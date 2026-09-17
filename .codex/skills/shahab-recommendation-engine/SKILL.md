@@ -54,6 +54,8 @@ The documents mention both tree matching and sequential filtering: model filteri
 
 - `interestRate` mapping weight for Q5 is **0.10**. Its variable weights must total exactly `1.00`; record this as a versioned data decision rather than altering raw source files.
 - For `depositRequired`, `depositHoldingMonths`, and `loanToDepositRatio`, `متغیر`, `نامشخص`, blank, or uncategorizable values are **neutral**. They contribute neither a positive nor negative score and must be excluded from that loan's effective score denominator. Trace `{ neutral: true, reason }`; never treat neutral as incompatible score zero.
+- For the core ranking fields `maxAmount`, `monthlyInstallment`, `maxRepaymentMonths`, and `interestRate`, unknown, variable, blank, or uncategorizable data is **not neutral**. Attempt only a versioned, deterministic extraction from structured source data. If it remains unresolved, exclude the loan from `rankedRecommendations`; put it in `needsReview` with explicit `rankingExcludedReasons` and no score, rank, or compatible-recommendation label.
+- Keep `requiredDepositAccount` and other non-scoring display fields separate: unknown display data must not by itself exclude a loan from ranking.
 - Loan-details conditions come only from the loan database's `شرایط و مقررات` field. Safely parse line breaks and existing bullets to ordered display bullets; do not hard-code the content or render raw HTML.
 - The current frontend route map is immutable unless product explicitly changes it: `/question/3..8 → Q1..Q6`, `/question/9 → S7`, `/question/10 → S8`, `/question/11 → S10`, `/question/12 → S13`. Keep it in one route-map adapter, separate from engine IDs.
 
@@ -80,6 +82,8 @@ Before handing off, run data audit, unit tests for parsing/categorization/scorin
 Run tests in execution order, not only at the end: (1) baseline, (2) import/audit, (3) domain/engine, (4) application use cases with fake repositories, (5) route map and details UI, (6) full E2E/release gate. Do not move to the next layer while its test gate fails.
 
 Add golden tests for Q5 interest weight and total 1.00; three paired loans proving neutral unknown differs from incompatibility and does not create a reward; ordered conditions bullet parsing for `•`, line breaks, nested markers and empty input; and both table-driven and browser tests for every route in the approved route map.
+
+Also test ranking eligibility: an otherwise identical loan with an unknown core field must leave `rankedRecommendations`, appear in `needsReview` with the exact reason, and have no score; an unknown deposit-related field must remain rankable with a neutral trace. If all rankable loans are absent but `needsReview` exists, UI must show the distinct insufficient-data state.
 
 ## Hand-off
 
