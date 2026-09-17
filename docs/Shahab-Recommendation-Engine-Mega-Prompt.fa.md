@@ -22,6 +22,30 @@
 
 اگر دو منبع دربارهٔ وزن یا ترتیب پاسخ با هم تناقض دارند، **مخفیانه یکی را انتخاب نکن**. اختلاف را در `docs/recommendation-data-decisions.md` با نام فایل، سلول/سطر، مقدارهای متناقض، اثر و تصمیم پیشنهادی ثبت کن؛ تا تأیید مالک محصول، build را با یک پیکربندی صریح و موقت (دارای `version` و `approved: false`) ممکن کن، اما انتشار production را مسدود کن. نمونهٔ اختلاف‌های شناخته‌شده: جمع وزن نرخ سود در ماتریس Markdown برابر ۱٫۰۵ است و سهم‌های مبلغ قسط در دو منبع یکسان نیستند.
 
+### تصمیم‌های قطعیِ تأییدشده
+
+این موارد دیگر اختلاف باز نیستند و باید در دادهٔ نرمال‌شده و آزمون‌های golden به‌عنوان تصمیم محصول ثبت شوند:
+
+1. برای متغیر `interestRate`، وزن `Q5` (انعطاف‌پذیری اقساط) برابر `0.10` است؛ بنابراین مجموع وزن‌های آن متغیر دقیقاً `1.00` می‌شود. این اصلاح باید در `data-decisions` با منبع و تاریخ ثبت شود و نه با تغییر خامِ فایل منبع.
+2. در ویژگی‌های `depositRequired`، `depositHoldingMonths` و `loanToDepositRatio`، مقدارهای `متغیر`، `نامشخص`، خالی یا غیرقابل‌دسته‌بندی، **خنثی** هستند. خنثی یعنی آن ویژگی هیچ امتیاز مثبت یا منفی به وام نمی‌دهد و از مخرج نرمال‌سازی همان وام هم کنار گذاشته می‌شود؛ نباید با صفرِ ناسازگاری اشتباه گرفته شود. در trace صریحاً `neutral: true` و علت ثبت شود.
+3. در مسیر `/loan-details`، بخش «شرایط و مدارک مورد نیاز» باید مستقیماً از ستون `شرایط و مقررات` دیتابیس وام ساخته شود. متن سلول به آیتم‌های بولت تبدیل شود، ترتیب و متن حفظ شود، bulletهای موجود/خط‌های جدید/نشان `•` تکراری به یک لیست تمیز تبدیل شوند، و داده هرگز در JSX hard-code نشود. اگر متن خالی است، حالت «اطلاعات تکمیلی در دسترس نیست» نمایش بده و آن را با نبود وام اشتباه نگیر.
+4. نگاشت الزام‌آور URL فعلی به شناسهٔ پرسشنامه چنین است و باید با تست E2E تثبیت شود:
+
+| مسیر | شناسهٔ سند |
+| --- | --- |
+| `/question/3` | `Q1` |
+| `/question/4` | `Q2` |
+| `/question/5` | `Q3` |
+| `/question/6` | `Q4` |
+| `/question/7` | `Q5` |
+| `/question/8` | `Q6` |
+| `/question/9` | `S7` |
+| `/question/10` | `S8` |
+| `/question/11` | `S10` |
+| `/question/12` | `S13` |
+
+دو صفحهٔ اول پرسشنامه را از این mapping مستقل نگه دار. URL فقط adapter ناوبری است؛ موتور فقط با شناسه‌های canonical بالا کار می‌کند.
+
 ## محدودهٔ داده و واژگان ثابت
 
 از شناسه‌های لاتین پایدار استفاده کن و متن فارسی فقط برچسب نمایشی باشد. هشت متغیر توصیه‌گر به ترتیب فیلتر عبارت‌اند از:
@@ -46,6 +70,33 @@ src/features/recommendation/
   __tests__/    # unit, fixture, integration
 ```
 
+Backend/منطق دامنه را در یک فایل بزرگ، component یا route پیاده‌سازی نکن. مرزهای زیر ضروری‌اند و هر ماژول باید مسئولیت واحد و API کوچک داشته باشد:
+
+```text
+src/features/recommendation/
+  domain/entities/           # Loan, Answer, Category, RecommendationTrace
+  domain/value-objects/      # Money, Percentage, Duration, CategoryId
+  application/
+    use-cases/               # RecommendLoans, GetLoanDetails, ValidateAnswers
+    ports/                   # LoanRepository, RecommendationConfigRepository
+  infrastructure/
+    importers/               # Excel → normalized data (build-time)
+    repositories/            # JSON/API adapter implementations
+    parsers/                 # Persian value and conditions-list parsers
+  engine/
+    score-category.js
+    traverse-candidate-tree.js
+    normalize-loan-score.js
+    apply-threshold.js
+    build-trace.js
+  presentation/
+    questionnaire-route-map.js
+    results-presenter.js
+    loan-details-presenter.js
+```
+
+نام دقیق فایل‌ها می‌تواند با convention مخزن هماهنگ شود، اما مسئولیت‌ها نباید ادغام شوند. React فقط `use-case` را صدا می‌زند؛ در component هیچ parser Excel، فرمول امتیازدهی یا شرط کسب‌وکاری قرار نده. وابستگی‌ها رو به داخل باشند: `presentation → application → domain` و `infrastructure` فقط implementation portها باشد. برای رعایت SOLID، وابستگی‌ها inject شوند، use caseها به interface وابسته باشند، و تغییر یک source داده یا یک فرمول نیازمند ویرایش UI نباشد.
+
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
 - فقط داده‌ای که شرط‌های ضروری نمایش دارد وارد candidateها شود: نام وام، نام ارائه‌دهنده، شرایط اصلی و روش اقدام/ثبت درخواست. موارد ناقص را با علت در audit ثبت کن.
@@ -67,6 +118,8 @@ categoryScore(variable, category) = Σ(normalizedQuestionWeight × impactFactor)
 ```
 
 همهٔ مؤلفه‌ها، جمع و منبع سلول/شناسه در trace ثبت شود. امتیازها را فقط با یک قانون مستند نرمال کن؛ rounding فقط برای نمایش است، نه مقایسه.
+
+برای ویژگی خنثی، به‌جای قراردادن `0` در صورت کسر، contribution آن متغیر را از جمع و وزن مؤثر همان وام خارج کن. مثال: اگر `depositHoldingMonths` وام «نامشخص» است، امتیاز متغیرهای دیگر حفظ می‌شود و این متغیر نه وام را پاداش می‌دهد نه جریمه. `rawLoanScore`, `effectiveWeight` و فهرست `neutralVariables` باید همگی در trace دیده شوند تا نتیجه قابل بازتولید باشد.
 
 ### ۳. کشف candidate با جست‌وجوی درختی
 
@@ -109,6 +162,41 @@ RTL، موبایل و مسیرهای بازگشت را تست کن. حالت loa
 4. edge/integration: پاسخ ناقص، دسته/ضریب گمشده، وام ناقص، صفر candidate، فیلتر دستی صفر، نتایج زیاد، امتیاز مساوی، ترجیحات متضاد و دادهٔ `متغیر/نامشخص`.
 5. property tests یا آزمون داده‌ای: score منفی نشود، score نرمال‌شده در `[0,100]` باشد، تغییر ترتیب رکوردهای ورودی رتبه‌های نامساوی را عوض نکند، و هیچ شاخهٔ خالی به candidate نرسد.
 6. build/lint/typecheck و یک E2E مرورگر برای تکمیل پرسشنامه، رسیدن به نتیجه، بازگشت و نمایش هر حالت خطا.
+
+### برنامهٔ اجرای تست‌ها
+
+تست‌ها را فقط در انتهای کار اجرا نکن؛ بعد از هر گام زیر تست‌های همان گام را اجرا کن و تنها با نتیجهٔ سبز به گام بعد برو:
+
+| گام | تست اجباری | معیار عبور |
+| --- | --- | --- |
+| داده و import | parser، schema، data-audit | همهٔ داده‌های قابل‌استفاده نرمال‌اند؛ دادهٔ unknown به neutral trace می‌رسد. |
+| domain | دسته‌بندی مرزی، value objectها، mapping وزن‌ها | `interestRate.Q5 = 0.10` و مجموع وزن `1.00` است. |
+| engine | score، tree، threshold، tie، neutral | unknown نه rank را بهتر می‌کند نه بدتر و در مخرج مؤثر وارد نمی‌شود. |
+| application | repository fake، پاسخ ناقص، loan ناقص | use case بدون React و با fixture قابل اجراست. |
+| UI | route mapping، conditions bullets، RTL | ده مسیر جدول به ID درست متصل‌اند؛ متن Excel به bulletهای صحیح نمایش می‌رسد. |
+| E2E/release | جریان کامل، برگشت، no-result، فیلتر دستی، جزئیات وام | build، lint و E2E کامل سبز است. |
+
+برای حالت neutral، دست‌کم این سه golden test داشته باش: (الف) وام کامل، (ب) همان وام با `نامشخص` در یکی از سه ویژگی، (ج) همان وام با دستهٔ مشخص ولی سازگاری پایین. حالت ب باید از حالت ج امتیاز بالاتری داشته باشد و trace آن `neutral` را ثبت کند؛ مقایسهٔ حالت الف و ب نباید به‌علت neutral، پاداش ساختگی بدهد.
+
+برای `loan-details`، fixtureهایی شامل بولت با `•`، خط جدید، bullet تو در تو، متن ساده و سلول خالی بساز. test باید نشان دهد خروجی در ترتیب اصلی، بدون bullet خالی یا تکراری و بدون تزریق HTML رندر می‌شود.
+
+برای route map، یک test جدولی و یک E2E بنویس که مستقیماً `/question/3` تا `/question/12` را باز می‌کند و `questionId` مورد انتظار را بررسی می‌کند. تغییر شمارندهٔ کلی سؤال، صفحهٔ اطلاعات فردی یا ترتیب UI نباید این mapping را بشکند.
+
+## ترتیب اجرای بدون دوباره‌کاری
+
+این ترتیب را رعایت کن؛ هیچ UI، API یا الگوریتمی را پیش از قرارداد داده و تست آن نساز:
+
+1. **Baseline:** شاخه بساز، build فعلی و test فعلی را اجرا کن، ساختار و نقاط mock را ثبت کن. هیچ refactor نکن.
+2. **قرارداد و audit داده:** schema، IDها، parserها، `data-audit` و data-decision versioned را بساز؛ اصلاح `interestRate.Q5=0.10` و قاعدهٔ neutral را اینجا ثبت کن. تست‌های این لایه باید پاس شوند.
+3. **تبدیل داده:** Excel را فقط در build/import به JSON نرمال تبدیل کن؛ نتیجهٔ تبدیل را snapshot و validate کن. تا اینجا هیچ componentی تغییر نده.
+4. **دامنه و موتور خالص:** entityها، ports و توابع engine را با fixture بساز. ابتدا unit و golden tests، سپس implementation. هیچ import از React در این لایه مجاز نیست.
+5. **لایهٔ کاربرد:** `RecommendLoans` و `GetLoanDetails` را با repository adapter پیاده کن؛ integration test با fake repository اجرا کن.
+6. **اتصال ناوبری پرسشنامه:** route map جدول بالا را در یک فایل واحد بساز، پاسخ‌های UI را به `answerId` canonical تبدیل کن، و فقط سپس جریان نتایج mock را به use case واقعی وصل کن.
+7. **جزئیات وام:** presenter شرایط و مقررات را با parser امن به bulletها تبدیل کن؛ UI test و E2E آن را اجرا کن.
+8. **سخت‌سازی UI:** loading/error/no-result، explainability، RTL و دسترسی‌پذیری را اضافه کن؛ منطق کسب‌وکاری را به UI برنگردان.
+9. **release gate:** audit نهایی، تمام تست‌ها، build، lint/typecheck، E2E و مرور trace نمونه را اجرا کن. فقط در صورت سبز بودن همه و `approved: true` بودن تصمیم‌های داده‌ای، preview/production را پیشنهاد بده.
+
+در هر گام، اگر تست شکست خورد، ابتدا همان لایه را اصلاح کن و به گام بعد نرو. «اصلاح موقت در UI» برای پوشاندن نقص داده یا موتور ممنوع است.
 
 هنگام شکست، خروجی باید حداقل `dataVersion`, `configVersion`, `questionId`, `answerId`, `loanId`, `variable`, `categoryId` و مسیر محاسبه را بدهد؛ ولی اطلاعات شناسایی شخصی کاربر را چاپ نکند.
 
