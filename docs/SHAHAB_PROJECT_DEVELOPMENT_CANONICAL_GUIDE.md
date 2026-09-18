@@ -260,6 +260,12 @@ Composition root تنها محل ساختن adapterها و تزریق آن‌ه�
 
 رمز عبور را خودت اختراع یا با الگوریتم ضعیف hash نکن. اگر product به حساب کاربری نیاز دارد، از provider/کتابخانهٔ معتبر استفاده کن و passwordها را فقط با password hashing مدرن و salt مدیریت کن. توکن‌ها کوتاه‌عمر، قابل ابطال و خارج از `localStorage` در سناریوی cookie-based باشند. refresh token، session revocation، MFA برای نقش‌های حساس، محدودیت تلاش ورود، recovery امن و logout سراسری را قبل از production طراحی و تست کن.
 
+#### تصمیم فعلی دربارهٔ OTP و کاوه‌نگار
+
+اتصال واقعی پیامک و OTP در این مرحله **خارج از محدودهٔ اجرا** است؛ ثبت‌نام، احراز هویت و تأییدهای قانونی کاوه‌نگار باید ابتدا توسط مالک محصول تکمیل شوند. تا آن زمان، پیاده‌سازی احراز هویت باید با یک port مستقل مانند `OtpProvider` و یک `MockOtpProvider` قابل‌آزمون برای local/test انجام شود. Mock فقط در محیط‌های غیرproduction مجاز است و باید کد را هرگز در log یا response غیرضروری افشا نکند.
+
+use caseهای درخواست و تأیید OTP نباید به کاوه‌نگار، React یا route وابسته شوند. Provider واقعی آینده با نام `KavenegarOtpProvider` فقط در composition root و پس از فعال‌سازی صریح محیط production جایگزین mock می‌شود؛ قرارداد endpoint، مدل داده، rate-limit، هش و زمان انقضای OTP، audit event و منطق verify نباید تغییر کنند. کلید API، نام الگو و هر secret مربوط به کاوه‌نگار فقط در secret manager/environment نگهداری می‌شود و هرگز در repository، frontend، migration، fixture یا log وارد نمی‌شود. تا پیش از تأیید کتبی فعال‌سازی، CI و production باید استفاده از `KavenegarOtpProvider` را رد کنند.
+
 ### ۴. حفاظت از داده، دیتابیس و یکپارچگی توصیه‌گر
 
 دیتابیس نباید public باشد و اتصالش فقط از network/service identity مجاز باشد. account دیتابیس برای runtime حداقل مجوز لازم را داشته باشد؛ account جدا برای migration، read-only analytics و backup تعریف کن. queryها parameterized/ORM-safe باشند؛ query string با ورودی کاربر ممنوع است. constraintهای دیتابیس (primary/foreign key, unique, check, transaction) باید integrity را مستقل از UI حفظ کنند.
