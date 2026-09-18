@@ -1,0 +1,70 @@
+{
+  "configVersion": "1.0.0",
+  "approved": true,
+  "approvedOn": "2026-09-18",
+  "scope": "Recommendation data interpretation only; no credit approval prediction.",
+  "interestRateQuestionWeights": {
+    "S13": 0.4,
+    "Q2": 0.2,
+    "Q3": 0.15,
+    "S10": 0.15,
+    "Q5": 0.1
+  },
+  "unknownPolicies": {
+    "neutralVariables": [
+      "depositRequired",
+      "depositHoldingMonths",
+      "loanToDepositRatio"
+    ],
+    "neutralValues": ["نامشخص", "متغیر", "", "unparseable"],
+    "neutralBehavior": {
+      "addsPositiveScore": false,
+      "addsNegativeScore": false,
+      "includedInEffectiveWeight": false,
+      "traceRequired": true
+    },
+    "rankingExclusionVariables": [
+      "maxAmount",
+      "monthlyInstallment",
+      "maxRepaymentMonths",
+      "interestRate"
+    ],
+    "rankingExclusionValues": ["نامشخص", "متغیر", "", "unparseable"],
+    "rankingExclusionBehavior": {
+      "rankedRecommendations": false,
+      "needsReview": true,
+      "scoreAssigned": false,
+      "reasonRequired": true
+    }
+  },
+  "sourceColumnRoles": {
+    "scoring": [
+      "نرخ سود وام",
+      "حداکثر مبلغ",
+      "مبلغ قسط",
+      "نیاز به سپرده",
+      "حداکثر زمان بازپرداخت",
+      "مدت زمان خواب سپرده",
+      "نسبت مبلغ وام به میزان سپرده",
+      "نوع ضمانت"
+    ],
+    "displayOnly": [
+      "نام وام",
+      "نام بانک",
+      "لوگو بانک",
+      "مجموع سود وام",
+      "حساب سپرده لازم",
+      "شرایط و مقررات"
+    ]
+  },
+  "displayOnlyBehavior": {
+    "participatesInScoring": false,
+    "participatesInRankingEligibility": false,
+    "conditionsRendering": "conditionsAndRegulations is displayed as sanitized ordered bullets in US-06; raw HTML is never rendered."
+  },
+  "sourceReferences": [
+    ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+    ".agents/documents/دیتابیس وام های بانکی.unitext",
+    "docs/data-audit/report.v1.json"
+  ]
+}

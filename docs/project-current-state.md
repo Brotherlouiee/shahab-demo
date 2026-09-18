@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-01.T05`
+- `activeTaskId`: `US-02.T05`
 - Status: `completed — awaiting PR review`
-- Base commit: `6f406146b9020bf20ea0ba786ee8f959400c307d`
-- Working branch: `feature/us-01-project-baseline`
+- Base commit: `f1dc2ec4a45ea6190a1d1b716b5ae03e01a51cf0`
+- Working branch: `feature/us-02-canonical-identifiers`
 
 ## Evidence
 
@@ -14,6 +14,11 @@
 - All six `.unitext` files are byte-verified UTF-16 LE sources.
 - Documentation skeletons and an ADR template now establish stable locations for future architecture, API, database, pipeline, security, operations, and test evidence.
 - The initial risk and ambiguity register is recorded in `docs/project-risk-register.md`; no risk is silently accepted.
+- Canonical IDs for questionnaire questions/answers, loan variables, categories, routes, and future loan identity are versioned in `data/contracts/canonical-identifiers.v1.json` and statically validated.
+- Pure, framework-independent schema and Persian scalar parser contracts are versioned and unit tested; ambiguous ranges/prose remain typed unknowns.
+- A read-only source audit and provenance report record source hashes, structural coverage, numeric coefficient ranges, loan-row evidence, and blocking core-value issues.
+- Versioned data decisions define the Q5 interest weight, neutral deposit-feature behavior, core-value ranking exclusion, and display-only source columns.
+- Versioned golden contract fixtures cover every canonical question and the complete, neutral, and core-unknown loan-policy boundaries without asserting an engine score prematurely.
 - No product behavior, data interpretation, backend, database, secret, or deploy configuration was changed.
 
 ## Test record
@@ -26,7 +31,8 @@
 
 - Docker/Compose is unavailable in this environment; Docker-dependent verification belongs to its assigned future task.
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
-- `US-01` is complete and awaiting PR review/merge. Only then may `US-02.T01` begin.
+- `US-01` was merged in PR #3.
+- `US-02` is complete and awaiting PR review/merge. Only then may `US-03.T01` begin.
 
 ## Compatibility pointer
 
