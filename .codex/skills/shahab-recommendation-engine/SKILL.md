@@ -86,6 +86,10 @@ Add golden tests for Q5 interest weight and total 1.00; three paired loans provi
 
 Also test ranking eligibility: an otherwise identical loan with an unknown core field must leave `rankedRecommendations`, appear in `needsReview` with the exact reason, and have no score; an unknown deposit-related field must remain rankable with a neutral trace. If all rankable loans are absent but `needsReview` exists, UI must show the distinct insufficient-data state.
 
+## Security and privacy gate
+
+Read [security guidance](references/security.md) before adding backend, persistence, authentication, external API access, data import/export, or deployment. Treat security as defense in depth, not a claim of absolute invulnerability. Do not store secrets in source/client/logs; enforce least privilege, server-side authorization and schema validation; protect sensitive data in transit and at rest; retain auditable versions of loan/config changes; and block release on exploitable high/critical findings, secret leakage, authorization bypass, confirmed XSS, sensitive-data leakage, or untested restore.
+
 ## Hand-off
 
 Report changed files, source and configuration versions, data conflicts, excluded loans and reasons, trace sample, tests run, and any blocker to production. Keep secrets and PII out of commits and logs.

@@ -218,6 +218,96 @@ Composition root تنها محل ساختن adapterها و تزریق آن‌ه�
 
 برای تغییرات پرریسک، ابتدا preview و fixture واقعی بساز؛ سپس PR بازبینی‌شده، سپس production. قابلیت جدید باید بتواند با feature flag خاموش شود یا با config version قبلی بازگردد، بدون اینکه داده یا نتایج قبلی را تخریب کند.
 
+## امنیت، حریم خصوصی و تاب‌آوری در برابر دستکاری
+
+هدف «نفوذناپذیری مطلق» نیست، چون چنین تضمینی واقع‌بینانه نیست. هدف، **دفاع در عمق** است: کاهش سطح حمله، حداقل‌سازی داده، محدودکردن اثر هر رخداد، تشخیص سریع، امکان بازیابی و جلوگیری از تکرار. هیچ قابلیت، API یا انتشار production بدون عبور از این release gate امنیتی کامل نیست.
+
+### ۱. مدل تهدید و طبقه‌بندی داده
+
+پیش از هر اتصال به backend، یک `docs/security/threat-model.md` بساز و برای هر دارایی، مهاجم، مسیر حمله، اثر، کنترل و مالک مشخص کن. حداقل تهدیدها: کاربر ناشناس، کاربر عادیِ مخرب، مدیر دسترسی‌گرفته، bot، مهاجم شبکه، dependency آلوده، credential افشاشده و خطای عملیاتی داخلی. مدل تهدید باید با هر قابلیت جدید یا تغییر داده به‌روزرسانی شود.
+
+داده‌ها را دسته‌بندی کن:
+
+| سطح | نمونه | سیاست |
+| --- | --- | --- |
+| عمومی | نام طرح، بانک و شرایط انتشارپذیر | integrity و منبع معتبر لازم است. |
+| داخلی | نسخهٔ ماتریس‌ها، trace فنی، audit داده | فقط نقش‌های داخلی مجاز؛ بدون دادهٔ هویتی در لاگ. |
+| حساس کاربر | پاسخ پرسشنامه، شماره تلفن، شناسهٔ کاربر، تاریخچهٔ نتیجه | کمینه‌سازی، رمزنگاری، کنترل دسترسی و retention محدود. |
+| راز | کلید API، secret امضا، credential دیتابیس، کلید رمزنگاری | فقط secret manager؛ هرگز در کد، Excel، log، client، commit یا error message نیست. |
+
+در نسخهٔ فعلی، پاسخ پرسشنامه را تا جای ممکن در client و session کوتاه‌عمر نگه دار. فقط اگر نیاز محصولی روشن وجود دارد آن را ذخیره کن؛ پیش از ذخیره، purpose، مدت نگهداری، مالک، روش حذف و رضایت کاربر را مستند کن. دادهٔ شخصی را برای آموزش، تحلیل یا اشتراک با شخص ثالث بدون مبنای روشن و رضایت مناسب بازاستفاده نکن.
+
+### ۲. طراحی امن API و تبادل داده
+
+تمام endpointهای production فقط از HTTPS با TLS معتبر استفاده کنند؛ HTTP را به HTTPS redirect کن و HSTS را پس از اطمینان از دامنه فعال کن. هر درخواست و پاسخ با schema validate شود؛ client قابل اعتماد نیست. API باید allowlist فیلدها داشته باشد، input را normalize کند، حد اندازهٔ body و timeout داشته باشد و خطاهای داخلی/stack trace را به client برنگرداند.
+
+- برای هر endpoint مشخص کن: actor مجاز، purpose، input schema، output schema، rate limit، مجوز، audit event و خطاهای مورد انتظار.
+- هر object را با شناسهٔ server-side و ownership check بخوان/ویرایش کن؛ دریافت ID از client هرگز به‌تنهایی مجوز نیست. این کنترل جلوی IDOR را می‌گیرد.
+- پاسخ‌های recommendation و loan details نباید دادهٔ خصوصی کاربر دیگر، config محرمانه، کلید، path سرور یا trace کامل داخلی را برگردانند.
+- CORS فقط برای originهای لازم، method/headerهای لازم و بدون wildcard همراه credential تنظیم شود.
+- برای endpointهای تغییر‌دهندهٔ وضعیت، روش احراز هویت مناسب و در صورت cookie-based auth، CSRF protection و cookieهای `HttpOnly`, `Secure`, `SameSite` اعمال شود.
+- rate limit، اندازهٔ request، pagination و quota برای جلوگیری از brute force، scraping مخرب و DoS سبک الزامی است. رفتار قابل قبول هنگام عبور: پاسخ عمومی `429`، بدون افشای داخلی، همراه `Retry-After` در صورت مناسب‌بودن.
+- schema قرارداد API نسخه‌دار باشد؛ تغییر ناسازگار با version یا migration صریح منتشر شود.
+
+### ۳. هویت، احراز هویت و مجوزها
+
+اصل کمترین دسترسی را پیاده کن. نقش پیشنهادی حداقلی: `anonymous`, `user`, `support`, `data-editor`, `admin`, `service`. هر نقش فقط مجوزهای لازم را می‌گیرد؛ «admin به‌طور پیش‌فرض برای همه‌چیز» یا نقش‌های مبهم ممنوع است. authorization باید server-side و نزدیک use case اجرا شود، نه فقط با مخفی‌کردن دکمه در UI.
+
+رمز عبور را خودت اختراع یا با الگوریتم ضعیف hash نکن. اگر product به حساب کاربری نیاز دارد، از provider/کتابخانهٔ معتبر استفاده کن و passwordها را فقط با password hashing مدرن و salt مدیریت کن. توکن‌ها کوتاه‌عمر، قابل ابطال و خارج از `localStorage` در سناریوی cookie-based باشند. refresh token، session revocation، MFA برای نقش‌های حساس، محدودیت تلاش ورود، recovery امن و logout سراسری را قبل از production طراحی و تست کن.
+
+### ۴. حفاظت از داده، دیتابیس و یکپارچگی توصیه‌گر
+
+دیتابیس نباید public باشد و اتصالش فقط از network/service identity مجاز باشد. account دیتابیس برای runtime حداقل مجوز لازم را داشته باشد؛ account جدا برای migration، read-only analytics و backup تعریف کن. queryها parameterized/ORM-safe باشند؛ query string با ورودی کاربر ممنوع است. constraintهای دیتابیس (primary/foreign key, unique, check, transaction) باید integrity را مستقل از UI حفظ کنند.
+
+برای دادهٔ حساس در حالت سکون از encryption at rest ارائه‌دهنده و برای فیلدهای بسیار حساس از envelope encryption با کلید خارج از دیتابیس استفاده کن. کلیدها در secret/KMS نگهداری، دوره‌ای rotation و دسترسی‌شان audit شود. رمزنگاری جایگزین authorization یا backup امن نیست.
+
+تمام تغییرات در دادهٔ وام، وزن‌ها، mappingها، config و تصمیم‌های audit باید append-only audit trail داشته باشد: actor، زمان، before/after، reason، version و correlation ID. کاربر عادی یا client هرگز نباید وزن‌ها، config، نسخهٔ داده یا score نهایی را تعیین یا overwrite کند. server باید recommendation را از دادهٔ تأییدشده محاسبه کند؛ اگر prototype محاسبه را در client انجام می‌دهد، آن را صرفاً نمایشی بدان و ادعای tamper-proof نکن.
+
+برای تغییرات حساس، approval workflow و immutable version ایجاد کن: دادهٔ جدید ابتدا validate، سپس preview، سپس با نقش مجاز approved و قابل rollback شود. backup رمزنگاری‌شده، بازیابی آزمایش‌شده، retention و restore runbook لازم است. backup هم باید همان کنترل دسترسی production را داشته باشد.
+
+### ۵. امنیت frontend، فایل و محتوا
+
+از XSS جلوگیری کن: متن شرایط وام و همهٔ دادهٔ بیرونی را text render کن؛ `dangerouslySetInnerHTML` ممنوع است مگر sanitize allowlist‌شده، توجیه‌شده و تست‌شده. URLهای لینک و لوگو را validate/allowlist کن و برای تصویر fallback امن داشته باش. Content Security Policy حداقلی، `frame-ancestors`, `X-Content-Type-Options: nosniff`, `Referrer-Policy` و clickjacking protection را در deploy تنظیم کن.
+
+فایل Excel فقط در مسیر trusted import پردازش شود؛ نوع، اندازه، sheet/columnهای مجاز و تعداد سطرها validate شوند. macro یا فرمت ناشناخته پردازش نشود. فایل بارگذاری‌شده با نام یا path کاربر ذخیره/اجرا نشود، path traversal رد شود و خروجی import قبل از publish audit شود. هیچ فایل source یا export حاوی اطلاعات شخصی بدون کنترل دسترسی و expiry در دسترس عمومی قرار نگیرد.
+
+### ۶. secrets، dependency و زنجیرهٔ تأمین
+
+secretها فقط از محیط امن/secret manager خوانده شوند و با schema startup validate شوند. `.env`، private key، token، backup و export حساس باید در `.gitignore` باشند؛ اما فقط `.gitignore` کافی نیست: secret scanner pre-commit و CI لازم است. در صورت افشای راز، آن را فوراً revoke/rotate کن؛ صرف حذف‌کردن از commit کافی نیست.
+
+dependencyها را pin/lock کن، package manager lockfile را commit کن، dependency audit و vulnerability scan در CI اجرا کن، package ناشناس/بدون نگهداری را وارد نکن و به‌روزرسانی امنیتی را در PR جدا انجام بده. build باید reproducible باشد و artifact production از pipeline کنترل‌شده تولید شود، نه از لپ‌تاپ یا فایل build ناشناس.
+
+### ۷. لاگ، پایش، پاسخ به رخداد و حریم خصوصی عملیاتی
+
+لاگ‌ها ساختاریافته، کمینه و redact‌شده باشند. شماره تلفن، token، authorization header، cookie، پاسخ پرسشنامه، رمز، کلید، دادهٔ مالی دقیق و stack trace production نباید log شوند. alertهای حداقلی برای افزایش login failure، افزایش 403/429/5xx، تغییر غیرعادی config، export حجیم، شکست audit و دسترسی administrator تعریف کن.
+
+یک `docs/security/incident-response.md` داشته باش: تشخیص، triage، محدودسازی، حفظ شواهد، rotation/revocation، اطلاع‌رسانی متناسب، بازیابی، postmortem بدون سرزنش و اقدام پیشگیرانه. برای هر رخداد، time line و تصمیم‌ها ثبت شوند. «خاموش‌کردن log» یا حذف شواهد راه‌حل نیست.
+
+### ۸. تست امنیتی و release gate
+
+تست امنیتی باید فقط روی محیط local/staging و حساب‌های آزمایشی انجام شود، نه علیه سامانهٔ ثالث یا production بدون مجوز صریح. هر تست باید automation‌پذیر باشد و نتیجه در PR ثبت شود. این سناریوها حداقل الزامی‌اند:
+
+| سناریو | مراحل آزمون | پاسخ قابل قبول |
+| --- | --- | --- |
+| اعتبارسنجی ورودی | payload نامعتبر، فیلد اضافی، body بزرگ، type غلط، Unicode غیرمنتظره ارسال کن | `400/422` کنترل‌شده؛ بدون crash، ذخیره یا stack trace. |
+| احراز هویت | endpoint محافظت‌شده را بدون/با token منقضی فراخوانی کن | `401` عمومی؛ هیچ داده‌ای نشت نکند. |
+| مجوز و IDOR | کاربر A شناسهٔ دادهٔ کاربر B را درخواست/ویرایش کند | `403` یا `404` یکسان با سیاست؛ داده بدون تغییر بماند. |
+| CSRF | با session cookie، درخواست تغییر‌دهنده را از origin نامعتبر شبیه‌سازی کن | درخواست رد شود؛ وضعیت تغییر نکند. |
+| XSS | متن شرایط/نام وام حاوی payload بی‌خطر آزمون قرار بده | فقط متن نمایش داده شود؛ script/event اجرا نشود. |
+| Injection | ورودی query، شناسه و فیلتر با الگوهای injection آزموده شوند | validation/parameterization؛ بدون خطای دیتابیس یا دادهٔ اضافه. |
+| Rate limiting | درخواست‌های سریع بیش از quota به login/search/API بفرست | `429` و سرویس پایدار؛ quota بعد از window مشخص بازیابی شود. |
+| CORS/headers | origin نامجاز و پاسخ headers بررسی شود | origin/credential ناخواسته مجاز نباشد؛ headers امنیتی حاضر باشند. |
+| Secret leakage | source، build artifact، log و error response را با secret scan بررسی کن | هیچ secret معتبر یا دادهٔ حساس یافت نشود. |
+| دادهٔ حساس | بررسی کن پاسخ کاربر در log، URL، analytics، cache عمومی یا client storage بلندمدت نیست | صفر نشت؛ retention و deletion مطابق policy. |
+| دستکاری score/config | تلاش کن request/client state امتیاز، وزن یا version را تغییر دهد | server مقدار canonical را محاسبه/رد کند؛ audit event ثبت شود. |
+| دیتابیس و migration | اجرای role غیرمجاز، query ناقص و migration شکست‌خورده را شبیه‌سازی کن | کمترین دسترسی، rollback امن، integrity و backup سالم. |
+| dependency | audit/SCA و license policy روی lockfile اجرا شود | vulnerability بحرانی یا با exploit شناخته‌شده بدون mitigation پذیرفته نیست. |
+| بازیابی | restore آزمایشی backup را در محیط جدا اجرا کن | داده و version صحیح، دسترسی محدود و زمان بازیابی ثبت‌شده. |
+
+افزون بر این‌ها، SAST در هر PR، dependency/secret scan در CI و DAST سبک روی staging پیش از release اجرا شوند. هر یافتهٔ بحرانی یا high قابل exploitation، secret افشاشده، bypass مجوز، XSS تأییدشده، نشت دادهٔ حساس یا فقدان restore تست‌شده، **blocker انتشار** است. یافتهٔ medium فقط با owner، mitigation، deadline و پذیرش ریسک مستند می‌تواند موقتاً عبور کند؛ یافتهٔ low باید backlog مالک‌دار داشته باشد.
+
+پیش از انتشار، یک checklist امضاشده/ثبت‌شده ایجاد کن: threat model به‌روز، schema و access control تست‌شده، secrets scan پاک، SAST/SCA/DAST نتیجه‌دار، backup restore تست‌شده، logging redacted، dependencyهای بحرانی رفع‌شده و plan واکنش رخداد موجود. هیچ‌کدام با تأیید شفاهی جایگزین نشوند.
+
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
 - فقط داده‌ای که شرط‌های ضروری نمایش دارد وارد candidateها شود: نام وام، نام ارائه‌دهنده، شرایط اصلی و روش اقدام/ثبت درخواست. موارد ناقص را با علت در audit ثبت کن.
