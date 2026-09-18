@@ -3,7 +3,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "validate:canonical-identifiers": "node scripts/validate-canonical-identifiers.mjs"
+    "validate:canonical-identifiers": "node scripts/validate-canonical-identifiers.mjs",
+    "test:persian-values": "python -m unittest discover -s backend/tests -p \"test_*.py\""
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
