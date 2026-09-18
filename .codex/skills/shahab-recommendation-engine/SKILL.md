@@ -15,7 +15,7 @@ Build a transparent matcher between user preferences and loan attributes. It is 
 
 ## Start here
 
-1. Inspect the app and the source documents under `.agents/documents/`.
+1. Inspect the app and the official `.unitext` source documents under `.agents/documents/`.
 2. Read the Markdown and Excel sources as separate artifacts. Run a data audit before coding.
 3. Work in a feature branch; do not write directly to `main`.
 4. Preserve the existing UI unless a change is needed to integrate the engine.
@@ -97,6 +97,10 @@ Read [security guidance](references/security.md) before adding backend, persiste
 ## Backend, PostgreSQL and documentation
 
 The backend stack is FastAPI + PostgreSQL. Read [database and pipeline guidance](references/database-and-pipeline.md) before implementing persistence, APIs, imports, migrations or backend modules. Use FastAPI routers only for HTTP concerns, Pydantic schemas at boundaries, SQLAlchemy 2.x repositories, Alembic-only schema migrations, a normalized PostgreSQL design and an idempotent `raw → staging → core → serving` pipeline. Commit ERD, data dictionary, pipeline/runbook, API and module-map documentation with every related change. Backend code requires meaningful detailed comments/docstrings that explain intent, domain invariant, security/transaction implications and trade-offs; never comments that only paraphrase obvious code.
+
+## Ordered delivery and changelog
+
+Follow the ordered user-story roadmap in `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` from US-01 through US-12; do not start a later story while the previous story's tests and documentation gate fail. For every task, write or update the relevant test before or alongside code, run the applicable quality/security checks, make only test-protected refactors, update affected documentation and add a Keep-a-Changelog entry under `Unreleased` with the user-story/task ID, behavior, migration/config impact and related ADR/PR. The project is complete only after US-12's release gate passes.
 
 ## Hand-off
 
