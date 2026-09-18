@@ -4,7 +4,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "validate:canonical-identifiers": "node scripts/validate-canonical-identifiers.mjs",
-    "test:persian-values": "python -m unittest discover -s backend/tests -p \"test_*.py\""
+    "test:persian-values": "python -m unittest discover -s backend/tests -p \"test_*.py\"",
+    "audit:data": "python scripts/data_audit.py"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
