@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-03.T02`
+- `activeTaskId`: `US-03.T03`
 - Status: `completed — awaiting PR review`
-- Base commit: `1ab386b783f33875336c2118a2c7a2691ec24529`
-- Working branch: `feature/us-03-fastapi-core`
+- Base commit: `b28faa1f5201584547b3f55b25c3d15b6544def1`
+- Working branch: `feature/us-03-ports-boundaries`
 
 ## Evidence
 
@@ -22,6 +22,8 @@
 - A staged frontend/backend architecture scaffold and module map are created without moving the active Vite prototype.
 - `US-03.T01` was merged in PR #5.
 - Typed FastAPI application composition, environment settings, redacting logging and dependency providers are implemented without any product endpoint, database or deploy change.
+- `US-03.T02` was merged in PR #6.
+- Framework-free domain references and small application ports now define one-way dependencies; an AST validator blocks reverse imports and local cycles.
 
 ## Test record
 
@@ -31,6 +33,9 @@
 | `npm run test:backend-core` | Passed; five settings, composition and redaction tests completed. |
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 22 backend tests completed. |
 | FastAPI composition boot with `SHAHAB_CORS_ALLOWED_ORIGINS` | Passed; comma-separated environment configuration was parsed safely. |
+| `npm run validate:import-boundaries` | Passed; no prohibited reverse import or local circular dependency detected. |
+| `python -m unittest backend.tests.test_application_ports` | Passed; four port and import-boundary tests completed. |
+| `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 26 backend tests completed after US-03.T03. |
 
 ## Blockers and next task
 
@@ -38,7 +43,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-03.T03` — domain/application ports and import-boundary enforcement.
+- Next task: `US-03.T04` — API v1, typed error model and restricted health/readiness.
 
 ## Compatibility pointer
 

@@ -7,7 +7,8 @@
     "test:persian-values": "python -m unittest discover -s backend/tests -p \"test_*.py\"",
     "audit:data": "python scripts/data_audit.py",
     "validate:architecture-scaffold": "python scripts/validate_architecture_scaffold.py",
-    "test:backend-core": "python -m unittest backend.tests.test_core_bootstrap"
+    "test:backend-core": "python -m unittest backend.tests.test_core_bootstrap",
+    "validate:import-boundaries": "python scripts/validate_import_boundaries.py"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
