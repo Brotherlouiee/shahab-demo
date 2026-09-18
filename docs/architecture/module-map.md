@@ -13,11 +13,11 @@ The root `src/` Vite application is the active prototype and remains operational
 | `frontend/src/features/loan-details` | loan-detail presentation | HTML rendering of raw conditions, scoring |
 | `backend/app/recommendation/domain` | entities/value contracts/pure parsing | FastAPI, ORM, React imports |
 | `backend/app/api/v1` | versioned transport adapters | domain logic, direct database decisions |
-| `backend/app/core` | settings, dependency wiring, redacted logging, security hooks | product use cases |
+| `backend/app/core` | typed settings, dependency wiring, redacted logging, security hooks | product use cases |
 | `backend/app/shared` | truly cross-feature backend helpers | recommendation-specific rules |
 
 ## Dependency direction
 
 `frontend presentation → application/API contract → backend application → backend domain`.
 
-Infrastructure implementations may depend on domain ports, never the reverse. The active root prototype has not yet been migrated to this graph; each later move requires tests and a focused commit.
+Infrastructure implementations may depend on domain ports, never the reverse. `backend/app/main.py` is the FastAPI composition root and must not import feature/domain implementations directly. The active root prototype has not yet been migrated to this graph; each later move requires tests and a focused commit.

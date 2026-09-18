@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-03.T01`
+- `activeTaskId`: `US-03.T02`
 - Status: `completed — awaiting PR review`
-- Base commit: `0c8e2f45f3074e9bef2a20719e0751533ec9575a`
-- Working branch: `feature/us-03-architecture-scaffold`
+- Base commit: `1ab386b783f33875336c2118a2c7a2691ec24529`
+- Working branch: `feature/us-03-fastapi-core`
 
 ## Evidence
 
@@ -20,13 +20,17 @@
 - Versioned data decisions define the Q5 interest weight, neutral deposit-feature behavior, core-value ranking exclusion, and display-only source columns.
 - Versioned golden contract fixtures cover every canonical question and the complete, neutral, and core-unknown loan-policy boundaries without asserting an engine score prematurely.
 - A staged frontend/backend architecture scaffold and module map are created without moving the active Vite prototype.
-- No product behavior, data interpretation, backend, database, secret, or deploy configuration was changed.
+- `US-03.T01` was merged in PR #5.
+- Typed FastAPI application composition, environment settings, redacting logging and dependency providers are implemented without any product endpoint, database or deploy change.
 
 ## Test record
 
 | Command | Result |
 | --- | --- |
 | `npm run build` | Passed; Vite production build completed. |
+| `npm run test:backend-core` | Passed; five settings, composition and redaction tests completed. |
+| `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 22 backend tests completed. |
+| FastAPI composition boot with `SHAHAB_CORS_ALLOWED_ORIGINS` | Passed; comma-separated environment configuration was parsed safely. |
 
 ## Blockers and next task
 
@@ -34,7 +38,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-03.T02` — FastAPI settings, redacted logging and dependency wiring.
+- Next task: `US-03.T03` — domain/application ports and import-boundary enforcement.
 
 ## Compatibility pointer
 

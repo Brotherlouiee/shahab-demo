@@ -20,3 +20,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-02.T04**: Added approved, versioned decisions for Q5 interest weight, neutral deposit attributes, core-ranking exclusions, and display-only loan metadata.
 - **US-02.T05**: Added versioned golden contract fixtures for canonical answers and complete, neutral, and core-unknown loan-policy boundaries.
 - **US-03.T01**: Added staged frontend/backend architecture boundaries, module map, ADR and scaffold validation without moving the active prototype.
+- **US-03.T02**: Added a typed FastAPI composition root, safe environment settings, recursive sensitive-field log redaction, dependency providers, focused core tests and local bootstrap runbook.
