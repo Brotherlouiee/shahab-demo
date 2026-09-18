@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-03.T04`
+- `activeTaskId`: `US-03.T05`
 - Status: `completed — awaiting PR review`
-- Base commit: `9818a2ec70f0815d06c94dcd0e331b0a4fc2fcd7`
-- Working branch: `feature/us-03-api-health`
+- Base commit: `8230f8678de70ef5e295630a06d1ff5efa070ae2`
+- Working branch: `feature/us-03-quality-gates`
 
 ## Evidence
 
@@ -26,6 +26,8 @@
 - Framework-free domain references and small application ports now define one-way dependencies; an AST validator blocks reverse imports and local cycles.
 - `US-03.T03` was merged in PR #7.
 - API v1 now has typed errors, server-generated correlation IDs, minimal public liveness and token-gated readiness without exposing dependency state.
+- `US-03.T04` was merged in PR #8.
+- A single local/CI quality command now runs formatting, linting, type checking, backend tests, architecture/data validators, secret scan and production build.
 
 ## Test record
 
@@ -40,6 +42,7 @@
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 26 backend tests completed after US-03.T03. |
 | `npm run test:api-health` | Passed; liveness, readiness authorization and typed 404 behavior verified. |
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 29 backend tests completed after US-03.T04. |
+| `npm run quality` | Passed; Ruff format/lint, Mypy (22 source files), 31 backend tests, all validators, secret scan and production build completed. |
 
 ## Blockers and next task
 
@@ -47,7 +50,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-03.T05` — lint, format, typecheck, test runner and CI quality gates.
+- US-03 complete; next task: `US-04.T01` — conceptual data model and ERD.
 
 ## Compatibility pointer
 

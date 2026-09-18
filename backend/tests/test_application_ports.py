@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import unittest
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from backend.app.application.ports import Clock, IdGenerator, LoanRepository, RecommendationConfigRepository
 from backend.app.domain.loan import LoanReference, RecommendationConfigReference
@@ -18,7 +18,7 @@ class ApplicationPortTests(unittest.TestCase):
         self.assertTrue(hasattr(IdGenerator, "new_id"))
         self.assertEqual(LoanReference("loan-1").loan_id, "loan-1")
         self.assertEqual(RecommendationConfigReference("v1").config_version, "v1")
-        self.assertIsNotNone(datetime.now(timezone.utc))
+        self.assertIsNotNone(datetime.now(UTC))
 
     def test_reverse_dependencies_are_forbidden(self) -> None:
         self.assertTrue(is_forbidden("backend.app.domain.loan", "backend.app.infrastructure.db"))
