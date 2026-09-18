@@ -9,7 +9,14 @@
     "validate:architecture-scaffold": "python scripts/validate_architecture_scaffold.py",
     "test:backend-core": "python -m unittest backend.tests.test_core_bootstrap",
     "validate:import-boundaries": "python scripts/validate_import_boundaries.py",
-    "test:api-health": "python -m unittest backend.tests.test_api_health"
+    "test:api-health": "python -m unittest backend.tests.test_api_health",
+    "format:check": "python -m ruff format --check backend scripts",
+    "format:python": "python -m ruff format backend scripts",
+    "lint:python": "python -m ruff check backend scripts",
+    "typecheck:python": "python -m mypy backend/app",
+    "test:backend": "python -m unittest discover -s backend/tests -p \"test_*.py\"",
+    "scan:secrets": "python scripts/scan_repository_secrets.py",
+    "quality": "npm run format:check && npm run lint:python && npm run typecheck:python && npm run test:backend && npm run validate:canonical-identifiers && npm run validate:architecture-scaffold && npm run validate:import-boundaries && npm run scan:secrets && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

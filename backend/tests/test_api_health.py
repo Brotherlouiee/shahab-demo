@@ -27,7 +27,9 @@ class ApiHealthTests(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json()["error"]["code"], "not_found")
         self.assertIn("correlationId", response.json()["error"])
-        authorized = self.client.get("/api/v1/health/ready", headers={"X-Shahab-Readiness-Token": "test-readiness-token"})
+        authorized = self.client.get(
+            "/api/v1/health/ready", headers={"X-Shahab-Readiness-Token": "test-readiness-token"}
+        )
         self.assertEqual(authorized.status_code, 200)
         self.assertEqual(authorized.json(), {"status": "ready"})
 

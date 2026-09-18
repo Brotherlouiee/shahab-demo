@@ -2,7 +2,6 @@ import json
 import unittest
 from pathlib import Path
 
-
 CONFIG_PATH = Path(__file__).parents[2] / "data/contracts/recommendation-data-decisions.v1.json"
 
 

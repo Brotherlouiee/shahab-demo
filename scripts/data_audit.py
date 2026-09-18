@@ -21,19 +21,44 @@ class SourceSpec:
 
 
 SOURCES = (
-    SourceSpec("پرسشنامه سنجش متغیرهای رفتاری.txt", ".agents/documents/پرسشنامه سنجش متغیرهای رفتاری.unitext", "questionnaire"),
-    SourceSpec("ماتریس گزینه های متغیرهای وام.txt", ".agents/documents/ماتریس گزینه های متغیرهای وام.unitext", "loan_categories"),
-    SourceSpec("ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.txt", ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext", "question_variable_weights"),
-    SourceSpec("تبدیل پاسخ‌ها به وزن‌های عددی.txt", ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext", "answer_weights"),
-    SourceSpec("ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها با هریک از دسته بندی‌ها متغیرهای وام.txt", ".agents/documents/ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها با هریک از دسته بندی‌ها متغیرهای وام.unitext", "compatibility_coefficients"),
+    SourceSpec(
+        "پرسشنامه سنجش متغیرهای رفتاری.txt", ".agents/documents/پرسشنامه سنجش متغیرهای رفتاری.unitext", "questionnaire"
+    ),
+    SourceSpec(
+        "ماتریس گزینه های متغیرهای وام.txt",
+        ".agents/documents/ماتریس گزینه های متغیرهای وام.unitext",
+        "loan_categories",
+    ),
+    SourceSpec(
+        "ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.txt",
+        ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+        "question_variable_weights",
+    ),
+    SourceSpec(
+        "تبدیل پاسخ‌ها به وزن‌های عددی.txt", ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext", "answer_weights"
+    ),
+    SourceSpec(
+        "ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها با هریک از دسته بندی‌ها متغیرهای وام.txt",
+        (
+            ".agents/documents/ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها "
+            "با هریک از دسته بندی‌ها متغیرهای وام.unitext"
+        ),
+        "compatibility_coefficients",
+    ),
     SourceSpec("دیتابیس وام های بانکی.txt", ".agents/documents/دیتابیس وام های بانکی.unitext", "loan_database"),
 )
 
 PERSIAN_DIGITS = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
 EXPECTED_QUESTION_ROWS = [1, 2, 3, 4, 5, 6, 7, 8, 10, 13]
 EXPECTED_CATEGORY_COUNTS = {
-    "حداکثر مبلغ": 8, "مبلغ قسط": 6, "حداکثر زمان بازپرداخت": 6, "نرخ سود": 5,
-    "نیاز به سپرده": 2, "مدت زمان خواب سپرده": 5, "نسبت مبلغ وام به میزان سپرده": 4, "نوع ضمانت": 3,
+    "حداکثر مبلغ": 8,
+    "مبلغ قسط": 6,
+    "حداکثر زمان بازپرداخت": 6,
+    "نرخ سود": 5,
+    "نیاز به سپرده": 2,
+    "مدت زمان خواب سپرده": 5,
+    "نسبت مبلغ وام به میزان سپرده": 4,
+    "نوع ضمانت": 3,
 }
 VARIABLE_ALIASES = {"نرخ سود وام": "نرخ سود"}
 CORE_LOAN_COLUMNS = ("نرخ سود وام", "حداکثر مبلغ", "مبلغ قسط", "حداکثر زمان بازپرداخت")
@@ -77,9 +102,13 @@ def audit_questionnaire(rows: list[list[str]]) -> dict:
             seen.add(active)
         if active is not None and option.strip():
             options[active] += 1
-    return {"questionRows": sorted(options), "optionCounts": dict(options), "duplicates": duplicates,
-            "missingExpectedRows": [item for item in EXPECTED_QUESTION_ROWS if item not in options],
-            "wrongOptionCounts": {str(k): v for k, v in options.items() if v != 5}}
+    return {
+        "questionRows": sorted(options),
+        "optionCounts": dict(options),
+        "duplicates": duplicates,
+        "missingExpectedRows": [item for item in EXPECTED_QUESTION_ROWS if item not in options],
+        "wrongOptionCounts": {str(k): v for k, v in options.items() if v != 5},
+    }
 
 
 def audit_categories(rows: list[list[str]]) -> dict:
@@ -91,8 +120,15 @@ def audit_categories(rows: list[list[str]]) -> dict:
             active = variable.strip()
         if active and category.strip():
             counts[active] += 1
-    return {"categoryCounts": dict(counts), "missingVariables": [name for name in EXPECTED_CATEGORY_COUNTS if name not in counts],
-            "wrongCounts": {name: counts.get(name, 0) for name, expected in EXPECTED_CATEGORY_COUNTS.items() if counts.get(name, 0) != expected}}
+    return {
+        "categoryCounts": dict(counts),
+        "missingVariables": [name for name in EXPECTED_CATEGORY_COUNTS if name not in counts],
+        "wrongCounts": {
+            name: counts.get(name, 0)
+            for name, expected in EXPECTED_CATEGORY_COUNTS.items()
+            if counts.get(name, 0) != expected
+        },
+    }
 
 
 def audit_mapping(rows: list[list[str]]) -> dict:
@@ -112,9 +148,13 @@ def audit_mapping(rows: list[list[str]]) -> dict:
             continue
         totals[active] += parsed
         coverage[active] += 1
-    return {"weightTotals": {key: str(value) for key, value in totals.items()}, "mappingRows": dict(coverage),
-            "invalidWeights": invalid, "missingVariables": [name for name in EXPECTED_CATEGORY_COUNTS if name not in totals],
-            "nonUnitTotals": {key: str(value) for key, value in totals.items() if value != Decimal("1")}}
+    return {
+        "weightTotals": {key: str(value) for key, value in totals.items()},
+        "mappingRows": dict(coverage),
+        "invalidWeights": invalid,
+        "missingVariables": [name for name in EXPECTED_CATEGORY_COUNTS if name not in totals],
+        "nonUnitTotals": {key: str(value) for key, value in totals.items() if value != Decimal("1")},
+    }
 
 
 def audit_numeric_cells(rows: list[list[str]]) -> dict:
@@ -130,8 +170,12 @@ def audit_numeric_cells(rows: list[list[str]]) -> dict:
                 values.append(parsed)
                 if not Decimal("0") <= parsed <= Decimal("1"):
                     invalid.append({"row": row_number, "column": column, "value": token})
-    return {"numericCellCount": len(values), "minimum": str(min(values)) if values else None,
-            "maximum": str(max(values)) if values else None, "outOfRange": invalid}
+    return {
+        "numericCellCount": len(values),
+        "minimum": str(min(values)) if values else None,
+        "maximum": str(max(values)) if values else None,
+        "outOfRange": invalid,
+    }
 
 
 def audit_loan_database(rows: list[list[str]]) -> dict:
@@ -146,9 +190,14 @@ def audit_loan_database(rows: list[list[str]]) -> dict:
             if value in {"نامشخص", "متغیر", ""}:
                 unknown[column][value or "blank"] += 1
     duplicate_names = [name for name, count in Counter(row[0].strip() for row in loan_rows).items() if count > 1]
-    return {"headerCount": len(header), "nonEmptyHeaderCount": len(header_positions), "emptyHeaderCount": len(header) - len(header_positions),
-            "loanRowCount": len(loan_rows), "duplicateLoanNames": duplicate_names,
-            "unknownCounts": {column: dict(counter) for column, counter in unknown.items()}}
+    return {
+        "headerCount": len(header),
+        "nonEmptyHeaderCount": len(header_positions),
+        "emptyHeaderCount": len(header) - len(header_positions),
+        "loanRowCount": len(loan_rows),
+        "duplicateLoanNames": duplicate_names,
+        "unknownCounts": {column: dict(counter) for column, counter in unknown.items()},
+    }
 
 
 def build_report(source_dir: Path) -> dict:
@@ -158,11 +207,22 @@ def build_report(source_dir: Path) -> dict:
         path = source_dir / spec.raw_name
         raw, _, rows = read_source(path)
         source_data[spec.role] = rows
-        provenance.append({"role": spec.role, "repositoryPath": spec.repository_path, "inputPath": str(path),
-                           "encoding": "UTF-16LE", "sha256": hashlib.sha256(raw).hexdigest(), "byteCount": len(raw), "rowCount": len(rows)})
+        provenance.append(
+            {
+                "role": spec.role,
+                "repositoryPath": spec.repository_path,
+                "inputPath": str(path),
+                "encoding": "UTF-16LE",
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "byteCount": len(raw),
+                "rowCount": len(rows),
+            }
+        )
     mapping = audit_mapping(source_data["question_variable_weights"])
     report = {
-        "auditVersion": "1.0.0", "mode": "read_only", "provenance": provenance,
+        "auditVersion": "1.0.0",
+        "mode": "read_only",
+        "provenance": provenance,
         "questionnaire": audit_questionnaire(source_data["questionnaire"]),
         "loanCategories": audit_categories(source_data["loan_categories"]),
         "questionVariableMapping": mapping,
@@ -172,11 +232,25 @@ def build_report(source_dir: Path) -> dict:
         "issues": [],
     }
     if report["loanDatabase"]["emptyHeaderCount"]:
-        report["issues"].append({"severity": "info", "code": "LOAN_DB_EMPTY_HEADERS", "message": "Trailing loan database headers are empty; importer must ignore only proven-empty columns."})
+        report["issues"].append(
+            {
+                "severity": "info",
+                "code": "LOAN_DB_EMPTY_HEADERS",
+                "message": "Trailing loan database headers are empty; importer must ignore only proven-empty columns.",
+            }
+        )
     for column in CORE_LOAN_COLUMNS:
         if report["loanDatabase"]["unknownCounts"][column]:
-            report["issues"].append({"severity": "blocking", "code": "CORE_LOAN_VALUE_UNKNOWN", "column": column,
-                                      "message": "Core values need the versioned extraction/exclusion decision required by the canonical guide."})
+            report["issues"].append(
+                {
+                    "severity": "blocking",
+                    "code": "CORE_LOAN_VALUE_UNKNOWN",
+                    "column": column,
+                    "message": (
+                        "Core values need the versioned extraction/exclusion decision required by the canonical guide."
+                    ),
+                }
+            )
     return report
 
 
@@ -188,7 +262,16 @@ def main() -> None:
     report = build_report(args.source_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"loanRows": report["loanDatabase"]["loanRowCount"], "issues": len(report["issues"]), "output": str(args.output)}, ensure_ascii=False))
+    print(
+        json.dumps(
+            {
+                "loanRows": report["loanDatabase"]["loanRowCount"],
+                "issues": len(report["issues"]),
+                "output": str(args.output),
+            },
+            ensure_ascii=False,
+        )
+    )
 
 
 if __name__ == "__main__":

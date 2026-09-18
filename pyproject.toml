@@ -17,6 +17,26 @@ dependencies = [
 test = [
   "httpx2>=0.0.1",
 ]
+quality = [
+  "mypy>=1.13,<2.0",
+  "ruff>=0.8,<1.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = ["dist", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["backend/app"]
+warn_unused_configs = true
+check_untyped_defs = true
+no_implicit_optional = true
+exclude = ["backend/tests"]
 
 [tool.setuptools.packages.find]
 include = ["backend*"]

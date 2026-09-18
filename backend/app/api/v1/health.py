@@ -26,7 +26,7 @@ def live() -> HealthResponse:
 
 
 def require_readiness_token(
-    settings: Settings = Depends(get_settings),
+    settings: Settings = Depends(get_settings),  # noqa: B008 - FastAPI declares dependencies in the signature.
     supplied_token: str | None = Header(default=None, alias="X-Shahab-Readiness-Token"),
 ) -> None:
     """Keep readiness unavailable unless an environment-provided token matches exactly."""

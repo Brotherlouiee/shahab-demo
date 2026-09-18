@@ -51,9 +51,15 @@ def correlation_id_for(request: Request) -> str:
 
 def error_payload(request: Request, *, code: ErrorCode, message: str) -> dict[str, object]:
     """Build the stable public error payload without including request input or tracebacks."""
-    return ErrorResponse(error=ErrorDetail(code=code, message=message, correlationId=correlation_id_for(request))).model_dump(by_alias=True)
+    return ErrorResponse(
+        error=ErrorDetail(code=code, message=message, correlationId=correlation_id_for(request))
+    ).model_dump(by_alias=True)
 
 
-async def api_error_handler(request: Request, error: ApiError) -> JSONResponse:
+async def api_error_handler(request: Request, error: Exception) -> JSONResponse:
     """Render known errors through the public schema."""
-    return JSONResponse(status_code=error.status_code, content=error_payload(request, code=error.code, message=error.message))
+    if not isinstance(error, ApiError):
+        raise TypeError("api_error_handler only supports ApiError instances")
+    return JSONResponse(
+        status_code=error.status_code, content=error_payload(request, code=error.code, message=error.message)
+    )

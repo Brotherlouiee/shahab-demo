@@ -2,7 +2,6 @@ import json
 import unittest
 from pathlib import Path
 
-
 ROOT = Path(__file__).parents[2]
 IDENTIFIERS = json.loads((ROOT / "data/contracts/canonical-identifiers.v1.json").read_text(encoding="utf-8"))
 DECISIONS = json.loads((ROOT / "data/contracts/recommendation-data-decisions.v1.json").read_text(encoding="utf-8"))
@@ -37,7 +36,9 @@ class RecommendationContractFixtureTests(unittest.TestCase):
 
     def test_core_unknown_fixture_cannot_be_ranked(self):
         excluded = set(DECISIONS["unknownPolicies"]["rankingExclusionVariables"])
-        fixture = next(item for item in FIXTURES["loanFixtures"] if item["fixtureId"] == "core-interest-rate-needs-review")
+        fixture = next(
+            item for item in FIXTURES["loanFixtures"] if item["fixtureId"] == "core-interest-rate-needs-review"
+        )
         self.assertEqual(set(fixture["unknowns"]), {"interestRate"})
         self.assertIn("interestRate", excluded)
         self.assertFalse(fixture["expected"]["rankingEligible"])
