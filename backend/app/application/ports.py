@@ -8,6 +8,14 @@ from typing import Protocol
 from backend.app.domain.loan import LoanReference, RecommendationConfigReference
 
 
+class TransactionManager(Protocol):
+    """Application transaction boundary; concrete sessions stay in infrastructure."""
+
+    def commit(self) -> None: ...
+
+    def rollback(self) -> None: ...
+
+
 class LoanRepository(Protocol):
     """Read-only loan access split by rankability; implementations belong to infrastructure."""
 

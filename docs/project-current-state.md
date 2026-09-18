@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-04.T02`
+- `activeTaskId`: `US-04.T03`
 - Status: `completed — awaiting PR review`
-- Base commit: `aa559bf9d7003b8dac10429b14012b28dbc3c28d`
-- Working branch: `feature/us-04-physical-schema-spec`
+- Base commit: `c9fb92acd4514ab9b2427bc00c86aaad48c51a35`
+- Working branch: `feature/us-04-sqlalchemy-models`
 
 ## Evidence
 
@@ -32,6 +32,8 @@
 - Conceptual bounded contexts, cardinalities, ownership/retention and physical-schema invariants are documented before ORM or migration work.
 - `US-04.T01` was merged in PR #10.
 - PostgreSQL 3NF physical tables, type/state semantics, constraint catalog and migration/rollback operations are specified before ORM/migration implementation.
+- `US-04.T02` was merged in PR #11.
+- SQLAlchemy 2.x metadata declares the core 3NF catalog/config/import constraints without creating a session, engine or schema.
 
 ## Test record
 
@@ -49,6 +51,7 @@
 | `npm run quality` | Passed; Ruff format/lint, Mypy (22 source files), 31 backend tests, all validators, secret scan and production build completed. |
 | `npm run quality` | Passed; conceptual data-model validator and 32 backend tests completed with all existing quality gates. |
 | `npm run quality` | Passed; physical-schema specification validator and 33 backend tests completed with all existing quality gates. |
+| `npm run quality` | Passed; SQLAlchemy metadata tests and 35 backend tests completed with all existing quality gates. |
 
 ## Blockers and next task
 
@@ -56,7 +59,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-04.T03` — SQLAlchemy model, database constraints and repository port.
+- Next task: `US-04.T04` — Alembic initial migration and PostgreSQL upgrade/downgrade verification.
 
 ## Compatibility pointer
 
