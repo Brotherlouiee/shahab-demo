@@ -25,3 +25,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-03.T04**: Added API v1 composition, typed safe error responses, generated correlation IDs, public minimal liveness and token-gated readiness.
 - **US-03.T05**: Added reproducible Ruff/Mypy/test/secret-scan quality gates and a GitHub Actions workflow with no product behavior change.
 - **US-04.T01**: Added versioned conceptual ERD, data dictionary, design ADR and documentation validator before physical schema work.
+- **US-04.T02**: Added PostgreSQL 3NF physical-schema/constraint specification, migration and rollback operations runbook, ADR and contract validator.
