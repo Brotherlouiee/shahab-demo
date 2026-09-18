@@ -33,6 +33,7 @@ Use stable internal IDs. Never use Persian display text or an array index as the
 - Exclude loans missing name, provider, principal conditions, or application information; report why.
 - Keep the domain and application layers independent of React. Split parsers, importers, repositories, use cases, score calculation, tree traversal, normalization, trace building and presenters into focused modules. Depend on repository/config ports rather than concrete data sources.
 - Follow SOLID and clean-code boundaries: one responsibility per module, small public APIs, dependency injection at the composition root, and no business scoring formula inside components or routes.
+- Read [architecture guidance](references/architecture.md) before creating a new recommendation module, changing a public contract, or refactoring across layers.
 
 ## Scoring and candidate discovery
 

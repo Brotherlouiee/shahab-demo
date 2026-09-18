@@ -118,6 +118,106 @@ src/features/recommendation/
 
 نام دقیق فایل‌ها می‌تواند با convention مخزن هماهنگ شود، اما مسئولیت‌ها نباید ادغام شوند. React فقط `use-case` را صدا می‌زند؛ در component هیچ parser Excel، فرمول امتیازدهی یا شرط کسب‌وکاری قرار نده. وابستگی‌ها رو به داخل باشند: `presentation → application → domain` و `infrastructure` فقط implementation portها باشد. برای رعایت SOLID، وابستگی‌ها inject شوند، use caseها به interface وابسته باشند، و تغییر یک source داده یا یک فرمول نیازمند ویرایش UI نباشد.
 
+## معماری پایدار، مقیاس‌پذیر و قابل‌نگهداری
+
+این بخش یک **قرارداد معماری** است، نه صرفاً پیشنهاد. هدف آن این است که افزودن قابلیت‌هایی مانند API واقعی بانک‌ها، پنل مدیریت وام، قوانین جدید، چند نوع تسهیلات، احراز هویت، تحلیل رفتار کاربر، A/B test یا تغییر کامل UI باعث نشود موتور توصیه‌گر دوباره نوشته شود.
+
+### ۱. مرزهای محصول و ماژول‌ها
+
+پروژه را بر پایهٔ قابلیت (feature) و درون هر قابلیت بر پایهٔ لایه سازمان‌دهی کن؛ نه بر اساس یک پوشهٔ بزرگ `components` یا `utils` مشترک. ساختار پیشنهادی:
+
+```text
+src/
+  app/                         # composition root، router، providerها، bootstrap
+  shared/                      # ابزارهای واقعاً عمومی و بدون وابستگی به توصیه‌گر
+    ui/                        # Button, Modal, EmptyState؛ بدون منطق دامنه
+    lib/                       # date/format/error helpers عمومی
+    config/                    # environment validation و feature flags
+  features/
+    questionnaire/             # نمایش و ذخیره پاسخ‌های canonical
+    recommendation/            # فقط منطق و UI توصیه‌گر
+      domain/
+      application/
+      infrastructure/
+      presentation/
+      engine/
+      tests/
+    loan-details/              # use case و presenter جزئیات وام
+  data/                        # خروجی نرمال و نسخه‌دار build-time؛ نه منطق
+  scripts/                     # import، audit، migration و validation داده
+  docs/architecture/           # ADR، قرارداد داده، runbook و تصمیم‌ها
+```
+
+اگر backend مستقل ایجاد شد، همان مرزها را در `server/` یا سرویس جدا با ساختاری معادل نگه دار. frontend نباید مستقیم به فایل Excel، دیتابیس یا provider بانکی وصل شود؛ فقط با یک API contract یا application port کار کند. تا زمانی که prototype client-only است، repository JSON همان contract را پیاده می‌کند تا جایگزینی با API واقعی بدون تغییر UI و engine ممکن باشد.
+
+فقط مواردی که واقعاً میان چند feature مشترک‌اند وارد `shared/` شوند. تابعی که نام یا منطق وام، پرسشنامه یا recommendation دارد هرگز shared نیست. پوشه‌های مبهم مانند `helpers`, `misc`, `common`, `utils` بدون مالک دامنه ممنوع‌اند؛ اگر ابزار عمومی نیست، کنار همان feature قرار گیرد.
+
+### ۲. قانون وابستگی و قراردادها
+
+`domain` مستقل از React، HTTP، فایل، دیتابیس، Excel، زمان سیستم و framework است. `application` جریان کسب‌وکاری را هماهنگ می‌کند اما layout یا parsing فایل ندارد. `infrastructure` adapterهای بیرونی را پیاده می‌کند. `presentation` فقط ورودی UI را به command/use case و خروجی آن را به view model تبدیل می‌کند.
+
+برای هر مرز یک قرارداد صریح و کوچک بساز:
+
+- `LoanRepository`: `listRankableLoans()`, `listLoansNeedingReview()`, `getLoanById()`؛ نه یک متد چندمنظوره با ده‌ها flag.
+- `RecommendationConfigRepository`: فقط خواندن نسخهٔ تأییدشدهٔ تنظیمات و وزن‌ها.
+- `RecommendationEngine`: ورودی‌های typed/canonical و خروجی `RecommendationResult`; هیچ I/O نداشته باشد.
+- `ConditionsListParser`: متن شرایط را به `string[]` امن تبدیل کند و هیچ JSX برنگرداند.
+- `Clock`, `Logger`, `IdGenerator` فقط در صورت نیاز پشت interface قرار گیرند؛ abstraction بی‌مصرف نساز.
+
+Composition root تنها محل ساختن adapterها و تزریق آن‌ها به use caseهاست. Component نباید بداند repository از JSON، API یا cache استفاده می‌کند. هیچ import از `infrastructure` در `domain` یا `engine` مجاز نیست؛ این قانون را با lint/import-boundary rule کنترل کن.
+
+### ۳. اندازه و مسئولیت فایل‌ها
+
+هر فایل باید یک دلیل روشن برای تغییر داشته باشد. به‌جای فایل‌های `recommendation-service.js` یا `App.jsx` چندصدخطی، عملیات را به واحدهای نام‌دار بشکن: `classifyLoan`, `scoreCategory`, `traverseCandidateTree`, `normalizeScores`, `buildTrace`, `parseConditions`, `mapQuestionRoute`.
+
+- فایل بزرگ به‌تنهایی خطا نیست، اما اگر دو مسئولیت مستقل یا بیش از یک مسیر تغییر دارد، تقسیمش کن.
+- یک component فقط هماهنگ‌کنندهٔ UI باشد؛ وضعیت محلی نمایش را نگه دارد اما قانون وام یا فرمول امتیاز را نه.
+- توابع pure کوچک، ورودی/خروجی واضح و بدون mutation ترجیح دارند.
+- objectهای بزرگ config را بر اساس variable و version تقسیم کن، نه یک فایل literal چندصدخطی.
+- exportهای داخلی feature از یک facade محدود ارائه شود؛ featureهای دیگر به مسیرهای خصوصی آن import نکنند.
+- circular dependency ممنوع است. هر بار که برای حل آن وسوسهٔ import متقابل ایجاد شد، مسئولیت‌ها یا contract اشتباه طراحی شده‌اند.
+
+### ۴. رشد بدون بازنویسی
+
+برای هر قابلیت جدید، ابتدا تعیین کن به کدام مرز تعلق دارد:
+
+| تغییر آینده | محل صحیح |
+| --- | --- |
+| وزن/قانون جدید توصیه‌گر | config نسخه‌دار + engine + golden test |
+| منبع جدید وام یا API بانک | adapter/repository جدید |
+| پرسش جدید یا تغییر متن گزینه | questionnaire config + mapper + validation |
+| فیلتر جدید صفحه نتایج | presentation/query state؛ بدون تغییر فرمول اصلی |
+| محاسبه جدید مثل نرخ مؤثر | value object/domain service مستقل |
+| پنل مدیریت وام | feature جدا که از application contract استفاده می‌کند |
+| login، سطح دسترسی یا پروفایل | feature جدا؛ هرگز داخل engine |
+| آزمایش A/B | feature flag در composition/config و trace نسخه‌دار |
+
+اگر یک قابلیت بیش از یک مرز را تغییر می‌دهد، تغییرات را به commitهای مستقل و قابل تست تقسیم کن، اما contract و migration را اول بساز. از «generic engine» برای نیازهای فرضی نساز. انعطاف از قراردادهای کوچک، config نسخه‌دار، adapterها و تست‌های محکم می‌آید؛ نه از abstractionهای زیاد و کلاس‌های خالی.
+
+### ۵. داده، نسخه‌بندی و تغییرات سازگار
+
+هر schema داده باید `schemaVersion` داشته باشد و هر تنظیم توصیه‌گر `configVersion`, `approved`, `effectiveFrom`, `sourceReferences` و `decisionId`. importer باید idempotent باشد: اجرای مجدد روی همان ورودی باید خروجی یکسان بدهد. دادهٔ نرمال‌شده immutable تلقی شود؛ تغییر آن فقط از مسیر importer/migration و همراه audit ممکن است.
+
+برای تغییرات ناسازگار، migration صریح بساز و هم‌زمان reader قدیمی را بی‌هشدار خراب نکن. feature flag یا adapter version اجازه می‌دهد نسخهٔ جدید ابتدا روی fixture و preview اجرا شود. trace هر نتیجه باید schema/config/data version را نگه دارد تا چند ماه بعد بتوان همان نتیجه را بازتولید و دیباگ کرد.
+
+### ۶. مدیریت خطا، مشاهده‌پذیری و دیباگ
+
+خطاهای expected مانند پاسخ ناقص، دادهٔ ناشناخته، no-result و timeout منبع داده باید typed/طبقه‌بندی شوند، نه اینکه همه با `catch` عمومی به پیام یکسان تبدیل شوند. UI فقط پیام امن فارسی دریافت می‌کند؛ جزئیات فنی در log/trace ساختاریافته ثبت می‌شود.
+
+برای هر request یا اجرای recommendation یک `correlationId` بساز. در logهای ساختاریافته حداقل `correlationId`, `loanId`, `questionId`, `variable`, `categoryId`, `dataVersion`, `configVersion` و نوع خطا را نگه دار؛ پاسخ کاربر و اطلاعات شخصی را log نکن. داشبورد یا log بعدی باید بتواند نشان دهد کدام مرحله بیشترین exclusion، neutral value یا failure را دارد. این مشاهده‌پذیری برای تغییرات پیش‌بینی‌نشده دریچهٔ اصلاح است، نه بهانه‌ای برای ذخیره دادهٔ حساس.
+
+### ۷. راهبرد refactor و کنترل بدهی فنی
+
+قبل از تغییر، تست‌های موجود، contractهای public و مسیرهای وابسته را مشخص کن. ابتدا تست یا characterization test بنویس، سپس refactor کن، سپس رفتار قبلی را با test ثابت کن. refactor و تغییر کسب‌وکاری را در یک commit مخلوط نکن مگر جداسازی واقعاً ممکن نباشد؛ در آن حالت علت را در PR بنویس.
+
+هیچ `TODO` بدون مالک، تاریخ بازبینی و لینک issue باقی نگذار. تکرار کوچک را فوراً abstraction نکن؛ بعد از مشاهدهٔ الگوی واقعی، آن را به ماژول مشترک استخراج کن. هر PR باید پاسخ دهد: «کدام مرز تغییر کرده؟»، «آیا API داخلی/داده شکسته؟»، «چه migration یا feature flag لازم است؟»، «چه تستی از regression جلوگیری می‌کند؟».
+
+### ۸. گیت، کیفیت و release gate معماری
+
+تعریف Done برای هر قابلیت شامل این موارد است: معماری مرزی رعایت شده، contract و data decision به‌روز است، unit/integration/E2E مرتبط پاس است، lint/typecheck و import-boundary check سبز است، documentation/ADR برای تصمیم مهم وجود دارد، trace خطا و rollback path مشخص است. هیچ feature جدیدی فقط با «درست کار کردن در مرورگر من» تمام‌شده نیست.
+
+برای تغییرات پرریسک، ابتدا preview و fixture واقعی بساز؛ سپس PR بازبینی‌شده، سپس production. قابلیت جدید باید بتواند با feature flag خاموش شود یا با config version قبلی بازگردد، بدون اینکه داده یا نتایج قبلی را تخریب کند.
+
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
 - فقط داده‌ای که شرط‌های ضروری نمایش دارد وارد candidateها شود: نام وام، نام ارائه‌دهنده، شرایط اصلی و روش اقدام/ثبت درخواست. موارد ناقص را با علت در audit ثبت کن.
