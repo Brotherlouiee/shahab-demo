@@ -9,6 +9,8 @@ description: Implement, validate, test, or debug Shahab's data-driven loan recom
 
 Before planning, implementing, refactoring, testing, debugging, migrating data, adding backend capabilities, or deploying this project, read `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md`. It is the project's continuing source of truth for product rules, architecture, database/data pipeline, security, testing and release gates. If another instruction conflicts with it, stop, identify the conflict and request a documented product decision; do not silently bypass the guide.
 
+At the start or resumption of every user story, task, subtask, bug fix, refactor, test, migration, or deployment, reread the guide's non-negotiable rules, current checkpoint, stage gate, and relevant section before changing code. Read all six `.unitext` sources under `.agents/documents/` for any recommendation, data, questionnaire, results, or database change. Record the guide revision, sections, and source documents read in the task checkpoint; do not begin implementation until this is complete.
+
 ## Purpose and hard boundaries
 
 Build a transparent matcher between user preferences and loan attributes. It is not credit scoring, approval prediction, or a guarantee of loan eligibility. Do not claim a loan is the best, approved, or certain.
