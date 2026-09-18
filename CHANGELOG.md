@@ -13,3 +13,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-01.T03**: Canonical-source inventory with Git/original hash comparison; a source-integrity mismatch is recorded as a blocker for data implementation.
 - **US-01.T03a**: Restored all six canonical `.unitext` files using byte-safe Git blobs and verified exact SHA-256/byte-count equality with the original UTF-16 LE sources.
 - **US-01.T04**: Added project-document skeletons and an ADR template; no product behavior or data logic changed.
+- **US-01.T05**: Added the initial risk and ambiguity register with owners, affected stories, and explicit future gates; no product logic changed.
