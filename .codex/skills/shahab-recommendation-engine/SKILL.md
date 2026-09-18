@@ -5,6 +5,10 @@ description: Implement, validate, test, or debug Shahab's data-driven loan recom
 
 # Shahab Recommendation Engine
 
+## Canonical project-development guide
+
+Before planning, implementing, refactoring, testing, debugging, migrating data, adding backend capabilities, or deploying this project, read `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md`. It is the project's continuing source of truth for product rules, architecture, database/data pipeline, security, testing and release gates. If another instruction conflicts with it, stop, identify the conflict and request a documented product decision; do not silently bypass the guide.
+
 ## Purpose and hard boundaries
 
 Build a transparent matcher between user preferences and loan attributes. It is not credit scoring, approval prediction, or a guarantee of loan eligibility. Do not claim a loan is the best, approved, or certain.
