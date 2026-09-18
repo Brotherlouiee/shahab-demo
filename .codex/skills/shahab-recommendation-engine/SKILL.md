@@ -90,6 +90,10 @@ Also test ranking eligibility: an otherwise identical loan with an unknown core 
 
 Read [security guidance](references/security.md) before adding backend, persistence, authentication, external API access, data import/export, or deployment. Treat security as defense in depth, not a claim of absolute invulnerability. Do not store secrets in source/client/logs; enforce least privilege, server-side authorization and schema validation; protect sensitive data in transit and at rest; retain auditable versions of loan/config changes; and block release on exploitable high/critical findings, secret leakage, authorization bypass, confirmed XSS, sensitive-data leakage, or untested restore.
 
+## Backend, PostgreSQL and documentation
+
+The backend stack is FastAPI + PostgreSQL. Read [database and pipeline guidance](references/database-and-pipeline.md) before implementing persistence, APIs, imports, migrations or backend modules. Use FastAPI routers only for HTTP concerns, Pydantic schemas at boundaries, SQLAlchemy 2.x repositories, Alembic-only schema migrations, a normalized PostgreSQL design and an idempotent `raw → staging → core → serving` pipeline. Commit ERD, data dictionary, pipeline/runbook, API and module-map documentation with every related change. Backend code requires meaningful detailed comments/docstrings that explain intent, domain invariant, security/transaction implications and trade-offs; never comments that only paraphrase obvious code.
+
 ## Hand-off
 
 Report changed files, source and configuration versions, data conflicts, excluded loans and reasons, trace sample, tests run, and any blocker to production. Keep secrets and PII out of commits and logs.

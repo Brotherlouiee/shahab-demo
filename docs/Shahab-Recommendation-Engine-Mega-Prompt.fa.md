@@ -308,6 +308,119 @@ dependencyها را pin/lock کن، package manager lockfile را commit کن، 
 
 پیش از انتشار، یک checklist امضاشده/ثبت‌شده ایجاد کن: threat model به‌روز، schema و access control تست‌شده، secrets scan پاک، SAST/SCA/DAST نتیجه‌دار، backup restore تست‌شده، logging redacted، dependencyهای بحرانی رفع‌شده و plan واکنش رخداد موجود. هیچ‌کدام با تأیید شفاهی جایگزین نشوند.
 
+## طراحی PostgreSQL، FastAPI و پایپ‌لاین داده
+
+Backend قطعی پروژه **FastAPI + PostgreSQL** است. از backend موقتِ داخل React، endpointهای بدون schema، SQLite production یا اتصال مستقیم frontend به دیتابیس استفاده نکن. طراحی باید از ابتدا برای رشد تعداد وام‌ها، بانک‌ها، نسخه‌های داده، قوانین توصیه‌گر، کاربران و عملیات مدیریتی آماده باشد؛ اما فقط نیازهای واقعی را مدل کند و از جدول/میکروسرویس فرضی پرهیز کند.
+
+### ۱. ساختار backend و استانداردهای پیاده‌سازی
+
+ساختار پیشنهادی را در مخزن ایجاد و مستند کن:
+
+```text
+backend/
+  app/
+    main.py                    # FastAPI composition root
+    api/v1/                    # routerهای versioned؛ فقط HTTP concerns
+    core/                      # settings, security, logging, dependency wiring
+    domain/                    # entity, value object, domain rule
+    application/               # command/query use cases و portها
+    infrastructure/
+      db/                      # SQLAlchemy models, session, repositories
+      importers/               # Excel → staging/core pipeline
+      external/                # provider/API adapters
+    schemas/                   # Pydantic request/response schemaها
+    tests/                     # unit, integration, API, security, pipeline
+  alembic/                     # migrationهای قابل تکرار و reviewable
+  scripts/                     # import, audit, seed, backup verification helpers
+  docs/
+    architecture/
+    database/
+    api/
+    data-pipeline/
+    runbooks/
+```
+
+از FastAPI dependency injection برای session، authenticated actor، logger و use case استفاده کن. router هیچ query پیچیده، قانون scoring یا ORM composition نداشته باشد؛ router input schema را می‌گیرد، use case را صدا می‌زند و response schema برمی‌گرداند. Pydantic برای تمام مرزهای HTTP، environment settings و import payload الزامی است. ORM پیشنهادی SQLAlchemy 2.x است و migrationها باید با Alembic ایجاد شوند. اتصال PostgreSQL از pool کنترل‌شده با timeout، health check و transaction scope مشخص انجام شود.
+
+### ۲. مدل دادهٔ نرمال و قابل‌گسترش
+
+حداقل تا 3NF نرمال‌سازی کن: هر fact تنها یک منبع حقیقت داشته باشد، دادهٔ تکراری قابل‌مغایرت نداشته باشیم، و many-to-many با جدول واسط مدل شود. نرمال‌سازی را فقط وقتی با read-performance تعارض واقعی دارد و با measurement اثبات شده است، به‌صورت denormalization مستند و قابل بازسازی بشکن. JSONB برای دادهٔ واقعاً انعطاف‌پذیر/نسخه‌دار و غیرقابل‌پیش‌بینی مجاز است؛ برای ستون‌هایی که query، filter، join، constraint یا integrity لازم دارند جای جدول نرمال نیست.
+
+مدل اولیه باید حداقل این موجودیت‌ها و روابط را بررسی و در ERD نهایی تعیین کند:
+
+| حوزه | جدول‌های محتمل و مسئولیت |
+| --- | --- |
+| مرجع | `lenders`, `loan_products`, `loan_product_versions`, `loan_terms`, `guarantee_types`, `deposit_account_types` |
+| طبقه‌بندی و توصیه‌گر | `loan_variables`, `variable_categories`, `questionnaire_versions`, `questions`, `answer_options`, `recommendation_config_versions`, `question_variable_weights`, `answer_category_compatibilities` |
+| کاربر و نتیجه | `users` فقط در صورت نیاز، `questionnaire_sessions`, `questionnaire_answers`, `recommendation_runs`, `recommendation_results`, `recommendation_exclusion_reasons` |
+| ورود و حکمرانی داده | `data_import_runs`, `data_source_files`, `staging_loan_rows`, `data_quality_issues`, `approval_records`, `audit_events` |
+
+نام جدول و column به `snake_case`، کلیدها با `uuid` یا سیاست ID مستند و timestampها با `timestamptz` در UTC باشند. برای هر جدول، primary key، foreign key، `NOT NULL`، `UNIQUE`، `CHECK`، default، owner و retention مشخص کن. حذف فیزیکی برای دادهٔ حساس یا دارای سابقه فقط با policy و در صورت لازم soft-delete (`deleted_at`) باشد؛ از soft-delete بی‌دلیل برای همهٔ جدول‌ها استفاده نکن.
+
+`loan_products` هویت پایدار طرح را نگه دارد و `loan_product_versions` شرایط نسخه‌دار آن را؛ رکورد توصیه همیشه به نسخهٔ دقیق وام و config دقیق وصل شود. مقدارهای محوری مثل نرخ، مبلغ، قسط و مدت باید typed/numeric باشند؛ متن فارسی خام فقط در source/staging یا فیلد توضیحی باقی بماند. نسبت وام به سپرده، سپرده و ضمانت با رابطه/کلید خارجی و category استاندارد مدل شوند، نه stringهای تکراری. برای وضعیت `unknown`, `variable`, `neutral` و `ranking_excluded` enum یا state صریح بساز؛ آن‌ها را در null مبهم پنهان نکن.
+
+### ۳. ایندکس، query و کارایی
+
+ایندکس را از queryهای واقعی طراحی کن، نه از روی حدس. برای foreign keyها، lookupهای loan/lender/version، فیلترهای رایج recommendation و constraintهای یکتا index مناسب ایجاد کن. `EXPLAIN (ANALYZE, BUFFERS)` را برای queryهای حیاتی در محیط نماینده اجرا و نتیجه را مستند کن. از N+1، `SELECT *`، pagination بدون order پایدار، joinهای غیرضروری و index بیش‌ازحد اجتناب کن.
+
+pagination برای لیست‌ها cursor یا limit/offset محدود و order deterministic داشته باشد. عملیات import/bulk در batch و transactionهای کوتاه انجام شود؛ یک transaction بزرگ که lock طولانی ایجاد کند ممنوع است. indexهای سنگین یا migrationهای پرخطر با روش compatible/online و plan rollback اجرا شوند. cache فقط پس از اندازه‌گیری، با TTL/invalidation و بدون cache کردن دادهٔ حساس مشترک افزوده شود.
+
+### ۴. پایپ‌لاین داده: raw → staging → core → serving
+
+Excel منبع خام است، نه schema runtime. پایپ‌لاین باید idempotent، نسخه‌دار، قابل تکرار و قابل audit باشد:
+
+1. **Ingest/raw:** فایل منبع را با hash، منبع، زمان دریافت، version و مالک ثبت کن؛ فایل اصلی immutable بماند.
+2. **Staging:** هر سطر و مقدار خام را بدون ازبین‌بردن provenance وارد `staging_*` کن؛ validation اولیهٔ نوع، header، تعداد ستون، encoding و duplicate انجام بده.
+3. **Normalize/core:** parserهای تست‌شده مبلغ/درصد/مدت/متن فارسی را به typeهای canonical تبدیل کنند؛ category، status و روابط مرجع ایجاد شوند.
+4. **Validate/audit:** قواعد business، FK/unique/check، پوشش دسته‌ها، unknown/variable، ناسازگاری mapping، شمارش وام‌های rankable/needs-review و تغییرات نسبت به import قبلی را گزارش کن.
+5. **Approve/publish:** فقط import تأییدشده با approval record به read model/serving version تبدیل شود. اجرای ناموفق یا ناقص نباید دادهٔ serving را تغییر دهد.
+6. **Observe/rollback:** metrics، issueها، version و قابلیت برگشت به serving version قبلی ثبت شوند.
+
+در pipeline هر تبدیل باید provenance داشته باشد: `source_file_id`, `source_row_number`, `source_column`, parser/version و rule decision. تغییر خام داده ممنوع است؛ correction با transformation یا نسخهٔ جدید ثبت می‌شود. مورد ambiguous را auto-correct نکن؛ به `data_quality_issues` بفرست تا role مجاز بررسی و approval کند.
+
+### ۵. migration، seed و عملیات دیتابیس
+
+تنها مسیر تغییر schema، Alembic migrationهای version-controlled است. هر migration باید upgrade و downgrade عملی، test شده، بدون data loss ناخواسته و همراه توضیح هدف/اثر/rollback باشد. migrationها را دستی روی production اجرا نکن؛ CI ابتدا روی DB خالی و سپس روی fixture نسخهٔ قبل اجرا کند. seed data از migration جداست و idempotent اجرا می‌شود؛ seed هرگز دادهٔ production را overwrite نمی‌کند.
+
+برای هر release، ترتیب deployment مستند باشد: migration سازگار → deploy backend → backfill در job جدا → switch feature/config → حذف فیلد قدیمی در release بعد. تغییر breaking با expand/contract انجام شود، نه rename/drop ناگهانی. health/readiness endpoint باید آماده‌بودن اتصال DB و migration version مورد انتظار را بدون افشای secret بررسی کند.
+
+### ۶. مستندات اجباری داخل مخزن
+
+هم‌زمان با ایجاد schema، این فایل‌ها را بساز و در هر تغییر DB/API به‌روزرسانی کن:
+
+- `docs/database/erd.md`: نمودار Mermaid ERD، cardinatlity، توضیح روابط و مرز هر bounded context.
+- `docs/database/data-dictionary.md`: برای هر جدول/ستون، type، nullable، default، constraint، منبع، مثال غیرحساس و مالک.
+- `docs/database/index-and-query-strategy.md`: queryهای کلیدی، indexهای مربوط، دلیل و نتایج `EXPLAIN`.
+- `docs/database/migrations-and-rollback.md`: ترتیب migration، backfill، rollback و restore.
+- `docs/data-pipeline/pipeline.md`: مراحل raw/staging/core/serving، validation، approval و runbook خطا.
+- `docs/api/openapi.md`: نسخه‌بندی، authentication، endpointها، schema و error codeها؛ OpenAPI تولیدی FastAPI نیز در CI export شود.
+- `docs/backend/module-map.md`: نقشهٔ پوشه‌ها، مسئولیت هر ماژول، dependency direction و راهنمای توسعهٔ قابلیت جدید.
+
+ERD باید از schema واقعی ساخته یا در CI با آن تطبیق داده شود؛ نمودار دستیِ قدیمی قابل قبول نیست. هر PR که DB/API/backend را تغییر می‌دهد، باید همان PR مستندات مرتبط و لینک migration/test را هم تغییر دهد.
+
+### ۷. استاندارد کامنت‌گذاری و مستندسازی کد
+
+در تمام کدهای backend، کامنت‌های **مفصل ولی معنادار** بنویس. کامنت نباید صرفاً کد بدیهی را تکرار کند؛ باید «چرایی»، محدودیت دامنه، فرض، اثر امنیتی، دلیل تصمیم، invariant، مرز transaction، دلیل index یا ملاحظهٔ rollback را توضیح دهد. برای moduleهای عمومی docstring با هدف، ورودی/خروجی، خطا، side effect و مثال کوتاه بنویس. برای use caseها، parserها، queryهای غیر بدیهی، migrationها، decisionهای scoring و کنترل‌های امنیتی، توضیح کافی الزامی است.
+
+کامنت منقضی بدتر از نداشتن کامنت است: همراه با تغییر کد، comment/docstring/docs مرتبط را به‌روزرسانی کن. `TODO` باید owner، دلیل و لینک issue داشته باشد. READMEهای کوتاه داخل هر bounded context باید نقش آن پوشه، public API و ممنوعیت dependency را توضیح دهند. کامنت نباید secret، دادهٔ واقعی کاربر یا جزئیات حساس عملیاتی را افشا کند.
+
+### ۸. برنامهٔ تست دیتابیس و پایپ‌لاین
+
+| سناریو | مراحل | معیار قبولی |
+| --- | --- | --- |
+| schema خالی | همه migrationها را روی PostgreSQL خالی اجرا کن | schema، constraint و ERD/data dictionary سازگارند. |
+| upgrade واقعی | fixture نسخهٔ قبلی را migrate کن | داده از بین نرود، queryهای اصلی کار کنند و downgrade/test rollback مشخص باشد. |
+| import تکراری | یک Excel یکسان را دو بار ingest کن | duplicate business record یا تغییر serving version ایجاد نشود. |
+| دادهٔ خراب | header/نوع/عدد فارسی/مقدار ambiguous نامعتبر وارد کن | staging issue ثبت شود؛ core/serving دست‌نخورده بماند. |
+| integrity | FK، unique، check و enum را نقض کن | DB عملیات را رد کند، نه UI یا application به‌تنهایی. |
+| transaction | خطا در میانهٔ import یا approval بساز | atomic rollback؛ دادهٔ نیمه‌کاره منتشر نشود. |
+| performance | queryهای ranking/details با حجم representative اجرا شوند | plan بررسی‌شده، N+1 ندارد و budget زمانی مستند پاس می‌شود. |
+| concurrency | دو update/approval هم‌زمان شبیه‌سازی کن | isolation/locking مانع overwrite ناخواسته و version conflict شود. |
+| authorization | roleهای مختلف repository/use case را امتحان کن | فقط role مجاز دادهٔ لازم را می‌خواند/می‌نویسد. |
+| backup/restore | snapshot آزمایشی را در محیط جدا restore کن | schema، data version و audit trail قابل بازیابی هستند. |
+
+قبل از انتشار، migration test، import/audit test، integration test FastAPI با PostgreSQL واقعی، performance smoke test، security gate و مستندات generated باید همگی سبز باشند. SQLite mock به‌تنهایی برای قبولی دیتابیس کافی نیست.
+
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
 - فقط داده‌ای که شرط‌های ضروری نمایش دارد وارد candidateها شود: نام وام، نام ارائه‌دهنده، شرایط اصلی و روش اقدام/ثبت درخواست. موارد ناقص را با علت در audit ثبت کن.
