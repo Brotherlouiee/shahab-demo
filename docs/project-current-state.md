@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-03.T05`
+- `activeTaskId`: `US-04.T01`
 - Status: `completed — awaiting PR review`
-- Base commit: `8230f8678de70ef5e295630a06d1ff5efa070ae2`
-- Working branch: `feature/us-03-quality-gates`
+- Base commit: `62744201db9a5f67d6193861990b9b3ae53f8f68`
+- Working branch: `feature/us-04-conceptual-model`
 
 ## Evidence
 
@@ -28,6 +28,8 @@
 - API v1 now has typed errors, server-generated correlation IDs, minimal public liveness and token-gated readiness without exposing dependency state.
 - `US-03.T04` was merged in PR #8.
 - A single local/CI quality command now runs formatting, linting, type checking, backend tests, architecture/data validators, secret scan and production build.
+- `US-03.T05` was merged in PR #9; US-03 quality gate is complete.
+- Conceptual bounded contexts, cardinalities, ownership/retention and physical-schema invariants are documented before ORM or migration work.
 
 ## Test record
 
@@ -43,6 +45,7 @@
 | `npm run test:api-health` | Passed; liveness, readiness authorization and typed 404 behavior verified. |
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 29 backend tests completed after US-03.T04. |
 | `npm run quality` | Passed; Ruff format/lint, Mypy (22 source files), 31 backend tests, all validators, secret scan and production build completed. |
+| `npm run quality` | Passed; conceptual data-model validator and 32 backend tests completed with all existing quality gates. |
 
 ## Blockers and next task
 
@@ -50,7 +53,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- US-03 complete; next task: `US-04.T01` — conceptual data model and ERD.
+- Next task: `US-04.T02` — 3NF physical schema design, constraints and database operation documentation.
 
 ## Compatibility pointer
 
