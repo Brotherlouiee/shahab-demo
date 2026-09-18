@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-04.T01`
+- `activeTaskId`: `US-04.T02`
 - Status: `completed — awaiting PR review`
-- Base commit: `62744201db9a5f67d6193861990b9b3ae53f8f68`
-- Working branch: `feature/us-04-conceptual-model`
+- Base commit: `aa559bf9d7003b8dac10429b14012b28dbc3c28d`
+- Working branch: `feature/us-04-physical-schema-spec`
 
 ## Evidence
 
@@ -30,6 +30,8 @@
 - A single local/CI quality command now runs formatting, linting, type checking, backend tests, architecture/data validators, secret scan and production build.
 - `US-03.T05` was merged in PR #9; US-03 quality gate is complete.
 - Conceptual bounded contexts, cardinalities, ownership/retention and physical-schema invariants are documented before ORM or migration work.
+- `US-04.T01` was merged in PR #10.
+- PostgreSQL 3NF physical tables, type/state semantics, constraint catalog and migration/rollback operations are specified before ORM/migration implementation.
 
 ## Test record
 
@@ -46,6 +48,7 @@
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 29 backend tests completed after US-03.T04. |
 | `npm run quality` | Passed; Ruff format/lint, Mypy (22 source files), 31 backend tests, all validators, secret scan and production build completed. |
 | `npm run quality` | Passed; conceptual data-model validator and 32 backend tests completed with all existing quality gates. |
+| `npm run quality` | Passed; physical-schema specification validator and 33 backend tests completed with all existing quality gates. |
 
 ## Blockers and next task
 
@@ -53,7 +56,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-04.T02` — 3NF physical schema design, constraints and database operation documentation.
+- Next task: `US-04.T03` — SQLAlchemy model, database constraints and repository port.
 
 ## Compatibility pointer
 
