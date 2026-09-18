@@ -448,6 +448,87 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 یک `CHANGELOG.md` در ریشهٔ مخزن با قالب Keep a Changelog ایجاد و نگهداری کن. هر change باید زیر `Unreleased` و یکی از دسته‌های `Added`, `Changed`, `Fixed`, `Security`, `Deprecated`, `Removed` ثبت شود؛ entry شامل شناسهٔ user story/task، خلاصهٔ قابل‌فهم، اثر داده/API/migration، نسخهٔ config/schema در صورت مرتبط‌بودن و لینک PR/ADR باشد. تغییر migration، data decision، قانون scoring، امنیت، dependency، رفتار UI یا bug fix بدون CHANGELOG entry قابل قبول نیست. در release، `Unreleased` به نسخه و تاریخ تبدیل شود؛ تاریخچهٔ قبلی بازنویسی نشود.
 
+## پروتکل توسعهٔ مرحله‌ای، تداوم کار و مصرف بهینهٔ توکن
+
+پروژه باید در چند مرحلهٔ کوچک، مستقل و قابل تحویل توسعه یابد؛ هیچ نشست یا پاسخ واحدی نباید مسئول توسعهٔ کل backend، دیتابیس، UI و deploy باشد. هدف از این روش، حذف دوباره‌کاری، حفظ زمینهٔ لازم در Git و اسناد، و مصرف حداقلیِ مؤثرِ توکن است؛ نه کوتاه‌کردن بررسی‌های ضروری امنیت، تست یا کیفیت.
+
+### ۱. واحد توسعهٔ اجباری
+
+هر واحد توسعه دقیقاً یک task یا زیرتسک از User Story فعال است و باید آن‌قدر کوچک باشد که بتوان آن را در یک PR/commit روشن بازبینی کرد. پیش از تغییر، Codex فقط این موارد را بخواند: بخش مرتبط guide، ADR/data decision مرتبط، module map همان feature، قرارداد public و testهای همان محدوده. خواندن دوبارهٔ کل مخزن، تکرار محتوای بلند اسناد یا بازنویسی فایل‌های نامرتبط ممنوع است.
+
+برای هر واحد، این ترتیب ثابت است:
+
+1. **Checkpoint آغاز:** شناسهٔ `US-xx / T-xx`، هدف، فایل‌های هدف، acceptance criterion، خطر، وابستگی و test plan در PR/issue یا `docs/progress/` ثبت شود.
+2. **بررسی محدود:** فقط `rg`/فهرست فایل و قطعه‌های مرتبط خوانده شوند؛ محتوا یا خروجی‌های بلند دوباره در گفتگو کپی نشوند.
+3. **تغییر حداقلی:** فقط فایل‌های متعلق به همان boundary تغییر کنند. اگر تغییر به boundary دیگر نیاز دارد، contract/ADR جداگانه بساز و task را بشکن.
+4. **تست نزدیک:** ابتدا سریع‌ترین test واحد/fixture، سپس integration مرتبط اجرا شود. refactor فقط پس از سبزشدن behavior فعلی و همراه test انجام شود.
+5. **ثبت پایدار:** code comment/docstring، سند مرتبط، `CHANGELOG.md` و progress checkpoint به‌روز شوند؛ سپس یک commit کوچک با پیام conventional و شناسهٔ task ثبت شود.
+6. **Checkpoint پایان:** فایل‌های تغییرکرده، فرمان‌های test و نتیجه، migration/config/data version، ریسک باقی‌مانده و task بعدی در `docs/progress/current-state.md` ثبت شود.
+
+هر زمان ادامهٔ کار به نشست/گفتگوی بعدی منتقل شد، Codex باید تنها با خواندن `docs/progress/current-state.md`، `CHANGELOG.md`، PR/commit قبلی و فایل‌های feature فعال ادامه دهد. از حدس‌زدن وضعیت یا انجام دوبارهٔ کار قبلی پرهیز کند. اگر checkpoint ناقص است، ابتدا آن را بازسازی کند و feature جدید شروع نکند.
+
+### ۲. سیاست بهینه‌سازی توکن و زمینه
+
+- از برنامهٔ User Story به‌عنوان صف قطعی کار استفاده کن؛ یک task فعال در هر زمان.
+- قبل از تولید کد جدید، contract، test fixture و موجودیت مشابه را جست‌وجو کن تا کد تکراری یا abstraction جدید بی‌دلیل ساخته نشود.
+- patchهای کوچک، خروجی test خلاصه و link به فایل/commit را ترجیح بده؛ log کامل یا source بزرگ فقط وقتی failure به آن وابسته است بررسی شود.
+- اسناد مرجع بزرگ (`.unitext`) را یک‌بار inventory/audit کن و نتیجهٔ ساختاریافته را در `docs/source-inventory.md` و `docs/recommendation-data-decisions.md` نگه دار؛ در taskهای بعدی فقط source/section لازم را بخوان.
+- testهای کم‌هزینه را نزدیک تغییر اجرا کن؛ full suite و E2E/security/performance را در gateهای داستان و release اجرا کن. شکست test دقیقاً همان لایه را اصلاح کند.
+- «صرفه‌جویی توکن» هرگز مجوز حذف migration، تست، threat model، backup verification، مستندات یا review نیست.
+- اگر یک task بیش از حد بزرگ شد، توقف کن، آن را به taskهای کوچک‌تر با dependency روشن تقسیم کن و checkpoint ثبت کن؛ ادامهٔ کورکورانه ممنوع است.
+
+### ۳. Git، commit و مستندسازی مرحله‌ای
+
+از شاخهٔ feature برای هر user story یا مجموعهٔ کوچکِ سازگار استفاده کن. هر commit باید buildable یا دست‌کم در یک حالت قابل توضیح باشد و پیامش شامل نوع و شناسهٔ task باشد؛ مثال: `feat(US-04/T-03): add versioned loan-term schema`. commitهای مجاز: `docs`, `test`, `feat`, `fix`, `refactor`, `chore`, `security`, `perf`.
+
+ترتیب پیشنهادی برای یک story: `docs/test` → `domain/config` → `infrastructure/migration` → `application/API` → `presentation` → `refactor/docs/release-gate`. در یک commit، migration، تغییر رفتار و refactor گسترده را مخلوط نکن. هر PR باید summary، محدودهٔ User Story/Task، ریسک، test output خلاصه، تغییر داده/API/migration، تصمیم امنیتی و rollback را داشته باشد.
+
+### ۴. محیط محلی استاندارد و Docker
+
+برای جلوگیری از تفاوت سیستم‌ها، محیط اصلی توسعه با Docker Compose اجرا می‌شود. روی Windows، **Docker Desktop با WSL 2**؛ روی macOS/Linux، Docker Desktop یا Docker Engine به‌همراه Docker Compose v2 لازم است. نصب جداگانهٔ PostgreSQL برای توسعه ضروری نیست؛ دیتابیس در container اجرا می‌شود. ابزارهای محلی لازم:
+
+| ابزار | نسخه/کاربرد | الزام |
+| --- | --- | --- |
+| Git | نسخهٔ پایدار | clone، branch، commit و PR |
+| Docker + Compose v2 | نسخهٔ پایدار | frontend، FastAPI، PostgreSQL و ابزارهای وابسته |
+| Node.js LTS + npm | نسخهٔ LTS ثابت در `.nvmrc`/`package.json` | React/Vite، lint و test frontend |
+| Python 3.12+ | نسخهٔ ثابت در `pyproject.toml` | FastAPI، scripts و test backend |
+| `uv` یا ابزار محیط پایتون مصوب | lockfile قطعی | نصب سریع و reproducible dependencyهای Python |
+| مرورگر Chromium/Playwright | نسخهٔ قفل‌شده در project | E2E محلی و CI |
+
+در مخزن باید این فایل‌ها وجود داشته باشند و هم‌زمان با توسعه به‌روز شوند:
+
+```text
+compose.yaml                         # سرویس‌های frontend, api, postgres و profileهای test/tool
+.env.example                         # فقط نام متغیرها و مقدارهای غیرحساس نمونه
+backend/Dockerfile                   # build چندمرحله‌ای FastAPI و non-root user
+frontend/Dockerfile                  # build/serve frontend و non-root user
+backend/pyproject.toml + lockfile    # dependencyهای Python قفل‌شده
+package.json + package-lock.json     # dependencyهای Node قفل‌شده
+docs/local-development.md            # نصب، فرمان‌ها، portها و troubleshooting
+docs/operations/docker-runbook.md    # reset امن، backup/restore محلی و health checks
+```
+
+Compose باید شبکهٔ داخلی، named volume PostgreSQL، health check، متغیر محیطی از `.env` محلی، dependency readiness و profileهای جدا برای test را داشته باشد. password/secret پیش‌فرض فقط برای local باشد، در `.env` قرار گیرد و هرگز commit نشود. production compose و development compose را یکی فرض نکن؛ deploy production از configuration/secret manager و pipeline جدا استفاده کند.
+
+### ۵. مراحل نصب و راه‌اندازی محلی
+
+Codex باید این راهنما را در `docs/local-development.md` تولید و با اجرای واقعی تأیید کند؛ فرمان دقیق ممکن است با OS تغییر کند، اما این توالی ثابت است:
+
+1. نصب Git، Docker Desktop/Engine با Compose v2، Node LTS و Python 3.12+؛ با فرمان version هرکدام را بررسی کن.
+2. clone مخزن، ورود به شاخهٔ درست و کپی `.env.example` به `.env`؛ فقط مقادیر local را پر کن.
+3. یک‌بار dependencyهای frontend و backend را از lockfile نصب کن؛ dependency جدید فقط با PR، lockfile و scan اضافه می‌شود.
+4. `docker compose up --build` را اجرا کن؛ readiness database، migration و health endpoint API را بررسی کن.
+5. pipeline seed/import آزمایشی را روی دادهٔ غیرحساس اجرا و audit را بررسی کن؛ هرگز با reset بی‌هدف volume داده را حذف نکن.
+6. frontend، OpenAPI/health API و مسیر پرسشنامه را باز کن؛ سپس unit/integration/E2E کوتاهِ smoke اجرا کن.
+7. برای توقف از down بدون حذف volume استفاده کن؛ reset یا حذف volume فقط طبق runbook و با تأیید هدف/محیط انجام شود.
+
+README نباید صرفاً فرمان‌ها را فهرست کند؛ باید پیش‌نیازها، علت هر سرویس، portها، health check، مسیر troubleshoot، seed data، نحوهٔ اجرای testها و تفاوت local/staging/production را توضیح دهد. هر تغییر در stack، port، env، dependency، migration یا فرمان اجرا، در همان PR به `docs/local-development.md`, `docs/operations/docker-runbook.md` و CHANGELOG اضافه شود.
+
+### ۶. شرط آغاز مرحلهٔ بعد و شرط پایان کل توسعه
+
+شروع task بعدی فقط وقتی مجاز است که checkpoint پایان task فعلی کامل، commit ثبت، test نزدیک سبز و تغییرات مستند شده باشند. شروع User Story بعدی فقط با gate سبز، PR قابل بازبینی و عدم وجود blocker باز از story قبلی ممکن است. پایان کل پروژه زمانی است که US-12 کامل، تمام containerها در محیط local با راهنمای مستند بالا می‌آیند، full release gate سبز است، deploy preview و rollback تست شده و آخرین checkpoint و CHANGELOG وضعیت دقیق نسخه را نشان می‌دهند.
+
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
 - فقط داده‌ای که شرط‌های ضروری نمایش دارد وارد candidateها شود: نام وام، نام ارائه‌دهنده، شرایط اصلی و روش اقدام/ثبت درخواست. موارد ناقص را با علت در audit ثبت کن.

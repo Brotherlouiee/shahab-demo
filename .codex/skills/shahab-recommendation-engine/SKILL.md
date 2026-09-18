@@ -102,6 +102,10 @@ The backend stack is FastAPI + PostgreSQL. Read [database and pipeline guidance]
 
 Follow the ordered user-story roadmap in `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` from US-01 through US-12; do not start a later story while the previous story's tests and documentation gate fail. For every task, write or update the relevant test before or alongside code, run the applicable quality/security checks, make only test-protected refactors, update affected documentation and add a Keep-a-Changelog entry under `Unreleased` with the user-story/task ID, behavior, migration/config impact and related ADR/PR. The project is complete only after US-12's release gate passes.
 
+## Incremental, token-efficient delivery and local stack
+
+Work one small task at a time and persist a start/end checkpoint in `docs/progress/current-state.md`; on a later session, read that checkpoint, CHANGELOG and the active feature only before continuing. Optimize context use by reading only the relevant guide section, ADR, contract, fixture and module—not by skipping tests, security or documentation. Commit each finished task separately with its US/task ID. The local stack is Docker Compose with FastAPI, PostgreSQL and the existing frontend; document and verify Docker, Node LTS, Python 3.12+, locked dependency installation, migration, seed/import, health checks, smoke tests and safe shutdown in `docs/local-development.md` and `docs/operations/docker-runbook.md`.
+
 ## Hand-off
 
 Report changed files, source and configuration versions, data conflicts, excluded loans and reasons, trace sample, tests run, and any blocker to production. Keep secrets and PII out of commits and logs.
