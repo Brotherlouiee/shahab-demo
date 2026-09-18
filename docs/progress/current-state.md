@@ -1,4 +1,6 @@
-# Project current state
+# Historical current-state checkpoint
+
+> The canonical live checkpoint moved to `docs/project-current-state.md` in `US-01.T04`. This file is retained for the earlier task history only and must not be used as current execution status.
 
 ## Active task
 
