@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate:canonical-identifiers": "node scripts/validate-canonical-identifiers.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
