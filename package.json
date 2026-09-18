@@ -5,7 +5,8 @@
     "preview": "vite preview",
     "validate:canonical-identifiers": "node scripts/validate-canonical-identifiers.mjs",
     "test:persian-values": "python -m unittest discover -s backend/tests -p \"test_*.py\"",
-    "audit:data": "python scripts/data_audit.py"
+    "audit:data": "python scripts/data_audit.py",
+    "validate:architecture-scaffold": "python scripts/validate_architecture_scaffold.py"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

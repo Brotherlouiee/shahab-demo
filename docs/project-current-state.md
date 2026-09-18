@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-02.T05`
+- `activeTaskId`: `US-03.T01`
 - Status: `completed — awaiting PR review`
-- Base commit: `f1dc2ec4a45ea6190a1d1b716b5ae03e01a51cf0`
-- Working branch: `feature/us-02-canonical-identifiers`
+- Base commit: `0c8e2f45f3074e9bef2a20719e0751533ec9575a`
+- Working branch: `feature/us-03-architecture-scaffold`
 
 ## Evidence
 
@@ -19,6 +19,7 @@
 - A read-only source audit and provenance report record source hashes, structural coverage, numeric coefficient ranges, loan-row evidence, and blocking core-value issues.
 - Versioned data decisions define the Q5 interest weight, neutral deposit-feature behavior, core-value ranking exclusion, and display-only source columns.
 - Versioned golden contract fixtures cover every canonical question and the complete, neutral, and core-unknown loan-policy boundaries without asserting an engine score prematurely.
+- A staged frontend/backend architecture scaffold and module map are created without moving the active Vite prototype.
 - No product behavior, data interpretation, backend, database, secret, or deploy configuration was changed.
 
 ## Test record
@@ -32,7 +33,8 @@
 - Docker/Compose is unavailable in this environment; Docker-dependent verification belongs to its assigned future task.
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
-- `US-02` is complete and awaiting PR review/merge. Only then may `US-03.T01` begin.
+- `US-02` was merged in PR #4.
+- Next task: `US-03.T02` — FastAPI settings, redacted logging and dependency wiring.
 
 ## Compatibility pointer
 
