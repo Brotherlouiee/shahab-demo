@@ -1,0 +1,87 @@
+{
+  "fixtureVersion": "1.0.0",
+  "contractVersion": "1.0.0",
+  "dataDecisionVersion": "1.0.0",
+  "purpose": "Golden contract fixtures only; no recommendation score or rank is asserted before US-08.",
+  "questionnaire": {
+    "fixtureId": "all-canonical-questions-valid",
+    "answers": {
+      "Q1": "Q1.incomeInvestment",
+      "Q2": "Q2.findLowerCostOption",
+      "Q3": "Q3.balancedTradeoff",
+      "Q4": "Q4.balancedTermInstallment",
+      "Q5": "Q5.flexibleDueDate",
+      "Q6": "Q6.twentyToFortyPercent",
+      "S7": "S7.accountTurnoverOnly",
+      "S8": "S8.oneMonthWait",
+      "S10": "S10.thirtySixMonthGuarantors",
+      "S13": "S13.requestEffectiveRateSchedule"
+    }
+  },
+  "loanFixtures": [
+    {
+      "fixtureId": "complete-core-and-deposit-values",
+      "loanId": "7d3323aa-4188-46ce-bf03-bf7e5bdbf111",
+      "categories": {
+        "maxAmount": "amount_150_300m",
+        "monthlyInstallment": "installment_5_15m",
+        "maxRepaymentMonths": "term_25_48m",
+        "interestRate": "rate_15_20",
+        "depositRequired": "deposit_required",
+        "depositHoldingMonths": "holding_1_3m",
+        "loanToDepositRatio": "ratio_100_200",
+        "guaranteeType": "thirdPartyUndertaking"
+      },
+      "expected": {
+        "rankingEligible": true,
+        "neutralVariables": [],
+        "needsReview": false
+      }
+    },
+    {
+      "fixtureId": "neutral-deposit-attributes",
+      "loanId": "1b95fe6c-d05d-45a9-99d9-f9706c21d222",
+      "categories": {
+        "maxAmount": "amount_150_300m",
+        "monthlyInstallment": "installment_5_15m",
+        "maxRepaymentMonths": "term_25_48m",
+        "interestRate": "rate_15_20",
+        "guaranteeType": "thirdPartyUndertaking"
+      },
+      "unknowns": {
+        "depositRequired": "unknown_label",
+        "depositHoldingMonths": "unknown_label",
+        "loanToDepositRatio": "blank"
+      },
+      "expected": {
+        "rankingEligible": true,
+        "neutralVariables": ["depositRequired", "depositHoldingMonths", "loanToDepositRatio"],
+        "needsReview": false,
+        "scoreAssertion": "none-before-US-08"
+      }
+    },
+    {
+      "fixtureId": "core-interest-rate-needs-review",
+      "loanId": "a934792a-2f03-4e7a-8bc7-3e5c8503e333",
+      "categories": {
+        "maxAmount": "amount_150_300m",
+        "monthlyInstallment": "installment_5_15m",
+        "maxRepaymentMonths": "term_25_48m",
+        "depositRequired": "deposit_required",
+        "depositHoldingMonths": "holding_1_3m",
+        "loanToDepositRatio": "ratio_100_200",
+        "guaranteeType": "thirdPartyUndertaking"
+      },
+      "unknowns": {
+        "interestRate": "unknown_label"
+      },
+      "expected": {
+        "rankingEligible": false,
+        "neutralVariables": [],
+        "needsReview": true,
+        "rankingExcludedReasons": ["interestRate:unknown_label"],
+        "scoreAssertion": "no-score-before-US-08"
+      }
+    }
+  ]
+}

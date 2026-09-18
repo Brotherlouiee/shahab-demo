@@ -2,7 +2,7 @@
 
 ## Active task
 
-- `activeTaskId`: `US-02.T04`
+- `activeTaskId`: `US-02.T05`
 - Status: `completed — awaiting PR review`
 - Base commit: `f1dc2ec4a45ea6190a1d1b716b5ae03e01a51cf0`
 - Working branch: `feature/us-02-canonical-identifiers`
@@ -18,6 +18,7 @@
 - Pure, framework-independent schema and Persian scalar parser contracts are versioned and unit tested; ambiguous ranges/prose remain typed unknowns.
 - A read-only source audit and provenance report record source hashes, structural coverage, numeric coefficient ranges, loan-row evidence, and blocking core-value issues.
 - Versioned data decisions define the Q5 interest weight, neutral deposit-feature behavior, core-value ranking exclusion, and display-only source columns.
+- Versioned golden contract fixtures cover every canonical question and the complete, neutral, and core-unknown loan-policy boundaries without asserting an engine score prematurely.
 - No product behavior, data interpretation, backend, database, secret, or deploy configuration was changed.
 
 ## Test record
@@ -31,7 +32,7 @@
 - Docker/Compose is unavailable in this environment; Docker-dependent verification belongs to its assigned future task.
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
-- Next task: `US-02.T05` — create small versioned fixtures and golden data; do not implement ranking, database runtime, or UI changes.
+- `US-02` is complete and awaiting PR review/merge. Only then may `US-03.T01` begin.
 
 ## Compatibility pointer
 
