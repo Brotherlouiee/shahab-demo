@@ -13,6 +13,10 @@ dependencies = [
   "uvicorn[standard]>=0.32,<1.0",
 ]
 
+[project.optional-dependencies]
+test = [
+  "httpx2>=0.0.1",
+]
+
 [tool.setuptools.packages.find]
 include = ["backend*"]
-

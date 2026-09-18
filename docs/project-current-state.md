@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-03.T03`
+- `activeTaskId`: `US-03.T04`
 - Status: `completed — awaiting PR review`
-- Base commit: `b28faa1f5201584547b3f55b25c3d15b6544def1`
-- Working branch: `feature/us-03-ports-boundaries`
+- Base commit: `9818a2ec70f0815d06c94dcd0e331b0a4fc2fcd7`
+- Working branch: `feature/us-03-api-health`
 
 ## Evidence
 
@@ -24,6 +24,8 @@
 - Typed FastAPI application composition, environment settings, redacting logging and dependency providers are implemented without any product endpoint, database or deploy change.
 - `US-03.T02` was merged in PR #6.
 - Framework-free domain references and small application ports now define one-way dependencies; an AST validator blocks reverse imports and local cycles.
+- `US-03.T03` was merged in PR #7.
+- API v1 now has typed errors, server-generated correlation IDs, minimal public liveness and token-gated readiness without exposing dependency state.
 
 ## Test record
 
@@ -36,6 +38,8 @@
 | `npm run validate:import-boundaries` | Passed; no prohibited reverse import or local circular dependency detected. |
 | `python -m unittest backend.tests.test_application_ports` | Passed; four port and import-boundary tests completed. |
 | `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 26 backend tests completed after US-03.T03. |
+| `npm run test:api-health` | Passed; liveness, readiness authorization and typed 404 behavior verified. |
+| `python -m unittest discover -s backend/tests -p "test_*.py"` | Passed; 29 backend tests completed after US-03.T04. |
 
 ## Blockers and next task
 
@@ -43,7 +47,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-03.T04` — API v1, typed error model and restricted health/readiness.
+- Next task: `US-03.T05` — lint, format, typecheck, test runner and CI quality gates.
 
 ## Compatibility pointer
 
