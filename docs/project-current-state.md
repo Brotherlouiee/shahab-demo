@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-05.T03`
-- Status: `completed locally — normalization PR pending`
-- Base commit: `76b6ef598bb8b5cf570c050220a2223f45fa8082`
-- Working branch: `feature/us-05-normalization`
+- `activeTaskId`: `US-05.T04`
+- Status: `completed locally — approval/publication PR pending`
+- Base commit: `bf169bd87306a03795e1dca623e00c204a1a7f3d`
+- Working branch: `feature/us-05-approval-publication`
 
 ## Evidence
 
@@ -42,6 +42,7 @@
 - Raw source capture is now isolated from parsers and serving data: source bytes have an immutable SHA-256 identity and traceable capture metadata.
 - Raw evidence now has strict, non-destructive staging checks for encoding, headers, row shape and duplicate source hashes.
 - All eight approved loan variables now have a pure, conservative category-normalization boundary. Matrix gaps, capped-out amounts, free text, ranges, unknown and variable values remain typed evidence rather than inferred categories.
+- Canonical rows now retain source-row fingerprints, typed construction rejections and rankability evidence; reviewable drafts require explicit approval before an atomic serving-version pointer can move.
 
 ## Test record
 
@@ -66,6 +67,8 @@
 | Alembic index lifecycle | Passed locally: initial migration + index migration upgrade, downgrade to base and repeated upgrade. |
 | `python -m unittest backend.tests.test_normalization` | Passed; approved categories, Persian digits, boundary ownership, gaps, unknowns and text-only categories are covered. |
 | `npm run quality` | Passed; 50 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T03. |
+| `python -m unittest backend.tests.test_serving_publication` | Passed; canonical-row rejection/eligibility, approval gate, diff and atomic-pointer failure behavior are covered. |
+| `npm run quality` | Passed; 55 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T04. |
 
 ## Blockers and next task
 
@@ -74,7 +77,8 @@
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
 - `US-05.T02` was merged in PR #16.
-- Next task after this PR is merged: `US-05.T04` — approved canonical-row construction and rejection evidence.
+- `US-05.T03` was merged in PR #17.
+- Next task after this PR is merged: `US-05.T05` — durable import command, PostgreSQL adapter and operations runbook.
 
 ## Compatibility pointer
 

@@ -1,0 +1,43 @@
+# Pipeline, approval and serving-version contract
+
+## US-05.T04 checkpoint
+
+- Guide reviewed: SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md on 2026-09-19.
+- Official inputs reread: all six UTF-16 LE unitext files in .agents/documents.
+- Canonical source blobs reviewed: questionnaire 26c702…faf, category matrix
+  f2121e…915, question-variable map 272194…fcd, answer weights f14d0d…10b,
+  compatibility matrix 7eeed3…7c, loan database 0854a5…3fc.
+- Decision contract: recommendation-data-decisions.v1.json version 1.0.0,
+  approved.
+
+## State flow
+
+raw immutable bytes → staging validation → normalized canonical rows → draft
+version → approved version → published serving version
+
+Only an approved version can become the active serving version. Publication is an
+atomic active-pointer change: the prior published version becomes superseded;
+its rows, diff and approval evidence remain immutable. A failed publication must
+leave the active pointer untouched. Rollback command and durable PostgreSQL
+adapter are intentionally deferred to US-05.T05/T06.
+
+## Canonical-row acceptance
+
+Each row must have a positive source row number, lender name, loan name and
+exactly the eight canonical loan variables. Rejected construction attempts return
+typed CanonicalRowRejection evidence; no source text is rewritten.
+
+Core ranking fields with unknown, variable, unparseable or unmapped states create
+a valid needs-review row and record the exact variable IDs. They are not silently
+neutralized. The three deposit attributes retain the approved neutral semantics
+for US-08; their uncertainty does not make the row unrankable here. Display-only
+fields are whitelisted and kept outside variables.
+
+## Diff and approval evidence
+
+The draft stores an identity-level diff (added, changed, removed) against the
+prior published catalogue. Identity is lender name plus loan name only for this
+staging boundary; immutable database IDs are assigned by the later durable import
+adapter. Approval requires a non-empty actor reference, reason and UTC timestamp.
+No HTTP route, user-controlled publication path or production credential was
+added in this task.
