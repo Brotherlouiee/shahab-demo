@@ -32,3 +32,11 @@ catalogue یا تصمیم پیشنهاد تولید نمی‌کند.
 در مرحله scoring بعدی اعمال می‌شود؛ این normalizer آن سیاست را دور نمی‌زند.
 
 approval، publish، rollback و runbook import در ادامهٔ `US-05` ثبت می‌شوند.
+
+## US-05.T04 — approval and serving version
+
+Canonical-row construction, typed rejection evidence, draft diff, named approval
+and atomic serving-pointer publication are now isolated in domain/application
+modules. The durable PostgreSQL adapter, import command and rollback operation
+remain intentionally deferred; the in-memory adapter is only test/local evidence.
+See `docs/data-pipeline/pipeline.md` and ADR 0005 for the state contract.
