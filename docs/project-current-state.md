@@ -7,7 +7,7 @@
 - Base branch: `main` after merge of `US-07.T01` / PR #27.
 - Working branch: `feature/us-07-questionnaire-route-adapter`
 - `estimatedWorkScope`: one pure canonical route adapter, narrow active-prototype integration, route-contract tests and documentation/checkpoint.
-- `actualScope`: bidirectional immutable route mapping for `/question/3..12`, an explicit legacy screen-index bridge, unit coverage against the canonical identifier contract, and one browser route assertion for every mapped path.
+- `actualScope`: bidirectional immutable route mapping for `/question/3..12`, an explicit legacy screen-index bridge, correction of the prototype's off-by-one post-`S13` screen boundary, unit coverage against the canonical identifier contract, and one browser route assertion for every mapped path.
 - `completionBudget`: met; no answer persistence, session, API, source-data mutation, scoring, recommendation or deployment change.
 - Acceptance: the ten approved public paths map exactly and only to `Q1..Q6`, `S7`, `S8`, `S10`, `S13`; browser navigation stays compatible while indexes remain non-canonical implementation detail.
 - Dependency: all `US-06.*` and `US-07.T01` are merged.
