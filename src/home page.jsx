@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
+import {
+  getCanonicalQuestionIdForRoute,
+  getPrototypeQuestionIndexForCanonicalQuestionId,
+  getQuestionnaireRouteForPrototypeQuestionIndex,
+} from "./features/questionnaire/questionnaireRouteMap.mjs";
 import logoUrl from "../assets/shahab-logo.png";
 import folderIconUrl from "../assets/folder.svg";
 import healthIconUrl from "../assets/health.svg";
@@ -272,6 +277,19 @@ function getQuestionnaireRouteState(pathname) {
   if (pathname === "/personal-info") {
     return {
       questionIndex: personalInfoQuestionIndex,
+      isOtpVerificationStep: false,
+      isAnalyzingLoans: false,
+      loanResultView: "",
+    };
+  }
+
+  const canonicalQuestionId = getCanonicalQuestionIdForRoute(pathname);
+  const prototypeQuestionIndex = canonicalQuestionId
+    ? getPrototypeQuestionIndexForCanonicalQuestionId(canonicalQuestionId)
+    : null;
+  if (prototypeQuestionIndex !== null) {
+    return {
+      questionIndex: prototypeQuestionIndex,
       isOtpVerificationStep: false,
       isAnalyzingLoans: false,
       loanResultView: "",
@@ -1712,7 +1730,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
                   ? "/verify-code"
                   : isPersonalInfoQuestion
                     ? "/personal-info"
-                    : `/question/${currentQuestion + 1}`;
+                    : getQuestionnaireRouteForPrototypeQuestionIndex(currentQuestion)
+                      ?? `/question/${currentQuestion + 1}`;
   const maxStageOffset = stageOffsets[stageOffsets.length - 1];
   const stagedQuestionIndexes = questions.reduce((groups, item, index) => {
     if (item.stageIndex === undefined) return groups;
