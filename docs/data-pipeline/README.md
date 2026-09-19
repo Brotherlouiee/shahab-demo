@@ -40,3 +40,10 @@ and atomic serving-pointer publication are now isolated in domain/application
 modules. The durable PostgreSQL adapter, import command and rollback operation
 remain intentionally deferred; the in-memory adapter is only test/local evidence.
 See `docs/data-pipeline/pipeline.md` and ADR 0005 for the state contract.
+
+## US-05.T05 — prepared import command and operations runbook
+
+The internal manifest command validates a narrow, reviewed hand-off into
+canonical rows and emits a non-publishing plan with typed issue evidence. It
+cannot move the serving pointer. The exact invocation, exit codes, review path
+and recovery rules are in `docs/operations/import-runbook.md`.

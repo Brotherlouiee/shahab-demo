@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-05.T04`
-- Status: `completed locally — approval/publication PR pending`
-- Base commit: `bf169bd87306a03795e1dca623e00c204a1a7f3d`
-- Working branch: `feature/us-05-approval-publication`
+- `activeTaskId`: `US-05.T05`
+- Status: `completed locally — prepared-import command PR pending`
+- Base commit: `b2fe43e5a34751176a2df90cc031b7e6d4a6783d`
+- Working branch: `feature/us-05-import-runbook`
 
 ## Evidence
 
@@ -43,6 +43,7 @@
 - Raw evidence now has strict, non-destructive staging checks for encoding, headers, row shape and duplicate source hashes.
 - All eight approved loan variables now have a pure, conservative category-normalization boundary. Matrix gaps, capped-out amounts, free text, ranges, unknown and variable values remain typed evidence rather than inferred categories.
 - Canonical rows now retain source-row fingerprints, typed construction rejections and rankability evidence; reviewable drafts require explicit approval before an atomic serving-version pointer can move.
+- The internal import command now produces a typed, reviewable canonical plan and cannot connect to a database or publish data; the operations runbook fixes the safe hand-off and recovery sequence.
 
 ## Test record
 
@@ -69,6 +70,8 @@
 | `npm run quality` | Passed; 50 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T03. |
 | `python -m unittest backend.tests.test_serving_publication` | Passed; canonical-row rejection/eligibility, approval gate, diff and atomic-pointer failure behavior are covered. |
 | `npm run quality` | Passed; 55 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T04. |
+| `python -m unittest backend.tests.test_import_preparation` | Passed; clean plan, typed issues/rejections, core needs-review preservation and non-publishing CLI behavior are covered. |
+| `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
 
 ## Blockers and next task
 
@@ -78,7 +81,8 @@
 - `US-02` was merged in PR #4.
 - `US-05.T02` was merged in PR #16.
 - `US-05.T03` was merged in PR #17.
-- Next task after this PR is merged: `US-05.T05` — durable import command, PostgreSQL adapter and operations runbook.
+- `US-05.T04` was merged in PR #18.
+- Next task after this PR is merged: `US-05.T06` — repeated import, atomic-failure and ambiguous-input tests.
 
 ## Compatibility pointer
 
