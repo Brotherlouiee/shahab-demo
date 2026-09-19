@@ -38,3 +38,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-06.T01**: Added framework-free ListLoans and GetLoanDetails use cases over a serving-only catalogue port; drafts, raw/staging data and provenance internals cannot reach public loan models.
 - **US-06.T02**: Added limited, camel-case FastAPI response schemas that allowlist approved public loan facts and reject provenance, raw conditions, internal asset references and extra fields.
 - **US-06.T03**: Added a pure plain-text conditions-to-bullets parser; it strips list formatting without generating HTML or interpreting source text as markup.
+- **Corrective US-06 dependency**: Added PostgreSQL/SQLAlchemy serving-catalogue adapter with an explicit published-state filter and integration coverage.
