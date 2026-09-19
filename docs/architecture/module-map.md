@@ -16,6 +16,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `backend/app/application` | use cases and dependency ports | FastAPI, ORM, direct adapter imports |
 | `backend/app/infrastructure` | outbound adapter implementations | domain/application dependency reversal |
 | `backend/app/infrastructure/db` | SQLAlchemy metadata, bounded engine/session factory and future repository adapters | API import, business scoring, migration execution at import time |
+| `backend/app/data_pipeline` | immutable raw source capture, staged transformation boundaries and adapters | scoring, serving publication, UI/API ownership before its task |
 | `backend/app/api/v1` | versioned transport adapters and restricted operational endpoints | domain logic, direct database decisions |
 | `backend/app/core` | typed settings, dependency wiring, redacted logging, security hooks | product use cases |
 | `backend/app/shared` | truly cross-feature backend helpers | recommendation-specific rules |
