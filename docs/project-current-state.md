@@ -2,16 +2,17 @@
 
 ## Active task
 
-- `activeTaskId`: `US-07.T01`
-- Status: `completed and CI-passed — questionnaire configuration PR pending`
-- Base commit: `8cfae109f21697ffa53e22d579da765297169b8b`
-- Working branch: `feature/us-07-questionnaire-configuration`
-- `estimatedWorkScope`: one approved questionnaire configuration artifact, pure loader/validation, source-integrity gate and documentation/checkpoint.
-- `actualScope`: source-traceable configuration for ten canonical questions and fifty stable answers; pure immutable loader, exact-source validation command and focused configuration tests.
-- `completionBudget`: met; no route adapter, session, API, persistence, UI, scoring, recommendation or deployment change.
-- Acceptance: every canonical question/answer is required, ordered and source-traceable; malformed/reordered configuration is rejected before any later adapter consumes it.
-- Dependency: all `US-06.*` are merged; `US-06.T05` was merged in PR #26.
-- Test plan: focused configuration tests, exact source/config comparison, then repository quality gate in CI.
+- `activeTaskId`: `US-07.T02`
+- Status: `completed locally — route-adapter PR pending`
+- Base branch: `main` after merge of `US-07.T01` / PR #27.
+- Working branch: `feature/us-07-questionnaire-route-adapter`
+- `estimatedWorkScope`: one pure canonical route adapter, narrow active-prototype integration, route-contract tests and documentation/checkpoint.
+- `actualScope`: bidirectional immutable route mapping for `/question/3..12`, an explicit legacy screen-index bridge, correction of the prototype's off-by-one post-`S13` screen boundary, unit coverage against the canonical identifier contract, and one browser route assertion for every mapped path.
+- `completionBudget`: met; no answer persistence, session, API, source-data mutation, scoring, recommendation or deployment change.
+- Acceptance: the ten approved public paths map exactly and only to `Q1..Q6`, `S7`, `S8`, `S10`, `S13`; browser navigation stays compatible while indexes remain non-canonical implementation detail.
+- Dependency: all `US-06.*` and `US-07.T01` are merged.
+- Source/guide attestation: the full `SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` was reread; all six official UTF-16LE source files were reread and SHA-256-verified against `docs/source-inventory.md` before implementation.
+- Test plan: route contract unit tests, full quality gate, and CI Chromium verification of all existing loan-detail and new questionnaire-route browser scenarios.
 
 ## Evidence
 
@@ -60,6 +61,7 @@
 - The active Vite prototype's `src/features/loan-details/` fetches that contract and renders RTL loading, absent-detail, safe-error/retry and detail states. It has no hard-coded detail fallback and React renders every condition as text.
 - `US-06.T05` adds four browser scenarios for RTL rendering, loading, typed absent detail, typed failure/retry, escaped hostile conditions and ignored invalid logo/link fields. The browser gate is isolated in CI and installs the pinned Chromium revision before execution.
 - `US-07.T01` adds an approved questionnaire configuration artifact with the verified questionnaire source hash, all ten canonical required questions and fifty semantic answer IDs. Its pure loader rejects missing, reordered, duplicate or non-canonical answers before route/session/UI work begins.
+- `US-07.T02` introduces the sole route adapter for `/question/3..12`. It translates public paths to canonical question IDs and back, while a documented compatibility bridge translates only those IDs to the prototype's existing screen indexes. Browser paths and indexes are never answer identifiers.
 
 ## Test record
 
@@ -105,6 +107,10 @@
 | Exact source/config comparison | Passed against the verified GitHub source blob; all ten prompts and fifty options match in source order. |
 | `npm run quality` | Passed through format, lint, Mypy, 76 backend tests and prior validators locally; the final source-file validator cannot run in this scratch checkout because its already-versioned `.agents/documents` raw files are absent locally. |
 | GitHub Actions run #41 | Passed: the complete checkout executed the source-file questionnaire validator, repository quality gate, PostgreSQL migration verification and Chromium E2E verification. |
+| `npm run test:questionnaire-route-map` | Passed; all ten canonical forward/reverse route mappings, legacy index bridge, and unmapped-path rejection are covered. |
+| `npm run quality` | Passed; 76 backend tests (2 PostgreSQL integration tests skipped locally), 3 route-adapter tests, source integrity validation, formatting, lint, typecheck, validators, secret scan and production build completed after US-07.T02. |
+| `npm run test:e2e` | Browser binary unavailable locally; CI run #46 installed the pinned Chromium revision and passed all five scenarios, including the US-07.T02 all-routes browser case. |
+| GitHub Actions run #46 | Passed: Quality gates, PostgreSQL migration verification, and Chromium browser verification on the final `US-07.T02` commit. |
 | `npm run quality` | Passed; 67 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T02. |
 | `npm run quality` | Passed; 64 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T01. |
 | `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
@@ -126,7 +132,7 @@
 - The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
 - Local Python dependencies are temporarily unavailable in this sandbox after runtime reset; CI reinstalled from the locked project configuration and passed quality/migration checks. The browser gate passed in CI run #37 and is the authoritative E2E execution.
 - The local scratch checkout lacks the already-versioned `.agents/documents/*.unitext` raw files; no fallback or source alteration was introduced. GitHub Actions run #41 executed the authoritative exact-source gate against the complete repository successfully.
-- Next task after this PR is merged: `US-07.T02` — route adapter from `/question/3..12` to canonical IDs.
+- Next task after this PR is merged: `US-07.T03` — short-lived anonymous session and server-side canonical-answer validation.
 
 ## Compatibility pointer
 

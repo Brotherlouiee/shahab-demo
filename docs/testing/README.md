@@ -34,3 +34,13 @@ not a reason to remove or skip the CI gate.
 
 GitHub Actions run #37 completed the browser job successfully, alongside the
 repository quality and PostgreSQL migration jobs.
+
+## US-07.T02 route-contract verification
+
+`npm run test:questionnaire-route-map` runs the framework-free route-adapter
+tests. They cover all ten immutable behavioural paths in both directions,
+legacy prototype-index bridging, and rejection of unmapped/non-behavioural
+paths. `tests/e2e/questionnaire-route-map.spec.mjs` visits all ten public
+routes and verifies their screen heading. The route-unit command is part of
+`npm run quality`; neither test submits answers, creates a session, or
+calculates a recommendation.

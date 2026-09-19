@@ -23,9 +23,24 @@ configuration answer is never identified by its display position.
 against canonical IDs, the six-source inventory hash, and the source prompt/
 option order. The command is read-only and part of `npm run quality`.
 
+## Route adapter — US-07.T02
+
+`src/features/questionnaire/questionnaireRouteMap.mjs` is the sole adapter
+between the immutable public behavioural paths and canonical IDs. It maps
+`/question/3..12` exactly to `Q1..Q6`, `S7`, `S8`, `S10`, and `S13`, and it
+also maps the canonical IDs back to their public paths. The active prototype
+uses the adapter to bridge its legacy screen indexes; those indexes remain
+navigation implementation detail and are never canonical answer keys.
+
+`npm run test:questionnaire-route-map` verifies every approved forward and
+reverse mapping against `canonical-identifiers.v1.json`, and verifies that
+`/question/1`, `/question/2`, malformed paths and unknown IDs cannot be
+guessed into a canonical behavioural question. The browser gate visits all ten
+approved paths and verifies that each still renders its intended screen.
+
 ## Explicitly deferred
 
-No route mapping, session, persistence, API, UI flow, scoring or recommendation
-output is introduced in this task. `US-07.T02` owns the `/question/3..12`
-adapter; `US-07.T03` owns session retention and response validation; `US-07.T04`
-owns UI integration.
+No session, persistence, answer submission/API, scoring or recommendation
+output is introduced in this task. `US-07.T03` owns session retention and
+response validation; `US-07.T04` owns UI integration with the canonical
+configuration and later API boundary.
