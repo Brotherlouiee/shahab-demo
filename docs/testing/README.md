@@ -10,3 +10,27 @@ internal fields, typed absent-detail response and typed unavailable-catalogue
 response. `npm run build` compiles the active RTL React integration. Browser/E2E
 coverage for loading, error, empty, invalid logo/link and XSS rendering remains
 the explicit scope of `US-06.T05`.
+
+## US-06.T05 browser and API verification
+
+`npm run test:e2e` runs four Chromium tests in `tests/e2e/loan-details.spec.mjs`.
+They use deterministic HTTP route interception rather than a prototype-data
+fallback, and cover: RTL approved-detail rendering, a pending loading response,
+typed 404/absent detail, and typed 503/safe retry. The approved-detail test
+deliberately supplies an HTML-looking condition plus `javascript:` logo/link
+fields: the condition must remain escaped text, no script may execute, and the
+unallowlisted asset/link fields must not reach the DOM.
+
+`backend.tests.test_loan_detail_api` additionally protects the HTTP boundary:
+the response is JSON, omits internal fields, returns typed unavailable/not-found
+responses, and is intentionally public because it exposes only approved
+catalogue facts. No user credential, session, source-version selector or
+authorization bypass is accepted by the route.
+
+CI installs the pinned Chromium revision and executes the browser command in
+the separate `Loan details browser verification` job. Local execution requires
+`npx playwright install chromium`; a browser-download failure is environmental,
+not a reason to remove or skip the CI gate.
+
+GitHub Actions run #37 completed the browser job successfully, alongside the
+repository quality and PostgreSQL migration jobs.

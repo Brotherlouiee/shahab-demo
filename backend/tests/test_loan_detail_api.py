@@ -47,12 +47,14 @@ class LoanDetailApiTests(unittest.TestCase):
     def test_detail_is_allowlisted_and_conditions_are_plain_text_bullets(self) -> None:
         response = self.client.get("/api/v1/loans/loan-approved")
         self.assertEqual(response.status_code, 200)
+        self.assertIn("application/json", response.headers["content-type"])
         payload = response.json()
         self.assertEqual(payload["loanId"], "loan-approved")
         self.assertEqual(payload["conditions"], ["کارت ملی", "<script>alert(1)</script>"])
         self.assertNotIn("conditionsSourceText", payload)
         self.assertNotIn("bankLogoReference", payload)
         self.assertNotIn("servingVersionId", payload)
+        self.assertNotIn("authorization", response.request.headers)
 
     def test_unknown_loan_has_a_typed_not_found_response(self) -> None:
         response = self.client.get("/api/v1/loans/loan-missing")
