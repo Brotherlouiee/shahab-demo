@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-06.T01`
-- Status: `completed locally — catalogue-use-cases PR pending`
-- Base commit: `e2faea311eb4737a6574126bfb6808e1fc1407ac`
-- Working branch: `feature/us-06-loan-catalogue-use-cases`
+- `activeTaskId`: `US-06.T02`
+- Status: `completed locally — loan-response-schema PR pending`
+- Base commit: `291b3b59a308a28595cd1ad4e4fd90cbcb0d0b30`
+- Working branch: `feature/us-06-loan-response-schemas`
 
 ## Evidence
 
@@ -46,6 +46,7 @@
 - The internal import command now produces a typed, reviewable canonical plan and cannot connect to a database or publish data; the operations runbook fixes the safe hand-off and recovery sequence.
 - Repeated manifest preparation is deterministic; ambiguous fields remain typed evidence, and a publish failure leaves the previous serving version active.
 - Framework-free ListLoans and GetLoanDetails now depend on a serving-only port; source/draft/superseded data and provenance fields are blocked from their output.
+- Typed loan response schemas now allowlist public catalogue facts and forbid raw conditions, provenance, serving-version and internal asset data.
 
 ## Test record
 
@@ -76,6 +77,8 @@
 | `python -m unittest backend.tests.test_import_preparation backend.tests.test_serving_publication` | Passed; repeated import determinism, ambiguous input and previous-pointer preservation on publication failure are covered. |
 | `npm run quality` | Passed; 61 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T06. |
 | loan catalogue use-case test | Passed; serving-only filtering, deterministic list ordering, missing detail and blank ID handling are covered. |
+| loan response-schema test | Passed; camel-case allowlist, prohibited internal fields and validation errors are covered. |
+| `npm run quality` | Passed; 67 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T02. |
 | `npm run quality` | Passed; 64 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T01. |
 | `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
 
@@ -90,7 +93,8 @@
 - `US-05.T04` was merged in PR #18.
 - `US-05.T05` was merged in PR #19.
 - `US-05.T06` was merged in PR #20.
-- Next task after this PR is merged: `US-06.T02` — limited and safe FastAPI response schemas.
+- `US-06.T01` was merged in PR #21.
+- Next task after this PR is merged: `US-06.T03` — safe conditions-to-bullets parser.
 
 ## Compatibility pointer
 
