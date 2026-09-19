@@ -14,4 +14,21 @@ filesystem adapter برای local/test است و فایل را با permission �
 
 `DelimitedStagingValidator` source bytes را بدون تغییر decode می‌کند و فقط چهار evidence قابل بازبینی می‌سازد: encoding ناسازگار، header نامطابق/تکراری، اختلاف تعداد ستون ردیف و hash منبع تکراری. نتیجهٔ دارای issue نباید به normalizer برسد. delimiter، encoding و headerهای مورد انتظار قرارداد صریح منبع هستند؛ هیچ حدس یا auto-repair وجود ندارد.
 
-normalization، category mapping، approval، publish، rollback و runbook import در ادامهٔ `US-05` ثبت می‌شوند.
+## US-05.T03 — normalization and category mapping
+
+`backend/app/data_pipeline/domain/normalization.py` مرز مستقل و framework-free
+بین staging معتبر و مرحله‌های approval/scoring است. این ماژول هر هشت متغیر
+مجاز قرارداد را به `NormalizedVariable` تبدیل می‌کند، اما امتیاز، انتشار
+catalogue یا تصمیم پیشنهاد تولید نمی‌کند.
+
+قواعد فقط از `.agents/documents/ماتریس گزینه های متغیرهای وام.unitext`
+(نمای Markdown همان ماتریس) آمده‌اند. مرز مشترک دو ردیف مجاور به ردیف اول
+تعلق دارد؛ این tie-break در test ثبت شده است. فاصله‌های صریح ماتریس، مقدار
+بزرگ‌تر از سقف ۳۵ میلیارد تومان، range/prose، و برچسب متن آزاد هرگز حدس
+نمی‌شوند. آن‌ها به ترتیب با `unmapped` یا `unparseable` ثبت می‌شوند.
+
+خروجی‌های `unknown`، `variable`، `unparseable` و `unmapped` category
+ندارند. سیاست neutral برای سه ویژگی سپرده و exclusion برای چهار ویژگی محوری
+در مرحله scoring بعدی اعمال می‌شود؛ این normalizer آن سیاست را دور نمی‌زند.
+
+approval، publish، rollback و runbook import در ادامهٔ `US-05` ثبت می‌شوند.

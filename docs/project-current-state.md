@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-05.T02`
-- Status: `completed locally — staging-validation PR pending`
-- Base commit: `d0754209966a92b6f37f21752f9b71412628c464`
-- Working branch: `feature/us-05-staging-validation`
+- `activeTaskId`: `US-05.T03`
+- Status: `completed locally — normalization PR pending`
+- Base commit: `76b6ef598bb8b5cf570c050220a2223f45fa8082`
+- Working branch: `feature/us-05-normalization`
 
 ## Evidence
 
@@ -40,7 +40,8 @@
 - Query contracts now own a small, reversible index set; a representative selective catalogue query must use the lender FK index according to PostgreSQL `EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)`.
 - `US-04.T05` was merged in PR #14 after PostgreSQL 16 migration and plan-verification CI passed.
 - Raw source capture is now isolated from parsers and serving data: source bytes have an immutable SHA-256 identity and traceable capture metadata.
-- Raw evidence now has strict, non-destructive staging checks for encoding, headers, row shape and duplicate source hashes; normalization remains deferred.
+- Raw evidence now has strict, non-destructive staging checks for encoding, headers, row shape and duplicate source hashes.
+- All eight approved loan variables now have a pure, conservative category-normalization boundary. Matrix gaps, capped-out amounts, free text, ranges, unknown and variable values remain typed evidence rather than inferred categories.
 
 ## Test record
 
@@ -63,6 +64,8 @@
 | GitHub Actions PostgreSQL 16 migration job | Pending PR execution; it enforces empty-db upgrade, fixture write and downgrade on real PostgreSQL. |
 | `npm run quality` | Passed; 38 backend tests (two PostgreSQL integration tests skipped locally), all quality gates and production build completed. |
 | Alembic index lifecycle | Passed locally: initial migration + index migration upgrade, downgrade to base and repeated upgrade. |
+| `python -m unittest backend.tests.test_normalization` | Passed; approved categories, Persian digits, boundary ownership, gaps, unknowns and text-only categories are covered. |
+| `npm run quality` | Passed; 50 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T03. |
 
 ## Blockers and next task
 
@@ -70,7 +73,8 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task after this PR is merged: `US-05.T02` — staging validation for headers, encoding, row shape and duplicate evidence.
+- `US-05.T02` was merged in PR #16.
+- Next task after this PR is merged: `US-05.T04` — approved canonical-row construction and rejection evidence.
 
 ## Compatibility pointer
 

@@ -31,3 +31,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-04.T05**: Added measured index/query strategy, reversible index migration and PostgreSQL `EXPLAIN (ANALYZE, BUFFERS)` plan-shape verification for selective catalogue lookup.
 - **US-05.T01**: Added immutable, content-addressable raw-source capture with SHA-256 integrity, metadata record, size gate and local/test storage adapter; no parsing or serving publication occurs.
 - **US-05.T02**: Added strict non-destructive staging validation for encoding, header contract, row width and duplicate source evidence.
+- **US-05.T03**: Added conservative normalization and category mapping for all approved loan variables, including typed unmapped outcomes for source-matrix gaps and out-of-range values; no scoring or publication behavior was added.
