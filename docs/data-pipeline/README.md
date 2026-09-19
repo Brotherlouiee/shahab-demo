@@ -10,4 +10,8 @@ filesystem adapter برای local/test است و فایل را با permission �
 
 ## مراحل بعدی
 
-staging validation، normalization، approval، publish، rollback و runbook import در ادامهٔ `US-05` ثبت می‌شوند.
+## US-05.T02 — staging validation
+
+`DelimitedStagingValidator` source bytes را بدون تغییر decode می‌کند و فقط چهار evidence قابل بازبینی می‌سازد: encoding ناسازگار، header نامطابق/تکراری، اختلاف تعداد ستون ردیف و hash منبع تکراری. نتیجهٔ دارای issue نباید به normalizer برسد. delimiter، encoding و headerهای مورد انتظار قرارداد صریح منبع هستند؛ هیچ حدس یا auto-repair وجود ندارد.
+
+normalization، category mapping، approval، publish، rollback و runbook import در ادامهٔ `US-05` ثبت می‌شوند.

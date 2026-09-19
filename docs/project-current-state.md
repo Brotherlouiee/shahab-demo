@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-05.T01`
-- Status: `in progress — raw-ingest verification and PR pending`
-- Base commit: `dd8ba4014d4c9a352cc907dcbdd409cba5213a67`
-- Working branch: `feature/us-05-raw-ingest`
+- `activeTaskId`: `US-05.T02`
+- Status: `completed locally — staging-validation PR pending`
+- Base commit: `d0754209966a92b6f37f21752f9b71412628c464`
+- Working branch: `feature/us-05-staging-validation`
 
 ## Evidence
 
@@ -40,6 +40,7 @@
 - Query contracts now own a small, reversible index set; a representative selective catalogue query must use the lender FK index according to PostgreSQL `EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)`.
 - `US-04.T05` was merged in PR #14 after PostgreSQL 16 migration and plan-verification CI passed.
 - Raw source capture is now isolated from parsers and serving data: source bytes have an immutable SHA-256 identity and traceable capture metadata.
+- Raw evidence now has strict, non-destructive staging checks for encoding, headers, row shape and duplicate source hashes; normalization remains deferred.
 
 ## Test record
 
