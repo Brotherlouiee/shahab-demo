@@ -20,6 +20,16 @@ class InMemoryServingVersionRepository(ServingVersionRepository):
         self._versions: dict[str, ServingDataVersion] = {}
         self._current_version_id: str | None = None
         self._fail_publish = fail_publish
+        self._fail_next_publish = False
+
+    def fail_next_publish_for_test(self) -> None:
+        """Inject one pre-commit failure in this local/test adapter.
+
+        The hook lets the pipeline prove that a failed future publish retains the
+        already serving version. It is deliberately unavailable from production
+        composition and performs no state mutation beyond this test adapter.
+        """
+        self._fail_next_publish = True
 
     def get_current_published(self) -> ServingDataVersion | None:
         return None if self._current_version_id is None else self._versions[self._current_version_id]
@@ -38,7 +48,8 @@ class InMemoryServingVersionRepository(ServingVersionRepository):
         self._versions[version.version_id] = version
 
     def publish_atomically(self, approved_version: ServingDataVersion) -> ServingDataVersion:
-        if self._fail_publish:
+        if self._fail_publish or self._fail_next_publish:
+            self._fail_next_publish = False
             raise RuntimeError("simulated publication failure")
         if approved_version.version_id not in self._versions:
             raise LookupError("serving version was not found")

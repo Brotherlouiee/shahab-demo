@@ -51,3 +51,13 @@ then it preserves every typed rejection or issue in its output. Exit code zero
 means a candidate is clean enough for review, not that it was approved or
 published. The operations runbook documents source verification, review,
 approval hand-off and failure recovery.
+
+## US-05.T06 failure and idempotency evidence
+
+The same source hash, parser version and manifest rows deterministically produce
+the same canonical plan and source-row fingerprints. Ambiguous text remains
+without a category; an ambiguous core field retains its needs-review exclusion
+reason while an ambiguous deposit field stays explicit for later neutral
+handling. A simulated publish failure occurs before the in-memory atomic
+pointer commit, proving that the previous published version remains active and
+the candidate remains approved rather than partially published.

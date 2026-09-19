@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-05.T05`
-- Status: `completed locally — prepared-import command PR pending`
-- Base commit: `b2fe43e5a34751176a2df90cc031b7e6d4a6783d`
-- Working branch: `feature/us-05-import-runbook`
+- `activeTaskId`: `US-05.T06`
+- Status: `completed locally — idempotency/failure-test PR pending`
+- Base commit: `95793289af48aa56b9086230bf5af1b89439f5ae`
+- Working branch: `feature/us-05-pipeline-failure-tests`
 
 ## Evidence
 
@@ -44,6 +44,7 @@
 - All eight approved loan variables now have a pure, conservative category-normalization boundary. Matrix gaps, capped-out amounts, free text, ranges, unknown and variable values remain typed evidence rather than inferred categories.
 - Canonical rows now retain source-row fingerprints, typed construction rejections and rankability evidence; reviewable drafts require explicit approval before an atomic serving-version pointer can move.
 - The internal import command now produces a typed, reviewable canonical plan and cannot connect to a database or publish data; the operations runbook fixes the safe hand-off and recovery sequence.
+- Repeated manifest preparation is deterministic; ambiguous fields remain typed evidence, and a publish failure leaves the previous serving version active.
 
 ## Test record
 
@@ -71,6 +72,8 @@
 | `python -m unittest backend.tests.test_serving_publication` | Passed; canonical-row rejection/eligibility, approval gate, diff and atomic-pointer failure behavior are covered. |
 | `npm run quality` | Passed; 55 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T04. |
 | `python -m unittest backend.tests.test_import_preparation` | Passed; clean plan, typed issues/rejections, core needs-review preservation and non-publishing CLI behavior are covered. |
+| `python -m unittest backend.tests.test_import_preparation backend.tests.test_serving_publication` | Passed; repeated import determinism, ambiguous input and previous-pointer preservation on publication failure are covered. |
+| `npm run quality` | Passed; 61 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T06. |
 | `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
 
 ## Blockers and next task
@@ -82,7 +85,8 @@
 - `US-05.T02` was merged in PR #16.
 - `US-05.T03` was merged in PR #17.
 - `US-05.T04` was merged in PR #18.
-- Next task after this PR is merged: `US-05.T06` — repeated import, atomic-failure and ambiguous-input tests.
+- `US-05.T05` was merged in PR #19.
+- Next task after this PR is merged: `US-06.T01` — ListLoans and GetLoanDetails use cases on approved serving data.
 
 ## Compatibility pointer
 
