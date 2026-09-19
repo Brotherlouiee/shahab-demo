@@ -2,7 +2,7 @@
 
 ## Current transition state
 
-The root `src/` Vite application is the active prototype and remains operational. The new `frontend/src/` is a migration target, not a second active application. `backend/app/recommendation/domain/` already contains framework-independent data contracts from US-02; no FastAPI runtime is introduced yet.
+The root `src/` Vite application is the active prototype and remains operational. The new `frontend/src/` is a migration target, not a second active application. `src/features/loan-details/` is the first active feature extraction and owns only the UI/API client for loan details. `backend/app/recommendation/domain/` already contains framework-independent data contracts from US-02; no FastAPI runtime is introduced yet.
 
 | Boundary | Owns | Must not own |
 | --- | --- | --- |
@@ -11,6 +11,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `frontend/src/features/questionnaire` | questionnaire presentation and canonical-answer interaction | raw source documents, scoring |
 | `frontend/src/features/recommendation` | result presentation and API view models | scoring formulas, database access |
 | `frontend/src/features/loan-details` | loan-detail presentation | HTML rendering of raw conditions, scoring |
+| `src/features/loan-details` | active prototype's loan-detail API client and RTL presentation states | raw source parsing, scoring, persistence, `innerHTML` rendering |
 | `backend/app/recommendation/domain` | entities/value contracts/pure parsing | FastAPI, ORM, React imports |
 | `backend/app/domain` | framework-free shared domain value types | FastAPI, ORM, transport, infrastructure |
 | `backend/app/application` | use cases and dependency ports | FastAPI, ORM, direct adapter imports |

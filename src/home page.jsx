@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import logoUrl from "../assets/shahab-logo.png";
 import folderIconUrl from "../assets/folder.svg";
 import healthIconUrl from "../assets/health.svg";
@@ -299,6 +300,11 @@ function getQuestionnaireRouteState(pathname) {
     isAnalyzingLoans: false,
     loanResultView: "",
   };
+}
+
+function getLoanIdFromLocation() {
+  if (typeof window === "undefined") return loanResultPlans[0].id;
+  return new URLSearchParams(window.location.search).get("loanId")?.trim() || loanResultPlans[0].id;
 }
 
 function getInitialViewFromPath(pathname) {
@@ -1007,33 +1013,6 @@ function LoanResultsScreen({ onBack, onMenu, onHome, onDetails, onCompare, onReq
   );
 }
 
-function LoanDetailsScreen({ onBack, onMenu, onHome }) {
-  const plan = loanResultPlans[0];
-
-  return (
-    <main className="hp-questionnaire-page hp-loan-details-page" dir="rtl">
-      <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
-      <LoanResultCard plan={plan} details />
-      <h2>شرایط و مدارک مورد نیاز</h2>
-      <section className="hp-loan-details-question">
-        <h1>۶-در حال حاضر، چه کسری از درآمد ماهانه شما صرف پرداخت اقساط وام‌های قبلی یا بدهی‌ها می‌شود و این موضوع چه احساسی در شما ایجاد کرده است؟</h1>
-        {[
-          "تقریباً ۰٪؛ هیچ بدهی یا قسط قابل‌توجهی ندارم و از نظر مالی کاملاً احساس آزادی و تسلط می‌کنم.",
-          "کمتر از ۲۰٪ درآمدم صرف اقساط می‌شود؛ پرداخت‌ها را به راحتی انجام می‌دهم و هیچ فشاری برای تأمین هزینه‌های روزمره احساس نمی‌کنم.",
-          "بین ۲۰٪ تا ۴۰٪ درآمدم به اقساط می‌رود؛ پرداخت‌ها را مدیریت می‌کنم اما جای مانور مالی‌ام کم شده و باید مراقب مخارج دیگرم باشم.",
-          "بین ۴۰٪ تا ۶۰٪ درآمدم صرف بدهی‌ها می‌شود؛ فشار مالی زیادی حس می‌کنم و گاهی برای رسیدگی به هزینه‌های ضروری زندگی دچار مشکل می‌شوم.",
-          "بیش از ۶۰٪ درآمدم برای اقساط می‌رود؛ به شدت تحت فشارم و گاهی برای پرداخت اقساط قبلی، مجبور می‌شوم وام جدید بگیرم یا پول قرض کنم.",
-        ].map((item) => (
-          <button className="hp-detail-question-option" type="button" key={item}>
-            <span />
-            {item}
-          </button>
-        ))}
-      </section>
-    </main>
-  );
-}
-
 function LoanCompareScreen({ onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
   const [selectedPlans, setSelectedPlans] = useState({});
   const selectedPlanIds = Object.entries(selectedPlans)
@@ -1284,6 +1263,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [isOtpVerificationStep, setIsOtpVerificationStep] = useState(initialRouteState.isOtpVerificationStep);
   const [isAnalyzingLoans, setIsAnalyzingLoans] = useState(initialRouteState.isAnalyzingLoans);
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
+  const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
   const [isAnalysisSpinnerRunning, setIsAnalysisSpinnerRunning] = useState(false);
   const [analysisCountdown, setAnalysisCountdown] = useState(8);
@@ -1719,7 +1699,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     : loanResultView === "results"
       ? "/loan-results"
       : loanResultView === "details"
-        ? "/loan-details"
+      ? `/loan-details?loanId=${encodeURIComponent(selectedLoanId)}`
         : loanResultView === "request"
           ? "/loan-request"
           : loanResultView === "compare"
@@ -1761,6 +1741,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setIsOtpVerificationStep(routeState.isOtpVerificationStep);
     setIsAnalyzingLoans(routeState.isAnalyzingLoans);
     setLoanResultView(routeState.loanResultView);
+    if (routeState.loanResultView === "details") setSelectedLoanId(getLoanIdFromLocation());
   }, []);
 
   useEffect(() => {
@@ -1779,6 +1760,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       setIsOtpVerificationStep(routeState.isOtpVerificationStep);
       setIsAnalyzingLoans(routeState.isAnalyzingLoans);
       setLoanResultView(routeState.loanResultView);
+      if (routeState.loanResultView === "details") setSelectedLoanId(getLoanIdFromLocation());
       setLoanOtpError("");
     }
 
@@ -1965,7 +1947,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setIsOtpVerificationStep(true);
   }
 
-  function handleLoanDetailsOpen() {
+  function handleLoanDetailsOpen(loanId) {
+    setSelectedLoanId(loanId);
     setLoanResultView("details");
   }
 
@@ -2159,9 +2142,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   if (loanResultView === "details") {
     return (
       <LoanDetailsScreen
-        onBack={handleLoanResultBack}
-        onMenu={onMenu}
-        onHome={onHome}
+        loanId={selectedLoanId}
+        header={<QuestionnaireHeader onBack={handleLoanResultBack} onMenu={onMenu} onHome={onHome} />}
       />
     );
   }

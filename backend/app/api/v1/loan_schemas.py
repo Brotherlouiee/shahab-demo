@@ -11,6 +11,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.app.loans.domain.conditions import parse_conditions_bullets
 from backend.app.loans.domain.models import LoanDetail, LoanSummary
 
 MoneyAmount = Annotated[Decimal, Field(ge=0, max_digits=18, decimal_places=2)]
@@ -35,7 +36,7 @@ class LoanSummaryResponse(BaseModel):
 
 
 class LoanDetailResponse(LoanSummaryResponse):
-    """Public approved facts; conditions text remains unavailable until US-06.T03."""
+    """Public approved facts plus safe, plain-text condition bullets."""
 
     max_amount_tomans: MoneyAmount | None = Field(alias="maxAmountTomans")
     monthly_installment_tomans: MoneyAmount | None = Field(alias="monthlyInstallmentTomans")
@@ -46,6 +47,7 @@ class LoanDetailResponse(LoanSummaryResponse):
     loan_to_deposit_ratio_percent: Percentage | None = Field(alias="loanToDepositRatioPercent")
     guarantee_type: Annotated[str, Field(max_length=100)] | None = Field(alias="guaranteeType")
     required_deposit_account: Annotated[str, Field(max_length=255)] | None = Field(alias="requiredDepositAccount")
+    conditions: tuple[Annotated[str, Field(min_length=1, max_length=2000)], ...]
 
     @classmethod
     def from_loan_detail(cls, loan: LoanDetail) -> LoanDetailResponse:
@@ -63,4 +65,5 @@ class LoanDetailResponse(LoanSummaryResponse):
             loanToDepositRatioPercent=loan.loan_to_deposit_ratio_percent,
             guaranteeType=loan.guarantee_type,
             requiredDepositAccount=loan.required_deposit_account,
+            conditions=parse_conditions_bullets(loan.conditions_source_text),
         )

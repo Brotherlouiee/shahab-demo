@@ -19,7 +19,7 @@ class LoanResponseSchemaTests(unittest.TestCase):
             {"loanId": "loan-1", "lenderName": "بانک نمونه", "loanName": "طرح نمونه"},
         )
 
-    def test_detail_allowlists_public_terms_but_never_conditions_or_provenance(self) -> None:
+    def test_detail_allowlists_public_terms_and_safe_conditions_but_never_provenance(self) -> None:
         domain = LoanDetail(
             loan_id="loan-1",
             lender_name="بانک نمونه",
@@ -38,6 +38,7 @@ class LoanResponseSchemaTests(unittest.TestCase):
         )
         payload = LoanDetailResponse.from_loan_detail(domain).model_dump(by_alias=True)
         self.assertEqual(payload["maxAmountTomans"], Decimal("100000000"))
+        self.assertEqual(payload["conditions"], ("متن خام شرایط",))
         self.assertNotIn("conditionsSourceText", payload)
         self.assertNotIn("bankLogoReference", payload)
         self.assertNotIn("servingVersionId", payload)

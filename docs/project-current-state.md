@@ -2,10 +2,16 @@
 
 ## Active task
 
-- `activeTaskId`: `US-06.R01`
-- Status: `completed locally — durable serving-catalogue adapter PR pending`
-- Base commit: `ddfd4aee2a26bbb049c8ae54fa0a80d46ddd972c`
-- Working branch: `fix/us-06-serving-catalogue-adapter`
+- `activeTaskId`: `US-06.T04`
+- Status: `completed locally — API/UI loan-details integration PR pending`
+- Base commit: `934559fdbb563faa5f14ee1a45551a55f85b2cbe`
+- Working branch: `feature/us-06-loan-details-integration`
+- `estimatedWorkScope`: one versioned detail endpoint, the active Vite detail feature, focused API coverage and its documentation/checkpoint.
+- `actualScope`: versioned approved-serving detail endpoint; request-scoped dependency wiring; parsed condition-bullet contract; active RTL React feature/client; focused API coverage and documentation.
+- `completionBudget`: met; no scoring, questionnaire, data import, migration or deployment change.
+- Acceptance: an approved serving loan is fetched by opaque ID, approved conditions become plain-text bullets, and the RTL detail view has loading, absent, safe-error and retry states.
+- Dependency: all `US-05.*`, `US-06.T01–T03`, and corrective PR #24 are merged.
+- Test plan: focused FastAPI dependency-override tests; production frontend build; repository quality gate.
 
 ## Evidence
 
@@ -49,6 +55,9 @@
 - Typed loan response schemas now allowlist public catalogue facts and forbid raw conditions, provenance, serving-version and internal asset data.
 - Approved conditions source text now has a pure plain-text bullet parser; nested list markers and blank lines are normalized without emitting HTML.
 - The serving-only use cases now have a PostgreSQL/SQLAlchemy read adapter with an explicit `PUBLISHED` predicate; draft, raw, staging and superseded records cannot cross into the public-catalogue boundary.
+- `US-06.T04` now composes a request-scoped `GetLoanDetails` endpoint at `GET /api/v1/loans/{loanId}`. It never accepts a source/version selector and returns typed unavailable/not-found errors without database details.
+- The endpoint exposes approved terms and parsed plain-text `conditions` only; it omits raw conditions, provenance, approval metadata, serving-version IDs and internal logo references.
+- The active Vite prototype's `src/features/loan-details/` fetches that contract and renders RTL loading, absent-detail, safe-error/retry and detail states. It has no hard-coded detail fallback and React renders every condition as text.
 
 ## Test record
 
@@ -84,6 +93,8 @@
 | `npm run quality` | Passed; 70 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T03. |
 | `python -m unittest backend.tests.test_sqlalchemy_catalogue_adapter` | Passed; the durable adapter returns only published versions and rejects draft lookups. |
 | `npm run quality` | Passed; 71 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after corrective US-06.R01. |
+| `python -m unittest backend.tests.test_loan_detail_api backend.tests.test_loan_response_schemas` | Passed; approved detail allowlist, text bullets, typed not-found/unavailable errors and omitted internals are covered. |
+| `npm run quality` | Passed; 74 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T04. |
 | `npm run quality` | Passed; 67 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T02. |
 | `npm run quality` | Passed; 64 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T01. |
 | `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
@@ -101,8 +112,9 @@
 - `US-05.T06` was merged in PR #20.
 - `US-06.T01` was merged in PR #21.
 - `US-06.T02` was merged in PR #22.
-- Corrective `US-06.R01` has a complete local verification record and awaits its isolated PR review/merge.
-- Next task after this PR is merged: `US-06.T04` — API/UI loan-details integration with RTL states.
+- Corrective `US-06.R01` was merged in PR #24.
+- The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
+- Next task after this PR is merged: `US-06.T05` — API/UI/E2E coverage for detail states, invalid links/logos, and XSS rendering.
 
 ## Compatibility pointer
 
