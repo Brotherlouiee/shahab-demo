@@ -35,3 +35,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-05.T04**: Added immutable canonical-row construction, typed rejection evidence, reviewed catalogue diffs, explicit approval records and atomic serving-version publication boundary; no public publication API or scoring behavior was added.
 - **US-05.T05**: Added a non-publishing canonical-import preparation command, typed manifest evidence and an operations runbook; no database, approval or serving-pointer mutation can be initiated by the command.
 - **US-05.T06**: Added deterministic repeated-import, ambiguous-input and atomic-publication-failure tests; a failed publication demonstrably preserves the prior serving version.
+- **US-06.T01**: Added framework-free ListLoans and GetLoanDetails use cases over a serving-only catalogue port; drafts, raw/staging data and provenance internals cannot reach public loan models.
