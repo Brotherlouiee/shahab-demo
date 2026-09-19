@@ -198,8 +198,11 @@ const analysisLogoPositions = [
   [94, 91],
 ];
 
-const questionnaireQuestionCount = 12;
-const personalInfoQuestionIndex = 11;
+// The first two prototype screens precede the ten canonical behavioural
+// questions.  Personal information therefore follows S13 at index 12; using
+// index 11 would silently redirect the immutable /question/12 route.
+const questionnaireQuestionCount = 13;
+const personalInfoQuestionIndex = 12;
 
 function getQuestionnaireRouteState(pathname) {
   if (pathname === "/analysis") {
