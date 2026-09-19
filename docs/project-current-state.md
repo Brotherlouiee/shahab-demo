@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-04.T04`
-- Status: `in progress — migration verification and PR pending`
-- Base commit: `f9dfeb29804de4bec15608c69a5dae1d3335fabb`
-- Working branch: `feature/us-04-migrations-postgresql`
+- `activeTaskId`: `US-04.T05`
+- Status: `completed locally — awaiting PostgreSQL CI and PR review`
+- Base commit: `0de91ad4ef913664151f3facf63dde2d4cd7d14a`
+- Working branch: `feature/us-04-index-query-strategy`
 
 ## Evidence
 
@@ -37,6 +37,7 @@
 - `US-04.T03` was merged in PR #12.
 - Alembic owns versioned DDL; a bounded SQLAlchemy engine/session factory is isolated in the database infrastructure adapter.
 - Docker Compose defines local-only API/PostgreSQL startup without committing operational credentials; GitHub Actions provisions PostgreSQL 16 for migration verification.
+- Query contracts now own a small, reversible index set; a representative selective catalogue query must use the lender FK index according to PostgreSQL `EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)`.
 
 ## Test record
 
@@ -57,6 +58,8 @@
 | `npm run quality` | Passed; SQLAlchemy metadata tests and 35 backend tests completed with all existing quality gates. |
 | `SHAHAB_DATABASE_URL=sqlite:///… alembic upgrade head → downgrade base → upgrade head` | Passed; clean structural lifecycle check completed. |
 | GitHub Actions PostgreSQL 16 migration job | Pending PR execution; it enforces empty-db upgrade, fixture write and downgrade on real PostgreSQL. |
+| `npm run quality` | Passed; 38 backend tests (two PostgreSQL integration tests skipped locally), all quality gates and production build completed. |
+| Alembic index lifecycle | Passed locally: initial migration + index migration upgrade, downgrade to base and repeated upgrade. |
 
 ## Blockers and next task
 
@@ -64,7 +67,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task after this PR is merged: `US-04.T05` — index strategy and representative PostgreSQL `EXPLAIN (ANALYZE, BUFFERS)` evidence.
+- Next task after this PR is merged: `US-05.T01` — immutable raw ingest with source hash and metadata.
 
 ## Compatibility pointer
 
