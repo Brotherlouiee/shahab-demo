@@ -4665,43 +4665,49 @@ button {
   text-align: right;
 }
 
-.hp-loan-details-question {
+.hp-loan-details-conditions,
+.hp-loan-details-state {
   width: 346px;
   max-width: calc(100vw - 44px);
   margin: 0 auto 28px;
 }
 
-.hp-loan-details-question h1 {
-  margin: 0 0 14px;
+.hp-loan-details-conditions p,
+.hp-loan-details-conditions li,
+.hp-loan-details-state {
+  margin: 0;
   color: #000000;
-  font-size: 16px;
-  font-weight: 900;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1.6;
   text-align: right;
 }
 
-.hp-detail-question-option {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: #000000;
-  display: grid;
-  grid-template-columns: 16px 1fr;
-  gap: 7px;
-  padding: 7px 0;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.8;
-  text-align: right;
+.hp-loan-details-conditions ul {
+  margin: 0;
+  padding: 0 20px 0 0;
 }
 
-.hp-detail-question-option span {
-  width: 15px;
-  height: 15px;
-  margin-top: 7px;
-  border: 1.5px solid #000000;
-  border-radius: 50%;
+.hp-loan-details-conditions li + li {
+  margin-top: 8px;
+}
+
+.hp-loan-details-state {
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.hp-loan-details-state button {
+  margin-top: 12px;
+  border: 0;
+  border-radius: 5px;
+  background: #0067ff;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  padding: 8px 14px;
 }
 
 .hp-compare-warning,

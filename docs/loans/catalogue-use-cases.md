@@ -29,3 +29,19 @@ predicate, so draft, raw, staging and superseded data cannot reach the use cases
 parse_conditions_bullets preserves source conditions as ordered plain text. It
 removes common Persian/ASCII list markers and empty lines only. It never returns
 HTML, and a presentation layer must render every bullet as text.
+
+## US-06.T04 API and active prototype integration
+
+The versioned detail route is `GET /api/v1/loans/{loanId}`. It receives an
+opaque ID, invokes `GetLoanDetails`, and maps only the approved serving detail
+through `LoanDetailResponse`. The transport adapter exposes parsed `conditions`
+but never `conditions_source_text`, a serving-version identifier, provenance,
+approval metadata or internal logo references.
+
+The active Vite prototype uses `src/features/loan-details/` because root `src/`
+is still the live application. Its small API client validates the minimal public
+shape, turns a typed 404 into a distinct absent-detail state, and never displays
+server error text. The React view renders condition strings in list nodes, where
+React escapes them as text; it provides loading, absent-detail, safe-error and
+retry states under a RTL root. It does not calculate recommendation scores or
+fall back to the prototype's hard-coded loan details.
