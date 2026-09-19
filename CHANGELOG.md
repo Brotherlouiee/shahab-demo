@@ -34,3 +34,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-05.T03**: Added conservative normalization and category mapping for all approved loan variables, including typed unmapped outcomes for source-matrix gaps and out-of-range values; no scoring or publication behavior was added.
 - **US-05.T04**: Added immutable canonical-row construction, typed rejection evidence, reviewed catalogue diffs, explicit approval records and atomic serving-version publication boundary; no public publication API or scoring behavior was added.
 - **US-05.T05**: Added a non-publishing canonical-import preparation command, typed manifest evidence and an operations runbook; no database, approval or serving-pointer mutation can be initiated by the command.
+- **US-05.T06**: Added deterministic repeated-import, ambiguous-input and atomic-publication-failure tests; a failed publication demonstrably preserves the prior serving version.

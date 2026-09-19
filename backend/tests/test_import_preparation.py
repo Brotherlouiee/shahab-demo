@@ -69,6 +69,44 @@ class ImportPreparationTests(unittest.TestCase):
         self.assertTrue(plan.is_publishable_candidate)
         self.assertEqual(plan.accepted_rows[0].ranking_excluded_variable_ids, ("interestRate",))
 
+    def test_repeated_identical_import_is_deterministic_and_non_mutating(self) -> None:
+        first = prepare_import_manifest(
+            source_file_sha256="a" * 64,
+            parser_version="normalizer-v1",
+            rows=(_manifest_row(),),
+        )
+        second = prepare_import_manifest(
+            source_file_sha256="a" * 64,
+            parser_version="normalizer-v1",
+            rows=(_manifest_row(),),
+        )
+        self.assertEqual(first, second)
+        self.assertEqual(
+            first.accepted_rows[0].source_row_fingerprint,
+            second.accepted_rows[0].source_row_fingerprint,
+        )
+
+    def test_ambiguous_input_is_explicit_and_never_becomes_a_category(self) -> None:
+        values = dict(_manifest_row().variable_values)
+        values["depositHoldingMonths"] = "وابسته به طرح"
+        values["interestRate"] = "۱۲ تا ۱۵ درصد"
+        plan = prepare_import_manifest(
+            source_file_sha256="a" * 64,
+            parser_version="normalizer-v1",
+            rows=(
+                ImportManifestRow(
+                    source_row_number=7,
+                    lender_name="بانک نمونه",
+                    loan_name="طرح نمونه",
+                    variable_values=values,
+                ),
+            ),
+        )
+        row = plan.accepted_rows[0]
+        self.assertEqual(row.variables["depositHoldingMonths"].category_id, None)
+        self.assertEqual(row.variables["interestRate"].category_id, None)
+        self.assertEqual(row.ranking_excluded_variable_ids, ("interestRate",))
+
     def test_cli_emits_non_publishing_plan_and_failure_exit_code(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             manifest = Path(directory) / "manifest.json"

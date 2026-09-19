@@ -56,3 +56,12 @@ Do not retry by editing raw source bytes. Keep the rejected plan as evidence,
 correct the upstream source or approved parser/config, then create a new hash
 and plan. If a later durable publish fails, leave the active serving pointer
 unchanged and use the retained version; never repair tables by hand.
+
+## Re-run guarantee
+
+Re-running an unchanged manifest with the same source hash and parser version
+must produce the same plan and source-row fingerprints. It is not permission to
+create a duplicate serving version: the later durable import adapter must reject
+the duplicate version/source identity atomically. If input is ambiguous, review
+its typed evidence; never replace it with a guessed scalar merely to make the
+command exit successfully.

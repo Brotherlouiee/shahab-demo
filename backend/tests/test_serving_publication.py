@@ -96,25 +96,24 @@ class ServingPublicationTests(unittest.TestCase):
 
     def test_publish_failure_does_not_move_active_pointer(self) -> None:
         baseline = self._publish_baseline()
-        failing_repository = InMemoryServingVersionRepository(fail_publish=True)
-        failing_service = ServingPublicationService(failing_repository)
-        candidate = failing_service.prepare(
+        candidate = self.service.prepare(
             version_id="catalogue-v2",
             import_id="import-2",
             source_file_sha256="b" * 64,
             parser_version="normalizer-v1",
             rows=(_row(loan_name="طرح دیگر"),),
         )
-        failing_service.approve(
+        self.service.approve(
             version_id=candidate.version_id,
             actor_reference="data-owner",
             reason="Audit reviewed",
             decided_at=self.now,
         )
+        self.repository.fail_next_publish_for_test()
         with self.assertRaisesRegex(RuntimeError, "simulated publication failure"):
-            failing_service.publish(version_id=candidate.version_id)
-        self.assertIsNone(failing_repository.get_current_published())
-        self.assertEqual(baseline.state, ServingVersionState.PUBLISHED)
+            self.service.publish(version_id=candidate.version_id)
+        self.assertEqual(self.repository.get_current_published(), baseline)
+        self.assertEqual(self.repository.get_by_id(candidate.version_id).state, ServingVersionState.APPROVED)
 
     def _publish_baseline(self):
         candidate = self.service.prepare(
