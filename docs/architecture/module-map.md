@@ -15,7 +15,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `backend/app/domain` | framework-free shared domain value types | FastAPI, ORM, transport, infrastructure |
 | `backend/app/application` | use cases and dependency ports | FastAPI, ORM, direct adapter imports |
 | `backend/app/infrastructure` | outbound adapter implementations | domain/application dependency reversal |
-| `backend/app/infrastructure/db` | SQLAlchemy metadata and future session/repository adapters | API import, business scoring, migration execution at import time |
+| `backend/app/infrastructure/db` | SQLAlchemy metadata, bounded engine/session factory and future repository adapters | API import, business scoring, migration execution at import time |
 | `backend/app/api/v1` | versioned transport adapters and restricted operational endpoints | domain logic, direct database decisions |
 | `backend/app/core` | typed settings, dependency wiring, redacted logging, security hooks | product use cases |
 | `backend/app/shared` | truly cross-feature backend helpers | recommendation-specific rules |
@@ -29,3 +29,5 @@ Infrastructure implementations may depend on application ports and domain types,
 All HTTP routes are mounted below the versioned API prefix. Transport errors use the typed `ErrorResponse` envelope; liveness is minimal and readiness is token-gated without returning dependency status.
 
 Repository-wide quality boundaries are enforced by Ruff, Mypy, backend tests, data/architecture validators and secret scan in `npm run quality`; `.github/workflows/quality.yml` runs the same gate in CI.
+
+Alembic is the sole schema-DDL owner under `alembic/`; its PostgreSQL 16 CI job verifies an empty-database upgrade, representative fixture write and full downgrade. Docker Compose is local-only composition and has no production secret or deployment authority.

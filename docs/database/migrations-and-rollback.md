@@ -2,7 +2,22 @@
 
 ## قانون عملیاتی
 
-تنها مسیر تغییر schema، Alembic migration نسخه‌دار است. اجرای دستی DDL روی production، تغییر مستقیم data serving یا migrate بدون backup/rollback plan ممنوع است. این runbook پیش‌شرط `US-04.T04` است؛ دستور اجرایی Alembic پس از ایجاد migration واقعی افزوده می‌شود.
+تنها مسیر تغییر schema، Alembic migration نسخه‌دار است. اجرای دستی DDL روی production، تغییر مستقیم data serving یا migrate بدون backup/rollback plan ممنوع است. این runbook در `US-04.T04` با Alembic و تست PostgreSQL واقعی اجرا شده است.
+
+## اجرای محلی ایمن
+
+1. `cp .env.example .env` و همهٔ مقادیر `change-me-local-only` را فقط در فایل محلی جایگزین کن؛ `.env` هرگز commit نمی‌شود.
+2. `docker compose up -d --build` را اجرا کن. سرویس API فقط پس از healthy شدن PostgreSQL، `alembic upgrade head` را اجرا می‌کند.
+3. liveness محلی: `GET /api/v1/health/live`. readiness فقط با header دارای توکن local قابل بررسی است.
+4. توقف با حفظ داده محلی: `docker compose down`. حذف داده فقط با تصمیم صریح: `docker compose down -v`.
+
+## کنترل migration
+
+- migrationها در `alembic/versions/` غیرقابل‌ویرایش و ترتیبی‌اند؛ migration اولیه `f0d0c68db55a` تمام tableهای 3NF مصوب را می‌سازد.
+- اجرای دستی: `SHAHAB_DATABASE_URL='postgresql+psycopg://…' alembic upgrade head`.
+- rollback آزمایش‌شده: `SHAHAB_DATABASE_URL='postgresql+psycopg://…' alembic downgrade base`.
+- تست integration از متغیر جداگانهٔ `SHAHAB_TEST_DATABASE_URL` استفاده می‌کند و هم upgrade روی database خالی، هم نوشتن fixture نماینده و هم downgrade کامل را می‌سنجد.
+- CI یک PostgreSQL 16 موقت ایجاد می‌کند؛ credential آن صرفاً test credential است و هیچ secret عملیاتی در workflow یا log قرار نمی‌گیرد.
 
 ## مسیر امن expand/contract
 

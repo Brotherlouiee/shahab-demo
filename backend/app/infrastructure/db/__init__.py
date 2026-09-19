@@ -1,1 +1,5 @@
-"""SQLAlchemy persistence declarations; sessions and migrations are introduced separately."""
+"""Database infrastructure adapters and migration metadata."""
+
+from .models import Base
+
+__all__ = ["Base"]

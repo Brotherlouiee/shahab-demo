@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-04.T03`
-- Status: `completed — awaiting PR review`
-- Base commit: `c9fb92acd4514ab9b2427bc00c86aaad48c51a35`
-- Working branch: `feature/us-04-sqlalchemy-models`
+- `activeTaskId`: `US-04.T04`
+- Status: `in progress — migration verification and PR pending`
+- Base commit: `f9dfeb29804de4bec15608c69a5dae1d3335fabb`
+- Working branch: `feature/us-04-migrations-postgresql`
 
 ## Evidence
 
@@ -34,6 +34,9 @@
 - PostgreSQL 3NF physical tables, type/state semantics, constraint catalog and migration/rollback operations are specified before ORM/migration implementation.
 - `US-04.T02` was merged in PR #11.
 - SQLAlchemy 2.x metadata declares the core 3NF catalog/config/import constraints without creating a session, engine or schema.
+- `US-04.T03` was merged in PR #12.
+- Alembic owns versioned DDL; a bounded SQLAlchemy engine/session factory is isolated in the database infrastructure adapter.
+- Docker Compose defines local-only API/PostgreSQL startup without committing operational credentials; GitHub Actions provisions PostgreSQL 16 for migration verification.
 
 ## Test record
 
@@ -52,14 +55,16 @@
 | `npm run quality` | Passed; conceptual data-model validator and 32 backend tests completed with all existing quality gates. |
 | `npm run quality` | Passed; physical-schema specification validator and 33 backend tests completed with all existing quality gates. |
 | `npm run quality` | Passed; SQLAlchemy metadata tests and 35 backend tests completed with all existing quality gates. |
+| `SHAHAB_DATABASE_URL=sqlite:///… alembic upgrade head → downgrade base → upgrade head` | Passed; clean structural lifecycle check completed. |
+| GitHub Actions PostgreSQL 16 migration job | Pending PR execution; it enforces empty-db upgrade, fixture write and downgrade on real PostgreSQL. |
 
 ## Blockers and next task
 
-- Docker/Compose is unavailable in this environment; Docker-dependent verification belongs to its assigned future task.
+- Docker/Compose is unavailable in this environment; real PostgreSQL migration integration is enforced in GitHub Actions.
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task: `US-04.T04` — Alembic initial migration and PostgreSQL upgrade/downgrade verification.
+- Next task after this PR is merged: `US-04.T05` — index strategy and representative PostgreSQL `EXPLAIN (ANALYZE, BUFFERS)` evidence.
 
 ## Compatibility pointer
 

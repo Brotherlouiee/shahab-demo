@@ -45,3 +45,10 @@ class CoreBootstrapTests(unittest.TestCase):
             redact_value(value),
             {"otp": REDACTED_VALUE, "nested": {"access_token": REDACTED_VALUE}, "safe": "visible"},
         )
+
+    def test_database_url_stays_optional_until_database_features_are_composed(self) -> None:
+        self.assertIsNone(Settings().database_url_value)
+        self.assertEqual(
+            Settings(database_url="postgresql+psycopg://user:password@db:5432/shahab").database_url_value,
+            "postgresql+psycopg://user:password@db:5432/shahab",
+        )
