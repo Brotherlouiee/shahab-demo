@@ -11,7 +11,6 @@ from sqlalchemy import create_engine, inspect, text
 
 DATABASE_URL = os.environ.get("SHAHAB_TEST_DATABASE_URL")
 EXPECTED_TABLES = {
-    "alembic_version",
     "answer_options",
     "data_import_runs",
     "data_source_files",
@@ -65,5 +64,6 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         self._alembic("downgrade", "base")
         engine = create_engine(str(DATABASE_URL))
+        # Alembic deliberately retains its own version ledger at base; only application tables must be gone.
         self.assertFalse(EXPECTED_TABLES & set(inspect(engine).get_table_names()))
         engine.dispose()
