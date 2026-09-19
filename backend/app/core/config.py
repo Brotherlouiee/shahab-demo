@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
     cors_allowed_origins: tuple[str, ...] = ()
     readiness_token: SecretStr | None = None
+    database_url: SecretStr | None = None
+    database_pool_size: int = 5
+    database_max_overflow: int = 5
+    database_connect_timeout_seconds: int = 5
 
     @field_validator("log_level")
     @classmethod
@@ -55,6 +59,11 @@ class Settings(BaseSettings):
     def docs_enabled(self) -> bool:
         """Interactive docs are deliberately disabled in production by default."""
         return self.environment is not AppEnvironment.PRODUCTION
+
+    @property
+    def database_url_value(self) -> str | None:
+        """Expose the database URL only to infrastructure composition code."""
+        return self.database_url.get_secret_value() if self.database_url else None
 
 
 @lru_cache

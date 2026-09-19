@@ -15,6 +15,7 @@
     "lint:python": "python -m ruff check backend scripts",
     "typecheck:python": "python -m mypy backend/app",
     "test:backend": "python -m unittest discover -s backend/tests -p \"test_*.py\"",
+    "test:postgres-migrations": "python -m unittest backend.tests.test_postgresql_migrations",
     "scan:secrets": "python scripts/scan_repository_secrets.py",
     "validate:conceptual-data-model": "python scripts/validate_conceptual_data_model.py",
     "validate:physical-schema-spec": "python scripts/validate_physical_schema_spec.py",
