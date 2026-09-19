@@ -17,6 +17,9 @@ The root `src/` Vite application is the active prototype and remains operational
 | `backend/app/infrastructure` | outbound adapter implementations | domain/application dependency reversal |
 | `backend/app/infrastructure/db` | SQLAlchemy metadata, bounded engine/session factory and future repository adapters | API import, business scoring, migration execution at import time |
 | `backend/app/data_pipeline` | immutable raw source capture, staged transformation boundaries and adapters | scoring, serving publication, UI/API ownership before its task |
+| backend/app/loans/domain | approved-catalogue value types and safe loan detail facts | FastAPI, ORM, source parsing, conditions HTML |
+| backend/app/loans/application | ListLoans/GetLoanDetails use cases and serving-only repository port | raw/staging/draft version access, HTTP concerns |
+| backend/app/loans/infrastructure | replaceable serving-catalogue adapters | business interpretation or source parsing |
 | `backend/app/api/v1` | versioned transport adapters and restricted operational endpoints | domain logic, direct database decisions |
 | `backend/app/core` | typed settings, dependency wiring, redacted logging, security hooks | product use cases |
 | `backend/app/shared` | truly cross-feature backend helpers | recommendation-specific rules |
