@@ -25,6 +25,7 @@ EXPECTED_TABLES = {
     "recommendation_config_versions",
     "variable_categories",
 }
+EXPECTED_INDEX = "ix_loan_products_lender_id"
 
 
 @unittest.skipUnless(DATABASE_URL, "requires SHAHAB_TEST_DATABASE_URL for real PostgreSQL verification")
@@ -67,3 +68,34 @@ class PostgreSqlMigrationTests(unittest.TestCase):
         # Alembic deliberately retains its own version ledger at base; only application tables must be gone.
         self.assertFalse(EXPECTED_TABLES & set(inspect(engine).get_table_names()))
         engine.dispose()
+
+    def test_selective_catalogue_lookup_uses_index(self) -> None:
+        """Record the V1 list-query plan on PostgreSQL; cost values are deliberately not asserted."""
+        self._alembic("upgrade", "head")
+        engine = create_engine(str(DATABASE_URL))
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "INSERT INTO lenders (lender_id, canonical_name) "
+                    "SELECT md5(series::text)::uuid, 'explain-lender-' || series "
+                    "FROM generate_series(1, 1000) AS series"
+                )
+            )
+            connection.execute(
+                text(
+                    "INSERT INTO loan_products (loan_product_id, lender_id, canonical_name) "
+                    "SELECT md5(('product-' || series)::text)::uuid, md5(series::text)::uuid, "
+                    "'explain-product-' || series FROM generate_series(1, 1000) AS series"
+                )
+            )
+            plan = connection.execute(
+                text(
+                    "EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON) "
+                    "SELECT loan_product_id, canonical_name FROM loan_products "
+                    "WHERE lender_id = md5('500')::uuid"
+                )
+            ).scalar_one()[0]["Plan"]
+        engine.dispose()
+
+        self.assertIn(EXPECTED_INDEX, str(plan))
+        self.assertNotEqual(plan["Node Type"], "Seq Scan")

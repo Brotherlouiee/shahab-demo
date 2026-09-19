@@ -69,3 +69,7 @@
 - mappingهای many-to-many از جدول واسط استفاده می‌کنند؛ هیچ array/string تکرارشونده برای category یا answer نگهداری نمی‌شود.
 - import: raw → staging → normalize/core → approval/publish در transactionهای کوتاه و مرحله‌ای انجام می‌شود. publish تنها پس از approval است؛ failure در staging/core نباید serving را تغییر دهد.
 - query/result snapshot برای reproducibility به IDهای version/config وصل است، نه به دادهٔ de-normalized. هر denormalization آینده باید measurement، rebuild strategy و ADR داشته باشد.
+
+## index و query evidence
+
+فهرست indexهای اجرایی و قرارداد query مرتبط در `docs/database/index-and-query-strategy.md` نگهداری می‌شود. `US-04.T05` indexهای lookup-FK و ترتیب پرسشنامه را با migration برگشت‌پذیر افزوده و usage یک lookup انتخابی catalogue را در PostgreSQL 16 با `EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)` در CI اثبات می‌کند. این specification از عدد ثابت performance یا index بدون query contract اجتناب می‌کند.

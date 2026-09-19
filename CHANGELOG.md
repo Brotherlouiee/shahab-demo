@@ -28,3 +28,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-04.T02**: Added PostgreSQL 3NF physical-schema/constraint specification, migration and rollback operations runbook, ADR and contract validator.
 - **US-04.T03**: Added SQLAlchemy 2.x core metadata, explicit database constraints/state enums, transaction boundary port and metadata tests before migrations.
 - **US-04.T04**: Added Alembic initial schema migration, bounded SQLAlchemy engine/session composition, Docker Compose local PostgreSQL/API runtime, and real PostgreSQL CI verification of upgrade, fixture write and downgrade.
+- **US-04.T05**: Added measured index/query strategy, reversible index migration and PostgreSQL `EXPLAIN (ANALYZE, BUFFERS)` plan-shape verification for selective catalogue lookup.
