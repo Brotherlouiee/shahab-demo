@@ -41,3 +41,13 @@ staging boundary; immutable database IDs are assigned by the later durable impor
 adapter. Approval requires a non-empty actor reference, reason and UTC timestamp.
 No HTTP route, user-controlled publication path or production credential was
 added in this task.
+
+## US-05.T05 preparation command
+
+The internal command at scripts/prepare_canonical_import.py accepts a reviewed
+UTF-8 JSON manifest and creates a non-publishing plan. It validates the manifest
+shape, source SHA-256, duplicate source rows and duplicate catalogue identities;
+then it preserves every typed rejection or issue in its output. Exit code zero
+means a candidate is clean enough for review, not that it was approved or
+published. The operations runbook documents source verification, review,
+approval hand-off and failure recovery.
