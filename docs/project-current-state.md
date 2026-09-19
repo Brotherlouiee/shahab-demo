@@ -2,10 +2,10 @@
 
 ## Active task
 
-- `activeTaskId`: `US-04.T05`
-- Status: `completed locally — awaiting PostgreSQL CI and PR review`
-- Base commit: `0de91ad4ef913664151f3facf63dde2d4cd7d14a`
-- Working branch: `feature/us-04-index-query-strategy`
+- `activeTaskId`: `US-05.T01`
+- Status: `in progress — raw-ingest verification and PR pending`
+- Base commit: `dd8ba4014d4c9a352cc907dcbdd409cba5213a67`
+- Working branch: `feature/us-05-raw-ingest`
 
 ## Evidence
 
@@ -38,6 +38,8 @@
 - Alembic owns versioned DDL; a bounded SQLAlchemy engine/session factory is isolated in the database infrastructure adapter.
 - Docker Compose defines local-only API/PostgreSQL startup without committing operational credentials; GitHub Actions provisions PostgreSQL 16 for migration verification.
 - Query contracts now own a small, reversible index set; a representative selective catalogue query must use the lender FK index according to PostgreSQL `EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)`.
+- `US-04.T05` was merged in PR #14 after PostgreSQL 16 migration and plan-verification CI passed.
+- Raw source capture is now isolated from parsers and serving data: source bytes have an immutable SHA-256 identity and traceable capture metadata.
 
 ## Test record
 
@@ -67,7 +69,7 @@
 - The prototype has no automated lint/typecheck/test suite yet; this remains recorded baseline risk.
 - `US-01` was merged in PR #3.
 - `US-02` was merged in PR #4.
-- Next task after this PR is merged: `US-05.T01` — immutable raw ingest with source hash and metadata.
+- Next task after this PR is merged: `US-05.T02` — staging validation for headers, encoding, row shape and duplicate evidence.
 
 ## Compatibility pointer
 

@@ -29,3 +29,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **US-04.T03**: Added SQLAlchemy 2.x core metadata, explicit database constraints/state enums, transaction boundary port and metadata tests before migrations.
 - **US-04.T04**: Added Alembic initial schema migration, bounded SQLAlchemy engine/session composition, Docker Compose local PostgreSQL/API runtime, and real PostgreSQL CI verification of upgrade, fixture write and downgrade.
 - **US-04.T05**: Added measured index/query strategy, reversible index migration and PostgreSQL `EXPLAIN (ANALYZE, BUFFERS)` plan-shape verification for selective catalogue lookup.
+- **US-05.T01**: Added immutable, content-addressable raw-source capture with SHA-256 integrity, metadata record, size gate and local/test storage adapter; no parsing or serving publication occurs.
