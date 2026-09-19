@@ -17,3 +17,9 @@ internal state.
 The conditions source text is deliberately retained as plain text in LoanDetail.
 US-06.T03 owns parsing it to safe bullets; this task must not render, sanitize
 or interpret it. API schemas are US-06.T02 and React integration is US-06.T04.
+
+## US-06.T03 conditions parser
+
+parse_conditions_bullets preserves source conditions as ordered plain text. It
+removes common Persian/ASCII list markers and empty lines only. It never returns
+HTML, and a presentation layer must render every bullet as text.
