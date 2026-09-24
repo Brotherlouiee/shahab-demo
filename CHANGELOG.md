@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-07.T05**: Added browser and API completion-boundary coverage for the behavioural questionnaire: incomplete answers are blocked, canonical body-only answers are persisted through the active-tab session, back navigation preserves the answer, and retryable save failures are announced without progressing. The tests assert no answer/session data appears in the browser URL. No durable PostgreSQL or Redis runtime is introduced; that remains US-07.T06.
+
 - **US-07.T06 (planned)**: Added the required PostgreSQL source-of-truth and Redis cache architecture for anonymous questionnaire sessions, including a 30-minute expiry/cleanup contract, normalized ERD/schema requirements, cache-fallback semantics and mandatory documentation synchronization. No runtime persistence behavior is implemented by this documentation change.
 
 - **US-07.T04**: Connected the behavioural-questionnaire UI to source-traceable canonical questions and a body-only anonymous-session API. The approved retention contract is 30 minutes in the current browser tab; opaque session IDs and answers are not written to browser URLs or web storage. No recommendation score, result, identity or cross-device resume behaviour was added.

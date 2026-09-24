@@ -13,3 +13,13 @@ The product owner confirmed a **30-minute** anonymous-session lifetime on 2026-0
 ## Scope boundary
 
 This task introduces no identity, credit decision, score, recommendation result, automatic deletion job, production persistence guarantee or public deployment. The current server adapter is an explicit development composition boundary; production storage/operational hardening remains ordered future work.
+
+
+## US-07.T05 verification boundary
+
+- Browser coverage verifies the RTL radiogroup and named controls, blocks an unanswered behavioural screen, and confirms that same-tab back navigation preserves the selected canonical option.
+- The browser test intercepts the session contract and asserts a single POST session request followed by a PUT answer request with the canonical JSON `answerId`; the answer and opaque ID do not appear in the browser URL.
+- On a session-start failure, the page remains on the question and exposes a retryable `role="alert"`; it does not advance with an unconfirmed answer.
+- API tests cover canonical answer ownership, safe unknown-session errors and rejection of an answer supplied outside the JSON body.
+
+These are completion tests for the current in-memory development adapter. They do not claim restart survival, durable storage, Redis availability or cross-tab/cross-device resume; those are acceptance criteria for **US-07.T06**.

@@ -3,15 +3,15 @@
 ## Active task
 
 - activeTaskId: US-07.T05
-- Status: US-07.T04 merged in PR #30; US-07.T05 is the next implementation task.
-- Base branch: main after merge of US-07.T03 / PR #29 (fcc12bd4e2eec4dbffeb6b6a1bae3a6432d6ad99).
-- Working branch: feature/us-07-questionnaire-ui-session
+- Status: US-07.T05 implementation is complete; PR #32 is mergeable with GitHub Actions run #85 green (quality, PostgreSQL migration verification and Chromium E2E).
+- Base branch: main after merge of documentation PR #31 (70edfce6d40b85eee7f46902f67f23ba898c1994).
+- Working branch: test/us-07-questionnaire-completion
 - estimatedWorkScope: complete route/API/RTL/accessibility/E2E verification for the questionnaire flow; then the mandatory persistence/cache task US-07.T06.
-- actualScope: US-07.T04 is merged. The next task has not started; the following US-07.T06 is documented as mandatory PostgreSQL persistence with Redis cache and synchronized ERD/schema updates.
+- actualScope: US-07.T05 adds browser/API verification only: incomplete-answer blocking, canonical body-only persistence request, same-tab back navigation, URL non-leakage, RTL/accessibility roles and retryable save failure. US-07.T06 remains mandatory PostgreSQL persistence with Redis cache and synchronized ERD/schema updates.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: canonical configuration/client contract tests, API session lifecycle/ownership validation, full quality gate, PostgreSQL migration verification and Chromium E2E CI gates.
+- Test plan: implemented focused API and Chromium browser completion tests; PR #32 / GitHub Actions run #85 passed quality, PostgreSQL migration verification and Chromium E2E; only normal PR review/merge remains.
 
 ## Evidence
 
