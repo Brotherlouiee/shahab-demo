@@ -142,7 +142,10 @@ class Question(Base):
 
 class AnswerOption(Base):
     __tablename__ = "answer_options"
-    __table_args__ = (UniqueConstraint("question_id", "canonical_id", name="uq_answer_question_canonical"),)
+    __table_args__ = (
+        UniqueConstraint("question_id", "canonical_id", name="uq_answer_question_canonical"),
+        UniqueConstraint("question_id", "answer_option_id", name="uq_answer_option_question_id"),
+    )
     answer_option_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     question_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("questions.question_id"), nullable=False)
     canonical_id: Mapped[str] = mapped_column(String(100), nullable=False)
