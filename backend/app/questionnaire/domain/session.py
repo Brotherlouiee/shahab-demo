@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from .configuration import QuestionnaireConfiguration
 
@@ -54,7 +54,7 @@ class QuestionnaireAnswer:
 def new_anonymous_session(
     questionnaire_version: str, retention_policy: QuestionnaireRetentionPolicy, now: datetime | None = None
 ) -> QuestionnaireSession:
-    created_at = now or datetime.now(timezone.utc)
+    created_at = now or datetime.now(UTC)
     if created_at.tzinfo is None:
         raise ValueError("now must be timezone-aware")
     return QuestionnaireSession(
