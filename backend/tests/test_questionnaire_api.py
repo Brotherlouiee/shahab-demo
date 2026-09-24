@@ -48,7 +48,7 @@ class QuestionnaireApiTests(unittest.TestCase):
     def test_rejects_unknown_sessions_with_a_safe_typed_not_found_error(self) -> None:
         response = self.client.get("/api/v1/questionnaire/sessions/unknown-session")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()["error"]["code"], "questionnaire_session_not_found")
+        self.assertEqual(response.json()["error"]["code"], "not_found")
         self.assertNotIn("unknown-session", response.json()["error"]["message"])
 
     def test_rejects_answer_transport_outside_the_json_body(self) -> None:
