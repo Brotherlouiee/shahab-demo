@@ -1,4 +1,5 @@
 """Process-local server-side adapter for development session wiring; never serializes answers into URLs."""
+
 from __future__ import annotations
 
 from backend.app.questionnaire.domain.session import QuestionnaireAnswer, QuestionnaireSession
