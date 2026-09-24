@@ -1,7 +1,15 @@
-# Anonymous questionnaire sessions — US-07.T03
+# Anonymous questionnaire sessions — US-07.T04
 
-Sessions carry only an opaque identifier, questionnaire version, expiry and canonical answers. They never carry identity, IP data, raw source, browser URL state or UI indexes.
+## Confirmed retention and resume contract
 
-A caller supplies the lifetime through QuestionnaireRetentionPolicy. No default production TTL, automatic deletion job, or cross-device resume behavior is introduced: those product/privacy decisions remain pending. At expiry, reads and writes are rejected.
+The product owner confirmed a **30-minute** anonymous-session lifetime on 2026-09-24.
 
-This task deliberately adds no HTTP endpoint, query-string answer transport, browser persistence, identity, scoring, ranking or frontend wiring.
+- A session contains only an opaque identifier, questionnaire version, expiry and canonical question/answer pairs.
+- The identifier is held only in the active React instance. It is not included in URLs, localStorage, sessionStorage, analytics or public logs.
+- Back/forward navigation within the active questionnaire view reuses the in-memory session. Refreshing, closing the tab, opening another tab or changing devices starts a new session; cross-device resume is out of scope.
+- At expiry, reads and writes return a typed safe error. The UI leaves the user on the current question and presents a retryable message.
+- A canonical answer is sent only in the JSON body of the answer-write request. Screen indexes and option positions are never sent as answer identities.
+
+## Scope boundary
+
+This task introduces no identity, credit decision, score, recommendation result, automatic deletion job, production persistence guarantee or public deployment. The current server adapter is an explicit development composition boundary; production storage/operational hardening remains ordered future work.

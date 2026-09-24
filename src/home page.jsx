@@ -5,6 +5,11 @@ import {
   getPrototypeQuestionIndexForCanonicalQuestionId,
   getQuestionnaireRouteForPrototypeQuestionIndex,
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
+import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
+import {
+  saveQuestionnaireAnswer,
+  startQuestionnaireSession,
+} from "./features/questionnaire/questionnaireSessionClient.mjs";
 import logoUrl from "../assets/shahab-logo.png";
 import folderIconUrl from "../assets/folder.svg";
 import healthIconUrl from "../assets/health.svg";
@@ -1264,6 +1269,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
   const [answers, setAnswers] = useState({});
+  // Kept only in this React instance: canonical answers and the opaque session
+  // identifier are deliberately absent from URLs and browser storage.
+  const [questionnaireSessionId, setQuestionnaireSessionId] = useState("");
+  const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
+  const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "",
     lastName: "",
@@ -1684,7 +1694,20 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       icon: profileIconUrl,
     },
   ];
-  const question = questions[currentQuestion];
+  const prototypeQuestion = questions[currentQuestion];
+  const canonicalQuestion = getCanonicalQuestionForPrototypeIndex(currentQuestion);
+  // The legacy index remains layout/navigation glue only. Behavioural wording
+  // and answer identifiers always come from the verified canonical artifact.
+  const question = canonicalQuestion
+    ? {
+        ...prototypeQuestion,
+        title: canonicalQuestion.prompt,
+        options: canonicalQuestion.answerOptions.map((option) => ({
+          id: option.answerId,
+          label: option.label,
+        })),
+      }
+    : prototypeQuestion;
   const selectedOption = answers[currentQuestion] || "";
   const selectedIncomeLabel = incomeOptions.find((option) => option.value === personalInfo.income)?.label || "";
   const selectedJobLabel = jobOptions.find((option) => option.value === personalInfo.job)?.label || "";
@@ -1706,7 +1729,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     ? loanOtpValue.length === 6
     : isPersonalInfoQuestion
       ? Boolean(isPersonalInfoComplete)
-      : Boolean(selectedOption);
+      : Boolean(selectedOption) && !isSavingQuestionnaireAnswer;
   const nextQuestionButtonText = isOtpQuestion
     ? "تایید و جستجوی وام"
     : isPersonalInfoQuestion
@@ -1894,8 +1917,33 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setCurrentQuestion(targetQuestionIndex);
   }
 
-  function handleNextQuestion() {
+  async function persistCanonicalQuestionnaireAnswer() {
+    if (!canonicalQuestion) return true;
+
+    setIsSavingQuestionnaireAnswer(true);
+    setQuestionnaireSessionError("");
+    try {
+      let sessionId = questionnaireSessionId;
+      if (!sessionId) {
+        const session = await startQuestionnaireSession();
+        sessionId = session.sessionId;
+        setQuestionnaireSessionId(sessionId);
+      }
+      await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
+      return true;
+    } catch {
+      setQuestionnaireSessionError(
+        "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
+      );
+      return false;
+    } finally {
+      setIsSavingQuestionnaireAnswer(false);
+    }
+  }
+
+  async function handleNextQuestion() {
     if (!canProceed) return;
+    if (!(await persistCanonicalQuestionnaireAnswer())) return;
     if (isPersonalInfoQuestion) {
       setIsOtpVerificationStep(true);
       setLoanOtp(Array(6).fill(""));
@@ -2553,6 +2601,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
           </>
         )}
 
+        {questionnaireSessionError ? (
+          <p className="hp-question-session-error" role="alert">
+            {questionnaireSessionError}
+          </p>
+        ) : null}
         <div className="hp-question-actions">
           <button
             className={`hp-next-question ${isPersonalInfoQuestion ? "is-personal-confirm" : ""} ${isOtpQuestion ? "is-loan-otp-submit" : ""}`}
