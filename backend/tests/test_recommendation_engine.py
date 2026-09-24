@@ -1,7 +1,7 @@
 """US-08.T01 tests for the pure deterministic recommendation engine."""
 
-from decimal import Decimal
 import unittest
+from decimal import Decimal
 
 from backend.app.recommendation.domain.entities import AnswerPreference, LoanCandidate, RecommendationInputError
 from backend.app.recommendation.engine.scoring import rank_loans, score_loan
