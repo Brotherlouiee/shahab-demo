@@ -43,3 +43,38 @@ class RecommendationEngineTests(unittest.TestCase):
                     AnswerPreference("maxAmount", "amount.high", Decimal("0.5")),
                 ),
             )
+
+
+    def test_core_unknown_is_excluded_without_a_score(self) -> None:
+        from backend.app.recommendation.domain.entities import ClassificationState
+        from backend.app.recommendation.engine.scoring import partition_loans
+
+        partition = partition_loans(
+            (
+                LoanCandidate(
+                    "loan-review",
+                    {"maxAmount": None, "interestRate": "interest.low"},
+                    {"maxAmount": ClassificationState.UNKNOWN},
+                ),
+            ),
+            self.preferences,
+        )
+        self.assertEqual(partition.ranked, ())
+        self.assertEqual(partition.needs_review[0].excluded_reasons, ("maxAmount:unknown",))
+
+    def test_unknown_deposit_attribute_is_neutral_not_zero_score(self) -> None:
+        from backend.app.recommendation.domain.entities import ClassificationState
+        from backend.app.recommendation.engine.scoring import score_loan
+
+        score = score_loan(
+            LoanCandidate(
+                "loan-neutral",
+                {"maxAmount": "amount.high", "depositRequired": None},
+                {"depositRequired": ClassificationState.UNKNOWN},
+            ),
+            (
+                AnswerPreference("maxAmount", "amount.high", Decimal("0.6")),
+                AnswerPreference("depositRequired", "deposit.required", Decimal("0.4")),
+            ),
+        )
+        self.assertEqual(score.score, Decimal("1.000000"))
