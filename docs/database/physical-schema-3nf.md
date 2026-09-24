@@ -44,11 +44,18 @@
 
 | جدول | ستون‌های تعیین‌کننده | constraints فیزیکی |
 | --- | --- | --- |
-| `questionnaire_sessions` | `session_id PK`, `questionnaire_version_id FK`, `state`, `expires_at`, timestamps | `CHECK(expires_at > created_at)`؛ بدون PII یا پاسخ raw |
-| `questionnaire_answers` | `questionnaire_answer_id PK`, `session_id FK`, `question_id FK`, `answer_option_id FK` | `UNIQUE(session_id, question_id)`؛ FK answer/question compatibility با composite FK یا trigger در T03 |
+| `questionnaire_sessions` | `session_id PK`, `questionnaire_version_id FK`, `state`, `expires_at`, timestamps | `CHECK(expires_at > created_at)`؛ بدون PII یا پاسخ raw؛ index انتخابی روی sessionهای منقضی‌نشده/`expires_at` برای lookup و cleanup |
+| `questionnaire_answers` | `questionnaire_answer_id PK`, `session_id FK`, `question_id FK`, `answer_option_id FK` | `UNIQUE(session_id, question_id)`؛ FK answer/question compatibility با composite FK یا trigger؛ `ON DELETE CASCADE` فقط از session به answerهای owned مجاز است |
 | `recommendation_runs` | `recommendation_run_id PK`, `session_id FK`, `config_version_id FK`, `state`, `trace_schema_version` | config/version/session immutable پس از completion |
 | `recommendation_results` | `recommendation_result_id PK`, `recommendation_run_id FK`, `loan_product_version_id FK`, `outcome_state`, `match_score numeric NULL`, `rank_position integer NULL` | `UNIQUE(run, loan_version)`؛ ranked ⇒ score/rank nonNULL; needs_review ⇒ score/rank NULL; `CHECK(match_score BETWEEN 0 AND 1)` |
 | `recommendation_exclusion_reasons` | `reason_id PK`, `recommendation_result_id FK`, `reason_code text`, `loan_variable_id FK NULL` | `UNIQUE(result, reason_code, loan_variable_id)`؛ no free-text internal detail in public API |
+
+### قرارداد persistence/cache در `US-07.T06`
+
+- PostgreSQL منبع حقیقت نرمال‌شده برای `questionnaire_sessions` و `questionnaire_answers` تا `expires_at` است؛ یک session چند answer دارد و هر answer دقیقاً به یک session، question و answer option متصل است. پاسخ تکراری یا JSON/array پاسخ‌ها در session ذخیره نمی‌شود.
+- Redis فقط cache TTLدار برای خواندن/نوشتن sessionهای فعال است و schema یا source of truth مستقل ایجاد نمی‌کند. cache key باید opaque/hash‌شده باشد؛ answer، session ID خام، PII و دادهٔ توصیه در key، log، metric یا trace قرار نمی‌گیرد.
+- در cache miss یا outage Redis، سرویس باید به PostgreSQL fallback کند؛ write موفق زمانی تأیید می‌شود که persistence PostgreSQL موفق باشد. invalidation پس از write/delete/expiry لازم است.
+- cleanup زمان‌دار و idempotent، sessionهای منقضی و answerهای owned آن‌ها را حذف می‌کند. migration، rollback، index evidence، restart/expiry/cache-failure integration test و به‌روزرسانی `erd.md` در همان PR اجباری است.
 
 `users` عمداً در این schema اولیه وجود ندارد. در صورت افزودن هویت، sessionها به nullable `user_id` در migration expand/contract بعدی متصل می‌شوند و retention/consent جداگانه لازم دارد.
 
