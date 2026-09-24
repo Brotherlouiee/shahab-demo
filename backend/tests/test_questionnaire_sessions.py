@@ -25,8 +25,8 @@ class QuestionnaireSessionTests(unittest.TestCase):
 
     def test_only_canonical_answer_is_accepted(self) -> None:
         self.assertEqual(
-            validate_canonical_answer(self.configuration, QuestionnaireAnswer("Q1", "Q1.cash_request")).answer_id,
-            "Q1.cash_request",
+            validate_canonical_answer(self.configuration, QuestionnaireAnswer("Q1", "Q1.incomeInvestment")).answer_id,
+            "Q1.incomeInvestment",
         )
         with self.assertRaises(CanonicalAnswerValidationError):
             validate_canonical_answer(self.configuration, QuestionnaireAnswer("Q1", "Q2.short_term"))
