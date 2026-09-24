@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 
 class AnswerWriteRequest(BaseModel):
     answer_id: str = Field(alias="answerId", min_length=1, max_length=200)
-    model_config = {"populate_by_name": True}
+    model_config = {"populate_by_name": True, "extra": "forbid"}
 
 
 class SessionResponse(BaseModel):
