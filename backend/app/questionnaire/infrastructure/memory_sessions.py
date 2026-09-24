@@ -1,6 +1,8 @@
-"""Process-local server-side adapter for development session wiring; never serializes answers into URLs."""
+"""Process-local repository used only where no database is configured (tests/local development)."""
 
 from __future__ import annotations
+
+from datetime import datetime
 
 from backend.app.questionnaire.domain.session import QuestionnaireAnswer, QuestionnaireSession
 
@@ -23,3 +25,10 @@ class InMemoryQuestionnaireSessionRepository:
 
     def list_answers(self, session_id: str) -> tuple[QuestionnaireAnswer, ...]:
         return tuple(self._answers[session_id].values())
+
+    def delete_expired(self, now: datetime) -> tuple[str, ...]:
+        expired = tuple(session_id for session_id, session in self._sessions.items() if session.expires_at <= now)
+        for session_id in expired:
+            del self._sessions[session_id]
+            del self._answers[session_id]
+        return expired
