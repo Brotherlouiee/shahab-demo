@@ -46,18 +46,26 @@ def _questionnaire_configuration() -> QuestionnaireConfiguration:
 _questionnaire_repository = InMemoryQuestionnaireSessionRepository()
 
 
-def get_questionnaire_session_service(settings: Annotated[Settings, Depends(get_settings)]) -> Generator[QuestionnaireSessionService, None, None]:
+def get_questionnaire_session_service(
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> Generator[QuestionnaireSessionService, None, None]:
     """Use PostgreSQL when configured; Redis is a best-effort cache, never the authority."""
     configuration = _questionnaire_configuration()
-    cache = RedisQuestionnaireSessionCache(Redis.from_url(settings.redis_url_value)) if settings.redis_url_value else None
+    cache = (
+        RedisQuestionnaireSessionCache(Redis.from_url(settings.redis_url_value)) if settings.redis_url_value else None
+    )
     if not settings.database_url_value:
-        yield QuestionnaireSessionService(_questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache)
+        yield QuestionnaireSessionService(
+            _questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
+        )
         return
     engine = create_database_engine(settings)
     session: Session = create_session_factory(engine)()
     try:
         repository = SqlAlchemyQuestionnaireSessionRepository(session, configuration)
-        yield QuestionnaireSessionService(repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache)
+        yield QuestionnaireSessionService(
+            repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
+        )
     finally:
         session.close()
         engine.dispose()
