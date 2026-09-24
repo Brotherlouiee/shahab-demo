@@ -11,11 +11,11 @@ from sqlalchemy.orm import Session
 from backend.app.infrastructure.db.models import (
     AnswerOption,
     Question,
-    QuestionnaireAnswer as QuestionnaireAnswerRow,
-    QuestionnaireSession as QuestionnaireSessionRow,
     QuestionnaireSessionState,
     QuestionnaireVersion,
 )
+from backend.app.infrastructure.db.models import QuestionnaireAnswer as QuestionnaireAnswerRow
+from backend.app.infrastructure.db.models import QuestionnaireSession as QuestionnaireSessionRow
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
 from backend.app.questionnaire.domain.session import QuestionnaireAnswer, QuestionnaireSession
 
