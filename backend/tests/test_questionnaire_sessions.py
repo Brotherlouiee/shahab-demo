@@ -19,7 +19,7 @@ class QuestionnaireSessionTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         root = Path(__file__).resolve().parents[2]
         cls.configuration = load_questionnaire_configuration(
-            root / "data/questionnaire/questionnaire.v1.json",
+            root / "data/contracts/questionnaire-configuration.v1.json",
             json.loads((root / "data/contracts/canonical-identifiers.v1.json").read_text(encoding="utf-8")),
         )
 
