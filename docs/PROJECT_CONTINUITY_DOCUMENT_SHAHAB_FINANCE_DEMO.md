@@ -1,6 +1,6 @@
 # Project Continuity Document
 
-> **Document version:** 3.0
+> **Document version:** 4.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
 > **Prepared:** 2026-09-24  
@@ -13,6 +13,7 @@ This section supersedes any older status statement below that says the questionn
 
 ### Version history
 
+- **v4.0 — 2026-09-24:** `US-08.T01` is complete in mergeable PR #34 with GitHub Actions #101 green. The Git `docs/` copy and the Library document are synchronized.
 - **v3.0 — 2026-09-24:** `US-07.T06` was merged in PR #33. Added the `US-08.T01` pure recommendation-engine checkpoint and synchronized copy requirement for `docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md`.
 - **v2.0 — 2026-09-24:** Added the `US-07.T06` durable-session implementation checkpoint and the explicit document-versioning convention. Future updates must increment this number.
 - **v1.0 — 2026-09-24:** Reconciled the document through merged `US-07.T05`.
@@ -24,7 +25,7 @@ This section supersedes any older status statement below that says the questionn
 - No durable questionnaire answer storage, Redis runtime, recommendation score/result, identity, OTP integration, cross-device resume or production deployment exists yet. Do not represent an answer as durably saved until `US-07.T06` is merged and deployed.
 - The next permitted product task after a green/merged `US-07.T05` is `US-07.T06`; `US-08` cannot start first.
 - `US-07.T06` is now implemented in PR #33: PostgreSQL is composed as the durable source of truth when configured, Redis uses only SHA-256-derived opaque cache keys and a cache miss/outage falls back to PostgreSQL. The 30-minute cleanup use case deletes expired sessions and their answers idempotently. At this checkpoint, PR CI is still the mandatory final merge gate; no production deployment is claimed.
-- `US-08.T01` is now underway on a dedicated branch. Its scope is deliberately small: immutable recommendation inputs plus a pure deterministic weighted category-match score and stable ordering. It has no database, FastAPI, React, trace, neutral/unknown, needs-review or recommendation endpoint behavior; those are later ordered tasks.
+- `US-08.T01` is complete in PR #34. It adds immutable recommendation inputs plus a pure deterministic weighted category-match score and stable ordering. GitHub Actions #101 is green for quality, PostgreSQL migration verification and Chromium E2E; PR #34 is mergeable. It has no database, FastAPI, React, trace, neutral/unknown, needs-review or recommendation endpoint behavior; those are later ordered tasks.
 
 ## 1. Project Identity
 
