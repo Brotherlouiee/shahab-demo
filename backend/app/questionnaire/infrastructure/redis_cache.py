@@ -14,7 +14,7 @@ from backend.app.questionnaire.domain.session import QuestionnaireSession
 
 
 class RedisQuestionnaireSessionCache:
-    def __init__(self, client: Redis) -> None:
+    def __init__(self, client: Redis[str]) -> None:
         self._client = client
 
     def get(self, session_id: str) -> QuestionnaireSession | None:
