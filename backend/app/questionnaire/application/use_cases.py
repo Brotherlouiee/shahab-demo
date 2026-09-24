@@ -28,9 +28,7 @@ class QuestionnaireSessionService:
         self._repository.create(session)
         return session
 
-    def record_answer(
-        self, session_id: str, answer: QuestionnaireAnswer, now: datetime | None = None
-    ) -> None:
+    def record_answer(self, session_id: str, answer: QuestionnaireAnswer, now: datetime | None = None) -> None:
         session = self._repository.get(session_id)
         if session is None:
             raise LookupError("questionnaire session was not found")
