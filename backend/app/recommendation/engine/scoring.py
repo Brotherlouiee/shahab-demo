@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal
 
 from backend.app.recommendation.domain.entities import (
     AnswerPreference,
