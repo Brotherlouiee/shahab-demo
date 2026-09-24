@@ -17,8 +17,8 @@
 | `recommendation_config_versions` | `config_version_id` | `approved`, `effective_from`, decision/source reference | مالک محصول | immutable؛ audit دائمی |
 | `question_variable_weights` | FK config/question/variable | سهم پرسش در متغیر؛ مجموع معتبر | موتور توصیه‌گر | constraint مجموع در T02/T03 |
 | `answer_category_compatibilities` | FK config/answer/category | ضریب سازگاری ۰..۱ | موتور توصیه‌گر | source/decision قابل‌ردیابی |
-| `questionnaire_sessions` | `session_id`; FK version | چرخهٔ پاسخ ناشناس و expiration | محصول و حریم خصوصی | کوتاه‌مدت؛ policy دقیق بعداً |
-| `questionnaire_answers` | FK session/answer option | انتخاب canonical کاربر | محصول و حریم خصوصی | حداقل‌سازی داده؛ log نشود |
+| `questionnaire_sessions` | `session_id`; FK version؛ 1→N `questionnaire_answers` | چرخهٔ پاسخ ناشناس، state و `expires_at` | محصول و حریم خصوصی | PostgreSQL source of truth تا ۳۰ دقیقه؛ بدون PII؛ cleanup idempotent |
+| `questionnaire_answers` | FK session/question/answer option؛ `UNIQUE(session, question)` | انتخاب canonical کاربر | محصول و حریم خصوصی | owned by session؛ حذف با expiry session؛ log نشود |
 | `recommendation_runs` | `run_id`; FK session/config | timestamp، trace version و state | موتور توصیه‌گر | برای reproducibility؛ بدون PII غیرضروری |
 | `recommendation_results` | FK run/version | score/trace نسخه‌دار برای گزینهٔ rankable | موتور توصیه‌گر | نتیجه به version دقیق وصل است |
 | `recommendation_exclusion_reasons` | FK result/run | دلیل typed حذف از ranking | موتور توصیه‌گر | قابل‌توضیح و غیرحساس |
@@ -33,3 +33,4 @@
 - raw text فارسی، hash source، `source_row_number`, `source_column`, parser version و decision ID در مسیر provenance نگهداری می‌شوند؛ در response API عمومی نمایش داده نمی‌شوند.
 - `deleted_at` فقط برای session یا policyهای مصوب privacy بررسی می‌شود؛ کاتالوگ نسخه‌دار و audit event soft-delete عمومی نمی‌گیرند.
 - مقدار نمونهٔ حساس، credential یا PII در این سند ثبت نمی‌شود.
+- Redis جدول مفهومی/رابطه‌ای نیست: cache موقت و قابل‌بازتولیدِ sessionهای فعال است، نه منبع حقیقت. سیاست کامل آن در `docs/architecture/0009-anonymous-session-persistence-and-cache.md` ثبت شده است.
