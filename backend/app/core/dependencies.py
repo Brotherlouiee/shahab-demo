@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Generator
 from datetime import timedelta
 from functools import lru_cache
 from pathlib import Path
-from collections.abc import Generator
 from typing import Annotated
 
 from fastapi import Depends
@@ -16,11 +16,11 @@ from sqlalchemy.orm import Session
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.infrastructure.db.session import create_database_engine, create_session_factory
 from backend.app.loans.application.use_cases import GetLoanDetails
+from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 from backend.app.questionnaire.application.use_cases import QuestionnaireSessionService
 from backend.app.questionnaire.domain.configuration import load_questionnaire_configuration
 from backend.app.questionnaire.domain.session import QuestionnaireRetentionPolicy
 from backend.app.questionnaire.infrastructure.memory_sessions import InMemoryQuestionnaireSessionRepository
-from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 
 from .config import Settings, get_settings
 from .logging import configure_logging
