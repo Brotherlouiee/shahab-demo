@@ -36,7 +36,9 @@ def _session_response(service: QuestionnaireSessionService, session_id: str) -> 
 
 
 @router.post("/sessions", response_model=SessionResponse, status_code=201)
-def start_session(service: Annotated[QuestionnaireSessionService, Depends(get_questionnaire_session_service)]) -> SessionResponse:
+def start_session(
+    service: Annotated[QuestionnaireSessionService, Depends(get_questionnaire_session_service)],
+) -> SessionResponse:
     session = service.start()
     return _session_response(service, str(session.session_id))
 
