@@ -18,7 +18,7 @@ from backend.app.infrastructure.db.session import create_database_engine, create
 from backend.app.loans.application.use_cases import GetLoanDetails
 from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 from backend.app.questionnaire.application.use_cases import QuestionnaireSessionService
-from backend.app.questionnaire.domain.configuration import load_questionnaire_configuration
+from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration, load_questionnaire_configuration
 from backend.app.questionnaire.domain.session import QuestionnaireRetentionPolicy
 from backend.app.questionnaire.infrastructure.memory_sessions import InMemoryQuestionnaireSessionRepository
 
@@ -32,7 +32,7 @@ def get_app_logger(settings: Annotated[Settings, Depends(get_settings)]) -> logg
 
 
 @lru_cache
-def _questionnaire_configuration() -> object:
+def _questionnaire_configuration() -> QuestionnaireConfiguration:
     root = Path(__file__).resolve().parents[3]
     return load_questionnaire_configuration(
         root / "data/contracts/questionnaire-configuration.v1.json",
