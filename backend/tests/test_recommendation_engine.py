@@ -3,7 +3,16 @@
 import unittest
 from decimal import Decimal
 
-from backend.app.recommendation.domain.entities import (\n    AnswerPreference,\n    ClassificationState,\n    LoanCandidate,\n    RecommendationDecision,\n    RecommendationInputError,\n)\nfrom backend.app.recommendation.engine.scoring import rank_loans, score_loan\nfrom backend.app.recommendation.engine.trace import build_recommendation_trace\n
+from backend.app.recommendation.domain.entities import (
+    AnswerPreference,
+    ClassificationState,
+    LoanCandidate,
+    RecommendationDecision,
+    RecommendationInputError,
+)
+from backend.app.recommendation.engine.scoring import rank_loans, score_loan
+from backend.app.recommendation.engine.trace import build_recommendation_trace
+
 
 class RecommendationEngineTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -73,7 +82,6 @@ class RecommendationEngineTests(unittest.TestCase):
             ),
         )
         self.assertEqual(score.score, Decimal("1.000000"))
-
 
     def test_trace_records_neutral_without_penalizing_effective_weight(self) -> None:
         trace = build_recommendation_trace(
