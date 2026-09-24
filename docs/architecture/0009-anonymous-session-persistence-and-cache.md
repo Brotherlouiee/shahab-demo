@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted as the required scope of `US-07.T06`; implementation begins only after `US-07.T05` is complete.
+Implemented in `US-07.T06`; deployment requires PostgreSQL and Redis configuration.
 
 ## Context
 

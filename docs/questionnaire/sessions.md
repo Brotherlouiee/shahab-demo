@@ -23,3 +23,8 @@ This task introduces no identity, credit decision, score, recommendation result,
 - API tests cover canonical answer ownership, safe unknown-session errors and rejection of an answer supplied outside the JSON body.
 
 These are completion tests for the current in-memory development adapter. They do not claim restart survival, durable storage, Redis availability or cross-tab/cross-device resume; those are acceptance criteria for **US-07.T06**.
+
+
+## US-07.T06 durable persistence
+
+PostgreSQL is the source of truth whenever `SHAHAB_DATABASE_URL` is configured. The repository stores only the anonymous session UUID, questionnaire version reference, timestamps and canonical question/answer references in normalized tables. Redis is an optional runtime cache configured with `SHAHAB_REDIS_URL`; its keys contain only a SHA-256 digest of the opaque session ID, failures are swallowed, and every cache miss falls back to PostgreSQL. Expired sessions and owned answers are removed idempotently through `cleanup_expired`.

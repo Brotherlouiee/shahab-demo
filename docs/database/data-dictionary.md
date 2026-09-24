@@ -17,7 +17,7 @@
 | `recommendation_config_versions` | `config_version_id` | `approved`, `effective_from`, decision/source reference | مالک محصول | immutable؛ audit دائمی |
 | `question_variable_weights` | FK config/question/variable | سهم پرسش در متغیر؛ مجموع معتبر | موتور توصیه‌گر | constraint مجموع در T02/T03 |
 | `answer_category_compatibilities` | FK config/answer/category | ضریب سازگاری ۰..۱ | موتور توصیه‌گر | source/decision قابل‌ردیابی |
-| `questionnaire_sessions` | `session_id`; FK version؛ 1→N `questionnaire_answers` | چرخهٔ پاسخ ناشناس، state و `expires_at` | محصول و حریم خصوصی | PostgreSQL source of truth تا ۳۰ دقیقه؛ بدون PII؛ cleanup idempotent |
+| `questionnaire_sessions` | `session_id`; FK version؛ 1→N `questionnaire_answers` | چرخهٔ پاسخ ناشناس، state و `expires_at` | محصول و حریم خصوصی | PostgreSQL source of truth تا ۳۰ دقیقه (implemented in US-07.T06)؛ بدون PII؛ cleanup idempotent |
 | `questionnaire_answers` | FK session/question/answer option؛ `UNIQUE(session, question)` | انتخاب canonical کاربر | محصول و حریم خصوصی | owned by session؛ حذف با expiry session؛ log نشود |
 | `recommendation_runs` | `run_id`; FK session/config | timestamp، trace version و state | موتور توصیه‌گر | برای reproducibility؛ بدون PII غیرضروری |
 | `recommendation_results` | FK run/version | score/trace نسخه‌دار برای گزینهٔ rankable | موتور توصیه‌گر | نتیجه به version دقیق وصل است |

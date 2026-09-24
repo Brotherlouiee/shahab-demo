@@ -9,7 +9,7 @@ from backend.app.questionnaire.domain.session import (
     validate_canonical_answer,
 )
 
-from .ports import QuestionnaireSessionRepository
+from .ports import QuestionnaireSessionCache, QuestionnaireSessionRepository
 
 
 class QuestionnaireSessionService:
@@ -18,30 +18,50 @@ class QuestionnaireSessionService:
         repository: QuestionnaireSessionRepository,
         configuration: QuestionnaireConfiguration,
         retention_policy: QuestionnaireRetentionPolicy,
+        cache: QuestionnaireSessionCache | None = None,
     ) -> None:
         self._repository = repository
         self._configuration = configuration
         self._retention_policy = retention_policy
+        self._cache = cache
 
     def start(self, now: datetime | None = None) -> QuestionnaireSession:
         session = new_anonymous_session(self._configuration.questionnaire_version, self._retention_policy, now)
         self._repository.create(session)
+        self._cache_set(session)
         return session
 
     def record_answer(self, session_id: str, answer: QuestionnaireAnswer, now: datetime | None = None) -> None:
-        session = self._repository.get(session_id)
-        if session is None:
-            raise LookupError("questionnaire session was not found")
+        session = self.get(session_id)
         session.ensure_active(now or datetime.now(UTC))
         self._repository.upsert_answer(session_id, validate_canonical_answer(self._configuration, answer))
+        self._cache_set(session)
 
     def get(self, session_id: str) -> QuestionnaireSession:
-        session = self._repository.get(session_id)
+        session = self._cache_get(session_id) or self._repository.get(session_id)
         if session is None:
             raise LookupError("questionnaire session was not found")
         session.ensure_active(datetime.now(UTC))
+        self._cache_set(session)
         return session
 
     def answers(self, session_id: str) -> tuple[QuestionnaireAnswer, ...]:
         self.get(session_id)
         return self._repository.list_answers(session_id)
+
+    def cleanup_expired(self, now: datetime | None = None) -> int:
+        session_ids = self._repository.delete_expired(now or datetime.now(UTC))
+        for session_id in session_ids:
+            self._cache_delete(session_id)
+        return len(session_ids)
+
+    def _cache_get(self, session_id: str) -> QuestionnaireSession | None:
+        return self._cache.get(session_id) if self._cache else None
+
+    def _cache_set(self, session: QuestionnaireSession) -> None:
+        if self._cache:
+            self._cache.set(session)
+
+    def _cache_delete(self, session_id: str) -> None:
+        if self._cache:
+            self._cache.delete(session_id)

@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-07.T06**: PostgreSQL now persists anonymous questionnaire sessions and canonical answers as the source of truth; Redis is a hashed-key, best-effort active-session cache with PostgreSQL fallback. A 30-minute expiry cleanup use case removes session-owned answers. No identity, cross-device resume, recommendation result or production deployment is introduced.
+
 - **US-07.T05**: Added browser and API completion-boundary coverage for the behavioural questionnaire: incomplete answers are blocked, canonical body-only answers are persisted through the active-tab session, back navigation preserves the answer, and retryable save failures are announced without progressing. The tests assert no answer/session data appears in the browser URL. No durable PostgreSQL or Redis runtime is introduced; that remains US-07.T06.
 
 - **US-07.T06 (planned)**: Added the required PostgreSQL source-of-truth and Redis cache architecture for anonymous questionnaire sessions, including a 30-minute expiry/cleanup contract, normalized ERD/schema requirements, cache-fallback semantics and mandatory documentation synchronization. No runtime persistence behavior is implemented by this documentation change.
