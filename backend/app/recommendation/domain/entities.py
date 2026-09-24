@@ -14,6 +14,11 @@ class ClassificationState(StrEnum):
     NEUTRAL = "neutral"
 
 
+class RecommendationDecision(StrEnum):
+    RANKED = "ranked"
+    NEEDS_REVIEW = "needs_review"
+
+
 @dataclass(frozen=True)
 class LoanCandidate:
     loan_id: str
@@ -49,6 +54,39 @@ class NeedsReviewLoan:
 class RecommendationPartition:
     ranked: tuple[ScoredLoan, ...]
     needs_review: tuple[NeedsReviewLoan, ...]
+
+
+@dataclass(frozen=True)
+class TraceContribution:
+    """A redacted per-variable explanation; it contains category IDs, never raw answers."""
+
+    variable_id: str
+    preferred_category_id: str
+    candidate_category_id: str | None
+    classification_state: ClassificationState
+    preference_weight: Decimal
+    included_in_effective_weight: bool
+    matched: bool | None
+    neutral: bool
+    reason: str | None
+
+
+@dataclass(frozen=True)
+class RecommendationTrace:
+    """Versioned, deterministic evidence for one loan decision without user/session data."""
+
+    trace_version: str
+    data_version: str
+    config_version: str
+    loan_id: str
+    decision: RecommendationDecision
+    raw_score: Decimal | None
+    normalized_score: Decimal | None
+    effective_weight: Decimal
+    neutral_variables: tuple[str, ...]
+    ranking_excluded_reasons: tuple[str, ...]
+    contributions: tuple[TraceContribution, ...]
+    stable_hash: str
 
 
 class RecommendationInputError(ValueError):
