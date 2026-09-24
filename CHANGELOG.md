@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-08.T02**: Added the approved neutral/needs-review policy to the pure engine. Unknown, variable or blank deposit attributes are excluded from the score denominator; unknown core attributes receive no score and are deterministically returned in `needsReview` with typed reasons. No trace/API/UI behavior is added.
+
 - **US-08.T01**: Added a framework-free, deterministic weighted category-matching engine. It validates complete unique positive-weight preferences, rejects missing candidate variables and orders tied results by stable loan ID. It has no database, API, UI, cache, trace, neutral or needs-review policy; those remain later US-08 tasks.
 
 - **US-07.T06**: PostgreSQL now persists anonymous questionnaire sessions and canonical answers as the source of truth; Redis is a hashed-key, best-effort active-session cache with PostgreSQL fallback. A 30-minute expiry cleanup use case removes session-owned answers. No identity, cross-device resume, recommendation result or production deployment is introduced.
