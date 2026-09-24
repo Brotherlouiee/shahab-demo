@@ -2,12 +2,12 @@
 
 ## Active task
 
-- activeTaskId: US-07.T04
-- Status: completed — PR #30 is ready for merge after all required CI checks passed.
+- activeTaskId: US-07.T05
+- Status: US-07.T04 merged in PR #30; US-07.T05 is the next implementation task.
 - Base branch: main after merge of US-07.T03 / PR #29 (fcc12bd4e2eec4dbffeb6b6a1bae3a6432d6ad99).
 - Working branch: feature/us-07-questionnaire-ui-session
-- estimatedWorkScope: canonical behavioural-question UI, anonymous session transport, validation/error states, focused API/client tests and documentation.
-- actualScope: behavioural pages render their source-traceable canonical prompt/answer IDs; selection is required before forward navigation; each selected canonical answer is written only in an HTTP request body to an anonymous server-side session. Back navigation keeps answers only in the active React instance.
+- estimatedWorkScope: complete route/API/RTL/accessibility/E2E verification for the questionnaire flow; then the mandatory persistence/cache task US-07.T06.
+- actualScope: US-07.T04 is merged. The next task has not started; the following US-07.T06 is documented as mandatory PostgreSQL persistence with Redis cache and synchronized ERD/schema updates.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
@@ -132,7 +132,7 @@
 - The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
 - Local Python dependencies are temporarily unavailable in this sandbox after runtime reset; CI reinstalled from the locked project configuration and passed quality/migration checks. The browser gate passed in CI run #37 and is the authoritative E2E execution.
 - The local scratch checkout lacks the already-versioned `.agents/documents/*.unitext` raw files; no fallback or source alteration was introduced. GitHub Actions run #41 executed the authoritative exact-source gate against the complete repository successfully.
-- `US-07.T03` is merged in PR #29. `US-07.T04` is complete in PR #30 with GitHub Actions run #78 green; it is ready for merge. The next ordered task after merge is `US-07.T05`.
+- `US-07.T03` is merged in PR #29 and `US-07.T04` is merged in PR #30. The next ordered task is `US-07.T05`; after it, the new mandatory `US-07.T06` persists anonymous questionnaire sessions/answers in normalized PostgreSQL tables with Redis cache, 30-minute expiry/cleanup, restart/cache-failure tests and synchronized ERD/schema documentation before `US-08` may start.
 
 ## Compatibility pointer
 

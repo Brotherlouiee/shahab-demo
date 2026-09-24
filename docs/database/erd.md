@@ -37,13 +37,27 @@ erDiagram
     approval_records ||--o{ audit_events : records
 ```
 
+## session persistence و cache (تکمیل‌شونده در `US-07.T06`)
+
+```mermaid
+flowchart LR
+    UI["React tab memory"] --> API["FastAPI session service"]
+    API --> R["Redis: ephemeral cache"]
+    API --> PG["PostgreSQL: source of truth"]
+    R -. "cache miss / unavailable" .-> PG
+```
+
+`Redis` یک datastore رابطه‌ای نیست و بنابراین موجودیت مستقلی در ERD 3NF ندارد. منبع حقیقتِ پاسخ‌های معتبر و sessionهای هنوز‌منقضی‌نشده، دو جدول نرمال‌شدهٔ PostgreSQL یعنی `questionnaire_sessions` و `questionnaire_answers` است. Redis فقط cache قابل حذف و قابل بازسازی است؛ پاسخ‌ها یا شناسهٔ session نباید در key/log/metric آشکار شوند و خرابی/خالی‌شدن Redis نباید پاسخ معتبر را از بین ببرد.
+
+هر migration که رابطه، constraint یا ستون این دو جدول را تغییر دهد، باید همین ERD، `physical-schema-3nf.md`، data dictionary و تست schema را در همان PR به‌روزرسانی کند. این یک gate اجباری برای `US-07.T06` و تغییرهای بعدی مدل داده است.
+
 ## bounded contextها و قواعد رابطه
 
 | context | مالک | موجودیت‌ها | invariant مفهومی |
 | --- | --- | --- | --- |
 | کاتالوگ وام | تیم دادهٔ محصول | `lenders`, `loan_products`, `loan_product_versions`, `loan_terms`, `guarantee_types`, `deposit_account_types` | هویت `loan_products` پایدار است؛ هر شرایط قابل‌نمایش/امتیازدهی فقط در یک version immutable ثبت می‌شود. |
 | پیکربندی توصیه‌گر | مالک محصول | `loan_variables`, `variable_categories`, `questionnaire_versions`, `questions`, `answer_options`, `recommendation_config_versions`, `question_variable_weights`, `answer_category_compatibilities` | شناسه‌های canonical پایدارند؛ وزن و compatibility همیشه به نسخهٔ config/source قابل‌ردیابی متصل‌اند. |
-| جلسه و نتیجه | محصول و حریم خصوصی | `questionnaire_sessions`, `questionnaire_answers`, `recommendation_runs`, `recommendation_results`, `recommendation_exclusion_reasons` | نتیجه به دقیق‌ترین `loan_product_version` و `recommendation_config_version` وصل است؛ پاسخ خام به log منتقل نمی‌شود. |
+| جلسه و نتیجه | محصول و حریم خصوصی | `questionnaire_sessions`, `questionnaire_answers`, `recommendation_runs`, `recommendation_results`, `recommendation_exclusion_reasons` | PostgreSQL منبع حقیقت session/answer تا TTL است؛ Redis فقط cache موقت و قابل‌بازتولید؛ پاسخ خام به log منتقل نمی‌شود. |
 | حکمرانی داده | عملیات داده | `data_import_runs`, `data_source_files`, `staging_loan_rows`, `data_quality_issues`, `approval_records`, `audit_events` | raw immutable است؛ فقط import approved به serving تبدیل می‌شود؛ هر تبدیل provenance دارد. |
 
 ## تصمیم‌های مدل‌سازی و امنیت
