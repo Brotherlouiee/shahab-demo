@@ -2,16 +2,16 @@
 
 ## Active task
 
-- activeTaskId: US-08.T01
-- Status: US-07.T06 merged in PR #33; US-08.T01 implementation is complete; PR #34 is mergeable with GitHub Actions run #101 green (quality, PostgreSQL migration verification and Chromium E2E).
+- activeTaskId: US-08.T02
+- Status: US-07.T06 merged in PR #33; US-08.T02 implementation is complete; PR #35 is mergeable with GitHub Actions run #106 green (quality, PostgreSQL migration verification and Chromium E2E).
 - Base branch: main after merge of documentation PR #31 (70edfce6d40b85eee7f46902f67f23ba898c1994).
-- Working branch: feature/us-08-pure-recommendation-engine
-- estimatedWorkScope: implement the pure deterministic recommendation engine and focused tests; later US-08 tasks own neutral/needs-review, trace and application integration.
-- actualScope: US-08.T01 provides only framework-free entity and deterministic weighted-category scoring/ranking boundaries. It intentionally excludes HTTP, ORM, React, trace output, neutral/unknown behavior, needs-review classification and use-case composition.
+- Working branch: feature/us-08-neutral-needs-review
+- estimatedWorkScope: implement the approved neutral/needs-review classification and focused tests; later US-08 tasks own trace and application integration.
+- actualScope: US-08.T02 adds approved neutral denominator exclusion for the three deposit attributes and needs-review partitioning for unknown core attributes. It intentionally excludes HTTP, ORM, React, trace output and use-case composition.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: implemented focused API and Chromium browser completion tests; PR #34 / GitHub Actions run #101 passed quality, PostgreSQL migration verification and Chromium E2E; only normal PR review/merge remains.
+- Test plan: implemented focused API and Chromium browser completion tests; PR #35 / GitHub Actions run #106 passed quality, PostgreSQL migration verification and Chromium E2E; only normal PR review/merge remains.
 
 ## Evidence
 
