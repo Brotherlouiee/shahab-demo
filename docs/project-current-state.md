@@ -132,7 +132,7 @@
 - The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
 - Local Python dependencies are temporarily unavailable in this sandbox after runtime reset; CI reinstalled from the locked project configuration and passed quality/migration checks. The browser gate passed in CI run #37 and is the authoritative E2E execution.
 - The local scratch checkout lacks the already-versioned `.agents/documents/*.unitext` raw files; no fallback or source alteration was introduced. GitHub Actions run #41 executed the authoritative exact-source gate against the complete repository successfully.
-- Next task after this PR is merged: `US-07.T03` — short-lived anonymous session and server-side canonical-answer validation.
+- `US-07.T03` is in review: anonymous session contracts, canonical-answer validation and the 3NF session/answer migration are implemented. The next guide task after merge is `US-07.T04` — wire the questionnaire UI to its session/API boundary.
 
 ## Compatibility pointer
 
