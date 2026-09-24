@@ -37,7 +37,7 @@ erDiagram
     approval_records ||--o{ audit_events : records
 ```
 
-## session persistence و cache (تکمیل‌شونده در `US-07.T06`)
+## session persistence و cache (implemented in `US-07.T06`)
 
 ```mermaid
 flowchart LR
