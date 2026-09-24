@@ -3,7 +3,7 @@
 ## Active task
 
 - activeTaskId: US-07.T05
-- Status: US-07.T05 implementation is complete on `test/us-07-questionnaire-completion`; awaiting pull-request CI and review before merge.
+- Status: US-07.T05 implementation is complete; PR #32 is mergeable with GitHub Actions run #85 green (quality, PostgreSQL migration verification and Chromium E2E).
 - Base branch: main after merge of documentation PR #31 (70edfce6d40b85eee7f46902f67f23ba898c1994).
 - Working branch: test/us-07-questionnaire-completion
 - estimatedWorkScope: complete route/API/RTL/accessibility/E2E verification for the questionnaire flow; then the mandatory persistence/cache task US-07.T06.
@@ -11,7 +11,7 @@
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: implemented focused API and Chromium browser completion tests; PR CI must pass quality, PostgreSQL migration verification and Chromium E2E gates before merge.
+- Test plan: implemented focused API and Chromium browser completion tests; PR #32 / GitHub Actions run #85 passed quality, PostgreSQL migration verification and Chromium E2E; only normal PR review/merge remains.
 
 ## Evidence
 
