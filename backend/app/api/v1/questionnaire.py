@@ -1,4 +1,5 @@
 """HTTP boundary for temporary anonymous questionnaire progress."""
+
 from __future__ import annotations
 
 from typing import Annotated
