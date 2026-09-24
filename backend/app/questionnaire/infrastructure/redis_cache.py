@@ -6,6 +6,7 @@ import hashlib
 import json
 import uuid
 from datetime import datetime
+from typing import Any, cast
 
 from redis import Redis
 from redis.exceptions import RedisError
@@ -14,12 +15,12 @@ from backend.app.questionnaire.domain.session import QuestionnaireSession
 
 
 class RedisQuestionnaireSessionCache:
-    def __init__(self, client: Redis[str]) -> None:
+    def __init__(self, client: Redis) -> None:
         self._client = client
 
     def get(self, session_id: str) -> QuestionnaireSession | None:
         try:
-            payload = self._client.get(self._key(session_id))
+            payload = cast(str | bytes | None, cast(Any, self._client).get(self._key(session_id)))
         except RedisError:
             return None
         if not payload:
