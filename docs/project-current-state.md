@@ -3,7 +3,7 @@
 ## Active task
 
 - activeTaskId: US-07.T04
-- Status: implemented — PR and CI verification pending
+- Status: completed — PR #30 is ready for merge after all required CI checks passed.
 - Base branch: main after merge of US-07.T03 / PR #29 (fcc12bd4e2eec4dbffeb6b6a1bae3a6432d6ad99).
 - Working branch: feature/us-07-questionnaire-ui-session
 - estimatedWorkScope: canonical behavioural-question UI, anonymous session transport, validation/error states, focused API/client tests and documentation.
@@ -113,6 +113,7 @@
 | `npm run quality` | Passed; 67 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T02. |
 | `npm run quality` | Passed; 64 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-06.T01. |
 | `npm run quality` | Passed; 59 backend tests (2 PostgreSQL integration tests skipped locally), formatting, lint/type checks, validators, secret scan and production build completed after US-05.T05. |
+| GitHub Actions run #78 | Passed: quality gate (format/lint/Mypy, backend and client contracts, validators, secret scan, production build), PostgreSQL migration verification, and Chromium browser E2E on the final US-07.T04 commit. |
 
 ## Blockers and next task
 
@@ -131,7 +132,7 @@
 - The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
 - Local Python dependencies are temporarily unavailable in this sandbox after runtime reset; CI reinstalled from the locked project configuration and passed quality/migration checks. The browser gate passed in CI run #37 and is the authoritative E2E execution.
 - The local scratch checkout lacks the already-versioned `.agents/documents/*.unitext` raw files; no fallback or source alteration was introduced. GitHub Actions run #41 executed the authoritative exact-source gate against the complete repository successfully.
-- `US-07.T03` is merged in PR #29. `US-07.T04` is implemented on `feature/us-07-questionnaire-ui-session`; CI and PR review are the remaining completion gates. The next ordered task after merge is `US-07.T05`.
+- `US-07.T03` is merged in PR #29. `US-07.T04` is complete in PR #30 with GitHub Actions run #78 green; it is ready for merge. The next ordered task after merge is `US-07.T05`.
 
 ## Compatibility pointer
 
