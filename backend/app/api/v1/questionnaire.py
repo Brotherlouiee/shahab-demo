@@ -68,9 +68,13 @@ def write_answer(
         service.record_answer(session_id, QuestionnaireAnswer(question_id, payload.answer_id))
         return _session_response(service, session_id)
     except LookupError as error:
-        raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Questionnaire session was not found.") from error
+        raise ApiError(
+            status_code=404, code=ErrorCode.NOT_FOUND, message="Questionnaire session was not found."
+        ) from error
     except QuestionnaireSessionExpiredError as error:
-        raise ApiError(status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired.") from error
+        raise ApiError(
+            status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired."
+        ) from error
     except CanonicalAnswerValidationError as error:
         raise ApiError(
             status_code=422, code=ErrorCode.INVALID_REQUEST, message="Answer is not valid for this question."
