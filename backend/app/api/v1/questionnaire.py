@@ -48,9 +48,13 @@ def resume_session(
     try:
         return _session_response(service, session_id)
     except LookupError as error:
-        raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Questionnaire session was not found.") from error
+        raise ApiError(
+            status_code=404, code=ErrorCode.NOT_FOUND, message="Questionnaire session was not found."
+        ) from error
     except QuestionnaireSessionExpiredError as error:
-        raise ApiError(status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired.") from error
+        raise ApiError(
+            status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired."
+        ) from error
 
 
 @router.put("/sessions/{session_id}/answers/{question_id}", response_model=SessionResponse)
@@ -68,7 +72,9 @@ def write_answer(
     except QuestionnaireSessionExpiredError as error:
         raise ApiError(status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired.") from error
     except CanonicalAnswerValidationError as error:
-        raise ApiError(status_code=422, code=ErrorCode.INVALID_REQUEST, message="Answer is not valid for this question.") from error
+        raise ApiError(
+            status_code=422, code=ErrorCode.INVALID_REQUEST, message="Answer is not valid for this question."
+        ) from error
 
 
 def configuration_response(configuration: QuestionnaireConfiguration) -> QuestionnaireConfigurationResponse:
