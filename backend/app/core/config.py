@@ -62,10 +62,10 @@ class Settings(BaseSettings):
         return self.environment is not AppEnvironment.PRODUCTION
 
     @property
-    @property
     def redis_url_value(self) -> str | None:
         return self.redis_url.get_secret_value() if self.redis_url else None
 
+    @property
     def database_url_value(self) -> str | None:
         """Expose the database URL only to infrastructure composition code."""
         return self.database_url.get_secret_value() if self.database_url else None
