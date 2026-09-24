@@ -2,18 +2,21 @@
 
 ## Active task
 
-- activeTaskId: US-08.T02
-- Status: US-07.T06 merged in PR #33; US-08.T02 implementation is complete; PR #35 is mergeable with GitHub Actions run #106 green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of documentation PR #31 (70edfce6d40b85eee7f46902f67f23ba898c1994).
-- Working branch: feature/us-08-neutral-needs-review
-- estimatedWorkScope: implement the approved neutral/needs-review classification and focused tests; later US-08 tasks own trace and application integration.
-- actualScope: US-08.T02 adds approved neutral denominator exclusion for the three deposit attributes and needs-review partitioning for unknown core attributes. It intentionally excludes HTTP, ORM, React, trace output and use-case composition.
+- activeTaskId: US-08.T03
+- Status: US-08.T02 was merged in PR #35; US-08.T03 is active on a fresh branch. This task adds only a pure, versioned, redacted RecommendationTrace with focused tests.
+- Base branch: main after merge of US-08.T02 in PR #35 (8a6e20b8705f8f239c42606fbbf19c71a99e3802).
+- Working branch: feature/us-08-recommendation-trace
+- estimatedWorkScope: add a pure, deterministic RecommendationTrace contract, trace builder and focused tests for score, neutral and needs-review evidence. Use-case composition remains US-08.T04.
+- actualScope: in progress; no API, ORM, React, database, Redis, session data or use-case composition is permitted in US-08.T03.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: implemented focused API and Chromium browser completion tests; PR #35 / GitHub Actions run #106 passed quality, PostgreSQL migration verification and Chromium E2E; only normal PR review/merge remains.
+- Test plan: write deterministic unit tests for the redacted trace, neutral evidence, ranking-exclusion evidence and stable trace hash; then run the repository quality gate plus mandatory GitHub Actions checks.
 
 ## Evidence
+
+- US-08.T03 start checkpoint: estimated scope fits one small pure-domain PR; dependency US-08.T02 is merged; acceptance requires versioned/redacted trace evidence for each candidate decision, deterministic stable hashing, no raw session/user data, focused tests, documentation, CHANGELOG and green CI.
+- Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
 
 - The full canonical guide and its three golden rules were reread before this task.
 - The baseline, repository, and canonical-source inventories are complete.
