@@ -37,7 +37,7 @@ class SqlAlchemyQuestionnaireSessionRepository:
     def _ensure_reference_catalogue(self) -> tuple[uuid.UUID, dict[str, uuid.UUID], dict[str, uuid.UUID]]:
         version = self._session.scalar(select(QuestionnaireVersion).where(QuestionnaireVersion.version_code == self._configuration.questionnaire_version))
         if version is None:
-            version = QuestionnaireVersion(version_code=self._configuration.questionnaire_version, source_hash=self._configuration.source_hash); self._session.add(version); self._session.flush()
+            version = QuestionnaireVersion(version_code=self._configuration.questionnaire_version, source_hash=self._configuration.source_sha256); self._session.add(version); self._session.flush()
         questions: dict[str, uuid.UUID] = {}; answers: dict[str, uuid.UUID] = {}
         for order, configured_question in enumerate(self._configuration.questions, start=1):
             question = self._session.scalar(select(Question).where(Question.questionnaire_version_id == version.questionnaire_version_id, Question.canonical_id == configured_question.question_id))
