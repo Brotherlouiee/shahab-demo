@@ -2,17 +2,16 @@
 
 ## Active task
 
-- `activeTaskId`: `US-07.T02`
-- Status: `completed locally — route-adapter PR pending`
-- Base branch: `main` after merge of `US-07.T01` / PR #27.
-- Working branch: `feature/us-07-questionnaire-route-adapter`
-- `estimatedWorkScope`: one pure canonical route adapter, narrow active-prototype integration, route-contract tests and documentation/checkpoint.
-- `actualScope`: bidirectional immutable route mapping for `/question/3..12`, an explicit legacy screen-index bridge, correction of the prototype's off-by-one post-`S13` screen boundary, unit coverage against the canonical identifier contract, and one browser route assertion for every mapped path.
-- `completionBudget`: met; no answer persistence, session, API, source-data mutation, scoring, recommendation or deployment change.
-- Acceptance: the ten approved public paths map exactly and only to `Q1..Q6`, `S7`, `S8`, `S10`, `S13`; browser navigation stays compatible while indexes remain non-canonical implementation detail.
-- Dependency: all `US-06.*` and `US-07.T01` are merged.
-- Source/guide attestation: the full `SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` was reread; all six official UTF-16LE source files were reread and SHA-256-verified against `docs/source-inventory.md` before implementation.
-- Test plan: route contract unit tests, full quality gate, and CI Chromium verification of all existing loan-detail and new questionnaire-route browser scenarios.
+- activeTaskId: US-07.T04
+- Status: implemented — PR and CI verification pending
+- Base branch: main after merge of US-07.T03 / PR #29 (fcc12bd4e2eec4dbffeb6b6a1bae3a6432d6ad99).
+- Working branch: feature/us-07-questionnaire-ui-session
+- estimatedWorkScope: canonical behavioural-question UI, anonymous session transport, validation/error states, focused API/client tests and documentation.
+- actualScope: behavioural pages render their source-traceable canonical prompt/answer IDs; selection is required before forward navigation; each selected canonical answer is written only in an HTTP request body to an anonymous server-side session. Back navigation keeps answers only in the active React instance.
+- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
+- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
+- Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
+- Test plan: canonical configuration/client contract tests, API session lifecycle/ownership validation, full quality gate, PostgreSQL migration verification and Chromium E2E CI gates.
 
 ## Evidence
 
@@ -132,7 +131,7 @@
 - The current physical catalogue adapter has no persisted display-conditions column yet; until the approved import/persistence mapping supplies `LoanDetail.conditions_source_text`, the deployed endpoint correctly returns an empty `conditions` list rather than inventing terms. This is a data-hydration limitation, not a fallback to prototype data.
 - Local Python dependencies are temporarily unavailable in this sandbox after runtime reset; CI reinstalled from the locked project configuration and passed quality/migration checks. The browser gate passed in CI run #37 and is the authoritative E2E execution.
 - The local scratch checkout lacks the already-versioned `.agents/documents/*.unitext` raw files; no fallback or source alteration was introduced. GitHub Actions run #41 executed the authoritative exact-source gate against the complete repository successfully.
-- `US-07.T03` is in review: anonymous session contracts, canonical-answer validation and the 3NF session/answer migration are implemented. The next guide task after merge is `US-07.T04` — wire the questionnaire UI to its session/API boundary.
+- `US-07.T03` is merged in PR #29. `US-07.T04` is implemented on `feature/us-07-questionnaire-ui-session`; CI and PR review are the remaining completion gates. The next ordered task after merge is `US-07.T05`.
 
 ## Compatibility pointer
 
