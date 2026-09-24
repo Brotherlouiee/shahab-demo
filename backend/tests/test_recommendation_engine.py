@@ -44,7 +44,6 @@ class RecommendationEngineTests(unittest.TestCase):
                 ),
             )
 
-
     def test_core_unknown_is_excluded_without_a_score(self) -> None:
         from backend.app.recommendation.domain.entities import ClassificationState
         from backend.app.recommendation.engine.scoring import partition_loans
