@@ -1,7 +1,7 @@
-from datetime import datetime, timedelta, timezone
-from pathlib import Path
 import json
 import unittest
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
 
 from backend.app.questionnaire.domain.configuration import load_questionnaire_configuration
 from backend.app.questionnaire.domain.session import (
@@ -32,7 +32,7 @@ class QuestionnaireSessionTests(unittest.TestCase):
             validate_canonical_answer(self.configuration, QuestionnaireAnswer("Q1", "Q2.short_term"))
 
     def test_expired_session_is_blocked(self) -> None:
-        now = datetime(2026, 9, 24, tzinfo=timezone.utc)
+        now = datetime(2026, 9, 24, tzinfo=UTC)
         session = new_anonymous_session("v1", QuestionnaireRetentionPolicy(timedelta(minutes=30)), now)
         with self.assertRaises(QuestionnaireSessionExpiredError):
             session.ensure_active(now + timedelta(minutes=30))
