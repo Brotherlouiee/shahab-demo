@@ -1,16 +1,34 @@
-/** Body-only client for US-07.T04; answer IDs never enter browser paths. */
-export async function startQuestionnaireSession(apiBaseUrl) {
-  const response = await fetch(`${apiBaseUrl}/questionnaire/sessions`, { method: "POST" });
-  if (!response.ok) throw new Error("questionnaire_session_unavailable");
+/**
+ * HTTP-only adapter for anonymous questionnaire progress.
+ *
+ * The opaque session identifier stays in the caller's in-memory state. Neither
+ * it nor canonical answer values are encoded in a browser path or persisted in
+ * web storage.
+ */
+const apiBaseUrl = import.meta.env.VITE_SHAHAB_API_BASE_URL || "/api/v1";
+
+async function parseResponse(response, failureCode) {
+  if (!response.ok) throw new Error(failureCode);
   return response.json();
 }
 
-export async function saveQuestionnaireAnswer(apiBaseUrl, sessionId, questionId, answerId) {
-  const response = await fetch(`${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}/answers/${encodeURIComponent(questionId)}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ answerId }),
-  });
-  if (!response.ok) throw new Error("questionnaire_answer_rejected");
-  return response.json();
+export async function startQuestionnaireSession(fetchImpl = fetch) {
+  return parseResponse(
+    await fetchImpl(`${apiBaseUrl}/questionnaire/sessions`, { method: "POST" }),
+    "questionnaire_session_unavailable",
+  );
+}
+
+export async function saveQuestionnaireAnswer(sessionId, questionId, answerId, fetchImpl = fetch) {
+  return parseResponse(
+    await fetchImpl(
+      `${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}/answers/${encodeURIComponent(questionId)}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answerId }),
+      },
+    ),
+    "questionnaire_answer_rejected",
+  );
 }
