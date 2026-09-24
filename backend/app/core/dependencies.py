@@ -38,7 +38,6 @@ def _questionnaire_configuration() -> object:
         root / "data/contracts/questionnaire-configuration.v1.json",
         json.loads((root / "data/contracts/canonical-identifiers.v1.json").read_text(encoding="utf-8")),
     )
-
 _questionnaire_repository = InMemoryQuestionnaireSessionRepository()
 
 
