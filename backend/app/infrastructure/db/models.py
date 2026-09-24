@@ -15,6 +15,7 @@ from sqlalchemy import (
     CheckConstraint,
     DateTime,
     ForeignKey,
+    ForeignKeyConstraint,
     Integer,
     Numeric,
     String,
@@ -41,6 +42,11 @@ class PublicationState(enum.StrEnum):
     APPROVED = "approved"
     PUBLISHED = "published"
     RETIRED = "retired"
+
+
+class QuestionnaireSessionState(enum.StrEnum):
+    ACTIVE = "active"
+    EXPIRED = "expired"
 
 
 class Timestamped:
@@ -136,7 +142,10 @@ class Question(Base):
 
 class AnswerOption(Base):
     __tablename__ = "answer_options"
-    __table_args__ = (UniqueConstraint("question_id", "canonical_id", name="uq_answer_question_canonical"),)
+    __table_args__ = (
+        UniqueConstraint("question_id", "canonical_id", name="uq_answer_question_canonical"),
+        UniqueConstraint("question_id", "answer_option_id", name="uq_answer_option_question_id"),
+    )
     answer_option_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     question_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("questions.question_id"), nullable=False)
     canonical_id: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -180,3 +189,32 @@ class DataSourceFile(Timestamped, Base):
     )
     sha256: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     original_filename: Mapped[str] = mapped_column(String(255), nullable=False)
+
+
+class QuestionnaireSession(Timestamped, Base):
+    __tablename__ = "questionnaire_sessions"
+    __table_args__ = (CheckConstraint("expires_at > created_at", name="ck_questionnaire_session_expiry"),)
+    questionnaire_session_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    questionnaire_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("questionnaire_versions.questionnaire_version_id"), nullable=False
+    )
+    state: Mapped[QuestionnaireSessionState] = mapped_column(nullable=False, default=QuestionnaireSessionState.ACTIVE)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
+class QuestionnaireAnswer(Base):
+    __tablename__ = "questionnaire_answers"
+    __table_args__ = (
+        UniqueConstraint("questionnaire_session_id", "question_id", name="uq_questionnaire_answer_session_question"),
+        ForeignKeyConstraint(
+            ["question_id", "answer_option_id"],
+            ["answer_options.question_id", "answer_options.answer_option_id"],
+            name="fk_questionnaire_answer_option_belongs_to_question",
+        ),
+    )
+    questionnaire_answer_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    questionnaire_session_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("questionnaire_sessions.questionnaire_session_id"), nullable=False
+    )
+    question_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("questions.question_id"), nullable=False)
+    answer_option_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("answer_options.answer_option_id"), nullable=False)

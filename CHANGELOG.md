@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-07.T03**: Added anonymous questionnaire session contracts, canonical server-side answer validation, 3NF session/answer migration and an explicit retention-policy boundary. No HTTP answer route, URL answer transport, browser persistence, identity, scoring or automatic deletion policy was introduced.
+
 - **US-01.T01**: Reproducible baseline record and current-state checkpoint; the existing frontend dependency install and production build are verified without changing product behavior.
 - **US-01.T02**: Repository, route, dependency, mock, asset, and prototype-risk inventory without changing product behavior.
 - **US-01.T03**: Canonical-source inventory with Git/original hash comparison; a source-integrity mismatch is recorded as a blocker for data implementation.
