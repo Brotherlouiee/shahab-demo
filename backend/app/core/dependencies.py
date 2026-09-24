@@ -11,8 +11,8 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
 from redis import Redis
+from sqlalchemy.orm import Session
 
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.infrastructure.db.session import create_database_engine, create_session_factory
