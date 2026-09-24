@@ -2,12 +2,12 @@
 
 ## Active task
 
-- activeTaskId: US-07.T04
-- Status: completed — PR #30 is ready for merge after all required CI checks passed.
+- activeTaskId: US-07.T05
+- Status: US-07.T04 merged in PR #30; US-07.T05 is the next implementation task.
 - Base branch: main after merge of US-07.T03 / PR #29 (fcc12bd4e2eec4dbffeb6b6a1bae3a6432d6ad99).
 - Working branch: feature/us-07-questionnaire-ui-session
-- estimatedWorkScope: canonical behavioural-question UI, anonymous session transport, validation/error states, focused API/client tests and documentation.
-- actualScope: behavioural pages render their source-traceable canonical prompt/answer IDs; selection is required before forward navigation; each selected canonical answer is written only in an HTTP request body to an anonymous server-side session. Back navigation keeps answers only in the active React instance.
+- estimatedWorkScope: complete route/API/RTL/accessibility/E2E verification for the questionnaire flow; then the mandatory persistence/cache task US-07.T06.
+- actualScope: US-07.T04 is merged. The next task has not started; the following US-07.T06 is documented as mandatory PostgreSQL persistence with Redis cache and synchronized ERD/schema updates.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
