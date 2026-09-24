@@ -14,13 +14,21 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks: [internal]
 
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    networks: [internal]
+
   api:
     build:
       context: .
     env_file: .env
     environment:
       SHAHAB_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      SHAHAB_REDIS_URL: redis://redis:6379/0
     depends_on:
+      redis:
+        condition: service_started
       postgres:
         condition: service_healthy
     command: >
