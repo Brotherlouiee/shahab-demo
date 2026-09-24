@@ -5,7 +5,7 @@
  * it nor canonical answer values are encoded in a browser path or persisted in
  * web storage.
  */
-const apiBaseUrl = import.meta.env.VITE_SHAHAB_API_BASE_URL || "/api/v1";
+const apiBaseUrl = import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1";
 
 async function parseResponse(response, failureCode) {
   if (!response.ok) throw new Error(failureCode);
