@@ -52,7 +52,7 @@ def get_questionnaire_session_service(
     """Use PostgreSQL when configured; Redis is a best-effort cache, never the authority."""
     configuration = _questionnaire_configuration()
     cache = (
-        RedisQuestionnaireSessionCache(Redis.from_url(settings.redis_url_value)) if settings.redis_url_value else None
+        RedisQuestionnaireSessionCache(Redis.from_url(settings.redis_url_value, decode_responses=True)) if settings.redis_url_value else None
     )
     if not settings.database_url_value:
         yield QuestionnaireSessionService(
