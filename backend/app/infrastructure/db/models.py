@@ -198,9 +198,7 @@ class QuestionnaireSession(Timestamped, Base):
     questionnaire_version_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("questionnaire_versions.questionnaire_version_id"), nullable=False
     )
-    state: Mapped[QuestionnaireSessionState] = mapped_column(
-        nullable=False, default=QuestionnaireSessionState.ACTIVE
-    )
+    state: Mapped[QuestionnaireSessionState] = mapped_column(nullable=False, default=QuestionnaireSessionState.ACTIVE)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
 
