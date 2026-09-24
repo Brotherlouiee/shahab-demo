@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
+from decimal import Decimal
 from hashlib import sha256
 from json import dumps
-from decimal import Decimal
 
 from backend.app.recommendation.domain.entities import (
     AnswerPreference,
@@ -184,7 +185,7 @@ def _trace(
             for item in trace.contributions
         ],
     }
-    return RecommendationTrace(**{**trace.__dict__, "stable_hash": sha256(_canonical_json(payload).encode()).hexdigest()})
+    return replace(trace, stable_hash=sha256(_canonical_json(payload).encode()).hexdigest())
 
 
 def _canonical_json(payload: object) -> str:
