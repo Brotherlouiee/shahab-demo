@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-07.T04**: Connected the behavioural-questionnaire UI to source-traceable canonical questions and a body-only anonymous-session API. The approved retention contract is 30 minutes in the current browser tab; opaque session IDs and answers are not written to browser URLs or web storage. No recommendation score, result, identity or cross-device resume behaviour was added.
+
 - **US-07.T03**: Added anonymous questionnaire session contracts, canonical server-side answer validation, 3NF session/answer migration and an explicit retention-policy boundary. No HTTP answer route, URL answer transport, browser persistence, identity, scoring or automatic deletion policy was introduced.
 
 - **US-01.T01**: Reproducible baseline record and current-state checkpoint; the existing frontend dependency install and production build are verified without changing product behavior.
