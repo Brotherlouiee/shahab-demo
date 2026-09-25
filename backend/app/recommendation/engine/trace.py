@@ -74,7 +74,9 @@ def build_recommendation_trace(
                 classification_state=state,
                 preference_weight=preference.weight,
                 included_in_effective_weight=not is_core_excluded and not is_neutral,
-                matched=candidate_category_id == preference.category_id if not is_core_excluded and not is_neutral else None,
+                matched=candidate_category_id == preference.category_id
+                if not is_core_excluded and not is_neutral
+                else None,
                 neutral=is_neutral,
                 reason=reason,
             )
