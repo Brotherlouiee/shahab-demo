@@ -8,6 +8,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T01**: Added a presentation-only, validated recommendation result view model and contract for server-calculated results. It preserves server rank/order and score, keeps needs-review entries score-free with a generic uncertainty warning, and builds encoded same-origin detail routes. No API request, React result page, client-side scoring, filtering, persistence or session lookup is added.
+
+- **US-08.T05**: Added bounded golden and property-style regression coverage for deterministic ranking, neutral deposit exclusion, non-classified core review exclusion, score bounds, terminal output completeness and redacted trace determinism.
+
 - **US-08.T04**: Added a framework-free `RecommendLoans` use case that reads one approved immutable recommendation snapshot, returns deterministic ranked and needs-review outputs, and keeps one redacted trace per candidate aligned to the same data/config versions. No FastAPI, React, ORM, database write, session lookup or public result behavior is added.
 
 - **US-08.T03**: Added a pure, versioned and redacted `RecommendationTrace` with deterministic SHA-256 evidence. It records canonical category decisions, effective weight, neutral reasons and core ranking exclusions without session IDs, user identity, free-text answers, API, UI or persistence behavior.
