@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import unittest
 from decimal import Decimal
 from itertools import permutations, product
-import unittest
 
 from backend.app.recommendation.application.use_cases import RecommendLoans
 from backend.app.recommendation.domain.entities import (
