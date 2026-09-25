@@ -2,18 +2,22 @@
 
 ## Active task
 
-- activeTaskId: US-08.T04
-- Status: US-08.T03 was merged in PR #36; US-08.T04 is complete in PR #37 and mergeable with GitHub Actions #116 green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of US-08.T03 in PR #36 (d17e0941919bb4d4b58f3dd842b63b7643c3fba2).
-- Working branch: feature/us-08-recommend-loans-use-case
-- estimatedWorkScope: add a framework-free RecommendLoans use case, an approved recommendation-snapshot port and fake-repository tests. API/UI/ORM composition remains outside this task.
-- actualScope: US-08.T04 adds only the framework-free RecommendLoans use case and approved immutable snapshot port. It returns deterministic ranked/needs-review results plus one trace per candidate, with no HTTP, UI, ORM, database write or session lookup.
+- activeTaskId: US-08.T05
+- Status: US-08.T04 was merged in PR #37; US-08.T05 is in progress on `feature/us-08-recommendation-engine-test-gates`.
+- Base branch: main after merge of US-08.T04 in PR #37 (97960e2226eb4436bfb6139effdb192bcb1427a1).
+- Working branch: feature/us-08-recommendation-engine-test-gates
+- estimatedWorkScope: expand regression coverage for the framework-free recommendation engine with focused unit, bounded property-style and golden tests. API/UI/ORM/database/session composition remains outside this task.
+- actualScope: pending completion; no product behavior, transport, persistence or configuration mutation is planned.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
-- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
-- Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: fake-repository tests prove a single snapshot read, deterministic ranked/needs-review partition, one trace per candidate and invalid-snapshot rejection. GitHub Actions #116 passed all mandatory gates; only normal review/merge remains.
+- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation API/result UI, production deployment or source-data mutation.
+- Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
+- Test plan: golden tests cover complete ranking, neutral deposit behavior and every non-classified core state. Bounded property-style tests cover preference/candidate permutations, score bounds and terminal ranked-or-review plus trace coverage for every candidate.
 
 ## Evidence
+
+- US-08.T05 start checkpoint: dependency US-08.T04 is merged; scope fits one small test-only PR. Acceptance requires deterministic regression coverage for approved scoring policy, no boundary crossing into transport/persistence, documentation, CHANGELOG, checkpoint and green CI.
+- Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
+- US-08.T05 end checkpoint: pending test and CI evidence.
 
 - US-08.T04 start checkpoint: dependency US-08.T03 is merged; scope fits one small application-layer PR. Acceptance requires an approved immutable read snapshot, deterministic results/traces from the pure engine, no transport/ORM dependency, focused fake-repository tests, docs, CHANGELOG, checkpoint and green CI.
 - Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
