@@ -1,6 +1,6 @@
 # Project Continuity Document
 
-> **Document version:** 7.0
+> **Document version:** 8.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
 > **Prepared:** 2026-09-24  
@@ -13,6 +13,7 @@ This section supersedes any older status statement below that says the questionn
 
 ### Version history
 
+- **v8.0 — 2026-09-25:** `US-08.T03` is complete in mergeable PR #36. GitHub Actions #112 passed quality, PostgreSQL migration verification and Chromium E2E. Library and Git `docs/` copies are synchronized.
 - **v7.0 — 2026-09-24:** `US-08.T03` is implemented in PR #36: a pure, deterministic and redacted `RecommendationTrace` records canonical category evidence, neutral/exclusion reasons, effective weight, score when rankable and a stable SHA-256 hash. No session, identity, raw answer, API, UI or persistence data is included; CI evidence is pending final PR gate.
 - **v6.0 — 2026-09-24:** `US-08.T02` is complete in mergeable PR #35 with GitHub Actions #106 green. Library and Git `docs/` copies are synchronized.
 - **v5.0 — 2026-09-24:** Recorded the `US-08.T02` neutral/needs-review policy checkpoint.
@@ -30,7 +31,7 @@ This section supersedes any older status statement below that says the questionn
 - `US-07.T06` is now implemented in PR #33: PostgreSQL is composed as the durable source of truth when configured, Redis uses only SHA-256-derived opaque cache keys and a cache miss/outage falls back to PostgreSQL. The 30-minute cleanup use case deletes expired sessions and their answers idempotently. At this checkpoint, PR CI is still the mandatory final merge gate; no production deployment is claimed.
 - `US-08.T01` is complete in PR #34. It adds immutable recommendation inputs plus a pure deterministic weighted category-match score and stable ordering. GitHub Actions #101 is green for quality, PostgreSQL migration verification and Chromium E2E; PR #34 is mergeable. It has no database, FastAPI, React, trace, neutral/unknown, needs-review or recommendation endpoint behavior; those are later ordered tasks.
 - `US-08.T02` is complete in PR #35. Unknown/variable/blank deposit attributes are neutral and excluded from the score denominator. Unknown core ranking attributes are returned deterministically in `needsReview` with typed reasons and receive no score or rank. GitHub Actions #106 is green; PR #35 is mergeable. Trace output, API, UI and use-case composition remain later tasks.
-- `US-08.T03` is now implemented in PR #36. Its framework-free trace contract is versioned and redact-by-design: it records only canonical category IDs and calculation evidence, never questionnaire session IDs, user identity, free-text answers or raw source values. `US-08.T04` remains the next task for use-case composition.
+- `US-08.T03` is complete in PR #36. Its framework-free trace contract is versioned and redact-by-design: it records only canonical category IDs and calculation evidence, never questionnaire session IDs, user identity, free-text answers or raw source values. GitHub Actions #112 is green for quality, PostgreSQL migration verification and Chromium E2E; PR #36 is mergeable. `US-08.T04` remains the next task for use-case composition.
 
 ## 1. Project Identity
 
