@@ -3,7 +3,7 @@
 ## Active task
 
 - activeTaskId: US-09.T03
-- Status: US-09.T02 was merged in PR #40; US-09.T03 is complete on this branch and awaits its required PR/CI gate.
+- Status: US-09.T02 was merged in PR #40; US-09.T03 is complete in PR #41 and ready for normal review/merge. GitHub Actions #135 is green (quality, PostgreSQL migration verification and Chromium E2E).
 - Base branch: main after merge of US-09.T02 in PR #40 (46b9e0b45bea477398e9f8594e4f04449549986f).
 - Working branch: feature/us-09-recommendation-result-states
 - estimatedWorkScope: define the framework-free presentation state contract that distinguishes ranked, needs-review, no-candidate and zero-after-filter results, with focused Node tests. Filters, sort, accessibility/RTL and route wiring remain later tasks.
@@ -11,17 +11,17 @@
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory and does not enter URLs, storage or logs.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, manual filter/sort logic, accessibility/RTL hardening, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test evidence: focused Node display-state coverage is committed in the mandatory quality command; final GitHub Actions quality, PostgreSQL migration and Chromium gates are required before merge.
+- Test evidence: GitHub Actions #135 passed the display-state tests inside the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
 
 ## Evidence
 
 - US-09.T03 start checkpoint: dependency US-09.T02 is merged. Acceptance requires four distinct display outcomes with no scoring/reorder/filter logic moving into the browser boundary, plus contract tests, docs, CHANGELOG, checkpoint and green CI.
-- US-09.T03 end checkpoint: code review confirmed server score/order preservation, score-free needs-review handling, no invented/reordered filtered item, and no API/storage/session/identity/React-route boundary crossing. The next ordered task is US-09.T04 (manual filters, stable sort, accessibility and responsive RTL); final CI evidence is recorded in the task PR.
+- US-09.T03 end checkpoint: code review confirmed server score/order preservation, score-free needs-review handling, no invented/reordered filtered item, and no API/storage/session/identity/React-route boundary crossing. GitHub Actions #135 passed all required gates; the next ordered task is US-09.T04 (manual filters, stable sort, accessibility and responsive RTL).
 - Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
 
 
 - US-09.T02 start checkpoint: dependency US-09.T01 is merged. Acceptance requires a minimal API client that carries only the in-memory opaque session ID in a JSON body, validates server data through the existing view model, has no client score/order/filter logic, and includes tests, docs, CHANGELOG, checkpoint and green CI.
-- US-09.T02 end checkpoint: code review confirmed no response-body leakage, client-side score computation, reorder/filter, storage, session lookup, identity, raw-answer handling or React result page. The next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states); GitHub Actions #132 passed all required gates; the next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states).
+- US-09.T02 end checkpoint: code review confirmed no response-body leakage, client-side score computation, reorder/filter, storage, session lookup, identity, raw-answer handling or React result page. GitHub Actions #132 passed all required gates; the next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states).
 - Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
 
 
