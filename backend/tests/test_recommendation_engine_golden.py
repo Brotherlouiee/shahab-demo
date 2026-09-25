@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from itertools import permutations, product
 from decimal import Decimal
+from itertools import permutations, product
 import unittest
 
 from backend.app.recommendation.application.use_cases import RecommendLoans
@@ -39,24 +39,33 @@ class RecommendationEngineGoldenTests(unittest.TestCase):
 
     def test_golden_complete_catalogue_ranks_score_then_stable_loan_id(self) -> None:
         candidates = (
-            LoanCandidate("loan-z", {
-                "maxAmount": "amount.high",
-                "monthlyInstallment": "installment.low",
-                "maxRepaymentMonths": "term.long",
-                "interestRate": "interest.low",
-            }),
-            LoanCandidate("loan-b", {
-                "maxAmount": "amount.high",
-                "monthlyInstallment": "installment.low",
-                "maxRepaymentMonths": "term.long",
-                "interestRate": "interest.low",
-            }),
-            LoanCandidate("loan-a", {
-                "maxAmount": "amount.low",
-                "monthlyInstallment": "installment.low",
-                "maxRepaymentMonths": "term.short",
-                "interestRate": "interest.low",
-            }),
+            LoanCandidate(
+                "loan-z",
+                {
+                    "maxAmount": "amount.high",
+                    "monthlyInstallment": "installment.low",
+                    "maxRepaymentMonths": "term.long",
+                    "interestRate": "interest.low",
+                },
+            ),
+            LoanCandidate(
+                "loan-b",
+                {
+                    "maxAmount": "amount.high",
+                    "monthlyInstallment": "installment.low",
+                    "maxRepaymentMonths": "term.long",
+                    "interestRate": "interest.low",
+                },
+            ),
+            LoanCandidate(
+                "loan-a",
+                {
+                    "maxAmount": "amount.low",
+                    "monthlyInstallment": "installment.low",
+                    "maxRepaymentMonths": "term.short",
+                    "interestRate": "interest.low",
+                },
+            ),
         )
 
         partition = partition_loans(candidates, self.core_preferences)
@@ -69,7 +78,10 @@ class RecommendationEngineGoldenTests(unittest.TestCase):
                 score_loan(candidates[2], self.core_preferences),
             ),
         )
-        self.assertEqual([item.score for item in partition.ranked], [Decimal("1.000000"), Decimal("1.000000"), Decimal("0.400000")])
+        self.assertEqual(
+            [item.score for item in partition.ranked],
+            [Decimal("1.000000"), Decimal("1.000000"), Decimal("0.400000")],
+        )
         self.assertEqual(partition.needs_review, ())
 
     def test_golden_neutral_deposit_is_excluded_from_score_and_trace_weight(self) -> None:
@@ -148,16 +160,22 @@ class RecommendationEnginePropertyTests(unittest.TestCase):
             AnswerPreference("depositHoldingMonths", "deposit.none", Decimal("0.2")),
         )
         candidates = (
-            LoanCandidate("loan-b", {
-                "maxAmount": "amount.high",
-                "interestRate": "interest.low",
-                "depositHoldingMonths": "deposit.none",
-            }),
-            LoanCandidate("loan-a", {
-                "maxAmount": "amount.low",
-                "interestRate": "interest.low",
-                "depositHoldingMonths": "deposit.none",
-            }),
+            LoanCandidate(
+                "loan-b",
+                {
+                    "maxAmount": "amount.high",
+                    "interestRate": "interest.low",
+                    "depositHoldingMonths": "deposit.none",
+                },
+            ),
+            LoanCandidate(
+                "loan-a",
+                {
+                    "maxAmount": "amount.low",
+                    "interestRate": "interest.low",
+                    "depositHoldingMonths": "deposit.none",
+                },
+            ),
         )
         baseline = RecommendLoans(
             _SnapshotRepository(RecommendationSnapshot("serving.v1", "recommendation.v1", candidates))
@@ -200,7 +218,15 @@ class RecommendationEnginePropertyTests(unittest.TestCase):
                 ).score
                 self.assertGreaterEqual(score, Decimal("0"))
                 self.assertLessEqual(score, Decimal("1"))
-                self.assertIn(score, {Decimal("0.000000"), Decimal("0.400000"), Decimal("0.600000"), Decimal("1.000000")})
+                self.assertIn(
+                    score,
+                    {
+                        Decimal("0.000000"),
+                        Decimal("0.400000"),
+                        Decimal("0.600000"),
+                        Decimal("1.000000"),
+                    },
+                )
 
     def test_every_snapshot_candidate_has_exactly_one_terminal_output_and_trace(self) -> None:
         preferences = (
