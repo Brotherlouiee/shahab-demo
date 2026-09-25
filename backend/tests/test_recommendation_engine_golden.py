@@ -85,9 +85,7 @@ class RecommendationEngineGoldenTests(unittest.TestCase):
         self.assertEqual(partition.needs_review, ())
 
     def test_golden_neutral_deposit_is_excluded_from_score_and_trace_weight(self) -> None:
-        preferences = self.core_preferences + (
-            AnswerPreference("depositRequired", "deposit.required", Decimal("0.9")),
-        )
+        preferences = self.core_preferences + (AnswerPreference("depositRequired", "deposit.required", Decimal("0.9")),)
         candidate = LoanCandidate(
             "loan-neutral",
             {
