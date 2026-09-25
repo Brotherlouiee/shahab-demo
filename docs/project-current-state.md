@@ -3,21 +3,22 @@
 ## Active task
 
 - activeTaskId: US-09.T01
-- Status: US-08 was merged through PR #38; US-09.T01 is in progress on `feature/us-09-recommendation-result-view-model`.
+- Status: US-08 was merged through PR #38; US-09.T01 is complete in PR #39 and ready for normal review/merge. GitHub Actions #128 is green (quality, PostgreSQL migration verification and Chromium E2E).
 - Base branch: main after merge of US-08.T05 in PR #38 (af9f445817bd57f1c11e1d69fe62416f9b957849).
 - Working branch: feature/us-09-recommendation-result-view-model
 - estimatedWorkScope: add a framework-free frontend presentation view model and contract for server-calculated recommendation results, plus focused Node tests. API client/page wiring remains US-09.T02.
-- actualScope: pending completion; no API request, React result page, client-side score computation, filtering, persistence or session lookup is planned.
+- actualScope: US-09.T01 adds only a validated presentation view model and contract. It preserves the server's score and order, gives needs-review entries generic uncertainty copy without a score, and creates encoded same-origin detail routes. No API request, React result page, score calculation, filtering, persistence or session lookup is introduced.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation API/result UI, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: Node contract tests must prove that server score and order are preserved, needs-review has no score, details links are safely encoded, and incomplete read models are rejected without guesses.
+- Test evidence: GitHub Actions #128 passed the new Node view-model contract test within the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
 
 ## Evidence
 
 - US-09.T01 start checkpoint: US-08 is merged and its green engine regression gate is the dependency. Acceptance requires a small presentation-only view model, a documented server read-model contract, no score calculation or API/UI/persistence boundary crossing, tests, CHANGELOG, checkpoint and green CI.
-- Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs will be recorded in the task PR.
-- Continuity-document rule: do not update `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` until the end of the complete US-09 user story.
+- Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
+- US-09.T01 end checkpoint: code review confirmed no API call, React page, client score calculation, reorder/filter, persistence, session, identity or raw-answer boundary crossing. GitHub Actions #128 passed all required gates; next ordered task is US-09.T02 (API client and actual response integration).
+- Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
 
 - US-08.T05 start checkpoint: dependency US-08.T04 is merged; scope fits one small test-only PR. Acceptance requires deterministic regression coverage for approved scoring policy, no boundary crossing into transport/persistence, documentation, CHANGELOG, checkpoint and green CI.
 - Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
