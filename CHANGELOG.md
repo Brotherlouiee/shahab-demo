@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-08.T04**: Added a framework-free `RecommendLoans` use case that reads one approved immutable recommendation snapshot, returns deterministic ranked and needs-review outputs, and keeps one redacted trace per candidate aligned to the same data/config versions. No FastAPI, React, ORM, database write, session lookup or public result behavior is added.
+
 - **US-08.T03**: Added a pure, versioned and redacted `RecommendationTrace` with deterministic SHA-256 evidence. It records canonical category decisions, effective weight, neutral reasons and core ranking exclusions without session IDs, user identity, free-text answers, API, UI or persistence behavior.
 
 - **US-08.T02**: Added the approved neutral/needs-review policy to the pure engine. Unknown, variable or blank deposit attributes are excluded from the score denominator; unknown core attributes receive no score and are deterministically returned in `needsReview` with typed reasons. No trace/API/UI behavior is added.
