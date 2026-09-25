@@ -89,5 +89,25 @@ class RecommendationTrace:
     stable_hash: str
 
 
+@dataclass(frozen=True)
+class RecommendationSnapshot:
+    """One immutable approved serving/configuration read used for a complete run."""
+
+    data_version: str
+    config_version: str
+    candidates: tuple[LoanCandidate, ...]
+
+
+@dataclass(frozen=True)
+class RecommendationRun:
+    """Application output that keeps ranked, review and explanation data aligned."""
+
+    data_version: str
+    config_version: str
+    ranked_recommendations: tuple[ScoredLoan, ...]
+    needs_review: tuple[NeedsReviewLoan, ...]
+    traces: tuple[RecommendationTrace, ...]
+
+
 class RecommendationInputError(ValueError):
     """Raised when a score cannot be computed from a complete valid input."""
