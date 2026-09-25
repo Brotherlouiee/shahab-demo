@@ -1,6 +1,6 @@
 # Project Continuity Document
 
-> **Document version:** 9.0
+> **Document version:** 10.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
 > **Prepared:** 2026-09-24  
@@ -13,6 +13,7 @@ This section supersedes any older status statement below that says the questionn
 
 ### Version history
 
+- **v10.0 — 2026-09-25:** `US-08.T05` is complete in mergeable PR #38. It adds bounded golden and property-style regression checks for ranking, neutral policy, core exclusions, terminal completeness and redacted trace determinism. GitHub Actions #123 is green; it adds no API, UI, ORM, database-write or session behaviour. Library and Git `docs/` copies are synchronized.
 - **v9.0 — 2026-09-25:** `US-08.T04` is complete in mergeable PR #37. The pure `RecommendLoans` use case reads one approved immutable snapshot and returns aligned ranked/needs-review outputs with one redacted trace per candidate. GitHub Actions #116 is green; Library and Git `docs/` copies are synchronized.
 - **v8.0 — 2026-09-25:** `US-08.T03` is complete in mergeable PR #36. GitHub Actions #112 passed quality, PostgreSQL migration verification and Chromium E2E. Library and Git `docs/` copies are synchronized.
 - **v7.0 — 2026-09-24:** `US-08.T03` is implemented in PR #36: a pure, deterministic and redacted `RecommendationTrace` records canonical category evidence, neutral/exclusion reasons, effective weight, score when rankable and a stable SHA-256 hash. No session, identity, raw answer, API, UI or persistence data is included; CI evidence is pending final PR gate.
@@ -33,7 +34,7 @@ This section supersedes any older status statement below that says the questionn
 - `US-08.T01` is complete in PR #34. It adds immutable recommendation inputs plus a pure deterministic weighted category-match score and stable ordering. GitHub Actions #101 is green for quality, PostgreSQL migration verification and Chromium E2E; PR #34 is mergeable. It has no database, FastAPI, React, trace, neutral/unknown, needs-review or recommendation endpoint behavior; those are later ordered tasks.
 - `US-08.T02` is complete in PR #35. Unknown/variable/blank deposit attributes are neutral and excluded from the score denominator. Unknown core ranking attributes are returned deterministically in `needsReview` with typed reasons and receive no score or rank. GitHub Actions #106 is green; PR #35 is mergeable. Trace output, API, UI and use-case composition remain later tasks.
 - `US-08.T03` is complete in PR #36. Its framework-free trace contract is versioned and redact-by-design: it records only canonical category IDs and calculation evidence, never questionnaire session IDs, user identity, free-text answers or raw source values. GitHub Actions #112 is green for quality, PostgreSQL migration verification and Chromium E2E; PR #36 is mergeable. `US-08.T04` remains the next task for use-case composition.
-- `US-08.T04` is complete in PR #37. `RecommendLoans` consumes exactly one approved immutable data/configuration snapshot, returns deterministic ranked and needs-review results and keeps one redacted trace per candidate tied to that snapshot's versions. It has no HTTP, UI, ORM, database-write or session-lookup behaviour. GitHub Actions #116 is green and PR #37 is mergeable; `US-08.T05` remains the next task for expanded unit/property/golden coverage.
+- `US-08.T04` is merged in PR #37. `US-08.T05` is complete in PR #38: bounded golden/property-style coverage now protects deterministic ranking, neutral handling, non-classified core exclusion, terminal completeness and trace determinism. GitHub Actions #123 is green; no API, UI, ORM, database-write or session-lookup behaviour is included. The next ordered work is `US-09.T01`.
 
 ## 1. Project Identity
 
