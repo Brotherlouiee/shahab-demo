@@ -2,18 +2,23 @@
 
 ## Active task
 
-- activeTaskId: US-09.T01
-- Status: US-08 was merged through PR #38; US-09.T01 is complete in PR #39 and ready for normal review/merge. GitHub Actions #128 is green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of US-08.T05 in PR #38 (af9f445817bd57f1c11e1d69fe62416f9b957849).
-- Working branch: feature/us-09-recommendation-result-view-model
-- estimatedWorkScope: add a framework-free frontend presentation view model and contract for server-calculated recommendation results, plus focused Node tests. API client/page wiring remains US-09.T02.
-- actualScope: US-09.T01 adds only a validated presentation view model and contract. It preserves the server's score and order, gives needs-review entries generic uncertainty copy without a score, and creates encoded same-origin detail routes. No API request, React result page, score calculation, filtering, persistence or session lookup is introduced.
-- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
-- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation API/result UI, production deployment or source-data mutation.
+- activeTaskId: US-09.T02
+- Status: US-09.T01 was merged in PR #39; US-09.T02 is complete in PR #40 and ready for normal review/merge. GitHub Actions #132 is green (quality, PostgreSQL migration verification and Chromium E2E).
+- Base branch: main after merge of US-09.T01 in PR #39 (437f6953c816646304e005c668677ee77472d75a).
+- Working branch: feature/us-09-recommendation-api-client
+- estimatedWorkScope: add one narrow, body-only recommendation-result API client and its contract tests. Result-page/UI state wiring remains US-09.T03.
+- actualScope: the client posts only the opaque active-tab session ID to the versioned recommendation result route, validates the server response with the T01 view model, and turns failed/malformed responses into generic typed errors. No browser scoring, reordering, filtering, persistence, session lookup, React result page or static recommendation data is introduced.
+- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input beyond the body-only API call.
+- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation result UI/state variants, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test evidence: GitHub Actions #128 passed the new Node view-model contract test within the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
+- Test evidence: GitHub Actions #132 passed the client-contract test inside the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
 
 ## Evidence
+
+- US-09.T02 start checkpoint: dependency US-09.T01 is merged. Acceptance requires a minimal API client that carries only the in-memory opaque session ID in a JSON body, validates server data through the existing view model, has no client score/order/filter logic, and includes tests, docs, CHANGELOG, checkpoint and green CI.
+- US-09.T02 end checkpoint: code review confirmed no response-body leakage, client-side score computation, reorder/filter, storage, session lookup, identity, raw-answer handling or React result page. The next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states); GitHub Actions #132 passed all required gates; the next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states).
+- Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
+
 
 - US-09.T01 start checkpoint: US-08 is merged and its green engine regression gate is the dependency. Acceptance requires a small presentation-only view model, a documented server read-model contract, no score calculation or API/UI/persistence boundary crossing, tests, CHANGELOG, checkpoint and green CI.
 - Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.

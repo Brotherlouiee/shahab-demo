@@ -22,3 +22,18 @@ database details.
 It is an ordered array of plain-text bullets produced by the US-06.T03 parser;
 the original raw field is not serialised. Clients must render each item as text,
 never through `innerHTML` or an equivalent unsafe HTML path.
+
+
+## US-09.T02 recommendation-result client contract
+
+The active result client calls `POST /api/v1/recommendations` with exactly one
+JSON body field, `sessionId`. The opaque anonymous-session ID stays in active-tab
+memory before this call; it must not appear in a URL, browser storage, log, or
+response-derived link. Canonical answers, score inputs, sort/filter state, and
+data/config selectors are never client-supplied.
+
+A successful response uses the documented recommendation result read model:
+`dataVersion`, `configVersion`, server-ordered `rankedRecommendations`, and
+score-free `needsReview` entries. The client validates it before presentation.
+A non-2xx or malformed response becomes a generic typed client error; it must not
+be converted into a fabricated result or expose the server error body.
