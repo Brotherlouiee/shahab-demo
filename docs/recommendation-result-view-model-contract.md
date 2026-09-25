@@ -2,13 +2,13 @@
 
 ## Scope
 
-`US-09.T01` defines the presentation boundary for a recommendation result.
-It does not add a recommendation API, mount a result page, query a session, alter
-the score, persist a result or compute any recommendation in the browser.
+`US-09.T01` defines the presentation boundary and `US-09.T02` adds its narrow
+client transport adapter. Neither task mounts a result page, alters the score,
+persists a result or computes a recommendation in the browser.
 
 ## Required server read model
 
-The future API integration (`US-09.T02`) must provide one read model with:
+The recommendation API response consumed by `US-09.T02` must provide one read model with:
 
 - `dataVersion` and `configVersion`, both non-blank strings;
 - `rankedRecommendations`, ordered by the server, where each item has
@@ -35,7 +35,6 @@ financial compatibility reason.
 
 ## Deferred work
 
-- `US-09.T02`: API client and actual response integration.
 - `US-09.T03`: distinct UI states for ranked, needs-review, no-candidate and
   zero-after-filter.
 - `US-09.T04`: manual filters, stable sort, accessibility and responsive RTL.
