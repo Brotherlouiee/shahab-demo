@@ -2,18 +2,21 @@
 
 ## Active task
 
-- activeTaskId: US-08.T03
-- Status: US-08.T02 was merged in PR #35; US-08.T03 is complete in PR #36 and mergeable with GitHub Actions #112 green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of US-08.T02 in PR #35 (8a6e20b8705f8f239c42606fbbf19c71a99e3802).
-- Working branch: feature/us-08-recommendation-trace
-- estimatedWorkScope: add a pure, deterministic RecommendationTrace contract, trace builder and focused tests for score, neutral and needs-review evidence. Use-case composition remains US-08.T04.
-- actualScope: US-08.T03 adds only pure trace entities and a deterministic trace builder. It records category evidence, effective weight, neutral/exclusion reasons and a stable SHA-256 hash. It excludes API, ORM, React, database, Redis, sessions, user identity, raw answers and use-case composition.
+- activeTaskId: US-08.T04
+- Status: US-08.T03 was merged in PR #36; US-08.T04 is active on a fresh branch. This task composes the pure recommendation engine through an approved read-snapshot port only.
+- Base branch: main after merge of US-08.T03 in PR #36 (d17e0941919bb4d4b58f3dd842b63b7643c3fba2).
+- Working branch: feature/us-08-recommend-loans-use-case
+- estimatedWorkScope: add a framework-free RecommendLoans use case, an approved recommendation-snapshot port and fake-repository tests. API/UI/ORM composition remains outside this task.
+- actualScope: in progress; no FastAPI endpoint, React result screen, SQLAlchemy adapter, database migration, session lookup or production deployment is permitted in US-08.T04.
 - Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input.
 - Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation score/result, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test plan: focused tests cover the redacted trace, neutral evidence, ranking-exclusion evidence and stable hash. GitHub Actions #112 passed quality, PostgreSQL migration verification and Chromium E2E; only normal review/merge remains.
+- Test plan: prove snapshot versions, deterministic ranked/needs-review partition and one trace per candidate with a fake repository; then run repository quality and GitHub Actions gates.
 
 ## Evidence
+
+- US-08.T04 start checkpoint: dependency US-08.T03 is merged; scope fits one small application-layer PR. Acceptance requires an approved immutable read snapshot, deterministic results/traces from the pure engine, no transport/ORM dependency, focused fake-repository tests, docs, CHANGELOG, checkpoint and green CI.
+- Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
 
 - US-08.T03 start checkpoint: estimated scope fits one small pure-domain PR; dependency US-08.T02 is merged; acceptance requires versioned/redacted trace evidence for each candidate decision, deterministic stable hashing, no raw session/user data, focused tests, documentation, CHANGELOG and green CI.
 - Full canonical guide, `docs/recommendation-data-decisions.md`, and all six verified UTF-16LE official sources were reread before implementation; source blob SHAs are recorded in the task PR.
