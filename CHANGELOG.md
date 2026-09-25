@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T03**: Added a validated display-state contract that distinguishes ranked options, score-free needs-review options, no-candidate results and zero results after later manual filters. It preserves server order and rejects reordered or invented filtered items; no filter/sort computation or result-page wiring is added.
+
 - **US-09.T02**: Added a narrow recommendation-result API client that posts only the opaque active-tab session ID in the JSON body, validates the server read model through the US-09.T01 view model, and turns transport/malformed-response failures into safe typed client errors. No browser scoring, reordering, filtering, persistence or result-page rendering is added.
 
 - **US-09.T01**: Added a presentation-only, validated recommendation result view model and contract for server-calculated results. It preserves server rank/order and score, keeps needs-review entries score-free with a generic uncertainty warning, and builds encoded same-origin detail routes. No API request, React result page, client-side scoring, filtering, persistence or session lookup is added.
