@@ -14,6 +14,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `frontend/src/features/loan-details` | loan-detail presentation | HTML rendering of raw conditions, scoring |
 | `src/features/loan-details` | active prototype's loan-detail API client and RTL presentation states | raw source parsing, scoring, persistence, `innerHTML` rendering |
 | `backend/app/recommendation/domain` | entities/value contracts/pure parsing | FastAPI, ORM, React imports |
+| `backend/app/recommendation/application` | RecommendLoans use case and approved read-snapshot port | FastAPI, ORM, session resolution, UI rendering |
 | `backend/app/domain` | framework-free shared domain value types | FastAPI, ORM, transport, infrastructure |
 | `backend/app/application` | use cases and dependency ports | FastAPI, ORM, direct adapter imports |
 | `backend/app/infrastructure` | outbound adapter implementations | domain/application dependency reversal |
