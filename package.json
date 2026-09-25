@@ -22,8 +22,9 @@
     "validate:conceptual-data-model": "python scripts/validate_conceptual_data_model.py",
     "validate:physical-schema-spec": "python scripts/validate_physical_schema_spec.py",
     "validate:questionnaire-configuration": "python scripts/validate_questionnaire_configuration.py",
-    "quality": "npm run format:check && npm run lint:python && npm run typecheck:python && npm run test:backend && npm run test:questionnaire-route-map && npm run test:questionnaire-session-client && npm run validate:canonical-identifiers && npm run validate:architecture-scaffold && npm run validate:import-boundaries && npm run validate:conceptual-data-model && npm run validate:physical-schema-spec && npm run validate:questionnaire-configuration && npm run scan:secrets && npm run build",
-    "test:questionnaire-session-client": "node --test tests/unit/questionnaire-session-client.test.mjs"
+    "quality": "npm run format:check && npm run lint:python && npm run typecheck:python && npm run test:backend && npm run test:questionnaire-route-map && npm run test:questionnaire-session-client && npm run test:recommendation-result-view-model && npm run validate:canonical-identifiers && npm run validate:architecture-scaffold && npm run validate:import-boundaries && npm run validate:conceptual-data-model && npm run validate:physical-schema-spec && npm run validate:questionnaire-configuration && npm run scan:secrets && npm run build",
+    "test:questionnaire-session-client": "node --test tests/unit/questionnaire-session-client.test.mjs",
+    "test:recommendation-result-view-model": "node --test tests/unit/recommendation-result-view-model.test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
