@@ -52,14 +52,8 @@ def build_recommendation_trace(
         _validate_preference(preference, seen_variables)
         state = candidate.state_for(preference.variable_id)
         candidate_category_id = candidate.categories.get(preference.variable_id)
-        is_core_excluded = (
-            preference.variable_id in CORE_VARIABLE_IDS
-            and state is not ClassificationState.CLASSIFIED
-        )
-        is_neutral = (
-            preference.variable_id in NEUTRAL_VARIABLE_IDS
-            and state is not ClassificationState.CLASSIFIED
-        )
+        is_core_excluded = preference.variable_id in CORE_VARIABLE_IDS and state is not ClassificationState.CLASSIFIED
+        is_neutral = preference.variable_id in NEUTRAL_VARIABLE_IDS and state is not ClassificationState.CLASSIFIED
 
         if is_core_excluded:
             reason = f"{preference.variable_id}:{state}"
@@ -80,11 +74,7 @@ def build_recommendation_trace(
                 classification_state=state,
                 preference_weight=preference.weight,
                 included_in_effective_weight=not is_core_excluded and not is_neutral,
-                matched=(
-                    candidate_category_id == preference.category_id
-                    if not is_core_excluded and not is_neutral
-                    else None
-                ),
+                matched=candidate_category_id == preference.category_id if not is_core_excluded and not is_neutral else None,
                 neutral=is_neutral,
                 reason=reason,
             )
