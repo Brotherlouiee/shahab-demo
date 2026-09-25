@@ -33,9 +33,12 @@ financial compatibility reason.
   source values, session identifiers and trace hashes are not part of this view
   model.
 
+## Display states
+
+`US-09.T03` defines distinct ranked, needs-review-only, no-candidate and
+zero-after-filter presentation states in `docs/recommendation-result-states.md`.
+
 ## Deferred work
 
-- `US-09.T03`: distinct UI states for ranked, needs-review, no-candidate and
-  zero-after-filter.
 - `US-09.T04`: manual filters, stable sort, accessibility and responsive RTL.
 - `US-09.T05`: complete browser journey.

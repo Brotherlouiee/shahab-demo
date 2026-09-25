@@ -2,18 +2,23 @@
 
 ## Active task
 
-- activeTaskId: US-09.T02
-- Status: US-09.T01 was merged in PR #39; US-09.T02 is complete in PR #40 and ready for normal review/merge. GitHub Actions #132 is green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of US-09.T01 in PR #39 (437f6953c816646304e005c668677ee77472d75a).
-- Working branch: feature/us-09-recommendation-api-client
-- estimatedWorkScope: add one narrow, body-only recommendation-result API client and its contract tests. Result-page/UI state wiring remains US-09.T03.
-- actualScope: the client posts only the opaque active-tab session ID to the versioned recommendation result route, validates the server response with the T01 view model, and turns failed/malformed responses into generic typed errors. No browser scoring, reordering, filtering, persistence, session lookup, React result page or static recommendation data is introduced.
-- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory; it is absent from URLs, localStorage, sessionStorage, logs and recommendation input beyond the body-only API call.
-- Explicit exclusions: no identity, OTP integration, cross-device resume, recommendation result UI/state variants, production deployment or source-data mutation.
+- activeTaskId: US-09.T03
+- Status: US-09.T02 was merged in PR #40; US-09.T03 is complete on this branch and awaits its required PR/CI gate.
+- Base branch: main after merge of US-09.T02 in PR #40 (46b9e0b45bea477398e9f8594e4f04449549986f).
+- Working branch: feature/us-09-recommendation-result-states
+- estimatedWorkScope: define the framework-free presentation state contract that distinguishes ranked, needs-review, no-candidate and zero-after-filter results, with focused Node tests. Filters, sort, accessibility/RTL and route wiring remain later tasks.
+- actualScope: adds a state mapper for a validated server result. It keeps ranked order/score intact, retains needs-review items as score-free, distinguishes empty causes with specific Persian copy, and accepts only order-preserving filter output supplied by a later boundary. No API request, browser scoring, filter/sort calculation, persistence or React result route is introduced.
+- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory and does not enter URLs, storage or logs.
+- Explicit exclusions: no identity, OTP integration, cross-device resume, manual filter/sort logic, accessibility/RTL hardening, production deployment or source-data mutation.
 - Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test evidence: GitHub Actions #132 passed the client-contract test inside the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
+- Test evidence: focused Node display-state coverage is committed in the mandatory quality command; final GitHub Actions quality, PostgreSQL migration and Chromium gates are required before merge.
 
 ## Evidence
+
+- US-09.T03 start checkpoint: dependency US-09.T02 is merged. Acceptance requires four distinct display outcomes with no scoring/reorder/filter logic moving into the browser boundary, plus contract tests, docs, CHANGELOG, checkpoint and green CI.
+- US-09.T03 end checkpoint: code review confirmed server score/order preservation, score-free needs-review handling, no invented/reordered filtered item, and no API/storage/session/identity/React-route boundary crossing. The next ordered task is US-09.T04 (manual filters, stable sort, accessibility and responsive RTL); final CI evidence is recorded in the task PR.
+- Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
+
 
 - US-09.T02 start checkpoint: dependency US-09.T01 is merged. Acceptance requires a minimal API client that carries only the in-memory opaque session ID in a JSON body, validates server data through the existing view model, has no client score/order/filter logic, and includes tests, docs, CHANGELOG, checkpoint and green CI.
 - US-09.T02 end checkpoint: code review confirmed no response-body leakage, client-side score computation, reorder/filter, storage, session lookup, identity, raw-answer handling or React result page. The next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states); GitHub Actions #132 passed all required gates; the next ordered task is US-09.T03 (distinct ranked, needs-review, no-candidate and zero-after-filter presentation states).
