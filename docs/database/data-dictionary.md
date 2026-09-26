@@ -45,3 +45,11 @@
 | `answer_option_weights` | PK config/answer/variable؛ مقدار ۰..۱ | وزن پاسخ از جدول تبدیل، با سطر منبع |
 | `answer_category_compatibilities` | PK config/answer/category؛ مقدار ۰..۱ | ضریب جدول تناسب یک‌به‌یک، با سطر/ستون |
 | `serving_catalogue_versions` / `serving_catalogue_members` | یک active در PostgreSQL؛ عضویت نسخهٔ وام | pointer و membership انتشار نسخه‌دار با actor/reason |
+
+## US-09.T05B
+
+| جدول | قید | خواندن |
+| --- | --- | --- |
+| `loan_serving_facts` | PK/FK همان `loan_product_version_id`؛ ماه/نسبت نامنفی | نیاز به سپرده، ماه خواب، نسبت، ضمانت، حساب و logo reference فقط از نسخهٔ منتشرشده؛ مقدار نامعلوم عددی `NULL` است. |
+
+آداپتور فقط اعضای active catalogue با نسخهٔ `PUBLISHED` و source file همان catalogue را می‌خواند؛ شرط همان loan version از `loan_conditions` می‌آید.
