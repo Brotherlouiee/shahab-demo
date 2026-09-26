@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
-import questionnaire from "../../data/contracts/questionnaire-configuration.v1.json";
+import { readFileSync } from "node:fs";
+const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/questionnaire-configuration.v1.json", import.meta.url), "utf8"));
 
 const sessionId = "opaque-live-flow-test";
 const response = {
