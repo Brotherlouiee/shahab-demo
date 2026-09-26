@@ -24,6 +24,12 @@ EXPECTED_TABLES = {
     "questions",
     "recommendation_config_versions",
     "variable_categories",
+    "loan_category_assignments",
+    "loan_conditions",
+    "answer_option_weights",
+    "answer_category_compatibilities",
+    "serving_catalogue_versions",
+    "serving_catalogue_members",
 }
 EXPECTED_INDEX = "ix_loan_products_lender_id"
 
@@ -99,3 +105,73 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         self.assertIn(EXPECTED_INDEX, str(plan))
         self.assertNotEqual(plan["Node Type"], "Seq Scan")
+
+    def test_official_materialization_has_a_durable_active_version(self) -> None:
+        import json
+        from pathlib import Path
+
+        from sqlalchemy import func, select
+        from sqlalchemy.orm import Session
+
+        from backend.app.data_pipeline.infrastructure.materialize_official_sources import materialize_official_sources
+        from backend.app.infrastructure.db.models import (
+            AnswerCategoryCompatibility,
+            LoanCategoryAssignment,
+            LoanConditions,
+            ServingCatalogueVersion,
+        )
+        from scripts.build_t05a_import_manifest import build_manifest
+        from scripts.build_t05a_recommendation_config import build_config
+        from scripts.materialize_t05a import audit_database
+
+        self._alembic("upgrade", "head")
+        root = Path(__file__).parents[2]
+        questionnaire = json.loads((root / "data/contracts/questionnaire-configuration.v1.json").read_text())
+        identifiers = json.loads((root / "data/contracts/canonical-identifiers.v1.json").read_text())
+        engine = create_engine(str(DATABASE_URL))
+        with Session(engine) as session:
+            with session.begin():
+                first = materialize_official_sources(
+                    session,
+                    loan_manifest=build_manifest(),
+                    config_manifest=build_config(),
+                    questionnaire=questionnaire,
+                    identifiers=identifiers,
+                    actor_reference="ci-fixture",
+                    approval_reason="verified source integration test",
+                )
+            self.assertEqual((first.loan_count, first.rankable_count, first.needs_review_count), (102, 88, 14))
+            self.assertEqual(session.scalar(select(func.count()).select_from(LoanCategoryAssignment)), 816)
+            self.assertEqual(session.scalar(select(func.count()).select_from(AnswerCategoryCompatibility)), 720)
+            self.assertEqual(session.scalar(select(func.count()).select_from(LoanConditions)), 102)
+            database_audit = audit_database(session)
+            for key in (
+                "missingSourceRows",
+                "unexpectedSourceRows",
+                "identityMismatchRows",
+                "conditionsMismatchRows",
+                "incompleteCategoryRows",
+                "categoryMismatchCells",
+            ):
+                self.assertEqual(database_audit[key], [], key)
+            self.assertEqual(
+                session.scalar(
+                    select(func.count())
+                    .select_from(ServingCatalogueVersion)
+                    .where(ServingCatalogueVersion.active.is_(True))
+                ),
+                1,
+            )
+            session.commit()
+            with session.begin():
+                again = materialize_official_sources(
+                    session,
+                    loan_manifest=build_manifest(),
+                    config_manifest=build_config(),
+                    questionnaire=questionnaire,
+                    identifiers=identifiers,
+                    actor_reference="ci-fixture",
+                    approval_reason="verified source integration test",
+                )
+            self.assertTrue(again.reused)
+        engine.dispose()

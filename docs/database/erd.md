@@ -71,3 +71,17 @@ flowchart LR
 ## تکامل و وابستگی
 
 `US-04.T02` این مدل را به ستون، PK/FK، `NOT NULL`، `UNIQUE` و `CHECK`های 3NF تبدیل می‌کند. `US-04.T03` مدل ORM و repository port، و `US-04.T04` migration و آزمون PostgreSQL واقعی را می‌سازد. تغییر cardinality یا حذف موجودیت، ADR و migration سازگار/rollback جداگانه می‌خواهد.
+
+## US-09.T05A persisted serving relations
+
+```mermaid
+erDiagram
+    loan_product_versions ||--|| loan_conditions : has
+    loan_product_versions ||--o{ loan_category_assignments : classifies
+    serving_catalogue_versions ||--o{ serving_catalogue_members : contains
+    serving_catalogue_members }o--|| loan_product_versions : selects
+    recommendation_config_versions ||--o{ answer_option_weights : weights
+    recommendation_config_versions ||--o{ answer_category_compatibilities : matches
+```
+
+`serving_catalogue_versions` یک active pointer یکتا دارد. membership تنها نسخه‌های منتشرشدهٔ تأییدشده را در transaction انتشار می‌گیرد. متن شروط روی همان loan version ذخیره می‌شود؛ وزن و ضریب به config version و سطر/ستون منبع پیوند دارند.

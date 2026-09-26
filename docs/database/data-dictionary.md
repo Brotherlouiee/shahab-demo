@@ -34,3 +34,14 @@
 - `deleted_at` فقط برای session یا policyهای مصوب privacy بررسی می‌شود؛ کاتالوگ نسخه‌دار و audit event soft-delete عمومی نمی‌گیرند.
 - مقدار نمونهٔ حساس، credential یا PII در این سند ثبت نمی‌شود.
 - Redis جدول مفهومی/رابطه‌ای نیست: cache موقت و قابل‌بازتولیدِ sessionهای فعال است، نه منبع حقیقت. سیاست کامل آن در `docs/architecture/0009-anonymous-session-persistence-and-cache.md` ثبت شده است.
+
+## US-09.T05A افزوده‌های فیزیکی
+
+| جدول/ستون | کلید و محدودیت | کاربرد |
+| --- | --- | --- |
+| `loan_product_versions.source_row_number` | unique همراه `source_file_id` | سطر رسمی برای version |
+| `loan_category_assignments` | PK `(loan_product_version_id, loan_variable_id)`؛ state/category سازگار | دسته و state هر یک از هشت متغیر |
+| `loan_conditions` | PK/FK همان loan version؛ text خالی مجاز | متن خام شروط همان نسخه، پیش از parser امن |
+| `answer_option_weights` | PK config/answer/variable؛ مقدار ۰..۱ | وزن پاسخ از جدول تبدیل، با سطر منبع |
+| `answer_category_compatibilities` | PK config/answer/category؛ مقدار ۰..۱ | ضریب جدول تناسب یک‌به‌یک، با سطر/ستون |
+| `serving_catalogue_versions` / `serving_catalogue_members` | یک active در PostgreSQL؛ عضویت نسخهٔ وام | pointer و membership انتشار نسخه‌دار با actor/reason |

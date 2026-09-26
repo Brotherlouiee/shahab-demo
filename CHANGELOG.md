@@ -8,6 +8,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T05A:** Verified deterministic official-source extraction and D-005 weight precedence; source audits cover 102 loans, 30 weight groups and 720 compatibility cells. Added a reversible PostgreSQL migration and transactional, approval-gated materialization for versioned categories, conditions, configuration and serving catalogue, with idempotency and source-content checks. Database publication remains an explicit operator action after inspecting the actual database; T05B/T06 consume these records later.
+
+### Changed
+
+- **US-09.T05B (planned):** Added a separate post-T05A server adapter task for an approved PostgreSQL recommendation snapshot, real published loan conditions/details, and durable publication when the database audit proves it missing. Canonical session-to-engine adaptation and the live API/UI journey remain T06; this entry defines work, not completed runtime functionality.
+
+- **US-09.T05A (planned):** Inserted an ordered data and configuration materialization gate before the unchanged T06 live integration. The task consumes the six official sources and approved D-001–D-004 decisions, persists PUBLISHED categories/conditions for existing server use cases, requires audit, provenance and PostgreSQL verification, and introduces no new matching formula or product behavior in this documentation change.
+
+
+- **US-09.T06 (checkpoint):** documented the missing approved mapping, durable published snapshot and conditions projection that block a truthful live recommendation result. No endpoint, scoring, schema, migration or deployment behavior changed. See the `feature/us-09-live-integration` PR.
+
+### Added
+
 - **US-09.T05**: Added a browser-level recommendation journey contract that exercises the result client, RTL/a11y result surface, manual display controls, typed retry error, and the safe handoff to approved loan-detail conditions through controlled HTTP responses. The live questionnaire/session/API/engine connection remains T06.
 
 - **US-09.T04**: Added server-result presentation controls: lender-only filtering, stable display sorting by lender name, responsive RTL/a11y result markup and typed loading/error states. Score formatting remains display-only; no browser scoring, API/session wiring or static recommendation results were added.

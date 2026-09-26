@@ -47,3 +47,7 @@ The internal manifest command validates a narrow, reviewed hand-off into
 canonical rows and emits a non-publishing plan with typed issue evidence. It
 cannot move the serving pointer. The exact invocation, exit codes, review path
 and recovery rules are in `docs/operations/import-runbook.md`.
+
+## US-09.T05A — official source materialization
+
+`build_t05a_import_manifest.py` و `build_t05a_recommendation_config.py` از بایت‌های UTF-16 تأییدشده manifest قطعی می‌سازند. D-005 وزن پرسش/پاسخ را فقط از جدول تبدیل پاسخ‌ها می‌گیرد؛ عدد ماتریس نگاشت در پیکربندی وارد نمی‌شود. ماتریس مستقل ضرایب تناسب یک‌به‌یک ۷۲۰ سلول سازگاری را تأمین می‌کند. `materialize_official_sources` پس از تأیید اپراتور، در یک transaction نسخهٔ config، ۱۰۲ loan version، ۸۱۶ assignment، شروط و active catalogue را ذخیره می‌کند؛ hash محتوای manifest هم قفل شده است. فرمان و حدود ممیزی دیتابیس در `docs/operations/t05a-materialization.md` است. آداپتور خواندن مصرف‌کننده در T05B ساخته می‌شود.

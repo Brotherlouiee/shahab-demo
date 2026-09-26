@@ -128,7 +128,10 @@ _PARSERS: dict[str, Callable[[str | None], ParsedScalar | UnknownScalar]] = {
 _GUARANTEE_CATEGORIES = {
     "وثایق سخت": "hardCollateral",
     "تعهد شخص ثالث": "thirdPartyUndertaking",
+    # The loan catalogue uses the plural of the exact same approved label.
+    "تعهدات شخص ثالث": "thirdPartyUndertaking",
     "تعهد فردی": "personalUndertaking",
+    "تعهدات فردی": "personalUndertaking",
 }
 
 

@@ -1,0 +1,71 @@
+{
+  "sourcePaths": [
+    ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+    ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext"
+  ],
+  "authoritativeWeightSource": ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext",
+  "ignoredNumericSource": ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+  "comparedPairs": 30,
+  "nonAuthoritativeDifferences": [
+    {
+      "variableId": "depositRequired",
+      "questionId": "S13",
+      "mapping": {
+        "weight": "0.5",
+        "row": 18
+      },
+      "answerWeights": {
+        "weight": "0.65",
+        "row": 79
+      }
+    },
+    {
+      "variableId": "depositRequired",
+      "questionId": "S8",
+      "mapping": {
+        "weight": "0.5",
+        "row": 17
+      },
+      "answerWeights": {
+        "weight": "0.35",
+        "row": 84
+      }
+    },
+    {
+      "variableId": "monthlyInstallment",
+      "questionId": "Q4",
+      "mapping": {
+        "weight": "0.5",
+        "row": 4
+      },
+      "answerWeights": {
+        "weight": "0.2",
+        "row": 14
+      }
+    },
+    {
+      "variableId": "monthlyInstallment",
+      "questionId": "Q5",
+      "mapping": {
+        "weight": "0.2",
+        "row": 6
+      },
+      "answerWeights": {
+        "weight": "0.35",
+        "row": 24
+      }
+    },
+    {
+      "variableId": "monthlyInstallment",
+      "questionId": "Q6",
+      "mapping": {
+        "weight": "0.3",
+        "row": 5
+      },
+      "answerWeights": {
+        "weight": "0.45",
+        "row": 19
+      }
+    }
+  ]
+}

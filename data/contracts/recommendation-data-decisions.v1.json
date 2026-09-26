@@ -1,7 +1,16 @@
 {
-  "configVersion": "1.0.0",
+  "configVersion": "1.1.0",
   "approved": true,
   "approvedOn": "2026-09-18",
+  "weightSourcePolicy": {
+    "decisionId": "D-005",
+    "authoritativePath": ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext",
+    "authoritativeSha256": "f786ff278f58a5abb998dafca46625cbf3da5922db1e5c68d505487b57133749",
+    "ignoredNumericPath": ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+    "ignoredNumericSha256": "462185978dd0aeaf4479cf761a092c99d6bccf783cde31645448097577c3fe4e",
+    "questionVariableRelationshipsMayBeRead": true,
+    "ignoredNumericWeightsMayBeScored": false
+  },
   "scope": "Recommendation data interpretation only; no credit approval prediction.",
   "interestRateQuestionWeights": {
     "S13": 0.4,

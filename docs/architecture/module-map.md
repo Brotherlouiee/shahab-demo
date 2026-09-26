@@ -39,3 +39,11 @@ All HTTP routes are mounted below the versioned API prefix. Transport errors use
 Repository-wide quality boundaries are enforced by Ruff, Mypy, backend tests, data/architecture validators and secret scan in `npm run quality`; `.github/workflows/quality.yml` runs the same gate in CI.
 
 Alembic is the sole schema-DDL owner under `alembic/`; its PostgreSQL 16 CI job verifies an empty-database upgrade, representative fixture write and full downgrade. Docker Compose is local-only composition and has no production secret or deployment authority.
+
+## US-09.T06 readiness boundary
+
+The future transport adapter resolves the anonymous session and creates an allowlisted read model. A separate answer mapper must consume approved versioned coefficients; a serving repository must return an immutable `PUBLISHED` snapshot with categories for all eight loan variables, display names and approved conditions. The current SQLAlchemy catalogue adapter does not populate conditions text or category assignments, and the in-memory publication adapter is test/local only. None of these gaps may be filled with prototype cards or raw spreadsheet rows at request time.
+
+## US-09.T05A materialization boundary
+
+`scripts/build_t05a_*.py` فقط بایت منبع و قراردادها را به manifest قطعی تبدیل می‌کنند. `backend/app/data_pipeline/infrastructure/materialize_official_sources.py` تنها adapter نوشتن PostgreSQL است و به session پرسشنامه، موتور pure یا HTTP متصل نیست. آداپتورهای خواندن active snapshot و جزئیات در T05B باقی می‌مانند.

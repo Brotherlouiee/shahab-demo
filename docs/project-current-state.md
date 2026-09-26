@@ -1,17 +1,41 @@
 # Project current state
 
+## US-09.T05A implementation checkpoint (2026-09-26)
+
+- `activeTaskId`: `US-09.T05A`; `estimatedWorkScope` / `completionBudget`: canonical source audit, D-005, deterministic source/config extraction, schema/materialization, focused and CI gates, documentation and PR in one bounded task. `actualScope`: same; no public API or deployment.
+- Official six Git blobs: questionnaire `26c70261829442e0676b85ac552bd6f7255f5faf`; categories `f2121e0e7f109d03cce432e4119978ba51ebb915`; questionnaire mapping `2721940cdc5ae17fc952d20f947d949a61317fcd`; answer conversion `f14d0d82a13708e87eea93c1d96ff14f4797c10b`; one-to-one compatibility `7eeed38450067f7fe3ba6be4846999d768ed697c`; loans `0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc`. No source bytes changed.
+- D-005 product-owner decision: only answer-conversion coefficients are authoritative weights; the mapping matrix's five differing numbers are ignored. Independent one-to-one compatibility matrix yields 720 coefficients.
+- Source audit: 102 loans/conditions, 88 rankable and 14 needsReview; 816 variable assignments, 30 question groups, 150 answer weights, 720 compatibility cells. Three values above the approved maxAmount ceiling remain unmapped.
+- Migration `91d5a005a01a` and `materialize_official_sources` provide durable versioned rows, source provenance and a single active publication with explicit operator approval. Exact manifest digests block edited content bearing a valid source hash; identical active publication is reused, and transaction failure rolls back. Previously published loans without this active official catalogue fail closed pending row-level reconciliation, avoiding duplicate import.
+- Tests: focused backend tests passed locally; PostgreSQL migration/materialization is wired into the CI PostgreSQL gate. Local environment lacks PostgreSQL credentials; the actual operational DB inventory and publication must be run by an authorized operator. No operational database state is inferred from source files.
+- `nextTaskId`: `US-09.T05B` after the T05A gate, then `US-09.T06` live integration. US-09 is incomplete. The User Story continuity document remains unchanged until the story ends.
+
 ## Active task
 
-- activeTaskId: US-09.T05
-- Status: US-09.T04 was merged in PR #43. US-09.T05 is complete in this branch. GitHub Actions #145 passed quality, PostgreSQL migration verification and Chromium E2E.
-- Base branch: main after merge of US-09.T04 in PR #43 (85c1ff115262cf66020afb770095cd300115be93).
-- Working branch: test/us-09-browser-e2e
-- estimatedWorkScope: add a production-excluded browser harness and Playwright journey tests for the existing result client/screen/detail boundaries, plus the smallest test command and task documentation. Do not add endpoint, session lookup, score calculation, persistence, route replacement or deployment.
-- actualScope: the test harness obtains a controlled API read model only through the existing T02 client, renders the T04 screen in a real browser, verifies the score-free needs-review state and manual display controls, then follows the existing safe details link to the approved-detail screen. The harness is under tests/ and is not part of the production entrypoint.
-- Session decision: 30-minute retention, same browser tab only. The E2E fixture checks that its opaque session ID is sent in the request body only and never in the URL.
-- Explicit exclusions: no live recommendation endpoint, no real questionnaire-to-result wiring, no persistence/Redis/identity/OTP/source-data mutation or production deploy. T06 remains the sole owner of live session → endpoint → engine → result integration and product-owner preview verification.
-- Source/guide attestation: complete canonical guide, recommendation-data decisions and all six UTF-16LE official sources reread before implementation. Source blobs: 26c7026, f2121e0, 2721940, f14d0d8, 7eeed38, 0854a5c.
-- Test plan: focused Playwright success/detail and typed retry cases; then GitHub Actions quality, PostgreSQL migration verification and Chromium E2E.
+- activeTaskId: US-09.T05A (new ordered prerequisite; implementation pending)
+- Status: task definition added to the canonical guide on `feature/us-09-live-integration`; no data, scoring, API, UI, deployment, or continuity document behavior changed by this planning amendment. US-09.T06 remains incomplete and follows a green T05A gate.
+- Decision: the six verified UTF-16LE unitext sources, approved D-001–D-004 decisions, canonical guide and existing US-08 engine define the calculation. T05A materializes and verifies those rules and PUBLISHED loan/conditions serving data; it does not invent recommendation logic.
+- Guide/source attestation: complete guide reread, `docs/recommendation-data-decisions.md` reread and six sources inspected via byte-preserving Git blob identities 26c70261829442e0676b85ac552bd6f7255f5faf, f2121e0e7f109d03cce432e4119978ba51ebb915, 2721940cdc5ae17fc952d20f947d949a61317fcd, f14d0d82a13708e87eea93c1d96ff14f4797c10b, 7eeed38450067f7fe3ba6be4846999d768ed697c, 0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc.
+- Test plan for this documentation change: verify US-09 story row, execution matrix, full T05A criteria and T06 dependency agree; no runtime tests are claimed. T05A implementation must run the gates defined in the guide.
+- Ordered sequence: US-09.T05A (data/config audit and durable materialization) → US-09.T05B (PostgreSQL snapshot, publication and loan-detail read adapters) → US-09.T06 (session-to-canonical mapping, recommendation endpoint and active frontend journey). The pure engine does not directly read session or ORM by design.
+- Planning gate: T05B is defined, not implemented. No runtime tests or live recommendations are claimed by this documentation-only change.
+- nextTaskId: US-09.T05A. Preserve `docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md` until the entire US-09 is complete.
+
+## Prior US-09.T06 discovery checkpoint
+
+- activeTaskId: US-09.T06
+- Status: in progress; US-09.T01–T05 and PR #44 are merged. This checkpoint is not a completion claim.
+- Base branch: main at 4c76f266693580312e908a1f23b691c00d24bc25 (merge PR #44).
+- Working branch: feature/us-09-live-integration
+- estimatedWorkScope: connect canonical session, approved answer-to-preference conversion, published snapshot, server endpoint and active frontend result route; prove response allowlist and browser journey. No deployment.
+- completionBudget: the first gate is approved data readiness. No score or published catalogue can be fabricated to satisfy an E2E.
+- Acceptance: only the sessionId appears in the recommendation POST body; complete active canonical answers, approved configuration, PUBLISHED candidates, server scores/reasons, score-free needsReview, real details and safe errors. Quality, PostgreSQL migration, Chromium and security gates must pass.
+- Source/guide attestation: full canonical guide and recommendation-data decisions reviewed. Six original source Git blob SHAs: questionnaire 26c70261829442e0676b85ac552bd6f7255f5faf; loan categories f2121e0e7f109d03cce432e4119978ba51ebb915; questionnaire mapping 2721940cdc5ae17fc952d20f947d949a61317fcd; answer weights f14d0d82a13708e87eea93c1d96ff14f4797c10b; one-to-one coefficients 7eeed38450067f7fe3ba6be4846999d768ed697c; loan source 0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc. The source contract identifies UTF-16LE; GitHub's text wrapper transcodes retrieval, so original blob SHA is the byte-preserving identity.
+- Blocker discovered before implementation: the persisted model has LoanTerms for four numeric attributes but no persisted category assignments for all eight variables, no approved answer-to-category impact mapping consumed by the engine, no durable published catalogue import/pointer adapter, and no stored approved conditions text. The current SQLAlchemy catalogue adapter returns conditionsSourceText=None. The current in-memory publication repository explicitly forbids production use. A scored API or real details cannot safely be declared operational until these boundaries are supplied and verified.
+- Decision: fail closed on unavailable approved data; do not invent mappings, scores, conditions or published loans. Preserve the User Story continuity document until the complete story is proven. No Netlify/deployment change.
+- nextTaskId: US-09.T06 (remaining prerequisite: approved materialization and configuration, followed by session/API/UI integration and all gates).
+
+## Previous checkpoint
 
 ## Evidence
 
