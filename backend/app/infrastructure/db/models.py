@@ -19,6 +19,7 @@ from sqlalchemy import (
     Integer,
     Numeric,
     String,
+    Text,
     UniqueConstraint,
     Uuid,
     func,
@@ -73,6 +74,7 @@ class LoanProductVersion(Timestamped, Base):
     __tablename__ = "loan_product_versions"
     __table_args__ = (
         UniqueConstraint("loan_product_id", "version_number", name="uq_loan_product_version"),
+        UniqueConstraint("source_file_id", "source_row_number", name="uq_loan_version_source_row"),
         CheckConstraint("version_number > 0", name="ck_loan_version_positive"),
     )
     loan_product_version_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
@@ -80,6 +82,7 @@ class LoanProductVersion(Timestamped, Base):
     version_number: Mapped[int] = mapped_column(Integer, nullable=False)
     publication_state: Mapped[PublicationState] = mapped_column(nullable=False, default=PublicationState.DRAFT)
     source_file_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("data_source_files.data_source_file_id"))
+    source_row_number: Mapped[int | None] = mapped_column(Integer)
 
 
 class LoanTerms(Base):
@@ -118,6 +121,42 @@ class VariableCategory(Base):
     variable_category_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     loan_variable_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("loan_variables.loan_variable_id"), nullable=False)
     canonical_id: Mapped[str] = mapped_column(String(100), nullable=False)
+
+
+class LoanCategoryAssignment(Base):
+    """One source-backed classification for every variable on one loan version."""
+
+    __tablename__ = "loan_category_assignments"
+    __table_args__ = (
+        CheckConstraint("source_row_number > 0", name="ck_assignment_source_row_positive"),
+        CheckConstraint(
+            "classification_state IN ('classified','unknown','variable','unparseable','unmapped')",
+            name="ck_assignment_state",
+        ),
+        CheckConstraint(
+            "(classification_state = 'classified') = (variable_category_id IS NOT NULL)",
+            name="ck_assignment_category_state",
+        ),
+    )
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id"), primary_key=True
+    )
+    loan_variable_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("loan_variables.loan_variable_id"), primary_key=True)
+    variable_category_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("variable_categories.variable_category_id")
+    )
+    classification_state: Mapped[str] = mapped_column(String(20), nullable=False)
+    source_row_number: Mapped[int] = mapped_column(Integer, nullable=False)
+
+
+class LoanConditions(Base):
+    """Exact approved plain-text source conditions for one immutable loan version."""
+
+    __tablename__ = "loan_conditions"
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id"), primary_key=True
+    )
+    source_text: Mapped[str] = mapped_column(Text, nullable=False)
 
 
 class QuestionnaireVersion(Timestamped, Base):
@@ -172,6 +211,68 @@ class QuestionVariableWeight(Base):
     question_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("questions.question_id"), nullable=False)
     loan_variable_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("loan_variables.loan_variable_id"), nullable=False)
     weight: Mapped[float] = mapped_column(Numeric(8, 6), nullable=False)
+
+
+class AnswerOptionWeight(Base):
+    """The authoritative weighted answer cell from D-005, without reweighting."""
+
+    __tablename__ = "answer_option_weights"
+    config_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("recommendation_config_versions.config_version_id"), primary_key=True
+    )
+    answer_option_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("answer_options.answer_option_id"), primary_key=True)
+    loan_variable_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("loan_variables.loan_variable_id"), primary_key=True)
+    weighted_value: Mapped[float] = mapped_column(Numeric(8, 6), nullable=False)
+    source_row_number: Mapped[int] = mapped_column(Integer, nullable=False)
+
+
+class AnswerCategoryCompatibility(Base):
+    """One cell from the separate one-to-one compatibility matrix."""
+
+    __tablename__ = "answer_category_compatibilities"
+    config_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("recommendation_config_versions.config_version_id"), primary_key=True
+    )
+    answer_option_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("answer_options.answer_option_id"), primary_key=True)
+    variable_category_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("variable_categories.variable_category_id"), primary_key=True
+    )
+    coefficient: Mapped[float] = mapped_column(Numeric(8, 6), nullable=False)
+    source_row_number: Mapped[int] = mapped_column(Integer, nullable=False)
+    source_column_number: Mapped[int] = mapped_column(Integer, nullable=False)
+
+
+class ServingCatalogueVersion(Timestamped, Base):
+    """Immutable catalogue publication with one active PostgreSQL pointer."""
+
+    __tablename__ = "serving_catalogue_versions"
+    __table_args__ = (
+        UniqueConstraint("version_code", name="uq_serving_catalogue_version_code"),
+        CheckConstraint("state IN ('published','superseded')", name="ck_serving_catalogue_state"),
+        CheckConstraint("active = (state = 'published')", name="ck_serving_catalogue_active_state"),
+    )
+    serving_catalogue_version_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    version_code: Mapped[str] = mapped_column(String(100), nullable=False)
+    data_source_file_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("data_source_files.data_source_file_id"), nullable=False
+    )
+    config_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("recommendation_config_versions.config_version_id"), nullable=False
+    )
+    state: Mapped[str] = mapped_column(String(20), nullable=False)
+    active: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    approved_by_reference: Mapped[str] = mapped_column(String(255), nullable=False)
+    approval_reason: Mapped[str] = mapped_column(Text, nullable=False)
+
+
+class ServingCatalogueMember(Base):
+    __tablename__ = "serving_catalogue_members"
+    serving_catalogue_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("serving_catalogue_versions.serving_catalogue_version_id"), primary_key=True
+    )
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id"), primary_key=True
+    )
 
 
 class DataImportRun(Timestamped, Base):
