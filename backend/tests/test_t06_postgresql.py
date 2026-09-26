@@ -73,6 +73,15 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
                 body = result.json()
                 self.assertEqual(len(body["needsReview"]), 14)
                 self.assertTrue(body["rankedRecommendations"])
+                self.assertEqual(
+                    len(body["rankedRecommendations"])
+                    + len(body["lowCompatibilityRecommendations"])
+                    + len(body["needsReview"]),
+                    102,
+                )
+                self.assertTrue(
+                    all(item["compatibilityScore"] < 0.5 for item in body["lowCompatibilityRecommendations"])
+                )
                 loan_id = body["rankedRecommendations"][0]["loanId"]
                 detail = client.get(f"/api/v1/loans/{loan_id}")
                 self.assertEqual(detail.status_code, 200)

@@ -17,9 +17,21 @@ export function buildRecommendationResultViewModel(response) {
     rankedRecommendations: Object.freeze(
       requireArray(result.rankedRecommendations, "rankedRecommendations").map(toRankedViewModel),
     ),
+    lowCompatibilityRecommendations: Object.freeze(
+      requireArray(result.lowCompatibilityRecommendations, "lowCompatibilityRecommendations").map(
+        toLowCompatibilityViewModel,
+      ),
+    ),
     needsReview: Object.freeze(
       requireArray(result.needsReview, "needsReview").map(toNeedsReviewViewModel),
     ),
+  });
+}
+
+function toLowCompatibilityViewModel(item) {
+  return Object.freeze({
+    ...toRankedViewModel(item),
+    statusLabel: "تطابق پایین؛ پیشنهاد اصلی نیست",
   });
 }
 

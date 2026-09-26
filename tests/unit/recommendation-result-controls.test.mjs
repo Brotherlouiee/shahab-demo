@@ -5,6 +5,7 @@ import {
   applyRecommendationResultControls,
   formatServerCompatibilityScore,
   recommendationResultControlOptions,
+  selectRecommendationResultMode,
 } from "../../src/features/recommendation/presentation/recommendationResultControls.mjs";
 
 const result = Object.freeze({
@@ -13,7 +14,27 @@ const result = Object.freeze({
     Object.freeze({ loanId: "l-2", lenderName: "بانک الف", loanName: "طرح دو", compatibilityScore: 0.6 }),
     Object.freeze({ loanId: "l-3", lenderName: "بانک ب", loanName: "طرح سه", compatibilityScore: 0.7 }),
   ]),
-  needsReview: Object.freeze([]),
+  lowCompatibilityRecommendations: Object.freeze([
+    Object.freeze({ loanId: "low-1", compatibilityScore: 0.1 }),
+    Object.freeze({ loanId: "low-2", compatibilityScore: 0.2 }),
+  ]),
+  needsReview: Object.freeze([Object.freeze({ loanId: "review-1" })]),
+});
+
+test("selects the three server-owned partitions without calculating or reordering scores", () => {
+  assert.deepEqual(
+    selectRecommendationResultMode(result, recommendationResultControlOptions.resultModes.highest).map((item) => item.loanId),
+    ["l-1", "l-2", "l-3"],
+  );
+  assert.deepEqual(
+    selectRecommendationResultMode(result, recommendationResultControlOptions.resultModes.lowest).map((item) => item.loanId),
+    ["low-1", "low-2"],
+  );
+  assert.deepEqual(
+    selectRecommendationResultMode(result, recommendationResultControlOptions.resultModes.variable).map((item) => item.loanId),
+    ["review-1"],
+  );
+  assert.throws(() => selectRecommendationResultMode(result, "scoreDesc"), /supported/);
 });
 
 test("filters only by lender while preserving the server sequence for the filter boundary", () => {

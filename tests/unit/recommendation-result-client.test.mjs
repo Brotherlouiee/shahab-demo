@@ -18,6 +18,7 @@ const responsePayload = {
       compatibilityReason: "سقف وام و نرخ سود با ترجیح شما هماهنگ است.",
     },
   ],
+  lowCompatibilityRecommendations: [],
   needsReview: [],
 };
 

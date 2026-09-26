@@ -17,6 +17,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T06A:** Replaced all reachable loan-result, detail, comparison,
+  action and explanation prototype data with active `PUBLISHED` PostgreSQL
+  serving data. The recommendation API now exposes server-owned highest,
+  low-compatibility and needs-review partitions with deterministic ordering;
+  direct result refresh fails safely, and unavailable provider/payment/OTP/AI
+  behavior is stated rather than simulated. Added route/API documentation and
+  unit, PostgreSQL integration, browser journey and responsive visual evidence.
+
 - **US-09.T06:** Connected the ten canonical session answers to approved source conversion and one-to-one category scoring in the server, added the session-only recommendation API, and mounted live ranked/review/loading/error results with published loan detail links. Staging deployment and real-URL verification remain US-09.T07.
 
 - **US-09.T05B:** Added one-statement approved PostgreSQL recommendation snapshot read, active-only loan details with official conditions/facts, and a source-checked idempotent backfill for already published T05A rows. The pure engine now has a real repository adapter, without a public recommendation endpoint or deployed database. Added `US-09.T07` as the separate mandatory persistent-staging/Netlify/real-URL delivery gate; CI success alone does not satisfy it.

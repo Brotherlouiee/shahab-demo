@@ -33,14 +33,20 @@ response-derived link. Canonical answers, score inputs, sort/filter state, and
 data/config selectors are never client-supplied.
 
 A successful response uses the documented recommendation result read model:
-`dataVersion`, `configVersion`, server-ordered `rankedRecommendations`, and
-score-free `needsReview` entries. The client validates it before presentation.
+`dataVersion`, `configVersion`, server-ordered `rankedRecommendations`, ascending
+`lowCompatibilityRecommendations`, and score-free `needsReview` entries. The
+client validates it before presentation.
 A non-2xx or malformed response becomes a generic typed client error; it must not
 be converted into a fabricated result or expose the server error body.
 
-## US-09.T06 live endpoint gate
+## US-09.T06/T06A live endpoint
 
-The planned `POST /api/v1/recommendations` must accept exactly `{ "sessionId": "<opaque-id>" }` and return only `dataVersion`, `configVersion`, `rankedRecommendations` and `needsReview`. An active 30-minute session and complete canonical answer set are required. Raw answers, session identifiers, trace data and source provenance must never enter this response. Until an approved answer-to-preference configuration and a published, categorized serving snapshot exist, the endpoint must fail closed; this document does not claim the endpoint is implemented.
+The implemented `POST /api/v1/recommendations` accepts exactly `{ "sessionId":
+"<opaque-id>" }`. An active 30-minute session and complete canonical answer set
+are required. It reads the active published PostgreSQL snapshot and returns the
+three server-owned result partitions documented in [openapi.md](openapi.md).
+Raw answers, session identifiers, trace data and source provenance never enter
+the response. Missing configuration or serving data fails closed.
 
 ## US-09.T05B serving data boundary
 

@@ -15,6 +15,15 @@ const response = {
       compatibilityReason: "سقف وام و نرخ سود با ترجیح شما هماهنگ است.",
     },
   ],
+  lowCompatibilityRecommendations: [
+    {
+      loanId: "loan-low",
+      lenderName: "بانک کم‌تطابق",
+      loanName: "طرح زیر آستانه",
+      compatibilityScore: 0.2,
+      compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست",
+    },
+  ],
   needsReview: [
     {
       loanId: "loan-review",
@@ -33,6 +42,8 @@ test("maps server-calculated ranked and needs-review read models without changin
   assert.equal(viewModel.rankedRecommendations[0].compatibilityScore, 0.75);
   assert.equal(viewModel.rankedRecommendations[0].compatibilityReason, response.rankedRecommendations[0].compatibilityReason);
   assert.equal(viewModel.rankedRecommendations[0].detailsHref, "/loan-details?loanId=loan%2Fa");
+  assert.equal(viewModel.lowCompatibilityRecommendations[0].compatibilityScore, 0.2);
+  assert.equal(viewModel.lowCompatibilityRecommendations[0].statusLabel, "تطابق پایین؛ پیشنهاد اصلی نیست");
   assert.equal(viewModel.needsReview[0].warning.includes("اطلاعات"), true);
   assert.deepEqual(viewModel.needsReview[0].rankingExcludedReasons, ["interestRate:unknown"]);
 });

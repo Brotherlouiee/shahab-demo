@@ -10,7 +10,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `frontend/src/shared` | generic UI and utility code | feature/domain rules |
 | `frontend/src/features/questionnaire` | questionnaire presentation and canonical-answer interaction | raw source documents, scoring |
 | `src/features/questionnaire` | active prototype's route-to-canonical-ID adapter | answer persistence, raw source documents, scoring |
-| `src/features/recommendation/presentation` | validated server-result view models, API client, display states, local filter/sort controls, RTL/a11y screen contracts and safe details routes | scoring, direct database/session access |
+| `src/features/recommendation/presentation` | validated three-part server-result view model, API client, display states, RTL/a11y controls and safe detail/explanation navigation | scoring, threshold classification, result reordering, direct database/session access |
 | `frontend/src/features/loan-details` | loan-detail presentation | HTML rendering of raw conditions, scoring |
 | `src/features/loan-details` | active prototype's loan-detail API client and RTL presentation states | raw source parsing, scoring, persistence, `innerHTML` rendering |
 | `backend/app/recommendation/domain` | entities/value contracts/pure parsing | FastAPI, ORM, React imports |
@@ -43,6 +43,17 @@ Alembic is the sole schema-DDL owner under `alembic/`; its PostgreSQL 16 CI job 
 ## US-09.T06 readiness boundary
 
 The future transport adapter resolves the anonymous session and creates an allowlisted read model. A separate answer mapper must consume approved versioned coefficients; a serving repository must return an immutable `PUBLISHED` snapshot with categories for all eight loan variables, display names and approved conditions. T05B supplies active-only SQLAlchemy reads of approved conditions and all eight categories; the in-memory publication adapter remains test/local only. T06 still owns the session mapper and public recommendation endpoint. None of these boundaries may use prototype cards or raw spreadsheet rows at request time.
+
+## US-09.T06A loan-route integrity boundary
+
+`backend/app/api/v1/recommendations.py` owns the public high/low/review read
+model; `canonical_scoring.py` owns threshold partitioning and stable ordering.
+The active Vite result screen selects one returned array and performs no score,
+weight, category or threshold calculation. Loan details and comparisons read
+allowlisted facts through `GET /api/v1/loans/{loanId}`. The action route remains
+fail-closed because no approved provider contract exists, and the explanation
+route renders only engine explanations, exclusion reasons and published
+conditions. See `docs/ui/loan-route-inventory.md` for the complete route map.
 
 ## US-09.T05A materialization boundary
 

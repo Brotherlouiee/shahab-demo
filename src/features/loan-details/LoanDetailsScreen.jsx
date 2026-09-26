@@ -20,6 +20,10 @@ export default function LoanDetailsScreen({ loanId, header }) {
   const [requestVersion, setRequestVersion] = useState(0);
 
   useEffect(() => {
+    if (!loanId) {
+      setState({ status: "empty", detail: null });
+      return undefined;
+    }
     const controller = new AbortController();
     setState({ status: "loading", detail: null });
     fetchLoanDetails(loanId, { signal: controller.signal })

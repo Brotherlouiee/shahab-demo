@@ -30,7 +30,7 @@ class CategoryImpact:
 class CanonicalPartition:
     ranked: tuple[ScoredLoan, ...]
     needs_review: tuple[NeedsReviewLoan, ...]
-    below_threshold: tuple[str, ...]
+    below_threshold: tuple[ScoredLoan, ...]
     # No answer IDs or session ID: per-loan redacted computation evidence.
     evidence: dict[str, tuple[Decimal, Decimal, tuple[str, ...]]]
 
@@ -96,16 +96,16 @@ def score_official_categories(
         evidence[candidate.loan_id] = (product, effective, tuple(sorted(neutral)))
     highest = max(raw.values(), default=Decimal("0"))
     ranked: list[ScoredLoan] = []
-    below: list[str] = []
+    below: list[ScoredLoan] = []
     for loan_id, value in raw.items():
         score = value / highest if highest else Decimal("0")
         if score >= minimum_match_score:
             ranked.append(ScoredLoan(loan_id, score))
         else:
-            below.append(loan_id)
+            below.append(ScoredLoan(loan_id, score))
     return CanonicalPartition(
         tuple(sorted(ranked, key=lambda item: (-item.score, item.loan_id))),
         tuple(sorted(review, key=lambda item: item.loan_id)),
-        tuple(sorted(below)),
+        tuple(sorted(below, key=lambda item: (item.score, item.loan_id))),
         evidence,
     )

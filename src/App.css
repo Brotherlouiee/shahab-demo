@@ -5254,34 +5254,49 @@ button {
   margin-block-start: 1rem;
 }
 
-.hp-recommendation-result-filters {
+.hp-recommendation-results-content > .hp-loan-results-actions {
+  inline-size: 100%;
+  max-inline-size: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hp-recommendation-results-content > .hp-loan-results-actions button {
+  inline-size: 100%;
+  block-size: auto;
+  min-block-size: 3rem;
+  padding: .6rem;
+  line-height: 1.5;
+  white-space: normal;
+}
+
+.hp-recommendation-result-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   align-items: end;
 }
 
-.hp-recommendation-result-filters label,
-.hp-recommendation-result-filters select {
+.hp-recommendation-result-filters button {
   display: block;
   inline-size: 100%;
-}
-
-.hp-recommendation-result-filters label {
-  margin-block-end: .4rem;
-  font-weight: 700;
-}
-
-.hp-recommendation-result-filters select {
   min-block-size: 2.75rem;
   border: 1px solid #9aa8b7;
   border-radius: .6rem;
   background: #fff;
   color: inherit;
-  padding-inline: .75rem;
+  padding: .55rem .75rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.hp-recommendation-result-filters select:focus-visible,
+.hp-recommendation-result-filters button.is-active {
+  border-color: #0b63ff;
+  background: #eaf2ff;
+  color: #08499f;
+}
+
+.hp-recommendation-result-filters button:focus-visible,
 .hp-recommendation-result-card a:focus-visible,
 .hp-recommendation-result-state button:focus-visible {
   outline: 3px solid #1264d7;
@@ -5337,6 +5352,7 @@ button {
 }
 
 @media (max-width: 38rem) {
+  .hp-recommendation-results-content > .hp-loan-results-actions,
   .hp-recommendation-result-filters {
     grid-template-columns: 1fr;
   }

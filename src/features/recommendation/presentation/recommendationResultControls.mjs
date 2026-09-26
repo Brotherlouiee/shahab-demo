@@ -9,6 +9,27 @@ const SORTS = Object.freeze({
   serverOrder: "serverOrder",
   lenderNameAsc: "lenderNameAsc",
 });
+const RESULT_MODES = Object.freeze({
+  highest: "highest",
+  lowest: "lowest",
+  variable: "variable",
+});
+
+/** Select one server-owned result partition without calculating or reordering it. */
+export function selectRecommendationResultMode(result, mode = RESULT_MODES.highest) {
+  if (!Object.values(RESULT_MODES).includes(mode)) {
+    throw new TypeError("mode must be a supported recommendation result partition");
+  }
+  const collections = {
+    [RESULT_MODES.highest]: result?.rankedRecommendations,
+    [RESULT_MODES.lowest]: result?.lowCompatibilityRecommendations,
+    [RESULT_MODES.variable]: result?.needsReview,
+  };
+  if (!Array.isArray(collections[mode])) {
+    throw new TypeError("result must contain all server recommendation partitions");
+  }
+  return Object.freeze([...collections[mode]]);
+}
 
 export function applyRecommendationResultControls(
   result,
@@ -56,6 +77,7 @@ export function formatServerCompatibilityScore(score) {
 export const recommendationResultControlOptions = Object.freeze({
   allLenders: ALL_LENDERS,
   sorts: SORTS,
+  resultModes: RESULT_MODES,
 });
 
 function requireRankedRecommendations(result) {
