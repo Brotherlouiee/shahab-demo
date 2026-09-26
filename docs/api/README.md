@@ -37,3 +37,7 @@ A successful response uses the documented recommendation result read model:
 score-free `needsReview` entries. The client validates it before presentation.
 A non-2xx or malformed response becomes a generic typed client error; it must not
 be converted into a fabricated result or expose the server error body.
+
+## US-09.T06 live endpoint gate
+
+The planned `POST /api/v1/recommendations` must accept exactly `{ "sessionId": "<opaque-id>" }` and return only `dataVersion`, `configVersion`, `rankedRecommendations` and `needsReview`. An active 30-minute session and complete canonical answer set are required. Raw answers, session identifiers, trace data and source provenance must never enter this response. Until an approved answer-to-preference configuration and a published, categorized serving snapshot exist, the endpoint must fail closed; this document does not claim the endpoint is implemented.
