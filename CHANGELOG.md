@@ -6,6 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- **US-09.T05A (planned):** Inserted an ordered data and configuration materialization gate before the unchanged T06 live integration. The task consumes the six official sources and approved D-001–D-004 decisions, persists PUBLISHED categories/conditions for existing server use cases, requires audit, provenance and PostgreSQL verification, and introduces no new matching formula or product behavior in this documentation change.
+
+
 - **US-09.T06 (checkpoint):** documented the missing approved mapping, durable published snapshot and conditions projection that block a truthful live recommendation result. No endpoint, scoring, schema, migration or deployment behavior changed. See the `feature/us-09-live-integration` PR.
 
 ### Added
