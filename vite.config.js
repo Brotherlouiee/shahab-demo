@@ -1,6 +1,4 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { createViteConfig } from "./scripts/vite-dev-config.mjs";
 
-export default defineConfig({
-  plugins: [react()],
-});
+export default defineConfig(() => createViteConfig());

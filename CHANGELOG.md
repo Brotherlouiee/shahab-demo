@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Fixed
+
+- **Local full-stack development:** Added a same-origin Vite `/api/v1` proxy,
+  Compose-managed frontend/API readiness ordering, packaged runtime contracts, an
+  explicit read-only/operator catalogue workflow, focused proxy and opt-in live
+  browser tests, and safe local startup/troubleshooting documentation. The host UI
+  uses port 4173 to avoid common Windows exclusions. No schema, migration, source
+  data, credential, or production deployment behavior changed.
+
 ### Added
 
 - **US-09.T06:** Connected the ten canonical session answers to approved source conversion and one-to-one category scoring in the server, added the session-only recommendation API, and mounted live ranked/review/loading/error results with published loan detail links. Staging deployment and real-URL verification remain US-09.T07.

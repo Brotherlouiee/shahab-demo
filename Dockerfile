@@ -11,6 +11,7 @@ COPY pyproject.toml README.md ./
 COPY backend ./backend
 COPY alembic ./alembic
 COPY alembic.ini ./
+COPY data/contracts ./data/contracts
 RUN python -m pip install --no-cache-dir .
 
 USER appuser
