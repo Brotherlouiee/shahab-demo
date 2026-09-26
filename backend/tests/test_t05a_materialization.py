@@ -15,9 +15,12 @@ from backend.app.infrastructure.db.models import (
     AnswerCategoryCompatibility,
     AnswerOptionWeight,
     Base,
+    Lender,
     LoanCategoryAssignment,
     LoanConditions,
+    LoanProduct,
     LoanProductVersion,
+    PublicationState,
     QuestionVariableWeight,
     ServingCatalogueMember,
     ServingCatalogueVersion,
@@ -126,6 +129,27 @@ class OfficialSourceMaterializationTests(unittest.TestCase):
             for manifest, config in ((edited_loan, self.config), (self.loan, edited_config)):
                 with self.assertRaises(ValueError), session.begin():
                     self._materialize(session, manifest=manifest, config=config)
+            self.assertEqual(session.scalar(select(func.count()).select_from(ServingCatalogueVersion)), 0)
+
+    def test_existing_published_loan_is_not_imported_again_without_reconciliation(self):
+        with Session(self.engine) as session:
+            with session.begin():
+                lender = Lender(canonical_name="existing bank")
+                session.add(lender)
+                session.flush()
+                product = LoanProduct(lender_id=lender.lender_id, canonical_name="existing loan")
+                session.add(product)
+                session.flush()
+                session.add(
+                    LoanProductVersion(
+                        loan_product_id=product.loan_product_id,
+                        version_number=1,
+                        publication_state=PublicationState.PUBLISHED,
+                    )
+                )
+            with self.assertRaisesRegex(ValueError, "reconcile"), session.begin():
+                self._materialize(session)
+            self.assertEqual(session.scalar(select(func.count()).select_from(LoanProductVersion)), 1)
             self.assertEqual(session.scalar(select(func.count()).select_from(ServingCatalogueVersion)), 0)
 
 
