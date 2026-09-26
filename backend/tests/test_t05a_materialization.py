@@ -26,6 +26,7 @@ from scripts.audit_source_weight_conflicts import build_report as weight_audit
 from scripts.audit_t05a_sources import build_report as loan_audit
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
+from scripts.materialize_t05a import audit_database
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -88,6 +89,16 @@ class OfficialSourceMaterializationTests(unittest.TestCase):
             ):
                 self.assertEqual(session.scalar(select(func.count()).select_from(model)), expected)
             self.assertTrue(all(record.source_text for record in session.scalars(select(LoanConditions))))
+            audit = audit_database(session)
+            for key in (
+                "missingSourceRows",
+                "unexpectedSourceRows",
+                "identityMismatchRows",
+                "conditionsMismatchRows",
+                "incompleteCategoryRows",
+                "categoryMismatchCells",
+            ):
+                self.assertEqual(audit[key], [], key)
             session.commit()
             with session.begin():
                 again = self._materialize(session)
