@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T05**: Added a browser-level recommendation journey contract that exercises the result client, RTL/a11y result surface, manual display controls, typed retry error, and the safe handoff to approved loan-detail conditions through controlled HTTP responses. The live questionnaire/session/API/engine connection remains T06.
+
 - **US-09.T04**: Added server-result presentation controls: lender-only filtering, stable display sorting by lender name, responsive RTL/a11y result markup and typed loading/error states. Score formatting remains display-only; no browser scoring, API/session wiring or static recommendation results were added.
 
 ### Changed

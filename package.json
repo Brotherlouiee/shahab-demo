@@ -28,7 +28,8 @@
     "test:recommendation-result-client": "node --test tests/unit/recommendation-result-client.test.mjs",
     "test:recommendation-result-states": "node --test tests/unit/recommendation-result-states.test.mjs",
     "test:recommendation-result-controls": "node --test tests/unit/recommendation-result-controls.test.mjs",
-    "test:recommendation-result-screen": "node --test tests/unit/recommendation-result-screen.test.mjs"
+    "test:recommendation-result-screen": "node --test tests/unit/recommendation-result-screen.test.mjs",
+    "test:e2e:recommendation-result": "playwright test tests/e2e/recommendation-result-journey.spec.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

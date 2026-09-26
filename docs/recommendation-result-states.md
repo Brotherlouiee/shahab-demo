@@ -24,4 +24,4 @@ reordered or invented item.
 ## Deferred work
 
 - `US-09.T04`: completed manual lender filtering, stable lender-name display sort, responsive RTL and accessibility contract.
-- `US-09.T05`: browser E2E from questionnaire to loan details; `US-09.T06` then completes live session/API/engine integration and preview verification.
+- `US-09.T05`: completed controlled browser journey for result states, controls and safe loan-detail handoff; `US-09.T06` completes the live questionnaire/session/API/engine integration and preview verification.

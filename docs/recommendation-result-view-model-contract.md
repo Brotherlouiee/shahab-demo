@@ -41,4 +41,4 @@ zero-after-filter presentation states in `docs/recommendation-result-states.md`.
 ## Deferred work
 
 - `US-09.T04`: manual filters, stable sort, accessibility and responsive RTL.
-- `US-09.T05`: complete browser journey.
+- `US-09.T05`: completed controlled browser journey from the API-client result boundary to safe loan details; live questionnaire/session/API/engine wiring remains `US-09.T06`.
