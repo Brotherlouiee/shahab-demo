@@ -32,3 +32,9 @@ The following source columns are presentation-only and do **not** participate in
 ## Change control
 
 Changing a decision requires a new `configVersion`, a documented source/owner/reason, updated golden tests, a trace compatibility review, and PR approval. Raw `.unitext` sources remain unchanged.
+
+## Version 1.1.0 — approved by product owner 2026-09-26
+
+### D-005 — authoritative question and answer weights
+
+Only the coefficients in `.agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext` are authoritative for question/answer weighting. The numerical weights in `.agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext` must not be consumed for scoring or persisted as approved recommendation weights. The latter may identify question-to-variable relationships, but its conflicting numbers have no precedence. This resolves the five differing pairs found in the source comparison (three `monthlyInstallment` and two `depositRequired` pairs); the original source bytes stay unchanged. Every materialized coefficient retains the conversion-table row and verified source hash.
