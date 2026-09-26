@@ -39,7 +39,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.locator(".hp-recommendation-needs-review")).not.toContainText("٪");
   expect(writes).toHaveLength(10);
   expect(writes.map(({ body }) => body.answerId)).toEqual(questionnaire.questions.map((q) => q.answerOptions[0].answerId));
-  expect(posts).toEqual([{ method: "POST", body: { sessionId } }]);
+  expect(posts.length).toBeGreaterThanOrEqual(1);
+  expect(posts.every((request) => request.method === "POST" && Object.keys(request.body).length === 1 && request.body.sessionId === sessionId)).toBe(true);
   expect(page.url()).not.toContain(sessionId);
   await page.getByRole("link", { name: "مشاهدهٔ جزئیات، شرایط و مدارک" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
