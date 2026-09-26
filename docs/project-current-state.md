@@ -2,6 +2,15 @@
 
 ## Active task
 
+- activeTaskId: US-09.T05A (new ordered prerequisite; implementation pending)
+- Status: task definition added to the canonical guide on `feature/us-09-live-integration`; no data, scoring, API, UI, deployment, or continuity document behavior changed by this planning amendment. US-09.T06 remains incomplete and follows a green T05A gate.
+- Decision: the six verified UTF-16LE unitext sources, approved D-001–D-004 decisions, canonical guide and existing US-08 engine define the calculation. T05A materializes and verifies those rules and PUBLISHED loan/conditions serving data; it does not invent recommendation logic.
+- Guide/source attestation: complete guide reread, `docs/recommendation-data-decisions.md` reread and six sources inspected via byte-preserving Git blob identities 26c70261829442e0676b85ac552bd6f7255f5faf, f2121e0e7f109d03cce432e4119978ba51ebb915, 2721940cdc5ae17fc952d20f947d949a61317fcd, f14d0d82a13708e87eea93c1d96ff14f4797c10b, 7eeed38450067f7fe3ba6be4846999d768ed697c, 0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc.
+- Test plan for this documentation change: verify US-09 story row, execution matrix, full T05A criteria and T06 dependency agree; no runtime tests are claimed. T05A implementation must run the gates defined in the guide.
+- nextTaskId: US-09.T05A. Preserve `docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md` until the entire US-09 is complete.
+
+## Prior US-09.T06 discovery checkpoint
+
 - activeTaskId: US-09.T06
 - Status: in progress; US-09.T01–T05 and PR #44 are merged. This checkpoint is not a completion claim.
 - Base branch: main at 4c76f266693580312e908a1f23b691c00d24bc25 (merge PR #44).
