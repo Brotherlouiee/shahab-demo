@@ -11,6 +11,9 @@ npm ci
 npm run dev
 ```
 
+For local FastAPI setup, environment configuration, and health checks, see the
+[backend bootstrap guide](docs/operations/fastapi-local-bootstrap.md).
+
 ## Build and host
 
 ```sh
