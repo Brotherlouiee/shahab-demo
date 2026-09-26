@@ -1,4 +1,4 @@
-"""Serving-catalogue adapter must select only published product versions."""
+"""Serving-catalogue adapter rejects orphan published and draft versions."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServ
 
 
 class SqlAlchemyCatalogueAdapterTests(unittest.TestCase):
-    def test_only_published_versions_are_visible(self) -> None:
+    def test_no_version_without_active_membership_is_visible(self) -> None:
         engine = create_engine("sqlite://")
         Base.metadata.create_all(engine)
         with Session(engine) as session:
@@ -34,9 +34,6 @@ class SqlAlchemyCatalogueAdapterTests(unittest.TestCase):
             session.add_all((lender, product, published, draft))
             session.commit()
             repository = SqlAlchemyServingLoanCatalogueRepository(session)
-            self.assertEqual(
-                [item.summary.loan_id for item in repository.list_current_serving_loans()],
-                [str(published.loan_product_version_id)],
-            )
-            self.assertIsNotNone(repository.get_current_serving_loan(str(published.loan_product_version_id)))
+            self.assertEqual(repository.list_current_serving_loans(), ())
+            self.assertIsNone(repository.get_current_serving_loan(str(published.loan_product_version_id)))
             self.assertIsNone(repository.get_current_serving_loan(str(draft.loan_product_version_id)))
