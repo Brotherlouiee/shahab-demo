@@ -40,6 +40,8 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(normalize_deposit_required("دارد").category_id, "deposit_required")
         self.assertEqual(normalize_deposit_required("وابسته به طرح").state, NormalizationState.UNMAPPED)
         self.assertEqual(normalize_guarantee_type("تعهد شخص ثالث").category_id, "thirdPartyUndertaking")
+        self.assertEqual(normalize_guarantee_type("تعهدات شخص ثالث").category_id, "thirdPartyUndertaking")
+        self.assertEqual(normalize_guarantee_type("تعهدات فردی").category_id, "personalUndertaking")
         self.assertEqual(normalize_guarantee_type("چک و ضامن").state, NormalizationState.UNMAPPED)
 
     def test_dispatcher_covers_every_approved_variable(self) -> None:
