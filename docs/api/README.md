@@ -41,3 +41,7 @@ be converted into a fabricated result or expose the server error body.
 ## US-09.T06 live endpoint gate
 
 The planned `POST /api/v1/recommendations` must accept exactly `{ "sessionId": "<opaque-id>" }` and return only `dataVersion`, `configVersion`, `rankedRecommendations` and `needsReview`. An active 30-minute session and complete canonical answer set are required. Raw answers, session identifiers, trace data and source provenance must never enter this response. Until an approved answer-to-preference configuration and a published, categorized serving snapshot exist, the endpoint must fail closed; this document does not claim the endpoint is implemented.
+
+## US-09.T05B serving data boundary
+
+The existing `GET /api/v1/loans/{loanId}` reads only active `PUBLISHED` serving members. `conditions` is an ordered plain-text bullet array derived from the exact conditions record of that loan version; an empty source is `[]`, and an absent/nonmember loan is 404. A storage failure returns the typed 503 envelope. The public allowlist excludes source rows, approval, catalogue/config IDs, recommendation traces, session IDs and raw answers. T05B adds no public recommendation endpoint; that belongs to T06. CI tests do not imply a persistent deployed API; T07 requires URL evidence.
