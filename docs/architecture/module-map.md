@@ -10,7 +10,7 @@ The root `src/` Vite application is the active prototype and remains operational
 | `frontend/src/shared` | generic UI and utility code | feature/domain rules |
 | `frontend/src/features/questionnaire` | questionnaire presentation and canonical-answer interaction | raw source documents, scoring |
 | `src/features/questionnaire` | active prototype's route-to-canonical-ID adapter | answer persistence, raw source documents, scoring |
-| `src/features/recommendation/presentation` | validated server-result view models, API client, distinct display states and safe details routes | scoring, filter/sort computation, direct database/session access |
+| `src/features/recommendation/presentation` | validated server-result view models, API client, display states, local filter/sort controls, RTL/a11y screen contracts and safe details routes | scoring, direct database/session access |
 | `frontend/src/features/loan-details` | loan-detail presentation | HTML rendering of raw conditions, scoring |
 | `src/features/loan-details` | active prototype's loan-detail API client and RTL presentation states | raw source parsing, scoring, persistence, `innerHTML` rendering |
 | `backend/app/recommendation/domain` | entities/value contracts/pure parsing | FastAPI, ORM, React imports |
