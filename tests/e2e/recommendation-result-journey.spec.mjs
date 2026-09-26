@@ -25,7 +25,7 @@ test("renders the validated server result in RTL, preserves needs-review without
   expect(recommendationRequests).toEqual([{ method: "POST", url: expect.stringMatching(/\/api\/v1\/recommendations$/), body: { sessionId } }]);
   expect(recommendationRequests[0].url).not.toContain(sessionId);
   expect(page.url()).not.toContain(sessionId);
-  await page.getByRole("link", { name: "مشاهدهٔ جزئیات، شرایط و مدارک" }).click();
+  await page.getByRole("link", { name: "مشاهدهٔ جزئیات، شرایط و مدارک" }).first().click();
   await expect(page).toHaveURL(/\/loan-details\?loanId=loan-ranked$/);
   await expect(page.locator("main.hp-loan-details-page")).toHaveAttribute("dir", "rtl");
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
