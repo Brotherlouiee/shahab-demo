@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+### Changed
+
+- **US-09.T06 (planned)**: Made live end-to-end recommendation delivery a required completion task: the canonical questionnaire session must reach the real recommendation endpoint and server engine, show published loans with server-calculated compatibility percentages, keep `needsReview` score-free, and let the user open safe loan conditions/rules on a testable preview URL. `US-09` is not Done without browser E2E and product-owner manual verification.
+
+
 - **US-09.T03**: Added a validated display-state contract that distinguishes ranked options, score-free needs-review options, no-candidate results and zero results after later manual filters. It preserves server order and rejects reordered or invented filtered items; no filter/sort computation or result-page wiring is added.
 
 - **US-09.T02**: Added a narrow recommendation-result API client that posts only the opaque active-tab session ID in the JSON body, validates the server read model through the US-09.T01 view model, and turns transport/malformed-response failures into safe typed client errors. No browser scoring, reordering, filtering, persistence or result-page rendering is added.
