@@ -42,8 +42,12 @@ Alembic is the sole schema-DDL owner under `alembic/`; its PostgreSQL 16 CI job 
 
 ## US-09.T06 readiness boundary
 
-The future transport adapter resolves the anonymous session and creates an allowlisted read model. A separate answer mapper must consume approved versioned coefficients; a serving repository must return an immutable `PUBLISHED` snapshot with categories for all eight loan variables, display names and approved conditions. The current SQLAlchemy catalogue adapter does not populate conditions text or category assignments, and the in-memory publication adapter is test/local only. None of these gaps may be filled with prototype cards or raw spreadsheet rows at request time.
+The future transport adapter resolves the anonymous session and creates an allowlisted read model. A separate answer mapper must consume approved versioned coefficients; a serving repository must return an immutable `PUBLISHED` snapshot with categories for all eight loan variables, display names and approved conditions. T05B supplies active-only SQLAlchemy reads of approved conditions and all eight categories; the in-memory publication adapter remains test/local only. T06 still owns the session mapper and public recommendation endpoint. None of these boundaries may use prototype cards or raw spreadsheet rows at request time.
 
 ## US-09.T05A materialization boundary
 
 `scripts/build_t05a_*.py` فقط بایت منبع و قراردادها را به manifest قطعی تبدیل می‌کنند. `backend/app/data_pipeline/infrastructure/materialize_official_sources.py` تنها adapter نوشتن PostgreSQL است و به session پرسشنامه، موتور pure یا HTTP متصل نیست. آداپتورهای خواندن active snapshot و جزئیات در T05B باقی می‌مانند.
+
+## US-09.T05B serving boundaries
+
+`backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py` پورت read snapshot را پیاده می‌کند؛ engine/application ORM نمی‌خوانند. `backend/app/loans/infrastructure/sqlalchemy_catalogue.py` تنها active published members و detail facts همان version را می‌خواند. `backend/app/loans/infrastructure/backfill_serving_facts.py` projection رسمی T05A را با manifest قفل‌شده تکمیل می‌کند. اتصال session و endpoint در T06 و استقرار پایدار در T07 است.
