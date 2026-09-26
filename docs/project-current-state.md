@@ -2,16 +2,19 @@
 
 ## Active task
 
-- activeTaskId: US-09.T05
-- Status: US-09.T04 was merged in PR #43. US-09.T05 is complete in this branch. GitHub Actions #145 passed quality, PostgreSQL migration verification and Chromium E2E.
-- Base branch: main after merge of US-09.T04 in PR #43 (85c1ff115262cf66020afb770095cd300115be93).
-- Working branch: test/us-09-browser-e2e
-- estimatedWorkScope: add a production-excluded browser harness and Playwright journey tests for the existing result client/screen/detail boundaries, plus the smallest test command and task documentation. Do not add endpoint, session lookup, score calculation, persistence, route replacement or deployment.
-- actualScope: the test harness obtains a controlled API read model only through the existing T02 client, renders the T04 screen in a real browser, verifies the score-free needs-review state and manual display controls, then follows the existing safe details link to the approved-detail screen. The harness is under tests/ and is not part of the production entrypoint.
-- Session decision: 30-minute retention, same browser tab only. The E2E fixture checks that its opaque session ID is sent in the request body only and never in the URL.
-- Explicit exclusions: no live recommendation endpoint, no real questionnaire-to-result wiring, no persistence/Redis/identity/OTP/source-data mutation or production deploy. T06 remains the sole owner of live session → endpoint → engine → result integration and product-owner preview verification.
-- Source/guide attestation: complete canonical guide, recommendation-data decisions and all six UTF-16LE official sources reread before implementation. Source blobs: 26c7026, f2121e0, 2721940, f14d0d8, 7eeed38, 0854a5c.
-- Test plan: focused Playwright success/detail and typed retry cases; then GitHub Actions quality, PostgreSQL migration verification and Chromium E2E.
+- activeTaskId: US-09.T06
+- Status: in progress; US-09.T01–T05 and PR #44 are merged. This checkpoint is not a completion claim.
+- Base branch: main at 4c76f266693580312e908a1f23b691c00d24bc25 (merge PR #44).
+- Working branch: feature/us-09-live-integration
+- estimatedWorkScope: connect canonical session, approved answer-to-preference conversion, published snapshot, server endpoint and active frontend result route; prove response allowlist and browser journey. No deployment.
+- completionBudget: the first gate is approved data readiness. No score or published catalogue can be fabricated to satisfy an E2E.
+- Acceptance: only the sessionId appears in the recommendation POST body; complete active canonical answers, approved configuration, PUBLISHED candidates, server scores/reasons, score-free needsReview, real details and safe errors. Quality, PostgreSQL migration, Chromium and security gates must pass.
+- Source/guide attestation: full canonical guide and recommendation-data decisions reviewed. Six original source Git blob SHAs: questionnaire 26c70261829442e0676b85ac552bd6f7255f5faf; loan categories f2121e0e7f109d03cce432e4119978ba51ebb915; questionnaire mapping 2721940cdc5ae17fc952d20f947d949a61317fcd; answer weights f14d0d82a13708e87eea93c1d96ff14f4797c10b; one-to-one coefficients 7eeed38450067f7fe3ba6be4846999d768ed697c; loan source 0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc. The source contract identifies UTF-16LE; GitHub's text wrapper transcodes retrieval, so original blob SHA is the byte-preserving identity.
+- Blocker discovered before implementation: the persisted model has LoanTerms for four numeric attributes but no persisted category assignments for all eight variables, no approved answer-to-category impact mapping consumed by the engine, no durable published catalogue import/pointer adapter, and no stored approved conditions text. The current SQLAlchemy catalogue adapter returns conditionsSourceText=None. The current in-memory publication repository explicitly forbids production use. A scored API or real details cannot safely be declared operational until these boundaries are supplied and verified.
+- Decision: fail closed on unavailable approved data; do not invent mappings, scores, conditions or published loans. Preserve the User Story continuity document until the complete story is proven. No Netlify/deployment change.
+- nextTaskId: US-09.T06 (remaining prerequisite: approved materialization and configuration, followed by session/API/UI integration and all gates).
+
+## Previous checkpoint
 
 ## Evidence
 
