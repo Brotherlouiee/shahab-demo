@@ -16,6 +16,13 @@ class RecommendationDataDecisionTests(unittest.TestCase):
         self.assertEqual(weights["Q5"], 0.1)
         self.assertAlmostEqual(sum(weights.values()), 1.0)
 
+    def test_answer_conversion_is_the_only_authoritative_weight_source(self):
+        policy = self.config["weightSourcePolicy"]
+        self.assertEqual(self.config["configVersion"], "1.1.0")
+        self.assertEqual(policy["decisionId"], "D-005")
+        self.assertTrue(policy["authoritativePath"].endswith("تبدیل پاسخ‌ها به وزن‌های عددی.unitext"))
+        self.assertFalse(policy["ignoredNumericWeightsMayBeScored"])
+
     def test_neutral_and_core_exclusion_variables_are_disjoint(self):
         policies = self.config["unknownPolicies"]
         neutral = set(policies["neutralVariables"])
