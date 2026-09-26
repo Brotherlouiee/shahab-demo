@@ -2,18 +2,22 @@
 
 ## Active task
 
-- activeTaskId: US-09.T03
-- Status: US-09.T02 was merged in PR #40; US-09.T03 is complete in PR #41 and ready for normal review/merge. GitHub Actions #135 is green (quality, PostgreSQL migration verification and Chromium E2E).
-- Base branch: main after merge of US-09.T02 in PR #40 (46b9e0b45bea477398e9f8594e4f04449549986f).
-- Working branch: feature/us-09-recommendation-result-states
-- estimatedWorkScope: define the framework-free presentation state contract that distinguishes ranked, needs-review, no-candidate and zero-after-filter results, with focused Node tests. Filters, sort, accessibility/RTL and route wiring remain later tasks.
-- actualScope: adds a state mapper for a validated server result. It keeps ranked order/score intact, retains needs-review items as score-free, distinguishes empty causes with specific Persian copy, and accepts only order-preserving filter output supplied by a later boundary. No API request, browser scoring, filter/sort calculation, persistence or React result route is introduced.
-- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. The opaque session ID remains in React memory and does not enter URLs, storage or logs.
-- Explicit exclusions: no identity, OTP integration, cross-device resume, manual filter/sort logic, accessibility/RTL hardening, production deployment or source-data mutation.
-- Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation.
-- Test evidence: GitHub Actions #135 passed the display-state tests inside the complete quality gate, plus PostgreSQL migration verification and Chromium E2E.
+- activeTaskId: US-09.T04
+- Status: US-09.T03 was merged in PR #41 and the US-09.T06 Definition of Done was merged in PR #42. US-09.T04 is complete in this branch and validated by GitHub Actions #141 (quality, PostgreSQL migration verification and Chromium E2E are green).
+- Base branch: main after merge of the US-09.T06 documentation decision in PR #42 (9774fc399ed749bc0f6f5ddda0ff8717318f9437).
+- Working branch: feature/us-09-result-controls
+- estimatedWorkScope: add a small presentation control module, a server-result-only RTL/a11y screen and focused Node/SSR contract tests. Do not wire the screen to the prototype route or create static result data.
+- actualScope: adds lender-only filtering, stable lender-name display sorting, server-order default, safe server-score formatting, RTL/a11y markup, responsive CSS and loading/error/no-result presentation. The control boundary keeps filter membership/order valid for the earlier display-state contract; no score or rank is calculated in the browser.
+- Session decision: confirmed by product owner on 2026-09-24 — 30-minute retention, same browser tab only. This task neither reads nor stores the opaque session ID.
+- Explicit exclusions: no endpoint, persistence, identity, OTP, cross-device resume, source-data change, mounted prototype-route replacement or production deploy. T06 owns the live session → API → engine → result journey and preview verification.
+- Source/guide attestation: the complete canonical guide, recommendation-data decisions and all six verified UTF-16LE official sources were reread before implementation. Source blobs: 26c7026, f2121e0, 2721940, f14d0d8, 7eeed38, 0854a5c.
+- Test plan: focused Node tests for controls and server-rendered a11y states, then complete GitHub Actions quality, PostgreSQL migration and Chromium E2E gates.
 
 ## Evidence
+
+- US-09.T04 start checkpoint: dependencies US-09.T01–T03 and the merged US-09.T06 Definition of Done are present. Acceptance requires lender filter, stable display sort without score ordering, RTL/a11y/responsive presentation and focused tests, without adding an API, session lookup, route wiring or static recommendation data.
+- US-09.T04 end checkpoint: code review confirmed filtering preserves source membership/order before display sorting; the only alternate sort is stable lender name; score formatting is presentation-only; needs-review remains score-free; safe details links and typed loading/error states are rendered. GitHub Actions #141 passed quality, PostgreSQL migration verification and Chromium E2E. The follow-up documentation checkpoint commit will be verified by the same required gate. The next task remains US-09.T05 (browser E2E); T06 remains required before US-09 can be declared Done.
+- Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
 
 - US-09.T03 start checkpoint: dependency US-09.T02 is merged. Acceptance requires four distinct display outcomes with no scoring/reorder/filter logic moving into the browser boundary, plus contract tests, docs, CHANGELOG, checkpoint and green CI.
 - US-09.T03 end checkpoint: code review confirmed server score/order preservation, score-free needs-review handling, no invented/reordered filtered item, and no API/storage/session/identity/React-route boundary crossing. GitHub Actions #135 passed all required gates; the next ordered task is US-09.T04 (manual filters, stable sort, accessibility and responsive RTL).

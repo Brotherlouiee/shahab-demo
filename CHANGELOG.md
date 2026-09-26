@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T04**: Added server-result presentation controls: lender-only filtering, stable display sorting by lender name, responsive RTL/a11y result markup and typed loading/error states. Score formatting remains display-only; no browser scoring, API/session wiring or static recommendation results were added.
+
 ### Changed
 
 - **US-09.T06 (planned)**: Made live end-to-end recommendation delivery a required completion task: the canonical questionnaire session must reach the real recommendation endpoint and server engine, show published loans with server-calculated compatibility percentages, keep `needsReview` score-free, and let the user open safe loan conditions/rules on a testable preview URL. `US-09` is not Done without browser E2E and product-owner manual verification.

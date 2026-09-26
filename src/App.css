@@ -5222,3 +5222,126 @@ button {
     transform: translate(-50%, 0);
   }
 }
+\n
+/* US-09.T04: a responsive, RTL-ready surface. The component remains unmounted
+   until the live result integration in T06; these classes are intentionally
+   scoped to the recommendation result boundary. */
+.hp-recommendation-results-screen {
+  inline-size: min(100%, 72rem);
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  color: #162134;
+}
+
+.hp-recommendation-results-heading,
+.hp-recommendation-section,
+.hp-recommendation-result-state {
+  background: #fff;
+  border: 1px solid #dce5ef;
+  border-radius: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.hp-recommendation-results-heading p,
+.hp-recommendation-reason,
+.hp-recommendation-warning {
+  line-height: 1.8;
+}
+
+.hp-recommendation-results-content {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 1rem;
+}
+
+.hp-recommendation-result-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.hp-recommendation-result-filters label,
+.hp-recommendation-result-filters select {
+  display: block;
+  inline-size: 100%;
+}
+
+.hp-recommendation-result-filters label {
+  margin-block-end: .4rem;
+  font-weight: 700;
+}
+
+.hp-recommendation-result-filters select {
+  min-block-size: 2.75rem;
+  border: 1px solid #9aa8b7;
+  border-radius: .6rem;
+  background: #fff;
+  color: inherit;
+  padding-inline: .75rem;
+}
+
+.hp-recommendation-result-filters select:focus-visible,
+.hp-recommendation-result-card a:focus-visible,
+.hp-recommendation-result-state button:focus-visible {
+  outline: 3px solid #1264d7;
+  outline-offset: 3px;
+}
+
+.hp-recommendation-result-announcement {
+  margin: 0;
+}
+
+.hp-recommendation-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.hp-recommendation-section h2,
+.hp-recommendation-result-card h3 {
+  margin: 0;
+}
+
+.hp-recommendation-result-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.hp-recommendation-result-card {
+  display: grid;
+  gap: .8rem;
+  border-color: #cbd8e5;
+}
+
+.hp-recommendation-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+}
+
+.hp-recommendation-score strong {
+  color: #0b63ff;
+  font-size: 1.3rem;
+}
+
+.hp-recommendation-warning {
+  margin: 0;
+  color: #755900;
+}
+
+.hp-recommendation-needs-review {
+  border-color: #eadb9d;
+}
+
+@media (max-width: 38rem) {
+  .hp-recommendation-result-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-recommendation-results-screen {
+    padding-inline: 1rem;
+  }
+}
