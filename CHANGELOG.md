@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- **US-09.T05A:** Verified deterministic official-source extraction and D-005 weight precedence; source audits cover 102 loans, 30 weight groups and 720 compatibility cells. Added a reversible PostgreSQL migration and transactional, approval-gated materialization for versioned categories, conditions, configuration and serving catalogue, with idempotency and source-content checks. Database publication remains an explicit operator action after inspecting the actual database; T05B/T06 consume these records later.
+
 ### Changed
 
 - **US-09.T05B (planned):** Added a separate post-T05A server adapter task for an approved PostgreSQL recommendation snapshot, real published loan conditions/details, and durable publication when the database audit proves it missing. Canonical session-to-engine adaptation and the live API/UI journey remain T06; this entry defines work, not completed runtime functionality.
