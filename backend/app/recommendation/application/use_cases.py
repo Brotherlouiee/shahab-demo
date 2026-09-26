@@ -9,6 +9,11 @@ from backend.app.recommendation.domain.entities import (
     RecommendationRun,
     RecommendationSnapshot,
 )
+from backend.app.recommendation.engine.canonical_scoring import (
+    CanonicalPartition,
+    CategoryImpact,
+    score_official_categories,
+)
 from backend.app.recommendation.engine.scoring import partition_loans
 from backend.app.recommendation.engine.trace import build_recommendation_trace
 
@@ -68,3 +73,15 @@ def _validate_snapshot(snapshot: RecommendationSnapshot) -> None:
     loan_ids = [candidate.loan_id for candidate in snapshot.candidates]
     if len(loan_ids) != len(set(loan_ids)):
         raise RecommendationInputError("snapshot candidate IDs must be unique")
+
+
+class RecommendCanonicalLoans:
+    """Run the source-backed category model against one published snapshot."""
+
+    def __init__(self, repository: RecommendationSnapshotRepository) -> None:
+        self._repository = repository
+
+    def execute(self, impacts: tuple[CategoryImpact, ...]) -> tuple[RecommendationSnapshot, CanonicalPartition]:
+        snapshot = self._repository.read_approved_snapshot()
+        _validate_snapshot(snapshot)
+        return snapshot, score_official_categories(snapshot.candidates, impacts)

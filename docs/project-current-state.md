@@ -1,5 +1,12 @@
 # Project current state
 
+## US-09.T06 implementation checkpoint (2026-09-26)
+
+- `activeTaskId`: `US-09.T06`; `actualScope`: canonical session to approved category impacts, source-backed scoring, real API and active result/detail route. D-005 uses only answer-conversion numeric weights; one-to-one factors use their independent source; mapping-matrix numbers are not read.
+- Tests: full official-source SQLite HTTP flow (102 approved loans, ten answers, 14 needsReview, published conditions), 116 backend tests, source-cell and neutral cases; record PostgreSQL and Chromium CI results in the PR after completion. These tests do not prove a public staging URL.
+- `nextTaskId`: `US-09.T07` persistent staging PostgreSQL and published import, deployed API/Netlify integration and real URL owner verification. Production remains US-12. Keep the User Story continuity document unchanged until the whole US-09 ends.
+
+
 ## US-09.T05B implementation checkpoint (2026-09-26)
 
 - `activeTaskId`: `US-09.T05B`; `estimatedWorkScope`/`completionBudget`: approved snapshot read, real loan-detail projection, existing T05A publication reuse/backfill, PostgreSQL integration tests, docs and PR. `actualScope`: those boundaries; no session mapper, recommendation endpoint, frontend route or deployment.
