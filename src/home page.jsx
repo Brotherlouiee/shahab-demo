@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
+import RecommendationResultScreen from "./features/recommendation/presentation/recommendationResultScreen.mjs";
+import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
   getPrototypeQuestionIndexForCanonicalQuestionId,
@@ -1265,6 +1267,29 @@ function LoanAiAnalysisScreen({ onBack }) {
   );
 }
 
+function LiveRecommendationResults({ sessionId, onBack, onMenu, onHome, onDetails }) {
+  const [result, setResult] = useState(null);
+  const [status, setStatus] = useState("loading");
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    const controller = new AbortController();
+    setStatus("loading");
+    fetchRecommendationResult(sessionId, { signal: controller.signal })
+      .then((response) => { if (!controller.signal.aborted) { setResult(response); setStatus("ready"); } })
+      .catch(() => { if (!controller.signal.aborted) setStatus("error"); });
+    return () => controller.abort();
+  }, [sessionId, attempt]);
+  return (
+    <RecommendationResultScreen
+      status={status}
+      result={result}
+      header={<QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />}
+      onRetry={() => setAttempt((value) => value + 1)}
+      onDetails={onDetails}
+    />
+  );
+}
+
 function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
@@ -1969,6 +1994,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       setAnalysisCountdown(8);
       return;
     }
+    if (canonicalQuestion?.questionId === "S13") {
+      setLoanResultView("results");
+      return;
+    }
     if (currentQuestion === 1 && selectedOption !== "person") return;
     if (currentQuestion >= questions.length - 1) return;
 
@@ -2014,7 +2043,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     }
 
     setLoanResultView("");
-    setIsOtpVerificationStep(true);
+    setIsOtpVerificationStep(false);
+    setCurrentQuestion(11);
   }
 
   function handleLoanDetailsOpen(loanId) {
@@ -2198,13 +2228,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   if (loanResultView === "results") {
     return (
-      <LoanResultsScreen
+      <LiveRecommendationResults
+        sessionId={questionnaireSessionId}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
         onDetails={handleLoanDetailsOpen}
-        onCompare={handleLoanCompareOpen}
-        onRequest={handleLoanRequestOpen}
       />
     );
   }
