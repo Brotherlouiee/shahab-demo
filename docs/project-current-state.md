@@ -3,11 +3,11 @@
 ## Active task
 
 - activeTaskId: US-09.T05
-- Status: US-09.T04 was merged in PR #43. US-09.T05 adds browser-level journey coverage in this branch; required CI gates are pending.
+- Status: US-09.T04 was merged in PR #43. US-09.T05 is complete in this branch. GitHub Actions #145 passed quality, PostgreSQL migration verification and Chromium E2E.
 - Base branch: main after merge of US-09.T04 in PR #43 (85c1ff115262cf66020afb770095cd300115be93).
 - Working branch: test/us-09-browser-e2e
 - estimatedWorkScope: add a production-excluded browser harness and Playwright journey tests for the existing result client/screen/detail boundaries, plus the smallest test command and task documentation. Do not add endpoint, session lookup, score calculation, persistence, route replacement or deployment.
-- actualScope: pending CI. The test harness obtains a controlled API read model only through the existing T02 client, renders the T04 screen in a real browser, verifies the score-free needs-review state and manual display controls, then follows the existing safe details link to the approved-detail screen. The harness is under tests/ and is not part of the production entrypoint.
+- actualScope: the test harness obtains a controlled API read model only through the existing T02 client, renders the T04 screen in a real browser, verifies the score-free needs-review state and manual display controls, then follows the existing safe details link to the approved-detail screen. The harness is under tests/ and is not part of the production entrypoint.
 - Session decision: 30-minute retention, same browser tab only. The E2E fixture checks that its opaque session ID is sent in the request body only and never in the URL.
 - Explicit exclusions: no live recommendation endpoint, no real questionnaire-to-result wiring, no persistence/Redis/identity/OTP/source-data mutation or production deploy. T06 remains the sole owner of live session → endpoint → engine → result integration and product-owner preview verification.
 - Source/guide attestation: complete canonical guide, recommendation-data decisions and all six UTF-16LE official sources reread before implementation. Source blobs: 26c7026, f2121e0, 2721940, f14d0d8, 7eeed38, 0854a5c.
@@ -16,7 +16,7 @@
 ## Evidence
 
 - US-09.T05 start checkpoint: dependencies T01–T04 are merged. Acceptance requires a browser-executed contract from the existing result client and RTL/a11y result screen through the safe loan-details route, including score-free needs-review, manual controls and typed retry. Because the live endpoint is owned by T06, controlled HTTP responses may be used only inside the test harness and must not become production data or a route replacement.
-- US-09.T05 end checkpoint: pending CI. The new fixture is reachable only beneath tests/, has no production import, sends the opaque session ID only in the request body, and verifies result-to-details browser handoff. T06 remains mandatory for real questionnaire/session/API/engine connection and preview verification; continuity remains unchanged until full US-09 completion.
+- US-09.T05 end checkpoint: GitHub Actions #145 passed quality, PostgreSQL migration verification and Chromium E2E after the detail-link selector was made explicit. The fixture is reachable only beneath tests/, has no production import, sends the opaque session ID only in the request body, and verifies result-to-details browser handoff. T06 remains mandatory for real questionnaire/session/API/engine connection and preview verification; continuity remains unchanged until full US-09 completion.
 
 - US-09.T04 start checkpoint: dependencies US-09.T01–T03 and the merged US-09.T06 Definition of Done are present. Acceptance requires lender filter, stable display sort without score ordering, RTL/a11y/responsive presentation and focused tests, without adding an API, session lookup, route wiring or static recommendation data.
 - US-09.T04 end checkpoint: code review confirmed filtering preserves source membership/order before display sorting; the only alternate sort is stable lender name; score formatting is presentation-only; needs-review remains score-free; safe details links and typed loading/error states are rendered. GitHub Actions #141 passed quality, PostgreSQL migration verification and Chromium E2E. The follow-up documentation checkpoint commit will be verified by the same required gate. The next task remains US-09.T05 (browser E2E); T06 remains required before US-09 can be declared Done.
