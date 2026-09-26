@@ -3,7 +3,7 @@
 ## Active task
 
 - activeTaskId: US-09.T04
-- Status: US-09.T03 was merged in PR #41 and the US-09.T06 Definition of Done was merged in PR #42. US-09.T04 is complete in this branch and awaiting the required GitHub Actions gate.
+- Status: US-09.T03 was merged in PR #41 and the US-09.T06 Definition of Done was merged in PR #42. US-09.T04 is complete in this branch and validated by GitHub Actions #141 (quality, PostgreSQL migration verification and Chromium E2E are green).
 - Base branch: main after merge of the US-09.T06 documentation decision in PR #42 (9774fc399ed749bc0f6f5ddda0ff8717318f9437).
 - Working branch: feature/us-09-result-controls
 - estimatedWorkScope: add a small presentation control module, a server-result-only RTL/a11y screen and focused Node/SSR contract tests. Do not wire the screen to the prototype route or create static result data.
@@ -16,7 +16,7 @@
 ## Evidence
 
 - US-09.T04 start checkpoint: dependencies US-09.T01–T03 and the merged US-09.T06 Definition of Done are present. Acceptance requires lender filter, stable display sort without score ordering, RTL/a11y/responsive presentation and focused tests, without adding an API, session lookup, route wiring or static recommendation data.
-- US-09.T04 end checkpoint: code review confirmed filtering preserves source membership/order before display sorting; the only alternate sort is stable lender name; score formatting is presentation-only; needs-review remains score-free; safe details links and typed loading/error states are rendered. Required CI evidence is pending on this commit. The next task remains US-09.T05 (browser E2E); T06 remains required before US-09 can be declared Done.
+- US-09.T04 end checkpoint: code review confirmed filtering preserves source membership/order before display sorting; the only alternate sort is stable lender name; score formatting is presentation-only; needs-review remains score-free; safe details links and typed loading/error states are rendered. GitHub Actions #141 passed quality, PostgreSQL migration verification and Chromium E2E. The follow-up documentation checkpoint commit will be verified by the same required gate. The next task remains US-09.T05 (browser E2E); T06 remains required before US-09 can be declared Done.
 - Continuity-document rule: `PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO` remains unchanged until the end of the complete US-09 user story.
 
 - US-09.T03 start checkpoint: dependency US-09.T02 is merged. Acceptance requires four distinct display outcomes with no scoring/reorder/filter logic moving into the browser boundary, plus contract tests, docs, CHANGELOG, checkpoint and green CI.
