@@ -1,5 +1,13 @@
 # Project current state
 
+## US-09.T05B implementation checkpoint (2026-09-26)
+
+- `activeTaskId`: `US-09.T05B`; `estimatedWorkScope`/`completionBudget`: approved snapshot read, real loan-detail projection, existing T05A publication reuse/backfill, PostgreSQL integration tests, docs and PR. `actualScope`: those boundaries; no session mapper, recommendation endpoint, frontend route or deployment.
+- Source integrity: same six official Git blobs listed in the T05A checkpoint below, unchanged. D-005: only answer-conversion weights are authoritative; numeric mapping-matrix coefficients are ignored. Separate one-to-one compatibility cells remain source-backed.
+- New migration `a62c0b5b005b` stores version-scoped display facts. Snapshot read checks active published members, approved config and eight variables in one SQL statement. Loan details read exact conditions and facts of the same member version. An existing T05A catalogue has an explicit source-checked, transactional, idempotent facts backfill. The T05A materialization/approval path remains the durable publisher; no parallel generic publisher was introduced.
+- Tests: focused SQLite/API and PostgreSQL CI verify score/review partition, exact conditions, backfill reuse/rollback, missing/incomplete/superseded/draft states, typed failure and public allowlist. Record final run in PR. No persistent service/database or Netlify integration is claimed by CI.
+- `nextTaskId`: `US-09.T06` live session/API/UI, then `US-09.T07` persistent staging DB, approved import, Netlify connection and real-URL verification. Production release remains US-12. The continuity document is unchanged until the entire US-09 (including T07) ends.
+
 ## US-09.T05A implementation checkpoint (2026-09-26)
 
 - `activeTaskId`: `US-09.T05A`; `estimatedWorkScope` / `completionBudget`: canonical source audit, D-005, deterministic source/config extraction, schema/materialization, focused and CI gates, documentation and PR in one bounded task. `actualScope`: same; no public API or deployment.
@@ -7,7 +15,7 @@
 - D-005 product-owner decision: only answer-conversion coefficients are authoritative weights; the mapping matrix's five differing numbers are ignored. Independent one-to-one compatibility matrix yields 720 coefficients.
 - Source audit: 102 loans/conditions, 88 rankable and 14 needsReview; 816 variable assignments, 30 question groups, 150 answer weights, 720 compatibility cells. Three values above the approved maxAmount ceiling remain unmapped.
 - Migration `91d5a005a01a` and `materialize_official_sources` provide durable versioned rows, source provenance and a single active publication with explicit operator approval. Exact manifest digests block edited content bearing a valid source hash; identical active publication is reused, and transaction failure rolls back. Previously published loans without this active official catalogue fail closed pending row-level reconciliation, avoiding duplicate import.
-- Tests: focused backend tests passed locally; PostgreSQL migration/materialization is wired into the CI PostgreSQL gate. Local environment lacks PostgreSQL credentials; the actual operational DB inventory and publication must be run by an authorized operator. No operational database state is inferred from source files.
+- Tests: focused backend tests passed locally; PostgreSQL migration/materialization passed in GitHub Actions' disposable PostgreSQL service. The repository also defines a local Docker Compose PostgreSQL volume, but this execution environment did not run it. `netlify.toml` builds only the frontend; no continuously hosted PostgreSQL instance is identified or claimed here. No persistent catalogue publication has occurred. Future local or hosted publication requires selecting that database, auditing it, then explicitly invoking the approved command; source counts are not database-state evidence.
 - `nextTaskId`: `US-09.T05B` after the T05A gate, then `US-09.T06` live integration. US-09 is incomplete. The User Story continuity document remains unchanged until the story ends.
 
 ## Active task
