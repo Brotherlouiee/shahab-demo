@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.core.dependencies import get_loan_details_use_case
 from backend.app.loans.application.use_cases import GetLoanDetails
+from backend.app.loans.domain.models import ServingCatalogueUnavailableError
 
 from .loan_schemas import LoanDetailResponse
 
@@ -23,6 +24,10 @@ def get_loan_detail(
     """Return only approved serving facts; identifiers never select a source version."""
     try:
         loan = use_case.execute(loan_id)
+    except ServingCatalogueUnavailableError as error:
+        raise ApiError(
+            status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Loan catalogue is temporarily unavailable."
+        ) from error
     except ValueError as error:
         raise ApiError(status_code=422, code=ErrorCode.INVALID_REQUEST, message="Loan ID is invalid.") from error
     if loan is None:
