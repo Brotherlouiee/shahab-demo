@@ -1,5 +1,15 @@
 # Project current state
 
+## US-09.T05A implementation checkpoint (2026-09-26)
+
+- `activeTaskId`: `US-09.T05A`; `estimatedWorkScope` / `completionBudget`: canonical source audit, D-005, deterministic source/config extraction, schema/materialization, focused and CI gates, documentation and PR in one bounded task. `actualScope`: same; no public API or deployment.
+- Official six Git blobs: questionnaire `26c70261829442e0676b85ac552bd6f7255f5faf`; categories `f2121e0e7f109d03cce432e4119978ba51ebb915`; questionnaire mapping `2721940cdc5ae17fc952d20f947d949a61317fcd`; answer conversion `f14d0d82a13708e87eea93c1d96ff14f4797c10b`; one-to-one compatibility `7eeed38450067f7fe3ba6be4846999d768ed697c`; loans `0854a5c3ad6b7640ddb7d6d9ae24ae0b2a4733fc`. No source bytes changed.
+- D-005 product-owner decision: only answer-conversion coefficients are authoritative weights; the mapping matrix's five differing numbers are ignored. Independent one-to-one compatibility matrix yields 720 coefficients.
+- Source audit: 102 loans/conditions, 88 rankable and 14 needsReview; 816 variable assignments, 30 question groups, 150 answer weights, 720 compatibility cells. Three values above the approved maxAmount ceiling remain unmapped.
+- Migration `91d5a005a01a` and `materialize_official_sources` provide durable versioned rows, source provenance and a single active publication with explicit operator approval. Exact manifest digests block edited content bearing a valid source hash; identical active publication is reused, and transaction failure rolls back.
+- Tests: focused backend tests passed locally; PostgreSQL migration/materialization is wired into the CI PostgreSQL gate. Local environment lacks PostgreSQL credentials; the actual operational DB inventory and publication must be run by an authorized operator. No operational database state is inferred from source files.
+- `nextTaskId`: `US-09.T05B` after the T05A gate, then `US-09.T06` live integration. US-09 is incomplete. The User Story continuity document remains unchanged until the story ends.
+
 ## Active task
 
 - activeTaskId: US-09.T05A (new ordered prerequisite; implementation pending)
