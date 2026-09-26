@@ -85,3 +85,14 @@ erDiagram
 ```
 
 `serving_catalogue_versions` یک active pointer یکتا دارد. membership تنها نسخه‌های منتشرشدهٔ تأییدشده را در transaction انتشار می‌گیرد. متن شروط روی همان loan version ذخیره می‌شود؛ وزن و ضریب به config version و سطر/ستون منبع پیوند دارند.
+
+## US-09.T05B detail projection
+
+```mermaid
+erDiagram
+    loan_product_versions ||--|| loan_serving_facts : displays
+    loan_product_versions ||--|| loan_conditions : specifies
+    serving_catalogue_members }o--|| loan_product_versions : selects
+```
+
+این projection از همان نسخهٔ تأییدشدهٔ وام ساخته می‌شود؛ مقدار شرط خالی از نبود عضو در کاتالوگ متمایز است.
