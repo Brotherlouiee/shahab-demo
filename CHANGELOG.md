@@ -8,6 +8,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T05B:** Added one-statement approved PostgreSQL recommendation snapshot read, active-only loan details with official conditions/facts, and a source-checked idempotent backfill for already published T05A rows. The pure engine now has a real repository adapter, without a public recommendation endpoint or deployed database. Added `US-09.T07` as the separate mandatory persistent-staging/Netlify/real-URL delivery gate; CI success alone does not satisfy it.
+
+
 - **US-09.T05A:** Verified deterministic official-source extraction and D-005 weight precedence; source audits cover 102 loans, 30 weight groups and 720 compatibility cells. Added a reversible PostgreSQL migration and transactional, approval-gated materialization for versioned categories, conditions, configuration and serving catalogue, with idempotency and source-content checks. Database publication remains an explicit operator action after inspecting the actual database; T05B/T06 consume these records later.
 
 ### Changed

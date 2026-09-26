@@ -29,6 +29,7 @@ from backend.app.infrastructure.db.models import (
     LoanConditions,
     LoanProduct,
     LoanProductVersion,
+    LoanServingFacts,
     LoanTerms,
     LoanVariable,
     PublicationState,
@@ -341,6 +342,19 @@ def materialize_official_sources(
             LoanConditions(
                 loan_product_version_id=version.loan_product_version_id,
                 source_text=canonical.display_fields.get("conditions", ""),
+            )
+        )
+        session.add(
+            LoanServingFacts(
+                loan_product_version_id=version.loan_product_version_id,
+                deposit_required_text=values["depositRequired"].raw.strip() or None,
+                deposit_holding_months=None
+                if _classified_number(values, "depositHoldingMonths") is None
+                else int(_classified_number(values, "depositHoldingMonths")),
+                loan_to_deposit_ratio_percent=_classified_number(values, "loanToDepositRatio"),
+                guarantee_type_text=values["guaranteeType"].raw.strip() or None,
+                required_deposit_account=canonical.display_fields.get("requiredDepositAccount"),
+                bank_logo_reference=canonical.display_fields.get("bankLogo"),
             )
         )
         session.add(

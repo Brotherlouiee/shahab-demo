@@ -11,7 +11,12 @@ from pydantic import SecretStr
 from backend.app.core.config import AppEnvironment, Settings
 from backend.app.core.dependencies import get_loan_details_use_case
 from backend.app.loans.application.use_cases import GetLoanDetails
-from backend.app.loans.domain.models import LoanDetail, LoanSummary, PublishedLoanRecord
+from backend.app.loans.domain.models import (
+    LoanDetail,
+    LoanSummary,
+    PublishedLoanRecord,
+    ServingCatalogueUnavailableError,
+)
 from backend.app.loans.infrastructure.in_memory_catalogue import InMemoryServingLoanCatalogueRepository
 from backend.app.main import create_app
 
@@ -66,3 +71,14 @@ class LoanDetailApiTests(unittest.TestCase):
         response = TestClient(app, raise_server_exceptions=False).get("/api/v1/loans/loan-approved")
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.json()["error"]["code"], "service_unavailable")
+
+    def test_storage_failure_is_a_typed_unavailable_response(self) -> None:
+        class BrokenDetails:
+            def execute(self, loan_id: str):
+                raise ServingCatalogueUnavailableError("storage failure")
+
+        self.app.dependency_overrides[get_loan_details_use_case] = lambda: BrokenDetails()
+        response = self.client.get("/api/v1/loans/loan-approved")
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.json()["error"]["code"], "service_unavailable")
+        self.assertNotIn("storage failure", response.text)

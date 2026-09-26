@@ -26,6 +26,7 @@ EXPECTED_TABLES = {
     "variable_categories",
     "loan_category_assignments",
     "loan_conditions",
+    "loan_serving_facts",
     "answer_option_weights",
     "answer_category_compatibilities",
     "serving_catalogue_versions",
@@ -108,9 +109,10 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
     def test_official_materialization_has_a_durable_active_version(self) -> None:
         import json
+        from decimal import Decimal
         from pathlib import Path
 
-        from sqlalchemy import func, select
+        from sqlalchemy import delete, func, select
         from sqlalchemy.orm import Session
 
         from backend.app.data_pipeline.infrastructure.materialize_official_sources import materialize_official_sources
@@ -118,7 +120,15 @@ class PostgreSqlMigrationTests(unittest.TestCase):
             AnswerCategoryCompatibility,
             LoanCategoryAssignment,
             LoanConditions,
+            LoanServingFacts,
             ServingCatalogueVersion,
+        )
+        from backend.app.loans.infrastructure.backfill_serving_facts import backfill_official_serving_facts
+        from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
+        from backend.app.recommendation.application.use_cases import RecommendLoans
+        from backend.app.recommendation.domain.entities import AnswerPreference, ClassificationState
+        from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import (
+            SqlAlchemyRecommendationSnapshotRepository,
         )
         from scripts.build_t05a_import_manifest import build_manifest
         from scripts.build_t05a_recommendation_config import build_config
@@ -144,6 +154,7 @@ class PostgreSqlMigrationTests(unittest.TestCase):
             self.assertEqual(session.scalar(select(func.count()).select_from(LoanCategoryAssignment)), 816)
             self.assertEqual(session.scalar(select(func.count()).select_from(AnswerCategoryCompatibility)), 720)
             self.assertEqual(session.scalar(select(func.count()).select_from(LoanConditions)), 102)
+            self.assertEqual(session.scalar(select(func.count()).select_from(LoanServingFacts)), 102)
             database_audit = audit_database(session)
             for key in (
                 "missingSourceRows",
@@ -174,4 +185,32 @@ class PostgreSqlMigrationTests(unittest.TestCase):
                     approval_reason="verified source integration test",
                 )
             self.assertTrue(again.reused)
+            snapshot = SqlAlchemyRecommendationSnapshotRepository(session).read_approved_snapshot()
+            self.assertEqual(len(snapshot.candidates), 102)
+            target = next(
+                item
+                for item in snapshot.candidates
+                if all(
+                    item.state_for(key) is ClassificationState.CLASSIFIED
+                    for key in ("maxAmount", "monthlyInstallment", "maxRepaymentMonths", "interestRate")
+                )
+            )
+            preferences = tuple(
+                AnswerPreference(key, target.categories[key] or identifiers["categoryIds"][key][0], Decimal("1"))
+                for key in identifiers["loanVariableIds"]
+            )
+            result = RecommendLoans(SqlAlchemyRecommendationSnapshotRepository(session)).execute(preferences)
+            self.assertEqual((len(result.ranked_recommendations), len(result.needs_review)), (88, 14))
+            self.assertTrue(all(item.score is not None for item in result.ranked_recommendations))
+            self.assertTrue(
+                all(trace.raw_score is None for trace in result.traces if trace.decision.value == "needs_review")
+            )
+            detail = SqlAlchemyServingLoanCatalogueRepository(session).get_current_serving_loan(target.loan_id)
+            self.assertTrue(detail.detail.conditions_source_text)
+            session.commit()
+            with session.begin():
+                session.execute(delete(LoanServingFacts))
+                self.assertEqual(backfill_official_serving_facts(session, build_manifest()), 102)
+            with session.begin():
+                self.assertEqual(backfill_official_serving_facts(session, build_manifest()), 0)
         engine.dispose()

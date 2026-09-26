@@ -159,6 +159,25 @@ class LoanConditions(Base):
     source_text: Mapped[str] = mapped_column(Text, nullable=False)
 
 
+class LoanServingFacts(Base):
+    """Approved detail facts belonging to exactly one immutable loan version."""
+
+    __tablename__ = "loan_serving_facts"
+    __table_args__ = (
+        CheckConstraint("deposit_holding_months >= 0", name="ck_serving_deposit_months_nonnegative"),
+        CheckConstraint("loan_to_deposit_ratio_percent >= 0", name="ck_serving_deposit_ratio_nonnegative"),
+    )
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id"), primary_key=True
+    )
+    deposit_required_text: Mapped[str | None] = mapped_column(String(100))
+    deposit_holding_months: Mapped[int | None] = mapped_column(Integer)
+    loan_to_deposit_ratio_percent: Mapped[float | None] = mapped_column(Numeric(8, 4))
+    guarantee_type_text: Mapped[str | None] = mapped_column(String(100))
+    required_deposit_account: Mapped[str | None] = mapped_column(String(255))
+    bank_logo_reference: Mapped[str | None] = mapped_column(String(512))
+
+
 class QuestionnaireVersion(Timestamped, Base):
     __tablename__ = "questionnaire_versions"
     questionnaire_version_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
