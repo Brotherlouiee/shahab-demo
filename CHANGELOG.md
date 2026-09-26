@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 
+- **US-09.T05B (planned):** Added a separate post-T05A server adapter task for an approved PostgreSQL recommendation snapshot, real published loan conditions/details, and durable publication when the database audit proves it missing. Canonical session-to-engine adaptation and the live API/UI journey remain T06; this entry defines work, not completed runtime functionality.
+
 - **US-09.T05A (planned):** Inserted an ordered data and configuration materialization gate before the unchanged T06 live integration. The task consumes the six official sources and approved D-001–D-004 decisions, persists PUBLISHED categories/conditions for existing server use cases, requires audit, provenance and PostgreSQL verification, and introduces no new matching formula or product behavior in this documentation change.
 
 
