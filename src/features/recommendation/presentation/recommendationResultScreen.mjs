@@ -19,6 +19,7 @@ export default function RecommendationResultScreen({
   status = "ready",
   header = null,
   onRetry,
+  onDetails,
 }) {
   const [lenderName, setLenderName] = useState(recommendationResultControlOptions.allLenders);
   const [sort, setSort] = useState(recommendationResultControlOptions.sorts.serverOrder);
@@ -69,6 +70,7 @@ export default function RecommendationResultScreen({
           displayState,
           onLenderNameChange: setLenderName,
           onSortChange: setSort,
+          onDetails,
         })
       : null,
   );
@@ -79,6 +81,7 @@ function ReadyRecommendationResult({
   displayState,
   onLenderNameChange,
   onSortChange,
+  onDetails,
 }) {
   return h(
     "div",
@@ -122,29 +125,30 @@ function ReadyRecommendationResult({
       ? h(RecommendationSection, {
           title: displayState.ranked.title,
           items: controls.orderedRankedRecommendations,
+          onDetails,
         })
       : null,
     displayState.emptyState && displayState.emptyState.kind !== "zeroAfterFilter"
       ? h("section", { className: "hp-recommendation-result-state", role: "status" }, displayState.emptyState.message)
       : null,
     displayState.needsReview
-      ? h(NeedsReviewSection, { section: displayState.needsReview })
+      ? h(NeedsReviewSection, { section: displayState.needsReview, onDetails })
       : null,
   );
 }
 
-function RecommendationSection({ title, items }) {
+function RecommendationSection({ title, items, onDetails }) {
   return h(
     "section",
     { className: "hp-recommendation-section", "aria-labelledby": "ranked-recommendations-title" },
     h("h2", { id: "ranked-recommendations-title" }, title),
     h("div", { className: "hp-recommendation-result-list" },
-      ...items.map((item) => h(RecommendationCard, { key: item.loanId, item })),
+      ...items.map((item) => h(RecommendationCard, { key: item.loanId, item, onDetails })),
     ),
   );
 }
 
-function RecommendationCard({ item }) {
+function RecommendationCard({ item, onDetails }) {
   return h(
     "article",
     { className: "hp-loan-result-card hp-recommendation-result-card" },
@@ -157,11 +161,11 @@ function RecommendationCard({ item }) {
       h("strong", { dir: "ltr" }, formatServerCompatibilityScore(item.compatibilityScore)),
     ),
     h("p", { className: "hp-recommendation-reason" }, item.compatibilityReason),
-    h("a", { className: "hp-loan-docs-link", href: item.detailsHref }, "مشاهدهٔ جزئیات، شرایط و مدارک"),
+    h("a", { className: "hp-loan-docs-link", href: item.detailsHref, onClick: detailClick(onDetails, item.loanId) }, "مشاهدهٔ جزئیات، شرایط و مدارک"),
   );
 }
 
-function NeedsReviewSection({ section }) {
+function NeedsReviewSection({ section, onDetails }) {
   return h(
     "section",
     { className: "hp-recommendation-section hp-recommendation-needs-review", "aria-labelledby": "needs-review-title" },
@@ -175,7 +179,7 @@ function NeedsReviewSection({ section }) {
           h("h3", null, item.loanName),
         ),
         h("p", { className: "hp-recommendation-warning" }, item.warning),
-        h("a", { className: "hp-loan-docs-link", href: item.detailsHref }, "مشاهدهٔ جزئیات، شرایط و مدارک"),
+        h("a", { className: "hp-loan-docs-link", href: item.detailsHref, onClick: detailClick(onDetails, item.loanId) }, "مشاهدهٔ جزئیات، شرایط و مدارک"),
       )),
     ),
   );
@@ -183,4 +187,13 @@ function NeedsReviewSection({ section }) {
 
 function preventSubmit(event) {
   event.preventDefault();
+}
+
+function detailClick(onDetails, loanId) {
+  if (typeof onDetails !== "function") return undefined;
+  return (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onDetails(loanId);
+  };
 }
