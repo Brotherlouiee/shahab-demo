@@ -153,6 +153,12 @@ def materialize_official_sources(
             )
         raise ValueError("source/config version exists but is not active; do not overwrite history")
 
+    # Existing published records may be the same real loans from an earlier
+    # import. Without a reviewed row-by-row reconciliation, creating another
+    # version here would duplicate them under an apparently official source.
+    if _one(session, LoanProductVersion, LoanProductVersion.publication_state == PublicationState.PUBLISHED):
+        raise ValueError("published loans already exist; reconcile their source rows before materialization")
+
     variable_ids = identifiers["loanVariableIds"]
     variables = {}
     categories = {}
