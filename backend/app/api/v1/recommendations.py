@@ -96,6 +96,12 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
         question.question_id for question in configuration.questions if question.required
     }:
         raise ApiError(status_code=422, code=ErrorCode.INVALID_REQUEST, message="Questionnaire is incomplete.")
+    # The questionnaire reads may start a READ COMMITTED transaction. Finish it
+    # before the published catalogue/weights/details are read at one PostgreSQL
+    # repeatable-read snapshot, so a concurrent publication cannot mix versions.
+    db.commit()
+    if db.bind is not None and db.bind.dialect.name == "postgresql":
+        db.connection(execution_options={"isolation_level": "REPEATABLE READ"})
     try:
         snapshot_repository = SqlAlchemyRecommendationSnapshotRepository(db)
         snapshot = snapshot_repository.read_approved_snapshot()
