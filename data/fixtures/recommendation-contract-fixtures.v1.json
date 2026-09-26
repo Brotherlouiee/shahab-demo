@@ -1,7 +1,7 @@
 {
   "fixtureVersion": "1.0.0",
   "contractVersion": "1.0.0",
-  "dataDecisionVersion": "1.0.0",
+  "dataDecisionVersion": "1.1.0",
   "purpose": "Golden contract fixtures only; no recommendation score or rank is asserted before US-08.",
   "questionnaire": {
     "fixtureId": "all-canonical-questions-valid",
@@ -55,7 +55,11 @@
       },
       "expected": {
         "rankingEligible": true,
-        "neutralVariables": ["depositRequired", "depositHoldingMonths", "loanToDepositRatio"],
+        "neutralVariables": [
+          "depositRequired",
+          "depositHoldingMonths",
+          "loanToDepositRatio"
+        ],
         "needsReview": false,
         "scoreAssertion": "none-before-US-08"
       }
@@ -79,7 +83,9 @@
         "rankingEligible": false,
         "neutralVariables": [],
         "needsReview": true,
-        "rankingExcludedReasons": ["interestRate:unknown_label"],
+        "rankingExcludedReasons": [
+          "interestRate:unknown_label"
+        ],
         "scoreAssertion": "no-score-before-US-08"
       }
     }
