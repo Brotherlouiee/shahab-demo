@@ -23,6 +23,26 @@ curl -H "X-Shahab-Readiness-Token: $SHAHAB_READINESS_TOKEN" http://127.0.0.1:800
 
 Do not place credentials, OTPs, tokens, authorization headers or API keys in source, `.env.example`, logs, test fixtures or command history. Production disables interactive OpenAPI documentation by default. `/api/v1/health/live` exposes only process liveness; `/api/v1/health/ready` is unavailable unless its environment secret is configured.
 
-## Recommendation integration prerequisite
+## Local recommendation integration after US-09.T06
 
-The API currently has questionnaire sessions and published-loan detail routes, but no live recommendation route. A usable local or preview result requires an approved configuration, a published serving catalogue with normalized categories and conditions, and a durable read adapter. Starting FastAPI alone cannot provide real matches. Keep the anonymous session ID in active-tab memory and the recommendation request body; configure the API origin explicitly for any later preview. This checkpoint performs no deployment.
+The live `POST /api/v1/recommendations` route accepts only the opaque `sessionId`
+from an active, complete questionnaire session. It resolves the session answers on
+the server and calculates results from the approved recommendation configuration
+and the active `PUBLISHED` serving catalogue in PostgreSQL. The browser does not
+send raw answers, weights, scores, or catalogue selectors to this route.
+
+A usable local result therefore requires more than starting Uvicorn: configure
+`SHAHAB_DATABASE_URL`, apply all Alembic migrations, and make sure the database
+contains the approved canonical impacts plus one active published catalogue with
+its normalized categories and loan details. Questionnaire session persistence
+also uses PostgreSQL; configure `SHAHAB_REDIS_URL` when exercising the supported
+Redis cache path. If the session is missing, expired, or incomplete, the route
+returns its typed client error. If the approved snapshot or serving catalogue is
+missing or inconsistent, it fails closed with `503` rather than inventing a
+recommendation.
+
+Keep `.env` local and ignored, retain the anonymous session ID only in active-tab
+memory, and send it only in the recommendation request body. Configure the
+frontend to reach the local `/api/v1` origin; never put database credentials or a
+service secret in the Vite client bundle. This local setup is not evidence of a
+deployed staging or production service.
