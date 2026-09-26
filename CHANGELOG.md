@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- **US-09.T06 (checkpoint):** documented the missing approved mapping, durable published snapshot and conditions projection that block a truthful live recommendation result. No endpoint, scoring, schema, migration or deployment behavior changed. See the `feature/us-09-live-integration` PR.
+
 ### Added
 
 - **US-09.T05**: Added a browser-level recommendation journey contract that exercises the result client, RTL/a11y result surface, manual display controls, typed retry error, and the safe handoff to approved loan-detail conditions through controlled HTTP responses. The live questionnaire/session/API/engine connection remains T06.
