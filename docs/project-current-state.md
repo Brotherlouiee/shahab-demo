@@ -1,5 +1,40 @@
 # Project current state
 
+## Local full-stack development fix checkpoint (2026-09-27)
+
+- `activeTaskId`: local full-stack development corrective task.
+- `estimatedWorkScope` / `completionBudget`: Vite `/api/v1` proxy, Compose Vite/API
+  readiness wiring, runtime contract packaging, explicit local catalogue operation,
+  focused contract/build/browser checks, local runbook, changelog, commit and PR.
+  No product logic, schema, migration, source byte, secret, or deployment change.
+- Acceptance: one `docker compose up --build` starts PostgreSQL, Redis, FastAPI and
+  Vite; direct and proxied liveness return JSON; FastAPI `/` remains an expected
+  404; `.env` stays ignored and uncommitted.
+- Guide/source attestation: canonical guide, security/database guidance, current
+  checkpoint and the six unchanged official source identities were reviewed. No
+  scoring or source-data decision is made by this task.
+- Runtime proof: Python 3.12.10, Docker Desktop 4.91.0, Engine 29.8.0 and Compose
+  5.5.1 run the Linux stack. PostgreSQL became healthy, Alembic upgraded through
+  `a62c0b5b005b`, and the approval-gated local operator published data version
+  `official-598052635954-1.1.0` with 102 loans (88 rankable, 14 needs-review), 816
+  assignments, 102 conditions and 720 compatibility cells. A repeat read-only audit
+  found no missing, unexpected, mismatched or incomplete records.
+- Runtime HTTP/browser proof: direct port 8000 and Vite-proxied port 4173 liveness
+  returned JSON `ok`. A real ten-answer session through the proxy returned 7 ranked
+  recommendations and 14 needs-review items, then loaded 7 conditions for the first
+  published loan. The unmocked Playwright journey passed in system Chrome and proved
+  questionnaire submission, recommendation rendering and the detail handoff.
+- Tests: `npm run test:vite-proxy` passed (2 tests); focused T05A audit tests passed
+  (5 tests); `npm run quality` passed with `PYTHONUTF8=1`, including 117 backend tests
+  (4 PostgreSQL-dependent skips), client tests, Ruff/Mypy, architecture/data
+  validators, secret scan, and production build. Compose configuration validation
+  and the final post-runtime quality rerun also passed before commit.
+- Cross-platform correction: canonical audit source paths now serialize with `/`
+  on Windows and Linux; no source bytes, weights, or data decisions changed.
+- Local-only state: `.env` remains ignored and uncommitted. Port 4173 is used because
+  this Windows host reserves 5173. The published development catalogue exists only
+  in the named local PostgreSQL volume and is not repository or production data.
+
 ## US-09.T06 implementation checkpoint (2026-09-26)
 
 - `activeTaskId`: `US-09.T06`; `actualScope`: canonical session to approved category impacts, source-backed scoring, real API and active result/detail route. D-005 uses only answer-conversion numeric weights; one-to-one factors use their independent source; mapping-matrix numbers are not read.

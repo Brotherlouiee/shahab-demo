@@ -84,9 +84,9 @@ def build_report() -> dict:
                 }
             )
     return {
-        "sourcePaths": [str(MAPPING.relative_to(ROOT)), str(ANSWER_WEIGHTS.relative_to(ROOT))],
-        "authoritativeWeightSource": str(ANSWER_WEIGHTS.relative_to(ROOT)),
-        "ignoredNumericSource": str(MAPPING.relative_to(ROOT)),
+        "sourcePaths": [MAPPING.relative_to(ROOT).as_posix(), ANSWER_WEIGHTS.relative_to(ROOT).as_posix()],
+        "authoritativeWeightSource": ANSWER_WEIGHTS.relative_to(ROOT).as_posix(),
+        "ignoredNumericSource": MAPPING.relative_to(ROOT).as_posix(),
         "comparedPairs": len(left.keys() | right.keys()),
         "nonAuthoritativeDifferences": conflicts,
     }
