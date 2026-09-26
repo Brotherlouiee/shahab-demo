@@ -122,6 +122,7 @@ class PostgreSqlMigrationTests(unittest.TestCase):
         )
         from scripts.build_t05a_import_manifest import build_manifest
         from scripts.build_t05a_recommendation_config import build_config
+        from scripts.materialize_t05a import audit_database
 
         self._alembic("upgrade", "head")
         root = Path(__file__).parents[2]
@@ -143,6 +144,16 @@ class PostgreSqlMigrationTests(unittest.TestCase):
             self.assertEqual(session.scalar(select(func.count()).select_from(LoanCategoryAssignment)), 816)
             self.assertEqual(session.scalar(select(func.count()).select_from(AnswerCategoryCompatibility)), 720)
             self.assertEqual(session.scalar(select(func.count()).select_from(LoanConditions)), 102)
+            database_audit = audit_database(session)
+            for key in (
+                "missingSourceRows",
+                "unexpectedSourceRows",
+                "identityMismatchRows",
+                "conditionsMismatchRows",
+                "incompleteCategoryRows",
+                "categoryMismatchCells",
+            ):
+                self.assertEqual(database_audit[key], [], key)
             self.assertEqual(
                 session.scalar(
                     select(func.count())
