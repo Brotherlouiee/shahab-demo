@@ -6,6 +6,10 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 
+class ServingCatalogueUnavailableError(RuntimeError):
+    """Approved loan details are unavailable from the serving store."""
+
+
 @dataclass(frozen=True, slots=True)
 class LoanSummary:
     """Minimal safe catalogue item; it deliberately omits source/provenance internals."""
