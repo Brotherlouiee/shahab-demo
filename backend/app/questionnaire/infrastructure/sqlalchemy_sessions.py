@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
+from datetime import UTC, datetime
 
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
@@ -49,8 +49,8 @@ class SqlAlchemyQuestionnaireSessionRepository:
         return QuestionnaireSession(
             row.questionnaire_session_id,
             self._configuration.questionnaire_version,
-            row.created_at,
-            row.expires_at,
+            row.created_at if row.created_at.tzinfo else row.created_at.replace(tzinfo=UTC),
+            row.expires_at if row.expires_at.tzinfo else row.expires_at.replace(tzinfo=UTC),
         )
 
     def upsert_answer(self, session_id: str, answer: QuestionnaireAnswer) -> None:
