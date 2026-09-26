@@ -23,7 +23,7 @@ Apply the reviewed Alembic migration in the intended environment using the exist
 python -m scripts.materialize_t05a
 ```
 
-Compare its existing published versions, source hash, assignments, conditions, config and active version with the source audit. The read-only report lists missing/unexpected source rows, identity and conditions mismatches, incomplete rows and individual category/state discrepancies for all eight variables. Review those differences before any write. A database already containing matching records should be reconciled/reused by review. If any existing source row or config conflicts, publication fails closed; do not delete records to make a count match.
+Compare its existing published versions, source hash, assignments, conditions, config and active version with the source audit. The read-only report lists missing/unexpected source rows, identity and conditions mismatches, incomplete rows and individual category/state discrepancies for all eight variables. Review those differences before any write. If any published loan version already exists without this exact active official catalogue, publication fails closed before writing; reconcile/reuse the existing rows in a separately reviewed backfill. If any existing source row or config conflicts, publication fails closed; do not delete records to make a count match.
 
 After source and database review, an authorized operator can execute:
 
