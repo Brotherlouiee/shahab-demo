@@ -47,6 +47,13 @@ class LoanResponseSchemaTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             LoanSummaryResponse(loanId="loan-1", lenderName="بانک", loanName="طرح", sourceHash="secret")
         with self.assertRaises(ValueError):
+            LoanSummaryResponse(
+                loanId="loan-1",
+                lenderName="بانک",
+                loanName="طرح",
+                bankLogoReference="javascript:alert(1)",
+            )
+        with self.assertRaises(ValueError):
             LoanDetailResponse(
                 loanId="loan-1",
                 lenderName="بانک",
