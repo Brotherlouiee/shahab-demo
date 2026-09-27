@@ -20,7 +20,7 @@ function formatMoney(value) {
 }
 
 function formatPercent(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
+  return value == null ? "اعلام نشده" : <bdi dir="ltr">{`${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
 }
 
 function formatMonths(value) {
@@ -87,7 +87,7 @@ function ServingLoanCard({ recommendation, onDetails }) {
       </header>
 
       <p className="hp-loan-match">
-        تطابق با وضعیت مشتری: <b>{hasScore ? `${Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪` : "نامشخص"}</b>
+        تطابق با وضعیت مشتری: <b>{hasScore ? <bdi dir="ltr">{`${Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi> : "نامشخص"}</b>
       </p>
 
       {state.status === "ready" ? (
