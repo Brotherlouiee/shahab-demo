@@ -51,6 +51,7 @@ class RankedRecommendationResponse(BaseModel):
     loan_id: str = Field(alias="loanId")
     lender_name: str = Field(alias="lenderName")
     loan_name: str = Field(alias="loanName")
+    bank_logo_reference: str | None = Field(default=None, alias="bankLogoReference")
     compatibility_score: float = Field(alias="compatibilityScore", ge=0, le=1)
     compatibility_reason: str = Field(alias="compatibilityReason")
 
@@ -59,6 +60,7 @@ class NeedsReviewResponse(BaseModel):
     loan_id: str = Field(alias="loanId")
     lender_name: str = Field(alias="lenderName")
     loan_name: str = Field(alias="loanName")
+    bank_logo_reference: str | None = Field(default=None, alias="bankLogoReference")
     ranking_excluded_reasons: tuple[str, ...] = Field(alias="rankingExcludedReasons")
 
 
@@ -131,6 +133,7 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
                 loanId=item.loan_id,
                 lenderName=catalogue[item.loan_id].lender_name,
                 loanName=catalogue[item.loan_id].loan_name,
+                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
                 compatibilityScore=float(item.score),
                 compatibilityReason="سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما",
             )
@@ -141,6 +144,7 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
                 loanId=item.loan_id,
                 lenderName=catalogue[item.loan_id].lender_name,
                 loanName=catalogue[item.loan_id].loan_name,
+                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
                 compatibilityScore=float(item.score),
                 compatibilityReason="تطابق پایین؛ پیشنهاد اصلی نیست",
             )
@@ -151,6 +155,7 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
                 loanId=item.loan_id,
                 lenderName=catalogue[item.loan_id].lender_name,
                 loanName=catalogue[item.loan_id].loan_name,
+                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
                 rankingExcludedReasons=tuple(_public_review_reason(reason) for reason in item.excluded_reasons),
             )
             for item in partition.needs_review

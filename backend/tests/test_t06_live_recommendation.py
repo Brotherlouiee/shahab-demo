@@ -103,6 +103,12 @@ class LiveRecommendationTests(unittest.TestCase):
             sorted(item["compatibilityScore"] for item in body["lowCompatibilityRecommendations"]),
         )
         self.assertTrue(all("compatibilityScore" not in item for item in body["needsReview"]))
+        for partition_name in ("rankedRecommendations", "lowCompatibilityRecommendations", "needsReview"):
+            for item in body[partition_name]:
+                detail = self.client.get(f"/api/v1/loans/{item['loanId']}")
+                self.assertEqual(detail.status_code, 200)
+                self.assertIn("bankLogoReference", item)
+                self.assertEqual(item["bankLogoReference"], detail.json()["bankLogoReference"])
         self.assertTrue(
             all(
                 reason.endswith(("اعلام نشده است", "متغیر است", "مقدار خنثی دارد", "قطعی نیست"))

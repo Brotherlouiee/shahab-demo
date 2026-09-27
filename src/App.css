@@ -4588,6 +4588,9 @@ button {
 }
 
 .hp-loan-result-card {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
   border: 1.5px solid #d1d1d1;
   border-radius: 7px;
   background: #ffffff;
@@ -4620,6 +4623,9 @@ button {
 }
 
 .hp-loan-result-head strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
   align-self: center;
   justify-self: center;
   font-size: 17px;
