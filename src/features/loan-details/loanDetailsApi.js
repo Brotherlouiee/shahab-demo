@@ -14,13 +14,17 @@ function assertDetailPayload(payload) {
   if (!payload || typeof payload !== "object" || typeof payload.loanId !== "string") {
     throw new LoanDetailsApiError(502);
   }
-  if (payload.bankLogoReference !== null && payload.bankLogoReference !== undefined && typeof payload.bankLogoReference !== "string") {
-    throw new LoanDetailsApiError(502);
-  }
   if (!Array.isArray(payload.conditions) || !payload.conditions.every((item) => typeof item === "string")) {
     throw new LoanDetailsApiError(502);
   }
-  return payload;
+
+  // The backend owns the public logo allowlist. This client-side guard keeps a
+  // malformed intermediary/test response from becoming an executable URL.
+  const bankLogoReference = typeof payload.bankLogoReference === "string"
+    && /^https?:\/\//i.test(payload.bankLogoReference)
+    ? payload.bankLogoReference
+    : null;
+  return { ...payload, bankLogoReference };
 }
 
 export async function fetchLoanDetails(loanId, { signal } = {}) {
