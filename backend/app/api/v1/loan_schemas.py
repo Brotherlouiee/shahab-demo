@@ -29,7 +29,7 @@ class LoanSummaryResponse(BaseModel):
     loan_id: LoanIdentifier = Field(alias="loanId")
     lender_name: DisplayText = Field(alias="lenderName")
     loan_name: DisplayText = Field(alias="loanName")
-    bank_logo_reference: BankLogoUrl | None = Field(alias="bankLogoReference")
+    bank_logo_reference: BankLogoUrl | None = Field(default=None, alias="bankLogoReference")
 
     @classmethod
     def from_domain(cls, loan: LoanSummary) -> LoanSummaryResponse:
