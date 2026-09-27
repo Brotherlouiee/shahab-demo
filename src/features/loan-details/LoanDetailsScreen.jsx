@@ -8,7 +8,7 @@ function formatNumber(value) {
 }
 
 function formatPercent(value) {
-  return value === null || value === undefined ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
+  return value === null || value === undefined ? "اعلام نشده" : <bdi dir="ltr">{`${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
 }
 
 function toPersianDigits(value) {
