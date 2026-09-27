@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / ".agents" / "documents" / "دیتابیس وام های بانکی.unitext"
 EXPECTED_SHA256 = "598052635954071b192bb43505e572f30ee88efd99b4d5ae757f6d555bfaae45"
 PARSER_VERSION = "loan-source.v1"
+ASSET_MANIFEST = ROOT / "data" / "contracts" / "bank-logo-assets.v1.json"
 COLUMNS = {
     "maxAmount": "حداکثر مبلغ",
     "monthlyInstallment": "مبلغ قسط",
@@ -31,28 +32,49 @@ COLUMNS = {
 DISPLAY = {"bankLogo": "لوگو بانک", "requiredDepositAccount": "حساب سپرده لازم", "conditions": "شرایط و مقررات"}
 
 
+def _assets_by_lender() -> dict[str, dict[str, str]]:
+    payload = json.loads(ASSET_MANIFEST.read_text(encoding="utf-8"))
+    assets = payload.get("byLender")
+    if not isinstance(assets, dict):
+        raise ValueError("bank logo asset manifest has no lender mapping")
+    for lender_name, asset in assets.items():
+        if not isinstance(asset, dict) or not isinstance(asset.get("assetKey"), str) or not isinstance(asset.get("sha256"), str):
+            raise ValueError(f"bank logo asset is invalid for {lender_name!r}")
+    return assets
+
+
 def build_manifest(path: Path = SOURCE) -> dict:
     raw = path.read_bytes()
     source_hash = hashlib.sha256(raw).hexdigest()
     if source_hash != EXPECTED_SHA256:
         raise ValueError("loan source bytes differ from the verified canonical source")
+    assets_by_lender = _assets_by_lender()
     with path.open(encoding="utf-16", newline="") as source:
         reader = csv.DictReader(source, delimiter="\t")
         if not set(COLUMNS.values()).issubset(reader.fieldnames or ()) or not set(DISPLAY.values()).issubset(
             reader.fieldnames or ()
         ):
             raise ValueError("loan source headers do not cover the canonical manifest")
-        rows = [
-            {
-                "sourceRowNumber": source_row_number,
-                "lenderName": row["نام بانک"].strip(),
-                "loanName": row["نام وام"].strip(),
-                "variableValues": {key: row.get(column) for key, column in COLUMNS.items()},
-                "displayFields": {key: row[column] for key, column in DISPLAY.items() if row.get(column)},
-            }
-            for source_row_number, row in enumerate(reader, 2)
-            if (row.get("نام وام") or "").strip()
-        ]
+        rows = []
+        for source_row_number, row in enumerate(reader, 2):
+            if not (row.get("نام وام") or "").strip():
+                continue
+            lender_name = row["نام بانک"].strip()
+            asset = assets_by_lender.get(lender_name)
+            if asset is None:
+                raise ValueError(f"no verified bank logo asset for {lender_name!r}")
+            display_fields = {key: row[column] for key, column in DISPLAY.items() if row.get(column)}
+            display_fields["bankLogoAssetKey"] = asset["assetKey"]
+            display_fields["bankLogoAssetSha256"] = asset["sha256"]
+            rows.append(
+                {
+                    "sourceRowNumber": source_row_number,
+                    "lenderName": lender_name,
+                    "loanName": row["نام وام"].strip(),
+                    "variableValues": {key: row.get(column) for key, column in COLUMNS.items()},
+                    "displayFields": display_fields,
+                }
+            )
     plan = prepare_import_manifest(
         source_file_sha256=source_hash,
         parser_version=PARSER_VERSION,
