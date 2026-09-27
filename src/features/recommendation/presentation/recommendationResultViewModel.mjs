@@ -18,7 +18,9 @@ export function buildRecommendationResultViewModel(response) {
       requireArray(result.rankedRecommendations, "rankedRecommendations").map(toRankedViewModel),
     ),
     lowCompatibilityRecommendations: Object.freeze(
-      requireArray(result.lowCompatibilityRecommendations, "lowCompatibilityRecommendations").map(toRankedViewModel),
+      requireArray(result.lowCompatibilityRecommendations, "lowCompatibilityRecommendations").map((item) =>
+        Object.freeze({ ...toRankedViewModel(item), statusLabel: "تطابق پایین؛ پیشنهاد اصلی نیست" }),
+      ),
     ),
     needsReview: Object.freeze(
       requireArray(result.needsReview, "needsReview").map(toNeedsReviewViewModel),
