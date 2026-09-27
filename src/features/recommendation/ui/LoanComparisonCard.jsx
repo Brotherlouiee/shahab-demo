@@ -17,14 +17,15 @@ export default function LoanComparisonCard({
   selected,
   onToggle,
 }) {
-  const [bankLogoReference, setBankLogoReference] = useState(null);
+  const [detailLogoReference, setDetailLogoReference] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
     fetchLoanDetails(recommendation.loanId, { signal: controller.signal })
-      .then((detail) => setBankLogoReference(detail?.bankLogoReference ?? null))
-      .catch(() => { if (!controller.signal.aborted) setBankLogoReference(null); });
+      .then((detail) => setDetailLogoReference(detail?.bankLogoReference ?? null))
+      .catch(() => { if (!controller.signal.aborted) setDetailLogoReference(null); });
     return () => controller.abort();
   }, [recommendation.loanId]);
+  const bankLogoReference = recommendation.bankLogoReference ?? detailLogoReference;
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
       <div className="hp-loan-result-head">
