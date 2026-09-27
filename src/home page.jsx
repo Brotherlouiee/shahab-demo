@@ -865,6 +865,7 @@ function LoanResultCard({ recommendation, compact = false, selectable = false, s
       {typeof recommendation.compatibilityScore === "number" ? (
         <p className="hp-loan-match">تطابق با وضعیت شما: <b><span dir="ltr">{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</span></b></p>
       ) : <p className="hp-recommendation-warning">وضعیت متغیر؛ بدون درصد و رتبه</p>}
+      {recommendation.statusLabel ? <p className="hp-recommendation-warning">{recommendation.statusLabel}</p> : null}
       {recommendation.compatibilityReason ? <p className="hp-recommendation-reason">{recommendation.compatibilityReason}</p> : null}
       {recommendation.rankingExcludedReasons?.length ? <p className="hp-recommendation-reason">{recommendation.rankingExcludedReasons.join("، ")}</p> : null}
       {!compact && onDetails ? <button className="hp-loan-docs-link" type="button" onClick={onDetails}>مشاهده شرایط و مدارک مورد نیاز</button> : null}
