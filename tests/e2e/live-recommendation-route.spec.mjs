@@ -55,8 +55,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await resultPartition.selectOption("lowest");
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
   await resultPartition.selectOption("variable");
-  await expect(page.locator(".hp-recommendation-needs-review")).toContainText("وام نیازمند بررسی");
-  await expect(page.locator(".hp-recommendation-needs-review")).not.toContainText("٪");
+  await expect(page.getByText("وام نیازمند بررسی")).toBeVisible();
+  await expect(page.locator(".hp-serving-loan-card")).toContainText("تطابق با وضعیت مشتری: نامشخص");
   expect(writes).toHaveLength(10);
   expect(writes.map(({ body }) => body.answerId)).toEqual(questionnaire.questions.map((q) => q.answerOptions[0].answerId));
   expect(posts.length).toBeGreaterThanOrEqual(1);
