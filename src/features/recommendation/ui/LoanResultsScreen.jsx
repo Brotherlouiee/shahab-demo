@@ -33,6 +33,12 @@ function itemsForMode(result, mode) {
   return result.rankedRecommendations;
 }
 
+function openInternalRoute(path) {
+  if (typeof window === "undefined") return;
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
+
 /**
  * One real serving-loan card. All monetary facts and logo URLs are fetched from
  * the approved loan-detail API; this component never synthesizes loan facts.
@@ -145,7 +151,7 @@ export default function LoanResultsScreen({
             >
               ثبت درخواست همزمان وام بانکی
             </button>
-            <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
+            <button type="button" onClick={() => { onCompare(result); openInternalRoute("/compare-loans"); }} disabled={status !== "ready"}>
               مقایسه وام
             </button>
           </div>
