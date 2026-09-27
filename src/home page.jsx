@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
+import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
@@ -883,11 +884,9 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
       ) : null}
       <section className="hp-compare-list">
         {visiblePlans.map((recommendation) => (
-          <LoanResultCard
+          <LoanComparisonCard
             key={recommendation.loanId}
             recommendation={recommendation}
-            compact
-            selectable
             selected={Boolean(selectedPlans[recommendation.loanId])}
             onToggle={() => setSelectedPlans((current) => ({
               ...current,
