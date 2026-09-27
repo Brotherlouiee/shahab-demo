@@ -53,7 +53,10 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   const resultLogo = page.locator(".hp-loan-result-head img").first();
   await expect(resultLogo).toBeVisible();
-  expect(await resultLogo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+  await expect(resultLogo).toHaveJSProperty("complete", true);
+  const assetResponse = await page.request.get(await resultLogo.getAttribute("src"));
+  expect(assetResponse.ok()).toBe(true);
+  expect(assetResponse.headers()["content-type"]).toContain("image/svg+xml");
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
