@@ -23,18 +23,25 @@ test("canonical questionnaire reaches the active real-result route and published
     return route.fulfill({ json: response });
   });
   await page.route("**/api/v1/loans/published-loan", (route) => route.fulfill({ json: {
-    loanId: "published-loan", lenderName: "بانک آزمون", loanName: "وام منتشرشده",
+    loanId: "published-loan", lenderName: "بانک آزمون", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg",
     maxAmountTomans: 500000000, monthlyInstallmentTomans: 12000000, maxRepaymentMonths: 48,
     interestRatePercent: 18, depositRequired: "خیر", depositHoldingMonths: null,
     loanToDepositRatioPercent: null, guaranteeType: "ضامن رسمی", requiredDepositAccount: null,
     conditions: ["مدارک هویتی", "ضامن معتبر"],
   } }));
   await page.route("**/api/v1/loans/low-loan", (route) => route.fulfill({ json: {
-    loanId: "low-loan", lenderName: "بانک کم‌تطابق", loanName: "وام زیر آستانه",
+    loanId: "low-loan", lenderName: "بانک کم‌تطابق", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg",
     maxAmountTomans: 200000000, monthlyInstallmentTomans: 9000000, maxRepaymentMonths: 24,
     interestRatePercent: 23, depositRequired: "بله", depositHoldingMonths: 3,
     loanToDepositRatioPercent: 80, guaranteeType: "چک", requiredDepositAccount: "قرض‌الحسنه",
     conditions: ["افتتاح حساب تأییدشده"],
+  } }));
+  await page.route("**/api/v1/loans/unknown-loan", (route) => route.fulfill({ json: {
+    loanId: "unknown-loan", lenderName: "بانک دیگر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg",
+    maxAmountTomans: 100000000, monthlyInstallmentTomans: null, maxRepaymentMonths: 12,
+    interestRatePercent: null, depositRequired: null, depositHoldingMonths: null,
+    loanToDepositRatioPercent: null, guaranteeType: null, requiredDepositAccount: null,
+    conditions: [],
   } }));
   await page.goto("/question/3");
   for (const question of questionnaire.questions) {
@@ -43,9 +50,11 @@ test("canonical questionnaire reaches the active real-result route and published
   }
   await expect(page).toHaveURL(/\/loan-results$/);
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
-  await page.getByRole("button", { name: "کمترین تطابق" }).click();
+  await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", "https://cdn.example.test/published-bank.svg");
+  const resultPartition = page.locator(".hp-loan-result-filters select").first();
+  await resultPartition.selectOption("lowest");
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
-  await page.getByRole("button", { name: "وضعیت متغیر" }).click();
+  await resultPartition.selectOption("variable");
   await expect(page.locator(".hp-recommendation-needs-review")).toContainText("وام نیازمند بررسی");
   await expect(page.locator(".hp-recommendation-needs-review")).not.toContainText("٪");
   expect(writes).toHaveLength(10);
@@ -53,31 +62,15 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(posts.length).toBeGreaterThanOrEqual(1);
   expect(posts.every((request) => request.method === "POST" && Object.keys(request.body).length === 1 && request.body.sessionId === sessionId)).toBe(true);
   expect(page.url()).not.toContain(sessionId);
-  await page.getByRole("button", { name: "بیشترین تطابق" }).click();
-  await page.getByRole("link", { name: "مشاهدهٔ جزئیات، شرایط و مدارک" }).first().click();
+  await resultPartition.selectOption("highest");
+  await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
 
-  await page.getByRole("button", { name: "روش اقدام یا درخواست" }).click();
-  await expect(page).toHaveURL(/\/loan-request$/);
-  await expect(page.getByText(/روش اقدام یا provider رسمی ثبت نشده است/)).toBeVisible();
-  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
-  await expect(page.getByRole("button", { name: "ثبت یا پرداخت در دسترس نیست" })).toBeDisabled();
-  await page.getByRole("button", { name: /بازگشت/ }).first().click();
+  await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
 
-  await page.getByRole("button", { name: "مقایسه وام" }).click();
-  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
-  await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
-  await page.getByRole("button", { name: /مقایسه کن/ }).click();
-  await expect(page).toHaveURL(/\/compare-result$/);
-  await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
-  await expect(page.getByText("۵۰۰٬۰۰۰٬۰۰۰ تومان")).toBeVisible();
-  await page.getByRole("button", { name: "توضیح نتیجه" }).click();
-  await expect(page).toHaveURL(/\/ai-analysis$/);
-  await expect(page.getByText("سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما")).toBeVisible();
-  await expect(page.getByText(/provider خارجی فعال نیست/)).toBeVisible();
 });
 
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {

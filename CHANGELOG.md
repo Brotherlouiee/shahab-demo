@@ -17,6 +17,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T06B:** Extracted the active loan-result and loan-detail screens from the home-page monolith into feature-owned components, retained the approved RTL card/filter layout, and exposed an optional validated public bank-logo URL from the same active `PUBLISHED` loan record. No score, total-interest amount, or loan fact is calculated in the browser; deployment remains T07.
+
+
 - **US-09.T06A:** Replaced all reachable loan-result, detail, comparison,
   action and explanation prototype data with active `PUBLISHED` PostgreSQL
   serving data. The recommendation API now exposes server-owned highest,

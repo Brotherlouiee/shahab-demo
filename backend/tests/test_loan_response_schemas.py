@@ -10,13 +10,18 @@ from backend.app.loans.domain.models import LoanDetail, LoanSummary
 
 
 class LoanResponseSchemaTests(unittest.TestCase):
-    def test_summary_uses_camel_case_and_excludes_internal_logo_reference(self) -> None:
+    def test_summary_uses_camel_case_and_includes_approved_logo_url(self) -> None:
         response = LoanSummaryResponse.from_domain(
-            LoanSummary("loan-1", "بانک نمونه", "طرح نمونه", "internal-logo-reference")
+            LoanSummary("loan-1", "بانک نمونه", "طرح نمونه", "https://cdn.example.test/bank.svg")
         )
         self.assertEqual(
             response.model_dump(by_alias=True),
-            {"loanId": "loan-1", "lenderName": "بانک نمونه", "loanName": "طرح نمونه"},
+            {
+                "loanId": "loan-1",
+                "lenderName": "بانک نمونه",
+                "loanName": "طرح نمونه",
+                "bankLogoReference": "https://cdn.example.test/bank.svg",
+            },
         )
 
     def test_detail_allowlists_public_terms_and_safe_conditions_but_never_provenance(self) -> None:
@@ -24,7 +29,7 @@ class LoanResponseSchemaTests(unittest.TestCase):
             loan_id="loan-1",
             lender_name="بانک نمونه",
             loan_name="طرح نمونه",
-            bank_logo_reference="internal-logo-reference",
+            bank_logo_reference="https://cdn.example.test/bank.svg",
             max_amount_tomans=Decimal("100000000"),
             monthly_installment_tomans=Decimal("10000000"),
             max_repayment_months=12,
@@ -40,12 +45,19 @@ class LoanResponseSchemaTests(unittest.TestCase):
         self.assertEqual(payload["maxAmountTomans"], Decimal("100000000"))
         self.assertEqual(payload["conditions"], ("متن خام شرایط",))
         self.assertNotIn("conditionsSourceText", payload)
-        self.assertNotIn("bankLogoReference", payload)
+        self.assertEqual(payload["bankLogoReference"], "https://cdn.example.test/bank.svg")
         self.assertNotIn("servingVersionId", payload)
 
     def test_extra_or_invalid_public_values_are_rejected(self) -> None:
         with self.assertRaises(ValueError):
             LoanSummaryResponse(loanId="loan-1", lenderName="بانک", loanName="طرح", sourceHash="secret")
+        with self.assertRaises(ValueError):
+            LoanSummaryResponse(
+                loanId="loan-1",
+                lenderName="بانک",
+                loanName="طرح",
+                bankLogoReference="javascript:alert(1)",
+            )
         with self.assertRaises(ValueError):
             LoanDetailResponse(
                 loanId="loan-1",

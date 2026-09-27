@@ -32,6 +32,9 @@ The response excludes session IDs, answers, traces, source rows, coefficients an
 
 ## `GET /api/v1/loans/{loanId}`
 
-This route returns the allowlisted facts and plain-text conditions of that exact loan in the active `PUBLISHED` version. It cannot select a draft, staging or superseded version. Missing/non-published IDs return the typed `not_found` envelope; unavailable storage returns the typed `service_unavailable` envelope.
+This route returns the allowlisted facts, an optional public `bankLogoReference` HTTP(S) URL, and plain-text conditions of that exact loan in the active `PUBLISHED` version. It cannot select a draft, staging or superseded version. Missing/non-published IDs return the typed `not_found` envelope; unavailable storage returns the typed `service_unavailable` envelope.
 
 There is currently no public application, payment, OTP or external analysis-provider endpoint. Clients must expose that absence and must not simulate success.
+
+
+`bankLogoReference`, when present, is validated at the server boundary and is rendered only as an image URL. It is not a source/provenance reference, HTML fragment or database connection detail. Clients show no substitute logo when it is absent.

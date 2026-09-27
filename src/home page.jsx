@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
+import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
@@ -841,134 +842,6 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
         <span />
       </button>
     </header>
-  );
-}
-
-function LoanResultCard({ recommendation, compact = false, selectable = false, selected = false, onDetails, onToggle }) {
-  return (
-    <article className={`hp-loan-result-card ${compact ? "is-compact" : ""}`}>
-      <div className="hp-loan-result-head">
-        {selectable ? (
-          <button
-            className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
-            type="button"
-            onClick={onToggle}
-            aria-label={`انتخاب ${recommendation.loanName}`}
-            aria-pressed={selected}
-          />
-        ) : null}
-        <div>
-          <span>«{recommendation.lenderName}»</span>
-        </div>
-        <strong>{recommendation.loanName}</strong>
-      </div>
-      {typeof recommendation.compatibilityScore === "number" ? (
-        <p className="hp-loan-match">تطابق با وضعیت شما: <b><span dir="ltr">{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</span></b></p>
-      ) : <p className="hp-recommendation-warning">وضعیت متغیر؛ بدون درصد و رتبه</p>}
-      {recommendation.statusLabel ? <p className="hp-recommendation-warning">{recommendation.statusLabel}</p> : null}
-      {recommendation.compatibilityReason ? <p className="hp-recommendation-reason">{recommendation.compatibilityReason}</p> : null}
-      {recommendation.rankingExcludedReasons?.length ? <p className="hp-recommendation-reason">{recommendation.rankingExcludedReasons.join("، ")}</p> : null}
-      {!compact && onDetails ? <a className="hp-loan-docs-link" href={`/loan-details?loanId=${encodeURIComponent(recommendation.loanId)}`} onClick={(event) => { event.preventDefault(); onDetails(); }}>مشاهدهٔ جزئیات، شرایط و مدارک</a> : null}
-    </article>
-  );
-}
-
-function LoanResultsScreen({ result, status, onRetry, onStartQuestionnaire, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
-  const [headerMode, setHeaderMode] = useState("top");
-  const [mode, setMode] = useState("highest");
-
-  const pageRef = useRef(null);
-  const lastScrollTopRef = useRef(0);
-  const stopTimerRef = useRef(null);
-
-  useEffect(() => {
-    const page = pageRef.current;
-    if (!page) return undefined;
-
-    const scrollContainer = page.closest(".hp-questionnaire-shell");
-    if (!scrollContainer) return undefined;
-
-    const TOP_THRESHOLD = 2;
-    const STOP_DELAY = 180;
-
-    lastScrollTopRef.current = scrollContainer.scrollTop;
-
-    function handleScroll() {
-      const currentScrollTop = scrollContainer.scrollTop;
-      const delta = currentScrollTop - lastScrollTopRef.current;
-
-      window.clearTimeout(stopTimerRef.current);
-
-      if (currentScrollTop <= TOP_THRESHOLD) {
-        setHeaderMode("top");
-      } else if (delta !== 0) {
-        setHeaderMode("collapsed");
-      }
-
-      lastScrollTopRef.current = currentScrollTop;
-
-      if (currentScrollTop > TOP_THRESHOLD) {
-        stopTimerRef.current = window.setTimeout(() => {
-          setHeaderMode("overlay");
-        }, STOP_DELAY);
-      }
-    }
-
-    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      scrollContainer.removeEventListener("scroll", handleScroll);
-      window.clearTimeout(stopTimerRef.current);
-    };
-  }, []);
-
-  const resultsByMode = {
-    highest: result?.rankedRecommendations || [],
-    lowest: result?.lowCompatibilityRecommendations || [],
-    variable: result?.needsReview || [],
-  };
-  const visibleResults = resultsByMode[mode];
-
-  return (
-    <main
-      ref={pageRef}
-      className={`hp-questionnaire-page hp-loan-results-page header-${headerMode}`}
-      dir="rtl"
-    >
-      <div className="hp-loan-results-top">
-        <QuestionnaireHeader
-          onBack={onBack}
-          onMenu={onMenu}
-          onHome={onHome}
-        />
-
-        <div className="hp-loan-results-controls">
-          <div className="hp-loan-results-actions">
-            <button className="is-primary" type="button" onClick={() => onRequest(result)} disabled={status !== "ready"}>
-              روش اقدام یا درخواست
-            </button>
-
-            <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
-              مقایسه وام
-            </button>
-          </div>
-
-          <div className="hp-loan-result-filters" role="group" aria-label="نوع نتایج">
-            <button className={mode === "highest" ? "is-active" : ""} type="button" onClick={() => setMode("highest")}>بیشترین تطابق</button>
-            <button className={mode === "lowest" ? "is-active" : ""} type="button" onClick={() => setMode("lowest")}>کمترین تطابق</button>
-            <button className={mode === "variable" ? "is-active" : ""} type="button" onClick={() => setMode("variable")}>وضعیت متغیر</button>
-          </div>
-        </div>
-      </div>
-
-      <section className="hp-loan-results-list">
-        {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
-        {status === "sessionMissing" ? <div className="hp-recommendation-result-state" role="status"><p>برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p><button type="button" onClick={onStartQuestionnaire}>شروع پرسشنامه</button></div> : null}
-        {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
-        {status === "ready" && !visibleResults.length ? <p className="hp-recommendation-result-state">برای این بخش نتیجه‌ای موجود نیست.</p> : null}
-        {status === "ready" && visibleResults.map((recommendation) => <div className={mode === "variable" ? "hp-recommendation-needs-review" : ""} key={recommendation.loanId}><LoanResultCard recommendation={recommendation} onDetails={() => onDetails(recommendation.loanId)} /></div>)}
-      </section>
-    </main>
   );
 }
 
@@ -2037,8 +1910,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setLoanResultView("ai-analysis");
   }
 
-  function handleLoanRequestOpen(result = recommendationResult) {
-    if (result) setRecommendationResult(result);
+  function handleLoanRequestOpen() {
+    // The current recommendation result is already state-owned. This action only
+    // changes the route/view; it must not replace that result with an event object.
     setLoanResultView("request");
   }
 
@@ -2214,9 +2088,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         status={recommendationStatus}
         onRetry={loadRecommendationResult}
         onStartQuestionnaire={handleStartQuestionnaire}
-        onBack={handleLoanResultBack}
-        onMenu={onMenu}
-        onHome={onHome}
+        header={<QuestionnaireHeader onBack={handleLoanResultBack} onMenu={onMenu} onHome={onHome} />}
         onDetails={handleLoanDetailsOpen}
         onCompare={handleLoanCompareOpen}
         onRequest={handleLoanRequestOpen}

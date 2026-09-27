@@ -4625,6 +4625,35 @@ button {
   white-space: nowrap;
 }
 
+/* Detail groups preserve the compact, two-column card pattern while keeping
+   every displayed value tied to an explicit serving-loan response field. */
+.hp-loan-detail-groups {
+  display: grid;
+  gap: 8px;
+}
+
+.hp-loan-detail-group {
+  border: 1px solid #b7b7b7;
+  border-radius: 7px;
+  padding: 9px 16px;
+  display: grid;
+  grid-template-columns: minmax(132px, 1.15fr) minmax(132px, 1fr);
+  gap: 7px 14px;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.hp-loan-detail-group span {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hp-loan-detail-group b {
+  text-align: left;
+  white-space: nowrap;
+}
+
 .hp-loan-docs-link {
   width: 100%;
   margin-top: 10px;
@@ -5360,4 +5389,60 @@ button {
   .hp-recommendation-results-screen {
     padding-inline: 1rem;
   }
+}
+
+
+/* US-09.T06B: real loan-result controls retain the reference dropdown layout. */
+.hp-loan-result-filters label {
+  position: relative;
+  display: block;
+}
+
+.hp-loan-result-filters select {
+  width: 100%;
+  height: 42px;
+  appearance: none;
+  border: 1px solid #c8c8c8;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #777777;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-align: right;
+  padding: 0 10px 0 30px;
+}
+
+.hp-loan-result-filters label::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid #9b9b9b;
+  border-bottom: 1.5px solid #9b9b9b;
+  pointer-events: none;
+  transform: rotate(45deg);
+}
+
+.hp-serving-loan-card {
+  border-color: #0b63ff;
+}
+
+.hp-loan-card-loading {
+  min-height: 74px;
+  margin: 10px 0 0;
+  color: #666666;
+  font-size: 14px;
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
