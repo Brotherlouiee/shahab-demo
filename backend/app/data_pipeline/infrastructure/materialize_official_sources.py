@@ -355,6 +355,8 @@ def materialize_official_sources(
                 guarantee_type_text=values["guaranteeType"].raw.strip() or None,
                 required_deposit_account=canonical.display_fields.get("requiredDepositAccount"),
                 bank_logo_reference=canonical.display_fields.get("bankLogo"),
+                bank_logo_asset_key=canonical.display_fields.get("bankLogoAssetKey"),
+                bank_logo_asset_sha256=canonical.display_fields.get("bankLogoAssetSha256"),
             )
         )
         session.add(
