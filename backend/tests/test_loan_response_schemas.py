@@ -16,7 +16,12 @@ class LoanResponseSchemaTests(unittest.TestCase):
         )
         self.assertEqual(
             response.model_dump(by_alias=True),
-            {"loanId": "loan-1", "lenderName": "بانک نمونه", "loanName": "طرح نمونه", "bankLogoReference": "https://cdn.example.test/bank.svg"},
+            {
+                "loanId": "loan-1",
+                "lenderName": "بانک نمونه",
+                "loanName": "طرح نمونه",
+                "bankLogoReference": "https://cdn.example.test/bank.svg",
+            },
         )
 
     def test_detail_allowlists_public_terms_and_safe_conditions_but_never_provenance(self) -> None:
