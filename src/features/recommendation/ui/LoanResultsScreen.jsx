@@ -136,7 +136,12 @@ export default function LoanResultsScreen({
         {header}
         <div className="hp-loan-results-controls">
           <div className="hp-loan-results-actions">
-            <button className="is-primary" type="button" onClick={onRequest} disabled={status !== "ready"}>
+            <button
+              className="is-primary"
+              type="button"
+              disabled
+              title="روش اقدام یا ثبت درخواست تأییدشده برای این وام‌ها ثبت نشده است."
+            >
               ثبت درخواست همزمان وام بانکی
             </button>
             <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
