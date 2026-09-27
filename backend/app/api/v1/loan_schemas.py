@@ -18,6 +18,7 @@ MoneyAmount = Annotated[Decimal, Field(ge=0, max_digits=18, decimal_places=2)]
 Percentage = Annotated[Decimal, Field(ge=0, max_digits=8, decimal_places=4)]
 LoanIdentifier = Annotated[str, Field(min_length=1, max_length=128)]
 DisplayText = Annotated[str, Field(min_length=1, max_length=255)]
+BankLogoUrl = Annotated[str, Field(min_length=8, max_length=2048, pattern=r"^https?://")]
 
 
 class LoanSummaryResponse(BaseModel):
@@ -28,11 +29,17 @@ class LoanSummaryResponse(BaseModel):
     loan_id: LoanIdentifier = Field(alias="loanId")
     lender_name: DisplayText = Field(alias="lenderName")
     loan_name: DisplayText = Field(alias="loanName")
+    bank_logo_reference: BankLogoUrl | None = Field(alias="bankLogoReference")
 
     @classmethod
     def from_domain(cls, loan: LoanSummary) -> LoanSummaryResponse:
         """Map the explicit public subset instead of serializing a domain object."""
-        return cls(loanId=loan.loan_id, lenderName=loan.lender_name, loanName=loan.loan_name)
+        return cls(
+            loanId=loan.loan_id,
+            lenderName=loan.lender_name,
+            loanName=loan.loan_name,
+            bankLogoReference=loan.bank_logo_reference,
+        )
 
 
 class LoanDetailResponse(LoanSummaryResponse):
@@ -56,6 +63,7 @@ class LoanDetailResponse(LoanSummaryResponse):
             loanId=loan.loan_id,
             lenderName=loan.lender_name,
             loanName=loan.loan_name,
+            bankLogoReference=loan.bank_logo_reference,
             maxAmountTomans=loan.max_amount_tomans,
             monthlyInstallmentTomans=loan.monthly_installment_tomans,
             maxRepaymentMonths=loan.max_repayment_months,
