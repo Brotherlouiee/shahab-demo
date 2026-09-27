@@ -62,7 +62,7 @@ function LoanDetail({ detail }) {
   return <>
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
-        <div>{detail.bankLogoReference ? <img src={detail.bankLogoReference} alt={detail.lenderName} /> : null}<span>«{detail.lenderName}»</span></div>
+        <div>{detail.bankLogoReference ? <img src={detail.bankLogoReference} alt={detail.lenderName} referrerPolicy="no-referrer" /> : null}<span>«{detail.lenderName}»</span></div>
         <strong>{detail.loanName}</strong>
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
