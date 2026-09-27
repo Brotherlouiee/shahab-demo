@@ -69,12 +69,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
 
-  await page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" }).click();
-  await expect(page).toHaveURL(/\/loan-request$/);
-  await expect(page.getByText(/روش اقدام یا provider رسمی ثبت نشده است/)).toBeVisible();
-  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
-  await expect(page.getByRole("button", { name: "ثبت یا پرداخت در دسترس نیست" })).toBeDisabled();
-  await page.getByRole("button", { name: /بازگشت/ }).first().click();
+  await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
 
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
