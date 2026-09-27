@@ -4,225 +4,225 @@
   "assets": {
     "بانک آینده.svg": {
       "assetKey": "bank-logos/v1/dc1b3d90b2f1cad4c43b0c7f2d6340fa03ad2ed0c5a4e8043db583b047ff02fd.svg",
-      "sha256": "329ded703fcb81977351289c3b4904eb2bdd2d187bc01f10408f9f626f0188db"
+      "sha256": "dc1b3d90b2f1cad4c43b0c7f2d6340fa03ad2ed0c5a4e8043db583b047ff02fd"
     },
     "بانک اقتصاد نوین.svg": {
       "assetKey": "bank-logos/v1/3902883cfd7325451774fc5d9f99a4cb6fcf776f5077a8e4d2f3ad3293c2c787.svg",
-      "sha256": "e1e2eb891e8588e60cc470943f9afb843f9c228c2782a1ebf649d703b5f7c2bb"
+      "sha256": "3902883cfd7325451774fc5d9f99a4cb6fcf776f5077a8e4d2f3ad3293c2c787"
     },
     "بانک ایران زمین.svg": {
       "assetKey": "bank-logos/v1/66efdfc07c06aa4b0cee3788b5eedece595e9970885e8c8a84ac6ad5f4789419.svg",
-      "sha256": "d280d37654c71cebcddcb6a4ea4d14c0714f280893b70a6fae4d28b588f7760c"
+      "sha256": "66efdfc07c06aa4b0cee3788b5eedece595e9970885e8c8a84ac6ad5f4789419"
     },
     "بانک ایران ونزوئلا.svg": {
       "assetKey": "bank-logos/v1/25629dd9f7828634048062f74b3411cb65b459893f36691cb4de945bc91cb020.svg",
-      "sha256": "b42d7f1ea6ca7bda36e1d4ecc3f8ae7b91c0c61491a11a200f1e9c998c113253"
+      "sha256": "25629dd9f7828634048062f74b3411cb65b459893f36691cb4de945bc91cb020"
     },
     "بانک تجارت.svg": {
       "assetKey": "bank-logos/v1/06343e1bf69ad493df88299d266c255b549458a2ab0ea23744a5e83306694ec8.svg",
-      "sha256": "412fbc97dc743486de63e5f5114faaf924aa2632a3f0d37177b9abb55020c593"
+      "sha256": "06343e1bf69ad493df88299d266c255b549458a2ab0ea23744a5e83306694ec8"
     },
     "بانک توسعه تعاون.svg": {
       "assetKey": "bank-logos/v1/809e9a337d769c8dfd84c01d2ffc4c059dd0a3a1008295e8e6c261fe4b4026a3.svg",
-      "sha256": "f71a1cfc388fd5c6068b2e0ed6cd2736144b6d31cd9024710fe734bc87699d2d"
+      "sha256": "809e9a337d769c8dfd84c01d2ffc4c059dd0a3a1008295e8e6c261fe4b4026a3"
     },
     "بانک توسعه صادرات.svg": {
       "assetKey": "bank-logos/v1/71e86e80d234b77ac1bfd2bcdbbfa7595ec079ef7d29ac438818806c6507ea8b.svg",
-      "sha256": "bb616fd1df5bc8a09104ad069fff7c379311ea995d75ba784e34150035242491"
+      "sha256": "71e86e80d234b77ac1bfd2bcdbbfa7595ec079ef7d29ac438818806c6507ea8b"
     },
     "بانک خاورمیانه.svg": {
       "assetKey": "bank-logos/v1/63accc8957cb9792f9c8606da653e3121f8865fb195ad956b654f6f05be6f877.svg",
-      "sha256": "6e182f3caca0f083f198a098071bf01b2329add640d8f12cfab871378f541094"
+      "sha256": "63accc8957cb9792f9c8606da653e3121f8865fb195ad956b654f6f05be6f877"
     },
     "بانک دی.svg": {
       "assetKey": "bank-logos/v1/307d5809e9779273624971b5f2c2f971176e45a664b46eb024f2b696534201d6.svg",
-      "sha256": "d81b5ce8df02c952060214607a0f5c37343d684985f35a0b7a6c0c7286d6726f"
+      "sha256": "307d5809e9779273624971b5f2c2f971176e45a664b46eb024f2b696534201d6"
     },
     "بانک رفاه کارگران.svg": {
       "assetKey": "bank-logos/v1/fb0c72cbf0549753cb6fc56b9177da71b176ccb81d923966708721c1246b04be.svg",
-      "sha256": "72ac6309523d98946272affd1fb8750b4b596d81cd824c87af4a8ca8f966e555"
+      "sha256": "fb0c72cbf0549753cb6fc56b9177da71b176ccb81d923966708721c1246b04be"
     },
     "بانک سامان.svg": {
       "assetKey": "bank-logos/v1/b3887cd34509f69de042d6a68585cffc24d0134cfc867d8e13971a61484916ee.svg",
-      "sha256": "3eb83749f02ee16fb4109b3f35413f0a5550c05c062d6a02d41a2a361f892b1c"
+      "sha256": "b3887cd34509f69de042d6a68585cffc24d0134cfc867d8e13971a61484916ee"
     },
     "بانک سرمایه.svg": {
       "assetKey": "bank-logos/v1/25589d05bbebfa9c662fbdb41d34cc48c83a6544f0b0abe0d948c38298dd01b3.svg",
-      "sha256": "e0f1fa0aae9b5509d16079831ee19446b1d48441a09becac1c33b5fafb80fd7f"
+      "sha256": "25589d05bbebfa9c662fbdb41d34cc48c83a6544f0b0abe0d948c38298dd01b3"
     },
     "بانک سپه.svg": {
       "assetKey": "bank-logos/v1/aaf2b4f22b7a3020226d62c3fc9903f2f73312cef38f05d1e1308d33cc041d52.svg",
-      "sha256": "7a7860993a4cdaf6a944b2f345d8d807a61497f8dc82ead180a4db52624b729c"
+      "sha256": "aaf2b4f22b7a3020226d62c3fc9903f2f73312cef38f05d1e1308d33cc041d52"
     },
     "بانک سینا.svg": {
       "assetKey": "bank-logos/v1/bd66c103eb19164ba177a839c4c5597cee6e6537dd150a6bcf5c547bc6b87bab.svg",
-      "sha256": "aa72c4c24da7b708caffbd6a4e70b6d38fc8f702a710aab453f4fd78484330d5"
+      "sha256": "bd66c103eb19164ba177a839c4c5597cee6e6537dd150a6bcf5c547bc6b87bab"
     },
     "بانک شهر.svg": {
       "assetKey": "bank-logos/v1/5f60ef318751ac950a91bbf8e6876353a08b7ff1553eb56f5268b2f7b7053956.svg",
-      "sha256": "445b011241f14b41ce960a382c4fcd1a89c6df620a79146a7a44a94ce64c4015"
+      "sha256": "5f60ef318751ac950a91bbf8e6876353a08b7ff1553eb56f5268b2f7b7053956"
     },
     "بانک صادرات.svg": {
       "assetKey": "bank-logos/v1/fd529cd2dd90e30540c95bc1fb172ae8149c3bdf8cadb41c978cd5d99502c5da.svg",
-      "sha256": "211a0641e286742e12d862302ada6b72abb753973846c25fb77985ec59a11c5d"
+      "sha256": "fd529cd2dd90e30540c95bc1fb172ae8149c3bdf8cadb41c978cd5d99502c5da"
     },
     "بانک صنعت و معدن.svg": {
       "assetKey": "bank-logos/v1/d4d7d3b1ece8f2f073c72477cf8c536cb485d9bf50bdd63d3443ce98e06c6433.svg",
-      "sha256": "1d9d883a9a5777707492fcd92129e42dee35fdc6fc7bae4c46e38ca8a800199e"
+      "sha256": "d4d7d3b1ece8f2f073c72477cf8c536cb485d9bf50bdd63d3443ce98e06c6433"
     },
     "بانک مرکزی.svg": {
       "assetKey": "bank-logos/v1/03ad836481c3be3b7a9035cfef5b845bf682756b4e2c8ae13c53af8cf0d2ab28.svg",
-      "sha256": "a2daf183daa24da74d8d4cac69c3fb257646ece44d6f1fd0d8845287c768c129"
+      "sha256": "03ad836481c3be3b7a9035cfef5b845bf682756b4e2c8ae13c53af8cf0d2ab28"
     },
     "بانک مسکن.svg": {
       "assetKey": "bank-logos/v1/5f6460cc5694c70c17e91cfeabeee3d0cb118b95500b69f0644aacb9c4d8f65a.svg",
-      "sha256": "44d1905104e207392f4a2167786549702bef4c3b71db36a06b99b664a0e863a7"
+      "sha256": "5f6460cc5694c70c17e91cfeabeee3d0cb118b95500b69f0644aacb9c4d8f65a"
     },
     "بانک ملت.svg": {
       "assetKey": "bank-logos/v1/8be1383361651e9a37b9d520af2ef84a88d0292d356cec614e0a42cc95a0b3c1.svg",
-      "sha256": "24cbb08c3b252800418c3794538a98f4bf12f5399b3bf613563ccc17f6346b10"
+      "sha256": "8be1383361651e9a37b9d520af2ef84a88d0292d356cec614e0a42cc95a0b3c1"
     },
     "بانک ملی.svg": {
-      "assetKey": "bank-logos/v1/26de030040a217f8038910f321c152bd1d79fa4ede662aee40b6f456fa1db8a4.svg",
-      "sha256": "5b8f3a011f44e4d3adcbb04d65222e5538bf81c413e31abbd575933ec3ee2a8d"
+      "assetKey": "bank-logos/v1/dd414f9e0ebd60e1ca6b8f36d9b2c7b6dd6ac02e12d479c33eca94c6e8fba685.svg",
+      "sha256": "dd414f9e0ebd60e1ca6b8f36d9b2c7b6dd6ac02e12d479c33eca94c6e8fba685"
     },
     "بانک پارسیان.svg": {
       "assetKey": "bank-logos/v1/32e51777852c839d410c25d14597ff33ecd4695ea28498ccfa2914b1ea689d38.svg",
-      "sha256": "ecc454a2b93f029d6042e0fbc0e04abe08820b1552a625b8ad128786d6633d7f"
+      "sha256": "32e51777852c839d410c25d14597ff33ecd4695ea28498ccfa2914b1ea689d38"
     },
     "بانک پاسارگاد.svg": {
       "assetKey": "bank-logos/v1/efe915505c7ac04536736e740032fe409e8b37540f6ae98bf33d980228ce8fc6.svg",
-      "sha256": "e94dcddf5e3a1a39270aaaec6020b51f279e2c7ac78a90b958798d2047715edc"
+      "sha256": "efe915505c7ac04536736e740032fe409e8b37540f6ae98bf33d980228ce8fc6"
     },
     "بانک کارآفرین.svg": {
       "assetKey": "bank-logos/v1/76f272f56539bbb31c6c6733522255deb7692a8866d9b5adc4cdd6098ab0f00c.svg",
-      "sha256": "50717059bbead192e220323de16c7cbdcaf4c72e5b8515eaac149cf793bab20c"
+      "sha256": "76f272f56539bbb31c6c6733522255deb7692a8866d9b5adc4cdd6098ab0f00c"
     },
     "بانک کشاورزی.svg": {
       "assetKey": "bank-logos/v1/495efbb48ad9eac086c40e7e938ac06b636b07e1800f195d8062687f998d1df1.svg",
-      "sha256": "18b723e9fc986b0203489b63ee10ccb566aae7a3a6d6c944747f28e408bcbeec"
+      "sha256": "495efbb48ad9eac086c40e7e938ac06b636b07e1800f195d8062687f998d1df1"
     },
     "بانک گردشگری.svg": {
       "assetKey": "bank-logos/v1/26f5ac22e4bb3e1f79bc5572b659569caf96aec63596ccccfa11466d7e3dd8c8.svg",
-      "sha256": "9c6782ad57ed5201d8a4d130482e4612ecc0459cc69d72dc960f669919dfc811"
+      "sha256": "26f5ac22e4bb3e1f79bc5572b659569caf96aec63596ccccfa11466d7e3dd8c8"
     },
     "بلو بانک.svg": {
       "assetKey": "bank-logos/v1/539255492477552aa8f51351d8f37b7f0230fa5eee1420db9dd35f615d9c34f9.svg",
-      "sha256": "9243c1d869b2979ff92d3e1188d899875d8346da5233f151c31d31d5a52467a2"
+      "sha256": "539255492477552aa8f51351d8f37b7f0230fa5eee1420db9dd35f615d9c34f9"
     },
     "موسسه اعتباری ملل.svg": {
       "assetKey": "bank-logos/v1/7f0efbcaa554b71a22e084a9cb5a71efbf4abaf82f8b602ceeb57242849ff0fd.svg",
-      "sha256": "a4c22f756a113e0c59ca18e30177f9b00a6669b5683b99fbe9960877f7fd85fa"
+      "sha256": "7f0efbcaa554b71a22e084a9cb5a71efbf4abaf82f8b602ceeb57242849ff0fd"
     },
     "پست بانک.svg": {
       "assetKey": "bank-logos/v1/f211749dd2d992500af2ab69b73c62b44710f55681aaf3f59d03675020375f40.svg",
-      "sha256": "37b5bf5608e38acc33221ac0a20b5cb66ababd63bdd936d85dc3f939bc92cdf3"
+      "sha256": "f211749dd2d992500af2ab69b73c62b44710f55681aaf3f59d03675020375f40"
     }
   },
   "byLender": {
     "بانک اقتصاد نوین": {
       "assetKey": "bank-logos/v1/3902883cfd7325451774fc5d9f99a4cb6fcf776f5077a8e4d2f3ad3293c2c787.svg",
-      "sha256": "e1e2eb891e8588e60cc470943f9afb843f9c228c2782a1ebf649d703b5f7c2bb"
+      "sha256": "3902883cfd7325451774fc5d9f99a4cb6fcf776f5077a8e4d2f3ad3293c2c787"
     },
     "بانک ایران و ونزوئلا": {
       "assetKey": "bank-logos/v1/25629dd9f7828634048062f74b3411cb65b459893f36691cb4de945bc91cb020.svg",
-      "sha256": "b42d7f1ea6ca7bda36e1d4ecc3f8ae7b91c0c61491a11a200f1e9c998c113253"
+      "sha256": "25629dd9f7828634048062f74b3411cb65b459893f36691cb4de945bc91cb020"
     },
     "بانک تجارت": {
       "assetKey": "bank-logos/v1/06343e1bf69ad493df88299d266c255b549458a2ab0ea23744a5e83306694ec8.svg",
-      "sha256": "412fbc97dc743486de63e5f5114faaf924aa2632a3f0d37177b9abb55020c593"
+      "sha256": "06343e1bf69ad493df88299d266c255b549458a2ab0ea23744a5e83306694ec8"
     },
     "بانک توسعه تعاون": {
       "assetKey": "bank-logos/v1/809e9a337d769c8dfd84c01d2ffc4c059dd0a3a1008295e8e6c261fe4b4026a3.svg",
-      "sha256": "f71a1cfc388fd5c6068b2e0ed6cd2736144b6d31cd9024710fe734bc87699d2d"
+      "sha256": "809e9a337d769c8dfd84c01d2ffc4c059dd0a3a1008295e8e6c261fe4b4026a3"
     },
     "بانک توسعه صادرات": {
       "assetKey": "bank-logos/v1/71e86e80d234b77ac1bfd2bcdbbfa7595ec079ef7d29ac438818806c6507ea8b.svg",
-      "sha256": "bb616fd1df5bc8a09104ad069fff7c379311ea995d75ba784e34150035242491"
+      "sha256": "71e86e80d234b77ac1bfd2bcdbbfa7595ec079ef7d29ac438818806c6507ea8b"
     },
     "بانک خاورمیانه": {
       "assetKey": "bank-logos/v1/63accc8957cb9792f9c8606da653e3121f8865fb195ad956b654f6f05be6f877.svg",
-      "sha256": "6e182f3caca0f083f198a098071bf01b2329add640d8f12cfab871378f541094"
+      "sha256": "63accc8957cb9792f9c8606da653e3121f8865fb195ad956b654f6f05be6f877"
     },
     "بانک دی": {
       "assetKey": "bank-logos/v1/307d5809e9779273624971b5f2c2f971176e45a664b46eb024f2b696534201d6.svg",
-      "sha256": "d81b5ce8df02c952060214607a0f5c37343d684985f35a0b7a6c0c7286d6726f"
+      "sha256": "307d5809e9779273624971b5f2c2f971176e45a664b46eb024f2b696534201d6"
     },
     "بانک رفاه کارگران": {
       "assetKey": "bank-logos/v1/fb0c72cbf0549753cb6fc56b9177da71b176ccb81d923966708721c1246b04be.svg",
-      "sha256": "72ac6309523d98946272affd1fb8750b4b596d81cd824c87af4a8ca8f966e555"
+      "sha256": "fb0c72cbf0549753cb6fc56b9177da71b176ccb81d923966708721c1246b04be"
     },
     "بانک سامان": {
       "assetKey": "bank-logos/v1/b3887cd34509f69de042d6a68585cffc24d0134cfc867d8e13971a61484916ee.svg",
-      "sha256": "3eb83749f02ee16fb4109b3f35413f0a5550c05c062d6a02d41a2a361f892b1c"
+      "sha256": "b3887cd34509f69de042d6a68585cffc24d0134cfc867d8e13971a61484916ee"
     },
     "بانک سرمایه": {
       "assetKey": "bank-logos/v1/25589d05bbebfa9c662fbdb41d34cc48c83a6544f0b0abe0d948c38298dd01b3.svg",
-      "sha256": "e0f1fa0aae9b5509d16079831ee19446b1d48441a09becac1c33b5fafb80fd7f"
+      "sha256": "25589d05bbebfa9c662fbdb41d34cc48c83a6544f0b0abe0d948c38298dd01b3"
     },
     "بانک سپه": {
       "assetKey": "bank-logos/v1/aaf2b4f22b7a3020226d62c3fc9903f2f73312cef38f05d1e1308d33cc041d52.svg",
-      "sha256": "7a7860993a4cdaf6a944b2f345d8d807a61497f8dc82ead180a4db52624b729c"
+      "sha256": "aaf2b4f22b7a3020226d62c3fc9903f2f73312cef38f05d1e1308d33cc041d52"
     },
     "بانک سینا": {
       "assetKey": "bank-logos/v1/bd66c103eb19164ba177a839c4c5597cee6e6537dd150a6bcf5c547bc6b87bab.svg",
-      "sha256": "aa72c4c24da7b708caffbd6a4e70b6d38fc8f702a710aab453f4fd78484330d5"
+      "sha256": "bd66c103eb19164ba177a839c4c5597cee6e6537dd150a6bcf5c547bc6b87bab"
     },
     "بانک شهر": {
       "assetKey": "bank-logos/v1/5f60ef318751ac950a91bbf8e6876353a08b7ff1553eb56f5268b2f7b7053956.svg",
-      "sha256": "445b011241f14b41ce960a382c4fcd1a89c6df620a79146a7a44a94ce64c4015"
+      "sha256": "5f60ef318751ac950a91bbf8e6876353a08b7ff1553eb56f5268b2f7b7053956"
     },
     "بانک صادرات": {
       "assetKey": "bank-logos/v1/fd529cd2dd90e30540c95bc1fb172ae8149c3bdf8cadb41c978cd5d99502c5da.svg",
-      "sha256": "211a0641e286742e12d862302ada6b72abb753973846c25fb77985ec59a11c5d"
+      "sha256": "fd529cd2dd90e30540c95bc1fb172ae8149c3bdf8cadb41c978cd5d99502c5da"
     },
     "بانک صنعت و معدن": {
       "assetKey": "bank-logos/v1/d4d7d3b1ece8f2f073c72477cf8c536cb485d9bf50bdd63d3443ce98e06c6433.svg",
-      "sha256": "1d9d883a9a5777707492fcd92129e42dee35fdc6fc7bae4c46e38ca8a800199e"
+      "sha256": "d4d7d3b1ece8f2f073c72477cf8c536cb485d9bf50bdd63d3443ce98e06c6433"
     },
     "بانک مرکزی": {
       "assetKey": "bank-logos/v1/03ad836481c3be3b7a9035cfef5b845bf682756b4e2c8ae13c53af8cf0d2ab28.svg",
-      "sha256": "a2daf183daa24da74d8d4cac69c3fb257646ece44d6f1fd0d8845287c768c129"
+      "sha256": "03ad836481c3be3b7a9035cfef5b845bf682756b4e2c8ae13c53af8cf0d2ab28"
     },
     "بانک مسکن": {
       "assetKey": "bank-logos/v1/5f6460cc5694c70c17e91cfeabeee3d0cb118b95500b69f0644aacb9c4d8f65a.svg",
-      "sha256": "44d1905104e207392f4a2167786549702bef4c3b71db36a06b99b664a0e863a7"
+      "sha256": "5f6460cc5694c70c17e91cfeabeee3d0cb118b95500b69f0644aacb9c4d8f65a"
     },
     "بانک ملت": {
       "assetKey": "bank-logos/v1/8be1383361651e9a37b9d520af2ef84a88d0292d356cec614e0a42cc95a0b3c1.svg",
-      "sha256": "24cbb08c3b252800418c3794538a98f4bf12f5399b3bf613563ccc17f6346b10"
+      "sha256": "8be1383361651e9a37b9d520af2ef84a88d0292d356cec614e0a42cc95a0b3c1"
     },
     "بانک ملی": {
-      "assetKey": "bank-logos/v1/26de030040a217f8038910f321c152bd1d79fa4ede662aee40b6f456fa1db8a4.svg",
-      "sha256": "5b8f3a011f44e4d3adcbb04d65222e5538bf81c413e31abbd575933ec3ee2a8d"
+      "assetKey": "bank-logos/v1/dd414f9e0ebd60e1ca6b8f36d9b2c7b6dd6ac02e12d479c33eca94c6e8fba685.svg",
+      "sha256": "dd414f9e0ebd60e1ca6b8f36d9b2c7b6dd6ac02e12d479c33eca94c6e8fba685"
     },
     "بانک پارسیان": {
       "assetKey": "bank-logos/v1/32e51777852c839d410c25d14597ff33ecd4695ea28498ccfa2914b1ea689d38.svg",
-      "sha256": "ecc454a2b93f029d6042e0fbc0e04abe08820b1552a625b8ad128786d6633d7f"
+      "sha256": "32e51777852c839d410c25d14597ff33ecd4695ea28498ccfa2914b1ea689d38"
     },
     "بانک پاسارگاد": {
       "assetKey": "bank-logos/v1/efe915505c7ac04536736e740032fe409e8b37540f6ae98bf33d980228ce8fc6.svg",
-      "sha256": "e94dcddf5e3a1a39270aaaec6020b51f279e2c7ac78a90b958798d2047715edc"
+      "sha256": "efe915505c7ac04536736e740032fe409e8b37540f6ae98bf33d980228ce8fc6"
     },
     "بانک کارآفرین": {
       "assetKey": "bank-logos/v1/76f272f56539bbb31c6c6733522255deb7692a8866d9b5adc4cdd6098ab0f00c.svg",
-      "sha256": "50717059bbead192e220323de16c7cbdcaf4c72e5b8515eaac149cf793bab20c"
+      "sha256": "76f272f56539bbb31c6c6733522255deb7692a8866d9b5adc4cdd6098ab0f00c"
     },
     "بانک کشاورزی": {
       "assetKey": "bank-logos/v1/495efbb48ad9eac086c40e7e938ac06b636b07e1800f195d8062687f998d1df1.svg",
-      "sha256": "18b723e9fc986b0203489b63ee10ccb566aae7a3a6d6c944747f28e408bcbeec"
+      "sha256": "495efbb48ad9eac086c40e7e938ac06b636b07e1800f195d8062687f998d1df1"
     },
     "بانک گردشگری": {
       "assetKey": "bank-logos/v1/26f5ac22e4bb3e1f79bc5572b659569caf96aec63596ccccfa11466d7e3dd8c8.svg",
-      "sha256": "9c6782ad57ed5201d8a4d130482e4612ecc0459cc69d72dc960f669919dfc811"
+      "sha256": "26f5ac22e4bb3e1f79bc5572b659569caf96aec63596ccccfa11466d7e3dd8c8"
     },
     "موسسه اعتباری ملل": {
       "assetKey": "bank-logos/v1/7f0efbcaa554b71a22e084a9cb5a71efbf4abaf82f8b602ceeb57242849ff0fd.svg",
-      "sha256": "a4c22f756a113e0c59ca18e30177f9b00a6669b5683b99fbe9960877f7fd85fa"
+      "sha256": "7f0efbcaa554b71a22e084a9cb5a71efbf4abaf82f8b602ceeb57242849ff0fd"
     },
     "پست بانک": {
       "assetKey": "bank-logos/v1/f211749dd2d992500af2ab69b73c62b44710f55681aaf3f59d03675020375f40.svg",
-      "sha256": "37b5bf5608e38acc33221ac0a20b5cb66ababd63bdd936d85dc3f939bc92cdf3"
+      "sha256": "f211749dd2d992500af2ab69b73c62b44710f55681aaf3f59d03675020375f40"
     }
   }
 }

@@ -13,6 +13,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T06G follow-up:** Decoded the controlled bank-logo payloads into renderable SVG bytes, made each internal filename/hash content-addressed, restored logos on comparison-result cards, and isolated every loan percentage (including «نرخ بهره اعلامی») so the sign remains after the Persian number in RTL layouts.
+
 - **Local full-stack development:** Added a same-origin Vite `/api/v1` proxy,
   Compose-managed frontend/API readiness ordering, packaged runtime contracts, an
   explicit read-only/operator catalogue workflow, focused proxy and opt-in live

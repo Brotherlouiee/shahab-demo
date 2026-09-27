@@ -1,12 +1,5 @@
-import { useEffect, useState } from "react";
-
 import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
-import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
-
-function formatPercent(value) {
-  if (typeof value !== "number") return "نامشخص";
-  return <bdi dir="ltr">{`${Math.round(value * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
-}
+import LoanPercent from "../../loan-details/LoanPercent.jsx";
 
 /**
  * Selection-only card for the restored comparison route. It consumes the
@@ -18,15 +11,7 @@ export default function LoanComparisonCard({
   selected,
   onToggle,
 }) {
-  const [detailLogoReference, setDetailLogoReference] = useState(null);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchLoanDetails(recommendation.loanId, { signal: controller.signal })
-      .then((detail) => setDetailLogoReference(detail?.bankLogoReference ?? null))
-      .catch(() => { if (!controller.signal.aborted) setDetailLogoReference(null); });
-    return () => controller.abort();
-  }, [recommendation.loanId]);
-  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName) ?? recommendation.bankLogoReference ?? detailLogoReference;
+  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName);
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
       <div className="hp-loan-result-head">
@@ -41,7 +26,7 @@ export default function LoanComparisonCard({
         <strong>{recommendation.loanName}</strong>
       </div>
       <p className="hp-loan-match">
-        تطابق با وضعیت مشتری: <b>{formatPercent(recommendation.compatibilityScore)}</b>
+        تطابق با وضعیت مشتری: <b>{typeof recommendation.compatibilityScore === "number" ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>
       </p>
     </article>
   );

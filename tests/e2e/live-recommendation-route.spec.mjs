@@ -54,6 +54,9 @@ test("canonical questionnaire reaches the active real-result route and published
   const resultLogo = page.locator(".hp-loan-result-head img").first();
   await expect(resultLogo).toBeVisible();
   await expect(resultLogo).toHaveJSProperty("complete", true);
+  expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
+  await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
+  await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("۹۱٪");
   const assetResponse = await page.request.get(await resultLogo.getAttribute("src"));
   expect(assetResponse.ok()).toBe(true);
   expect(assetResponse.headers()["content-type"]).toContain("image/svg+xml");
@@ -86,12 +89,20 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
   await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
+  expect(await page.locator(".hp-loan-compare-card .hp-loan-result-head img").first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
   await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
   await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
+  expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
+  await page.getByRole("button", { name: "نرخ بهره" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("button", { name: "نرخ بهره" })).toHaveClass(/is-active/);
+  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
+  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveText("۱۸٪");
 
 });
 

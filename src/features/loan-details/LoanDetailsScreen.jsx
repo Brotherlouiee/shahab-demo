@@ -2,13 +2,10 @@ import { useEffect, useState } from "react";
 
 import { bankLogoAssetUrlForLender } from "./bankLogoAssetUrl.mjs";
 import { fetchLoanDetails } from "./loanDetailsApi";
+import LoanPercent from "./LoanPercent.jsx";
 
 function formatNumber(value) {
   return value === null || value === undefined ? "اعلام نشده" : Number(value).toLocaleString("fa-IR").replaceAll("٬", "/");
-}
-
-function formatPercent(value) {
-  return value === null || value === undefined ? "اعلام نشده" : <bdi dir="ltr">{`${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
 }
 
 function toPersianDigits(value) {
@@ -64,7 +61,7 @@ export default function LoanDetailsScreen({ loanId, header }) {
 }
 
 function LoanDetail({ detail }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName) ?? detail.bankLogoReference;
+  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName);
   return <>
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
@@ -74,7 +71,7 @@ function LoanDetail({ detail }) {
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
         <DetailGroup>
           <DetailValue label="حداکثر مبلغ وام">{formatNumber(detail.maxAmountTomans)} تومان</DetailValue>
-          <DetailValue label="نرخ بهره اعلامی">{formatPercent(detail.interestRatePercent)}</DetailValue>
+          <DetailValue label="نرخ بهره اعلامی"><LoanPercent value={detail.interestRatePercent} /></DetailValue>
         </DetailGroup>
         <DetailGroup>
           <DetailValue label="مبلغ هر قسط">{formatNumber(detail.monthlyInstallmentTomans)} تومان</DetailValue>
