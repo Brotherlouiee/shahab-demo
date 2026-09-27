@@ -13,7 +13,6 @@ test("every verified bank logo has an ASCII versioned path and matching SHA-256"
     const bytes = readFileSync(resolve(root, "public", asset.assetKey));
     return [filename, createHash("sha256").update(bytes).digest("hex")];
   });
-  console.log(JSON.stringify({ calculated }));
   for (const [filename, actualSha256] of calculated) {
     assert.equal(actualSha256, manifest.assets[filename].sha256);
   }
