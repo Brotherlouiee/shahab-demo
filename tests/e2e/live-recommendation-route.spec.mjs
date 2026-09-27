@@ -71,6 +71,15 @@ test("canonical questionnaire reaches the active real-result route and published
 
   await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
 
+  await page.getByRole("button", { name: "مقایسه وام" }).click();
+  await expect(page).toHaveURL(/\/compare-loans$/);
+  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
+  await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
+  await page.getByRole("button", { name: /مقایسه کن/ }).click();
+  await expect(page).toHaveURL(/\/compare-result$/);
+  await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
+
 });
 
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {
