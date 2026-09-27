@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
-import RecommendationResultScreen from "./features/recommendation/presentation/recommendationResultScreen.mjs";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
@@ -17,6 +16,9 @@ import logoUrl from "../assets/shahab-logo.png";
 import folderIconUrl from "../assets/folder.svg";
 import healthIconUrl from "../assets/health.svg";
 import profileIconUrl from "../assets/profile.svg";
+import sendIconUrl from "../assets/send.svg";
+import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
+import addCircleIconUrl from "../assets/add-circle.svg";
 
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
   eager: true,
@@ -119,6 +121,37 @@ const incomeOptions = [
   { value: "250-to-500", label: "۲۵۰ میلیون تا ۵۰۰ میلیون تومان" },
   { value: "500-to-1000", label: "۵۰۰ تا ۱ میلیارد تومان" },
   { value: "over-1000", label: "بیش از ۱ میلیارد تومان" },
+];
+
+const analysisLogoNames = [
+  "بانک ملت",
+  "بانک ملی",
+  "بانک صادرات",
+  "بانک تجارت",
+  "بانک سپه",
+  "بانک آینده",
+  "بانک شهر",
+  "بانک سامان",
+  "بانک اقتصاد",
+  "بانک دی",
+  "بانک پاسارگاد",
+  "بانک پارسیان",
+  "بانک رفاه",
+  "بانک سینا",
+  "بانک رسالت",
+  "بانک قرض الحسنه",
+  "بانک گردشگری",
+  "بانک کشاورزی",
+  "بانک توسعه",
+  "بانک کارآفرین",
+  "بانک سرمایه",
+  "بانک خاورمیانه",
+  "بانک حکمت",
+  "بانک صنعت",
+  "بانک مسکن",
+  "بانک ایران زمین",
+  "بانک مهر",
+  "بلو بانک",
 ];
 
 const analysisLogoPositions = [
@@ -811,9 +844,9 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   );
 }
 
-function LoanResultCard({ recommendation, selectable = false, selected = false, onDetails, onToggle }) {
+function LoanResultCard({ recommendation, compact = false, selectable = false, selected = false, onDetails, onToggle }) {
   return (
-    <article className="hp-loan-result-card is-compact">
+    <article className={`hp-loan-result-card ${compact ? "is-compact" : ""}`}>
       <div className="hp-loan-result-head">
         {selectable ? (
           <button
@@ -824,16 +857,117 @@ function LoanResultCard({ recommendation, selectable = false, selected = false, 
             aria-pressed={selected}
           />
         ) : null}
-        <div><span>«{recommendation.lenderName}»</span></div>
+        <div>
+          <span>«{recommendation.lenderName}»</span>
+        </div>
         <strong>{recommendation.loanName}</strong>
       </div>
       {typeof recommendation.compatibilityScore === "number" ? (
-        <p className="hp-loan-match">
-          تطابق محاسبه‌شدهٔ سرور: <b>{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</b>
-        </p>
+        <p className="hp-loan-match">تطابق با وضعیت شما: <b><span dir="ltr">{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</span></b></p>
       ) : <p className="hp-recommendation-warning">وضعیت متغیر؛ بدون درصد و رتبه</p>}
-      {onDetails ? <button className="hp-loan-docs-link" type="button" onClick={onDetails}>مشاهده شرایط و مدارک مورد نیاز</button> : null}
+      {recommendation.compatibilityReason ? <p className="hp-recommendation-reason">{recommendation.compatibilityReason}</p> : null}
+      {recommendation.rankingExcludedReasons?.length ? <p className="hp-recommendation-reason">{recommendation.rankingExcludedReasons.join("، ")}</p> : null}
+      {!compact && onDetails ? <button className="hp-loan-docs-link" type="button" onClick={onDetails}>مشاهده شرایط و مدارک مورد نیاز</button> : null}
     </article>
+  );
+}
+
+function LoanResultsScreen({ result, status, onRetry, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
+  const [headerMode, setHeaderMode] = useState("top");
+  const [mode, setMode] = useState("highest");
+
+  const pageRef = useRef(null);
+  const lastScrollTopRef = useRef(0);
+  const stopTimerRef = useRef(null);
+
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return undefined;
+
+    const scrollContainer = page.closest(".hp-questionnaire-shell");
+    if (!scrollContainer) return undefined;
+
+    const TOP_THRESHOLD = 2;
+    const STOP_DELAY = 180;
+
+    lastScrollTopRef.current = scrollContainer.scrollTop;
+
+    function handleScroll() {
+      const currentScrollTop = scrollContainer.scrollTop;
+      const delta = currentScrollTop - lastScrollTopRef.current;
+
+      window.clearTimeout(stopTimerRef.current);
+
+      if (currentScrollTop <= TOP_THRESHOLD) {
+        setHeaderMode("top");
+      } else if (delta !== 0) {
+        setHeaderMode("collapsed");
+      }
+
+      lastScrollTopRef.current = currentScrollTop;
+
+      if (currentScrollTop > TOP_THRESHOLD) {
+        stopTimerRef.current = window.setTimeout(() => {
+          setHeaderMode("overlay");
+        }, STOP_DELAY);
+      }
+    }
+
+    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", handleScroll);
+      window.clearTimeout(stopTimerRef.current);
+    };
+  }, []);
+
+  const resultsByMode = {
+    highest: result?.rankedRecommendations || [],
+    lowest: result?.lowCompatibilityRecommendations || [],
+    variable: result?.needsReview || [],
+  };
+  const visibleResults = resultsByMode[mode];
+
+  return (
+    <main
+      ref={pageRef}
+      className={`hp-questionnaire-page hp-loan-results-page header-${headerMode}`}
+      dir="rtl"
+    >
+      <div className="hp-loan-results-top">
+        <QuestionnaireHeader
+          onBack={onBack}
+          onMenu={onMenu}
+          onHome={onHome}
+        />
+
+        <div className="hp-loan-results-controls">
+          <div className="hp-loan-results-actions">
+            <button className="is-primary" type="button" onClick={() => onRequest(result)} disabled={status !== "ready"}>
+              ثبت درخواست همزمان وام بانکی
+            </button>
+
+            <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
+              مقایسه وام
+            </button>
+          </div>
+
+          <div className="hp-loan-result-filters" role="group" aria-label="نوع نتایج">
+            <button className={mode === "highest" ? "is-active" : ""} type="button" onClick={() => setMode("highest")}>بیشترین تطابق</button>
+            <button className={mode === "lowest" ? "is-active" : ""} type="button" onClick={() => setMode("lowest")}>کمترین تطابق</button>
+            <button className={mode === "variable" ? "is-active" : ""} type="button" onClick={() => setMode("variable")}>وضعیت متغیر</button>
+          </div>
+        </div>
+      </div>
+
+      <section className="hp-loan-results-list">
+        {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
+        {status === "sessionMissing" ? <p className="hp-recommendation-result-state" role="status">برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p> : null}
+        {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
+        {status === "ready" && !visibleResults.length ? <p className="hp-recommendation-result-state">برای این بخش نتیجه‌ای موجود نیست.</p> : null}
+        {status === "ready" && visibleResults.map((recommendation) => <LoanResultCard key={recommendation.loanId} recommendation={recommendation} onDetails={() => onDetails(recommendation.loanId)} />)}
+      </section>
+    </main>
   );
 }
 
@@ -847,17 +981,6 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
-function MissingRecommendationSession({ onBack, onMenu, onHome }) {
-  return (
-    <main className="hp-questionnaire-page hp-recommendation-results-screen" dir="rtl">
-      <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
-      <section className="hp-recommendation-result-state" role="status">
-        برای دسترسی به این صفحه، ابتدا پرسشنامه را در همین تب کامل و یک نتیجهٔ معتبر دریافت کنید.
-      </section>
-    </main>
-  );
-}
-
 function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
   const [selectedPlans, setSelectedPlans] = useState({});
   const selectedPlanIds = Object.entries(selectedPlans)
@@ -868,7 +991,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
   const visiblePlans = allRecommendationItems(result);
 
   if (!result) {
-    return <MissingRecommendationSession onBack={onBack} onMenu={onMenu} onHome={onHome} />;
+    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">برای ادامه، ابتدا نتیجهٔ معتبر پرسشنامه را در همین تب دریافت کنید.</p></main>;
   }
 
   return (
@@ -876,12 +999,12 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
         <span>!</span>
-        <p>{isCompareMode ? "حداکثر ۱۰ وام واقعی را برای مقایسه انتخاب کنید." : "روش اقدام فقط در صورت وجود اطلاعات تأییدشدهٔ همان وام نمایش داده می‌شود."}</p>
+        <p>{isCompareMode ? "حداکثر ۱۰ وام واقعی را برای مقایسه انتخاب کنید." : "روش اقدام رسمی فقط پس از تأیید provider نمایش داده می‌شود."}</p>
       </div>
       {!isCompareMode ? (
         <div className="hp-compare-info">
           <span>!</span>
-          <p>در دادهٔ serving فعلی، روش اقدام یا provider رسمی ثبت نشده است؛ این صفحه ثبت، پرداخت یا موفقیت درخواست را شبیه‌سازی نمی‌کند.</p>
+          <p>در دادهٔ serving فعلی، provider یا روش پرداخت تأییدشده‌ای موجود نیست؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
         </div>
       ) : null}
       <section className="hp-compare-list">
@@ -889,11 +1012,12 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
           <LoanResultCard
             key={recommendation.loanId}
             recommendation={recommendation}
+            compact
             selectable
             selected={Boolean(selectedPlans[recommendation.loanId])}
             onToggle={() => setSelectedPlans((current) => ({
               ...current,
-              [recommendation.loanId]: !current[recommendation.loanId] && selectedCount < 10,
+              [recommendation.loanId]: current[recommendation.loanId] ? false : selectedCount < 10,
             }))}
           />
         ))}
@@ -905,7 +1029,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
       ) : selectedCount > 0 ? (
         <div className="hp-compare-bottom-bar">
           <div>
-            <span>برای «{toPersianDigits(selectedCount)}» وام انتخاب‌شده روش اقدام تأییدشده‌ای موجود نیست.</span>
+            <span>برای «{toPersianDigits(selectedCount)}» وام انتخاب‌شده، روش اقدام تأییدشده‌ای موجود نیست.</span>
           </div>
           <button type="button" disabled>ثبت یا پرداخت در دسترس نیست</button>
         </div>
@@ -958,6 +1082,7 @@ function formatApprovedPercent(value) {
 }
 
 function LoanComparisonResultCard({ detail, metric }) {
+
   return (
     <article className="hp-compare-result-card">
       <div>
@@ -993,12 +1118,14 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
     return () => controller.abort();
   }, [result, selectedPlanIds]);
 
+  if (!result) {
+    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p></main>;
+  }
+
   useEffect(() => {
     const activeTab = tabsRef.current?.querySelector(`[data-tab-index="${activeMetricIndex}"]`);
     activeTab?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
   }, [activeMetricIndex]);
-
-  if (!result) return <MissingRecommendationSession onBack={onBack} onMenu={onMenu} onHome={onHome} />;
 
   function handleTabsPointerDown(event) {
     tabDragStartXRef.current = event.clientX;
@@ -1056,38 +1183,23 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
       </nav>
 
       <section className="hp-compare-result-list">
-        {detailState.status === "loading" ? <p role="status">در حال دریافت اطلاعات واقعی وام‌ها…</p> : null}
-        {detailState.status === "empty" ? <p>برای مقایسه حداقل دو وام واقعی انتخاب کنید.</p> : null}
-        {detailState.status === "error" ? <p role="alert">دریافت اطلاعات مقایسه ممکن نیست.</p> : null}
-        {detailState.details.map((detail) => <LoanComparisonResultCard key={detail.loanId} detail={detail} metric={activeMetric} />)}
+        {detailState.status === "loading" ? <p className="hp-recommendation-result-state">در حال دریافت جزئیات وام‌ها…</p> : null}
+        {detailState.status === "empty" ? <p className="hp-recommendation-result-state">برای مقایسه دست‌کم دو وام را انتخاب کنید.</p> : null}
+        {detailState.status === "error" ? <p className="hp-recommendation-result-state">دریافت جزئیات مقایسه در حال حاضر ممکن نیست.</p> : null}
+        {detailState.status === "ready" ? detailState.details.map((detail) => <LoanComparisonResultCard key={detail.loanId} detail={detail} metric={activeMetric} />) : null}
       </section>
 
       <div className="hp-compare-result-bottom-bar">
-        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0])} disabled={!selectedPlanIds.length}>توضیح نتیجه</button>
+        <button type="button" onClick={onAiAnalysis}>تحلیل با هوش مصنوعی</button>
       </div>
     </main>
   );
 }
 
-function LoanAiAnalysisScreen({ result, loanId, onBack }) {
-  const recommendation = allRecommendationItems(result).find((item) => item.loanId === loanId);
-  const [detail, setDetail] = useState(null);
-
-  useEffect(() => {
-    if (!recommendation) return undefined;
-    const controller = new AbortController();
-    fetchLoanDetails(recommendation.loanId, { signal: controller.signal })
-      .then(setDetail)
-      .catch(() => setDetail(null));
-    return () => controller.abort();
-  }, [recommendation]);
-
-  if (!result || !recommendation) {
-    return <main className="hp-ai-analysis-page" dir="rtl"><button type="button" onClick={onBack}>بازگشت</button><p>برای دیدن توضیح، ابتدا یک نتیجهٔ واقعی را انتخاب کنید.</p></main>;
-  }
+function LoanAiAnalysisScreen({ onBack, loanId }) {
   return (
     <main className="hp-ai-analysis-page" dir="rtl">
-      <div className="hp-ai-analysis-credit">توضیح ثبت‌شدهٔ نتیجهٔ توصیه‌گر</div>
+      <div className="hp-ai-analysis-credit">اعتبار شما در هر ۲ ساعت ۱۰ پرامپت است.</div>
       <header className="hp-ai-analysis-header">
         <button className="hp-ai-analysis-back" type="button" onClick={onBack} aria-label="بازگشت">
           <svg viewBox="0 0 24 24" focusable="false">
@@ -1095,62 +1207,29 @@ function LoanAiAnalysisScreen({ result, loanId, onBack }) {
             <path d="m12 19-7-7 7-7" />
           </svg>
         </button>
+        <button className="hp-ai-analysis-panel-button" type="button" aria-label="پنل">
+          <img src={sidebarLeftIconUrl} alt="" />
+        </button>
       </header>
 
       <section className="hp-ai-analysis-message">
-        <h1>{recommendation.loanName}</h1>
-        <p>ارائه‌دهنده: {recommendation.lenderName}</p>
-        {typeof recommendation.compatibilityScore === "number" ? (
-          <p>{recommendation.compatibilityReason}</p>
-        ) : (
-          <ul>{recommendation.rankingExcludedReasons.map((reason) => <li key={reason}>{reason}</li>)}</ul>
-        )}
-        <h2>شرایط تأییدشدهٔ همین وام</h2>
-        {detail?.conditions?.length ? <ul>{detail.conditions.map((condition) => <li key={condition}>{condition}</li>)}</ul> : <p>شرایط تأییدشده‌ای برای نمایش در دسترس نیست.</p>}
-        <p>این توضیح فقط از خروجی موتور و شرایط منتشرشده ساخته شده است؛ سرویس تحلیل هوش مصنوعی یا provider خارجی فعال نیست.</p>
+        <p>
+          تحلیل هوش مصنوعی برای این وام هنوز قرارداد خارجیِ تأییدشده ندارد.
+          <br />
+          {loanId ? "جزئیات وام انتخاب‌شده از مسیر معتبر قابل مشاهده است، اما تحلیل ساختگی نمایش داده نمی‌شود." : "ابتدا یک وام را از نتیجهٔ معتبر انتخاب کنید."}
+        </p>
       </section>
-    </main>
-  );
-}
 
-function LiveRecommendationResults({
-  sessionId, onBack, onMenu, onHome, onDetails, onCompare, onAction,
-  onAnalysis, onResult, onStartQuestionnaire,
-}) {
-  const [result, setResult] = useState(null);
-  const [status, setStatus] = useState("loading");
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    if (!sessionId) {
-      setResult(null);
-      setStatus("sessionMissing");
-      return undefined;
-    }
-    const controller = new AbortController();
-    setStatus("loading");
-    fetchRecommendationResult(sessionId, { signal: controller.signal })
-      .then((response) => {
-        if (!controller.signal.aborted) {
-          setResult(response);
-          onResult?.(response);
-          setStatus("ready");
-        }
-      })
-      .catch(() => { if (!controller.signal.aborted) setStatus("error"); });
-    return () => controller.abort();
-  }, [sessionId, attempt, onResult]);
-  return (
-    <RecommendationResultScreen
-      status={status}
-      result={result}
-      header={<QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />}
-      onRetry={() => setAttempt((value) => value + 1)}
-      onDetails={onDetails}
-      onCompare={onCompare}
-      onAction={onAction}
-      onAnalysis={onAnalysis}
-      onStartQuestionnaire={onStartQuestionnaire}
-    />
+      <form className="hp-ai-analysis-input" onSubmit={(event) => event.preventDefault()}>
+        <button type="button" aria-label="افزودن" disabled>
+          <img src={addCircleIconUrl} alt="" />
+        </button>
+        <input type="text" placeholder="تحلیل هوش مصنوعی هنوز فعال نیست" disabled />
+        <button type="submit" aria-label="ارسال" disabled>
+          <img src={sendIconUrl} alt="" />
+        </button>
+      </form>
+    </main>
   );
 }
 
@@ -1186,6 +1265,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
   const [recommendationResult, setRecommendationResult] = useState(null);
+  const [recommendationStatus, setRecommendationStatus] = useState("idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
   const [isAnalysisSpinnerRunning, setIsAnalysisSpinnerRunning] = useState(false);
   const [analysisCountdown, setAnalysisCountdown] = useState(8);
@@ -1761,6 +1841,15 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     return () => window.clearInterval(timerId);
   }, [isAnalyzingLoans]);
 
+  useEffect(() => {
+    if (loanResultView !== "results" || recommendationResult || recommendationStatus === "loading") return;
+    if (!questionnaireSessionId) {
+      setRecommendationStatus("sessionMissing");
+      return;
+    }
+    loadRecommendationResult();
+  }, [loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+
   function getNearestStageIndex(offset) {
     return stageOffsets.reduce((nearestIndex, currentOffset, index) => {
       const nearestDistance = Math.abs(offset - stageOffsets[nearestIndex]);
@@ -1832,6 +1921,21 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     }
   }
 
+  async function loadRecommendationResult() {
+    if (!questionnaireSessionId) {
+      setRecommendationStatus("sessionMissing");
+      return;
+    }
+    setRecommendationStatus("loading");
+    try {
+      const result = await fetchRecommendationResult(questionnaireSessionId);
+      setRecommendationResult(result);
+      setRecommendationStatus("ready");
+    } catch {
+      setRecommendationStatus("error");
+    }
+  }
+
   async function handleNextQuestion() {
     if (!canProceed) return;
     if (!(await persistCanonicalQuestionnaireAnswer())) return;
@@ -1847,7 +1951,16 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       return;
     }
     if (canonicalQuestion?.questionId === "S13") {
+      setRecommendationResult(null);
+      setRecommendationStatus("loading");
       setLoanResultView("results");
+      try {
+        const result = await fetchRecommendationResult(questionnaireSessionId);
+        setRecommendationResult(result);
+        setRecommendationStatus("ready");
+      } catch {
+        setRecommendationStatus("error");
+      }
       return;
     }
     if (currentQuestion === 1 && selectedOption !== "person") return;
@@ -1922,12 +2035,6 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   function handleLoanRequestOpen(result = recommendationResult) {
     if (result) setRecommendationResult(result);
     setLoanResultView("request");
-  }
-
-  function handleStartQuestionnaire() {
-    setLoanResultView("");
-    setIsOtpVerificationStep(false);
-    setCurrentQuestion(2);
   }
 
   function handlePersonalInfoChange(field, value) {
@@ -2089,17 +2196,16 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   if (loanResultView === "results") {
     return (
-      <LiveRecommendationResults
-        sessionId={questionnaireSessionId}
+      <LoanResultsScreen
+        result={recommendationResult}
+        status={recommendationStatus}
+        onRetry={loadRecommendationResult}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
         onDetails={handleLoanDetailsOpen}
         onCompare={handleLoanCompareOpen}
-        onAction={handleLoanRequestOpen}
-        onAnalysis={handleLoanAiAnalysisOpen}
-        onResult={setRecommendationResult}
-        onStartQuestionnaire={handleStartQuestionnaire}
+        onRequest={handleLoanRequestOpen}
       />
     );
   }
@@ -2154,9 +2260,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   if (loanResultView === "ai-analysis") {
     return (
       <LoanAiAnalysisScreen
-        result={recommendationResult}
-        loanId={selectedAnalysisLoanId || selectedComparisonPlanIds[0] || ""}
         onBack={handleLoanResultBack}
+        loanId={selectedAnalysisLoanId || selectedComparisonPlanIds[0] || ""}
       />
     );
   }
