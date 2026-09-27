@@ -14,6 +14,9 @@ function assertDetailPayload(payload) {
   if (!payload || typeof payload !== "object" || typeof payload.loanId !== "string") {
     throw new LoanDetailsApiError(502);
   }
+  if (payload.bankLogoReference !== null && payload.bankLogoReference !== undefined && typeof payload.bankLogoReference !== "string") {
+    throw new LoanDetailsApiError(502);
+  }
   if (!Array.isArray(payload.conditions) || !payload.conditions.every((item) => typeof item === "string")) {
     throw new LoanDetailsApiError(502);
   }
