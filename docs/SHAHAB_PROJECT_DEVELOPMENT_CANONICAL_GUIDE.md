@@ -598,9 +598,9 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 **هدف و وابستگی:** پس از `T06E` و پیش از `T07`، نمایش logo نباید به hotlink یا دسترس‌پذیری لحظه‌ای `rade.ir` وابسته باشد. ۲۹ فایل SVG تأییدشدهٔ تحویل‌داده‌شده باید دارایی نسخه‌دار خود پروژه باشند؛ URL اصلی فقط provenance باقی می‌ماند.
 
 1. SVGها در مسیر public کنترل‌شدهٔ پروژه نگهداری شوند. manifest نسخه‌دار باید برای هر asset نام، کلید و SHA-256 و برای هر بانک canonical کلید مربوط را ثبت کند.
-2. هنگام materialization، `loan_serving_facts` علاوه بر `bank_logo_reference` اصلی، `bank_logo_asset_key` و `bank_logo_asset_sha256` را ثبت کند. هر وام منتشرشده باید mapping تأییدشده داشته باشد؛ نبود آن fail-closed است.
+2. هنگام materialization، `loan_serving_facts` علاوه بر `bank_logo_reference` اصلی، `bank_logo_asset_key` و `bank_logo_asset_sha256` را ثبت کند. هر وام منتشرشده باید mapping تأییدشده داشته باشد؛ نبود آن fail-closed است. migration نیز رکوردهای PUBLISHED پیشین را با همین mapping backfill می‌کند.
 3. کارت‌های نتیجه، تطابق کم، وضعیت متغیر، مقایسه و جزئیات از مسیر static خود سامانه logo را نمایش دهند، نه URL خارجی. layout یا source داده/امتیاز/شرط تغییر نمی‌کند.
-4. آزمون browser باید هم attribute مسیر کنترل‌شده و هم decode واقعی تصویر (`complete` و `naturalWidth > 0`) را در کارت نتیجه و مقایسه اثبات کند. تست materialization نیز key/hash همه ۱۰۲ وام را بررسی می‌کند.
+4. آزمون browser باید مسیر کنترل‌شده، نمایش image و دریافت موفق SVG با MIME درست از همان سامانه را در کارت نتیجه و مقایسه اثبات کند. تست materialization نیز key/hash همه ۱۰۲ وام را بررسی می‌کند.
 5. URL اصلی و hash asset در audit/provenance باقی می‌مانند. جایگزینی SVG فقط با فایل تأییدشده، تغییر manifest، hash جدید و PR مجاز است.
 
 **خارج از scope:** deploy عمومی، object storage production، snapshot/migration عملیاتی روی سرور و Netlify واقعی همچنان جزء `T07` هستند. `docs/project-current-state.md` تا پایان کامل US-09/T07 تغییر نمی‌کند.
