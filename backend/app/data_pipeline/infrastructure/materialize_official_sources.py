@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 from dataclasses import dataclass
 from decimal import Decimal
 
@@ -41,6 +42,26 @@ from backend.app.infrastructure.db.models import (
     ServingCatalogueVersion,
     VariableCategory,
 )
+
+ROOT = Path(__file__).resolve().parents[4]
+ASSET_MANIFEST = ROOT / "data" / "contracts" / "bank-logo-assets.v1.json"
+
+
+def _bank_logo_assets() -> dict[str, tuple[str, str]]:
+    payload = json.loads(ASSET_MANIFEST.read_text(encoding="utf-8"))
+    source_mapping = payload.get("byLender")
+    if not isinstance(source_mapping, dict):
+        raise ValueError("bank logo asset manifest has no lender mapping")
+    assets: dict[str, tuple[str, str]] = {}
+    for lender_name, entry in source_mapping.items():
+        if not isinstance(lender_name, str) or not isinstance(entry, dict):
+            raise ValueError("bank logo asset manifest contains an invalid entry")
+        asset_key = entry.get("assetKey")
+        asset_sha256 = entry.get("sha256")
+        if not isinstance(asset_key, str) or not isinstance(asset_sha256, str) or len(asset_sha256) != 64:
+            raise ValueError(f"bank logo asset is invalid for {lender_name!r}")
+        assets[lender_name] = (asset_key, asset_sha256)
+    return assets
 
 
 @dataclass(frozen=True)
@@ -133,6 +154,7 @@ def materialize_official_sources(
     )
     if not plan.is_publishable_candidate or len(plan.accepted_rows) != 102:
         raise ValueError("the reviewed source must contain exactly 102 accepted loan rows")
+    logo_assets = _bank_logo_assets()
     active = _one(session, ServingCatalogueVersion, ServingCatalogueVersion.active.is_(True))
     existing = _one(session, ServingCatalogueVersion, ServingCatalogueVersion.version_code == version_code)
     if existing is not None:
@@ -287,6 +309,9 @@ def materialize_official_sources(
     session.flush()
     rankable = 0
     for canonical in plan.accepted_rows:
+        logo_asset = logo_assets.get(canonical.lender_name)
+        if logo_asset is None:
+            raise ValueError(f"no verified bank logo asset for {canonical.lender_name!r}")
         lender = _get_or_create(
             session,
             Lender,
@@ -355,8 +380,8 @@ def materialize_official_sources(
                 guarantee_type_text=values["guaranteeType"].raw.strip() or None,
                 required_deposit_account=canonical.display_fields.get("requiredDepositAccount"),
                 bank_logo_reference=canonical.display_fields.get("bankLogo"),
-                bank_logo_asset_key=canonical.display_fields.get("bankLogoAssetKey"),
-                bank_logo_asset_sha256=canonical.display_fields.get("bankLogoAssetSha256"),
+                bank_logo_asset_key=logo_asset[0],
+                bank_logo_asset_sha256=logo_asset[1],
             )
         )
         session.add(
