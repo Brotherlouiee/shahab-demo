@@ -945,7 +945,7 @@ function LoanResultsScreen({ result, status, onRetry, onStartQuestionnaire, onBa
         <div className="hp-loan-results-controls">
           <div className="hp-loan-results-actions">
             <button className="is-primary" type="button" onClick={() => onRequest(result)} disabled={status !== "ready"}>
-              ثبت درخواست همزمان وام بانکی
+              روش اقدام یا درخواست
             </button>
 
             <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
@@ -1005,7 +1005,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
       {!isCompareMode ? (
         <div className="hp-compare-info">
           <span>!</span>
-          <p>در دادهٔ serving فعلی، provider یا روش پرداخت تأییدشده‌ای موجود نیست؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
+          <p>در دادهٔ serving فعلی، روش اقدام یا provider رسمی ثبت نشده است؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
         </div>
       ) : null}
       <section className="hp-compare-list">
