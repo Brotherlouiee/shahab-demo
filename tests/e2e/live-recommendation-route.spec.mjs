@@ -5,7 +5,7 @@ const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/ques
 const sessionId = "opaque-live-flow-test";
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
-  rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک آزمون", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }],
+  rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }],
   lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک کم‌تطابق", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک دیگر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
@@ -23,7 +23,7 @@ test("canonical questionnaire reaches the active real-result route and published
     return route.fulfill({ json: response });
   });
   await page.route("**/api/v1/loans/published-loan", (route) => route.fulfill({ json: {
-    loanId: "published-loan", lenderName: "بانک آزمون", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg",
+    loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg",
     maxAmountTomans: 500000000, monthlyInstallmentTomans: 12000000, maxRepaymentMonths: 48,
     interestRatePercent: 18, depositRequired: "خیر", depositHoldingMonths: null,
     loanToDepositRatioPercent: null, guaranteeType: "ضامن رسمی", requiredDepositAccount: null,
@@ -50,8 +50,10 @@ test("canonical questionnaire reaches the active real-result route and published
   }
   await expect(page).toHaveURL(/\/loan-results$/);
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
-  await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", "https://cdn.example.test/published-bank.svg");
-  await expect(page.locator(".hp-loan-result-head img").first()).toBeVisible();
+  await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
+  const resultLogo = page.locator(".hp-loan-result-head img").first();
+  await expect(resultLogo).toBeVisible();
+  expect(await resultLogo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
@@ -76,7 +78,7 @@ test("canonical questionnaire reaches the active real-result route and published
 
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
-  await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", "https://cdn.example.test/published-bank.svg");
+  await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
   await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
