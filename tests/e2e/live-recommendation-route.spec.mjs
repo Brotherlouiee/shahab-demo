@@ -6,8 +6,8 @@ const sessionId = "opaque-live-flow-test";
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
   rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }],
-  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک کم‌تطابق", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
-  needsReview: [{ loanId: "unknown-loan", lenderName: "بانک دیگر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
+  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک مسکن", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
+  needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
 test("canonical questionnaire reaches the active real-result route and published detail", async ({ page }) => {
@@ -30,14 +30,14 @@ test("canonical questionnaire reaches the active real-result route and published
     conditions: ["مدارک هویتی", "ضامن معتبر"],
   } }));
   await page.route("**/api/v1/loans/low-loan", (route) => route.fulfill({ json: {
-    loanId: "low-loan", lenderName: "بانک کم‌تطابق", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg",
+    loanId: "low-loan", lenderName: "بانک مسکن", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg",
     maxAmountTomans: 200000000, monthlyInstallmentTomans: 9000000, maxRepaymentMonths: 24,
     interestRatePercent: 23, depositRequired: "بله", depositHoldingMonths: 3,
     loanToDepositRatioPercent: 80, guaranteeType: "چک", requiredDepositAccount: "قرض‌الحسنه",
     conditions: ["افتتاح حساب تأییدشده"],
   } }));
   await page.route("**/api/v1/loans/unknown-loan", (route) => route.fulfill({ json: {
-    loanId: "unknown-loan", lenderName: "بانک دیگر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg",
+    loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg",
     maxAmountTomans: 100000000, monthlyInstallmentTomans: null, maxRepaymentMonths: 12,
     interestRatePercent: null, depositRequired: null, depositHoldingMonths: null,
     loanToDepositRatioPercent: null, guaranteeType: null, requiredDepositAccount: null,
@@ -60,9 +60,13 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
+  await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
+  await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "وضعیت متغیر" }).click();
   await expect(page.getByText("وام نیازمند بررسی")).toBeVisible();
+  await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
+  await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
   await expect(page.locator(".hp-serving-loan-card")).toContainText("تطابق با وضعیت مشتری: نامشخص");
   expect(writes).toHaveLength(10);
   expect(writes.map(({ body }) => body.answerId)).toEqual(questionnaire.questions.map((q) => q.answerOptions[0].answerId));

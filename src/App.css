@@ -5551,3 +5551,11 @@ button {
     text-align: center;
   }
 }
+
+/* T06G: a result-card document link stays blue in every filter and visited state. */
+.hp-loan-result-card .hp-loan-docs-link,
+.hp-loan-result-card .hp-loan-docs-link:visited,
+.hp-loan-result-card .hp-loan-docs-link:hover,
+.hp-loan-result-card .hp-loan-docs-link:focus-visible {
+  color: #0067ff !important;
+}
