@@ -930,7 +930,7 @@ const comparisonMetrics = [
     id: "repayment",
     label: "بازپرداخت",
     title: "حداکثر زمان بازپرداخت",
-    value: (detail) => detail.maxRepaymentMonths == null ? "اعلام نشده" : `${Number(detail.maxRepaymentMonths).toLocaleString("fa-IR")} ماه`,
+    value: (detail) => detail.maxRepaymentMonths == null ? "اعلام نشده" : `${Number(detail.maxRepaymentMonths).toLocaleString("fa-IR").replaceAll("٬", "/")} ماه`,
   },
   {
     id: "installment",
@@ -947,11 +947,11 @@ const comparisonMetrics = [
 ];
 
 function formatApprovedMoney(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")} تومان`;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} تومان`;
 }
 
 function formatApprovedPercent(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")}٪`;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
 }
 
 function LoanComparisonResultCard({ detail, metric }) {
