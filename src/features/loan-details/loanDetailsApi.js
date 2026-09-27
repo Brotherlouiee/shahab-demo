@@ -10,6 +10,16 @@ export class LoanDetailsApiError extends Error {
   }
 }
 
+function normalizeBankLogoReference(value) {
+  if (typeof value !== "string") return null;
+  const reference = value.trim();
+  // The API owns which logo URL is approved. Accept its HTTPS/HTTP URL or a
+  // same-origin SVG path; reject protocol-relative and executable schemes.
+  if (/^https?:\/\//i.test(reference)) return reference;
+  if (/^\/(?!\/)/.test(reference)) return reference;
+  return null;
+}
+
 function assertDetailPayload(payload) {
   if (!payload || typeof payload !== "object" || typeof payload.loanId !== "string") {
     throw new LoanDetailsApiError(502);
@@ -17,14 +27,7 @@ function assertDetailPayload(payload) {
   if (!Array.isArray(payload.conditions) || !payload.conditions.every((item) => typeof item === "string")) {
     throw new LoanDetailsApiError(502);
   }
-
-  // The backend owns the public logo allowlist. This client-side guard keeps a
-  // malformed intermediary/test response from becoming an executable URL.
-  const bankLogoReference = typeof payload.bankLogoReference === "string"
-    && /^https?:\/\//i.test(payload.bankLogoReference)
-    ? payload.bankLogoReference
-    : null;
-  return { ...payload, bankLogoReference };
+  return { ...payload, bankLogoReference: normalizeBankLogoReference(payload.bankLogoReference) };
 }
 
 export async function fetchLoanDetails(loanId, { signal } = {}) {
