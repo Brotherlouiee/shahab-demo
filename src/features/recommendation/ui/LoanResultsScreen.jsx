@@ -134,7 +134,8 @@ export default function LoanResultsScreen({
     <main className="hp-questionnaire-page hp-loan-results-page header-top" dir="rtl" aria-busy={status === "loading"}>
       <div className="hp-loan-results-top">
         {header}
-        <div className="hp-loan-results-controls">
+      </div>
+      <div className="hp-loan-results-controls">
           <div className="hp-loan-results-actions">
             <button
               className="is-primary"
@@ -164,7 +165,6 @@ export default function LoanResultsScreen({
               </select>
             </label>
           </div>
-        </div>
       </div>
 
       <section className={`hp-loan-results-list ${mode === VIEW_MODES.variable ? "hp-recommendation-needs-review" : ""}`}>
