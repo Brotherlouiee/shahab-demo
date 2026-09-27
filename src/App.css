@@ -4625,6 +4625,35 @@ button {
   white-space: nowrap;
 }
 
+/* Detail groups preserve the compact, two-column card pattern while keeping
+   every displayed value tied to an explicit serving-loan response field. */
+.hp-loan-detail-groups {
+  display: grid;
+  gap: 8px;
+}
+
+.hp-loan-detail-group {
+  border: 1px solid #b7b7b7;
+  border-radius: 7px;
+  padding: 9px 16px;
+  display: grid;
+  grid-template-columns: minmax(132px, 1.15fr) minmax(132px, 1fr);
+  gap: 7px 14px;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.hp-loan-detail-group span {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hp-loan-detail-group b {
+  text-align: left;
+  white-space: nowrap;
+}
+
 .hp-loan-docs-link {
   width: 100%;
   margin-top: 10px;
