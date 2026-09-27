@@ -96,7 +96,12 @@ class OfficialSourceMaterializationTests(unittest.TestCase):
             serving_facts = tuple(session.scalars(select(LoanServingFacts)))
             self.assertEqual(len(serving_facts), 102)
             self.assertTrue(all(record.bank_logo_asset_key for record in serving_facts))
-            self.assertTrue(all(record.bank_logo_asset_sha256 and len(record.bank_logo_asset_sha256) == 64 for record in serving_facts))
+            self.assertTrue(
+                all(
+                    record.bank_logo_asset_sha256 and len(record.bank_logo_asset_sha256) == 64
+                    for record in serving_facts
+                )
+            )
             audit = audit_database(session)
             for key in (
                 "missingSourceRows",
