@@ -35,7 +35,7 @@ function itemsForMode(result, mode) {
 
 
 
-function FilterMenu({ label, value, options, onChange }) {
+function FilterMenu({ label, value, selectedValue, options, onChange }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   useEffect(() => {
@@ -48,7 +48,7 @@ function FilterMenu({ label, value, options, onChange }) {
   return <div className="hp-loan-filter-menu-wrap" ref={menuRef}>
     <button type="button" className="hp-loan-filter-trigger" aria-haspopup="listbox" aria-expanded={open} aria-label={label} onClick={() => setOpen((current) => !current)}>{value}</button>
     {open ? <div className="hp-loan-filter-menu" role="listbox" aria-label={label}>
-      {options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} onClick={() => { onChange(option.value); setOpen(false); }}>{option.label}</button>)}
+      {options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === selectedValue} onClick={() => { onChange(option.value); setOpen(false); }}>{option.label}</button>)}
     </div> : null}
   </div>;
 }
@@ -164,8 +164,8 @@ export default function LoanResultsScreen({
           </div>
 
           <div className="hp-loan-result-filters">
-            <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
-            <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} />
+            <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} selectedValue={mode} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
+            <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} selectedValue={lenderName} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} />
           </div>
       </div>
 
