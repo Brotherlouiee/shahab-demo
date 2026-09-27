@@ -144,6 +144,7 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
                 loanId=item.loan_id,
                 lenderName=catalogue[item.loan_id].lender_name,
                 loanName=catalogue[item.loan_id].loan_name,
+                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
                 compatibilityScore=float(item.score),
                 compatibilityReason="تطابق پایین؛ پیشنهاد اصلی نیست",
             )
