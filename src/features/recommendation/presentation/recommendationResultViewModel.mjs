@@ -36,6 +36,7 @@ function toRankedViewModel(item) {
     loanId,
     lenderName: requireText(recommendation.lenderName, "lenderName"),
     loanName: requireText(recommendation.loanName, "loanName"),
+    bankLogoReference: optionalLogoReference(recommendation.bankLogoReference),
     compatibilityScore: requireScore(recommendation.compatibilityScore),
     compatibilityReason: requireText(recommendation.compatibilityReason, "compatibilityReason"),
     scoreCaption: "درصد تطابق محاسبه‌شده",
@@ -51,6 +52,7 @@ function toNeedsReviewViewModel(item) {
     loanId,
     lenderName: requireText(recommendation.lenderName, "lenderName"),
     loanName: requireText(recommendation.loanName, "loanName"),
+    bankLogoReference: optionalLogoReference(recommendation.bankLogoReference),
     rankingExcludedReasons: Object.freeze(
       requireArray(recommendation.rankingExcludedReasons, "rankingExcludedReasons").map((reason) =>
         requireText(reason, "rankingExcludedReason"),
@@ -59,6 +61,13 @@ function toNeedsReviewViewModel(item) {
     warning: REVIEW_WARNING,
     detailsHref: detailsHrefFor(loanId),
   });
+}
+
+function optionalLogoReference(value) {
+  if (typeof value !== "string") return null;
+  const reference = value.trim();
+  if (/^https?:\/\//i.test(reference) || /^\/(?!\/)/.test(reference)) return reference;
+  return null;
 }
 
 function detailsHrefFor(loanId) {
