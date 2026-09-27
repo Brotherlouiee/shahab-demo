@@ -1,4 +1,4 @@
-# Loan route inventory — US-09.T06A / US-09.T06B
+# Loan route inventory — US-09.T06A / US-09.T06B / US-09.T06C
 
 This inventory covers every loan-related route reachable from the active Vite application. It records the runtime source of each displayed value and the fail-closed behavior required when a serving contract is absent.
 
@@ -28,3 +28,7 @@ Loan names, lenders, facts, conditions and an optional public bank-logo URL come
 ## Known serving gap
 
 The published loan contract has no approved application URL, provider identifier, registration workflow, payment contract or production OTP contract. Therefore `/loan-request` is informational and disabled. Operationalizing an external application flow requires a separately approved provider contract and is not simulated by T06A.
+
+## UI stability — T06C
+
+All three result partitions use the same card structure. Scores are server-owned; `needsReview` shows `نامشخص` in the score position. Display numbers use Persian digits and `/` grouping. Comparison uses the real recommendation identities and approved detail API; it does not recreate loan facts.
