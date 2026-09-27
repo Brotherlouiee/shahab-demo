@@ -27,12 +27,12 @@ class LoanDetailApiTests(unittest.TestCase):
         self.app = create_app(settings)
         record = PublishedLoanRecord(
             serving_version_id="approved-v1",
-            summary=LoanSummary("loan-approved", "بانک نمونه", "طرح نمونه", "internal-logo"),
+            summary=LoanSummary("loan-approved", "بانک نمونه", "طرح نمونه", "https://cdn.example.test/bank.svg"),
             detail=LoanDetail(
                 loan_id="loan-approved",
                 lender_name="بانک نمونه",
                 loan_name="طرح نمونه",
-                bank_logo_reference="internal-logo",
+                bank_logo_reference="https://cdn.example.test/bank.svg",
                 max_amount_tomans=Decimal("100000000"),
                 monthly_installment_tomans=Decimal("10000000"),
                 max_repayment_months=12,
@@ -57,7 +57,7 @@ class LoanDetailApiTests(unittest.TestCase):
         self.assertEqual(payload["loanId"], "loan-approved")
         self.assertEqual(payload["conditions"], ["کارت ملی", "<script>alert(1)</script>"])
         self.assertNotIn("conditionsSourceText", payload)
-        self.assertNotIn("bankLogoReference", payload)
+        self.assertEqual(payload["bankLogoReference"], "https://cdn.example.test/bank.svg")
         self.assertNotIn("servingVersionId", payload)
         self.assertNotIn("authorization", response.request.headers)
 
