@@ -14,6 +14,10 @@ function DetailValue({ label, children }) {
   return <><span>{label}</span><b>{children}</b></>;
 }
 
+function DetailGroup({ children }) {
+  return <div className="hp-loan-detail-group">{children}</div>;
+}
+
 /** Render API-approved facts as text; neither source text nor error payloads become HTML. */
 export default function LoanDetailsScreen({ loanId, header }) {
   const [state, setState] = useState({ status: "loading", detail: null });
@@ -57,15 +61,23 @@ function LoanDetail({ detail }) {
         <div>{detail.bankLogoReference ? <img src={detail.bankLogoReference} alt={detail.lenderName} /> : null}<span>«{detail.lenderName}»</span></div>
         <strong>{detail.loanName}</strong>
       </div>
-      <div className="hp-loan-detail-grid">
-        <DetailValue label="حداکثر مبلغ وام">{formatNumber(detail.maxAmountTomans)} تومان</DetailValue>
-        <DetailValue label="نرخ بهره اعلامی">{formatPercent(detail.interestRatePercent)}</DetailValue>
-        <DetailValue label="مبلغ هر قسط">{formatNumber(detail.monthlyInstallmentTomans)} تومان</DetailValue>
-        <DetailValue label="حداکثر زمان بازپرداخت">{detail.maxRepaymentMonths === null ? "اعلام نشده" : `${formatNumber(detail.maxRepaymentMonths)} ماه`}</DetailValue>
-        <DetailValue label="نیاز به سپرده">{detail.depositRequired || "اعلام نشده"}</DetailValue>
-        <DetailValue label="مدت زمان خواب سپرده">{detail.depositHoldingMonths === null ? "اعلام نشده" : `${formatNumber(detail.depositHoldingMonths)} ماه`}</DetailValue>
-        <DetailValue label="نوع ضمانت">{detail.guaranteeType || "اعلام نشده"}</DetailValue>
-        <DetailValue label="حساب سپرده لازم">{detail.requiredDepositAccount || "اعلام نشده"}</DetailValue>
+      <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
+        <DetailGroup>
+          <DetailValue label="حداکثر مبلغ وام">{formatNumber(detail.maxAmountTomans)} تومان</DetailValue>
+          <DetailValue label="نرخ بهره اعلامی">{formatPercent(detail.interestRatePercent)}</DetailValue>
+        </DetailGroup>
+        <DetailGroup>
+          <DetailValue label="مبلغ هر قسط">{formatNumber(detail.monthlyInstallmentTomans)} تومان</DetailValue>
+          <DetailValue label="حداکثر زمان بازپرداخت">{detail.maxRepaymentMonths === null ? "اعلام نشده" : `${formatNumber(detail.maxRepaymentMonths)} ماه`}</DetailValue>
+        </DetailGroup>
+        <DetailGroup>
+          <DetailValue label="نیاز به سپرده">{detail.depositRequired || "اعلام نشده"}</DetailValue>
+          <DetailValue label="مدت زمان خواب سپرده">{detail.depositHoldingMonths === null ? "اعلام نشده" : `${formatNumber(detail.depositHoldingMonths)} ماه`}</DetailValue>
+        </DetailGroup>
+        <DetailGroup>
+          <DetailValue label="نوع ضمانت">{detail.guaranteeType || "اعلام نشده"}</DetailValue>
+          <DetailValue label="حساب سپرده لازم">{detail.requiredDepositAccount || "اعلام نشده"}</DetailValue>
+        </DetailGroup>
       </div>
     </article>
     <h2>شرایط و مدارک مورد نیاز</h2>
