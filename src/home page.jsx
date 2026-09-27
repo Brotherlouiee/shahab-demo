@@ -1191,13 +1191,17 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
       </section>
 
       <div className="hp-compare-result-bottom-bar">
-        <button type="button" onClick={onAiAnalysis}>تحلیل با هوش مصنوعی</button>
+        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0] || "")}>توضیح نتیجه</button>
       </div>
     </main>
   );
 }
 
-function LoanAiAnalysisScreen({ onBack, loanId }) {
+function LoanAiAnalysisScreen({ onBack, result, loanId }) {
+  const selectedRecommendation = allRecommendationItems(result).find((item) => item.loanId === loanId);
+  const explanation = selectedRecommendation?.compatibilityReason
+    || selectedRecommendation?.rankingExcludedReasons?.join("، ")
+    || "برای این نتیجه توضیح تأییدشده‌ای موجود نیست.";
   return (
     <main className="hp-ai-analysis-page" dir="rtl">
       <div className="hp-ai-analysis-credit">اعتبار شما در هر ۲ ساعت ۱۰ پرامپت است.</div>
@@ -1215,9 +1219,9 @@ function LoanAiAnalysisScreen({ onBack, loanId }) {
 
       <section className="hp-ai-analysis-message">
         <p>
-          تحلیل هوش مصنوعی برای این وام هنوز قرارداد خارجیِ تأییدشده ندارد.
+          {explanation}
           <br />
-          {loanId ? "جزئیات وام انتخاب‌شده از مسیر معتبر قابل مشاهده است، اما تحلیل ساختگی نمایش داده نمی‌شود." : "ابتدا یک وام را از نتیجهٔ معتبر انتخاب کنید."}
+          provider خارجی فعال نیست؛ تحلیل ساختگی نمایش داده نمی‌شود.
         </p>
       </section>
 
@@ -2271,6 +2275,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     return (
       <LoanAiAnalysisScreen
         onBack={handleLoanResultBack}
+        result={recommendationResult}
         loanId={selectedAnalysisLoanId || selectedComparisonPlanIds[0] || ""}
       />
     );
