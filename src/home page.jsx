@@ -20,6 +20,25 @@ import sendIconUrl from "../assets/send.svg";
 import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
 
+// =============================================================================
+// FRONTEND PAGE MAP
+// =============================================================================
+// /                         -> HomePage + Hero + StatsMarquee + Features + Footer
+// /login, /login/otp        -> LoginScreen
+// /question/1 ... /13       -> QuestionnaireScreen
+// /personal-info            -> QuestionnaireScreen (personal-information step)
+// /verify-code              -> QuestionnaireScreen (verification step)
+// /analysis                 -> QuestionnaireScreen (recommendation loading step)
+// /loan-results             -> LoanResultsScreen
+// /loan-details?loanId=...  -> LoanDetailsScreen (imported feature component)
+// /loan-request             -> LoanCompareScreen in request mode
+// /compare-loans            -> LoanCompareScreen in comparison-selection mode
+// /compare-result           -> LoanComparisonResultScreen
+// /ai-analysis              -> LoanAiAnalysisScreen
+
+// =============================================================================
+// SHARED DATA AND ASSETS — used by more than one page
+// =============================================================================
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
   eager: true,
   import: "default",
@@ -166,6 +185,9 @@ const analysisLogoPositions = [
   [94, 91],
 ];
 
+// =============================================================================
+// ROUTE MAP AND SHARED NAVIGATION HELPERS
+// =============================================================================
 // The first two prototype screens precede the ten canonical behavioural
 // questions.  Personal information therefore follows S13 at index 12; using
 // index 11 would silently redirect the immutable /question/12 route.
@@ -422,6 +444,9 @@ function sanitizeOtpDigits(value) {
     });
 }
 
+// =============================================================================
+// SHARED SITE CHROME — header/navigation and sidebar
+// =============================================================================
 function Nav({ onLogin, onBack, onMenu, onHome, isLoginView = false }) {
   return (
     <header className="hp-nav">
@@ -656,6 +681,9 @@ function formatOtpCountdown(seconds) {
   return toPersianDigits(`${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`);
 }
 
+// =============================================================================
+// PAGE: LOGIN — routes: /login and /login/otp
+// =============================================================================
 function LoginScreen({ loginStep, setLoginStep }) {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(Array(6).fill(""));
@@ -819,6 +847,9 @@ function LoginScreen({ loginStep, setLoginStep }) {
   );
 }
 
+// =============================================================================
+// SHARED QUESTIONNAIRE HEADER — used by questionnaire and loan pages
+// =============================================================================
 function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   return (
     <header className="hp-questionnaire-header">
@@ -844,6 +875,9 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   );
 }
 
+// =============================================================================
+// SHARED LOAN RESULT CARD — used by result, request and comparison pages
+// =============================================================================
 function LoanResultCard({ recommendation, compact = false, selectable = false, selected = false, onDetails, onToggle }) {
   return (
     <article className={`hp-loan-result-card ${compact ? "is-compact" : ""}`}>
@@ -873,6 +907,9 @@ function LoanResultCard({ recommendation, compact = false, selectable = false, s
   );
 }
 
+// =============================================================================
+// PAGE: LOAN RESULTS — route: /loan-results
+// =============================================================================
 function LoanResultsScreen({ result, status, onRetry, onStartQuestionnaire, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
   const [headerMode, setHeaderMode] = useState("top");
   const [mode, setMode] = useState("highest");
@@ -982,6 +1019,10 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
+// =============================================================================
+// PAGES: LOAN ACTION / COMPARISON SELECTION
+// routes: /loan-request (request mode) and /compare-loans (compare mode)
+// =============================================================================
 function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
   const [selectedPlans, setSelectedPlans] = useState({});
   const selectedPlanIds = Object.entries(selectedPlans)
@@ -1098,6 +1139,9 @@ function LoanComparisonResultCard({ detail, metric }) {
   );
 }
 
+// =============================================================================
+// PAGE: LOAN COMPARISON RESULT — route: /compare-result
+// =============================================================================
 function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalysis, selectedPlanIds }) {
   const [activeMetricIndex, setActiveMetricIndex] = useState(0);
   const [detailState, setDetailState] = useState({ status: "loading", details: [] });
@@ -1197,6 +1241,9 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
   );
 }
 
+// =============================================================================
+// PAGE: RECOMMENDATION EXPLANATION — route: /ai-analysis
+// =============================================================================
 function LoanAiAnalysisScreen({ onBack, result, loanId }) {
   const selectedRecommendation = allRecommendationItems(result).find((item) => item.loanId === loanId);
   const explanation = selectedRecommendation?.compatibilityReason
@@ -1238,6 +1285,11 @@ function LoanAiAnalysisScreen({ onBack, result, loanId }) {
   );
 }
 
+// =============================================================================
+// QUESTIONNAIRE FLOW PAGES
+// routes: /question/1.../13, /personal-info, /verify-code and /analysis
+// This component also dispatches the loan sub-pages listed below.
+// =============================================================================
 function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
@@ -2171,6 +2223,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     goToStage(getNearestStageIndex(stageDragRef.current.lastOffset));
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: recommendation loading — route: /analysis
+  // ---------------------------------------------------------------------------
   if (isAnalyzingLoans) {
     return (
       <main className="hp-loan-analysis-page" dir="rtl" aria-busy={isAnalysisSpinnerRunning}>
@@ -2207,6 +2262,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: loan results — route: /loan-results
+  // ---------------------------------------------------------------------------
   if (loanResultView === "results") {
     return (
       <LoanResultsScreen
@@ -2224,6 +2282,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: published loan details — route: /loan-details?loanId=...
+  // ---------------------------------------------------------------------------
   if (loanResultView === "details") {
     return (
       <LoanDetailsScreen
@@ -2233,6 +2294,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: approved application-method status — route: /loan-request
+  // ---------------------------------------------------------------------------
   if (loanResultView === "request") {
     return (
       <LoanCompareScreen
@@ -2245,6 +2309,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: loan comparison selection — route: /compare-loans
+  // ---------------------------------------------------------------------------
   if (loanResultView === "compare") {
     return (
       <LoanCompareScreen
@@ -2258,6 +2325,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: loan comparison result — route: /compare-result
+  // ---------------------------------------------------------------------------
   if (loanResultView === "compare-result") {
     return (
       <LoanComparisonResultScreen
@@ -2271,6 +2341,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: recommendation explanation — route: /ai-analysis
+  // ---------------------------------------------------------------------------
   if (loanResultView === "ai-analysis") {
     return (
       <LoanAiAnalysisScreen
@@ -2281,6 +2354,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // PAGE OUTPUT: questionnaire, personal info or verification
+  // routes: /question/1.../13, /personal-info and /verify-code
+  // ---------------------------------------------------------------------------
   return (
     <main className="hp-questionnaire-page" dir="rtl">
       <header className="hp-questionnaire-header">
@@ -2650,6 +2727,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   );
 }
 
+// =============================================================================
+// PAGE: HOME — route: /
+// The following components are consecutive sections of the landing page.
+// =============================================================================
+
+// HOME SECTION: hero and questionnaire entry point
 function Hero({ onStartQuestionnaire }) {
   const [amount, setAmount] = useState("");
   const [isAmountOpen, setIsAmountOpen] = useState(false);
@@ -2738,6 +2821,7 @@ function Hero({ onStartQuestionnaire }) {
   );
 }
 
+// HOME SECTION HELPER: one customer/statistics card
 function CardView({ card }) {
   if (card.kind === "stat-dark") {
     return (
@@ -2804,6 +2888,7 @@ function CardView({ card }) {
   );
 }
 
+// HOME SECTION: customer and statistics marquee
 function StatsMarquee() {
   return (
     <section className="hp-marquee" aria-label="آمار و نمونه مشتریان">
@@ -2816,6 +2901,7 @@ function StatsMarquee() {
   );
 }
 
+// HOME SECTION: product features and final call to action
 function Features() {
   return (
     <section id="process" className="hp-features">
@@ -2852,6 +2938,7 @@ function Features() {
   );
 }
 
+// HOME SECTION: footer
 function Footer() {
   const columns = [
     { title: "محصولات", links: ["وام سرمایه در گردش", "وام تجهیزات", "خط اعتباری", "تأمین مالی فاکتور"] },
@@ -2888,6 +2975,10 @@ function Footer() {
   );
 }
 
+// =============================================================================
+// APPLICATION PAGE SWITCHER
+// Chooses Home, Login or Questionnaire/Loan flows from the active URL.
+// =============================================================================
 export default function HomePage() {
   const [currentView, setCurrentView] = useState(() => getInitialViewFromPath(window.location.pathname));
   const [loginStep, setLoginStep] = useState(() => (window.location.pathname === "/login/otp" ? "otp" : "phone"));
