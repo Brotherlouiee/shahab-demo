@@ -131,7 +131,7 @@ export default function LoanResultsScreen({
   }, [lenderName, lenders]);
 
   return (
-    <main className="hp-questionnaire-page hp-loan-results-page" dir="rtl" aria-busy={status === "loading"}>
+    <main className="hp-questionnaire-page hp-loan-results-page header-top" dir="rtl" aria-busy={status === "loading"}>
       <div className="hp-loan-results-top">
         {header}
         <div className="hp-loan-results-controls">
