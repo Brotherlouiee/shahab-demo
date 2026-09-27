@@ -5,7 +5,7 @@ import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 
 function formatPercent(value) {
   if (typeof value !== "number") return "نامشخص";
-  return `${Math.round(value * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
+  return <bdi dir="ltr">{`${Math.round(value * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
 }
 
 /**
