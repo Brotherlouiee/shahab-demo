@@ -4509,11 +4509,16 @@ button {
   gap: 4px;
 }
 
-.hp-loan-result-filters button {
+.hp-loan-filter-menu-wrap { position: relative; min-width: 0; }
+
+.hp-loan-filter-trigger {
   position: relative;
+  width: 100%;
   height: 42px;
   border: 1px solid #c8c8c8;
   border-radius: 7px;
+  outline: none;
+  box-shadow: none;
   background: #ffffff;
   color: #9b9b9b;
   font-family: inherit;
@@ -4525,7 +4530,9 @@ button {
   white-space: nowrap;
 }
 
-.hp-loan-result-filters button::before {
+.hp-loan-filter-trigger:focus-visible { outline: 2px solid #0067ff; outline-offset: 2px; }
+
+.hp-loan-filter-trigger::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -4536,6 +4543,40 @@ button {
   border-bottom: 1.5px solid #9b9b9b;
   transform: translateY(-70%) rotate(45deg);
 }
+
+.hp-loan-filter-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 100%;
+  min-width: max-content;
+  overflow: hidden;
+  border: 1px solid #c8c8c8;
+  border-radius: 7px;
+  box-shadow: none;
+  background: #ffffff;
+}
+
+.hp-loan-filter-menu button {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: #ffffff;
+  color: #333333;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: right;
+  padding: 9px 10px;
+}
+
+.hp-loan-filter-menu button:hover,
+.hp-loan-filter-menu button[aria-selected="true"] { background: #f0f7ff; color: #0067ff; }
 
 .hp-loan-results-list,
 .hp-compare-list {
@@ -4654,7 +4695,9 @@ button {
   white-space: nowrap;
 }
 
-.hp-loan-docs-link {
+.hp-loan-docs-link,
+.hp-loan-docs-link:visited,
+.hp-loan-docs-link:hover {
   width: 100%;
   margin-top: 10px;
   border: 0;
@@ -4796,8 +4839,26 @@ button {
 }
 
 .hp-loan-result-card.is-compact .hp-loan-result-head {
-  grid-template-columns: 54px 1fr;
+  grid-template-columns: 54px minmax(0, 1fr);
 }
+
+.hp-loan-compare-card {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hp-loan-compare-card .hp-loan-result-head {
+  grid-template-columns: 28px 62px minmax(0, 1fr) !important;
+}
+
+.hp-loan-compare-card .hp-loan-result-head strong {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.hp-loan-compare-card .hp-loan-match { white-space: normal; }
 
 .hp-loan-compare-check {
   width: 24.3px;
