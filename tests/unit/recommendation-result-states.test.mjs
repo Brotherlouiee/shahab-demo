@@ -4,11 +4,12 @@ import test from "node:test";
 import { buildRecommendationResultDisplayState } from "../../src/features/recommendation/presentation/recommendationResultStates.mjs";
 import { buildRecommendationResultViewModel } from "../../src/features/recommendation/presentation/recommendationResultViewModel.mjs";
 
-function viewModel({ rankedRecommendations = [], needsReview = [] } = {}) {
+function viewModel({ rankedRecommendations = [], lowCompatibilityRecommendations = [], needsReview = [] } = {}) {
   return buildRecommendationResultViewModel({
     dataVersion: "serving.v1",
     configVersion: "recommendation.v1",
     rankedRecommendations,
+    lowCompatibilityRecommendations,
     needsReview,
   });
 }

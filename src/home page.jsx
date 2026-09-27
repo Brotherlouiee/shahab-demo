@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
-import RecommendationResultScreen from "./features/recommendation/presentation/recommendationResultScreen.mjs";
+import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
@@ -122,45 +122,6 @@ const incomeOptions = [
   { value: "500-to-1000", label: "۵۰۰ تا ۱ میلیارد تومان" },
   { value: "over-1000", label: "بیش از ۱ میلیارد تومان" },
 ];
-
-const loanResultPlans = [
-  {
-    id: "saman-200",
-    bank: "بانک سامان",
-    plan: "طرح ۲۰۰ میلیونی",
-    match: "۴۵٪",
-    border: "#0b63ff",
-    logoIndex: 17,
-  },
-  {
-    id: "melat-200-a",
-    bank: "بانک ملت",
-    plan: "طرح ۲۰۰ میلیونی",
-    match: "۲۳٪",
-    border: "#c9c900",
-    logoIndex: 15,
-  },
-  {
-    id: "melat-200-b",
-    bank: "بانک ملت",
-    plan: "طرح ۲۰۰ میلیونی",
-    match: "۲۳٪",
-    border: "#c9c900",
-    logoIndex: 15,
-  },
-  {
-    id: "melat-200-c",
-    bank: "بانک ملت",
-    plan: "طرح ۲۰۰ میلیونی",
-    match: "۲۳٪",
-    border: "#c9c900",
-    logoIndex: 15,
-  },
-];
-
-function renderTrailingPercent(value) {
-  return "٪" + value.replace("٪", "");
-}
 
 const analysisLogoNames = [
   "بانک ملت",
@@ -331,8 +292,8 @@ function getQuestionnaireRouteState(pathname) {
 }
 
 function getLoanIdFromLocation() {
-  if (typeof window === "undefined") return loanResultPlans[0].id;
-  return new URLSearchParams(window.location.search).get("loanId")?.trim() || loanResultPlans[0].id;
+  if (typeof window === "undefined") return "";
+  return new URLSearchParams(window.location.search).get("loanId")?.trim() || "";
 }
 
 function getInitialViewFromPath(pathname) {
@@ -689,10 +650,6 @@ function toPersianDigits(value) {
   return String(value).replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
 }
 
-function formatPersianPrice(value) {
-  return toPersianDigits(String(value).replace(/\B(?=(\d{3})+(?!\d))/g, "/"));
-}
-
 function formatOtpCountdown(seconds) {
   const minutes = Math.floor(seconds / 60);
   const rest = seconds % 60;
@@ -887,65 +844,38 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   );
 }
 
-function LoanResultCard({ plan, compact = false, details = false, selectable = false, selected = false, onDetails, onToggle }) {
-  const logoSrc = analysisLogoUrls[plan.logoIndex] || analysisLogoUrls[0];
-
+function LoanResultCard({ recommendation, compact = false, selectable = false, selected = false, onDetails, onToggle }) {
   return (
-    <article
-      className={`hp-loan-result-card ${compact ? "is-compact" : ""} ${details ? "is-details" : ""}`}
-      style={{ borderColor: plan.border, "--loan-accent": plan.border }}
-    >
+    <article className={`hp-loan-result-card ${compact ? "is-compact" : ""}`}>
       <div className="hp-loan-result-head">
-        {selectable && !compact ? (
-          <button className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`} type="button" onClick={onToggle} aria-label="انتخاب وام" />
+        {selectable ? (
+          <button
+            className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
+            type="button"
+            onClick={onToggle}
+            aria-label={`انتخاب ${recommendation.loanName}`}
+            aria-pressed={selected}
+          />
         ) : null}
         <div>
-          <img src={logoSrc} alt="" />
-          <span>«{plan.bank}»</span>
+          <span>«{recommendation.lenderName}»</span>
         </div>
-        <strong>{plan.plan}</strong>
+        <strong>{recommendation.loanName}</strong>
       </div>
-
-      {!compact ? <p className="hp-loan-match">تطابق با وضعیت مشتری: <b>«<span dir="ltr">{renderTrailingPercent(plan.match)}</span>»</b></p> : null}
-
-      {details ? (
-        <div className="hp-loan-detail-grid">
-          <span>حداکثر مبلغ وام</span><b>۱۰۰۰/۰۰۰/۰۰۰ تومان</b>
-          <span>مجموع سود وام</span><b>۱۰۰۰/۰۰۰/۰۰۰ تومان</b>
-          <span>نرخ بهره اعلامی</span><b dir="ltr">{renderTrailingPercent("۲۳٪")}</b>
-          <span>مبلغ هر قسط</span><b>۱۰۰۰/۰۰۰/۰۰۰ تومان</b>
-          <span>حداکثر زمان بازپرداخت</span><b>۶۰ ماه</b>
-          <span>مدت زمان خواب سپرده</span><b>۱۲ ماه</b>
-          <span>نوع ضمانت</span><b>اعتبارسنجی</b>
-          <span>حساب سپرده لازم</span><b>قرض الحسنه</b>
-        </div>
-      ) : compact ? (
-        <div className="hp-loan-compare-row">
-          {selectable ? (
-            <button className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`} type="button" onClick={onToggle} aria-label="انتخاب وام" />
-          ) : null}
-          <span>حداکثر مبلغ وام</span>
-          <b>۱/۰۰۰/۰۰۰/۰۰۰ تومان</b>
-        </div>
-      ) : (
-        <>
-          <div className="hp-loan-summary-grid">
-            <span>حداکثر مبلغ وام</span><b>۱۰۰۰/۰۰۰/۰۰۰ تومان</b>
-            <span>نرخ بهره اعلامی</span><b dir="ltr">{renderTrailingPercent("۲۳٪")}</b>
-            <span>مبلغ هر قسط</span><b>۱۰۰۰/۰۰۰/۰۰۰ تومان</b>
-            <span>حداکثر زمان بازپرداخت</span><b>۶۰ ماه</b>
-          </div>
-          <button className="hp-loan-docs-link" type="button" onClick={onDetails}>
-            مشاهده شرایط و مدارک مورد نیاز
-          </button>
-        </>
-      )}
+      {typeof recommendation.compatibilityScore === "number" ? (
+        <p className="hp-loan-match">تطابق با وضعیت شما: <b><span dir="ltr">{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</span></b></p>
+      ) : <p className="hp-recommendation-warning">وضعیت متغیر؛ بدون درصد و رتبه</p>}
+      {recommendation.statusLabel ? <p className="hp-recommendation-warning">{recommendation.statusLabel}</p> : null}
+      {recommendation.compatibilityReason ? <p className="hp-recommendation-reason">{recommendation.compatibilityReason}</p> : null}
+      {recommendation.rankingExcludedReasons?.length ? <p className="hp-recommendation-reason">{recommendation.rankingExcludedReasons.join("، ")}</p> : null}
+      {!compact && onDetails ? <a className="hp-loan-docs-link" href={`/loan-details?loanId=${encodeURIComponent(recommendation.loanId)}`} onClick={(event) => { event.preventDefault(); onDetails(); }}>مشاهدهٔ جزئیات، شرایط و مدارک</a> : null}
     </article>
   );
 }
 
-function LoanResultsScreen({ onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
+function LoanResultsScreen({ result, status, onRetry, onStartQuestionnaire, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
   const [headerMode, setHeaderMode] = useState("top");
+  const [mode, setMode] = useState("highest");
 
   const pageRef = useRef(null);
   const lastScrollTopRef = useRef(0);
@@ -992,6 +922,13 @@ function LoanResultsScreen({ onBack, onMenu, onHome, onDetails, onCompare, onReq
     };
   }, []);
 
+  const resultsByMode = {
+    highest: result?.rankedRecommendations || [],
+    lowest: result?.lowCompatibilityRecommendations || [],
+    variable: result?.needsReview || [],
+  };
+  const visibleResults = resultsByMode[mode];
+
   return (
     <main
       ref={pageRef}
@@ -1007,73 +944,82 @@ function LoanResultsScreen({ onBack, onMenu, onHome, onDetails, onCompare, onReq
 
         <div className="hp-loan-results-controls">
           <div className="hp-loan-results-actions">
-            <button className="is-primary" type="button" onClick={onRequest}>
-              ثبت درخواست همزمان وام بانکی
+            <button className="is-primary" type="button" onClick={() => onRequest(result)} disabled={status !== "ready"}>
+              روش اقدام یا درخواست
             </button>
 
-            <button type="button" onClick={onCompare}>
+            <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
               مقایسه وام
             </button>
           </div>
 
-          <div className="hp-loan-result-filters">
-            <button type="button">
-              مرتب سازی بر اساس
-            </button>
-
-            <button type="button">
-              نام بانک
-            </button>
+          <div className="hp-loan-result-filters" role="group" aria-label="نوع نتایج">
+            <button className={mode === "highest" ? "is-active" : ""} type="button" onClick={() => setMode("highest")}>بیشترین تطابق</button>
+            <button className={mode === "lowest" ? "is-active" : ""} type="button" onClick={() => setMode("lowest")}>کمترین تطابق</button>
+            <button className={mode === "variable" ? "is-active" : ""} type="button" onClick={() => setMode("variable")}>وضعیت متغیر</button>
           </div>
         </div>
       </div>
 
       <section className="hp-loan-results-list">
-        {loanResultPlans.map((plan) => (
-          <LoanResultCard
-            key={plan.id}
-            plan={plan}
-            onDetails={() => onDetails(plan.id)}
-          />
-        ))}
+        {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
+        {status === "sessionMissing" ? <div className="hp-recommendation-result-state" role="status"><p>برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p><button type="button" onClick={onStartQuestionnaire}>شروع پرسشنامه</button></div> : null}
+        {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
+        {status === "ready" && !visibleResults.length ? <p className="hp-recommendation-result-state">برای این بخش نتیجه‌ای موجود نیست.</p> : null}
+        {status === "ready" && visibleResults.map((recommendation) => <div className={mode === "variable" ? "hp-recommendation-needs-review" : ""} key={recommendation.loanId}><LoanResultCard recommendation={recommendation} onDetails={() => onDetails(recommendation.loanId)} /></div>)}
       </section>
     </main>
   );
 }
 
-function LoanCompareScreen({ onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
+function allRecommendationItems(result) {
+  if (!result) return [];
+  const items = [
+    ...result.rankedRecommendations,
+    ...result.lowCompatibilityRecommendations,
+    ...result.needsReview,
+  ];
+  return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
+}
+
+function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
   const [selectedPlans, setSelectedPlans] = useState({});
   const selectedPlanIds = Object.entries(selectedPlans)
     .filter(([, isSelected]) => isSelected)
     .map(([planId]) => planId);
   const selectedCount = selectedPlanIds.length;
   const isCompareMode = mode === "compare";
-  const visiblePlans = isCompareMode
-    ? loanResultPlans.map((plan) => ({ ...loanResultPlans[0], id: plan.id }))
-    : loanResultPlans.slice(0, 3);
+  const visiblePlans = allRecommendationItems(result);
+
+  if (!result) {
+    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">برای ادامه، ابتدا پرسشنامه را در همین تب کامل کنید و نتیجهٔ معتبر دریافت کنید.</p></main>;
+  }
 
   return (
     <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""}`} dir="rtl">
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
         <span>!</span>
-        <p>{isCompareMode ? "حداکثر ۱۰ وام را برای مقایسه می‌توانید انتخاب کنید." : "در ثبت درخواست همزمان، وام‌های مورد نظر خود را انتخاب می‌کنید و پس از پرداخت هزینه تنها یک‌بار برای کلیه وام‌ها ثبت نام و مدارک ارسال می‌کنید."}</p>
+        <p>{isCompareMode ? "حداکثر ۱۰ وام واقعی را برای مقایسه انتخاب کنید." : "روش اقدام رسمی فقط پس از تأیید provider نمایش داده می‌شود."}</p>
       </div>
       {!isCompareMode ? (
         <div className="hp-compare-info">
           <span>!</span>
-          <p>قیمت ثبت درخواست هر وام ۱۰۰/۰۰۰ تومان است.</p>
+          <p>در دادهٔ serving فعلی، روش اقدام یا provider رسمی ثبت نشده است؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
         </div>
       ) : null}
       <section className="hp-compare-list">
-        {visiblePlans.map((plan) => (
+        {visiblePlans.map((recommendation) => (
           <LoanResultCard
-            key={plan.id}
-            plan={plan}
+            key={recommendation.loanId}
+            recommendation={recommendation}
             compact
             selectable
-            selected={Boolean(selectedPlans[plan.id])}
-            onToggle={() => setSelectedPlans((current) => ({ ...current, [plan.id]: !current[plan.id] }))}
+            selected={Boolean(selectedPlans[recommendation.loanId])}
+            onToggle={() => setSelectedPlans((current) => ({
+              ...current,
+              [recommendation.loanId]: current[recommendation.loanId] ? false : selectedCount < 10,
+            }))}
           />
         ))}
       </section>
@@ -1084,10 +1030,9 @@ function LoanCompareScreen({ onBack, onMenu, onHome, onCompareSubmit, mode = "re
       ) : selectedCount > 0 ? (
         <div className="hp-compare-bottom-bar">
           <div>
-            <span>قابل پرداخت برای ثبت درخواست «{toPersianDigits(selectedCount)}» وام</span>
-            <strong><span dir="ltr">{formatPersianPrice(selectedCount * 800000)}</span> تومان</strong>
+            <span>برای «{toPersianDigits(selectedCount)}» وام انتخاب‌شده، روش اقدام تأییدشده‌ای موجود نیست.</span>
           </div>
-          <button type="button">تایید و پرداخت</button>
+          <button type="button" disabled>ثبت یا پرداخت در دسترس نیست</button>
         </div>
       ) : (
         null
@@ -1101,61 +1046,82 @@ const comparisonMetrics = [
     id: "amount",
     label: "مبلغ وام",
     title: "حداکثر مبلغ وام",
-    value: "۱/۰۰۰/۰۰۰/۰۰۰ تومان",
+    value: (detail) => formatApprovedMoney(detail.maxAmountTomans),
   },
   {
     id: "interest",
     label: "نرخ بهره",
     title: "نرخ بهره اعلامی",
-    value: renderTrailingPercent("۲۳٪"),
+    value: (detail) => formatApprovedPercent(detail.interestRatePercent),
   },
   {
     id: "repayment",
     label: "بازپرداخت",
     title: "حداکثر زمان بازپرداخت",
-    value: "۶۰ ماه",
+    value: (detail) => detail.maxRepaymentMonths == null ? "اعلام نشده" : `${Number(detail.maxRepaymentMonths).toLocaleString("fa-IR")} ماه`,
   },
   {
     id: "installment",
     label: "مبلغ قسط",
     title: "مبلغ هر قسط",
-    value: "۱۰۰/۰۰۰/۰۰۰ تومان",
+    value: (detail) => formatApprovedMoney(detail.monthlyInstallmentTomans),
   },
   {
-    id: "total",
-    label: "مجموع",
-    title: "مجموع سود وام",
-    value: "۱/۰۰۰/۰۰۰/۰۰۰ تومان",
+    id: "guarantee",
+    label: "ضمانت",
+    title: "نوع ضمانت",
+    value: (detail) => detail.guaranteeType || "اعلام نشده",
   },
 ];
 
-function LoanComparisonResultCard({ plan, metric }) {
-  const logoSrc = analysisLogoUrls[plan.logoIndex] || analysisLogoUrls[0];
+function formatApprovedMoney(value) {
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")} تومان`;
+}
+
+function formatApprovedPercent(value) {
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")}٪`;
+}
+
+function LoanComparisonResultCard({ detail, metric }) {
 
   return (
     <article className="hp-compare-result-card">
       <div>
-        <img src={logoSrc} alt="" />
-        <span>«{plan.bank}»</span>
+        <span>«{detail.lenderName}»</span>
       </div>
-      <strong>{plan.plan}</strong>
+      <strong>{detail.loanName}</strong>
       <p>
         <span>{metric.title}</span>
-        <b dir={metric.id === "interest" ? "ltr" : undefined}>{metric.value}</b>
+        <b>{metric.value(detail)}</b>
       </p>
     </article>
   );
 }
 
-function LoanComparisonResultScreen({ onBack, onMenu, onHome, onAiAnalysis, selectedPlanIds }) {
+function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalysis, selectedPlanIds }) {
   const [activeMetricIndex, setActiveMetricIndex] = useState(0);
+  const [detailState, setDetailState] = useState({ status: "loading", details: [] });
   const tabsRef = useRef(null);
   const tabDragStartXRef = useRef(null);
   const tabDragStartScrollLeftRef = useRef(0);
-  const selectedPlans = selectedPlanIds.length
-    ? loanResultPlans.filter((plan) => selectedPlanIds.includes(plan.id))
-    : loanResultPlans;
   const activeMetric = comparisonMetrics[activeMetricIndex];
+
+  useEffect(() => {
+    if (!result || selectedPlanIds.length < 2) {
+      setDetailState({ status: "empty", details: [] });
+      return undefined;
+    }
+    const controller = new AbortController();
+    setDetailState({ status: "loading", details: [] });
+    Promise.all(selectedPlanIds.map((loanId) => fetchLoanDetails(loanId, { signal: controller.signal })))
+      .then((details) => setDetailState({ status: "ready", details: details.filter(Boolean) }))
+      .catch((error) => { if (error.name !== "AbortError") setDetailState({ status: "error", details: [] }); });
+    return () => controller.abort();
+  }, [result, selectedPlanIds]);
+
+  if (!result) {
+    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p></main>;
+  }
 
   useEffect(() => {
     const activeTab = tabsRef.current?.querySelector(`[data-tab-index="${activeMetricIndex}"]`);
@@ -1218,19 +1184,24 @@ function LoanComparisonResultScreen({ onBack, onMenu, onHome, onAiAnalysis, sele
       </nav>
 
       <section className="hp-compare-result-list">
-        {selectedPlans.map((plan) => (
-          <LoanComparisonResultCard key={plan.id} plan={plan} metric={activeMetric} />
-        ))}
+        {detailState.status === "loading" ? <p className="hp-recommendation-result-state">در حال دریافت جزئیات وام‌ها…</p> : null}
+        {detailState.status === "empty" ? <p className="hp-recommendation-result-state">برای مقایسه دست‌کم دو وام را انتخاب کنید.</p> : null}
+        {detailState.status === "error" ? <p className="hp-recommendation-result-state">دریافت جزئیات مقایسه در حال حاضر ممکن نیست.</p> : null}
+        {detailState.status === "ready" ? detailState.details.map((detail) => <LoanComparisonResultCard key={detail.loanId} detail={detail} metric={activeMetric} />) : null}
       </section>
 
       <div className="hp-compare-result-bottom-bar">
-        <button type="button" onClick={onAiAnalysis}>تحلیل با هوش مصنوعی</button>
+        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0] || "")}>توضیح نتیجه</button>
       </div>
     </main>
   );
 }
 
-function LoanAiAnalysisScreen({ onBack }) {
+function LoanAiAnalysisScreen({ onBack, result, loanId }) {
+  const selectedRecommendation = allRecommendationItems(result).find((item) => item.loanId === loanId);
+  const explanation = selectedRecommendation?.compatibilityReason
+    || selectedRecommendation?.rankingExcludedReasons?.join("، ")
+    || "برای این نتیجه توضیح تأییدشده‌ای موجود نیست.";
   return (
     <main className="hp-ai-analysis-page" dir="rtl">
       <div className="hp-ai-analysis-credit">اعتبار شما در هر ۲ ساعت ۱۰ پرامپت است.</div>
@@ -1248,45 +1219,22 @@ function LoanAiAnalysisScreen({ onBack }) {
 
       <section className="hp-ai-analysis-message">
         <p>
-          سلام
+          {explanation}
           <br />
-          من دستیار هوش مصنوعی شهاب هستم. سوال خودتون رو بپرسید تا یک تحلیل دقیق به شما ارائه بدهم.
+          provider خارجی فعال نیست؛ تحلیل ساختگی نمایش داده نمی‌شود.
         </p>
       </section>
 
       <form className="hp-ai-analysis-input" onSubmit={(event) => event.preventDefault()}>
-        <button type="button" aria-label="افزودن">
+        <button type="button" aria-label="افزودن" disabled>
           <img src={addCircleIconUrl} alt="" />
         </button>
-        <input type="text" placeholder="سوالات خود را بپرسید..." />
-        <button type="submit" aria-label="ارسال">
+        <input type="text" placeholder="تحلیل هوش مصنوعی هنوز فعال نیست" disabled />
+        <button type="submit" aria-label="ارسال" disabled>
           <img src={sendIconUrl} alt="" />
         </button>
       </form>
     </main>
-  );
-}
-
-function LiveRecommendationResults({ sessionId, onBack, onMenu, onHome, onDetails }) {
-  const [result, setResult] = useState(null);
-  const [status, setStatus] = useState("loading");
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    const controller = new AbortController();
-    setStatus("loading");
-    fetchRecommendationResult(sessionId, { signal: controller.signal })
-      .then((response) => { if (!controller.signal.aborted) { setResult(response); setStatus("ready"); } })
-      .catch(() => { if (!controller.signal.aborted) setStatus("error"); });
-    return () => controller.abort();
-  }, [sessionId, attempt]);
-  return (
-    <RecommendationResultScreen
-      status={status}
-      result={result}
-      header={<QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />}
-      onRetry={() => setAttempt((value) => value + 1)}
-      onDetails={onDetails}
-    />
   );
 }
 
@@ -1321,6 +1269,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
+  const [recommendationResult, setRecommendationResult] = useState(null);
+  const [recommendationStatus, setRecommendationStatus] = useState("idle");
+  const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
   const [isAnalysisSpinnerRunning, setIsAnalysisSpinnerRunning] = useState(false);
   const [analysisCountdown, setAnalysisCountdown] = useState(8);
   const [loanOtp, setLoanOtp] = useState(Array(6).fill(""));
@@ -1895,6 +1846,15 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     return () => window.clearInterval(timerId);
   }, [isAnalyzingLoans]);
 
+  useEffect(() => {
+    if (loanResultView !== "results" || recommendationResult || recommendationStatus === "loading") return;
+    if (!questionnaireSessionId) {
+      setRecommendationStatus("sessionMissing");
+      return;
+    }
+    loadRecommendationResult();
+  }, [loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+
   function getNearestStageIndex(offset) {
     return stageOffsets.reduce((nearestIndex, currentOffset, index) => {
       const nearestDistance = Math.abs(offset - stageOffsets[nearestIndex]);
@@ -1966,6 +1926,21 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     }
   }
 
+  async function loadRecommendationResult() {
+    if (!questionnaireSessionId) {
+      setRecommendationStatus("sessionMissing");
+      return;
+    }
+    setRecommendationStatus("loading");
+    try {
+      const result = await fetchRecommendationResult(questionnaireSessionId);
+      setRecommendationResult(result);
+      setRecommendationStatus("ready");
+    } catch {
+      setRecommendationStatus("error");
+    }
+  }
+
   async function handleNextQuestion() {
     if (!canProceed) return;
     if (!(await persistCanonicalQuestionnaireAnswer())) return;
@@ -1977,25 +1952,20 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       return;
     }
     if (isOtpQuestion) {
-      if (loanOtpValue !== "۱۲۳۴۵۶") {
-        setLoanOtpError("کد وارد شده اشتباه است");
-        return;
-      }
-      const accountProfile = {
-        firstName: personalInfo.firstName.trim(),
-        lastName: personalInfo.lastName.trim(),
-        phone: personalInfo.phone,
-      };
-      setCachedAccountProfile(accountProfile);
-      onAccountCreated(accountProfile);
-      setLoanResultView("");
-      setIsAnalyzingLoans(true);
-      setIsAnalysisSpinnerRunning(true);
-      setAnalysisCountdown(8);
+      setLoanOtpError("سرویس OTP تأییدشده در این محیط فعال نیست؛ ثبت رسمی یا ورود شبیه‌سازی نمی‌شود.");
       return;
     }
     if (canonicalQuestion?.questionId === "S13") {
+      setRecommendationResult(null);
+      setRecommendationStatus("loading");
       setLoanResultView("results");
+      try {
+        const result = await fetchRecommendationResult(questionnaireSessionId);
+        setRecommendationResult(result);
+        setRecommendationStatus("ready");
+      } catch {
+        setRecommendationStatus("error");
+      }
       return;
     }
     if (currentQuestion === 1 && selectedOption !== "person") return;
@@ -2052,7 +2022,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setLoanResultView("details");
   }
 
-  function handleLoanCompareOpen() {
+  function handleLoanCompareOpen(result = recommendationResult) {
+    if (result) setRecommendationResult(result);
     setLoanResultView("compare");
   }
 
@@ -2061,12 +2032,22 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setLoanResultView("compare-result");
   }
 
-  function handleLoanAiAnalysisOpen() {
+  function handleLoanAiAnalysisOpen(loanId) {
+    setSelectedAnalysisLoanId(loanId);
     setLoanResultView("ai-analysis");
   }
 
-  function handleLoanRequestOpen() {
+  function handleLoanRequestOpen(result = recommendationResult) {
+    if (result) setRecommendationResult(result);
     setLoanResultView("request");
+  }
+
+  function handleStartQuestionnaire() {
+    setRecommendationResult(null);
+    setRecommendationStatus("idle");
+    setLoanResultView("");
+    setIsOtpVerificationStep(false);
+    setCurrentQuestion(2);
   }
 
   function handlePersonalInfoChange(field, value) {
@@ -2228,12 +2209,17 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   if (loanResultView === "results") {
     return (
-      <LiveRecommendationResults
-        sessionId={questionnaireSessionId}
+      <LoanResultsScreen
+        result={recommendationResult}
+        status={recommendationStatus}
+        onRetry={loadRecommendationResult}
+        onStartQuestionnaire={handleStartQuestionnaire}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
         onDetails={handleLoanDetailsOpen}
+        onCompare={handleLoanCompareOpen}
+        onRequest={handleLoanRequestOpen}
       />
     );
   }
@@ -2250,6 +2236,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   if (loanResultView === "request") {
     return (
       <LoanCompareScreen
+        result={recommendationResult}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
@@ -2261,6 +2248,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   if (loanResultView === "compare") {
     return (
       <LoanCompareScreen
+        result={recommendationResult}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
@@ -2273,6 +2261,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   if (loanResultView === "compare-result") {
     return (
       <LoanComparisonResultScreen
+        result={recommendationResult}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
@@ -2286,6 +2275,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     return (
       <LoanAiAnalysisScreen
         onBack={handleLoanResultBack}
+        result={recommendationResult}
+        loanId={selectedAnalysisLoanId || selectedComparisonPlanIds[0] || ""}
       />
     );
   }

@@ -29,6 +29,18 @@ from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import (
 
 router = APIRouter(prefix="/recommendations", tags=["recommendations"])
 
+_VARIABLE_LABELS = {
+    "maxAmount": "حداکثر مبلغ وام",
+    "monthlyInstallment": "مبلغ قسط ماهانه",
+    "maxRepaymentMonths": "مدت بازپرداخت",
+    "interestRate": "نرخ بهره",
+}
+_STATE_LABELS = {
+    "unknown": "در دادهٔ منتشرشده اعلام نشده است",
+    "variable": "در دادهٔ منتشرشده متغیر است",
+    "neutral": "برای رتبه‌بندی مقدار خنثی دارد",
+}
+
 
 class RecommendationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -54,6 +66,9 @@ class RecommendationResponse(BaseModel):
     data_version: str = Field(alias="dataVersion")
     config_version: str = Field(alias="configVersion")
     ranked_recommendations: tuple[RankedRecommendationResponse, ...] = Field(alias="rankedRecommendations")
+    low_compatibility_recommendations: tuple[RankedRecommendationResponse, ...] = Field(
+        alias="lowCompatibilityRecommendations"
+    )
     needs_review: tuple[NeedsReviewResponse, ...] = Field(alias="needsReview")
 
 
@@ -121,12 +136,22 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
             )
             for item in partition.ranked
         )
+        low_compatibility = tuple(
+            RankedRecommendationResponse(
+                loanId=item.loan_id,
+                lenderName=catalogue[item.loan_id].lender_name,
+                loanName=catalogue[item.loan_id].loan_name,
+                compatibilityScore=float(item.score),
+                compatibilityReason="تطابق پایین؛ پیشنهاد اصلی نیست",
+            )
+            for item in partition.below_threshold
+        )
         needs_review = tuple(
             NeedsReviewResponse(
                 loanId=item.loan_id,
                 lenderName=catalogue[item.loan_id].lender_name,
                 loanName=catalogue[item.loan_id].loan_name,
-                rankingExcludedReasons=item.excluded_reasons,
+                rankingExcludedReasons=tuple(_public_review_reason(reason) for reason in item.excluded_reasons),
             )
             for item in partition.needs_review
         )
@@ -134,6 +159,7 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
             dataVersion=snapshot.data_version,
             configVersion=snapshot.config_version,
             rankedRecommendations=ranked,
+            lowCompatibilityRecommendations=low_compatibility,
             needsReview=needs_review,
         )
     except (
@@ -145,3 +171,12 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
         raise ApiError(
             status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Recommendation catalogue is unavailable."
         ) from error
+
+
+def _public_review_reason(reason: str) -> str:
+    variable_id, separator, state = reason.partition(":")
+    if not separator:
+        return "اطلاعات لازم برای رتبه‌بندی در دادهٔ منتشرشده کامل نیست"
+    variable = _VARIABLE_LABELS.get(variable_id, "یکی از شرایط اصلی وام")
+    state_text = _STATE_LABELS.get(state, "برای رتبه‌بندی قطعی نیست")
+    return f"{variable} {state_text}"
