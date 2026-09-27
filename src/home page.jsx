@@ -2460,7 +2460,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
           </form>
         ) : (
           <>
-            <h1 className={question.titleClassName || ""}>{question.title}</h1>
+            <h1 className={question.titleClassName || ""}>{toPersianDigits(question.title)}</h1>
 
             <div
               className={`hp-question-card ${currentQuestion === 1 ? "is-compact" : ""} ${isStagedQuestion ? "is-staged" : ""}`}
@@ -2477,13 +2477,13 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
                     onClick={() => handleSelectOption(option.id)}
                   >
                     <span className="hp-option-check" aria-hidden="true" />
-                    <span>{option.label}</span>
+                    <span>{toPersianDigits(option.label)}</span>
                   </button>
 
                   {index === 0 && question.warning ? (
                     <div className="hp-question-warning">
                       <span className="hp-question-warning-icon" aria-hidden="true">!</span>
-                      <p>{question.warning}</p>
+                      <p>{toPersianDigits(question.warning)}</p>
                     </div>
                   ) : null}
                 </div>

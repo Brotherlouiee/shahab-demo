@@ -11,7 +11,11 @@ function formatPercent(value) {
 }
 
 function toPersianDigits(value) {
-  return String(value).replace(/[0-9]/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
+  const persian = "۰۱۲۳۴۵۶۷۸۹";
+  const arabic = "٠١٢٣٤٥٦٧٨٩";
+  return String(value)
+    .replace(/[0-9]/g, (digit) => persian[Number(digit)])
+    .replace(/[٠-٩]/g, (digit) => persian[arabic.indexOf(digit)]);
 }
 
 function DetailValue({ label, children }) {

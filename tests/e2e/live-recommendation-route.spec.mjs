@@ -51,10 +51,11 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(/\/loan-results$/);
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", "https://cdn.example.test/published-bank.svg");
-  const resultPartition = page.locator(".hp-loan-result-filters select").first();
-  await resultPartition.selectOption("lowest");
+  await page.getByRole("button", { name: "نمایش نتایج" }).click();
+  await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
-  await resultPartition.selectOption("variable");
+  await page.getByRole("button", { name: "نمایش نتایج" }).click();
+  await page.getByRole("option", { name: "وضعیت متغیر" }).click();
   await expect(page.getByText("وام نیازمند بررسی")).toBeVisible();
   await expect(page.locator(".hp-serving-loan-card")).toContainText("تطابق با وضعیت مشتری: نامشخص");
   expect(writes).toHaveLength(10);
@@ -62,7 +63,8 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(posts.length).toBeGreaterThanOrEqual(1);
   expect(posts.every((request) => request.method === "POST" && Object.keys(request.body).length === 1 && request.body.sessionId === sessionId)).toBe(true);
   expect(page.url()).not.toContain(sessionId);
-  await resultPartition.selectOption("highest");
+  await page.getByRole("button", { name: "نمایش نتایج" }).click();
+  await page.getByRole("option", { name: "بیشترین تطابق" }).click();
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");

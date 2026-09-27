@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 
@@ -35,6 +35,24 @@ function itemsForMode(result, mode) {
 
 
 
+function FilterMenu({ label, value, selectedValue, options, onChange }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const close = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+  return <div className="hp-loan-filter-menu-wrap" ref={menuRef}>
+    <button type="button" className="hp-loan-filter-trigger" aria-haspopup="listbox" aria-expanded={open} aria-label={label} onClick={() => setOpen((current) => !current)}>{value}</button>
+    {open ? <div className="hp-loan-filter-menu" role="listbox" aria-label={label}>
+      {options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === selectedValue} onClick={() => { onChange(option.value); setOpen(false); }}>{option.label}</button>)}
+    </div> : null}
+  </div>;
+}
+
 /**
  * One real serving-loan card. All monetary facts and logo URLs are fetched from
  * the approved loan-detail API; this component never synthesizes loan facts.
@@ -70,8 +88,6 @@ function ServingLoanCard({ recommendation, onDetails }) {
         تطابق با وضعیت مشتری: <b>{hasScore ? `${Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪` : "نامشخص"}</b>
       </p>
 
-      {state.status === "loading" ? <p className="hp-loan-card-loading">در حال دریافت شرایط وام…</p> : null}
-      {state.status === "error" ? <p className="hp-loan-card-loading">جزئیات این وام فعلاً در دسترس نیست.</p> : null}
       {state.status === "ready" ? (
         <div className="hp-loan-summary-grid">
           <span>حداکثر مبلغ وام</span><b>{formatMoney(detail.maxAmountTomans)}</b>
@@ -148,19 +164,8 @@ export default function LoanResultsScreen({
           </div>
 
           <div className="hp-loan-result-filters">
-            <label>
-              <span className="sr-only">نمایش نتایج</span>
-              <select value={mode} onChange={(event) => setMode(event.target.value)}>
-                {Object.entries(VIEW_MODE_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-              </select>
-            </label>
-            <label>
-              <span className="sr-only">نام بانک</span>
-              <select value={lenderName} onChange={(event) => setLenderName(event.target.value)}>
-                <option value="">نام بانک</option>
-                {lenders.map((name) => <option key={name} value={name}>{name}</option>)}
-              </select>
-            </label>
+            <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} selectedValue={mode} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
+            <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} selectedValue={lenderName} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} />
           </div>
       </div>
 
