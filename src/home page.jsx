@@ -1910,8 +1910,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setLoanResultView("ai-analysis");
   }
 
-  function handleLoanRequestOpen(result = recommendationResult) {
-    if (result) setRecommendationResult(result);
+  function handleLoanRequestOpen() {
+    // The current recommendation result is already state-owned. This action only
+    // changes the route/view; it must not replace that result with an event object.
     setLoanResultView("request");
   }
 
