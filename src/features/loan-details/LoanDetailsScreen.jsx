@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import { fetchLoanDetails } from "./loanDetailsApi";
 
 function formatNumber(value) {
-  return value === null || value === undefined ? "اعلام نشده" : Number(value).toLocaleString("fa-IR");
+  return value === null || value === undefined ? "اعلام نشده" : Number(value).toLocaleString("fa-IR").replaceAll("٬", "/");
 }
 
 function formatPercent(value) {
-  return value === null || value === undefined ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")}٪`;
+  return value === null || value === undefined ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
+}
+
+function toPersianDigits(value) {
+  return String(value).replace(/[0-9]/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
 }
 
 function DetailValue({ label, children }) {
@@ -58,7 +62,7 @@ function LoanDetail({ detail }) {
   return <>
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
-        <div>{detail.bankLogoReference ? <img src={detail.bankLogoReference} alt={detail.lenderName} /> : null}<span>«{detail.lenderName}»</span></div>
+        <div>{detail.bankLogoReference ? <img src={detail.bankLogoReference} alt={detail.lenderName} referrerPolicy="no-referrer" /> : null}<span>«{detail.lenderName}»</span></div>
         <strong>{detail.loanName}</strong>
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
@@ -82,7 +86,7 @@ function LoanDetail({ detail }) {
     </article>
     <h2>شرایط و مدارک مورد نیاز</h2>
     <section className="hp-loan-details-conditions">
-      {detail.conditions.length ? <ul>{detail.conditions.map((condition, index) => <li key={`${index}-${condition}`}>{condition}</li>)}</ul> : <p>شرط یا مدرک تأییدشده‌ای برای نمایش ثبت نشده است.</p>}
+      {detail.conditions.length ? <ul>{detail.conditions.map((condition, index) => <li key={`${index}-${condition}`}>{toPersianDigits(condition)}</li>)}</ul> : <p>شرط یا مدرک تأییدشده‌ای برای نمایش ثبت نشده است.</p>}
     </section>
   </>;
 }

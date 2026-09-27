@@ -55,8 +55,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await resultPartition.selectOption("lowest");
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
   await resultPartition.selectOption("variable");
-  await expect(page.locator(".hp-recommendation-needs-review")).toContainText("وام نیازمند بررسی");
-  await expect(page.locator(".hp-recommendation-needs-review")).not.toContainText("٪");
+  await expect(page.getByText("وام نیازمند بررسی")).toBeVisible();
+  await expect(page.locator(".hp-serving-loan-card")).toContainText("تطابق با وضعیت مشتری: نامشخص");
   expect(writes).toHaveLength(10);
   expect(writes.map(({ body }) => body.answerId)).toEqual(questionnaire.questions.map((q) => q.answerOptions[0].answerId));
   expect(posts.length).toBeGreaterThanOrEqual(1);
@@ -70,6 +70,15 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
 
   await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
+
+  await page.getByRole("button", { name: "مقایسه وام" }).click();
+  await expect(page).toHaveURL(/\/compare-loans$/);
+  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
+  await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
+  await page.getByRole("button", { name: /مقایسه کن/ }).click();
+  await expect(page).toHaveURL(/\/compare-result$/);
+  await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
 
 });
 

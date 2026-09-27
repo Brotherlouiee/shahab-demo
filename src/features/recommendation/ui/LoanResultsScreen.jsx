@@ -15,15 +15,15 @@ const VIEW_MODE_LABELS = Object.freeze({
 });
 
 function formatMoney(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")} تومان`;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} تومان`;
 }
 
 function formatPercent(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")}٪`;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
 }
 
 function formatMonths(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR")} ماه`;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} ماه`;
 }
 
 function itemsForMode(result, mode) {
@@ -33,11 +33,7 @@ function itemsForMode(result, mode) {
   return result.rankedRecommendations;
 }
 
-function openInternalRoute(path) {
-  if (typeof window === "undefined") return;
-  window.history.pushState({}, "", path);
-  window.dispatchEvent(new PopStateEvent("popstate"));
-}
+
 
 /**
  * One real serving-loan card. All monetary facts and logo URLs are fetched from
@@ -64,20 +60,15 @@ function ServingLoanCard({ recommendation, onDetails }) {
     <article className="hp-loan-result-card hp-serving-loan-card">
       <header className="hp-loan-result-head">
         <div>
-          {detail?.bankLogoReference ? <img src={detail.bankLogoReference} alt={recommendation.lenderName} /> : null}
+          {detail?.bankLogoReference ? <img src={detail.bankLogoReference} alt={recommendation.lenderName} referrerPolicy="no-referrer" /> : null}
           <span>«{recommendation.lenderName}»</span>
         </div>
         <strong>{recommendation.loanName}</strong>
       </header>
 
-      {hasScore ? (
-        <p className="hp-loan-match">
-          تطابق با وضعیت مشتری: <b><span dir="ltr">{Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR")}٪</span></b>
-        </p>
-      ) : <p className="hp-recommendation-warning">وضعیت متغیر؛ بدون درصد و رتبه</p>}
-      {recommendation.statusLabel ? <p className="hp-recommendation-warning">{recommendation.statusLabel}</p> : null}
-      {recommendation.compatibilityReason ? <p className="hp-recommendation-reason">{recommendation.compatibilityReason}</p> : null}
-      {recommendation.rankingExcludedReasons?.length ? <p className="hp-recommendation-reason">{recommendation.rankingExcludedReasons.join("، ")}</p> : null}
+      <p className="hp-loan-match">
+        تطابق با وضعیت مشتری: <b>{hasScore ? `${Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪` : "نامشخص"}</b>
+      </p>
 
       {state.status === "loading" ? <p className="hp-loan-card-loading">در حال دریافت شرایط وام…</p> : null}
       {state.status === "error" ? <p className="hp-loan-card-loading">جزئیات این وام فعلاً در دسترس نیست.</p> : null}
@@ -151,7 +142,7 @@ export default function LoanResultsScreen({
             >
               ثبت درخواست همزمان وام بانکی
             </button>
-            <button type="button" onClick={() => { onCompare(result); openInternalRoute("/compare-loans"); }} disabled={status !== "ready"}>
+            <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
               مقایسه وام
             </button>
           </div>
@@ -173,7 +164,7 @@ export default function LoanResultsScreen({
           </div>
       </div>
 
-      <section className={`hp-loan-results-list ${mode === VIEW_MODES.variable ? "hp-recommendation-needs-review" : ""}`}>
+      <section className="hp-loan-results-list">
         {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
         {status === "sessionMissing" ? (
           <div className="hp-recommendation-result-state" role="status">

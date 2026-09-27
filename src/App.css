@@ -4606,7 +4606,7 @@ button {
   border-radius: 7px;
   padding: 9px 16px;
   display: grid;
-  grid-template-columns: minmax(132px, 1fr) minmax(132px, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 7px 14px;
   font-size: 14px;
   font-weight: 900;
@@ -4637,7 +4637,7 @@ button {
   border-radius: 7px;
   padding: 9px 16px;
   display: grid;
-  grid-template-columns: minmax(132px, 1.15fr) minmax(132px, 1fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 7px 14px;
   font-size: 14px;
   font-weight: 900;
@@ -4660,6 +4660,9 @@ button {
   border: 0;
   background: transparent;
   color: #0067ff;
+  display: flex;
+  justify-content: center;
+  text-align: center;
   font-family: inherit;
   font-size: 16px;
   font-weight: 900;
@@ -5445,4 +5448,39 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+}
+
+/* US-09.T06C: keep mobile cards inside the viewport and suppress browser
+   focus chrome; the visible border stays stable before and after selection. */
+.hp-loan-summary-grid > *,
+.hp-loan-detail-group > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.hp-loan-result-filters select,
+.hp-loan-result-filters select:focus,
+.hp-loan-result-filters select:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: #c8c8c8;
+}
+
+.hp-loan-result-filters select option {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (max-width: 360px) {
+  .hp-loan-summary-grid,
+  .hp-loan-detail-group {
+    padding-inline: 10px;
+    gap: 7px 8px;
+    font-size: 12px;
+  }
+
+  .hp-loan-result-head strong {
+    white-space: normal;
+    text-align: center;
+  }
 }
