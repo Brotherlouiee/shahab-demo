@@ -9,7 +9,7 @@ This inventory covers every loan-related route reachable from the active Vite ap
 | `/compare-loans` | Select real result loans for comparison | The three arrays already returned by the recommendation API | Selection changes presentation only. The browser does not score, classify or manufacture candidates. |
 | `/compare-result` | Compare approved facts for selected loans | One `GET /api/v1/loans/{loanId}` per selected real loan | At least two real loans are required. Unknown facts render as “اعلام نشده”, never as an inferred number. |
 | `/loan-request` | Show whether an approved application method exists | Recommendation result identities; no application/provider contract currently exists | The page states the exact gap and keeps registration/payment disabled. It does not simulate submission, payment, OTP or success. |
-| `/ai-analysis` | Explain one result | Recommendation API reason/exclusion reasons plus the same loan-detail conditions | It identifies the content as engine output, not AI. No external analysis provider is claimed or simulated. |
+| `/ai-analysis` | Preserve the designed explanation screen without manufacturing an analysis | No approved external AI-analysis contract exists | The screen explicitly states that analysis is unavailable; its input and submit controls are disabled. It does not present an invented explanation or AI success. |
 
 ## Result partitions
 
