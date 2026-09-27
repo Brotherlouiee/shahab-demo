@@ -60,7 +60,7 @@ function ServingLoanCard({ recommendation, onDetails }) {
     <article className="hp-loan-result-card hp-serving-loan-card">
       <header className="hp-loan-result-head">
         <div>
-          {detail?.bankLogoReference ? <img src={detail.bankLogoReference} alt={recommendation.lenderName} /> : null}
+          {detail?.bankLogoReference ? <img src={detail.bankLogoReference} alt={recommendation.lenderName} referrerPolicy="no-referrer" /> : null}
           <span>«{recommendation.lenderName}»</span>
         </div>
         <strong>{recommendation.loanName}</strong>
