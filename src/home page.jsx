@@ -22,14 +22,6 @@ import sendIconUrl from "../assets/send.svg";
 import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
 
-function toPersianDigits(value) {
-  const persian = "۰۱۲۳۴۵۶۷۸۹";
-  const arabic = "٠١٢٣٤٥٦٧٨٩";
-  return String(value)
-    .replace(/[0-9]/g, (digit) => persian[Number(digit)])
-    .replace(/[٠-٩]/g, (digit) => persian[arabic.indexOf(digit)]);
-}
-
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
   eager: true,
   import: "default",
