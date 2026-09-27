@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 
 const VIEW_MODES = Object.freeze({
@@ -72,7 +73,7 @@ function ServingLoanCard({ recommendation, onDetails }) {
   }, [recommendation.loanId]);
 
   const detail = state.detail;
-  const bankLogoReference = recommendation.bankLogoReference ?? detail?.bankLogoReference;
+  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName) ?? recommendation.bankLogoReference ?? detail?.bankLogoReference;
   const hasScore = typeof recommendation.compatibilityScore === "number";
 
   return (

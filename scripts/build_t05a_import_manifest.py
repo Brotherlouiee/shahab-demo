@@ -42,17 +42,21 @@ def build_manifest(path: Path = SOURCE) -> dict:
             reader.fieldnames or ()
         ):
             raise ValueError("loan source headers do not cover the canonical manifest")
-        rows = [
-            {
-                "sourceRowNumber": source_row_number,
-                "lenderName": row["نام بانک"].strip(),
-                "loanName": row["نام وام"].strip(),
-                "variableValues": {key: row.get(column) for key, column in COLUMNS.items()},
-                "displayFields": {key: row[column] for key, column in DISPLAY.items() if row.get(column)},
-            }
-            for source_row_number, row in enumerate(reader, 2)
-            if (row.get("نام وام") or "").strip()
-        ]
+        rows = []
+        for source_row_number, row in enumerate(reader, 2):
+            if not (row.get("نام وام") or "").strip():
+                continue
+            lender_name = row["نام بانک"].strip()
+            display_fields = {key: row[column] for key, column in DISPLAY.items() if row.get(column)}
+            rows.append(
+                {
+                    "sourceRowNumber": source_row_number,
+                    "lenderName": lender_name,
+                    "loanName": row["نام وام"].strip(),
+                    "variableValues": {key: row.get(column) for key, column in COLUMNS.items()},
+                    "displayFields": display_fields,
+                }
+            )
     plan = prepare_import_manifest(
         source_file_sha256=source_hash,
         parser_version=PARSER_VERSION,

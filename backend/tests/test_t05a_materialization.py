@@ -20,6 +20,7 @@ from backend.app.infrastructure.db.models import (
     LoanConditions,
     LoanProduct,
     LoanProductVersion,
+    LoanServingFacts,
     PublicationState,
     QuestionVariableWeight,
     ServingCatalogueMember,
@@ -92,6 +93,15 @@ class OfficialSourceMaterializationTests(unittest.TestCase):
             ):
                 self.assertEqual(session.scalar(select(func.count()).select_from(model)), expected)
             self.assertTrue(all(record.source_text for record in session.scalars(select(LoanConditions))))
+            serving_facts = tuple(session.scalars(select(LoanServingFacts)))
+            self.assertEqual(len(serving_facts), 102)
+            self.assertTrue(all(record.bank_logo_asset_key for record in serving_facts))
+            self.assertTrue(
+                all(
+                    record.bank_logo_asset_sha256 and len(record.bank_logo_asset_sha256) == 64
+                    for record in serving_facts
+                )
+            )
             audit = audit_database(session)
             for key in (
                 "missingSourceRows",

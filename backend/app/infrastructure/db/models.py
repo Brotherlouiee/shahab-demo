@@ -176,6 +176,8 @@ class LoanServingFacts(Base):
     guarantee_type_text: Mapped[str | None] = mapped_column(String(100))
     required_deposit_account: Mapped[str | None] = mapped_column(String(255))
     bank_logo_reference: Mapped[str | None] = mapped_column(String(512))
+    bank_logo_asset_key: Mapped[str | None] = mapped_column(String(512))
+    bank_logo_asset_sha256: Mapped[str | None] = mapped_column(String(64))
 
 
 class QuestionnaireVersion(Timestamped, Base):

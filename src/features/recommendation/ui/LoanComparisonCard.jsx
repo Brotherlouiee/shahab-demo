@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 
 function formatPercent(value) {
@@ -25,7 +26,7 @@ export default function LoanComparisonCard({
       .catch(() => { if (!controller.signal.aborted) setDetailLogoReference(null); });
     return () => controller.abort();
   }, [recommendation.loanId]);
-  const bankLogoReference = recommendation.bankLogoReference ?? detailLogoReference;
+  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName) ?? recommendation.bankLogoReference ?? detailLogoReference;
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
       <div className="hp-loan-result-head">
