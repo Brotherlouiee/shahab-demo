@@ -873,7 +873,7 @@ function LoanResultCard({ recommendation, compact = false, selectable = false, s
   );
 }
 
-function LoanResultsScreen({ result, status, onRetry, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
+function LoanResultsScreen({ result, status, onRetry, onStartQuestionnaire, onBack, onMenu, onHome, onDetails, onCompare, onRequest }) {
   const [headerMode, setHeaderMode] = useState("top");
   const [mode, setMode] = useState("highest");
 
@@ -963,10 +963,10 @@ function LoanResultsScreen({ result, status, onRetry, onBack, onMenu, onHome, on
 
       <section className="hp-loan-results-list">
         {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
-        {status === "sessionMissing" ? <p className="hp-recommendation-result-state" role="status">برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p> : null}
+        {status === "sessionMissing" ? <div className="hp-recommendation-result-state" role="status"><p>برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p><button type="button" onClick={onStartQuestionnaire}>شروع پرسشنامه</button></div> : null}
         {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
         {status === "ready" && !visibleResults.length ? <p className="hp-recommendation-result-state">برای این بخش نتیجه‌ای موجود نیست.</p> : null}
-        {status === "ready" && visibleResults.map((recommendation) => <LoanResultCard key={recommendation.loanId} recommendation={recommendation} onDetails={() => onDetails(recommendation.loanId)} />)}
+        {status === "ready" && visibleResults.map((recommendation) => <div className={mode === "variable" ? "hp-recommendation-needs-review" : ""} key={recommendation.loanId}><LoanResultCard recommendation={recommendation} onDetails={() => onDetails(recommendation.loanId)} /></div>)}
       </section>
     </main>
   );
@@ -2038,6 +2038,14 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     setLoanResultView("request");
   }
 
+  function handleStartQuestionnaire() {
+    setRecommendationResult(null);
+    setRecommendationStatus("idle");
+    setLoanResultView("");
+    setIsOtpVerificationStep(false);
+    setCurrentQuestion(2);
+  }
+
   function handlePersonalInfoChange(field, value) {
     setPersonalInfo((current) => ({
       ...current,
@@ -2201,6 +2209,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         result={recommendationResult}
         status={recommendationStatus}
         onRetry={loadRecommendationResult}
+        onStartQuestionnaire={handleStartQuestionnaire}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
