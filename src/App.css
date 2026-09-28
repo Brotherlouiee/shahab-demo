@@ -3921,9 +3921,9 @@ button {
 }
 
 .hp-personal-info-form {
-  width: 352px;
-  max-width: calc(100% - 5px);
-  margin-inline: auto;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -3932,7 +3932,7 @@ button {
 
 .hp-personal-info-form label {
   display: grid;
-  grid-template-columns: 132px 200px;
+  grid-template-columns: minmax(0, calc(100% - 220px)) 200px;
   align-items: center;
   gap: 20px;
   row-gap: 5px;
@@ -4156,7 +4156,7 @@ button {
   width: 357px;
   max-width: 100%;
   margin-inline: auto;
-  margin-top: 41px;
+  margin-top: 40px;
   gap: 8px;
 }
 
@@ -4171,17 +4171,73 @@ button {
   flex: 0 0 165px;
 }
 
-/* The supplied 390px design uses a 357px content rail and a 352px form rail. */
-.hp-questionnaire-page:has(.hp-personal-info-form) {
-  min-height: max(100dvh, 834px);
+/* Personal information and OTP use the same 345px questionnaire content rail. */
+.hp-questionnaire-page:has(.hp-personal-info-form),
+.hp-questionnaire-page:has(.hp-loan-otp-card) {
+  width: min(100vw, 391px);
+  min-height: max(100dvh, 904px);
 }
 
-.hp-questionnaire-content:has(.hp-personal-info-form) {
-  padding-inline: 16.5px;
+.hp-questionnaire-content:has(.hp-personal-info-form),
+.hp-questionnaire-content:has(.hp-loan-otp-card) {
+  padding-inline: 23px;
 }
 
-.hp-questionnaire-content:has(.hp-personal-info-form) .hp-stage-board:has(.hp-stage-track.is-personal-info) {
-  margin-top: 45px;
+@media (max-width: 420px) {
+  .hp-questionnaire-content:has(.hp-personal-info-form),
+  .hp-questionnaire-content:has(.hp-loan-otp-card) {
+    padding-inline: 24px;
+  }
+}
+
+.hp-questionnaire-content:has(.hp-personal-info-form) .hp-stage-board:has(.hp-stage-track.is-personal-info),
+.hp-questionnaire-content:has(.hp-loan-otp-card) .hp-stage-board:has(.hp-stage-track.is-personal-info) {
+  width: 100%;
+  height: 128px;
+  margin: 14px 0;
+}
+
+.hp-questionnaire-content:has(.hp-personal-info-form) .hp-stage-board:has(.hp-stage-track.is-personal-info) .hp-stage-track,
+.hp-questionnaire-content:has(.hp-loan-otp-card) .hp-stage-board:has(.hp-stage-track.is-personal-info) .hp-stage-track {
+  height: 57px;
+  padding: 28px 18px 0 0;
+  align-items: center;
+}
+
+.hp-personal-info-form + .hp-question-actions,
+.hp-loan-otp-card + .hp-question-actions {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  gap: 60px;
+}
+
+.hp-personal-info-form + .hp-question-actions {
+  margin-top: 28px;
+}
+
+.hp-loan-otp-card {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 20px 0 0;
+}
+
+.hp-loan-otp-card + .hp-question-actions {
+  margin-top: 42px;
+}
+
+.hp-personal-info-form + .hp-question-actions .hp-next-question,
+.hp-loan-otp-card + .hp-question-actions .hp-next-question {
+  width: 145px;
+  flex: 0 0 145px;
+}
+
+.hp-personal-info-form + .hp-question-actions .hp-previous-question,
+.hp-loan-otp-card + .hp-question-actions .hp-previous-question {
+  width: auto;
+  min-width: max-content;
+  flex: 0 0 auto;
 }
 
 .hp-next-question.is-personal-confirm,

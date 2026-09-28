@@ -248,51 +248,77 @@ for (const viewport of [
   { name: "desktop", width: 1280, height: 720 },
   { name: "mobile", width: 390, height: 834 },
 ]) {
-  test(`${viewport.name} personal-information form follows the supplied design dimensions`, async ({ page }) => {
+  test(`${viewport.name} personal-information and OTP use the questionnaire content rail`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/question/3");
+    const questionnaireRail = await page.locator(".hp-stage-board").evaluate((board) => {
+      const rect = board.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, width: rect.width };
+    });
+
     await page.goto("/personal-info");
     await expect(page.locator(".hp-questionnaire-header")).toBeVisible();
     await expect(page.locator(".hp-personal-info-form")).toBeVisible();
     await page.waitForTimeout(100);
 
-    const geometry = await page.evaluate(() => {
+    const personalGeometry = await page.evaluate(() => {
+      const board = document.querySelector(".hp-stage-board");
       const form = document.querySelector(".hp-personal-info-form");
-      const fields = [...form.querySelectorAll("input, .hp-personal-dropdown-trigger")];
+      const fields = [...form.querySelectorAll(":scope > label > input, :scope > label > .hp-personal-phone, :scope > label .hp-personal-dropdown-trigger")];
       const actions = document.querySelector(".hp-personal-info-form + .hp-question-actions");
       const confirm = actions.querySelector(".hp-next-question");
-      const back = actions.querySelector(".hp-previous-question");
       const rect = (element) => element.getBoundingClientRect();
+      const boardRect = rect(board);
       const formRect = rect(form);
       const actionRect = rect(actions);
       const confirmRect = rect(confirm);
-      const backRect = rect(back);
       return {
-        formWidth: formRect.width,
-        actionWidth: actionRect.width,
-        firstFieldTop: rect(fields[0]).top,
-        actionsTop: actionRect.top,
+        board: { left: boardRect.left, right: boardRect.right, width: boardRect.width },
+        form: { left: formRect.left, right: formRect.right, width: formRect.width },
+        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
+        fields: fields.map((field) => {
+          const fieldRect = rect(field);
+          return { left: fieldRect.left, right: fieldRect.right, width: fieldRect.width };
+        }),
+        labelRight: rect(form.querySelector("label > span")).right,
         fieldHeights: fields.map((field) => rect(field).height),
         fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
         confirm: { width: confirmRect.width, height: confirmRect.height },
-        back: { width: backRect.width, height: backRect.height },
-        actionGap: Math.max(backRect.left - confirmRect.right, confirmRect.left - backRect.right),
       };
     });
 
-    expect(geometry.formWidth).toBeCloseTo(352, 0);
-    expect(geometry.actionWidth).toBeCloseTo(357, 0);
-    if (viewport.name === "mobile") {
-      expect(geometry.firstFieldTop).toBeCloseTo(236, 0);
-      expect(geometry.actionsTop).toBeCloseTo(489, 0);
+    expect(personalGeometry.board).toEqual(questionnaireRail);
+    expect(personalGeometry.form).toEqual(questionnaireRail);
+    expect(personalGeometry.actions).toEqual(questionnaireRail);
+    expect(personalGeometry.labelRight).toBeCloseTo(questionnaireRail.right, 1);
+    for (const field of personalGeometry.fields) {
+      expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
+      expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);
     }
-    for (const height of geometry.fieldHeights) expect(height).toBeCloseTo(36, 0);
-    for (const gap of geometry.fieldGaps) expect(gap).toBeCloseTo(8, 0);
-    expect(geometry.confirm.width).toBeCloseTo(184, 0);
-    expect(geometry.confirm.height).toBeCloseTo(48, 0);
-    expect(geometry.back.width).toBeCloseTo(165, 0);
-    expect(geometry.back.height).toBeCloseTo(48, 0);
-    expect(geometry.actionGap).toBeCloseTo(8, 0);
-    await page.screenshot({ path: `docs/evidence/us-09-t06i/personal-info-${viewport.name}-dimensions.png` });
+    expect(personalGeometry.confirm).toEqual({ width: 145, height: 48 });
+    if (viewport.name === "mobile") {
+      await page.screenshot({ path: "docs/evidence/us-09-t06i/personal-info-mobile-reference.png" });
+    }
+    for (const height of personalGeometry.fieldHeights) expect(height).toBeCloseTo(36, 0);
+    for (const gap of personalGeometry.fieldGaps) expect(gap).toBeCloseTo(8, 0);
+
+    await page.goto("/verify-code");
+    await expect(page.locator(".hp-loan-otp-card")).toBeVisible();
+    await page.waitForTimeout(100);
+    const otpGeometry = await page.evaluate(() => {
+      const cardRect = document.querySelector(".hp-loan-otp-card").getBoundingClientRect();
+      const actionRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions").getBoundingClientRect();
+      const confirmRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions .hp-next-question").getBoundingClientRect();
+      return {
+        card: { left: cardRect.left, right: cardRect.right, width: cardRect.width },
+        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
+        confirm: { width: confirmRect.width, height: confirmRect.height },
+      };
+    });
+    expect(otpGeometry.card).toEqual(questionnaireRail);
+    expect(otpGeometry.actions).toEqual(questionnaireRail);
+    expect(otpGeometry.confirm).toEqual({ width: 145, height: 48 });
+    if (viewport.name === "mobile") await page.screenshot({ path: "docs/evidence/us-09-t06i/verify-code-mobile-reference.png" });
   });
 }
 

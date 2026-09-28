@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Added
-- **US-09.T06I design alignment:** `/personal-info` now follows the supplied 390px reference rail (357px content, 352px form, 36px controls, and 48px actions); browser geometry tests and desktop/mobile screenshots cover the layout. This is UI-only and does not change profile data handling, OTP, APIs, or recommendation logic.
+- **US-09.T06I questionnaire layout alignment:** `/personal-info` and `/verify-code` now use the same responsive content rail, stage-board dimensions, actions, and symmetric side margins as the preceding questionnaire pages. Browser geometry tests cover desktop and mobile. This is UI-only and does not change profile data handling, OTP, APIs, or recommendation logic.
 - **US-09.T06I follow-up:** پاسخ نهایی S13 دیگر صفحه‌های اطلاعات شخصی و OTP را skip نمی‌کند؛ flow کامل پرسشنامه به `/personal-info`، سپس `/verify-code` و spinner پنج‌ثانیه‌ای می‌رسد و فقط پس از آن نتیجهٔ واقعی/fail-closed را درخواست می‌کند.
 - **US-09.T06I:** بازگردانی محافظه‌کارانهٔ جریان UI اطلاعات شخصی، کد OTP نمایشی و spinner پنج‌ثانیه‌ای؛ کد ثابت فقط پروفایل محلی را برای منوی همبرگری نگه می‌دارد و پس از پایان به همان نتایج fail-closed/واقعی می‌رود. دادهٔ وام، API، scoring، migration، provider و deployment تغییر نکرده‌اند.
 - US-09.T06H comparison-card correction: فقط row «تطابق با وضعیت مشتری» در layout جابه‌جا شد؛ checkbox دست‌نخورده ماند، ارتفاع کارت انتخاب با کارت نتیجهٔ مقایسه برابر شد و center متن/checkbox با E2E تا ۱px هم‌راستا کنترل می‌شود.
