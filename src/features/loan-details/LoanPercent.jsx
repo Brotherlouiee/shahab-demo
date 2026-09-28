@@ -8,7 +8,8 @@ export default function LoanPercent({ value, fallback = "اعلام نشده" })
 
   return (
     <bdi dir="ltr" className="hp-loan-percent">
-      <span>{formatPersianNumber(value)}</span><span>٪</span>
+      <span className="hp-loan-percent-value">{formatPersianNumber(value)}</span>
+      <span className="hp-loan-percent-sign">٪</span>
     </bdi>
   );
 }

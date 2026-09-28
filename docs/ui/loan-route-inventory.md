@@ -31,4 +31,4 @@ The published loan contract has no approved application URL, provider identifier
 
 ## UI stability — T06C
 
-All three result partitions use the same card structure. Scores are server-owned; `needsReview` shows `نامشخص` in the score position. Display numbers use Persian digits and `/` grouping. Every displayed loan percentage is isolated with `bdi dir="ltr"`, keeping `٪` after the number in RTL, including «نرخ بهره اعلامی». Comparison uses the real recommendation identities and approved detail API; it does not recreate loan facts.
+All three result partitions use the same card structure. Scores are server-owned; `needsReview` shows `نامشخص` in the score position. Display numbers use Persian digits and `/` grouping. Every displayed loan percentage is isolated with `bdi dir="ltr"` and an explicit LTR inline-flex row, physically keeping `٪` after the number in RTL parents, including «نرخ بهره اعلامی». Browser tests verify the sign's rendered x-position instead of relying only on DOM text order. Comparison uses the real recommendation identities and approved detail API; it does not recreate loan facts.

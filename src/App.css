@@ -636,6 +636,20 @@ button {
   line-height: 1;
 }
 
+/* Force the visual order to remain number-then-sign inside every RTL parent. */
+.hp-loan-percent {
+  display: inline-flex;
+  direction: ltr;
+  flex-direction: row;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+.hp-loan-percent-value,
+.hp-loan-percent-sign {
+  display: inline-block;
+}
+
 .match-track {
   width: 38px;
   height: 4px;

@@ -57,6 +57,8 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("۹۱٪");
+  const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(resultPercentParts[1]).toBeGreaterThanOrEqual(resultPercentParts[0]);
   const assetResponse = await page.request.get(await resultLogo.getAttribute("src"));
   expect(assetResponse.ok()).toBe(true);
   expect(assetResponse.headers()["content-type"]).toContain("image/svg+xml");
@@ -81,6 +83,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
+  const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(declaredInterestParts[1]).toBeGreaterThanOrEqual(declaredInterestParts[0]);
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
 
@@ -103,6 +107,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByRole("button", { name: "نرخ بهره" })).toHaveClass(/is-active/);
   await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
   await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveText("۱۸٪");
+  const comparedPercentParts = await page.locator(".hp-compare-result-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(comparedPercentParts[1]).toBeGreaterThanOrEqual(comparedPercentParts[0]);
 
 });
 
