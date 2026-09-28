@@ -636,7 +636,7 @@ button {
   line-height: 1;
 }
 
-/* Force the visual order to remain number-then-sign inside every RTL parent. */
+/* In Persian RTL, the trailing percent sign must appear visually left of the number. */
 .hp-loan-percent {
   display: inline-flex;
   direction: ltr;

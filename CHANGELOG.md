@@ -13,7 +13,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
-- **US-09.T06G follow-up:** Decoded the controlled bank-logo payloads into renderable SVG bytes, made each internal filename/hash content-addressed, restored logos on comparison-result cards, and enforced the physical number-then-percent order with an explicit LTR inline-flex row (including «نرخ بهره اعلامی») plus browser geometry assertions in RTL layouts.
+- **US-09.T06G follow-up:** Decoded the controlled bank-logo payloads into renderable SVG bytes, made each internal filename/hash content-addressed, restored logos on comparison-result cards, and enforced the Persian RTL rule that `٪` renders visually to the left of its number (including «نرخ بهره اعلامی»), with browser geometry assertions for result, detail and comparison views.
 
 - **Local full-stack development:** Added a same-origin Vite `/api/v1` proxy,
   Compose-managed frontend/API readiness ordering, packaged runtime contracts, an
