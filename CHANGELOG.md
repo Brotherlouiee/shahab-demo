@@ -7,7 +7,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Added
-- US-09.T06H: یک component مشترک هویت بانک با box ثابت logo، نام دوخطی کنترل‌شده و عنوان مستقل برای همهٔ کارت‌های نتیجه، مقایسه و جزئیات؛ بدون تغییر داده/API/migration یا scoring.
+- US-09.T06H follow-up: نام بانک و عنوان وام در همهٔ کارت‌ها تک‌خطی و ellipsis‌شده شدند، checkbox مقایسه در راست ثابت شد، برای نوار ثابتِ مقایسه فضای scroll رزرو شد و stacking/overflow فیلترها بدون workaround قطع pointer اصلاح شد؛ تست هندسی و screenshot موبایل/دسکتاپ با ۱۰ وام افزوده شد. داده، API، migration و scoring تغییر نکردند.
+- US-09.T06H: یک component مشترک هویت بانک با box ثابت logo، نام مستقل و عنوان مستقل برای همهٔ کارت‌های نتیجه، مقایسه و جزئیات؛ بدون تغییر داده/API/migration یا scoring.
 - US-09.T06F: نگهداری ۲۹ SVG تأییدشدهٔ بانک در assetهای کنترل‌شده، ثبت key/hash در serving facts و نمایش از مسیر پایدار برنامه.
 - US-09.T06G: مسیرهای URL-safe برای SVGها، نمایش RTL پایدارِ درصد و کنترل browser برای هر فیلتر.
 

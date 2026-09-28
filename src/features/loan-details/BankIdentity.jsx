@@ -12,7 +12,7 @@ export default function BankIdentity({ lenderName }) {
       <span className="hp-bank-logo-box">
         {logoUrl ? <img src={logoUrl} alt={lenderName} referrerPolicy="no-referrer" /> : null}
       </span>
-      <span className="hp-bank-name" title={lenderName}>«{lenderName}»</span>
+      <span className="hp-bank-name" title={lenderName} aria-label={lenderName}>«{lenderName}»</span>
     </div>
   );
 }

@@ -4451,7 +4451,9 @@ button {
 
 .hp-loan-results-page.header-top
 .hp-loan-results-controls {
-  position: static;
+  position: relative;
+  top: auto;
+  z-index: 2;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -4480,7 +4482,7 @@ button {
 
 .hp-loan-results-list {
   position: relative;
-  z-index: 0;
+  z-index: 1;
   transform: none;
 }
 
@@ -4518,16 +4520,16 @@ button {
 
 .hp-loan-result-filters {
   position: relative;
-  z-index: 100;
   width: 346px;
   max-width: calc(100vw - 44px);
   margin: 0 auto 14px;
   display: grid;
   grid-template-columns: 1.7fr 1fr;
   gap: 4px;
+  overflow: visible;
 }
 
-.hp-loan-filter-menu-wrap { position: relative; z-index: 50; min-width: 0; }
+.hp-loan-filter-menu-wrap { position: relative; min-width: 0; overflow: visible; }
 
 .hp-loan-filter-trigger {
   position: relative;
@@ -4564,7 +4566,7 @@ button {
 
 .hp-loan-filter-menu {
   position: absolute;
-  z-index: 20;
+  z-index: 1;
   top: calc(100% + 4px);
   right: 0;
   width: 100%;
@@ -4595,12 +4597,6 @@ button {
 
 .hp-loan-filter-menu button:hover,
 .hp-loan-filter-menu button[aria-selected="true"] { background: #f0f7ff; color: #0067ff; }
-
-/* The legacy shell gives cards their own stacking context. Only while a
-   filter popup is open, let pointer input pass through the covered list. */
-body:has(.hp-loan-filter-menu) .hp-loan-results-list {
-  pointer-events: none;
-}
 
 .hp-loan-results-list,
 .hp-compare-list {
@@ -4639,7 +4635,7 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   width: 82px;
   min-width: 0;
   display: grid;
-  justify-items: center;
+  justify-items: end;
   gap: 2px;
   font-size: 13px;
   font-weight: 900;
@@ -4650,7 +4646,7 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   width: 54px;
   height: 48px;
   display: grid;
-  place-items: center;
+  place-items: center end;
 }
 
 .hp-bank-logo-box img {
@@ -4663,18 +4659,17 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   width: 100%;
   min-width: 0;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  text-align: center;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
 }
 
 .hp-loan-result-head strong {
   width: 100%;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   align-self: center;
   justify-self: center;
@@ -4899,6 +4894,7 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
 }
 
 .hp-loan-compare-card {
+  position: relative;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -4910,23 +4906,26 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
 
 .hp-loan-compare-card .hp-loan-result-head strong {
   min-width: 0;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.hp-loan-compare-card .hp-loan-match { white-space: normal; }
+.hp-loan-compare-card .hp-loan-match {
+  padding-inline-start: 36px;
+  white-space: normal;
+}
 
 .hp-loan-compare-check {
   position: absolute;
-  inset-inline-end: 0;
-  inset-block-start: 24px;
+  inset-inline-start: 12px;
+  inset-block-end: 16px;
   width: 24.3px;
   height: 24.3px;
   border: 1.5px solid #b5b5b5;
   border-radius: 7px;
   background: #ffffff;
-  align-self: center;
-  justify-self: start;
+  z-index: 1;
 }
 
 .hp-loan-compare-check.is-selected {
@@ -5005,6 +5004,17 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   padding: 22px;
   transform: translateX(-50%);
   z-index: 50;
+}
+
+/* Reserve the fixed action's height inside the scrollable card list so the
+   last selected card and its checkbox can move fully above that action. */
+.hp-loan-compare-page.has-bottom-bar .hp-compare-list {
+  box-sizing: border-box;
+  padding-bottom: 184px;
+}
+
+.hp-loan-compare-page.is-simple-compare.has-bottom-bar .hp-compare-list {
+  padding-bottom: 112px;
 }
 
 .hp-compare-result-page {
@@ -5108,8 +5118,10 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   font-size: 17px;
   font-weight: 900;
   line-height: 1.4;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .hp-compare-result-card p {
@@ -5594,7 +5606,9 @@ body:has(.hp-loan-filter-menu) .hp-loan-results-list {
   }
 
   .hp-loan-result-head strong {
-    white-space: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
   }
 }

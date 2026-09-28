@@ -65,7 +65,7 @@ function LoanDetail({ detail }) {
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
         <BankIdentity lenderName={detail.lenderName} />
-        <strong>{detail.loanName}</strong>
+        <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
         <DetailGroup>

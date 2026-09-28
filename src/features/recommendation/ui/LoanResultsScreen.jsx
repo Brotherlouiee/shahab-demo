@@ -76,7 +76,7 @@ function ServingLoanCard({ recommendation, onDetails }) {
     <article className="hp-loan-result-card hp-serving-loan-card">
       <header className="hp-loan-result-head">
         <BankIdentity lenderName={recommendation.lenderName} />
-        <strong>{recommendation.loanName}</strong>
+        <strong title={recommendation.loanName} aria-label={recommendation.loanName}>{recommendation.loanName}</strong>
       </header>
 
       <p className="hp-loan-match">

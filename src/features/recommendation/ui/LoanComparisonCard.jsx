@@ -13,16 +13,16 @@ export default function LoanComparisonCard({
 }) {
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
+      <button
+        className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
+        type="button"
+        onClick={onToggle}
+        aria-label={`انتخاب ${recommendation.loanName}`}
+        aria-pressed={selected}
+      />
       <div className="hp-loan-result-head">
-        <button
-          className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
-          type="button"
-          onClick={onToggle}
-          aria-label={`انتخاب ${recommendation.loanName}`}
-          aria-pressed={selected}
-        />
         <BankIdentity lenderName={recommendation.lenderName} />
-        <strong>{recommendation.loanName}</strong>
+        <strong title={recommendation.loanName} aria-label={recommendation.loanName}>{recommendation.loanName}</strong>
       </div>
       <p className="hp-loan-match">
         تطابق با وضعیت مشتری: <b>{typeof recommendation.compatibilityScore === "number" ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>

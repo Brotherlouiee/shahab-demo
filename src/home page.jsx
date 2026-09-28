@@ -872,7 +872,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
   }
 
   return (
-    <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""}`} dir="rtl">
+    <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""} ${selectedCount > 0 ? "has-bottom-bar" : ""}`} dir="rtl">
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
         <span>!</span>
@@ -960,7 +960,7 @@ function LoanComparisonResultCard({ detail, metric }) {
   return (
     <article className="hp-compare-result-card">
       <BankIdentity lenderName={detail.lenderName} />
-      <strong>{detail.loanName}</strong>
+      <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
       <p>
         <span>{metric.title}</span>
         <b>{metric.value(detail)}</b>
