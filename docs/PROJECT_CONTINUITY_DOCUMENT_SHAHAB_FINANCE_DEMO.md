@@ -4,7 +4,7 @@
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
 > **Prepared:** 2026-09-28  
-> **Repository state represented:** `main` after merge of PR #31 (documentation/architecture) on 2026-09-24; PR #32 (`US-07.T05`) is open and awaiting its final green CI/review at the time of this update.  
+> **Repository state represented:** `main` after merge of PR #60 (`US-09.T06H`) on 2026-09-28. The authoritative reconciliation in section 0A separates completed local/code work from the still-pending real deployment gate `US-09.T07`.  
 > **Purpose:** This is the hand-off document for a new chat or engineer with no access to prior conversation history. It distinguishes implemented reality from the target architecture and from proposals not yet approved.
 
 ## 0A. Owner-directed continuity reconciliation — authoritative update (2026-09-28)
