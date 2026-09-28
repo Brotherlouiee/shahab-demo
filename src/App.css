@@ -5106,6 +5106,7 @@ button {
   color: #000000;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: minmax(78px, auto) auto;
   grid-template-areas:
     "title"
     "amount";
@@ -5119,7 +5120,6 @@ button {
 
 .hp-compare-result-card > strong {
   grid-area: title;
-  min-height: 78px;
   width: min(100%, 200px);
   padding-inline: 0;
   box-sizing: border-box;

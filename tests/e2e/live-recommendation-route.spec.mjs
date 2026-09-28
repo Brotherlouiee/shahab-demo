@@ -72,6 +72,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(resultLogo).toHaveJSProperty("complete", true);
   expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
   const shortNameLogoOffset = await logoOffsetFromCard(page.locator(".hp-serving-loan-card").first());
+  const resultTitleOffset = await titleOffsetFromCard(page.locator(".hp-serving-loan-card").first(), ".hp-loan-result-head strong");
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("٪۹۱");
   const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
@@ -130,6 +131,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
   await expectVerticalShift(page.locator(".hp-compare-result-card > strong").first(), -0.2);
+  await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);
   await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
   expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
   await expectLogoOffsets(page.locator(".hp-compare-result-card"), shortNameLogoOffset);
@@ -150,6 +152,19 @@ async function logoOffsetFromCard(card) {
     const logoRect = element.querySelector(".hp-bank-logo-box img").getBoundingClientRect();
     return { right: cardRect.right - logoRect.right, top: logoRect.top - cardRect.top };
   });
+}
+
+async function titleOffsetFromCard(card, selector) {
+  return card.evaluate((element, titleSelector) => {
+    const cardRect = element.getBoundingClientRect();
+    const titleRect = element.querySelector(titleSelector).getBoundingClientRect();
+    return { top: titleRect.top - cardRect.top };
+  }, selector);
+}
+
+async function expectTitleOffset(card, selector, expectedOffset) {
+  const offset = await titleOffsetFromCard(card, selector);
+  expect(Math.abs(offset.top - expectedOffset.top)).toBeLessThanOrEqual(1);
 }
 
 async function expectLogoOffsets(cards, expectedOffset) {
