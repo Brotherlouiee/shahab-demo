@@ -1144,7 +1144,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [recommendationStatus, setRecommendationStatus] = useState("idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
   const [isAnalysisSpinnerRunning, setIsAnalysisSpinnerRunning] = useState(false);
-  const [analysisCountdown, setAnalysisCountdown] = useState(8);
+  const [analysisCountdown, setAnalysisCountdown] = useState(5);
   const [loanOtp, setLoanOtp] = useState(Array(6).fill(""));
   const [loanOtpSeconds, setLoanOtpSeconds] = useState(120);
   const [loanOtpError, setLoanOtpError] = useState("");
@@ -1697,7 +1697,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   useEffect(() => {
     if (!isAnalyzingLoans) return undefined;
 
-    setAnalysisCountdown(8);
+    setAnalysisCountdown(5);
     setIsAnalysisSpinnerRunning(true);
 
     const timerId = window.setInterval(() => {
@@ -1712,7 +1712,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
         return current - 1;
       });
-    }, 625);
+    }, 1000);
 
     return () => window.clearInterval(timerId);
   }, [isAnalyzingLoans]);
@@ -1823,7 +1823,24 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       return;
     }
     if (isOtpQuestion) {
-      setLoanOtpError("سرویس OTP تأییدشده در این محیط فعال نیست؛ ثبت رسمی یا ورود شبیه‌سازی نمی‌شود.");
+      // Deliberate local-only prototype flow: no OTP provider is called and no
+      // real authentication, application or approval claim is made.
+      if (loanOtpValue !== "۱۲۳۴۵۶") {
+        setLoanOtpError("کد وارد شده اشتباه است");
+        return;
+      }
+      const accountProfile = {
+        firstName: personalInfo.firstName.trim(),
+        lastName: personalInfo.lastName.trim(),
+        phone: personalInfo.phone,
+      };
+      setCachedAccountProfile(accountProfile);
+      onAccountCreated(accountProfile);
+      setLoanResultView("");
+      setIsAnalyzingLoans(true);
+      setIsAnalysisSpinnerRunning(true);
+      setAnalysisCountdown(5);
+      setLoanOtpError("");
       return;
     }
     if (canonicalQuestion?.questionId === "S13") {
