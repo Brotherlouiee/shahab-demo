@@ -4252,6 +4252,10 @@ button {
 
 .hp-personal-info-form + .hp-question-actions .hp-previous-question {
   margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  direction: rtl;
   text-align: right;
 }
 
