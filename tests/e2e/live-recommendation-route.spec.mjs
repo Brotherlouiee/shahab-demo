@@ -196,9 +196,9 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
   await personalInputs.nth(1).fill("رضایی");
   await personalInputs.nth(2).fill("۹۱۲۳۴۵۶۷۸۹");
   await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
-  await page.getByRole("option", { name: "تا 22 میلیون تومان" }).click();
+  await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
   await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
-  await page.getByRole("option", { name: "کارمند (کارشناس، کارمند شرکت یا اداره)" }).click();
+  await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
   await page.getByRole("button", { name: "تایید" }).click();
 
   await expect(page).toHaveURL(/\/verify-code$/);
