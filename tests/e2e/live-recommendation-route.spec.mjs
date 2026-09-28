@@ -131,6 +131,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  const comparisonResultCardHeight = await page.locator(".hp-compare-result-card").first().evaluate((card) => card.getBoundingClientRect().height);
   await expectTitleTopOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong");
   await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);
   await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
@@ -149,6 +150,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(2);
   await expect(page.getByRole("button", { name: "انتخاب وام منتشرشده" })).toHaveClass(/is-selected/);
   await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
+  await expectComparisonSelectionGeometry(page.locator(".hp-loan-compare-card").first(), comparisonResultCardHeight);
 
 });
 
@@ -242,6 +244,7 @@ for (const viewport of [
     await page.getByRole("button", { name: /مقایسه کن/ }).click();
     await expect(page).toHaveURL(/\/compare-result$/);
     await expect(page.locator(".hp-compare-result-card")).toHaveCount(10);
+    const comparisonResultCardHeight = await page.locator(".hp-compare-result-card").first().evaluate((card) => card.getBoundingClientRect().height);
     await scrollActivePageToBottom(page);
     const resultClearance = await page.evaluate(() => {
       const card = document.querySelector(".hp-compare-result-card:last-child").getBoundingClientRect();
@@ -253,6 +256,7 @@ for (const viewport of [
     await page.getByRole("button", { name: "بازگشت" }).click();
     await expect(page).toHaveURL(/\/compare-loans$/);
     await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(10);
+    await expectComparisonSelectionGeometry(compareCards.first(), comparisonResultCardHeight);
   });
 }
 
@@ -372,7 +376,22 @@ async function expectComparisonMatchTopOffset(card) {
     const matchRect = element.querySelector(".hp-loan-match").getBoundingClientRect();
     return matchRect.top - cardRect.top;
   });
-  expect(offset).toBeCloseTo(125, 0);
+  expect(offset).toBeCloseTo(98, 0);
+}
+
+async function expectComparisonSelectionGeometry(card, expectedHeight) {
+  const metrics = await card.evaluate((element) => {
+    const cardRect = element.getBoundingClientRect();
+    const matchRect = element.querySelector(".hp-loan-match").getBoundingClientRect();
+    const checkboxRect = element.querySelector(".hp-loan-compare-check").getBoundingClientRect();
+    return {
+      height: cardRect.height,
+      matchCenter: matchRect.top - cardRect.top + matchRect.height / 2,
+      checkboxCenter: checkboxRect.top - cardRect.top + checkboxRect.height / 2,
+    };
+  });
+  expect(Math.abs(metrics.height - expectedHeight)).toBeLessThanOrEqual(1);
+  expect(Math.abs(metrics.matchCenter - metrics.checkboxCenter)).toBeLessThanOrEqual(1);
 }
 
 async function expectStableLogoOffsets(firstCard, secondCard) {

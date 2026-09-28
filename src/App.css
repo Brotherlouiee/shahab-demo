@@ -4904,8 +4904,12 @@ button {
 
 .hp-loan-compare-card {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   max-width: 100%;
+  height: 138.5px;
+  min-height: 138.5px;
+  padding-bottom: 12px;
   overflow: hidden;
 }
 
@@ -4923,9 +4927,9 @@ button {
 .hp-loan-compare-card .hp-loan-match {
   padding-inline-start: 36px;
   white-space: normal;
-  /* The customer-match row moves from 104.5px to 125px from the card top:
-     a visible 20% downward layout move, with space reserved inside the card. */
-  margin-top: 34px;
+  /* The row alone moves; it is centered with the fixed checkbox without
+     changing the checkbox or the shared comparison-card height. */
+  margin: 7px 0 0;
   transform: none;
 }
 
