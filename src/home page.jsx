@@ -1844,16 +1844,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       return;
     }
     if (canonicalQuestion?.questionId === "S13") {
-      setRecommendationResult(null);
-      setRecommendationStatus("loading");
-      setLoanResultView("results");
-      try {
-        const result = await fetchRecommendationResult(questionnaireSessionId);
-        setRecommendationResult(result);
-        setRecommendationStatus("ready");
-      } catch {
-        setRecommendationStatus("error");
-      }
+      // The final canonical answer must lead to the restored local profile
+      // and demonstration-OTP screens before recommendations are requested.
+      setCurrentQuestion(personalInfoQuestionIndex);
+      setIsOtpVerificationStep(false);
       return;
     }
     if (currentQuestion === 1 && selectedOption !== "person") return;

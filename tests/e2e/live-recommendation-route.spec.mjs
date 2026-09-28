@@ -64,6 +64,23 @@ test("canonical questionnaire reaches the active real-result route and published
     await page.getByRole("radio").first().click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   }
+
+  await expect(page).toHaveURL(/\/personal-info$/);
+  const personalInputs = page.locator(".hp-personal-info-form input");
+  await personalInputs.nth(0).fill("علی");
+  await personalInputs.nth(1).fill("رضایی");
+  await personalInputs.nth(2).fill("۹۱۲۳۴۵۶۷۸۹");
+  await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
+  await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
+  await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
+  await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
+  await expect(page).toHaveURL(/\/verify-code$/);
+  const otpInputs = page.locator(".hp-loan-otp-row input");
+  for (const [index, digit] of [..."۱۲۳۴۵۶"].entries()) await otpInputs.nth(index).fill(digit);
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  await expect(page).toHaveURL(/\/analysis$/);
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
   await expect(page).toHaveURL(/\/loan-results$/);
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
@@ -332,7 +349,21 @@ async function completeQuestionnaire(page) {
     await page.getByRole("radio").first().click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   }
-  await expect(page).toHaveURL(/\/loan-results$/);
+  await expect(page).toHaveURL(/\/personal-info$/);
+  const personalInputs = page.locator(".hp-personal-info-form input");
+  await personalInputs.nth(0).fill("علی");
+  await personalInputs.nth(1).fill("رضایی");
+  await personalInputs.nth(2).fill("۹۱۲۳۴۵۶۷۸۹");
+  await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
+  await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
+  await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
+  await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
+  await expect(page).toHaveURL(/\/verify-code$/);
+  const otpInputs = page.locator(".hp-loan-otp-row input");
+  for (const [index, digit] of [..."۱۲۳۴۵۶"].entries()) await otpInputs.nth(index).fill(digit);
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
 }
 
 async function scrollActivePageToBottom(page) {
