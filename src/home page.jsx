@@ -858,8 +858,8 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
-function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
-  const [selectedPlans, setSelectedPlans] = useState({});
+function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request", initialSelectedPlanIds = [] }) {
+  const [selectedPlans, setSelectedPlans] = useState(() => Object.fromEntries(initialSelectedPlanIds.map((planId) => [planId, true])));
   const selectedPlanIds = Object.entries(selectedPlans)
     .filter(([, isSelected]) => isSelected)
     .map(([planId]) => planId);
@@ -2124,6 +2124,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         onHome={onHome}
         onCompareSubmit={handleLoanCompareSubmit}
         mode="compare"
+        initialSelectedPlanIds={selectedComparisonPlanIds}
       />
     );
   }

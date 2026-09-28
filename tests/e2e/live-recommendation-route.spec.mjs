@@ -143,6 +143,11 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveText("٪۱۸");
   const comparedPercentParts = await page.locator(".hp-compare-result-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(comparedPercentParts[0]).toBeLessThan(comparedPercentParts[1]);
+  await page.getByRole("button", { name: "بازگشت" }).click();
+  await expect(page).toHaveURL(/\/compare-loans$/);
+  await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(2);
+  await expect(page.getByRole("button", { name: "انتخاب وام منتشرشده" })).toHaveClass(/is-selected/);
+  await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
 
 });
 
@@ -244,6 +249,9 @@ for (const viewport of [
     });
     expect(resultClearance).toBeGreaterThanOrEqual(20);
     await page.screenshot({ path: `docs/evidence/us-09-t06h/${viewport.name}-compare-result-clearance.png` });
+    await page.getByRole("button", { name: "بازگشت" }).click();
+    await expect(page).toHaveURL(/\/compare-loans$/);
+    await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(10);
   });
 }
 
