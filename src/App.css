@@ -3921,15 +3921,18 @@ button {
 }
 
 .hp-personal-info-form {
+  width: 352px;
+  max-width: calc(100% - 5px);
+  margin-inline: auto;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .hp-personal-info-form label {
   display: grid;
-  grid-template-columns: 130px 1fr;
+  grid-template-columns: 132px 200px;
   align-items: center;
   gap: 20px;
   row-gap: 5px;
@@ -3954,7 +3957,7 @@ button {
 .hp-personal-info-form select,
 .hp-personal-select {
   width: 200px;
-  height: 35px;
+  height: 36px;
   border: 0;
   border-radius: 7px;
   background: #eeeeee;
@@ -4040,12 +4043,12 @@ button {
   position: relative;
   display: block;
   width: 200px;
-  height: 35px;
+  height: 36px;
 }
 
 .hp-personal-dropdown-trigger {
   width: 100%;
-  height: 35px;
+  height: 36px;
   border: 0;
   border-radius: 7px;
   background: #eeeeee;
@@ -4135,7 +4138,7 @@ button {
 }
 
 .hp-personal-phone span {
-  height: 35px;
+  height: 36px;
   border-radius: 7px;
   background: #eeeeee;
   display: grid;
@@ -4150,12 +4153,35 @@ button {
 }
 
 .hp-personal-info-form + .hp-question-actions {
-  margin-top: 40px;
-  gap: 22px;
+  width: 357px;
+  max-width: 100%;
+  margin-inline: auto;
+  margin-top: 41px;
+  gap: 8px;
 }
 
 .hp-personal-info-form + .hp-question-actions .hp-next-question {
-  width: 183px;
+  width: 184px;
+  flex: 0 0 184px;
+}
+
+.hp-personal-info-form + .hp-question-actions .hp-previous-question {
+  width: 165px;
+  min-width: 165px;
+  flex: 0 0 165px;
+}
+
+/* The supplied 390px design uses a 357px content rail and a 352px form rail. */
+.hp-questionnaire-page:has(.hp-personal-info-form) {
+  min-height: max(100dvh, 834px);
+}
+
+.hp-questionnaire-content:has(.hp-personal-info-form) {
+  padding-inline: 16.5px;
+}
+
+.hp-questionnaire-content:has(.hp-personal-info-form) .hp-stage-board:has(.hp-stage-track.is-personal-info) {
+  margin-top: 45px;
 }
 
 .hp-next-question.is-personal-confirm,

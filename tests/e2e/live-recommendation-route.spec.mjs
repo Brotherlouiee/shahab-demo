@@ -244,6 +244,58 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
   await expect(page.getByRole("button", { name: "علی" })).toBeVisible();
 });
 
+for (const viewport of [
+  { name: "desktop", width: 1280, height: 720 },
+  { name: "mobile", width: 390, height: 834 },
+]) {
+  test(`${viewport.name} personal-information form follows the supplied design dimensions`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/personal-info");
+    await expect(page.locator(".hp-questionnaire-header")).toBeVisible();
+    await expect(page.locator(".hp-personal-info-form")).toBeVisible();
+    await page.waitForTimeout(100);
+
+    const geometry = await page.evaluate(() => {
+      const form = document.querySelector(".hp-personal-info-form");
+      const fields = [...form.querySelectorAll("input, .hp-personal-dropdown-trigger")];
+      const actions = document.querySelector(".hp-personal-info-form + .hp-question-actions");
+      const confirm = actions.querySelector(".hp-next-question");
+      const back = actions.querySelector(".hp-previous-question");
+      const rect = (element) => element.getBoundingClientRect();
+      const formRect = rect(form);
+      const actionRect = rect(actions);
+      const confirmRect = rect(confirm);
+      const backRect = rect(back);
+      return {
+        formWidth: formRect.width,
+        actionWidth: actionRect.width,
+        firstFieldTop: rect(fields[0]).top,
+        actionsTop: actionRect.top,
+        fieldHeights: fields.map((field) => rect(field).height),
+        fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
+        confirm: { width: confirmRect.width, height: confirmRect.height },
+        back: { width: backRect.width, height: backRect.height },
+        actionGap: Math.max(backRect.left - confirmRect.right, confirmRect.left - backRect.right),
+      };
+    });
+
+    expect(geometry.formWidth).toBeCloseTo(352, 0);
+    expect(geometry.actionWidth).toBeCloseTo(357, 0);
+    if (viewport.name === "mobile") {
+      expect(geometry.firstFieldTop).toBeCloseTo(236, 0);
+      expect(geometry.actionsTop).toBeCloseTo(489, 0);
+    }
+    for (const height of geometry.fieldHeights) expect(height).toBeCloseTo(36, 0);
+    for (const gap of geometry.fieldGaps) expect(gap).toBeCloseTo(8, 0);
+    expect(geometry.confirm.width).toBeCloseTo(184, 0);
+    expect(geometry.confirm.height).toBeCloseTo(48, 0);
+    expect(geometry.back.width).toBeCloseTo(165, 0);
+    expect(geometry.back.height).toBeCloseTo(48, 0);
+    expect(geometry.actionGap).toBeCloseTo(8, 0);
+    await page.screenshot({ path: `docs/evidence/us-09-t06i/personal-info-${viewport.name}-dimensions.png` });
+  });
+}
+
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {
   await page.goto("/loan-results");
   await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
