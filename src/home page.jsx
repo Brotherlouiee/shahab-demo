@@ -3,7 +3,7 @@ import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
 import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
-import { bankLogoAssetUrlForLender } from "./features/loan-details/bankLogoAssetUrl.mjs";
+import BankIdentity from "./features/loan-details/BankIdentity.jsx";
 import LoanPercent from "./features/loan-details/LoanPercent.jsx";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
@@ -858,8 +858,8 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
-function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request" }) {
-  const [selectedPlans, setSelectedPlans] = useState({});
+function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request", initialSelectedPlanIds = [] }) {
+  const [selectedPlans, setSelectedPlans] = useState(() => Object.fromEntries(initialSelectedPlanIds.map((planId) => [planId, true])));
   const selectedPlanIds = Object.entries(selectedPlans)
     .filter(([, isSelected]) => isSelected)
     .map(([planId]) => planId);
@@ -872,7 +872,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
   }
 
   return (
-    <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""}`} dir="rtl">
+    <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""} ${selectedCount > 0 ? "has-bottom-bar" : ""}`} dir="rtl">
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
         <span>!</span>
@@ -957,15 +957,10 @@ function formatApprovedPercent(value) {
 }
 
 function LoanComparisonResultCard({ detail, metric }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName);
-
   return (
     <article className="hp-compare-result-card">
-      <div>
-        {bankLogoReference ? <img src={bankLogoReference} alt={detail.lenderName} /> : null}
-        <span>«{detail.lenderName}»</span>
-      </div>
-      <strong>{detail.loanName}</strong>
+      <BankIdentity lenderName={detail.lenderName} />
+      <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
       <p>
         <span>{metric.title}</span>
         <b>{metric.value(detail)}</b>
@@ -2129,6 +2124,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         onHome={onHome}
         onCompareSubmit={handleLoanCompareSubmit}
         mode="compare"
+        initialSelectedPlanIds={selectedComparisonPlanIds}
       />
     );
   }

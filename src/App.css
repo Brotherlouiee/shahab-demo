@@ -4451,7 +4451,9 @@ button {
 
 .hp-loan-results-page.header-top
 .hp-loan-results-controls {
-  position: static;
+  position: relative;
+  top: auto;
+  z-index: 2;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -4479,6 +4481,8 @@ button {
 }
 
 .hp-loan-results-list {
+  position: relative;
+  z-index: 1;
   transform: none;
 }
 
@@ -4515,15 +4519,17 @@ button {
 }
 
 .hp-loan-result-filters {
+  position: relative;
   width: 346px;
   max-width: calc(100vw - 44px);
   margin: 0 auto 14px;
   display: grid;
   grid-template-columns: 1.7fr 1fr;
   gap: 4px;
+  overflow: visible;
 }
 
-.hp-loan-filter-menu-wrap { position: relative; min-width: 0; }
+.hp-loan-filter-menu-wrap { position: relative; min-width: 0; overflow: visible; }
 
 .hp-loan-filter-trigger {
   position: relative;
@@ -4560,7 +4566,7 @@ button {
 
 .hp-loan-filter-menu {
   position: absolute;
-  z-index: 20;
+  z-index: 1;
   top: calc(100% + 4px);
   right: 0;
   width: 100%;
@@ -4609,43 +4615,73 @@ button {
   border-radius: 7px;
   background: #ffffff;
   min-height: 286px;
-  padding: 15px 12px 10px;
+  padding: 12px 12px 10px;
   color: #000000;
 }
 
 .hp-loan-result-head {
+  position: relative;
   display: grid;
-  grid-template-columns: 82px 1fr;
-  align-items: start;
-  gap: 8px;
+  place-items: center;
+  min-height: 78px;
+  padding-inline: 52px;
+  box-sizing: border-box;
 }
 
-.hp-loan-result-head > div {
+.hp-bank-identity {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: max-content;
+  min-width: 82px;
   display: grid;
-  justify-items: center;
+  justify-items: start;
   gap: 2px;
   font-size: 13px;
   font-weight: 900;
-  line-height: 1.5;
-  white-space: nowrap;
+  line-height: 1.35;
 }
 
-.hp-loan-result-head img {
+.hp-bank-logo-box {
+  width: 54px;
+  height: 48px;
+  display: grid;
+  place-items: center end;
+  justify-self: start;
+}
+
+.hp-bank-logo-box img {
   width: 50px;
   height: 44px;
   object-fit: contain;
 }
 
+.hp-bank-name {
+  width: max-content;
+  max-width: none;
+  overflow: visible;
+  display: block;
+  white-space: nowrap;
+  text-overflow: clip;
+  text-align: right;
+  justify-self: start;
+}
+
 .hp-loan-result-head strong {
+  width: min(100%, 200px);
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   align-self: center;
   justify-self: center;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1.4;
   white-space: nowrap;
+  /* A 20% upward move from the former 36.8px title position is 30px from
+     the card border; keep this visible geometry consistent across cards. */
+  transform: translateY(calc(-20% - 6.3px));
 }
 
 .hp-loan-match {
@@ -4659,6 +4695,10 @@ button {
 
 .hp-loan-match b {
   color: var(--loan-accent, #0067ff);
+}
+
+.hp-loan-match .hp-loan-percent {
+  font-size: 1.2em;
 }
 
 .hp-loan-summary-grid,
@@ -4855,39 +4895,54 @@ button {
 
 .hp-loan-result-card.is-compact {
   min-height: 126px;
-  padding: 14px 12px 16px;
+  padding: 12px 12px 16px;
 }
 
 .hp-loan-result-card.is-compact .hp-loan-result-head {
-  grid-template-columns: 54px minmax(0, 1fr);
+  min-height: 78px;
 }
 
 .hp-loan-compare-card {
+  position: relative;
+  box-sizing: border-box;
   width: 100%;
   max-width: 100%;
+  height: 138.5px;
+  min-height: 138.5px;
+  padding-bottom: 12px;
   overflow: hidden;
 }
 
 .hp-loan-compare-card .hp-loan-result-head {
-  grid-template-columns: 28px 62px minmax(0, 1fr) !important;
+  padding-inline: 52px !important;
 }
 
 .hp-loan-compare-card .hp-loan-result-head strong {
   min-width: 0;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.hp-loan-compare-card .hp-loan-match { white-space: normal; }
+.hp-loan-compare-card .hp-loan-match {
+  padding-inline-start: 36px;
+  white-space: normal;
+  /* The row alone moves; it is centered with the fixed checkbox without
+     changing the checkbox or the shared comparison-card height. */
+  margin: 7px 0 0;
+  transform: none;
+}
 
 .hp-loan-compare-check {
+  position: absolute;
+  inset-inline-start: 12px;
+  inset-block-end: 16px;
   width: 24.3px;
   height: 24.3px;
   border: 1.5px solid #b5b5b5;
   border-radius: 7px;
   background: #ffffff;
-  align-self: center;
-  justify-self: start;
+  z-index: 1;
 }
 
 .hp-loan-compare-check.is-selected {
@@ -4968,8 +5023,19 @@ button {
   z-index: 50;
 }
 
+/* Reserve the fixed action's height inside the scrollable card list so the
+   last selected card and its checkbox can move fully above that action. */
+.hp-loan-compare-page.has-bottom-bar .hp-compare-list {
+  box-sizing: border-box;
+  padding-bottom: 184px;
+}
+
+.hp-loan-compare-page.is-simple-compare.has-bottom-bar .hp-compare-list {
+  padding-bottom: 112px;
+}
+
 .hp-compare-result-page {
-  padding-bottom: 108px;
+  padding-bottom: 0;
 }
 
 .hp-compare-result-tabs {
@@ -5035,9 +5101,12 @@ button {
   margin: 0 auto;
   display: grid;
   gap: 10px;
+  box-sizing: border-box;
+  padding-bottom: 110px;
 }
 
 .hp-compare-result-card {
+  position: relative;
   min-height: 116px;
   border: 1.5px solid #b9b9b9;
   border-radius: 7px;
@@ -5045,38 +5114,34 @@ button {
   padding: 12px;
   color: #000000;
   display: grid;
-  grid-template-columns: 82px 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(78px, auto) auto;
   grid-template-areas:
-    "bank title"
-    "amount amount";
+    "title"
+    "amount";
   gap: 6px 8px;
 }
 
-.hp-compare-result-card > div {
-  grid-area: bank;
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-  font-size: 13px;
-  font-weight: 900;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.hp-compare-result-card img {
-  width: 50px;
-  height: 44px;
-  object-fit: contain;
+.hp-compare-result-card > .hp-bank-identity {
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
 }
 
 .hp-compare-result-card > strong {
   grid-area: title;
+  width: min(100%, 200px);
+  padding-inline: 0;
+  box-sizing: border-box;
+  transform: translateY(calc(-20% - 6.3px));
   align-self: center;
   justify-self: center;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1.4;
+  overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .hp-compare-result-card p {
@@ -5561,7 +5626,9 @@ button {
   }
 
   .hp-loan-result-head strong {
-    white-space: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
   }
 }

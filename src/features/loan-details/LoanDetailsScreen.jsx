@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { bankLogoAssetUrlForLender } from "./bankLogoAssetUrl.mjs";
+import BankIdentity from "./BankIdentity.jsx";
 import { fetchLoanDetails } from "./loanDetailsApi";
 import LoanPercent from "./LoanPercent.jsx";
 
@@ -61,12 +61,11 @@ export default function LoanDetailsScreen({ loanId, header }) {
 }
 
 function LoanDetail({ detail }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName);
   return <>
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
-        <div>{bankLogoReference ? <img src={bankLogoReference} alt={detail.lenderName} /> : null}<span>«{detail.lenderName}»</span></div>
-        <strong>{detail.loanName}</strong>
+        <BankIdentity lenderName={detail.lenderName} />
+        <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
         <DetailGroup>

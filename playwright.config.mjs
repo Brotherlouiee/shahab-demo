@@ -1,20 +1,21 @@
 import { defineConfig } from "@playwright/test";
 
 const localBrowserPath = process.env.SHAHAB_E2E_BROWSER_PATH;
+const e2ePort = process.env.SHAHAB_E2E_PORT || "4173";
 
 /** Browser tests target the built application through its public HTTP boundary. */
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: false,
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: `http://127.0.0.1:${e2ePort}`,
     browserName: "chromium",
     launchOptions: localBrowserPath ? { executablePath: localBrowserPath } : {},
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "npm run dev -- --host 127.0.0.1 --port 4173",
-    url: "http://127.0.0.1:4173",
+    command: `npm run dev -- --host=127.0.0.1 --port=${e2ePort}`,
+    url: `http://127.0.0.1:${e2ePort}`,
     reuseExistingServer: !process.env.CI,
   },
 });

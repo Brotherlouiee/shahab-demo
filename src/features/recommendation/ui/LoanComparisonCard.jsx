@@ -1,4 +1,4 @@
-import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
+import BankIdentity from "../../loan-details/BankIdentity.jsx";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 
 /**
@@ -11,19 +11,18 @@ export default function LoanComparisonCard({
   selected,
   onToggle,
 }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName);
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
+      <button
+        className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
+        type="button"
+        onClick={onToggle}
+        aria-label={`انتخاب ${recommendation.loanName}`}
+        aria-pressed={selected}
+      />
       <div className="hp-loan-result-head">
-        <button
-          className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
-          type="button"
-          onClick={onToggle}
-          aria-label={`انتخاب ${recommendation.loanName}`}
-          aria-pressed={selected}
-        />
-        <div>{bankLogoReference ? <img src={bankLogoReference} alt={recommendation.lenderName} referrerPolicy="no-referrer" /> : null}<span>«{recommendation.lenderName}»</span></div>
-        <strong>{recommendation.loanName}</strong>
+        <BankIdentity lenderName={recommendation.lenderName} />
+        <strong title={recommendation.loanName} aria-label={recommendation.loanName}>{recommendation.loanName}</strong>
       </div>
       <p className="hp-loan-match">
         تطابق با وضعیت مشتری: <b>{typeof recommendation.compatibilityScore === "number" ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>
