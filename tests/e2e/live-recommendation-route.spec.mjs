@@ -187,6 +187,46 @@ async function expectLogoOffsets(cards, expectedOffset) {
   }
 }
 
+
+test("local profile, demonstration OTP and five-second spinner preserve the fail-closed result boundary", async ({ page }) => {
+  await page.goto("/personal-info");
+
+  const personalInputs = page.locator(".hp-personal-info-form input");
+  await personalInputs.nth(0).fill("علی");
+  await personalInputs.nth(1).fill("رضایی");
+  await personalInputs.nth(2).fill("۹۱۲۳۴۵۶۷۸۹");
+  await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
+  await page.getByRole("option", { name: "تا 22 میلیون تومان" }).click();
+  await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
+  await page.getByRole("option", { name: "کارمند (کارشناس، کارمند شرکت یا اداره)" }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
+
+  await expect(page).toHaveURL(/\\/verify-code$/);
+  await expect(page.locator(".hp-loan-otp-row input")).toHaveCount(6);
+  await expect(page.getByRole("button", { name: /۰۲:۰۰/ })).toBeDisabled();
+
+  const otpInputs = page.locator(".hp-loan-otp-row input");
+  for (const [index, digit] of [..."۱۲۳۴۵۰"].entries()) await otpInputs.nth(index).fill(digit);
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  await expect(page.getByText("کد وارد شده اشتباه است")).toBeVisible();
+
+  for (const [index, digit] of [..."۱۲۳۴۵۶"].entries()) await otpInputs.nth(index).fill(digit);
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  await expect(page).toHaveURL(/\\/analysis$/);
+  await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۵");
+  await page.waitForTimeout(1100);
+  await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۴");
+  await expect(page).toHaveURL(/\\/loan-results$/, { timeout: 7000 });
+  await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
+
+  await page.getByRole("button", { name: "منو" }).click();
+  await expect(page.locator(".hp-sidebar-name")).toHaveText("علی رضایی");
+
+  await page.goto("/personal-info");
+  await personalInputs.nth(0).focus();
+  await expect(page.getByRole("button", { name: "علی" })).toBeVisible();
+});
+
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {
   await page.goto("/loan-results");
   await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
