@@ -4679,6 +4679,7 @@ button {
   font-weight: 900;
   line-height: 1.4;
   white-space: nowrap;
+  transform: translateY(-20%);
 }
 
 .hp-loan-match {
@@ -4692,6 +4693,10 @@ button {
 
 .hp-loan-match b {
   color: var(--loan-accent, #0067ff);
+}
+
+.hp-loan-match .hp-loan-percent {
+  font-size: 1.2em;
 }
 
 .hp-loan-summary-grid,
@@ -4916,6 +4921,7 @@ button {
 .hp-loan-compare-card .hp-loan-match {
   padding-inline-start: 36px;
   white-space: normal;
+  transform: translateY(20%);
 }
 
 .hp-loan-compare-check {
@@ -5117,6 +5123,7 @@ button {
   width: min(100%, 200px);
   padding-inline: 0;
   box-sizing: border-box;
+  transform: translateY(-20%);
   align-self: center;
   justify-self: center;
   font-size: 16px;
