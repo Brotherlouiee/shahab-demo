@@ -3951,6 +3951,7 @@ button {
   font-weight: 800;
   line-height: 1;
   text-align: right;
+  white-space: nowrap;
 }
 
 .hp-personal-info-form input,
@@ -4238,6 +4239,20 @@ button {
   width: auto;
   min-width: max-content;
   flex: 0 0 auto;
+}
+
+/* The two personal-information progress steps remain distinct without spanning the full rail. */
+.hp-questionnaire-content:has(.hp-personal-info-form) .hp-step-line {
+  width: 89px;
+  margin-inline: auto;
+  padding-inline: 0;
+  grid-template-columns: repeat(2, 36px);
+  column-gap: 17px;
+}
+
+.hp-personal-info-form + .hp-question-actions .hp-previous-question {
+  margin-left: auto;
+  text-align: right;
 }
 
 .hp-next-question.is-personal-confirm,

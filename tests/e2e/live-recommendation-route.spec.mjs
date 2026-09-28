@@ -267,6 +267,8 @@ for (const viewport of [
       const fields = [...form.querySelectorAll(":scope > label > input, :scope > label > .hp-personal-phone, :scope > label .hp-personal-dropdown-trigger")];
       const actions = document.querySelector(".hp-personal-info-form + .hp-question-actions");
       const confirm = actions.querySelector(".hp-next-question");
+      const previous = actions.querySelector(".hp-previous-question");
+      const phoneLabel = [...form.querySelectorAll(":scope > label > span:first-child")].find((label) => label.textContent.trim() === "شماره تلفن همراه");
       const rect = (element) => element.getBoundingClientRect();
       const boardRect = rect(board);
       const formRect = rect(form);
@@ -281,6 +283,13 @@ for (const viewport of [
           return { left: fieldRect.left, right: fieldRect.right, width: fieldRect.width };
         }),
         labelRight: rect(form.querySelector("label > span")).right,
+        phoneLabel: {
+          whiteSpace: getComputedStyle(phoneLabel).whiteSpace,
+          width: rect(phoneLabel).width,
+          scrollWidth: phoneLabel.scrollWidth,
+        },
+        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => rect(dot).left),
+        previousRight: rect(previous).right,
         fieldHeights: fields.map((field) => rect(field).height),
         fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
         confirm: { width: confirmRect.width, height: confirmRect.height },
@@ -291,6 +300,11 @@ for (const viewport of [
     expect(personalGeometry.form).toEqual(questionnaireRail);
     expect(personalGeometry.actions).toEqual(questionnaireRail);
     expect(personalGeometry.labelRight).toBeCloseTo(questionnaireRail.right, 1);
+    expect(personalGeometry.phoneLabel.whiteSpace).toBe("nowrap");
+    expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
+    expect(personalGeometry.dots).toHaveLength(2);
+    expect(Math.abs(personalGeometry.dots[0] - personalGeometry.dots[1])).toBeCloseTo(53, 0);
+    expect(personalGeometry.previousRight).toBeCloseTo(personalGeometry.labelRight, 1);
     for (const field of personalGeometry.fields) {
       expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
       expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);
