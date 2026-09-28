@@ -1,4 +1,4 @@
-# Loan route inventory — US-09.T06A–US-09.T06G
+# Loan route inventory — US-09.T06A–US-09.T06H
 
 This inventory covers every loan-related route reachable from the active Vite application. It records the runtime source of each displayed value and the fail-closed behavior required when a serving contract is absent.
 
@@ -32,3 +32,7 @@ The published loan contract has no approved application URL, provider identifier
 ## UI stability — T06C
 
 All three result partitions use the same card structure. Scores are server-owned; `needsReview` shows `نامشخص` in the score position. Display numbers use Persian digits and `/` grouping. Every displayed loan percentage is isolated with `bdi dir="ltr"`; its semantic text remains number-then-sign while an explicit reversed flex row places `٪` visually to the left of the number in Persian RTL, including «نرخ بهره اعلامی». Browser tests require the sign's rendered x-position to be smaller than the number's instead of relying only on DOM text order. Comparison uses the real recommendation identities and approved detail API; it does not recreate loan facts.
+
+## Bank identity anchor — T06H
+
+Result, low-match, needs-review, comparison-selection, comparison-result and detail cards share one `BankIdentity` component. Its internal-only approved logo occupies a fixed box anchored from the card's right/top border; the lender name is constrained to a separate two-line area, and the centered loan title has symmetric reserved space. Browser geometry checks compare short and long lender names and require right/top logo offsets to remain within 1px across every reachable card type.

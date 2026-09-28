@@ -3,7 +3,7 @@ import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
 import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
-import { bankLogoAssetUrlForLender } from "./features/loan-details/bankLogoAssetUrl.mjs";
+import BankIdentity from "./features/loan-details/BankIdentity.jsx";
 import LoanPercent from "./features/loan-details/LoanPercent.jsx";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
@@ -957,14 +957,9 @@ function formatApprovedPercent(value) {
 }
 
 function LoanComparisonResultCard({ detail, metric }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName);
-
   return (
     <article className="hp-compare-result-card">
-      <div>
-        {bankLogoReference ? <img src={bankLogoReference} alt={detail.lenderName} /> : null}
-        <span>«{detail.lenderName}»</span>
-      </div>
+      <BankIdentity lenderName={detail.lenderName} />
       <strong>{detail.loanName}</strong>
       <p>
         <span>{metric.title}</span>

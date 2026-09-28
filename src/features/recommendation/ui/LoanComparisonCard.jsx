@@ -1,4 +1,4 @@
-import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
+import BankIdentity from "../../loan-details/BankIdentity.jsx";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 
 /**
@@ -11,7 +11,6 @@ export default function LoanComparisonCard({
   selected,
   onToggle,
 }) {
-  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName);
   return (
     <article className="hp-loan-result-card is-compact hp-loan-compare-card">
       <div className="hp-loan-result-head">
@@ -22,7 +21,7 @@ export default function LoanComparisonCard({
           aria-label={`انتخاب ${recommendation.loanName}`}
           aria-pressed={selected}
         />
-        <div>{bankLogoReference ? <img src={bankLogoReference} alt={recommendation.lenderName} referrerPolicy="no-referrer" /> : null}<span>«{recommendation.lenderName}»</span></div>
+        <BankIdentity lenderName={recommendation.lenderName} />
         <strong>{recommendation.loanName}</strong>
       </div>
       <p className="hp-loan-match">

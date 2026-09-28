@@ -6,7 +6,7 @@ const sessionId = "opaque-live-flow-test";
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
   rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }],
-  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک مسکن", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
+  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
@@ -30,7 +30,7 @@ test("canonical questionnaire reaches the active real-result route and published
     conditions: ["مدارک هویتی", "ضامن معتبر"],
   } }));
   await page.route("**/api/v1/loans/low-loan", (route) => route.fulfill({ json: {
-    loanId: "low-loan", lenderName: "بانک مسکن", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg",
+    loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg",
     maxAmountTomans: 200000000, monthlyInstallmentTomans: 9000000, maxRepaymentMonths: 24,
     interestRatePercent: 23, depositRequired: "بله", depositHoldingMonths: 3,
     loanToDepositRatioPercent: 80, guaranteeType: "چک", requiredDepositAccount: "قرض‌الحسنه",
@@ -55,6 +55,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(resultLogo).toBeVisible();
   await expect(resultLogo).toHaveJSProperty("complete", true);
   expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
+  const shortNameLogoOffset = await logoOffsetFromCard(page.locator(".hp-serving-loan-card").first());
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("٪۹۱");
   const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
@@ -67,6 +68,9 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
   await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
+  const longNameLogoOffset = await logoOffsetFromCard(page.locator(".hp-serving-loan-card").first());
+  expect(Math.abs(shortNameLogoOffset.right - longNameLogoOffset.right)).toBeLessThanOrEqual(1);
+  expect(Math.abs(shortNameLogoOffset.top - longNameLogoOffset.top)).toBeLessThanOrEqual(1);
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "وضعیت متغیر" }).click();
   await expect(page.getByText("وام نیازمند بررسی")).toBeVisible();
@@ -83,6 +87,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
+  await expectLogoOffsets(page.locator(".hp-loan-detail-card"), shortNameLogoOffset);
   const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(declaredInterestParts[0]).toBeLessThan(declaredInterestParts[1]);
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
@@ -94,6 +99,12 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(/\/compare-loans$/);
   await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   expect(await page.locator(".hp-loan-compare-card .hp-loan-result-head img").first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+  await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
+  await page.screenshot({ path: "docs/evidence/us-09-t06h/desktop-bank-logo-anchor.png", fullPage: true });
+  await page.setViewportSize({ width: 360, height: 800 });
+  await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
+  await page.screenshot({ path: "docs/evidence/us-09-t06h/mobile-bank-logo-anchor.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 720 });
   await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
   await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
@@ -101,6 +112,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
   await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
   expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
+  await expectLogoOffsets(page.locator(".hp-compare-result-card"), shortNameLogoOffset);
   await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
   await page.getByRole("button", { name: "نرخ بهره" }).focus();
   await page.keyboard.press("Enter");
@@ -111,6 +123,26 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(comparedPercentParts[0]).toBeLessThan(comparedPercentParts[1]);
 
 });
+
+async function logoOffsetFromCard(card) {
+  return card.evaluate((element) => {
+    const cardRect = element.getBoundingClientRect();
+    const logoRect = element.querySelector(".hp-bank-logo-box img").getBoundingClientRect();
+    return { right: cardRect.right - logoRect.right, top: logoRect.top - cardRect.top };
+  });
+}
+
+async function expectLogoOffsets(cards, expectedOffset) {
+  const offsets = await cards.evaluateAll((elements) => elements.map((element) => {
+    const cardRect = element.getBoundingClientRect();
+    const logoRect = element.querySelector(".hp-bank-logo-box img").getBoundingClientRect();
+    return { right: cardRect.right - logoRect.right, top: logoRect.top - cardRect.top };
+  }));
+  for (const offset of offsets) {
+    expect(Math.abs(offset.right - expectedOffset.right)).toBeLessThanOrEqual(1);
+    expect(Math.abs(offset.top - expectedOffset.top)).toBeLessThanOrEqual(1);
+  }
+}
 
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {
   await page.goto("/loan-results");

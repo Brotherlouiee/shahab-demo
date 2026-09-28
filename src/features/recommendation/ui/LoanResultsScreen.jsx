@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
+import BankIdentity from "../../loan-details/BankIdentity.jsx";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 
@@ -70,16 +70,12 @@ function ServingLoanCard({ recommendation, onDetails }) {
   }, [recommendation.loanId]);
 
   const detail = state.detail;
-  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName);
   const hasScore = typeof recommendation.compatibilityScore === "number";
 
   return (
     <article className="hp-loan-result-card hp-serving-loan-card">
       <header className="hp-loan-result-head">
-        <div>
-          {bankLogoReference ? <img src={bankLogoReference} alt={recommendation.lenderName} referrerPolicy="no-referrer" /> : null}
-          <span>«{recommendation.lenderName}»</span>
-        </div>
+        <BankIdentity lenderName={recommendation.lenderName} />
         <strong>{recommendation.loanName}</strong>
       </header>
 
