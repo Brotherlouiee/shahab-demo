@@ -201,7 +201,7 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
   await page.getByRole("option", { name: "کارمند (کارشناس، کارمند شرکت یا اداره)" }).click();
   await page.getByRole("button", { name: "تایید" }).click();
 
-  await expect(page).toHaveURL(/\\/verify-code$/);
+  await expect(page).toHaveURL(/\/verify-code$/);
   await expect(page.locator(".hp-loan-otp-row input")).toHaveCount(6);
   await expect(page.getByRole("button", { name: /۰۲:۰۰/ })).toBeDisabled();
 
@@ -212,11 +212,11 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
 
   for (const [index, digit] of [..."۱۲۳۴۵۶"].entries()) await otpInputs.nth(index).fill(digit);
   await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
-  await expect(page).toHaveURL(/\\/analysis$/);
+  await expect(page).toHaveURL(/\/analysis$/);
   await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۵");
   await page.waitForTimeout(1100);
   await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۴");
-  await expect(page).toHaveURL(/\\/loan-results$/, { timeout: 7000 });
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
   await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
 
   await page.getByRole("button", { name: "منو" }).click();
