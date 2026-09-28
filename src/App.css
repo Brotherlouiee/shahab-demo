@@ -4259,6 +4259,12 @@ button {
   text-align: right;
 }
 
+.hp-personal-info-form + .hp-question-actions .hp-previous-question.is-personal-stage-back::after {
+  width: 100%;
+  direction: rtl;
+  text-align: right;
+}
+
 .hp-next-question.is-personal-confirm,
 .hp-next-question.is-loan-otp-submit {
   font-size: 0;
