@@ -1,12 +1,61 @@
 # Project Continuity Document
 
-> **Document version:** 10.0
+> **Document version:** 11.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
-> **Prepared:** 2026-09-24  
-> **Repository state represented:** `main` after merge of PR #31 (documentation/architecture) on 2026-09-24; PR #32 (`US-07.T05`) is open and awaiting its final green CI/review at the time of this update.  
+> **Prepared:** 2026-09-28  
+> **Repository state represented:** `main` after merge of PR #60 (`US-09.T06H`) on 2026-09-28. The authoritative reconciliation in section 0A separates completed local/code work from the still-pending real deployment gate `US-09.T07`.  
 > **Purpose:** This is the hand-off document for a new chat or engineer with no access to prior conversation history. It distinguishes implemented reality from the target architecture and from proposals not yet approved.
 
+## 0A. Owner-directed continuity reconciliation — authoritative update (2026-09-28)
+
+> This is an explicit product-owner-directed mid-story refresh. It **does not** mark `US-09` complete and does not weaken the normal rule that the continuity document is updated at a completed user-story gate. All earlier statements in this document about current implementation, the next task, local/full-stack readiness, results UI or `US-09` status are superseded by this section.
+
+### Repository position
+
+- **Repository truth:** `main` after merge of PR [#60](https://github.com/Brotherlouiee/shahab-demo/pull/60), merge commit `a3f9680ebb7c5e60e410f210f0b8d7e2c18894b7`.
+- **Completed story base:** US-01 through US-08 are merged. The anonymous questionnaire uses PostgreSQL as its durable source of truth when configured, with Redis only as an optional, rebuildable cache and a database fallback.
+- **US-09 completed work:** the result view model/API client, canonical session-to-recommendation integration, real published-loan result/detail routes and follow-up UI work through `US-09.T06H` are merged. The relevant delivery PRs include [#39](https://github.com/Brotherlouiee/shahab-demo/pull/39), [#40](https://github.com/Brotherlouiee/shahab-demo/pull/40), [#51](https://github.com/Brotherlouiee/shahab-demo/pull/51), [#53](https://github.com/Brotherlouiee/shahab-demo/pull/53), [#54](https://github.com/Brotherlouiee/shahab-demo/pull/54), [#55](https://github.com/Brotherlouiee/shahab-demo/pull/55), [#56](https://github.com/Brotherlouiee/shahab-demo/pull/56), [#57](https://github.com/Brotherlouiee/shahab-demo/pull/57), [#58](https://github.com/Brotherlouiee/shahab-demo/pull/58), [#59](https://github.com/Brotherlouiee/shahab-demo/pull/59) and [#60](https://github.com/Brotherlouiee/shahab-demo/pull/60).
+- **Not complete:** `US-09.T07` is the separate, mandatory real-deployment task. CI, Docker-local integration and a merge to `main` are not evidence of deployment.
+
+### What is now available in code and locally verified browser flows
+
+1. The user completes the canonical questionnaire; the browser sends only the opaque session identifier to `POST /api/v1/recommendations`. No client-side score, threshold, weight, category, rank or fabricated loan fact is calculated.
+2. FastAPI reads the complete questionnaire session plus the approved configuration and the active `PUBLISHED` PostgreSQL catalogue. Results are returned in three server-owned partitions: highest compatibility, low compatibility and variable/needs-review. The latter has no score or rank.
+3. Results, loan details, comparison selection and comparison result routes use server-owned published loan facts. Direct result-route entry without a usable session fails closed rather than showing invented rows.
+4. Conditions/required documents are displayed from approved serving data; no provider, payment, OTP, loan-application or external-analysis success is simulated when no approved provider contract exists.
+5. The local catalogue publication verification recorded 102 loans: 88 rankable and 14 needing review. These figures describe the checked local catalogue, not a deployed production database.
+6. The UI is modularised around feature-owned result, card, detail and percentage components. Current card behavior includes fixed internal bank-logo placement, right-aligned single-line bank identity, centered single-line loan title with ellipsis, real result filters, comparison selection/result flow and reserved scroll space so a selected tenth loan is not hidden by the fixed comparison action.
+7. Bank logos are not fetched from `rade.ir` at render time. Twenty-nine approved SVG assets are stored under project control; the serving data preserves provenance while also storing a controlled asset key and recorded file hash. Results, details and comparison surfaces use those internal assets.
+8. Loan percentage displays use the tested visual RTL form `٪۱۸`, including the declared-interest display. The browser does not alter the underlying numeric data.
+
+### Rules that remain binding
+
+- **D-005:** only coefficients from the approved answer-conversion table are valid. Numeric coefficients from the questionnaire-to-loan mapping matrix must not be used.
+- The product remains decision support, not credit scoring, approval prediction or a guarantee of receiving a loan.
+- Only `PUBLISHED` serving records may cross the public API boundary. Unknown/variable core fields remain unscored and unranked in needs-review; the three deposit fields follow the approved neutral policy.
+- No credential, database URL or provider secret belongs in Git, Vite/React or browser storage.
+
+### Verification currently evidenced
+
+- PR #60: `PYTHONUTF8=1 npm run quality` passed (120 backend tests passed; 4 environment-dependent tests skipped) and `npx playwright test tests/e2e/live-recommendation-route.spec.mjs` passed 4 desktop/mobile checks, including card geometry and the two-/ten-loan comparison-return flows.
+- PR #59 additionally verified controlled SVG rendering/hash checks, the questionnaire-to-results/detail/comparison browser route, and visual percentage geometry. These are code/local/CI checks, not public deployment checks.
+- Fresh desktop and mobile visual evidence is versioned under `docs/evidence/us-09-t06h/`.
+
+### The one next delivery gate — US-09.T07
+
+Before calling the product operational, complete and document all of the following on real infrastructure:
+
+1. persistent PostgreSQL on the selected server, reachable only through the intended protected network path;
+2. migrations and the approved 102-loan publication/import on that persistent database;
+3. FastAPI connected to that database and exposed through HTTPS;
+4. Netlify configured to call that deployed API without a browser-visible credential;
+5. an end-to-end test on the actual public URL: questionnaire → API → engine → results/detail/comparison;
+6. a restart check proving API health, data access and recommendation flow recover correctly.
+
+Required user/product-owner inputs for T07 remain the server/domain/access and secret-management decisions. Do not guess them. Until T07 succeeds, the Netlify frontend must not be represented as a deployed full-stack product.
+
+---
 ## 0. Current reconciliation — authoritative update (2026-09-24)
 
 This section supersedes any older status statement below that says the questionnaire work stops at `US-07.T02`.
