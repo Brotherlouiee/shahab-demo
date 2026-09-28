@@ -4624,7 +4624,7 @@ button {
   display: grid;
   place-items: center;
   min-height: 78px;
-  padding-inline: 90px;
+  padding-inline: 52px;
   box-sizing: border-box;
 }
 
@@ -4632,10 +4632,10 @@ button {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
-  width: 82px;
-  min-width: 0;
+  width: max-content;
+  min-width: 82px;
   display: grid;
-  justify-items: end;
+  justify-items: start;
   gap: 2px;
   font-size: 13px;
   font-weight: 900;
@@ -4647,6 +4647,7 @@ button {
   height: 48px;
   display: grid;
   place-items: center end;
+  justify-self: start;
 }
 
 .hp-bank-logo-box img {
@@ -4656,24 +4657,25 @@ button {
 }
 
 .hp-bank-name {
-  width: 100%;
-  min-width: 0;
-  overflow: hidden;
+  width: max-content;
+  max-width: none;
+  overflow: visible;
   display: block;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   text-align: right;
+  justify-self: start;
 }
 
 .hp-loan-result-head strong {
-  width: 100%;
+  width: min(100%, 200px);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
   align-self: center;
   justify-self: center;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1.4;
   white-space: nowrap;
@@ -4901,7 +4903,7 @@ button {
 }
 
 .hp-loan-compare-card .hp-loan-result-head {
-  padding-inline: 90px !important;
+  padding-inline: 52px !important;
 }
 
 .hp-loan-compare-card .hp-loan-result-head strong {
@@ -5018,7 +5020,7 @@ button {
 }
 
 .hp-compare-result-page {
-  padding-bottom: 108px;
+  padding-bottom: 0;
 }
 
 .hp-compare-result-tabs {
@@ -5084,6 +5086,8 @@ button {
   margin: 0 auto;
   display: grid;
   gap: 10px;
+  box-sizing: border-box;
+  padding-bottom: 110px;
 }
 
 .hp-compare-result-card {
@@ -5109,13 +5113,13 @@ button {
 
 .hp-compare-result-card > strong {
   grid-area: title;
-  width: 100%;
   min-height: 78px;
-  padding-inline: 90px;
+  width: min(100%, 200px);
+  padding-inline: 0;
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1.4;
   overflow: hidden;

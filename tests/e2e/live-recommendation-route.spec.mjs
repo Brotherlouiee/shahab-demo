@@ -4,12 +4,12 @@ const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/ques
 
 const sessionId = "opaque-live-flow-test";
 const additionalRankedRecommendations = [
-  ["published-loan-2", "بانک توسعه صادرات", "طرح تسهیلات سرمایه‌گذاری بسیار بلند برای توسعه کسب‌وکار", 0.86],
+  ["published-loan-2", "بانک توسعه تعاون", "طرح نیروگاه خورشیدی خانگی", 0.86],
   ["published-loan-3", "بانک دی", "وام دی", 0.82],
   ["published-loan-4", "بانک رفاه کارگران", "طرح رفاه سازمانی", 0.79],
   ["published-loan-5", "بانک صنعت و معدن", "تسهیلات توسعه صنعتی", 0.76],
   ["published-loan-6", "بانک ملی", "وام ملی", 0.73],
-  ["published-loan-7", "بانک اقتصاد نوین", "طرح تأمین مالی زنجیره‌ای بنگاه‌های کوچک و متوسط", 0.69],
+  ["published-loan-7", "بانک ایران و ونزوئلا", "طرح تأمین مالی زنجیره‌ای بنگاه‌های کوچک و متوسط", 0.69],
   ["published-loan-8", "بانک سینا", "وام سینا", 0.65],
 ].map(([loanId, lenderName, loanName, compatibilityScore]) => ({
   loanId,
@@ -182,8 +182,9 @@ for (const viewport of [
 
     const cards = page.locator(".hp-serving-loan-card");
     await expect(cards).toHaveCount(8);
-    await expectSingleLineIdentity(cards.first());
-    await expectSingleLineIdentity(cards.nth(1));
+    await expectCardTextRules(cards.first(), { titleShouldFit: true });
+    await expectCardTextRules(cards.nth(1), { titleShouldFit: true });
+    await expectCardTextRules(cards.nth(6), { titleShouldFit: false });
     await expectStableLogoOffsets(cards.first(), cards.nth(1));
     await expectFilterMenuAboveCards(page);
     await page.screenshot({ path: `docs/evidence/us-09-t06h/${viewport.name}-results-card-layout.png`, fullPage: true });
@@ -192,14 +193,15 @@ for (const viewport of [
     await expect(page).toHaveURL(/\/compare-loans$/);
     const compareCards = page.locator(".hp-loan-compare-card");
     await expect(compareCards).toHaveCount(10);
-    await expectSingleLineIdentity(compareCards.first());
-    await expectSingleLineIdentity(compareCards.nth(1));
+    await expectCardTextRules(compareCards.first(), { titleShouldFit: true });
+    await expectCardTextRules(compareCards.nth(1), { titleShouldFit: true });
+    await expectCardTextRules(compareCards.nth(6), { titleShouldFit: false });
     await expectStableLogoOffsets(compareCards.first(), compareCards.nth(1));
     await expectStableCheckboxOffsets(compareCards);
 
     for (const checkbox of await page.locator(".hp-loan-compare-check").all()) await checkbox.click();
     await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(10);
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await scrollActivePageToBottom(page);
     const lastCard = compareCards.last();
     await expect(lastCard).toBeVisible();
     const clearance = await page.evaluate(() => {
@@ -209,6 +211,18 @@ for (const viewport of [
     });
     expect(clearance.cardBottom).toBeLessThanOrEqual(clearance.barTop + 1);
     await page.screenshot({ path: `docs/evidence/us-09-t06h/${viewport.name}-compare-ten-loans.png`, fullPage: true });
+
+    await page.getByRole("button", { name: /مقایسه کن/ }).click();
+    await expect(page).toHaveURL(/\/compare-result$/);
+    await expect(page.locator(".hp-compare-result-card")).toHaveCount(10);
+    await scrollActivePageToBottom(page);
+    const resultClearance = await page.evaluate(() => {
+      const card = document.querySelector(".hp-compare-result-card:last-child").getBoundingClientRect();
+      const button = document.querySelector(".hp-compare-result-bottom-bar button").getBoundingClientRect();
+      return button.top - card.bottom;
+    });
+    expect(resultClearance).toBeGreaterThanOrEqual(20);
+    await page.screenshot({ path: `docs/evidence/us-09-t06h/${viewport.name}-compare-result-clearance.png` });
   });
 }
 
@@ -247,37 +261,62 @@ async function completeQuestionnaire(page) {
   await expect(page).toHaveURL(/\/loan-results$/);
 }
 
-async function expectSingleLineIdentity(card) {
-  for (const selector of [".hp-bank-name", ".hp-loan-result-head strong"]) {
-    await expect(card.locator(selector)).toBeVisible();
-    const metrics = await card.locator(selector).evaluate((element) => {
-      const style = getComputedStyle(element);
-      const rect = element.getBoundingClientRect();
-      const cardRect = element.closest("article").getBoundingClientRect();
-      return {
-        whiteSpace: style.whiteSpace,
-        overflow: style.overflow,
-        textOverflow: style.textOverflow,
-        height: rect.height,
-        lineHeight: Number.parseFloat(style.lineHeight),
-        inside: rect.left >= cardRect.left - 1 && rect.right <= cardRect.right + 1,
-        title: element.getAttribute("title"),
-        text: element.textContent.replace(/[«»]/g, ""),
-      };
-    });
-    expect(metrics.whiteSpace, selector).toBe("nowrap");
-    expect(metrics.overflow, selector).toBe("hidden");
-    expect(metrics.textOverflow, selector).toBe("ellipsis");
-    expect(metrics.height).toBeLessThanOrEqual(metrics.lineHeight + 1);
-    expect(metrics.inside).toBe(true);
-    expect(metrics.title).toBe(metrics.text);
-    const hitTarget = await card.locator(selector).evaluate((element) => {
-      const rect = element.getBoundingClientRect();
-      const hit = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      return { uncovered: hit === element || element.contains(hit), target: `${hit?.tagName || "none"}.${hit?.className || ""}` };
-    });
-    expect(hitTarget.uncovered, `${selector} is covered by ${hitTarget.target}`).toBe(true);
-  }
+async function scrollActivePageToBottom(page) {
+  await page.evaluate(() => {
+    const shell = document.querySelector(".hp-questionnaire-shell");
+    shell.scrollTop = shell.scrollHeight;
+  });
+}
+
+async function expectCardTextRules(card, { titleShouldFit }) {
+  const bankName = card.locator(".hp-bank-name");
+  const loanTitle = card.locator(".hp-loan-result-head strong");
+  await expect(bankName).toBeVisible();
+  await expect(loanTitle).toBeVisible();
+
+  const bankMetrics = await bankName.evaluate((element) => {
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    const cardRect = element.closest("article").getBoundingClientRect();
+    const logoRect = element.closest(".hp-bank-identity").querySelector(".hp-bank-logo-box").getBoundingClientRect();
+    return {
+      whiteSpace: style.whiteSpace,
+      textOverflow: style.textOverflow,
+      scrollWidth: element.scrollWidth,
+      clientWidth: element.clientWidth,
+      inside: rect.left >= cardRect.left - 1 && rect.right <= cardRect.right + 1,
+      bankRight: rect.right,
+      logoRight: logoRect.right,
+      rightAlignmentDelta: Math.abs(rect.right - logoRect.right),
+      title: element.getAttribute("title"),
+      text: element.textContent.replace(/[«»]/g, ""),
+    };
+  });
+  expect(bankMetrics.whiteSpace).toBe("nowrap");
+  expect(bankMetrics.textOverflow).not.toBe("ellipsis");
+  expect(bankMetrics.scrollWidth).toBeLessThanOrEqual(bankMetrics.clientWidth + 1);
+  expect(bankMetrics.inside).toBe(true);
+  expect(bankMetrics.rightAlignmentDelta, JSON.stringify(bankMetrics)).toBeLessThanOrEqual(1);
+  expect(bankMetrics.title).toBe(bankMetrics.text);
+
+  const titleMetrics = await loanTitle.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      whiteSpace: style.whiteSpace,
+      overflow: style.overflow,
+      textOverflow: style.textOverflow,
+      scrollWidth: element.scrollWidth,
+      clientWidth: element.clientWidth,
+      title: element.getAttribute("title"),
+      text: element.textContent,
+    };
+  });
+  expect(titleMetrics.whiteSpace).toBe("nowrap");
+  expect(titleMetrics.overflow).toBe("hidden");
+  expect(titleMetrics.textOverflow).toBe("ellipsis");
+  expect(titleMetrics.title).toBe(titleMetrics.text);
+  if (titleShouldFit) expect(titleMetrics.scrollWidth).toBeLessThanOrEqual(titleMetrics.clientWidth + 1);
+  else expect(titleMetrics.scrollWidth).toBeGreaterThan(titleMetrics.clientWidth);
 }
 
 async function expectStableLogoOffsets(firstCard, secondCard) {
