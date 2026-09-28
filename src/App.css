@@ -4679,7 +4679,9 @@ button {
   font-weight: 900;
   line-height: 1.4;
   white-space: nowrap;
-  transform: translateY(-20%);
+  /* A 20% upward move from the former 36.8px title position is 30px from
+     the card border; keep this visible geometry consistent across cards. */
+  transform: translateY(calc(-20% - 6.3px));
 }
 
 .hp-loan-match {
@@ -4921,7 +4923,10 @@ button {
 .hp-loan-compare-card .hp-loan-match {
   padding-inline-start: 36px;
   white-space: normal;
-  transform: translateY(20%);
+  /* The customer-match row moves from 104.5px to 125px from the card top:
+     a visible 20% downward layout move, with space reserved inside the card. */
+  margin-top: 34px;
+  transform: none;
 }
 
 .hp-loan-compare-check {
@@ -5123,7 +5128,7 @@ button {
   width: min(100%, 200px);
   padding-inline: 0;
   box-sizing: border-box;
-  transform: translateY(-20%);
+  transform: translateY(calc(-20% - 6.3px));
   align-self: center;
   justify-self: center;
   font-size: 16px;

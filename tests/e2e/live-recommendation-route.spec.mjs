@@ -73,6 +73,7 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
   const shortNameLogoOffset = await logoOffsetFromCard(page.locator(".hp-serving-loan-card").first());
   const resultTitleOffset = await titleOffsetFromCard(page.locator(".hp-serving-loan-card").first(), ".hp-loan-result-head strong");
+  expect(resultTitleOffset.top).toBeCloseTo(30, 0);
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
   await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("٪۹۱");
   const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
@@ -119,7 +120,7 @@ test("canonical questionnaire reaches the active real-result route and published
   expect(await page.locator(".hp-loan-compare-card .hp-loan-result-head img").first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
   await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
   await expectCompatibilityPercentScale(page.locator(".hp-loan-compare-card").first());
-  await expectVerticalShift(page.locator(".hp-loan-compare-card .hp-loan-match").first(), 0.2);
+  await expectComparisonMatchTopOffset(page.locator(".hp-loan-compare-card").first());
   await page.screenshot({ path: "docs/evidence/us-09-t06h/desktop-bank-logo-anchor.png", fullPage: true });
   await page.setViewportSize({ width: 360, height: 800 });
   await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
@@ -130,7 +131,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
-  await expectVerticalShift(page.locator(".hp-compare-result-card > strong").first(), -0.2);
+  await expectTitleTopOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong");
   await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);
   await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
   expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
@@ -223,7 +224,7 @@ for (const viewport of [
     await expectStableLogoOffsets(compareCards.first(), compareCards.nth(1));
     await expectStableCheckboxOffsets(compareCards);
     await expectCompatibilityPercentScale(compareCards.first());
-    await expectVerticalShift(compareCards.first().locator(".hp-loan-match"), 0.2);
+    await expectComparisonMatchTopOffset(compareCards.first());
 
     for (const checkbox of await page.locator(".hp-loan-compare-check").all()) await checkbox.click();
     await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(10);
@@ -346,7 +347,7 @@ async function expectCardTextRules(card, { titleShouldFit }) {
   expect(titleMetrics.title).toBe(titleMetrics.text);
   if (titleShouldFit) expect(titleMetrics.scrollWidth).toBeLessThanOrEqual(titleMetrics.clientWidth + 1);
   else expect(titleMetrics.scrollWidth).toBeGreaterThan(titleMetrics.clientWidth);
-  await expectVerticalShift(loanTitle, -0.2);
+  await expectTitleTopOffset(card, ".hp-loan-result-head strong");
 }
 
 async function expectCompatibilityPercentScale(card) {
@@ -360,13 +361,18 @@ async function expectCompatibilityPercentScale(card) {
   await expect(percent).toBeVisible();
 }
 
-async function expectVerticalShift(locator, expectedRatio) {
-  const metrics = await locator.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    const matrix = new DOMMatrixReadOnly(getComputedStyle(element).transform);
-    return { height: rect.height, translateY: matrix.m42 };
+async function expectTitleTopOffset(card, selector) {
+  const offset = await titleOffsetFromCard(card, selector);
+  expect(offset.top).toBeCloseTo(30, 0);
+}
+
+async function expectComparisonMatchTopOffset(card) {
+  const offset = await card.evaluate((element) => {
+    const cardRect = element.getBoundingClientRect();
+    const matchRect = element.querySelector(".hp-loan-match").getBoundingClientRect();
+    return matchRect.top - cardRect.top;
   });
-  expect(metrics.translateY).toBeCloseTo(metrics.height * expectedRatio, 1);
+  expect(offset).toBeCloseTo(125, 0);
 }
 
 async function expectStableLogoOffsets(firstCard, secondCard) {

@@ -7,6 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Added
+- US-09.T06H geometry correction: top نام وام در همهٔ کارت‌ها به ۳۰px از border رسید و row «تطابق با وضعیت مشتری» در انتخاب مقایسه با تغییر واقعی layout به ۱۲۵px (۲۰٪ پایین‌تر از ۱۰۴٫۵px) منتقل شد؛ E2E این مختصات را کنترل می‌کند.
 - US-09.T06H comparison return follow-up: بازگشت از نتیجهٔ مقایسه، checkbox وام‌های واقعیِ انتخاب‌شده را از حافظهٔ همان tab سبز نگه می‌دارد؛ URL و web storage برای این انتخاب‌ها استفاده نمی‌شوند و Playwright مسیر بازگشت را کنترل می‌کند.
 - US-09.T06H compare-result alignment follow-up: عنوان وام در کارت نتیجهٔ مقایسه اکنون از همان title row کارت‌های دیگر استفاده می‌کند؛ آزمون browser برابری مختصات عمودی آن با کارت نتایج را تا تلرانس ۱px کنترل می‌کند.
 - US-09.T06H typography follow-up: عنوان وام در همهٔ کارت‌ها ۲۰٪ ارتفاع خودش بالاتر رفت، ردیف «تطابق با وضعیت مشتری» در انتخاب مقایسه ۲۰٪ پایین‌تر قرار گرفت و عدد/نماد درصد تطابق بدون تغییر نرخ بهرهٔ اعلامی ۲۰٪ بزرگ‌تر شد؛ Playwright نسبت‌های واقعی geometry و font را در desktop/mobile کنترل می‌کند.
