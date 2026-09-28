@@ -54,6 +54,11 @@ test("canonical questionnaire reaches the active real-result route and published
   const resultLogo = page.locator(".hp-loan-result-head img").first();
   await expect(resultLogo).toBeVisible();
   await expect(resultLogo).toHaveJSProperty("complete", true);
+  expect(await resultLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
+  await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
+  await expect(page.locator(".hp-serving-loan-card .hp-loan-percent").first()).toHaveText("٪۹۱");
+  const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(resultPercentParts[0]).toBeLessThan(resultPercentParts[1]);
   const assetResponse = await page.request.get(await resultLogo.getAttribute("src"));
   expect(assetResponse.ok()).toBe(true);
   expect(assetResponse.headers()["content-type"]).toContain("image/svg+xml");
@@ -78,6 +83,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
+  const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(declaredInterestParts[0]).toBeLessThan(declaredInterestParts[1]);
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
   await expect(page.getByText("وام منتشرشده")).toBeVisible();
 
@@ -86,12 +93,22 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
   await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
+  expect(await page.locator(".hp-loan-compare-card .hp-loan-result-head img").first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
   await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
   await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
+  expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
+  await page.getByRole("button", { name: "نرخ بهره" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("button", { name: "نرخ بهره" })).toHaveClass(/is-active/);
+  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
+  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveText("٪۱۸");
+  const comparedPercentParts = await page.locator(".hp-compare-result-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
+  expect(comparedPercentParts[0]).toBeLessThan(comparedPercentParts[1]);
 
 });
 

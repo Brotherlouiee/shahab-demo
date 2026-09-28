@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { bankLogoAssetUrlForLender } from "../../loan-details/bankLogoAssetUrl.mjs";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
+import LoanPercent from "../../loan-details/LoanPercent.jsx";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -17,10 +18,6 @@ const VIEW_MODE_LABELS = Object.freeze({
 
 function formatMoney(value) {
   return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} تومان`;
-}
-
-function formatPercent(value) {
-  return value == null ? "اعلام نشده" : <bdi dir="ltr">{`${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi>;
 }
 
 function formatMonths(value) {
@@ -73,7 +70,7 @@ function ServingLoanCard({ recommendation, onDetails }) {
   }, [recommendation.loanId]);
 
   const detail = state.detail;
-  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName) ?? recommendation.bankLogoReference ?? detail?.bankLogoReference;
+  const bankLogoReference = bankLogoAssetUrlForLender(recommendation.lenderName);
   const hasScore = typeof recommendation.compatibilityScore === "number";
 
   return (
@@ -87,13 +84,13 @@ function ServingLoanCard({ recommendation, onDetails }) {
       </header>
 
       <p className="hp-loan-match">
-        تطابق با وضعیت مشتری: <b>{hasScore ? <bdi dir="ltr">{`${Math.round(recommendation.compatibilityScore * 100).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`}</bdi> : "نامشخص"}</b>
+        تطابق با وضعیت مشتری: <b>{hasScore ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>
       </p>
 
       {state.status === "ready" ? (
         <div className="hp-loan-summary-grid">
           <span>حداکثر مبلغ وام</span><b>{formatMoney(detail.maxAmountTomans)}</b>
-          <span>نرخ بهره اعلامی</span><b>{formatPercent(detail.interestRatePercent)}</b>
+          <span>نرخ بهره اعلامی</span><b><LoanPercent value={detail.interestRatePercent} /></b>
           <span>مبلغ هر قسط</span><b>{formatMoney(detail.monthlyInstallmentTomans)}</b>
           <span>حداکثر زمان بازپرداخت</span><b>{formatMonths(detail.maxRepaymentMonths)}</b>
         </div>

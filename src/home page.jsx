@@ -3,6 +3,8 @@ import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
 import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
+import { bankLogoAssetUrlForLender } from "./features/loan-details/bankLogoAssetUrl.mjs";
+import LoanPercent from "./features/loan-details/LoanPercent.jsx";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
@@ -951,14 +953,16 @@ function formatApprovedMoney(value) {
 }
 
 function formatApprovedPercent(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")}٪`;
+  return <LoanPercent value={value} />;
 }
 
 function LoanComparisonResultCard({ detail, metric }) {
+  const bankLogoReference = bankLogoAssetUrlForLender(detail.lenderName);
 
   return (
     <article className="hp-compare-result-card">
       <div>
+        {bankLogoReference ? <img src={bankLogoReference} alt={detail.lenderName} /> : null}
         <span>«{detail.lenderName}»</span>
       </div>
       <strong>{detail.loanName}</strong>
