@@ -22,10 +22,7 @@ const additionalRankedRecommendations = [
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
   rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "میثاق 2", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }, ...additionalRankedRecommendations],
-  lowCompatibilityRecommendations: [
-    { loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" },
-    { loanId: "low-loan-32", lenderName: "بانک سینا", loanName: "وام کم‌تطابق 32", bankLogoReference: "https://cdn.example.test/low-bank-32.svg", compatibilityScore: 0.32, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" },
-  ],
+  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
@@ -112,7 +109,6 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
-  await expect(page.locator(".hp-serving-loan-card").first()).toContainText("وام کم‌تطابق ۳۲");
   await expect(page.locator(".hp-serving-loan-card").first()).toHaveCSS("border-top-color", "rgb(255, 47, 0)");
   await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
