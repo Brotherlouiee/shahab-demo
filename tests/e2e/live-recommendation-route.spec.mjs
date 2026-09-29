@@ -244,6 +244,138 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
   await expect(page.getByRole("button", { name: "علی" })).toBeVisible();
 });
 
+for (const viewport of [
+  { name: "desktop", width: 1280, height: 720 },
+  { name: "mobile", width: 390, height: 834 },
+]) {
+  test(`${viewport.name} personal-information and OTP use the questionnaire content rail`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/question/3");
+    const questionnaireRail = await page.locator(".hp-stage-board").evaluate((board) => {
+      const rect = board.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, width: rect.width };
+    });
+
+    await page.goto("/personal-info");
+    await expect(page.locator(".hp-questionnaire-header")).toBeVisible();
+    await expect(page.locator(".hp-personal-info-form")).toBeVisible();
+    await page.waitForTimeout(100);
+
+    const personalGeometry = await page.evaluate(() => {
+      const board = document.querySelector(".hp-stage-board");
+      const form = document.querySelector(".hp-personal-info-form");
+      const fields = [...form.querySelectorAll(":scope > label > input, :scope > label > .hp-personal-phone, :scope > label .hp-personal-dropdown-trigger")];
+      const actions = document.querySelector(".hp-personal-info-form + .hp-question-actions");
+      const confirm = actions.querySelector(".hp-next-question");
+      const previous = actions.querySelector(".hp-previous-question");
+      const phoneLabel = [...form.querySelectorAll(":scope > label > span:first-child")].find((label) => label.textContent.trim() === "شماره تلفن همراه");
+      const rect = (element) => element.getBoundingClientRect();
+      const boardRect = rect(board);
+      const formRect = rect(form);
+      const actionRect = rect(actions);
+      const confirmRect = rect(confirm);
+      const previousTextRange = document.createRange();
+      previousTextRange.selectNodeContents(previous);
+      const previousTextRect = previousTextRange.getBoundingClientRect();
+      return {
+        board: { left: boardRect.left, right: boardRect.right, width: boardRect.width },
+        form: { left: formRect.left, right: formRect.right, width: formRect.width },
+        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
+        fields: fields.map((field) => {
+          const fieldRect = rect(field);
+          return { left: fieldRect.left, right: fieldRect.right, width: fieldRect.width };
+        }),
+        labelRight: rect(form.querySelector("label > span")).right,
+        phoneLabel: {
+          whiteSpace: getComputedStyle(phoneLabel).whiteSpace,
+          width: rect(phoneLabel).width,
+          scrollWidth: phoneLabel.scrollWidth,
+        },
+        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
+          const dotRect = rect(dot);
+          return {
+            left: dotRect.left,
+            top: dotRect.top,
+            width: dotRect.width,
+            height: dotRect.height,
+          };
+        }),
+        previousRight: rect(previous).right,
+        previousText: {
+          left: previousTextRect.left,
+          right: previousTextRect.right,
+          width: previousTextRect.width,
+          height: previousTextRect.height,
+        },
+        previousTextAlign: getComputedStyle(previous).textAlign,
+        previousAfterContent: getComputedStyle(previous, "::after").content,
+        previousLayout: {
+          direction: getComputedStyle(previous).direction,
+          display: getComputedStyle(previous).display,
+          justifyContent: getComputedStyle(previous).justifyContent,
+          afterDirection: getComputedStyle(previous, "::after").direction,
+          afterTextAlign: getComputedStyle(previous, "::after").textAlign,
+          afterTransform: getComputedStyle(previous, "::after").transform,
+        },
+        fieldHeights: fields.map((field) => rect(field).height),
+        fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
+        confirm: { width: confirmRect.width, height: confirmRect.height },
+      };
+    });
+
+    expect(personalGeometry.board).toEqual(questionnaireRail);
+    expect(personalGeometry.form).toEqual(questionnaireRail);
+    expect(personalGeometry.actions).toEqual(questionnaireRail);
+    expect(personalGeometry.labelRight).toBeCloseTo(questionnaireRail.right, 1);
+    expect(personalGeometry.phoneLabel.whiteSpace).toBe("nowrap");
+    expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
+    expect(personalGeometry.dots).toHaveLength(2);
+    expect(Math.abs(personalGeometry.dots[0].left - personalGeometry.dots[1].left)).toBeCloseTo(53, 0);
+    expect(personalGeometry.previousText.height).toBeGreaterThan(0);
+    expect(personalGeometry.previousTextAlign).toBe("right");
+    expect(personalGeometry.previousAfterContent).toBe("none");
+    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "none" });
+    for (const field of personalGeometry.fields) {
+      expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
+      expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);
+    }
+    expect(personalGeometry.confirm).toEqual({ width: 145, height: 48 });
+    if (viewport.name === "mobile") {
+      await page.screenshot({ path: "docs/evidence/us-09-t06i/personal-info-mobile-reference.png" });
+    }
+    for (const height of personalGeometry.fieldHeights) expect(height).toBeCloseTo(36, 0);
+    for (const gap of personalGeometry.fieldGaps) expect(gap).toBeCloseTo(8, 0);
+
+    await page.goto("/verify-code");
+    await expect(page.locator(".hp-loan-otp-card")).toBeVisible();
+    await page.waitForTimeout(100);
+    const otpGeometry = await page.evaluate(() => {
+      const cardRect = document.querySelector(".hp-loan-otp-card").getBoundingClientRect();
+      const actionRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions").getBoundingClientRect();
+      const confirmRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions .hp-next-question").getBoundingClientRect();
+      return {
+        card: { left: cardRect.left, right: cardRect.right, width: cardRect.width },
+        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
+        confirm: { width: confirmRect.width, height: confirmRect.height },
+        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
+          const dotRect = dot.getBoundingClientRect();
+          return {
+            left: dotRect.left,
+            top: dotRect.top,
+            width: dotRect.width,
+            height: dotRect.height,
+          };
+        }),
+      };
+    });
+    expect(otpGeometry.card).toEqual(questionnaireRail);
+    expect(otpGeometry.actions).toEqual(questionnaireRail);
+    expect(otpGeometry.confirm).toEqual({ width: 145, height: 48 });
+    expect(otpGeometry.dots).toEqual(personalGeometry.dots);
+    if (viewport.name === "mobile") await page.screenshot({ path: "docs/evidence/us-09-t06i/verify-code-mobile-reference.png" });
+  });
+}
+
 test("direct result and action routes fail closed without an active-tab session", async ({ page }) => {
   await page.goto("/loan-results");
   await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();

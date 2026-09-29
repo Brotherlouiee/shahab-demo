@@ -2211,24 +2211,27 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
                 </div>
               ))}
             </div>
-            {!isPersonalStageQuestion ? (
-              <div
-                className="hp-step-line"
-                style={{ "--step-count": stages[question.stageIndex].count }}
-              >
-                {Array.from({ length: stages[question.stageIndex].count }).map((_, index) => (
+            <div
+              className="hp-step-line"
+              style={{ "--step-count": isPersonalStageQuestion ? 2 : stages[question.stageIndex].count }}
+            >
+              {Array.from({ length: isPersonalStageQuestion ? 2 : stages[question.stageIndex].count }).map((_, index) => {
+                const isPersonalCurrent = isPersonalStageQuestion && index === (isOtpQuestion ? 1 : 0);
+                const isPersonalDone = isPersonalStageQuestion && index === (isOtpQuestion ? 0 : 1);
+
+                return (
                   <button
-                    className={`hp-step-dot ${answers[getQuestionIndexForStep(question.stageIndex, index)] && getQuestionIndexForStep(question.stageIndex, index) !== currentQuestion ? "is-done" : ""} ${index === question.stepIndex ? "is-current" : ""}`}
+                    className={`hp-step-dot ${isPersonalStageQuestion ? (isPersonalDone ? "is-done" : "") : (answers[getQuestionIndexForStep(question.stageIndex, index)] && getQuestionIndexForStep(question.stageIndex, index) !== currentQuestion ? "is-done" : "")} ${isPersonalStageQuestion ? (isPersonalCurrent ? "is-current" : "") : (index === question.stepIndex ? "is-current" : "")}`}
                     type="button"
-                    disabled={!canGoToStep(question.stageIndex, index)}
+                    disabled={isPersonalStageQuestion || !canGoToStep(question.stageIndex, index)}
                     key={index}
-                    onClick={() => handleStepClick(question.stageIndex, index)}
+                    onClick={() => !isPersonalStageQuestion && handleStepClick(question.stageIndex, index)}
                   >
                     {toPersianDigits(index + 1)}
                   </button>
-                ))}
-              </div>
-            ) : null}
+                );
+              })}
+            </div>
           </div>
         ) : null}
 
