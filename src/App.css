@@ -4240,9 +4240,6 @@ button {
   min-width: max-content;
   flex: 0 0 auto;
 }
-.hp-loan-otp-card + .hp-question-actions .hp-previous-question.is-personal-stage-back::after {
-  transform: translateX(-15px);
-}
 /* The two personal-information progress steps remain distinct without spanning the full rail. */
 .hp-questionnaire-content:has(.hp-personal-info-form) .hp-step-line,
 .hp-questionnaire-content:has(.hp-loan-otp-card) .hp-step-line {
@@ -4266,7 +4263,6 @@ button {
   width: 100%;
   direction: rtl;
   text-align: right;
-  transform: translateX(-15px);
 }
 
 .hp-next-question.is-personal-confirm,
