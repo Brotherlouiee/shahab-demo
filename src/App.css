@@ -4708,6 +4708,12 @@ right: 16px;
   background: #ffffff;
 }
 
+.hp-loan-filter-menu.is-scrollable {
+  max-height: calc(38px * 5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 .hp-loan-filter-menu button {
   display: block;
   width: 100%;
@@ -4841,6 +4847,15 @@ right: 16px;
   transform: translateY(calc(-20% - 6.3px));
 }
 
+.hp-loan-match-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  direction: rtl;
+}
+
 .hp-loan-match {
   margin: 13px 0 10px;
   color: #000000;
@@ -4848,6 +4863,38 @@ right: 16px;
   font-weight: 500;
   text-align: right;
   white-space: nowrap;
+}
+
+.hp-loan-match-row .hp-loan-match {
+  margin: 0;
+}
+
+.hp-loan-save-button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #34383d;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.hp-loan-save-button svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.hp-loan-save-button[aria-pressed="true"] {
+  color: #34383d;
+}
+
+.hp-loan-save-button:focus-visible {
+  outline: 2px solid #0067ff;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .hp-loan-match b {
@@ -4928,6 +4975,19 @@ right: 16px;
   font-weight: 900;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.hp-loan-save-toast {
+  margin: 0;
+  min-height: 38px;
+  padding: 10px 12px;
+  border-radius: 5px;
+  background: #BFFFE9;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
 }
 
 .hp-loan-details-page .hp-loan-result-card {
