@@ -21,7 +21,7 @@ const additionalRankedRecommendations = [
 }));
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
-  rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }, ...additionalRankedRecommendations],
+  rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "میثاق 2", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }, ...additionalRankedRecommendations],
   lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
@@ -39,7 +39,7 @@ test("canonical questionnaire reaches the active real-result route and published
     return route.fulfill({ json: response });
   });
   await page.route("**/api/v1/loans/published-loan", (route) => route.fulfill({ json: {
-    loanId: "published-loan", lenderName: "بانک ملت", loanName: "وام منتشرشده", bankLogoReference: "https://cdn.example.test/published-bank.svg",
+    loanId: "published-loan", lenderName: "بانک ملت", loanName: "میثاق 2", bankLogoReference: "https://cdn.example.test/published-bank.svg",
     maxAmountTomans: 500000000, monthlyInstallmentTomans: 12000000, maxRepaymentMonths: 48,
     interestRatePercent: 18, depositRequired: "خیر", depositHoldingMonths: null,
     loanToDepositRatioPercent: null, guaranteeType: "ضامن رسمی", requiredDepositAccount: null,
@@ -82,7 +82,8 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(/\/analysis$/);
   await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
   await expect(page).toHaveURL(/\/loan-results$/);
-  await expect(page.getByText("وام منتشرشده")).toBeVisible();
+  await expect(page.getByText("میثاق ۲")).toBeVisible();
+  await expect(page.getByText("میثاق 2", { exact: true })).toHaveCount(0);
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   const resultLogo = page.locator(".hp-loan-result-head img").first();
   await expect(resultLogo).toBeVisible();
@@ -96,12 +97,19 @@ test("canonical questionnaire reaches the active real-result route and published
   const resultPercentParts = await page.locator(".hp-serving-loan-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(resultPercentParts[0]).toBeLessThan(resultPercentParts[1]);
   await expectCompatibilityPercentScale(page.locator(".hp-serving-loan-card").first());
+  const limeCompatibilityCard = page.locator(".hp-serving-loan-card").filter({ hasText: "طرح رفاه سازمانی" });
+  await expect(limeCompatibilityCard).toHaveCSS("border-top-color", "rgb(207, 210, 56)");
+  const melliLogo = page.getByAltText("بانک ملی").first();
+  await expect(melliLogo).toBeVisible();
+  await expect(melliLogo).toHaveJSProperty("complete", true);
+  expect(await melliLogo.evaluate((image) => image.naturalWidth > 0 && image.naturalHeight > 0)).toBe(true);
   const assetResponse = await page.request.get(await resultLogo.getAttribute("src"));
   expect(assetResponse.ok()).toBe(true);
   expect(assetResponse.headers()["content-type"]).toContain("image/svg+xml");
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
+  await expect(page.locator(".hp-serving-loan-card").first()).toHaveCSS("border-top-color", "rgb(255, 47, 0)");
   await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
   const longNameLogoOffset = await logoOffsetFromCard(page.locator(".hp-serving-loan-card").first());
@@ -127,7 +135,7 @@ test("canonical questionnaire reaches the active real-result route and published
   const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(declaredInterestParts[0]).toBeLessThan(declaredInterestParts[1]);
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
-  await expect(page.getByText("وام منتشرشده")).toBeVisible();
+  await expect(page.getByText("میثاق ۲")).toBeVisible();
 
   await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
 
@@ -143,11 +151,12 @@ test("canonical questionnaire reaches the active real-result route and published
   await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
   await page.screenshot({ path: "docs/evidence/us-09-t06h/mobile-bank-logo-anchor.png", fullPage: true });
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.getByRole("button", { name: "انتخاب وام منتشرشده" }).click();
+  await page.getByRole("button", { name: "انتخاب میثاق ۲" }).click();
   await page.getByRole("button", { name: "انتخاب وام زیر آستانه" }).click();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+  await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
   const comparisonResultCardHeight = await page.locator(".hp-compare-result-card").first().evaluate((card) => card.getBoundingClientRect().height);
   await expectTitleTopOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong");
   await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);
@@ -165,7 +174,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "بازگشت" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
   await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(2);
-  await expect(page.getByRole("button", { name: "انتخاب وام منتشرشده" })).toHaveClass(/is-selected/);
+  await expect(page.getByRole("button", { name: "انتخاب میثاق ۲" })).toHaveClass(/is-selected/);
   await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
   await expectComparisonSelectionGeometry(page.locator(".hp-loan-compare-card").first(), comparisonResultCardHeight);
 
@@ -627,6 +636,6 @@ async function expectFilterMenuAboveCards(page) {
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "بیشترین تطابق" }).click();
-  await expect(page.getByText("وام منتشرشده")).toBeVisible();
+  await expect(page.getByText("میثاق ۲")).toBeVisible();
   await expect(page.locator(".hp-serving-loan-card img").first()).toHaveJSProperty("complete", true);
 }
