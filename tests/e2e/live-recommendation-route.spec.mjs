@@ -22,7 +22,10 @@ const additionalRankedRecommendations = [
 const response = {
   dataVersion: "official-source-v1", configVersion: "1.1.0",
   rankedRecommendations: [{ loanId: "published-loan", lenderName: "بانک ملت", loanName: "میثاق 2", bankLogoReference: "https://cdn.example.test/published-bank.svg", compatibilityScore: 0.91, compatibilityReason: "سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما" }, ...additionalRankedRecommendations],
-  lowCompatibilityRecommendations: [{ loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }],
+  lowCompatibilityRecommendations: [
+    { loanId: "low-loan", lenderName: "بانک ایران و ونزوئلا", loanName: "وام زیر آستانه", bankLogoReference: "https://cdn.example.test/low-bank.svg", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" },
+    { loanId: "low-loan-32", lenderName: "بانک سینا", loanName: "وام کم‌تطابق 32", bankLogoReference: "https://cdn.example.test/low-bank-32.svg", compatibilityScore: 0.32, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" },
+  ],
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
@@ -109,6 +112,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: "نمایش نتایج" }).click();
   await page.getByRole("option", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("وام زیر آستانه")).toBeVisible();
+  await expect(page.locator(".hp-serving-loan-card").first()).toContainText("وام کم‌تطابق ۳۲");
   await expect(page.locator(".hp-serving-loan-card").first()).toHaveCSS("border-top-color", "rgb(255, 47, 0)");
   await expect(page.locator(".hp-loan-docs-link").first()).toHaveCSS("color", "rgb(0, 103, 255)");
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos\/v1\/[a-f0-9]{64}\.svg/);
@@ -137,7 +141,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: /بازگشت/ }).first().click();
   await expect(page.getByText("میثاق ۲")).toBeVisible();
 
-  await expect(page.getByRole("button", { name: "ثبت درخواست همزمان وام بانکی" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "بررسی آمادگی دریافت وام" })).toBeDisabled();
 
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
@@ -412,6 +416,8 @@ for (const viewport of [
     await expectCardTextRules(cards.nth(6), { titleShouldFit: false });
     await expectStableLogoOffsets(cards.first(), cards.nth(1));
     await expectFilterMenuAboveCards(page);
+    await expectScrollableBankFilter(page);
+    await expectLoanSaveFeedback(page);
     await page.screenshot({ path: `docs/evidence/us-09-t06h/${viewport.name}-results-card-layout.png`, fullPage: true });
 
     await page.getByRole("button", { name: "مقایسه وام" }).click();
@@ -621,6 +627,32 @@ async function expectStableCheckboxOffsets(cards) {
   }));
   for (const offset of offsets) expect(Math.abs(offset.right - offsets[0].right)).toBeLessThanOrEqual(1);
   expect(offsets[0].right).toBeGreaterThanOrEqual(11);
+}
+
+async function expectScrollableBankFilter(page) {
+  await page.getByRole("button", { name: "نام بانک" }).click();
+  const menu = page.locator(".hp-loan-filter-menu.is-scrollable");
+  await expect(menu).toBeVisible();
+  expect(await menu.evaluate((element) => element.scrollHeight > element.clientHeight)).toBe(true);
+  await menu.evaluate((element) => { element.scrollTop = element.scrollHeight; });
+  await page.getByRole("option", { name: "بانک سینا" }).last().click();
+  await expect(page.locator(".hp-serving-loan-card")).toHaveCount(1);
+  await expect(page.locator(".hp-serving-loan-card")).toContainText("وام سینا");
+  await page.getByRole("button", { name: "نام بانک" }).click();
+  await page.getByRole("option", { name: "نام بانک" }).click();
+  await expect(page.locator(".hp-serving-loan-card")).toHaveCount(8);
+}
+
+async function expectLoanSaveFeedback(page) {
+  const save = page.getByRole("button", { name: "ذخیره وام میثاق ۲" });
+  await expect(save).toHaveAttribute("aria-pressed", "false");
+  await save.click();
+  await expect(save).toHaveAttribute("aria-pressed", "true");
+  const toast = page.getByText("وام مورد نظر با موفقیت ذخیره شد", { exact: true });
+  await expect(toast).toBeVisible();
+  await expect(toast).toHaveCSS("background-color", "rgb(191, 255, 233)");
+  await page.waitForTimeout(2100);
+  await expect(toast).toHaveCount(0);
 }
 
 async function expectFilterMenuAboveCards(page) {
