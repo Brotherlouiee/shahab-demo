@@ -288,7 +288,15 @@ for (const viewport of [
           width: rect(phoneLabel).width,
           scrollWidth: phoneLabel.scrollWidth,
         },
-        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => rect(dot).left),
+        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
+          const dotRect = rect(dot);
+          return {
+            left: dotRect.left,
+            top: dotRect.top,
+            width: dotRect.width,
+            height: dotRect.height,
+          };
+        }),
         previousRight: rect(previous).right,
         previousLayout: {
           direction: getComputedStyle(previous).direction,
@@ -311,9 +319,9 @@ for (const viewport of [
     expect(personalGeometry.phoneLabel.whiteSpace).toBe("nowrap");
     expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
     expect(personalGeometry.dots).toHaveLength(2);
-    expect(Math.abs(personalGeometry.dots[0] - personalGeometry.dots[1])).toBeCloseTo(53, 0);
+    expect(Math.abs(personalGeometry.dots[0].left - personalGeometry.dots[1].left)).toBeCloseTo(53, 0);
     expect(personalGeometry.previousRight).toBeCloseTo(personalGeometry.labelRight, 1);
-    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "matrix(1, 0, 0, 1, -1, 0)" });
+    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "matrix(1, 0, 0, 1, -15, 0)" });
     for (const field of personalGeometry.fields) {
       expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
       expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);
@@ -336,11 +344,21 @@ for (const viewport of [
         card: { left: cardRect.left, right: cardRect.right, width: cardRect.width },
         actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
         confirm: { width: confirmRect.width, height: confirmRect.height },
+        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
+          const dotRect = dot.getBoundingClientRect();
+          return {
+            left: dotRect.left,
+            top: dotRect.top,
+            width: dotRect.width,
+            height: dotRect.height,
+          };
+        }),
       };
     });
     expect(otpGeometry.card).toEqual(questionnaireRail);
     expect(otpGeometry.actions).toEqual(questionnaireRail);
     expect(otpGeometry.confirm).toEqual({ width: 145, height: 48 });
+    expect(otpGeometry.dots).toEqual(personalGeometry.dots);
     if (viewport.name === "mobile") await page.screenshot({ path: "docs/evidence/us-09-t06i/verify-code-mobile-reference.png" });
   });
 }
