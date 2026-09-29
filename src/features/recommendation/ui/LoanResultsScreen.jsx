@@ -5,6 +5,7 @@ import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
+import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -23,21 +24,7 @@ function formatMoney(value) {
 }
 
 function formatMonths(value) {
-  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} ماه`;
-}
-
-function itemsForMode(result, mode) {
-  if (!result) return [];
-  if (mode === VIEW_MODES.lowest) {
-    // The server owns every score and decides this partition. The UI only
-    // presents those existing entries from the displayed highest score to the
-    // lowest, retaining input order for ties.
-    return result.lowCompatibilityRecommendations
-      .map((item, index) => ({ item, index }))
-      .sort((left, right) => right.item.compatibilityScore - left.item.compatibilityScore || left.index - right.index)
-      .map(({ item }) => item);
-  }
-  if (mode === VIEW_MODES.variable) return result.needsReview;
+  return value == null ?EW_MODES.variable) return result.needsReview;
   return result.rankedRecommendations;
 }
 
@@ -176,7 +163,7 @@ export default function LoanResultsScreen({
     saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
   };
 
-  const items = useMemo(() => itemsForMode(result, mode), [result, mode]);
+  const items = useMemo(() => displayItemsForResultMode(result, mode), [result, mode]);
   const lenders = useMemo(
     () => [...new Set(items.map((item) => item.lenderName))].sort(new Intl.Collator("fa").compare),
     [items],
@@ -244,4 +231,4 @@ export default function LoanResultsScreen({
   );
 }
 
-export { itemsForMode };
+export { displayItemsForResultMode as itemsForMode };
