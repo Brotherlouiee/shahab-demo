@@ -274,6 +274,9 @@ for (const viewport of [
       const formRect = rect(form);
       const actionRect = rect(actions);
       const confirmRect = rect(confirm);
+      const previousTextRange = document.createRange();
+      previousTextRange.selectNodeContents(previous);
+      const previousTextRect = previousTextRange.getBoundingClientRect();
       return {
         board: { left: boardRect.left, right: boardRect.right, width: boardRect.width },
         form: { left: formRect.left, right: formRect.right, width: formRect.width },
@@ -298,6 +301,14 @@ for (const viewport of [
           };
         }),
         previousRight: rect(previous).right,
+        previousText: {
+          left: previousTextRect.left,
+          right: previousTextRect.right,
+          width: previousTextRect.width,
+          height: previousTextRect.height,
+        },
+        previousTextAlign: getComputedStyle(previous).textAlign,
+        previousAfterContent: getComputedStyle(previous, "::after").content,
         previousLayout: {
           direction: getComputedStyle(previous).direction,
           display: getComputedStyle(previous).display,
@@ -320,7 +331,10 @@ for (const viewport of [
     expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
     expect(personalGeometry.dots).toHaveLength(2);
     expect(Math.abs(personalGeometry.dots[0].left - personalGeometry.dots[1].left)).toBeCloseTo(53, 0);
-    expect(personalGeometry.previousRight).toBeCloseTo(personalGeometry.labelRight, 1);
+    expect(personalGeometry.previousRight).toBe(personalGeometry.labelRight);
+    expect(personalGeometry.previousText.height).toBeGreaterThan(0);
+    expect(personalGeometry.previousTextAlign).toBe("right");
+    expect(personalGeometry.previousAfterContent).toBe("none");
     expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "none" });
     for (const field of personalGeometry.fields) {
       expect(field.left).toBeCloseTo(questionnaireRail.left, 1);

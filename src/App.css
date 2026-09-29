@@ -4215,6 +4215,10 @@ button {
 
 .hp-personal-info-form + .hp-question-actions {
   margin-top: 28px;
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  column-gap: 60px;
+  row-gap: 0;
 }
 
 .hp-loan-otp-card {
@@ -4251,18 +4255,23 @@ button {
 }
 
 .hp-personal-info-form + .hp-question-actions .hp-previous-question {
-  margin-left: auto;
-  display: inline-flex;
+  margin-left: 0;
+  min-width: 0;
+  justify-self: stretch;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
   direction: rtl;
   text-align: right;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .hp-personal-info-form + .hp-question-actions .hp-previous-question.is-personal-stage-back::after {
-  width: 100%;
-  direction: rtl;
-  text-align: right;
+  content: none;
+  display: none;
 }
 
 .hp-next-question.is-personal-confirm,
