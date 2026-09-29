@@ -7,6 +7,7 @@ import {
   recommendationResultControlOptions,
   selectRecommendationResultMode,
 } from "../../src/features/recommendation/presentation/recommendationResultControls.mjs";
+import { displayItemsForResultMode } from "../../src/features/recommendation/presentation/loanResultDisplayOrder.mjs";
 
 const result = Object.freeze({
   rankedRecommendations: Object.freeze([
@@ -61,4 +62,14 @@ test("rejects unknown filters and never treats a score as a sorting input", () =
   assert.throws(() => applyRecommendationResultControls(result, { sort: "scoreDesc" }), /supported/);
   assert.equal(formatServerCompatibilityScore(0.905), "۹۱٪");
   assert.throws(() => formatServerCompatibilityScore(1.1), /server-supplied/);
+});
+
+test("presents only the server low-compatibility partition from its highest supplied score to lowest", () => {
+  const items = displayItemsForResultMode(result, "lowest");
+
+  assert.deepEqual(items.map((item) => item.loanId), ["low-2", "low-1"]);
+  assert.equal(items[0], result.lowCompatibilityRecommendations[1]);
+  assert.equal(items[1], result.lowCompatibilityRecommendations[0]);
+  assert.deepEqual(displayItemsForResultMode(result, "highest").map((item) => item.loanId), ["l-1", "l-2", "l-3"]);
+  assert.deepEqual(displayItemsForResultMode(result, "variable").map((item) => item.loanId), ["review-1"]);
 });
