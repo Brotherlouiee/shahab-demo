@@ -4400,6 +4400,20 @@ button {
     font-size: 15px;
     line-height: 1.68;
   }
+.hp-loan-otp-card + .hp-question-actions .hp-previous-question {
+  width: max-content;
+  justify-self: end;
+  margin-right: 20px;
+  position: relative;
+right: 16px;
+}
+
+  .hp-personal-info-form + .hp-question-actions .hp-previous-question {
+    width: max-content;
+    justify-self: end;
+    padding-right: 0;
+    margin-right: 0.5px;
+  }
 }
 
 .hp-questionnaire-content > h1,
