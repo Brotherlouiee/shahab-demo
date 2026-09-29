@@ -24,8 +24,7 @@ function formatMoney(value) {
 }
 
 function formatMonths(value) {
-  return value == null ?EW_MODES.variable) return result.needsReview;
-  return result.rankedRecommendations;
+  return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} ماه`;
 }
 
 function BookmarkSaveIcon({ filled }) {
