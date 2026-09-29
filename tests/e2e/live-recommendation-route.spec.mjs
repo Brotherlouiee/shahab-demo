@@ -296,6 +296,7 @@ for (const viewport of [
           justifyContent: getComputedStyle(previous).justifyContent,
           afterDirection: getComputedStyle(previous, "::after").direction,
           afterTextAlign: getComputedStyle(previous, "::after").textAlign,
+          afterTransform: getComputedStyle(previous, "::after").transform,
         },
         fieldHeights: fields.map((field) => rect(field).height),
         fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
@@ -312,7 +313,7 @@ for (const viewport of [
     expect(personalGeometry.dots).toHaveLength(2);
     expect(Math.abs(personalGeometry.dots[0] - personalGeometry.dots[1])).toBeCloseTo(53, 0);
     expect(personalGeometry.previousRight).toBeCloseTo(personalGeometry.labelRight, 1);
-    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right" });
+    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "matrix(1, 0, 0, 1, -1, 0)" });
     for (const field of personalGeometry.fields) {
       expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
       expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);

@@ -4263,6 +4263,7 @@ button {
   width: 100%;
   direction: rtl;
   text-align: right;
+  transform: translateX(-1px);
 }
 
 .hp-next-question.is-personal-confirm,
