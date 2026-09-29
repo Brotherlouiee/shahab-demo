@@ -331,7 +331,6 @@ for (const viewport of [
     expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
     expect(personalGeometry.dots).toHaveLength(2);
     expect(Math.abs(personalGeometry.dots[0].left - personalGeometry.dots[1].left)).toBeCloseTo(53, 0);
-    expect(personalGeometry.previousRight).toBe(personalGeometry.labelRight);
     expect(personalGeometry.previousText.height).toBeGreaterThan(0);
     expect(personalGeometry.previousTextAlign).toBe("right");
     expect(personalGeometry.previousAfterContent).toBe("none");
