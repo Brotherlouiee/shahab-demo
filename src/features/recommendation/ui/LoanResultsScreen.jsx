@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
 import BankIdentity from "../../loan-details/BankIdentity.jsx";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
+import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -26,16 +27,22 @@ function formatMonths(value) {
   return value == null ? "اعلام نشده" : `${Number(value).toLocaleString("fa-IR").replaceAll("٬", "/")} ماه`;
 }
 
-function itemsForMode(result, mode) {
-  if (!result) return [];
-  if (mode === VIEW_MODES.lowest) return result.lowCompatibilityRecommendations;
-  if (mode === VIEW_MODES.variable) return result.needsReview;
-  return result.rankedRecommendations;
+function BookmarkSaveIcon({ filled }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.5A1.75 1.75 0 0 1 17 4.75V20l-5-2.9L7 20V4.75Z"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+      {!filled ? <path d="M12 7.6v4.8M9.6 10h4.8" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" /> : null}
+    </svg>
+  );
 }
 
-
-
-function FilterMenu({ label, value, selectedValue, options, onChange }) {
+function FilterMenu({ label, value, selectedValue, options, onChange, scrollable = false }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   useEffect(() => {
@@ -47,7 +54,7 @@ function FilterMenu({ label, value, selectedValue, options, onChange }) {
   }, []);
   return <div className="hp-loan-filter-menu-wrap" ref={menuRef}>
     <button type="button" className="hp-loan-filter-trigger" aria-haspopup="listbox" aria-expanded={open} aria-label={label} onClick={() => setOpen((current) => !current)}>{value}</button>
-    {open ? <div className="hp-loan-filter-menu" role="listbox" aria-label={label}>
+    {open ? <div className={`hp-loan-filter-menu${scrollable ? " is-scrollable" : ""}`} role="listbox" aria-label={label}>
       {options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === selectedValue} onClick={() => { onChange(option.value); setOpen(false); }}>{option.label}</button>)}
     </div> : null}
   </div>;
@@ -57,7 +64,7 @@ function FilterMenu({ label, value, selectedValue, options, onChange }) {
  * One real serving-loan card. All monetary facts and logo URLs are fetched from
  * the approved loan-detail API; this component never synthesizes loan facts.
  */
-function ServingLoanCard({ recommendation, onDetails }) {
+function ServingLoanCard({ recommendation, onDetails, isSaved, onSave }) {
   const [state, setState] = useState({ status: "loading", detail: null });
 
   useEffect(() => {
@@ -82,9 +89,21 @@ function ServingLoanCard({ recommendation, onDetails }) {
         <strong title={toPersianDigits(recommendation.loanName)} aria-label={toPersianDigits(recommendation.loanName)}>{toPersianDigits(recommendation.loanName)}</strong>
       </header>
 
-      <p className="hp-loan-match">
-        تطابق با وضعیت مشتری: <b>{hasScore ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>
-      </p>
+      <div className="hp-loan-match-row">
+        <p className="hp-loan-match">
+          تطابق با وضعیت مشتری: <b>{hasScore ? <LoanPercent value={Math.round(recommendation.compatibilityScore * 100)} /> : "نامشخص"}</b>
+        </p>
+        <button
+          className="hp-loan-save-button"
+          type="button"
+          aria-pressed={isSaved}
+          aria-label={`ذخیره وام ${toPersianDigits(recommendation.loanName)}`}
+          title="ذخیره وام"
+          onClick={() => onSave(recommendation.loanId)}
+        >
+          <BookmarkSaveIcon filled={isSaved} />
+        </button>
+      </div>
 
       {state.status === "ready" ? (
         <div className="hp-loan-summary-grid">
@@ -111,8 +130,8 @@ function ServingLoanCard({ recommendation, onDetails }) {
 
 /**
  * Result screen extracted from home page. It only selects server-owned
- * partitions and filters lender identity; it never calculates or reorders a
- * compatibility score.
+ * partitions and filters lender identity. Low-compatibility cards are presented
+ * in descending order using their already server-supplied score; it never calculates a score.
  */
 export default function LoanResultsScreen({
   result,
@@ -126,8 +145,24 @@ export default function LoanResultsScreen({
 }) {
   const [mode, setMode] = useState(VIEW_MODES.highest);
   const [lenderName, setLenderName] = useState("");
+  const [savedLoanIds, setSavedLoanIds] = useState(() => new Set());
+  const [savedToastLoanId, setSavedToastLoanId] = useState(null);
+  const saveToastTimeoutRef = useRef(null);
 
-  const items = useMemo(() => itemsForMode(result, mode), [result, mode]);
+  useEffect(() => () => window.clearTimeout(saveToastTimeoutRef.current), []);
+
+  const saveLoan = (loanId) => {
+    setSavedLoanIds((current) => {
+      const next = new Set(current);
+      next.add(loanId);
+      return next;
+    });
+    setSavedToastLoanId(loanId);
+    window.clearTimeout(saveToastTimeoutRef.current);
+    saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
+  };
+
+  const items = useMemo(() => displayItemsForResultMode(result, mode), [result, mode]);
   const lenders = useMemo(
     () => [...new Set(items.map((item) => item.lenderName))].sort(new Intl.Collator("fa").compare),
     [items],
@@ -154,7 +189,7 @@ export default function LoanResultsScreen({
               disabled
               title="روش اقدام یا ثبت درخواست تأییدشده برای این وام‌ها ثبت نشده است."
             >
-              ثبت درخواست همزمان وام بانکی
+              بررسی آمادگی دریافت وام
             </button>
             <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
               مقایسه وام
@@ -163,7 +198,7 @@ export default function LoanResultsScreen({
 
           <div className="hp-loan-result-filters">
             <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} selectedValue={mode} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
-            <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} selectedValue={lenderName} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} />
+            <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} selectedValue={lenderName} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} scrollable={lenders.length > 4} />
           </div>
       </div>
 
@@ -177,10 +212,22 @@ export default function LoanResultsScreen({
         ) : null}
         {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
         {status === "ready" && !visibleItems.length ? <p className="hp-recommendation-result-state">برای این فیلتر نتیجه‌ای موجود نیست.</p> : null}
-        {status === "ready" ? visibleItems.map((item) => <ServingLoanCard key={item.loanId} recommendation={item} onDetails={onDetails} />) : null}
+        {status === "ready" ? visibleItems.map((item) => (
+          <Fragment key={item.loanId}>
+            <ServingLoanCard
+              recommendation={item}
+              onDetails={onDetails}
+              isSaved={savedLoanIds.has(item.loanId)}
+              onSave={saveLoan}
+            />
+            {savedToastLoanId === item.loanId ? (
+              <p className="hp-loan-save-toast" role="status" aria-live="polite">وام مورد نظر با موفقیت ذخیره شد</p>
+            ) : null}
+          </Fragment>
+        )) : null}
       </section>
     </main>
   );
 }
 
-export { itemsForMode };
+export { displayItemsForResultMode as itemsForMode };

@@ -24,6 +24,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T06K:** On `/loan-results`, bank choices now scroll after four bank names, the existing server-supplied low-compatibility partition is presented from its highest displayed score to lowest, and every card has a tab-local save bookmark with a two-second `#BFFFE9` confirmation. The disabled header CTA now reads «بررسی آمادگی دریافت وام». No loan data, API contract, score, threshold, engine ranking or deployment behavior changed.
+
 - **US-09.T06G follow-up:** Decoded the controlled bank-logo payloads into renderable SVG bytes, made each internal filename/hash content-addressed, restored logos on comparison-result cards, and enforced the Persian RTL rule that `٪` renders visually to the left of its number (including «نرخ بهره اعلامی»), with browser geometry assertions for result, detail and comparison views.
 
 - **Local full-stack development:** Added a same-origin Vite `/api/v1` proxy,
