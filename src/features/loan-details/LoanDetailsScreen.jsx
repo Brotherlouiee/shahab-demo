@@ -3,17 +3,10 @@ import { useEffect, useState } from "react";
 import BankIdentity from "./BankIdentity.jsx";
 import { fetchLoanDetails } from "./loanDetailsApi";
 import LoanPercent from "./LoanPercent.jsx";
+import { toPersianDigits } from "./toPersianDigits.mjs";
 
 function formatNumber(value) {
   return value === null || value === undefined ? "اعلام نشده" : Number(value).toLocaleString("fa-IR").replaceAll("٬", "/");
-}
-
-function toPersianDigits(value) {
-  const persian = "۰۱۲۳۴۵۶۷۸۹";
-  const arabic = "٠١٢٣٤٥٦٧٨٩";
-  return String(value)
-    .replace(/[0-9]/g, (digit) => persian[Number(digit)])
-    .replace(/[٠-٩]/g, (digit) => persian[arabic.indexOf(digit)]);
 }
 
 function DetailValue({ label, children }) {
@@ -65,7 +58,7 @@ function LoanDetail({ detail }) {
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
         <BankIdentity lenderName={detail.lenderName} />
-        <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
+        <strong title={toPersianDigits(detail.loanName)} aria-label={toPersianDigits(detail.loanName)}>{toPersianDigits(detail.loanName)}</strong>
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
         <DetailGroup>
@@ -77,12 +70,12 @@ function LoanDetail({ detail }) {
           <DetailValue label="حداکثر زمان بازپرداخت">{detail.maxRepaymentMonths === null ? "اعلام نشده" : `${formatNumber(detail.maxRepaymentMonths)} ماه`}</DetailValue>
         </DetailGroup>
         <DetailGroup>
-          <DetailValue label="نیاز به سپرده">{detail.depositRequired || "اعلام نشده"}</DetailValue>
+          <DetailValue label="نیاز به سپرده">{toPersianDigits(detail.depositRequired || "اعلام نشده")}</DetailValue>
           <DetailValue label="مدت زمان خواب سپرده">{detail.depositHoldingMonths === null ? "اعلام نشده" : `${formatNumber(detail.depositHoldingMonths)} ماه`}</DetailValue>
         </DetailGroup>
         <DetailGroup>
-          <DetailValue label="نوع ضمانت">{detail.guaranteeType || "اعلام نشده"}</DetailValue>
-          <DetailValue label="حساب سپرده لازم">{detail.requiredDepositAccount || "اعلام نشده"}</DetailValue>
+          <DetailValue label="نوع ضمانت">{toPersianDigits(detail.guaranteeType || "اعلام نشده")}</DetailValue>
+          <DetailValue label="حساب سپرده لازم">{toPersianDigits(detail.requiredDepositAccount || "اعلام نشده")}</DetailValue>
         </DetailGroup>
       </div>
     </article>

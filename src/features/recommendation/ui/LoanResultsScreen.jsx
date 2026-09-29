@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import BankIdentity from "../../loan-details/BankIdentity.jsx";
 import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
+import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
+import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -71,12 +73,13 @@ function ServingLoanCard({ recommendation, onDetails }) {
 
   const detail = state.detail;
   const hasScore = typeof recommendation.compatibilityScore === "number";
+  const compatibilityBand = compatibilityBandForScore(recommendation.compatibilityScore);
 
   return (
-    <article className="hp-loan-result-card hp-serving-loan-card">
+    <article className="hp-loan-result-card hp-serving-loan-card" data-compatibility-band={compatibilityBand || undefined}>
       <header className="hp-loan-result-head">
         <BankIdentity lenderName={recommendation.lenderName} />
-        <strong title={recommendation.loanName} aria-label={recommendation.loanName}>{recommendation.loanName}</strong>
+        <strong title={toPersianDigits(recommendation.loanName)} aria-label={toPersianDigits(recommendation.loanName)}>{toPersianDigits(recommendation.loanName)}</strong>
       </header>
 
       <p className="hp-loan-match">

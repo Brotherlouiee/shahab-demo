@@ -1,4 +1,5 @@
 import { bankLogoAssetUrlForLender } from "./bankLogoAssetUrl.mjs";
+import { toPersianDigits } from "./toPersianDigits.mjs";
 
 /**
  * Keep the approved bank logo in a fixed box. The lender label has its own
@@ -6,13 +7,14 @@ import { bankLogoAssetUrlForLender } from "./bankLogoAssetUrl.mjs";
  */
 export default function BankIdentity({ lenderName }) {
   const logoUrl = bankLogoAssetUrlForLender(lenderName);
+  const displayLenderName = toPersianDigits(lenderName);
 
   return (
     <div className="hp-bank-identity">
       <span className="hp-bank-logo-box">
-        {logoUrl ? <img src={logoUrl} alt={lenderName} referrerPolicy="no-referrer" /> : null}
+        {logoUrl ? <img src={logoUrl} alt={displayLenderName} referrerPolicy="no-referrer" /> : null}
       </span>
-      <span className="hp-bank-name" title={lenderName} aria-label={lenderName}>«{lenderName}»</span>
+      <span className="hp-bank-name" title={displayLenderName} aria-label={displayLenderName}>«{displayLenderName}»</span>
     </div>
   );
 }

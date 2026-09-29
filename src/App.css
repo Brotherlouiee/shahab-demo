@@ -4749,6 +4749,33 @@ right: 16px;
   color: #000000;
 }
 
+/* The server owns the score. These colors only represent its displayed,
+   rounded percentage and intentionally do not apply to scoreless review cards. */
+.hp-loan-result-card[data-compatibility-band="blue"] {
+  --loan-accent: #0067ff;
+  border-color: #0067ff;
+}
+
+.hp-loan-result-card[data-compatibility-band="lime"] {
+  --loan-accent: #CFD238;
+  border-color: #CFD238;
+}
+
+.hp-loan-result-card[data-compatibility-band="orange"] {
+  --loan-accent: #F28943;
+  border-color: #F28943;
+}
+
+.hp-loan-result-card[data-compatibility-band="deep-orange"] {
+  --loan-accent: #FF2F00;
+  border-color: #FF2F00;
+}
+
+.hp-loan-result-card[data-compatibility-band="red"] {
+  --loan-accent: #FF0004;
+  border-color: #FF0004;
+}
+
 .hp-loan-result-head {
   position: relative;
   display: grid;

@@ -5,6 +5,7 @@ import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import BankIdentity from "./features/loan-details/BankIdentity.jsx";
 import LoanPercent from "./features/loan-details/LoanPercent.jsx";
+import { toPersianDigits } from "./features/loan-details/toPersianDigits.mjs";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
@@ -650,10 +651,6 @@ function UserSidebar({ isOpen, onClose, userName }) {
   );
 }
 
-function toPersianDigits(value) {
-  return String(value).replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
-}
-
 function formatOtpCountdown(seconds) {
   const minutes = Math.floor(seconds / 60);
   const rest = seconds % 60;
@@ -960,7 +957,7 @@ function LoanComparisonResultCard({ detail, metric }) {
   return (
     <article className="hp-compare-result-card">
       <BankIdentity lenderName={detail.lenderName} />
-      <strong title={detail.loanName} aria-label={detail.loanName}>{detail.loanName}</strong>
+      <strong title={toPersianDigits(detail.loanName)} aria-label={toPersianDigits(detail.loanName)}>{toPersianDigits(detail.loanName)}</strong>
       <p>
         <span>{metric.title}</span>
         <b>{metric.value(detail)}</b>
@@ -1062,7 +1059,7 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
       </section>
 
       <div className="hp-compare-result-bottom-bar">
-        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0] || "")}>توضیح نتیجه</button>
+        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0] || "")}>تحلیل با هوش مصنوعی</button>
       </div>
     </main>
   );
@@ -2399,12 +2396,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
                   onChange={(event) => handlePersonalInfoChange("income", event.target.value)}
                 >
                   <option value=""></option>
-                  <option value="up-to-22">تا 22 میلیون تومان</option>
-                  <option value="22-to-50">22 تا 50 میلیون تومان</option>
-                  <option value="50-to-80">50 تا 80 میلیون تومان</option>
-                  <option value="80-to-120">80 تا 120 میلیون تومان</option>
-                  <option value="120-to-160">120 تا 160 میلیون تومان</option>
-                  <option value="over-160">بیش از 160 میلیون تومان</option>
+                  <option value="up-to-22">تا ۲۲ میلیون تومان</option>
+                  <option value="22-to-50">۲۲ تا ۵۰ میلیون تومان</option>
+                  <option value="50-to-80">۵۰ تا ۸۰ میلیون تومان</option>
+                  <option value="80-to-120">۸۰ تا ۱۲۰ میلیون تومان</option>
+                  <option value="120-to-160">۱۲۰ تا ۱۶۰ میلیون تومان</option>
+                  <option value="over-160">بیش از ۱۶۰ میلیون تومان</option>
                 </select>
               </span>
             </label>
