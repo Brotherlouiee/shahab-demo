@@ -131,6 +131,9 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
+  await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expectLogoOffsets(page.locator(".hp-loan-detail-card"), shortNameLogoOffset);
   const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(declaredInterestParts[0]).toBeLessThan(declaredInterestParts[1]);
