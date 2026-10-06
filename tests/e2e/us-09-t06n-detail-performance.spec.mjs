@@ -38,3 +38,13 @@ for (const viewport of [
     expect(geometry[1]).toBeLessThan(geometry[0]);
   });
 }
+
+
+test("refresh never renders the removed legacy mock page", async ({ page }) => {
+  await page.goto("/");
+  await page.reload();
+
+  for (const legacyText of ["محاسبه وام شهاب", "طرح نیک وام", "ثبت درخواست وام بانکی"]) {
+    await expect(page.getByText(legacyText, { exact: true })).toHaveCount(0);
+  }
+});

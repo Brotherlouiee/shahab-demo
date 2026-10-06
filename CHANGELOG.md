@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T06Q:** fallback static صفحهٔ mock از `index.html` حذف شد؛ `#root` پیش از mount React خالی است و آزمون واحد و E2E refresh، نبود متن‌های صفحهٔ جعلی را قفل می‌کنند. UI فعال، داده، API، score و استقرار تغییری نکردند.
+
 - **US-09.T06P:** صفحهٔ mock قدیمیِ خارج از runtime حذف شد تا refresh هرگز UI ساختگی نمایش ندهد؛ قاب CTA جزئیات با ارتفاع صریح ۱۱۷px و فاصله‌های قطعی ۳۵/۴۸/۳۴px ساخته و در E2E اندازه‌گیری شد.
 
 
