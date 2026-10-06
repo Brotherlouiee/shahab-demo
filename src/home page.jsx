@@ -1653,7 +1653,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   useEffect(() => {
     replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult);
-  }, [questionnaireSessionId, recommendationResult]);
+  }, [questionnaireSessionId, recommendationResult, routePath]);
 
   useEffect(() => {
     const routeState = getQuestionnaireRouteState(window.location.pathname);
