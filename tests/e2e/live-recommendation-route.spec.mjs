@@ -641,13 +641,22 @@ async function expectScrollableBankFilter(page) {
 
 async function expectLoanSaveFeedback(page) {
   const save = page.getByRole("button", { name: "ذخیره وام میثاق ۲" });
+  const card = page.locator(".hp-serving-loan-card").filter({ hasText: "میثاق ۲" }).first();
   await expect(save).toHaveAttribute("aria-pressed", "false");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-linear\.png$/);
   await save.click();
   await expect(save).toHaveAttribute("aria-pressed", "true");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-bold\.png$/);
   const toast = page.getByText("وام مورد نظر با موفقیت ذخیره شد", { exact: true });
   await expect(toast).toBeVisible();
   await expect(toast).toHaveCSS("background-color", "rgb(191, 255, 233)");
+  const geometry = await Promise.all([toast.boundingBox(), card.boundingBox()]);
+  expect(geometry[0].y + geometry[0].height).toBeLessThanOrEqual(geometry[1].y);
   await page.waitForTimeout(2100);
+  await expect(toast).toHaveCount(0);
+  await save.click();
+  await expect(save).toHaveAttribute("aria-pressed", "false");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-linear\.png$/);
   await expect(toast).toHaveCount(0);
 }
 
