@@ -351,7 +351,9 @@ function getInitialViewFromPath(pathname) {
 function replaceRoute(pathname) {
   if (typeof window === "undefined") return;
   if (window.location.pathname === pathname) return;
-  window.history.pushState(null, "", pathname);
+  // Carry only the current browser-history entry forward; this preserves the
+  // active, opaque recommendation navigation through a detail-page refresh.
+  window.history.pushState(window.history.state, "", pathname);
 }
 
 const personalInfoCacheKeys = {
