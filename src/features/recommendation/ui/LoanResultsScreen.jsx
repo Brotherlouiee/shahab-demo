@@ -28,18 +28,8 @@ function formatMonths(value) {
 }
 
 function BookmarkSaveIcon({ filled }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.5A1.75 1.75 0 0 1 17 4.75V20l-5-2.9L7 20V4.75Z"
-        fill={filled ? "currentColor" : "none"}
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinejoin="round"
-      />
-      {!filled ? <path d="M12 7.6v4.8M9.6 10h4.8" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" /> : null}
-    </svg>
-  );
+  const assetUrl = filled ? "/ui-icons/save-bold.png" : "/ui-icons/save-linear.png";
+  return <img src={assetUrl} alt="" aria-hidden="true" />;
 }
 
 function FilterMenu({ label, value, selectedValue, options, onChange, scrollable = false }) {
@@ -151,14 +141,23 @@ export default function LoanResultsScreen({
 
   useEffect(() => () => window.clearTimeout(saveToastTimeoutRef.current), []);
 
-  const saveLoan = (loanId) => {
+  const toggleSavedLoan = (loanId) => {
+    const wasSaved = savedLoanIds.has(loanId);
+
     setSavedLoanIds((current) => {
       const next = new Set(current);
-      next.add(loanId);
+      if (wasSaved) next.delete(loanId);
+      else next.add(loanId);
       return next;
     });
-    setSavedToastLoanId(loanId);
+
     window.clearTimeout(saveToastTimeoutRef.current);
+    if (wasSaved) {
+      setSavedToastLoanId(null);
+      return;
+    }
+
+    setSavedToastLoanId(loanId);
     saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
   };
 
@@ -214,15 +213,15 @@ export default function LoanResultsScreen({
         {status === "ready" && !visibleItems.length ? <p className="hp-recommendation-result-state">برای این فیلتر نتیجه‌ای موجود نیست.</p> : null}
         {status === "ready" ? visibleItems.map((item) => (
           <Fragment key={item.loanId}>
+            {savedToastLoanId === item.loanId ? (
+              <p className="hp-loan-save-toast" role="status" aria-live="polite">وام مورد نظر با موفقیت ذخیره شد</p>
+            ) : null}
             <ServingLoanCard
               recommendation={item}
               onDetails={onDetails}
               isSaved={savedLoanIds.has(item.loanId)}
-              onSave={saveLoan}
+              onSave={toggleSavedLoan}
             />
-            {savedToastLoanId === item.loanId ? (
-              <p className="hp-loan-save-toast" role="status" aria-live="polite">وام مورد نظر با موفقیت ذخیره شد</p>
-            ) : null}
           </Fragment>
         )) : null}
       </section>
