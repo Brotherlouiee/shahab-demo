@@ -30,15 +30,36 @@ function assertDetailPayload(payload) {
   return { ...payload, bankLogoReference: normalizeBankLogoReference(payload.bankLogoReference) };
 }
 
-export async function fetchLoanDetails(loanId, { signal } = {}) {
-  if (!loanId || !loanId.trim()) {
-    throw new LoanDetailsApiError(400);
-  }
-  const response = await fetch(`${apiBaseUrl}/loans/${encodeURIComponent(loanId)}`, {
-    headers: { Accept: "application/json" },
-    signal,
+const detailCache = new Map();
+const detailsInFlight = new Map();
+
+function waitForDetail(promise, signal) {
+  if (!signal) return promise;
+  if (signal.aborted) return Promise.reject(new DOMException("Aborted", "AbortError"));
+  return new Promise((resolve, reject) => {
+    const abort = () => reject(new DOMException("Aborted", "AbortError"));
+    signal.addEventListener("abort", abort, { once: true });
+    promise.then(resolve, reject).finally(() => signal.removeEventListener("abort", abort));
   });
-  if (response.status === 404) return null;
-  if (!response.ok) throw new LoanDetailsApiError(response.status);
-  return assertDetailPayload(await response.json());
+}
+
+export async function fetchLoanDetails(loanId, { signal } = {}) {
+  if (!loanId || !loanId.trim()) throw new LoanDetailsApiError(400);
+  const cacheKey = loanId.trim();
+  if (detailCache.has(cacheKey)) return waitForDetail(Promise.resolve(detailCache.get(cacheKey)), signal);
+
+  let request = detailsInFlight.get(cacheKey);
+  if (!request) {
+    request = fetch(`${apiBaseUrl}/loans/${encodeURIComponent(cacheKey)}`, {
+      headers: { Accept: "application/json" },
+    }).then(async (response) => {
+      if (response.status === 404) return null;
+      if (!response.ok) throw new LoanDetailsApiError(response.status);
+      const detail = assertDetailPayload(await response.json());
+      detailCache.set(cacheKey, detail);
+      return detail;
+    }).finally(() => detailsInFlight.delete(cacheKey));
+    detailsInFlight.set(cacheKey, request);
+  }
+  return waitForDetail(request, signal);
 }

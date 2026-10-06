@@ -14,6 +14,7 @@ import {
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
+  QuestionnaireSessionApiError,
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
@@ -1841,7 +1842,30 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       }
       await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       return true;
-    } catch {
+    } catch (error) {
+      // An expired anonymous session must not put a blocking error card in the
+      // questionnaire or make the user re-enter answers already held in memory.
+      if (error instanceof QuestionnaireSessionApiError && error.status === 410) {
+        try {
+          const freshSession = await startQuestionnaireSession();
+          const replay = Object.entries(answers)
+            .map(([questionIndex, answerId]) => ({
+              question: getCanonicalQuestionForPrototypeIndex(Number(questionIndex)),
+              answerId,
+            }))
+            .filter(({ question }) => question);
+          const currentAnswer = replay.find(({ question }) => question.questionId === canonicalQuestion.questionId);
+          if (currentAnswer) currentAnswer.answerId = selectedOption;
+          else replay.push({ question: canonicalQuestion, answerId: selectedOption });
+          for (const { question, answerId } of replay) {
+            await saveQuestionnaireAnswer(freshSession.sessionId, question.questionId, answerId);
+          }
+          setQuestionnaireSessionId(freshSession.sessionId);
+          return true;
+        } catch {
+          // Fall through to the ordinary recoverable transport message.
+        }
+      }
       setQuestionnaireSessionError(
         "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
       );

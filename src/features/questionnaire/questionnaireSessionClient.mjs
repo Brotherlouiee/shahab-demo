@@ -7,8 +7,16 @@
  */
 const apiBaseUrl = import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1";
 
+export class QuestionnaireSessionApiError extends Error {
+  constructor(code, status) {
+    super(code);
+    this.name = "QuestionnaireSessionApiError";
+    this.status = status;
+  }
+}
+
 async function parseResponse(response, failureCode) {
-  if (!response.ok) throw new Error(failureCode);
+  if (!response.ok) throw new QuestionnaireSessionApiError(failureCode, response.status);
   return response.json();
 }
 
