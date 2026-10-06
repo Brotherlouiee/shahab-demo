@@ -5022,14 +5022,14 @@ right: 16px;
 }
 
 /* This is a viewport action bar, not a sticky element inside the detail
-   document. Its fixed height is reserved below so no published condition is
-   hidden behind it. */
+   document. The sibling spacer below creates genuine scroll clearance after
+   every conditions list, including lists taller than the inherited page. */
 .hp-loan-details-page {
-  /* box-sizing:border-box would otherwise consume this clearance inside the
-     inherited min-height and leave no extra scroll range. */
-  min-height: calc(max(100dvh, 904px) + 166px);
   box-sizing: border-box;
-  padding-bottom: 166px;
+}
+
+.hp-loan-details-footer-spacer {
+  height: 166px;
 }
 
 .hp-loan-details-analysis-bar {
