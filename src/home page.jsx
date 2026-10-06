@@ -25,16 +25,24 @@ import sendIconUrl from "../assets/send.svg";
 import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
 
+// These images belong only to the five-second analysis screen. Loading them
+// eagerly delayed every route, including results and loan details.
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
-  eager: true,
   import: "default",
   query: "?url",
 });
-const analysisLogoUrls = [...new Set(
-  Object.entries(bankLogoModules)
-    .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
-    .map(([, logoPath]) => logoPath)
-)];
+let analysisLogoPromise;
+function loadAnalysisLogos() {
+  analysisLogoPromise ??= Promise.all(
+    Object.entries(bankLogoModules)
+      .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+      .map(([, loadLogo]) => loadLogo()),
+  ).then((urls) => [...new Set(urls)]).catch(() => {
+    analysisLogoPromise = undefined;
+    return [];
+  });
+  return analysisLogoPromise;
+}
 
 const amounts = [
   "تا ۵۰ میلیون",
@@ -1166,6 +1174,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
+  // One in-flight request is sufficient for one anonymous questionnaire session.
+  // The guard prevents a rerender from issuing a duplicate recommendation request.
+  const recommendationRequestRef = useRef(false);
+  const [analysisLogoUrls, setAnalysisLogoUrls] = useState([]);
   const [recommendationResult, setRecommendationResult] = useState(() => initialRecommendationHistory?.result || null);
   const [recommendationStatus, setRecommendationStatus] = useState(() => initialRecommendationHistory?.result ? "ready" : "idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
@@ -1748,13 +1760,25 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }, [isAnalyzingLoans]);
 
   useEffect(() => {
-    if (loanResultView !== "results" || recommendationResult || recommendationStatus === "loading") return;
+    // Start the real server request during the existing five-second spinner.
+    // It still remains a server-owned recommendation and no artificial extra
+    // wait is added after the countdown.
+    if ((!isAnalyzingLoans && loanResultView !== "results") || recommendationResult || recommendationStatus !== "idle") return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
     loadRecommendationResult();
-  }, [loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+  }, [isAnalyzingLoans, loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+
+  useEffect(() => {
+    if (!isAnalyzingLoans) return undefined;
+    let cancelled = false;
+    loadAnalysisLogos().then((urls) => {
+      if (!cancelled) setAnalysisLogoUrls(urls);
+    });
+    return () => { cancelled = true; };
+  }, [isAnalyzingLoans]);
 
   function getNearestStageIndex(offset) {
     return stageOffsets.reduce((nearestIndex, currentOffset, index) => {
@@ -1828,17 +1852,23 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   async function loadRecommendationResult() {
+    if (recommendationRequestRef.current) return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
+    recommendationRequestRef.current = true;
     setRecommendationStatus("loading");
     try {
       const result = await fetchRecommendationResult(questionnaireSessionId);
       setRecommendationResult(result);
       setRecommendationStatus("ready");
     } catch {
+      // Retry is deliberately user-triggered; an effect must not loop after a
+      // transient failure and keep the page in a permanently busy state.
       setRecommendationStatus("error");
+    } finally {
+      recommendationRequestRef.current = false;
     }
   }
 

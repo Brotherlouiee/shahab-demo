@@ -83,6 +83,7 @@ function LoanDetail({ detail, onAiAnalysis }) {
     <section className="hp-loan-details-conditions">
       {detail.conditions.length ? <ul>{detail.conditions.map((condition, index) => <li key={`${index}-${condition}`}>{toPersianDigits(condition)}</li>)}</ul> : <p>شرط یا مدرک تأییدشده‌ای برای نمایش ثبت نشده است.</p>}
     </section>
+    <div className="hp-loan-details-footer-spacer" aria-hidden="true" />
     <div className="hp-loan-details-analysis-bar">
       <button type="button" onClick={() => onAiAnalysis?.(detail.loanId)}>تحلیل با هوش مصنوعی</button>
     </div>
