@@ -68,3 +68,5 @@ conditions. See `docs/ui/loan-route-inventory.md` for the complete route map.
 `QuestionnaireScreen` starts its existing recommendation client during analysis rather than after the five-second countdown. Server-owned responses and explicit error recovery stay within the existing presentation boundary. Analysis-only logo modules are lazy imports; the detail footer is CSS positioning with reserved content space. No backend, scoring, data, API or dependency boundary changes.
 
 `index.html` loads the existing external font stylesheet without blocking page initialization; the font family/provider and noscript fallback remain the same. Browser verification deliberately delays the font request.
+
+`questionnaireSessionClient.mjs` exposes a safe typed HTTP status error. Presentation distinguishes session expiry from transient failures and owns explicit restart; it does not extend server TTL or replay previous answers automatically.

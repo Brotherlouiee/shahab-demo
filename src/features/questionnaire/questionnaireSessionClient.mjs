@@ -7,8 +7,17 @@
  */
 const apiBaseUrl = import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1";
 
+/** Preserve safe HTTP status so expiry is distinct from a transient outage. */
+export class QuestionnaireSessionApiError extends Error {
+  constructor(status, failureCode) {
+    super(failureCode);
+    this.name = "QuestionnaireSessionApiError";
+    this.status = status;
+  }
+}
+
 async function parseResponse(response, failureCode) {
-  if (!response.ok) throw new Error(failureCode);
+  if (!response.ok) throw new QuestionnaireSessionApiError(response.status, failureCode);
   return response.json();
 }
 

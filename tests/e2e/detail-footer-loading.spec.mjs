@@ -136,3 +136,35 @@ test("questionnaire stays usable while the external font stylesheet is delayed",
     release();
   }
 });
+
+
+test("expired history session offers an explicit fresh questionnaire restart", async ({ page }) => {
+  const writes=[];let starts=0;
+  await page.addInitScript(({ result }) => {
+    history.replaceState({ shahabRecommendation: { sessionId: "expired-session", result } }, "", location.href);
+  }, { result: response });
+  await page.route("**/api/v1/questionnaire/sessions", route => {
+    starts++;
+    return route.fulfill({ status: 201, json: { sessionId: "fresh-session", answers: {} } });
+  });
+  await page.route("**/api/v1/questionnaire/sessions/*/answers/*", route => {
+    writes.push(route.request().url());
+    return route.request().url().includes("expired-session")
+      ? route.fulfill({ status: 410, json: { detail: "expired" } })
+      : route.fulfill({ json: { sessionId: "fresh-session", answers: {} } });
+  });
+  await page.goto("/question/3");
+  await page.getByRole("radio").first().click();
+  await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  await expect(page.getByRole("alert")).toContainText("منقضی شده");
+  await expect(page.getByRole("button", { name: "پاسخ به سوال بعد" })).toBeDisabled();
+  await page.getByRole("button", { name: "شروع دوباره پرسشنامه" }).click();
+  await expect(page.getByRole("radio", { checked: true })).toHaveCount(0);
+  expect(await page.evaluate(() => history.state?.shahabRecommendation)).toBeUndefined();
+  await page.getByRole("radio").first().click();
+  await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  await expect(page).toHaveURL(/\/question\/4$/);
+  expect(starts).toBe(1);
+  expect(writes).toHaveLength(2);
+  expect(writes[1]).toContain("fresh-session/answers/Q1");
+});

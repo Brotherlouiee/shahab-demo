@@ -42,3 +42,7 @@ Result, low-match, needs-review, comparison-selection, comparison-result and det
 The detail analysis button stays at the viewport bottom, including safe-area padding. Detail content reserves scroll space so the final published condition remains reachable. The existing five-second analysis countdown runs concurrently with the server recommendation request; results continue to fail closed while a slower response is pending. A single-flight guard prevents duplicate requests, errors wait for explicit retry, and spinner logo imports load only when analysis starts. No recommendation response is manufactured or re-scored. Local timings and desktop/mobile evidence are recorded in `docs/evidence/us-09-t06m/` and `docs/progress/us-09-t06m.md`.
 
 The external Vazirmatn stylesheet uses nonblocking loading with the existing fallback and a noscript stylesheet. A browser test holds that request open and still completes question selection; slow font delivery cannot block the questionnaire JavaScript.
+
+### T06M expired-session recovery
+
+HTTP 410 from an answer write is an expired-session state, not a generic connection error. The next button stops reusing that session; an explicit restart button clears the active history result, React answers/session/result and returns to Q1. The next answer creates a new server session. Transient HTTP failures preserve the current answers for retry. Expired answers are never silently resubmitted, and backend TTL is unchanged.

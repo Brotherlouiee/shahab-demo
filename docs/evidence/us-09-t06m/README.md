@@ -18,3 +18,7 @@ These measurements use the real local Docker API through port 4173 and synthetic
 The screenshots show the actual published loan detail and bottom CTA at desktop/mobile sizes, including the final condition after scrolling. The controlled browser tests also hold a recommendation response open past the countdown, return an error until explicit retry, and hold the external font stylesheet open while the questionnaire stays usable.
 
 Known limits: cold Docker/Vite and API latency remain environment-dependent; the five-second countdown is intentionally preserved. A very slow server still shows the honest loading state. Font loading can briefly use the existing fallback. No dependency, data, backend, provider or deployment changes are included.
+
+## Expired-questionnaire follow-up
+
+`questionnaire-recovery-live.json` verifies the real local Q1 flow: new session HTTP 201, canonical answer HTTP 200, then `/question/4`. A separate controlled browser test starts with an expired history session and HTTP 410, verifies the explicit restart UI, clears old state and saves Q1 in a fresh session. Backend retention remains 30 minutes; no expired responses are silently replayed.

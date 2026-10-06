@@ -14,6 +14,7 @@ import {
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
+  QuestionnaireSessionApiError,
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
@@ -1149,6 +1150,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   // identifier are deliberately absent from URLs and browser storage.
   const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
   const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
+  const [isQuestionnaireSessionExpired, setIsQuestionnaireSessionExpired] = useState(false);
   const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "",
@@ -1822,6 +1824,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   async function persistCanonicalQuestionnaireAnswer() {
     if (!canonicalQuestion) return true;
+    if (isQuestionnaireSessionExpired || isSavingQuestionnaireAnswer) return false;
 
     setIsSavingQuestionnaireAnswer(true);
     setQuestionnaireSessionError("");
@@ -1834,9 +1837,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       }
       await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       return true;
-    } catch {
-      setQuestionnaireSessionError(
-        "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
+    } catch (error) {
+      const expired = error instanceof QuestionnaireSessionApiError && error.status === 410;
+      setIsQuestionnaireSessionExpired(expired);
+      setQuestionnaireSessionError(expired
+        ? "نشست پرسشنامه منقضی شده است. برای ثبت پاسخ‌ها، پرسشنامه را دوباره شروع کنید."
+        : "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
       );
       return false;
     } finally {
@@ -1986,6 +1992,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   function handleStartQuestionnaire() {
     clearActiveRecommendationHistoryState();
+    // A new questionnaire must never reuse an old result's expiring session.
+    setQuestionnaireSessionId("");
+    setQuestionnaireSessionError("");
+    setIsQuestionnaireSessionExpired(false);
+    setAnswers({});
+    setIsAnalyzingLoans(false);
     setRecommendationResult(null);
     setRecommendationStatus("idle");
     setLoanResultView("");
@@ -2570,13 +2582,16 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         {questionnaireSessionError ? (
           <p className="hp-question-session-error" role="alert">
             {questionnaireSessionError}
+            {isQuestionnaireSessionExpired ? (
+              <button type="button" onClick={handleStartQuestionnaire}>شروع دوباره پرسشنامه</button>
+            ) : null}
           </p>
         ) : null}
         <div className="hp-question-actions">
           <button
             className={`hp-next-question ${isPersonalInfoQuestion ? "is-personal-confirm" : ""} ${isOtpQuestion ? "is-loan-otp-submit" : ""}`}
             type="button"
-            disabled={!canProceed}
+            disabled={!canProceed || isQuestionnaireSessionExpired}
             onClick={handleNextQuestion}
           >
             {isPersonalInfoQuestion ? "تایید و جستجوی وام" : "پاسخ به سوال بعد"}

@@ -5893,3 +5893,15 @@ right: 16px;
 .hp-loan-result-card .hp-loan-docs-link:focus-visible {
   color: #0067ff !important;
 }
+
+.hp-question-session-error button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 7px;
+  background: #00b87a;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+}

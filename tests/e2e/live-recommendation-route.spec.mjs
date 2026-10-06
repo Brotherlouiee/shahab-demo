@@ -224,6 +224,8 @@ async function expectLogoOffsets(cards, expectedOffset) {
 
 
 test("local profile, demonstration OTP and five-second spinner preserve the fail-closed result boundary", async ({ page }) => {
+  await page.clock.install({ time: new Date("2026-10-06T12:00:00Z") });
+  await page.clock.pauseAt(new Date("2026-10-06T12:00:01Z"));
   await page.goto("/personal-info");
 
   const personalInputs = page.locator(".hp-personal-info-form input");
@@ -249,8 +251,9 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
   await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
   await expect(page).toHaveURL(/\/analysis$/);
   await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۵");
-  await page.waitForTimeout(1100);
+  await page.clock.runFor(1100);
   await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۴");
+  await page.clock.runFor(4000);
   await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
   await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
 
