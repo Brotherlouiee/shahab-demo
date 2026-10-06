@@ -19,8 +19,14 @@ for (const viewport of [
     await page.goto("/loan-details?loanId=t06n-footer-loan");
     const bar = page.locator(".hp-loan-details-analysis-bar");
     await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
-    const initial = await bar.evaluate((element) => ({ bottom: element.getBoundingClientRect().bottom, viewport: window.innerHeight }));
-    expect(Math.abs(initial.bottom - initial.viewport)).toBeLessThanOrEqual(1);
+    const frame = await Promise.all([
+      bar.evaluate((element) => ({ top: element.getBoundingClientRect().top, bottom: element.getBoundingClientRect().bottom, height: element.getBoundingClientRect().height, viewport: window.innerHeight })),
+      page.getByRole("button", { name: "تحلیل با هوش مصنوعی" }).evaluate((element) => ({ top: element.getBoundingClientRect().top, bottom: element.getBoundingClientRect().bottom })),
+    ]);
+    expect(Math.abs(frame[0].bottom - frame[0].viewport)).toBeLessThanOrEqual(1);
+    expect(frame[0].height).toBeCloseTo(117, 0);
+    expect(frame[1].top - frame[0].top).toBeCloseTo(35, 0);
+    expect(frame[0].viewport - frame[1].bottom).toBeCloseTo(34, 0);
 
     await page.locator(".hp-questionnaire-shell").evaluate((shell) => { shell.scrollTop = shell.scrollHeight; });
     const finalCondition = page.locator(".hp-loan-details-conditions li").last();
