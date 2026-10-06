@@ -5021,15 +5021,22 @@ right: 16px;
   text-align: right;
 }
 
+.hp-loan-details-page {
+  box-sizing: border-box;
+  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+}
+
 .hp-loan-details-analysis-bar {
-  position: sticky;
+  position: fixed;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  width: min(100%, 391px);
-  margin: 26px auto 0;
+  width: min(100vw, 391px);
+  margin: 0;
   background: #ffffff;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.18);
-  padding: 22px 11px 20px;
+  padding: 16px 11px env(safe-area-inset-bottom, 0px);
   box-sizing: border-box;
 }
 

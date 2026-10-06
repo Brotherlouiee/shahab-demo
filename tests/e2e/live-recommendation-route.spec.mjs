@@ -61,6 +61,7 @@ test("canonical questionnaire reaches the active real-result route and published
   } }));
   await page.goto("/question/3");
   for (const question of questionnaire.questions) {
+    await expect(page.getByRole("heading", { name: question.prompt.replace(/[0-9]/g, digit => String.fromCharCode(0x6f0 + Number(digit))).replace(/\s+/g, " ").trim() })).toBeVisible();
     await page.getByRole("radio").first().click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   }

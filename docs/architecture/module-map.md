@@ -62,3 +62,9 @@ conditions. See `docs/ui/loan-route-inventory.md` for the complete route map.
 ## US-09.T05B serving boundaries
 
 `backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py` پورت read snapshot را پیاده می‌کند؛ engine/application ORM نمی‌خوانند. `backend/app/loans/infrastructure/sqlalchemy_catalogue.py` تنها active published members و detail facts همان version را می‌خواند. `backend/app/loans/infrastructure/backfill_serving_facts.py` projection رسمی T05A را با manifest قفل‌شده تکمیل می‌کند. اتصال session و endpoint در T06 و استقرار پایدار در T07 است.
+
+## US-09.T06M loading boundary
+
+`QuestionnaireScreen` starts its existing recommendation client during analysis rather than after the five-second countdown. Server-owned responses and explicit error recovery stay within the existing presentation boundary. Analysis-only logo modules are lazy imports; the detail footer is CSS positioning with reserved content space. No backend, scoring, data, API or dependency boundary changes.
+
+`index.html` loads the existing external font stylesheet without blocking page initialization; the font family/provider and noscript fallback remain the same. Browser verification deliberately delays the font request.

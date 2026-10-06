@@ -26,15 +26,21 @@ import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
 
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
-  eager: true,
   import: "default",
   query: "?url",
 });
-const analysisLogoUrls = [...new Set(
-  Object.entries(bankLogoModules)
-    .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
-    .map(([, logoPath]) => logoPath)
-)];
+let analysisLogoPromise;
+function loadAnalysisLogos() {
+  analysisLogoPromise ??= Promise.all(
+    Object.entries(bankLogoModules)
+      .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+      .map(([, loadLogo]) => loadLogo()),
+  ).then((urls) => [...new Set(urls)]).catch(() => {
+    analysisLogoPromise = undefined;
+    return [];
+  });
+  return analysisLogoPromise;
+}
 
 const amounts = [
   "تا ۵۰ میلیون",
@@ -1166,6 +1172,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
+  const recommendationRequestRef = useRef(false);
+  const [analysisLogoUrls, setAnalysisLogoUrls] = useState([]);
   const [recommendationResult, setRecommendationResult] = useState(() => initialRecommendationHistory?.result || null);
   const [recommendationStatus, setRecommendationStatus] = useState(() => initialRecommendationHistory?.result ? "ready" : "idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
@@ -1748,13 +1756,22 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }, [isAnalyzingLoans]);
 
   useEffect(() => {
-    if (loanResultView !== "results" || recommendationResult || recommendationStatus === "loading") return;
+    if ((!isAnalyzingLoans && loanResultView !== "results") || recommendationResult || recommendationStatus !== "idle") return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
     loadRecommendationResult();
-  }, [loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+  }, [isAnalyzingLoans, loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+
+  useEffect(() => {
+    if (!isAnalyzingLoans) return;
+    let cancelled = false;
+    loadAnalysisLogos().then((urls) => {
+      if (!cancelled) setAnalysisLogoUrls(urls);
+    });
+    return () => { cancelled = true; };
+  }, [isAnalyzingLoans]);
 
   function getNearestStageIndex(offset) {
     return stageOffsets.reduce((nearestIndex, currentOffset, index) => {
@@ -1828,10 +1845,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   async function loadRecommendationResult() {
+    if (recommendationRequestRef.current) return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
+    recommendationRequestRef.current = true;
     setRecommendationStatus("loading");
     try {
       const result = await fetchRecommendationResult(questionnaireSessionId);
@@ -1839,6 +1858,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       setRecommendationStatus("ready");
     } catch {
       setRecommendationStatus("error");
+    } finally {
+      recommendationRequestRef.current = false;
     }
   }
 

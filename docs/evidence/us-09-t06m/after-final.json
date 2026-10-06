@@ -1,0 +1,113 @@
+{
+  "timings": [
+    {
+      "path": "/question/3",
+      "ms": 2824,
+      "at": 2912
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions",
+      "ms": 340,
+      "at": 6115
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q1",
+      "ms": 291,
+      "at": 6412
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q2",
+      "ms": 406,
+      "at": 7187
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q3",
+      "ms": 308,
+      "at": 8050
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q4",
+      "ms": 340,
+      "at": 8549
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q5",
+      "ms": 470,
+      "at": 9168
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q6",
+      "ms": 242,
+      "at": 9968
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S7",
+      "ms": 298,
+      "at": 10407
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S8",
+      "ms": 603,
+      "at": 11161
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S10",
+      "ms": 514,
+      "at": 12145
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S13",
+      "ms": 531,
+      "at": 13192
+    },
+    {
+      "path": "/api/v1/recommendations",
+      "ms": 2858,
+      "at": 20024
+    },
+    {
+      "path": "/api/v1/loans/d5074946-7a0a-442a-baae-55ceac8ccd7f",
+      "ms": 407,
+      "at": 22688
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 812,
+      "at": 24076
+    },
+    {
+      "path": "/api/v1/loans/efaacbde-e875-4a10-b9eb-9283450ec269",
+      "ms": 553,
+      "at": 26417
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 575,
+      "at": 26435
+    }
+  ],
+  "firstQuestionReadyMs": 5627,
+  "initialAnalysisLogoRequests": 0,
+  "recommendations": {
+    "status": 200,
+    "dataVersion": "official-598052635954-1.1.0",
+    "configVersion": "1.1.0",
+    "ranked": 7,
+    "low": 81,
+    "needsReview": 14
+  },
+  "analysisToResultsMs": 5497,
+  "detailsStatus": 200,
+  "footer": {
+    "bottom": 720,
+    "viewport": 720,
+    "position": "fixed"
+  },
+  "mobileFooter": {
+    "bottom": 844,
+    "viewport": 844
+  },
+  "comparedLoans": 2,
+  "pageErrors": [],
+  "passed": true
+}
