@@ -1,0 +1,104 @@
+{
+  "timings": [
+    {
+      "path": "/question/3",
+      "ms": 2350,
+      "at": 2409
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions",
+      "ms": 294,
+      "at": 5338
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q1",
+      "ms": 270,
+      "at": 5614
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q2",
+      "ms": 188,
+      "at": 6210
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q3",
+      "ms": 211,
+      "at": 6565
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q4",
+      "ms": 199,
+      "at": 6924
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q5",
+      "ms": 283,
+      "at": 7341
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q6",
+      "ms": 284,
+      "at": 7821
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S7",
+      "ms": 395,
+      "at": 8409
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S8",
+      "ms": 388,
+      "at": 8912
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S10",
+      "ms": 385,
+      "at": 9476
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S13",
+      "ms": 487,
+      "at": 10584
+    },
+    {
+      "path": "/api/v1/recommendations",
+      "ms": 1826,
+      "at": 14070
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 524,
+      "at": 18699
+    },
+    {
+      "path": "/api/v1/loans/efaacbde-e875-4a10-b9eb-9283450ec269",
+      "ms": 468,
+      "at": 20867
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 473,
+      "at": 20870
+    }
+  ],
+  "firstQuestionReadyMs": 4923,
+  "initialAnalysisLogoRequests": 0,
+  "recommendations": {
+    "status": 200,
+    "dataVersion": "official-598052635954-1.1.0",
+    "configVersion": "1.1.0",
+    "ranked": 7,
+    "low": 81,
+    "needsReview": 14
+  },
+  "analysisToResultsMs": 5347,
+  "detailsStatus": 200,
+  "footer": {
+    "bottom": 720,
+    "viewport": 720,
+    "position": "fixed"
+  },
+  "comparedLoans": 2,
+  "pageErrors": [],
+  "passed": true
+}

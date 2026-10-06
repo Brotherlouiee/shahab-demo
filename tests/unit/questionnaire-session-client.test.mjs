@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  QuestionnaireSessionApiError,
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "../../src/features/questionnaire/questionnaireSessionClient.mjs";
@@ -30,4 +31,13 @@ test("writes a canonical answer in JSON rather than a query string", async () =>
   assert.equal(calls[0].options.method, "PUT");
   assert.equal(calls[0].options.body, JSON.stringify({ answerId: "Q1.incomeInvestment" }));
   assert.equal(calls[0].url.includes("?"), false);
+});
+
+
+test("preserves HTTP expiry and transient failure status without exposing response bodies", async () => {
+  for (const status of [410, 503]) {
+    const fetchImpl = async () => ({ ok: false, status, json: async () => { throw Error("must not read error body"); } });
+    await assert.rejects(saveQuestionnaireAnswer("opaque", "Q1", "canonical", fetchImpl), error => error instanceof QuestionnaireSessionApiError && error.status === status);
+    await assert.rejects(startQuestionnaireSession(fetchImpl), error => error instanceof QuestionnaireSessionApiError && error.status === status);
+  }
 });

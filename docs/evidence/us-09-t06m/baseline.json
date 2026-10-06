@@ -1,0 +1,101 @@
+{
+  "timings": [
+    {
+      "path": "/question/3",
+      "ms": 50,
+      "at": 289
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions",
+      "ms": 1937,
+      "at": 5644
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q1",
+      "ms": 1912,
+      "at": 7549
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q2",
+      "ms": 643,
+      "at": 8516
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q3",
+      "ms": 1130,
+      "at": 10042
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q4",
+      "ms": 504,
+      "at": 11120
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q5",
+      "ms": 747,
+      "at": 12353
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/Q6",
+      "ms": 547,
+      "at": 13152
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S7",
+      "ms": 767,
+      "at": 14419
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S8",
+      "ms": 434,
+      "at": 15216
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S10",
+      "ms": 851,
+      "at": 16574
+    },
+    {
+      "path": "/api/v1/questionnaire/sessions/[redacted]/answers/S13",
+      "ms": 622,
+      "at": 17325
+    },
+    {
+      "path": "/api/v1/recommendations",
+      "ms": 798,
+      "at": 27630
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 292,
+      "at": 28601
+    },
+    {
+      "path": "/api/v1/loans/efaacbde-e875-4a10-b9eb-9283450ec269",
+      "ms": 1875,
+      "at": 31579
+    },
+    {
+      "path": "/api/v1/loans/8a03810d-a672-4235-9a98-ac3e0547f6a0",
+      "ms": 2446,
+      "at": 32151
+    }
+  ],
+  "recommendations": {
+    "status": 200,
+    "dataVersion": "official-598052635954-1.1.0",
+    "configVersion": "1.1.0",
+    "ranked": 7,
+    "low": 81,
+    "needsReview": 14
+  },
+  "detailsStatus": 200,
+  "footer": {
+    "bottom": 1272.375,
+    "viewport": 720,
+    "position": "sticky"
+  },
+  "comparedLoans": 2,
+  "pageErrors": [],
+  "passed": true
+}

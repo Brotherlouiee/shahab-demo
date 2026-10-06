@@ -14,6 +14,7 @@ import {
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
+  QuestionnaireSessionApiError,
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
@@ -26,15 +27,21 @@ import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
 
 const bankLogoModules = import.meta.glob("../assets/iranian-bank-logos/*.{png,svg}", {
-  eager: true,
   import: "default",
   query: "?url",
 });
-const analysisLogoUrls = [...new Set(
-  Object.entries(bankLogoModules)
-    .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
-    .map(([, logoPath]) => logoPath)
-)];
+let analysisLogoPromise;
+function loadAnalysisLogos() {
+  analysisLogoPromise ??= Promise.all(
+    Object.entries(bankLogoModules)
+      .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+      .map(([, loadLogo]) => loadLogo()),
+  ).then((urls) => [...new Set(urls)]).catch(() => {
+    analysisLogoPromise = undefined;
+    return [];
+  });
+  return analysisLogoPromise;
+}
 
 const amounts = [
   "تا ۵۰ میلیون",
@@ -1143,6 +1150,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   // identifier are deliberately absent from URLs and browser storage.
   const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
   const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
+  const [isQuestionnaireSessionExpired, setIsQuestionnaireSessionExpired] = useState(false);
   const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "",
@@ -1166,6 +1174,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
+  const recommendationRequestRef = useRef(false);
+  const [analysisLogoUrls, setAnalysisLogoUrls] = useState([]);
   const [recommendationResult, setRecommendationResult] = useState(() => initialRecommendationHistory?.result || null);
   const [recommendationStatus, setRecommendationStatus] = useState(() => initialRecommendationHistory?.result ? "ready" : "idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
@@ -1748,13 +1758,22 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }, [isAnalyzingLoans]);
 
   useEffect(() => {
-    if (loanResultView !== "results" || recommendationResult || recommendationStatus === "loading") return;
+    if ((!isAnalyzingLoans && loanResultView !== "results") || recommendationResult || recommendationStatus !== "idle") return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
     loadRecommendationResult();
-  }, [loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+  }, [isAnalyzingLoans, loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+
+  useEffect(() => {
+    if (!isAnalyzingLoans) return;
+    let cancelled = false;
+    loadAnalysisLogos().then((urls) => {
+      if (!cancelled) setAnalysisLogoUrls(urls);
+    });
+    return () => { cancelled = true; };
+  }, [isAnalyzingLoans]);
 
   function getNearestStageIndex(offset) {
     return stageOffsets.reduce((nearestIndex, currentOffset, index) => {
@@ -1805,6 +1824,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   async function persistCanonicalQuestionnaireAnswer() {
     if (!canonicalQuestion) return true;
+    if (isQuestionnaireSessionExpired || isSavingQuestionnaireAnswer) return false;
 
     setIsSavingQuestionnaireAnswer(true);
     setQuestionnaireSessionError("");
@@ -1817,9 +1837,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       }
       await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       return true;
-    } catch {
-      setQuestionnaireSessionError(
-        "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
+    } catch (error) {
+      const expired = error instanceof QuestionnaireSessionApiError && error.status === 410;
+      setIsQuestionnaireSessionExpired(expired);
+      setQuestionnaireSessionError(expired
+        ? "نشست پرسشنامه منقضی شده است. برای ثبت پاسخ‌ها، پرسشنامه را دوباره شروع کنید."
+        : "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
       );
       return false;
     } finally {
@@ -1828,10 +1851,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   async function loadRecommendationResult() {
+    if (recommendationRequestRef.current) return;
     if (!questionnaireSessionId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
+    recommendationRequestRef.current = true;
     setRecommendationStatus("loading");
     try {
       const result = await fetchRecommendationResult(questionnaireSessionId);
@@ -1839,6 +1864,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       setRecommendationStatus("ready");
     } catch {
       setRecommendationStatus("error");
+    } finally {
+      recommendationRequestRef.current = false;
     }
   }
 
@@ -1965,6 +1992,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
 
   function handleStartQuestionnaire() {
     clearActiveRecommendationHistoryState();
+    // A new questionnaire must never reuse an old result's expiring session.
+    setQuestionnaireSessionId("");
+    setQuestionnaireSessionError("");
+    setIsQuestionnaireSessionExpired(false);
+    setAnswers({});
+    setIsAnalyzingLoans(false);
     setRecommendationResult(null);
     setRecommendationStatus("idle");
     setLoanResultView("");
@@ -2549,13 +2582,16 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         {questionnaireSessionError ? (
           <p className="hp-question-session-error" role="alert">
             {questionnaireSessionError}
+            {isQuestionnaireSessionExpired ? (
+              <button type="button" onClick={handleStartQuestionnaire}>شروع دوباره پرسشنامه</button>
+            ) : null}
           </p>
         ) : null}
         <div className="hp-question-actions">
           <button
             className={`hp-next-question ${isPersonalInfoQuestion ? "is-personal-confirm" : ""} ${isOtpQuestion ? "is-loan-otp-submit" : ""}`}
             type="button"
-            disabled={!canProceed}
+            disabled={!canProceed || isQuestionnaireSessionExpired}
             onClick={handleNextQuestion}
           >
             {isPersonalInfoQuestion ? "تایید و جستجوی وام" : "پاسخ به سوال بعد"}

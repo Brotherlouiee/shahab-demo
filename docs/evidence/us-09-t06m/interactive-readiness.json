@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/question/3",
+    "interactiveMs": 3430,
+    "allResourcesLoadedMs": 4572,
+    "navigation": {
+      "responseEnd": 2124,
+      "domContentLoaded": 3048,
+      "load": 4550
+    }
+  },
+  {
+    "path": "/loan-details?loanId=8a03810d-a672-4235-9a98-ac3e0547f6a0",
+    "interactiveMs": 1500,
+    "allResourcesLoadedMs": 1501,
+    "navigation": {
+      "responseEnd": 46,
+      "domContentLoaded": 803,
+      "load": 1061
+    }
+  }
+]
