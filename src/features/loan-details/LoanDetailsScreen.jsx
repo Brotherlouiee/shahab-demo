@@ -18,7 +18,7 @@ function DetailGroup({ children }) {
 }
 
 /** Render API-approved facts as text; neither source text nor error payloads become HTML. */
-export default function LoanDetailsScreen({ loanId, header }) {
+export default function LoanDetailsScreen({ loanId, header, onAiAnalysis }) {
   const [state, setState] = useState({ status: "loading", detail: null });
   const [requestVersion, setRequestVersion] = useState(0);
 
@@ -48,12 +48,12 @@ export default function LoanDetailsScreen({ loanId, header }) {
           <button type="button" onClick={() => setRequestVersion((value) => value + 1)}>تلاش مجدد</button>
         </section>
       ) : null}
-      {state.status === "ready" ? <LoanDetail detail={state.detail} /> : null}
+      {state.status === "ready" ? <LoanDetail detail={state.detail} onAiAnalysis={onAiAnalysis} /> : null}
     </main>
   );
 }
 
-function LoanDetail({ detail }) {
+function LoanDetail({ detail, onAiAnalysis }) {
   return <>
     <article className="hp-loan-result-card is-details hp-loan-detail-card">
       <div className="hp-loan-result-head">
@@ -83,5 +83,8 @@ function LoanDetail({ detail }) {
     <section className="hp-loan-details-conditions">
       {detail.conditions.length ? <ul>{detail.conditions.map((condition, index) => <li key={`${index}-${condition}`}>{toPersianDigits(condition)}</li>)}</ul> : <p>شرط یا مدرک تأییدشده‌ای برای نمایش ثبت نشده است.</p>}
     </section>
+    <div className="hp-loan-details-analysis-bar">
+      <button type="button" onClick={() => onAiAnalysis?.(detail.loanId)}>تحلیل با هوش مصنوعی</button>
+    </div>
   </>;
 }

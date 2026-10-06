@@ -301,6 +301,32 @@ function getLoanIdFromLocation() {
   return new URLSearchParams(window.location.search).get("loanId")?.trim() || "";
 }
 
+/**
+ * The active recommendation is kept only in the browser's current history
+ * entry. This permits a detail-page refresh followed by Back without putting
+ * questionnaire answers or the opaque session ID in a URL or web storage.
+ */
+function getActiveRecommendationHistoryState() {
+  if (typeof window === "undefined") return null;
+  const value = window.history.state?.shahabRecommendation;
+  return value && typeof value.sessionId === "string" && value.result ? value : null;
+}
+
+function replaceActiveRecommendationHistoryState(sessionId, result) {
+  if (typeof window === "undefined" || !sessionId || !result) return;
+  window.history.replaceState(
+    { ...(window.history.state || {}), shahabRecommendation: { sessionId, result } },
+    "",
+    window.location.pathname + window.location.search,
+  );
+}
+
+function clearActiveRecommendationHistoryState() {
+  if (typeof window === "undefined" || !window.history.state?.shahabRecommendation) return;
+  const { shahabRecommendation: _discarded, ...nextState } = window.history.state;
+  window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
+}
+
 function getInitialViewFromPath(pathname) {
   if (
     pathname.startsWith("/question/") ||
@@ -325,7 +351,9 @@ function getInitialViewFromPath(pathname) {
 function replaceRoute(pathname) {
   if (typeof window === "undefined") return;
   if (window.location.pathname === pathname) return;
-  window.history.pushState(null, "", pathname);
+  // Carry only the current browser-history entry forward; this preserves the
+  // active, opaque recommendation navigation through a detail-page refresh.
+  window.history.pushState(window.history.state, "", pathname);
 }
 
 const personalInfoCacheKeys = {
@@ -1108,11 +1136,12 @@ function LoanAiAnalysisScreen({ onBack, result, loanId }) {
 
 function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
+  const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
   const [answers, setAnswers] = useState({});
   // Kept only in this React instance: canonical answers and the opaque session
   // identifier are deliberately absent from URLs and browser storage.
-  const [questionnaireSessionId, setQuestionnaireSessionId] = useState("");
+  const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
   const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
   const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
   const [personalInfo, setPersonalInfo] = useState({
@@ -1137,8 +1166,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
   const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
-  const [recommendationResult, setRecommendationResult] = useState(null);
-  const [recommendationStatus, setRecommendationStatus] = useState("idle");
+  const [recommendationResult, setRecommendationResult] = useState(() => initialRecommendationHistory?.result || null);
+  const [recommendationStatus, setRecommendationStatus] = useState(() => initialRecommendationHistory?.result ? "ready" : "idle");
   const [selectedAnalysisLoanId, setSelectedAnalysisLoanId] = useState("");
   const [isAnalysisSpinnerRunning, setIsAnalysisSpinnerRunning] = useState(false);
   const [analysisCountdown, setAnalysisCountdown] = useState(5);
@@ -1625,6 +1654,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     workflowActiveStageIndex === -1 ? stages.length - 1 : workflowActiveStageIndex;
 
   useEffect(() => {
+    replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult);
+  }, [questionnaireSessionId, recommendationResult, routePath]);
+
+  useEffect(() => {
     const routeState = getQuestionnaireRouteState(window.location.pathname);
     setCurrentQuestion(routeState.questionIndex);
     setIsOtpVerificationStep(routeState.isOtpVerificationStep);
@@ -1886,7 +1919,15 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       return;
     }
 
-    if (loanResultView === "details" || loanResultView === "request" || loanResultView === "compare") {
+    if (loanResultView === "compare") {
+      // Leaving selection for results intentionally starts the next compare
+      // visit with no choices; returning from compare-result is handled above.
+      setSelectedComparisonPlanIds([]);
+      setLoanResultView("results");
+      return;
+    }
+
+    if (loanResultView === "details" || loanResultView === "request") {
       setLoanResultView("results");
       return;
     }
@@ -1923,6 +1964,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   function handleStartQuestionnaire() {
+    clearActiveRecommendationHistoryState();
     setRecommendationResult(null);
     setRecommendationStatus("idle");
     setLoanResultView("");
@@ -2107,6 +2149,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       <LoanDetailsScreen
         loanId={selectedLoanId}
         header={<QuestionnaireHeader onBack={handleLoanResultBack} onMenu={onMenu} onHome={onHome} />}
+        onAiAnalysis={handleLoanAiAnalysisOpen}
       />
     );
   }

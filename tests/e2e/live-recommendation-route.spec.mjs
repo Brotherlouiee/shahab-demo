@@ -131,6 +131,9 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
+  await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expectLogoOffsets(page.locator(".hp-loan-detail-card"), shortNameLogoOffset);
   const declaredInterestParts = await page.locator(".hp-loan-detail-card .hp-loan-percent").locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
   expect(declaredInterestParts[0]).toBeLessThan(declaredInterestParts[1]);
@@ -177,6 +180,11 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByRole("button", { name: "انتخاب میثاق ۲" })).toHaveClass(/is-selected/);
   await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
   await expectComparisonSelectionGeometry(page.locator(".hp-loan-compare-card").first(), comparisonResultCardHeight);
+  await page.getByRole("button", { name: "بازگشت" }).click();
+  await expect(page).toHaveURL(/\/loan-results$/);
+  await page.getByRole("button", { name: "مقایسه وام" }).click();
+  await expect(page).toHaveURL(/\/compare-loans$/);
+  await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(0);
 
 });
 
@@ -641,13 +649,22 @@ async function expectScrollableBankFilter(page) {
 
 async function expectLoanSaveFeedback(page) {
   const save = page.getByRole("button", { name: "ذخیره وام میثاق ۲" });
+  const card = page.locator(".hp-serving-loan-card").filter({ hasText: "میثاق ۲" }).first();
   await expect(save).toHaveAttribute("aria-pressed", "false");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-linear\.png$/);
   await save.click();
   await expect(save).toHaveAttribute("aria-pressed", "true");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-bold\.png$/);
   const toast = page.getByText("وام مورد نظر با موفقیت ذخیره شد", { exact: true });
   await expect(toast).toBeVisible();
   await expect(toast).toHaveCSS("background-color", "rgb(191, 255, 233)");
+  const geometry = await Promise.all([toast.boundingBox(), card.boundingBox()]);
+  expect(geometry[0].y + geometry[0].height).toBeLessThanOrEqual(geometry[1].y);
   await page.waitForTimeout(2100);
+  await expect(toast).toHaveCount(0);
+  await save.click();
+  await expect(save).toHaveAttribute("aria-pressed", "false");
+  await expect(save.locator("img")).toHaveAttribute("src", /save-linear\.png$/);
   await expect(toast).toHaveCount(0);
 }
 
