@@ -5025,6 +5025,9 @@ right: 16px;
    document. Its fixed height is reserved below so no published condition is
    hidden behind it. */
 .hp-loan-details-page {
+  /* box-sizing:border-box would otherwise consume this clearance inside the
+     inherited min-height and leave no extra scroll range. */
+  min-height: calc(max(100dvh, 904px) + 166px);
   box-sizing: border-box;
   padding-bottom: 166px;
 }
