@@ -180,6 +180,11 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByRole("button", { name: "انتخاب میثاق ۲" })).toHaveClass(/is-selected/);
   await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
   await expectComparisonSelectionGeometry(page.locator(".hp-loan-compare-card").first(), comparisonResultCardHeight);
+  await page.getByRole("button", { name: "بازگشت" }).click();
+  await expect(page).toHaveURL(/\/loan-results$/);
+  await page.getByRole("button", { name: "مقایسه وام" }).click();
+  await expect(page).toHaveURL(/\/compare-loans$/);
+  await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(0);
 
 });
 
