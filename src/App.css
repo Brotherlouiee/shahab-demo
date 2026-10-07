@@ -5909,3 +5909,25 @@ right: 16px;
 .hp-skeleton-line { height: 16px; }
 .hp-skeleton-card { height: 124px; }
 @keyframes hp-skeleton-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+
+
+/* US-09.T06W: communicate a pending canonical answer without showing stale
+   content or a loading sentence. The delayed component itself owns the 50ms
+   threshold; this rule only positions its real placeholder. */
+.hp-questionnaire-content { position: relative; }
+
+.hp-questionnaire-content > .hp-deferred-skeleton.is-questionnaire {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  min-height: 260px;
+  margin: 0;
+  background: #ffffff;
+}
+
+.hp-simple-compare-submit:disabled {
+  background: #8c8c8c;
+  color: #ffffff;
+  cursor: not-allowed;
+}
