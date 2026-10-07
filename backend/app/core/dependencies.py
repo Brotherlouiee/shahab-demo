@@ -33,12 +33,17 @@ def get_app_logger(settings: Annotated[Settings, Depends(get_settings)]) -> logg
 
 
 @lru_cache
-def get_questionnaire_configuration() -> QuestionnaireConfiguration:
+def _questionnaire_configuration() -> QuestionnaireConfiguration:
     root = Path(__file__).resolve().parents[3]
     return load_questionnaire_configuration(
         root / "data/contracts/questionnaire-configuration.v1.json",
         json.loads((root / "data/contracts/canonical-identifiers.v1.json").read_text(encoding="utf-8")),
     )
+
+
+def get_questionnaire_configuration() -> QuestionnaireConfiguration:
+    """Expose the cached canonical questionnaire configuration to app lifecycle wiring."""
+    return _questionnaire_configuration()
 
 
 _questionnaire_repository = InMemoryQuestionnaireSessionRepository()
