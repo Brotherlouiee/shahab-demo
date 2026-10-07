@@ -7,8 +7,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      #initial-page-skeleton { position: fixed; inset: 0; z-index: 2147483647; display: grid; align-content: center; gap: 16px; padding: 24px; box-sizing: border-box; background: #fff; opacity: 0; visibility: hidden; pointer-events: none; animation: shahab-initial-skeleton 0s linear 50ms forwards; }
+      #initial-page-skeleton span { display: block; border-radius: 10px; background: linear-gradient(90deg, #edf1f3 25%, #f8fafb 37%, #edf1f3 63%); background-size: 400% 100%; animation: shahab-initial-shimmer 1.2s ease-in-out infinite; }
+      #initial-page-skeleton span:first-child { width: 42%; height: 28px; }
+      #initial-page-skeleton span:not(:first-child) { height: 18px; }
+      #initial-page-skeleton span:last-child { height: 132px; }
+      @keyframes shahab-initial-skeleton { to { opacity: 1; visibility: visible; } }
+      @keyframes shahab-initial-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+    </style>
   </head>
   <body>
+    <div id="initial-page-skeleton" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
