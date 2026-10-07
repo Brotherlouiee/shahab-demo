@@ -5931,3 +5931,54 @@ right: 16px;
   color: #ffffff;
   cursor: not-allowed;
 }
+
+
+/* US-09.T06X: Skeletons follow the geometry of their destination page.
+   They contain no user, loan, score, or condition data. */
+.hp-deferred-skeleton {
+  width: min(100% - 32px, 760px);
+  margin: 20px auto;
+  padding: 0;
+  border-radius: 0;
+  background: #fff;
+}
+
+.hp-deferred-skeleton [class^="hp-skeleton-"] {
+  display: grid;
+  gap: 12px;
+}
+
+.hp-skeleton-block {
+  display: block;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #edf1f3 25%, #f8fafb 37%, #edf1f3 63%);
+  background-size: 400% 100%;
+  animation: hp-skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+.hp-skeleton-cards { gap: 14px; }
+.hp-skeleton-heading { width: min(52%, 290px); height: 28px; }
+.hp-skeleton-filter { width: 100%; height: 42px; }
+.hp-skeleton-loan-card { width: 100%; min-height: 138px; }
+
+.hp-skeleton-detail { gap: 16px; }
+.hp-skeleton-summary { width: 100%; min-height: 112px; }
+.hp-skeleton-detail-group { width: 100%; min-height: 148px; }
+.hp-skeleton-bottom-action { width: 100%; height: 52px; margin-top: 8px; border-radius: 14px; }
+
+.hp-skeleton-questionnaire { padding-top: 6px; gap: 16px; }
+.hp-skeleton-stage { width: 100%; height: 9px; border-radius: 99px; }
+.hp-skeleton-question-title { width: min(78%, 520px); height: 28px; margin-top: 22px; }
+.hp-skeleton-option { width: 100%; height: 64px; }
+.hp-skeleton-next-action { width: 150px; height: 46px; margin-top: 14px; }
+
+.hp-questionnaire-content > .hp-deferred-skeleton.is-questionnaire {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 38rem) {
+  .hp-deferred-skeleton { width: calc(100% - 24px); }
+  .hp-questionnaire-content > .hp-deferred-skeleton.is-questionnaire { padding: 16px 12px; }
+  .hp-skeleton-loan-card { min-height: 132px; }
+}
