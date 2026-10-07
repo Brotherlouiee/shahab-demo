@@ -18,7 +18,11 @@ def _timed_endpoint(request: Request) -> str | None:
     if request.method != "PUT":
         return None
     segments = request.url.path.split("/")
-    if len(segments) == 8 and segments[:5] == ["", "api", "v1", "questionnaire", "sessions"] and segments[6] == "answers":
+    if (
+        len(segments) == 8
+        and segments[:5] == ["", "api", "v1", "questionnaire", "sessions"]
+        and segments[6] == "answers"
+    ):
         return "questionnaire_answer_write"
     return None
 

@@ -72,4 +72,3 @@ class ApiSessionLifecycleTests(unittest.TestCase):
         self.assertIn("duration_ms=", output)
         self.assertNotIn(session_id, output)
         self.assertNotIn(answer_id, output)
-
