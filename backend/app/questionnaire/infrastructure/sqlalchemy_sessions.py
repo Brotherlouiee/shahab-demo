@@ -21,10 +21,23 @@ from backend.app.questionnaire.domain.session import QuestionnaireAnswer, Questi
 
 
 class SqlAlchemyQuestionnaireSessionRepository:
-    def __init__(self, session: Session, configuration: QuestionnaireConfiguration) -> None:
+    def __init__(
+        self,
+        session: Session,
+        configuration: QuestionnaireConfiguration,
+        *,
+        reference_catalogue: tuple[uuid.UUID, dict[str, uuid.UUID], dict[str, uuid.UUID]] | None = None,
+    ) -> None:
         self._session = session
         self._configuration = configuration
-        self._version_id, self._question_ids, self._answer_ids = self._ensure_reference_catalogue()
+        self._version_id, self._question_ids, self._answer_ids = (
+            reference_catalogue if reference_catalogue is not None else self._ensure_reference_catalogue()
+        )
+
+    @property
+    def reference_catalogue(self) -> tuple[uuid.UUID, dict[str, uuid.UUID], dict[str, uuid.UUID]]:
+        """Return the identifiers prepared once during application startup."""
+        return self._version_id, self._question_ids, self._answer_ids
 
     def create(self, session: QuestionnaireSession) -> None:
         self._session.add(

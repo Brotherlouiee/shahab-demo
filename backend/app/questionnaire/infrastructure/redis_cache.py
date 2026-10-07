@@ -61,6 +61,9 @@ class RedisQuestionnaireSessionCache:
         except RedisError:
             pass
 
+    def close(self) -> None:
+        self._client.close()
+
     @staticmethod
     def _key(session_id: str) -> str:
         digest = hashlib.sha256(session_id.encode("utf-8")).hexdigest()
