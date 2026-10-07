@@ -771,6 +771,18 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 **خارج از scope:** migration/schema، دادهٔ وام، Redis fallback، retention، UI، URL، scoring، D-005، provider خارجی، deploy و سند تداوم تغییر نمی‌کنند.
 
+### استاندارد skeleton و تعامل مقایسه — `US-09.T06V`
+
+**هدف:** پس از ۵۰ms انتظار برای دادهٔ واقعی، Skeleton همان ناحیهٔ محصول نمایش داده شود؛ پیام loading یا صفحهٔ خالی به کاربر نشان داده نشود. این استاندارد برای همهٔ صفحه‌ها و تغییرهای بعدی لازم‌الاجرا است؛ spinner پنج‌ثانیه‌ای تحلیل تنها استثنای صریح است.
+
+1. Skeleton فقط نمایشی است، داده، score، source یا نتیجهٔ ساختگی تولید نمی‌کند.
+2. جزئیات مقدار null با واحد پول یا واحد زمانی ترکیب نمی‌شود.
+3. کارت وام در compare-loans و compare-result با click/keyboard به جزئیات همان loanId می‌رود؛ کنترل checkbox از navigation مستقل می‌ماند.
+4. دکمهٔ مقایسه با کمتر از دو انتخاب disabled است و ترتیب compare-loans نزولی بر اساس score server-owned با tie-break loanId است.
+5. E2E باید delayed Skeleton، نبود متن loading قدیمی، navigation کارت و disable/enable مقایسه را کنترل کند.
+
+**خارج از scope:** API، دادهٔ PUBLISHED، D-005، scoring، migration، provider خارجی، deploy و سند تداوم تغییر نمی‌کنند.
+
 ### استقرار و راستی‌آزمایی محیط پایدار — `US-09.T07`
 
 **هدف و وابستگی:** پس از T06A، یک محیط staging با PostgreSQL دائمی و بک‌اند مستقر بساز؛ سایت Netlify را به همان API وصل کن و مسیر واقعی را روی URL در دسترس مالک محصول اثبات کن. این تسک بخشی از تحویل US-09 است؛ سبز بودن CI یا دیتابیس موقت GitHub Actions جای آن را نمی‌گیرد. انتشار production نهایی، امنیت و release gate همچنان در US-11/US-12 انجام می‌شوند.

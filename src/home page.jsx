@@ -6,6 +6,7 @@ import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import BankIdentity from "./features/loan-details/BankIdentity.jsx";
 import LoanPercent from "./features/loan-details/LoanPercent.jsx";
 import { toPersianDigits } from "./features/loan-details/toPersianDigits.mjs";
+import DeferredPageSkeleton from "./shared/DeferredPageSkeleton.jsx";
 import { fetchRecommendationResult } from "./features/recommendation/presentation/recommendationResultClient.mjs";
 import {
   getCanonicalQuestionIdForRoute,
@@ -892,14 +893,18 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
-function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mode = "request", initialSelectedPlanIds = [] }) {
+function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, onDetails, mode = "request", initialSelectedPlanIds = [] }) {
   const [selectedPlans, setSelectedPlans] = useState(() => Object.fromEntries(initialSelectedPlanIds.map((planId) => [planId, true])));
   const selectedPlanIds = Object.entries(selectedPlans)
     .filter(([, isSelected]) => isSelected)
     .map(([planId]) => planId);
   const selectedCount = selectedPlanIds.length;
   const isCompareMode = mode === "compare";
-  const visiblePlans = allRecommendationItems(result);
+  const visiblePlans = useMemo(() => allRecommendationItems(result).slice().sort((first, second) => {
+    const firstScore = typeof first.compatibilityScore === "number" ? first.compatibilityScore : -1;
+    const secondScore = typeof second.compatibilityScore === "number" ? second.compatibilityScore : -1;
+    return secondScore - firstScore || first.loanId.localeCompare(second.loanId);
+  }), [result]);
 
   if (!result) {
     return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">برای ادامه، ابتدا پرسشنامه را در همین تب کامل کنید و نتیجهٔ معتبر دریافت کنید.</p></main>;
@@ -924,6 +929,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
             key={recommendation.loanId}
             recommendation={recommendation}
             selected={Boolean(selectedPlans[recommendation.loanId])}
+            onDetails={onDetails}
             onToggle={() => setSelectedPlans((current) => ({
               ...current,
               [recommendation.loanId]: current[recommendation.loanId] ? false : selectedCount < 10,
@@ -933,7 +939,7 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, mo
       </section>
       {isCompareMode && selectedCount > 0 ? (
         <div className="hp-simple-compare-bottom-bar">
-          <button className="hp-simple-compare-submit" type="button" onClick={() => onCompareSubmit?.(selectedPlanIds)}>مقایسه کن ({toPersianDigits(selectedCount)} وام)</button>
+          <button className="hp-simple-compare-submit" type="button" disabled={selectedCount < 2} onClick={() => onCompareSubmit?.(selectedPlanIds)}>مقایسه کن ({toPersianDigits(selectedCount)} وام)</button>
         </div>
       ) : selectedCount > 0 ? (
         <div className="hp-compare-bottom-bar">
@@ -990,9 +996,9 @@ function formatApprovedPercent(value) {
   return <LoanPercent value={value} />;
 }
 
-function LoanComparisonResultCard({ detail, metric }) {
+function LoanComparisonResultCard({ detail, metric, onDetails }) {
   return (
-    <article className="hp-compare-result-card">
+    <article className="hp-compare-result-card" role="link" tabIndex={0} onClick={() => onDetails?.(detail.loanId)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onDetails?.(detail.loanId); } }}>
       <BankIdentity lenderName={detail.lenderName} />
       <strong title={toPersianDigits(detail.loanName)} aria-label={toPersianDigits(detail.loanName)}>{toPersianDigits(detail.loanName)}</strong>
       <p>
@@ -1003,7 +1009,7 @@ function LoanComparisonResultCard({ detail, metric }) {
   );
 }
 
-function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalysis, selectedPlanIds }) {
+function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalysis, onDetails, selectedPlanIds }) {
   const [activeMetricIndex, setActiveMetricIndex] = useState(0);
   const [detailState, setDetailState] = useState({ status: "loading", details: [] });
   const tabsRef = useRef(null);
@@ -1089,10 +1095,10 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
       </nav>
 
       <section className="hp-compare-result-list">
-        {detailState.status === "loading" ? <p className="hp-recommendation-result-state">در حال دریافت جزئیات وام‌ها…</p> : null}
+        <DeferredPageSkeleton active={detailState.status === "loading"} variant="cards" />
         {detailState.status === "empty" ? <p className="hp-recommendation-result-state">برای مقایسه دست‌کم دو وام را انتخاب کنید.</p> : null}
         {detailState.status === "error" ? <p className="hp-recommendation-result-state">دریافت جزئیات مقایسه در حال حاضر ممکن نیست.</p> : null}
-        {detailState.status === "ready" ? detailState.details.map((detail) => <LoanComparisonResultCard key={detail.loanId} detail={detail} metric={activeMetric} />) : null}
+        {detailState.status === "ready" ? detailState.details.map((detail) => <LoanComparisonResultCard key={detail.loanId} detail={detail} metric={activeMetric} onDetails={onDetails} />) : null}
       </section>
 
       <div className="hp-compare-result-bottom-bar">
@@ -2228,6 +2234,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         onMenu={onMenu}
         onHome={onHome}
         onCompareSubmit={handleLoanCompareSubmit}
+        onDetails={handleLoanDetailsOpen}
         mode="compare"
         initialSelectedPlanIds={selectedComparisonPlanIds}
       />
@@ -2242,6 +2249,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         onMenu={onMenu}
         onHome={onHome}
         onAiAnalysis={handleLoanAiAnalysisOpen}
+        onDetails={handleLoanDetailsOpen}
         selectedPlanIds={selectedComparisonPlanIds}
       />
     );

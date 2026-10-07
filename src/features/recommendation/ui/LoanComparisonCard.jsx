@@ -12,15 +12,16 @@ export default function LoanComparisonCard({
   recommendation,
   selected,
   onToggle,
+  onDetails,
 }) {
   const compatibilityBand = compatibilityBandForScore(recommendation.compatibilityScore);
 
   return (
-    <article className="hp-loan-result-card is-compact hp-loan-compare-card" data-compatibility-band={compatibilityBand || undefined}>
+    <article className="hp-loan-result-card is-compact hp-loan-compare-card" data-compatibility-band={compatibilityBand || undefined} role="link" tabIndex={0} onClick={() => onDetails?.(recommendation.loanId)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onDetails?.(recommendation.loanId); } }}>
       <button
         className={`hp-loan-compare-check ${selected ? "is-selected" : ""}`}
         type="button"
-        onClick={onToggle}
+        onClick={(event) => { event.stopPropagation(); onToggle(); }}
         aria-label={`انتخاب ${toPersianDigits(recommendation.loanName)}`}
         aria-pressed={selected}
       />

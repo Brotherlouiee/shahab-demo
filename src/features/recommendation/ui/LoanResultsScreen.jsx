@@ -6,6 +6,7 @@ import LoanPercent from "../../loan-details/LoanPercent.jsx";
 import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
 import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
+import DeferredPageSkeleton from "../../../shared/DeferredPageSkeleton.jsx";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -210,7 +211,7 @@ export default function LoanResultsScreen({
       </div>
 
       <section className="hp-loan-results-list">
-        {status === "loading" ? <p className="hp-recommendation-result-state" role="status">در حال دریافت نتیجه…</p> : null}
+        <DeferredPageSkeleton active={status === "loading"} variant="cards" />
         {status === "sessionMissing" ? (
           <div className="hp-recommendation-result-state" role="status">
             <p>برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p>
