@@ -2266,7 +2266,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   return (
-    <main className="hp-questionnaire-page" dir="rtl">
+    <main className="hp-questionnaire-page" dir="rtl" aria-busy={isSavingQuestionnaireAnswer}>
       <header className="hp-questionnaire-header">
         <button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت">
           <svg viewBox="0 0 24 24" focusable="false">
@@ -2289,6 +2289,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       </header>
 
       <section className="hp-questionnaire-content">
+        <DeferredPageSkeleton active={isSavingQuestionnaireAnswer} variant="questionnaire" />
         {isStagedQuestion ? (
           <div className="hp-stage-board" aria-label="مراحل پرسشنامه">
             <div
