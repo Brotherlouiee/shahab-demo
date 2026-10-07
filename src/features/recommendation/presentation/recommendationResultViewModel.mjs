@@ -39,6 +39,7 @@ function toRankedViewModel(item) {
     bankLogoReference: optionalLogoReference(recommendation.bankLogoReference),
     compatibilityScore: requireScore(recommendation.compatibilityScore),
     compatibilityReason: requireText(recommendation.compatibilityReason, "compatibilityReason"),
+    loanSummary: optionalLoanSummary(recommendation.loanSummary),
     scoreCaption: "درصد تطابق محاسبه‌شده",
     detailsHref: detailsHrefFor(loanId),
   });
@@ -59,8 +60,38 @@ function toNeedsReviewViewModel(item) {
       ),
     ),
     warning: REVIEW_WARNING,
+    loanSummary: optionalLoanSummary(recommendation.loanSummary),
     detailsHref: detailsHrefFor(loanId),
   });
+}
+
+function optionalLoanSummary(value) {
+  // Current server responses contain this additive field. Older responses use
+  // the existing detail endpoint fallback instead of inventing any loan facts.
+  if (value === undefined || value === null) return null;
+  const summary = requireRecord(value, "loanSummary");
+  return Object.freeze({
+    maxAmountTomans: optionalPublishedNumber(summary.maxAmountTomans, "maxAmountTomans"),
+    monthlyInstallmentTomans: optionalPublishedNumber(summary.monthlyInstallmentTomans, "monthlyInstallmentTomans"),
+    maxRepaymentMonths: optionalPublishedInteger(summary.maxRepaymentMonths, "maxRepaymentMonths"),
+    interestRatePercent: optionalPublishedNumber(summary.interestRatePercent, "interestRatePercent"),
+  });
+}
+
+function optionalPublishedNumber(value, label) {
+  if (value === null) return null;
+  if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+    throw new TypeError(`${label} must be a non-negative server number or null`);
+  }
+  return value;
+}
+
+function optionalPublishedInteger(value, label) {
+  if (value === null) return null;
+  if (!Number.isInteger(value) || value < 0) {
+    throw new TypeError(`${label} must be a non-negative server integer or null`);
+  }
+  return value;
 }
 
 function optionalLogoReference(value) {

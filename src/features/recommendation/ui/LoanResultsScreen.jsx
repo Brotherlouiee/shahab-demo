@@ -55,9 +55,17 @@ function FilterMenu({ label, value, selectedValue, options, onChange, scrollable
  * the approved loan-detail API; this component never synthesizes loan facts.
  */
 function ServingLoanCard({ recommendation, onDetails, isSaved, onSave }) {
-  const [state, setState] = useState({ status: "loading", detail: null });
+  const [state, setState] = useState(() => recommendation.loanSummary
+    ? { status: "ready", detail: recommendation.loanSummary }
+    : { status: "loading", detail: null });
 
   useEffect(() => {
+    // Use the real card facts included with the PUBLISHED recommendation.
+    // Full conditions remain lazy on the dedicated details route.
+    if (recommendation.loanSummary) {
+      setState({ status: "ready", detail: recommendation.loanSummary });
+      return undefined;
+    }
     const controller = new AbortController();
     setState({ status: "loading", detail: null });
     fetchLoanDetails(recommendation.loanId, { signal: controller.signal })
@@ -66,7 +74,7 @@ function ServingLoanCard({ recommendation, onDetails, isSaved, onSave }) {
         if (error.name !== "AbortError") setState({ status: "error", detail: null });
       });
     return () => controller.abort();
-  }, [recommendation.loanId]);
+  }, [recommendation.loanId, recommendation.loanSummary]);
 
   const detail = state.detail;
   const hasScore = typeof recommendation.compatibilityScore === "number";

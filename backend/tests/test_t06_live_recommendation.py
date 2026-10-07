@@ -19,7 +19,10 @@ from backend.app.infrastructure.db.models import Base
 from backend.app.main import create_app
 from backend.app.recommendation.domain.entities import ClassificationState, LoanCandidate
 from backend.app.recommendation.engine.canonical_scoring import CategoryImpact, score_official_categories
-from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import SnapshotUnavailableError
+from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import (
+    SnapshotUnavailableError,
+    SqlAlchemyRecommendationSnapshotRepository,
+)
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
 
@@ -84,8 +87,16 @@ class LiveRecommendationTests(unittest.TestCase):
                 json={"answerId": question["answerOptions"][0]["answerId"]},
             )
             self.assertEqual(written.status_code, 200)
-        result = self.client.post("/api/v1/recommendations", json={"sessionId": session_id})
+        original_snapshot_read = SqlAlchemyRecommendationSnapshotRepository.read_approved_snapshot
+        with patch.object(
+            SqlAlchemyRecommendationSnapshotRepository,
+            "read_approved_snapshot",
+            autospec=True,
+            side_effect=original_snapshot_read,
+        ) as snapshot_read:
+            result = self.client.post("/api/v1/recommendations", json={"sessionId": session_id})
         self.assertEqual(result.status_code, 200, result.text)
+        self.assertEqual(snapshot_read.call_count, 1)
         body = result.json()
         self.assertEqual(body["configVersion"], "1.1.0")
         self.assertEqual(len(body["needsReview"]), 14)
@@ -109,6 +120,15 @@ class LiveRecommendationTests(unittest.TestCase):
                 self.assertEqual(detail.status_code, 200)
                 self.assertIn("bankLogoReference", item)
                 self.assertEqual(item["bankLogoReference"], detail.json()["bankLogoReference"])
+                self.assertEqual(
+                    item["loanSummary"],
+                    {
+                        "maxAmountTomans": detail.json()["maxAmountTomans"],
+                        "monthlyInstallmentTomans": detail.json()["monthlyInstallmentTomans"],
+                        "maxRepaymentMonths": detail.json()["maxRepaymentMonths"],
+                        "interestRatePercent": detail.json()["interestRatePercent"],
+                    },
+                )
         self.assertTrue(
             all(
                 reason.endswith(("اعلام نشده است", "متغیر است", "مقدار خنثی دارد", "قطعی نیست"))
