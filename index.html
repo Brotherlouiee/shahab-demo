@@ -6,21 +6,57 @@
     <title>شهاب</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet" /></noscript>
     <style>
-      #initial-page-skeleton { position: fixed; inset: 0; z-index: 2147483647; display: grid; align-content: center; gap: 16px; padding: 24px; box-sizing: border-box; background: #fff; opacity: 0; visibility: hidden; pointer-events: none; animation: shahab-initial-skeleton 0s linear 50ms forwards; }
-      #initial-page-skeleton span { display: block; border-radius: 10px; background: linear-gradient(90deg, #edf1f3 25%, #f8fafb 37%, #edf1f3 63%); background-size: 400% 100%; animation: shahab-initial-shimmer 1.2s ease-in-out infinite; }
-      #initial-page-skeleton span:first-child { width: 42%; height: 28px; }
-      #initial-page-skeleton span:not(:first-child) { height: 18px; }
-      #initial-page-skeleton span:last-child { height: 132px; }
+      #initial-page-skeleton { position: fixed; inset: 0; z-index: 2147483647; padding: 24px; box-sizing: border-box; background: #fff; opacity: 0; visibility: hidden; pointer-events: none; animation: shahab-initial-skeleton 0s linear 50ms forwards; }
+      #initial-page-skeleton [data-skeleton-shape] { display: none; max-width: 760px; margin: 0 auto; }
+      #initial-page-skeleton [data-skeleton-shape] > * { display: block; border-radius: 12px; background: linear-gradient(90deg, #edf1f3 25%, #f8fafb 37%, #edf1f3 63%); background-size: 400% 100%; animation: shahab-initial-shimmer 1.2s ease-in-out infinite; }
+      #initial-page-skeleton[data-variant="home"] .initial-home,
+      #initial-page-skeleton[data-variant="questionnaire"] .initial-questionnaire,
+      #initial-page-skeleton[data-variant="cards"] .initial-cards,
+      #initial-page-skeleton[data-variant="detail"] .initial-detail { display: grid; }
+      .initial-home { padding-top: 44px; gap: 18px; }
+      .initial-home .s-logo { width: 116px; height: 32px; }
+      .initial-home .s-hero { width: min(100%, 500px); height: 72px; }
+      .initial-home .s-copy { width: min(85%, 390px); height: 18px; }
+      .initial-home .s-control { width: min(100%, 510px); height: 58px; }
+      .initial-home .s-action { width: 170px; height: 48px; }
+      .initial-questionnaire { padding-top: 76px; gap: 16px; }
+      .initial-questionnaire .s-stage { width: 100%; height: 9px; border-radius: 99px; }
+      .initial-questionnaire .s-title { width: 72%; height: 28px; margin-top: 26px; }
+      .initial-questionnaire .s-option { width: 100%; height: 64px; }
+      .initial-questionnaire .s-action { width: 144px; height: 46px; margin-top: 16px; }
+      .initial-cards { padding-top: 48px; gap: 14px; }
+      .initial-cards .s-heading { width: 48%; height: 30px; margin-bottom: 10px; }
+      .initial-cards .s-filter { width: 100%; height: 42px; }
+      .initial-cards .s-card { width: 100%; height: 142px; }
+      .initial-detail { padding-top: 48px; gap: 16px; }
+      .initial-detail .s-title { width: 56%; height: 30px; }
+      .initial-detail .s-summary { width: 100%; height: 112px; }
+      .initial-detail .s-group { width: 100%; height: 148px; }
+      .initial-detail .s-action { width: 100%; height: 52px; margin-top: 24px; }
       @keyframes shahab-initial-skeleton { to { opacity: 1; visibility: visible; } }
       @keyframes shahab-initial-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
     </style>
   </head>
   <body>
-    <div id="initial-page-skeleton" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
+    <div id="initial-page-skeleton" aria-hidden="true" data-variant="home">
+      <div class="initial-home" data-skeleton-shape><span class="s-logo"></span><span class="s-hero"></span><span class="s-copy"></span><span class="s-control"></span><span class="s-action"></span></div>
+      <div class="initial-questionnaire" data-skeleton-shape><span class="s-stage"></span><span class="s-title"></span><span class="s-option"></span><span class="s-option"></span><span class="s-action"></span></div>
+      <div class="initial-cards" data-skeleton-shape><span class="s-heading"></span><span class="s-filter"></span><span class="s-card"></span><span class="s-card"></span></div>
+      <div class="initial-detail" data-skeleton-shape><span class="s-title"></span><span class="s-summary"></span><span class="s-group"></span><span class="s-action"></span></div>
     </div>
+    <script>
+      (function () {
+        var path = window.location.pathname;
+        var variant = path.indexOf("/loan-details") === 0 ? "detail"
+          : path.indexOf("/question/") === 0 || path === "/personal-info" || path === "/verify-code" ? "questionnaire"
+          : path.indexOf("/loan-results") === 0 || path.indexOf("/compare-") === 0 ? "cards"
+          : "home";
+        document.getElementById("initial-page-skeleton").setAttribute("data-variant", variant);
+      }());
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -8,6 +8,8 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
 
   const navigation = page.goto("/", { waitUntil: "commit" });
   await expect(page.locator("#initial-page-skeleton")).toBeVisible();
+  await expect(page.locator("#initial-page-skeleton .initial-home")).toBeVisible();
+  await expect(page.locator("#initial-page-skeleton .initial-questionnaire")).toBeHidden();
   await expect(page.locator("#root")).toBeEmpty();
   await navigation;
   await expect(page.getByRole("button", { name: "ورود" })).toBeVisible();
@@ -32,6 +34,8 @@ test("shows a delayed skeleton while a canonical questionnaire answer is saved",
 
   const skeleton = page.getByRole("status", { name: "در حال بارگذاری" });
   await expect(skeleton).toBeVisible();
+  await expect(skeleton.locator(".hp-skeleton-questionnaire")).toBeVisible();
+  await expect(skeleton.locator(".hp-skeleton-option")).toHaveCount(2);
   await releaseSession();
   await expect(page).toHaveURL(/\/question\/4$/);
 });
@@ -49,4 +53,18 @@ test("renders the one-loan comparison action as visibly disabled", async ({ page
   await expect(button).toBeDisabled();
   await expect(button).toHaveCSS("cursor", "not-allowed");
   await expect(button).toHaveCSS("background-color", "rgb(140, 140, 140)");
+});
+
+
+test("uses a detail-shaped document fallback for a delayed loan-details route", async ({ page }) => {
+  await page.route("**/src/main.jsx", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 90));
+    await route.continue();
+  });
+
+  const navigation = page.goto("/loan-details?loanId=example", { waitUntil: "commit" });
+  await expect(page.locator("#initial-page-skeleton[data-variant=\"detail\"]")).toBeVisible();
+  await expect(page.locator("#initial-page-skeleton .initial-detail")).toBeVisible();
+  await expect(page.locator("#initial-page-skeleton .initial-home")).toBeHidden();
+  await navigation;
 });
