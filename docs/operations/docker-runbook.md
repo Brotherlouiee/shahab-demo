@@ -25,8 +25,11 @@ docker compose down
 
 - PostgreSQL must become healthy before migrations and FastAPI start.
 - FastAPI must answer `/api/v1/health/live` before Vite starts.
-- Compose publishes Vite on host port `4173`; the container keeps its standard
-  internal port `5173` to avoid Windows/Hyper-V excluded port ranges.
+- Compose publishes Vite on host and container port `5173`. This avoids the
+  `4173` range that Windows/Hyper-V can reserve dynamically.
+- The API mounts the repository and Uvicorn reloads when a file under
+  `backend/` changes. Rebuild the API only after dependency, Dockerfile, or
+  runtime-configuration changes.
 - A 404 at FastAPI `/` is expected; use the liveness path instead.
 - If the browser receives HTML for an API request, confirm it was started through
   the repository Vite config and inspect the `api` and `frontend` logs.

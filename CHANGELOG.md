@@ -8,6 +8,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **Local development:** Compose now publishes Vite on `5173`, avoiding the
+  Windows-reserved `4173` range. FastAPI mounts the local source and reloads
+  changes under `backend/`, so normal backend edits no longer require an image
+  rebuild. No production runtime, API contract, data, or recommendation logic
+  changed.
+
 - **US-09.T06S:** endpoint توصیه یک snapshot تأییدشده را فقط یک‌بار می‌خواند و چهار fact واقعیِ کارت را از همان serving catalogue در پاسخ برمی‌گرداند. کارت نتیجه با این خلاصهٔ server-owned دیگر پس از spinner برای هر وام درخواست جزئیات جداگانه نمی‌فرستد؛ شروط کامل فقط در صفحهٔ جزئیات خوانده می‌شوند. داده، score، ضرایب D-005، threshold، session و استقرار تغییر نکرده‌اند.
 
 ### Security

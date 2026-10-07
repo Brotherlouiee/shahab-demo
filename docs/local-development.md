@@ -13,8 +13,13 @@ Compose. Docker Desktop (with Compose v2), Node.js 22+, and Git are required.
    docker compose up --build
    ```
 
-3. Open `http://localhost:4173/`. Browser requests to `/api/v1` stay
+3. Open `http://localhost:5173/`. Browser requests to `/api/v1` stay
    same-origin and Vite proxies them to FastAPI inside the Compose network.
+
+The Compose development stack mounts the repository into both Vite and FastAPI.
+Frontend changes use Vite hot reload; backend changes under `backend/` restart
+Uvicorn automatically. A full image rebuild is only needed after changing
+Python dependencies, the Dockerfile, or the database/runtime configuration.
 
 ## Publish the verified local catalogue
 
@@ -45,7 +50,7 @@ The public liveness endpoint is available both directly and through Vite:
 
 ```bash
 curl http://127.0.0.1:8000/api/v1/health/live
-curl http://127.0.0.1:4173/api/v1/health/live
+curl http://127.0.0.1:5173/api/v1/health/live
 ```
 
 Both must return JSON containing `{"status":"ok"}`. Opening
