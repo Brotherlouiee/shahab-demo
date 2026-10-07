@@ -2782,7 +2782,7 @@ function CardView({ card }) {
 
   return (
     <article className="hp-m-card hp-image-card">
-      <img src={card.src} alt={card.name} />
+      <img src={card.src} alt={card.name} loading="lazy" decoding="async" />
       <div>
         <strong>{card.name}</strong>
         <span>{card.desc}</span>
