@@ -32,12 +32,15 @@ async def database_lifespan(app: FastAPI) -> AsyncIterator[None]:
         engine = create_database_engine(app.state.settings)
         app.state.database_engine = engine
         app.state.database_session_factory = create_session_factory(engine)
-        with app.state.database_session_factory() as bootstrap_session:
+        bootstrap_session = app.state.database_session_factory()
+        try:
             repository = SqlAlchemyQuestionnaireSessionRepository(
                 bootstrap_session,
                 get_questionnaire_configuration(),
             )
             app.state.questionnaire_reference_catalogue = repository.reference_catalogue
+        finally:
+            bootstrap_session.close()
     else:
         app.state.database_engine = None
         app.state.database_session_factory = None

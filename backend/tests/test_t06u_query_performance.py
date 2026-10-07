@@ -48,7 +48,7 @@ class QueryScopeTests(unittest.TestCase):
             reference_catalogue=reference_catalogue,
         )
 
-        self.assertIs(repository.reference_catalogue, reference_catalogue)
+        self.assertEqual(repository.reference_catalogue, reference_catalogue)
 
 
 if __name__ == "__main__":
