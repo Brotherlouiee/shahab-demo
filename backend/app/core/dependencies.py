@@ -20,7 +20,6 @@ from backend.app.questionnaire.application.use_cases import QuestionnaireSession
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration, load_questionnaire_configuration
 from backend.app.questionnaire.domain.session import QuestionnaireRetentionPolicy
 from backend.app.questionnaire.infrastructure.memory_sessions import InMemoryQuestionnaireSessionRepository
-from backend.app.questionnaire.infrastructure.redis_cache import RedisQuestionnaireSessionCache
 from backend.app.questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 
 from .config import Settings, get_settings

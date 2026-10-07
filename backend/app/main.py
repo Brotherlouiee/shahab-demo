@@ -6,9 +6,9 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
-from redis import Redis
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from redis import Redis
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
