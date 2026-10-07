@@ -10,12 +10,11 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Annotated
 
-from fastapi import Depends
+from fastapi import Depends, Request
 from redis import Redis
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from backend.app.api.errors import ApiError, ErrorCode
-from backend.app.infrastructure.db.session import create_database_engine, create_session_factory
 from backend.app.loans.application.use_cases import GetLoanDetails
 from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 from backend.app.questionnaire.application.use_cases import QuestionnaireSessionService
@@ -46,8 +45,22 @@ def _questionnaire_configuration() -> QuestionnaireConfiguration:
 _questionnaire_repository = InMemoryQuestionnaireSessionRepository()
 
 
+def get_request_database_session(request: Request) -> Generator[Session | None, None, None]:
+    """Create and close one request-local session from the app-lifecycle factory."""
+    session_factory: sessionmaker[Session] | None = request.app.state.database_session_factory
+    if session_factory is None:
+        yield None
+        return
+    session = session_factory()
+    try:
+        yield session
+    finally:
+        session.close()
+
+
 def get_questionnaire_session_service(
     settings: Annotated[Settings, Depends(get_settings)],
+    session: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> Generator[QuestionnaireSessionService, None, None]:
     """Use PostgreSQL when configured; Redis is a best-effort cache, never the authority."""
     configuration = _questionnaire_configuration()
@@ -56,25 +69,20 @@ def get_questionnaire_session_service(
         if settings.redis_url_value
         else None
     )
-    if not settings.database_url_value:
+    if session is None:
         yield QuestionnaireSessionService(
             _questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
         )
         return
-    engine = create_database_engine(settings)
-    session: Session = create_session_factory(engine)()
-    try:
-        repository = SqlAlchemyQuestionnaireSessionRepository(session, configuration)
-        yield QuestionnaireSessionService(
-            repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
-        )
-    finally:
-        session.close()
-        engine.dispose()
+    repository = SqlAlchemyQuestionnaireSessionRepository(session, configuration)
+    yield QuestionnaireSessionService(
+        repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
+    )
 
 
 def get_loan_details_use_case(
     settings: Annotated[Settings, Depends(get_settings)],
+    session: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> Generator[GetLoanDetails, None, None]:
     """Compose one request-scoped approved-serving loan-detail use case.
 
@@ -82,16 +90,10 @@ def get_loan_details_use_case(
     to fall back to prototype data.  The endpoint therefore returns a typed
     unavailable response until an approved catalogue database is configured.
     """
-    if not settings.database_url_value:
+    if session is None:
         raise ApiError(
             status_code=503,
             code=ErrorCode.SERVICE_UNAVAILABLE,
             message="Loan catalogue is temporarily unavailable.",
         )
-    engine = create_database_engine(settings)
-    session: Session = create_session_factory(engine)()
-    try:
-        yield GetLoanDetails(SqlAlchemyServingLoanCatalogueRepository(session))
-    finally:
-        session.close()
-        engine.dispose()
+    yield GetLoanDetails(SqlAlchemyServingLoanCatalogueRepository(session))

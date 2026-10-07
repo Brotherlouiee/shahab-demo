@@ -15,13 +15,17 @@ def create_database_engine(settings: Settings) -> Engine:
     database_url = settings.database_url_value
     if not database_url:
         raise RuntimeError("Database is not configured.")
+    options: dict[str, object] = {
+        "pool_pre_ping": True,
+        "pool_size": settings.database_pool_size,
+        "max_overflow": settings.database_max_overflow,
+        "pool_timeout": settings.database_connect_timeout_seconds,
+    }
+    if database_url.startswith("postgresql"):
+        options["connect_args"] = {"connect_timeout": settings.database_connect_timeout_seconds}
     return create_engine(
         database_url,
-        pool_pre_ping=True,
-        pool_size=settings.database_pool_size,
-        max_overflow=settings.database_max_overflow,
-        pool_timeout=settings.database_connect_timeout_seconds,
-        connect_args={"connect_timeout": settings.database_connect_timeout_seconds},
+        **options,
     )
 
 
