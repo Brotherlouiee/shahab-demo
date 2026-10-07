@@ -6,9 +6,10 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
     await route.continue();
   });
 
-  await page.goto("/");
+  const navigation = page.goto("/", { waitUntil: "commit" });
   await expect(page.locator("#initial-page-skeleton")).toBeVisible();
   await expect(page.locator("#root")).toBeEmpty();
+  await navigation;
   await expect(page.getByRole("button", { name: "ورود" })).toBeVisible();
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
 });
