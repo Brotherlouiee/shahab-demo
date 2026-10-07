@@ -82,6 +82,7 @@ class SqlAlchemyServingLoanCatalogueRepository(ServingLoanCatalogueRepository):
                 LoanProductVersion.source_file_id == ServingCatalogueVersion.data_source_file_id,
             )
         )
+
     @staticmethod
     def _to_record(row) -> PublishedLoanRecord:
         version, product, lender, terms, conditions, facts = row
