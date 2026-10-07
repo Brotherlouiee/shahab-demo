@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends, Request
-from redis import Redis
 from sqlalchemy.orm import Session, sessionmaker
 
 from backend.app.api.errors import ApiError, ErrorCode
@@ -34,7 +33,7 @@ def get_app_logger(settings: Annotated[Settings, Depends(get_settings)]) -> logg
 
 
 @lru_cache
-def _questionnaire_configuration() -> QuestionnaireConfiguration:
+def get_questionnaire_configuration() -> QuestionnaireConfiguration:
     root = Path(__file__).resolve().parents[3]
     return load_questionnaire_configuration(
         root / "data/contracts/questionnaire-configuration.v1.json",
@@ -59,22 +58,22 @@ def get_request_database_session(request: Request) -> Generator[Session | None, 
 
 
 def get_questionnaire_session_service(
-    settings: Annotated[Settings, Depends(get_settings)],
+    request: Request,
     session: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> Generator[QuestionnaireSessionService, None, None]:
     """Use PostgreSQL when configured; Redis is a best-effort cache, never the authority."""
-    configuration = _questionnaire_configuration()
-    cache = (
-        RedisQuestionnaireSessionCache(Redis.from_url(settings.redis_url_value, decode_responses=True))
-        if settings.redis_url_value
-        else None
-    )
+    configuration = get_questionnaire_configuration()
+    cache = request.app.state.questionnaire_session_cache
     if session is None:
         yield QuestionnaireSessionService(
             _questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
         )
         return
-    repository = SqlAlchemyQuestionnaireSessionRepository(session, configuration)
+    repository = SqlAlchemyQuestionnaireSessionRepository(
+        session,
+        configuration,
+        reference_catalogue=request.app.state.questionnaire_reference_catalogue,
+    )
     yield QuestionnaireSessionService(
         repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
     )

@@ -759,6 +759,18 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 **خارج از scope:** PostgreSQL schema/migration، Redis fallback، retention، داده وام PUBLISHED، D-005، scoring، API response، UI، provider خارجی، deploy و سند تداوم تغییر نمی‌کنند.
 
 
+### بهینه‌سازی queryهای پرسشنامه و جزئیات وام — US-09.T06U
+
+**هدف:** حذف queryهای تکراری در ثبت پاسخ و جلوگیری از خواندن کل کاتالوگ برای جزئیات یک وام، بدون تغییر قرارداد API، دادهٔ PUBLISHED، retention، Redis fallback، D-005 یا scoring.
+
+1. شناسه‌های مرجع پرسشنامه فقط یک‌بار در lifecycle برنامه از کاتالوگ تأییدشده آماده می‌شوند؛ هر request آن‌ها را reuse می‌کند و دیگر catalog-check/commit تکراری ندارد.
+2. هر درخواست همچنان Session مستقل خود را دارد؛ Session یا transaction بین requestها share نمی‌شود.
+3. جزئیات وام فقط با شناسهٔ opaque همان وام و تمام predicateهای publication موجود query می‌شود؛ خواندن و scan همهٔ ردیف‌های serving catalogue ممنوع است.
+4. معیار پذیرش local warm: p95 ثبت پاسخ در مرورگر کمتر از ۵۰ms و مسیر جزئیات با یک request برای یک loanId، همراه با ثبت زمان مرحله‌ایِ redacted برای تشخیص گلوگاه.
+5. تست regression باید reuse reference catalogue، بسته‌شدن Session، فیلتر PUBLISHED و lookup تک‌وام را پوشش دهد؛ اندازه‌گیری واقعی مرورگر از CI جدا گزارش می‌شود.
+
+**خارج از scope:** migration/schema، دادهٔ وام، Redis fallback، retention، UI، URL، scoring، D-005، provider خارجی، deploy و سند تداوم تغییر نمی‌کنند.
+
 ### استقرار و راستی‌آزمایی محیط پایدار — `US-09.T07`
 
 **هدف و وابستگی:** پس از T06A، یک محیط staging با PostgreSQL دائمی و بک‌اند مستقر بساز؛ سایت Netlify را به همان API وصل کن و مسیر واقعی را روی URL در دسترس مالک محصول اثبات کن. این تسک بخشی از تحویل US-09 است؛ سبز بودن CI یا دیتابیس موقت GitHub Actions جای آن را نمی‌گیرد. انتشار production نهایی، امنیت و release gate همچنان در US-11/US-12 انجام می‌شوند.

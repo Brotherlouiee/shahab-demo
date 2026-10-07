@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T06U:** کاتالوگ مرجع پرسشنامه در lifecycle یک‌بار آماده می‌شود و پاسخ‌های بعدی دیگر آن را query/commit نمی‌کنند. جزئیات یک وام با شناسهٔ همان loan و predicateهای PUBLISHED از PostgreSQL خوانده می‌شود؛ endpoint دیگر کل serving catalogue را برای یافتن یک وام scan نمی‌کند. قرارداد API، داده، D-005، scoring، retention، Redis fallback، UI و استقرار تغییری نکرده‌اند.
+
 - **US-09.T06T:** FastAPI اکنون engine و session factory SQLAlchemy را یک‌بار در lifecycle می‌سازد و فقط در shutdown dispose می‌کند. هر request یک Session مستقل و بسته‌شونده می‌گیرد؛ timing ایمن development فقط endpoint ثابت، status و مدت را log می‌کند. PostgreSQL، Redis fallback، retention، دادهٔ PUBLISHED، D-005، scoring و قرارداد API تغییری نکرده‌اند.
 
 - **Local development:** Compose now publishes Vite on `5173`, avoiding the

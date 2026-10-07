@@ -15,8 +15,10 @@ from .api.middleware import correlation_id_middleware
 from .api.timing import development_timing_middleware
 from .api.v1.router import router as api_v1_router
 from .core.config import Settings, get_settings
+from .core.dependencies import get_questionnaire_configuration
 from .core.logging import configure_logging
 from .infrastructure.db.session import create_database_engine, create_session_factory
+from .questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 
 
 @asynccontextmanager
@@ -27,9 +29,16 @@ async def database_lifespan(app: FastAPI) -> AsyncIterator[None]:
         engine = create_database_engine(app.state.settings)
         app.state.database_engine = engine
         app.state.database_session_factory = create_session_factory(engine)
+        with app.state.database_session_factory() as bootstrap_session:
+            repository = SqlAlchemyQuestionnaireSessionRepository(
+                bootstrap_session,
+                get_questionnaire_configuration(),
+            )
+            app.state.questionnaire_reference_catalogue = repository.reference_catalogue
     else:
         app.state.database_engine = None
         app.state.database_session_factory = None
+        app.state.questionnaire_reference_catalogue = None
     try:
         yield
     finally:
@@ -85,6 +94,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.logger = logger
     app.state.database_engine = None
     app.state.database_session_factory = None
+    app.state.questionnaire_reference_catalogue = None
+    app.state.questionnaire_session_cache = None
     return app
 
 

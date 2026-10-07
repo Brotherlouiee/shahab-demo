@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
@@ -38,13 +39,25 @@ class SqlAlchemyServingLoanCatalogueRepository(ServingLoanCatalogueRepository):
         return tuple(self._to_record(row) for row in self._rows())
 
     def get_current_serving_loan(self, loan_id: str) -> PublishedLoanRecord | None:
-        for row in self._rows():
-            if str(row[0].loan_product_version_id) == loan_id:
-                return self._to_record(row)
-        return None
+        try:
+            identifier = UUID(loan_id)
+        except ValueError:
+            return None
+        statement = self._statement().where(LoanProductVersion.loan_product_version_id == identifier)
+        try:
+            row = self._session.execute(statement).one_or_none()
+        except SQLAlchemyError as error:
+            raise ServingCatalogueUnavailableError("approved loan catalogue is unavailable") from error
+        return None if row is None else self._to_record(row)
 
     def _rows(self):
-        statement = (
+        try:
+            return self._session.execute(self._statement()).all()
+        except SQLAlchemyError as error:
+            raise ServingCatalogueUnavailableError("approved loan catalogue is unavailable") from error
+
+    def _statement(self):
+        return (
             select(LoanProductVersion, LoanProduct, Lender, LoanTerms, LoanConditions, LoanServingFacts)
             .join(
                 ServingCatalogueMember,
@@ -69,11 +82,6 @@ class SqlAlchemyServingLoanCatalogueRepository(ServingLoanCatalogueRepository):
                 LoanProductVersion.source_file_id == ServingCatalogueVersion.data_source_file_id,
             )
         )
-        try:
-            return self._session.execute(statement).all()
-        except SQLAlchemyError as error:
-            raise ServingCatalogueUnavailableError("approved loan catalogue is unavailable") from error
-
     @staticmethod
     def _to_record(row) -> PublishedLoanRecord:
         version, product, lender, terms, conditions, facts = row
