@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T06X:** stylesheet فونت دیگر نخستین paint را مسدود نمی‌کند و تصویرهای پایینِ home lazy/async decode می‌شوند. fallback document و Skeletonهای React برای home، پرسشنامه، نتایج/مقایسه و جزئیات با هندسهٔ همان صفحه نمایش داده می‌شوند؛ هیچ داده، API، D-005، scoring، migration یا استقراری تغییر نکرده است.
+
 - **US-09.T06W:** fallback نخستین paint پس از ۵۰ms برای home/refresh افزوده شد، انتظار ثبت پاسخ پرسشنامه Skeleton همان ناحیه را نشان می‌دهد و دکمهٔ «مقایسه کن» با یک انتخاب خاکستری و غیرقابل‌کلیک است. داده، API، D-005، scoring، migration و استقرار تغییری نکرده‌اند.
 
 - **US-09.T06V:** استاندارد Skeleton با تأخیر ۵۰ms برای loading داده در نتیجه، جزئیات و مقایسه اضافه شد؛ متن‌های loading جایگزین شدند. null monetary value دیگر با «تومان» نمایش داده نمی‌شود؛ کارت‌های comparison به جزئیات همان وام می‌روند، ترتیب انتخاب از بیشترین تطابق است و دکمهٔ مقایسه تا دو انتخاب disabled می‌ماند. داده، API، D-005، scoring، retention و استقرار تغییری نکرده‌اند.
