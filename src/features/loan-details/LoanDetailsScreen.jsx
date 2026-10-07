@@ -4,9 +4,14 @@ import BankIdentity from "./BankIdentity.jsx";
 import { fetchLoanDetails } from "./loanDetailsApi";
 import LoanPercent from "./LoanPercent.jsx";
 import { toPersianDigits } from "./toPersianDigits.mjs";
+import DeferredPageSkeleton from "../../shared/DeferredPageSkeleton.jsx";
 
 function formatNumber(value) {
   return value === null || value === undefined ? "اعلام نشده" : Number(value).toLocaleString("fa-IR").replaceAll("٬", "/");
+}
+
+function formatTomans(value) {
+  return value === null || value === undefined ? "اعلام نشده" : `${formatNumber(value)} تومان`;
 }
 
 function DetailValue({ label, children }) {
@@ -40,7 +45,7 @@ export default function LoanDetailsScreen({ loanId, header, onAiAnalysis }) {
   return (
     <main className="hp-questionnaire-page hp-loan-details-page" dir="rtl" aria-busy={state.status === "loading"}>
       {header}
-      {state.status === "loading" ? <section className="hp-loan-details-state" role="status">در حال دریافت جزئیات وام…</section> : null}
+      <DeferredPageSkeleton active={state.status === "loading"} variant="detail" />
       {state.status === "empty" ? <section className="hp-loan-details-state">جزئیات این وام در فهرست تأییدشده موجود نیست.</section> : null}
       {state.status === "error" ? (
         <section className="hp-loan-details-state" role="alert">
@@ -62,11 +67,11 @@ function LoanDetail({ detail, onAiAnalysis }) {
       </div>
       <div className="hp-loan-detail-groups" aria-label="مشخصات تأییدشدهٔ وام">
         <DetailGroup>
-          <DetailValue label="حداکثر مبلغ وام">{formatNumber(detail.maxAmountTomans)} تومان</DetailValue>
+          <DetailValue label="حداکثر مبلغ وام">{formatTomans(detail.maxAmountTomans)}</DetailValue>
           <DetailValue label="نرخ بهره اعلامی"><LoanPercent value={detail.interestRatePercent} /></DetailValue>
         </DetailGroup>
         <DetailGroup>
-          <DetailValue label="مبلغ هر قسط">{formatNumber(detail.monthlyInstallmentTomans)} تومان</DetailValue>
+          <DetailValue label="مبلغ هر قسط">{formatTomans(detail.monthlyInstallmentTomans)}</DetailValue>
           <DetailValue label="حداکثر زمان بازپرداخت">{detail.maxRepaymentMonths === null ? "اعلام نشده" : `${formatNumber(detail.maxRepaymentMonths)} ماه`}</DetailValue>
         </DetailGroup>
         <DetailGroup>

@@ -50,7 +50,9 @@ test("keeps a visible loading state until the approved-detail response arrives",
   }));
 
   await openDetail(page);
-  await expect(page.getByRole("status")).toContainText("در حال دریافت جزئیات وام");
+  const skeleton = page.getByRole("status", { name: "در حال بارگذاری" });
+  await expect(skeleton).toBeVisible();
+  await expect(skeleton).toHaveClass(/hp-deferred-skeleton/);
   await releaseResponse();
   await expect(page.getByText("طرح نمونه")).toBeVisible();
 });

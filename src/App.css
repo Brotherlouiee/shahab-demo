@@ -5900,3 +5900,12 @@ right: 16px;
 .hp-loan-result-card .hp-loan-docs-link:focus-visible {
   color: #0067ff !important;
 }
+
+
+/* Product-wide delayed skeleton: real content states replace this once ready. */
+.hp-deferred-skeleton { display: grid; gap: 12px; padding: 24px; margin: 20px auto; width: min(100% - 32px, 720px); border-radius: 18px; }
+.hp-skeleton-line, .hp-skeleton-card { display: block; border-radius: 10px; background: linear-gradient(90deg, #edf1f3 25%, #f8fafb 37%, #edf1f3 63%); background-size: 400% 100%; animation: hp-skeleton-shimmer 1.2s ease-in-out infinite; }
+.hp-skeleton-title { width: 42%; height: 24px; }
+.hp-skeleton-line { height: 16px; }
+.hp-skeleton-card { height: 124px; }
+@keyframes hp-skeleton-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
