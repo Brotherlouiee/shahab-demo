@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Fixed
+
+- **US-09.T06S:** endpoint توصیه یک snapshot تأییدشده را فقط یک‌بار می‌خواند و چهار fact واقعیِ کارت را از همان serving catalogue در پاسخ برمی‌گرداند. کارت نتیجه با این خلاصهٔ server-owned دیگر پس از spinner برای هر وام درخواست جزئیات جداگانه نمی‌فرستد؛ شروط کامل فقط در صفحهٔ جزئیات خوانده می‌شوند. داده، score، ضرایب D-005، threshold، session و استقرار تغییر نکرده‌اند.
+
 ### Security
 
 - **US-09.T06R:** زنجیرهٔ توسعهٔ Vite به نسخهٔ pin‌شدهٔ امن `8.3.3` ارتقا یافت؛ lockfile نسخه‌های امن PostCSS، nanoid و source-map-js را ثبت می‌کند. `npm audit` نهایی صفر آسیب‌پذیری گزارش می‌دهد. UI، API، داده و استقرار تغییری نکرده‌اند.

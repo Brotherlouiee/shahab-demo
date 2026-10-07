@@ -83,5 +83,13 @@ class RecommendCanonicalLoans:
 
     def execute(self, impacts: tuple[CategoryImpact, ...]) -> tuple[RecommendationSnapshot, CanonicalPartition]:
         snapshot = self._repository.read_approved_snapshot()
+        return snapshot, self.execute_for_snapshot(snapshot, impacts)
+
+    @staticmethod
+    def execute_for_snapshot(
+        snapshot: RecommendationSnapshot, impacts: tuple[CategoryImpact, ...]
+    ) -> CanonicalPartition:
+        """Score one already-approved read without reopening the snapshot repository."""
+
         _validate_snapshot(snapshot)
-        return snapshot, score_official_categories(snapshot.candidates, impacts)
+        return score_official_categories(snapshot.candidates, impacts)

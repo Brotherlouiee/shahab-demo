@@ -26,9 +26,26 @@ const response = {
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
+for (const recommendation of [
+  ...response.rankedRecommendations,
+  ...response.lowCompatibilityRecommendations,
+  ...response.needsReview,
+]) {
+  recommendation.loanSummary = {
+    maxAmountTomans: 500000000,
+    monthlyInstallmentTomans: 12000000,
+    maxRepaymentMonths: 48,
+    interestRatePercent: 18,
+  };
+}
+
 test("canonical questionnaire reaches the active real-result route and published detail", async ({ page }) => {
   const writes = [];
   const posts = [];
+  const detailRequests = [];
+  page.on("request", (request) => {
+    if (request.url().includes("/api/v1/loans/")) detailRequests.push(request.url());
+  });
   await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => {
     writes.push({ url: route.request().url(), body: route.request().postDataJSON() });
@@ -83,6 +100,9 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
   await expect(page).toHaveURL(/\/loan-results$/);
   await expect(page.getByText("میثاق ۲")).toBeVisible();
+  await expect(page.locator(".hp-loan-summary-grid").first()).toBeVisible();
+  // Rendering the result must not initiate a per-card detail request wave.
+  expect(detailRequests).toHaveLength(0);
   await expect(page.getByText("میثاق 2", { exact: true })).toHaveCount(0);
   await expect(page.locator(".hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   const resultLogo = page.locator(".hp-loan-result-head img").first();

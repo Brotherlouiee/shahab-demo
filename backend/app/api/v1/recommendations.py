@@ -47,6 +47,15 @@ class RecommendationRequest(BaseModel):
     session_id: str = Field(alias="sessionId", min_length=1)
 
 
+class LoanResultSummaryResponse(BaseModel):
+    """Safe card facts from the same PUBLISHED serving record."""
+
+    max_amount_tomans: float | None = Field(alias="maxAmountTomans")
+    monthly_installment_tomans: float | None = Field(alias="monthlyInstallmentTomans")
+    max_repayment_months: int | None = Field(alias="maxRepaymentMonths")
+    interest_rate_percent: float | None = Field(alias="interestRatePercent")
+
+
 class RankedRecommendationResponse(BaseModel):
     loan_id: str = Field(alias="loanId")
     lender_name: str = Field(alias="lenderName")
@@ -54,6 +63,7 @@ class RankedRecommendationResponse(BaseModel):
     bank_logo_reference: str | None = Field(default=None, alias="bankLogoReference")
     compatibility_score: float = Field(alias="compatibilityScore", ge=0, le=1)
     compatibility_reason: str = Field(alias="compatibilityReason")
+    loan_summary: LoanResultSummaryResponse = Field(alias="loanSummary")
 
 
 class NeedsReviewResponse(BaseModel):
@@ -62,6 +72,7 @@ class NeedsReviewResponse(BaseModel):
     loan_name: str = Field(alias="loanName")
     bank_logo_reference: str | None = Field(default=None, alias="bankLogoReference")
     ranking_excluded_reasons: tuple[str, ...] = Field(alias="rankingExcludedReasons")
+    loan_summary: LoanResultSummaryResponse = Field(alias="loanSummary")
 
 
 class RecommendationResponse(BaseModel):
@@ -123,40 +134,43 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
         snapshot_repository = SqlAlchemyRecommendationSnapshotRepository(db)
         snapshot = snapshot_repository.read_approved_snapshot()
         impacts = SqlAlchemyCanonicalImpactRepository(db).read_approved_impacts(answers, snapshot.config_version)
-        _, partition = RecommendCanonicalLoans(snapshot_repository).execute(impacts)
+        partition = RecommendCanonicalLoans.execute_for_snapshot(snapshot, impacts)
         records = SqlAlchemyServingLoanCatalogueRepository(db).list_current_serving_loans()
-        catalogue = {record.summary.loan_id: record.summary for record in records}
+        catalogue = {record.summary.loan_id: record for record in records}
         if set(catalogue) != {candidate.loan_id for candidate in snapshot.candidates}:
             raise SnapshotIntegrityError("serving details and recommendation snapshot disagree")
         ranked = tuple(
             RankedRecommendationResponse(
                 loanId=item.loan_id,
-                lenderName=catalogue[item.loan_id].lender_name,
-                loanName=catalogue[item.loan_id].loan_name,
-                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
+                lenderName=catalogue[item.loan_id].summary.lender_name,
+                loanName=catalogue[item.loan_id].summary.loan_name,
+                bankLogoReference=catalogue[item.loan_id].summary.bank_logo_reference,
                 compatibilityScore=float(item.score),
                 compatibilityReason="سازگاری دسته‌بندی شرایط وام با پاسخ‌های ثبت‌شدهٔ شما",
+                loanSummary=_loan_result_summary(catalogue[item.loan_id].detail),
             )
             for item in partition.ranked
         )
         low_compatibility = tuple(
             RankedRecommendationResponse(
                 loanId=item.loan_id,
-                lenderName=catalogue[item.loan_id].lender_name,
-                loanName=catalogue[item.loan_id].loan_name,
-                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
+                lenderName=catalogue[item.loan_id].summary.lender_name,
+                loanName=catalogue[item.loan_id].summary.loan_name,
+                bankLogoReference=catalogue[item.loan_id].summary.bank_logo_reference,
                 compatibilityScore=float(item.score),
                 compatibilityReason="تطابق پایین؛ پیشنهاد اصلی نیست",
+                loanSummary=_loan_result_summary(catalogue[item.loan_id].detail),
             )
             for item in partition.below_threshold
         )
         needs_review = tuple(
             NeedsReviewResponse(
                 loanId=item.loan_id,
-                lenderName=catalogue[item.loan_id].lender_name,
-                loanName=catalogue[item.loan_id].loan_name,
-                bankLogoReference=catalogue[item.loan_id].bank_logo_reference,
+                lenderName=catalogue[item.loan_id].summary.lender_name,
+                loanName=catalogue[item.loan_id].summary.loan_name,
+                bankLogoReference=catalogue[item.loan_id].summary.bank_logo_reference,
                 rankingExcludedReasons=tuple(_public_review_reason(reason) for reason in item.excluded_reasons),
+                loanSummary=_loan_result_summary(catalogue[item.loan_id].detail),
             )
             for item in partition.needs_review
         )
@@ -176,6 +190,17 @@ def _recommend_from_session(db: Session, session_id: str) -> RecommendationRespo
         raise ApiError(
             status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Recommendation catalogue is unavailable."
         ) from error
+
+
+def _loan_result_summary(detail) -> LoanResultSummaryResponse:
+    """Expose only the four already-public card facts; conditions stay on details."""
+
+    return LoanResultSummaryResponse(
+        maxAmountTomans=detail.max_amount_tomans,
+        monthlyInstallmentTomans=detail.monthly_installment_tomans,
+        maxRepaymentMonths=detail.max_repayment_months,
+        interestRatePercent=detail.interest_rate_percent,
+    )
 
 
 def _public_review_reason(reason: str) -> str:
