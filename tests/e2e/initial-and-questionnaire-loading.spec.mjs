@@ -36,10 +36,16 @@ test("shows a delayed skeleton while a canonical questionnaire answer is saved",
 });
 
 test("renders the one-loan comparison action as visibly disabled", async ({ page }) => {
-  await page.setContent(`
-    <button class="hp-simple-compare-submit" disabled>مقایسه کن (۱ وام)</button>
-  `);
-  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toBeDisabled();
-  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toHaveCSS("cursor", "not-allowed");
-  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toHaveCSS("background-color", "rgb(140, 140, 140)");
+  await page.goto("/");
+  await page.evaluate(() => {
+    const button = document.createElement("button");
+    button.className = "hp-simple-compare-submit";
+    button.disabled = true;
+    button.textContent = "مقایسه کن (۱ وام)";
+    document.body.append(button);
+  });
+  const button = page.getByRole("button", { name: /مقایسه کن/ });
+  await expect(button).toBeDisabled();
+  await expect(button).toHaveCSS("cursor", "not-allowed");
+  await expect(button).toHaveCSS("background-color", "rgb(140, 140, 140)");
 });
