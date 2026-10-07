@@ -53,24 +53,11 @@ class LiveRecommendationTests(unittest.TestCase):
                 approval_reason="official source regression",
             )
         engine.dispose()
-        self.patches = [
-            patch(
-                "backend.app.core.dependencies.create_database_engine",
-                side_effect=lambda _: create_engine(self.database_url),
-            ),
-            patch(
-                "backend.app.api.v1.recommendations.create_database_engine",
-                side_effect=lambda _: create_engine(self.database_url),
-            ),
-        ]
-        for item in self.patches:
-            item.start()
         self.client = TestClient(create_app(Settings(database_url=self.database_url)))
+        self.client.__enter__()
 
     def tearDown(self):
-        self.client.close()
-        for item in reversed(self.patches):
-            item.stop()
+        self.client.__exit__(None, None, None)
         self.directory.cleanup()
 
     def test_complete_session_returns_only_published_loans_and_safe_details(self):

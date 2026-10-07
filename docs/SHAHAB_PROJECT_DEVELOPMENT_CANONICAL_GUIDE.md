@@ -747,6 +747,17 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 **خارج از scope:** دادهٔ منبع، migration، session/OTP، سیاست نگهداری، قواعد D-005، API جزئیات، UI ظاهری، provider خارجی، استقرار و سند تداوم تغییر نمی‌کنند.
 
+### استفادهٔ پایدار از connection pool در API محلی — `US-09.T06T`
+
+**هدف:** تأخیر ناشی از ساخت و dispose کردن engine SQLAlchemy در هر درخواست محلی حذف شود، بدون تغییر دادن قرارداد عمومی API، دادهٔ PUBLISHED، retention، Redis fallback یا منطق توصیه.
+
+1. FastAPI در lifespan خود فقط یک database engine و session factory می‌سازد، آن‌ها را در `app.state` نگه می‌دارد و فقط در shutdown همان engine را dispose می‌کند.
+2. dependencyهای questionnaire، جزئیات و recommendation در هر HTTP request از همان factory یک `Session` تازه می‌گیرند و فقط همان Session را در پایان request می‌بندند؛ هیچ Session میان requestها share نمی‌شود.
+3. در محیط local/test فقط برای ساخت session، ثبت پاسخ و recommendation، log ساخت‌یافته با نام ثابت endpoint، status و `duration_ms` ثبت می‌شود. session ID، answer، payload، database URL و secret نباید در log بیایند؛ production timing development را منتشر نمی‌کند.
+4. تست‌ها باید creation یک‌بارهٔ engine در lifecycle، dispose در shutdown، استقلال/بسته‌شدن Sessionها، timing redacted و مسیر کامل session → answer → recommendation را ثابت کنند. اندازه‌گیری واقعی localhost پیش و پس از تغییر، جدا از CI ثبت شود.
+
+**خارج از scope:** PostgreSQL schema/migration، Redis fallback، retention، داده وام PUBLISHED، D-005، scoring، API response، UI، provider خارجی، deploy و سند تداوم تغییر نمی‌کنند.
+
 
 ### استقرار و راستی‌آزمایی محیط پایدار — `US-09.T07`
 

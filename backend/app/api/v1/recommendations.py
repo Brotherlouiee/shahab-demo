@@ -11,8 +11,7 @@ from sqlalchemy.orm import Session
 
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.core.config import Settings, get_settings
-from backend.app.core.dependencies import _questionnaire_configuration
-from backend.app.infrastructure.db.session import create_database_engine, create_session_factory
+from backend.app.core.dependencies import _questionnaire_configuration, get_request_database_session
 from backend.app.loans.domain.models import ServingCatalogueUnavailableError
 from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 from backend.app.questionnaire.application.use_cases import QuestionnaireSessionService
@@ -89,17 +88,13 @@ class RecommendationResponse(BaseModel):
 def recommend(
     payload: Annotated[RecommendationRequest, Body()],
     settings: Annotated[Settings, Depends(get_settings)],
+    db: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> RecommendationResponse:
-    if not settings.database_url_value:
+    if db is None:
         raise ApiError(
             status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Recommendation catalogue is unavailable."
         )
-    engine = create_database_engine(settings)
-    try:
-        with create_session_factory(engine)() as db:
-            return _recommend_from_session(db, payload.session_id)
-    finally:
-        engine.dispose()
+    return _recommend_from_session(db, payload.session_id)
 
 
 def _recommend_from_session(db: Session, session_id: str) -> RecommendationResponse:
