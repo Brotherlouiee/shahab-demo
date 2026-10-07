@@ -6,6 +6,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from redis import Redis
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -18,6 +19,7 @@ from .core.config import Settings, get_settings
 from .core.dependencies import get_questionnaire_configuration
 from .core.logging import configure_logging
 from .infrastructure.db.session import create_database_engine, create_session_factory
+from .questionnaire.infrastructure.redis_cache import RedisQuestionnaireSessionCache
 from .questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 
 
@@ -25,6 +27,7 @@ from .questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestion
 async def database_lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Own the process-wide engine while request dependencies own sessions."""
     engine = None
+    cache = None
     if app.state.settings.database_url_value:
         engine = create_database_engine(app.state.settings)
         app.state.database_engine = engine
@@ -39,9 +42,16 @@ async def database_lifespan(app: FastAPI) -> AsyncIterator[None]:
         app.state.database_engine = None
         app.state.database_session_factory = None
         app.state.questionnaire_reference_catalogue = None
+    if app.state.settings.redis_url_value:
+        cache = RedisQuestionnaireSessionCache(
+            Redis.from_url(app.state.settings.redis_url_value, decode_responses=True)
+        )
+    app.state.questionnaire_session_cache = cache
     try:
         yield
     finally:
+        if cache is not None:
+            cache.close()
         if engine is not None:
             engine.dispose()
 
