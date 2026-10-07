@@ -162,8 +162,13 @@ test("canonical questionnaire reaches the active real-result route and published
 
   await expect(page.getByRole("button", { name: "بررسی آمادگی دریافت وام" })).toBeDisabled();
 
+  const renderErrors = [];
+  page.on("pageerror", (error) => renderErrors.push(error.message));
   await page.getByRole("button", { name: "مقایسه وام" }).click();
-  await expect(page).toHaveURL(/\/compare-loans$/);
+  await expect(page).toHaveURL(/\/compare-loans$/).catch(() => {
+    console.log("compare render errors:", JSON.stringify(renderErrors));
+    throw new Error("comparison route did not open");
+  });
   await expect(page.locator(".hp-loan-compare-card .hp-loan-result-head img").first()).toHaveAttribute("src", /bank-logos/);
   expect(await page.locator(".hp-loan-compare-card .hp-loan-result-head img").first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
   await expectLogoOffsets(page.locator(".hp-loan-compare-card"), shortNameLogoOffset);
