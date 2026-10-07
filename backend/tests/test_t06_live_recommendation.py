@@ -123,10 +123,16 @@ class LiveRecommendationTests(unittest.TestCase):
                 self.assertEqual(
                     item["loanSummary"],
                     {
-                        "maxAmountTomans": detail.json()["maxAmountTomans"],
-                        "monthlyInstallmentTomans": detail.json()["monthlyInstallmentTomans"],
+                        "maxAmountTomans": None
+                        if detail.json()["maxAmountTomans"] is None
+                        else float(detail.json()["maxAmountTomans"]),
+                        "monthlyInstallmentTomans": None
+                        if detail.json()["monthlyInstallmentTomans"] is None
+                        else float(detail.json()["monthlyInstallmentTomans"]),
                         "maxRepaymentMonths": detail.json()["maxRepaymentMonths"],
-                        "interestRatePercent": detail.json()["interestRatePercent"],
+                        "interestRatePercent": None
+                        if detail.json()["interestRatePercent"] is None
+                        else float(detail.json()["interestRatePercent"]),
                     },
                 )
         self.assertTrue(
