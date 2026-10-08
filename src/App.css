@@ -5990,13 +5990,13 @@ right: 16px;
 .hp-sidebar-menu button,
 .hp-sidebar-menu a {
   display: flex; align-items: center; gap: 8px;
-  width: 100%; min-height: 48px; border: 0; border-radius: 0; background: transparent;
+  width: 100%; min-height: 38px; border: 0; border-radius: 0; background: transparent;
   color: #000000; cursor: pointer; font: inherit; font-size: 16px; font-weight: 800;
   justify-content: flex-start; padding: 7px 0; text-align: right;
 }
 .hp-sidebar-menu button:hover,
 .hp-sidebar-menu button:focus-visible { background: #f4f4f4; outline: none; }
-.hp-sidebar-menu button.is-active { width: 100%; min-height: 48px; background: #f4f4f4; color: #000000; padding: 7px 0; transform: none; }
+.hp-sidebar-menu button.is-active { width: 100%; min-height: 38px; background: #f4f4f4; color: #000000; padding: 7px 0; transform: none; }
 .hp-sidebar-menu button:nth-child(1):not(:only-child) { border-bottom: 1px solid #a8a8a8; }
 .hp-sidebar-menu button:nth-child(3) { border-bottom: 1px solid #a8a8a8; }
 .hp-sidebar-icon,
