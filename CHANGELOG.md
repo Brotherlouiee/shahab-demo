@@ -32,6 +32,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T06Z:** منوی همبرگری مهمان/کاربر واردشده، مسیر ورود OTP نمایشی، پروفایل محلی با شمارهٔ غیرقابل‌ویرایش و کنترل عکس حداکثر ۱۰۰KB، وام‌های نشان‌شدهٔ محلی و صفحهٔ درباره ما افزوده شدند. bookmark فقط card منتشرشده و `loanId` را در همان مرورگر نگه می‌دارد و جزئیات را از API می‌خواند؛ هیچ API، migration، داده، D-005، scoring یا استقرار تغییر نکرده است.
+
+
 - **US-09.T06Y:** پوشهٔ `docs/runbook/` و runbook استقرار محیط پایدار اضافه شد؛ مسیر PostgreSQL دائمی، publication دادهٔ تأییدشده، FastAPI HTTPS، Netlify، آزمون URL واقعی، restart، backup و rollback را ثبت می‌کند. این تغییر هیچ سرور، secret، داده، API یا deployment واقعی ایجاد نکرده است.
 
 - **US-09.T06Q:** fallback static صفحهٔ mock از `index.html` حذف شد؛ `#root` پیش از mount React خالی است و آزمون واحد و E2E refresh، نبود متن‌های صفحهٔ جعلی را قفل می‌کنند. UI فعال، داده، API، score و استقرار تغییری نکردند.
