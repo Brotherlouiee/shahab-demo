@@ -780,6 +780,10 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   );
 }
 
+function AccountHeader({ onBack, onHome }) {
+  return <header className="hp-account-header"><button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 12H5" /><path d="m12 19-7-7 7-7" /></svg></button><a className="hp-questionnaire-brand" href="/" onClick={onHome}><img src={logoUrl} alt="شهاب" /><span><strong>شهاب</strong><small>(شبکه همرسانی اعتبار برخط)</small></span></a></header>;
+}
+
 function allRecommendationItems(result) {
   if (!result) return [];
   const items = [
@@ -2782,7 +2786,7 @@ function AccountPage({ profile, onSave, onBack }) {
     if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; }
     const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file);
   }
-  return <main className="hp-account-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={() => {}} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <span className="hp-avatar-icons"><img src={profileIconUrl} alt="" /><img src={addCircleIconUrl} alt="" /></span>}<input type="file" accept="image/*" onChange={selectAvatar} /></label><label>شماره تلفن همراه<input value={draft.phone || ""} disabled /></label><label>نام<input value={draft.firstName || ""} onChange={(event) => update("firstName", event.target.value)} /></label><label>نام خانوادگی<input value={draft.lastName || ""} onChange={(event) => update("lastName", event.target.value)} /></label><label>میزان درآمد ماهانه<select value={draft.income} onChange={(event) => update("income", event.target.value)}><option value="" /><option>کمتر از ۲۰ میلیون تومان</option><option>۲۰ تا ۵۰ میلیون تومان</option><option>بیشتر از ۵۰ میلیون تومان</option></select></label><label>شغل<select value={draft.job} onChange={(event) => update("job", event.target.value)}><option value="" /><option>کارمند</option><option>آزاد</option><option>صاحب کسب‌وکار</option></select></label><label>جنسیت<select value={draft.gender} onChange={(event) => update("gender", event.target.value)}><option value="" /><option>زن</option><option>مرد</option></select></label><button type="button" className="hp-account-save" onClick={() => { onSave(draft); onBack(); }}>ذخیره تغییرات</button></main>;
+  return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.png" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><label>شماره تلفن همراه<input value={draft.phone || ""} disabled /></label><label>نام<input value={draft.firstName || ""} onChange={(event) => update("firstName", event.target.value)} /></label><label>نام خانوادگی<input value={draft.lastName || ""} onChange={(event) => update("lastName", event.target.value)} /></label><label>میزان درآمد ماهانه<select value={draft.income} onChange={(event) => update("income", event.target.value)}><option value="" /><option>کمتر از ۲۰ میلیون تومان</option><option>۲۰ تا ۵۰ میلیون تومان</option><option>بیشتر از ۵۰ میلیون تومان</option></select></label><label>شغل<select value={draft.job} onChange={(event) => update("job", event.target.value)}><option value="" /><option>کارمند</option><option>آزاد</option><option>صاحب کسب‌وکار</option></select></label><label>جنسیت<select value={draft.gender} onChange={(event) => update("gender", event.target.value)}><option value="" /><option>زن</option><option>مرد</option></select></label><button type="button" className="hp-account-save" onClick={() => { onSave(draft); onBack(); }}>ذخیره تغییرات</button></main>;
 }
 
 function AboutPage({ onBack }) {
