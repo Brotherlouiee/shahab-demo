@@ -6003,9 +6003,9 @@ right: 16px;
 .hp-sidebar-icon *,
 .hp-sidebar-menu .hp-sidebar-logout .hp-sidebar-icon,
 .hp-sidebar-menu .hp-sidebar-logout .hp-sidebar-icon * {
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
   color: #000000 !important;
   stroke: #000000 !important;
   fill: none;
