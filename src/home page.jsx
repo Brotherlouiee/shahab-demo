@@ -2838,7 +2838,6 @@ export default function HomePage() {
   function handleAccountCreated(profile) {
     setCachedAccountProfile(profile);
     setAccountProfile(profile);
-    setCurrentView("home");
   }
 
   function handleProfileSaved(profile) {
@@ -2913,7 +2912,7 @@ export default function HomePage() {
         onHome={handleHomeOpen}
       />
       {sidebar}
-      {currentView === "login" ? <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onVerified={handleAccountCreated} /> : null}
+      {currentView === "login" ? <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onVerified={(profile) => { handleAccountCreated(profile); setCurrentView("home"); }} /> : null}
       {currentView === "profile" && accountProfile ? <ProfileScreen profile={accountProfile} onSave={handleProfileSaved} onBack={handleBack} /> : null}
       {currentView === "saved-loans" ? <SavedLoansScreen loans={savedLoans} onBack={handleBack} onDetails={handleSavedLoanDetails} /> : null}
       {currentView === "about" ? <AboutScreen onBack={handleBack} /> : null}
