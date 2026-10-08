@@ -142,6 +142,8 @@ export default function LoanResultsScreen({
   onDetails,
   onCompare,
   onRequest,
+  savedItems = null,
+  showActions = true,
 }) {
   const [mode, setMode] = useState(VIEW_MODES.highest);
   const [lenderName, setLenderName] = useState("");
@@ -167,7 +169,7 @@ export default function LoanResultsScreen({
     saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
   };
 
-  const items = useMemo(() => displayItemsForResultMode(result, mode), [result, mode]);
+  const items = useMemo(() => savedItems || displayItemsForResultMode(result, mode), [result, mode, savedItems]);
   const lenders = useMemo(
     () => [...new Set(items.map((item) => item.lenderName))].sort(new Intl.Collator("fa").compare),
     [items],
@@ -187,7 +189,7 @@ export default function LoanResultsScreen({
         {header}
       </div>
       <div className="hp-loan-results-controls">
-          <div className="hp-loan-results-actions">
+          {showActions ? <div className="hp-loan-results-actions">
             <button
               className="is-primary"
               type="button"
@@ -199,7 +201,7 @@ export default function LoanResultsScreen({
             <button type="button" onClick={() => onCompare(result)} disabled={status !== "ready"}>
               مقایسه وام
             </button>
-          </div>
+          </div> : null}
 
           <div className="hp-loan-result-filters">
             <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} selectedValue={mode} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
