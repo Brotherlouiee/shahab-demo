@@ -6143,3 +6143,25 @@ right: 16px;
   .account-header { margin-bottom: 22px; }
   .account-about-copy h1 { font-size: 20px; }
 }
+
+/* Account entry is intentionally reachable on desktop as well as mobile. */
+.hp-menu-button {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.hp-menu-button span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: #5f6665;
+}
