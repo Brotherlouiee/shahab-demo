@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T06Z:** دکمهٔ ورود از home حذف شد و فقط منوی مهمان آن را نشان می‌دهد. پس از تکمیل OTP نمایشی، منوی کوتاه کاربر با پروفایل، سوابق درخواست، وام‌های نشان‌شده، درباره ما و خروج نمایش داده می‌شود؛ خروج profile محلی را پاک می‌کند. این تغییر UI-only است و provider احراز هویت، API، session پرسشنامه، داده، scoring، D-005، migration و deploy را تغییر نمی‌دهد.
+
 - **US-09.T06X:** stylesheet فونت دیگر نخستین paint را مسدود نمی‌کند و تصویرهای پایینِ home lazy/async decode می‌شوند. fallback document و Skeletonهای React برای home، پرسشنامه، نتایج/مقایسه و جزئیات با هندسهٔ همان صفحه نمایش داده می‌شوند؛ هیچ داده، API، D-005، scoring، migration یا استقراری تغییر نکرده است.
 
 - **US-09.T06W:** fallback نخستین paint پس از ۵۰ms برای home/refresh افزوده شد، انتظار ثبت پاسخ پرسشنامه Skeleton همان ناحیه را نشان می‌دهد و دکمهٔ «مقایسه کن» با یک انتخاب خاکستری و غیرقابل‌کلیک است. داده، API، D-005، scoring، migration و استقرار تغییری نکرده‌اند.

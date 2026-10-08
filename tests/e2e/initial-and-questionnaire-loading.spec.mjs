@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("shows the document fallback only after a delayed first paint", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/src/main.jsx", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 90));
     await route.continue();
@@ -12,8 +13,36 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
   await expect(page.locator("#initial-page-skeleton .initial-questionnaire")).toBeHidden();
   await expect(page.locator("#root")).toBeEmpty();
   await navigation;
-  await expect(page.getByRole("button", { name: "ورود" })).toBeVisible();
+  await expect(page.locator(".hp-nav .hp-login-link")).toHaveCount(0);
+  await expect(page.locator("button.hp-menu-button")).toBeVisible();
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
+});
+
+test("shows the approved guest and local-OTP account menus", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.locator("button.hp-menu-button").click();
+  await expect(page.getByRole("button", { name: "ورود کاربر" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "درباره ما" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "پروفایل کاربر" })).toHaveCount(0);
+
+  await page.getByRole("button", { name: "ورود کاربر" }).click();
+  await page.getByLabel("شماره تلفن همراه").fill("912345678");
+  await page.getByRole("button", { name: "ارسال کد یکبار مصرف" }).click();
+  const digits = page.locator(".hp-otp-row input");
+  for (let index = 0; index < 6; index += 1) await digits.nth(index).fill(String(index + 1));
+  await page.getByRole("button", { name: "ورود به حساب" }).click();
+
+  await page.locator("button.hp-menu-button").click();
+  await expect(page.getByRole("button", { name: "پروفایل کاربر" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "سوابق درخواست وام" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "وام‌های نشان شده" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "خروج از حساب کاربری" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "پروفایل کاربر" }).locator(".hp-sidebar-icon")).toHaveCSS("stroke", "rgb(0, 0, 0)");
+
+  await page.getByRole("button", { name: "خروج از حساب کاربری" }).click();
+  await page.locator("button.hp-menu-button").click();
+  await expect(page.getByRole("button", { name: "ورود کاربر" })).toBeVisible();
 });
 
 test("shows a delayed skeleton while a canonical questionnaire answer is saved", async ({ page }) => {

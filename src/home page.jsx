@@ -465,38 +465,20 @@ function sanitizeOtpDigits(value) {
     });
 }
 
-function Nav({ onLogin, onBack, onMenu, onHome, isLoginView = false }) {
+function Nav({ onBack, onMenu, onHome, isLoginView = false }) {
   return (
-    <header className="hp-nav">
-      <div className="hp-nav-inner">
-        <div className="hp-nav-right">
-          <button className="hp-menu-button" type="button" aria-label="menu" onClick={onMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <BrandMark onClick={onHome} />
-        </div>
-        <div className="hp-nav-left">
-          {isLoginView ? (
-            <button className="hp-back-button" type="button" onClick={onBack} aria-label="بازگشت">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path d="M20.4 12H5" />
-                <path d="m12 19-7-7 7-7" />
-              </svg>
-            </button>
-          ) : (
-            <button className="hp-login-link" type="button" onClick={onLogin}>ورود</button>
-          )}
-          <a href="#">پشتیبانی</a>
-          <a href="#">درباره ما</a>
-        </div>
-      </div>
-    </header>
+    <header className="hp-nav"><div className="hp-nav-inner"><div className="hp-nav-right">
+      <button className="hp-menu-button" type="button" aria-label="menu" onClick={onMenu}><span></span><span></span><span></span></button>
+      <BrandMark onClick={onHome} />
+    </div><div className="hp-nav-left">
+      {isLoginView ? <button className="hp-back-button" type="button" onClick={onBack} aria-label="بازگشت"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.4 12H5" /><path d="m12 19-7-7 7-7" /></svg></button> : null}
+    </div></div></header>
   );
 }
 
 function SidebarIcon({ name }) {
+  if (name === "login") return <svg className="hp-sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5" /><path d="m10 17 5-5-5-5M15 12H3" /></svg>;
+  if (name === "saved") return <svg className="hp-sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v16l-8-4-8 4V5a2 2 0 0 1 2-2Z" /><path d="M12 7v6M9 10h6" /></svg>;
   const icons = {
     profile: (
       <>
@@ -570,121 +552,24 @@ function SidebarIcon({ name }) {
   );
 }
 
-function UserSidebar({ isOpen, onClose, userName }) {
+function UserSidebar({ isOpen, onClose, onLogin, onLogout, userName }) {
   const [activeItem, setActiveItem] = useState("");
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const items = [
-    ["profile", "پروفایل کاربر"],
-    ["requests", "درخواست‌های ثبت شده"],
-    ["invest", "فرصت‌های سرمایه‌گذاری"],
-    ["shop", "خرید و فروش امتیاز وام"],
-    ["credit", "استخر اعتباری"],
-    ["wallet", "کیف پول"],
-    ["reports", "گزارشات"],
-    ["ai", "تحلیل با هوش مصنوعی"],
-    ["about", "درباره ما"],
-  ];
-
+  const isAuthenticated = Boolean(userName);
+  const items = isAuthenticated
+    ? [["profile", "پروفایل کاربر"], ["requests", "سوابق درخواست وام"], ["saved", "وام‌های نشان شده"], ["about", "درباره ما"]]
+    : [["login", "ورود کاربر"], ["about", "درباره ما"]];
+  function selectItem(icon) { setActiveItem(icon); if (icon === "login") { onClose(); onLogin(); } }
   return (
-    <div className={`hp-sidebar-layer ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
+    <div className={"hp-sidebar-layer " + (isOpen ? "is-open" : "")} aria-hidden={!isOpen}>
       <button className="hp-sidebar-backdrop" type="button" aria-label="بستن منو" onClick={onClose}></button>
       <aside className="hp-user-sidebar" aria-label="منوی کاربر">
-        <strong className="hp-sidebar-name">{userName || "محمد حسن کیوند"}</strong>
+        {isAuthenticated ? <strong className="hp-sidebar-name">{userName}</strong> : null}
         <nav className="hp-sidebar-menu">
-          {items.map(([icon, label]) => (
-            <a
-              className={activeItem === icon ? "is-active" : ""}
-              href="#"
-              key={label}
-              onClick={(event) => {
-                event.preventDefault();
-                setActiveItem(icon);
-              }}
-            >
-              <SidebarIcon name={icon} />
-              <span>{label}</span>
-            </a>
-          ))}
-          <a
-            className={`hp-sidebar-logout ${activeItem === "logout" ? "is-active" : ""}`}
-            href="#"
-            onClick={(event) => {
-              event.preventDefault();
-              setShowLogoutConfirm(true);
-            }}
-          >
-            <SidebarIcon name="logout" />
-            <span>خروج از حساب کاربری</span>
-          </a>
+          {items.map(([icon, label]) => <button className={activeItem === icon ? "is-active" : ""} type="button" key={label} onClick={() => selectItem(icon)}><SidebarIcon name={icon} /><span>{label}</span></button>)}
+          {isAuthenticated ? <button className="hp-sidebar-logout" type="button" onClick={() => { onClose(); onLogout(); }}><SidebarIcon name="logout" /><span>خروج از حساب کاربری</span></button> : null}
         </nav>
-        <p className="hp-sidebar-support">
-          جهت دریافت مشاوره با شماره تلفن
-          <br />
-          <a href="tel:02135647">۰۲۱-۳۵۶۴۷</a>
-          {" "}
-          تماس حاصل نمایید.
-        </p>
-        {showLogoutConfirm ? (
-          <div className="hp-logout-confirm" role="dialog" aria-modal="true">
-            <div className="hp-logout-warning" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path d="M12 9v5M12 21.41H5.94c-3.47 0-4.92-2.48-3.24-5.51l3.12-5.62L8.76 5c1.78-3.21 4.7-3.21 6.48 0l2.94 5.29 3.12 5.62c1.68 3.03.22 5.51-3.24 5.51H12v-.01Z" />
-                <path d="M11.995 17h.009" />
-              </svg>
-            </div>
-            <p>آیا از خروج از حساب کاربری‌تان مطمئن هستید؟</p>
-            <div>
-              <button
-                className="hp-logout-no"
-                type="button"
-                onClick={() => setShowLogoutConfirm(false)}
-              >
-                خیر
-              </button>
-              <button
-                className="hp-logout-yes"
-                type="button"
-                onClick={() => {
-                  setShowLogoutConfirm(false);
-                  setActiveItem("logout");
-                }}
-              >
-                بله
-              </button>
-            </div>
-          </div>
-        ) : null}
+        <p className="hp-sidebar-support">جهت دریافت مشاوره با شماره تلفن<br /><a href="tel:02135647">۰۲۱-۳۵۶۴۷</a>{" "}تماس حاصل نمایید.</p>
       </aside>
-      {showLogoutConfirm ? (
-        <div className="hp-logout-confirm hp-logout-confirm-floating" role="dialog" aria-modal="true">
-          <div className="hp-logout-warning" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false">
-              <path d="M12 9v5M12 21.41H5.94c-3.47 0-4.92-2.48-3.24-5.51l3.12-5.62L8.76 5c1.78-3.21 4.7-3.21 6.48 0l2.94 5.29 3.12 5.62c1.68 3.03.22 5.51-3.24 5.51H12v-.01Z" />
-              <path d="M11.995 17h.009" />
-            </svg>
-          </div>
-          <p>آیا از خروج از حساب کاربری‌تان مطمئن هستید؟</p>
-          <div>
-            <button
-              className="hp-logout-no"
-              type="button"
-              onClick={() => setShowLogoutConfirm(false)}
-            >
-              خیر
-            </button>
-            <button
-              className="hp-logout-yes"
-              type="button"
-              onClick={() => {
-                setShowLogoutConfirm(false);
-                setActiveItem("logout");
-              }}
-            >
-              بله
-            </button>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
@@ -695,7 +580,7 @@ function formatOtpCountdown(seconds) {
   return toPersianDigits(`${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`);
 }
 
-function LoginScreen({ loginStep, setLoginStep }) {
+function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [remainingSeconds, setRemainingSeconds] = useState(120);
@@ -794,10 +679,19 @@ function LoginScreen({ loginStep, setLoginStep }) {
     setRemainingSeconds(120);
   }
 
+  function handleOtpSubmit(event) {
+    event.preventDefault();
+    if (otp.join("").length !== 6) return;
+
+    // This front-end demo has no OTP provider. Completing a code creates only
+    // a local UI profile; it does not represent server authentication.
+    onAuthenticated({ firstName: "محمد", lastName: "حسن کیوند", phone });
+  }
+
   if (loginStep === "otp") {
     return (
       <main className="hp-login-page hp-otp-page">
-        <form className="hp-otp-form" onSubmit={(event) => event.preventDefault()}>
+        <form className="hp-otp-form" onSubmit={handleOtpSubmit}>
           <label>کد یکبار مصرف</label>
           <div className="hp-otp-row" dir="ltr">
             {otp.map((digit, index) => (
@@ -829,6 +723,7 @@ function LoginScreen({ loginStep, setLoginStep }) {
               {remainingSeconds > 0 ? ` (${formatOtpCountdown(remainingSeconds)})` : ""}
             </button>
           </div>
+          <button className="hp-login-verify" type="submit" disabled={otp.join("").length !== 6}>ورود به حساب</button>
         </form>
       </main>
     );
@@ -2925,6 +2820,23 @@ export default function HomePage() {
     setAccountProfile(profile);
   }
 
+  function handleLoginAuthenticated(profile) {
+    setCachedAccountProfile(profile);
+    setAccountProfile(profile);
+    setCurrentView("home");
+    setLoginStep("phone");
+  }
+
+  function handleLogout() {
+    try {
+      window.localStorage.removeItem(accountProfileCacheKey);
+    } catch {
+      // A blocked localStorage must not prevent leaving the local UI state.
+    }
+    setAccountProfile(null);
+    handleHomeOpen();
+  }
+
   function handleQuestionnaireOpen() {
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
@@ -2962,7 +2874,7 @@ export default function HomePage() {
   if (currentView === "questionnaire") {
     return (
       <div className="hp-page hp-questionnaire-shell" dir="rtl">
-        <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} userName={sidebarUserName} />
+        <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} userName={sidebarUserName} />
         <QuestionnaireScreen
           onBack={handleBack}
           onMenu={() => setIsSidebarOpen(true)}
@@ -2977,14 +2889,13 @@ export default function HomePage() {
     <div className="hp-page" dir="rtl">
       <Nav
         isLoginView={currentView === "login"}
-        onLogin={handleLoginOpen}
         onBack={handleBack}
         onMenu={() => setIsSidebarOpen(true)}
         onHome={handleHomeOpen}
       />
-      <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} userName={sidebarUserName} />
+      <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} userName={sidebarUserName} />
       {currentView === "login" ? (
-        <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} />
+        <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onAuthenticated={handleLoginAuthenticated} />
       ) : (
         <>
           <main>
