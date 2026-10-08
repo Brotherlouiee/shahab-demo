@@ -7,6 +7,7 @@ import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
 import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 import DeferredPageSkeleton from "../../../shared/DeferredPageSkeleton.jsx";
+import { readSavedLoans, toggleSavedLoan } from "../../account/savedLoans.mjs";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -144,21 +145,17 @@ export default function LoanResultsScreen({
 }) {
   const [mode, setMode] = useState(VIEW_MODES.highest);
   const [lenderName, setLenderName] = useState("");
-  const [savedLoanIds, setSavedLoanIds] = useState(() => new Set());
+  const [savedLoanIds, setSavedLoanIds] = useState(() => new Set(readSavedLoans().map((loan) => loan.loanId)));
   const [savedToastLoanId, setSavedToastLoanId] = useState(null);
   const saveToastTimeoutRef = useRef(null);
 
   useEffect(() => () => window.clearTimeout(saveToastTimeoutRef.current), []);
 
-  const toggleSavedLoan = (loanId) => {
+  const handleSavedLoan = (recommendation) => {
+    const loanId = recommendation.loanId;
     const wasSaved = savedLoanIds.has(loanId);
-
-    setSavedLoanIds((current) => {
-      const next = new Set(current);
-      if (wasSaved) next.delete(loanId);
-      else next.add(loanId);
-      return next;
-    });
+    toggleSavedLoan(recommendation);
+    setSavedLoanIds(new Set(readSavedLoans().map((loan) => loan.loanId)));
 
     window.clearTimeout(saveToastTimeoutRef.current);
     if (wasSaved) {
@@ -229,7 +226,7 @@ export default function LoanResultsScreen({
               recommendation={item}
               onDetails={onDetails}
               isSaved={savedLoanIds.has(item.loanId)}
-              onSave={toggleSavedLoan}
+              onSave={() => handleSavedLoan(item)}
             />
           </Fragment>
         )) : null}

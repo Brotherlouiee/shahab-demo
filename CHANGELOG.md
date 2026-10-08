@@ -86,3 +86,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
   action and explanation prototype data with active `PUBLISHED` PostgreSQL
   serving data. The recommendation API now exposes server-owned highest,
   low-compatibility and needs-review partitions with deterministic ordering;
+
+- **US-09.T071:** Added local saved-loan persistence, editable local profile fields with a 100 KB avatar limit, and an About page; recommendation, API, and published loan data are unchanged.

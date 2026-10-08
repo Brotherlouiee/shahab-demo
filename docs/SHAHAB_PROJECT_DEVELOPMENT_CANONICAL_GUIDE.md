@@ -1067,3 +1067,8 @@ RTL، موبایل و مسیرهای بازگشت را تست کن. حالت loa
 2. هش Git blob محاسبه‌شده از بایت اصلی باید با هش blob بازگردانده‌شده از Git برابر باشد؛ SHA-256 و byte count هر شش فایل نیز ثبت شوند.
 3. نتیجه در docs/source-inventory.md، docs/source-integrity-verification.md، docs/progress/current-state.md و CHANGELOG.md ثبت شود.
 4. اگر حتی یک فایل برابر نبود، blocker باز می‌ماند و ورود به US-02 ممنوع است. اگر همه برابرند، فقط blocker یکپارچگی منبع رفع می‌شود؛ تکمیل بقیهٔ US-01 همچنان پیش‌نیاز US-02 است.
+
+
+## US-09.T071 — Account UI
+
+Saved loans persist only in browser localStorage and use server-supplied recommendation display data. The saved-loan view excludes readiness and comparison actions. Profile phone is read-only; other local fields are editable. Profile uploads are selected locally and reject files over 100 KB. This task does not change API, scoring, PUBLISHED data, migrations, or session policy.
