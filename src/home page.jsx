@@ -26,7 +26,8 @@ import profileIconUrl from "../assets/profile.svg";
 import sendIconUrl from "../assets/send.svg";
 import sidebarLeftIconUrl from "../assets/sidebar-left.svg";
 import addCircleIconUrl from "../assets/add-circle.svg";
-import aboutPaymentUrl from "../assets/teal-mobile-payment-essentials.webp";
+import { AboutScreen, ProfileScreen, SavedLoansScreen } from "./features/account/AccountViews.jsx";
+import { readSavedLoans, SAVED_LOANS_CHANGED_EVENT } from "./features/account/savedLoansStore.mjs";
 
 // These images belong only to the five-second analysis screen. Loading them
 // eagerly delayed every route, including results and loan details.
@@ -355,13 +356,16 @@ function getInitialViewFromPath(pathname) {
   }
 
   if (pathname === "/login" || pathname === "/login/otp") return "login";
+  if (pathname === "/profile") return "profile";
+  if (pathname === "/saved-loans") return "saved-loans";
+  if (pathname === "/about") return "about";
 
   return "home";
 }
 
 function replaceRoute(pathname) {
   if (typeof window === "undefined") return;
-  if (window.location.pathname === pathname) return;
+  if (window.location.pathname + window.location.search === pathname) return;
   // Carry only the current browser-history entry forward; this preserves the
   // active, opaque recommendation navigation through a detail-page refresh.
   window.history.pushState(window.history.state, "", pathname);
@@ -417,31 +421,6 @@ function setCachedAccountProfile(profile) {
   }
 }
 
-const savedLoansCacheKey = "shahab.savedLoans";
-
-function getSavedLoans() {
-  if (typeof window === "undefined") return [];
-  try {
-    const value = JSON.parse(window.localStorage.getItem(savedLoansCacheKey) || "[]");
-    return Array.isArray(value) ? value.filter((item) => item && typeof item.loanId === "string") : [];
-  } catch { return []; }
-}
-
-function persistSavedLoans(loans) {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(savedLoansCacheKey, JSON.stringify(loans));
-    window.dispatchEvent(new Event("shahab:saved-loans"));
-  } catch { /* storage is optional */ }
-}
-
-function isLoanSaved(loanId) { return getSavedLoans().some((item) => item.loanId === loanId); }
-function toggleSavedLoan(recommendation) {
-  const loans = getSavedLoans();
-  const found = loans.some((item) => item.loanId === recommendation.loanId);
-  persistSavedLoans(found ? loans.filter((item) => item.loanId !== recommendation.loanId) : [...loans, recommendation]);
-  return !found;
-}
 const persianNamePattern = /^[\u0621-\u064A\u067E\u0686\u0698\u06AF\u06A9\u06CC\s‌]+$/;
 const persianNameError = "فقط حروف فارسی مجاز هستند";
 const phoneDigitPattern = /^[0-9۰-۹٠-٩]$/;
@@ -2815,39 +2794,40 @@ export default function HomePage() {
   const [loginStep, setLoginStep] = useState(() => (window.location.pathname === "/login/otp" ? "otp" : "phone"));
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [accountProfile, setAccountProfile] = useState(() => getCachedAccountProfile());
-  const sidebarUserName = accountProfile
-    ? `${accountProfile.firstName} ${accountProfile.lastName}`.trim()
-    : "";
+  const [savedLoans, setSavedLoans] = useState(() => readSavedLoans());
 
   useEffect(() => {
     if (!isSidebarOpen) return undefined;
-
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
+    return () => { document.body.style.overflow = previousOverflow; };
   }, [isSidebarOpen]);
 
   useEffect(() => {
     if (currentView === "questionnaire") return;
-
-    replaceRoute(currentView === "login" ? (loginStep === "otp" ? "/login/otp" : "/login") : "/");
+    const pathByView = {
+      home: "/",
+      login: loginStep === "otp" ? "/login/otp" : "/login",
+      profile: "/profile",
+      "saved-loans": "/saved-loans",
+      about: "/about",
+    };
+    replaceRoute(pathByView[currentView] || "/");
   }, [currentView, loginStep]);
 
   useEffect(() => {
+    const syncSavedLoans = () => setSavedLoans(readSavedLoans());
+    window.addEventListener(SAVED_LOANS_CHANGED_EVENT, syncSavedLoans);
+    return () => window.removeEventListener(SAVED_LOANS_CHANGED_EVENT, syncSavedLoans);
+  }, []);
+
+  useEffect(() => {
     function handleRouteChange() {
-      const nextView = getInitialViewFromPath(window.location.pathname);
-      setCurrentView(nextView);
+      setCurrentView(getInitialViewFromPath(window.location.pathname));
       setLoginStep(window.location.pathname === "/login/otp" ? "otp" : "phone");
     }
-
     window.addEventListener("popstate", handleRouteChange);
-
-    return () => {
-      window.removeEventListener("popstate", handleRouteChange);
-    };
+    return () => window.removeEventListener("popstate", handleRouteChange);
   }, []);
 
   function handleLoginOpen() {
@@ -2856,7 +2836,20 @@ export default function HomePage() {
   }
 
   function handleAccountCreated(profile) {
+    setCachedAccountProfile(profile);
     setAccountProfile(profile);
+    setCurrentView("home");
+  }
+
+  function handleProfileSaved(profile) {
+    setCachedAccountProfile(profile);
+    setAccountProfile(profile);
+  }
+
+  function handleLogout() {
+    try { window.localStorage.removeItem(accountProfileCacheKey); } catch { /* local storage can be blocked */ }
+    setAccountProfile(null);
+    setCurrentView("home");
   }
 
   function handleQuestionnaireOpen() {
@@ -2873,30 +2866,34 @@ export default function HomePage() {
   }
 
   function handleBack() {
-    if (isSidebarOpen) {
-      setIsSidebarOpen(false);
-      return;
-    }
-
-    if (currentView === "login" && loginStep === "otp") {
-      setLoginStep("phone");
-      return;
-    }
-
-    if (currentView === "login") {
-      setCurrentView("home");
-      return;
-    }
-
-    if (currentView === "questionnaire") {
-      setCurrentView("home");
-    }
+    if (isSidebarOpen) { setIsSidebarOpen(false); return; }
+    if (currentView === "login" && loginStep === "otp") { setLoginStep("phone"); return; }
+    if (currentView === "questionnaire") { setCurrentView("home"); return; }
+    if (currentView !== "home") setCurrentView("home");
   }
+
+  function handleSavedLoanDetails(loanId) {
+    replaceRoute(`/loan-details?loanId=${encodeURIComponent(loanId)}`);
+    setCurrentView("questionnaire");
+  }
+
+  const sidebar = (
+    <UserSidebar
+      isOpen={isSidebarOpen}
+      onClose={() => setIsSidebarOpen(false)}
+      accountProfile={accountProfile}
+      onLogin={handleLoginOpen}
+      onProfile={() => setCurrentView("profile")}
+      onSavedLoans={() => setCurrentView("saved-loans")}
+      onAbout={() => setCurrentView("about")}
+      onLogout={handleLogout}
+    />
+  );
 
   if (currentView === "questionnaire") {
     return (
       <div className="hp-page hp-questionnaire-shell" dir="rtl">
-        <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} userName={sidebarUserName} />
+        {sidebar}
         <QuestionnaireScreen
           onBack={handleBack}
           onMenu={() => setIsSidebarOpen(true)}
@@ -2911,24 +2908,16 @@ export default function HomePage() {
     <div className="hp-page" dir="rtl">
       <Nav
         isLoginView={currentView === "login"}
-        onLogin={handleLoginOpen}
         onBack={handleBack}
         onMenu={() => setIsSidebarOpen(true)}
         onHome={handleHomeOpen}
       />
-      <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} userName={sidebarUserName} />
-      {currentView === "login" ? (
-        <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} />
-      ) : (
-        <>
-          <main>
-            <Hero onStartQuestionnaire={handleQuestionnaireOpen} />
-            <StatsMarquee />
-            <Features />
-          </main>
-          <Footer />
-        </>
-      )}
+      {sidebar}
+      {currentView === "login" ? <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onVerified={handleAccountCreated} /> : null}
+      {currentView === "profile" && accountProfile ? <ProfileScreen profile={accountProfile} onSave={handleProfileSaved} onBack={handleBack} /> : null}
+      {currentView === "saved-loans" ? <SavedLoansScreen loans={savedLoans} onBack={handleBack} onDetails={handleSavedLoanDetails} /> : null}
+      {currentView === "about" ? <AboutScreen onBack={handleBack} /> : null}
+      {currentView === "home" ? <><main><Hero onStartQuestionnaire={handleQuestionnaireOpen} /><StatsMarquee /><Features /></main><Footer /></> : null}
     </div>
   );
 }
