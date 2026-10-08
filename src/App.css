@@ -5986,17 +5986,17 @@ right: 16px;
 /* The drawer has distinct guest and authenticated states from the approved UI. */
 .hp-user-sidebar { width: min(300px, 78vw); padding: 64px 32px 18px; }
 .hp-sidebar-name { margin-bottom: 24px; font-size: 17px; }
-.hp-sidebar-menu { gap: 0; }
+.hp-sidebar-menu { gap: 0 !important; row-gap: 0 !important; }
 .hp-sidebar-menu button,
 .hp-sidebar-menu a {
   display: flex; align-items: center; gap: 8px;
-  width: 100%; min-height: 30px; border: 0; border-radius: 0; background: transparent;
+  width: 100%; height: 30px !important; min-height: 30px !important; max-height: 30px !important; margin: 0 !important; border: 0; border-radius: 0; background: transparent;
   color: #000000; cursor: pointer; font: inherit; font-size: 16px; font-weight: 800;
-  justify-content: flex-start; padding: 5px 0; text-align: right;
+  justify-content: flex-start; padding: 5px 0 !important; text-align: right;
 }
 .hp-sidebar-menu button:hover,
 .hp-sidebar-menu button:focus-visible { background: #f4f4f4; outline: none; }
-.hp-sidebar-menu button.is-active { width: 100%; min-height: 30px; background: #f4f4f4; color: #000000; padding: 5px 0; transform: none; }
+.hp-sidebar-menu button.is-active { width: 100%; height: 30px !important; min-height: 30px !important; max-height: 30px !important; margin: 0 !important; background: #f4f4f4; color: #000000; padding: 5px 0 !important; transform: none; }
 .hp-sidebar-menu button:nth-child(1):not(:only-child) { border-bottom: 1px solid #a8a8a8; }
 .hp-sidebar-menu button:nth-child(3) { border-bottom: 1px solid #a8a8a8; }
 .hp-sidebar-icon,
