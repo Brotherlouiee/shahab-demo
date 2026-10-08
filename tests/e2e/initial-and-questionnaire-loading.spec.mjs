@@ -38,7 +38,7 @@ test("shows the approved guest and local-OTP account menus", async ({ page }) =>
   await expect(page.getByRole("button", { name: "سوابق درخواست وام" })).toBeVisible();
   await expect(page.getByRole("button", { name: "وام‌های نشان شده" })).toBeVisible();
   await expect(page.getByRole("button", { name: "خروج از حساب کاربری" })).toBeVisible();
-  await expect(page.locator(".hp-sidebar-icon")).toHaveCSS("stroke", "rgb(0, 0, 0)");
+  await expect(page.getByRole("button", { name: "پروفایل کاربر" }).locator(".hp-sidebar-icon")).toHaveCSS("stroke", "rgb(0, 0, 0)");
 
   await page.getByRole("button", { name: "خروج از حساب کاربری" }).click();
   await page.locator("button.hp-menu-button").click();
