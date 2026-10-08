@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("shows the document fallback only after a delayed first paint", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/src/main.jsx", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 90));
     await route.continue();
@@ -18,6 +19,7 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
 });
 
 test("shows the approved guest and local-OTP account menus", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.locator("button.hp-menu-button").click();
   await expect(page.getByRole("button", { name: "ورود کاربر" })).toBeVisible();
