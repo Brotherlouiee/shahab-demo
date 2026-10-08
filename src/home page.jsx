@@ -472,7 +472,6 @@ function Nav({ onBack, onMenu, onHome, isLoginView = false }) {
       <BrandMark onClick={onHome} />
     </div><div className="hp-nav-left">
       {isLoginView ? <button className="hp-back-button" type="button" onClick={onBack} aria-label="بازگشت"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.4 12H5" /><path d="m12 19-7-7 7-7" /></svg></button> : null}
-      <a href="#">پشتیبانی</a><a href="#">درباره ما</a>
     </div></div></header>
   );
 }
