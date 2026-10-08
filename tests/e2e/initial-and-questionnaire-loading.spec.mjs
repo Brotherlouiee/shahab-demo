@@ -12,9 +12,7 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
   await expect(page.locator("#initial-page-skeleton .initial-questionnaire")).toBeHidden();
   await expect(page.locator("#root")).toBeEmpty();
   await navigation;
-  await expect(page.getByRole("button", { name: "ورود" })).toHaveCount(0);
-  await page.getByRole("button", { name: "menu" }).click();
-  await expect(page.getByRole("button", { name: "ورود کاربر" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "ورود" })).toBeVisible();
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
 });
 

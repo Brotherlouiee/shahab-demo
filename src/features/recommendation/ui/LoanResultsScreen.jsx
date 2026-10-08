@@ -5,7 +5,6 @@ import { fetchLoanDetails } from "../../loan-details/loanDetailsApi.js";
 import LoanPercent from "../../loan-details/LoanPercent.jsx";
 import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
-import { readSavedLoans, SAVED_LOANS_CHANGED_EVENT, toggleSavedLoan as persistSavedLoan } from "../../account/savedLoansStore.mjs";
 import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 import DeferredPageSkeleton from "../../../shared/DeferredPageSkeleton.jsx";
 
@@ -99,7 +98,7 @@ function ServingLoanCard({ recommendation, onDetails, isSaved, onSave }) {
           aria-pressed={isSaved}
           aria-label={`ذخیره وام ${toPersianDigits(recommendation.loanName)}`}
           title="ذخیره وام"
-          onClick={() => onSave(recommendation)}
+          onClick={() => onSave(recommendation.loanId)}
         >
           <BookmarkSaveIcon filled={isSaved} />
         </button>
@@ -145,22 +144,21 @@ export default function LoanResultsScreen({
 }) {
   const [mode, setMode] = useState(VIEW_MODES.highest);
   const [lenderName, setLenderName] = useState("");
-  const [savedLoanIds, setSavedLoanIds] = useState(() => new Set(readSavedLoans().map((item) => item.loanId)));
+  const [savedLoanIds, setSavedLoanIds] = useState(() => new Set());
   const [savedToastLoanId, setSavedToastLoanId] = useState(null);
   const saveToastTimeoutRef = useRef(null);
 
   useEffect(() => () => window.clearTimeout(saveToastTimeoutRef.current), []);
 
-  useEffect(() => {
-    const syncSavedLoans = () => setSavedLoanIds(new Set(readSavedLoans().map((item) => item.loanId)));
-    window.addEventListener(SAVED_LOANS_CHANGED_EVENT, syncSavedLoans);
-    return () => window.removeEventListener(SAVED_LOANS_CHANGED_EVENT, syncSavedLoans);
-  }, []);
+  const toggleSavedLoan = (loanId) => {
+    const wasSaved = savedLoanIds.has(loanId);
 
-  const toggleSavedLoan = (recommendation) => {
-    const wasSaved = savedLoanIds.has(recommendation.loanId);
-    persistSavedLoan(recommendation);
-    setSavedLoanIds(new Set(readSavedLoans().map((item) => item.loanId)));
+    setSavedLoanIds((current) => {
+      const next = new Set(current);
+      if (wasSaved) next.delete(loanId);
+      else next.add(loanId);
+      return next;
+    });
 
     window.clearTimeout(saveToastTimeoutRef.current);
     if (wasSaved) {
@@ -168,7 +166,7 @@ export default function LoanResultsScreen({
       return;
     }
 
-    setSavedToastLoanId(recommendation.loanId);
+    setSavedToastLoanId(loanId);
     saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
   };
 
