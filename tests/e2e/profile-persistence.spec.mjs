@@ -38,6 +38,7 @@ test("profile preserves eleven digits and never treats a failed save as success"
   for (let i = 0; i < 6; i += 1) await page.getByLabel(`رقم ${i + 1} کد یکبار مصرف`).fill(String(i + 1));
   await page.getByRole("button", { name: "ورود به حساب" }).click();
   await page.locator("button.hp-menu-button").click();
+  await expect(page.locator(".hp-sidebar-name")).toHaveText("آزمون تست");
   await page.getByRole("button", { name: "پروفایل کاربر" }).click();
   const form = page.locator(".hp-account-profile-form");
   await expect(form.locator("input").first()).toHaveValue("۰۹۹۱۲۳۴۵۶۷۸");
@@ -53,4 +54,25 @@ test("profile preserves eleven digits and never treats a failed save as success"
   expect(api.profile.firstName).toBe("علی");
   await page.screenshot({ path: "docs/evidence/us-09-t072/profile-mobile.png" });
   expect(await page.evaluate(() => Object.entries(localStorage).some(([key, value]) => /accessToken|fixture/.test(key + value)))).toBe(false);
+});
+
+
+test("phone-only login shows generic sidebar name and refreshes saved database name", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const api = await installProfileApi(page);
+  await page.goto("/");
+  await page.locator("button.hp-menu-button").click();
+  await page.getByRole("button", { name: "ورود کاربر" }).click();
+  await page.getByLabel("شماره تلفن همراه").fill("912345678");
+  await page.getByRole("button", { name: "ارسال کد یکبار مصرف" }).click();
+  for (let i = 0; i < 6; i += 1) await page.getByLabel(`رقم ${i + 1} کد یکبار مصرف`).fill(String(i + 1));
+  await page.getByRole("button", { name: "ورود به حساب" }).click();
+  await page.locator("button.hp-menu-button").click();
+  await expect(page.locator(".hp-sidebar-name")).toHaveText("کاربر");
+  await page.getByRole("button", { name: "بستن منو" }).click();
+  api.profile.firstName = "علی";
+  api.profile.lastName = "احمدی";
+  await page.locator("button.hp-menu-button").click();
+  await expect(page.locator(".hp-sidebar-name")).toHaveText("علی احمدی");
+  await page.screenshot({ path: "docs/evidence/us-09-t072/sidebar-name-mobile.png" });
 });

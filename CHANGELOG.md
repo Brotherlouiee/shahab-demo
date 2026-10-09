@@ -102,3 +102,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 - **US-09.T071:** Added browser-local saved loans, editable profile fields and About page; PR #85 also introduced profile API and the user_profiles migration. Scoring and published loan data were unchanged.
 
+
+Sidebar owner clarification: show the server profile name; use «کاربر» for a phone-only profile without a name. Refresh the owned profile when opening the menu with a valid capability. Personal-info uses the confirmed server response. Browser regression verifies named and unnamed profiles.

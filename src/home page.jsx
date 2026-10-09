@@ -1854,14 +1854,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         // A storage retry reuses the verified capability, not a consumed OTP challenge.
         if (!hasProfileAccess(personalInfo.phone)) await verifyProfileCode(profileChallengeId, loanOtpValue);
         const stored = await persistPersonalInfo(personalInfo);
-        const accountProfile = {
-          ...stored,
-          firstName: personalInfo.firstName.trim(),
-          lastName: personalInfo.lastName.trim(),
-          phone: personalInfo.phone,
-          income: personalInfo.income,
-          job: personalInfo.job,
-        };
+        const accountProfile = stored;
         Object.entries(accountProfile).forEach(([field, value]) => {
           if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
         });
@@ -2881,8 +2874,17 @@ export default function HomePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [accountProfile, setAccountProfile] = useState(() => getCachedAccountProfile());
   const sidebarUserName = accountProfile
-    ? `${accountProfile.firstName || ""} ${accountProfile.lastName || ""}`.trim() || displayProfilePhone(accountProfile.phone)
+    ? `${accountProfile.firstName || ""} ${accountProfile.lastName || ""}`.trim() || "کاربر"
     : "";
+
+  useEffect(() => {
+    if (!isSidebarOpen || !accountProfile?.phone || !hasProfileAccess(accountProfile.phone)) return undefined;
+    let active = true;
+    readOwnProfile().then((stored) => {
+      if (active && stored) { setAccountProfile(stored); setCachedAccountProfile(stored); }
+    }).catch(() => {});
+    return () => { active = false; };
+  }, [isSidebarOpen, accountProfile?.phone]);
 
   useEffect(() => {
     if (!isSidebarOpen) return undefined;
