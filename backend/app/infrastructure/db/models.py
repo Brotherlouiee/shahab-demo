@@ -313,6 +313,22 @@ class DataSourceFile(Timestamped, Base):
     original_filename: Mapped[str] = mapped_column(String(255), nullable=False)
 
 
+class UserProfile(Timestamped, Base):
+    """Editable account details keyed by the verified demonstration phone number."""
+
+    __tablename__ = "user_profiles"
+    phone: Mapped[str] = mapped_column(String(11), primary_key=True)
+    first_name: Mapped[str] = mapped_column(String(60), nullable=False, default="")
+    last_name: Mapped[str] = mapped_column(String(60), nullable=False, default="")
+    income: Mapped[str] = mapped_column(String(40), nullable=False, default="")
+    job: Mapped[str] = mapped_column(String(40), nullable=False, default="")
+    gender: Mapped[str] = mapped_column(String(10), nullable=False, default="")
+    avatar_data_url: Mapped[str | None] = mapped_column(Text)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+
 class QuestionnaireSession(Timestamped, Base):
     __tablename__ = "questionnaire_sessions"
     __table_args__ = (CheckConstraint("expires_at > created_at", name="ck_questionnaire_session_expiry"),)
