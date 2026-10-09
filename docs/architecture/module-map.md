@@ -62,3 +62,8 @@ conditions. See `docs/ui/loan-route-inventory.md` for the complete route map.
 ## US-09.T05B serving boundaries
 
 `backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py` پورت read snapshot را پیاده می‌کند؛ engine/application ORM نمی‌خوانند. `backend/app/loans/infrastructure/sqlalchemy_catalogue.py` تنها active published members و detail facts همان version را می‌خواند. `backend/app/loans/infrastructure/backfill_serving_facts.py` projection رسمی T05A را با manifest قفل‌شده تکمیل می‌کند. اتصال session و endpoint در T06 و استقرار پایدار در T07 است.
+
+
+## Account/profile repair — US-09.T072
+
+backend/app/accounts/phone.py normalizes full phone identities; profile_schema.py validates allowlisted fields; profile_repository.py owns DB persistence; access.py provides bounded local/test OTP sessions. api/v1/account_access.py resolves actors and maps safe errors; api/v1/profiles.py checks ownership before persistence. main.py disables mock outside explicit local/test. No account dependency on recommendation scoring.

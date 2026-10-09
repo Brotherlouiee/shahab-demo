@@ -26,6 +26,7 @@ services:
     environment:
       SHAHAB_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       SHAHAB_REDIS_URL: redis://redis:6379/0
+      SHAHAB_PROFILE_MOCK_OTP_ENABLED: ${SHAHAB_PROFILE_MOCK_OTP_ENABLED:-true}
     depends_on:
       redis:
         condition: service_started
@@ -91,3 +92,4 @@ networks:
 volumes:
   postgres_data:
   frontend_node_modules:
+

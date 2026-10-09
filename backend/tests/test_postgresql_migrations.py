@@ -11,6 +11,7 @@ from sqlalchemy import create_engine, inspect, text
 
 DATABASE_URL = os.environ.get("SHAHAB_TEST_DATABASE_URL")
 EXPECTED_TABLES = {
+    "user_profiles",
     "answer_options",
     "data_import_runs",
     "data_source_files",
@@ -106,6 +107,25 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         self.assertIn(EXPECTED_INDEX, str(plan))
         self.assertNotEqual(plan["Node Type"], "Seq Scan")
+
+    def test_profile_persistence_survives_a_new_connection(self) -> None:
+        from sqlalchemy.orm import Session
+
+        from backend.app.accounts.profile_repository import read_profile, upsert_profile
+        from backend.app.accounts.profile_schema import ProfilePayload
+
+        self._alembic("upgrade", "head")
+        engine = create_engine(str(DATABASE_URL))
+        with Session(engine) as session:
+            upsert_profile(
+                ProfilePayload(phone="09000000001", firstName="آزمون", income="22-to-50", job="manager"), session
+            )
+        engine.dispose()
+        engine = create_engine(str(DATABASE_URL))
+        with Session(engine) as session:
+            stored = read_profile("09000000001", session)
+            self.assertEqual((stored.firstName, stored.income, stored.job), ("آزمون", "22-to-50", "manager"))
+        engine.dispose()
 
     def test_official_materialization_has_a_durable_active_version(self) -> None:
         import json

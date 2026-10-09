@@ -15,6 +15,7 @@ class ErrorCode(StrEnum):
     INVALID_REQUEST = "invalid_request"
     NOT_FOUND = "not_found"
     FORBIDDEN = "forbidden"
+    UNAUTHORIZED = "unauthorized"
     SERVICE_UNAVAILABLE = "service_unavailable"
     INTERNAL_ERROR = "internal_error"
 
@@ -61,5 +62,7 @@ async def api_error_handler(request: Request, error: Exception) -> JSONResponse:
     if not isinstance(error, ApiError):
         raise TypeError("api_error_handler only supports ApiError instances")
     return JSONResponse(
-        status_code=error.status_code, content=error_payload(request, code=error.code, message=error.message)
+        status_code=error.status_code,
+        content=error_payload(request, code=error.code, message=error.message),
+        headers={"Cache-Control": "no-store"},
     )

@@ -43,3 +43,10 @@ The named `postgres_data` volume persists local database state. Do not run
 local target and data-loss impact have been reviewed and explicitly approved.
 Never put production exports, database URLs, passwords, or tokens in the repo or
 Compose logs.
+
+
+## Profile access repair — US-09.T072
+
+After update run `docker compose up -d --build api` to apply routes and the development mock flag. No new migration or data publication command; normal startup applies the existing profile migration. Staging/production profile access remains fail-closed pending real authentication.
+
+401 after refresh/restart requires development login again. For 503, check DB readiness/migration and explicit local/test flag; never bypass ownership or treat browser storage as successful DB persistence. Disable flag/restart to invalidate access without deleting profiles. Do not roll back to PR #85's unprotected endpoints.

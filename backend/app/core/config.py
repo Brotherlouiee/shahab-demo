@@ -39,6 +39,7 @@ class Settings(BaseSettings):
     database_max_overflow: int = 5
     database_connect_timeout_seconds: int = 5
     redis_url: SecretStr | None = None
+    profile_mock_otp_enabled: bool = False
 
     @field_validator("log_level")
     @classmethod

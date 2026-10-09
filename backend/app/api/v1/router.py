@@ -2,6 +2,7 @@
 
 from fastapi import APIRouter
 
+from .account_access import router as account_access_router
 from .health import router as health_router
 from .loans import router as loans_router
 from .profiles import router as profiles_router
@@ -9,6 +10,7 @@ from .questionnaire import router as questionnaire_router
 from .recommendations import router as recommendations_router
 
 router = APIRouter()
+router.include_router(account_access_router)
 router.include_router(health_router)
 router.include_router(loans_router)
 router.include_router(questionnaire_router)

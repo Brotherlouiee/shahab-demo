@@ -101,3 +101,10 @@ credentials.
 
 Use `docker compose down` to stop the stack while preserving PostgreSQL data.
 See [the Docker runbook](operations/docker-runbook.md) before any reset.
+
+
+## Profile development access — US-09.T072
+
+Development Compose passes SHAHAB_PROFILE_MOCK_OTP_ENABLED (default true for the local stack). Direct API execution requires explicit SHAHAB_PROFILE_MOCK_OTP_ENABLED=true with local/test environment. The existing demo code is ۱۲۳۴۵۶; no SMS is sent. Staging/production always reject this mock. Never configure a public production deployment as local.
+
+After code update, recreate API with `docker compose up -d --build api`. Existing migration d1a9e71b4c3f supplies user_profiles; no new migration or publication command. Refresh/API restart requires development login before protected profile operations; DB records survive restart. Personal-info now persists before analysis, and failures remain visible/retryable. See ADR 0010.

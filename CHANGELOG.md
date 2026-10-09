@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Security
+
+- **US-09.T072:** Replace unprotected phone lookup with owned /profiles/me; writes require server capability. Explicit local/test mock OTP has expiry, quotas and revocation, and is blocked in staging/production. ADR 0010; no real SMS or production authentication.
+
+### Fixed
+
+- **US-09.T072:** Persist personal-info after development verification before analysis; show retryable storage errors, preserve draft and existing avatar/gender, and retain eleven-digit phones. Existing schema reused; no scoring, published loan data or design changes.
+
+
 ### Fixed
 
 - **US-09.T06Z:** دکمهٔ ورود از home حذف شد و فقط منوی مهمان آن را نشان می‌دهد. پس از تکمیل OTP نمایشی، منوی کوتاه کاربر با پروفایل، سوابق درخواست، وام‌های نشان‌شده، درباره ما و خروج نمایش داده می‌شود؛ خروج profile محلی را پاک می‌کند. این تغییر UI-only است و provider احراز هویت، API، session پرسشنامه، داده، scoring، D-005، migration و deploy را تغییر نمی‌دهد.
@@ -87,4 +96,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
   serving data. The recommendation API now exposes server-owned highest,
   low-compatibility and needs-review partitions with deterministic ordering;
 
-- **US-09.T071:** Added local saved-loan persistence, editable local profile fields with a 100 KB avatar limit, and an About page; recommendation, API, and published loan data are unchanged.
+- **US-09.T071:** Added browser-local saved loans, editable profile fields and About page; PR #85 also introduced profile API and the user_profiles migration. Scoring and published loan data were unchanged.
+
