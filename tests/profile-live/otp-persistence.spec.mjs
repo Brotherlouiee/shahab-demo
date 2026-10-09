@@ -3,6 +3,11 @@ import { expect, test } from "@playwright/test";
 async function login(page, suffix) {
   await page.goto("/");
   await page.locator("button.hp-menu-button").click();
+  const logout = page.getByRole("button", { name: "خروج از حساب کاربری" });
+  if (await logout.isVisible()) {
+    await logout.click();
+    await page.locator("button.hp-menu-button").click();
+  }
   await page.getByRole("button", { name: "ورود کاربر" }).click();
   await page.getByLabel("شماره تلفن همراه").fill(suffix);
   const requested = page.waitForResponse(r => r.url().endsWith("/account-access/request"));
