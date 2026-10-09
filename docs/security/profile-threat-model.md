@@ -5,7 +5,7 @@
 | Guessed phone reads / cross-account writes | GET /profiles/me and server-owned phone comparison | API access/ownership tests; old lookup removed |
 | Forged cached identity | Opaque server session; bearer only in module memory | Cache never authorizes; forged-token tests |
 | Replay/expired access | Single-use OTP, attempts/expiry, digested tokens/TTL/revocation | Access tests; API restart requires login |
-| Mock in production | Explicit flag plus local/test environment allowlist | Staging/production fail-closed tests |
+| Mock in production | Local/test environment allowlist regardless of flag; explicit false disables local mock | Staging/production fail-closed tests |
 | Silent storage failure / overwritten draft | Safe error, blocked advancement, draft retained, confirmed cache only after success | API/client/browser retry tests |
 | Phone in URL / shared HTTP cache | /me and JSON body; no-store | API/client tests |
 | Invalid input/avatar | Reject extras; income/job/gender allowlists; base64 raster signature/type and 100 KB server limit | Schema tests; SVG rejected |
