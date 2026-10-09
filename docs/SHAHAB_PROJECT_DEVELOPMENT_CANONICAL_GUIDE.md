@@ -1093,3 +1093,7 @@ Owner clarification: after entering a phone and successfully verifying mock OTP 
 ## US-09.T073 — Local OTP request repair (2026-10-09)
 
 Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.
+
+## US-09.T074 � Home hero-only composition (2026-10-09)
+
+Owner requested the home route to contain only the supplied initial mobile composition: existing header/menu and the loan-request hero. The statistics marquee, feature grid, secondary CTA and footer are no longer rendered on home. This is a presentation-only composition change; questionnaire routing, OTP/profile access, API, PostgreSQL, PUBLISHED loan data, D-005, scoring and deployment behavior are unchanged. The continuity document remains unchanged.

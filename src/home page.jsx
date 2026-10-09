@@ -3021,14 +3021,9 @@ export default function HomePage() {
       {currentView === "login" ? (
         <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onAuthenticated={handleLoginAuthenticated} />
       ) : (
-        <>
-          <main>
-            <Hero onStartQuestionnaire={handleQuestionnaireOpen} />
-            <StatsMarquee />
-            <Features />
-          </main>
-          <Footer />
-        </>
+        <main>
+          <Hero onStartQuestionnaire={handleQuestionnaireOpen} />
+        </main>
       )}
     </div>
   );
