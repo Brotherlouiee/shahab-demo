@@ -1062,13 +1062,13 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
   const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
   const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
-  const [personalInfo, setPersonalInfo] = useState(() => ({
-    firstName: getCachedPersonalInfoValue("firstName"),
-    lastName: getCachedPersonalInfoValue("lastName"),
-    phone: getCachedPersonalInfoValue("phone"),
-    income: getCachedPersonalInfoValue("income"),
-    job: getCachedPersonalInfoValue("job"),
-  }));
+  const [personalInfo, setPersonalInfo] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    income: "",
+    job: "",
+  });
   const [cachedPersonalInfo, setCachedPersonalInfo] = useState(() => ({
     firstName: getCachedPersonalInfoValue("firstName"),
     lastName: getCachedPersonalInfoValue("lastName"),

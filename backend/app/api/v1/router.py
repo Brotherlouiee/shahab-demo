@@ -4,8 +4,8 @@ from fastapi import APIRouter
 
 from .health import router as health_router
 from .loans import router as loans_router
-from .questionnaire import router as questionnaire_router
 from .profiles import router as profiles_router
+from .questionnaire import router as questionnaire_router
 from .recommendations import router as recommendations_router
 
 router = APIRouter()
