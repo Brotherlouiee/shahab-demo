@@ -372,6 +372,8 @@ const personalInfoCacheKeys = {
   firstName: "shahab.personalInfo.firstName",
   lastName: "shahab.personalInfo.lastName",
   phone: "shahab.personalInfo.phone",
+  income: "shahab.personalInfo.income",
+  job: "shahab.personalInfo.job",
 };
 const accountProfileCacheKey = "shahab.accountProfile";
 
@@ -1060,17 +1062,19 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
   const [questionnaireSessionError, setQuestionnaireSessionError] = useState("");
   const [isSavingQuestionnaireAnswer, setIsSavingQuestionnaireAnswer] = useState(false);
-  const [personalInfo, setPersonalInfo] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    income: "",
-    job: "",
-  });
+  const [personalInfo, setPersonalInfo] = useState(() => ({
+    firstName: getCachedPersonalInfoValue("firstName"),
+    lastName: getCachedPersonalInfoValue("lastName"),
+    phone: getCachedPersonalInfoValue("phone"),
+    income: getCachedPersonalInfoValue("income"),
+    job: getCachedPersonalInfoValue("job"),
+  }));
   const [cachedPersonalInfo, setCachedPersonalInfo] = useState(() => ({
     firstName: getCachedPersonalInfoValue("firstName"),
     lastName: getCachedPersonalInfoValue("lastName"),
     phone: getCachedPersonalInfoValue("phone"),
+    income: getCachedPersonalInfoValue("income"),
+    job: getCachedPersonalInfoValue("job"),
   }));
   const [focusedPersonalInfoField, setFocusedPersonalInfoField] = useState("");
   const [personalInfoErrors, setPersonalInfoErrors] = useState({
@@ -1824,7 +1828,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
         firstName: personalInfo.firstName.trim(),
         lastName: personalInfo.lastName.trim(),
         phone: personalInfo.phone,
+        income: personalInfo.income,
+        job: personalInfo.job,
       };
+      Object.entries(accountProfile).forEach(([field, value]) => {
+        if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
+      });
       setCachedAccountProfile(accountProfile);
       onAccountCreated(accountProfile);
       setLoanResultView("");
@@ -1938,6 +1947,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       ...current,
       [field]: value,
     }));
+    if (field === "income" || field === "job") {
+      setCachedPersonalInfoValue(field, value);
+      setCachedPersonalInfo((current) => ({ ...current, [field]: value }));
+    }
   }
 
   function handlePersianNameChange(field, value) {
@@ -2777,26 +2790,44 @@ function Footer() {
   );
 }
 
+async function persistProfile(profile) {
+  const response = await fetch("/api/v1/profiles", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ phone: displayPersianPhone(profile.phone), firstName: profile.firstName || "", lastName: profile.lastName || "", income: profile.income || "", job: profile.job || "", gender: profile.gender || "", avatar: profile.avatar || null }) });
+  if (!response.ok) throw new Error("profile persistence failed");
+  return response.json();
+}
+function ProfileDropdown({ label, value, options, onChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedLabel = options.find((option) => option.value === value)?.label || "";
+  return <label><span>{label}</span><span className="hp-personal-select"><span className={"hp-personal-dropdown " + (isOpen ? "is-open" : "")} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}><button className="hp-personal-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded={isOpen} onClick={() => setIsOpen((current) => !current)}><span>{selectedLabel}</span></button>{isOpen ? <span className="hp-personal-dropdown-menu" role="listbox">{options.map((option) => <button className={"hp-personal-dropdown-option " + (value === option.value ? "is-selected" : "")} type="button" role="option" aria-selected={value === option.value} key={option.value} onClick={() => { onChange(option.value); setIsOpen(false); }}>{option.label}</button>)}</span> : null}</span></span></label>;
+}
+const genderOptions = [{ value: "female", label: "زن" }, { value: "male", label: "مرد" }];
+function displayPersianPhone(phone) { const digits = sanitizePhoneDigits(phone || ""); return digits.startsWith("۰۹") ? digits : "۰۹" + digits; }
 function AccountPage({ profile, onSave, onBack }) {
   const [draft, setDraft] = useState(() => ({ ...profile, income: profile.income || "", job: profile.job || "", gender: profile.gender || "", avatar: profile.avatar || "" }));
   const update = (field, value) => setDraft((current) => ({ ...current, [field]: value }));
-  function selectAvatar(event) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; }
-    const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file);
-  }
-  return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><label>شماره تلفن همراه<input value={draft.phone || ""} disabled /></label><label>نام<input value={draft.firstName || ""} onChange={(event) => update("firstName", event.target.value)} /></label><label>نام خانوادگی<input value={draft.lastName || ""} onChange={(event) => update("lastName", event.target.value)} /></label><label>میزان درآمد ماهانه<select value={draft.income} onChange={(event) => update("income", event.target.value)}><option value="" /><option>کمتر از ۲۰ میلیون تومان</option><option>۲۰ تا ۵۰ میلیون تومان</option><option>بیشتر از ۵۰ میلیون تومان</option></select></label><label>شغل<select value={draft.job} onChange={(event) => update("job", event.target.value)}><option value="" /><option>کارمند</option><option>آزاد</option><option>صاحب کسب‌وکار</option></select></label><label>جنسیت<select value={draft.gender} onChange={(event) => update("gender", event.target.value)}><option value="" /><option>زن</option><option>مرد</option></select></label><button type="button" className="hp-account-save" onClick={() => { onSave(draft); onBack(); }}>ذخیره تغییرات</button></main>;
+  useEffect(() => {
+    if (!profile.phone) return undefined;
+    let isCurrent = true;
+    fetch(`/api/v1/profiles/${encodeURIComponent(displayPersianPhone(profile.phone))}`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((stored) => {
+        if (isCurrent && stored) setDraft((current) => ({ ...current, ...stored, phone: profile.phone }));
+      })
+      .catch(() => {});
+    return () => { isCurrent = false; };
+  }, [profile.phone]);
+  function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
+  return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><form className="hp-account-profile-form" onSubmit={(event) => { event.preventDefault(); onSave(draft); }}><label><span>شماره تلفن همراه</span><input value={displayPersianPhone(draft.phone)} disabled /></label><label><span>نام</span><input value={draft.firstName || ""} onChange={(event) => update("firstName", sanitizePersianName(event.target.value))} /></label><label><span>نام خانوادگی</span><input value={draft.lastName || ""} onChange={(event) => update("lastName", sanitizePersianName(event.target.value))} /></label><ProfileDropdown label="میزان درآمد ماهانه" value={draft.income} options={incomeOptions} onChange={(value) => update("income", value)} /><ProfileDropdown label="شغل" value={draft.job} options={jobOptions} onChange={(value) => update("job", value)} /><ProfileDropdown label="جنسیت" value={draft.gender} options={genderOptions} onChange={(value) => update("gender", value)} /><button type="submit" className="hp-account-save">ذخیره تغییرات</button></form></main>;
 }
 
 function AboutPage({ onBack }) {
-  return <main className="hp-about-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={() => {}} onHome={onBack} /><img src="/about-us-payment.png" alt="کیف پول، تلفن همراه و کارت پرداخت" /><p>ما از یک مسئله واقعی شروع کرده‌ایم: وقتی فرد یا کسب‌وکاری به منابع مالی نیاز دارد، با انبوهی از گزینه‌ها، اصطلاحات، شرایط متغیر و تصمیم‌هایی روبه‌رو می‌شود که مقایسه آن‌ها ساده نیست. نرخ سود به‌تنهایی تعیین‌کننده نیست؛ مبلغ وام، میزان قسط، مدت بازپرداخت، سپرده، ضمانت، زمان انتظار، هزینه‌های جانبی و پیچیدگی فرایند نیز در انتخاب نهایی اثر می‌گذارند.</p><p>شهاب تلاش می‌کند این تصمیم را از یک جست‌وجوی پراکنده و مبهم به یک تجربه روشن و قابل‌فهم تبدیل کند.</p><p>ما شهاب را صرفاً یک فهرست وام یا موتور جست‌وجو نمی‌دانیم. هدف ما ساختن یک لایه هوشمند برای تطبیق نیاز با گزینه‌های اعتباری است؛ لایه‌ای که هم به کاربر برای یافتن مسیر مناسب‌تر کمک کند و هم در آینده، به اعتباردهندگان و شرکای مالی امکان دهد متقاضیان واجدشرایط‌تر را بهتر بشناسند. این نگاه، شهاب را به سمت یک پلتفرم چندمسیرهٔ تأمین مالی هدایت می‌کند. پلتفرمی که می‌تواند در کنار تسهیلات بانکی، با همکاری با نهادهای مالی و مدل‌های نوین تأمین مالی رشد کند.</p></main>;
+  return <main className="hp-about-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><img src="/about-us-payment.png" alt="کیف پول، تلفن همراه و کارت پرداخت" /><p>ما از یک مسئله واقعی شروع کرده‌ایم: وقتی فرد یا کسب‌وکاری به منابع مالی نیاز دارد، با انبوهی از گزینه‌ها، اصطلاحات، شرایط متغیر و تصمیم‌هایی روبه‌رو می‌شود که مقایسه آن‌ها ساده نیست. نرخ سود به‌تنهایی تعیین‌کننده نیست؛ مبلغ وام، میزان قسط، مدت بازپرداخت، سپرده، ضمانت، زمان انتظار، هزینه‌های جانبی و پیچیدگی فرایند نیز در انتخاب نهایی اثر می‌گذارند.</p><p>شهاب تلاش می‌کند این تصمیم را از یک جست‌وجوی پراکنده و مبهم به یک تجربه روشن و قابل‌فهم تبدیل کند.</p><p>ما شهاب را صرفاً یک فهرست وام یا موتور جست‌وجو نمی‌دانیم. هدف ما ساختن یک لایه هوشمند برای تطبیق نیاز با گزینه‌های اعتباری است؛ لایه‌ای که هم به کاربر برای یافتن مسیر مناسب‌تر کمک کند و هم در آینده، به اعتباردهندگان و شرکای مالی امکان دهد متقاضیان واجدشرایط‌تر را بهتر بشناسند. این نگاه، شهاب را به سمت یک پلتفرم چندمسیرهٔ تأمین مالی هدایت می‌کند. پلتفرمی که می‌تواند در کنار تسهیلات بانکی، با همکاری با نهادهای مالی و مدل‌های نوین تأمین مالی رشد کند.</p></main>;
 }
 
 function SavedLoansPage({ onBack, onDetails }) {
   const [loans, setLoans] = useState(readSavedLoans);
   useEffect(() => { const refresh = () => setLoans(readSavedLoans()); window.addEventListener("shahab:saved-loans", refresh); return () => window.removeEventListener("shahab:saved-loans", refresh); }, []);
-  return <LoanResultsScreen result={null} status="ready" header={<QuestionnaireHeader onBack={onBack} onMenu={() => {}} onHome={onBack} />} onDetails={onDetails} savedItems={loans} showActions={false} />;
+  return <LoanResultsScreen result={null} status="ready" header={<AccountHeader onBack={onBack} onHome={onBack} />} onDetails={onDetails} savedItems={loans} showActions={false} />;
 }
 
 export default function HomePage() {
@@ -2912,7 +2943,7 @@ export default function HomePage() {
     }
   }
 
-  if (currentView === "profile") return <AccountPage profile={accountProfile || { phone: "" }} onSave={(profile) => { setCachedAccountProfile(profile); setAccountProfile(profile); }} onBack={handleHomeOpen} />;
+  if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={async (profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); try { const stored = await persistProfile(profile); const normalized = { ...profile, ...stored, phone: getCachedPersonalInfoValue("phone") || profile.phone }; setCachedAccountProfile(normalized); setAccountProfile(normalized); } catch { setCachedAccountProfile(profile); setAccountProfile(profile); } }} onBack={handleHomeOpen} />;
   if (currentView === "about") return <AboutPage onBack={handleHomeOpen} />;
   if (currentView === "saved") return <SavedLoansPage onBack={handleHomeOpen} onDetails={handleSavedLoanDetails} />;
 
