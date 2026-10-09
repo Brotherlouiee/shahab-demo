@@ -3,6 +3,7 @@
 let accessToken = "";
 let actorPhone = "";
 let expiresAt = 0;
+const apiBaseUrl = (import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1").replace(/\/+$/, "");
 
 export class ProfileApiError extends Error {
   constructor(status) {
@@ -31,7 +32,7 @@ async function request(path, { body, method = "GET", authorize = false } = {}) {
   if (authorize && (!accessToken || Date.now() >= expiresAt)) throw new ProfileApiError(401);
   let response;
   try {
-    response = await fetch(`/api/v1/${path}`, {
+    response = await fetch(`${apiBaseUrl}/${path}`, {
       method, cache: "no-store",
       headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(authorize ? { Authorization: `Bearer ${accessToken}` } : {}) },
       ...(body ? { body: JSON.stringify(body) } : {}),
@@ -84,5 +85,5 @@ export async function logoutProfile() {
   // Clear the local capability even if the network is unavailable; server TTL still bounds it.
   const token = accessToken;
   clearAccountAccess();
-  if (token) await fetch("/api/v1/account-access/logout", { method: "POST", headers: { Authorization: `Bearer ${token}` } });
+  if (token) await fetch(`${apiBaseUrl}/account-access/logout`, { method: "POST", headers: { Authorization: `Bearer ${token}` } });
 }

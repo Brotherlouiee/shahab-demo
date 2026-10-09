@@ -50,3 +50,13 @@ Compose logs.
 After update run `docker compose up -d --build api` to apply routes and the development mock flag. No new migration or data publication command; normal startup applies the existing profile migration. Staging/production profile access remains fail-closed pending real authentication.
 
 401 after refresh/restart requires development login again. For 503, check DB readiness/migration and explicit local/test flag; never bypass ownership or treat browser storage as successful DB persistence. Disable flag/restart to invalidate access without deleting profiles. Do not roll back to PR #85's unprotected endpoints.
+
+## OTP request failure repair — US-09.T073
+
+An API container created before T072 may lack the new OTP flag. The previous local default then returned 503 even when Python files had reloaded. Local/test now enable the fake provider by default; explicitly setting SHAHAB_PROFILE_MOCK_OTP_ENABLED=false still disables it. Staging/production remain denied regardless of the flag. The fake code is 123456 and no SMS is sent.
+
+After pulling the repair, recreate the API with `docker compose up -d --build --force-recreate api`. This retains the PostgreSQL volume. For a freshly created API network endpoint, restart frontend with `docker compose restart frontend` if its proxy still fails.
+
+Inspect only non-secret configuration: `docker compose exec api python -c "from backend.app.core.config import get_settings; s=get_settings(); print(s.environment.value, s.profile_mock_otp_enabled)"`. Expected local output is `local True`. A missing route (404), unavailable provider (503), or connection failure requires API/proxy checks; do not bypass database persistence.
+
+The account client now uses VITE_SHAHAB_API_BASE_URL consistently with the existing questionnaire client, including logout. Without a configured base it uses /api/v1 via the Compose Vite proxy. Existing local browser/Node tests using mocked API responses cannot demonstrate that this proxy is connected; a separate CI browser job now uses real Vite, FastAPI and PostgreSQL with no route fixtures.

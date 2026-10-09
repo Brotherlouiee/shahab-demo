@@ -131,6 +131,16 @@ class ProfileAccessTests(unittest.TestCase):
         self.assertNotIn("private database", response.text)
         self.database.rollback.assert_called_once()
 
+    def test_existing_local_container_without_new_flag_can_request_mock_otp(self) -> None:
+        from unittest.mock import patch
+
+        with patch.dict("os.environ", {}, clear=True):
+            app = create_app(Settings(environment=AppEnvironment.LOCAL))
+        client = TestClient(app)
+        response = client.post("/api/v1/account-access/request", json={"phone": "09000000001"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("challengeId", response.json())
+
     def test_mock_is_explicit_and_never_available_in_staging_or_production(self) -> None:
         for environment, enabled in (
             (AppEnvironment.LOCAL, False),

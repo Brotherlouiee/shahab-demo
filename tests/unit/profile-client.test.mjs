@@ -40,3 +40,33 @@ test("verification authorizes persistence; storage failure stays an error and pr
     assert.ok(requests.every((r) => !r.url.includes("09000000001")));
   } finally { globalThis.fetch = original; clearAccountAccess(); }
 });
+
+
+test("configured API base is used by OTP, profile and logout requests", async () => {
+  const { createServer } = await import("vite");
+  const originalBase = process.env.VITE_SHAHAB_API_BASE_URL;
+  const originalFetch = globalThis.fetch;
+  process.env.VITE_SHAHAB_API_BASE_URL = "https://api.example.test/api/v1/";
+  const server = await createServer({ configFile: false, server: { middlewareMode: true }, appType: "custom" });
+  const urls = [];
+  globalThis.fetch = async (url) => {
+    urls.push(url);
+    if (url.endsWith("/verify")) return Response.json({ accessToken: "fixture", phone: "09000000001", expiresIn: 1800 });
+    if (url.endsWith("/logout")) return new Response(null, { status: 204 });
+    return Response.json({ challengeId: "fixture", phone: "09000000001" });
+  };
+  try {
+    const client = await server.ssrLoadModule("/src/features/account/profileClient.mjs");
+    await client.requestProfileCode("09000000001");
+    await client.verifyProfileCode("fixture", "123456");
+    await client.readOwnProfile();
+    await client.persistProfile({ phone: "09000000001" });
+    await client.logoutProfile();
+    assert.deepEqual(urls, ["account-access/request", "account-access/verify", "profiles/me", "profiles", "account-access/logout"].map(path => `https://api.example.test/api/v1/${path}`));
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalBase === undefined) delete process.env.VITE_SHAHAB_API_BASE_URL;
+    else process.env.VITE_SHAHAB_API_BASE_URL = originalBase;
+    await server.close();
+  }
+});
