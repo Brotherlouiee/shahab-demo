@@ -69,7 +69,7 @@ test("phone-only login shows generic sidebar name and refreshes saved database n
   await page.getByRole("button", { name: "ورود به حساب" }).click();
   await page.locator("button.hp-menu-button").click();
   await expect(page.locator(".hp-sidebar-name")).toHaveText("کاربر");
-  await page.getByRole("button", { name: "بستن منو" }).click();
+  await page.getByRole("button", { name: "بستن منو" }).click({ position: { x: 10, y: 400 } });
   api.profile.firstName = "علی";
   api.profile.lastName = "احمدی";
   await page.locator("button.hp-menu-button").click();

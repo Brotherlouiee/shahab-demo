@@ -1514,6 +1514,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   ];
   const prototypeQuestion = questions[currentQuestion];
   const canonicalQuestion = getCanonicalQuestionForPrototypeIndex(currentQuestion);
+  const usesContentHeightQuestionCard = ["Q3", "S8"].includes(canonicalQuestion?.questionId);
   // The legacy index remains layout/navigation glue only. Behavioural wording
   // and answer identifiers always come from the verified canonical artifact.
   const question = canonicalQuestion
@@ -2534,7 +2535,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
             <h1 className={question.titleClassName || ""}>{toPersianDigits(question.title)}</h1>
 
             <div
-              className={`hp-question-card ${currentQuestion === 1 ? "is-compact" : ""} ${isStagedQuestion ? "is-staged" : ""}`}
+              className={`hp-question-card ${currentQuestion === 1 ? "is-compact" : ""} ${isStagedQuestion ? "is-staged" : ""} ${usesContentHeightQuestionCard ? "uses-content-height" : ""}`}
               role="radiogroup"
               aria-label="نوع وام"
             >

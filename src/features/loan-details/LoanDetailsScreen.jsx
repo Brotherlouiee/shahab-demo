@@ -90,7 +90,7 @@ function LoanDetail({ detail, onAiAnalysis }) {
     </section>
     <div className="hp-loan-details-footer-spacer" aria-hidden="true" />
     <div className="hp-loan-details-analysis-bar">
-      <button type="button" onClick={() => onAiAnalysis?.(detail.loanId)}>تحلیل با هوش مصنوعی</button>
+      <button type="button" disabled>تحلیل با هوش مصنوعی</button>
     </div>
   </>;
 }

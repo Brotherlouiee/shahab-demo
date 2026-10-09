@@ -163,6 +163,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page.getByText("میثاق ۲")).toBeVisible();
 
   await expect(page.getByRole("button", { name: "بررسی آمادگی دریافت وام" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "بررسی آمادگی دریافت وام" })).toHaveCSS("background-color", "rgb(140, 140, 140)");
 
   await page.getByRole("button", { name: "مقایسه وام" }).click();
   await expect(page).toHaveURL(/\/compare-loans$/);
