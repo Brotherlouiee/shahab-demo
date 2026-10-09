@@ -14,6 +14,7 @@ export async function installProfileApi(page, options = {}) {
     }
     state.verifies += 1;
     if (latin(body.code) !== "123456") return route.fulfill({ status: 401, json: {} });
+    state.profile ||= { phone: state.phone, firstName: "", lastName: "", income: "", job: "", gender: "", avatar: null };
     return route.fulfill({ json: { accessToken: "fixture", phone: state.phone, expiresIn: 1800 } });
   });
   await page.route("**/api/v1/profiles/me", (route) => {

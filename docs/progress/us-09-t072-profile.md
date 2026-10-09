@@ -29,3 +29,7 @@ Implementation and acceptance checks passed on PR #86 head `b3b14fb3cda237f30787
 - `.agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext`: `2721940cdc5ae17fc952d20f947d949a61317fcd`
 - `.agents/documents/ماتریس گزینه های متغیرهای وام.unitext`: `f2121e0e7f109d03cce432e4119978ba51ebb915`
 - `.agents/documents/پرسشنامه سنجش متغیرهای رفتاری.unitext`: `26c70261829442e0676b85ac552bd6f7255f5faf`
+
+## Verified first-login profile creation — 2026-10-09
+
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.

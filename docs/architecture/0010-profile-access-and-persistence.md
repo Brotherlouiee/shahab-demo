@@ -17,3 +17,7 @@ Personal-info requires server verification plus confirmed persistence before ana
 API tests cover anonymous/forged access, ownership, expiry, attempts, single use, quota, logout, production denial, schema and storage errors. A PostgreSQL migration test verifies persistence through a new connection. Browser tests cover both forms' retry paths.
 
 No new migration/dependency, design, About copy, loan data, D-005 or questionnaire TTL changes. Disable the local mock flag and restart to close access without deleting profiles. Do not restore the vulnerable unauthenticated endpoints as rollback. Production remains blocked pending real authentication/security release work.
+
+## Verified first-login profile creation — 2026-10-09
+
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.

@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Fixed
+
+- Verified first mock-OTP login now creates the database profile; subsequent logins preserve existing data. Personal-info updates that same profile. Failed creation does not issue access.
+
 ### Security
 
 - **US-09.T072:** Replace unprotected phone lookup with owned /profiles/me; writes require server capability. Explicit local/test mock OTP has expiry, quotas and revocation, and is blocked in staging/production. ADR 0010; no real SMS or production authentication.

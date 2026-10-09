@@ -95,6 +95,42 @@ class ProfileAccessTests(unittest.TestCase):
         self.assertEqual(self.client.post("/api/v1/account-access/logout", headers=headers).status_code, 204)
         self.assertEqual(self.client.get("/api/v1/profiles/me", headers=headers).status_code, 401)
 
+    def test_verification_creates_a_profile_only_after_valid_code(self) -> None:
+        self.database.get.return_value = None
+        challenge = self.client.post("/api/v1/account-access/request", json={"phone": "09000000001"}).json()
+        self.database.add.assert_not_called()
+        response = self.client.post(
+            "/api/v1/account-access/verify", json={"challengeId": challenge["challengeId"], "code": "000000"}
+        )
+        self.assertEqual(response.status_code, 401)
+        self.database.add.assert_not_called()
+        response = self.client.post(
+            "/api/v1/account-access/verify", json={"challengeId": challenge["challengeId"], "code": "123456"}
+        )
+        self.assertEqual(response.status_code, 200)
+        created = self.database.add.call_args.args[0]
+        self.assertEqual((created.phone, created.first_name, created.last_name), ("09000000001", "", ""))
+        self.database.commit.assert_called_once()
+
+    def test_repeat_login_preserves_existing_profile(self) -> None:
+        self.login()
+        self.login()
+        self.database.add.assert_not_called()
+        self.database.commit.assert_not_called()
+        self.assertEqual((self.record.first_name, self.record.income), ("آزمون", "up-to-22"))
+
+    def test_failed_profile_creation_does_not_issue_access(self) -> None:
+        self.database.get.return_value = None
+        self.database.commit.side_effect = RuntimeError("private database failure")
+        challenge = self.client.post("/api/v1/account-access/request", json={"phone": "09000000001"}).json()
+        response = self.client.post(
+            "/api/v1/account-access/verify", json={"challengeId": challenge["challengeId"], "code": "123456"}
+        )
+        self.assertEqual(response.status_code, 503)
+        self.assertNotIn("accessToken", response.text)
+        self.assertNotIn("private database", response.text)
+        self.database.rollback.assert_called_once()
+
     def test_mock_is_explicit_and_never_available_in_staging_or_production(self) -> None:
         for environment, enabled in (
             (AppEnvironment.LOCAL, False),

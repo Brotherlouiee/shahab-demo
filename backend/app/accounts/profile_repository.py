@@ -1,5 +1,6 @@
 """Profile persistence: one owned record, atomic writes and explicit storage failure."""
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from backend.app.api.errors import ApiError, ErrorCode
@@ -33,6 +34,30 @@ def read_profile(phone: str, session: Session | None) -> ProfilePayload:
     if record is None:
         raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Profile was not found.")
     return _response(record)
+
+
+def ensure_profile(phone: str, session: Session | None) -> None:
+    """Create the verified actor once; subsequent logins never overwrite their data."""
+    active_session = _database_session(session)
+    try:
+        if active_session.get(UserProfile, phone) is not None:
+            return
+        active_session.add(
+            UserProfile(phone=phone, first_name="", last_name="", income="", job="", gender="", avatar_data_url=None)
+        )
+        active_session.commit()
+    except IntegrityError:
+        # Another verification may have created the same primary-key record concurrently.
+        active_session.rollback()
+        if active_session.get(UserProfile, phone) is None:
+            raise ApiError(
+                status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Profile could not be created."
+            ) from None
+    except Exception:
+        active_session.rollback()
+        raise ApiError(
+            status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Profile could not be created."
+        ) from None
 
 
 def upsert_profile(payload: ProfilePayload, session: Session | None) -> ProfilePayload:

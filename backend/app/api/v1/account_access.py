@@ -4,10 +4,13 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Header, Request, Response
 from pydantic import BaseModel, ConfigDict, Field, field_validator
+from sqlalchemy.orm import Session
 
 from backend.app.accounts.access import AccessFailure, AccountAccess
 from backend.app.accounts.phone import normalize_phone
+from backend.app.accounts.profile_repository import ensure_profile
 from backend.app.api.errors import ApiError, ErrorCode
+from backend.app.core.dependencies import get_request_database_session
 
 router = APIRouter(prefix="/account-access", tags=["account-access"])
 
@@ -73,13 +76,21 @@ def request_code(
 
 @router.post("/verify")
 def verify_code(
-    payload: CodeVerification, service: Annotated[AccountAccess, Depends(access_service)]
+    payload: CodeVerification,
+    service: Annotated[AccountAccess, Depends(access_service)],
+    session: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> dict[str, str | int]:
     try:
         token = service.verify_code(payload.challengeId, payload.code)
     except AccessFailure as error:
         raise safe_failure(error) from None
-    return {"accessToken": token, "phone": service.actor(token), "expiresIn": 1800}
+    phone = service.actor(token)
+    try:
+        ensure_profile(phone, session)
+    except Exception:
+        service.revoke(token)
+        raise
+    return {"accessToken": token, "phone": phone, "expiresIn": 1800}
 
 
 @router.post("/logout", status_code=204)
