@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T075:** Saved Loans now renders the supplied empty-state artwork when no loan is saved, hides filters for zero or one saved loan, preserves `/saved-loans` as the detail return target, aligns the header inset, and gives the document link the same icon as result cards. No API, scoring, data, or storage-policy change.
+
 - **US-09.T074:** صفحهٔ home فقط هدر، منوی همبرگری و بخش ابتداییِ درخواست وام را نگه می‌دارد. بخش‌های آمار، ویژگی‌ها، CTA و footer از رندر صفحهٔ خانه حذف شدند؛ مسیر پرسشنامه، OTP، API، داده‌های PUBLISHED و scoring تغییری ندارند.
 
 - Verified first mock-OTP login now creates the database profile; subsequent logins preserve existing data. Personal-info updates that same profile. Failed creation does not issue access.

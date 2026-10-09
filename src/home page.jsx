@@ -1,6 +1,7 @@
 import { displayProfilePhone, hasProfileAccess, logoutProfile, persistPersonalInfo, persistProfile, readOwnProfile, requestProfileCode, verifyProfileCode } from "./features/account/profileClient.mjs";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { readSavedLoans } from "./features/account/savedLoans.mjs";
+import { isSavedLoanDetailsPath, savedLoanDetailsPath } from "./features/account/savedLoansPresentation.mjs";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
 import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
@@ -1070,7 +1071,7 @@ function LoanAiAnalysisScreen({ onBack, result, loanId }) {
   );
 }
 
-function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
+function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSavedLoans }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
@@ -1560,7 +1561,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     : loanResultView === "results"
       ? "/loan-results"
       : loanResultView === "details"
-      ? `/loan-details?loanId=${encodeURIComponent(selectedLoanId)}`
+      ? (isSavedLoanDetailsPath(window.location.search)
+        ? savedLoanDetailsPath(selectedLoanId)
+        : `/loan-details?loanId=${encodeURIComponent(selectedLoanId)}`)
         : loanResultView === "request"
           ? "/loan-request"
           : loanResultView === "compare"
@@ -1920,6 +1923,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       // visit with no choices; returning from compare-result is handled above.
       setSelectedComparisonPlanIds([]);
       setLoanResultView("results");
+      return;
+    }
+
+    if (loanResultView === "details" && isSavedLoanDetailsPath(window.location.search)) {
+      onSavedLoans();
       return;
     }
 
@@ -2900,7 +2908,8 @@ export default function HomePage() {
   useEffect(() => {
     if (currentView === "questionnaire") return;
 
-    replaceRoute(currentView === "login" ? (loginStep === "otp" ? "/login/otp" : "/login") : "/");
+    const accountRoute = { profile: "/profile", saved: "/saved-loans", about: "/about" };
+    replaceRoute(currentView === "login" ? (loginStep === "otp" ? "/login/otp" : "/login") : (accountRoute[currentView] || "/"));
   }, [currentView, loginStep]);
 
   useEffect(() => {
@@ -2953,8 +2962,13 @@ export default function HomePage() {
   }
 
   function handleSavedLoanDetails(loanId) {
-    replaceRoute(`/loan-details?loanId=${encodeURIComponent(loanId)}`);
+    replaceRoute(savedLoanDetailsPath(loanId));
     setCurrentView("questionnaire");
+  }
+
+  function handleSavedLoansOpen() {
+    replaceRoute("/saved-loans");
+    setCurrentView("saved");
   }
 
   function handleQuestionnaireOpen() {
@@ -2986,9 +3000,7 @@ export default function HomePage() {
       return;
     }
 
-    if (currentView === "questionnaire") {
-      setCurrentView("home");
-    }
+    if (currentView === "questionnaire") setCurrentView("home");
   }
 
   if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={(profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); setCachedAccountProfile(profile); setAccountProfile(profile); }} onBack={handleHomeOpen} />;
@@ -3004,6 +3016,7 @@ export default function HomePage() {
           onMenu={() => setIsSidebarOpen(true)}
           onAccountCreated={handleAccountCreated}
           onHome={handleHomeOpen}
+          onSavedLoans={handleSavedLoansOpen}
         />
       </div>
     );

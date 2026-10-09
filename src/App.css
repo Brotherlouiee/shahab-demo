@@ -4970,13 +4970,44 @@ right: 16px;
   background: transparent;
   color: #0067ff;
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: 5px;
   text-align: center;
   font-family: inherit;
   font-size: 16px;
   font-weight: 900;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.hp-loan-docs-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.hp-loan-results-page.is-saved-loans .hp-loan-results-top {
+  padding-inline: 20px;
+}
+
+.hp-saved-loans-empty-state {
+  width: min(100%, 346px);
+  margin: 42px auto 0;
+  display: grid;
+  place-items: center;
+}
+
+.hp-saved-loans-empty-state img {
+  display: block;
+  width: min(100%, 300px);
+  height: auto;
+  object-fit: contain;
 }
 
 .hp-loan-save-toast {
