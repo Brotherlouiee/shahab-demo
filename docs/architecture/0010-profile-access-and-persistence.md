@@ -6,7 +6,7 @@ PR #85 exposed personal profiles by phone without ownership checks and silently 
 
 Reuse the existing user_profiles table/migration. GET /profiles/me selects the server-owned actor; PUT /profiles compares normalized payload phone against that actor. The public GET /profiles/{phone} route is removed. Client phone, localStorage and React login state are not authorization.
 
-Real SMS/Kavenegar remains out of scope under the canonical guide. SHAHAB_PROFILE_MOCK_OTP_ENABLED explicitly permits only local/test demo OTP. Staging/production reject the mock even with the flag enabled. This is development verification, not real phone ownership or production authentication.
+Real SMS/Kavenegar remains out of scope under the canonical guide. Under the T073 owner-authorized local repair, local/test demo OTP is enabled by default; SHAHAB_PROFILE_MOCK_OTP_ENABLED=false explicitly disables it. Staging/production reject the mock even with the flag enabled. This is development verification, not real phone ownership or production authentication.
 
 Challenges expire after 120 seconds, permit five attempts and are single-use. Request quota is five per phone/client in 120 seconds. A bounded, locked process-local store retains token digests, expires capabilities after 30 minutes and revokes them on logout. API restart invalidates access. Shared production/multiple-worker sessions require a separate adapter and real authentication gate.
 

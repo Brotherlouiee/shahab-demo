@@ -104,3 +104,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 
 Sidebar owner clarification: show the server profile name; use «کاربر» for a phone-only profile without a name. Refresh the owned profile when opening the menu with a valid capability. Personal-info uses the confirmed server response. Browser regression verifies named and unnamed profiles.
+
+## US-09.T073 — Local OTP request repair (2026-10-09)
+
+Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.

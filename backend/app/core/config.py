@@ -39,7 +39,9 @@ class Settings(BaseSettings):
     database_max_overflow: int = 5
     database_connect_timeout_seconds: int = 5
     redis_url: SecretStr | None = None
-    profile_mock_otp_enabled: bool = False
+    # Development OTP works on existing local containers without a newly added env variable.
+    # Composition still denies mock access in staging/production, regardless of this flag.
+    profile_mock_otp_enabled: bool = True
 
     @field_validator("log_level")
     @classmethod

@@ -139,7 +139,7 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         self._alembic("upgrade", "head")
         engine = create_engine(str(DATABASE_URL))
-        app = create_app(Settings(environment=AppEnvironment.TEST, profile_mock_otp_enabled=True))
+        app = create_app(Settings(environment=AppEnvironment.LOCAL))
 
         def database_session():
             with Session(engine) as session:
