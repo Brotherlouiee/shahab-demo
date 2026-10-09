@@ -3140,16 +3140,17 @@ button {
 
 .hp-question-card {
   width: 100%;
-  min-height: 175px;
+  min-height: 0;
   border: 1px solid #8c8c8c;
   border-radius: 14px;
-  padding: 11px 9px 11px;
+  /* 27px content padding + 1px border = 28px visible inset. */
+  padding: 27px 9px;
 }
 
 .hp-question-card.is-compact {
-  min-height: 84px;
-  padding-top: 11px;
-  padding-bottom: 11px;
+  min-height: 0;
+  padding-top: 27px;
+  padding-bottom: 27px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3875,10 +3876,14 @@ button {
 }
 
 .hp-question-card.is-staged {
-  min-height: 351px;
-  padding: 12px 7px 11px;
+  min-height: 0;
+  padding: 27px 7px;
   border-color: #8c8c8c;
   border-radius: 9px;
+}
+
+.hp-question-card.is-staged.uses-content-height {
+  min-height: 0;
 }
 
 .hp-question-card.is-staged > div + div {
@@ -4649,6 +4654,13 @@ right: 16px;
   color: #ffffff;
 }
 
+.hp-loan-results-actions .is-primary:disabled,
+.hp-loan-details-analysis-bar button:disabled {
+  background: #8c8c8c;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
 .hp-loan-result-filters {
   position: relative;
   width: 346px;
@@ -5090,6 +5102,19 @@ right: 16px;
   font-family: inherit;
   font-size: 17px;
   font-weight: 900;
+}
+
+.hp-select-wrap span {
+  width: 8px !important;
+  height: 8px !important;
+  border-right: 1.8px solid #000000;
+  border-bottom: 1.8px solid #000000;
+  transform: translateY(-70%) rotate(45deg) !important;
+}
+
+.hp-select-wrap span::before,
+.hp-select-wrap span::after {
+  content: none !important;
 }
 
 .hp-loan-details-conditions,
@@ -5947,6 +5972,33 @@ right: 16px;
    content or a loading sentence. The delayed component itself owns the 50ms
    threshold; this rule only positions its real placeholder. */
 .hp-questionnaire-content { position: relative; }
+
+/* Keep every questionnaire navigation row on the same 28px bottom inset.
+   The content area can grow for longer forms; the actions then remain after
+   the content instead of becoming fixed and covering a field. */
+.hp-questionnaire-shell > .hp-questionnaire-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.hp-questionnaire-shell > .hp-questionnaire-page > .hp-questionnaire-content {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  min-height: 0;
+  padding-bottom: 28px !important;
+}
+
+.hp-questionnaire-shell .hp-question-actions,
+.hp-questionnaire-shell .hp-question-card.is-staged + .hp-question-actions,
+.hp-questionnaire-shell .hp-personal-info-form + .hp-question-actions,
+.hp-questionnaire-shell .hp-loan-otp-card + .hp-question-actions,
+.hp-questionnaire-shell .hp-loan-otp-card + .hp-loan-otp-error + .hp-question-actions {
+  margin-top: 28px !important;
+  padding-top: 0;
+}
 
 .hp-questionnaire-content > .hp-deferred-skeleton.is-questionnaire {
   position: absolute;
