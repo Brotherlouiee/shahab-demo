@@ -11,11 +11,12 @@ from fastapi.responses import JSONResponse
 from redis import Redis
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from .accounts.access import AccountAccess, MockOtpProvider
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
 from .api.timing import development_timing_middleware
 from .api.v1.router import router as api_v1_router
-from .core.config import Settings, get_settings
+from .core.config import AppEnvironment, Settings, get_settings
 from .core.dependencies import get_questionnaire_configuration
 from .core.logging import configure_logging
 from .infrastructure.db.session import create_database_engine, create_session_factory
@@ -104,6 +105,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(api_v1_router, prefix=active_settings.api_v1_prefix)
     app.dependency_overrides[get_settings] = lambda: active_settings
     app.state.settings = active_settings
+    # Even an accidentally enabled flag cannot turn demo OTP into production authentication.
+    mock_allowed = active_settings.profile_mock_otp_enabled and active_settings.environment in (
+        AppEnvironment.LOCAL,
+        AppEnvironment.TEST,
+    )
+    app.state.account_access = AccountAccess(MockOtpProvider() if mock_allowed else None)
     app.state.logger = logger
     app.state.database_engine = None
     app.state.database_session_factory = None

@@ -53,3 +53,17 @@
 | `loan_serving_facts` | PK/FK همان `loan_product_version_id`؛ ماه/نسبت نامنفی | نیاز به سپرده، ماه خواب، نسبت، ضمانت، حساب و logo reference فقط از نسخهٔ منتشرشده؛ مقدار نامعلوم عددی `NULL` است. |
 
 آداپتور فقط اعضای active catalogue با نسخهٔ `PUBLISHED` و source file همان catalogue را می‌خواند؛ شرط همان loan version از `loan_conditions` می‌آید.
+
+
+## user_profiles — PR #85 / US-09.T072
+
+| Column | PostgreSQL type | Null/default |
+| --- | --- | --- |
+| phone | varchar(11), PK | non-null canonical ASCII mobile |
+| first_name, last_name | varchar(60) | non-null, empty string |
+| income, job | varchar(40) | non-null, empty string; API allowlist |
+| gender | varchar(10) | non-null, empty string; female/male/empty |
+| avatar_data_url | text | nullable; supported base64 raster; 100 KB server limit |
+| created_at, updated_at | timestamptz | non-null, now(); ORM updates updated_at |
+
+Source: migration d1a9e71b4c3f_add_user_profiles.py. Owner: account/profile feature. Synthetic fixture phone: 09000000001. Purpose: local/test profile persistence. Retained until explicit owner/operator removal; production deletion/retention policy is a separate account release gate. No new schema/migration in T072.

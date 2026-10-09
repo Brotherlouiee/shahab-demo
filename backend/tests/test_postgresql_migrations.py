@@ -11,6 +11,7 @@ from sqlalchemy import create_engine, inspect, text
 
 DATABASE_URL = os.environ.get("SHAHAB_TEST_DATABASE_URL")
 EXPECTED_TABLES = {
+    "user_profiles",
     "answer_options",
     "data_import_runs",
     "data_source_files",
@@ -106,6 +107,81 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         self.assertIn(EXPECTED_INDEX, str(plan))
         self.assertNotEqual(plan["Node Type"], "Seq Scan")
+
+    def test_profile_persistence_survives_a_new_connection(self) -> None:
+        from sqlalchemy.orm import Session
+
+        from backend.app.accounts.profile_repository import read_profile, upsert_profile
+        from backend.app.accounts.profile_schema import ProfilePayload
+
+        self._alembic("upgrade", "head")
+        engine = create_engine(str(DATABASE_URL))
+        with Session(engine) as session:
+            upsert_profile(
+                ProfilePayload(phone="09000000001", firstName="آزمون", income="22-to-50", job="manager"), session
+            )
+        engine.dispose()
+
+        engine = create_engine(str(DATABASE_URL))
+        with Session(engine) as session:
+            stored = read_profile("09000000001", session)
+            self.assertEqual((stored.firstName, stored.income, stored.job), ("آزمون", "22-to-50", "manager"))
+        engine.dispose()
+
+    def test_verified_login_creates_profile_and_personal_info_survives_relogin(self) -> None:
+        from fastapi.testclient import TestClient
+        from sqlalchemy.orm import Session
+
+        from backend.app.core.config import AppEnvironment, Settings
+        from backend.app.core.dependencies import get_request_database_session
+        from backend.app.infrastructure.db.models import UserProfile
+        from backend.app.main import create_app
+
+        self._alembic("upgrade", "head")
+        engine = create_engine(str(DATABASE_URL))
+        app = create_app(Settings(environment=AppEnvironment.TEST, profile_mock_otp_enabled=True))
+
+        def database_session():
+            with Session(engine) as session:
+                yield session
+
+        app.dependency_overrides[get_request_database_session] = database_session
+        client = TestClient(app)
+
+        def login():
+            requested = client.post("/api/v1/account-access/request", json={"phone": "۰۹۰۰۰۰۰۰۰۰۱"})
+            verified = client.post(
+                "/api/v1/account-access/verify",
+                json={"challengeId": requested.json()["challengeId"], "code": "123456"},
+            )
+            self.assertEqual(verified.status_code, 200)
+            return {"Authorization": "Bearer " + verified.json()["accessToken"]}
+
+        headers = login()
+        with Session(engine) as session:
+            record = session.get(UserProfile, "09000000001")
+            self.assertIsNotNone(record)
+            assert record is not None
+            self.assertEqual(record.first_name, "")
+        payload = {
+            "phone": "09000000001",
+            "firstName": "آزمون",
+            "lastName": "تست",
+            "income": "22-to-50",
+            "job": "manager",
+        }
+        self.assertEqual(client.put("/api/v1/profiles", headers=headers, json=payload).status_code, 200)
+        headers = login()
+        profile = client.get("/api/v1/profiles/me", headers=headers).json()
+        self.assertEqual({key: profile[key] for key in payload}, payload)
+        with Session(engine) as session:
+            record = session.get(UserProfile, "09000000001")
+            assert record is not None
+            self.assertEqual(
+                (record.first_name, record.last_name, record.income, record.job),
+                ("آزمون", "تست", "22-to-50", "manager"),
+            )
+        engine.dispose()
 
     def test_official_materialization_has_a_durable_active_version(self) -> None:
         import json

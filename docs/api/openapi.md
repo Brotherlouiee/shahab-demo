@@ -38,3 +38,19 @@ There is currently no public application, payment, OTP or external analysis-prov
 
 
 `bankLogoReference`, when present, is validated at the server boundary and is rendered only as an image URL. It is not a source/provenance reference, HTML fragment or database connection detail. Clients show no substitute logo when it is absent.
+
+
+## Profile access correction — US-09.T072
+
+- POST /api/v1/account-access/request: JSON phone to opaque challengeId and 120-second expiry; explicit local/test mock only.
+- POST /api/v1/account-access/verify: challengeId/code to accessToken, phone and 1800-second expiry; single-use, five attempts.
+- POST /api/v1/account-access/logout: revoke bearer capability; 204.
+- GET /api/v1/profiles/me: actor's own profile; 404 if no record.
+- PUT /api/v1/profiles: allowlisted payload; phone must equal server actor, otherwise 403.
+- Unauthenticated GET /profiles/{phone} is removed as a security fix. Clients use /me and bearer authorization.
+- Missing/invalid/expired token: 401; disabled service: 503; request quota: 429; invalid payload: 422. Protected successes and expected errors use no-store.
+- Existing user_profiles migration reused. Browser caches never authorize. Real production authentication/SMS remains blocked; see ADR 0010.
+
+## Verified first-login profile creation — 2026-10-09
+
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.

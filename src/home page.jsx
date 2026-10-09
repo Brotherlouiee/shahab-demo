@@ -1,3 +1,4 @@
+import { displayProfilePhone, hasProfileAccess, logoutProfile, persistPersonalInfo, persistProfile, readOwnProfile, requestProfileCode, verifyProfileCode } from "./features/account/profileClient.mjs";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { readSavedLoans } from "./features/account/savedLoans.mjs";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
@@ -440,14 +441,16 @@ function sanitizePersianName(value) {
 }
 
 function sanitizePhoneDigits(value) {
-  return Array.from(value)
+  const normalized = Array.from(value)
     .filter((character) => phoneDigitPattern.test(character))
     .map((character) => {
       if (character >= "0" && character <= "9") return persianDigits[Number(character)];
       const arabicDigitIndex = "٠١٢٣٤٥٦٧٨٩".indexOf(character);
       return arabicDigitIndex >= 0 ? persianDigits[arabicDigitIndex] : character;
     })
-    .reduce((result, digit) => {
+    .join("");
+  const suffix = normalized.length === 11 && normalized.startsWith("۰۹") ? normalized.slice(2) : normalized;
+  return Array.from(suffix).reduce((result, digit) => {
       const digits = Array.from(result);
       const hasFourRepeatedDigits =
         digits.at(-1) === digit &&
@@ -588,6 +591,9 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [remainingSeconds, setRemainingSeconds] = useState(120);
+  const [challengeId, setChallengeId] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (loginStep !== "otp" || remainingSeconds <= 0) return undefined;
@@ -600,7 +606,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
   }, [loginStep, remainingSeconds]);
 
   function handlePhoneChange(event) {
-    setPhone(event.target.value.replace(/\D/g, "").slice(0, 9));
+    setPhone(sanitizePhoneDigits(event.target.value));
   }
 
   function handlePhoneKeyDown(event) {
@@ -615,20 +621,23 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
     ];
 
     if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey) return;
-    if (!/^\d$/.test(event.key)) event.preventDefault();
+    if (!phoneDigitPattern.test(event.key)) event.preventDefault();
   }
 
-  function handlePhoneSubmit(event) {
+  async function handlePhoneSubmit(event) {
     event.preventDefault();
-    if (phone.length !== 9) return;
-
+    if (phone.length !== 9 || isSubmitting) return;
+    setIsSubmitting(true); setLoginError("");
+    try { const challenge = await requestProfileCode(phone); setChallengeId(challenge.challengeId); }
+    catch (error) { setLoginError(error.message); return; }
+    finally { setIsSubmitting(false); }
     setLoginStep("otp");
     setOtp(Array(6).fill(""));
     setRemainingSeconds(120);
   }
 
   function handleOtpChange(index, event) {
-    const digit = event.target.value.replace(/\D/g, "").slice(-1);
+    const digit = sanitizeOtpDigits(event.target.value).slice(-1).join("");
     const nextOtp = [...otp];
     nextOtp[index] = digit;
     setOtp(nextOtp);
@@ -655,12 +664,12 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
     }
 
     if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey) return;
-    if (!/^\d$/.test(event.key)) event.preventDefault();
+    if (!phoneDigitPattern.test(event.key)) event.preventDefault();
   }
 
   function handleOtpPaste(event) {
     event.preventDefault();
-    const pastedDigits = event.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+    const pastedDigits = sanitizeOtpDigits(event.clipboardData.getData("text")).slice(0, 6).join("");
     if (!pastedDigits) return;
 
     const nextOtp = Array(6).fill("");
@@ -670,8 +679,12 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
     setOtp(nextOtp);
   }
 
-  function handleResendCode() {
-    if (remainingSeconds > 0) return;
+  async function handleResendCode() {
+    if (remainingSeconds > 0 || isSubmitting) return;
+    setIsSubmitting(true); setLoginError("");
+    try { const challenge = await requestProfileCode(phone); setChallengeId(challenge.challengeId); }
+    catch (error) { setLoginError(error.message); return; }
+    finally { setIsSubmitting(false); }
 
     setOtp(Array(6).fill(""));
     setRemainingSeconds(120);
@@ -683,19 +696,23 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
     setRemainingSeconds(120);
   }
 
-  function handleOtpSubmit(event) {
+  async function handleOtpSubmit(event) {
     event.preventDefault();
-    if (otp.join("").length !== 6) return;
-
-    // This front-end demo has no OTP provider. Completing a code creates only
-    // a local UI profile; it does not represent server authentication.
-    onAuthenticated({ firstName: "محمد", lastName: "حسن کیوند", phone });
+    if (otp.join("").length !== 6 || isSubmitting) return;
+    setIsSubmitting(true); setLoginError("");
+    try {
+      if (!hasProfileAccess(phone)) await verifyProfileCode(challengeId, otp.join(""));
+      const stored = await readOwnProfile();
+      onAuthenticated(stored || { firstName: "", lastName: "", phone });
+    } catch (error) { setLoginError(error.message); }
+    finally { setIsSubmitting(false); }
   }
 
   if (loginStep === "otp") {
     return (
       <main className="hp-login-page hp-otp-page">
         <form className="hp-otp-form" onSubmit={handleOtpSubmit}>
+          {loginError ? <p role="alert">{loginError}</p> : null}
           <label>کد یکبار مصرف</label>
           <div className="hp-otp-row" dir="ltr">
             {otp.map((digit, index) => (
@@ -703,7 +720,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
                 key={index}
                 type="tel"
                 inputMode="numeric"
-                pattern="[0-9]*"
+                pattern="[0-9۰-۹٠-٩]*"
                 maxLength={1}
                 value={digit}
                 onChange={(event) => handleOtpChange(index, event)}
@@ -727,7 +744,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
               {remainingSeconds > 0 ? ` (${formatOtpCountdown(remainingSeconds)})` : ""}
             </button>
           </div>
-          <button className="hp-login-verify" type="submit" disabled={otp.join("").length !== 6}>ورود به حساب</button>
+          <button className="hp-login-verify" type="submit" disabled={otp.join("").length !== 6 || isSubmitting}>ورود به حساب</button>
         </form>
       </main>
     );
@@ -736,6 +753,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
   return (
     <main className="hp-login-page">
       <form className="hp-login-form" onSubmit={handlePhoneSubmit}>
+        {loginError ? <p role="alert">{loginError}</p> : null}
         <label htmlFor="login-phone">شماره تلفن همراه</label>
         <div className="hp-phone-row">
           <span>۰۹</span>
@@ -743,7 +761,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
             id="login-phone"
             type="tel"
             inputMode="numeric"
-            pattern="[0-9]*"
+            pattern="[0-9۰-۹٠-٩]*"
             maxLength={9}
             value={phone}
             onChange={handlePhoneChange}
@@ -751,7 +769,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
             aria-label="شماره تلفن همراه"
           />
         </div>
-        <button type="submit" disabled={phone.length !== 9}>ارسال کد یکبار مصرف</button>
+        <button type="submit" disabled={phone.length !== 9 || isSubmitting}>ارسال کد یکبار مصرف</button>
       </form>
     </main>
   );
@@ -1098,6 +1116,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   const [loanOtp, setLoanOtp] = useState(Array(6).fill(""));
   const [loanOtpSeconds, setLoanOtpSeconds] = useState(120);
   const [loanOtpError, setLoanOtpError] = useState("");
+  const [profileChallengeId, setProfileChallengeId] = useState("");
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isIncomeDropdownOpen, setIsIncomeDropdownOpen] = useState(false);
   const [isJobDropdownOpen, setIsJobDropdownOpen] = useState(false);
   const [stageOffset, setStageOffset] = useState(0);
@@ -1522,11 +1542,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     personalInfo.job &&
     !personalInfoErrors.firstName &&
     !personalInfoErrors.lastName;
-  const canProceed = isOtpQuestion
+  const canProceed = !isSavingProfile && (isOtpQuestion
     ? loanOtpValue.length === 6
     : isPersonalInfoQuestion
       ? Boolean(isPersonalInfoComplete)
-      : Boolean(selectedOption) && !isSavingQuestionnaireAnswer;
+      : Boolean(selectedOption) && !isSavingQuestionnaireAnswer);
   const nextQuestionButtonText = isOtpQuestion
     ? "تایید و جستجوی وام"
     : isPersonalInfoQuestion
@@ -1811,36 +1831,42 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     if (!canProceed) return;
     if (!(await persistCanonicalQuestionnaireAnswer())) return;
     if (isPersonalInfoQuestion) {
-      setIsOtpVerificationStep(true);
+      setIsSavingProfile(true);
+      setQuestionnaireSessionError("");
+      try {
+        const challenge = await requestProfileCode(personalInfo.phone);
+        setProfileChallengeId(challenge.challengeId);
+        setIsOtpVerificationStep(true);
+      } catch (error) {
+        setQuestionnaireSessionError(error.message);
+        return;
+      } finally { setIsSavingProfile(false); }
       setLoanOtp(Array(6).fill(""));
       setLoanOtpSeconds(120);
       setLoanOtpError("");
       return;
     }
     if (isOtpQuestion) {
-      // Deliberate local-only prototype flow: no OTP provider is called and no
-      // real authentication, application or approval claim is made.
-      if (loanOtpValue !== "۱۲۳۴۵۶") {
-        setLoanOtpError("کد وارد شده اشتباه است");
-        return;
-      }
-      const accountProfile = {
-        firstName: personalInfo.firstName.trim(),
-        lastName: personalInfo.lastName.trim(),
-        phone: personalInfo.phone,
-        income: personalInfo.income,
-        job: personalInfo.job,
-      };
-      Object.entries(accountProfile).forEach(([field, value]) => {
-        if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
-      });
-      setCachedAccountProfile(accountProfile);
-      onAccountCreated(accountProfile);
-      setLoanResultView("");
-      setIsAnalyzingLoans(true);
-      setIsAnalysisSpinnerRunning(true);
-      setAnalysisCountdown(5);
+      setIsSavingProfile(true);
       setLoanOtpError("");
+      try {
+        // Verification and persistence must both succeed before the analysis route opens.
+        // A storage retry reuses the verified capability, not a consumed OTP challenge.
+        if (!hasProfileAccess(personalInfo.phone)) await verifyProfileCode(profileChallengeId, loanOtpValue);
+        const stored = await persistPersonalInfo(personalInfo);
+        const accountProfile = stored;
+        Object.entries(accountProfile).forEach(([field, value]) => {
+          if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
+        });
+        setCachedAccountProfile(accountProfile);
+        onAccountCreated(accountProfile);
+        setLoanResultView("");
+        setIsAnalyzingLoans(true);
+        setIsAnalysisSpinnerRunning(true);
+        setAnalysisCountdown(5);
+        setLoanOtpError("");
+      } catch (error) { setLoanOtpError(error.message); }
+      finally { setIsSavingProfile(false); }
       return;
     }
     if (canonicalQuestion?.questionId === "S13") {
@@ -2027,7 +2053,13 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
     handleLoanOtpChange(0, event.clipboardData.getData("text"));
   }
 
-  function handleLoanOtpResend() {
+  async function handleLoanOtpResend() {
+    setIsSavingProfile(true);
+    try {
+      const challenge = await requestProfileCode(personalInfo.phone);
+      setProfileChallengeId(challenge.challengeId);
+    } catch (error) { setLoanOtpError(error.message); return; }
+    finally { setIsSavingProfile(false); }
     setLoanOtp(Array(6).fill(""));
     setLoanOtpSeconds(120);
     setLoanOtpError("");
@@ -2180,7 +2212,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
   }
 
   return (
-    <main className="hp-questionnaire-page" dir="rtl" aria-busy={isSavingQuestionnaireAnswer}>
+    <main className="hp-questionnaire-page" dir="rtl" aria-busy={isSavingQuestionnaireAnswer || isSavingProfile}>
       <header className="hp-questionnaire-header">
         <button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت">
           <svg viewBox="0 0 24 24" focusable="false">
@@ -2203,7 +2235,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome }) {
       </header>
 
       <section className="hp-questionnaire-content">
-        <DeferredPageSkeleton active={isSavingQuestionnaireAnswer} variant="questionnaire" />
+        <DeferredPageSkeleton active={isSavingQuestionnaireAnswer || isSavingProfile} variant="questionnaire" />
         {isStagedQuestion ? (
           <div className="hp-stage-board" aria-label="مراحل پرسشنامه">
             <div
@@ -2790,34 +2822,40 @@ function Footer() {
   );
 }
 
-async function persistProfile(profile) {
-  const response = await fetch("/api/v1/profiles", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ phone: displayPersianPhone(profile.phone), firstName: profile.firstName || "", lastName: profile.lastName || "", income: profile.income || "", job: profile.job || "", gender: profile.gender || "", avatar: profile.avatar || null }) });
-  if (!response.ok) throw new Error("profile persistence failed");
-  return response.json();
-}
 function ProfileDropdown({ label, value, options, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const selectedLabel = options.find((option) => option.value === value)?.label || "";
   return <label><span>{label}</span><span className="hp-personal-select"><span className={"hp-personal-dropdown " + (isOpen ? "is-open" : "")} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}><button className="hp-personal-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded={isOpen} onClick={() => setIsOpen((current) => !current)}><span>{selectedLabel}</span></button>{isOpen ? <span className="hp-personal-dropdown-menu" role="listbox">{options.map((option) => <button className={"hp-personal-dropdown-option " + (value === option.value ? "is-selected" : "")} type="button" role="option" aria-selected={value === option.value} key={option.value} onClick={() => { onChange(option.value); setIsOpen(false); }}>{option.label}</button>)}</span> : null}</span></span></label>;
 }
 const genderOptions = [{ value: "female", label: "زن" }, { value: "male", label: "مرد" }];
-function displayPersianPhone(phone) { const digits = sanitizePhoneDigits(phone || ""); return digits.startsWith("۰۹") ? digits : "۰۹" + digits; }
+function displayPersianPhone(phone) { return displayProfilePhone(phone); }
 function AccountPage({ profile, onSave, onBack }) {
   const [draft, setDraft] = useState(() => ({ ...profile, income: profile.income || "", job: profile.job || "", gender: profile.gender || "", avatar: profile.avatar || "" }));
-  const update = (field, value) => setDraft((current) => ({ ...current, [field]: value }));
+  const [profileError, setProfileError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSucceeded, setSaveSucceeded] = useState(false);
+  const edited = useRef(false);
+  const update = (field, value) => { edited.current = true; setSaveSucceeded(false); setDraft((current) => ({ ...current, [field]: value })); };
+  async function submitProfile(event) {
+    event.preventDefault();
+    if (isSaving) return;
+    setIsSaving(true); setProfileError(""); setSaveSucceeded(false);
+    try { const stored = await persistProfile(draft); onSave(stored); setSaveSucceeded(true); }
+    catch (error) { setProfileError(error.message); }
+    finally { setIsSaving(false); }
+  }
   useEffect(() => {
     if (!profile.phone) return undefined;
     let isCurrent = true;
-    fetch(`/api/v1/profiles/${encodeURIComponent(displayPersianPhone(profile.phone))}`)
-      .then((response) => (response.ok ? response.json() : null))
+    readOwnProfile()
       .then((stored) => {
-        if (isCurrent && stored) setDraft((current) => ({ ...current, ...stored, phone: profile.phone }));
+        if (isCurrent && stored && !edited.current) setDraft((current) => ({ ...current, ...stored, phone: profile.phone }));
       })
-      .catch(() => {});
+      .catch((error) => { if (isCurrent) setProfileError(error.message); });
     return () => { isCurrent = false; };
   }, [profile.phone]);
   function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
-  return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><form className="hp-account-profile-form" onSubmit={(event) => { event.preventDefault(); onSave(draft); }}><label><span>شماره تلفن همراه</span><input value={displayPersianPhone(draft.phone)} disabled /></label><label><span>نام</span><input value={draft.firstName || ""} onChange={(event) => update("firstName", sanitizePersianName(event.target.value))} /></label><label><span>نام خانوادگی</span><input value={draft.lastName || ""} onChange={(event) => update("lastName", sanitizePersianName(event.target.value))} /></label><ProfileDropdown label="میزان درآمد ماهانه" value={draft.income} options={incomeOptions} onChange={(value) => update("income", value)} /><ProfileDropdown label="شغل" value={draft.job} options={jobOptions} onChange={(value) => update("job", value)} /><ProfileDropdown label="جنسیت" value={draft.gender} options={genderOptions} onChange={(value) => update("gender", value)} /><button type="submit" className="hp-account-save">ذخیره تغییرات</button></form></main>;
+  return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><form className="hp-account-profile-form" onSubmit={submitProfile}><label><span>شماره تلفن همراه</span><input value={displayPersianPhone(draft.phone)} disabled /></label><label><span>نام</span><input value={draft.firstName || ""} onChange={(event) => update("firstName", sanitizePersianName(event.target.value))} /></label><label><span>نام خانوادگی</span><input value={draft.lastName || ""} onChange={(event) => update("lastName", sanitizePersianName(event.target.value))} /></label><ProfileDropdown label="میزان درآمد ماهانه" value={draft.income} options={incomeOptions} onChange={(value) => update("income", value)} /><ProfileDropdown label="شغل" value={draft.job} options={jobOptions} onChange={(value) => update("job", value)} /><ProfileDropdown label="جنسیت" value={draft.gender} options={genderOptions} onChange={(value) => update("gender", value)} /><button type="submit" className="hp-account-save" disabled={isSaving}>ذخیره تغییرات</button>{profileError ? <p role="alert">{profileError}</p> : null}{saveSucceeded ? <p role="status">تغییرات ذخیره شد.</p> : null}</form></main>;
 }
 
 function AboutPage({ onBack }) {
@@ -2836,8 +2874,17 @@ export default function HomePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [accountProfile, setAccountProfile] = useState(() => getCachedAccountProfile());
   const sidebarUserName = accountProfile
-    ? `${accountProfile.firstName} ${accountProfile.lastName}`.trim()
+    ? `${accountProfile.firstName || ""} ${accountProfile.lastName || ""}`.trim() || "کاربر"
     : "";
+
+  useEffect(() => {
+    if (!isSidebarOpen || !accountProfile?.phone || !hasProfileAccess(accountProfile.phone)) return undefined;
+    let active = true;
+    readOwnProfile().then((stored) => {
+      if (active && stored) { setAccountProfile(stored); setCachedAccountProfile(stored); }
+    }).catch(() => {});
+    return () => { active = false; };
+  }, [isSidebarOpen, accountProfile?.phone]);
 
   useEffect(() => {
     if (!isSidebarOpen) return undefined;
@@ -2887,6 +2934,7 @@ export default function HomePage() {
   }
 
   function handleLogout() {
+    void logoutProfile().catch(() => {});
     try {
       window.localStorage.removeItem(accountProfileCacheKey);
     } catch {
@@ -2943,7 +2991,7 @@ export default function HomePage() {
     }
   }
 
-  if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={async (profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); try { const stored = await persistProfile(profile); const normalized = { ...profile, ...stored, phone: getCachedPersonalInfoValue("phone") || profile.phone }; setCachedAccountProfile(normalized); setAccountProfile(normalized); } catch { setCachedAccountProfile(profile); setAccountProfile(profile); } }} onBack={handleHomeOpen} />;
+  if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={(profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); setCachedAccountProfile(profile); setAccountProfile(profile); }} onBack={handleHomeOpen} />;
   if (currentView === "about") return <AboutPage onBack={handleHomeOpen} />;
   if (currentView === "saved") return <SavedLoansPage onBack={handleHomeOpen} onDetails={handleSavedLoanDetails} />;
 
@@ -2985,3 +3033,4 @@ export default function HomePage() {
     </div>
   );
 }
+

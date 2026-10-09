@@ -1071,4 +1071,21 @@ RTL، موبایل و مسیرهای بازگشت را تست کن. حالت loa
 
 ## US-09.T071 — Account UI
 
-Saved loans persist only in browser localStorage and use server-supplied recommendation display data. The saved-loan view excludes readiness and comparison actions. Profile phone is read-only; other local fields are editable. Profile uploads are selected locally and reject files over 100 KB. This task does not change API, scoring, PUBLISHED data, migrations, or session policy.
+Saved loans persist only in browser localStorage and use server-supplied recommendation display data. The saved-loan view excludes readiness and comparison actions. Profile phone is read-only; other local fields are editable. Profile uploads are selected locally and reject files over 100 KB. PR #85 also added profile API persistence and migration d1a9e71b4c3f for user_profiles. Saved loans remain browser-local. The unrestricted API is corrected by T072 below; scoring, PUBLISHED data and anonymous session policy are unchanged.
+
+
+## US-09.T072 — Profile access and persistence repair after PR #85
+
+Within the owner's repair request, protect existing profile persistence, connect personal-info after server development OTP verification, expose storage errors and preserve complete phone identities. Reuse user_profiles and its existing migration; no new migration, loan data, D-005, questionnaire TTL, design, About text or story continuity changes.
+
+1. Reads use /profiles/me; writes require the server-owned phone. Client phone and browser cache alone never authorize.
+2. OTP remains an explicitly enabled local/test mock with expiry, attempts, quotas and revocable memory-only bearer capability. Staging/production always reject this mock. Real SMS/Kavenegar still requires separate owner approval/configuration and is not delivered here.
+3. Server verification plus DB persistence precede analysis navigation. Failed storage remains retryable on the current screen. Confirmed profile caches update only after success; full phones are not truncated.
+4. API/security/client/browser and real PostgreSQL checks must pass. API, ADR, profile threat model, module map, database docs, local/Docker runbooks, CHANGELOG and checkpoint are updated.
+5. Supersedes profile local-only limitations of T06I/T06Z solely for development persistence/access. This does not claim real phone ownership, production login or full US-09 completion. Continuity remains unchanged until its story-level gate.
+
+See docs/architecture/0010-profile-access-and-persistence.md for contract and rollback.
+
+## Verified first-login profile creation — 2026-10-09
+
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.

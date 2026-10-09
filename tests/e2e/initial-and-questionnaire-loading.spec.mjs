@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { installProfileApi } from "./fixtures/profile-api.mjs";
+test.beforeEach(async ({ page }) => { await installProfileApi(page); });
 
 test("shows the document fallback only after a delayed first paint", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -97,3 +99,4 @@ test("uses a detail-shaped document fallback for a delayed loan-details route", 
   await expect(page.locator("#initial-page-skeleton .initial-home")).toBeHidden();
   await navigation;
 });
+

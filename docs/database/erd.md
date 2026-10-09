@@ -96,3 +96,8 @@ erDiagram
 ```
 
 این projection از همان نسخهٔ تأییدشدهٔ وام ساخته می‌شود؛ مقدار شرط خالی از نبود عضو در کاتالوگ متمایز است.
+
+
+## Existing profile table — PR #85 / US-09.T072
+
+user_profiles was introduced by migration d1a9e71b4c3f, independent of anonymous questionnaire/recommendation data. Canonical eleven-digit phone is the string primary key; one editable record per phone. A local/test verified server session selects that phone. There is no FK to questionnaires or loans, and this repair adds no schema changes.

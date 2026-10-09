@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { installProfileApi } from "./fixtures/profile-api.mjs";
+test.beforeEach(async ({ page }) => { await installProfileApi(page); });
 import { readFileSync } from "node:fs";
 const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/questionnaire-configuration.v1.json", import.meta.url), "utf8"));
 
@@ -704,3 +706,4 @@ async function expectFilterMenuAboveCards(page) {
   await expect(page.getByText("میثاق ۲")).toBeVisible();
   await expect(page.locator(".hp-serving-loan-card img").first()).toHaveJSProperty("complete", true);
 }
+
