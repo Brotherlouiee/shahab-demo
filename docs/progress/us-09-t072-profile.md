@@ -13,13 +13,13 @@
 
 ## End checkpoint
 
-Pending validation; do not mark Done until the final PR checks pass.
+Implementation and acceptance checks passed on PR #86 head `b3b14fb3cda237f30787bd17a0a5a0d916ff03ac`. GitHub Actions run [37924268911](https://github.com/Brotherlouiee/shahab-demo/actions/runs/37924268911) passed all three required jobs: Quality gates, browser verification, and real PostgreSQL migration/persistence verification. This documentation-only checkpoint commit must also pass the final PR checks before merge. No merge or deployment performed.
 
 ## Validation checkpoint
 
 - Backend: 136 tests passed, 5 PostgreSQL-dependent skips without a local DB; targeted ownership/session tests and two client tests passed. Build passed; mypy, targeted Ruff, boundaries and secret scan passed.
 - Full local quality is not claimed: one large existing logo asset is absent from the partial test snapshot. Browser download was blocked/truncated; required browser and real PostgreSQL checks run in GitHub Actions.
-- Scope closed for implementation; final Done/merge readiness awaits CI on the PR head. No deployment or local user DB mutation.
+- Scope closed for implementation and acceptance validation. Final merge readiness requires green CI on the latest documentation checkpoint head. No deployment or local user DB mutation.
 
 ## Official source inventory (all six Git blob hashes verified; no source edits)
 
