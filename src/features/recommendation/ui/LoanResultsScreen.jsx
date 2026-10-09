@@ -8,6 +8,7 @@ import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
 import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 import DeferredPageSkeleton from "../../../shared/DeferredPageSkeleton.jsx";
 import { readSavedLoans, toggleSavedLoan } from "../../account/savedLoans.mjs";
+import { shouldShowSavedLoanFilters } from "../../account/savedLoansPresentation.mjs";
 
 const VIEW_MODES = Object.freeze({
   highest: "highest",
@@ -32,6 +33,13 @@ function formatMonths(value) {
 function BookmarkSaveIcon({ filled }) {
   const assetUrl = filled ? "/ui-icons/save-bold.png" : "/ui-icons/save-linear.png";
   return <img src={assetUrl} alt="" aria-hidden="true" />;
+}
+
+function LoanDocumentsIcon() {
+  return <svg className="hp-loan-docs-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M7 3.5h7l3 3V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1.5-1.5H7Z" />
+    <path d="M14 3.5V7h3M8 11h8M8 15h5" />
+  </svg>;
 }
 
 function FilterMenu({ label, value, selectedValue, options, onChange, scrollable = false }) {
@@ -122,6 +130,7 @@ function ServingLoanCard({ recommendation, onDetails, isSaved, onSave }) {
           onDetails(recommendation.loanId);
         }}
       >
+        <LoanDocumentsIcon />
         مشاهده شرایط و مدارک مورد نیاز
       </a>
     </article>
@@ -178,13 +187,14 @@ export default function LoanResultsScreen({
     () => items.filter((item) => !lenderName || item.lenderName === lenderName),
     [items, lenderName],
   );
+  const showFilters = shouldShowSavedLoanFilters(savedItems);
 
   useEffect(() => {
     if (lenderName && !lenders.includes(lenderName)) setLenderName("");
   }, [lenderName, lenders]);
 
   return (
-    <main className="hp-questionnaire-page hp-loan-results-page header-top" dir="rtl" aria-busy={status === "loading"}>
+    <main className={`hp-questionnaire-page hp-loan-results-page header-top${savedItems !== null ? " is-saved-loans" : ""}`} dir="rtl" aria-busy={status === "loading"}>
       <div className="hp-loan-results-top">
         {header}
       </div>
@@ -203,14 +213,19 @@ export default function LoanResultsScreen({
             </button>
           </div> : null}
 
-          <div className="hp-loan-result-filters">
+          {showFilters ? <div className="hp-loan-result-filters">
             <FilterMenu label="نمایش نتایج" value={VIEW_MODE_LABELS[mode]} selectedValue={mode} options={Object.entries(VIEW_MODE_LABELS).map(([value, label]) => ({ value, label }))} onChange={setMode} />
             <FilterMenu label="نام بانک" value={lenderName || "نام بانک"} selectedValue={lenderName} options={[{ value: "", label: "نام بانک" }, ...lenders.map((name) => ({ value: name, label: name }))]} onChange={setLenderName} scrollable={lenders.length > 4} />
-          </div>
+          </div> : null}
       </div>
 
       <section className="hp-loan-results-list">
         <DeferredPageSkeleton active={status === "loading"} variant="cards" />
+        {status === "ready" && savedItems !== null && !items.length ? (
+          <div className="hp-saved-loans-empty-state" role="status">
+            <img src="/saved-loans-empty.png" alt="" />
+          </div>
+        ) : null}
         {status === "sessionMissing" ? (
           <div className="hp-recommendation-result-state" role="status">
             <p>برای دیدن نتیجه، ابتدا پرسشنامه را در همین تب کامل کنید.</p>
@@ -218,7 +233,7 @@ export default function LoanResultsScreen({
           </div>
         ) : null}
         {status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت نتیجه در حال حاضر ممکن نیست.</p><button type="button" onClick={onRetry}>تلاش مجدد</button></div> : null}
-        {status === "ready" && !visibleItems.length ? <p className="hp-recommendation-result-state">برای این فیلتر نتیجه‌ای موجود نیست.</p> : null}
+        {status === "ready" && (savedItems === null || items.length > 0) && !visibleItems.length ? <p className="hp-recommendation-result-state">برای این فیلتر نتیجه‌ای موجود نیست.</p> : null}
         {status === "ready" ? visibleItems.map((item) => (
           <Fragment key={item.loanId}>
             {savedToastLoanId === item.loanId ? (

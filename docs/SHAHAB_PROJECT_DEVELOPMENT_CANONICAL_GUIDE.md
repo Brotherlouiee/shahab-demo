@@ -1097,3 +1097,7 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 ## US-09.T074 � Home hero-only composition (2026-10-09)
 
 Owner requested the home route to contain only the supplied initial mobile composition: existing header/menu and the loan-request hero. The statistics marquee, feature grid, secondary CTA and footer are no longer rendered on home. This is a presentation-only composition change; questionnaire routing, OTP/profile access, API, PostgreSQL, PUBLISHED loan data, D-005, scoring and deployment behavior are unchanged. The continuity document remains unchanged.
+
+## US-09.T075 — Saved-loans empty state and navigation (2026-10-09)
+
+Saved loans retain their browser-local storage contract and their own /saved-loans route. With zero saved loans, the view uses the owner-supplied empty-state artwork; filters are hidden when zero or one saved loan exists because they cannot change the results. Detail navigation marks only the return route, so the detail back arrow returns to /saved-loans. The shared serving-loan card now includes its document icon in both result and saved-loan views, and the saved header receives the same horizontal inset as profile and About. This is UI/navigation-only; PostgreSQL, API, PUBLISHED data, D-005, scoring, retention and the continuity document remain unchanged.
