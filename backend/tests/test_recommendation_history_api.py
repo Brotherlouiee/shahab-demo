@@ -101,16 +101,25 @@ class RecommendationHistoryApiTests(unittest.TestCase):
                 f"historical {key} must preserve the original server result",
             )
 
-        other = self.login("09000000002")
-        self.assertEqual(self.client.get("/api/v1/recommendation-history", headers=other).json()["items"], [])
-        self.assertEqual(
-            self.client.get(f"/api/v1/recommendation-history/{history_id}", headers=other).status_code,
-            404,
-        )
-        self.assertEqual(
-            self.client.post("/api/v1/recommendations", headers=other, json={"sessionId": session_id}).status_code,
-            403,
-        )
+        attacker = TestClient(self.client.app, raise_server_exceptions=False)
+        attacker.__enter__()
+        try:
+            original_client = self.client
+            self.client = attacker
+            other = self.login("09000000002")
+            self.client = original_client
+            self.assertEqual(attacker.get("/api/v1/recommendation-history", headers=other).json()["items"], [])
+            self.assertEqual(
+                attacker.get(f"/api/v1/recommendation-history/{history_id}", headers=other).status_code,
+                404,
+            )
+            self.assertEqual(
+                attacker.post("/api/v1/recommendations", headers=other, json={"sessionId": session_id}).status_code,
+                403,
+            )
+        finally:
+            self.client = original_client
+            attacker.__exit__(None, None, None)
         verification_engine = create_engine(self.database_url)
         with Session(verification_engine) as session:
             self.assertEqual(session.scalar(select(func.count()).select_from(RecommendationHistoryRun)), 1)

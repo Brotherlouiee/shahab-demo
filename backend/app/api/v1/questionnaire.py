@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Body, Depends, Response
 
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.core.dependencies import get_questionnaire_session_service
@@ -25,6 +25,7 @@ from .questionnaire_schemas import (
 )
 
 router = APIRouter(prefix="/questionnaire", tags=["questionnaire"])
+QUESTIONNAIRE_PROOF_COOKIE_PREFIX = "shahab_questionnaire_proof_"
 
 
 def _session_response(service: QuestionnaireSessionService, session_id: str) -> SessionResponse:
@@ -39,8 +40,19 @@ def _session_response(service: QuestionnaireSessionService, session_id: str) -> 
 @router.post("/sessions", response_model=SessionResponse, status_code=201)
 def start_session(
     service: Annotated[QuestionnaireSessionService, Depends(get_questionnaire_session_service)],
+    response: Response,
 ) -> SessionResponse:
     session = service.start()
+    # The opaque session id is not sufficient to attach it to an account.  The
+    # browser that created it alone receives this HttpOnly proof cookie.
+    response.set_cookie(
+        f"{QUESTIONNAIRE_PROOF_COOKIE_PREFIX}{session.session_id}",
+        "1",
+        max_age=30 * 60,
+        httponly=True,
+        samesite="lax",
+        path="/api/v1",
+    )
     return _session_response(service, str(session.session_id))
 
 
