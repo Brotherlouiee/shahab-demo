@@ -1,5 +1,17 @@
 # Project current state
 
+## Owner-directed continuity v12 checkpoint (2026-10-10) — authoritative documentation update
+
+- Scope/budget: one documentation-only PR; refresh the continuity handoff, CHANGELOG and this checkpoint. No runtime, migration, data or design edits.
+- Base: main `6d31bde1bc27ecdf1fabe3f423b660b3930f1b78` after merged PR #93; feature head `69a0abf7b8deef4b26a8abbd7484bd4fe9ef9858`.
+- Evidence: feature CI 38073092052 and merged-main CI 38073493793 succeeded; all four main jobs passed.
+- Owner authorization: explicit request to update continuity despite the normal story-end rule. This refresh does not declare US-09 complete.
+- Acceptance: v12 names current main/evidence; records profile, same-origin cookie restoration, questionnaire ownership proof, immutable history/cursor/hide, migrations and browser-local bookmark separation; removes obsolete next-task instructions from current sections.
+- Validation: inspected canonical guide/current repository contracts and related ADRs; checked Markdown structure, version/date/ref/CI consistency, changed-file scope and absence of runtime edits. Runtime tests are not rerun for this documentation change; this PR's required CI remains the merge gate.
+- nextTaskId: US-09.T07 real infrastructure and URL verification, after resolving any final owner acceptance defects. Previous entries below are historical; do not restart completed tasks from them.
+- Limitations: no independent final visual acceptance, real SMS, production authentication or public full-stack deployment is asserted.
+
+
 ## US-09.T06 implementation checkpoint (2026-09-26)
 
 - `activeTaskId`: `US-09.T06`; `actualScope`: canonical session to approved category impacts, source-backed scoring, real API and active result/detail route. D-005 uses only answer-conversion numeric weights; one-to-one factors use their independent source; mapping-matrix numbers are not read.
