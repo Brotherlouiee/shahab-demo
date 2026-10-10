@@ -13,6 +13,7 @@ from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.core.dependencies import get_request_database_session
 
 router = APIRouter(prefix="/account-access", tags=["account-access"])
+ACCESS_COOKIE = "shahab_account_access"
 
 
 class CodeRequest(BaseModel):
@@ -47,10 +48,15 @@ def safe_failure(error: AccessFailure) -> ApiError:
     return ApiError(status_code=error.status, code=code, message="Account access could not be completed.")
 
 
-def bearer_token(authorization: Annotated[str | None, Header()] = None) -> str:
-    if not authorization or not authorization.startswith("Bearer ") or len(authorization) > 128:
+def bearer_token(request: Request, authorization: Annotated[str | None, Header()] = None) -> str:
+    token = (
+        authorization.removeprefix("Bearer ")
+        if authorization and authorization.startswith("Bearer ")
+        else request.cookies.get(ACCESS_COOKIE)
+    )
+    if not token or len(token) > 128:
         raise safe_failure(AccessFailure(401))
-    return authorization[7:]
+    return token
 
 
 def authenticated_phone(
@@ -64,12 +70,13 @@ def authenticated_phone(
 
 def optional_authenticated_phone(
     service: Annotated[AccountAccess, Depends(access_service)],
+    request: Request,
     authorization: Annotated[str | None, Header()] = None,
 ) -> str | None:
     """Permit anonymous recommendation while never trusting a malformed token."""
-    if authorization is None:
+    if authorization is None and not request.cookies.get(ACCESS_COOKIE):
         return None
-    token = bearer_token(authorization)
+    token = bearer_token(request, authorization)
     try:
         return service.actor(token)
     except AccessFailure as error:
@@ -93,6 +100,7 @@ def verify_code(
     payload: CodeVerification,
     service: Annotated[AccountAccess, Depends(access_service)],
     session: Annotated[Session | None, Depends(get_request_database_session)],
+    response: Response,
 ) -> dict[str, str | int]:
     try:
         token = service.verify_code(payload.challengeId, payload.code)
@@ -104,11 +112,20 @@ def verify_code(
     except Exception:
         service.revoke(token)
         raise
+    response.set_cookie(ACCESS_COOKIE, token, max_age=1800, httponly=True, samesite="lax", path="/api/v1")
     return {"accessToken": token, "phone": phone, "expiresIn": 1800}
+
+
+@router.get("/session")
+def current_session(actor: Annotated[str, Depends(authenticated_phone)]) -> dict[str, str | int]:
+    return {"phone": actor, "expiresIn": 1800}
 
 
 @router.post("/logout", status_code=204)
 def logout(
-    service: Annotated[AccountAccess, Depends(access_service)], token: Annotated[str, Depends(bearer_token)]
+    service: Annotated[AccountAccess, Depends(access_service)],
+    token: Annotated[str, Depends(bearer_token)],
+    response: Response,
 ) -> None:
     service.revoke(token)
+    response.delete_cookie(ACCESS_COOKIE, path="/api/v1")

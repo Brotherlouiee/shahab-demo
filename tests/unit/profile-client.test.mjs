@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clearAccountAccess, displayProfilePhone, hasProfileAccess, normalizeProfilePhone, persistPersonalInfo, persistProfile, requestProfileCode, verifyProfileCode } from "../../src/features/account/profileClient.mjs";
+import { clearAccountAccess, displayProfilePhone, hasProfileAccess, normalizeProfilePhone, persistPersonalInfo, persistProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "../../src/features/account/profileClient.mjs";
 
 test("complete phone identities are not truncated", () => {
   for (const value of ["09000000001", "۰۹۰۰۰۰۰۰۰۰۱", "٠٩٠٠٠٠٠٠٠٠١", "000000001"]) {
@@ -25,7 +25,8 @@ test("verification authorizes persistence; storage failure stays an error and pr
   };
   try {
     await assert.rejects(persistProfile({ phone: "09000000001" }), { status: 401 });
-    assert.equal(requests.length, 0);
+    assert.equal(requests.length, 1);
+    assert.ok(requests[0].url.endsWith("/account-access/session"));
     await requestProfileCode("۰۹۰۰۰۰۰۰۰۰۱");
     await verifyProfileCode("test-challenge", "۱۲۳۴۵۶");
     await assert.rejects(persistPersonalInfo({ phone: "000000001", job: "manager" }), { status: 503 });
@@ -38,6 +39,19 @@ test("verification authorizes persistence; storage failure stays an error and pr
     assert.equal(write.options.headers.Authorization, "Bearer fixture");
     assert.equal(requests.filter((r) => r.url.endsWith("/verify")).length, 1);
     assert.ok(requests.every((r) => !r.url.includes("09000000001")));
+  } finally { globalThis.fetch = original; clearAccountAccess(); }
+});
+
+test("a valid HttpOnly access cookie restores authorization without browser token storage", async () => {
+  clearAccountAccess();
+  const original = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    assert.ok(url.endsWith("/account-access/session"));
+    return Response.json({ phone: "09000000001", expiresIn: 1800 });
+  };
+  try {
+    assert.equal(await restoreAccountAccess(), "09000000001");
+    assert.equal(hasProfileAccess("09000000001"), true);
   } finally { globalThis.fetch = original; clearAccountAccess(); }
 });
 

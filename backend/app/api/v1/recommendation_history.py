@@ -1,6 +1,10 @@
 """Owner-scoped read API for immutable recommendation history."""
 
+import base64
+import json
+from datetime import datetime
 from typing import Annotated
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, ConfigDict, Field
@@ -25,7 +29,7 @@ class HistoryEntry(BaseModel):
 class HistoryPage(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
     items: list[HistoryEntry]
-    next_offset: int | None = Field(alias="nextOffset")
+    next_cursor: str | None = Field(alias="nextCursor")
 
 
 class LoanSummary(BaseModel):
@@ -68,11 +72,26 @@ def list_history(
     actor: Annotated[str, Depends(authenticated_phone)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
     limit: int = Query(20, ge=1, le=50),
-    offset: int = Query(0, ge=0),
+    cursor: str | None = Query(None, max_length=256),
 ) -> HistoryPage:
     if db is None:
         raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="History is unavailable.")
-    runs = RecommendationHistoryRepository(db).list_for_owner(actor, limit, offset)
+    decoded = None
+    if cursor:
+        try:
+            value = json.loads(base64.urlsafe_b64decode(cursor.encode()).decode())
+            decoded = (datetime.fromisoformat(value[0]), UUID(value[1]))
+        except (ValueError, TypeError, UnicodeDecodeError, json.JSONDecodeError):
+            raise ApiError(
+                status_code=422, code=ErrorCode.INVALID_REQUEST, message="History cursor is invalid."
+            ) from None
+    runs = RecommendationHistoryRepository(db).list_for_owner(actor, limit, decoded)
+    next_cursor = None
+    if len(runs) == limit:
+        run = runs[-1][0]
+        next_cursor = base64.urlsafe_b64encode(
+            json.dumps([run.created_at.isoformat(), str(run.recommendation_history_run_id)]).encode()
+        ).decode()
     return HistoryPage(
         items=[
             HistoryEntry(
@@ -82,7 +101,7 @@ def list_history(
             )
             for run, ranked_count in runs
         ],
-        nextOffset=offset + len(runs) if len(runs) == limit else None,
+        nextCursor=next_cursor,
     )
 
 

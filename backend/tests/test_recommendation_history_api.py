@@ -107,10 +107,20 @@ class RecommendationHistoryApiTests(unittest.TestCase):
             self.client.get(f"/api/v1/recommendation-history/{history_id}", headers=other).status_code,
             404,
         )
+        self.assertEqual(
+            self.client.post("/api/v1/recommendations", headers=other, json={"sessionId": session_id}).status_code,
+            403,
+        )
         verification_engine = create_engine(self.database_url)
         with Session(verification_engine) as session:
             self.assertEqual(session.scalar(select(func.count()).select_from(RecommendationHistoryRun)), 1)
         verification_engine.dispose()
+
+    def test_verified_cookie_restores_history_access_without_bearer_header(self) -> None:
+        self.login("09000000001")
+        session = self.client.get("/api/v1/account-access/session")
+        self.assertEqual(session.status_code, 200, session.text)
+        self.assertEqual(session.json()["phone"], "09000000001")
 
     def test_failed_snapshot_write_leaves_no_partial_history(self) -> None:
         owner = self.login("09000000001")

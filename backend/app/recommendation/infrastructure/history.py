@@ -5,13 +5,14 @@ from __future__ import annotations
 import uuid
 from collections import defaultdict
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, cast
 
-from sqlalchemy import func, select
+from sqlalchemy import CursorResult, func, or_, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from backend.app.infrastructure.db.models import (
+    QuestionnaireSession,
     RecommendationHistoryItem,
     RecommendationHistoryItemReason,
     RecommendationHistoryRun,
@@ -27,6 +28,20 @@ class RecommendationHistoryRepository:
     def save(self, owner_phone: str, questionnaire_session_id: str, result: Any) -> RecommendationHistoryRun:
         """Save a complete run, or return its existing owner-scoped idempotent result."""
         session_id = uuid.UUID(questionnaire_session_id)
+        # Bind the completed anonymous questionnaire to the authenticated actor
+        # atomically. Subsequent accounts cannot claim or persist its snapshot.
+        claim_result = cast(
+            CursorResult[object],
+            self._session.execute(
+                update(QuestionnaireSession)
+                .where(QuestionnaireSession.questionnaire_session_id == session_id)
+                .where(or_(QuestionnaireSession.owner_phone.is_(None), QuestionnaireSession.owner_phone == owner_phone))
+                .values(owner_phone=owner_phone)
+            ),
+        )
+        claimed = claim_result.rowcount
+        if claimed != 1:
+            raise PermissionError("questionnaire session belongs to another account")
         existing = self._existing(session_id)
         if existing is not None:
             return self._owned(existing, owner_phone)
@@ -52,7 +67,7 @@ class RecommendationHistoryRepository:
             return self._owned(existing, owner_phone)
 
     def list_for_owner(
-        self, owner_phone: str, limit: int, offset: int
+        self, owner_phone: str, limit: int, cursor: tuple[object, uuid.UUID] | None = None
     ) -> Sequence[tuple[RecommendationHistoryRun, int]]:
         ranked_count = (
             select(func.count(RecommendationHistoryItem.recommendation_history_item_id))
@@ -64,15 +79,23 @@ class RecommendationHistoryRepository:
             .correlate(RecommendationHistoryRun)
             .scalar_subquery()
         )
+        statement = select(RecommendationHistoryRun, ranked_count.label("ranked_count")).where(
+            RecommendationHistoryRun.owner_phone == owner_phone
+        )
+        if cursor is not None:
+            created_at, run_id = cursor
+            statement = statement.where(
+                or_(
+                    RecommendationHistoryRun.created_at < created_at,
+                    (RecommendationHistoryRun.created_at == created_at)
+                    & (RecommendationHistoryRun.recommendation_history_run_id < run_id),
+                )
+            )
         return self._session.execute(
-            select(RecommendationHistoryRun, ranked_count.label("ranked_count"))
-            .where(RecommendationHistoryRun.owner_phone == owner_phone)
-            .order_by(
+            statement.order_by(
                 RecommendationHistoryRun.created_at.desc(),
                 RecommendationHistoryRun.recommendation_history_run_id.desc(),
-            )
-            .offset(offset)
-            .limit(limit)
+            ).limit(limit)
         ).all()
 
     def read_for_owner(

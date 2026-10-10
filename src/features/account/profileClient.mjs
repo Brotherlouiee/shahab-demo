@@ -29,11 +29,12 @@ export function displayProfilePhone(value) {
 }
 
 async function request(path, { body, method = "GET", authorize = false } = {}) {
-  if (authorize && (!accessToken || Date.now() >= expiresAt)) throw new ProfileApiError(401);
+  if (authorize && !(await ensureAccountAccess())) throw new ProfileApiError(401);
   let response;
   try {
     response = await fetch(`${apiBaseUrl}/${path}`, {
       method, cache: "no-store",
+      credentials: "same-origin",
       headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(authorize ? { Authorization: `Bearer ${accessToken}` } : {}) },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
@@ -48,8 +49,7 @@ async function request(path, { body, method = "GET", authorize = false } = {}) {
 export function authorizedRequest(path, options) { return request(path, { ...options, authorize: true }); }
 
 export function authenticatedHeaders() {
-  if (!accessToken || Date.now() >= expiresAt) throw new ProfileApiError(401);
-  return { Authorization: `Bearer ${accessToken}` };
+  return accessToken && Date.now() < expiresAt ? { Authorization: `Bearer ${accessToken}` } : {};
 }
 
 export function optionalAuthenticatedHeaders() {
@@ -69,8 +69,24 @@ export async function verifyProfileCode(challengeId, code) {
   expiresAt = Date.now() + verified.expiresIn * 1000;
 }
 
+export async function restoreAccountAccess() {
+  try {
+    const response = await fetch(`${apiBaseUrl}/account-access/session`, { cache: "no-store", credentials: "same-origin" });
+    if (!response.ok) { clearAccountAccess(); return null; }
+    const value = await response.json();
+    actorPhone = normalizeProfilePhone(value.phone);
+    expiresAt = Date.now() + value.expiresIn * 1000;
+    return actorPhone;
+  } catch { return null; }
+}
+
+async function ensureAccountAccess() {
+  if (Date.now() < expiresAt && actorPhone) return true;
+  return Boolean(await restoreAccountAccess());
+}
+
 export function hasProfileAccess(phone) {
-  return Boolean(accessToken && Date.now() < expiresAt && actorPhone === normalizeProfilePhone(phone));
+  return Boolean(Date.now() < expiresAt && actorPhone === normalizeProfilePhone(phone));
 }
 
 export async function readOwnProfile() {
@@ -96,5 +112,5 @@ export async function logoutProfile() {
   // Clear the local capability even if the network is unavailable; server TTL still bounds it.
   const token = accessToken;
   clearAccountAccess();
-  if (token) await fetch(`${apiBaseUrl}/account-access/logout`, { method: "POST", headers: { Authorization: `Bearer ${token}` } });
+  await fetch(`${apiBaseUrl}/account-access/logout`, { method: "POST", credentials: "same-origin", headers: token ? { Authorization: `Bearer ${token}` } : {} });
 }

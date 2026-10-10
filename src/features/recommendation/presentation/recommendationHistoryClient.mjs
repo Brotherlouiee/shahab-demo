@@ -1,8 +1,9 @@
 import { authorizedRequest, ProfileApiError } from "../../account/profileClient.mjs";
 import { buildRecommendationResultViewModel } from "./recommendationResultViewModel.mjs";
 
-export async function fetchRecommendationHistory({ limit = 20, offset = 0 } = {}) {
-  try { return await authorizedRequest(`recommendation-history?limit=${encodeURIComponent(limit)}&offset=${encodeURIComponent(offset)}`); }
+export async function fetchRecommendationHistory({ limit = 20, cursor = null } = {}) {
+  const query = `limit=${encodeURIComponent(limit)}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`;
+  try { return await authorizedRequest(`recommendation-history?${query}`); }
   catch (error) { throw error instanceof ProfileApiError ? error : new ProfileApiError(0); }
 }
 
