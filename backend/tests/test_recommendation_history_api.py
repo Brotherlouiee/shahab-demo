@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from uuid import UUID
 from pathlib import Path
 from unittest.mock import patch
 
@@ -149,7 +150,7 @@ class RecommendationHistoryApiTests(unittest.TestCase):
 
         verification_engine = create_engine(self.database_url)
         with Session(verification_engine) as session:
-            retained = session.get(RecommendationHistoryRun, history_id)
+            retained = session.get(RecommendationHistoryRun, UUID(history_id))
             self.assertIsNotNone(retained)
             self.assertIsNotNone(retained.hidden_at)
         verification_engine.dispose()
