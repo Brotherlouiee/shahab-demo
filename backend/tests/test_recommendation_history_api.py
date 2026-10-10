@@ -5,9 +5,9 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
-from uuid import UUID
 from pathlib import Path
 from unittest.mock import patch
+from uuid import UUID
 
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, func, select
