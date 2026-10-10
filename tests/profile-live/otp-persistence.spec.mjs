@@ -6,6 +6,7 @@ async function login(page, suffix) {
   const logout = page.getByRole("button", { name: "خروج از حساب کاربری" });
   if (await logout.isVisible()) {
     await logout.click();
+    await page.getByRole("alertdialog").getByRole("button").last().click();
     await page.locator("button.hp-menu-button").click();
   }
   await page.getByRole("button", { name: "ورود کاربر" }).click();

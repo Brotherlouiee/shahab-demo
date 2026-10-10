@@ -6137,4 +6137,12 @@ right: 16px;
 .hp-history-confirm > div { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px; direction:rtl; }
 .hp-history-confirm button { height:34px; border:0; border-radius:5px; background:#00b87a; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
 .hp-history-confirm button:last-child { background:#fff; color:#000; }
+
+.hp-logout-confirm-backdrop { position:fixed; inset:0; z-index:7000; display:grid; place-items:center; padding:18px; background:rgba(0,0,0,.36); }
+.hp-logout-confirm-dialog { width:min(100%,340px); min-height:158px; box-sizing:border-box; padding:15px 10px 11px; border-radius:15px; background:#fff; text-align:center; box-shadow:0 8px 24px rgba(0,0,0,.28); display:grid; justify-items:center; gap:10px; }
+.hp-logout-confirm-dialog > img { width:49px; height:49px; }
+.hp-logout-confirm-dialog strong { color:#000; font-size:16px; font-weight:800; }
+.hp-logout-confirm-dialog > div { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px; direction:rtl; }
+.hp-logout-confirm-dialog button { height:34px; border:0; border-radius:5px; background:#00b87a; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
+.hp-logout-confirm-dialog button:last-child { background:#fff; color:#000; }
 .hp-sidebar-icon[src$="book-saved.svg"] { object-fit: contain; }

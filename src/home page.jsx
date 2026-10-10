@@ -574,10 +574,16 @@ function SidebarIcon({ name }) {
 
 function UserSidebar({ isOpen, onClose, onLogin, onLogout, onNavigate, userName, isAuthenticated = false }) {
   const [activeItem, setActiveItem] = useState("");
+  const [isLogoutConfirmationOpen, setIsLogoutConfirmationOpen] = useState(false);
   const items = isAuthenticated
     ? [["profile", "پروفایل کاربر"], ["requests", "سوابق درخواست وام"], ["history", "سوابق وام‌های توصیه شده"], ["saved", "وام‌های نشان شده"], ["about", "درباره ما"]]
     : [["login", "ورود کاربر"], ["about", "درباره ما"]];
   function selectItem(icon) { setActiveItem(icon); onClose(); if (icon === "login") onLogin(); else onNavigate?.(icon); }
+  function confirmLogout() {
+    setIsLogoutConfirmationOpen(false);
+    onClose();
+    onLogout();
+  }
   return (
     <div className={"hp-sidebar-layer " + (isOpen ? "is-open" : "")} aria-hidden={!isOpen}>
       <button className="hp-sidebar-backdrop" type="button" aria-label="بستن منو" onClick={onClose}></button>
@@ -585,10 +591,11 @@ function UserSidebar({ isOpen, onClose, onLogin, onLogout, onNavigate, userName,
         {isAuthenticated ? <strong className="hp-sidebar-name">{userName}</strong> : null}
         <nav className="hp-sidebar-menu">
           {items.map(([icon, label]) => <button className={activeItem === icon ? "is-active" : ""} type="button" key={label} onClick={() => selectItem(icon)}><SidebarIcon name={icon} /><span>{label}</span></button>)}
-          {isAuthenticated ? <button className="hp-sidebar-logout" type="button" onClick={() => { onClose(); onLogout(); }}><SidebarIcon name="logout" /><span>خروج از حساب کاربری</span></button> : null}
+          {isAuthenticated ? <button className="hp-sidebar-logout" type="button" onClick={() => setIsLogoutConfirmationOpen(true)}><SidebarIcon name="logout" /><span>خروج از حساب کاربری</span></button> : null}
         </nav>
         <p className="hp-sidebar-support">جهت دریافت مشاوره با شماره تلفن<br /><a href="tel:02135647">۰۲۱-۳۵۶۴۷</a>{" "}تماس حاصل نمایید.</p>
       </aside>
+      {isLogoutConfirmationOpen ? <div className="hp-logout-confirm-backdrop" role="presentation"><section className="hp-logout-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="logout-confirm-title"><img src={dangerIconUrl} alt="" /><strong id="logout-confirm-title">آیا از خروج از حساب کاربری‌تان مطمئن هستید؟</strong><div><button type="button" onClick={() => setIsLogoutConfirmationOpen(false)}>خیر</button><button type="button" onClick={confirmLogout}>بله</button></div></section></div> : null}
     </div>
   );
 }
