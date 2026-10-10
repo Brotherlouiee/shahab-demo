@@ -80,7 +80,8 @@ class RecommendationHistoryRepository:
             .scalar_subquery()
         )
         statement = select(RecommendationHistoryRun, ranked_count.label("ranked_count")).where(
-            RecommendationHistoryRun.owner_phone == owner_phone
+            RecommendationHistoryRun.owner_phone == owner_phone,
+            RecommendationHistoryRun.hidden_at.is_(None),
         )
         if cursor is not None:
             created_at, run_id = cursor
@@ -105,6 +106,7 @@ class RecommendationHistoryRepository:
             select(RecommendationHistoryRun).where(
                 RecommendationHistoryRun.recommendation_history_run_id == uuid.UUID(run_id),
                 RecommendationHistoryRun.owner_phone == owner_phone,
+                RecommendationHistoryRun.hidden_at.is_(None),
             )
         )
         if run is None:
@@ -133,6 +135,20 @@ class RecommendationHistoryRepository:
             ):
                 reasons[item_id].append(reason)
         return run, items, {item_id: tuple(values) for item_id, values in reasons.items()}
+
+    def hide_for_owner(self, owner_phone: str, run_id: str) -> bool:
+        """Hide an owned run without deleting its immutable database snapshot."""
+        result = cast(
+            CursorResult[object],
+            self._session.execute(
+                update(RecommendationHistoryRun)
+                .where(RecommendationHistoryRun.recommendation_history_run_id == uuid.UUID(run_id))
+                .where(RecommendationHistoryRun.owner_phone == owner_phone)
+                .where(RecommendationHistoryRun.hidden_at.is_(None))
+                .values(hidden_at=func.now())
+            ),
+        )
+        return result.rowcount == 1
 
     def _existing(self, session_id: uuid.UUID) -> RecommendationHistoryRun | None:
         return self._session.scalar(

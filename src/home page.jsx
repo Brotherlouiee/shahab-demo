@@ -4,8 +4,10 @@ import { readSavedLoans } from "./features/account/savedLoans.mjs";
 import { isSavedLoanDetailsPath, savedLoanDetailsPath } from "./features/account/savedLoansPresentation.mjs";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
-import { fetchHistoricalRecommendation, fetchRecommendationHistory } from "./features/recommendation/presentation/recommendationHistoryClient.mjs";
+import { fetchHistoricalRecommendation, fetchRecommendationHistory, hideRecommendationHistory } from "./features/recommendation/presentation/recommendationHistoryClient.mjs";
 import historyIconUrl from "../assets/book-saved.svg";
+import closeCircleIconUrl from "../assets/close-circle.svg";
+import dangerIconUrl from "../assets/danger.svg";
 import LoanComparisonCard from "./features/recommendation/ui/LoanComparisonCard.jsx";
 import { fetchLoanDetails } from "./features/loan-details/loanDetailsApi.js";
 import BankIdentity from "./features/loan-details/BankIdentity.jsx";
@@ -2886,7 +2888,9 @@ function SavedLoansPage({ onBack, onDetails }) {
   return <LoanResultsScreen result={null} status="ready" header={<AccountHeader onBack={onBack} onHome={onBack} />} onDetails={onDetails} savedItems={loans} showActions={false} />;
 }
 
-function RecommendationHistoryPage({ onBack, onMenu, onOpen, onUnauthorized, state, setState }) {
+function RecommendationHistoryPage({ onBack, onOpen, onUnauthorized, state, setState }) {
+  const [pendingHideId, setPendingHideId] = useState(null);
+  const [isHiding, setIsHiding] = useState(false);
   const load = (cursor = null, append = false) => {
     setState((current) => ({ ...current, status: "loading" }));
     fetchRecommendationHistory({ cursor }).then((value) => setState((current) => ({
@@ -2899,11 +2903,21 @@ function RecommendationHistoryPage({ onBack, onMenu, onOpen, onUnauthorized, sta
     });
   };
   useEffect(() => { load(); }, []);
-  return <main className="hp-questionnaire-page hp-recommendation-history-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onBack} />
+  async function confirmHide() {
+    if (!pendingHideId || isHiding) return;
+    setIsHiding(true);
+    try {
+      await hideRecommendationHistory(pendingHideId);
+      setState((current) => ({ ...current, items: current.items.filter((item) => item.historyId !== pendingHideId) }));
+      setPendingHideId(null);
+    } finally { setIsHiding(false); }
+  }
+  return <main className="hp-account-page hp-recommendation-history-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} />
     {state.status === "loading" ? <DeferredPageSkeleton active variant="cards" /> : null}
     {state.status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت سوابق در حال حاضر ممکن نیست.</p><button type="button" onClick={() => load()}>تلاش مجدد</button></div> : null}
     {state.status === "ready" && !state.items.length ? <div className="hp-saved-loans-empty-state" role="status"><img src="/saved-loans-empty.png" alt="" /></div> : null}
-    {state.status === "ready" ? <section className="hp-recommendation-history-list">{state.items.map((item) => <button type="button" className="hp-recommendation-history-card" key={item.historyId} onClick={() => onOpen(item.historyId)}><span className="hp-history-card-top"><strong>مشاهده نتایج</strong><span className="hp-history-card-chevron" aria-hidden="true" /></span><span className="hp-history-card-row"><b>تعداد وام توصیه شده</b><em>{toPersianDigits(item.rankedCount)}</em></span><span className="hp-history-card-row"><b>تاریخ</b><em>{new Date(item.createdAt).toLocaleDateString("fa-IR", { timeZone: "Asia/Tehran" })}</em></span><span className="hp-history-card-row"><b>ساعت</b><em>{new Date(item.createdAt).toLocaleTimeString("fa-IR", { timeZone: "Asia/Tehran", hour: "2-digit", minute: "2-digit" })}</em></span></button>)}{state.nextCursor !== null ? <button type="button" className="hp-history-load-more" onClick={() => load(state.nextCursor, true)}>نمایش بیشتر</button> : null}</section> : null}
+    {state.status === "ready" ? <section className="hp-recommendation-history-list">{state.items.map((item) => <article className="hp-recommendation-history-card" key={item.historyId}><button type="button" className="hp-history-card-open" onClick={() => onOpen(item.historyId)}><span className="hp-history-card-top"><strong>مشاهده نتایج</strong></span><span className="hp-history-card-row"><b>تعداد وام توصیه شده</b><em>{toPersianDigits(item.rankedCount)}</em></span><span className="hp-history-card-row"><b>تاریخ</b><em>{new Date(item.createdAt).toLocaleDateString("fa-IR", { timeZone: "Asia/Tehran" })}</em></span><span className="hp-history-card-row"><b>ساعت</b><em>{new Date(item.createdAt).toLocaleTimeString("fa-IR", { timeZone: "Asia/Tehran", hour: "2-digit", minute: "2-digit" })}</em></span></button><button className="hp-history-hide" type="button" aria-label="حذف سابقه" onClick={() => setPendingHideId(item.historyId)}><img src={closeCircleIconUrl} alt="" /></button></article>)}{state.nextCursor !== null ? <button type="button" className="hp-history-load-more" onClick={() => load(state.nextCursor, true)}>نمایش بیشتر</button> : null}</section> : null}
+    {pendingHideId ? <div className="hp-history-confirm-backdrop" role="presentation"><section className="hp-history-confirm" role="alertdialog" aria-modal="true" aria-labelledby="history-confirm-title"><img src={dangerIconUrl} alt="" /><strong id="history-confirm-title">آیا از حذف کارت مطمئن هستید؟</strong><div><button type="button" disabled={isHiding} onClick={() => setPendingHideId(null)}>خیر</button><button type="button" disabled={isHiding} onClick={confirmHide}>بله</button></div></section></div> : null}
   </main>;
 }
 
@@ -3068,7 +3082,7 @@ export default function HomePage() {
   if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={(profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); setCachedAccountProfile(profile); setAccountProfile(profile); }} onBack={handleHomeOpen} />;
   if (currentView === "about") return <AboutPage onBack={handleHomeOpen} />;
   if (currentView === "saved") return <SavedLoansPage onBack={handleHomeOpen} onDetails={handleSavedLoanDetails} />;
-  if (currentView === "history") return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><RecommendationHistoryPage state={historyListState} setState={setHistoryListState} onMenu={() => setIsSidebarOpen(true)} onBack={() => { const origin = historyOrigin; replaceRoute(origin?.path || "/"); setCurrentView(origin?.view || "home"); setIsSidebarOpen(Boolean(origin)); }} onUnauthorized={() => { setPendingHistoryPath("/recommendation-history"); setLoginStep("phone"); setCurrentView("login"); replaceRoute("/login"); }} onOpen={(historyId) => { fetchHistoricalRecommendation(historyId).then((result) => { setHistoryResult(result); setCurrentView("history-result"); replaceRoute(`/recommendation-history/${encodeURIComponent(historyId)}`); }).catch(() => setHistoryResult(false)); }} /></>;
+  if (currentView === "history") return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><RecommendationHistoryPage state={historyListState} setState={setHistoryListState} onBack={() => { const origin = historyOrigin; replaceRoute(origin?.path || "/"); setCurrentView(origin?.view || "home"); setIsSidebarOpen(Boolean(origin)); }} onUnauthorized={() => { setPendingHistoryPath("/recommendation-history"); setLoginStep("phone"); setCurrentView("login"); replaceRoute("/login"); }} onOpen={(historyId) => { fetchHistoricalRecommendation(historyId).then((result) => { setHistoryResult(result); setCurrentView("history-result"); replaceRoute(`/recommendation-history/${encodeURIComponent(historyId)}`); }).catch(() => setHistoryResult(false)); }} /></>;
   if (currentView === "history-result") {
     if (historyResult === false) return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} /><p className="hp-recommendation-result-state">نتیجهٔ تاریخی در دسترس نیست.</p></main>;
     if (!historyResult) return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} /><DeferredPageSkeleton active variant="cards" /></main>;

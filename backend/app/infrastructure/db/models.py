@@ -372,6 +372,9 @@ class RecommendationHistoryRun(Timestamped, Base):
     )
     data_version: Mapped[str] = mapped_column(String(100), nullable=False)
     config_version: Mapped[str] = mapped_column(String(100), nullable=False)
+    # A user can hide a run from their own list without destroying the immutable
+    # audit snapshot retained for administrative review.
+    hidden_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class RecommendationHistoryItem(Base):

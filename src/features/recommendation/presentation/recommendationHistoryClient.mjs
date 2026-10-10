@@ -11,3 +11,8 @@ export async function fetchHistoricalRecommendation(historyId) {
   try { return buildRecommendationResultViewModel(await authorizedRequest(`recommendation-history/${encodeURIComponent(historyId)}`)); }
   catch (error) { throw error instanceof ProfileApiError ? error : new ProfileApiError(0); }
 }
+
+export async function hideRecommendationHistory(historyId) {
+  try { await authorizedRequest(`recommendation-history/${encodeURIComponent(historyId)}`, { method: "DELETE" }); }
+  catch (error) { throw error instanceof ProfileApiError ? error : new ProfileApiError(0); }
+}

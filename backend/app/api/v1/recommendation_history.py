@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy.orm import Session
 
@@ -161,3 +161,21 @@ def read_history(
         lowCompatibilityRecommendations=low,
         needsReview=review,
     )
+
+
+@router.delete("/{history_id}", status_code=204)
+def hide_history(
+    history_id: str,
+    actor: Annotated[str, Depends(authenticated_phone)],
+    db: Annotated[Session | None, Depends(get_request_database_session)],
+) -> Response:
+    if db is None:
+        raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="History is unavailable.")
+    try:
+        hidden = RecommendationHistoryRepository(db).hide_for_owner(actor, history_id)
+    except ValueError:
+        hidden = False
+    if not hidden:
+        raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="History entry was not found.")
+    db.commit()
+    return Response(status_code=204)

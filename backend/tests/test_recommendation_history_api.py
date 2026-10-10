@@ -131,6 +131,27 @@ class RecommendationHistoryApiTests(unittest.TestCase):
         self.assertEqual(session.status_code, 200, session.text)
         self.assertEqual(session.json()["phone"], "09000000001")
 
+    def test_owner_can_hide_a_history_card_without_deleting_its_audit_snapshot(self) -> None:
+        owner = self.login("09000000001")
+        session_id = self.completed_session()
+        self.assertEqual(
+            self.client.post("/api/v1/recommendations", headers=owner, json={"sessionId": session_id}).status_code,
+            200,
+        )
+        history_id = self.client.get("/api/v1/recommendation-history", headers=owner).json()["items"][0]["historyId"]
+
+        hidden = self.client.delete(f"/api/v1/recommendation-history/{history_id}", headers=owner)
+        self.assertEqual(hidden.status_code, 204, hidden.text)
+        self.assertEqual(self.client.get("/api/v1/recommendation-history", headers=owner).json()["items"], [])
+        self.assertEqual(self.client.get(f"/api/v1/recommendation-history/{history_id}", headers=owner).status_code, 404)
+
+        verification_engine = create_engine(self.database_url)
+        with Session(verification_engine) as session:
+            retained = session.get(RecommendationHistoryRun, history_id)
+            self.assertIsNotNone(retained)
+            self.assertIsNotNone(retained.hidden_at)
+        verification_engine.dispose()
+
     def test_failed_snapshot_write_leaves_no_partial_history(self) -> None:
         owner = self.login("09000000001")
         session_id = self.completed_session()
