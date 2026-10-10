@@ -8,7 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
-- **US-09.T081 planning:** Define shareable online Swagger/OpenAPI documentation and Postman import artifacts before US-09.T07. Separate online documentation from live API execution, preserve production docs/auth controls, and require safe examples, route coverage and drift checks. Feasibility/planning only; no runtime or publication performed.
+- **US-09.T081 planning:** Define a shareable online Swagger or Postman surface for real manual testing of every implemented API before US-09.T07. Include the required restricted HTTPS API/PostgreSQL test environment and reuse it in T07; preserve production docs/auth controls, safe examples, complete operation coverage and drift checks. Feasibility/planning only; no runtime or publication performed.
 
 
 ### Added
