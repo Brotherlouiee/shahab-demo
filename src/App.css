@@ -6118,11 +6118,14 @@ right: 16px;
 .hp-account-profile-form{position:relative;z-index:1}.hp-account-profile-form>label{display:grid;gap:4px;margin:12px 4px}.hp-account-profile-form>label:has(.hp-personal-dropdown.is-open){position:relative;z-index:60}.hp-account-profile-form label>span:first-child{font-weight:800;color:#000;text-align:right}.hp-account-profile-form input,.hp-account-profile-form .hp-personal-select,.hp-account-profile-form .hp-personal-dropdown,.hp-account-profile-form .hp-personal-dropdown-trigger{width:100%;box-sizing:border-box}.hp-account-profile-form input,.hp-account-profile-form .hp-personal-dropdown-trigger{height:35px;background:#f1f1f1;color:#858585;font-size:15px;font-weight:700}.hp-account-profile-form input:disabled{opacity:1;color:#858585;-webkit-text-fill-color:#858585}.hp-account-profile-form .hp-personal-select,.hp-account-profile-form .hp-personal-dropdown{height:35px;background:transparent}.hp-account-profile-form .hp-personal-dropdown-trigger{height:35px;border-radius:8px}.hp-account-profile-form .hp-personal-dropdown-trigger::after{border-color:#333}.hp-account-profile-form .hp-personal-dropdown-menu{right:0;left:auto;width:min(310px,calc(100vw - 48px));z-index:50}.hp-account-profile-form .hp-account-save{margin-top:18px}
 
 /* Account-owned recommendation history; scoped to the new route only. */
-.hp-recommendation-history-page { padding-inline: 22px; }
-.hp-recommendation-history-list { display: grid; gap: 10px; padding-bottom: 28px; }
-.hp-recommendation-history-card { width: 100%; border: 1px solid #aaa; border-radius: 8px; background: #fff; padding: 0; text-align: right; color: #111; overflow: hidden; display: grid; grid-template-columns: 1fr auto; cursor: pointer; }
-.hp-recommendation-history-card strong { grid-column: 1 / -1; color: #066cff; border-bottom: 1px solid #aaa; padding: 10px 12px; text-align: right; }
-.hp-recommendation-history-card span { padding: 7px 12px; font-size: 15px; font-weight: 700; }
-.hp-recommendation-history-card span b { font-weight: 700; }
+.hp-recommendation-history-page { min-height:100vh; padding:0 22px 28px; background:#fff; }
+.hp-recommendation-history-list { display:grid; gap:10px; padding:0 0 28px; }
+.hp-recommendation-history-card { width:100%; min-height:152px; border:1px solid #aaa; border-radius:8px; background:#fff; padding:0; text-align:right; color:#111; overflow:hidden; display:block; cursor:pointer; font-family:inherit; }
+.hp-history-card-top { height:40px; box-sizing:border-box; border-bottom:1px solid #aaa; display:flex; align-items:center; justify-content:space-between; padding:0 10px 0 12px; }
+.hp-history-card-top strong { color:#066cff; font-size:16px; font-weight:800; line-height:1; }
+.hp-history-card-top svg { width:19px; height:19px; fill:none; stroke:#111; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.hp-history-card-row { min-height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; padding:0 11px; font-size:15px; font-weight:700; line-height:1; }
+.hp-history-card-row b,.hp-history-card-row em { font-style:normal; font-weight:700; }
+.hp-history-card-row em { direction:ltr; unicode-bidi:plaintext; }
 .hp-history-load-more { border: 1px solid #111; border-radius: 8px; background: #fff; color: #111; min-height: 40px; font: inherit; font-weight: 700; cursor: pointer; }
 .hp-sidebar-icon[src$="book-saved.svg"] { object-fit: contain; }

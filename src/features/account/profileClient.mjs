@@ -3,6 +3,7 @@
 let accessToken = "";
 let actorPhone = "";
 let expiresAt = 0;
+let accessGeneration = 0;
 const apiBaseUrl = (import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1").replace(/\/+$/, "");
 
 export class ProfileApiError extends Error {
@@ -67,15 +68,23 @@ export async function verifyProfileCode(challengeId, code) {
   accessToken = verified.accessToken;
   actorPhone = normalizeProfilePhone(verified.phone);
   expiresAt = Date.now() + verified.expiresIn * 1000;
+  accessGeneration += 1;
 }
 
 export async function restoreAccountAccess() {
+  const generationAtStart = accessGeneration;
   try {
     const response = await fetch(`${apiBaseUrl}/account-access/session`, { cache: "no-store", credentials: "same-origin" });
-    if (!response.ok) { clearAccountAccess(); return null; }
+    if (!response.ok) {
+      // An anonymous bootstrap response must never erase a later successful
+      // OTP verification that completed while this request was in flight.
+      if (generationAtStart === accessGeneration) clearAccountAccess();
+      return null;
+    }
     const value = await response.json();
     actorPhone = normalizeProfilePhone(value.phone);
     expiresAt = Date.now() + value.expiresIn * 1000;
+    accessGeneration += 1;
     return actorPhone;
   } catch { return null; }
 }
@@ -106,7 +115,7 @@ export async function persistPersonalInfo(profile) {
   return persistProfile({ ...previous, ...profile });
 }
 
-export function clearAccountAccess() { accessToken = ""; actorPhone = ""; expiresAt = 0; }
+export function clearAccountAccess() { accessToken = ""; actorPhone = ""; expiresAt = 0; accessGeneration += 1; }
 
 export async function logoutProfile() {
   // Clear the local capability even if the network is unavailable; server TTL still bounds it.

@@ -55,6 +55,24 @@ test("a valid HttpOnly access cookie restores authorization without browser toke
   } finally { globalThis.fetch = original; clearAccountAccess(); }
 });
 
+test("an earlier anonymous session probe cannot erase a later OTP verification", async () => {
+  clearAccountAccess();
+  const original = globalThis.fetch;
+  let resolveProbe;
+  globalThis.fetch = (url) => {
+    if (url.endsWith("/account-access/session")) return new Promise((resolve) => { resolveProbe = resolve; });
+    if (url.endsWith("/verify")) return Promise.resolve(Response.json({ accessToken: "fixture", phone: "09000000001", expiresIn: 1800 }));
+    return Promise.resolve(Response.json({}));
+  };
+  try {
+    const probe = restoreAccountAccess();
+    await verifyProfileCode("fixture", "123456");
+    resolveProbe(new Response(null, { status: 401 }));
+    await probe;
+    assert.equal(hasProfileAccess("09000000001"), true);
+  } finally { globalThis.fetch = original; clearAccountAccess(); }
+});
+
 
 test("configured API base is used by OTP, profile and logout requests", async () => {
   const { createServer } = await import("vite");
