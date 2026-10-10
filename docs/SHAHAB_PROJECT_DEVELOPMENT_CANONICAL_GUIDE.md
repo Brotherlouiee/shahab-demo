@@ -1105,3 +1105,7 @@ Saved loans retain their browser-local storage contract and their own /saved-loa
 ## US-09.T076 — Questionnaire geometry and unavailable controls (2026-10-09)
 
 Questionnaire cards use their content height on every canonical route, with an exact 28px inset above the first option and below the last option; their existing rhythm between options is preserved. Every questionnaire navigation row sits exactly 28px below its question card and 28px above the end of its page. The questionnaire no longer reserves artificial blank page height, without changing questionnaire text, answer IDs, route mapping, session policy or scoring. The home amount chevron shares the 8px geometry used by application dropdowns. The unavailable loan-detail AI action and readiness action remain non-operational and are now both semantic disabled buttons with the disabled grey state. API, PostgreSQL, PUBLISHED data, D-005, scoring, retention and the continuity document are unchanged.
+
+## US-09.T077 — Application logo replacement (2026-10-10)
+
+The owner-supplied Shahab SVG is the single logo asset imported by every application surface that renders the product mark. Existing image elements, CSS classes, dimensions, margins, padding, page layout and application behaviour are unchanged. The vector source preserves clarity at every rendered density. API, PostgreSQL, PUBLISHED data, D-005, scoring, retention and the continuity document are unchanged.
