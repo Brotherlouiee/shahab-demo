@@ -143,7 +143,9 @@ class RecommendationHistoryApiTests(unittest.TestCase):
         hidden = self.client.delete(f"/api/v1/recommendation-history/{history_id}", headers=owner)
         self.assertEqual(hidden.status_code, 204, hidden.text)
         self.assertEqual(self.client.get("/api/v1/recommendation-history", headers=owner).json()["items"], [])
-        self.assertEqual(self.client.get(f"/api/v1/recommendation-history/{history_id}", headers=owner).status_code, 404)
+        self.assertEqual(
+            self.client.get(f"/api/v1/recommendation-history/{history_id}", headers=owner).status_code, 404
+        )
 
         verification_engine = create_engine(self.database_url)
         with Session(verification_engine) as session:
