@@ -7,6 +7,9 @@ export async function installProfileApi(page, options = {}) {
   await page.route("**/api/v1/account-access/**", async (route) => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith("/logout")) return route.fulfill({ status: 204 });
+    // Initial page hydration probes the cookie-backed session. This fixture has
+    // no server cookie jar, so it deliberately models an anonymous refresh.
+    if (path.endsWith("/session")) return route.fulfill({ status: 401, json: {} });
     const body = route.request().postDataJSON();
     if (path.endsWith("/request")) {
       state.phone = body.phone;

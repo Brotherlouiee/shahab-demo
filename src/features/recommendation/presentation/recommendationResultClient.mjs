@@ -5,6 +5,7 @@
  * never sends answers, scoring inputs, data/config selectors, or ranking controls.
  */
 import { buildRecommendationResultViewModel } from "./recommendationResultViewModel.mjs";
+import { optionalAuthenticatedHeaders } from "../../account/profileClient.mjs";
 
 const apiBaseUrl = import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1";
 
@@ -24,7 +25,7 @@ export async function fetchRecommendationResult(sessionId, { fetchImpl = fetch, 
   const response = await fetchImpl(`${apiBaseUrl}/recommendations`,
     {
       method: "POST",
-      headers: { Accept: "application/json", "Content-Type": "application/json" },
+      headers: { Accept: "application/json", "Content-Type": "application/json", ...optionalAuthenticatedHeaders() },
       body: JSON.stringify({ sessionId }),
       signal,
     },

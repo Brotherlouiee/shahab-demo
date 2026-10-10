@@ -8,6 +8,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T079 follow-up:** A signed-in user can now hide a recommendation-history card through a centered warning confirmation. The owner-scoped DELETE API records `hidden_at` instead of deleting the immutable run, items or reasons; hidden runs are absent from that user's list and detail route while remaining available for database administration. The history list uses the same no-menu account header as About and Saved Loans.
+
+- **US-09.T079 follow-up:** Recommendation-history authorization now survives a browser refresh through an HttpOnly, same-site server session cookie; no credential is persisted in browser storage. The browser that creates a questionnaire receives a separate HttpOnly proof cookie, so a session ID alone cannot be attached to an account; the database then atomically binds the verified owner before its immutable history snapshot is written. History pagination uses a stable newest-first cursor, a failed list remains an error rather than an empty state, and the successful empty state reuses the existing saved-loans artwork. Historical results retain the original result controls and no longer alter the result presentation.
+
+- **US-09.T079:** Authenticated recommendation responses are persisted once per questionnaire session as immutable, owner-scoped PostgreSQL history. The authenticated menu now links to paginated recommendation history; cards show the server-created Tehran date/time and ranked-result count. Reopening a run uses the existing result UI without rescoring, keeps all three partitions and returns from loan details to that history entry. Anonymous sessions remain transient and the 30-minute questionnaire retention policy is unchanged.
+
 - **US-09.T078:** The option-card border on `/question/2` is 30% shorter (117px to 82px at the supported mobile viewport), with no change to options, typography, actions, routes, or other questionnaire cards.
 
 - **US-09.T077:** The supplied vector Shahab mark replaces the previous application logo everywhere it is rendered. Existing logo elements, dimensions, layout classes, spacing and page behaviour are unchanged.

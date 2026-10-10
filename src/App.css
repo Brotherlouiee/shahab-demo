@@ -6084,7 +6084,7 @@ right: 16px;
 .hp-sidebar-menu button:focus-visible { background: #f4f4f4; outline: none; }
 .hp-sidebar-menu button.is-active { width: 100%; height: 38px !important; min-height: 38px !important; max-height: 38px !important; margin: 0 !important; background: #f4f4f4; color: #000000; padding: 7px 0 !important; transform: none; }
 .hp-sidebar-menu button:nth-child(1):not(:only-child) { border-bottom: 1px solid #a8a8a8; }
-.hp-sidebar-menu button:nth-child(3) { border-bottom: 1px solid #a8a8a8; }
+.hp-sidebar-menu button:nth-child(4) { border-bottom: 1px solid #a8a8a8; }
 .hp-sidebar-icon,
 .hp-sidebar-icon *,
 .hp-sidebar-menu .hp-sidebar-logout .hp-sidebar-icon,
@@ -6116,3 +6116,25 @@ right: 16px;
 
 /* Account fields use the same dropdown structure as personal information. */
 .hp-account-profile-form{position:relative;z-index:1}.hp-account-profile-form>label{display:grid;gap:4px;margin:12px 4px}.hp-account-profile-form>label:has(.hp-personal-dropdown.is-open){position:relative;z-index:60}.hp-account-profile-form label>span:first-child{font-weight:800;color:#000;text-align:right}.hp-account-profile-form input,.hp-account-profile-form .hp-personal-select,.hp-account-profile-form .hp-personal-dropdown,.hp-account-profile-form .hp-personal-dropdown-trigger{width:100%;box-sizing:border-box}.hp-account-profile-form input,.hp-account-profile-form .hp-personal-dropdown-trigger{height:35px;background:#f1f1f1;color:#858585;font-size:15px;font-weight:700}.hp-account-profile-form input:disabled{opacity:1;color:#858585;-webkit-text-fill-color:#858585}.hp-account-profile-form .hp-personal-select,.hp-account-profile-form .hp-personal-dropdown{height:35px;background:transparent}.hp-account-profile-form .hp-personal-dropdown-trigger{height:35px;border-radius:8px}.hp-account-profile-form .hp-personal-dropdown-trigger::after{border-color:#333}.hp-account-profile-form .hp-personal-dropdown-menu{right:0;left:auto;width:min(310px,calc(100vw - 48px));z-index:50}.hp-account-profile-form .hp-account-save{margin-top:18px}
+
+/* Account-owned recommendation history; scoped to the new route only. */
+.hp-recommendation-history-page { min-height:100vh; padding:0 22px 28px; background:#fff; }
+.hp-recommendation-history-list { display:grid; gap:10px; padding:0 0 28px; }
+.hp-recommendation-history-card { position:relative; width:100%; min-height:152px; border:1px solid #aaa; border-radius:8px; background:#fff; padding:0; text-align:right; color:#111; overflow:hidden; display:block; }
+.hp-history-card-open { display:block; width:100%; min-height:150px; padding:0; border:0; background:transparent; color:inherit; text-align:inherit; font:inherit; cursor:pointer; }
+.hp-history-card-top { height:40px; box-sizing:border-box; border-bottom:1px solid #aaa; display:flex; align-items:center; justify-content:space-between; padding:0 10px 0 12px; }
+.hp-history-card-top strong { color:#066cff; font-size:16px; font-weight:800; line-height:1; }
+.hp-history-hide { position:absolute; z-index:1; top:11px; left:11px; width:22px; height:22px; padding:0; border:0; background:transparent; cursor:pointer; }
+.hp-history-hide img { display:block; width:100%; height:100%; }
+.hp-history-card-row { min-height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; padding:0 11px; font-size:15px; font-weight:700; line-height:1; }
+.hp-history-card-row b,.hp-history-card-row em { font-style:normal; font-weight:700; }
+.hp-history-card-row em { direction:ltr; unicode-bidi:plaintext; }
+.hp-history-load-more { border: 1px solid #111; border-radius: 8px; background: #fff; color: #111; min-height: 40px; font: inherit; font-weight: 700; cursor: pointer; }
+.hp-history-confirm-backdrop { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:18px; background:rgba(0,0,0,.36); }
+.hp-history-confirm { width:min(100%,340px); min-height:158px; box-sizing:border-box; padding:15px 10px 11px; border-radius:15px; background:#fff; text-align:center; box-shadow:0 8px 24px rgba(0,0,0,.28); display:grid; justify-items:center; gap:10px; }
+.hp-history-confirm > img { width:49px; height:49px; }
+.hp-history-confirm strong { color:#000; font-size:16px; font-weight:800; }
+.hp-history-confirm > div { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px; direction:rtl; }
+.hp-history-confirm button { height:34px; border:0; border-radius:5px; background:#00b87a; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
+.hp-history-confirm button:last-child { background:#fff; color:#000; }
+.hp-sidebar-icon[src$="book-saved.svg"] { object-fit: contain; }

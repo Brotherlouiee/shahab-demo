@@ -5,11 +5,13 @@ from __future__ import annotations
 from datetime import timedelta
 from typing import Annotated
 
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Body, Depends, Request
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy.orm import Session
 
 from backend.app.api.errors import ApiError, ErrorCode
+from backend.app.api.v1.account_access import optional_authenticated_phone
+from backend.app.api.v1.questionnaire import QUESTIONNAIRE_PROOF_COOKIE_PREFIX
 from backend.app.core.config import Settings, get_settings
 from backend.app.core.dependencies import _questionnaire_configuration, get_request_database_session
 from backend.app.loans.domain.models import ServingCatalogueUnavailableError
@@ -19,6 +21,7 @@ from backend.app.questionnaire.domain.session import QuestionnaireRetentionPolic
 from backend.app.questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 from backend.app.recommendation.application.use_cases import RecommendCanonicalLoans
 from backend.app.recommendation.domain.entities import RecommendationInputError
+from backend.app.recommendation.infrastructure.history import RecommendationHistoryRepository
 from backend.app.recommendation.infrastructure.sqlalchemy_impacts import SqlAlchemyCanonicalImpactRepository
 from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import (
     SnapshotIntegrityError,
@@ -89,12 +92,31 @@ def recommend(
     payload: Annotated[RecommendationRequest, Body()],
     settings: Annotated[Settings, Depends(get_settings)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
+    actor: Annotated[str | None, Depends(optional_authenticated_phone)],
+    request: Request,
 ) -> RecommendationResponse:
     if db is None:
         raise ApiError(
             status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Recommendation catalogue is unavailable."
         )
-    return _recommend_from_session(db, payload.session_id)
+    result = _recommend_from_session(db, payload.session_id)
+    if actor is not None:
+        if request.cookies.get(f"{QUESTIONNAIRE_PROOF_COOKIE_PREFIX}{payload.session_id}") != "1":
+            raise ApiError(
+                status_code=403, code=ErrorCode.FORBIDDEN, message="Recommendation history access is not allowed."
+            )
+        try:
+            RecommendationHistoryRepository(db).save(actor, payload.session_id, result)
+            db.commit()
+        except PermissionError as error:
+            db.rollback()
+            raise ApiError(
+                status_code=403, code=ErrorCode.FORBIDDEN, message="Recommendation history access is not allowed."
+            ) from error
+        except Exception:
+            db.rollback()
+            raise
+    return result
 
 
 def _recommend_from_session(db: Session, session_id: str) -> RecommendationResponse:
