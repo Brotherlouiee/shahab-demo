@@ -14,6 +14,7 @@ from sqlalchemy import (
     Boolean,
     CheckConstraint,
     DateTime,
+    Float,
     ForeignKey,
     ForeignKeyConstraint,
     Integer,
@@ -356,3 +357,55 @@ class QuestionnaireAnswer(Base):
     )
     question_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("questions.question_id"), nullable=False)
     answer_option_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("answer_options.answer_option_id"), nullable=False)
+
+
+class RecommendationHistoryRun(Timestamped, Base):
+    """Immutable, account-owned record of one successful recommendation response."""
+
+    __tablename__ = "recommendation_history_runs"
+    __table_args__ = (UniqueConstraint("questionnaire_session_id", name="uq_recommendation_history_session"),)
+    recommendation_history_run_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    owner_phone: Mapped[str] = mapped_column(ForeignKey("user_profiles.phone"), nullable=False)
+    questionnaire_session_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("questionnaire_sessions.questionnaire_session_id"), nullable=False
+    )
+    data_version: Mapped[str] = mapped_column(String(100), nullable=False)
+    config_version: Mapped[str] = mapped_column(String(100), nullable=False)
+
+
+class RecommendationHistoryItem(Base):
+    """Stable display facts for one historical result item; never re-read from mutable serving data."""
+
+    __tablename__ = "recommendation_history_items"
+    __table_args__ = (
+        UniqueConstraint("recommendation_history_run_id", "section", "display_order", name="uq_history_item_order"),
+        CheckConstraint("section IN ('ranked', 'low', 'review')", name="ck_history_item_section"),
+        CheckConstraint("display_order >= 0", name="ck_history_item_display_order"),
+    )
+    recommendation_history_item_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    recommendation_history_run_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("recommendation_history_runs.recommendation_history_run_id"), nullable=False
+    )
+    section: Mapped[str] = mapped_column(String(30), nullable=False)
+    display_order: Mapped[int] = mapped_column(Integer, nullable=False)
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id"), nullable=False
+    )
+    lender_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    loan_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    bank_logo_reference: Mapped[str | None] = mapped_column(String(512))
+    compatibility_score: Mapped[float | None] = mapped_column(Float)
+    compatibility_reason: Mapped[str | None] = mapped_column(Text)
+    max_amount_tomans: Mapped[float | None] = mapped_column(Numeric(18, 2))
+    monthly_installment_tomans: Mapped[float | None] = mapped_column(Numeric(18, 2))
+    max_repayment_months: Mapped[int | None] = mapped_column(Integer)
+    interest_rate_percent: Mapped[float | None] = mapped_column(Numeric(8, 4))
+
+
+class RecommendationHistoryItemReason(Base):
+    __tablename__ = "recommendation_history_item_reasons"
+    recommendation_history_item_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("recommendation_history_items.recommendation_history_item_id"), primary_key=True
+    )
+    display_order: Mapped[int] = mapped_column(Integer, primary_key=True)
+    reason: Mapped[str] = mapped_column(Text, nullable=False)

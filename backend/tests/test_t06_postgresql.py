@@ -61,6 +61,14 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
             finally:
                 engine.dispose()
             with TestClient(create_app(Settings(database_url=str(DATABASE_URL)))) as client:
+                requested = client.post("/api/v1/account-access/request", json={"phone": "09000000001"})
+                self.assertEqual(requested.status_code, 200, requested.text)
+                verified = client.post(
+                    "/api/v1/account-access/verify",
+                    json={"challengeId": requested.json()["challengeId"], "code": "123456"},
+                )
+                self.assertEqual(verified.status_code, 200, verified.text)
+                headers = {"Authorization": f"Bearer {verified.json()['accessToken']}"}
                 session_id = client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
                 for question in questionnaire["questions"]:
                     response = client.put(
@@ -68,7 +76,7 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
                         json={"answerId": question["answerOptions"][0]["answerId"]},
                     )
                     self.assertEqual(response.status_code, 200)
-                result = client.post("/api/v1/recommendations", json={"sessionId": session_id})
+                result = client.post("/api/v1/recommendations", headers=headers, json={"sessionId": session_id})
                 self.assertEqual(result.status_code, 200, result.text)
                 body = result.json()
                 self.assertEqual(len(body["needsReview"]), 14)
@@ -82,6 +90,15 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
                 self.assertTrue(
                     all(item["compatibilityScore"] < 0.5 for item in body["lowCompatibilityRecommendations"])
                 )
+                history = client.get("/api/v1/recommendation-history", headers=headers)
+                self.assertEqual(history.status_code, 200, history.text)
+                self.assertEqual(len(history.json()["items"]), 1)
+                stored = client.get(
+                    f"/api/v1/recommendation-history/{history.json()['items'][0]['historyId']}",
+                    headers=headers,
+                )
+                self.assertEqual(stored.status_code, 200, stored.text)
+                self.assertEqual(stored.json(), body)
                 loan_id = body["rankedRecommendations"][0]["loanId"]
                 detail = client.get(f"/api/v1/loans/{loan_id}")
                 self.assertEqual(detail.status_code, 200)

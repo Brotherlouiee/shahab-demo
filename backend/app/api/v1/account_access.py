@@ -62,6 +62,20 @@ def authenticated_phone(
         raise safe_failure(error) from None
 
 
+def optional_authenticated_phone(
+    service: Annotated[AccountAccess, Depends(access_service)],
+    authorization: Annotated[str | None, Header()] = None,
+) -> str | None:
+    """Permit anonymous recommendation while never trusting a malformed token."""
+    if authorization is None:
+        return None
+    token = bearer_token(authorization)
+    try:
+        return service.actor(token)
+    except AccessFailure as error:
+        raise safe_failure(error) from None
+
+
 @router.post("/request")
 def request_code(
     payload: CodeRequest, request: Request, service: Annotated[AccountAccess, Depends(access_service)]

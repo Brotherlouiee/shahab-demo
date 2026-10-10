@@ -45,6 +45,17 @@ async function request(path, { body, method = "GET", authorize = false } = {}) {
   return response.status === 204 ? null : response.json();
 }
 
+export function authorizedRequest(path, options) { return request(path, { ...options, authorize: true }); }
+
+export function authenticatedHeaders() {
+  if (!accessToken || Date.now() >= expiresAt) throw new ProfileApiError(401);
+  return { Authorization: `Bearer ${accessToken}` };
+}
+
+export function optionalAuthenticatedHeaders() {
+  return accessToken && Date.now() < expiresAt ? { Authorization: `Bearer ${accessToken}` } : {};
+}
+
 export function requestProfileCode(phone) {
   return request("account-access/request", { method: "POST", body: { phone: normalizeProfilePhone(phone) } });
 }

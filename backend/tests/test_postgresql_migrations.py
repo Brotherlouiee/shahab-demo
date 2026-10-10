@@ -32,6 +32,9 @@ EXPECTED_TABLES = {
     "answer_category_compatibilities",
     "serving_catalogue_versions",
     "serving_catalogue_members",
+    "recommendation_history_runs",
+    "recommendation_history_items",
+    "recommendation_history_item_reasons",
 }
 EXPECTED_INDEX = "ix_loan_products_lender_id"
 

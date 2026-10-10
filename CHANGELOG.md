@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T079:** Authenticated recommendation responses are persisted once per questionnaire session as immutable, owner-scoped PostgreSQL history. The authenticated menu now links to paginated recommendation history; cards show the server-created Tehran date/time and ranked-result count. Reopening a run uses the existing result UI without rescoring, keeps all three partitions and returns from loan details to that history entry. Anonymous sessions remain transient and the 30-minute questionnaire retention policy is unchanged.
+
 - **US-09.T078:** The option-card border on `/question/2` is 30% shorter (117px to 82px at the supported mobile viewport), with no change to options, typography, actions, routes, or other questionnaire cards.
 
 - **US-09.T077:** The supplied vector Shahab mark replaces the previous application logo everywhere it is rendered. Existing logo elements, dimensions, layout classes, spacing and page behaviour are unchanged.
