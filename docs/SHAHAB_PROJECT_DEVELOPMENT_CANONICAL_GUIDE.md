@@ -834,7 +834,58 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 **خارج از scope:** provider OTP، ورود/هویت واقعی، role/access control، API جدید، حساب کاربری پایدار سمت سرور، دادهٔ وام و سند تداوم.
 
+## US-09.T081 — مستندات آنلاین و قابل اشتراک API (تعریف تسک، ۲۰۲۶-۱۰-۱۰)
+
+**وضعیت:** بررسی امکان‌پذیری انجام شده؛ این بخش تعریف کار است و ادعای پیاده‌سازی یا انتشار نیست. به درخواست مالک، این تسک پیش از US-09.T07 اجرا می‌شود. شناسهٔ T07 و gate استقرار حذف یا بسته نمی‌شود.
+
+### هدف و مبنای فعلی
+
+یک مرجع نسخه‌دار برای همهٔ APIهای پیاده‌سازی‌شده ایجاد کن که دیگران بتوانند آنلاین ببینند و قراردادهای مجاز را در Postman وارد کنند؛ API طراحی‌شده ولی پیاده‌سازی‌نشده را فعال نشان نده.
+
+FastAPI فعلی در محیط غیرproduction مسیرهای /docs، /redoc و /api/v1/openapi.json دارد؛ production آن‌ها را با docs_enabled غیرفعال می‌کند. از app.openapi() و قرارداد واقعی routeها به‌عنوان منبع واحد استفاده کن؛ Swagger و Postman را با دو قرارداد دستی مستقل نگهداری نکن.
+
+### ترتیب و حدود اجرا
+
+۱. پیش از تغییر، AGENTS.md، سند جامع، TASK_EXECUTION_PROTOCOL.md و قراردادهای API مرتبط را بخوان. routeها و آزمون‌های OpenAPI موجود را inventory کن و زمان مراحل را از ابتدا ثبت کن.
+۲. همهٔ عملیات فعلی، شامل health/readiness، loans، questionnaire، recommendations، account-access، profiles و recommendation-history را با method/path، purpose، ورودی، پاسخ، خطا و نوع دسترسی فهرست کن. پوشش کامل با inventory اثبات شود؛ تعداد را حدس نزن. مسیر داخلی یا حساس باید در مرجع محدود مستند شود، نه الزاماً در نسخهٔ عمومی.
+۳. خروجی OpenAPI معتبر و قابل بازتولید از کد بساز. revision/schema version، operationIdهای یکتا، tags، مثال‌های مصنوعی، پاسخ خطای امن و security schemes مطابق رفتار واقعی را ثبت کن. اگر annotation قرارداد ناقص است، فقط اصلاح مستندسازی سازگار انجام بده؛ منطق، مالکیت، endpoint یا پاسخ runtime را بی‌دلیل تغییر نده.
+۴. یک صفحهٔ مستقل Swagger UI برای مستندات آنلاین از همان schema آماده کن؛ پیش از T07 نمایش مستندات مجاز است اما supportedSubmitMethods=[] باشد تا عملیات واقعی از صفحه اجرا نشود. tryItOutEnabled=false به‌تنهایی غیرفعال‌سازی کامل نیست. نسخهٔ دارایی‌ها pin شود و ارسال schema به validator خارجی بدون نیاز/اجازه انجام نشود.
+۵. از همان schema یک Postman Collection سازگار و environment template با baseUrl و متغیرهای خالی بساز یا با ابزار استاندارد وارد کن؛ تکرار method/path میان دو خروجی را بررسی کن. collection قابل import/share باشد؛ متغیر مشترک حاوی token، cookie، شماره واقعی، sessionId واقعی یا secret نباشد.
+۶. راهنمای اشتراک‌گذاری خصوصی با افراد مجاز و نسخهٔ عمومی پالایش‌شده را ثبت کن. برای انتشار حساب Postman، workspace و سطح دسترسی مالک لازم است؛ بدون آن collection و دستور انتشار را کامل تحویل بده، اما لینک آنلاین Postman ادعا نکن. Swagger آنلاین مسیر مستقل قابل تحویل است و به خرید SwaggerHub یا حساب Postman وابسته نیست.
+۷. مقصد پیشنهادی، مسیر مستقل /api-docs/ در سایت مستندات یا Netlify انتخاب‌شدهٔ مالک است؛ routing آن با SPA و /api/v1 تداخل نداشته باشد. انتشار واقعی مطابق مجوز و runbook محیط انجام شود؛ اگر فقط artifact آماده است، بخش لینک آنلاین Done نیست. این تسک انتشار مستندات است و provisioning بک‌اند/DB یا تکمیل T07 نیست.
+۸. در T07، base URL واقعی، proxy/root_path، TLS و دسترسی مرورگر را بررسی کن؛ Try it out فقط برای محیط آزمایشی مجاز و با همان کنترل‌های واقعی احراز هویت/مالکیت فعال شود. مستندات نباید نقش bypass API داشته باشند. محدودیت cookie/proof questionnaire و restore account را صریحاً توضیح بده؛ مثال bearer به‌تنهایی را جایگزین proof cookie ندان.
+
+### حفاظت از داده و محیط
+
+- برای نمونه‌ها فقط دادهٔ مصنوعی استفاده کن؛ هیچ export دیتابیس، لاگ، credential، شماره کاربر، پاسخ خام واقعی یا token در Git/collection/docs وارد نشود.
+- مستندات APIهای مالک‌محور می‌توانند schema را نشان دهند؛ نمایش schema مجوز خواندن داده نیست. APIهای مدیریتی/جزئیات داخلی حساس در نسخهٔ عمومی منتشر نشوند.
+- انتشار Postman docs عمومی ممکن است مقادیر shared environment را هم منتشر کند؛ قبل از انتشار، export نهایی را بررسی کن. visibility را صریح مشخص کن؛ لینک خصوصی و public به‌جای هم معرفی نشوند.
+- mock OTP فقط local/test است؛ برای تست مستندات، آن را در staging/production فعال نکن. کنترل فعلی خاموش‌بودن docs در production حفظ شود.
+- migration، scoring، دادهٔ PUBLISHED، retention، UI محصول، پروفایل یا نشست با این تسک تغییر نکند؛ مستندات مستقل از طراحی صفحات کاربر باشند.
+
+### معیار پذیرش و تست متناسب
+
+- inventory همهٔ method/pathهای ثبت‌شده با مرجع کامل هم‌خوان است؛ موارد خارج از نسخهٔ عمومی با دلیل ثبت‌اند.
+- schema معتبر، operationIdها یکتا، نمونه‌ها مطابق قرارداد و خروجی تولید مجدد بدون drift است؛ قیاس CI با خروجی تولیدشده مانع کهنه‌شدن docs شود.
+- Collection در Postman قابل import است و متغیرها/دسترسی واقعی را درست توضیح می‌دهد؛ import را صرفاً از روی JSON ظاهراً معتبر موفق اعلام نکن.
+- صفحهٔ آنلاین منتخب با HTTPS و لینک قابل اشتراک در مرورگر واقعی باز می‌شود، schema و assetها بارگیری می‌شوند و پیش از T07 هیچ درخواست اجرایی به API ارسال نمی‌کند.
+- URL localhost لینک آنلاین برای دیگران نیست. لینک docs آنلاین، دسترسی به API واقعی و تست API زنده سه وضعیت جدا هستند.
+- آزمون نزدیک: پوشش route/security/schema، عدم secret/داده واقعی و browser smoke صفحهٔ docs. بدون اثر runtime، full E2E محصول را بی‌دلیل تکرار نکن؛ gateهای مصوب CI همچنان لازم‌اند.
+- README/API docs، فرمان تولید/به‌روزرسانی، runbook انتشار/بازگشت، CHANGELOG و checkpoint با revision و نتیجهٔ واقعی ثبت شوند. سند تداوم فقط طبق قاعدهٔ story یا دستور صریح مالک تغییر کند.
+- تحویل: لینک مستندات آنلاین منتخب، فایل OpenAPI و collection/template، پوشش routeها، شواهد بررسی، محدودیت Postman/account یا API زنده، SHA/PR و جدول زمان. انتشار فیزیکی APIها روی Postman/Swagger ادعا نشود؛ این ابزارها مستندات و client هستند.
+
+### منابع بررسی امکان‌پذیری
+
+- FastAPI metadata/docs: https://fastapi.tiangolo.com/tutorial/metadata/
+- Swagger UI configuration: https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
+- Postman OpenAPI import: https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/
+- Postman docs publishing: https://learning.postman.com/docs/publishing-your-api/publishing-your-docs
+
+
 ### استقرار و راستی‌آزمایی محیط پایدار — `US-09.T07`
+
+**ترتیب مصوب جدید (۲۰۲۶-۱۰-۱۰):** ابتدا US-09.T081، سپس اجرای US-09.T07. مستندات آنلاینِ پیش از استقرار، جایگزین آزمون API واقعی و gate محیط پایدار نیست.
+
 
 **هدف و وابستگی:** پس از T06A، یک محیط staging با PostgreSQL دائمی و بک‌اند مستقر بساز؛ سایت Netlify را به همان API وصل کن و مسیر واقعی را روی URL در دسترس مالک محصول اثبات کن. این تسک بخشی از تحویل US-09 است؛ سبز بودن CI یا دیتابیس موقت GitHub Actions جای آن را نمی‌گیرد. انتشار production نهایی، امنیت و release gate همچنان در US-11/US-12 انجام می‌شوند.
 

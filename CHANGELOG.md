@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T081 planning:** Define shareable online Swagger/OpenAPI documentation and Postman import artifacts before US-09.T07. Separate online documentation from live API execution, preserve production docs/auth controls, and require safe examples, route coverage and drift checks. Feasibility/planning only; no runtime or publication performed.
+
+
+### Added
+
 - **Task execution protocol (2026-10-10):** Added mandatory dependency/test-environment checks, targeted pre-push verification, evidence-based CI diagnosis and measured time reporting in docs/TASK_EXECUTION_PROTOCOL.md. Root AGENTS.md and the canonical guide require it for every task without weakening existing security or quality gates. Documentation only.
 
 

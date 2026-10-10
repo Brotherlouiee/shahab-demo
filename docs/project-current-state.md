@@ -1,5 +1,18 @@
 # Project current state
 
+## US-09.T081 — API documentation feasibility / planning checkpoint (2026-10-10)
+
+- Scope: inspect FastAPI docs/config/routes and official Swagger/Postman documentation; define the new task before T07. Documentation only; implementation/publishing not started.
+- Base main: d100325c3c6fa626e08b5a4bcfe5d41e72e9e128.
+- Feasibility: existing non-production /docs, /redoc and /api/v1/openapi.json support a single OpenAPI source. Static Swagger can be hosted before live API deployment; Postman can import/share a collection derived from the same schema.
+- Decision: selected online Swagger documentation plus importable Postman artifacts; visibility and external account publishing must be explicit. All API inventory is complete in the restricted reference; public sensitive exclusions are documented.
+- Dependencies: online docs need an approved hosting/publishing path; live Try it out waits for accessible API/T07. No fake OTP enabled outside local/test, no production docs policy bypass, no raw data/secrets.
+- Validation: checked task ID uniqueness, T081-before-T07 placement, acceptance/implementation distinction and documentation-only scope. No runtime tests or deployment are claimed.
+- nextTaskId: US-09.T081 implementation after planning PR is accepted; then US-09.T07. Older next-task statements below are superseded for this owner-directed ordering.
+- Timing: phase-level timer was not started at turn entry; durations are not claimed from Git timestamps.
+
+
+
 ## Owner-directed continuity v12 checkpoint (2026-10-10) — authoritative documentation update
 
 - Scope/budget: one documentation-only PR; refresh the continuity handoff, CHANGELOG and this checkpoint. No runtime, migration, data or design edits.
