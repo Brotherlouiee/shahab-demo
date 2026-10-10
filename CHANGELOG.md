@@ -13,6 +13,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T080:** Clicking the red account-logout control now opens a centered confirmation warning. Choosing «خیر» preserves the verified session; choosing «بله» invokes the existing server-backed logout flow. No API, database, migration, scoring or retention behavior changed.
+
 - **US-09.T079 follow-up:** A signed-in user can now hide a recommendation-history card through a centered warning confirmation. The owner-scoped DELETE API records `hidden_at` instead of deleting the immutable run, items or reasons; hidden runs are absent from that user's list and detail route while remaining available for database administration. The history list uses the same no-menu account header as About and Saved Loans.
 
 - **US-09.T079 follow-up:** Recommendation-history authorization now survives a browser refresh through an HttpOnly, same-site server session cookie; no credential is persisted in browser storage. The browser that creates a questionnaire receives a separate HttpOnly proof cookie, so a session ID alone cannot be attached to an account; the database then atomically binds the verified owner before its immutable history snapshot is written. History pagination uses a stable newest-first cursor, a failed list remains an error rather than an empty state, and the successful empty state reuses the existing saved-loans artwork. Historical results retain the original result controls and no longer alter the result presentation.

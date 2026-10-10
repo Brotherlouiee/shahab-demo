@@ -1127,3 +1127,7 @@ The authenticated history write also requires the per-questionnaire HttpOnly pro
 ### US-09.T079 â€” User-hidden recommendation-history cards (2026-10-10)
 
 An authenticated user may hide one of their own recommendation-history cards after the supplied centered warning confirmation. Additive migration `a3b7c9d1e2f4` records `hidden_at`; it does not remove the immutable run, items or reasons. Owner-scoped list and detail reads exclude hidden runs, while direct database administration retains every run. The API returns `204` only for a visible run owned by the authenticated actor and returns `404` for another user's, missing or already-hidden run. The history-list header uses the shared account header, with back navigation and brand only. No scoring, PUBLISHED data, D-005, retention, continuity document or deployment behavior changes.
+
+## US-09.T080 — Account logout confirmation (2026-10-10)
+
+The authenticated sidebar’s red logout control opens a centered warning dialog before it performs any state change. Selecting «خیر» closes only that dialog and preserves the verified account session. Selecting «بله» calls the existing logout path, including its server-backed session invalidation and local account-state cleanup. The supplied danger asset is used at the reference size. API contracts, PostgreSQL data, migrations, PUBLISHED data, D-005, scoring, retention, the continuity document and deployment behavior are unchanged.
