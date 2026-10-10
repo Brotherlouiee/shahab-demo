@@ -1109,3 +1109,7 @@ Questionnaire cards use their content height on every canonical route, with an e
 ## US-09.T077 — Application logo replacement (2026-10-10)
 
 The owner-supplied Shahab SVG is the single logo asset imported by every application surface that renders the product mark. Existing image elements, CSS classes, dimensions, margins, padding, page layout and application behaviour are unchanged. The vector source preserves clarity at every rendered density. API, PostgreSQL, PUBLISHED data, D-005, scoring, retention and the continuity document are unchanged.
+
+## US-09.T078 — Question 2 compact-card height (2026-10-10)
+
+Only the compact option card used by `/question/2` changes: its vertical padding is calibrated from 27px to 9.5px, reducing the measured 430px-mobile card border height from 117px to 82px (30%). Option text, option dimensions, typography, actions, 28px action spacing, all other questionnaire cards, route mapping, session policy, API, PostgreSQL, PUBLISHED data, D-005, scoring, retention and the continuity document are unchanged.

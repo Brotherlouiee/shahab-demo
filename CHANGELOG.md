@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Fixed
 
+- **US-09.T078:** The option-card border on `/question/2` is 30% shorter (117px to 82px at the supported mobile viewport), with no change to options, typography, actions, routes, or other questionnaire cards.
+
 - **US-09.T077:** The supplied vector Shahab mark replaces the previous application logo everywhere it is rendered. Existing logo elements, dimensions, layout classes, spacing and page behaviour are unchanged.
 
 - **US-09.T076:** Questionnaire cards now use their content height with an exact 28px inset above the first option and below the last option, while their existing option rhythm is preserved; questionnaire navigation rows sit exactly 28px below each question card and 28px above the end of the page, without artificial empty page height; the home amount selector uses the shared 8px chevron geometry; and the unavailable readiness and AI-analysis actions are visibly disabled in grey.
