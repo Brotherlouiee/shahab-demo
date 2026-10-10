@@ -6,6 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- **Task execution protocol (2026-10-10):** Added mandatory dependency/test-environment checks, targeted pre-push verification, evidence-based CI diagnosis and measured time reporting in docs/TASK_EXECUTION_PROTOCOL.md. Root AGENTS.md and the canonical guide require it for every task without weakening existing security or quality gates. Documentation only.
+
+
 ### Changed
 
 - **Owner-directed continuity refresh (2026-10-10):** Version 12 reconciles the handoff with merged PR #93 and successful main CI, records profile/session/history migrations and remaining US-09.T07 deployment gate, and replaces obsolete current/next-task statements. Documentation only; no runtime, data, schema or design changes.
