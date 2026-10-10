@@ -22,7 +22,7 @@ import {
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
-import logoUrl from "../assets/shahab-logo.png";
+import logoUrl from "../assets/shahab-logo.svg";
 import folderIconUrl from "../assets/folder.svg";
 import healthIconUrl from "../assets/health.svg";
 import profileIconUrl from "../assets/profile.svg";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logoUrl from "../assets/logo.svg";
+import logoUrl from "../assets/shahab-logo.svg";
 import businessLoanUrl from "../assets/business-loan.png";
 import personLoanUrl from "../assets/person-loan.png";
 
