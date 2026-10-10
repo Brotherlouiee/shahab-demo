@@ -1,11 +1,85 @@
 # Project Continuity Document
 
-> **Document version:** 11.0
+> **Document version:** 12.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
-> **Prepared:** 2026-09-28  
-> **Repository state represented:** `main` after merge of PR #60 (`US-09.T06H`) on 2026-09-28. The authoritative reconciliation in section 0A separates completed local/code work from the still-pending real deployment gate `US-09.T07`.  
+> **Prepared:** 2026-10-10  
+> **Repository state represented:** `main` at `6d31bde1bc27ecdf1fabe3f423b660b3930f1b78`, after PR #93; section 0B is the current authoritative handoff. US-09.T07 real deployment remains unverified.
 > **Purpose:** This is the hand-off document for a new chat or engineer with no access to prior conversation history. It distinguishes implemented reality from the target architecture and from proposals not yet approved.
+
+## 0B. Owner-directed continuity reconciliation — authoritative update (2026-10-10)
+
+The owner explicitly requested this refresh after the recent changes were described as nearly complete. This authorization permits a mid-story documentation update; it does **not** declare US-09, production authentication, deployment or the project complete. The normal story-end continuity rule remains binding for future work.
+
+**Precedence:** this section and the refreshed sections 17–19 and 22 supersede older implementation/status/next-task statements. Sections 0A and 0 preserve dated checkpoints; older task tables and quality counts are historical evidence, not a current work queue. Permanent source, product, security and Golden Rules remain binding. Repository code, migrations and fresh CI must be reconciled before further work.
+
+### Repository and verification
+
+- Latest merged feature: [PR #93 — recommendation history](https://github.com/Brotherlouiee/shahab-demo/pull/93), merged 2026-10-10 at 21:22 Tehran (17:52 UTC), with 11 commits and 31 changed files.
+- Feature head: `69a0abf7b8deef4b26a8abbd7484bd4fe9ef9858`; merge/main: `6d31bde1bc27ecdf1fabe3f423b660b3930f1b78`.
+- [Feature-head CI](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38073092052) succeeded.
+- [Merged-main CI](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38073493793) succeeded in all four jobs: Quality gates, PostgreSQL migration verification, Loan details browser verification, and Profile OTP real API browser verification.
+- These runs verify their checked test scopes. They are not evidence of deployment, the owner's local database contents, or independent visual acceptance of every page. This documentation refresh does not rerun runtime tests or change application code.
+
+### Implemented capability map
+
+| Capability | Current contract / evidence boundary |
+|---|---|
+| Questionnaire and recommendation | Canonical questionnaire answers are server validated; anonymous retention remains 30 minutes. The deterministic server engine reads approved configuration and active PUBLISHED data. Results/detail/comparison are API connected. No client-owned score or fabricated catalogue data. |
+| Profile creation | Successful local/test OTP verification creates/reuses `user_profiles` before issuing access. Requesting OTP alone does not create a profile. Repeat login preserves saved fields. |
+| Personal information | Name, family name, income and job update the same owned database profile before analysis; existing gender/avatar are preserved. Failed persistence remains visible/retryable. |
+| Sidebar identity | Read the owned server profile; show the stored name, or «کاربر» for a phone-only profile. Browser display cache alone does not authorize access. |
+| Account session | PR #93 adds an HttpOnly, SameSite=Lax same-origin account cookie and `GET /api/v1/account-access/session` restoration. A valid refresh/session should reach history without unnecessary OTP. Bearer credentials are not saved in localStorage. |
+| Recommendation history | Successful authenticated results are stored atomically once per questionnaire session, with all three partitions, order, scores/reasons, data/config versions and immutable card display facts. Anonymous results remain transient. |
+| Ownership | The creator browser receives a per-questionnaire HttpOnly proof cookie. First history write requires that proof and atomically binds the session owner. Session ID alone is not ownership; reads and mutations constrain the authenticated actor. |
+| History list | Menu item «سوابق وام‌های توصیه شده» follows «سوابق درخواست وام». Cards show server creation date/time in Tehran, ranked-section count, and result navigation. Newest-first keyset pagination replaces offset pagination. |
+| Historical display | Reuses LoanResultsScreen and normal result controls with stored output; no rescoring. Result-to-detail and return paths belong to the selected historical entry. Preserve list position/pagination and original source/back behavior according to the approved flow. |
+| Empty states | A successful empty history reuses the existing saved-loans artwork. Loading, valid empty output and request/authentication failure are distinct. Zero ranked count does not mean the entire historical result is empty. |
+| Hidden histories | Owner-scoped DELETE hides a card after confirmation by setting `hidden_at`. Immutable run/items/reasons remain in the database. Hidden runs are excluded from user list/detail reads; this is not physical deletion. |
+| Bookmarked loans | Still browser-local under `/saved-loans`; recommendation history is a separate, database-backed feature. Do not conflate the two or claim bookmarks are per-account PostgreSQL records. |
+| Unavailable external actions | Real SMS, external AI analysis/readiness and bank application/provider success are not delivered by this update. Preserve approved disabled controls and do not simulate success. |
+
+### Database and API handoff
+
+Use the existing profile identity and normalized relations; do not create duplicate user/bank/loan tables. The history design deliberately snapshots the minimum card facts to protect historical display while retaining a loan-product-version foreign key. It is not permission to duplicate all API payloads or raw questionnaire answers.
+
+| Migration | Change |
+|---|---|
+| `d1a9e71b4c3f` | Existing user_profiles foundation (PR #85). |
+| `e4c7b9a1d2f3` | recommendation_history_runs, recommendation_history_items and recommendation_history_item_reasons; unique questionnaire-session run and owner/time index. |
+| `f1a2b3c4d5e6` | Nullable questionnaire session owner relation/index for atomic owner binding. |
+| `a3b7c9d1e2f4` | History hidden_at; retained data rather than physical deletion. |
+
+- Owned APIs: `GET /api/v1/profiles/me`, `PUT /api/v1/profiles`, `GET /api/v1/recommendation-history`, `GET /api/v1/recommendation-history/{historyId}`, and `DELETE /api/v1/recommendation-history/{historyId}`.
+- Missing/other-owner/hidden history is not readable; hide returns 204 only for an eligible owned visible record.
+- Database access for authorized operators follows the run/item/reason foreign keys and existing owner identity. Hidden data remains accessible to authorized database administration; no public admin/export endpoint is implied.
+- Never copy raw answers or credentials into history, URLs or logs. Questionnaire expiry is not permission to erase retained history. Review retention/cleanup against foreign keys before changing that policy.
+- Apply forward migrations according to the Docker/operations runbook. Never reset a volume, truncate data, run `docker compose down -v`, or treat destructive downgrade as routine rollback.
+
+### Authentication and operational limits
+
+- Local/test fake OTP remains `123456`, enabled by default in these environments; an explicit false setting disables it. Staging/production reject this mock. It proves development flow, not real phone ownership.
+- Challenges are bounded and expire; account capabilities expire/revoke and are stored process-locally. The restoration cookie does not make access survive API restart or provide shared multi-worker production sessions. Do not claim durable production authentication.
+- The present frontend uses same-origin credentials and a local Vite API proxy. A separately hosted API requires an approved cookie/CORS/HTTPS/CSRF arrangement; do not assume same-origin development settings automatically work across hosts.
+- ADR 0010's earlier “refresh requires login” statement is superseded by PR #93 session restoration while the server session remains valid. ADR 0011 describes the base history decision; the canonical guide's T079 follow-ups and current migrations describe later ownership/cursor/hide additions.
+- The currently observed Netlify project URL is `https://shahabfintech-ir.netlify.app/`; older `shahab-finance-demo.netlify.app` references are historical and must not be used without rechecking. No current real-URL full-stack acceptance is established by this refresh.
+
+### Recent merged work to preserve
+
+PRs #85–#87 introduced/repaired database profiles and local/test OTP; #88 restricted home to the approved hero composition; #89 delivered saved-loans empty/navigation states; #90 refined questionnaire geometry/disabled controls; #91 installed the supplied global SVG logo; #92 reduced only question-2 card height; #93 delivered history and corrective follow-ups.
+
+No unsolicited design changes are authorized. Preserve supplied icons/assets, exact page geometry, colors, text and existing controls. Reuse shared pages/components. Historical results must match the existing result page for the same data and viewport.
+
+### Next action and unresolved delivery gate
+
+1. Reconcile the owner's IDE with merged main safely: inspect local status before pull/switch; preserve uncommitted edits. Work on a new scoped branch for any further correction because PR #93 is already merged.
+2. Confirm the owner's final acceptance of the three previously reported issues: unnecessary history login, successful-empty artwork, and history-card geometry. The owner says changes are nearly complete; no unresolved failure is asserted here, but no independent visual acceptance is invented.
+3. The remaining ordered operational delivery gate is **US-09.T07**: persistent staging PostgreSQL, approved publication/import, deployed HTTPS API, Netlify integration, actual-URL questionnaire/result/detail/comparison verification, restart and rollback evidence. Select infrastructure/access/configuration with the owner rather than guessing.
+4. Do not advance to US-10 or mark US-09 complete until its full gate is evidenced. US-11 hardening and US-12 production release remain later gates.
+
+References: canonical guide T071–T079 and corrective follow-ups; CHANGELOG; ADR 0010/0011; docs/operations/docker-runbook.md; docs/runbook/production-deployment.md; docs/evidence/ and current GitHub CI. Older short-term checkpoint entries must be read as dated history, not as instructions to restart completed tasks.
+
+---
 
 ## 0A. Owner-directed continuity reconciliation — authoritative update (2026-09-28)
 
@@ -786,65 +860,37 @@ Beyond server/domain, production readiness requires:
 
 ## 17. Current Project State
 
-### Completed
-
-- US-01 through US-06 are complete and merged.
-- Persistent published-catalogue data boundary is implemented.
-- Loan detail API and frontend code are integrated and browser-tested in CI.
-- Canonical questionnaire config and canonical route adapter are complete/merged (PR #27 and #28).
-- Current quality evidence includes format/lint/typecheck, 76 backend tests, validators, secret scan, production build, migration verification and Chromium E2E in CI.
-
-### In Progress
-
-- **US-07** is the active story.
-- `US-07.T03` is the next task and has not started: short-lived anonymous session, server-side canonical answer validation/retention, no leakage in URL/logs.
-
-### Blocked / not yet available
-
-- Personalised recommendation engine awaits completed US-07.
-- Results UI/API is still prototype/static until US-08/09.
-- No public FastAPI/PostgreSQL deployment; Netlify site is frontend-only.
-- Conditions column hydration into durable serving adapter remains a known data-mapping limitation.
-- Real SMS/OTP deferred pending legal registration.
-
-### Next milestones
-
-1. Finish US-07.T03–T05.
-2. Build and prove US-08 deterministic engine.
-3. Replace static result logic through US-09.
-4. Build internal data/config controls in US-10.
-5. Complete hardening/operations (US-11), then preview/release/production (US-12).
+- **Merged foundation:** US-01 through US-08, canonical questionnaire sessions, approved catalogue/configuration, deterministic engine and live result/detail/comparison code.
+- **Merged US-09 work:** frontend refinements through PR #92; database-backed profile/mock-OTP access and authenticated recommendation history through PR #93 and its corrective commits.
+- **Verified repository gate:** merged main `6d31bde` has all four CI jobs successful (see section 0B). Do not reuse old test totals as current suite counts.
+- **Acceptance boundary:** the owner's current statement is “changes nearly complete”; final visual/local acceptance and actual hosted database state are not independently established by this document.
+- **Remaining story gate:** US-09.T07 actual deployment and real-URL/restart verification. US-09 is not declared complete; real SMS, production auth, US-10–US-12 and production release remain outside this completion claim.
 
 ---
 
 ## 18. Immediate Next Actions
 
-| Priority | Action | Reason | Dependency |
-|---|---|---|---|
-| P0 | Read complete canonical guide, current checkpoint, related ADR/data decisions and six official source files; inspect current `main` | Mandatory Golden Rule before any task | None; must precede all work |
-| P0 | Start `US-07.T03` only if capacity can close full task cycle | Session is the next sequential capability and prerequisite for UI/engine | PR #28 merged; capacity check |
-| P0 | Define/implement short-lived anonymous questionnaire session use cases and canonical answer validation | Answers currently have no backend persistence/validation | Existing canonical config and DB/session schema/ports |
-| P0 | Add retention/no-URL/no-public-log policy and tests | Protect user answers and meet US-07 acceptance | US-07.T03 scope |
-| P1 | Complete T03 docs/checkpoint/CHANGELOG/PR and green gates before T04 | Enforced task boundary | T03 implementation/tests |
-| P1 | `US-07.T04`: connect frontend to canonical config/session API; next/back/resume/incomplete state | Existing route adapter is navigation-only | T03 merged |
-| P1 | `US-07.T05`: API/route/RTL/accessibility/E2E story gate | Close US-07 before engine | T04 merged |
-| P2 | Resolve/plan conditions-source persistence mapping through data/import path | Detail page should eventually show approved condition bullets | Must fit correct data-pipeline scope; do not patch UI fallback |
-| P3 | Record an explicit deployment/security ADR for BFF/service-token/session/rate-limit strategy | Needed before public full-stack hosting, but not before the ordered US-07/08 work unless a deployment task is approved | Product-owner decision and deployment host choice |
+| Priority | Action | Boundary |
+|---|---|---|
+| P0 | Safely synchronize the owner's local IDE with merged main and verify required migrations | Inspect local edits; no discard, forced push or database reset. |
+| P0 | Record final owner acceptance of history access, empty state and card geometry | Correct only observed defects in a new scoped PR; preserve exact approved design. |
+| P1 | Complete US-09.T07 on explicitly selected real infrastructure | Persistent database/publication, API HTTPS, Netlify, real URL and restart evidence. |
+| P1 | Record staging/rollback and relevant security/session decisions | Local mock and process-local account store are not production authentication. |
+| P2 | Close US-09 only after the complete story gate; then select US-10 work | Do not restart completed US-07/08 tasks from old checkpoints. |
 
 ---
 
 ## 19. Open Questions
 
-| Question | Importance | Options / current state |
-|---|---|---|
-| What exact retention duration and deletion behaviour should anonymous questionnaire sessions use? | Required for US-07.T03 privacy/session contract | Short-lived session with explicit TTL; exact duration pending product decision. |
-| Is anonymous resume required across browser/device or only same-browser session? | Impacts token/cookie/session design and privacy | US-07 says resume is needed; scope of cross-device persistence remains pending. |
-| How should `conditions_source_text` be carried from approved import into durable serving `LoanDetail`? | Needed for live conditions display | Must be fixed at data/import/persistence boundary; no UI fallback. |
-| What host/database provider will run staging and production FastAPI/PostgreSQL? | Required for real public operation | Not selected. Netlify remains frontend hosting; backend requires a real compatible host/database. |
-| Should BFF/proxy architecture be adopted for public API access? | Needed for server-side secret and abuse-control design | Proposed but not yet approved/implemented. |
-| When/which user authentication should be introduced? | Determines true per-user authorisation, not merely anonymous abuse limits | Future scope; anonymous session is first. |
-| How/when will real bank data be refreshed and approved? | Determines live catalogue freshness | Import/approval foundation exists; operational cadence/source access pending. |
-| Is a later Shahab financial super-app expansion in scope? | Affects long-term brand/domain boundaries | Strategic hypothesis only; do not expand current implementation prematurely. |
+| Question | Current state |
+|---|---|
+| Has the owner accepted the final history UI/flow in the updated local stack? | Nearly complete per owner; explicit final acceptance remains to be recorded. |
+| Which server/domain/access and secret management will support T07? | Not established by this documentation refresh. |
+| Does the actual Netlify URL reach the selected persistent API/database? | Requires fresh real-URL acceptance; CI success is insufficient. |
+| When will real SMS/provider credentials and production authentication be enabled? | Deferred; no API key or production activation supplied/claimed here. |
+| How will production sessions, cross-host cookie/CSRF and multi-worker/restart behavior be handled? | Must be resolved before production; current account state is process-local. |
+| What retention/erasure policy applies to persistent recommendation history? | Raw answers keep their 30-minute policy; hide preserves records. Formal durable-history privacy/retention and authorized erasure require explicit decisions. |
+| What operational cadence updates/approves catalogue data? | Existing versioned publication rules remain; operational cadence needs release planning. |
 
 ---
 
@@ -853,7 +899,7 @@ Beyond server/domain, production readiness requires:
 ### Critical distinctions a new chat must keep
 
 1. **“Connected in code” is not “deployed live.”** Loan details are connected to API in code and CI; public Netlify has no live FastAPI/PostgreSQL.
-2. **Questionnaire route mapping is not answer persistence.** PR #28 only maps pages to canonical IDs and corrects navigation. It does not send/store answers or calculate recommendations.
+2. **Questionnaire route mapping is not answer persistence.** PR #28 was navigation-only; later US-07/08/09 work implements server answer persistence and recommendation. Do not infer current status from PR #28 alone.
 3. **Published data boundary is real.** Do not repair an empty detail field by returning raw/staging/prototype data.
 4. **Neutral is not zero.** Neutral removes a non-core unknown variable from both contribution and denominator; it does not penalise or reward the loan.
 5. **Core unknown is exclusion, not neutral.** No score or rank for those loans.
@@ -894,33 +940,23 @@ Beyond server/domain, production readiness requires:
 
 ## 22. Instructions For New Chat
 
-1. Read this entire Project Continuity Document before suggesting or making any change.
-2. Before work, inspect current repository `main`; this document reflects PR #28 merge, but repository state is authoritative if later changes exist.
-3. Read the complete `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` and follow the Three Golden Rules. For any engine/data/questionnaire/result/database work, reread all six official `.unitext` sources and relevant ADR/data decision files.
-4. Treat all items labelled **Confirmed** as binding. Do not change them without an explicit, documented product decision explaining previous decision, reason for change, new decision and impact.
-5. Treat **Under discussion**, **Hypothesis/Proposal** and **Pending Decision** items as non-final; do not implement them silently.
-6. Continue from `US-07.T03`, not from US-08 or deployment, unless the product owner explicitly changes priority and the dependency/impact is documented.
-7. Work in a fresh feature branch from `main`. Keep one ordered task per small PR; do not push directly to `main`.
-8. At task start, create/refresh a checkpoint with capacity estimate, dependencies, acceptance criteria and test plan. If capacity cannot close implementation + test + docs + PR, split before changing code.
-9. At task end, run applicable nearby tests and full required quality gates; update docs, `CHANGELOG.md` and `docs/project-current-state.md`; open a PR and report only evidence-backed completion.
-10. Never use prototype/static data to pretend that backend/recommendation/deployment is operational. Explicitly distinguish code/CI integration from public live deployment.
-11. Never place secrets in client code, Git, chat or logs. Do not use a frontend-visible API key as backend protection.
+1. Read this document, especially authoritative section 0B, and inspect fresh main/PR/CI state. This handoff represents PR #93, not the older PR #28 or #60 snapshots.
+2. Read the complete canonical guide and preserve the Three Golden Rules. For engine/data/questionnaire/result/database changes, read required official sources and related ADR/data decisions.
+3. Preserve confirmed product/data/security decisions, particularly D-005, PUBLISHED-only serving, unknown-core exclusions and deposit neutral policy.
+4. Do not restart completed US-07 or US-08 work. Resolve any confirmed owner acceptance defects, then pursue the remaining US-09.T07 gate unless the owner explicitly changes priority.
+5. Use a fresh scoped branch from current main; protect local IDE edits. PR #93 is merged, so further implementation needs a new PR.
+6. Separate database-backed recommendation history from browser-local bookmarks; preserve owner proof, atomic idempotency, immutable output and hidden-run retention.
+7. Keep loading, valid empty response and request/authentication error separate; reuse supplied empty-state assets and existing result components without unsolicited design changes.
+8. Update relevant docs, CHANGELOG and current checkpoint with evidence, then verify required CI on the final commit. Continuity normally updates at story completion; this v12 refresh was explicitly requested by the owner.
+9. Do not claim CI/local code equals deployment. Require real infrastructure, URL, restart and rollback evidence for the deployment/story gate.
+10. Keep credentials out of code, URLs, logs and browser storage. Fake OTP and process-local account access are development-only; real SMS/production security remain deferred.
 
 ---
 
 ## Audit of This Continuity Document
 
-### Audit questions and result
-
-| Audit question | Result |
-|---|---|
-| Can a new chat identify the exact next task without history? | **Yes.** `US-07.T03` is explicitly identified, with dependency, objective and required boundary. |
-| Are current implementation status and deployment status separated? | **Yes.** The document distinguishes implemented code/CI, public frontend hosting and missing live FastAPI/PostgreSQL. |
-| Are irreversible/product-critical decisions preserved? | **Yes.** Source hierarchy, Golden Rules, Q5 correction, neutral/exclusion policy, serving boundary, route contract, safe rendering and non-credit-scoring boundary are recorded. |
-| Are changed decisions and their impacts recorded? | **Yes.** The decision log includes the corrective serving adapter, route-12 correction and prior prototype/data limitations. |
-| Does it prevent common rework? | **Yes.** It states task order, PR status, known limitations, rejected shortcuts and strict distinctions between route mapping, answer persistence and recommendation engine. |
-| Are open matters honestly marked rather than invented? | **Yes.** Session retention, deployment provider, BFF, conditions hydration, auth and expansion scope are pending. |
-
-### Final audit conclusion
-
-This document is sufficient to continue the project without the original conversation **provided the new chat first reconciles it with current `main` and the canonical guide**. The only intentionally unresolved items are labelled pending/under discussion; they must be decided explicitly rather than inferred.
+- Version 12 reconciles main after PR #93, records both feature and merge CI evidence, and removes the obsolete US-07.T03 next-action queue from current sections.
+- Historical checkpoints are retained with explicit precedence; their old status, host names and test counts do not define current reality.
+- Profile creation/persistence, session restoration, questionnaire ownership proof, history snapshot/cursor/hide behavior, migrations and bookmark separation are documented.
+- No full US-09 completion, production authentication, deployed database or final independent visual acceptance is asserted.
+- Next work is evidence-based owner acceptance and US-09.T07 real deployment; no runtime, schema, data, scoring or design changes are made by this document.
