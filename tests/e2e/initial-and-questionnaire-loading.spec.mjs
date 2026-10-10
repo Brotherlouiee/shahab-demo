@@ -43,6 +43,7 @@ test("shows the approved guest and local-OTP account menus", async ({ page }) =>
   await expect(page.getByRole("button", { name: "پروفایل کاربر" }).locator(".hp-sidebar-icon")).toHaveCSS("stroke", "rgb(0, 0, 0)");
 
   await page.getByRole("button", { name: "خروج از حساب کاربری" }).click();
+  await page.getByRole("alertdialog").getByRole("button").last().click();
   await page.locator("button.hp-menu-button").click();
   await expect(page.getByRole("button", { name: "ورود کاربر" })).toBeVisible();
 });
