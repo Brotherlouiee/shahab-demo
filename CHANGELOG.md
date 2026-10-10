@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T081 planning:** Define a shareable online Swagger or Postman surface for real manual testing of every implemented API before US-09.T07. Include the required restricted HTTPS API/PostgreSQL test environment and reuse it in T07; preserve production docs/auth controls, safe examples, complete operation coverage and drift checks. Feasibility/planning only; no runtime or publication performed.
+
+
+### Added
+
 - **Task execution protocol (2026-10-10):** Added mandatory dependency/test-environment checks, targeted pre-push verification, evidence-based CI diagnosis and measured time reporting in docs/TASK_EXECUTION_PROTOCOL.md. Root AGENTS.md and the canonical guide require it for every task without weakening existing security or quality gates. Documentation only.
 
 
