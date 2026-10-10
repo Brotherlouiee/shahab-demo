@@ -3149,8 +3149,10 @@ button {
 
 .hp-question-card.is-compact {
   min-height: 0;
-  padding-top: 27px;
-  padding-bottom: 27px;
+  /* Question 2 has two single-line options: 9.5px vertical padding makes its
+     117px card 82px tall (a 30% reduction) without affecting any other card. */
+  padding-top: 9.5px;
+  padding-bottom: 9.5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
