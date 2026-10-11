@@ -13,3 +13,5 @@ The app defaults to a deny-all grant repository. No operator is seeded and no
 phone allowlist, shared bearer credential, role endpoint or grant migration is
 introduced. T02/T03/T04 retain their independent integration/audit/authentication
 acceptance. See `docs/operations/authorization.md` for the threat boundaries.
+
+T02 coordination is `data_pipeline/application/operations.py`; it depends inward on this pure authority. See `docs/operations/data-use-cases.md`. No memory adapter is installed in app composition.

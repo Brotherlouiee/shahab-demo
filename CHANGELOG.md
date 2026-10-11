@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-10.T02:** Authorized internal import/review/prepare/approve/publish/rollback use cases reuse the pipeline. Stored clean-import linkage prevents partial or mismatched approval; rollback uses an atomic expected-pointer contract and preserves original evidence. Local/test adapters and targeted security/transition tests accompany [the contract](docs/operations/data-use-cases.md). Owner-authorized independent T02 sequencing is recorded; production adapters/audit/tooling remain T03/T04. No UI/API/schema/scoring/deployment change.
+
 - **US-10.T01:** Explicit least-privilege import/review/approval/publication/rollback/config permissions and a server-owned current-grant authorization port. Unknown, expired, revoked, mismatched and mock/customer identities fail closed; app composition defaults to deny all. Role/permission and public escalation tests, boundary checks and [operations security documentation](docs/operations/authorization.md) accompany it. No management endpoint, operator credential provider, schema/migration, scoring or UI change; T02–T04 retain their enforcement/audit/tool responsibilities.
 
 ### Changed

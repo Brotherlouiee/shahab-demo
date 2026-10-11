@@ -65,3 +65,7 @@ create a duplicate serving version: the later durable import adapter must reject
 the duplicate version/source identity atomically. If input is ambiguous, review
 its typed evidence; never replace it with a guessed scalar merely to make the
 command exit successfully.
+
+## Internal use-case integration — US-10.T02
+
+For future guarded tools, use `InternalDataOperations`, not a direct low-level publication call. Review stored import IDs and retain every issue; correct input in a new import. Require exact hash/parser/rows linkage before approval. Rollback must specify the expected active version, verified actor, reason and UTC decision, and preserve prior approval. These new contracts currently have local/test adapters only; durable append-only storage and real PostgreSQL transaction verification (T03), and verified internal tooling (T04), are required before exposure. Existing CLI remains OS-trusted.

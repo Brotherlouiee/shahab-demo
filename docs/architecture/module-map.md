@@ -79,3 +79,7 @@ backend/app/accounts/phone.py normalizes full phone identities; profile_schema.p
 
 `backend/app/api/documentation.py` enriches FastAPI's generated schema with the existing transport error/auth contracts; `DocumentedFastAPI` changes descriptions only. `main.py` serves pinned, cookie-preserving Swagger and respects the proxy root for schema loading. `api_docs_include_operations` controls health visibility in non-production docs, never runtime authorization. `scripts/export_api_docs.py` emits deterministic OpenAPI, Postman and route inventory without DB startup or user data; CI rejects drift. No ORM, migration, data, scoring, application UI or authentication implementation changed. [Online test runbook](../runbook/api-testing.md) records the hosting blocker and existing publication reuse.
 
+
+## US-10.T02 internal data coordinator
+
+`data_pipeline/application/operations.py` calls the pure operations authority before every review or mutation, then reuses manifest preparation/publication. Its review port retains immutable evidence; infrastructure memory adapters are local/test only. Version/import linkage and atomic expected-pointer rollback preserve prior evidence. No reverse operations → pipeline/ORM dependency, public route, production adapter or schema change is introduced; durable audit and verified tooling remain T03/T04.
