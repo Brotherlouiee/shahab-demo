@@ -10,6 +10,13 @@ ROOT = Path(__file__).parents[1]
 BACKEND_ROOT = ROOT / "backend"
 
 FORBIDDEN_PREFIXES = {
+    "backend.app.operations": (
+        "backend.app.api",
+        "backend.app.core",
+        "backend.app.infrastructure",
+        "backend.app.accounts",
+        "backend.app.data_pipeline",
+    ),
     "backend.app.domain": (
         "backend.app.api",
         "backend.app.core",

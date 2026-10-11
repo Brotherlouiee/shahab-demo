@@ -30,6 +30,13 @@ The root `src/` Vite application is the active prototype and remains operational
 
 ## Dependency direction
 
+`backend/app/operations/` owns the pure role/permission policy and current-grant
+authorization port. It imports no HTTP, ORM, customer account or pipeline code.
+`main.py` composes a deny-all authorizer until T02/T04 connect reviewed internal
+use cases and credentials. The boundary validator rejects reversed dependencies
+to API/core/infrastructure/accounts/data_pipeline. See
+[operations authorization](../operations/authorization.md).
+
 `frontend presentation → application/API contract → backend application → backend domain`.
 
 Infrastructure implementations may depend on application ports and domain types, never the reverse. `backend/app/main.py` is the FastAPI composition root and must not import feature/domain implementations directly. `scripts/validate_import_boundaries.py` enforces prohibited reverse imports and local import cycles. The active root prototype has not yet been migrated to this graph; each later move requires tests and a focused commit.

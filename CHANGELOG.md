@@ -8,6 +8,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-10.T01:** Explicit least-privilege import/review/approval/publication/rollback/config permissions and a server-owned current-grant authorization port. Unknown, expired, revoked, mismatched and mock/customer identities fail closed; app composition defaults to deny all. Role/permission and public escalation tests, boundary checks and [operations security documentation](docs/operations/authorization.md) accompany it. No management endpoint, operator credential provider, schema/migration, scoring or UI change; T02–T04 retain their enforcement/audit/tool responsibilities.
+
+### Changed
+
+- **Owner sequencing decision (2026-10-11):** Canonical guide permits independent US-10.T01 development after dependency review while US-09.T07 awaits server purchase and online US-09.T081 remains open. Later task dependencies must be separately recorded; US-09 completion, deployment/security gates and the continuity document are unchanged.
+
+### Added
+
 - **US-09.T081 implementation checkpoint:** Added a complete generated OpenAPI/Postman contract, safe synthetic examples, cookie-preserving pinned Swagger, opt-in restricted health schemas, targeted contract/browser checks and CI drift validation. Manual testing, operation coverage and restricted hosting runbook are included. Existing production docs/auth/ownership, data/schema/migrations, scoring and UI are unchanged. Online HTTPS/PostgreSQL publication and two-tester verification remain blocked by missing hosting/access; T081 is not Done.
 
 ### Added
