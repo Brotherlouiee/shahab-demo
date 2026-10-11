@@ -8,6 +8,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- US-10.T04: ابزار داخلی محافظت‌شده با تأیید authority HTTPS/MFA و مجوز تازه،
+  اتصال تراکنشی materializer رسمی به audit و آزمون PostgreSQL با نقش محدود.
+  [ADR 0007](docs/adr/0007-protected-operations-tool.md). بدون API عمومی یا migration جدید.
+
+### Added
+
 - US-10.T03: PostgreSQL review/version adapters and append-only operations decisions;
   additive `b4d8e1f2a3c5` migration, approval view and real transaction/race verification.
   [ADR 0006](docs/adr/0006-durable-operations-audit.md). No public transport or live catalogue changes.

@@ -59,6 +59,8 @@ jobs:
       - run: python -m unittest backend.tests.test_t06_postgresql
       - name: Verify durable operations audit and transaction races
         run: python -m unittest backend.tests.test_operations_postgresql
+      - name: Verify protected operations tool with least-privilege PostgreSQL
+        run: python -m unittest backend.tests.test_operations_tool_postgresql
   loan-details-e2e:
     name: Loan details browser verification
     runs-on: ubuntu-24.04

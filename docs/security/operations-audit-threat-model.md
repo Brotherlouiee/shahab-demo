@@ -21,3 +21,11 @@ protect audit reads. External tamper-proof signing/export is not claimed.
 A failed or denied command raises without success-event; no audit persistence
 claim is made when PostgreSQL is unavailable. T04's transport should record a
 redacted denial/security log separately, not fake a committed state transition.
+
+## T04 اتصال ابزار
+
+CLI از HTTPS introspection با issuer/audience/expiry/MFA و grant تازه استفاده
+می‌کند. payload نمی‌تواند actor/role/source/config تعیین کند. redirect و TLS
+نامعتبر رد؛ خطا و خروجی بدون credential هستند. DB role غیرمالک الزامی و حساب
+مشتری خارج از grant است. public materializer و audit در یک transaction هستند.
+محدودیت provider و scope رسمی در operations/protected-tool.md ثبت شده است.

@@ -59,3 +59,9 @@ upgrades from the previous head, retains an existing lender fixture, exercises
 transactions/concurrency/append-only constraints and downgrades afterward.
 The existing PostgreSQL CI job runs it. No SQLite substitute; local skips are
 reported as skips and do not qualify for readiness.
+
+## US-10.T04 اتصال فعال ابزار
+
+protected-tool.md و ADR 0007 جای وعدهٔ اتصال آینده را برای منبع رسمی فعلی
+می‌گیرند: projection همان materializer در transaction audit اجرا می‌شود.
+source/config جدید و provider production هنوز خودکار فعال نیستند.

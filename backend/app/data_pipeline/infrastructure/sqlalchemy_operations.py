@@ -8,6 +8,7 @@ across connections. Public serving projections and application wiring are untouc
 from collections.abc import Callable
 from dataclasses import replace
 from datetime import UTC, datetime
+from typing import Protocol
 from uuid import UUID
 
 from sqlalchemy import select
@@ -29,6 +30,13 @@ from backend.app.data_pipeline.infrastructure.operations_codec import (
 from backend.app.infrastructure.db.models import AuditEvent, OperationsImport, OperationsVersion, OperationsWorkflowHead
 
 SessionFactory = Callable[[], Session]
+
+
+class ServingProjection(Protocol):
+    """Trusted public projection bridge; invoked under the same workflow transaction."""
+
+    def publish(self, session: Session, version: ServingDataVersion, decision: ApprovalRecord) -> None: ...
+    def rollback(self, session: Session, target: ServingDataVersion, current: ServingDataVersion) -> None: ...
 
 
 def _head(session: Session, *, lock: bool = False) -> OperationsWorkflowHead:
@@ -176,8 +184,9 @@ class SqlAlchemyImportReviewRepository:
 class SqlAlchemyServingVersionRepository:
     """Durable internal version workflow; pointer plus audit commit together."""
 
-    def __init__(self, sessions: SessionFactory) -> None:
+    def __init__(self, sessions: SessionFactory, *, projection: ServingProjection | None = None) -> None:
         self._sessions = sessions
+        self._projection = projection
 
     def get_current_published(self) -> ServingDataVersion | None:
         with self._sessions() as session, session.begin():
@@ -262,6 +271,8 @@ class SqlAlchemyServingVersionRepository:
                 or stored.approval is None
             ):
                 raise ValueError("publication target is stale or unapproved")
+            if self._projection is not None:
+                self._projection.publish(session, stored, decision)
             _event(
                 session,
                 "publish",
@@ -288,6 +299,8 @@ class SqlAlchemyServingVersionRepository:
             stored = _version(session, record, head)
             if stored != target or stored.state is not ServingVersionState.SUPERSEDED or stored.approval is None:
                 raise ValueError("rollback requires the unchanged approved historical version")
+            if self._projection is not None:
+                self._projection.rollback(session, stored, _version(session, current, head))
             _event(
                 session,
                 "rollback",

@@ -59,3 +59,9 @@ Owner clarification: after entering a phone and successfully verifying mock OTP 
 
 `python -m scripts.export_api_docs` exports the real contract and matching Postman templates; `--check` fails drift in CI. [Manual testing](manual-testing.md) documents cookie-preserving Swagger/Postman flows. Health schemas are opt-in via `SHAHAB_API_DOCS_INCLUDE_OPERATIONS`; readiness remains token-gated, and production docs remain unavailable. Authenticated paths describe bearer OR HttpOnly account cookie; authenticated history additionally needs the questionnaire creator's proof cookie. Errors describe the actual safe `ErrorResponse`, not FastAPI's default validation payload. All online operation results remain pending in [coverage](coverage.md).
 
+
+## US-10.T04
+
+عملیات مدیریتی از CLI داخلی محافظت‌شده اجرا می‌شود، نه route HTTP جدید.
+OpenAPI عمومی و collection فعلی تغییر ندارند. قرارداد ابزار و هویت مستقل در
+../operations/protected-tool.md است؛ OTP مشتری مجوز مدیریتی نمی‌دهد.
