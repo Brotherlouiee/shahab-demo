@@ -1,5 +1,14 @@
 # Project current state
 
+## US-10R — برنامه‌ریزی ریفکتور محافظه‌کارانه فرانت (۲۰۲۶-۱۰-۱۱)
+
+- activeTaskId: US-10R.PLAN؛ یوزر استوری مستقل به درخواست مالک بین US-10 و US-11 تعریف شد. این برنامه بر candidate قبلی US-11.T01 در صف فعلی مقدم است؛ شماره‌های موجود ثابت‌اند.
+- Base main: 0a518bf6261f26a754fdfff6e290f5be763c0f54 پس از مرج PR #104؛ branch مستقل docs/us-10r-frontend-refactor-plan. فقط guide، CHANGELOG، این وضعیت و checkpoint برنامه تغییر می‌کنند.
+- T01: inventory و baseline قبل از تغییر؛ T02/T03: انتقال هر بخش و CSS آن در PRهای کوچک متوالی با حفظ cascade/state؛ T04: cleanup اثبات‌شده و gate کامل. runtime و ظاهر/رفتار در این PR تغییر نکرده‌اند؛ baseline تصویری هنوز تولید نشده است.
+- شرط قطعی: ظاهر/رفتار دقیقاً حفظ شود؛ API/DB/data/scoring/asset bytes بدون تغییر. componentهای نتیجه/جزئیات موجود دوباره ساخته نشوند. screenshot همراه characterization تعامل/شبکه لازم است.
+- nextTaskId: US-10R.T01 پس از مرج PR برنامه و بررسی مبنا؛ US-11 پس از gate US-10R. بخش آنلاین US-09.T081 و T07 همچنان باز/معوق‌اند؛ هیچ deploy/production claim.
+- بررسی هدفمند/زمان و محدوده: [checkpoint](progress/us-10r-plan.md). چهار gate CI روی SHA نهایی در PR ثبت می‌شود. سند تداوم v13 در این PR تغییر نکرده است؛ وضعیت‌های قبلی زیر تاریخی‌اند.
+
 ## Owner-directed continuity v13 checkpoint (2026-10-11)
 
 - activeTaskId: owner-requested continuity-v13; documentation only, explicitly authorized after US-10.T05 merged. This request overrides the deferred continuity-update rule for this refresh only.
@@ -260,4 +269,5 @@
 ## Compatibility pointer
 
 This is the canonical current-state checkpoint required by the guide. `docs/progress/current-state.md` is retained only as historical context for earlier commits.
+
 

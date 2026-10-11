@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- US-10R planning: یوزر استوری مستقل ماژولارسازی فرانت پیش از US-11، با چهار
+  تسک و زوج‌های کوچک استخراج صفحه/CSS، baseline تصویری و رفتاری مستقل و
+  ممنوعیت تغییر ظاهر، React state، CSS cascade، API، DB و scoring.
+  [checkpoint](docs/progress/us-10r-plan.md). برنامه‌ریزی فقط؛ T01/refactor
+  اجرا نشده، استقرار T07 و بخش آنلاین T081 همچنان بازند.
+
 ### Changed
 
 - Owner-directed continuity v13: refreshed the authoritative handoff after merged
@@ -183,4 +191,5 @@ Sidebar owner clarification: show the server profile name; use «کاربر» fo
 ## US-09.T073 — Local OTP request repair (2026-10-09)
 
 Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.
+
 
