@@ -1,5 +1,19 @@
 # Project current state
 
+## Owner-directed continuity v13 checkpoint (2026-10-11)
+
+- activeTaskId: owner-requested continuity-v13; documentation only, explicitly authorized after US-10.T05 merged. This request overrides the deferred continuity-update rule for this refresh only.
+- estimatedWorkScope/completionBudget: one bounded docs PR; reconcile handoff/current-state/CHANGELOG, verify links/status/history/diff and mandatory CI. No runtime, UI, API, data, schema, authority provisioning or deployment.
+- Safe Git: independent Codex-owned docs/continuity-v13-us10 branch from main 9bf688a8d2da9921a045889985ebef5cf19eae86; other local checkouts and user edits/evidence untouched. Remote commit preserves the full main tree.
+- Dependency/acceptance: PR #103 merged; feature CI 38145252408 and merge CI 38145538923 all four jobs successful. v13 must reflect merged T01–T05, preserve profile/history/D-005, distinguish CLI limits from production activation and keep T081 online/T07 open.
+- Review: AGENTS, full canonical guide and TASK_EXECUTION_PROTOCOL reread; authoritative doc, recent merged PRs and exact-main docs checked. Required raw-source reread is not triggered by this documentation-only change; no source bytes change.
+- Test plan: document version/precedence and current task queue, all new relative links against main tree, historical-section preservation, allowlist, whitespace and secret scan. No runtime suite is necessary locally; four existing CI gates remain required on the final remote commit.
+- actualScope: continuity v13 authoritative section 0C and current sections 17–19/22; this checkpoint and CHANGELOG only. No product behavior changes. Historical checkpoints remain as dated evidence.
+- nextTaskId: candidate US-11.T01 only after explicit owner instruction and dependency/gate review; when infrastructure is ready, complete online US-09.T081 then US-09.T07. No automatic advance or production-readiness claim.
+- Phase timer started at task entry in UTC; actual review/edit/verification/Git/CI durations and final SHA are recorded in the PR after CI, rather than inferred from commit times or forcing another documentation-only CI cycle.
+- End gate: targeted checks before first push; final four-job CI evidence in PR. No merge/deploy authorized or performed by this refresh.
+
+
 ## US-09.T081 — implementation checkpoint (2026-10-11)
 
 - activeTaskId/nextTaskId: US-09.T081; contract/tooling patch prepared, online hosting/access gate blocked. T07 has not begun.

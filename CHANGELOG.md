@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- Owner-directed continuity v13: refreshed the authoritative handoff after merged
+  US-10.T05 / PR #103, including durable audit, protected CLI/runbook and exact
+  feature/main CI evidence. Preserved historical checkpoints; online T081/T07,
+  real providers and production gates remain open. Documentation only: no
+  runtime, UI, API, migration, source, scoring or deployment changes.
+
 ### Added
 
 - US-10.T05: [راهنمای عملیات و آموزش اپراتور](docs/operations/operations-runbook.md)
