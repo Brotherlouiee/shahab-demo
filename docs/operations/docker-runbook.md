@@ -60,3 +60,10 @@ After pulling the repair, recreate the API with `docker compose up -d --build --
 Inspect only non-secret configuration: `docker compose exec api python -c "from backend.app.core.config import get_settings; s=get_settings(); print(s.environment.value, s.profile_mock_otp_enabled)"`. Expected local output is `local True`. A missing route (404), unavailable provider (503), or connection failure requires API/proxy checks; do not bypass database persistence.
 
 The account client now uses VITE_SHAHAB_API_BASE_URL consistently with the existing questionnaire client, including logout. Without a configured base it uses /api/v1 via the Compose Vite proxy. Existing local browser/Node tests using mocked API responses cannot demonstrate that this proxy is connected; a separate CI browser job now uses real Vite, FastAPI and PostgreSQL with no route fixtures.
+
+## ابزار داخلی US-10.T04
+
+CLI operations_tool در محیط trusted با secret manager و DB role محدود اجرا
+می‌شود؛ account مالک migration برای ابزار رد می‌شود. provider/customer OTP
+یکی نیستند. port عمومی اضافه نشده است؛ protected-tool.md مرجع provisioning
+مجوز، عدم ذخیره secrets و خاموش‌کردن ابزار بدون حذف volume/audit است.

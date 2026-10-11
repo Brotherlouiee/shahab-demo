@@ -73,3 +73,10 @@ ports retaining immutable reviewed plans, diffs and decisions. This is internal
 workflow evidence, not a second raw/core/serving pipeline. Normalization and
 scoring are never rerun when historical evidence is read. The public serving
 materializer remains unchanged; protected composition/projection is T04 scope.
+
+## US-10.T04 protected publication
+
+CLI authenticated via independent authority composes T02/T03 with the existing
+materializer. Exact reviewed official plan and config digest only; public serving
+projection, workflow head and audit share one transaction. An audit failure rolls
+back all public writes. No second import/scoring algorithm. See protected-tool.md.

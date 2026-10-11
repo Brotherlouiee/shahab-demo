@@ -93,3 +93,11 @@ transactions. Pure `operations` authorization remains database-independent.
 `audit_events` is the single decision ledger, `approval_records` its view.
 No HTTP/app registration, scoring implementation or frontend import is added.
 See ADR 0006 and operations/audit-runbook.md for the public-serving boundary.
+
+## US-10.T04 protected tool
+
+operations/infrastructure/introspection.py verifies the configured HTTPS authority;
+scripts/operations_tool.py is the private composition/command boundary.
+data_pipeline/infrastructure/operations_projection.py reuses the official
+materializer under the SQL repository transaction and validates the runtime role.
+Pure authorization stays independent. No FastAPI router/UI or scoring change.

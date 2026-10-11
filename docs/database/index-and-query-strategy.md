@@ -47,3 +47,10 @@ No JSONB index: preparation/diff are historical evidence, not list predicates.
 Singleton head lock intentionally serializes rare administration. Public scoring
 reads are unaffected. PostgreSQL tests use EXPLAIN with a selective event_order
 predicate to verify the ordered-key index path (costs are not asserted).
+
+## US-10.T04 transactional bridge
+
+Existing workflow head lock and public active-row lock cover the tool publication.
+No new table/index; permission checks query PostgreSQL role/schema metadata.
+Public source/config code derives from approved immutable extraction; no JSON
+filter or N+1 is introduced. T04 PostgreSQL test proves least-privilege writes.
