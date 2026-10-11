@@ -61,3 +61,7 @@ reason while an ambiguous deposit field stays explicit for later neutral
 handling. A simulated publish failure occurs before the in-memory atomic
 pointer commit, proving that the previous published version remains active and
 the candidate remains approved rather than partially published.
+
+## US-10.T02 authorized application boundary
+
+`InternalDataOperations` guards import/review/prepare/approve/publish/rollback and checks exact stored clean-import linkage. Rollback targets an approved superseded version and compares the expected current pointer inside the atomic repository method; original rows/approval remain immutable. Preparation/publication decisions and rollback decisions retain verified actor/reason/UTC through port arguments. Existing memory adapters model this only for local/test; durable audit/approval and PostgreSQL transaction implementation/proof are T03. Existing OS-trusted CLI is not exposed as an operations route. See `../operations/data-use-cases.md`.

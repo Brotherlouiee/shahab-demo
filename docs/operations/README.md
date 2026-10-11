@@ -6,3 +6,5 @@ runbookهای Docker، import، approval، rollback، backup/restore و incident
 
 
 برای استقرار محیط پایدار و اتصال Netlify به API، [runbook استقرار](../runbook/production-deployment.md) را ببینید. این سند جایگزین CI یا Docker محلی نیست.
+
+[Internal data use cases — US-10.T02](data-use-cases.md) documents permission checks, resource linkage, rollback contracts and the remaining durable/audit/tool gates.

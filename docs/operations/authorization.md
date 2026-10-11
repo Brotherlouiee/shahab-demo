@@ -79,3 +79,7 @@ and browser suites.
 
 Rollback reverts the policy and app composition change. There is no schema,
 grant seed, data/config version, API contract or customer UI change to reverse.
+
+## US-10.T02 enforcement delivered
+
+The internal coordinator now checks each exact permission before any review/version repository access. Preparation and publication require nonempty reasons and aware UTC decisions as do import/approval/rollback; port decisions retain the actual verified actor independently of original approval. Stored resource linkage blocks mismatched or partially accepted imports. Stale or failed rollback leaves the pointer and decision unchanged in the explicit local/test contract model. No public route, durable adapter or real verifier is enabled; T03/T04 and hosting gates remain open. See [data-use-cases.md](data-use-cases.md).

@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import replace
 
 from backend.app.data_pipeline.application.publish_serving_version import ServingVersionRepository
-from backend.app.data_pipeline.domain.publication import ServingDataVersion, ServingVersionState
+from backend.app.data_pipeline.domain.publication import ApprovalRecord, ServingDataVersion, ServingVersionState
 
 
 class InMemoryServingVersionRepository(ServingVersionRepository):
@@ -21,6 +21,9 @@ class InMemoryServingVersionRepository(ServingVersionRepository):
         self._current_version_id: str | None = None
         self._fail_publish = fail_publish
         self._fail_next_publish = False
+        self.preparation_decisions: dict[str, ApprovalRecord] = {}
+        self.publication_decisions: tuple[tuple[str, ApprovalRecord], ...] = ()
+        self.rollback_decisions: tuple[tuple[str, str, ApprovalRecord], ...] = ()
 
     def fail_next_publish_for_test(self) -> None:
         """Inject one pre-commit failure in this local/test adapter.
@@ -37,17 +40,21 @@ class InMemoryServingVersionRepository(ServingVersionRepository):
     def get_by_id(self, version_id: str) -> ServingDataVersion | None:
         return self._versions.get(version_id)
 
-    def save_draft(self, version: ServingDataVersion) -> None:
+    def save_draft(self, version: ServingDataVersion, *, decision: ApprovalRecord | None = None) -> None:
         if version.version_id in self._versions:
             raise ValueError("serving version already exists")
         self._versions[version.version_id] = version
+        if decision is not None:
+            self.preparation_decisions[version.version_id] = decision
 
     def replace_version(self, version: ServingDataVersion) -> None:
         if version.version_id not in self._versions:
             raise LookupError("serving version was not found")
         self._versions[version.version_id] = version
 
-    def publish_atomically(self, approved_version: ServingDataVersion) -> ServingDataVersion:
+    def publish_atomically(
+        self, approved_version: ServingDataVersion, *, decision: ApprovalRecord | None = None
+    ) -> ServingDataVersion:
         if self._fail_publish or self._fail_next_publish:
             self._fail_next_publish = False
             raise RuntimeError("simulated publication failure")
@@ -61,4 +68,33 @@ class InMemoryServingVersionRepository(ServingVersionRepository):
         next_versions[published.version_id] = published
         self._versions = next_versions
         self._current_version_id = published.version_id
+        if decision is not None:
+            self.publication_decisions = (*self.publication_decisions, (published.version_id, decision))
         return published
+
+    def rollback_atomically(
+        self,
+        target: ServingDataVersion,
+        *,
+        expected_current_version_id: str,
+        decision: ApprovalRecord,
+    ) -> ServingDataVersion:
+        """Test-only copy-on-write model of CAS and decision atomicity."""
+        if self._current_version_id != expected_current_version_id:
+            raise ValueError("current version changed; review again")
+        stored = self._versions.get(target.version_id)
+        if stored != target or target.state is not ServingVersionState.SUPERSEDED or target.approval is None:
+            raise ValueError("rollback target changed or is not approved")
+        if self._fail_publish or self._fail_next_publish:
+            self._fail_next_publish = False
+            raise RuntimeError("simulated publication failure")
+        next_versions = dict(self._versions)
+        current = next_versions[expected_current_version_id]
+        next_versions[current.version_id] = replace(current, state=ServingVersionState.SUPERSEDED)
+        restored = replace(target, state=ServingVersionState.PUBLISHED)
+        next_versions[target.version_id] = restored
+        decisions = (*self.rollback_decisions, (current.version_id, target.version_id, decision))
+        self._versions = next_versions
+        self._current_version_id = target.version_id
+        self.rollback_decisions = decisions
+        return restored
