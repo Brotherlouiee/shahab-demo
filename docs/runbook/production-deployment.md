@@ -98,14 +98,12 @@ python -m scripts.materialize_t05a
 ```
 
 2. خروجی را بررسی کنید. محیط تازه باید پیش از انتشار صفر/خالی باشد؛ محیط موجود نباید اختلاف source row، conditions یا category داشته باشد.
-3. فقط با approval ثبت‌شده، دادهٔ رسمی را publish کنید:
-
-```sh
-python -m scripts.materialize_t05a \
-  --publish \
-  --actor-reference "APPROVED_OPERATOR_REFERENCE" \
-  --approval-reason "Approved production catalogue publication"
-```
+3. برای تغییر داده، [راهنمای عملیات T05](../operations/operations-runbook.md)
+   را با ابزار محافظت‌شده `scripts.operations_tool` طی کنید: import → review →
+   prepare → approve → publish. authority HTTPS/MFA و DB role غیرمالک باید قبل
+   از این مرحله فعال و آزموده شوند. reason/actor ارسالی به فرمان legacy، هویت
+   اپراتور نیست؛ `materialize_t05a --publish` را جای این مسیر یا برای bypass
+   استفاده نکنید. فرمان بدون flag بالا فقط audit می‌خواند.
 
 4. همان audit را دوباره اجرا کنید و این موارد را ثبت کنید:
 
@@ -118,7 +116,7 @@ python -m scripts.materialize_t05a \
 
 5. اگر کاتالوگ T05A از قبل با schema قدیمی وجود دارد، فقط طبق [راهنمای T05B](../operations/t05b-serving-readiness.md) و با backfill تأییدشده عمل کنید؛ حذف یا ویرایش مستقیم جدول‌ها ممنوع است.
 
-**نکته:** این command digest منابع رسمی را بررسی می‌کند و فقط نسخهٔ D-005 تأییدشده را publish می‌کند. اگر fail شد، داده را دستی تغییر ندهید؛ خروجی و source mismatch را ثبت و بررسی کنید.
+**نکته:** ابزار محافظت‌شده با materializer موجود digest منابع رسمی را بررسی می‌کند و فقط نسخهٔ D-005 تأییدشده را publish می‌کند. اگر fail شد، داده را دستی تغییر ندهید؛ خروجی و source mismatch را ثبت و بررسی کنید.
 
 ### گام 3 — آزمون API واقعی
 

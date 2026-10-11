@@ -48,7 +48,7 @@ reasons, not raw financial values.
 4. Record a named approval with reason and UTC time through the internal
    operations workflow once US-10 authorization is implemented.
 5. Publish atomically, run serving smoke tests, and retain the prior version for
-   rollback. These durable operations are still staged for later US-05 tasks.
+   rollback. For the implemented official source, use the protected T04 tool and the T05 operations runbook; source/config changes require a separate reviewed version.
 
 ## Failure and recovery
 
@@ -69,3 +69,10 @@ command exit successfully.
 ## Internal use-case integration — US-10.T02
 
 For future guarded tools, use `InternalDataOperations`, not a direct low-level publication call. Review stored import IDs and retain every issue; correct input in a new import. Require exact hash/parser/rows linkage before approval. Rollback must specify the expected active version, verified actor, reason and UTC decision, and preserve prior approval. T03 adds PostgreSQL review/version adapters and append-only decisions; verified internal tooling and the existing materializer bridge (T04) remain required before exposure. See audit-runbook.md. Existing CLI remains OS-trusted.
+
+## مسیر عملیاتی فعلی — T04/T05
+
+فرمان preparation بالا فقط plan است. برای mutation عملیاتی از
+[راهنمای عملیات T05](operations-runbook.md) و `scripts.operations_tool` با
+هویت معتبر، role محدود و audit استفاده کنید. actor-reference متن آزاد در
+فرمان legacy تأیید هویت نیست؛ آن را جای authority یا برای bypass استفاده نکنید.
