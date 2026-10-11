@@ -34,7 +34,7 @@ The response excludes session IDs, answers, traces, source rows, coefficients an
 
 This route returns the allowlisted facts, an optional public `bankLogoReference` HTTP(S) URL, and plain-text conditions of that exact loan in the active `PUBLISHED` version. It cannot select a draft, staging or superseded version. Missing/non-published IDs return the typed `not_found` envelope; unavailable storage returns the typed `service_unavailable` envelope.
 
-There is currently no public application, payment, OTP or external analysis-provider endpoint. Clients must expose that absence and must not simulate success.
+There is currently no public application, payment, real SMS-provider or external analysis-provider endpoint. Clients must expose that absence and must not simulate success.
 
 
 `bankLogoReference`, when present, is validated at the server boundary and is rendered only as an image URL. It is not a source/provenance reference, HTML fragment or database connection detail. Clients show no substitute logo when it is absent.
@@ -54,3 +54,8 @@ There is currently no public application, payment, OTP or external analysis-prov
 ## Verified first-login profile creation — 2026-10-09
 
 Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
+
+## US-09.T081 — Generated complete contract
+
+`python -m scripts.export_api_docs` exports the real contract and matching Postman templates; `--check` fails drift in CI. [Manual testing](manual-testing.md) documents cookie-preserving Swagger/Postman flows. Health schemas are opt-in via `SHAHAB_API_DOCS_INCLUDE_OPERATIONS`; readiness remains token-gated, and production docs remain unavailable. Authenticated paths describe bearer OR HttpOnly account cookie; authenticated history additionally needs the questionnaire creator's proof cookie. Errors describe the actual safe `ErrorResponse`, not FastAPI's default validation payload. All online operation results remain pending in [coverage](coverage.md).
+

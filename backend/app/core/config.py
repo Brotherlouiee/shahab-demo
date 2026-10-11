@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     debug: bool = False
     log_level: str = "INFO"
     api_v1_prefix: str = "/api/v1"
+    # Operational schemas require an approved restricted documentation environment.
+    api_docs_include_operations: bool = False
     cors_allowed_origins: tuple[str, ...] = ()
     readiness_token: SecretStr | None = None
     database_url: SecretStr | None = None

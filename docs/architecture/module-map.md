@@ -67,3 +67,8 @@ conditions. See `docs/ui/loan-route-inventory.md` for the complete route map.
 ## Account/profile repair — US-09.T072
 
 backend/app/accounts/phone.py normalizes full phone identities; profile_schema.py validates allowlisted fields; profile_repository.py owns DB persistence; access.py provides bounded local/test OTP sessions. api/v1/account_access.py resolves actors and maps safe errors; api/v1/profiles.py checks ownership before persistence. main.py disables mock outside explicit local/test. No account dependency on recommendation scoring.
+
+## US-09.T081 documentation boundary
+
+`backend/app/api/documentation.py` enriches FastAPI's generated schema with the existing transport error/auth contracts; `DocumentedFastAPI` changes descriptions only. `main.py` serves pinned, cookie-preserving Swagger and respects the proxy root for schema loading. `api_docs_include_operations` controls health visibility in non-production docs, never runtime authorization. `scripts/export_api_docs.py` emits deterministic OpenAPI, Postman and route inventory without DB startup or user data; CI rejects drift. No ORM, migration, data, scoring, application UI or authentication implementation changed. [Online test runbook](../runbook/api-testing.md) records the hosting blocker and existing publication reuse.
+
