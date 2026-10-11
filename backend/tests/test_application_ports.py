@@ -21,6 +21,9 @@ class ApplicationPortTests(unittest.TestCase):
         self.assertIsNotNone(datetime.now(UTC))
 
     def test_reverse_dependencies_are_forbidden(self) -> None:
+        self.assertTrue(is_forbidden("backend.app.operations.authorization", "backend.app.accounts.access"))
+        self.assertTrue(is_forbidden("backend.app.operations.policy", "backend.app.infrastructure.db"))
+        self.assertFalse(is_forbidden("backend.app.main", "backend.app.operations.authorization"))
         self.assertTrue(is_forbidden("backend.app.domain.loan", "backend.app.infrastructure.db"))
         self.assertTrue(is_forbidden("backend.app.application.ports", "backend.app.api.v1"))
         self.assertFalse(is_forbidden("backend.app.infrastructure.db", "backend.app.application.ports"))

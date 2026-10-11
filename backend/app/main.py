@@ -22,6 +22,7 @@ from .core.config import AppEnvironment, Settings, get_settings
 from .core.dependencies import get_questionnaire_configuration
 from .core.logging import configure_logging
 from .infrastructure.db.session import create_database_engine, create_session_factory
+from .operations.authorization import OperationsAuthorizer
 from .questionnaire.infrastructure.redis_cache import RedisQuestionnaireSessionCache
 from .questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 
@@ -131,6 +132,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         AppEnvironment.TEST,
     )
     app.state.account_access = AccountAccess(MockOtpProvider() if mock_allowed else None)
+    # Customer/mock OTP cannot configure operator identity or role grants.
+    # Internal use cases wire this deny-by-default boundary in US-10.T02.
+    app.state.operations_authorizer = OperationsAuthorizer()
     app.state.logger = logger
     app.state.database_engine = None
     app.state.database_session_factory = None

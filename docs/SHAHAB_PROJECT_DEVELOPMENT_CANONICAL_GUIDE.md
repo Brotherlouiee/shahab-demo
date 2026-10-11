@@ -446,7 +446,7 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 ## نقشهٔ اجرایی کامل: User Story، تسک و زیرتسک
 
-این جدول ترتیب **الزام‌آور** اجرای پروژه است. Codex باید از `US-01` شروع کند و فقط پس از اتمام همهٔ تسک‌ها، زیرتسک‌ها و gateهای آن به داستان بعدی برود. پرش به UI، API، migration یا deployment مرحلهٔ بعد ممنوع است. در انتهای هر تسک، تست مرتبط اجرا، کد بررسی و در صورت نیاز refactor محدود انجام، مستندات به‌روز و یک entry در `CHANGELOG.md` ثبت می‌شود. اگر gate یک داستان قرمز است، همان داستان اصلاح می‌شود و هیچ workaround در لایهٔ بعدی مجاز نیست.
+این جدول ترتیب **الزام‌آور** اجرای پروژه است؛ تنها استثنای محدود مصوب برای بخش مستقل US-10 در بخش «تعویق استقرار و وابستگی US-10» ثبت شده است. Codex باید از `US-01` شروع کند و فقط پس از اتمام همهٔ تسک‌ها، زیرتسک‌ها و gateهای آن به داستان بعدی برود. پرش به UI، API، migration یا deployment مرحلهٔ بعد ممنوع است. در انتهای هر تسک، تست مرتبط اجرا، کد بررسی و در صورت نیاز refactor محدود انجام، مستندات به‌روز و یک entry در `CHANGELOG.md` ثبت می‌شود. اگر gate یک داستان قرمز است، همان داستان اصلاح می‌شود و هیچ workaround در لایهٔ بعدی مجاز نیست.
 
 | ترتیب | User story و ارزش | تسک‌ها و زیرتسک‌های ترتیبی | Gate اجباری و خروجی |
 | --- | --- | --- | --- |
@@ -478,9 +478,25 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 | `US-07.T01` questionnaire config → `T02` route adapter → `T03` session use case/retention → `T04` UI flow → `T05` route/API/E2E/a11y tests → `T06` PostgreSQL persistence/Redis cache/ERD | همهٔ `US-06.*` | `backend/app/questionnaire/`, `backend/app/infrastructure/`, `frontend/src/features/questionnaire/`, `docs/api/`, `docs/database/erd.md`, `docs/database/physical-schema-3nf.md`, `docs/architecture/` و تست‌ها | مسیرهای `/question/3..12` به ID ثابت برسند؛ پاسخ ناقص مسدود؛ next/back/resume و عدم نشت session تأیید شود؛ پس از restart پاسخ تا TTL از PostgreSQL بازیابی شود، cache-miss/failure به منبع پایدار degrade کند، Redis پاسخ/PII دائمی نباشد و ERD/schema هم‌زمان اعتبارسنجی شوند. |
 | `US-08.T01` engine خالص → `T02` neutral/needsReview → `T03` trace → `T04` RecommendLoans use case → `T05` unit/property/golden | همهٔ `US-07.*` | `backend/app/recommendation/domain`, `application`, `engine`, repository port و fixtureها؛ React/FastAPI در engine ممنوع | deterministic score/tree/threshold؛ unknown سیاست‌مند؛ trace redact‌شده؛ همه golden/property testها سبز. |
 | `US-09.T01` results view model → `T02` API integration → `T03` states جداگانه → `T04` manual filters/sort/a11y → `T05` E2E قراردادی → `T05A` audit/materialization داده و پیکربندی رسمی → `T05B` آداپتورهای پایدار snapshot و جزئیات → `T06` اتصال عملیاتی → `T06A` یکپارچگی UIهای توسعه‌یافته و فیلترهای واقعی → `T07` استقرار staging پایدار و آزمون URL واقعی | همهٔ `US-08.*` | `src/features/recommendation/ui/`، `src/features/loan-details/`، `backend/app/questionnaire/`، `backend/app/recommendation/`، `backend/app/loans/`، API presenter/contract، deploy/preview config و E2Eها | browser هرگز score محاسبه نکند؛ session معتبر فقط به endpoint واقعی برسد؛ ranked/needsReview/empty جدا باشند؛ نتیجه فقط از وام‌های منتشرشده و امتیاز server-calculated ساخته شود؛ کاربر از پرسشنامه تا جزئیات و شرایط/قوانین وام را در URL قابل‌آزمایش طی کند؛ E2E و آزمون دستی mobile/desktop سبز باشد. |
-| `US-10.T01` RBAC → `T02` import/review/approve/rollback use case → `T03` audit event → `T04` internal endpoint/tool → `T05` operations runbook | همهٔ `US-09.*` | `backend/app/operations/`, authz policy، audit migration/test و `docs/operations/` | client عادی تغییر نمی‌دهد؛ role/ownership/append-only audit/rollback با test اثبات شود. |
+| `US-10.T01` RBAC → `T02` import/review/approve/rollback use case → `T03` audit event → `T04` internal endpoint/tool → `T05` operations runbook | gateهای فنی موردنیاز همان تسک از US-09؛ فقط T01 طبق استثنای مصوب زیر مجاز است. پایان T07 و بخش آنلاین T081 همچنان باز است. | `backend/app/operations/`, authz policy، audit migration/test و `docs/operations/` | client عادی تغییر نمی‌دهد؛ role/ownership/append-only audit/rollback با test اثبات شود. |
 | `US-11.T01` threat/privacy review → `T02` transport/app hardening → `T03` SAST/SCA/secret/DAST → `T04` logging/metrics/alerts → `T05` load/backup/restore | همهٔ `US-10.*` | `docs/security/`, deploy config، CI security jobs، monitor/runbook و security tests | critical/high و secret leak صفر؛ rate-limit و headers test؛ backup restore و performance smoke ثبت‌شده. |
 | `US-12.T01` documentation review → `T02` full CI → `T03` preview/smoke → `T04` release/rollback note → `T05` reviewed production/post-deploy | همهٔ `US-11.*` | `CHANGELOG.md`, `docs/`, release config، PR/release note و deploy runbook | همهٔ storyهای قبلی Done؛ full gate/preview/post-deploy سبز؛ rollback تمرین‌شده. |
+
+### تعویق استقرار و وابستگی US-10 — تصمیم مالک، ۲۰۲۶-۱۰-۱۱
+
+مالک محصول خرید دامنه را اعلام کرده و خرید سرور را به آینده موکول کرده است. `US-09.T07` تا آماده‌شدن سرور معوق و باز می‌ماند. بخش آنلاین و اشتراک/آزمون واقعی `US-09.T081` نیز تکمیل‌شده نیست؛ import فایل‌ها و تست محلی جای لینک HTTPS مشترک را نمی‌گیرد. این تصمیم هیچ gate امنیتی، آزمون، استقرار یا شرط پایان US-09/US-12 را حذف نمی‌کند. سند تداوم تا پایان واقعی داستان تغییر نمی‌کند.
+
+استثنای ترتیب فقط برای توسعهٔ مستقل `US-10.T01` مجاز است: قرارداد حساب/پروفایل موجود، نبود API مدیریتی عمومی و مسیرهای internal داده/انتشار بررسی شوند؛ سیاست مجوز در سمت سرور و با آزمون‌های مستقل ساخته شود. T01 به میزبان آنلاین، دادهٔ production یا migration نیاز ندارد. کاربر OTP فیک، شماره تلفن، نقش ارسالی client و پنهان‌کردن UI هیچ‌کدام هویت مدیر نیستند.
+
+قبل از هر T02–T05، وابستگی فنی، سلامت gate لازم و امکان اجرای مستقل باید در checkpoint همان تسک ثبت و تقدم آن در سند صریح تصویب شود؛ این استثنا مجوز شروع خودکار همهٔ US-10 یا US-11/US-12 نیست. شکست فنی واقعی US-09 نباید با این استثنا دور زده شود. برای پایان US-09 و اعلام آمادگی عملیاتی، T07 و آزمون‌های آنلاین لازم همچنان اجباری‌اند.
+
+### نقش‌ها و مجوزهای داخلی — `US-10.T01`
+
+**هدف:** یک قرارداد کوچک و قابل‌آزمون برای authorization عملیات import، review، approve، publish، rollback و تغییر/تأیید config بساز. نقش‌ها و permissionها صریح‌اند؛ wildcard و ارث‌بری ضمنی admin ممنوع است. `anonymous/user/support` هیچ مجوز نوشتن داده/تنظیمات ندارند؛ data-editor فقط import/review/config-edit، admin فقط approve/publish/rollback/config-approve و service فقط import با هویت سرویس معتبر دارد. برای ترکیب وظایف، grant صریح چند نقش لازم است.
+
+منبع نقش، port مورداعتماد سمت سرور است و پیش از هر اقدام دوباره خوانده می‌شود؛ نبود grant، انقضا، ابطال، هویت نامعتبر، permission/role ناشناخته، پاسخ مربوط به actor دیگر یا خرابی منبع مجوز به رد درخواست منجر می‌شود. هویت داخلی از ورود مصرف‌کننده/OTP فیک مستقل است؛ انسان داخلی به تأیید MFA و سرویس به credential مستقل نیاز دارد. composition فعلی بدون provider معتبر و grant صریح همهٔ عملیات را رد می‌کند.
+
+**پذیرش T01:** ماتریس کامل allow/deny و شکست‌های امنیتی با unittest، قرارداد deny-by-default در app و جلوگیری از ارتقای نقش از payload عمومی با آزمون FastAPI اثبات شود؛ format/lint/mypy/boundary و CI مصوب سبز شوند. schema، دادهٔ وام، scoring، UI، migration و endpoint جدید خارج از scope هستند. T02 اتصال کنترل مجوز نزدیک use caseها، T03 audit append-only و T04 ابزار/هویت مدیریتی محافظت‌شده را تکمیل می‌کنند. وجود این سیاست به‌تنهایی به معنی امن‌شدن همهٔ عملیات فعلی داخلی یا آماده‌بودن پنل مدیریتی نیست.
 
 ### پیش‌نیاز مستقل اتصال زنده — `US-09.T05A`
 
@@ -1008,7 +1024,7 @@ README نباید صرفاً فرمان‌ها را فهرست کند؛ باید
 
 ### ۶. شرط آغاز مرحلهٔ بعد و شرط پایان کل توسعه
 
-شروع task بعدی فقط وقتی مجاز است که checkpoint پایان task فعلی کامل، commit ثبت، test نزدیک سبز و تغییرات مستند شده باشند. شروع User Story بعدی فقط با gate سبز، PR قابل بازبینی و عدم وجود blocker باز از story قبلی ممکن است. پایان کل پروژه زمانی است که US-12 کامل، تمام containerها در محیط local با راهنمای مستند بالا می‌آیند، full release gate سبز است، deploy preview و rollback تست شده و آخرین checkpoint و CHANGELOG وضعیت دقیق نسخه را نشان می‌دهند.
+شروع task بعدی فقط وقتی مجاز است که checkpoint پایان task فعلی کامل، commit ثبت، test نزدیک سبز و تغییرات مستند شده باشند. شروع User Story بعدی فقط با gate سبز، PR قابل بازبینی و عدم وجود blocker باز از story قبلی، یا استثنای محدود مصوب بخش «تعویق استقرار و وابستگی US-10» ممکن است. پایان کل پروژه زمانی است که US-12 کامل، تمام containerها در محیط local با راهنمای مستند بالا می‌آیند، full release gate سبز است، deploy preview و rollback تست شده و آخرین checkpoint و CHANGELOG وضعیت دقیق نسخه را نشان می‌دهند.
 
 - از schema validation (مثلاً Zod یا معادل سبک) در مرز ورود داده استفاده کن.
 - منبع داده باید از یک adapter جدا خوانده شود؛ prototype می‌تواند JSON نسخه‌دار داشته باشد، اما قرارداد adapter باید آمادهٔ API/دیتابیس باشد.
