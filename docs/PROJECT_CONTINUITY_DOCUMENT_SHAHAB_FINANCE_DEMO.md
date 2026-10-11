@@ -1,11 +1,72 @@
 # Project Continuity Document
 
-> **Document version:** 12.0
+> **Document version:** 13.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
-> **Prepared:** 2026-10-10  
-> **Repository state represented:** `main` at `6d31bde1bc27ecdf1fabe3f423b660b3930f1b78`, after PR #93; section 0B is the current authoritative handoff. US-09.T07 real deployment remains unverified.
+> **Prepared:** 2026-10-11
+> **Repository state represented:** `main` at `9bf688a8d2da9921a045889985ebef5cf19eae86`, after PR #103; section 0C is the current authoritative handoff. US-09.T07 and online US-09.T081 remain open.
 > **Purpose:** This is the hand-off document for a new chat or engineer with no access to prior conversation history. It distinguishes implemented reality from the target architecture and from proposals not yet approved.
+
+## 0C. Owner-directed continuity v13 — authoritative handoff (2026-10-11)
+
+This refresh is explicitly authorized by the owner's request after US-10.T05 merged. It overrides the deferred continuity-update rule **for this documentation task only**. It does not close US-09 or authorize starting US-11/US-12, provisioning infrastructure, merging this PR or deploying.
+
+**Precedence:** section 0C and current sections 17–19 and 22 supersede every older status, task queue, hosting claim and test count below, including section 0B. Sections 0B, 0A and 0 remain dated historical evidence. Permanent Golden Rules, source integrity, D-005 and product/security contracts remain binding.
+
+### Verified repository baseline
+
+- Represented main: `9bf688a8d2da9921a045889985ebef5cf19eae86`, merge of [PR #103](https://github.com/Brotherlouiee/shahab-demo/pull/103), 2026-10-11 14:01:57 UTC. The documentation PR containing v13 is a later change; this SHA records the implementation baseline.
+- US-10.T05 feature head: `1f702c27f56331ba4d31dcc6bb9b7e0ae6300b7b`; feature CI [38145252408](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38145252408) and merged-main CI [38145538923](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38145538923) each succeeded in all four jobs: Quality gates, PostgreSQL migration verification, Loan details browser verification and Profile OTP real API browser verification.
+- This is repository/CI evidence. It does not establish a deployed database, reachable backend, operational identity provider, human training or backup restore.
+
+### Merged work since v12
+
+| Task/change | Merged PR | Delivered scope |
+| --- | --- | --- |
+| US-09.T080 | [#95](https://github.com/Brotherlouiee/shahab-demo/pull/95) | Logout confirmation: «خیر» preserves the account session; «بله» invokes existing server logout and local account cleanup. |
+| Mandatory execution protocol | [#96](https://github.com/Brotherlouiee/shahab-demo/pull/96) | AGENTS requires [TASK_EXECUTION_PROTOCOL.md](TASK_EXECUTION_PROTOCOL.md): impact/suite review, targeted checks, CI root-cause diagnosis and phase timing. |
+| US-09.T081 planning/tooling | [#97](https://github.com/Brotherlouiee/shahab-demo/pull/97), [#98](https://github.com/Brotherlouiee/shahab-demo/pull/98) | Complete OpenAPI/Postman artifacts, pinned cookie-preserving Swagger, operation inventory, manual-testing/hosting runbooks and CI drift checks. Online acceptance remains open. |
+| US-10.T01 | [#99](https://github.com/Brotherlouiee/shahab-demo/pull/99) | Explicit least-privilege permissions, trusted fresh grants and default-deny authorization. |
+| US-10.T02 | [#100](https://github.com/Brotherlouiee/shahab-demo/pull/100) | Internal import/review/prepare/approve/publish/rollback use cases; clean-import linkage, immutable retries and expected-head rollback. |
+| US-10.T03 | [#101](https://github.com/Brotherlouiee/shahab-demo/pull/101) | Durable PostgreSQL audit/version adapters, additive migration, append-only evidence and transactional concurrency checks. |
+| US-10.T04 | [#102](https://github.com/Brotherlouiee/shahab-demo/pull/102) | Protected internal CLI with HTTPS identity introspection and non-owner DB role; atomic materialization/head/audit. |
+| US-10.T05 | [#103](https://github.com/Brotherlouiee/shahab-demo/pull/103) | [Operations runbook](operations/operations-runbook.md), validated command examples, read-only audit checks, retry/rollback and operator training scenarios. |
+
+The independent technical delivery of **US-10.T01–T05 is merged** under the separately approved sequencing exception in the canonical guide. This is not a declaration of full production readiness or US-09 completion. Completed US-10 tasks must not be restarted from old “future work” statements.
+
+### Operations contracts and durable data
+
+- `anonymous/user/support` cannot mutate operational data/configuration. `data-editor` has explicit import/review/config-edit permissions; `admin` has approve/publish/rollback/config-approve permissions; `service` has import only with independently verified service credentials. Admin does not implicitly inherit editor privileges. Config permissions define policy; **no config-edit command is delivered**.
+- Authorization is checked close to each use case using fresh trusted grants. Public customer OTP, a phone number, client-supplied role/actor and hidden UI controls cannot grant operator access. Unconfigured public-app operations authorization remains deny-all.
+- [ADR 0006](adr/0006-durable-operations-audit.md) and [durable audit runbook](operations/audit-runbook.md) describe `operations_imports`, `operations_versions`, `audit_events` and singleton `operations_workflow_head`. Migration `b4d8e1f2a3c5` follows `a3b7c9d1e2f4`; `approval_records` is a derived view, not a duplicated approval table. Relational identifiers/constraints coexist with versioned JSON evidence.
+- Import/version evidence is immutable; audit rejects UPDATE/DELETE/TRUNCATE. Head locking and one transaction preserve source linkage, approval and decisions under retries/concurrency. Database-owner/superuser powers are outside this protection; do not claim externally tamper-proof storage.
+- [Protected-tool contract](operations/protected-tool.md) / [ADR 0007](adr/0007-protected-operations-tool.md): `python -m scripts.operations_tool --command /private/command.json`. Six actions are import/review/prepare/approve/publish/rollback. This is an internal CLI, **not** a public HTTP endpoint, Swagger admin API or frontend panel.
+- Human operator identity requires independent MFA and HTTPS authority verification; service identity requires an independent credential. Issuer/audience/activity/expiry and fresh grants are validated; failures deny access. Tokens belong in a private environment or prompt, never command arguments, Git or logs. `SHAHAB_OPERATIONS_AUTHORITY` and `SHAHAB_OPERATIONS_ACCESS_TOKEN` are configuration names, not supplied credentials.
+- Runtime operations DB credentials must use the validated restricted non-owner role, without customer-table access or elevated/ownership/schema-create privileges. Provisioning real authority, grants and credentials remains outstanding.
+- Publication reuses the existing official materializer. Serving publication, workflow head and audit commit atomically. Current CLI accepts only the exact official 102-loan extraction and D-005 configuration `1.1.0`, including canonical digests/rows. It does not support arbitrary source edits, numeric corrections or new configurations.
+- Rollback is compare-and-swap against the expected head and only reuses revisions of the same approved source/configuration and public projection. It preserves prior approval/evidence; it is not arbitrary catalogue/config rollback.
+- [Operations runbook](operations/operations-runbook.md) is the current entry point. [Deployment runbook](runbook/production-deployment.md) uses the protected path for publication; historical legacy publication commands are not authorization to bypass it. Training scenarios are documented; no real-person training, real deployment or restore rehearsal is claimed.
+
+### Existing user and recommendation contracts remain in force
+
+Database-backed first-login profile creation, personal-info persistence, name/«کاربر» sidebar fallback, account session restore, questionnaire proof and owner-scoped immutable recommendation history from section 0B remain implemented. History contains all three server-owned partitions and card snapshots; retry is idempotent, historical results reuse the existing result screen without rescoring, and user hide retains database evidence. Bookmarked loans remain browser-local; they are a different feature.
+
+Fake OTP remains local/test only; staging/production reject it. Real SMS/Kavenegar and production customer sessions remain deferred; current process-local account capability/session state does not survive restart or multiple workers. Do not conflate customer login with operator identity.
+
+The six canonical source blobs and D-005 are unchanged. Only answer-conversion numeric weights are authoritative; mapping-matrix numbers are not scoring weights. The 102/88/14 official-source counts are source facts, not guaranteed per-user result totals or proof of deployed database contents. Preserve approved frontend layouts, assets, empty/loading/error distinctions and routes.
+
+### Infrastructure, manual API testing and next boundaries
+
+- The owner reports a purchased domain and plans to purchase a server. This refresh neither provisions nor verifies DNS, TLS, Netlify/API integration or a persistent hosted database.
+- Swagger/Postman contracts and local manual-test instructions exist; the owner reports successful desktop Postman tests. A collection or localhost test is not a shared online API host. [Manual testing](api/manual-testing.md), [coverage](api/coverage.md) and [API hosting runbook](runbook/api-testing.md) remain the T081 references.
+- **US-09.T081 online gate is open:** restricted HTTPS API/PostgreSQL, all-operation real requests and a second authorized tester require actual environment evidence. Reuse that approved environment in T07.
+- **US-09.T07 is deferred and open:** persistent publication, frontend-to-API connection, real URL, mobile/desktop, restart, backup and rollback verification are required. CI does not substitute for these gates.
+- **Next candidate is US-11.T01** threat/privacy/retention review, only on an explicit owner instruction and a recorded dependency/gate review. No automatic US-11/US-12 advance is authorized. US-12 still requires all prior release gates.
+- Every next task reads AGENTS, the complete canonical guide, this authoritative handoff and TASK_EXECUTION_PROTOCOL; records a narrow allowlist, dependent tests, the correct suite/environment and phase timings; runs targeted checks before push; diagnoses actual failed-job output before fixes; never weakens security/tests to make CI green.
+
+**Version record:** v13 supersedes v12's current task queue after merged PR #103, retains older checkpoints and records outstanding online/provider/security gates. It changes documentation only.
+
+---
 
 ## 0B. Owner-directed continuity reconciliation — authoritative update (2026-10-10)
 
@@ -860,37 +921,38 @@ Beyond server/domain, production readiness requires:
 
 ## 17. Current Project State
 
-- **Merged foundation:** US-01 through US-08, canonical questionnaire sessions, approved catalogue/configuration, deterministic engine and live result/detail/comparison code.
-- **Merged US-09 work:** frontend refinements through PR #92; database-backed profile/mock-OTP access and authenticated recommendation history through PR #93 and its corrective commits.
-- **Verified repository gate:** merged main `6d31bde` has all four CI jobs successful (see section 0B). Do not reuse old test totals as current suite counts.
-- **Acceptance boundary:** the owner's current statement is “changes nearly complete”; final visual/local acceptance and actual hosted database state are not independently established by this document.
-- **Remaining story gate:** US-09.T07 actual deployment and real-URL/restart verification. US-09 is not declared complete; real SMS, production auth, US-10–US-12 and production release remain outside this completion claim.
+- US-01–US-08 and user-facing US-09 code through recommendation history/logout are merged. Profile/history ownership and existing presentation contracts remain binding.
+- API contract/tooling for US-09.T081 is merged; online acceptance remains open. US-09.T07 awaits server readiness and real-URL verification.
+- Independent US-10.T01–T05 technical delivery is merged through PR #103. Permissions, durable audit, protected CLI and runbook are available; real authority/grants and production activation are not established.
+- Main baseline and both feature/main four-job CI evidence are recorded in section 0C. Historical test totals are not current suite counts.
+- US-09 is not closed. Real SMS, production customer sessions, security/restore and release gates remain outstanding.
 
 ---
 
 ## 18. Immediate Next Actions
 
 | Priority | Action | Boundary |
-|---|---|---|
-| P0 | Safely synchronize the owner's local IDE with merged main and verify required migrations | Inspect local edits; no discard, forced push or database reset. |
-| P0 | Record final owner acceptance of history access, empty state and card geometry | Correct only observed defects in a new scoped PR; preserve exact approved design. |
-| P1 | Complete US-09.T07 on explicitly selected real infrastructure | Persistent database/publication, API HTTPS, Netlify, real URL and restart evidence. |
-| P1 | Record staging/rollback and relevant security/session decisions | Local mock and process-local account store are not production authentication. |
-| P2 | Close US-09 only after the complete story gate; then select US-10 work | Do not restart completed US-07/08 tasks from old checkpoints. |
+| --- | --- | --- |
+| P0 | Safely reconcile the owner's IDE with current main | Preserve local edits/evidence; use a fresh scoped branch. No forced push, discard or database reset. |
+| P1 | On owner instruction, review dependencies and begin US-11.T01 | Threat/privacy/retention scope only; do not automatically start later tasks or bypass open hosting gates. |
+| P1 | When server/access are ready, complete online US-09.T081, then US-09.T07 | Reuse the approved environment; real HTTPS, database, tester, frontend, restart/rollback evidence required. |
+| P1 | Plan real operator authority and production customer authentication separately | Explicit grants, independent MFA/service identity, restricted DB role; customer mock OTP is insufficient. |
+| P2 | Close US-09 and pursue release only after outstanding gates | Merged US-10 and green CI do not establish production readiness. |
 
 ---
 
 ## 19. Open Questions
 
 | Question | Current state |
-|---|---|
-| Has the owner accepted the final history UI/flow in the updated local stack? | Nearly complete per owner; explicit final acceptance remains to be recorded. |
-| Which server/domain/access and secret management will support T07? | Not established by this documentation refresh. |
-| Does the actual Netlify URL reach the selected persistent API/database? | Requires fresh real-URL acceptance; CI success is insufficient. |
-| When will real SMS/provider credentials and production authentication be enabled? | Deferred; no API key or production activation supplied/claimed here. |
-| How will production sessions, cross-host cookie/CSRF and multi-worker/restart behavior be handled? | Must be resolved before production; current account state is process-local. |
-| What retention/erasure policy applies to persistent recommendation history? | Raw answers keep their 30-minute policy; hide preserves records. Formal durable-history privacy/retention and authorized erasure require explicit decisions. |
-| What operational cadence updates/approves catalogue data? | Existing versioned publication rules remain; operational cadence needs release planning. |
+| --- | --- |
+| Which server/access/network/secret-management setup will be used? | Domain purchase is reported; server purchase and usable deployment environment remain pending. |
+| Is there a restricted shared HTTPS API that passes the entire T081 coverage matrix? | Not established; local Postman success is not online acceptance. |
+| Does Netlify reach the selected persistent API/database and survive restart? | Requires T07 evidence; no fresh live verification is claimed. |
+| Which real internal authority and grants will activate the protected CLI? | Not provisioned/verified; unavailable authority fails closed. Human MFA and service credentials are separate from customer OTP. |
+| When are real SMS and durable production customer sessions enabled? | Deferred; current mock/process-local access is not production authentication. |
+| What are durable-history retention, authorized erasure and privacy policies? | Hide preserves snapshots; questionnaire answers retain their existing 30-minute policy. Formal durable-history policy remains a security/product decision. |
+| How will catalogue/configuration changes beyond the current official version be approved? | Current CLI scope is exact official source/config only. New versions need explicit decisions and a separate reviewed implementation. |
+| Have operator training, backup restore and production security gates been performed? | Runbooks/scenarios exist; real training, restore and production acceptance are not claimed. |
 
 ---
 
@@ -940,23 +1002,25 @@ Beyond server/domain, production readiness requires:
 
 ## 22. Instructions For New Chat
 
-1. Read this document, especially authoritative section 0B, and inspect fresh main/PR/CI state. This handoff represents PR #93, not the older PR #28 or #60 snapshots.
-2. Read the complete canonical guide and preserve the Three Golden Rules. For engine/data/questionnaire/result/database changes, read required official sources and related ADR/data decisions.
-3. Preserve confirmed product/data/security decisions, particularly D-005, PUBLISHED-only serving, unknown-core exclusions and deposit neutral policy.
-4. Do not restart completed US-07 or US-08 work. Resolve any confirmed owner acceptance defects, then pursue the remaining US-09.T07 gate unless the owner explicitly changes priority.
-5. Use a fresh scoped branch from current main; protect local IDE edits. PR #93 is merged, so further implementation needs a new PR.
-6. Separate database-backed recommendation history from browser-local bookmarks; preserve owner proof, atomic idempotency, immutable output and hidden-run retention.
-7. Keep loading, valid empty response and request/authentication error separate; reuse supplied empty-state assets and existing result components without unsolicited design changes.
-8. Update relevant docs, CHANGELOG and current checkpoint with evidence, then verify required CI on the final commit. Continuity normally updates at story completion; this v12 refresh was explicitly requested by the owner.
-9. Do not claim CI/local code equals deployment. Require real infrastructure, URL, restart and rollback evidence for the deployment/story gate.
-10. Keep credentials out of code, URLs, logs and browser storage. Fake OTP and process-local account access are development-only; real SMS/production security remain deferred.
+1. Read authoritative section 0C and current sections 17–19; verify fresh main/PR/CI. The implementation baseline is after PR #103, not historical PR #93/#60/#28.
+2. Read AGENTS, the complete canonical guide, TASK_EXECUTION_PROTOCOL and applicable safe-git-ide-collaboration instructions. For engine/data/questionnaire/result/database changes, reread required official sources and related ADR/data decisions.
+3. Preserve D-005, PUBLISHED-only serving, neutral deposits, unknown-core exclusion, source bytes and approved frontend presentation. Do not infer weights or facts from UI text.
+4. Do not restart merged US-07/08 or US-10.T01–T05. US-11.T01 is only the next candidate; explicit owner instruction and dependency/gate checkpoint are required.
+5. Keep online T081 and T07 open until real infrastructure/testing evidence exists. The limited US-10 sequencing exception does not close US-09 or waive US-12 gates.
+6. Use a fresh branch from current main; protect all owner IDE edits and old Playwright evidence. PR #103 is merged; new work needs a new PR. Commit descriptions remain Persian as requested.
+7. Distinguish database recommendation history from browser bookmarks, customer development login from operator authority, and documented training from completed training. Preserve proof, ownership, idempotency and immutable snapshots.
+8. Use the current operations runbook and protected CLI; no direct DB edits, unguarded legacy publication, customer-role escalation or unsupported source/config updates. Real authority and restricted DB credentials must be established separately.
+9. Before implementation map dependent code/tests, correct suite/environment and smallest sufficient check. Update related tests with behavior; run targeted checks before the first push. Required CI remains mandatory. Diagnose failed-job output before fixes; do not weaken tests/security.
+10. Record actual activity timings from task start, not inferred commit timestamps. Update docs, CHANGELOG and checkpoints, then verify final-head CI. This v13 refresh is specifically owner-authorized; future continuity updates follow the normal story rule unless the owner requests otherwise.
+11. Do not equate CI with deployment. Require real URL, persistence/restart, rollback and security/restore evidence before the corresponding completion claim. Never place tokens, cookies, real personal data or credentials in Git, command arguments, logs or shared artifacts.
 
 ---
 
 ## Audit of This Continuity Document
 
-- Version 12 reconciles main after PR #93, records both feature and merge CI evidence, and removes the obsolete US-07.T03 next-action queue from current sections.
-- Historical checkpoints are retained with explicit precedence; their old status, host names and test counts do not define current reality.
-- Profile creation/persistence, session restoration, questionnaire ownership proof, history snapshot/cursor/hide behavior, migrations and bookmark separation are documented.
-- No full US-09 completion, production authentication, deployed database or final independent visual acceptance is asserted.
-- Next work is evidence-based owner acceptance and US-09.T07 real deployment; no runtime, schema, data, scoring or design changes are made by this document.
+- Version 13 reconciles main after PR #103 and records successful feature/main CI. Merged PR #95–#103 scopes are separated from remaining online/operational gates.
+- Historical sections/checkpoints remain preserved, with explicit section 0C precedence over outdated future-work and task-queue statements.
+- Durable operations tables/view/migration, trusted authorization, protected CLI, atomic publication and limited rollback are distinguished from production provider provisioning and unrestricted source/config editing.
+- Existing profile/history/bookmark contracts, D-005 and source integrity remain unchanged.
+- Only this handoff, current-state checkpoint and CHANGELOG change; no runtime, API, schema, source, scoring, UI or deployment changes occur. No full US-09 completion or production readiness is asserted.
+
