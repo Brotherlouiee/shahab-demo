@@ -3,7 +3,7 @@
 Apply with the established migration job: `python -m alembic upgrade head`.
 Revision `b4d8e1f2a3c5` follows `a3b7c9d1e2f4`. New tables/view only, no live
 catalogue or user backfill. Restart does not erase preparation or decisions.
-No new environment variable/package/port; app remains deny-all until T04.
+No new environment variable/package/port; the public app remains deny-all; the T04 private CLI is a separate authenticated composition.
 
 Import retry returns first evidence when ID, preparation, actor and reason match;
 new time/correlation does not replace the originals. Conflicts require a new
@@ -40,9 +40,9 @@ and read current head before retry. No manual repair UPDATE/DELETE is permitted.
 Rollback of an internal version takes expected_current_version_id and creates a
 new decision; it preserves target rows and original approval.
 
-The workflow head is not serving_catalogue_versions.active. T04 must explicitly
-compose verified tooling with the existing materializer/public projection; this
-task alone does not publish new loans into customer recommendations.
+The workflow head is not serving_catalogue_versions.active. T04 now composes
+the protected CLI with the existing materializer in the same transaction for
+the approved official source; the T03 storage primitive alone does not publish.
 
 Code rollback can stop use of these adapters and leave additive storage intact.
 Schema rollback is destructive to T03 evidence: export/backup all four tables and
@@ -65,3 +65,10 @@ reported as skips and do not qualify for readiness.
 protected-tool.md و ADR 0007 جای وعدهٔ اتصال آینده را برای منبع رسمی فعلی
 می‌گیرند: projection همان materializer در transaction audit اجرا می‌شود.
 source/config جدید و provider production هنوز خودکار فعال نیستند.
+
+## راهنمای اجرایی و آموزش T05
+
+برای کد متنی import/version در برابر UUID داخلی، queryهای فقط‌خواندنی، تشخیص
+نتیجه نامعلوم پیش از retry، تمرین rollback و ثبت تحویل اپراتور،
+[operations-runbook.md](operations-runbook.md) را دنبال کنید. downgrade/testهای
+disposable را روی محیط مشترک اجرا نکنید و audit را برای پاک‌سازی آموزش حذف نکنید.

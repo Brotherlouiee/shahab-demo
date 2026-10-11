@@ -45,7 +45,7 @@ frontend state. These grants do not confer access to customer profile/history.
    Neither a route-only check nor a non-empty `actor_reference` is sufficient.
 4. Permission denial raises `OperationsAccessDenied`; authority lookup failure
    raises `OperationsAuthorityUnavailable`. Both messages omit actor/credential/
-   repository details. T04 maps these to safe HTTP errors without bypass.
+   repository details. The T04 CLI returns a safe failure/exit status without bypass; no HTTP operations endpoint is installed.
 5. Wrong-subject grants, naive/expired timestamps, empty/unknown roles, raw
    permission strings and unsupported identity kinds fail closed.
 
@@ -83,3 +83,12 @@ grant seed, data/config version, API contract or customer UI change to reverse.
 ## US-10.T02 enforcement delivered
 
 The internal coordinator now checks each exact permission before any review/version repository access. Preparation and publication require nonempty reasons and aware UTC decisions as do import/approval/rollback; port decisions retain the actual verified actor independently of original approval. Stored resource linkage blocks mismatched or partially accepted imports. Stale or failed rollback leaves the pointer and decision unchanged in the explicit local/test contract model. No public route, durable adapter or real verifier is enabled; T03/T04 and hosting gates remain open. See [data-use-cases.md](data-use-cases.md).
+
+## وضعیت پس از T04/T05
+
+مطالب بالا محدوده تاریخی T01 را شرح می‌دهند. اکنون T02 کنترل use case، T03
+adapter/audit دائمی و T04 verifier HTTPS و CLI خصوصی را تحویل داده‌اند. app عمومی
+همچنان deny-all است؛ provider واقعی اپراتور هنوز فعال نشده. دستورهای اجرایی و
+آموزش در [راهنمای T05](operations-runbook.md) و قرارداد [T04](protected-tool.md)
+هستند. permissionهای config سیاست‌اند؛ command تغییر config یا وزن در ابزار
+فعلی وجود ندارد و SQL دستی جای آن نیست.

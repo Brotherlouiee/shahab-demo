@@ -92,3 +92,8 @@ role واقعی/secret ایجاد یا deploy نشده است. فعال‌ساز
 
 مراجع: [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662) و
 [RFC 8176](https://www.rfc-editor.org/rfc/rfc8176)، ADR 0007 و audit-runbook.md.
+
+## اجرای گام‌به‌گام و آموزش
+
+[راهنمای عملیات T05](operations-runbook.md) نمونه‌های معتبر هر شش operation،
+بازخوانی فقط‌خواندنی، تمرین rollback و آموزش منع ویرایش مستقیم دیتابیس را دارد.

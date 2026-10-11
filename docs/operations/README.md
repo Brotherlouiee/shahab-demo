@@ -1,10 +1,15 @@
-# Operations documentation
+# مستندات عملیات شهاب
 
-[نقش‌ها و مجوزهای عملیات داخلی — US-10.T01](authorization.md) سیاست، مرز هویت داخلی، پیش‌فرض رد دسترسی و مسئولیت تسک‌های بعدی را توضیح می‌دهد.
+از [راهنمای عملیات و آموزش اپراتور — US-10.T05](operations-runbook.md) شروع کنید:
+پیش‌نیاز، نمونه دستور، نقش هر مرحله، بازخوانی شواهد، retry، rollback و منع ویرایش
+مستقیم دیتابیس را در یک مسیر توضیح می‌دهد.
 
-runbookهای Docker، import، approval، rollback، backup/restore و incident response در داستان‌های مرتبط تکمیل می‌شوند. عملیات production نباید بر حدس یا ویرایش مستقیم دیتابیس متکی باشد.
+- [قرارداد ابزار محافظت‌شده T04](protected-tool.md): authority/MFA، schema و DB role.
+- [نقش‌ها T01](authorization.md) و [use caseها T02](data-use-cases.md).
+- [audit دائمی T03](audit-runbook.md): شاهد append-only و rollback schema.
+- [آماده‌سازی import](import-runbook.md): plan فقط، بدون انتشار مستقیم.
+- [Docker محلی](docker-runbook.md) و [readiness داده](t05b-serving-readiness.md).
+- [استقرار محیط پایدار](../runbook/production-deployment.md): gate مستقل T07 و URL واقعی.
 
-
-برای استقرار محیط پایدار و اتصال Netlify به API، [runbook استقرار](../runbook/production-deployment.md) را ببینید. این سند جایگزین CI یا Docker محلی نیست.
-
-[Internal data use cases — US-10.T02](data-use-cases.md) documents permission checks, resource linkage, rollback contracts and the remaining durable/audit/tool gates.
+CI موفق، provider پیکربندی‌شده، آموزش انسانی و deployment چهار نتیجه جدا هستند.
+backup/restore rehearsal و hardening نهایی در US-11/US-12 تکمیل می‌شوند.

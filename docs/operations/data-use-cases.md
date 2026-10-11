@@ -82,3 +82,11 @@ See [ADR 0006](../adr/0006-durable-operations-audit.md) and
 [the audit runbook](audit-runbook.md). This internal workflow persists its own
 review/preparation/approval decisions; it does not rewrite the existing public
 serving catalogue. The public projection bridge is an explicit T04 requirement.
+
+## وضعیت اجرایی پس از T04/T05
+
+بخش availability بالا تاریخ تحویل T02 است. اکنون T03 ذخیره‌سازی دائمی و T04
+CLI محافظت‌شده متصل به materializer رسمی را فراهم کرده‌اند. حافظه test مسیر
+عملیاتی نیست و public app deny-all می‌ماند. [راهنمای T05](operations-runbook.md)
+جای وعده tooling آینده را برای workflow فعلی می‌گیرد؛ provider/deploy و source/
+config جدید همچنان gate جدا دارند.

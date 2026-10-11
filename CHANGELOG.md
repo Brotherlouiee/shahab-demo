@@ -8,6 +8,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- US-10.T05: [راهنمای عملیات و آموزش اپراتور](docs/operations/operations-runbook.md)
+  با نمونه command معتبر، بررسی فقط‌خواندنی audit/catalogue، retry و rollback
+  و منع ویرایش مستقیم DB. ارجاع‌های تاریخی و مسیر انتشار runbook استقرار به
+  CLI محافظت‌شده فعلی متصل شدند؛ runtime/schema/data/scoring/deploy تغییر نکرد.
+
+
+### Added
+
 - US-10.T04: ابزار داخلی محافظت‌شده با تأیید authority HTTPS/MFA و مجوز تازه،
   اتصال تراکنشی materializer رسمی به audit و آزمون PostgreSQL با نقش محدود.
   [ADR 0007](docs/adr/0007-protected-operations-tool.md). بدون API عمومی یا migration جدید.
