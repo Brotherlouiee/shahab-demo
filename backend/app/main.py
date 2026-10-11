@@ -7,11 +7,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.responses import HTMLResponse, JSONResponse
 from redis import Redis
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .accounts.access import AccountAccess, MockOtpProvider
+from .api.documentation import DocumentedFastAPI
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
 from .api.timing import development_timing_middleware
@@ -64,10 +66,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     """Compose the API without importing domain, ORM, or feature implementation code."""
     active_settings = settings or get_settings()
     logger = configure_logging(active_settings.log_level)
-    app = FastAPI(
+    app = DocumentedFastAPI(
         title=active_settings.app_name,
         debug=active_settings.debug,
-        docs_url="/docs" if active_settings.docs_enabled else None,
+        docs_url=None,
         redoc_url="/redoc" if active_settings.docs_enabled else None,
         openapi_url=f"{active_settings.api_v1_prefix}/openapi.json" if active_settings.docs_enabled else None,
         lifespan=database_lifespan,
@@ -103,6 +105,24 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
 
     app.include_router(api_v1_router, prefix=active_settings.api_v1_prefix)
+    if active_settings.docs_enabled:
+
+        @app.get("/docs", include_in_schema=False)
+        def interactive_documentation(request: Request) -> HTMLResponse:
+            proxy_root = request.scope.get("root_path", "").rstrip("/")
+            return get_swagger_ui_html(
+                openapi_url=f"{proxy_root}{active_settings.api_v1_prefix}/openapi.json",
+                title=f"{active_settings.app_name} — API testing",
+                swagger_js_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js",
+                swagger_css_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css",
+                swagger_ui_parameters={
+                    "withCredentials": True,
+                    "persistAuthorization": False,
+                    "validatorUrl": None,
+                    "displayRequestDuration": True,
+                },
+            )
+
     app.dependency_overrides[get_settings] = lambda: active_settings
     app.state.settings = active_settings
     # Even an accidentally enabled flag cannot turn demo OTP into production authentication.

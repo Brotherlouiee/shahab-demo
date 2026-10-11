@@ -1,0 +1,82 @@
+[
+  {
+    "method": "POST",
+    "operationId": "logout_api_v1_account_access_logout_post",
+    "path": "/api/v1/account-access/logout"
+  },
+  {
+    "method": "POST",
+    "operationId": "request_code_api_v1_account_access_request_post",
+    "path": "/api/v1/account-access/request"
+  },
+  {
+    "method": "GET",
+    "operationId": "current_session_api_v1_account_access_session_get",
+    "path": "/api/v1/account-access/session"
+  },
+  {
+    "method": "POST",
+    "operationId": "verify_code_api_v1_account_access_verify_post",
+    "path": "/api/v1/account-access/verify"
+  },
+  {
+    "method": "GET",
+    "operationId": "live_health_live_get",
+    "path": "/api/v1/health/live"
+  },
+  {
+    "method": "GET",
+    "operationId": "ready_health_ready_get",
+    "path": "/api/v1/health/ready"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_loan_detail_api_v1_loans__loan_id__get",
+    "path": "/api/v1/loans/{loan_id}"
+  },
+  {
+    "method": "PUT",
+    "operationId": "upsert_profile_api_v1_profiles_put",
+    "path": "/api/v1/profiles"
+  },
+  {
+    "method": "GET",
+    "operationId": "read_own_profile_api_v1_profiles_me_get",
+    "path": "/api/v1/profiles/me"
+  },
+  {
+    "method": "POST",
+    "operationId": "start_session_api_v1_questionnaire_sessions_post",
+    "path": "/api/v1/questionnaire/sessions"
+  },
+  {
+    "method": "GET",
+    "operationId": "resume_session_api_v1_questionnaire_sessions__session_id__get",
+    "path": "/api/v1/questionnaire/sessions/{session_id}"
+  },
+  {
+    "method": "PUT",
+    "operationId": "write_answer_api_v1_questionnaire_sessions__session_id__answers__question_id__put",
+    "path": "/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}"
+  },
+  {
+    "method": "GET",
+    "operationId": "list_history_api_v1_recommendation_history_get",
+    "path": "/api/v1/recommendation-history"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "hide_history_api_v1_recommendation_history__history_id__delete",
+    "path": "/api/v1/recommendation-history/{history_id}"
+  },
+  {
+    "method": "GET",
+    "operationId": "read_history_api_v1_recommendation_history__history_id__get",
+    "path": "/api/v1/recommendation-history/{history_id}"
+  },
+  {
+    "method": "POST",
+    "operationId": "recommend_api_v1_recommendations_post",
+    "path": "/api/v1/recommendations"
+  }
+]

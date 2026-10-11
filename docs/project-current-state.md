@@ -1,5 +1,16 @@
 # Project current state
 
+## US-09.T081 — implementation checkpoint (2026-10-11)
+
+- activeTaskId/nextTaskId: US-09.T081; contract/tooling patch prepared, online hosting/access gate blocked. T07 has not begun.
+- Base main: 1e719ce85bfda05e8e3ce956e658ab1681b2bdcc; Codex-owned branch feat/us-09-t081-api-testing.
+- Complete operation inventory, OpenAPI/Postman export, pinned cookie-preserving Swagger, opt-in health schemas and CI drift/browser checks are implemented; docs/auth production policy unchanged.
+- 41 focused tests, format/lint/Mypy, boundary/secret scan, OpenAPI validation and real local Newman health requests passed. Final SHA/CI evidence belongs in the PR, not inferred here.
+- All online operation results remain unverified: approved HTTPS API/PostgreSQL host, tester network/access and costs are not supplied. No deployment or production/SMS claim.
+- Scope, review, source identities, execution time and next-step blocker: [US-09.T081 checkpoint](progress/us-09-t081.md), [manual guide](api/manual-testing.md), [coverage](api/coverage.md), [hosting runbook](runbook/api-testing.md).
+- Story continuity stays unchanged; historical next-task statements below are superseded.
+
+
 ## US-09.T081 — Interactive online API testing / corrected planning checkpoint (2026-10-10)
 
 - Scope: inspect FastAPI docs/config/routes and official Swagger/Postman documentation; define the new task before T07. Documentation only; implementation/publishing not started.
@@ -235,3 +246,4 @@
 ## Compatibility pointer
 
 This is the canonical current-state checkpoint required by the guide. `docs/progress/current-state.md` is retained only as historical context for earlier commits.
+

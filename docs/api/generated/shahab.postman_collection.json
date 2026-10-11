@@ -1,0 +1,683 @@
+{
+  "info": {
+    "description": "Restricted test environment only. Keep cookies enabled. Never publish populated environments or tokens.",
+    "name": "Shahab API — manual testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "POST /api/v1/account-access/logout",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Revokes the current account session and clears its cookie. Protected requests subsequently return 401; run this after completing the manual test flow.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "account-access",
+                "logout"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/account-access/logout"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const value = pm.response.json();",
+                  "  pm.environment.set(\"challengeId\", value[\"challengeId\"]);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "POST /api/v1/account-access/request",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"phone\": \"{{testPhone}}\"\n}"
+            },
+            "description": "Request Code",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "account-access",
+                "request"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/account-access/request"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "GET /api/v1/account-access/session",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Current Session",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "account-access",
+                "session"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/account-access/session"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const value = pm.response.json();",
+                  "  pm.environment.set(\"accessToken\", value[\"accessToken\"]);",
+                  "  pm.environment.set(\"testPhone\", value[\"phone\"]);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "POST /api/v1/account-access/verify",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"challengeId\": \"{{challengeId}}\",\n  \"code\": \"{{otpCode}}\"\n}"
+            },
+            "description": "Local/test verification creates or reuses the database profile and sets an HttpOnly account cookie. Mock OTP is forbidden in staging/production. No real phone ownership is asserted.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "account-access",
+                "verify"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/account-access/verify"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "account-access"
+    },
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "GET /api/v1/health/live",
+          "request": {
+            "description": "Public liveness: the running process can answer HTTP requests.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "health",
+                "live"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/health/live"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "GET /api/v1/health/ready",
+          "request": {
+            "description": "Restricted application readiness; dependency readiness is added with each adapter.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Shahab-Readiness-Token",
+                "value": "{{readinessToken}}"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "health",
+                "ready"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/health/ready"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "health"
+    },
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "GET /api/v1/loans/{loan_id}",
+          "request": {
+            "description": "Return only approved serving facts; identifiers never select a source version.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "{{loanId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/loans/{{loanId}}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "loans"
+    },
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "PUT /api/v1/profiles",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"phone\": \"{{testPhone}}\",\n  \"firstName\": \"\",\n  \"lastName\": \"\",\n  \"income\": \"\",\n  \"job\": \"\",\n  \"gender\": \"\",\n  \"avatar\": \"\"\n}"
+            },
+            "description": "Changes the signed-in actor's database profile. Test only your own synthetic account; the payload phone must match the server actor. Read /profiles/me to verify persistence.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "profiles"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/profiles"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "GET /api/v1/profiles/me",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Read Own Profile",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "profiles",
+                "me"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/profiles/me"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "profiles"
+    },
+    {
+      "item": [
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const value = pm.response.json();",
+                  "  pm.environment.set(\"sessionId\", value[\"sessionId\"]);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "POST /api/v1/questionnaire/sessions",
+          "request": {
+            "description": "Creates a 30-minute session and its HttpOnly proof cookie. Keep this cookie jar.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "questionnaire",
+                "sessions"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/questionnaire/sessions"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "GET /api/v1/questionnaire/sessions/{session_id}",
+          "request": {
+            "description": "Resume Session",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "questionnaire",
+                "sessions",
+                "{{sessionId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/questionnaire/sessions/{{sessionId}}"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "PUT /api/v1/questionnaire/sessions/{session_id}/answers/{question_id}",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"answerId\": \"{{answerId}}\"\n}"
+            },
+            "description": "Write Answer",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "questionnaire",
+                "sessions",
+                "{{sessionId}}",
+                "answers",
+                "{{questionId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/questionnaire/sessions/{{sessionId}}/answers/{{questionId}}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "questionnaire"
+    },
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "GET /api/v1/recommendation-history",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "List History",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "recommendation-history"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": true,
+                  "key": "cursor",
+                  "value": ""
+                }
+              ],
+              "raw": "{{baseUrl}}/api/v1/recommendation-history"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "DELETE /api/v1/recommendation-history/{history_id}",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Hides your own test history entry from user-facing reads; does not physically delete its immutable database snapshot. Missing, already-hidden and another actor's IDs return 404.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "recommendation-history",
+                "{{historyId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/recommendation-history/{{historyId}}"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "GET /api/v1/recommendation-history/{history_id}",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Read History",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "recommendation-history",
+                "{{historyId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/recommendation-history/{{historyId}}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "recommendation-history"
+    },
+    {
+      "item": [
+        {
+          "event": [],
+          "name": "POST /api/v1/recommendations",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"sessionId\": \"{{sessionId}}\"\n}"
+            },
+            "description": "Send only sessionId after completing all canonical answers. Authenticated persistence also requires the HttpOnly questionnaire proof cookie from session creation in this same client. Bearer alone does not prove questionnaire ownership. Anonymous results remain transient. Keep account and questionnaire proof cookies in this Postman cookie jar.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "recommendations"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/recommendations"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "recommendations"
+    }
+  ]
+}

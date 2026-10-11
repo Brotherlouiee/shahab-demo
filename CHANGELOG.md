@@ -8,6 +8,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- **US-09.T081 implementation checkpoint:** Added a complete generated OpenAPI/Postman contract, safe synthetic examples, cookie-preserving pinned Swagger, opt-in restricted health schemas, targeted contract/browser checks and CI drift validation. Manual testing, operation coverage and restricted hosting runbook are included. Existing production docs/auth/ownership, data/schema/migrations, scoring and UI are unchanged. Online HTTPS/PostgreSQL publication and two-tester verification remain blocked by missing hosting/access; T081 is not Done.
+
+### Added
+
 - **US-09.T081 planning:** Define a shareable online Swagger or Postman surface for real manual testing of every implemented API before US-09.T07. Include the required restricted HTTPS API/PostgreSQL test environment and reuse it in T07; preserve production docs/auth controls, safe examples, complete operation coverage and drift checks. Feasibility/planning only; no runtime or publication performed.
 
 
@@ -141,3 +145,4 @@ Sidebar owner clarification: show the server profile name; use «کاربر» fo
 ## US-09.T073 — Local OTP request repair (2026-10-09)
 
 Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.
+
