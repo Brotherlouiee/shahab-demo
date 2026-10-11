@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from enum import StrEnum
+from uuid import UUID, uuid4
 
 from .canonical_row import CanonicalLoanRow
 
@@ -32,6 +33,7 @@ class ApprovalRecord:
     actor_reference: str
     reason: str
     decided_at: datetime
+    correlation_id: UUID = field(default_factory=uuid4, compare=False)
 
 
 @dataclass(frozen=True, slots=True)

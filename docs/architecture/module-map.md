@@ -83,3 +83,13 @@ backend/app/accounts/phone.py normalizes full phone identities; profile_schema.p
 ## US-10.T02 internal data coordinator
 
 `data_pipeline/application/operations.py` calls the pure operations authority before every review or mutation, then reuses manifest preparation/publication. Its review port retains immutable evidence; infrastructure memory adapters are local/test only. Version/import linkage and atomic expected-pointer rollback preserve prior evidence. No reverse operations → pipeline/ORM dependency, public route, production adapter or schema change is introduced; durable audit and verified tooling remain T03/T04.
+
+## US-10.T03 durable infrastructure
+
+`data_pipeline/infrastructure/operations_codec.py` stores versioned historical
+preparation/diff evidence without re-normalization. `sqlalchemy_operations.py`
+implements the review and version ports using shared ORM metadata and per-call
+transactions. Pure `operations` authorization remains database-independent.
+`audit_events` is the single decision ledger, `approval_records` its view.
+No HTTP/app registration, scoring implementation or frontend import is added.
+See ADR 0006 and operations/audit-runbook.md for the public-serving boundary.

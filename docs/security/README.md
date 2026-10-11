@@ -5,3 +5,5 @@ documents the internal identity/role boundary. Customer mock OTP never confers
 operations authority; the current app defaults to deny all operations grants.
 
 threat model، privacy/retention، secret management، security test evidence و incident response در US-11 ثبت می‌شوند. هیچ secret یا دادهٔ شخصی در این مستندات یا لاگ‌ها ثبت نمی‌شود.
+
+[US-10.T03 durable audit threat review](operations-audit-threat-model.md).

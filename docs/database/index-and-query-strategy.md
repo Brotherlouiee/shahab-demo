@@ -36,3 +36,14 @@ WHERE lender_id = :selective_lender_id;
 - indexهای هم‌پوشان یا index روی دادهٔ حساس بدون اندازه‌گیری ممنوع است.
 - creation indexهای پرهزینه روی production بزرگ در migration بعدی با `CREATE INDEX CONCURRENTLY`، plan rollback و ADR انجام می‌شود؛ migration فعلی فقط schema خالی/ابتدایی را هدف دارد.
 - cost/time ثابت نیست؛ CI plan shape را assert می‌کند، نه عدد شکننده.
+
+## US-10.T03 audit access
+
+Unique import_code/version_code lookups; indexes on version.import_id and
+ event.import_id/version_id; partial unique initial-import and prepare/approve
+ decisions. Unique event_order supports bounded keyset pagination; composite
+ix_audit_actor_order(actor_reference,event_order) supports actor-scoped keysets.
+No JSONB index: preparation/diff are historical evidence, not list predicates.
+Singleton head lock intentionally serializes rare administration. Public scoring
+reads are unaffected. PostgreSQL tests use EXPLAIN with a selective event_order
+predicate to verify the ordered-key index path (costs are not asserted).

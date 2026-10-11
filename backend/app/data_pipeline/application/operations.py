@@ -7,9 +7,10 @@ review/audit adapters before operational exposure. Customer OTP never qualifies.
 """
 
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Protocol
+from uuid import UUID, uuid4
 
 from backend.app.data_pipeline.application.prepare_import import (
     ImportManifestRow,
@@ -31,6 +32,7 @@ class ReviewedImport:
     reason: str
     created_at: datetime
     preparation: ImportPreparation
+    correlation_id: UUID = field(default_factory=uuid4, compare=False)
 
 
 class ImportReviewRepository(Protocol):

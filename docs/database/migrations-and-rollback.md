@@ -43,3 +43,13 @@
 ## معیار خروجی مرحله‌های بعد
 
 `US-04.T03`: schema model/constraint declaration و repository port. `US-04.T04`: upgrade/downgrade روی PostgreSQL خالی و fixture. `US-04.T05`: index strategy و `EXPLAIN (ANALYZE, BUFFERS)` با dataset نماینده.
+
+## US-10.T03 — b4d8e1f2a3c5
+
+Add operations_imports, operations_versions, audit_events, operations_workflow_head,
+approval_records view and append-only triggers. Previous head a3b7c9d1e2f4.
+No existing-row backfill or customer/catalogue mutation. Frozen DDL in migration;
+future ORM changes do not rewrite this revision. Upgrade/downgrade proof runs
+in the existing disposable PostgreSQL CI job (test_operations_postgresql).
+Code rollback leaves additive evidence intact. Destructive schema downgrade needs
+verified backup/export and stopped writers; see ../operations/audit-runbook.md.

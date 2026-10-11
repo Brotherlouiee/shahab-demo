@@ -65,3 +65,11 @@ the candidate remains approved rather than partially published.
 ## US-10.T02 authorized application boundary
 
 `InternalDataOperations` guards import/review/prepare/approve/publish/rollback and checks exact stored clean-import linkage. Rollback targets an approved superseded version and compares the expected current pointer inside the atomic repository method; original rows/approval remain immutable. Preparation/publication decisions and rollback decisions retain verified actor/reason/UTC through port arguments. Existing memory adapters model this only for local/test; durable audit/approval and PostgreSQL transaction implementation/proof are T03. Existing OS-trusted CLI is not exposed as an operations route. See `../operations/data-use-cases.md`.
+
+## US-10.T03 review evidence persistence
+
+The existing manifest preparation and publication domain now have PostgreSQL
+ports retaining immutable reviewed plans, diffs and decisions. This is internal
+workflow evidence, not a second raw/core/serving pipeline. Normalization and
+scoring are never rerun when historical evidence is read. The public serving
+materializer remains unchanged; protected composition/projection is T04 scope.
