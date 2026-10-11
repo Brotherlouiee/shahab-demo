@@ -526,6 +526,27 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 
 **محدوده فایل‌ها:** T01 فقط مستندات نقشه/baseline، characterization/tests و evidence مصنوعی در مسیر جدید اختصاصی US-10R؛ evidence قدیمی اجراهای دیگر بازنویسی نشود. T02/T03 فقط src/home page.jsx، src/App.css، entry/import و feature/صفحه متناظرِ ثبت‌شده، تست مرتبط و docs/checkpoint/CHANGELOG. backend، migration، منبع خام، داده/config و asset bytes ممنوع‌اند. در صورت تماس با پرسشنامه/نتیجه، الزام بازخوانی منابع رسمی همین guide همچنان برقرار است؛ این داستان آن را لغو نمی‌کند.
 
+### کنترل‌های تکمیلی محافظت از نسخه فعلی — درخواست مالک، ۲۰۲۶-۱۰-۱۱
+
+این کنترل‌ها بخشی از پذیرش هر تسک‌اند؛ نوشتن این برنامه به معنی اجرای کنترل‌ها نیست. هیچ ادعای «تضمین بدون خطا» مجاز نیست؛ تغییر فقط با شاهد قابل بازبینی پذیرفته می‌شود.
+
+| مرحله | کنترل اجباری پیش از عبور |
+| --- | --- |
+| T01؛ مرجع ثابت | SHA اصلی داستان، hash تصویرها/assetها، نسخه browser/OS/font/lockfile، fixture و فرمان بازتولید در manifest ثبت شود. baseline کل داستان محفوظ بماند؛ برای هر PR علاوه بر آن، main قبل از همان PR هم مقایسه شود تا تغییر تدریجی انباشته پنهان نشود. |
+| T01؛ اعتبار مرجع | ابتدا baseline بدون candidate با همان فرمان آزمون شود. route/state بدون پوشش یا خطای baseline مشخص شود؛ نبود پوشش، شکست baseline یا عدم امکان مقایسه مانع استخراج همان بخش است. ایراد قبلی با تست جدیدِ انتظار درست پنهان نشود؛ رفعش task جدا می‌خواهد. |
+| T01؛ محیط و داده | baseline و candidate در checkoutهای جدا و محیط یکسان اجرا شوند؛ DB فقط fixture اختصاصی و قابل تکرار با هویت مصنوعی. تست logout/hide/profile هیچ داده/volume کاربر یا محیط مشترک را تغییر/پاک نکند. cookie/token/شماره واقعی و پاسخ شخصی در screenshot/trace/HAR/Git نباشند؛ گزارش شبکه فقط مشخصات پالایش‌شده و شمارش معنایی را نگه دارد. |
+| T01؛ نگاشت تست | برای هر route و state، آزمون موجود و شکاف، suite/config/fixture/API/DB، viewport و selectorهای cross-page مشخص شود. حداقل home/menu مهمان و کاربر، login/OTP درست/غلط/ارسال مجدد، personal-info/profile، پرسشنامه next/back، analysis، سه partition، بانک/مقایسه، جزئیات، saved/history، hide/logout لغو/تأیید، loading/empty/error و direct/refresh/back بررسی شوند. حالت غیرفعال فعلی نیز ثبت شود، نه فعال‌سازی آن. |
+| T02؛ انتقال مکانیکی | قبل از تغییر، نام export/import، props/callback، DOM/class، state owner و key/effect/timer ثبت شود؛ استخراج و cleanup در یک PR مخلوط نشوند. formatter سراسری، rename انبوه، routing/router جدید، lazy-loading، تغییر dependency array یا معماری state ممنوع؛ هیچ bugfix/بهبود UX در refactor مخفی نشود. |
+| T02؛ رفتار غیرتصویری | baseline و candidate با ورودی یکسان، وضعیت قبل/بعد/Back/refresh و preservation انتخاب/فرم/focus را مقایسه کنند. method/path، ترتیب وابستگی درخواست‌ها، شمارش درخواست تکمیل‌شده/درحال‌اجرا، retry/abort/dedupe و پاسخ خطای مربوط برابر باشند؛ شناسه تصادفی فقط در harness به شکل معنایی تطبیق داده شود، امنیت و مالکیت واقعی حفظ شود. |
+| T03؛ ترتیب CSS و build | manifest ترتیب قواعد شامل @media/@supports/pseudo-state/global و مصرف‌کنندگان مشترک ثبت شود. computed style/geometry صفحات مجاور قبل/بعد مقایسه شود؛ هم dev و هم build/preview با همان lockfile برای ترتیب CSS، asset URL/font/image و نبود import شکسته بررسی شوند. صرف build موفق یا screenshot یک صفحه کافی نیست. |
+| T04؛ حذف فقط با شاهد | duplicate declaration می‌تواند به دلیل cascade لازم باشد؛ شباهت متن مجوز حذف نیست. نبود مصرف در تمام routeها، کلاس پویا، responsive/pseudo-state، branchهای guest/auth و empty/error ثابت شود. مورد مشکوک حفظ و در backlog دلیل‌دار ثبت شود؛ برای پایین‌آوردن خط‌شمار حذف انجام نشود. |
+
+**gate قبل از ready/merge هر PR:** allowlist دقیق و دامنه وابستگی بررسی شود؛ آزمون‌های موجود حذف/ضعیف/skip نشده باشند؛ evidence شامل baseline/candidate/diff، نتیجه تعامل/شبکه، محیط، SHA و فرمان بازتولید باشد. نبود شواهد، خطای console/import/network جدید، reset state، اختلاف واقعی تصویر/هندسه یا شکست CI، PR را غیرقابل مرج نگه می‌دارد. tolerance/mask/timeout/baseline برای پذیرش تفاوت تغییر نکند. مرور بصری نسخه قابل‌آزمایش برای مالک فراهم شود؛ merge/deploy خودکار ممنوع است و مرور مالک جای تست را نمی‌گیرد.
+
+**توقف و برگشت:** اگر حفظ رفتار یک بخش قابل اثبات نیست، انتقال همان بخش انجام نشود یا patch آن در branch خود Codex بازگردد؛ نسخه معتبر اصلی دست‌نخورده بماند. rollback پیش از مرج با بازبینی patch روی branch خود و پس از مرج با PR revert مستقل است؛ بدون reset --hard، force-push، restore تغییرات کاربر یا reset DB. مسیر revert در محیط مستقل بررسی شود و شامل migration/data نباشد. شکست یک زیرتسک مانع زیرتسک بعد است؛ checkpoint آخرین SHA معتبر و مشکل را ثبت کند.
+
+**همکاری و تحویل:** پیش از هر زیرتسک، Git/IDE و تغییرات محلی صاحب پروژه بررسی شوند؛ کد خارج از main از پوشه قدیمی خودکار کپی نشود. اگر main تغییر کرد، دامنه اثر و آزمون‌های تحت اثر دوباره بررسی شوند، اما baseline اصلی داستان بازنویسی نشود. اثر تغییر approved دیگری صریح در manifest ثبت و تنها برای همان تغییر مجاز reconciliation شود. artefactهای قدیمی نامرتبط untouched بمانند. در پایان T04، baseline اصلی و آخرین main پذیرفته‌شده با نسخه نهایی مقایسه شوند؛ صفر اختلاف واقعی و تمام gateها لازم است.
+
 **gate پایان US-10R:** تمام registry بسته، تغییر واقعی ظاهر/رفتار صفر، تمام آزمون‌های لازم/چهار CI سبز روی commit نهایی، review امنیت/مرزها و CSS/state کامل، مسیرهای کاربر و snapshot تاریخی حفظ، docs/CHANGELOG/checkpoint کامل و rollback روشن. فقط سپس US-11 قابل شروع طبق دستور مربوط است؛ T07/T081 و تمام شرایط پایان US-09/US-12 پابرجا هستند.
 
 ### تعویق استقرار و وابستگی US-10 — تصمیم مالک، ۲۰۲۶-۱۰-۱۱

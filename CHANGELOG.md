@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- US-10R safeguards: مرجع ثابت کل داستان و هر PR، آزمون اعتبار baseline،
+  مقایسه رفتار/شبکه و CSS در dev/build، محیط fixture مستقل و gate توقف/revert
+  به جزئیات تسک‌ها افزوده شد. برنامه فقط؛ runtime/CSS/DB تغییر نکرده است.
+
+
 - US-10R planning: یوزر استوری مستقل ماژولارسازی فرانت پیش از US-11، با چهار
   تسک و زوج‌های کوچک استخراج صفحه/CSS، baseline تصویری و رفتاری مستقل و
   ممنوعیت تغییر ظاهر، React state، CSS cascade، API، DB و scoring.
