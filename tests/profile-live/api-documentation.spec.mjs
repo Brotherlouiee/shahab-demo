@@ -15,12 +15,12 @@ test("Swagger lists every operation and executes real authorized-boundary reques
   await live.locator(".opblock-summary").click();
   await live.getByRole("button", { name: "Try it out", exact: true }).click();
   await live.getByRole("button", { name: "Execute", exact: true }).click();
-  await expect(live.locator(".live-responses-table .response-col_status")).toHaveText(/^200(?:\s|$)/);
+  await expect(live.locator(".live-responses-table tbody .response-col_status")).toHaveText(/^200(?:\s|$)/);
   await expect(live.locator(".live-responses-table")).toContainText('"ok"');
   const profile = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/profiles/me"]') });
   await profile.locator(".opblock-summary").click();
   await profile.getByRole("button", { name: "Try it out", exact: true }).click();
   await profile.getByRole("button", { name: "Execute", exact: true }).click();
-  await expect(profile.locator(".live-responses-table .response-col_status")).toHaveText(/^401(?:\s|$)/);
+  await expect(profile.locator(".live-responses-table tbody .response-col_status")).toHaveText(/^401(?:\s|$)/);
   await expect(profile.locator(".live-responses-table")).toContainText("correlationId");
 });
