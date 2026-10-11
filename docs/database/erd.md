@@ -101,3 +101,20 @@ erDiagram
 ## Existing profile table — PR #85 / US-09.T072
 
 user_profiles was introduced by migration d1a9e71b4c3f, independent of anonymous questionnaire/recommendation data. Canonical eleven-digit phone is the string primary key; one editable record per phone. A local/test verified server session selects that phone. There is no FK to questionnaires or loans, and this repair adds no schema changes.
+
+## US-10.T03 implemented operations evidence
+
+```mermaid
+erDiagram
+    operations_imports ||--o{ operations_versions : prepares
+    operations_imports ||--o{ audit_events : evidences
+    operations_versions o|--o{ audit_events : decides
+    operations_versions o|--o| operations_workflow_head : current
+```
+
+`audit_events` has a composite version/import FK, plus before/after version FKs.
+`approval_records` is a view of approve events, not an independent table. Imports,
+versions and events are append-only; singleton head is the mutable projection.
+These implemented relations supersede only the earlier conceptual approval/audit
+shape; unimplemented staging concepts are still conceptual. Historical JSONB
+preparation/diff follows ADR 0006; customer serving relations remain unchanged.

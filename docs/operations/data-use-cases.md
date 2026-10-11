@@ -53,7 +53,7 @@ composition. Creating an `OperationsIdentity` object is not authentication.
 
 The app remains deny-all. Existing OS-trusted materialization/backfill jobs
 retain their explicit reviewed operator workflow and must not be called directly
-from a public route. There is no production rollout or database change here.
+from a public route. T02 itself made no database change; T03 adds the durable adapters described below.
 
 ## Verification / code rollback
 
@@ -71,3 +71,14 @@ state is changed by deploying this code, because operations composition is not
 enabled. Later data rollback is the guarded version operation, not a schema
 downgrade or raw SQL edit. See `docs/progress/us-10-t02.md` for dependency/time
 evidence. T07/online T081 and the story continuity gate remain open.
+
+## Durable adapters — US-10.T03
+
+`SqlAlchemyImportReviewRepository` and `SqlAlchemyServingVersionRepository` take
+an existing trusted Session factory and implement the T02 ports. Compose them
+behind `InternalDataOperations`, never as directly callable HTTP primitives.
+No adapter is installed into the production app before T04 credential verification.
+See [ADR 0006](../adr/0006-durable-operations-audit.md) and
+[the audit runbook](audit-runbook.md). This internal workflow persists its own
+review/preparation/approval decisions; it does not rewrite the existing public
+serving catalogue. The public projection bridge is an explicit T04 requirement.

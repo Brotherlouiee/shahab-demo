@@ -11,6 +11,10 @@ from sqlalchemy import create_engine, inspect, text
 
 DATABASE_URL = os.environ.get("SHAHAB_TEST_DATABASE_URL")
 EXPECTED_TABLES = {
+    "operations_imports",
+    "operations_versions",
+    "audit_events",
+    "operations_workflow_head",
     "user_profiles",
     "answer_options",
     "data_import_runs",

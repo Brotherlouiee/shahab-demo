@@ -11,12 +11,15 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import (
+    JSON,
+    BigInteger,
     Boolean,
     CheckConstraint,
     DateTime,
     Float,
     ForeignKey,
     ForeignKeyConstraint,
+    Identity,
     Integer,
     Numeric,
     String,
@@ -25,6 +28,7 @@ from sqlalchemy import (
     Uuid,
     func,
 )
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -413,3 +417,90 @@ class RecommendationHistoryItemReason(Base):
     )
     display_order: Mapped[int] = mapped_column(Integer, primary_key=True)
     reason: Mapped[str] = mapped_column(Text, nullable=False)
+
+
+class OperationsImport(Base):
+    """Immutable versioned review evidence, not a second live loan catalogue."""
+
+    __tablename__ = "operations_imports"
+    import_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    import_code: Mapped[str] = mapped_column(Text, unique=True, nullable=False)
+    source_hash: Mapped[str] = mapped_column(Text, nullable=False)
+    parser_version: Mapped[str] = mapped_column(Text, nullable=False)
+    preparation: Mapped[dict[str, object]] = mapped_column(JSON().with_variant(JSONB(), "postgresql"), nullable=False)
+    __table_args__ = (
+        CheckConstraint(
+            "length(trim(import_code)) > 0 AND length(trim(parser_version)) > 0", name="ck_operations_import_identity"
+        ),
+    )
+
+
+class OperationsVersion(Base):
+    """Immutable draft identity; current state is projected from the decision ledger."""
+
+    __tablename__ = "operations_versions"
+    version_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    version_code: Mapped[str] = mapped_column(Text, unique=True, nullable=False)
+    import_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("operations_imports.import_id"), nullable=False, index=True)
+    diff: Mapped[dict[str, object]] = mapped_column(JSON().with_variant(JSONB(), "postgresql"), nullable=False)
+    __table_args__ = (
+        CheckConstraint("length(trim(version_code)) > 0", name="ck_operations_version_identity"),
+        UniqueConstraint("version_id", "import_id", name="uq_operations_version_import"),
+    )
+
+
+class AuditEvent(Base):
+    """Append-only actor decision with relational linkage and before/after state."""
+
+    __tablename__ = "audit_events"
+    event_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    event_order: Mapped[int] = mapped_column(BigInteger, Identity(), unique=True, nullable=False)
+    event_type: Mapped[str] = mapped_column(String(16), nullable=False)
+    import_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("operations_imports.import_id"), nullable=False, index=True)
+    version_id: Mapped[uuid.UUID | None] = mapped_column(Uuid, nullable=True, index=True)
+    actor_reference: Mapped[str] = mapped_column(Text, nullable=False)
+    reason: Mapped[str] = mapped_column(Text, nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    correlation_id: Mapped[uuid.UUID] = mapped_column(Uuid, nullable=False, unique=True)
+    before_state: Mapped[str | None] = mapped_column(String(16), nullable=True)
+    after_state: Mapped[str] = mapped_column(String(16), nullable=False)
+    before_version_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("operations_versions.version_id"))
+    after_version_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("operations_versions.version_id"))
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ["version_id", "import_id"],
+            ["operations_versions.version_id", "operations_versions.import_id"],
+            name="fk_audit_version_import",
+        ),
+        CheckConstraint(
+            "event_type IN ('import', 'prepare', 'approve', 'publish', 'rollback')", name="ck_audit_event_type"
+        ),
+        CheckConstraint("length(trim(actor_reference)) > 0 AND length(trim(reason)) > 0", name="ck_audit_actor_reason"),
+        CheckConstraint(
+            "COALESCE((event_type = 'import' AND version_id IS NULL AND before_state IS NULL "
+            "AND after_state = 'reviewed') OR "
+            "(event_type = 'prepare' AND version_id IS NOT NULL AND before_state IS NULL AND after_state = 'draft') OR "
+            "(event_type = 'approve' AND version_id IS NOT NULL AND before_state = 'draft' "
+            "AND after_state = 'approved') OR "
+            "(event_type = 'publish' AND version_id IS NOT NULL AND before_state = 'approved' "
+            "AND after_state = 'published' AND after_version_id IS NOT NULL "
+            "AND after_version_id = version_id) OR "
+            "(event_type = 'rollback' AND version_id IS NOT NULL AND before_state = 'superseded' "
+            "AND after_state = 'published' AND after_version_id IS NOT NULL "
+            "AND before_version_id IS NOT NULL AND after_version_id = version_id), FALSE)",
+            name="ck_audit_transition",
+        ),
+        CheckConstraint(
+            "event_type IN ('publish', 'rollback') OR (before_version_id IS NULL AND after_version_id IS NULL)",
+            name="ck_audit_pointer_evidence",
+        ),
+    )
+
+
+class OperationsWorkflowHead(Base):
+    """Singleton transaction lock and current internal workflow version."""
+
+    __tablename__ = "operations_workflow_head"
+    head_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
+    version_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("operations_versions.version_id"))
+    __table_args__ = (CheckConstraint("head_id = 1", name="ck_operations_singleton"),)

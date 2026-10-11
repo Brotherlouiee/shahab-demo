@@ -67,3 +67,23 @@
 | created_at, updated_at | timestamptz | non-null, now(); ORM updates updated_at |
 
 Source: migration d1a9e71b4c3f_add_user_profiles.py. Owner: account/profile feature. Synthetic fixture phone: 09000000001. Purpose: local/test profile persistence. Retained until explicit owner/operator removal; production deletion/retention policy is a separate account release gate. No new schema/migration in T072.
+
+## US-10.T03 actual audit dictionary
+
+- operations_imports: immutable reviewed input aggregate; import_code is the T02
+  external key, UUID is relational identity; source_hash/parser_version identify
+  provenance; preparation is version-1 accepted/rejected/issue evidence.
+- operations_versions: immutable prepared version identity and catalogue diff;
+  import_id joins the exact stored source plan, no second copy of canonical rows.
+- audit_events: event_id identity, event_order stable order (gaps allowed),
+  event_type decision kind; actor_reference internal server subject; reason
+  non-sensitive explanation; occurred_at UTC instant; correlation_id server UUID;
+  import_id/version_id linked resource; before_state/after_state target transition;
+  before_version_id/after_version_id head transition for publish/rollback.
+- operations_workflow_head: exactly the seeded head_id=1 in application, nullable
+  version_id until initial internal publication. Mutable lock/projection only.
+- approval_records: relational VIEW of approve audit facts, not a copied table.
+
+Exact types/nullability/constraints are in physical-schema-3nf.md. This implemented
+additive schema supersedes the earlier conceptual approval/audit columns only;
+customer-serving storage is unchanged. Evidence has no automatic retention purge.
