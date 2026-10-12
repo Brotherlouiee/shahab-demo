@@ -1,4 +1,4 @@
-import { displayProfilePhone, hasProfileAccess, logoutProfile, persistPersonalInfo, persistProfile, readOwnProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
+import { displayProfilePhone, hasProfileAccess, logoutProfile, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { readSavedLoans } from "./features/account/savedLoans.mjs";
 import { isSavedLoanDetailsPath, savedLoanDetailsPath } from "./features/account/savedLoansPresentation.mjs";
@@ -23,6 +23,7 @@ import {
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
   QuestionnaireSessionApiError,
+  readQuestionnaireSession,
   saveQuestionnaireAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
@@ -326,11 +327,11 @@ function getLoanIdFromLocation() {
 function getActiveRecommendationHistoryState() {
   if (typeof window === "undefined") return null;
   const value = window.history.state?.shahabRecommendation;
-  return value && typeof value.sessionId === "string" && value.result ? value : null;
+  return value && typeof value.sessionId === "string" ? value : null;
 }
 
 function replaceActiveRecommendationHistoryState(sessionId, result) {
-  if (typeof window === "undefined" || !sessionId || !result) return;
+  if (typeof window === "undefined" || !sessionId) return;
   window.history.replaceState(
     { ...(window.history.state || {}), shahabRecommendation: { sessionId, result } },
     "",
@@ -1137,6 +1138,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const [loanOtpError, setLoanOtpError] = useState("");
   const [profileChallengeId, setProfileChallengeId] = useState("");
   const [isSavingProfile, setIsSavingProfile] = useState(false);
+  const [isCheckingPersonalAccess, setIsCheckingPersonalAccess] = useState(true);
+  const [personalAccountPhone, setPersonalAccountPhone] = useState("");
+  const personalDraftFields = useRef(new Set());
+  const profileSubmitRef = useRef(false);
   const [isIncomeDropdownOpen, setIsIncomeDropdownOpen] = useState(false);
   const [isJobDropdownOpen, setIsJobDropdownOpen] = useState(false);
   const [stageOffset, setStageOffset] = useState(0);
@@ -1562,7 +1567,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     personalInfo.job &&
     !personalInfoErrors.firstName &&
     !personalInfoErrors.lastName;
-  const canProceed = !isSavingProfile && (isOtpQuestion
+  const canProceed = !isSavingProfile && (!isPersonalInfoQuestion || !isCheckingPersonalAccess) && (isOtpQuestion
     ? loanOtpValue.length === 6
     : isPersonalInfoQuestion
       ? Boolean(isPersonalInfoComplete)
@@ -1618,6 +1623,24 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   );
   const activeStageIndex =
     workflowActiveStageIndex === -1 ? stages.length - 1 : workflowActiveStageIndex;
+
+  useEffect(() => {
+    if (!isPersonalInfoQuestion || isAnalyzingLoans || loanResultView) return undefined;
+    let active = true;
+    setIsCheckingPersonalAccess(true);
+    readPersonalInfoProfile().then((profile) => {
+      if (!active) return;
+      setPersonalAccountPhone(profile?.phone || "");
+      if (!profile) return;
+      const fields = { firstName: profile.firstName || "", lastName: profile.lastName || "",
+        income: profile.income || "", job: profile.job || "", phone: displayProfilePhone(profile.phone).slice(2) };
+      setPersonalInfo((current) => Object.fromEntries(Object.entries(fields).map(([key, value]) =>
+        [key, key !== "phone" && personalDraftFields.current.has(key) ? current[key] : value])));
+    }).catch((error) => {
+      if (active) setQuestionnaireSessionError(error.message);
+    }).finally(() => { if (active) setIsCheckingPersonalAccess(false); });
+    return () => { active = false; };
+  }, [isPersonalInfoQuestion, isAnalyzingLoans, loanResultView]);
 
   useEffect(() => {
     replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult);
@@ -1796,28 +1819,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       return true;
     } catch (error) {
-      // An expired anonymous session must not put a blocking error card in the
-      // questionnaire or make the user re-enter answers already held in memory.
       if (error instanceof QuestionnaireSessionApiError && error.status === 410) {
-        try {
-          const freshSession = await startQuestionnaireSession();
-          const replay = Object.entries(answers)
-            .map(([questionIndex, answerId]) => ({
-              question: getCanonicalQuestionForPrototypeIndex(Number(questionIndex)),
-              answerId,
-            }))
-            .filter(({ question }) => question);
-          const currentAnswer = replay.find(({ question }) => question.questionId === canonicalQuestion.questionId);
-          if (currentAnswer) currentAnswer.answerId = selectedOption;
-          else replay.push({ question: canonicalQuestion, answerId: selectedOption });
-          for (const { question, answerId } of replay) {
-            await saveQuestionnaireAnswer(freshSession.sessionId, question.questionId, answerId);
-          }
-          setQuestionnaireSessionId(freshSession.sessionId);
-          return true;
-        } catch {
-          // Fall through to the ordinary recoverable transport message.
-        }
+        setAnswers({});
+        setQuestionnaireSessionError("مهلت پرسشنامه تمام شده است. پرسشنامه را دوباره تکمیل کنید.");
+        return false;
       }
       setQuestionnaireSessionError(
         "ذخیره پاسخ انجام نشد. لطفاً اتصال را بررسی کنید و دوباره تلاش کنید.",
@@ -1849,44 +1854,64 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     }
   }
 
+  async function savePersonalProfileAndAnalyze(profile) {
+    const stored = await persistPersonalInfo(profile);
+    const accountProfile = stored;
+    Object.entries(accountProfile).forEach(([field, value]) => {
+      if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
+    });
+    setCachedAccountProfile(accountProfile);
+    onAccountCreated(accountProfile);
+    setLoanResultView("");
+    setIsAnalyzingLoans(true);
+    setIsAnalysisSpinnerRunning(true);
+    setAnalysisCountdown(5);
+    setLoanOtpError("");
+  }
+
   async function handleNextQuestion() {
     if (!canProceed) return;
     if (!(await persistCanonicalQuestionnaireAnswer())) return;
     if (isPersonalInfoQuestion) {
+      if (profileSubmitRef.current) return;
+      profileSubmitRef.current = true;
       setIsSavingProfile(true);
       setQuestionnaireSessionError("");
       try {
+        // Check the original raw-answer TTL; never create/replay a replacement session.
+        if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
+        const profile = await readPersonalInfoProfile();
+        setPersonalAccountPhone(profile?.phone || "");
+        if (profile) {
+          await savePersonalProfileAndAnalyze({ ...personalInfo, phone: profile.phone });
+          return;
+        }
         const challenge = await requestProfileCode(personalInfo.phone);
         setProfileChallengeId(challenge.challengeId);
         setIsOtpVerificationStep(true);
+        setLoanOtp(Array(6).fill(""));
+        setLoanOtpSeconds(120);
+        setLoanOtpError("");
       } catch (error) {
-        setQuestionnaireSessionError(error.message);
-        return;
-      } finally { setIsSavingProfile(false); }
-      setLoanOtp(Array(6).fill(""));
-      setLoanOtpSeconds(120);
-      setLoanOtpError("");
+        if (error instanceof QuestionnaireSessionApiError && error.status === 410) {
+          setAnswers({});
+          setQuestionnaireSessionError("مهلت پرسشنامه تمام شده است. پرسشنامه را دوباره تکمیل کنید.");
+        } else {
+          if (error.status === 401) setPersonalAccountPhone("");
+          setQuestionnaireSessionError(error.message);
+        }
+      } finally { setIsSavingProfile(false); profileSubmitRef.current = false; }
       return;
     }
     if (isOtpQuestion) {
       setIsSavingProfile(true);
       setLoanOtpError("");
       try {
+        if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
         // Verification and persistence must both succeed before the analysis route opens.
         // A storage retry reuses the verified capability, not a consumed OTP challenge.
         if (!hasProfileAccess(personalInfo.phone)) await verifyProfileCode(profileChallengeId, loanOtpValue);
-        const stored = await persistPersonalInfo(personalInfo);
-        const accountProfile = stored;
-        Object.entries(accountProfile).forEach(([field, value]) => {
-          if (field in personalInfoCacheKeys) setCachedPersonalInfoValue(field, value);
-        });
-        setCachedAccountProfile(accountProfile);
-        onAccountCreated(accountProfile);
-        setLoanResultView("");
-        setIsAnalyzingLoans(true);
-        setIsAnalysisSpinnerRunning(true);
-        setAnalysisCountdown(5);
-        setLoanOtpError("");
+        await savePersonalProfileAndAnalyze(personalInfo);
       } catch (error) { setLoanOtpError(error.message); }
       finally { setIsSavingProfile(false); }
       return;
@@ -1988,6 +2013,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   function handleStartQuestionnaire() {
     clearActiveRecommendationHistoryState();
+    setQuestionnaireSessionId("");
+    setAnswers({});
     setRecommendationResult(null);
     setRecommendationStatus("idle");
     setLoanResultView("");
@@ -1996,6 +2023,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handlePersonalInfoChange(field, value) {
+    personalDraftFields.current.add(field);
     setPersonalInfo((current) => ({
       ...current,
       [field]: value,
@@ -2007,6 +2035,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handlePersianNameChange(field, value) {
+    personalDraftFields.current.add(field);
     const sanitizedValue = sanitizePersianName(value);
     const hasInvalidCharacter = hasInvalidPersianNameCharacter(value);
 
@@ -2026,6 +2055,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handlePhoneChange(value) {
+    if (personalAccountPhone || isCheckingPersonalAccess) return;
     const sanitizedValue = sanitizePhoneDigits(value);
     handlePersonalInfoChange("phone", sanitizedValue);
     setCachedPersonalInfo((current) => ({
@@ -2407,6 +2437,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                   list="hp-phone-cache"
                   autoComplete="tel-national"
                   value={personalInfo.phone}
+                  readOnly={Boolean(personalAccountPhone) || isCheckingPersonalAccess}
                   onFocus={() => setFocusedPersonalInfoField("phone")}
                   onBlur={() => window.setTimeout(() => setFocusedPersonalInfoField(""), 120)}
                   onBeforeInput={(event) => {
@@ -2424,7 +2455,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                   {cachedPersonalInfo.phone ? <option value={cachedPersonalInfo.phone} /> : null}
                 </datalist>
               </div>
-              {focusedPersonalInfoField === "phone" && cachedPersonalInfo.phone && cachedPersonalInfo.phone !== personalInfo.phone ? (
+              {!personalAccountPhone && !isCheckingPersonalAccess && focusedPersonalInfoField === "phone" && cachedPersonalInfo.phone && cachedPersonalInfo.phone !== personalInfo.phone ? (
                 <button className="hp-personal-cache-suggestion" type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => handleCachedPersonalInfoSelect("phone")}>
                   {cachedPersonalInfo.phone}
                 </button>
@@ -3055,6 +3086,7 @@ export default function HomePage() {
   }
 
   function handleQuestionnaireOpen() {
+    clearActiveRecommendationHistoryState();
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }
@@ -3134,4 +3166,3 @@ export default function HomePage() {
     </div>
   );
 }
-

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clearAccountAccess, displayProfilePhone, hasProfileAccess, normalizeProfilePhone, persistPersonalInfo, persistProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "../../src/features/account/profileClient.mjs";
+import { clearAccountAccess, displayProfilePhone, hasProfileAccess, normalizeProfilePhone, persistPersonalInfo, persistProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "../../src/features/account/profileClient.mjs";
 
 test("complete phone identities are not truncated", () => {
   for (const value of ["09000000001", "۰۹۰۰۰۰۰۰۰۰۱", "٠٩٠٠٠٠٠٠٠٠١", "000000001"]) {
@@ -70,6 +70,55 @@ test("an earlier anonymous session probe cannot erase a later OTP verification",
     resolveProbe(new Response(null, { status: 401 }));
     await probe;
     assert.equal(hasProfileAccess("09000000001"), true);
+  } finally { globalThis.fetch = original; clearAccountAccess(); }
+});
+
+test("personal-info restores the server actor and persists with its cookie without OTP", async () => {
+  clearAccountAccess();
+  const original = globalThis.fetch;
+  const paths = [];
+  globalThis.fetch = async (url, options) => {
+    paths.push(url);
+    if (url.endsWith("/session")) return Response.json({ phone: "09000000001", expiresIn: 17 });
+    assert.equal(options.headers.Authorization, undefined);
+    assert.equal(options.credentials, "same-origin");
+    if (url.endsWith("/me")) return Response.json({ phone: "09000000001", firstName: "آزمون", gender: "female" });
+    return Response.json(JSON.parse(options.body));
+  };
+  try {
+    const profile = await readPersonalInfoProfile();
+    const stored = await persistPersonalInfo({ ...profile, job: "manager" });
+    assert.equal(stored.gender, "female");
+    assert.ok(paths.every(path => !/\/(request|verify)$/.test(path)));
+  } finally { globalThis.fetch = original; clearAccountAccess(); }
+});
+
+test("personal-info treats only 401 as guest; infrastructure errors never imply login", async () => {
+  clearAccountAccess();
+  const original = globalThis.fetch;
+  try {
+    for (const status of [403, 429, 503]) {
+      globalThis.fetch = async () => new Response(null, { status });
+      await assert.rejects(readPersonalInfoProfile(), { status });
+    }
+    globalThis.fetch = async () => { throw new TypeError("offline"); };
+    await assert.rejects(readPersonalInfoProfile(), { status: 0 });
+    globalThis.fetch = async () => new Response(null, { status: 401 });
+    assert.equal(await readPersonalInfoProfile(), null);
+  } finally { globalThis.fetch = original; clearAccountAccess(); }
+});
+
+test("a successful cookie probe started before logout cannot resurrect the old actor", async () => {
+  clearAccountAccess();
+  const original = globalThis.fetch;
+  let resolveProbe;
+  globalThis.fetch = () => new Promise(resolve => { resolveProbe = resolve; });
+  try {
+    const probe = restoreAccountAccess({ strict: true });
+    clearAccountAccess();
+    resolveProbe(Response.json({ phone: "09000000001", expiresIn: 3600 }));
+    assert.equal(await probe, null);
+    assert.equal(hasProfileAccess("09000000001"), false);
   } finally { globalThis.fetch = original; clearAccountAccess(); }
 });
 

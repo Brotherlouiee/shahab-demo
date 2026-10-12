@@ -27,6 +27,13 @@ export async function startQuestionnaireSession(fetchImpl = fetch) {
   );
 }
 
+export async function readQuestionnaireSession(sessionId, fetchImpl = fetch) {
+  return parseResponse(
+    await fetchImpl(`${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}`, { cache: "no-store" }),
+    "questionnaire_session_unavailable",
+  );
+}
+
 export async function saveQuestionnaireAnswer(sessionId, questionId, answerId, fetchImpl = fetch) {
   return parseResponse(
     await fetchImpl(
