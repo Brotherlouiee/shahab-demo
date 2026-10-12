@@ -64,3 +64,13 @@ partial uq_account_active_phone فقط active login؛ ix_questionnaire_sessions_
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 PK token/challenge digest lookup، account/expiry cleanup و quota key/time. lock advisory server key110203 برای عملیات کوتاه OTP/quota، account→session ترتیب lifecycle. cleanup بستر TTL همان حدود قبلی، cache مثبت ندارد؛ EXPLAIN/load نماینده production در T05 جدا. [قرارداد](../security/account-session-lifecycle.md).
+
+## US-11.T02E — query پاک‌سازی خام
+
+ایندکس موجود `ix_questionnaire_sessions_expiry` و unique session/question پاسخ‌ها
+و `uq_recommendation_history_session` برای expiry و EXISTS استفاده‌پذیرند؛ query
+حداکثر۱۰۰۰ شناسه با order expiry/UUID و lock SKIP LOCKED دارد. چند statement ثابت
+برای هر batch، بدون N+1؛ linked EXPIRED بدون پاسخ دوباره انتخاب نمی‌شود. SELECT
+aggregate dry-run محدود به counts است، نه payload. index جدید بدون اندازه‌گیری
+اضافه نشد؛ representative EXPLAIN/load و سقف backlog/زمان job در T05. محدودبودن
+rows برگشتی ادعای هزینه ثابت scan یا ظرفیت production نیست.

@@ -127,3 +127,10 @@ authority HTTPS معتبر مستقل و PostgreSQL account غیرمالک اس�
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 C نیازمند migration cc11b02c0001 و restart همه workerهاست؛ داده قبلی حذف/reset نشود. یک login تازه برای session حافظه‌ای قدیمی لازم؛ سپس restore با باقی‌مانده یک ساعت و logout cross-worker. [runbook](security/account-session-lifecycle.md). روی DB مالک این PR migration اجرا نکرده.
+
+## US-11.T02E — ابزار نگهداری خام
+
+[runbook پاک‌سازی مستقل](operations/raw-answer-retention.md) برای محیط جدا و
+`python -m scripts.cleanup_questionnaire_sessions` (dry-run) است؛ اجرای apply روی
+داده واقعی تنها طبق مجوز و نقش محدود عملیات. در Docker از فرمان runbook با سرویس
+api به‌روز استفاده شود؛ reset volume/downgrade داده برای این اصلاح لازم نیست.

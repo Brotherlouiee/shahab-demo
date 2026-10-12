@@ -113,3 +113,11 @@ questionnaire/infrastructure/proof.py: gate DB/local authority و digest/expiry/
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 accounts/sqlalchemy_access.py adapter request-scoped برای durable/shared session+OTP/quota؛ access.py memory local/test oracle. account_access dependency در SQL Session واقعی adapter دائمی می‌سازد؛ actor Account UUID و status تازه DB، clocks PostgreSQL و remaining بدون renewal. current provider gating/operations roles مستقل.
+
+## US-11.T02E — adapter نگهداری پاسخ
+
+`questionnaire/infrastructure/retention.py` فقط DB purge/count را بدون ساخت reference
+catalogue اجرا می‌کند؛ SQL repository `delete_expired` به آن delegate و service فقط
+پس از commit metadata cache را invalidate می‌کند. memory adapter همان batch۱۰۰.
+`scripts/cleanup_questionnaire_sessions.py` CLI اپراتور/dry-run و counts امن، بدون
+router/HTTP customer authority. هیچ import/تغییر frontend، engine یا schema وجود ندارد.

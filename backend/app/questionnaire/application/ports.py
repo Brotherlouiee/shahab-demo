@@ -13,7 +13,9 @@ class QuestionnaireSessionRepository(Protocol):
 
     def list_answers(self, session_id: str) -> tuple[QuestionnaireAnswer, ...]: ...
 
-    def delete_expired(self, now: datetime) -> tuple[str, ...]: ...
+    def delete_expired(self, now: datetime) -> tuple[str, ...]:
+        """Purge one bounded batch of raw answers; preserve referenced result evidence."""
+        ...
 
 
 class QuestionnaireSessionCache(Protocol):

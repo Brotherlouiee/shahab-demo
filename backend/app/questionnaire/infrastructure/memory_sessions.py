@@ -27,7 +27,11 @@ class InMemoryQuestionnaireSessionRepository:
         return tuple(self._answers[session_id].values())
 
     def delete_expired(self, now: datetime) -> tuple[str, ...]:
-        expired = tuple(session_id for session_id, session in self._sessions.items() if session.expires_at <= now)
+        expired = tuple(
+            session_id
+            for session_id, session in sorted(self._sessions.items(), key=lambda item: (item[1].expires_at, item[0]))
+            if session.expires_at <= now
+        )[:100]
         for session_id in expired:
             del self._sessions[session_id]
             del self._answers[session_id]

@@ -8,6 +8,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Security
 
+- US-11.T02E: پاک‌سازی transactional/bounded پاسخ‌های کامل/نیمه‌کاره expired، حفظ
+  snapshot و metadata مرتبط با history حتی hidden/archived؛ حذف metadata غیرمرتبط.
+  CLI داخلی dry-run/apply با counts بدون payload، retry/rollback و PostgreSQL race
+  verification؛ بدون migration یا تغییر UI/scoring. scheduler/restore/monitor در T05.
+
+### Security
+
 - US-11.T02C: نشست account-bound با expiry مطلق۳۶۰۰ و revocation دائمی/shared در
   PostgreSQL؛ restore زمان باقی‌مانده، بدون renewal و restart/worker صحیح. OTP
   challenge/attempt/quota مشترک، migration افزایشی cc11b02c0001 و PG race/rollback.

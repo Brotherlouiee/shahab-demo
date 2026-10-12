@@ -13,3 +13,13 @@ npm run quality
 The secret scan is intentionally conservative: it detects credential-shaped literal assignments, not every sensitive word. It is a defense-in-depth gate and never replaces secret-manager use, code review or the future SAST/SCA gates. Documented test placeholders are the only allowed literals.
 
 Use `npm run format:python` only after reviewing its diff; CI always runs `format:check` and never rewrites files.
+
+## US-11.T02E — raw retention
+
+`python -m unittest backend.tests.test_questionnaire_retention` قرارداد محلی SQLite/
+cache/CLI را می‌سنجد؛ اثبات FK/transaction/concurrency فقط
+`python -m unittest backend.tests.test_questionnaire_retention_postgresql` در job
+PostgreSQL با database **disposable** است. fixture upgrade/downgrade و synthetic
+archive دارد؛ هرگز URL کاربر/production را به SHAHAB_TEST_DATABASE_URL ندهید.
+suite PG شامل visible/hidden/archived snapshot، full/partial/empty/unlinked/active،
+rollback و retry، دو اتصال SKIP LOCKED و CLI dry-run/partial-failure counts است.

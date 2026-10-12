@@ -91,3 +91,23 @@ secret فقط cookie HttpOnly و digest فقط DB؛ Redis/JSON/URL/log هیچ pr
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 credential/OTP/quota موقت مطابق عمر مصوب۱h/۱۲۰s و bounded cleanup؛ token/code خام در DB/log نیست. profile/history/hidden/archive retained و purge خام E ثابت. restore backup باید credential/OTP را در T05 invalidate کند؛ این PR restore عملیاتی را ادعا نمی‌کند.
+
+## US-11.T02E — پاسخ خام مستقل از snapshot
+
+`questionnaire/infrastructure/retention.py` هر بار حداکثر۱۰۰ (حد سخت۱۰۰۰) نشست
+expired را با ترتیب expiry/UUID و `FOR UPDATE SKIP LOCKED` انتخاب می‌کند. حذف
+answers، EXPIRED کردن metadata مرتبط و حذف metadata غیرمرتبط در یک transaction
+commit یا rollback می‌شوند. لینک history با هیچ فیلتر hidden/status کنار گذاشته
+نمی‌شود: profile/account/run/item/reason/owner و data/config/loan/questionnaire
+version حفظ می‌شوند؛ هیچ cascade، انتقال خام به archive/JSON یا تغییر scoring وجود ندارد.
+metadata مرتبط شامل UUID، version FK، owner UUID، created/expires، state و digest
+immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history همیشگی
+باقی می‌ماند؛ digest secret قابل بازیابی/پاسخ خام نیست و expiry/state هرگز اجازه
+استفاده دوباره نمی‌دهند. metadata غیرمرتبط پس از expiry نیاز durable ندارد و حذف
+می‌شود. قرارداد proof/owner و TTL۱۸۰۰ تمدید/تضعیف نمی‌شوند.
+
+این موتور و CLI به‌تنهایی scheduler نیستند. F02 مسیر FK/runtime در E اصلاح می‌شود؛
+بستن کامل operational retention همچنان نیازمند scheduler/monitor/restore-before-reopen
+در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
+[فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
+[شواهد E](../progress/us-11-t02e.md).
