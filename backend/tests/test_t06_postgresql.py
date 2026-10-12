@@ -98,7 +98,9 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
                     headers=headers,
                 )
                 self.assertEqual(stored.status_code, 200, stored.text)
-                self.assertEqual(stored.json(), body)
+                # F adds an opaque navigation reference; all immutable result fields stay exact.
+                self.assertEqual(body["historyId"], history.json()["items"][0]["historyId"])
+                self.assertEqual(stored.json(), {key: value for key, value in body.items() if key != "historyId"})
                 loan_id = body["rankedRecommendations"][0]["loanId"]
                 detail = client.get(f"/api/v1/loans/{loan_id}")
                 self.assertEqual(detail.status_code, 200)

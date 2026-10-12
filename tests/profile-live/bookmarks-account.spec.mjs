@@ -90,6 +90,9 @@ test("two devices share database bookmarks, another account cannot inherit them,
     await other.getByRole("button", { name: "بازگشت" }).click();
     await expect(other).toHaveURL(/\/saved-loans$/);
 
+    // Historical results have the approved account header, not a hamburger menu.
+    await page.locator("a.hp-questionnaire-brand").click();
+    await expect(page).toHaveURL(/\/$/);
     await page.evaluate(() => {
       localStorage.setItem("another-app", "preserve"); sessionStorage.setItem("another-app", "preserve");
       localStorage.setItem("shahab.savedLoans", "legacy fixture");

@@ -127,3 +127,20 @@ test("same phone in a new server account generation never inherits an old bookma
   assert.equal((await saved.refreshSavedLoans()).length, 0);
   assert.deepEqual(saved.readSavedLoans(), []);
 });
+
+test("expired authority clears stored data without signaling an explicit form-discarding logout", async () => {
+  globalThis.fetch = async () => response({ phone: "09000000001", accountId: "expiry-A", expiresIn: 3600 });
+  await profile.restoreAccountAccess({ strict: true });
+  browser.localStorage.setItem("shahab.accountProfile", "private");
+  state.writeAccountProfileCache({ firstName: "private" });
+  let discarded = false;
+  const listener = () => { discarded = true; };
+  browser.addEventListener("shahab:account-cleared", listener);
+  try {
+    globalThis.fetch = async () => response({}, 401);
+    assert.equal(await profile.restoreAccountAccess({ strict: true }), null);
+    assert.equal(state.readAccountProfileCache(), null);
+    assert.equal(browser.localStorage.getItem("shahab.accountProfile"), null);
+    assert.equal(discarded, false);
+  } finally { browser.removeEventListener("shahab:account-cleared", listener); }
+});
