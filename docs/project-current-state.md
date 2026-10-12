@@ -1,5 +1,15 @@
 # Project current state
 
+## US-11.T02A.1 — طراحی account identity/lifecycle (۲۰۲۶-۱۰-۱۲)
+
+- activeTaskId: US-11.T02A.1؛ base 2e63479ae5e1034a50e9386cc42e2c3846ed8c27 بعد از PR #107 مرج‌شده، branch مستقل docs/us-11-t02a1-account-contract.
+- actualScope: ADR 0008، قرارداد/ERD هدف account UUID/status و profile 1:1، owner/composite FK و lifetime/race/backfill/rollback؛ ERD/dictionary/3NF reference و ردیف‌های مستقل A.1/A.2 در guide، CHANGELOG/checkpoint.
+- schema واقعی هنوز user_profiles.phone-PK است؛ source ORM/DDL/runtime/UI/API/data/scoring تغییر نکرده. diagram هدف اجرایی یا آزمایش persistence نیست؛ account_sessions/bookmarks آینده C/F جدا.
+- A.1 acceptance: design consistency و AC01–AC16 آزمون آینده، preserve policy/Golden Rules/US-13 و چهار CI؛ نتایج نهایی در PR.
+- nextTaskId: US-11.T02A.2 پس از مرج/gate، migration/backfill/adapters با PostgreSQL واقعی؛ F01/F02 هنوز باز و B/E رفعشان می‌کنند. legacy token owner نباید با phone به نسل تازه map شود.
+- [قرارداد](database/account-identity-lifecycle.md)، [checkpoint](progress/us-11-t02a1.md). سند تداوم ثابت و US-13 آخرین کار؛ merge/deploy این تسک انجام نمی‌شود.
+
+
 ## تصمیم‌های جاری حساب و ترتیب T02 — ۲۰۲۶-۱۰-۱۲
 
 - activeTaskId: تکمیل policy/task plan در PR #107، نه اجرای T02.

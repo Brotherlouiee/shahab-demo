@@ -100,3 +100,14 @@ row evidence is stored once on import, versions reference it. JSONB is an explic
 historical-document exception to 3NF, never operational query/filter fields. Live
 3NF catalogue/core/serving and customer records are untouched. See audit runbook
 for bounded keyset access and destructive backup-first downgrade.
+
+## US-11.T02A.1 — قرارداد طراحی بعدی، هنوز غیر اجرایی
+
+[قرارداد account identity/lifecycle](account-identity-lifecycle.md) و
+[ADR 0008](../adr/0008-account-identity-lifecycle.md) schema هدف account UUID،
+profile یک‌به‌یک و account-owner FK را مشخص می‌کنند. تنها accounts برای هویت
+به مدل اصلی افزوده می‌شود؛ archive table موازی ساخته نمی‌شود. partial UNIQUE
+active phone و consistency status/archived_at، composite owner/session FK، cutover
+phone-PK و guard downgrade به T02A.2 تعلق دارند. جدول‌های access session/bookmark
+در diagram آینده‌اند و اجرای C/F جدا دارند. مشخصات اجراشده فعلی و 3NF/audit
+قبلی عوض نشده‌اند؛ A.1 هیچ DDL/backfill ندارد.

@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- US-11.T02A.1: قرارداد هویت account UUID، active/archived و یک active phone،
+  ERD هدف مستقل، روابط 3NF/account owner و طرح migration/backfill/rollback نسل‌ها؛
+  [ADR 0008](docs/adr/0008-account-identity-lifecycle.md).
+  ردیف A.1/A.2 قابل جست‌وجو به guide افزوده شد. طراحی فقط؛ model/migration/runtime/
+  UI/scoring/data تغییر نکرده، F01/F02 هنوز باز و اجرای persistence در A.2 است.
+
+
 ### Changed
 
 - US-11.T01 owner decisions: PD01–PD08 و ترتیب زیرتسک‌های مستقل T02A–H

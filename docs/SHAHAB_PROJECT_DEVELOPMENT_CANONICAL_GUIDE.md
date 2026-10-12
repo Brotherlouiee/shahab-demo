@@ -509,6 +509,18 @@ scheduler/backup/restore در T05 اثبات شوند. جزئیات: [checkpoint
 و اسناد/CHANGELOG/زمان ثبت شوند. فقط docs؛ auth/API/UI/schema/scoring/data/retention
 تغییر نمی‌کند، purge/DAST خارجی/deploy اجرا نمی‌شود. یافته‌های فنی و تصمیم‌های باقی‌مانده با وضعیت صریح ثبت شده‌اند؛ Doneِ T01 به معنی رفع خطرها، پایان US-11 یا production نیست.
 
+### قرارداد هویت و ERD — US-11.T02A.1
+
+**تحویل طراحی، ۲۰۲۶-۱۰-۱۲:** مالک پس از مرج PR #107 اجرای A.1 را درخواست کرد.
+[قرارداد target](database/account-identity-lifecycle.md) و
+[ADR 0008](adr/0008-account-identity-lifecycle.md) account UUID immutable، یک active
+phone و چند archived، profile 1:1، owner/composite FK، lifecycle و migration/rollback
+بدون انتقال نسل را مشخص می‌کنند. schema فعلی همچنان phone-PK است؛ diagram هدف جدا
+از ERD اجرایی و referenceهای dictionary/3NF صریح‌اند. فقط docs؛ هیچ DDL، auth،
+data/scoring، UI، purge، session یک‌ساعته یا archive اجرایی افزوده نشده است.
+[checkpoint](progress/us-11-t02a1.md) و چهار CI نهایی لازم؛ nextTaskId A.2 پس از مرج،
+با PostgreSQL واقعی و قبل از B/C/D/E/F/G/H. F01/F02 باز و US-13 آخرین کار پابرجاست.
+
 ### تصمیم‌های مصوب حساب و داده و برنامه اجرای T02 — ۲۰۲۶-۱۰-۱۲
 
 **مرجع تصمیم محصول:** مالک هفت تصمیم داده و سپس اصلاح جریان ورود را صریح تصویب
@@ -545,6 +557,8 @@ T02 یک PR بزرگ نیست. هر زیرتسک فقط پس از gate/مرج ق
 | شناسه / ترتیب | تحویل و وابستگی | پذیرش و آزمون لازم |
 | --- | --- | --- |
 | US-11.T02A — هویت و چرخه عمر حساب | پیش‌نیاز همه زیرتسک‌های account: A.1 قرارداد account_id/status و ERD/3NF؛ سپس A.2 persistence/migration/backfill سازگار و account-bound adapters. current phone-PK به مدل نسلی با یک active phone منتقل شود؛ history/snapshot موجود حفظ. | PostgreSQL واقعی upgrade از fixture قبل، بدون orphan/duplicate active و حفظ profile/history؛ دو account با phone مشترک نسل مستقل؛ API مصرف‌کننده سازگار و rollback بدون حذف داده. بایگانی/ورودمجدد در test contract، نه اضافه‌کردن دکمه حذف. |
+| US-11.T02A.1 — قرارداد هویت و چرخه حساب و ERD | پس از مرج T01/تصمیم PD01–PD08؛ **فقط طراحی** account_id/status، 3NF، روابط/constraints و migration/rollback strategy؛ [قرارداد](database/account-identity-lifecycle.md)، [ADR 0008](adr/0008-account-identity-lifecycle.md). | consistency/link/schema-current-vs-target، AC01–AC16 طرح آینده و چهار CI؛ هیچ DDL/model/runtime/UI/data change. |
+| US-11.T02A.2 — اجرای persistence و migration/backfill | پس از مرج/gate T02A.1؛ model/adapters/expand-contract و mapping idempotent طبق قرارداد؛ archive G تا cutover owner/credential فعال نشود. | PostgreSQL واقعی upgrade/fixture legacy، حفظ profile/history و counts، partial unique/race/composite FK، rollback guard؛ این PR آن را آغاز نکرده است. |
 | US-11.T02B — مالکیت پرسشنامه و proof معتبر | پس از A؛ رفع F01: capability تصادفی server-verified، TTL و creator/owner کنترل برای read/write/recommend/history؛ account bind اتمیک و مستقل از phone/payload. | دو client/دوحساب: ID تنها، proof ثابت/ساختگی/دیگری/expired رد؛ قبل از افشای پاسخ/نوشتن DB؛ client معتبر و anonymous flow مجاز، refresh/Back/expiry حفظ، F01 regression واقعی. |
 | US-11.T02C — نشست یک‌ساعته و ابطال | پس از A/B؛ lifecycle account-bound، PD08، expires_at server-owned؛ restore زمان باقی‌مانده را بدهد، نه ۳۶۰۰ تازه. حالت multiworker/restart/shared store و quota/revocation تولیدی صریح طراحی و اثبات شود؛ customer/operator مستقل. | ساعت کنترل‌شده: ۳۵۹۹/۳۶۰۰، refresh بدون تمدید، logout/replay، حساب archived و token قبلی رد؛ چند دستگاه به account واحد، false login از cache ممنوع. real provider فعال‌سازی جدا دارد و mock production همچنان رد. |
 | US-11.T02D — **اصلاح جریان ورود و OTP تکراری** | پس از A–C؛ در personal-info نشست معتبر از سرور بازیابی، form با profile جاری پر و phone readonly از account گرفته شود. تأیید/ویرایش form به update همان profile و نتیجه برود، بدون request/verify OTP. مهمان یا نشست منقضی همان UI ورود/OTP موجود را طی کند. | مرورگر با API/PostgreSQL واقعی: اولین OTP و account creation؛ دومین پرسشنامه و refresh با OTP requests=۰، profile آخرین ورودی و snapshot قبلی ثابت؛ expiry وسط فرم/retry/logoff و server error، حفظ draft و پاسخ فقط تا TTL۳۰دقیقه. TTL منقضی خودکار تمدید یا جواب از URL/storage بازسازی نشود. |
