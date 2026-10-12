@@ -1,9 +1,19 @@
+import { clearAccountBrowserData, isLogoutPending, markLogoutPending, resetAccountPresentation } from "./accountBrowserState.mjs";
 // Profile authorization lives only in this tab's active module instance.
 // Browser caches are presentation data and never authorize server requests.
 let accessToken = "";
 let actorPhone = "";
 let expiresAt = 0;
 let accessGeneration = 0;
+let accountId = "";
+let accountEpoch = 0;
+let logoutInFlight = null;
+export function accountAccessEpoch() { return accountEpoch; }
+function announceAccountChange() {
+  accountEpoch += 1;
+  resetAccountPresentation();
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("shahab:account-changed"));
+}
 const apiBaseUrl = (import.meta.env?.VITE_SHAHAB_API_BASE_URL || "/api/v1").replace(/\/+$/, "");
 
 export class ProfileApiError extends Error {
@@ -31,6 +41,7 @@ export function displayProfilePhone(value) {
 
 async function request(path, { body, method = "GET", authorize = false } = {}) {
   if (authorize && !(await ensureAccountAccess())) throw new ProfileApiError(401);
+  const epochAtStart = accountEpoch;
   let response;
   try {
     response = await fetch(`${apiBaseUrl}/${path}`, {
@@ -40,11 +51,14 @@ async function request(path, { body, method = "GET", authorize = false } = {}) {
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
   } catch { throw new ProfileApiError(0); }
+  if (authorize && epochAtStart !== accountEpoch) throw new ProfileApiError(401);
   if (!response.ok) {
     if (authorize && response.status === 401) clearAccountAccess();
     throw new ProfileApiError(response.status);
   }
-  return response.status === 204 ? null : response.json();
+  const value = response.status === 204 ? null : await response.json();
+  if (authorize && epochAtStart !== accountEpoch) throw new ProfileApiError(401);
+  return value;
 }
 
 export function authorizedRequest(path, options) { return request(path, { ...options, authorize: true }); }
@@ -57,14 +71,24 @@ export function optionalAuthenticatedHeaders() {
   return accessToken && Date.now() < expiresAt ? { Authorization: `Bearer ${accessToken}` } : {};
 }
 
-export function requestProfileCode(phone) {
+export async function requestProfileCode(phone) {
+  if (isLogoutPending()) await finishPendingLogout();
   return request("account-access/request", { method: "POST", body: { phone: normalizeProfilePhone(phone) } });
 }
 
 export async function verifyProfileCode(challengeId, code) {
+  if (isLogoutPending()) await finishPendingLogout();
+  const epochAtStart = accountEpoch;
   let verified;
   try { verified = await request("account-access/verify", { method: "POST", body: { challengeId, code } }); }
   catch (error) { if (error.status === 401) error.message = "کد وارد شده اشتباه است"; throw error; }
+  if (epochAtStart !== accountEpoch) {
+    markLogoutPending(true);
+    await finishPendingLogout();
+    throw new ProfileApiError(401);
+  }
+  announceAccountChange();
+  accountId = verified.accountId || verified.phone;
   accessToken = verified.accessToken;
   actorPhone = normalizeProfilePhone(verified.phone);
   expiresAt = Date.now() + verified.expiresIn * 1000;
@@ -72,6 +96,10 @@ export async function verifyProfileCode(challengeId, code) {
 }
 
 export async function restoreAccountAccess({ strict = false } = {}) {
+  if (isLogoutPending()) {
+    try { await finishPendingLogout(); } catch (error) { if (strict) throw error; }
+    return null;
+  }
   const generationAtStart = accessGeneration;
   try {
     const response = await fetch(`${apiBaseUrl}/account-access/session`, { cache: "no-store", credentials: "same-origin" });
@@ -88,6 +116,9 @@ export async function restoreAccountAccess({ strict = false } = {}) {
     const value = await response.json();
     // A probe started before logout or a newer login cannot resurrect its actor.
     if (generationAtStart !== accessGeneration) return Date.now() < expiresAt ? actorPhone : null;
+    const restoredId = value.accountId || value.phone;
+    if (accountId !== restoredId) announceAccountChange();
+    accountId = restoredId;
     accessToken = "";
     actorPhone = normalizeProfilePhone(value.phone);
     expiresAt = Date.now() + value.expiresIn * 1000;
@@ -138,11 +169,42 @@ export async function persistPersonalInfo(profile) {
   return persistProfile({ ...previous, ...profile });
 }
 
-export function clearAccountAccess() { accessToken = ""; actorPhone = ""; expiresAt = 0; accessGeneration += 1; }
+export function clearAccountAccess() {
+  const hadAccess = Boolean(actorPhone);
+  accessToken = ""; actorPhone = ""; accountId = ""; expiresAt = 0; accessGeneration += 1;
+  if (hadAccess) { announceAccountChange(); clearAccountBrowserData({ notify: false }); }
+  else resetAccountPresentation();
+}
+
+async function finishPendingLogout(token = "") {
+  if (logoutInFlight) return logoutInFlight;
+  const operation = (async () => {
+    let response;
+    try { response = await fetch(`${apiBaseUrl}/account-access/logout`, {
+      method: "POST", credentials: "same-origin", cache: "no-store",
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    }); } catch { throw new ProfileApiError(0); }
+    if (!response.ok && response.status !== 401) throw new ProfileApiError(response.status);
+    markLogoutPending(false);
+    if (typeof window !== "undefined") window.dispatchEvent(new Event("shahab:logout-completed"));
+  })();
+  logoutInFlight = operation;
+  try { await operation; } finally { if (logoutInFlight === operation) logoutInFlight = null; }
+}
 
 export async function logoutProfile() {
-  // Clear the local capability even if the network is unavailable; server TTL still bounds it.
   const token = accessToken;
   clearAccountAccess();
-  await fetch(`${apiBaseUrl}/account-access/logout`, { method: "POST", credentials: "same-origin", headers: token ? { Authorization: `Bearer ${token}` } : {} });
+  clearAccountBrowserData();
+  markLogoutPending(true);
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("shahab:logout-intent"));
+  await finishPendingLogout(token);
+}
+
+if (typeof window !== "undefined") {
+  // Cleanup from another tab invalidates capabilities as well as presentation.
+  window.addEventListener("shahab:account-cleared", () => {
+    accessToken = ""; actorPhone = ""; accountId = ""; expiresAt = 0; accessGeneration += 1;
+    announceAccountChange();
+  });
 }

@@ -21,6 +21,21 @@
   },
   {
     "method": "GET",
+    "operationId": "list_bookmarks_api_v1_bookmarks_get",
+    "path": "/api/v1/bookmarks"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "remove_bookmark_api_v1_bookmarks__loan_id__delete",
+    "path": "/api/v1/bookmarks/{loan_id}"
+  },
+  {
+    "method": "PUT",
+    "operationId": "save_bookmark_api_v1_bookmarks__loan_id__put",
+    "path": "/api/v1/bookmarks/{loan_id}"
+  },
+  {
+    "method": "GET",
     "operationId": "live_health_live_get",
     "path": "/api/v1/health/live"
   },

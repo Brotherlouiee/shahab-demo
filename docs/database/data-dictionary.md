@@ -152,3 +152,18 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — account_bookmarks
+
+| ستون | type / null / default | constraint و هدف |
+|---|---|---|
+| account_id | uuid / nonnull / none | PK part؛ accounts FK RESTRICT، owner فقط actor سرور |
+| loan_product_version_id | uuid / nonnull / none | PK part؛ immutable version FK RESTRICT |
+| source_history_run_id | uuid / nullable / NULL | composite FK همراه account_id به همان owner run؛ بدون کپی facts/score |
+| created_at | timestamptz / nonnull / now() | ایجاد نخستین association، retry آن را عوض نمی‌کند |
+| removed_at | timestamptz / nullable / NULL | حذف نمایشی؛ NULL visible، CHECK >=created_at |
+
+مالک account، retention همیشگی مطابق سیاست durable؛ logout/archive حذف DB نیست.
+unique PK از duplicate جلوگیری و trigger identity retarget account/version را رد می‌کند.
+مرجع اختیاری snapshot فقط از own visible run دارای همان loan انتخاب؛ hide بعدی run
+bookmark صریح را حذف نمی‌کند. [migration/runbook](../security/account-bookmarks.md).

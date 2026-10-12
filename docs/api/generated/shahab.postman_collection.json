@@ -199,6 +199,148 @@
       "item": [
         {
           "event": [],
+          "name": "GET /api/v1/bookmarks",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookmarks"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": true,
+                  "key": "cursor",
+                  "value": ""
+                }
+              ],
+              "raw": "{{baseUrl}}/api/v1/bookmarks"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "DELETE /api/v1/bookmarks/{loan_id}",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookmarks",
+                "{{loanId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/bookmarks/{{loanId}}"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "PUT /api/v1/bookmarks/{loan_id}",
+          "request": {
+            "auth": {
+              "bearer": [
+                {
+                  "key": "token",
+                  "type": "string",
+                  "value": "{{accessToken}}"
+                }
+              ],
+              "type": "bearer"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{}"
+            },
+            "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookmarks",
+                "{{loanId}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/bookmarks/{{loanId}}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "name": "bookmarks"
+    },
+    {
+      "item": [
+        {
+          "event": [],
           "name": "GET /api/v1/health/live",
           "request": {
             "description": "Public liveness: the running process can answer HTTP requests.",

@@ -83,3 +83,11 @@ verify نمی‌تواند profile persist کند. configured API از SQL adapt
 استفاده می‌کند؛ SQL Session/credential cache بین درخواست‌ها share نمی‌شوند. auth
 مشتری هیچ مجوز داخلی نمی‌دهد. کاهش درخواست OTP در personal-info هنوز D است؛
 bookmark/browser cleanup F، archive G، purge E و transport H مستقل‌اند.
+
+## US-11.T02F — cleanup نشست
+
+verify/session علاوه بر phone/remaining، accountId opaque سرور برای cache epoch؛
+هیچ renewal یا پذیرش ID/phone client نیست. logout فعلی revoke می‌کند و همه cookieهای
+creator با prefix شهاب از path /api/v1 حذف؛ business rows unchanged. network/storage
+failure از پاک‌سازی حافظه جدا، pending revoke پیش از restore/login retry و stale
+response generation guard. [قرارداد/محدودیت‌ها](account-bookmarks.md).

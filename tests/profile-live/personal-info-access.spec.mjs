@@ -234,7 +234,7 @@ test("changing the prefilled phone requires its OTP and creates an independent a
   await expect(page).toHaveURL(/\/verify-code$/);
   // The old account remains unchanged before verification of the new number.
   expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject(original);
-  expect(await page.evaluate(() => localStorage.getItem("shahab.personalInfo.phone"))).toBe(firstPhone);
+  expect(await page.evaluate(() => localStorage.getItem("shahab.personalInfo.phone"))).toBeNull();
   await page.getByRole("button", { name: "تغییر شماره تلفن" }).click();
   await expect(inputs.nth(2)).toHaveValue(nextPhone.slice(2).replace(/[0-9]/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]));
   await expect(inputs.first()).toHaveValue("آزمون");

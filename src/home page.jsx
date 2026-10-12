@@ -1,6 +1,7 @@
-import { displayProfilePhone, hasProfileAccess, logoutProfile, normalizeProfilePhone, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
+import { readAccountProfileCache, writeAccountProfileCache, readPersonalInfoCache, writePersonalInfoCache, synchronizeAccountTabs, readRecommendationCache, writeRecommendationCache } from "./features/account/accountBrowserState.mjs";
+import { accountAccessEpoch, displayProfilePhone, hasProfileAccess, logoutProfile, normalizeProfilePhone, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { readSavedLoans } from "./features/account/savedLoans.mjs";
+import { readSavedLoans, refreshSavedLoans } from "./features/account/savedLoans.mjs";
 import { isSavedLoanDetailsPath, savedLoanDetailsPath } from "./features/account/savedLoansPresentation.mjs";
 import LoanDetailsScreen from "./features/loan-details/LoanDetailsScreen.jsx";
 import LoanResultsScreen from "./features/recommendation/ui/LoanResultsScreen.jsx";
@@ -327,13 +328,17 @@ function getLoanIdFromLocation() {
 function getActiveRecommendationHistoryState() {
   if (typeof window === "undefined") return null;
   const value = window.history.state?.shahabRecommendation;
-  return value && typeof value.sessionId === "string" ? value : null;
+  return value && typeof value.sessionId === "string"
+    ? { sessionId: value.sessionId, historyId: typeof value.historyId === "string" ? value.historyId : null, result: readRecommendationCache(value.sessionId) }
+    : null;
 }
 
 function replaceActiveRecommendationHistoryState(sessionId, result) {
   if (typeof window === "undefined" || !sessionId) return;
+  writeRecommendationCache(sessionId, result);
+  const historyId = result?.historyId || getActiveRecommendationHistoryState()?.historyId || null;
   window.history.replaceState(
-    { ...(window.history.state || {}), shahabRecommendation: { sessionId, result } },
+    { ...(window.history.state || {}), shahabRecommendation: { sessionId, historyId } },
     "",
     window.location.pathname + window.location.search,
   );
@@ -382,57 +387,11 @@ function replaceRoute(pathname) {
   window.history.pushState(window.history.state, "", pathname);
 }
 
-const personalInfoCacheKeys = {
-  firstName: "shahab.personalInfo.firstName",
-  lastName: "shahab.personalInfo.lastName",
-  phone: "shahab.personalInfo.phone",
-  income: "shahab.personalInfo.income",
-  job: "shahab.personalInfo.job",
-};
-const accountProfileCacheKey = "shahab.accountProfile";
-
-function getCachedPersonalInfoValue(field) {
-  if (typeof window === "undefined") return "";
-
-  try {
-    return window.localStorage.getItem(personalInfoCacheKeys[field]) || "";
-  } catch {
-    return "";
-  }
-}
-
-function setCachedPersonalInfoValue(field, value) {
-  if (typeof window === "undefined" || !personalInfoCacheKeys[field]) return;
-
-  try {
-    if (value) {
-      window.localStorage.setItem(personalInfoCacheKeys[field], value);
-    }
-  } catch {
-    // Ignore storage failures so the form remains usable in private/restricted modes.
-  }
-}
-
-function getCachedAccountProfile() {
-  if (typeof window === "undefined") return null;
-
-  try {
-    const cachedProfile = window.localStorage.getItem(accountProfileCacheKey);
-    return cachedProfile ? JSON.parse(cachedProfile) : null;
-  } catch {
-    return null;
-  }
-}
-
-function setCachedAccountProfile(profile) {
-  if (typeof window === "undefined") return;
-
-  try {
-    window.localStorage.setItem(accountProfileCacheKey, JSON.stringify(profile));
-  } catch {
-    // Ignore storage failures so creating the local account does not block the flow.
-  }
-}
+const personalInfoCacheKeys = { firstName: "firstName", lastName: "lastName", phone: "phone", income: "income", job: "job" };
+function getCachedPersonalInfoValue(field) { return readPersonalInfoCache(field); }
+function setCachedPersonalInfoValue(field, value) { writePersonalInfoCache(field, value); }
+function getCachedAccountProfile() { return readAccountProfileCache(); }
+function setCachedAccountProfile(profile) { writeAccountProfileCache(profile); }
 
 const persianNamePattern = /^[\u0621-\u064A\u067E\u0686\u0698\u06AF\u06A9\u06CC\s‌]+$/;
 const persianNameError = "فقط حروف فارسی مجاز هستند";
@@ -1842,7 +1801,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     recommendationRequestRef.current = true;
     setRecommendationStatus("loading");
     try {
-      const result = await fetchRecommendationResult(questionnaireSessionId);
+      const history = getActiveRecommendationHistoryState();
+      const result = history?.sessionId === questionnaireSessionId && history.historyId
+        ? await fetchHistoricalRecommendation(history.historyId)
+        : await fetchRecommendationResult(questionnaireSessionId);
       setRecommendationResult(result);
       setRecommendationStatus("ready");
     } catch {
@@ -2931,8 +2893,19 @@ function AboutPage({ onBack }) {
 
 function SavedLoansPage({ onBack, onDetails }) {
   const [loans, setLoans] = useState(readSavedLoans);
-  useEffect(() => { const refresh = () => setLoans(readSavedLoans()); window.addEventListener("shahab:saved-loans", refresh); return () => window.removeEventListener("shahab:saved-loans", refresh); }, []);
-  return <LoanResultsScreen result={null} status="ready" header={<AccountHeader onBack={onBack} onHome={onBack} />} onDetails={onDetails} savedItems={loans} showActions={false} />;
+  const [status, setStatus] = useState("loading");
+  const load = () => {
+    setStatus("loading");
+    refreshSavedLoans().then((value) => { setLoans(value); setStatus("ready"); }).catch(() => setStatus("error"));
+  };
+  useEffect(() => {
+    let active = true;
+    const sync = () => { if (active) setLoans(readSavedLoans()); };
+    const refresh = () => { if (active) load(); };
+    refresh(); window.addEventListener("shahab:saved-loans", sync); window.addEventListener("focus", refresh);
+    return () => { active = false; window.removeEventListener("shahab:saved-loans", sync); window.removeEventListener("focus", refresh); };
+  }, []);
+  return <LoanResultsScreen result={null} status={status} onRetry={load} header={<AccountHeader onBack={onBack} onHome={onBack} />} onDetails={onDetails} savedItems={loans} showActions={false} />;
 }
 
 function RecommendationHistoryPage({ onBack, onOpen, onUnauthorized, state, setState }) {
@@ -2977,6 +2950,33 @@ export default function HomePage() {
   const [pendingHistoryPath, setPendingHistoryPath] = useState("");
   const [historyListState, setHistoryListState] = useState({ status: "loading", items: [], nextCursor: null });
   const [historyOrigin, setHistoryOrigin] = useState(null);
+  const knownAccountEpoch = useRef(accountAccessEpoch());
+  useEffect(() => {
+    const clear = () => {
+      setAccountProfile(null); setHistoryResult(null); setPendingHistoryPath("");
+      setHistoryListState({ status: "loading", items: [], nextCursor: null }); setHistoryOrigin(null);
+      setIsSidebarOpen(false); setLoginStep("phone");
+      window.history.replaceState(window.history.state, "", "/"); setCurrentView("home");
+    };
+    const changed = () => {
+      const hadAccount = knownAccountEpoch.current > 0;
+      knownAccountEpoch.current = accountAccessEpoch();
+      setAccountProfile(null); setHistoryResult(null);
+      setHistoryListState({ status: "loading", items: [], nextCursor: null });
+      if (hadAccount && /^\/(profile|saved-loans|recommendation-history)(\/|$)/.test(window.location.pathname)) {
+        window.history.replaceState(window.history.state, "", "/"); setCurrentView("home");
+      }
+      // Populate only a still-empty current generation; a later successful form
+      // save must not be overwritten by this earlier bootstrap profile read.
+      Promise.resolve().then(() => readOwnProfile()).then(profile => {
+        if (profile) setAccountProfile(current => { if (current) return current; setCachedAccountProfile(profile); return profile; });
+      }).catch(() => {});
+    };
+    window.addEventListener("shahab:account-changed", changed);
+    window.addEventListener("shahab:account-cleared", clear);
+    const stopTabs = synchronizeAccountTabs();
+    return () => { window.removeEventListener("shahab:account-changed", changed); window.removeEventListener("shahab:account-cleared", clear); stopTabs(); };
+  }, []);
   useEffect(() => { let active = true; restoreAccountAccess().then((phone) => { if (!phone || !active) return; readOwnProfile().then((profile) => { if (profile && active) { setAccountProfile(profile); setCachedAccountProfile(profile); } }).catch(() => {}); }); return () => { active = false; }; }, []);
   useEffect(() => {
     if (currentView !== "history-result" || historyResult) return;
@@ -3064,14 +3064,8 @@ export default function HomePage() {
   }
 
   function handleLogout() {
-    void logoutProfile().catch(() => {});
-    try {
-      window.localStorage.removeItem(accountProfileCacheKey);
-    } catch {
-      // A blocked localStorage must not prevent leaving the local UI state.
-    }
-    setAccountProfile(null);
-    handleHomeOpen();
+    // Failed revoke stays pending, preventing cookie restoration on refresh.
+    void logoutProfile().catch(() => window.alert("خروج در سرور تأیید نشد. اتصال را بررسی کنید و دوباره تلاش کنید."));
   }
 
   function handleSidebarNavigate(destination) {

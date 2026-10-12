@@ -282,7 +282,9 @@ test("local profile, demonstration OTP and five-second spinner preserve the fail
 
   await page.goto("/personal-info");
   await personalInputs.nth(0).focus();
-  await expect(page.getByRole("button", { name: "علی" })).toBeVisible();
+  // F restores authenticated profile from the server, without a persisted suggestion.
+  await expect(personalInputs.nth(0)).toHaveValue("علی");
+  expect(await page.evaluate(() => localStorage.getItem("shahab.personalInfo.firstName"))).toBeNull();
 });
 
 for (const viewport of [

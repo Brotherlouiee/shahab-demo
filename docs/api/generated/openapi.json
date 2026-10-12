@@ -17,6 +17,54 @@
         "title": "AnswerWriteRequest",
         "type": "object"
       },
+      "BookmarkContext": {
+        "additionalProperties": false,
+        "example": {},
+        "properties": {
+          "historyId": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Historyid"
+          }
+        },
+        "title": "BookmarkContext",
+        "type": "object"
+      },
+      "BookmarkPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/HistoryRankedItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "BookmarkPage",
+        "type": "object"
+      },
       "CodeRequest": {
         "additionalProperties": false,
         "properties": {
@@ -790,6 +838,17 @@
             "title": "Dataversion",
             "type": "string"
           },
+          "historyId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Historyid"
+          },
           "lowCompatibilityRecommendations": {
             "items": {
               "$ref": "#/components/schemas/RankedRecommendationResponse"
@@ -1263,6 +1322,343 @@
         "summary": "Verify Code",
         "tags": [
           "account-access"
+        ]
+      }
+    },
+    "/api/v1/bookmarks": {
+      "get": {
+        "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+        "operationId": "list_bookmarks_api_v1_bookmarks_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 256,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookmarkPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing/invalid/expired account access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing or inaccessible resource"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal failure"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service/storage unavailable"
+          }
+        },
+        "security": [
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
+        "summary": "List Bookmarks",
+        "tags": [
+          "bookmarks"
+        ]
+      }
+    },
+    "/api/v1/bookmarks/{loan_id}": {
+      "delete": {
+        "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+        "operationId": "remove_bookmark_api_v1_bookmarks__loan_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "loan_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Loan Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing/invalid/expired account access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing or inaccessible resource"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal failure"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service/storage unavailable"
+          }
+        },
+        "security": [
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
+        "summary": "Remove Bookmark",
+        "tags": [
+          "bookmarks"
+        ]
+      },
+      "put": {
+        "description": "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; retries are idempotent. Only loan UUID and optional own visible historyId are accepted. No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; snapshot display context is read from its original immutable server tables.",
+        "operationId": "save_bookmark_api_v1_bookmarks__loan_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "loan_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Loan Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookmarkContext"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing/invalid/expired account access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing or inaccessible resource"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal failure"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service/storage unavailable"
+          }
+        },
+        "security": [
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
+        "summary": "Save Bookmark",
+        "tags": [
+          "bookmarks"
         ]
       }
     },

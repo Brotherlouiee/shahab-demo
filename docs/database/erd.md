@@ -172,3 +172,17 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — نشان‌شده‌های حساب
+
+```mermaid
+erDiagram
+    accounts ||--o{ account_bookmarks : owns
+    loan_product_versions ||--o{ account_bookmarks : exact_version
+    recommendation_history_runs o|--o{ account_bookmarks : optional_owned_context
+```
+
+PK(account_id,loan_product_version_id)، FKهای RESTRICT و composite FK(source_history_run_id,
+account_id)→history(run_id,owner_account_id)؛ run+owner UNIQUE اضافه می‌شود تا مرجع
+snapshot هرگز متعلق به نسل/حساب دیگر نباشد. created_at و removed_at UTC؛ هیچ JSON،
+phone، نام وام یا score در association نیست. [قرارداد F](../security/account-bookmarks.md).

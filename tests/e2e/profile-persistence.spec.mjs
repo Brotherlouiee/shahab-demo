@@ -47,7 +47,8 @@ test("profile preserves eleven digits and never treats a failed save as success"
   api.failWrites = 1;
   await page.getByRole("button", { name: "ذخیره تغییرات" }).click();
   await expect(page.getByRole("alert")).toContainText("انجام نشد");
-  expect(JSON.parse(await page.evaluate(() => localStorage.getItem("shahab.accountProfile"))).firstName).toBe("آزمون");
+  expect(await page.evaluate(() => localStorage.getItem("shahab.accountProfile"))).toBeNull();
+  expect(api.profile.firstName).toBe("آزمون");
   await expect(form.locator("input").nth(1)).toHaveValue("علی");
   await page.getByRole("button", { name: "ذخیره تغییرات" }).click();
   await expect(page.getByRole("status")).toHaveText("تغییرات ذخیره شد.");

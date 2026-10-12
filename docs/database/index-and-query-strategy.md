@@ -74,3 +74,13 @@ PK token/challenge digest lookup، account/expiry cleanup و quota key/time. loc
 aggregate dry-run محدود به counts است، نه payload. index جدید بدون اندازه‌گیری
 اضافه نشد؛ representative EXPLAIN/load و سقف backlog/زمان job در T05. محدودبودن
 rows برگشتی ادعای هزینه ثابت scan یا ظرفیت production نیست.
+
+## US-11.T02F — bookmark queries
+
+PK(account_id,loan_product_version_id) برای upsert/owner remove؛
+ix_bookmark_owner_visible_created(account_id,removed_at,created_at,loan_product_version_id)
+برای visible keyset ASC و limit<=50+1. list یک statement با joins version/lender/terms/
+facts و lookup deterministic item همان source run، بدون fan-out HTTP/N+1 repository.
+uq_history_run_owner کلید لازم composite FK است، نه index فرضی analytics. آزمون PG
+با۲۰۰۲ association، ANALYZE و EXPLAIN(ANALYZE,BUFFERS) owner انتخابی index path را
+می‌سنجد؛ production latency/load ادعا نمی‌شود. [checkpoint F](../progress/us-11-t02f.md).

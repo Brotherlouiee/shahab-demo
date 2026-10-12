@@ -6,6 +6,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- US-11.T02F: نشان‌شده‌های حساب‌محور در association نرمال account_bookmarks و API
+  owner-scoped desired-state، migration افزایشی ff11b02f0001، optional own-snapshot
+  reference بدون کپی مشخصات/score. sync دستگاه/refresh، retry/rollback/PK و index tests.
+
+### Security
+
+- US-11.T02F: profile/form/bookmark/result cache فقط memory؛ logout revoke و cookie/
+  storage/state شهاب پاک، late response/نسل تازه رد و failed logout fail-closed.
+  historyId opaque برای refresh همان snapshot بدون JSON شخصی در navigation؛ legacy
+  browser bookmark خودکار upload نمی‌شود. CSS/asset/engine/source unchanged؛ visual
+  مقایسه مستقل و راهنمای rollback nonempty guard. [قرارداد](docs/security/account-bookmarks.md).
+
 ### Security
 
 - US-11.T02E: پاک‌سازی transactional/bounded پاسخ‌های کامل/نیمه‌کاره expired، حفظ

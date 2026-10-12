@@ -143,3 +143,12 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — association نرمال نشان‌شده
+
+account_bookmarks با composite PK(account_id,loan_product_version_id)، دو FK RESTRICT،
+source_history_run_id nullable و owner-composite FK به history، created_at/removed_at
+و CHECK زمان حذف. unique(run_id,owner_account_id) فقط برای constraint مرجع مالک؛
+facts/score/phone/آرایه JSON در bookmark/profile کپی نمی‌شوند. 3NF و immutable
+loan version/snapshot برقرار. trigger account/version identity، remove نرم و no
+cascade داده حساب. API desired-state idempotent و query actor-scoped در همان transaction.

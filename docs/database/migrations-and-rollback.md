@@ -85,3 +85,14 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — ff11b02f0001
+
+parent cc11b02c0001؛ افزایشی account_bookmarks/owner FK/index/identity trigger و
+unique history run-owner، بدون data backfill/تغییر source/snapshot/profile. credential
+فقط در environment؛ backup/revision و توقف writers طبق runbook پیش از migration
+واقعی. upgrade ابتدا، backend و frontend جدید بعد؛ reset volume ممنوع.
+Downgrade جدول nonempty را برای حفظ نشان‌شده‌های durable رد می‌کند؛ empty fixture
+upgrade/downgrade عملی آزموده می‌شود. پس از داده واقعی، schema نگه داشته و
+roll-forward/کد سازگار؛ restore قدیمی بدون bookmarks یا بازگشت به localStorage
+reader می‌تواند داده را پنهان کند و rollback معتبر نیست. [runbook F](../security/account-bookmarks.md).

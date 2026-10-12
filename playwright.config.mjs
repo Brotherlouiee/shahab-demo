@@ -13,9 +13,13 @@ export default defineConfig({
     launchOptions: localBrowserPath ? { executablePath: localBrowserPath } : {},
     trace: "retain-on-failure",
   },
-  webServer: {
+  webServer: [{
     command: `npm run dev -- --host=127.0.0.1 --port=${e2ePort}`,
     url: `http://127.0.0.1:${e2ePort}`,
     reuseExistingServer: !process.env.CI,
-  },
+  }, ...(process.env.SHAHAB_BOOKMARK_BASELINE_DIR ? [{
+    command: `npm --prefix ${process.env.SHAHAB_BOOKMARK_BASELINE_DIR} run dev -- --host=127.0.0.1 --port=4175`,
+    url: process.env.SHAHAB_BOOKMARK_BASELINE_URL,
+    reuseExistingServer: false,
+  }] : [])],
 });

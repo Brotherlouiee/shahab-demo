@@ -7,7 +7,7 @@ import { toPersianDigits } from "../../loan-details/toPersianDigits.mjs";
 import { compatibilityBandForScore } from "./compatibilityDisplay.mjs";
 import { displayItemsForResultMode } from "../presentation/loanResultDisplayOrder.mjs";
 import DeferredPageSkeleton from "../../../shared/DeferredPageSkeleton.jsx";
-import { readSavedLoans, toggleSavedLoan } from "../../account/savedLoans.mjs";
+import { readSavedLoans, refreshSavedLoans, toggleSavedLoan } from "../../account/savedLoans.mjs";
 import { shouldShowSavedLoanFilters } from "../../account/savedLoansPresentation.mjs";
 
 const VIEW_MODES = Object.freeze({
@@ -157,25 +157,35 @@ export default function LoanResultsScreen({
   const [mode, setMode] = useState(VIEW_MODES.highest);
   const [lenderName, setLenderName] = useState("");
   const [savedLoanIds, setSavedLoanIds] = useState(() => new Set(readSavedLoans().map((loan) => loan.loanId)));
+  const [saveError, setSaveError] = useState("");
+  const [savingLoanIds, setSavingLoanIds] = useState(new Set());
   const [savedToastLoanId, setSavedToastLoanId] = useState(null);
   const saveToastTimeoutRef = useRef(null);
 
   useEffect(() => () => window.clearTimeout(saveToastTimeoutRef.current), []);
 
-  const handleSavedLoan = (recommendation) => {
+  useEffect(() => {
+    let active = true;
+    const sync = () => { if (active) setSavedLoanIds(new Set(readSavedLoans().map(loan => loan.loanId))); };
+    const refresh = () => { if (savedItems === null) void refreshSavedLoans().catch(() => {}); };
+    window.addEventListener("shahab:saved-loans", sync); window.addEventListener("focus", refresh); refresh();
+    return () => { active = false; window.removeEventListener("shahab:saved-loans", sync); window.removeEventListener("focus", refresh); };
+  }, [savedItems === null]);
+
+  const handleSavedLoan = async (recommendation) => {
     const loanId = recommendation.loanId;
-    const wasSaved = savedLoanIds.has(loanId);
-    toggleSavedLoan(recommendation);
-    setSavedLoanIds(new Set(readSavedLoans().map((loan) => loan.loanId)));
-
-    window.clearTimeout(saveToastTimeoutRef.current);
-    if (wasSaved) {
-      setSavedToastLoanId(null);
-      return;
-    }
-
-    setSavedToastLoanId(loanId);
-    saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
+    if (savingLoanIds.has(loanId)) return;
+    setSavingLoanIds(current => new Set([...current, loanId])); setSaveError("");
+    try {
+      const match = window.location.pathname.match(/^\/recommendation-history\/([^/]+)$/);
+      const saved = await toggleSavedLoan(recommendation, { historyId: match ? decodeURIComponent(match[1]) : result?.historyId || null });
+      if (saved === null) return;
+      window.clearTimeout(saveToastTimeoutRef.current);
+      if (!saved) { setSavedToastLoanId(null); return; }
+      setSavedToastLoanId(loanId);
+      saveToastTimeoutRef.current = window.setTimeout(() => setSavedToastLoanId(null), 2000);
+    } catch (error) { setSaveError(error.status === 401 ? "برای ذخیره وام، وارد حساب کاربری شوید." : "ذخیره وام انجام نشد. دوباره تلاش کنید."); }
+    finally { setSavingLoanIds(current => { const next = new Set(current); next.delete(loanId); return next; }); }
   };
 
   const items = useMemo(() => savedItems || displayItemsForResultMode(result, mode), [result, mode, savedItems]);
@@ -220,6 +230,7 @@ export default function LoanResultsScreen({
       </div>
 
       <section className="hp-loan-results-list">
+        {saveError ? <p className="hp-recommendation-result-state" role="alert">{saveError}</p> : null}
         <DeferredPageSkeleton active={status === "loading"} variant="cards" />
         {status === "ready" && savedItems !== null && !items.length ? (
           <div className="hp-saved-loans-empty-state" role="status">

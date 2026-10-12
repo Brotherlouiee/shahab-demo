@@ -48,3 +48,11 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — navigation privacy
+
+در tab memory نتیجه سروری حفظ؛ history.state تنها sessionId و historyId opaque،
+بدون snapshot JSON/raw answers/token. refresh result احراز‌شده با reference همان
+history snapshot خوانده می‌شود و profile edit/scoring تازه روی آن اثر ندارد. خروج
+current reference/memory و creator HttpOnly cookies را پاک؛ PD01/rawTTL۳۰ و history
+همیشگی/owner gate ثابت. entryهای نسخه قدیمی بدون authority معتبر بازنمایی نمی‌شوند.
