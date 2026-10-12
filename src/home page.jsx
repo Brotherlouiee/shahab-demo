@@ -1,4 +1,4 @@
-import { displayProfilePhone, hasProfileAccess, logoutProfile, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
+import { displayProfilePhone, hasProfileAccess, logoutProfile, normalizeProfilePhone, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { readSavedLoans } from "./features/account/savedLoans.mjs";
 import { isSavedLoanDetailsPath, savedLoanDetailsPath } from "./features/account/savedLoansPresentation.mjs";
@@ -1635,7 +1635,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       const fields = { firstName: profile.firstName || "", lastName: profile.lastName || "",
         income: profile.income || "", job: profile.job || "", phone: displayProfilePhone(profile.phone).slice(2) };
       setPersonalInfo((current) => Object.fromEntries(Object.entries(fields).map(([key, value]) =>
-        [key, key !== "phone" && personalDraftFields.current.has(key) ? current[key] : value])));
+        [key, personalDraftFields.current.has(key) ? current[key] : value])));
     }).catch((error) => {
       if (active) setQuestionnaireSessionError(error.message);
     }).finally(() => { if (active) setIsCheckingPersonalAccess(false); });
@@ -1880,7 +1880,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       try {
         const profile = await readPersonalInfoProfile();
         setPersonalAccountPhone(profile?.phone || "");
-        if (profile) {
+        if (profile && normalizeProfilePhone(personalInfo.phone) === profile.phone) {
           // An expired account cookie cannot authorize questionnaire reads.
           // Reestablish account access first, then validate the original raw TTL.
           if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
@@ -2056,7 +2056,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handlePhoneChange(value) {
-    if (personalAccountPhone || isCheckingPersonalAccess) return;
+    if (isCheckingPersonalAccess) return;
     const sanitizedValue = sanitizePhoneDigits(value);
     handlePersonalInfoChange("phone", sanitizedValue);
     setCachedPersonalInfo((current) => ({
@@ -2438,7 +2438,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                   list="hp-phone-cache"
                   autoComplete="tel-national"
                   value={personalInfo.phone}
-                  readOnly={Boolean(personalAccountPhone) || isCheckingPersonalAccess}
+                  readOnly={isCheckingPersonalAccess}
                   onFocus={() => setFocusedPersonalInfoField("phone")}
                   onBlur={() => window.setTimeout(() => setFocusedPersonalInfoField(""), 120)}
                   onBeforeInput={(event) => {

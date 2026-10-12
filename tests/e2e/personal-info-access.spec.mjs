@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 // Client interaction contracts; PostgreSQL/API proof is in tests/profile-live.
-test("server-restored profile has a readonly phone and storage retry sends no OTP", async ({ page }) => {
+test("server-restored profile prefills the phone and storage retry with the same phone sends no OTP", async ({ page }) => {
   const otp = [];
   const profile = { phone: "09011112222", firstName: "آزمون", lastName: "کاربر", income: "up-to-22", job: "employee", gender: "female", avatar: null };
   let failWrite = true;
@@ -15,7 +15,7 @@ test("server-restored profile has a readonly phone and storage retry sends no OT
   await page.goto("/personal-info");
   const inputs = page.locator(".hp-personal-info-form input");
   await expect(inputs.nth(2)).toHaveValue("۰۱۱۱۱۲۲۲۲");
-  await expect(inputs.nth(2)).not.toBeEditable();
+  await expect(inputs.nth(2)).toBeEditable();
   await inputs.first().fill("مریم");
   await page.getByRole("button", { name: "تایید" }).click();
   await expect(page.getByRole("alert")).toContainText("انجام نشد");

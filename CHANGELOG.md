@@ -264,3 +264,8 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 - personal-info نشست معتبر را از سرور می‌خواند، profile جاری و phone readonly، ذخیره مستقیم بدون OTP؛ مهمان/منقضی همان flow موجود.
 - خطای restore/storage حفظ draft و retry؛ probe دیررس پس از logout actor را بازنمی‌گرداند؛ raw TTL با replay تمدید نمی‌شود.
 - unit و regression مرورگر عمومی/واقعی PostgreSQL؛ هیچ CSS، asset، schema یا scoring تغییر ندارد. جزئیات و وضعیت gate در [checkpoint](docs/progress/us-11-t02d.md) و PR #112.
+
+### اصلاح پیش از مرج US-11.T02D — شماره متفاوت
+
+- personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
+- Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.

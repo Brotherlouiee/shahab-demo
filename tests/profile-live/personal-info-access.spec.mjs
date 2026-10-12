@@ -108,7 +108,7 @@ test("first OTP creates the account; a refreshed second questionnaire saves the 
   const inputs = page.locator(".hp-personal-info-form input");
   await expect(inputs.nth(0)).toHaveValue("آزمون");
   await expect(inputs.nth(2)).toHaveValue("۰۱۱۱۱۲۲۲۲");
-  await expect(inputs.nth(2)).not.toBeEditable();
+  await expect(inputs.nth(2)).toBeEditable();
   expect(await formGeometry(page)).toEqual(geometry);
   await inputs.nth(0).fill("مریم");
   const recommended = page.waitForResponse(r => r.url().endsWith("/recommendations"));
@@ -191,4 +191,73 @@ test("expired raw answers cannot be replayed into a fresh session or bypassed by
   expect(afterExpiry).toEqual([]);
   expect((await page.request.get(`/api/v1/questionnaire/sessions/${sid}`)).status()).toBe(410);
   expect(questionnaire.questions).toHaveLength(10);
+});
+
+test("changing the prefilled phone requires its OTP and creates an independent account without transferring the old profile or history", async ({ page }) => {
+  const firstPhone = "09011116666";
+  const nextPhone = "09011117777";
+  const requested = await page.request.post("/api/v1/account-access/request", { data: { phone: firstPhone } });
+  expect(requested.status()).toBe(200);
+  const verified = await page.request.post("/api/v1/account-access/verify", { data: { challengeId: (await requested.json()).challengeId, code: "123456" } });
+  expect(verified.status()).toBe(200);
+  const firstToken = (await verified.json()).accessToken;
+  const original = { phone: firstPhone, firstName: "مریم", lastName: "کاربر", income: "up-to-22", job: "employee", gender: "female", avatar: null };
+  expect((await page.request.put("/api/v1/profiles", { data: original })).status()).toBe(200);
+  async function fillQuestionnaire() {
+    await page.goto("/question/3");
+    for (let number = 3; number <= 12; number += 1) {
+      await page.getByRole("radio").first().click();
+      await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+    }
+    await expect(page).toHaveURL(/\/personal-info$/);
+    await expect(page.locator(".hp-personal-info-form input").first()).toHaveValue("مریم");
+  }
+  await fillQuestionnaire();
+  const firstResult = page.waitForResponse(r => r.url().endsWith("/recommendations"));
+  await page.getByRole("button", { name: "تایید" }).click();
+  expect((await firstResult).status()).toBe(200);
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 10000 });
+  const historyBefore = await (await page.request.get("/api/v1/recommendation-history")).json();
+  expect(historyBefore.items).toHaveLength(1);
+  const originalHistoryId = historyBefore.items[0].historyId;
+  const originalSnapshot = await (await page.request.get(`/api/v1/recommendation-history/${originalHistoryId}`)).json();
+  // A fresh questionnaire remains unbound until its first successful result.
+  await fillQuestionnaire();
+  await expect(page).toHaveURL(/\/personal-info$/);
+  const inputs = page.locator(".hp-personal-info-form input");
+  await expect(inputs.first()).toHaveValue("مریم");
+  await expect(inputs.nth(2)).toHaveValue("۰۱۱۱۱۶۶۶۶");
+  await expect(inputs.nth(2)).toBeEditable();
+  await inputs.nth(2).fill(nextPhone.slice(2));
+  await inputs.first().fill("آزمون");
+  const challengeResponse = page.waitForResponse(r => r.url().endsWith("/account-access/request"));
+  await page.getByRole("button", { name: "تایید" }).click();
+  const challenge = await challengeResponse;
+  expect(challenge.status()).toBe(200);
+  expect(challenge.request().postDataJSON()).toEqual({ phone: nextPhone });
+  await expect(page).toHaveURL(/\/verify-code$/);
+  // The old account remains unchanged before verification of the new number.
+  expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject(original);
+  await page.getByRole("button", { name: "تغییر شماره تلفن" }).click();
+  await expect(inputs.nth(2)).toHaveValue(nextPhone.slice(2));
+  await expect(inputs.first()).toHaveValue("آزمون");
+  await page.getByRole("button", { name: "تایید" }).click();
+  await expect(page).toHaveURL(/\/verify-code$/);
+  for (const [index, digit] of [..."123450"].entries()) await page.locator(".hp-loan-otp-row input").nth(index).fill(digit);
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  await expect(page.locator(".hp-loan-otp-error")).toContainText("اشتباه");
+  await expect(page).toHaveURL(/\/verify-code$/);
+  expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject(original);
+  for (const [index, digit] of [..."123456"].entries()) await page.locator(".hp-loan-otp-row input").nth(index).fill(digit);
+  const result = page.waitForResponse(r => r.url().endsWith("/recommendations"));
+  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
+  expect((await result).status()).toBe(200);
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 10000 });
+  expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject({ phone: nextPhone, firstName: "آزمون", gender: "" });
+  expect((await (await page.request.get("/api/v1/recommendation-history")).json()).items).toHaveLength(1);
+  const oldHeaders = { Authorization: `Bearer ${firstToken}` };
+  expect(await (await page.request.get("/api/v1/profiles/me", { headers: oldHeaders })).json()).toMatchObject(original);
+  expect(await (await page.request.get("/api/v1/recommendation-history", { headers: oldHeaders })).json()).toEqual(historyBefore);
+  expect(await (await page.request.get(`/api/v1/recommendation-history/${originalHistoryId}`, { headers: oldHeaders })).json()).toEqual(originalSnapshot);
+  expect((await page.request.get(`/api/v1/recommendation-history/${originalHistoryId}`)).status()).toBe(404);
 });
