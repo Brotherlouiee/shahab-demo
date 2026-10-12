@@ -21,3 +21,7 @@ No new migration/dependency, design, About copy, loan data, D-005 or questionnai
 ## Verified first-login profile creation — 2026-10-09
 
 Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+قرارداد phone-PK اولیه بالا تاریخی است؛ identity اکنون AccountActor.account_id و profile PK/FK accounts است. payload phone فقط برابر phone actor بررسی می‌شود؛ GET/PUT با ID همان generation و active DB انجام می‌شوند. atomic creation، read lock در برابر archive، partial unique race و یک ورود مجدد بعد از cutover؛ TTL/store/OTP provider همان قبلی.

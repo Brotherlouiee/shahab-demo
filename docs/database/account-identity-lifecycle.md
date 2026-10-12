@@ -1,7 +1,13 @@
 # قرارداد هویت و چرخهٔ عمر حساب — US-11.T02A.1
 
 نسخه ۱؛ ۲۰۲۶-۱۰-۱۲؛ مبنا `2e63479ae5e1034a50e9386cc42e2c3846ed8c27`.
-**وضعیت: قرارداد طراحی هدف؛ schema/runtime هنوز تغییر نکرده است.**
+**وضعیت core identity: در US-11.T02A.2 پیاده‌سازی شده؛ سایر قابلیت‌ها آینده‌اند.**
+
+accounts/profile PK، owner/session composite FK، adapter account-ID و دو migration
+طبق [runbook](account-identity-migration-runbook.md) اجرا شده‌اند. شرح «فعلی» در
+بخش‌های A.1 زیر وضعیت زمان طراحی است؛ ERD/dictionary اجرایی به‌روز شده‌اند.
+A.2 همه AC01–AC16 را انجام نمی‌دهد: proof B، نشست durable/۱ساعت C، جریان D، purge E،
+bookmark F، archive use case G و backup T05 همچنان جدا هستند.
 تصمیم محصول PD01–PD08 مصوب است؛ اجرای مدل در T02A.2 و قابلیت‌های بعدی انجام می‌شود.
 [ADR 0008](../adr/0008-account-identity-lifecycle.md) چرایی تصمیم،
 [checkpoint](../progress/us-11-t02a1.md) شواهد و مرز تحویل را ثبت می‌کنند.

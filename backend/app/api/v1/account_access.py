@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sqlalchemy.orm import Session
 
 from backend.app.accounts.access import AccessFailure, AccountAccess
+from backend.app.accounts.identity import AccountActor, require_active_account
 from backend.app.accounts.phone import normalize_phone
 from backend.app.accounts.profile_repository import ensure_profile
 from backend.app.api.errors import ApiError, ErrorCode
@@ -59,26 +60,29 @@ def bearer_token(request: Request, authorization: Annotated[str | None, Header()
     return token
 
 
-def authenticated_phone(
-    service: Annotated[AccountAccess, Depends(access_service)], token: Annotated[str, Depends(bearer_token)]
-) -> str:
+def authenticated_account(
+    service: Annotated[AccountAccess, Depends(access_service)],
+    token: Annotated[str, Depends(bearer_token)],
+    session: Annotated[Session | None, Depends(get_request_database_session)],
+) -> AccountActor:
     try:
-        return service.actor(token)
+        return require_active_account(service.actor(token), session)
     except AccessFailure as error:
         raise safe_failure(error) from None
 
 
-def optional_authenticated_phone(
+def optional_authenticated_account(
     service: Annotated[AccountAccess, Depends(access_service)],
     request: Request,
+    session: Annotated[Session | None, Depends(get_request_database_session)],
     authorization: Annotated[str | None, Header()] = None,
-) -> str | None:
+) -> AccountActor | None:
     """Permit anonymous recommendation while never trusting a malformed token."""
     if authorization is None and not request.cookies.get(ACCESS_COOKIE):
         return None
     token = bearer_token(request, authorization)
     try:
-        return service.actor(token)
+        return require_active_account(service.actor(token), session)
     except AccessFailure as error:
         raise safe_failure(error) from None
 
@@ -106,9 +110,10 @@ def verify_code(
         token = service.verify_code(payload.challengeId, payload.code)
     except AccessFailure as error:
         raise safe_failure(error) from None
-    phone = service.actor(token)
+    phone = service.verified_phone(token)
     try:
-        ensure_profile(phone, session)
+        actor = ensure_profile(phone, session)
+        service.bind_account(token, actor.account_id)
     except Exception:
         service.revoke(token)
         raise
@@ -117,8 +122,8 @@ def verify_code(
 
 
 @router.get("/session")
-def current_session(actor: Annotated[str, Depends(authenticated_phone)]) -> dict[str, str | int]:
-    return {"phone": actor, "expiresIn": 1800}
+def current_session(actor: Annotated[AccountActor, Depends(authenticated_account)]) -> dict[str, str | int]:
+    return {"phone": actor.phone, "expiresIn": 1800}
 
 
 @router.post("/logout", status_code=204)

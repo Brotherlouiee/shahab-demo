@@ -67,3 +67,7 @@ CLI operations_tool در محیط trusted با secret manager و DB role محد�
 می‌شود؛ account مالک migration برای ابزار رد می‌شود. provider/customer OTP
 یکی نیستند. port عمومی اضافه نشده است؛ protected-tool.md مرجع provisioning
 مجوز، عدم ذخیره secrets و خاموش‌کردن ابزار بدون حذف volume/audit است.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+برای aa11b02a2001/2 از [runbook هویت](../database/account-identity-migration-runbook.md) استفاده کن؛ stop API پیش از تغییر کلید و recreate همه workerها پس از head. down -v/reset داده ممنوع؛ expand audit/backfill پیش از contract. rollback چند نسل guard دارد، schema قدیمی به‌تنهایی کافی نیست.

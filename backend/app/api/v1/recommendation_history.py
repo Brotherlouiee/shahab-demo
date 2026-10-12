@@ -10,11 +10,12 @@ from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy.orm import Session
 
+from backend.app.accounts.identity import AccountActor
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.core.dependencies import get_request_database_session
 from backend.app.recommendation.infrastructure.history import RecommendationHistoryRepository
 
-from .account_access import authenticated_phone
+from .account_access import authenticated_account
 
 router = APIRouter(prefix="/recommendation-history", tags=["recommendation-history"])
 
@@ -69,7 +70,7 @@ class HistoryDetail(BaseModel):
 
 @router.get("", response_model=HistoryPage, response_model_by_alias=True)
 def list_history(
-    actor: Annotated[str, Depends(authenticated_phone)],
+    actor: Annotated[AccountActor, Depends(authenticated_account)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
     limit: int = Query(20, ge=1, le=50),
     cursor: str | None = Query(None, max_length=256),
@@ -112,7 +113,7 @@ def list_history(
 )
 def read_history(
     history_id: str,
-    actor: Annotated[str, Depends(authenticated_phone)],
+    actor: Annotated[AccountActor, Depends(authenticated_account)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> HistoryDetail:
     if db is None:
@@ -166,7 +167,7 @@ def read_history(
 @router.delete("/{history_id}", status_code=204)
 def hide_history(
     history_id: str,
-    actor: Annotated[str, Depends(authenticated_phone)],
+    actor: Annotated[AccountActor, Depends(authenticated_account)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
 ) -> Response:
     if db is None:

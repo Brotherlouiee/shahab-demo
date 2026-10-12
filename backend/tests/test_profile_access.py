@@ -2,23 +2,34 @@
 
 import unittest
 from unittest.mock import MagicMock
+from uuid import uuid4
 
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine, delete
+from sqlalchemy.orm import Session
+from sqlalchemy.pool import StaticPool
 
 from backend.app.accounts.access import AccessFailure, AccountAccess, MockOtpProvider
 from backend.app.accounts.phone import normalize_phone
 from backend.app.core.config import AppEnvironment, Settings
 from backend.app.core.dependencies import get_request_database_session
-from backend.app.infrastructure.db.models import UserProfile
+from backend.app.infrastructure.db.models import Account, Base, UserProfile
 from backend.app.main import create_app
 
 
 class ProfileAccessTests(unittest.TestCase):
     def setUp(self) -> None:
         self.app = create_app(Settings(environment=AppEnvironment.TEST, profile_mock_otp_enabled=True))
-        self.database = MagicMock()
+        self.engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
+        Base.metadata.create_all(self.engine)
+        self.real_database = Session(self.engine)
+        self.account_id = uuid4()
+        self.account = Account(account_id=self.account_id, phone="09000000001", status="active")
+        self.real_database.add(self.account)
+        self.real_database.flush()
+        self.database = MagicMock(wraps=self.real_database)
         self.record = UserProfile(
-            phone="09000000001",
+            account_id=self.account_id,
             first_name="آزمون",
             last_name="تست",
             income="up-to-22",
@@ -26,9 +37,20 @@ class ProfileAccessTests(unittest.TestCase):
             gender="",
             avatar_data_url=None,
         )
-        self.database.get.return_value = self.record
+        self.real_database.add(self.record)
+        self.real_database.commit()
         self.app.dependency_overrides[get_request_database_session] = lambda: self.database
         self.client = TestClient(self.app, raise_server_exceptions=False)
+
+    def tearDown(self) -> None:
+        self.real_database.close()
+        self.engine.dispose()
+
+    def clear_fixture_account(self) -> None:
+        self.real_database.execute(delete(UserProfile))
+        self.real_database.execute(delete(Account))
+        self.real_database.commit()
+        self.database.reset_mock()
 
     def login(self, phone: str = "09000000001") -> dict[str, str]:
         challenge = self.client.post("/api/v1/account-access/request", json={"phone": phone})
@@ -57,11 +79,11 @@ class ProfileAccessTests(unittest.TestCase):
         response = self.client.get("/api/v1/profiles/me", headers=headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers["Cache-Control"], "no-store")
-        self.database.get.assert_called_with(UserProfile, "09000000001")
+        self.database.get.assert_called_with(UserProfile, self.account_id)
         response = self.client.put("/api/v1/profiles", headers=headers, json={"phone": "09000000002"})
         self.assertEqual(response.status_code, 403)
         self.database.commit.assert_not_called()
-        self.assertEqual(self.record.phone, "09000000001")
+        self.assertEqual(self.account.phone, "09000000001")
 
     def test_profile_write_and_storage_failure_are_distinct(self) -> None:
         headers = self.login()
@@ -96,7 +118,7 @@ class ProfileAccessTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/v1/profiles/me", headers=headers).status_code, 401)
 
     def test_verification_creates_a_profile_only_after_valid_code(self) -> None:
-        self.database.get.return_value = None
+        self.clear_fixture_account()
         challenge = self.client.post("/api/v1/account-access/request", json={"phone": "09000000001"}).json()
         self.database.add.assert_not_called()
         response = self.client.post(
@@ -109,7 +131,8 @@ class ProfileAccessTests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         created = self.database.add.call_args.args[0]
-        self.assertEqual((created.phone, created.first_name, created.last_name), ("09000000001", "", ""))
+        self.assertEqual((created.first_name, created.last_name), ("", ""))
+        self.assertEqual(self.real_database.get(Account, created.account_id).phone, "09000000001")
         self.database.commit.assert_called_once()
 
     def test_repeat_login_preserves_existing_profile(self) -> None:
@@ -120,7 +143,7 @@ class ProfileAccessTests(unittest.TestCase):
         self.assertEqual((self.record.first_name, self.record.income), ("آزمون", "up-to-22"))
 
     def test_failed_profile_creation_does_not_issue_access(self) -> None:
-        self.database.get.return_value = None
+        self.clear_fixture_account()
         self.database.commit.side_effect = RuntimeError("private database failure")
         challenge = self.client.post("/api/v1/account-access/request", json={"phone": "09000000001"}).json()
         response = self.client.post(
@@ -174,7 +197,11 @@ class AccountSessionTests(unittest.TestCase):
             self.access.verify_code(challenge, "123456")
         challenge = self.access.request_code("09000000001", "test-client")
         token = self.access.verify_code(challenge, "123456")
-        self.assertEqual(self.access.actor(token), "09000000001")
+        with self.assertRaises(AccessFailure):
+            self.access.actor(token)  # Legacy/unbound credentials cannot resolve by phone.
+        account_id = uuid4()
+        self.access.bind_account(token, account_id)
+        self.assertEqual(self.access.actor(token), account_id)
         with self.assertRaises(AccessFailure):
             self.access.verify_code(challenge, "123456")
         self.now += 1801

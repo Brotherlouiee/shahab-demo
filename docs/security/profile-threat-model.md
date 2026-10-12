@@ -12,3 +12,7 @@
 | OTP brute force/memory exhaustion | Five attempts; client/phone quota; bounded stores | Attempt/quota/expiry tests |
 
 Purpose: local/test editable profile persistence. Existing profiles remain until explicit owner/operator deletion. Automated deletion and production retention/consent policy remain separate account release gates. No analytics, training or third-party use is added. Real SMS, shared production sessions and full transport/security release gates are not delivered here.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+تغییر هویت با phone مشترک: capability به UUID immutable bind و هر request active همان ID را از DB validate می‌کند؛ archived credential هیچ داده نسل جدید را نمی‌خواند. migration از مالک legacy به mapping پایدار، guard rollback و race دو connection. mock/local-only و نشست حافظه‌ای/۱۸۰۰ قبلی باقی؛ C/H production gates مستقل‌اند.

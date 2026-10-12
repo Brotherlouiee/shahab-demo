@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- US-11.T02A.2: هویت مستقل UUID حساب، profile و مالکیت session/history نرمال،
+  token متصل به همان نسل و status تازه DB. snapshot قبلی و UI/scoring ثابت.
+  migrationهای افزایشی aa11b02a2001/2 با backfill تکرارپذیر، partial unique/composite FK،
+  rollback guard، تست PostgreSQL و [runbook](docs/database/account-identity-migration-runbook.md).
+  پس از cutover توقف/restart همه writerها و ورود مجدد لازم؛ C/OTP-flow/purge/archive جدا.
+
+
 ### Added
 
 - US-11.T02A.1: قرارداد هویت account UUID، active/archived و یک active phone،

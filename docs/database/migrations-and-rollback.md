@@ -53,3 +53,7 @@ future ORM changes do not rewrite this revision. Upgrade/downgrade proof runs
 in the existing disposable PostgreSQL CI job (test_operations_postgresql).
 Code rollback leaves additive evidence intact. Destructive schema downgrade needs
 verified backup/export and stopped writers; see ../operations/audit-runbook.md.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+aa11b02a2001 expand و aa11b02a2002 contract، parent b4d8e1f2a3c5؛ writers متوقف، backfill مستقل repeatable، cutover و restart همه workerها. rollback قبل از archive/multiple generation lossless؛ پس از آن guard رد می‌کند. [runbook هویت](account-identity-migration-runbook.md) مرجع فرمان و ترتیب است.

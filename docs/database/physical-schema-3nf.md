@@ -111,3 +111,7 @@ active phone و consistency status/archived_at، composite owner/session FK، cu
 phone-PK و guard downgrade به T02A.2 تعلق دارند. جدول‌های access session/bookmark
 در diagram آینده‌اند و اجرای C/F جدا دارند. مشخصات اجراشده فعلی و 3NF/audit
 قبلی عوض نشده‌اند؛ A.1 هیچ DDL/backfill ندارد.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+phone فقط در accounts؛ profile.account_id PK/FK و owner_account_id رابطه‌ای. partial unique active phone، composite history/session FK و RESTRICT در aa11b02a2002 واقعی‌اند؛ کپی archive یا JSON profile ساخته نشده. بند A.1 بالا طراحی تاریخی است.

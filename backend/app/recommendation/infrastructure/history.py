@@ -11,6 +11,7 @@ from sqlalchemy import CursorResult, func, or_, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from backend.app.accounts.identity import AccountActor, require_active_account
 from backend.app.infrastructure.db.models import (
     QuestionnaireSession,
     RecommendationHistoryItem,
@@ -25,8 +26,9 @@ class RecommendationHistoryRepository:
     def __init__(self, session: Session) -> None:
         self._session = session
 
-    def save(self, owner_phone: str, questionnaire_session_id: str, result: Any) -> RecommendationHistoryRun:
+    def save(self, actor: AccountActor, questionnaire_session_id: str, result: Any) -> RecommendationHistoryRun:
         """Save a complete run, or return its existing owner-scoped idempotent result."""
+        require_active_account(actor.account_id, self._session)
         session_id = uuid.UUID(questionnaire_session_id)
         # Bind the completed anonymous questionnaire to the authenticated actor
         # atomically. Subsequent accounts cannot claim or persist its snapshot.
@@ -35,8 +37,13 @@ class RecommendationHistoryRepository:
             self._session.execute(
                 update(QuestionnaireSession)
                 .where(QuestionnaireSession.questionnaire_session_id == session_id)
-                .where(or_(QuestionnaireSession.owner_phone.is_(None), QuestionnaireSession.owner_phone == owner_phone))
-                .values(owner_phone=owner_phone)
+                .where(
+                    or_(
+                        QuestionnaireSession.owner_account_id.is_(None),
+                        QuestionnaireSession.owner_account_id == actor.account_id,
+                    )
+                )
+                .values(owner_account_id=actor.account_id)
             ),
         )
         claimed = claim_result.rowcount
@@ -44,12 +51,12 @@ class RecommendationHistoryRepository:
             raise PermissionError("questionnaire session belongs to another account")
         existing = self._existing(session_id)
         if existing is not None:
-            return self._owned(existing, owner_phone)
+            return self._owned(existing, actor)
 
         try:
             with self._session.begin_nested():
                 run = RecommendationHistoryRun(
-                    owner_phone=owner_phone,
+                    owner_account_id=actor.account_id,
                     questionnaire_session_id=session_id,
                     data_version=result.data_version,
                     config_version=result.config_version,
@@ -64,11 +71,12 @@ class RecommendationHistoryRepository:
             existing = self._existing(session_id)
             if existing is None:
                 raise
-            return self._owned(existing, owner_phone)
+            return self._owned(existing, actor)
 
     def list_for_owner(
-        self, owner_phone: str, limit: int, cursor: tuple[object, uuid.UUID] | None = None
+        self, actor: AccountActor, limit: int, cursor: tuple[object, uuid.UUID] | None = None
     ) -> Sequence[tuple[RecommendationHistoryRun, int]]:
+        require_active_account(actor.account_id, self._session)
         ranked_count = (
             select(func.count(RecommendationHistoryItem.recommendation_history_item_id))
             .where(
@@ -80,7 +88,7 @@ class RecommendationHistoryRepository:
             .scalar_subquery()
         )
         statement = select(RecommendationHistoryRun, ranked_count.label("ranked_count")).where(
-            RecommendationHistoryRun.owner_phone == owner_phone,
+            RecommendationHistoryRun.owner_account_id == actor.account_id,
             RecommendationHistoryRun.hidden_at.is_(None),
         )
         if cursor is not None:
@@ -100,12 +108,13 @@ class RecommendationHistoryRepository:
         ).all()
 
     def read_for_owner(
-        self, owner_phone: str, run_id: str
+        self, actor: AccountActor, run_id: str
     ) -> tuple[RecommendationHistoryRun, Sequence[RecommendationHistoryItem], dict[uuid.UUID, tuple[str, ...]]]:
+        require_active_account(actor.account_id, self._session)
         run = self._session.scalar(
             select(RecommendationHistoryRun).where(
                 RecommendationHistoryRun.recommendation_history_run_id == uuid.UUID(run_id),
-                RecommendationHistoryRun.owner_phone == owner_phone,
+                RecommendationHistoryRun.owner_account_id == actor.account_id,
                 RecommendationHistoryRun.hidden_at.is_(None),
             )
         )
@@ -136,14 +145,15 @@ class RecommendationHistoryRepository:
                 reasons[item_id].append(reason)
         return run, items, {item_id: tuple(values) for item_id, values in reasons.items()}
 
-    def hide_for_owner(self, owner_phone: str, run_id: str) -> bool:
+    def hide_for_owner(self, actor: AccountActor, run_id: str) -> bool:
         """Hide an owned run without deleting its immutable database snapshot."""
+        require_active_account(actor.account_id, self._session)
         result = cast(
             CursorResult[object],
             self._session.execute(
                 update(RecommendationHistoryRun)
                 .where(RecommendationHistoryRun.recommendation_history_run_id == uuid.UUID(run_id))
-                .where(RecommendationHistoryRun.owner_phone == owner_phone)
+                .where(RecommendationHistoryRun.owner_account_id == actor.account_id)
                 .where(RecommendationHistoryRun.hidden_at.is_(None))
                 .values(hidden_at=func.now())
             ),
@@ -156,8 +166,8 @@ class RecommendationHistoryRepository:
         )
 
     @staticmethod
-    def _owned(run: RecommendationHistoryRun, owner_phone: str) -> RecommendationHistoryRun:
-        if run.owner_phone != owner_phone:
+    def _owned(run: RecommendationHistoryRun, actor: AccountActor) -> RecommendationHistoryRun:
+        if run.owner_account_id != actor.account_id:
             raise PermissionError("recommendation session belongs to another account")
         return run
 

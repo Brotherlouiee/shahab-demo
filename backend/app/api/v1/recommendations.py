@@ -9,8 +9,9 @@ from fastapi import APIRouter, Body, Depends, Request
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy.orm import Session
 
+from backend.app.accounts.identity import AccountActor
 from backend.app.api.errors import ApiError, ErrorCode
-from backend.app.api.v1.account_access import optional_authenticated_phone
+from backend.app.api.v1.account_access import optional_authenticated_account
 from backend.app.api.v1.questionnaire import QUESTIONNAIRE_PROOF_COOKIE_PREFIX
 from backend.app.core.config import Settings, get_settings
 from backend.app.core.dependencies import _questionnaire_configuration, get_request_database_session
@@ -92,7 +93,7 @@ def recommend(
     payload: Annotated[RecommendationRequest, Body()],
     settings: Annotated[Settings, Depends(get_settings)],
     db: Annotated[Session | None, Depends(get_request_database_session)],
-    actor: Annotated[str | None, Depends(optional_authenticated_phone)],
+    actor: Annotated[AccountActor | None, Depends(optional_authenticated_account)],
     request: Request,
 ) -> RecommendationResponse:
     if db is None:

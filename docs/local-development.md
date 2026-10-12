@@ -115,3 +115,7 @@ python -m scripts.operations_tool --command /private/command.json؛ نیازمن
 authority HTTPS معتبر مستقل و PostgreSQL account غیرمالک است. OTP فیک کاربر
 جای آن نیست. secrets از محیط خصوصی، نه argument/command.json. راهنمای کامل
 در operations/protected-tool.md؛ هیچ سرویس/port/dependency جدیدی ندارد.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+پس از دریافت این نسخه، API writers را توقف و مطابق [runbook حساب](database/account-identity-migration-runbook.md) دو revision را اجرا و همه workerها را دوباره راه‌اندازی کن؛ volume reset لازم نیست. داده قبلی حفظ و memory sessions قدیمی نیازمند ورود مجدد هستند. migration روی DB مالک در این PR اجرا نشده.

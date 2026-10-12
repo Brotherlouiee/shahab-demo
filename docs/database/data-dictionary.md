@@ -55,18 +55,18 @@
 آداپتور فقط اعضای active catalogue با نسخهٔ `PUBLISHED` و source file همان catalogue را می‌خواند؛ شرط همان loan version از `loan_conditions` می‌آید.
 
 
-## user_profiles — PR #85 / US-09.T072
+## user_profiles — اجرایی پس از US-11.T02A.2
 
 | Column | PostgreSQL type | Null/default |
 | --- | --- | --- |
-| phone | varchar(11), PK | non-null canonical ASCII mobile |
+| account_id | uuid PK/FK accounts ON DELETE RESTRICT | non-null؛ phone از accounts join می‌شود |
 | first_name, last_name | varchar(60) | non-null, empty string |
 | income, job | varchar(40) | non-null, empty string; API allowlist |
 | gender | varchar(10) | non-null, empty string; female/male/empty |
 | avatar_data_url | text | nullable; supported base64 raster; 100 KB server limit |
 | created_at, updated_at | timestamptz | non-null, now(); ORM updates updated_at |
 
-Source: migration d1a9e71b4c3f_add_user_profiles.py. Owner: account/profile feature. Synthetic fixture phone: 09000000001. Purpose: local/test profile persistence. Retained until explicit owner/operator removal; production deletion/retention policy is a separate account release gate. No new schema/migration in T072.
+Source: migration aa11b02a2002؛ account/profile feature. PD02–PD07 حفظ دائمی profile/history/hidden/archive را مشخص می‌کنند؛ حذف خام ۳۰دقیقه‌ای مستقل است. API public phone از accounts می‌آید، فقط پروفایل همان account تغییر می‌کند.
 
 ## US-10.T03 actual audit dictionary
 
@@ -104,3 +104,23 @@ customer-serving storage is unchanged. Evidence has no automatic retention purge
 این بخش تصمیم طراحی است، نه تأیید وجود این ستون‌ها. مهاجرت در A.2 با legacy
 mapping و حفظ counts/FK/snapshot روی PostgreSQL واقعی اثبات شود؛ کنترل F01/F02
 در مراحل B/E رفع می‌شود و در A.1 رفع‌شده ادعا نمی‌شود.
+
+## US-11.T02A.2 — ستون‌ها و قیود اجرایی جدید
+
+| جدول/ستون | نوع / null/default | قیود و منبع |
+| --- | --- | --- |
+| accounts.account_id | UUID NOT NULL | PK، opaque immutable؛ تولید یک‌بار |
+| accounts.phone | varchar(11) NOT NULL | `^09[0-9]{9}$`، immutable؛ partial UNIQUE فقط status active |
+| accounts.status | varchar(16) NOT NULL، active | CHECK active/archived؛ archive terminal با trigger |
+| accounts.created_at | timestamptz NOT NULL، now() | UTC؛ backfill همان profile created_at؛ immutable |
+| accounts.archived_at | timestamptz NULL | active⇒NULL، archived⇒nonnull>=created_at؛ بایگانی retained |
+| user_profiles.account_id | UUID NOT NULL | PK/FK accounts RESTRICT؛ phone duplicate حذف شده |
+| questionnaire_sessions.owner_account_id | UUID NULL | FK accounts RESTRICT؛ index؛ NULL ناشناس؛ bind immutable |
+| recommendation_history_runs.owner_account_id | UUID NOT NULL | FK accounts RESTRICT؛ index(owner,created_at,run_id) |
+| session/history pair | UUID pair | session UNIQUE(id,owner)، history composite FK RESTRICT؛ unique session قبلی حفظ |
+
+profile fields/shape و API allowlist همان‌اند؛ items/reasons/version/hidden_at
+بدون تغییر. AccountActor شامل UUID و phone تازه از DB است؛ نقش اپراتور نیست.
+جدول access_sessions و bookmarks هنوز آینده‌اند. migration قدیمی دست‌نخورده؛
+[runbook](account-identity-migration-runbook.md) و تست PostgreSQL مرجع عملیات/rollback.
+بخش target A.1 بالا طرح تاریخی است؛ این بخش وضعیت اجرای core identity را ثبت می‌کند.
