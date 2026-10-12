@@ -204,12 +204,7 @@ test("changing the prefilled phone requires its OTP and creates an independent a
   const original = { phone: firstPhone, firstName: "مریم", lastName: "کاربر", income: "up-to-22", job: "employee", gender: "female", avatar: null };
   expect((await page.request.put("/api/v1/profiles", { data: original })).status()).toBe(200);
   async function fillQuestionnaire() {
-    await page.goto("/question/3");
-    for (let number = 3; number <= 12; number += 1) {
-      await page.getByRole("radio").first().click();
-      await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
-    }
-    await expect(page).toHaveURL(/\/personal-info$/);
+    await completeQuestionnaire(page);
     await expect(page.locator(".hp-personal-info-form input").first()).toHaveValue("مریم");
   }
   await fillQuestionnaire();
