@@ -118,3 +118,13 @@ versions and events are append-only; singleton head is the mutable projection.
 These implemented relations supersede only the earlier conceptual approval/audit
 shape; unimplemented staging concepts are still conceptual. Historical JSONB
 preparation/diff follows ADR 0006; customer serving relations remain unchanged.
+
+## US-11.T02A.1 — هویت حساب: اجرا در برابر طرح هدف
+
+schema فعلی همچنان user_profiles.phone-PK است؛ questionnaire_sessions.owner_phone
+و recommendation_history_runs.owner_phone به آن FK دارند. عبارت تاریخیِ «بدون
+FK به پرسشنامه» در بخش PR #85 فقط وضعیت آن مقطع را نشان می‌دهد و وضعیت فعلی نیست.
+[ERD هدف و قرارداد account](account-identity-lifecycle.md) در فایل جداست تا
+accounts/account_id و روابط آینده، schema اجراشده قلمداد نشوند. A.1 طراحی است؛
+model/migration و نقش جدید اجرا نشده‌اند. A.2 باید همین ERD و dictionary را با
+schema واقعی و آزمون PostgreSQL به‌روز کند.

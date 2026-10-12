@@ -87,3 +87,20 @@ Source: migration d1a9e71b4c3f_add_user_profiles.py. Owner: account/profile feat
 Exact types/nullability/constraints are in physical-schema-3nf.md. This implemented
 additive schema supersedes the earlier conceptual approval/audit columns only;
 customer-serving storage is unchanged. Evidence has no automatic retention purge.
+
+## US-11.T02A.1 — dictionary هدف حساب؛ schema فعلی نیست
+
+مرجع ستون/type/nullable/constraint واحد:
+[قرارداد account identity/lifecycle](account-identity-lifecycle.md).
+
+| موجودیت هدف | کلید و factهای اصلی | هدف/دسترسی/retention |
+| --- | --- | --- |
+| accounts (جدید در A.2) | account_id uuid PK؛ phone canonical immutable؛ status و created_at/archived_at؛ یک active phone | هویت هر دوره حساب؛ retained forever، archived دسترسی ندارد؛ phone در profile/history کپی نشود |
+| user_profiles (کلید جدید در A.2) | account_id PK/FK؛ همان name/income/job/gender/avatar/timestamps موجود | profile جاری مستقل از snapshot؛ initial خالی جز phone در account؛ جنسیت اختیاری؛ archive retained |
+| questionnaire_sessions (owner جدید در A.2) | owner_account_id nullable FK؛ session UUID و expiry موجود | anonymous تا bind معتبر؛ raw answers پس از ۳۰ دقیقه حذف، metadata لازم history حفظ |
+| recommendation_history_runs (owner جدید در A.2) | owner_account_id NOT NULL FK و pair FK با session؛ unique session فعلی | visible/hidden snapshot همیشگی؛ owner و version immutable، hide≠erasure |
+| account_bookmarks / account_access_sessions (آینده F/C) | account/version junction یا account-bound credential | تعریف جزئی/اجرای جدا؛ browser/phone مالکیت را تعیین نمی‌کند، TTL نشست یک‌ساعته مصوب هنوز اجرا نشده |
+
+این بخش تصمیم طراحی است، نه تأیید وجود این ستون‌ها. مهاجرت در A.2 با legacy
+mapping و حفظ counts/FK/snapshot روی PostgreSQL واقعی اثبات شود؛ کنترل F01/F02
+در مراحل B/E رفع می‌شود و در A.1 رفع‌شده ادعا نمی‌شود.
