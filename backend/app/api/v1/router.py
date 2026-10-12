@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 
 from .account_access import router as account_access_router
+from .bookmarks import router as bookmarks_router
 from .health import router as health_router
 from .loans import router as loans_router
 from .profiles import router as profiles_router
@@ -18,3 +19,5 @@ router.include_router(questionnaire_router)
 router.include_router(profiles_router)
 router.include_router(recommendations_router)
 router.include_router(recommendation_history_router)
+
+router.include_router(bookmarks_router)

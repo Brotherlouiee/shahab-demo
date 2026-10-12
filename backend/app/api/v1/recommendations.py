@@ -81,6 +81,7 @@ class NeedsReviewResponse(BaseModel):
 
 
 class RecommendationResponse(BaseModel):
+    history_id: str | None = Field(default=None, alias="historyId")
     data_version: str = Field(alias="dataVersion")
     config_version: str = Field(alias="configVersion")
     ranked_recommendations: tuple[RankedRecommendationResponse, ...] = Field(alias="rankedRecommendations")
@@ -111,7 +112,7 @@ def recommend(
     authorize_questionnaire(payload.session_id, request, db, actor)
     if actor is not None:
         try:
-            RecommendationHistoryRepository(db).save(
+            saved_run = RecommendationHistoryRepository(db).save(
                 actor,
                 payload.session_id,
                 result,
@@ -119,6 +120,9 @@ def recommend(
                     request.cookies[PROOF_COOKIE_PREFIX + str(UUID(payload.session_id))]
                 ),
             )
+            # Opaque own-snapshot reference permits refresh without persisting
+            # personalized result JSON in browser navigation or rescoring it.
+            result = result.model_copy(update={"history_id": str(saved_run.recommendation_history_run_id)})
             db.commit()
         except PermissionError as error:
             db.rollback()

@@ -35,7 +35,7 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
             if method not in {"get", "post", "put", "delete", "patch", "head", "options"}:
                 continue
             relative = path.removeprefix(prefix)
-            protected = relative.startswith(("/profiles", "/recommendation-history")) or relative in {
+            protected = relative.startswith(("/profiles", "/recommendation-history", "/bookmarks")) or relative in {
                 "/account-access/session",
                 "/account-access/logout",
             }
@@ -86,6 +86,13 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
                     "Hides your own test history entry from user-facing reads; does not physically delete its "
                     "immutable database snapshot. Missing, already-hidden and another actor's IDs return 404."
                 )
+            if relative.startswith("/bookmarks"):
+                operation["description"] = (
+                    "Account-generation scoped bookmarks. PUT expresses saved state and DELETE hides the association; "
+                    "retries are idempotent. Only loan UUID and optional own visible historyId are accepted. "
+                    "No client owner, score or loan facts are stored. GET is cursor-paginated with no-store; "
+                    "snapshot display context is read from its original immutable server tables."
+                )
             if relative == "/account-access/logout":
                 operation["description"] = (
                     "Revokes the current account session and clears its cookie. Protected requests subsequently "
@@ -110,7 +117,9 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
                 statuses["503"] = "Service/storage unavailable"
             if protected or relative in {"/account-access/verify", "/recommendations"}:
                 statuses["401"] = "Missing/invalid/expired account access"
-            if relative.startswith(("/profiles", "/recommendation-history", "/loans", "/questionnaire/sessions/")):
+            if relative.startswith(
+                ("/profiles", "/recommendation-history", "/bookmarks", "/loans", "/questionnaire/sessions/")
+            ):
                 statuses["404"] = "Missing or inaccessible resource"
             if (
                 relative == "/recommendations"

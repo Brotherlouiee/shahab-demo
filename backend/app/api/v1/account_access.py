@@ -143,7 +143,7 @@ def verify_code(
         or request.app.state.settings.environment in {AppEnvironment.STAGING, AppEnvironment.PRODUCTION},
         path="/api/v1",
     )
-    return {"accessToken": token, "phone": phone, "expiresIn": 3600}
+    return {"accessToken": token, "phone": phone, "accountId": str(actor.account_id), "expiresIn": 3600}
 
 
 @router.get("/session")
@@ -156,7 +156,7 @@ def current_session(
         remaining = service.remaining(token)
     except AccessFailure as error:
         raise safe_failure(error) from None
-    return {"phone": actor.phone, "expiresIn": remaining}
+    return {"phone": actor.phone, "accountId": str(actor.account_id), "expiresIn": remaining}
 
 
 @router.post("/logout", status_code=204)
@@ -164,9 +164,15 @@ def logout(
     service: Annotated[AccountAccess, Depends(access_service)],
     token: Annotated[str, Depends(bearer_token)],
     response: Response,
+    request: Request,
 ) -> None:
     try:
         service.revoke(token)
     except AccessFailure as error:
         raise safe_failure(error) from None
     response.delete_cookie(ACCESS_COOKIE, path="/api/v1")
+    # The browser cannot clear HttpOnly creator secrets itself. Logout removes
+    # only Shahab questionnaire cookies; raw DB retention remains independent.
+    for cookie in request.cookies:
+        if cookie.startswith("shahab_questionnaire_proof_"):
+            response.delete_cookie(cookie, path="/api/v1")

@@ -457,6 +457,7 @@ class RecommendationHistoryRun(Timestamped, Base):
     __tablename__ = "recommendation_history_runs"
     __table_args__ = (
         UniqueConstraint("questionnaire_session_id", name="uq_recommendation_history_session"),
+        UniqueConstraint("recommendation_history_run_id", "owner_account_id", name="uq_history_run_owner"),
         ForeignKeyConstraint(
             ["questionnaire_session_id", "owner_account_id"],
             ["questionnaire_sessions.questionnaire_session_id", "questionnaire_sessions.owner_account_id"],
@@ -611,3 +612,34 @@ class OperationsWorkflowHead(Base):
     head_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
     version_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("operations_versions.version_id"))
     __table_args__ = (CheckConstraint("head_id = 1", name="ck_operations_singleton"),)
+
+
+class AccountBookmark(Timestamped, Base):
+    """Normalized account/version association; display facts remain in their original tables.
+
+    Removal changes visibility only. The optional owner-consistent result reference
+    preserves the score the user saved without duplicating personalized facts.
+    """
+
+    __tablename__ = "account_bookmarks"
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ["source_history_run_id", "account_id"],
+            [
+                "recommendation_history_runs.recommendation_history_run_id",
+                "recommendation_history_runs.owner_account_id",
+            ],
+            name="fk_bookmark_history_owner",
+            ondelete="RESTRICT",
+        ),
+        CheckConstraint("removed_at IS NULL OR removed_at >= created_at", name="ck_bookmark_removal_time"),
+        Index("ix_bookmark_owner_visible_created", "account_id", "removed_at", "created_at", "loan_product_version_id"),
+    )
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"), primary_key=True
+    )
+    loan_product_version_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("loan_product_versions.loan_product_version_id", ondelete="RESTRICT"), primary_key=True
+    )
+    source_history_run_id: Mapped[uuid.UUID | None] = mapped_column(Uuid)
+    removed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
