@@ -77,3 +77,19 @@ resume/write/recommend نیازمند cookie تصادفی سازنده؛ bound q
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 verify expiresIn=۳۶۰۰ و cookie Max-Age=۳۶۰۰؛ GET account-access/session expiresIn زمان باقی‌مانده، بدون Set-Cookie/تمدید. logout revoke مشترک، restart/worker تازه credential صحیح را restore می‌کند؛ expiry/revoked/archived deny. method/path/body ثابت؛ Swagger/Postman دوباره تولید. [قرارداد](../security/account-session-lifecycle.md).
+
+## US-11.T02F — API نشان‌شده
+
+GET /api/v1/bookmarks: account bearer/cookie، limit۱..۵۰ و cursor opaque owner-scoped،
+items همان card DTO سرور و nextCursor؛ no-store، empty با items[].
+PUT /api/v1/bookmarks/{loan_id}: UUID نسخه PUBLISHED و JSON {} یا historyId own-visible
+matching snapshot؛ desired saved state، retry بدون duplicate، 204 فقط پس از commit.
+DELETE همان مسیر: desired removed visibility برای همان actor، idempotent204 حتی
+missing/other association، نه DELETE فیزیکی؛ source/history/profile محفوظ.
+Extra owner/phone/score/facts رد422، forged/hidden/missing context404، guest/expired/
+archived401 و storage503؛ token مشتری مجوز عملیات نیست.
+verify/session اکنون accountId سرور می‌دهند تا cache نسل هم‌شماره جدا بماند؛ response
+توصیه authenticated، historyId همان saved run می‌دهد برای refresh بدون score JSON
+در history.state. request/scoring/TTL unchanged؛ bearer/proof مثل قبل.
+OpenAPI/Postman/inventory generated۱۹ عملیات؛ bookmark body نمونه{} معتبر، نه UUID
+خالی. [قرارداد F](../security/account-bookmarks.md) و [checkpoint](../progress/us-11-t02f.md).

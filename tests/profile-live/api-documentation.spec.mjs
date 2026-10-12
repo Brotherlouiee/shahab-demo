@@ -9,7 +9,8 @@ test("Swagger lists every operation and executes real authorized-boundary reques
   const schema = await schemaResponse.json();
   const methods = new Set(["get", "post", "put", "delete", "patch", "head", "options"]);
   const count = Object.values(schema.paths).flatMap(path => Object.keys(path).filter(method => methods.has(method))).length;
-  expect(count).toBe(16);
+  expect(count).toBe(19);
+  for (const method of ["get", "put", "delete"]) expect(schema.paths[method === "get" ? "/api/v1/bookmarks" : "/api/v1/bookmarks/{loan_id}"][method].security).toEqual([{ AccountBearer: [] }, { AccountCookie: [] }]);
   await expect(page.locator(".opblock")).toHaveCount(count);
   const live = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/health/live"]') });
   await live.locator(".opblock-summary").click();

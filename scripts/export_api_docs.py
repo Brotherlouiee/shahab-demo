@@ -32,6 +32,8 @@ def sample(schema: dict[str, Any], definitions: dict[str, Any], name: str = "", 
         return None
     if "$ref" in schema:
         return sample(definitions[schema["$ref"].rsplit("/", 1)[-1]], definitions, name, depth + 1)
+    if "example" in schema:
+        return schema["example"]
     if "anyOf" in schema:
         choice = next((item for item in schema["anyOf"] if item.get("type") != "null"), {})
         return sample(choice, definitions, name, depth + 1)

@@ -12,6 +12,7 @@ export function buildRecommendationResultViewModel(response) {
   const result = requireRecord(response, "recommendation response");
 
   return Object.freeze({
+    ...(typeof result.historyId === "string" ? { historyId: requireText(result.historyId, "historyId") } : {}),
     dataVersion: requireText(result.dataVersion, "dataVersion"),
     configVersion: requireText(result.configVersion, "configVersion"),
     rankedRecommendations: Object.freeze(

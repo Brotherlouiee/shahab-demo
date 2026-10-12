@@ -134,3 +134,10 @@ C نیازمند migration cc11b02c0001 و restart همه workerهاست؛ دا�
 `python -m scripts.cleanup_questionnaire_sessions` (dry-run) است؛ اجرای apply روی
 داده واقعی تنها طبق مجوز و نقش محدود عملیات. در Docker از فرمان runbook با سرویس
 api به‌روز استفاده شود؛ reset volume/downgrade داده برای این اصلاح لازم نیست.
+
+## US-11.T02F — نشان‌شده‌های پایدار
+
+پس از مرج، image/API با migration ff11b02f0001 هماهنگ شود؛ refresh مرورگر به‌تنهایی
+schema را نمی‌سازد. runbook migration/backup موجود، بدون reset volume؛ `alembic upgrade
+head` فقط روی DB هدف مجاز، سپس recreate/restart کد جدید. GET/PUT/DELETE bookmarks در
+Swagger/Postman همان auth/proof/roles مصوب را نگه می‌دارند. [قرارداد و rollback](security/account-bookmarks.md).

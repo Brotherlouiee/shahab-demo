@@ -64,6 +64,8 @@ jobs:
         run: python -m unittest backend.tests.test_account_access_postgresql
       - name: Verify independent raw-answer retention and snapshot preservation
         run: python -m unittest backend.tests.test_questionnaire_retention_postgresql
+      - name: Verify account bookmarks ownership, migration and transaction races
+        run: python -m unittest backend.tests.test_account_bookmarks_postgresql
       - run: python -m unittest backend.tests.test_t06_postgresql
       - name: Verify durable operations audit and transaction races
         run: python -m unittest backend.tests.test_operations_postgresql
@@ -71,6 +73,9 @@ jobs:
         run: python -m unittest backend.tests.test_operations_tool_postgresql
   loan-details-e2e:
     name: Loan details browser verification
+    env:
+      SHAHAB_BOOKMARK_BASELINE_DIR: /tmp/shahab-bookmark-baseline
+      SHAHAB_BOOKMARK_BASELINE_URL: http://127.0.0.1:4175
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -81,7 +86,19 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Prepare independent accepted pre-F frontend baseline
+        run: |
+          git fetch --no-tags --depth=1 origin d4197e94b24da8cb91e277a7cb1d82be936bbd07
+          git worktree add --detach "$SHAHAB_BOOKMARK_BASELINE_DIR" d4197e94b24da8cb91e277a7cb1d82be936bbd07
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
       - run: npm run test:e2e
+      - name: Upload synthetic visual comparison evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-visual-evidence
+          path: test-results/
+          retention-days: 7
 
   profile-live-e2e:
     name: Profile OTP real API browser verification

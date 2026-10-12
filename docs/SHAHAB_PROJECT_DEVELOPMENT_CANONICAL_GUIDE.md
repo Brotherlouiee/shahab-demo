@@ -1500,3 +1500,19 @@ expiry دسترسی حذف واقعی نیست؛ F02 عملیاتی تا schedul
 gate PostgreSQL موجود suite اختصاصی را اجرا می‌کند؛ چهار gate final-head لازم،
 CI معادل استقرار نیست. پس از gate/مرج E، مرحله بعد US-11.T02F؛ archive G UI حذف
 حساب فعلاً نمی‌سازد. سند تداوم در پایان story به‌روز می‌شود.
+
+
+## checkpoint اجرایی US-11.T02F — bookmarks حساب و پاک‌سازی خروج
+
+[checkpoint F](progress/us-11-t02f.md) و [قرارداد](security/account-bookmarks.md):
+association نرمال account_bookmarks با PK حساب/نسخه، optional same-owner snapshot
+reference و removed_at؛ API GET/PUT/DELETE سروری، desired-state/retry و sync دستگاه.
+بدون JSON/phone/score duplicate یا backfill بی‌منشأ browser؛ legacy تا logout صریح
+quarantined، سپس فقط کلید/state شهاب پاک. profile/result/bookmarks memory، history
+فقط opaque IDs؛ refresh همان snapshot، نه scoring مجدد. logout revoke/cookie cleanup،
+stale epoch/نسل هم‌شماره و failure/retry کنترل‌شده. migration ff11b02f0001، upgrade
+افزایشی/empty rollback و nonempty refusal؛ CSS/asset/متن موفق/UI geometry/engine/source
+ثابت، PG/API/browser و baseline visual مستقل/چهار gate final-head لازم. CI deploy
+یا اجرای migration روی DB مالک نیست. قدم بعد پس از gate/مرج F، US-11.T02G فقط
+زیرساخت بایگانی؛ هیچ گزینه حذف حساب بدون دستور جدید در فرانت ایجاد نمی‌شود.
+سند تداوم مطابق پایان story ثابت؛ H/T03–T05 و T07/T081 آنلاین همچنان جدا.

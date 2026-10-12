@@ -121,3 +121,13 @@ catalogue اجرا می‌کند؛ SQL repository `delete_expired` به آن del
 پس از commit metadata cache را invalidate می‌کند. memory adapter همان batch۱۰۰.
 `scripts/cleanup_questionnaire_sessions.py` CLI اپراتور/dry-run و counts امن، بدون
 router/HTTP customer authority. هیچ import/تغییر frontend، engine یا schema وجود ندارد.
+
+## US-11.T02F — bookmark و browser lifecycle
+
+accounts/bookmarks.py persistence/query فقط actor/DB و immutable context؛ api/v1/bookmarks
+transport/schema و commit، router composition. AccountBookmark در metadata و migration
+ff11b02f0001. savedLoans.mjs async API/cache memory/desired-state؛ accountBrowserState.mjs
+فقط presentation cleanup و nonpersonal pending revoke flag. profileClient epoch/UUID
+سروری reply قدیمی را رد؛ home فقط callback/load موجود و LoanResultsScreen همان DOM/
+CSS/asset، toast بعد commit. recommendation VM/client فقط opaque historyId برای
+بازخوانی snapshot، بدون parsing/scoring یا API موازی. no US13 refactor.

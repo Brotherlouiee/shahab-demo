@@ -111,3 +111,17 @@ immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history
 در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
+
+## US-11.T02F — نشان‌شده‌های حساب و پاک‌سازی خروج
+
+PD06 اجرا: association owner UUID/loan version و optional same-owner historical
+reference، نه client recommendation JSON/phone/score copy. source snapshot immutable؛
+removed_at فقط نمایش را می‌بندد، retained همراه account/archive؛ no automatic legacy
+upload. browser profile/form/bookmarks/result فقط memory، خروج کلیدهای shahab.* از
+local/session storage و current history reference/React state پاک و credential فعلی
+سرور revoke؛ proof cookieهای شهاب حذف. پاسخ دیررس/نسل هم‌شماره cache را احیا نمی‌کند.
+خروج شبکه‌ناموفق، خطا و pending control flag غیرشخصی با retry-before-restore دارد؛
+revoke offline ناممکن را موفق گزارش نمی‌کند. اطلاعات سایر appها پاک نمی‌شود.
+سیاست legacy، محدودیت history قدیمی مرورگر، FK/rollback و شواهد در
+[قرارداد F](account-bookmarks.md). PG/real browser و مستقل baseline visual لازم؛
+F02 عملیاتی/T03–T05/H/production هنوز gateهای جدا هستند و UI حذف حساب ساخته نشد.

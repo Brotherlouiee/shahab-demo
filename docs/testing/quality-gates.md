@@ -23,3 +23,12 @@ PostgreSQL با database **disposable** است. fixture upgrade/downgrade و syn
 archive دارد؛ هرگز URL کاربر/production را به SHAHAB_TEST_DATABASE_URL ندهید.
 suite PG شامل visible/hidden/archived snapshot، full/partial/empty/unlinked/active،
 rollback و retry، دو اتصال SKIP LOCKED و CLI dry-run/partial-failure counts است.
+
+## US-11.T02F
+
+API contract۵، client۷، PostgreSQL۶ در job واقعی: owner/device، constraint/upgrade/
+rollback guard، atomic failure/retry/race و index؛ real profile-live دو context و
+logout cookie/storage/refresh؛ pixel/geometry قبل/بعد saved card و empty در۳۹۰/۱۴۴۰
+با baseline detached main مستقل و fixture/fonts یکسان. CI baseline در /tmp، هیچ
+snapshot از candidate به baseline بدل نمی‌شود؛ tolerance/mask صفر. artifacts مصنوعی
+در us-11-t02f-visual-evidence؛ gateهای قبلی و۱۹ operation Swagger پوشش دارند.

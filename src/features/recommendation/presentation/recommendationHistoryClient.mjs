@@ -8,7 +8,7 @@ export async function fetchRecommendationHistory({ limit = 20, cursor = null } =
 }
 
 export async function fetchHistoricalRecommendation(historyId) {
-  try { return buildRecommendationResultViewModel(await authorizedRequest(`recommendation-history/${encodeURIComponent(historyId)}`)); }
+  try { return Object.freeze({ ...buildRecommendationResultViewModel(await authorizedRequest(`recommendation-history/${encodeURIComponent(historyId)}`)), historyId }); }
   catch (error) { throw error instanceof ProfileApiError ? error : new ProfileApiError(0); }
 }
 
