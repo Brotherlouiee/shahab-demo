@@ -31,6 +31,7 @@ def upgrade() -> None:
     backfill_accounts(op.get_bind())
     for table in ("recommendation_history_runs", "questionnaire_sessions"):
         op.drop_constraint(_phone_fk(table), table, type_="foreignkey")
+    op.drop_index("ix_recommendation_history_visible_owner_created", table_name="recommendation_history_runs")
     op.drop_index("ix_recommendation_history_owner_created", table_name="recommendation_history_runs")
     op.drop_index("ix_questionnaire_sessions_owner_phone", table_name="questionnaire_sessions")
     op.alter_column("user_profiles", "account_id", nullable=False)
@@ -44,6 +45,8 @@ def upgrade() -> None:
     op.create_index("ix_questionnaire_sessions_owner_account_id", "questionnaire_sessions", ["owner_account_id"])
     op.create_index("ix_recommendation_history_owner_created", "recommendation_history_runs",
                     ["owner_account_id", "created_at", "recommendation_history_run_id"])
+    op.create_index("ix_recommendation_history_visible_owner_created", "recommendation_history_runs",
+                    ["owner_account_id", "hidden_at", "created_at", "recommendation_history_run_id"])
     for table in ("recommendation_history_runs", "questionnaire_sessions"):
         op.drop_column(table, "owner_phone")
     op.drop_column("user_profiles", "phone")
@@ -88,6 +91,7 @@ def downgrade() -> None:
     op.drop_constraint("fk_history_session_owner", "recommendation_history_runs", type_="foreignkey")
     op.drop_constraint("uq_questionnaire_session_owner", "questionnaire_sessions", type_="unique")
     op.drop_index("ix_questionnaire_sessions_owner_account_id", table_name="questionnaire_sessions")
+    op.drop_index("ix_recommendation_history_visible_owner_created", table_name="recommendation_history_runs")
     op.drop_index("ix_recommendation_history_owner_created", table_name="recommendation_history_runs")
     op.drop_constraint("user_profiles_pkey", "user_profiles", type_="primary")
     op.create_primary_key("user_profiles_pkey", "user_profiles", ["phone"])
@@ -101,3 +105,5 @@ def downgrade() -> None:
     op.alter_column("recommendation_history_runs", "owner_phone", nullable=False)
     op.create_index("ix_questionnaire_sessions_owner_phone", "questionnaire_sessions", ["owner_phone"])
     op.create_index("ix_recommendation_history_owner_created", "recommendation_history_runs", ["owner_phone", "created_at", "recommendation_history_run_id"])
+    op.create_index("ix_recommendation_history_visible_owner_created", "recommendation_history_runs",
+                    ["owner_phone", "hidden_at", "created_at", "recommendation_history_run_id"])

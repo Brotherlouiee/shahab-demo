@@ -196,6 +196,14 @@ class AccountIdentityPostgreSqlTests(unittest.TestCase):
                 0,
             )
         self.alembic("downgrade", EXPAND)
+        legacy_indexes = {
+            index["name"]: index["column_names"]
+            for index in inspect(self.engine).get_indexes("recommendation_history_runs")
+        }
+        self.assertEqual(
+            legacy_indexes["ix_recommendation_history_visible_owner_created"],
+            ["owner_phone", "hidden_at", "created_at", "recommendation_history_run_id"],
+        )
         self.assertEqual(before, self.retained())
         self.alembic("upgrade", "head")
         self.assertEqual(before, self.retained())

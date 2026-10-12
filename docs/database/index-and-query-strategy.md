@@ -58,3 +58,5 @@ filter or N+1 is introduced. T04 PostgreSQL test proves least-privilege writes.
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 partial uq_account_active_phone فقط active login؛ ix_questionnaire_sessions_owner_account_id؛ ix_recommendation_history_owner_created(owner_account_id,created_at,run_id) برای keyset فعلی. lookup status/UUID با PK و join profile با PK؛ snapshot خواندن unchanged، هیچ cache/N+1 جدید. PostgreSQL race/constraints در test_account_identity_postgresql، plan اختصاصی حجم production ادعا نمی‌شود.
+
+ایندکس visible قبلی نیز صریح حفظ می‌شود: (owner_account_id,hidden_at,created_at,run_id)؛ downgrade هر دو index phone قدیمی را بازمی‌سازد.

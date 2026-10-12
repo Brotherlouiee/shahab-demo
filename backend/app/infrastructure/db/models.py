@@ -419,6 +419,13 @@ class RecommendationHistoryRun(Timestamped, Base):
         Index(
             "ix_recommendation_history_owner_created", "owner_account_id", "created_at", "recommendation_history_run_id"
         ),
+        Index(
+            "ix_recommendation_history_visible_owner_created",
+            "owner_account_id",
+            "hidden_at",
+            "created_at",
+            "recommendation_history_run_id",
+        ),
     )
     recommendation_history_run_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     owner_account_id: Mapped[uuid.UUID] = mapped_column(

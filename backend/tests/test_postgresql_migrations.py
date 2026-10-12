@@ -50,10 +50,10 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.environment = {**os.environ, "SHAHAB_DATABASE_URL": str(DATABASE_URL)}
-        self._alembic("downgrade", "base", check=False)
+        self._alembic("downgrade", "base")
 
     def tearDown(self) -> None:
-        self._alembic("downgrade", "base", check=False)
+        self._alembic("downgrade", "base")
 
     def _alembic(self, *arguments: str, check: bool = True) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
