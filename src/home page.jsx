@@ -2445,10 +2445,15 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                   onFocus={() => setFocusedPersonalInfoField("phone")}
                   onBlur={() => window.setTimeout(() => setFocusedPersonalInfoField(""), 120)}
                   onBeforeInput={(event) => {
+                    const input = event.currentTarget;
+                    const start = input.selectionStart ?? personalInfo.phone.length;
+                    const end = input.selectionEnd ?? start;
+                    const remaining = `${personalInfo.phone.slice(0, start)}${personalInfo.phone.slice(end)}`;
+                    const proposed = `${personalInfo.phone.slice(0, start)}${event.data || ""}${personalInfo.phone.slice(end)}`;
                     if (
                       event.data &&
                       (!Array.from(event.data).every((character) => phoneDigitPattern.test(character)) ||
-                        sanitizePhoneDigits(`${personalInfo.phone}${event.data}`).length === personalInfo.phone.length)
+                        sanitizePhoneDigits(proposed).length === remaining.length)
                     ) {
                       event.preventDefault();
                     }

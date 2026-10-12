@@ -224,6 +224,7 @@ test("changing the prefilled phone requires its OTP and creates an independent a
   await expect(inputs.nth(2)).toHaveValue("۰۱۱۱۱۶۶۶۶");
   await expect(inputs.nth(2)).toBeEditable();
   await inputs.nth(2).fill(nextPhone.slice(2));
+  await expect(inputs.nth(2)).toHaveValue(nextPhone.slice(2).replace(/[0-9]/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]));
   await inputs.first().fill("آزمون");
   const challengeResponse = page.waitForResponse(r => r.url().endsWith("/account-access/request"));
   await page.getByRole("button", { name: "تایید" }).click();
