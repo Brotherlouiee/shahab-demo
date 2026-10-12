@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import delete, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from backend.app.infrastructure.db.models import (
@@ -18,6 +18,7 @@ from backend.app.infrastructure.db.models import QuestionnaireAnswer as Question
 from backend.app.infrastructure.db.models import QuestionnaireSession as QuestionnaireSessionRow
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
 from backend.app.questionnaire.domain.session import QuestionnaireAnswer, QuestionnaireSession
+from backend.app.questionnaire.infrastructure.retention import purge_expired_batch
 
 
 class SqlAlchemyQuestionnaireSessionRepository:
@@ -100,20 +101,7 @@ class SqlAlchemyQuestionnaireSessionRepository:
         return tuple(QuestionnaireAnswer(question_id, answer_id) for question_id, answer_id in rows)
 
     def delete_expired(self, now: datetime) -> tuple[str, ...]:
-        rows = self._session.scalars(
-            select(QuestionnaireSessionRow).where(QuestionnaireSessionRow.expires_at <= now)
-        ).all()
-        identifiers = [row.questionnaire_session_id for row in rows]
-        if not identifiers:
-            return ()
-        self._session.execute(
-            delete(QuestionnaireAnswerRow).where(QuestionnaireAnswerRow.questionnaire_session_id.in_(identifiers))
-        )
-        self._session.execute(
-            delete(QuestionnaireSessionRow).where(QuestionnaireSessionRow.questionnaire_session_id.in_(identifiers))
-        )
-        self._session.commit()
-        return tuple(str(identifier) for identifier in identifiers)
+        return purge_expired_batch(self._session, now=now).session_ids
 
     def _ensure_reference_catalogue(self) -> tuple[uuid.UUID, dict[str, uuid.UUID], dict[str, uuid.UUID]]:
         version = self._session.scalar(

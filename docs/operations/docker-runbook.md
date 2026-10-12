@@ -75,3 +75,10 @@ CLI operations_tool در محیط trusted با secret manager و DB role محد�
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 پیش از C writerهای API stop، cc11b02c0001 روی DB منتخب مطابق [runbook](../security/account-session-lifecycle.md)، سپس recreate backend بدون حذف volume. old tokens backfill نمی‌شوند و login تازه لازم؛ rollback credentials را invalid و business facts حفظ می‌کند.
+
+## US-11.T02E — ابزار نگهداری خام
+
+[runbook پاک‌سازی مستقل](raw-answer-retention.md) برای محیط جدا و
+`python -m scripts.cleanup_questionnaire_sessions` (dry-run) است؛ اجرای apply روی
+داده واقعی تنها طبق مجوز و نقش محدود عملیات. در Docker از فرمان runbook با سرویس
+api به‌روز استفاده شود؛ reset volume/downgrade داده برای این اصلاح لازم نیست.

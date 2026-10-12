@@ -1487,3 +1487,16 @@ US-12 شامل انتشار و بررسی پس از انتشار خودش است
 ### تصمیم تکمیلی مالک برای US-11.T02D — ۲۰۲۶-۱۰-۱۲
 
 شماره فقط در فرم personal-info قابل تغییر است. تغییر شماره به معنی rename حساب قبلی نیست؛ درخواست/تأیید OTP شماره جدید ضروری است و پس از تأیید، فرم و نتیجه به account همان شماره متصل می‌شوند. شماره ثبت‌نشده حساب مستقل تازه می‌سازد؛ شماره دارای حساب فعال پس از OTP به همان حساب موجود وارد می‌شود، نه duplicate یا انتقال سوابق. profile صفحه کاربری همچنان phone immutable/readonly دارد. نام و شماره فعلی از DB پیش‌فرض‌اند؛ شماره بدون تغییر OTP نمی‌خواهد. snapshot/profile/history حساب قبلی محفوظ است. این تصمیم جایگزین readonly بودن phone در personal-info در توضیح قبلی D است، نه PD05 صفحه profile.
+
+
+## checkpoint اجرایی US-11.T02E — پاک‌سازی مستقل پاسخ خام
+
+[checkpoint E](progress/us-11-t02e.md) و [runbook](operations/raw-answer-retention.md):
+raw پاسخ expired مستقل purge؛ FK و snapshot/account/profile/hidden/archive/owner/
+version حفظ، metadata مرتبط EXPIRED همیشگی برای evidence/idempotency و metadata
+غیرمرتبط حذف. batch bounded/atomic با SKIP LOCKED، CLI پیش‌فرض dry-run و counts
+غیرشخصی؛ بدون public endpoint، migration، تغییر فرانت/ظاهر/scoring/منابع رسمی.
+expiry دسترسی حذف واقعی نیست؛ F02 عملیاتی تا scheduler/monitor/restore T05 باز.
+gate PostgreSQL موجود suite اختصاصی را اجرا می‌کند؛ چهار gate final-head لازم،
+CI معادل استقرار نیست. پس از gate/مرج E، مرحله بعد US-11.T02F؛ archive G UI حذف
+حساب فعلاً نمی‌سازد. سند تداوم در پایان story به‌روز می‌شود.

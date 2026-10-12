@@ -132,3 +132,23 @@ questionnaire_sessions.creator_proof_digest: varchar(64) NULL، بدون default
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 account_access_sessions: token_digest varchar64 PK/hex64، account_id UUID FK RESTRICT، issued/expires timestamptz NOT NULL با دقیقاً۱h، revoked nullable>=issued و terminal؛ index account/expiry. account_otp_challenges: digest PK/hex64، phone varchar11 canonical موقت، created/expires UTC دقیق۱۲۰s، attempts۰–۵، consumed nullable؛ index expiry و immutable lifecycle. account_otp_quota_events: UUID PK، quota_key varchar72 hash dimension، occurred_at UTC، index key/time؛ پنجره۱۲۰s. raw token/code ذخیره نمی‌شود؛ [جزئیات](../security/account-session-lifecycle.md).
+
+## US-11.T02E — پاسخ خام مستقل از snapshot
+
+`questionnaire/infrastructure/retention.py` هر بار حداکثر۱۰۰ (حد سخت۱۰۰۰) نشست
+expired را با ترتیب expiry/UUID و `FOR UPDATE SKIP LOCKED` انتخاب می‌کند. حذف
+answers، EXPIRED کردن metadata مرتبط و حذف metadata غیرمرتبط در یک transaction
+commit یا rollback می‌شوند. لینک history با هیچ فیلتر hidden/status کنار گذاشته
+نمی‌شود: profile/account/run/item/reason/owner و data/config/loan/questionnaire
+version حفظ می‌شوند؛ هیچ cascade، انتقال خام به archive/JSON یا تغییر scoring وجود ندارد.
+metadata مرتبط شامل UUID، version FK، owner UUID، created/expires، state و digest
+immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history همیشگی
+باقی می‌ماند؛ digest secret قابل بازیابی/پاسخ خام نیست و expiry/state هرگز اجازه
+استفاده دوباره نمی‌دهند. metadata غیرمرتبط پس از expiry نیاز durable ندارد و حذف
+می‌شود. قرارداد proof/owner و TTL۱۸۰۰ تمدید/تضعیف نمی‌شوند.
+
+این موتور و CLI به‌تنهایی scheduler نیستند. F02 مسیر FK/runtime در E اصلاح می‌شود؛
+بستن کامل operational retention همچنان نیازمند scheduler/monitor/restore-before-reopen
+در T05 است. expiry denial یا batch خالی معادل حذف اثبات‌شده نیست.
+[فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
+[شواهد E](../progress/us-11-t02e.md).
