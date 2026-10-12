@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- US-11.T01: مدل تهدید سراسری و بررسی حریم خصوصی/retention با inventory داده،
+  شواهد دو client/پاک‌سازی FK و کنترل log، یافته‌های F01–F07 و تصمیم‌های P01–P06.
+  [checkpoint](docs/progress/us-11-t01.md). F01/F02 همچنان blocker release هستند؛
+  review به معنی رفع یا production نیست. runtime/API/schema/UI/scoring/retention
+  و deployment تغییر نکرده‌اند.
+
+
 ### Changed
 
 - US-13 ordering (owner decision, 2026-10-12): ریفکتور فرانت از US-10R به

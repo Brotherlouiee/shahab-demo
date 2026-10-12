@@ -1,5 +1,16 @@
 # Project current state
 
+## US-11.T01 — بازبینی تهدید و حریم خصوصی (۲۰۲۶-۱۰-۱۲)
+
+- activeTaskId: US-11.T01؛ درخواست مستقیم مالک پس از مرج PR #106، base ae52f112dc16b9e07447a195725560f54263c981. branch مستقل docs/us-11-t01-threat-privacy.
+- Scope: review مستند سراسری تهدید/چرخه داده، تطبیق کد و fixture هدفمند؛ بدون runtime/API/schema/retention/UI/scoring/deploy.
+- Review findings: F01 read/write با sessionId و proof ثابت قابل ساخت، F02 تعارض FK history با purge، F03 پوشش ناکامل PII logger، F04 cache شخصی پس از logout، F05 policy erasure، F06 provider/session تولیدی، F07 زیرساخت/backup هنوز اثبات‌نشده.
+- Evidence: ۳۱ تست موجود موفق و بازتولید مصنوعی دو client و SQLite FK روشن؛ PostgreSQL این purge و امنیت محیط واقعی اینجا اثبات نشده‌اند. یافته‌های F01/F02 باز و blocker release هستند؛ CI آن‌ها را رفع نمی‌کند.
+- Output: [مدل تهدید](security/threat-model.md)، [privacy/retention](security/privacy-retention-review.md)، [checkpoint](progress/us-11-t01.md).
+- nextTaskId: candidate US-11.T02 برای hardening با subtasks/acceptance یافته‌ها؛ logging T04 و restore T05 باقی‌اند. آنلاین T081/T07 و تولیدی باز تا شواهد واقعی؛ US-13 همچنان آخرین کار پس از US-12 است و شروع نشده.
+- Review Done تنها پس از PR/gateهای لازم؛ policy جدید فعال نشده و تصمیم P01–P06 مالک باز است. سند تداوم تا پایان داستان تغییر نمی‌کند. وضعیت‌های قبلی زیر تاریخی‌اند.
+
+
 ## تصمیم جاری مالک — US-13 آخرین کار پروژه (۲۰۲۶-۱۰-۱۲)
 
 - activeTaskId: US-13.PLAN-ORDER؛ فقط اصلاح برنامه پس از مرج PR #105.

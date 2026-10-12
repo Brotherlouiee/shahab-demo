@@ -484,6 +484,32 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 | `US-12.T01` documentation review → `T02` full CI → `T03` preview/smoke → `T04` release/rollback note → `T05` reviewed production/post-deploy | همهٔ `US-11.*` | `CHANGELOG.md`, `docs/`, release config، PR/release note و deploy runbook | همهٔ storyهای قبلی Done؛ full gate/preview/post-deploy سبز؛ rollback تمرین‌شده. |
 | `US-13.T01` baseline → زوج‌های `T02.nn` استخراج / `T03.nn` CSS → `T04` cleanup و gate | تمام بک‌اند و همه تسک‌ها/gateهای US-01 تا US-12؛ هیچ blocker قبلی باز نباشد | `src/home page.jsx`, `src/App.css`, entry/feature و تست/evidence اختصاصی طبق registry؛ backend/data/asset bytes ممنوع | baseline قبل از تغییر، visual/behavior/network و cascade/state regression، چهار CI؛ بدون تغییر محصول. |
 
+### مدل تهدید و privacy/retention review — US-11.T01
+
+**مجوز و وابستگی، ۲۰۲۶-۱۰-۱۲:** مالک پس از مرج PR #106 صریحاً T01 را درخواست کرد.
+US-10.T01–T05 مرج شده‌اند؛ بازبینی کد و سیاست مستقل از provision آنلاین قابل انجام
+است. تقدم محدود فقط برای T01 ثبت می‌شود؛ آنلاین US-09.T081/T07 و gateهای production
+باز می‌مانند. این مجوز شروع خودکار T02–T05 یا US-12 نیست؛ US-13 همچنان آخرین کار است.
+
+**تحویل T01:** [مدل تهدید سراسری](security/threat-model.md) دارایی‌ها، مرزهای اعتماد،
+۱۲ سناریو و ۷ یافته باز را با مالک و معیار آزمون ثبت می‌کند؛
+[بررسی حریم خصوصی/retention](security/privacy-retention-review.md) محل/هدف/دسترسی و
+expiry در برابر حذف/hide/backup را جدا و شش تصمیم محصولیِ تصویب‌نشده را مشخص می‌کند.
+مدل‌های پروفایل و audit قبلی حفظ و از مرجع سراسری متصل‌اند.
+
+**شاهد review:** ۳۱ تست هدفمند profile/session/history/authorization موفق؛ fixture
+TestClient/SQLite مصنوعی روی source blob برابر main نشان داد sessionId افشاشده
+read/write کلاینت دیگر و ساختن proof ثابت را ممکن می‌کند؛ FK تاریخچه delete_expired
+را rollback می‌کند؛ helper log phone/answers را redact نمی‌کند. این‌ها رفع‌شده نیستند
+و تست SQLite اثبات PostgreSQL یا حمله production نیست. F01/F02 blocker release و
+اصلاح runtime با regression معتبر در T02 لازم است؛ sink logging در T04 و
+scheduler/backup/restore در T05 اثبات شوند. جزئیات: [checkpoint](progress/us-11-t01.md).
+
+**پذیرش/مرز:** review کامل و قابل‌ردیابی، خطر/سیاست موجود و proposed جدا، چهار CI
+و اسناد/CHANGELOG/زمان ثبت شوند. فقط docs؛ auth/API/UI/schema/scoring/data/retention
+تغییر نمی‌کند، purge/DAST خارجی/deploy اجرا نمی‌شود. بازبودن یافته و تصمیم محصولی
+به‌صورت صریح ثبت شده؛ Doneِ T01 به معنی رفع خطرها، پایان US-11 یا production نیست.
+
 ### تعویق استقرار و وابستگی US-10 — تصمیم مالک، ۲۰۲۶-۱۰-۱۱
 
 مالک محصول خرید دامنه را اعلام کرده و خرید سرور را به آینده موکول کرده است. `US-09.T07` تا آماده‌شدن سرور معوق و باز می‌ماند. بخش آنلاین و اشتراک/آزمون واقعی `US-09.T081` نیز تکمیل‌شده نیست؛ import فایل‌ها و تست محلی جای لینک HTTPS مشترک را نمی‌گیرد. این تصمیم هیچ gate امنیتی، آزمون، استقرار یا شرط پایان US-09/US-12 را حذف نمی‌کند. سند تداوم تا پایان واقعی داستان تغییر نمی‌کند.
