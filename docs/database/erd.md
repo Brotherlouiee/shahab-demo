@@ -144,3 +144,7 @@ profile دقیقاً یک رکورد با PK/FK RESTRICT، invariant وجود pr
 با trigger immutable است. FKهای حساب RESTRICT‌اند؛ archive/hide باعث حذف snapshot
 نمی‌شود. [runbook](account-identity-migration-runbook.md) و
 [قرارداد](account-identity-lifecycle.md) مرجع جزئیات؛ archive feature در G است.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+bb11b02b0001 فقط creator_proof_digest nullable به questionnaire_sessions می‌افزاید؛ روابط account/session/history و 3NF قبلی ثابت. digest fact سازنده، authority از DB نه Redis؛ legacy NULL و owner UUID حفظ. CHECK hex64 و trigger immutable؛ [قرارداد proof](../security/questionnaire-proof.md).

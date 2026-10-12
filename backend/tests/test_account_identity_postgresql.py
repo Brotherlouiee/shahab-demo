@@ -379,7 +379,7 @@ class AccountIdentityPostgreSqlTests(unittest.TestCase):
                 self.assertNotEqual(rejected.returncode, 0)
                 self.assertIn("multiple retained generations", rejected.stderr)
                 with self.engine.connect() as c:
-                    self.assertEqual(c.scalar(text("SELECT version_num FROM alembic_version")), "aa11b02a2002")
+                    self.assertEqual(c.scalar(text("SELECT version_num FROM alembic_version")), "bb11b02b0001")
                     self.assertEqual(c.scalar(text("SELECT count(*) FROM accounts WHERE phone='09000000001'")), 2)
                 # Historical snapshots remain byte-equivalent; only one empty new profile was added.
                 retained = self.retained()

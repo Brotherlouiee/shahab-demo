@@ -380,6 +380,7 @@ class QuestionnaireSession(Timestamped, Base):
         ForeignKey("questionnaire_versions.questionnaire_version_id"), nullable=False
     )
     state: Mapped[QuestionnaireSessionState] = mapped_column(nullable=False, default=QuestionnaireSessionState.ACTIVE)
+    creator_proof_digest: Mapped[str | None] = mapped_column(String(64))
     owner_account_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("accounts.account_id", ondelete="RESTRICT"), index=True
     )

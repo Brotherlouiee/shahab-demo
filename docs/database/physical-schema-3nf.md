@@ -115,3 +115,7 @@ phone-PK و guard downgrade به T02A.2 تعلق دارند. جدول‌های a
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 phone فقط در accounts؛ profile.account_id PK/FK و owner_account_id رابطه‌ای. partial unique active phone، composite history/session FK و RESTRICT در aa11b02a2002 واقعی‌اند؛ کپی archive یا JSON profile ساخته نشده. بند A.1 بالا طراحی تاریخی است.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+یک fact سازنده در questionnaire_sessions، بدون جدول/JSON موازی؛ nullable برای legacy فاقد proof معتبر، hex64/immutable در PostgreSQL. metadata cache حامل authority نیست؛ روابط و snapshot unchanged. migration bb11b02b0001.

@@ -26,7 +26,9 @@ class RecommendationHistoryRepository:
     def __init__(self, session: Session) -> None:
         self._session = session
 
-    def save(self, actor: AccountActor, questionnaire_session_id: str, result: Any) -> RecommendationHistoryRun:
+    def save(
+        self, actor: AccountActor, questionnaire_session_id: str, result: Any, *, authorized_proof_digest: str
+    ) -> RecommendationHistoryRun:
         """Save a complete run, or return its existing owner-scoped idempotent result."""
         require_active_account(actor.account_id, self._session)
         session_id = uuid.UUID(questionnaire_session_id)
@@ -43,6 +45,8 @@ class RecommendationHistoryRepository:
                         QuestionnaireSession.owner_account_id == actor.account_id,
                     )
                 )
+                .where(QuestionnaireSession.creator_proof_digest == authorized_proof_digest)
+                .where(QuestionnaireSession.expires_at > func.now())
                 .values(owner_account_id=actor.account_id)
             ),
         )

@@ -405,7 +405,7 @@
           ],
           "name": "POST /api/v1/questionnaire/sessions",
           "request": {
-            "description": "Creates a 30-minute session and its HttpOnly proof cookie. Keep this cookie jar.",
+            "description": "Creates a 30-minute session and its unpredictable HttpOnly proof cookie. Keep this cookie jar; the secret is never returned in JSON.",
             "header": [
               {
                 "key": "Accept",
@@ -433,7 +433,7 @@
           "event": [],
           "name": "GET /api/v1/questionnaire/sessions/{session_id}",
           "request": {
-            "description": "Resume Session",
+            "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
             "header": [
               {
                 "key": "Accept",
@@ -471,7 +471,7 @@
               },
               "raw": "{\n  \"answerId\": \"{{answerId}}\"\n}"
             },
-            "description": "Write Answer",
+            "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
             "header": [
               {
                 "key": "Accept",
@@ -649,7 +649,7 @@
               },
               "raw": "{\n  \"sessionId\": \"{{sessionId}}\"\n}"
             },
-            "description": "Send only sessionId after completing all canonical answers. Authenticated persistence also requires the HttpOnly questionnaire proof cookie from session creation in this same client. Bearer alone does not prove questionnaire ownership. Anonymous results remain transient. Keep account and questionnaire proof cookies in this Postman cookie jar.",
+            "description": "Send only sessionId after completing all canonical answers. Authenticated persistence also requires the unpredictable HttpOnly questionnaire proof cookie from session creation in this same client. Bearer alone does not prove questionnaire ownership. Anonymous results remain transient. Keep account and questionnaire proof cookies in this Postman cookie jar.",
             "header": [
               {
                 "key": "Accept",

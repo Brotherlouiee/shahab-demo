@@ -69,3 +69,7 @@ OpenAPI عمومی و collection فعلی تغییر ندارند. قراردا�
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 method/path/body/response عمومی ثابت؛ phone در response از accounts، authorization با AccountActor UUID از credential متصل و status تازه DB. profile/history/recommendation بر account ID؛ token phone-only قدیمی بعد از cutover/restart نیازمند ورود مجدد است. TTL فعلی ۱۸۰۰ هنوز باقی؛ C نشست یک‌ساعته را اجرا می‌کند. archive endpoint/UI ساخته نشده.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+resume/write/recommend نیازمند cookie تصادفی سازنده؛ bound questionnaire همان account active را هم می‌خواهد. invalid/missing/unknown=403 عمومی، valid expired=410؛ 422 validation و output shape ثابت. secret فقط Set-Cookie نه JSON/URL؛ Postman/Swagger jar از POST creation حفظ کند، bearer به‌تنهایی کافی نیست. artifacts دوباره تولید؛ [قرارداد](../security/questionnaire-proof.md).

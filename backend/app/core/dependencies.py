@@ -48,6 +48,11 @@ def get_questionnaire_configuration() -> QuestionnaireConfiguration:
 _questionnaire_repository = InMemoryQuestionnaireSessionRepository()
 
 
+def get_local_questionnaire_repository() -> InMemoryQuestionnaireSessionRepository:
+    """Local/test authority for session creation proof; Redis never grants access."""
+    return _questionnaire_repository
+
+
 def get_request_database_session(request: Request) -> Generator[Session | None, None, None]:
     """Create and close one request-local session from the app-lifecycle factory."""
     session_factory: sessionmaker[Session] | None = request.app.state.database_session_factory

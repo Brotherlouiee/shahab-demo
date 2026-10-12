@@ -47,6 +47,7 @@ class SqlAlchemyQuestionnaireSessionRepository:
                 state=QuestionnaireSessionState.ACTIVE,
                 created_at=session.created_at,
                 expires_at=session.expires_at,
+                creator_proof_digest=session.creator_proof_digest,
             )
         )
         self._session.commit()

@@ -57,3 +57,7 @@ verified backup/export and stopped writers; see ../operations/audit-runbook.md.
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 aa11b02a2001 expand و aa11b02a2002 contract، parent b4d8e1f2a3c5؛ writers متوقف، backfill مستقل repeatable، cutover و restart همه workerها. rollback قبل از archive/multiple generation lossless؛ پس از آن guard رد می‌کند. [runbook هویت](account-identity-migration-runbook.md) مرجع فرمان و ترتیب است.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+bb11b02b0001 parent aa11b02a2002، nullable digest و CHECK/immutable trigger؛ هیچ backfill secret ثابت. writers متوقف، upgrade و backend جدید restart، جریان تازه/سوابق قبلی smoke. downgrade داده را حفظ ولی proof را invalid می‌کند؛ binary قدیمی F01 دارد و نباید public reopen شود؛ roll-forward و [runbook امنیت proof](../security/questionnaire-proof.md).
