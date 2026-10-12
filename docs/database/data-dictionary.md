@@ -128,3 +128,7 @@ profile fields/shape و API allowlist همان‌اند؛ items/reasons/version/
 ## US-11.T02B — proof معتبر پرسشنامه
 
 questionnaire_sessions.creator_proof_digest: varchar(64) NULL، بدون default؛ SHA-256 capability تصادفی، CHECK NULL یا hex64، immutable trigger، مالک feature پرسشنامه، lifetime همان expiry ۳۰ دقیقه. NULL legacy مجوز نیست؛ raw secret هرگز DB نیست. owner/session/history constraints ثابت؛ [قرارداد](../security/questionnaire-proof.md).
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+account_access_sessions: token_digest varchar64 PK/hex64، account_id UUID FK RESTRICT، issued/expires timestamptz NOT NULL با دقیقاً۱h، revoked nullable>=issued و terminal؛ index account/expiry. account_otp_challenges: digest PK/hex64، phone varchar11 canonical موقت، created/expires UTC دقیق۱۲۰s، attempts۰–۵، consumed nullable؛ index expiry و immutable lifecycle. account_otp_quota_events: UUID PK، quota_key varchar72 hash dimension، occurred_at UTC، index key/time؛ پنجره۱۲۰s. raw token/code ذخیره نمی‌شود؛ [جزئیات](../security/account-session-lifecycle.md).

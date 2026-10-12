@@ -61,3 +61,7 @@ aa11b02a2001 expand و aa11b02a2002 contract، parent b4d8e1f2a3c5؛ writers م�
 ## US-11.T02B — proof معتبر پرسشنامه
 
 bb11b02b0001 parent aa11b02a2002، nullable digest و CHECK/immutable trigger؛ هیچ backfill secret ثابت. writers متوقف، upgrade و backend جدید restart، جریان تازه/سوابق قبلی smoke. downgrade داده را حفظ ولی proof را invalid می‌کند؛ binary قدیمی F01 دارد و نباید public reopen شود؛ roll-forward و [runbook امنیت proof](../security/questionnaire-proof.md).
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+cc11b02c0001 افزایشی parent bb11b02b0001؛ business data backfill/delete ندارد. همه writerها stop، upgrade و backend restart، login تازه برای token قدیمی؛ downgrade credentials/challenges را invalid می‌کند و profile/history حفظ‌اند. [runbook/restore caveat](../security/account-session-lifecycle.md)؛ reset volume ممنوع.

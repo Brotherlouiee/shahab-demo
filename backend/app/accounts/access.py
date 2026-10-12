@@ -1,8 +1,8 @@
 """Bounded development OTP access, with opaque revocable sessions.
 
 This is deliberately a local/test adapter, not proof of real phone ownership.
-No state is persisted across API restarts. A real provider and shared session
-store require their own reviewed production task; disabled environments fail closed.
+This memory adapter is only for local/test without a SQL session. Configured
+API requests use the shared PostgreSQL adapter; real SMS remains a separate gate.
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ import secrets
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, replace
+from math import ceil
 from threading import Lock
 from typing import Protocol
 from uuid import UUID
@@ -111,7 +112,7 @@ class AccountAccess:
                 raise AccessFailure(429)
             del self.challenges[key]
             token = secrets.token_urlsafe(32)
-            self.sessions[digest(token)] = AccountSession(challenge.phone, now + 1800)
+            self.sessions[digest(token)] = AccountSession(challenge.phone, now + 3600)
             return token
 
     def verified_phone(self, token: str) -> str:
@@ -131,7 +132,7 @@ class AccountAccess:
             session = self.sessions.get(key)
             if session is None or session.account_id is not None:
                 raise AccessFailure(401)
-            self.sessions[key] = replace(session, account_id=account_id)
+            self.sessions[key] = replace(session, account_id=account_id, expires_at=self.clock() + 3600)
 
     def actor(self, token: str) -> UUID:
         self._enabled()
@@ -141,6 +142,16 @@ class AccountAccess:
             if session is None or session.account_id is None:
                 raise AccessFailure(401)
             return session.account_id
+
+    def remaining(self, token: str) -> int:
+        """Absolute remaining lifetime, never a fresh one-hour window on restore."""
+        self.actor(token)
+        with self.lock:
+            now = self.clock()
+            session = self.sessions.get(digest(token))
+            if session is None or session.expires_at <= now:
+                raise AccessFailure(401)
+            return ceil(session.expires_at - now)
 
     def revoke(self, token: str) -> None:
         with self.lock:

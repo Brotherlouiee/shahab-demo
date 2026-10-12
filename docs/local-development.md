@@ -123,3 +123,7 @@ authority HTTPS معتبر مستقل و PostgreSQL account غیرمالک اس�
 ## US-11.T02B — proof معتبر پرسشنامه
 
 پس از دریافت T02B، bb11b02b0001 را با توقف writerها و runbook proof اجرا کن؛ sessionهای قدیمی با cookie ثابت نیاز به شروع پرسشنامه جدید دارند، سوابق قبلی حفظ‌اند. [قرارداد](security/questionnaire-proof.md)؛ reset volume یا جعل cookie ممنوع. در این PR DB لپ‌تاپ مالک تغییر نکرده.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+C نیازمند migration cc11b02c0001 و restart همه workerهاست؛ داده قبلی حذف/reset نشود. یک login تازه برای session حافظه‌ای قدیمی لازم؛ سپس restore با باقی‌مانده یک ساعت و logout cross-worker. [runbook](security/account-session-lifecycle.md). روی DB مالک این PR migration اجرا نکرده.

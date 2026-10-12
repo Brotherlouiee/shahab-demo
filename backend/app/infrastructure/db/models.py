@@ -351,6 +351,52 @@ class Account(Timestamped, Base):
     archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class AccountAccessSession(Base):
+    """Durable credential for one immutable account generation, with absolute expiry."""
+
+    __tablename__ = "account_access_sessions"
+    __table_args__ = (
+        CheckConstraint("expires_at > issued_at", name="ck_access_session_expiry"),
+        CheckConstraint("revoked_at IS NULL OR revoked_at >= issued_at", name="ck_access_session_revocation"),
+        Index("ix_access_session_account", "account_id"),
+        Index("ix_access_session_expiry", "expires_at"),
+    )
+    token_digest: Mapped[str] = mapped_column(String(64), primary_key=True)
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
+    issued_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class AccountOtpChallenge(Base):
+    """Single-use OTP challenge shared across workers; no raw code or capability is stored."""
+
+    __tablename__ = "account_otp_challenges"
+    __table_args__ = (
+        CheckConstraint("attempts >= 0 AND attempts <= 5", name="ck_otp_attempts"),
+        CheckConstraint("expires_at > created_at", name="ck_otp_expiry"),
+        Index("ix_otp_challenge_expiry", "expires_at"),
+    )
+    challenge_digest: Mapped[str] = mapped_column(String(64), primary_key=True)
+    phone: Mapped[str] = mapped_column(String(11), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    consumed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class AccountOtpQuotaEvent(Base):
+    """Two short-lived hashed rate dimensions per request, not analytics history."""
+
+    __tablename__ = "account_otp_quota_events"
+    __table_args__ = (Index("ix_otp_quota_key_time", "quota_key", "occurred_at"),)
+    event_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    quota_key: Mapped[str] = mapped_column(String(72), nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
 class UserProfile(Timestamped, Base):
     """Editable facts belong to one account; public phone is joined from accounts."""
 

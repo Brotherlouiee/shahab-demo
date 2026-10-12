@@ -109,3 +109,7 @@ accounts/identity.py: AccountActor و DB status/lock؛ profile_repository: accou
 ## US-11.T02B — proof معتبر پرسشنامه
 
 questionnaire/infrastructure/proof.py: gate DB/local authority و digest/expiry/account، بدون Redis. API questionnaire از gate پیش از service reads/writes، recommendations قبل scoring و بعد از transaction snapshot دوباره gate؛ history CAS شامل digest. دامنه secret/raw HTTP ندارد؛ entity فقط optional digest برای atomic persistence، cache digest را serialize نمی‌کند.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+accounts/sqlalchemy_access.py adapter request-scoped برای durable/shared session+OTP/quota؛ access.py memory local/test oracle. account_access dependency در SQL Session واقعی adapter دائمی می‌سازد؛ actor Account UUID و status تازه DB، clocks PostgreSQL و remaining بدون renewal. current provider gating/operations roles مستقل.

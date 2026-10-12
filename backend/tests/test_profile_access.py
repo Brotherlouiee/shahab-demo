@@ -204,7 +204,7 @@ class AccountSessionTests(unittest.TestCase):
         self.assertEqual(self.access.actor(token), account_id)
         with self.assertRaises(AccessFailure):
             self.access.verify_code(challenge, "123456")
-        self.now += 1801
+        self.now += 3600
         with self.assertRaises(AccessFailure):
             self.access.actor(token)
 

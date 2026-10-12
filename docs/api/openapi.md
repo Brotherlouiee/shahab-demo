@@ -73,3 +73,7 @@ method/path/body/response عمومی ثابت؛ phone در response از account
 ## US-11.T02B — proof معتبر پرسشنامه
 
 resume/write/recommend نیازمند cookie تصادفی سازنده؛ bound questionnaire همان account active را هم می‌خواهد. invalid/missing/unknown=403 عمومی، valid expired=410؛ 422 validation و output shape ثابت. secret فقط Set-Cookie نه JSON/URL؛ Postman/Swagger jar از POST creation حفظ کند، bearer به‌تنهایی کافی نیست. artifacts دوباره تولید؛ [قرارداد](../security/questionnaire-proof.md).
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+verify expiresIn=۳۶۰۰ و cookie Max-Age=۳۶۰۰؛ GET account-access/session expiresIn زمان باقی‌مانده، بدون Set-Cookie/تمدید. logout revoke مشترک، restart/worker تازه credential صحیح را restore می‌کند؛ expiry/revoked/archived deny. method/path/body ثابت؛ Swagger/Postman دوباره تولید. [قرارداد](../security/account-session-lifecycle.md).

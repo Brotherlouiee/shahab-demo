@@ -16,3 +16,7 @@ Purpose: local/test editable profile persistence. Existing profiles remain until
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 تغییر هویت با phone مشترک: capability به UUID immutable bind و هر request active همان ID را از DB validate می‌کند؛ archived credential هیچ داده نسل جدید را نمی‌خواند. migration از مالک legacy به mapping پایدار، guard rollback و race دو connection. mock/local-only و نشست حافظه‌ای/۱۸۰۰ قبلی باقی؛ C/H production gates مستقل‌اند.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+C credential digest/account UUID و expiry۱h در PostgreSQL، status و revocation تازه، OTP/attempt/quota مشترک و race واقعی. mock هنوز local/test و provider واقعی production فعال نیست؛ archive G و browser cleanup F، H transport جدا. [قرارداد](account-session-lifecycle.md).

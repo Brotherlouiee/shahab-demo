@@ -543,6 +543,16 @@ F01 پس از gate مربوط بسته؛ F02 و C–H باقی. قدم بعد پ
 فرانت/طراحی/scoring ثابت و هیچ گزینهٔ حذف حساب به کاربر ارائه نمی‌شود؛ تنها زیرساخت
 بایگانی آینده G، مطابق دستور مالک، و UI آن بدون دستور جدید ساخته نخواهد شد.
 
+### اجرای نشست — US-11.T02C
+
+پس از مرج PR #110، نشست credential/account-ID، challenge و quota در PostgreSQL
+مشترک پیاده شد؛ issued+۳۶۰۰ مطلق، remaining restore بدون renew، revoke در همه workerها
+و restart صحیح. [قرارداد/rollback](security/account-session-lifecycle.md)،
+[checkpoint](progress/us-11-t02c.md)، migration cc11b02c0001 و gateهای ساعت/PG/مرورگر.
+mock همچنان local/test؛ real provider/production و F02/دیگر gateها باز. UI حذف حساب
+ساخته نمی‌شود؛ فرانت/scoring و data ثابت. قدم بعد پس از مرج/gate: US-11.T02D برای
+OTP تکراری personal-info. C به معنی اجرای flow D یا archive G نیست؛ US-13 آخر است.
+
 ### تصمیم‌های مصوب حساب و داده و برنامه اجرای T02 — ۲۰۲۶-۱۰-۱۲
 
 **مرجع تصمیم محصول:** مالک هفت تصمیم داده و سپس اصلاح جریان ورود را صریح تصویب
