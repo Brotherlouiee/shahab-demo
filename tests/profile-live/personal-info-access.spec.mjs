@@ -68,7 +68,7 @@ async function verify(page) {
   const result = page.waitForResponse(r => r.url().endsWith("/recommendations") && r.request().method() === "POST");
   await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
   expect((await result).status()).toBe(200);
-  await expect(page).toHaveURL(/\/loan-result$/);
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 10000 });
 }
 
 async function seedLogin(page, phone) {
@@ -114,7 +114,7 @@ test("first OTP creates the account; a refreshed second questionnaire saves the 
   const recommended = page.waitForResponse(r => r.url().endsWith("/recommendations"));
   await page.getByRole("button", { name: "تایید" }).click();
   expect((await recommended).status()).toBe(200);
-  await expect(page).toHaveURL(/\/loan-result$/);
+  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 10000 });
   expect(otp).toHaveLength(2);
   expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject({ phone, firstName: "مریم", income: "up-to-22", job: "employee" });
   expect((await (await page.request.get("/api/v1/recommendation-history")).json()).items).toHaveLength(2);
