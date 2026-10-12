@@ -87,3 +87,7 @@ profile/session/history به account UUID مستقل متصل شدند؛ phone �
 ## US-11.T02B — proof معتبر پرسشنامه
 
 secret فقط cookie HttpOnly و digest فقط DB؛ Redis/JSON/URL/log هیچ proof ندارند. TTL پاسخ ۳۰ دقیقه بدون تمدید؛ purge F02 در E است و expiry اثبات حذف نیست. legacy NULL fail-closed، snapshot/account data retained؛ هیچ حذف/بایگانی UI ساخته نشده.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+credential/OTP/quota موقت مطابق عمر مصوب۱h/۱۲۰s و bounded cleanup؛ token/code خام در DB/log نیست. profile/history/hidden/archive retained و purge خام E ثابت. restore backup باید credential/OTP را در T05 invalidate کند؛ این PR restore عملیاتی را ادعا نمی‌کند.

@@ -113,7 +113,7 @@
               ],
               "type": "bearer"
             },
-            "description": "Current Session",
+            "description": "Restores the same active account and returns expiresIn as the remaining absolute lifetime. A successful login lasts 3600 seconds; restore, refresh and questionnaire activity never renew it. Expired, revoked and archived-account credentials are denied across workers and restarts.",
             "header": [
               {
                 "key": "Accept",
@@ -164,7 +164,7 @@
               },
               "raw": "{\n  \"challengeId\": \"{{challengeId}}\",\n  \"code\": \"{{otpCode}}\"\n}"
             },
-            "description": "Local/test verification creates or reuses the database profile and sets an HttpOnly account cookie. Mock OTP is forbidden in staging/production. No real phone ownership is asserted.",
+            "description": "Local/test verification creates or reuses the database profile and sets a one-hour HttpOnly account cookie backed by PostgreSQL. Mock OTP is forbidden in staging/production. No real phone ownership is asserted.",
             "header": [
               {
                 "key": "Accept",

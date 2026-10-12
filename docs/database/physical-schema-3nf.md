@@ -119,3 +119,7 @@ phone فقط در accounts؛ profile.account_id PK/FK و owner_account_id راب
 ## US-11.T02B — proof معتبر پرسشنامه
 
 یک fact سازنده در questionnaire_sessions، بدون جدول/JSON موازی؛ nullable برای legacy فاقد proof معتبر، hex64/immutable در PostgreSQL. metadata cache حامل authority نیست؛ روابط و snapshot unchanged. migration bb11b02b0001.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+نشست FK UUID به accounts دارد و phone copy ندارد؛ challenge مستقلِ قبل login، quota رویداد گذرای امنیتی است، نه analytics یا JSON profile. زمان‌ها/PK/FK/check/immutable trigger در cc11b02c0001؛ data/core/serving/history untouched. [قرارداد](../security/account-session-lifecycle.md).

@@ -379,7 +379,7 @@ class AccountIdentityPostgreSqlTests(unittest.TestCase):
                 self.assertNotEqual(rejected.returncode, 0)
                 self.assertIn("multiple retained generations", rejected.stderr)
                 with self.engine.connect() as c:
-                    self.assertEqual(c.scalar(text("SELECT version_num FROM alembic_version")), "bb11b02b0001")
+                    self.assertEqual(c.scalar(text("SELECT version_num FROM alembic_version")), "cc11b02c0001")
                     self.assertEqual(c.scalar(text("SELECT count(*) FROM accounts WHERE phone='09000000001'")), 2)
                 # Historical snapshots remain byte-equivalent; only one empty new profile was added.
                 retained = self.retained()
@@ -389,6 +389,7 @@ class AccountIdentityPostgreSqlTests(unittest.TestCase):
             finally:
                 # Fixture-only undo for reusable disposable database, not application behavior.
                 with self.engine.begin() as c:
+                    c.execute(text("DELETE FROM account_access_sessions WHERE account_id=:id"), {"id": new_id})
                     c.execute(text("DELETE FROM user_profiles WHERE account_id=:id"), {"id": new_id})
                     c.execute(text("DELETE FROM accounts WHERE account_id=:id"), {"id": new_id})
                     c.execute(text("ALTER TABLE accounts DISABLE TRIGGER protect_account_identity"))

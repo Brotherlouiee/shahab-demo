@@ -91,7 +91,7 @@ accounts تأمین شود؛ حذف column تکراری phone در مرحله co
 | recommendation_history_runs.owner_account_id → accounts | NOT NULL/FK RESTRICT؛ unique questionnaire_session_id فعلی حفظ. owner باید با owner همان session یکسان باشد. |
 | session ↔ history consistency | UNIQUE(session_id, owner_account_id) و composite FK از history(session_id, owner_account_id) به همان pair؛ history owner غیرNULL، پس anonymous session قابل ثبت history نیست. این constraint پیشنهادی A.2 است؛ adapter نیز bind اتمیک را حفظ کند. |
 | history items/reasons → run و loan_product_version | همان PK/FK و display_order/partition/facts فعلی، هیچ snapshot جدید/کپی raw answers. hide/archive owner/item/version را تغییر ندهد. |
-| account_access_sessions → accounts | **رابطه آینده T02C**، store durable/shared با account_id immutable، token digest، issued/expires/revoked؛ هیچ جدول/session provider در A.1 اجرا نمی‌شود. credential/phone client مجوز نیست. |
+| account_access_sessions → accounts | **اجراشده در T02C**، store durable/shared با account_id immutable، token digest، issued/expires/revoked؛ هیچ جدول/session provider در A.1 اجرا نمی‌شود. credential/phone client مجوز نیست. |
 | account_bookmarks → accounts و loan_product_versions | **جدول واسط آینده T02F**؛ کلید یکتای (account_id, loan_product_version_id)، بدون آرایه JSON در profile یا کپی کاتالوگ. مشخصات وام از نسخه معتبر موجود خوانده شود، snapshot client authority نیست. |
 
 FKهای account نباید ON DELETE CASCADE داشته باشند. account هیچ public hard-delete
@@ -237,3 +237,7 @@ profile، DELETE archived برای سبزکردن downgrade یا بازگردا�
 A.1 با consistency/link/scope review و چهار CI پایان می‌یابد؛ ACها طرح آزمون
 A.2/B–H هستند و **اجراشده گزارش نمی‌شوند**. schema واقعی هنوز phone-PK است؛
 F01/F02 بازند، نشست یک‌ساعته و bookmark account DB و archive UI هنوز فعال نیستند.
+
+## اجرای C
+
+[نشست durable یک‌ساعته](../security/account-session-lifecycle.md) و challenge/quota مشترک در PostgreSQL پیاده‌سازی شده‌اند؛ بخش‌های «آینده C» بالا طرح تاریخی‌اند. real provider/production/restore و OTP تکراری D هنوز جدا هستند.

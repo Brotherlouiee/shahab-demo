@@ -8,6 +8,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Security
 
+- US-11.T02C: نشست account-bound با expiry مطلق۳۶۰۰ و revocation دائمی/shared در
+  PostgreSQL؛ restore زمان باقی‌مانده، بدون renewal و restart/worker صحیح. OTP
+  challenge/attempt/quota مشترک، migration افزایشی cc11b02c0001 و PG race/rollback.
+  [قرارداد](docs/security/account-session-lifecycle.md). profile/history/source/UI ثابت؛
+  token قدیمی نیازمند login تازه، real provider/OTP flow D/archive G جدا.
+
+
+### Security
+
 - US-11.T02B: رفع F01 با proof تصادفی مخصوص پرسشنامه، digest پایدار و expiry/creator/
   account gate روی read/write/recommend و history CAS. migration bb11b02b0001؛
   legacy ثابت fail-closed بدون حذف snapshot/answer. PostgreSQL regression و

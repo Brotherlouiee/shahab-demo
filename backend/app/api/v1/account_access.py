@@ -10,7 +10,9 @@ from backend.app.accounts.access import AccessFailure, AccountAccess
 from backend.app.accounts.identity import AccountActor, require_active_account
 from backend.app.accounts.phone import normalize_phone
 from backend.app.accounts.profile_repository import ensure_profile
+from backend.app.accounts.sqlalchemy_access import SqlAlchemyAccountAccess
 from backend.app.api.errors import ApiError, ErrorCode
+from backend.app.core.config import AppEnvironment
 from backend.app.core.dependencies import get_request_database_session
 
 router = APIRouter(prefix="/account-access", tags=["account-access"])
@@ -33,8 +35,12 @@ class CodeVerification(BaseModel):
     code: str = Field(min_length=6, max_length=6)
 
 
-def access_service(request: Request, response: Response) -> AccountAccess:
+def access_service(
+    request: Request, response: Response, session: Annotated[Session | None, Depends(get_request_database_session)]
+) -> AccountAccess:
     response.headers["Cache-Control"] = "no-store"
+    if isinstance(session, Session):
+        return SqlAlchemyAccountAccess(request.app.state.account_access.provider, session)
     return request.app.state.account_access  # type: ignore[no-any-return]
 
 
@@ -105,6 +111,7 @@ def verify_code(
     service: Annotated[AccountAccess, Depends(access_service)],
     session: Annotated[Session | None, Depends(get_request_database_session)],
     response: Response,
+    request: Request,
 ) -> dict[str, str | int]:
     try:
         token = service.verify_code(payload.challengeId, payload.code)
@@ -114,16 +121,42 @@ def verify_code(
     try:
         actor = ensure_profile(phone, session)
         service.bind_account(token, actor.account_id)
+    except AccessFailure as error:
+        try:
+            service.revoke(token)
+        except AccessFailure as revoke_error:
+            raise safe_failure(revoke_error) from None
+        raise safe_failure(error) from None
     except Exception:
-        service.revoke(token)
+        try:
+            service.revoke(token)
+        except AccessFailure as error:
+            raise safe_failure(error) from None
         raise
-    response.set_cookie(ACCESS_COOKIE, token, max_age=1800, httponly=True, samesite="lax", path="/api/v1")
-    return {"accessToken": token, "phone": phone, "expiresIn": 1800}
+    response.set_cookie(
+        ACCESS_COOKIE,
+        token,
+        max_age=3600,
+        httponly=True,
+        samesite="lax",
+        secure=request.url.scheme == "https"
+        or request.app.state.settings.environment in {AppEnvironment.STAGING, AppEnvironment.PRODUCTION},
+        path="/api/v1",
+    )
+    return {"accessToken": token, "phone": phone, "expiresIn": 3600}
 
 
 @router.get("/session")
-def current_session(actor: Annotated[AccountActor, Depends(authenticated_account)]) -> dict[str, str | int]:
-    return {"phone": actor.phone, "expiresIn": 1800}
+def current_session(
+    actor: Annotated[AccountActor, Depends(authenticated_account)],
+    service: Annotated[AccountAccess, Depends(access_service)],
+    token: Annotated[str, Depends(bearer_token)],
+) -> dict[str, str | int]:
+    try:
+        remaining = service.remaining(token)
+    except AccessFailure as error:
+        raise safe_failure(error) from None
+    return {"phone": actor.phone, "expiresIn": remaining}
 
 
 @router.post("/logout", status_code=204)
@@ -132,5 +165,8 @@ def logout(
     token: Annotated[str, Depends(bearer_token)],
     response: Response,
 ) -> None:
-    service.revoke(token)
+    try:
+        service.revoke(token)
+    except AccessFailure as error:
+        raise safe_failure(error) from None
     response.delete_cookie(ACCESS_COOKIE, path="/api/v1")

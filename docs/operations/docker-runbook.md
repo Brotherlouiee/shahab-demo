@@ -71,3 +71,7 @@ CLI operations_tool در محیط trusted با secret manager و DB role محد�
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 برای aa11b02a2001/2 از [runbook هویت](../database/account-identity-migration-runbook.md) استفاده کن؛ stop API پیش از تغییر کلید و recreate همه workerها پس از head. down -v/reset داده ممنوع؛ expand audit/backfill پیش از contract. rollback چند نسل guard دارد، schema قدیمی به‌تنهایی کافی نیست.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+پیش از C writerهای API stop، cc11b02c0001 روی DB منتخب مطابق [runbook](../security/account-session-lifecycle.md)، سپس recreate backend بدون حذف volume. old tokens backfill نمی‌شوند و login تازه لازم؛ rollback credentials را invalid و business facts حفظ می‌کند.

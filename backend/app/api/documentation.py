@@ -66,8 +66,15 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
             if relative == "/account-access/verify":
                 operation["description"] = (
                     "Local/test verification creates or reuses the database profile "
-                    "and sets an HttpOnly account cookie. "
+                    "and sets a one-hour HttpOnly account cookie backed by PostgreSQL. "
                     "Mock OTP is forbidden in staging/production. No real phone ownership is asserted."
+                )
+            if relative == "/account-access/session":
+                operation["description"] = (
+                    "Restores the same active account and returns expiresIn as the remaining absolute lifetime. "
+                    "A successful login lasts 3600 seconds; restore, refresh and questionnaire activity "
+                    "never renew it. "
+                    "Expired, revoked and archived-account credentials are denied across workers and restarts."
                 )
             if relative == "/profiles" and method == "put":
                 operation["description"] = (

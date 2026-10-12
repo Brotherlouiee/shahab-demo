@@ -148,3 +148,7 @@ profile دقیقاً یک رکورد با PK/FK RESTRICT، invariant وجود pr
 ## US-11.T02B — proof معتبر پرسشنامه
 
 bb11b02b0001 فقط creator_proof_digest nullable به questionnaire_sessions می‌افزاید؛ روابط account/session/history و 3NF قبلی ثابت. digest fact سازنده، authority از DB نه Redis؛ legacy NULL و owner UUID حفظ. CHECK hex64 و trigger immutable؛ [قرارداد proof](../security/questionnaire-proof.md).
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+C سه جدول اجرایی دارد: accounts ||--o{ account_access_sessions (RESTRICT)، OTP challenge پیش از account و quota events عملیاتی کوتاه‌عمر، بدون FK به business profile. [قرارداد](../security/account-session-lifecycle.md). owner/history/source روابط قبلی ثابت.

@@ -101,3 +101,7 @@ core identity account UUID با status، active-phone unique، token bound و ow
 ## US-11.T02B — اصلاح proof
 
 [قرارداد و migration proof](questionnaire-proof.md) کنترل واقعی و شواهد دو client/حساب و PostgreSQL را مشخص می‌کند. یافته F01 بالا شاهد نسخه پیشین است؛ NULL legacy معتبر فرض نمی‌شود. F02 و دیگر gateهای تولیدی پابرجا هستند؛ frontend/گزینه حذف حساب ساخته نشده.
+
+## US-11.T02C — نشست مشترک یک‌ساعته
+
+F06 بخش session/attempt/quota memory-only با adapter PostgreSQL و gate restart/worker/revoke/expiry اصلاح شد؛ F06 real provider/production provisioning و F02 purge و دیگر gateها باز. auth مشتری internal role نمی‌دهد؛ هیچ UI حذف حساب ساخته نشده. [قرارداد](account-session-lifecycle.md).
