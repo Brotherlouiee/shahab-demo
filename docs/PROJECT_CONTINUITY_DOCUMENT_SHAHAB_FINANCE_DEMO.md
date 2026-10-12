@@ -1,11 +1,159 @@
 # Project Continuity Document
 
-> **Document version:** 13.0
+> **Document version:** 14.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
-> **Prepared:** 2026-10-11
-> **Repository state represented:** `main` at `9bf688a8d2da9921a045889985ebef5cf19eae86`, after PR #103; section 0C is the current authoritative handoff. US-09.T07 and online US-09.T081 remain open.
+> **Prepared:** 2026-10-12
+> **Repository state represented:** `main` at `f4a617c8ee0dbfb5b334054f48f7f9074faa40af`, after merged PR #114; section 0D is authoritative. Feature CI passed; merged-main visual failure is explicitly open. Online US-09.T081/T07 remain open.
 > **Purpose:** This is the hand-off document for a new chat or engineer with no access to prior conversation history. It distinguishes implemented reality from the target architecture and from proposals not yet approved.
+
+## 0D. سند تداوم نسخه ۱۴ — مرجع جاری برای چت جدید (۲۰۲۶-۱۰-۱۲)
+
+**مجوز:** درخواست صریح مالک «سند تداوم را به‌روز رسانی کن» برای انتقال به چت جدید.
+استثنا فقط همین refresh مستندات است؛ قاعده معمول پایان user story لغو نمی‌شود.
+**تقدم:** این بخش و بخش‌های جاری ۱۷–۱۹ و۲۲ بر همه status، صف تسک، TTL، هویت و
+storageهای قدیمی از جمله 0C مقدم‌اند. بخش‌های 0C/0B/0A/0 و سایر شواهد تاریخی
+حفظ می‌شوند؛ اصول دائمی، شش منبع رسمی، D-005 و design مصوب پابرجایند.
+
+### وضعیت Git و شواهد آزمون
+
+- مبنای پیاده‌سازی: main `f4a617c8ee0dbfb5b334054f48f7f9074faa40af`،
+  مرج [PR #114](https://github.com/Brotherlouiee/shahab-demo/pull/114) در
+  ۲۰۲۶-۱۰-۱۲ ساعت۱۹:۵۶:۱۶ UTC (۲۳:۲۶:۱۶ تهران). این SHA مبنای کد است، نه
+  self-reference کامیت آیندهٔ همین سند.
+- feature head F: `5896da55317c03f3dbea57f1836052df15c10c5c`؛
+  [CI 38300190905](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38300190905)
+  هر چهار job موفق: Quality، PostgreSQL migration، browser عمومی، OTP/API واقعی.
+  ۱۱ browser واقعی و۵۸ عمومی موفق؛ یک skip موجود local-fullstack تغییر نکرد.
+  چهار مقایسه کارت/empty در390×844 و1440×900 با PNG وgeometry دقیق موفق.
+- **main پس از مرج کاملاً سبز نیست:** در
+  [CI 38300935881](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38300935881)
+  Quality، PostgreSQL و OTP/API واقعی موفق‌اند، اما browser عمومی در مقایسه
+  کارت390 شکست خورده است. نسبت‌دادن green feature به green main ممنوع.
+- [artifact همان شکست](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38300935881/artifacts/11770610545)
+  بررسی شد: اندازه تصاویر برابر، اختلاف RGB در۸ pixel در box
+  `(22,84,29,91)`، گوشه border بالا/چپ؛ assertion هندسه پاس و سه مقایسه دیگر
+  موفق‌اند. این شاهد، علت قطعی یا مجوز نادیده‌گرفتن اختلاف نیست. احتمال raster/
+  frame/compositing باید با baseline مستقل و محیط یکسان بررسی شود؛ timeout،
+  tolerance، mask یا بازسازی baseline از candidate برای سبزکردن ممنوع است.
+  artifact هفت‌روزه است؛ پیش از انقضا evidence مصنوعی لازم را در مسیر مجاز حفظ کنید.
+- این refresh فقط سه فایل مستندات دارد؛ محصول، CSS/asset، تست و DB تغییر نمی‌کند.
+  نتیجه CI روی head همین PR مستندات جدا در PR ثبت شود؛ موفقیت آن به‌تنهایی
+  دلیل بسته‌شدن شکست تاریخی main یا آمادگی production نیست.
+
+### کارهای مرج‌شده پس از نسخه ۱۳
+
+| کار | PR مرج‌شده | واقعیت تحویل |
+| --- | --- | --- |
+| برنامه ریفکتور و ترتیب نهایی | [#105](https://github.com/Brotherlouiee/shahab-demo/pull/105)، [#106](https://github.com/Brotherlouiee/shahab-demo/pull/106) | نام نهایی US-13؛ آخرین کار پس از همه بک‌اند و gateهای US-01–US-12، هیچ استخراج/CSS refactor شروع نشده. |
+| US-11.T01 | [#107](https://github.com/Brotherlouiee/shahab-demo/pull/107) | مدل تهدید/privacy و PD01–PD08 مصوب؛ review به معنی رفع همه تهدیدها نیست. |
+| US-11.T02A.1 | [#108](https://github.com/Brotherlouiee/shahab-demo/pull/108) | قرارداد/ERD/ADR 0008 هویت account نسلی؛ طراحی از runtime جدا. |
+| US-11.T02A.2 | [#109](https://github.com/Brotherlouiee/shahab-demo/pull/109) | UUID immutable حساب، partial unique یک active phone، profile account-PK و owner FK؛ migration expand/contract/backfill با حفظ snapshot. |
+| US-11.T02B | [#110](https://github.com/Brotherlouiee/shahab-demo/pull/110) | proof تصادفی256بیتی creator، digest DB و کنترل creator/owner/expiry؛ ID تنها یا proof legacy معتبر نیست. |
+| US-11.T02C | [#111](https://github.com/Brotherlouiee/shahab-demo/pull/111) | نشست۳۶۰۰ثانیه مطلق، challenge/quota/revoke مشترک PostgreSQL و restart/multiworker؛ refresh renew نمی‌کند. |
+| US-11.T02D | [#112](https://github.com/Brotherlouiee/shahab-demo/pull/112) | personal-info نام/phone جاری از DB؛ شماره یکسان با نشست معتبر بدون OTP مجدد؛ تغییر شماره نیازمند OTP همان شماره، بدون انتقال سوابق. |
+| US-11.T02E | [#113](https://github.com/Brotherlouiee/shahab-demo/pull/113) | purge پاسخ expired مستقل از snapshot؛ batch اتمیک/bounded/CLI dry-run؛ scheduler/restore عملیاتی هنوز T05. |
+| US-11.T02F | [#114](https://github.com/Brotherlouiee/shahab-demo/pull/114) | bookmarks DB/account/device، حذف نرم و cleanup خروج؛ historyId برای refresh snapshot بدون scoring/JSON شخصی در history. شکست visual پس از مرج بالا باز است. |
+
+US-10.T01–T05 مرج‌شده و قرارداد CLI/مجوز/audit در0C پابرجاست؛ دوباره اجرا نشوند.
+US-11 یا پروژه کامل نشده‌اند؛ G/H/T03–T05، آنلاین T081/T07 و US-12/US-13 باقی‌اند.
+
+### تصمیم‌های محصول لازم برای ادامه — PD01–PD08
+
+1. raw پاسخ کامل/نیمه‌کاره پس از۳۰ دقیقه حذف؛ snapshot تاریخی مستقل و غیرقابل
+   ویرایش پرسشنامه است. read expiry به معنی اجرای موفق purge نیست.
+2. سوابق visible حساب همیشگی؛ حذف کارت، hide در تمام deviceهای همان حساب است
+   و run/item/reason در DB برای هدف مصوب retained می‌مانند.
+3. بایگانی آیندهٔ حساب status/archived_at و بستن دسترسی همان ID است، نه حذف فیزیکی.
+   **گزینه «حذف حساب» فعلاً در فرانت ساخته/نمایش داده نشود.** ورود دوباره همان
+   phone پس از بایگانی حساب مستقل تازه، profile فقط phone و سوابق خالی می‌سازد.
+   schema آماده بودن، به معنی use case بایگانی تحویل‌شده نیست؛ G باقی است.
+4. ساخت profile فقط phone؛ پس از فرم دریافت نتیجه نام/درآمد/شغل مصوب با آخرین
+   ورودی در profile به‌روز می‌شوند، snapshot قبلی تغییر نمی‌کند. gender اختیاری
+   و در scoring مصرف نمی‌شود؛ avatar اجباری نیست. phone صفحه profile readonly.
+5. phone در **personal-info** قابل تغییر است: شماره متفاوت فقط پس از OTP به حساب
+   همان شماره متصل می‌شود؛ شماره تازه account تازه، شماره با account فعال login
+   به همان account، نه duplicate/rename/انتقال داده. نشست معتبر و شماره یکسان
+   مستقیم ذخیره و نتیجه می‌گیرد، بدون صفحه OTP تکراری.
+6. bookmarks و سوابق account-bound و بین دستگاه‌ها مشترک‌اند. logout credential/
+   state/cache شهاب را پاک و نشست جاری را revoke می‌کند؛ DB/داده برنامه دیگر پاک
+   نمی‌شود. expiry خودکار باید draft جاری را برای OTP معتبر حفظ کند.
+7. backup retained/hidden/archived را با status/owner/version حفظ کند، آن‌ها را فعال
+   یا به account تازه منتقل نکند؛ raw expired پس از restore پیش از سرو purge و
+   credential/OTP restoreشده پیش از بازگشایی invalidate شوند (اثبات T05 باقی).
+8. نشست یک ساعت **مطلق از ورود موفق**؛ فعالیت/refresh/پرسشنامه جدید تمدید نمی‌کند.
+   TTL حساب از rawTTL۳۰دقیقه مستقل است. OTP fake فقط local/test؛ real SMS و
+   Kavenegar/production activation ورودی و مجوز جدا می‌خواهد.
+
+مرجع جزئی: [guide](SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md)،
+[identity/ADR](database/account-identity-lifecycle.md)،
+[نشست](security/account-session-lifecycle.md)، [proof](security/questionnaire-proof.md)،
+[bookmarks](security/account-bookmarks.md)،
+[raw cleanup](operations/raw-answer-retention.md).
+هدف behavioral analysis مصوب، مجوز training/third-party یا دسترسی بی‌قید نیست؛
+retention/access دقیق log/audit/backup rotation و اطلاع‌رسانی/حداقل‌سازی همچنان جداست.
+
+### مرزهای مهم storage، UI و migration
+
+- account_bookmarks association3NF با PK(account_id,loan_product_version_id)،
+  optional same-owner snapshot FK و removed_at؛ هیچ catalogue/score/raw JSON کپی
+  نمی‌شود. GET owner-only keyset؛ PUT/DELETE desired state. retry context موجود
+  را عوض نمی‌کند؛ removed دوباره قابل save است. actor از سرور، نه payload/phone.
+- legacy browser bookmarks مالک معتبر ندارند: قرنطینه، بدون نمایش/upload خودکار؛
+  تا logout صریح دیسک حفظ، سپس فقط کلیدهای شهاب با prefix واقعی `shahab.*`
+  پاک می‌شوند. از localStorage.clear سراسری یا انتقال به هر login بعدی استفاده نشود.
+- cache شخصی جدید فقط memory، stale reply با account epoch رد، نسل هم‌شماره
+  accountId تازه دارد. history.state فقط sessionId/historyId opaque، refresh از
+  owner snapshot بدون rescoring. Browser API کل stack قدیمی را پاک نمی‌کند:
+  current entry پاک و legacy JSON بازنمایی نمی‌شود؛ حذف فیزیکی stack قدیمی بستن tab
+  می‌خواهد. شکست revoke صریح و pending flag غیرشخصی دارد، نه موفقیت جعلی.
+- ظاهر/متن/رنگ/فاصله/CSS/asset و routeهای مصوب حفظ شوند. loan-result تاریخی همان
+  component فعلی است. اصلاحات مالکیت مجوز redesign یا شروع US-13 نیستند.
+- Alembic head در کد `ff11b02f0001`، parent `cc11b02c0001`. revision DB لپ‌تاپ
+  **بررسی/اجرا نشده**؛ Git pull جدول‌ها را خودکار نمی‌سازد و refresh کافی نیست.
+  قبل از اجرا DB/environment/head و backup بررسی، migration نقش مجاز/خصوصی؛
+  reset/drop volume/stamp حدسی/حذف داده ممنوع.
+- اگر DB هنوز قبل از A.2 است، [runbook هویت](database/account-identity-migration-runbook.md)
+  با writers متوقف و ترتیب expand `aa11b02a2001` → backfill بررسی/apply →
+  contract `aa11b02a2002` لازم است؛ صرف upgrade مستقیم همه schemaها روی داده قدیمی
+  جای backfill نیست. سپس B `bb11b02b0001`، C `cc11b02c0001` و F طبق runbook.
+  revision/backup باید توسط Codex محلی از محیط واقعی تأیید شوند؛ هیچ اجرای مالک
+  از CI نتیجه گرفته نشود.
+- downgrade F با bookmark retained عمداً رد؛ schema قدیمی چند نسل/بایگانی را
+  نمایش نمی‌دهد. rollback برنامه سازگار/roll-forward، نه دستکاری trigger/status.
+  CLI cleanup E پیش‌فرض dry-run است؛ این refresh مجوز purge واقعی نیست.
+
+### صف ادامه و ناتمام‌ها
+
+**نخست:** اختلاف visual پس از مرج F را با خروجی همان job/artifact و baseline مستقل
+بررسی و gate معتبر را برقرار کنید؛ نتیجه دقیق/فرضیه/شاهد ثبت شود. نسخه feature
+قبلاً سبز، اما main فوق یک failure دارد. rerun حدسی یا پذیرش۸pixel با tolerance
+ممنوع؛ اگر raster/environment اثبات شد، شاهد و اقدام محدود harness در PR مستقل.
+**بعد از رفع gate و دستور مالک:** `US-11.T02G` فقط بایگانی server-side و revoke
+تمام نشست‌های account؛ بدون UI حذف حساب. سپس H transport/hardening، T03 زنجیره
+امنیت، T04 redaction/log/metrics/incident و T05 load/scheduler/backup/restore.
+F01 proof اصلاح شده؛ F02 implementation E دارد اما scheduler/monitor/restore
+پیش از release باید اثبات شوند. هیچ ادعای privacy compliance/consent/production نشود.
+
+US-09.T081 online وT07 تا server/access واقعی باز؛ domain خریداری‌شده گزارش مالک است،
+DNS/TLS/host/Netlify↔API/DB پایدار تازه بررسی نشده. Postman desktop/local موفقیتِ
+گزارش‌شده مالک است، نه shared HTTPS API. internal operator authority/MFA/DBrole
+با customer OTP مستقل است. US-12 پس از gateهای واقعی قبلی؛ **US-13 آخرین کار
+پس از تمام بک‌اند وUS-01–US-12**، ظاهر/رفتار صفر تغییر و baseline مستقل/interaction
+وvisual لازم. نام US-10R فقط alias تاریخی، کار یا story دوم نیست.
+
+### انتقال به چت جدید و قطع اتصال
+
+این سند + project-current-state و PR/CI تازه مبنای ادامه‌اند، نه حافظه چت یا قول
+«ادامه می‌دهم». ابتدا ref/PR/head و نتیجه ابزار قبلی را read-only بررسی کنید؛ اگر
+پاسخ ابزار قطع شد، commit/push/PR را بدون بررسی وضعیت دوباره اجرا نکنید.
+پیام Connection interrupted علت قطعی را نشان نمی‌دهد؛ نسبت‌دادن آن به طول چت،
+VPN، لپ‌تاپ یا سرویس بدون شاهد درست نیست. چت جدید نظم انتقال را بهتر می‌کند،
+تضمین رفع قطع شبکه نیست. commitها فارسی، کار روی branch مستقل، بدون مرج/deploy
+خودکار یا تغییرات محلی/evidence کاربر. قاعده update تداوم فقط در پایان story یا
+دستور صریح بعدی مالک برقرار است.
+
+---
 
 ## 0C. Owner-directed continuity v13 — authoritative handoff (2026-10-11)
 
@@ -921,38 +1069,40 @@ Beyond server/domain, production readiness requires:
 
 ## 17. Current Project State
 
-- US-01–US-08 and user-facing US-09 code through recommendation history/logout are merged. Profile/history ownership and existing presentation contracts remain binding.
-- API contract/tooling for US-09.T081 is merged; online acceptance remains open. US-09.T07 awaits server readiness and real-URL verification.
-- Independent US-10.T01–T05 technical delivery is merged through PR #103. Permissions, durable audit, protected CLI and runbook are available; real authority/grants and production activation are not established.
-- Main baseline and both feature/main four-job CI evidence are recorded in section 0C. Historical test totals are not current suite counts.
-- US-09 is not closed. Real SMS, production customer sessions, security/restore and release gates remain outstanding.
+- مبنای کد main پس از PR #114، هویت/creator proof/نشست/shared OTP/profile flow/raw purge/account bookmarks تا US-11.T02F مرج‌شده؛ جزئیات جاری در0D.
+- feature F چهار gate سبز؛ merged-main run38300935881 یک visual failure دارد. از ادامه خودکار G یا production-readiness بدون gate معتبر پرهیز شود.
+- US-10 تکمیل فنی مرج‌شده، T02G/H وUS-11.T03–T05 هنوز اجرا نشده؛ UI حذف حساب فعلاً ممنوع.
+- rawTTL۳۰دقیقه و accountTTL۳۶۰۰ مطلق مستقل؛ snapshots/hidden/archives retained، update profile قدیمی را بازنویسی نمی‌کند.
+- migration روی DB لوکال مالک بررسی/اجرا نشده؛ head کد ff11b02f0001 و runbook/backfill شرط است.
+- US-09 آنلاینT081/T07، provider واقعی، server/restore/security/release باقی؛ US-13 آخرین کار است.
 
 ---
 
 ## 18. Immediate Next Actions
 
-| Priority | Action | Boundary |
+| اولویت | کار | مرز |
 | --- | --- | --- |
-| P0 | Safely reconcile the owner's IDE with current main | Preserve local edits/evidence; use a fresh scoped branch. No forced push, discard or database reset. |
-| P1 | On owner instruction, review dependencies and begin US-11.T01 | Threat/privacy/retention scope only; do not automatically start later tasks or bypass open hosting gates. |
-| P1 | When server/access are ready, complete online US-09.T081, then US-09.T07 | Reuse the approved environment; real HTTPS, database, tester, frontend, restart/rollback evidence required. |
-| P1 | Plan real operator authority and production customer authentication separately | Explicit grants, independent MFA/service identity, restricted DB role; customer mock OTP is insufficient. |
-| P2 | Close US-09 and pursue release only after outstanding gates | Merged US-10 and green CI do not establish production readiness. |
+| P0 | بررسی و رفع/اثبات علت شکست visual پس از مرج F | artifact مستقل؛ بدون tolerance/mask/skip یا redesign. |
+| P0 | همگام‌کردن IDE و DB لوکال با نسخه مرج‌شده، اگر مالک اجرای محلی را درخواست کرد | حفظ فایل‌های کاربر، backup/revision و runbook هویت/backfill؛ بدون reset/production. |
+| P1 | US-11.T02G پس از gate معتبر و دستور مالک | بایگانی/revoke نسل حساب فقط سمت سرور؛ UI حذف اضافه نشود. |
+| P1 | H سپس T03/T04/T05 با scope/gate مستقل | transport، security scans، logging/metrics، scheduler/load/backup/restore. |
+| P1 | آنلاین T081 سپس T07 وقتی server/access آماده است | HTTPS/shared tester/DB پایدار، Netlify flow/restart/rollback واقعی. |
+| P2 | US-12 سپس US-13 | تمام gateهای قبلی؛ refactor فرانت آخرین کار و بدون تغییر ظاهر/رفتار. |
 
 ---
 
 ## 19. Open Questions
 
-| Question | Current state |
+| مورد | وضعیت واقعی |
 | --- | --- |
-| Which server/access/network/secret-management setup will be used? | Domain purchase is reported; server purchase and usable deployment environment remain pending. |
-| Is there a restricted shared HTTPS API that passes the entire T081 coverage matrix? | Not established; local Postman success is not online acceptance. |
-| Does Netlify reach the selected persistent API/database and survive restart? | Requires T07 evidence; no fresh live verification is claimed. |
-| Which real internal authority and grants will activate the protected CLI? | Not provisioned/verified; unavailable authority fails closed. Human MFA and service credentials are separate from customer OTP. |
-| When are real SMS and durable production customer sessions enabled? | Deferred; current mock/process-local access is not production authentication. |
-| What are durable-history retention, authorized erasure and privacy policies? | Hide preserves snapshots; questionnaire answers retain their existing 30-minute policy. Formal durable-history policy remains a security/product decision. |
-| How will catalogue/configuration changes beyond the current official version be approved? | Current CLI scope is exact official source/config only. New versions need explicit decisions and a separate reviewed implementation. |
-| Have operator training, backup restore and production security gates been performed? | Runbooks/scenarios exist; real training, restore and production acceptance are not claimed. |
+| اختلاف۸pixel در main visual390 | مشاهده‌شده در گوشه border؛ علت قطعی، stability/raster/frame هنوز اثبات نشده. |
+| DB لوکال مالک و backup/head | ناشناخته تا Codex محلی بررسی کند؛ migration در CI به معنی اعمال روی لپ‌تاپ نیست. |
+| بایگانی همه نشست‌ها و race login/archive | قرارداد/schema موجود؛ use case و آزمون G هنوز تحویل نشده؛ UI ممنوع. |
+| server، DNS/TLS، HTTPS API مشترک و Netlify | خرید domain گزارش‌شده، محیط و gate آنلاین T081/T07 تازه اثبات نشده. |
+| provider مشتری و operator authority | fake فقط local/test؛ SMS واقعی و MFA/grant/role داخلی activation جدا دارند. |
+| raw purge schedule و restore امن | ابزار E تحویل‌شده؛ scheduler/monitor/credential invalidation و rehearsal T05 باقی. |
+| log/audit/artifact و backup rotation/privacy notice | مدت/دسترسی و اطلاع‌رسانی دقیق هنوز تصمیم/اجرای جدا؛ forever حساب مجوز reuse نامحدود نیست. |
+| داده/config تازه و release | D-005 و منبع رسمی ثابت؛ تغییر جدید با تصمیم/approval/version؛ US-11/12 و US-13 باز. |
 
 ---
 
@@ -1002,21 +1152,26 @@ Beyond server/domain, production readiness requires:
 
 ## 22. Instructions For New Chat
 
-1. Read authoritative section 0C and current sections 17–19; verify fresh main/PR/CI. The implementation baseline is after PR #103, not historical PR #93/#60/#28.
-2. Read AGENTS, the complete canonical guide, TASK_EXECUTION_PROTOCOL and applicable safe-git-ide-collaboration instructions. For engine/data/questionnaire/result/database changes, reread required official sources and related ADR/data decisions.
-3. Preserve D-005, PUBLISHED-only serving, neutral deposits, unknown-core exclusion, source bytes and approved frontend presentation. Do not infer weights or facts from UI text.
-4. Do not restart merged US-07/08 or US-10.T01–T05. US-11.T01 is only the next candidate; explicit owner instruction and dependency/gate checkpoint are required.
-5. Keep online T081 and T07 open until real infrastructure/testing evidence exists. The limited US-10 sequencing exception does not close US-09 or waive US-12 gates.
-6. Use a fresh branch from current main; protect all owner IDE edits and old Playwright evidence. PR #103 is merged; new work needs a new PR. Commit descriptions remain Persian as requested.
-7. Distinguish database recommendation history from browser bookmarks, customer development login from operator authority, and documented training from completed training. Preserve proof, ownership, idempotency and immutable snapshots.
-8. Use the current operations runbook and protected CLI; no direct DB edits, unguarded legacy publication, customer-role escalation or unsupported source/config updates. Real authority and restricted DB credentials must be established separately.
-9. Before implementation map dependent code/tests, correct suite/environment and smallest sufficient check. Update related tests with behavior; run targeted checks before the first push. Required CI remains mandatory. Diagnose failed-job output before fixes; do not weaken tests/security.
-10. Record actual activity timings from task start, not inferred commit timestamps. Update docs, CHANGELOG and checkpoints, then verify final-head CI. This v13 refresh is specifically owner-authorized; future continuity updates follow the normal story rule unless the owner requests otherwise.
-11. Do not equate CI with deployment. Require real URL, persistence/restart, rollback and security/restore evidence before the corresponding completion claim. Never place tokens, cookies, real personal data or credentials in Git, command arguments, logs or shared artifacts.
+1. ابتدا بخش0D و17–19 و [current-state](project-current-state.md) را بخوان؛ Git main/PR/CI تازه را بررسی کن. PR #114 مرج است؛ F feature سبز، merged-main یک visual failure مستند دارد. از claim قدیمی0C درباره browser bookmarks/process-local session استفاده نکن.
+2. AGENTS، کل canonical guide، TASK_EXECUTION_PROTOCOL و safe-git-ide-collaboration لازم‌اند؛ برای تغییرهای موتور/data/DB/questionnaire/result منابع رسمی مرتبط/الزام‌شده وADR بازخوانی شوند.
+3. US-01–US-10 و US-11.T01/A.1/A.2/B/C/D/E/F را از اول اجرا نکن. ابتدا gate visual F را با شاهد بررسی؛ پس از رفع و دستور مالک، nextTaskId=US-11.T02G، سپس H/T03/T04/T05.
+4. هیچ گزینه/flow «حذف حساب» در frontend اضافه نکن؛ G زیرساخت بایگانی است. same-phone new generation هیچ داده A را inherit نمی‌کند؛ همه owner queryها accountId، نه phone.
+5. PD01–PD08، absolute3600/no-renew، raw1800/purge، profile latest input و immutable snapshot، same-number noOTP و changed-number OTP معتبر حفظ شوند.
+6. bookmarks DB/device و epoch cleanup؛ legacy browser خودکار upload/attach نشود. خروج فقط داده شهاب و credential/session جاری را پاک کند، نه DB یا داده برنامه دیگر. current history محدودیت پاک‌سازی stack قدیمی دارد؛ پیام موفق جعلی revoke ممنوع.
+7. branch مستقل از main تازه، حفظ IDE/evidence؛ commit فارسی، مرج/deploy/DBreset خودکار ممنوع. schema لوکال از Git خودکار تغییر نمی‌کند؛ runbook/backup/revision/backfill واقعی لازم.
+8. ظاهر، CSS، asset، متن و مسیرهای مصوب عیناً حفظ؛ نتیجه تاریخی همان component. US-13 آخرین کار پس از همه بک‌اند وUS-01–US-12، نه اکنون.
+9. T081 آنلاین/T07 و provider/backup/security/release را باز نگه دار تا شاهد واقعی؛ CI جای host/HTTPS/دیتابیس دائمی یا consent نیست. operations CLI/authority/MFA با customer OTP مستقل‌اند.
+10. پیش از تغییر consumer/test/fixture/suite و حداقل اثبات را تعیین؛ شکست job واقعی را بررسی؛ gate، ownership و baseline را تضعیف نکن. زمان واقعی را از شروع ثبت، زمان ثبت‌نشده را حدس نزن.
+11. قطع ابزار: ref/head/PR/run را پیش از تکرار mutation بخوان؛ علت شبکه/طول چت بدون شاهد قطعی نیست. ادامه از آخرین commit/checkpoint معتبر، نه تکرار کاوش کامل repo.
+12. این v14 با دستور صریح مالک مجاز است؛ آینده همان قاعده پایان story/درخواست صریح. token/cookie/PII/backup/DSN در Git یا artifact عمومی نباشد.
 
 ---
 
 ## Audit of This Continuity Document
+
+- Version14: owner-authorized docs-only refresh after merged PR #114;0D/current sections supersede old states. PD01–PD08, US-13-last, account generation/migrations, local DB unknown, remaining gates and new main visual failure explicitly recorded. Three-file allowlist; old evidence below preserved. Final docs PR/head/CI and timing are recorded in its PR.
+
+### Historical audit of version13
 
 - Version 13 reconciles main after PR #103 and records successful feature/main CI. Merged PR #95–#103 scopes are separated from remaining online/operational gates.
 - Historical sections/checkpoints remain preserved, with explicit section 0C precedence over outdated future-work and task-queue statements.

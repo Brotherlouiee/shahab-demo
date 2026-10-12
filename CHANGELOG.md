@@ -6,6 +6,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- دستور مالک: سند تداوم نسخه۱۴ و current-state پس از مرج PR#114؛ PD01–PD08،
+  US-11تاT02F، schema/backfillلوکال، US-13آخر وgateهای باز. CIسبز feature از
+  شکست visual۸pixelِmain جدا ثبت؛ فقطdocs، بدونruntime/UI/DB/source تغییر.
+  [handoff](docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md).
+
 ### Added
 
 - US-11.T02F: نشان‌شده‌های حساب‌محور در association نرمال account_bookmarks و API

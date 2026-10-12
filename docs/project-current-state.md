@@ -1,5 +1,21 @@
 # Project current state
 
+## سند تداوم نسخه۱۴ — دستور صریح مالک،۲۰۲۶-۱۰-۱۲
+
+- activeTaskId: owner-requested continuity-v14؛ فقط docs؛ درخواست انتقال چت مجوز استثنا برای همین update است.
+- base/currentImplementation: main f4a617c8ee0dbfb5b334054f48f7f9074faa40af بعد از PR #114 مرج؛ branch Codex docs/continuity-v14-us11-handoff.
+- estimatedWorkScope/completionBudget: سه فایل handoff/current-state/CHANGELOG، ظرفیت برای بررسی/patch/link/diff/secret/PR وچهار gate؛ بدون runtime/test/schema/source/UI/migration.
+- آغاز/قواعد: هر سه قانون طلایی، AGENTS، کل guide با blob 14bfadb5a75c1bd698ae24a4584daf1b90ef6dc6 وTASK_EXECUTION_PROTOCOL بازخوانی شدند. منابع raw لازم برای docs-only runtime-free trigger نمی‌شوند؛ همه source bytes محفوظ. قراردادهای identity/session/bookmark/privacy/purge و PR#104–114 بررسی شدند.
+- acceptance:0D/17–19/22 وضعیت تازه/تصمیم‌ها/محدودیت/صف صحیح، تاریخی0C–0 و1–16 حفظ، لینک‌ها معتبر، فقطallowlist وsecret/whitespace؛ CI فعلی feature وmain جدا.
+- actualScope: v14، PD01–PD08 و merged US-11 تاF، migration headff11b02f0001/backfill ولوکال نامعلوم، UIحذف ممنوع/US-13آخر، ادامه Gپس‌ازgate، failure visual main با۸pixel/box ثبت.
+- evidence: PR114 feature5896da5 چهارjob run38300190905 سبز؛ main run38300935881 سهjob سبز، browser card390 failed؛ artifact11770610545 با۸pixelگوشهborder وgeometryپاس. علت قطعی وfix بااین docs اثبات نشده؛ tolerance/mask/skip ممنوع.
+- nextTaskId: US-11.T02G فقط پس از بررسی/رفع معتبر gate visualF و دستور مالک؛ H/T03–T05 وT081online/T07 وUS12/13 باز. UIdelete یا advanceخودکار نیست.
+- پایان/GoldenRules: محدود/مستند/بدون تغییر محصول؛ target/link/history/scope/secret پیش ازpush بررسی؛ چهارCI آخرینhead درPR. موفقیت docsCI به معنی رفع علت failure تاریخیmain/deploy نیست. زمان‌ها از ثبتtimer، ابتدایreview ثبت تفکیکی نداشته و حدس زده نمی‌شود.
+- این بخش و0D بر صف‌های تاریخی زیر مقدم‌اند؛ قاعده تداوم آینده پایانstory یا دستور مالک است. قطعconnection نیاز به read-only ref/head بررسی پیش از retry mutation دارد.
+
+---
+
+
 ## US-11.T02A.1 — طراحی account identity/lifecycle (۲۰۲۶-۱۰-۱۲)
 
 - activeTaskId: US-11.T02A.1؛ base 2e63479ae5e1034a50e9386cc42e2c3846ed8c27 بعد از PR #107 مرج‌شده، branch مستقل docs/us-11-t02a1-account-contract.
