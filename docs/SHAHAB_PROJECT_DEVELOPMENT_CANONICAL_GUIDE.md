@@ -532,6 +532,17 @@ rollback نسل‌های غیرقابل نمایش در schema قدیمی رد �
 OTP تکراری، purge و bookmarks DB هنوز B–H هستند. F01/F02 بازند؛ آنلاین T081/T07
 و gate production باقی‌اند؛ US-13 آخرین کار است. قدم بعد پس از مرج/gate A.2: US-11.T02B.
 
+### اجرای proof — US-11.T02B
+
+پس از مرج PR #109، proof ثابت به secret تصادفی ۲۵۶بیتی مخصوص پرسشنامه تبدیل شد؛
+digest در PostgreSQL، gate expiry/creator/account قبل read/write/scoring و پس از
+commit، history CAS با digest. [قرارداد و migration](security/questionnaire-proof.md)،
+[checkpoint](progress/us-11-t02b.md)، regression دو client/حساب و PostgreSQL/چهار CI.
+legacy proof ثابت قابل اعتبارسنجی نیست؛ session قدیمی fail-closed و snapshot محفوظ.
+F01 پس از gate مربوط بسته؛ F02 و C–H باقی. قدم بعد پس از مرج: US-11.T02C.
+فرانت/طراحی/scoring ثابت و هیچ گزینهٔ حذف حساب به کاربر ارائه نمی‌شود؛ تنها زیرساخت
+بایگانی آینده G، مطابق دستور مالک، و UI آن بدون دستور جدید ساخته نخواهد شد.
+
 ### تصمیم‌های مصوب حساب و داده و برنامه اجرای T02 — ۲۰۲۶-۱۰-۱۲
 
 **مرجع تصمیم محصول:** مالک هفت تصمیم داده و سپس اصلاح جریان ورود را صریح تصویب

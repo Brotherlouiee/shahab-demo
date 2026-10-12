@@ -62,7 +62,7 @@ class LiveRecommendationTests(unittest.TestCase):
 
     def test_complete_session_returns_only_published_loans_and_safe_details(self):
         missing = self.client.post("/api/v1/recommendations", json={"sessionId": "missing"})
-        self.assertEqual(missing.status_code, 404)
+        self.assertEqual(missing.status_code, 403)
         started = self.client.post("/api/v1/questionnaire/sessions")
         self.assertEqual(started.status_code, 201)
         session_id = started.json()["sessionId"]

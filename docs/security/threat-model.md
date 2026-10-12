@@ -24,8 +24,8 @@ browser/payload/storage غیرقابل اعتماد است. client واقعی م
 | جریان | کنترل مشاهده‌شده در کد | مرز اثبات |
 | --- | --- | --- |
 | ورود مشتری → پروفایل | mock فقط local/test؛ token تصادفی digest‌شده با TTL/revoke؛ ensure_profile پیش از تحویل دسترسی؛ /me و phone سمت سرور | مالکیت واقعی تلفن، provider SMS و نشست durable/shared تولیدی پیاده/فعال‌شده ادعا نشده‌اند. |
-| پرسشنامه ناشناس → پاسخ | canonical validation و انقضای ۳۰ دقیقه؛ PostgreSQL پاسخ‌ها، Redis فقط metadata با TTL | read/write فعلی sessionId را می‌پذیرند؛ proof/owner را کنترل نمی‌کنند (F01). |
-| توصیه → تاریخچه حساب | scoring سرور از snapshot مصوب؛ owner CAS و unique session؛ transaction کامل run/item/reason، owner filter و hidden_at | cookie proof فعلی مقدار ثابت دارد؛ proof ساختگی برای session هنوز bindنشده پذیرفته شد (F01). حساب دیگر نمی‌تواند رکورد bindشده را با CAS تصاحب کند، اما این ضعف proof را رفع نمی‌کند. |
+| پرسشنامه ناشناس → پاسخ | canonical validation و انقضای ۳۰ دقیقه؛ PostgreSQL پاسخ‌ها، Redis فقط metadata با TTL | در T02B proof تصادفی digest-backed و expiry/owner در read/write/recommend کنترل می‌شود؛ شواهد regression و CI در سند proof/PR. |
+| توصیه → تاریخچه حساب | scoring سرور از snapshot مصوب؛ owner CAS و unique session؛ transaction کامل run/item/reason، owner filter و hidden_at | proof تصادفی پیش از scoring و در CAS history بررسی می‌شود؛ bound owner باید همان account فعال باشد. وضعیت پیش از T02B مقدار ثابت بود؛ شرح یافته زیر تاریخی است. |
 | عملیات داخلی → publication | grant تازه، HTTPS issuer/audience/expiry/MFA؛ DB role غیرمالک؛ materializer/head/audit اتمیک؛ source/config رسمی | authority/grant تولیدی provision نشده؛ DB owner/superuser خارج از حفاظت trigger است. |
 | داده → log/artifact/backup | پیام خطای محدود، timing ثابت، redaction marker credential | redaction عمومی phone/answers/free text را پوشش نمی‌دهد؛ proxy/uvicorn/backup واقعی بررسی نشده‌اند. |
 
@@ -49,12 +49,12 @@ browser/payload/storage غیرقابل اعتماد است. client واقعی م
 ## یافته‌ها و blockerهای انتشار
 
 ارزیابی شدت، triage مهندسی همین بازبینی است؛ CVSS رسمی یا exploit production نیست.
-**F01/F02 تا رفع و اثبات، مانع انتشار داده کاربران/production هستند.**
+**F01 پس از اثبات T02B بسته می‌شود؛ F02 همچنان مانع انتشار داده کاربران/production است.**
 هیچ یافته با سبزکردن CI یا پذیرش مبهم «بعداً» بسته نمی‌شود.
 
 | ID / اولویت | شاهد و وضعیت | مالک اجرایی / شرط بسته‌شدن |
 | --- | --- | --- |
-| F01 / High، باز و بازتولیدشده | questionnaire.resume/write بدون proof؛ proof Cookie مقدار «1». دو client مستقل: read=200، write=200، recommendation بدون proof=403 ولی cookie ساخته‌شده=200 قبل از اولین owner bind. شناسه از fixture داده شد؛ enumeration، XSS یا exploit روی سرویس واقعی ادعا نمی‌شود. | backend / US-11.T02؛ capability تصادفی server-verified با TTL/ownership مناسب به تمام عملیات session و history وصل، طراحی migration/compatibility صریح و regression واقعی دوحساب/دوclient. UUID تنها و مقایسه constant رد. |
+| F01 / High، رفع کد در T02B؛ بسته پس از CI regression | questionnaire.resume/write بدون proof؛ proof Cookie مقدار «1». دو client مستقل: read=200، write=200، recommendation بدون proof=403 ولی cookie ساخته‌شده=200 قبل از اولین owner bind. شناسه از fixture داده شد؛ enumeration، XSS یا exploit روی سرویس واقعی ادعا نمی‌شود. | backend / US-11.T02؛ capability تصادفی server-verified با TTL/ownership مناسب به تمام عملیات session و history وصل، طراحی migration/compatibility صریح و regression واقعی دوحساب/دوclient. UUID تنها و مقایسه constant رد. |
 | F02 / High، باز؛ قرارداد و FK بازتولید | history_run.session FK بدون ON DELETE؛ delete_expired ابتدا answers سپس session را حذف می‌کند و transaction با history به FK خطا می‌خورد. SQLite با foreign_keys=ON شکست/rollback را نشان داد؛ PostgreSQL این سناریو اینجا اجرا نشد. هیچ scheduler production احراز نشد. | backend/عملیات / T02 سپس T05؛ پاسخ خام در TTL مصوب حذف شود، snapshot نگه‌داری مصوب داشته باشد؛ migration در صورت نیاز افزایشی/نرمال، بدون cascade حذف تاریخچه. real PostgreSQL، batch مخلوط، retry، restart و پاک‌سازی monitorشده. |
 | F03 / Medium شکاف کنترل، باز؛ خطر بالا اگر PII به sink برسد | core.logging markerها phone/answers/income/name را redact نمی‌کنند؛ آزمایش helper: phone و answers باقی، token redact. timing موجود از label ثابت استفاده می‌کند؛ **نشت واقعی log production مشاهده نشده**. | backend/امنیت / US-11.T04؛ schema/allowlist log و تست sink واقعی، positional/free text/URL/error/authority، proxy مستقل. تا آن زمان واردکردن PII به log ممنوع. |
 | F04 / Medium، رفتار storage تأیید | home personalInfo نام/phone/income/job و accountProfile را localStorage می‌کند؛ logout فقط accountProfile را حذف می‌کند. savedLoans سراسری browser است. token در module memory، نه localStorage. | محصول + backend / تصمیم privacy سپس T02؛ purpose/مدت/حذف/shared-device و سازگاری flow ثبت و آزموده شود؛ T01 cache را تغییر نمی‌دهد، redesign/refactor US-13 شروع نمی‌شود. |
@@ -97,3 +97,7 @@ PostgreSQL cleanup را ثابت نمی‌کنند. جزئیات fixture/command
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 core identity account UUID با status، active-phone unique، token bound و owner composite FK افزوده شد؛ stale نسل archived با phone مشترک رد می‌شود. F01/F02/F03 و production provider/shared sessions/transport/restore هنوز بسته نشده‌اند. archive fixture SQL صرفاً آزمون isolated، use case بایگانی G هنوز پیاده نشده.
+
+## US-11.T02B — اصلاح proof
+
+[قرارداد و migration proof](questionnaire-proof.md) کنترل واقعی و شواهد دو client/حساب و PostgreSQL را مشخص می‌کند. یافته F01 بالا شاهد نسخه پیشین است؛ NULL legacy معتبر فرض نمی‌شود. F02 و دیگر gateهای تولیدی پابرجا هستند؛ frontend/گزینه حذف حساب ساخته نشده.

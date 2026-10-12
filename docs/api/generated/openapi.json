@@ -1679,7 +1679,7 @@
     },
     "/api/v1/questionnaire/sessions": {
       "post": {
-        "description": "Creates a 30-minute session and its HttpOnly proof cookie. Keep this cookie jar.",
+        "description": "Creates a 30-minute session and its unpredictable HttpOnly proof cookie. Keep this cookie jar; the secret is never returned in JSON.",
         "operationId": "start_session_api_v1_questionnaire_sessions_post",
         "responses": {
           "201": {
@@ -1732,6 +1732,7 @@
     },
     "/api/v1/questionnaire/sessions/{session_id}": {
       "get": {
+        "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
         "operationId": "resume_session_api_v1_questionnaire_sessions__session_id__get",
         "parameters": [
           {
@@ -1741,6 +1742,22 @@
             "schema": {
               "title": "Session Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -1754,6 +1771,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Ownership denied"
           },
           "404": {
             "content": {
@@ -1806,7 +1833,15 @@
             "description": "Service/storage unavailable"
           }
         },
-        "security": [],
+        "security": [
+          {},
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
         "summary": "Resume Session",
         "tags": [
           "questionnaire"
@@ -1815,6 +1850,7 @@
     },
     "/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}": {
       "put": {
+        "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
         "operationId": "write_answer_api_v1_questionnaire_sessions__session_id__answers__question_id__put",
         "parameters": [
           {
@@ -1833,6 +1869,22 @@
             "schema": {
               "title": "Question Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -1860,6 +1912,16 @@
             },
             "description": "Successful Response"
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Ownership denied"
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1911,7 +1973,15 @@
             "description": "Service/storage unavailable"
           }
         },
-        "security": [],
+        "security": [
+          {},
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
         "summary": "Write Answer",
         "tags": [
           "questionnaire"
@@ -2250,7 +2320,7 @@
     },
     "/api/v1/recommendations": {
       "post": {
-        "description": "Send only sessionId after completing all canonical answers. Authenticated persistence also requires the HttpOnly questionnaire proof cookie from session creation in this same client. Bearer alone does not prove questionnaire ownership. Anonymous results remain transient.",
+        "description": "Send only sessionId after completing all canonical answers. Authenticated persistence also requires the unpredictable HttpOnly questionnaire proof cookie from session creation in this same client. Bearer alone does not prove questionnaire ownership. Anonymous results remain transient.",
         "operationId": "recommend_api_v1_recommendations_post",
         "parameters": [
           {

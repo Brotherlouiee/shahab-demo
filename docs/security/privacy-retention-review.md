@@ -83,3 +83,7 @@ cache/export/backup propagation و تأیید نتیجه داشته باشد. SL
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 profile/session/history به account UUID مستقل متصل شدند؛ phone کپی در profile/history حذف، snapshot unchanged، archive generations schema-ready. هیچ purge، retention، analytics access یا account deletion UI اجرا نشد؛ PD01–PD08 مصوب پابرجا و اجرای B–H/T04/T05 باقی است.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+secret فقط cookie HttpOnly و digest فقط DB؛ Redis/JSON/URL/log هیچ proof ندارند. TTL پاسخ ۳۰ دقیقه بدون تمدید؛ purge F02 در E است و expiry اثبات حذف نیست. legacy NULL fail-closed، snapshot/account data retained؛ هیچ حذف/بایگانی UI ساخته نشده.

@@ -119,3 +119,7 @@ authority HTTPS معتبر مستقل و PostgreSQL account غیرمالک اس�
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 پس از دریافت این نسخه، API writers را توقف و مطابق [runbook حساب](database/account-identity-migration-runbook.md) دو revision را اجرا و همه workerها را دوباره راه‌اندازی کن؛ volume reset لازم نیست. داده قبلی حفظ و memory sessions قدیمی نیازمند ورود مجدد هستند. migration روی DB مالک در این PR اجرا نشده.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+پس از دریافت T02B، bb11b02b0001 را با توقف writerها و runbook proof اجرا کن؛ sessionهای قدیمی با cookie ثابت نیاز به شروع پرسشنامه جدید دارند، سوابق قبلی حفظ‌اند. [قرارداد](security/questionnaire-proof.md)؛ reset volume یا جعل cookie ممنوع. در این PR DB لپ‌تاپ مالک تغییر نکرده.

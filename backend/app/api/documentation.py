@@ -46,13 +46,23 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
                 operation["security"] = [{}, {"AccountBearer": []}, {"AccountCookie": []}]
                 operation["description"] = (
                     "Send only sessionId after completing all canonical answers. Authenticated persistence also "
-                    "requires the HttpOnly questionnaire proof cookie from session creation in this same client. "
+                    "requires the unpredictable HttpOnly questionnaire proof cookie from session creation "
+                    "in this same client. "
                     "Bearer alone does not prove questionnaire ownership. Anonymous results remain transient."
                 )
             if relative == "/questionnaire/sessions" and method == "post":
                 operation["description"] = (
-                    "Creates a 30-minute session and its HttpOnly proof cookie. Keep this cookie jar."
+                    "Creates a 30-minute session and its unpredictable HttpOnly proof cookie. "
+                    "Keep this cookie jar; the secret is never returned in JSON."
                 )
+            if relative.startswith("/questionnaire/sessions/"):
+                operation["description"] = (
+                    "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. "
+                    "ID alone, legacy constant or another session's cookie is forbidden. After account binding, "
+                    "the same active account session is also required. Valid expired proof returns 410; "
+                    "missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal."
+                )
+                operation["security"] = [{}, {"AccountBearer": []}, {"AccountCookie": []}]
             if relative == "/account-access/verify":
                 operation["description"] = (
                     "Local/test verification creates or reuses the database profile "
@@ -95,7 +105,11 @@ def document_contract(schema: dict[str, Any], prefix: str, *, include_operations
                 statuses["401"] = "Missing/invalid/expired account access"
             if relative.startswith(("/profiles", "/recommendation-history", "/loans", "/questionnaire/sessions/")):
                 statuses["404"] = "Missing or inaccessible resource"
-            if relative == "/recommendations" or relative == "/profiles":
+            if (
+                relative == "/recommendations"
+                or relative == "/profiles"
+                or relative.startswith("/questionnaire/sessions/")
+            ):
                 statuses["403"] = "Ownership denied"
             if relative == "/account-access/request":
                 statuses["429"] = "Request quota exceeded"

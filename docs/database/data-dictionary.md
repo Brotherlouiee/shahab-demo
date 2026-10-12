@@ -124,3 +124,7 @@ profile fields/shape و API allowlist همان‌اند؛ items/reasons/version/
 جدول access_sessions و bookmarks هنوز آینده‌اند. migration قدیمی دست‌نخورده؛
 [runbook](account-identity-migration-runbook.md) و تست PostgreSQL مرجع عملیات/rollback.
 بخش target A.1 بالا طرح تاریخی است؛ این بخش وضعیت اجرای core identity را ثبت می‌کند.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+questionnaire_sessions.creator_proof_digest: varchar(64) NULL، بدون default؛ SHA-256 capability تصادفی، CHECK NULL یا hex64، immutable trigger، مالک feature پرسشنامه، lifetime همان expiry ۳۰ دقیقه. NULL legacy مجوز نیست؛ raw secret هرگز DB نیست. owner/session/history constraints ثابت؛ [قرارداد](../security/questionnaire-proof.md).

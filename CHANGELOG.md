@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Security
+
+- US-11.T02B: رفع F01 با proof تصادفی مخصوص پرسشنامه، digest پایدار و expiry/creator/
+  account gate روی read/write/recommend و history CAS. migration bb11b02b0001؛
+  legacy ثابت fail-closed بدون حذف snapshot/answer. PostgreSQL regression و
+  [قرارداد/rollback](docs/security/questionnaire-proof.md)؛ ظاهر/scoring/حذف حساب UI ثابت.
+
+
 ### Changed
 
 - US-11.T02A.2: هویت مستقل UUID حساب، profile و مالکیت session/history نرمال،

@@ -105,3 +105,7 @@ Pure authorization stays independent. No FastAPI router/UI or scoring change.
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
 accounts/identity.py: AccountActor و DB status/lock؛ profile_repository: account+profile atomic و profile update؛ access: bind یک‌باره capability به UUID پیش از انتشار. infrastructure/db/account_backfill.py فقط bridge migration، هیچ authentication phone lookup نیست. scripts/backfill_account_identity CLI خصوصیِ stopped-writer؛ migration aa11b02a2001/2. موتور/فرانت تغییر ندارند.
+
+## US-11.T02B — proof معتبر پرسشنامه
+
+questionnaire/infrastructure/proof.py: gate DB/local authority و digest/expiry/account، بدون Redis. API questionnaire از gate پیش از service reads/writes، recommendations قبل scoring و بعد از transaction snapshot دوباره gate؛ history CAS شامل digest. دامنه secret/raw HTTP ندارد؛ entity فقط optional digest برای atomic persistence، cache digest را serialize نمی‌کند.

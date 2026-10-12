@@ -37,6 +37,7 @@ class QuestionnaireSession:
     questionnaire_version: str
     created_at: datetime
     expires_at: datetime
+    creator_proof_digest: str | None = None
 
     def ensure_active(self, now: datetime) -> None:
         if now.tzinfo is None:

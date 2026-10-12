@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 from typing import Annotated
+from uuid import UUID
 
 from fastapi import APIRouter, Body, Depends, Request
 from pydantic import BaseModel, ConfigDict, Field
@@ -12,13 +13,14 @@ from sqlalchemy.orm import Session
 from backend.app.accounts.identity import AccountActor
 from backend.app.api.errors import ApiError, ErrorCode
 from backend.app.api.v1.account_access import optional_authenticated_account
-from backend.app.api.v1.questionnaire import QUESTIONNAIRE_PROOF_COOKIE_PREFIX
+from backend.app.api.v1.questionnaire import authorize_questionnaire
 from backend.app.core.config import Settings, get_settings
 from backend.app.core.dependencies import _questionnaire_configuration, get_request_database_session
 from backend.app.loans.domain.models import ServingCatalogueUnavailableError
 from backend.app.loans.infrastructure.sqlalchemy_catalogue import SqlAlchemyServingLoanCatalogueRepository
 from backend.app.questionnaire.application.use_cases import QuestionnaireSessionService
 from backend.app.questionnaire.domain.session import QuestionnaireRetentionPolicy, QuestionnaireSessionExpiredError
+from backend.app.questionnaire.infrastructure.proof import PROOF_COOKIE_PREFIX, proof_digest
 from backend.app.questionnaire.infrastructure.sqlalchemy_sessions import SqlAlchemyQuestionnaireSessionRepository
 from backend.app.recommendation.application.use_cases import RecommendCanonicalLoans
 from backend.app.recommendation.domain.entities import RecommendationInputError
@@ -100,14 +102,23 @@ def recommend(
         raise ApiError(
             status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Recommendation catalogue is unavailable."
         )
-    result = _recommend_from_session(db, payload.session_id)
+    authorize_questionnaire(payload.session_id, request, db, actor)
+    result = _recommend_from_session(
+        db, payload.session_id, reference_catalogue=request.app.state.questionnaire_reference_catalogue
+    )
+    # Scoring releases its read transaction; reacquire fresh owner authority before returning/saving.
+    db.commit()
+    authorize_questionnaire(payload.session_id, request, db, actor)
     if actor is not None:
-        if request.cookies.get(f"{QUESTIONNAIRE_PROOF_COOKIE_PREFIX}{payload.session_id}") != "1":
-            raise ApiError(
-                status_code=403, code=ErrorCode.FORBIDDEN, message="Recommendation history access is not allowed."
-            )
         try:
-            RecommendationHistoryRepository(db).save(actor, payload.session_id, result)
+            RecommendationHistoryRepository(db).save(
+                actor,
+                payload.session_id,
+                result,
+                authorized_proof_digest=proof_digest(
+                    request.cookies[PROOF_COOKIE_PREFIX + str(UUID(payload.session_id))]
+                ),
+            )
             db.commit()
         except PermissionError as error:
             db.rollback()
@@ -120,10 +131,15 @@ def recommend(
     return result
 
 
-def _recommend_from_session(db: Session, session_id: str) -> RecommendationResponse:
+def _recommend_from_session(
+    db: Session,
+    session_id: str,
+    *,
+    reference_catalogue: tuple[UUID, dict[str, UUID], dict[str, UUID]] | None = None,
+) -> RecommendationResponse:
     configuration = _questionnaire_configuration()
     service = QuestionnaireSessionService(
-        SqlAlchemyQuestionnaireSessionRepository(db, configuration),
+        SqlAlchemyQuestionnaireSessionRepository(db, configuration, reference_catalogue=reference_catalogue),
         configuration,
         QuestionnaireRetentionPolicy(timedelta(minutes=30)),
     )

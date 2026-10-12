@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import UTC, datetime
 
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
@@ -25,8 +26,9 @@ class QuestionnaireSessionService:
         self._retention_policy = retention_policy
         self._cache = cache
 
-    def start(self, now: datetime | None = None) -> QuestionnaireSession:
+    def start(self, now: datetime | None = None, *, proof_digest: str | None = None) -> QuestionnaireSession:
         session = new_anonymous_session(self._configuration.questionnaire_version, self._retention_policy, now)
+        session = replace(session, creator_proof_digest=proof_digest)
         self._repository.create(session)
         self._cache_set(session)
         return session
