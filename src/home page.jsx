@@ -1878,11 +1878,12 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       setIsSavingProfile(true);
       setQuestionnaireSessionError("");
       try {
-        // Check the original raw-answer TTL; never create/replay a replacement session.
-        if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
         const profile = await readPersonalInfoProfile();
         setPersonalAccountPhone(profile?.phone || "");
         if (profile) {
+          // An expired account cookie cannot authorize questionnaire reads.
+          // Reestablish account access first, then validate the original raw TTL.
+          if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
           await savePersonalProfileAndAnalyze({ ...personalInfo, phone: profile.phone });
           return;
         }
@@ -1907,10 +1908,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       setIsSavingProfile(true);
       setLoanOtpError("");
       try {
-        if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
         // Verification and persistence must both succeed before the analysis route opens.
         // A storage retry reuses the verified capability, not a consumed OTP challenge.
         if (!hasProfileAccess(personalInfo.phone)) await verifyProfileCode(profileChallengeId, loanOtpValue);
+        if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
         await savePersonalProfileAndAnalyze(personalInfo);
       } catch (error) { setLoanOtpError(error.message); }
       finally { setIsSavingProfile(false); }
