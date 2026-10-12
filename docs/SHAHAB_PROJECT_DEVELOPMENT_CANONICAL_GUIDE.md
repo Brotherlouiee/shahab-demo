@@ -480,7 +480,7 @@ ERD باید از schema واقعی ساخته یا در CI با آن تطبیق
 | `US-08.T01` engine خالص → `T02` neutral/needsReview → `T03` trace → `T04` RecommendLoans use case → `T05` unit/property/golden | همهٔ `US-07.*` | `backend/app/recommendation/domain`, `application`, `engine`, repository port و fixtureها؛ React/FastAPI در engine ممنوع | deterministic score/tree/threshold؛ unknown سیاست‌مند؛ trace redact‌شده؛ همه golden/property testها سبز. |
 | `US-09.T01` results view model → `T02` API integration → `T03` states جداگانه → `T04` manual filters/sort/a11y → `T05` E2E قراردادی → `T05A` audit/materialization داده و پیکربندی رسمی → `T05B` آداپتورهای پایدار snapshot و جزئیات → `T06` اتصال عملیاتی → `T06A` یکپارچگی UIهای توسعه‌یافته و فیلترهای واقعی → `T07` استقرار staging پایدار و آزمون URL واقعی | همهٔ `US-08.*` | `src/features/recommendation/ui/`، `src/features/loan-details/`، `backend/app/questionnaire/`، `backend/app/recommendation/`، `backend/app/loans/`، API presenter/contract، deploy/preview config و E2Eها | browser هرگز score محاسبه نکند؛ session معتبر فقط به endpoint واقعی برسد؛ ranked/needsReview/empty جدا باشند؛ نتیجه فقط از وام‌های منتشرشده و امتیاز server-calculated ساخته شود؛ کاربر از پرسشنامه تا جزئیات و شرایط/قوانین وام را در URL قابل‌آزمایش طی کند؛ E2E و آزمون دستی mobile/desktop سبز باشد. |
 | `US-10.T01` RBAC → `T02` import/review/approve/rollback use case → `T03` audit event → `T04` internal endpoint/tool → `T05` operations runbook | gateهای فنی موردنیاز همان تسک از US-09؛ T01 تا T05 طبق استثنای محدود مصوب زیر مجاز هستند. پایان T07 و بخش آنلاین T081 همچنان باز است. | `backend/app/operations/`, authz policy، audit migration/test و `docs/operations/` | client عادی تغییر نمی‌دهد؛ role/ownership/append-only audit/rollback با test اثبات شود. |
-| `US-11.T01` threat/privacy review → `T02` transport/app hardening → `T03` SAST/SCA/secret/DAST → `T04` logging/metrics/alerts → `T05` load/backup/restore | همهٔ `US-10.*` | `docs/security/`, deploy config، CI security jobs، monitor/runbook و security tests | critical/high و secret leak صفر؛ rate-limit و headers test؛ backup restore و performance smoke ثبت‌شده. |
+| `US-11.T01` threat/privacy review → `T02` hardening با زیرتسک‌های A–H مصوب (هویت، proof، نشست، جریان ورود، purge، bookmarks، archive، transport) → `T03` SAST/SCA/secret/DAST → `T04` logging/metrics/alerts → `T05` load/backup/restore | همهٔ `US-10.*` | `docs/security/`, deploy config، CI security jobs، monitor/runbook و security tests | critical/high و secret leak صفر؛ rate-limit و headers test؛ backup restore و performance smoke ثبت‌شده. |
 | `US-12.T01` documentation review → `T02` full CI → `T03` preview/smoke → `T04` release/rollback note → `T05` reviewed production/post-deploy | همهٔ `US-11.*` | `CHANGELOG.md`, `docs/`, release config، PR/release note و deploy runbook | همهٔ storyهای قبلی Done؛ full gate/preview/post-deploy سبز؛ rollback تمرین‌شده. |
 | `US-13.T01` baseline → زوج‌های `T02.nn` استخراج / `T03.nn` CSS → `T04` cleanup و gate | تمام بک‌اند و همه تسک‌ها/gateهای US-01 تا US-12؛ هیچ blocker قبلی باز نباشد | `src/home page.jsx`, `src/App.css`, entry/feature و تست/evidence اختصاصی طبق registry؛ backend/data/asset bytes ممنوع | baseline قبل از تغییر، visual/behavior/network و cascade/state regression، چهار CI؛ بدون تغییر محصول. |
 
@@ -494,7 +494,7 @@ US-10.T01–T05 مرج شده‌اند؛ بازبینی کد و سیاست مس�
 **تحویل T01:** [مدل تهدید سراسری](security/threat-model.md) دارایی‌ها، مرزهای اعتماد،
 ۱۲ سناریو و ۷ یافته باز را با مالک و معیار آزمون ثبت می‌کند؛
 [بررسی حریم خصوصی/retention](security/privacy-retention-review.md) محل/هدف/دسترسی و
-expiry در برابر حذف/hide/backup را جدا و شش تصمیم محصولیِ تصویب‌نشده را مشخص می‌کند.
+expiry در برابر حذف/hide/backup را جدا و تصمیم‌های محصولی و وضعیت اجرای آن‌ها را مشخص می‌کند؛ PD01–PD08 مصوبِ ادامه همین بخش بر پیشنهادهای قبلی مقدم‌اند.
 مدل‌های پروفایل و audit قبلی حفظ و از مرجع سراسری متصل‌اند.
 
 **شاهد review:** ۳۱ تست هدفمند profile/session/history/authorization موفق؛ fixture
@@ -505,10 +505,81 @@ read/write کلاینت دیگر و ساختن proof ثابت را ممکن می
 اصلاح runtime با regression معتبر در T02 لازم است؛ sink logging در T04 و
 scheduler/backup/restore در T05 اثبات شوند. جزئیات: [checkpoint](progress/us-11-t01.md).
 
-**پذیرش/مرز:** review کامل و قابل‌ردیابی، خطر/سیاست موجود و proposed جدا، چهار CI
+**پذیرش/مرز:** review کامل و قابل‌ردیابی، خطر/سیاست موجود، تصمیم مصوب و اجرای آینده جدا، چهار CI
 و اسناد/CHANGELOG/زمان ثبت شوند. فقط docs؛ auth/API/UI/schema/scoring/data/retention
-تغییر نمی‌کند، purge/DAST خارجی/deploy اجرا نمی‌شود. بازبودن یافته و تصمیم محصولی
-به‌صورت صریح ثبت شده؛ Doneِ T01 به معنی رفع خطرها، پایان US-11 یا production نیست.
+تغییر نمی‌کند، purge/DAST خارجی/deploy اجرا نمی‌شود. یافته‌های فنی و تصمیم‌های باقی‌مانده با وضعیت صریح ثبت شده‌اند؛ Doneِ T01 به معنی رفع خطرها، پایان US-11 یا production نیست.
+
+### تصمیم‌های مصوب حساب و داده و برنامه اجرای T02 — ۲۰۲۶-۱۰-۱۲
+
+**مرجع تصمیم محصول:** مالک هفت تصمیم داده و سپس اصلاح جریان ورود را صریح تصویب
+کرده است. PD01–PD08 زیر بر پیشنهادها/پرسش‌های باز قبلی فقط در موضوع متناظر مقدم‌اند.
+تصویب سیاست به معنی پیاده‌سازی، رفع F01/F02 یا مجوز deploy نیست. این ادامه PR #107
+فقط اسناد را تکمیل می‌کند؛ T01 review، T02 اجرا، T04 log و T05 restore جدا می‌مانند.
+
+| ID | قرارداد مصوب |
+| --- | --- |
+| PD01 | پاسخ خام کامل/نیمه‌کاره پرسشنامه پس از مهلت ۳۰ دقیقه حذف شود؛ نتیجه تاریخی snapshot مستقل است و پرسشنامه تاریخی قابلیت ویرایش ندارد. ارتباط FK/بایگانی نباید مانع purge پاسخ شود. |
+| PD02 | تمام نتایج حساب بدون محدودیت زمانی برای صاحب همان حساب قابل مشاهده‌اند، مگر خود کاربر کارت را حذف/پنهان کند. این داده شخصی است؛ public catalogue با آن یکی نیست. |
+| PD03 | حذف کارت فقط پنهان‌سازی از تمام deviceهای همان حساب است؛ snapshot برای بررسی رفتار کاربر، همیشگی در DB باقی می‌ماند. وضعیت/زمان hide ثبت شود؛ hide رفتار خرید/رد وام را اثبات نمی‌کند. |
+| PD04 | قابلیت بایگانی حساب فعلاً در UI وجود ندارد. در آینده «حذف حساب» کل حساب و profile/history/bookmarks را از دسترسی کاربر خارج و همیشگی بایگانی می‌کند؛ status/archived_at لازم است. ورود دوباره با همان phone حساب تازه با ID مستقل و اطلاعات/سوابق خالی بسازد؛ داده قدیمی به حساب تازه وصل نشود. جدول archive جدا صرفاً به خاطر نام عملیات لازم نیست. |
+| PD05 | ساخت حساب فقط phone می‌خواهد؛ profile ابتدا سایر فیلدهای خالی دارد. نام/اطلاعات درآمد و شغل و دیگر فیلدهای فرم مصوب هنگام جریان دریافت نتیجه، در همان پروفایل با آخرین ورودی کاربر به‌روز شوند؛ phone از صفحه profile قابل ویرایش نیست. gender اختیاری و بی‌اثر بر توصیه‌گر است؛ avatar اجباری فرض نشود. ویرایش profile یا دریافت نتیجه جدید، snapshot قبلی را تغییر نمی‌دهد. |
+| PD06 | bookmarks و تمام سوابق متعلق به account هستند؛ پس از login در هر device از DB همان account خوانده شوند، نه browser localStorage. logout اطلاعات شخصی، credential و state حساب متعلق به شهاب را از مرورگر پاک و نشست جاری را در سرور باطل کند؛ داده DB حذف نمی‌شود. |
+| PD07 | backup همه داده‌های نگهداری‌شده، از جمله بایگانی/hidden را با همان status/owner/version برگرداند؛ restore آن‌ها را فعال/قابل‌نمایش نکند. استثنای PD01 برقرار است: پاسخ خام منقضی پس از restore پیش از بازگشایی سرویس purge شود. حذف فیزیکی profile/history فرض نشود. |
+| PD08 | نشست حساب **یک ساعت مطلق از آخرین ورود موفق** است، نه یک ساعت از آخرین فعالیت. refresh/restore/پرسشنامه جدید TTL را تمدید نکند. نشست معتبر نیاز به OTP مجدد ندارد؛ logout فوراً باطل می‌کند. عمر حساب با TTL مستقل ۳۰ دقیقه پاسخ‌ها یکی نیست. |
+
+**هویت و نرمال‌سازی:** account_id opaque/پایدار باید هویت هر دوره حساب باشد؛ phone
+شناسه ورود است، نه PK دائمی برای چند نسل حساب. در هر لحظه حداکثر یک حساب فعال
+برای phone؛ چند حساب بایگانی مجاز. تمام profile/session/history/bookmark و capability
+به account صحیح پیوند داشته باشند. unique(phone) سراسری روی همه نسل‌ها و lookup
+تاریخچه بر phone به‌تنهایی نامعتبر است. حساب A بایگانی و B تازه با phone مشترک
+هرگز داده، نشست، cache یا bookmarks همدیگر را به ارث نبرند. migration/backfill
+حساب‌های فعلی، FKها و 3NF با ERD و PostgreSQL اثبات شود؛ drop/reset یا کپی موازی
+حساب به archive table بدون نیاز طراحی مجاز نیست.
+
+### زیرتسک‌های مستقل و ترتیب اجرایی US-11.T02
+
+T02 یک PR بزرگ نیست. هر زیرتسک فقط پس از gate/مرج قبلی از main تازه شروع می‌شود؛
+در checkpoint آغاز allowlist/محیط آزمون/خطر/بودجه ثبت شود. زیرتسک بزرگ پیش از تغییر
+به .1/.2 مستقل شکسته شود؛ migration، data backfill، auth و UI در یک patch انباشته نشوند.
+
+| شناسه / ترتیب | تحویل و وابستگی | پذیرش و آزمون لازم |
+| --- | --- | --- |
+| US-11.T02A — هویت و چرخه عمر حساب | پیش‌نیاز همه زیرتسک‌های account: A.1 قرارداد account_id/status و ERD/3NF؛ سپس A.2 persistence/migration/backfill سازگار و account-bound adapters. current phone-PK به مدل نسلی با یک active phone منتقل شود؛ history/snapshot موجود حفظ. | PostgreSQL واقعی upgrade از fixture قبل، بدون orphan/duplicate active و حفظ profile/history؛ دو account با phone مشترک نسل مستقل؛ API مصرف‌کننده سازگار و rollback بدون حذف داده. بایگانی/ورودمجدد در test contract، نه اضافه‌کردن دکمه حذف. |
+| US-11.T02B — مالکیت پرسشنامه و proof معتبر | پس از A؛ رفع F01: capability تصادفی server-verified، TTL و creator/owner کنترل برای read/write/recommend/history؛ account bind اتمیک و مستقل از phone/payload. | دو client/دوحساب: ID تنها، proof ثابت/ساختگی/دیگری/expired رد؛ قبل از افشای پاسخ/نوشتن DB؛ client معتبر و anonymous flow مجاز، refresh/Back/expiry حفظ، F01 regression واقعی. |
+| US-11.T02C — نشست یک‌ساعته و ابطال | پس از A/B؛ lifecycle account-bound، PD08، expires_at server-owned؛ restore زمان باقی‌مانده را بدهد، نه ۳۶۰۰ تازه. حالت multiworker/restart/shared store و quota/revocation تولیدی صریح طراحی و اثبات شود؛ customer/operator مستقل. | ساعت کنترل‌شده: ۳۵۹۹/۳۶۰۰، refresh بدون تمدید، logout/replay، حساب archived و token قبلی رد؛ چند دستگاه به account واحد، false login از cache ممنوع. real provider فعال‌سازی جدا دارد و mock production همچنان رد. |
+| US-11.T02D — **اصلاح جریان ورود و OTP تکراری** | پس از A–C؛ در personal-info نشست معتبر از سرور بازیابی، form با profile جاری پر و phone readonly از account گرفته شود. تأیید/ویرایش form به update همان profile و نتیجه برود، بدون request/verify OTP. مهمان یا نشست منقضی همان UI ورود/OTP موجود را طی کند. | مرورگر با API/PostgreSQL واقعی: اولین OTP و account creation؛ دومین پرسشنامه و refresh با OTP requests=۰، profile آخرین ورودی و snapshot قبلی ثابت؛ expiry وسط فرم/retry/logoff و server error، حفظ draft و پاسخ فقط تا TTL۳۰دقیقه. TTL منقضی خودکار تمدید یا جواب از URL/storage بازسازی نشود. |
+| US-11.T02E — پاک‌سازی پاسخ و حفظ snapshot | پس از A/B و با قرارداد account/session نهایی؛ رفع F02 بدون حذف history: پاسخ کامل/نیمه‌کاره expired مستقل purge، session metadata حداقلیِ لازم برای evidence/idempotency با سیاست مشخص؛ migration فقط اگر طراحی لازم. | PostgreSQL با expired مرتبط/غیرمرتبط و hidden/archive، حذف خام و حفظ snapshot/item/reason/owner/version، batch retry/failure atomic و counts غیرشخصی. expiry دسترسی به معنی purge موفق نیست؛ scheduler/runbook/monitor در T05 تکمیل. |
+| US-11.T02F — bookmarks حساب‌محور و logout cleanup | پس از A–D؛ normalized account↔loan association با constraint یکتا/owner query/API و همان UI bookmark موجود. read/toggle در DB و sync deviceها؛ PD06 و profile جاری هم‌نسل. هیچ redesign/refactor US-13. | دو device یک account لیست یکسان، دو account جدا، retry بدون duplicate، unauthorized/IDOR؛ logout کلیدها/state/credential شهاب را پاک کند و login تازه از DB صحیح بخواند. localStorage.clear سراسری یا حذف داده برنامه دیگر ممنوع. |
+| US-11.T02G — بایگانی حساب و ورود نسل تازه | پس از A–F؛ قرارداد/use case بایگانی server-side با status و revoke تمام نشست‌های حساب archived؛ hidden/retained سوابق و profile محفوظ. login با phone قبلی active account تازه بسازد. قابلیت UI حذف فعلاً وجود ندارد؛ بدون task/طراحی جدا دکمه یا flow حذف عمومی ساخته نشود. | archive→deny همه token/lookupهای آن account؛ login مجدد ID جدید و profile اولیه فقط phone، history/bookmarks خالی؛ A در DB archived با همه داده‌ها، B دسترسی به A ندارد؛ race هم‌زمان login/archive و unique-active روی PostgreSQL. |
+| US-11.T02H — gate کامل hardening | پس از A–G؛ کنترل‌های اصلی T02 همچنان لازم‌اند: TLS/CORS/headers/CSRF، rate-limit/input/body/timeout، secrets، no-store پاسخ شخصی موفق/خطا؛ تصمیم provider/deploy مستقل از UI/auth مشتری. | matrix negative و security/ownership، چهار CI و محیط مجاز؛ نبود واقعی host/provider blocker deploy ثبت شود، هیچ کنترل برای manual Swagger حذف نشود؛ یافته‌ها فقط با شاهد بسته شوند. |
+
+**مرز کارهای باقی‌مانده:** T03 supply-chain/SAST/SCA/secret/DAST طبق محیط مجاز،
+T04 redaction/metrics/alerts/incident برای F03 و کمینه‌سازی PII، T05 scheduler/load/
+encryption/backup/restore طبق PD01/PD07. backup به معنی حذف status archive یا احیای
+حساب نیست. مدت نگهداری log/CI artifact/audit داخلی و افراد مجاز مشاهده آن‌ها، برخلاف
+profile/history همیشگی مصوب، هنوز تصمیم دقیق جدا می‌خواهد؛ هیچ مدت یا رضایت حدسی
+ثبت نشود. نگهداری برای behavioral analysis هدف مصوب است ولی اطلاع‌رسانی/دسترسی
+تحلیلی/حداقل‌سازی در privacy contract باید روشن باشد؛ ادعای انطباق قانونی نمی‌شود.
+
+**داده موجود:** migration phone-linked server data به account معتبر باید counts/
+lineage/idempotency/rollback داشته باشد. bookmarks قدیمی browser-local منشأ حساب
+قطعی ندارند؛ خودکار به هر حساب بعدی attach نشوند. سیاست انتقال آن‌ها در checkpoint
+F مشخص شود؛ بدون تصمیم/اثبات مالکیت silent upload/حذف قبل از انتقال مجاز نیست.
+هنگام اجرای logout مصوب، اطلاعات browser شهاب پاک شود؛ این به معنی حذف DB نیست.
+
+**اصل حفظ محصول:** فقط تغییر رفتار صریح مصوب PD06/PD08 و OTP/profile flow مجاز
+است؛ متن، رنگ، فاصله، icon/asset، layout/RTL و مسیرهای مجاور عیناً حفظ شوند. result
+همان component/snapshot و scoring فعلی است؛ form آخرین ورودی را در profile می‌نویسد،
+نه در snapshot تاریخی. تغییر پاسخ بعد از اولین result نباید snapshot قبلی را overwrite
+کند؛ sessionهای توصیه و idempotency فعلی رعایت شوند. تبدیل همه فایل‌ها/CSS یا بازطراحی
+خارج از scope است؛ US-13 بعد از US-12 باقی می‌ماند.
+
+**مثال پذیرش اصلی:** مریم account A را با OTP می‌سازد و نتیجه R1 می‌گیرد؛ بار دوم
+در همان ساعت، profile prefill را اصلاح و بدون OTP نتیجه R2 می‌گیرد. profile مقادیر
+جدید دارد، R1 unchanged است. device دیگر همان A سوابق/bookmarks را می‌بیند. hide R1
+همه deviceهای A را به‌روز می‌کند ولی DB آن را نگه می‌دارد. archive A تمام نشست‌ها و
+دسترسی‌اش را می‌بندد؛ ورود با همان phone account B خالی می‌سازد. restore، A و R1 را
+archived/hidden نگه می‌دارد و raw پاسخ منقضی را پیش از سرو purge می‌کند.
 
 ### تعویق استقرار و وابستگی US-10 — تصمیم مالک، ۲۰۲۶-۱۰-۱۱
 
@@ -1362,4 +1433,3 @@ US-12 شامل انتشار و بررسی پس از انتشار خودش است
 **همکاری و تحویل:** پیش از هر زیرتسک، Git/IDE و تغییرات محلی صاحب پروژه بررسی شوند؛ کد خارج از main از پوشه قدیمی خودکار کپی نشود. اگر main تغییر کرد، دامنه اثر و آزمون‌های تحت اثر دوباره بررسی شوند، اما baseline اصلی داستان بازنویسی نشود. اثر تغییر approved دیگری صریح در manifest ثبت و تنها برای همان تغییر مجاز reconciliation شود. artefactهای قدیمی نامرتبط untouched بمانند. در پایان T04، baseline اصلی و آخرین main پذیرفته‌شده با نسخه نهایی مقایسه شوند؛ صفر اختلاف واقعی و تمام gateها لازم است.
 
 **gate پایان US-13:** تمام registry بسته، تغییر واقعی ظاهر/رفتار صفر، تمام آزمون‌های لازم/چهار CI سبز روی commit نهایی، review امنیت/مرزها و CSS/state کامل، مسیرهای کاربر و snapshot تاریخی حفظ، docs/CHANGELOG/checkpoint کامل و rollback روشن. این آخرین gate توسعه پروژه است؛ T07/T081 و همه gateهای US-09/US-11/US-12 باید پیش از آغاز این داستان کامل باشند. نسخه پس از refactor نیز full quality/security/release verification و preview/rollback لازم را می‌گذراند؛ CI نسخه قبل از refactor جای اثبات نسخه جدید نیست. اگر انتشار نسخه refactor درخواست شود، مجوز جدا، مسیر release موجود و post-deploy verification لازم است؛ پایان US-12 یا مرج یک PR مجوز خودکار redeploy نیست.
-

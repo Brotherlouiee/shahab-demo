@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- US-11.T01 owner decisions: PD01–PD08 و ترتیب زیرتسک‌های مستقل T02A–H
+  برای هویت نسلی حساب، proof، نشست یک‌ساعته، اصلاح جریان ورود بدون OTP تکراری،
+  raw purge۳۰دقیقه، bookmarks حساب‌محور، archive و transport gate ثبت شدند.
+  سیاست مصوب از runtime فعلی/موارد باز جدا شد؛ [guide](docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md).
+  فقط docs؛ هیچ migration، رفتار، حذف داده یا deploy اجرا نشده است.
+
+
 ### Added
 
 - US-11.T01: مدل تهدید سراسری و بررسی حریم خصوصی/retention با inventory داده،
@@ -214,5 +223,3 @@ Sidebar owner clarification: show the server profile name; use «کاربر» fo
 ## US-09.T073 — Local OTP request repair (2026-10-09)
 
 Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.
-
-

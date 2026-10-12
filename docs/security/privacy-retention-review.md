@@ -1,8 +1,9 @@
 # بررسی حریم خصوصی و نگهداری داده — US-11.T01
 
 نسخه ۱؛ ۲۰۲۶-۱۰-۱۲؛ مبنای کد `ae52f112dc16b9e07447a195725560f54263c981`.
-این سند رفتار موجود، شکاف و تصمیم لازم را جدا می‌کند؛ سیاست تازه/مدت فرضی را
-فعال نمی‌کند و مدعی انطباق قانونی یا رضایت اخذشده نیست.
+این سند رفتار موجود، سیاست مصوب و اجرای آینده را جدا می‌کند. تصمیم‌های PD01–PD08
+مالک در ادامه PR #107 تصویب شده‌اند؛ کد/مدت runtime هنوز تغییر نکرده است و
+انطباق قانونی یا رضایت اخذشده ادعا نمی‌شود.
 [مدل تهدید و یافته‌های F01–F07](threat-model.md) مرجع triage است.
 
 ## موجودی داده و چرخه عمر فعلی
@@ -39,20 +40,27 @@
 - pseudonymized actor/hashed phone همچنان ممکن است قابل پیوند باشند؛ anonymization
   یا compliance صرفاً با hash/UUID/hidden_at ادعا نشود.
 
-## تصمیم‌های باز؛ پیشنهاد ≠ سیاست فعال
+## تصمیم‌های مصوب و موارد باقی‌مانده
 
-هیچ مدت جدید دلخواهی برای profile/history/audit/backups در این review تصویب نمی‌شود.
-مالک محصول تصمیم purpose/مدت/روش حذف را با مسئول امنیت و عملیات ثبت می‌کند؛ تا
-پیش از این تصمیم‌ها و اجرا/اثبات مربوط، تولید با داده واقعی کاربران مجاز اعلام نشود.
+مرجع واحد: [PD01–PD08 و تسک‌های T02A–H در سند جامع](../SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md).
+دستور مالک در ۲۰۲۶-۱۰-۱۲ جای پیشنهاد نگهداری محدود profile/history یا erasure
+فیزیکی آن‌ها را گرفته است: داده durable همیشگی نگه‌داری، hide/archive با status،
+بازگشت همان status در backup؛ **raw پاسخ پس از ۳۰ دقیقه حذف**. این‌ها policy approved
+هستند و هنوز implementation-approved/completed یا فعلیت TTL یک‌ساعته نیستند.
 
-| ID | تصمیم و مالک | خروجی لازم پیش از release |
+| تصمیم بازبینی قبلی | وضعیت پس از تصمیم مالک | اجرا/باقی‌مانده |
 | --- | --- | --- |
-| P01 | محصول: هدف/ضرورت پروفایل و فیلدها، اطلاع‌رسانی/رضایت و دسترسی/اصلاح/حذف | policy version، field allowlist، گیرندگان، مدت با rationale، مسیر احراز هویت درخواست و اثر حذف FKها؛ حفظ طراحی مصوب تا change جدا. |
-| P02 | محصول + backend: visible/hidden history و erasure | مدت محدود و مبدأ شمارش، تفاوت hide/حذف، ماهیت immutable evidence، روش حذف/ناشناس‌سازی مصوب بدون orphan و lookup حساب دیگر؛ user expectation صریح. |
-| P03 | محصول + frontend/security: cache و bookmarks دستگاه مشترک | purpose/expiry/account scoping و logout cleanup مصوب، حفظ suggestion/back/refresh، آزمون xss/shared-device؛ حذف credential از cache پابرجاست. |
-| P04 | عملیات/security: audit و retention/conflict | customer PII ممنوع، actor reference قابل‌کنترل، duration/access/approved erasure یا exception با rationale؛ هیچ weakening trigger برای پاک‌سازی عمومی. |
-| P05 | security/infra: log/telemetry/CI artifact | allowlist و sink، retention/deletion، نقش مشاهده‌گر، redaction/canary و proxy/provider policy؛ تصویر/trace فقط fixture مصنوعی. |
-| P06 | infra/محصول: backup/export/restore/deletion propagation | encryption/key/access، retention schedule، restore rehearsal جدا، حذف/استثنا و quarantine پس از restore با reconciliation پیش از سرو داده، owner و evidence. |
+| P01 پروفایل | PD05 مصوب: initial فقط phone، form آخرین ورودی profile، gender اختیاری؛ snapshot قبلی مستقل | T02A/D؛ اطلاع‌رسانی و دسترسی/حداقل‌سازی، بدون ادعای consent اخذشده. |
+| P02 تاریخچه/حساب | PD02–PD04 مصوب: visible forever، hide retained forever؛ account archive نه erasure، phone مجدد حساب نسل تازه | T02A/B/E/G؛ archive access همه tokenها را ببندد، snapshot/lineage immutable؛ UI حذف حساب فعلاً اضافه نشود. |
+| P03 browser/bookmarks | PD06 مصوب: همه bookmarks/سوابق account DB، logout پاک‌سازی اطلاعات browser شهاب | T02F؛ migration bookmarks محلی قدیمی تنها با منشأ معتبر/تصمیم انتقال، هیچ attach خودکار به login بعدی. |
+| P04 audit داخلی | retention forever مصوب برای profile/history/archive؛ audit عملیات و log با آن یکی نیستند | مدت دقیق/access داخلی audit هنوز نیاز به تصمیم مستقل دارد؛ PII مشتری وارد reason نشود، حفاظت append-only حفظ. |
+| P05 log/telemetry/artifact | حذف اطلاعات شخصی مرورگر مصوب است، ولی مدت log/CI artifact و دسترسی مشاهده‌گر تعیین نشده | T04 schema/allowlist/redaction/alerts و تصمیم جدا؛ production leakage ادعا نشده. |
+| P06 backup/restore | PD07 مصوب: retained data با archived/hidden/account_id برگردند؛ raw expired قبل از سرو purge | T05 retention عملی backup/key/access/rehearsal؛ بازیابی archived به active یا account قدیم به جدید ممنوع. |
+| ورود مجدد/TTL | PD08 مصوب: یک ساعت absolute؛ valid session بدون OTP، refresh بدون تمدید | T02C/D؛ عمر فعلی ۱۸۰۰ ثانیه تا پیاده‌سازی تغییر نکرده؛ نیاز به server expires_at واقعی و revoke. |
+
+مدت جدید برای log/audit/backup rotation، گیرندگان تحلیل رفتاری و اطلاع‌رسانی محصول
+حدس زده نمی‌شود. تصمیم مصوب forever مجوز دسترسی نامحدود/آموزش مدل/اشتراک ثالث
+نیست؛ هدف behavioral analysis و حدودش در privacy contract مشخص شود.
 
 ## طرح اصلاح و اثبات (در T01 اجرا/فعال نمی‌شود)
 
@@ -61,7 +69,7 @@
 ۲. برای F02 مسیر purge پاسخ خام از evidence پایدار جدا طراحی شود؛ به‌جای حدس یا
 drop FK، 3NF و snapshot قرارداد حفظ شود. PostgreSQL واقعی با expired مرتبط/
 غیرمرتبط، batch failure/retry و restart، حذف پاسخ و حفظ history را ثابت کند.
-۳. policyهای مصوب P01–P04 در taskهای لازم به schema/use case/runbook تبدیل شوند؛
+۳. policyهای مصوب PD01–PD08 طبق T02A–H به schema/use case/runbook تبدیل شوند؛
 dry-run count/audit بدون payload شخصی، transaction/idempotency و نقش محدود الزامی.
 ۴. T04 log همه sinkها را با داده synthetic آزمون کند؛ helper عمومی با free text
 و PII فیلدهایی که redact نشده‌اند تطبیق داده شود. T05 scheduler/monitor/backup/

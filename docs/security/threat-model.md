@@ -58,9 +58,19 @@ browser/payload/storage غیرقابل اعتماد است. client واقعی م
 | F02 / High، باز؛ قرارداد و FK بازتولید | history_run.session FK بدون ON DELETE؛ delete_expired ابتدا answers سپس session را حذف می‌کند و transaction با history به FK خطا می‌خورد. SQLite با foreign_keys=ON شکست/rollback را نشان داد؛ PostgreSQL این سناریو اینجا اجرا نشد. هیچ scheduler production احراز نشد. | backend/عملیات / T02 سپس T05؛ پاسخ خام در TTL مصوب حذف شود، snapshot نگه‌داری مصوب داشته باشد؛ migration در صورت نیاز افزایشی/نرمال، بدون cascade حذف تاریخچه. real PostgreSQL، batch مخلوط، retry، restart و پاک‌سازی monitorشده. |
 | F03 / Medium شکاف کنترل، باز؛ خطر بالا اگر PII به sink برسد | core.logging markerها phone/answers/income/name را redact نمی‌کنند؛ آزمایش helper: phone و answers باقی، token redact. timing موجود از label ثابت استفاده می‌کند؛ **نشت واقعی log production مشاهده نشده**. | backend/امنیت / US-11.T04؛ schema/allowlist log و تست sink واقعی، positional/free text/URL/error/authority، proxy مستقل. تا آن زمان واردکردن PII به log ممنوع. |
 | F04 / Medium، رفتار storage تأیید | home personalInfo نام/phone/income/job و accountProfile را localStorage می‌کند؛ logout فقط accountProfile را حذف می‌کند. savedLoans سراسری browser است. token در module memory، نه localStorage. | محصول + backend / تصمیم privacy سپس T02؛ purpose/مدت/حذف/shared-device و سازگاری flow ثبت و آزموده شود؛ T01 cache را تغییر نمی‌دهد، redesign/refactor US-13 شروع نمی‌شود. |
-| F05 / تصمیم محصول/حریم خصوصی، blocker تولیدی باز | profile/history/hidden history بدون TTL/erasure مصوب؛ audit append-only با حذف کاربر تعارض محتمل دارد. hide=204 حذف فیزیکی/erasure نیست. | مالک محصول/امنیت/عملیات پیش از release؛ تصمیم‌های P01–P06 سند retention و اجرای قابل‌اثبات در taskهای مربوط. |
+| F05 / تصمیم محصول/حریم خصوصی، blocker تولیدی باز | profile/history/hidden history بدون TTL/erasure مصوب؛ audit append-only با حذف کاربر تعارض محتمل دارد. hide=204 حذف فیزیکی/erasure نیست. | مالک محصول/امنیت/عملیات پیش از release؛ تصمیم‌های PD01–PD08 مصوب و اجرای قابل‌اثبات T02A–H؛ موارد باقیمانده log/audit/backup در سند retention. |
 | F06 / آمادگی تولیدی، blocker باز | mock مشتری مالکیت واقعی تلفن نیست؛ token/session/account quota فرایندمحلی و restart/multiworker مشترک نیست. authority داخلی تولیدی provision نشده و unavailable deny است. | مالک provider + backend/زیرساخت / T02 و gate استقرار؛ provider مستقل/نشست/revocation/quota و customer/operator جدایی با test واقعی، بدون فعال‌سازی mock production. |
 | F07 / زیرساخت، blocker اثبات باز | TLS/شبکه DB/CORS/CSRF/headers، log proxy، encryption/backup/restore/retention و آنلاین دوسرویس هنوز محیط واقعی اثبات ندارند. | زیرساخت/امنیت / T02–T05، T081/T07/US-12؛ environment/version/owner و شواهد واقعی. صرف دامنه خریده‌شده یا CI جای این کنترل‌ها نیست. |
+
+## به‌روزرسانی تصمیم مالک — ۲۰۲۶-۱۰-۱۲
+
+سیاست PD01–PD08 در سند جامع تصویب شده است؛ F05 دیگر «نبود تصمیم درباره مدت
+profile/history/نوع حذف حساب» نیست، بلکه **نیاز به اجرای سیاست بایگانی مصوب**
+و تصمیم‌های جدا برای log/audit/backup access است. F04 از نظر مطلوب محصول روشن
+شده ولی browser cleanup و bookmark persistence هنوز پیاده نشده‌اند. F01/F02/F03
+و provider/infrastructure همچنان بازند؛ هیچ یافته با ثبت سیاست یا CI بسته نمی‌شود.
+ترتیب اصلاح: T02A identity → B proof → C session → D login flow → E purge →
+F bookmarks/logout → G archival → H transport gate؛ T04 log و T05 restore.
 
 ## شواهد و بازبینی بعدی
 

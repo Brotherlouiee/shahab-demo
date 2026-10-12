@@ -1,5 +1,15 @@
 # Project current state
 
+## تصمیم‌های جاری حساب و ترتیب T02 — ۲۰۲۶-۱۰-۱۲
+
+- activeTaskId: تکمیل policy/task plan در PR #107، نه اجرای T02.
+- مرجع PD01–PD08 در guide: raw کامل/نیمه‌کاره ۳۰ دقیقه حذف؛ نتیجه snapshot، history/hide/account archive همیشگی، نسل تازه account با phone قبلی؛ آخرین form/profile جدا از history؛ account bookmarks همه deviceها؛ browser PII پس از خروج پاک؛ restore status و purge expired؛ یک ساعت absolute و بدون OTP تکراری برای نشست معتبر.
+- ترتیب اجرای مستقل T02A هویت/ERD سپس migration → B proof/ownership → C session → D اصلاح جریان ورود → E purge → F bookmarks/logout → G archive lifecycle بدون UI جدید → H transport/full hardening. T04 log و T05 scheduler/backup/restore باقی می‌مانند.
+- nextTaskId: US-11.T02A.1 پس از مرج و دستور مربوط؛ F01/F02 باز تا اصلاح/تست. تصویب سیاست، رفع خطر یا فعال‌سازی یک ساعت نیست.
+- تصمیم‌های محصولی قبلی در موضوع متناظر پاسخ گرفته‌اند؛ log/audit/backup rotation/access و legacy browser bookmark migration جدا ثبت شوند، بدون مدت/consent حدسی.
+- این بخش بر صف/سیاست‌های قبلی زیر مقدم است. runtime/schema/UI/scoring/retention تغییر نکرده و US-13 بعد از US-12 پابرجاست.
+
+
 ## US-11.T01 — بازبینی تهدید و حریم خصوصی (۲۰۲۶-۱۰-۱۲)
 
 - activeTaskId: US-11.T01؛ درخواست مستقیم مالک پس از مرج PR #106، base ae52f112dc16b9e07447a195725560f54263c981. branch مستقل docs/us-11-t01-threat-privacy.
@@ -291,5 +301,3 @@
 ## Compatibility pointer
 
 This is the canonical current-state checkpoint required by the guide. `docs/progress/current-state.md` is retained only as historical context for earlier commits.
-
-
