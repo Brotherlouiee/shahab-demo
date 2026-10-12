@@ -20,6 +20,7 @@ from sqlalchemy import (
     ForeignKey,
     ForeignKeyConstraint,
     Identity,
+    Index,
     Integer,
     Numeric,
     String,
@@ -27,6 +28,7 @@ from sqlalchemy import (
     UniqueConstraint,
     Uuid,
     func,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -318,11 +320,44 @@ class DataSourceFile(Timestamped, Base):
     original_filename: Mapped[str] = mapped_column(String(255), nullable=False)
 
 
+class Account(Timestamped, Base):
+    """One immutable account generation; phone is a login identifier, never its identity."""
+
+    __tablename__ = "accounts"
+    __table_args__ = (
+        CheckConstraint("status IN ('active', 'archived')", name="ck_account_status"),
+        CheckConstraint(
+            "(status = 'active' AND archived_at IS NULL) OR "
+            "(status = 'archived' AND archived_at IS NOT NULL AND archived_at >= created_at)",
+            name="ck_account_archive_time",
+        ),
+        CheckConstraint(
+            "length(phone) = 11 AND phone LIKE '09%' AND "
+            "replace(replace(replace(replace(replace(replace(replace(replace(replace(replace("
+            "phone,'0',''),'1',''),'2',''),'3',''),'4',''),'5',''),'6',''),'7',''),'8',''),'9','') = ''",
+            name="ck_account_phone",
+        ),
+        Index(
+            "uq_account_active_phone",
+            "phone",
+            unique=True,
+            postgresql_where=text("status = 'active'"),
+            sqlite_where=text("status = 'active'"),
+        ),
+    )
+    account_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    phone: Mapped[str] = mapped_column(String(11), nullable=False)
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="active", server_default="active")
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
 class UserProfile(Timestamped, Base):
-    """Editable account details keyed by the verified demonstration phone number."""
+    """Editable facts belong to one account; public phone is joined from accounts."""
 
     __tablename__ = "user_profiles"
-    phone: Mapped[str] = mapped_column(String(11), primary_key=True)
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"), primary_key=True
+    )
     first_name: Mapped[str] = mapped_column(String(60), nullable=False, default="")
     last_name: Mapped[str] = mapped_column(String(60), nullable=False, default="")
     income: Mapped[str] = mapped_column(String(40), nullable=False, default="")
@@ -336,13 +371,18 @@ class UserProfile(Timestamped, Base):
 
 class QuestionnaireSession(Timestamped, Base):
     __tablename__ = "questionnaire_sessions"
-    __table_args__ = (CheckConstraint("expires_at > created_at", name="ck_questionnaire_session_expiry"),)
+    __table_args__ = (
+        CheckConstraint("expires_at > created_at", name="ck_questionnaire_session_expiry"),
+        UniqueConstraint("questionnaire_session_id", "owner_account_id", name="uq_questionnaire_session_owner"),
+    )
     questionnaire_session_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     questionnaire_version_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("questionnaire_versions.questionnaire_version_id"), nullable=False
     )
     state: Mapped[QuestionnaireSessionState] = mapped_column(nullable=False, default=QuestionnaireSessionState.ACTIVE)
-    owner_phone: Mapped[str | None] = mapped_column(ForeignKey("user_profiles.phone"), index=True)
+    owner_account_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"), index=True
+    )
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
 
@@ -368,9 +408,22 @@ class RecommendationHistoryRun(Timestamped, Base):
     """Immutable, account-owned record of one successful recommendation response."""
 
     __tablename__ = "recommendation_history_runs"
-    __table_args__ = (UniqueConstraint("questionnaire_session_id", name="uq_recommendation_history_session"),)
+    __table_args__ = (
+        UniqueConstraint("questionnaire_session_id", name="uq_recommendation_history_session"),
+        ForeignKeyConstraint(
+            ["questionnaire_session_id", "owner_account_id"],
+            ["questionnaire_sessions.questionnaire_session_id", "questionnaire_sessions.owner_account_id"],
+            name="fk_history_session_owner",
+            ondelete="RESTRICT",
+        ),
+        Index(
+            "ix_recommendation_history_owner_created", "owner_account_id", "created_at", "recommendation_history_run_id"
+        ),
+    )
     recommendation_history_run_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
-    owner_phone: Mapped[str] = mapped_column(ForeignKey("user_profiles.phone"), nullable=False)
+    owner_account_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
     questionnaire_session_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("questionnaire_sessions.questionnaire_session_id"), nullable=False
     )

@@ -4,12 +4,13 @@ import unittest
 from datetime import UTC, datetime, timedelta
 from typing import cast
 from unittest.mock import MagicMock
+from uuid import uuid4
 
 from fastapi.testclient import TestClient
 
 from backend.app.core.config import AppEnvironment, Settings
 from backend.app.core.dependencies import get_request_database_session
-from backend.app.infrastructure.db.models import UserProfile
+from backend.app.infrastructure.db.models import Account, UserProfile
 from backend.app.main import create_app
 from backend.app.operations.authorization import (
     IdentityKind,
@@ -162,7 +163,9 @@ class OperationsPublicBoundaryTests(unittest.TestCase):
                 app.state.operations_authorizer.require(identity, permission)
 
         database = MagicMock()
-        database.get.return_value = UserProfile(phone="09000000001")
+        account_id = uuid4()
+        database.scalar.return_value = Account(account_id=account_id, phone="09000000001", status="active")
+        database.get.return_value = UserProfile(account_id=account_id)
         app.dependency_overrides[get_request_database_session] = lambda: database
         client = TestClient(app)
         # Existing real HTTP handlers with a contract-only DB double.

@@ -521,6 +521,17 @@ data/scoring، UI، purge، session یک‌ساعته یا archive اجرایی 
 [checkpoint](progress/us-11-t02a1.md) و چهار CI نهایی لازم؛ nextTaskId A.2 پس از مرج،
 با PostgreSQL واقعی و قبل از B/C/D/E/F/G/H. F01/F02 باز و US-13 آخرین کار پابرجاست.
 
+### اجرای هویت — US-11.T02A.2
+
+مالک پس از مرج PR #108 اجرای A.2 را خواست. accounts با UUID/status/partial unique،
+profile account-PK، ownerهای session/history و composite FK، capability account-bound
+و migration expand/contract/backfill اجرا شده‌اند. snapshot/profile facts حفظ؛
+rollback نسل‌های غیرقابل نمایش در schema قدیمی رد می‌شود. [checkpoint](progress/us-11-t02a2.md)
+و [runbook](database/account-identity-migration-runbook.md) شامل شواهد CI/زمان‌اند.
+فرانت، scoring و source bytes بدون تغییر؛ archive API/UI، shared/۱ساعت session،
+OTP تکراری، purge و bookmarks DB هنوز B–H هستند. F01/F02 بازند؛ آنلاین T081/T07
+و gate production باقی‌اند؛ US-13 آخرین کار است. قدم بعد پس از مرج/gate A.2: US-11.T02B.
+
 ### تصمیم‌های مصوب حساب و داده و برنامه اجرای T02 — ۲۰۲۶-۱۰-۱۲
 
 **مرجع تصمیم محصول:** مالک هفت تصمیم داده و سپس اصلاح جریان ورود را صریح تصویب
@@ -558,7 +569,7 @@ T02 یک PR بزرگ نیست. هر زیرتسک فقط پس از gate/مرج ق
 | --- | --- | --- |
 | US-11.T02A — هویت و چرخه عمر حساب | پیش‌نیاز همه زیرتسک‌های account: A.1 قرارداد account_id/status و ERD/3NF؛ سپس A.2 persistence/migration/backfill سازگار و account-bound adapters. current phone-PK به مدل نسلی با یک active phone منتقل شود؛ history/snapshot موجود حفظ. | PostgreSQL واقعی upgrade از fixture قبل، بدون orphan/duplicate active و حفظ profile/history؛ دو account با phone مشترک نسل مستقل؛ API مصرف‌کننده سازگار و rollback بدون حذف داده. بایگانی/ورودمجدد در test contract، نه اضافه‌کردن دکمه حذف. |
 | US-11.T02A.1 — قرارداد هویت و چرخه حساب و ERD | پس از مرج T01/تصمیم PD01–PD08؛ **فقط طراحی** account_id/status، 3NF، روابط/constraints و migration/rollback strategy؛ [قرارداد](database/account-identity-lifecycle.md)، [ADR 0008](adr/0008-account-identity-lifecycle.md). | consistency/link/schema-current-vs-target، AC01–AC16 طرح آینده و چهار CI؛ هیچ DDL/model/runtime/UI/data change. |
-| US-11.T02A.2 — اجرای persistence و migration/backfill | پس از مرج/gate T02A.1؛ model/adapters/expand-contract و mapping idempotent طبق قرارداد؛ archive G تا cutover owner/credential فعال نشود. | PostgreSQL واقعی upgrade/fixture legacy، حفظ profile/history و counts، partial unique/race/composite FK، rollback guard؛ این PR آن را آغاز نکرده است. |
+| US-11.T02A.2 — اجرای persistence و migration/backfill | پس از مرج/gate T02A.1؛ model/adapters/expand-contract و mapping idempotent طبق قرارداد؛ archive G تا cutover owner/credential فعال نشود. | PostgreSQL واقعی upgrade/fixture legacy، حفظ profile/history و counts، partial unique/race/composite FK، rollback guard؛ اجرای core identity در [checkpoint A.2](progress/us-11-t02a2.md) و [runbook](database/account-identity-migration-runbook.md) ثبت شده؛ B–H جدا هستند. |
 | US-11.T02B — مالکیت پرسشنامه و proof معتبر | پس از A؛ رفع F01: capability تصادفی server-verified، TTL و creator/owner کنترل برای read/write/recommend/history؛ account bind اتمیک و مستقل از phone/payload. | دو client/دوحساب: ID تنها، proof ثابت/ساختگی/دیگری/expired رد؛ قبل از افشای پاسخ/نوشتن DB؛ client معتبر و anonymous flow مجاز، refresh/Back/expiry حفظ، F01 regression واقعی. |
 | US-11.T02C — نشست یک‌ساعته و ابطال | پس از A/B؛ lifecycle account-bound، PD08، expires_at server-owned؛ restore زمان باقی‌مانده را بدهد، نه ۳۶۰۰ تازه. حالت multiworker/restart/shared store و quota/revocation تولیدی صریح طراحی و اثبات شود؛ customer/operator مستقل. | ساعت کنترل‌شده: ۳۵۹۹/۳۶۰۰، refresh بدون تمدید، logout/replay، حساب archived و token قبلی رد؛ چند دستگاه به account واحد، false login از cache ممنوع. real provider فعال‌سازی جدا دارد و mock production همچنان رد. |
 | US-11.T02D — **اصلاح جریان ورود و OTP تکراری** | پس از A–C؛ در personal-info نشست معتبر از سرور بازیابی، form با profile جاری پر و phone readonly از account گرفته شود. تأیید/ویرایش form به update همان profile و نتیجه برود، بدون request/verify OTP. مهمان یا نشست منقضی همان UI ورود/OTP موجود را طی کند. | مرورگر با API/PostgreSQL واقعی: اولین OTP و account creation؛ دومین پرسشنامه و refresh با OTP requests=۰، profile آخرین ورودی و snapshot قبلی ثابت؛ expiry وسط فرم/retry/logoff و server error، حفظ draft و پاسخ فقط تا TTL۳۰دقیقه. TTL منقضی خودکار تمدید یا جواب از URL/storage بازسازی نشود. |

@@ -12,9 +12,10 @@ import hmac
 import secrets
 import time
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from threading import Lock
 from typing import Protocol
+from uuid import UUID
 
 
 class AccessFailure(Exception):
@@ -48,6 +49,7 @@ class Challenge:
 class AccountSession:
     phone: str
     expires_at: float
+    account_id: UUID | None = None
 
 
 def digest(value: str) -> str:
@@ -112,7 +114,7 @@ class AccountAccess:
             self.sessions[digest(token)] = AccountSession(challenge.phone, now + 1800)
             return token
 
-    def actor(self, token: str) -> str:
+    def verified_phone(self, token: str) -> str:
         self._enabled()
         with self.lock:
             self._prune(self.clock())
@@ -120,6 +122,25 @@ class AccountAccess:
             if session is None:
                 raise AccessFailure(401)
             return session.phone
+
+    def bind_account(self, token: str, account_id: UUID) -> None:
+        """Bind only once, before publishing the capability; legacy unbound tokens fail closed."""
+        with self.lock:
+            self._prune(self.clock())
+            key = digest(token)
+            session = self.sessions.get(key)
+            if session is None or session.account_id is not None:
+                raise AccessFailure(401)
+            self.sessions[key] = replace(session, account_id=account_id)
+
+    def actor(self, token: str) -> UUID:
+        self._enabled()
+        with self.lock:
+            self._prune(self.clock())
+            session = self.sessions.get(digest(token))
+            if session is None or session.account_id is None:
+                raise AccessFailure(401)
+            return session.account_id
 
     def revoke(self, token: str) -> None:
         with self.lock:

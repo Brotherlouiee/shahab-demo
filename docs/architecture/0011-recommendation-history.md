@@ -24,3 +24,7 @@ extends nor changes the existing 30-minute questionnaire-session retention polic
 The migration is additive (e4c7b9a1d2f3) and is tested on CI's real PostgreSQL
 service. Operational rollback must be planned against retained user history; do not
 use the Alembic downgrade as a production data-deletion procedure.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+run/session owner اکنون UUID حساب است؛ composite FK owner equality و session unique/idempotency حفظ شده. hidden/items/reasons/data/config snapshot عیناً محفوظ؛ query با phone یا فعال تازه برای token قدیمی ممنوع. proof ثابت F01 و purge F02 هنوز در B/E باز هستند.

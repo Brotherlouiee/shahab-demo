@@ -15,6 +15,7 @@ EXPECTED_TABLES = {
     "operations_versions",
     "audit_events",
     "operations_workflow_head",
+    "accounts",
     "user_profiles",
     "answer_options",
     "data_import_runs",
@@ -118,30 +119,32 @@ class PostgreSqlMigrationTests(unittest.TestCase):
     def test_profile_persistence_survives_a_new_connection(self) -> None:
         from sqlalchemy.orm import Session
 
-        from backend.app.accounts.profile_repository import read_profile, upsert_profile
+        from backend.app.accounts.profile_repository import ensure_profile, read_profile, upsert_profile
         from backend.app.accounts.profile_schema import ProfilePayload
 
         self._alembic("upgrade", "head")
         engine = create_engine(str(DATABASE_URL))
         with Session(engine) as session:
+            actor = ensure_profile("09000000001", session)
             upsert_profile(
-                ProfilePayload(phone="09000000001", firstName="آزمون", income="22-to-50", job="manager"), session
+                ProfilePayload(phone="09000000001", firstName="آزمون", income="22-to-50", job="manager"), actor, session
             )
         engine.dispose()
 
         engine = create_engine(str(DATABASE_URL))
         with Session(engine) as session:
-            stored = read_profile("09000000001", session)
+            stored = read_profile(actor, session)
             self.assertEqual((stored.firstName, stored.income, stored.job), ("آزمون", "22-to-50", "manager"))
         engine.dispose()
 
     def test_verified_login_creates_profile_and_personal_info_survives_relogin(self) -> None:
         from fastapi.testclient import TestClient
+        from sqlalchemy import select
         from sqlalchemy.orm import Session
 
         from backend.app.core.config import AppEnvironment, Settings
         from backend.app.core.dependencies import get_request_database_session
-        from backend.app.infrastructure.db.models import UserProfile
+        from backend.app.infrastructure.db.models import Account, UserProfile
         from backend.app.main import create_app
 
         self._alembic("upgrade", "head")
@@ -166,7 +169,10 @@ class PostgreSqlMigrationTests(unittest.TestCase):
 
         headers = login()
         with Session(engine) as session:
-            record = session.get(UserProfile, "09000000001")
+            account_id = session.scalar(
+                select(Account.account_id).where(Account.phone == "09000000001", Account.status == "active")
+            )
+            record = session.get(UserProfile, account_id)
             self.assertIsNotNone(record)
             assert record is not None
             self.assertEqual(record.first_name, "")
@@ -182,7 +188,10 @@ class PostgreSqlMigrationTests(unittest.TestCase):
         profile = client.get("/api/v1/profiles/me", headers=headers).json()
         self.assertEqual({key: profile[key] for key in payload}, payload)
         with Session(engine) as session:
-            record = session.get(UserProfile, "09000000001")
+            account_id = session.scalar(
+                select(Account.account_id).where(Account.phone == "09000000001", Account.status == "active")
+            )
+            record = session.get(UserProfile, account_id)
             assert record is not None
             self.assertEqual(
                 (record.first_name, record.last_name, record.income, record.job),

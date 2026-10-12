@@ -79,3 +79,7 @@ cache/export/backup propagation و تأیید نتیجه داشته باشد. SL
 فقط با تصمیم معتبر ثبت شوند، نه حدس توسعه‌دهنده.
 ۶. purge واقعی/انتشار provider/production نه در این PR و نه صرف CI مجاز نیست.
 گزارش Doneِ review از Doneِ اصلاح runtime و پذیرش production جداست.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+profile/session/history به account UUID مستقل متصل شدند؛ phone کپی در profile/history حذف، snapshot unchanged، archive generations schema-ready. هیچ purge، retention، analytics access یا account deletion UI اجرا نشد؛ PD01–PD08 مصوب پابرجا و اجرای B–H/T04/T05 باقی است.

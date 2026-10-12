@@ -93,3 +93,7 @@ PostgreSQL cleanup را ثابت نمی‌کنند. جزئیات fixture/command
 تغییر auth/session/owner، retention/erasure/backup، provider/deploy، import/audit و
 قرارداد داده لازم است. US-11.T01 با تحویل **review** پایان می‌یابد؛ داستان US-11،
 رفع F01/F02، فعال‌سازی production یا US-13 با این PR Done نمی‌شوند.
+
+## US-11.T02A.2 — انتقال اجرایی هویت
+
+core identity account UUID با status، active-phone unique، token bound و owner composite FK افزوده شد؛ stale نسل archived با phone مشترک رد می‌شود. F01/F02/F03 و production provider/shared sessions/transport/restore هنوز بسته نشده‌اند. archive fixture SQL صرفاً آزمون isolated، use case بایگانی G هنوز پیاده نشده.

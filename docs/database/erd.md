@@ -98,7 +98,7 @@ erDiagram
 این projection از همان نسخهٔ تأییدشدهٔ وام ساخته می‌شود؛ مقدار شرط خالی از نبود عضو در کاتالوگ متمایز است.
 
 
-## Existing profile table — PR #85 / US-09.T072
+## Historical profile table — PR #85 / US-09.T072
 
 user_profiles was introduced by migration d1a9e71b4c3f, independent of anonymous questionnaire/recommendation data. Canonical eleven-digit phone is the string primary key; one editable record per phone. A local/test verified server session selects that phone. There is no FK to questionnaires or loans, and this repair adds no schema changes.
 
@@ -119,12 +119,28 @@ These implemented relations supersede only the earlier conceptual approval/audit
 shape; unimplemented staging concepts are still conceptual. Historical JSONB
 preparation/diff follows ADR 0006; customer serving relations remain unchanged.
 
-## US-11.T02A.1 — هویت حساب: اجرا در برابر طرح هدف
+## US-11.T02A.2 — مدل اجرایی حساب
 
-schema فعلی همچنان user_profiles.phone-PK است؛ questionnaire_sessions.owner_phone
-و recommendation_history_runs.owner_phone به آن FK دارند. عبارت تاریخیِ «بدون
-FK به پرسشنامه» در بخش PR #85 فقط وضعیت آن مقطع را نشان می‌دهد و وضعیت فعلی نیست.
-[ERD هدف و قرارداد account](account-identity-lifecycle.md) در فایل جداست تا
-accounts/account_id و روابط آینده، schema اجراشده قلمداد نشوند. A.1 طراحی است؛
-model/migration و نقش جدید اجرا نشده‌اند. A.2 باید همین ERD و dictionary را با
-schema واقعی و آزمون PostgreSQL به‌روز کند.
+پس از revision `aa11b02a2002`، phone فقط شناسه ورود در accounts است؛ profile PK
+و ownerهای session/history به UUID مستقل هر دوره حساب اشاره می‌کنند. مدل قدیمی
+PR #85 بالا تاریخی است. روابط فعلی زیر از ORM/migration واقعی‌اند؛ session durable
+و bookmarks آینده C/F در این نمودار اجراشده نیستند.
+
+```mermaid
+erDiagram
+    direction TB
+    accounts ||--|| user_profiles : owns
+    accounts o|--o{ questionnaire_sessions : binds
+    accounts ||--o{ recommendation_history_runs : owns
+    questionnaire_sessions ||--o| recommendation_history_runs : produces
+    recommendation_history_runs ||--o{ recommendation_history_items : retains
+    recommendation_history_items ||--o{ recommendation_history_item_reasons : explains
+```
+
+account با phone canonical، status/archived_at و partial unique active phone؛
+profile دقیقاً یک رکورد با PK/FK RESTRICT، invariant وجود profile با transaction
+و آزمون برقرار است. anonymous owner NULL؛ history owner غیرNULL و composite FK
+(session_id, owner_account_id) به session، unique global session؛ owner پس از bind
+با trigger immutable است. FKهای حساب RESTRICT‌اند؛ archive/hide باعث حذف snapshot
+نمی‌شود. [runbook](account-identity-migration-runbook.md) و
+[قرارداد](account-identity-lifecycle.md) مرجع جزئیات؛ archive feature در G است.
