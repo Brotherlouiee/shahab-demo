@@ -49,6 +49,7 @@ test("canonical questionnaire reaches the active real-result route and published
     if (request.url().includes("/api/v1/loans/")) detailRequests.push(request.url());
   });
   await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => {
     writes.push({ url: route.request().url(), body: route.request().postDataJSON() });
     return route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } });
@@ -493,6 +494,7 @@ for (const viewport of [
 
 async function mockRecommendationJourney(page) {
   await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/recommendations", (route) => route.fulfill({ json: response }));
   await page.route("**/api/v1/loans/*", (route) => {
@@ -707,4 +709,3 @@ async function expectFilterMenuAboveCards(page) {
   await expect(page.getByText("میثاق ۲")).toBeVisible();
   await expect(page.locator(".hp-serving-loan-card img").first()).toHaveJSProperty("complete", true);
 }
-

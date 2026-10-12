@@ -17,11 +17,11 @@ test("server-restored profile has a readonly phone and storage retry sends no OT
   await expect(inputs.nth(2)).toHaveValue("۰۱۱۱۱۲۲۲۲");
   await expect(inputs.nth(2)).not.toBeEditable();
   await inputs.first().fill("مریم");
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await expect(page.getByRole("alert")).toContainText("انجام نشد");
   await expect(inputs.first()).toHaveValue("مریم");
   failWrite = false;
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await expect(page).toHaveURL(/\/analysis$/);
   expect(otp).toEqual([]);
 });

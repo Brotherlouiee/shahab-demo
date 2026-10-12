@@ -96,7 +96,7 @@ test("first OTP creates the account; a refreshed second questionnaire saves the 
   await completeQuestionnaire(page);
   await fillInfo(page, phone);
   const geometry = await formGeometry(page);
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await verify(page);
   expect(otp).toHaveLength(2);
   const list = await page.request.get("/api/v1/recommendation-history");
@@ -112,7 +112,7 @@ test("first OTP creates the account; a refreshed second questionnaire saves the 
   expect(await formGeometry(page)).toEqual(geometry);
   await inputs.nth(0).fill("مریم");
   const recommended = page.waitForResponse(r => r.url().endsWith("/recommendations"));
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   expect((await recommended).status()).toBe(200);
   await expect(page).toHaveURL(/\/loan-result$/);
   expect(otp).toHaveLength(2);
@@ -137,18 +137,18 @@ test("session and storage failures preserve the edited draft and retry without O
   let failWrite = true;
   await page.route("**/api/v1/account-access/session", route => failSession ? route.fulfill({ status: 503, json: {} }) : route.continue());
   await page.route("**/api/v1/profiles", route => failWrite ? route.fulfill({ status: 503, json: {} }) : route.continue());
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await expect(page.getByRole("alert")).toContainText("انجام نشد");
   await expect(firstName).toHaveValue("مریم");
   failSession = false;
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await expect(page.getByRole("alert")).toContainText("انجام نشد");
   await expect(page).toHaveURL(/\/personal-info$/);
   await expect(firstName).toHaveValue("مریم");
   expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject({ firstName: "آزمون" });
   failWrite = false;
   const result = page.waitForResponse(r => r.url().endsWith("/recommendations"));
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   expect((await result).status()).toBe(200);
   expect(otp).toHaveLength(0);
   expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject({ firstName: "مریم", gender: "female" });
@@ -166,7 +166,7 @@ with engine.begin() as connection:
     connection.execute(text("INSERT INTO account_access_sessions (token_digest, account_id, issued_at, expires_at) SELECT :digest, account_id, now()-interval '2 hours', now()-interval '1 hour' FROM accounts WHERE phone=:phone AND status='active'"), {"digest": hashlib.sha256(b"d-browser-expired-credential").hexdigest(), "phone": "${phone}"})`);
   await context.addCookies([{ name: "shahab_account_access", value: "d-browser-expired-credential", domain: "127.0.0.1", path: "/api/v1", httpOnly: true, sameSite: "Lax" }]);
   const requested = page.waitForResponse(r => r.url().endsWith("/account-access/request"));
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   expect((await requested).status()).toBe(200);
   await verify(page);
   expect(await (await page.request.get("/api/v1/profiles/me")).json()).toMatchObject({ phone, firstName: "مریم" });
@@ -185,7 +185,7 @@ test("expired raw answers cannot be replayed into a fresh session or bypassed by
     connection.execute(text("UPDATE questionnaire_sessions SET created_at=now()-interval '31 minutes', expires_at=now()-interval '1 minute' WHERE questionnaire_session_id=:sid"), {"sid": "${sid}"})`);
   const afterExpiry = [];
   page.on("request", request => { if (request.method() === "POST") afterExpiry.push(request.url()); });
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await page.getByRole("button", { name: "تایید" }).click();
   await expect(page.getByRole("alert")).toContainText("مهلت پرسشنامه تمام شده");
   await expect(page).toHaveURL(/\/personal-info$/);
   expect(afterExpiry).toEqual([]);
