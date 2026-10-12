@@ -36,7 +36,7 @@ async function request(path, { body, method = "GET", authorize = false } = {}) {
     response = await fetch(`${apiBaseUrl}/${path}`, {
       method, cache: "no-store",
       credentials: "same-origin",
-      headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(authorize ? { Authorization: `Bearer ${accessToken}` } : {}) },
+      headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(authorize && accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
   } catch { throw new ProfileApiError(0); }
@@ -71,22 +71,45 @@ export async function verifyProfileCode(challengeId, code) {
   accessGeneration += 1;
 }
 
-export async function restoreAccountAccess() {
+export async function restoreAccountAccess({ strict = false } = {}) {
   const generationAtStart = accessGeneration;
   try {
     const response = await fetch(`${apiBaseUrl}/account-access/session`, { cache: "no-store", credentials: "same-origin" });
     if (!response.ok) {
       // An anonymous bootstrap response must never erase a later successful
       // OTP verification that completed while this request was in flight.
-      if (generationAtStart === accessGeneration) clearAccountAccess();
+      if (response.status === 401) {
+        if (generationAtStart === accessGeneration) clearAccountAccess();
+        return Date.now() < expiresAt ? actorPhone : null;
+      }
+      if (strict) throw new ProfileApiError(response.status);
       return null;
     }
     const value = await response.json();
+    // A probe started before logout or a newer login cannot resurrect its actor.
+    if (generationAtStart !== accessGeneration) return Date.now() < expiresAt ? actorPhone : null;
+    accessToken = "";
     actorPhone = normalizeProfilePhone(value.phone);
     expiresAt = Date.now() + value.expiresIn * 1000;
     accessGeneration += 1;
     return actorPhone;
-  } catch { return null; }
+  } catch (error) {
+    if (strict) throw error instanceof ProfileApiError ? error : new ProfileApiError(0);
+    return null;
+  }
+}
+
+export async function readPersonalInfoProfile() {
+  if (!(await restoreAccountAccess({ strict: true }))) return null;
+  try {
+    const profile = await readOwnProfile();
+    if (!profile) throw new ProfileApiError(503);
+    if (!hasProfileAccess(profile.phone)) return null;
+    return profile;
+  } catch (error) {
+    if (error instanceof ProfileApiError && error.status === 401) return null;
+    throw error;
+  }
 }
 
 async function ensureAccountAccess() {

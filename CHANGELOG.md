@@ -258,3 +258,14 @@ Sidebar owner clarification: show the server profile name; use «کاربر» fo
 ## US-09.T073 — Local OTP request repair (2026-10-09)
 
 Owner reported failures in both login and personal-info on local Docker. Reproduced local API 503 with the new mock flag absent (old-container environment). Local/test now default to fake OTP 123456; explicit false still disables it, and staging/production remain fail-closed. This supersedes T072's opt-in-only local default without enabling real SMS or production authentication. The profile client honors VITE_SHAHAB_API_BASE_URL for every request. Existing schema, design, icons, About text, D-005 and published source data remain unchanged. New CI browser integration runs against real FastAPI/PostgreSQL through Vite, not API route fixtures. See Docker runbook for non-destructive container recreation.
+
+## US-11.T02D — اصلاح OTP تکراری
+
+- personal-info نشست معتبر را از سرور می‌خواند، profile جاری و phone readonly، ذخیره مستقیم بدون OTP؛ مهمان/منقضی همان flow موجود.
+- خطای restore/storage حفظ draft و retry؛ probe دیررس پس از logout actor را بازنمی‌گرداند؛ raw TTL با replay تمدید نمی‌شود.
+- unit و regression مرورگر عمومی/واقعی PostgreSQL؛ هیچ CSS، asset، schema یا scoring تغییر ندارد. جزئیات و وضعیت gate در [checkpoint](docs/progress/us-11-t02d.md) و PR #112.
+
+### اصلاح پیش از مرج US-11.T02D — شماره متفاوت
+
+- personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
+- Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
