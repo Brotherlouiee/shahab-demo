@@ -1,5 +1,7 @@
 # US-10R — checkpoint تعریف یوزر استوری (۲۰۲۶-۱۰-۱۱)
 
+> **Checkpoint تاریخی؛ صف اجرایی نیست.** تصمیم مالک در ۲۰۲۶-۱۰-۱۲، نام داستان را به US-13 و ترتیب آن را به پس از تکمیل US-12 منتقل کرد. نام‌ها/nextTaskهای زیر مربوط به برنامه قبلی‌اند و مجوز شروع refactor نیستند. مرجع جاری: [US-13](us-13-plan.md).
+
 - activeTaskId: US-10R.PLAN؛ درخواست مالک ایجاد یوزر استوری مستقل و تسک‌های ریفکتور، با ممنوعیت تغییر ظاهر و رفتار.
 - estimatedWorkScope/completionBudget: یک PR مستندات برای guide، CHANGELOG، project-current-state و همین checkpoint؛ ظرفیت برای تعریف، بررسی هدفمند، commit/PR و gateهای CI. اجرای T01 یا استخراج runtime جزو این PR نیست.
 - مبنا: main `0a518bf6261f26a754fdfff6e290f5be763c0f54` پس از مرج PR #104؛ branch مستقل Codex `docs/us-10r-frontend-refactor-plan`. checkoutهای قبلی و فایل‌های محلی کاربر دست‌نخورده‌اند.

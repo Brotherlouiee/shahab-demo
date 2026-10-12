@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- US-13 ordering (owner decision, 2026-10-12): ریفکتور فرانت از US-10R به
+  US-13 و آخرین داستان، بعد از تکمیل بک‌اند و همه gateهای US-01 تا US-12 منتقل
+  شد. وابستگی ریفکتور از US-11/US-12 حذف و شرط پایان کل توسعه همسو شد؛
+  همه احتیاط‌های حفظ ظاهر/رفتار پابرجاست. [checkpoint](docs/progress/us-13-plan.md).
+  فقط برنامه/مستندات؛ runtime/CSS/API/DB/scoring/deploy تغییر نکرده‌اند.
+
+
 ### Added
 
 - US-10R safeguards: مرجع ثابت کل داستان و هر PR، آزمون اعتبار baseline،
