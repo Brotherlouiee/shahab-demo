@@ -28,8 +28,10 @@ with Session(engine) as db, db.begin():
         identifiers=json.loads(Path("data/contracts/canonical-identifiers.v1.json").read_text()),
         actor_reference="CI-bookmark-fixture",approval_reason="source-backed account bookmark regression")`);
 });
-test.beforeEach(() => database(`with engine.begin() as c:
-    c.execute(text("DELETE FROM account_otp_quota_events"))`));
+const clearFixtureQuota = () => database(`with engine.begin() as c:
+    c.execute(text("DELETE FROM account_otp_quota_events"))`);
+test.beforeEach(clearFixtureQuota);
+test.afterEach(clearFixtureQuota);
 
 async function login(context, phone) {
   const requested = await context.request.post("/api/v1/account-access/request", { data: { phone } });
@@ -53,7 +55,7 @@ async function recommendation(context) {
   expect(result.rankedRecommendations.length).toBeGreaterThan(0);
   const history = await context.request.get("/api/v1/recommendation-history");
   expect(history.status()).toBe(200);
-  return { loan: result.rankedRecommendations[0], historyId: (await history.json()).items[0].historyId };
+  return { loan: result.rankedRecommendations[0], sessionId: sid, historyId: result.historyId };
 }
 
 test("two devices share database bookmarks, another account cannot inherit them, logout clears only Shahab", async ({ browser, baseURL }) => {
@@ -67,9 +69,11 @@ test("two devices share database bookmarks, another account cannot inherit them,
     const page = await a.newPage();
     await page.goto(`/recommendation-history/${historyId}`);
     const card = page.locator(".hp-serving-loan-card").filter({ has: page.getByRole("button", { name: `ذخیره وام ${loan.loanName.replace(/[0-9]/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)])}` }) });
+    console.log("F browser: historical card", loan.loanId, loan.loanName);
     await expect(card).toBeVisible();
     const save = card.locator(".hp-loan-save-button");
     const committed = page.waitForResponse(response => response.url().includes(`/bookmarks/${loan.loanId}`) && response.request().method() === "PUT");
+    console.log("F browser: save");
     await save.click(); expect((await committed).status()).toBe(204);
     await expect(save).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator(".hp-loan-save-toast")).toBeVisible();
@@ -77,6 +81,7 @@ test("two devices share database bookmarks, another account cannot inherit them,
     expect((await (await second.request.get("/api/v1/bookmarks")).json()).items).toEqual(firstList.items);
     expect((await (await b.request.get("/api/v1/bookmarks")).json()).items).toEqual([]);
     const other = await second.newPage();
+    console.log("F browser: second device");
     await other.goto("/saved-loans");
     await expect(other.locator(".hp-serving-loan-card")).toHaveCount(1);
     await other.reload(); await expect(other.locator(".hp-serving-loan-card")).toHaveCount(1);
@@ -91,6 +96,7 @@ test("two devices share database bookmarks, another account cannot inherit them,
       localStorage.setItem("shahab.personalInfo.phone", "synthetic fixture");
       sessionStorage.setItem("shahab.testDraft", "synthetic fixture");
     });
+    console.log("F browser: logout");
     await page.locator("button.hp-menu-button").click();
     await page.getByRole("button", { name: "خروج از حساب کاربری" }).click();
     await page.getByRole("alertdialog").getByRole("button", { name: "خیر" }).click();
@@ -118,5 +124,37 @@ test("two devices share database bookmarks, another account cannot inherit them,
     await other.reload(); await expect(other.locator(".hp-saved-loans-empty-state img")).toBeVisible();
     expect(Number(database(`with engine.connect() as c:
     print(c.scalar(text("SELECT count(*) FROM account_bookmarks WHERE removed_at IS NOT NULL")))`))).toBeGreaterThan(0);
-  } finally { await a.close(); await second.close(); await b.close(); }
+  } finally { await Promise.allSettled([a.close(), second.close(), b.close()]); }
+});
+
+// A refreshed current result resolves its immutable snapshot, without rescoring or PII storage.
+test("current result refresh and detail Back use only an owned historical reference", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ baseURL });
+  try {
+    await login(context, "09000000823");
+    const { loan, sessionId, historyId } = await recommendation(context);
+    expect(historyId).toMatch(/^[a-f0-9-]{36}$/i);
+    const page = await context.newPage();
+    await page.addInitScript(({ sessionId, historyId }) => {
+      if (location.pathname === "/loan-results" && !history.state?.shahabRecommendation)
+        history.replaceState({ shahabRecommendation: { sessionId, historyId } }, "", location.href);
+    }, { sessionId, historyId });
+    let scoringRequests = 0;
+    page.on("request", request => {
+      if (request.method() === "POST" && new URL(request.url()).pathname === "/api/v1/recommendations") scoringRequests += 1;
+    });
+    await page.goto("/loan-results");
+    await expect(page.locator(".hp-serving-loan-card").first()).toBeVisible();
+    await page.reload();
+    await expect(page.locator(".hp-serving-loan-card").first()).toBeVisible();
+    expect(await page.evaluate(() => history.state.shahabRecommendation)).toEqual({ sessionId, historyId });
+    await page.locator(".hp-loan-docs-link").first().click();
+    await page.reload();
+    await page.getByRole("button", { name: "بازگشت" }).click();
+    await expect(page).toHaveURL(/\/loan-results$/);
+    await expect(page.locator(".hp-serving-loan-card").first()).toBeVisible();
+    expect(scoringRequests).toBe(0);
+    expect(await page.evaluate(() => [...Object.keys(localStorage), ...Object.keys(sessionStorage)].filter(k => k.startsWith("shahab.")))).toEqual([]);
+    expect((await context.request.get(`/api/v1/recommendation-history/${historyId}`)).status()).toBe(200);
+  } finally { await context.close(); }
 });

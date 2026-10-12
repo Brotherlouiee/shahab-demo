@@ -172,7 +172,7 @@ export async function persistPersonalInfo(profile) {
 export function clearAccountAccess() {
   const hadAccess = Boolean(actorPhone);
   accessToken = ""; actorPhone = ""; accountId = ""; expiresAt = 0; accessGeneration += 1;
-  if (hadAccess) { announceAccountChange(); clearAccountBrowserData(); }
+  if (hadAccess) { announceAccountChange(); clearAccountBrowserData({ notify: false }); }
   else resetAccountPresentation();
 }
 

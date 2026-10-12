@@ -26,7 +26,13 @@ from backend.tests import test_account_identity_postgresql as fixture
 @unittest.skipUnless(fixture.DATABASE_URL, "requires real PostgreSQL SHAHAB_TEST_DATABASE_URL")
 class AccountBookmarksPostgreSqlTests(unittest.TestCase):
     setUp = fixture.AccountIdentityPostgreSqlTests.setUp
-    alembic = fixture.AccountIdentityPostgreSqlTests.alembic
+
+    def alembic(self, *arguments, check=True):
+        result = fixture.AccountIdentityPostgreSqlTests.alembic(self, *arguments, check=False)
+        if check and result.returncode:
+            self.fail(f"alembic {arguments}: {result.stdout}\n{result.stderr}")
+        return result
+
     legacy_fixture = fixture.AccountIdentityPostgreSqlTests.legacy_fixture
     retained = fixture.AccountIdentityPostgreSqlTests.retained
 
@@ -34,6 +40,14 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
         with self.engine.begin() as c:
             if inspect(c).has_table("account_bookmarks"):
                 c.execute(text("DELETE FROM account_bookmarks"))
+            if getattr(self, "performance_fixture", False):
+                # Only the 2000 synthetic accounts created by this test; never user data.
+                c.execute(
+                    text(
+                        "DELETE FROM accounts WHERE account_id IN "
+                        "(SELECT md5('bookmark-fixture-'||i)::uuid FROM generate_series(10000,11999) i)"
+                    )
+                )
             if getattr(self, "new_generation", None):
                 aid = self.new_generation
                 c.execute(text("DELETE FROM account_access_sessions WHERE account_id=:id"), {"id": aid})
@@ -239,6 +253,7 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
 
     def test_keyset_pagination_and_selective_owner_index_on_representative_associations(self):
         self.prepare()
+        self.performance_fixture = True
         with self.engine.begin() as c:
             c.execute(
                 text(

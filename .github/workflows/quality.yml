@@ -135,3 +135,10 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test --config playwright.profile-live.config.mjs
+      - name: Upload real API browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-real-api-evidence
+          path: test-results/
+          retention-days: 7

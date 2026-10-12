@@ -15,7 +15,7 @@ export function readRecommendationCache(sessionId) { return recommendations.get(
 export function writeRecommendationCache(sessionId, result) { if (result) recommendations.set(sessionId, result); }
 export function resetAccountPresentation() { profile = null; fields = {}; recommendations.clear(); }
 
-export function clearAccountBrowserData() {
+export function clearAccountBrowserData({ notify = true } = {}) {
   resetAccountPresentation();
   if (typeof window === "undefined") return;
   for (const name of ["localStorage", "sessionStorage"]) {
@@ -33,7 +33,7 @@ export function clearAccountBrowserData() {
     const { shahabRecommendation: _removed, ...state } = window.history.state;
     window.history.replaceState(state, "", window.location.pathname + window.location.search);
   }
-  window.dispatchEvent(new Event("shahab:account-cleared"));
+  if (notify) window.dispatchEvent(new Event("shahab:account-cleared"));
 }
 
 // Only a non-personal control flag persists during a failed logout. It prevents
