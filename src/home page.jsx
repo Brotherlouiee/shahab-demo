@@ -2059,6 +2059,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     if (isCheckingPersonalAccess) return;
     const sanitizedValue = sanitizePhoneDigits(value);
     handlePersonalInfoChange("phone", sanitizedValue);
+    // A pending phone switch must not replace the current account's display cache.
+    // The verified profile updates that cache only after successful persistence.
+    if (personalAccountPhone) return;
     setCachedPersonalInfo((current) => ({
       ...current,
       phone: sanitizedValue || current.phone,
