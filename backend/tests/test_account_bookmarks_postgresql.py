@@ -339,7 +339,10 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
                     text("SELECT account_id FROM accounts WHERE phone=:p AND status='active'"), {"p": self.a.phone}
                 )
                 self.assertNotEqual(self.new_generation, self.a.account_id)
-        self.assertEqual(before, self.retained())
+        # The original owner graph must remain; a new empty profile is expected.
+        after = self.retained()
+        for table in ("recommendation_history_runs", "recommendation_history_items", "recommendation_history_item_reasons"):
+            self.assertEqual(before[table], after[table])
 
     def test_archive_login_race_has_at_most_one_active_generation(self):
         from backend.app.accounts.identity import archive_account
