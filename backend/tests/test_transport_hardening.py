@@ -77,6 +77,19 @@ class TransportHardeningTests(unittest.TestCase):
         )
         self.assertIn(malformed.status_code, (400, 422))
 
+    def test_streamed_body_is_rejected_before_unbounded_allocation(self):
+        def pieces():
+            yield b"x" * (600 * 1024)
+            yield b"y" * (600 * 1024)
+
+        response = self.client.post(
+            "/api/v1/account-access/request",
+            headers={"Content-Type": "application/json"},
+            content=pieces(),
+        )
+        self.assertEqual(response.status_code, 413)
+        self.assertEqual(response.json()["error"]["code"], "invalid_request")
+
     def test_bearer_allowed_origin_does_not_bypass_account_checks(self):
         response = self.client.post(
             "/api/v1/account-access/logout",
