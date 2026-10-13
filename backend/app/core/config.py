@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 from functools import lru_cache
+from urllib.parse import urlsplit
 
 from pydantic import SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -58,7 +59,28 @@ class Settings(BaseSettings):
     def parse_origins(cls, value: object) -> object:
         """Allow an explicit comma-separated local value without permissive defaults."""
         if isinstance(value, str):
-            return tuple(item.strip() for item in value.split(",") if item.strip())
+            value = tuple(item.strip() for item in value.split(",") if item.strip())
+        if isinstance(value, (tuple, list)):
+            for origin in value:
+                if not isinstance(origin, str) or origin == "*":
+                    raise ValueError("CORS origins must be explicit HTTP(S) origins")
+                try:
+                    parsed = urlsplit(origin)
+                    valid = (
+                        parsed.scheme in {"http", "https"}
+                        and parsed.hostname is not None
+                        and parsed.username is None
+                        and parsed.password is None
+                        and parsed.port != 0
+                        and parsed.path in {"", "/"}
+                        and not parsed.query
+                        and not parsed.fragment
+                    )
+                except ValueError:
+                    valid = False
+                if not valid:
+                    raise ValueError("CORS origins must be explicit HTTP(S) origins")
+            return tuple(value)
         return value
 
     @property
