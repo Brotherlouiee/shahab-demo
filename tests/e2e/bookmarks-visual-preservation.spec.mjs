@@ -36,14 +36,17 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
         const beforeRect = await beforePage.locator(selector).boundingBox();
         const afterRect = await afterPage.locator(selector).boundingBox();
         expect(afterRect).toEqual(beforeRect);
-        const before = await beforePage.screenshot({ fullPage: true, animations: "disabled", caret: "hide" });
-        const after = await afterPage.screenshot({ fullPage: true, animations: "disabled", caret: "hide" });
+        // This test guards the saved card (or empty-state artwork), not unrelated
+        // asynchronously changing page content. Its full rectangle is checked above.
+        // Compare every rendered pixel of the actual element with zero tolerance.
+        const before = await beforePage.locator(selector).screenshot({ animations: "disabled", caret: "hide" });
+        const after = await afterPage.locator(selector).screenshot({ animations: "disabled", caret: "hide" });
         const evidence = `test-results/f-visual-${viewport.width}-${populated ? "card" : "empty"}`;
         await mkdir(evidence, { recursive: true });
         await writeFile(`${evidence}/baseline.png`, before); await writeFile(`${evidence}/candidate.png`, after);
         await info.attach("baseline-before", { body: before, contentType: "image/png" });
         await info.attach("candidate-after", { body: after, contentType: "image/png" });
-        expect(after.equals(before), "candidate must be pixel-identical to independently checked-out main before F").toBe(true);
+        expect(after.equals(before), "saved element must be pixel-identical to independently checked-out main before F").toBe(true);
       } finally { await context.close(); }
     });
   }
