@@ -1,5 +1,12 @@
 # Project current state
 
+## US-11.T04 — ثبت رخداد امن و پایش عملیاتی (۲۰۲۶-۱۰-۱۳)
+
+- activeTaskId: US-11.T04؛ پس از merge PR #119، main `d646a363`؛ شاخه `feat/us-11-t04-observability-incident`.
+- scope: redaction/allowlist لاگ، metrics تجمعی و alert داخلی بدون PII، incident response؛ هیچ endpoint مدیریتی/عمومی جدیدی ندارد.
+- [checkpoint](progress/us-11-t04.md) و [راهنمای رخداد](security/incident-response.md). شواهد CI روی SHA آخر در PR ثبت می‌شود؛ sink آنلاین/alert receiver، policy retention/ACL و reverse proxy canary طبق دفتر معوقات سرور **باز** هستند. سند تداوم طبق قاعدهٔ پایان داستان ثابت است.
+
+
 ## US-11.T03 — ممیزی امنیت کد و وابستگی (۲۰۲۶-۱۰-۱۳)
 
 - activeTaskId: US-11.T03؛ main پس از مرج PR #117، SHA `5a25d1e6`؛ شاخه `feat/us-11-t03-security-scanning`.

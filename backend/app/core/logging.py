@@ -6,7 +6,38 @@ import logging
 from collections.abc import Mapping
 from typing import Any
 
-SENSITIVE_FIELD_MARKERS = ("password", "secret", "token", "authorization", "cookie", "otp", "api_key")
+SENSITIVE_FIELD_MARKERS = (
+    "password",
+    "secret",
+    "token",
+    "authorization",
+    "cookie",
+    "otp",
+    "api_key",
+    "phone",
+    "mobile",
+    "name",
+    "income",
+    "salary",
+    "answer",
+    "questionnaire",
+    "gender",
+    "job",
+    "avatar",
+    "session",
+    "address",
+    "email",
+    "reason",
+    "payload",
+    "body",
+    "query",
+    "url",
+    "header",
+    "trace",
+    "financial",
+    "identity",
+    "actor",
+)
 REDACTED_VALUE = "[REDACTED]"
 
 
@@ -33,12 +64,36 @@ class RedactingFilter(logging.Filter):
     """Ensure mapping messages and mapping arguments never leak sensitive fields."""
 
     def filter(self, record: logging.LogRecord) -> bool:
-        if isinstance(record.msg, Mapping):
-            record.msg = redact_value(record.msg)
-        if isinstance(record.args, Mapping):
-            record.args = redact_value(record.args)
-        elif isinstance(record.args, tuple):
-            record.args = tuple(redact_value(item) for item in record.args)
+        allowed = {
+            "development_api_timing endpoint=%s status_code=%s duration_ms=%.1f",
+            "operational_alert signal=%s window_seconds=60 threshold=%d",
+        }
+        if not isinstance(record.msg, str) or record.msg not in allowed:
+            record.msg = "unstructured_log_redacted"
+            record.args = ()
+            return True
+        if not isinstance(record.args, tuple) or len(record.args) != 3:
+            record.msg = "unstructured_log_redacted"
+            record.args = ()
+            return True
+        first, second, third = record.args
+        if record.msg.startswith("development_api_timing"):
+            valid = (
+                isinstance(first, str)
+                and first in {"questionnaire_session_create", "questionnaire_answer_write", "recommendation"}
+                and isinstance(second, int)
+                and isinstance(third, (int, float))
+            )
+        else:
+            valid = (
+                isinstance(first, str)
+                and first in {"login_failure", "forbidden", "rate_limited", "server_error"}
+                and isinstance(second, int)
+                and isinstance(third, int)
+            )
+        if not valid:
+            record.msg = "unstructured_log_redacted"
+            record.args = ()
         return True
 
 
