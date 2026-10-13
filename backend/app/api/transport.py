@@ -70,10 +70,22 @@ async def transport_hardening_middleware(request: Request, call_next) -> Respons
                 response = reject(400, ErrorCode.INVALID_REQUEST, "Invalid request length.")
             elif declared > MAX_API_BODY_BYTES:
                 response = reject(413, ErrorCode.INVALID_REQUEST, "Request body is too large.")
-            elif len(await request.body()) > MAX_API_BODY_BYTES:
-                response = reject(413, ErrorCode.INVALID_REQUEST, "Request body is too large.")
             else:
-                response = await call_next(request)
+                # Bound memory while receiving chunked/unknown-length requests.
+                # Starlette replays _body to the downstream request in
+                # BaseHTTPMiddleware; no unbounded request.body() allocation.
+                body = bytearray()
+                oversized = False
+                async for chunk in request.stream():
+                    if len(body) + len(chunk) > MAX_API_BODY_BYTES:
+                        oversized = True
+                        break
+                    body.extend(chunk)
+                if oversized:
+                    response = reject(413, ErrorCode.INVALID_REQUEST, "Request body is too large.")
+                else:
+                    request._body = bytes(body)
+                    response = await call_next(request)
     else:
         response = await call_next(request)
 
