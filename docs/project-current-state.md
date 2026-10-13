@@ -1,5 +1,13 @@
 # Project current state
 
+## US-11.T02H — سخت‌سازی امنیت انتقال (۲۰۲۶-۱۰-۱۳)
+
+- activeTaskId: US-11.T02H؛ مبنا main `755ffdc4` بعد از مرج G در PR #116؛ branch `feat/us-11-t02h-transport-hardening`.
+- محدوده: API middleware security headers/no-store/Origin CSRF/body limit؛ CORS allowlist و negative tests؛ schema/score/data/UI unchanged.
+- پذیرش: چهار job CI روی head، آزمون منفی/مالکیت و محدودیت‌های host/proxy/provider ثبت شود؛ deployment آنلاین مستقل است.
+- [checkpoint](progress/us-11-t02h.md). سند تداوم تا پایان User Story ثابت؛ T03/T04/T05 مستقل و نیازمند gate هستند.
+
+
 ## US-11.T02G — بایگانی نسل حساب (۲۰۲۶-۱۰-۱۳)
 
 - activeTaskId: US-11.T02G؛ مبنا `f4a617c8` بعد از مرج PR #114؛ branch مستقل `feat/us-11-t02g-account-archive`.
