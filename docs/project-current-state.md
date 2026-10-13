@@ -2,6 +2,9 @@
 
 ## US-13.T01 — inventory و خط مبنای محافظت فرانت (۲۰۲۶-۱۰-۱۳)
 
+**تطابق مستقلِ جدید:** از artifact CI نسخهٔ پایه، ۹ تصویر اصلی/کاندید صفحهٔ home/about/login در ۳۹۰/۴۳۰/۱۴۴۰ **صفر تفاوت پیکسلی** داشتند؛ آزمون صریح صفر tolerance به collector افزوده شد. هنوز حالت‌های login OTP، فرم/پرسشنامه، result/compare/profile/history و تعامل منو خارج از این ۹ نمونه‌اند و باید پیش از extraction هر بخش گیت اختصاصی داشته باشند.
+
+
 **شاهد اجرایی افزوده‌شده:** یک workflow جداگانه فقط برای capture تصاویر مستقل home/about/login در ۳ viewport ایجاد شد. همراه snapshot، geometry assert می‌شود؛ برابری پیکسلی جامع هنوز بدون بررسی شواهد اعلام نمی‌شود. `playwright.config.mjs` فقط در حضور متغیر محیطی اختصاصی، سرور baseline جداگانه را اضافه می‌کند؛ اجرای عادی بدون آن unchanged است. هیچ JSX/CSS/asset/runtime/API تغییر نمی‌کند.
 
 
