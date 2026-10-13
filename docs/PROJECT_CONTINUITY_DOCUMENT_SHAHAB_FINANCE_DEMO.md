@@ -1,5 +1,78 @@
 # Project Continuity Document
 
+> **Document version:** 15.0
+> **Prepared:** 2026-10-13
+> **Verified main:** `f1f7184fb2b5192747b8422ba5e091cd95274f08`, merge of PR #123; GitHub Actions quality/security on that push succeeded.
+> **Next planned task:** `US-13.T01` (baseline and inventory only), **not started**.
+> **Nature:** documentation handoff, subordinate to `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md`, Golden Rules, `docs/TASK_EXECUTION_PROTOCOL.md`, `$safe-git-ide-collaboration` and approved ADRs.
+
+## 0E. Handoff v15 — verified merged state and owner-mandated frontend preservation (2026-10-13)
+
+**Verification addendum after PR #126 merge:** The test-raster stability fix [PR #126](https://github.com/Brotherlouiee/shahab-demo/pull/126) is merged into `main` at `e380482bd4f141a18098b510574eb4ffce685450`. Its pre-merge saved-loan visual browser gate passed three independent executions on the same SHA; this does not excuse verification of the current handoff PR #125 against updated main. PR #125 does not change frontend or browser test code. The SHA listed above as prepared baseline remains historical; for any new task use latest verified GitHub main. No story/task acceptance changes.
+
+
+**Precedence and integrity.** This newly updated section 0E supersedes older *status/sequence/next-task claims* in 0D/0C/0B/0A and other dated passages in this handoff. Older sections remain unchanged as history and **must not be used as current instructions**. The canonical guide, Golden Rules, decisions in repository and [ADR-0009](adr/0009-offline-refactor-before-release.md) govern any disagreement. **This continuity file does not change task authority, architecture, acceptance criteria or permission to merge/deploy.** The explicit owner request here permits this handoff update before beginning US-13; it is not a claim that US-13 has reached story completion.
+
+### A. Verified repository and merged PRs
+
+| Item | Verified state | Practical implication |
+| --- | --- | --- |
+| Repository/default branch | `Brotherlouiee/shahab-demo`; `main` = `f1f7184fb2b5192747b8422ba5e091cd95274f08` at preparation | Branch US-13.T01 from fresh main *after* checking current HEAD, uncommitted owner IDE changes, remote and approved source files. |
+| [PR #121](https://github.com/Brotherlouiee/shahab-demo/pull/121) — `US-11.T05` | **Merged**, merge commit `ecd5a11cf371b83d75dcd0db9e58452d089b77ee` | Bounded single-tick retention script, dry-run by default, tests and runbook; no online scheduler, encrypted live backup or restore completed. |
+| [PR #122](https://github.com/Brotherlouiee/shahab-demo/pull/122) — `US-12.T04A` planning | **Merged**, merge commit `a05747e43cefe78a266673d1c8f6840d78f200ce` | Backend+frontend Docker image build/scan/publish to Docker Hub is an explicit future task. **No Docker Hub account/credential or push is present.** |
+| [PR #124](https://github.com/Brotherlouiee/shahab-demo/pull/124) — recurring saved-loan visual CI | **Merged**, merge commit `f1a738767c1479433515565f9ea55e02df3a697f`; final PR quality/security checks green | Playwright now compares the saved-loan card or empty artwork **element pixels** on the independent pre-F baseline vs candidate, with browser rasterization isolated; bounding rectangles and zero-tolerance PNG identity remain enforced. No frontend CSS, markup, asset or content change was authorized. |
+| [PR #123](https://github.com/Brotherlouiee/shahab-demo/pull/123) — new story order | **Merged**, merge commit `f1f7184fb2b5192747b8422ba5e091cd95274f08`; PR checks and merged-main push Quality/Security successful | The mandatory story order is **US-13 first, US-12 afterwards**, with later online acceptance and production publication. Supersedes historical plan that placed US-13 after US-12. |
+| Current task | `US-13.T01` **up next, not begun**; this PR is exclusively handoff documentation | Do not claim an inventory, screenshot baseline or mechanical extraction has already been performed. |
+
+**CI evidence:** PR #124 [Quality Actions 38405199154](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38405199154) and [Security Actions 38405199035](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38405199035); PR #123 after raster fix [Quality Actions 38406436744](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38406436744), [Security Actions 38406435830](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38406435830). The merged-main quality and security workflows succeeded on `f1f7184f`. These prove CI status, **not online/deploy/backup/restore**.
+
+### B. Owner-approved binding execution order
+
+1. **US-13.T01 → pairs US-13.T02.nn / US-13.T03.nn → US-13.T04**: first characterize the complete frontend and preserve a verified, immutable baseline; then make one small mechanical React extraction PR at a time paired with its CSS transfer PR; finish cleanup only when unused code/declarations are proven. **No redesign, behavioral fix, feature, asset or backend change disguised as refactor.**
+2. **US-12 offline-capable work** only after US-13 acceptance: T01 documentation/ADR/API/ERD audit, T02 full test gates that the current permitted environment can actually support; preparing T03 preview checklist, T04 release/rollback notes and T04A backend+frontend image build/test/security workflow **without publishing to Docker Hub before account and approval**.
+3. **Reconcile and update the independent online/deferred register** in the canonical guide after the offline-capable work. Record evidence, owners, sequence and unfulfilled acceptance separately; leave every incomplete gate explicitly `blocked`, never `Done`.
+4. **When owner provisions infrastructure**: authorized HTTPS staging/PostgreSQL (`US-09.T081`), then live Netlify–API/E2E (`US-09.T07`), trusted operator identity, real ingress TLS/headers/CSRF/CORS/rate limits, DAST, log/alert sink verification, scheduler/cleanup/load and isolated encrypted backup/restore, plus SMS provider if approved; Docker Hub namespace/token/Secrets are a separate external dependency and do not require VPS merely to publish an image.
+5. **US-12.T03/T04/T04A online gates, then US-12.T05**: preview + smoke, tested rollback, **real** Docker Hub push of *both* signed-off image versions with tags/SHA/digests and pull evidence, then only with explicit owner approval production deployment and post-deploy checks. **Project release is not Done before these gates pass.**
+
+The order exception authorizes beginning safe offline work despite online blockers; it does **not** waive security, user story acceptance, branch isolation, the four quality jobs, separate security job, evidence, or owner-controlled merge/deploy.
+
+### C. Owner's non-negotiable frontend preservation contract — US-13
+
+**Background:** The owner has invested extensive time perfecting the frontend and expressly disallows any regression or requirement to redesign/redo it. The only outcome authorized is improved code ownership/modularity **with the same user-facing product and system behavior**.
+
+- **Pixel/UI parity:** identical texts, icons/SVG/logo/asset bytes, fonts, colors, borders/radius/shadows, spacing, sizing, alignment, responsive breakpoints, RTL, scroll, wrapping/truncation, overlays, loading visuals and every relevant pseudo-state across mobile/desktop. No arbitrary orange recoloring, new buttons/labels, copy edits, unapproved layout or styling cleanup.
+- **Interaction/state parity:** home, menus, OTP/login/logout and confirmation/cancel, profile/personal-info, questionnaire/back/next/resume, analysis, results and low-compatibility/needs-review, loan details, sorting/filtering, comparisons, bookmarks/saved loans, archived/hidden/history, navigation/back/forward/refresh/deep link, keyboard/focus, errors/empty states, skeleton/spinners and timing. Avoid unwanted remounts, hook-order changes, duplicate effects/network requests or loss of form selection.
+- **API/security/data parity:** preserve method/path/payload/status semantics, auth proof/cookies/ownership, dedupe/retry/cache/requests, all serving versions and loan datasets, scoring, storage/retention, PostgreSQL schema/migrations and archive generation. Refactor PRs must **never** reset the user's local DB/volumes or bring in speculative dependencies, routers or features.
+- **Baseline before touch:** `US-13.T01` is **documentation, inventory, synthetic characterization and baseline evidence ONLY**, using a fresh main SHA, independent pre-change worktree/checkout, identical Chromium/font/viewport/toolchain and mock fixtures. Record repository/asset/CSS hashes, routes × states × viewport matrix, computed geometry/styles where required, keyboard/network behavior, image/interaction baseline and reproducible commands. Verify the baseline against itself; a failing or uncovered baseline blocks extraction of that part. Never rewrite baselines to rationalize an unexpected diff.
+- **Small changes and exact pair order:** after T01, do T02.01 React extraction **without CSS movement**, then T03.01 CSS transfer under original cascade order; next T02.02 then T03.02, and so on. Each PR scoped to one page or smaller responsibility; preserve DOM wrappers/class names/component identity, existing component reuse, imports, props, state ownership and effect ordering. Do not combine extraction, CSS restructuring and unused-code removal in one PR.
+- **No hidden cleanup:** T04 may remove a duplicate or unused rule only with proof across all relevant routes/states and cascade consequences. Similar-looking selectors/overrides may be necessary. If uncertain, leave them intact with a backlog reason.
+- **Hard stop/rollback:** verify before/after images at zero real visual/geometry difference, behavior/state/network assertions, CI (Quality, PostgreSQL, Loan details browser, Profile OTP browser) and Security; include independent evidence, exact main and candidate SHA and revert plan. Any genuine difference blocks ready/merge; **never** loosen tolerance, add masks/skips, silently rebaseline, weaken auth/quality checks, modify styling to appease tests, or hide failures. A test-environment rendering artifact requires direct evidence and an independent narrowly scoped correction, as was done for PR #124.
+- **Owner Git/IDE protection:** inspect local/remote changes before branching and never overwrite uncommitted owner files; work in separate clean branches/worktrees, Persian commit messages, small PRs; **no direct main edits, automatic merges or deploys**. Document end-of-task checkpoints in `docs/project-current-state.md`; update this continuity handoff at **the end of an actual User Story** or when the owner expressly requests it.
+
+**First next step only after this docs PR merges:** execute `US-13.T01` as its own branch/PR, inventory and independently verify baselines. Do not touch frontend runtime/CSS for this document update.
+
+### D. Online/deferred work — still OPEN, not canceled
+
+| Work | Remaining real-world acceptance evidence |
+| --- | --- |
+| `US-09.T081`, `US-09.T07` | Reachable authorized HTTPS API and persistent PostgreSQL; connection to real frontend/Netlify, manual browser journeys/restart/ownership/restore checks. |
+| `US-10.T04`, `US-11.T02H` | Real operator authority/MFA/revocation/least privilege and ingress TLS/headers/CORS/CSRF/cookies/rate limits. |
+| `US-11.T03`, `T04`, `T05` | Authorized DAST, production-like log redaction and alert sink, retention/ACL decision, scheduled purge/backlog notification, load/latency, encrypted backup with approved keys and isolated restore rehearsal preserving archived/hidden lineage. |
+| `US-12.T03`, `T04`, `T04A`, `T05` | Online preview/real smoke and rollback; Docker Hub account and real two-image build/push/digests/pull; separately approved final production/post-deploy tests. |
+| SMS/OTP provider | Real approved SMS integration and credential/provider behavior not established; synthetic OTP remains only a fixture/local contract, not proof of real production delivery. |
+
+**Critical privacy/data invariants:** questionnaire raw answers retain their preapproved expiry (1800 seconds) and are purged without erasing linked durable non-raw evidence. Archived account generations are never silently revived by restore and must not lose hidden/history/bookmark/profile lineage. A successful GitHub Actions run is not evidence that these online gates were performed. The canonical **independent deferred-online table**, not this handoff, remains the task-level tracking source and will be reconciled after offline US-13/US-12 work.
+
+### E. Handoff checklist and explicit exclusions
+
+- Read the **entire canonical guide** and execution protocol before every task; check approved ADR-0009, US-13 preservation section, latest `docs/project-current-state.md`, changed files/branch SHA and user's IDE edits.
+- On start of T01, record the real current main and baseline; do not assume the SHAs here remain the latest once a PR is merged.
+- Prepare focused route/component/CSS/dependency/asset inventory and characterization, then independent screenshots and semantic network/interaction tests. Keep credentials and real personal data out of screenshots, logs, trace files and Git.
+- Use Persian commit messages, targeted tests before push, then full required CI on final SHA; report simply **from user perspective** and **from system perspective**, with links and verified limitations.
+- This v15 handoff contains **no code changes, no completed US-13 task, no new server, no Docker Hub secret, no production release or acceptance of any deferred test**. Existing historical text under sections 0D and earlier remains an archive and cannot override this current handoff.
+
+---
+
 > **Document version:** 14.0
 > **Prepared:** 2026-10-13
 > **Current-status scope:** User Story US-11 T01–T05 through the T05 implementation branch; authoritative runtime state remains `docs/project-current-state.md` and the canonical development guide. This document is a handoff, never authority to override the Golden Rules, ADRs, or task sequence.
