@@ -2,6 +2,7 @@
 
 import io
 import json
+import sys
 import unittest
 from contextlib import redirect_stdout
 from unittest.mock import patch
@@ -14,7 +15,7 @@ class RetentionTickTests(unittest.TestCase):
         output = io.StringIO()
 
         def fake_main(args):
-            print(json.dumps(payload))
+            print(json.dumps(payload), file=sys.stderr if cli_result == 1 else sys.stdout)
             return cli_result
 
         with (
