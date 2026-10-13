@@ -81,3 +81,22 @@ owner/generation قبل از reopen؛ audit/count بدون داده شخصی. re
 full/partial/empty/unlinked/active، visible snapshot readable، hidden/archive graph
 byte-equivalent، retry، failure atomic، دو اتصال held-lock و drain پس از آزادسازی،
 dry-run بدون write و counts شکست جزئی. CI موفق مجوز deploy/purge production نیست.
+
+
+## US-11.T05 — فراخوانی تک‌نوبتی برای زمان‌بند مجاز
+
+پس از آماده‌سازی محیط آزمایشی جدا و تأیید کتبی هدف، فقط مسئول عملیات می‌تواند یک اجرای **بدون حذف** برای دیدن backlog انجام دهد:
+
+```bash
+python -m scripts.retention_tick
+```
+
+برای اجرای **حذف واقعی فقط در محیطی که از قبل مجوز گرفته** (هیچ فرمانی دیتابیس هدف را خودش انتخاب نمی‌کند):
+
+```bash
+python -m scripts.retention_tick --apply --batch-size 100 --max-batches 10
+```
+
+هر فراخوانی دقیقاً یک tick است و حداکثر ۱۰ batch را پردازش می‌کند؛ این اسکریپت زمان‌بند خودکار، تضمین عدم اجرای هم‌پوشان چند میزبان یا watcher پیوسته نیست. کد خروج: `0` اجرا کامل یا dry-run، `2` پاک‌سازی انجام‌شده اما backlog باقی است (برای retry/alert)، `1` خطا (هشدار و بررسی علت در کانال امن). JSON فقط count غیرشخصی و نام event دارد؛ exception/credential چاپ نشود. عدم‌وجود pending در یک لحظه الزاماً سلامت دوره‌ای یا رعایت expiry ۳۰ دقیقه‌ای را ثابت نمی‌کند.
+
+در راه‌اندازی تولیدی، scheduler/leader-election، تناوب مبتنی بر SLA مصوب، service role محدود، آستانه backlog/last-success و اعلان واقعی را طبق [checkpoint T05](../progress/us-11-t05.md) پس از provision محیط آزمایشی و آزمون هم‌پوشانی تعیین کنید. رمزنگاری بک‌آپ با کلید و restore فقط در پایگاه‌دادهٔ مجزا انجام شود؛ هیچ دیتابیس یا volume متعلق به کاربر reset نشود.

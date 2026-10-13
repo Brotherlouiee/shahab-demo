@@ -1,5 +1,32 @@
 # Project Continuity Document
 
+> **Document version:** 14.0
+> **Prepared:** 2026-10-13
+> **Current-status scope:** User Story US-11 T01–T05 through the T05 implementation branch; authoritative runtime state remains `docs/project-current-state.md` and the canonical development guide. This document is a handoff, never authority to override the Golden Rules, ADRs, or task sequence.
+
+## 0D. Continuity after US-11.T05 implementation — handoff v14 (2026-10-13)
+
+**Priority of status:** This section supersedes dated *progress/status claims* in older 0C/0B/0A/0 and historical task queues, but does **not** supersede the binding canonical guide, Golden Rules, project ADRs, or the actual latest GitHub main state. Version 13 remains retained as historical baseline.
+
+**Verified baseline:** after PR #120 was merged, `main` at `7be7283d1711ffe7ea0c37708afa830f4e829971`. The T05 branch `feat/us-11-t05-retention-operations` is independent, not automatically merged or deployed. Its final SHA, CI run and PR result must be read from its corresponding GitHub PR; no unverified pass or merge status should be inferred from this handoff.
+
+**Delivered before T05:** US-11.T01 threat/privacy review; T02A–H account identity, proof, sessions, login, raw retention E, bookmarks/logout F, archived generation G and API transport controls H; T03 SAST/SCA/secret-scanning CI and opt-in staging security smoke tool; T04 restricted-schema operational logging, process-local metrics and incident runbook. The feature PRs to T04 were merged, but external TLS/proxy, real SMS and monitoring provider were not demonstrated by CI.
+
+**T05 branch scope:** one-shot wrapper `scripts/retention_tick.py` around already-proven `cleanup_questionnaire_sessions`, default read-only and explicit `--apply`; per-run count-only result and 0/1/2 semantics; bounded batches and error redaction; test contracts, runbook and checkpoint. Existing PostgreSQL retention tests remain the authority for row locking, purge atomicity and durable history/archived preservation. It does **not** configure a background scheduler, trigger purge on owner DB, change Compose startup, install backup keys, create encrypted backup archives, or carry out a restore.
+
+**Critical unfinished online/release gates (still OPEN):**
+1. US-09.T081 staging PostgreSQL/API with HTTPS and permitted Swagger/API; US-09.T07 Netlify real API E2E/restart and persistence; authorization/provider for real SMS remains separately unplanned and mock is local/test only.
+2. US-10.T04 live trusted-operator authority / least-privilege verification and US-11.T02H real ingress TLS/proxy/timeout/CORS/cookie verification.
+3. US-11.T03 **authorized staging DAST**, US-11.T04 actual log/proxy/trace redaction and on-call alert delivery, access control and undecided retention.
+4. US-11.T05 **schedule/last-success/backlog/error alert**, load/concurrency and throttling smoke, authenticated encrypted backup with real key and ACL/retention, isolated PostgreSQL restore rehearsal with restart and lineage/history/archived/hidden validation plus expired raw purge before reopen. No such server evidence has yet been furnished; **US-11 cannot be release-closed merely from successful CI**.
+5. US-12 preview/release/rollback/post-deploy gates remain future tasks and depend on closing all relevant acceptance blockers. The independent online-work register in the canonical guide lists environment/owner/evidence for each.
+
+**Preserved domain policy:** account archive is a new generation, not physical deletion; archive's history, hidden items, profile and bookmark lineage persist as approved; raw questionnaire answers expire after initial 1800 seconds and are purged, but linked non-raw evidence remains. Backups/restores may not re-enable archived accounts, revive access credentials or expose expired answers. Never reset owner's PostgreSQL volume or downgrade migrations to simplify acceptance. The policy for log/CI artifacts/audit access/retention needs explicit owner decision, never guessed.
+
+**Next work:** check T05 PR and final-head quality/security/PostgreSQL/browser outcomes, then merge only after review and authorization. Do not mark the whole US-11 story Done until independently recorded operational online evidence exists. Use `docs/progress/us-11-t05.md`, `docs/project-current-state.md` and the canonical guide's online-work table; project progression follows its binding order and does not silently waive staging gates.
+
+---
+
 > **Document version:** 13.0
 
 > **Project:** Shahab Finance Demo / `shahab-demo`  
