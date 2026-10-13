@@ -21,7 +21,7 @@ class RetentionTickTests(unittest.TestCase):
             patch("scripts.retention_tick.cleanup_main", side_effect=fake_main) as mocked,
             redirect_stdout(output),
         ):
-            status = tick(argv)
+            status = tick(argv if argv is not None else [])
         return status, json.loads(output.getvalue()), mocked
 
     def test_default_dry_run_never_passes_apply(self):
