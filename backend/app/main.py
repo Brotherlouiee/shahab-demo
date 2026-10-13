@@ -11,12 +11,14 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse, JSONResponse
 from redis import Redis
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.middleware.cors import CORSMiddleware
 
 from .accounts.access import AccountAccess, MockOtpProvider
 from .api.documentation import DocumentedFastAPI
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
 from .api.timing import development_timing_middleware
+from .api.transport import transport_hardening_middleware
 from .api.v1.router import router as api_v1_router
 from .core.config import AppEnvironment, Settings, get_settings
 from .core.dependencies import get_questionnaire_configuration
@@ -75,6 +77,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         openapi_url=f"{active_settings.api_v1_prefix}/openapi.json" if active_settings.docs_enabled else None,
         lifespan=database_lifespan,
     )
+    app.middleware("http")(transport_hardening_middleware)
     app.middleware("http")(correlation_id_middleware)
     app.middleware("http")(development_timing_middleware)
     app.add_exception_handler(ApiError, api_error_handler)
@@ -106,6 +109,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
 
     app.include_router(api_v1_router, prefix=active_settings.api_v1_prefix)
+    if active_settings.cors_allowed_origins:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=list(active_settings.cors_allowed_origins),
+            allow_credentials=True,
+            allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+            allow_headers=["Authorization", "Content-Type", "X-Shahab-Readiness-Token"],
+        )
     if active_settings.docs_enabled:
 
         @app.get("/docs", include_in_schema=False)
