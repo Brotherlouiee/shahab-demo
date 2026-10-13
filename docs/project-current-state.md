@@ -1,5 +1,12 @@
 # Project current state
 
+## US-11.T03 — ممیزی امنیت کد و وابستگی (۲۰۲۶-۱۰-۱۳)
+
+- activeTaskId: US-11.T03؛ main پس از مرج PR #117، SHA `5a25d1e6`؛ شاخه `feat/us-11-t03-security-scanning`.
+- SAST و SCA مستقل روی Python/Node و secret scan در CI؛ smoke خواندنی DAST تنها روی HTTPS مجاز، بدون اجرای مخفیانه روی میزبان ناشناس؛ [checkpoint](progress/us-11-t03.md).
+- چهار CI مصوب دست‌نخورده؛ اجرای آخر و یافته‌ها در PR بررسی می‌شوند. DAST آنلاین بدون host مجاز **اجرا نشده** و مانع release است؛ T04/T05 مستقل، تداوم در پایان user story.
+
+
 ## US-11.T02H — سخت‌سازی امنیت انتقال (۲۰۲۶-۱۰-۱۳)
 
 - activeTaskId: US-11.T02H؛ مبنا main `755ffdc4` بعد از مرج G در PR #116؛ branch `feat/us-11-t02h-transport-hardening`.
