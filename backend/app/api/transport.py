@@ -53,9 +53,14 @@ async def transport_hardening_middleware(request: Request, call_next) -> Respons
         origin = request.headers.get("origin")
         site = request.headers.get("sec-fetch-site")
         allowed = {_origin_tuple(value) for value in settings.cors_allowed_origins}
-        if (origin is not None and not (_same_origin(request, origin) or _origin_tuple(origin) in allowed)) or (
-            site == "cross-site" and origin is None
-        ):
+        bearer = request.headers.get("authorization", "").startswith("Bearer ")
+        # CORS permission alone is not CSRF consent: a cookie-authenticated
+        # mutation requires the same origin; an explicit bearer may use a
+        # separately approved origin.
+        origin_ok = origin is None or _same_origin(request, origin) or (
+            bearer and _origin_tuple(origin) in allowed
+        )
+        if (not origin_ok) or (site == "cross-site" and origin is None and not bearer):
             response = reject(403, ErrorCode.FORBIDDEN, "Request origin is not allowed.")
         else:
             length = request.headers.get("content-length")
