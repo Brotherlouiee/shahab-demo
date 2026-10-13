@@ -51,7 +51,7 @@ def tick(argv: list[str] | None = None) -> int:
         event = "retention_tick_backlog" if result == 2 else "retention_tick_complete"
         print(json.dumps({"event": event, "mode": "apply" if args.apply else "dry-run", **metrics}, sort_keys=True))
         return result
-    except (ValueError, TypeError, KeyError):
+    except Exception:  # Driver/runtime messages may embed credentials; never relay them.
         print(json.dumps({"event": "retention_tick_failed"}))
         return 1
 
