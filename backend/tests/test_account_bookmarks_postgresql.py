@@ -304,15 +304,15 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
                 {r[0].loan_product_version_id for r in first[:2]} & {r[0].loan_product_version_id for r in second}
             )
 
-
     def test_server_archive_revokes_every_credential_and_preserves_bookmarks(self):
         from backend.app.accounts.identity import archive_account
 
         self.prepare()
         before = self.retained()
-        with TestClient(create_app(Settings(database_url=str(fixture.DATABASE_URL)))) as first, TestClient(
-            create_app(Settings(database_url=str(fixture.DATABASE_URL)))
-        ) as second:
+        with (
+            TestClient(create_app(Settings(database_url=str(fixture.DATABASE_URL)))) as first,
+            TestClient(create_app(Settings(database_url=str(fixture.DATABASE_URL)))) as second,
+        ):
             original_one = self.login(first, self.a.phone)
             original_two = self.login(second, self.a.phone)
             path = f"/api/v1/bookmarks/{self.loan}"
@@ -325,11 +325,26 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
                 self.assertEqual(first.get("/api/v1/recommendation-history", headers=credentials).status_code, 401)
             with self.engine.connect() as connection:
                 self.assertEqual(
-                    connection.scalar(text("SELECT count(*) FROM account_access_sessions WHERE account_id=:a AND revoked_at IS NOT NULL"),
-                                      {"a": self.a.account_id}), 2
+                    connection.scalar(
+                        text(
+                            "SELECT count(*) FROM account_access_sessions WHERE account_id=:a AND revoked_at IS NOT NULL"
+                        ),
+                        {"a": self.a.account_id},
+                    ),
+                    2,
                 )
-                self.assertEqual(connection.scalar(text("SELECT count(*) FROM account_bookmarks WHERE account_id=:a"), {"a": self.a.account_id}), 1)
-                self.assertEqual(connection.scalar(text("SELECT status FROM accounts WHERE account_id=:a"), {"a": self.a.account_id}), "archived")
+                self.assertEqual(
+                    connection.scalar(
+                        text("SELECT count(*) FROM account_bookmarks WHERE account_id=:a"), {"a": self.a.account_id}
+                    ),
+                    1,
+                )
+                self.assertEqual(
+                    connection.scalar(
+                        text("SELECT status FROM accounts WHERE account_id=:a"), {"a": self.a.account_id}
+                    ),
+                    "archived",
+                )
             next_login = self.login(first, self.a.phone)
             self.assertEqual(first.get("/api/v1/bookmarks", headers=next_login).json()["items"], [])
             self.assertEqual(first.get("/api/v1/recommendation-history", headers=next_login).json()["items"], [])
@@ -341,7 +356,11 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
                 self.assertNotEqual(self.new_generation, self.a.account_id)
         # The original owner graph must remain; a new empty profile is expected.
         after = self.retained()
-        for table in ("recommendation_history_runs", "recommendation_history_items", "recommendation_history_item_reasons"):
+        for table in (
+            "recommendation_history_runs",
+            "recommendation_history_items",
+            "recommendation_history_item_reasons",
+        ):
             self.assertEqual(before[table], after[table])
 
     def test_archive_login_race_has_at_most_one_active_generation(self):
@@ -367,9 +386,10 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
             first.result(timeout=30)
             logged_in = second.result(timeout=30)
         with self.engine.connect() as connection:
-            self.assertEqual(connection.scalar(
-                text("SELECT status FROM accounts WHERE account_id=:a"), {"a": self.a.account_id}
-            ), "archived")
+            self.assertEqual(
+                connection.scalar(text("SELECT status FROM accounts WHERE account_id=:a"), {"a": self.a.account_id}),
+                "archived",
+            )
             active = connection.scalar(
                 text("SELECT account_id FROM accounts WHERE phone=:p AND status='active'"), {"p": self.a.phone}
             )
