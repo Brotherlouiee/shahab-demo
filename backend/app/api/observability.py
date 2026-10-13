@@ -92,9 +92,7 @@ async def operational_observability_middleware(request: Request, call_next) -> R
     try:
         response = await call_next(request)
     except Exception:
-        request.app.state.operational_metrics.record(
-            request.method, 500, (perf_counter() - started) * 1000
-        )
+        request.app.state.operational_metrics.record(request.method, 500, (perf_counter() - started) * 1000)
         raise
     if request.url.path.startswith("/api/v1/"):
         # Only exact static endpoints qualify as login failures. Never log paths.
