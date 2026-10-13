@@ -100,6 +100,7 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
 
     def setUp(self):
         from backend.app.infrastructure.db.models import Base
+
         self.engine = create_engine("sqlite://")
         Base.metadata.create_all(self.engine)
 
@@ -110,6 +111,7 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
         from sqlalchemy import select
         from backend.app.accounts.identity import archive_account
         from backend.app.infrastructure.db.models import Account, AccountAccessSession, UserProfile
+
         with Session(self.engine) as db:
             provider = MockOtpProvider()
             service = SqlAlchemyAccountAccess(provider, db)
@@ -128,7 +130,9 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
             self.assertEqual(old.status, "archived")
             self.assertIsNotNone(old.archived_at)
             self.assertEqual(db.get(UserProfile, old_id).first_name, "")
-            self.assertEqual(len(db.scalars(select(AccountAccessSession).where(AccountAccessSession.account_id == old_id)).all()), 2)
+            self.assertEqual(
+                len(db.scalars(select(AccountAccessSession).where(AccountAccessSession.account_id == old_id)).all()), 2
+            )
             for token in tokens:
                 with self.assertRaises(AccessFailure):
                     service.actor(token)
@@ -137,6 +141,7 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
             self.assertEqual(db.get(UserProfile, new_actor.account_id).first_name, "")
             self.assertEqual(db.get(Account, old_id).status, "archived")
             from backend.app.api.errors import ApiError
+
             with self.assertRaises(ApiError) as failure:
                 archive_account(old_id, db)
             self.assertEqual(failure.exception.status_code, 404)
