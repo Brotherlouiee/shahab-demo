@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Test/Documentation (US-13.T03.01): مستندسازی no-move برای قواعد درهم‌تنیدهٔ CSS صفحهٔ درباره ما با profile/saved/header و افزودن گیت مستقل تطابق computed style/geometry با baseline؛ هیچ انتقال CSS، redesign یا تغییر رفتار.
+
 - Refactor (US-13.T02.01): انتقال بی‌تغییرِ صفحه «درباره ما» به ماژول مستقل و تزریق هدر فعلی، بدون جابه‌جایی CSS، متن، آیکن، دارایی، DOM یا تغییر رفتار؛ آزمون مقایسهٔ ناوبری/تصویر در کنار خط مبنای صفرپیکسلی.
 
 - Test (US-13.T01): الزام برابری دقیق تمام پیکسل‌های تصاویر صفحه‌های خانه/درباره‌ما/ورود با نسخهٔ پذیرفته‌شدهٔ پیش از ریفکتور در ۹ ترکیب route×viewport، بدون mask/threshold و بدون تغییر UI.
