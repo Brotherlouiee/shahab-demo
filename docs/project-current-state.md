@@ -1,5 +1,13 @@
 # Project current state
 
+## US-13.T03.01 — تصمیم no-move برای CSS مشترک درباره ما (۲۰۲۶-۱۰-۱۳)
+
+- `activeTaskId: US-13.T03.01`؛ base `main=b8487f25f9aa8bb3b00145b36ed21b8f8f45f8dd` (مرج PR #128). `AboutPage` قبلاً در T02.01 استخراج شده؛ **در این تسک هیچ CSS/React/asset/entry/API/data تغییر نمی‌کند**.
+- `src/App.css:6111` از rule مشترک `.hp-account-page,.hp-about-page,.hp-saved-loans-page` و قواعد خاص About در همان خط تشکیل شده و `:6115` هدر مشترک چندین صفحه را استایل می‌کند؛ جابه‌جایی بی‌مدرک CSS می‌تواند cascade/profiles/history را تغییر دهد. طبق سند جامع و [checkpoint T03.01](progress/us-13-t03-01.md) این segmentها آگاهانه در `App.css` می‌مانند؛ **هیچ CSS module مستقل ساخته‌شده ادعا نمی‌شود**.
+- test-only gate در frozen US13: برابری computed styles، bounding rect، متن و شمار عناصر About/shared header در 390/430/1440 با baseline اصلی؛ به‌علاوه آزمون hard zero-pixel و ناوبری و همهٔ CI. **نتیجهٔ نهایی فقط از CI SHA نهایی قابل پذیرش است**. سند تداوم تا پایان User Story تغییر نمی‌کند.
+- پس از PR موفق و مرج مالک، `T02.02` طبق registry؛ اگر تفکیک واقعی CSS بعدها ایمن شد، task/PR مستقل و consumer graph لازم دارد.
+
+
 ## US-13.T02.01 — استخراج محدود صفحه درباره ما (۲۰۲۶-۱۰-۱۳)
 
 - `activeTaskId: US-13.T02.01`؛ مبنا `main=3d3eac0813808abb50f83eb017d0282e215ef52c`؛ فایل ثابت refactor `f5e50da0ea29b7d933a813736a2616169ee9b8f3`.
