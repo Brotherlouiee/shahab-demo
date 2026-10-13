@@ -49,7 +49,7 @@ class SafeObservabilityTests(unittest.TestCase):
     def test_process_local_metrics_do_not_hold_identifiers(self) -> None:
         logger = RecordingLogger()
         metrics = OperationalMetrics(logger)
-        for i in range(10):
+        for _ in range(10):
             metrics.record("GET", 403, 20.0, login_failure=True)
         snapshot = metrics.snapshot()
         self.assertEqual(snapshot["signals"]["forbidden"], 10)
