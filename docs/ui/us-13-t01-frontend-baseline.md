@@ -1,6 +1,8 @@
 # US-13.T01 — موجودی فرانت، خط مبنای تغییرناپذیر و رجیستری استخراج
 
-**ثبت:** ۲۰۲۶-۱۰-۱۳**گردآوری قابل‌تکرار T01:** `.github/workflows/us13-baseline.yml` نسخهٔ منجمد `f5e50da...` را جداگانه با Vite روی 4177 اجرا می‌کند؛ `tests/e2e/us13-baseline-inventory.spec.mjs` با Playwright از home/about/login در سه viewport مرجع و candidate تصویر و boundingBox ثبت می‌کند. این گردآوری **به‌خودی‌خود assertion برابری همه پیکسل‌ها نیست**؛ خروجی artifact بررسی انسانی/بعدی می‌خواهد و coverage سایر سطرها باز است. آزمون سخت‌گیرانهٔ موجود کارت saved-loan بدون تغییر باقی مانده.
+**ثبت:** ۲۰۲۶-۱۰-۱۳**گردآوری قابل‌تکرار T01:****شاهد بررسی‌شده روی اجرای CI پیشین:** [workflow 38418578360](https://github.com/Brotherlouiee/shahab-demo/actions/runs/38418578360)، artifact `us13-t01-original-vs-candidate` (ID 11825860358): هر ۹ جفت PNG (خانه/درباره‌ما/ورود × ۳۹۰/۴۳۰/۱۴۴۰) با script مستقلِ decode RGBA مقایسه شدند، اندازه یکسان و **صفر پیکسل متفاوت** داشتند؛ سپس assertion `Buffer.equals` با tolerance=0 به خود تست افزوده شد و قبولی روی SHA نهایی نیازمند CI تازه است. این خط مبنا فقط guest initial states این ۳ صفحه را پوشش می‌دهد، نه تعامل منو، OTP یا سایر صفحات.
+
+ `.github/workflows/us13-baseline.yml` نسخهٔ منجمد `f5e50da...` را جداگانه با Vite روی 4177 اجرا می‌کند؛ `tests/e2e/us13-baseline-inventory.spec.mjs` با Playwright از home/about/login در سه viewport مرجع و candidate تصویر و boundingBox ثبت می‌کند. این گردآوری **اکنون برای همین ۹ نمونه assertion برابری کامل پیکسل‌ها دارد**؛ خروجی artifact بررسی انسانی/بعدی می‌خواهد و coverage سایر سطرها باز است. آزمون سخت‌گیرانهٔ موجود کارت saved-loan بدون تغییر باقی مانده.
 
  · **وضعیت:** موجودی و طراحی قرارداد حفاظت ثبت شده؛ **گیت تصویر مستقلِ جامع برای تمام حالت‌ها هنوز کامل نیست؛ آغاز T02 تا تکمیل شاهد همان محدوده مجاز نیست**.
 
