@@ -1,5 +1,13 @@
 # Project current state
 
+## US-13.T02.01 — استخراج محدود صفحه درباره ما (۲۰۲۶-۱۰-۱۳)
+
+- `activeTaskId: US-13.T02.01`؛ مبنا `main=3d3eac0813808abb50f83eb017d0282e215ef52c`؛ فایل ثابت refactor `f5e50da0ea29b7d933a813736a2616169ee9b8f3`.
+- فقط تابع AboutPage به `src/features/about/AboutPage.jsx` منتقل شده و با prop `AccountHeader` به هدر موجود متصل است؛ **۱۱۳۸ کاراکتر بدنهٔ تابع پس از نرمال‌سازی export/signature عیناً برابر نسخهٔ قبل است**. `src/App.css` SHA ثابت `f0fe7d22bb5d1dc147f04ee5f6c769166ddaef41`؛ هیچ CSS/متن/آیکن/asset/فرم/API تغییر نکرده است.
+- baseline مستقل `US-13` برای خانه، ورود و درباره‌ما در سه viewport + characterization کلیک بازگشت و برند در دو viewport؛ روی SHA نهایی CI باید تأیید شود. [checkpoint](progress/us-13-t02-01.md).
+- **ادامه:** پس از سبزشدن CI و مرج صریح مالک، T03.01 فقط با نقشهٔ selector/cascade و بدون تغییر واقعی ظاهر انجام شود؛ نه T02 کامل/نه پایان User Story. سند تداوم تا پایان US-13 تغییر نمی‌کند.
+
+
 ## US-13.T01 — inventory و خط مبنای محافظت فرانت (۲۰۲۶-۱۰-۱۳)
 
 **تطابق مستقلِ جدید:** از artifact CI نسخهٔ پایه، ۹ تصویر اصلی/کاندید صفحهٔ home/about/login در ۳۹۰/۴۳۰/۱۴۴۰ **صفر تفاوت پیکسلی** داشتند؛ آزمون صریح صفر tolerance به collector افزوده شد. هنوز حالت‌های login OTP، فرم/پرسشنامه، result/compare/profile/history و تعامل منو خارج از این ۹ نمونه‌اند و باید پیش از extraction هر بخش گیت اختصاصی داشته باشند.
