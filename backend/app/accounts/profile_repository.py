@@ -59,6 +59,7 @@ def ensure_profile(phone: str, session: Session | None) -> AccountActor:
             # The partial unique index remains the final race arbiter.
             if db.get_bind().dialect.name == "postgresql":
                 from sqlalchemy import func
+
                 db.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(phone, 110211))))
             account = db.scalar(
                 select(Account)
