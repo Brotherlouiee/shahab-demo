@@ -55,12 +55,6 @@ def ensure_profile(phone: str, session: Session | None) -> AccountActor:
     phone = normalize_phone(phone)
     for attempt in range(2):
         try:
-            # Serialize against archive before locking the active account row.
-            # The partial unique index remains the final race arbiter.
-            if db.get_bind().dialect.name == "postgresql":
-                from sqlalchemy import func
-
-                db.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(phone, 110211))))
             account = db.scalar(
                 select(Account)
                 .where(Account.phone == phone, Account.status == "active")
