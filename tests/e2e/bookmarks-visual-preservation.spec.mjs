@@ -12,8 +12,20 @@ const profile = { phone: "09000000001", firstName: "آزمون", lastName: "کا
 for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
   for (const populated of [false, true]) {
     test(`preserves saved-loan ${populated ? "card" : "empty artwork"} pixels and geometry at ${viewport.width}`, async ({ baseURL }, info) => {
-      // Isolate the visual oracle from host GPU rasterization variability.
-      const browser = await chromium.launch({ args: ["--disable-gpu", "--disable-gpu-rasterization"] });
+      // Chromium can round anti-aliased border-radius edge colors differently
+      // across partial raster tiles and CPU-dependent Skia code paths.
+      // Force full tiles and the generic Skia path for BOTH independently
+      // checked-out versions; keep the screenshot pixel comparison exact.
+      const browser = await chromium.launch({
+        args: [
+          "--disable-gpu",
+          "--disable-gpu-rasterization",
+          "--disable-partial-raster",
+          "--disable-skia-runtime-opts",
+          "--force-color-profile=srgb",
+          "--disable-features=PaintHolding",
+        ],
+      });
       const context = await browser.newContext({ viewport });
       const page = await context.newPage();
       const items = populated ? [loan] : [];
