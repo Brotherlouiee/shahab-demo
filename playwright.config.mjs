@@ -21,5 +21,9 @@ export default defineConfig({
     command: `npm --prefix ${process.env.SHAHAB_BOOKMARK_BASELINE_DIR} run dev -- --host=127.0.0.1 --port=4175`,
     url: process.env.SHAHAB_BOOKMARK_BASELINE_URL,
     reuseExistingServer: false,
+  }] : []), ...(process.env.SHAHAB_US13_BASELINE_DIR ? [{
+    command: `npm --prefix ${process.env.SHAHAB_US13_BASELINE_DIR} run dev -- --host=127.0.0.1 --port=4177`,
+    url: process.env.SHAHAB_US13_BASELINE_URL,
+    reuseExistingServer: false,
   }] : [])],
 });
