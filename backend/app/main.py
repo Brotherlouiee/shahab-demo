@@ -17,8 +17,8 @@ from .accounts.access import AccountAccess, MockOtpProvider
 from .api.documentation import DocumentedFastAPI
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
-from .api.transport import transport_hardening_middleware
 from .api.timing import development_timing_middleware
+from .api.transport import transport_hardening_middleware
 from .api.v1.router import router as api_v1_router
 from .core.config import AppEnvironment, Settings, get_settings
 from .core.dependencies import get_questionnaire_configuration
