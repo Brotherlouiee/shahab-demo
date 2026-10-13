@@ -45,9 +45,7 @@ class RetentionTickTests(unittest.TestCase):
         self.assertIn("--apply", mocked.call_args.args[0])
 
     def test_failed_execution_never_prints_secret_or_traceback(self):
-        code, out, _ = self.invoke(
-            1, {"error": "private DSN password", "completed_batches": 1}
-        )
+        code, out, _ = self.invoke(1, {"error": "private DSN password", "completed_batches": 1})
         self.assertEqual(code, 1)
         self.assertEqual(out, {"event": "retention_tick_failed", "completed_batches": 1})
 
