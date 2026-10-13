@@ -327,7 +327,8 @@ class AccountBookmarksPostgreSqlTests(unittest.TestCase):
                 self.assertEqual(
                     connection.scalar(
                         text(
-                            "SELECT count(*) FROM account_access_sessions WHERE account_id=:a AND revoked_at IS NOT NULL"
+                            "SELECT count(*) FROM account_access_sessions "
+                            "WHERE account_id=:a AND revoked_at IS NOT NULL"
                         ),
                         {"a": self.a.account_id},
                     ),
