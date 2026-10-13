@@ -17,6 +17,7 @@ from .accounts.access import AccountAccess, MockOtpProvider
 from .api.documentation import DocumentedFastAPI
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
+from .api.observability import OperationalMetrics, operational_observability_middleware
 from .api.timing import development_timing_middleware
 from .api.transport import transport_hardening_middleware
 from .api.v1.router import router as api_v1_router
@@ -78,6 +79,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=database_lifespan,
     )
     app.middleware("http")(transport_hardening_middleware)
+    app.middleware("http")(operational_observability_middleware)
     app.middleware("http")(correlation_id_middleware)
     app.middleware("http")(development_timing_middleware)
     app.add_exception_handler(ApiError, api_error_handler)
@@ -147,6 +149,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # Internal use cases wire this deny-by-default boundary in US-10.T02.
     app.state.operations_authorizer = OperationsAuthorizer()
     app.state.logger = logger
+    app.state.operational_metrics = OperationalMetrics(logger)
     app.state.database_engine = None
     app.state.database_session_factory = None
     app.state.questionnaire_reference_catalogue = None
