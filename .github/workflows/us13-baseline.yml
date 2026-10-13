@@ -1,0 +1,40 @@
+name: US-13 frozen frontend baseline evidence
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture-baseline:
+    name: Independent original-vs-candidate route evidence
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      SHAHAB_US13_BASELINE_DIR: /tmp/shahab-us13-original
+      SHAHAB_US13_BASELINE_URL: http://127.0.0.1:4177
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Isolate immutable accepted frontend
+        run: |
+          git fetch --no-tags --depth=1 origin f5e50da0ea29b7d933a813736a2616169ee9b8f3
+          git worktree add --detach "$SHAHAB_US13_BASELINE_DIR" f5e50da0ea29b7d933a813736a2616169ee9b8f3
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_US13_BASELINE_DIR/node_modules"
+          test "$(git -C "$SHAHAB_US13_BASELINE_DIR" rev-parse HEAD)" = f5e50da0ea29b7d933a813736a2616169ee9b8f3
+      - name: Capture original and candidate without UI modifications
+        run: npx playwright test tests/e2e/us13-baseline-inventory.spec.mjs
+      - name: Preserve synthetic screenshots and geometry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us13-t01-original-vs-candidate
+          path: test-results/
+          retention-days: 30
