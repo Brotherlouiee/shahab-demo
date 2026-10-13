@@ -1,5 +1,12 @@
 # Project current state
 
+## US-11.T05 — نگهداری عملیاتی و ارزیابی بازیابی (۲۰۲۶-۱۰-۱۳)
+
+- activeTaskId: US-11.T05؛ مرج PR #120 و main `7be7283d` تأیید شد؛ شاخه `feat/us-11-t05-retention-operations`.
+- ابزار تک‌نوبتی scheduler-ready با dry-run پیش‌فرض و کد 2 برای backlog؛ آزمون‌های موجود PostgreSQL درباره expiry، history، hidden/archived و rollback حفظ شده‌اند. [checkpoint](progress/us-11-t05.md).
+- **باز:** scheduler و هشدار آنلاین، load/performance smoke روی staging، backup encryption و restore rehearsal روی DB ایزوله، تصمیم retention/ACL. کد و CI جایگزین شواهد این‌ها نیستند؛ هیچ DB owner تغییر نکرده. سند تداوم در پایان User Story بر اساس وضعیت صادقانه به‌روزرسانی می‌شود.
+
+
 ## US-11.T04 — ثبت رخداد امن و پایش عملیاتی (۲۰۲۶-۱۰-۱۳)
 
 - activeTaskId: US-11.T04؛ پس از merge PR #119، main `d646a363`؛ شاخه `feat/us-11-t04-observability-incident`.
