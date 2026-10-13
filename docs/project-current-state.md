@@ -2,10 +2,13 @@
 
 ## US-13.T01 — inventory و خط مبنای محافظت فرانت (۲۰۲۶-۱۰-۱۳)
 
+**شاهد اجرایی افزوده‌شده:** یک workflow جداگانه فقط برای capture تصاویر مستقل home/about/login در ۳ viewport ایجاد شد. همراه snapshot، geometry assert می‌شود؛ برابری پیکسلی جامع هنوز بدون بررسی شواهد اعلام نمی‌شود. `playwright.config.mjs` فقط در حضور متغیر محیطی اختصاصی، سرور baseline جداگانه را اضافه می‌کند؛ اجرای عادی بدون آن unchanged است. هیچ JSX/CSS/asset/runtime/API تغییر نمی‌کند.
+
+
 - `activeTaskId: US-13.T01`؛ پایهٔ ثابتِ پیش از ریفکتور `main=f5e50da0ea29b7d933a813736a2616169ee9b8f3` پس از مرج PR #125. **هیچ ریفکتور React/CSS آغاز نشده است.**
 - [مستند موجودی، ماتریس و رجیستری](ui/us-13-t01-frontend-baseline.md) و [checkpoint](progress/us-13-t01.md): نقشهٔ ۳۱۷۲ خط JSX و ۶۱۴۹ خط CSS، state/route و مالکیت/مصرف‌کننده‌های مشترک، پیشنهاد زوج‌های بسیار کوچک و تست لازم.
 - **صادقانه باز:** تصویر مستقل برای همهٔ مسیرها، حالت‌ها و viewportها و characterization network هنوز تمام نشده است. existing visual card CI فقط subset را اثبات می‌کند. هیچ T02/T03 بدون baseline معتبر همان قسمت و آزمون خطایابی قابل انجام نیست؛ T01 تا تحقق معیار baseline جامع نمی‌تواند Done کامل تلقی شود.
-- طبق استثنای صریح مالک این task فقط `docs/` و `CHANGELOG.md` را تغییر می‌دهد؛ سند تداوم v15 چون US-13 پایان نیافته، تغییر نمی‌کند. merge/deploy/main write/DB reset ممنوع و انجام نشده است.
+- طبق استثنای صریح مالک این task فقط مستندات و ابزار اختصاصی browser-baseline/CI را تغییر می‌دهد؛ سند تداوم v15 چون US-13 پایان نیافته، تغییر نمی‌کند. merge/deploy/main write/DB reset ممنوع و انجام نشده است.
 
 
 ## تصمیم اجرایی جاری — US-13 پیش از US-12 (۲۰۲۶-۱۰-۱۳)
