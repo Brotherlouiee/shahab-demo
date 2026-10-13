@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-import io
 import logging
 import unittest
-from collections import Counter
 
 from fastapi.testclient import TestClient
 
