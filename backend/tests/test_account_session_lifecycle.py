@@ -134,9 +134,12 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
             self.assertEqual(
                 len(db.scalars(select(AccountAccessSession).where(AccountAccessSession.account_id == old_id)).all()), 2
             )
+            from backend.app.api.errors import ApiError
+
             for token in tokens:
-                with self.assertRaises(AccessFailure):
+                with self.assertRaises(ApiError) as denied:
                     service.actor(token)
+                self.assertEqual(denied.exception.status_code, 401)
             new_actor = ensure_profile("09000000001", db)
             self.assertNotEqual(new_actor.account_id, old_id)
             self.assertEqual(db.get(UserProfile, new_actor.account_id).first_name, "")
