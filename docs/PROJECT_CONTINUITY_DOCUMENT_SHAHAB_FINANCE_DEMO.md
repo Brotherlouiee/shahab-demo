@@ -8,6 +8,9 @@
 
 ## 0E. Handoff v15 — verified merged state and owner-mandated frontend preservation (2026-10-13)
 
+**Verification addendum after PR #126 merge:** The test-raster stability fix [PR #126](https://github.com/Brotherlouiee/shahab-demo/pull/126) is merged into `main` at `e380482bd4f141a18098b510574eb4ffce685450`. Its pre-merge saved-loan visual browser gate passed three independent executions on the same SHA; this does not excuse verification of the current handoff PR #125 against updated main. PR #125 does not change frontend or browser test code. The SHA listed above as prepared baseline remains historical; for any new task use latest verified GitHub main. No story/task acceptance changes.
+
+
 **Precedence and integrity.** This newly updated section 0E supersedes older *status/sequence/next-task claims* in 0D/0C/0B/0A and other dated passages in this handoff. Older sections remain unchanged as history and **must not be used as current instructions**. The canonical guide, Golden Rules, decisions in repository and [ADR-0009](adr/0009-offline-refactor-before-release.md) govern any disagreement. **This continuity file does not change task authority, architecture, acceptance criteria or permission to merge/deploy.** The explicit owner request here permits this handoff update before beginning US-13; it is not a claim that US-13 has reached story completion.
 
 ### A. Verified repository and merged PRs
