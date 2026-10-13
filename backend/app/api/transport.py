@@ -57,9 +57,7 @@ async def transport_hardening_middleware(request: Request, call_next) -> Respons
         # CORS permission alone is not CSRF consent: a cookie-authenticated
         # mutation requires the same origin; an explicit bearer may use a
         # separately approved origin.
-        origin_ok = origin is None or _same_origin(request, origin) or (
-            bearer and _origin_tuple(origin) in allowed
-        )
+        origin_ok = origin is None or _same_origin(request, origin) or (bearer and _origin_tuple(origin) in allowed)
         if (not origin_ok) or (site == "cross-site" and origin is None and not bearer):
             response = reject(403, ErrorCode.FORBIDDEN, "Request origin is not allowed.")
         else:
