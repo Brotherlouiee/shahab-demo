@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { expect, test } from "@playwright/test";
+import { chromium, expect, test } from "@playwright/test";
 import { installProfileApi } from "./fixtures/profile-api.mjs";
 
 const baselineUrl = process.env.SHAHAB_BOOKMARK_BASELINE_URL;
@@ -11,7 +11,9 @@ const profile = { phone: "09000000001", firstName: "آزمون", lastName: "کا
 
 for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
   for (const populated of [false, true]) {
-    test(`preserves saved-loan ${populated ? "card" : "empty artwork"} pixels and geometry at ${viewport.width}`, async ({ browser, baseURL }, info) => {
+    test(`preserves saved-loan ${populated ? "card" : "empty artwork"} pixels and geometry at ${viewport.width}`, async ({ baseURL }, info) => {
+      // Isolate the visual oracle from host GPU rasterization variability.
+      const browser = await chromium.launch({ args: ["--disable-gpu", "--disable-gpu-rasterization"] });
       const context = await browser.newContext({ viewport });
       const page = await context.newPage();
       const items = populated ? [loan] : [];
@@ -48,7 +50,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
         await info.attach("baseline-before", { body: before.pixels, contentType: "image/png" });
         await info.attach("candidate-after", { body: after.pixels, contentType: "image/png" });
         expect(after.pixels.equals(before.pixels), "saved element must be pixel-identical to independently checked-out main before F").toBe(true);
-      } finally { await context.close(); }
+      } finally { await context.close(); await browser.close(); }
     });
   }
 }
