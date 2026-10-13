@@ -29,17 +29,19 @@ class SafeObservabilityTests(unittest.TestCase):
             self.assertTrue(is_sensitive_field(name))
         redactor = RedactingFilter()
         for secret in privacy_canaries:
-            record = logging.LogRecord(
-                "shahab", logging.INFO, __file__, 1, "unsafe: %s", (secret,), None
-            )
+            record = logging.LogRecord("shahab", logging.INFO, __file__, 1, "unsafe: %s", (secret,), None)
             self.assertTrue(redactor.filter(record))
             self.assertNotIn(secret, record.getMessage())
             self.assertEqual(record.getMessage(), "unstructured_log_redacted")
         for secret in privacy_canaries:
             record = logging.LogRecord(
-                "shahab", logging.INFO, __file__, 1,
+                "shahab",
+                logging.INFO,
+                __file__,
+                1,
                 "development_api_timing endpoint=%s status_code=%s duration_ms=%.1f",
-                (secret, 401, 2.0), None
+                (secret, 401, 2.0),
+                None,
             )
             redactor.filter(record)
             self.assertEqual(record.getMessage(), "unstructured_log_redacted")
