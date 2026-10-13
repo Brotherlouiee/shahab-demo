@@ -33,7 +33,7 @@ jobs:
       - name: SAST — fail on medium/high-confidence high-severity findings
         run: python -m bandit -q -r backend/app scripts -ll -ii
       - name: Python SCA — reject known vulnerable installed dependencies
-        run: python -m pip_audit --disable-pip --progress-spinner off
+        run: python -m pip_audit --progress-spinner off
       - name: Node SCA — reject high/critical advisories, including dev dependencies
         run: npm audit --audit-level=high
       - name: Existing repository secret scan
