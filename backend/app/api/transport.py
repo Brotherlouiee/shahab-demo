@@ -32,7 +32,7 @@ def _origin_tuple(value: str) -> tuple[str, str, int] | None:
 
 
 def _same_origin(request: Request, origin: str) -> bool:
-    return _origin_tuple(origin) == _origin_tuple(str(request.base_url).rstrip("/"))
+    return _origin_tuple(origin) == _origin_tuple(f"{request.url.scheme}://{request.url.netloc}")
 
 
 async def transport_hardening_middleware(request: Request, call_next) -> Response:  # type: ignore[no-untyped-def]
