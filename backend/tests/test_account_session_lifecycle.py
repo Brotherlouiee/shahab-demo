@@ -109,6 +109,7 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
 
     def test_archive_revokes_all_credentials_and_new_generation_is_empty(self):
         from sqlalchemy import select
+
         from backend.app.accounts.identity import archive_account
         from backend.app.infrastructure.db.models import Account, AccountAccessSession, UserProfile
 
