@@ -41,12 +41,19 @@ def tick(argv: list[str] | None = None) -> int:
         source = output.getvalue() if result in (0, 2) else errors.getvalue()
         payload = json.loads(source)
         permitted = (
-            "completed_batches", "processed_sessions", "deleted_answers",
-            "deleted_sessions", "retained_sessions", "pending_sessions", "pending_answers",
+            "completed_batches",
+            "processed_sessions",
+            "deleted_answers",
+            "deleted_sessions",
+            "retained_sessions",
+            "pending_sessions",
+            "pending_answers",
         )
         metrics = {name: value for name in permitted if isinstance((value := payload.get(name)), int)}
         if result not in (0, 2):
-            print(json.dumps({"event": "retention_tick_failed", "completed_batches": metrics.get("completed_batches", 0)}))
+            print(
+                json.dumps({"event": "retention_tick_failed", "completed_batches": metrics.get("completed_batches", 0)})
+            )
             return 1
         event = "retention_tick_backlog" if result == 2 else "retention_tick_complete"
         print(json.dumps({"event": event, "mode": "apply" if args.apply else "dry-run", **metrics}, sort_keys=True))
