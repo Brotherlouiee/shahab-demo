@@ -36,3 +36,44 @@ def require_active_account(account_id: UUID, session: Session | None) -> Account
     if account is None:
         raise ApiError(status_code=401, code=ErrorCode.UNAUTHORIZED, message="Account access could not be completed.")
     return AccountActor(account.account_id, account.phone)
+
+
+def archive_account(account_id: UUID, session: Session | None) -> None:
+    """Internal use case only: archive one generation and revoke every credential atomically.
+
+    Acquire the account row before session rows, matching readers' lock order.
+    Concurrent authenticated requests either finish before archival commits or
+    revalidate the archived identity and fail closed. No customer HTTP route exists.
+    Existing profile, history, bookmarks and evidence are retained untouched.
+    """
+    from datetime import UTC, datetime
+
+    from sqlalchemy import func, update
+    from sqlalchemy.exc import SQLAlchemyError
+
+    from backend.app.infrastructure.db.models import AccountAccessSession
+
+    if session is None:
+        raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account service unavailable.")
+    try:
+        account = session.scalar(
+            select(Account).where(Account.account_id == account_id).with_for_update().execution_options(populate_existing=True)
+        )
+        if account is None or account.status != "active":
+            raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Account not found.")
+        now = session.scalar(select(func.clock_timestamp())) if session.get_bind().dialect.name == "postgresql" else datetime.now(UTC)
+        account.status = "archived"
+        account.archived_at = max(now, account.created_at.replace(tzinfo=UTC) if account.created_at.tzinfo is None else account.created_at)
+        session.flush()
+        session.execute(
+            update(AccountAccessSession)
+            .where(AccountAccessSession.account_id == account_id, AccountAccessSession.revoked_at.is_(None))
+            .values(revoked_at=account.archived_at)
+        )
+        session.commit()
+    except ApiError:
+        session.rollback()
+        raise
+    except SQLAlchemyError:
+        session.rollback()
+        raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account archival failed.") from None
