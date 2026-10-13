@@ -42,9 +42,7 @@ class TransportHardeningTests(unittest.TestCase):
             self.assertEqual(response.json()["error"]["code"], "forbidden")
 
     def test_cross_site_fetch_metadata_without_origin_is_denied(self):
-        response = self.client.post(
-            "/api/v1/account-access/logout", headers={"Sec-Fetch-Site": "cross-site"}
-        )
+        response = self.client.post("/api/v1/account-access/logout", headers={"Sec-Fetch-Site": "cross-site"})
         self.assertEqual(response.status_code, 403)
 
     def test_cors_preflight_denies_unknown_and_limits_methods(self):
