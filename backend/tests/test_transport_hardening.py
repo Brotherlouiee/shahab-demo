@@ -45,6 +45,11 @@ class TransportHardeningTests(unittest.TestCase):
         response = self.client.post("/api/v1/account-access/logout", headers={"Sec-Fetch-Site": "cross-site"})
         self.assertEqual(response.status_code, 403)
 
+    def test_invalid_cors_configuration_is_rejected(self):
+        for origin in ("*", "null", "https://allowed.example/path", "https://user@allowed.example"):
+            with self.subTest(origin=origin), self.assertRaises(ValueError):
+                Settings(cors_allowed_origins=(origin,))
+
     def test_cors_preflight_denies_unknown_and_limits_methods(self):
         denied = self.client.options(
             "/api/v1/account-access/request",
