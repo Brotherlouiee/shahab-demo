@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Test (US-13.T01): الزام برابری دقیق تمام پیکسل‌های تصاویر صفحه‌های خانه/درباره‌ما/ورود با نسخهٔ پذیرفته‌شدهٔ پیش از ریفکتور در ۹ ترکیب route×viewport، بدون mask/threshold و بدون تغییر UI.
+
 - Test (US-13.T01): افزوده‌شدن workflow مستقلِ تصویرگیری از نسخهٔ منجمد پیش از ریفکتور و head برای خانه، درباره ما و ورود در ۳ viewport، بدون تغییر UI؛ assertion هندسه و artifact PNG برای ممیزی دقیق.
 
 - Docs (US-13.T01): موجودی ماژول‌های فعال فرانت، ماتریس مسیر و وضعیت و viewport، Git blob baseline ثابت، رجیستری پیشنهادی ریزگام‌های T02/T03 و شکاف‌های باقی‌ماندهٔ شواهد مستقل پیش از استخراج؛ بدون تغییر کد، CSS، asset یا رفتار محصول.
