@@ -91,3 +91,7 @@ verify/session علاوه بر phone/remaining، accountId opaque سرور بر�
 creator با prefix شهاب از path /api/v1 حذف؛ business rows unchanged. network/storage
 failure از پاک‌سازی حافظه جدا، pending revoke پیش از restore/login retry و stale
 response generation guard. [قرارداد/محدودیت‌ها](account-bookmarks.md).
+
+## US-11.T02G — بایگانی داخلی
+
+`archive_account(account_id, db)` فقط use case داخلی است و به route کاربر وصل نیست. قفل advisory وابسته به phone و سپس account row برای جلوگیری از رقابت با `ensure_profile` و بعد ابطال همه `account_access_sessions` همان `account_id` در همان transaction استفاده می‌شود. بایگانی terminal است؛ فعال‌سازی دوباره نسل قدیمی ممنوع و ورود مجدد با phone تأییدشده نسل تازه و profile خالی می‌سازد. سوابق/پروفایل/نشان‌شده‌ها حفظ و تنها owner آن نسل قابل دسترسی است که پس از archive غیرفعال می‌شود. آزمون PostgreSQL واقعی، failure rollback و deployment همچنان gate مستقل دارند؛ هیچ UI حذف حساب یا operator endpoint ارائه نشده است.
