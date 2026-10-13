@@ -53,6 +53,12 @@ def ensure_profile(phone: str, session: Session | None) -> AccountActor:
     """
     db = _database_session(session)
     phone = normalize_phone(phone)
+    # Serialize a verified login against an archive of this phone on PostgreSQL.
+    # The advisory lock is transaction-scoped; the active partial-unique index
+    # remains the arbiter for independent writers and mixed application versions.
+    if db.get_bind().dialect.name == "postgresql":
+        from sqlalchemy import func
+        db.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(phone, 110211))))
     for attempt in range(2):
         try:
             account = db.scalar(
