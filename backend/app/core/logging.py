@@ -53,13 +53,13 @@ class RedactingFilter(logging.Filter):
         first, second, third = record.args
         if record.msg.startswith("development_api_timing"):
             valid = (
-                first in {"questionnaire_session_create", "questionnaire_answer_write", "recommendation"}
+                isinstance(first, str) and first in {"questionnaire_session_create", "questionnaire_answer_write", "recommendation"}
                 and isinstance(second, int)
                 and isinstance(third, (int, float))
             )
         else:
             valid = (
-                first in {"login_failure", "forbidden", "rate_limited", "server_error"}
+                isinstance(first, str) and first in {"login_failure", "forbidden", "rate_limited", "server_error"}
                 and isinstance(second, int)
                 and isinstance(third, int)
             )
