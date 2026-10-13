@@ -104,3 +104,70 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
     }
   } finally { await browser.close(); }
 });
+
+
+test("T03.01: About and shared header computed CSS stays identical to frozen pre-refactor baseline", async ({ baseURL }, info) => {
+  const browser = await chromium.launch({
+    args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
+  });
+  const selectors = [
+    ".hp-about-page",
+    ".hp-about-page > img",
+    ".hp-about-page > p",
+    ".hp-account-header",
+    ".hp-account-header .hp-questionnaire-brand",
+    ".hp-account-header .hp-questionnaire-brand img",
+    ".hp-account-header .hp-questionnaire-icon-button",
+  ];
+  const properties = [
+    "display", "position", "box-sizing", "width", "height", "min-width", "min-height",
+    "max-width", "max-height", "padding", "margin", "border", "border-radius",
+    "background-color", "color", "font-family", "font-size", "font-weight",
+    "line-height", "letter-spacing", "text-align", "direction", "object-fit",
+    "flex", "align-items", "justify-content", "gap", "overflow",
+    "transform", "opacity", "visibility", "box-shadow", "z-index",
+  ];
+  try {
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 430, height: 932 },
+      { width: 1440, height: 900 },
+    ]) {
+      const context = await browser.newContext({ viewport, deviceScaleFactor: 1, locale: "fa-IR" });
+      try {
+        const page = await context.newPage();
+        await page.route(/https:\/\/fonts\.(googleapis|gstatic)\.com\//, (route) => route.abort());
+        const evidence = [];
+        for (const [label, origin] of [["baseline", reference], ["candidate", baseURL]]) {
+          await page.goto(`${origin}/about`);
+          await expect(page.locator(".hp-about-page")).toBeVisible();
+          await page.evaluate(() => document.fonts.ready);
+          const snapshot = await page.evaluate(({ selectors, properties }) =>
+            selectors.map((selector) => ({
+              selector,
+              elements: [...document.querySelectorAll(selector)].map((element) => {
+                const css = getComputedStyle(element);
+                const rect = element.getBoundingClientRect();
+                return {
+                  css: Object.fromEntries(properties.map((name) => [name, css.getPropertyValue(name)])),
+                  rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+                  text: element.innerText ?? element.getAttribute("alt") ?? "",
+                };
+              }),
+            })), { selectors, properties });
+          for (const group of snapshot) expect(group.elements.length, `missing ${group.selector}`).toBeGreaterThan(0);
+          await info.attach(`t03-01-${viewport.width}-${label}-computed-styles`, {
+            body: Buffer.from(JSON.stringify(snapshot, null, 2)),
+            contentType: "application/json",
+          });
+          evidence.push(snapshot);
+        }
+        expect(evidence[1], `T03.01 About CSS/geometry must equal frozen baseline at ${viewport.width}`).toEqual(evidence[0]);
+      } finally {
+        await context.close();
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+});
