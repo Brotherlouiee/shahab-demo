@@ -64,14 +64,17 @@ def archive_account(account_id: UUID, session: Session | None) -> None:
         if session.get_bind().dialect.name == "postgresql":
             session.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(phone, 110211))))
         account = session.scalar(
-            select(Account).where(Account.account_id == account_id)
-            .with_for_update().execution_options(populate_existing=True)
+            select(Account)
+            .where(Account.account_id == account_id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
         )
         if account is None or account.status != "active":
             raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Account not found.")
         now = (
             session.scalar(select(func.clock_timestamp()))
-            if session.get_bind().dialect.name == "postgresql" else datetime.now(UTC)
+            if session.get_bind().dialect.name == "postgresql"
+            else datetime.now(UTC)
         )
         account.status = "archived"
         created = account.created_at.replace(tzinfo=UTC) if account.created_at.tzinfo is None else account.created_at
@@ -88,4 +91,6 @@ def archive_account(account_id: UUID, session: Session | None) -> None:
         raise
     except SQLAlchemyError:
         session.rollback()
-        raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account archival failed.") from None
+        raise ApiError(
+            status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account archival failed."
+        ) from None
