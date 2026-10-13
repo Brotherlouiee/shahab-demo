@@ -71,6 +71,8 @@ def archive_account(account_id: UUID, session: Session | None) -> None:
             if session.get_bind().dialect.name == "postgresql"
             else datetime.now(UTC)
         )
+        if not isinstance(now, datetime):
+            raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account clock unavailable.")
         account.status = "archived"
         created = account.created_at.replace(tzinfo=UTC) if account.created_at.tzinfo is None else account.created_at
         account.archived_at = max(now, created)
