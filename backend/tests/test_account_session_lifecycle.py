@@ -93,3 +93,56 @@ class SqlSessionClockTests(unittest.TestCase):
         self.assertEqual(other.verified_phone(token), "09000000001")
         with self.assertRaises(AccessFailure):
             self.service.verify_code(challenge, "123456")
+
+
+class ArchiveAccountSqliteContractTests(unittest.TestCase):
+    """SQLite contract checks; concurrency and transactional locking require PostgreSQL."""
+
+    def setUp(self):
+        from backend.app.infrastructure.db.models import Base
+
+        self.engine = create_engine("sqlite://")
+        Base.metadata.create_all(self.engine)
+
+    def tearDown(self):
+        self.engine.dispose()
+
+    def test_archive_revokes_all_credentials_and_new_generation_is_empty(self):
+        from sqlalchemy import select
+
+        from backend.app.accounts.identity import archive_account
+        from backend.app.api.errors import ApiError
+        from backend.app.infrastructure.db.models import Account, AccountAccessSession, UserProfile
+
+        with Session(self.engine) as db:
+            provider = MockOtpProvider()
+            service = SqlAlchemyAccountAccess(provider, db)
+            tokens = []
+            for index in range(2):
+                challenge = service.request_code("09000000001", f"client{index}")
+                token = service.verify_code(challenge, "123456")
+                actor = ensure_profile(service.verified_phone(token), db)
+                service.bind_account(token, actor.account_id)
+                tokens.append(token)
+            old_id = actor.account_id
+            db.rollback()
+            archive_account(old_id, db)
+            db.expire_all()
+            old = db.get(Account, old_id)
+            self.assertEqual(old.status, "archived")
+            self.assertIsNotNone(old.archived_at)
+            self.assertEqual(db.get(UserProfile, old_id).first_name, "")
+            self.assertEqual(
+                len(db.scalars(select(AccountAccessSession).where(AccountAccessSession.account_id == old_id)).all()), 2
+            )
+            for token in tokens:
+                with self.assertRaises(ApiError) as denied:
+                    service.actor(token)
+                self.assertEqual(denied.exception.status_code, 401)
+            new_actor = ensure_profile("09000000001", db)
+            self.assertNotEqual(new_actor.account_id, old_id)
+            self.assertEqual(db.get(UserProfile, new_actor.account_id).first_name, "")
+            self.assertEqual(db.get(Account, old_id).status, "archived")
+            with self.assertRaises(ApiError) as failure:
+                archive_account(old_id, db)
+            self.assertEqual(failure.exception.status_code, 404)

@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- US-11.T02G: استفادهٔ داخلی برای بایگانی اتمیک حساب و ابطال تمامی نشست‌ها؛ ورود دوباره همان شماره، نسل مستقل می‌سازد. بدون UI یا endpoint حذف.
+
 ### Added
 
 - US-11.T02F: نشان‌شده‌های حساب‌محور در association نرمال account_bookmarks و API
