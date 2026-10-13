@@ -34,6 +34,7 @@ test("freeze initial user-visible routes without mutating product state", async 
           const output = `test-results/us13-t01/${item.name}-${viewport.width}`;
           await mkdir(output, { recursive: true });
           const captures = [];
+          const pictures = [];
           for (const [label, url] of [["baseline", reference], ["candidate", baseURL]]) {
             await page.goto(`${url}${item.path}`);
             const loc = page.locator(item.selector);
@@ -43,12 +44,16 @@ test("freeze initial user-visible routes without mutating product state", async 
             const screenshot = await page.screenshot({ fullPage: true, animations: "disabled", caret: "hide" });
             await writeFile(`${output}/${label}.png`, screenshot);
             await info.attach(`${item.name}-${viewport.width}-${label}`, { body: screenshot, contentType: "image/png" });
+            pictures.push(screenshot);
             captures.push({ label, path: item.path, width: viewport.width, height: viewport.height, rect, title: await page.title() });
           }
-          // Geometry is the immediate invariant. Whole-screen PNGs are evidence
-          // to review; strict per-component pixel tests are installed before
-          // the corresponding later extraction (not silently treated as passing).
+          // Full-page pixel and geometry assertions apply to these nine cases.
+          // Other routes and interactive states still require their own gates.
           expect(captures[1].rect).toEqual(captures[0].rect);
+          // All nine initial route/viewport combinations were independently
+          // compared pixel-by-pixel on the frozen pre-refactor SHA. Keep this
+          // exact zero-tolerance gate; never rebaseline to accommodate a diff.
+          expect(pictures[1].equals(pictures[0]), `US-13 frozen ${item.name} at ${viewport.width}: entire screen must be pixel-identical`).toBe(true);
           await writeFile(`${output}/geometry.json`, JSON.stringify({ frozenCommit: "f5e50da0ea29b7d933a813736a2616169ee9b8f3", captures }, null, 2));
         }
       } finally { await context.close(); }
