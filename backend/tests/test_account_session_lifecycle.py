@@ -136,5 +136,7 @@ class ArchiveAccountSqliteContractTests(unittest.TestCase):
             self.assertNotEqual(new_actor.account_id, old_id)
             self.assertEqual(db.get(UserProfile, new_actor.account_id).first_name, "")
             self.assertEqual(db.get(Account, old_id).status, "archived")
-            with self.assertRaises(Exception):
+            from backend.app.api.errors import ApiError
+            with self.assertRaises(ApiError) as failure:
                 archive_account(old_id, db)
+            self.assertEqual(failure.exception.status_code, 404)
