@@ -1,5 +1,13 @@
 # Project current state
 
+## تصمیم اجرایی جاری — US-13 پیش از US-12 (۲۰۲۶-۱۰-۱۳)
+
+- **activeTaskId: US-13.PLAN-ORDER-20261013**؛ تصمیم صریح مالک: پس از مرج این PR، `US-13.T01→T04` با baseline مستقل و حفظ کامل UI/behavior/CSS/state/network و چهار CI، **پیش از** `US-12.T01` انجام شود.
+- پس از ریفکتور، `US-12.T01/T02` و قسمت مستقل از سرور `T03/T04/T04A` روی SHA **پس از refactor** آماده/تست شوند؛ هیچ نشر Docker Hub بدون حساب/Secrets و مجوز، هیچ preview/post-deploy بدون سرور به‌صورت Done ثبت نشود.
+- سپس دفتر معوقات آنلاین و registry موجود با شواهد/مسئول/ترتیب/وضعیت تازه اصلاح شود؛ با فراهم‌شدن سرور، `US-09.T081 → T07`، سایر gateهای باز US-10/US-11/US-12 و در انتها `US-12.T05` انتشار/آزمون آنلاین تکمیل شوند.
+- مرجع: [ADR-0009](adr/0009-offline-refactor-before-release.md) و تصمیم الزام‌آور در [سند جامع](SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md). **PR این تصمیم فقط docs است**؛ هنوز T01 اجرا نشده؛ ادعای Done برای معوقات یا تغییر دیتابیس/ظاهر وجود ندارد. `main` تأییدشدهٔ پیش از branch: `a05747e43cefe78a266673d1c8f6840d78f200ce`. سند تداوم طبق قاعدهٔ پایان داستان untouched.
+
+
 ## US-11.T05 — نگهداری عملیاتی و ارزیابی بازیابی (۲۰۲۶-۱۰-۱۳)
 
 - activeTaskId: US-11.T05؛ مرج PR #120 و main `7be7283d` تأیید شد؛ شاخه `feat/us-11-t05-retention-operations`.
