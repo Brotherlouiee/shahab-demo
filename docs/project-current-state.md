@@ -1,5 +1,15 @@
 # Project current state
 
+## US-11.T02G — بایگانی نسل حساب (۲۰۲۶-۱۰-۱۳)
+
+- activeTaskId: US-11.T02G؛ مبنا `f4a617c8` بعد از مرج PR #114؛ branch مستقل `feat/us-11-t02g-account-archive`.
+- محدوده: use case داخلی بایگانی account_id با status/archived_at و revoke تمام credentialهای همان نسل در transaction واحد؛ هماهنگی advisory lock با ورود موفق/partial-unique active phone؛ حفظ profile/history/hidden/bookmarks.
+- مصرف عمومی: هیچ API/دکمه/صفحه حذف حساب اضافه نشد؛ caller/operator authorization برای فعال‌سازی آینده جدا لازم است، این تابع به request عمومی وصل نیست.
+- تست: قرارداد SQLite و دو آزمون PostgreSQL واقعیِ multi-device/re-login و race روی CI؛ نتیجه نهایی باید از SHA همان PR خوانده شود و قبل از آن «موفق» گزارش نشود. PostgreSQL موجود کاربر reset/migrate نشده.
+- سند تداوم طبق قاعده پایان US-11 بدون تغییر؛ PR #115 تداوم v14 هنوز باز و دارای failure تصویری سابق است. گام بعدی فقط پس از gate معتبر G، `US-11.T02H`.
+- [checkpoint](progress/us-11-t02g.md). US-13 همچنان مرحله آخر پس از US-12 است.
+
+
 ## US-11.T02A.1 — طراحی account identity/lifecycle (۲۰۲۶-۱۰-۱۲)
 
 - activeTaskId: US-11.T02A.1؛ base 2e63479ae5e1034a50e9386cc42e2c3846ed8c27 بعد از PR #107 مرج‌شده، branch مستقل docs/us-11-t02a1-account-contract.
