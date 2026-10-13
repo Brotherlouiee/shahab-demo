@@ -56,13 +56,8 @@ def archive_account(account_id: UUID, session: Session | None) -> None:
     if session is None:
         raise ApiError(status_code=503, code=ErrorCode.SERVICE_UNAVAILABLE, message="Account service unavailable.")
     try:
-        # The phone is immutable; acquire the same advisory lock as verified login
-        # before the account row lock to serialize archival with new login.
-        phone = session.scalar(select(Account.phone).where(Account.account_id == account_id))
-        if phone is None:
-            raise ApiError(status_code=404, code=ErrorCode.NOT_FOUND, message="Account not found.")
-        if session.get_bind().dialect.name == "postgresql":
-            session.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(phone, 110211))))
+        # The exact account generation is locked before touching session rows.
+        # The active-phone partial unique index arbitrates concurrent new logins.
         account = session.scalar(
             select(Account)
             .where(Account.account_id == account_id)
