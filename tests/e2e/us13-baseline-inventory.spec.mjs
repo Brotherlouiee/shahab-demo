@@ -38,6 +38,12 @@ test("freeze initial user-visible routes without mutating product state", async 
           const pictures = [];
           for (const [label, url] of [["baseline", reference], ["candidate", baseURL]]) {
             await page.goto(`${url}${item.path}`);
+            // The shared nav can appear before the initial route finishes loading.
+            // Compare both real phone forms, never a transient loading skeleton.
+            if (item.name === "login") {
+              await expect(page.locator(".hp-login-form")).toBeVisible();
+              await expect(page.locator(".hp-deferred-skeleton")).toBeHidden();
+            }
             const loc = page.locator(item.selector);
             await expect(loc).toBeVisible();
             await page.evaluate(() => document.fonts.ready);

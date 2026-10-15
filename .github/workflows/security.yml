@@ -23,6 +23,7 @@ jobs:
       run: bash scripts/ci/run-local-container.sh
       env:
         SHAHAB_CI_COMMANDS: |
+          python -m pip install --upgrade "pip>=26.2"
           echo '::group::Install project dependencies and pinned security tooling'
           python -m pip install -e ".[test,quality]"
           python -m pip install "bandit==1.8.6" "pip-audit==2.9.0"
