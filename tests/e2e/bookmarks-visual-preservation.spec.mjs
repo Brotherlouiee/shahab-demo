@@ -17,6 +17,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
       // Force full tiles and the generic Skia path for BOTH independently
       // checked-out versions; keep the screenshot pixel comparison exact.
       const browser = await chromium.launch({
+    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
         args: [
           "--disable-gpu",
           "--disable-gpu-rasterization",

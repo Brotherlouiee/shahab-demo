@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-- CI: انتقال شش job فعلی به اجراکنندهٔ محلی دارای برچسب shahab-local و کانتینرهای موقت Ubuntu 24.04؛ PostgreSQL آزمایشی بدون انتشار پورت میزبان، با حفظ چک‌ها، فرمان‌های آزمون و baselineهای مستقل.
+- CI: اجرای شش job فعلی با ایمیج آمادهٔ محلی shahab-ci:local-v1 و منع pull هنگام آزمون؛ cache دانلود npm/pip، PostgreSQL موقت بدون پورت میزبان، cleanup محدود و پنج آزمون wrapper. پشتیبانی از مسیر مرورگر آماده در تست‌های baseline و پروفایل با حفظ assertionها و همهٔ gateهای قبلی.
 
 - Test/Documentation (US-13.T03.01): مستندسازی no-move برای قواعد درهم‌تنیدهٔ CSS صفحهٔ درباره ما با profile/saved/header و افزودن گیت مستقل تطابق computed style/geometry با baseline؛ هیچ انتقال CSS، redesign یا تغییر رفتار.
 

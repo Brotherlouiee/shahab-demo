@@ -22,6 +22,7 @@ const viewports = [
 
 test("freeze initial user-visible routes without mutating product state", async ({ baseURL }, info) => {
   const browser = await chromium.launch({
+    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
     args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
   });
   try {
@@ -64,6 +65,7 @@ test("freeze initial user-visible routes without mutating product state", async 
 
 test("AboutPage header actions preserve route, visuals, and API boundary", async ({ baseURL }, info) => {
   const browser = await chromium.launch({
+    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
     args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
   });
   try {
@@ -108,6 +110,7 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
 
 test("T03.01: About and shared header computed CSS stays identical to frozen pre-refactor baseline", async ({ baseURL }, info) => {
   const browser = await chromium.launch({
+    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
     args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
   });
   const selectors = [
