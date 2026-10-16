@@ -103,7 +103,9 @@ def main() -> int:
     outcomes = []
     failed = False
     # Every module owns a different DB; each module's internal race tests remain unchanged.
-    with ThreadPoolExecutor(max_workers=2) as executor:
+    workers = min(4, os.cpu_count() or 1)
+    print(f"PG_CONFIG workers={workers} cpu_count={os.cpu_count()}", flush=True)
+    with ThreadPoolExecutor(max_workers=workers) as executor:
         pending = {
             executor.submit(run_suite, module, f"{prefix}_{index}", environment): module
             for index, module in enumerate(MODULES)

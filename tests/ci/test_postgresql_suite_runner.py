@@ -51,7 +51,7 @@ class PostgreSqlSuiteRunnerTests(unittest.TestCase):
                 self.assertFalse(runner.verify_output(status, output)[0])
         self.assertEqual(runner.verify_output(0, "Ran 3 tests in 1s\nOK"), (True, 3))
 
-    def test_scheduler_runs_every_suite_once_with_two_workers_and_propagates_failure(self):
+    def test_scheduler_caps_workers_runs_every_suite_once_and_propagates_failure(self):
         lock = threading.Lock()
         active = peak = 0
         seen = []
@@ -70,12 +70,13 @@ class PostgreSqlSuiteRunnerTests(unittest.TestCase):
         with (
             patch.dict(runner.os.environ, self.environment(), clear=True),
             patch.object(runner, "run_suite", task),
+            patch.object(runner.os, "cpu_count", return_value=64),
             contextlib.redirect_stdout(io.StringIO()),
         ):
             self.assertEqual(runner.main(), 1)
         self.assertEqual(sorted(module for module, _ in seen), sorted(runner.MODULES))
         self.assertEqual(len({name for _, name in seen}), len(runner.MODULES))
-        self.assertEqual(peak, 2)
+        self.assertEqual(peak, 4)
 
     def test_worker_cleanup_survives_failed_or_crashed_child_and_preserves_parent_database(self):
         for crashes in (False, True):
