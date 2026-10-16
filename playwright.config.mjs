@@ -8,6 +8,12 @@ const e2ePort = process.env.SHAHAB_E2E_PORT || "4173";
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: false,
+  // These two files exercise dev-only module delivery and an unbuilt HTML harness.
+  // The workflow runs them explicitly in dev; discovery verifies the complete partition.
+  ...(process.env.SHAHAB_E2E_BUILT === "1" ? { testIgnore: [
+    "**/initial-and-questionnaire-loading.spec.mjs",
+    "**/recommendation-result-journey.spec.mjs",
+  ] } : {}),
   // Keep browser memory bounded on the shared local runner.
   ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { workers: 1 } : {}),
   use: {
