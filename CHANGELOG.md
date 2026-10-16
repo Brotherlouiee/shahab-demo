@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- CI/browser: محدودکردن worker مرورگر محلی به یک، انتظار واقعی decode تصویر و آزادسازی کنترل‌شدهٔ document fallback؛ تفکیک مسیر/viewportهای مستقل با حفظ همهٔ assertionها و شرط صفرپیکسل. suite واقعی API روی خروجی build همان revision با FastAPI/PostgreSQL واقعی بررسی می‌شود.
+
 - CI: اجرای checkout و venv در tmpfs محدود خصوصی و دیتابیس fixture در tmpfs اختصاصی، با حفظ تنظیم‌های PostgreSQL و خروجی تصاویر/trace؛ تغییر آزمایشی برای سنجش کندی I/O، بدون ادعای رسیدن به سقف پنج دقیقه.
 
 - CI: ذخیرهٔ محیط نصب‌شدهٔ Python با کلید وابستگی/ایمیج/profile و عمر ۲۴ساعته، بازیابی کپی مستقل برای هر job، حفظ audit امنیتی و زمان‌سنجی جداگانهٔ ۹ مجموعه PostgreSQL؛ probe مستقل برای مقایسه cold/warm بدون اجرای خودکار gateهای کامل.
@@ -327,4 +329,3 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 
 - personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
 - Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
-
