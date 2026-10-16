@@ -103,7 +103,7 @@ def main() -> int:
     outcomes = []
     failed = False
     # Every module owns a different DB; each module's internal race tests remain unchanged.
-    workers = min(4, os.cpu_count() or 1)
+    workers = 2
     print(f"PG_CONFIG workers={workers} cpu_count={os.cpu_count()}", flush=True)
     with ThreadPoolExecutor(max_workers=workers) as executor:
         pending = {
@@ -133,8 +133,7 @@ def main() -> int:
             failed |= not outcome.succeeded
     total = sum(item.count for item in outcomes)
     print(
-        f"PG_TOTAL suites={len(outcomes)}/{len(MODULES)} tests={total} "
-        f"seconds={time.monotonic() - started:.3f}",
+        f"PG_TOTAL suites={len(outcomes)}/{len(MODULES)} tests={total} seconds={time.monotonic() - started:.3f}",
         flush=True,
     )
     return int(failed or len(outcomes) != len(MODULES))
