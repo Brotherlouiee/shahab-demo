@@ -36,6 +36,9 @@ network_created=false
 cleanup() {
   local result=$?
   trap - EXIT INT TERM
+  # On cancellation the container is still running; preserve available evidence
+  # before removing tmpfs. Normal exits also copy it from the bootstrap EXIT trap.
+  docker exec "$job_container" bash -c 'if [[ -d /workspace/test-results ]]; then cp -a /workspace/test-results/. /ci-evidence/; fi' >/dev/null 2>&1 || true
   docker rm -f -v "$job_container" >/dev/null 2>&1 || true
   if [[ -n "$database" ]]; then
     docker rm -f -v "$db_container" >/dev/null 2>&1 || true
@@ -52,13 +55,14 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 
 cache_dir="$RUNNER_TOOL_CACHE/shahab-ci-v1"
-mkdir -p "$cache_dir/npm" "$cache_dir/pip"
+mkdir -p "$cache_dir/npm" "$cache_dir/pip" "$GITHUB_WORKSPACE/test-results"
 docker network create --label "$owner_label" "$network" >/dev/null
 network_created=true
 if [[ -n "$database" ]]; then
   docker run --detach --rm --pull=never --name "$db_container" \
     --label "$owner_label" \
     --network "$network" --network-alias postgres \
+    --tmpfs /var/lib/postgresql/data:rw,nosuid,nodev,size=512m \
     --env "POSTGRES_DB=$database" --env POSTGRES_USER=shahab_test \
     --env POSTGRES_PASSWORD=test-password-not-a-secret \
     --health-cmd "pg_isready -U shahab_test -d $database" \
@@ -80,6 +84,22 @@ fi
 
 cat > "$task_dir/commands.sh" <<'BOOTSTRAP'
 set -euo pipefail
+started=$SECONDS
+# Docker Desktop shared mounts are only the input boundary. Execute the exact
+# checkout, including Git objects, on private in-memory filesystems.
+test -d /ci-source/.git
+tar -C /ci-source --exclude=./node_modules --exclude=./test-results \
+  --exclude=./dist --exclude=./.git/worktrees -cf - . | tar -C /workspace -xf -
+copy_evidence() {
+  local result=$?
+  trap - EXIT
+  if [[ -d /workspace/test-results ]]; then
+    cp -a /workspace/test-results/. /ci-evidence/ || result=1
+  fi
+  exit "$result"
+}
+trap copy_evidence EXIT
+echo "CI_STORAGE checkout_copy_seconds=$((SECONDS-started))"
 mkdir -p "$HOME"
 git config --global --add safe.directory "$GITHUB_WORKSPACE"
 git worktree prune
@@ -105,7 +125,10 @@ done
 docker run --rm --pull=never --init --name "$job_container" \
   --label "$owner_label" \
   --user "$(id -u):$(id -g)" --network "$network" --shm-size=1g \
-  --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+  --tmpfs "/workspace:rw,nosuid,nodev,size=512m,uid=$(id -u),gid=$(id -g),mode=0755" \
+  --tmpfs /tmp:rw,nosuid,nodev,size=1g,mode=1777 \
+  --mount "type=bind,source=$GITHUB_WORKSPACE,target=/ci-source,readonly" \
+  --mount "type=bind,source=$GITHUB_WORKSPACE/test-results,target=/ci-evidence" \
   --mount "type=bind,source=$task_dir/commands.sh,target=/ci-commands.sh,readonly" \
   --mount "type=bind,source=$cache_dir,target=/ci-cache" \
   --workdir /workspace --env CI=true --env GITHUB_WORKSPACE=/workspace \

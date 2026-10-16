@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- CI: اجرای checkout و venv در tmpfs محدود خصوصی و دیتابیس fixture در tmpfs اختصاصی، با حفظ تنظیم‌های PostgreSQL و خروجی تصاویر/trace؛ تغییر آزمایشی برای سنجش کندی I/O، بدون ادعای رسیدن به سقف پنج دقیقه.
+
 - CI: ذخیرهٔ محیط نصب‌شدهٔ Python با کلید وابستگی/ایمیج/profile و عمر ۲۴ساعته، بازیابی کپی مستقل برای هر job، حفظ audit امنیتی و زمان‌سنجی جداگانهٔ ۹ مجموعه PostgreSQL؛ probe مستقل برای مقایسه cold/warm بدون اجرای خودکار gateهای کامل.
 
 - CI: قطع‌پذیرشدن wrapper و پاک‌سازی محدود به run/attempt/job پس از لغو؛ افزودن probe محدود برای زمان نصب، import، تراکنش و یک آزمون migration، بدون اجرای خودکار gateها یا تغییر timeout و معیارهای قبلی.

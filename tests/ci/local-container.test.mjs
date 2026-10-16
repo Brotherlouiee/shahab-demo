@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn, spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -206,4 +206,46 @@ if (process.env.GITHUB_JOB === "cancel-probe") {
     assert.ok(calls[1].args.includes("180s"));
     assert.ok(calls[2].args.includes("120s"));
   } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("private checkout preserves source bytes and exports evidence even when verification fails", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "shahab-ci-storage-"));
+  const source = path.join(dir, "input");
+  const workspace = path.join(dir, "workspace");
+  const evidence = path.join(dir, "evidence");
+  for (const name of [source, workspace, evidence, path.join(source, "node_modules"), path.join(source, "test-results")]) {
+    mkdirSync(name, { recursive: true });
+  }
+  assert.equal(spawnSync("git", ["init", "--quiet", source]).status, 0);
+  writeFileSync(path.join(source, "source.txt"), "exact source bytes\n");
+  writeFileSync(path.join(source, "node_modules/stale"), "do not reuse dependencies");
+  writeFileSync(path.join(source, "test-results/stale"), "do not reuse results");
+  const script = readFileSync("scripts/ci/run-local-container.sh", "utf8");
+  const bootstrap = script.match(/<<'BOOTSTRAP'\n([\s\S]*?)\nBOOTSTRAP/)[1].split('if [[ -n "${SHAHAB_CI_PYTHON_PROFILE:-}" ]]')[0]
+    .replaceAll("/ci-source", source).replaceAll("/workspace", workspace).replaceAll("/ci-evidence", evidence);
+  try {
+    const result = spawnSync("bash", ["-c", bootstrap + '\nmkdir -p test-results\nprintf synthetic-evidence > test-results/result.txt\nexit 23\n'], {
+      cwd: workspace, encoding: "utf8", env: { ...process.env, HOME: path.join(dir, "home"), GITHUB_WORKSPACE: workspace },
+    });
+    assert.equal(result.status, 23, result.stderr);
+    assert.equal(readFileSync(path.join(workspace, "source.txt"), "utf8"), "exact source bytes\n");
+    assert.equal(readFileSync(path.join(evidence, "result.txt"), "utf8"), "synthetic-evidence");
+    assert.equal(readFileSync(path.join(source, "test-results/stale"), "utf8"), "do not reuse results");
+    assert.ok(!existsSync(path.join(workspace, "node_modules/stale")));
+    assert.ok(!existsSync(path.join(workspace, "test-results/stale")));
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("in-memory filesystems belong only to disposable job and database containers", () => {
+  const { result, calls } = run({ database: "shahab_test" });
+  assert.equal(result.status, 0, result.stderr);
+  const runs = calls.filter(args => args[0] === "run");
+  const job = runs.find(args => args.includes("shahab-ci:local-v1"));
+  const database = runs.find(args => args.includes("postgres:16-alpine"));
+  assert.ok(job.some(arg => arg.startsWith("/workspace:rw,nosuid,nodev,size=512m,uid=")));
+  assert.ok(job.includes("/tmp:rw,nosuid,nodev,size=1g,mode=1777"));
+  assert.ok(job.some(arg => arg.endsWith("target=/ci-source,readonly")));
+  assert.ok(job.some(arg => arg.endsWith("/test-results,target=/ci-evidence")));
+  assert.ok(database.includes("/var/lib/postgresql/data:rw,nosuid,nodev,size=512m"));
+  assert.ok(!database.includes("-c"));
 });

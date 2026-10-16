@@ -91,3 +91,21 @@ Checkpoint این نوبت: در خروجی مالک روی f5fba822، نصب ۷
 مالک خروج موفق probe نسخه bd54d7f1 و exit=0 را گزارش کرد: نصب project=41.134s، ساخت کامل snapshot=63.450s، بازیابی در container مستقل=17.738s (pip check=1.971s)، imports=0.411s و ۲۰ تراکنش=1.805s. migration test موجود با 22.149s موفق شد؛ upgrade head=15.015s. fsync/synchronous_commit/full_page_writes همچنان on بودند. عبور probe اولیه لغو پیش‌شرط ورود به این مراحل بود. این اندازه‌گیری شاهد cache واقعی است، نه نتیجه کل suite یا security profile.
 
 طبق قرار مالک، پس از موفقیت probe، ثبت این شواهد بدون تغییر کد اجرایی و بدون skip-ci منتشر می‌شود تا شش gate موجود روی revision نهایی اجرا شوند. cache helper و pyproject/image/profile ثابت‌اند؛ کلید cache project با تغییر مستندات عوض نمی‌شود. profile امنیتی ممکن است اولین بار نیاز به آماده‌سازی مستقل داشته باشد. PR تا موفقیت واقعی تمام gateها draft می‌ماند؛ merge/deploy انجام نمی‌شود. سقف gateها و assertionها تغییر نمی‌کنند.
+
+## timeout پروفایل و آزمون فرضیهٔ I/O — ۲۰۲۶-۱۰-۱۶
+
+معیار مالک حداکثر پنج دقیقه برای کل شش gate است؛ هنوز اثبات نشده است. برآورد ۲۰–۳۰ دقیقه معیار پذیرش نیست. شروع این بررسی: پس از گزارش مالک ساعت 12:46:44 Asia/Tehran؛ timestamp پایان بررسی/پیاده‌سازی محلی 2026-10-16T09:24:01Z UTC ثبت شد، تفکیک دقیق فعالیت/انتظار پیش از آن ثبت نشده است.
+
+شاهد اجرای f9ff720f: job پروفایل 116895000040 در ۳۰ ثانیهٔ هر test سه failure داشت (Swagger، navigation دستگاه دوم bookmarks، ورود مجدد OTP)، ۸ test موفق و مدت suite برابر ۶٫۷ دقیقه بود؛ سپس job cancelled شد. cache hit=15.704s در همین اجرا موفق بود و security job 116894999731 نیز موفق شد. بنابراین cache اصلاح نصب است، نه حل سرعت کل محیط.
+
+مقایسه با jobهای موفق commit 3d340f11 در run 38448672499: migration اولیه ۱ ثانیه، profile browser suite=75s، ۱۱/۱۱ موفق؛ PostgreSQL job حدود ۳:۴۵ و کل Quality حدود ۳:۵۰ بود. این سابقه ادعای ۱–۲ دقیقه برای تمام شش gate را تأیید نمی‌کند، اما افت فعلی را روشن می‌کند: migration اولیه فعلی حدود ۱۷ ثانیه و profile suite حدود ۶٫۷ دقیقه است. زمان مجموع صف و زمان هر job از هم جدا هستند.
+
+trace واقعی دریافت شد: Swagger DOM تمام ۱۹ operation و selector health را دارد؛ goto حدود ۱۳٫۲ ثانیه و resourceهای CDN حدود ۳٫۴–۳٫۶ ثانیه صرف کرده‌اند. هنوز شاهدی برای تغییر selector یا افزایش timeout نداریم. OTP trace نیز جایگزینی دکمه مهمان پس از restore نشست را نشان می‌دهد؛ assertion یا محصول برای عبور تغییر نمی‌کند. فرضیهٔ محدود فعلی: I/O فایل‌های bindشدهٔ Docker Desktop و دیسک DB موقت، با شواهد کندی migration/npm/import؛ CPU، RAM و شبکه نیز هنوز علت‌های ردشده نیستند.
+
+patch آزمایشی، نه ادعای علت قطعی:
+- /workspace یک tmpfs خصوصی با cap=512MiB و UID/GID همان runner است. checkout دقیق به‌همراه .git از /ci-source فقط‌خواندنی کپی می‌شود؛ node_modules، dist و test-results قدیمی و metadata worktreeهای خارجی وارد آن نمی‌شوند. مسیر /workspace عوض نشده؛ cache key و editable source قبلی معتبر می‌مانند.
+- /tmp مربوط به job tmpfs با cap=1GiB دارد؛ venv و فایل‌های موقت روی RAM بازسازی می‌شوند. PostgreSQL فقط DB آزمایشی wrapper و tmpfs اختصاصی data با cap=512MiB دارد. این capها رزرو پیشاپیش حافظه نیستند؛ مصرف واقعی باید روی لپ‌تاپ سنجیده شود. هیچ volume یا DB برنامه تغییر نمی‌کند.
+- fsync، synchronous_commit و full_page_writes خاموش نشده‌اند؛ transaction، ownership، migration و همه assertionها ثابت‌اند. tmpfs این DB صرفاً برای fixture یک job است و شاهد ماندگاری پس از خاموشی/container restart نیست؛ همانند قبل هیچ ادعای durability دادهٔ تولیدی از آن نمی‌شود.
+- پیش از خروج عادی یا شکست، EXIT trap تصاویر و trace را به bind اختصاصی /ci-evidence می‌فرستد؛ پیش از حذف container هنگام لغو نیز تلاش به copy شواهد موجود می‌شود. خاموشی اجباری می‌تواند evidence ناتمام داشته باشد؛ cleanup برچسب‌دار موجود حفظ شده است.
+- ۱۲ آزمون Node موفق؛ دو مورد جدید copy واقعی tar با حفظ byteهای source و جدایی ورودی/خروجی و انتقال evidence هنگام exit=23، و محدودبودن tmpfsها به containerهای آزمایشی را می‌سنجند. bash syntax و diff check موفق‌اند. ۹ آزمون cacheِ revision قبلی تحت تغییر نیستند و بی‌دلیل تکرار نشده‌اند.
+- در این محیط Docker نیست؛ cap حافظه، اثر واقعی tmpfs، artifact کامل در Docker، و کاهش زمان به پنج دقیقه هنوز باید روی لپ‌تاپ ثابت شوند. نسخه با [skip ci] منتشر می‌شود؛ تا probe موفق، شش gate جدید dispatch نمی‌شوند. هیچ timeout/test/selector/security check تغییر نکرده؛ اصلاح fixture یا runner موازی بدون شاهد به این patch اضافه نمی‌شود.
