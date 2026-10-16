@@ -82,8 +82,8 @@ class PostgreSqlSuiteRunnerTests(unittest.TestCase):
             connection = MagicMock()
             connection.__enter__.return_value = connection
             sql = SimpleNamespace(
-                SQL=lambda text: SimpleNamespace(format=lambda name: text.format(name)),
-                Identifier=lambda name: name,
+                SQL=lambda template: SimpleNamespace(format=template.format),
+                Identifier=str,
             )
             driver = SimpleNamespace(connect=MagicMock(return_value=connection), sql=sql)
             parent = self.environment()

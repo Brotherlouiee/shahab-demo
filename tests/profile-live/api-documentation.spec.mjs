@@ -2,6 +2,10 @@ import { test, expect } from "@playwright/test";
 
 // Every test uses the real FastAPI/PostgreSQL service and unmodified Swagger assets.
 // Independent operations have independent existing test budgets; no API fixtures.
+// Preserve action/network/screenshot traces; avoid repeated full Swagger DOM copies.
+// Playwright still writes the final error-context DOM when an assertion fails.
+test.use({ trace: { mode: "retain-on-failure", snapshots: false, screenshots: true, sources: true } });
+
 test.beforeEach(async ({ page }) => {
   await page.goto("http://127.0.0.1:8000/docs", { waitUntil: "domcontentloaded" });
 });
@@ -21,7 +25,12 @@ test("Swagger executes a real public health request", async ({ page }) => {
   const live = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/health/live"]') });
   await live.locator(".opblock-summary").click();
   await live.getByRole("button", { name: "Try it out", exact: true }).click();
-  await live.getByRole("button", { name: "Execute", exact: true }).click();
+  const [response] = await Promise.all([
+    page.waitForResponse(reply => new URL(reply.url()).pathname === "/api/v1/health/live" && reply.request().method() === "GET"),
+    live.getByRole("button", { name: "Execute", exact: true }).click(),
+  ]);
+  await response.finished();
+  expect(response.status()).toBe(200);
   await expect(live.locator(".live-responses-table tbody .response-col_status")).toHaveText(/^200(?:\s|$)/);
   await expect(live.locator(".live-responses-table")).toContainText('"ok"');
 });
@@ -30,7 +39,12 @@ test("Swagger rejects an unauthorized real profile request", async ({ page }) =>
   const profile = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/profiles/me"]') });
   await profile.locator(".opblock-summary").click();
   await profile.getByRole("button", { name: "Try it out", exact: true }).click();
-  await profile.getByRole("button", { name: "Execute", exact: true }).click();
+  const [response] = await Promise.all([
+    page.waitForResponse(reply => new URL(reply.url()).pathname === "/api/v1/profiles/me" && reply.request().method() === "GET"),
+    profile.getByRole("button", { name: "Execute", exact: true }).click(),
+  ]);
+  await response.finished();
+  expect(response.status()).toBe(401);
   await expect(profile.locator(".live-responses-table tbody .response-col_status")).toHaveText(/^401(?:\s|$)/);
   await expect(profile.locator(".live-responses-table")).toContainText("correlationId");
 });

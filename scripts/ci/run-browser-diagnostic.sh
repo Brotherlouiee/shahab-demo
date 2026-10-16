@@ -8,3 +8,7 @@ printf '%s\n' postgresql > /tmp/shahab-diagnostic-phase
 ruff check scripts/ci/run_postgresql_suites.py tests/ci/test_postgresql_suite_runner.py
 python -m unittest discover -s tests/ci -p test_postgresql_suite_runner.py
 python -m scripts.ci.run_postgresql_suites
+printf '%s\n' swagger > /tmp/shahab-diagnostic-phase
+python -m alembic upgrade head
+npm ci
+npx playwright test tests/profile-live/api-documentation.spec.mjs --config playwright.profile-live.config.mjs --repeat-each=2 --reporter=line --output=test-results/swagger
