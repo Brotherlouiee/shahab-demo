@@ -6,6 +6,10 @@ set -euo pipefail
 : "${RUNNER_TEMP:?Missing runner temporary directory}"
 : "${RUNNER_TOOL_CACHE:?Missing runner cache directory}"
 : "${SHAHAB_CI_COMMANDS:?Missing verification commands}"
+: "${GITHUB_RUN_ID:?Missing workflow run identity}"
+: "${GITHUB_RUN_ATTEMPT:?Missing workflow attempt identity}"
+: "${GITHUB_JOB:?Missing job identity}"
+owner_label="shahab.ci.owner=$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-$GITHUB_JOB"
 
 image=shahab-ci:local-v1
 database=${SHAHAB_CI_DATABASE:-}
@@ -44,10 +48,11 @@ trap 'exit 143' TERM
 
 cache_dir="$RUNNER_TOOL_CACHE/shahab-ci-v1"
 mkdir -p "$cache_dir/npm" "$cache_dir/pip"
-docker network create "$network" >/dev/null
+docker network create --label "$owner_label" "$network" >/dev/null
 network_created=true
 if [[ -n "$database" ]]; then
   docker run --detach --rm --pull=never --name "$db_container" \
+    --label "$owner_label" \
     --network "$network" --network-alias postgres \
     --env "POSTGRES_DB=$database" --env POSTGRES_USER=shahab_test \
     --env POSTGRES_PASSWORD=test-password-not-a-secret \
@@ -89,6 +94,7 @@ for key in SHAHAB_TEST_DATABASE_URL SHAHAB_DATABASE_URL SHAHAB_ENVIRONMENT \
 done
 
 docker run --rm --pull=never --init --name "$job_container" \
+  --label "$owner_label" \
   --user "$(id -u):$(id -g)" --network "$network" --shm-size=1g \
   --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
   --mount "type=bind,source=$task_dir/commands.sh,target=/ci-commands.sh,readonly" \
@@ -97,4 +103,8 @@ docker run --rm --pull=never --init --name "$job_container" \
   --env HOME=/tmp/shahab-ci-home --env npm_config_cache=/ci-cache/npm \
   --env PIP_CACHE_DIR=/ci-cache/pip --env PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
   --env SHAHAB_E2E_BROWSER_PATH=/opt/chrome/chrome-linux64/chrome \
-  "${env_args[@]}" "$image" bash /ci-commands.sh
+  "${env_args[@]}" "$image" bash /ci-commands.sh &
+docker_pid=$!
+# A trap can be deferred while Bash runs a foreground external command.
+# Waiting on a background child lets cancellation interrupt wait immediately.
+wait "$docker_pid"

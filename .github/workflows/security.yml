@@ -41,3 +41,6 @@ jobs:
           echo '::group::Existing repository secret scan'
           python scripts/scan_repository_secrets.py
           echo '::endgroup::'
+    - name: Clean resources owned by this job attempt
+      if: always()
+      run: bash scripts/ci/cleanup-local-container.sh

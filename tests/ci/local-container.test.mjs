@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -24,6 +24,7 @@ if (args[0] === "run" && args.includes("shahab-ci:local-v1")) process.exit(Numbe
       GITHUB_WORKSPACE: path.join(dir, "workspace"), RUNNER_TEMP: path.join(dir, "temp"),
       RUNNER_TOOL_CACHE: path.join(dir, "cache"), SHAHAB_CI_COMMANDS: "echo verification",
       SHAHAB_CI_DATABASE: database, MOCK_DOCKER_LOG: log,
+      GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "2", GITHUB_JOB: "verification",
       MOCK_MISSING: String(missing), MOCK_UNHEALTHY: String(unhealthy), MOCK_CHECK_EXIT: String(exitCode),
     },
   });
@@ -78,4 +79,77 @@ test("unhealthy database prevents verification and cleans its own resources", ()
   assert.equal(result.status, 1);
   assert.ok(!calls.some(args => args[0] === "run" && args.includes("shahab-ci:local-v1")));
   assert.equal(calls.filter(args => args[0] === "rm").length, 2);
+});
+
+test("TERM interrupts a running check and triggers cleanup before it finishes", { timeout: 10000 }, async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "shahab-ci-cancel-"));
+  for (const name of ["bin", "temp", "cache", "workspace"]) mkdirSync(path.join(dir, name));
+  const log = path.join(dir, "docker.jsonl");
+  const pidFile = path.join(dir, "check.pid");
+  writeFileSync(path.join(dir, "bin/docker"), `#!/usr/bin/env node
+const fs = require("node:fs");
+const args = process.argv.slice(2);
+fs.appendFileSync(process.env.MOCK_DOCKER_LOG, JSON.stringify(args) + "\\n");
+if (args[0] === "run") {
+  fs.writeFileSync(process.env.MOCK_CHILD_PID, String(process.pid));
+  setInterval(() => {}, 1000);
+}
+if (args[0] === "rm" && args.at(-1).endsWith("-checks")) {
+  try { process.kill(Number(fs.readFileSync(process.env.MOCK_CHILD_PID, "utf8")), "SIGTERM"); } catch {}
+}
+`, { mode: 0o755 });
+  const child = spawn("bash", ["scripts/ci/run-local-container.sh"], {
+    stdio: "ignore",
+    env: { ...process.env, PATH: path.join(dir, "bin") + path.delimiter + process.env.PATH,
+      GITHUB_WORKSPACE: path.join(dir, "workspace"), RUNNER_TEMP: path.join(dir, "temp"),
+      RUNNER_TOOL_CACHE: path.join(dir, "cache"), SHAHAB_CI_COMMANDS: "echo verification", SHAHAB_CI_DATABASE: "",
+      GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "2", GITHUB_JOB: "verification",
+      MOCK_DOCKER_LOG: log, MOCK_CHILD_PID: pidFile },
+  });
+  const exited = new Promise(resolve => child.on("exit", (code, signal) => resolve({ code, signal })));
+  let pid;
+  try {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      try { pid = Number(readFileSync(pidFile, "utf8")); break; } catch {}
+      await new Promise(resolve => setTimeout(resolve, 20));
+    }
+    assert.ok(pid, "verification process must be running before cancellation");
+    child.kill("SIGTERM");
+    const result = await Promise.race([exited, new Promise((_, reject) => {
+      const timer = setTimeout(() => reject(new Error("cancellation did not clean up promptly")), 3000);
+      timer.unref();
+    })]);
+    assert.equal(result.code, 143);
+    const calls = readFileSync(log, "utf8").trim().split("\n").map(JSON.parse);
+    assert.ok(calls.some(args => args[0] === "rm" && args.at(-1).endsWith("-checks")));
+    assert.ok(calls.some(args => args[0] === "network" && args[1] === "rm"));
+  } finally {
+    child.kill("SIGKILL");
+    if (pid) { try { process.kill(pid, "SIGKILL"); } catch {} }
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("fallback cleanup selects only the exact workflow attempt and job label", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "shahab-ci-recovery-"));
+  const log = path.join(dir, "docker.jsonl");
+  writeFileSync(path.join(dir, "docker"), `#!/usr/bin/env node
+const fs = require("node:fs");
+const args = process.argv.slice(2);
+fs.appendFileSync(process.env.MOCK_DOCKER_LOG, JSON.stringify(args) + "\\n");
+if (args[0] === "ps") console.log("111111111111\\n222222222222");
+if (args[0] === "network" && args[1] === "ls") console.log("333333333333");
+`, { mode: 0o755 });
+  try {
+    const result = spawnSync("bash", ["scripts/ci/cleanup-local-container.sh"], { encoding: "utf8",
+      env: { ...process.env, PATH: dir + path.delimiter + process.env.PATH, MOCK_DOCKER_LOG: log,
+        GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "2", GITHUB_JOB: "verification" } });
+    assert.equal(result.status, 0, result.stderr);
+    const calls = readFileSync(log, "utf8").trim().split("\n").map(JSON.parse);
+    for (const args of calls.filter(args => args.includes("--filter"))) {
+      assert.equal(args[args.indexOf("--filter") + 1], "label=shahab.ci.owner=123-2-verification");
+    }
+    assert.deepEqual(calls.find(args => args[0] === "rm"), ["rm", "-f", "-v", "111111111111", "222222222222"]);
+    assert.deepEqual(calls.at(-1), ["network", "rm", "333333333333"]);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });

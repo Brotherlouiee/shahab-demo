@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- CI: قطع‌پذیرشدن wrapper و پاک‌سازی محدود به run/attempt/job پس از لغو؛ افزودن probe محدود برای زمان نصب، import، تراکنش و یک آزمون migration، بدون اجرای خودکار gateها یا تغییر timeout و معیارهای قبلی.
+
 - CI: به‌روزرسانی pip محیط آزمون امنیتی به نسخهٔ دارای اصلاح advisoryها و انتظار برای فرم واقعی ورود پیش از مقایسهٔ تصویر، با حفظ gate صفرپیکسل و بدون تغییر محصول.
 
 - CI: اجرای شش job فعلی با ایمیج آمادهٔ محلی shahab-ci:local-v1 و منع pull هنگام آزمون؛ cache دانلود npm/pip، PostgreSQL موقت بدون پورت میزبان، cleanup محدود و پنج آزمون wrapper. پشتیبانی از مسیر مرورگر آماده در تست‌های baseline و پروفایل با حفظ assertionها و همهٔ gateهای قبلی.

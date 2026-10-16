@@ -29,6 +29,9 @@ jobs:
           echo '::endgroup::'
           node --test tests/ci/local-container.test.mjs
           npm run quality
+    - name: Clean resources owned by this job attempt
+      if: always()
+      run: bash scripts/ci/cleanup-local-container.sh
   postgresql-migrations:
     name: PostgreSQL migration verification
     runs-on:
@@ -71,6 +74,9 @@ jobs:
           python -m unittest backend.tests.test_operations_tool_postgresql
           echo '::endgroup::'
         SHAHAB_CI_DATABASE: shahab_test
+    - name: Clean resources owned by this job attempt
+      if: always()
+      run: bash scripts/ci/cleanup-local-container.sh
   loan-details-e2e:
     name: Loan details browser verification
     env:
@@ -95,6 +101,9 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
           echo '::endgroup::'
           npm run test:e2e
+    - name: Clean resources owned by this job attempt
+      if: always()
+      run: bash scripts/ci/cleanup-local-container.sh
     - name: Upload synthetic visual comparison evidence
       if: always()
       uses: actions/upload-artifact@v4
@@ -125,6 +134,9 @@ jobs:
           npm ci
           npx playwright test --config playwright.profile-live.config.mjs
         SHAHAB_CI_DATABASE: shahab_profile_test
+    - name: Clean resources owned by this job attempt
+      if: always()
+      run: bash scripts/ci/cleanup-local-container.sh
     - name: Upload real API browser evidence
       if: always()
       uses: actions/upload-artifact@v4
