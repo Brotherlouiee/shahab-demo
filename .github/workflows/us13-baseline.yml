@@ -30,7 +30,9 @@ jobs:
           test "$(git -C "$SHAHAB_US13_BASELINE_DIR" rev-parse HEAD)" = f5e50da0ea29b7d933a813736a2616169ee9b8f3
           echo '::endgroup::'
           echo '::group::Capture original and candidate without UI modifications'
-          npx playwright test tests/e2e/us13-baseline-inventory.spec.mjs
+          npm run build
+          npm --prefix "$SHAHAB_US13_BASELINE_DIR" run build
+          SHAHAB_E2E_BUILT=1 npx playwright test tests/e2e/us13-baseline-inventory.spec.mjs
           echo '::endgroup::'
     - name: Clean resources owned by this job attempt
       if: always()

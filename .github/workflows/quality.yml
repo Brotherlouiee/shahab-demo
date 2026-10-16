@@ -26,8 +26,9 @@ jobs:
           echo '::group::Verify generated API artifacts'
           python -m scripts.export_api_docs --check
           echo '::endgroup::'
-          node --test tests/ci/local-container.test.mjs
+          node --test tests/ci/local-container.test.mjs tests/ci/e2e-partition.test.mjs
           python -m unittest discover -s tests/ci -p test_python_environment_cache.py
+          python -m unittest discover -s tests/ci -p test_postgresql_suite_runner.py
           npm run quality
     - name: Clean resources owned by this job attempt
       if: always()
@@ -49,29 +50,7 @@ jobs:
       env:
         SHAHAB_CI_PYTHON_PROFILE: project
         SHAHAB_CI_COMMANDS: |
-          time python -m unittest backend.tests.test_postgresql_migrations
-          echo '::group::Verify account identity migration and generation isolation on PostgreSQL'
-          time python -m unittest backend.tests.test_account_identity_postgresql
-          echo '::endgroup::'
-          echo '::group::Verify durable questionnaire creator proof and safe legacy migration'
-          time python -m unittest backend.tests.test_questionnaire_proof_postgresql
-          echo '::endgroup::'
-          echo '::group::Verify durable one-hour account sessions and shared OTP races'
-          time python -m unittest backend.tests.test_account_access_postgresql
-          echo '::endgroup::'
-          echo '::group::Verify independent raw-answer retention and snapshot preservation'
-          time python -m unittest backend.tests.test_questionnaire_retention_postgresql
-          echo '::endgroup::'
-          echo '::group::Verify account bookmarks ownership, migration and transaction races'
-          time python -m unittest backend.tests.test_account_bookmarks_postgresql
-          echo '::endgroup::'
-          time python -m unittest backend.tests.test_t06_postgresql
-          echo '::group::Verify durable operations audit and transaction races'
-          time python -m unittest backend.tests.test_operations_postgresql
-          echo '::endgroup::'
-          echo '::group::Verify protected operations tool with least-privilege PostgreSQL'
-          time python -m unittest backend.tests.test_operations_tool_postgresql
-          echo '::endgroup::'
+          python -m scripts.ci.run_postgresql_suites
         SHAHAB_CI_DATABASE: shahab_test
     - name: Clean resources owned by this job attempt
       if: always()
@@ -99,7 +78,21 @@ jobs:
           git worktree add --detach "$SHAHAB_BOOKMARK_BASELINE_DIR" d4197e94b24da8cb91e277a7cb1d82be936bbd07
           ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
           echo '::endgroup::'
-          npm run test:e2e
+          npm run build
+          npm --prefix "$SHAHAB_BOOKMARK_BASELINE_DIR" run build
+          echo '::group::Verify every original browser test is assigned exactly once'
+          mkdir -p test-results
+          npx playwright test --list --reporter=json > test-results/e2e-original-list.json
+          SHAHAB_E2E_BUILT=1 npx playwright test --list --reporter=json > test-results/e2e-built-list.json
+          npx playwright test tests/e2e/initial-and-questionnaire-loading.spec.mjs tests/e2e/recommendation-result-journey.spec.mjs --list --reporter=json > test-results/e2e-development-list.json
+          node scripts/ci/verify_e2e_partition.mjs test-results/e2e-original-list.json test-results/e2e-built-list.json test-results/e2e-development-list.json
+          echo '::endgroup::'
+          echo '::group::Verify built application'
+          SHAHAB_E2E_BUILT=1 npx playwright test --reporter=line --output=test-results/built
+          echo '::endgroup::'
+          echo '::group::Verify dev-only loading and HTML harness'
+          env -u SHAHAB_BOOKMARK_BASELINE_DIR -u SHAHAB_BOOKMARK_BASELINE_URL npx playwright test tests/e2e/initial-and-questionnaire-loading.spec.mjs tests/e2e/recommendation-result-journey.spec.mjs --reporter=line --output=test-results/development
+          echo '::endgroup::'
     - name: Clean resources owned by this job attempt
       if: always()
       run: bash scripts/ci/cleanup-local-container.sh

@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 mkdir -p test-results
-python -u scripts/ci/record-ci-resources.py &
-metrics_pid=$!
-trap 'kill "$metrics_pid" 2>/dev/null || true; wait "$metrics_pid" || true' EXIT
-printf '%s\n' postgresql > /tmp/shahab-diagnostic-phase
+ruff format --check scripts/ci/run_postgresql_suites.py || { ruff format --diff scripts/ci/run_postgresql_suites.py; exit 1; }
 ruff check scripts/ci/run_postgresql_suites.py tests/ci/test_postgresql_suite_runner.py
+node --test tests/ci/local-container.test.mjs tests/ci/e2e-partition.test.mjs
 python -m unittest discover -s tests/ci -p test_postgresql_suite_runner.py
-python -m scripts.ci.run_postgresql_suites
+python scripts/scan_repository_secrets.py
