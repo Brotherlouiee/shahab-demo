@@ -1,9 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-// This suite already runs FastAPI with PostgreSQL. No HTTP route fixtures:
-// Try it out must send to the real API and retain the runtime authorization rules.
-test("Swagger lists every operation and executes real authorized-boundary requests", async ({ page }) => {
-  await page.goto("http://127.0.0.1:8000/docs");
+// Every test uses the real FastAPI/PostgreSQL service and unmodified Swagger assets.
+// Independent operations have independent existing test budgets; no API fixtures.
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://127.0.0.1:8000/docs", { waitUntil: "domcontentloaded" });
+});
+
+test("Swagger lists all operations and preserves account security declarations", async ({ page }) => {
   const schemaResponse = await page.request.get("http://127.0.0.1:8000/api/v1/openapi.json");
   expect(schemaResponse.ok()).toBe(true);
   const schema = await schemaResponse.json();
@@ -12,12 +15,18 @@ test("Swagger lists every operation and executes real authorized-boundary reques
   expect(count).toBe(19);
   for (const method of ["get", "put", "delete"]) expect(schema.paths[method === "get" ? "/api/v1/bookmarks" : "/api/v1/bookmarks/{loan_id}"][method].security).toEqual([{ AccountBearer: [] }, { AccountCookie: [] }]);
   await expect(page.locator(".opblock")).toHaveCount(count);
+});
+
+test("Swagger executes a real public health request", async ({ page }) => {
   const live = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/health/live"]') });
   await live.locator(".opblock-summary").click();
   await live.getByRole("button", { name: "Try it out", exact: true }).click();
   await live.getByRole("button", { name: "Execute", exact: true }).click();
   await expect(live.locator(".live-responses-table tbody .response-col_status")).toHaveText(/^200(?:\s|$)/);
   await expect(live.locator(".live-responses-table")).toContainText('"ok"');
+});
+
+test("Swagger rejects an unauthorized real profile request", async ({ page }) => {
   const profile = page.locator(".opblock").filter({ has: page.locator('.opblock-summary-path[data-path="/api/v1/profiles/me"]') });
   await profile.locator(".opblock-summary").click();
   await profile.getByRole("button", { name: "Try it out", exact: true }).click();
