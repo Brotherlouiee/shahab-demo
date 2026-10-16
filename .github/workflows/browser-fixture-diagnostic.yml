@@ -6,12 +6,13 @@ permissions:
   contents: read
 jobs:
   diagnose-browser:
-    name: Reproduce current browser failures with resource counters
+    name: Verify PostgreSQL suites in isolated worker databases
     runs-on: [self-hosted, Linux, X64, shahab-local]
     timeout-minutes: 10
     env:
       SHAHAB_ENVIRONMENT: local
       SHAHAB_API_DOCS_INCLUDE_OPERATIONS: 'true'
+      SHAHAB_TEST_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@postgres:5432/shahab_profile_test
       SHAHAB_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@postgres:5432/shahab_profile_test
     steps:
       - uses: actions/checkout@v4
