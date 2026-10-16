@@ -1,0 +1,33 @@
+name: Targeted browser fixture diagnosis
+'on':
+  push:
+    branches: [ci/browser-fixture-diagnostic-20261016-1023]
+permissions:
+  contents: read
+jobs:
+  diagnose-browser:
+    name: Reproduce failed browser cases with resource counters
+    runs-on: [self-hosted, Linux, X64, shahab-local]
+    timeout-minutes: 10
+    env:
+      SHAHAB_ENVIRONMENT: local
+      SHAHAB_API_DOCS_INCLUDE_OPERATIONS: 'true'
+      SHAHAB_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@postgres:5432/shahab_profile_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run only failed cases and adjacent loading regression
+        run: bash scripts/ci/run-local-container.sh
+        env:
+          SHAHAB_CI_DATABASE: shahab_profile_test
+          SHAHAB_CI_PYTHON_PROFILE: project
+          SHAHAB_CI_COMMANDS: bash scripts/ci/run-browser-diagnostic.sh
+      - name: Clean resources owned by this job attempt
+        if: always()
+        run: bash scripts/ci/cleanup-local-container.sh
+      - name: Preserve traces and numeric resource counters
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: targeted-browser-diagnostic
+          path: test-results/
+          retention-days: 7
