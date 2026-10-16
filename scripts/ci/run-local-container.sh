@@ -125,8 +125,8 @@ done
 docker run --rm --pull=never --init --name "$job_container" \
   --label "$owner_label" \
   --user "$(id -u):$(id -g)" --network "$network" --shm-size=1g \
-  --tmpfs "/workspace:rw,nosuid,nodev,size=512m,uid=$(id -u),gid=$(id -g),mode=0755" \
-  --tmpfs /tmp:rw,nosuid,nodev,size=1g,mode=1777 \
+  --tmpfs "/workspace:rw,exec,nosuid,nodev,size=512m,uid=$(id -u),gid=$(id -g),mode=0755" \
+  --tmpfs /tmp:rw,exec,nosuid,nodev,size=1g,mode=1777 \
   --mount "type=bind,source=$GITHUB_WORKSPACE,target=/ci-source,readonly" \
   --mount "type=bind,source=$GITHUB_WORKSPACE/test-results,target=/ci-evidence" \
   --mount "type=bind,source=$task_dir/commands.sh,target=/ci-commands.sh,readonly" \

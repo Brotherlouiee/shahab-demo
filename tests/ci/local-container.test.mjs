@@ -242,8 +242,8 @@ test("in-memory filesystems belong only to disposable job and database container
   const runs = calls.filter(args => args[0] === "run");
   const job = runs.find(args => args.includes("shahab-ci:local-v1"));
   const database = runs.find(args => args.includes("postgres:16-alpine"));
-  assert.ok(job.some(arg => arg.startsWith("/workspace:rw,nosuid,nodev,size=512m,uid=")));
-  assert.ok(job.includes("/tmp:rw,nosuid,nodev,size=1g,mode=1777"));
+  assert.ok(job.some(arg => arg.startsWith("/workspace:rw,exec,nosuid,nodev,size=512m,uid=")));
+  assert.ok(job.includes("/tmp:rw,exec,nosuid,nodev,size=1g,mode=1777"));
   assert.ok(job.some(arg => arg.endsWith("target=/ci-source,readonly")));
   assert.ok(job.some(arg => arg.endsWith("/test-results,target=/ci-evidence")));
   assert.ok(database.includes("/var/lib/postgresql/data:rw,nosuid,nodev,size=512m"));
