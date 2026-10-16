@@ -1,23 +1,24 @@
 """Measure one existing migration test against the wrapper's disposable database."""
 
+import importlib
 import os
 import time
 import unittest
 
 started = time.perf_counter()
-from sqlalchemy import create_engine, text
-from backend.tests.test_postgresql_migrations import PostgreSqlMigrationTests
+sqlalchemy = importlib.import_module("sqlalchemy")
+PostgreSqlMigrationTests = importlib.import_module("backend.tests.test_postgresql_migrations").PostgreSqlMigrationTests
 
 print(f"DIAGNOSTIC imports_seconds={time.perf_counter() - started:.3f}", flush=True)
-engine = create_engine(os.environ["SHAHAB_TEST_DATABASE_URL"])
+engine = sqlalchemy.create_engine(os.environ["SHAHAB_TEST_DATABASE_URL"])
 with engine.connect() as connection:
     for setting in ("fsync", "synchronous_commit", "full_page_writes"):
-        print(f"DIAGNOSTIC {setting}={connection.execute(text('SHOW ' + setting)).scalar_one()}", flush=True)
+        print(f"DIAGNOSTIC {setting}={connection.execute(sqlalchemy.text('SHOW ' + setting)).scalar_one()}", flush=True)
 started = time.perf_counter()
 for _ in range(20):
     with engine.begin() as connection:
-        connection.execute(text("CREATE TEMP TABLE diagnostic_probe (value integer) ON COMMIT DROP"))
-        connection.execute(text("INSERT INTO diagnostic_probe VALUES (1)"))
+        connection.execute(sqlalchemy.text("CREATE TEMP TABLE diagnostic_probe (value integer) ON COMMIT DROP"))
+        connection.execute(sqlalchemy.text("INSERT INTO diagnostic_probe VALUES (1)"))
 print(f"DIAGNOSTIC twenty_transactions_seconds={time.perf_counter() - started:.3f}", flush=True)
 engine.dispose()
 original = PostgreSqlMigrationTests._alembic

@@ -20,14 +20,14 @@ jobs:
     - name: Run verification in prepared local image
       run: bash scripts/ci/run-local-container.sh
       env:
+        SHAHAB_CI_PYTHON_PROFILE: project
         SHAHAB_CI_COMMANDS: |
-          python -m pip install --upgrade pip
-          python -m pip install -e ".[test,quality]"
           npm ci
           echo '::group::Verify generated API artifacts'
           python -m scripts.export_api_docs --check
           echo '::endgroup::'
           node --test tests/ci/local-container.test.mjs
+          python -m unittest discover -s tests/ci -p test_python_environment_cache.py
           npm run quality
     - name: Clean resources owned by this job attempt
       if: always()
@@ -47,31 +47,30 @@ jobs:
     - name: Run verification in prepared local image
       run: bash scripts/ci/run-local-container.sh
       env:
+        SHAHAB_CI_PYTHON_PROFILE: project
         SHAHAB_CI_COMMANDS: |
-          python -m pip install --upgrade pip
-          python -m pip install -e ".[test,quality]"
-          python -m unittest backend.tests.test_postgresql_migrations
+          time python -m unittest backend.tests.test_postgresql_migrations
           echo '::group::Verify account identity migration and generation isolation on PostgreSQL'
-          python -m unittest backend.tests.test_account_identity_postgresql
+          time python -m unittest backend.tests.test_account_identity_postgresql
           echo '::endgroup::'
           echo '::group::Verify durable questionnaire creator proof and safe legacy migration'
-          python -m unittest backend.tests.test_questionnaire_proof_postgresql
+          time python -m unittest backend.tests.test_questionnaire_proof_postgresql
           echo '::endgroup::'
           echo '::group::Verify durable one-hour account sessions and shared OTP races'
-          python -m unittest backend.tests.test_account_access_postgresql
+          time python -m unittest backend.tests.test_account_access_postgresql
           echo '::endgroup::'
           echo '::group::Verify independent raw-answer retention and snapshot preservation'
-          python -m unittest backend.tests.test_questionnaire_retention_postgresql
+          time python -m unittest backend.tests.test_questionnaire_retention_postgresql
           echo '::endgroup::'
           echo '::group::Verify account bookmarks ownership, migration and transaction races'
-          python -m unittest backend.tests.test_account_bookmarks_postgresql
+          time python -m unittest backend.tests.test_account_bookmarks_postgresql
           echo '::endgroup::'
-          python -m unittest backend.tests.test_t06_postgresql
+          time python -m unittest backend.tests.test_t06_postgresql
           echo '::group::Verify durable operations audit and transaction races'
-          python -m unittest backend.tests.test_operations_postgresql
+          time python -m unittest backend.tests.test_operations_postgresql
           echo '::endgroup::'
           echo '::group::Verify protected operations tool with least-privilege PostgreSQL'
-          python -m unittest backend.tests.test_operations_tool_postgresql
+          time python -m unittest backend.tests.test_operations_tool_postgresql
           echo '::endgroup::'
         SHAHAB_CI_DATABASE: shahab_test
     - name: Clean resources owned by this job attempt
@@ -128,8 +127,8 @@ jobs:
     - name: Run verification in prepared local image
       run: bash scripts/ci/run-local-container.sh
       env:
+        SHAHAB_CI_PYTHON_PROFILE: project
         SHAHAB_CI_COMMANDS: |
-          python -m pip install -e ".[test,quality]"
           python -m alembic upgrade head
           npm ci
           npx playwright test --config playwright.profile-live.config.mjs
@@ -144,3 +143,4 @@ jobs:
         name: us-11-t02f-real-api-evidence
         path: test-results/
         retention-days: 7
+

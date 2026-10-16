@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 
-function run({ database = "", missing = false, exitCode = 0, unhealthy = false } = {}) {
+function run({ database = "", missing = false, exitCode = 0, unhealthy = false, profile = "" } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), "shahab-ci-test-"));
   for (const name of ["bin", "temp", "cache", "workspace"]) mkdirSync(path.join(dir, name));
   const log = path.join(dir, "docker.jsonl");
@@ -14,6 +14,7 @@ const fs = require("node:fs");
 const args = process.argv.slice(2);
 fs.appendFileSync(process.env.MOCK_DOCKER_LOG, JSON.stringify(args) + "\\n");
 if (args[0] === "image" && process.env.MOCK_MISSING === "true") process.exit(1);
+if (args[0] === "image") console.log("sha256:fixture");
 if (args[0] === "inspect") console.log(process.env.MOCK_UNHEALTHY === "true" ? "unhealthy" : "healthy");
 if (args[0] === "run" && args.includes("shahab-ci:local-v1")) process.exit(Number(process.env.MOCK_CHECK_EXIT));
 `, { mode: 0o755 });
@@ -23,7 +24,7 @@ if (args[0] === "run" && args.includes("shahab-ci:local-v1")) process.exit(Numbe
       ...process.env, PATH: path.join(dir, "bin") + path.delimiter + process.env.PATH,
       GITHUB_WORKSPACE: path.join(dir, "workspace"), RUNNER_TEMP: path.join(dir, "temp"),
       RUNNER_TOOL_CACHE: path.join(dir, "cache"), SHAHAB_CI_COMMANDS: "echo verification",
-      SHAHAB_CI_DATABASE: database, MOCK_DOCKER_LOG: log,
+      SHAHAB_CI_DATABASE: database, SHAHAB_CI_PYTHON_PROFILE: profile, MOCK_DOCKER_LOG: log,
       GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "2", GITHUB_JOB: "verification",
       MOCK_MISSING: String(missing), MOCK_UNHEALTHY: String(unhealthy), MOCK_CHECK_EXIT: String(exitCode),
     },
@@ -38,7 +39,7 @@ if (args[0] === "run" && args.includes("shahab-ci:local-v1")) process.exit(Numbe
 test("missing prepared image fails before creating resources or pulling", () => {
   const { result, calls } = run({ missing: true });
   assert.equal(result.status, 1);
-  assert.deepEqual(calls, [["image", "inspect", "shahab-ci:local-v1"]]);
+  assert.deepEqual(calls, [["image", "inspect", "--format", "{{.Id}}", "shahab-ci:local-v1"]]);
 });
 
 test("only the two disposable database names are accepted", () => {
@@ -151,5 +152,58 @@ if (args[0] === "network" && args[1] === "ls") console.log("333333333333");
     }
     assert.deepEqual(calls.find(args => args[0] === "rm"), ["rm", "-f", "-v", "111111111111", "222222222222"]);
     assert.deepEqual(calls.at(-1), ["network", "rm", "333333333333"]);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+
+test("Python profile and immutable image identity reach the job container", () => {
+  const { result, calls } = run({ profile: "security" });
+  assert.equal(result.status, 0, result.stderr);
+  const job = calls.find(args => args[0] === "run" && args.includes("shahab-ci:local-v1"));
+  assert.ok(job.includes("SHAHAB_CI_PYTHON_PROFILE"));
+  assert.ok(job.includes("SHAHAB_CI_IMAGE_ID=sha256:fixture"));
+});
+
+test("unsupported Python profile is rejected before Docker resources are created", () => {
+  const { result, calls } = run({ profile: "unknown" });
+  assert.equal(result.status, 2);
+  assert.deepEqual(calls, []);
+});
+
+test("cache diagnostic separates fill from a warm single-test database probe", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "shahab-ci-probe-"));
+  const log = path.join(dir, "timeouts.jsonl");
+  for (const name of ["bin", ".git", "scripts/ci"]) mkdirSync(path.join(dir, name), { recursive: true });
+  writeFileSync(path.join(dir, "scripts/ci/cleanup-local-container.sh"),
+    readFileSync("scripts/ci/cleanup-local-container.sh", "utf8"));
+  writeFileSync(path.join(dir, "bin/git"), "#!/bin/sh\nprintf '%s\\n' \"$MOCK_ROOT\"\n", { mode: 0o755 });
+  writeFileSync(path.join(dir, "bin/docker"), "#!/bin/sh\nexit 0\n", { mode: 0o755 });
+  writeFileSync(path.join(dir, "bin/timeout"), `#!/usr/bin/env node
+const fs = require("node:fs");
+fs.appendFileSync(process.env.MOCK_LOG, JSON.stringify({
+  args: process.argv.slice(2), job: process.env.GITHUB_JOB,
+  profile: process.env.SHAHAB_CI_PYTHON_PROFILE, database: process.env.SHAHAB_CI_DATABASE,
+  commands: process.env.SHAHAB_CI_COMMANDS
+}) + "\\n");
+if (process.env.GITHUB_JOB === "cancel-probe") {
+  console.log("DIAGNOSTIC_CANCEL_READY");
+  process.exit(124);
+}
+`, { mode: 0o755 });
+  try {
+    const result = spawnSync("bash", [path.resolve("scripts/ci/diagnose-local-postgres.sh"), "--cache"], {
+      encoding: "utf8", env: { ...process.env, PATH: path.join(dir, "bin") + path.delimiter + process.env.PATH,
+        MOCK_ROOT: dir, MOCK_LOG: log, SHAHAB_DIAGNOSTIC_CACHE: path.join(dir, "cache") },
+    });
+    assert.equal(result.status, 0, result.stderr);
+    const calls = readFileSync(log, "utf8").trim().split("\n").map(JSON.parse);
+    assert.equal(calls.length, 3);
+    assert.deepEqual(calls.map(call => call.job), ["cancel-probe", "python-cache-fill", "postgres-cached-probe"]);
+    assert.deepEqual(calls.map(call => call.profile), ["", "project", "project"]);
+    assert.deepEqual(calls.map(call => call.database), ["", "", "shahab_test"]);
+    assert.equal(calls[1].commands, "python -m pip check");
+    assert.equal(calls[2].commands, "PYTHONPATH=. python -u scripts/ci/profile-postgres-test.py");
+    assert.ok(calls[1].args.includes("180s"));
+    assert.ok(calls[2].args.includes("120s"));
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

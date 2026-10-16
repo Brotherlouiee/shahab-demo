@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- CI: ذخیرهٔ محیط نصب‌شدهٔ Python با کلید وابستگی/ایمیج/profile و عمر ۲۴ساعته، بازیابی کپی مستقل برای هر job، حفظ audit امنیتی و زمان‌سنجی جداگانهٔ ۹ مجموعه PostgreSQL؛ probe مستقل برای مقایسه cold/warm بدون اجرای خودکار gateهای کامل.
+
 - CI: قطع‌پذیرشدن wrapper و پاک‌سازی محدود به run/attempt/job پس از لغو؛ افزودن probe محدود برای زمان نصب، import، تراکنش و یک آزمون migration، بدون اجرای خودکار gateها یا تغییر timeout و معیارهای قبلی.
 
 - CI: به‌روزرسانی pip محیط آزمون امنیتی به نسخهٔ دارای اصلاح advisoryها و انتظار برای فرم واقعی ورود پیش از مقایسهٔ تصویر، با حفظ gate صفرپیکسل و بدون تغییر محصول.
@@ -323,3 +325,4 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 
 - personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
 - Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
+

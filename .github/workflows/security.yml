@@ -22,11 +22,9 @@ jobs:
     - name: Run verification in prepared local image
       run: bash scripts/ci/run-local-container.sh
       env:
+        SHAHAB_CI_PYTHON_PROFILE: security
         SHAHAB_CI_COMMANDS: |
-          python -m pip install --upgrade "pip>=26.2"
-          echo '::group::Install project dependencies and pinned security tooling'
-          python -m pip install -e ".[test,quality]"
-          python -m pip install "bandit==1.8.6" "pip-audit==2.9.0"
+          echo '::group::Install Node dependencies; Python dependencies prepared by wrapper'
           npm ci
           echo '::endgroup::'
           echo '::group::SAST — fail on medium/high-confidence high-severity findings'
@@ -44,3 +42,4 @@ jobs:
     - name: Clean resources owned by this job attempt
       if: always()
       run: bash scripts/ci/cleanup-local-container.sh
+

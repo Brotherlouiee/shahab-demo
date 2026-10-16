@@ -11,13 +11,18 @@ set -euo pipefail
 : "${GITHUB_JOB:?Missing job identity}"
 owner_label="shahab.ci.owner=$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-$GITHUB_JOB"
 
+case "${SHAHAB_CI_PYTHON_PROFILE:-}" in
+  ''|project|security) ;;
+  *) echo 'Unsupported Python dependency profile' >&2; exit 2 ;;
+esac
+
 image=shahab-ci:local-v1
 database=${SHAHAB_CI_DATABASE:-}
 case "$database" in
   ''|shahab_test|shahab_profile_test) ;;
   *) echo 'Unsupported disposable database name' >&2; exit 2 ;;
 esac
-docker image inspect "$image" >/dev/null
+image_id=$(docker image inspect --format '{{.Id}}' "$image")
 if [[ -n "$database" ]]; then
   docker image inspect postgres:16-alpine >/dev/null
 fi
@@ -78,7 +83,11 @@ set -euo pipefail
 mkdir -p "$HOME"
 git config --global --add safe.directory "$GITHUB_WORKSPACE"
 git worktree prune
-python3 -m venv /tmp/shahab-job-python
+if [[ -n "${SHAHAB_CI_PYTHON_PROFILE:-}" ]]; then
+  python3 scripts/ci/prepare-python-environment.py "$SHAHAB_CI_PYTHON_PROFILE"
+else
+  python3 -m venv /tmp/shahab-job-python
+fi
 export PATH="/tmp/shahab-job-python/bin:$PATH"
 python -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
 node -e 'if (process.version !== "v22.23.3") process.exit(1); if (require("/usr/local/lib/node_modules/playwright/package.json").version !== "1.63.0") process.exit(1);'
@@ -87,7 +96,7 @@ python --version
 BOOTSTRAP
 printf '\n%s\n' "$SHAHAB_CI_COMMANDS" >> "$task_dir/commands.sh"
 env_args=()
-for key in SHAHAB_TEST_DATABASE_URL SHAHAB_DATABASE_URL SHAHAB_ENVIRONMENT \
+for key in SHAHAB_CI_PYTHON_PROFILE SHAHAB_TEST_DATABASE_URL SHAHAB_DATABASE_URL SHAHAB_ENVIRONMENT \
   SHAHAB_API_DOCS_INCLUDE_OPERATIONS SHAHAB_BOOKMARK_BASELINE_DIR \
   SHAHAB_BOOKMARK_BASELINE_URL SHAHAB_US13_BASELINE_DIR SHAHAB_US13_BASELINE_URL; do
   if [[ -v "$key" ]]; then env_args+=(--env "$key"); fi
@@ -100,6 +109,7 @@ docker run --rm --pull=never --init --name "$job_container" \
   --mount "type=bind,source=$task_dir/commands.sh,target=/ci-commands.sh,readonly" \
   --mount "type=bind,source=$cache_dir,target=/ci-cache" \
   --workdir /workspace --env CI=true --env GITHUB_WORKSPACE=/workspace \
+  --env "SHAHAB_CI_IMAGE_ID=$image_id" \
   --env HOME=/tmp/shahab-ci-home --env npm_config_cache=/ci-cache/npm \
   --env PIP_CACHE_DIR=/ci-cache/pip --env PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
   --env SHAHAB_E2E_BROWSER_PATH=/opt/chrome/chrome-linux64/chrome \

@@ -63,3 +63,25 @@ Checkpoint پیش از تغییر: wrapper هنگام docker run پیش‌زمی
 - بررسی هدفمند نهایی: ۷/۷ آزمون Node mock، bash -n سه script، Python compile و parse YAML موفق. Docker در محیط Codex موجود نیست؛ سنجش واقعی لغو و PostgreSQL هنوز اجرا نشده است. نتیجه واقعی باید از لپ‌تاپ دریافت شود؛ PR همچنان draft است.
 - commit با [skip ci] منتشر می‌شود تا طبق دستور مالک شش gate دوباره وارد صف نشوند؛ این commit اثبات CI موفق یا مجوز merge نیست. پس از بررسی محدود و رفع علت، نسخه نهایی باید gateهای لازم را واقعاً بگذراند.
 - ثبت زمان: بررسی اولیه این نوبت پیش از 2026-10-16T07:55:54Z دقیق ثبت نشده؛ اولین checkpoint ساعت 07:55:54Z UTC است. زمان فعالیت بخش‌های پیشین حدس زده نمی‌شود. build/full suite تکرار نشده؛ انتظار ضروری باقی‌مانده اجرای probe روی Docker مالک است.
+
+## حذف نصب تکراری پایتون — ۲۰۲۶-۱۰-۱۶
+
+Checkpoint این نوبت: در خروجی مالک روی f5fba822، نصب ۷۹ ثانیه، import برابر ۰٫۶۴۸، ۲۰ تراکنش ۲٫۵۳۶ و یک migration test برابر ۲۲٫۷۶۵ ثانیه بود؛ upgrade head به‌تنهایی ۱۷٫۶۷۹ ثانیه. عبور برنامه به DB به معنی عبور probe اولیه لغو است. این فقط یک test است و علت زمان تمام suite را اثبات نمی‌کند.
+
+محدوده مصوب: setup پایتون و زمان‌سنجی CI؛ نه تغییر fixture یا assertionهای migration، UI، API، dependency versions، schema، scoring یا داده کاربر. وابستگی‌ها چهار job پایتون، wrapper مشترک و probe محدودند. fixtureهای migration فعلاً حفظ می‌شوند؛ هزینه آن‌ها هنوز در کل suite اندازه‌گیری نشده است.
+
+### رفتار جدید
+- prepare-python-environment.py محیط نصب‌شده را در snapshot محلی نگه می‌دارد؛ برای هر container در همان مسیر /tmp/shahab-job-python یک کپی خصوصی بازسازی می‌شود. مسیر editable کد همچنان /workspace جاری است؛ کد PR قبلی از snapshot اجرا نمی‌شود. cache شامل کد منبع برنامه یا HOME/credential نیست.
+- کلید شامل pyproject.toml کامل، خود helper، Python/ABI/platform/architecture، profile و شناسه immutable ایمیج آماده است. عمر reuse حداکثر ۲۴ ساعت است چون وابستگی‌های Python range هستند. تغییر این ورودی‌ها یا انقضا باعث نصب تازه می‌شود. profile امنیتی مستقل، pip>=26.2 و bandit/pip-audit با نسخه‌های قبلی دارد؛ audit هر بار اجرا می‌شود.
+- cache hit هیچ pip install ندارد؛ فقط استخراج کپی مستقل و pip check انجام می‌شود. cache خراب/ناسازگار بازسازی می‌شود؛ نصب ناموفق snapshot جدید منتشر نمی‌کند. انتشار atomic و lock بین آماده‌سازی‌های هم‌کلید است. استخراج با data filter و بدون symlink مطلق است. interpreterهای venv در snapshot کپی‌اند و lib64 نسبی حفظ می‌شود. cache برای کد مورد اعتماد runner است، نه مرز امنیتی بین PR خصمانه.
+- فرمان‌های نصب workflow به bootstrap منتقل شده‌اند، نه اینکه وابستگی‌ها حذف شوند. سه job عمومی پایتون profile project مشترک و job امنیتی profile security دارد. نصب Node و تمام فرمان‌های آزمون/امنیت/browser/baseline و سقف gateها حفظ شده‌اند. هر ۹ مجموعه unittest PostgreSQL با time مدت مستقل می‌دهند.
+- probe جدید با --cache ابتدا لغو wrapper را می‌سنجد، سپس یک container برای ساخت/اعتبارسنجی snapshot و container دوم برای cache hit و همان یک migration test اجرا می‌کند. سقف‌ها ۲۰/۱۸۰/۱۲۰ ثانیه و هرکدام حداکثر ۱۰ ثانیه grace هستند؛ آزمون کامل را dispatch نمی‌کند. Docker در Codex موجود نیست؛ زمان بهبود روی لپ‌تاپ هنوز اثبات نشده است.
+- linked worktree داخل Docker به .git میزبان خارج از mount اشاره می‌کند؛ probe اکنون آن را پیش از اجرا با خطای روشن رد می‌کند. clone مستقل لازم است. کپی از shallow runner موجب انتقال ناقص commit شد؛ دستور بعدی clone مستقیم تک‌شاخه از GitHub است. این رفت‌وبرگشت‌ها نقص دستور قبلی بود، نه failure محصول.
+
+### بررسی نزدیک و محدودیت
+۱۰ آزمون Node شامل لغو/مالکیت، profile/image و ترتیب probe، و ۹ آزمون Python cache موفق‌اند. cache hit بدون نصب، ایزوله‌بودن کپی، invalidation، انقضا، شکست نصب، snapshot خراب و traversal پوشش دارند. یکی از آزمون‌ها venv واقعی و pip/console-script واقعی را بدون دانلود می‌سازد و پس از restore اجرا می‌کند؛ این fixture وابستگی‌های کامل پروژه را ندارد و زمانش به لپ‌تاپ تعمیم داده نمی‌شود. Ruff lint/format، Bandit با همان -ll -ii پروژه، bash syntax، diff check و بررسی YAML/حفظ gateها انجام شده‌اند. خطای import-order فایل probe قبلی نیز با importlib اصلاح شد تا gate formatter/linter را نشکند.
+
+نتیجه واقعی cold/warm در Docker لپ‌تاپ، pip-audit محیط cached و شش gate نسخه نهایی باقی‌اند. commit با [skip ci] منتشر می‌شود؛ PR draft می‌ماند و merge/deploy انجام نمی‌شود. snapshotهای کلیدهای قدیمی روی دیسک cache باقی می‌مانند؛ rebuild به معنای حذف cacheهای نامرتبط یا داده برنامه نیست. rollback با revert همین تغییر cache و برگشت نصب داخل job ممکن است؛ DB/data migration لازم نیست.
+
+### ثبت زمان
+اولین timestamp ثبت‌شده این نوبت 2026-10-16T08:37:03Z UTC؛ فعالیت پیش از آن دقیق ثبت نشده است. تا 08:44:04Z بررسی، پیاده‌سازی و آزمون نزدیک انجام شد (۷ دقیقه و ۱ ثانیه دیواری؛ مدت فعال هر بخش جدا ثبت نشده، فعالیت و انتظار با هم جمع نمی‌شوند). آزمون‌های نزدیک پس از تغییرات مرتبط دوباره اجرا شدند؛ full suite یا شش workflow تکرار نشد. عوامل اتلاف هدف‌گرفته‌شده: نصب تکراری → snapshot مستقل؛ دستور worktree/shallow نامناسب → clone مستقیم؛ زمان نامشخص suite → زمان‌سنجی هر module. انتظار باقی‌مانده دریافت سنجش واقعی Docker است.
