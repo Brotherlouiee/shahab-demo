@@ -20,13 +20,13 @@ const viewports = [
   { width: 1440, height: 900 },
 ];
 
-test("freeze initial user-visible routes without mutating product state", async ({ baseURL }, info) => {
-  const browser = await chromium.launch({
-    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
-    args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
-  });
-  try {
-    for (const viewport of viewports) {
+for (const viewport of viewports) {
+  test(`freeze initial user-visible routes at ${viewport.width} without mutating product state`, async ({ baseURL }, info) => {
+    const browser = await chromium.launch({
+      ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
+      args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
+    });
+    try {
       const context = await browser.newContext({ viewport, deviceScaleFactor: 1, locale: "fa-IR" });
       try {
         const page = await context.newPage();
@@ -47,6 +47,7 @@ test("freeze initial user-visible routes without mutating product state", async 
             const loc = page.locator(item.selector);
             await expect(loc).toBeVisible();
             await page.evaluate(() => document.fonts.ready);
+            await page.locator("img:visible").evaluateAll(images => Promise.all(images.map(image => image.decode())));
             const rect = await loc.boundingBox();
             const screenshot = await page.screenshot({ fullPage: true, animations: "disabled", caret: "hide" });
             await writeFile(`${output}/${label}.png`, screenshot);
@@ -64,10 +65,9 @@ test("freeze initial user-visible routes without mutating product state", async 
           await writeFile(`${output}/geometry.json`, JSON.stringify({ frozenCommit: "f5e50da0ea29b7d933a813736a2616169ee9b8f3", captures }, null, 2));
         }
       } finally { await context.close(); }
-    }
-  } finally { await browser.close(); }
+    } finally { await browser.close(); }
 });
-
+}
 
 test("AboutPage header actions preserve route, visuals, and API boundary", async ({ baseURL }, info) => {
   const browser = await chromium.launch({
@@ -180,3 +180,4 @@ test("T03.01: About and shared header computed CSS stays identical to frozen pre
     await browser.close();
   }
 });
+

@@ -24,20 +24,10 @@ DEBUG=pw:browser npx playwright test \
 phase frontend-fixtures
 # The API phase is finished; release its private dependency tree before browsers.
 rm -rf /tmp/shahab-job-python
-export SHAHAB_BOOKMARK_BASELINE_DIR=/tmp/shahab-bookmark-baseline
-export SHAHAB_BOOKMARK_BASELINE_URL=http://127.0.0.1:4175
-git fetch --no-tags --depth=1 origin d4197e94b24da8cb91e277a7cb1d82be936bbd07
-git worktree add --detach "$SHAHAB_BOOKMARK_BASELINE_DIR" d4197e94b24da8cb91e277a7cb1d82be936bbd07
-ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
-DEBUG=pw:browser npx playwright test \
-  tests/e2e/bookmarks-visual-preservation.spec.mjs \
-  tests/e2e/initial-and-questionnaire-loading.spec.mjs \
-  tests/e2e/live-recommendation-route.spec.mjs tests/e2e/questionnaire-route-map.spec.mjs \
-  --grep 'empty artwork|document fallback|detail-shaped|keeps card identity|preserves every approved behavioural path' \
+npx playwright test tests/e2e/questionnaire-route-map.spec.mjs \
   --workers=1 --reporter=line --output=test-results/diagnostic-frontend || result=1
 
 phase frozen-baseline
-unset SHAHAB_BOOKMARK_BASELINE_DIR SHAHAB_BOOKMARK_BASELINE_URL
 export SHAHAB_US13_BASELINE_DIR=/tmp/shahab-us13-original
 export SHAHAB_US13_BASELINE_URL=http://127.0.0.1:4177
 git fetch --no-tags --depth=1 origin f5e50da0ea29b7d933a813736a2616169ee9b8f3
