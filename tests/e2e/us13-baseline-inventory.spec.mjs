@@ -180,4 +180,3 @@ test("T03.01: About and shared header computed CSS stays identical to frozen pre
     await browser.close();
   }
 });
-

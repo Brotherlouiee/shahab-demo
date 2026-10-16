@@ -113,5 +113,3 @@ test("uses a detail-shaped document fallback for a delayed loan-details route", 
   await page.waitForLoadState("load");
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
 });
-
-

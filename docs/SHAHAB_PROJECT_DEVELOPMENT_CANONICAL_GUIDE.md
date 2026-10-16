@@ -1494,9 +1494,95 @@ The authenticated sidebar’s red logout control opens a centered warning dialog
 | US-13.T03 | زیرتسک هم‌شماره US-13.T03.01 و سپس .02…؛ وابسته به مرج T02 همان بخش و inventory cascade، حداکثر CSS همان بخش/segment. | انتقال قواعد از src/App.css با ترتیب اثبات‌شده و entry مرکزی؛ computed style/geometry و تصویر برابر baseline و تست رفتار سبز، بدون cleanup هم‌زمان. |
 | US-13.T04 | پس از تمام زیرتسک‌های registry T02/T03 و gateهای آن‌ها؛ cleanup محدود در PRهای کوچک در صورت نیاز. | فقط حذف تکرار یا کد/CSS بدون مصرف با شاهد تمام route/stateها، نه صرف جست‌وجوی متن یا coverage یک صفحه. آزمون کامل پایان داستان، نقشه نهایی، CHANGELOG/checkpoint و سند تداوم در پایان واقعی داستان. |
 
-**ترتیب زیرتسک‌ها:** T01 → T02.01 → T03.01 → T02.02 → T03.02 → … → T04. این interleaving صریح مانع انباشتن استخراج همه صفحه‌ها یا همه CSS در یک PR می‌شود؛ parentهای T02/T03 تنها پس از تمام فرزندان Done هستند. T01 برای هر ID نام صفحه/مسئولیت، مسیر واقعی source/target، فایل‌های allowlist، state owner، مصرف‌کنندگان CSS، test command/environment و دلیل اندازه مناسب را ثبت می‌کند. اگر صفحه بزرگ است، پیش از تغییر به مسئولیت‌های مستقل کوچک‌تر تقسیم شود؛ هیچ زیرتسکی «کل فرانت» نیست. شروع هر زیرتسک از main تازه و پس از gate/مرج قبلی است.
+**ترتیب زیرتسک‌ها:** T01 → هر جفت فعال و لازمِ T02.nn → T03.nn طبق رجیستری مصوب زیر → T04. جفت ۰۱ قبلاً مرج شده و صف ادامه در بخش رجیستری همین سند مشخص است. این interleaving صریح مانع انباشتن استخراج همه صفحه‌ها یا همه CSS در یک PR می‌شود؛ parentهای T02/T03 تنها پس از تعیین تکلیف مستند همهٔ ردیف‌ها تکمیل می‌شوند: انتقال انجام‌شده، no-move آزموده‌شده یا عدم نیازِ مصوب؛ این وضعیت‌ها در گزارش با هم یکی نمی‌شوند. T01 برای هر ID نام صفحه/مسئولیت، مسیر واقعی source/target، فایل‌های allowlist، state owner، مصرف‌کنندگان CSS، test command/environment و دلیل اندازه مناسب را ثبت می‌کند. اگر صفحه بزرگ است، پیش از تغییر به مسئولیت‌های مستقل کوچک‌تر تقسیم شود؛ هیچ زیرتسکی «کل فرانت» نیست. شروع هر زیرتسک از main تازه و پس از gate/مرج قبلی است.
 
 پیشنهاد ترتیب بررسی T01، نه ادعای انتقال انجام‌شده: صفحه home و navigation/menu، ورود/account و فرم‌های اطلاعات شخصی، بخش‌های پرسشنامه/analysis، انتخاب/نتیجه مقایسه، پروفایل/About و saved/history. registry بر اساس کد واقعی تعیین می‌شود و می‌تواند هر گروه را به چند زیرتسک بشکند؛ featureهای نتیجه/جزئیات موجود دوباره ساخته نمی‌شوند. کد dormant مثل بخش‌های حذف‌شده از home فقط در T04 و پس از اثبات نبود دسترسی حذف می‌شود.
+
+### رجیستری اجرایی US-13 و برنامهٔ ادامه — تجمیع ۲۰۲۶-۱۰-۱۶ در PR #132
+
+**این بخش از سند جامع مرجع واحد برنامه‌ریزی US-13 است.** چهار تسک اصلی `US-13.T01` تا `US-13.T04` بدون تغییر باقی می‌مانند. پسوندهای `T02.nn` و `T03.nn` زیرتسک اجراییِ همان دو تسک اصلی هستند و **هر شناسه، دامنه، وابستگی، تغییر وضعیت، تقسیم، حذف یا جابه‌جایی ترتیب باید ابتدا در همین سند جامع با یک تغییر مستند و بازبینی‌شده تصویب شود**؛ رجیستری جانبی، گزارش تسک، PR یا تشخیص لحظه‌ای اجراکننده به‌تنهایی حق ایجاد یا قطعی‌کردن زیرتسک جدید را ندارد. این فهرست شناسه‌های قبلی را برای ردیابی حفظ می‌کند؛ با پذیرش و مرج همین برنامه، ردیف‌های بدون مصرفِ فعلی طبق تصمیم صریح زیر از صف انتقال خارج می‌شوند. **وجود ۲۰ جفت شناسه، الزام به ۴۰ انتقال یا ۴۰ PR نیست.** استخراج هر ردیف فعال همچنان به baseline و محدودهٔ تأییدشدهٔ خودش نیاز دارد.
+
+**مبنای ممیزی:** `main=f5711e78df58366b65c7f00e29fa484ea5fb0b85` پس از مرج PR #129؛ بازبینی روی head زیرساختی `5ecf436b9f081f7734035ff631237ef00ed09ef8` در PR #132؛ منبع رفتار `src/home page.jsx` با blob `9c18b0c3ff8157526178f06622675391c24da59e` و CSS `src/App.css` با blob `f0fe7d22bb5d1dc147f04ee5f6c769166ddaef41`. رجیستری اولیه در `docs/ui/us-13-t01-frontend-baseline.md` نگهداری می‌شود، ولی در اختلاف یا تصمیم جدید **همین سند جامع مقدم است**. شناسایی مصرف از تعریف/فراخوانی JSX، زنجیرهٔ caller و exportهای فایل بررسی شده است؛ این ممیزی مجوز حذف dead code نیست. `CardView` فقط در `StatsMarquee` مصرف می‌شود و `Hero` آن را فراخوانی نمی‌کند؛ `StatsMarquee` نیز در composition فعلی رندر نمی‌شود. برچسب «عدم نیاز به انتقال در محصول فعلی» با «حذف ایمن اثبات‌شده» فرق دارد.
+
+| زیرتسک استخراج React | زیرتسک CSS هم‌شماره | مالک/بخش | وضعیت اجرایی با شواهد فعلی | مرز و ملاحظهٔ اجباری |
+| --- | --- | --- | --- | --- |
+| `US-13.T02.01` | `US-13.T03.01` | `AboutPage` | مرج‌شده: React جدا شد؛ CSS مشترک در جای خود باقی ماند | PR #128 و #129؛ تأیید محدود به گیت‌های ثبت‌شده |
+| `US-13.T02.02` | `US-13.T03.02` | `Features` | عدم نیاز به انتقال در محصول فعلی | تعریف تابع هست، `<Features>` در درخت JSX موجود نیست؛ بدون فعال‌سازی UI؛ بررسی حذف احتمالی فقط در T04 با شاهد |
+| `US-13.T02.03` | `US-13.T03.03` | `Footer` | عدم نیاز به انتقال در محصول فعلی | تعریف تابع هست، `<Footer>` در درخت JSX موجود نیست؛ حذف احتمالی فقط T04 با شواهد |
+| `US-13.T02.04` | `US-13.T03.04` | `StatsMarquee` | عدم نیاز به انتقال در محصول فعلی | تعریف تابع هست، `<StatsMarquee>` در درخت JSX موجود نیست؛ حذف احتمالی فقط T04 |
+| `US-13.T02.05` | `US-13.T03.05` | `CardView` | عدم نیاز به انتقال در محصول فعلی | فقط caller آن `StatsMarquee` غیرفعال است؛ وابستگی به Hero در پیشنهاد PR #131 نادرست بود |
+| `US-13.T02.06` | `US-13.T03.06` | `Hero` | فعال؛ نیازمند baseline و استخراج محدود | در HomePage رندر می‌شود؛ amounts، سه state محلی و callback ناوبری؛ بدون وابستگی به CardView |
+| `US-13.T02.07` | `US-13.T03.07` | `AccountHeader` | فعال/مشترک؛ نیازمند baseline چندصفحه‌ای | در About، پروفایل، saved و history؛ CSS shared مجاز به no-move |
+| `US-13.T02.08` | `US-13.T03.08` | `ProfileDropdown` | فعال؛ نیازمند characterization تعامل | سه مصرف JSX؛ open/close/focus و فرم پروفایل |
+| `US-13.T02.09` | `US-13.T03.09` | `AccountPage` | فعال؛ نیازمند baseline احراز هویت | state، save/upload، تعامل با ProfileDropdown |
+| `US-13.T02.10` | `US-13.T03.10` | `SavedLoansPage` | فعال؛ نیازمند baseline نشست و داده | مقایسه حالت‌های پر/خالی/خطا و navigation |
+| `US-13.T02.11` | `US-13.T03.11` | `RecommendationHistoryPage` | فعال؛ نیازمند baseline API و state | fetch، pagination، hide/confirm و خطا |
+| `US-13.T02.12` | `US-13.T03.12` | `Nav و SidebarIcon` | فعال/مشترک؛ نیازمند تقسیم مستقل در صورت نیاز | گیت ناوبری، آیکن، click و حالت mobile |
+| `US-13.T02.13` | `US-13.T03.13` | `UserSidebar` | فعال؛ نیازمند baseline تعامل | open/close، login/logout/confirm و refresh |
+| `US-13.T02.14` | `US-13.T03.14` | `LoginScreen` | فعال؛ نیازمند baseline OTP | زمان‌سنج، ورود، validation و session |
+| `US-13.T02.15` | `US-13.T03.15` | `LoanAiAnalysisScreen` | فعال در مسیر برنامه؛ بررسی حالت دسترسی | فراخوانی JSX وجود دارد؛ provider disabled نباید تغییر کند |
+| `US-13.T02.16` | `US-13.T03.16` | `LoanCompareScreen` | فعال؛ نیازمند baseline انتخاب وام | state selection، card/order و submit |
+| `US-13.T02.17` | `US-13.T03.17` | `LoanComparisonResultCard` | فعال؛ نیازمند baseline کارت | shared style و متن/اعداد RTL |
+| `US-13.T02.18` | `US-13.T03.18` | `LoanComparisonResultScreen` | فعال؛ نیازمند baseline نتیجه | رفتار برگشت و درخواست/نمایش |
+| `US-13.T02.19` | `US-13.T03.19` | `QuestionnaireScreen` | فعال و بزرگ؛ تقسیم جزئی 19.1 تا 19.7 در جدول زیر ثبت شده | hook/effect/session؛ استخراج ۱۵۰۰ خطی در یک PR ممنوع |
+| `US-13.T02.20` | `US-13.T03.20` | `HomePage (composition root)` | فعال؛ فقط آخر کار و با امکان عدم انتقال | entry/state owner؛ ممکن است در home page.jsx باقی بماند |
+
+
+
+**تقسیم ثبت‌شدهٔ پرسشنامه — زیرمجموعهٔ ردیف ۱۹، بدون تغییر شمارهٔ ردیف‌های دیگر:**
+
+شناسه‌های زیر اکنون جزئی از همین برنامه‌اند؛ همه «برنامه‌ریزی‌شده، اجرا نشده» هستند و پس از پذیرش/مرج برنامه و تکمیل baseline اختصاصی قابل اجرا می‌شوند. مقصد فایل‌ها زیر `src/features/questionnaire/` است؛ نام‌ها مقصد پیشنهادی قطعی این برنامه‌اند و تغییر مرز/شناسه پیش از اجرا نیازمند اصلاح همین سند است. هر فرزند فقط JSX همان شاخه را با props و callback استخراج می‌کند، بدون wrapper، تغییر key، ترتیب DOM یا انتقال مالکیت state/ref/effect. هر جفت پس از مرج React و سپس CSS خودش، پیش از جفت بعدی بررسی می‌شود.
+
+| React / CSS | مسئولیت و مقصد | مرز واقعی در منبع و قرارداد ورودی | پذیرش اختصاصی علاوه بر شش چک و baseline مشترک |
+| --- | --- | --- | --- |
+| `US-13.T02.19.1` / `US-13.T03.19.1` | نمای تحلیل، `QuestionnaireAnalysisView.jsx` | فقط return شاخهٔ `isAnalyzingLoans` با `hp-loan-analysis-page`؛ ورودی logo URL/positions، countdown و spinnerRunning؛ effectهای logo/request و interval پنج‌ثانیه‌ای در parent بمانند | آغاز/پایان spinner، aria-busy، لوگوها و گذار به results؛ یک درخواست واقعی، عدم تکرار در rerender و cleanup هنگام ترک مسیر؛ زمان انتظار فعلی تغییر نکند |
+| `US-13.T02.19.2` / `US-13.T03.19.2` | مراحل و قدم‌ها، `QuestionnaireStageBoard.jsx` | فقط `hp-stage-board`؛ stages، question/stage flags، answers، offset، completed/active، callbackهای pointer/step و ref callback موجود؛ محاسبهٔ offset/اندازه‌گیری و dragRef در parent | pointer down/move/up/cancel/leave، snap و دسترسی به قدم پاسخ‌داده؛ مرحلهٔ شخصی دو قدم؛ عرض‌های هدف و اندازه‌گیری پس از mount بدون تغییر |
+| `US-13.T02.19.3` / `US-13.T03.19.3` | عنوان و گزینه‌ها، `QuestionnaireQuestionCard.jsx` | شاخهٔ عادی شامل h1، `hp-question-card` و warning؛ question، selectedOption، currentQuestion، staged/content-height و onSelect؛ questions و canonical mapping در parent | دو سؤال اولیه، Q3/S8 و تمام شناسه‌های canonical؛ ترتیب/متن/عدد فارسی، radio/selection/warning و next/back یکسان؛ دادهٔ سؤال بازنویسی نشود |
+| `US-13.T02.19.4` / `US-13.T03.19.4` | فرم اطلاعات شخصی، `QuestionnairePersonalInfoForm.jsx` | فقط `hp-personal-info-form`؛ مقادیر/خطا/cache/focus، وضعیت خواندن حساب، گزینه/label و وضعیت دو dropdown با callbackهای فعلی؛ خواندن/نوشتن profile، draft refs و همهٔ stateها در parent | نام فارسی، محدودیت طول، سه نوع رقم تلفن، selection/paste، readOnly هنگام دسترسی، cache و blur تأخیری 120ms، هر دو dropdown/native select؛ آزمون واقعی API برای حفظ پروفایل حساب و تلفن تأییدشده |
+| `US-13.T02.19.5` / `US-13.T03.19.5` | کارت و خطای OTP، `QuestionnaireOtpView.jsx` | fragment شامل `hp-loan-otp-card` و خطای آن؛ شش رقم، seconds/error، input refs و callbackهای change/keydown/paste/resend/changePhone؛ challenge، verify، timeout و persist در parent | paste و focus/Backspace و رقم فارسی/عربی؛ resend در صفر و reset120؛ خطای verify/persist و retry، تغییر تلفن؛ عدم درخواست یا دسترسی اضافی با suite واقعی FastAPI/PostgreSQL |
+| `US-13.T02.19.6` / `US-13.T03.19.6` | خطای session و اقدام‌ها، `QuestionnaireActions.jsx` | fragment شامل `hp-question-session-error` و `hp-question-actions`؛ error/canProceed/currentQuestion/personal/OTP flags و onNext/onPrevious؛ handlerهای async و guard در parent | متن واقعی JSX ملاک است، نه متغیرهای عنوانِ فعلاً مصرف‌نشده؛ disabled/loading، جلوگیری از submit تکراری، 410 و reset پاسخ، بازگشت اولین سؤال و OTP/فرم؛ count/order درخواست حفظ شود |
+| `US-13.T02.19.7` / `US-13.T03.19.7` | بازبینی نهایی controller و shell؛ مقصد فعلی `src/home page.jsx` | باقی‌ماندن QuestionnaireScreen به‌عنوان مالک state/ref/effect/route/session و header/skeleton؛ reuse نتیجه/details و اجزای ردیف‌های ۱۵–۱۸؛ انتقال کل تابع یا ساخت hook جدید جزو این مرحله نیست | آزمون پیوسته سؤال→فرم→OTP→تحلیل→نتیجه، refresh/popstate، برگشت saved/details/compare، حفظ انتخاب‌ها و resetهای فعلی، request single-flight/history retry/TTL؛ تصمیم مستند باقی‌ماندن controller و no-move CSS مجاز است |
+
+ترتیب ردیف ۱۹: `19.1 → 19.2 → 19.3 → 19.4 → 19.5 → 19.6 → 19.7`، در هر مورد React سپس CSS هم‌شماره. پیش‌نیاز ورود، تعیین تکلیف ردیف‌های فعال ۰۶–۱۸ و baseline مسیرها/stateهای همین فرزند در T01 است. فرزندان، هفت مسئولیت محدود با شواهد مستقل‌اند؛ تعداد PR الزام عددی ندارد و ردیف 19.7 می‌تواند فقط تصمیم مستدل نگهداری باشد. CSS هر فرزند فقط پس از consumer/cascade audit منتقل می‌شود؛ selectors مشترک/interleaved در App.css با no-move آزموده‌شده باقی می‌مانند.
+
+**مالکیت ثابت پرسشنامه:** تمام useState/useRef/useEffectها، canonical questions، routePath/popstate، persistCanonicalQuestionnaireAnswer، loadRecommendationResult، profile access/OTP verification، handlerهای navigation، draft/cache، stage measurement و timer cleanup در همان QuestionnaireScreen و همان ترتیب باقی می‌مانند. تغییر مالکیت هرکدام خارج از دامنهٔ این تقسیم است و به اصلاح مصوب همین رجیستری نیاز دارد. استخراج viewها مجوز تغییر متن فعلی دکمه‌ها، رفع متغیر بی‌مصرف، اصلاح رفتار یا ساده‌سازی validation نیست.
+
+**وضعیت واقعی چهار تسک اصلی، نه وضعیت پیشنهادی استخراج‌ها:**
+
+| تسک اصلی | وضعیت و شاهد فعلی | شرط تکمیل باقی‌مانده |
+| --- | --- | --- |
+| `US-13.T01` | inventory/رجیستری در PR #127 مرج شده؛ ۹ نمای اولیهٔ home/about/login، About header/CSS و گیت‌های محدود موجود شاهد دارند | تصویر/رفتار/شبکهٔ stateهای هر بخش فعال پیش از استخراج همان بخش تکمیل شود؛ T01 هنوز پوشش جامع همهٔ فرانت نیست |
+| `US-13.T02` | فقط `T02.01` با استخراج AboutPage در PR #128 مرج شده | ردیف‌های فعال لازم با baseline، مالک state و allowlist روشن؛ ۰۲–۰۵ به‌عنوان انتقال انجام‌شده شمرده نشوند |
+| `US-13.T03` | `T03.01` در PR #129 تصمیم no-move و گیت استایل دارد | CSS مستقل About ساخته نشده؛ هر ردیف فعال انتقالِ امن یا no-move مستدل و آزموده‌شدهٔ خودش را می‌خواهد |
+| `US-13.T04` | آغاز نشده است | تعیین تکلیف تمام ردیف‌ها، حذف فقط با شاهد، full gate پایان داستان و سپس به‌روزرسانی سند تداوم |
+
+شش چک موفق روی `5ecf436` در PR #132، سلامت همان نسخهٔ CI/harness را نشان می‌دهند؛ جای baseline اختصاصی Hero یا سایر stateهای فاقد شاهد را نمی‌گیرند. زمان ۲۶:۵۹ اجرای آن نوبت، رسیدن به هدف پنج دقیقه نیست و کار سرعت CI با استخراج محصول مخلوط نمی‌شود.
+
+**یافته‌های صریح و تصمیم اجرایی:**
+
+1. **تعیین تکلیف رسمی ردیف‌های غیرفعال:** `Features`، `Footer` و `StatsMarquee` در composition فعلی فراخوانی ندارند؛ `CardView` نیز فقط در `StatsMarquee` مصرف می‌شود. بنابراین با پذیرش این برنامه، هشت شناسهٔ `T02.02/T03.02` تا `T02.05/T03.05` وضعیت **«عدم نیاز به انتقال در محصول فعلی»** می‌گیرند و پیش‌نیاز اجباریِ اجرای ردیف فعال بعدی نیستند. این وضعیت Doneِ استخراج/CSS نیست؛ هیچ‌یک به UI بازگردانده یا در این PR حذف نمی‌شوند. پاک‌سازی احتمالی فقط در `T04`، با اثبات نبود مصرف در تمام مسیرها و gate همان مرحله مجاز است. در صورت تغییر مصوب محصول، همین ردیف‌ها پیش از هر اجرا دوباره در سند جامع بازبینی می‌شوند.
+2. `US-13.T02.01` با PR #128 و `US-13.T03.01` با PR #129 مرج شده‌اند؛ T03.01 «تصمیم مستند no-move و گیت استایل» است، **نه انتقال CSS**. مرج این دو به معنای Done والد `T02`/`T03` یا تمام story نیست.
+3. کامپوننت‌های قبلاً مستقل `LoanResultsScreen` و `LoanDetailsScreen` باید **reuse** شوند و استخراج تکراری ندارند. برای بخش‌های فعال، فاصلهٔ میان تعریف و تعداد فراخوانی، وابستگی import/asset، state owner، hook identity، CSS selector consumer و suite نیازمند ثبت task-level قبل از هر PR کدنویسی است.
+4. `QuestionnaireScreen` طبق رجیستری جزئی 19.1 تا 19.7 زیر، تنها پس از پذیرش برنامه و baseline هر فرزند قابل استخراج است؛ شمارهٔ جدید یا زیرمرحلهٔ پنهانی صرفاً در checkpoint مجاز نیست. `HomePage` ریشهٔ composition است و بدون ضرورت اثبات‌شده از فایل فعلی خارج نمی‌شود.
+5. **قدم بعد و ترتیب اجرایی:** پس از پذیرش/مرج این برنامه و بررسی main تازه، ابتدا شکاف characterization خود `Hero` در `T01` بسته شود؛ سپس `T02.06 → T03.06` آغاز می‌شود. بقیهٔ ردیف‌های فعال با همان شناسهٔ ثابت، به‌ترتیب `07 → 08 → 09 → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 17 → 18 → 19` و در هر ردیف ابتدا `T02.nn` و بعد `T03.nn` بررسی/اجرا می‌شوند. ردیف ۲۰ فقط بررسی نهایی composition و تصمیم مستند انتقال محدود/باقی‌ماندن در فایل فعلی است. `T03.nn` پیش از پذیرش و مرج `T02.nn` مجاز نیست؛ no-move مستدل با gate معتبر می‌تواند خروجی CSS باشد. هیچ PR «گزارش مانع» تکمیل زیرتسک نیست؛ PR #130 گزارش قبلی است و پیش‌نیاز لازم این صف نیست.
+6. **قاعدهٔ اندازه و تعداد:** ۲۰ جفت رجیستری به معنای الزام به ۴۰ PR یا ۴۰ انتقال نیست. فقط زیرتسک‌هایی اجرا می‌شوند که مطابق این سند ضرورت، محدوده، baseline و شواهد آزمونشان تأیید شده باشد. تصمیم no-move CSS shared وقتی مبنای فنی و gate مستند دارد مجاز است؛ اما نباید به عنوان جداسازی CSS گزارش شود.
+7. **قرارداد گیت برای هر ردیف اجرایی:** SHA baseline مستقل `f5e50da0ea29b7d933a813736a2616169ee9b8f3`، route/state/viewport فعال همان کامپوننت، screenshot zero-tolerance و computed-style/geometry، event/navigation، network/API count/order، selectors shared، accessibility/focus، suite واقعی backend در صورت دخالت و **هر شش job موجود در سه workflow Quality/Security/Baseline** ثبت و سبز شوند. شمارش تاریخی «چهار CI» مجوز حذف هیچ‌یک از شش چک فعلی نیست. نبود شواهد = `Blocked`، نه `Done` و نه تغییر silent baseline. CSS interleaved/shared می‌تواند در `App.css` باقی بماند.
+8. **حفاظت از مرجع و مالکیت:** سه قانون طلایی، `docs/TASK_EXECUTION_PROTOCOL.md`، `AGENTS.md`، `$safe-git-ide-collaboration`، تفاوت محیط محلی مالک، ترتیب و قرارداد UI/API/DB/امنیت بدون تغییر است. این افزودهٔ برنامه **صرفاً مستندات** است و به درخواست مالک به همان PR #132 اضافه می‌شود؛ اصلاحات CI قبلی آن PR حفظ می‌شوند. این برنامه هیچ ریفکتور محصول، migration، merge یا deploy انجام نمی‌دهد. سند تداوم فقط در پایان User Story به‌روزرسانی می‌شود.
+
+
+**مرز و پذیرش مرحلهٔ بعد، داخل همین سند جامع:**
+
+| مرحله | محدوده و وابستگی مشخص | شاهد لازم پیش از عبور |
+| --- | --- | --- |
+| تکمیل T01 برای Hero | فقط characterization مسیر `/` و گذار موجود به پرسشنامه؛ source محصول/asset تغییر نکند | مبلغ خالی/انتخاب‌شده، منوی مبلغ باز/بسته، notice و «متوجه شدم»، focus/blur و navigation؛ تصویر/هندسه/رویداد/شبکهٔ مستقل در 390/430/1440 و دو سوی breakpoint تحت اثر؛ روی baseline منجمد موفق و در برابر regression عمدی حساس باشد |
+| `US-13.T02.06` | انتقال مکانیکی تابع `Hero` از `src/home page.jsx` به `src/features/home/Hero.jsx` پس از gate بالا؛ `amounts` بدون تغییر داده و پس از بررسی همهٔ مصرف‌کننده‌ها همراه همان feature قرار گیرد؛ callback و سه state محلی با همان مالکیت، order و identity حفظ شوند؛ CSS ممنوع | بدنهٔ JSX و classها/متن/asset یکسان، import بدون چرخه، تست‌های تعامل بالا و zero-diff؛ no remount/reset یا درخواست اضافه؛ docs/CHANGELOG و شش چک |
+| `US-13.T03.06` | پس از مرج T02.06؛ فقط قواعد اثبات‌شدهٔ Hero در `src/App.css` و entry مرکزی `src/main.jsx` در صورت نیاز | consumer/cascade manifest، حفظ selector/declaration/order، تصویر و computed-style/geometry مسیرهای مشترک در dev و build/preview؛ در صورت interleaving غیرقابل‌انتقال، no-move مستند و آزموده‌شده، بدون ادعای جداسازی |
+| جفت‌های ۰۷–۱۹ | هر بار فقط یک مسئولیتِ ردیف ثبت‌شده؛ قبل از کد، target/allowlist، state owner، hook/effect/timer، مصرف‌کنندهٔ CSS و test case/environment در همین رجیستری تکمیل شود | About/Profile/Saved/History برای header؛ فرم/dropdown/OTP با API واقعی در suite مربوط؛ next/back/refresh و selection برای questionnaire/compare؛ no activation برای AI؛ baseline ناکامل یعنی تکمیل T01 همان بخش، نه استخراج بدون شاهد |
+| ردیف ۲۰ و T04 | composition root و helperهای باقی‌مانده مثل BrandMark/Icon/QuestionnaireHeader صریح بررسی شوند؛ وجود helper مجوز استخراج پنهان یا ساخت شناسه بیرون سند نیست | نقشهٔ مالکیت نهایی، نبود تکرار/چرخه، حفظ رفتار، تعیین تکلیف دلیل‌دار ردیف‌های عدم نیاز و no-move، مقایسه با baseline اصلی و main پیش از PR، full gate و rollback؛ سند تداوم فقط پایان واقعی داستان |
+
+شمارهٔ ردیف کنارگذاشته‌شده به مسئولیت دیگری داده نمی‌شود. خردکردن QuestionnaireScreen یا هر بخش بزرگ، پیش از اجرا با شناسه/مرز/وابستگی/معیار پذیرش **در همین سند** ثبت می‌شود؛ این برنامه اجازهٔ ایجاد زیرتسک بی‌نام یا خارج از رجیستری نمی‌دهد.
+
+**محدودیت ممیزی:** نبود call در فایل فعلی به‌تنهایی برای حکم قطعی dead code و پاک‌سازی کافی نیست. همچنین ردیف‌های فعال بدون baseline اختصاصی و بررسی dependency، هنوز مجوز ایجاد PR استخراج ندارند. تأیید رجیستری باید پیش از توسعهٔ بعدی باشد، نه بعد از آن.
 
 ### baseline و اثبات حفظ محصول
 
