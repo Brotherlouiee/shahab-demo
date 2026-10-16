@@ -113,3 +113,9 @@ patch آزمایشی، نه ادعای علت قطعی:
 ## اصلاح قابلیت اجرای tmpfs — ۲۰۲۶-۱۰-۱۶
 
 مالک ImportError در بارگذاری SQLAlchemy .so با failed to map segment گزارش کرد. این نشانه با mount دارای noexec سازگار است؛ flags واقعی میزبان هنوز دریافت نشده‌اند. دو tmpfs اجرا (/tmp و /workspace) اکنون exec را صریح دارند؛ nosuid/nodev و capها حفظ می‌شوند و PGDATA همچنان نیاز به exec ندارد. تغییر فقط دو گزینه mount و انتظار تست مربوط است؛ package/image/cache key و assertion/timeout تغییر نمی‌کند. ۱۲ آزمون نزدیک Node، syntax bash و diff check موفق‌اند؛ Docker محلی موجود نیست و اثبات بارگذاری native module و سنجش زمان با probe واقعی لپ‌تاپ باقی است. تکیه به آزمون mock برای flag پیش‌فرض mount نقص بررسی قبلی بود. راهنمای رسمی Docker: https://docs.docker.com/engine/storage/tmpfs/ . نسخه با skip-ci منتشر می‌شود؛ full gate جدیدی dispatch نمی‌شود.
+
+## سنجش واقعی tmpfs و اجرای gateها — ۲۰۲۶-۱۰-۱۶
+
+مالک خروج موفق probe نسخه 75588b40 را فرستاد: cancellation و نبود container/network باقی‌مانده موفق؛ checkout copy در دقت ثانیه=0؛ cache hit در دو container مستقل=2.439s و 2.293s؛ imports=0.257s؛ بیست تراکنش=0.078s؛ migration test=5.816s با upgrade head=1.512s. fsync/synchronous_commit/full_page_writes همچنان on بودند. نسبت به probe قبلی، cache از17.738s و test از22.149s کاهش یافت؛ این مقایسه کل suite یا علت انحصاری کندی را ثابت نمی‌کند.
+
+پس از این شاهد، فقط ثبت شواهد بدون skip-ci منتشر می‌شود تا شش gate موجود اجرا شوند. هدف حداکثر پنج دقیقه برای کل مسیر هنوز باید در full run اندازه‌گیری شود؛ سه failure مرورگر پروفایل اجرای قبل هم باید واقعاً حل شده باشند. assertion، fixture، timeout، image و cache key تغییر نمی‌کنند؛ PR تا موفقیت تمام gateها draft می‌ماند. زمان کل CI و نتیجهٔ شش job فقط از همین revision معتبر است؛ merge/deploy انجام نمی‌شود.
