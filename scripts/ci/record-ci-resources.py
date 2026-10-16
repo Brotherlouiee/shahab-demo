@@ -12,6 +12,8 @@ signal.signal(signal.SIGINT, lambda *_: stopped.set())
 output = Path("test-results/diagnostic-resources.jsonl")
 output.parent.mkdir(parents=True, exist_ok=True)
 paths = {
+    "host_memory": "/proc/meminfo",
+    "memory_detail": "/sys/fs/cgroup/memory.stat",
     "cpu": "/sys/fs/cgroup/cpu.stat",
     "cpu_limit": "/sys/fs/cgroup/cpu.max",
     "memory_bytes": "/sys/fs/cgroup/memory.current",

@@ -20,6 +20,7 @@ test("shows the document fallback only after a delayed first paint", async ({ pa
   } finally {
     releaseEntry();
   }
+  await page.waitForLoadState("load");
   await expect(page.locator(".hp-nav .hp-login-link")).toHaveCount(0);
   await expect(page.locator("button.hp-menu-button")).toBeVisible();
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
@@ -109,6 +110,7 @@ test("uses a detail-shaped document fallback for a delayed loan-details route", 
   } finally {
     releaseEntry();
   }
+  await page.waitForLoadState("load");
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
 });
 
