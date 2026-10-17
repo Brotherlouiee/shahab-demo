@@ -1,45 +1,41 @@
 name: Security SAST, SCA and secret gates
-'on':
-  pull_request: null
+
+on:
+  pull_request:
   push:
-    branches:
-    - main
+    branches: [main]
+
 permissions:
   contents: read
+
 jobs:
   static-and-dependencies:
     name: Python SAST and Python/Node dependency audit
-    runs-on:
-    - self-hosted
-    - Linux
-    - X64
-    - shahab-local
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
-    - uses: actions/checkout@v4
-      with:
-        persist-credentials: 'false'
-    - name: Run verification in prepared local image
-      run: bash scripts/ci/run-local-container.sh
-      env:
-        SHAHAB_CI_PYTHON_PROFILE: security
-        SHAHAB_CI_COMMANDS: |
-          echo '::group::Install Node dependencies; Python dependencies prepared by wrapper'
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install project dependencies and pinned security tooling
+        run: |
+          python -m pip install --upgrade "pip>=26.2"
+          python -m pip install -e ".[test,quality]"
+          python -m pip install "bandit==1.8.6" "pip-audit==2.9.0"
           npm ci
-          echo '::endgroup::'
-          echo '::group::SAST — fail on medium/high-confidence high-severity findings'
-          python -m bandit -q -r backend/app scripts -ll -ii
-          echo '::endgroup::'
-          echo '::group::Python SCA — reject known vulnerable installed dependencies'
-          python -m pip_audit --progress-spinner off
-          echo '::endgroup::'
-          echo '::group::Node SCA — reject high/critical advisories, including dev dependencies'
-          npm audit --audit-level=high
-          echo '::endgroup::'
-          echo '::group::Existing repository secret scan'
-          python scripts/scan_repository_secrets.py
-          echo '::endgroup::'
-    - name: Clean resources owned by this job attempt
-      if: always()
-      run: bash scripts/ci/cleanup-local-container.sh
-
+      - name: SAST — fail on medium/high-confidence high-severity findings
+        run: python -m bandit -q -r backend/app scripts -ll -ii
+      - name: Python SCA — reject known vulnerable installed dependencies
+        run: python -m pip_audit --progress-spinner off
+      - name: Node SCA — reject high/critical advisories, including dev dependencies
+        run: npm audit --audit-level=high
+      - name: Existing repository secret scan
+        run: python scripts/scan_repository_secrets.py

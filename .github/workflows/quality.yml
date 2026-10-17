@@ -1,83 +1,103 @@
 name: Quality gates
-'on':
-  pull_request: null
+
+on:
+  pull_request:
   push:
-    branches:
-    - main
+    branches: [main]
+
 permissions:
   contents: read
+
 jobs:
   quality:
     name: Quality gates
-    runs-on:
-    - self-hosted
-    - Linux
-    - X64
-    - shahab-local
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v4
-    - name: Run verification in prepared local image
-      run: bash scripts/ci/run-local-container.sh
-      env:
-        SHAHAB_CI_PYTHON_PROFILE: project
-        SHAHAB_CI_COMMANDS: |
-          npm ci
-          echo '::group::Verify generated API artifacts'
-          python -m scripts.export_api_docs --check
-          echo '::endgroup::'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,quality]"
+      - run: npm ci
+      - name: Verify generated API artifacts
+        run: python -m scripts.export_api_docs --check
+      - name: Verify CI harness and complete browser test partition
+        run: |
           node --test tests/ci/local-container.test.mjs tests/ci/e2e-partition.test.mjs
           python -m unittest discover -s tests/ci -p test_python_environment_cache.py
           python -m unittest discover -s tests/ci -p test_postgresql_suite_runner.py
-          npm run quality
-    - name: Clean resources owned by this job attempt
-      if: always()
-      run: bash scripts/ci/cleanup-local-container.sh
+      - run: npm run quality
   postgresql-migrations:
     name: PostgreSQL migration verification
-    runs-on:
-    - self-hosted
-    - Linux
-    - X64
-    - shahab-local
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: shahab_test
+          POSTGRES_USER: shahab_test
+          POSTGRES_PASSWORD: test-password-not-a-secret
+        options: >-
+          --health-cmd "pg_isready -U shahab_test -d shahab_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports:
+          - 5432:5432
     env:
-      SHAHAB_TEST_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@postgres:5432/shahab_test
+      SHAHAB_TEST_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@127.0.0.1:5432/shahab_test
     steps:
-    - uses: actions/checkout@v4
-    - name: Run verification in prepared local image
-      run: bash scripts/ci/run-local-container.sh
-      env:
-        SHAHAB_CI_PYTHON_PROFILE: project
-        SHAHAB_CI_COMMANDS: |
-          python -m scripts.ci.run_postgresql_suites
-        SHAHAB_CI_DATABASE: shahab_test
-    - name: Clean resources owned by this job attempt
-      if: always()
-      run: bash scripts/ci/cleanup-local-container.sh
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,quality]"
+      - run: python -m unittest backend.tests.test_postgresql_migrations
+      - name: Verify account identity migration and generation isolation on PostgreSQL
+        run: python -m unittest backend.tests.test_account_identity_postgresql
+      - name: Verify durable questionnaire creator proof and safe legacy migration
+        run: python -m unittest backend.tests.test_questionnaire_proof_postgresql
+      - name: Verify durable one-hour account sessions and shared OTP races
+        run: python -m unittest backend.tests.test_account_access_postgresql
+      - name: Verify independent raw-answer retention and snapshot preservation
+        run: python -m unittest backend.tests.test_questionnaire_retention_postgresql
+      - name: Verify account bookmarks ownership, migration and transaction races
+        run: python -m unittest backend.tests.test_account_bookmarks_postgresql
+      - run: python -m unittest backend.tests.test_t06_postgresql
+      - name: Verify durable operations audit and transaction races
+        run: python -m unittest backend.tests.test_operations_postgresql
+      - name: Verify protected operations tool with least-privilege PostgreSQL
+        run: python -m unittest backend.tests.test_operations_tool_postgresql
   loan-details-e2e:
     name: Loan details browser verification
     env:
       SHAHAB_BOOKMARK_BASELINE_DIR: /tmp/shahab-bookmark-baseline
       SHAHAB_BOOKMARK_BASELINE_URL: http://127.0.0.1:4175
-    runs-on:
-    - self-hosted
-    - Linux
-    - X64
-    - shahab-local
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v4
-    - name: Run verification in prepared local image
-      run: bash scripts/ci/run-local-container.sh
-      env:
-        SHAHAB_CI_COMMANDS: |
-          npm ci
-          echo '::group::Prepare independent accepted pre-F frontend baseline'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Prepare independent accepted pre-F frontend baseline
+        run: |
           git fetch --no-tags --depth=1 origin d4197e94b24da8cb91e277a7cb1d82be936bbd07
           git worktree add --detach "$SHAHAB_BOOKMARK_BASELINE_DIR" d4197e94b24da8cb91e277a7cb1d82be936bbd07
           ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
-          echo '::endgroup::'
+      - name: Verify built application and dev-only tests without omissions
+        run: |
           npm run build
           npm --prefix "$SHAHAB_BOOKMARK_BASELINE_DIR" run build
           echo '::group::Verify every original browser test is assigned exactly once'
@@ -93,48 +113,53 @@ jobs:
           echo '::group::Verify dev-only loading and HTML harness'
           env -u SHAHAB_BOOKMARK_BASELINE_DIR -u SHAHAB_BOOKMARK_BASELINE_URL npx playwright test tests/e2e/initial-and-questionnaire-loading.spec.mjs tests/e2e/recommendation-result-journey.spec.mjs --reporter=line --output=test-results/development
           echo '::endgroup::'
-    - name: Clean resources owned by this job attempt
-      if: always()
-      run: bash scripts/ci/cleanup-local-container.sh
-    - name: Upload synthetic visual comparison evidence
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: us-11-t02f-visual-evidence
-        path: test-results/
-        retention-days: 7
+      - name: Upload synthetic visual comparison evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-visual-evidence
+          path: test-results/
+          retention-days: 7
+
   profile-live-e2e:
     name: Profile OTP real API browser verification
-    runs-on:
-    - self-hosted
-    - Linux
-    - X64
-    - shahab-local
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: shahab_profile_test
+          POSTGRES_USER: shahab_test
+          POSTGRES_PASSWORD: test-password-not-a-secret
+        options: >-
+          --health-cmd "pg_isready -U shahab_test -d shahab_profile_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports:
+          - 5432:5432
     env:
       SHAHAB_ENVIRONMENT: local
-      SHAHAB_API_DOCS_INCLUDE_OPERATIONS: 'true'
-      SHAHAB_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@postgres:5432/shahab_profile_test
+      SHAHAB_API_DOCS_INCLUDE_OPERATIONS: "true"
+      SHAHAB_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@127.0.0.1:5432/shahab_profile_test
     steps:
-    - uses: actions/checkout@v4
-    - name: Run verification in prepared local image
-      run: bash scripts/ci/run-local-container.sh
-      env:
-        SHAHAB_CI_PYTHON_PROFILE: project
-        SHAHAB_CI_COMMANDS: |
-          python -m alembic upgrade head
-          npm ci
-          npx playwright test --config playwright.profile-live.config.mjs
-        SHAHAB_CI_DATABASE: shahab_profile_test
-    - name: Clean resources owned by this job attempt
-      if: always()
-      run: bash scripts/ci/cleanup-local-container.sh
-    - name: Upload real API browser evidence
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: us-11-t02f-real-api-evidence
-        path: test-results/
-        retention-days: 7
-
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: python -m pip install -e ".[test,quality]"
+      - run: python -m alembic upgrade head
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.profile-live.config.mjs
+      - name: Upload real API browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-real-api-evidence
+          path: test-results/
+          retention-days: 7
