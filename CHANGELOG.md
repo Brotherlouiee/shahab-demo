@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- CI: اجرای مستقل مجموعه‌های PostgreSQL روی دیتابیس‌های موقت با concurrency محدود؛ حفظ همهٔ مجموعه‌ها، شکست در skip/zero-test و پاک‌سازی ایمن. مقایسهٔ baseline روی build، اجرای مرورگر عمومی در دو مرحله با اثبات پوشش کامل discovery، readiness واقعی refresh و بررسی‌های مستقل Swagger با API واقعی؛ بدون تغییر source محصول، timeout یا معیار صفرپیکسل.
+
 - Documentation (US-13؛ PR #132): تجمیع برنامه و تمام ۲۰ جفت شناسهٔ PR #131 در سند جامع؛ تطبیق با main واقعی، اصلاح رابطهٔ CardView/StatsMarquee، تعیین تکلیف ردیف‌های بدون مصرف، تقسیم صریح پرسشنامه به هفت مسئولیت با مالکیت و پذیرش مستقل، ثبت وضعیت چهار تسک و صف Hero با معیار پذیرش؛ بدون تغییر runtime/ظاهر/API/داده یا اعلام پایان داستان.
 
 - CI/browser: محدودکردن worker مرورگر محلی به یک، انتظار واقعی decode تصویر و آزادسازی کنترل‌شدهٔ document fallback؛ تفکیک مسیر/viewportهای مستقل با حفظ همهٔ assertionها و شرط صفرپیکسل. suite واقعی API روی خروجی build همان revision با FastAPI/PostgreSQL واقعی بررسی می‌شود.
@@ -331,3 +333,4 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 
 - personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
 - Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
+

@@ -61,6 +61,7 @@ test("database and job have no published ports; cleanup targets only this invoca
   }
   const job = runs.find(args => args.includes("shahab-ci:local-v1"));
   assert.ok(job.includes("--user"));
+  assert.ok(job.includes("SHAHAB_CI_DATABASE"), "owned database identity must reach the isolated scheduler");
   const names = runs.map(args => args[args.indexOf("--name") + 1]);
   const removed = calls.filter(args => args[0] === "rm").map(args => args.at(-1));
   assert.deepEqual(new Set(removed), new Set(names));
@@ -249,3 +250,4 @@ test("in-memory filesystems belong only to disposable job and database container
   assert.ok(database.includes("/var/lib/postgresql/data:rw,nosuid,nodev,size=512m"));
   assert.ok(!database.includes("-c"));
 });
+
