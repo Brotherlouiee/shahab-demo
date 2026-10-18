@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Added (US-12.T04A.1): ایمیج مستقل static فرانت با runtime غیرروت و پایهٔ digest-pinned، contextهای allowlist برای دو build، proxy HTTPS غیرفعال و harness واقعی build/run/TLS/static-byte comparison در CI بدون publish؛ Dockerfile بک‌اند، Compose/Netlify و source/UI/schema/data ثابت. [قرارداد](docs/operations/container-images.md).
+
 - Docs (US-12.T04): پیش‌نویس release notes، زنجیرهٔ واقعی migration، طرح تفکیک بازگشت کد/schema/داده و restore با گیت ابطال credential، purge پاسخ منقضی و حفظ archived/hidden؛ فرم شواهد خالی، بدون تغییر runtime یا اجرای migration/deploy. [یادداشت](docs/release/us-12-t04-release-notes.md).
 
 - Docs (US-12.T03): نمونه‌های غیرفعال backend/Netlify و فرم شواهد، راهنمای preview/smoke با شرط same-origin/proxy و cookie، محل secrets و gateهای آنلاین؛ بدون تغییر تنظیم فعال یا استقرار/ارسال SMS. [راهنما](docs/runbook/preview-smoke.md).

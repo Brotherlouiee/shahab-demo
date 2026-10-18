@@ -1,0 +1,19 @@
+# Backend context allowlist. Root Dockerfile and development Compose stay unchanged.
+**
+!pyproject.toml
+!README.md
+!backend/
+backend/**
+!backend/__init__.py
+!backend/app/
+!backend/app/**
+!alembic/
+!alembic/**
+!alembic.ini
+!data/
+data/**
+!data/contracts/
+!data/contracts/**
+**/__pycache__
+**/*.pyc
+**/.env*

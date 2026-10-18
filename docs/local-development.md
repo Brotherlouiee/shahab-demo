@@ -21,6 +21,11 @@ Frontend changes use Vite hot reload; backend changes under `backend/` restart
 Uvicorn automatically. A full image rebuild is only needed after changing
 Python dependencies, the Dockerfile, or the database/runtime configuration.
 
+Release image packaging is separate: [T04A.1 image build/run contract](operations/container-images.md)
+adds an independent static frontend image on port8080. It does not replace this
+Vite development service or change Netlify. The API keeps its root Dockerfile;
+Dockerfile-specific context allowlists exclude local secrets and unrelated files.
+
 ## Publish the verified local catalogue
 
 On a new local PostgreSQL volume, first inspect the migrated database without
