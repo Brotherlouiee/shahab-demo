@@ -155,7 +155,19 @@ bb11b02b0001 فقط creator_proof_digest nullable به questionnaire_sessions م
 
 C سه جدول اجرایی دارد: accounts ||--o{ account_access_sessions (RESTRICT)، OTP challenge پیش از account و quota events عملیاتی کوتاه‌عمر، بدون FK به business profile. [قرارداد](../security/account-session-lifecycle.md). owner/history/source روابط قبلی ثابت.
 
-## US-11.…9352 tokens truncated… تمدید/تضعیف نمی‌شوند.
+## US-11.T02E — پاسخ خام مستقل از snapshot
+
+`questionnaire/infrastructure/retention.py` هر بار حداکثر۱۰۰ (حد سخت۱۰۰۰) نشست
+expired را با ترتیب expiry/UUID و `FOR UPDATE SKIP LOCKED` انتخاب می‌کند. حذف
+answers، EXPIRED کردن metadata مرتبط و حذف metadata غیرمرتبط در یک transaction
+commit یا rollback می‌شوند. لینک history با هیچ فیلتر hidden/status کنار گذاشته
+نمی‌شود: profile/account/run/item/reason/owner و data/config/loan/questionnaire
+version حفظ می‌شوند؛ هیچ cascade، انتقال خام به archive/JSON یا تغییر scoring وجود ندارد.
+metadata مرتبط شامل UUID، version FK، owner UUID، created/expires، state و digest
+immutable (یا NULL legacy) برای FK/idempotency/evidence همراه history همیشگی
+باقی می‌ماند؛ digest secret قابل بازیابی/پاسخ خام نیست و expiry/state هرگز اجازه
+استفاده دوباره نمی‌دهند. metadata غیرمرتبط پس از expiry نیاز durable ندارد و حذف
+می‌شود. قرارداد proof/owner و TTL۱۸۰۰ تمدید/تضعیف نمی‌شوند.
 
 این موتور و CLI به‌تنهایی scheduler نیستند. F02 مسیر FK/runtime در E اصلاح می‌شود؛
 بستن کامل operational retention همچنان نیازمند scheduler/monitor/restore-before-reopen
@@ -163,11 +175,16 @@ C سه جدول اجرایی دارد: accounts ||--o{ account_access_sessions (
 [فرمان و حدود عملیاتی](../operations/raw-answer-retention.md) و
 [شواهد E](../progress/us-11-t02e.md).
 
-## US-11.T02F — association نرمال نشان‌شده
+## US-11.T02F — نشان‌شده‌های حساب
 
-account_bookmarks با composite PK(account_id,loan_product_version_id)، دو FK RESTRICT،
-source_history_run_id nullable و owner-composite FK به history، created_at/removed_at
-و CHECK زمان حذف. unique(run_id,owner_account_id) فقط برای constraint مرجع مالک؛
-facts/score/phone/آرایه JSON در bookmark/profile کپی نمی‌شوند. 3NF و immutable
-loan version/snapshot برقرار. trigger account/version identity، remove نرم و no
-cascade داده حساب. API desired-state idempotent و query actor-scoped در همان transaction.
+```mermaid
+erDiagram
+    accounts ||--o{ account_bookmarks : owns
+    loan_product_versions ||--o{ account_bookmarks : exact_version
+    recommendation_history_runs o|--o{ account_bookmarks : optional_owned_context
+```
+
+PK(account_id,loan_product_version_id)، FKهای RESTRICT و composite FK(source_history_run_id,
+account_id)→history(run_id,owner_account_id)؛ run+owner UNIQUE اضافه می‌شود تا مرجع
+snapshot هرگز متعلق به نسل/حساب دیگر نباشد. created_at و removed_at UTC؛ هیچ JSON،
+phone، نام وام یا score در association نیست. [قرارداد F](../security/account-bookmarks.md).
