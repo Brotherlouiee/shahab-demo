@@ -83,20 +83,29 @@ jobs:
           cache-to: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'type=gha,scope=shahab-web-amd64-v1,mode=min,version=2,timeout=60s' || '' }}
       - name: Preserve build metadata, with no registry credentials
         if: ${{ always() }}
-        env:
-          API_METADATA: ${{ steps.api.outputs.metadata }}
-          WEB_METADATA: ${{ steps.web.outputs.metadata }}
         run: |
-          python - <<'PY'
+          python - <<'PYCODE'
           import json, os
           from pathlib import Path
-          for name in ('api', 'web'):
-              raw = os.environ[name.upper() + '_METADATA']
-              if not raw:
-                  continue  # A failed build stays failed; retain the other build evidence.
-              value = json.loads(raw)
-              Path('test-results/images/' + name + '-build.json').write_text(json.dumps(value, indent=2) + '\n')
-          PY
+          # These pinned build-push-action/toolkit versions write their CLI
+          # --metadata-file here. Read files directly: max provenance exceeds
+          # Linux's per-environment-variable limit. Never trim provenance.
+          expected = {
+              'docker.io/library/shahab-ci-' + name + ':sha-' + os.environ['SOURCE_SHA']: name
+              for name in ('api', 'web')
+          }
+          seen = set()
+          for path in Path(os.environ['RUNNER_TEMP']).glob('docker-actions-toolkit-*/build-metadata-*.json'):
+              value = json.loads(path.read_text())
+              name = expected.get(value.get('image.name'))
+              if name is None:
+                  continue
+              if name in seen:
+                  raise ValueError('Ambiguous build metadata for ' + name)
+              seen.add(name)
+              Path('test-results/images/' + name + '-build.json').write_bytes(path.read_bytes())
+          print('Build metadata files retained:', sorted(seen))
+          PYCODE
       - name: Smoke the exact loaded images without rebuilding
         run: python tests/images/smoke.py --api-image "shahab-ci-api:sha-$SOURCE_SHA" --web-image "shahab-ci-web:sha-$SOURCE_SHA"
       - name: Install checksum-pinned Trivy, no package-manager scripts
