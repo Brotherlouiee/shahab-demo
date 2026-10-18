@@ -1,0 +1,24 @@
+# INERT DOCUMENTATION ONLY; root netlify.toml remains authoritative.
+# Do not select/copy this config until T081/T07 prerequisites and authorization.
+# Replace .invalid ONLY with the approved isolated API origin.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Browser traffic stays on the frontend origin for HttpOnly proof/session cookies.
+  VITE_SHAHAB_API_BASE_URL = "/api/v1"
+
+# API before SPA. Actual upstream Host/scheme and cookie forwarding must be proven;
+# this example does not establish trust for forwarded headers or authorize deployment.
+[[redirects]]
+  from = "/api/v1/*"
+  to = "https://api.preview.example.invalid/api/v1/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

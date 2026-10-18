@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Docs (US-12.T03): نمونه‌های غیرفعال backend/Netlify و فرم شواهد، راهنمای preview/smoke با شرط same-origin/proxy و cookie، محل secrets و gateهای آنلاین؛ بدون تغییر تنظیم فعال یا استقرار/ارسال SMS. [راهنما](docs/runbook/preview-smoke.md).
+
 - Test (US-12.T02): اجرای همهٔ unitهای فرانت با discovery، اصلاح harness تست dedupe و انتقال journey کامل به suite واقعی FastAPI/PostgreSQL با فرم/OTP و selectorهای جاری؛ ثبت پوشش و محدودیت شواهد مستقل از سرور، بدون تغییر UI/API/schema/data/scoring یا شل‌کردن gateها. [نقشهٔ تست](docs/testing/us-12-t02.md).
 
 - Docs (US-12 / ترتیب ۲۰۲۶-۱۰-۱۸، PR #132): انجام کارهای مستقل از سرور US-12 پیش از US-13؛ حذف شرط تقدم/تأخر انتشار مخزن، تغییر نام همان جدول به «جدول تسک‌های پس از استقرار» و جداسازی وابستگی CI/registry از سرور؛ رجیستری و پذیرش داخلی US-13 و تمام gateهای نهایی محفوظ، بدون تغییر runtime/workflow. [checkpoint](docs/progress/us-12-preparation-order-20261018.md).
