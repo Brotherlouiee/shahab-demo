@@ -56,7 +56,7 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/question/3");
   for (const question of questionnaire.questions) {
-    await expect(page.getByRole("heading", { name: question.prompt })).toBeVisible();
+    await expect(page.getByRole("heading", { name: persian(question.prompt).replace(/\s+/g, " ").trim() })).toBeVisible();
     const answer = page.getByRole("radio").first();
     await answer.click();
     await expect(answer).toBeChecked();
