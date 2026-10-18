@@ -97,7 +97,9 @@ def main():
                     command("docker", "run", "--rm", "--network", "none", "--entrypoint", "id", image, "-u").strip()
                     != "0"
                 )
-            command("docker", "network", "create", "--internal", network)
+            # A dedicated bridge permits loopback-only host probes. Docker's
+            # --internal network deliberately does not publish those host ports.
+            command("docker", "network", "create", network)
             network_created = True
             api_name, api = start(
                 "api",
