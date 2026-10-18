@@ -239,4 +239,3 @@ class AccountAccessPostgreSqlTests(unittest.TestCase):
             self.assertEqual(db.scalar(select(func.count()).select_from(AccountOtpQuotaEvent)), 10)
             self.assertEqual(db.scalar(select(func.count()).select_from(Account)), 0)
             self.assertTrue(all(row.consumed_at is not None for row in db.scalars(select(AccountOtpChallenge))))
-

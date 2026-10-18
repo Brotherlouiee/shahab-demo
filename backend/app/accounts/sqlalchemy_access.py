@@ -230,4 +230,3 @@ class SqlAlchemyAccountAccess(AccountAccess):
         except SQLAlchemyError:
             self.db.rollback()
             raise AccessFailure(503) from None
-

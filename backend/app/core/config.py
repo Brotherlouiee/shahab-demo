@@ -109,4 +109,3 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Return the process-wide immutable settings instance."""
     return Settings()
-

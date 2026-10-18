@@ -176,4 +176,3 @@ def logout(
     for cookie in request.cookies:
         if cookie.startswith("shahab_questionnaire_proof_"):
             response.delete_cookie(cookie, path="/api/v1")
-

@@ -181,4 +181,3 @@ class AccountAccess:
     def revoke(self, token: str) -> None:
         with self.lock:
             self.sessions.pop(digest(token), None)
-
