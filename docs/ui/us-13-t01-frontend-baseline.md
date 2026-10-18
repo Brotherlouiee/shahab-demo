@@ -6,6 +6,17 @@
 
 **روش قابل تکرار:** `.github/workflows/us13-baseline.yml` نسخهٔ منجمد `f5e50da...` را روی پورت 4177 در worktree مستقل بالا می‌آورد؛ `tests/e2e/us13-baseline-inventory.spec.mjs` نسخهٔ پذیرفته و head را در یک مرورگر و viewport/fixture یکسان با شرط صفر تلورانس می‌سنجد و هر دو تصویر و boundingBox را به‌صورت artifact نگه می‌دارد. این فقط ۹ حالت اولیهٔ مهمان را اثبات می‌کند؛ منو/OTP و سایر صفحات هنوز به characterization اختصاصی نیاز دارند. آزمون موجود saved-loan بدون تغییر حفظ شده است.
 
+## اصلاح ممیزی و تقدم برنامهٔ جاری — ۲۰۲۶-۱۰-۱۶
+
+برنامهٔ اجرایی و تمام شناسه‌ها اکنون در [سند جامع](../SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md) تجمیع شده‌اند؛ آن سند بر ترتیب پیشنهادی/خط‌شمار تاریخی این فایل مقدم است. کد در `main=f5711e78` و head `5ecf436` همان blob `9c18b0c3ff8157526178f06622675391c24da59e` است.
+
+- تعریف `Hero` فعال است و سه state محلی دارد؛ هیچ `CardView` در آن نیست.
+- `Features`، `Footer` و `StatsMarquee` در HomePage فعلی فراخوانی JSX ندارند. تنها caller محلی `CardView`، `StatsMarquee` است؛ بنابراین وجود یک JSX call برای CardView به‌تنهایی شاهد فعال‌بودنش در محصول نیست.
+- جفت‌های ۰۲–۰۵ با پذیرش برنامه وضعیت «عدم نیاز به انتقال در محصول فعلی» می‌گیرند؛ بازگردانی به UI و حذف کد/CSS جزو این مستندسازی نیست. حذف فقط در T04 با شواهد کامل بررسی می‌شود.
+- جفت ۰۱ قبلاً مرج شده و CSS آن no-move است. قدم بعد تکمیل baseline تعامل‌های Hero در T01 و سپس جفت ۰۶ است؛ هیچ شماره‌ای دوباره به مسئولیت دیگری داده نمی‌شود.
+- شش check روی `5ecf436` سبز و ۹ نمای اولیه/گیت About را محافظت می‌کنند؛ این شاهد، پوشش جامع همهٔ route/state/viewportها نیست. suite واقعی API با build/preview همان revision و FastAPI/PostgreSQL اجرا می‌شود؛ suite عمومی فقط قراردادهای مربوط خودش را اثبات می‌کند.
+- محیط فعلی PR #132، runner محلی Linux/WSL با image و browser مشخص آن PR است؛ عبارت ubuntu-24.04 در مشخصات تاریخی پایین، وضعیت baseline اصلی است، نه ادعای runner کنونی. هر مقایسهٔ جدید باید baseline و candidate را در همان محیطِ ثبت‌شده اجرا کند و مرجع اصلی `f5e50da...` تغییر نمی‌کند.
+
 ## ۱. منابع الزام‌آور و مرز تسک
 
 - مالک: `Brotherlouiee/shahab-demo`؛ آخرین مبنای تأییدشده هنگام آغاز `main = f5e50da0ea29b7d933a813736a2616169ee9b8f3` (مرج PR #125). این شناسه **مرجع منجمد پیش از هر ریفکتور US-13** است و در T02/T03 نباید از HEAD بعدی به‌عنوان «baseline جدید» جایگزین شود.
@@ -46,7 +57,7 @@
 | Questionnaire + personal stage | `getQuestionnaireRouteState` ~199، `QuestionnaireScreen` ~1052–2614 | **بزرگ‌ترین و پرخطرترین بلوک (~۱۵۶۳ خط)**؛ session ID و پاسخ‌ها در React instance، URLهای canonical، route popstate، local-only cache profile؛ تقسیم ریز پیش از هر جابه‌جایی |
 | Loan compare | `LoanCompareScreen` ~795، `LoanComparisonResultCard` ~898، `LoanComparisonResultScreen` ~911 | دادهٔ API وام، انتخاب/بازگشت، صفحهٔ مستقل نتیجه، درصد RTL؛ استفادهٔ دوباره از `LoanComparisonCard` و `BankIdentity` |
 | AI explanation | `LoanAiAnalysisScreen` ~1010 | فقط توضیح واقعی provider؛ submit disabled؛ هر تغییر محتوای توضیح یا فعال‌سازی دکمه ممنوع |
-| Home marketing | `Hero` ~2615، `CardView` ~2703، `StatsMarquee` ~2769، `Features` ~2781، `Footer` ~2817 | ترتیب DOM، animation، لوگو و external images، breakpoint و کلیک‌ها حفظ شوند |
+| Home marketing | `Hero` فعال؛ `Features`/`Footer`/`StatsMarquee` فعلاً dormant و `CardView` فقط مصرف‌شده در StatsMarquee | فعال‌بودن تعریف از حضور در محصول استنتاج نشود؛ تصمیم انتقال طبق سند جامع؛ هیچ UI غیرفعالی دوباره فعال نمی‌شود |
 | Account and profile | `ProfileDropdown` ~2854، `AccountPage` ~2861 | read/persist profile، edit dirty state، avatar <=100KB، validation و POST؛ error/confirm/load |
 | About | `AboutPage` ~2890 | محتوای فارسی و تصویر /about-us-payment.png باید بایت‌به‌بایت/متن دقیق حفظ شود |
 | Saved loans | `SavedLoansPage` ~2894؛ مصرف‌کنندهٔ `LoanResultsScreen` | `refreshSavedLoans`، listener `shahab:saved-loans` و focus، mount/unmount و status error/empty؛ مرورگر کارت 390/1440 |
@@ -87,7 +98,7 @@
 - وجود یک selector در چند صفحه یا ترکیب state، دلیل کافی برای جداکردن آن نیست. shared/global CSS ممکن است **عمداً در App.css بماند**؛ «ماژولار کردن» مجوز تغییر behavior یا override نیست.
 - برای استخراج دقیق CSS: پیش از T03.nn با Playwright `getComputedStyle`، geometry و screenshot در stateهای نمایان/پنهان/keyboard/open/scroll و هم‌صفحه‌های consumer اندازه‌گیری شود؛ فقط پس از سبزشدن این شواهد یک قانون منتقل شود.
 
-## ۶. رجیستری پیشنهادی ریزگام‌های استخراج؛ **نه مجوز اجرا**
+## ۶. رجیستری اولیهٔ تاریخی؛ **مرجع اجرای جاری فقط سند جامع است**
 
 **قرارداد هر سطر:** `T02.nn` تنها پس از مرج `T01` و تکمیل baseline مربوط، سپس `T03.nn` فقط بعد از مرج همان T02.nn؛ هر مرحله از main جدید، یک PR کوچک، با commit فارسی، تست/visual/network gate جدا، rollback. فایل منبع همهٔ استخراج‌ها `src/home page.jsx` است؛ هدف مسیر پیشنهادی است و قبل از create باید با import graph و محافظت نام/identity بازبینی شود.
 
@@ -129,3 +140,6 @@
 | سند تداوم | طبق مصوبه **فقط پایان User Story**؛ این تسک T01 پایان US-13 نیست | تغییر ندارد |
 
 **خروجیِ درست T01:** نقشهٔ قابل اتکا و baseline SHA منجمد، رجیستری ریزگام‌ها و کشف شکاف‌های واقعی؛ **نه** مجوز ریفکتور بدون پوشش آزمون همان بخش. در صورت باقی‌ماندن شاهدِ اجباری، T01 را «داده/موجودی تکمیل، gate تصویری در حال تکمیل» ثبت کنید و از عنوان Done قطعی تا پذیرش همهٔ موارد پرهیز کنید.
+
+
+تقسیم اجرایی QuestionnaireScreen به هفت جفت فرزند 19.1 تا 19.7 با مرز، مالکیت و پذیرش در رجیستری سند جامع ثبت شده است؛ جدول تاریخی این فایل مرجع ایجاد شناسهٔ جدید نیست.

@@ -17,6 +17,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
       // Force full tiles and the generic Skia path for BOTH independently
       // checked-out versions; keep the screenshot pixel comparison exact.
       const browser = await chromium.launch({
+    ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
         args: [
           "--disable-gpu",
           "--disable-gpu-rasterization",
@@ -47,7 +48,10 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
           await expect(element).toBeVisible();
           await page.evaluate(() => document.fonts.ready);
           if (populated) await expect(page.locator(".hp-loan-save-button")).toHaveAttribute("aria-pressed", "true");
-          else expect(await element.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+          else {
+            await element.evaluate(image => image.decode());
+            expect(await element.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+          }
           const rect = await element.boundingBox();
           const pixels = await element.screenshot({ animations: "disabled", caret: "hide" });
           return { rect, pixels };

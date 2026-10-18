@@ -13,10 +13,10 @@ const approvedRoutes = [
   ["/question/12", "فرض کنید برای تأمین مبلغ ۱۰۰ میلیون تومان"],
 ];
 
-test("preserves every approved behavioural path and renders its canonical questionnaire screen", async ({ page }) => {
-  for (const [route, expectedQuestionPrefix] of approvedRoutes) {
+for (const [route, expectedQuestionPrefix] of approvedRoutes) {
+  test(`preserves approved behavioural path ${route} and renders its canonical questionnaire screen`, async ({ page }) => {
     await page.goto(route);
     await expect(page).toHaveURL(new RegExp(`${route}$`));
     await expect(page.locator(".hp-questionnaire-page h1")).toContainText(expectedQuestionPrefix);
-  }
-});
+  });
+}

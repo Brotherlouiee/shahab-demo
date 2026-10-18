@@ -6,6 +6,24 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Docs (US-12 / ترتیب ۲۰۲۶-۱۰-۱۸، PR #132): انجام کارهای مستقل از سرور US-12 پیش از US-13؛ حذف شرط تقدم/تأخر انتشار مخزن، تغییر نام همان جدول به «جدول تسک‌های پس از استقرار» و جداسازی وابستگی CI/registry از سرور؛ رجیستری و پذیرش داخلی US-13 و تمام gateهای نهایی محفوظ، بدون تغییر runtime/workflow. [checkpoint](docs/progress/us-12-preparation-order-20261018.md).
+
+- CI: اجرای مستقل مجموعه‌های PostgreSQL روی دیتابیس‌های موقت با concurrency محدود؛ حفظ همهٔ مجموعه‌ها، شکست در skip/zero-test و پاک‌سازی ایمن. مقایسهٔ baseline روی build، اجرای مرورگر عمومی در دو مرحله با اثبات پوشش کامل discovery، readiness واقعی refresh و بررسی‌های مستقل Swagger با API واقعی؛ بدون تغییر source محصول، timeout یا معیار صفرپیکسل.
+
+- Documentation (US-13؛ PR #132): تجمیع برنامه و تمام ۲۰ جفت شناسهٔ PR #131 در سند جامع؛ تطبیق با main واقعی، اصلاح رابطهٔ CardView/StatsMarquee، تعیین تکلیف ردیف‌های بدون مصرف، تقسیم صریح پرسشنامه به هفت مسئولیت با مالکیت و پذیرش مستقل، ثبت وضعیت چهار تسک و صف Hero با معیار پذیرش؛ بدون تغییر runtime/ظاهر/API/داده یا اعلام پایان داستان.
+
+- CI/browser: محدودکردن worker مرورگر محلی به یک، انتظار واقعی decode تصویر و آزادسازی کنترل‌شدهٔ document fallback؛ تفکیک مسیر/viewportهای مستقل با حفظ همهٔ assertionها و شرط صفرپیکسل. suite واقعی API روی خروجی build همان revision با FastAPI/PostgreSQL واقعی بررسی می‌شود.
+
+- CI: اجرای checkout و venv در tmpfs محدود خصوصی و دیتابیس fixture در tmpfs اختصاصی، با حفظ تنظیم‌های PostgreSQL و خروجی تصاویر/trace؛ تغییر آزمایشی برای سنجش کندی I/O، بدون ادعای رسیدن به سقف پنج دقیقه.
+
+- CI: ذخیرهٔ محیط نصب‌شدهٔ Python با کلید وابستگی/ایمیج/profile و عمر ۲۴ساعته، بازیابی کپی مستقل برای هر job، حفظ audit امنیتی و زمان‌سنجی جداگانهٔ ۹ مجموعه PostgreSQL؛ probe مستقل برای مقایسه cold/warm بدون اجرای خودکار gateهای کامل.
+
+- CI: قطع‌پذیرشدن wrapper و پاک‌سازی محدود به run/attempt/job پس از لغو؛ افزودن probe محدود برای زمان نصب، import، تراکنش و یک آزمون migration، بدون اجرای خودکار gateها یا تغییر timeout و معیارهای قبلی.
+
+- CI: به‌روزرسانی pip محیط آزمون امنیتی به نسخهٔ دارای اصلاح advisoryها و انتظار برای فرم واقعی ورود پیش از مقایسهٔ تصویر، با حفظ gate صفرپیکسل و بدون تغییر محصول.
+
+- CI: اجرای شش job فعلی با ایمیج آمادهٔ محلی shahab-ci:local-v1 و منع pull هنگام آزمون؛ cache دانلود npm/pip، PostgreSQL موقت بدون پورت میزبان، cleanup محدود و پنج آزمون wrapper. پشتیبانی از مسیر مرورگر آماده در تست‌های baseline و پروفایل با حفظ assertionها و همهٔ gateهای قبلی.
+
 - Test/Documentation (US-13.T03.01): مستندسازی no-move برای قواعد درهم‌تنیدهٔ CSS صفحهٔ درباره ما با profile/saved/header و افزودن گیت مستقل تطابق computed style/geometry با baseline؛ هیچ انتقال CSS، redesign یا تغییر رفتار.
 
 - Refactor (US-13.T02.01): انتقال بی‌تغییرِ صفحه «درباره ما» به ماژول مستقل و تزریق هدر فعلی، بدون جابه‌جایی CSS، متن، آیکن، دارایی، DOM یا تغییر رفتار؛ آزمون مقایسهٔ ناوبری/تصویر در کنار خط مبنای صفرپیکسلی.
@@ -317,3 +335,4 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 
 - personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
 - Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
+
