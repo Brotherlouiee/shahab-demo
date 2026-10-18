@@ -181,3 +181,62 @@ class AccountAccessPostgreSqlTests(unittest.TestCase):
             with self.engine.begin() as c:
                 c.execute(text("DROP TRIGGER reject_access_fixture ON account_access_sessions"))
                 c.execute(text("DROP FUNCTION reject_access_fixture()"))
+
+    def test_lookup_without_sms_verifies_after_restart_and_consumes_once_across_connections(self):
+        """Real PostgreSQL locking with a fake external boundary; no paid SMS."""
+        from backend.tests.test_kavenegar_otp import accepted, provider
+
+        self.alembic("upgrade", "head")
+        sent = []
+
+        def deliver(key, parameters, timeout):
+            # A separate connection sees the committed reservation while delivery
+            # is in progress. PostgreSQL's advisory quota lock must be released.
+            with self.engine.begin() as connection:
+                self.assertTrue(connection.scalar(text("SELECT pg_try_advisory_xact_lock(110203)")))
+                self.assertEqual(connection.scalar(text("SELECT count(*) FROM account_otp_challenges")), 1)
+            sent.append(parameters)
+            return accepted()
+
+        with Session(self.engine) as db:
+            challenge = SqlAlchemyAccountAccess(provider(deliver), db).request_code("09000000001", "client")
+        barrier = Barrier(2)
+
+        def consume():
+            with Session(self.engine) as db:
+                service = SqlAlchemyAccountAccess(provider(), db)
+                barrier.wait(timeout=10)
+                try:
+                    token = service.verify_code(challenge, sent[0]["token"])
+                    actor = ensure_profile(service.verified_phone(token), db)
+                    service.bind_account(token, actor.account_id)
+                    return 200
+                except AccessFailure as error:
+                    return error.status
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            self.assertEqual(sorted(pool.map(lambda _: consume(), range(2))), [200, 401])
+        with Session(self.engine) as db:
+            self.assertEqual(db.scalar(select(func.count()).select_from(AccountAccessSession)), 1)
+            self.assertIsNotNone(db.scalar(select(AccountOtpChallenge)).consumed_at)
+
+    def test_lookup_failure_keeps_committed_quota_and_denies_every_challenge(self):
+        from unittest.mock import Mock
+
+        from backend.app.infrastructure.db.models import Account, AccountOtpQuotaEvent
+        from backend.tests.test_kavenegar_otp import provider
+
+        self.alembic("upgrade", "head")
+        sender = provider(Mock(side_effect=TimeoutError("synthetic unavailable")))
+        for _ in range(5):
+            with Session(self.engine) as db, self.assertRaises(AccessFailure) as error:
+                SqlAlchemyAccountAccess(sender, db).request_code("09000000001", "client")
+            self.assertEqual(error.exception.status, 503)
+        with Session(self.engine) as db, self.assertRaises(AccessFailure) as error:
+            SqlAlchemyAccountAccess(sender, db).request_code("09000000001", "client")
+        self.assertEqual(error.exception.status, 429)
+        with Session(self.engine) as db:
+            self.assertEqual(db.scalar(select(func.count()).select_from(AccountOtpQuotaEvent)), 10)
+            self.assertEqual(db.scalar(select(func.count()).select_from(Account)), 0)
+            self.assertTrue(all(row.consumed_at is not None for row in db.scalars(select(AccountOtpChallenge))))
+

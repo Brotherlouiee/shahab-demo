@@ -22,6 +22,8 @@ from backend.app.infrastructure.db.models import AccountAccessSession, AccountOt
 
 
 class SqlAlchemyAccountAccess(AccountAccess):
+    persistent = True
+
     def __init__(self, provider: OtpProvider | None, db: Session, clock: Callable[[], datetime] | None = None) -> None:
         super().__init__(provider)
         self.db = db
@@ -86,7 +88,7 @@ class SqlAlchemyAccountAccess(AccountAccess):
                 raise AccessFailure(429)
             for key in keys:
                 self.db.add(AccountOtpQuotaEvent(quota_key=key, occurred_at=now))
-            challenge = secrets.token_urlsafe(32)
+            challenge = (self.provider.challenge_prefix if self.provider else "") + secrets.token_urlsafe(32)
             self.db.add(
                 AccountOtpChallenge(
                     challenge_digest=digest(challenge),
@@ -96,6 +98,19 @@ class SqlAlchemyAccountAccess(AccountAccess):
                     attempts=0,
                 )
             )
+        # Quota and challenge are committed before I/O, so concurrent workers
+        # see the reservation. A timeout is ambiguous: never automatically retry.
+        try:
+            if self.provider is not None:
+                self.provider.send(phone, challenge)
+        except Exception:
+            with self._write():
+                self.db.execute(
+                    update(AccountOtpChallenge)
+                    .where(AccountOtpChallenge.challenge_digest == digest(challenge))
+                    .values(consumed_at=self._now())
+                )
+            raise AccessFailure(503) from None
         return challenge
 
     def verify_code(self, challenge_id: str, code: str) -> str:
@@ -114,7 +129,7 @@ class SqlAlchemyAccountAccess(AccountAccess):
             if row is None or row.consumed_at is not None or row.attempts >= 5:
                 raise AccessFailure(401)
             row.attempts += 1
-            if self.provider is None or not self.provider.verify(code):
+            if self.provider is None or not self.provider.verify(code, challenge_id):
                 if row.attempts >= 5:
                     row.consumed_at = now
                 raise AccessFailure(401)
@@ -215,3 +230,4 @@ class SqlAlchemyAccountAccess(AccountAccess):
         except SQLAlchemyError:
             self.db.rollback()
             raise AccessFailure(503) from None
+

@@ -35,6 +35,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- US-11.T06: اتصال قابل فعال‌سازی OTP کاوه‌نگار با الگوی محیطی، ارسال HTTPS Lookup، کد challenge-bound بدون ذخیره خام و حفظ quota/expiry/session؛ آزمون‌های بدون پیامک و runbook [فعال‌سازی/بازگشت](docs/operations/kavenegar-otp.md). schema/API/UI/منابع توصیه‌گر تغییر نمی‌کنند؛ تأیید الگو و تست واقعی همچنان pending.
+
 - US-11.T02F: نشان‌شده‌های حساب‌محور در association نرمال account_bookmarks و API
   owner-scoped desired-state، migration افزایشی ff11b02f0001، optional own-snapshot
   reference بدون کپی مشخصات/score. sync دستگاه/refresh، retry/rollback/PK و index tests.
@@ -317,3 +319,4 @@ Owner reported failures in both login and personal-info on local Docker. Reprodu
 
 - personal-info نام و شماره حساب فعلی را پیش‌فرض دارد؛ شماره یکسان بدون OTP و شماره تغییرکرده تنها پس از OTP همان شماره ادامه می‌یابد. شماره profile همچنان immutable است.
 - Back شماره draft را حفظ می‌کند؛ account/profile/history قدیمی rename یا منتقل نمی‌شوند؛ حساب شماره جدید از OTP تأییدشده انتخاب می‌شود. regression واقعی PostgreSQL افزوده شد.
+

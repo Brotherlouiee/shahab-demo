@@ -1,4 +1,4 @@
-"""HTTP adapter for local/test OTP and profile ownership; no public phone lookup authorization."""
+"""HTTP adapter for OTP and profile ownership; no public phone lookup authorization."""
 
 from typing import Annotated
 
@@ -176,3 +176,4 @@ def logout(
     for cookie in request.cookies:
         if cookie.startswith("shahab_questionnaire_proof_"):
             response.delete_cookie(cookie, path="/api/v1")
+
