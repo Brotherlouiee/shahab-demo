@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { fetchLoanDetails } from "../../src/features/loan-details/loanDetailsApi.js";
+import { createServer } from "vite";
 
 test("deduplicates concurrent detail requests and reuses the same-tab response", async () => {
+  // Exercise the unmodified Vite module with its real import.meta.env transform.
+  const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false }, appType: "custom" });
   const originalFetch = globalThis.fetch;
   let calls = 0;
   let release;
@@ -16,6 +18,7 @@ test("deduplicates concurrent detail requests and reuses the same-tab response",
     }), { status: 200, headers: { "Content-Type": "application/json" } });
   };
   try {
+    const { fetchLoanDetails } = await server.ssrLoadModule("/src/features/loan-details/loanDetailsApi.js");
     const first = fetchLoanDetails("cached-loan");
     const second = fetchLoanDetails("cached-loan");
     assert.equal(calls, 1);
@@ -25,5 +28,6 @@ test("deduplicates concurrent detail requests and reuses the same-tab response",
     assert.equal(calls, 1);
   } finally {
     globalThis.fetch = originalFetch;
+    await server.close();
   }
 });

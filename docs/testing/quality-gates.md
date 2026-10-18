@@ -32,3 +32,7 @@ logout cookie/storage/refresh؛ pixel/geometry قبل/بعد saved card و empty
 با baseline detached main مستقل و fixture/fonts یکسان. CI baseline در /tmp، هیچ
 snapshot از candidate به baseline بدل نمی‌شود؛ tolerance/mask صفر. artifacts مصنوعی
 در us-11-t02f-visual-evidence؛ gateهای قبلی و۱۹ operation Swagger پوشش دارند.
+
+## US-12.T02 — پوشش کامل نسخهٔ جاری
+
+`quality` اکنون همهٔ ۱۵ فایل unit فرانت را با `npm run test:unit` کشف می‌کند؛ loan-details-api و vite-proxy دیگر بیرون گیت نیستند. مسیر full-stack از suite فاقد DB به profile-live واقعی منتقل و با فرم/OTP فعلی هماهنگ شده است، بدون تغییر محصول یا افزایش timeout کلی. [نقشهٔ پوشش/محیط و محدودیت‌ها](us-12-t02.md) مرجع تفکیک unit، pipeline، PostgreSQL، browser و شواهد پس از استقرار است. هر شش check موجود روی head همان PR لازم‌اند.
