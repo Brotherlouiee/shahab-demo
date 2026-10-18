@@ -155,3 +155,5 @@ Swagger/Postman همان auth/proof/roles مصوب را نگه می‌دارند
 استفاده کنید. کلید واقعی برای توسعه/CI لازم نیست. اجرای live به تأیید الگو، مجوز
 مالک، PostgreSQL و secrets خصوصی نیاز دارد؛ staging/production mock را نمی‌پذیرند.
 [راهنمای کامل](operations/kavenegar-otp.md).
+
+Release image packaging uses Python3.12 Alpine with digest and image-only hashed locks, plus two pinned NGINX security APK fixes; see [image build/security contract](operations/container-images.md). These do not change Compose ports, application source, API or migration commands. Actual container compatibility and security are checked by the additional image CI gate.

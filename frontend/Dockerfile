@@ -13,6 +13,8 @@ COPY data/contracts ./data/contracts
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:782bb89768cc87b7f95c18b95baa1af250e5d451f26794f59363540161147c01 AS runtime
+# Fix the two HIGH findings in the pinned base; fail if exact patched APKs are unavailable.
+RUN apk add --no-cache --upgrade libexpat=2.9.0-r0 libx11=1.8.14-r0
 COPY frontend/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY frontend/nginx/api-disabled.conf /etc/nginx/shahab-api.conf
 COPY --from=build /build/dist /srv/shahab

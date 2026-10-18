@@ -1,9 +1,9 @@
 # Local Docker operations runbook
 
 Independent release images and their isolated build/run harness are documented in
-[the T04A.1 contract](container-images.md). Development Compose, its ports, volumes
+[the T04A.1/.2 contract](container-images.md). Development Compose, its ports, volumes
 and reload commands below remain unchanged; no registry account or publishing is
-required for that image test.
+required for that image test. The API image now uses digest-pinned Python 3.12 Alpine and hashed image-only dependency locks; development source, ports and CMD are preserved. See that contract for native-wheel/scan evidence and the two pinned NGINX security APKs.
 
 ## Routine commands
 

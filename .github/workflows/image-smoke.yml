@@ -8,6 +8,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: image-contract-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOCKER_BUILD_SUMMARY: 'false'
+  DOCKER_BUILD_RECORD_UPLOAD: 'false'
+  BUILDX_METADATA_PROVENANCE: max
+
 jobs:
   images:
     name: Build and run two isolated images
@@ -15,20 +24,102 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
+      - name: Test security and release fail-closed policies
+        run: python -m unittest discover -s tests/images -p 'test_*.py' -v
       - name: Build independent reference static files
         run: |
           npm ci
           npm run build
-      - name: Build and smoke both images without publishing
-        run: python tests/images/smoke.py
-      - name: Preserve count-only build evidence
+          mkdir -p test-results/images
+          echo "SOURCE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+        with:
+          version: v0.38.0
+          buildkitd-flags: --oci-worker-gc
+          driver-opts: |
+            image=moby/buildkit:v0.34.0@sha256:b059f8d7226d0b326bc871af489a5dddf65e36af4d20d14251b072974d9ee87c
+          buildkitd-config-inline: |
+            [worker.oci]
+              max-parallelism = 2
+              gc = true
+              reservedSpace = '256MB'
+              maxUsedSpace = '1GB'
+      - name: Build API once, load locally, never push
+        id: api
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          load: true
+          push: false
+          provenance: false
+          tags: shahab-ci-api:sha-${{ env.SOURCE_SHA }}
+          labels: org.opencontainers.image.revision=${{ env.SOURCE_SHA }}
+          build-args: SOURCE_DATE_EPOCH=${{ env.SOURCE_DATE_EPOCH }}
+          cache-from: type=gha,scope=shahab-api-amd64-v1,version=2
+          cache-to: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'type=gha,scope=shahab-api-amd64-v1,mode=min,version=2,timeout=60s' || '' }}
+      - name: Build frontend once, load locally, never push
+        id: web
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          file: frontend/Dockerfile
+          platforms: linux/amd64
+          load: true
+          push: false
+          provenance: false
+          tags: shahab-ci-web:sha-${{ env.SOURCE_SHA }}
+          labels: org.opencontainers.image.revision=${{ env.SOURCE_SHA }}
+          build-args: SOURCE_DATE_EPOCH=${{ env.SOURCE_DATE_EPOCH }}
+          cache-from: type=gha,scope=shahab-web-amd64-v1,version=2
+          cache-to: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'type=gha,scope=shahab-web-amd64-v1,mode=min,version=2,timeout=60s' || '' }}
+      - name: Preserve build metadata, with no registry credentials
+        env:
+          API_METADATA: ${{ steps.api.outputs.metadata }}
+          WEB_METADATA: ${{ steps.web.outputs.metadata }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          for name in ('api', 'web'):
+              value = json.loads(os.environ[name.upper() + '_METADATA'])
+              Path('test-results/images/' + name + '-build.json').write_text(json.dumps(value, indent=2) + '\n')
+          PY
+      - name: Smoke the exact loaded images without rebuilding
+        run: python tests/images/smoke.py --api-image "shahab-ci-api:sha-$SOURCE_SHA" --web-image "shahab-ci-web:sha-$SOURCE_SHA"
+      - name: Install checksum-pinned Trivy, no package-manager scripts
+        env:
+          TRIVY_VERSION: 0.76.0
+        run: |
+          tool_dir="$RUNNER_TEMP/shahab-trivy"
+          mkdir -p "$tool_dir"
+          curl --fail --silent --show-error --location --retry 2 --max-time 90 \
+            "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" \
+            -o "$tool_dir/trivy.tar.gz"
+          echo "e24b1c51293c1b15e4ba8d45bbc7891ba053f90278ec2698f3562c993e145fe7  $tool_dir/trivy.tar.gz" | sha256sum --check
+          tar -xzf "$tool_dir/trivy.tar.gz" -C "$tool_dir" trivy
+          echo "$tool_dir" >> "$GITHUB_PATH"
+      - name: Scan both exact images, enforce policy and produce SBOMs
+        env:
+          TRIVY_CACHE_DIR: ${{ runner.temp }}/shahab-trivy-db
+          TRIVY_NO_PROGRESS: 'true'
+          TRIVY_TIMEOUT: 3m
+        run: python tests/images/security_gate.py
+      - name: Preserve build, smoke, scan and SBOM evidence even on failure
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: container-build-contract-evidence
-          path: test-results/image-smoke.json
+          path: |
+            test-results/image-smoke.json
+            test-results/images/*.json
           if-no-files-found: error
           retention-days: 7

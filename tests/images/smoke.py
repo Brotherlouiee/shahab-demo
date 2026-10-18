@@ -1,9 +1,10 @@
-"""Build/run contract for A.1; disposable resources only, never push or deploy.
+"""Build/run contract for A.1/A.2; disposable resources only, never push or deploy.
 
 Requires Docker, OpenSSL and an independently built dist/ from this same checkout.
 No database, owner volume, registry credential, source publication or SMS is used.
 """
 
+import argparse
 import hashlib
 import json
 import subprocess
@@ -54,9 +55,16 @@ def fingerprints(directory):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--api-image")
+    parser.add_argument("--web-image")
+    args = parser.parse_args()
+    if bool(args.api_image) != bool(args.web_image):
+        parser.error("Supply both externally built image references or neither")
+    external = bool(args.api_image)
     identifier = "shahab-image-" + uuid.uuid4().hex[:12]
     network = identifier + "-network"
-    images = [identifier + "-api", identifier + "-web"]
+    images = [args.api_image, args.web_image] if external else [identifier + "-api", identifier + "-web"]
     containers = []
     network_created = False
     started = time.monotonic()
@@ -90,7 +98,8 @@ def main():
         try:
             assert (ROOT / "dist/index.html").is_file(), "Build independent dist reference first"
             for dockerfile, image in zip(("Dockerfile", "frontend/Dockerfile"), images, strict=True):
-                command("docker", "build", "-f", dockerfile, "-t", image, ".", capture=False)
+                if not external:
+                    command("docker", "build", "-f", dockerfile, "-t", image, ".", capture=False)
                 user = command("docker", "image", "inspect", "--format", "{{.Config.User}}", image).strip()
                 assert user and user.split(":")[0] not in {"0", "root"}, "Image must declare non-root"
                 assert (
@@ -254,7 +263,7 @@ def main():
                 subprocess.run(["docker", "rm", "-f", name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             if network_created:
                 command("docker", "network", "rm", network)
-            for image in images:
+            for image in [] if external else images:
                 subprocess.run(["docker", "image", "rm", image], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
