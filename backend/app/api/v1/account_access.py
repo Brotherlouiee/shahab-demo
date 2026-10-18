@@ -1,4 +1,4 @@
-"""HTTP adapter for local/test OTP and profile ownership; no public phone lookup authorization."""
+"""HTTP adapter for OTP and profile ownership; no public phone lookup authorization."""
 
 from typing import Annotated
 

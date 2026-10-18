@@ -93,3 +93,14 @@ verify/session اکنون accountId سرور می‌دهند تا cache نسل �
 در history.state. request/scoring/TTL unchanged؛ bearer/proof مثل قبل.
 OpenAPI/Postman/inventory generated۱۹ عملیات؛ bookmark body نمونه{} معتبر، نه UUID
 خالی. [قرارداد F](../security/account-bookmarks.md) و [checkpoint](../progress/us-11-t02f.md).
+
+
+
+## US-11.T06 — provider واقعی OTP، بدون تغییر قرارداد HTTP
+
+`POST /account-access/request` همچنان phone → challengeId/expiresIn=120؛
+`POST /account-access/verify` همچنان challengeId/code → نشست مطلق۱ساعت پس از ذخیره
+پروفایل موفق. 401 برای کد/expiry/مصرف نامعتبر، 429 برای quota و 503 عمومی برای
+خرابی یا عدم فعال‌سازی provider؛ no-store و cookie/CSRF موجود حفظ‌اند. کد، پاسخ خام
+کاوه‌نگار و key برنمی‌گردند. الگو و کلید فقط از سرور؛ هیچ فیلد جدید client لازم نیست.
+[config و آزمون](../operations/kavenegar-otp.md). تولید مجدد OpenAPI باید بدون drift باشد.

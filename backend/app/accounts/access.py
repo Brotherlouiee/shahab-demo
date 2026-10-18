@@ -1,8 +1,8 @@
-"""Bounded development OTP access, with opaque revocable sessions.
+"""Bounded OTP access, with opaque revocable sessions.
 
-This is deliberately a local/test adapter, not proof of real phone ownership.
 This memory adapter is only for local/test without a SQL session. Configured
-API requests use the shared PostgreSQL adapter; real SMS remains a separate gate.
+API requests use the shared PostgreSQL adapter. Live providers require that
+persistent adapter; a missing database never permits a memory fallback.
 """
 
 from __future__ import annotations
@@ -28,13 +28,28 @@ class AccessFailure(Exception):
 
 
 class OtpProvider(Protocol):
-    def verify(self, code: str) -> bool: ...
+    challenge_prefix: str
+    requires_persistence: bool
+
+    def send(self, phone: str, challenge_id: str) -> None: ...
+
+    def verify(self, code: str, challenge_id: str) -> bool: ...
 
 
 class MockOtpProvider:
     """The documented demo code is accepted only by the local/test composition."""
 
-    def verify(self, code: str) -> bool:
+    challenge_prefix = ""
+    requires_persistence = False
+
+    def send(self, phone: str, challenge_id: str) -> None:
+        """Local/test only: no external side effect."""
+
+    def verify(self, code: str, challenge_id: str = "") -> bool:
+        # A later configuration change must never admit an SMS challenge with
+        # the public development code.
+        if challenge_id.startswith("sms1."):
+            return False
         normalized = code.translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩", "01234567890123456789"))
         return hmac.compare_digest(normalized.encode(), b"123456")
 
@@ -60,6 +75,8 @@ def digest(value: str) -> str:
 class AccountAccess:
     """Thread-safe, bounded local store; expiry, single use and revocation are server-owned."""
 
+    persistent = False
+
     def __init__(self, provider: OtpProvider | None, clock: Callable[[], float] = time.monotonic) -> None:
         self.provider = provider
         self.clock = clock
@@ -69,7 +86,7 @@ class AccountAccess:
         self.lock = Lock()
 
     def _enabled(self) -> None:
-        if self.provider is None:
+        if self.provider is None or (self.provider.requires_persistence and not self.persistent):
             raise AccessFailure(503)
 
     def _prune(self, now: float) -> None:
@@ -90,9 +107,17 @@ class AccountAccess:
                 raise AccessFailure(429)
             for key in keys:
                 self.quota.setdefault(key, []).append(now)
-            challenge_id = secrets.token_urlsafe(32)
+            challenge_id = (self.provider.challenge_prefix if self.provider else "") + secrets.token_urlsafe(32)
             self.challenges[digest(challenge_id)] = Challenge(phone, now + 120)
-            return challenge_id
+        # Never hold the access lock over network I/O; reserve quota first.
+        try:
+            if self.provider is not None:
+                self.provider.send(phone, challenge_id)
+        except Exception:
+            with self.lock:
+                self.challenges.pop(digest(challenge_id), None)
+            raise AccessFailure(503) from None
+        return challenge_id
 
     def verify_code(self, challenge_id: str, code: str) -> str:
         self._enabled()
@@ -104,7 +129,7 @@ class AccountAccess:
             if challenge is None:
                 raise AccessFailure(401)
             challenge.attempts += 1
-            if self.provider is None or not self.provider.verify(code):
+            if self.provider is None or not self.provider.verify(code, challenge_id):
                 if challenge.attempts >= 5:
                     del self.challenges[key]
                 raise AccessFailure(401)
