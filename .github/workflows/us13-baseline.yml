@@ -30,7 +30,10 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_US13_BASELINE_DIR/node_modules"
           test "$(git -C "$SHAHAB_US13_BASELINE_DIR" rev-parse HEAD)" = f5e50da0ea29b7d933a813736a2616169ee9b8f3
       - name: Capture original and candidate without UI modifications
-        run: npx playwright test tests/e2e/us13-baseline-inventory.spec.mjs
+        run: |
+          npm run build
+          npm --prefix "$SHAHAB_US13_BASELINE_DIR" run build
+          SHAHAB_E2E_BUILT=1 npx playwright test tests/e2e/us13-baseline-inventory.spec.mjs
       - name: Preserve synthetic screenshots and geometry
         if: always()
         uses: actions/upload-artifact@v4

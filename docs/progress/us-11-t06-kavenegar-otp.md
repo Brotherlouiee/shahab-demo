@@ -1,5 +1,17 @@
 # US-11.T06 — اتصال OTP کاوه‌نگار، بدون ارسال واقعی
 
+## بازبینی برای مرج پس از PR #132 — ۲۰۲۶-۱۰-۱۸
+
+دستور مالک: بررسی و آماده‌کردن همین PR برای مرج توسط خودش؛ تأیید الگوی OTP1 هنوز منتظر است. مبنای تازه main برابر `2f78336ebe84e0fdf965caa5176b9cf478b7d28d` (مرج #132) و head قبلی OTP برابر `a2a78fd031a196a236e5df2f950d52d75bd79ec8` است. شاخه به Codex سپرده شده؛ snapshot مستقل و update با expected_sha، بدون force و بدون دست‌کاری IDE/main.
+
+پیش از تغییر: هم‌پوشانی فقط guide و CHANGELOG بود؛ هدف همگام‌سازی شاخه با main، حفظ تمام تصمیم‌های #132 و کد OTP موجود، سپس اجرای CI واقعی روی ترکیب جدید است. دامنه این همگام‌سازی: همان ۱۹ فایل PR؛ runtime/test blobها دقیقاً همان head قبلی OTP، بدون تغییر رفتار یا رفع حدسی. ریسک merge دو برنامه با حفظ کامل registry و محتوای main کنترل می‌شود؛ راه بازگشت revert merge/کد طبق runbook، بدون reset دیتابیس است.
+
+۵۶ تست بدون SMS در snapshot مستقل و با blobهای runtime/test برابر head موفق شدند: kavenegar_otp، profile_access، account_session_lifecycle، transport_hardening، account_bookmarks، operational_observability، api_documentation و api_health. قرارداد Lookup با transport مصنوعی است؛ کلید واقعی/ارسال شبکه لازم نیست. مرز import و OpenAPI drift نیز بررسی می‌شوند؛ PostgreSQL و browser در شش CI جدید روی head همگام‌شده اثبات می‌شوند، نه با skip محلی.
+
+خاموش‌بودن پیش‌فرض هر دو flag، رد فعال‌سازی بدون تأیید/secret/PostgreSQL، رد sender واقعی در TEST/CI، عدم fallback production به mock، quota/expiry/مصرف یک‌باره و خطای امن بررسی شدند. pending واقعی تأیید الگو و دریافت SMS روی سایت در «جدول تسک‌های پس از استقرار» main باز است؛ مرج کد پایان آن بخش نیست. هیچ key واقعی، SMS، استقرار یا merge این PR انجام نمی‌شود.
+
+ثبت نتیجه Ruff/mypy/secret، SHA جدید و لینک/خلاصه CI در بدنه PR است. checkpointهای پایین سابقهٔ پیاده‌سازی اولیه‌اند و به معنی Private بودن فعلی مخزن یا باقی‌بودن شکست اولیهٔ CI نیستند. برآورد بازبینی/همگام‌سازی و CI: حدود ۵–۱۰ دقیقه؛ زمان واقعی در PR ثبت می‌شود. یک فرمان محلی پیش از ایجاد پوشه هدف خطای cwd داد؛ پوشه ساخته شد و تست‌ها بدون تغییر محصول موفق شدند.
+
 ## checkpoint آغاز — ۲۰۲۶-۱۰-۱۸
 
 مجوز مالک: پیاده‌سازی مستقل اتصال با الگوی OTP1، اجرای تست بدون ارسال و ساخت PR؛

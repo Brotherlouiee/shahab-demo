@@ -41,10 +41,14 @@ for (const viewport of [
 
 
 test("refresh never renders the removed legacy mock page", async ({ page }) => {
-  await page.goto("/");
-  await page.reload();
+  // Assert application readiness rather than waiting for unrelated font/image load.
+  await page.goto("/", { waitUntil: "commit" });
+  await page.locator(".hp-nav").waitFor({ state: "visible" });
+  await page.reload({ waitUntil: "commit" });
+  await page.locator(".hp-nav").waitFor({ state: "visible" });
 
   for (const legacyText of ["محاسبه وام شهاب", "طرح نیک وام", "ثبت درخواست وام بانکی"]) {
     await expect(page.getByText(legacyText, { exact: true })).toHaveCount(0);
   }
 });
+

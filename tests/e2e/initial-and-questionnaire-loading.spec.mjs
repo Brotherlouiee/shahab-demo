@@ -4,17 +4,23 @@ test.beforeEach(async ({ page }) => { await installProfileApi(page); });
 
 test("shows the document fallback only after a delayed first paint", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route("**/src/main.jsx", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 90));
+  let releaseEntry;
+  const entryGate = new Promise(resolve => { releaseEntry = resolve; });
+  await page.route("**/src/main.jsx", async route => {
+    await entryGate;
     await route.continue();
   });
 
-  const navigation = page.goto("/", { waitUntil: "commit" });
-  await expect(page.locator("#initial-page-skeleton")).toBeVisible();
-  await expect(page.locator("#initial-page-skeleton .initial-home")).toBeVisible();
-  await expect(page.locator("#initial-page-skeleton .initial-questionnaire")).toBeHidden();
-  await expect(page.locator("#root")).toBeEmpty();
-  await navigation;
+  await page.goto("/", { waitUntil: "commit" });
+  try {
+    await expect(page.locator("#initial-page-skeleton")).toBeVisible();
+    await expect(page.locator("#initial-page-skeleton .initial-home")).toBeVisible();
+    await expect(page.locator("#initial-page-skeleton .initial-questionnaire")).toBeHidden();
+    await expect(page.locator("#root")).toBeEmpty();
+  } finally {
+    releaseEntry();
+  }
+  await page.waitForLoadState("load");
   await expect(page.locator(".hp-nav .hp-login-link")).toHaveCount(0);
   await expect(page.locator("button.hp-menu-button")).toBeVisible();
   await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
@@ -89,15 +95,21 @@ test("renders the one-loan comparison action as visibly disabled", async ({ page
 
 
 test("uses a detail-shaped document fallback for a delayed loan-details route", async ({ page }) => {
-  await page.route("**/src/main.jsx", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 90));
+  let releaseEntry;
+  const entryGate = new Promise(resolve => { releaseEntry = resolve; });
+  await page.route("**/src/main.jsx", async route => {
+    await entryGate;
     await route.continue();
   });
 
-  const navigation = page.goto("/loan-details?loanId=example", { waitUntil: "commit" });
-  await expect(page.locator("#initial-page-skeleton[data-variant=\"detail\"]")).toBeVisible();
-  await expect(page.locator("#initial-page-skeleton .initial-detail")).toBeVisible();
-  await expect(page.locator("#initial-page-skeleton .initial-home")).toBeHidden();
-  await navigation;
+  await page.goto("/loan-details?loanId=example", { waitUntil: "commit" });
+  try {
+    await expect(page.locator("#initial-page-skeleton[data-variant=\"detail\"]")).toBeVisible();
+    await expect(page.locator("#initial-page-skeleton .initial-detail")).toBeVisible();
+    await expect(page.locator("#initial-page-skeleton .initial-home")).toBeHidden();
+  } finally {
+    releaseEntry();
+  }
+  await page.waitForLoadState("load");
+  await expect(page.locator("#initial-page-skeleton")).toHaveCount(0);
 });
-
