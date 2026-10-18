@@ -45,6 +45,13 @@ class Settings(BaseSettings):
     # Development OTP works on existing local containers without a newly added env variable.
     # Composition still denies mock access in staging/production, regardless of this flag.
     profile_mock_otp_enabled: bool = True
+    # Enabling code is separate from approving live SMS. Defaults never send.
+    kavenegar_otp_enabled: bool = False
+    kavenegar_template_approved: bool = False
+    kavenegar_api_key: SecretStr | None = None
+    kavenegar_template: str | None = None
+    otp_code_secret: SecretStr | None = None
+    kavenegar_timeout_seconds: float = 5.0
 
     @field_validator("log_level")
     @classmethod

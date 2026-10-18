@@ -136,3 +136,14 @@ ff11b02f0001. savedLoans.mjs async API/cache memory/desired-state؛ accountBrows
 سروری reply قدیمی را رد؛ home فقط callback/load موجود و LoanResultsScreen همان DOM/
 CSS/asset، toast بعد commit. recommendation VM/client فقط opaque historyId برای
 بازخوانی snapshot، بدون parsing/scoring یا API موازی. no US13 refactor.
+
+
+
+## US-11.T06 — OTP کاوه‌نگار
+
+`accounts/kavenegar.py` آداپتور Lookup و proof مبتنی بر HMAC برای challenge تصادفی؛
+`accounts/access.py` port ارسال/verify و guard نبود persistence؛
+`accounts/sqlalchemy_access.py` همان quota/expiry/attempt/consumption مشترک و ارسال پس از commit؛
+`main.py` فقط محل انتخاب provider با config مصوب. route sync فعلی threadpool را مصرف
+می‌کند، نه event loop؛ UI و قرارداد API، schema و موتور تغییر نکرده‌اند.
+[راه‌اندازی و امنیت](../operations/kavenegar-otp.md).

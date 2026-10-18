@@ -55,7 +55,7 @@ There is currently no public application, payment, real SMS-provider or external
 
 ## Verified first-login profile creation — 2026-10-09
 
-Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. The guarded Kavenegar provider has merged; enablement and template approval default to false. Provider approval, secure server configuration and a real delivery test remain pending; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
 
 ## US-09.T081 — Generated complete contract
 
@@ -95,3 +95,14 @@ verify/session اکنون accountId سرور می‌دهند تا cache نسل �
 در history.state. request/scoring/TTL unchanged؛ bearer/proof مثل قبل.
 OpenAPI/Postman/inventory generated۱۹ عملیات؛ bookmark body نمونه{} معتبر، نه UUID
 خالی. [قرارداد F](../security/account-bookmarks.md) و [checkpoint](../progress/us-11-t02f.md).
+
+
+
+## US-11.T06 — provider واقعی OTP، بدون تغییر قرارداد HTTP
+
+`POST /account-access/request` همچنان phone → challengeId/expiresIn=120؛
+`POST /account-access/verify` همچنان challengeId/code → نشست مطلق۱ساعت پس از ذخیره
+پروفایل موفق. 401 برای کد/expiry/مصرف نامعتبر، 429 برای quota و 503 عمومی برای
+خرابی یا عدم فعال‌سازی provider؛ no-store و cookie/CSRF موجود حفظ‌اند. کد، پاسخ خام
+کاوه‌نگار و key برنمی‌گردند. الگو و کلید فقط از سرور؛ هیچ فیلد جدید client لازم نیست.
+[config و آزمون](../operations/kavenegar-otp.md). تولید مجدد OpenAPI باید بدون drift باشد.

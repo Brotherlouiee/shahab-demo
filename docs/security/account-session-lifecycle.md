@@ -95,3 +95,17 @@ response generation guard. [قرارداد/محدودیت‌ها](account-bookma
 ## US-11.T02G — بایگانی داخلی
 
 `archive_account(account_id, db)` فقط use case داخلی است و به route کاربر وصل نیست. قفل انحصاری ردیف account و محدودیت یکتایی phone فعال در رقابت با `ensure_profile` و سپس ابطال همه `account_access_sessions` همان `account_id` در همان transaction استفاده می‌شود. بایگانی terminal است؛ فعال‌سازی دوباره نسل قدیمی ممنوع و ورود مجدد با phone تأییدشده نسل تازه و profile خالی می‌سازد. سوابق/پروفایل/نشان‌شده‌ها حفظ و تنها owner آن نسل قابل دسترسی است که پس از archive غیرفعال می‌شود. آزمون PostgreSQL واقعی، failure rollback و deployment همچنان gate مستقل دارند؛ هیچ UI حذف حساب یا operator endpoint ارائه نشده است.
+
+
+
+## US-11.T06 — افزوده OTP واقعی؛ ۲۰۲۶-۱۰-۱۸
+
+توصیف mock-only بالا تاریخی است. با opt-in و تأیید الگو، KavenegarOtpProvider کد
+مختص nonce challenge را با HMAC راز مستقل می‌سازد و Lookup می‌فرستد. schema بدون
+تغییر و فقط digest challenge ذخیره می‌شود؛ provider جدید در worker تازه نیز همان
+کد را verify می‌کند، اما صدور session همچنان به ردیف معتبر و مصرف‌نشده DB نیاز دارد.
+همه محدودیت‌های expiry/attempt/quota و نشست مطلق/owner/revoke بالا برقرارند. شبکه
+خارج از advisory lock است؛ خطای ارسال challenge را consumed و quota را حفظ می‌کند.
+mock challenge در live و sms challenge در mock معتبر نیست. config ناقص، TEST/CI و
+نبود PostgreSQL، live را رد می‌کنند. تأیید الگو و آزمون SMS واقعی جدا و pending است.
+[راه‌اندازی/rotate/rollback](../operations/kavenegar-otp.md).

@@ -89,3 +89,13 @@ api به‌روز استفاده شود؛ reset volume/downgrade داده برا
 schema را نمی‌سازد. runbook migration/backup موجود، بدون reset volume؛ `alembic upgrade
 head` فقط روی DB هدف مجاز، سپس recreate/restart کد جدید. GET/PUT/DELETE bookmarks در
 Swagger/Postman همان auth/proof/roles مصوب را نگه می‌دارند. [قرارداد و rollback](../security/account-bookmarks.md).
+
+
+
+## OTP کاوه‌نگار — US-11.T06
+
+api از قبل env_file: .env دارد؛ هیچ key یا template در Dockerfile/image/frontend
+قرار نمی‌گیرد. flags جدید پیش‌فرض false هستند. بعد از تأیید الگو و مجوز مستقل،
+secrets را در محیط خصوصی backend ثبت و فقط سرویس api را recreate کنید؛ schema و
+volume تغییری نمی‌کنند، down -v و reset لازم نیست. در محیط production public، mock
+هرگز فعال نشود. [تنظیمات، تست و خاموش‌سازی](kavenegar-otp.md).

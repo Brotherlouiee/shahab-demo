@@ -13,7 +13,8 @@ from redis import Redis
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.cors import CORSMiddleware
 
-from .accounts.access import AccountAccess, MockOtpProvider
+from .accounts.access import AccountAccess, MockOtpProvider, OtpProvider
+from .accounts.kavenegar import KavenegarOtpProvider
 from .api.documentation import DocumentedFastAPI
 from .api.errors import ApiError, ErrorCode, api_error_handler, error_payload
 from .api.middleware import correlation_id_middleware
@@ -144,7 +145,32 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         AppEnvironment.LOCAL,
         AppEnvironment.TEST,
     )
-    app.state.account_access = AccountAccess(MockOtpProvider() if mock_allowed else None)
+    # Keep production fail-closed until the owner enables an approved template.
+    # CI/test must never instantiate a live sender, even with ambient secrets.
+    provider: OtpProvider | None = None
+    if active_settings.kavenegar_otp_enabled:
+        if (
+            active_settings.environment is AppEnvironment.TEST
+            or not active_settings.kavenegar_template_approved
+            or not (active_settings.database_url_value or "").startswith("postgresql+psycopg://")
+            or active_settings.kavenegar_api_key is None
+            or active_settings.kavenegar_template is None
+            or active_settings.otp_code_secret is None
+        ):
+            raise ValueError("OTP activation requires approved, complete server configuration.")
+        import os
+
+        if os.environ.get("CI", "").lower() in {"1", "true"} or os.environ.get("GITHUB_ACTIONS") == "true":
+            raise ValueError("Live OTP is disabled in CI.")
+        provider = KavenegarOtpProvider(
+            active_settings.kavenegar_api_key.get_secret_value(),
+            active_settings.kavenegar_template,
+            active_settings.otp_code_secret.get_secret_value(),
+            active_settings.kavenegar_timeout_seconds,
+        )
+    elif mock_allowed:
+        provider = MockOtpProvider()
+    app.state.account_access = AccountAccess(provider)
     # Customer/mock OTP cannot configure operator identity or role grants.
     # Internal use cases wire this deny-by-default boundary in US-10.T02.
     app.state.operations_authorizer = OperationsAuthorizer()

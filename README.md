@@ -32,7 +32,7 @@ npm run build
 
 وابستگی‌ها و محیط موردنیاز هر suite در [گیت‌های کیفیت](docs/testing/quality-gates.md) ثبت‌اند؛ اجرای فرانت بدون API/PostgreSQL اثبات مسیر کامل نیست. راهنمای [Swagger/Postman](docs/api/manual-testing.md) و [ماتریس ۱۹ عملیات](docs/api/coverage.md) قرارداد فعلی را پوشش می‌دهند؛ آزمون آنلاین T081 هنوز شاهد میزبان HTTPS می‌خواهد.
 
-`dist` خروجی ایستای فرانت است. `netlify.toml` فعلی فقط build و SPA fallback دارد و API را مستقر یا proxy نمی‌کند؛ build فرانت به‌تنهایی سایت متصل به backend ایجاد نمی‌کند. [runbook استقرار](docs/runbook/production-deployment.md) وابستگی‌های محیط و مجوز انتشار را مشخص می‌کند. ارسال پیامک واقعی، درخواست بانکی و سرویس تحلیل خارجی در main مبنای ممیزی فعال نیستند.
+`dist` خروجی ایستای فرانت است. `netlify.toml` فعلی فقط build و SPA fallback دارد و API را مستقر یا proxy نمی‌کند؛ build فرانت به‌تنهایی سایت متصل به backend ایجاد نمی‌کند. [runbook استقرار](docs/runbook/production-deployment.md) وابستگی‌های محیط و مجوز انتشار را مشخص می‌کند. اتصال کاوه‌نگار مرج شده اما ارسال واقعی به‌صورت پیش‌فرض غیرفعال است؛ تأیید الگوی OTP1، تنظیم امن سرور و آزمون واقعی هنوز باقی‌اند: [راهنمای OTP](docs/operations/kavenegar-otp.md). درخواست بانکی و سرویس تحلیل خارجی فعال نیستند.
 
 ## مراجع
 

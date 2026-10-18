@@ -141,3 +141,13 @@ api به‌روز استفاده شود؛ reset volume/downgrade داده برا
 schema را نمی‌سازد. runbook migration/backup موجود، بدون reset volume؛ `alembic upgrade
 head` فقط روی DB هدف مجاز، سپس recreate/restart کد جدید. GET/PUT/DELETE bookmarks در
 Swagger/Postman همان auth/proof/roles مصوب را نگه می‌دارند. [قرارداد و rollback](security/account-bookmarks.md).
+
+
+
+## OTP کاوه‌نگار — US-11.T06
+
+پیش‌فرض local/test همان mock است؛ متغیرهای جدید در .env.example خاموش/خالی‌اند.
+برای تست اتصال بدون SMS از `python -m unittest backend.tests.test_kavenegar_otp`
+استفاده کنید. کلید واقعی برای توسعه/CI لازم نیست. اجرای live به تأیید الگو، مجوز
+مالک، PostgreSQL و secrets خصوصی نیاز دارد؛ staging/production mock را نمی‌پذیرند.
+[راهنمای کامل](operations/kavenegar-otp.md).

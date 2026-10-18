@@ -20,3 +20,21 @@ Purpose: local/test editable profile persistence. Existing profiles remain until
 ## US-11.T02C — نشست مشترک یک‌ساعته
 
 C credential digest/account UUID و expiry۱h در PostgreSQL، status و revocation تازه، OTP/attempt/quota مشترک و race واقعی. mock هنوز local/test و provider واقعی production فعال نیست؛ archive G و browser cleanup F، H transport جدا. [قرارداد](account-session-lifecycle.md).
+
+
+
+## US-11.T06 — تهدیدهای ارسال واقعی OTP
+
+| تهدید | کنترل و شاهد |
+| --- | --- |
+| key در URL/خطای upstream یا redirect | host HTTPS ثابت، redirect/proxy خاموش، خطای عمومی بدون URL/body؛ تست transport |
+| brute-force آفلاین code digest | HMAC با راز مستقل و nonce تصادفی؛ کد/hash کم‌انتروپی در DB ذخیره نمی‌شود |
+| استفاده از mock یا worker با config متفاوت | prefix sms1 و proof context، منع mock در production، راز یکسان workerها؛ config و cross-mode tests |
+| SMS تکراری/دورزدن quota در outage | commit رزرو پیش از I/O، بدون retry، مصرف challenge شکست‌خورده و حفظ quota؛ fault tests |
+| نگه‌داشتن قفل کل سیستم در شبکه | ارسال پس از commit؛ contract test و دو تست جدید PostgreSQL در suite موجود |
+| ارسال ناخواسته در CI یا قبل تأیید | opt-in و approved پیش‌فرض false، config کامل PostgreSQL، CI/TEST guard؛ composition tests |
+
+نام الگوی مالک OTP1؛ تأیید و ارسال واقعی هنوز pending. آماده‌سازی اتصال، gate انتشار
+یا اثبات دریافت SMS نیست. provider شماره و کد را فقط برای هدف ورود دریافت می‌کند؛
+response خام نگهداری نمی‌شود. رخداد و نرخ خطا از metrics موجود به‌صورت غیرشخصی است.
+[runbook و rollback](../operations/kavenegar-otp.md).

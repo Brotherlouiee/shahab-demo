@@ -20,7 +20,7 @@ No new migration/dependency, design, About copy, loan data, D-005 or questionnai
 
 ## Current precedence — US-12.T01 documentation audit, 2026-10-18
 
-The process-local 30-minute capability and refresh/restart-login descriptions above record T072, not current runtime. US-11.T02A.2 replaces phone ownership with account UUID; T02C supplies PostgreSQL-shared challenges, quotas, absolute one-hour sessions and durable revocation. T02F restores account state without browser credential storage and adds account-owned bookmarks. See the [session contract](../security/account-session-lifecycle.md), [bookmark contract](../security/account-bookmarks.md) and [current API matrix](../api/coverage.md). Questionnaire TTL remains 30 minutes. Main still uses local/test mock OTP; the Kavenegar proposal in PR #133 is unmerged at the audit baseline.
+The process-local 30-minute capability and refresh/restart-login descriptions above record T072, not current runtime. US-11.T02A.2 replaces phone ownership with account UUID; T02C supplies PostgreSQL-shared challenges, quotas, absolute one-hour sessions and durable revocation. T02F restores account state without browser credential storage and adds account-owned bookmarks. See the [session contract](../security/account-session-lifecycle.md), [bookmark contract](../security/account-bookmarks.md) and [current API matrix](../api/coverage.md). Questionnaire TTL remains 30 minutes. PR #133 has merged the guarded Kavenegar integration; both enablement and template-approval flags default to false. Local/test mock behavior remains unchanged. Provider approval, server configuration and a real delivery test remain pending; see the [OTP runbook](../operations/kavenegar-otp.md).
 
 ## Verified first-login profile creation — 2026-10-09
 

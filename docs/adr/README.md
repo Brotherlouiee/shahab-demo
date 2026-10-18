@@ -15,6 +15,6 @@
 | هویت نسلی حساب | [0008](0008-account-identity-lifecycle.md)؛ A.1 طراحی، اجرای A.2 و C/F/G در [قرارداد حساب](../database/account-identity-lifecycle.md) و [موجودی DB](../database/README.md) |
 | دسترسی و نشست | [معماری 0010](../architecture/0010-profile-access-and-persistence.md) با تقدم اصلاحات US-11؛ [قرارداد یک‌ساعته](../security/account-session-lifecycle.md) |
 | snapshot سوابق | [معماری 0011](../architecture/0011-recommendation-history.md)؛ UUID مالک و proof/retention جدید بر phone owner اولیه مقدم‌اند |
-| ترتیب refactor/release | [0009](0009-offline-refactor-before-release.md) و سند جامع؛ استثنای آماده‌سازی پیش از Public در PR #132 هنوز مرج‌نشده است و اجرای محدود T01 با دستور صریح مالک انجام می‌شود |
+| ترتیب refactor/release | [0009](0009-offline-refactor-before-release.md) و سند جامع؛ PR #132 مرج شده است: کارهای مستقل از سرور US-12 پیش از US-13؛ کارهای وابسته به سرور در «جدول تسک‌های پس از استقرار»؛ انتشار عمومی مخزن شرط این ترتیب نیست |
 
 این فهرست تصمیم معماری جدید، پذیرش release یا مجوز deploy نیست. [ممیزی](../release/us-12-t01-documentation-audit.md) SHA و مرز شواهد را مشخص می‌کند.
