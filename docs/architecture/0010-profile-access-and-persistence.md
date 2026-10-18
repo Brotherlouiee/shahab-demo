@@ -18,6 +18,10 @@ API tests cover anonymous/forged access, ownership, expiry, attempts, single use
 
 No new migration/dependency, design, About copy, loan data, D-005 or questionnaire TTL changes. Disable the local mock flag and restart to close access without deleting profiles. Do not restore the vulnerable unauthenticated endpoints as rollback. Production remains blocked pending real authentication/security release work.
 
+## Current precedence — US-12.T01 documentation audit, 2026-10-18
+
+The process-local 30-minute capability and refresh/restart-login descriptions above record T072, not current runtime. US-11.T02A.2 replaces phone ownership with account UUID; T02C supplies PostgreSQL-shared challenges, quotas, absolute one-hour sessions and durable revocation. T02F restores account state without browser credential storage and adds account-owned bookmarks. See the [session contract](../security/account-session-lifecycle.md), [bookmark contract](../security/account-bookmarks.md) and [current API matrix](../api/coverage.md). Questionnaire TTL remains 30 minutes. PR #133 has merged the guarded Kavenegar integration; both enablement and template-approval flags default to false. Local/test mock behavior remains unchanged. Provider approval, server configuration and a real delivery test remain pending; see the [OTP runbook](../operations/kavenegar-otp.md).
+
 ## Verified first-login profile creation — 2026-10-09
 
 Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.

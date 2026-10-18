@@ -27,4 +27,4 @@ use the Alembic downgrade as a production data-deletion procedure.
 
 ## US-11.T02A.2 — انتقال اجرایی هویت
 
-run/session owner اکنون UUID حساب است؛ composite FK owner equality و session unique/idempotency حفظ شده. hidden/items/reasons/data/config snapshot عیناً محفوظ؛ query با phone یا فعال تازه برای token قدیمی ممنوع. proof ثابت F01 و purge F02 هنوز در B/E باز هستند.
+run/session owner اکنون UUID حساب است؛ composite FK owner equality و session unique/idempotency حفظ شده. hidden/items/reasons/data/config snapshot عیناً محفوظ؛ query با phone یا فعال تازه برای token قدیمی ممنوع. این بند شرح گذار A.2 است. در main مبنای ممیزی، B proof تصادفی/digest را اجرا کرده و E پاک‌سازی مستقل پاسخ خام را افزوده است؛ گیت عملیاتی scheduler/monitor/restore همچنان تا شاهد T05 باز است. [proof](../security/questionnaire-proof.md) و [retention](../operations/raw-answer-retention.md) بر توضیحات تاریخی مقدم‌اند.

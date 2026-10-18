@@ -1,5 +1,7 @@
 # US-09 recommendation and loan-detail HTTP contract
 
+> Current precedence, US-12.T01 (2026-10-18): dated T072/A.2 sections retain their historical contracts. US-11.T02C/F below supersede the 1800-second account expiry with absolute 3600-second SQL-backed account sessions and add accountId/bookmarks. Questionnaire expiry remains 1800 seconds. Use the [19-operation matrix](coverage.md), generated schema and current session/proof/bookmark contracts; historical notes are not runtime overrides.
+
 FastAPI generates the machine-readable OpenAPI document at `/api/v1/openapi.json` only when API documentation is enabled. This page records the security and ordering semantics that JSON Schema alone cannot express.
 
 ## `POST /api/v1/recommendations`
@@ -53,7 +55,7 @@ There is currently no public application, payment, real SMS-provider or external
 
 ## Verified first-login profile creation — 2026-10-09
 
-Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. Real SMS provider remains deferred until the owner supplies its API key; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
+Owner clarification: after entering a phone and successfully verifying mock OTP `123456`, the API creates the actor's `user_profiles` record before issuing access. Requesting a code or submitting an invalid code does not create a profile. Repeated login reuses the record without erasing name, income, job, gender or avatar. Personal-info then updates that same database profile before analysis. Creation failure returns 503 without issuing access; resend a code to retry. Existing migration is reused. The guarded Kavenegar provider has merged; enablement and template approval default to false. Provider approval, secure server configuration and a real delivery test remain pending; mock remains explicitly local/test. API tests and a real PostgreSQL HTTP integration test cover creation, persistence and repeat login. Follow-up CI must pass before merge.
 
 ## US-09.T081 — Generated complete contract
 

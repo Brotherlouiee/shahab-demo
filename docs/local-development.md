@@ -105,9 +105,9 @@ See [the Docker runbook](operations/docker-runbook.md) before any reset.
 
 ## Profile development access — US-09.T072
 
-Development Compose passes SHAHAB_PROFILE_MOCK_OTP_ENABLED (default true for the local stack). Direct API execution requires explicit SHAHAB_PROFILE_MOCK_OTP_ENABLED=true with local/test environment. The existing demo code is ۱۲۳۴۵۶; no SMS is sent. Staging/production always reject this mock. Never configure a public production deployment as local.
+Development Compose passes SHAHAB_PROFILE_MOCK_OTP_ENABLED (default true for the local stack). Direct API execution also enables the mock by default in local/test; explicit SHAHAB_PROFILE_MOCK_OTP_ENABLED=false disables it. The existing demo code is ۱۲۳۴۵۶; no SMS is sent. Staging/production always reject this mock. Never configure a public production deployment as local.
 
-After code update, recreate API with `docker compose up -d --build api`. Existing migration d1a9e71b4c3f supplies user_profiles; no new migration or publication command. Refresh/API restart requires development login before protected profile operations; DB records survive restart. Personal-info now persists before analysis, and failures remain visible/retryable. See ADR 0010.
+After code update, recreate API with `docker compose up -d --build api`. The original d1a9e71b4c3f profile migration is historical; the current chain ends at ff11b02f0001 and includes account UUID ownership and shared access. For an existing database follow the account migration runbook, including stopped writers/backfill before contract; do not treat automatic startup as a substitute. A valid current SQL-backed account session survives refresh/API restart until its absolute one-hour expiry; revoked/expired credentials require login again. Personal-info now persists before analysis, and failures remain visible/retryable. See ADR 0010.
 
 ## ابزار داخلی US-10.T04
 

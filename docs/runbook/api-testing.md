@@ -26,7 +26,7 @@ POSTGRES_USER
 POSTGRES_PASSWORD
 ```
 
-از پیش‌فرض `change-me-local-only` خارج توسعه استفاده نکنید. در محیط آنلاین محدود command اجرای API را بدون `--reload` و با یک worker تنظیم کنید: سرویس OTP فعلی در حافظهٔ process است و چند worker/replica نشست یکسان ندارند؛ restart آن نشست حساب را باطل می‌کند. state پرسشنامه و history مطابق سیاست موجود PostgreSQL باقی می‌مانند. این محدودیت را auth production تلقی نکنید.
+از پیش‌فرض `change-me-local-only` خارج توسعه استفاده نکنید. command محیط آنلاین محدود بدون `--reload` باشد. در نسخهٔ فعلی، DB پیکربندی‌شده adapter مشترک PostgreSQL برای challenge/quota/نشست حساب دارد؛ restart یا worker تازه به‌تنهایی نشست معتبر را باطل نمی‌کند. عمر مطلق حساب ۳۶۰۰ ثانیه است و restore آن را تمدید نمی‌کند؛ پرسشنامه TTL مستقل ۱۸۰۰ ثانیه دارد. memory adapter فقط local/test بدون SQL است. این اصلاح مستندات مجوز scale یا اثبات load نیست؛ [قرارداد نشست](../security/account-session-lifecycle.md) و گیت محیط واقعی برقرارند. mock همچنان ورود production نیست.
 
 ۴. پیش از mutation دیتابیس موجود، backup/restore و audit را مطابق [runbook استقرار موجود](production-deployment.md) انجام دهید. روی DB انتخاب‌شده، migration موجود `python -m alembic upgrade head` و سپس audit فقط‌خواندنی `python -m scripts.materialize_t05a` اجرا شود. publication فقط با approval ثبت‌شده و command موجود آن runbook انجام شود. اجرای مجدد نباید دادهٔ تکراری تولید کند. این تسک migration، importer یا pipeline دوم ندارد و sourceهای canonical تغییر نمی‌کنند.
 
@@ -38,8 +38,8 @@ POSTGRES_PASSWORD
 
 - SHA/image دقیق، URL HTTPS بدون credential، مالک محیط و data/config version ثبت شود.
 - بیرون شبکهٔ مجاز، docs/schema و **همهٔ API** رد شوند؛ داخل شبکه مالک و تست‌کنندهٔ دوم وارد شوند.
-- ۱۶ عملیات در Swagger باشند؛ درخواست واقعی، cookieهای حساب/اثبات پرسشنامه، مالکیت و رد دسترسی حساب دیگر بررسی شوند.
-- پروفایل، snapshot تاریخچه و hide با بازخوانی API/DB همان محیط اثبات شوند؛ خروج 204 و درخواست بعدی 401 باشد.
+- ۱۹ عملیات در Swagger باشند؛ درخواست واقعی، cookieهای حساب/اثبات پرسشنامه، مالکیت و رد دسترسی حساب دیگر بررسی شوند.
+- پروفایل، snapshot تاریخچه، hide و save/list/remove نشان‌شده‌ها با بازخوانی API/DB همان محیط اثبات شوند؛ خروج 204 و درخواست بعدی 401 باشد.
 - جدول [پوشش](../api/coverage.md) با شاهد پالایش‌شده تکمیل شود. کوئیری/توکن/شماره/پاسخ خام را در گزارش مشترک ثبت نکنید.
 - T07 همین API و PostgreSQL را reuse می‌کند؛ اتصال Netlify و gate کامل محصول متعلق به T07 است، نه این مستندات.
 
