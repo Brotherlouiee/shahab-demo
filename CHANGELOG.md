@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Docs (US-12.T01–T04A / تصمیم ۲۰۲۶-۱۰-۱۸، PR #132): ثبت تقدم محدود آماده‌سازی انتشار پیش از Public، تکمیل همان دفتر معوقات سرور/registry/CI و پیگیری OTP در PR #133؛ برنامه US-13 محفوظ، همه gateهای نهایی و مجوزهای انتشار برقرار و بدون تغییر runtime/workflow. [checkpoint](docs/progress/us-12-preparation-order-20261018.md).
+
 - CI: اجرای مستقل مجموعه‌های PostgreSQL روی دیتابیس‌های موقت با concurrency محدود؛ حفظ همهٔ مجموعه‌ها، شکست در skip/zero-test و پاک‌سازی ایمن. مقایسهٔ baseline روی build، اجرای مرورگر عمومی در دو مرحله با اثبات پوشش کامل discovery، readiness واقعی refresh و بررسی‌های مستقل Swagger با API واقعی؛ بدون تغییر source محصول، timeout یا معیار صفرپیکسل.
 
 - Documentation (US-13؛ PR #132): تجمیع برنامه و تمام ۲۰ جفت شناسهٔ PR #131 در سند جامع؛ تطبیق با main واقعی، اصلاح رابطهٔ CardView/StatsMarquee، تعیین تکلیف ردیف‌های بدون مصرف، تقسیم صریح پرسشنامه به هفت مسئولیت با مالکیت و پذیرش مستقل، ثبت وضعیت چهار تسک و صف Hero با معیار پذیرش؛ بدون تغییر runtime/ظاهر/API/داده یا اعلام پایان داستان.
