@@ -64,14 +64,13 @@ npm run test:vite-proxy
 npm run build
 ```
 
-After the catalogue is published, the opt-in browser check exercises the real
-questionnaire, proxied API, recommendation result, and loan-detail route. Playwright
-uses its managed Chromium by default:
-
-```powershell
-$env:SHAHAB_LIVE_E2E = "1"
-npx playwright test tests/e2e/local-fullstack-live.spec.mjs
-```
+The complete browser journey now runs without an opt-in skip in the existing
+real-API CI suite. It requires a dedicated disposable PostgreSQL database, its
+current migrations and local mock OTP; its fixture rejects other database names.
+It is not a check to point at your ordinary Compose data. See the
+[US-12.T02 test map](testing/us-12-t02.md) for the exact environment and command.
+The CI path covers questionnaire → personal-info → OTP → real recommendation
+partitions → published details → comparison. It does not send SMS or deploy.
 
 If the Playwright browser CDN is unavailable, point the check at an already
 installed Chromium-compatible browser without committing that machine-specific
@@ -79,7 +78,7 @@ path:
 
 ```powershell
 $env:SHAHAB_E2E_BROWSER_PATH = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-npx playwright test tests/e2e/local-fullstack-live.spec.mjs
+npx playwright test --config playwright.profile-live.config.mjs tests/profile-live/fullstack-recommendation.spec.mjs
 ```
 
 On Windows, set `PYTHONUTF8=1` for host-run Python checks so canonical UTF-8

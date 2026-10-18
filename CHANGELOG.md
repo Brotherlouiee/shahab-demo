@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Test (US-12.T02): اجرای همهٔ unitهای فرانت با discovery، اصلاح harness تست dedupe و انتقال journey کامل به suite واقعی FastAPI/PostgreSQL با فرم/OTP و selectorهای جاری؛ ثبت پوشش و محدودیت شواهد مستقل از سرور، بدون تغییر UI/API/schema/data/scoring یا شل‌کردن gateها. [نقشهٔ تست](docs/testing/us-12-t02.md).
+
 - Docs (US-12 / ترتیب ۲۰۲۶-۱۰-۱۸، PR #132): انجام کارهای مستقل از سرور US-12 پیش از US-13؛ حذف شرط تقدم/تأخر انتشار مخزن، تغییر نام همان جدول به «جدول تسک‌های پس از استقرار» و جداسازی وابستگی CI/registry از سرور؛ رجیستری و پذیرش داخلی US-13 و تمام gateهای نهایی محفوظ، بدون تغییر runtime/workflow. [checkpoint](docs/progress/us-12-preparation-order-20261018.md).
 
 - CI: اجرای مستقل مجموعه‌های PostgreSQL روی دیتابیس‌های موقت با concurrency محدود؛ حفظ همهٔ مجموعه‌ها، شکست در skip/zero-test و پاک‌سازی ایمن. مقایسهٔ baseline روی build، اجرای مرورگر عمومی در دو مرحله با اثبات پوشش کامل discovery، readiness واقعی refresh و بررسی‌های مستقل Swagger با API واقعی؛ بدون تغییر source محصول، timeout یا معیار صفرپیکسل.
