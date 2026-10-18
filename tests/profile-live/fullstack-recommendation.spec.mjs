@@ -77,8 +77,8 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
   await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
   await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
-  await expect(page.getByRole("button", { name: "تایید", exact: true })).toBeEnabled();
-  await page.getByRole("button", { name: "تایید", exact: true }).click();
+  await expect(page.getByRole("button", { name: "تایید و جستجوی وام", exact: true })).toBeEnabled();
+  await page.getByRole("button", { name: "تایید و جستجوی وام", exact: true }).click();
   await expect(page).toHaveURL(/\/verify-code$/);
   for (const [index, digit] of [..."123456"].entries()) {
     await page.locator(".hp-loan-otp-row input").nth(index).fill(digit);
