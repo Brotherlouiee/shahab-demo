@@ -82,6 +82,7 @@ jobs:
           cache-from: type=gha,scope=shahab-web-amd64-v1,version=2
           cache-to: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'type=gha,scope=shahab-web-amd64-v1,mode=min,version=2,timeout=60s' || '' }}
       - name: Preserve build metadata, with no registry credentials
+        if: ${{ always() }}
         env:
           API_METADATA: ${{ steps.api.outputs.metadata }}
           WEB_METADATA: ${{ steps.web.outputs.metadata }}
@@ -90,7 +91,10 @@ jobs:
           import json, os
           from pathlib import Path
           for name in ('api', 'web'):
-              value = json.loads(os.environ[name.upper() + '_METADATA'])
+              raw = os.environ[name.upper() + '_METADATA']
+              if not raw:
+                  continue  # A failed build stays failed; retain the other build evidence.
+              value = json.loads(raw)
               Path('test-results/images/' + name + '-build.json').write_text(json.dumps(value, indent=2) + '\n')
           PY
       - name: Smoke the exact loaded images without rebuilding

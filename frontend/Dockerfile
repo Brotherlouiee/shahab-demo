@@ -13,6 +13,8 @@ COPY data/contracts ./data/contracts
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:782bb89768cc87b7f95c18b95baa1af250e5d451f26794f59363540161147c01 AS runtime
+# Package installation needs root only while building; final USER remains 101:101.
+USER 0
 # Fix the two HIGH findings in the pinned base; fail if exact patched APKs are unavailable.
 RUN apk add --no-cache --upgrade libexpat=2.9.0-r0 libx11=1.8.14-r0
 COPY frontend/nginx/nginx.conf /etc/nginx/nginx.conf
