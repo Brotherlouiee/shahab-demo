@@ -3,6 +3,7 @@
 !pyproject.toml
 !README.md
 !backend/
+backend/**
 !backend/__init__.py
 !backend/app/
 !backend/app/**
@@ -10,6 +11,7 @@
 !alembic/**
 !alembic.ini
 !data/
+data/**
 !data/contracts/
 !data/contracts/**
 **/__pycache__
