@@ -1,5 +1,10 @@
 # Local Docker operations runbook
 
+Independent release images and their isolated build/run harness are documented in
+[the T04A.1 contract](container-images.md). Development Compose, its ports, volumes
+and reload commands below remain unchanged; no registry account or publishing is
+required for that image test.
+
 ## Routine commands
 
 Start or rebuild the local stack:
