@@ -137,9 +137,13 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   expect(recommendationPosts).toHaveLength(1); // Back reuses the result; no rescoring.
 
   await page.getByRole("button", { name: "مقایسه وام", exact: true }).click();
-  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toBeDisabled();
+  // The approved bottom bar is absent at zero selections, disabled at one,
+  // and enabled only after the second selection; do not invent a zero-state button.
+  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toHaveCount(0);
   await page.locator(".hp-loan-compare-check").nth(0).click();
+  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toBeDisabled();
   await page.locator(".hp-loan-compare-check").nth(1).click();
+  await expect(page.getByRole("button", { name: /مقایسه کن/ })).toBeEnabled();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
   await page.getByRole("button", { name: "تحلیل با هوش مصنوعی", exact: true }).click();
