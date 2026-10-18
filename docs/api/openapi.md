@@ -1,5 +1,7 @@
 # US-09 recommendation and loan-detail HTTP contract
 
+> Current precedence, US-12.T01 (2026-10-18): dated T072/A.2 sections retain their historical contracts. US-11.T02C/F below supersede the 1800-second account expiry with absolute 3600-second SQL-backed account sessions and add accountId/bookmarks. Questionnaire expiry remains 1800 seconds. Use the [19-operation matrix](coverage.md), generated schema and current session/proof/bookmark contracts; historical notes are not runtime overrides.
+
 FastAPI generates the machine-readable OpenAPI document at `/api/v1/openapi.json` only when API documentation is enabled. This page records the security and ordering semantics that JSON Schema alone cannot express.
 
 ## `POST /api/v1/recommendations`

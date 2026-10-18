@@ -36,7 +36,7 @@ python -m scripts.export_api_docs --check
 
 ## مسیر دستی در Swagger یا Postman
 
-همهٔ گام‌ها را در **همان مرورگر یا cookie jar** و ظرف TTL فعلی ۳۰ دقیقه انجام دهید. Swagger با `withCredentials` cookieهای HttpOnly را خودکار می‌فرستد؛ نیازی به کپی cookie نیست. ذخیرهٔ Authorization در Swagger خاموش است؛ schema به validator خارجی ارسال نمی‌شود. دارایی‌های Swagger روی نسخهٔ مشخص `5.17.14` هستند؛ مرورگر باید به CDN دارایی‌ها دسترسی داشته باشد.
+همهٔ گام‌ها را در **همان مرورگر یا cookie jar** انجام دهید. نشست حساب عمر مطلق یک ساعت دارد؛ نشست پرسشنامه TTL جداگانهٔ ۳۰ دقیقه و challenge OTP فقط ۱۲۰ ثانیه دارد. restore زمان حساب را تمدید نمی‌کند. Swagger با `withCredentials` cookieهای HttpOnly را خودکار می‌فرستد؛ نیازی به کپی cookie نیست. ذخیرهٔ Authorization در Swagger خاموش است؛ schema به validator خارجی ارسال نمی‌شود. دارایی‌های Swagger روی نسخهٔ مشخص `5.17.14` هستند؛ مرورگر باید به CDN دارایی‌ها دسترسی داشته باشد.
 
 | گام | درخواست و ورودی | انتظار |
 | --- | --- | --- |
@@ -53,7 +53,10 @@ python -m scripts.export_api_docs --check
 | ۱۱ | GET `/api/v1/loans/{loan_id}` با ID یکی از خروجی‌ها | 200 و شرایط همان وام؛ ID ناموجود 404 |
 | ۱۲ | GET `/api/v1/recommendation-history`؛ سپس GET `/{history_id}` | سابقهٔ حساب خود، تعداد ranked و snapshot بدون scoring مجدد |
 | ۱۳ | DELETE `/api/v1/recommendation-history/{history_id}` **فقط سابقهٔ آزمایشی خود** | 204؛ از فهرست/جزئیات کاربر پنهان می‌شود، در DB حذف فیزیکی نمی‌شود؛ تکرار 404 |
-| ۱۴ | POST `/api/v1/account-access/logout` | 204؛ درخواست بعدی محافظت‌شده 401 |
+| ۱۴ | PUT `/api/v1/bookmarks/{loan_id}` با `{}` یا `{"historyId":"UUID سابقهٔ قابل‌مشاهدهٔ خود"}` | 204 پس از commit؛ نسخه PUBLISHED و context همان حساب؛ retry بدون duplicate |
+| ۱۵ | GET `/api/v1/bookmarks` | کارت ذخیره‌شدهٔ همان حساب، limit بین ۱ و ۵۰ و nextCursor برای ادامه؛ حساب دوم آن را نمی‌بیند |
+| ۱۶ | DELETE `/api/v1/bookmarks/{loan_id}`، سپس GET فهرست | 204 و حذف از نمایش؛ تکرار DELETE هم 204؛ رکورد durable فیزیکی حذف نمی‌شود |
+| ۱۷ | POST `/api/v1/account-access/logout` | 204؛ درخواست بعدی محافظت‌شده 401 |
 
 Bearer تنها جای cookie اثبات سازندهٔ پرسشنامه را نمی‌گیرد. ورود بدون آن cookie و درخواست تاریخچه برای پرسشنامهٔ دیگری نباید موفق شود. برای تست حساب دوم یک browser context/cookie jar مستقل بسازید؛ context اول را به آن منتقل نکنید. برای pagination از `limit` مجاز و `nextCursor` همان پاسخ استفاده کنید؛ cursor را حدس نزنید.
 
@@ -63,4 +66,4 @@ Bearer تنها جای cookie اثبات سازندهٔ پرسشنامه را ن
 
 فقط لینک HTTPS **محدود** را با مالک و تست‌کنندهٔ دوم مجاز به اشتراک بگذارید. اجازهٔ دیدن مستندات، مجوز تغییر پروفایل یا history شخص دیگر نیست. راه‌اندازی مطابق [runbook محیط تست](../runbook/api-testing.md)، با PostgreSQL مستقل و دادهٔ رسمی تأییدشده انجام می‌شود.
 
-روی همان URL، وضعیت هر یک از ۱۶ عملیات، SHA runtime، data/config version و بازخوانی persistence را ثبت کنید. فقط status و نام عملیات را در شواهد مشترک نگه دارید؛ مقادیر خصوصی، token، phone و answers حذف شوند. تا همهٔ عملیات مربوط، مالک و تست‌کنندهٔ دوم، cookie/proxy/TLS و خطاهای مالکیت در محیط آنلاین اثبات نشوند، T081 **Done نیست**.
+روی همان URL، وضعیت هر یک از ۱۹ عملیات، SHA runtime، data/config version و بازخوانی persistence را ثبت کنید. فقط status و نام عملیات را در شواهد مشترک نگه دارید؛ مقادیر خصوصی، token، phone و answers حذف شوند. تا همهٔ عملیات مربوط، مالک و تست‌کنندهٔ دوم، cookie/proxy/TLS و خطاهای مالکیت در محیط آنلاین اثبات نشوند، T081 **Done نیست**.

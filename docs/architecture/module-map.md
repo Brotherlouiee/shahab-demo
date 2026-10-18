@@ -20,13 +20,18 @@ The root `src/` Vite application is the active prototype and remains operational
 | `backend/app/infrastructure` | outbound adapter implementations | domain/application dependency reversal |
 | `backend/app/infrastructure/db` | SQLAlchemy metadata, bounded engine/session factory and future repository adapters | API import, business scoring, migration execution at import time |
 | `backend/app/data_pipeline` | immutable raw source capture, staged transformation boundaries and adapters | scoring, serving publication, UI/API ownership before its task |
-| `backend/app/questionnaire/domain` | approved configuration, canonical answer validation and anonymous-session invariants | route indexes, HTTP, ORM, raw-source mutation, scoring |\n| `backend/app/questionnaire/application` | session use cases and persistence port | FastAPI, direct ORM/adapter imports, scoring |
+| `backend/app/questionnaire/domain` | approved configuration, canonical answer validation and anonymous-session invariants | route indexes, HTTP, ORM, raw-source mutation, scoring |
+| `backend/app/questionnaire/application` | session use cases and persistence port | FastAPI, direct ORM/adapter imports, scoring |
 | backend/app/loans/domain | approved-catalogue value types and safe loan detail facts | FastAPI, ORM, source parsing, conditions HTML |
 | backend/app/loans/application | ListLoans/GetLoanDetails use cases and serving-only repository port | raw/staging/draft version access, HTTP concerns |
 | backend/app/loans/infrastructure | replaceable serving-catalogue adapters | business interpretation or source parsing |
 | `backend/app/api/v1` | versioned transport adapters and restricted operational endpoints | domain logic, direct database decisions |
 | `backend/app/core` | typed settings, dependency wiring, redacted logging, security hooks | product use cases |
 | `backend/app/shared` | truly cross-feature backend helpers | recommendation-specific rules |
+
+## Current implementation precedence — US-12.T01
+
+This map retains task-by-task history. Active frontend code is under root `src/`; `frontend/src/` is the target scaffold, not a second live app. Later US-09/10/11 sections supersede early “future” descriptions: published SQL catalogue and recommendation API, protected operational CLI, account UUID, shared one-hour sessions, creator proof, raw-answer purge and server bookmarks exist in the audit baseline. [Database inventory](../database/README.md) and [API matrix](../api/coverage.md) identify current implementations; [audit](../release/us-12-t01-documentation-audit.md) separates them from unmerged PRs and online evidence.
 
 ## Dependency direction
 

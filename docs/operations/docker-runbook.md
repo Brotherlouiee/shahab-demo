@@ -49,7 +49,7 @@ Compose logs.
 
 After update run `docker compose up -d --build api` to apply routes and the development mock flag. No new migration or data publication command; normal startup applies the existing profile migration. Staging/production profile access remains fail-closed pending real authentication.
 
-401 after refresh/restart requires development login again. For 503, check DB readiness/migration and explicit local/test flag; never bypass ownership or treat browser storage as successful DB persistence. Disable flag/restart to invalidate access without deleting profiles. Do not roll back to PR #85's unprotected endpoints.
+In the current SQL-backed adapter, refresh/restart alone does not invalidate an unexpired account session. For 401 inspect credential expiry/revocation and account status; for 503 inspect DB readiness/migration and local/test provider configuration. Never bypass ownership or treat browser storage as successful DB persistence. Disabling the mock flag stops mock login but does not replace durable session revocation; use the session lifecycle runbook for access invalidation. Do not roll back to PR #85's unprotected endpoints.
 
 ## OTP request failure repair — US-09.T073
 
