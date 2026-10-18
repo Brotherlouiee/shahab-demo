@@ -70,11 +70,14 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   const inputs = page.locator(".hp-personal-info-form input");
   await inputs.nth(0).fill("آزمون");
   await inputs.nth(1).fill("کاربر");
-  await inputs.nth(2).fill("9000000931");
+  const phone = "09012340931"; // Synthetic local-only fixture; never sent to an SMS provider.
+  await inputs.nth(2).fill(phone.slice(2));
+  await expect(inputs.nth(2)).toHaveValue(persian(phone.slice(2)));
   await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
   await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
   await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
   await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
+  await expect(page.getByRole("button", { name: "تایید", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "تایید", exact: true }).click();
   await expect(page).toHaveURL(/\/verify-code$/);
   for (const [index, digit] of [..."123456"].entries()) {
