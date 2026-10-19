@@ -1,0 +1,152 @@
+# Standalone VM stack: never merge with the development Compose file.
+name: shahab-prod
+
+x-api-image: &api-image docker.io/shahab2026/shahab-backend@sha256:7e9366e8ad69aaba5fcbba702d0cbd60a935c3816daf89841b490f53bb73fb7e
+x-web-image: &web-image docker.io/shahab2026/shahab-frontend@sha256:ad0129b5cdc9998afd838ff8ab11b9dcdc5b5ad946f13b39f75f47589110089a
+
+services:
+  postgres:
+    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-shahab}
+      POSTGRES_USER: ${POSTGRES_USER:-shahab_migrator}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set the private database owner password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499
+    platform: linux/amd64
+    restart: unless-stopped
+    command: [redis-server, --save, '', --appendonly, 'no']
+    networks: [data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Explicit one-shot maintenance only. Normal up never migrates or seeds data.
+  migrate:
+    image: *api-image
+    platform: linux/amd64
+    profiles: [maintenance]
+    restart: 'no'
+    command: [alembic, upgrade, head]
+    environment:
+      SHAHAB_ENVIRONMENT: production
+      SHAHAB_DATABASE_URL: ${SHAHAB_MIGRATION_DATABASE_URL:?Set the private migration database URL}
+      SHAHAB_PROFILE_MOCK_OTP_ENABLED: 'false'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [data]
+
+  api:
+    image: *api-image
+    platform: linux/amd64
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/tmp]
+    command:
+      - uvicorn
+      - backend.app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8000'
+      - --proxy-headers
+      - --forwarded-allow-ips
+      - ${SHAHAB_FRONTEND_IP:-172.30.50.10}
+      - --no-access-log
+    environment:
+      SHAHAB_ENVIRONMENT: production
+      SHAHAB_DEBUG: 'false'
+      SHAHAB_LOG_LEVEL: INFO
+      SHAHAB_DATABASE_URL: ${SHAHAB_DATABASE_URL:?Set the private non-owner API database URL}
+      SHAHAB_READINESS_TOKEN: ${SHAHAB_READINESS_TOKEN:?Set a private readiness token}
+      SHAHAB_REDIS_URL: redis://redis:6379/0
+      SHAHAB_PROFILE_MOCK_OTP_ENABLED: 'false'
+      SHAHAB_API_DOCS_INCLUDE_OPERATIONS: 'false'
+      SHAHAB_KAVENEGAR_OTP_ENABLED: ${SHAHAB_KAVENEGAR_OTP_ENABLED:-false}
+      SHAHAB_KAVENEGAR_TEMPLATE_APPROVED: ${SHAHAB_KAVENEGAR_TEMPLATE_APPROVED:-false}
+      SHAHAB_KAVENEGAR_API_KEY: ${SHAHAB_KAVENEGAR_API_KEY:-}
+      SHAHAB_KAVENEGAR_TEMPLATE: ${SHAHAB_KAVENEGAR_TEMPLATE:-OTP1}
+      SHAHAB_OTP_CODE_SECRET: ${SHAHAB_OTP_CODE_SECRET:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    networks: [app, data]
+
+  frontend:
+    image: *web-image
+    platform: linux/amd64
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/tmp]
+    environment:
+      SHAHAB_PUBLIC_HOST: ${SHAHAB_PUBLIC_HOST:?Set the certificate DNS hostname, without scheme or port}
+    entrypoint: [/bin/sh, -ec]
+    command:
+      - |
+        case "$$SHAHAB_PUBLIC_HOST" in ''|*[!a-z0-9.-]*) echo 'Invalid public hostname' >&2; exit 64;; esac
+        envsubst '$$SHAHAB_PUBLIC_HOST' < /etc/nginx/vm.conf.template > /tmp/vm.conf
+        exec nginx -c /tmp/vm.conf -g 'daemon off;'
+    ports:
+      - '${SHAHAB_BIND_IP:-127.0.0.1}:${SHAHAB_HTTP_PORT:-80}:8080'
+      - '${SHAHAB_BIND_IP:-127.0.0.1}:${SHAHAB_HTTPS_PORT:-443}:8443'
+    volumes:
+      - type: bind
+        source: ./deploy/vm/nginx.conf.template
+        target: /etc/nginx/vm.conf.template
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${SHAHAB_TLS_DIRECTORY:?Set the absolute directory containing fullchain.pem and privkey.pem}
+        target: /etc/nginx/tls
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, 'http://127.0.0.1:8090/health']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      app:
+        ipv4_address: ${SHAHAB_FRONTEND_IP:-172.30.50.10}
+
+networks:
+  app:
+    ipam:
+      config:
+        - subnet: ${SHAHAB_APP_SUBNET:-172.30.50.0/24}
+  data:
+    internal: true
+
+volumes:
+  postgres_data:

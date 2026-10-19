@@ -157,3 +157,8 @@ Swagger/Postman همان auth/proof/roles مصوب را نگه می‌دارند
 [راهنمای کامل](operations/kavenegar-otp.md).
 
 Release image packaging uses Python3.12 Alpine with digest and image-only hashed locks, plus two pinned NGINX security APK fixes; see [image build/security contract](operations/container-images.md). These do not change Compose ports, application source, API or migration commands. Actual container compatibility and security are checked by the additional image CI gate.
+
+
+## اجرای VM با image آماده
+
+برای ماشین استقرار از فایل مستقل docker-compose.prod.yml و [راهنمای VM](operations/vm-compose.md) استفاده کنید؛ Compose توسعه و فرمان‌های build/reload آن برای VM نیستند. این افزوده تنظیم توسعه را تغییر نمی‌دهد.

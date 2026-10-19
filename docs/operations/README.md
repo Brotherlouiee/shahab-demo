@@ -15,3 +15,5 @@ CI موفق، provider پیکربندی‌شده، آموزش انسانی و de
 backup/restore rehearsal و hardening نهایی در US-11/US-12 تکمیل می‌شوند.
 
 - [مصرف و بازگشت ایمیج‌های منتشرشده](image-consumption.md): manifest، pull با digest و آزمون ایزولهٔ A.4.
+
+- [اجرای VM بدون build](vm-compose.md): Compose مستقل با image منتشرشده، TLS، DB پایدار و مهاجرت دستی.
