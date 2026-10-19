@@ -104,3 +104,8 @@ api از قبل env_file: .env دارد؛ هیچ key یا template در Dockerfi
 secrets را در محیط خصوصی backend ثبت و فقط سرویس api را recreate کنید؛ schema و
 volume تغییری نمی‌کنند، down -v و reset لازم نیست. در محیط production public، mock
 هرگز فعال نشود. [تنظیمات، تست و خاموش‌سازی](kavenegar-otp.md).
+
+
+## اجرای VM با image آماده
+
+برای ماشین استقرار از فایل مستقل docker-compose.prod.yml و [راهنمای VM](vm-compose.md) استفاده کنید؛ Compose توسعه و فرمان‌های build/reload آن برای VM نیستند. این افزوده تنظیم توسعه را تغییر نمی‌دهد.

@@ -186,6 +186,13 @@ jobs:
               assert loaded['Config']['Labels']['org.opencontainers.image.revision'] == smoke['sourceSha']
           print('Archive round-trip preserves both tested/scanned image identities')
           PYCODE
+      - name: Exercise VM Compose with the already-built candidates
+        # Historical approved sources before this VM config do not contain it.
+        if: ${{ hashFiles('docker-compose.prod.yml') != '' }}
+        run: >-
+          python tests/images/vm_compose_smoke.py
+          --api-image "shahab-ci-api:sha-$SOURCE_SHA"
+          --web-image "shahab-ci-web:sha-$SOURCE_SHA"
       - name: Preserve candidate images for the protected publish job
         if: ${{ inputs.export_images && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         uses: actions/upload-artifact@v4
@@ -202,6 +209,7 @@ jobs:
           name: container-build-contract-evidence
           path: |
             test-results/image-smoke.json
+            test-results/vm-compose.json
             test-results/images/*.json
           if-no-files-found: error
           retention-days: 7
