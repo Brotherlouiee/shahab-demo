@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Added (US-12.T04A.4): ثبت manifest واقعی جفت v0.1.0 با دو digest و trace انتشار، workflow دستی pull-by-digest و smoke ایزوله با کنترل هویت و راهنمای سازگاری/بازگشت؛ بدون build/push تصویر یا تغییر محصول/داده/استقرار. اولین نسخه target قبلی ندارد؛ rollback باز می‌ماند و اجرای خصوصی پس از merge/approval لازم است. [راهنما](docs/operations/image-consumption.md).
+
 - Security (US-12.T04A.3): حذف pip/ensurepip غیرلازم از Python پایهٔ runtime، نصب zlib و libxpm اصلاح‌شده با نسخهٔ دقیق و کنترل inventory واقعی برای رفع هر ۹ یافتهٔ باقی‌مانده؛ بدون تغییر کد محصول، dependencyهای برنامه، digest پایه، UI/API/schema/data/scoring یا publish/deploy. [شواهد](docs/progress/us-12-runtime-security.md).
 
 - Fixed (US-12.T04A.3): اصلاح مقصد Docker Hub بک‌اند به `shahab2026/shahab-backend` طبق نام مصوب مالک، تطبیق تست و راهنما و ثبت محدودیت یک مخزن خصوصی Personal؛ بدون تغییر image/runtime یا عمومی‌کردن مخزن.
