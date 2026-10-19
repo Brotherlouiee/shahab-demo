@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Added (US-12.T04A.3): مسیر دستی انتشار همان دو image آزموده/scanشده به Docker Hub با approval محیط، version/SHA immutable، بازخوانی digest/config و اتصال SBOM/provenance؛ journal انتشار جزئی و تست‌های policy. نشر واقعی هنوز وابسته به namespace/secrets/tag و پذیرش ریسک مالک است؛ هیچ deploy یا تغییر محصول انجام نشده. [راهنما](docs/operations/dockerhub-publish.md).
+
 - Security (US-12.T04A.2): گیت Buildx/cache محدود و scan واقعی OS/library هر دو image با رد تمام HIGH/CRITICAL، SBOM و metadata provenance؛ قفل hash وابستگی‌های image با همان نسخه‌های A.1، پایهٔ Python Alpine و دو APK امنیتی NGINX؛ بررسی read-only tag/SHA/main و هفت گیت برای A.3، با افزودن trigger main به baseline موجود بدون تغییر معیار آن. بدون registry push، تغییر UI/API/schema/data/scoring یا deploy. [قرارداد](docs/operations/container-images.md).
 
 - Fixed (CI / US-12.T04A.2): همگام‌سازی helper ورود مرورگر با پاسخ واقعی restore/logout برای رفع race اثبات‌شده در trace؛ همان قرارداد و همهٔ assertions، بدون تغییر محصول، timeout یا retry.

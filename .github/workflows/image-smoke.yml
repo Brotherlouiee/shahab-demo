@@ -1,6 +1,14 @@
 name: Container build contract smoke
 
 on:
+  workflow_call:
+    inputs:
+      source_sha:
+        type: string
+        required: true
+      export_images:
+        type: boolean
+        default: false
   pull_request:
   push:
     branches: [main]
@@ -35,6 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.source_sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -152,6 +161,40 @@ jobs:
           TRIVY_NO_PROGRESS: 'true'
           TRIVY_TIMEOUT: 3m
         run: python tests/images/security_gate.py
+      - name: Export and reload the exact scanned images, with no registry credentials
+        run: |
+          mkdir -p "$RUNNER_TEMP/shahab-release-images"
+          docker save --output "$RUNNER_TEMP/shahab-release-images/api.tar" "shahab-ci-api:sha-$SOURCE_SHA"
+          docker save --output "$RUNNER_TEMP/shahab-release-images/web.tar" "shahab-ci-web:sha-$SOURCE_SHA"
+          docker image rm "shahab-ci-api:sha-$SOURCE_SHA" "shahab-ci-web:sha-$SOURCE_SHA"
+          python - <<'PYCODE'
+          import json, subprocess
+          from pathlib import Path
+          for image_id in json.loads(Path('test-results/image-smoke.json').read_text())['imageIds']:
+              result = subprocess.run(['docker', 'image', 'inspect', image_id], capture_output=True)
+              assert result.returncode != 0, 'Archive test requires images to be absent before reload'
+          PYCODE
+          docker load --input "$RUNNER_TEMP/shahab-release-images/api.tar"
+          docker load --input "$RUNNER_TEMP/shahab-release-images/web.tar"
+          python - <<'PYCODE'
+          import json, subprocess
+          from pathlib import Path
+          smoke = json.loads(Path('test-results/image-smoke.json').read_text())
+          for image_id in smoke['imageIds']:
+              loaded = json.loads(subprocess.check_output(['docker', 'image', 'inspect', image_id]))[0]
+              assert loaded['Id'] == image_id
+              assert loaded['Config']['Labels']['org.opencontainers.image.revision'] == smoke['sourceSha']
+          print('Archive round-trip preserves both tested/scanned image identities')
+          PYCODE
+      - name: Preserve candidate images for the protected publish job
+        if: ${{ inputs.export_images && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: shahab-release-images
+          path: ${{ runner.temp }}/shahab-release-images/*.tar
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
       - name: Preserve build, smoke, scan and SBOM evidence even on failure
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
