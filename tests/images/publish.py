@@ -106,9 +106,10 @@ class Registry:
         return repo
 
     def get(self, repo, path, missing=False):
+        accept = "application/vnd.oci.image.index.v1+json" if path.startswith("referrers/") else MEDIA
         return request(
             "https://registry-1.docker.io/v2/" + repo + "/" + path,
-            {"Authorization": "Bearer " + self.bearers[repo], "Accept": MEDIA},
+            {"Authorization": "Bearer " + self.bearers[repo], "Accept": accept},
             missing=missing,
         )
 

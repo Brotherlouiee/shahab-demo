@@ -141,6 +141,13 @@ class PublicationTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         registry.preflight("shahab-api", ["v1.0.0", "sha-" + SHA])
 
+    def test_referrers_request_accepts_the_oci_index_media_type(self):
+        registry = Registry.__new__(Registry)
+        registry.bearers = {"owner/api": "synthetic"}
+        with patch("publish.request", return_value=b"{}") as transport:
+            registry.get("owner/api", "referrers/sha256:" + "1" * 64)
+            self.assertEqual(transport.call_args.args[1]["Accept"], "application/vnd.oci.image.index.v1+json")
+
     def test_remote_digest_and_revision_are_actually_checked(self):
         registry = Registry.__new__(Registry)
         config = json.dumps({"config": {"Labels": {"org.opencontainers.image.revision": SHA}}}).encode()
