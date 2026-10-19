@@ -198,7 +198,7 @@ def candidate(folder, sha, review, owner, now):
 def publish_images(registry, images, builds, sha, tag, folder, journal, save, run=command):
     tags = [tag, "sha-" + sha]
     # All four tags, immutability and both repositories checked before any push.
-    repos = [registry.preflight(name, tags) for name in ("shahab-api", "shahab-frontend")]
+    repos = [registry.preflight(name, tags) for name in ("shahab-backend", "shahab-frontend")]
     for image, build, repo in zip(images, builds, repos, strict=True):
         record = {"repository": repo, "imageId": image["imageId"], "status": "push-started"}
         journal["images"].append(record)

@@ -4,7 +4,7 @@
 
 ## پیش‌نیاز مالک
 
-1. namespace واقعی Docker Hub را مشخص کن؛ نام GitHub به‌جای آن حدس زده نمی‌شود. نام دو repository تأییدشده `shahab-api` و `shahab-frontend` است. مالک هر دو را در namespace خود ایجاد و visibility آن‌ها را تعیین کند؛ workflow repository یا حساب ایجاد نمی‌کند.
+1. namespace اعلام‌شدهٔ مالک `shahab2026` است؛ مقدار Environment variable با نام `DOCKERHUB_NAMESPACE` همین مقدار قرار می‌گیرد. نام دو repository تأییدشده `shahab-backend` و `shahab-frontend` است. مالک هر دو را در namespace خود ایجاد و visibility آن‌ها را تعیین کند؛ workflow repository یا حساب ایجاد نمی‌کند.
 2. در Settings → General → Tag mutability هر دو repository، Specific tags immutable را با **همین regex** فعال کن:
 
    ```text
@@ -16,6 +16,12 @@
 4. در **همین Environment** متغیر `DOCKERHUB_NAMESPACE` و دو Secret با نام‌های `DOCKERHUB_USERNAME` و `DOCKERHUB_TOKEN` قرار بده. PAT با Read/Write، بدون Delete و با کمترین دسترسی قابل‌اعطا به همین دو repo استفاده شود؛ اگر طرح حساب محدودیت repo ندارد، حساب اختصاصی نشر با دسترسی محدود لازم است. از password حساب استفاده نکن. token در چت/فایل/متغیر عمومی قرار نمی‌گیرد. ابزار GitHub این جلسه مدیریت secrets ندارد؛ ورود مقدار محرمانه توسط مالک انجام می‌شود.
 5. پس از merge پیاده‌سازی، هفت job روی **همان commit از main** باید موفق باشند. مالک version جدید `vX.Y.Z` و SHA کامل آن را تصویب و tag را ایجاد کند؛ هیچ workflow اینجا tag یا release نمی‌سازد. tag باید به همان commit در تاریخچه main اشاره کند. نام نسخه از طرف عامل حدس زده نمی‌شود.
 6. یافته‌های MEDIUM/LOW همان نسخه را از `container-build-contract-evidence/images/{api,web}-scan.json` بررسی کن. برای هر یافته تصمیم مستقل با مالک، mitigation و deadline لازم است. پذیرش A.2 یا یک SHA دیگر خودکار منتقل نمی‌شود. HIGH/CRITICAL یا severity ناشناخته هیچ override ندارد.
+
+## محدودیت حساب رایگان و وضعیت دسترسی
+
+حساب Docker Personal طبق [مستندات رسمی](https://docs.docker.com/docker-hub/usage/) فقط یک repository خصوصی و repositoryهای عمومی نامحدود دارد؛ بنابراین ساخت دو مخزن Private در این حساب قابل اجرا نیست. پیشنهاد قبلی دو مخزن خصوصی اصلاح شد. دو image و دو repository مستقل مطابق سند جامع حفظ شده‌اند؛ workflow هیچ visibility را تغییر نمی‌دهد.
+
+مقصد بک‌اند `shahab2026/shahab-backend` و مقصد فرانت `shahab2026/shahab-frontend` است. گزینهٔ سازگار با حساب رایگان، خصوصی‌بودن بک‌اند و عمومی‌بودن فرانت **فقط پس از تأیید مالک برای انتشار محتوای آن** است. اگر هر دو باید خصوصی بمانند، دسترسی حساب با ظرفیت دو مخزن خصوصی لازم است. در این اصلاح، هیچ گزینه‌ای به‌جای مالک انتخاب، مخزنی عمومی، یا طرحی خریداری نشده است. تا انتخاب visibility و ایجاد هر دو repository، نشر واقعی blocked است. ادغام دو image در یک repository یا تغییر registry بدون تصمیم جدا انجام نمی‌شود.
 
 ## تصمیم امنیت و اجرای دستی
 
