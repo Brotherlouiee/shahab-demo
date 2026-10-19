@@ -40,6 +40,34 @@ def assess(report, image_id):
     return counts
 
 
+def assess_runtime_inventory(report, name):
+    """Runtime packaging regression, independent of vulnerability suppressions.
+
+    Keep installer tooling out and verify the exact patched APKs actually landed
+    in the final filesystem. This does not replace the full OS/library scan or
+    change the project-wide severity/owner-review policy.
+    """
+    packages = [package for result in report.get("Results", []) for package in result.get("Packages", [])]
+    expected = {"zlib": "1.3.2-r1"}
+    if name == "api":
+        if any(package.get("Name") == "pip" for package in packages):
+            raise ValueError("Runtime API image contains the removed installer")
+    elif name == "web":
+        expected["libxpm"] = "3.5.20-r0"
+    else:
+        raise ValueError("Unknown runtime image")
+    os_packages = [
+        package
+        for result in report.get("Results", [])
+        if result.get("Class") == "os-pkgs"
+        for package in result.get("Packages", [])
+    ]
+    for package_name, version in expected.items():
+        installed = [package.get("Version") for package in os_packages if package.get("Name") == package_name]
+        if installed != [version]:
+            raise ValueError("Runtime patched package missing/mismatched: " + package_name)
+
+
 def main():
     smoke = json.loads((ROOT / "test-results/image-smoke.json").read_text())
     source = run("git", "rev-parse", "HEAD").strip()
@@ -102,6 +130,9 @@ def main():
                 "buildDigest": metadata["containerimage.digest"],
             }
         )
+    # Preserve both scan reports and SBOMs before rejecting packaging drift.
+    for name in ("api", "web"):
+        assess_runtime_inventory(json.loads((OUT / f"{name}-scan.json").read_text()), name)
     evidence["scanner"] = json.loads(run("trivy", "--version", "--format", "json"))
     updated = datetime.fromisoformat(evidence["scanner"]["VulnerabilityDB"]["UpdatedAt"].replace("Z", "+00:00"))
     if not timedelta(0) <= datetime.now(UTC) - updated <= timedelta(hours=24):
