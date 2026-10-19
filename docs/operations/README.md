@@ -13,3 +13,5 @@
 
 CI موفق، provider پیکربندی‌شده، آموزش انسانی و deployment چهار نتیجه جدا هستند.
 backup/restore rehearsal و hardening نهایی در US-11/US-12 تکمیل می‌شوند.
+
+- [مصرف و بازگشت ایمیج‌های منتشرشده](image-consumption.md): manifest، pull با digest و آزمون ایزولهٔ A.4.
