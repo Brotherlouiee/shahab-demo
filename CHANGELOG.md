@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- مستندات: نقطهٔ تداوم میانی به درخواست مالک با شواهد انتشار و مصرف v0.1.0، مرج Compose بدون build، موانع rollback/استقرار/OTP و تصمیم ادامه پیش از US-13 به‌روز شد؛ پایان داستان یا استقرار ادعا نمی‌شود.
+
 - Added (آماده‌سازی VM / US-09.T081–T07): فایل مستقل docker-compose.prod.yml فقط با imageهای منتشرشده و digest، PostgreSQL پایدار/Redis داخلی، proxy HTTPS هم‌مبدأ و مهاجرت دستی جدا؛ نمونه env خصوصی، grant محدود API و تست واقعی topology در CI. بدون build روی VM، تغییر محصول/داده یا استقرار سرور. [راهنما](docs/operations/vm-compose.md).
 
 - Added (US-12.T04A.4): ثبت manifest واقعی جفت v0.1.0 با دو digest و trace انتشار، workflow دستی pull-by-digest و smoke ایزوله با کنترل هویت و راهنمای سازگاری/بازگشت؛ بدون build/push تصویر یا تغییر محصول/داده/استقرار. اولین نسخه target قبلی ندارد؛ rollback باز می‌ماند و اجرای خصوصی پس از merge/approval لازم است. [راهنما](docs/operations/image-consumption.md).
