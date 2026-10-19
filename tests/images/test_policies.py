@@ -4,7 +4,7 @@ import copy
 import unittest
 
 from release_policy import REQUIRED, validate_gates, validate_image_evidence, validate_request
-from security_gate import assess
+from security_gate import assess, assess_runtime_inventory
 
 SHA = "a" * 40
 IMAGE = "sha256:" + "b" * 64
@@ -128,6 +128,23 @@ class ScanPolicyTests(unittest.TestCase):
             "Metadata": {"ImageID": IMAGE, "OS": {"Family": "debian"}},
             "Results": [{"Class": "os-pkgs", "Packages": [{"Name": "example"}], "Vulnerabilities": []}],
         }
+
+    def test_runtime_package_regression_uses_actual_inventory(self):
+        report = self.report()
+        packages = [{"Name": "zlib", "Version": "1.3.2-r1"}, {"Name": "libxpm", "Version": "3.5.20-r0"}]
+        report["Results"][0]["Packages"] = packages
+        assess_runtime_inventory(report, "api")
+        assess_runtime_inventory(report, "web")
+        for image, mutate in [("api", "installer"), ("api", "missing"), ("api", "old-zlib"), ("web", "old-xpm")]:
+            bad = copy.deepcopy(report)
+            if mutate == "installer":
+                bad["Results"].append({"Class": "lang-pkgs", "Packages": [{"Name": "pip", "Version": "25.0.1"}]})
+            elif mutate == "missing":
+                bad["Results"][0]["Packages"] = []
+            else:
+                bad["Results"][0]["Packages"][0 if mutate == "old-zlib" else 1]["Version"] = "old"
+            with self.subTest(mutation=mutate), self.assertRaises(ValueError):
+                assess_runtime_inventory(bad, image)
 
     def test_clean_and_all_severities_counted_including_unfixed(self):
         report = self.report()
