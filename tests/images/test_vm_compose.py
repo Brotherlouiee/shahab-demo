@@ -70,7 +70,8 @@ class VMComposeTests(unittest.TestCase):
                 self.assertNotEqual(mount["target"], "/app")
                 if mount["type"] == "bind":
                     self.assertTrue(mount["read_only"])
-                    self.assertFalse(mount["bind"]["create_host_path"])
+                    # Some Compose releases omit false fields in normalized JSON.
+                    self.assertFalse(mount.get("bind", {}).get("create_host_path", False))
         self.assertTrue(self.config["networks"]["data"]["internal"])
         for port in self.config["services"]["frontend"]["ports"]:
             self.assertEqual(port["host_ip"], "127.0.0.1")
