@@ -1,12 +1,22 @@
 import { expect, test } from "@playwright/test";
 
 async function login(page, suffix) {
+  // A full reload restores the cookie-backed session asynchronously. Wait for
+  // its authoritative result before choosing guest versus authenticated UI;
+  // an immediate isVisible() can observe the transient guest paint.
+  const restored = page.waitForResponse(r => r.url().endsWith("/account-access/session") && r.request().method() === "GET");
   await page.goto("/");
+  const restoration = await restored;
+  expect([200, 401]).toContain(restoration.status());
   await page.locator("button.hp-menu-button").click();
   const logout = page.getByRole("button", { name: "خروج از حساب کاربری" });
-  if (await logout.isVisible()) {
+  if (restoration.status() === 200) {
+    await expect(logout).toBeVisible();
     await logout.click();
+    const loggedOut = page.waitForResponse(r => r.url().endsWith("/account-access/logout") && r.request().method() === "POST");
     await page.getByRole("alertdialog").getByRole("button").last().click();
+    expect((await loggedOut).status()).toBe(204);
+    await expect(logout).not.toBeVisible();
     await page.locator("button.hp-menu-button").click();
   }
   await page.getByRole("button", { name: "ورود کاربر" }).click();

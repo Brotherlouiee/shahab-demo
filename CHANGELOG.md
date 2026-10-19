@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 - Security (US-12.T04A.2): گیت Buildx/cache محدود و scan واقعی OS/library هر دو image با رد تمام HIGH/CRITICAL، SBOM و metadata provenance؛ قفل hash وابستگی‌های image با همان نسخه‌های A.1، پایهٔ Python Alpine و دو APK امنیتی NGINX؛ بررسی read-only tag/SHA/main و هفت گیت برای A.3، با افزودن trigger main به baseline موجود بدون تغییر معیار آن. بدون registry push، تغییر UI/API/schema/data/scoring یا deploy. [قرارداد](docs/operations/container-images.md).
 
+- Fixed (CI / US-12.T04A.2): همگام‌سازی helper ورود مرورگر با پاسخ واقعی restore/logout برای رفع race اثبات‌شده در trace؛ همان قرارداد و همهٔ assertions، بدون تغییر محصول، timeout یا retry.
+
 - Added (US-12.T04A.1): ایمیج مستقل static فرانت با runtime غیرروت و پایهٔ digest-pinned، contextهای allowlist برای دو build، proxy HTTPS غیرفعال و harness واقعی build/run/TLS/static-byte comparison در CI بدون publish؛ Dockerfile بک‌اند، Compose/Netlify و source/UI/schema/data ثابت. [قرارداد](docs/operations/container-images.md).
 
 - Docs (US-12.T04): پیش‌نویس release notes، زنجیرهٔ واقعی migration، طرح تفکیک بازگشت کد/schema/داده و restore با گیت ابطال credential، purge پاسخ منقضی و حفظ archived/hidden؛ فرم شواهد خالی، بدون تغییر runtime یا اجرای migration/deploy. [یادداشت](docs/release/us-12-t04-release-notes.md).
