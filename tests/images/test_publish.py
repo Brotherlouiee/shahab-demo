@@ -136,10 +136,12 @@ class PublicationTests(unittest.TestCase):
                 patch.object(registry, "get", return_value=b"{}" if exists else None),
             ):
                 if allowed:
-                    self.assertEqual(registry.preflight("shahab-api", ["v1.0.0", "sha-" + SHA]), "owner/shahab-api")
+                    self.assertEqual(
+                        registry.preflight("shahab-backend", ["v1.0.0", "sha-" + SHA]), "owner/shahab-backend"
+                    )
                 else:
                     with self.assertRaises(ValueError):
-                        registry.preflight("shahab-api", ["v1.0.0", "sha-" + SHA])
+                        registry.preflight("shahab-backend", ["v1.0.0", "sha-" + SHA])
 
     def test_referrers_request_accepts_the_oci_index_media_type(self):
         registry = Registry.__new__(Registry)
@@ -247,6 +249,9 @@ class PublicationTests(unittest.TestCase):
             builds = [{"buildx.build.provenance": {"materials": []}}] * 2
             publish_images(registry, images, builds, SHA, "v1.0.0", folder, journal, lambda: None, run)
             self.assertEqual(journal["status"], "complete")
+            self.assertEqual(
+                [item["repository"] for item in journal["images"]], ["owner/shahab-backend", "owner/shahab-frontend"]
+            )
             self.assertEqual([i["status"] for i in journal["images"]], ["verified", "verified"])
             registry.fail_second = True
             journal = {"images": [], "status": "blocked"}
