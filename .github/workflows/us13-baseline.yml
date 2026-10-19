@@ -2,6 +2,8 @@ name: US-13 frozen frontend baseline evidence
 
 on:
   pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
