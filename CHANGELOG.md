@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- Docs (US-09.T081): پس از مرج ممیزی PR #148، ظرفیت و جداسازی VM، مسیر HTTPS/CDN، خالی‌بودن کاتالوگ و پیش‌نیازهای دسترسی/authority محیط test محدود دوباره بررسی و ثبت شد؛ provisioning، import، SMS، انتشار image و تغییر production انجام نشد و آزمون مثبت T081 باز ماند.
+
 - Docs (US-09.T081): ممیزی خواندنی نسخهٔ مستقر v0.1.0، TLS، digest، migration، وضعیت داده/config و ماتریس ۱۹ مسیر API ثبت شد؛ آزمون‌های دستی وابسته به دو حساب، OTP و دادهٔ منتشرشده همچنان مسدودند و تسک Done اعلام نشده است. هیچ سرویس، داده یا تصویر production تغییر نکرد.
 - Added (مستندات عامل): ثبت عین مهارت ارسالی مالک در `.agents/skills/safe-git-ide-collaboration/SKILL.md` و ارجاع از `AGENTS.md`؛ بدون جایگزینی پروتکل اجرای تسک یا تغییر محصول/داده/استقرار.
 
