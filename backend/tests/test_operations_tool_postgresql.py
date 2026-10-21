@@ -101,7 +101,7 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             c.execute(text(f"DROP OWNED BY {cls.role}"))
             c.execute(text(f"DROP ROLE {cls.role}"))
         cls.owner.dispose()
-        if os.environ.get("SHAHAB_T081_DISPOSABLE_FIXTURE") != "1":
+        if not getattr(cls, "t081_positive_fixture_test_ran", False):
             cls.alembic("downgrade", "base")
 
     def setUp(self):
@@ -163,6 +163,7 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
 
     def test_protected_fixture_publication_supports_owned_http_journey(self):
         """Disposable PG/TLS fixture proof, not deployed MFA or operational data approval."""
+        self.__class__.t081_positive_fixture_test_ran = True
         version_id = self.approved()
         self.command("publish", version_id=version_id, reason="Test-only protected source publication")
         settings = Settings(database_url=str(DATABASE_URL))

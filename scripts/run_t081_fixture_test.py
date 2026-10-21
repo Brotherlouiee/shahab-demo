@@ -42,7 +42,6 @@ def run() -> None:
     project = "shahab-t081-fixture-" + secrets.token_hex(4)
     compose = ["docker", "compose", "-p", project, "-f", str(COMPOSE), "--env-file", str(ENV_FILE)]
     env = os.environ.copy()
-    env["SHAHAB_T081_DISPOSABLE_FIXTURE"] = "1"
     env["SHAHAB_TEST_DATABASE_URL"] = "postgresql+psycopg://{}:{}@127.0.0.1:{}/{}".format(
         quote(values["POSTGRES_USER"], safe=""),
         quote(values["POSTGRES_PASSWORD"], safe=""),
