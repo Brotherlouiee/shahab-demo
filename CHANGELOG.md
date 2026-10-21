@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+- آزمون (US-09.T081): پس از مجوز صریح مالک، fixture رسمی فقط در PostgreSQL تازهٔ موقت لپ‌تاپ با TLS authority آزمایشی و ابزار محافظت‌شدهٔ عملیات منتشر و مسیر مثبت توصیه، وام، تاریخچه، نشان، مالکیت و ماندگاری پاس شد؛ ابزار آزمون HTTP محلی و guardهای آن افزوده شدند. پذیرش آنلاین دو آزمونگر، دادهٔ مصوب عملیاتی، MFA واقعی و SMS همچنان باز هستند؛ production و ایمیج منتشرشده تغییر نکردند.
+
 - Docs (US-09.T081): تصمیم مالک برای آزمون فقط روی Docker/WSL لپ‌تاپ و نبود authority انتشار ثبت شد؛ آزمون HTTP واقعی با دو حساب و PostgreSQL مستقل، کنترل مالکیت، persistence و restart محلی گذشت، اما توصیهٔ موفق وابسته به داده/config و پذیرش آنلاین همچنان مسدودند. هیچ import، انتشار image یا تغییر production انجام نشد.
 
 - Docs (US-09.T081): پس از مرج ممیزی PR #148، ظرفیت و جداسازی VM، مسیر HTTPS/CDN، خالی‌بودن کاتالوگ و پیش‌نیازهای دسترسی/authority محیط test محدود دوباره بررسی و ثبت شد؛ provisioning، import، SMS، انتشار image و تغییر production انجام نشد و آزمون مثبت T081 باز ماند.

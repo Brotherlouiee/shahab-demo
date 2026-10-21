@@ -1,0 +1,19 @@
+# Disposable, laptop-only PostgreSQL for the protected-tool fixture regression.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?local .env required}
+      POSTGRES_USER: ${POSTGRES_USER:?local .env required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?local .env required}
+    ports:
+      - "127.0.0.1:55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
