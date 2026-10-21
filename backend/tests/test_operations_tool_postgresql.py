@@ -12,10 +12,10 @@ import sys
 import unittest
 from dataclasses import replace
 from pathlib import Path
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine, event, func, select, text
+from sqlalchemy import create_engine, delete, event, func, select, text
 from sqlalchemy.orm import sessionmaker
 
 from backend.app.core.config import Settings
@@ -23,6 +23,7 @@ from backend.app.data_pipeline.domain.publication import ApprovalRecord
 from backend.app.data_pipeline.infrastructure.operations_projection import verify_operations_database_role
 from backend.app.data_pipeline.infrastructure.sqlalchemy_operations import SqlAlchemyServingVersionRepository
 from backend.app.infrastructure.db.models import (
+    AccountBookmark,
     AuditEvent,
     LoanProductVersion,
     OperationsImport,
@@ -101,8 +102,7 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             c.execute(text(f"DROP OWNED BY {cls.role}"))
             c.execute(text(f"DROP ROLE {cls.role}"))
         cls.owner.dispose()
-        if not getattr(cls, "t081_positive_fixture_test_ran", False):
-            cls.alembic("downgrade", "base")
+        cls.alembic("downgrade", "base")
 
     def setUp(self):
         self.prefix = uuid4().hex
@@ -126,6 +126,11 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
     def count(self, model):
         with self.sessions() as session:
             return session.scalar(select(func.count()).select_from(model))
+
+    def remove_fixture_bookmark(self, history_id: str) -> None:
+        """Remove only this disposable test's association after persistence checks."""
+        with sessionmaker(self.owner).begin() as session:
+            session.execute(delete(AccountBookmark).where(AccountBookmark.source_history_run_id == UUID(history_id)))
 
     def test_atomic_publication_audit_failure_leaves_no_serving_rows_then_reuses_catalogue(self):
         version_id = self.approved()
@@ -163,7 +168,6 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
 
     def test_protected_fixture_publication_supports_owned_http_journey(self):
         """Disposable PG/TLS fixture proof, not deployed MFA or operational data approval."""
-        self.__class__.t081_positive_fixture_test_ran = True
         version_id = self.approved()
         self.command("publish", version_id=version_id, reason="Test-only protected source publication")
         settings = Settings(database_url=str(DATABASE_URL))
@@ -211,6 +215,7 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             self.assertEqual(other.get(f"/api/v1/recommendation-history/{history_id}").status_code, 404)
             self.assertEqual(other.delete(f"/api/v1/recommendation-history/{history_id}").status_code, 404)
             self.assertEqual(owner.put(f"/api/v1/bookmarks/{loan_id}", json={"historyId": history_id}).status_code, 204)
+            self.addCleanup(self.remove_fixture_bookmark, history_id)
             self.assertEqual(len(owner.get("/api/v1/bookmarks").json()["items"]), 1)
             self.assertEqual(other.get("/api/v1/bookmarks").json()["items"], [])
             self.assertEqual(owner.delete(f"/api/v1/recommendation-history/{history_id}").status_code, 204)
