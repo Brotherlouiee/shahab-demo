@@ -4,26 +4,33 @@ Disposable database only. Creates/removes an ephemeral test LOGIN role with a
 random runtime password, never a committed credential. No SQLite substitute.
 """
 
+import json
 import os
 import secrets
 import subprocess
 import sys
 import unittest
 from dataclasses import replace
-from uuid import uuid4
+from pathlib import Path
+from uuid import UUID, uuid4
 
-from sqlalchemy import create_engine, event, func, select, text
+from fastapi.testclient import TestClient
+from sqlalchemy import create_engine, delete, event, func, select, text
 from sqlalchemy.orm import sessionmaker
 
+from backend.app.core.config import Settings
 from backend.app.data_pipeline.domain.publication import ApprovalRecord
 from backend.app.data_pipeline.infrastructure.operations_projection import verify_operations_database_role
 from backend.app.data_pipeline.infrastructure.sqlalchemy_operations import SqlAlchemyServingVersionRepository
 from backend.app.infrastructure.db.models import (
+    AccountBookmark,
     AuditEvent,
     LoanProductVersion,
     OperationsImport,
+    RecommendationHistoryRun,
     ServingCatalogueVersion,
 )
+from backend.app.main import create_app
 from backend.app.operations.authorization import OperationsAccessDenied
 from backend.tests.operations_authority_fixture import TLSAuthorityFixture
 from scripts.operations_tool import OperationsCommand, execute, projection
@@ -120,6 +127,11 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
         with self.sessions() as session:
             return session.scalar(select(func.count()).select_from(model))
 
+    def remove_fixture_bookmark(self, history_id: str) -> None:
+        """Remove only this disposable test's association after persistence checks."""
+        with sessionmaker(self.owner).begin() as session:
+            session.execute(delete(AccountBookmark).where(AccountBookmark.source_history_run_id == UUID(history_id)))
+
     def test_atomic_publication_audit_failure_leaves_no_serving_rows_then_reuses_catalogue(self):
         version_id = self.approved()
         previous = self.count(LoanProductVersion)
@@ -153,6 +165,71 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             reason="Restore approved workflow revision",
         )
         self.assertEqual(self.count(LoanProductVersion), 102)
+
+    def test_protected_fixture_publication_supports_owned_http_journey(self):
+        """Disposable PG/TLS fixture proof, not deployed MFA or operational data approval."""
+        version_id = self.approved()
+        self.command("publish", version_id=version_id, reason="Test-only protected source publication")
+        settings = Settings(database_url=str(DATABASE_URL))
+        questions = json.loads(
+            (Path(__file__).resolve().parents[2] / "data/contracts/questionnaire-configuration.v1.json").read_text(
+                encoding="utf-8"
+            )
+        )["questions"]
+        with TestClient(create_app(settings)) as owner, TestClient(create_app(settings)) as other:
+            for client, phone in ((owner, "09000000001"), (other, "09000000002")):
+                challenge = client.post("/api/v1/account-access/request", json={"phone": phone})
+                self.assertEqual(challenge.status_code, 200)
+                verified = client.post(
+                    "/api/v1/account-access/verify",
+                    json={"challengeId": challenge.json()["challengeId"], "code": "123456"},
+                )
+                self.assertEqual(verified.status_code, 200)
+            started = owner.post("/api/v1/questionnaire/sessions")
+            self.assertEqual(started.status_code, 201)
+            session_id = started.json()["sessionId"]
+            self.assertEqual(other.get(f"/api/v1/questionnaire/sessions/{session_id}").status_code, 403)
+            for question in questions:
+                written = owner.put(
+                    f"/api/v1/questionnaire/sessions/{session_id}/answers/{question['questionId']}",
+                    json={"answerId": question["answerOptions"][0]["answerId"]},
+                )
+                self.assertEqual(written.status_code, 200)
+            recommended = owner.post("/api/v1/recommendations", json={"sessionId": session_id})
+            self.assertEqual(recommended.status_code, 200)
+            result = recommended.json()
+            self.assertEqual(result["configVersion"], "1.1.0")
+            self.assertEqual(
+                sum(
+                    len(result[key])
+                    for key in ("rankedRecommendations", "lowCompatibilityRecommendations", "needsReview")
+                ),
+                102,
+            )
+            history_id = result["historyId"]
+            loan_id = result["rankedRecommendations"][0]["loanId"]
+            self.assertEqual(owner.get(f"/api/v1/loans/{loan_id}").status_code, 200)
+            self.assertEqual(len(owner.get("/api/v1/recommendation-history").json()["items"]), 1)
+            self.assertEqual(other.get("/api/v1/recommendation-history").json()["items"], [])
+            self.assertEqual(owner.get(f"/api/v1/recommendation-history/{history_id}").status_code, 200)
+            self.assertEqual(other.get(f"/api/v1/recommendation-history/{history_id}").status_code, 404)
+            self.assertEqual(other.delete(f"/api/v1/recommendation-history/{history_id}").status_code, 404)
+            self.assertEqual(owner.put(f"/api/v1/bookmarks/{loan_id}", json={"historyId": history_id}).status_code, 204)
+            self.addCleanup(self.remove_fixture_bookmark, history_id)
+            self.assertEqual(len(owner.get("/api/v1/bookmarks").json()["items"]), 1)
+            self.assertEqual(other.get("/api/v1/bookmarks").json()["items"], [])
+            self.assertEqual(owner.delete(f"/api/v1/recommendation-history/{history_id}").status_code, 204)
+            self.assertEqual(owner.get(f"/api/v1/recommendation-history/{history_id}").status_code, 404)
+            self.assertEqual(owner.delete(f"/api/v1/bookmarks/{loan_id}").status_code, 204)
+            self.assertEqual(owner.get("/api/v1/bookmarks").json()["items"], [])
+        with sessionmaker(self.owner)() as session:
+            stored = session.get(RecommendationHistoryRun, history_id)
+            self.assertIsNotNone(stored)
+            self.assertIsNotNone(stored.hidden_at)
+        with TestClient(create_app(settings)) as reopened:
+            reopened.cookies.update(owner.cookies)
+            self.assertEqual(reopened.get("/api/v1/account-access/session").status_code, 200)
+            self.assertEqual(reopened.get("/api/v1/recommendation-history").json()["items"], [])
 
     def test_database_owner_and_customer_tables_are_not_allowed(self):
         with sessionmaker(self.owner)() as session, self.assertRaises(ValueError):
