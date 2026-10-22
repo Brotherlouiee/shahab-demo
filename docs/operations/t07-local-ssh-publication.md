@@ -59,7 +59,7 @@ wrapper فقط یکی از نام‌های `01-import` تا `05-publish` را م
 
 ## ترتیب عملیات و کنترل پس از هر مرحله
 
-پیش از نوشتن، از DB اصلی backup تازهٔ `pg_dump -Fc` با permission خصوصی بگیرید؛ hash انتقال را مقایسه و آن را در PostgreSQL موقت مستقل restore کنید. backup قبلیِ ۲۰۲۶-۱۰-۲۲ با SHA-256 `159c4708b307e4c4d95246b49a045a2c742403bf17f63d1d6a3f5364cb9d97ad` با موفقیت restore شده، اما به‌دلیل نوشتن‌های بعدی کاربران نباید تنها نسخهٔ پیش از publish تلقی شود. migration یا reset/restart لازم نیست.
+پیش از نوشتن، تازه‌بودن backup بررسی شود؛ اگر DB از آخرین backup تغییر کرده، `pg_dump -Fc` تازه با permission خصوصی بگیرید، hash انتقال را مقایسه و آن را در PostgreSQL موقت مستقل restore کنید. backup ساعت `2026-10-22T15:35:30Z` با SHA-256 `4c34dbbc75e3e6549609ef2c6df60681632b50e4792991eb840f10e39244d4ed` در PostgreSQL 16 موقت و بدون شبکه restore شد؛ revision ‏`ff11b02f0001` و کاتالوگ خالی تأیید شدند. backup خصوصی قبلی نیز حفظ است. هیچ‌کدام مجوز overwrite روی DB زنده نیستند. migration یا reset/restart لازم نیست.
 
 از نشست SSH فعلی مالک، یک‌به‌یک `/usr/local/sbin/shahab-t07-operations 01-import`، سپس `02-review` و پس از بررسی `eligible=true`، `accepted=102`، `rejected=0`، `issues=0`، دستور `03-prepare` اجرا شود. مالک diff و head ذخیره‌شده را بررسی و سپس `04-approve` و `05-publish` را جداگانه اجرا کند. نتیجهٔ مبهم/timeout پیش از retry با audit/read-only DB بررسی می‌شود؛ کد و operation به‌صورت کور تکرار نمی‌شوند.
 
