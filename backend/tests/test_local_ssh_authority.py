@@ -23,9 +23,10 @@ class LocalSshAuthorityTests(unittest.TestCase):
         self.expires = (datetime.now(UTC) + timedelta(minutes=10)).isoformat()
         self.document = {
             "schemaVersion": 1,
+            "singleOwner": False,
             "operators": [
-                {"uid": 10001, "actor": "ssh-editor-1", "role": "data-editor", "expiresAt": self.expires},
-                {"uid": 10002, "actor": "ssh-admin-2", "role": "admin", "expiresAt": self.expires},
+                {"uid": 10001, "actor": "ssh-editor-1", "roles": ["data-editor"], "expiresAt": self.expires},
+                {"uid": 10002, "actor": "ssh-admin-2", "roles": ["admin"], "expiresAt": self.expires},
             ],
         }
         self.authority = LocalSshAuthority()
@@ -52,16 +53,16 @@ class LocalSshAuthorityTests(unittest.TestCase):
         with self.assertRaises(OperationsAuthorityUnavailable):
             OperationsAuthorizer(self.authority).require(editor, Permission.IMPORT)
         self.document["operators"].append(
-            {"uid": 10001, "actor": "ssh-editor-1", "role": "data-editor", "expiresAt": self.expires}
+            {"uid": 10001, "actor": "ssh-editor-1", "roles": ["data-editor"], "expiresAt": self.expires}
         )
         self.document["operators"].append(dict(self.document["operators"][-1]))
         with self.assertRaises(OperationsAccessDenied):
             self.authority.authenticate()
         self.document["operators"].pop()
-        self.document["operators"][-1]["role"] = "service"
+        self.document["operators"][-1]["roles"] = ["service"]
         with self.assertRaises(OperationsAccessDenied):
             self.authority.authenticate()
-        self.document["operators"][-1]["role"] = "data-editor"
+        self.document["operators"][-1]["roles"] = ["data-editor"]
         self.document["operators"][0]["actor"] = "ssh-editor-1"
         with self.assertRaises(OperationsAccessDenied):
             self.authority.authenticate()
@@ -103,6 +104,32 @@ class LocalSshAuthorityTests(unittest.TestCase):
             patch("backend.app.operations.infrastructure.local_ssh.os.name", "posix"),
         ):
             self.assertEqual(LocalSshAuthority()._uid(), 10001)
+
+    def test_single_owner_requires_explicit_root_mode_and_both_roles(self):
+        self.document = {
+            "schemaVersion": 1,
+            "singleOwner": True,
+            "operators": [
+                {"uid": 0, "actor": "ssh-owner-root", "roles": ["data-editor", "admin"], "expiresAt": self.expires}
+            ],
+        }
+        with (
+            patch.dict(os.environ, {}, clear=True),
+            patch("backend.app.operations.infrastructure.local_ssh.os.getuid", return_value=0, create=True),
+            patch("backend.app.operations.infrastructure.local_ssh.os.geteuid", return_value=0, create=True),
+            patch("backend.app.operations.infrastructure.local_ssh.os.name", "posix"),
+        ):
+            owner = LocalSshAuthority(allow_root_owner=True)
+            owner._document = lambda: self.document
+            identity = owner.authenticate()
+            authorizer = OperationsAuthorizer(owner)
+            self.assertEqual(authorizer.require(identity, Permission.IMPORT), "ssh-owner-root")
+            self.assertEqual(authorizer.require(identity, Permission.PUBLISH), "ssh-owner-root")
+            with self.assertRaises(OperationsAccessDenied):
+                LocalSshAuthority().authenticate()
+            self.document["operators"][0]["roles"] = ["admin"]
+            with self.assertRaises(OperationsAccessDenied):
+                owner.authenticate()
 
     @unittest.skipUnless(
         os.name == "posix" and getattr(os, "geteuid", lambda: -1)() == 0,

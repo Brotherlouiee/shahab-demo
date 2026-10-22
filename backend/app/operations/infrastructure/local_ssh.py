@@ -1,8 +1,8 @@
 """Local SSH operator authority for the private CLI only.
 
-The operating system authenticates distinct unprivileged accounts. A root-owned
-policy binds numeric UIDs to one role each and is re-read for every grant check.
-No role, actor or policy path comes from an operations command or environment.
+A root-owned policy binds numeric UIDs to explicit roles and is re-read for every
+grant check. Single-owner root mode is opt-in and does not claim dual control.
+No role, actor or policy path comes from a command or environment.
 """
 
 import json
@@ -25,15 +25,17 @@ POLICY_PATH = Path("/etc/shahab/operations-operators.json")
 
 
 class LocalSshAuthority:
-    def __init__(self, policy_path: Path = POLICY_PATH) -> None:
+    def __init__(self, policy_path: Path = POLICY_PATH, *, allow_root_owner: bool = False) -> None:
         self._path = policy_path
+        self._allow_root_owner = allow_root_owner
 
     def _uid(self) -> int:
         if os.name != "posix" or os.getuid() != os.geteuid():
             raise OperationsAccessDenied()
         if os.getuid() == 0:
-            # Only a root-owned sudo wrapper may inject the DB credential.
-            # The invoking, unprivileged SSH user's numeric UID is authoritative.
+            if self._allow_root_owner and not os.environ.get("SUDO_UID"):
+                return 0
+            # A sudo wrapper retains the invoking unprivileged SSH UID.
             original = os.environ.get("SUDO_UID", "")
             if not original.isdecimal() or int(original) <= 0 or not os.environ.get("SUDO_USER"):
                 raise OperationsAccessDenied()
@@ -66,7 +68,9 @@ class LocalSshAuthority:
         uid = self._uid()
         try:
             document = self._document()
-            if set(document) != {"schemaVersion", "operators"} or document["schemaVersion"] != 1:
+            if set(document) != {"schemaVersion", "operators", "singleOwner"} or document["schemaVersion"] != 1:
+                raise OperationsAccessDenied()
+            if type(document["singleOwner"]) is not bool:
                 raise OperationsAccessDenied()
             operators = document["operators"]
             if not isinstance(operators, list) or not 1 <= len(operators) <= 16:
@@ -75,10 +79,10 @@ class LocalSshAuthority:
             seen = set()
             seen_actors = set()
             for entry in operators:
-                if not isinstance(entry, dict) or set(entry) != {"uid", "actor", "role", "expiresAt"}:
+                if not isinstance(entry, dict) or set(entry) != {"uid", "actor", "roles", "expiresAt"}:
                     raise OperationsAccessDenied()
                 operator_uid = entry["uid"]
-                if type(operator_uid) is not int or operator_uid <= 0 or operator_uid in seen:
+                if type(operator_uid) is not int or operator_uid < 0 or operator_uid in seen:
                     raise OperationsAccessDenied()
                 seen.add(operator_uid)
                 actor = entry["actor"]
@@ -91,12 +95,24 @@ class LocalSshAuthority:
                 ):
                     raise OperationsAccessDenied()
                 seen_actors.add(actor)
-                role = Role(entry["role"])
-                if role not in {Role.DATA_EDITOR, Role.ADMIN}:
+                raw_roles = entry["roles"]
+                if not isinstance(raw_roles, list) or not raw_roles or len(raw_roles) > 2:
+                    raise OperationsAccessDenied()
+                roles = frozenset(Role(item) for item in raw_roles)
+                if len(roles) != len(raw_roles) or not roles <= {Role.DATA_EDITOR, Role.ADMIN}:
+                    raise OperationsAccessDenied()
+                if operator_uid == 0 and (
+                    not self._allow_root_owner
+                    or not document["singleOwner"]
+                    or len(operators) != 1
+                    or roles != {Role.DATA_EDITOR, Role.ADMIN}
+                ):
+                    raise OperationsAccessDenied()
+                if operator_uid != 0 and document["singleOwner"]:
                     raise OperationsAccessDenied()
                 expiry = datetime.fromisoformat(entry["expiresAt"])
                 if operator_uid == uid:
-                    matches.append((actor, RoleGrant(actor, frozenset({role}), expiry)))
+                    matches.append((actor, RoleGrant(actor, roles, expiry)))
             now = utc_now()
             if (
                 len(matches) != 1

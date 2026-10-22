@@ -1,11 +1,11 @@
 #!/bin/sh
 # Install root-owned at /usr/local/sbin/shahab-t07-operations only after approval.
-# Sudo must allow only this fixed wrapper to distinct unprivileged SSH users.
+# The sole owner invokes it through the existing SSH root account.
 set -eu
 umask 077
 
-if [ "$(id -u)" != 0 ] || [ -z "${SUDO_UID:-}" ] || [ -z "${SUDO_USER:-}" ]; then
-    echo "Local operator context is required." >&2
+if [ "$(id -u)" != 0 ] || [ -n "${SUDO_UID:-}" ]; then
+    echo "Direct owner root SSH context is required." >&2
     exit 1
 fi
 if [ "$#" != 1 ]; then
@@ -31,11 +31,11 @@ done
 cd /home/shahab/app
 image=$(docker compose --env-file .env.prod -f docker-compose.prod.yml -p shahab-prod images -q api)
 [ -n "$image" ] || exit 1
-exec docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
+exec docker run --rm --user 0:0 --read-only --cap-drop ALL --security-opt no-new-privileges \
     --network shahab-prod_data --tmpfs /tmp:rw,nosuid,noexec,size=32m \
-    --env-file "$secret_file" --env SUDO_UID --env SUDO_USER \
+    --env-file "$secret_file" \
     --mount "type=bind,src=$checkout,dst=/work,readonly" \
     --mount "type=bind,src=$policy,dst=/etc/shahab/operations-operators.json,readonly" \
     --mount "type=bind,src=$command_file,dst=/private/command.json,readonly" \
     --workdir /work --entrypoint python "$image" \
-    -m scripts.operations_tool --local-ssh-operator --command /private/command.json
+    -m scripts.operations_tool --local-owner-operator --command /private/command.json

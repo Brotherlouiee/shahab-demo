@@ -149,6 +149,7 @@ def main() -> int:
     parser.add_argument(
         "--local-ssh-operator", action="store_true", help="private CLI; require separate OS accounts and root policy"
     )
+    parser.add_argument("--local-owner-operator", action="store_true", help="private CLI; one approved SSH owner")
     args = parser.parse_args()
     engine = None
     try:
@@ -157,8 +158,10 @@ def main() -> int:
         if len(payload) > 8192:
             raise ValueError("command too large")
         command = OperationsCommand.model_validate_json(payload)
-        if args.local_ssh_operator:
-            authority = LocalSshAuthority()
+        if args.local_ssh_operator and args.local_owner_operator:
+            raise ValueError("choose one local operator mode")
+        if args.local_ssh_operator or args.local_owner_operator:
+            authority = LocalSshAuthority(allow_root_owner=args.local_owner_operator)
         else:
             config = AuthorityConfiguration.model_validate_json(os.environ["SHAHAB_OPERATIONS_AUTHORITY"])
             credential = os.environ.get("SHAHAB_OPERATIONS_ACCESS_TOKEN")
