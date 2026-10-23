@@ -147,3 +147,7 @@ CSS/asset، toast بعد commit. recommendation VM/client فقط opaque historyI
 `main.py` فقط محل انتخاب provider با config مصوب. route sync فعلی threadpool را مصرف
 می‌کند، نه event loop؛ UI و قرارداد API، schema و موتور تغییر نکرده‌اند.
 [راه‌اندازی و امنیت](../operations/kavenegar-otp.md).
+
+## US-09.T082 — تماس با ما
+
+`src/features/contact/ContactPage.jsx` owns static contact details, social availability and the official trust-seal link; `ContactPage.css` scopes its layout and `assets/` contains display-sized local images. The composition root owns `/contact`, existing account state, drawer and optional menu action in the reused header. The page has no API, persistence, authentication, form submission or scoring responsibility.

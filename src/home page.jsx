@@ -1,3 +1,5 @@
+import ContactPage from "./features/contact/ContactPage.jsx";
+import contactIconUrl from "../assets/call-calling.svg";
 import AboutPage from "./features/about/AboutPage.jsx";
 import { readAccountProfileCache, writeAccountProfileCache, readPersonalInfoCache, writePersonalInfoCache, synchronizeAccountTabs, readRecommendationCache, writeRecommendationCache } from "./features/account/accountBrowserState.mjs";
 import { accountAccessEpoch, displayProfilePhone, hasProfileAccess, logoutProfile, normalizeProfilePhone, persistPersonalInfo, persistProfile, readOwnProfile, readPersonalInfoProfile, requestProfileCode, restoreAccountAccess, verifyProfileCode } from "./features/account/profileClient.mjs";
@@ -352,6 +354,7 @@ function clearActiveRecommendationHistoryState() {
 }
 
 function getInitialViewFromPath(pathname) {
+  if (pathname === "/contact") return "contact";
   if (pathname.startsWith("/recommendation-history/")) return "history-result";
   if (pathname === "/loan-details" && new URLSearchParams(window.location.search).get("from") === "history") return "history-detail";
   if (["/profile", "/saved-loans", "/about", "/recommendation-history"].includes(pathname)) return pathname.slice(1).replace("-loans", "").replace("recommendation-history", "history");
@@ -457,6 +460,7 @@ function Nav({ onBack, onMenu, onHome, isLoginView = false }) {
 }
 
 function SidebarIcon({ name }) {
+  if (name === "contact") return <img className="hp-sidebar-icon" src={contactIconUrl} alt="" aria-hidden="true" />;
   if (name === "history") return <img className="hp-sidebar-icon" src={historyIconUrl} alt="" aria-hidden="true" />;
   if (name === "login") return <svg className="hp-sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5" /><path d="m10 17 5-5-5-5M15 12H3" /></svg>;
   if (name === "saved") return <svg className="hp-sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v16l-8-4-8 4V5a2 2 0 0 1 2-2Z" /><path d="M12 7v6M9 10h6" /></svg>;
@@ -537,8 +541,8 @@ function UserSidebar({ isOpen, onClose, onLogin, onLogout, onNavigate, userName,
   const [activeItem, setActiveItem] = useState("");
   const [isLogoutConfirmationOpen, setIsLogoutConfirmationOpen] = useState(false);
   const items = isAuthenticated
-    ? [["profile", "پروفایل کاربر"], ["requests", "سوابق درخواست وام"], ["history", "سوابق وام‌های توصیه شده"], ["saved", "وام‌های نشان شده"], ["about", "درباره ما"]]
-    : [["login", "ورود کاربر"], ["about", "درباره ما"]];
+    ? [["profile", "پروفایل کاربر"], ["requests", "سوابق درخواست وام"], ["history", "سوابق وام‌های توصیه شده"], ["saved", "وام‌های نشان شده"], ["contact", "تماس با ما"], ["about", "درباره ما"]]
+    : [["login", "ورود کاربر"], ["contact", "تماس با ما"], ["about", "درباره ما"]];
   function selectItem(icon) { setActiveItem(icon); onClose(); if (icon === "login") onLogin(); else onNavigate?.(icon); }
   function confirmLogout() {
     setIsLogoutConfirmationOpen(false);
@@ -554,7 +558,6 @@ function UserSidebar({ isOpen, onClose, onLogin, onLogout, onNavigate, userName,
           {items.map(([icon, label]) => <button className={activeItem === icon ? "is-active" : ""} type="button" key={label} onClick={() => selectItem(icon)}><SidebarIcon name={icon} /><span>{label}</span></button>)}
           {isAuthenticated ? <button className="hp-sidebar-logout" type="button" onClick={() => setIsLogoutConfirmationOpen(true)}><SidebarIcon name="logout" /><span>خروج از حساب کاربری</span></button> : null}
         </nav>
-        <p className="hp-sidebar-support">جهت دریافت مشاوره با شماره تلفن<br /><a href="tel:02135647">۰۲۱-۳۵۶۴۷</a>{" "}تماس حاصل نمایید.</p>
       </aside>
       {isLogoutConfirmationOpen ? <div className="hp-logout-confirm-backdrop" role="presentation"><section className="hp-logout-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="logout-confirm-title"><img src={dangerIconUrl} alt="" /><strong id="logout-confirm-title">آیا از خروج از حساب کاربری‌تان مطمئن هستید؟</strong><div><button type="button" onClick={() => setIsLogoutConfirmationOpen(false)}>خیر</button><button type="button" onClick={confirmLogout}>بله</button></div></section></div> : null}
     </div>
@@ -780,8 +783,8 @@ function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   );
 }
 
-function AccountHeader({ onBack, onHome }) {
-  return <header className="hp-account-header"><button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 12H5" /><path d="m12 19-7-7 7-7" /></svg></button><a className="hp-questionnaire-brand" href="/" onClick={onHome}><img src={logoUrl} alt="شهاب" /><span><strong>شهاب</strong><small>(شبکه همرسانی اعتبار برخط)</small></span></a></header>;
+function AccountHeader({ onBack, onHome, onMenu }) {
+  return <header className="hp-account-header"><button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 12H5" /><path d="m12 19-7-7 7-7" /></svg></button><a className="hp-questionnaire-brand" href="/" onClick={onHome}><img src={logoUrl} alt="شهاب" /><span><strong>شهاب</strong><small>(شبکه همرسانی اعتبار برخط)</small></span></a>{onMenu ? <button className="hp-questionnaire-icon-button" type="button" onClick={onMenu} aria-label="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg></button> : null}</header>;
 }
 
 function allRecommendationItems(result) {
@@ -3018,7 +3021,7 @@ export default function HomePage() {
   useEffect(() => {
     if (currentView === "questionnaire" || currentView === "history-result" || currentView === "history-detail") return;
 
-    const accountRoute = { profile: "/profile", saved: "/saved-loans", history: "/recommendation-history", about: "/about" };
+    const accountRoute = { profile: "/profile", saved: "/saved-loans", history: "/recommendation-history", about: "/about", contact: "/contact" };
     replaceRoute(currentView === "login" ? (loginStep === "otp" ? "/login/otp" : "/login") : (accountRoute[currentView] || "/"));
   }, [currentView, loginStep]);
 
@@ -3066,8 +3069,8 @@ export default function HomePage() {
   }
 
   function handleSidebarNavigate(destination) {
-    const routes = { profile: "/profile", saved: "/saved-loans", history: "/recommendation-history", about: "/about" };
-    const views = { profile: "profile", saved: "saved", history: "history", about: "about" };
+    const routes = { profile: "/profile", saved: "/saved-loans", history: "/recommendation-history", about: "/about", contact: "/contact" };
+    const views = { profile: "profile", saved: "saved", history: "history", about: "about", contact: "contact" };
     if (!routes[destination]) return;
     if (destination === "history") setHistoryOrigin({ view: currentView, path: window.location.pathname + window.location.search });
     setIsSidebarOpen(false);
@@ -3119,6 +3122,7 @@ export default function HomePage() {
   }
 
   if (currentView === "profile") return <AccountPage profile={{ ...(accountProfile || {}), firstName: getCachedPersonalInfoValue("firstName") || accountProfile?.firstName || "", lastName: getCachedPersonalInfoValue("lastName") || accountProfile?.lastName || "", phone: getCachedPersonalInfoValue("phone") || accountProfile?.phone || "", income: getCachedPersonalInfoValue("income") || accountProfile?.income || "", job: getCachedPersonalInfoValue("job") || accountProfile?.job || "" }} onSave={(profile) => { ["firstName", "lastName", "phone", "income", "job"].forEach((field) => setCachedPersonalInfoValue(field, profile[field] || "")); setCachedAccountProfile(profile); setAccountProfile(profile); }} onBack={handleHomeOpen} />;
+  if (currentView === "contact") return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><ContactPage header={<AccountHeader onBack={handleHomeOpen} onHome={handleHomeOpen} onMenu={() => setIsSidebarOpen(true)} />} /></>;
   if (currentView === "about") return <AboutPage onBack={handleHomeOpen} AccountHeader={AccountHeader} />;
   if (currentView === "saved") return <SavedLoansPage onBack={handleHomeOpen} onDetails={handleSavedLoanDetails} />;
   if (currentView === "history") return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><RecommendationHistoryPage state={historyListState} setState={setHistoryListState} onBack={() => { const origin = historyOrigin; replaceRoute(origin?.path || "/"); setCurrentView(origin?.view || "home"); setIsSidebarOpen(Boolean(origin)); }} onUnauthorized={() => { setPendingHistoryPath("/recommendation-history"); setLoginStep("phone"); setCurrentView("login"); replaceRoute("/login"); }} onOpen={(historyId) => { fetchHistoricalRecommendation(historyId).then((result) => { setHistoryResult(result); setCurrentView("history-result"); replaceRoute(`/recommendation-history/${encodeURIComponent(historyId)}`); }).catch(() => setHistoryResult(false)); }} /></>;
