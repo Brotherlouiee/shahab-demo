@@ -48,7 +48,7 @@ def assess_runtime_inventory(report, name):
     change the project-wide severity/owner-review policy.
     """
     packages = [package for result in report.get("Results", []) for package in result.get("Packages", [])]
-    expected = {"zlib": "1.3.2-r1"}
+    expected = {"zlib": "1.3.2-r1", "musl": "1.2.6-r3", "musl-utils": "1.2.6-r3"}
     if name == "api":
         if any(package.get("Name") == "pip" for package in packages):
             raise ValueError("Runtime API image contains the removed installer")
