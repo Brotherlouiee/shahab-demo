@@ -23,7 +23,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 # The base has its own pip, independently of our pip-free application venv.
 # Runtime installs are unsupported; remove both installed and bundled installers.
-RUN apk add --no-cache --upgrade zlib=1.3.2-r1 \
+RUN apk add --no-cache --upgrade musl=1.2.6-r3 musl-utils=1.2.6-r3 zlib=1.3.2-r1 \
     && /usr/local/bin/python -m pip uninstall --yes pip \
     && rm -rf /usr/local/lib/python3.12/ensurepip \
     && /usr/local/bin/python -c "import importlib.util; assert importlib.util.find_spec('pip') is None; assert importlib.util.find_spec('ensurepip') is None" \

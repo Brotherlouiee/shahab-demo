@@ -131,7 +131,7 @@ class ScanPolicyTests(unittest.TestCase):
 
     def test_runtime_package_regression_uses_actual_inventory(self):
         report = self.report()
-        packages = [{"Name": "zlib", "Version": "1.3.2-r1"}, {"Name": "libxpm", "Version": "3.5.20-r0"}]
+        packages = [{"Name": "zlib", "Version": "1.3.2-r1"}, {"Name": "libxpm", "Version": "3.5.20-r0"}, {"Name": "musl", "Version": "1.2.6-r3"}, {"Name": "musl-utils", "Version": "1.2.6-r3"}]
         report["Results"][0]["Packages"] = packages
         assess_runtime_inventory(report, "api")
         assess_runtime_inventory(report, "web")
@@ -145,6 +145,22 @@ class ScanPolicyTests(unittest.TestCase):
                 bad["Results"][0]["Packages"][0 if mutate == "old-zlib" else 1]["Version"] = "old"
             with self.subTest(mutation=mutate), self.assertRaises(ValueError):
                 assess_runtime_inventory(bad, image)
+
+    def test_old_or_missing_musl_blocks_both_runtime_images(self):
+        for image in ("api", "web"):
+            for name in ("musl", "musl-utils"):
+                for version in (None, "1.2.6-r2"):
+                    packages = [{"Name": n, "Version": v} for n, v in (
+                        ("zlib", "1.3.2-r1"), ("libxpm", "3.5.20-r0"),
+                        ("musl", "1.2.6-r3"), ("musl-utils", "1.2.6-r3"))]
+                    packages = [p for p in packages if p["Name"] != name or version is not None]
+                    for package in packages:
+                        if package["Name"] == name:
+                            package["Version"] = version
+                    report = self.report()
+                    report["Results"][0]["Packages"] = packages
+                    with self.subTest(image=image, package=name, version=version), self.assertRaises(ValueError):
+                        assess_runtime_inventory(report, image)
 
     def test_clean_and_all_severities_counted_including_unfixed(self):
         report = self.report()

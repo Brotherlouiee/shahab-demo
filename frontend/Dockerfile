@@ -16,7 +16,7 @@ FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:782bb89768cc87b7f95c18b95b
 # Package installation needs root only while building; final USER remains 101:101.
 USER 0
 # Pin fixes for the base HIGH/MEDIUM findings; unavailable exact APKs fail the build.
-RUN apk add --no-cache --upgrade libexpat=2.9.0-r0 libx11=1.8.14-r0 zlib=1.3.2-r1 libxpm=3.5.20-r0
+RUN apk add --no-cache --upgrade musl=1.2.6-r3 musl-utils=1.2.6-r3 libexpat=2.9.0-r0 libx11=1.8.14-r0 zlib=1.3.2-r1 libxpm=3.5.20-r0
 COPY frontend/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY frontend/nginx/api-disabled.conf /etc/nginx/shahab-api.conf
 COPY --from=build /build/dist /srv/shahab
