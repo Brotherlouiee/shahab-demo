@@ -8,7 +8,7 @@ import enamadImage from "./assets/enamad.png";
 import "./ContactPage.css";
 
 const linkedinUrl = "https://www.linkedin.com/company/shahabfintech";
-const enamadUrl = "https://trustseal.enamad.ir/?id=8316058&code=YCgntg1cyA41RMpSVRpI0XieeveRCHnk";
+const enamadUrl = "https://trustseal.enamad.ir/?id=8316058&Code=YCgntg1cyA41RMpSVRpI0XieeveRCHnk";
 const socialNetworks = [
   { label: "لینکدین", image: linkedinImage, href: linkedinUrl },
   { label: "تلگرام", image: telegramImage },

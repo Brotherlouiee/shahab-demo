@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { installProfileApi } from "./fixtures/profile-api.mjs";
 
-const enamad = "https://trustseal.enamad.ir/?id=8316058&code=YCgntg1cyA41RMpSVRpI0XieeveRCHnk";
+const enamad = "https://trustseal.enamad.ir/?id=8316058&Code=YCgntg1cyA41RMpSVRpI0XieeveRCHnk";
 
 for (const viewport of [{ width: 390, height: 974 }, { width: 1440, height: 1000 }, { width: 320, height: 844 }]) {
   test(`contact page, links and history work at ${viewport.width}px`, async ({ page }, info) => {
@@ -41,11 +41,19 @@ for (const viewport of [{ width: 390, height: 974 }, { width: 1440, height: 1000
     expect(externalRequests).toEqual([]); // Badges are local; no third-party request before a click.
     // Test navigation without contacting third-party services or placing calls.
     for (const [name, destination] of [["لینکدین", "https://www.linkedin.com/company/shahabfintech"], ["استعلام نماد اعتماد الکترونیکی شهاب", enamad]]) {
-      await page.context().route(destination, route => route.fulfill({ contentType: "text/html", body: "External destination fixture" }));
+      let sentReferer;
+      await page.context().route(destination, route => {
+        sentReferer = route.request().headers().referer;
+        return route.fulfill({ contentType: "text/html", body: "External destination fixture" });
+      });
       const popupPromise = page.waitForEvent("popup");
       await page.getByRole("link", { name, exact: true }).click();
       const popup = await popupPromise;
       await expect(popup).toHaveURL(destination);
+      if (destination === enamad) {
+        expect(sentReferer).toBe(`${new URL(page.url()).origin}/`);
+        expect(new URL(popup.url()).searchParams.has("code")).toBe(false);
+      }
       expect(await popup.evaluate(() => window.opener === null)).toBe(true);
       await popup.close();
     }
