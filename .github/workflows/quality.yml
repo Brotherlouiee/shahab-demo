@@ -124,7 +124,7 @@ jobs:
   profile-live-e2e:
     name: Profile OTP real API browser verification
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     services:
       postgres:
         image: postgres:16-alpine

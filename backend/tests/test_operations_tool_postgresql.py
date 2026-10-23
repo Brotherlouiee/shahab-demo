@@ -32,6 +32,7 @@ from backend.app.infrastructure.db.models import (
 )
 from backend.app.main import create_app
 from backend.app.operations.authorization import OperationsAccessDenied
+from backend.app.operations.infrastructure.local_ssh import LocalSshAuthority
 from backend.tests.operations_authority_fixture import TLSAuthorityFixture
 from scripts.operations_tool import OperationsCommand, execute, projection
 
@@ -165,6 +166,100 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             reason="Restore approved workflow revision",
         )
         self.assertEqual(self.count(LoanProductVersion), 102)
+
+    def test_local_ssh_operator_uses_same_transactional_workflow_and_rejects_cross_role(self):
+        from datetime import UTC, datetime, timedelta
+
+        expiry = (datetime.now(UTC) + timedelta(minutes=10)).isoformat()
+        active_uid = [10001]
+        authority = LocalSshAuthority()
+        authority._uid = lambda: active_uid[0]
+        authority._document = lambda: {
+            "schemaVersion": 1,
+            "singleOwner": False,
+            "operators": [
+                {"uid": 10001, "actor": "ssh-editor-1", "roles": ["data-editor"], "expiresAt": expiry},
+                {"uid": 10002, "actor": "ssh-admin-2", "roles": ["admin"], "expiresAt": expiry},
+            ],
+        }
+
+        def local(operation, **fields):
+            return execute(OperationsCommand(operation=operation, **fields), authority, self.sessions, self.serving)
+
+        import_id, version_id = self.prefix + "li", self.prefix + "lv"
+        initial_imports = self.count(OperationsImport)
+        with self.assertRaises(OperationsAccessDenied):
+            local("publish", version_id=version_id, reason="wrong local role")
+        self.assertEqual(self.count(OperationsImport), initial_imports)
+        local("import", import_id=import_id, reason="official source via local operator")
+        self.assertEqual(local("review", import_id=import_id)["accepted"], 102)
+        local("prepare", import_id=import_id, version_id=version_id, reason="reviewed official source")
+        active_uid[0] = 10002
+        with self.assertRaises(OperationsAccessDenied):
+            local("import", import_id=self.prefix + "denied", reason="wrong local role")
+        local("approve", version_id=version_id, reason="separate operator approval")
+        before_loans = self.count(LoanProductVersion)
+
+        def fail(conn, cursor, statement, parameters, context, executemany):
+            if statement.lstrip().startswith("INSERT INTO audit_events"):
+                raise RuntimeError("injected audit failure")
+
+        event.listen(self.runtime, "before_cursor_execute", fail)
+        try:
+            with self.assertRaisesRegex(RuntimeError, "injected audit"):
+                local("publish", version_id=version_id, reason="atomic local publish")
+        finally:
+            event.remove(self.runtime, "before_cursor_execute", fail)
+        self.assertEqual(self.count(LoanProductVersion), before_loans)
+        self.assertEqual(local("publish", version_id=version_id, reason="atomic local publish")["state"], "published")
+        self.assertEqual(self.count(LoanProductVersion), 102)
+        with self.sessions() as session:
+            self.assertFalse(session.scalar(text("SELECT has_table_privilege(current_user,'user_profiles','SELECT')")))
+
+    def test_single_owner_local_operator_records_same_actor_and_keeps_atomic_publish(self):
+        from datetime import UTC, datetime, timedelta
+
+        authority = LocalSshAuthority(allow_root_owner=True)
+        authority._uid = lambda: 0
+        authority._document = lambda: {
+            "schemaVersion": 1,
+            "singleOwner": True,
+            "operators": [
+                {
+                    "uid": 0,
+                    "actor": "owner-ssh-root",
+                    "roles": ["data-editor", "admin"],
+                    "expiresAt": (datetime.now(UTC) + timedelta(minutes=10)).isoformat(),
+                }
+            ],
+        }
+
+        def local(operation, **fields):
+            return execute(OperationsCommand(operation=operation, **fields), authority, self.sessions, self.serving)
+
+        import_id, version_id = self.prefix + "oi", self.prefix + "ov"
+        local("import", import_id=import_id, reason="official source via owner")
+        self.assertEqual(local("review", import_id=import_id)["accepted"], 102)
+        local("prepare", import_id=import_id, version_id=version_id, reason="owner reviewed source")
+        local("approve", version_id=version_id, reason="owner explicit approval; no second reviewer")
+        before_loans = self.count(LoanProductVersion)
+
+        def fail(conn, cursor, statement, parameters, context, executemany):
+            if statement.lstrip().startswith("INSERT INTO audit_events"):
+                raise RuntimeError("injected audit failure")
+
+        event.listen(self.runtime, "before_cursor_execute", fail)
+        try:
+            with self.assertRaisesRegex(RuntimeError, "injected audit failure"):
+                local("publish", version_id=version_id, reason="owner explicit publish")
+        finally:
+            event.remove(self.runtime, "before_cursor_execute", fail)
+        self.assertEqual(self.count(LoanProductVersion), before_loans)
+        self.assertEqual(local("publish", version_id=version_id, reason="owner explicit publish")["state"], "published")
+        with self.sessions() as session:
+            actors = session.scalars(select(AuditEvent.actor_reference)).all()
+            self.assertIn("owner-ssh-root", actors)
+            self.assertFalse(session.scalar(text("SELECT has_table_privilege(current_user,'user_profiles','SELECT')")))
 
     def test_protected_fixture_publication_supports_owned_http_journey(self):
         """Disposable PG/TLS fixture proof, not deployed MFA or operational data approval."""

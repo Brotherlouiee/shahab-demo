@@ -21,6 +21,7 @@ class IdentityKind(StrEnum):
     CUSTOMER = "customer"
     MOCK_OTP = "mock-otp"
     OPERATOR_MFA = "operator-mfa"
+    LOCAL_SSH_OPERATOR = "local-ssh-operator"
     SERVICE_CREDENTIAL = "service-credential"
 
 
@@ -101,7 +102,12 @@ class OperationsAuthorizer:
             not isinstance(identity, OperationsIdentity)
             or not identity.subject.strip()
             or not isinstance(identity.kind, IdentityKind)
-            or identity.kind not in {IdentityKind.OPERATOR_MFA, IdentityKind.SERVICE_CREDENTIAL}
+            or identity.kind
+            not in {
+                IdentityKind.OPERATOR_MFA,
+                IdentityKind.LOCAL_SSH_OPERATOR,
+                IdentityKind.SERVICE_CREDENTIAL,
+            }
             or not unexpired(identity.expires_at, now)
             or not isinstance(permission, Permission)
         ):

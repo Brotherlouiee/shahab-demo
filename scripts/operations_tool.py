@@ -29,6 +29,7 @@ from backend.app.data_pipeline.infrastructure.sqlalchemy_operations import (
 )
 from backend.app.operations.authorization import OperationsAuthorizer
 from backend.app.operations.infrastructure.introspection import AuthorityConfiguration, IntrospectionAuthority
+from backend.app.operations.infrastructure.local_ssh import LocalSshAuthority
 from backend.app.operations.policy import Permission
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
@@ -81,7 +82,10 @@ def projection() -> OfficialServingProjection:
 
 
 def execute(
-    command: OperationsCommand, authority: IntrospectionAuthority, sessions, serving: OfficialServingProjection
+    command: OperationsCommand,
+    authority: IntrospectionAuthority | LocalSshAuthority,
+    sessions,
+    serving: OfficialServingProjection,
 ):
     """Authenticate and authorize before database access; T02 checks fresh grants again."""
     identity = authority.authenticate()
@@ -142,6 +146,10 @@ def execute(
 def main() -> int:
     parser = argparse.ArgumentParser(description="ابزار داخلی عملیات شهاب؛ هویت مستقل و مجوز جاری الزامی است")
     parser.add_argument("--command", type=Path, required=True)
+    parser.add_argument(
+        "--local-ssh-operator", action="store_true", help="private CLI; require separate OS accounts and root policy"
+    )
+    parser.add_argument("--local-owner-operator", action="store_true", help="private CLI; one approved SSH owner")
     args = parser.parse_args()
     engine = None
     try:
@@ -150,13 +158,18 @@ def main() -> int:
         if len(payload) > 8192:
             raise ValueError("command too large")
         command = OperationsCommand.model_validate_json(payload)
-        config = AuthorityConfiguration.model_validate_json(os.environ["SHAHAB_OPERATIONS_AUTHORITY"])
-        credential = os.environ.get("SHAHAB_OPERATIONS_ACCESS_TOKEN")
-        if credential is None:
-            if not sys.stdin.isatty():
-                raise ValueError("credential is required")
-            credential = getpass.getpass("توکن کوتاه‌عمر عملیات: ")
-        authority = IntrospectionAuthority(config, SecretStr(credential))
+        if args.local_ssh_operator and args.local_owner_operator:
+            raise ValueError("choose one local operator mode")
+        if args.local_ssh_operator or args.local_owner_operator:
+            authority = LocalSshAuthority(allow_root_owner=args.local_owner_operator)
+        else:
+            config = AuthorityConfiguration.model_validate_json(os.environ["SHAHAB_OPERATIONS_AUTHORITY"])
+            credential = os.environ.get("SHAHAB_OPERATIONS_ACCESS_TOKEN")
+            if credential is None:
+                if not sys.stdin.isatty():
+                    raise ValueError("credential is required")
+                credential = getpass.getpass("توکن کوتاه‌عمر عملیات: ")
+            authority = IntrospectionAuthority(config, SecretStr(credential))
         # Engine construction does not connect. execute authenticates/authorizes
         # before the first database call, then T02 checks current grants again.
         engine = create_engine(os.environ["SHAHAB_DATABASE_URL"], pool_pre_ping=True)
