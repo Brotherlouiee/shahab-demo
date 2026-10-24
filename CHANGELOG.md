@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-- راستی‌آزمایی استقرار (US-11.T02H): ابزار خواندنی محدود برای پورت‌ها، trust/config پراکسی و شش پاسخ HTTP مربوط به TLS، cache و Origin/CORS، همراه پنج تست آفلاین و ارجاع شواهد cookie واقعی T06؛ نتیجهٔ VM هنوز باز است. بدون تغییر runtime، تنظیمات، داده، image، restart یا SMS.
+- راستی‌آزمایی استقرار (US-11.T02H): ابزار خواندنی محدود برای پورت‌ها، trust/config پراکسی و شش پاسخ HTTP مربوط به TLS، cache و Origin/CORS، همراه هشت تست آفلاین و ارجاع شواهد cookie واقعی T06؛ اجرای مالک روی VM با شش درخواست HTTP و صفر SMS موفق شد. بدون تغییر runtime، تنظیمات، داده، image، restart یا SMS.
 
 - عملیات و پذیرش (US-11.T06): ثبت تأیید مالک برای الگوی OTP1، فعال‌سازی خصوصی و دریافت SMS/ورود واقعی؛ ابزار تعاملی محدود به دو پیامک برای بررسی HTTPS کد اشتباه، مصرف مجدد، خروج/revocation و انقضا، همراه آزمون آفلاین بدون SMS. اجرای زندهٔ مالک با دو پیامک و تمام بررسی‌ها موفق شد؛ بدون تغییر runtime، API، schema یا image.
 

@@ -67,6 +67,14 @@ class HostVerifierTests(unittest.TestCase):
         with self.assertRaises(audit.AuditFailed):
             audit.api_block("location /api/v1/ { } location /api/v1/ { }")
 
+    def test_config_path_comes_from_container_command(self):
+        path = "/run/shahab/nginx.conf"
+        self.assertEqual(audit.frontend_config_path(["/bin/sh", "-ec", f"exec nginx -c {path} -g 'daemon off;'"]), path)
+        self.assertEqual(audit.frontend_config_path(["nginx", "-c", path, "-g", "daemon off;"]), path)
+        for args in (["nginx"], ["nginx -c /run/../etc/nginx.conf"], ["nginx -c /a nginx -c /b"]):
+            with self.subTest(args=args), self.assertRaises(audit.AuditFailed):
+                audit.frontend_config_path(args)
+
     def test_ports_and_api_trust_match_actual_frontend_peer(self):
         rows = []
         for name in ("api", "frontend", "postgres", "redis"):
@@ -79,6 +87,7 @@ class HostVerifierTests(unittest.TestCase):
                     "image": "synthetic",
                 }
             )
+        rows[1]["cmd"] = ["/bin/sh", "-ec", "exec nginx -c /run/shahab/nginx.conf -g 'daemon off;'"]
         rows[1]["ports"] = {"8443/tcp": [{"HostIp": "127.0.0.1", "HostPort": "8443"}]}
         config = (ROOT / "deploy/vm/nginx.conf.template").read_text()
 

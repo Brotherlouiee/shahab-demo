@@ -115,6 +115,14 @@ def inspect_proxy(config, host_config=None):
     check("tls_protocols_restricted", bool(re.search(r"ssl_protocols\s+TLSv1\.2\s+TLSv1\.3\s*;", config)))
 
 
+def frontend_config_path(args):
+    """Use the container's declared nginx config rather than assuming a temp path."""
+    matches = re.findall(r"\bnginx\s+-c\s+(/[A-Za-z0-9_./-]+)(?=\s|$)", " ".join(args))
+    if len(matches) != 1 or ".." in matches[0].split("/"):
+        raise AuditFailed("frontend_config_path_not_identified")
+    return matches[0]
+
+
 def inspect_containers():
     template = (
         '{"name":{{json .Name}},"ports":{{json .NetworkSettings.Ports}},'
@@ -144,7 +152,15 @@ def inspect_containers():
     index = args.index("--forwarded-allow-ips")
     allowed = set(args[index + 1].split(","))
     check("api_trusts_only_frontend_peer", bool(allowed) and allowed <= peers and "*" not in allowed)
-    config = command("docker", "exec", "shahab-prod-frontend-1", "nginx", "-T", "-c", "/tmp/vm.conf")
+    config = command(
+        "docker",
+        "exec",
+        "shahab-prod-frontend-1",
+        "nginx",
+        "-T",
+        "-c",
+        frontend_config_path(services["frontend"]["cmd"]),
+    )
     host_config = command("nginx", "-T") if "$api_forwarded_proto" in api_block(config) else None
     inspect_proxy(config, host_config)
     # Check host listeners as well as Docker publish rules; no process details are printed.
