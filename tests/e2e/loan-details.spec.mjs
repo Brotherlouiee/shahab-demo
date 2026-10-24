@@ -40,6 +40,29 @@ test("renders approved detail in RTL and escapes hostile conditions without usin
   expect(await page.evaluate(() => window.__xss)).toBeUndefined();
 });
 
+
+test("keeps history-detail back and brand controls inside the shared page margins", async ({ page }) => {
+  await page.route("**/api/v1/loans/**", (route) => route.fulfill({ json: approvedDetail }));
+
+  for (const viewport of [{ width: 390, height: 844 }, { width: 430, height: 932 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/loan-details?from=history&loanId=loan-approved");
+
+    const header = page.locator(".hp-loan-details-page > .hp-account-header");
+    await expect(header).toBeVisible();
+    await expect(header.locator(".hp-questionnaire-menu")).toHaveCount(0);
+    const margins = await page.evaluate(() => {
+      const headerRect = document.querySelector(".hp-loan-details-page > .hp-account-header").getBoundingClientRect();
+      const backRect = document.querySelector(".hp-loan-details-page > .hp-account-header .hp-questionnaire-icon-button").getBoundingClientRect();
+      const brandRect = document.querySelector(".hp-loan-details-page > .hp-account-header .hp-questionnaire-brand").getBoundingClientRect();
+      return { back: backRect.left - headerRect.left, brand: headerRect.right - brandRect.right };
+    });
+
+    expect(margins.back).toBeGreaterThanOrEqual(19);
+    expect(margins.brand).toBeGreaterThanOrEqual(19);
+  }
+});
+
 test("keeps a visible loading state until the approved-detail response arrives", async ({ page }) => {
   let releaseResponse;
   await page.route("**/api/v1/loans/**", (route) => new Promise((resolve) => {
