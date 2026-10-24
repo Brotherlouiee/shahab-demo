@@ -28,6 +28,12 @@ const response = {
   needsReview: [{ loanId: "unknown-loan", lenderName: "بانک شهر", loanName: "وام نیازمند بررسی", bankLogoReference: "https://cdn.example.test/review-bank.svg", rankingExcludedReasons: ["interestRate:unknown"] }],
 };
 
+test("question two uses the corrected person label", async ({ page }) => {
+  await page.goto("/question/2");
+  await expect(page.getByText("به عنوان یک «شخص» نیازمند اعتبار هستم.", { exact: true })).toBeVisible();
+  await expect(page.getByText("به عنوان یک «شخصی» نیازمند اعتبار هستم.", { exact: true })).toHaveCount(0);
+});
+
 for (const recommendation of [
   ...response.rankedRecommendations,
   ...response.lowCompatibilityRecommendations,
@@ -154,7 +160,11 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
-  await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
+  const aiCompare = page.getByRole("button", { name: "تحلیل با هوش مصنوعی" });
+  await expect(aiCompare).toBeVisible();
+  await expect(aiCompare).toBeDisabled();
+  await expect(aiCompare).toHaveCSS("background-color", "rgb(140, 140, 140)");
+  await expect(page).toHaveURL(/\/compare-result$/);
   await page.reload();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expectLogoOffsets(page.locator(".hp-loan-detail-card"), shortNameLogoOffset);

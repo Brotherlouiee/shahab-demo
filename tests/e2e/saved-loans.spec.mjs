@@ -16,10 +16,28 @@ const savedLoan = {
 
 test("shows the supplied empty artwork and no filters when no saved loan exists", async ({ page }) => {
   await installProfileApi(page, { authenticated: true, profile: { phone: "09000000001" } });
+  const imageResponse = page.waitForResponse(response => response.url().endsWith("/saved-loans-empty.webp"));
   await page.goto("/saved-loans");
 
   await expect(page).toHaveURL(/\/saved-loans$/);
-  await expect(page.locator(".hp-saved-loans-empty-state img")).toHaveAttribute("src", "/saved-loans-empty.png");
+  await expect(page.locator(".hp-saved-loans-empty-state img")).toHaveAttribute("src", "/saved-loans-empty.webp");
+  const emptyArtwork = page.locator(".hp-saved-loans-empty-state img");
+  const artworkResponse = await imageResponse;
+  expect(artworkResponse.headers()["content-type"]).toContain("image/webp");
+  expect(Number(artworkResponse.headers()["content-length"])).toBeLessThan(100_000);
+  await expect(emptyArtwork).toHaveJSProperty("complete", true);
+  expect(await emptyArtwork.evaluate((image) => image.naturalWidth === 600 && image.naturalHeight === 623)).toBe(true);
+  const timing = await emptyArtwork.evaluate((image) => {
+    const resource = performance.getEntriesByName(image.currentSrc).at(-1);
+    return resource && {
+      durationMs: Math.round(resource.duration * 100) / 100,
+      transferBytes: resource.transferSize,
+      encodedBytes: resource.encodedBodySize,
+    };
+  });
+  expect(timing).not.toBeNull();
+  expect(timing.encodedBytes).toBeLessThan(100_000);
+  console.info(`SAVED_EMPTY_ARTWORK ${JSON.stringify(timing)} cache-control=${artworkResponse.headers()["cache-control"] || "unspecified"}`);
   await expect(page.locator(".hp-loan-result-filters")).toHaveCount(0);
 });
 

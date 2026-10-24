@@ -331,20 +331,45 @@ function getLoanIdFromLocation() {
 function getActiveRecommendationHistoryState() {
   if (typeof window === "undefined") return null;
   const value = window.history.state?.shahabRecommendation;
-  return value && typeof value.sessionId === "string"
-    ? { sessionId: value.sessionId, historyId: typeof value.historyId === "string" ? value.historyId : null, result: readRecommendationCache(value.sessionId) }
-    : null;
+  const sessionId = typeof value?.sessionId === "string" ? value.sessionId : null;
+  const historyId = typeof value?.historyId === "string" ? value.historyId : getHistoryIdFromLocation();
+  if (!sessionId && !historyId) return null;
+  return {
+    sessionId,
+    historyId: historyId || null,
+    selectedComparisonPlanIds: Array.isArray(value?.selectedComparisonPlanIds)
+      ? value.selectedComparisonPlanIds.filter((id) => typeof id === "string").slice(0, 10)
+      : [],
+    result: sessionId ? readRecommendationCache(sessionId) : null,
+  };
 }
 
-function replaceActiveRecommendationHistoryState(sessionId, result) {
-  if (typeof window === "undefined" || !sessionId) return;
-  writeRecommendationCache(sessionId, result);
-  const historyId = result?.historyId || getActiveRecommendationHistoryState()?.historyId || null;
+function replaceActiveRecommendationHistoryState(sessionId, result, selectedComparisonPlanIds) {
+  if (typeof window === "undefined") return;
+  if (sessionId) writeRecommendationCache(sessionId, result);
+  const active = getActiveRecommendationHistoryState();
+  const historyId = result?.historyId || active?.historyId || null;
+  if (!sessionId && !historyId) return;
   window.history.replaceState(
-    { ...(window.history.state || {}), shahabRecommendation: { sessionId, historyId } },
+    {
+      ...(window.history.state || {}),
+      shahabRecommendation: {
+        ...(sessionId ? { sessionId } : {}),
+        ...(historyId ? { historyId } : {}),
+        selectedComparisonPlanIds: selectedComparisonPlanIds || active?.selectedComparisonPlanIds || [],
+      },
+    },
     "",
     window.location.pathname + window.location.search,
   );
+}
+
+function withRecommendationHistory(pathname, historyId) {
+  if (!historyId) return pathname;
+  const [path, query = ""] = pathname.split("?");
+  const params = new URLSearchParams(query);
+  params.set("historyId", historyId);
+  return `${path}?${params.toString()}`;
 }
 
 function clearActiveRecommendationHistoryState() {
@@ -379,8 +404,9 @@ function getInitialViewFromPath(pathname) {
 }
 
 function getHistoryIdFromLocation() {
+  const queryHistoryId = new URLSearchParams(window.location.search).get("historyId");
   const match = window.location.pathname.match(/^\/recommendation-history\/([^/]+)$/);
-  return match ? decodeURIComponent(match[1]) : "";
+  return match ? decodeURIComponent(match[1]) : queryHistoryId || "";
 }
 
 function replaceRoute(pathname) {
@@ -913,7 +939,7 @@ function LoanComparisonResultCard({ detail, metric, onDetails }) {
   );
 }
 
-function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalysis, onDetails, selectedPlanIds }) {
+function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onDetails, selectedPlanIds }) {
   const [activeMetricIndex, setActiveMetricIndex] = useState(0);
   const [detailState, setDetailState] = useState({ status: "loading", details: [] });
   const tabsRef = useRef(null);
@@ -1006,7 +1032,7 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onAiAnalys
       </section>
 
       <div className="hp-compare-result-bottom-bar">
-        <button type="button" onClick={() => onAiAnalysis(selectedPlanIds[0] || "")}>تحلیل با هوش مصنوعی</button>
+        <button type="button" disabled>تحلیل با هوش مصنوعی</button>
       </div>
     </main>
   );
@@ -1053,7 +1079,7 @@ function LoanAiAnalysisScreen({ onBack, result, loanId }) {
   );
 }
 
-function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSavedLoans }) {
+function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSavedLoans, onHistoricalBack }) {
   const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
@@ -1086,7 +1112,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const [isAnalyzingLoans, setIsAnalyzingLoans] = useState(initialRouteState.isAnalyzingLoans);
   const [loanResultView, setLoanResultView] = useState(initialRouteState.loanResultView);
   const [selectedLoanId, setSelectedLoanId] = useState(getLoanIdFromLocation);
-  const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState([]);
+  const [selectedComparisonPlanIds, setSelectedComparisonPlanIds] = useState(() => initialRecommendationHistory?.selectedComparisonPlanIds || []);
   // One in-flight request is sufficient for one anonymous questionnaire session.
   // The guard prevents a rerender from issuing a duplicate recommendation request.
   const recommendationRequestRef = useRef(false);
@@ -1143,7 +1169,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         },
         {
           id: "person",
-          label: "به عنوان یک «شخصی» نیازمند اعتبار هستم.",
+          label: "به عنوان یک «شخص» نیازمند اعتبار هستم.",
         },
       ],
     },
@@ -1543,7 +1569,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const previousQuestionButtonText = isPersonalStageQuestion
     ? "بازگشت به مرحله قبل"
     : "بازگشت به سوال قبل";
-  const routePath = isAnalyzingLoans
+  const historyId = recommendationResult?.historyId || initialRecommendationHistory?.historyId || getHistoryIdFromLocation();
+  const routeBasePath = isAnalyzingLoans
     ? "/analysis"
     : loanResultView === "results"
       ? "/loan-results"
@@ -1565,6 +1592,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                     ? "/personal-info"
                     : getQuestionnaireRouteForPrototypeQuestionIndex(currentQuestion)
                       ?? `/question/${currentQuestion + 1}`;
+  const routePath = withRecommendationHistory(routeBasePath, historyId);
   const maxStageOffset = stageOffsets[stageOffsets.length - 1];
   const stagedQuestionIndexes = questions.reduce((groups, item, index) => {
     if (item.stageIndex === undefined) return groups;
@@ -1606,8 +1634,31 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }, [isPersonalInfoQuestion, isAnalyzingLoans, loanResultView]);
 
   useEffect(() => {
-    replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult);
-  }, [questionnaireSessionId, recommendationResult, routePath]);
+    replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult, selectedComparisonPlanIds);
+  }, [questionnaireSessionId, recommendationResult, routePath, selectedComparisonPlanIds]);
+
+  useEffect(() => {
+    if (!questionnaireSessionId) return undefined;
+    let active = true;
+    readQuestionnaireSession(questionnaireSessionId).then((session) => {
+      if (!active) return;
+      setAnswers((current) => {
+        const restored = { ...current };
+        for (const [questionId, answerId] of Object.entries(session.answers || {})) {
+          const questionIndex = getPrototypeQuestionIndexForCanonicalQuestionId(questionId);
+          if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
+        }
+        return restored;
+      });
+    }).catch((error) => {
+      if (active) {
+        setQuestionnaireSessionError(error.status === 410
+          ? "مهلت نگهداری این پرسشنامه پایان یافته است و نشست دیگر قابل بازیابی نیست."
+          : "بازیابی پاسخ‌های ثبت‌شده از نشست پرسشنامه در حال حاضر ممکن نشد.");
+      }
+    });
+    return () => { active = false; };
+  }, [questionnaireSessionId]);
 
   useEffect(() => {
     const routeState = getQuestionnaireRouteState(window.location.pathname);
@@ -1703,13 +1754,15 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     // Start the real server request during the existing five-second spinner.
     // It still remains a server-owned recommendation and no artificial extra
     // wait is added after the countdown.
-    if ((!isAnalyzingLoans && loanResultView !== "results") || recommendationResult || recommendationStatus !== "idle") return;
-    if (!questionnaireSessionId) {
+    const resultBackedViews = ["results", "details", "request", "compare", "compare-result", "ai-analysis"];
+    if ((!isAnalyzingLoans && !resultBackedViews.includes(loanResultView)) || recommendationResult || recommendationStatus !== "idle") return;
+    const activeHistory = getActiveRecommendationHistoryState();
+    if (!questionnaireSessionId && !activeHistory?.historyId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
     loadRecommendationResult();
-  }, [isAnalyzingLoans, loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus]);
+  }, [isAnalyzingLoans, loanResultView, questionnaireSessionId, recommendationResult, recommendationStatus, historyId]);
 
   useEffect(() => {
     if (!isAnalyzingLoans) return undefined;
@@ -1798,16 +1851,17 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   async function loadRecommendationResult() {
     if (recommendationRequestRef.current) return;
-    if (!questionnaireSessionId) {
+    const activeHistory = getActiveRecommendationHistoryState();
+    const activeHistoryId = activeHistory?.historyId || historyId;
+    if (!questionnaireSessionId && !activeHistoryId) {
       setRecommendationStatus("sessionMissing");
       return;
     }
     recommendationRequestRef.current = true;
     setRecommendationStatus("loading");
     try {
-      const history = getActiveRecommendationHistoryState();
-      const result = history?.sessionId === questionnaireSessionId && history.historyId
-        ? await fetchHistoricalRecommendation(history.historyId)
+      const result = activeHistoryId
+        ? await fetchHistoricalRecommendation(activeHistoryId)
         : await fetchRecommendationResult(questionnaireSessionId);
       setRecommendationResult(result);
       setRecommendationStatus("ready");
@@ -1944,6 +1998,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
     if (loanResultView === "details" || loanResultView === "request") {
       setLoanResultView("results");
+      return;
+    }
+
+    if (loanResultView === "results" && historyId) {
+      onHistoricalBack?.(historyId);
       return;
     }
 
@@ -2935,7 +2994,7 @@ function RecommendationHistoryPage({ onBack, onOpen, onUnauthorized, state, setS
   return <main className="hp-account-page hp-recommendation-history-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} />
     {state.status === "loading" ? <DeferredPageSkeleton active variant="cards" /> : null}
     {state.status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت سوابق در حال حاضر ممکن نیست.</p><button type="button" onClick={() => load()}>تلاش مجدد</button></div> : null}
-    {state.status === "ready" && !state.items.length ? <div className="hp-saved-loans-empty-state" role="status"><img src="/saved-loans-empty.png" alt="" /></div> : null}
+    {state.status === "ready" && !state.items.length ? <div className="hp-saved-loans-empty-state" role="status"><img src="/saved-loans-empty.webp" alt="" width="300" height="312" decoding="async" /></div> : null}
     {state.status === "ready" ? <section className="hp-recommendation-history-list">{state.items.map((item) => <article className="hp-recommendation-history-card" key={item.historyId}><button type="button" className="hp-history-card-open" onClick={() => onOpen(item.historyId)}><span className="hp-history-card-top"><strong>مشاهده نتایج</strong></span><span className="hp-history-card-row"><b>تعداد وام توصیه شده</b><em>{toPersianDigits(item.rankedCount)}</em></span><span className="hp-history-card-row"><b>تاریخ</b><em>{new Date(item.createdAt).toLocaleDateString("fa-IR", { timeZone: "Asia/Tehran" })}</em></span><span className="hp-history-card-row"><b>ساعت</b><em>{new Date(item.createdAt).toLocaleTimeString("fa-IR", { timeZone: "Asia/Tehran", hour: "2-digit", minute: "2-digit" })}</em></span></button><button className="hp-history-hide" type="button" aria-label="حذف سابقه" onClick={() => setPendingHideId(item.historyId)}><img src={closeCircleIconUrl} alt="" /></button></article>)}{state.nextCursor !== null ? <button type="button" className="hp-history-load-more" onClick={() => load(state.nextCursor, true)}>نمایش بیشتر</button> : null}</section> : null}
     {pendingHideId ? <div className="hp-history-confirm-backdrop" role="presentation"><section className="hp-history-confirm" role="alertdialog" aria-modal="true" aria-labelledby="history-confirm-title"><img src={dangerIconUrl} alt="" /><strong id="history-confirm-title">آیا از حذف کارت مطمئن هستید؟</strong><div><button type="button" disabled={isHiding} onClick={() => setPendingHideId(null)}>خیر</button><button type="button" disabled={isHiding} onClick={confirmHide}>بله</button></div></section></div> : null}
   </main>;
@@ -3129,7 +3188,7 @@ export default function HomePage() {
   if (currentView === "history-result") {
     if (historyResult === false) return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} /><p className="hp-recommendation-result-state">نتیجهٔ تاریخی در دسترس نیست.</p></main>;
     if (!historyResult) return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} /><DeferredPageSkeleton active variant="cards" /></main>;
-    return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><LoanResultsScreen result={historyResult} status="ready" header={<QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setHistoryResult(null); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} />} onDetails={(loanId) => { const historyId = getHistoryIdFromLocation(); replaceRoute(`/loan-details?loanId=${encodeURIComponent(loanId)}&from=history&historyId=${encodeURIComponent(historyId)}`); setCurrentView("history-detail"); }} /></>;
+    return <><UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onLogin={handleLoginOpen} onLogout={handleLogout} onNavigate={handleSidebarNavigate} userName={sidebarUserName} isAuthenticated={hasValidAccountAccess} /><LoanResultsScreen result={historyResult} status="ready" header={<QuestionnaireHeader onBack={() => { replaceRoute("/recommendation-history"); setHistoryResult(null); setCurrentView("history"); }} onMenu={() => setIsSidebarOpen(true)} onHome={handleHomeOpen} />} onDetails={(loanId) => { const historyId = getHistoryIdFromLocation(); replaceRoute(`/loan-details?loanId=${encodeURIComponent(loanId)}&from=history&historyId=${encodeURIComponent(historyId)}`); setCurrentView("history-detail"); }} onCompare={(result) => { const historyId = result.historyId || getHistoryIdFromLocation(); if (!historyId) return; window.history.replaceState({ ...(window.history.state || {}), shahabRecommendation: { historyId, selectedComparisonPlanIds: [] } }, "", window.location.pathname + window.location.search); replaceRoute(withRecommendationHistory("/compare-loans", historyId)); setCurrentView("questionnaire"); }} /></>;
   }
   if (currentView === "history-detail") {
     const historyId = new URLSearchParams(window.location.search).get("historyId") || "";
@@ -3146,6 +3205,7 @@ export default function HomePage() {
           onAccountCreated={handleAccountCreated}
           onHome={handleHomeOpen}
           onSavedLoans={handleSavedLoansOpen}
+          onHistoricalBack={(historyId) => { replaceRoute(`/recommendation-history/${encodeURIComponent(historyId)}`); setCurrentView("history-result"); }}
         />
       </div>
     );

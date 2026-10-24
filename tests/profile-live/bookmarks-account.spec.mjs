@@ -55,7 +55,7 @@ async function recommendation(context) {
   expect(result.rankedRecommendations.length).toBeGreaterThan(0);
   const history = await context.request.get("/api/v1/recommendation-history");
   expect(history.status()).toBe(200);
-  return { loan: result.rankedRecommendations[0], sessionId: sid, historyId: result.historyId };
+  return { loan: result.rankedRecommendations[0], result, sessionId: sid, historyId: result.historyId };
 }
 
 test("two devices share database bookmarks, another account cannot inherit them, logout clears only Shahab", async ({ browser, baseURL }) => {
@@ -160,4 +160,71 @@ test("current result refresh and detail Back use only an owned historical refere
     expect(await page.evaluate(() => [...Object.keys(localStorage), ...Object.keys(sessionStorage)].filter(k => k.startsWith("shahab.")))).toEqual([]);
     expect((await context.request.get(`/api/v1/recommendation-history/${historyId}`)).status()).toBe(200);
   } finally { await context.close(); }
+});
+
+test("refresh restores persisted questionnaire answers on the same step from the real API", async ({ page }) => {
+  const started = await page.request.post("/api/v1/questionnaire/sessions");
+  expect(started.status()).toBe(201);
+  const sessionId = (await started.json()).sessionId;
+  const firstQuestion = questionnaire.questions[0];
+  const saved = await page.request.put(`/api/v1/questionnaire/sessions/${sessionId}/answers/${firstQuestion.questionId}`, {
+    data: { answerId: firstQuestion.answerOptions[0].answerId },
+  });
+  expect(saved.status()).toBe(200);
+  await page.addInitScript((id) => {
+    window.history.replaceState({ ...(window.history.state || {}), shahabRecommendation: { sessionId: id } }, "", window.location.href);
+  }, sessionId);
+
+  const restoredBeforeReload = page.waitForResponse(response => response.url().endsWith(`/questionnaire/sessions/${sessionId}`) && response.request().method() === "GET");
+  await page.goto("/question/4");
+  expect((await restoredBeforeReload).status()).toBe(200);
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.getByRole("heading").first()).toBeVisible();
+
+  const restoredAfterReload = page.waitForResponse(response => response.url().endsWith(`/questionnaire/sessions/${sessionId}`) && response.request().method() === "GET");
+  await page.reload();
+  expect((await restoredAfterReload).status()).toBe(200);
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.getByRole("radio").first()).toBeChecked();
+  expect(await page.evaluate(() => [...Object.keys(localStorage), ...Object.keys(sessionStorage)].filter(key => key.startsWith("shahab.")))).toEqual([]);
+});
+
+test("historical recommendation comparison works and its route and selection survive refresh", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ baseURL });
+  try {
+    await login(context, "09000000824");
+    const { result, historyId } = await recommendation(context);
+    expect(result.rankedRecommendations.length).toBeGreaterThanOrEqual(2);
+    const page = await context.newPage();
+    let scoringRequests = 0;
+    page.on("request", request => {
+      if (request.method() === "POST" && new URL(request.url()).pathname === "/api/v1/recommendations") scoringRequests += 1;
+    });
+    await page.goto(`/recommendation-history/${historyId}`);
+    await expect(page.locator(".hp-serving-loan-card").first()).toBeVisible();
+    await page.getByRole("button", { name: "مقایسه وام" }).click();
+    await expect(page).toHaveURL(new RegExp(`/compare-loans\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-loan-compare-card").first()).toBeVisible();
+    await page.locator(".hp-loan-compare-check").nth(0).click();
+    await page.locator(".hp-loan-compare-check").nth(1).click();
+    await page.getByRole("button", { name: /مقایسه کن/ }).click();
+    await expect(page).toHaveURL(new RegExp(`/compare-result\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+    await page.reload();
+    await expect(page).toHaveURL(new RegExp(`/compare-result\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
+    expect(await page.evaluate(() => history.state.shahabRecommendation.selectedComparisonPlanIds)).toHaveLength(2);
+    expect(scoringRequests).toBe(0);
+
+    await page.getByRole("button", { name: "بازگشت" }).click();
+    await expect(page).toHaveURL(new RegExp(`/compare-loans\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-loan-compare-check[aria-pressed=true]")).toHaveCount(2);
+    await page.reload();
+    await expect(page.locator(".hp-loan-compare-check[aria-pressed=true]")).toHaveCount(2);
+    expect(scoringRequests).toBe(0);
+  } finally {
+    await context.close();
+  }
 });
