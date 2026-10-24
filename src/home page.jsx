@@ -825,7 +825,7 @@ function allRecommendationItems(result) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.loanId === item.loanId) === index);
 }
 
-function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, onDetails, mode = "request", initialSelectedPlanIds = [] }) {
+function LoanCompareScreen({ result, status = "ready", onBack, onMenu, onHome, onCompareSubmit, onDetails, mode = "request", initialSelectedPlanIds = [] }) {
   const [selectedPlans, setSelectedPlans] = useState(() => Object.fromEntries(initialSelectedPlanIds.map((planId) => [planId, true])));
   const selectedPlanIds = Object.entries(selectedPlans)
     .filter(([, isSelected]) => isSelected)
@@ -839,7 +839,8 @@ function LoanCompareScreen({ result, onBack, onMenu, onHome, onCompareSubmit, on
   }), [result]);
 
   if (!result) {
-    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">برای ادامه، ابتدا پرسشنامه را در همین تب کامل کنید و نتیجهٔ معتبر دریافت کنید.</p></main>;
+    const isRestoring = status === "idle" || status === "loading";
+    return <main className="hp-questionnaire-page" dir="rtl" aria-busy={isRestoring}><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />{isRestoring ? <DeferredPageSkeleton active variant="cards" /> : <p className="hp-recommendation-result-state">برای ادامه، ابتدا پرسشنامه را در همین تب کامل کنید و نتیجهٔ معتبر دریافت کنید.</p>}</main>;
   }
 
   return (
@@ -941,7 +942,7 @@ function LoanComparisonResultCard({ detail, metric, onDetails }) {
   );
 }
 
-function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onDetails, selectedPlanIds }) {
+function LoanComparisonResultScreen({ result, status = "ready", onBack, onMenu, onHome, onDetails, selectedPlanIds }) {
   const [activeMetricIndex, setActiveMetricIndex] = useState(0);
   const [detailState, setDetailState] = useState({ status: "loading", details: [] });
   const tabsRef = useRef(null);
@@ -968,7 +969,8 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onDetails,
   }, [activeMetricIndex]);
 
   if (!result) {
-    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p></main>;
+    const isRestoring = status === "idle" || status === "loading";
+    return <main className="hp-questionnaire-page" dir="rtl" aria-busy={isRestoring}><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />{isRestoring ? <DeferredPageSkeleton active variant="cards" /> : <p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p>}</main>;
   }
 
   function handleTabsPointerDown(event) {
@@ -2255,6 +2257,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     return (
       <LoanCompareScreen
         result={recommendationResult}
+        status={recommendationStatus}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
@@ -2267,6 +2270,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     return (
       <LoanCompareScreen
         result={recommendationResult}
+        status={recommendationStatus}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
@@ -2282,6 +2286,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     return (
       <LoanComparisonResultScreen
         result={recommendationResult}
+        status={recommendationStatus}
         onBack={handleLoanResultBack}
         onMenu={onMenu}
         onHome={onHome}
