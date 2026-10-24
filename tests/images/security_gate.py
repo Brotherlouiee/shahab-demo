@@ -54,6 +54,7 @@ def assess_runtime_inventory(report, name):
             raise ValueError("Runtime API image contains the removed installer")
     elif name == "web":
         expected["libxpm"] = "3.5.20-r0"
+        expected["brotli-libs"] = "1.2.1-r0"
     else:
         raise ValueError("Unknown runtime image")
     os_packages = [
