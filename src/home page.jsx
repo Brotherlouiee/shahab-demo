@@ -1653,7 +1653,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     }).catch((error) => {
       if (active) {
         setQuestionnaireSessionError(error.status === 410
-          ? "مهلت نگهداری این پرسشنامه پایان یافته است و نشست دیگر قابل بازیابی نیست."
+          ? "مهلت پرسشنامه تمام شده است. پرسشنامه را دوباره تکمیل کنید."
           : "بازیابی پاسخ‌های ثبت‌شده از نشست پرسشنامه در حال حاضر ممکن نشد.");
       }
     });

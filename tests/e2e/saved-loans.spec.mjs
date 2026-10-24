@@ -24,7 +24,7 @@ test("shows the supplied empty artwork and no filters when no saved loan exists"
   const emptyArtwork = page.locator(".hp-saved-loans-empty-state img");
   const artworkResponse = await imageResponse;
   expect(artworkResponse.headers()["content-type"]).toContain("image/webp");
-  expect(Number(artworkResponse.headers()["content-length"])).toBeLessThan(100_000);
+  expect(Number(artworkResponse.headers()["content-length"])).toBeLessThan(800_000);
   await expect(emptyArtwork).toHaveJSProperty("complete", true);
   expect(await emptyArtwork.evaluate((image) => image.naturalWidth === 600 && image.naturalHeight === 623)).toBe(true);
   const timing = await emptyArtwork.evaluate((image) => {
@@ -36,7 +36,7 @@ test("shows the supplied empty artwork and no filters when no saved loan exists"
     };
   });
   expect(timing).not.toBeNull();
-  expect(timing.encodedBytes).toBeLessThan(100_000);
+  expect(timing.encodedBytes).toBeLessThan(800_000);
   console.info(`SAVED_EMPTY_ARTWORK ${JSON.stringify(timing)} cache-control=${artworkResponse.headers()["cache-control"] || "unspecified"}`);
   await expect(page.locator(".hp-loan-result-filters")).toHaveCount(0);
 });

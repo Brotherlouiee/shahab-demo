@@ -160,11 +160,6 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("link", { name: "مشاهده شرایط و مدارک مورد نیاز" }).first().click();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expect(page.locator(".hp-loan-details-conditions")).toContainText("مدارک هویتی");
-  const aiCompare = page.getByRole("button", { name: "تحلیل با هوش مصنوعی" });
-  await expect(aiCompare).toBeVisible();
-  await expect(aiCompare).toBeDisabled();
-  await expect(aiCompare).toHaveCSS("background-color", "rgb(140, 140, 140)");
-  await expect(page).toHaveURL(/\/compare-result$/);
   await page.reload();
   await expect(page.getByRole("heading", { name: "شرایط و مدارک مورد نیاز" })).toBeVisible();
   await expectLogoOffsets(page.locator(".hp-loan-detail-card"), shortNameLogoOffset);
@@ -193,7 +188,13 @@ test("canonical questionnaire reaches the active real-result route and published
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page).toHaveURL(/\/compare-result$/);
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
-  await expect(page.getByRole("button", { name: "تحلیل با هوش مصنوعی" })).toBeVisible();
+  const aiCompare = page.getByRole("button", { name: "تحلیل با هوش مصنوعی" });
+  await expect(aiCompare).toBeVisible();
+  await expect(aiCompare).toBeDisabled();
+  await expect(aiCompare).toHaveCSS("background-color", "rgb(140, 140, 140)");
+  const compareResultUrl = page.url();
+  await aiCompare.evaluate((button) => button.click());
+  await expect(page).toHaveURL(compareResultUrl);
   const comparisonResultCardHeight = await page.locator(".hp-compare-result-card").first().evaluate((card) => card.getBoundingClientRect().height);
   await expectTitleTopOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong");
   await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);

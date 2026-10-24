@@ -32,6 +32,9 @@ test("expiry rejects the canonical answer without creating and replaying a new q
     starts += 1;
     return route.fulfill({ status: 201, json: { sessionId: "expired-fixture", expiresAt: "2000-01-01T00:00:00Z", answers: {} } });
   });
+  await page.route("**/api/v1/questionnaire/sessions/expired-fixture", route => route.request().method() === "GET"
+    ? route.fulfill({ status: 410, json: {} })
+    : route.fallback());
   await page.route("**/api/v1/questionnaire/sessions/expired-fixture/answers/Q1", route => route.fulfill({ status: 410, json: {} }));
   await page.goto("/question/3");
   await page.getByRole("radio").first().click();
