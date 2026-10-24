@@ -13,11 +13,11 @@
 | تأیید الگو، نصب تنظیمات، سلامت API | تأیید/خروجی مالک در همین تحویل؛ completed |
 | دریافت SMS و ورود از مرورگر سایت | گزارش صریح مالک؛ passed |
 | قرارداد provider، خطای ارسال، quota/attempts/restart | تست‌های موجود؛ [Quality main مبنا](https://github.com/Brotherlouiee/shahab-demo/actions/runs/40015328895) موفق است؛ خطای واقعی provider روی production القا نمی‌شود |
-| کد اشتباه، single-use، restore/profile، logout/revocation، انقضای واقعی کد روی HTTPS | آمادهٔ اجرای محدود با scripts/verify_otp_live.py؛ هنوز اجرا/موفق گزارش نمی‌شود |
+| کد اشتباه، single-use، restore/profile، logout/revocation، انقضای واقعی کد روی HTTPS | اجرای مالک با commit 756ec67 و SHA-256 ابزار 04e43bf2a21a5c39e5a1fcad14b28bc7e83259f0b843e9120df7f386712d37b3؛ همهٔ موارد passed |
 
 محدودهٔ این تغییر: ابزار CLI مستقل پذیرش و تست ایمنی آن، گزارش، runbook، guide و CHANGELOG. runtime، frontend، schema، منابع/scoring، نصب جدید روی سرور، restart و workflow تغییر نمی‌کنند. ابزار فقط API عمومی موجود روی دامنهٔ ثابت HTTPS را با شمارهٔ خود مالک صدا می‌زند؛ حداکثر دو request پیامک، بدون retry/redirect/proxy محیطی، بدون API key/DB، بدون نوشتن profile و بدون نمایش شماره/کد/token. نشست خودش را خارج می‌کند؛ اعتبارسنجی revoke عمداً از token قبلی استفاده می‌کند تا پاک‌شدن cookie به‌تنهایی با لغو سروری اشتباه نشود. کد دوم پس از TTL واقعی بررسی می‌شود؛ زمان/DB سرور دست‌کاری نمی‌شود.
 
-شرط پایان همین مرحله: خروجی پالایش‌شدهٔ live_checks_passed از اجرای مالک، ثبت نتیجه و CI نهایی همین PR؛ سپس می‌توان T06 را بست. ساخت ابزار یا CI موفق جای اجرای زنده را نمی‌گیرد. هیچ NetBird، staging، آزمونگر دوم، کمپین DAST یا آزمون بار اضافه نمی‌شود. سند تداوم چون پایان US-11 نیست تغییر نمی‌کند.
+نتیجهٔ زنده: مالک خروجی `live_checks_passed` با `smsRequests: 2` را ارائه کرد؛ بخش عملیاتی T06 کامل است. بستن تحویل PR به ثبت همین شاهد و CI سبز head نهایی وابسته است. ساخت ابزار یا CI موفق جای اجرای زنده را نمی‌گیرد. هیچ NetBird، staging، آزمونگر دوم، کمپین DAST یا آزمون بار اضافه نمی‌شود. سند تداوم چون پایان US-11 نیست تغییر نمی‌کند.
 
 بررسی محلی: چهار تست ابزار بدون شبکه موفق؛ عدم درخواست سوم SMS، توقف روی redirect/endpoint نامجاز، استفاده از token قدیمی، پاک‌سازی نشست در موفقیت غیرمنتظره و عدم افشای ورودی/exception بررسی شدند. Ruff و secret/diff check روی نسخهٔ نهایی ثبت می‌شوند. اجرای اولیهٔ suite قدیمی در Python این محیط به نبود fastapi/sqlalchemy پیش از شروع تست خورد؛ آن را موفق اعلام نکردیم و وابستگی/نسخهٔ محصول را عوض نکردیم. CI موجود مبنا و CI PR جدید شاهد مستقل‌اند. زمان کل و مصرف توکن دقیق اندازه‌گیری نشده‌اند.
 
@@ -123,3 +123,25 @@ nextTaskId: همین US-11.T06، اثبات CI روی head و سپس تأیید 
 نه شروع ماژولارسازی یا اعلام پایانUS-11. تا آن زمان implemented/offline verified،
 pending PostgreSQL CI and online evidence. PR آماده بررسی و تا gate معتبر غیرقابل merge.
 Rollback/config/rotation در runbook؛ سند تداوم پایان story طبق دستور مالک تغییر نکرد.
+
+## نتیجهٔ نهایی پذیرش HTTPS — ۲۰۲۶-۱۰-۲۴
+
+شاهد: اجرای تعاملی فایل checksum-verified روی سرور توسط مالک؛ مشاهدهٔ مستقل SSH توسط عامل ادعا نمی‌شود. دریافت دو پیامک واقعی و ورود مرورگر پیش‌تر نیز تأیید شده است. خروجی پالایش‌شدهٔ ارائه‌شده:
+
+```text
+PASS anonymous_session HTTP 401
+PASS first_sms_requested HTTP 200
+PASS wrong_code HTTP 401
+PASS valid_code HTTP 200
+PASS cookie_session_restore HTTP 200
+PASS profile_read HTTP 200
+PASS consumed_code_rejected HTTP 401
+PASS logout HTTP 204
+PASS revoked_session_rejected HTTP 401
+PASS revoked_profile_rejected HTTP 401
+PASS second_sms_requested HTTP 200
+PASS expired_code_rejected HTTP 401
+{"task": "US-11.T06", "result": "live_checks_passed", "smsRequests": 2}
+```
+
+مرز نتیجه: بخش آنلاین T06 روی backend مستقر v0.1.0 و frontend v0.1.2 موفق است؛ نه پایان US-11/فاز۱ و نه آزمون بار/اختلال عمدی provider. CI head اولیهٔ PR156 شش موفق و یک شکست دارد: ساخت/اسکن تصاویر در run40087533704 به HIGH تازهٔ CVE-2026-111497 در brotli-libs نسخهٔ 1.2.0-r1 فرانت رسیده؛ FixedVersion گزارش 1.2.1-r0 است. این شکست مستقل از OTP در اصلاح امنیتی جدا پیگیری می‌شود و تا gate سبز تحویل قابل مرج ادعا نمی‌شود. کد ابزار آزموده‌شده پس از اجرای زنده تغییر نکرده و تکرار SMS لازم نیست.
