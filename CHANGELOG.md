@@ -1,5 +1,7 @@
 # Changelog
 
+- بررسی عملیاتی محدود US-11.T04: لاگ‌های پالایش‌شدهٔ API و NGINX، ۱۵ پاسخ 503 درخواست OTP با علت نامشخص به‌دلیل در دسترس نبودن لاگ کانتینر قبلی، و سلامت فعلی HTTPS=200 ثبت شد؛ هیچ تنظیم production تغییر نکرد. [checkpoint](docs/progress/us-11-t04.md)
+
 All notable changes to this project are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows Semantic Versioning when production releases begin.
