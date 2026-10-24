@@ -159,3 +159,9 @@ cookie/proof، رد Origin و هدر جعلی و دوام نشست پس از res
 این فرمان نصب/بازسازی/restart/SQL/SMS ندارد. در FAIL، فقط همان شاهد تحلیل شود و تا مشخص‌شدن اصلاح، تغییر خودکار سرور انجام نشود. روش بررسی جای تست بار یا سیاست جامع DAST نیست؛ rate-limit و timeout/body در حد config مؤثر بررسی می‌شوند و اثبات cookie واقعی از [پذیرش T06](../progress/us-11-t06-kavenegar-otp.md) ارجاع می‌شود. نتیجه در [checkpoint H](../progress/us-11-t02h.md) ثبت می‌شود؛ اجرای محلی/CI جای اجرای VM نیست.
 
 شاهد ۲۰۲۶-۱۰-۲۴: اجرای مالک با شش HTTP request و صفر SMS به `host_checks_passed` رسید؛ config و سرویس تغییر نکردند. SHA ابزار اجراشده و digestهای واقعی در checkpoint H ثبت‌اند. مسیر config نسخهٔ تازه از فرمان کانتینر استخراج می‌شود، نه از فرض مسیر ثابت.
+
+## بررسی هدفمند T03 و یافتهٔ image مستقر
+
+برای شش GET مجاز بدون login/SMS از ابزار موجود `authorized_staging_security_smoke.py --authorized-test-origin https://shahabfintech.ir --include-exposure-checks` استفاده شود؛ فایل از commit ثابت دریافت و hash بررسی شود. ابزار body/secret/cookie چاپ نمی‌کند و profile/history را تغییر نمی‌دهد. نتیجه را با scan/headers/cookie شواهد قبلی مخلوط نکنید.
+
+استقرار frontend v0.1.2 هنوز inventory قدیمی brotli-libs=1.2.0-r1 دارد؛ merge #157 به‌تنهایی آن را اصلاح نکرده است. نسخهٔ اصلاح‌شده از pipeline موجود منتشر، digest ثبت و با backup Compose و حفظ env/volume روی VM جایگزین شود؛ روی VM build، migration، import یا reset انجام نشود. کلید OTP قبلی باید حفظ شود. وضعیت و شاهد رفع در checkpoint T03 ثبت خواهد شد؛ تا آن زمان high شناخته‌شده باز است.
