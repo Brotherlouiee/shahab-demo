@@ -204,7 +204,7 @@ export default function LoanResultsScreen({
   }, [lenderName, lenders]);
 
   return (
-    <main className={`hp-questionnaire-page hp-loan-results-page header-top${savedItems !== null ? " is-saved-loans" : ""}`} dir="rtl" aria-busy={status === "loading"}>
+    <main className={`hp-questionnaire-page hp-loan-results-page header-top${savedItems !== null ? " is-saved-loans" : ""}`} dir="rtl" aria-busy={status === "loading" || status === "idle"}>
       <div className="hp-loan-results-top">
         {header}
       </div>
@@ -231,7 +231,7 @@ export default function LoanResultsScreen({
 
       <section className="hp-loan-results-list">
         {saveError ? <p className="hp-recommendation-result-state" role="alert">{saveError}</p> : null}
-        <DeferredPageSkeleton active={status === "loading"} variant="cards" />
+        <DeferredPageSkeleton active={status === "loading" || status === "idle"} variant="cards" />
         {status === "ready" && savedItems !== null && !items.length ? (
           <div className="hp-saved-loans-empty-state" role="status">
             <img src="/saved-loans-empty.png" alt="" width="1230" height="1278" decoding="async" fetchPriority="high" />

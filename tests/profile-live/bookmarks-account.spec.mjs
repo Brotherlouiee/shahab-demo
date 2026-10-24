@@ -214,12 +214,14 @@ test("historical recommendation comparison works and its route and selection sur
     await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
     await page.reload();
     await expect(page).toHaveURL(new RegExp(`/compare-result\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-recommendation-result-state")).toHaveCount(0);
     await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
     expect(await page.evaluate(() => history.state.shahabRecommendation.selectedComparisonPlanIds)).toHaveLength(2);
     expect(scoringRequests).toBe(0);
 
     await page.getByRole("button", { name: "بازگشت" }).click();
     await expect(page).toHaveURL(new RegExp(`/compare-loans\\?historyId=${historyId}`));
+    await expect(page.locator(".hp-recommendation-result-state")).toHaveCount(0);
     await expect(page.locator(".hp-loan-compare-check[aria-pressed=true]")).toHaveCount(2);
     await page.reload();
     await expect(page.locator(".hp-loan-compare-check[aria-pressed=true]")).toHaveCount(2);
