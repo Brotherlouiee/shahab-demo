@@ -962,14 +962,14 @@ function LoanComparisonResultScreen({ result, onBack, onMenu, onHome, onDetails,
     return () => controller.abort();
   }, [result, selectedPlanIds]);
 
-  if (!result) {
-    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p></main>;
-  }
-
   useEffect(() => {
     const activeTab = tabsRef.current?.querySelector(`[data-tab-index="${activeMetricIndex}"]`);
     activeTab?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
   }, [activeMetricIndex]);
+
+  if (!result) {
+    return <main className="hp-questionnaire-page" dir="rtl"><QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} /><p className="hp-recommendation-result-state">نتیجهٔ معتبر این پرسشنامه در دسترس نیست.</p></main>;
+  }
 
   function handleTabsPointerDown(event) {
     tabDragStartXRef.current = event.clientX;
