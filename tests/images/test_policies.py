@@ -131,7 +131,7 @@ class ScanPolicyTests(unittest.TestCase):
 
     def test_runtime_package_regression_uses_actual_inventory(self):
         report = self.report()
-        packages = [{"Name": "zlib", "Version": "1.3.2-r1"}, {"Name": "libxpm", "Version": "3.5.20-r0"}, {"Name": "musl", "Version": "1.2.6-r3"}, {"Name": "musl-utils", "Version": "1.2.6-r3"}]
+        packages = [{"Name": "zlib", "Version": "1.3.2-r1"}, {"Name": "libxpm", "Version": "3.5.20-r0"}, {"Name": "brotli-libs", "Version": "1.2.1-r0"}, {"Name": "musl", "Version": "1.2.6-r3"}, {"Name": "musl-utils", "Version": "1.2.6-r3"}]
         report["Results"][0]["Packages"] = packages
         assess_runtime_inventory(report, "api")
         assess_runtime_inventory(report, "web")
@@ -151,7 +151,7 @@ class ScanPolicyTests(unittest.TestCase):
             for name in ("musl", "musl-utils"):
                 for version in (None, "1.2.6-r2"):
                     packages = [{"Name": n, "Version": v} for n, v in (
-                        ("zlib", "1.3.2-r1"), ("libxpm", "3.5.20-r0"),
+                        ("zlib", "1.3.2-r1"), ("libxpm", "3.5.20-r0"), ("brotli-libs", "1.2.1-r0"),
                         ("musl", "1.2.6-r3"), ("musl-utils", "1.2.6-r3"))]
                     packages = [p for p in packages if p["Name"] != name or version is not None]
                     for package in packages:
@@ -161,6 +161,23 @@ class ScanPolicyTests(unittest.TestCase):
                     report["Results"][0]["Packages"] = packages
                     with self.subTest(image=image, package=name, version=version), self.assertRaises(ValueError):
                         assess_runtime_inventory(report, image)
+
+    def test_old_or_missing_brotli_blocks_web_runtime(self):
+        for version in (None, "1.2.0-r1", "1.2.1-r0"):
+            packages = [{"Name": n, "Version": v} for n, v in (
+                ("zlib", "1.3.2-r1"), ("libxpm", "3.5.20-r0"),
+                ("musl", "1.2.6-r3"), ("musl-utils", "1.2.6-r3"))]
+            if version is not None:
+                packages.append({"Name": "brotli-libs", "Version": version})
+            report = self.report()
+            report["Results"][0]["Packages"] = packages
+            assess_runtime_inventory(report, "api")
+            with self.subTest(version=version):
+                if version == "1.2.1-r0":
+                    assess_runtime_inventory(report, "web")
+                else:
+                    with self.assertRaisesRegex(ValueError, "brotli-libs"):
+                        assess_runtime_inventory(report, "web")
 
     def test_clean_and_all_severities_counted_including_unfixed(self):
         report = self.report()
