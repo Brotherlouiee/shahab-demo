@@ -49,11 +49,52 @@ def api_block(config):
     raise AuditFailed("invalid_api_location")
 
 
-def inspect_proxy(config):
+def blocks(config, pattern):
+    """Return balanced blocks for the small NGINX forms this deployment uses."""
+    config = re.sub(r"#[^\n]*", "", config)
+    found = []
+    for match in re.finditer(pattern, config):
+        depth = 1
+        for index in range(match.end(), len(config)):
+            depth += (config[index] == "{") - (config[index] == "}")
+            if depth == 0:
+                found.append(config[match.end() : index])
+                break
+        else:
+            raise AuditFailed("unbalanced_proxy_config")
+    return found
+
+
+def host_sanitizes_proto(config):
+    # Only the site's actual loopback proxy locations can establish trust;
+    # a matching directive in another hostname/location is insufficient.
+    routes = []
+    for server in blocks(config, r"\bserver\s*\{"):
+        names = re.findall(r"server_name\s+([^;]+);", server)
+        if not any("shahabfintech.ir" in value.split() for value in names):
+            continue
+        for location in blocks(server, r"\blocation\s+(?:/|/api/v1/)\s*\{"):
+            if re.search(r"proxy_pass\s+https?://127\.0\.0\.1:(?:8080|8443)/?\s*;", location):
+                values = re.findall(r"proxy_set_header\s+X-Forwarded-Proto\s+([^;]+);", location, re.I)
+                routes.append(values == ["https"])
+    return bool(routes) and all(routes)
+
+
+def inspect_proxy(config, host_config=None):
     block = api_block(config)
-    for header, value in (("X-Forwarded-Proto", "$scheme"), ("X-Forwarded-For", "$remote_addr")):
-        values = re.findall(r"proxy_set_header\s+" + header + r"\s+([^;]+);", block, re.I)
-        check("proxy_overwrites_" + header.lower(), values == [value])
+    proto = re.findall(r"proxy_set_header\s+X-Forwarded-Proto\s+([^;]+);", block, re.I)
+    if proto == ["$api_forwarded_proto"]:
+        maps = re.findall(r"map\s+\$http_x_forwarded_proto\s+\$api_forwarded_proto\s*\{([^}]*)\}", config)
+        valid_map = (
+            len(maps) == 1
+            and re.fullmatch(r'\s*""\s+\$scheme;\s*default\s+\$http_x_forwarded_proto;\s*', maps[0]) is not None
+        )
+        check("forwarded_proto_map_defined", valid_map)
+        check("host_overwrites_proto_for_site", host_config is not None and host_sanitizes_proto(host_config))
+    else:
+        check("proxy_overwrites_x-forwarded-proto", proto == ["$scheme"])
+    values = re.findall(r"proxy_set_header\s+X-Forwarded-For\s+([^;]+);", block, re.I)
+    check("proxy_overwrites_x-forwarded-for", values == ["$remote_addr"])
     check("proxy_api_internal", bool(re.search(r"proxy_pass\s+http://api:8000\s*;", block)))
     for name, limit in (("connect", 10), ("read", 60), ("send", 60)):
         values = re.findall(r"proxy_" + name + r"_timeout\s+([0-9]+)s;", block)
@@ -103,7 +144,9 @@ def inspect_containers():
     index = args.index("--forwarded-allow-ips")
     allowed = set(args[index + 1].split(","))
     check("api_trusts_only_frontend_peer", bool(allowed) and allowed <= peers and "*" not in allowed)
-    inspect_proxy(command("docker", "exec", "shahab-prod-frontend-1", "nginx", "-T", "-c", "/tmp/vm.conf"))
+    config = command("docker", "exec", "shahab-prod-frontend-1", "nginx", "-T", "-c", "/tmp/vm.conf")
+    host_config = command("nginx", "-T") if "$api_forwarded_proto" in api_block(config) else None
+    inspect_proxy(config, host_config)
     # Check host listeners as well as Docker publish rules; no process details are printed.
     listeners = command("ss", "-H", "-lnt")
     unsafe = []

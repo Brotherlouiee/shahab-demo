@@ -26,6 +26,38 @@ class HostVerifierTests(unittest.TestCase):
             with self.subTest(change=new), redirect_stdout(io.StringIO()), self.assertRaises(audit.AuditFailed):
                 audit.inspect_proxy(config.replace(old, new))
 
+    def test_mapped_proto_requires_sanitizing_site_proxy(self):
+        config = (ROOT / "deploy/vm/nginx.conf.template").read_text()
+        config = config.replace(
+            "proxy_set_header X-Forwarded-Proto $scheme;", "proxy_set_header X-Forwarded-Proto $api_forwarded_proto;"
+        )
+        config += ' map $http_x_forwarded_proto $api_forwarded_proto { "" $scheme; default $http_x_forwarded_proto; }'
+        host = (
+            "server { listen 80; server_name shahabfintech.ir; location / { "
+            "proxy_pass https://127.0.0.1:8443; proxy_set_header X-Forwarded-Proto https; } }"
+        )
+        with redirect_stdout(io.StringIO()):
+            audit.inspect_proxy(config, host)
+        for unsafe in (
+            None,
+            host.replace(" https;", " $http_x_forwarded_proto;"),
+            host.replace("server_name shahabfintech.ir;", "server_name unrelated.invalid;"),
+        ):
+            with self.subTest(host=unsafe), redirect_stdout(io.StringIO()), self.assertRaises(audit.AuditFailed):
+                audit.inspect_proxy(config, unsafe)
+        with redirect_stdout(io.StringIO()), self.assertRaisesRegex(audit.AuditFailed, "map_defined"):
+            audit.inspect_proxy(config.replace('"" $scheme;', '"" $http_x_forwarded_proto;'), host)
+
+    def test_sanitizing_unrelated_route_does_not_authorize_api(self):
+        host = (
+            "server { server_name shahabfintech.ir; "
+            "location /unrelated { proxy_pass https://127.0.0.1:8443; "
+            "proxy_set_header X-Forwarded-Proto https; } "
+            "location /api/v1/ { proxy_pass https://127.0.0.1:8443; "
+            "proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto; } }"
+        )
+        self.assertFalse(audit.host_sanitizes_proto(host))
+
     def test_unrelated_location_cannot_supply_missing_api_directive(self):
         config = (ROOT / "deploy/vm/nginx.conf.template").read_text()
         config = config.replace("proxy_set_header X-Forwarded-For $remote_addr;", "")
