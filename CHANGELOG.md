@@ -1,5 +1,7 @@
 # Changelog
 
+- شواهد US-11.T05: backup موجود #150 با GPG AES256 رمز شد؛ decrypt و SHA-256 برابر اصل بود و restore ایزوله PostgreSQL 16 موفق شد (revision ff11b02f0001، ۲۰ نشست). آزمون‌های cleanup/hidden/archived و rollback/retry/هم‌زمانی از suite PostgreSQL موجود ارجاع شدند؛ production تغییر نکرد. ثبت زمان restore و تعیین هدف RPO/RTO برای دامنه فعلی لازم نیست و به آینده موکول شد؛ بار گسترده و scheduler عملیاتی نیز موکول‌اند. [checkpoint](docs/progress/us-11-t05.md)
+
 - بررسی عملیاتی محدود US-11.T04: لاگ‌های پالایش‌شدهٔ API و NGINX، ۱۵ پاسخ 503 درخواست OTP با علت نامشخص به‌دلیل در دسترس نبودن لاگ کانتینر قبلی، و سلامت فعلی HTTPS=200 ثبت شد؛ هیچ تنظیم production تغییر نکرد. [checkpoint](docs/progress/us-11-t04.md)
 
 All notable changes to this project are documented in this file.
