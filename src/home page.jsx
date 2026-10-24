@@ -356,7 +356,9 @@ function replaceActiveRecommendationHistoryState(sessionId, result, selectedComp
       shahabRecommendation: {
         ...(sessionId ? { sessionId } : {}),
         ...(historyId ? { historyId } : {}),
-        selectedComparisonPlanIds: selectedComparisonPlanIds || active?.selectedComparisonPlanIds || [],
+        ...((selectedComparisonPlanIds || active?.selectedComparisonPlanIds || []).length
+          ? { selectedComparisonPlanIds: selectedComparisonPlanIds || active.selectedComparisonPlanIds }
+          : {}),
       },
     },
     "",
@@ -1569,7 +1571,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const previousQuestionButtonText = isPersonalStageQuestion
     ? "بازگشت به مرحله قبل"
     : "بازگشت به سوال قبل";
-  const historyId = recommendationResult?.historyId || initialRecommendationHistory?.historyId || getHistoryIdFromLocation();
+  const historyId = getHistoryIdFromLocation()
+    || (!initialRecommendationHistory?.sessionId ? initialRecommendationHistory?.historyId : null)
+    || null;
   const routeBasePath = isAnalyzingLoans
     ? "/analysis"
     : loanResultView === "results"
@@ -2023,6 +2027,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   function handleLoanCompareSubmit(selectedPlanIds) {
     setSelectedComparisonPlanIds(selectedPlanIds);
+    replaceActiveRecommendationHistoryState(questionnaireSessionId, recommendationResult, selectedPlanIds);
     setLoanResultView("compare-result");
   }
 
