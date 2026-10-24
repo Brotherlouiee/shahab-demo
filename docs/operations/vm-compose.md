@@ -165,3 +165,6 @@ cookie/proof، رد Origin و هدر جعلی و دوام نشست پس از res
 برای شش GET مجاز بدون login/SMS از ابزار موجود `authorized_staging_security_smoke.py --authorized-test-origin https://shahabfintech.ir --include-exposure-checks` استفاده شود؛ فایل از commit ثابت دریافت و hash بررسی شود. ابزار body/secret/cookie چاپ نمی‌کند و profile/history را تغییر نمی‌دهد. نتیجه را با scan/headers/cookie شواهد قبلی مخلوط نکنید.
 
 استقرار frontend v0.1.2 هنوز inventory قدیمی brotli-libs=1.2.0-r1 دارد؛ merge #157 به‌تنهایی آن را اصلاح نکرده است. نسخهٔ اصلاح‌شده از pipeline موجود منتشر، digest ثبت و با backup Compose و حفظ env/volume روی VM جایگزین شود؛ روی VM build، migration، import یا reset انجام نشود. کلید OTP قبلی باید حفظ شود. وضعیت و شاهد رفع در checkpoint T03 ثبت خواهد شد؛ تا آن زمان high شناخته‌شده باز است.
+
+
+شاهد اجرای اصلاح T03، ۲۰۲۶-۱۰-۲۴: نسخهٔ v0.1.3 از اجرای انتشار 40096211625 با دو scan صفر یافته روی VM مستقر شد؛ healthy دو سرویس، HTTPS health=200 و نسخه‌های brotli-libs=1.2.1-r0 و musl/musl-utils=1.2.6-r3 از خروجی مالک تأیید شدند. digestهای دقیق و روش بازگشت محدود به Compose در [checkpoint T03](../progress/us-11-t03.md) ثبت‌اند؛ بند قبلی دربارهٔ بازبودن استقرار، سابقهٔ پیش از این اقدام است. دیتابیس، Redis و تنظیمات OTP حفظ شدند.

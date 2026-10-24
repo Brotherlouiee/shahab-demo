@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-- بررسی محدود امنیت (US-11.T03): توسعهٔ اختیاری ابزار خواندنی موجود از چهار به شش GET برای artifactهای تنظیمات/Git، تشخیص SPA fallback و پالایش خطای شبکه؛ ثبت شواهد SAST/SCA و candidate پاک و بازماندن رفع عملیاتی brotli در image مستقر. اجرای شش GET روی VM با findings=[] موفق شد؛ استقرار اصلاح امنیتی هنوز باز است؛ بدون تغییر runtime/API/DB یا اسکن گسترده.
+- بررسی محدود امنیت (US-11.T03): توسعهٔ اختیاری ابزار خواندنی موجود از چهار به شش GET برای artifactهای تنظیمات/Git، تشخیص SPA fallback و پالایش خطای شبکه؛ ثبت شواهد SAST/SCA و candidate پاک و بازماندن رفع عملیاتی brotli در image مستقر. اجرای شش GET روی VM با findings=[] موفق شد؛ استقرار v0.1.3 و رفع HIGH با brotli-libs=1.2.1-r0 و musl/musl-utils=1.2.6-r3، healthy دو image و HTTPS health=200 از خروجی مالک تأیید شد؛ بدون تغییر کد runtime/API/DB یا اسکن گسترده.
 
 - راستی‌آزمایی استقرار (US-11.T02H): ابزار خواندنی محدود برای پورت‌ها، trust/config پراکسی و شش پاسخ HTTP مربوط به TLS، cache و Origin/CORS، همراه هشت تست آفلاین و ارجاع شواهد cookie واقعی T06؛ اجرای مالک روی VM با شش درخواست HTTP و صفر SMS موفق شد. بدون تغییر runtime، تنظیمات، داده، image، restart یا SMS.
 
