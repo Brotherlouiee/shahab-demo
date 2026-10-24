@@ -5509,6 +5509,12 @@ right: 16px;
   font-weight: 900;
 }
 
+.hp-compare-result-bottom-bar button:disabled {
+  background: #8c8c8c;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
 .hp-ai-analysis-page {
   position: relative;
   width: min(100vw, 391px);

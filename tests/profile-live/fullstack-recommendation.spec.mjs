@@ -146,7 +146,10 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   await expect(page.getByRole("button", { name: /مقایسه کن/ })).toBeEnabled();
   await page.getByRole("button", { name: /مقایسه کن/ }).click();
   await expect(page.locator(".hp-compare-result-card")).toHaveCount(2);
-  await page.getByRole("button", { name: "تحلیل با هوش مصنوعی", exact: true }).click();
-  await expect(page.locator(".hp-ai-analysis-message")).toContainText("provider خارجی فعال نیست؛ تحلیل ساختگی نمایش داده نمی‌شود.");
-  await expect(page.getByRole("button", { name: "ارسال", exact: true })).toBeDisabled();
+  const aiCompare = page.getByRole("button", { name: "تحلیل با هوش مصنوعی", exact: true });
+  const comparisonUrl = page.url();
+  await expect(aiCompare).toBeDisabled();
+  await expect(aiCompare).toHaveCSS("background-color", "rgb(140, 140, 140)");
+  await aiCompare.evaluate(button => button.click());
+  await expect(page).toHaveURL(comparisonUrl);
 });
