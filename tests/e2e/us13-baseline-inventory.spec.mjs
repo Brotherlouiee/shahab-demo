@@ -265,6 +265,9 @@ for (const viewport of heroViewports) {
           const captures = [];
           const capture = async (state) => {
             await expect(hero).toBeVisible();
+            // A click leaves the pointer over a menu option; move it to the
+            // same neutral viewport corner before recording :hover styles.
+            await page.mouse.move(viewport.width - 1, viewport.height - 1);
             const snapshot = await page.evaluate(({ selectors, properties }) => ({
               elements: selectors.map((selector) => ({
                 selector,
