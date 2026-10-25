@@ -74,7 +74,7 @@ test("halves the history-detail header-to-card gap", async ({ page }) => {
     return card.top - header.bottom;
   });
 
-  expect(gap).toBe(12);
+  expect(gap).toBe(8);
 });
 
 test("keeps a visible loading state until the approved-detail response arrives", async ({ page }) => {

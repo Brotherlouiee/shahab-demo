@@ -5043,7 +5043,7 @@ right: 16px;
 .hp-loan-details-page .hp-loan-result-card {
   width: 346px;
   max-width: calc(100vw - 44px);
-  margin: 12px auto 28px;
+  margin: 8px auto 28px;
   border-color: #0b63ff;
   padding-bottom: 14px;
 }
