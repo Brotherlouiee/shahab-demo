@@ -67,6 +67,8 @@ test("uses an eight-pixel history-detail header-to-card gap", async ({ page }) =
   await page.route("**/api/v1/loans/**", (route) => route.fulfill({ json: approvedDetail }));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/loan-details?from=history&loanId=loan-approved");
+  await expect(page.locator(".hp-loan-details-page > .hp-account-header")).toBeVisible();
+  await expect(page.locator(".hp-loan-details-page .hp-loan-result-card")).toBeVisible();
 
   const gap = await page.evaluate(() => {
     const header = document.querySelector(".hp-loan-details-page > .hp-account-header").getBoundingClientRect();
