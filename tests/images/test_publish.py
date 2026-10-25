@@ -17,6 +17,7 @@ from publish import (
     request,
     validate_environment,
     validate_review,
+    wait_for_referrer,
 )
 
 SHA = "a" * 40
@@ -24,6 +25,53 @@ NOW = datetime.now(UTC)
 
 
 class PublicationTests(unittest.TestCase):
+    def test_referrer_discovery_retries_bounded_registry_propagation(self):
+        attachment = "sha256:" + "a" * 64
+
+        class FakeRegistry:
+            responses = [
+                json.dumps({"manifests": []}).encode(),
+                None,
+                json.dumps({"manifests": [{"digest": attachment}]}).encode(),
+            ]
+            calls = 0
+
+            def get(self, repo, path, missing=False):
+                self.calls += 1
+                return self.responses.pop(0)
+
+        registry = FakeRegistry()
+        sleeps = []
+        wait_for_referrer(
+            registry,
+            "owner/api",
+            "sha256:" + "b" * 64,
+            attachment,
+            attempts=3,
+            interval=2,
+            sleep=sleeps.append,
+        )
+        self.assertEqual(registry.calls, 3)
+        self.assertEqual(sleeps, [2, 2])
+
+    def test_referrer_discovery_fails_closed_after_bounded_retries(self):
+        class FakeRegistry:
+            def get(self, repo, path, missing=False):
+                return json.dumps({"manifests": []}).encode()
+
+        sleeps = []
+        with self.assertRaisesRegex(ValueError, "not discoverable"):
+            wait_for_referrer(
+                FakeRegistry(),
+                "owner/api",
+                "sha256:" + "b" * 64,
+                "sha256:" + "a" * 64,
+                attempts=3,
+                interval=2,
+                sleep=sleeps.append,
+            )
+        self.assertEqual(sleeps, [2, 2])
+
     def test_environment_requires_owner_and_only_main(self):
         environment = {
             "protection_rules": [{"type": "required_reviewers", "reviewers": [{"reviewer": {"login": "Owner"}}]}],
@@ -224,7 +272,7 @@ class PublicationTests(unittest.TestCase):
                     raise ValueError("Second publication failed")
                 return "sha256:" + "3" * 64
 
-            def get(self, repo, path):
+            def get(self, repo, path, missing=False):
                 return self.blobs[path]
 
         with tempfile.TemporaryDirectory() as temp:
@@ -232,6 +280,10 @@ class PublicationTests(unittest.TestCase):
             (folder / "images").mkdir()
             registry = FakeRegistry()
             journal = {"images": [], "status": "blocked"}
+            snapshots = []
+
+            def save_snapshot():
+                snapshots.append(json.loads(json.dumps(journal)))
 
             def run(*args):
                 if args[:2] != ("oras", "attach"):
@@ -247,12 +299,20 @@ class PublicationTests(unittest.TestCase):
 
             images = [{"imageId": "sha256:" + c * 64, "name": n} for n, c in (("api", "1"), ("web", "2"))]
             builds = [{"buildx.build.provenance": {"materials": []}}] * 2
-            publish_images(registry, images, builds, SHA, "v1.0.0", folder, journal, lambda: None, run)
+            publish_images(registry, images, builds, SHA, "v1.0.0", folder, journal, save_snapshot, run)
             self.assertEqual(journal["status"], "complete")
             self.assertEqual(
                 [item["repository"] for item in journal["images"]], ["owner/shahab-backend", "owner/shahab-frontend"]
             )
             self.assertEqual([i["status"] for i in journal["images"]], ["verified", "verified"])
+            self.assertTrue(
+                any(
+                    item.get("status") == "incomplete"
+                    and item.get("images", [{}])[0].get("status") == "evidence-attached"
+                    and item["images"][0].get("evidenceDigest")
+                    for item in snapshots
+                )
+            )
             registry.fail_second = True
             journal = {"images": [], "status": "blocked"}
             with self.assertRaises(ValueError):
