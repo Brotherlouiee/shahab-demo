@@ -1,8 +1,8 @@
 # Standalone VM stack: never merge with the development Compose file.
 name: shahab-prod
 
-x-api-image: &api-image docker.io/shahab2026/shahab-backend@sha256:7e9366e8ad69aaba5fcbba702d0cbd60a935c3816daf89841b490f53bb73fb7e
-x-web-image: &web-image docker.io/shahab2026/shahab-frontend@sha256:ad0129b5cdc9998afd838ff8ab11b9dcdc5b5ad946f13b39f75f47589110089a
+x-api-image: &api-image docker.io/shahab2026/shahab-backend@sha256:ed8467348eaa6faea289193e83de14900dca505009ba603b0ac75873d24363f2
+x-web-image: &web-image docker.io/shahab2026/shahab-frontend@sha256:3466774fcb9aaf71e469d9321df1e6a8f0d1d06684c5ee7483c3196d1a0f6ebd
 
 services:
   postgres:
