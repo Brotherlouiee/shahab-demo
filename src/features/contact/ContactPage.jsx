@@ -10,10 +10,10 @@ import "./ContactPage.css";
 const linkedinUrl = "https://www.linkedin.com/company/shahabfintech";
 const enamadUrl = "https://trustseal.enamad.ir/?id=8316058&Code=YCgntg1cyA41RMpSVRpI0XieeveRCHnk";
 const socialNetworks = [
-  { label: "لینکدین", image: linkedinImage, href: linkedinUrl },
-  { label: "تلگرام", image: telegramImage },
-  { label: "اینستاگرام", image: instagramImage },
-  { label: "ایکس", image: xImage },
+  { label: "لینکدین", image: linkedinImage, iconClass: "linkedin", href: linkedinUrl },
+  { label: "تلگرام", image: telegramImage, iconClass: "telegram" },
+  { label: "اینستاگرام", image: instagramImage, iconClass: "instagram" },
+  { label: "ایکس", image: xImage, iconClass: "x" },
 ];
 
 function ContactDetails() {
@@ -34,15 +34,15 @@ function SocialNetworks() {
     <section className="sh-contact-card sh-contact-social" aria-label="شبکه‌های اجتماعی">
       <img className="sh-contact-illustration" src={megaphoneImage} width="1536" height="1024" alt="" />
       <ul>
-        {socialNetworks.map(({ label, image, href }) => (
+        {socialNetworks.map(({ label, image, iconClass, href }) => (
           <li key={label}>
             {href ? (
               <a className="sh-contact-network" href={href} target="_blank" rel="noopener noreferrer">
-                <span>{label}</span><img src={image} alt="" width="40" height="40" />
+                <span>{label}</span><img className={`sh-contact-network-icon sh-contact-network-icon--${iconClass}`} src={image} alt="" width="40" height="40" />
               </a>
             ) : (
               <button className="sh-contact-network" type="button" disabled aria-label={`${label}؛ صفحه هنوز ایجاد نشده است`}>
-                <span>{label}</span><img src={image} alt="" width="40" height="40" />
+                <span>{label}</span><img className={`sh-contact-network-icon sh-contact-network-icon--${iconClass}`} src={image} alt="" width="40" height="40" />
               </button>
             )}
           </li>

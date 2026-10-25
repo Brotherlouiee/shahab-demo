@@ -24,7 +24,10 @@
 .sh-contact-social li { position: relative; margin: 0; padding: 0; }
 .sh-contact-social li:not(:last-child)::after { content: ""; position: absolute; bottom: 0; left: 40px; right: 40px; height: 1px; background: #aaa; }
 .sh-contact-network { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 50px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #000; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
-.sh-contact-network img { display: block; width: 40px; height: 40px; object-fit: contain; }
+.sh-contact-network .sh-contact-network-icon { display: block; width: 40px; height: 40px; object-fit: contain; }
+.sh-contact-network-icon--linkedin { transform: scale(1.05, 1.08); }
+.sh-contact-network-icon--instagram { transform: scale(1.03); }
+.sh-contact-network-icon--x { transform: scale(1.005, 1.04); }
 .sh-contact-network:disabled { color: #000; opacity: 1; cursor: default; }
 .sh-contact-enamad { display: block; width: 210px; margin: 32px auto 0; }
 .sh-contact-enamad img { display: block; width: 100%; height: auto; }

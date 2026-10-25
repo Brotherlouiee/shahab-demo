@@ -63,6 +63,20 @@ test("keeps history-detail back and brand controls inside the shared page margin
   }
 });
 
+test("halves the history-detail header-to-card gap", async ({ page }) => {
+  await page.route("**/api/v1/loans/**", (route) => route.fulfill({ json: approvedDetail }));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/loan-details?from=history&loanId=loan-approved");
+
+  const gap = await page.evaluate(() => {
+    const header = document.querySelector(".hp-loan-details-page > .hp-account-header").getBoundingClientRect();
+    const card = document.querySelector(".hp-loan-details-page .hp-loan-result-card").getBoundingClientRect();
+    return card.top - header.bottom;
+  });
+
+  expect(gap).toBe(12);
+});
+
 test("keeps a visible loading state until the approved-detail response arrives", async ({ page }) => {
   let releaseResponse;
   await page.route("**/api/v1/loans/**", (route) => new Promise((resolve) => {

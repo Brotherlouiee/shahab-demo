@@ -34,6 +34,30 @@ for (const viewport of [{ width: 390, height: 974 }, { width: 1440, height: 1000
     await expect(page.locator(".sh-contact-details")).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
     await page.locator(".sh-contact-page img").evaluateAll(images => Promise.all(images.map(image => image.decode())));
+    const iconBounds = await page.locator(".sh-contact-network-icon").evaluateAll((images) => images.map((image) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      context.drawImage(image, 0, 0);
+      const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+      let left = canvas.width; let top = canvas.height; let right = 0; let bottom = 0;
+      for (let y = 0; y < canvas.height; y += 1) {
+        for (let x = 0; x < canvas.width; x += 1) {
+          if (pixels[(y * canvas.width + x) * 4 + 3] > 0) {
+            left = Math.min(left, x); top = Math.min(top, y);
+            right = Math.max(right, x + 1); bottom = Math.max(bottom, y + 1);
+          }
+        }
+      }
+      const fit = Math.min(40 / canvas.width, 40 / canvas.height);
+      const transform = getComputedStyle(image).transform;
+      const matrix = transform === "none" ? new DOMMatrix() : new DOMMatrix(transform);
+      return { width: (right - left) * fit * Math.abs(matrix.a), height: (bottom - top) * fit * Math.abs(matrix.d) };
+    }));
+    expect(iconBounds).toHaveLength(4);
+    expect(Math.max(...iconBounds.map(({ width }) => width)) - Math.min(...iconBounds.map(({ width }) => width))).toBeLessThanOrEqual(1.5);
+    expect(Math.max(...iconBounds.map(({ height }) => height)) - Math.min(...iconBounds.map(({ height }) => height))).toBeLessThanOrEqual(1.5);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const screenshot = await page.screenshot({ fullPage: true, animations: "disabled" });
     await info.attach(`contact-${viewport.width}`, { body: screenshot, contentType: "image/png" });
