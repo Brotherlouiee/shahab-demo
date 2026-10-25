@@ -63,7 +63,7 @@ test("keeps history-detail back and brand controls inside the shared page margin
   }
 });
 
-test("halves the history-detail header-to-card gap", async ({ page }) => {
+test("uses an eight-pixel history-detail header-to-card gap", async ({ page }) => {
   await page.route("**/api/v1/loans/**", (route) => route.fulfill({ json: approvedDetail }));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/loan-details?from=history&loanId=loan-approved");
