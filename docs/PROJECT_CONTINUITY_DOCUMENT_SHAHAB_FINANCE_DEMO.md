@@ -1,10 +1,47 @@
-# Project Continuity Document
+# سند تداوم پروژهٔ شهاب
 
-> **Document version:** 15.0
-> **Prepared:** 2026-10-13
-> **Verified main:** `f1f7184fb2b5192747b8422ba5e091cd95274f08`, merge of PR #123; GitHub Actions quality/security on that push succeeded.
-> **Next planned task:** `US-13.T01` (baseline and inventory only), **not started**.
-> **Nature:** documentation handoff, subordinate to `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md`, Golden Rules, `docs/TASK_EXECUTION_PROTOCOL.md`, `$safe-git-ide-collaboration` and approved ADRs.
+> **نسخهٔ سند:** ۱۶٫۰
+> **تاریخ آماده‌سازی:** ۲۰۲۶-۱۰-۲۵
+> **main تأییدشده:** `9cdb048c81a1ff369da7fd43a2a006ebc0c5dcb6`، مرج PR #169؛ چهار workflow مربوط به commit آن موفق‌اند.
+> **گام بعدی:** تکمیل characterization اختصاصی Hero در `US-13.T01`؛ پس از ثبت شاهد، `US-13.T02.06` و بعد از مرج آن `US-13.T03.06`.
+> **ماهیت:** این handoff وضعیت جاری را ثبت می‌کند و تابع سند جامع، قوانین طلایی، پروتکل اجرا، مهارت همکاری امن Git/IDE و ADRهای مصوب است.
+
+## وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵
+
+این بخش تازه، وضعیت و گام بعدی را بر بخش‌های قدیمی‌تر همین سند مقدم می‌کند؛ بخش‌های قبلی برای تاریخچه حفظ شده‌اند. مرجع شناسه، وابستگی و معیار پذیرش همچنان [سند جامع پروژه](SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md) است. این به‌روزرسانی فقط مستندات تداوم را تغییر می‌دهد و پایان User Story، استقرار production یا مجوز merge/deploy برای تغییرات آینده محسوب نمی‌شود.
+
+### اصلاحات اخیر فرانت و جریان کاربر
+
+- [PR #164](https://github.com/Brotherlouiee/shahab-demo/pull/164) مرج شد: حاشیهٔ هدر صفحهٔ جزئیات سوابق اصلاح شد تا لوگو و فلش بازگشت از لبه‌ها فاصلهٔ یکسان داشته باشند؛ آزمون مرورگر mobile و desktop افزوده شد.
+- [PR #165](https://github.com/Brotherlouiee/shahab-demo/pull/165) مرج شد: دکمهٔ تحلیل هوش مصنوعی در صفحهٔ مقایسه غیرفعال شد، متن گزینهٔ پرسش دوم اصلاح شد، مقایسه از سابقه به همان سابقه متصل شد، و بازیابی مسیر/پاسخ‌ها پس از refresh حفظ شد. تصویر خالی بشقاب‌پرنده نیز بدون تغییر پیکسل‌ها ۸٫۶٪ کم‌حجم شد.
+- [PR #166](https://github.com/Brotherlouiee/shahab-demo/pull/166) مرج شد: پیام خطای گذرای refresh تا زمان بازیابی snapshot با حالت بارگذاری جایگزین شد.
+- [PR #167](https://github.com/Brotherlouiee/shahab-demo/pull/167) مرج شد: فاصلهٔ کارت جزئیات تا هدر به ۱۲ پیکسل رسید و اندازهٔ بصری آیکن‌های شبکه‌های اجتماعی صفحهٔ تماس با ما یکسان شد.
+- [PR #168](https://github.com/Brotherlouiee/shahab-demo/pull/168) مقدار فاصله را به ۸ پیکسل رساند؛ این مقدار بعداً در PR #169 جایگزین شد.
+- [PR #169](https://github.com/Brotherlouiee/shahab-demo/pull/169) مرج شد: فاصلهٔ کارت تا هدر اکنون ۶ پیکسل است؛ آزمون مرورگر همین مقدار دقیق را اندازه می‌گیرد و CHANGELOG هم به‌روز است.
+
+### وضعیت آزمون و انتشار
+
+- چهار workflow اجرای PR #169 روی commit `73f951957919e35e55cf38b1d5e9bb02debb2be9` موفق‌اند: [Quality gates](https://github.com/Brotherlouiee/shahab-demo/actions/runs/40175227129)، [Security](https://github.com/Brotherlouiee/shahab-demo/actions/runs/40175227082)، [baseline فرانت](https://github.com/Brotherlouiee/shahab-demo/actions/runs/40175227204) و [Container build contract](https://github.com/Brotherlouiee/shahab-demo/actions/runs/40175227083).
+- merge PRها به‌تنهایی اثبات استقرار production نیست؛ در این به‌روزرسانی ساخت یا انتشار ایمیج جدید، استقرار سرور، یا آزمون سایت زنده ادعا نمی‌شود.
+
+### وضعیت US-13 و گام بعدی
+
+- `US-13.T01` inventory و baseline اولیه دارد؛ اما برای هر بخش فعال باید characterization مسیر، state، viewport و تعامل/شبکهٔ همان بخش پیش از استخراج کامل شود. برای Hero، این characterization هنوز گام لازم بعدی است.
+- `US-13.T02.01` استخراج AboutPage مرج شده و `US-13.T03.01` تصمیم آزموده‌شدهٔ `no-move` برای CSS مشترک دارد.
+- ردیف‌های `US-13.T02.02` تا `T02.05` و جفت‌های CSS متناظرشان در محصول فعلی «عدم نیاز به انتقال» هستند؛ این به معنی حذف کد نیست و حذف احتمالی فقط در T04 با شواهد مجاز است.
+- اولین ردیف فعال بعدی Hero است: ابتدا characterization در T01، سپس استخراج React در `US-13.T02.06`؛ انتقال یا تصمیم `no-move` برای CSS در `US-13.T03.06` پس از مرج React بررسی می‌شود.
+- ۲۰ جفت شناسه به معنی ۴۰ انتقال یا ۴۰ PR نیست. طبق رجیستری فعلی، استخراج React و بررسی CSS هر بخش جدا و به‌ترتیب انجام می‌شوند؛ ادغام این دو در یک PR نیازمند اصلاح و تصویب قبلی سند جامع است.
+- پرسشنامهٔ بزرگ در رجیستری به هفت مسئولیت کوچک تقسیم شده است؛ این تقسیم فقط برنامه است و اجرای آن باید طبق ترتیب و پیش‌نیازهای همان سند انجام شود.
+
+### مرزها و نقاط باز
+
+- هیچ‌یک از PRهای اخیر UI/API، به‌تنهایی پایان US-13 یا پذیرش انتشار نهایی را ثابت نمی‌کنند.
+- گیت‌های عملیاتی/آنلاینِ بازِ US-09، US-11 و US-12 در جدول‌های سند جامع پیگیری می‌شوند؛ این handoff آن‌ها را حذف یا Done اعلام نمی‌کند.
+- پیش از شروع هر زیرتسک، شاخه و تغییرات محلی بررسی و کار از main تازه آغاز شود؛ baseline یا آزمون موجود برای پنهان‌کردن اختلاف تغییر نکند. پس از هر استخراج React، CI و بازبینی همان PR لازم است و CSS هم‌شماره فقط در گام بعدی بررسی می‌شود.
+
+---
+
+
 
 ## 0E. Handoff v15 — verified merged state and owner-mandated frontend preservation (2026-10-13)
 
