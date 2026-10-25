@@ -1,5 +1,7 @@
 # Changelog
 
+- آزمون characterization خط مبنای Hero برای انتخاب مبلغ، focus/blur، پیام eligibility و ناوبری افزوده شد؛ نتیجهٔ pixel/behavior/network روی baseline منجمد با CI بررسی می‌شود. هیچ تغییر محصولی انجام نشد. [checkpoint](docs/progress/us-13-t01.md)
+
 - اصلاح فاصلهٔ افقی لوگو و فلش بازگشت در هدر صفحهٔ جزئیات سوابق؛ آزمون مرورگری برای viewportهای موبایل و دسکتاپ افزوده شد. [جزئیات](tests/e2e/loan-details.spec.mjs)
 
 - سند جامع اکنون صف شش باگ گزارش‌شده را با ترتیب فرانت‌اند سپس جریان/API، معیار پذیرش و مرز تشخیص علت ثبت می‌کند؛ رجیستری و شناسه‌های US-13 بدون تغییر ماندند. این commit فقط مستندات است و رفع باگ‌ها هنوز انجام نشده است. [سند جامع](docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md)

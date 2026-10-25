@@ -180,3 +180,217 @@ test("T03.01: About and shared header computed CSS stays identical to frozen pre
     await browser.close();
   }
 });
+
+// T01 Hero gate: characterize the existing home flow against the immutable
+// pre-refactor checkout. The test injects no application code or persisted data.
+const heroViewports = [
+  { width: 390, height: 844 },
+  { width: 430, height: 932 },
+  { width: 1440, height: 900 },
+  // Both sides of the Hero's active 420px, 700px, and 900px CSS breakpoints.
+  { width: 419, height: 932 },
+  { width: 421, height: 932 },
+  { width: 699, height: 932 },
+  { width: 701, height: 932 },
+  { width: 899, height: 932 },
+  { width: 901, height: 932 },
+];
+
+const heroSelectors = [
+  ".hp-hero",
+  ".hp-hero h1",
+  ".hp-hero h1 em",
+  ".hp-hero > p",
+  ".hp-hero-form",
+  ".hp-submit",
+  ".hp-select-wrap",
+  ".hp-select-trigger",
+  ".hp-select-menu",
+  ".hp-select-menu button",
+  ".hp-eligibility-message",
+  ".hp-eligibility-message p",
+  ".hp-eligibility-message button",
+];
+
+const heroStyleProperties = [
+  "display", "position", "box-sizing", "width", "height", "min-height",
+  "padding", "margin", "border", "border-radius", "background-color", "color",
+  "font-family", "font-size", "font-weight", "line-height", "letter-spacing",
+  "text-align", "direction", "flex-direction", "align-items", "justify-content",
+  "gap", "overflow", "transform", "opacity", "visibility", "box-shadow", "z-index",
+];
+
+for (const viewport of heroViewports) {
+  test(`T01 Hero interaction, geometry, pixels and network match frozen baseline at ${viewport.width}px`, async ({ baseURL }, info) => {
+    const browser = await chromium.launch({
+      ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
+      args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
+    });
+    const evidence = [];
+    try {
+      for (const [label, origin] of [["baseline", reference], ["candidate", baseURL]]) {
+        const context = await browser.newContext({ viewport, deviceScaleFactor: 1, locale: "fa-IR" });
+        try {
+          const output = `test-results/us13-t01/hero-${viewport.width}`;
+          await mkdir(output, { recursive: true });
+          await context.addInitScript(() => {
+            const events = [];
+            for (const type of ["click", "submit", "focusin", "focusout"]) {
+              document.addEventListener(type, (event) => {
+                if (!event.target.closest?.(".hp-hero")) return;
+                events.push({
+                  type,
+                  tag: event.target.tagName,
+                  className: event.target.getAttribute("class") || "",
+                  text: (event.target.innerText || "").trim().replace(/\s+/g, " ").slice(0, 100),
+                });
+              }, true);
+            }
+            window.__us13HeroEvents = events;
+          });
+          const page = await context.newPage();
+          const apiRequests = [];
+          page.on("request", (request) => {
+            const url = new URL(request.url());
+            if (url.pathname.startsWith("/api/")) {
+              apiRequests.push({ method: request.method(), path: url.pathname });
+            }
+          });
+          await page.route(/https:\/\/fonts\.(googleapis|gstatic)\.com\//, (route) => route.abort());
+          await page.goto(`${origin}/`);
+          const hero = page.locator(".hp-hero");
+          await expect(hero).toBeVisible();
+          await page.evaluate(() => document.fonts.ready);
+
+          const captures = [];
+          const capture = async (state) => {
+            await expect(hero).toBeVisible();
+            const snapshot = await page.evaluate(({ selectors, properties }) => ({
+              elements: selectors.map((selector) => ({
+                selector,
+                elements: [...document.querySelectorAll(selector)].map((element) => {
+                  const style = getComputedStyle(element);
+                  const rect = element.getBoundingClientRect();
+                  return {
+                    text: element.innerText || "",
+                    attributes: {
+                      ariaExpanded: element.getAttribute("aria-expanded"),
+                      ariaDisabled: element.getAttribute("aria-disabled"),
+                      disabled: Boolean(element.disabled),
+                      type: element.getAttribute("type"),
+                    },
+                    css: Object.fromEntries(properties.map((name) => [name, style.getPropertyValue(name)])),
+                    rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+                  };
+                }),
+              })),
+              activeElement: document.activeElement?.getAttribute("class") || document.activeElement?.tagName || "",
+              path: `${window.location.pathname}${window.location.search}`,
+            }), { selectors: heroSelectors, properties: heroStyleProperties });
+            const screenshot = await hero.screenshot({ animations: "disabled", caret: "hide" });
+            captures.push({ state, snapshot, screenshot });
+            await writeFile(`${output}/${label}-${state}.png`, screenshot);
+            await info.attach(`t01-hero-${viewport.width}-${label}-${state}.png`, { body: screenshot, contentType: "image/png" });
+          };
+
+          await capture("initial-empty-closed");
+          const submit = page.getByRole("button", { name: "بررسی واجد شرایط بودن" });
+          await submit.click();
+          const menu = page.locator(".hp-select-menu");
+          await expect(menu).toBeVisible();
+          await capture("empty-submit-opens-menu");
+
+          const trigger = page.locator(".hp-select-trigger");
+          await menu.getByRole("button", { name: "تا ۵۰ میلیون", exact: true }).click();
+          await expect(trigger).toHaveText("تا ۵۰ میلیون");
+          await expect(menu).toBeHidden();
+          await capture("selected-amount-menu-closed");
+
+          await submit.focus();
+          await trigger.focus();
+          await trigger.press("Enter");
+          await expect(menu).toBeVisible();
+          await capture("keyboard-focus-menu-open");
+          await trigger.press("Shift+Tab");
+          await expect(menu).toBeHidden();
+          await expect(submit).toBeFocused();
+          await capture("blur-closes-menu");
+
+          await trigger.click();
+          await expect(menu).toBeVisible();
+          await capture("pointer-opens-menu");
+          await menu.getByRole("button", { name: "۵۰ تا ۲۵۰ میلیون", exact: true }).click();
+          await expect(trigger).toHaveText("۵۰ تا ۲۵۰ میلیون");
+          await expect(menu).toBeHidden();
+          await submit.click();
+          const notice = page.locator(".hp-eligibility-message");
+          await expect(notice).toBeVisible();
+          await expect(notice.getByRole("button", { name: "متوجه شدم" })).toBeVisible();
+          await capture("eligibility-notice");
+
+          await notice.getByRole("button", { name: "متوجه شدم" }).click();
+          await expect.poll(() => new URL(page.url()).pathname).toBe("/question/1");
+          await expect(page.locator(".hp-questionnaire-page")).toBeVisible();
+          const navigation = {
+            path: new URL(page.url()).pathname,
+            questionnaireVisible: await page.locator(".hp-questionnaire-page").isVisible(),
+          };
+          const events = await page.evaluate(() => window.__us13HeroEvents);
+          evidence.push({ label, captures, apiRequests, events, navigation });
+          await writeFile(`${output}/${label}-interaction-network.json`, JSON.stringify({
+            frozenCommit: "f5e50da0ea29b7d933a813736a2616169ee9b8f3",
+            label,
+            viewport,
+            states: captures.map(({ state, snapshot }) => ({ state, snapshot })),
+            events,
+            apiRequests,
+            navigation,
+          }, null, 2));
+          await info.attach(`t01-hero-${viewport.width}-${label}-events-network.json`, {
+            body: Buffer.from(JSON.stringify({ events, apiRequests, navigation }, null, 2)),
+            contentType: "application/json",
+          });
+        } finally {
+          await context.close();
+        }
+      }
+
+      const [baseline, candidate] = evidence;
+      expect(candidate.captures.map(({ state, snapshot }) => ({ state, snapshot })),
+        `T01 Hero state, focus, text, computed style and geometry at ${viewport.width}px`).toEqual(
+        baseline.captures.map(({ state, snapshot }) => ({ state, snapshot })),
+      );
+      const screenshotMatches = candidate.captures.map((capture, index) =>
+        capture.screenshot.equals(baseline.captures[index].screenshot));
+      expect(screenshotMatches,
+        `T01 Hero screenshots must match frozen baseline at ${viewport.width}px`).toEqual(
+        Array(candidate.captures.length).fill(true),
+      );
+      expect(candidate.events, `T01 Hero DOM event sequence at ${viewport.width}px`).toEqual(baseline.events);
+      expect(candidate.apiRequests, `T01 Hero API request sequence at ${viewport.width}px`).toEqual(baseline.apiRequests);
+      expect(candidate.navigation, `T01 Hero acknowledgement navigation at ${viewport.width}px`).toEqual(baseline.navigation);
+
+      if (viewport.width === 390) {
+        // Prove the strict visual oracle is sensitive without modifying source:
+        // a test-only style mutation must produce a different Hero capture.
+        const context = await browser.newContext({ viewport, deviceScaleFactor: 1, locale: "fa-IR" });
+        try {
+          const page = await context.newPage();
+          await page.route(/https:\/\/fonts\.(googleapis|gstatic)\.com\//, (route) => route.abort());
+          await page.goto(`${baseURL}/`);
+          const hero = page.locator(".hp-hero");
+          await expect(hero).toBeVisible();
+          await page.evaluate(() => document.fonts.ready);
+          const unchanged = await hero.screenshot({ animations: "disabled", caret: "hide" });
+          await page.addStyleTag({ content: ".hp-hero { filter: grayscale(1) !important; }" });
+          const mutated = await hero.screenshot({ animations: "disabled", caret: "hide" });
+          expect(mutated.equals(unchanged), "test-only intentional Hero style mutation must be detected").toBe(false);
+        } finally {
+          await context.close();
+        }
+      }
+    } finally {
+      await browser.close();
+    }
+  });
+}
