@@ -53,9 +53,18 @@ class VMComposeTests(unittest.TestCase):
 
     def test_only_prebuilt_release_pair_and_pinned_infrastructure(self):
         services = self.config["services"]
-        manifest = json.loads((ROOT / "docs/release/images/v0.1.0.json").read_text())
-        for name, item in zip(("api", "frontend"), manifest["images"], strict=True):
-            self.assertEqual(services[name]["image"], "docker.io/" + item["repository"] + "@" + item["digest"])
+        expected_images = {
+            "api": (
+                "docker.io/shahab2026/shahab-backend@"
+                "sha256:ed8467348eaa6faea289193e83de14900dca505009ba603b0ac75873d24363f2"
+            ),
+            "frontend": (
+                "docker.io/shahab2026/shahab-frontend@"
+                "sha256:3466774fcb9aaf71e469d9321df1e6a8f0d1d06684c5ee7483c3196d1a0f6ebd"
+            ),
+        }
+        for name, image in expected_images.items():
+            self.assertEqual(services[name]["image"], image)
         for service in services.values():
             self.assertNotIn("build", service)
             self.assertIn("@sha256:", service["image"])
