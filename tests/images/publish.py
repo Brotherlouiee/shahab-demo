@@ -10,6 +10,7 @@ import json
 import os
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -22,10 +23,34 @@ from security_gate import assess
 IMMUTABLE_RULE = r"^(v[0-9]+\.[0-9]+\.[0-9]+|sha-[0-9a-f]{40})$"
 MEDIA = "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json"
 ARTIFACT_TYPE = "application/vnd.shahab.release-evidence.v1+json"
+REFERRER_ATTEMPTS = 6
+REFERRER_RETRY_SECONDS = 2
 
 
 def digest(data):
     return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def wait_for_referrer(
+    registry,
+    repo,
+    subject,
+    attachment_digest,
+    *,
+    attempts=REFERRER_ATTEMPTS,
+    interval=REFERRER_RETRY_SECONDS,
+    sleep=time.sleep,
+):
+    """Poll the OCI referrers index for bounded registry-side propagation."""
+    for attempt in range(attempts):
+        raw = registry.get(repo, "referrers/" + subject, missing=True)
+        if raw is not None:
+            referrers = json.loads(raw)
+            if attachment_digest in [item.get("digest") for item in referrers.get("manifests", [])]:
+                return
+        if attempt + 1 < attempts:
+            sleep(interval)
+    raise ValueError("Published evidence is not discoverable by subject digest")
 
 
 def command(*args):
@@ -253,10 +278,10 @@ def publish_images(registry, images, builds, sha, tag, folder, journal, save, ru
         for layer in parsed["layers"]:
             if digest(registry.get(repo, "blobs/" + layer["digest"])) != layer["digest"]:
                 raise ValueError("Remote evidence blob mismatch")
-        referrers = json.loads(registry.get(repo, "referrers/" + remote))
-        if attachment_digest not in [item.get("digest") for item in referrers.get("manifests", [])]:
-            raise ValueError("Published evidence is not discoverable by subject digest")
-        record.update({"tags": tags, "evidenceDigest": attachment_digest, "status": "verified"})
+        record.update({"tags": tags, "evidenceDigest": attachment_digest, "status": "evidence-attached"})
+        save()
+        wait_for_referrer(registry, repo, remote, attachment_digest)
+        record["status"] = "verified"
         save()
     journal["status"] = "complete"
     journal["completedAt"] = datetime.now(UTC).isoformat()
