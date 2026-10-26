@@ -1723,6 +1723,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     setIsOtpVerificationStep(routeState.isOtpVerificationStep);
     setIsAnalyzingLoans(routeState.isAnalyzingLoans);
     setLoanResultView(routeState.loanResultView);
+    if (routeState.pathname !== window.location.pathname) {
+      window.history.replaceState(window.history.state, "", routeState.pathname);
+    }
     if (routeState.loanResultView === "details") setSelectedLoanId(getLoanIdFromLocation());
   }, []);
 
