@@ -145,7 +145,7 @@ def _recommend_from_session(
     service = QuestionnaireSessionService(
         SqlAlchemyQuestionnaireSessionRepository(db, configuration, reference_catalogue=reference_catalogue),
         configuration,
-        QuestionnaireRetentionPolicy(timedelta(minutes=30)),
+        QuestionnaireRetentionPolicy(timedelta(hours=1)),
     )
     try:
         session = service.get(session_id)

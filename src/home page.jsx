@@ -1898,6 +1898,14 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         const session = await startQuestionnaireSession();
         sessionId = session.sessionId;
         setQuestionnaireSessionId(sessionId);
+        // The next screen becomes refreshable as soon as its route is shown.
+        // Persist the opaque capability on this history entry synchronously,
+        // before awaiting the answer write and navigating to that screen.
+        replaceActiveRecommendationHistoryState(
+          sessionId,
+          recommendationResult,
+          selectedComparisonPlanIds,
+        );
       }
       await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       return true;
@@ -2018,6 +2026,8 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handlePreviousQuestion() {
+    if (isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer) return;
+
     if (isOtpQuestion) {
       setIsOtpVerificationStep(false);
       setLoanOtpError("");
@@ -2736,6 +2746,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
             <button
               className={`hp-previous-question ${isPersonalStageQuestion ? "is-personal-stage-back" : ""}`}
               type="button"
+              disabled={isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer}
               onClick={handlePreviousQuestion}
             >
               {isPersonalInfoQuestion ? "بازگشت به مرحله قبل" : "بازگشت به سوال قبل"}

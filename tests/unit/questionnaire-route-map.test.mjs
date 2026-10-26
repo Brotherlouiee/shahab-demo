@@ -49,3 +49,22 @@ test("guards direct and history navigation at the first unanswered required ques
   assert.equal(guardQuestionnaireRoute("/question/12", approvedRoutes.map(([, id]) => id)), "/question/12");
   assert.equal(guardQuestionnaireRoute("/loan-results", []), "/loan-results");
 });
+
+test("holds every canonical route behind the complete answered prefix", () => {
+  for (let answeredCount = 0; answeredCount <= approvedRoutes.length; answeredCount += 1) {
+    const answeredIds = approvedRoutes.slice(0, answeredCount).map(([, questionId]) => questionId);
+    const firstUnansweredRoute = approvedRoutes[answeredCount]?.[0];
+
+    for (let requestedIndex = 0; requestedIndex < approvedRoutes.length; requestedIndex += 1) {
+      const requestedRoute = approvedRoutes[requestedIndex][0];
+      const expectedRoute = requestedIndex <= answeredCount
+        ? requestedRoute
+        : firstUnansweredRoute;
+      assert.equal(
+        guardQuestionnaireRoute(requestedRoute, answeredIds),
+        expectedRoute,
+        `answered=${answeredCount}, requested=${requestedRoute}`,
+      );
+    }
+  }
+});

@@ -33,6 +33,8 @@ class QuestionnaireSessionTests(unittest.TestCase):
 
     def test_expired_session_is_blocked(self) -> None:
         now = datetime(2026, 9, 24, tzinfo=UTC)
-        session = new_anonymous_session("v1", QuestionnaireRetentionPolicy(timedelta(minutes=30)), now)
+        session = new_anonymous_session("v1", QuestionnaireRetentionPolicy(timedelta(hours=1)), now)
+        self.assertEqual(session.expires_at, now + timedelta(hours=1))
+        session.ensure_active(now + timedelta(minutes=59, seconds=59))
         with self.assertRaises(QuestionnaireSessionExpiredError):
-            session.ensure_active(now + timedelta(minutes=30))
+            session.ensure_active(now + timedelta(hours=1))
