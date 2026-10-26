@@ -92,6 +92,52 @@ test("saves only a canonical body answer, advances, and keeps the answer on same
   expect(requests).toHaveLength(2);
 });
 
+test("restores the saved selection after refresh before allowing back navigation", async ({ page }) => {
+  const answers = {};
+  await page.route("**/api/v1/questionnaire/sessions**", async (route) => {
+    const request = route.request();
+    if (request.method() === "POST") {
+      await route.fulfill({
+        status: 201,
+        contentType: "application/json",
+        body: JSON.stringify({ sessionId, expiresAt: "2026-09-24T12:30:00Z", answers }),
+      });
+      return;
+    }
+
+    if (request.method() === "PUT") {
+      const questionId = new URL(request.url()).pathname.split("/").at(-1);
+      answers[questionId] = request.postDataJSON().answerId;
+    }
+
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ sessionId, expiresAt: "2026-09-24T12:30:00Z", answers }),
+    });
+  });
+
+  await page.goto("/question/3");
+  const firstChoice = page.getByRole("radio", {
+    name: "مستقیماً برای کار، تولید یا خرید تجهیزاتی که درآمدم را بیشتر می‌کند سرمایه‌گذاری می‌کنم.",
+  });
+  await firstChoice.click();
+  await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect.poll(() => page.evaluate(
+    () => window.history.state?.shahabRecommendation?.sessionId,
+  )).toBe(sessionId);
+
+  await page.reload();
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.locator(".hp-questionnaire-page")).toHaveAttribute("aria-busy", "false");
+  await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.getByRole("radio", {
+    name: "مستقیماً برای کار، تولید یا خرید تجهیزاتی که درآمدم را بیشتر می‌کند سرمایه‌گذاری می‌کنم.",
+  })).toHaveAttribute("aria-checked", "true");
+});
+
 test("keeps the user on the question and announces a retryable save failure", async ({ page }) => {
   const requests = await mockQuestionnaireSessionApi(page, { failStart: true });
 

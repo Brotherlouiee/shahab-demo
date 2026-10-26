@@ -42,3 +42,16 @@ test("allows refresh of the current question when all preceding answers were sav
   await expect(page).toHaveURL(/\/question\/4$/);
   await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
 });
+
+test("blocks a later in-app history route at the first unanswered canonical question", async ({ page }) => {
+  await restoreSessionAt(page, "/question/4", { Q1: "Q1.incomeInvestment" });
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await page.evaluate(() => {
+    window.history.pushState(window.history.state, "", "/question/6");
+    window.dispatchEvent(new PopStateEvent("popstate", { state: window.history.state }));
+  });
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
+});

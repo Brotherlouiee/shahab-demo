@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
 from backend.app.questionnaire.domain.session import (
+    CanonicalAnswerValidationError,
     QuestionnaireAnswer,
     QuestionnaireRetentionPolicy,
     QuestionnaireSession,
@@ -36,7 +37,19 @@ class QuestionnaireSessionService:
     def record_answer(self, session_id: str, answer: QuestionnaireAnswer, now: datetime | None = None) -> None:
         session = self.get(session_id)
         session.ensure_active(now or datetime.now(UTC))
-        self._repository.upsert_answer(session_id, validate_canonical_answer(self._configuration, answer))
+        validated_answer = validate_canonical_answer(self._configuration, answer)
+        question_ids = [question.question_id for question in self._configuration.questions]
+        question_index = question_ids.index(validated_answer.question_id)
+        answered_question_ids = {saved.question_id for saved in self._repository.list_answers(session_id)}
+        unanswered_required = [
+            question.question_id
+            for question in self._configuration.questions[:question_index]
+            if question.required and question.question_id not in answered_question_ids
+        ]
+        if unanswered_required:
+            raise CanonicalAnswerValidationError("required questions must be answered in order")
+
+        self._repository.upsert_answer(session_id, validated_answer)
         self._cache_set(session)
 
     def get(self, session_id: str) -> QuestionnaireSession:
