@@ -85,7 +85,7 @@ def start_session(
     response.set_cookie(
         f"{QUESTIONNAIRE_PROOF_COOKIE_PREFIX}{session.session_id}",
         secret,
-        max_age=30 * 60,
+        max_age=60 * 60,
         secure=request.url.scheme == "https"
         or request.app.state.settings.environment in {AppEnvironment.STAGING, AppEnvironment.PRODUCTION},
         httponly=True,

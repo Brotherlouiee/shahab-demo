@@ -75,7 +75,7 @@ def get_questionnaire_session_service(
     cache = request.app.state.questionnaire_session_cache
     if session is None:
         yield QuestionnaireSessionService(
-            _questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
+            _questionnaire_repository, configuration, QuestionnaireRetentionPolicy(timedelta(hours=1)), cache
         )
         return
     repository = SqlAlchemyQuestionnaireSessionRepository(
@@ -84,7 +84,7 @@ def get_questionnaire_session_service(
         reference_catalogue=request.app.state.questionnaire_reference_catalogue,
     )
     yield QuestionnaireSessionService(
-        repository, configuration, QuestionnaireRetentionPolicy(timedelta(minutes=30)), cache
+        repository, configuration, QuestionnaireRetentionPolicy(timedelta(hours=1)), cache
     )
 
 

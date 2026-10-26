@@ -2,13 +2,22 @@
 
 from __future__ import annotations
 
+import json
 import unittest
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 from pydantic import SecretStr
 
 from backend.app.core.config import AppEnvironment, Settings
 from backend.app.main import create_app
+
+_QUESTIONNAIRE_CONFIGURATION = json.loads(
+    (Path(__file__).resolve().parents[2] / "data/contracts/questionnaire-configuration.v1.json").read_text(
+        encoding="utf-8"
+    )
+)
+_CANONICAL_QUESTIONS = _QUESTIONNAIRE_CONFIGURATION["questions"]
 
 
 class QuestionnaireApiTests(unittest.TestCase):
@@ -45,38 +54,34 @@ class QuestionnaireApiTests(unittest.TestCase):
         self.assertEqual(response.json()["error"]["code"], "invalid_request")
 
     def test_rejects_skipping_required_questions_without_persisting_the_answer(self) -> None:
-        session_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        for answered_count in range(len(_CANONICAL_QUESTIONS)):
+            with self.subTest(answered_count=answered_count):
+                session_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+                expected_answers: dict[str, str] = {}
 
-        skipped = self.client.put(
-            f"/api/v1/questionnaire/sessions/{session_id}/answers/Q4",
-            json={"answerId": "Q4.balancedTermInstallment"},
-        )
-        self.assertEqual(skipped.status_code, 422)
-        self.assertEqual(skipped.json()["error"]["code"], "invalid_request")
-        self.assertEqual(
-            self.client.get(f"/api/v1/questionnaire/sessions/{session_id}").json()["answers"],
-            {},
-        )
+                for question in _CANONICAL_QUESTIONS[:answered_count]:
+                    question_id = question["questionId"]
+                    answer_id = question["answerOptions"][0]["answerId"]
+                    accepted = self.client.put(
+                        f"/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}",
+                        json={"answerId": answer_id},
+                    )
+                    self.assertEqual(accepted.status_code, 200)
+                    expected_answers[question_id] = answer_id
 
-        for question_id, answer_id in (
-            ("Q1", "Q1.incomeInvestment"),
-            ("Q2", "Q2.highCostBorrowing"),
-        ):
-            accepted = self.client.put(
-                f"/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}",
-                json={"answerId": answer_id},
-            )
-            self.assertEqual(accepted.status_code, 200)
-
-        skipped_after_q1 = self.client.put(
-            f"/api/v1/questionnaire/sessions/{session_id}/answers/Q4",
-            json={"answerId": "Q4.balancedTermInstallment"},
-        )
-        self.assertEqual(skipped_after_q1.status_code, 422)
-        self.assertEqual(
-            self.client.get(f"/api/v1/questionnaire/sessions/{session_id}").json()["answers"],
-            {"Q1": "Q1.incomeInvestment", "Q2": "Q2.highCostBorrowing"},
-        )
+                for skipped_question in _CANONICAL_QUESTIONS[answered_count + 1 :]:
+                    question_id = skipped_question["questionId"]
+                    answer_id = skipped_question["answerOptions"][0]["answerId"]
+                    skipped = self.client.put(
+                        f"/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}",
+                        json={"answerId": answer_id},
+                    )
+                    self.assertEqual(skipped.status_code, 422, question_id)
+                    self.assertEqual(skipped.json()["error"]["code"], "invalid_request")
+                    self.assertEqual(
+                        self.client.get(f"/api/v1/questionnaire/sessions/{session_id}").json()["answers"],
+                        expected_answers,
+                    )
 
     def test_rejects_unproved_sessions_without_disclosing_existence(
         self,

@@ -106,5 +106,5 @@ class QuestionnaireProofTests(unittest.TestCase):
         self.assertNotIn(secret, response.text)
         self.assertNotIn("proof", response.text)
         self.assertEqual(response.headers["Cache-Control"], "no-store")
-        for flag in ("HttpOnly", "SameSite=lax", "Path=/api/v1", "Max-Age=1800"):
+        for flag in ("HttpOnly", "SameSite=lax", "Path=/api/v1", "Max-Age=3600"):
             self.assertIn(flag, response.headers["set-cookie"])

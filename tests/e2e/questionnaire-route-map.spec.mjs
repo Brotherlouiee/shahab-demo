@@ -1,7 +1,22 @@
 
 import { expect, test } from "@playwright/test";
+import { readFileSync } from "node:fs";
 
 const sessionId = "route-guard-test-session";
+const canonicalIdentifiers = JSON.parse(
+  readFileSync(new URL("../../data/contracts/canonical-identifiers.v1.json", import.meta.url), "utf8"),
+);
+const questionnaireConfiguration = JSON.parse(
+  readFileSync(new URL("../../data/contracts/questionnaire-configuration.v1.json", import.meta.url), "utf8"),
+);
+const canonicalRoutes = Object.entries(canonicalIdentifiers.questionnaireRouteMap);
+
+function answeredPrefix(answeredCount) {
+  return Object.fromEntries(canonicalRoutes.slice(0, answeredCount).map(([, questionId]) => {
+    const question = questionnaireConfiguration.questions.find((item) => item.questionId === questionId);
+    return [questionId, question.answerOptions[0].answerId];
+  }));
+}
 
 async function restoreSessionAt(page, route, answers) {
   await page.addInitScript((id) => {
@@ -55,3 +70,25 @@ test("blocks a later in-app history route at the first unanswered canonical ques
   await expect(page).toHaveURL(/\/question\/4$/);
   await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
 });
+
+for (let answeredCount = 0; answeredCount < canonicalRoutes.length; answeredCount += 1) {
+  test(`blocks direct, refreshed, and history jumps with ${answeredCount} answers`, async ({ page }) => {
+    const expectedRoute = canonicalRoutes[answeredCount][0];
+    const lastRoute = canonicalRoutes.at(-1)[0];
+    await restoreSessionAt(page, lastRoute, answeredPrefix(answeredCount));
+
+    await expect(page).toHaveURL(new RegExp(`${expectedRoute.replaceAll("/", "\\/")}$`));
+    await expect(page.locator(".hp-questionnaire-page h1")).toContainText(
+      questionnaireConfiguration.questions.find((item) => item.questionId === canonicalRoutes[answeredCount][1]).prompt,
+    );
+
+    await page.evaluate((targetRoute) => {
+      window.history.pushState(window.history.state, "", targetRoute);
+      window.dispatchEvent(new PopStateEvent("popstate", { state: window.history.state }));
+    }, lastRoute);
+    await expect(page).toHaveURL(new RegExp(`${expectedRoute.replaceAll("/", "\\/")}$`));
+
+    await page.reload();
+    await expect(page).toHaveURL(new RegExp(`${expectedRoute.replaceAll("/", "\\/")}$`));
+  });
+}
