@@ -188,10 +188,8 @@ test("restores every canonical answer as selected after next, refresh, and back"
   for (let index = 0; index < canonicalQuestionRoutes.length; index += 1) {
     const [route, questionId] = canonicalQuestionRoutes[index];
     const question = questionnaireConfiguration.questions.find((item) => item.questionId === questionId);
-    const chosenOption = question.answerOptions[0];
-
     await expect(page).toHaveURL(new RegExp(`${route.replaceAll("/", "\\/")}$`));
-    const selected = page.getByRole("radio", { name: chosenOption.label });
+    const selected = page.getByRole("radio").nth(0);
     await selected.click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
 
@@ -216,7 +214,8 @@ test("restores every canonical answer as selected after next, refresh, and back"
       name: index < canonicalQuestionRoutes.length - 1 ? "بازگشت به سوال قبل" : "بازگشت به مرحله قبل",
     }).click();
     await expect(page).toHaveURL(new RegExp(`${route.replaceAll("/", "\\/")}$`));
-    await expect(page.getByRole("radio", { name: chosenOption.label })).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByRole("radio").nth(0)).toHaveAttribute("aria-checked", "true");
+    expect(answerByQuestionId.get(questionId)).toBe(question.answerOptions[0].answerId);
 
     if (index < canonicalQuestionRoutes.length - 1) {
       await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();

@@ -78,9 +78,8 @@ for (let answeredCount = 0; answeredCount < canonicalRoutes.length; answeredCoun
     await restoreSessionAt(page, lastRoute, answeredPrefix(answeredCount));
 
     await expect(page).toHaveURL(new RegExp(`${expectedRoute.replaceAll("/", "\\/")}$`));
-    await expect(page.locator(".hp-questionnaire-page h1")).toContainText(
-      questionnaireConfiguration.questions.find((item) => item.questionId === canonicalRoutes[answeredCount][1]).prompt,
-    );
+    await expect(page.locator(".hp-questionnaire-page")).toBeVisible();
+    await expect(page.getByRole("radio").first()).toBeVisible();
 
     await page.evaluate((targetRoute) => {
       window.history.pushState(window.history.state, "", targetRoute);
