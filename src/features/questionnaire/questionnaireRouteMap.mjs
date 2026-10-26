@@ -50,4 +50,18 @@ export function getQuestionnaireRouteForPrototypeQuestionIndex(questionIndex) {
   return questionId ? getQuestionnaireRouteForCanonicalQuestionId(questionId) : null;
 }
 
+/**
+ * Keep direct links and browser history from skipping required questions.
+ * A route at the first unanswered question is allowed; later routes are not.
+ */
+export function guardQuestionnaireRoute(pathname, answeredQuestionIds = []) {
+  const requestedIndex = routeEntries.findIndex(([route]) => route === pathname);
+  if (requestedIndex < 0) return pathname;
+
+  const answered = new Set(answeredQuestionIds);
+  const firstUnansweredIndex = routeEntries.findIndex(([, questionId]) => !answered.has(questionId));
+  if (firstUnansweredIndex < 0 || requestedIndex <= firstUnansweredIndex) return pathname;
+  return routeEntries[firstUnansweredIndex][0];
+}
+
 export const canonicalQuestionnaireRouteEntries = routeEntries;

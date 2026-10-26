@@ -1,22 +1,44 @@
+
 import { expect, test } from "@playwright/test";
 
-const approvedRoutes = [
-  ["/question/3", "پولی که از این وام یا اعتبار به دست می‌آورید را دقیقاً در چه راهی صرف می‌کنید؟"],
-  ["/question/4", "اگر دریافت این وام لغو شود و نتوانید آن را بگیرید"],
-  ["/question/5", "در انتخاب یک وام، کدام حالت برای شما در اولویت اول قرار دارد؟"],
-  ["/question/6", "بین مبلغ اقساط ماهانه و مدت‌زمان وام، کدام حالت را انتخاب می‌کنید؟"],
-  ["/question/7", "چقدر برایتان مهم است که شرایط پرداخت اقساط قابل تغییر و منعطف باشد؟"],
-  ["/question/8", "در حال حاضر، چه کسری از درآمد ماهانه شما صرف پرداخت اقساط"],
-  ["/question/9", "تصور کنید روبروی کارشناس اعتبارات بانک نشسته‌اید"],
-  ["/question/10", "برای یک سرمایه‌گذاری یا ارتقای کسب‌وکار به مبلغ ۲۰۰ میلیون تومان نیاز دارید."],
-  ["/question/11", "برای توسعه کار به ۵۰۰ میلیون تومان سرمایه نیاز دارید."],
-  ["/question/12", "فرض کنید برای تأمین مبلغ ۱۰۰ میلیون تومان"],
-];
+const sessionId = "route-guard-test-session";
 
-for (const [route, expectedQuestionPrefix] of approvedRoutes) {
-  test(`preserves approved behavioural path ${route} and renders its canonical questionnaire screen`, async ({ page }) => {
-    await page.goto(route);
-    await expect(page).toHaveURL(new RegExp(`${route}$`));
-    await expect(page.locator(".hp-questionnaire-page h1")).toContainText(expectedQuestionPrefix);
-  });
+async function restoreSessionAt(page, route, answers) {
+  await page.addInitScript((id) => {
+    window.history.replaceState({ shahabRecommendation: { sessionId: id } }, "", window.location.href);
+  }, sessionId);
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (request) => request.fulfill({
+    status: 200,
+    contentType: "application/json",
+    body: JSON.stringify({
+      sessionId,
+      expiresAt: "2026-10-27T12:30:00Z",
+      answers,
+    }),
+  }));
+  await page.goto(route);
 }
+
+test("redirects a direct later-question URL to Q1 when there is no saved session", async ({ page }) => {
+  await page.goto("/question/4");
+
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("پولی که از این وام یا اعتبار");
+});
+
+test("restores the first unanswered question when a later URL is opened with a saved session", async ({ page }) => {
+  await restoreSessionAt(page, "/question/5", { Q1: "Q1.incomeInvestment" });
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
+  await page.reload();
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
+});
+
+test("allows refresh of the current question when all preceding answers were saved", async ({ page }) => {
+  await restoreSessionAt(page, "/question/4", { Q1: "Q1.incomeInvestment" });
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("اگر دریافت این وام لغو شود");
+});

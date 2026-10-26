@@ -22,6 +22,7 @@ import { fetchRecommendationResult } from "./features/recommendation/presentatio
 import {
   getCanonicalQuestionIdForRoute,
   getPrototypeQuestionIndexForCanonicalQuestionId,
+  guardQuestionnaireRoute,
   getQuestionnaireRouteForPrototypeQuestionIndex,
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
@@ -316,6 +317,17 @@ function getQuestionnaireRouteState(pathname) {
     isAnalyzingLoans: false,
     loanResultView: "",
   };
+}
+
+function getCanonicalQuestionIdsFromPrototypeAnswers(answerByIndex = {}) {
+  return Object.keys(answerByIndex)
+    .map((index) => getCanonicalQuestionForPrototypeIndex(Number(index))?.questionId)
+    .filter(Boolean);
+}
+
+function getGuardedQuestionnaireRouteState(pathname, answeredQuestionIds = []) {
+  const guardedPathname = guardQuestionnaireRoute(pathname, answeredQuestionIds);
+  return { ...getQuestionnaireRouteState(guardedPathname), pathname: guardedPathname };
 }
 
 function getLoanIdFromLocation() {
@@ -1084,10 +1096,22 @@ function LoanAiAnalysisScreen({ onBack, result, loanId }) {
 }
 
 function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSavedLoans, onHistoricalBack }) {
-  const initialRouteState = getQuestionnaireRouteState(window.location.pathname);
+  const initialRequestedPath = window.location.pathname;
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
+  const initialSessionId = initialRecommendationHistory?.sessionId || "";
+  const isInitialCanonicalQuestionRoute = Boolean(getCanonicalQuestionIdForRoute(initialRequestedPath));
+  const initialRouteState = isInitialCanonicalQuestionRoute && !initialSessionId
+    ? getGuardedQuestionnaireRouteState(initialRequestedPath, [])
+    : getQuestionnaireRouteState(initialRequestedPath);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
   const [answers, setAnswers] = useState({});
+  const answersRef = useRef(answers);
+  answersRef.current = answers;
+  const initialRouteSessionIdRef = useRef(initialSessionId);
+  const initialRouteRestoredRef = useRef(false);
+  const [isRestoringQuestionnaireRoute, setIsRestoringQuestionnaireRoute] = useState(
+    Boolean(initialSessionId && isInitialCanonicalQuestionRoute),
+  );
   // Kept only in this React instance: canonical answers and the opaque session
   // identifier are deliberately absent from URLs and browser storage.
   const [questionnaireSessionId, setQuestionnaireSessionId] = useState(() => initialRecommendationHistory?.sessionId || "");
@@ -1560,7 +1584,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     personalInfo.job &&
     !personalInfoErrors.firstName &&
     !personalInfoErrors.lastName;
-  const canProceed = !isSavingProfile && (!isPersonalInfoQuestion || !isCheckingPersonalAccess) && (isOtpQuestion
+  const canProceed = !isRestoringQuestionnaireRoute && !isSavingProfile && (!isPersonalInfoQuestion || !isCheckingPersonalAccess) && (isOtpQuestion
     ? loanOtpValue.length === 6
     : isPersonalInfoQuestion
       ? Boolean(isPersonalInfoComplete)
@@ -1648,32 +1672,60 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     let active = true;
     readQuestionnaireSession(questionnaireSessionId).then((session) => {
       if (!active) return;
-      setAnswers((current) => {
-        const restored = { ...current };
-        for (const [questionId, answerId] of Object.entries(session.answers || {})) {
-          const questionIndex = getPrototypeQuestionIndexForCanonicalQuestionId(questionId);
-          if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
-        }
-        return restored;
-      });
+      const savedAnswers = session.answers || {};
+      const restored = { ...answersRef.current };
+      for (const [questionId, answerId] of Object.entries(savedAnswers)) {
+        const questionIndex = getPrototypeQuestionIndexForCanonicalQuestionId(questionId);
+        if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
+      }
+      answersRef.current = restored;
+      setAnswers(restored);
+
+      if (questionnaireSessionId === initialRouteSessionIdRef.current
+        && isInitialCanonicalQuestionRoute
+        && !initialRouteRestoredRef.current) {
+        initialRouteRestoredRef.current = true;
+        const routeState = getGuardedQuestionnaireRouteState(
+          initialRequestedPath,
+          Object.keys(savedAnswers),
+        );
+        setCurrentQuestion(routeState.questionIndex);
+        setIsOtpVerificationStep(routeState.isOtpVerificationStep);
+        setIsAnalyzingLoans(routeState.isAnalyzingLoans);
+        setLoanResultView(routeState.loanResultView);
+        setIsRestoringQuestionnaireRoute(false);
+      }
     }).catch((error) => {
-      if (active) {
-        setQuestionnaireSessionError(error.status === 410
-          ? "مهلت پرسشنامه تمام شده است. پرسشنامه را دوباره تکمیل کنید."
-          : "بازیابی پاسخ‌های ثبت‌شده از نشست پرسشنامه در حال حاضر ممکن نشد.");
+      if (!active) return;
+      setQuestionnaireSessionError(error.status === 410
+        ? "مهلت پرسشنامه تمام شده است. پرسشنامه را دوباره تکمیل کنید."
+        : "بازیابی پاسخ‌های ثبت‌شده از نشست پرسشنامه در حال حاضر ممکن نشد.");
+
+      if (questionnaireSessionId === initialRouteSessionIdRef.current
+        && isInitialCanonicalQuestionRoute
+        && !initialRouteRestoredRef.current) {
+        initialRouteRestoredRef.current = true;
+        const routeState = getGuardedQuestionnaireRouteState(initialRequestedPath, []);
+        setCurrentQuestion(routeState.questionIndex);
+        setIsRestoringQuestionnaireRoute(false);
       }
     });
     return () => { active = false; };
   }, [questionnaireSessionId]);
 
   useEffect(() => {
-    const routeState = getQuestionnaireRouteState(window.location.pathname);
+    if (initialSessionId && isInitialCanonicalQuestionRoute) return;
+    const routeState = getGuardedQuestionnaireRouteState(
+      window.location.pathname,
+      getCanonicalQuestionIdsFromPrototypeAnswers(answersRef.current),
+    );
     setCurrentQuestion(routeState.questionIndex);
     setIsOtpVerificationStep(routeState.isOtpVerificationStep);
     setIsAnalyzingLoans(routeState.isAnalyzingLoans);
     setLoanResultView(routeState.loanResultView);
     if (routeState.loanResultView === "details") setSelectedLoanId(getLoanIdFromLocation());
   }, []);
+
 
   useEffect(() => {
     if (!didSkipInitialRouteSyncRef.current) {
@@ -1686,11 +1738,17 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   useEffect(() => {
     function handleRouteChange() {
-      const routeState = getQuestionnaireRouteState(window.location.pathname);
+      const routeState = getGuardedQuestionnaireRouteState(
+        window.location.pathname,
+        getCanonicalQuestionIdsFromPrototypeAnswers(answersRef.current),
+      );
       setCurrentQuestion(routeState.questionIndex);
       setIsOtpVerificationStep(routeState.isOtpVerificationStep);
       setIsAnalyzingLoans(routeState.isAnalyzingLoans);
       setLoanResultView(routeState.loanResultView);
+      if (routeState.pathname !== window.location.pathname) {
+        window.history.replaceState(window.history.state, "", routeState.pathname);
+      }
       if (routeState.loanResultView === "details") setSelectedLoanId(getLoanIdFromLocation());
       setLoanOtpError("");
     }
@@ -2308,7 +2366,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   return (
-    <main className="hp-questionnaire-page" dir="rtl" aria-busy={isSavingQuestionnaireAnswer || isSavingProfile}>
+    <main className="hp-questionnaire-page" dir="rtl" aria-busy={isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer || isSavingProfile}>
       <header className="hp-questionnaire-header">
         <button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت">
           <svg viewBox="0 0 24 24" focusable="false">
@@ -2331,7 +2389,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       </header>
 
       <section className="hp-questionnaire-content">
-        <DeferredPageSkeleton active={isSavingQuestionnaireAnswer || isSavingProfile} variant="questionnaire" />
+        <DeferredPageSkeleton active={isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer || isSavingProfile} variant="questionnaire" />
         {isStagedQuestion ? (
           <div className="hp-stage-board" aria-label="مراحل پرسشنامه">
             <div

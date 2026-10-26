@@ -4,6 +4,7 @@ import test from "node:test";
 
 import {
   canonicalQuestionnaireRouteEntries,
+  guardQuestionnaireRoute,
   getCanonicalQuestionIdForRoute,
   getPrototypeQuestionIndexForCanonicalQuestionId,
   getQuestionnaireRouteForCanonicalQuestionId,
@@ -39,4 +40,12 @@ test("rejects non-behavioural and malformed paths rather than guessing an ID", (
   assert.equal(getQuestionnaireRouteForCanonicalQuestionId("Q7"), null);
   assert.equal(getPrototypeQuestionIndexForCanonicalQuestionId("Q7"), null);
   assert.equal(getQuestionnaireRouteForPrototypeQuestionIndex(1), null);
+});
+
+test("guards direct and history navigation at the first unanswered required question", () => {
+  assert.equal(guardQuestionnaireRoute("/question/4"), "/question/3");
+  assert.equal(guardQuestionnaireRoute("/question/5", ["Q1"]), "/question/4");
+  assert.equal(guardQuestionnaireRoute("/question/4", ["Q1"]), "/question/4");
+  assert.equal(guardQuestionnaireRoute("/question/12", approvedRoutes.map(([, id]) => id)), "/question/12");
+  assert.equal(guardQuestionnaireRoute("/loan-results", []), "/loan-results");
 });
