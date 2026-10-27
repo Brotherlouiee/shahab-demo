@@ -61,16 +61,83 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   await page.getByRole("button", { name: "متوجه شدم" }).click();
   await expect(page).toHaveURL(/\/question\/1$/);
   for (let number = 1; number <= 2; number += 1) {
-    await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
+    await expect(page).toHaveURL(new RegExp(`/question/${number}import { expect, test } from "@playwright/test";
+import { execFileSync } from "node:child_process";
+import questionnaire from "../../data/contracts/questionnaire-configuration.v1.json" with { type: "json" };
+
+// This fixture mutates security metadata only in CI's named disposable database.
+// It never resets business rows, volumes or an owner's local database.
+function database(code) {
+  return execFileSync("python", ["-c", `
+import os, json
+from sqlalchemy import create_engine, text
+from sqlalchemy.engine import make_url
+url = os.environ.get("SHAHAB_DATABASE_URL", "")
+assert os.environ.get("SHAHAB_ENVIRONMENT") == "local"
+assert make_url(url).database == "shahab_profile_test", "requires disposable profile CI database"
+engine = create_engine(url)
+${code}
+engine.dispose()
+`], { encoding: "utf8" }).trim();
+}
+
+test.beforeAll(() => {
+  database(`from sqlalchemy.orm import Session
+from pathlib import Path
+from backend.app.data_pipeline.infrastructure.materialize_official_sources import materialize_official_sources
+from scripts.build_t05a_import_manifest import build_manifest
+from scripts.build_t05a_recommendation_config import build_config
+with Session(engine) as session, session.begin():
+    materialize_official_sources(session, loan_manifest=build_manifest(), config_manifest=build_config(),
+        questionnaire=json.loads(Path("data/contracts/questionnaire-configuration.v1.json").read_text()),
+        identifiers=json.loads(Path("data/contracts/canonical-identifiers.v1.json").read_text()),
+        actor_reference="CI-US12-T02-journey", approval_reason="source-backed release-gate fixture")`);
+});
+
+test.beforeEach(() => {
+  // Test isolation of the 120-second global quota, not a production bypass.
+  database(`with engine.begin() as connection:
+    connection.execute(text("DELETE FROM account_otp_quota_events"))`);
+});
+
+
+const persian = value => value.replace(/[0-9]/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
+
+test("full questionnaire, OTP, server partitions, published details and comparison", async ({ page }, testInfo) => {
+  // Retain the original journey's budget, including the approved five-second spinner.
+  test.setTimeout(60_000);
+  const answerWrites = [];
+  const recommendationPosts = [];
+  const detailRequests = [];
+  page.on("request", request => {
+    const path = new URL(request.url()).pathname;
+    if (/\/answers\/[^/]+$/.test(path) && request.method() === "PUT") answerWrites.push(request);
+    if (path === "/api/v1/recommendations" && request.method() === "POST") recommendationPosts.push(request);
+    if (path.startsWith("/api/v1/loans/")) detailRequests.push(request);
+  });
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.locator(".hp-select-trigger").click();
+  await page.locator(".hp-select-menu button").first().click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+  await expect(page).toHaveURL(/\/question\/1$/);
+  for (let number = 1; number <= 2; number += 1) {
+));
+    await expect(page.locator(".hp-questionnaire-page")).toHaveAttribute("aria-busy", "false");
     // The second entry step must be a person flow for this recommendation fixture.
     await page.getByRole("radio").nth(number === 2 ? 1 : 0).click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   }
   for (const question of questionnaire.questions) {
     await expect(page.locator("h1")).toBeVisible();
+    const questionnairePage = page.locator(".hp-questionnaire-page");
+    await expect(questionnairePage).toHaveAttribute("aria-busy", "false");
     const answer = page.getByRole("radio").first();
     await answer.click();
     await expect(answer).toBeChecked();
+    await expect(questionnairePage).toHaveAttribute("aria-busy", "false");
     const next = page.getByRole("button", { name: "پاسخ به سوال بعد" });
     await expect(next).toBeEnabled();
     await next.click();
