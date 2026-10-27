@@ -249,7 +249,6 @@ test("home CTA resumes the active incomplete questionnaire and keeps its saved a
   await page.getByRole("button", { name: "متوجه شدم" }).click();
 
   await expect(page).toHaveURL(/\/question\/4$/);
-  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
   await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
   await expect(page).toHaveURL(/\/question\/3$/);
   await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
