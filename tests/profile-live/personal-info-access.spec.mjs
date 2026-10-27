@@ -40,8 +40,13 @@ test.beforeEach(() => {
     connection.execute(text("DELETE FROM account_otp_quota_events"))`);
 });
 
-async function completeQuestionnaire(page) {
-  await page.goto("/");
+async function completeQuestionnaire(page, { requestFreshAfterResult = false } = {}) {
+  if (requestFreshAfterResult) {
+    await page.locator(".hp-questionnaire-brand").click();
+    await expect(page).toHaveURL(/\/$/);
+  } else {
+    await page.goto("/");
+  }
   await page.locator(".hp-select-trigger").click();
   await page.locator(".hp-select-menu button").first().click();
   await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
@@ -113,7 +118,7 @@ test("first OTP creates the account; a refreshed second questionnaire saves the 
   expect(list.status()).toBe(200);
   const historyId = (await list.json()).items[0].historyId;
   const old = await (await page.request.get(`/api/v1/recommendation-history/${historyId}`)).json();
-  await completeQuestionnaire(page);
+  await completeQuestionnaire(page, { requestFreshAfterResult: true });
   await page.reload();
   const inputs = page.locator(".hp-personal-info-form input");
   await expect(inputs.nth(0)).toHaveValue("آزمون");
