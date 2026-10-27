@@ -3360,12 +3360,18 @@ export default function HomePage() {
   }
 
   function handleQuestionnaireOpen() {
+    const completedRecommendation = Boolean(getActiveRecommendationHistoryState()?.result);
     clearActiveRecommendationHistoryState();
     // The home CTA resumes an unexpired attempt. Only the explicit action
-    // from completed results marks the next attempt as fresh.
+    // after reaching results marks the next attempt as fresh.
     clearFreshQuestionnaireStartMarker();
     window.history.replaceState(
-      { ...(window.history.state || {}), shahabResumeActiveQuestionnaire: true },
+      {
+        ...(window.history.state || {}),
+        ...(completedRecommendation
+          ? { shahabStartFreshQuestionnaire: true }
+          : { shahabResumeActiveQuestionnaire: true }),
+      },
       "",
       window.location.pathname + window.location.search,
     );
