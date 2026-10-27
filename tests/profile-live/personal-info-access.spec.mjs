@@ -44,7 +44,7 @@ async function completeQuestionnaire(page) {
   await page.goto("/question/1");
   for (let number = 1; number <= 2; number += 1) {
     await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
-    await page.getByRole("radio").first().click();
+    await page.getByRole("radio").nth(number === 2 ? 1 : 0).click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   }
   for (let number = 3; number <= 12; number += 1) {
