@@ -14,17 +14,18 @@ GRANT SELECT ON
     data_import_runs, data_source_files, alembic_version,
     accounts, account_access_sessions, account_otp_challenges,
     account_otp_quota_events, user_profiles, questionnaire_sessions,
-    questionnaire_answers, recommendation_history_runs,
+    questionnaire_answers, questionnaire_flow_answers, recommendation_history_runs,
     recommendation_history_items, recommendation_history_item_reasons,
     account_bookmarks TO shahab_api;
 -- Existing API startup idempotently initializes the canonical reference IDs.
 GRANT INSERT ON questionnaire_versions, questions, answer_options TO shahab_api;
 GRANT INSERT, UPDATE ON accounts, user_profiles, account_access_sessions,
     account_otp_challenges, questionnaire_sessions, questionnaire_answers,
+    questionnaire_flow_answers,
     account_bookmarks TO shahab_api;
 GRANT INSERT, DELETE ON account_otp_quota_events TO shahab_api;
 GRANT DELETE ON account_access_sessions, account_otp_challenges,
-    questionnaire_sessions, questionnaire_answers TO shahab_api;
+    questionnaire_sessions, questionnaire_answers, questionnaire_flow_answers TO shahab_api;
 GRANT INSERT ON recommendation_history_runs, recommendation_history_items,
     recommendation_history_item_reasons TO shahab_api;
 GRANT UPDATE (hidden_at) ON recommendation_history_runs TO shahab_api;

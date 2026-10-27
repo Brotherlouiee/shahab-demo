@@ -16,7 +16,7 @@ test("Swagger lists all operations and preserves account security declarations",
   const schema = await schemaResponse.json();
   const methods = new Set(["get", "post", "put", "delete", "patch", "head", "options"]);
   const count = Object.values(schema.paths).flatMap(path => Object.keys(path).filter(method => methods.has(method))).length;
-  expect(count).toBe(19);
+  expect(count).toBe(21);
   for (const method of ["get", "put", "delete"]) expect(schema.paths[method === "get" ? "/api/v1/bookmarks" : "/api/v1/bookmarks/{loan_id}"][method].security).toEqual([{ AccountBearer: [] }, { AccountCookie: [] }]);
   await expect(page.locator(".opblock")).toHaveCount(count);
 });

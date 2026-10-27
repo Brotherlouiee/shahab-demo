@@ -1,5 +1,17 @@
 import { expect, test } from "@playwright/test";
 
+const questionnaireFixture = {
+  sessionId: "t076-layout-session",
+  expiresAt: "2027-01-01T00:00:00Z",
+  answers: {},
+  flowAnswers: { loan_type: "shahab", entity_type: "person" },
+};
+
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: questionnaireFixture }));
+  await page.route(`**/api/v1/questionnaire/sessions/${questionnaireFixture.sessionId}`, route => route.fulfill({ json: questionnaireFixture }));
+});
+
 for (const route of [
   "/question/3", "/question/4", "/question/5", "/question/6", "/question/7",
   "/question/8", "/question/9", "/question/10", "/question/11", "/question/12",

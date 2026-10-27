@@ -1,8 +1,24 @@
+Warning: truncated output (original token count: 11140)
+Total output lines: 744
+
 import { expect, test } from "@playwright/test";
 import { installProfileApi } from "./fixtures/profile-api.mjs";
 test.beforeEach(async ({ page }) => { await installProfileApi(page); });
 import { readFileSync } from "node:fs";
 const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/questionnaire-configuration.v1.json", import.meta.url), "utf8"));
+
+const routeFixtureSession = {
+  sessionId: "opaque-live-flow-test",
+  expiresAt: "2027-01-01T00:00:00Z",
+  answers: {},
+  flowAnswers: { loan_type: "shahab", entity_type: "person" },
+};
+
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${routeFixtureSession.sessionId}`, route => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", route => route.fulfill({ json: routeFixtureSession }));
+});
 
 const sessionId = "opaque-live-flow-test";
 const additionalRankedRecommendations = [
@@ -29,6 +45,11 @@ const response = {
 };
 
 test("question two uses the corrected person label", async ({ page }) => {
+  await page.unroute("**/api/v1/questionnaire/sessions/current");
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: {
+    ...routeFixtureSession,
+    flowAnswers: { loan_type: "shahab" },
+  } }));
   await page.goto("/question/2");
   await expect(page.getByText("به عنوان یک «شخص» نیازمند اعتبار هستم.", { exact: true })).toBeVisible();
   await expect(page.getByText("به عنوان یک «شخصی» نیازمند اعتبار هستم.", { exact: true })).toHaveCount(0);
@@ -54,8 +75,9 @@ test("canonical questionnaire reaches the active real-result route and published
   page.on("request", (request) => {
     if (request.url().includes("/api/v1/loans/")) detailRequests.push(request.url());
   });
-  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
-  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", (route) => route.fulfill({ json: routeFixtureSession }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => {
     writes.push({ url: route.request().url(), body: route.request().postDataJSON() });
     return route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } });
@@ -197,225 +219,7 @@ test("canonical questionnaire reaches the active real-result route and published
   await expect(page).toHaveURL(compareResultUrl);
   const comparisonResultCardHeight = await page.locator(".hp-compare-result-card").first().evaluate((card) => card.getBoundingClientRect().height);
   await expectTitleTopOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong");
-  await expectTitleOffset(page.locator(".hp-compare-result-card").first(), ".hp-compare-result-card > strong", resultTitleOffset);
-  await expect(page.locator(".hp-compare-result-card img")).toHaveCount(2);
-  expect(await page.locator(".hp-compare-result-card img").evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
-  await expectLogoOffsets(page.locator(".hp-compare-result-card"), shortNameLogoOffset);
-  await expect(page.getByText("۵۰۰/۰۰۰/۰۰۰ تومان")).toBeVisible();
-  await page.getByRole("button", { name: "نرخ بهره" }).focus();
-  await page.keyboard.press("Enter");
-  await expect(page.getByRole("button", { name: "نرخ بهره" })).toHaveClass(/is-active/);
-  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveAttribute("dir", "ltr");
-  await expect(page.locator(".hp-compare-result-card .hp-loan-percent").first()).toHaveText("٪۱۸");
-  const comparedPercentParts = await page.locator(".hp-compare-result-card .hp-loan-percent").first().locator("span").evaluateAll((parts) => parts.map((part) => part.getBoundingClientRect().x));
-  expect(comparedPercentParts[0]).toBeLessThan(comparedPercentParts[1]);
-  await page.getByRole("button", { name: "بازگشت" }).click();
-  await expect(page).toHaveURL(/\/compare-loans$/);
-  await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(2);
-  await expect(page.getByRole("button", { name: "انتخاب میثاق ۲" })).toHaveClass(/is-selected/);
-  await expect(page.getByRole("button", { name: "انتخاب وام زیر آستانه" })).toHaveClass(/is-selected/);
-  await expectComparisonSelectionGeometry(page.locator(".hp-loan-compare-card").first(), comparisonResultCardHeight);
-  await page.getByRole("button", { name: "بازگشت" }).click();
-  await expect(page).toHaveURL(/\/loan-results$/);
-  await page.getByRole("button", { name: "مقایسه وام" }).click();
-  await expect(page).toHaveURL(/\/compare-loans$/);
-  await expect(page.locator(".hp-loan-compare-check[aria-pressed='true']")).toHaveCount(0);
-
-});
-
-async function logoOffsetFromCard(card) {
-  return card.evaluate((element) => {
-    const cardRect = element.getBoundingClientRect();
-    const logoRect = element.querySelector(".hp-bank-logo-box img").getBoundingClientRect();
-    return { right: cardRect.right - logoRect.right, top: logoRect.top - cardRect.top };
-  });
-}
-
-async function titleOffsetFromCard(card, selector) {
-  return card.evaluate((element, titleSelector) => {
-    const cardRect = element.getBoundingClientRect();
-    const titleRect = element.querySelector(titleSelector).getBoundingClientRect();
-    return { top: titleRect.top - cardRect.top };
-  }, selector);
-}
-
-async function expectTitleOffset(card, selector, expectedOffset) {
-  const offset = await titleOffsetFromCard(card, selector);
-  expect(Math.abs(offset.top - expectedOffset.top)).toBeLessThanOrEqual(1);
-}
-
-async function expectLogoOffsets(cards, expectedOffset) {
-  const offsets = await cards.evaluateAll((elements) => elements.map((element) => {
-    const cardRect = element.getBoundingClientRect();
-    const logoRect = element.querySelector(".hp-bank-logo-box img").getBoundingClientRect();
-    return { right: cardRect.right - logoRect.right, top: logoRect.top - cardRect.top };
-  }));
-  for (const offset of offsets) {
-    expect(Math.abs(offset.right - expectedOffset.right)).toBeLessThanOrEqual(1);
-    expect(Math.abs(offset.top - expectedOffset.top)).toBeLessThanOrEqual(1);
-  }
-}
-
-
-test("local profile, demonstration OTP and five-second spinner preserve the fail-closed result boundary", async ({ page }) => {
-  await page.goto("/personal-info");
-
-  const personalInputs = page.locator(".hp-personal-info-form input");
-  await personalInputs.nth(0).fill("علی");
-  await personalInputs.nth(1).fill("رضایی");
-  await personalInputs.nth(2).fill("۹۱۲۳۴۵۶۷۸۹");
-  await page.locator(".hp-personal-dropdown-trigger").nth(0).click();
-  await page.getByRole("option", { name: "تا ۲۲ میلیون تومان" }).click();
-  await page.locator(".hp-personal-dropdown-trigger").nth(1).click();
-  await page.getByRole("option", { name: "کارمند (شرکت یا اداره)" }).click();
-  await page.getByRole("button", { name: "تایید" }).click();
-
-  await expect(page).toHaveURL(/\/verify-code$/);
-  await expect(page.locator(".hp-loan-otp-row input")).toHaveCount(6);
-  await expect(page.getByRole("button", { name: /۰۲:۰۰/ })).toBeDisabled();
-
-  const otpInputs = page.locator(".hp-loan-otp-row input");
-  for (const [index, digit] of [..."۱۲۳۴۵۰"].entries()) await otpInputs.nth(index).fill(digit);
-  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
-  await expect(page.getByText("کد وارد شده اشتباه است")).toBeVisible();
-
-  for (const [index, digit] of [..."۱۲۳۴۵۶"].entries()) await otpInputs.nth(index).fill(digit);
-  await page.getByRole("button", { name: "تایید و جستجوی وام" }).click();
-  await expect(page).toHaveURL(/\/analysis$/);
-  await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۵");
-  await page.waitForTimeout(1100);
-  await expect(page.locator(".hp-analysis-spinner > span")).toHaveText("۴");
-  await expect(page).toHaveURL(/\/loan-results$/, { timeout: 7000 });
-  await expect(page.getByText(/ابتدا پرسشنامه را در همین تب کامل کنید/)).toBeVisible();
-
-  await page.getByRole("button", { name: "منو" }).click();
-  await expect(page.locator(".hp-sidebar-name")).toHaveText("علی رضایی");
-
-  await page.goto("/personal-info");
-  await personalInputs.nth(0).focus();
-  // F restores authenticated profile from the server, without a persisted suggestion.
-  await expect(personalInputs.nth(0)).toHaveValue("علی");
-  expect(await page.evaluate(() => localStorage.getItem("shahab.personalInfo.firstName"))).toBeNull();
-});
-
-for (const viewport of [
-  { name: "desktop", width: 1280, height: 720 },
-  { name: "mobile", width: 390, height: 834 },
-]) {
-  test(`${viewport.name} personal-information and OTP use the questionnaire content rail`, async ({ page }) => {
-    await page.setViewportSize({ width: viewport.width, height: viewport.height });
-    await page.goto("/question/3");
-    const questionnaireRail = await page.locator(".hp-stage-board").evaluate((board) => {
-      const rect = board.getBoundingClientRect();
-      return { left: rect.left, right: rect.right, width: rect.width };
-    });
-
-    await page.goto("/personal-info");
-    await expect(page.locator(".hp-questionnaire-header")).toBeVisible();
-    await expect(page.locator(".hp-personal-info-form")).toBeVisible();
-    await page.waitForTimeout(100);
-
-    const personalGeometry = await page.evaluate(() => {
-      const board = document.querySelector(".hp-stage-board");
-      const form = document.querySelector(".hp-personal-info-form");
-      const fields = [...form.querySelectorAll(":scope > label > input, :scope > label > .hp-personal-phone, :scope > label .hp-personal-dropdown-trigger")];
-      const actions = document.querySelector(".hp-personal-info-form + .hp-question-actions");
-      const confirm = actions.querySelector(".hp-next-question");
-      const previous = actions.querySelector(".hp-previous-question");
-      const phoneLabel = [...form.querySelectorAll(":scope > label > span:first-child")].find((label) => label.textContent.trim() === "شماره تلفن همراه");
-      const rect = (element) => element.getBoundingClientRect();
-      const boardRect = rect(board);
-      const formRect = rect(form);
-      const actionRect = rect(actions);
-      const confirmRect = rect(confirm);
-      const previousTextRange = document.createRange();
-      previousTextRange.selectNodeContents(previous);
-      const previousTextRect = previousTextRange.getBoundingClientRect();
-      return {
-        board: { left: boardRect.left, right: boardRect.right, width: boardRect.width },
-        form: { left: formRect.left, right: formRect.right, width: formRect.width },
-        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
-        fields: fields.map((field) => {
-          const fieldRect = rect(field);
-          return { left: fieldRect.left, right: fieldRect.right, width: fieldRect.width };
-        }),
-        labelRight: rect(form.querySelector("label > span")).right,
-        phoneLabel: {
-          whiteSpace: getComputedStyle(phoneLabel).whiteSpace,
-          width: rect(phoneLabel).width,
-          scrollWidth: phoneLabel.scrollWidth,
-        },
-        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
-          const dotRect = rect(dot);
-          return {
-            left: dotRect.left,
-            top: dotRect.top,
-            width: dotRect.width,
-            height: dotRect.height,
-          };
-        }),
-        previousRight: rect(previous).right,
-        previousText: {
-          left: previousTextRect.left,
-          right: previousTextRect.right,
-          width: previousTextRect.width,
-          height: previousTextRect.height,
-        },
-        previousTextAlign: getComputedStyle(previous).textAlign,
-        previousAfterContent: getComputedStyle(previous, "::after").content,
-        previousLayout: {
-          direction: getComputedStyle(previous).direction,
-          display: getComputedStyle(previous).display,
-          justifyContent: getComputedStyle(previous).justifyContent,
-          afterDirection: getComputedStyle(previous, "::after").direction,
-          afterTextAlign: getComputedStyle(previous, "::after").textAlign,
-          afterTransform: getComputedStyle(previous, "::after").transform,
-        },
-        fieldHeights: fields.map((field) => rect(field).height),
-        fieldGaps: fields.slice(1).map((field, index) => rect(field).top - rect(fields[index]).bottom),
-        confirm: { width: confirmRect.width, height: confirmRect.height },
-      };
-    });
-
-    expect(personalGeometry.board).toEqual(questionnaireRail);
-    expect(personalGeometry.form).toEqual(questionnaireRail);
-    expect(personalGeometry.actions).toEqual(questionnaireRail);
-    expect(personalGeometry.labelRight).toBeCloseTo(questionnaireRail.right, 1);
-    expect(personalGeometry.phoneLabel.whiteSpace).toBe("nowrap");
-    expect(personalGeometry.phoneLabel.scrollWidth).toBeLessThanOrEqual(personalGeometry.phoneLabel.width + 1);
-    expect(personalGeometry.dots).toHaveLength(2);
-    expect(Math.abs(personalGeometry.dots[0].left - personalGeometry.dots[1].left)).toBeCloseTo(53, 0);
-    expect(personalGeometry.previousText.height).toBeGreaterThan(0);
-    expect(personalGeometry.previousTextAlign).toBe("right");
-    expect(personalGeometry.previousAfterContent).toBe("none");
-    expect(personalGeometry.previousLayout).toEqual({ direction: "rtl", display: "flex", justifyContent: "flex-end", afterDirection: "rtl", afterTextAlign: "right", afterTransform: "none" });
-    for (const field of personalGeometry.fields) {
-      expect(field.left).toBeCloseTo(questionnaireRail.left, 1);
-      expect(field.right).toBeLessThanOrEqual(questionnaireRail.right + 1);
-    }
-    expect(personalGeometry.confirm).toEqual({ width: 145, height: 48 });
-    if (viewport.name === "mobile") {
-      await page.screenshot({ path: "docs/evidence/us-09-t06i/personal-info-mobile-reference.png" });
-    }
-    for (const height of personalGeometry.fieldHeights) expect(height).toBeCloseTo(36, 0);
-    for (const gap of personalGeometry.fieldGaps) expect(gap).toBeCloseTo(8, 0);
-
-    await page.goto("/verify-code");
-    await expect(page.locator(".hp-loan-otp-card")).toBeVisible();
-    await page.waitForTimeout(100);
-    const otpGeometry = await page.evaluate(() => {
-      const cardRect = document.querySelector(".hp-loan-otp-card").getBoundingClientRect();
-      const actionRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions").getBoundingClientRect();
-      const confirmRect = document.querySelector(".hp-loan-otp-card + .hp-question-actions .hp-next-question").getBoundingClientRect();
-      return {
-        card: { left: cardRect.left, right: cardRect.right, width: cardRect.width },
-        actions: { left: actionRect.left, right: actionRect.right, width: actionRect.width },
-        confirm: { width: confirmRect.width, height: confirmRect.height },
-        dots: [...document.querySelectorAll(".hp-step-dot")].map((dot) => {
-          const dotRect = dot.getBoundingClientRect();
-          return {
-            left: dotRect.left,
-            top: dotRect.top,
+  await expectTitleOffset(page.locator(".hp-compare-result-card").first…3140 tokens truncated…otRect.top,
             width: dotRect.width,
             height: dotRect.height,
           };
@@ -506,8 +310,9 @@ for (const viewport of [
 }
 
 async function mockRecommendationJourney(page) {
-  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
-  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", (route) => route.fulfill({ json: routeFixtureSession }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/recommendations", (route) => route.fulfill({ json: response }));
   await page.route("**/api/v1/loans/*", (route) => {

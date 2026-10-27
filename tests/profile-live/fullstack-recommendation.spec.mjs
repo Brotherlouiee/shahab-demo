@@ -54,7 +54,12 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   });
 
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/question/3");
+  await page.goto("/question/1");
+  for (let number = 1; number <= 2; number += 1) {
+    await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
+    await page.getByRole("radio").first().click();
+    await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  }
   for (const question of questionnaire.questions) {
     await expect(page.getByRole("heading", { name: persian(question.prompt).replace(/\s+/g, " ").trim() })).toBeVisible();
     const answer = page.getByRole("radio").first();
