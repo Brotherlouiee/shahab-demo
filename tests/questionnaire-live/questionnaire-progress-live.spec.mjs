@@ -14,7 +14,8 @@ test("persists every visible answer and blocks URL jumps against the real API an
     const currentRoute = journeyRoutes[index];
     const nextRoute = journeyRoutes[index + 1] || "/personal-info";
     await expect(page).toHaveURL(new RegExp(`${currentRoute.replaceAll("/", "\\/")}$`));
-    await page.getByRole("radio").nth(index === 1 ? 1 : 0).click();
+    const selectedAnswerIndex = index === 1 ? 1 : 0;
+    await page.getByRole("radio").nth(selectedAnswerIndex).click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
     await expect(page).toHaveURL(new RegExp(`${nextRoute.replaceAll("/", "\\/")}$`));
 
@@ -31,7 +32,7 @@ test("persists every visible answer and blocks URL jumps against the real API an
     const backButtonName = nextRoute === "/personal-info" ? "بازگشت به مرحله قبل" : "بازگشت به سوال قبل";
     await page.getByRole("button", { name: backButtonName }).click();
     await expect(page).toHaveURL(new RegExp(`${currentRoute.replaceAll("/", "\\/")}$`));
-    await expect(page.getByRole("radio").first()).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByRole("radio").nth(selectedAnswerIndex)).toHaveAttribute("aria-checked", "true");
 
     if (index < journeyRoutes.length - 1) {
       await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
