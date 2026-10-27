@@ -10,13 +10,13 @@ const canonicalIdentifiers = JSON.parse(
 );
 const canonicalQuestionRoutes = Object.entries(canonicalIdentifiers.questionnaireRouteMap);
 
-async function mockQuestionnaireSessionApi(page, { failStart = false, existingSession = false } = {}) {
+async function mockQuestionnaireSessionApi(page, { failStart = false, existingSession = false, withRecommendationHistory = true } = {}) {
   const answers = {};
   const flowAnswers = existingSession ? { loan_type: "shahab", entity_type: "person" } : {};
   let sessionExists = existingSession;
   const requests = [];
 
-  if (existingSession) {
+  if (existingSession && withRecommendationHistory) {
     await page.addInitScript((id) => {
       window.history.replaceState({ shahabRecommendation: { sessionId: id } }, "", window.location.href);
     }, sessionId);
@@ -227,4 +227,32 @@ test("restores an answered canonical step from server state after refresh", asyn
   await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
   await expect(page).toHaveURL(/\/question\/3$/);
   await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+});
+
+test("home CTA resumes the active incomplete questionnaire and keeps its saved answer", async ({ page }) => {
+  const { answers, requests } = await mockQuestionnaireSessionApi(page, {
+    existingSession: true,
+    withRecommendationHistory: false,
+  });
+  const question = questionnaireConfiguration.questions[0];
+  answers[question.questionId] = question.answerOptions[1].answerId;
+
+  await page.goto("/question/3");
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+  await page.locator(".hp-questionnaire-brand").click();
+  await expect(page).toHaveURL(/\/$/);
+
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.locator(".hp-select-menu").getByRole("button", { name: "تا ۵۰ میلیون", exact: true }).click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+  expect(requests.filter(({ method }) => method === "POST")).toHaveLength(0);
+  expect(requests.filter(({ method, pathname }) => method === "GET" && pathname.endsWith("/sessions/current")))
+    .toHaveLength(2);
 });

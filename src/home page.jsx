@@ -26,6 +26,7 @@ import {
   getQuestionnaireRouteForPrototypeQuestionIndex,
   getQuestionnaireStepIdForPrototypeQuestionIndex,
   getPrototypeQuestionIndexForQuestionnaireStepId,
+  questionnaireJourneyRouteEntries,
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
@@ -406,6 +407,12 @@ function clearActiveRecommendationHistoryState() {
 function clearFreshQuestionnaireStartMarker() {
   if (typeof window === "undefined" || !window.history.state?.shahabStartFreshQuestionnaire) return;
   const { shahabStartFreshQuestionnaire: _discarded, ...nextState } = window.history.state;
+  window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
+}
+
+function clearResumeQuestionnaireMarker() {
+  if (typeof window === "undefined" || !window.history.state?.shahabResumeActiveQuestionnaire) return;
+  const { shahabResumeActiveQuestionnaire: _discarded, ...nextState } = window.history.state;
   window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
 }
 
@@ -1117,6 +1124,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const initialSessionId = initialRecommendationHistory?.sessionId || "";
   const isFreshQuestionnaireStart = window.history.state?.shahabStartFreshQuestionnaire === true;
+  const isResumeActiveQuestionnaire = window.history.state?.shahabResumeActiveQuestionnaire === true;
   const pendingQuestionnaireSessionIdRef = useRef("");
   const isInitialQuestionnaireRoute = /^\/question\/\d+$/.test(initialRequestedPath);
   const initialRouteState = isInitialQuestionnaireRoute && !initialSessionId
@@ -1705,10 +1713,16 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         answersRef.current = restored;
         setAnswers(restored);
         initialRouteRestoredRef.current = true;
+        const answeredQuestionIds = Object.keys(session.answers || {});
+        const answeredFlowStepIds = Object.keys(session.flowAnswers || {});
+        const completedSteps = new Set([...answeredQuestionIds, ...answeredFlowStepIds]);
+        const resumePath = isResumeActiveQuestionnaire
+          ? questionnaireJourneyRouteEntries.find(([, stepId]) => !completedSteps.has(stepId))?.[0] || "/personal-info"
+          : initialRequestedPath;
         const routeState = getGuardedQuestionnaireRouteState(
-          initialRequestedPath,
-          Object.keys(session.answers || {}),
-          Object.keys(session.flowAnswers || {}),
+          resumePath,
+          answeredQuestionIds,
+          answeredFlowStepIds,
         );
         setCurrentQuestion(routeState.questionIndex);
         setIsOtpVerificationStep(routeState.isOtpVerificationStep);
@@ -1717,6 +1731,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         if (routeState.pathname !== window.location.pathname) {
           window.history.replaceState(window.history.state, "", routeState.pathname);
         }
+        if (isResumeActiveQuestionnaire) clearResumeQuestionnaireMarker();
         setQuestionnaireSessionId(session.sessionId);
         setIsRestoringQuestionnaireRoute(false);
         return;
@@ -1730,6 +1745,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       if (routeState.pathname !== window.location.pathname) {
         window.history.replaceState(window.history.state, "", routeState.pathname);
       }
+      if (isResumeActiveQuestionnaire) clearResumeQuestionnaireMarker();
       setIsRestoringQuestionnaireRoute(false);
     }).catch(() => {
       if (!active) return;
@@ -3344,9 +3360,18 @@ export default function HomePage() {
   }
 
   function handleQuestionnaireOpen() {
+    const completedRecommendation = Boolean(getActiveRecommendationHistoryState()?.result);
     clearActiveRecommendationHistoryState();
+    // The home CTA resumes an unexpired attempt. Only the explicit action
+    // after reaching results marks the next attempt as fresh.
+    clearFreshQuestionnaireStartMarker();
     window.history.replaceState(
-      { ...(window.history.state || {}), shahabStartFreshQuestionnaire: true },
+      {
+        ...(window.history.state || {}),
+        ...(completedRecommendation
+          ? { shahabStartFreshQuestionnaire: true }
+          : { shahabResumeActiveQuestionnaire: true }),
+      },
       "",
       window.location.pathname + window.location.search,
     );
