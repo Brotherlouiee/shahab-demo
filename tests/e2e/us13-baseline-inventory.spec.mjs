@@ -377,8 +377,8 @@ for (const viewport of heroViewports) {
         ({ path }) => path !== "/api/v1/questionnaire/sessions/current",
       );
       expect(candidateHeroApiRequests, `T01 Hero API request sequence at ${viewport.width}px`).toEqual(baseline.apiRequests);
-      expect(questionnaireResumeRequests, `T01 fresh questionnaire must not resume an older session at ${viewport.width}px`)
-        .toEqual([]);
+      expect(questionnaireResumeRequests, `T01 home CTA must check for a resumable questionnaire at ${viewport.width}px`)
+        .toEqual([{ method: "GET", path: "/api/v1/questionnaire/sessions/current" }]);
       expect(candidate.navigation, `T01 Hero acknowledgement navigation at ${viewport.width}px`).toEqual(baseline.navigation);
 
       if (viewport.width === 390) {
