@@ -3335,7 +3335,6 @@ export default function HomePage() {
     setLoanResultView("");
     setIsOtpVerificationStep(false);
     setIsAnalyzingLoans(false);
-    setCurrentQuestion(0);
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }
