@@ -23,6 +23,7 @@ from backend.app.recommendation.infrastructure.sqlalchemy_snapshot import (
     SnapshotUnavailableError,
     SqlAlchemyRecommendationSnapshotRepository,
 )
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
 
@@ -66,6 +67,7 @@ class LiveRecommendationTests(unittest.TestCase):
         started = self.client.post("/api/v1/questionnaire/sessions")
         self.assertEqual(started.status_code, 201)
         session_id = started.json()["sessionId"]
+        complete_questionnaire_entry_steps(self.client, session_id)
         incomplete = self.client.post("/api/v1/recommendations", json={"sessionId": session_id})
         self.assertEqual(incomplete.status_code, 422)
         for question in self.questionnaire["questions"]:
@@ -155,6 +157,7 @@ class LiveRecommendationTests(unittest.TestCase):
 
     def test_missing_published_snapshot_fails_closed(self):
         session_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        complete_questionnaire_entry_steps(self.client, session_id)
         for question in self.questionnaire["questions"]:
             self.client.put(
                 f"/api/v1/questionnaire/sessions/{session_id}/answers/{question['questionId']}",

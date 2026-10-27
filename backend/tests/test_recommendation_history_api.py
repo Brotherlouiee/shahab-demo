@@ -18,6 +18,7 @@ from backend.app.data_pipeline.infrastructure.materialize_official_sources impor
 from backend.app.infrastructure.db.models import Base, RecommendationHistoryRun
 from backend.app.main import create_app
 from backend.app.recommendation.infrastructure.history import RecommendationHistoryRepository
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
 
@@ -69,6 +70,7 @@ class RecommendationHistoryApiTests(unittest.TestCase):
         started = self.client.post("/api/v1/questionnaire/sessions")
         self.assertEqual(started.status_code, 201)
         session_id = started.json()["sessionId"]
+        complete_questionnaire_entry_steps(self.client, session_id)
         for question in self.questionnaire["questions"]:
             response = self.client.put(
                 f"/api/v1/questionnaire/sessions/{session_id}/answers/{question['questionId']}",

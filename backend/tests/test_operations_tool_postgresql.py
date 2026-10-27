@@ -34,6 +34,7 @@ from backend.app.main import create_app
 from backend.app.operations.authorization import OperationsAccessDenied
 from backend.app.operations.infrastructure.local_ssh import LocalSshAuthority
 from backend.tests.operations_authority_fixture import TLSAuthorityFixture
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 from scripts.operations_tool import OperationsCommand, execute, projection
 
 DATABASE_URL = os.environ.get("SHAHAB_TEST_DATABASE_URL")
@@ -283,6 +284,7 @@ class OperationsToolPostgreSQLTests(unittest.TestCase):
             started = owner.post("/api/v1/questionnaire/sessions")
             self.assertEqual(started.status_code, 201)
             session_id = started.json()["sessionId"]
+            complete_questionnaire_entry_steps(owner, session_id)
             self.assertEqual(other.get(f"/api/v1/questionnaire/sessions/{session_id}").status_code, 403)
             for question in questions:
                 written = owner.put(

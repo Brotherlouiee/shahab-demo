@@ -34,10 +34,30 @@ export async function readQuestionnaireSession(sessionId, fetchImpl = fetch) {
   );
 }
 
+export async function readCurrentQuestionnaireSession(fetchImpl = fetch) {
+  const response = await fetchImpl(`${apiBaseUrl}/questionnaire/sessions/current`, { cache: "no-store" });
+  if (!response.ok) throw new QuestionnaireSessionApiError("questionnaire_session_unavailable", response.status);
+  return response.json();
+}
+
 export async function saveQuestionnaireAnswer(sessionId, questionId, answerId, fetchImpl = fetch) {
   return parseResponse(
     await fetchImpl(
       `${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}/answers/${encodeURIComponent(questionId)}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answerId }),
+      },
+    ),
+    "questionnaire_answer_rejected",
+  );
+}
+
+export async function saveQuestionnaireFlowAnswer(sessionId, stepId, answerId, fetchImpl = fetch) {
+  return parseResponse(
+    await fetchImpl(
+      `${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}/flow-answers/${encodeURIComponent(stepId)}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

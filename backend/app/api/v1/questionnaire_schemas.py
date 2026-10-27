@@ -10,10 +10,16 @@ class AnswerWriteRequest(BaseModel):
     model_config = {"populate_by_name": True, "extra": "forbid"}
 
 
+class FlowAnswerWriteRequest(BaseModel):
+    answer_id: str = Field(alias="answerId", min_length=1, max_length=32)
+    model_config = {"populate_by_name": True, "extra": "forbid"}
+
+
 class SessionResponse(BaseModel):
     session_id: str = Field(alias="sessionId")
     expires_at: str = Field(alias="expiresAt")
     answers: dict[str, str]
+    flow_answers: dict[str, str] = Field(default_factory=dict, alias="flowAnswers")
     model_config = {"populate_by_name": True}
 
 

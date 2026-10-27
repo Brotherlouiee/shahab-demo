@@ -6,7 +6,7 @@
  * only place where a public path is translated to (or from) the stable
  * question IDs approved in the questionnaire contract.
  */
-const routeEntries = Object.freeze([
+const canonicalRouteEntries = Object.freeze([
   ["/question/3", "Q1"],
   ["/question/4", "Q2"],
   ["/question/5", "Q3"],
@@ -19,11 +19,24 @@ const routeEntries = Object.freeze([
   ["/question/12", "S13"],
 ]);
 
-const questionIdByRoute = new Map(routeEntries);
-const routeByQuestionId = new Map(routeEntries.map(([route, questionId]) => [questionId, route]));
+const flowRouteEntries = Object.freeze([
+  ["/question/1", "loan_type"],
+  ["/question/2", "entity_type"],
+]);
+const journeyRouteEntries = Object.freeze([
+  ...flowRouteEntries,
+  ...canonicalRouteEntries,
+]);
+
+const questionIdByRoute = new Map(canonicalRouteEntries);
+const routeByQuestionId = new Map(canonicalRouteEntries.map(([route, questionId]) => [questionId, route]));
 const prototypeQuestionIndexByQuestionId = new Map(
-  routeEntries.map(([, questionId], offset) => [questionId, offset + 2]),
+  canonicalRouteEntries.map(([, questionId], offset) => [questionId, offset + 2]),
 );
+const stepIdByPrototypeQuestionIndex = new Map([
+  [0, "loan_type"], [1, "entity_type"],
+  ...canonicalRouteEntries.map(([, questionId], offset) => [offset + 2, questionId]),
+]);
 
 /** Return a canonical ID for an exact questionnaire path, otherwise null. */
 export function getCanonicalQuestionIdForRoute(pathname) {
@@ -46,22 +59,38 @@ export function getPrototypeQuestionIndexForCanonicalQuestionId(questionId) {
 
 /** Return a canonical route for an existing prototype screen index, if mapped. */
 export function getQuestionnaireRouteForPrototypeQuestionIndex(questionIndex) {
-  const questionId = routeEntries[questionIndex - 2]?.[1];
-  return questionId ? getQuestionnaireRouteForCanonicalQuestionId(questionId) : null;
+  return journeyRouteEntries[questionIndex]?.[0] ?? null;
+}
+
+export function getQuestionnaireStepIdForPrototypeQuestionIndex(questionIndex) {
+  return stepIdByPrototypeQuestionIndex.get(questionIndex) ?? null;
+}
+
+export function getPrototypeQuestionIndexForQuestionnaireStepId(stepId) {
+  for (const [index, candidate] of stepIdByPrototypeQuestionIndex) {
+    if (candidate === stepId) return index;
+  }
+  return null;
 }
 
 /**
  * Keep direct links and browser history from skipping required questions.
  * A route at the first unanswered question is allowed; later routes are not.
  */
-export function guardQuestionnaireRoute(pathname, answeredQuestionIds = []) {
-  const requestedIndex = routeEntries.findIndex(([route]) => route === pathname);
-  if (requestedIndex < 0) return pathname;
+export function guardQuestionnaireRoute(pathname, answeredQuestionIds = [], answeredFlowStepIds = []) {
+  const requestedIndex = journeyRouteEntries.findIndex(([route]) => route === pathname);
+  if (requestedIndex < 0) {
+    if (!/^\/question\/\d+$/.test(pathname)) return pathname;
+    const completed = new Set([...answeredFlowStepIds, ...answeredQuestionIds]);
+    const firstUnansweredIndex = journeyRouteEntries.findIndex(([, stepId]) => !completed.has(stepId));
+    return journeyRouteEntries[Math.max(0, firstUnansweredIndex)][0];
+  }
 
-  const answered = new Set(answeredQuestionIds);
-  const firstUnansweredIndex = routeEntries.findIndex(([, questionId]) => !answered.has(questionId));
+  const completed = new Set([...answeredFlowStepIds, ...answeredQuestionIds]);
+  const firstUnansweredIndex = journeyRouteEntries.findIndex(([, stepId]) => !completed.has(stepId));
   if (firstUnansweredIndex < 0 || requestedIndex <= firstUnansweredIndex) return pathname;
-  return routeEntries[firstUnansweredIndex][0];
+  return journeyRouteEntries[firstUnansweredIndex][0];
 }
 
-export const canonicalQuestionnaireRouteEntries = routeEntries;
+export const canonicalQuestionnaireRouteEntries = canonicalRouteEntries;
+export const questionnaireJourneyRouteEntries = journeyRouteEntries;

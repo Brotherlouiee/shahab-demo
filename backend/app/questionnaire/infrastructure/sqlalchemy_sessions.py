@@ -8,16 +8,12 @@ from datetime import UTC, datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from backend.app.infrastructure.db.models import (
-    AnswerOption,
-    Question,
-    QuestionnaireSessionState,
-    QuestionnaireVersion,
-)
+from backend.app.infrastructure.db.models import AnswerOption, Question, QuestionnaireSessionState, QuestionnaireVersion
 from backend.app.infrastructure.db.models import QuestionnaireAnswer as QuestionnaireAnswerRow
 from backend.app.infrastructure.db.models import QuestionnaireSession as QuestionnaireSessionRow
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
 from backend.app.questionnaire.domain.session import QuestionnaireAnswer, QuestionnaireSession
+from backend.app.questionnaire.infrastructure.flow_answer_model import QuestionnaireFlowAnswer
 from backend.app.questionnaire.infrastructure.retention import purge_expired_batch
 
 
@@ -99,6 +95,29 @@ class SqlAlchemyQuestionnaireSessionRepository:
             .order_by(Question.display_order)
         ).all()
         return tuple(QuestionnaireAnswer(question_id, answer_id) for question_id, answer_id in rows)
+
+    def upsert_flow_answer(self, session_id: str, step_id: str, answer_id: str) -> None:
+        session_uuid = uuid.UUID(session_id)
+        row = self._session.get(QuestionnaireFlowAnswer, (session_uuid, step_id))
+        if row is None:
+            self._session.add(
+                QuestionnaireFlowAnswer(
+                    questionnaire_session_id=session_uuid,
+                    step_id=step_id,
+                    answer_id=answer_id,
+                )
+            )
+        else:
+            row.answer_id = answer_id
+        self._session.commit()
+
+    def list_flow_answers(self, session_id: str) -> dict[str, str]:
+        rows = self._session.execute(
+            select(QuestionnaireFlowAnswer.step_id, QuestionnaireFlowAnswer.answer_id).where(
+                QuestionnaireFlowAnswer.questionnaire_session_id == uuid.UUID(session_id)
+            )
+        ).all()
+        return dict(rows)
 
     def delete_expired(self, now: datetime) -> tuple[str, ...]:
         return purge_expired_batch(self._session, now=now).session_ids

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import secrets
+from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
@@ -33,6 +34,7 @@ from backend.app.questionnaire.infrastructure.proof import (
 
 from .questionnaire_schemas import (
     AnswerWriteRequest,
+    FlowAnswerWriteRequest,
     QuestionnaireAnswerOptionResponse,
     QuestionnaireConfigurationResponse,
     QuestionnaireQuestionResponse,
@@ -68,6 +70,7 @@ def _session_response(service: QuestionnaireSessionService, session_id: str) -> 
         sessionId=str(session.session_id),
         expiresAt=session.expires_at.isoformat(),
         answers={answer.question_id: answer.answer_id for answer in service.answers(session_id)},
+        flowAnswers=service.flow_answers(session_id),
     )
 
 
@@ -93,6 +96,46 @@ def start_session(
         path="/api/v1",
     )
     return _session_response(service, str(session.session_id))
+
+
+@router.get("/sessions/current", response_model=SessionResponse | None)
+def resume_current_session(
+    request: Request,
+    actor: Annotated[AccountActor | None, Depends(optional_authenticated_account)],
+    db: Annotated[Session | None, Depends(get_request_database_session)],
+    service: Annotated[QuestionnaireSessionService, Depends(get_questionnaire_session_service)],
+    response: Response,
+) -> SessionResponse | None:
+    """Restore the newest active session proven by this browser's HttpOnly cookie.
+
+    This supports a full page load after a user manually edits the questionnaire
+    path. Session IDs remain out of URLs and browser storage; the capability is
+    still verified against its server-side digest before any answers are read.
+    """
+    response.headers["Cache-Control"] = "no-store"
+    candidates: list[tuple[datetime, str]] = []
+    for name, secret in request.cookies.items():
+        if not name.startswith(PROOF_COOKIE_PREFIX):
+            continue
+        raw_id = name.removeprefix(PROOF_COOKIE_PREFIX)
+        try:
+            session_id = str(UUID(raw_id))
+            require_questionnaire_access(
+                session_id,
+                secret,
+                actor,
+                db,
+                get_local_questionnaire_repository(),
+            )
+            session = service.get(session_id)
+        except (ApiError, LookupError, QuestionnaireSessionExpiredError, ValueError):
+            continue
+        candidates.append((session.created_at, session_id))
+
+    if not candidates:
+        return None
+    _, session_id = max(candidates, key=lambda candidate: candidate[0])
+    return _session_response(service, session_id)
 
 
 @router.get("/sessions/{session_id}", response_model=SessionResponse)
@@ -143,6 +186,37 @@ def write_answer(
     except CanonicalAnswerValidationError as error:
         raise ApiError(
             status_code=422, code=ErrorCode.INVALID_REQUEST, message="Answer is not valid for this question."
+        ) from error
+
+
+@router.put("/sessions/{session_id}/flow-answers/{step_id}", response_model=SessionResponse)
+def write_flow_answer(
+    session_id: str,
+    step_id: str,
+    authorization: Annotated[None, Depends(authorize_questionnaire)],
+    request: Request,
+    db: Annotated[Session | None, Depends(get_request_database_session)],
+    actor: Annotated[AccountActor | None, Depends(optional_authenticated_account)],
+    payload: Annotated[FlowAnswerWriteRequest, Body()],
+    service: Annotated[QuestionnaireSessionService, Depends(get_questionnaire_session_service)],
+    response: Response,
+) -> SessionResponse:
+    response.headers["Cache-Control"] = "no-store"
+    try:
+        service.record_flow_answer(session_id, step_id, payload.answer_id)
+        authorize_questionnaire(session_id, request, db, actor)
+        return _session_response(service, session_id)
+    except LookupError as error:
+        raise ApiError(
+            status_code=404, code=ErrorCode.NOT_FOUND, message="Questionnaire session was not found."
+        ) from error
+    except QuestionnaireSessionExpiredError as error:
+        raise ApiError(
+            status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired."
+        ) from error
+    except CanonicalAnswerValidationError as error:
+        raise ApiError(
+            status_code=422, code=ErrorCode.INVALID_REQUEST, message="Answer is not valid for this step or sequence."
         ) from error
 
 

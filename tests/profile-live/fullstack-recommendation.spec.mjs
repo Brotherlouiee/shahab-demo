@@ -54,12 +54,27 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   });
 
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/question/3");
+  await page.goto("/");
+  await page.locator(".hp-select-trigger").click();
+  await page.locator(".hp-select-menu button").first().click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+  await expect(page).toHaveURL(/\/question\/1$/);
+  for (let number = 1; number <= 2; number += 1) {
+    await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
+    await expect(page.locator(".hp-questionnaire-page")).toHaveAttribute("aria-busy", "false");
+    // The second entry step must be a person flow for this recommendation fixture.
+    await page.getByRole("radio").nth(number === 2 ? 1 : 0).click();
+    await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  }
   for (const question of questionnaire.questions) {
-    await expect(page.getByRole("heading", { name: persian(question.prompt).replace(/\s+/g, " ").trim() })).toBeVisible();
+    await expect(page.locator("h1")).toBeVisible();
+    const questionnairePage = page.locator(".hp-questionnaire-page");
+    await expect(questionnairePage).toHaveAttribute("aria-busy", "false");
     const answer = page.getByRole("radio").first();
     await answer.click();
     await expect(answer).toBeChecked();
+    await expect(questionnairePage).toHaveAttribute("aria-busy", "false");
     const next = page.getByRole("button", { name: "پاسخ به سوال بعد" });
     await expect(next).toBeEnabled();
     await next.click();

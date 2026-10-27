@@ -26,17 +26,19 @@ test("server-restored profile prefills the phone and storage retry with the same
   expect(otp).toEqual([]);
 });
 
-test("expiry rejects the canonical answer without creating and replaying a new questionnaire", async ({ page }) => {
+test("expiry rejects the first flow answer without creating and replaying a new questionnaire", async ({ page }) => {
   let starts = 0;
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: null }));
   await page.route("**/api/v1/questionnaire/sessions", route => {
     starts += 1;
-    return route.fulfill({ status: 201, json: { sessionId: "expired-fixture", expiresAt: "2000-01-01T00:00:00Z", answers: {} } });
+    return route.fulfill({ status: 201, json: { sessionId: "expired-fixture", expiresAt: "2000-01-01T00:00:00Z", answers: {}, flowAnswers: {} } });
   });
   await page.route("**/api/v1/questionnaire/sessions/expired-fixture", route => route.request().method() === "GET"
     ? route.fulfill({ status: 410, json: {} })
     : route.fallback());
+  await page.route("**/api/v1/questionnaire/sessions/expired-fixture/flow-answers/loan_type", route => route.fulfill({ status: 410, json: {} }));
   await page.route("**/api/v1/questionnaire/sessions/expired-fixture/answers/Q1", route => route.fulfill({ status: 410, json: {} }));
-  await page.goto("/question/3");
+  await page.goto("/question/1");
   await page.getByRole("radio").first().click();
   await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   await expect(page.getByRole("alert")).toContainText("مهلت پرسشنامه تمام شده");

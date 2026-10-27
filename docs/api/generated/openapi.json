@@ -152,6 +152,22 @@
         "title": "ErrorResponse",
         "type": "object"
       },
+      "FlowAnswerWriteRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answerId": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Answerid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "answerId"
+        ],
+        "title": "FlowAnswerWriteRequest",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -893,6 +909,13 @@
           "expiresAt": {
             "title": "Expiresat",
             "type": "string"
+          },
+          "flowAnswers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Flowanswers",
+            "type": "object"
           },
           "sessionId": {
             "title": "Sessionid",
@@ -2127,6 +2150,123 @@
         ]
       }
     },
+    "/api/v1/questionnaire/sessions/current": {
+      "get": {
+        "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
+        "operationId": "resume_current_session_api_v1_questionnaire_sessions_current_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/SessionResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Resume Current Session Api V1 Questionnaire Sessions Current Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Ownership denied"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing or inaccessible resource"
+          },
+          "410": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Questionnaire expired"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal failure"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service/storage unavailable"
+          }
+        },
+        "security": [
+          {},
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
+        "summary": "Resume Current Session",
+        "tags": [
+          "questionnaire"
+        ]
+      }
+    },
     "/api/v1/questionnaire/sessions/{session_id}": {
       "get": {
         "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
@@ -2380,6 +2520,143 @@
           }
         ],
         "summary": "Write Answer",
+        "tags": [
+          "questionnaire"
+        ]
+      }
+    },
+    "/api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}": {
+      "put": {
+        "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
+        "operationId": "write_flow_answer_api_v1_questionnaire_sessions__session_id__flow_answers__step_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "step_id",
+            "required": true,
+            "schema": {
+              "title": "Step Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FlowAnswerWriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Ownership denied"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Missing or inaccessible resource"
+          },
+          "410": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Questionnaire expired"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal failure"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service/storage unavailable"
+          }
+        },
+        "security": [
+          {},
+          {
+            "AccountBearer": []
+          },
+          {
+            "AccountCookie": []
+          }
+        ],
+        "summary": "Write Flow Answer",
         "tags": [
           "questionnaire"
         ]

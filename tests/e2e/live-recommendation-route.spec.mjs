@@ -4,6 +4,19 @@ test.beforeEach(async ({ page }) => { await installProfileApi(page); });
 import { readFileSync } from "node:fs";
 const questionnaire = JSON.parse(readFileSync(new URL("../../data/contracts/questionnaire-configuration.v1.json", import.meta.url), "utf8"));
 
+const routeFixtureSession = {
+  sessionId: "opaque-live-flow-test",
+  expiresAt: "2027-01-01T00:00:00Z",
+  answers: {},
+  flowAnswers: { loan_type: "shahab", entity_type: "person" },
+};
+
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${routeFixtureSession.sessionId}`, route => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", route => route.fulfill({ json: routeFixtureSession }));
+});
+
 const sessionId = "opaque-live-flow-test";
 const additionalRankedRecommendations = [
   ["published-loan-2", "بانک توسعه تعاون", "طرح نیروگاه خورشیدی خانگی", 0.86],
@@ -29,6 +42,11 @@ const response = {
 };
 
 test("question two uses the corrected person label", async ({ page }) => {
+  await page.unroute("**/api/v1/questionnaire/sessions/current");
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: {
+    ...routeFixtureSession,
+    flowAnswers: { loan_type: "shahab" },
+  } }));
   await page.goto("/question/2");
   await expect(page.getByText("به عنوان یک «شخص» نیازمند اعتبار هستم.", { exact: true })).toBeVisible();
   await expect(page.getByText("به عنوان یک «شخصی» نیازمند اعتبار هستم.", { exact: true })).toHaveCount(0);
@@ -54,8 +72,9 @@ test("canonical questionnaire reaches the active real-result route and published
   page.on("request", (request) => {
     if (request.url().includes("/api/v1/loans/")) detailRequests.push(request.url());
   });
-  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
-  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", (route) => route.fulfill({ json: routeFixtureSession }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => {
     writes.push({ url: route.request().url(), body: route.request().postDataJSON() });
     return route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } });
@@ -506,8 +525,9 @@ for (const viewport of [
 }
 
 async function mockRecommendationJourney(page) {
-  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
-  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
+  await page.route("**/api/v1/questionnaire/sessions", (route) => route.fulfill({ status: 201, json: routeFixtureSession }));
+  await page.route(`**/api/v1/questionnaire/sessions/${sessionId}`, (route) => route.fulfill({ json: routeFixtureSession }));
+  await page.route("**/api/v1/questionnaire/sessions/*/flow-answers/*", (route) => route.fulfill({ json: routeFixtureSession }));
   await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => route.fulfill({ json: { sessionId, expiresAt: "2027-01-01T00:00:00Z", answers: {} } }));
   await page.route("**/api/v1/recommendations", (route) => route.fulfill({ json: response }));
   await page.route("**/api/v1/loans/*", (route) => {

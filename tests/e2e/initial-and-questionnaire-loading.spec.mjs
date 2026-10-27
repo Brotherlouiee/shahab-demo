@@ -55,15 +55,20 @@ test("shows the approved guest and local-OTP account menus", async ({ page }) =>
 });
 
 test("shows a delayed skeleton while a canonical questionnaire answer is saved", async ({ page }) => {
-  let releaseSession;
-  await page.route("**/api/v1/questionnaire/sessions", (route) => new Promise((resolve) => {
-    releaseSession = async () => {
-      await route.fulfill({ status: 201, json: { sessionId: "test-session", expiresAt: "2027-01-01T00:00:00Z", answers: {} } });
+  let releaseAnswer;
+  const session = {
+    sessionId: "test-session",
+    expiresAt: "2027-01-01T00:00:00Z",
+    answers: {},
+    flowAnswers: { loan_type: "shahab", entity_type: "person" },
+  };
+  await page.route("**/api/v1/questionnaire/sessions/current", route => route.fulfill({ json: session }));
+  await page.route("**/api/v1/questionnaire/sessions/test-session", route => route.fulfill({ json: session }));
+  await page.route("**/api/v1/questionnaire/sessions/*/answers/*", route => new Promise(resolve => {
+    releaseAnswer = async () => {
+      await route.fulfill({ json: session });
       resolve();
     };
-  }));
-  await page.route("**/api/v1/questionnaire/sessions/*/answers/*", (route) => route.fulfill({
-    json: { sessionId: "test-session", expiresAt: "2027-01-01T00:00:00Z", answers: {} },
   }));
 
   await page.goto("/question/3");
@@ -74,7 +79,7 @@ test("shows a delayed skeleton while a canonical questionnaire answer is saved",
   await expect(skeleton).toBeVisible();
   await expect(skeleton.locator(".hp-skeleton-questionnaire")).toBeVisible();
   await expect(skeleton.locator(".hp-skeleton-option")).toHaveCount(2);
-  await releaseSession();
+  await releaseAnswer();
   await expect(page).toHaveURL(/\/question\/4$/);
 });
 

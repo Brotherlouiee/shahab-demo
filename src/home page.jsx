@@ -24,12 +24,16 @@ import {
   getPrototypeQuestionIndexForCanonicalQuestionId,
   guardQuestionnaireRoute,
   getQuestionnaireRouteForPrototypeQuestionIndex,
+  getQuestionnaireStepIdForPrototypeQuestionIndex,
+  getPrototypeQuestionIndexForQuestionnaireStepId,
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
 import {
   QuestionnaireSessionApiError,
   readQuestionnaireSession,
+  readCurrentQuestionnaireSession,
   saveQuestionnaireAnswer,
+  saveQuestionnaireFlowAnswer,
   startQuestionnaireSession,
 } from "./features/questionnaire/questionnaireSessionClient.mjs";
 import logoUrl from "../assets/shahab-logo.svg";
@@ -325,8 +329,15 @@ function getCanonicalQuestionIdsFromPrototypeAnswers(answerByIndex = {}) {
     .filter(Boolean);
 }
 
-function getGuardedQuestionnaireRouteState(pathname, answeredQuestionIds = []) {
-  const guardedPathname = guardQuestionnaireRoute(pathname, answeredQuestionIds);
+function getFlowStepIdsFromPrototypeAnswers(answerByIndex = {}) {
+  return Object.keys(answerByIndex)
+    .map(Number)
+    .map((index) => getQuestionnaireStepIdForPrototypeQuestionIndex(index))
+    .filter((stepId) => stepId === "loan_type" || stepId === "entity_type");
+}
+
+function getGuardedQuestionnaireRouteState(pathname, answeredQuestionIds = [], answeredFlowStepIds = []) {
+  const guardedPathname = guardQuestionnaireRoute(pathname, answeredQuestionIds, answeredFlowStepIds);
   return { ...getQuestionnaireRouteState(guardedPathname), pathname: guardedPathname };
 }
 
@@ -389,6 +400,12 @@ function withRecommendationHistory(pathname, historyId) {
 function clearActiveRecommendationHistoryState() {
   if (typeof window === "undefined" || !window.history.state?.shahabRecommendation) return;
   const { shahabRecommendation: _discarded, ...nextState } = window.history.state;
+  window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
+}
+
+function clearFreshQuestionnaireStartMarker() {
+  if (typeof window === "undefined" || !window.history.state?.shahabStartFreshQuestionnaire) return;
+  const { shahabStartFreshQuestionnaire: _discarded, ...nextState } = window.history.state;
   window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
 }
 
@@ -1099,8 +1116,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRequestedPath = window.location.pathname;
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const initialSessionId = initialRecommendationHistory?.sessionId || "";
-  const isInitialCanonicalQuestionRoute = Boolean(getCanonicalQuestionIdForRoute(initialRequestedPath));
-  const initialRouteState = isInitialCanonicalQuestionRoute && !initialSessionId
+  const isFreshQuestionnaireStart = window.history.state?.shahabStartFreshQuestionnaire === true;
+  const isInitialQuestionnaireRoute = /^\/question\/\d+$/.test(initialRequestedPath);
+  const initialRouteState = isInitialQuestionnaireRoute && !initialSessionId
     ? getGuardedQuestionnaireRouteState(initialRequestedPath, [])
     : getQuestionnaireRouteState(initialRequestedPath);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
@@ -1110,7 +1128,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRouteSessionIdRef = useRef(initialSessionId);
   const initialRouteRestoredRef = useRef(false);
   const [isRestoringQuestionnaireRoute, setIsRestoringQuestionnaireRoute] = useState(
-    Boolean(initialSessionId && isInitialCanonicalQuestionRoute),
+    isInitialQuestionnaireRoute && !isFreshQuestionnaireStart,
   );
   // Kept only in this React instance: canonical answers and the opaque session
   // identifier are deliberately absent from URLs and browser storage.
@@ -1668,6 +1686,68 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }, [questionnaireSessionId, recommendationResult, routePath, selectedComparisonPlanIds]);
 
   useEffect(() => {
+    if (!isInitialQuestionnaireRoute || initialSessionId || isFreshQuestionnaireStart) return undefined;
+    let active = true;
+    readCurrentQuestionnaireSession().then((session) => {
+      if (!active) return;
+      if (session?.sessionId) {
+        initialRouteSessionIdRef.current = session.sessionId;
+        const restored = { ...answersRef.current };
+        for (const [questionId, answerId] of Object.entries(session.answers || {})) {
+          const questionIndex = getPrototypeQuestionIndexForCanonicalQuestionId(questionId);
+          if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
+        }
+        for (const [stepId, answerId] of Object.entries(session.flowAnswers || {})) {
+          const questionIndex = getPrototypeQuestionIndexForQuestionnaireStepId(stepId);
+          if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
+        }
+        answersRef.current = restored;
+        setAnswers(restored);
+        initialRouteRestoredRef.current = true;
+        const routeState = getGuardedQuestionnaireRouteState(
+          initialRequestedPath,
+          Object.keys(session.answers || {}),
+          Object.keys(session.flowAnswers || {}),
+        );
+        setCurrentQuestion(routeState.questionIndex);
+        setIsOtpVerificationStep(routeState.isOtpVerificationStep);
+        setIsAnalyzingLoans(routeState.isAnalyzingLoans);
+        setLoanResultView(routeState.loanResultView);
+        if (routeState.pathname !== window.location.pathname) {
+          window.history.replaceState(window.history.state, "", routeState.pathname);
+        }
+        setQuestionnaireSessionId(session.sessionId);
+        setIsRestoringQuestionnaireRoute(false);
+        return;
+      }
+      initialRouteRestoredRef.current = true;
+      const routeState = getGuardedQuestionnaireRouteState(initialRequestedPath, []);
+      setCurrentQuestion(routeState.questionIndex);
+      setIsOtpVerificationStep(routeState.isOtpVerificationStep);
+      setIsAnalyzingLoans(routeState.isAnalyzingLoans);
+      setLoanResultView(routeState.loanResultView);
+      if (routeState.pathname !== window.location.pathname) {
+        window.history.replaceState(window.history.state, "", routeState.pathname);
+      }
+      setIsRestoringQuestionnaireRoute(false);
+    }).catch(() => {
+      if (!active) return;
+      initialRouteRestoredRef.current = true;
+      const routeState = getGuardedQuestionnaireRouteState(initialRequestedPath, []);
+      setCurrentQuestion(routeState.questionIndex);
+      setIsOtpVerificationStep(routeState.isOtpVerificationStep);
+      setIsAnalyzingLoans(routeState.isAnalyzingLoans);
+      setLoanResultView(routeState.loanResultView);
+      if (routeState.pathname !== window.location.pathname) {
+        window.history.replaceState(window.history.state, "", routeState.pathname);
+      }
+      setIsRestoringQuestionnaireRoute(false);
+      setQuestionnaireSessionError("بازیابی نشست پرسشنامه ممکن نشد. اتصال را بررسی و صفحه را دوباره بارگذاری کنید.");
+    });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
     if (!questionnaireSessionId) return undefined;
     let active = true;
     readQuestionnaireSession(questionnaireSessionId).then((session) => {
@@ -1678,16 +1758,22 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         const questionIndex = getPrototypeQuestionIndexForCanonicalQuestionId(questionId);
         if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
       }
+      const savedFlowAnswers = session.flowAnswers || {};
+      for (const [stepId, answerId] of Object.entries(savedFlowAnswers)) {
+        const questionIndex = getPrototypeQuestionIndexForQuestionnaireStepId(stepId);
+        if (questionIndex !== null && !restored[questionIndex]) restored[questionIndex] = answerId;
+      }
       answersRef.current = restored;
       setAnswers(restored);
 
       if (questionnaireSessionId === initialRouteSessionIdRef.current
-        && isInitialCanonicalQuestionRoute
+        && isInitialQuestionnaireRoute
         && !initialRouteRestoredRef.current) {
         initialRouteRestoredRef.current = true;
         const routeState = getGuardedQuestionnaireRouteState(
           initialRequestedPath,
           Object.keys(savedAnswers),
+          Object.keys(savedFlowAnswers),
         );
         setCurrentQuestion(routeState.questionIndex);
         setIsOtpVerificationStep(routeState.isOtpVerificationStep);
@@ -1702,11 +1788,17 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         : "بازیابی پاسخ‌های ثبت‌شده از نشست پرسشنامه در حال حاضر ممکن نشد.");
 
       if (questionnaireSessionId === initialRouteSessionIdRef.current
-        && isInitialCanonicalQuestionRoute
+        && isInitialQuestionnaireRoute
         && !initialRouteRestoredRef.current) {
         initialRouteRestoredRef.current = true;
         const routeState = getGuardedQuestionnaireRouteState(initialRequestedPath, []);
         setCurrentQuestion(routeState.questionIndex);
+        setIsOtpVerificationStep(routeState.isOtpVerificationStep);
+        setIsAnalyzingLoans(routeState.isAnalyzingLoans);
+        setLoanResultView(routeState.loanResultView);
+        if (routeState.pathname !== window.location.pathname) {
+          window.history.replaceState(window.history.state, "", routeState.pathname);
+        }
         setIsRestoringQuestionnaireRoute(false);
       }
     });
@@ -1714,10 +1806,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }, [questionnaireSessionId]);
 
   useEffect(() => {
-    if (initialSessionId && isInitialCanonicalQuestionRoute) return;
+    if (isInitialQuestionnaireRoute) return;
     const routeState = getGuardedQuestionnaireRouteState(
       window.location.pathname,
       getCanonicalQuestionIdsFromPrototypeAnswers(answersRef.current),
+      getFlowStepIdsFromPrototypeAnswers(answersRef.current),
     );
     setCurrentQuestion(routeState.questionIndex);
     setIsOtpVerificationStep(routeState.isOtpVerificationStep);
@@ -1744,6 +1837,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       const routeState = getGuardedQuestionnaireRouteState(
         window.location.pathname,
         getCanonicalQuestionIdsFromPrototypeAnswers(answersRef.current),
+        getFlowStepIdsFromPrototypeAnswers(answersRef.current),
       );
       setCurrentQuestion(routeState.questionIndex);
       setIsOtpVerificationStep(routeState.isOtpVerificationStep);
@@ -1887,8 +1981,9 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     setCurrentQuestion(targetQuestionIndex);
   }
 
-  async function persistCanonicalQuestionnaireAnswer() {
-    if (!canonicalQuestion) return true;
+  async function persistQuestionnaireAnswer() {
+    const flowStepId = getQuestionnaireStepIdForPrototypeQuestionIndex(currentQuestion);
+    if (!canonicalQuestion && !["loan_type", "entity_type"].includes(flowStepId)) return true;
 
     setIsSavingQuestionnaireAnswer(true);
     setQuestionnaireSessionError("");
@@ -1906,8 +2001,13 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           recommendationResult,
           selectedComparisonPlanIds,
         );
+        clearFreshQuestionnaireStartMarker();
       }
-      await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
+      if (canonicalQuestion) {
+        await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
+      } else {
+        await saveQuestionnaireFlowAnswer(sessionId, flowStepId, selectedOption);
+      }
       return true;
     } catch (error) {
       if (error instanceof QuestionnaireSessionApiError && error.status === 410) {
@@ -1966,7 +2066,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   async function handleNextQuestion() {
     if (!canProceed) return;
-    if (!(await persistCanonicalQuestionnaireAnswer())) return;
+    if (!(await persistQuestionnaireAnswer())) return;
     if (isPersonalInfoQuestion) {
       if (profileSubmitRef.current) return;
       profileSubmitRef.current = true;
@@ -2119,11 +2219,14 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     clearActiveRecommendationHistoryState();
     setQuestionnaireSessionId("");
     setAnswers({});
+    setQuestionnaireSessionError("");
     setRecommendationResult(null);
     setRecommendationStatus("idle");
+    setSelectedComparisonPlanIds([]);
     setLoanResultView("");
     setIsOtpVerificationStep(false);
-    setCurrentQuestion(2);
+    setIsAnalyzingLoans(false);
+    setCurrentQuestion(0);
   }
 
   function handlePersonalInfoChange(field, value) {
@@ -3231,6 +3334,11 @@ export default function HomePage() {
 
   function handleQuestionnaireOpen() {
     clearActiveRecommendationHistoryState();
+    window.history.replaceState(
+      { ...(window.history.state || {}), shahabStartFreshQuestionnaire: true },
+      "",
+      window.location.pathname + window.location.search,
+    );
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }

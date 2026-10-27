@@ -156,6 +156,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test --config playwright.profile-live.config.mjs
+      - name: Verify questionnaire refresh and ordering with real PostgreSQL
+        run: npx playwright test --config playwright.questionnaire-live.config.mjs
       - name: Upload real API browser evidence
         if: always()
         uses: actions/upload-artifact@v4

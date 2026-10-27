@@ -370,7 +370,15 @@ for (const viewport of heroViewports) {
         Array(candidate.captures.length).fill(true),
       );
       expect(candidate.events, `T01 Hero DOM event sequence at ${viewport.width}px`).toEqual(baseline.events);
-      expect(candidate.apiRequests, `T01 Hero API request sequence at ${viewport.width}px`).toEqual(baseline.apiRequests);
+      const questionnaireResumeRequests = candidate.apiRequests.filter(
+        ({ path }) => path === "/api/v1/questionnaire/sessions/current",
+      );
+      const candidateHeroApiRequests = candidate.apiRequests.filter(
+        ({ path }) => path !== "/api/v1/questionnaire/sessions/current",
+      );
+      expect(candidateHeroApiRequests, `T01 Hero API request sequence at ${viewport.width}px`).toEqual(baseline.apiRequests);
+      expect(questionnaireResumeRequests, `T01 fresh questionnaire must not resume an older session at ${viewport.width}px`)
+        .toEqual([]);
       expect(candidate.navigation, `T01 Hero acknowledgement navigation at ${viewport.width}px`).toEqual(baseline.navigation);
 
       if (viewport.width === 390) {

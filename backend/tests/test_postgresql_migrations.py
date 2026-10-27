@@ -31,6 +31,7 @@ EXPECTED_TABLES = {
     "loan_variables",
     "question_variable_weights",
     "questionnaire_versions",
+    "questionnaire_flow_answers",
     "questions",
     "recommendation_config_versions",
     "variable_categories",

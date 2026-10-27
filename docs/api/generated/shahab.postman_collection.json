@@ -573,6 +573,35 @@
         },
         {
           "event": [],
+          "name": "GET /api/v1/questionnaire/sessions/current",
+          "request": {
+            "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "questionnaire",
+                "sessions",
+                "current"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/questionnaire/sessions/current"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
           "name": "GET /api/v1/questionnaire/sessions/{session_id}",
           "request": {
             "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
@@ -640,6 +669,50 @@
               ],
               "query": [],
               "raw": "{{baseUrl}}/api/v1/questionnaire/sessions/{{sessionId}}/answers/{{questionId}}"
+            }
+          },
+          "response": []
+        },
+        {
+          "event": [],
+          "name": "PUT /api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"answerId\": \"{{answerId}}\"\n}"
+            },
+            "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "questionnaire",
+                "sessions",
+                "{{sessionId}}",
+                "flow-answers",
+                "{{step_id}}"
+              ],
+              "query": [],
+              "raw": "{{baseUrl}}/api/v1/questionnaire/sessions/{{sessionId}}/flow-answers/{{step_id}}"
             }
           },
           "response": []

@@ -45,6 +45,10 @@ async function recommendation(context) {
   const started = await context.request.post("/api/v1/questionnaire/sessions");
   expect(started.status()).toBe(201);
   const sid = (await started.json()).sessionId;
+  for (const [stepId, answerId] of [["loan_type", "shahab"], ["entity_type", "person"]]) {
+    const flow = await context.request.put(`/api/v1/questionnaire/sessions/${sid}/flow-answers/${stepId}`, { data: { answerId } });
+    expect(flow.status()).toBe(200);
+  }
   for (const question of questionnaire.questions) {
     const answer = await context.request.put(`/api/v1/questionnaire/sessions/${sid}/answers/${question.questionId}`, { data: { answerId: question.answerOptions[0].answerId } });
     expect(answer.status()).toBe(200);
@@ -166,6 +170,10 @@ test("refresh restores persisted questionnaire answers on the same step from the
   const started = await page.request.post("/api/v1/questionnaire/sessions");
   expect(started.status()).toBe(201);
   const sessionId = (await started.json()).sessionId;
+  for (const [stepId, answerId] of [["loan_type", "shahab"], ["entity_type", "person"]]) {
+    const flow = await page.request.put(`/api/v1/questionnaire/sessions/${sessionId}/flow-answers/${stepId}`, { data: { answerId } });
+    expect(flow.status()).toBe(200);
+  }
   const firstQuestion = questionnaire.questions[0];
   const saved = await page.request.put(`/api/v1/questionnaire/sessions/${sessionId}/answers/${firstQuestion.questionId}`, {
     data: { answerId: firstQuestion.answerOptions[0].answerId },
