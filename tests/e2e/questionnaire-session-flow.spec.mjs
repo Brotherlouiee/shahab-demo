@@ -228,3 +228,28 @@ test("restores an answered canonical step from server state after refresh", asyn
   await expect(page).toHaveURL(/\/question\/3$/);
   await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
 });
+
+test("home CTA resumes the active incomplete questionnaire and keeps its saved answer", async ({ page }) => {
+  const { answers, requests } = await mockQuestionnaireSessionApi(page, { existingSession: true });
+  const question = questionnaireConfiguration.questions[0];
+  answers[question.questionId] = question.answerOptions[1].answerId;
+
+  await page.goto("/question/4");
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await page.locator(".hp-questionnaire-brand").click();
+  await expect(page).toHaveURL(/\/$/);
+
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.locator(".hp-select-menu").getByRole("button", { name: "تا ۵۰ میلیون", exact: true }).click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+
+  await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+  await page.getByRole("button", { name: "بازگشت به سوال قبل" }).click();
+  await expect(page).toHaveURL(/\/question\/3$/);
+  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+  expect(requests.filter(({ method }) => method === "POST")).toHaveLength(0);
+  expect(requests.filter(({ method, pathname }) => method === "GET" && pathname.endsWith("/sessions/current")))
+    .toHaveLength(2);
+});
