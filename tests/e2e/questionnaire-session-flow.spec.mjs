@@ -239,6 +239,7 @@ test("home CTA resumes the active incomplete questionnaire and keeps its saved a
 
   await page.goto("/question/4");
   await expect(page).toHaveURL(/\/question\/4$/);
+  await expect(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
   await page.locator(".hp-questionnaire-brand").click();
   await expect(page).toHaveURL(/\/$/);
 
