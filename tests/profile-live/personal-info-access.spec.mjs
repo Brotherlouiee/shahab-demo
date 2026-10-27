@@ -218,8 +218,8 @@ test("changing the prefilled phone requires its OTP and creates an independent a
   const firstToken = (await verified.json()).accessToken;
   const original = { phone: firstPhone, firstName: "مریم", lastName: "کاربر", income: "up-to-22", job: "employee", gender: "female", avatar: null };
   expect((await page.request.put("/api/v1/profiles", { data: original })).status()).toBe(200);
-  async function fillQuestionnaire() {
-    await completeQuestionnaire(page);
+  async function fillQuestionnaire({ requestFreshAfterResult = false } = {}) {
+    await completeQuestionnaire(page, { requestFreshAfterResult });
     await expect(page.locator(".hp-personal-info-form input").first()).toHaveValue("مریم");
   }
   await fillQuestionnaire();
@@ -232,7 +232,7 @@ test("changing the prefilled phone requires its OTP and creates an independent a
   const originalHistoryId = historyBefore.items[0].historyId;
   const originalSnapshot = await (await page.request.get(`/api/v1/recommendation-history/${originalHistoryId}`)).json();
   // A fresh questionnaire remains unbound until its first successful result.
-  await fillQuestionnaire();
+  await fillQuestionnaire({ requestFreshAfterResult: true });
   await expect(page).toHaveURL(/\/personal-info$/);
   const inputs = page.locator(".hp-personal-info-form input");
   await expect(inputs.first()).toHaveValue("مریم");
