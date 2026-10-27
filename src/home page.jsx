@@ -3326,15 +3326,6 @@ export default function HomePage() {
 
   function handleQuestionnaireOpen() {
     clearActiveRecommendationHistoryState();
-    setQuestionnaireSessionId("");
-    setAnswers({});
-    setQuestionnaireSessionError("");
-    setRecommendationResult(null);
-    setRecommendationStatus("idle");
-    setSelectedComparisonPlanIds([]);
-    setLoanResultView("");
-    setIsOtpVerificationStep(false);
-    setIsAnalyzingLoans(false);
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }
