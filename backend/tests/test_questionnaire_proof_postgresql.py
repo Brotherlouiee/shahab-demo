@@ -118,7 +118,9 @@ class QuestionnaireProofPostgreSqlTests(unittest.TestCase):
             self.assertEqual(
                 connection.scalar(
                     text(
-                        "SELECT count(*) FROM questionnaire_answers a JOIN questionnaire_sessions s USING(questionnaire_session_id) WHERE s.questionnaire_session_id=:sid"
+                        "SELECT count(*) FROM questionnaire_answers a "
+                        "JOIN questionnaire_sessions s USING(questionnaire_session_id) "
+                        "WHERE s.questionnaire_session_id=:sid"
                     ),
                     {"sid": old_id},
                 ),

@@ -12,8 +12,8 @@ from backend.app.infrastructure.db.models import (
     AnswerOption,
     Question,
     QuestionnaireSessionState,
-    RecommendationHistoryRun,
     QuestionnaireVersion,
+    RecommendationHistoryRun,
 )
 from backend.app.infrastructure.db.models import QuestionnaireAnswer as QuestionnaireAnswerRow
 from backend.app.infrastructure.db.models import QuestionnaireSession as QuestionnaireSessionRow
