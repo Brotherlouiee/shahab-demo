@@ -403,6 +403,12 @@ function clearActiveRecommendationHistoryState() {
   window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
 }
 
+function clearFreshQuestionnaireStartMarker() {
+  if (typeof window === "undefined" || !window.history.state?.shahabStartFreshQuestionnaire) return;
+  const { shahabStartFreshQuestionnaire: _discarded, ...nextState } = window.history.state;
+  window.history.replaceState(nextState, "", window.location.pathname + window.location.search);
+}
+
 function getInitialViewFromPath(pathname) {
   if (pathname === "/contact") return "contact";
   if (pathname.startsWith("/recommendation-history/")) return "history-result";
@@ -1110,6 +1116,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRequestedPath = window.location.pathname;
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const initialSessionId = initialRecommendationHistory?.sessionId || "";
+  const isFreshQuestionnaireStart = window.history.state?.shahabStartFreshQuestionnaire === true;
   const isInitialQuestionnaireRoute = /^\/question\/\d+$/.test(initialRequestedPath);
   const initialRouteState = isInitialQuestionnaireRoute && !initialSessionId
     ? getGuardedQuestionnaireRouteState(initialRequestedPath, [])
@@ -1121,7 +1128,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRouteSessionIdRef = useRef(initialSessionId);
   const initialRouteRestoredRef = useRef(false);
   const [isRestoringQuestionnaireRoute, setIsRestoringQuestionnaireRoute] = useState(
-    isInitialQuestionnaireRoute,
+    isInitialQuestionnaireRoute && !isFreshQuestionnaireStart,
   );
   // Kept only in this React instance: canonical answers and the opaque session
   // identifier are deliberately absent from URLs and browser storage.
@@ -1679,7 +1686,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }, [questionnaireSessionId, recommendationResult, routePath, selectedComparisonPlanIds]);
 
   useEffect(() => {
-    if (!isInitialQuestionnaireRoute || initialSessionId) return undefined;
+    if (!isInitialQuestionnaireRoute || initialSessionId || isFreshQuestionnaireStart) return undefined;
     let active = true;
     readCurrentQuestionnaireSession().then((session) => {
       if (!active) return;
@@ -1994,6 +2001,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           recommendationResult,
           selectedComparisonPlanIds,
         );
+        clearFreshQuestionnaireStartMarker();
       }
       if (canonicalQuestion) {
         await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
@@ -3326,6 +3334,11 @@ export default function HomePage() {
 
   function handleQuestionnaireOpen() {
     clearActiveRecommendationHistoryState();
+    window.history.replaceState(
+      { ...(window.history.state || {}), shahabStartFreshQuestionnaire: true },
+      "",
+      window.location.pathname + window.location.search,
+    );
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }
