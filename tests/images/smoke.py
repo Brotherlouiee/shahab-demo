@@ -148,16 +148,7 @@ def main():
             expected = (ROOT / "dist/index.html").read_bytes()
             for route in ("/", "/question/3", "/personal-info", "/loan-details?loanId=synthetic"):
                 status, headers, body = request(web, route)
-                assert status == 200, f"SPA route {route} returned HTTP {status}"
-                assert "text/html" in headers.get("Content-Type", ""), (
-                    f"SPA route {route} returned Content-Type {headers.get('Content-Type')!r}"
-                )
-                assert body == expected, (
-                    f"SPA route {route} did not serve the built index.html "
-                    f"(response_bytes={len(body)}, expected_bytes={len(expected)}, "
-                    f"response_sha256={hashlib.sha256(body).hexdigest()}, "
-                    f"expected_sha256={hashlib.sha256(expected).hexdigest()})"
-                )
+                assert status == 200 and body == expected and "text/html" in headers["Content-Type"]
             for suffix in ("/api/v1/health/live", "/api/v1/not-found"):
                 status, headers, body = request(web, suffix)
                 assert status == 503 and headers["Cache-Control"] == "no-store"
