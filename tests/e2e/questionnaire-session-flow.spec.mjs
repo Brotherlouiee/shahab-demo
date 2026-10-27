@@ -209,11 +209,11 @@ test("only commits supersession after an explicit fresh attempt saves its first 
   expect(writes[0].pathname).toContain("/flow-answers/loan_type");
   expect(writes[0].body).toEqual({ answerId: "shahab", supersedePrevious: true });
 
-  await page.getByRole("radio").first().click();
+  await page.getByRole("radio").nth(1).click();
   await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
   await expect(page).toHaveURL(/\/question\/3$/);
   expect(writes[1].pathname).toContain("/flow-answers/entity_type");
-  expect(writes[1].body).toEqual({ answerId: "business" });
+  expect(writes[1].body).toEqual({ answerId: "person" });
 });
 
 test("restores an answered canonical step from server state after refresh", async ({ page }) => {
