@@ -10,13 +10,13 @@ const canonicalIdentifiers = JSON.parse(
 );
 const canonicalQuestionRoutes = Object.entries(canonicalIdentifiers.questionnaireRouteMap);
 
-async function mockQuestionnaireSessionApi(page, { failStart = false, existingSession = false } = {}) {
+async function mockQuestionnaireSessionApi(page, { failStart = false, existingSession = false, withRecommendationHistory = true } = {}) {
   const answers = {};
   const flowAnswers = existingSession ? { loan_type: "shahab", entity_type: "person" } : {};
   let sessionExists = existingSession;
   const requests = [];
 
-  if (existingSession) {
+  if (existingSession && withRecommendationHistory) {
     await page.addInitScript((id) => {
       window.history.replaceState({ shahabRecommendation: { sessionId: id } }, "", window.location.href);
     }, sessionId);
@@ -230,7 +230,10 @@ test("restores an answered canonical step from server state after refresh", asyn
 });
 
 test("home CTA resumes the active incomplete questionnaire and keeps its saved answer", async ({ page }) => {
-  const { answers, requests } = await mockQuestionnaireSessionApi(page, { existingSession: true });
+  const { answers, requests } = await mockQuestionnaireSessionApi(page, {
+    existingSession: true,
+    withRecommendationHistory: false,
+  });
   const question = questionnaireConfiguration.questions[0];
   answers[question.questionId] = question.answerOptions[1].answerId;
 
