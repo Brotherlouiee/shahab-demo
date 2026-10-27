@@ -4,11 +4,13 @@ import test from "node:test";
 
 import {
   canonicalQuestionnaireRouteEntries,
+  questionnaireJourneyRouteEntries,
   guardQuestionnaireRoute,
   getCanonicalQuestionIdForRoute,
   getPrototypeQuestionIndexForCanonicalQuestionId,
   getQuestionnaireRouteForCanonicalQuestionId,
   getQuestionnaireRouteForPrototypeQuestionIndex,
+  getQuestionnaireStepIdForPrototypeQuestionIndex,
 } from "../../src/features/questionnaire/questionnaireRouteMap.mjs";
 
 const canonicalIdentifiers = JSON.parse(
@@ -16,55 +18,49 @@ const canonicalIdentifiers = JSON.parse(
 );
 const approvedRoutes = Object.entries(canonicalIdentifiers.questionnaireRouteMap);
 
-test("maps every immutable behavioural route to its canonical ID and back", () => {
+test("keeps the ten scoring routes mapped to the approved canonical IDs", () => {
   assert.deepEqual(canonicalQuestionnaireRouteEntries, approvedRoutes);
-
   for (const [route, questionId] of approvedRoutes) {
     assert.equal(getCanonicalQuestionIdForRoute(route), questionId);
     assert.equal(getQuestionnaireRouteForCanonicalQuestionId(questionId), route);
   }
 });
 
-test("uses the adapter for the prototype index without making an index canonical", () => {
-  for (const [offset, [route, questionId]] of approvedRoutes.entries()) {
-    const prototypeQuestionIndex = offset + 2;
-    assert.equal(getPrototypeQuestionIndexForCanonicalQuestionId(questionId), prototypeQuestionIndex);
-    assert.equal(getQuestionnaireRouteForPrototypeQuestionIndex(prototypeQuestionIndex), route);
+test("maps all twelve visible steps to stable server-side step IDs", () => {
+  assert.equal(questionnaireJourneyRouteEntries.length, 12);
+  assert.deepEqual(questionnaireJourneyRouteEntries.slice(0, 2), [
+    ["/question/1", "loan_type"], ["/question/2", "entity_type"],
+  ]);
+  for (const [index, [route, stepId]] of questionnaireJourneyRouteEntries.entries()) {
+    assert.equal(getQuestionnaireRouteForPrototypeQuestionIndex(index), route);
+    assert.equal(getQuestionnaireStepIdForPrototypeQuestionIndex(index), stepId);
   }
 });
 
-test("rejects non-behavioural and malformed paths rather than guessing an ID", () => {
-  assert.equal(getCanonicalQuestionIdForRoute("/question/1"), null);
-  assert.equal(getCanonicalQuestionIdForRoute("/question/13"), null);
-  assert.equal(getCanonicalQuestionIdForRoute("/question/03"), null);
-  assert.equal(getQuestionnaireRouteForCanonicalQuestionId("Q7"), null);
-  assert.equal(getPrototypeQuestionIndexForCanonicalQuestionId("Q7"), null);
-  assert.equal(getQuestionnaireRouteForPrototypeQuestionIndex(1), null);
-});
+test("blocks direct, refreshed, and history navigation beyond the first unanswered step", () => {
+  for (let answeredCount = 0; answeredCount <= questionnaireJourneyRouteEntries.length; answeredCount += 1) {
+    const answered = questionnaireJourneyRouteEntries.slice(0, answeredCount).map(([, id]) => id);
+    const flowAnswers = answered.filter((id) => id === "loan_type" || id === "entity_type");
+    const canonicalAnswers = answered.filter((id) => id !== "loan_type" && id !== "entity_type");
+    const firstUnansweredRoute = questionnaireJourneyRouteEntries[answeredCount]?.[0];
 
-test("guards direct and history navigation at the first unanswered required question", () => {
-  assert.equal(guardQuestionnaireRoute("/question/4"), "/question/3");
-  assert.equal(guardQuestionnaireRoute("/question/5", ["Q1"]), "/question/4");
-  assert.equal(guardQuestionnaireRoute("/question/4", ["Q1"]), "/question/4");
-  assert.equal(guardQuestionnaireRoute("/question/12", approvedRoutes.map(([, id]) => id)), "/question/12");
-  assert.equal(guardQuestionnaireRoute("/loan-results", []), "/loan-results");
-});
-
-test("holds every canonical route behind the complete answered prefix", () => {
-  for (let answeredCount = 0; answeredCount <= approvedRoutes.length; answeredCount += 1) {
-    const answeredIds = approvedRoutes.slice(0, answeredCount).map(([, questionId]) => questionId);
-    const firstUnansweredRoute = approvedRoutes[answeredCount]?.[0];
-
-    for (let requestedIndex = 0; requestedIndex < approvedRoutes.length; requestedIndex += 1) {
-      const requestedRoute = approvedRoutes[requestedIndex][0];
-      const expectedRoute = requestedIndex <= answeredCount
+    for (let requestedIndex = 0; requestedIndex < questionnaireJourneyRouteEntries.length; requestedIndex += 1) {
+      const [requestedRoute] = questionnaireJourneyRouteEntries[requestedIndex];
+      const expected = requestedIndex <= answeredCount
         ? requestedRoute
         : firstUnansweredRoute;
       assert.equal(
-        guardQuestionnaireRoute(requestedRoute, answeredIds),
-        expectedRoute,
+        guardQuestionnaireRoute(requestedRoute, canonicalAnswers, flowAnswers),
+        expected,
         `answered=${answeredCount}, requested=${requestedRoute}`,
       );
     }
   }
+});
+
+test("fails closed for malformed and unknown numbered questionnaire paths", () => {
+  assert.equal(guardQuestionnaireRoute("/question/13"), "/question/1");
+  assert.equal(guardQuestionnaireRoute("/question/03"), "/question/1");
+  assert.equal(guardQuestionnaireRoute("/question/not-a-number"), "/question/not-a-number");
+  assert.equal(guardQuestionnaireRoute("/loan-results"), "/loan-results");
 });

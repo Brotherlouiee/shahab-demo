@@ -11,6 +11,7 @@ from starlette.requests import Request
 from backend.app.core.config import AppEnvironment, Settings
 from backend.app.core.dependencies import get_request_database_session
 from backend.app.main import create_app
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 
 
 class ApiSessionLifecycleTests(unittest.TestCase):
@@ -59,6 +60,7 @@ class ApiSessionLifecycleTests(unittest.TestCase):
             started = client.post("/api/v1/questionnaire/sessions")
             self.assertEqual(started.status_code, 201)
             session_id = started.json()["sessionId"]
+            complete_questionnaire_entry_steps(client, session_id)
             answer_id = "Q1.incomeInvestment"
             response = client.put(
                 f"/api/v1/questionnaire/sessions/{session_id}/answers/Q1",

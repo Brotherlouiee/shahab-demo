@@ -13,6 +13,7 @@ from backend.app.core.config import Settings
 from backend.app.main import create_app
 from backend.app.questionnaire.infrastructure.proof import PROOF_COOKIE_PREFIX
 from backend.tests import test_account_identity_postgresql as fixture
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 
 
 @unittest.skipUnless(os.environ.get("SHAHAB_TEST_DATABASE_URL"), "requires real PostgreSQL")
@@ -55,6 +56,7 @@ class QuestionnaireProofPostgreSqlTests(unittest.TestCase):
             self.assertEqual(started.status_code, 201)
             sid = started.json()["sessionId"]
             proof = creator.cookies.get(PROOF_COOKIE_PREFIX + sid)
+            complete_questionnaire_entry_steps(creator, sid)
             wrote = creator.put(
                 f"/api/v1/questionnaire/sessions/{sid}/answers/Q1", json={"answerId": "Q1.incomeInvestment"}
             )
@@ -93,6 +95,7 @@ class QuestionnaireProofPostgreSqlTests(unittest.TestCase):
 
             headers = login(owner, "09000000001")
             sid = owner.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+            complete_questionnaire_entry_steps(owner, sid)
             configuration = json.loads(
                 (fixture.ROOT / "data/contracts/questionnaire-configuration.v1.json").read_text()
             )

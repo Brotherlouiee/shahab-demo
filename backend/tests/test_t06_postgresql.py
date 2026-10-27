@@ -16,6 +16,7 @@ from sqlalchemy.orm import Session
 from backend.app.core.config import Settings
 from backend.app.data_pipeline.infrastructure.materialize_official_sources import materialize_official_sources
 from backend.app.main import create_app
+from backend.tests.questionnaire_test_helpers import complete_questionnaire_entry_steps
 from scripts.build_t05a_import_manifest import build_manifest
 from scripts.build_t05a_recommendation_config import build_config
 
@@ -70,6 +71,7 @@ class LivePostgresqlRecommendationTests(unittest.TestCase):
                 self.assertEqual(verified.status_code, 200, verified.text)
                 headers = {"Authorization": f"Bearer {verified.json()['accessToken']}"}
                 session_id = client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+                complete_questionnaire_entry_steps(client, session_id)
                 for question in questionnaire["questions"]:
                     response = client.put(
                         f"/api/v1/questionnaire/sessions/{session_id}/answers/{question['questionId']}",

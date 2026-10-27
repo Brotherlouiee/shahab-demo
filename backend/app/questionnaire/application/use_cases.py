@@ -2,6 +2,7 @@ from dataclasses import replace
 from datetime import UTC, datetime
 
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
+from backend.app.questionnaire.domain.flow import QUESTIONNAIRE_FLOW_STEPS, validate_flow_answer
 from backend.app.questionnaire.domain.session import (
     CanonicalAnswerValidationError,
     QuestionnaireAnswer,
@@ -38,6 +39,9 @@ class QuestionnaireSessionService:
         session = self.get(session_id)
         session.ensure_active(now or datetime.now(UTC))
         validated_answer = validate_canonical_answer(self._configuration, answer)
+        flow_answers = self._repository.list_flow_answers(session_id)
+        if any(step.step_id not in flow_answers for step in QUESTIONNAIRE_FLOW_STEPS):
+            raise CanonicalAnswerValidationError("entry questions must be answered in order")
         question_ids = [question.question_id for question in self._configuration.questions]
         question_index = question_ids.index(validated_answer.question_id)
         answered_question_ids = {saved.question_id for saved in self._repository.list_answers(session_id)}
@@ -52,6 +56,19 @@ class QuestionnaireSessionService:
         self._repository.upsert_answer(session_id, validated_answer)
         self._cache_set(session)
 
+    def record_flow_answer(self, session_id: str, step_id: str, answer_id: str, now: datetime | None = None) -> None:
+        session = self.get(session_id)
+        session.ensure_active(now or datetime.now(UTC))
+        try:
+            step_index, validated_answer_id = validate_flow_answer(step_id, answer_id)
+        except ValueError as error:
+            raise CanonicalAnswerValidationError("flow answer is invalid") from error
+        saved = self._repository.list_flow_answers(session_id)
+        if any(step.step_id not in saved for step in QUESTIONNAIRE_FLOW_STEPS[:step_index]):
+            raise CanonicalAnswerValidationError("entry questions must be answered in order")
+        self._repository.upsert_flow_answer(session_id, step_id, validated_answer_id)
+        self._cache_set(session)
+
     def get(self, session_id: str) -> QuestionnaireSession:
         session = self._cache_get(session_id) or self._repository.get(session_id)
         if session is None:
@@ -63,6 +80,10 @@ class QuestionnaireSessionService:
     def answers(self, session_id: str) -> tuple[QuestionnaireAnswer, ...]:
         self.get(session_id)
         return self._repository.list_answers(session_id)
+
+    def flow_answers(self, session_id: str) -> dict[str, str]:
+        self.get(session_id)
+        return self._repository.list_flow_answers(session_id)
 
     def cleanup_expired(self, now: datetime | None = None) -> int:
         session_ids = self._repository.delete_expired(now or datetime.now(UTC))

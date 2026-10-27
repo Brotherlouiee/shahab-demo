@@ -29,16 +29,17 @@ async function restoreSessionAt(page, route, answers) {
       sessionId,
       expiresAt: "2026-10-27T12:30:00Z",
       answers,
+      flowAnswers: { loan_type: "shahab", entity_type: "person" },
     }),
   }));
   await page.goto(route);
 }
 
-test("redirects a direct later-question URL to Q1 when there is no saved session", async ({ page }) => {
+test("redirects a direct later-question URL to the first visible step without a saved session", async ({ page }) => {
   await page.goto("/question/4");
 
-  await expect(page).toHaveURL(/\/question\/3$/);
-  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("پولی که از این وام یا اعتبار");
+  await expect(page).toHaveURL(/\/question\/1$/);
+  await expect(page.locator(".hp-questionnaire-page h1")).toContainText("مایل به دریافت چه نوع وامی");
 });
 
 test("restores the first unanswered question when a later URL is opened with a saved session", async ({ page }) => {

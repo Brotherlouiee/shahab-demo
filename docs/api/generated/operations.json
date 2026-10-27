@@ -66,6 +66,11 @@
   },
   {
     "method": "GET",
+    "operationId": "resume_current_session_api_v1_questionnaire_sessions_current_get",
+    "path": "/api/v1/questionnaire/sessions/current"
+  },
+  {
+    "method": "GET",
     "operationId": "resume_session_api_v1_questionnaire_sessions__session_id__get",
     "path": "/api/v1/questionnaire/sessions/{session_id}"
   },
@@ -73,6 +78,11 @@
     "method": "PUT",
     "operationId": "write_answer_api_v1_questionnaire_sessions__session_id__answers__question_id__put",
     "path": "/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}"
+  },
+  {
+    "method": "PUT",
+    "operationId": "write_flow_answer_api_v1_questionnaire_sessions__session_id__flow_answers__step_id__put",
+    "path": "/api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}"
   },
   {
     "method": "GET",
