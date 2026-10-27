@@ -684,7 +684,7 @@
                   "language": "json"
                 }
               },
-              "raw": "{\n  \"answerId\": \"{{answerId}}\"\n}"
+              "raw": "{\n  \"answerId\": \"{{answerId}}\",\n  \"supersedePrevious\": false\n}"
             },
             "description": "Requires the creator's per-session HttpOnly proof cookie, preserved by this cookie jar. ID alone, legacy constant or another session's cookie is forbidden. After account binding, the same active account session is also required. Valid expired proof returns 410; missing/invalid proof and unknown IDs return the same safe 403. No TTL renewal.",
             "header": [

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import secrets
 from datetime import datetime
 from typing import Annotated
@@ -203,7 +204,24 @@ def write_flow_answer(
 ) -> SessionResponse:
     response.headers["Cache-Control"] = "no-store"
     try:
-        service.record_flow_answer(session_id, step_id, payload.answer_id)
+        proof_digests: tuple[str, ...] = ()
+        if payload.supersede_previous:
+            if step_id != "loan_type":
+                raise CanonicalAnswerValidationError("only the first questionnaire answer can supersede prior progress")
+            current_id = str(UUID(session_id))
+            proof_digests = tuple(
+                proof_digest(secret)
+                for name, secret in request.cookies.items()
+                if name.startswith(PROOF_COOKIE_PREFIX)
+                and name.removeprefix(PROOF_COOKIE_PREFIX) != current_id
+                and re.fullmatch(r"[A-Za-z0-9_-]{43}", secret)
+            )
+        service.record_flow_answer(
+            session_id,
+            step_id,
+            payload.answer_id,
+            supersede_proof_digests=proof_digests,
+        )
         authorize_questionnaire(session_id, request, db, actor)
         return _session_response(service, session_id)
     except LookupError as error:

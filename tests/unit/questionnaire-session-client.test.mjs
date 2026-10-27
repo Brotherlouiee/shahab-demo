@@ -50,6 +50,18 @@ test("writes an entry-step answer through the protected JSON endpoint", async ()
   assert.equal(calls[0].url.includes("?"), false);
 });
 
+test("marks only an explicitly fresh attempt's committed first answer", async () => {
+  const calls = [];
+  const fetchImpl = async (url, options) => {
+    calls.push({ url, options });
+    return { ok: true, json: async () => ({ flowAnswers: { loan_type: "shahab" } }) };
+  };
+
+  await saveQuestionnaireFlowAnswer("fresh-session", "loan_type", "shahab", fetchImpl, true);
+
+  assert.equal(calls[0].options.body, JSON.stringify({ answerId: "shahab", supersedePrevious: true }));
+});
+
 test("writes a canonical answer in JSON rather than a query string", async () => {
   const calls = [];
   const fetchImpl = async (url, options) => {

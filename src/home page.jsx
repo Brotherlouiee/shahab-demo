@@ -1117,6 +1117,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const initialRecommendationHistory = getActiveRecommendationHistoryState();
   const initialSessionId = initialRecommendationHistory?.sessionId || "";
   const isFreshQuestionnaireStart = window.history.state?.shahabStartFreshQuestionnaire === true;
+  const pendingQuestionnaireSessionIdRef = useRef("");
   const isInitialQuestionnaireRoute = /^\/question\/\d+$/.test(initialRequestedPath);
   const initialRouteState = isInitialQuestionnaireRoute && !initialSessionId
     ? getGuardedQuestionnaireRouteState(initialRequestedPath, [])
@@ -1988,26 +1989,31 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     setIsSavingQuestionnaireAnswer(true);
     setQuestionnaireSessionError("");
     try {
-      let sessionId = questionnaireSessionId;
+      let sessionId = questionnaireSessionId || pendingQuestionnaireSessionIdRef.current;
       if (!sessionId) {
         const session = await startQuestionnaireSession();
         sessionId = session.sessionId;
-        setQuestionnaireSessionId(sessionId);
-        // The next screen becomes refreshable as soon as its route is shown.
-        // Persist the opaque capability on this history entry synchronously,
-        // before awaiting the answer write and navigating to that screen.
-        replaceActiveRecommendationHistoryState(
-          sessionId,
-          recommendationResult,
-          selectedComparisonPlanIds,
-        );
-        clearFreshQuestionnaireStartMarker();
+        pendingQuestionnaireSessionIdRef.current = sessionId;
       }
       if (canonicalQuestion) {
         await saveQuestionnaireAnswer(sessionId, canonicalQuestion.questionId, selectedOption);
       } else {
-        await saveQuestionnaireFlowAnswer(sessionId, flowStepId, selectedOption);
+        await saveQuestionnaireFlowAnswer(
+          sessionId,
+          flowStepId,
+          selectedOption,
+          fetch,
+          window.history.state?.shahabStartFreshQuestionnaire === true && flowStepId === "loan_type",
+        );
       }
+      pendingQuestionnaireSessionIdRef.current = "";
+      setQuestionnaireSessionId(sessionId);
+      replaceActiveRecommendationHistoryState(
+        sessionId,
+        recommendationResult,
+        selectedComparisonPlanIds,
+      );
+      clearFreshQuestionnaireStartMarker();
       return true;
     } catch (error) {
       if (error instanceof QuestionnaireSessionApiError && error.status === 410) {
@@ -2216,6 +2222,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handleStartQuestionnaire() {
+    window.history.replaceState(
+      { ...(window.history.state || {}), shahabStartFreshQuestionnaire: true },
+      "",
+      window.location.pathname + window.location.search,
+    );
     clearActiveRecommendationHistoryState();
     setQuestionnaireSessionId("");
     setAnswers({});

@@ -12,6 +12,7 @@ class InMemoryQuestionnaireSessionRepository:
         self._sessions: dict[str, QuestionnaireSession] = {}
         self._answers: dict[str, dict[str, QuestionnaireAnswer]] = {}
         self._flow_answers: dict[str, dict[str, str]] = {}
+        self._superseded: set[str] = set()
 
     def create(self, session: QuestionnaireSession) -> None:
         key = str(session.session_id)
@@ -28,8 +29,32 @@ class InMemoryQuestionnaireSessionRepository:
     def list_answers(self, session_id: str) -> tuple[QuestionnaireAnswer, ...]:
         return tuple(self._answers[session_id].values())
 
-    def upsert_flow_answer(self, session_id: str, step_id: str, answer_id: str) -> None:
+    def upsert_flow_answer(
+        self,
+        session_id: str,
+        step_id: str,
+        answer_id: str,
+        *,
+        supersede_proof_digests: tuple[str, ...] = (),
+    ) -> tuple[str, ...]:
         self._flow_answers[session_id][step_id] = answer_id
+        if not supersede_proof_digests:
+            return ()
+        current = self._sessions[session_id]
+        superseded = tuple(
+            candidate_id
+            for candidate_id, candidate in self._sessions.items()
+            if candidate_id != session_id
+            and candidate_id not in self._superseded
+            and candidate.created_at < current.created_at
+            and candidate.expires_at > current.created_at
+            and candidate.creator_proof_digest in supersede_proof_digests
+        )
+        self._superseded.update(superseded)
+        return superseded
+
+    def is_superseded(self, session_id: str) -> bool:
+        return session_id in self._superseded
 
     def list_flow_answers(self, session_id: str) -> dict[str, str]:
         return dict(self._flow_answers[session_id])
