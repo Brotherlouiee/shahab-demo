@@ -14,7 +14,7 @@ test("persists every visible answer and blocks URL jumps against the real API an
     const currentRoute = journeyRoutes[index];
     const nextRoute = journeyRoutes[index + 1] || "/personal-info";
     await expect(page).toHaveURL(new RegExp(`${currentRoute.replaceAll("/", "\\/")}$`));
-    await page.getByRole("radio").first().click();
+    await page.getByRole("radio").nth(index === 1 ? 1 : 0).click();
     await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
     await expect(page).toHaveURL(new RegExp(`${nextRoute.replaceAll("/", "\\/")}$`));
 
