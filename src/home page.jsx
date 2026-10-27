@@ -3345,11 +3345,9 @@ export default function HomePage() {
 
   function handleQuestionnaireOpen() {
     clearActiveRecommendationHistoryState();
-    window.history.replaceState(
-      { ...(window.history.state || {}), shahabStartFreshQuestionnaire: true },
-      "",
-      window.location.pathname + window.location.search,
-    );
+    // The home CTA resumes an unexpired attempt. Only the explicit action
+    // from completed results marks the next attempt as fresh.
+    clearFreshQuestionnaireStartMarker();
     replaceRoute("/question/1");
     setCurrentView("questionnaire");
   }
