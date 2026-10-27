@@ -117,7 +117,9 @@ class QuestionnaireProofPostgreSqlTests(unittest.TestCase):
             # Superseding revokes reads immediately but leaves retention to the existing expiry cleanup.
             self.assertEqual(
                 connection.scalar(
-                    text("SELECT count(*) FROM questionnaire_answers a JOIN questionnaire_sessions s USING(questionnaire_session_id) WHERE s.questionnaire_session_id=:sid"),
+                    text(
+                        "SELECT count(*) FROM questionnaire_answers a JOIN questionnaire_sessions s USING(questionnaire_session_id) WHERE s.questionnaire_session_id=:sid"
+                    ),
                     {"sid": old_id},
                 ),
                 1,

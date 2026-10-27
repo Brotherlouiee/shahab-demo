@@ -76,11 +76,7 @@ class QuestionnaireSessionService:
             raise CanonicalAnswerValidationError("entry questions must be answered in order")
         if supersede_proof_digests:
             saved_answers = self._repository.list_answers(session_id)
-            if (
-                step_id != QUESTIONNAIRE_FLOW_STEPS[0].step_id
-                or saved_answers
-                or any(key != step_id for key in saved)
-            ):
+            if step_id != QUESTIONNAIRE_FLOW_STEPS[0].step_id or saved_answers or any(key != step_id for key in saved):
                 raise CanonicalAnswerValidationError("only a fresh questionnaire attempt can supersede prior progress")
         superseded_ids = self._repository.upsert_flow_answer(
             session_id,

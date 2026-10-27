@@ -133,7 +133,9 @@ class SqlAlchemyQuestionnaireSessionRepository:
                 )
                 if target is None:
                     raise LookupError("questionnaire session was not found")
-                database_now = func.clock_timestamp() if self._session.get_bind().dialect.name == "postgresql" else func.now()
+                database_now = (
+                    func.clock_timestamp() if self._session.get_bind().dialect.name == "postgresql" else func.now()
+                )
                 has_history = exists().where(
                     RecommendationHistoryRun.questionnaire_session_id
                     == QuestionnaireSessionRow.questionnaire_session_id
