@@ -54,14 +54,14 @@ export async function saveQuestionnaireAnswer(sessionId, questionId, answerId, f
   );
 }
 
-export async function saveQuestionnaireFlowAnswer(sessionId, stepId, answerId, fetchImpl = fetch) {
+export async function saveQuestionnaireFlowAnswer(sessionId, stepId, answerId, fetchImpl = fetch, supersedePrevious = false) {
   return parseResponse(
     await fetchImpl(
       `${apiBaseUrl}/questionnaire/sessions/${encodeURIComponent(sessionId)}/flow-answers/${encodeURIComponent(stepId)}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answerId }),
+        body: JSON.stringify({ answerId, ...(supersedePrevious ? { supersedePrevious: true } : {}) }),
       },
     ),
     "questionnaire_answer_rejected",

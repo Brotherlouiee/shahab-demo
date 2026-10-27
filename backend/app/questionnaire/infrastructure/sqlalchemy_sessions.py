@@ -5,10 +5,16 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
+from sqlalchemy import exists, func, select, update
 from sqlalchemy.orm import Session
 
-from backend.app.infrastructure.db.models import AnswerOption, Question, QuestionnaireSessionState, QuestionnaireVersion
+from backend.app.infrastructure.db.models import (
+    AnswerOption,
+    Question,
+    QuestionnaireSessionState,
+    RecommendationHistoryRun,
+    QuestionnaireVersion,
+)
 from backend.app.infrastructure.db.models import QuestionnaireAnswer as QuestionnaireAnswerRow
 from backend.app.infrastructure.db.models import QuestionnaireSession as QuestionnaireSessionRow
 from backend.app.questionnaire.domain.configuration import QuestionnaireConfiguration
@@ -96,20 +102,76 @@ class SqlAlchemyQuestionnaireSessionRepository:
         ).all()
         return tuple(QuestionnaireAnswer(question_id, answer_id) for question_id, answer_id in rows)
 
-    def upsert_flow_answer(self, session_id: str, step_id: str, answer_id: str) -> None:
+    def upsert_flow_answer(
+        self,
+        session_id: str,
+        step_id: str,
+        answer_id: str,
+        *,
+        supersede_proof_digests: tuple[str, ...] = (),
+    ) -> tuple[str, ...]:
         session_uuid = uuid.UUID(session_id)
-        row = self._session.get(QuestionnaireFlowAnswer, (session_uuid, step_id))
-        if row is None:
-            self._session.add(
-                QuestionnaireFlowAnswer(
-                    questionnaire_session_id=session_uuid,
-                    step_id=step_id,
-                    answer_id=answer_id,
+        try:
+            row = self._session.get(QuestionnaireFlowAnswer, (session_uuid, step_id))
+            if row is None:
+                self._session.add(
+                    QuestionnaireFlowAnswer(
+                        questionnaire_session_id=session_uuid,
+                        step_id=step_id,
+                        answer_id=answer_id,
+                    )
                 )
-            )
-        else:
-            row.answer_id = answer_id
-        self._session.commit()
+            else:
+                row.answer_id = answer_id
+
+            superseded_ids: tuple[str, ...] = ()
+            if supersede_proof_digests:
+                target = self._session.scalar(
+                    select(QuestionnaireSessionRow)
+                    .where(QuestionnaireSessionRow.questionnaire_session_id == session_uuid)
+                    .with_for_update()
+                )
+                if target is None:
+                    raise LookupError("questionnaire session was not found")
+                database_now = func.clock_timestamp() if self._session.get_bind().dialect.name == "postgresql" else func.now()
+                has_history = exists().where(
+                    RecommendationHistoryRun.questionnaire_session_id
+                    == QuestionnaireSessionRow.questionnaire_session_id
+                )
+                candidates = tuple(
+                    self._session.scalars(
+                        select(QuestionnaireSessionRow)
+                        .where(
+                            QuestionnaireSessionRow.questionnaire_session_id != session_uuid,
+                            QuestionnaireSessionRow.questionnaire_version_id == self._version_id,
+                            QuestionnaireSessionRow.creator_proof_digest.in_(supersede_proof_digests),
+                            QuestionnaireSessionRow.owner_account_id.is_(None),
+                            QuestionnaireSessionRow.superseded_at.is_(None),
+                            QuestionnaireSessionRow.state == QuestionnaireSessionState.ACTIVE,
+                            QuestionnaireSessionRow.expires_at > database_now,
+                            QuestionnaireSessionRow.created_at < target.created_at,
+                            ~has_history,
+                        )
+                        .order_by(
+                            QuestionnaireSessionRow.created_at,
+                            QuestionnaireSessionRow.questionnaire_session_id,
+                        )
+                        .with_for_update()
+                    )
+                )
+                if candidates:
+                    candidate_ids = tuple(candidate.questionnaire_session_id for candidate in candidates)
+                    self._session.execute(
+                        update(QuestionnaireSessionRow)
+                        .where(QuestionnaireSessionRow.questionnaire_session_id.in_(candidate_ids))
+                        .values(superseded_at=database_now)
+                    )
+                    superseded_ids = tuple(map(str, candidate_ids))
+            self._session.commit()
+            return superseded_ids
+        except Exception:
+            self._session.rollback()
+            raise
 
     def list_flow_answers(self, session_id: str) -> dict[str, str]:
         rows = self._session.execute(

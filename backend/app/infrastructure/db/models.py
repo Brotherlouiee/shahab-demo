@@ -427,6 +427,7 @@ class QuestionnaireSession(Timestamped, Base):
     )
     state: Mapped[QuestionnaireSessionState] = mapped_column(nullable=False, default=QuestionnaireSessionState.ACTIVE)
     creator_proof_digest: Mapped[str | None] = mapped_column(String(64))
+    superseded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     owner_account_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("accounts.account_id", ondelete="RESTRICT"), index=True
     )

@@ -49,10 +49,12 @@ def require_questionnaire_access(
         raise denied from None
     owner = None
     expired_state = False
+    superseded_state = False
     if db is None:
         row = local_repository.get(str(identifier))
         digest = row.creator_proof_digest if row is not None else None
         expires = row.expires_at if row is not None else None
+        superseded_state = local_repository.is_superseded(str(identifier)) if row is not None else False
     else:
         if actor is not None:
             require_active_account(actor.account_id, db)
@@ -66,6 +68,7 @@ def require_questionnaire_access(
         expires = stored.expires_at if stored is not None else None
         owner = stored.owner_account_id if stored is not None else None
         expired_state = stored is not None and stored.state == QuestionnaireSessionState.EXPIRED
+        superseded_state = stored is not None and stored.superseded_at is not None
     if digest is None or not hmac.compare_digest(digest, proof_digest(secret)):
         raise denied
     if owner is not None and (actor is None or actor.account_id != owner):
@@ -74,5 +77,5 @@ def require_questionnaire_access(
         raise denied
     if expires.tzinfo is None:
         expires = expires.replace(tzinfo=UTC)
-    if expired_state or datetime.now(UTC) >= expires:
-        raise ApiError(status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session has expired.")
+    if expired_state or superseded_state or datetime.now(UTC) >= expires:
+        raise ApiError(status_code=410, code=ErrorCode.NOT_FOUND, message="Questionnaire session is no longer active.")

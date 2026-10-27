@@ -173,6 +173,49 @@ test("keeps the user on the current entry step and announces retryable API failu
     .toBeGreaterThan(0);
 });
 
+test("only commits supersession after an explicit fresh attempt saves its first answer", async ({ page }) => {
+  const writes = [];
+  const session = { sessionId: "fresh-test-session", expiresAt: "2026-10-27T12:30:00Z", answers: {}, flowAnswers: {} };
+  await page.addInitScript(() => {
+    window.history.replaceState({ shahabStartFreshQuestionnaire: true }, "", window.location.href);
+  });
+  await page.route("**/api/v1/questionnaire/sessions**", async (route) => {
+    const request = route.request();
+    const pathname = new URL(request.url()).pathname;
+    if (request.method() === "GET" && pathname.endsWith("/sessions/current")) {
+      await route.fulfill({ json: null });
+      return;
+    }
+    if (request.method() === "POST") {
+      await route.fulfill({ status: 201, json: session });
+      return;
+    }
+    if (request.method() === "PUT") {
+      writes.push({ pathname, body: request.postDataJSON() });
+      const flowStep = pathname.split("/flow-answers/")[1];
+      if (flowStep) session.flowAnswers[flowStep] = request.postDataJSON().answerId;
+      await route.fulfill({ json: session });
+      return;
+    }
+    await route.fulfill({ json: session });
+  });
+
+  await page.goto("/question/1");
+  await page.getByRole("radio").first().click();
+  expect(writes).toHaveLength(0);
+
+  await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  await expect(page).toHaveURL(/\/question\/2$/);
+  expect(writes[0].pathname).toContain("/flow-answers/loan_type");
+  expect(writes[0].body).toEqual({ answerId: "shahab", supersedePrevious: true });
+
+  await page.getByRole("radio").first().click();
+  await page.getByRole("button", { name: "پاسخ به سوال بعد" }).click();
+  await expect(page).toHaveURL(/\/question\/3$/);
+  expect(writes[1].pathname).toContain("/flow-answers/entity_type");
+  expect(writes[1].body).toEqual({ answerId: "business" });
+});
+
 test("restores an answered canonical step from server state after refresh", async ({ page }) => {
   const { answers } = await mockQuestionnaireSessionApi(page, { existingSession: true });
   const question = questionnaireConfiguration.questions[0];

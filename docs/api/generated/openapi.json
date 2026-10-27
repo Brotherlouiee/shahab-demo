@@ -160,6 +160,11 @@
             "minLength": 1,
             "title": "Answerid",
             "type": "string"
+          },
+          "supersedePrevious": {
+            "default": false,
+            "title": "Supersedeprevious",
+            "type": "boolean"
           }
         },
         "required": [

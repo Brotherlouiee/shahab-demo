@@ -79,6 +79,50 @@ class QuestionnaireProofPostgreSqlTests(unittest.TestCase):
         with self.engine.connect() as connection:
             self.assertEqual(connection.scalar(text("SELECT count(*) FROM questionnaire_answers")), 1)
 
+    def test_fresh_first_answer_atomically_supersedes_only_the_prior_browser_attempt(self):
+        self.alembic("upgrade", "head")
+        url = str(fixture.DATABASE_URL)
+        with TestClient(create_app(Settings(database_url=url))) as client:
+            old = client.post("/api/v1/questionnaire/sessions")
+            self.assertEqual(old.status_code, 201)
+            old_id = old.json()["sessionId"]
+            old_expiry = old.json()["expiresAt"]
+            complete_questionnaire_entry_steps(client, old_id)
+            saved = client.put(
+                f"/api/v1/questionnaire/sessions/{old_id}/answers/Q1",
+                json={"answerId": "Q1.incomeInvestment"},
+            )
+            self.assertEqual(saved.status_code, 200)
+
+            fresh = client.post("/api/v1/questionnaire/sessions")
+            self.assertEqual(fresh.status_code, 201)
+            new_id = fresh.json()["sessionId"]
+            # Merely creating a new attempt leaves prior progress readable.
+            self.assertEqual(client.get(f"/api/v1/questionnaire/sessions/{old_id}").status_code, 200)
+            committed = client.put(
+                f"/api/v1/questionnaire/sessions/{new_id}/flow-answers/loan_type",
+                json={"answerId": "shahab", "supersedePrevious": True},
+            )
+            self.assertEqual(committed.status_code, 200, committed.text)
+            self.assertEqual(client.get(f"/api/v1/questionnaire/sessions/{old_id}").status_code, 410)
+            self.assertEqual(client.get(f"/api/v1/questionnaire/sessions/{new_id}").status_code, 200)
+
+        with self.engine.connect() as connection:
+            old_row = connection.execute(
+                text("SELECT superseded_at,expires_at FROM questionnaire_sessions WHERE questionnaire_session_id=:sid"),
+                {"sid": old_id},
+            ).one()
+            self.assertIsNotNone(old_row.superseded_at)
+            self.assertEqual(old_row.expires_at.isoformat(), old_expiry)
+            # Superseding revokes reads immediately but leaves retention to the existing expiry cleanup.
+            self.assertEqual(
+                connection.scalar(
+                    text("SELECT count(*) FROM questionnaire_answers a JOIN questionnaire_sessions s USING(questionnaire_session_id) WHERE s.questionnaire_session_id=:sid"),
+                    {"sid": old_id},
+                ),
+                1,
+            )
+
     def test_two_accounts_cannot_read_write_or_claim_another_bound_questionnaire(self):
         self.legacy_fixture()
         self.alembic("upgrade", "head")

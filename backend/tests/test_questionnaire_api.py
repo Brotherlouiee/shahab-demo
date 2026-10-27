@@ -93,6 +93,73 @@ class QuestionnaireApiTests(unittest.TestCase):
         )
         self.assertEqual(accepted.status_code, 200)
 
+    def test_abandoned_attempt_is_kept_until_a_new_first_answer_is_saved(self) -> None:
+        old_session = self.client.post("/api/v1/questionnaire/sessions").json()
+        old_id = old_session["sessionId"]
+        self._complete_entry_steps(old_id)
+        self.assertEqual(
+            self.client.put(
+                f"/api/v1/questionnaire/sessions/{old_id}/answers/Q1",
+                json={"answerId": "Q1.incomeInvestment"},
+            ).status_code,
+            200,
+        )
+
+        # A fresh session with no committed first answer leaves the old attempt active.
+        new_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        still_active = self.client.get(f"/api/v1/questionnaire/sessions/{old_id}")
+        self.assertEqual(still_active.status_code, 200)
+        self.assertEqual(still_active.json()["expiresAt"], old_session["expiresAt"])
+
+        first_answer = self.client.put(
+            f"/api/v1/questionnaire/sessions/{new_id}/flow-answers/loan_type",
+            json={"answerId": "shahab", "supersedePrevious": True},
+        )
+        self.assertEqual(first_answer.status_code, 200, first_answer.text)
+        self.assertEqual(first_answer.json()["sessionId"], new_id)
+        self.assertEqual(self.client.get(f"/api/v1/questionnaire/sessions/{old_id}").status_code, 410)
+        self.assertEqual(
+            self.client.put(
+                f"/api/v1/questionnaire/sessions/{old_id}/flow-answers/entity_type",
+                json={"answerId": "person"},
+            ).status_code,
+            410,
+        )
+        current = self.client.get("/api/v1/questionnaire/sessions/current")
+        self.assertEqual(current.status_code, 200)
+        self.assertEqual(current.json()["sessionId"], new_id)
+
+    def test_failed_first_answer_does_not_supersede_the_old_attempt(self) -> None:
+        old_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        self._complete_entry_steps(old_id)
+        new_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+
+        failed = self.client.put(
+            f"/api/v1/questionnaire/sessions/{new_id}/flow-answers/loan_type",
+            json={"answerId": "invalid", "supersedePrevious": True},
+        )
+        self.assertEqual(failed.status_code, 422)
+        self.assertEqual(self.client.get(f"/api/v1/questionnaire/sessions/{old_id}").status_code, 200)
+
+    def test_superseding_requires_the_first_step_and_does_not_affect_another_browser(self) -> None:
+        other = TestClient(self.client.app, raise_server_exceptions=False)
+        other_id = other.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        for step_id, answer_id in (("loan_type", "shahab"), ("entity_type", "person")):
+            self.assertEqual(
+                other.put(
+                    f"/api/v1/questionnaire/sessions/{other_id}/flow-answers/{step_id}",
+                    json={"answerId": answer_id},
+                ).status_code,
+                200,
+            )
+        own_id = self.client.post("/api/v1/questionnaire/sessions").json()["sessionId"]
+        invalid_step = self.client.put(
+            f"/api/v1/questionnaire/sessions/{own_id}/flow-answers/entity_type",
+            json={"answerId": "person", "supersedePrevious": True},
+        )
+        self.assertEqual(invalid_step.status_code, 422)
+        self.assertEqual(other.get(f"/api/v1/questionnaire/sessions/{other_id}").status_code, 200)
+
     def test_session_writes_and_resumes_only_canonical_answers(self) -> None:
         started = self.client.post("/api/v1/questionnaire/sessions")
         self.assertEqual(started.status_code, 201)

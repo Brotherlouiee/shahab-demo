@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictBool
 
 
 class AnswerWriteRequest(BaseModel):
@@ -12,6 +12,7 @@ class AnswerWriteRequest(BaseModel):
 
 class FlowAnswerWriteRequest(BaseModel):
     answer_id: str = Field(alias="answerId", min_length=1, max_length=32)
+    supersede_previous: StrictBool = Field(default=False, alias="supersedePrevious")
     model_config = {"populate_by_name": True, "extra": "forbid"}
 
 

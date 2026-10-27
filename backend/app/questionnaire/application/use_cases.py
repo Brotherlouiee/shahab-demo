@@ -56,7 +56,15 @@ class QuestionnaireSessionService:
         self._repository.upsert_answer(session_id, validated_answer)
         self._cache_set(session)
 
-    def record_flow_answer(self, session_id: str, step_id: str, answer_id: str, now: datetime | None = None) -> None:
+    def record_flow_answer(
+        self,
+        session_id: str,
+        step_id: str,
+        answer_id: str,
+        now: datetime | None = None,
+        *,
+        supersede_proof_digests: tuple[str, ...] = (),
+    ) -> None:
         session = self.get(session_id)
         session.ensure_active(now or datetime.now(UTC))
         try:
@@ -66,8 +74,23 @@ class QuestionnaireSessionService:
         saved = self._repository.list_flow_answers(session_id)
         if any(step.step_id not in saved for step in QUESTIONNAIRE_FLOW_STEPS[:step_index]):
             raise CanonicalAnswerValidationError("entry questions must be answered in order")
-        self._repository.upsert_flow_answer(session_id, step_id, validated_answer_id)
+        if supersede_proof_digests:
+            saved_answers = self._repository.list_answers(session_id)
+            if (
+                step_id != QUESTIONNAIRE_FLOW_STEPS[0].step_id
+                or saved_answers
+                or any(key != step_id for key in saved)
+            ):
+                raise CanonicalAnswerValidationError("only a fresh questionnaire attempt can supersede prior progress")
+        superseded_ids = self._repository.upsert_flow_answer(
+            session_id,
+            step_id,
+            validated_answer_id,
+            supersede_proof_digests=supersede_proof_digests,
+        )
         self._cache_set(session)
+        for superseded_id in superseded_ids:
+            self._cache_delete(superseded_id)
 
     def get(self, session_id: str) -> QuestionnaireSession:
         session = self._cache_get(session_id) or self._repository.get(session_id)
