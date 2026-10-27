@@ -54,7 +54,12 @@ test("full questionnaire, OTP, server partitions, published details and comparis
   });
 
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/question/1");
+  await page.goto("/");
+  await page.locator(".hp-select-trigger").click();
+  await page.locator(".hp-select-menu button").first().click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+  await expect(page).toHaveURL(/\/question\/1$/);
   for (let number = 1; number <= 2; number += 1) {
     await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
     // The second entry step must be a person flow for this recommendation fixture.

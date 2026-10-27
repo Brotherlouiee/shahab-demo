@@ -41,7 +41,12 @@ test.beforeEach(() => {
 });
 
 async function completeQuestionnaire(page) {
-  await page.goto("/question/1");
+  await page.goto("/");
+  await page.locator(".hp-select-trigger").click();
+  await page.locator(".hp-select-menu button").first().click();
+  await page.getByRole("button", { name: "بررسی واجد شرایط بودن" }).click();
+  await page.getByRole("button", { name: "متوجه شدم" }).click();
+  await expect(page).toHaveURL(/\/question\/1$/);
   for (let number = 1; number <= 2; number += 1) {
     await expect(page).toHaveURL(new RegExp(`/question/${number}$`));
     await page.getByRole("radio").nth(number === 2 ? 1 : 0).click();
