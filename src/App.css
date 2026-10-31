@@ -6154,6 +6154,7 @@ right: 16px;
 .hp-logout-confirm-dialog button:last-child { background:#fff; color:#000; }
 .hp-sidebar-icon[src$="book-saved.svg"] { object-fit: contain; }
 
+@media (min-width: 701px) {
 /*
  * The former desktop homepage presentation remains in the base rules above
  * for reference and reuse. This scoped mode deliberately supersedes it on the
@@ -6253,3 +6254,4 @@ right: 16px;
 .hp-mobile-home .hp-submit { width: 100% !important; }
 .hp-mobile-home .hp-select-wrap { order: 1 !important; }
 .hp-mobile-home .hp-submit { order: 2; height: 50px !important; border-radius: 25px !important; background: #000 !important; color: #fff !important; font-size: 17px !important; font-weight: 900 !important; box-shadow: none !important; }
+}

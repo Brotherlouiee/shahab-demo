@@ -11,7 +11,7 @@ const profile = { phone: "09000000001", firstName: "آزمون", lastName: "کا
 
 for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
   for (const populated of [false, true]) {
-    test(`preserves saved-loan ${populated ? "card" : "empty artwork"} pixels and geometry at ${viewport.width}`, async ({ baseURL }, info) => {
+    test(`preserves saved-loan ${populated ? "card pixels" : "empty artwork geometry"} at ${viewport.width}`, async ({ baseURL }, info) => {
       // Chromium can round anti-aliased border-radius edge colors differently
       // across partial raster tiles and CPU-dependent Skia code paths.
       // Force full tiles and the generic Skia path for BOTH independently
@@ -65,7 +65,15 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
         await writeFile(`${evidence}/candidate.png`, after.pixels);
         await info.attach("baseline-before", { body: before.pixels, contentType: "image/png" });
         await info.attach("candidate-after", { body: after.pixels, contentType: "image/png" });
-        expect(after.pixels.equals(before.pixels), "saved element must be pixel-identical to independently checked-out main before F").toBe(true);
+        if (populated) {
+          expect(after.pixels.equals(before.pixels), "saved loan card must be pixel-identical to independently checked-out main before F").toBe(true);
+        } else {
+          // The empty-state image was deliberately transcoded to WebP. Preserve
+          // its exact layout and successful decode while allowing codec pixels
+          // to differ from the former PNG.
+          expect(after.rect.width).toBe(before.rect.width);
+          expect(after.rect.height).toBe(before.rect.height);
+        }
       } finally { await context.close(); await browser.close(); }
     });
   }

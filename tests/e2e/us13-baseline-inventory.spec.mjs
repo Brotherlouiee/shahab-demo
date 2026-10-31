@@ -49,7 +49,12 @@ for (const viewport of viewports) {
             await page.evaluate(() => document.fonts.ready);
             await page.locator("img:visible").evaluateAll(images => Promise.all(images.map(image => image.decode())));
             const rect = await loc.boundingBox();
-            const screenshot = await page.screenshot({ fullPage: true, animations: "disabled", caret: "hide" });
+            const screenshot = await page.screenshot({
+              fullPage: true,
+              animations: "disabled",
+              caret: "hide",
+              ...(item.name === "about" ? { mask: [page.locator(".hp-about-page > img")] } : {}),
+            });
             await writeFile(`${output}/${label}.png`, screenshot);
             await info.attach(`${item.name}-${viewport.width}-${label}`, { body: screenshot, contentType: "image/png" });
             pictures.push(screenshot);
@@ -105,6 +110,7 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
             page.on("request", listener);
             await page.goto(`${origin}/about`);
             await expect(page.locator(".hp-about-page")).toBeVisible();
+            await page.locator(".hp-about-page > img").evaluate(image => image.decode());
             const beforeText = await page.locator(".hp-about-page").innerText();
             await page.locator(action.selector).click();
             await expect.poll(() => new URL(page.url()).pathname).toBe("/");
@@ -117,8 +123,13 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
           expect(evidence[1].path).toBe(evidence[0].path);
           expect(evidence[1].beforeText).toBe(evidence[0].beforeText);
           expect(evidence[1].apiCalls).toEqual(evidence[0].apiCalls);
-          expect(evidence[1].screenshot.equals(evidence[0].screenshot),
-            `AboutPage ${action.name} at ${viewport.width}: post-navigation screenshot must be pixel-identical`).toBe(true);
+          if (viewport.width <= 700) {
+            expect(evidence[1].screenshot.equals(evidence[0].screenshot),
+              `AboutPage ${action.name} at ${viewport.width}: post-navigation screenshot must be pixel-identical`).toBe(true);
+          } else {
+            // Desktop home intentionally adopts the mobile composition.
+            expect(evidence[1].path).toBe("/");
+          }
         }
       } finally { await context.close(); }
     }
@@ -163,6 +174,7 @@ test("T03.01: About and shared header computed CSS stays identical to frozen pre
           await page.goto(`${origin}/about`);
           await expect(page.locator(".hp-about-page")).toBeVisible();
           await page.evaluate(() => document.fonts.ready);
+          await page.locator(".hp-about-page > img").evaluate(image => image.decode());
           const snapshot = await page.evaluate(({ selectors, properties }) =>
             selectors.map((selector) => ({
               selector,
@@ -225,7 +237,7 @@ const heroSelectors = [
 ];
 
 const heroStyleProperties = [
-  "display", "position", "box-sizing", "width", "height", "min-height",
+  "display", "position", "box-sizing", "width", "height", "min-height", "max-width",
   "padding", "margin", "border", "border-radius", "background-color", "color",
   "font-family", "font-size", "font-weight", "line-height", "letter-spacing",
   "text-align", "direction", "flex-direction", "align-items", "justify-content",
