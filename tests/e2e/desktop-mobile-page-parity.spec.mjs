@@ -32,7 +32,20 @@ test("about, contact and login retain the mobile canvas on desktop", async ({ pa
   await page.goto("/login");
   await expect(page.locator(".hp-menu-button")).toBeVisible();
   await expect(page.locator(".hp-back-button")).toBeVisible();
-  expect(await page.locator(".hp-login-form").evaluate(node => node.getBoundingClientRect().width)).toBe(326);
+  const loginCanvas = page.locator(".hp-mobile-login");
+  const canvasBounds = await loginCanvas.boundingBox();
+  expect(canvasBounds.width).toBe(430);
+  expect(canvasBounds.x).toBe((desktopViewport.width - 430) / 2);
+  const navLayout = await loginCanvas.locator(".hp-nav").evaluate(node => {
+    const rect = node.getBoundingClientRect();
+    const style = getComputedStyle(node);
+    return { position: style.position, left: rect.left, width: rect.width };
+  });
+  expect(navLayout).toEqual({ position: "fixed", left: 505, width: 430 });
+  const loginForm = page.locator(".hp-login-form");
+  const formBounds = await loginForm.boundingBox();
+  expect(formBounds.width).toBe(326);
+  expect(formBounds.x - canvasBounds.x).toBe(52);
 });
 
 test("profile and recommendation history keep the mobile content width on desktop", async ({ page }) => {

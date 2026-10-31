@@ -6277,16 +6277,17 @@ right: 16px;
   }
 
   .hp-mobile-login .hp-nav {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    right: auto;
-    width: min(100%, 430px);
-    transform: translateX(-50%);
-    padding: 0;
-    border: 0;
-    background: #fff;
-    backdrop-filter: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 50% !important;
+    right: auto !important;
+    width: min(100%, 430px) !important;
+    transform: translateX(-50%) !important;
+    z-index: 2000 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
   }
 
   .hp-mobile-login .hp-nav-inner {
