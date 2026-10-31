@@ -6255,3 +6255,189 @@ right: 16px;
 .hp-mobile-home .hp-select-wrap { order: 1 !important; }
 .hp-mobile-home .hp-submit { order: 2; height: 50px !important; border-radius: 25px !important; background: #000 !important; color: #fff !important; font-size: 17px !important; font-weight: 900 !important; box-shadow: none !important; }
 }
+
+/* Keep selected account routes at the same mobile canvas width on desktop. */
+@media (min-width: 701px) {
+  .hp-about-page,
+  .hp-account-page,
+  .hp-recommendation-history-page {
+    box-sizing: border-box;
+    width: min(100%, 430px);
+    margin-inline: auto;
+  }
+
+  .hp-page.hp-mobile-login {
+    box-sizing: border-box;
+    width: min(100%, 430px);
+    min-height: 100svh;
+    margin-inline: auto;
+    overflow-x: hidden;
+    background: #fff;
+    color: #000;
+  }
+
+  .hp-mobile-login .hp-nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    right: auto;
+    width: min(100%, 430px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: 0;
+    background: #fff;
+    backdrop-filter: none;
+  }
+
+  .hp-mobile-login .hp-nav-inner {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 58px 1fr 24px;
+    width: 100%;
+    max-width: none;
+    height: 104px;
+    min-height: 104px;
+    margin: 0;
+    padding: 31px 22px 0;
+    gap: 0;
+    align-items: start;
+    direction: ltr;
+  }
+
+  .hp-mobile-login .hp-nav-right {
+    grid-column: 2 / 4;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .hp-mobile-login .hp-nav-left {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    padding-top: 14px;
+  }
+
+  .hp-mobile-login .hp-nav-left .hp-back-button {
+    display: block;
+    color: #000;
+  }
+
+  .hp-mobile-login .hp-menu-button {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .hp-mobile-login .hp-menu-button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 1px;
+    background: #5f6665;
+  }
+
+  .hp-mobile-login .hp-brand {
+    gap: 5px;
+    direction: rtl;
+  }
+
+  .hp-mobile-login .hp-nav .hp-brand img {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    background: transparent;
+  }
+
+  .hp-mobile-login .hp-brand strong {
+    color: #000;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .hp-mobile-login .hp-nav .hp-brand small {
+    margin-top: 3px;
+    color: #000;
+    font-size: 8.5px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .hp-mobile-login > .hp-login-page {
+    box-sizing: border-box;
+    min-height: calc(100svh - 104px);
+    padding: 131px 33px 0;
+    background: #fff;
+  }
+
+  .hp-mobile-login .hp-login-form,
+  .hp-mobile-login .hp-otp-form {
+    width: 100%;
+    max-width: 326px;
+  }
+
+  .hp-mobile-login .hp-login-form label {
+    margin-bottom: 17px;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .hp-mobile-login .hp-phone-row {
+    gap: 5px;
+  }
+
+  .hp-mobile-login .hp-phone-row span,
+  .hp-mobile-login .hp-phone-row input {
+    height: 41px;
+    border-radius: 7px;
+    background: #f1f1f1;
+  }
+
+  .hp-mobile-login .hp-phone-row span {
+    width: 41px;
+    font-size: 15px;
+  }
+
+  .hp-mobile-login .hp-login-form > button {
+    height: 49px;
+    margin-top: 14px;
+    border-radius: 7px;
+    font-size: 16px;
+  }
+
+  .hp-mobile-login .hp-otp-row {
+    gap: 6px;
+    margin-top: 25px;
+  }
+
+  .hp-mobile-login .hp-otp-row input {
+    height: 49px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+
+  .hp-mobile-login .hp-otp-actions {
+    margin-top: 24px;
+    padding: 0 7px;
+  }
+
+  .hp-mobile-login .hp-change-phone,
+  .hp-mobile-login .hp-resend-code {
+    font-size: 14px;
+  }
+}

@@ -32,6 +32,15 @@
 .sh-contact-enamad { display: block; width: 210px; margin: 32px auto 0; }
 .sh-contact-enamad img { display: block; width: 100%; height: auto; }
 .sh-contact-page a:focus-visible, .sh-contact-page button:focus-visible { outline: 2px solid #059c7b; outline-offset: 4px; }
+@media (min-width: 701px) {
+  .sh-contact-page {
+    box-sizing: border-box;
+    width: min(100%, 430px);
+    margin-inline: auto;
+  }
+
+  .sh-contact-content { max-width: none; }
+}
 @media (max-width: 359px) {
   .sh-contact-page { padding-inline: 16px; }
   .sh-contact-page .hp-account-header { gap: 8px; }
