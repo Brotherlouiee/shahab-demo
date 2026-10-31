@@ -4,7 +4,7 @@ import test from "node:test";
 
 test("index root has no legacy fallback UI before React starts", async () => {
   const html = await readFile(new URL("../../index.html", import.meta.url), "utf8");
-  const root = html.match(/<div\s+id=["']root["']\s*>([\s\S]*?)<\/div>/i);
+  const root = html.match(/<div\b(?=[^>]*\bid=["']root["'])[^>]*>([\s\S]*?)<\/div>/i);
 
   assert.ok(root, "index.html must define the React root");
   assert.equal(root[1].trim(), "", "the React root must not contain static fallback markup");
