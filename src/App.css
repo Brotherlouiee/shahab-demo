@@ -6114,7 +6114,7 @@ right: 16px;
 }
 .hp-login-verify:disabled { cursor: not-allowed; opacity: .45; }
 
-.hp-account-page,.hp-about-page,.hp-saved-loans-page{min-height:100vh;background:#fff;color:#000;padding:0 20px 32px;direction:rtl}.hp-account-page h1,.hp-saved-loans-page h1{text-align:right;font-size:18px}.hp-account-page label{display:grid;gap:5px;margin:10px 0;font-weight:700}.hp-account-page input,.hp-account-page select{height:38px;border:0;border-radius:8px;background:#f1f1f1;padding:0 12px;font:inherit}.hp-avatar-upload{width:94px;height:94px!important;margin:28px auto!important;border:1px solid #00b87a;border-radius:50%;display:grid!important;place-items:center;overflow:hidden}.hp-avatar-upload input{display:none}.hp-avatar-upload img{width:100%;height:100%;object-fit:cover}.hp-avatar-upload span{font-size:32px}.hp-account-save{width:100%;margin-top:16px;padding:12px;border:0;border-radius:8px;background:#00b87a;color:#fff;font:inherit;font-weight:800}.hp-about-page img{display:block;width:min(100%,340px);margin:20px auto;max-height:260px;object-fit:contain}.hp-about-page p{font-size:16px;line-height:1.8;text-align:right}.hp-saved-loans-page .hp-loan-result-card{margin:10px 0}.hp-saved-loans-page .hp-loan-result-filters{display:flex;gap:8px;margin:10px 0}.hp-saved-loans-page .hp-loan-result-filters span{flex:1;border:1px solid #bbb;border-radius:8px;padding:9px;color:#999}.hp-saved-loans-page .hp-loan-docs-link{border:0;background:transparent;width:100%;text-align:center;cursor:pointer}
+.hp-account-page,.hp-about-page,.hp-saved-loans-page{min-height:100vh;background:#fff;color:#000;padding:0 20px 32px;direction:rtl}.hp-account-page h1,.hp-saved-loans-page h1{text-align:right;font-size:18px}.hp-account-page label{display:grid;gap:5px;margin:10px 0;font-weight:700}.hp-account-page input,.hp-account-page select{height:38px;border:0;border-radius:8px;background:#f1f1f1;padding:0 12px;font:inherit}.hp-avatar-upload{width:94px;height:94px!important;margin:28px auto!important;border:1px solid #00b87a;border-radius:50%;display:grid!important;place-items:center;overflow:hidden}.hp-avatar-upload input{display:none}.hp-avatar-upload img{width:100%;height:100%;object-fit:cover}.hp-avatar-upload span{font-size:32px}.hp-account-save{width:100%;margin-top:16px;padding:12px;border:0;border-radius:8px;background:#00b87a;color:#fff;font:inherit;font-weight:800}.hp-about-page img{display:block;width:min(100%,340px);margin:20px auto;max-height:260px;object-fit:contain}.hp-about-page > img{height:auto}.hp-about-page p{font-size:16px;line-height:1.8;text-align:right}.hp-saved-loans-page .hp-loan-result-card{margin:10px 0}.hp-saved-loans-page .hp-loan-result-filters{display:flex;gap:8px;margin:10px 0}.hp-saved-loans-page .hp-loan-result-filters span{flex:1;border:1px solid #bbb;border-radius:8px;padding:9px;color:#999}.hp-saved-loans-page .hp-loan-docs-link{border:0;background:transparent;width:100%;text-align:center;cursor:pointer}
 
 /* US-09.T071: use the supplied mobile reference geometry. */
 .hp-account-page{padding:0 20px 32px}.hp-account-page .hp-avatar-upload{margin:14px 0 26px auto!important;width:94px;height:94px!important}.hp-account-page .hp-avatar-upload>img{width:42px;height:42px;object-fit:contain}.hp-account-page .hp-avatar-upload>img[alt="عکس پروفایل"]{width:100%;height:100%;object-fit:cover}.hp-account-page label{margin:10px 4px;gap:4px}.hp-account-page input,.hp-account-page select{height:35px}.hp-account-page select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,#111 50%),linear-gradient(135deg,#111 50%,transparent 50%);background-position:12px 14px,17px 14px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-left:32px}.hp-saved-loans-page{padding:0}.hp-saved-loans-page h1,.hp-account-page h1{display:none}
@@ -6153,3 +6153,105 @@ right: 16px;
 .hp-logout-confirm-dialog button { height:34px; border:0; border-radius:5px; background:#00b87a; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
 .hp-logout-confirm-dialog button:last-child { background:#fff; color:#000; }
 .hp-sidebar-icon[src$="book-saved.svg"] { object-fit: contain; }
+
+@media (min-width: 701px) {
+/*
+ * The former desktop homepage presentation remains in the base rules above
+ * for reference and reuse. This scoped mode deliberately supersedes it on the
+ * home route so every viewport receives the existing mobile composition.
+ */
+.hp-mobile-home {
+  background: #fff !important;
+  color: #000;
+}
+
+.hp-mobile-home .hp-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 2000 !important;
+  background: #fff !important;
+  border-bottom: 0 !important;
+  padding: 0 !important;
+  backdrop-filter: none;
+}
+
+.hp-mobile-home .hp-nav .hp-nav-inner,
+.hp-mobile-home .hp-nav-inner {
+  display: grid !important;
+  grid-template-columns: 58px 1fr 24px;
+  height: 104px !important;
+  min-height: 104px !important;
+  padding: 31px 22px 0 !important;
+  gap: 0 !important;
+  align-items: start !important;
+  direction: ltr;
+}
+
+.hp-mobile-home .hp-nav-right {
+  grid-column: 2 / 4;
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  min-width: 0;
+}
+
+.hp-mobile-home .hp-nav-left {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  padding-top: 14px;
+}
+
+.hp-mobile-home .hp-nav-left a,
+.hp-mobile-home .hp-nav-left button { display: none !important; }
+
+.hp-mobile-home .hp-menu-button {
+  display: inline-flex !important;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4px;
+}
+
+.hp-mobile-home .hp-menu-button span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: #5f6665;
+}
+
+.hp-mobile-home .hp-brand { gap: 5px !important; direction: rtl; }
+.hp-mobile-home .hp-nav .hp-brand img { width: 35px !important; height: 35px !important; padding: 0 !important; background: transparent !important; }
+.hp-mobile-home .hp-brand > span { display: inline-flex !important; flex-direction: row !important; align-items: baseline !important; gap: 5px !important; white-space: nowrap !important; }
+.hp-mobile-home .hp-brand strong { display: inline !important; color: #000 !important; font-size: 18.4px !important; font-weight: 800 !important; line-height: 1 !important; }
+.hp-mobile-home .hp-nav .hp-brand small { display: inline !important; color: #000 !important; margin-top: 0 !important; font-size: 9.8px !important; font-weight: 400 !important; line-height: 1 !important; white-space: nowrap; }
+
+.hp-mobile-home > main { padding-top: 104px !important; }
+.hp-mobile-home .hp-hero { box-sizing: border-box !important; min-height: calc(100svh - 104px) !important; padding: 19px 21px 24px !important; background: #fff !important; text-align: center !important; }
+.hp-mobile-home .hp-hero h1,
+.hp-mobile-home .hp-hero p { top: 0 !important; position: relative !important; }
+.hp-mobile-home .hp-hero h1 { max-width: 348px !important; margin: 0 auto !important; color: #000 !important; font-size: 33px !important; font-weight: 900 !important; line-height: 1.72 !important; letter-spacing: 0 !important; white-space: normal !important; word-spacing: 2px !important; }
+.hp-mobile-home .hp-hero h1 br,
+.hp-mobile-home .hp-hero p br { display: none !important; }
+.hp-mobile-home .hp-hero h1 em { display: block; color: #00B87A !important; font-size: 33px !important; font-weight: 900 !important; line-height: 1.35 !important; }
+.hp-mobile-home .hp-hero p { max-width: 330px !important; margin: 26px auto 0 !important; color: #bdbdbd !important; font-size: 18px !important; font-weight: 400 !important; line-height: 1.7 !important; }
+.hp-mobile-home .hp-hero .hp-hero-form { width: 100% !important; max-width: 348px !important; margin: 53px auto 0 !important; display: flex !important; flex-direction: column !important; gap: 16px !important; align-items: stretch !important; direction: rtl !important; }
+.hp-mobile-home .hp-select-wrap,
+.hp-mobile-home .hp-submit { width: 100% !important; }
+.hp-mobile-home .hp-select-wrap { order: 1 !important; }
+.hp-mobile-home .hp-submit { order: 2; height: 50px !important; border-radius: 25px !important; background: #000 !important; color: #fff !important; font-size: 17px !important; font-weight: 900 !important; box-shadow: none !important; }
+}

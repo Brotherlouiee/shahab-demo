@@ -1781,6 +1781,10 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   useEffect(() => {
     if (!questionnaireSessionId) return undefined;
+    // The current-session response already restored this session's answers.
+    // Fetching the same session by ID immediately afterward duplicated the
+    // request and could race the initial route restoration.
+    if (questionnaireSessionId === initialRouteSessionIdRef.current && initialRouteRestoredRef.current) return undefined;
     let active = true;
     readQuestionnaireSession(questionnaireSessionId).then((session) => {
       if (!active) return;
@@ -3230,7 +3234,7 @@ function RecommendationHistoryPage({ onBack, onOpen, onUnauthorized, state, setS
   return <main className="hp-account-page hp-recommendation-history-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} />
     {state.status === "loading" ? <DeferredPageSkeleton active variant="cards" /> : null}
     {state.status === "error" ? <div className="hp-recommendation-result-state" role="alert"><p>دریافت سوابق در حال حاضر ممکن نیست.</p><button type="button" onClick={() => load()}>تلاش مجدد</button></div> : null}
-    {state.status === "ready" && !state.items.length ? <div className="hp-saved-loans-empty-state" role="status"><img src="/saved-loans-empty.png" alt="" width="1230" height="1278" decoding="async" fetchPriority="high" /></div> : null}
+    {state.status === "ready" && !state.items.length ? <div className="hp-saved-loans-empty-state" role="status"><img src="/saved-loans-empty.webp" alt="" width="1230" height="1278" decoding="async" fetchPriority="high" /></div> : null}
     {state.status === "ready" ? <section className="hp-recommendation-history-list">{state.items.map((item) => <article className="hp-recommendation-history-card" key={item.historyId}><button type="button" className="hp-history-card-open" onClick={() => onOpen(item.historyId)}><span className="hp-history-card-top"><strong>مشاهده نتایج</strong></span><span className="hp-history-card-row"><b>تعداد وام توصیه شده</b><em>{toPersianDigits(item.rankedCount)}</em></span><span className="hp-history-card-row"><b>تاریخ</b><em>{new Date(item.createdAt).toLocaleDateString("fa-IR", { timeZone: "Asia/Tehran" })}</em></span><span className="hp-history-card-row"><b>ساعت</b><em>{new Date(item.createdAt).toLocaleTimeString("fa-IR", { timeZone: "Asia/Tehran", hour: "2-digit", minute: "2-digit" })}</em></span></button><button className="hp-history-hide" type="button" aria-label="حذف سابقه" onClick={() => setPendingHideId(item.historyId)}><img src={closeCircleIconUrl} alt="" /></button></article>)}{state.nextCursor !== null ? <button type="button" className="hp-history-load-more" onClick={() => load(state.nextCursor, true)}>نمایش بیشتر</button> : null}</section> : null}
     {pendingHideId ? <div className="hp-history-confirm-backdrop" role="presentation"><section className="hp-history-confirm" role="alertdialog" aria-modal="true" aria-labelledby="history-confirm-title"><img src={dangerIconUrl} alt="" /><strong id="history-confirm-title">آیا از حذف کارت مطمئن هستید؟</strong><div><button type="button" disabled={isHiding} onClick={() => setPendingHideId(null)}>خیر</button><button type="button" disabled={isHiding} onClick={confirmHide}>بله</button></div></section></div> : null}
   </main>;
@@ -3462,7 +3466,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="hp-page" dir="rtl">
+    <div className={`hp-page ${currentView === "home" ? "hp-mobile-home" : ""}`} dir="rtl">
       <Nav
         isLoginView={currentView === "login"}
         onBack={handleBack}
@@ -3473,6 +3477,8 @@ export default function HomePage() {
       {currentView === "login" ? (
         <LoginScreen loginStep={loginStep} setLoginStep={setLoginStep} onAuthenticated={handleLoginAuthenticated} />
       ) : (
+        /* نمای دسکتاپ قدیمیِ خانه حذف نشده است؛ کلاس hp-mobile-home آن را در
+           مسیر اصلی غیرفعال می‌کند تا CSS موبایل در همهٔ عرض‌ها اعمال شود. */
         <main>
           <Hero onStartQuestionnaire={handleQuestionnaireOpen} />
         </main>
