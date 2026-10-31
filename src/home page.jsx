@@ -3466,7 +3466,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className={`hp-page ${currentView === "home" ? "hp-mobile-home" : ""}`} dir="rtl">
+    <div className={`hp-page ${currentView === "home" ? "hp-mobile-home" : ""} ${currentView === "login" ? "hp-mobile-login" : ""}`} dir="rtl">
       <Nav
         isLoginView={currentView === "login"}
         onBack={handleBack}

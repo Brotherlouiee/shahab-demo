@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { chromium, expect, test } from "@playwright/test";
 
 // US-13.T01 records *independent* pre-refactor and current visual evidence.
-// The owner-approved desktop-home layout change has a narrow explicit oracle;
+// Owner-approved desktop mobile-canvas changes have narrow explicit oracles;
 // all unchanged route/viewport and T02/T03 pixel/behavior/network gates stay strict.
 const reference = process.env.SHAHAB_US13_BASELINE_URL;
 // The general e2e workflow has no reference server: skip only this collector.
@@ -60,19 +60,31 @@ for (const viewport of viewports) {
             pictures.push(screenshot);
             captures.push({ label, path: item.path, width: viewport.width, height: viewport.height, rect, title: await page.title() });
           }
-          // Capture all nine route/viewport cases; only the approved desktop
-          // home layout gets a new contract instead of old-layout pixel parity.
-          const approvedMobileHomeAtDesktop = item.name === "home" && viewport.width > 700;
-          if (approvedMobileHomeAtDesktop) {
-            // Product owner explicitly changed the desktop home contract: it
-            // now renders the established mobile composition. Keep all other
-            // frozen-route pixels strict and assert that new contract here.
-            await expect(page.locator(".hp-mobile-home")).toBeVisible();
-            await expect(page.locator(".hp-menu-button")).toBeVisible();
-            await expect(page.locator(".hp-nav-left a")).toBeHidden();
-            await expect(page.locator(".hp-hero h1")).toHaveCSS("font-size", "33px");
-            await expect(page.locator(".hp-hero-form")).toHaveCSS("flex-direction", "column");
-            await expect(page.locator(".hp-nav-inner")).toHaveCSS("min-height", "104px");
+          // Capture every route/viewport. Owner-approved mobile presentation
+          // on desktop gets an explicit narrow contract instead of legacy pixels.
+          const approvedMobileCanvasAtDesktop = viewport.width > 700 && ["home", "about", "login"].includes(item.name);
+          if (approvedMobileCanvasAtDesktop) {
+            // Product owner explicitly requests the established 430px mobile
+            // canvas for these desktop routes. Other routes stay pixel-identical.
+            if (item.name === "home") {
+              await expect(page.locator(".hp-mobile-home")).toBeVisible();
+              await expect(page.locator(".hp-menu-button")).toBeVisible();
+              await expect(page.locator(".hp-nav-left a")).toBeHidden();
+              await expect(page.locator(".hp-hero h1")).toHaveCSS("font-size", "33px");
+              await expect(page.locator(".hp-hero-form")).toHaveCSS("flex-direction", "column");
+              await expect(page.locator(".hp-nav-inner")).toHaveCSS("min-height", "104px");
+            } else if (item.name === "about") {
+              const bounds = await page.locator(".hp-about-page").boundingBox();
+              expect(bounds.width).toBe(430);
+              expect(bounds.x).toBe((viewport.width - 430) / 2);
+            } else {
+              const canvas = page.locator(".hp-mobile-login");
+              const bounds = await canvas.boundingBox();
+              expect(bounds.width).toBe(430);
+              expect(bounds.x).toBe((viewport.width - 430) / 2);
+              await expect(page.locator(".hp-menu-button")).toBeVisible();
+              await expect(page.locator(".hp-back-button")).toBeVisible();
+            }
           } else {
             expect(captures[1].rect).toEqual(captures[0].rect);
             // Keep the exact frozen-page gate for all unchanged routes and
@@ -137,7 +149,7 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
 });
 
 
-test("T03.01: About and shared header computed CSS stays identical to frozen pre-refactor baseline", async ({ baseURL }, info) => {
+test("T03.01: About and shared header preserve frozen mobile styles and approved desktop canvas", async ({ baseURL }, info) => {
   const browser = await chromium.launch({
     ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
     args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
@@ -195,7 +207,32 @@ test("T03.01: About and shared header computed CSS stays identical to frozen pre
           });
           evidence.push(snapshot);
         }
-        expect(evidence[1], `T03.01 About CSS/geometry must equal frozen baseline at ${viewport.width}`).toEqual(evidence[0]);
+        if (viewport.width > 700) {
+          // The approved desktop frame intentionally uses the mobile canvas.
+          // Preserve the artwork asset treatment and the fixed-size logo/actions;
+          // container width and horizontal positions are covered by the page-parity test.
+          const bounds = await page.locator(".hp-about-page").boundingBox();
+          expect(bounds.width).toBe(430);
+          const pick = (snapshot, selector) => snapshot.find(group => group.selector === selector)?.elements ?? [];
+          const baseArtwork = pick(evidence[0], ".hp-about-page > img")[0];
+          const candidateArtwork = pick(evidence[1], ".hp-about-page > img")[0];
+          expect(candidateArtwork.text).toBe(baseArtwork.text);
+          expect(candidateArtwork.css["object-fit"]).toBe(baseArtwork.css["object-fit"]);
+          expect(candidateArtwork.css["max-height"]).toBe(baseArtwork.css["max-height"]);
+          for (const selector of [
+            ".hp-account-header .hp-questionnaire-brand img",
+            ".hp-account-header .hp-questionnaire-icon-button",
+          ]) {
+            const baselineElements = pick(evidence[0], selector);
+            const candidateElements = pick(evidence[1], selector);
+            expect(candidateElements, `T03.01 ${selector} count at ${viewport.width}`).toHaveLength(baselineElements.length);
+            expect(candidateElements.map(({ rect, text }) => ({ width: rect.width, height: rect.height, text }))).toEqual(
+              baselineElements.map(({ rect, text }) => ({ width: rect.width, height: rect.height, text })),
+            );
+          }
+        } else {
+          expect(evidence[1], `T03.01 About CSS/geometry must equal frozen baseline at ${viewport.width}`).toEqual(evidence[0]);
+        }
       } finally {
         await context.close();
       }
