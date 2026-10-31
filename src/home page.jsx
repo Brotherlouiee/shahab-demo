@@ -29,6 +29,7 @@ import {
   questionnaireJourneyRouteEntries,
 } from "./features/questionnaire/questionnaireRouteMap.mjs";
 import { getCanonicalQuestionForPrototypeIndex } from "./features/questionnaire/canonicalQuestionnaire.mjs";
+import { trackQuestionnaireClarity } from "./features/questionnaire/questionnaireClarity.mjs";
 import {
   QuestionnaireSessionApiError,
   readQuestionnaireSession,
@@ -824,7 +825,7 @@ function LoginScreen({ loginStep, setLoginStep, onAuthenticated }) {
 
 function QuestionnaireHeader({ onBack, onMenu, onHome }) {
   return (
-    <header className="hp-questionnaire-header">
+    <header className="hp-questionnaire-header" data-clarity-unmask="true">
       <button className="hp-questionnaire-icon-button" type="button" onClick={onBack} aria-label="بازگشت">
         <svg viewBox="0 0 24 24" focusable="false">
           <path d="M20 12H5" />
@@ -1131,6 +1132,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
     ? getGuardedQuestionnaireRouteState(initialRequestedPath, [])
     : getQuestionnaireRouteState(initialRequestedPath);
   const [currentQuestion, setCurrentQuestion] = useState(initialRouteState.questionIndex);
+  const lastClarityStepRef = useRef(null);
   const [answers, setAnswers] = useState({});
   const answersRef = useRef(answers);
   answersRef.current = answers;
@@ -1624,6 +1626,19 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   const previousQuestionButtonText = isPersonalStageQuestion
     ? "بازگشت به مرحله قبل"
     : "بازگشت به سوال قبل";
+
+  useEffect(() => {
+    if (isRestoringQuestionnaireRoute) return;
+    const clarityStepKey = `${currentQuestion}:${isOtpQuestion ? "otp" : isPersonalInfoQuestion ? "profile" : "question"}`;
+    if (lastClarityStepRef.current === clarityStepKey) return;
+    lastClarityStepRef.current = clarityStepKey;
+    const action = isOtpQuestion
+      ? "otp_step_viewed"
+      : isPersonalInfoQuestion
+        ? "profile_step_viewed"
+        : "step_viewed";
+    trackQuestionnaireClarity(action, currentQuestion + 1);
+  }, [currentQuestion, isOtpQuestion, isPersonalInfoQuestion, isRestoringQuestionnaireRoute]);
   const historyId = getHistoryIdFromLocation()
     || (!initialRecommendationHistory?.sessionId ? initialRecommendationHistory?.historyId : null)
     || null;
@@ -2022,6 +2037,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           window.history.state?.shahabStartFreshQuestionnaire === true && flowStepId === "loan_type",
         );
       }
+      trackQuestionnaireClarity("answer_saved", currentQuestion + 1);
       pendingQuestionnaireSessionIdRef.current = "";
       setQuestionnaireSessionId(sessionId);
       replaceActiveRecommendationHistoryState(
@@ -2088,6 +2104,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   async function handleNextQuestion() {
     if (!canProceed) return;
+    trackQuestionnaireClarity("next_clicked", currentQuestion + 1);
     if (!(await persistQuestionnaireAnswer())) return;
     if (isPersonalInfoQuestion) {
       if (profileSubmitRef.current) return;
@@ -2102,9 +2119,11 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           // Reestablish account access first, then validate the original raw TTL.
           if (questionnaireSessionId) await readQuestionnaireSession(questionnaireSessionId);
           await savePersonalProfileAndAnalyze({ ...personalInfo, phone: profile.phone });
+          trackQuestionnaireClarity("profile_submitted", currentQuestion + 1);
           return;
         }
         const challenge = await requestProfileCode(personalInfo.phone);
+        trackQuestionnaireClarity("profile_submitted", currentQuestion + 1);
         setProfileChallengeId(challenge.challengeId);
         setIsOtpVerificationStep(true);
         setLoanOtp(Array(6).fill(""));
@@ -2149,6 +2168,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
   function handlePreviousQuestion() {
     if (isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer) return;
+    trackQuestionnaireClarity("back_clicked", currentQuestion + 1);
 
     if (isOtpQuestion) {
       setIsOtpVerificationStep(false);
@@ -2165,6 +2185,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
   }
 
   function handleSelectOption(optionId) {
+    trackQuestionnaireClarity("answer_selected", currentQuestion + 1);
     setAnswers((current) => ({
       ...current,
       [currentQuestion]: optionId,
@@ -2534,7 +2555,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
       <section className="hp-questionnaire-content">
         <DeferredPageSkeleton active={isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer || isSavingProfile} variant="questionnaire" />
         {isStagedQuestion ? (
-          <div className="hp-stage-board" aria-label="مراحل پرسشنامه">
+          <div className="hp-stage-board" aria-label="مراحل پرسشنامه" data-clarity-unmask="true">
             <div
               className={`hp-stage-track ${isPersonalStageQuestion ? "is-personal-info" : ""}`}
               style={{ transform: `translateX(${stageOffset}px)` }}
@@ -2583,7 +2604,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
         {isOtpQuestion ? (
           <>
-          <div className="hp-loan-otp-card">
+          <div className="hp-loan-otp-card" data-clarity-mask="true">
             <label>کد یکبار مصرف</label>
             <div className="hp-loan-otp-row" dir="ltr">
               {loanOtp.map((digit, index) => (
@@ -2619,7 +2640,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           {loanOtpError ? <p className="hp-loan-otp-error">{loanOtpError}</p> : null}
           </>
         ) : isPersonalInfoQuestion ? (
-          <form className="hp-personal-info-form" onSubmit={(event) => event.preventDefault()}>
+          <form className="hp-personal-info-form" data-clarity-mask="true" onSubmit={(event) => event.preventDefault()}>
             <label>
               <span>نام</span>
               <input
@@ -2826,7 +2847,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           </form>
         ) : (
           <>
-            <h1 className={question.titleClassName || ""}>{toPersianDigits(question.title)}</h1>
+            <h1 className={question.titleClassName || ""} data-clarity-unmask="true">{toPersianDigits(question.title)}</h1>
 
             <div
               className={`hp-question-card ${currentQuestion === 1 ? "is-compact" : ""} ${isStagedQuestion ? "is-staged" : ""} ${usesContentHeightQuestionCard ? "uses-content-height" : ""}`}
@@ -2837,6 +2858,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
                 <div key={option.id}>
                   <button
                     className={`hp-question-option ${selectedOption === option.id ? "is-selected" : ""}`}
+                    data-clarity-mask="true"
                     type="button"
                     role="radio"
                     aria-checked={selectedOption === option.id}
@@ -2866,6 +2888,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
         <div className="hp-question-actions">
           <button
             className={`hp-next-question ${isPersonalInfoQuestion ? "is-personal-confirm" : ""} ${isOtpQuestion ? "is-loan-otp-submit" : ""}`}
+            data-clarity-unmask="true"
             type="button"
             disabled={!canProceed}
             onClick={handleNextQuestion}
@@ -2875,6 +2898,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
           {currentQuestion > 0 ? (
             <button
               className={`hp-previous-question ${isPersonalStageQuestion ? "is-personal-stage-back" : ""}`}
+              data-clarity-unmask="true"
               type="button"
               disabled={isRestoringQuestionnaireRoute || isSavingQuestionnaireAnswer}
               onClick={handlePreviousQuestion}
