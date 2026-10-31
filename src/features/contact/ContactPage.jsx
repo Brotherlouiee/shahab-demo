@@ -1,10 +1,10 @@
-import phoneImage from "./assets/phone.png";
-import megaphoneImage from "./assets/megaphone.png";
+import phoneImage from "./assets/phone.webp";
+import megaphoneImage from "./assets/megaphone.webp";
 import linkedinImage from "./assets/linkedin.png";
 import telegramImage from "./assets/telegram.png";
 import instagramImage from "./assets/instagram.png";
 import xImage from "./assets/x.png";
-import enamadImage from "./assets/enamad.png";
+import enamadImage from "./assets/enamad.webp";
 import "./ContactPage.css";
 
 const linkedinUrl = "https://www.linkedin.com/company/shahabfintech";

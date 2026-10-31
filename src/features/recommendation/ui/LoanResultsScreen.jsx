@@ -234,7 +234,7 @@ export default function LoanResultsScreen({
         <DeferredPageSkeleton active={status === "loading" || status === "idle"} variant="cards" />
         {status === "ready" && savedItems !== null && !items.length ? (
           <div className="hp-saved-loans-empty-state" role="status">
-            <img src="/saved-loans-empty.png" alt="" width="1230" height="1278" decoding="async" fetchPriority="high" />
+            <img src="/saved-loans-empty.webp" alt="" width="1230" height="1278" decoding="async" fetchPriority="high" />
           </div>
         ) : null}
         {status === "sessionMissing" ? (

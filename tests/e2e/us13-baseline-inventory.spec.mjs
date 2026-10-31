@@ -2,8 +2,8 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { chromium, expect, test } from "@playwright/test";
 
 // US-13.T01 records *independent* pre-refactor and current visual evidence.
-// This is a characterization collector, not permission to weaken the strict
-// per-feature pixel/behavior/network parity assertions required in T02/T03.
+// The owner-approved desktop-home layout change has a narrow explicit oracle;
+// all unchanged route/viewport and T02/T03 pixel/behavior/network gates stay strict.
 const reference = process.env.SHAHAB_US13_BASELINE_URL;
 // The general e2e workflow has no reference server: skip only this collector.
 // The dedicated baseline workflow sets SHA/URL explicitly and therefore runs it.
@@ -55,13 +55,25 @@ for (const viewport of viewports) {
             pictures.push(screenshot);
             captures.push({ label, path: item.path, width: viewport.width, height: viewport.height, rect, title: await page.title() });
           }
-          // Full-page pixel and geometry assertions apply to these nine cases.
-          // Other routes and interactive states still require their own gates.
-          expect(captures[1].rect).toEqual(captures[0].rect);
-          // All nine initial route/viewport combinations were independently
-          // compared pixel-by-pixel on the frozen pre-refactor SHA. Keep this
-          // exact zero-tolerance gate; never rebaseline to accommodate a diff.
-          expect(pictures[1].equals(pictures[0]), `US-13 frozen ${item.name} at ${viewport.width}: entire screen must be pixel-identical`).toBe(true);
+          // Capture all nine route/viewport cases; only the approved desktop
+          // home layout gets a new contract instead of old-layout pixel parity.
+          const approvedMobileHomeAtDesktop = item.name === "home" && viewport.width > 700;
+          if (approvedMobileHomeAtDesktop) {
+            // Product owner explicitly changed the desktop home contract: it
+            // now renders the established mobile composition. Keep all other
+            // frozen-route pixels strict and assert that new contract here.
+            await expect(page.locator(".hp-mobile-home")).toBeVisible();
+            await expect(page.locator(".hp-menu-button")).toBeVisible();
+            await expect(page.locator(".hp-nav-left a")).toBeHidden();
+            await expect(page.locator(".hp-hero h1")).toHaveCSS("font-size", "33px");
+            await expect(page.locator(".hp-hero-form")).toHaveCSS("flex-direction", "column");
+            await expect(page.locator(".hp-nav-inner")).toHaveCSS("min-height", "104px");
+          } else {
+            expect(captures[1].rect).toEqual(captures[0].rect);
+            // Keep the exact frozen-page gate for all unchanged routes and
+            // viewports; only the explicitly approved desktop home changed.
+            expect(pictures[1].equals(pictures[0]), `US-13 frozen ${item.name} at ${viewport.width}: entire screen must be pixel-identical`).toBe(true);
+          }
           await writeFile(`${output}/geometry.json`, JSON.stringify({ frozenCommit: "f5e50da0ea29b7d933a813736a2616169ee9b8f3", captures }, null, 2));
         }
       } finally { await context.close(); }
@@ -221,7 +233,7 @@ const heroStyleProperties = [
 ];
 
 for (const viewport of heroViewports) {
-  test(`T01 Hero interaction, geometry, pixels and network match frozen baseline at ${viewport.width}px`, async ({ baseURL }, info) => {
+  test(`T01 Hero interaction and ${viewport.width > 700 ? "mobile-home layout" : "frozen view"} network contract at ${viewport.width}px`, async ({ baseURL }, info) => {
     const browser = await chromium.launch({
       ...(process.env.SHAHAB_E2E_BROWSER_PATH ? { executablePath: process.env.SHAHAB_E2E_BROWSER_PATH } : {}),
       args: ["--disable-gpu", "--disable-gpu-rasterization", "--disable-partial-raster", "--disable-skia-runtime-opts", "--force-color-profile=srgb"],
@@ -359,16 +371,28 @@ for (const viewport of heroViewports) {
       }
 
       const [baseline, candidate] = evidence;
-      expect(candidate.captures.map(({ state, snapshot }) => ({ state, snapshot })),
-        `T01 Hero state, focus, text, computed style and geometry at ${viewport.width}px`).toEqual(
-        baseline.captures.map(({ state, snapshot }) => ({ state, snapshot })),
-      );
-      const screenshotMatches = candidate.captures.map((capture, index) =>
-        capture.screenshot.equals(baseline.captures[index].screenshot));
-      expect(screenshotMatches,
-        `T01 Hero screenshots must match frozen baseline at ${viewport.width}px`).toEqual(
-        Array(candidate.captures.length).fill(true),
-      );
+      if (viewport.width <= 700) {
+        expect(candidate.captures.map(({ state, snapshot }) => ({ state, snapshot })),
+          `T01 Hero state, focus, text, computed style and geometry at ${viewport.width}px`).toEqual(
+          baseline.captures.map(({ state, snapshot }) => ({ state, snapshot })),
+        );
+        const screenshotMatches = candidate.captures.map((capture, index) =>
+          capture.screenshot.equals(baseline.captures[index].screenshot));
+        expect(screenshotMatches,
+          `T01 Hero screenshots must match frozen baseline at ${viewport.width}px`).toEqual(
+          Array(candidate.captures.length).fill(true),
+        );
+      } else {
+        // The desktop homepage intentionally adopts the existing mobile
+        // layout; retain its interaction/network oracle and assert that view.
+        const firstSnapshot = candidate.captures[0].snapshot.elements;
+        const styleFor = (selector, property) => firstSnapshot
+          .find((item) => item.selector === selector)?.elements[0]?.css[property];
+        expect(styleFor(".hp-hero h1", "font-size")).toBe("33px");
+        expect(styleFor(".hp-hero h1", "max-width")).toBe("348px");
+        expect(styleFor(".hp-hero-form", "flex-direction")).toBe("column");
+        expect(styleFor(".hp-hero", "background-color")).toBe("rgb(255, 255, 255)");
+      }
       expect(candidate.events, `T01 Hero DOM event sequence at ${viewport.width}px`).toEqual(baseline.events);
       const questionnaireResumeRequests = candidate.apiRequests.filter(
         ({ path }) => path === "/api/v1/questionnaire/sessions/current",
