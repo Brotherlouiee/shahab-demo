@@ -21,7 +21,7 @@ const frozenThemeNormalization = `
     .hp-page .hp-hero .hp-eligibility-message { padding: 46px 18px 40px !important; }
     .hp-page .hp-hero .hp-eligibility-message p {
       max-width: 326px !important;
-      margin: 0 3px !important;
+      margin: 0 1px !important;
       color: #000000 !important;
       line-height: 1.85 !important;
       text-align: center !important;
