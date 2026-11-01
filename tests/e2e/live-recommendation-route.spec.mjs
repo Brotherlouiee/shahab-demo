@@ -715,7 +715,8 @@ async function expectLoanSaveFeedback(page) {
   await expect(save.locator("img")).toHaveAttribute("src", /save-bold\.png$/);
   const toast = page.getByText("وام مورد نظر با موفقیت ذخیره شد", { exact: true });
   await expect(toast).toBeVisible();
-  await expect(toast).toHaveCSS("background-color", "rgb(191, 255, 233)");
+  await expect(toast).toHaveCSS("background-color", "rgb(48, 51, 53)");
+  await expect(toast).toHaveCSS("color", "rgb(5, 156, 123)");
   const geometry = await Promise.all([toast.boundingBox(), card.boundingBox()]);
   expect(geometry[0].y + geometry[0].height).toBeLessThanOrEqual(geometry[1].y);
   await page.waitForTimeout(2100);
