@@ -18,6 +18,7 @@ const result = Object.freeze({
   lowCompatibilityRecommendations: Object.freeze([
     Object.freeze({ loanId: "low-1", compatibilityScore: 0.1 }),
     Object.freeze({ loanId: "low-2", compatibilityScore: 0.2 }),
+    Object.freeze({ loanId: "low-under-floor", compatibilityScore: 0.099 }),
   ]),
   needsReview: Object.freeze([Object.freeze({ loanId: "review-1" })]),
 });
@@ -64,10 +65,12 @@ test("rejects unknown filters and never treats a score as a sorting input", () =
   assert.throws(() => formatServerCompatibilityScore(1.1), /server-supplied/);
 });
 
-test("presents only the server low-compatibility partition from its highest supplied score to lowest", () => {
+test("hides low-partition scores below 10%, includes exactly 10%, and keeps stable descending order", () => {
   const items = displayItemsForResultMode(result, "lowest");
 
   assert.deepEqual(items.map((item) => item.loanId), ["low-2", "low-1"]);
+  assert.equal(items.some((item) => item.loanId === "low-under-floor"), false);
+  assert.equal(items[1].compatibilityScore, 0.1);
   assert.equal(items[0], result.lowCompatibilityRecommendations[1]);
   assert.equal(items[1], result.lowCompatibilityRecommendations[0]);
   assert.deepEqual(displayItemsForResultMode(result, "highest").map((item) => item.loanId), ["l-1", "l-2", "l-3"]);

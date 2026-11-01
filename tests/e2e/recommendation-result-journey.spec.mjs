@@ -3,7 +3,7 @@ const sessionId = "opaque-e2e-session";
 const recommendationResponse = { dataVersion: "serving.v1", configVersion: "recommendation.v1", rankedRecommendations: [
   { loanId: "loan-ranked", lenderName: "بانک الف", loanName: "طرح قابل مقایسه", compatibilityScore: 0.87, compatibilityReason: "دلیل سازگاری از پاسخ معتبر سرور آمده است." },
   { loanId: "loan-second", lenderName: "بانک ب", loanName: "طرح دوم", compatibilityScore: 0.65, compatibilityReason: "دلیل دوم از سرور آمده است." },
-], lowCompatibilityRecommendations: [{ loanId: "loan-low", lenderName: "بانک کم‌تطابق", loanName: "طرح زیر آستانه", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }], needsReview: [{ loanId: "loan-review", lenderName: "بانک بررسی", loanName: "طرح داده‌ناقص", rankingExcludedReasons: ["interestRate:unknown"] }] };
+], lowCompatibilityRecommendations: [{ loanId: "loan-low", lenderName: "بانک کم‌تطابق", loanName: "طرح زیر آستانه", compatibilityScore: 0.2, compatibilityReason: "تطابق پایین؛ پیشنهاد اصلی نیست" }, { loanId: "loan-at-floor", lenderName: "بانک مرز", loanName: "طرح ده‌درصدی", compatibilityScore: 0.1, compatibilityReason: "دقیقاً روی حد نمایش است" }, { loanId: "loan-below-floor", lenderName: "بانک پنهان", loanName: "طرح زیر ده درصد", compatibilityScore: 0.099, compatibilityReason: "کمتر از حد نمایش است" }], needsReview: [{ loanId: "loan-review", lenderName: "بانک بررسی", loanName: "طرح داده‌ناقص", rankingExcludedReasons: ["interestRate:unknown"] }] };
 const detailResponse = { loanId: "loan-ranked", lenderName: "بانک الف", loanName: "طرح قابل مقایسه", maxAmountTomans: 100000000, monthlyInstallmentTomans: 10000000, maxRepaymentMonths: 12, interestRatePercent: 18, depositRequired: "دارد", depositHoldingMonths: 3, loanToDepositRatioPercent: 100, guaranteeType: "ضامن", requiredDepositAccount: "قرض الحسنه", conditions: ["کارت ملی", "یک ضامن معتبر"], bankLogoReference: null, applicationLink: null };
 async function mockDetail(page) { await page.route("**/api/v1/loans/loan-ranked", (route) => route.fulfill({ json: detailResponse })); }
 test("renders the validated server result in RTL, preserves needs-review without a score, and opens safe loan details", async ({ page }) => {
@@ -20,6 +20,9 @@ test("renders the validated server result in RTL, preserves needs-review without
   await page.getByRole("button", { name: "کمترین تطابق" }).click();
   await expect(page.getByText("طرح زیر آستانه")).toBeVisible();
   await expect(page.getByText("۲۰٪")).toBeVisible();
+  await expect(page.getByText("طرح ده‌درصدی")).toBeVisible();
+  await expect(page.getByText("۱۰٪")).toBeVisible();
+  await expect(page.getByText("طرح زیر ده درصد")).toHaveCount(0);
   await page.getByRole("button", { name: "وضعیت متغیر" }).click();
   await expect(page.locator(".hp-recommendation-needs-review")).toContainText("طرح داده‌ناقص");
   await expect(page.locator(".hp-recommendation-needs-review")).not.toContainText("درصد تطابق محاسبه‌شده");

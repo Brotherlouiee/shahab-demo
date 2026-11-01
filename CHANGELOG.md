@@ -1,5 +1,8 @@
 # Changelog
 
+- در حالت «کمترین تطابق» صفحهٔ نتایج، وام‌های با امتیاز کمتر از ۱۰٪ پنهان می‌شوند؛ ۱۰٪ شامل نمایش است. امتیاز یا پاسخ موتور توصیه‌گر تغییر نمی‌کند. [checkpoint](docs/progress/us-09-t06k-minimum-match-floor.md)
+
+
 - اسناد موکول‌شدهٔ PRهای #180، #183 و #184 به مخزن خصوصی افزوده شدند؛ ماتریس API با ۲۱ عملیات جاری و مسیرهای ذخیره/بازیابی گام‌های پرسشنامه هم‌راستا شد. گزارش‌های حریم خصوصی/Clarity و بهینه‌سازی خانه با وضعیت واقعی ادغام و محدودیت شواهد ثبت شدند. [گزارش #180](docs/progress/us-11-questionnaire-order-guard.md)، [بازبینی حریم خصوصی #183](docs/security/privacy-retention-review.md)، [گزارش #184](docs/progress/us-13-homepage-image-question-performance.md)
 
 
