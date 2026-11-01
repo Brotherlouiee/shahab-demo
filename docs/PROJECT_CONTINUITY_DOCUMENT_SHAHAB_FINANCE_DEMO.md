@@ -9,7 +9,7 @@
 
 ## 0. تطبیق کامل handoff — تغییرات پس از نسخهٔ ۱۸٫۰ تا ۲۰۲۶-۱۱-۰۱
 
-این بخش (نسخهٔ ۱۹٫۰) مرجع وضعیت پروژه تا ۲۰۲۶-۱۱-۰۱ است و تغییرات پس از نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ را ثبت می‌کند. این بخش بر ادعاهای قدیمی دربارهٔ وضعیت مخزن، یوزر استوری‌ها، گام بعد، استقرار و مهلت پرسشنامه در handoffهای پایین‌تر—از جمله بخش‌های ۰E تا ۰، ۱۷ تا ۱۹ و ۲۲—تقدم دارد. بخش‌های قدیمی تاریخچه‌اند؛ قراردادهای محصولی، امنیتی و حفظ فرانت‌اند فقط تا جایی پابرجا هستند که با راهنمای جامع، ADRهای مصوب و checkpoint جاری سازگار باشند. وضعیت تسک و گام بعد را از نقطهٔ وضعیت جاری و راهنمای جامع بخوان. snapshot «وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵» نیز فقط سابقهٔ همان روز است.
+این بخش (نسخهٔ ۱۹٫۰) مرجع وضعیت پروژه تا ۲۰۲۶-۱۱-۰۱ است و تغییرات پس از نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ را ثبت می‌کند. این بخش بر ادعاهای قدیمی دربارهٔ وضعیت مخزن، یوزر استوری‌ها، گام بعد، استقرار و مهلت پرسشنامه در handoffهای پایین‌تر—از جمله بخش‌های تاریخی ۰E، ۰D، ۰C، ۰B، ۰A، ۱۷ تا ۱۹ و ۲۲—تقدم دارد. بخش‌های قدیمی تاریخچه‌اند؛ قراردادهای محصولی، امنیتی و حفظ فرانت‌اند فقط تا جایی پابرجا هستند که با راهنمای جامع، ADRهای مصوب و checkpoint جاری سازگار باشند. وضعیت تسک و گام بعد را از نقطهٔ وضعیت جاری و راهنمای جامع بخوان. snapshot «وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵» نیز فقط سابقهٔ همان روز است.
 
 ### مبنای تطبیق
 
@@ -691,12 +691,12 @@ Dependency direction is mandatory: `presentation → application → domain`; in
 
 | Layer | Technology / approach | State |
 |---|---|---|
-| Frontend | React + Vite; current prototype pages under `src/`; RTL UI | Existing and incrementally integrated |
-| Backend | Python 3.12+, FastAPI | Implemented foundation/API |
-| Database | PostgreSQL, SQLAlchemy, Alembic | Implemented local/CI architecture |
+| Frontend | React + Vite؛ رابط RTL در `src/` | جریان‌های محصول در main پیاده‌سازی شده‌اند؛ کد هنوز تا حدی در screen/CSSهای مشترک قرار دارد و ماژولارسازی US-13 کامل نیست. تغییرات رابط PRهای ۱۷۷–۱۸۸ پس از v0.1.5 deploy نشده‌اند. |
+| Backend | Python 3.12+, FastAPI | کاتالوگ وام، نشست پرسشنامه، توصیه و نتیجه در main پیاده‌سازی شده‌اند؛ deploy production ثبت‌شده v0.1.5 است. |
+| Database | PostgreSQL, SQLAlchemy, Alembic | migration و ذخیرهٔ پایدار در CI و production v0.1.5 استفاده شده‌اند؛ هر تغییر بعد از آن باید جداگانه بررسی شود. |
 | Tests | Python unit/integration, Node tests, Playwright Chromium E2E, PostgreSQL migration verification | Implemented CI gates |
-| Dev packaging | Docker/Docker Compose target architecture, non-root containers, local env docs/runbook | Foundation/docs expected; production deploy not complete |
-| Hosting currently | Netlify frontend project `shahab-finance-demo` | Live frontend only; no live FastAPI/PostgreSQL |
+| Dev/production packaging | Docker/Docker Compose، ایمیج‌های versioned، health/readiness | برای production v0.1.5 استفاده شده؛ merge کدهای بعد از آن مساوی deploy نیست. |
+| Hosting | Netlify frontend و production جداگانهٔ v0.1.5 | Netlify خود به‌تنهایی API/DB را نمیزبانی می‌کند؛ وضعیت deployment فقط از بخش ۰ و runbook جاری خوانده شود. |
 
 ### Backend structure/responsibilities
 
@@ -1037,6 +1037,8 @@ For a future deployment, use a server-side BFF/API proxy token kept only in serv
 
 ### Required future deployment foundation
 
+فهرست زیر گیت‌های release و deploy بعدی را خلاصه می‌کند؛ برخی اجزا برای v0.1.5 آماده یا اجرا شده‌اند. وجود آن نسخه، پذیرش نهایی US-12، rollback آزموده‌شده یا آماده‌بودن نسخه‌های بعدی را ثابت نمی‌کند.
+
 Beyond server/domain, production readiness requires:
 
 1. immutable Docker image build and registry/deployment pipeline;
@@ -1074,7 +1076,7 @@ Beyond server/domain, production readiness requires:
 | US-06 | Do not infer missing persisted conditions | Avoid fabricated loan terms | Return empty conditions until import/persistence mapping is complete. |
 | US-07.T01 / PR #27 | Versioned canonical config: 10 questions, 50 answers | Stable questionnaire identity independent of UI | Later routes/session/engine use canonical IDs. |
 | US-07.T02 / PR #28 | Exact route adapter; `/question/12 → S13` | Existing prototype index caused redirect/off-by-one defect | Public routes retained; indexes cannot become answer IDs. |
-| Deployment discussion | Netlify currently frontend-only; backend needs separate real hosting/database | Static frontend cannot host full FastAPI/PostgreSQL architecture | Do not claim public full-stack integration yet. |
+| Deployment discussion | پیشنهاد تاریخی Netlify-only/BFF؛ بعدتر v0.1.5 روی production جداگانه مستقر شد | فرانت‌اند Netlify به‌تنهایی میزبان FastAPI/PostgreSQL نیست | وضعیت انتشار را از بخش ۰ و runbook جاری بخوان؛ این ردیف سابقهٔ بحث اولیه است. |
 | API protection discussion | Browser API key is not a secret; use server-side BFF token + abuse controls | Keys in client bundle are extractable | Pending deployment ADR/implementation. |
 
 ---
