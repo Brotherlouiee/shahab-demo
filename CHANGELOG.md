@@ -1,6 +1,6 @@
 # Changelog
 
-- سند تداوم نسخهٔ ۲۰٫۰ و نقطهٔ وضعیت جاری با روند build/publish در GitHub Actions، دسترسی GitHub و SSH مالک، استقرار واقعی v0.1.8 روی Arvan، digestها، حدود شواهد و گام‌های بعد به‌روز شدند. هیچ secret یا محتوای `.env.prod` ثبت نشده است. [سند تداوم](docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md)
+- سند تداوم نسخهٔ ۲۰٫۰ و نقطهٔ وضعیت جاری با روند build/publish در GitHub Actions، دسترسی GitHub و SSH مالک، Release گیت‌هاب v0.1.8، استقرار واقعی روی Arvan، digestها، حدود شواهد و گام‌های بعد به‌روز شدند. هیچ secret یا محتوای `.env.prod` ثبت نشده است. [سند تداوم](docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md)
 
 - در حالت «کمترین تطابق» صفحهٔ نتایج، وام‌های با امتیاز کمتر از ۱۰٪ پنهان می‌شوند؛ ۱۰٪ شامل نمایش است. امتیاز یا پاسخ موتور توصیه‌گر تغییر نمی‌کند. [checkpoint](docs/progress/us-09-t06k-minimum-match-floor.md)
 
