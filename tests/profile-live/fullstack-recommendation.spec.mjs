@@ -127,8 +127,10 @@ test("full questionnaire, OTP, server partitions, published details and comparis
     await page.getByRole("option", { name: label, exact: true }).click();
   }
   await mode("کمترین تطابق");
-  await expect(cards).toHaveCount(payload.lowCompatibilityRecommendations.length);
-  const low = [...payload.lowCompatibilityRecommendations].sort((a, b) => b.compatibilityScore - a.compatibilityScore);
+  const low = payload.lowCompatibilityRecommendations
+    .filter(item => item.compatibilityScore >= 0.1)
+    .sort((a, b) => b.compatibilityScore - a.compatibilityScore);
+  await expect(cards).toHaveCount(low.length);
   await expect(cards.locator(".hp-loan-result-head > strong")).toHaveText(low.map(item => persian(item.loanName)));
   await page.setViewportSize({ width: 390, height: 844 });
   await mode("وضعیت متغیر");
