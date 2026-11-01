@@ -9,7 +9,7 @@
 
 ## 0. تطبیق کامل handoff — تغییرات پس از نسخهٔ ۱۸٫۰ تا ۲۰۲۶-۱۱-۰۱
 
-این بخش مرجع وضعیت جاری است و همهٔ تغییرات مخزن از نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ تا این handoff را ثبت می‌کند. بخش «وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵» پایین‌تر فقط snapshot تاریخی همان روز است و دستور جاری نیست.
+این بخش (نسخهٔ ۱۹٫۰) مرجع وضعیت پروژه تا ۲۰۲۶-۱۱-۰۱ است و تغییرات پس از نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ را ثبت می‌کند. این بخش بر ادعاهای قدیمی دربارهٔ وضعیت مخزن، یوزر استوری‌ها، گام بعد، استقرار و مهلت پرسشنامه در handoffهای پایین‌تر—از جمله بخش‌های ۰E تا ۰، ۱۷ تا ۱۹ و ۲۲—تقدم دارد. بخش‌های قدیمی تاریخچه‌اند؛ قراردادهای محصولی، امنیتی و حفظ فرانت‌اند فقط تا جایی پابرجا هستند که با راهنمای جامع، ADRهای مصوب و checkpoint جاری سازگار باشند. وضعیت تسک و گام بعد را از نقطهٔ وضعیت جاری و راهنمای جامع بخوان. snapshot «وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵» نیز فقط سابقهٔ همان روز است.
 
 ### مبنای تطبیق
 
@@ -406,7 +406,7 @@ This section supersedes any older status statement below that says the questionn
 | Explicit non-objective | Not credit scoring; not credit approval prediction; not a guarantee that a user will receive a loan. Bank/lender makes approval decisions and user makes the final choice. |
 | Target users | Iranian individuals assessing available loans/credit facilities; future operations users who import, review and approve loan data/configuration. |
 | Value proposition | Explainable comparison: show compatible loan options, important terms, trade-offs and uncertainty rather than claim a universally “best” loan or approval probability. |
-| Current delivery stage | Data/backend foundations, published-loan detail API/UI and canonical questionnaire navigation are implemented and tested. Personalised recommendation, response persistence, public backend deployment and live full-stack integration are **not yet implemented**. |
+| Current delivery stage | تا main=bd27ce7، داده و API وام، موتور توصیهٔ قطعی و توضیح‌پذیر، اتصال نتایج، ذخیرهٔ سروری پاسخ‌ها و بازیابی پرسشنامهٔ ناقص پیاده‌سازی شده‌اند. آخرین استقرار ثبت‌شده production، v0.1.5 است؛ پی‌آرهای ۱۷۷ تا ۱۸۸ پس از آن deploy نشده‌اند. پذیرش آنلاین/انتشار نهایی کامل نیست و US-13 باز است. جزئیات جاری در بخش ۰ و نقطهٔ وضعیت پروژه آمده است. |
 
 ---
 
@@ -700,9 +700,9 @@ Dependency direction is mandatory: `presentation → application → domain`; in
 - `backend/app/.../application`: use cases and ports; depends on abstractions, not database/UI.
 - `backend/app/.../infrastructure`: SQLAlchemy repositories, importers, parsers and adapters.
 - Loan catalogue: serving-only use cases and a durable SQLAlchemy read adapter with an explicit `PUBLISHED` predicate.
-- Questionnaire: canonical configuration exists; session/use case is next.
-- Recommendation: must be a pure engine/domain module, still pending.
-- API: typed errors, health/readiness, public allowlisted loan detail responses are implemented.
+- Questionnaire: کاتالوگ canonical، ذخیرهٔ server-side و کنترل ترتیب پاسخ‌ها پیاده‌سازی شده؛ پرسشنامهٔ نیمه‌کاره تا یک ساعت مطلق قابل‌بازیابی است. پی‌آرهای ۱۷۷–۱۸۲ مسیر مستقیم، refresh، بازگشت و resume از خانه را اصلاح کردند.
+- Recommendation: موتور pure و deterministic، RecommendationTrace و اتصال نتیجه در main پیاده‌سازی شده‌اند؛ از وضعیت قدیمی این سند نتیجهٔ اجرایی نگیر.
+- API: خطاهای typed، health/readiness، کاتالوگ وام، نشست پرسشنامه و endpointهای توصیه/نتیجه پیاده‌سازی شده‌اند؛ deploy بودن هر تغییر بعد از v0.1.5 را جداگانه بررسی کن.
 
 ### Frontend
 
@@ -739,8 +739,9 @@ There is **no ML model currently planned or implemented**. The recommender is a 
 ### Infrastructure/deployment status
 
 - Netlify site currently exists: `https://shahab-finance-demo.netlify.app/`.
-- It is a frontend deployment; the public site is **not** backed by live FastAPI/PostgreSQL at present.
-- Docker/Compose, health/readiness, migrations and CI are architectural preparation; production/staging service hosting, secrets, database, observability and rollback are still pending.
+- Netlify استقرار فرانت‌اند است و نباید با backend production یکی گرفته شود.
+- production نسخهٔ v0.1.5 جداگانه فعال شده؛ ۱۰۲ وام و config 1.1.0 در snapshot اکتبر ثبت‌اند و توصیه/جزئیات از HTTPS در گزارش PR #150 موفق بوده‌اند.
+- آخرین استقرار ثبت‌شده v0.1.5 است؛ پی‌آرهای ۱۷۵ و ۱۷۷–۱۸۸ استقرار جدید را ثابت نمی‌کنند. پذیرش آنلاین T081/T07، گیت‌های انتشار و rollback کامل باز می‌مانند تا شاهد تازه ثبت شود.
 
 ---
 
@@ -793,7 +794,7 @@ There is **no ML model currently planned or implemented**. The recommender is a 
 
 ### ADR-07: Recommendation engine is deterministic, explainable and server-side
 
-- **Status:** Confirmed; implementation pending US-08/09.
+- **Status:** مشخصات مصوب و موتور/trace در US-08 پیاده‌سازی شده‌اند؛ اتصال توصیه و نتیجه در main وجود دارد. وضعیت deploy را از بخش ۰ بخوان.
 - **Context:** Static client-side percentages are wrong and easily manipulable; user needs explanations.
 - **Final choice:** Pure backend/domain engine with versioned configuration; server calculates score/rank and emits redacted trace. Client displays a view model and does not calculate score.
 - **Consequences:** Requires completed questionnaire session API and approved data snapshot before live results.
@@ -867,7 +868,7 @@ For a core `متغیر` value, importer may extract an explicit structured range
 
 Audit of the 102-loan source observed, at the time of audit: 66 `دارد`, 34 `نامشخص`, 2 blank for deposit requirement; 37 unknown deposit-holding values; 54 unknown loan-to-deposit values. Example core cases included one unknown interest rate, 9 variable maximum amounts, 12 variable instalments and 4 variable repayment terms. These figures are evidence for the policy, not constants; recompute them on each audit.
 
-### Target recommendation algorithm — **Confirmed specification, not yet implemented**
+### الگوریتم توصیه — مشخصات مصوب و پیاده‌سازی‌شده در US-08؛ وضعیت deploy در بخش ۰
 
 1. Validate answers: exactly one known `answerId` for each required canonical question.
 2. Normalise loan data and classify all eight variables.
@@ -891,7 +892,7 @@ normalizedScore = rawLoanScore / max(rawLoanScore among candidates) × 100
 7. `minimumMatchScore` is a versioned setting with initial value `50`; below-threshold loans remain in diagnostic trace but are not user results.
 8. Return two separate collections: `rankedRecommendations` and `needsReview`.
 
-### RecommendationTrace requirements — **Confirmed target**
+### RecommendationTrace — قرارداد مصوب و پیاده‌سازی‌شده در US-08
 
 Each recommendation run must produce a reproducible/redacted `RecommendationTrace` including:
 
@@ -1015,18 +1016,18 @@ For a future deployment, use a server-side BFF/API proxy token kept only in serv
 
 ### Environments
 
-| Environment | Current state | Requirement |
+| Environment | وضعیت ثبت‌شده در handoff ۲۰۲۶-۱۱-۰۱ | مرز پذیرش |
 |---|---|---|
-| Local | Intended Docker Compose with frontend, FastAPI and PostgreSQL | Must validate health/readiness, migrations, seed/import and smoke tests; do not delete volumes casually. |
-| CI | Active GitHub Actions quality, PostgreSQL migration and Chromium E2E gates | Remains mandatory; do not disable gate due to local missing dependencies. |
-| Preview/staging | Not established as full stack | Required before production; approved config/data version, smoke, monitoring and rollback. |
-| Production | Not deployed for API/database | Only after US-12 release gate. |
+| Local | Docker Compose برای frontend، FastAPI و PostgreSQL؛ وضعیت localhost باید در همان روز تأیید شود. | مشاهدهٔ محلی به‌تنهایی منبع وضعیت repository یا production نیست؛ volume بدون runbook پاک نشود. |
+| CI | چهار workflow کیفیت، امنیت، baseline فرانت‌اند و ساخت کانتینر فعال‌اند. | نتیجه فقط برای همان SHA معتبر است؛ هر CI تازه باید روی commit جاری خوانده شود. |
+| Preview/staging | پذیرش آنلاین کامل T081/T07 در اسناد جاری باز است. | URL واقعی، PostgreSQL پایدار، smoke و rollback با شواهد لازم‌اند. |
+| Production | نسخهٔ v0.1.5 مستقر و آخرین deployment ثبت‌شده است. | پی‌آرهای ۱۷۷–۱۸۸ و تغییرات بعدی مستقرشده فرض نشوند؛ پذیرش نهایی US-12 و rollback کامل باز است. |
 
 ### Existing hosting
 
-- Netlify project: `shahab-finance-demo`.
-- Current public site: `https://shahab-finance-demo.netlify.app/`.
-- It serves frontend assets. It does not constitute a live FastAPI/PostgreSQL production deployment.
+- Netlify project: `shahab-finance-demo` برای فرانت‌اند.
+- Production v0.1.5 جداگانه مستقر شده و مسیر توصیه/جزئیات از HTTPS در گزارش PR #150 شاهد دارد.
+- وضعیت سرور، دامنه، reverse proxy، secrets و عملیات را فقط از runbookهای فعلی و checkpoint بخوان؛ این خلاصه جایگزین آن‌ها نیست.
 
 ### Required future deployment foundation
 
