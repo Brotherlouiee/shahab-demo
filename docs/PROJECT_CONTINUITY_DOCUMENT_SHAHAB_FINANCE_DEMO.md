@@ -1,15 +1,59 @@
 # سند تداوم پروژهٔ شهاب
 
-> **نسخهٔ سند:** ۱۸٫۰
-> **تاریخ آماده‌سازی:** ۲۰۲۶-۱۰-۲۵
-> **main تأییدشده:** `6859c96a92b839871fc9ea0a3d0936835edd0427`، مرج PR #174.
+> **نسخهٔ سند:** ۱۹٫۰
+> **تاریخ آماده‌سازی:** ۲۰۲۶-۱۱-۰۱
+> **main تأییدشده:** `bd27ce799c6f8d33e623e2580bf65e1abe24c94d`، merge commit مربوط به PR #188.
 > **وضعیت محصول:** قابلیت اصلی فاز اول روی production منتشر شده است؛ مالک نسخهٔ v0.1.5 را بدون مشکل گزارش کرده است. جزئیات وضعیت تسک‌ها و معوقات در [نقطهٔ وضعیت جاری](project-current-state.md) ثبت شده‌اند.
-> **گام بعدی:** ریفکتور باقی‌ماندهٔ US-13 تا ۱ نوامبر ۲۰۲۶ موکول است. در آن تاریخ خصوصی‌شدن مخزن و فعال‌بودن CI بررسی شود؛ سپس برای فاز دوم سند اجرایی مستقل تدوین شود.
+> **گام بعدی:** پس از بازبینی و ادغام این به‌روزرسانی مستنداتی، ادامهٔ کار محصولی فقط با شناسه و معیار پذیرش ثبت‌شده در سند جامع و checkpoint جاری انجام شود؛ زیرتسک تازه‌ای خارج از آن‌ها ساخته نشود.
 > **ماهیت:** این handoff وضعیت و گام بعدی را ثبت می‌کند؛ سند جامع مرجع شناسه و معیار پذیرش تسک‌هاست. این ثبت به‌تنهایی پایان تمام تسک‌های فاز اول یا مجوز merge/deploy آینده نیست.
 
-## وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵
+## 0. تطبیق کامل handoff — تغییرات پس از نسخهٔ ۱۸٫۰ تا ۲۰۲۶-۱۱-۰۱
 
-بخش جاری این فایل بر handoffهای تاریخی پایین مقدم است. برای وضعیت ریز تسک‌ها، معوقات و شواهد به [نقطهٔ وضعیت پروژه](project-current-state.md) مراجعه شود؛ تاریخچهٔ پایین حفظ شده و دستور جاری نیست.
+این بخش (نسخهٔ ۱۹٫۰) مرجع وضعیت پروژه تا ۲۰۲۶-۱۱-۰۱ است و تغییرات پس از نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ را ثبت می‌کند. این بخش بر ادعاهای قدیمی دربارهٔ وضعیت مخزن، یوزر استوری‌ها، گام بعد، استقرار و مهلت پرسشنامه در handoffهای پایین‌تر—از جمله بخش‌های تاریخی ۰E، ۰D، ۰C، ۰B، ۰A، ۱۷ تا ۱۹ و ۲۲—تقدم دارد. بخش‌های قدیمی تاریخچه‌اند؛ قراردادهای محصولی، امنیتی و حفظ فرانت‌اند فقط تا جایی پابرجا هستند که با راهنمای جامع، ADRهای مصوب و checkpoint جاری سازگار باشند. وضعیت تسک و گام بعد را از نقطهٔ وضعیت جاری و راهنمای جامع بخوان. snapshot «وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵» نیز فقط سابقهٔ همان روز است.
+
+### مبنای تطبیق
+
+- نسخهٔ پیشین سند در ۲۰۲۶-۱۰-۲۵، `main` را روی `6859c96a92b839871fc9ea0a3d0936835edd0427` ثبت کرده بود.
+- اکنون `main` روی merge commit پی‌آر ۱۸۸، یعنی `bd27ce799c6f8d33e623e2580bf65e1abe24c94d` (`bd27ce7`) قرار دارد.
+- همهٔ پی‌آرهای شمارهٔ ۱۷۵ تا ۱۸۸ بررسی شدند: سیزده پی‌آر ادغام شده‌اند و پی‌آر ۱۷۶ همچنان باز و ادغام‌نشده است.
+- برای commit نهایی پی‌آرهای ۱۷۷ تا ۱۸۸، چهار گردش‌کار کیفیت، امنیت، خط مبنای فرانت‌اند و ساخت/آزمون کانتینر موفق ثبت شده‌اند. دربارهٔ پی‌آر ۱۸۸، مالک یک شکست در اجرای قبلی را گزارش کرده بود؛ اما هر چهار گردش‌کار روی commit نهایی `7ab2c75` موفق‌اند.
+- ادغام تغییرات کد در این بازه به‌تنهایی استقرار جدید را ثابت نمی‌کند. آخرین استقرار ثبت‌شده همچنان v0.1.5 است؛ برای پی‌آرهای ۱۷۷ تا ۱۸۸ استقرار production ثبت نشده است.
+
+### رخدادهای کامل بازه
+
+| تاریخ | پی‌آر و وضعیت | رخداد، نتیجه و محدودیت ثبت‌شده |
+| --- | --- | --- |
+| ۲۵ اکتبر | [پی‌آر ۱۷۵](https://github.com/Brotherlouiee/shahab-demo/pull/175) — ادغام شد | وضعیت فاز اول، استقرار v0.1.5 و موارد باز/موکول‌شده در اسناد ثبت شد؛ شناسه‌ها و معیارهای پذیرش تغییر نکردند. این تغییر مستنداتی بود. |
+| ۲۵ اکتبر | [پی‌آر ۱۷۶](https://github.com/Brotherlouiee/shahab-demo/pull/176) — هنوز باز است | فقط بستر اسناد فاز دوم آماده شد. طراحی فاز دوم و انتخاب فناوری تأیید نشد؛ کد، API، داده، Docker، محیط و production تغییر نکردند. |
+| ۲۶ اکتبر | [پی‌آر ۱۷۸](https://github.com/Brotherlouiee/shahab-demo/pull/178) — ادغام شد | `curl` و `libcurl` آسیب‌پذیر از ایمیج نهایی فرانت حذف شدند؛ `ca-certificates-bundle` حفظ شد و health check روی `wget` باقی ماند. یافتهٔ HIGH با شناسهٔ `CVE-2026-92392` علت تغییر بود. چهار گردش‌کار نهایی موفق‌اند؛ انتشار ایمیج یا استقرار production انجام نشد. |
+| ۲۶ اکتبر | [پی‌آر ۱۷۷](https://github.com/Brotherlouiee/shahab-demo/pull/177) — ادغام شد | عبور مستقیم، بازگشت مرورگر و بازیابی نشست به پرسش بی‌پاسخ محدود شد. آزمون‌های مسیر ناقص/مجاز و مرورگر ثبت شدند؛ گیت ساخت ایمیج ابتدا به‌دلیل آسیب‌پذیری `curl/libcurl` مسدود بود و با پی‌آر ۱۷۸ رفع شد. چهار گردش‌کار نهایی موفق‌اند. |
+| ۲۶ اکتبر | [پی‌آر ۱۷۹](https://github.com/Brotherlouiee/shahab-demo/pull/179) — ادغام شد | بازیابی پاسخ‌های هر ۱۰ پرسش پس از رفتن به مرحلهٔ بعد، refresh و بازگشت اصلاح شد؛ API پاسخ خارج از ترتیب را رد می‌کند و فقط پیشوند معتبر را نگه می‌دارد. تست API و Playwright گزارش شده و چهار گردش‌کار نهایی موفق‌اند. متن توضیح پی‌آر وضعیت پیش از ادغام را نشان می‌دهد و جای وضعیت واقعی ادغام را نمی‌گیرد. |
+| ۲۷ اکتبر | [پی‌آر ۱۸۰](https://github.com/Brotherlouiee/shahab-demo/pull/180) — ادغام شد | پاسخ‌های دو مرحلهٔ آغازین و ۱۰ پرسش رفتاری به نشست سروری متصل شدند؛ ترتیب در API/DB کنترل شد؛ مجوز runtime محدود و جداسازی پرسشنامهٔ تازه اضافه شد. مستندات داخلی و عملیاتی در این پی‌آر نبودند و بعداً در پی‌آر ۱۸۶ تکمیل شدند. چهار گردش‌کار نهایی موفق‌اند. |
+| ۲۷ اکتبر | [پی‌آر ۱۸۱](https://github.com/Brotherlouiee/shahab-demo/pull/181) — ادغام شد | نشست نیمه‌کاره تا یک ساعت مطلق از ایجادش قابل بازیابی است و فعالیت یا refresh مهلت را تمدید نمی‌کند. نشست قبلی فقط پس از ذخیرهٔ موفق پاسخ نخستِ تلاش تازه، اتمیک و همان مرورگر، برای دسترسی بسته می‌شود؛ شکست ذخیره نشست قبلی را حفظ می‌کند. چهار گردش‌کار نهایی موفق‌اند. |
+| ۲۷ اکتبر | [پی‌آر ۱۸۲](https://github.com/Brotherlouiee/shahab-demo/pull/182) — ادغام شد | دکمهٔ خانه تا پیش از انقضای یک‌ساعته، نشست نیمه‌کاره را ادامه می‌دهد و کاربر را به نخستین پرسش بی‌پاسخ می‌برد. شروع تازه پس از انقضا یا درخواست صریح از نتیجه انجام می‌شود؛ جایگزینی نشست پیشین منوط به ذخیرهٔ موفق پاسخ اول است. چهار گردش‌کار نهایی موفق‌اند. |
+| ۳۱ اکتبر | [پی‌آر ۱۸۳](https://github.com/Brotherlouiee/shahab-demo/pull/183) — ادغام شد | Microsoft Clarity برای دامنهٔ اصلی اضافه شد؛ رویدادهای مشاهده، انتخاب، ذخیره، بعدی، بازگشت و ورود به پروفایل/OTP فقط با شمارهٔ مرحله ثبت می‌شوند. پاسخ، تلفن، شناسهٔ حساب و نشست ارسال نمی‌شوند و فیلدهای حساس ماسک‌اند؛ localhost داده به Clarity نمی‌فرستد. ساخت محلی به‌علت نبود Vite/Docker انجام نشد؛ چهار گردش‌کار نهایی موفق‌اند و بررسی حریم خصوصی در پی‌آر ۱۸۶ ثبت شد. |
+| ۳۱ اکتبر | [پی‌آر ۱۸۴](https://github.com/Brotherlouiee/shahab-demo/pull/184) — ادغام شد | صفحهٔ خانه در همهٔ عرض‌ها از چیدمان موبایل استفاده می‌کند؛ تصاویر درباره‌ما، تماس و حالت خالی به WebP تبدیل شدند و حجم تصاویر اصلی به‌ترتیب حدود ۹۵٪، ۸۵٪ و ۶۳–۷۸٪ کاهش یافت. درخواست تکراری جزئیات نشست حذف شد. آزمون محلی و ساخت انجام شدند؛ آزمون واقعی مرورگر در آن محیط به‌علت نبود Chromium اجرا نشد و SLA کمتر از ۲۰۰ میلی‌ثانیه اثبات نشده است. چهار گردش‌کار نهایی موفق‌اند. |
+| ۳۱ اکتبر | [پی‌آر ۱۸۵](https://github.com/Brotherlouiee/shahab-demo/pull/185) — ادغام شد | صفحه‌های درباره‌ما، ورود، پروفایل و سوابق وام‌های توصیه‌شده در دسکتاپ روی بوم ۴۳۰ پیکسلی وسط‌چین شدند؛ صفحهٔ ورود چینش موبایل را گرفت و عرض صفحهٔ تماس نیز با موبایل هم‌اندازه شد. آزمون‌های Playwright و baseline به‌روز شدند؛ اجرای واقعی مرورگر محلی به‌علت نبود Chromium ممکن نبود. چهار گردش‌کار نهایی موفق‌اند؛ استقرار انجام نشد. |
+| ۱ نوامبر | [پی‌آر ۱۸۶](https://github.com/Brotherlouiee/shahab-demo/pull/186) — ادغام شد | گزارش‌های تکمیلی پی‌آرهای ۱۸۰، ۱۸۳ و ۱۸۴، بازبینی حریم خصوصی/نگهداری داده، و هم‌راستایی فهرست API با ۲۱ عملیات و دو مسیر ذخیره/بازیابی افزوده شدند. این پی‌آر مستنداتی است و استقرار یا پذیرش آنلاین را ثابت نمی‌کند؛ چهار گردش‌کار نهایی موفق‌اند. |
+| ۱ نوامبر | [پی‌آر ۱۸۷](https://github.com/Brotherlouiee/shahab-demo/pull/187) — ادغام شد | پیام‌های گذرا و درون‌صفحه‌ای و SVGهای موفقیت/هشدار/خطا یکپارچه شدند؛ جای متن/آیکن پیام‌ها اصلاح و کارت هشدار موبایل حدود ۲۵٪ کوتاه‌تر شد. رنگ‌ها: سبز `#059C7B`، زرد هشدار `#FFF600`، قرمز خطا `#FF0000` و زغالی `#303335`. چهار گردش‌کار نهایی موفق‌اند؛ تأیید بصری محلی جداگانه لازم است. |
+| ۱ نوامبر | [پی‌آر ۱۸۸](https://github.com/Brotherlouiee/shahab-demo/pull/188) — ادغام شد | تصویر درباره‌ما از ۱٫۵۷ مگابایت به ۳۷ کیلوبایت و تصویر UFO حالت خالی از ۱٫۳۵ مگابایت به ۱۸۲ کیلوبایت فشرده شدند؛ شفافیت حفظ شد و ابعاد ذاتی به‌ترتیب ۶۷۸×۴۵۲ و ۱۲۳۰×۱۲۷۸ باقی ماندند. یک شکست در اجرای قبلی طبق گزارش مالک رخ داد، اما چهار گردش‌کار روی commit نهایی موفق‌اند. تأیید بصری محلی نسخهٔ جدید هنوز ثبت نشده است. |
+
+### وضعیت فعلی و موارد باز
+
+- قابلیت پرسشنامه از مسیرهای مستقیم و پاسخ خارج از ترتیب محافظت می‌شود و پاسخ‌ها پس از refresh/بازگشت بازیابی می‌شوند. نشست نیمه‌کاره تا یک ساعت مطلق از زمان ایجاد قابل‌بازیابی است؛ refresh یا فعالیت مهلت را تمدید نمی‌کند و دکمهٔ خانه آن را از نخستین پرسش بی‌پاسخ ادامه می‌دهد. پرسشنامهٔ تازه پس از انقضا یا با درخواست صریح از صفحهٔ نتیجه آغاز می‌شود؛ در حالت دوم، دسترسی به نشست قبلی فقط پس از ذخیرهٔ موفق پاسخ نخست و به‌صورت اتمیک بسته می‌شود.
+- US-13 در این handoff همچنان باز است؛ ادغام PRهای اخیر به‌تنهایی معیار پذیرش داستان یا پایان ریفکتور را ثابت نمی‌کند. وضعیت هر تسک باید از registry/checkpoint مصوب خوانده شود.
+- خط مبنای تغییرات کد پس از نسخهٔ پیشین، `main=bd27ce7` است. آخرین نسخهٔ production ثبت‌شده همچنان v0.1.5 است؛ تغییرات PRهای ۱۷۷ تا ۱۸۸ را مستقرشده فرض نکن.
+- PR شمارهٔ ۱۷۶ همچنان باز و ادغام‌نشده است. PR شمارهٔ ۱۸۹ همین به‌روزرسانی مستنداتی است و تا زمان ثبت این نسخه باز است؛ هیچ‌یک را ادغام‌شده فرض نکن.
+- توضیحات پی‌آرهای ۱۷۹، ۱۸۱ و ۱۸۲ پس از ادغام به‌روز نشده‌اند و هنوز وضعیت پیش از ادغام را نشان می‌دهند؛ جدول بالا وضعیت نهایی GitHub را منعکس می‌کند.
+
+### گام بعدی
+
+برای ادامهٔ محصولی، شناسه و معیار پذیرش را فقط از سند جامع و checkpoint جاری بگیر و هیچ زیرتسک جدیدی نساز. ادغام این به‌روزرسانی مستنداتی به‌تنهایی پذیرش US-13 یا استقرار تغییرات پی‌آرهای ۱۷۷ تا ۱۸۸ را ثابت نمی‌کند.
+
+---
+## وضعیت جاری و تحویل — ۲۰۲۶-۱۰-۲۵ (snapshot تاریخی)
+
+این بخش snapshot ثبت‌شده در ۲۰۲۶-۱۰-۲۵ است. خلاصه و رخدادهای پس از آن در بخش ۰ آمده‌اند و وضعیت فعلی را تعیین می‌کنند؛ متن زیر را به‌عنوان دستور یا وضعیت روز استفاده نکن. جزئیات قبلی برای حفظ تاریخچه باقی مانده‌اند.
 
 ### انتشار و استقرار v0.1.5
 
@@ -41,7 +85,7 @@
 **Verification addendum after PR #126 merge:** The test-raster stability fix [PR #126](https://github.com/Brotherlouiee/shahab-demo/pull/126) is merged into `main` at `e380482bd4f141a18098b510574eb4ffce685450`. Its pre-merge saved-loan visual browser gate passed three independent executions on the same SHA; this does not excuse verification of the current handoff PR #125 against updated main. PR #125 does not change frontend or browser test code. The SHA listed above as prepared baseline remains historical; for any new task use latest verified GitHub main. No story/task acceptance changes.
 
 
-**Precedence and integrity.** This newly updated section 0E supersedes older *status/sequence/next-task claims* in 0D/0C/0B/0A and other dated passages in this handoff. Older sections remain unchanged as history and **must not be used as current instructions**. The canonical guide, Golden Rules, decisions in repository and [ADR-0009](adr/0009-offline-refactor-before-release.md) govern any disagreement. **This continuity file does not change task authority, architecture, acceptance criteria or permission to merge/deploy.** The explicit owner request here permits this handoff update before beginning US-13; it is not a claim that US-13 has reached story completion.
+**وضعیت تاریخی و تقدم.** این handoff وضعیت و تصمیم‌های مورخ ۲۰۲۶-۱۰-۱۳ را حفظ می‌کند. در زمان نگارش بر بخش‌های قدیمی‌تر تقدم داشت؛ اکنون بخش ۰ نسخهٔ ۱۹٫۰ و checkpoint جاری بر ادعاهای وضعیت، ترتیب، گام بعد و استقرار این snapshot مقدم‌اند. گزارهٔ ۳۰ دقیقه‌ای مربوط به نگهداری پاسخ خام در جدول آنلاین/معوقِ همین snapshot، وضعیت آن تاریخ است و قاعدهٔ جاری بازیابی پرسشنامه نیست؛ قاعدهٔ جاری، بازیابی و ادامهٔ پرسشنامهٔ ناقص تا یک ساعت مطلق است که در بخش ۰ و پی‌آرهای ۱۸۱ و ۱۸۲ ثبت شده. قراردادهای حفظ رفتار/ظاهر فرانت‌اند و منع ادغام یا استقرار خودکار فقط در صورت تأیید راهنمای جامع و ADRهای جاری پابرجا هستند. این سند مجوز تغییر تسک، معیار پذیرش، merge یا deploy نمی‌دهد.
 
 ### A. Verified repository and merged PRs
 
@@ -362,7 +406,7 @@ This section supersedes any older status statement below that says the questionn
 | Explicit non-objective | Not credit scoring; not credit approval prediction; not a guarantee that a user will receive a loan. Bank/lender makes approval decisions and user makes the final choice. |
 | Target users | Iranian individuals assessing available loans/credit facilities; future operations users who import, review and approve loan data/configuration. |
 | Value proposition | Explainable comparison: show compatible loan options, important terms, trade-offs and uncertainty rather than claim a universally “best” loan or approval probability. |
-| Current delivery stage | Data/backend foundations, published-loan detail API/UI and canonical questionnaire navigation are implemented and tested. Personalised recommendation, response persistence, public backend deployment and live full-stack integration are **not yet implemented**. |
+| Current delivery stage | تا main=bd27ce7، داده و API وام، موتور توصیهٔ قطعی و توضیح‌پذیر، اتصال نتایج، ذخیرهٔ سروری پاسخ‌ها و بازیابی پرسشنامهٔ ناقص پیاده‌سازی شده‌اند. آخرین استقرار ثبت‌شده production، v0.1.5 است؛ پی‌آرهای ۱۷۷ تا ۱۸۸ پس از آن deploy نشده‌اند. پذیرش آنلاین/انتشار نهایی کامل نیست و US-13 باز است. جزئیات جاری در بخش ۰ و نقطهٔ وضعیت پروژه آمده است. |
 
 ---
 
@@ -492,7 +536,7 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 6. Frontend presents scores, reasons, warnings, conditions and action links with clear uncertainty language.
 7. User can return/back/resume without corrupting answers; can open loan detail; final decision remains theirs.
 
-### Product capability map and current state
+### Product capability map — historical status snapshot (2026-09-20; current status in section 0)
 
 | Capability | Goal/business logic | Status as of 2026-09-20 | Dependencies / note |
 |---|---|---|---|
@@ -515,6 +559,8 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 
 ## 6. Functional Requirements
 
+**یادداشت وضعیت:** ستون Status در جدول زیر snapshot قدیمیِ ۲۰۲۶-۰۹-۲۰ است، نه وضعیت جاری. نیازمندی‌ها به‌عنوان قرارداد محصولی حفظ شده‌اند؛ وضعیت پیاده‌سازی امروز در بخش ۰، نقطهٔ وضعیت جاری و راهنمای جامع تعیین می‌شود.
+
 | ID | Requirement | Description | Status |
 |---|---|---|---|
 | FR-01 | Canonical questionnaire | Ten required canonical questions and fifty stable answers must match official source text/order. | Implemented |
@@ -531,9 +577,11 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 
 ---
 
-## 7. User Stories & Execution Status
+## 7. User Stories & Task Map — historical baseline
 
-### Overall implementation sequence — **Confirmed; do not reorder**
+**یادداشت وضعیت:** جدول‌ها و خردکردن کار در این بخش، baseline اولیهٔ سپتامبر ۲۰۲۶ هستند. برچسب‌های Done/Pending، ترتیب اولیه و شناسه‌های «گام بعدی» در آن‌ها وضعیت یا backlog جاری محسوب نمی‌شوند؛ مرجع جاری، راهنمای جامع و checkpoint است. قاعدهٔ فعلی ترتیب US-13 و US-12 در handoff اکتبر و راهنمای جاری ثبت شده است.
+
+### Overall implementation sequence — historical baseline; do not execute from this table
 
 | ID | Title | Status | Notes |
 |---|---|---|---|
@@ -643,12 +691,12 @@ Dependency direction is mandatory: `presentation → application → domain`; in
 
 | Layer | Technology / approach | State |
 |---|---|---|
-| Frontend | React + Vite; current prototype pages under `src/`; RTL UI | Existing and incrementally integrated |
-| Backend | Python 3.12+, FastAPI | Implemented foundation/API |
-| Database | PostgreSQL, SQLAlchemy, Alembic | Implemented local/CI architecture |
+| Frontend | React + Vite؛ رابط RTL در `src/` | جریان‌های محصول در main پیاده‌سازی شده‌اند؛ کد هنوز تا حدی در screen/CSSهای مشترک قرار دارد و ماژولارسازی US-13 کامل نیست. تغییرات رابط PRهای ۱۷۷–۱۸۸ پس از v0.1.5 deploy نشده‌اند. |
+| Backend | Python 3.12+, FastAPI | کاتالوگ وام، نشست پرسشنامه، توصیه و نتیجه در main پیاده‌سازی شده‌اند؛ deploy production ثبت‌شده v0.1.5 است. |
+| Database | PostgreSQL, SQLAlchemy, Alembic | migration و ذخیرهٔ پایدار در CI و production v0.1.5 استفاده شده‌اند؛ هر تغییر بعد از آن باید جداگانه بررسی شود. |
 | Tests | Python unit/integration, Node tests, Playwright Chromium E2E, PostgreSQL migration verification | Implemented CI gates |
-| Dev packaging | Docker/Docker Compose target architecture, non-root containers, local env docs/runbook | Foundation/docs expected; production deploy not complete |
-| Hosting currently | Netlify frontend project `shahab-finance-demo` | Live frontend only; no live FastAPI/PostgreSQL |
+| Dev/production packaging | Docker/Docker Compose، ایمیج‌های versioned، health/readiness | برای production v0.1.5 استفاده شده؛ merge کدهای بعد از آن مساوی deploy نیست. |
+| Hosting | Netlify frontend و production جداگانهٔ v0.1.5 | Netlify خود به‌تنهایی API/DB را نمیزبانی می‌کند؛ وضعیت deployment فقط از بخش ۰ و runbook جاری خوانده شود. |
 
 ### Backend structure/responsibilities
 
@@ -656,13 +704,13 @@ Dependency direction is mandatory: `presentation → application → domain`; in
 - `backend/app/.../application`: use cases and ports; depends on abstractions, not database/UI.
 - `backend/app/.../infrastructure`: SQLAlchemy repositories, importers, parsers and adapters.
 - Loan catalogue: serving-only use cases and a durable SQLAlchemy read adapter with an explicit `PUBLISHED` predicate.
-- Questionnaire: canonical configuration exists; session/use case is next.
-- Recommendation: must be a pure engine/domain module, still pending.
-- API: typed errors, health/readiness, public allowlisted loan detail responses are implemented.
+- Questionnaire: کاتالوگ canonical، ذخیرهٔ server-side و کنترل ترتیب پاسخ‌ها پیاده‌سازی شده؛ پرسشنامهٔ نیمه‌کاره تا یک ساعت مطلق قابل‌بازیابی است. پی‌آرهای ۱۷۷–۱۸۲ مسیر مستقیم، refresh، بازگشت و resume از خانه را اصلاح کردند.
+- Recommendation: موتور pure و deterministic، RecommendationTrace و اتصال نتیجه در main پیاده‌سازی شده‌اند؛ از وضعیت قدیمی این سند نتیجهٔ اجرایی نگیر.
+- API: خطاهای typed، health/readiness، کاتالوگ وام، نشست پرسشنامه و endpointهای توصیه/نتیجه پیاده‌سازی شده‌اند؛ deploy بودن هر تغییر بعد از v0.1.5 را جداگانه بررسی کن.
 
 ### Frontend
 
-Current operational code is in `src/`, principally the existing prototype screen and `src/App.css`; assets are in `assets/`. More focused modules added during delivery include:
+کد فرانت‌اند در `src/` و assetها در `assets/` قرار دارند. برخی بخش‌ها به feature moduleهای مستقل منتقل شده‌اند، اما بخشی از جریان‌های صفحه و CSS هنوز مشترک‌اند؛ ریفکتور US-13 همچنان باز است. نمونه‌های ماژول‌های جداشده:
 
 - `src/features/loan-details/`: API client and RTL detail states; no hard-coded detail fallback.
 - `src/features/questionnaire/questionnaireRouteMap.mjs`: the sole route ↔ canonical question ID adapter.
@@ -695,8 +743,9 @@ There is **no ML model currently planned or implemented**. The recommender is a 
 ### Infrastructure/deployment status
 
 - Netlify site currently exists: `https://shahab-finance-demo.netlify.app/`.
-- It is a frontend deployment; the public site is **not** backed by live FastAPI/PostgreSQL at present.
-- Docker/Compose, health/readiness, migrations and CI are architectural preparation; production/staging service hosting, secrets, database, observability and rollback are still pending.
+- Netlify استقرار فرانت‌اند است و نباید با backend production یکی گرفته شود.
+- production نسخهٔ v0.1.5 جداگانه فعال شده؛ ۱۰۲ وام و config 1.1.0 در snapshot اکتبر ثبت‌اند و توصیه/جزئیات از HTTPS در گزارش PR #150 موفق بوده‌اند.
+- آخرین استقرار ثبت‌شده v0.1.5 است؛ پی‌آرهای ۱۷۵ و ۱۷۷–۱۸۸ استقرار جدید را ثابت نمی‌کنند. پذیرش آنلاین T081/T07، گیت‌های انتشار و rollback کامل باز می‌مانند تا شاهد تازه ثبت شود.
 
 ---
 
@@ -749,17 +798,17 @@ There is **no ML model currently planned or implemented**. The recommender is a 
 
 ### ADR-07: Recommendation engine is deterministic, explainable and server-side
 
-- **Status:** Confirmed; implementation pending US-08/09.
+- **Status:** مشخصات مصوب و موتور/trace در US-08 پیاده‌سازی شده‌اند؛ اتصال توصیه و نتیجه در main وجود دارد. وضعیت deploy را از بخش ۰ بخوان.
 - **Context:** Static client-side percentages are wrong and easily manipulable; user needs explanations.
 - **Final choice:** Pure backend/domain engine with versioned configuration; server calculates score/rank and emits redacted trace. Client displays a view model and does not calculate score.
 - **Consequences:** Requires completed questionnaire session API and approved data snapshot before live results.
 
 ### ADR-08: Public API protection approach
 
-- **Status:** Under discussion; not yet an approved/implemented deployment ADR.
+- **Status:** پیشنهاد تاریخی برای استقرار با Netlify BFF؛ این شرح، معماری production جداگانهٔ v0.1.5 را توصیف نمی‌کند. برای تصمیم فعلی به guide و runbook استقرار مراجعه شود.
 - **Context:** Product owner asked how to make backend public for frontend while preventing direct resource abuse with an API key.
 - **Important security fact:** A key shipped in React/Vite/browser code cannot be secret and cannot secure the backend.
-- **Proposed direction (not yet implemented):** Browser → same-origin Netlify Function/BFF → FastAPI, with service token only in server-side environment variables. Add rate limiting, short-lived anonymous sessions, input validation, HTTPS, narrow CORS, logging and later user auth/session.
+- **Historical proposal:** Browser → same-origin Netlify Function/BFF → FastAPI, with a server-only token. این پیشنهاد را با استقرار production فعلی یکی ندان و برای معماری بعدی بدون بازبینی guide/runbook مبنا قرار نده.
 - **Consequence:** A BFF prevents direct backend access without a service credential, but cannot stop an anonymous public visitor from using the public product flow. Real per-user control requires authentication/authorisation; anti-abuse requires rate limits/CAPTCHA/WAF as appropriate.
 
 ---
@@ -823,7 +872,7 @@ For a core `متغیر` value, importer may extract an explicit structured range
 
 Audit of the 102-loan source observed, at the time of audit: 66 `دارد`, 34 `نامشخص`, 2 blank for deposit requirement; 37 unknown deposit-holding values; 54 unknown loan-to-deposit values. Example core cases included one unknown interest rate, 9 variable maximum amounts, 12 variable instalments and 4 variable repayment terms. These figures are evidence for the policy, not constants; recompute them on each audit.
 
-### Target recommendation algorithm — **Confirmed specification, not yet implemented**
+### الگوریتم توصیه — مشخصات مصوب و پیاده‌سازی‌شده در US-08؛ وضعیت deploy در بخش ۰
 
 1. Validate answers: exactly one known `answerId` for each required canonical question.
 2. Normalise loan data and classify all eight variables.
@@ -847,7 +896,7 @@ normalizedScore = rawLoanScore / max(rawLoanScore among candidates) × 100
 7. `minimumMatchScore` is a versioned setting with initial value `50`; below-threshold loans remain in diagnostic trace but are not user results.
 8. Return two separate collections: `rankedRecommendations` and `needsReview`.
 
-### RecommendationTrace requirements — **Confirmed target**
+### RecommendationTrace — قرارداد مصوب و پیاده‌سازی‌شده در US-08
 
 Each recommendation run must produce a reproducible/redacted `RecommendationTrace` including:
 
@@ -872,7 +921,9 @@ Never put identifying user data in public logs or a public trace.
 
 ---
 
-## 11. Repository & Development Status
+## 11. Repository & Development Status — historical baseline at PR #28 (2026-09-19)
+
+**یادداشت وضعیت:** جدول repository، فهرست PRها، شمار تست‌ها و known issues این بخش، snapshot زمان PR #28 است. ادعاهای قدیمیِ عدم ذخیرهٔ پاسخ، عدم وجود engine و عدم استقرار backend وضعیت امروز نیستند؛ وضعیت جاری در بخش ۰ و نقطهٔ وضعیت پروژه ثبت شده است.
 
 ### Repository
 
@@ -963,7 +1014,7 @@ No task can be marked Done merely because code compiles. It needs the task-speci
 
 A static SPA cannot keep an API key secret. Any key inserted into a React/Vite browser bundle can be inspected and reused. Do not represent a browser API key or CORS as access control.
 
-For a future deployment, use a server-side BFF/API proxy token kept only in server/hosting secrets for service-to-service authentication, combined with anonymous short-lived session controls, rate limits and later user authentication. This direction remains pending implementation/ADR approval (ADR-08).
+این پاراگراف اصل امنیتی API key را تثبیت می‌کند، نه انتخاب معماری جاری. در deployment با SPA و backend جدا، روش دسترسی، authentication و کنترل abuse باید طبق راهنمای جامع و runbook همان محیط تعیین شود؛ پیشنهاد قدیمی Netlify BFF در ADR-08 به‌تنهایی تصمیم مصوب یا وضعیت production نیست.
 
 ---
 
@@ -971,20 +1022,22 @@ For a future deployment, use a server-side BFF/API proxy token kept only in serv
 
 ### Environments
 
-| Environment | Current state | Requirement |
+| Environment | وضعیت ثبت‌شده در handoff ۲۰۲۶-۱۱-۰۱ | مرز پذیرش |
 |---|---|---|
-| Local | Intended Docker Compose with frontend, FastAPI and PostgreSQL | Must validate health/readiness, migrations, seed/import and smoke tests; do not delete volumes casually. |
-| CI | Active GitHub Actions quality, PostgreSQL migration and Chromium E2E gates | Remains mandatory; do not disable gate due to local missing dependencies. |
-| Preview/staging | Not established as full stack | Required before production; approved config/data version, smoke, monitoring and rollback. |
-| Production | Not deployed for API/database | Only after US-12 release gate. |
+| Local | Docker Compose توسعه برای frontend، FastAPI و PostgreSQL. | آزمون را روی SHA و محیط ثبت‌شده اجرا کن؛ volume بدون runbook پاک نشود. |
+| CI | چهار workflow کیفیت، امنیت، baseline فرانت‌اند و ساخت کانتینر فعال‌اند. | نتیجه فقط برای همان SHA معتبر است؛ هر CI تازه باید روی commit جاری خوانده شود. |
+| Preview/staging | پذیرش آنلاین کامل T081/T07 در اسناد جاری باز است. | URL واقعی، PostgreSQL پایدار، smoke و rollback با شواهد لازم‌اند. |
+| Production | نسخهٔ v0.1.5 مستقر و آخرین deployment ثبت‌شده است. | پی‌آرهای ۱۷۷–۱۸۸ و تغییرات بعدی مستقرشده فرض نشوند؛ پذیرش نهایی US-12 و rollback کامل باز است. |
 
 ### Existing hosting
 
-- Netlify project: `shahab-finance-demo`.
-- Current public site: `https://shahab-finance-demo.netlify.app/`.
-- It serves frontend assets. It does not constitute a live FastAPI/PostgreSQL production deployment.
+- Netlify project: `shahab-finance-demo` برای فرانت‌اند.
+- Production v0.1.5 جداگانه مستقر شده و مسیر توصیه/جزئیات از HTTPS در گزارش PR #150 شاهد دارد.
+- وضعیت سرور، دامنه، reverse proxy، secrets و عملیات را فقط از runbookهای فعلی و checkpoint بخوان؛ این خلاصه جایگزین آن‌ها نیست.
 
 ### Required future deployment foundation
+
+فهرست زیر گیت‌های release و deploy بعدی را خلاصه می‌کند؛ برخی اجزا برای v0.1.5 آماده یا اجرا شده‌اند. وجود آن نسخه، پذیرش نهایی US-12، rollback آزموده‌شده یا آماده‌بودن نسخه‌های بعدی را ثابت نمی‌کند.
 
 Beyond server/domain, production readiness requires:
 
@@ -1023,8 +1076,8 @@ Beyond server/domain, production readiness requires:
 | US-06 | Do not infer missing persisted conditions | Avoid fabricated loan terms | Return empty conditions until import/persistence mapping is complete. |
 | US-07.T01 / PR #27 | Versioned canonical config: 10 questions, 50 answers | Stable questionnaire identity independent of UI | Later routes/session/engine use canonical IDs. |
 | US-07.T02 / PR #28 | Exact route adapter; `/question/12 → S13` | Existing prototype index caused redirect/off-by-one defect | Public routes retained; indexes cannot become answer IDs. |
-| Deployment discussion | Netlify currently frontend-only; backend needs separate real hosting/database | Static frontend cannot host full FastAPI/PostgreSQL architecture | Do not claim public full-stack integration yet. |
-| API protection discussion | Browser API key is not a secret; use server-side BFF token + abuse controls | Keys in client bundle are extractable | Pending deployment ADR/implementation. |
+| Deployment discussion | پیشنهاد تاریخی Netlify-only/BFF؛ بعدتر v0.1.5 روی production جداگانه مستقر شد | فرانت‌اند Netlify به‌تنهایی میزبان FastAPI/PostgreSQL نیست | وضعیت انتشار را از بخش ۰ و runbook جاری بخوان؛ این ردیف سابقهٔ بحث اولیه است. |
+| API protection discussion | کلید داخل bundle مرورگر secret نیست؛ پیشنهاد Netlify BFF مربوط به بحث تاریخی است | کلیدهای client قابل استخراج‌اند | معماری production و کنترل‌های فعال را از اسناد عملیات جاری بخوان؛ این ردیف تصمیم جاری دربارهٔ topology نیست. |
 
 ---
 
@@ -1049,7 +1102,9 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 17. Current Project State
+## 17. Historical Project State — snapshot 2026-10-11; superseded by section 0
+
+این بخش وضعیت ثبت‌شده در handoff ۲۰۲۶-۱۰-۱۱ را حفظ می‌کند؛ وضعیت جاری در بخش ۰ و checkpoint ۲۰۲۶-۱۱-۰۱ است.
 
 - US-01–US-08 and user-facing US-09 code through recommendation history/logout are merged. Profile/history ownership and existing presentation contracts remain binding.
 - API contract/tooling for US-09.T081 is merged; online acceptance remains open. US-09.T07 awaits server readiness and real-URL verification.
@@ -1059,7 +1114,7 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 18. Immediate Next Actions
+## 18. Historical Next Actions — snapshot 2026-10-11; superseded by section 0
 
 | Priority | Action | Boundary |
 | --- | --- | --- |
@@ -1071,7 +1126,7 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 19. Open Questions
+## 19. Historical Open Questions — snapshot 2026-10-11; verify against current checkpoint
 
 | Question | Current state |
 | --- | --- |
@@ -1090,8 +1145,8 @@ Beyond server/domain, production readiness requires:
 
 ### Critical distinctions a new chat must keep
 
-1. **“Connected in code” is not “deployed live.”** Loan details are connected to API in code and CI; public Netlify has no live FastAPI/PostgreSQL.
-2. **Questionnaire route mapping is not answer persistence.** PR #28 was navigation-only; later US-07/08/09 work implements server answer persistence and recommendation. Do not infer current status from PR #28 alone.
+1. **اتصال کد با استقرار یکی نیست.** نسخهٔ v0.1.5 production ثبت شده و API توصیه/جزئیات از HTTPS شاهد دارد؛ Netlify frontend و backend production دو استقرار جدا هستند. PRهای بعدی main را مستقرشده فرض نکن.
+2. **نگاشت مسیر با نگهداری پاسخ فرق دارد.** PR #28 فقط نگاشت route را ساخت؛ بعدتر ذخیرهٔ server-side پاسخ‌ها در PR #180 و بازیابی یک‌ساعته در پی‌آرهای #181 و #182 اضافه شد. وضعیت را از PR #28 تنها نتیجه نگیر.
 3. **Published data boundary is real.** Do not repair an empty detail field by returning raw/staging/prototype data.
 4. **Neutral is not zero.** Neutral removes a non-core unknown variable from both contribution and denominator; it does not penalise or reward the loan.
 5. **Core unknown is exclusion, not neutral.** No score or rank for those loans.
@@ -1130,27 +1185,24 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 22. Instructions For New Chat
+## 22. دستورالعمل ادامهٔ کار بر پایهٔ وضعیت جاری
 
-1. Read authoritative section 0C and current sections 17–19; verify fresh main/PR/CI. The implementation baseline is after PR #103, not historical PR #93/#60/#28.
-2. Read AGENTS, the complete canonical guide, TASK_EXECUTION_PROTOCOL and applicable safe-git-ide-collaboration instructions. For engine/data/questionnaire/result/database changes, reread required official sources and related ADR/data decisions.
-3. Preserve D-005, PUBLISHED-only serving, neutral deposits, unknown-core exclusion, source bytes and approved frontend presentation. Do not infer weights or facts from UI text.
-4. Do not restart merged US-07/08 or US-10.T01–T05. US-11.T01 is only the next candidate; explicit owner instruction and dependency/gate checkpoint are required.
-5. Keep online T081 and T07 open until real infrastructure/testing evidence exists. The limited US-10 sequencing exception does not close US-09 or waive US-12 gates.
-6. Use a fresh branch from current main; protect all owner IDE edits and old Playwright evidence. PR #103 is merged; new work needs a new PR. Commit descriptions remain Persian as requested.
-7. Distinguish database recommendation history from browser bookmarks, customer development login from operator authority, and documented training from completed training. Preserve proof, ownership, idempotency and immutable snapshots.
-8. Use the current operations runbook and protected CLI; no direct DB edits, unguarded legacy publication, customer-role escalation or unsupported source/config updates. Real authority and restricted DB credentials must be established separately.
-9. Before implementation map dependent code/tests, correct suite/environment and smallest sufficient check. Update related tests with behavior; run targeted checks before the first push. Required CI remains mandatory. Diagnose failed-job output before fixes; do not weaken tests/security.
-10. Record actual activity timings from task start, not inferred commit timestamps. Update docs, CHANGELOG and checkpoints, then verify final-head CI. This v13 refresh is specifically owner-authorized; future continuity updates follow the normal story rule unless the owner requests otherwise.
-11. Do not equate CI with deployment. Require real URL, persistence/restart, rollback and security/restore evidence before the corresponding completion claim. Never place tokens, cookies, real personal data or credentials in Git, command arguments, logs or shared artifacts.
-
+1. ابتدا بخش ۰ نسخهٔ ۱۹٫۰ و آخرین نقطهٔ وضعیت پروژه را بخوان؛ برای وضعیت GitHub و CI، SHA/PR جاری را دوباره بررسی کن. handoffهای قدیمی و snapshotهای بخش‌های ۱۷ تا ۱۹ تاریخچه‌اند، نه وضعیت روز.
+2. پیش از هر تسک، کل راهنمای جامع، پروتکل اجرای تسک و قواعد همکاری Git/IDE را بخوان. سه قانون طلایی و سلسله‌مراتب منابع را رعایت کن.
+3. شناسه، وابستگی، معیار پذیرش و ترتیب کار را فقط از راهنمای جامع و checkpoint جاری بگیر؛ از جدول‌های تاریخی همین handoff تسک یا زیرتسک جدید استخراج نکن.
+4. برای تغییرات پرسشنامه/داده/نتیجه/دیتابیس، شش منبع رسمی و تصمیم‌های مرتبط را طبق راهنمای جامع بازخوانی کن. قاعدهٔ فعلی بازیابی پرسشنامهٔ ناقص یک ساعت مطلق است؛ متن قدیمی ۳۰ دقیقه‌ای در handoff ۱۳ اکتبر فقط تاریخچه است.
+5. main=bd27ce7 خط مبنای ثبت‌شده در این نسخه است، نه تضمین HEAD امروز. production آخرین بار با v0.1.5 ثبت شده؛ پی‌آرهای ۱۷۷–۱۸۸ و هر تغییر بعدی را تا زمان اثبات deploy، منتشرشده فرض نکن.
+6. US-13 در وضعیت این handoff باز است؛ ترتیب و task دقیق بعدی را از راهنمای جامع/checkpoint جاری بگیر. پذیرش‌های آنلاین US-09، US-11 و US-12 را فقط با شواهد واقعی ببند.
+7. روی branch تازه و تمیز کار کن، تغییرات IDE مالک را حفظ کن، مستقیم روی main کار نکن، force-push/بازنویسی تاریخچه نکن و فایل‌های نامرتبط را وارد PR نکن.
+8. تست نزدیک، گیت‌های اجباری، امنیت، مستندات و checkpoint را بر اساس دامنهٔ تسک کامل کن. نتیجهٔ CI فقط برای همان SHA معتبر است و به‌تنهایی deploy، مرورگر واقعی، restore یا پذیرش محصول را ثابت نمی‌کند.
+9. ظاهر و رفتار تأییدشدهٔ فرانت‌اند، مالکیت state، پاسخ‌ها، session proof، داده و معیارهای پذیرش را حفظ کن؛ برای ریفکتور US-13 قرارداد حفظ فرانت‌اند و رجیستری جاری راهنمای جامع لازم‌الاجراست.
+10. سند تداوم را در پایان User Story یا با درخواست صریح مالک به‌روز کن؛ خلاصهٔ جاری پروژه را در نقطهٔ وضعیت همان زمان نگه دار. وضعیت/تاریخ‌های قدیمی را به‌جای رویداد تازه بازنویسی نکن.
 ---
 
-## Audit of This Continuity Document
+## ممیزی نسخهٔ ۱۹٫۰ این سند
 
-- Version 13 reconciles main after PR #103 and records successful feature/main CI. Merged PR #95–#103 scopes are separated from remaining online/operational gates.
-- Historical sections/checkpoints remain preserved, with explicit section 0C precedence over outdated future-work and task-queue statements.
-- Durable operations tables/view/migration, trusted authorization, protected CLI, atomic publication and limited rollback are distinguished from production provider provisioning and unrestricted source/config editing.
-- Existing profile/history/bookmark contracts, D-005 and source integrity remain unchanged.
-- Only this handoff, current-state checkpoint and CHANGELOG change; no runtime, API, schema, source, scoring, UI or deployment changes occur. No full US-09 completion or production readiness is asserted.
-
+- نسخهٔ ۱۹٫۰ تغییرات پس از snapshot نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ تا main پس از PR #188 (bd27ce7) را ثبت می‌کند: PRهای #175 و #177 تا #188 ادغام شده‌اند و #176 باز مانده است.
+- جزئیات هر PR، ترتیب واقعی ادغام، محدودیت آزمون/استقرار و وضعیت جاری در بخش ۰ آمده است؛ قاعدهٔ بازیابی پرسشنامهٔ ناقص یک ساعت مطلق است.
+- ادعاهای وضعیت/گام بعد در handoffهای قدیمی و جدول‌های دارای تاریخ قدیمی، تاریخچه‌اند و وضعیت روز نیستند. قراردادهای محصولی، امنیتی و معماری از راهنمای جامع و ADRهای مصوب جاری پیروی می‌کنند.
+- production نسخهٔ v0.1.5 آخرین deployment ثبت‌شده است؛ تغییرات PRهای #177 تا #188 پس از آن merge شده‌اند، اما deploy جدید در این handoff ثبت نشده است.
+- PR #189 این به‌روزرسانی مستنداتی را نگه می‌دارد؛ هیچ تغییر کد یا deploy در آن نیست. تست محلی نرم‌افزاری اجرا نشده و نتیجهٔ CI باید روی آخرین commit همان PR خوانده شود.
