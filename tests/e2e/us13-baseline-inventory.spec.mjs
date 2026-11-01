@@ -163,7 +163,6 @@ test("AboutPage header actions preserve route, visuals, and API boundary", async
             };
             page.on("request", listener);
             await page.goto(`${origin}/about`);
-          await normalizeApprovedThemeForFrozenComparison(page, label);
             await normalizeApprovedThemeForFrozenComparison(page, label);
             await expect(page.locator(".hp-about-page")).toBeVisible();
             await page.locator(".hp-about-page > img").evaluate(image => image.decode());
@@ -228,6 +227,7 @@ test("T03.01: About and shared header preserve frozen mobile styles and approved
         const evidence = [];
         for (const [label, origin] of [["baseline", reference], ["candidate", baseURL]]) {
           await page.goto(`${origin}/about`);
+          await normalizeApprovedThemeForFrozenComparison(page, label);
           await expect(page.locator(".hp-about-page")).toBeVisible();
           await page.evaluate(() => document.fonts.ready);
           await page.locator(".hp-about-page > img").evaluate(image => image.decode());
