@@ -1143,8 +1143,8 @@ Beyond server/domain, production readiness requires:
 
 ### Critical distinctions a new chat must keep
 
-1. **“Connected in code” is not “deployed live.”** Loan details are connected to API in code and CI; public Netlify has no live FastAPI/PostgreSQL.
-2. **Questionnaire route mapping is not answer persistence.** PR #28 was navigation-only; later US-07/08/09 work implements server answer persistence and recommendation. Do not infer current status from PR #28 alone.
+1. **اتصال کد با استقرار یکی نیست.** نسخهٔ v0.1.5 production ثبت شده و API توصیه/جزئیات از HTTPS شاهد دارد؛ Netlify frontend و backend production دو استقرار جدا هستند. PRهای بعدی main را مستقرشده فرض نکن.
+2. **نگاشت مسیر با نگهداری پاسخ فرق دارد.** PR #28 فقط نگاشت route را ساخت؛ بعدتر ذخیرهٔ server-side پاسخ‌ها در PR #180 و بازیابی یک‌ساعته در پی‌آرهای #181 و #182 اضافه شد. وضعیت را از PR #28 تنها نتیجه نگیر.
 3. **Published data boundary is real.** Do not repair an empty detail field by returning raw/staging/prototype data.
 4. **Neutral is not zero.** Neutral removes a non-core unknown variable from both contribution and denominator; it does not penalise or reward the loan.
 5. **Core unknown is exclusion, not neutral.** No score or rank for those loans.
@@ -1183,27 +1183,24 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 22. Instructions For New Chat
+## 22. دستورالعمل ادامهٔ کار بر پایهٔ وضعیت جاری
 
-1. Read authoritative section 0C and current sections 17–19; verify fresh main/PR/CI. The implementation baseline is after PR #103, not historical PR #93/#60/#28.
-2. Read AGENTS, the complete canonical guide, TASK_EXECUTION_PROTOCOL and applicable safe-git-ide-collaboration instructions. For engine/data/questionnaire/result/database changes, reread required official sources and related ADR/data decisions.
-3. Preserve D-005, PUBLISHED-only serving, neutral deposits, unknown-core exclusion, source bytes and approved frontend presentation. Do not infer weights or facts from UI text.
-4. Do not restart merged US-07/08 or US-10.T01–T05. US-11.T01 is only the next candidate; explicit owner instruction and dependency/gate checkpoint are required.
-5. Keep online T081 and T07 open until real infrastructure/testing evidence exists. The limited US-10 sequencing exception does not close US-09 or waive US-12 gates.
-6. Use a fresh branch from current main; protect all owner IDE edits and old Playwright evidence. PR #103 is merged; new work needs a new PR. Commit descriptions remain Persian as requested.
-7. Distinguish database recommendation history from browser bookmarks, customer development login from operator authority, and documented training from completed training. Preserve proof, ownership, idempotency and immutable snapshots.
-8. Use the current operations runbook and protected CLI; no direct DB edits, unguarded legacy publication, customer-role escalation or unsupported source/config updates. Real authority and restricted DB credentials must be established separately.
-9. Before implementation map dependent code/tests, correct suite/environment and smallest sufficient check. Update related tests with behavior; run targeted checks before the first push. Required CI remains mandatory. Diagnose failed-job output before fixes; do not weaken tests/security.
-10. Record actual activity timings from task start, not inferred commit timestamps. Update docs, CHANGELOG and checkpoints, then verify final-head CI. This v13 refresh is specifically owner-authorized; future continuity updates follow the normal story rule unless the owner requests otherwise.
-11. Do not equate CI with deployment. Require real URL, persistence/restart, rollback and security/restore evidence before the corresponding completion claim. Never place tokens, cookies, real personal data or credentials in Git, command arguments, logs or shared artifacts.
-
+1. ابتدا بخش ۰ نسخهٔ ۱۹٫۰ و آخرین نقطهٔ وضعیت پروژه را بخوان؛ برای وضعیت GitHub و CI، SHA/PR جاری را دوباره بررسی کن. handoffهای قدیمی و snapshotهای بخش‌های ۱۷ تا ۱۹ تاریخچه‌اند، نه وضعیت روز.
+2. پیش از هر تسک، کل راهنمای جامع، پروتکل اجرای تسک و قواعد همکاری Git/IDE را بخوان. سه قانون طلایی و سلسله‌مراتب منابع را رعایت کن.
+3. شناسه، وابستگی، معیار پذیرش و ترتیب کار را فقط از راهنمای جامع و checkpoint جاری بگیر؛ از جدول‌های تاریخی همین handoff تسک یا زیرتسک جدید استخراج نکن.
+4. برای تغییرات پرسشنامه/داده/نتیجه/دیتابیس، شش منبع رسمی و تصمیم‌های مرتبط را طبق راهنمای جامع بازخوانی کن. قاعدهٔ فعلی بازیابی پرسشنامهٔ ناقص یک ساعت مطلق است؛ متن قدیمی ۳۰ دقیقه‌ای در handoff ۱۳ اکتبر فقط تاریخچه است.
+5. main=bd27ce7 خط مبنای ثبت‌شده در این نسخه است، نه تضمین HEAD امروز. production آخرین بار با v0.1.5 ثبت شده؛ پی‌آرهای ۱۷۷–۱۸۸ و هر تغییر بعدی را تا زمان اثبات deploy، منتشرشده فرض نکن.
+6. US-13 در وضعیت این handoff باز است؛ ترتیب و task دقیق بعدی را از راهنمای جامع/checkpoint جاری بگیر. پذیرش‌های آنلاین US-09، US-11 و US-12 را فقط با شواهد واقعی ببند.
+7. روی branch تازه و تمیز کار کن، تغییرات IDE مالک را حفظ کن، مستقیم روی main کار نکن، force-push/بازنویسی تاریخچه نکن و فایل‌های نامرتبط را وارد PR نکن.
+8. تست نزدیک، گیت‌های اجباری، امنیت، مستندات و checkpoint را بر اساس دامنهٔ تسک کامل کن. نتیجهٔ CI فقط برای همان SHA معتبر است و به‌تنهایی deploy، مرورگر واقعی، restore یا پذیرش محصول را ثابت نمی‌کند.
+9. ظاهر و رفتار تأییدشدهٔ فرانت‌اند، مالکیت state، پاسخ‌ها، session proof، داده و معیارهای پذیرش را حفظ کن؛ برای ریفکتور US-13 قرارداد حفظ فرانت‌اند و رجیستری جاری راهنمای جامع لازم‌الاجراست.
+10. سند تداوم را در پایان User Story یا با درخواست صریح مالک به‌روز کن؛ خلاصهٔ جاری پروژه را در نقطهٔ وضعیت همان زمان نگه دار. وضعیت/تاریخ‌های قدیمی را به‌جای رویداد تازه بازنویسی نکن.
 ---
 
-## Audit of This Continuity Document
+## ممیزی نسخهٔ ۱۹٫۰ این سند
 
-- Version 13 reconciles main after PR #103 and records successful feature/main CI. Merged PR #95–#103 scopes are separated from remaining online/operational gates.
-- Historical sections/checkpoints remain preserved, with explicit section 0C precedence over outdated future-work and task-queue statements.
-- Durable operations tables/view/migration, trusted authorization, protected CLI, atomic publication and limited rollback are distinguished from production provider provisioning and unrestricted source/config editing.
-- Existing profile/history/bookmark contracts, D-005 and source integrity remain unchanged.
-- Only this handoff, current-state checkpoint and CHANGELOG change; no runtime, API, schema, source, scoring, UI or deployment changes occur. No full US-09 completion or production readiness is asserted.
-
+- نسخهٔ ۱۹٫۰ تغییرات پس از snapshot نسخهٔ ۱۸٫۰ مورخ ۲۰۲۶-۱۰-۲۵ تا main پس از PR #188 (bd27ce7) را ثبت می‌کند: PRهای #175 و #177 تا #188 ادغام شده‌اند و #176 باز مانده است.
+- جزئیات هر PR، ترتیب واقعی ادغام، محدودیت آزمون/استقرار و وضعیت جاری در بخش ۰ آمده است؛ قاعدهٔ بازیابی پرسشنامهٔ ناقص یک ساعت مطلق است.
+- ادعاهای وضعیت/گام بعد در handoffهای قدیمی و جدول‌های دارای تاریخ قدیمی، تاریخچه‌اند و وضعیت روز نیستند. قراردادهای محصولی، امنیتی و معماری از راهنمای جامع و ADRهای مصوب جاری پیروی می‌کنند.
+- production نسخهٔ v0.1.5 آخرین deployment ثبت‌شده است؛ تغییرات PRهای #177 تا #188 پس از آن merge شده‌اند، اما deploy جدید در این handoff ثبت نشده است.
+- PR #189 این به‌روزرسانی مستنداتی را نگه می‌دارد؛ هیچ تغییر کد یا deploy در آن نیست. تست محلی نرم‌افزاری اجرا نشده و نتیجهٔ CI باید روی آخرین commit همان PR خوانده شود.
