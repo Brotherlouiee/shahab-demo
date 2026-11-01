@@ -85,7 +85,7 @@
 **Verification addendum after PR #126 merge:** The test-raster stability fix [PR #126](https://github.com/Brotherlouiee/shahab-demo/pull/126) is merged into `main` at `e380482bd4f141a18098b510574eb4ffce685450`. Its pre-merge saved-loan visual browser gate passed three independent executions on the same SHA; this does not excuse verification of the current handoff PR #125 against updated main. PR #125 does not change frontend or browser test code. The SHA listed above as prepared baseline remains historical; for any new task use latest verified GitHub main. No story/task acceptance changes.
 
 
-**Precedence and integrity.** This newly updated section 0E supersedes older *status/sequence/next-task claims* in 0D/0C/0B/0A and other dated passages in this handoff. Older sections remain unchanged as history and **must not be used as current instructions**. The canonical guide, Golden Rules, decisions in repository and [ADR-0009](adr/0009-offline-refactor-before-release.md) govern any disagreement. **This continuity file does not change task authority, architecture, acceptance criteria or permission to merge/deploy.** The explicit owner request here permits this handoff update before beginning US-13; it is not a claim that US-13 has reached story completion.
+**وضعیت تاریخی و تقدم.** این handoff وضعیت و تصمیم‌های مورخ ۲۰۲۶-۱۰-۱۳ را حفظ می‌کند. در زمان نگارش بر بخش‌های قدیمی‌تر تقدم داشت؛ اکنون بخش ۰ نسخهٔ ۱۹٫۰ و checkpoint جاری بر ادعاهای وضعیت، ترتیب، گام بعد و استقرار این snapshot مقدم‌اند. گزارهٔ ۳۰ دقیقه‌ای مربوط به نگهداری پاسخ خام در جدول آنلاین/معوقِ همین snapshot، وضعیت آن تاریخ است و قاعدهٔ جاری بازیابی پرسشنامه نیست؛ قاعدهٔ جاری، بازیابی و ادامهٔ پرسشنامهٔ ناقص تا یک ساعت مطلق است که در بخش ۰ و پی‌آرهای ۱۸۱ و ۱۸۲ ثبت شده. قراردادهای حفظ رفتار/ظاهر فرانت‌اند و منع ادغام یا استقرار خودکار فقط در صورت تأیید راهنمای جامع و ADRهای جاری پابرجا هستند. این سند مجوز تغییر تسک، معیار پذیرش، merge یا deploy نمی‌دهد.
 
 ### A. Verified repository and merged PRs
 
@@ -536,7 +536,7 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 6. Frontend presents scores, reasons, warnings, conditions and action links with clear uncertainty language.
 7. User can return/back/resume without corrupting answers; can open loan detail; final decision remains theirs.
 
-### Product capability map and current state
+### Product capability map — historical status snapshot (2026-09-20; current status in section 0)
 
 | Capability | Goal/business logic | Status as of 2026-09-20 | Dependencies / note |
 |---|---|---|---|
@@ -559,6 +559,8 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 
 ## 6. Functional Requirements
 
+**یادداشت وضعیت:** ستون Status در جدول زیر snapshot قدیمیِ ۲۰۲۶-۰۹-۲۰ است، نه وضعیت جاری. نیازمندی‌ها به‌عنوان قرارداد محصولی حفظ شده‌اند؛ وضعیت پیاده‌سازی امروز در بخش ۰، نقطهٔ وضعیت جاری و راهنمای جامع تعیین می‌شود.
+
 | ID | Requirement | Description | Status |
 |---|---|---|---|
 | FR-01 | Canonical questionnaire | Ten required canonical questions and fifty stable answers must match official source text/order. | Implemented |
@@ -575,9 +577,11 @@ An Iranian loan seeker needs help comparing loan facilities according to their o
 
 ---
 
-## 7. User Stories & Execution Status
+## 7. User Stories & Task Map — historical baseline
 
-### Overall implementation sequence — **Confirmed; do not reorder**
+**یادداشت وضعیت:** جدول‌ها و خردکردن کار در این بخش، baseline اولیهٔ سپتامبر ۲۰۲۶ هستند. برچسب‌های Done/Pending، ترتیب اولیه و شناسه‌های «گام بعدی» در آن‌ها وضعیت یا backlog جاری محسوب نمی‌شوند؛ مرجع جاری، راهنمای جامع و checkpoint است. قاعدهٔ فعلی ترتیب US-13 و US-12 در handoff اکتبر و راهنمای جاری ثبت شده است.
+
+### Overall implementation sequence — historical baseline; do not execute from this table
 
 | ID | Title | Status | Notes |
 |---|---|---|---|
@@ -917,7 +921,9 @@ Never put identifying user data in public logs or a public trace.
 
 ---
 
-## 11. Repository & Development Status
+## 11. Repository & Development Status — historical baseline at PR #28 (2026-09-19)
+
+**یادداشت وضعیت:** جدول repository، فهرست PRها، شمار تست‌ها و known issues این بخش، snapshot زمان PR #28 است. ادعاهای قدیمیِ عدم ذخیرهٔ پاسخ، عدم وجود engine و عدم استقرار backend وضعیت امروز نیستند؛ وضعیت جاری در بخش ۰ و نقطهٔ وضعیت پروژه ثبت شده است.
 
 ### Repository
 
@@ -1094,7 +1100,9 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 17. Current Project State
+## 17. Historical Project State — snapshot 2026-10-11; superseded by section 0
+
+این بخش وضعیت ثبت‌شده در handoff ۲۰۲۶-۱۰-۱۱ را حفظ می‌کند؛ وضعیت جاری در بخش ۰ و checkpoint ۲۰۲۶-۱۱-۰۱ است.
 
 - US-01–US-08 and user-facing US-09 code through recommendation history/logout are merged. Profile/history ownership and existing presentation contracts remain binding.
 - API contract/tooling for US-09.T081 is merged; online acceptance remains open. US-09.T07 awaits server readiness and real-URL verification.
@@ -1104,7 +1112,7 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 18. Immediate Next Actions
+## 18. Historical Next Actions — snapshot 2026-10-11; superseded by section 0
 
 | Priority | Action | Boundary |
 | --- | --- | --- |
@@ -1116,7 +1124,7 @@ Beyond server/domain, production readiness requires:
 
 ---
 
-## 19. Open Questions
+## 19. Historical Open Questions — snapshot 2026-10-11; verify against current checkpoint
 
 | Question | Current state |
 | --- | --- |
