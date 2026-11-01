@@ -1,14 +1,15 @@
 /**
  * Local presentation controls for a recommendation result already produced by the server.
  *
- * Filtering is limited to lender identity and sorting is limited to explicit display order.
- * This module never calculates, normalizes or compares compatibility scores.
+ * Local presentation filters use lender identity and the agreed 10% floor for the
+ * low-compatibility view. Scores are never calculated or normalized here.
  */
 const ALL_LENDERS = "all";
 const SORTS = Object.freeze({
   serverOrder: "serverOrder",
   lenderNameAsc: "lenderNameAsc",
 });
+const LOWEST_MATCH_MINIMUM_SCORE = 0.1;
 const RESULT_MODES = Object.freeze({
   highest: "highest",
   lowest: "lowest",
@@ -28,7 +29,10 @@ export function selectRecommendationResultMode(result, mode = RESULT_MODES.highe
   if (!Array.isArray(collections[mode])) {
     throw new TypeError("result must contain all server recommendation partitions");
   }
-  return Object.freeze([...collections[mode]]);
+  const visibleItems = mode === RESULT_MODES.lowest
+    ? collections[mode].filter((item) => item.compatibilityScore >= LOWEST_MATCH_MINIMUM_SCORE)
+    : [...collections[mode]];
+  return Object.freeze(visibleItems);
 }
 
 export function applyRecommendationResultControls(
