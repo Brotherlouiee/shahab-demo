@@ -379,3 +379,37 @@ button.submit-button,
 .hp-compare-info {
   gap: 12px;
 }
+
+/* Keep the home warning compact: icon and copy share a row; reduce vertical
+   padding and button spacing so the card is about one quarter shorter. */
+@media (max-width: 700px) {
+  .hp-page .hp-hero .hp-eligibility-message {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 10px;
+    padding: 20px 18px !important;
+  }
+
+  .hp-page .hp-hero .hp-eligibility-message-icon {
+    position: static;
+    grid-column: 1;
+    grid-row: 1;
+    float: none;
+    margin: 0;
+  }
+
+  .hp-page .hp-hero .hp-eligibility-message p {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none !important;
+    margin: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  .hp-page .hp-hero .hp-eligibility-message button {
+    grid-column: 1 / -1;
+    clear: none;
+    margin: 16px auto 0 !important;
+  }
+}
