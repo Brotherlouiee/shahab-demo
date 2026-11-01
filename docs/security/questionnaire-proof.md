@@ -14,6 +14,7 @@
 - پیش از resume/write/recommend، secret قالب معتبر، digest با compare_digest،
   expiry/state تازه و در صورت bound، همان account ID فعال کنترل می‌شوند. شناسه
   تنها، cookie ثابت/ساختگی، secret پرسشنامه دیگر و حساب دیگر رد می‌شوند.
+- `GET /sessions/current` پس از بارگذاری کامل فقط نشست دارای proof معتبر همان مرورگر را بازمی‌گرداند؛ UUIDهای cookie فقط locator هستند و digest، expiry و owner تازه بررسی می‌شوند. پاسخ `no-store` است و نبود نشست معتبر `null` می‌دهد.
 - PostgreSQL authority با row lock است؛ Redis/cache هیچ مجوزی صادر نمی‌کند.
   owner/account status پیش از mutation تازه است. پس از commit پاسخ/قبل return
   recommendation دوباره gate اجرا می‌شود؛ repeatable-read catalogue پس از scoring

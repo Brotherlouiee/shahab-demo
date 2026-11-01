@@ -48,6 +48,7 @@
 | --- | --- | --- |
 | `questionnaire_sessions` | `session_id PK`, `questionnaire_version_id FK`, `state`, `expires_at`, timestamps | `CHECK(expires_at > created_at)`؛ بدون PII یا پاسخ raw؛ index انتخابی روی sessionهای منقضی‌نشده/`expires_at` برای lookup و cleanup |
 | `questionnaire_answers` | `questionnaire_answer_id PK`, `session_id FK`, `question_id FK`, `answer_option_id FK` | `UNIQUE(session_id, question_id)`؛ FK answer/question compatibility با composite FK یا trigger؛ `ON DELETE CASCADE` فقط از session به answerهای owned مجاز است |
+| `questionnaire_flow_answers` | `session_id FK`, `step_id`, `answer_id`؛ PK مرکب `(session_id, step_id)` | فقط `loan_type` و `entity_type` خارج از scoring؛ مقادیر مجاز کنترل می‌شوند؛ حذف با نشست؛ بدون PII |
 | `recommendation_runs` | `recommendation_run_id PK`, `session_id FK`, `config_version_id FK`, `state`, `trace_schema_version` | config/version/session immutable پس از completion |
 | `recommendation_results` | `recommendation_result_id PK`, `recommendation_run_id FK`, `loan_product_version_id FK`, `outcome_state`, `match_score numeric NULL`, `rank_position integer NULL` | `UNIQUE(run, loan_version)`؛ ranked ⇒ score/rank nonNULL; needs_review ⇒ score/rank NULL; `CHECK(match_score BETWEEN 0 AND 1)` |
 | `recommendation_exclusion_reasons` | `reason_id PK`, `recommendation_result_id FK`, `reason_code text`, `loan_variable_id FK NULL` | `UNIQUE(result, reason_code, loan_variable_id)`؛ no free-text internal detail in public API |

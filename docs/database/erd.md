@@ -24,6 +24,7 @@ erDiagram
 
     questionnaire_versions ||--o{ questionnaire_sessions : starts
     questionnaire_sessions ||--o{ questionnaire_answers : records
+    questionnaire_sessions ||--o{ questionnaire_flow_answers : resumes_entry_steps
     answer_options ||--o{ questionnaire_answers : selects
     questionnaire_sessions ||--o{ recommendation_runs : triggers
     recommendation_config_versions ||--o{ recommendation_runs : configures
@@ -49,7 +50,7 @@ flowchart LR
     R -. "cache miss / unavailable" .-> PG
 ```
 
-`Redis` یک datastore رابطه‌ای نیست و بنابراین موجودیت مستقلی در ERD 3NF ندارد. منبع حقیقتِ پاسخ‌های معتبر و sessionهای هنوز‌منقضی‌نشده، دو جدول نرمال‌شدهٔ PostgreSQL یعنی `questionnaire_sessions` و `questionnaire_answers` است. Redis فقط cache قابل حذف و قابل بازسازی است؛ پاسخ‌ها یا شناسهٔ session نباید در key/log/metric آشکار شوند و خرابی/خالی‌شدن Redis نباید پاسخ معتبر را از بین ببرد.
+`Redis` یک datastore رابطه‌ای نیست و بنابراین موجودیت مستقلی در ERD 3NF ندارد. منبع حقیقتِ پاسخ‌های معتبر و sessionهای هنوز‌منقضی‌نشده، سه جدول نرمال‌شدهٔ PostgreSQL یعنی `questionnaire_sessions`، `questionnaire_answers` و `questionnaire_flow_answers` است. جدول `questionnaire_flow_answers` فقط دو پاسخ ورودی غیرامتیازی را تا انقضای همان نشست نگه می‌دارد و در scoring وارد نمی‌شود. Redis فقط cache قابل حذف و قابل بازسازی است؛ پاسخ‌ها یا شناسهٔ session نباید در key/log/metric آشکار شوند و خرابی/خالی‌شدن Redis نباید پاسخ معتبر را از بین ببرد.
 
 هر migration که رابطه، constraint یا ستون این دو جدول را تغییر دهد، باید همین ERD، `physical-schema-3nf.md`، data dictionary و تست schema را در همان PR به‌روزرسانی کند. این یک gate اجباری برای `US-07.T06` و تغییرهای بعدی مدل داده است.
 

@@ -66,6 +66,10 @@ Bearer تنها جای cookie اثبات سازندهٔ پرسشنامه را ن
 
 شناسهٔ گزینه‌ها و متن مرجع در [questionnaire-configuration.v1.json](../../data/contracts/questionnaire-configuration.v1.json) است: `Q1..Q6,S7,S8,S10,S13`. برای هر سؤال یک `answerId` متعلق به همان سؤال انتخاب کنید؛ مثال Q1: `Q1.incomeInvestment`. route عمومی configuration در کد فعلی وجود ندارد؛ endpoint فرضی نسازید. سؤال‌های مالی نمایشیِ دو صفحهٔ نخست ورودی جدید API توصیه نیستند.
 
+### آزمون دو route افزوده‌شده در PR #180
+
+پس از ساخت نشست، در همان cookie jar، `GET /api/v1/questionnaire/sessions/current` باید تازه‌ترین نشست دارای proof معتبر را برگرداند یا در نبود آن `null` بدهد؛ پاسخ `no-store` است. پیش از پاسخ‌های scoring، دو درخواست `PUT /api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}` را به‌ترتیب برای `loan_type` و `entity_type` با `answerId` معتبر همان گام بفرستید. گام جلوتر نباید پیش از گام قبلی پذیرفته شود؛ این پاسخ‌ها وارد scoring نمی‌شوند.
+
 ## اشتراک و اثبات نهایی
 
 فقط لینک HTTPS **محدود** را با مالک و تست‌کنندهٔ دوم مجاز به اشتراک بگذارید. اجازهٔ دیدن مستندات، مجوز تغییر پروفایل یا history شخص دیگر نیست. راه‌اندازی مطابق [runbook محیط تست](../runbook/api-testing.md)، با PostgreSQL مستقل و دادهٔ رسمی تأییدشده انجام می‌شود.

@@ -14,7 +14,7 @@
 | مرز | جدول‌ها |
 | --- | --- |
 | کاتالوگ و serving | `lenders`، `loan_products`، `loan_product_versions`، `loan_terms`، `loan_variables`، `variable_categories`، `loan_category_assignments`، `loan_conditions`، `loan_serving_facts`، `serving_catalogue_versions`، `serving_catalogue_members` |
-| پرسشنامه و config | `questionnaire_versions`، `questions`، `answer_options`، `recommendation_config_versions`، `question_variable_weights`، `answer_option_weights`، `answer_category_compatibilities`، `questionnaire_sessions`، `questionnaire_answers` |
+| پرسشنامه و config | `questionnaire_versions`، `questions`، `answer_options`، `recommendation_config_versions`، `question_variable_weights`، `answer_option_weights`، `answer_category_compatibilities`، `questionnaire_sessions`، `questionnaire_answers`، `questionnaire_flow_answers` |
 | حساب و snapshot | `accounts`، `user_profiles`، `account_access_sessions`، `account_otp_challenges`، `account_otp_quota_events`، `recommendation_history_runs`، `recommendation_history_items`، `recommendation_history_item_reasons`، `account_bookmarks` |
 | ورودی و عملیات | `data_import_runs`، `data_source_files`، `operations_imports`، `operations_versions`، `audit_events`، `operations_workflow_head` |
 
