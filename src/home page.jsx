@@ -1,5 +1,6 @@
 import ContactPage from "./features/contact/ContactPage.jsx";
 import { showSystemMessage } from "./shared/systemMessages.mjs";
+import warningIconUrl from "../assets/system-message-warning.svg";
 import contactIconUrl from "../assets/call-calling.svg";
 import AboutPage from "./features/about/AboutPage.jsx";
 import { readAccountProfileCache, writeAccountProfileCache, readPersonalInfoCache, writePersonalInfoCache, synchronizeAccountTabs, readRecommendationCache, writeRecommendationCache } from "./features/account/accountBrowserState.mjs";
@@ -885,12 +886,12 @@ function LoanCompareScreen({ result, status = "ready", onBack, onMenu, onHome, o
     <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""} ${selectedCount > 0 ? "has-bottom-bar" : ""}`} dir="rtl">
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
-        <span>!</span>
+        <img className="hp-compare-warning-icon" src={warningIconUrl} alt="" />
         <p>{isCompareMode ? "حداکثر ۱۰ وام واقعی را برای مقایسه انتخاب کنید." : "روش اقدام رسمی فقط پس از تأیید provider نمایش داده می‌شود."}</p>
       </div>
       {!isCompareMode ? (
         <div className="hp-compare-info">
-          <span>!</span>
+          <img className="hp-compare-warning-icon" src={warningIconUrl} alt="" />
           <p>در دادهٔ serving فعلی، روش اقدام یا provider رسمی ثبت نشده است؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
         </div>
       ) : null}
@@ -2875,7 +2876,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
                   {index === 0 && question.warning ? (
                     <div className="hp-question-warning">
-                      <span className="hp-question-warning-icon" aria-hidden="true">!</span>
+                      <img className="hp-question-warning-icon" src={warningIconUrl} alt="" />
                       <p>{toPersianDigits(question.warning)}</p>
                     </div>
                   ) : null}
@@ -2944,6 +2945,7 @@ function Hero({ onStartQuestionnaire }) {
 
       {showEligibilityNotice ? (
         <div className="hp-eligibility-message" role="status" aria-live="polite">
+          <img className="hp-eligibility-message-icon" src={warningIconUrl} alt="" />
           <p>
             برای پیشنهاد بهترین وام‌ها متناسب با شرایط و ترجیحات شما لازم است در ابتدا
             به تعدادی پرسش پاسخ دهید.
