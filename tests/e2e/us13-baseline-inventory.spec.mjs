@@ -16,6 +16,7 @@ const frozenThemeNormalization = `
   .shahab-system-message-viewport { display: none !important; }
   .hp-page .hp-hero .hp-eligibility-message { background: #ffffff !important; }
   .hp-page .hp-hero .hp-eligibility-message::before { content: none !important; }
+  .hp-eligibility-message-icon { display: none !important; }
   .hp-page .hp-hero .hp-eligibility-message p { color: #000000 !important; }
   .hp-page .hp-hero .hp-eligibility-message button:not(:disabled) {
     border-color: #ffffff !important;
