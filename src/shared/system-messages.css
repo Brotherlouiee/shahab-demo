@@ -346,18 +346,28 @@ button.submit-button,
   text-align: right;
 }
 
-/* The home eligibility alert stacks its warning icon above the message text. */
+/* The warning icon sits at the RTL start; its message begins beside it. */
 .hp-page .hp-hero .hp-eligibility-message {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: block;
   direction: rtl;
 }
 
 .hp-page .hp-hero .hp-eligibility-message-icon {
   position: static;
-  align-self: flex-start;
-  margin: 0 0 12px;
+  display: block;
+  float: right;
+  width: 24px;
+  height: 22px;
+  margin: 2px 0 0 10px;
+}
+
+.hp-page .hp-hero .hp-eligibility-message p {
+  text-align: right;
+}
+
+.hp-page .hp-hero .hp-eligibility-message button {
+  display: block;
+  clear: both;
 }
 
 /* Reserve a clear gap between inline warning icons and their RTL text. */
