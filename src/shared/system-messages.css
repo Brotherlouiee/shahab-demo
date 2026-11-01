@@ -231,3 +231,106 @@ button.submit-button,
 .hp-loan-details-state[role="alert"] p {
   color: var(--shahab-error) !important;
 }
+
+
+/* Match the supplied status SVGs in all existing inline feedback. */
+.hp-page .hp-hero .hp-eligibility-message p {
+  color: var(--shahab-warning) !important;
+}
+
+.hp-eligibility-message::before {
+  content: none !important;
+}
+
+.hp-eligibility-message-icon {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: block;
+  width: 24px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.hp-question-warning-icon,
+.hp-compare-warning-icon {
+  display: block;
+  flex: 0 0 24px;
+  width: 24px !important;
+  height: 22px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  object-fit: contain;
+}
+
+.hp-question-warning-icon {
+  top: 9px;
+  right: 8px;
+}
+
+.hp-compare-warning,
+.hp-compare-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  direction: rtl;
+}
+
+.hp-compare-warning > p,
+.hp-compare-info > p {
+  flex: 1;
+  min-width: 0;
+}
+
+.hp-login-form p[role="alert"]::before,
+.hp-otp-form p[role="alert"]::before,
+.hp-account-page p[role="alert"]::before,
+.hp-question-session-error::before,
+.hp-recommendation-result-state[role="alert"]::before,
+.hp-loan-otp-error::before,
+.hp-personal-field-error::before,
+.hp-loan-details-state[role="alert"]::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  margin-inline-end: 8px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: url("../../assets/system-message-error.svg") center / contain no-repeat;
+  vertical-align: middle;
+}
+
+.hp-account-page p[role="status"],
+.hp-loan-save-toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hp-account-page p[role="status"]::before,
+.hp-loan-save-toast::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  background: url("../../assets/system-message-success.svg") center / contain no-repeat;
+}
+
+.hp-recommendation-result-state[role="status"]::before,
+.hp-recommendation-result-state:not([role])::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 22px;
+  margin-inline-end: 8px;
+  background: url("../../assets/system-message-warning.svg") center / contain no-repeat;
+  vertical-align: middle;
+}
