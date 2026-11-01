@@ -96,6 +96,7 @@ button.shahab-system-message__dismiss {
 }
 
 /* Green primary actions use the approved brand green; disabled states stay gray. */
+.hp-page .hp-step-dot.is-done,
 .hp-page .hp-hero .hp-eligibility-message button:not(:disabled),
 .hp-page .hp-logout-no:not(:disabled),
 .hp-page .hp-next-question:not(:disabled),
