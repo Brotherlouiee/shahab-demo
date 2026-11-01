@@ -1,4 +1,6 @@
 import ContactPage from "./features/contact/ContactPage.jsx";
+import { showSystemMessage } from "./shared/systemMessages.mjs";
+import warningIconUrl from "../assets/system-message-warning.svg";
 import contactIconUrl from "../assets/call-calling.svg";
 import AboutPage from "./features/about/AboutPage.jsx";
 import { readAccountProfileCache, writeAccountProfileCache, readPersonalInfoCache, writePersonalInfoCache, synchronizeAccountTabs, readRecommendationCache, writeRecommendationCache } from "./features/account/accountBrowserState.mjs";
@@ -884,12 +886,12 @@ function LoanCompareScreen({ result, status = "ready", onBack, onMenu, onHome, o
     <main className={`hp-questionnaire-page hp-loan-compare-page ${isCompareMode ? "is-simple-compare" : ""} ${selectedCount > 0 ? "has-bottom-bar" : ""}`} dir="rtl">
       <QuestionnaireHeader onBack={onBack} onMenu={onMenu} onHome={onHome} />
       <div className="hp-compare-warning">
-        <span>!</span>
+        <img className="hp-compare-warning-icon" src={warningIconUrl} alt="" />
         <p>{isCompareMode ? "حداکثر ۱۰ وام واقعی را برای مقایسه انتخاب کنید." : "روش اقدام رسمی فقط پس از تأیید provider نمایش داده می‌شود."}</p>
       </div>
       {!isCompareMode ? (
         <div className="hp-compare-info">
-          <span>!</span>
+          <img className="hp-compare-warning-icon" src={warningIconUrl} alt="" />
           <p>در دادهٔ serving فعلی، روش اقدام یا provider رسمی ثبت نشده است؛ این صفحه پرداخت یا ثبت موفقیت را شبیه‌سازی نمی‌کند.</p>
         </div>
       ) : null}
@@ -2874,7 +2876,7 @@ function QuestionnaireScreen({ onBack, onMenu, onAccountCreated, onHome, onSaved
 
                   {index === 0 && question.warning ? (
                     <div className="hp-question-warning">
-                      <span className="hp-question-warning-icon" aria-hidden="true">!</span>
+                      <img className="hp-question-warning-icon" src={warningIconUrl} alt="" />
                       <p>{toPersianDigits(question.warning)}</p>
                     </div>
                   ) : null}
@@ -2943,6 +2945,7 @@ function Hero({ onStartQuestionnaire }) {
 
       {showEligibilityNotice ? (
         <div className="hp-eligibility-message" role="status" aria-live="polite">
+          <img className="hp-eligibility-message-icon" src={warningIconUrl} alt="" />
           <p>
             برای پیشنهاد بهترین وام‌ها متناسب با شرایط و ترجیحات شما لازم است در ابتدا
             به تعدادی پرسش پاسخ دهید.
@@ -3186,7 +3189,7 @@ function AccountPage({ profile, onSave, onBack }) {
       .catch((error) => { if (isCurrent) setProfileError(error.message); });
     return () => { isCurrent = false; };
   }, [profile.phone]);
-  function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
+  function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { showSystemMessage("warning", "حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
   return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><form className="hp-account-profile-form" onSubmit={submitProfile}><label><span>شماره تلفن همراه</span><input value={displayPersianPhone(draft.phone)} disabled /></label><label><span>نام</span><input value={draft.firstName || ""} onChange={(event) => update("firstName", sanitizePersianName(event.target.value))} /></label><label><span>نام خانوادگی</span><input value={draft.lastName || ""} onChange={(event) => update("lastName", sanitizePersianName(event.target.value))} /></label><ProfileDropdown label="میزان درآمد ماهانه" value={draft.income} options={incomeOptions} onChange={(value) => update("income", value)} /><ProfileDropdown label="شغل" value={draft.job} options={jobOptions} onChange={(value) => update("job", value)} /><ProfileDropdown label="جنسیت" value={draft.gender} options={genderOptions} onChange={(value) => update("gender", value)} /><button type="submit" className="hp-account-save" disabled={isSaving}>ذخیره تغییرات</button>{profileError ? <p role="alert">{profileError}</p> : null}{saveSucceeded ? <p role="status">تغییرات ذخیره شد.</p> : null}</form></main>;
 }
 
@@ -3364,7 +3367,7 @@ export default function HomePage() {
 
   function handleLogout() {
     // Failed revoke stays pending, preventing cookie restoration on refresh.
-    void logoutProfile().catch(() => window.alert("خروج در سرور تأیید نشد. اتصال را بررسی کنید و دوباره تلاش کنید."));
+    void logoutProfile().catch(() => showSystemMessage("error", "خروج در سرور تأیید نشد. اتصال را بررسی کنید و دوباره تلاش کنید."));
   }
 
   function handleSidebarNavigate(destination) {
