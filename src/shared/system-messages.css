@@ -84,6 +84,7 @@ button.shahab-system-message__dismiss {
 .hp-recommendation-result-state[role="alert"] p { color: var(--shahab-error) !important; }
 
 .hp-eligibility-message {
+  position: relative;
   background: var(--shahab-charcoal) !important;
 }
 .hp-eligibility-message p { color: var(--shahab-warning) !important; }
@@ -142,6 +143,10 @@ button.submit-button,
 }
 
 .hp-eligibility-message::before {
+  position: absolute;
+  top: 5px;
+  right: 14px;
+  margin: 0;
   content: "⚠";
   display: block;
   margin: 0 auto 8px;
