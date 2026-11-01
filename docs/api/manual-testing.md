@@ -51,6 +51,7 @@ python -m scripts.export_api_docs --check
 | ۵ | GET `/api/v1/account-access/session` و GET `/api/v1/profiles/me` | بازیابی حساب و پروفایل همان شخص |
 | ۶ | PUT `/api/v1/profiles` با phone همان حساب و فیلدهای مجاز؛ سپس GET `/me` | تغییر فقط حساب خود و بازخوانی مقدار ثبت‌شده؛ phone حساب دیگر 403 |
 | ۷ | POST `/api/v1/questionnaire/sessions` بدون body | 201، `sessionId` و cookie اثبات سازنده |
+| ۸ | PUT `/api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}` با `answerId`؛ دو بار به‌ترتیب `loan_type` و `entity_type` | پاسخ هر دو گام با 200؛ گام جلوتر پیش از قبلی پذیرفته نمی‌شود |
 | ۸ | PUT `/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}` با `answerId` | برای هر ده سؤال یک گزینهٔ canonical؛ 200 |
 | ۹ | GET `/api/v1/questionnaire/sessions/{session_id}` | ده پاسخ همان نشست؛ برای انقضای واقعی 410 |
 | ۱۰ | POST `/api/v1/recommendations` فقط با `sessionId` | 200؛ سه مجموعهٔ واقعی سروری، data/config version؛ نقص ورودی 422 و نبود serving معتبر 503 |
@@ -74,7 +75,7 @@ Bearer تنها جای cookie اثبات سازندهٔ پرسشنامه را ن
 
 فقط لینک HTTPS **محدود** را با مالک و تست‌کنندهٔ دوم مجاز به اشتراک بگذارید. اجازهٔ دیدن مستندات، مجوز تغییر پروفایل یا history شخص دیگر نیست. راه‌اندازی مطابق [runbook محیط تست](../runbook/api-testing.md)، با PostgreSQL مستقل و دادهٔ رسمی تأییدشده انجام می‌شود.
 
-روی همان URL، وضعیت هر یک از ۱۹ عملیات، SHA runtime، data/config version و بازخوانی persistence را ثبت کنید. فقط status و نام عملیات را در شواهد مشترک نگه دارید؛ مقادیر خصوصی، token، phone و answers حذف شوند. تا همهٔ عملیات مربوط، مالک و تست‌کنندهٔ دوم، cookie/proxy/TLS و خطاهای مالکیت در محیط آنلاین اثبات نشوند، T081 **Done نیست**.
+روی همان URL، وضعیت هر یک از ۲۱ عملیات، SHA runtime، data/config version و بازخوانی persistence را ثبت کنید. فقط status و نام عملیات را در شواهد مشترک نگه دارید؛ مقادیر خصوصی، token، phone و answers حذف شوند. تا همهٔ عملیات مربوط، مالک و تست‌کنندهٔ دوم، cookie/proxy/TLS و خطاهای مالکیت در محیط آنلاین اثبات نشوند، T081 **Done نیست**.
 
 ## مرز OTP واقعی
 
