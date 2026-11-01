@@ -234,6 +234,8 @@ button.submit-button,
 
 
 /* Match the supplied status SVGs in all existing inline feedback. */
+.hp-page .hp-hero .hp-eligibility-message { position: relative; }
+
 .hp-page .hp-hero .hp-eligibility-message p {
   color: var(--shahab-warning) !important;
 }
