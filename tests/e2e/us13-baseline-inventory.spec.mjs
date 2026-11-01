@@ -14,9 +14,26 @@ test.skip(!reference, "US-13 baseline collector runs only with the independent r
 // pre-change route geometry, text, interactions, and remaining presentation.
 const frozenThemeNormalization = `
   .shahab-system-message-viewport { display: none !important; }
-  .hp-page .hp-hero .hp-eligibility-message { display: block !important; flex-direction: row !important; align-items: normal !important; background: #ffffff !important; }
+  .hp-page .hp-hero .hp-eligibility-message { display: block !important; flex-direction: row !important; align-items: normal !important; gap: normal !important; background: #ffffff !important; }
   .hp-page .hp-hero .hp-eligibility-message::before { content: none !important; }
   .hp-eligibility-message-icon { display: none !important; }
+  @media (max-width: 700px) {
+    .hp-page .hp-hero .hp-eligibility-message { padding: 46px 18px 40px !important; }
+    .hp-page .hp-hero .hp-eligibility-message p {
+      max-width: 326px !important;
+      margin: 0 3px !important;
+      color: #000000 !important;
+      line-height: 1.85 !important;
+      text-align: center !important;
+    }
+    .hp-page .hp-hero .hp-eligibility-message button {
+      display: inline-block !important;
+      width: 80% !important;
+      height: 56px !important;
+      margin: 30px auto 0 !important;
+      clear: none !important;
+    }
+  }
   .hp-page .hp-hero .hp-eligibility-message p { color: #000000 !important; }
   .hp-page .hp-hero .hp-eligibility-message button:not(:disabled) {
     border-color: #ffffff !important;
