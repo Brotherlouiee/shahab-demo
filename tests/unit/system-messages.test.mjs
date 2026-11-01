@@ -23,6 +23,7 @@ test("system feedback and button palette use the approved brand colors", () => {
   assert.match(css, /--shahab-warning:\s*#FFF600/i);
   assert.match(css, /--shahab-error:\s*#FF0000/i);
   assert.match(css, /--shahab-charcoal:\s*#303335/i);
+  assert.match(css, /\.hp-step-dot\.is-done[\s\S]*?background-color:\s*var\(--shahab-success\)/);
   assert.match(css, /\.hp-next-question[\s\S]*?background-color:\s*var\(--shahab-success\)/);
   assert.match(css, /button\.submit-button[\s\S]*?background-color:\s*var\(--shahab-charcoal\)/);
 });
