@@ -14,7 +14,7 @@ test.skip(!reference, "US-13 baseline collector runs only with the independent r
 // pre-change route geometry, text, interactions, and remaining presentation.
 const frozenThemeNormalization = `
   .shahab-system-message-viewport { display: none !important; }
-  .hp-page .hp-hero .hp-eligibility-message { display: block !important; background: #ffffff !important; }
+  .hp-page .hp-hero .hp-eligibility-message { display: block !important; flex-direction: row !important; align-items: normal !important; background: #ffffff !important; }
   .hp-page .hp-hero .hp-eligibility-message::before { content: none !important; }
   .hp-eligibility-message-icon { display: none !important; }
   .hp-page .hp-hero .hp-eligibility-message p { color: #000000 !important; }
