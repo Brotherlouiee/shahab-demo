@@ -710,7 +710,7 @@ Dependency direction is mandatory: `presentation → application → domain`; in
 
 ### Frontend
 
-Current operational code is in `src/`, principally the existing prototype screen and `src/App.css`; assets are in `assets/`. More focused modules added during delivery include:
+کد فرانت‌اند در `src/` و assetها در `assets/` قرار دارند. برخی بخش‌ها به feature moduleهای مستقل منتقل شده‌اند، اما بخشی از جریان‌های صفحه و CSS هنوز مشترک‌اند؛ ریفکتور US-13 همچنان باز است. نمونه‌های ماژول‌های جداشده:
 
 - `src/features/loan-details/`: API client and RTL detail states; no hard-coded detail fallback.
 - `src/features/questionnaire/questionnaireRouteMap.mjs`: the sole route ↔ canonical question ID adapter.
@@ -805,10 +805,10 @@ There is **no ML model currently planned or implemented**. The recommender is a 
 
 ### ADR-08: Public API protection approach
 
-- **Status:** Under discussion; not yet an approved/implemented deployment ADR.
+- **Status:** پیشنهاد تاریخی برای استقرار با Netlify BFF؛ این شرح، معماری production جداگانهٔ v0.1.5 را توصیف نمی‌کند. برای تصمیم فعلی به guide و runbook استقرار مراجعه شود.
 - **Context:** Product owner asked how to make backend public for frontend while preventing direct resource abuse with an API key.
 - **Important security fact:** A key shipped in React/Vite/browser code cannot be secret and cannot secure the backend.
-- **Proposed direction (not yet implemented):** Browser → same-origin Netlify Function/BFF → FastAPI, with service token only in server-side environment variables. Add rate limiting, short-lived anonymous sessions, input validation, HTTPS, narrow CORS, logging and later user auth/session.
+- **Historical proposal:** Browser → same-origin Netlify Function/BFF → FastAPI, with a server-only token. این پیشنهاد را با استقرار production فعلی یکی ندان و برای معماری بعدی بدون بازبینی guide/runbook مبنا قرار نده.
 - **Consequence:** A BFF prevents direct backend access without a service credential, but cannot stop an anonymous public visitor from using the public product flow. Real per-user control requires authentication/authorisation; anti-abuse requires rate limits/CAPTCHA/WAF as appropriate.
 
 ---
@@ -1014,7 +1014,7 @@ No task can be marked Done merely because code compiles. It needs the task-speci
 
 A static SPA cannot keep an API key secret. Any key inserted into a React/Vite browser bundle can be inspected and reused. Do not represent a browser API key or CORS as access control.
 
-For a future deployment, use a server-side BFF/API proxy token kept only in server/hosting secrets for service-to-service authentication, combined with anonymous short-lived session controls, rate limits and later user authentication. This direction remains pending implementation/ADR approval (ADR-08).
+این پاراگراف اصل امنیتی API key را تثبیت می‌کند، نه انتخاب معماری جاری. در deployment با SPA و backend جدا، روش دسترسی، authentication و کنترل abuse باید طبق راهنمای جامع و runbook همان محیط تعیین شود؛ پیشنهاد قدیمی Netlify BFF در ADR-08 به‌تنهایی تصمیم مصوب یا وضعیت production نیست.
 
 ---
 
@@ -1077,7 +1077,7 @@ Beyond server/domain, production readiness requires:
 | US-07.T01 / PR #27 | Versioned canonical config: 10 questions, 50 answers | Stable questionnaire identity independent of UI | Later routes/session/engine use canonical IDs. |
 | US-07.T02 / PR #28 | Exact route adapter; `/question/12 → S13` | Existing prototype index caused redirect/off-by-one defect | Public routes retained; indexes cannot become answer IDs. |
 | Deployment discussion | پیشنهاد تاریخی Netlify-only/BFF؛ بعدتر v0.1.5 روی production جداگانه مستقر شد | فرانت‌اند Netlify به‌تنهایی میزبان FastAPI/PostgreSQL نیست | وضعیت انتشار را از بخش ۰ و runbook جاری بخوان؛ این ردیف سابقهٔ بحث اولیه است. |
-| API protection discussion | Browser API key is not a secret; use server-side BFF token + abuse controls | Keys in client bundle are extractable | Pending deployment ADR/implementation. |
+| API protection discussion | کلید داخل bundle مرورگر secret نیست؛ پیشنهاد Netlify BFF مربوط به بحث تاریخی است | کلیدهای client قابل استخراج‌اند | معماری production و کنترل‌های فعال را از اسناد عملیات جاری بخوان؛ این ردیف تصمیم جاری دربارهٔ topology نیست. |
 
 ---
 
