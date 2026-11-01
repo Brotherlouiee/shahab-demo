@@ -1024,7 +1024,7 @@ A static SPA cannot keep an API key secret. Any key inserted into a React/Vite b
 
 | Environment | وضعیت ثبت‌شده در handoff ۲۰۲۶-۱۱-۰۱ | مرز پذیرش |
 |---|---|---|
-| Local | Docker Compose برای frontend، FastAPI و PostgreSQL؛ وضعیت localhost باید در همان روز تأیید شود. | مشاهدهٔ محلی به‌تنهایی منبع وضعیت repository یا production نیست؛ volume بدون runbook پاک نشود. |
+| Local | Docker Compose توسعه برای frontend، FastAPI و PostgreSQL. | آزمون را روی SHA و محیط ثبت‌شده اجرا کن؛ volume بدون runbook پاک نشود. |
 | CI | چهار workflow کیفیت، امنیت، baseline فرانت‌اند و ساخت کانتینر فعال‌اند. | نتیجه فقط برای همان SHA معتبر است؛ هر CI تازه باید روی commit جاری خوانده شود. |
 | Preview/staging | پذیرش آنلاین کامل T081/T07 در اسناد جاری باز است. | URL واقعی، PostgreSQL پایدار، smoke و rollback با شواهد لازم‌اند. |
 | Production | نسخهٔ v0.1.5 مستقر و آخرین deployment ثبت‌شده است. | پی‌آرهای ۱۷۷–۱۸۸ و تغییرات بعدی مستقرشده فرض نشوند؛ پذیرش نهایی US-12 و rollback کامل باز است. |
