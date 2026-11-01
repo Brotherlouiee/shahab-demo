@@ -120,3 +120,37 @@ button.submit-button,
   border-color: var(--shahab-charcoal) !important;
   background-color: var(--shahab-charcoal) !important;
 }
+
+/* Give inline success and error messages the same clear status mark as the toast. */
+.hp-login-form p[role="alert"]::before,
+.hp-otp-form p[role="alert"]::before,
+.hp-account-page p[role="alert"]::before,
+.hp-question-session-error::before,
+.hp-recommendation-result-state[role="alert"]::before {
+  content: "×";
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  margin-inline-end: 7px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.hp-eligibility-message::before {
+  content: "⚠";
+  display: block;
+  margin: 0 auto 8px;
+  color: var(--shahab-warning);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.hp-account-page p[role="status"]::before {
+  content: "✓";
+  margin-inline-end: 7px;
+  font-weight: 900;
+}
