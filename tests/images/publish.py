@@ -152,21 +152,24 @@ class Registry:
         return digest(manifest)
 
 
-def validate_environment(info, branches, owner):
+def validate_environment(info, branches, owner, event_name=None, actor=None):
+    reviewer_rules = [
+        rule for rule in info.get("protection_rules", []) if rule.get("type") == "required_reviewers"
+    ]
     reviewers = [
         reviewer.get("reviewer", {}).get("login", "").lower()
-        for rule in info.get("protection_rules", [])
-        if rule.get("type") == "required_reviewers"
+        for rule in reviewer_rules
         for reviewer in rule.get("reviewers", [])
     ]
     policy = info.get("deployment_branch_policy") or {}
     names = [(b.get("name"), b.get("type")) for b in branches.get("branch_policies", [])]
-    if (
-        reviewers != [owner.lower()]
-        or policy.get("custom_branch_policies") is not True
-        or names != [("main", "branch")]
-    ):
-        raise ValueError("Environment must require the repository owner and allow only the main branch")
+    owner_dispatch = event_name == "workflow_dispatch" and (actor or "").lower() == owner.lower()
+    approval_valid = reviewers == [owner.lower()] if reviewer_rules else owner_dispatch
+    if not approval_valid or policy.get("custom_branch_policies") is not True or names != [("main", "branch")]:
+        raise ValueError(
+            "Environment must require the repository owner, or allow only an owner workflow_dispatch, "
+            "and allow only the main branch"
+        )
 
 
 def validate_review(review, sha, reports, owner, now):
@@ -296,7 +299,13 @@ def main():
         raise ValueError("Docker Hub namespace has not been configured")
     repo, owner = os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_REPOSITORY_OWNER"]
     prefix = "repos/" + repo + "/environments/dockerhub-publish"
-    validate_environment(api(prefix)[0], api(prefix + "/deployment-branch-policies")[0], owner)
+    validate_environment(
+        api(prefix)[0],
+        api(prefix + "/deployment-branch-policies")[0],
+        owner,
+        os.environ["GITHUB_EVENT_NAME"],
+        os.environ["GITHUB_ACTOR"],
+    )
     folder = Path("test-results")
     journal = {
         "sourceSha": sha,
