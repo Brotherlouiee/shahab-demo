@@ -26,3 +26,13 @@ test("system feedback and button palette use the approved brand colors", () => {
   assert.match(css, /\.hp-next-question[\s\S]*?background-color:\s*var\(--shahab-success\)/);
   assert.match(css, /button\.submit-button[\s\S]*?background-color:\s*var\(--shahab-charcoal\)/);
 });
+
+test("all inline warning and field-error messages use their typed palette", () => {
+  const css = readFileSync(new URL("../../src/shared/system-messages.css", import.meta.url), "utf8");
+  for (const selector of [".hp-loan-otp-error", ".hp-personal-field-error"]) {
+    assert.match(css, new RegExp(selector.replaceAll(".", "\\\\.") + "[\\s\\S]*?color:\\s*var\\(--shahab-error\\)"));
+  }
+  for (const selector of [".hp-question-warning", ".hp-compare-warning", ".hp-compare-info"]) {
+    assert.match(css, new RegExp(selector.replaceAll(".", "\\\\.") + "[\\s\\S]*?color:\\s*var\\(--shahab-warning\\)"));
+  }
+});

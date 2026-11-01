@@ -154,3 +154,38 @@ button.submit-button,
   margin-inline-end: 7px;
   font-weight: 900;
 }
+
+/* Apply the same typed palette to the remaining inline application feedback. */
+.hp-loan-otp-error,
+.hp-personal-field-error {
+  display: inline-block;
+  border-radius: 6px;
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-error) !important;
+  padding: 3px 8px;
+}
+
+.hp-question-warning,
+.hp-compare-warning,
+.hp-compare-info {
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-warning) !important;
+}
+
+.hp-question-warning p,
+.hp-compare-warning p,
+.hp-compare-info p {
+  color: var(--shahab-warning) !important;
+}
+
+.hp-question-warning-icon,
+.hp-compare-warning span,
+.hp-compare-info span {
+  background: transparent !important;
+  color: var(--shahab-warning) !important;
+}
+
+/* These inline warnings already render an icon; keep it visible on charcoal. */
+.hp-question-warning-icon {
+  border: 1px solid var(--shahab-warning);
+}
