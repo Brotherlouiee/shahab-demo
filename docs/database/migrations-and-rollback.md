@@ -19,6 +19,13 @@
 - تست integration از متغیر جداگانهٔ `SHAHAB_TEST_DATABASE_URL` استفاده می‌کند و هم upgrade روی database خالی، هم نوشتن fixture نماینده و هم downgrade کامل را می‌سنجد.
 - CI یک PostgreSQL 16 موقت ایجاد می‌کند؛ credential آن صرفاً test credential است و هیچ secret عملیاتی در workflow یا log قرار نمی‌گیرد.
 
+### ماندگاری و ترتیب گام‌های ورودی پرسشنامه
+
+- migration `a17d9c4e6b20` پس از `ff11b02f0001` جدول افزایشی `questionnaire_flow_answers` را برای پاسخ دو گام آغازینِ غیرامتیازی می‌سازد؛ دادهٔ قبلی backfill یا حذف نمی‌شود.
+- هر سطر به نشست موقت تعلق دارد و با حذف نشست cascade می‌شود. پاسخ‌های این جدول وارد scoring نمی‌شوند و با انقضای نشست پاک‌سازی می‌شوند.
+- downgrade جدول تازه و پاسخ‌های دو گام ورودی را حذف می‌کند؛ پاسخ‌های اصلی `questionnaire_answers` و دادهٔ کاربر از این جدول حذف نمی‌شوند. پیش از downgrade در محیط زنده، نویسنده‌ها متوقف و backup طبق روال تهیه شود.
+- ارتقا و downgrade باید روی PostgreSQL موقت آزموده شوند؛ SQLite یا تست واحد به‌تنهایی شاهد migration نیست.
+
 ## مسیر امن expand/contract
 
 1. migration **expand** سازگار: جدول/column/index جدید nullable یا با default امن ایجاد کن.

@@ -10,7 +10,8 @@ The questionnaire currently has a 30-minute anonymous-session policy and resumes
 
 ## Decision
 
-- PostgreSQL is the durable, normalized source of truth for `questionnaire_sessions` and `questionnaire_answers`.
+- PostgreSQL is the durable, normalized source of truth for `questionnaire_sessions`, `questionnaire_answers`, and `questionnaire_flow_answers`.
+- `questionnaire_flow_answers` stores the two required, non-scoring entry-step identifiers under the same session proof and expiry; these answers never enter recommendation scoring.
 - Redis is an optional-but-required-at-deploy cache for active anonymous sessions. It reduces repeated database reads but never becomes the only copy of an answer.
 - Every write persists to PostgreSQL first (or atomically with an explicit failure strategy); Redis is updated/invalidated only after that persistence succeeds.
 - Cache miss, eviction, restart or Redis outage falls back safely to PostgreSQL. The application must remain correct, though potentially slower, while Redis is unavailable.

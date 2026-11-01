@@ -6,7 +6,7 @@
 
 > وضعیت تازهٔ ۲۰۲۶-۱۰-۲۱: [ممیزی production](../progress/us-09-t081-online-audit-2026-10-21.md) چند پاسخ خواندنی و منفی را ثبت کرده و [آمادگی محیط محدود](../progress/us-09-t081-restricted-environment-readiness-2026-10-21.md) ظرفیت و موانع را روشن کرده است. ستون «نتیجهٔ آنلاین» در جدول زیر مختص محیط **test محدود هدف T081** است؛ چون آن محیط هنوز provision نشده، هیچ‌یک از ۱۹ عملیات در آن پاس نشده‌اند.
 
-مبنای این بازبینی: `main=f5711e78df58366b65c7f00e29fa484ea5fb0b85`، ۱۹ عملیات در routerها، OpenAPI و Postman. **همهٔ شواهد آنلاین هنوز اجرا نشده‌اند**؛ وجود schema یا تست قرارداد، شاهد HTTPS/PostgreSQL آنلاین نیست.
+مبنای موجودی جاری: ۲۱ عملیات در routerها، OpenAPI و Postman؛ شواهد تاریخ‌دار آنلاین در بخش‌های پایین حفظ شده‌اند. **همهٔ شواهد آنلاین هنوز اجرا نشده‌اند**؛ وجود schema یا تست قرارداد، شاهد HTTPS/PostgreSQL آنلاین نیست.
 
 | method | مسیر | دسترسی/وابستگی جاری | OpenAPI/Postman | نتیجهٔ آنلاین |
 | --- | --- | --- | --- | --- |
@@ -23,14 +23,16 @@
 | PUT | `/api/v1/profiles` | حساب فعال خود؛ phone برابر actor، persistence DB | بله | اجرا نشده |
 | GET | `/api/v1/profiles/me` | حساب فعال خود؛ persistence DB | بله | اجرا نشده |
 | POST | `/api/v1/questionnaire/sessions` | ساخت نشست موقت در DB و cookie تصادفی سازنده | بله | اجرا نشده |
+| GET | `/api/v1/questionnaire/sessions/current` | بازیابی تازه‌ترین نشست دارای proof معتبر همان مرورگر؛ DB | بله | اجرا نشده |
 | GET | `/api/v1/questionnaire/sessions/{session_id}` | proof سازنده؛ اگر bound است همان حساب فعال؛ DB | بله | اجرا نشده |
 | PUT | `/api/v1/questionnaire/sessions/{session_id}/answers/{question_id}` | proof سازنده؛ اگر bound است همان حساب فعال؛ DB | بله | اجرا نشده |
+| PUT | `/api/v1/questionnaire/sessions/{session_id}/flow-answers/{step_id}` | proof سازنده؛ ذخیرهٔ دو گام ورودی غیرامتیازی و کنترل ترتیب؛ DB | بله | اجرا نشده |
 | GET | `/api/v1/recommendation-history` | حساب فعال خود؛ snapshot در DB و keyset pagination | بله | اجرا نشده |
 | DELETE | `/api/v1/recommendation-history/{history_id}` | حساب فعال صاحب snapshot؛ DB؛ DELETE فقط hide | بله | اجرا نشده |
 | GET | `/api/v1/recommendation-history/{history_id}` | حساب فعال صاحب snapshot؛ DB؛ DELETE فقط hide | بله | اجرا نشده |
 | POST | `/api/v1/recommendations` | نشست کامل و proof معتبر؛ catalogue/config؛ حساب bound برای history | بله | اجرا نشده |
 
-### شاهد محلی قرارداد ۱۹ عملیات
+### شاهد محلی تاریخی قرارداد ۱۹ عملیات (پیش از دو مسیر بازیابی/گام ورودی)
 
 | عملیات | Docker/API روی loopback | fixture محافظت‌شده روی PostgreSQL موقت |
 | --- | --- | --- |
@@ -66,4 +68,4 @@
 
 تست‌های موجود `backend/tests/test_api_documentation.py` پوشش مستقل decoratorها، یکتایی operationId، drift چهار artifact و سیاست docs/auth را می‌سنجند. نتیجهٔ اجرای این نوبت در [ممیزی](../release/us-12-t01-documentation-audit.md) است؛ شواهد قدیمی SDK/Newman یا CI به revision جدید تعمیم داده نمی‌شوند.
 
-طبق [runbook](../runbook/api-testing.md)، برای هر ۱۹ عملیات status واقعی و SHA runtime/data/config و بازخوانی persistence ثبت شود. حساب دوم در context جدا، proof، انقضا، خروج، profile/history و save/list/remove نشان‌شده‌ها بررسی شوند. فقط status و نام عملیات در گزارش مشترک باشد؛ token/cookie/phone/answers و ID خصوصی ثبت نشوند. T081 تا شواهد واقعی محیط خودش باز است.
+طبق [runbook](../runbook/api-testing.md)، برای هر ۲۱ عملیات status واقعی و SHA runtime/data/config و بازخوانی persistence ثبت شود. حساب دوم در context جدا، proof، انقضا، خروج، profile/history و save/list/remove نشان‌شده‌ها بررسی شوند. فقط status و نام عملیات در گزارش مشترک باشد؛ token/cookie/phone/answers و ID خصوصی ثبت نشوند. T081 تا شواهد واقعی محیط خودش باز است.

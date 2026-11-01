@@ -1,5 +1,8 @@
 # Changelog
 
+- اسناد موکول‌شدهٔ PRهای #180، #183 و #184 به مخزن خصوصی افزوده شدند؛ ماتریس API با ۲۱ عملیات جاری و مسیرهای ذخیره/بازیابی گام‌های پرسشنامه هم‌راستا شد. گزارش‌های حریم خصوصی/Clarity و بهینه‌سازی خانه با وضعیت واقعی ادغام و محدودیت شواهد ثبت شدند. [گزارش #180](docs/progress/us-11-questionnaire-order-guard.md)، [بازبینی حریم خصوصی #183](docs/security/privacy-retention-review.md)، [گزارش #184](docs/progress/us-13-homepage-image-question-performance.md)
+
+
 - آزمون characterization خط مبنای Hero برای انتخاب مبلغ، focus/blur، پیام eligibility و ناوبری افزوده شد؛ نتیجهٔ pixel/behavior/network روی baseline منجمد با CI بررسی می‌شود. هیچ تغییر محصولی انجام نشد. [checkpoint](docs/progress/us-13-t01.md)
 
 - اصلاح فاصلهٔ افقی لوگو و فلش بازگشت در هدر صفحهٔ جزئیات سوابق؛ آزمون مرورگری برای viewportهای موبایل و دسکتاپ افزوده شد. [جزئیات](tests/e2e/loan-details.spec.mjs)
