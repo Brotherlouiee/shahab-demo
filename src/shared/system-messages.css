@@ -194,3 +194,40 @@ button.submit-button,
 .hp-question-warning-icon {
   border: 1px solid var(--shahab-warning);
 }
+
+
+/* Recommendation and loan-detail states use the same success/info/error types. */
+.hp-recommendation-result-state[role="status"],
+.hp-recommendation-result-state:not([role]) {
+  border-radius: 8px;
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-warning) !important;
+  padding: 9px 12px;
+}
+
+.hp-recommendation-result-state[role="status"] p,
+.hp-recommendation-result-state:not([role]) p {
+  color: var(--shahab-warning) !important;
+}
+
+.hp-recommendation-result-state[role="status"] button {
+  border-color: var(--shahab-charcoal) !important;
+  background-color: var(--shahab-charcoal) !important;
+}
+
+.hp-loan-save-toast {
+  border-radius: 8px;
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-success) !important;
+  padding: 9px 12px;
+}
+
+.hp-loan-details-state[role="alert"] {
+  border-color: var(--shahab-charcoal);
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-error) !important;
+}
+
+.hp-loan-details-state[role="alert"] p {
+  color: var(--shahab-error) !important;
+}
