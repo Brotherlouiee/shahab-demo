@@ -27,7 +27,7 @@
 - workflow `Publish approved images to Docker Hub` ابتدا روی همان source SHA، imageهای API و web را در job کاندیدا می‌سازد، smoke/scan/SBOM و شواهد را تولید می‌کند و بدون credential رجیستری image می‌سازد؛ job نشر، artifact همان اجرا را استفاده می‌کند و rebuild ندارد. انتشار با tag نسخه و `sha-<40-char SHA>` انجام می‌شود؛ هر دو digest و attachment پس‌خوانی و verify می‌شوند. tagها immutable هستند و `latest` ساخته نمی‌شود.
 - چون GitHub در تنظیم فعلی مخزن خصوصی Required reviewers را ارائه نمی‌کند، پی‌آر #191 سیاست جایگزین را ثبت کرده است: اگر reviewer rule وجود ندارد، فقط `workflow_dispatch` آغازشده توسط مالک (`GITHUB_ACTOR=Brotherlouiee`) از `main` مجاز است. اگر rule وجود داشته باشد، باید دقیقاً مالک تنها reviewer باشد. محدودیت branch روی فقط `main` و سایر gateهای هفت‌گانه و شواهد امنیتی باقی‌اند.
 - انتشار واقعی در [اجرای #13](https://github.com/Brotherlouiee/shahab-demo/actions/runs/41343398368) موفق است: head/main=`aa275409f8ca9474f07fc9cf73e8cfefe991608c`، source image=`09c5c872a0fbec91119b253fd9f4b6b2000dcc57`، tag=`v0.1.8`، publication status=`complete`. digest بک‌اند `sha256:50674baeac43dba7cf4f36ac8ee5dcf9e3ff3a1a477a46e15e6fcb8659b18ee0` و فرانت‌اند `sha256:7a2ad8256329918ac05db1205265b2a6e9fe1f2f3f6da3d2492a5c0a31907139` است.
-- workflow نشر فقط Docker Hub را تغییر می‌دهد و خودش deploy نمی‌کند؛ `deployed:false` در artifact به معنی publish-only بودن workflow است، نه خطای انتشار. استقرار VM مرحلهٔ جدا و توسط مالک انجام شد.
+- workflow نشر فقط Docker Hub را تغییر می‌دهد و خودش GitHub Release یا deploy نمی‌کند؛ `deployed:false` در artifact به معنی publish-only بودن workflow است، نه خطای انتشار. پس از انتشار، GitHub Release با عنوان «انتشار نسخهٔ v0.1.8 شهاب» روی تگ موجود `v0.1.8` و همان source SHA ساخته شد؛ [صفحهٔ Release](https://github.com/Brotherlouiee/shahab-demo/releases/tag/v0.1.8). استقرار VM مرحلهٔ جدا و توسط مالک انجام شد.
 
 #### استقرار واقعی روی Arvan VM
 
@@ -1245,8 +1245,8 @@ Beyond server/domain, production readiness requires:
 
 ## ممیزی نسخهٔ ۲۰٫۰ این سند
 
-- افزودهٔ نسخهٔ ۲۰٫۰ وضعیت بعد از merge PR #191، انتشار موفق workflow #13 برای v0.1.8 و استقرار دستی imageهای دارای digest روی Arvan VM را با محدودیت‌های شواهد ثبت می‌کند.
+- افزودهٔ نسخهٔ ۲۰٫۰ وضعیت بعد از merge PR #191، انتشار موفق workflow #13، ساخت GitHub Release `v0.1.8` و استقرار دستی imageهای دارای digest روی Arvan VM را با محدودیت‌های شواهد ثبت می‌کند.
 - روش‌های handoff در نسخهٔ ۲۰٫۰ از فایل `docs/deployment/arvan-vm-deployment.md` و خروجی PowerShell/SSH همان استقرار استخراج شدند؛ هیچ secret، token، کلید خصوصی یا مقدار `.env.prod` ثبت نشده است.
-- انتشار و استقرار از هم تفکیک شده‌اند: run #13 روی Docker Hub publish را کامل کرد؛ اجرای owner روی VM deploy را انجام داد. healthcheck کانتینرها healthy است؛ پاسخ health عمومی در transcript حاضر نیست.
+- انتشار image، انتشار GitHub Release و استقرار از هم تفکیک شده‌اند: run #13 روی Docker Hub publish را کامل کرد؛ Release گیت‌هاب جداگانه روی تگ موجود `v0.1.8` ساخته شد؛ اجرای owner روی VM deploy را انجام داد. healthcheck کانتینرها healthy است؛ پاسخ health عمومی در transcript حاضر نیست.
 - فایل Compose سرور با backup نسخهٔ پیشین تغییر کرده است؛ فایل tracked مخزن هنوز باید در PR جدا با digestهای جاری sync شود. هیچ کد، image، داده یا production config در این PR مستنداتی تغییر نمی‌کند.
 - در این تغییر مستنداتی تست نرم‌افزاری اجرا نشده است؛ CI نهایی باید روی head همین PR خوانده شود.
