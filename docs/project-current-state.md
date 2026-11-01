@@ -2,7 +2,7 @@
 
 > **تاریخ ثبت:** ۲۰۲۶-۱۱-۰۱
 > **main تأییدشده:** `aa275409f8ca9474f07fc9cf73e8cfefe991608c`، merge commit پی‌آر #191.
-> **وضعیت release:** `v0.1.8` از source SHA `09c5c872a0fbec91119b253fd9f4b6b2000dcc57` در [اجرای #13](https://github.com/Brotherlouiee/shahab-demo/actions/runs/41343398368) با `status: complete` منتشر و سپس به درخواست مالک روی Arvan VM مستقر شده است.
+> **وضعیت release:** `v0.1.8` از source SHA `09c5c872a0fbec91119b253fd9f4b6b2000dcc57` در [اجرای #13](https://github.com/Brotherlouiee/shahab-demo/actions/runs/41343398368) با `status: complete` منتشر، در [GitHub Releases](https://github.com/Brotherlouiee/shahab-demo/releases/tag/v0.1.8) ثبت، و سپس به درخواست مالک روی Arvan VM مستقر شده است. Release در ۱ نوامبر ۲۰۲۶ روی تگ موجود ساخته شد؛ workflow انتشار image آن را ایجاد نمی‌کند.
 > **مرجع تفصیلی:** [سند تداوم، بخش ۰، افزودهٔ ۲۰٫۰](PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md). سوابق پایین این فایل snapshot تاریخی ۲۰۲۶-۱۰-۲۵ هستند.
 
 ## وضعیت جاری در ۲۰۲۶-۱۱-۰۱
