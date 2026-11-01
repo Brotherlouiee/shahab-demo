@@ -18,7 +18,7 @@ const frozenThemeNormalization = `
   .hp-page .hp-hero .hp-eligibility-message::before { content: none !important; }
   .hp-page .hp-hero .hp-eligibility-message p { color: #000000 !important; }
   .hp-page .hp-hero .hp-eligibility-message button:not(:disabled) {
-    border-color: #00B87A !important;
+    border-color: #ffffff !important;
     background-color: #00B87A !important;
   }
   .hp-page .hp-logout-no:not(:disabled),
@@ -32,7 +32,7 @@ const frozenThemeNormalization = `
   .hp-account-page .hp-account-save:not(:disabled),
   .hp-history-confirm button:not(:last-child),
   .hp-logout-confirm-dialog button:not(:last-child) {
-    border-color: #00B87A !important;
+    border-color: #ffffff !important;
     background-color: #00B87A !important;
   }
   button.alert-button,
@@ -40,7 +40,7 @@ const frozenThemeNormalization = `
   .hp-page button.hp-submit,
   .hp-login-form > button:not(:disabled),
   .hp-page button.hp-login-verify:not(:disabled) {
-    border-color: #000000 !important;
+    border-color: #ffffff !important;
     background-color: #000000 !important;
   }
 `;
