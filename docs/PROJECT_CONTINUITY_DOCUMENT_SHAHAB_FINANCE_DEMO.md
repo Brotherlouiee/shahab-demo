@@ -31,6 +31,8 @@
 
 #### استقرار واقعی روی Arvan VM
 
+راهنمای کامل اتصال، مسیرها، topology، فرمان‌های Compose و قواعد ایمنی سرور در [سند استقرار Arvan VM](deployment/arvan-vm-deployment.md) نگهداری می‌شود؛ قبل از هر اقدام عملیاتی آن را بخوان.
+
 - SSH: `root@85.198.52.5`؛ مسیر Compose: `/home/shahab/app`؛ فایل‌ها: `docker-compose.prod.yml` و `.env.prod`. سایت `https://shahabfintech.ir` از Arvan CDN می‌آید؛ TLS عمومی روی CDN خاتمه می‌یابد، origin به host NGINX روی پورت 80 می‌رسد، سپس frontend container روی loopback پورت‌های 8080/8443 سرو می‌کند و `/api/v1/` را به API شبکهٔ خصوصی می‌فرستد. DB، Redis و API را public نکن و مسیر frontend را دور نزن.
 - مالک در ۱ نوامبر از PowerShell، Bash را با here-string از طریق `ssh root@85.198.52.5 'bash -s'` اجرا کرد. در VM از فایل Compose پیش از تغییر backup با نام `docker-compose.prod.yml.before-v0.1.8-20261101T200412Z` ساخته شد؛ فقط anchorهای `x-api-image` و `x-web-image` با digestهای بالا جایگزین شدند؛ سپس `config --quiet`، `pull api frontend` و `up -d --no-build --no-deps --wait api frontend` اجرا شد.
 - Docker Hub login/token دوباره خواسته نشد؛ دسترسی pull از قبل روی سرور آماده بود. اگر چنین استقرار مجددی لازم شد، از همان auth ذخیره‌شده استفاده کن و login/token را پیش‌فرض وارد فرمان نکن. اگر pull واقعاً رد شد، پیش از هر درخواست credential علت و auth موجود سرور را بررسی کن.
@@ -1244,7 +1246,7 @@ Beyond server/domain, production readiness requires:
 ## ممیزی نسخهٔ ۲۰٫۰ این سند
 
 - افزودهٔ نسخهٔ ۲۰٫۰ وضعیت بعد از merge PR #191، انتشار موفق workflow #13 برای v0.1.8 و استقرار دستی imageهای دارای digest روی Arvan VM را با محدودیت‌های شواهد ثبت می‌کند.
-- روش‌های handoff در نسخهٔ ۲۰٫۰ از فایل `deploy-arvan.md` مالک و خروجی PowerShell/SSH همان استقرار استخراج شدند؛ هیچ secret، token، کلید خصوصی یا مقدار `.env.prod` ثبت نشده است.
+- روش‌های handoff در نسخهٔ ۲۰٫۰ از فایل `docs/deployment/arvan-vm-deployment.md` و خروجی PowerShell/SSH همان استقرار استخراج شدند؛ هیچ secret، token، کلید خصوصی یا مقدار `.env.prod` ثبت نشده است.
 - انتشار و استقرار از هم تفکیک شده‌اند: run #13 روی Docker Hub publish را کامل کرد؛ اجرای owner روی VM deploy را انجام داد. healthcheck کانتینرها healthy است؛ پاسخ health عمومی در transcript حاضر نیست.
 - فایل Compose سرور با backup نسخهٔ پیشین تغییر کرده است؛ فایل tracked مخزن هنوز باید در PR جدا با digestهای جاری sync شود. هیچ کد، image، داده یا production config در این PR مستنداتی تغییر نمی‌کند.
 - در این تغییر مستنداتی تست نرم‌افزاری اجرا نشده است؛ CI نهایی باید روی head همین PR خوانده شود.
