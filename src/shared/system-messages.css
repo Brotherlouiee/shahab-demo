@@ -336,3 +336,36 @@ button.submit-button,
   background: url("../../assets/system-message-warning.svg") center / contain no-repeat;
   vertical-align: middle;
 }
+
+
+/* Keep feedback content aligned to the RTL reading edge. */
+.hp-account-page p[role="status"],
+.hp-loan-save-toast {
+  justify-content: flex-start;
+  direction: rtl;
+  text-align: right;
+}
+
+/* The home eligibility alert stacks its warning icon above the message text. */
+.hp-page .hp-hero .hp-eligibility-message {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  direction: rtl;
+}
+
+.hp-page .hp-hero .hp-eligibility-message-icon {
+  position: static;
+  align-self: flex-start;
+  margin: 0 0 12px;
+}
+
+/* Reserve a clear gap between inline warning icons and their RTL text. */
+.hp-question-warning {
+  padding-right: 44px;
+}
+
+.hp-compare-warning,
+.hp-compare-info {
+  gap: 12px;
+}
