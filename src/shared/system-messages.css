@@ -1,0 +1,122 @@
+:root {
+  --shahab-success: #059C7B;
+  --shahab-warning: #FFF600;
+  --shahab-error: #FF0000;
+  --shahab-charcoal: #303335;
+}
+
+/* Keep existing page geometry while giving every app notice a typed treatment. */
+.shahab-system-message-viewport {
+  position: fixed;
+  z-index: 10000;
+  top: max(12px, env(safe-area-inset-top));
+  left: 50%;
+  width: min(390px, calc(100vw - 28px));
+  transform: translateX(-50%);
+  pointer-events: none;
+  direction: rtl;
+}
+
+.shahab-system-message {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: var(--shahab-charcoal);
+  box-shadow: 0 5px 18px rgb(0 0 0 / 20%);
+  pointer-events: auto;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.shahab-system-message[data-type="success"] { color: var(--shahab-success); }
+.shahab-system-message[data-type="warning"] { color: var(--shahab-warning); }
+.shahab-system-message[data-type="error"] { color: var(--shahab-error); }
+
+.shahab-system-message__icon {
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.shahab-system-message p {
+  flex: 1;
+  margin: 0;
+  color: inherit;
+  text-align: right;
+}
+
+button.shahab-system-message__dismiss {
+  display: inline-grid;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent !important;
+  color: inherit;
+  font: inherit;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Existing inline feedback keeps its position and receives the matching type palette. */
+.hp-login-form p[role="alert"],
+.hp-otp-form p[role="alert"],
+.hp-account-page p[role="alert"],
+.hp-question-session-error,
+.hp-recommendation-result-state[role="alert"] {
+  border-radius: 8px;
+  background: var(--shahab-charcoal) !important;
+  color: var(--shahab-error) !important;
+  padding: 9px 12px;
+}
+
+.hp-recommendation-result-state[role="alert"] p { color: var(--shahab-error) !important; }
+
+.hp-eligibility-message {
+  background: var(--shahab-charcoal) !important;
+}
+.hp-eligibility-message p { color: var(--shahab-warning) !important; }
+
+.hp-account-page p[role="status"] {
+  border-radius: 8px;
+  background: var(--shahab-charcoal);
+  color: var(--shahab-success);
+  padding: 9px 12px;
+}
+
+/* Green primary actions use the approved brand green; disabled states stay gray. */
+.hp-page .hp-hero .hp-eligibility-message button:not(:disabled),
+.hp-page .hp-logout-no:not(:disabled),
+.hp-page .hp-next-question:not(:disabled),
+.hp-page .hp-loan-results-actions .is-primary:not(:disabled),
+.hp-page .hp-loan-details-analysis-bar button:not(:disabled),
+.hp-page .hp-compare-bottom-bar button:not(:disabled),
+.hp-page .hp-compare-result-bottom-bar button:not(:disabled),
+.hp-page .hp-simple-compare-submit:not(:disabled),
+.hp-account-page .hp-account-save:not(:disabled),
+.hp-history-confirm button:not(:last-child),
+.hp-logout-confirm-dialog button:not(:last-child) {
+  border-color: var(--shahab-success) !important;
+  background-color: var(--shahab-success) !important;
+}
+
+/* Black primary actions use charcoal without touching transparent or white controls. */
+button.alert-button,
+button.submit-button,
+.hp-page button.hp-submit,
+.hp-login-form > button:not(:disabled),
+.hp-page button.hp-login-verify:not(:disabled) {
+  border-color: var(--shahab-charcoal) !important;
+  background-color: var(--shahab-charcoal) !important;
+}

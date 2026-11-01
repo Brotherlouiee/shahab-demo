@@ -1,4 +1,5 @@
 import ContactPage from "./features/contact/ContactPage.jsx";
+import { showSystemMessage } from "./shared/systemMessages.mjs";
 import contactIconUrl from "../assets/call-calling.svg";
 import AboutPage from "./features/about/AboutPage.jsx";
 import { readAccountProfileCache, writeAccountProfileCache, readPersonalInfoCache, writePersonalInfoCache, synchronizeAccountTabs, readRecommendationCache, writeRecommendationCache } from "./features/account/accountBrowserState.mjs";
@@ -3186,7 +3187,7 @@ function AccountPage({ profile, onSave, onBack }) {
       .catch((error) => { if (isCurrent) setProfileError(error.message); });
     return () => { isCurrent = false; };
   }, [profile.phone]);
-  function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { window.alert("حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
+  function selectAvatar(event) { const file = event.target.files?.[0]; if (!file) return; if (file.size > 100 * 1024) { showSystemMessage("warning", "حجم عکس پروفایل باید حداکثر ۱۰۰ کیلوبایت باشد."); event.target.value = ""; return; } const reader = new FileReader(); reader.onload = () => update("avatar", reader.result); reader.readAsDataURL(file); }
   return <main className="hp-account-page" dir="rtl"><AccountHeader onBack={onBack} onHome={onBack} /><label className="hp-avatar-upload">{draft.avatar ? <img src={draft.avatar} alt="عکس پروفایل" /> : <img src="/ui-icons/user-add.svg" alt="" />}<input type="file" accept="image/*" onChange={selectAvatar} /></label><form className="hp-account-profile-form" onSubmit={submitProfile}><label><span>شماره تلفن همراه</span><input value={displayPersianPhone(draft.phone)} disabled /></label><label><span>نام</span><input value={draft.firstName || ""} onChange={(event) => update("firstName", sanitizePersianName(event.target.value))} /></label><label><span>نام خانوادگی</span><input value={draft.lastName || ""} onChange={(event) => update("lastName", sanitizePersianName(event.target.value))} /></label><ProfileDropdown label="میزان درآمد ماهانه" value={draft.income} options={incomeOptions} onChange={(value) => update("income", value)} /><ProfileDropdown label="شغل" value={draft.job} options={jobOptions} onChange={(value) => update("job", value)} /><ProfileDropdown label="جنسیت" value={draft.gender} options={genderOptions} onChange={(value) => update("gender", value)} /><button type="submit" className="hp-account-save" disabled={isSaving}>ذخیره تغییرات</button>{profileError ? <p role="alert">{profileError}</p> : null}{saveSucceeded ? <p role="status">تغییرات ذخیره شد.</p> : null}</form></main>;
 }
 
@@ -3364,7 +3365,7 @@ export default function HomePage() {
 
   function handleLogout() {
     // Failed revoke stays pending, preventing cookie restoration on refresh.
-    void logoutProfile().catch(() => window.alert("خروج در سرور تأیید نشد. اتصال را بررسی کنید و دوباره تلاش کنید."));
+    void logoutProfile().catch(() => showSystemMessage("error", "خروج در سرور تأیید نشد. اتصال را بررسی کنید و دوباره تلاش کنید."));
   }
 
   function handleSidebarNavigate(destination) {

@@ -2,12 +2,17 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./home page.jsx";
 import "./App.css";
+import "./shared/system-messages.css";
+import SystemMessageHost from "./shared/SystemMessageHost.jsx";
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <App />
+    <>
+      <App />
+      <SystemMessageHost />
+    </>
   </React.StrictMode>,
 );
 
