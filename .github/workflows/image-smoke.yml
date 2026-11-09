@@ -149,7 +149,7 @@ jobs:
         run: |
           tool_dir="$RUNNER_TEMP/shahab-trivy"
           mkdir -p "$tool_dir"
-          curl --fail --silent --show-error --location --retry 2 --max-time 90 \
+          curl --fail --silent --show-error --location --retry 8 --retry-all-errors --retry-delay 5 --retry-max-time 240 --max-time 90 \
             "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" \
             -o "$tool_dir/trivy.tar.gz"
           echo "e24b1c51293c1b15e4ba8d45bbc7891ba053f90278ec2698f3562c993e145fe7  $tool_dir/trivy.tar.gz" | sha256sum --check
