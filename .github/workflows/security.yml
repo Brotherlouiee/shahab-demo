@@ -9,8 +9,33 @@ permissions:
   contents: read
 
 jobs:
+  change-scope:
+    name: Classify changes and run lightweight documentation checks
+    runs-on: ubuntu-24.04
+    outputs:
+      run_security: ${{ steps.scope.outputs.run_security }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: scope
+        name: Classify changed files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          HEAD_SHA: ${{ github.sha }}
+          FORCE_FULL: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
+        run: python scripts/ci/classify_changes.py
+  repository-secrets:
+    name: Repository secret scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Scan repository secrets
+        run: python scripts/scan_repository_secrets.py
   static-and-dependencies:
     name: Python SAST and Python/Node dependency audit
+    needs: change-scope
+    if: needs.change-scope.outputs.run_security == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
@@ -37,5 +62,3 @@ jobs:
         run: python -m pip_audit --progress-spinner off
       - name: Node SCA — reject high/critical advisories, including dev dependencies
         run: npm audit --audit-level=high
-      - name: Existing repository secret scan
-        run: python scripts/scan_repository_secrets.py

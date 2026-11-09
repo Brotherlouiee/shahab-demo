@@ -10,8 +10,24 @@ permissions:
   contents: read
 
 jobs:
+  change-scope:
+    name: Classify changes and run lightweight documentation checks
+    runs-on: ubuntu-24.04
+    outputs:
+      run_us13: ${{ steps.scope.outputs.run_us13 }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: scope
+        name: Classify changed files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          HEAD_SHA: ${{ github.sha }}
+          FORCE_FULL: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
+        run: python scripts/ci/classify_changes.py
   capture-baseline:
     name: Independent original-vs-candidate route evidence
+    needs: change-scope
+    if: needs.change-scope.outputs.run_us13 == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     env:
