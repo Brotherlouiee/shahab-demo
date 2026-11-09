@@ -26,7 +26,6 @@ jobs:
           FORCE_FULL: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
         run: python scripts/ci/classify_changes.py
       - name: Validate changed Markdown links and whitespace
-        if: steps.scope.outputs.has_docs == 'true'
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
           HEAD_SHA: ${{ github.sha }}
