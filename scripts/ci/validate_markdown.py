@@ -10,7 +10,10 @@ from html import unescape
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-LINK = re.compile(r"!?[[^\]]*\]\((<[^>]+>|[^)\s]+)(?:\s+[^)]*)?\)")
+LINK = re.compile(
+    r"!?" + re.escape("[") + "[^" + re.escape("]") + "]*" + re.escape("]") + re.escape("(")
+    + r"(<[^>]+>|[^)\s]+)(?:\s+[^)]*)?" + re.escape(")")
+)
 MARKDOWN_SUFFIXES = {".md", ".mdx", ".rst", ".adoc"}
 
 
