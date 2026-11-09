@@ -11,8 +11,15 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 LINK = re.compile(
-    r"!?" + re.escape("[") + "[^" + re.escape("]") + "]*" + re.escape("]") + re.escape("(")
-    + r"(<[^>]+>|[^)\s]+)(?:\s+[^)]*)?" + re.escape(")")
+    r"!"
+    + re.escape("[")
+    + "[^"
+    + re.escape("]")
+    + "]*"
+    + re.escape("]")
+    + re.escape("(")
+    + r"(<[^>]+>|[^)\s]+)(?:\s+[^)]*)?"
+    + re.escape(")")
 )
 MARKDOWN_SUFFIXES = {".md", ".mdx", ".rst", ".adoc"}
 
