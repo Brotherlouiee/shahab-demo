@@ -47,7 +47,7 @@ def main() -> int:
 
     docs_only = bool(paths) and all(is_document(path) for path in paths)
     full_product = not docs_only
-    frontend = full_product and any(is_frontend(path) for path in paths)
+    frontend = full_product and (force_full or "<classification-failed>" in paths or any(is_frontend(path) for path in paths))
     has_docs = any(is_document(path) for path in paths)
 
     outputs = {
