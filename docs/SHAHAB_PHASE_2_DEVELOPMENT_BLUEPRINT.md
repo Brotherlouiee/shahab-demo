@@ -229,7 +229,7 @@ MCP می‌تواند ابزارهای نوع‌دار و اختصاصی برا�
 5. **رتبه‌بندی نامزدها:** ترکیب شواهد ساختاری، واژگانی و معنایی و در صورت نیاز Reranker/LLM.
 6. **تأیید رابطه:** برای نامزدهای منتخب، دریافت متن کامل سند جدید و استخراج شواهد صریح یا ضمنیِ قابل ارزیابی؛ تمایز «موضوع مشابه» از «اثر حقوقی».
 
-**اصل محدودکننده:** عنوان مشابه فقط `candidate_relation` ایجاد می‌کند. روابطی مانند `AMENDS` یا `REPEALS` باید با شواهد متن و کنترل مناسب ثبت شوند. در صورت ابهام، وضعیت `needs_review` حفظ می‌شود.
+**اصل محدودکننده:** عنوان مشابه فقط `candidate_relation` ایجاد می‌کند. روابطی مانند `AMENDS` یا `REPEALS` باید در سطح سند یا بندِ متأثر با شواهد متن، نسخه و قلمرو/زمان اثر ثبت شوند؛ اصلاح جزئی نباید تمام بندهای سند را منسوخ نشان دهد. در صورت ابهام، وضعیت `needs_review` حفظ می‌شود.
 
 #### 3.5 Selective Document Ingestion
 
@@ -249,12 +249,12 @@ MCP می‌تواند ابزارهای نوع‌دار و اختصاصی برا�
 
 #### 3.7 Knowledge Base, Catalog & Relationship Store
 
-- **Knowledge Base:** متن کامل، بخش‌ها، نسخه‌ها، نمایه واژگانی/برداری و شواهد منبع.
+- **Knowledge Base:** هویت پایدار سند حقوقی مستقل از نسخه و URL/عنوان، نسخه‌های تغییرناپذیر و منشأ دریافت/استخراج، مواد و بندهای قابل ارجاع، بازه‌های اعتبار حقوقی و زمان ثبت، متن و نمایه‌های مشتق؛ نسخه دریافت‌شده یا تغییر قالب/استخراج لزوماً نسخه حقوقی جدید نیست.
 - **Source Catalog:** فهرست سبک اسناد کشف‌شده، حتی اگر متن کاملشان ذخیره نشده باشد.
-- **Relationship Store:** یال‌های بین اسناد، نوع رابطه، شواهد، درجه اطمینان و وضعیت بررسی.
+- **Relationship Store:** روابط نسخه‌دار سند/بند مانند `AMENDS`، `REPEALS` و `REFERS_TO` با مبدأ/مقصد، شاهد بند و نسخه، قلمرو اثر، زمان اعتبار و وضعیت بررسی؛ شباهت معنایی فقط `candidate_relation` است.
 - **Event / Audit Log:** ثبت رویداد کشف، جست‌وجو، دانلود، تغییر، تأیید و انتشار پاسخ.
 
-برای V0.1، PostgreSQL به همراه full-text search و `pgvector` یک گزینه اولیه قابل ارزیابی است. روابط را می‌توان در جدول رابطه‌ای نگهداری کرد؛ **Neo4j الزامی نیست**. انتخاب قطعی پس از ارزیابی حجم، عملکرد و نیازهای پرس‌وجوی گرافی انجام می‌شود.
+برای V0.1، PostgreSQL با جداول رابطه‌ای و full-text search مبنای مدل هیبرید سند/نسخه/بند/رابطه است؛ `pgvector` در صورت نیاز بازیابی معنایی قابل ارزیابی است و **Neo4j الزامی نیست**. تاریخچه سند و اثر حقوقی در سطح بند در موارد لازم حفظ می‌شود؛ ذخیره خام/نامزد تأییدنشده از انتشار دانش قابل استناد جداست. انتخاب نمایه و فناوری تکمیلی پس از آزمون حجم و عملکرد انجام می‌شود.
 
 #### 3.8 Answer Generation & Citation Guard
 
@@ -302,7 +302,7 @@ MCP می‌تواند ابزارهای نوع‌دار و اختصاصی برا�
 **مالکیت منطقی:** Evidence Sufficiency، Answer Guard.
 
 ##### ADR-RAG-08 — اعتبار زمانی دوگانه
-**تصمیم تأییدشده:** زمان اعتبار حقوقی/اجرایی (valid time) از زمان مشاهده و ثبت در شهاب (system/recorded time) تفکیک شود؛ پاسخ تاریخی از نسخه و دانش قابل دسترس در همان نقطه زمانی بازسازی‌پذیر باشد.
+**تصمیم تأییدشده (C04):** هویت پایدار سند از نسخه و URL/عنوان مستقل است؛ برای نسخه‌ها، بندهای مؤثر و روابط حقوقی، زمان اعتبار حقوقی/اجرایی (`valid time`) از زمان مشاهده و ثبت در شهاب (`system/recorded time`) تفکیک شود تا هم حکم قابل اعمال در تاریخ پرسش و هم دانسته‌های شهاب در تاریخ ثبت گذشته بازسازی‌پذیر باشد. کشف دیرهنگام اصلاحیه، تاریخ اثر حقوقی گذشته را با زمان کشف امروز خلط نمی‌کند.
 **مرز و قید:** مدل دو‌زمانه فقط بر موجودیت‌های نیازمند تاریخچه اعمال شود، نه اجباراً همه جدول‌ها.
 **مالکیت منطقی:** Versioning، Temporal Knowledge.
 
@@ -387,7 +387,7 @@ MCP می‌تواند ابزارهای نوع‌دار و اختصاصی برا�
 **مالکیت منطقی:** Source Registry & Governance.
 
 ##### ADR-RAG-25 — قرارداد داده کاننیکال نسخه‌دار
-**تصمیم تأییدشده:** خروجی Source Access و داده‌های سند/بند/رابطه قرارداد نسخه‌دار با قواعد اعتبارسنجی، مهاجرت و سازگاری عقب‌رو داشته باشند.
+**تصمیم تأییدشده (C04):** مدل کاننیکال هیبرید حقوقی شامل `DocumentIdentity` پایدار، `DocumentVersion` با متن/زمان‌های دوگانه، منشأ و کیفیت استخراج، `Provision/Clause` قابل استناد، `LegalRelation` مستند در سطح سند یا بند و `EvidenceUnit` است. خروجی Source Access و این داده‌ها قرارداد نسخه‌دار با اعتبارسنجی، مهاجرت و سازگاری عقب‌رو دارند؛ سند کشف‌شده یا رابطه نامزد پیش از کنترل C01/C03 قابل انتشار به‌عنوان دانش معتبر نیست.
 **مرز و قید:** طبق A07، Schema عمومی در فصل اول و قرارداد محصول/خدمت در فصل دوم مالک مشخص دارند؛ اعتبارسنجی ساختاری و معنایی، ورودی نامعتبر و مقادیر مرزی، Property-Based Tests و سازگاری عقب‌رو پیش از انتشار آزموده شوند. افزودن فیلد اختیاری فقط در صورت تحمل مصرف‌کننده سازگار است؛ تغییر نوع یا معنای فیلد حتی بدون تغییر نام شکننده است.
 **مالکیت منطقی:** Canonical Contracts.
 
@@ -477,8 +477,9 @@ MCP می‌تواند ابزارهای نوع‌دار و اختصاصی برا�
 | قرارداد منطقی | حداقل محتوا | مصرف‌کننده/کنترل |
 |---|---|---|
 | `SourceAccessResult` | `source_id`, `source_uri`, `access_method`, `retrieved_at`, `status`, `error`, `content_hash`, `permission_policy_ref`, `raw_artifact_ref` | استخراج، ممیزی و کنترل مجوز؛ قالب واقعی نسخه‌دار |
-| `DocumentIdentity/Version` | `document_id`, `version_id`, `issuer_id`, `published_at`, `valid_from/to`, `recorded_from/to`, `content_hash`, `status` | حل هویت، تاریخچه و اعتبار زمانی |
-| `EvidenceUnit` | `evidence_id`, `version_id`, `section/table_ref`, `text_span`, `extraction_quality`, `source_trust_dimensions` | کفایت شواهد و استناد در سطح ادعا |
+| `DocumentIdentity/Version` | `document_id` پایدار مستقل از URL/عنوان، `version_id`, `issuer_id`, `published_at`, `valid_from/to`, `recorded_from/to`, `content_hash`, `status`, `provenance_ref`, `extraction_quality` | حل هویت، حفظ نسخه/منشأ و بازسازی دو‌زمانه؛ تغییر قالب به‌تنهایی نسخه حقوقی جدید نیست |
+| `EvidenceUnit/Provision` | `evidence_id`, `version_id`, `provision_id`, `section/table_ref`, `text_span`, `extraction_quality`, `source_trust_dimensions` | کفایت شواهد و شمول حکم در سطح ماده/بند؛ استخراج تدریجی با حفظ ارجاع نسخه |
+| `LegalRelation` | `relation_id`, `source_document/version/provision_ref`, `target_document/version/provision_ref`, `relation_type`, `evidence_id`, `valid_from/to`, `review_status` | اصلاح/نسخ/ارجاع مستند و قابل ممیزی؛ نامزد معنایی حکم حقوقی نیست |
 | `ClaimEvidenceLink` | `claim_id`, `evidence_id`, `support_type`, `entailment_status`, `verified_at`, `citation_snapshot_ref` | کنترل استناد و بازسازی پاسخ تاریخی |
 | `KnowledgeSnapshot` | `snapshot_id`, `activated_at`, `document_set_version`, `rules_version`, `catalog_version`, `index_version`, `validation_status` | پاسخ/محاسبه سازگار و انتشار اتمیک |
 | `RetrievalDecisionTrace` | `trace_id`, `admission_decision`, `route`, `risk_reasons`, `budget`, `evidence_ids`, `freshness_status`, `fallback_reason`, `response_policy` | ممیزی حداقلی و ارزیابی کیفیت |
