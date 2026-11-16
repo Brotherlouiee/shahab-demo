@@ -61,6 +61,11 @@
 | S-US-09 | متقاضی ضمانت‌نامه | پرونده ضمانت‌نامه با شواهد معتبر | موجب فراهم‌شدن گردش‌کار انتخاب حوزه→گزینه معتبر CAT/RAG→انتخاب مشتری→مجوز→Computer Use→رسید؛ matcher اختیاری | پیشنهاد حدسی یا submit بدون تأیید نهایی | B:1639، B:1645، B:1647 | S-JRN-01 |
 | S-US-06 | مشتری و اپراتور | Feedback و Feedforward دارای شواهد | موجب فراهم‌شدن event candidate→policy/entitlement/consent/evidence→dedup→alert؛ عدم اجازه اجرای عملیات از رویداد | پایش بی‌اجازه یا اعلان تکراری ناموجه | B:1684، B:944 | S-FF-01 |
 
+| C-US-23 | مسئول مالی و توسعه‌دهنده | سازمان‌دهی دفترکل و lineage عملیاتی | حساب‌های بانکی/تعهد/درآمد/تأمین‌کننده/هدیه و journal متوازن؛ credit lot lineage و سه چرخه وضعیت مستقل؛ idempotency هر اقدام | journal ناتراز، حذف پیوند واسط یا دو debit از یک موجودی | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | C-LED-02 |
+| C-US-24 | مسئول عملیات مالی | تطبیق، رسیدگی اختلاف و نتیجه نامعلوم | تطبیق حداقل روزانه با cutoff/tz مشخص، پرونده مغایرت دارای مالک و عامل، inquiry/جبران وابسته به عملیات اولیه | تطبیق غیرروزانه بدون گیت، تغییر مستقیم دفترکل، payout مجدد قبل inquiry | W:1289، W:1303، W:1369 | C-REC-02 |
+| C-US-25 | مسئول امنیت و مالی | امنیت مالی و نگهداری دائمی سوابق | reauth تغییر بانکی/ادمین/برداشت، نگهداری دائمی lineage مالی، حذف راز و OTP از audit، هشدار امنیتی/پوشش، اتصال رویه انطباق موجود | حذف رخداد بعد ۲۰ سال یا استفاده از نشست قدیمی برای تغییر حساب | W:1317، W:1331، W:1343، W:1355 | C-SEC-02 |
+| C-US-26 | کاربر و کارشناس مجاز | نمای اصلی، رسید و اعلان مالی | نمای موجودی قابل‌مصرف/رزرو/برداشت مستقل، جزئیات origin و price، تاریخچه فیلترپذیر، اعلان مالی و پیامک امنیتی | نمایش هدیه در قابل برداشت یا نمایش سوابق سازمان دیگر | W:1517، W:1529، W:1541 | C-UX-01 |
+
 ### ۱.۳. Core — مالکیت داده پایه و عملیات مالی
 
 | تسک | Story | ارجاع منبع | خروجی فنی اختصاصی | معیار پذیرش اصلی | مثال رفتار مردود | شناسه آزمون | پیش‌نیاز سخت | گیت تصمیم | وضعیت |
@@ -87,6 +92,11 @@
 | C-SET-01 | C-US-19 | W:1481 | ثبت بدهی به تأمین‌کننده، قرارداد زمان/تسویه و رسید بانکی، جدا از کسر کیف مشتری | پیش تسویه reconciliation مطابق قرارداد؛ پرداخت supplier wallet debit تازه نسازد | تسویه خودکار روزانه برای همه؛ دوبار کسر مشتری | T-C-SET-01 | C-FIN-01 | گیت قرارداد واقعی هر تأمین‌کننده | طراحی؛ اجرا نشده |
 | C-SUP-01 | C-US-21 | W:1553، W:1565 | Case به تراکنش/مالک/وضعیت، دسترسی شبکه تراکنش با audit view/export و حداقل داده | کاربر فقط رسیدهای خودش؛ پرونده اختلاف state+actor؛ گزارش مشکوک برای غیرمجاز مخفی | نمایش تراکنش فرد دیگر یا وعده SLA مصوب نشده | T-C-SUP-01 | C-FIN-01;C-POL-01 | گیت ظرفیت و SLA اعلامی | طراحی؛ اجرا نشده |
 | C-OPS-01 | C-US-22 | W:1619 | قواعد انتشار ledger invariants، تست concurrency، دسترسی، refund و recovery؛ هشدارهای مهم | اگر تراز/تکرار/مجوز تست fail باشد release مالی blocked؛ شکست CI مستند شود | انتشار قابلیت مالی با آزمون طراحی‌شده ولی اجرا نشده | T-C-OPS-01 | C-FIN-01;C-POL-01 | گیت مالی و کیفیت نسخه جاری | طراحی؛ اجرا نشده |
+
+| C-LED-02 | C-US-23 | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | حساب‌های بانکی/تعهد/درآمد/تأمین‌کننده/هدیه و journal متوازن؛ credit lot lineage و سه چرخه وضعیت مستقل؛ idempotency هر اقدام | ثبت هم‌زمان hold/capture/reversal اتمیک و بازسازی تمام انتقال‌ها؛ retry اثر دوم نداشته باشد | journal ناتراز، حذف پیوند واسط یا دو debit از یک موجودی | T-C-LED-02 | C-FIN-01;C-POL-01 | گیت حسابداری نهایی هدیه | طراحی؛ اجرا نشده |
+| C-REC-02 | C-US-24 | W:1289، W:1303، W:1369 | تطبیق حداقل روزانه با cutoff/tz مشخص، پرونده مغایرت دارای مالک و عامل، inquiry/جبران وابسته به عملیات اولیه | timeout شکست قطعی فرض نشود؛ اصلاح فقط با reason/actor/original_ref و journal جبرانی | تطبیق غیرروزانه بدون گیت، تغییر مستقیم دفترکل، payout مجدد قبل inquiry | T-C-REC-02 | C-LED-02;C-CHG-01 | گیت SLA و cut-off بانک | طراحی؛ اجرا نشده |
+| C-SEC-02 | C-US-25 | W:1317، W:1331، W:1343، W:1355 | reauth تغییر بانکی/ادمین/برداشت، نگهداری دائمی lineage مالی، حذف راز و OTP از audit، هشدار امنیتی/پوشش، اتصال رویه انطباق موجود | حذف بی‌زمان سوابق مالی ممنوع؛ OTP ذخیره نشود؛ هشدار اصلی برقرار؛ سامانه AML جدید فرض نشود | حذف رخداد بعد ۲۰ سال یا استفاده از نشست قدیمی برای تغییر حساب | T-C-SEC-02 | C-LED-02;C-POL-01 | گیت بررسی حقوقی داده و رویه انطباق موجود | طراحی؛ اجرا نشده |
+| C-UX-01 | C-US-26 | W:1517، W:1529، W:1541 | نمای موجودی قابل‌مصرف/رزرو/برداشت مستقل، جزئیات origin و price، تاریخچه فیلترپذیر، اعلان مالی و پیامک امنیتی | رسید شامل شناسه پیگیری، time/status/amount باشد؛ کاربر رسید غیرخودی نبیند؛ موارد فوری پیامک داشته باشند | نمایش هدیه در قابل برداشت یا نمایش سوابق سازمان دیگر | T-C-UX-01 | C-FIN-01;C-SUP-01;C-POL-01 | گیت UX/حریم خصوصی | طراحی؛ اجرا نشده |
 
 ### ۱.۴. RAG / Adviser — مالکیت دانش و پاسخ مستند
 
@@ -434,6 +444,31 @@ flowchart LR
 | P2-W-1565-01 | W:1565 | دسترسی و گرفتن خروجی ثبت شوند | APPROVED_OR_BOUNDARY_CONDITIONAL | CORE/C-US-21 | C-SUP-01 | T-C-SUP-01 | audit برای view/export شبکه زنجیره | نشت گزارش حساس مشتری | DESIGN_PENDING |
 | P2-W-1619-01 | W:1619 | قابلیت مالی فعال بدون کنترل صحت منتشر نشود | APPROVED_OR_BOUNDARY_CONDITIONAL | CORE/C-US-22 | C-OPS-01 | T-C-OPS-01 | گیت انتشار مالی fail-closed | انتشار بدون تست دفترکل | DESIGN_PENDING |
 
+| P2-W-1167-01 | W:1167 | یک دفترکل مشترک ریالی با حساب‌های تفکیک‌شده | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | bank/obligation/revenue/supplier/gift/disputed ledgers separately reconstructible | ledger per-wallet separately without shared accounting | DESIGN_PENDING |
+| P2-W-1169-01 | W:1169 | ثبت مالی دوطرفه و متوازن | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | every transaction postings balance to 0 and persist atomically | partial journal posting or balance nonzero | DESIGN_PENDING |
+| P2-W-1183-01 | W:1183 | هر جزء شناسه، مالک فعلی، منشأ و رویداد ایجاد | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | lot includes origin/owner/expiry/held/spent lineage as queryable fields | rights stored as display-only text | DESIGN_PENDING |
+| P2-W-1199-01 | W:1199 | ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | three-hop retransfer full ancestral chain reconstructible | missing intermediary after reversal | DESIGN_PENDING |
+| P2-W-1211-01 | W:1211 | سه چرخهٔ مستقل و مرتبط نگهداری شود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | service,bank,ledger state distinguish unknown bank vs final ledger | bank timeout moves ledger to settled | DESIGN_PENDING |
+| P2-W-1227-01 | W:1227 | شناسهٔ عملیات، کیف پول، تراکنش دفترکل | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | operation, wallet, journal, lot, hold, bank, correction IDs distinct and linked | invoice_id used as payment id | DESIGN_PENDING |
+| P2-W-1241-01 | W:1241 | رزرو، قطعی‌کردن و بازگشت اقدام‌های متفاوت‌اند | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | retry hold/capture/refund separately idempotent with unique action key | reuse hold key for capture | DESIGN_PENDING |
+| P2-W-1257-01 | W:1257 | قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | capture atomic with held decrement, no transient double spend | capture posted and hold not decreased | DESIGN_PENDING |
+| P2-W-1271-01 | W:1271 | بررسی و مصرف، دو مرحلهٔ مستقل و بدون محافظ نباشند | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | concurrent debit on same lot cannot exceed available | two requests both use last 100 | DESIGN_PENDING |
+| P2-W-1289-01 | W:1289 | تطبیق خودکار دست‌کم روزانه انجام شود | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | daily reconciliation records missing/surplus/unknown and case owner | weekly-only no documented daily run | DESIGN_PENDING |
+| P2-W-1289-02 | W:1289 | هر اصلاح مالی ثبت مرتبط، علت و عامل داشته باشد | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | correction journal has original_ref, actor and reason | silent overwrite ledger | DESIGN_PENDING |
+| P2-W-1303-01 | W:1303 | برش روزانه با زمان و منطقهٔ زمانی مشخص | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | cutoff tz fixed per run, in-transit separate report | unbounded timezone mismatch | DESIGN_PENDING |
+| P2-W-1317-01 | W:1317 | برداشت، تغییر حساب بانکی، تغییر ادمین | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | sensitive changes demand renewed authentication | admin change with old session | DESIGN_PENDING |
+| P2-W-1331-01 | W:1331 | دائمی نگهداری شوند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | financial lineage immutable with no 20y TTL cleanup | delete journal at timer expiry | DESIGN_PENDING |
+| P2-W-1331-02 | W:1331 | رمز و OTP ذخیره نشوند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | secret absent from financial audit and backups | OTP present in audit note | DESIGN_PENDING |
+| P2-W-1343-01 | W:1343 | کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | all four events raise actionable alarm and actor | prolonged unknown silently omitted | DESIGN_PENDING |
+| P2-W-1355-01 | W:1355 | ساخت سامانهٔ مستقل تازه | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | link existing compliance procedures rather than invent new AML subsystem | unapproved parallel suspicious-reporting engine | DESIGN_PENDING |
+| P2-W-1369-01 | W:1369 | تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | unknown payout inquiry before retry; no second debit | timeout classified failed directly | DESIGN_PENDING |
+| P2-W-1419-01 | W:1419 | تکرار پیام، بازیابی پاسخ قبلی یا استعلام نتیجه | APPROVED_EXPLICIT | CORE/C-US-18 | C-PRC-01 | T-C-PRC-01 | replay not priced as new run | charge again for status inquiry | DESIGN_PENDING |
+| P2-W-1433-01 | W:1433 | هزینهٔ داخلی و مبلغ مشتری جدا و مرتبط ثبت شوند | APPROVED_EXPLICIT | CORE/C-US-18 | C-PRC-01 | T-C-PRC-01 | cost supplier and billable customer distinct ledger lines | automatic pass-through cost as fee | DESIGN_PENDING |
+| P2-W-1463-01 | W:1463 | هزینهٔ اضافه برای مشتری نداشته باشد | APPROVED_EXPLICIT | CORE/C-US-18 | C-PRC-01 | T-C-PRC-01 | repair run after Shahab error has customer extra debit 0 | charge again for remediation | DESIGN_PENDING |
+| P2-W-1517-01 | W:1517 | اعتبار قابل مصرف، رزرو و قابل برداشت | APPROVED_EXPLICIT | CORE/C-US-26 | C-UX-01 | T-C-UX-01 | dashboard shows 3 balances independent, extra details on expand | display reserved as withdrawable | DESIGN_PENDING |
+| P2-W-1529-01 | W:1529 | فیلتر نوع، وضعیت و زمان | APPROVED_EXPLICIT | CORE/C-US-26 | C-UX-01 | T-C-UX-01 | history filter and receipt include amount/time/status/tracking, org isolation | member sees colleague receipt | DESIGN_PENDING |
+| P2-W-1541-01 | W:1541 | رویدادهای مالی اعلان درون‌برنامه داشته باشند | APPROVED_EXPLICIT | CORE/C-US-26 | C-UX-01 | T-C-UX-01 | money events in-app; urgent security SMS; reminders opt configurable | silent urgent security event | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -482,15 +517,20 @@ flowchart LR
 | S-JRN-01 | ASSISTANT | S-US-09 | P2-B-1639-11، P2-B-1645-11، P2-B-1647-11 | B:1639، B:1645، B:1647 | T-S-JRN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | S-FF-01 | ASSISTANT | S-US-06 | P2-B-944-11، P2-B-1684-11، P2-B-1684-12 | B:1684، B:944 | T-S-FF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 
+| C-LED-02 | CORE | C-US-23 | P2-W-1167-01، P2-W-1169-01، P2-W-1183-01، P2-W-1199-01، P2-W-1211-01، P2-W-1227-01، P2-W-1241-01، P2-W-1257-01، P2-W-1271-01 | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | T-C-LED-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-REC-02 | CORE | C-US-24 | P2-W-1289-01، P2-W-1289-02، P2-W-1303-01، P2-W-1369-01 | W:1289، W:1303، W:1369 | T-C-REC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-SEC-02 | CORE | C-US-25 | P2-W-1317-01، P2-W-1331-01، P2-W-1331-02، P2-W-1343-01، P2-W-1355-01 | W:1317، W:1331، W:1343، W:1355 | T-C-SEC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-UX-01 | CORE | C-US-26 | P2-W-1517-01، P2-W-1529-01، P2-W-1541-01 | W:1517، W:1529، W:1541 | T-C-UX-01 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+
 ## فصل نهم — گیت‌های ممیزی و گزارش وضعیت جاری
 
 | شاخص | مقدار قابل اثبات | وضعیت |
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 156 | استخراج اولیه؛ تأیید کامل خیر |
-| تسک‌های طراحی‌شده بر مبنای گزاره‌های اولیه | 43 | فقط specification |
-| داستان‌های کاربر مبنا | 43 | فقط specification |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 180 | استخراج اولیه؛ تأیید کامل خیر |
+| تسک‌های طراحی‌شده بر مبنای گزاره‌های اولیه | 47 | فقط specification |
+| داستان‌های کاربر مبنا | 47 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
 | خطوط با تأیید معنایی کامل | نامعلوم | ۲٬۸۰۶ واحد هنوز نیازمند G2 کامل |
 | روابط و استثناهای باقیمانده | نامعلوم | گیت‌های G3/G7/G8 باز |
