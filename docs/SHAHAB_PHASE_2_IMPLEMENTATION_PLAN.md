@@ -1257,10 +1257,10 @@
 - ارتباط با بخش‌های دیگر: وضعیت خدمت در ۷.۳، شناسه‌ها در ۷.۴ و بازیابی در ۸.۳ باید اجرای قبلی و تازه را از هم تشخیص دهند. اجرای تازهٔ اصلاحی برای خطای شهاب در همان دامنه مطابق ۹.۱.۶ هزینهٔ اضافه برای مشتری ندارد؛ نرخ روز آن در حساب داخلی ثبت می‌شود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-089.DB | RunLifecycle و stopped/resumed/new با price_version و parent_case | CORE-W-089.DB.T01؛ قبولی/رد: انتظار OTP همان run باشد و نرخ تغییر نکند؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-089.BE | resume قبلی بدون charge جدید؛ new_run با quote تازه و مجوز | CORE-W-089.BE.T01؛ قبولی/رد: OTP wait v1، اجرا بعد توقف v2، recovery debit تکراری صفر؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-089.FE | نمای waiting/resume و quote جدید فقط در new_run | CORE-W-089.FE.T01؛ قبولی/رد: retry نتیجه قدیمی را اجرای تازه قابل دریافت نمایش ندهد؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-089.QA | تست انتظار، توقف، new run، اصلاح رایگان شهاب | CORE-W-089.QA.T01؛ قبولی/رد: new_run اصلاحی در همان دامنه customer charge صفر؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-089.DB | ExecutionPriceBinding با execution_id و rate_snapshot و parent_run_id و reason restart | CORE-W-089.DB.T01: OTP wait نرخ snapshot را تغییر ندهد؛ اجرای تازه شناسه و نسخه مستقل داشته باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-089.BE | OTP wait و replay نتیجه همان execution حفظ نرخ؛ بعد پایان/stopped اجرای تازه با rate جدید و consent جدید؛ corrective run هزینه مشتری صفر | CORE-W-089.BE.T01: دو callback یک اجرای جاری هزینه جدید نسازند؛ restart واقعی نرخ زمان جدید بگیرد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-089.FE | نمای برچسب «ادامه همان اجرا» در برابر «اجرای تازه» و نرخ مربوط | CORE-W-089.FE.T01: در resume بدون پایان، UI برآورد جدید نگیرد؛ در run جدید قیمت قبل تأیید نمایش داده شود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-089.QA | تست wait OTP، restart بعد fail، reply replay و corrective retry | CORE-W-089.QA.T01: اصلاح خطای شهاب با rate جدید در هزینه داخلی و صفر هزینه اضافه مشتری ثبت شود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-090 — ۹.۱.۴. هزینهٔ داخلی، دقت محاسبه و مسائل باقی‌مانده
 **مرجع:** کیف پول ۹.۱.۴، خط 1427؛ **مالک:** CORE-US-26.
@@ -1270,10 +1270,10 @@
 - وضعیت تصمیم‌ها: انتخاب معیار دقیق سنجش پردازش فعلاً به تعویق افتاده است؛ هیچ گزینهٔ توکن، صورتحساب ارائه‌دهنده یا معیار دیگر خودکار انتخاب نشده است. نرخ‌های عددی نیز هنوز تعیین نشده‌اند. گردکردن تجمعی در ۵.۴.۱، لغو و شکست در ۹.۱.۵ و اصلاح خطای شهاب در ۹.۱.۶ مصوب‌اند. روش تقسیم ریال باقی‌مانده استرداد طبق E04-O08 و بخش ۶.۶.۱ تصویب شده؛ قاعده شکست تساوی و جزئیات اجرایی آن باز است. امور اسناد و مالیات در ۹.۲ نیازمند بررسی تخصصی‌اند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-090.DB | CostAttribution جدا برای supplier_cost و customer_charge، unit/rate/coef/rounding | CORE-W-090.DB.T01؛ قبولی/رد: هر customer charge به usage و rate version مرتبط و supplier cost جدا باشد؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-090.BE | گزارش نسخه‌دار cost vs charge؛ معیار پردازش هنوز decision gate | CORE-W-090.BE.T01؛ قبولی/رد: اگر measure=UNDECIDED، نرخ حدسی ثابت به‌عنوان مصوب ندهد؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-090.FE | نمای هزینه مرتبط برای نقش مجاز و تاریخچه عدد ریالی دقیق | CORE-W-090.FE.T01؛ قبولی/رد: بازیابی run تاریخی با نسخه نرخ اصلی ممکن باشد؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-090.QA | تست هزینه تجمعی و تفکیک درآمد از هزینه تامین‌کننده | CORE-W-090.QA.T01؛ قبولی/رد: round-half-up طبق W028، بدون تخمین قطعی metric نامصوب؛ شاهد داده، نسخه، assertion؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-090.DB | CustomerCharge و ProviderCost مجزا با usage_qty،price_version،factor=0.5،unit_precision و ledger refs | CORE-W-090.DB.T01: هر UsageEvent هزینه داخلی و customer debit دو ref مستقل داشته باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-090.BE | محاسبه هزینه مشتری و تأمین‌کننده جدا؛ ارجاع گردکردن فقط W028 و refund remainder فقط W062؛ متریک سنجش باز | CORE-W-090.BE.T01: با دو execution rate متفاوت هزینه پایه تازه لحاظ شود اما اجرای قدیمی reprice نشود؛ واحد metric بدون تصمیم hard-code نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-090.FE | گزارش جداگانه مبلغ دریافتی مشتری و هزینه تامین‌کننده با snapshot نرخ/مصرف | CORE-W-090.FE.T01: گزارش customer=۱۰ و provider=۸ نمونه، دو عدد را مخلوط نکند و نسخه‌شان قابل ردیابی باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-090.QA | تست تغییر قیمت پایه اجرای تازه، factor، گردکردن و دروازه متریک باز | CORE-W-090.QA.T01: قاعده tie Largest Remainder بدون تصمیم تکمیلی به اولویت نقد/هدیه تبدیل نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-091 — ۹.۱.۵. هزینهٔ لغو، شکست و اجرای ناقص
 **مرجع:** کیف پول ۹.۱.۵، خط 1443؛ **مالک:** CORE-US-31.
@@ -1282,10 +1282,10 @@
 - پاسخ مصوب: در لغو داوطلبانهٔ مشتری، مصرف مجاز انجام‌شده و مراحل تحویل‌شده تا زمان لغو، طبق تعرفه و مجوز همان اجرا دریافت و باقی رزرو بدون تعهد آزاد شود. یک مصرف یا مرحله دوبار محاسبه نشود. در شکست یا اجرای ناقص ناشی از خطای شهاب، فقط خروجی مستقل، قابل استفاده و تحویل‌شده با مبنای قیمت اعلام‌شده هزینه داشته باشد؛ بدون چنین خروجی‌ای، هزینهٔ مشتری صفر و کسر احتمالی مربوط بازگردانده شود. پردازش داخلی بی‌نتیجه به علت خطای شهاب، به مشتری تحمیل نشود. سهم دارای نتیجهٔ نامعلوم پیش از احراز وضعیت، مصرف قطعی یا آزاد فرض نشود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-091.DB | CancellationSettlement با علت، delivered_billable_output،previous_capture،held、unresolved و original_operation | CORE-W-091.DB.T01؛ قبولی/رد: شکست شهاب بدون خروجی مستقل قابل‌استفاده customer_billable=۰؛ unknown جدا بماند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-091.BE | حساب هزینه مجاز تا لغو داوطلبانه و release بدون تعهد؛ شکست شهاب فقط خروجی مستقل تحویل‌شده charge شود | CORE-W-091.BE.T01؛ قبولی/رد: در لغو پس از capture=۶۰ از hold=۱۰۰، release=۴۰؛ یک stage دو بار charge نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-091.FE | نمای علت، اقلام تحویل‌شده، charge نهایی و release/refund بدون تضمین نتیجه unknown | CORE-W-091.FE.T01؛ قبولی/رد: در شکست بدون خروجی مبلغ customer=۰ و مبلغ کسرشده جبرانی برگردد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-091.QA | آزمون cancel voluntary/technical failure, partial delivery, unknown and retry | CORE-W-091.QA.T01؛ قبولی/رد: عدم تحمیل هزینه پردازش بی‌نتیجه؛ unresolved نه capture و نه release تا inquiry؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-091.DB | BillingOutcome با cancellation_reason و delivered_billable_output و unknown_obligation و refund/capture refs | CORE-W-091.DB.T01: هر deliverable با billable_event_id یکتا و تعهد pending جدا نگهداری شود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-091.BE | لغو داوطلبانه فقط مراحل تحویل شده؛ شکست شهاب فقط خروجی مستقل قابل‌استفاده؛ بدون خروجی هزینه صفر | CORE-W-091.BE.T01: با Hold=۱۰۰ و مرحله تحویل ۳۰ در لغو داوطلبانه capture=۳۰ release=۷۰؛ failure بدون تحویل capture=۰؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-091.FE | نمای کسر واقعی و آزادسازی مانده، دلیل لغو یا شکست و پرونده unknown | CORE-W-091.FE.T01: در شکست بدون خروجی، مبلغ مشتری صفر و refund capture اشتباه نمایش داده شود؛ unknown تا استعلام unresolved بماند؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-091.QA | تست لغو داوطلبانه، failure سیستم قبل/بعد تحویل و نتیجه خارجی unknown | CORE-W-091.QA.T01: وقوع billable event تکراری دو charge نسازد؛ unknown بدون شاهد نه capture و نه release قطعی شود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-092 — ۹.۱.۶. اجرای اصلاحی برای رفع خطای شهاب
 **مرجع:** کیف پول ۹.۱.۶، خط 1457؛ **مالک:** CORE-US-31.
@@ -1295,10 +1295,10 @@
 - ارتباط با بخش‌های دیگر: نرخ اجرای تازه در ۹.۱.۳ محفوظ است؛ مسئول پرداخت این هزینه در این بخش مشخص می‌شود. شناسه‌های بخش ۷ و بازیابی بخش ۸ باید رابطهٔ اجرای اصلی و اصلاحی را نگهداری کنند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-092.DB | RemediationRun با parent_run_id،error_cause،internal_cost و customer_extra_charge=۰ | CORE-W-092.DB.T01؛ قبولی/رد: هر remediation معتبر به همان سفارش و علت خطا وصل باشد؛ درخواست جدید مستقل همان شناسه را نگیرد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-092.BE | محاسبه هزینه داخلی اصلاح با نرخ روز و صدور quote مشتری صفر؛ هزینه قبلی طبق W091 | CORE-W-092.BE.T01؛ قبولی/رد: برای run اصلاحی شهاب customer extra debit=۰؛ درخواست مستقل خارج دامنه قیمت جدا بگیرد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-092.FE | نمای «اصلاح خطای شهاب بدون هزینه اضافه» و پیوند اجرای اصلی | CORE-W-092.FE.T01؛ قبولی/رد: run اصلاحی رسید پرداخت اضافه نشان ندهد؛ درخواست تازه خارج scope رایگان معرفی نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-092.QA | آزمون remediation retry، double refund و out-of-scope new order | CORE-W-092.QA.T01؛ قبولی/رد: تلاش دو بار اصلاح فقط یک نتیجه مالی؛ customer_extra=۰، internal_cost ثبت؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-092.DB | CorrectiveExecution با original_execution_id،cause_code،payer=SHAHAB و provider_cost_rate_current | CORE-W-092.DB.T01: correction linked to original و same-scope verified؛ event قبلی حذف نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-092.BE | اصلاح خطای شهاب در همان دامنه با rate جاری هزینه داخلی شهاب؛ هیچ debit افزوده مشتری؛ سفارش تازه مستقل نیاز به مجوز | CORE-W-092.BE.T01: در اصلاح same-scope provider_cost=۲۰ اما extra_customer_charge=۰؛ درخواست مستقل ورودی تازه charge طبق consent؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-092.FE | نمای جریان اصلاح رایگان در همان سفارش و تفاوت آن با سفارش جدید | CORE-W-092.FE.T01: در اصلاح سیستم پیام «هزینه اضافه ۲۰» به مشتری نمایش داده نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-092.QA | تست اصلاح در scope یکسان، scope تغییر یافته و retry در اصلاح | CORE-W-092.QA.T01: refund قبلی و correction دوبار انجام نشوند؛ نرخ جاری هزینه داخلی ثبت شود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-093 — ۹.۲. تسویه، ثبت حسابداری و اسناد رسمی
 **مرجع:** کیف پول ۹.۲، خط 1471؛ **مالک:** CORE-US-43.
@@ -1306,10 +1306,10 @@
 - مسئله و هدف: مصرف مشتری، ایجاد بدهی تأمین‌کننده، پرداخت بانکی و صدور فاکتور زمان و اثر یکسان ندارند. باید ارتباط آن‌ها روشن باشد و یک خدمت دوبار از مشتری کسر یا صورتحساب نشود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-093.DB | روابط مستقل service_usage،supplier_payable،payout،customer_invoice و bank_payment | CORE-W-093.DB.T01؛ قبولی/رد: مصرف خدمت و وصول پول دو ثبت مستقل باشند؛ هیچ payout تأمین‌کننده debit دوباره مشتری نسازد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-093.BE | Core accounting events با state و idempotency برای payable و settlement، اسناد فقط با گیت حقوقی | CORE-W-093.BE.T01؛ قبولی/رد: supplier payout بعد fulfilment دوباره wallet capture ندهد؛ سند بدون پرداخت revenue ایجاد نکند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-093.FE | پنل وضعیت تسویه و ارتباط اسناد با خدمت برای نقش مالی مجاز | CORE-W-093.FE.T01؛ قبولی/رد: فاکتور، رسید و گردش بانک یکسان برچسب نخورند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-093.QA | آزمون ۱ مصرف، ۱ بدهی تأمین‌کننده، payout با callback تکراری | CORE-W-093.QA.T01؛ قبولی/رد: پس از payout دوباره charge_customer_count همان یک بماند؛ مدارک مالیاتی باز؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-093.DB | SupplierLiability،CustomerPayment،Settlement،Invoice با رویداد و زمان مستقل و linkage | CORE-W-093.DB.T01: invoice_id و supplier_settlement_id از customer_payment_id متمایز باشند؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-093.BE | سرویس ثبت بدهی supplier هنگام تعهد و تسویه در مرحله بعد؛ یک billable service یک customer debit | CORE-W-093.BE.T01: پرداخت ۱۰۰ مشتری و ۳۰ به تامین‌کننده فقط یک customer debit=۱۰۰ بسازد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-093.FE | پنل وضعیت بدهی/تسویه و اسناد مستقل از تاریخچه پرداخت مشتری | CORE-W-093.FE.T01: بعد supplier paid، رسید مشتری charge جدید نمایش ندهد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-093.QA | تست charge مشتری، ایجاد بدهی، پرداخت تامین‌کننده، invoice بدون وصول | CORE-W-093.QA.T01: invoice issued بدون payment، هیچ revenue/cash-in جدید بدون قاعده مصوب نسازد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-094 — ۹.۲.۱. زمان‌بندی تسویه با تأمین‌کننده
 **مرجع:** کیف پول ۹.۲.۱، خط 1475؛ **مالک:** CORE-US-43.
@@ -1318,10 +1318,10 @@
 - پاسخ مصوب: تسویه پس از تطبیق مبالغ و طبق قرارداد هر تأمین‌کننده انجام شود؛ برنامهٔ روزانه یا هفتگی واحدی برای همه تحمیل نشود. هزینه و بدهی از زمان تحقق تعهد مربوط جدا ثبت شوند و پرداخت بانکی بعدی، بدهی را تسویه کند؛ پرداخت به تأمین‌کننده کسر دوباره از کیف پول مشتری ایجاد نکند. زمان دقیق و مدارک تطبیق هر تأمین‌کننده در قرارداد اجرایی مشخص شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-094.DB | SupplierContractSettlementPolicy با due_schedule،reconciled_amount،payable و bank_payout | CORE-W-094.DB.T01؛ قبولی/رد: برای دو تأمین‌کننده قرارداد متفاوت زمان‌بندی مشترک اجباری ایجاد نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-094.BE | تسویه فقط پس از reconciliation و طبق قرارداد هر تأمین‌کننده؛ کاهش بدهی پس از payout موفق | CORE-W-094.BE.T01؛ قبولی/رد: unreconciled supplier payout رد؛ repeated payout یک payment اجرا کند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-094.FE | نمای بدهی، تطبیق و نوبت پرداخت به اپراتور مالی شهاب | CORE-W-094.FE.T01؛ قبولی/رد: وضعیت بدهی پیش از پرداخت «تسویه‌شده» نمایش داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-094.QA | تست two suppliers differing terms،reconcile fail،payout retry | CORE-W-094.QA.T01؛ قبولی/رد: ۱ wallet capture به ۲ supplier settlement بدون customer second debit؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-094.DB | SupplierContractPolicy با reconciliation_basis و settlement_schedule قابل تغییر برای هر تامین‌کننده؛ liability ledger | CORE-W-094.DB.T01: برای supplier A و B برنامه‌های متفاوت ذخیره شوند، هیچ default واحد تحمیل نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-094.BE | ایجاد بدهی با مصرف واقعی، تطبیق supplier سپس پرداخت بانکی و کاهش بدهی؛ زمان‌بندی هر قرارداد مستقل | CORE-W-094.BE.T01: settlement به تامین‌کننده در ledger supplier liability اثر گذارد نه wallet debit دوم مشتری؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-094.FE | نمای گزارش اختلاف supplier و تاریخ تسویه همان قرارداد؛ نه روزانه ثابت برای همه | CORE-W-094.FE.T01: گزارش بدهی ۳۰ تا تأیید تسویه صفر نشود؛ سند تطبیق موجود باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-094.QA | تست دو تامین‌کننده با برنامه روزانه و هفتگی به‌عنوان fixture، mismatch و replay settlement | CORE-W-094.QA.T01: دو callback تسویه یک پرداخت را دوباره از حساب شهاب کسر نکنند؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-095 — ۹.۲.۲. فاکتور پیش از پرداخت و بررسی تخصصی اسناد
 **مرجع:** کیف پول ۹.۲.۲، خط 1489؛ **مالک:** CORE-US-43.
@@ -1330,10 +1330,10 @@
 - ارتباط با بخش‌های دیگر: الزام اصلی بخش ۶.۱.۶ و تفکیک پول و تعهد و درآمد بخش ۴ برقرارند؛ نمایش رسید و فاکتور در بخش ۱۰ باید همین تفاوت‌ها را روشن کند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-095.DB | InvoiceDocument/ChargeRequest/Payment/ServiceUsage و tax_status مستقل با correction references | CORE-W-095.DB.T01؛ قبولی/رد: صدور پیش از پرداخت سازمان به همان org و wallet وصل شود؛ بدون وصول credit=۰؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-095.BE | API صدور فاکتور پیشینی برای درگاه/واریز و منع duplicate invoice/revenue؛ نوع سند مالیاتی گیت حقوقی | CORE-W-095.BE.T01؛ قبولی/رد: اگر فاکتور صادر اما پرداخت failed باشد، درآمد خدمت و wallet credit ایجاد نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-095.FE | نمای سند پیش از پرداخت با تفکیک invoice/receipt/service delivery | CORE-W-095.FE.T01؛ قبولی/رد: صورتحساب مالیاتی را بدون تأیید تخصصی معادل پیش‌فاکتور ننامد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-095.QA | آزمون duplicate invoice، bank transfer و gateway، settlement later و tax gate | CORE-W-095.QA.T01؛ قبولی/رد: فاکتور تنها ledger credit=۰؛ فاکتور دوباره همان sale تکراری ندهد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-095.DB | InvoiceCase با invoice/request/payment/service/correction links و tax_schema_status به صورت pending_legal | CORE-W-095.DB.T01: یک فروش با چند event charge/consume شناسه ارتباطی داشته باشد اما فاکتور فروش دوبار ایجاد نکند؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-095.BE | صدور فاکتور رسمی سازمانی پیش از پرداخت؛ بررسی مالیاتی نوع سند و شناسایی درآمد گیت باز؛ شارژ را خدمت فروخته فرض نکند | CORE-W-095.BE.T01: invoice بدون وصول wallet_credit=۰ و service_revenue=۰؛ نوع tax سند تا بررسی تخصصی blocked؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-095.FE | نمای فاکتور پیش از پرداخت با وضعیت مستقل وصول و مصرف خدمت | CORE-W-095.FE.T01: ادمین سازمان سند را دریافت کند؛ پس از پرداخت همان پرونده شماره وصول داشته باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-095.QA | تست invoice before payment در دو روش، وصول بعدی، لغو و double invoicing | CORE-W-095.QA.T01: درگاه و واریز هر دو الزام سند را داشته باشند؛ مالیات یا فرمت خاص بدون تأیید فرض نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-096 — ۱۰.۱. نمایش موجودی، هزینه و پیگیری
 **مرجع:** کیف پول ۱۰.۱، خط 1507؛ **مالک:** CORE-US-30.
@@ -1341,10 +1341,10 @@
 - مسئله و هدف: مشتری باید وضعیت و علت تغییر اعتبار را بفهمد، بدون شلوغ‌شدن نمای اصلی.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-096.DB | ReadModel وضعیت مانده/hold/withdrawable، هزینه و آخرین وضعیت عملیاتی با source ledger | CORE-W-096.DB.T01؛ قبولی/رد: هر رقم پنل از snapshot مجاز Core قابل محاسبه باشد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-096.BE | API projection مالک‌محور برای مانده و رسید و pending، با consistency version | CORE-W-096.BE.T01؛ قبولی/رد: در unknown event، status قطعی نشان ندهد و مانده آزاد با ledger ناسازگار نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-096.FE | نمای خلاصه و drilldown بدون نمایش تمامی raw events در صفحه اول | CORE-W-096.FE.T01؛ قبولی/رد: کاربر با یک کلیک provenance/hold و علت تغییر را ببیند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-096.QA | آزمون available/held/pending از ledger در حالت delay و retry | CORE-W-096.QA.T01؛ قبولی/رد: panel total=ledger projection؛ هیچ هزینه/مانده ساختگی؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-096.DB | ReadModel مستقل برای available/held/withdrawable و cost/audit status از دفترکل معتبر | CORE-W-096.DB.T01: ReadModel با ledger reconciliation قابل بازسازی باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-096.BE | API تجمیع وضعیت با منشأ و شناسه پیگیری، بدون ادغام pending و posted | CORE-W-096.BE.T01: pending charge موجودی قابل مصرف را افزایش ندهد؛ debit واقعی و hold جدا باشد؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-096.FE | نمای اصلی خلاصه با ورود به جزئیات و روش پیگیری | CORE-W-096.FE.T01: با posted=۵۰۰ و hold=۱۰۰ UI available=۴۰۰ نشان دهد؛ pending موفق نمایش داده نشود؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-096.QA | تست مانده، هزینه actual vs reserved، state pending و access | CORE-W-096.QA.T01: فقط کاربر صاحب کیف داده خودش ببیند؛ خلاصه بدون افشای حساب‌های سازمان دیگر؛ شاهد: fixture، ردیابی و assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-097 — ۱۰.۱.۱. نمای اصلی و جزئیات
 **مرجع:** کیف پول ۱۰.۱.۱، خط 1511؛ **مالک:** CORE-US-30.
