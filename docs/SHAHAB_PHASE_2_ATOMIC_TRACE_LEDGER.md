@@ -2026,6 +2026,864 @@
 
 **نقطه ادامه:** CORE-W-049؛ ممیزی تک‌خطی B/W؛ تفکیک احکام اتمی در هر بند؛ تکمیل وابستگی‌های Adviser/Assistant. از ۲٬۸۰۶ واحد خطی ۸۴۹ واحد هنوز فاقد شناسه SEM اولیه هستند و این دفتر با وضعیت فعلی، پوشش کامل ندارد.
 
+### کنترل کامل مرجع خطی — ۸۴۹ واحد فاقد SEM اولیه
+
+این ۸۴۹ واحد از دو خط مبنای تثبیت‌شده استخراج شده‌اند و برای حفظ ترتیب واقعی مرجع، شناسه یک‌به‌یک دارند. «نقش ظاهری نامزد» فقط طبقه‌بندی قالب متن است، **نه تصمیم درباره الزام اجرایی یا تأیید معنایی**. هر مورد باید جداگانه برای نقش معنایی، احکام صریح/ضمنی/مرکب، وضعیت مصوبه، مالک، Story، تسک و آزمون تعیین تکلیف شود. نبود SEM قبلی به معنی نداشتن الزام نیست. وضعیت همه این ردیف‌ها NOT EXAMINED است.
+
+| شناسه خطی | مرجع و متن خط | نقش ظاهری نامزد | وضعیت معنایی | مالک / الزام اتمی / تسک / آزمون |
+|---|---|---|---|---|
+| LINE-B-1 | B:1 — # سند توسعه فاز دوم شهاب — نسخه ۱.۶ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-3 | B:3 — **شناسه سند:** `SHAHAB-PHASE2-DEV-DOC` | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-4 | B:4 — **نسخه:** `V1.6` | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-5 | B:5 — **تاریخ به‌روزرسانی:** ۲۰۲۶-۱۱-۱۵ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-7 | B:7 — **وضعیت جاری:** تصمیم‌های مصوب معماری، محصول، مالی، امنیت و حاکمیت انتشار، از جمله سیاست سه‌مرحله‌ای و تصمیم‌های O5-01 تا O5-14، لازم‌الاجرا هستند؛ جزئیات اجرایی، شواهد، آستانه‌های عددی، بودجه و مجوز  | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-8 | B:8 — **ساختار:** فصل نخست — شبکه دانش و بازیابی مقررات؛ فصل دوم — معماری کلان محصول؛ فصل سوم — معماری تفصیلی ایجنت‌ها و گزینه‌های معماری استقرار؛ فصل پنجم — سیاست مصوب اجرای تدریجی و برنامه اجرایی نیازمند  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-10 | B:10 — > **یادداشت ویرایشی:** فصل نخست از نسخه ۰.۱ حفظ شده است؛ فصل دوم از نسخه ۰.۲ فقط در نقاط تعارض با تصمیم‌های جدید اصلاح شده و فصل سوم برای طراحی تفصیلی افزوده شده و در نسخه ۰.۴ یک بخش مستقل درباره گزین | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-12 | B:12 — > **مبنای نسخه ۱.۰ و کنترل تغییر:** این نسخه، متن کامل نسخه ۰.۹ را حفظ کرده و پیوست ممیزی یکپارچگی فاز اول و دوم را اضافه می‌کند. نسخه مبنای انتشار نرم‌افزار طبق اعلام صریح مالک پروژه **`v.1.08`** است | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-14 | B:14 — > **منابع کنترل‌شده:** کد شاخه `main`، `docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md` (نسخه ۲۰.۰)، `docs/project-current-state.md`، `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md`، `do | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-16 | B:16 — ### تصمیم سراسری A01 — معماری هدف و استقرار تدریجی (مصوب ۲۰۲۶-۱۱-۰۹) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-18 | B:18 — **وضعیت: مصوب مالک پروژه در سطح معماری هدف؛ بدون مجوز اجرای کد، انتشار یا تغییر زیرساخت.** این تصمیم بر فصل‌های دوم، سوم و پنجم و برنامه‌های اجرایی استخراج‌شده از سند مادر حاکم است و هیچ‌یک از ۴۰ ADR  | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-20 | B:20 — - **Core:** هسته محصول، مونولیت ماژولار با مرزهای داخلی روشن. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-21 | B:21 — - **Adviser:** سرویس مستقل مشاور هوشمند و RAG با چرخه استقرار مستقل از Core. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-22 | B:22 — - **Assistant:** سرویس مستقل دستیار اجرایی در معماری هدف؛ در انتشار RAG R1 فقط مرزها و قراردادهای آن طراحی می‌شوند و خود سرویس پیاده‌سازی یا مستقر نمی‌شود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-23 | B:23 — - **انتشار RAG R1:** فقط Core و Adviser واحدهای استقرار فعال این انتشارند؛ جزئیات Release Plan همچنان نیازمند تصویب مستقل است. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-24 | B:24 — - **زیرساخت اولیه:** VM فعلی و زیرساخت PostgreSQL/Redis موجود مبنا هستند. سه سرویس به معنی الزام به سه VM یا سه نمونه مستقل PostgreSQL نیست. تفکیک منطقی مالکیت داده ضروری است؛ تفکیک فیزیکی با شواهد ام | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-25 | B:25 — - **قراردادها، پیکربندی و مشاهده‌پذیری:** طبق A08، تنظیمات عملیاتی، اسرار، Feature Flag و سیاست‌های کسب‌وکار چهار دسته با مالکیت و چرخه تأیید متفاوت‌اند؛ پیکربندی نوع‌دار، نسخه‌دار، اعتبارسنجی‌شده و ق | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-26 | B:26 — - **تقدم تفسیر:** متن‌های قدیمیِ «یک مونولیت برای همه قابلیت‌ها»، «میکروسرویس کامل» یا «باز بودن اصل انتخاب معماری هدف» دیگر گزینه اجرایی مصوب نیستند؛ صرفاً سابقه تحلیل به‌شمار می‌روند. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-28 | B:28 — ## فصل نخست — شبکه دانش، بازیابی مبتنی بر تقاضا و پایش مقررات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-38 | B:38 — ### 1. هدف و اصول طراحی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-42 | B:42 — اصول: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-52 | B:52 — ### 2. دامنه و فرضیات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-54 | B:54 — #### 2.1 منابع بالقوه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-62 | B:62 — #### 2.2 خارج از محدوده V0.1 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-70 | B:70 — ### 3. اجزای معماری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-72 | B:72 — #### 3.1 Query Understanding & Retrieval Router | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-78 | B:78 — قواعد پایه: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-88 | B:88 — ##### 3.1.1 مثال تشریحی — پرسش درباره رد ضامن در طرح مهربانی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-101 | B:101 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-113 | B:113 — \\| شناسه \\| پرسش فرعی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-114 | B:114 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-124 | B:124 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-136 | B:136 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-145 | B:145 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-146 | B:146 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-155 | B:155 — L --> E | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-156 | B:156 — V --> E | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-157 | B:157 — C --> E | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-159 | B:159 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-163 | B:163 — ```json | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-164 | B:164 — { | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-165 | B:165 — "domain": "loans", | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-167 | B:167 — "entities": { | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-171 | B:171 — }, | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-172 | B:172 — "risk_level": "high", | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-173 | B:173 — "retrieval_plan": [ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-179 | B:179 — ], | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-182 | B:182 — } | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-183 | B:183 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-194 | B:194 — ##### 3.1.2 سطح تصمیم‌گیری Retrieval Router | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-198 | B:198 — #### 3.2 Demand-Driven Ingestion (DDI) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-210 | B:210 — #### 3.3 Source Discovery & Metadata Catalog | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-218 | B:218 — #### 3.4 Relationship Discovery Engine (RDE) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-223 | B:223 — **مراحل:** | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-234 | B:234 — #### 3.5 Selective Document Ingestion | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-242 | B:242 — #### 3.6 Document Revalidation Service (DRS) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-250 | B:250 — #### 3.7 Knowledge Base, Catalog & Relationship Store | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-259 | B:259 — #### 3.8 Answer Generation & Citation Guard | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-263 | B:263 — ### 3.9 معماری مصوب تکمیلی و نگاشت تصمیم‌های ۴۰گانه (V0.8) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-267 | B:267 — #### 3.9.1 دفتر تصمیم‌های معماری (Architecture Decision Register) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-269 | B:269 — ##### ADR-RAG-01 — کنترل پذیرش خدمت و مسیریابی تطبیقی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-274 | B:274 — ##### ADR-RAG-02 — بازیابی زنده ریسک‌محور | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-279 | B:279 — ##### ADR-RAG-03 — PostgreSQL-first و آمادگی گراف | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-284 | B:284 — ##### ADR-RAG-04 — لایه دسترسی ترکیبی و قرارداد مشترک منابع | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-289 | B:289 — ##### ADR-RAG-05 — هماهنگی رویدادمحور DDI/SR/SCM | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-294 | B:294 — ##### ADR-RAG-06 — حل تعارض چندمعیاره حقوقی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-299 | B:299 — ##### ADR-RAG-07 — پاسخ‌گویی مبتنی بر کفایت شواهد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-304 | B:304 — ##### ADR-RAG-08 — اعتبار زمانی دوگانه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-309 | B:309 — ##### ADR-RAG-09 — بازیابی شکست‌خورده و بازیابی ایمن | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-314 | B:314 — ##### ADR-RAG-10 — بودجه بازیابی و کاتالوگ خدمت پویا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-319 | B:319 — ##### ADR-RAG-11 — ارزیابی چندلایه RAG | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-324 | B:324 — ##### ADR-RAG-12 — چرخه عمر وابسته دانش | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-329 | B:329 — ##### ADR-RAG-13 — امنیت چندلایه و مقابله با Prompt Injection | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-334 | B:334 — ##### ADR-RAG-14 — ردیابی سرتاسری با رعایت حریم خصوصی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-339 | B:339 — ##### ADR-RAG-15 — تشخیص تغییر ساختار و کیفیت استخراج | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-344 | B:344 — ##### ADR-RAG-16 — پوشش ساختاری و شکاف‌یابی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-349 | B:349 — ##### ADR-RAG-17 — کش چندلایه آگاه از اعتبار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-354 | B:354 — ##### ADR-RAG-18 — ارجاع به پشتیبانی در موارد نیازمند کارشناس | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-359 | B:359 — ##### ADR-RAG-19 — انتشار نسخه‌دار و بازگشت‌پذیر | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-364 | B:364 — ##### ADR-RAG-20 — حاکمیت انتشار دانش با وضعیت‌های تفکیکی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-369 | B:369 — ##### ADR-RAG-21 — کنترل بار و Backpressure | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-374 | B:374 — ##### ADR-RAG-22 — اجرای پایدار و Idempotent گردش‌کار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-379 | B:379 — ##### ADR-RAG-23 — اعتماد چندبعدی به منبع در سطح ادعا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-384 | B:384 — ##### ADR-RAG-24 — چرخه عمر کنترل‌شده منابع | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-389 | B:389 — ##### ADR-RAG-25 — قرارداد داده کاننیکال نسخه‌دار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-394 | B:394 — ##### ADR-RAG-26 — جداسازی دانش عمومی از زمینه کاربر | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-399 | B:399 — ##### ADR-RAG-27 — تحلیل اثر تغییر مقررات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-404 | B:404 — ##### ADR-RAG-28 — Snapshot سازگار و فعال‌سازی اتمیک | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-409 | B:409 — ##### ADR-RAG-29 — حل هویت مستند موجودیت‌های مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-414 | B:414 — ##### ADR-RAG-30 — مدل صریح دامنه شمول و وابستگی قواعد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-419 | B:419 — ##### ADR-RAG-31 — انتشار عدم قطعیت مرحله‌ای | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-424 | B:424 — ##### ADR-RAG-32 — محاسبه مالی قطعی و مستند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-429 | B:429 — ##### ADR-RAG-33 — زمینه گفت‌وگوی ساختاریافته و وضعیت بازیابی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-434 | B:434 — ##### ADR-RAG-34 — حاکمیت مجوز و شرایط استفاده منابع | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-439 | B:439 — ##### ADR-RAG-35 — تضمین تازگی متناسب با ریسک | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-444 | B:444 — ##### ADR-RAG-36 — Failover تأییدشده و تاب‌آوری بازیابی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-449 | B:449 — ##### ADR-RAG-37 — اصالت شواهد و استناد در سطح ادعا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-454 | B:454 — ##### ADR-RAG-38 — حلقه کنترل‌شده بهبود کیفیت بازیابی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-459 | B:459 — ##### ADR-RAG-39 — بازیابی پس از بحران و بازسازی دانش | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-464 | B:464 — ##### ADR-RAG-40 — تثبیت معماری و آمادگی پیاده‌سازی مرحله‌ای | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-469 | B:469 — #### 3.9.2 زنجیره اجرایی یکپارچه و مرز ماژول‌ها | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-475 | B:475 — #### 3.9.3 قراردادهای مشترک و حداقل فیلدهای الزامی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-478 | B:478 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-492 | B:492 — #### 3.9.4 سیاست انتشار، نمایش و تصمیم در وضعیت عدم قطعیت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-495 | B:495 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-502 | B:502 — #### 3.9.5 سازگاری زمانی، وابستگی‌ها و انتشار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-506 | B:506 — #### 3.9.6 حداقل کنترل‌های کیفیت و پذیرش پیش از استقرار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-510 | B:510 — #### 3.9.7 توالی وابستگی برای طراحی و اعتبارسنجی (نه برنامه اجرایی مصوب) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-520 | B:520 — #### 3.9.8 نقاط تصمیم بازِ اجرایی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-524 | B:524 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-527 | B:527 — ### 4. شماتیک کلان معماری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-529 | B:529 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-530 | B:530 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-537 | B:537 — DDI --> KB | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-538 | B:538 — DDI --> A | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-543 | B:543 — KB --> RDE | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-550 | B:550 — DRS --> KB | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-551 | B:551 — KB --> DRS | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-553 | B:553 — LIVE --> SRC | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-554 | B:554 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-558 | B:558 — ### 5. منطق تصمیم‌گیری برای اسناد جدید | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-560 | B:560 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-561 | B:561 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-567 | B:567 — T -->\\|بله\\| H | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-574 | B:574 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-576 | B:576 — #### 5.1 نمونه قواعد تصمیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-579 | B:579 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-588 | B:588 — ### 6. مثال کامل و مرحله‌به‌مرحله (کاملاً فرضی) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-590 | B:590 — #### 6.1 وضعیت اولیه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-596 | B:596 — #### 6.2 روز اول: سؤال و ورود سند A | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-609 | B:609 — \\| مخزن \\| محتوا \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-610 | B:610 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-615 | B:615 — #### 6.3 روز پنجم: کشف سند B بدون پرسش کاربر | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-624 | B:624 — #### 6.4 روز پنجم: بررسی انتخابی سند B | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-639 | B:639 — **وضعیت پس از بررسی:** | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-641 | B:641 — \\| مخزن \\| محتوا \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-642 | B:642 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-648 | B:648 — #### 6.5 روز ششم: سؤال مجدد کاربر | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-657 | B:657 — #### 6.6 حالت شکست: عنوان مبهم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-661 | B:661 — ### 7. مدل داده پیشنهادی اولیه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-664 | B:664 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-677 | B:677 — ### 8. وضعیت‌ها و سیاست‌های اطمینان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-691 | B:691 — ### 9. اجزای فنی پیشنهادی (غیرقطعی) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-723 | B:723 — ### 10. معیارهای ارزیابی و پذیرش اولیه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-725 | B:725 — \\| معیار \\| روش سنجش \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-726 | B:726 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-744 | B:744 — ### 11. ریسک‌ها و اقدامات کاهنده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-747 | B:747 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-757 | B:757 — ### 12. مسیر اعتبارسنجی پیش از پیاده‌سازی گسترده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-767 | B:767 — ### 13. تصمیم‌های باز و پارامترهای نیازمند تعیین | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-780 | B:780 — ### 14. جمع‌بندی تصمیم معماری فصل اول (مبنای ۰.۱ + تصمیم‌های V0.8) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-784 | B:784 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-786 | B:786 — ## فصل دوم — معماری محصول، ایجنت‌ها و اجرای خدمات مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-796 | B:796 — ### ۱. هدف و جایگاه فصل دوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-804 | B:804 — ### ۲. معماری مرجع یکپارچه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-808 | B:808 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-809 | B:809 — flowchart TB | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-821 | B:821 — ORC <--> KNOW | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-826 | B:826 — WF <--> BILL | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-833 | B:833 — FB <--> KNOW | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-834 | B:834 — FF <--> KNOW | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-835 | B:835 — FB --> ORC | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-836 | B:836 — FF --> ORC | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-838 | B:838 — ENT <--> PG | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-839 | B:839 — BILL <--> PG | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-842 | B:842 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-846 | B:846 — ### ۳. معماری دامنه‌محور | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-852 | B:852 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-853 | B:853 — flowchart TB | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-863 | B:863 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-867 | B:867 — ### ۴. کاتالوگ خدمات و مسیریاب تجربه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-874 | B:874 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-880 | B:880 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-881 | B:881 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-893 | B:893 — A --> B --> C --> D | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-904 | B:904 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-908 | B:908 — ### ۵. هماهنگ‌کننده ایجنت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-914 | B:914 — ### ۶. موتور گردش‌کار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-920 | B:920 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-921 | B:921 — stateDiagram-v2 | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-922 | B:922 — [*] --> Created | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-935 | B:935 — Completed --> [*] | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-936 | B:936 — Failed --> [*] | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-937 | B:937 — Cancelled --> [*] | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-938 | B:938 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-942 | B:942 — ### ۷. معماری ایجنت رویدادمحور | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-948 | B:948 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-949 | B:949 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-950 | B:950 — A["رویداد عملیاتی"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-953 | B:953 — D{"محرک معتبر"} | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-956 | B:956 — G["بازیابی شواهد"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-959 | B:959 — J["ادامه گردش‌کار"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-960 | B:960 — A --> B --> C --> D | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-964 | B:964 — E --> G | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-965 | B:965 — F --> G | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-966 | B:966 — G --> H --> I --> J | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-967 | B:967 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-971 | B:971 — ### ۸. فیدبک و فیدفوروارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-979 | B:979 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-980 | B:980 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-984 | B:984 — D["ارزیابی ریسک"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-989 | B:989 — I["تصمیم مشتری"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-991 | B:991 — E -->\\|خیر\\| F | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-993 | B:993 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-999 | B:999 — ### ۹. مدل محصول و سطوح عضویت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1004 | B:1004 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1017 | B:1017 — ### ۱۰. مدل تجاری و معماری مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1029 | B:1029 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1030 | B:1030 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1031 | B:1031 — U["مشتری"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1039 | B:1039 — U --> S --> E | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1040 | B:1040 — U --> W --> L | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1041 | B:1041 — E --> T | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1042 | B:1042 — U --> A --> L | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1043 | B:1043 — T --> R --> L | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1044 | B:1044 — S --> L | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1045 | B:1045 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1048 | B:1048 — ### ۱۰.۱. کیف پول شهاب — تصمیم‌های مصوب E03 و مرز اجرا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1062 | B:1062 — ### ۱۰.۲. قواعد مصوب E04 برای اشتراک و تصمیم باز FD-02 درباره فعال‌سازی زیرساخت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1076 | B:1076 — **محورهای بررسی:** | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1087 | B:1087 — ### ۱۰.۳. تصمیم باز FD-03 — درگاه پرداخت و صدور خودکار اسناد حسابداری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1093 | B:1093 — **محورهای بررسی:** | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1105 | B:1105 — ### ۱۰.۴. مدل درآمدی شهاب — تصمیم‌های مصوب E01 و کیف پول و جزئیات عددی باز | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1109 | B:1109 — #### ۱۰.۴.۱. منطق کلان کسب درآمد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1112 | B:1112 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1122 | B:1122 — #### ۱۰.۴.۲. سنجش مصرف، برآورد و تفکیک قیمت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1128 | B:1128 — #### ۱۰.۴.۳. کیف پول، حاشیه عملیات و تسویه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1136 | B:1136 — #### ۱۰.۴.۴. خروجی‌های لازم برای طراحی مالی و انتشار بعدی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1145 | B:1145 — ### ۱۱. مجوز مشتری و امنیت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1150 | B:1150 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1158 | B:1158 — ### ۱۱.۱. الزامات تکمیلی ابزارهای MCP و API غیرمستقیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1170 | B:1170 — ### ۱۲. اتصال به منابع خارجی و اصل استقلال عملیاتی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1172 | B:1172 — دو مسیر مستقل داریم: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1177 | B:1177 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1178 | B:1178 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1184 | B:1184 — OBS --> DISC | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1186 | B:1186 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1190 | B:1190 — ### ۱۳. اثر بر طراحی دیتابیس و سرویس‌ها | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1197 | B:1197 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1218 | B:1218 — ### ۱۴. جریان جامع اجرای درخواست | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1222 | B:1222 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1223 | B:1223 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1227 | B:1227 — D["ایجاد پرونده"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1229 | B:1229 — F["استعلام مجاز"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1232 | B:1232 — I["فیدبک و راهکار"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1241 | B:1241 — H -->\\|بله\\| I --> K | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1242 | B:1242 — H -->\\|خیر\\| J --> K | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1243 | B:1243 — K --> L | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1245 | B:1245 — L -->\\|خیر\\| O | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1246 | B:1246 — O --> P | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1247 | B:1247 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1253 | B:1253 — ### ۱۵. تجربه کاربری و سوپراپ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1257 | B:1257 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1258 | B:1258 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1260 | B:1260 — LOAN["تسهیلات"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1261 | B:1261 — TAX["مالیات"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1262 | B:1262 — GUAR["ضمانت‌نامه"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1265 | B:1265 — ADV["مشاور هوشمند"] | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1269 | B:1269 — CONFIRM --> CHECK | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1270 | B:1270 — HOME --> LOAN | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1271 | B:1271 — HOME --> TAX | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1272 | B:1272 — HOME --> GUAR | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1273 | B:1273 — LOAN --> CHECK | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1274 | B:1274 — TAX --> CHECK | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1275 | B:1275 — GUAR --> CHECK | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1279 | B:1279 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1283 | B:1283 — ### ۱۶. الزامات کیفیت و قابلیت اطمینان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1285 | B:1285 — \\| بخش \\| الزامات \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1286 | B:1286 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1295 | B:1295 — ### ۱۷. شاخص‌های ارزیابی پیشنهادی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1297 | B:1297 — \\| حوزه \\| شاخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1298 | B:1298 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1312 | B:1312 — ### ۱۸. جزئیات اجرایی باز و موضوعات نیازمند اعتبارسنجی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1336 | B:1336 — ### ۱۹. مسیر مفهومی توسعه و نسبت آن با مرحله‌بندی مصوب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1360 | B:1360 — ### ۲۰. الزامات الحاق و سازگاری با سند قبلی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1374 | B:1374 — ### ۲۱. نتیجه معماری فصل دوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1380 | B:1380 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1383 | B:1383 — ## فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1393 | B:1393 — ### ۱. دامنه، اهداف و تفکیک وضعیت تصمیم‌ها | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1398 | B:1398 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1410 | B:1410 — ### ۲. معماری سوپراپ و نشست دامنه‌محور | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1416 | B:1416 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1417 | B:1417 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1425 | B:1425 — B --> GUARD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1439 | B:1439 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1445 | B:1445 — ### ۳. دو نقش مشاور و دستیار و رابطه آن‌ها با پلن | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1451 | B:1451 — ### ۴. معماری چت تعاملی و تولید مؤلفه‌های رابط | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1455 | B:1455 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1456 | B:1456 — sequenceDiagram | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1472 | B:1472 — X->>B: ادامه فرایند | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1473 | B:1473 — B-->>X: نتیجه مرحله | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1476 | B:1476 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1480 | B:1480 — ### ۵. معماری Computer Use و چرخه تصمیم اجرایی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1484 | B:1484 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1485 | B:1485 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1497 | B:1497 — RECOVER --> OBS | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1498 | B:1498 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1502 | B:1502 — ### ۶. تشخیص اپ نصب‌شده، انتخاب مسیر و نصب با مجوز | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1506 | B:1506 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1507 | B:1507 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1512 | B:1512 — ASK --> CAN | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1520 | B:1520 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1524 | B:1524 — ### ۷. محل اجرا، مدیریت دستگاه و ایزوله‌سازی نشست | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1529 | B:1529 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1536 | B:1536 — ### ۸. کشف، آزمون و پایش تغییرات رابط کاربری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1540 | B:1540 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1541 | B:1541 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1553 | B:1553 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1557 | B:1557 — ### ۹. کاتالوگ پویا و خودتوسعه‌دهنده محصولات مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1565 | B:1565 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1566 | B:1566 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1573 | B:1573 — DISC --> EX | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1580 | B:1580 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1584 | B:1584 — ### ۱۰. API کاتالوگ: مزیت رقابتی بدون وابستگی عملیاتی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1597 | B:1597 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1604 | B:1604 — ### ۱۱. تفکیک سه نوع دانش و مدل داده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1612 | B:1612 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1613 | B:1613 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1618 | B:1618 — LAW --> MATCH | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1623 | B:1623 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1627 | B:1627 — ### ۱۲. موتور توصیه دامنه‌ای و استفاده از توصیه‌گر فعلی تسهیلات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1637 | B:1637 — ### ۱۳. سناریوی سرتاسری ضمانت‌نامه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1657 | B:1657 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1658 | B:1658 — sequenceDiagram | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1680 | B:1680 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1682 | B:1682 — ### ۱۴. رویدادها، فیدبک و فیدفوروارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1686 | B:1686 — ### ۱۵. امنیت، رضایت، احراز هویت و توقف امن | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1696 | B:1696 — ### ۱۵.۱. الزامات فنی نیازمند تصمیم برای قابلیت‌های مالی آتی (FD-01 تا FD-03) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1701 | B:1701 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1710 | B:1710 — ### ۱۶. کیفیت، آزمون و معیارهای پذیرش پیشنهادی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1713 | B:1713 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1727 | B:1727 — ### ۱۷. تعامل صوتی آینده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1731 | B:1731 — ### ۱۸. جزئیات اجرایی باز و آزمایش‌های امکان‌سنجی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1753 | B:1753 — ### ۱۹. مسیر اعتبارسنجی پیشنهادی، بدون تبدیل به تسک مصوب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1757 | B:1757 — ### ۲۰. سازگاری با فصل‌های اول و دوم و اسناد مرجع | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1765 | B:1765 — ### ۲۱. نتیجه فصل سوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1770 | B:1770 — ### ۲۲. تصمیم مصوب A01 و ارزیابی فنی مهاجرت و استخراج سرویس | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1774 | B:1774 — #### ۲۲.۱. گزینه تاریخی قابل آزمون در برابر تصمیم مصوب A01 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1778 | B:1778 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1779 | B:1779 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1789 | B:1789 — end | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1793 | B:1793 — end | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1795 | B:1795 — UI --> G | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1796 | B:1796 — G --> ID | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1797 | B:1797 — G --> DOMAIN | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1798 | B:1798 — DOMAIN --> CAT | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1799 | B:1799 — DOMAIN --> CASE | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1800 | B:1800 — CASE --> AGENT | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1801 | B:1801 — AGENT --> CU | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1802 | B:1802 — CAT --> DISC | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1803 | B:1803 — ID --> DATA | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1804 | B:1804 — CAT --> DATA | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1805 | B:1805 — CASE --> DATA | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1806 | B:1806 — BILL --> DATA | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1807 | B:1807 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1811 | B:1811 — #### ۲۲.۲. مقایسه گزینه‌های اولیه از منظر مهاجرت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1814 | B:1814 — \\|---\\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1823 | B:1823 — #### ۲۲.۳. قواعد پیشنهادی برای کاهش هزینه مهاجرت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1839 | B:1839 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1840 | B:1840 — flowchart LR | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1845 | B:1845 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1849 | B:1849 — #### ۲۲.۴. مسیر پیشنهادی مهاجرت تدریجی، بدون تعهد زمانی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1851 | B:1851 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1852 | B:1852 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1859 | B:1859 — S1 --> S2 --> GATE | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1863 | B:1863 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1867 | B:1867 — #### ۲۲.۵. معیارهای تصمیم برای استخراج هر ماژول | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1870 | B:1870 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1881 | B:1881 — #### ۲۲.۶. هزینه منابع و زیرساخت: چالش مستقل ماکروسرویس | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1888 | B:1888 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1889 | B:1889 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1895 | B:1895 — T --> A | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1896 | B:1896 — T --> B | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1897 | B:1897 — T --> C | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1898 | B:1898 — T --> D | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1901 | B:1901 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1905 | B:1905 — #### ۲۲.۷. آزمون‌های معماری پیشنهادی پیش از تصویب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1919 | B:1919 — #### ۲۲.۸. معیار پذیرش یا رد پیشنهاد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1925 | B:1925 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1927 | B:1927 — ## فصل پنجم — سیاست مصوب اجرای تدریجی، انتشار و مدیریت پروژه فاز دوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1934 | B:1934 — ### ۵.۱. مسئله، هدف و مرز فصل | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1942 | B:1942 — ### ۵.۲. اصول حاکم بر برنامه‌ریزی و قواعد غیرقابل‌چشم‌پوشی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-1960 | B:1960 — #### ۵.۲.۱. اصول پیاده سازی نرم افزار شهاب در فاز 2 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2024 | B:2024 — ### ۵.۳. سه مرحله مصوب در سطح سیاست — برنامه اجرایی در انتظار گیت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2027 | B:2027 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2036 | B:2036 — ### ۵.۴. اصل محوری: دامنه کامل مرحله در برابر انتشارهای تدریجی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2045 | B:2045 — ```mermaid | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2046 | B:2046 — flowchart TD | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2050 | B:2050 — S1 --> S2 --> S3 | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2053 | B:2053 — S1 -.-> R1 | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2054 | B:2054 — S2 -.-> R1 | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2055 | B:2055 — S3 -.-> R1 | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2056 | B:2056 — R1 --> R2 | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2057 | B:2057 — ``` | CODE_OR_DIAGRAM | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2061 | B:2061 — ### ۵.۵. تحقق تدریجی معماری مصوب A01 در سه مرحله | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2066 | B:2066 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2073 | B:2073 — ### ۵.۶. محتوای تخصصی و محدودیت‌های هر مرحله | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2085 | B:2085 — ### ۵.۷. دو مسیر موازی اجرا و تحقیق | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2092 | B:2092 — ### ۵.۸. قالب پیشنهادی برای هر قابلیت قابل‌انتشار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2096 | B:2096 — \\| فیلد \\| محتوای لازم \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2097 | B:2097 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2109 | B:2109 — ### ۵.۹. شاخص‌های ارزیابی و دروازه‌های تصمیم — بدون آستانه‌سازی فرضی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2112 | B:2112 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2122 | B:2122 — ### ۵.۱۰. کنترل هزینه، پیچیدگی، رقابت و استفاده مجدد از فناوری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2130 | B:2130 — ### ۵.۱۱. ساختار شکست کار و سازگاری با فرایند فعلی پروژه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2136 | B:2136 — ### ۵.۱۲. کنترل تغییرات، رتروسپکتیو و مدیریت تعارض | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2142 | B:2142 — ### ۵.۱۲.۱. موضوعات باز مالی در برنامه‌ریزی مراحل بعد (FD-01 تا FD-03) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2147 | B:2147 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2156 | B:2156 — ### ۵.۱۳. دفتر تصمیم‌های سیاستی مصوب و مسائل اجرایی باز | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2161 | B:2161 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2177 | B:2177 — ### ۵.۱۴. ماتریس مصوبات و وابستگی تصمیم‌های مرحله‌بندی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2182 | B:2182 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2221 | B:2221 — #### ۵.۱۴.۱. ترتیب بررسی اجرایی وابستگی‌های مصوب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2228 | B:2228 — #### ۵.۱۴.۲. قاعده ثبت و بستن هر تصمیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2232 | B:2232 — ### ۵.۱۴.۳. پوشش دامنه و وابستگی انتشار طبق O5-13 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2240 | B:2240 — ### ۵.۱۴.۴. سیاست رشد پس از مرحله سوم طبق O5-14 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2248 | B:2248 — ### ۵.۱۵. شرایط تبدیل سیاست مصوب به برنامه اجرایی قابل‌اجرا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2258 | B:2258 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2260 | B:2260 — ## پیوست A — ممیزی یکپارچگی فاز اول و دوم و اصلاحات اجرایی نسخه ۱.۰ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2262 | B:2262 — **نوع تغییر:** الحاق توضیحات انطباق و شواهد؛ بدون بازنویسی فصل‌های ۱ تا ۳، بدون تغییر ۴۰ ADR مصوب، بدون تصویب WBS یا انتشار. **زمان مبنا:** ۲۰۲۶-۱۱-۰۴. **دامنه شواهد:** خواندن ساختار و فایل‌های منتخب  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2264 | B:2264 — ### A.1. خط مبنا، تقدم منابع و وضعیت ادعاها | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2266 | B:2266 — \\| موضوع \\| خط مبنا / شاهد \\| سطح اطمینان و اقدام لازم \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2267 | B:2267 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2268 | B:2268 — \\| نسخه انتشار فاز اول \\| `v.1.08` طبق تأیید مالک \\| مرجع نام نسخه؛ تطبیق Git tag، SHA، image digest و runtime هنوز لازم است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2269 | B:2269 — \\| تداوم پروژه \\| `docs/PROJECT_CONTINUITY_DOCUMENT_SHAHAB_FINANCE_DEMO.md` نسخه ۲۰.۰ \\| مبنای تاریخچه و وضعیت ثبت‌شده؛ بندهای تاریخی نباید جایگزین شواهد جاری شوند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2270 | B:2270 — \\| وضعیت اجرای پروژه \\| `docs/project-current-state.md` \\| وضعیت ثبت‌شده؛ نیازمند تطبیق با آخرین کد و شواهد اجرا \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2271 | B:2271 — \\| قواعد مشترک فازها \\| PR #176 و سند پیشنهادی `docs/SHAHAB_PROJECT_DEVELOPMENT_PHASE2_CANONICAL_GUIDE.md` \\| PR در زمان بررسی Draft و ادغام‌نشده؛ مرجع تطبیق، نه قانون ادغام‌شده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2272 | B:2272 — \\| کد فعلی \\| `main` و فایل‌های backend/frontend/CI/Compose \\| شاهد ساختار؛ به‌تنهایی اثبات عملکرد production نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2273 | B:2273 — \\| معماری هدف \\| فصل‌های ۱–۳ همین سند و ADR-RAG-01 تا ADR-RAG-40 \\| اصول فصل نخست مصوب؛ گزینه‌ها و پارامترهای اجرایی باز \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2275 | B:2275 — **قاعده حل تعارض:** تفاوت شماره نسخه، مسیر فایل، شمارش migration، وضعیت PR یا استقرار باید در دفتر مغایرت با شاهد و تصمیم‌گیر ثبت شود؛ هیچ اصلاح حدسی در کد یا سند منبع مجاز نیست. آدرس سند تداوم در `ma | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2277 | B:2277 — ### A.2. نقشه استفاده مجدد و مرز مالکیت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2279 | B:2279 — \\| قابلیت فاز دوم \\| دارایی واقعی فاز اول \\| تصمیم اتصال و ممنوعیت \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2280 | B:2280 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2281 | B:2281 — \\| RAG API و مشاور \\| `backend/app/main.py` و `backend/app/api/v1/router.py` \\| روتر/قرارداد جدید با نسخه‌بندی و خطاهای سازگار؛ عدم قراردادن منطق بازیابی در لایه HTTP \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2282 | B:2282 — \\| دانش و فراداده حقوقی \\| PostgreSQL، SQLAlchemy و `alembic/versions/` \\| جداول و migrationهای مستقل دامنه دانش؛ عدم تغییر خاموش جداول وام و حساب؛ Alembic مالک DDL \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2283 | B:2283 — \\| cache و هماهنگی \\| Redis موجود؛ `questionnaire/infrastructure/redis_cache.py` \\| namespace و TTL مستقل RAG؛ PostgreSQL منبع حقیقت نشست پرسشنامه است؛ Redis cache نباید authority شود \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2284 | B:2284 — \\| توصیه مبتنی بر دانش \\| `recommendation/application/use_cases.py`، `engine/canonical_scoring.py`، snapshot و قراردادهای توصیه \\| طبق B06، Core مرجع Snapshot `PUBLISHED` و موتور امتیازدهی قطعی است | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2285 | B:2285 — \\| ورود داده و انتشار \\| `data_pipeline/application/publish_serving_version.py`، audit و عملیات \\| الگوی draft/approval/atomic publish/rollback قابل الگوبرداری است؛ سرویس انتشار وام مستقیماً ناشر م | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2286 | B:2286 — \\| هویت، نشست و حریم خصوصی \\| `accounts/`، API حساب، proof پرسشنامه، history \\| استفاده از authority فعلی و عدم ساخت هویت موازی؛ B05: جداسازی زمینه نشست، تداوم گفتگو، حافظه ماندگار خودکار و وضعیت پ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2287 | B:2287 — \\| سوپراپ و مشاور \\| `src/home page.jsx` و `src/features/` \\| تغییر تدریجی و قابل بازگشت، حفظ مسیرهای فعلی و طراحی تأییدشده؛ تغییر محصول از refactor US-13 جدا شود \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2288 | B:2288 — \\| کیفیت و انتشار \\| `backend/tests/`، `tests/`، `.github/workflows/quality.yml` و `security.yml`، Docker Compose \\| افزودن آزمون‌های RAG و CI بدون حذف گیت‌های قبلی؛ تغییرات production نیازمند مجوز | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2290 | B:2290 — **تفکیک داده:** اطلاعات حقوقی عمومی، اطلاعات محصول مالی منتشرشده، و داده شخصی/نشست کاربر سه مرز مالکیت متفاوت‌اند. در B05، ذخیره خودکار حافظه ماندگار تنها برای اطلاعات مفید و مجاز با هدف مشخص و شفافیت | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2292 | B:2292 — ### A.3. یافته‌ها و مغایرت‌های ثبت‌شده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2294 | B:2294 — 1. **RAG مستقل شناسایی نشد:** در فهرست کامل ۷۱۷ فایل مخزن (در زمان ممیزی، بدون truncation)، فایل/ماژول مشخص RAG، MCP، embedding، crawler یا vector store شناسایی نشد؛ روتر `api/v1/router.py` نیز مسیر R | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2295 | B:2295 — 2. **زیرساخت مشترک موجود است:** FastAPI، PostgreSQL 16، Redis 7، SQLAlchemy، Alembic، React/Vite، API نسخه‌دار، آزمون و CI وجود دارند؛ فعال‌بودن `pgvector`، موتور جست‌وجوی ترکیبی، صف worker و ظرفیت عم | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2296 | B:2296 — 3. **شمارش migration نیازمند رفع مغایرت است:** `docs/database/README.md` از ۱۸ migration و ۳۵ جدول ORM می‌گوید، درحالی‌که در فهرست `main` هنگام ممیزی ۲۰ فایل زیر `alembic/versions/` مشاهده شد. شمارش ف | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2297 | B:2297 — 4. **اختلاف Compose و انتشار:** `docker-compose.prod.yml` دارای digestهای pinشده‌ای است که در گزارش ممیزی با وضعیت انتشار اعلام‌شده همخوانی قطعی نداشتند. بدون بررسی VM، manifest و image digest واقعی،  | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2298 | B:2298 — 5. **شواهد تست و تولید متفاوت‌اند:** `docs/api/coverage.md` نتایج محلی و محدودیت آزمون آنلاین را تفکیک می‌کند. سبزبودن تست محلی/CI، اثبات امنیت یا سلامت production و آماده‌بودن RAG نیست. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2299 | B:2299 — 6. **مستندات معماری دارای تاریخچه‌اند:** `docs/architecture/module-map.md` بعضی وضعیت‌های اولیه را تاریخی نگه داشته است. مسیر فعال فرانت `src/` است؛ `frontend/src/` scaffold مهاجرتی است، نه دومین فران | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2301 | B:2301 — ### A.4. قراردادهای اجرایی پیشنهادی برای طراحی مرحله سوم آماده‌سازی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2303 | B:2303 — این‌ها **نقاط قرارداد برای طراحی** هستند، نه API/schema نهایی یا مجوز پیاده‌سازی: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2305 | B:2305 — - **SourceAccessPort:** کشف، دریافت و استعلام منبع با ثبت شناسه مرجع، مجوز، روش دسترسی (وب/API مستقیم یا غیرمستقیم/MCP)، زمان، خطا و provenance؛ ابزار خواندنی از ابزار تراکنشی جدا باشد. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2306 | B:2306 — - **DocumentLifecyclePort:** raw evidence غیرقابل‌تغییر، hash، نسخه سند، وضعیت بررسی و اعتبار حقوقی/زمانی؛ draft/approval/publish/retire و rollback با audit مستقل از serving وام. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2307 | B:2307 — - **RetrievalPort:** بازیابی ترکیبی، ارزیابی کفایت، ریسک، تازگی، citation و abstention؛ پاسخ بدون شاهد کافی نباید قطعیت حقوقی ادعا کند. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2308 | B:2308 — - **AdvisorIntegrationPort:** قرارداد مشاور با RAG و توصیه‌گر قطعی؛ شناسه نسخه کاتالوگ و پیکربندی در پاسخ قابل ردیابی باشد، بدون کپی داده شخصی به مخزن دانش. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2309 | B:2309 — - **IdentityPrivacyBoundary:** مالکیت حساب، consent، retention، redaction و منع انتشار token/phone/raw answers در لاگ، analytics و ابزار خارجی. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2310 | B:2310 — - **OperationalBoundary:** jobهای refresh/SCM/DDI با idempotency، rate limit، retry، backoff، isolation و audit؛ عدم اتصال مستقیم عملیات حساس به روتر عمومی. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2312 | B:2312 — ### A.5. برنامه موازی RAG و فرانت‌اند — وابستگی‌محور، غیرمصوب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2314 | B:2314 — \\| مسیر \\| کار قابل شروع پس از تصویب تسک \\| وابستگی پیش از فعال‌سازی \\| شرط حفاظت از فاز اول \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2315 | B:2315 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2316 | B:2316 — \\| هسته RAG \\| رجیستری منابع، نمونه دریافت مجاز، مدل سند، retrieval و ارزیابی \\| اعتبارسنجی منبع و قراردادهای داده \\| بدون تغییر امتیازدهی وام یا انتشار خودکار کاتالوگ \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2317 | B:2317 — \\| پوسته سوپراپ \\| طراحی و تفکیک تدریجی ناوبری و ورودی خدمات \\| طرح UI و معیار پذیرش تصویب‌شده \\| حفظ پرسشنامه، توصیه، حساب، OTP، RTL و دسترس‌پذیری \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2318 | B:2318 — \\| مشاور هوشمند \\| طراحی حالت‌های UI و API client \\| API امن و پاسخ مستند RAG + کنترل دسترسی \\| عدم نمایش پاسخ ساختگی به‌عنوان نتیجه واقعی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2319 | B:2319 — \\| کاتالوگ پویا \\| طراحی اتصال دانش و محصول \\| تصمیم‌های فصل دوم و سازگاری publication \\| مرجع حقیقت داده محصول وام همچنان مسیر مصوب فاز اول \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2320 | B:2320 — \\| دستیار اجرایی \\| نمایش وضعیت مصوب «به‌زودی» در رابط مرحله اول؛ بدون فعال‌سازی اجرا \\| امنیت، مجوز، workflow و اثبات فصل سوم \\| بدون ابزار نوشتنی/تراکنشی فعال در مرحله RAG \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2322 | B:2322 — ### A.6. ماتریس حداقل آزمون انطباق و گیت‌ها | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2324 | B:2324 — \\| محور \\| آزمون/شاهد لازم \\| گیت تصمیم \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2325 | B:2325 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2326 | B:2326 — \\| موتور توصیه \\| golden scoring، snapshot نسخه‌دار، عدم تغییر خروجی در برابر تغییرات RAG؛ آزمون معنایی قرارداد درصد تطابق، دلایل و نسخه قواعد، پاسخ ناقص و نسخه ناسازگار؛ طبق A09 سیگنال امن خطای معن | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2327 | B:2327 — \\| API و نشست \\| contract/schema، احراز هویت، proof، دسترسی حساب دوم، انقضا و خطا \\| عدم افشای داده یا شکستن مصرف‌کننده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2328 | B:2328 — \\| دیتابیس \\| migration روی PostgreSQL 16، upgrade/downgrade، حفظ داده، rollback و restore آزمایشی \\| قبل از migration production \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2329 | B:2329 — \\| RAG حقوقی \\| اعتبار منبع، زمان اعتبار، سند ناسخ/اصلاحیه، تعارض، citation، abstention و پاسخ با منبع ناموجود؛ کنترل‌های F05-G1 تا F05-G10: مرجع نسخه‌دار، پوشش پنج حوزه فارسی/تاریخ/عدد/جدول/اسکن، خ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2330 | B:2330 — \\| ابزارها \\| قطع API/MCP، محدودیت نرخ، SSRF/redirect، prompt injection، idempotency و عدم اجرای نوشتنی بدون مجوز \\| قبل از فعال‌سازی هر اتصال \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2331 | B:2331 — \\| فرانت \\| baseline بصری، مسیرهای موجود، mobile/desktop، RTL، a11y و عملکرد \\| قبل از انتشار پوسته سوپراپ \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2332 | B:2332 — \\| استقرار \\| SHA/tag/digest، CI، health، rollback، observability، عدم ارسال داده حساس به Clarity؛ طبق A07 گیت سازگاری نسخه‌های Core/Adviser و خطاهای قراردادی؛ طبق A08 Schema Validation تنظیمات، Con | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2334 | B:2334 — هیچ آستانه عددی یا pass/fail جدیدی در این نسخه جعل نشده است. معیارهای عددی و مالک تأیید باید در طراحی اجرایی و برنامه انتشار تصویب شوند. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2336 | B:2336 — ### A.7. گیت‌های ورود به مرحله دوم آماده‌سازی: اعتبارسنجی منابع | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2338 | B:2338 — **ورود به مرحله ۲ آماده‌سازی مجاز است** زیرا ممیزی ساختاری، نقشه بازاستفاده و فهرست شکاف‌ها ثبت شده‌اند؛ این به معنی بسته‌شدن آزمون‌های runtime نیست. مرحله ۲ باید برای هر منبع اولویت‌دار شواهد زیر را  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2340 | B:2340 — **موضوعات اجرایی باز پیش از تصویب Epic/User Story/Task:** رفع مغایرت migration، تطبیق tag `v.1.08` با SHA/digest و VM، بررسی pgvector و ظرفیت، اجرای آزمون واقعی، انتخاب منابع و قراردادهای فیزیکی، گردآ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2342 | B:2342 — **محدودیت ممیزی:** این پیوست جایگزین audit اجرایی PostgreSQL/VM، ارزیابی امنیتی یا پذیرش release نیست. تمام موارد باز، باز باقی می‌مانند. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2344 | B:2344 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2346 | B:2346 — ## تاریخچه تغییرات و وضعیت سند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2348 | B:2348 — \\| نسخه \\| تغییر \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2349 | B:2349 — \\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2350 | B:2350 — \\| ۰.۱ \\| معماری مفهومی شبکه دانش، بازیابی مبتنی بر تقاضا، کشف منابع و روابط \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2351 | B:2351 — \\| ۰.۲ \\| حفظ کامل فصل نخست و افزودن فصل دوم ۲۱‌بخشی درباره معماری محصول، مشاور و دستیار، گردش‌کار، رویدادها، پلن‌ها، مالی و سؤال باز معماری ماکروسرویس \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2352 | B:2352 — \\| ۰.۳ \\| اصلاح هدفمند فصل دوم: انتخاب صریح حوزه و نقش، قفل دامنه، Computer Use به‌عنوان مسیر اصلی، تفکیک کاتالوگ و API مکمل؛ افزودن فصل سوم ۲۱‌بخشی با نمودارهای فنی، قیود امنیتی و مسائل باز \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2353 | B:2353 — \\| ۰.۴ \\| افزودن بخش ۲۲ فصل سوم: پیشنهاد مونولیت ماژولار قابل استخراج با اجرای ایزوله، اصول کاهش هزینه مهاجرت، مقایسه گزینه‌ها، مسیر تدریجی، سنجه‌های منابع و آزمون‌های تصمیم؛ ارجاع در سؤال باز فصل د | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2354 | B:2354 — \\| ۰.۵ \\| حفظ فصل‌های پیشین بدون بازنویسی و افزودن فصل پنجم به‌عنوان پیش‌نویس غیرمصوب سه‌مرحله‌ای؛ تفکیک انتشار از پایان مرحله، تکامل معماری ماژولار، شاخص‌ها، ریسک‌ها و دفتر تصمیم‌های باز \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2355 | B:2355 — \\| ۰.۶ \\| افزودن ماتریس وابستگی ۱۴ تصمیم باز فصل پنجم به مبانی فصل‌های ۱ تا ۳ و اسناد فاز اول؛ تعیین شواهد لازم، اثر بر برنامه و ترتیب بررسی؛ بدون تصویب مرحله‌بندی یا ایجاد تسک \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2356 | B:2356 — \\| ۰.۷ \\| نسخه مبنای ارائه‌شده برای بازنگری ۴۰ تصمیم؛ محتوای نسخه حفظ شد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2357 | B:2357 — \\| **۰.۸** \\| **ثبت ۴۰ تصمیم مصوب اصولی فصل نخست** با قیود و مالکیت منطقی؛ افزودن جریان سرتاسری، قراردادهای مفهومی، سیاست انتشار و عدم قطعیت، سازگاری زمانی، آزمون‌ها، وابستگی‌ها، پارامترهای باز؛ تکم | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2359 | B:2359 — \\| **A01 — ۲۰۲۶-۱۱-۰۹** \\| **تصویب معماری هدف Core / Adviser / Assistant با استقرار تدریجی؛ بدون تغییر ۴۰ ADR و بدون مجوز اجرا.** \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2360 | B:2360 — \\| **۰.۹** \\| **تکمیل ADR-RAG-04 و قرارداد Source Access** با API غیرمستقیم و واسط ثالث مجاز؛ تعریف ابزارهای MCP خواندنی و نوشتنی (جست‌وجو، استعلام، ثبت سفارش)، کنترل مجوز/رضایت/امنیت/تکرار، ارتباط  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2362 | B:2362 — \\| **۱.۰** \\| **تطبیق با ممیزی فاز اول**: اصلاح شناسنامه، ثبت baseline انتشار `v.1.08` به اعلام مالک، افزودن پیوست A شامل تقدم منابع، نقشه بازاستفاده، شکاف‌ها، مغایرت‌ها، مرزهای قرارداد، مسیر موازی  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2364 | B:2364 — **وضعیت تاریخی نسخه ۱.۰ (نه وضعیت جاری):** نسخه ۰.۹ حفظ شد و یافته‌های ممیزی در پیوست A افزوده شدند. مصوبات بعدی بر وضعیت جاری حاکم‌اند؛ برنامه اجرایی و مجوز انتشار مستقل از تصویب سیاست‌ها هستند. | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2366 | B:2366 — **وضعیت تاریخی نسخه ۰.۹ (نه وضعیت جاری):** در این نسخه ۴۰ تصمیم معماری فصل نخست تصویب شده بودند و فصل پنجم هنوز Draft بود. مصوبات بعدی سیاست سه‌مرحله‌ای و O5-01 تا O5-14 بر وضعیت جاری حاکم‌اند؛ شماره  | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2369 | B:2369 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2371 | B:2371 — ## پیوست تکمیلی V1.1 — ممیزی اکتشافی منابع حقوقی و برنامه اعتبارسنجی در Work | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2373 | B:2373 — **تاریخ ثبت:** ۲۰۲۶-۱۱-۰۴ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2374 | B:2374 — **وضعیت:** یافته‌های اکتشافی و برنامه آزمون؛ **نه تأیید اتصال تولیدی، نه مجوز خزش، نه تغییر معماری مصوب**. | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2375 | B:2375 — **منبع شواهد:** بررسی‌های گفتگو تا تاریخ فوق. یافته‌های قابل مشاهده، گزارش‌های آزمون قبلی و ادعاهای معرفی‌شده توسط کاربر از هم تفکیک شده‌اند؛ تمام موارد نیازمند بازآزمایی باید در Work با شواهد مستقل ث | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2377 | B:2377 — ### الف. دامنه و فهرست منابع کاندیدا (نسخه ۰.۲) | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2379 | B:2379 — \\| ردیف \\| منبع / گروه منبع \\| نشانی پایه یا وضعیت \\| نوع محتوا / نقش احتمالی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2380 | B:2380 — \\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2381 | B:2381 — \\| ۱ \\| بانک مرکزی جمهوری اسلامی ایران \\| https://www.cbi.ir/ \\| بخشنامه‌ها و مقررات پولی، بانکی، اعتباری و ارزی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2382 | B:2382 — \\| ۲ \\| سامانه ملی قوانین و مقررات \\| https://qavanin.ir/ \\| متن قوانین و مقررات، وضعیت اعتبار احتمالی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2383 | B:2383 — \\| ۳ \\| پایگاه اطلاع‌رسانی قوانین و مقررات کشور \\| https://dotic.ir/ \\| مصوبات و مقررات اجرایی، فراداده و تنقیح \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2384 | B:2384 — \\| ۴ \\| مرکز پژوهش‌های مجلس \\| https://rc.majlis.ir/fa/law \\| سوابق تقنینی و متن مصوبات \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2385 | B:2385 — \\| ۵ \\| دستیار پژوهش قانون‌گذاری و تنقیح \\| https://ilaws.net/ \\| کشف سند، مراجع تصویب، دستگاه‌ها و جست‌وجو \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2386 | B:2386 — \\| ۶ \\| سامانه ملی آرا \\| https://ara.jri.ac.ir/ \\| آرای قضایی و مستندات حقوقی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2387 | B:2387 — \\| ۷ \\| وب‌سایت‌های رسمی بانک‌ها \\| گروه منبع؛ تعیین اعضا باز است \\| شرایط محصولات و تسهیلات \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2388 | B:2388 — \\| ۸ \\| مراجع مصوبات و ابلاغیه‌های اجرایی \\| گروه منبع؛ تعیین اعضا باز است \\| مصوبات و ابلاغیه‌ها؛ بررسی روزنامه رسمی نیز لازم است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2389 | B:2389 — \\| ۹ \\| مراجع مالیاتی و مبارزه با پول‌شویی \\| گروه منبع؛ تعیین اعضا باز است \\| مقررات مالیاتی و انطباق \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2390 | B:2390 — \\| ۱۰ \\| مراجع اعتبارسنجی و خدمات مالی \\| گروه منبع؛ تعیین اعضا باز است \\| الزامات اعتبارسنجی و خدمات مالی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2392 | B:2392 — **تذکر شمارش:** این فهرست شامل شش منبع مشخص و چهار *گروه منبع* است؛ به معنی شناسایی ۱۰ وب‌سایت مستقل نیست. هم‌پوشانی گروه‌ها باید در فهرست نهایی رفع شود. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2394 | B:2394 — **چهار مسیر ilaws.net که جداگانه باید آزمایش شوند:** | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2395 | B:2395 — - https://ilaws.net/ComprehensiveRulesList — فهرست جامع قوانین (عنوان و عملکرد نیازمند تأیید عملی) | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2396 | B:2396 — - https://ilaws.net/ExecutiveDevices — دستگاه‌های اجرایی | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2397 | B:2397 — - https://ilaws.net/ApprovalAuthorities — مراجع تصویب | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2398 | B:2398 — - https://ilaws.net/AdvanceSearch — جست‌وجوی پیشرفته | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2400 | B:2400 — این چهار نشانی **مسیرهای یک دامنه** هستند، نه ساب‌دامین و نه چهار منبع مستقل. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2402 | B:2402 — ### ب. ماتریس وضعیت شواهد تا V1.1 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2404 | B:2404 — \\| منبع \\| شواهد گزارش‌شده در ممیزی اکتشافی \\| API رسمی / MCP رسمی \\| مجوز استفاده تجاری و خزش \\| وضعیت پایش تغییر \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2405 | B:2405 — \\|---\\|---\\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2406 | B:2406 — \\| بانک مرکزی \\| بخش‌های مقررات و بخشنامه‌ها شناسایی شدند؛ RSS اخبار/ارز معرفی شده است، نه RSS اختصاصی مقررات \\| مستندات عمومی تأیید نشده؛ RSS جایگزین API مقررات نیست \\| شرایط استفاده گزارش شده که | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2407 | B:2407 — \\| qavanin.ir \\| تلاش دریافت صفحه اصلی در بررسی قبلی با timeout مواجه شد \\| نامشخص \\| نامشخص \\| نامشخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2408 | B:2408 — \\| dotic.ir \\| صفحه فهرست و نمونه سند با فراداده گزارش شده؛ بازیابی متن کامل نیازمند بررسی \\| نامشخص \\| نامشخص \\| فهرست انتشار قابل آزمون؛ تشخیص اصلاح سند هنوز اثبات نشده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2409 | B:2409 — \\| rc.majlis.ir \\| تلاش دریافت مسیر قوانین در بررسی قبلی با خطای 502 مواجه شد \\| نامشخص \\| نامشخص \\| نامشخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2410 | B:2410 — \\| ilaws.net \\| برخی صفحات پاسخ داده‌اند اما متن استخراج‌پذیر کافی مشاهده نشده؛ نیازمند مرورگر تعاملی \\| نامشخص \\| نامشخص \\| نامشخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2411 | B:2411 — \\| ara.jri.ac.ir \\| جست‌وجو و صفحه رأی نمونه گزارش شده است \\| نامشخص \\| نامشخص \\| فراداده تاریخ و شناسه قابل آزمون؛ تغییر متن نامشخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2412 | B:2412 — \\| گروه‌های ۷ تا ۱۰ \\| فهرست نهادها هنوز نهایی نشده است \\| نامشخص \\| نامشخص \\| نامشخص \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2414 | B:2414 — **اصل تفسیر:** «نامشخص» و «مستندات عمومی پیدا نشد» معادل «وجود ندارد» نیستند. پاسخ HTML یا امکان بازدید دستی نیز به معنی مجوز برداشت انبوه، بازنشر، ذخیره‌سازی تجاری یا اتصال تولیدی نیست. `robots.txt`  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2416 | B:2416 — ### ج. الزامات ممیزی تعاملی در Work | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2418 | B:2418 — برای هر **منبع مشخص** و هر یک از چهار مسیر `ilaws.net`: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2420 | B:2420 — 1. **هویت و اصالت:** دامنه رسمی، مالک/ناشر، نوع و اعتبار حقوقی سند، شناسه پایدار، مرجع وضع، تاریخ تصویب، ابلاغ، انتشار و لازم‌الاجراشدن؛ تفکیک پیش‌نویس از سند معتبر، رأی قضایی از قانون، و ابزار کمکی ت | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2421 | B:2421 — 2. **دسترسی:** آزمون GET/HEAD در حد مجاز، وضعیت HTTP، redirect، TLS، نوع محتوا، encoding، فایل ضمیمه و PDF، ساختار جست‌وجو و صفحه جزئیات، رفتار pagination، نیاز به JavaScript، CAPTCHA یا ورود. از دورز | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2422 | B:2422 — 3. **API / MCP:** جست‌وجوی مستندات رسمی، پیوندهای قابل استناد، endpointهای آشکار در شبکه مرورگر، شرایط احراز هویت، rate limit و ثبات قرارداد. درخواست‌های داخلیِ مشاهده‌شده را تا احراز اجازه استفاده، « | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2423 | B:2423 — 4. **مجوزها:** شرایط استفاده، حق نشر/بازنشر، `robots.txt`، محدودیت نرخ، مجوز استفاده تجاری و ذخیره متن کامل؛ ثبت URL و تاریخ شواهد. در صورت ابهام، وضعیت «نیازمند مجوز/نظر حقوقی» بماند. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2424 | B:2424 — 5. **SCM / SR / DDI:** کشف سند جدید، تغییر متن همان سند، اصلاحیه، نسخ، رابطه سند-مرجع، تغییر وضعیت حقوقی و منابع متعارض؛ آزمون حداقل یک سند دارای سابقه اصلاح در دو منبع مستقل. تفاوت hash متن و تغییر ا | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2425 | B:2425 — 6. **آزمون داده:** یک نمونه واقعی با متن کامل، فراداده، لینک منبع و زمان دریافت؛ در صورت مجازبودن، ثبت نمونه حداقلی بدون جمع‌آوری انبوه. خطاها و عدم‌دسترسی نیز با زمان، روش و محیط آزمون ثبت شوند. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2426 | B:2426 — 7. **خروجی هر منبع:** شناسنامه منبع، جدول endpoint/روش دسترسی، شواهد حقوقی، ماتریس DDI/SR/SCM، محدودیت‌ها، ریسک، تصمیم `Eligible / Conditional / Blocked / Unknown` و اقدامات باز. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2428 | B:2428 — **شرایط محیطی:** آزمون‌ها از مرورگر تعاملی و در صورت نیاز محیط شبکه‌ای مجاز انجام شوند؛ اختلاف دسترسی ناشی از شبکه/جغرافیا باید ثبت شود، نه اینکه به قطعی‌بودن خرابی سایت تعبیر شود. هیچ اقدام مخرب، دور | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2430 | B:2430 — ### د. گیت‌های ورود به طراحی کانکتور و اجرا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2432 | B:2432 — - **Gate-S1 — اصالت و استناد:** دست‌کم یک سند نمونه و فراداده کلیدی با URL پایدار و مرجع معتبر برای منبع منتخب تأیید شود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2433 | B:2433 — - **Gate-S2 — حق دسترسی:** روش استفاده و حدود مجوز تجاری/خزش روشن باشد؛ در غیر این صورت اتصال تولیدی مسدود بماند. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2434 | B:2434 — - **Gate-S3 — روش فنی:** API رسمی یا روش جایگزین مجاز با محدودیت‌های قابل رعایت شناسایی و آزمایش شود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2435 | B:2435 — - **Gate-S4 — تغییرات:** روش کشف انتشار و اصلاح، به همراه تفکیک تغییر متن از تغییر اثر حقوقی، آزمایش شود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2436 | B:2436 — - **Gate-S5 — امنیت و یکپارچگی:** حفاظت از داده شخصی، جداسازی دانش حقوقی از موتور امتیازدهی قطعی و عدم رگرسیون فاز اول قابل آزمون باشد. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2438 | B:2438 — **قاعده تصمیم (C01):** Gate-S1 تا Gate-S5 برای احراز منبع و روش دسترسی، شرط اتصال تولیدی‌اند؛ علاوه بر آن، اصالت هر سند و قابلیت استناد آن برای ادعای معین باید جداگانه از نظر مرجع، نسخه، زمان، قلمرو و | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2440 | B:2440 — ### هـ. تحویل مورد انتظار از چت Work به چت برنامه‌ریزی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2442 | B:2442 — 1. گزارش ممیزی مستند با تاریخ، نشانی‌های بررسی‌شده، شواهد قابل کلیک، وضعیت آزمون‌ها و محدودیت‌های مشاهده. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2443 | B:2443 — 2. فایل ماتریس منابع با یک ردیف برای هر سامانه/گروه و زیربخش‌های `ilaws.net`، شامل API، MCP، robots/ToS، مجوز تجاری، قالب داده، DDI، SR، SCM، ریسک و اولویت. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2444 | B:2444 — 3. نمونه‌های حداقلی و مجاز برای سنجش کیفیت استخراج و استناد؛ بدون خزش انبوه. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2445 | B:2445 — 4. فهرست ابهامات نیازمند مکاتبه با مالک سایت یا بررسی حقوقی. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2446 | B:2446 — 5. پیشنهاد مرحله‌بندی اتصال و گیت‌های قابل آزمون، بدون ایجاد PR، تغییر کد، merge یا deploy. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2448 | B:2448 — **حدود اختیار Work:** فقط تحقیق و آزمون خواندنی/کم‌بار و تولید گزارش. تغییر معماری ADR-RAG-01..40، تغییر نسخه مبنای `v.1.08`، تغییر کد، ایجاد PR، اتصال تولیدی و انتشار نیازمند مجوز مستقل مالک پروژه اس | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2451 | B:2451 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2453 | B:2453 — ## پیوست تکمیلی V1.2 — نتایج ممیزی مرحله اول و دوم و دروازه ورود به توسعه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2455 | B:2455 — **تاریخ ثبت:** ۲۰۲۶-۱۱-۰۸ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2456 | B:2456 — **منابع شواهد:** `shahab-rag-source-audit-stage-1(1).md` و `shahab-rag-source-audit-stage-2(1).md`، به‌ویژه «الحاقیهٔ نهایی اجرای مأموریت مرحلهٔ دوم». | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2457 | B:2457 — **نوع تغییر:** به‌روزرسانی وضعیت شواهد و فرآیند تصمیم‌گیری؛ بدون تغییر `ADR-RAG-01` تا `ADR-RAG-40`، بدون تصویب WBS و بدون مجوز تغییر کد. **در صورت تعارض وضعیت آزمون‌ها، الحاقیهٔ نهایی مرحله دوم بر یا | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2459 | B:2459 — ### ۱. فرض مالک درباره عمومی‌بودن منابع و مرز تصمیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2461 | B:2461 — مالک محصول اعلام کرده است که همه منابع منتخب عمومی‌اند و استفاده از آن‌ها برای عموم آزاد است. این اعلام به‌عنوان **فرض و موضع مالک محصول** ثبت می‌شود و مبنای اولویت‌دادن به بررسی روش‌های فنی دسترسی اس | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2463 | B:2463 — برای بانک مرکزی، متن شرایط استفاده در گزارش مرحله دوم مشخصاً استفاده شخصی و غیرتجاری و استفاده از گزیده با ذکر منبع را مطرح کرده و برای دیگر مجوزها ارجاع به تماس داده است؛ این شاهد نباید حذف یا به مجو | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2465 | B:2465 — **تفکیک روش‌ها:** (الف) مرور و ارجاع به صفحه عمومی، (ب) بازیابی محدود سند، (ج) دریافت ماشینی دوره‌ای، (د) نگهداری/نمایه‌سازی متن کامل، (هـ) نمایش یا بازنشر تجاری. وضعیت حق استفاده برای هر مورد جداگانه | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2467 | B:2467 — ### ۲. یافته‌های مستند مرحله دوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2469 | B:2469 — \\| منبع/گروه \\| شاهد فنی ثبت‌شده \\| نتیجه و محدودیت \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2470 | B:2470 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2471 | B:2471 — \\| بانک مرکزی `cbi.ir` \\| مسیر فهرست بخشنامه‌های اعتباری `/category/7226.aspx` به سند نمونه `/page/36023.aspx`؛ PDF یک‌صفحه‌ای مورخ ۱۴۰۵/۰۶/۰۴ و شناسه روی فایل `8806452` \\| بازیابی دستی یک سند کامل | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2472 | B:2472 — \\| RSS بانک مرکزی \\| `NewsRss.aspx?ln=fa` با ساختار RSS 2.0 و ۱۰ آیتم در یک snapshot؛ عنوان/پیوند/تاریخ \\| **فید اخبار** و سیگنال Discovery است، نه فید رسمی نسخه‌های مقررات؛ تناوب و تاریخچه آزموده  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2473 | B:2473 — \\| سامانه ملی آرا \\| متن رأی بدوی `https://ara.jri.ac.ir/Judge/Text/43539` و فراداده `Judge/Attribute/43539` \\| متن کامل یک رأی بازیابی شد؛ این رأی **خود رأی وحدت رویه ۸۱۱ نیست** \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2474 | B:2474 — \\| مرکز پژوهش‌های مجلس \\| متن و فراداده رکورد `https://rc.majlis.ir/fa/law/show/97851` \\| سند نمونه خوانده شد؛ زنجیره اصلاح/نسخ و نسخه جاری هنوز بررسی نشده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2475 | B:2475 — \\| `qavanin.ir` \\| رابط جست‌وجو و صفحه‌بندی در مرورگر قابل مشاهده \\| نمونه سند کامل، API رسمی، مجوز و نسخه‌بندی تأیید نشده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2476 | B:2476 — \\| `dotic.ir` \\| فهرست‌های تاریخ‌دار، مسیرهای `/news/{id}`، robots با `Allow: /` و sitemap \\| برای Discovery مناسب جهت آزمون؛ مجوز بازنشر و تشخیص تغییر حقوقی اثبات نشده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2477 | B:2477 — \\| `ilaws.net` \\| چهار مسیر `ComprehensiveRulesList`، `ExecutiveDevices`، `ApprovalAuthorities` و `AdvanceSearch` باز شدند؛ برخی رکوردها به `/ViewText/{id}` می‌رسند \\| ابزار جست‌وجو/تنقیح؛ خروجی تن | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2478 | B:2478 — \\| بانک‌ها \\| بانک ملی به‌عنوان نمونه و فهرست نهادهای مجاز CBI \\| شرایط محصول بانکی باید از مقررات بالادستی تفکیک شود؛ فهرست نهایی بانک‌ها باز است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2479 | B:2479 — \\| مصوبات اجرایی \\| روزنامه رسمی `rrk.ir`، dotic و qavanin \\| هویت منبع، نسخه رسمی و اولویت در تعارض باید برای هر نوع سند مشخص شود \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2480 | B:2480 — \\| مالیات/AML \\| `tax.gov.ir`، `intamedia.ir`، `afiu.ir` و مقررات CBI \\| فقط نماینده‌ها بررسی شده‌اند؛ پوشش، نسخه‌بندی و دسترسی تولیدی باز است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2481 | B:2481 — \\| اعتبارسنجی/خدمات مالی \\| نامزدهای عمومی شناسایی شدند، اما دامنه رسمی و داده مجاز قطعی نشد \\| اطلاعات اعتباری شخصی خارج از دامنه ممیزی عمومی و نیازمند مجوز/رضایت مستقل است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2483 | B:2483 — **API/MCP:** در ممیزی مستندات عمومی، API یا MCP رسمی برای شش منبع اصلی احراز نشد؛ این امر نبود آن‌ها را ثابت نمی‌کند. `qavanin-mcp` یک پروژه شخص ثالث است و رسمی یا مجاز بودن استفاده از آن اثبات نشده ا | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2485 | B:2485 — **robots:** در آزمون مرحله دوم، `dotic.ir` دارای `Allow: /` و `rc.majlis.ir` و `ilaws.net` دارای `Disallow:` خالی گزارش شدند؛ `qavanin.ir` به صفحه انتقال رسید، `cbi.ir` پاسخ رد داد، و `ara.jri.ac.ir`  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2487 | B:2487 — ### ۳. وضعیت گیت‌های S1 تا S5 در تاریخ ثبت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2489 | B:2489 — \\| گیت \\| وضعیت \\| شاهد / مانع \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2490 | B:2490 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2491 | B:2491 — \\| **S1 — اصالت و استناد** \\| **جزئیِ تقویت‌شده** \\| متن و فراداده سه نمونه CBI، Ara و مجلس؛ هنوز نه برای همه منابع و نه برای اعتبار حقوقی جاری \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2492 | B:2492 — \\| **S2 — دامنه حق استفاده** \\| **مشروط به روش استفاده** \\| عمومی‌بودن منابع به اعلام مالک ثبت شد؛ دامنه استفاده ماشینی/ذخیره/تجاری برای روش‌های مشخص باید مستند شود \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2493 | B:2493 — \\| **S3 — دسترسی فنی** \\| **جزئی** \\| HTML/PDF و XML نمونه بازیابی شدند؛ API/Adapter پایدار و مجاز، rate limit و fallback آزموده نشد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2494 | B:2494 — \\| **S4 — SR/SCM** \\| **باز** \\| فقط سیگنال کشف؛ هیچ مقایسه معتبر دو نسخه، اصلاحیه یا نسخ اجرا نشد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2495 | B:2495 — \\| **S5 — امنیت/عدم رگرسیون** \\| **باز** \\| هیچ کانکتور و آزمون امنیتی/رگرسیون ساخته یا اجرا نشده است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2497 | B:2497 — **گیت‌ها به‌ازای هر منبع و روش دسترسی بسته می‌شوند، نه یک‌بار برای کل RAG.** وضعیت S2 مانع طراحی و نمونه‌سازی غیرتولیدی نیست. اتصال واقعی تولیدی نیازمند رعایت S2، S3، S4 متناسب با سطح خدمت و S5 است. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2499 | B:2499 — ### ۴. تصمیم درباره «تست یا توسعه» | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2501 | B:2501 — مسیر دوم از این نقطه **ورود به فاز تعریف و طراحی توسعه (Delivery Preparation / Design)** است، نه آغاز بی‌قیدوشرط کدنویسی. آزمون‌ها حذف نمی‌شوند؛ بلکه از «ممیزی اکتشافی وب‌سایت‌ها» به «PoC مهندسی و آزم | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2503 | B:2503 — ترتیب گام‌ها: | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2504 | B:2504 — 1. **تعریف دامنه انتشار نخست:** یک سناریوی ارزش‌آفرین RAG، منابع منتخب، مرز فاز اول و معیارهای پاسخ مستند/امتناع از پاسخ؛ تصویب مالک. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2505 | B:2505 — 2. **سند محصول (PRD) و قراردادهای پذیرش:** مسئله، کاربر، journey، دامنه و خارج از دامنه، نیازمندی‌ها، ریسک‌ها، معیار موفقیت، سناریوهای مثبت/منفی، رفتار خطا و وابستگی‌ها. PRD باید به ADRها و اسناد حاکم | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2506 | B:2506 — 3. **طراحی فنی (Technical Design / RFC):** معماری ماژول‌ها، Source Adapter، ingestion، فراداده و provenance، نسخه‌بندی دو‌زمانه، Router، Citation Guard، ذخیره‌سازی، امنیت، هزینه و observability؛ تعیین | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2507 | B:2507 — 4. **PoC محدود:** با اسناد مجاز/نمونه ساختگی و بدون اتصال تولیدی، مسیر `retrieve → normalize → index → answer with citation/abstain` و یک سناریوی SR/SCM مصنوعی آزموده شود؛ معیارهای اندازه‌گیری و شکست  | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2508 | B:2508 — 5. **Backlog و WBS:** پس از روشن‌شدن PRD و طراحی، Epic → User Story → Task/Subtask، وابستگی، معیار پذیرش، تخمین، اولویت، تست، rollout و rollback؛ هیچ تسک خارج از سند جامع/پروتکل تصویب‌شده ایجاد نشود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2509 | B:2509 — 6. **گیت تصویب اجرای کد:** مالک PRD، طراحی، اولویت تسک‌ها و برنامه انتشار را تأیید کند؛ سپس توسعه در شاخه و PR مطابق قوانین طلایی، `docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md` و `docs/TASK_EXE | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2511 | B:2511 — **دو مسیر موازی:** (الف) شفاف‌سازی دامنه استفاده از منابع و روش اتصال، (ب) طراحی محصول/فنی و PoC ایزوله. مسیر (ب) منتظر تکمیل همه استعلام‌ها نمی‌ماند، ولی از دسترسی نامجاز یا استقرار تولیدی استفاده نم | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2513 | B:2513 — ### ۵. وضعیت پرسش‌های باز O5-01 تا O5-14 | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2515 | B:2515 — گزارش مرحله دوم پیش از تصویب تصمیم‌های O5 تهیه شده بود؛ **اکنون هر ۱۴ تصمیم در سطح سیاست مصوب است، ولی هیچ گیت اجرایی صرفاً به دلیل این تصویب گذرانده نشده است**. شواهد جدید به O5-01 (امکان بازیابی محد | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2517 | B:2517 — ### ۶. خروجی‌های لازم پیش از اولین PR اجرایی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2519 | B:2519 — - PRD مصوب برای انتشار نخست RAG، شامل scope، non-goals، معیارهای پذیرش و معیار Go/No-Go. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2520 | B:2520 — - RFC/Technical Design و قراردادهای داده/Source Adapter با traceability به ADR-RAG-01..40. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2521 | B:2521 — - ماتریس منبع × روش استفاده × وضعیت S1..S5 و محدودیت‌های مجاز. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2522 | B:2522 — - طرح PoC و گزارش آزمون‌های مثبت/منفی، Citation Guard، abstention، SR/SCM و security. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2523 | B:2523 — - Backlog/WBS رسمی با وابستگی، تخمین، تست و rollback؛ تطبیق با اسناد حاکمیت و baseline `v.1.08`. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2524 | B:2524 — - تأیید صریح مالک برای شروع پیاده‌سازی؛ هیچ موردی از موارد فوق با ثبت این پیوست خودکار تصویب نمی‌شود. | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2526 | B:2526 — ### ۷. ثبت تغییر نسخه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2528 | B:2528 — \\| نسخه \\| تاریخ \\| تغییر \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2529 | B:2529 — \\|---\\|---\\|---\\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2530 | B:2530 — \\| V1.2 \\| ۲۰۲۶-۱۱-۰۸ \\| ثبت نتایج ممیزی مرحله اول و دوم، اصلاح یافته RSS و نمونه اسناد، ثبت فرض مالک درباره عمومی‌بودن منابع و تفکیک دامنه استفاده، وضعیت گیت‌ها، تعریف گذار از ممیزی به PRD/طراحی/P | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2532 | B:2532 — **یادداشت:** جدول‌های قدیمی در پیوست V1.1 وضعیت تاریخی همان زمان هستند. برای تصمیم‌های فعلی درباره منابع، این پیوست V1.2 مرجع جدیدتر است. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2534 | B:2534 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2536 | B:2536 — ## یادداشت اصلاحی V1.4 — اصلاح جانمایی موضوعات مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2538 | B:2538 — **تاریخ:** ۲۰۲۶-۱۱-۰۸. در این نسخه، سه موضوع `FD-01`، `FD-02` و `FD-03` از پیوست انتهایی V1.3 به بخش‌های موضوعی **فصل دوم §۱۰.۱–۱۰.۳، فصل سوم §۱۵.۱ و فصل پنجم §۵.۱۲.۱** منتقل شدند. ترتیب نادرست قبلی ک | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2540 | B:2540 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2542 | B:2542 — ## یادداشت تغییر V1.5 — افزودن مدل درآمدی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2544 | B:2544 — **تاریخ:** ۲۰۲۶-۱۱-۰۸. فصل دوم §۱۰.۴ «مدل درآمدی شهاب — پیش‌نویس اولیه» افزوده شد: دو مسیر مشاور Pay-as-you-go با کیف پول و قیمت‌گذاری مبتنی بر پردازش/مصرف منابع، و دستیار با پلن قابلیت‌محور به‌علاوه  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2546 | B:2546 — --- | ENUMERATED_OR_BULLET | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2548 | B:2548 — ## تاریخچه اصلاح V1.6 — ممیزی سراسری وضعیت مصوبات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-B-2550 | B:2550 — **تاریخ:** ۲۰۲۶-۱۱-۱۵. وضعیت جاری فصل دوم و پنجم با مصوبات بعدی هماهنگ شد؛ یادداشت‌های تاریخی با وضعیت جاری اشتباه گرفته نمی‌شوند. شمار ثابت قابلیت‌های کیف پول در دفتر پوشش به ارجاع به همه قابلیت‌های  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1 | W:1 — # کیف پول دیجیتال شهاب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-3 | W:3 — نسخه: ۰٫۲۰ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-7 | W:7 — ## ۱. این سند چه مسئله‌ای را حل می‌کند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-13 | W:13 — ### ۱.۱. سند را با چه ترتیبی بخوانیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-25 | W:25 — ### ۱.۲. از کجا بدانیم کدام پاسخ قطعی است | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-39 | W:39 — ### ۱.۳. مطالب جدید چگونه وارد سند شوند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-51 | W:51 — ### ۱.۴. اعتبار داخلی برای خدمات خود شهاب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-63 | W:63 — ## ۲. کیف پول شهاب چه امکاناتی دارد؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-73 | W:73 — ### ۲.۱. ویژگی‌های پایه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-76 | W:76 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-87 | W:87 — ### ۲.۲. قابلیت‌های وابسته به مدل محصول | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-90 | W:90 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-101 | W:101 — ### ۲.۳. زیرساخت‌های پشت صحنه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-104 | W:104 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-114 | W:114 — ### ۲.۴. دامنه و ترتیب انتشار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-126 | W:126 — ## ۳. کیف پول متعلق به چه کسی است و چه کسی از آن استفاده می‌کند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-130 | W:130 — ### ۳.۱. هر شخص و سازمان چند کیف پول دارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-150 | W:150 — #### ۳.۱.۱. فعال‌سازی مالی سازمان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-162 | W:162 — #### ۳.۱.۲. شناسایی معمول شخص حقیقی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-174 | W:174 — ### ۳.۲. کاربر می‌تواند عضو چند سازمان باشد و با خروج او چه می‌شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-190 | W:190 — #### ۳.۲.۱. دعوت و پذیرش عضو | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-202 | W:202 — #### ۳.۲.۲. دسترسی عضو سابق به رسید | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-214 | W:214 — ### ۳.۳. سازمان برای مدیریت کیف پول به چند نقش مدیریتی نیاز دارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-223 | W:223 — \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-238 | W:238 — #### ۳.۳.۱. چند ادمین با یک نوع نقش | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-250 | W:250 — #### ۳.۳.۲. جایگزینی ادمین و بستن حساب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-262 | W:262 — ### ۳.۴. اختصاص بودجه به کارمند، پول را وارد کیف پول شخصی او می‌کند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-278 | W:278 — #### ۳.۴.۱. انتقال ماندهٔ مجوز مصرف | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-290 | W:290 — #### ۳.۴.۲. اثر استرداد بر ظرفیت کارمند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-302 | W:302 — ### ۳.۵. هزینه از کیف پول شخصی پرداخت می‌شود یا سازمانی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-318 | W:318 — ### ۳.۶. اگر دسترسی کارمند در میانهٔ کار قطع شود، هزینه چه می‌شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-334 | W:334 — #### ۳.۶.۱. کاهش سقف در میانهٔ اجرا | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-346 | W:346 — ### ۳.۷. سازمان با چه اشخاصی و به چه روشی اعتبار در اختیار می‌گذارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-369 | W:369 — ## ۴. پول واقعی مشتری کجاست و چه نسبتی با درآمد شهاب دارد؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-373 | W:373 — ### ۴.۱. شارژ مشتری چه اثری دارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-387 | W:387 — #### ۴.۱.۱. تفکیک منابع و درآمد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-399 | W:399 — ### ۴.۲. پول مشتریان در همان حساب هزینه‌های جاری شرکت باشد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-413 | W:413 — ### ۴.۳. بانک و شهاب هرکدام چه مسئولیتی دارند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-429 | W:429 — #### ۴.۳.۱. حدود استناد به ضوابط کیف پول ایران | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-443 | W:443 — ### ۴.۴. خاتمهٔ فعالیت، انحلال و تصفیه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-455 | W:455 — ## ۵. موجودی مشتری از چه اعتبارهایی تشکیل می‌شود؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-459 | W:459 — ### ۵.۱. چه مبلغی قابل مصرف، انتقال یا برداشت است | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-468 | W:468 — \\| --- \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-479 | W:479 — #### ۵.۱.۱. انقضا در فعالیت عادی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-491 | W:491 — ### ۵.۲. چرا موجودی قطعی، رزروشده و قابل‌مصرف یک عدد نیستند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-499 | W:499 — \\| عنوان \\| توضیح ساده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-500 | W:500 — \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-518 | W:518 — ### ۵.۳. وقتی چند نوع اعتبار داریم، هزینه اول از کدام کم شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-538 | W:538 — ### ۵.۴. مبلغ با ریال ثبت شود یا تومان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-552 | W:552 — #### ۵.۴.۱. گردکردن هزینهٔ تجمعی عملیات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-566 | W:566 — ## ۶. شارژ، مصرف و جابه‌جایی اعتبار چگونه انجام می‌شوند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-570 | W:570 — ### ۶.۱. شارژ نقدی و پرداخت سازمانی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-574 | W:574 — #### ۶.۱.۱. شخص و سازمان از چه روشی شارژ می‌کنند و مقصد چگونه مشخص می‌شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-590 | W:590 — #### ۶.۱.۲. در چه زمانی اعتبار قابل‌مصرف می‌شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-604 | W:604 — #### ۶.۱.۳. اگر پول از حساب مشتری کم شد ولی نتیجه نرسید، چه کنیم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-613 | W:613 — \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-630 | W:630 — #### ۶.۱.۴. اگر یک تأیید چند بار برسد، چند بار شارژ انجام می‌شود | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-644 | W:644 — #### ۶.۱.۵. حداقل و سقف شارژ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-653 | W:653 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-671 | W:671 — #### ۶.۱.۶. سازمان پیش از پرداخت چه سندی دریافت کند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-689 | W:689 — ### ۶.۲. کد هدیه و تخفیف | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-693 | W:693 — #### ۶.۲.۱. کد هدیه و کد تخفیف یک قابلیت‌اند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-707 | W:707 — #### ۶.۲.۲. مدیر کسب‌وکار چه تنظیماتی برای کمپین داشته باشد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-721 | W:721 — #### ۶.۲.۳. سقف مصرف هدیه دقیقاً چه چیزی را محدود می‌کند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-735 | W:735 — #### ۶.۲.۴. مهلت واردکردن کد با مهلت مصرف اعتبار یکی است | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-749 | W:749 — ### ۶.۳. پرداخت هزینهٔ خدمات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-763 | W:763 — ### ۶.۴. رزرو موقت برای عملیات دستیار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-767 | W:767 — #### ۶.۴.۱. معنای رزرو و تفاوت آن با کسر و استرداد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-781 | W:781 — #### ۶.۴.۲. مبنای مبلغ اولیهٔ رزرو | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-795 | W:795 — #### ۶.۴.۳. مدت اعتبار و پایان رزرو | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-809 | W:809 — #### ۶.۴.۴. افزایش رزرو، عبور از سقف و خطای برآورد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-825 | W:825 — #### ۶.۴.۵. انقضای هدیه در حین رزرو | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-839 | W:839 — #### ۶.۴.۶. رویداد مجاز برای کسر قطعی از رزرو | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-853 | W:853 — ### ۶.۵. برداشت بانکی و انتقال اعتبار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-857 | W:857 — #### ۶.۵.۱. چه اعتبارهایی قابل انتقال یا برداشت‌اند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-871 | W:871 — #### ۶.۵.۲. در انتقال ترکیبی، منشأ و مبلغ هر جزء چگونه حفظ می‌شوند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-887 | W:887 — #### ۶.۵.۳. هدیه پس از انتقال چه شرایطی دارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-899 | W:899 — #### ۶.۵.۴. حساب بانکی مجاز برای برداشت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-913 | W:913 — #### ۶.۵.۵. گیرندگان مجاز انتقال سازمانی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-927 | W:927 — #### ۶.۵.۶. سقف برداشت و انتقال | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-943 | W:943 — #### ۶.۵.۷. کارمزد برداشت و انتقال | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-959 | W:959 — #### ۶.۵.۸. مراحل درخواست برداشت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-967 | W:967 — \\| مرحله \\| اثر مالی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-968 | W:968 — \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-985 | W:985 — #### ۶.۵.۹. شناسایی گیرندهٔ فردبه‌فرد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-999 | W:999 — #### ۶.۵.۱۰. اصلاح انتقال اشتباه | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1019 | W:1019 — #### ۶.۵.۱۱. شارژ نقدی خود سازمان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1035 | W:1035 — ### ۶.۶. لغو خدمت، اصلاح و استرداد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1039 | W:1039 — #### ۶.۶.۱. مبلغ قابل‌بازگشت به کجا و با چه ترکیبی برگردد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1049 | W:1049 — \\| عملیات \\| معنای ساده \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1050 | W:1050 — \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1059 | W:1059 — #### ۶.۶.۲. هدیهٔ برگشتی چه مهلتی برای مصرف دارد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1081 | W:1081 — ### ۶.۷. شارژ خودکار و پرداخت دوره‌ای | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1085 | W:1085 — #### ۶.۷.۱. مجوز شارژ خودکار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1097 | W:1097 — #### ۶.۷.۲. محرک و مبلغ شارژ خودکار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1109 | W:1109 — #### ۶.۷.۳. پرداخت دوره‌ای از کیف پول | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1121 | W:1121 — #### ۶.۷.۴. لغو مجوز | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1133 | W:1133 — #### ۶.۷.۵. شکست و کمبود اعتبار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1145 | W:1145 — ### ۶.۸. محدودیت مصرف | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1157 | W:1157 — ## ۷. چگونه مطمئن شویم مبلغی گم یا دوبار محاسبه نمی‌شود؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1161 | W:1161 — ### ۷.۱. پول و تعهدها در چه حساب‌هایی ثبت شوند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1177 | W:1177 — ### ۷.۲. منشأ و حق مصرف هر جزء اعتبار چگونه نگهداری شود؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1193 | W:1193 — #### ۷.۲.۱. ردیابی کامل زنجیرهٔ اعتبار در طول زمان | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1205 | W:1205 — ### ۷.۳. وضعیت خدمت، بانک و ثبت مالی چگونه از هم جدا شوند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1221 | W:1221 — ### ۷.۴. چگونه تمام ثبت‌های یک عملیات به هم متصل شوند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1235 | W:1235 — ### ۷.۵. درخواست و پیام تکراری چگونه فقط یک اثر مالی داشته باشند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1251 | W:1251 — ### ۷.۶. رزرو چگونه به مصرف قطعی یا آزادسازی تبدیل شود؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1265 | W:1265 — ### ۷.۷. چگونه جلوی مصرف هم‌زمان یک اعتبار گرفته شود؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1279 | W:1279 — ## ۸. چگونه خطا، اختلاف با بانک و دسترسی غیرمجاز را مدیریت کنیم؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1283 | W:1283 — ### ۸.۱. تطبیق و رسیدگی به مغایرت | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1297 | W:1297 — #### ۸.۱.۱. برش زمانی و پوشش تعهد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1311 | W:1311 — ### ۸.۲. احراز عملیات حساس | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1325 | W:1325 — #### ۸.۲.۱. نگهداری دائمی و دسترسی سوابق مالی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1337 | W:1337 — #### ۸.۲.۲. هشدارهای عملیاتی و امنیتی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1349 | W:1349 — #### ۸.۲.۳. نسبت ردیابی با تکالیف مبارزه با پول‌شویی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1363 | W:1363 — ### ۸.۳. بازیابی کارهای ناتمام و نتیجهٔ نامعلوم | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1377 | W:1377 — ## ۹. قیمت خدمت، هزینهٔ تأمین‌کننده و تسویه چگونه از هم جدا می‌شوند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1381 | W:1381 — ### ۹.۱. مدل داینامیک هزینهٔ مشاور و دستیار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1385 | W:1385 — #### ۹.۱.۱. مبنای محاسبهٔ مشاور و دستیار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1399 | W:1399 — #### ۹.۱.۲. تغییر لحظه‌ای نرخ و حفظ مبنای اجرای جاری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1413 | W:1413 — #### ۹.۱.۳. انتظار، توقف و آغاز مجدد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1427 | W:1427 — #### ۹.۱.۴. هزینهٔ داخلی، دقت محاسبه و مسائل باقی‌مانده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1443 | W:1443 — #### ۹.۱.۵. هزینهٔ لغو، شکست و اجرای ناقص | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1457 | W:1457 — #### ۹.۱.۶. اجرای اصلاحی برای رفع خطای شهاب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1471 | W:1471 — ### ۹.۲. تسویه، ثبت حسابداری و اسناد رسمی | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1475 | W:1475 — #### ۹.۲.۱. زمان‌بندی تسویه با تأمین‌کننده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1489 | W:1489 — #### ۹.۲.۲. فاکتور پیش از پرداخت و بررسی تخصصی اسناد | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1503 | W:1503 — ## ۱۰. مشتری چه چیزی می‌بیند و چگونه پیگیری می‌کند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1507 | W:1507 — ### ۱۰.۱. نمایش موجودی، هزینه و پیگیری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1511 | W:1511 — #### ۱۰.۱.۱. نمای اصلی و جزئیات | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1523 | W:1523 — #### ۱۰.۱.۲. تاریخچه و رسید | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1535 | W:1535 — #### ۱۰.۱.۳. اعلان مشتری | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1547 | W:1547 — #### ۱۰.۱.۴. پروندهٔ پشتیبانی و اختلاف | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1559 | W:1559 — #### ۱۰.۱.۵. مشاهده و گزارش زنجیره برای اشخاص مجاز | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1571 | W:1571 — ### ۱۰.۲. آیا رسید پرداخت، فاکتور و رسید خدمت یک سند هستند | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1583 | W:1583 — ## ۱۱. از کجا بفهمیم مدل در سناریوهای واقعی درست کار می‌کند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1592 | W:1592 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1613 | W:1613 — ### ۱۱.۱. معیار پذیرش انتشار | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1625 | W:1625 — ## ۱۲. چه چیزی مصوب است و چه جزئیاتی نیازمند تصمیم‌اند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1635 | W:1635 — ### ۱۲.۱. جزئیات اجرایی نیازمند تصمیم — موارد ب | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1644 | W:1644 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1658 | W:1658 — ### ۱۲.۲. جزئیات اجرایی باز و وضعیت تصمیم‌های پیش‌تر به‌تعویق‌افتاده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1670 | W:1670 — ## ۱۳. منابع این تصمیم‌ها از کجا آمده‌اند؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1672 | W:1672 — **مسئله و هدف:** خواننده باید بتواند فرق قاعدهٔ خود شهاب با مثال یا ابزار ارائه‌دهندهٔ خارجی را بفهمد. این بخش نشانی منابع را یک‌جا نگه می‌دارد؛ استناد مرتبط در متن همان تصمیم نیز آمده است. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1674 | W:1674 — **سؤال: استفاده از این منابع چه معنایی دارد؟** | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1676 | W:1676 — **پاسخ:** منابع برای شناخت الگوهای طراحی مطالعه شده‌اند. نام‌بردن از یک سرویس به معنی خرید، اتصال، امکان ارائهٔ آن در ایران یا انتخاب تمام سیاست‌هایش نیست. | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1678 | W:1678 — ### ۱۳.۱. مرجع اصلی بررسی‌شده | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1680 | W:1680 — Modern Treasury شرکت ارائه‌دهندهٔ زیرساخت پرداخت، دفترکل و تطبیق برای کسب‌وکارهاست. دفترکل آن مستقل از خدمات پرداخت نیز قابل استفاده است. مستنداتش برای بررسی طراحی مطالعه شده‌اند؛ خرید، اتصال، دسترسی  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1682 | W:1682 — منابع زیر در ۱۴ نوامبر ۲۰۲۶ مستقیماً بررسی شدند؛ هر منبع پشتوانهٔ موضوع تعیین‌شده است، نه تأیید همهٔ جنبه‌های مدل شهاب. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1684 | W:1684 — \\| شناسه \\| منبع رسمی \\| کاربرد و حد استناد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1685 | W:1685 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1686 | W:1686 — \\| م۱ \\| [آموزش کیف پول](https://docs.moderntreasury.com/ledgers/docs/digital-wallet-tutorial) \\| تفکیک نقد، تعهد و درآمد و انتقال داخلی؛ سیاست برداشت گیرنده با شهاب متفاوت است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1687 | W:1687 — \\| م۲ \\| [نگهداری پول مشتری](https://www.moderntreasury.com/journal/what-matters-when-you-hold-customer-money) \\| تفکیک وجوه، حساب FBO و تطبیق روزانه؛ ساختار و حمایت حقوقی آمریکا به ایران تعمیم داد | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1688 | W:1688 — \\| م۳ \\| [معرفی خدمات پرداخت](https://docs.moderntreasury.com/payments/docs/overview) \\| مسیر بانک همکار یا PSP؛ انتخاب شریک داخلی همچنان باز است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1689 | W:1689 — \\| م۴ \\| [انواع موجودی دفترکل](https://docs.moderntreasury.com/platform/reference/ledger-balances-object) \\| موجودی قطعی، در انتظار و قابل‌مصرف \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1690 | W:1690 — \\| م۵ \\| [تراکنش‌ها](https://docs.moderntreasury.com/platform/reference/transaction-object) \\| مبلغ صحیح در واحد دقیق پول؛ انتخاب ریال/تومان تصمیم شهاب است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1691 | W:1691 — \\| م۶ \\| [تضمین‌های دفترکل](https://docs.moderntreasury.com/ledgers/docs/ledgers-guarantees) \\| توازن، اتمیک‌بودن، تکرار امن و تغییرناپذیری \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1692 | W:1692 — \\| م۷ \\| [وضعیت تراکنش و موجودی](https://docs.moderntreasury.com/ledgers/docs/transaction-status-and-balances) \\| وضعیت ثبت و اصلاح با ثبت معکوس \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1693 | W:1693 — \\| م۸ \\| [تطبیق حساب](https://docs.moderntreasury.com/ledgers/docs/account-reconciliation) \\| مقایسهٔ گزارش بانک یا ارائه‌دهنده با حساب داخلی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1694 | W:1694 — \\| م۹ \\| [حساب‌های دفترکل](https://docs.moderntreasury.com/ledgers/docs/ledger-accounts-overview) \\| معنا و استقلال حساب؛ تعداد کیف پول محصول را تعیین نمی‌کند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1695 | W:1695 — \\| م۱۰ \\| [اشیای دفترکل](https://docs.moderntreasury.com/ledgers/docs/guide-to-ledger-objects) \\| حساب‌ها و تراکنش‌های چندورودی داخل یک دفترکل \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1696 | W:1696 — \\| م۱۱ \\| [سازمان‌ها و محیط‌ها](https://docs.moderntreasury.com/platform/docs/organizations-overview) \\| محدودهٔ حساب و تیم در MT؛ جایگزین مدل سازمان مشتری در شهاب نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1697 | W:1697 — \\| م۱۲ \\| [نقش‌ها و مجوزها](https://docs.moderntreasury.com/platform/docs/roles-and-permissions) \\| نقش، مجموعه‌مجوز و گروه؛ اقتباس اصل کنترل دسترسی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1698 | W:1698 — \\| م۱۳ \\| [مرجع مجموعه‌مجوزهای استاندارد](https://docs.moderntreasury.com/platform/docs/standard-permission-set-reference) \\| تفکیک مشاهده، عملیات مالی، کنترل و دسترسی فنی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1699 | W:1699 — \\| م۱۴ \\| [تعریف قاعدهٔ تأیید پرداخت](https://docs.moderntreasury.com/payments/docs/create-an-approval-rule) \\| شرط مبلغ و سایر مشخصات و تعیین تأییدکننده؛ معادل بودجهٔ دوره‌ای نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1700 | W:1700 — \\| م۱۵ \\| [مدیریت کاربران با SCIM](https://docs.moderntreasury.com/platform/docs/managing-users-and-roles-with-scim) \\| ایجاد، تغییر و حذف دسترسی سازمانی در پلتفرم \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1701 | W:1701 — \\| م۱۶ \\| [هم‌زمانی دفترکل](https://docs.moderntreasury.com/ledgers/docs/handle-concurrency) \\| کنترل مانده و پردازش وابسته به موجودی \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1702 | W:1702 — \\| م۱۷ \\| [لغو دستور پرداخت](https://docs.moderntreasury.com/payments/docs/cancel-a-payment-order) \\| محدودیت لغو در مراحل بانکی؛ مستقیماً سیاست دستیار نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1703 | W:1703 — \\| م۱۸ \\| [مرور قواعد تأیید](https://docs.moderntreasury.com/payments/docs/approval-rules-overview) \\| بررسی انسانی، سابقهٔ تأیید، تغییر قواعد و حدود اثر آن \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1704 | W:1704 — \\| م۱۹ \\| [پایش پرداخت ورودی](https://docs.moderntreasury.com/payments/docs/monitoring-incoming-payment-details) \\| تفکیک اعلان اولیه، وصول و تطبیق و شناسایی مقصد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1705 | W:1705 — \\| م۲۰ \\| [تطبیق پرداخت دریافتی](https://docs.moderntreasury.com/payments/docs/managing-externally-originated-payments) \\| پرداخت موردانتظار و شناسایی واریزهای مبهم \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1706 | W:1706 — \\| م۲۱ \\| [درخواست تکرار امن](https://docs.moderntreasury.com/platform/reference/idempotent-requests) \\| تکرار امن API با محدوده و عمر مشخص؛ جایگزین یکتایی پایدار نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1707 | W:1707 — \\| م۲۲ \\| [شناسه‌های خارجی](https://docs.moderntreasury.com/platform/reference/external-ids) \\| اتصال شناسهٔ داخلی و جلوگیری از ایجاد تکراری \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1708 | W:1708 — \\| م۲۳ \\| [بهترین روش‌های وبهوک](https://docs.moderntreasury.com/platform/docs/webhook-endpoint-best-practices) \\| پیام تکراری و پردازش مطمئن \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1709 | W:1709 — \\| م۲۴ \\| [حدود روزانه](https://docs.moderntreasury.com/payments/docs/daily-limits) \\| نمونهٔ محدودیت وابسته به مسیر و دوره؛ اعداد سقف شهاب از آن استخراج نشده‌اند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1711 | W:1711 — \\| م۲۵ \\| [آموزش پاداش](https://docs.moderntreasury.com/ledgers/docs/points-rewards) \\| ثبت اعطا و مصرف پاداش؛ زمان کمپین، ترتیب مصرف، انتقال شرایط و مهلت جبرانی سیاست شهاب‌اند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1712 | W:1712 — \\| م۲۶ \\| [حساب‌های دفترکل](https://docs.moderntreasury.com/platform/reference/ledger-account-object) \\| نگهداری اطلاعات و حساب؛ ذخیرهٔ فراداده به‌تنهایی اجرای شرایط کمپین نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1714 | W:1714 — \\| م۲۷ \\| [تأیید حساب بانکی](https://docs.moderntreasury.com/payments/docs/verifying-bank-accounts) \\| وضعیت احراز و ضرورت اعمال سیاست مقصد در محصول \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1715 | W:1715 — \\| م۲۸ \\| [اطلاعات بانکی و هویتی](https://docs.moderntreasury.com/payments/docs/verify-account-using-plaid) \\| تفکیک شناسایی حساب و هویت؛ انتخاب API ایران جداست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1716 | W:1716 — \\| م۲۹ \\| [طرف معامله](https://docs.moderntreasury.com/payments/docs/counterparty-management-overview) \\| ارتباط هویت شخص یا کسب‌وکار با حساب \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1717 | W:1717 — \\| م۳۰ \\| [دستور پرداخت](https://docs.moderntreasury.com/platform/reference/payment-orders-overview) \\| مراحل پرداخت بانکی و نتیجه \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1718 | W:1718 — \\| م۳۱ \\| [برگشت ACH](https://docs.moderntreasury.com/payments/docs/reverse-an-ach-payment) \\| نمونهٔ اصلاح مستقل؛ قواعد شبکه به ایران تعمیم داده نشده‌اند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1719 | W:1719 — \\| م۳۲ \\| [قیمت‌گذاری](https://www.moderntreasury.com/pricing) \\| هزینهٔ ارائه‌دهنده با تعرفهٔ مشتری شهاب یکی نیست \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1721 | W:1721 — \\| م۳۳ \\| [قطعی‌کردن جزئی](https://docs.moderntreasury.com/platform/reference/create-ledger-transaction-partial-post) \\| کاهش اتمیک رزرو و ایجاد ثبت قطعی با قیود حساب، جهت و مبلغ؛ تخصیص اجزای شهاب  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1722 | W:1722 — \\| م۳۴ \\| [قفل بر مانده یا نسخه](https://docs.moderntreasury.com/ledgers/docs/lock-on-account-balance-or-version) \\| ثبت مشروط برای جلوگیری از مصرف هم‌زمان؛ شروط محصول باید جداگانه اعمال شوند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1724 | W:1724 — \\| م۳۵ \\| [ضوابط کیف پول ارسالی، ویرایش پنجم تابستان ۱۳۹۹](https://chatgpt.com/library?file_id=libfile_ac4a88bb70e88191b53e6e5d81d2743e&account_id=personal) \\| مقدمه و بند ۱ـ۱۲ برای تفکیک حلقه‌بسته | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1725 | W:1725 — \\| م۳۶ \\| [قانون مبارزه با پول‌شویی ارسالی با اصلاحات ذکرشده](https://chatgpt.com/library?file_id=libfile_1935cd57fe3c819187d3b523a8d59adf&account_id=personal) \\| مبنای بررسی شناسایی، سوابق، گزارش  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1727 | W:1727 — ### ۱۳.۲. منابع تکمیلی و مسیر تحقیق | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1729 | W:1729 — \\| منبع \\| کاربرد \\| وضعیت \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1730 | W:1730 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1731 | W:1731 — \\| [معرفی Payments](https://www.moderntreasury.com/products/payments) و [Ledgers](https://www.moderntreasury.com/products/ledgers) \\| شناخت محصولات شرکت \\| معرفی شرکت بررسی شده است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1732 | W:1732 — \\| [مرور Ledgers](https://docs.moderntreasury.com/ledgers/docs/overview) \\| استقلال دفترکل از پرداخت \\| در معرفی اولیه بررسی شد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1733 | W:1733 — \\| [اتصال بانک‌ها](https://docs.moderntreasury.com/payments/docs/banks) \\| مدل اتصال و دریافت گزارش \\| برای شناخت اولیهٔ اتصال بررسی شد \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1734 | W:1734 — \\| [TigerBeetle: انتقال دومرحله‌ای](https://docs.tigerbeetle.com/coding/two-phase-transfers/) \\| تکمیل رزرو، قطعی‌کردن و لغو \\| معرفی شده؛ بررسی تفصیلی شهاب باقی است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1735 | W:1735 — \\| [Stripe](https://docs.stripe.com/) \\| تعرفهٔ مصرفی، پرداخت، بازپرداخت و اختلاف \\| معرفی شده؛ قواعد شهاب استخراج نشده‌اند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1736 | W:1736 — \\| [Adyen](https://docs.adyen.com/) و [لغو پرداخت](https://docs.adyen.com/online-payments/cancel/) \\| چرخهٔ پرداخت، لغو و استرداد \\| معرفی شده؛ بررسی تفصیلی باقی است \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1737 | W:1737 — \\| مقررات و قرارداد داخلی \\| مسئول وجوه، حساب، مجوز و برداشت \\| منبع و ارائه‌دهندهٔ منتخب هنوز تعیین نشده‌اند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1739 | W:1739 — دسترسی به صفحهٔ آموزش کیف پول از مسیر عمومی API.SH در گفتگوی اولیه موفق گزارش شد. این فقط سابقهٔ آزمایش دسترسی است و به معنی بررسی کامل همهٔ صفحات یا تضمین دسترسی آتی نیست. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1742 | W:1742 — **ارتباط با سایر بخش‌ها:** اگر منبعی در آینده تغییر کند، قاعدهٔ مصوب شهاب خودکار عوض نمی‌شود؛ ابتدا اثر آن بر همان سؤال بررسی و در صورت نیاز تصمیم تازه گرفته می‌شود. | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1744 | W:1744 — ## ۱۴. این سند چگونه تغییر کرده است؟ | HEADING | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1746 | W:1746 — **مسئله و هدف:** خواننده باید بداند هر نسخه چه تغییری داده، بدون اینکه تصمیم‌ها را از میان روایت گفتگو پیدا کند. | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1748 | W:1748 — **سؤال: خلاصهٔ تغییر نسخه‌ها چیست؟** | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1750 | W:1750 — **پاسخ:** جدول زیر فقط سابقهٔ ویرایش را نشان می‌دهد. متن اصلی هر موضوع، قاعدهٔ جاری است؛ وضعیت‌های قدیمی این جدول، تصمیم جاری را تغییر نمی‌دهند. | LABELED_CLAUSE | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1752 | W:1752 — \\| نسخه \\| تاریخ \\| تغییر \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1753 | W:1753 — \\| --- \\| --- \\| --- \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1754 | W:1754 — \\| نسخهٔ ۰٫۱ \\| ۱۴ نوامبر ۲۰۲۶ \\| ثبت دامنه، مبانی، منابع و مسائل باز \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1755 | W:1755 — \\| نسخهٔ ۰٫۲ \\| ۱۴ نوامبر ۲۰۲۶ \\| ثبت تصمیم‌های برداشت، انتقال، مصرف، هدیه و بازگشت \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1756 | W:1756 — \\| نسخهٔ ۰٫۳ \\| ۱۴ نوامبر ۲۰۲۶ \\| بررسی منابع رسمی اصول مالی و نگهداری وجوه \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1757 | W:1757 — \\| نسخهٔ ۰٫۴ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب اصول مالی، تطبیق روزانه و واحد ثبت و نمایش \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1758 | W:1758 — \\| نسخهٔ ۰٫۵ \\| ۱۴ نوامبر ۲۰۲۶ \\| بازنویسی موضوعی، ادغام تکرارها، انتقال هر قاعده و مثال به محل اصلی، هماهنگی وضعیت‌ها و اصلاح شمارش قابلیت‌ها از ۲۷ به ۲۶ \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1759 | W:1759 — \\| نسخهٔ ۰٫۶ \\| ۱۴ نوامبر ۲۰۲۶ \\| جایگزینی پرسش‌های بخش ۳ با بررسی مستند و پیشنهاد مشخص برای هر هفت موضوع؛ افزودن منابع در فصل منابع و اصلاح وضعیت مسیر بررسی؛ پیشنهادها هنوز مصوب نیستند \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1760 | W:1760 — \\| نسخهٔ ۰٫۷ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب پیشنهادهای مالکیت و مجوزها با اصلاح کاربر: فقط نقش مدیریتی ادمین با اختیارات کامل؛ حذف نقش‌های مالی و تأیید مستقل اجباری و واگذاری تصمیم تخصیص و سقف به ادمین | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1761 | W:1761 — \\| نسخهٔ ۰٫۸ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب تطبیق فرایند شارژ با تصمیم‌های کاربر؛ ادغام قواعد در ۶.۱؛ الزام فاکتور سازمانی پیش از پرداخت و هماهنگی رسید، تعرفه و سناریوها؛ دامنهٔ سقف شخصی و جزئیات حقوقی | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1762 | W:1762 — \\| نسخهٔ ۰٫۹ \\| ۱۴ نوامبر ۲۰۲۶ \\| بازنویسی کامل برای خوانندهٔ انسانی: تعریف مسئله و هدف، سؤال و پاسخ روشن، مثال و استناد محلی و توضیح ارتباط بخش‌ها؛ حفظ مصوبات و مسائل باز و رفع ابهام پرداخت ترکیبی | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1763 | W:1763 — \\| نسخهٔ ۰٫۱۰ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب سقف مجموع ۲۰۰ میلیون تومان شارژ شخصی در ۲۴ ساعت شناور؛ بازنویسی بخش ۶.۱.۵ با مسئله، سؤال، پاسخ، مثال و ارتباط‌ها؛ هماهنگی مسیر ادامه \\| | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1764 | W:1764 — \\| نسخهٔ ۰٫۱۱ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب و ادغام قواعد هدیه و تخفیف، تنظیمات و سقف کمپین، مهلت‌ها، ترتیب مصرف، انتقال چندمنشأ و بازانتقال، بازگشت نسبتی و مهلت جبرانی؛ حفظ قالب مسئله و سؤال و مثال و | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1765 | W:1765 — \\| نسخهٔ ۰٫۱۲ \\| ۱۴ نوامبر ۲۰۲۶ \\| الزام تطبیق API حساب شخصی و کد ملی؛ حذف انتقال فرد به سازمان و سازمان به سازمان؛ انتقال سازمان فقط به فهرست خودش یا اعطای مصرف مشترک با سقف فردی؛ هماهنگی مالکیت،  | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1766 | W:1766 — \\| نسخهٔ ۰٫۱۳ \\| ۱۴ نوامبر ۲۰۲۶ \\| اصلاح ترتیب مسئله، سؤال، پاسخ و مثال و ارتباط‌ها در زیربخش‌های تصمیم؛ جداسازی احراز حساب برداشت، گیرندگان سازمانی و تصمیم‌های باز از شرایط انتقال هدیه؛ حفظ همهٔ م | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1767 | W:1767 — \\| نسخهٔ ۰٫۱۴ \\| ۱۴ نوامبر ۲۰۲۶ \\| ثبت مجموعهٔ هفت تصمیم برداشت و انتقال با سه اصلاح مالک؛ سامان‌دهی مقصد، سقف، کارمزد، چرخهٔ برداشت، گیرنده، اصلاح اشتباه و شارژ سازمان در بخش ۶.۵؛ هماهنگی مالکیت و | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1770 | W:1770 — \\| نسخهٔ ۰٫۱۵ \\| ۱۴ نوامبر ۲۰۲۶ \\| ادغام هفت تصمیم مصوب ساختار مالی در بخش ۷ با قالب مسئله، سؤال، پاسخ و مثال و ارتباط؛ هماهنگی سیاست رزرو و مسیر تصمیم‌های بعدی؛ حفظ جزئیات اجرایی و حسابداری تعیین‌ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1772 | W:1772 — \\| نسخهٔ ۰٫۱۶ \\| ۱۴ نوامبر ۲۰۲۶ \\| تصویب و ادغام سیاست‌های رزرو در ۶.۴ با قالب مسئله، سؤال، پاسخ و مثال و ارتباط؛ ثبت مسئولیت هزینهٔ اضافهٔ ناشی از خطای شهاب؛ هماهنگی ارجاع‌ها و بخش ۹ و مسیر ادامه، | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1774 | W:1774 — \\| نسخهٔ ۰٫۱۷ \\| ۱۴ نوامبر ۲۰۲۶ \\| یکپارچه‌سازی مدل داینامیک مشاور و دستیار؛ ضریب همواره یک‌دوم مشاورهٔ حین اجرا؛ سقف خودکار ۲۰ درصد بر برآورد کل اولیه بدون انباشت؛ حفظ نرخ اجرای پیوسته و اعمال نرخ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1776 | W:1776 — \\| نسخهٔ ۰٫۱۸ \\| ۱۴ نوامبر ۲۰۲۶ \\| ثبت هشت انتخاب مالک در محل موضوعی: تعویق معیار پردازش و تخصیص ریال استرداد، سیاست لغو و شکست و اصلاح رایگان، گردکردن تجمعی، تسویه قراردادی پس از تطبیق و بررسی تخص | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1778 | W:1778 — \\| نسخهٔ ۰٫۱۹ \\| ۱۴ نوامبر ۲۰۲۶ \\| ادغام ۲۷ تصمیم مصوب در سازمان، بودجه، خودکار، محدودیت، تطبیق، امنیت، بازیابی، تجربه و پذیرش و انتشار؛ ثبت موارد ب و ج به‌عنوان جزئیات اجرایی نیازمند تصمیم؛ رفع عب | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+| LINE-W-1780 | W:1780 — \\| نسخهٔ ۰٫۲۰ \\| ۱۵ نوامبر ۲۰۲۶ \\| ادغام مصرف داخلی و نبود پذیرنده، احراز شخصی و قرارداد محضری سازمان، تفکیک وجه و تعهد، نگهداری دائمی مالی، انقضای محدود به هدیه و تعیین تکلیف قانونی انحلال؛ توسعهٔ | PROSE_OR_METADATA | NOT EXAMINED | تعیین نشده؛ نیازمند بازبینی فردی |
+
+**کنترل عدم حذف:** با ۱٬۹۵۷ ردیف SEM اولیه و این ۸۴۹ ردیف، تعداد ارجاعات خطی برابر ۲٬۸۰۶ است؛ هیچ‌کدام در این مرحله VERIFIED نیستند. این عدد تعداد احکام اتمی نیست.
+
 ## آمار ثبت‌شده
 
 - واحدهای ممیزی اولیه: 1957
@@ -2035,4 +2893,4 @@
 - دارای وضعیت باز: 48
 - نامزدهای متصل به آزمون عمومی: 1142
 
-**گیت پایان:** همه ۱۹۵۷ ردیف این دفتر باید با متن مرجع، وضعیت تصویب، مالک واقعی، الزام اتمی، تسک و آزمون اختصاصی تأیید شوند. همچنین این دفتر هنوز جایگزین استخراج تمام ۵۲۵۸ واحد متنی و تفکیک احکام مرکب نیست.
+**گیت پایان:** همه ۲٬۸۰۶ واحد خطی این دفتر (۱۹۵۷ ردیف SEM و ۸۴۹ ردیف LINE) باید با متن مرجع، وضعیت تصویب، مالک واقعی، الزام اتمی، تسک و آزمون اختصاصی تأیید شوند. همچنین این دفتر هنوز جایگزین استخراج تمام ۵۲۵۸ واحد ادعایی بدون روش استخراج تأییدشده و تفکیک احکام مرکب نیست.
