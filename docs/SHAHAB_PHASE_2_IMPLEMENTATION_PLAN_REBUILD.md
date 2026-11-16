@@ -127,6 +127,8 @@
 
 | تسک | Story | ارجاع منبع | خروجی فنی اختصاصی | معیار پذیرش اصلی | مثال رفتار مردود | شناسه آزمون | پیش‌نیاز سخت | گیت تصمیم | وضعیت |
 |---|---|---|---|---|---|---|---|---|---|
+| S-OTP-01 | S-US-02 | B:1478، B:1651، B:1690 | مؤلفه ورود OTP/رمزِ محدود به نشست و انقضا با ارتباط محافظت‌شده و بدون ورود به prompt/log/RAG/trace؛ مسیر مستقیم بانک در نبود مجوز واسط | تزریق OTP آزمایشی در تمام مسیرهای log/chat/trace صفر نشت بدهد؛ بانک فاقد مجوز third-party ورود را blocked یا direct-bank نشان دهد | OCR/LLM رمز یا OTP را از صفحه بخواند و نگه دارد | T-S-OTP-01 | S-SEC-01;S-SES-01 | مجوز مستقل هر ارائه‌دهنده و ارزیابی فنی | طراحی؛ اجرا نشده |
+| S-CFM-01 | S-US-02 | B:1482، B:1653، B:1689، B:1694 | تأیید نهایی محدود به operation/recipient/amount/plan_version؛ کنترل Backend در مرز submit و invalidation بعد تغییر | بدون تأیید صریح متصل به نسخه و مبلغ submit_count=۰؛ تغییر گیرنده/مبلغ/خدمت confirmation قبلی را باطل کند | پذیرش یک‌باره onboarding برای پرداخت حساس | T-S-CFM-01 | S-SEC-01;S-WFL-01 | گیت مجوز ارائه‌دهنده و تأیید مشتری | طراحی؛ اجرا نشده |
 | S-SEC-01 | S-US-02 | B:1653، B:1688، B:1689، B:1690، B:918 | گیت Backend در مرز هر اقدام حساس با consent scoped و final confirmation؛ OTP در کنترل امن کاربر و نه حافظه مدل | تغییر مبلغ/گیرنده تأیید قبلی را باطل کند؛ OTP در log/prompt/storage نباشد | submit با approval عمومی، bypass CAPTCHA یا token مشترک | T-S-SEC-01 | C-POL-01;C-PLN-01 | گیت اختیار بانک/پلتفرم و مجوز مشتری | طراحی؛ اجرا نشده |
 | S-WFL-01 | S-US-01 | B:1693، B:1694، B:916، B:918 | workflow state در DB مالک Assistant، job version، توقف/ادامه، audit، inquiry قبل retry، idempotency خارجی | پس restart پرونده ادامه یابد؛ timeout «موفق» نشود؛ دوباره submit بدون inquiry انجام نشود | حافظه LLM مرجع وضعیت یا submit تکراری | T-S-WFL-01 | S-SEC-01 | گیت قابلیت سرویس خارجی و Retry policy | طراحی؛ اجرا نشده |
 | S-SES-01 | S-US-05 | B:1534 | Session/Device Orchestrator با تخصیص، TTL، پاک‌سازی، recovery و جداسازی مشتری و آزمون | cookie/OTP کاربر A در محیط B هرگز دیده نشود؛ نشست پاک‌شده دوباره استفاده نشود | اشتراک bank session یا test/prod credential | T-S-SES-01 | S-WFL-01;S-SEC-01 | گیت محل اجرا و سیاست سیستم‌عامل | طراحی؛ اجرا نشده |
@@ -780,6 +782,32 @@ flowchart LR
 | P2-W-1355-03 | W:1355 | این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | record compliance owner and evidence needed separate | بستن gate compliance با صرف گفته مالک | DESIGN_PENDING |
 | P2-W-1369-02 | W:1369 | بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | recovery retry ledger side effects zero beyond original | resubmit payout duplicate | DESIGN_PENDING |
 
+| P2-B-1478-01 | B:1478 | کد یک‌بارمصرف، رمز، کلید یا توکن نباید وارد متن چت قابل مشاهده برای مدل، لاگ عمومی، تحلیل مکالمه یا حافظه RAG شود | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-OTP-01 | T-S-OTP-01 | هیچ راز در prompt/chat/log/RAG ذخیره نشود | canary OTP in log | DESIGN_PENDING |
+| P2-B-1478-02 | B:1478 | ارتباط محافظت‌شده، محدود به نشست و دارای انقضا | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-OTP-01 | T-S-OTP-01 | OTP تنها در نشست معتبر و قبل expiry پذیرفته شود | reuse OTP after expiry | DESIGN_PENDING |
+| P2-B-1478-03 | B:1478 | برای هر ارائه‌دهنده جداگانه بررسی می‌شود | CONDITIONAL | ASSISTANT/S-US-02 | S-OTP-01 | T-S-OTP-01 | Bank lacking clearance blocked or direct-bank mode | third-party OTP without permission | DESIGN_PENDING |
+| P2-B-1482-14 | B:1482 | ابزار اجرایی فقط پس از کنترل قرارداد، وضعیت جاری، مجوز و تأیید حساس در Backend کلیک، تایپ، پیمایش و دریافت نتیجه را انجام می‌دهد | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-CFM-01 | T-S-CFM-01 | action gated by current server policy | click after revoke | DESIGN_PENDING |
+| P2-B-1482-15 | B:1482 | موتور گردش‌کار سرویس مالک مرجع معتبر وضعیت پرونده است | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | restart recovers owner DB state | LLM memory as persistent state | DESIGN_PENDING |
+| P2-B-1482-16 | B:1482 | در نتیجه نامعلوم، ابتدا وضعیت واقعی استعلام/راستی‌آزمایی | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | unknown external inquiry before resubmit | blind retry | DESIGN_PENDING |
+| P2-B-1482-17 | B:1482 | اتکا به مختصات ثابت یا فلوهای شکننده ممنوع به‌عنوان تنها سازوکار است | APPROVED_EXPLICIT | ASSISTANT/S-US-03 | S-CU-01 | T-S-CU-01 | live element semantics and validation before action | stale coordinate-only click | DESIGN_PENDING |
+| P2-B-1500-12 | B:1500 | مدل نباید خودسرانه از CAPTCHA، محدودیت ضدربات یا کنترل احراز هویت عبور کند | APPROVED_EXPLICIT | ASSISTANT/S-US-03 | S-CU-01 | T-S-CU-01 | CAPTCHA prompts handoff/stop and bypass_count=0 | unauthorized captcha solver | DESIGN_PENDING |
+| P2-B-1504-13 | B:1504 | قابلیت‌های واقعی و مسیرهای شناخته‌شده آن خدمت را بررسی می‌کند: وب، اندروید، iOS | APPROVED_EXPLICIT | ASSISTANT/S-US-04 | S-PLT-01 | T-S-PLT-01 | only supported and authorized adapters listed | advertise unsupported iOS | DESIGN_PENDING |
+| P2-B-1504-14 | B:1504 | دستیار با تأیید مشتری **درخواست نصب** را مطرح می‌کند | APPROVED_EXPLICIT | ASSISTANT/S-US-04 | S-PLT-01 | T-S-PLT-01 | install proposal only with explicit customer action | silent installation | DESIGN_PENDING |
+| P2-B-1522-12 | B:1522 | هیچ معماری نباید فرض کند رضایت مشتری این محدودیت‌ها را حذف می‌کند | APPROVED_EXPLICIT | ASSISTANT/S-US-04 | S-PLT-01 | T-S-PLT-01 | OS restriction stays despite consent | cross-app control via consent | DESIGN_PENDING |
+| P2-B-1538-13 | B:1538 | آزمون باید غیرمخرب باشد | APPROVED_EXPLICIT | ASSISTANT/S-US-07 | S-UI-01 | T-S-UI-01 | monitor external submissions=0 | real payment in test | DESIGN_PENDING |
+| P2-B-1555-12 | B:1555 | پایش دوره‌ای جایگزین **تشخیص لحظه‌ای هنگام اجرای درخواست مشتری** نمی‌شود | APPROVED_EXPLICIT | ASSISTANT/S-US-03 | S-CU-01 | T-S-CU-01 | live page verification despite previous UI map | blind action from map | DESIGN_PENDING |
+| P2-B-1639-12 | B:1639 | مستقیماً زبانه دستیار را انتخاب کند، بدون عبور اجباری از Adviser | APPROVED_EXPLICIT | ASSISTANT/S-US-09 | S-JRN-01 | T-S-JRN-01 | Assistant entry allowed without Adviser step when authorized | forced consultation | DESIGN_PENDING |
+| P2-B-1647-13 | B:1647 | مشتری گزینه را انتخاب می‌کند | APPROVED_EXPLICIT | ASSISTANT/S-US-09 | S-JRN-01 | T-S-JRN-01 | product requires explicit selection | auto-choice top-ranked | DESIGN_PENDING |
+| P2-B-1649-01 | B:1649 | پس از کنترل تعرفه، پلن و رضایت، موتور گردش‌کار پرونده را ایجاد می‌کند | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | workflow must have quote, entitlement and consent | create before approval | DESIGN_PENDING |
+| P2-B-1653-12 | B:1653 | پیش از ارسال نهایی یا ایجاد تعهد، تأیید صریح و مناسب مشتری را می‌گیرد | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-CFM-01 | T-S-CFM-01 | final submit without matching approval=0 | generic approval reused | DESIGN_PENDING |
+| P2-B-1655-01 | B:1655 | نتیجه، شماره پیگیری و وضعیت معتبر ثبت می‌شود | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | external status and tracking ID persisted | success inferred from UI click | DESIGN_PENDING |
+| P2-B-1684-14 | B:1684 | یک هشدار منطقی مشترک با منشأهای قابل ردیابی | APPROVED_EXPLICIT | ASSISTANT/S-US-06 | S-FF-01 | T-S-FF-01 | duplicate inputs produce one logical notification with provenance | duplicate notification | DESIGN_PENDING |
+| P2-B-1684-15 | B:1684 | تکرارزدایی نسخه‌آگاه، اولویت اثرمحور، ثبت پایدار در سوابق پیام‌ها | APPROVED_EXPLICIT | ASSISTANT/S-US-06 | S-FF-01 | T-S-FF-01 | same evidence/version one alert | repeated alert | DESIGN_PENDING |
+| P2-B-1688-12 | B:1688 | مجوزها برای یک مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شوند | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-SEC-01 | T-S-SEC-01 | all six token scope dimensions enforced | cross-account action | DESIGN_PENDING |
+| P2-B-1690-12 | B:1690 | رمز، OTP، توکن و اسرار احراز هویت به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-OTP-01 | T-S-OTP-01 | canary secret absent from all six sinks | secret in debug event | DESIGN_PENDING |
+| P2-B-1691-12 | B:1691 | رضایت مشتری به‌تنهایی مجوز خودکارسازی سامانه بانک نیست | APPROVED_EXPLICIT | ASSISTANT/S-US-02 | S-SEC-01 | T-S-SEC-01 | provider-prohibited automation blocked despite consent | unauthorized bank bot | DESIGN_PENDING |
+| P2-B-1693-12 | B:1693 | هر اقدام مؤثر دارای شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلی | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | audit record has case/reason/approval/time/result | unattributed submit | DESIGN_PENDING |
+| P2-B-1694-13 | B:1694 | از ارسال تکراری درخواست بدون کلید تکرارناپذیری و بررسی وضعیت جلوگیری شود | APPROVED_EXPLICIT | ASSISTANT/S-US-01 | S-WFL-01 | T-S-WFL-01 | replay has idempotency and inquiry before retry | duplicate external payment | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -818,15 +846,15 @@ flowchart LR
 | A-SEC-01 | ADVISER | A-US-10 | P2-B-330-01، P2-B-395-01، P2-B-430-01، P2-B-330-02، P2-B-330-03، P2-B-330-04، P2-B-331-01، P2-B-331-02، P2-B-336-02، P2-B-351-01، P2-B-395-02، P2-B-396-01، P2-B-431-01، P2-B-456-02 | B:330، B:395، B:430، B:331، B:336، B:351، B:396، B:431، B:456 | T-A-SEC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | A-OPS-01 | ADVISER | A-US-11 | P2-B-335-01، P2-B-370-01، P2-B-375-01، P2-B-460-01، P2-B-290-02، P2-B-290-03، P2-B-290-04، P2-B-311-02، P2-B-335-02، P2-B-336-01، P2-B-370-02، P2-B-371-01، P2-B-375-02، P2-B-376-01، P2-B-376-02، P2-B-376-03، P2-B-460-02، P2-B-460-03، P2-B-461-01، P2-B-461-02 | B:335، B:370، B:375، B:460، B:290، B:311، B:336، B:371، B:376، B:461 | T-A-OPS-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | A-QA-01 | ADVISER | A-US-09 | P2-B-320-01، P2-B-455-01، P2-B-36-01، P2-B-320-02، P2-B-320-03، P2-B-320-04، P2-B-321-01، P2-B-340-06، P2-B-455-02، P2-B-455-04، P2-B-456-01، P2-B-465-01 | B:320، B:455، B:36، B:321، B:340، B:456، B:465 | T-A-QA-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-SEC-01 | ASSISTANT | S-US-02 | P2-B-918-11، P2-B-1653-11، P2-B-1688-11، P2-B-1689-11، P2-B-1690-11 | B:918، B:1653، B:1688، B:1689، B:1690 | T-S-SEC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-WFL-01 | ASSISTANT | S-US-01 | P2-B-916-11، P2-B-916-12، P2-B-918-12، P2-B-918-13، P2-B-1693-11، P2-B-1694-12 | B:916، B:918، B:1693، B:1694 | T-S-WFL-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-SEC-01 | ASSISTANT | S-US-02 | P2-B-918-11، P2-B-1653-11، P2-B-1688-11، P2-B-1689-11، P2-B-1690-11، P2-B-1688-12، P2-B-1691-12 | B:918، B:1653، B:1688، B:1689، B:1690، B:1691 | T-S-SEC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-WFL-01 | ASSISTANT | S-US-01 | P2-B-916-11، P2-B-916-12، P2-B-918-12، P2-B-918-13، P2-B-1693-11، P2-B-1694-12، P2-B-1482-15، P2-B-1482-16، P2-B-1649-01، P2-B-1655-01، P2-B-1693-12، P2-B-1694-13 | B:916، B:918، B:1693، B:1694، B:1482، B:1649، B:1655 | T-S-WFL-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | S-SES-01 | ASSISTANT | S-US-05 | P2-B-1534-11 | B:1534 | T-S-SES-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-CU-01 | ASSISTANT | S-US-03 | P2-B-1482-11، P2-B-1482-12، P2-B-1482-13، P2-B-1500-11، P2-B-1555-11، P2-B-1691-11، P2-B-1694-11 | B:1482، B:1500، B:1555، B:1691، B:1694 | T-S-CU-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-PLT-01 | ASSISTANT | S-US-04 | P2-B-1504-11، P2-B-1504-12، P2-B-1522-11، P2-B-1534-12 | B:1504، B:1522، B:1534 | T-S-PLT-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-UI-01 | ASSISTANT | S-US-07 | P2-B-1538-11، P2-B-1538-12، P2-B-1692-11 | B:1538، B:1692 | T-S-UI-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-CU-01 | ASSISTANT | S-US-03 | P2-B-1482-11، P2-B-1482-12، P2-B-1482-13، P2-B-1500-11، P2-B-1555-11، P2-B-1691-11، P2-B-1694-11، P2-B-1482-17، P2-B-1500-12، P2-B-1555-12 | B:1482، B:1500، B:1555، B:1691، B:1694 | T-S-CU-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-PLT-01 | ASSISTANT | S-US-04 | P2-B-1504-11، P2-B-1504-12، P2-B-1522-11، P2-B-1534-12، P2-B-1504-13، P2-B-1504-14، P2-B-1522-12 | B:1504، B:1522، B:1534 | T-S-PLT-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-UI-01 | ASSISTANT | S-US-07 | P2-B-1538-11، P2-B-1538-12، P2-B-1692-11، P2-B-1538-13 | B:1538، B:1692 | T-S-UI-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | S-REC-01 | ASSISTANT | S-US-08 | P2-B-1631-11، P2-B-1631-12 | B:1631 | T-S-REC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-JRN-01 | ASSISTANT | S-US-09 | P2-B-1639-11، P2-B-1645-11، P2-B-1647-11 | B:1639، B:1645، B:1647 | T-S-JRN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| S-FF-01 | ASSISTANT | S-US-06 | P2-B-944-11، P2-B-1684-11، P2-B-1684-12 | B:944، B:1684 | T-S-FF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-JRN-01 | ASSISTANT | S-US-09 | P2-B-1639-11، P2-B-1645-11، P2-B-1647-11، P2-B-1639-12، P2-B-1647-13 | B:1639، B:1645، B:1647 | T-S-JRN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| S-FF-01 | ASSISTANT | S-US-06 | P2-B-944-11، P2-B-1684-11، P2-B-1684-12، P2-B-1684-14، P2-B-1684-15 | B:944، B:1684 | T-S-FF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 
 | C-LED-02 | CORE | C-US-23 | P2-W-1167-01، P2-W-1169-01، P2-W-1183-01، P2-W-1199-01، P2-W-1211-01، P2-W-1227-01، P2-W-1241-01، P2-W-1257-01، P2-W-1271-01، P2-W-1167-02، P2-W-1167-03، P2-W-1167-04، P2-W-1167-05، P2-W-1167-06، P2-W-1167-07، P2-W-1167-08، P2-W-1183-02، P2-W-1183-03، P2-W-1183-04، P2-W-1199-02، P2-W-1199-03، P2-W-1199-04، P2-W-1199-05، P2-W-1199-06، P2-W-1211-02، P2-W-1227-02، P2-W-1227-03، P2-W-1227-04، P2-W-1241-02، P2-W-1241-03، P2-W-1241-04، P2-W-1241-05، P2-W-1271-02، P2-W-1271-03، P2-W-1271-04، P2-W-1271-05 | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | T-C-LED-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
 | C-REC-02 | CORE | C-US-24 | P2-W-1289-01، P2-W-1289-02، P2-W-1303-01، P2-W-1369-01، P2-W-1289-03، P2-W-1303-02، P2-W-1303-03، P2-W-1303-04، P2-W-1369-02 | W:1289، W:1303، W:1369 | T-C-REC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
@@ -847,6 +875,8 @@ flowchart LR
 | X-E2E-01 | PLATFORM | S-US-09 | P2-B-1647-12 | B:1647 | T-X-E2E-01 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
 | X-E2E-02 | PLATFORM | S-US-01 | P2-W-801-02 | W:801 | T-X-E2E-02 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
 | X-E2E-03 | PLATFORM | S-US-06 | P2-B-1684-13 | B:1684 | T-X-E2E-03 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| S-OTP-01 | ASSISTANT | S-US-02 | P2-B-1478-01، P2-B-1478-02، P2-B-1478-03، P2-B-1690-12 | B:1478، B:1690 | T-S-OTP-01 | طراحی؛ آزمون اجرا نشده؛ INCOMPLETE |
+| S-CFM-01 | ASSISTANT | S-US-02 | P2-B-1482-14، P2-B-1653-12 | B:1482، B:1653 | T-S-CFM-01 | طراحی؛ آزمون اجرا نشده؛ INCOMPLETE |
 
 ## فصل نهم — گیت‌های ممیزی و گزارش وضعیت جاری
 
@@ -854,8 +884,8 @@ flowchart LR
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 471 | استخراج اولیه؛ تأیید کامل خیر |
-| تسک‌های دارای زنجیره اتمی | ۶۱ (۵۳ تسک دامنه و ۸ قرارداد/آزمون بین‌سرویسی) | specification؛ اجرا نشده |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 496 | استخراج اولیه؛ تأیید کامل خیر |
+| تسک‌های دارای زنجیره اتمی | ۶۳ (۵۵ تسک دامنه و ۸ قرارداد/آزمون بین‌سرویسی) | specification؛ اجرا نشده |
 | داستان‌های کاربر مبنا | 53 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
 | خطوط با تأیید معنایی کامل | نامعلوم | ۲٬۸۰۶ واحد هنوز نیازمند G2 کامل |
@@ -878,5 +908,7 @@ flowchart LR
 **بازبینی دسته کیف پول W:1045–1151:** 28 الزام تفکیک‌شده درباره استرداد، منشأ اعتبار، مهلت جبرانی، شارژ/پرداخت دوره‌ای و سقف مصرف ثبت شد؛ موارد open و conditional گیت باقی می‌مانند.
 
 **بازبینی دسته کیف پول W:1167–1369:** 45 الزام مستقل درباره دفترکل واحد، منشأ، زنجیره دائم، وضعیت سه‌گانه، تکرار امن، رزرو، تطبیق و امنیت ثبت و به معیار ردپذیر متصل شد.
+
+**Assistant:** 25 الزام B:1478–1694 و دو تسک مستقل OTP و تأیید نهایی اضافه شد؛ گیت‌های ارائه‌دهنده، محیط و اجرای E2E بازند.
 
 **نقطه بازیابی:** بازبینی فردی تمام ۲٬۸۰۶ خط، کامل‌کردن استخراج مرکب/ضمنی و پوشش جدول‌ها/نمودارها؛ تفکیک بیشتر تسک‌های بزرگ به خروجی فنی اختصاصی؛ آزمون قرارداد و E2E با fixture و شواهد اجرا؛ کنترل G8 معکوس؛ اجرای CI این شاخه؛ تنها بعد از عبور گیت‌ها جابه‌جایی فایل موقت به مسیر رسمی و PR جدید. تا آن زمان وضعیت INCOMPLETE است.
