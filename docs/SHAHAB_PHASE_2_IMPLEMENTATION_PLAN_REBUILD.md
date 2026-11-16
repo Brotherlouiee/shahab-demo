@@ -705,6 +705,35 @@ flowchart LR
 | P2-W-801-02 | W:801 | در نتیجهٔ نامعلوم هزینهٔ خارجی، هزینه‌سازی جدید متوقف، فقط سهم مرتبط با تعهد نامعلوم نگهداری | DERIVED_REQUIRED | PLATFORM/S-US-01 | X-E2E-02 | T-X-E2E-02 | در E2E timeout خارجی، action_count جدید=۰ و hold فقط unresolved portion بماند | retry بانکی بدون inquiry | DESIGN_PENDING |
 | P2-B-1684-13 | B:1684 | هیچ رویدادی به‌تنهایی مجوز اجرای اقدام حساس ایجاد نمی‌کند | DERIVED_REQUIRED | PLATFORM/S-US-06 | X-E2E-03 | T-X-E2E-03 | در trigger feedforward بدون consent، bank-submit_count=۰ و تنها candidate_event مجاز باشد | اجرای خودکار پرداخت از هشدار | DESIGN_PENDING |
 
+| P2-W-1045-02 | W:1045 | بازگشت کامل، سهم‌های اصلی را بازیابی و بازگشت جزئی به نسبت سهم‌های پرداخت تقسیم شود | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | در پرداخت ۷۰ نقد+۳۰ هدیه refund=۵۰ به ۳۵ نقد+۱۵ هدیه تخصیص یابد | refund همه مبلغ به نقد | DESIGN_PENDING |
+| P2-W-1045-03 | W:1045 | منشأ و حق برداشت حفظ شوند و سقف‌ها بدون قاعده بازنشانی نشوند | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | پس بازگشت gift همچنان cashout=false و caps تاریخی محفوظ باشد | افزایش بی‌مجوز سقف مصرف | DESIGN_PENDING |
+| P2-W-1045-04 | W:1045 | ثبت قطعی حذف یا بازنویسی نشود | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | refund journal compensating لینک به original record داشته باشد | DELETE ثبت قطعی | DESIGN_PENDING |
+| P2-W-1047-01 | W:1047 | بزرگ‌ترین بخش کسری | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | در refund نسبتی چند منشئی ریال‌های باقی‌مانده به largest fractions برسند؛ مجموع دقیقاً برابر refund باشد | گردکردن مستقل اجزا و اختلاف جمع | DESIGN_PENDING |
+| P2-W-1047-02 | W:1047 | ترتیب قطعی و نسخه‌دار شکست تساوی کسری‌ها هنوز جزئیات اجرایی باز است | OPEN_DECISION | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | تا تصویب tie-break deterministic/versioned، حالت تساوی fraction گیت تصمیم باز داشته باشد | انتخاب سلیقه‌ای و نامستند tie-break | DESIGN_PENDING |
+| P2-W-1065-02 | W:1065 | هدیهٔ هنوز معتبر با تاریخ قبلی و هدیهٔ بدون انقضا بدون انقضا برگردد | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | refund هدیه معتبر original expiry را حفظ کند؛ نامحدود null بماند | تمدید تاریخ معتبر در refund | DESIGN_PENDING |
+| P2-W-1065-03 | W:1065 | اگر هدیه هنگام بازگشت منقضی شده و لغو ناشی از شهاب یا شکست خدمت باشد، مهلت جبرانی دریافت کند | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | هدیه منقضی با failure قابل‌انتساب، فرصت جبرانی فعال شود | هدیه منقضیِ شکست سرویس بدون فرصت | DESIGN_PENDING |
+| P2-W-1067-01 | W:1067 | هفت روز | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | مهلت جبرانی حداقل ۷ روز از لحظه بازگشت برای مورد واجد شرایط باشد | مهلت کمتر از ۷ روز | DESIGN_PENDING |
+| P2-W-1067-02 | W:1067 | مهلت باقی‌مانده هنگام پرداخت | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | compensatoryDuration=max(7days,remainingAtPayment) و نه مجموع باشد | ۲۰+۷ روز در مثال مهلت بیست‌روزه | DESIGN_PENDING |
+| P2-W-1075-01 | W:1075 | فقط ظرفیت دورهٔ اصلی را به اندازهٔ مبلغ بازگشتی احیا می‌کند | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | refund استرداد تاریخ گذشته روی allowance دوره جدید اثر صفر داشته باشد | افزایش دوره جدید با استرداد قدیمی | DESIGN_PENDING |
+| P2-W-1077-01 | W:1077 | امکان استفادهٔ مجدد از کد تخفیف باید تعیین شوند | OPEN_DECISION | CORE/C-US-08 | C-GFT-01 | T-C-GFT-01 | reuse discount code پس refund بدون تصمیم مصوب غیرفعال/گیت باقی بماند | روشن شدن reuse اتوماتیک | DESIGN_PENDING |
+| P2-W-1077-02 | W:1077 | تخفیف مصرف‌شده به موجودی تبدیل نشود | APPROVED_EXPLICIT | CORE/C-US-12 | C-REF-01 | T-C-REF-01 | refund discount credit=0 | ایجاد وجه نقد از discount | DESIGN_PENDING |
+| P2-W-1091-02 | W:1091 | اختیاری، با مجوز صریح مشتری، سقف مبلغ و امکان لغو | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | auto charge default off؛ requires consent+cap+revocation | فعال‌سازی بدون opt-in | DESIGN_PENDING |
+| P2-W-1091-03 | W:1091 | فقط پس از تأیید پشتیبانی فنی و قراردادی ارائه‌دهنده فعال شود | CONDITIONAL | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | provider no contract => feature disabled | درگاه بدون mandate شروع برداشت | DESIGN_PENDING |
+| P2-W-1103-02 | W:1103 | آستانهٔ اعتبار، مبلغ ثابت هر شارژ و سقف مجموع دوره را تنظیم کند | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | threshold/fixed_amount/period_cap سه مقدار مستقل و معتبر باشند | شارژ بدون سقف دوره | DESIGN_PENDING |
+| P2-W-1103-03 | W:1103 | سقف‌های کل مصوب و درخواست‌های در انتظار نیز کنترل شوند | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | pending autocharge در rolling 24h limit حساب منظور شود | عبور چند درخواست موازی از cap | DESIGN_PENDING |
+| P2-W-1115-02 | W:1115 | برای خدمت مشخص، زمان‌بندی و سقف هر نوبت باشد | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | recurring service binding و per_occurrence_cap داشته باشد | برداشت یک پرداخت بدون خدمت شناخته‌شده | DESIGN_PENDING |
+| P2-W-1127-02 | W:1127 | عملیات در جریان فقط در صورت امکان توقف امن متوقف شود | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | pending external unknown محفوظ/استعلام شود، نه باطل قطعی | حذف بدهی اجرای جاری | DESIGN_PENDING |
+| P2-W-1127-03 | W:1127 | وضعیت و تعهد قبلی پیگیری و ثبت شوند | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | revocation journal retains past billed status | پاک شدن invoice قبلی | DESIGN_PENDING |
+| P2-W-1139-02 | W:1139 | پس از شکست قطعی اعلان و همان نوبت متوقف شود | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | definite failed occurrence => one notification, no auto restart | retry شروع نوبت جدید خودکار | DESIGN_PENDING |
+| P2-W-1139-03 | W:1139 | تکرار با اقدام مشتری باشد | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | failed recurring new attempt requires user action token | replay without user action | DESIGN_PENDING |
+| P2-W-1139-04 | W:1139 | در کمبود اعتبار، هزینهٔ بدون پشتوانه ایجاد نشود | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | insufficient balance => billable_debit 0 | کیف منفی | DESIGN_PENDING |
+| P2-W-1139-05 | W:1139 | نتیجهٔ نامعلوم ابتدا بررسی شود و شکست قطعی فرض نشود | APPROVED_EXPLICIT | CORE/C-US-13 | C-REC-01 | T-C-REC-01 | timeout => unknown inquiry before fresh external submit | timeout -> failed+resubmit | DESIGN_PENDING |
+| P2-W-1151-02 | W:1151 | سقف هر عملیات، روزانه و ماهانه را فعال یا غیرفعال کند | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | سه قید فرد/سازمان independently toggleable and enforced | خاموشی قید روزانه، بقیه سقف‌ها را هم خاموش کند | DESIGN_PENDING |
+| P2-W-1151-03 | W:1151 | تعریف دوره و منطقهٔ زمانی مشخص باشد | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | period window by configured timezone without ambiguous boundary | جابجایی روز با timezone اشتباه | DESIGN_PENDING |
+| P2-W-1151-04 | W:1151 | همهٔ سقف‌های فعال هم‌زمان رعایت شوند | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | transaction passes only if all active caps allow | قبول با یک cap نقض‌شده | DESIGN_PENDING |
+| P2-W-1151-05 | W:1151 | بودجهٔ عضو فقط مجوز مصرف است و پشتوانهٔ موجودی اختصاصی ندارد | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | allowance spend نباید cash transfer به personal ledger بسازد | ساخت کیف شخصی شارژشده | DESIGN_PENDING |
+| P2-W-1151-06 | W:1151 | ماندهٔ آزاد سازمان نیز کنترل شود | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | hold ≤ min(allowance,org_available) | مصرف از allowance با org balance 0 | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -714,16 +743,16 @@ flowchart LR
 | C-ORG-01 | CORE | C-US-02 | P2-W-156-01، P2-W-156-02 | W:156 | T-C-ORG-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-ORG-02 | CORE | C-US-04 | P2-W-180-01، P2-W-180-02، P2-W-196-01، P2-W-208-01 | W:180، W:196، W:208 | T-C-ORG-02 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-ORG-03 | CORE | C-US-05 | P2-W-220-01، P2-W-244-01، P2-W-256-01 | W:220، W:244، W:256 | T-C-ORG-03 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| C-ALW-01 | CORE | C-US-06 | P2-W-268-01، P2-W-268-02، P2-W-284-01، P2-W-296-01، P2-W-308-01، P2-W-1151-01 | W:268، W:284، W:296، W:308، W:1151 | T-C-ALW-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| C-ALW-01 | CORE | C-US-06 | P2-W-268-01، P2-W-268-02، P2-W-284-01، P2-W-296-01، P2-W-308-01، P2-W-1151-01، P2-W-1075-01، P2-W-1151-02، P2-W-1151-03، P2-W-1151-04، P2-W-1151-05، P2-W-1151-06 | W:268، W:284، W:296، W:308، W:1151، W:1075 | T-C-ALW-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-FIN-01 | CORE | C-US-07 | P2-W-379-01، P2-W-393-01، P2-W-544-01، P2-W-558-01 | W:379، W:393، W:544، W:558 | T-C-FIN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| C-GFT-01 | CORE | C-US-08 | P2-W-485-01، P2-W-699-01، P2-W-699-02، P2-W-713-01، P2-W-727-01، P2-W-741-01 | W:485، W:699، W:713، W:727، W:741 | T-C-GFT-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| C-GFT-01 | CORE | C-US-08 | P2-W-485-01، P2-W-699-01، P2-W-699-02، P2-W-713-01، P2-W-727-01، P2-W-741-01، P2-W-1077-01 | W:485، W:699، W:713، W:727، W:741، W:1077 | T-C-GFT-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-INV-01 | CORE | C-US-20 | P2-W-1495-01، P2-W-1495-02 | W:1495 | T-C-INV-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-CHG-01 | CORE | C-US-09 | P2-W-580-01، P2-W-596-01، P2-W-636-01، P2-W-650-01، P2-W-650-02، P2-W-677-01 | W:580، W:596، W:636، W:650، W:677 | T-C-CHG-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-PRC-01 | CORE | C-US-18 | P2-W-1391-01، P2-W-1391-02، P2-W-1405-01، P2-W-1449-01، P2-W-1419-01، P2-W-1433-01، P2-W-1463-01 | W:1391، W:1405، W:1449، W:1419، W:1433، W:1463 | T-C-PRC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-HLD-01 | CORE | C-US-10 | P2-W-773-01، P2-W-787-01، P2-W-801-01، P2-W-815-01، P2-W-831-01، P2-W-845-01 | W:773، W:787، W:801، W:815، W:831، W:845 | T-C-HLD-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-TFR-01 | CORE | C-US-11 | P2-W-863-01، P2-W-863-02، P2-W-877-01، P2-W-893-01، P2-W-905-01، P2-W-919-01، P2-W-933-01، P2-W-949-01 | W:863، W:877، W:893، W:905، W:919، W:933، W:949 | T-C-TFR-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| C-REF-01 | CORE | C-US-12 | P2-W-1045-01، P2-W-1065-01 | W:1045، W:1065 | T-C-REF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| C-REC-01 | CORE | C-US-13 | P2-W-1091-01، P2-W-1103-01، P2-W-1115-01، P2-W-1127-01، P2-W-1139-01 | W:1091، W:1103، W:1115، W:1127، W:1139 | T-C-REC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| C-REF-01 | CORE | C-US-12 | P2-W-1045-01، P2-W-1065-01، P2-W-1045-02، P2-W-1045-03، P2-W-1045-04، P2-W-1047-01، P2-W-1047-02، P2-W-1065-02، P2-W-1065-03، P2-W-1067-01، P2-W-1067-02، P2-W-1077-02 | W:1045، W:1065، W:1047، W:1067، W:1077 | T-C-REF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| C-REC-01 | CORE | C-US-13 | P2-W-1091-01، P2-W-1103-01، P2-W-1115-01، P2-W-1127-01، P2-W-1139-01، P2-W-1091-02، P2-W-1091-03، P2-W-1103-02، P2-W-1103-03، P2-W-1115-02، P2-W-1127-02، P2-W-1127-03، P2-W-1139-02، P2-W-1139-03، P2-W-1139-04، P2-W-1139-05 | W:1091، W:1103، W:1115، W:1127، W:1139 | T-C-REC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-CAT-01 | CORE | C-US-14 | P2-B-871-01، P2-B-871-02، P2-B-1633-01، P2-B-410-02، P2-B-410-03 | B:871، B:1633، B:410 | T-C-CAT-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-PLN-01 | CORE | C-US-15 | P2-B-1014-01، P2-B-1014-02 | B:1014 | T-C-PLN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-POL-01 | CORE | C-US-16 | P2-B-1147-01، P2-B-396-02، P2-B-431-02 | B:1147، B:396، B:431 | T-C-POL-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
@@ -779,7 +808,7 @@ flowchart LR
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 398 | استخراج اولیه؛ تأیید کامل خیر |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 426 | استخراج اولیه؛ تأیید کامل خیر |
 | تسک‌های دارای زنجیره اتمی | ۶۱ (۵۳ تسک دامنه و ۸ قرارداد/آزمون بین‌سرویسی) | specification؛ اجرا نشده |
 | داستان‌های کاربر مبنا | 53 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
@@ -799,5 +828,7 @@ flowchart LR
 **بازبینی تکمیلی ADR-RAG-31..40:** 39 الزام با مرزبندی Core/Adviser/Platform و وضعیت آزمون طراحی‌شده ثبت شد؛ آزمون واقعی و گیت مستقل انتشار باز است.
 
 **کنترل قراردادهای بین‌سرویسی:** هشت تسک X-CTR-01..05 و X-E2E-01..03 در ماتریس معکوس به متن مرجع و آزمون وابسته شدند؛ شش حکم اجرایی استنتاجی با منشأ و ضرورت ثبت شد.
+
+**بازبینی دسته کیف پول W:1045–1151:** 28 الزام تفکیک‌شده درباره استرداد، منشأ اعتبار، مهلت جبرانی، شارژ/پرداخت دوره‌ای و سقف مصرف ثبت شد؛ موارد open و conditional گیت باقی می‌مانند.
 
 **نقطه بازیابی:** بازبینی فردی تمام ۲٬۸۰۶ خط، کامل‌کردن استخراج مرکب/ضمنی و پوشش جدول‌ها/نمودارها؛ تفکیک بیشتر تسک‌های بزرگ به خروجی فنی اختصاصی؛ آزمون قرارداد و E2E با fixture و شواهد اجرا؛ کنترل G8 معکوس؛ اجرای CI این شاخه؛ تنها بعد از عبور گیت‌ها جابه‌جایی فایل موقت به مسیر رسمی و PR جدید. تا آن زمان وضعیت INCOMPLETE است.
