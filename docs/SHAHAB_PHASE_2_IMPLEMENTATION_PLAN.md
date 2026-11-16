@@ -106,12 +106,12 @@
 
 | شناسه تسک | کار اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-US-01.MAIN | ماژول‌های Identity/Catalog/Recommendation/Plan/Wallet را با dependency rule جدا کن | تست معماری هر import بین ماژول‌ها را کنترل کند |
-| CORE-US-02.MAIN | تنظیمات نوع‌دار، migration و feature flag نسخه‌دار بساز | تغییر schema و rollback بدون تخریب داده انجام شود |
-| CORE-US-03.MAIN | OpenAPI و DTO قرارداد Core با Adviser و Assistant را نسخه‌دار کن | consumer contract test نسخه ناسازگار را رد کند |
-| CORE-US-04.MAIN | Job پایدار و Outbox تراکنشی و پردازش idempotent بساز | restart یا retry پیام اثر مالی تکراری نسازد |
-| CORE-US-05.MAIN | Metric/Trace/Log برای API، Job، مالی و وابستگی بساز | داشبورد تأخیر و خطای قرارداد و ledger هشدار دهد |
-| CORE-US-06.MAIN | RBAC/ABAC، کنترل نشست، rate limit و audit عملیات حساس بساز | دسترسی افقی و نقش نامعتبر رد شود |
+| CORE-US-01.MAIN | تفکیک ماژول‌های Identity/Catalog/Recommendation/Plan/Wallet در Core Modular Monolith و منع import جداول خصوصی Adviser/Assistant؛ قرارداد Port/Adapter برای سرویس‌های مستقل هدف A01 | CORE-US-01.MAIN.T01: static dependency test هیچ import معکوس یا دسترسی مستقیم داده Adviser/Assistant را نپذیرد؛ در تست R1 فقط Core/Adviser استقرار فعال باشند و Assistant صرفاً قرارداد/mock داشته باشد؛ تعریف معماری هدف به‌تنهایی مجوز استقرار نشود؛ [طراحی آزمون؛ اجرا نشده] |
+| CORE-US-02.MAIN | Config registry نوع‌دار و نسخه‌دار برای Operational Settings، Secrets، Feature Flags و Business Policy با مالک/چرخه تأیید مجزا، validation و rollback؛ عدم الزام سرویس مستقل config در R1 | CORE-US-02.MAIN.T01: تغییر ناسازگار schema یا پیکربندی بدون migration/rollback در contract test رد شود؛ secret در config عمومی یا commit/log صفر باشد؛ تغییر business policy بدون مالک/تأیید لازم فعال نشود؛ R1 بدون config microservice ممکن بماند؛ [طراحی آزمون؛ اجرا نشده] |
+| CORE-US-03.MAIN | ثبت OpenAPI/Schema نسخه‌دار Core برای Adviser و Assistant، ماتریس consumer compatibility، قرارداد مالکیت داده و مهاجرت breaking change از مسیر Expand→Migrate→Contract | CORE-US-03.MAIN.T01: حذف/تغییر نوع فیلد مورد استفاده مصرف‌کننده بدون نسخه جدید و migration با CI consumer-contract شکست بخورد؛ در schema مشترک هیچ Core private table برای خواندن مستقیم Adviser/Assistant expose نشود؛ mock نسخه سازگار pass دهد؛ [طراحی آزمون؛ اجرا نشده] |
+| CORE-US-04.MAIN | Transactional Outbox و JobState پایدار و idempotent برای کارهای طولانی؛ کار کوتاه و قطعی sync API؛ سیاست retry محدود و isolation صف/Worker در سرویس مالک، بدون الزام broker مستقل | CORE-US-04.MAIN.T01: قطع Worker پس از DB commit قبل publish، با recovery دقیقاً یک اثر مالی/رویداد قابل مشاهده بسازد؛ درخواست کوتاه در مسیر sync بدون صف غیرضروری پاسخ دهد؛ retry محدود و dedupe key قابل بازیابی باشد؛ [طراحی آزمون؛ اجرا نشده] |
+| CORE-US-05.MAIN | OpenTelemetry logs/metrics/traces با correlation، privacy redaction، شاخص‌های مالی و contract-version drift، SLI/SLO با baseline و هشدار اثرمحور؛ SigNoz فقط ارزیابی مشروط Cloud/Self-hosted طبق A09 | CORE-US-05.MAIN.T01: در سناریو API timeout/ledger mismatch/contract drift، trace و هشدار دارای correlation و بدون OTP/متن حساس باشند؛ threshold بدون baseline VERIFIED نشود؛ SigNoz self-host روی VM تولید فعلی با ظرفیت ثبت‌شده هرگز approved/deployed نشود؛ [طراحی آزمون؛ اجرا نشده] |
+| CORE-US-06.MAIN | RBAC/ABAC و جداسازی نشست، rate-limit، audit عملیات حساس و مدیریت اسرار کمینه با rotation/revoke و CI secret scan؛ مجوز هر سرویس محدود به دامنه و نسخه قرارداد | CORE-US-06.MAIN.T01: نقش غیرمجاز یا tenant دیگر API مالی را 403/404 بگیرد؛ secret جعلی در commit/CI fail شود؛ revoke credential access پیشین را ببندد؛ log و trace حاوی رمز/OTP صفر باشند؛ [طراحی آزمون؛ اجرا نشده] |
 | CORE-US-07.MAIN | ثبت‌نام، ورود، نشست ناشناس و تبدیل مجاز به حساب بساز | انقضای نشست و مهاجرت داده بدون نشت تست شود |
 | CORE-US-08.MAIN | مدل زمینه دامنه، نقش، نشست و دسترسی چندسازمانی بساز | جابجایی دامنه بدون مجوز داده شخصی منتقل نکند |
 | CORE-US-09.MAIN | کاتالوگ نسخه‌دار حوزه/خدمت/شرایط/شواهد بساز | خدمت ناموجود یا غیرفعال در مسیریابی قابل اجرا نباشد |
@@ -2186,7 +2186,7 @@
 | CORE-X05 | دفترکل دوطرفه، حساب‌های تعهد، CreditLot و invariants | تراز هر عملیات و بازسازی مانده |
 | CORE-X06 | Job پایدار، Outbox اتمیک، deduplication و recovery | Fault injection و عدم ثبت مضاعف |
 | CORE-X07 | Secret، رمزنگاری، کمینه‌سازی PII و audit تغییر | اسکن امنیتی و تست نشت داده |
-| CORE-X08 | OpenTelemetry، مانیتورینگ مالی و قراردادها، Runbook | شبیه‌سازی هشدار و incident |
+| CORE-X08 | داشبورد/Runbook مبتنی بر OpenTelemetry، قراردادهای Core↔Adviser/Assistant، سلامت دفترکل و Worker؛ SigNoz صرفاً گزینه ارزیابی A09، نه نصب قطعی روی VM تولید فعلی | CORE-X08.T01: با تزریق تأخیر Worker و contract-version mismatch دو هشدار مستقل و قابل رسیدگی با correlation ایجاد شوند؛ حادثه مالی از timeout عادی تفکیک شود؛ بدون baseline و ظرفیت‌سنجی هیچ استقرار SigNoz Self-host روی VM تولید تأیید نشود؛ لاگ OTP و فرم حساس صفر؛ طراحی، اجرا نشده |
 | CORE-X09 | پنل اپراتوری پرونده مغایرت، تسویه و پشتیبانی | دسترسی نقش‌محور و ردپا |
 | CORE-X10 | پوشش unit/integration/contract/E2E/property/load/recovery | اجرای CI با گزارش شکست و پوشش invariant |
 | CORE-X11 | فهرست تصمیم‌های باز و مالک تصمیم و اثر هر تصمیم بر تسک | هیچ مقدار یا بانک فرضی به مصوبه تبدیل نشود |
