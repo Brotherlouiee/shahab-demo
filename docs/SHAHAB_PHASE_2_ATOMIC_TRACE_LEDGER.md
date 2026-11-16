@@ -3224,6 +3224,18 @@
 | AR-W-1541-02 | W:1541؛ «برای موارد امنیتی و نیاز به اقدام فوری پیامک ارسال شود» | مصوب؛ کانال امنیت | Core / CORE-US-41 | CORE-W-099.BE | CORE-W-099.BE.T01 | NOT VERIFIED؛ معیار طراحی‌شده، اجرای آزمون و تطبیق روابط کامل باز |
 | AR-W-1541-03 | W:1541؛ «یادآوری‌ها قابل تنظیم باشند» | مصوب؛ یادآور غیراجباری | Core / CORE-US-41 | CORE-W-099.FE | CORE-W-099.FE.T01 | NOT VERIFIED؛ معیار طراحی‌شده، اجرای آزمون و تطبیق روابط کامل باز |
 
+### تمایز قرارداد فرم نوع‌دار از مصرف‌کننده Adviser/Assistant — B:1453
+
+Core مالک قرارداد نوع‌دار و validation است؛ هر سرویس مصرف‌کننده مسئول رندر و اقدام خود است. هر خروجی مدل با کد اجرایی به‌عنوان داده غیرقابل‌اعتماد رد می‌شود. این ردیابی از طرح آزمون به اجرای آزمون ارتقا داده نشده است.
+
+| شناسه اتم | متن مرجع | وضعیت | مالک | تسک | آزمون | شواهد |
+|---|---|---|---|---|---|---|
+| AR-B-1453-14 | B:1453؛ «مدل زبانی نباید کد اجرایی دلخواه، اسکریپت یا مؤلفه ناامن به کلاینت تزریق کند» | مصوب؛ security/consumer contracts | Core / CORE-US-03؛ Adviser / ADV-US-10؛ Assistant / AST-US-10 | CORE-B-030.QA؛ ADV-RAG-055؛ AST-040 | CORE-B-030.QA.T01؛ AT-RAG-055.01؛ AT-AST-040.01 | TASKS REGISTERED؛ آزمون طراحی‌شده، اجرا نشده؛ NOT VERIFIED |
+| AR-B-1453-15 | B:1453؛ «رابط‌های عمومی پلتفرم مستقل‌اند» | مصوب؛ UI owner context | Core / CORE-US-12؛ Adviser / ADV-US-10؛ Assistant / AST-US-10 | CORE-B-030.FE؛ ADV-RAG-055؛ AST-040 | CORE-B-030.FE.T01؛ AT-RAG-055.03؛ AT-AST-040.01 | TASKS REGISTERED؛ آزمون طراحی‌شده، اجرا نشده؛ NOT VERIFIED |
+| AR-B-1453-16 | B:1453؛ «تعبیه UI به معنی انتقال منطق قطعی Backend به فرانت نیست» | مصوب؛ backend-only execution policy | Core / CORE-US-03؛ Assistant / AST-US-06 | CORE-B-030.BE؛ AST-040 | CORE-B-030.BE.T01؛ AT-AST-040.02 | TASKS REGISTERED؛ آزمون طراحی‌شده، اجرا نشده؛ NOT VERIFIED |
+| AR-B-1453-17 | B:1453؛ «فرم‌ها باید **بر اساس قرارداد نوع‌دار و اعتبارسنجی‌شده**» | مصوب؛ typed form validation | Core / CORE-US-03؛ Adviser / ADV-US-10؛ Assistant / AST-US-10 | CORE-B-030.DB/BE؛ ADV-RAG-055؛ AST-040 | CORE-B-030.QA.T01؛ AT-RAG-055.03؛ AT-AST-040.01 | TASKS REGISTERED؛ آزمون طراحی‌شده، اجرا نشده؛ NOT VERIFIED |
+
+
 ## آمار ثبت‌شده
 
 - واحدهای ممیزی اولیه: 1957
