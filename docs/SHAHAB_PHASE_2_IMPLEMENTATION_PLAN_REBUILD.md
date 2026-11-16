@@ -734,6 +734,52 @@ flowchart LR
 | P2-W-1151-05 | W:1151 | بودجهٔ عضو فقط مجوز مصرف است و پشتوانهٔ موجودی اختصاصی ندارد | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | allowance spend نباید cash transfer به personal ledger بسازد | ساخت کیف شخصی شارژشده | DESIGN_PENDING |
 | P2-W-1151-06 | W:1151 | ماندهٔ آزاد سازمان نیز کنترل شود | APPROVED_EXPLICIT | CORE/C-US-06 | C-ALW-01 | T-C-ALW-01 | hold ≤ min(allowance,org_available) | مصرف از allowance با org balance 0 | DESIGN_PENDING |
 
+| P2-W-1167-02 | W:1167 | یک دفترکل مشترک ریالی با حساب‌های تفکیک‌شده برای مالک و موضوع مالی | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | journal ledger واحد با accounts جدا برای org/person داشته باشد | دو ledger مجزا بدون reconciliation | DESIGN_PENDING |
+| P2-W-1167-03 | W:1167 | پول بانک و وجوه در راه | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | در پرداخت pending سرفصل in_transit از bank cash جدا بماند | پول در راه به پول وصول‌شده تبدیل شود | DESIGN_PENDING |
+| P2-W-1167-04 | W:1167 | تعهد موجودی هر کیف پول | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | liability هر wallet_id جدا و تجمیع آن برابر بدهی اشخاص باشد | گم‌شدن بدهی سازمان | DESIGN_PENDING |
+| P2-W-1167-05 | W:1167 | درآمد و کارمزد | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | شارژ بدون خدمت نباید revenue ایجاد کند | revenue در هنگام شارژ | DESIGN_PENDING |
+| P2-W-1167-06 | W:1167 | هزینه و بدهی به تأمین‌کننده | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | هزینه supplier جدا از customer debit و زمان تسویه باشد | تسویه از کیف مشتری دوم | DESIGN_PENDING |
+| P2-W-1167-07 | W:1167 | اعطا، مصرف و انقضای هدیه | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | gift lifecycle grant/spend/expire جدا و lineage داشته باشد | اعتبار gift cashout شود | DESIGN_PENDING |
+| P2-W-1167-08 | W:1167 | وجوه نامشخص یا مورد اختلاف | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | unknown funds در suspense تا تطبیق قطعی نگهداری شود | شارژ کیف از رسید بدون انتساب | DESIGN_PENDING |
+| P2-W-1183-02 | W:1183 | پیوند انتقال‌های قبلی، مبلغ اولیه و مانده، مقدار رزروشده و مصرف‌شده | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | sum(available,reserved,spent) با original+adjustments سازگار باشد | رزرو دوبار یا negative available | DESIGN_PENDING |
+| P2-W-1183-03 | W:1183 | حق برداشت، انقضا، محدودیت خدمت و پیوند مصرف، بازگشت و اصلاح | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | lot cap/expiry/scope در policy engine enforce شوند | gift expired در خدمت دیگری | DESIGN_PENDING |
+| P2-W-1183-04 | W:1183 | شرایط صرفاً به‌صورت توضیح آزاد یا فرادادهٔ نمایشی ذخیره نشوند | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | constraint ساختاری مانع خرج خارج scope شود | policy فقط JSON note بدون validation | DESIGN_PENDING |
+| P2-W-1199-02 | W:1199 | ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف، انتقال، بازگشت یا انقضا فراهم شود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | forensic traversal forward/backward full lineage قابل بازسازی باشد | قطع پیوند پس retransfer | DESIGN_PENDING |
+| P2-W-1199-03 | W:1199 | تمام کاربران و سازمان‌های واسط در جهت‌های انتقال مجاز | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | هر intermediate owner/transfer_id دائمی قابل جست‌وجو باشد | پنهان شدن واسط‌های مجاز | DESIGN_PENDING |
+| P2-W-1199-04 | W:1199 | تقسیم میان چند گیرنده، ترکیب منشأها، بازانتقال و حلقهٔ بازگشت به حساب قبلی، پیوندها را حذف نکنند | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | split/recombine/roundtrip lineage کامل حفظ شود | از بین‌رفتن child lot parent | DESIGN_PENDING |
+| P2-W-1199-05 | W:1199 | اصلاح و استرداد رویداد مرتبط تازه‌اند؛ سابقه پاک نشود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | refund/new correction event جدا و original journal immutable باشد | overwrite ثبت اولیه | DESIGN_PENDING |
+| P2-W-1199-06 | W:1199 | وضعیت مسیر در هر مقطع زمانی و کل شبکهٔ مرتبط با حساب قابل بازسازی و گزارش باشد | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | query as-of past timestamp همان chain/amount را بازگرداند | زنجیره فقط وضعیت جاری داشته باشد | DESIGN_PENDING |
+| P2-W-1211-02 | W:1211 | نام فنی نهایی و جدول انتقال مجاز وضعیت‌ها در طراحی اجرایی تکمیل شوند | OPEN_DECISION | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | transition matrix پس طراحی تأیید شود و هر transition invalid reject | ثبت پیش‌فرض enum تازه بدون گیت | DESIGN_PENDING |
+| P2-W-1227-02 | W:1227 | شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | شناسه‌های هشت‌گانه distinct و با foreign reference مربوط link شوند | استفاده invoice_id به‌عنوان bank_ref | DESIGN_PENDING |
+| P2-W-1227-03 | W:1227 | هر عملیات می‌تواند چند ثبت مالی داشته باشد | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | operation دارای ۲ capture journal به همان root operation باشد | فرض فقط یک journal برای یک خدمت | DESIGN_PENDING |
+| P2-W-1227-04 | W:1227 | هر اصلاح نیز به رویداد اصلی اشاره کند | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | compensating entry root link اجباری باشد | refund بی original_id | DESIGN_PENDING |
+| P2-W-1241-02 | W:1241 | کلید تکرار امن برای هر اقدام مشخص از یک عملیات | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | hold/capture/refund key جدا و unique per operation/action باشد | یک key مشترک برای hold و release | DESIGN_PENDING |
+| P2-W-1241-03 | W:1241 | یکتایی پایدار رویداد مالی در شهاب | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | same financial event replay ledger credit count=1 | دو journal برای یک bank receipt | DESIGN_PENDING |
+| P2-W-1241-04 | W:1241 | تکرار همان اقدام با همان داده اثر دوم نسازد | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | POST retry با key یکسان پاسخ سابق و journal count ثابت بدهد | double debit | DESIGN_PENDING |
+| P2-W-1241-05 | W:1241 | تغییر مبلغ یا مقصد زیر همان کلید نیز نباید بی‌صدا به اقدام تازه تبدیل شود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | reused key+different payload must conflict | پرداخت به گیرنده تازه با همان key | DESIGN_PENDING |
+| P2-W-1257-02 | W:1257 | هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد | APPROVED_EXPLICIT | CORE/C-US-10 | C-HLD-01 | T-C-HLD-01 | hold allocations روی lot و operation ثبت و قابل release دقیق باشند | hold غیرقابل ردگیری | DESIGN_PENDING |
+| P2-W-1257-03 | W:1257 | هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود | APPROVED_EXPLICIT | CORE/C-US-10 | C-HLD-01 | T-C-HLD-01 | partial capture بدون عبور از reserved amount باشد | capture بیشتر از hold | DESIGN_PENDING |
+| P2-W-1257-04 | W:1257 | ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند | APPROVED_EXPLICIT | CORE/C-US-10 | C-HLD-01 | T-C-HLD-01 | unknown external commitment hold active بماند | release کامل با timeout | DESIGN_PENDING |
+| P2-W-1257-05 | W:1257 | قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند | APPROVED_EXPLICIT | CORE/C-US-10 | C-HLD-01 | T-C-HLD-01 | capture و hold decrement اتمیک باشد | double-spend during capture | DESIGN_PENDING |
+| P2-W-1271-02 | W:1271 | ثبت اثر مالی به مانده یا نسخهٔ معتبر حساب و اجزای اعتبار مشروط شود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | optimistic locking/serializable invariant concurrent debit حفظ کند | lost update در دو مصرف | DESIGN_PENDING |
+| P2-W-1271-03 | W:1271 | حق برداشت، انقضا، خدمت مجاز، سهم اجزا، رزروهای قبلی، سقف‌های فرد و سازمان | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | در مرز commit تمام constraints دوباره اعتبارسنجی شوند | استفاده از مجوز منقضی cache | DESIGN_PENDING |
+| P2-W-1271-04 | W:1271 | تغییر شرایط باعث رد یا محاسبهٔ مجدد شود | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | version conflict reject/requote و requires confirmation باشد | مصرف قیمت قبلی بدون رضایت | DESIGN_PENDING |
+| P2-W-1271-05 | W:1271 | محاسبهٔ مجدد اجازهٔ تغییر پنهان پرداخت‌کننده، گیرنده یا مبلغ تأییدشده نیست | APPROVED_EXPLICIT | CORE/C-US-23 | C-LED-02 | T-C-LED-02 | payer/payee/approved-amount immutable during retry | fallback بی‌صدا به کیف شخصی | DESIGN_PENDING |
+| P2-W-1289-03 | W:1289 | موارد حل‌نشده پرونده شوند | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | mismatch unresolved create case with owner | اختلاف بدون پرونده | DESIGN_PENDING |
+| P2-W-1303-02 | W:1303 | برش روزانه با زمان و منطقهٔ زمانی مشخص باشد | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | daily cutoff+timezone configurable و ثابت snapshot job باشد | تطبیق دو روز روی timezone متفاوت | DESIGN_PENDING |
+| P2-W-1303-03 | W:1303 | هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | reconciliation suspense/in_transit/gift separately aggregate شود | پنهان‌کردن pending از report | DESIGN_PENDING |
+| P2-W-1303-04 | W:1303 | فرمول پوشش تعهد با تأیید متخصص نهایی شود | OPEN_DECISION | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | تا تأیید فرمول، coverage calculation gate blocked باشد | فرمول سفارشی بدون تایید | DESIGN_PENDING |
+| P2-W-1317-02 | W:1317 | برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم، احراز مجدد بخواهند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | reauth recent برای هر چهار action لازم باشد | session قدیمی به تغییر bank account | DESIGN_PENDING |
+| P2-W-1317-03 | W:1317 | سازمان به تأییدکنندهٔ دوم اجباری نیاز ندارد | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | org admin after reauth بدون second required approval عمل کند | block برداشت سازمان به دلیل نبود second approver | DESIGN_PENDING |
+| P2-W-1331-03 | W:1331 | همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | retention مالی no time purge + lineage intact | حذف بعد ۲۰ سال | DESIGN_PENDING |
+| P2-W-1331-04 | W:1331 | مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | forensics event docs/actor/reason/time references retained | audit row بدون actor | DESIGN_PENDING |
+| P2-W-1331-05 | W:1331 | لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | technical logging TTL policy separate from perpetual financial history | نگهداری OTP همراه ledger | DESIGN_PENDING |
+| P2-W-1331-06 | W:1331 | مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | access to financial history role scoped + read audit | member reads other org ledger | DESIGN_PENDING |
+| P2-W-1343-02 | W:1343 | کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | each 4 alert events publish actionable alert | silent suspicious access | DESIGN_PENDING |
+| P2-W-1355-02 | W:1355 | ساخت سامانهٔ مستقل تازه برای چهار موضوع گزارش مشکوک، کنترل داخلی و آموزش، محرمانگی و اجرای دستور قانونی به برنامه اضافه نمی‌شود | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | reuse documented compliance procedures not custom AML platform | تسک موتور AML اختراعی | DESIGN_PENDING |
+| P2-W-1355-03 | W:1355 | این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست | APPROVED_EXPLICIT | CORE/C-US-25 | C-SEC-02 | T-C-SEC-02 | record compliance owner and evidence needed separate | بستن gate compliance با صرف گفته مالک | DESIGN_PENDING |
+| P2-W-1369-02 | W:1369 | بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست | APPROVED_EXPLICIT | CORE/C-US-24 | C-REC-02 | T-C-REC-02 | recovery retry ledger side effects zero beyond original | resubmit payout duplicate | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -749,7 +795,7 @@ flowchart LR
 | C-INV-01 | CORE | C-US-20 | P2-W-1495-01، P2-W-1495-02 | W:1495 | T-C-INV-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-CHG-01 | CORE | C-US-09 | P2-W-580-01، P2-W-596-01، P2-W-636-01، P2-W-650-01، P2-W-650-02، P2-W-677-01 | W:580، W:596، W:636، W:650، W:677 | T-C-CHG-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-PRC-01 | CORE | C-US-18 | P2-W-1391-01، P2-W-1391-02، P2-W-1405-01، P2-W-1449-01، P2-W-1419-01، P2-W-1433-01، P2-W-1463-01 | W:1391، W:1405، W:1449، W:1419، W:1433، W:1463 | T-C-PRC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
-| C-HLD-01 | CORE | C-US-10 | P2-W-773-01، P2-W-787-01، P2-W-801-01، P2-W-815-01، P2-W-831-01، P2-W-845-01 | W:773، W:787، W:801، W:815، W:831، W:845 | T-C-HLD-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
+| C-HLD-01 | CORE | C-US-10 | P2-W-773-01، P2-W-787-01، P2-W-801-01، P2-W-815-01، P2-W-831-01، P2-W-845-01، P2-W-1257-02، P2-W-1257-03، P2-W-1257-04، P2-W-1257-05 | W:773، W:787، W:801، W:815، W:831، W:845، W:1257 | T-C-HLD-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-TFR-01 | CORE | C-US-11 | P2-W-863-01، P2-W-863-02، P2-W-877-01، P2-W-893-01، P2-W-905-01، P2-W-919-01، P2-W-933-01، P2-W-949-01 | W:863، W:877، W:893، W:905، W:919، W:933، W:949 | T-C-TFR-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-REF-01 | CORE | C-US-12 | P2-W-1045-01، P2-W-1065-01، P2-W-1045-02، P2-W-1045-03، P2-W-1045-04، P2-W-1047-01، P2-W-1047-02، P2-W-1065-02، P2-W-1065-03، P2-W-1067-01، P2-W-1067-02، P2-W-1077-02 | W:1045، W:1065، W:1047، W:1067، W:1077 | T-C-REF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | C-REC-01 | CORE | C-US-13 | P2-W-1091-01، P2-W-1103-01، P2-W-1115-01، P2-W-1127-01، P2-W-1139-01، P2-W-1091-02، P2-W-1091-03، P2-W-1103-02، P2-W-1103-03، P2-W-1115-02، P2-W-1127-02، P2-W-1127-03، P2-W-1139-02، P2-W-1139-03، P2-W-1139-04، P2-W-1139-05 | W:1091، W:1103، W:1115، W:1127، W:1139 | T-C-REC-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
@@ -782,9 +828,9 @@ flowchart LR
 | S-JRN-01 | ASSISTANT | S-US-09 | P2-B-1639-11، P2-B-1645-11، P2-B-1647-11 | B:1639، B:1645، B:1647 | T-S-JRN-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 | S-FF-01 | ASSISTANT | S-US-06 | P2-B-944-11، P2-B-1684-11، P2-B-1684-12 | B:944، B:1684 | T-S-FF-01 | منبع عینی تطبیق‌شده؛ انطباق سرتاسری INCOMPLETE |
 
-| C-LED-02 | CORE | C-US-23 | P2-W-1167-01، P2-W-1169-01، P2-W-1183-01، P2-W-1199-01، P2-W-1211-01، P2-W-1227-01، P2-W-1241-01، P2-W-1257-01، P2-W-1271-01 | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | T-C-LED-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
-| C-REC-02 | CORE | C-US-24 | P2-W-1289-01، P2-W-1289-02، P2-W-1303-01، P2-W-1369-01 | W:1289، W:1303، W:1369 | T-C-REC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
-| C-SEC-02 | CORE | C-US-25 | P2-W-1317-01، P2-W-1331-01، P2-W-1331-02، P2-W-1343-01، P2-W-1355-01 | W:1317، W:1331، W:1343، W:1355 | T-C-SEC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-LED-02 | CORE | C-US-23 | P2-W-1167-01، P2-W-1169-01، P2-W-1183-01، P2-W-1199-01، P2-W-1211-01، P2-W-1227-01، P2-W-1241-01، P2-W-1257-01، P2-W-1271-01، P2-W-1167-02، P2-W-1167-03، P2-W-1167-04، P2-W-1167-05، P2-W-1167-06، P2-W-1167-07، P2-W-1167-08، P2-W-1183-02، P2-W-1183-03، P2-W-1183-04، P2-W-1199-02، P2-W-1199-03، P2-W-1199-04، P2-W-1199-05، P2-W-1199-06، P2-W-1211-02، P2-W-1227-02، P2-W-1227-03، P2-W-1227-04، P2-W-1241-02، P2-W-1241-03، P2-W-1241-04، P2-W-1241-05، P2-W-1271-02، P2-W-1271-03، P2-W-1271-04، P2-W-1271-05 | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | T-C-LED-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-REC-02 | CORE | C-US-24 | P2-W-1289-01، P2-W-1289-02، P2-W-1303-01، P2-W-1369-01، P2-W-1289-03، P2-W-1303-02، P2-W-1303-03، P2-W-1303-04، P2-W-1369-02 | W:1289، W:1303، W:1369 | T-C-REC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
+| C-SEC-02 | CORE | C-US-25 | P2-W-1317-01، P2-W-1331-01، P2-W-1331-02، P2-W-1343-01، P2-W-1355-01، P2-W-1317-02، P2-W-1317-03، P2-W-1331-03، P2-W-1331-04، P2-W-1331-05، P2-W-1331-06، P2-W-1343-02، P2-W-1355-02، P2-W-1355-03 | W:1317، W:1331، W:1343، W:1355 | T-C-SEC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
 | C-UX-01 | CORE | C-US-26 | P2-W-1517-01، P2-W-1529-01، P2-W-1541-01 | W:1517، W:1529، W:1541 | T-C-UX-01 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
 
 | X-R1-01 | PLATFORM | X-US-04 | P2-B-7-01، P2-B-12-01، P2-B-14-01، P2-B-18-01، P2-B-21-01، P2-B-22-01، P2-B-23-01، P2-B-23-02، P2-B-24-01، P2-B-24-02، P2-B-24-04، P2-B-465-02، P2-B-466-01 | B:7، B:12، B:14، B:18، B:21، B:22، B:23، B:24، B:465، B:466 | T-X-R1-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
@@ -808,7 +854,7 @@ flowchart LR
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 426 | استخراج اولیه؛ تأیید کامل خیر |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 471 | استخراج اولیه؛ تأیید کامل خیر |
 | تسک‌های دارای زنجیره اتمی | ۶۱ (۵۳ تسک دامنه و ۸ قرارداد/آزمون بین‌سرویسی) | specification؛ اجرا نشده |
 | داستان‌های کاربر مبنا | 53 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
@@ -830,5 +876,7 @@ flowchart LR
 **کنترل قراردادهای بین‌سرویسی:** هشت تسک X-CTR-01..05 و X-E2E-01..03 در ماتریس معکوس به متن مرجع و آزمون وابسته شدند؛ شش حکم اجرایی استنتاجی با منشأ و ضرورت ثبت شد.
 
 **بازبینی دسته کیف پول W:1045–1151:** 28 الزام تفکیک‌شده درباره استرداد، منشأ اعتبار، مهلت جبرانی، شارژ/پرداخت دوره‌ای و سقف مصرف ثبت شد؛ موارد open و conditional گیت باقی می‌مانند.
+
+**بازبینی دسته کیف پول W:1167–1369:** 45 الزام مستقل درباره دفترکل واحد، منشأ، زنجیره دائم، وضعیت سه‌گانه، تکرار امن، رزرو، تطبیق و امنیت ثبت و به معیار ردپذیر متصل شد.
 
 **نقطه بازیابی:** بازبینی فردی تمام ۲٬۸۰۶ خط، کامل‌کردن استخراج مرکب/ضمنی و پوشش جدول‌ها/نمودارها؛ تفکیک بیشتر تسک‌های بزرگ به خروجی فنی اختصاصی؛ آزمون قرارداد و E2E با fixture و شواهد اجرا؛ کنترل G8 معکوس؛ اجرای CI این شاخه؛ تنها بعد از عبور گیت‌ها جابه‌جایی فایل موقت به مسیر رسمی و PR جدید. تا آن زمان وضعیت INCOMPLETE است.
