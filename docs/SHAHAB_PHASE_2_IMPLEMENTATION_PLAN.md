@@ -1840,7 +1840,7 @@
 
 #### CORE-B-030 — ۴. معماری چت تعاملی و تولید مؤلفه‌های رابط
 **مرجع:** جامع فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات، خط 1451؛ **مالک مرزی Core:** CORE-US-12.
-**خروجی Core:** مرز ماژول، API نسخه‌دار، مالکیت داده و کنترل کیفیت.
+**خروجی Core:** تعریف قرارداد نوع‌دار مؤلفه‌های مشترک و اعتبارسنجی Backend/کنترل امن secrets در پوسته سوپراپ؛ **رندر و فرایند تعاملی Adviser/Assistant متعلق به همان سرویس** است و از قرارداد Core مصرف می‌شود، نه اینکه Core موتور چت آن‌ها شود.
 **قیود و تصمیم‌های مرتبط:**
 - چت Adviser یا Assistant سطح تعامل تخصصی است: متن، کارت محصول، پرسشنامه وام، نتیجه توصیه‌گر، انتخاب گزینه، فرم پویا، بارگذاری مدرک، درخواست مجوز، نمایش پیشرفت پرونده اصلی و زیرکارهای وابسته، وضعیت انتظار و ازسرگیری، تأیید حساس، خطا، رسید و اعلان فیدبک/فیدفوروارد در همان جریان نمایش داده می‌شوند. مطابق D02/D03، بخش مستقل «سوابق پیام‌ها و اطلاع‌رسانی‌ها» در رابط اصلی سوپراپ (برای نمونه از زنگوله یا منوی همبرگری) مرجع پایدار و قابل بازیابی
 - مرز امنیتی کد تأیید: کد یک‌بارمصرف، رمز، کلید یا توکن نباید وارد متن چت قابل مشاهده برای مدل، لاگ عمومی، تحلیل مکالمه یا حافظه RAG شود. کنترل امن باید ارتباط محافظت‌شده، محدود به نشست و دارای انقضا با مؤلفه اجرایی داشته باشد. امکان و مجازبودن ورود کد بانک از طریق واسط ثالث برای هر ارائه‌دهنده جداگانه بررسی می‌شود؛ ممکن است الزام به تعامل مستقیم در محیط رسمی بانک وجود داشته باشد. تجربه «همه‌چیز در چت» هدف محصول است، نه تضمین عبور از محدو
@@ -1848,8 +1848,8 @@
 |---|---|---|
 | CORE-B-030.DB | Typed UI component definitions for service forms/status/receipts and secure secret input contract | CORE-B-030.DB.T01؛ قبولی/رد: OTP یا password به chat message/memory/RAG field serialize نشود؛ شاهد قرارداد، fixture و assertion؛ طراحی شده، اجرا نشده |
 | CORE-B-030.BE | Backend renderer schema و consent/action events جدا از LLM متن، financial state از Core API | CORE-B-030.BE.T01؛ قبولی/رد: schema invalid یا untrusted UI content بدون validation نمایش/اجرا نشود؛ شاهد قرارداد، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-B-030.FE | چت کارت/فرم/رسید و control امن خارج prompt همراه با status واقعی | CORE-B-030.FE.T01؛ قبولی/رد: کد بانکی در transcript یا LLM context هرگز ظاهر نشود؛ شاهد قرارداد، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-B-030.QA | secure-chat component tests | CORE-B-030.QA.T01؛ قبولی/رد: منع ذخیره OTP، form tampering denial، unknown status بدون success؛ شاهد قرارداد، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-B-030.FE | Component registry ایمن و سازگار برای سوپراپ Core (کارت، فرم تایپ‌شده، status و رسید) با allowlist و کنترل secure-input مشترک؛ رندر پیام و اقدام Adviser/Assistant با ADV-RAG-055 و AST-040 است | CORE-B-030.FE.T01: raw HTML/JS مدل هیچ اسکریپتی در پوسته Core اجرا نکند؛ schema type نامعتبر component نگیرد؛ secret input هیچ مقدار OTP/رمز به state چت یا storage RAG تحویل ندهد؛ سناریوی cross-domain component reject؛ تست طراحی، اجرا نشده |
+| CORE-B-030.QA | consumer contract tests مشترک Core→Adviser/Assistant برای UI schema، فرم دارای فیلد مجاز/غیرمجاز، injection و credential hygiene | CORE-B-030.QA.T01: هر دو consumer با schema invalid/downgrade version fail کنند؛ در شواهد دو سرویس OTP absent و submit مؤثر بدون confirmation صفر باشد؛ آزمون‌های AT-AST-040 و AT-RAG-055 به‌عنوان consumer اجرا شوند؛ طراحی، اجرا نشده |
 
 #### CORE-B-031 — ۵. معماری Computer Use و چرخه تصمیم اجرایی
 **مرجع:** جامع فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات، خط 1480؛ **مالک مرزی Core:** CORE-US-03؛ **مالک رفتار اجرایی:** Assistant (AST).
@@ -2509,7 +2509,7 @@ flowchart LR
 | AST-US-07 | مصرف مالی و مدیریت نتیجه نامعلوم | AST-021 تا AST-024 |
 | AST-US-08 | پایش تغییر رابط و قابلیت اطمینان | AST-025 تا AST-028 |
 | AST-US-09 | بازخورد و پیش‌آگاهی متناسب با پلن | AST-029 تا AST-031 |
-| AST-US-10 | تجربه تعاملی، دسترس‌پذیری و پشتیبانی | AST-032 تا AST-034 |
+| AST-US-10 | تجربه تعاملی، فرم نوع‌دار امن، دسترس‌پذیری و پشتیبانی | AST-032 تا AST-034، AST-040 |
 | AST-US-11 | ارزیابی، انتشار تدریجی و بازگشت | AST-035 تا AST-038 |
 
 #### ۱.۱۱.۳. ماتریس تسک، تحویل‌دادنی، آزمون و ردیابی
@@ -2553,10 +2553,11 @@ flowchart LR
 | AST-033 | نمای step quote/hold/capture و رسید Core، سازگار با دسترس‌پذیری و عدم جعل شماره رسید بانک | AST-007 و CORE-US-30 | AT-AST-033: هر مبلغ در UI از WALLET-v1/ORDER-v1 Core خوانده شود؛ رسید pending موفق نمایش داده نشود و با case_id قابل بازیابی باشد؛ طراحی‌شده، اجرا نشده | B:1451-1479؛ W:1503-1570 |
 | AST-034 | مسیر اعتراض با پرونده support Core و شناسه اجرای Assistant و شواهد غیرحساسِ قابل ارسال | CORE-US-42 | AT-AST-034: شکایت ناشی از failed/unknown به پرونده جدا و قابل پیگیری برسد؛ نقش دیگر نتواند سند شخصی کاربر را ببیند؛ طراحی‌شده، اجرا نشده | B:1686-1695؛ CORE-US-42.MAIN |
 | AST-035 | ماتریس انتخاب خدمت اول با معیارهای مصوب O5-05 و گیت‌های F1..F5؛ بدون فرض قطعیت یک بانک خاص | تصمیم O5-05 و گیت‌های F1..F5 | AT-AST-035: خدمت با ریسک/قابلیت فاقد شواهد گیت F1..F5 برای اقدام واقعی فعال نشود؛ وزن‌های مصوب بدون تصمیم جدید تغییر نکنند؛ طراحی‌شده، اجرا نشده | B:2024-2129؛ O5-05 |
-| AST-036 | آزمون contract mock و E2E واقعی کنترل‌شده برای web-only خدمت مجاز شامل توقف، consent، retry، failure و Core settlement | AST-001..034 برحسب خدمت | AT-AST-036: E2E fail-closed روی لغو مجوز، unknown external، تغییر UI و پاسخ Core timeout برقرار؛ آزمون واقعی بدون گیت محیط مجاز اجرا نشود؛ طراحی‌شده، اجرا نشده | B:1710-1726؛ B:2109-2121 |
+| AST-036 | آزمون contract mock و E2E واقعی کنترل‌شده برای web-only خدمت مجاز شامل توقف، consent، retry، failure و Core settlement | AST-001..034 و AST-039/040 برحسب خدمت | AT-AST-036: E2E fail-closed روی لغو مجوز، unknown external، تغییر UI و پاسخ Core timeout برقرار؛ آزمون واقعی بدون گیت محیط مجاز اجرا نشود؛ طراحی‌شده، اجرا نشده | B:1710-1726؛ B:2109-2121 |
 | AST-037 | ماتریس conditional Go/No-Go ریسک R1..R4 و REL-G1..REL-G8، قابلیت rollback و تصمیم‌گیری ثبت‌شده | O5-10 و REL-G1..G8 | AT-AST-037: هر گیت ضروری FAIL مانع rollout شود؛ تصویب نقشه مفهومی B:1753 را مجوز انتشار تلقی نکند؛ طراحی‌شده، اجرا نشده | B:2109-2121؛ B:2024-2072؛ O5-10 |
 | AST-038 | Rollback ایمن نسخه Workflow/UI map و kill switch با حفظ ledger قطعی Core و status external unknown | AST-037 و قراردادهای Core | AT-AST-038: rollback نسخه Assistant هیچ original capture یا bank transfer را حذف نکند؛ در unknown ابتدا reconciliation و سپس resume انجام شود؛ طراحی‌شده، اجرا نشده | B:914-942؛ B:1480؛ W:1205-1278 |
 | AST-039 | مدیریت مجموعه درخواست‌های چندوامی با شناسه child_case مستقل؛ وضعیت مدرک ناقص، عدم احراز شرط و قطعی بانک تفکیک؛ پیشنهاد وام جایگزین از کاتالوگ Core فقط با تأیید جدید مشتری، بدون حذف درخواست‌های دیگر | AST-003/006/008/014؛ CORE-US-09/14.MAIN و RECOMMENDATION-v1 | AT-AST-039: در سه وام A/B/C با ناموفق‌شدن B، A و C بدون لغو ادامه یابند؛ وام جایگزین B بدون approval جدید هیچ case خارجی نسازد؛ کمبود مدرک، عدم احراز شرط و timeout بانک سه failure_reason مستقل باشند؛ retry B درخواست A/C را تکرار نکند؛ طراحی‌شده، اجرا نشده | B:1248-1252؛ B:1410-1444؛ CORE-B-019 |
+| AST-040 | **مالک Assistant:** مصرف قرارداد تایپ‌شده فرم از Core/Shared UI Schema برای جریان اجرا؛ رندر فقط اجزای allowlisted و اعتبارسنجی schema، دامنه خدمت و فیلدها؛ ورود OTP/رمز در کنترل جدا و غیرقابل‌ثبت در متن مدل؛ submit مؤثر فقط پس از AST-008/020 و gate Backend | CORE-B-030.DB/BE؛ CORE-US-03/11.MAIN؛ AST-008/019/020؛ گیت UI-Schema نیازمند تثبیت نسخه | AT-AST-040.01: Schema دارای script، HTML دلخواه یا فیلد outside service_scope بدون رندر/اجرا رد شود؛ AT-AST-040.02: درخواست LLM برای افزودن action «submit-payment» بدون مجوز Backend هیچ external write نکند؛ AT-AST-040.03: OTP تست در prompt/transcript/trace ذخیره نشود و بعد انقضا قابل استفاده نباشد؛ طراحی، اجرا نشده | B:1453-1479؛ B:1686-1695؛ CORE-B-030 |
 
 #### ۱.۱۱.۴. شبکه وابستگی و گیت‌های تصمیم
 
@@ -2707,6 +2708,8 @@ flowchart TD
 
 **وابستگی‌های اجرایی:** ADV-RAG-014 به قرارداد نسخه‌دار داده محصول Core، منبع مجاز ADV-RAG-011 و ردیابی ADV-RAG-010 وابسته است؛ ADV-RAG-003 به تفکیک Discovery/Ingestion در ADV-RAG-005 وابسته است. انتخاب فنی ADV-RAG-012 تا تعیین تصمیم باز گیت مشروط دارد.
 
+
+| ADV-RAG-055 | B:1453-1479؛ اصل تفکیک چت و فرم تایپ‌شده؛ وابسته به قرارداد Core و گیت انتشار | **مالک Adviser:** مصرف UI Schema versioned و کارت پاسخ مستند/فرم مشاوره در Adviser؛ هر output مولد فقط داده و پیشنهاد است، نه HTML/JS قابل اجرا؛ فرم مشاوره اختیار Submit بانکی یا دسترسی مستقیم Core DB نمی‌گیرد | AT-RAG-055.01: خروجی مدل با script/iframe یا form action بانکی در رابط Adviser اجرا نشود؛ AT-RAG-055.02: کارت سند با provenance ناقص ادعای تأیید قطعی ندهد؛ AT-RAG-055.03: ناسازگاری نسخه UI schema در consumer contract fail شود و متن OTP در log/LLM صفر باشد؛ طراحی، اجرا نشده | ADV-US-10؛ Adviser برای چت/نمایش؛ Core برای schema/shared shell | CORE-B-030.DB/BE/FE؛ CORE-US-03/11.MAIN؛ ADV-RAG-044؛ گیت UI Schema |
 
 #### قرارداد ردیابی ۴۰ تصمیم RAG به تسک و آزمون (تا تأیید گیت‌ها، غیر VERIFIED)
 
