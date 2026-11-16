@@ -3447,6 +3447,35 @@ Core مالک قرارداد نوع‌دار و validation است؛ هر سرو�
 
 **نقطه ادامه:** تفکیک فیلدهای EvidenceUnit/ChunkRepresentation/LegalRelation/ClaimEvidenceLink/Snapshot/Trace/SourceLifecycle/Job از B:481–488 و آزمون وابستگی دوطرفه با Core.
 
+
+### ماتریس فیلدهای EvidenceUnit و ChunkRepresentation — B:481–482
+
+۱۹ فیلد منطقی از دو سطر قرارداد، با provenance دقیق و آزمون وابسته به معنا، جدا شده‌اند. تقسیم فیلد group با slash به ستون SQL جدا هنوز تصویب نشده و این ماتریس تضمین کفایت کلی RAG نیست.
+
+| شناسه اتم | منبع و فیلد | وضعیت | مالک | زیرتسک | آزمون | نتیجه |
+|---|---|---|---|---|---|---|
+| AR-B-SCHEMA-020 | B:481؛ EvidenceUnit/Provision.evidence_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F020 | AT-RAG-059.F020 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-021 | B:481؛ EvidenceUnit/Provision.version_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F021 | AT-RAG-059.F021 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-022 | B:481؛ EvidenceUnit/Provision.provision_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F022 | AT-RAG-059.F022 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-023 | B:481؛ EvidenceUnit/Provision.section/table_ref | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F023 | AT-RAG-059.F023 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-024 | B:481؛ EvidenceUnit/Provision.text_span | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F024 | AT-RAG-059.F024 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-025 | B:481؛ EvidenceUnit/Provision.extraction_quality | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F025 | AT-RAG-059.F025 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-026 | B:481؛ EvidenceUnit/Provision.source_trust_dimensions | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F026 | AT-RAG-059.F026 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-027 | B:482؛ ChunkRepresentation.chunk_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F027 | AT-RAG-059.F027 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-028 | B:482؛ ChunkRepresentation.version_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F028 | AT-RAG-059.F028 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-029 | B:482؛ ChunkRepresentation.evidence_id | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F029 | AT-RAG-059.F029 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-030 | B:482؛ ChunkRepresentation.parent_ref | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F030 | AT-RAG-059.F030 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-031 | B:482؛ ChunkRepresentation.related_refs | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F031 | AT-RAG-059.F031 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-032 | B:482؛ ChunkRepresentation.page/table_ref | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F032 | AT-RAG-059.F032 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-033 | B:482؛ ChunkRepresentation.content_type | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F033 | AT-RAG-059.F033 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-034 | B:482؛ ChunkRepresentation.original_span_ref | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F034 | AT-RAG-059.F034 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-035 | B:482؛ ChunkRepresentation.normalized_text | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F035 | AT-RAG-059.F035 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-036 | B:482؛ ChunkRepresentation.extraction_quality | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F036 | AT-RAG-059.F036 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-037 | B:482؛ ChunkRepresentation.chunking_strategy/version | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F037 | AT-RAG-059.F037 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-038 | B:482؛ ChunkRepresentation.embedding_version | حداقل قرارداد مفهومی مصوب؛ schema نسخه‌دار و آزمون لازم | Adviser / ADV-US-05 | ADV-RAG-059.F038 | AT-RAG-059.F038 | طراحی مستقل؛ اجرا نشده؛ NOT VERIFIED |
+
+**نقطه ادامه:** B:483–488 روابط، پیوند ادعا، Snapshot، trace، lifecycle و Job؛ سپس ممیزی تمام خطوط باقیمانده.
+
 ## آمار ثبت‌شده
 
 - واحدهای ممیزی اولیه: 1957
