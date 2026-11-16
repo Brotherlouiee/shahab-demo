@@ -1,12 +1,12 @@
 # برنامه پیاده‌سازی فاز دوم شهاب
 
-**وضعیت:** فصل اول — فهرست اجرایی Core، مستقل از اولویت و انتشار.
+**وضعیت:** فصل اول — فهرست اجرایی Core و موجودی اولیه Assistant؛ ممیزی اتمی و پوشش Adviser هنوز تکمیل نشده است.
 **مراجع:** [سند جامع فاز دوم](SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md) نسخه ۱.۶؛ [سند کیف پول](SHAHAB_DIGITAL_WALLET.md) نسخه ۰.۲۰.
 
 ## فصل اول — مجموعه تسک های فاز دوم
 
 ### ۱.۱. اصول دامنه، مالکیت و ردیابی
-- این فصل تمام کارهای Core را مستقل از زمان انتشار پوشش می‌دهد؛ اجرای RAG و Computer Use در سرویس‌های Adviser و Assistant است، ولی قرارداد و مجوز و داده متعلق به Core در همین فصل ثبت می‌شود.
+- این فصل بسته‌های Core و موجودی اولیه Assistant را مستقل از زمان انتشار ثبت می‌کند؛ اجرای RAG و Computer Use به‌ترتیب متعلق به Adviser و Assistant است. مالکیت داده، مجوز و قرارداد برحسب دامنه و مرجع مصوب تعیین می‌شود و پوشش کامل Adviser ادعا نشده است.
 - هر ردیف `CORE-W-xxx` یا `CORE-B-xxx` یک بسته قابلیت مستقل است؛ چهار زیرتسک `.DB`، `.BE`، `.FE` و `.QA` دارد. زیرتسک فاقد کاربرد باید با دلیل فنی مستند شود؛ حذف خاموش مجاز نیست.
 - متن مصوب هر بند بر خلاصه این سند مقدم است؛ گزاره‌های تصمیم‌باز با برچسب «باز» از پیاده‌سازی مصوب تفکیک می‌شوند. مثال عددی به‌تنهایی مصوبه نیست.
 - [ماتریس ممیزی محتوایی](SHAHAB_PHASE_2_CORE_SEMANTIC_AUDIT.md) مرجع کمکی ردیابی خطوط است، نه جایگزین آزمون‌های اختصاصی زیر.
@@ -2053,13 +2053,14 @@
 
 #### CORE-B-046 — ۱۹. مسیر اعتبارسنجی پیشنهادی، بدون تبدیل به تسک مصوب
 **مرجع:** جامع فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات، خط 1753؛ **مالک پیشنهادی:** CORE-US-25.
-**خروجی Core:** قرارداد Core و مرز داده/مجوز با Adviser و Assistant.
+**وضعیت تصمیم:** این مسیر در فصل سوم بند ۱۹ سند جامع فقط نقشه پیشنهادی اعتبارسنجی است؛ خودبه‌خود تسک اجرایی مصوب ایجاد نمی‌کند. اجرای ردیف‌های زیر به تصویب مستقل و تعیین مالک نیاز دارد.
+**خروجی احتمالی Core پس از تصویب:** قرارداد Core و مرز داده/مجوز با Adviser و Assistant.
 | تسک | تحویل | معیار پذیرش |
 |---|---|---|
-| CORE-B-046.DB | مدل داده و قیود قرارداد Core و مرز داده/مجوز با Adviser و Assistant | مهاجرت و invariant داده آزموده شود |
-| CORE-B-046.BE | API نسخه‌دار، کنترل دسترسی، رفتار خطا و رویدادهای قرارداد Core و مرز داده/مجوز با Adviser و Assistant | قرارداد و شکست وابستگی آزموده شود |
-| CORE-B-046.FE | تجربه Core مربوط یا دلیل عدم کاربرد رابط | مسیر E2E، خطا و لغو مستند شود |
-| CORE-B-046.QA | آزمون قرارداد، امنیت، یکپارچگی و بازیابی | تست قابل اجرا با شناسه بند ثبت شود |
+| CORE-B-046.DB | بررسی مشروط پس از تصویب مستقل؛ فاقد تعهد اجرایی فعلی | گیت تصمیم و شواهد امکان‌سنجی؛ نه آزمون تسک مصوب |
+| CORE-B-046.BE | بررسی مشروط پس از تصویب مستقل؛ فاقد تعهد اجرایی فعلی | گیت تصمیم و شواهد امکان‌سنجی؛ نه آزمون تسک مصوب |
+| CORE-B-046.FE | بررسی مشروط پس از تصویب مستقل؛ فاقد تعهد اجرایی فعلی | گیت تصمیم و شواهد امکان‌سنجی؛ نه آزمون تسک مصوب |
+| CORE-B-046.QA | بررسی مشروط پس از تصویب مستقل؛ فاقد تعهد اجرایی فعلی | گیت تصمیم و شواهد امکان‌سنجی؛ نه آزمون تسک مصوب |
 
 #### CORE-B-047 — ۲۰. سازگاری با فصل‌های اول و دوم و اسناد مرجع
 **مرجع:** جامع فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات، خط 1757؛ **مالک پیشنهادی:** CORE-US-25.
@@ -2318,7 +2319,7 @@ flowchart LR
 | CORE-W-022 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-023 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | TRANSFER-v1 | CORE | — |
 | CORE-W-024 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
-| CORE-W-025 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-025 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | CORE | — |
 | CORE-W-026 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-027 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-028 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
@@ -2335,13 +2336,13 @@ flowchart LR
 | CORE-W-039 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-040 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-041 | CORE-US-31.MAIN | G05 | CORE-US-20.MAIN،CORE-US-23.MAIN،CORE-US-27.MAIN | ARCH-API-v1 | CORE | — |
-| CORE-W-042 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-043 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-044 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-045 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-046 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-047 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
-| CORE-W-048 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-042 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-043 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-044 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-045 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-046 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-047 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
+| CORE-W-048 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | CORE | — |
 | CORE-W-049 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
 | CORE-W-050 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
 | CORE-W-051 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
@@ -2370,7 +2371,7 @@ flowchart LR
 | CORE-W-074 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | PAYMENT-v1 | CORE | — |
 | CORE-W-075 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-076 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
-| CORE-W-077 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-077 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | CORE | — |
 | CORE-W-078 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-079 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-080 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
@@ -2379,8 +2380,8 @@ flowchart LR
 | CORE-W-083 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | NOTIFY-v1 | CORE | — |
 | CORE-W-084 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-085 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
-| CORE-W-086 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | ASSISTANT | — |
-| CORE-W-087 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | ASSISTANT | — |
+| CORE-W-086 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-087 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-088 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-089 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-W-090 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
@@ -2427,16 +2428,16 @@ flowchart LR
 | CORE-B-026 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
 | CORE-B-027 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-028 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
-| CORE-B-029 | CORE-US-21.MAIN | G04 | CORE-US-19.MAIN،CORE-US-20.MAIN،CORE-US-24.MAIN | PRICING-v1 | ASSISTANT | — |
+| CORE-B-029 | CORE-US-21.MAIN | G04 | CORE-US-19.MAIN،CORE-US-20.MAIN،CORE-US-24.MAIN | PRICING-v1 | CORE | — |
 | CORE-B-030 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
-| CORE-B-031 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | ASSISTANT | — |
+| CORE-B-031 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
 | CORE-B-032 | CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | CONSENT-v1 | CORE | — |
 | CORE-B-033 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-034 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-035 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | PRODUCT-SNAPSHOT-v1 | CORE | — |
 | CORE-B-036 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-037 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
-| CORE-B-038 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | PRODUCT-SNAPSHOT-v1 | ADVISER | — |
+| CORE-B-038 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | PRODUCT-SNAPSHOT-v1 | CORE | — |
 | CORE-B-039 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-040 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
 | CORE-B-041 | CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | CONSENT-v1 | CORE | — |
@@ -2491,7 +2492,7 @@ flowchart LR
 | مشاهده‌پذیری زیرساخت و قراردادهای مشترک | مالک سرویس تولیدکننده؛ Core برای قراردادهای مشترک | ثبت telemetry عملیاتی خود، بدون ذخیره رمز یا محتوای محرمانه |
 | قراردادها و آزمون‌های بین‌سرویسی | هر سرویس مالک سمت خود؛ قرارداد مشترک نسخه‌دار | آزمون مصرف‌کننده و آزمون سرتاسری با مالک مشترک مشخص |
 
-**قاعده رفع تعارض:** بسته‌های `CORE-B-031` تا `CORE-B-034` در فهرست قبلی *ردیف‌های ردیابی متن منبع* هستند، نه مجوز مالکیت Computer Use برای Core. اجرای واقعی آن در تسک‌های `AST` زیر است. برچسب `component` در جدول ۱.۹ باید بر مبنای **مالک اجرای تسک** تفسیر شود؛ هر ردیف ارجاعی به Core به‌تنهایی یک تسک اجرایی جدید نیست. تصمیم «وب، سپس اندروید، سپس آی‌اواس» ترتیب اعتبارسنجی پلتفرم است و مانع طراحی قرارداد مستقل از پلتفرم از ابتدا نیست.
+**قاعده اصلاح‌شده مالکیت:** همه بسته‌های CORE-W و CORE-B در جدول ۱.۹ مالک CORE دارند و فقط داده، قرارداد یا کنترل متعلق به Core را اجرا می‌کنند. مصرف‌کننده Assistant یا Adviser مالکیت مالی، دفترکل یا Computer Use را تغییر نمی‌دهد. Computer Use فقط در AST و RAG فقط در Adviser اجرا می‌شود. بسته‌های CORE-B-031 تا CORE-B-034 برای Core صرفاً قرارداد و کنترل مرزی هستند؛ رزرو، قیمت‌گذاری، قطعی‌سازی و استرداد مالی فقط در Core انجام می‌شود. تصمیم «وب، سپس اندروید، سپس آی‌اواس» ترتیب اعتبارسنجی پلتفرم است و مانع طراحی قرارداد مستقل از پلتفرم از ابتدا نیست.
 
 #### ۱.۱۱.۲. داستان‌های کاربر و بسته‌های اجرایی
 
@@ -2589,3 +2590,22 @@ flowchart TD
 ۶. تغییر قیمت، تمدید، ارتقا، برداشت، هدیه، انتقال و رزرو با قواعد مصوب Core و کیف پول اجرا می‌شوند؛ Assistant مجاز به ایجاد استثنای مالی محلی نیست.
 
 ۷. تکمیل ممیزی اتمی نیازمند شکستن احکام مرکب، تعیین وضعیت هر گزاره، بند دقیق مرجع، آزمون یکتا، رفع موارد بدون مالک و ثبت پوشش همه واحدهای متنی است. تا آن زمان ادعای پوشش صددرصدی، بسته بودن تمام تعارض‌ها یا آماده‌بودن برنامه برای زمان‌بندی نهایی مجاز نیست.
+
+#### ۱.۱۱.۶. ماتریس الزام‌آور کنترل‌های تطبیقی مالی و تصمیمی
+
+**مرجع حاکم:** سند کیف پول بندهای ۵.۲، ۵.۳، ۶.۴.۱ تا ۶.۴.۶، ۷.۲، ۷.۵ تا ۷.۷ و ۹.۱؛ سند جامع فصل دوم بندهای ۱۰ و ۱۱ و فصل سوم بندهای ۵، ۱۵ و ۱۹. در هر تعارض احتمالی، متن دقیق مصوبه مرجع مقدم است.
+
+| الزام مرجع | مالک | تسک‌های متصل | آزمون اختصاصی |
+|---|---|---|---|
+| رزرو مصرف قطعی یا درآمد نیست و منشأ اعتبار حفظ می‌شود؛ کیف پول ۶.۴.۱ | CORE | CORE-W-042، CORE-W-043، CORE-W-072 | رزرو بدون ثبت درآمد؛ سهم رزروشده غیرقابل برداشت یا انتقال؛ حفظ منشأ نقدی و هدیه |
+| رزرو مرحله‌ای از برآورد کل و سقف افزایش مستقل است؛ کیف پول ۶.۴.۲ | CORE و مصرف‌کننده ASSISTANT | CORE-W-044، AST-021، AST-022 | مرحله ۳۰ از برآورد کل ۱۰۰ سقف کل را به ۳۶ تبدیل نکند |
+| سقف خودکار ۱۲۰ درصد برآورد اولیه است و زنجیره‌ای افزایش نمی‌یابد؛ کیف پول ۶.۴.۴ | CORE | CORE-W-046، AST-022 | هزینه ۱۱۲ با اعتبار و اختیار کافی مجاز؛ ۱۲۵ بدون تأیید تازه متوقف؛ سقف با رزرو جدید بازتنظیم نشود |
+| نتیجه نامعلوم: فقط سهم تعهد نامعلوم محفوظ و هزینه تازه متوقف شود؛ کیف پول ۶.۴.۳ و ۸.۳ | CORE برای مانده؛ ASSISTANT برای توقف | CORE-W-045، CORE-W-085، AST-023، AST-024 | از رزرو ۱۰۰ با تعهد نامعلوم ۲۰، پس از احراز نبود تعهد دیگر ۸۰ آزاد شود |
+| هدیه رزروشده پس از انقضا فقط در عملیات اصلی معتبر است؛ کیف پول ۶.۴.۵ | CORE | CORE-W-047، CORE-W-024 | هدیه ۴۰ پیش از انقضا رزرو؛ مصرف ۳۰ در مهلت مجاز؛ ۱۰ آزادشده منقضی و غیرقابل مصرف عمومی |
+| قطعی‌سازی فقط با رویداد قابل صورتحساب از پیش تعیین‌شده؛ کیف پول ۶.۴.۶ | CORE | CORE-W-048، CORE-W-077، AST-022 | کلیک یا پیشرفت داخلی بدون واحد تعرفه کسر نکند؛ تکرار پیام اثر مالی مضاعف نداشته باشد |
+| ضریب مشاوره حین دستیار یک‌دوم و نسخه نرخ اجرای جاری ثابت است؛ کیف پول ۹.۱ | CORE برای محاسبه؛ ASSISTANT برای گزارش مصرف | CORE-W-086 تا CORE-W-089، AST-021 | ضریب ۰٫۵ در برآورد و صورتحساب؛ تغییر نرخ میانه اجرای معتبر بی‌اثر باشد |
+| تکرار درخواست و مصرف هم‌زمان نباید اثر مالی تکراری داشته باشد؛ کیف پول ۷.۵ و ۷.۷ | CORE | CORE-W-076، CORE-W-078، AST-024 | هم‌زمانی و retry حداکثر یک اثر مالی داشته باشند |
+| مسیر پیشنهادی اعتبارسنجی فصل سوم بند ۱۹ مصوبه اجرایی نیست | تصمیم مستقل لازم | CORE-B-046، AST-035 تا AST-038 در دامنه مصوب | پیش از تصویب مستقل هیچ تعهد انتشار از متن پیشنهادی نتیجه نشود |
+
+**کنترل مالکیت:** در ماتریس ۱.۹ هر ۱۵۸ بسته CORE-W و CORE-B مالک CORE دارند؛ مالکیت مصرف‌کننده با مالکیت اجرای بسته یکسان نیست. این اصلاح به‌تنهایی تکمیل ممیزی اتمی تمام احکام یا پوشش Adviser را اثبات نمی‌کند.
+
