@@ -2082,6 +2082,21 @@
 | CORE-B-043.FE | نمای dashboard اجرا/خطا واقعی و نه امتیاز ساختگی | CORE-B-043.FE.T01؛ قبولی/رد: در نبود test result وضعیت unknown نشان داده شود؛ شواهد source و contract assertion؛ طراحی شده، اجرا نشده |
 | CORE-B-043.QA | QA matrix B03/OTP/UI drift و E2E | CORE-B-043.QA.T01؛ قبولی/رد: در انتشار Assistant با unknown banking E2E، release blocked؛ شواهد source و contract assertion؛ طراحی شده، اجرا نشده |
 
+**ریزآزمون‌های سناریوی سه‌حوزه‌ای فصل سوم §۱۶:** این جدول «پیشنهاد آزمون» منبع را به قرارداد قابل‌رد و مالک واقعی وصل می‌کند؛ عددهای کیفیت/ظرفیت و انتشار Voice هنوز تصمیم مستقل‌اند. Core-B-043 مالک تجمیع شواهد است، نه مالک Computer Use یا موتور RAG.
+
+| شناسه آزمون | مرجع و محور | مالک رفتار | شرط قبولی | شرط شکست |
+|---|---|---|---|---|
+| CORE-B-043.QA.T02 | B:1714؛ قفل دامنه و پذیرش B03 | Core scope gate؛ Adviser/Assistant مصرف‌کننده | درخواست وام مستقل در چت ضمانت‌نامه فقط تغییر حوزه با تأیید صریح پیشنهاد دهد؛ ابهام فقط clarifying و ابزار خارج‌دامنه صفر | بدون تأیید تغییر حوزه، دسترسی ابزار وام یا اقدام حساس انجام شود |
+| CORE-B-043.QA.T03 | B:1715؛ پلن | Core entitlement | در Bronze تقاضای قابلیت منتشرشده فقط برای Gold با 403/entitlement-denied از Backend رد شود؛ رابط ممکن است توضیح دسترسی نشان دهد | مخفی‌کردن صرف دکمه در FE اجازه اجرای API Gold برای Bronze بدهد |
+| CORE-B-043.QA.T04 | B:1716؛ کاتالوگ | Core Catalog؛ Adviser evidence | محصولی با نرخ تغییرکرده و snapshot تأییدنشده در توصیه قطعی برچسب unavailable/uncertain داشته باشد و نسخه تاریخی حفظ شود | منبع منقضی یا متعارض بی‌برچسب به قیمت یا توصیه قطعی برسد |
+| CORE-B-043.QA.T05 | B:1717؛ قطع API کاتالوگ | Core catalog/service router | با قطع API مکمل، جریان اصلیِ مستقل از آن ادامه یابد ولی پاسخ وابسته به داده تازه طبق سیاست تازگی محدود شود | قطع API مکمل تمام سرویس مستقل را نابود یا داده نامعلوم را به مقدار پیش‌فرض قطعی تبدیل کند |
+| CORE-B-043.QA.T06 | B:1718؛ تغییر UI | Assistant Computer Use | در تغییر selector یا order فرم و صفحه ناشناخته، UI map نامعتبر quarantine و action حساس صفر باشد | کلیک حدسی روی دکمه هم‌موقعیت بدون تطبیق نسخه و مجوز اجرا شود |
+| CORE-B-043.QA.T07 | B:1719؛ نشست | Core session و Assistant isolated execution | در انقضا، resume فقط بعد reauth و تأیید حوزه انجام شود؛ session A هیچ token/cookie/data B را در اجرای موازی نبیند | worker restart از نشست منقضی یا داده مشتری دیگر استفاده کند |
+| CORE-B-043.QA.T08 | B:1720؛ احراز هویت | Core consent و Assistant secure entry | OTP تست تنها در کنترل امن کاربر و برای یک action/TTL معتبر باشد؛ در prompt/log/trace/persistent state هیچ plaintext یافت نشود | OTP به مدل یا log، حتی هنگام خطای رندر/timeout، ارسال شود |
+| CORE-B-043.QA.T09 | B:1721؛ اقدام حساس | Core permission و Assistant action engine | ارسال بدون approval تازه=۰ external write؛ تکرار callback یک نتیجه و unknown قبل retry استعلام معتبر داشته باشد | ارسال بدون تأیید یا duplicate external transaction پس timeout رخ دهد |
+| CORE-B-043.QA.T10 | B:1722؛ اندروید و iOS | Assistant platform adapter | برای نبود اپ/permission یا کنترل ناممکن، route وب مجاز یا unsupported با توضیح ثبت شود؛ نصب بدون رضایت صفر | نبود اپ به نصب مخفی یا اعلام قابلیت کنترل غیرواقعی منجر شود |
+| CORE-B-043.QA.T11 | B:1723؛ صوت آینده | Core policy و Assistant future voice | در voice-driver hypothetical scenario هنگام رانندگی، هر تأیید پرداخت/OTP/امضا pending تا تأیید ایمن مستقیم بماند؛ انتشار Voice در R1 فرض نشود | گفتار هنگام رانندگی به‌عنوان تأیید مالی حساس قطعی پذیرفته یا بانک پرداخت شود |
+
 #### CORE-B-044 — ۱۷. تعامل صوتی آینده
 **مرجع:** جامع فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات، خط 1727؛ **مالک مرزی Core:** CORE-US-12.
 **وضعیت و مرز اجرا:** کانال Voice جهت‌گیری آینده است؛ گیت ایمنی و قرارداد Core قابل طراحی، اما پیاده‌سازی و انتشار آن در R1 مصوب نیست.
