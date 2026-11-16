@@ -2197,3 +2197,280 @@
 - تسک‌های کیف پول شامل زیربخش‌های ۳ تا ۱۲ و کنترل‌های بخش‌های ۱ و ۲ هستند؛ جزئیات صرفاً منبع‌شناختی/تاریخچه تغییرات در دامنه اجرایی نیستند.
 - پارامترهای عددی، بانک/درگاه، انطباق حقوقی، شکست تساوی استرداد، سنجش دقیق پردازش مشاور و قراردادهای تأمین‌کننده که در مرجع باز هستند، **تصمیم باز** باقی می‌مانند و تسک تحلیل/تصویب آن‌ها در CORE-X11 ثبت است.
 - هر بسته به بند و خط مرجع پیوند دارد. نتیجه آزمون‌ها در این سند **معیار پذیرش طراحی‌شده** است، نه ادعای اجرای واقعی تست روی کد.
+
+### ۱.۸. ماتریس پایه توالی‌یابی اهداف و Storyها
+
+**قاعده:** پیش‌نیازهای این جدول «پیش‌نیاز قابلیت کامل/یکپارچه‌سازی» هستند؛ شروع پیاده‌سازی داخلی با Mock و قرارداد مصوب می‌تواند زودتر انجام شود. هیچ مدت یا تاریخ ساختگی در این فصل تعیین نمی‌شود. شناسه‌های هدف در هر سه بخش ثابت خواهند ماند.
+
+| هدف | خروجی قابل سنجش | Storyهای Core | قرارداد بین‌بخشی |
+|---|---|---|---|
+| G01 | زیرساخت قابل اتکا | CORE-US-01، CORE-US-02، CORE-US-03، CORE-US-04، CORE-US-05، CORE-US-06، CORE-US-45، CORE-US-46 | ARCH-API-v1 |
+| G02 | ورود و سوپراپ مشاور | CORE-US-07، CORE-US-08، CORE-US-09، CORE-US-10، CORE-US-11، CORE-US-12 | IDENTITY-v1;SERVICE-CATALOG-v1;CONSENT-v1 |
+| G03 | توصیه‌گر و کاتالوگ تسهیلات | CORE-US-13، CORE-US-14، CORE-US-15، CORE-US-16، CORE-US-17، CORE-US-18 | PRODUCT-SNAPSHOT-v1;RECOMMENDATION-v1 |
+| G04 | اشتراک و استحقاق خدمات | CORE-US-19، CORE-US-20، CORE-US-21، CORE-US-22، CORE-US-23، CORE-US-24 | ENTITLEMENT-v1;ORDER-v1;PRICING-v1 |
+| G05 | کیف پول و پرداخت مطمئن | CORE-US-25، CORE-US-26، CORE-US-27، CORE-US-28، CORE-US-29، CORE-US-30، CORE-US-31، CORE-US-32، CORE-US-33، CORE-US-34 | WALLET-v1;LEDGER-v1;PAYMENT-v1 |
+| G06 | خدمات مالی سازمانی | CORE-US-35، CORE-US-36، CORE-US-37، CORE-US-38، CORE-US-39، CORE-US-40 | ORG-ALLOWANCE-v1;TRANSFER-v1;PAYOUT-v1 |
+| G07 | عملیات، حسابداری و کنترل | CORE-US-41، CORE-US-42، CORE-US-43، CORE-US-44 | FINANCE-OPERATIONS-v1;NOTIFY-v1 |
+
+#### ۱.۸.۱. شبکه وابستگی ۴۶ Story
+
+| Story / تسک اصلی | اهداف | پیش‌نیاز تکمیل قابلیت | امکان شروع موازی |
+|---|---|---|---|
+| CORE-US-01.MAIN | G01 | — | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-02.MAIN | G01 | CORE-US-01.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-03.MAIN | G01 | CORE-US-01.MAIN،CORE-US-02.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-04.MAIN | G01 | CORE-US-02.MAIN،CORE-US-03.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-05.MAIN | G01 | CORE-US-03.MAIN،CORE-US-04.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-06.MAIN | G01 | CORE-US-01.MAIN،CORE-US-03.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-07.MAIN | G02 | CORE-US-02.MAIN،CORE-US-06.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-08.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-09.MAIN | G02 | CORE-US-02.MAIN،CORE-US-03.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-10.MAIN | G02 | CORE-US-03.MAIN،CORE-US-09.MAIN،CORE-US-11.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-12.MAIN | G02 | CORE-US-07.MAIN،CORE-US-09.MAIN،CORE-US-10.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-13.MAIN | G03 | CORE-US-02.MAIN،CORE-US-03.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-15.MAIN | G03 | CORE-US-07.MAIN،CORE-US-13.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-16.MAIN | G03 | CORE-US-09.MAIN،CORE-US-13.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-17.MAIN | G03 | CORE-US-16.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-18.MAIN | G03 | CORE-US-16.MAIN،CORE-US-17.MAIN،CORE-US-06.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-19.MAIN | G04 | CORE-US-07.MAIN،CORE-US-09.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-21.MAIN | G04 | CORE-US-19.MAIN،CORE-US-20.MAIN،CORE-US-24.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-22.MAIN | G04 | CORE-US-21.MAIN،CORE-US-11.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-23.MAIN | G04 | CORE-US-19.MAIN،CORE-US-03.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-27.MAIN | G05 | CORE-US-26.MAIN،CORE-US-04.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-28.MAIN | G05 | CORE-US-27.MAIN،CORE-US-24.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-29.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-31.MAIN | G05 | CORE-US-20.MAIN،CORE-US-23.MAIN،CORE-US-27.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-32.MAIN | G05 | CORE-US-26.MAIN،CORE-US-31.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-35.MAIN | G06 | CORE-US-08.MAIN،CORE-US-25.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-36.MAIN | G06 | CORE-US-35.MAIN،CORE-US-27.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-37.MAIN | G06 | CORE-US-24.MAIN،CORE-US-35.MAIN،CORE-US-28.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-39.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-34.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-41.MAIN | G07 | CORE-US-04.MAIN،CORE-US-07.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-42.MAIN | G07 | CORE-US-30.MAIN،CORE-US-41.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-43.MAIN | G07 | CORE-US-26.MAIN،CORE-US-34.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-44.MAIN | G07 | CORE-US-05.MAIN،CORE-US-34.MAIN،CORE-US-42.MAIN،CORE-US-43.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-45.MAIN | G01 | CORE-US-03.MAIN،CORE-US-04.MAIN،CORE-US-06.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+| CORE-US-46.MAIN | G01 | CORE-US-02.MAIN،CORE-US-45.MAIN | طراحی قرارداد، UI و تست با Mock تا زمان تکمیل پیش‌نیازها مجاز است |
+
+#### ۱.۸.۲. نمودار شبکه اهداف و گیت یکپارچه‌سازی
+
+```mermaid
+flowchart LR
+ A["G01: زیرساخت و قراردادها"] --> B["G02: هویت و سوپراپ"]
+ A --> C["G03: توصیه‌گر قطعی"]
+ B --> D["G04: اشتراک و سفارش"]
+ A --> E["G05: کیف پول و دفترکل"]
+ D --> E
+ B --> F["G06: مالی سازمانی"]
+ E --> F
+ E --> G["G07: عملیات و حسابداری"]
+ C --> H["اتصال Adviser"]
+ B --> H
+ D --> H
+ E --> I["اتصال Assistant"]
+ F --> I
+ H --> J["آزمون یکپارچه سه بخش"]
+ I --> J
+ G --> J
+ J --> K{"گیت انتشار بر اساس هدف"}
+```
+
+این نمودار فقط روابط اصلی اهداف را نشان می‌دهد؛ مسیر بحرانی واقعی و زمان‌بندی از ماتریس تسک‌ها، ظرفیت و تخمین فصل بعد محاسبه می‌شود. پیکان‌ها **وابستگی برای یکپارچه‌سازی** هستند، نه منع شروع موازی توسعه.
+
+### ۱.۹. ماتریس اتصال همه بسته‌های مرجع به شبکه بین‌سرویسی
+
+هر بسته `CORE-W` یا `CORE-B` در جدول زیر به یک Story اصلی، هدف، پیش‌نیازهای همان Story، قرارداد مصرفی و مصرف‌کننده وصل شده است. **مالک قطعی بسته** برای برنامه‌ریزی، ستون «مالک اجرایی» است؛ برچسب «مالک پیشنهادی» در متن استخراج اولیه صرفاً یک نگاشت اولیه بوده و در تعارض، این ماتریس برای توالی‌یابی مقدم است. `CORE-W-xxx.DB/BE/FE/QA` به همین شناسه بسته ارث می‌برد، اما وابستگی داخلی آن باید با معیار پایان واقعی سنجیده شود.
+
+| بسته | مالک اجرایی | هدف | پیش‌نیاز تکمیل | قرارداد/داده مشترک | مصرف‌کننده | گیت تصمیم |
+|---|---|---|---|---|---|---|
+| CORE-W-001 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-002 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-003 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-004 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-005 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-006 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-007 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-008 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-009 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-010 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-011 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-012 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-013 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-014 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-015 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-016 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-017 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-018 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-019 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-020 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-021 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-022 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-023 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-024 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-025 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-026 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-027 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-028 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-029 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-030 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-031 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-032 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-033 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-034 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-035 | CORE-US-24.MAIN | G04 | CORE-US-20.MAIN،CORE-US-07.MAIN،CORE-US-27.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-036 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-037 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-038 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-039 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-040 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-041 | CORE-US-31.MAIN | G05 | CORE-US-20.MAIN،CORE-US-23.MAIN،CORE-US-27.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-042 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-043 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-044 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-045 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-046 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-047 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-048 | CORE-US-33.MAIN | G05 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-31.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-049 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-050 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-051 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-052 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-053 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-054 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-055 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-056 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-057 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-058 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-059 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | TRANSFER-v1 | CORE | — |
+| CORE-W-060 | CORE-US-38.MAIN | G06 | CORE-US-26.MAIN،CORE-US-27.MAIN،CORE-US-35.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-W-061 | CORE-US-32.MAIN | G05 | CORE-US-26.MAIN،CORE-US-31.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-062 | CORE-US-32.MAIN | G05 | CORE-US-26.MAIN،CORE-US-31.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-W-063 | CORE-US-32.MAIN | G05 | CORE-US-26.MAIN،CORE-US-31.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-064 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-065 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-066 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-067 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-068 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | CONSENT-v1 | CORE | — |
+| CORE-W-069 | CORE-US-40.MAIN | G06 | CORE-US-11.MAIN،CORE-US-22.MAIN،CORE-US-27.MAIN،CORE-US-28.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-070 | CORE-US-36.MAIN | G06 | CORE-US-35.MAIN،CORE-US-27.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-071 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-072 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-073 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-074 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | PAYMENT-v1 | CORE | — |
+| CORE-W-075 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-076 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-077 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | WALLET-v1 | ASSISTANT | — |
+| CORE-W-078 | CORE-US-26.MAIN | G05 | CORE-US-02.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-079 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-080 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-081 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-082 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-083 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | NOTIFY-v1 | CORE | — |
+| CORE-W-084 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-085 | CORE-US-34.MAIN | G05 | CORE-US-26.MAIN،CORE-US-28.MAIN،CORE-US-32.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-W-086 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | ASSISTANT | — |
+| CORE-W-087 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | ASSISTANT | — |
+| CORE-W-088 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-089 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-090 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-091 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-092 | CORE-US-20.MAIN | G04 | CORE-US-19.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-093 | CORE-US-43.MAIN | G07 | CORE-US-26.MAIN،CORE-US-34.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-094 | CORE-US-43.MAIN | G07 | CORE-US-26.MAIN،CORE-US-34.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-095 | CORE-US-43.MAIN | G07 | CORE-US-26.MAIN،CORE-US-34.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-W-096 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-097 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-098 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-099 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | NOTIFY-v1 | CORE | — |
+| CORE-W-100 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-101 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-102 | CORE-US-30.MAIN | G05 | CORE-US-26.MAIN،CORE-US-25.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-103 | CORE-US-45.MAIN | G01 | CORE-US-03.MAIN،CORE-US-04.MAIN،CORE-US-06.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-W-104 | CORE-US-45.MAIN | G01 | CORE-US-03.MAIN،CORE-US-04.MAIN،CORE-US-06.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-W-105 | CORE-US-45.MAIN | G01 | CORE-US-03.MAIN،CORE-US-04.MAIN،CORE-US-06.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-001 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-002 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-003 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-004 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-005 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-006 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-007 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-008 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-009 | CORE-US-35.MAIN | G06 | CORE-US-08.MAIN،CORE-US-25.MAIN | ORG-ALLOWANCE-v1 | CORE | — |
+| CORE-B-010 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-011 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-012 | CORE-US-21.MAIN | G04 | CORE-US-19.MAIN،CORE-US-20.MAIN،CORE-US-24.MAIN | PRICING-v1 | CORE | DECISION-REVIEW |
+| CORE-B-013 | CORE-US-28.MAIN | G05 | CORE-US-27.MAIN،CORE-US-24.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-014 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-015 | CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | CONSENT-v1 | CORE | — |
+| CORE-B-016 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-017 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-018 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-019 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-020 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-021 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-022 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-023 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-024 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-025 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-026 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-027 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-028 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-029 | CORE-US-21.MAIN | G04 | CORE-US-19.MAIN،CORE-US-20.MAIN،CORE-US-24.MAIN | PRICING-v1 | ASSISTANT | — |
+| CORE-B-030 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-031 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | ASSISTANT | — |
+| CORE-B-032 | CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | CONSENT-v1 | CORE | — |
+| CORE-B-033 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-034 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-035 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | PRODUCT-SNAPSHOT-v1 | CORE | — |
+| CORE-B-036 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-037 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-038 | CORE-US-14.MAIN | G03 | CORE-US-13.MAIN،CORE-US-15.MAIN | PRODUCT-SNAPSHOT-v1 | ADVISER | — |
+| CORE-B-039 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-040 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-041 | CORE-US-11.MAIN | G02 | CORE-US-07.MAIN،CORE-US-06.MAIN | CONSENT-v1 | CORE | — |
+| CORE-B-042 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-043 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-044 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-045 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+| CORE-B-046 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-047 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-048 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-049 | CORE-US-01.MAIN | G01 | — | ARCH-API-v1 | CORE | — |
+| CORE-B-050 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-051 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-052 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | — |
+| CORE-B-053 | CORE-US-25.MAIN | G05 | CORE-US-07.MAIN،CORE-US-08.MAIN | ARCH-API-v1 | CORE | DECISION-REVIEW |
+
+### ۱.۱۰. قرارداد ریزتسک‌ها و استقلال کار موازی
+
+| ریزتسک | وابستگی لازم | خروجی برای دیگر بخش‌ها | قاعده تکمیل |
+|---|---|---|---|
+| `.DB` | طرح مدل و invariant مصوب؛ تصمیم باز مرتبط | Schema/Migration و قرارداد داده | Migration و آزمون قید داده؛ در نبود DB جدید، دلیل «عدم کاربرد» |
+| `.BE` | قرارداد API/رویداد نسخه‌دار؛ مدل پایدار برای ادغام | API، رویداد و خطاهای استاندارد | آزمون قرارداد، idempotency و خطای وابستگی؛ توسعه با stub قبل از DB مجاز |
+| `.FE` | قرارداد API/DTO و حالات UI مصوب، نه الزاماً اجرای واقعی BE | جریان کاربر و نمایش خطا/وضعیت | آزمون با Mock و سپس E2E واقعی؛ نبود UI باید مستند شود |
+| `.QA` | معیار پذیرش از آغاز طراحی؛ اجرای E2E پس از اتصال واقعی | شواهد قابل بازتولید و گیت کیفیت | آزمون واحد/قرارداد موازی؛ تست یکپارچه پس از BE و FE و زیرساخت |
+
+**روابط بین‌سرویسی نمونه، بدون جعل شناسه تسک‌های هنوز تدوین‌نشده:**
+
+| هدف مشترک | خروجی Core | نیاز Adviser | نیاز Assistant | گیت اتصال |
+|---|---|---|---|---|
+| ورود و مشاوره | CORE-US-07/09/10/11/12 | خواندن کاتالوگ و بررسی مجوز از API نسخه‌دار | مسیر خدمت و بررسی مجوز از API نسخه‌دار | Contract tests و عدم خواندن مستقیم DB |
+| توصیه‌گر تسهیلات | CORE-US-13/14/15/16/17/18 | استناد به نسخه Snapshot و ارجاع به توصیه قطعی | دریافت خدمت منتخب و پیش‌شرط‌های اجرا | همسانی نسخه و provenance |
+| اشتراک و مصرف | CORE-US-19/20/21/23/24 | استعلام استحقاق و ثبت مصرف مشاوره | استعلام استحقاق و هزینه خدمت | عدم کسر مضاعف و حفظ نسخه قیمت |
+| اجرای مالی دستیار | CORE-US-25/26/27/31/32/33/34 | مشاوره هزینه‌دار با مجوز و RateSnapshot | Hold/Capture/Release/Refund و وضعیت نتیجه نامعلوم | تست قطعی‌سازی جزئی و recovery |
+| خدمت سازمانی | CORE-US-35/36/37/38/39 | نمایش محدودیت‌های سازمان در مشاوره | اجرای خدمت با سقف عضو و کیف سازمان | تست قطع عضویت در میانه عملیات |
+| عملیات و پایش | CORE-US-04/05/41/42/43/44 | telemetry قراردادی بدون متن محرمانه | trace اجرای خدمت و نتیجه نامعلوم | گیت امنیت، تطبیق و incident |
+
+**گیت ورود به فصل زمان‌بندی:** برای هر تسک باید `objective_ids`، `hard_dependencies`، `contract_dependencies`، `decision_gates` و `acceptance_tests` تکمیل یا با «عدم کاربرد + دلیل» مشخص شده باشد؛ وجود جدول به‌تنهایی به‌معنای تأیید همه وابستگی‌ها نیست. شناسه تسک‌های Adviser و Assistant در فصل‌های مربوطه ایجاد و در فصل تلفیق به روابط بالا وصل می‌شوند؛ در این فصل نباید شناسه جعلی برای آن‌ها ساخته شود.
