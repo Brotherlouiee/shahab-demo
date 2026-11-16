@@ -1353,10 +1353,10 @@
 - پاسخ مصوب: نمای اصلی ساده با اعتبار قابل مصرف، رزرو و قابل برداشت باشد؛ منشأ، انقضا و جزئیات محاسبه با بازکردن هر مورد دیده شوند. برآورد کل، سقف افزایش خودکار و سهم مشاورهٔ حین اجرا قابل فهم باشند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-097.DB | BalanceSummaryView شامل spendable,reserved,cashout،details lot/expiry و price quote | CORE-W-097.DB.T01؛ قبولی/رد: با ۵۰۰ total و ۱۰۰ hold spendable=۴۰۰؛ withdrawable مستقل محاسبه شود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-097.BE | API summary و detail با provenance و سقف ۱٫۲ برآورد اصلی، مشاوره نیم‌نرخ | CORE-W-097.BE.T01؛ قبولی/رد: hold ۳۰ از estimate۱۰۰، auto cap۱۲۰ باشد نه ۳۶؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-097.FE | نمای ساده سه موجودی و بخش جزئیات منبع و زمان انقضا/محاسبه | CORE-W-097.FE.T01؛ قبولی/رد: ۲۰٪ margin به عنوان fee یا total debit در صفحه نمایش داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-097.QA | E2E مقایسه اعداد summary و detail و accessibility | CORE-W-097.QA.T01؛ قبولی/رد: تفاوت spendable+reserved با ledger بدون دلیل شکست؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-097.DB | WalletSummaryView شامل available/held/withdrawable و detail refs expiry/origin و price breakdown | CORE-W-097.DB.T01: جمع آزاد/رزرو/برداشت با دفترکل همان snapshot سازگار باشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-097.BE | API summary کم‌حجم و detail مجاز با snapshot یکسان؛ محاسبه سقف ۱۲۰٪ و ضریب ۰٫۵ از Core | CORE-W-097.BE.T01: در wallet فقط هدیه، withdrawable=۰ حتی اگر available>۰؛ جزئیات منشأ درست باشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-097.FE | نمای ساده سه مقدار و drilldown منشأ/انقضا/برآورد/سهم مشاوره | CORE-W-097.FE.T01: با balance=۵۰۰ و hold=۱۰۰، available=۴۰۰ و held=۱۰۰؛ summary بی‌نیاز از نمایش همه lots باشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-097.QA | تست consistency خلاصه/جزئیات، permission و برآورد عملیات دستیار | CORE-W-097.QA.T01: سقف ۱۲۰٪ هزینه را با fee اشتباه نکند و مشاوره دستیار با ×۰٫۵ نشان داده شود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-098 — ۱۰.۱.۲. تاریخچه و رسید
 **مرجع:** کیف پول ۱۰.۱.۲، خط 1523؛ **مالک:** CORE-US-30.
@@ -1364,10 +1364,10 @@
 - پاسخ مصوب: فیلتر نوع، وضعیت و زمان فراهم شود؛ رسید شامل مبلغ، اجزای هزینه، زمان، وضعیت و شناسهٔ پیگیری باشد. خروجی سازمانی برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-098.DB | ReceiptEntry با kind,status,amount,component breakdown,timestamp,reference و owner | CORE-W-098.DB.T01؛ قبولی/رد: رسید شخص/سازمان مرجع و owner صحیح داشته باشد؛ نمایش تاریخچه جدا از audit حساس؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-098.BE | API فیلتر type,status,time و export سازمان فقط برای admin same-org | CORE-W-098.BE.T01؛ قبولی/رد: عضو سابق فقط رسید خودش؛ cross-org filter=403/empty بدون leakage؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-098.FE | صفحه فیلترها و خروجی رسید/تاریخچه با شناسه پیگیری | CORE-W-098.FE.T01؛ قبولی/رد: رسید pending نباید settled معرفی شود؛ شخص به سایر اعضا دسترسی نگیرد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-098.QA | تست سه فیلتر، member former، admin report و unauthorised IDOR | CORE-W-098.QA.T01؛ قبولی/رد: در خروج عضو رسید خود حفظ، رسید همکار صفر؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-098.DB | FinancialReceipt با amount,parts,timestamp,status,tracking_id و actor/org_scope؛ index filter | CORE-W-098.DB.T01: رسید با amount/status/date/tracking_id غیرتهی در ثبت قطعی داشته باشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-098.BE | API query تاریخچه با فیلتر نوع/وضعیت/زمان و خروجی org فقط برای admin | CORE-W-098.BE.T01: admin org A دریافت export org B را 403 بگیرد؛ member سابق فقط رسید خودش؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-098.FE | نمای جدول فیلترشونده و رسید اجزای هزینه و شناسه پیگیری؛ خروجی سازمانی محدود | CORE-W-098.FE.T01: فیلتر نوع+وضعیت+زمان برگردان دقیق subset؛ سایر اعضا مخفی؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-098.QA | تست فیلتر سه‌گانه، شخص در دو سازمان، export افقی و عضو سابق | CORE-W-098.QA.T01: تغییر organization active نتواند رسید سازمان دیگر را افشا کند؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-099 — ۱۰.۱.۳. اعلان مشتری
 **مرجع:** کیف پول ۱۰.۱.۳، خط 1535؛ **مالک:** CORE-US-41.
@@ -1375,10 +1375,10 @@
 - پاسخ مصوب: رویدادهای مالی اعلان درون‌برنامه داشته باشند؛ برای موارد امنیتی و نیاز به اقدام فوری پیامک ارسال شود. یادآوری‌ها قابل تنظیم باشند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-099.DB | NotificationEvent/DeliveryChannel با category=financial/security/urgent و preference reminder | CORE-W-099.DB.T01؛ قبولی/رد: اعلان مالی درون‌برنامه و رخداد امنیتی فوری sms eligible ذخیره شود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-099.BE | dispatcher idempotent تفکیک in-app برای مالی، SMS برای امنیت/اقدام فوری و reminder opt-out | CORE-W-099.BE.T01؛ قبولی/رد: یک event retry duplicate SMS نسازد؛ تنظیم یادآوری opt-out رعایت شود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-099.FE | مرکز اعلان و تنظیم یادآوری؛ بدون نمایش اطلاعات حساس در متن SMS | CORE-W-099.FE.T01؛ قبولی/رد: برای رویداد مالی عادی push درون‌برنامه؛ امنیتی SMS بدون رمز/شماره کامل حساب؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-099.QA | تست channel routing و duplicate delivery و privacy | CORE-W-099.QA.T01؛ قبولی/رد: financial event یک inbox notification؛ security event sms مجاز؛ retry duplicate=۰؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-099.DB | NotificationPreference و NotificationEvent با channel و severity و owner_id و dedupe key | CORE-W-099.DB.T01: رویداد یکسان تکراری یک اعلان با idempotency بسازد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-099.BE | مالی درون‌برنامه؛ امنیت/اقدام فوری SMS طبق سیاست؛ یادآوری قابل تنظیم و لغو | CORE-W-099.BE.T01: financial posted→in_app ایجاد کند؛ suspicious_access→SMS مجاز ارسال؛ reminder غیرفعال ارسال نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-099.FE | پنل ترجیح یادآوری و نمایش اعلان مالی با بدون نشت داده حساس در پیامک | CORE-W-099.FE.T01: کاربر یادآوری غیرحساس را خاموش کند و پیام امنیتی ضروری از آن تابع نباشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-099.QA | تست اعلان مالی، امنیتی فوری، انصراف reminder و callback تکراری | CORE-W-099.QA.T01: شماره کاربر B برای اعلان A استفاده نشود؛ متن SMS رمز یا OTP را لو ندهد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-100 — ۱۰.۱.۴. پروندهٔ پشتیبانی و اختلاف
 **مرجع:** کیف پول ۱۰.۱.۴، خط 1547؛ **مالک:** CORE-US-42.
@@ -1386,10 +1386,10 @@
 - پاسخ مصوب: پرونده به تراکنش متصل و دارای وضعیت و مسئول باشد؛ مدارک فقط در صورت نیاز دریافت شوند. مهلت پاسخ پس از تعیین ظرفیت تیم منتشر شود؛ عددی فعلاً وعده داده نشده است.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-100.DB | SupportCase با transaction_id,status,assignee و optional document_refs با ACL | CORE-W-100.DB.T01؛ قبولی/رد: پرونده بدون transaction شناسه معتبر رد؛ مدارک اضافه بدون نیاز نگهداری نشوند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-100.BE | API ایجاد و پیگیری پرونده با مسئول و وضعیت؛ SLA تا تایید ظرفیت تیم باز بماند | CORE-W-100.BE.T01؛ قبولی/رد: درخواست کاربر دیگر با case_id غیرخود 403؛ زمان ثابت پاسخ بدون تصمیم منتشر نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-100.FE | نمای وضعیت پرونده و بارگذاری مدارک فقط هنگام درخواست مشخص | CORE-W-100.FE.T01؛ قبولی/رد: کاربر بتواند شناسه پیگیری را بازیابی و اطلاعات سازمان دیگر را نبیند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-100.QA | تست case create/reopen، owner and attachments permissions | CORE-W-100.QA.T01؛ قبولی/رد: case_id قابل جست‌وجو برای مالک و نه غیرمجاز؛ SLA invented=۰؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-100.DB | SupportCase با operation_id، owner/assignee/status و attachments_need_flag و audit trail | CORE-W-100.DB.T01: هر پرونده به یک operation معتبر و مسئول یا صف مشخص متصل باشد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-100.BE | API ایجاد اختلاف با اتصال به تراکنش، صف مسئول و دریافت مدرک تنها در نیاز؛ SLA عددی تا تعیین ظرفیت باز | CORE-W-100.BE.T01: بدون نیاز واقعی به مدرک، API بارگذاری اجباری نکند؛ شخص B پرونده A را نخواند؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-100.FE | نمای پرونده و شماره پیگیری و امکان افزودن مدرک به درخواست مشخص | CORE-W-100.FE.T01: بدون SLA مصوب، زمان وعده داده‌شده ثابت در UI نمایش داده نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-100.QA | تست بدون مدرک، درخواست مدرک، نقش مجاز، SLA باز و تکرار case | CORE-W-100.QA.T01: retry یک درخواست complaint دو پرونده جدا نسازد؛ مدارک حساس با ACL محدود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-101 — ۱۰.۱.۵. مشاهده و گزارش زنجیره برای اشخاص مجاز
 **مرجع:** کیف پول ۱۰.۱.۵، خط 1559؛ **مالک:** CORE-US-30.
@@ -1398,10 +1398,10 @@
 - پاسخ مصوب: برای اشخاص دارای مجوز رسیدگی، نمایش زمانی و شبکه‌ای مسیر و خروجی مستند با حساب‌های واسط، رویدادها و سهم منشأها فراهم شود؛ دسترسی و گرفتن خروجی ثبت شوند. تاریخچهٔ معمول مشتری به سوابق و حدود مجاز خودش محدود بماند؛ گزارش مشکوک و تحلیل داخلی خودکار در خروجی مشتری یا ادمین قرار نگیرد.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-101.DB | LineageReportReadModel با access_scope,actor,query_audit و ریال سهم هر node | CORE-W-101.DB.T01؛ قبولی/رد: بررسی زنجیره A→B→C حفظ شود؛ داده‌های غیرمجاز در export نباشند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-101.BE | API گزارش زمان‌محور و گرافی با redaction و logging هر read/export | CORE-W-101.BE.T01؛ قبولی/رد: ادمین org-A نتواند مانده/نام کامل org-B را از traversing دریافت کند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-101.FE | پنل کارشناسی مجاز با export تاریخچه شبکه‌ای؛ UI عادی فقط تاریخچه مجاز | CORE-W-101.FE.T01؛ قبولی/رد: گزارش مشکوک یا تحلیل محرمانه داخلی به مشتری نمایش داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-101.QA | تست reachability lineage، privacy، audit export و cross-tenant | CORE-W-101.QA.T01؛ قبولی/رد: هر report دانلودشده audit actor،scope و زمان داشته باشد؛ leakage=۰؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-101.DB | LineageReportAccess با privileged_role،scope و export audit در گراف مالک Core | CORE-W-101.DB.T01: export log actor/time/scope با هر دانلود ثبت شود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-101.BE | API گزارش زمانی/شبکه‌ای فقط برای نقش رسیدگی مجاز؛ trace report بدون تحلیل مشکوک داخلی به مشتری | CORE-W-101.BE.T01: کاربر عادی از طریق graph API نتواند طرف‌های واسط دیگر را کشف کند؛ نقش رسیدگی مجاز به همان حدود دسترسی برسد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-101.FE | پنل گزارش chain با مجوز و export ثبت‌شده؛ نمای عادی مشتری فقط سوابق خود | CORE-W-101.FE.T01: در صفحه مشتری گزینه تحلیل مشکوک داخلی و گزارش حساب‌های دیگر نمایش داده نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-101.QA | تست export بدون مجوز، فیلتر org و برگشت زنجیره چندحساب | CORE-W-101.QA.T01: دو export ردیابی جداگانه داشته باشند و بدون ACL 403، حتی با حدس شناسه lot؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-102 — ۱۰.۲. آیا رسید پرداخت، فاکتور و رسید خدمت یک سند هستند
 **مرجع:** کیف پول ۱۰.۲، خط 1571؛ **مالک:** CORE-US-30.
@@ -1411,10 +1411,10 @@
 - ارتباط با سایر بخش‌ها: تاریخچه باید وضعیت‌های واقعی بخش ۶ را منعکس کند و از سابقهٔ مالی بخش ۷ قابل توضیح باشد. پشتیبانی از نتیجهٔ تطبیق بخش ۸ استفاده می‌کند. نقش ادمین و حریم کیف پول شخصی نیز از بخش ۳ می‌آید.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-102.DB | سه نوع سند PaymentReceipt,CorporateInvoice,ServiceReceipt با references و document_type | CORE-W-102.DB.T01؛ قبولی/رد: هر سه سند قابلیت پیوند به order و payment داشته باشند ولی document_type مستقل بماند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-102.BE | API مستندسازی مالی با وضعیت payment و خدمت، بدون تعبیر invoice به وصول | CORE-W-102.BE.T01؛ قبولی/رد: invoice صادرشده بدون payment_ref confirmed هیچ وصول قطعی اعلام نکند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-102.FE | نمای تفکیک رسید بانکی/فاکتور پیشینی/جزئیات خدمت در تاریخچه | CORE-W-102.FE.T01؛ قبولی/رد: عنوان و اثر مالیاتی همه اسناد یکسان نشان داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-102.QA | تست invoice before payment، payment unknown، service delivered and correction | CORE-W-102.QA.T01؛ قبولی/رد: status هر سند مستقل، cross-reference صحیح و duplicate invoice=۰؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-102.DB | Receipt/Invoice/ServiceDelivery سه entity مستقل با original_request و payment linkage | CORE-W-102.DB.T01: invoice_id و payment_receipt_id و service_receipt_id در مدل جدا و joinable باشند؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-102.BE | API بازگشت سه نوع سند مستقل؛ invoice issued≠paid و receipt payment≠service delivered | CORE-W-102.BE.T01: فاکتور بدون وصول نتواند payment_success=true بدهد؛ delivered service بعد invoice غیرهمزمان مجاز؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-102.FE | نمای سه عنوان سند مجزا با وضعیت و مبلغ/خدمت متناظر؛ سند مالیاتی نامصوب قطعی معرفی نشود | CORE-W-102.FE.T01: کاربر فاکتور را با عنوان رسید پرداخت اشتباه نبیند؛ ۳ لینک مرتبط هرکدام جدا نمایش یابند؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-102.QA | تست invoice before payment، receipt after settlement و service delivery delayed | CORE-W-102.QA.T01: صدور یک invoice به تنهایی نه balance credit و نه شناسایی درآمد ایجاد کند؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-103 — ۱۱.۱. معیار پذیرش انتشار
 **مرجع:** کیف پول ۱۱.۱، خط 1613؛ **مالک:** CORE-US-45.
@@ -1422,10 +1422,10 @@
 - پاسخ مصوب: صحت مالی، جلوگیری از تکرار و مصرف هم‌زمان، مجوزها، استرداد و بازیابی شرط انتشار باشند؛ معیار تجربه و کارایی نیز متناسب با دامنهٔ هر انتشار تعیین شود. قابلیت مالی فعال بدون کنترل صحت منتشر نشود. این مصوبه ادعای اجرای آزمون یا قبولی سیستم نیست.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-103.DB | ReleaseEvidenceManifest با finance_invariants،permissions،recovery،load/UX checks و release-id | CORE-W-103.DB.T01؛ قبولی/رد: انتشار Wallet بدون شاهد گیت مالی و امنیتی به approved تبدیل نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-103.BE | CI/release gate خواندن نتایج واقعی و الزام idempotency/concurrency/refund قبل rollout | CORE-W-103.BE.T01؛ قبولی/رد: با یک financial test FAIL یا missing، release=blocked بماند؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-103.FE | نمای وضعیت گیت و evidence برای operator، بدون ادعای آزمون اجرا نشده | CORE-W-103.FE.T01؛ قبولی/رد: گیت طراحی شده ولی اجرا نشده وضعیت passed نگیرد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-103.QA | آزمون منفی pipeline با missing artifacts و stale test report | CORE-W-103.QA.T01؛ قبولی/رد: release approval فقط با suite واقعی PASSED و دامنه متناسب؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-103.DB | ReleaseEvidenceRecord برای financial integrity,auth,retry,refund,recovery/performance با نسخه build | CORE-W-103.DB.T01: برای هر release مالی یک gate snapshot با commit_sha و test_run_id ذخیره شود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-103.BE | CI/release gate هر کنترل مالی/امنیتی لازم را اجباری کند؛ بدون evidence pass انتشار قابلیت مالی فعال متوقف | CORE-W-103.BE.T01: اگر property ledger test fail، workflow انتشار مالی block، حتی با lint سبز؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-103.FE | نمای مدیریتی gate PASS/BLOCKED با دلیل و نسخه؛ بدون نمایش green ساختگی | CORE-W-103.FE.T01: گیت failed واضح و بدون گزینه force-ready خودکار نشان داده شود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-103.QA | تست شکست ledger consistency، race، refund، permission و rollback مانع انتشار | CORE-W-103.QA.T01: پیاده‌سازی هنوز انجام نشده؛ QA task plan با اجرای CI سند یکی قلمداد نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-104 — ۱۲.۱. جزئیات اجرایی نیازمند تصمیم — موارد ب
 **مرجع:** کیف پول ۱۲.۱، خط 1635؛ **مالک:** CORE-US-25.
@@ -1436,10 +1436,10 @@
 - ارتباط با بخش‌های دیگر: این جدول فهرست پیگیری است؛ پاسخ هر موضوع باید در محل اصلی خودش اعمال و وضعیت این فهرست هماهنگ شود. معیارهای اجرایی پیش از فعال‌کردن قابلیت مربوط نهایی شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-104.DB | DecisionRegistry برای provider/contract/legal/accounting/migration با status OPEN و external-evidence | CORE-W-104.DB.T01؛ قبولی/رد: گزینه حل‌نشده default implementation یا deadline ساختگی نگیرد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-104.BE | گیت feature activation براساس تصمیم مصوب برای بانک/مالیات/سقف/شناسه | CORE-W-104.BE.T01؛ قبولی/رد: بدون provider و legal approval settlement/auto-charge قابلیت واقعی فعال نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-104.FE | نمای مدیریتی اقلام تصمیم باز با owner و تأثیر اجرایی نه UI مشتری | CORE-W-104.FE.T01؛ قبولی/رد: پیشنهاد اکتشافی با برچسب approved نشان داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-104.QA | کنترل گیت باز و رجوع به متن ۱۲.۱ و بند اصلی | CORE-W-104.QA.T01؛ قبولی/رد: همه بازها OPEN تا تایید مالک؛ تیم فنی اصل سیاست مصوب را تغییر ندهد؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-104.DB | DecisionRegisterLink برای هر بازه بانک/تطبیق/مبلغ/قانون با status OPEN و source_ref؛ ساخت feature flag gated | CORE-W-104.DB.T01: هر open item شناسه/مالک/status OPEN داشته باشد و از مصوب تفکیک شود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-104.BE | تا گیت ارائه‌دهنده و حقوقی، connector یا نرخ نامصوب منتشر نشود؛ تصمیم در محل بند مرجع ثبت شود | CORE-W-104.BE.T01: بانک یا سرویس تطبیق انتخاب‌نشده API production فعال نسازد؛ test fake به نام واقعی معرفی نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-104.FE | پنل داخلی تصمیم باز با مالک و وابستگی سرویس، نه UI محصول وعده اجرا | CORE-W-104.FE.T01: UI درباره قابلیت پرداخت خودکار ناموجود وعده ندهد؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-104.QA | تست گیت بانک نامشخص، schema ناقص و بدون رضایت معتبر | CORE-W-104.QA.T01: مدل trace کامل باید به‌عنوان requirement ثابت بماند، انتخاب فناوری گراف باز؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-105 — ۱۲.۲. جزئیات اجرایی باز و وضعیت تصمیم‌های پیش‌تر به‌تعویق‌افتاده
 **مرجع:** کیف پول ۱۲.۲، خط 1658؛ **مالک:** CORE-US-25.
@@ -1448,10 +1448,10 @@
 - ارتباط با بخش‌های دیگر: مرجع گردکردن هزینه ۵.۴.۱ و مرجع تخصیص استرداد ۶.۶.۱ است؛ پیش از پیاده‌سازی، فقط جزئیات اجرایی باز در محل اصلی تکمیل شوند. قواعد عرضه در ۲.۴ و گیت‌های ۱۱ رعایت شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-105.DB | DecisionLedger جداکننده approved LargestRemainder از pending tie_break و undecided usage measurement | CORE-W-105.DB.T01؛ قبولی/رد: لجیک rounding مصرف W028 با تخصیص refund W062 در یک policy مخلوط نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-105.BE | گیت تصمیم میزان پردازش و tie-break استرداد؛ LargestRemainder مصوب باقی بماند | CORE-W-105.BE.T01؛ قبولی/رد: در tie fractional برابر با rule نامصوب، انتخاب خودسرانه ثبت نشود؛ اصل method مصوب حذف نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-105.FE | نمای status هر تصمیم برای تیم و ارجاع به بند اصلی | CORE-W-105.FE.T01؛ قبولی/رد: عبارت «روش Largest Remainder تصمیم باز است» نمایش داده نشود؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
-| CORE-W-105.QA | تست عدم تعارض بین W028، W062، W090 و گیت بند ۱۲.۲ | CORE-W-105.QA.T01؛ قبولی/رد: rounding هزینه و refund مستقل؛ tie فقط بخش باز؛ نسخه ۰٫۲۰ حاکم؛ شواهد fixture، نسخه، پاسخ و assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-105.DB | DecisionGateLedger برای processing_unit و refund_tie_break با status OPEN؛ largest_remainder ثابت مصوب | CORE-W-105.DB.T01: method=LargestRemainder ثبت شود؛ tie_break_choice OPEN نه «اولویت هدیه»؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-105.BE | core refund از Largest Remainder مطابق W062 استفاده کند و tie rule تا تصمیم OPEN بماند؛ processing unit را hard-code نکند | CORE-W-105.BE.T01: در مبلغ refund با سهم ۲/۳ و ۱/۳ جمع ریالی دقیق باشد؛ tie برابر بدون تصمیم تازه arbitrarily cash-first نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-105.FE | پنل سیاست‌ها تصمیم‌های باز را واضح نمایش دهد و روش مصوب تخصیص را باز معرفی نکند | CORE-W-105.FE.T01: در سند اجرایی Largest Remainder «تصمیم باز» نمایش داده نشود؛ فقط tie rule باز؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
+| CORE-W-105.QA | تست Largest Remainder ۳ lot و tie unresolved، سنجش token نامصوب و گردکردن مستقل | CORE-W-105.QA.T01: معیار processing انتخاب نشده تا گیت با آزمون تجربی تکمیل نشود؛ شاهد: fixture و assertion/decision gate؛ طراحی‌شده، اجرا نشده |
 
 ### ۱.۴. معماری محصول، کاتالوگ و اتصال Core به سرویس‌ها
 
