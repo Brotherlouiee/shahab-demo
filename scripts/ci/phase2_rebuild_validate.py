@@ -21,6 +21,7 @@ BASELINE = {
           "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a", 964),
 }
 REGISTRY = "docs/SHAHAB_PHASE_2_REBUILD_LINE_REGISTER.jsonl"
+CANDIDATES = "docs/SHAHAB_PHASE_2_REBUILD_STATEMENT_CANDIDATES.jsonl"
 ATOMS = "docs/SHAHAB_PHASE_2_REBUILD_ATOMIC_REQUIREMENTS.jsonl"
 PLAN = "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN_REBUILD.md"
 ALLOWED_REVIEW = {
@@ -116,6 +117,79 @@ def verify(repo: Path, strict: bool) -> dict:
         if row.get("test_status") == "PASSED" and not row.get("execution_evidence"):
             fail(errors, f"Test falsely marked PASSED: {identifier}")
 
+
+    # Every statement candidate must be grounded in the immutable source text.
+    # These are discovery candidates, NOT automatically approved requirements.
+    candidate_rows = read_jsonl(repo / CANDIDATES)
+    candidate_ids: set[str] = set()
+    for candidate in candidate_rows:
+        candidate_id = candidate.get("candidate_id")
+        if candidate_id in candidate_ids:
+            fail(errors, f"Duplicate statement candidate {candidate_id}")
+        candidate_ids.add(candidate_id)
+        source_ref = candidate.get("source_ref", "")
+        matched = re.fullmatch(r"([BW]):(\d+)", source_ref)
+        if not matched or source_ref not in expected_lines:
+            fail(errors, f"Candidate has invalid source {candidate_id}: {source_ref}")
+            continue
+        source_line = sources[matched.group(1)][int(matched.group(2)) - 1]
+        if candidate.get("source_line_text") != source_line:
+            fail(errors, f"Candidate source text mismatch {candidate_id}")
+        for clause in candidate.get("proposed_subclauses", []):
+            if clause not in source_line:
+                fail(errors, f"Candidate clause not verbatim {candidate_id}")
+        if candidate.get("review_status") == "VERIFIED" and not candidate.get("review_evidence"):
+            fail(errors, f"Candidate wrongly VERIFIED without evidence {candidate_id}")
+
+    # Atomic source-to-task and reverse task-to-source chains must agree exactly.
+    atom_by_task: dict[str, list[dict]] = {}
+    atom_by_ref: dict[str, set[str]] = {}
+    for atom in atom_rows:
+        atom_by_task.setdefault(atom["task_id"], []).append(atom)
+        atom_by_ref.setdefault(atom["source"], set()).add(atom["id"])
+    for reg_row in registry:
+        actual_ids = set(reg_row.get("atom_ids", []))
+        expected_ids = atom_by_ref.get(reg_row["ref"], set())
+        if actual_ids != expected_ids:
+            fail(errors, f"Line-register atomic links mismatch {reg_row['ref']}")
+    reverse_start = plan.find("## فصل هشتم — ماتریس B")
+    reverse_end = plan.find("## فصل نهم — گیت‌های ممیزی", reverse_start)
+    if reverse_start < 0 or reverse_end < 0:
+        fail(errors, "Missing bidirectional trace matrix B")
+    else:
+        reverse_rows: dict[str, list[str]] = {}
+        for line in plan[reverse_start:reverse_end].splitlines():
+            if not re.match(r"^\| [CASX]-[A-Z0-9-]+ \|", line):
+                continue
+            cols = [x.strip() for x in line.strip("|").split("|")]
+            if len(cols) != 7:
+                fail(errors, f"Malformed reverse matrix row: {line[:75]}")
+                continue
+            task_id = cols[0]
+            if task_id in reverse_rows:
+                fail(errors, f"Duplicate reverse task row {task_id}")
+            reverse_rows[task_id] = cols
+        for task_id, items in atom_by_task.items():
+            row = reverse_rows.get(task_id)
+            if row is None:
+                fail(errors, f"No reverse trace for task {task_id}")
+                continue
+            expected_atoms = {x["id"] for x in items}
+            actual_atoms = set(row[3].split("، "))
+            if expected_atoms != actual_atoms:
+                fail(errors, f"Reverse trace atom mismatch {task_id}")
+            expected_refs = {x["source"] for x in items}
+            actual_refs = set(row[4].split("، "))
+            if expected_refs != actual_refs:
+                fail(errors, f"Reverse trace source mismatch {task_id}")
+            if row[1] != items[0]["owner"] or row[2] != items[0]["story_id"]:
+                fail(errors, f"Reverse trace owner/story mismatch {task_id}")
+            if row[5] != items[0]["test_id"]:
+                fail(errors, f"Reverse trace test mismatch {task_id}")
+        for task_id in reverse_rows:
+            if task_id not in atom_by_task:
+                fail(errors, f"Reverse task without an atomic source {task_id}")
+
     fenced = False
     table_columns: int | None = None
     for n, line in enumerate(plan.split("\n"), 1):
@@ -137,7 +211,8 @@ def verify(repo: Path, strict: bool) -> dict:
 
     semantic_complete = (all(x.get("review_status") == "VERIFIED" for x in registry)
                          and all(x.get("coverage") == "COVERED" for x in atom_rows)
-                         and all(x.get("test_status") == "PASSED" for x in atom_rows))
+                         and all(x.get("test_status") == "PASSED" for x in atom_rows)
+                         and all(x.get("review_status") == "VERIFIED" for x in candidate_rows))
     if strict and not semantic_complete:
         fail(errors, "G8 semantic/implementation gate INCOMPLETE")
     result = {
@@ -145,6 +220,8 @@ def verify(repo: Path, strict: bool) -> dict:
         "semantic_complete": semantic_complete,
         "source_lines": len(registry),
         "atoms": len(atom_rows),
+        "statement_candidates": len(candidate_rows),
+        "reverse_tasks": len(atom_by_task),
         "tasks": len(tasks),
         "review_status": dict(counts),
         "errors": errors,
