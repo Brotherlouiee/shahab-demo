@@ -3418,6 +3418,35 @@ Core مالک قرارداد نوع‌دار و validation است؛ هر سرو�
 
 **نقطه ادامه:** جمع‌آوری شواهد فنی/حقوقی برای هر روش و منبع و تصمیم جداگانه؛ سایر متن‌های دو سند تا گیت نهایی NOT VERIFIED باقی‌اند.
 
+
+### ردیابی اتمی ۱۹ فیلد قرارداد SourceAccessResult و DocumentIdentity/Version
+
+برای هر فیلد عیناً مندرج در B:479–480، ریزتسک اختصاصی در بخش ۱.۱۲.۱ برنامه و آزمون مثبت/رد متناسب تعریف شده است. `valid_from/to` و `recorded_from/to` دو گروه منطقی متمایزند؛ این ثبت نام ستون SQL یا تأیید migration نیست. تمام ردیف‌ها تا اجرای contract test و بررسی schema واقعی NOT VERIFIED هستند.
+
+| شناسه الزام | عبارت مرجع | وضعیت تصمیم | مالک/Story | زیرتسک | آزمون | نتیجه |
+|---|---|---|---|---|---|---|
+| AR-B-SCHEMA-001 | B:479؛ SourceAccessResult.source_id | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F001 | AT-RAG-059.F001 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-002 | B:479؛ SourceAccessResult.source_uri | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F002 | AT-RAG-059.F002 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-003 | B:479؛ SourceAccessResult.access_method | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F003 | AT-RAG-059.F003 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-004 | B:479؛ SourceAccessResult.retrieved_at | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F004 | AT-RAG-059.F004 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-005 | B:479؛ SourceAccessResult.status | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F005 | AT-RAG-059.F005 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-006 | B:479؛ SourceAccessResult.error | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F006 | AT-RAG-059.F006 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-007 | B:479؛ SourceAccessResult.content_hash | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F007 | AT-RAG-059.F007 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-008 | B:479؛ SourceAccessResult.permission_policy_ref | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F008 | AT-RAG-059.F008 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-009 | B:479؛ SourceAccessResult.raw_artifact_ref | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F009 | AT-RAG-059.F009 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-010 | B:480؛ DocumentIdentity/Version.document_id | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F010 | AT-RAG-059.F010 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-011 | B:480؛ DocumentIdentity/Version.version_id | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F011 | AT-RAG-059.F011 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-012 | B:480؛ DocumentIdentity/Version.issuer_id | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F012 | AT-RAG-059.F012 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-013 | B:480؛ DocumentIdentity/Version.published_at | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F013 | AT-RAG-059.F013 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-014 | B:480؛ DocumentIdentity/Version.valid_from/to | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F014 | AT-RAG-059.F014 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-015 | B:480؛ DocumentIdentity/Version.recorded_from/to | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F015 | AT-RAG-059.F015 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-016 | B:480؛ DocumentIdentity/Version.content_hash | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F016 | AT-RAG-059.F016 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-017 | B:480؛ DocumentIdentity/Version.status | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F017 | AT-RAG-059.F017 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-018 | B:480؛ DocumentIdentity/Version.provenance_ref | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F018 | AT-RAG-059.F018 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+| AR-B-SCHEMA-019 | B:480؛ DocumentIdentity/Version.extraction_quality | حداقل فیلد قرارداد مفهومی مصوب؛ type/wire/migration نیازمند طراحی | Adviser / ADV-US-05؛ دسترسی منبع ADV-US-07 | ADV-RAG-059.F019 | AT-RAG-059.F019 | اعتبارسنجی فیلد و گیت انتشار طراحی؛ اجرا نشده، NOT VERIFIED |
+
+**نقطه ادامه:** تفکیک فیلدهای EvidenceUnit/ChunkRepresentation/LegalRelation/ClaimEvidenceLink/Snapshot/Trace/SourceLifecycle/Job از B:481–488 و آزمون وابستگی دوطرفه با Core.
+
 ## آمار ثبت‌شده
 
 - واحدهای ممیزی اولیه: 1957
