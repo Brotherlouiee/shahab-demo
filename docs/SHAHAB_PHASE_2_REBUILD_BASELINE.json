@@ -1,0 +1,44 @@
+{
+  "schema": "SHAHAB-PHASE2-G1-REBUILD-1",
+  "source_ref": "GitHub main SHA 88e52020492fd6fcf72c11393ec3d47fb3a7c6e7",
+  "method": "Every nonempty physical line obtained by UTF-8 splitting on newline; syntax hints are NOT semantic verification.",
+  "sources": {
+    "B": {
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "blob": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "physical_lines": 2551,
+      "nonempty": 1842,
+      "headings": 196,
+      "headings_by_level": {
+        "1": 1,
+        "2": 11,
+        "3": 102,
+        "4": 40,
+        "5": 42
+      },
+      "table_groups": 45,
+      "mermaid_diagrams": 26
+    },
+    "W": {
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "blob": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "physical_lines": 1780,
+      "nonempty": 964,
+      "headings": 130,
+      "headings_by_level": {
+        "1": 1,
+        "2": 14,
+        "3": 50,
+        "4": 65
+      },
+      "table_groups": 25,
+      "mermaid_diagrams": 0
+    }
+  },
+  "total_nonempty_line_units": 2806,
+  "prior_claim_5258": "NOT_REPRODUCED",
+  "atomic_requirements_verified": null,
+  "classification_status": "ALL_NOT_EXAMINED",
+  "exclusions": 0,
+  "origin": "re-extracted directly from SHA-locked canonical documents, not from PR247"
+}
