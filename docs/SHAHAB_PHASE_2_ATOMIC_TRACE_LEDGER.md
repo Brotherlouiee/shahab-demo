@@ -3476,6 +3476,29 @@ Core مالک قرارداد نوع‌دار و validation است؛ هر سرو�
 
 **نقطه ادامه:** B:483–488 روابط، پیوند ادعا، Snapshot، trace، lifecycle و Job؛ سپس ممیزی تمام خطوط باقیمانده.
 
+
+### ۱۵ جزء مستقل رابطه حقوقی و پشتیبانی ادعا — B:483–484
+
+هر جزء به شرط رد مخصوص خود در بخش ۱.۱۲.۱ ارجاع دارد. رابطه صرفاً نامزد و ادعای فاقد شواهد یا خارج از قلمرو نباید در خروجی Adviser قطعی شوند؛ معیارهای گیت نشر هنوز نیازمند اجرای آزمون‌اند.
+
+| شناسه اتم | مرجع | وضعیت | مالک | تسک | آزمون | وضعیت اجرا |
+|---|---|---|---|---|---|---|
+| AR-B-SCHEMA-039 | B:483؛ LegalRelation.relation_id | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F039 | AT-RAG-059.F039 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-040 | B:483؛ LegalRelation.source_document/version/provision_ref | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F040 | AT-RAG-059.F040 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-041 | B:483؛ LegalRelation.target_document/version/provision_ref | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F041 | AT-RAG-059.F041 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-042 | B:483؛ LegalRelation.relation_type | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F042 | AT-RAG-059.F042 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-043 | B:483؛ LegalRelation.evidence_id | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F043 | AT-RAG-059.F043 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-044 | B:483؛ LegalRelation.valid_from/to | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F044 | AT-RAG-059.F044 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-045 | B:483؛ LegalRelation.review_status | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F045 | AT-RAG-059.F045 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-046 | B:484؛ ClaimEvidenceLink.claim_id | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F046 | AT-RAG-059.F046 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-047 | B:484؛ ClaimEvidenceLink.evidence_id | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F047 | AT-RAG-059.F047 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-048 | B:484؛ ClaimEvidenceLink.support_type | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F048 | AT-RAG-059.F048 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-049 | B:484؛ ClaimEvidenceLink.entailment_status | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F049 | AT-RAG-059.F049 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-050 | B:484؛ ClaimEvidenceLink.verified_at | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F050 | AT-RAG-059.F050 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-051 | B:484؛ ClaimEvidenceLink.citation_snapshot_ref | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F051 | AT-RAG-059.F051 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-052 | B:484؛ ClaimEvidenceLink.sufficiency_status | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F052 | AT-RAG-059.F052 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+| AR-B-SCHEMA-053 | B:484؛ ClaimEvidenceLink.uncertainty_reasons | حداقل فیلد مرجع؛ تأیید نسخه/شواهد لازم | Adviser / ADV-US-05/06 | ADV-RAG-059.F053 | AT-RAG-059.F053 | متن و آزمون طراحی شد؛ اجرا نشده؛ NOT VERIFIED |
+
 ## آمار ثبت‌شده
 
 - واحدهای ممیزی اولیه: 1957
