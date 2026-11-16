@@ -182,13 +182,31 @@ def verify(repo: Path, strict: bool) -> dict:
             actual_refs = set(row[4].split("، "))
             if expected_refs != actual_refs:
                 fail(errors, f"Reverse trace source mismatch {task_id}")
-            if row[1] != items[0]["owner"] or row[2] != items[0]["story_id"]:
+            if row[1] != items[0]["owner"] or set(row[2].split("، ")) != {x["story_id"] for x in items}:
                 fail(errors, f"Reverse trace owner/story mismatch {task_id}")
             if row[5] != items[0]["test_id"]:
                 fail(errors, f"Reverse trace test mismatch {task_id}")
         for task_id in reverse_rows:
             if task_id not in atom_by_task:
                 fail(errors, f"Reverse task without an atomic source {task_id}")
+
+    # Fail fast when a Story row absorbs a task row or the Core task table loses a task.
+    story_section = plan.split("### ۱.۲. User Storyهای استخراج‌شده و سناریوهای شکست", 1)[1].split("### ۱.۳. Core", 1)[0]
+    core_section = plan.split("### ۱.۳. Core", 1)[1].split("### ۱.۴. RAG", 1)[0]
+    for raw in story_section.splitlines():
+        if raw.startswith("|") and not raw.startswith("|---") and not raw.startswith("| Story "):
+            cols = [x.strip() for x in raw.strip("|").split("|")]
+            if len(cols) != 7 or not re.fullmatch(r"[CASX]-US-\d{2}", cols[0]):
+                fail(errors, f"Malformed story row: {raw[:100]}")
+    for raw in core_section.splitlines():
+        if raw.startswith("|") and not raw.startswith("|---") and not raw.startswith("| تسک "):
+            cols = [x.strip() for x in raw.strip("|").split("|")]
+            if len(cols) != 10 or not re.fullmatch(r"C-[A-Z]+-\d{2}", cols[0]):
+                fail(errors, f"Malformed Core task row: {raw[:100]}")
+    for atom in atom_rows:
+        if atom["task_id"].startswith("C-"):
+            if not re.search(r"^\| " + re.escape(atom["task_id"]) + r" \|", core_section, re.M):
+                fail(errors, f"Core task absent from Core task section: {atom['id']}")
 
     fenced = False
     table_columns: int | None = None
