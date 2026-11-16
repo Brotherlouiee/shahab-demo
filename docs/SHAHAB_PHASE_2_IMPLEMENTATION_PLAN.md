@@ -964,10 +964,10 @@
 - پاسخ مصوب: اختیاری، با مجوز صریح مشتری، سقف مبلغ و امکان لغو؛ فقط پس از تأیید پشتیبانی فنی و قراردادی ارائه‌دهنده فعال شود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-065.DB | AutoChargeConsent با user_id، wallet_id، max_amount، scope، version، expiry/revocation و provider_capability_evidence | CORE-W-065.DB.T01؛ قبولی/شکست: بدون مدرک پشتیبانی قراردادی/فنی provider هیچ mandate به حالت ACTIVE نرود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-065.BE | API فعال‌سازی opt-in با تأیید صریح و سقف؛ fail-closed provider-gate و اجرای قطع فوری مجوز | CORE-W-065.BE.T01؛ قبولی/شکست: revoked یا provider_unverified هر درخواست auto-charge جدید را رد کند؛ سقف بیش از consent پذیرفته نشود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-065.FE | نمای مجوز اختیاری و مبلغ سقف، وضعیت provider و دکمه لغو مستقل | CORE-W-065.FE.T01؛ قبولی/شکست: تا تأیید provider امکان فعال‌سازی روشن نمایش داده نشود؛ consent خاموش پیش‌فرض باشد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-065.QA | contract tests از consent absent/revoked، provider unsupported، سقف و تکرار callback | CORE-W-065.QA.T01؛ قبولی/شکست: بدون explicit consent و provider evidence charge count=۰؛ تکرار schedule یک charge_request داشته باشد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-065.DB | AutoChargeConsent با scope، max_amount، expiry/revoked و provider_capability_verified | CORE-W-065.DB.T01: بدون consent فعال و provider_verified، job_autocharge فعال نشود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-065.BE | شروع فقط پس از اجازه صریح + تأیید فنی/قراردادی ارائه‌دهنده؛ بدون مجوز شارژ صفر | CORE-W-065.BE.T01: با provider_supported=false هیچ debit بانکی حتی پس از consent کاربر ایجاد نشود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-065.FE | کنترل روشن/خاموش و سقف شارژ خودکار با اعلام وابستگی ارائه‌دهنده | CORE-W-065.FE.T01: گزینه فعال‌سازی در provider نامجاز در UI وضعیت غیرقابل فعال نشان دهد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-065.QA | تست provider غیرمجاز، consent لغوشده، retry و سقف مبلغ | CORE-W-065.QA.T01: همزمان revocation و اجرای Job، درخواست پس از لغو وارد بانک نشود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-066 — ۶.۷.۲. محرک و مبلغ شارژ خودکار
 **مرجع:** کیف پول ۶.۷.۲، خط 1097؛ **مالک:** CORE-US-40.
@@ -977,10 +977,10 @@
 - ارتباط با بخش‌های دیگر: عددهای تنظیمات، تعریف دوره و کنترل هم‌زمانی باید در طراحی اجرایی مشخص شوند؛ حداقل و سقف مصوب شارژ تغییر نمی‌کنند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-066.DB | AutoChargePolicy شامل threshold، fixed_topup_amount، period_cap، period_definition و pending_capacity جدا از سقف عمومی شارژ | CORE-W-066.DB.T01؛ قبولی/شکست: آستانه، مبلغ شارژ و سقف دوره به‌صورت مستقل persist شوند؛ مقادیر فاقد تصویب پیش‌فرض ساختگی نگیرند؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-066.BE | scheduler پس از عبور از threshold فقط مبلغ ثابت تحت سقف مجوز/دوره و سقف ۲۴ساعته شارژ، با احتساب pending رزرو کند | CORE-W-066.BE.T01؛ قبولی/شکست: در مانده بالای threshold شارژ صفر؛ pending قبلی مصرف ظرفیت دوره، retry یک charge_request؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-066.FE | نمای تنظیم سه پارامتر با اعلام سقف عمومی شارژ و وضعیت pending؛ اعداد قاعده ثابت به‌جای انتخاب مشتری درج نشود | CORE-W-066.FE.T01؛ قبولی/شکست: اگر fixed amount از سقف remaining بیشتر است، قبل تلاش به درگاه خطای کافی‌نبودن ظرفیت نشان دهد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-066.QA | آزمون crossing-threshold، limit دوره، pending و دو scheduler هم‌زمان | CORE-W-066.QA.T01؛ قبولی/شکست: در fixture cap=۱۰۰، pending=۸۰، topup=۳۰، شارژ جدید صفر؛ بعد release pending=۸۰، ۳۰ مجاز؛ بدون double charge؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-066.DB | AutoChargePolicy شامل threshold،fixed_amount،period_limit و pending_total با کلید حساب/دوره | CORE-W-066.DB.T01: سقف ۲۴ ساعت W034 مستقل از سقف دوره autocharge ذخیره شود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-066.BE | هنگام عبور موجودی از threshold فقط مبلغ ثابت در سقف دوره و ۲۴ساعت شناور با احتساب pending درخواست شود | CORE-W-066.BE.T01: threshold=۱۰۰ و balance=۹۰، fixed_amount=۳۰، با pending همان policy درخواست همزمان دوم شارژ جدید نسازد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-066.FE | نمای محرک شارژ و مبلغ ثابت و مصرف سقف دوره؛ عددهای کاربر و وضعیت pending | CORE-W-066.FE.T01: کاربر مبلغ ثابت ۳۰ و سقف دوره را قبل consent ببیند؛ عدد مثال تنظیم محصول قطعی نباشد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-066.QA | تست دو trigger همزمان، pending اشغال ظرفیت، failed آزادسازی و حداقل شارژ | CORE-W-066.QA.T01: دو trigger روی یک وضعیت فقط یک درخواست pending بسازند؛ بعد fail قطعی امکان اقدام جدید مطابق سیاست باشد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-067 — ۶.۷.۳. پرداخت دوره‌ای از کیف پول
 **مرجع:** کیف پول ۶.۷.۳، خط 1109؛ **مالک:** CORE-US-40.
@@ -989,10 +989,10 @@
 - ارتباط با بخش‌های دیگر: حقوق اجزای اعتبار و تعرفهٔ داینامیک بخش ۹ و موجودی آزاد باید رعایت شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-067.DB | RecurringWalletOrder با service_id،schedule،per_cycle_cap،payer_wallet،contract_version و next_due/attempt_id | CORE-W-067.DB.T01؛ قبولی/شکست: پرداخت دوره‌ای مختص خدمت ثبت‌شده با سقف هر نوبت باشد؛ تغییر نسخه نرخ بدون reconsent خارج scope رد شود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-067.BE | Job idempotent برای اجرای هزینه از کیف در سررسید؛ الزام رضایت تازه برای بیش از سقف و کنترل gift/cash/available | CORE-W-067.BE.T01؛ قبولی/شکست: در دوره با cap=۱۰۰ و هزینه=۱۲۰ هیچ debit قبل تأیید جدید رخ ندهد؛ کمبود اعتبار credit منفی نسازد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-067.FE | نمای تقویم پرداخت، سقف هر نوبت، خدمت و تاریخچه؛ امکان تأیید افزایش خارج از مجوز | CORE-W-067.FE.T01؛ قبولی/شکست: در هزینه ۱۲۰ و cap ۱۰۰، CTA «نیازمند تأیید» به جای خودکارپرداخت نمایش دهد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-067.QA | آزمون سررسید تکراری، افزایش تعرفه، مجوز لغوشده، عدم کفایت مانده و محدودیت lot | CORE-W-067.QA.T01؛ قبولی/شکست: در یک دوره فقط یک debit، با مبلغ >cap صفر تا تأیید جدید، gift نامجاز مصرف نشود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-067.DB | RecurringPaymentAuthorization با service_id، schedule، max_per_run، rate_version و status | CORE-W-067.DB.T01: schedule برای هر service_id یکتا و consent-version ثبت شود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-067.BE | برای هر نوبت همان خدمت و سقف مصوب کنترل شود؛ افزایش خارج از سقف بدون رضایت جدید رد؛ موجودی آزاد و lot حقوق رعایت | CORE-W-067.BE.T01: نوبت با هزینه ۱۱۰ در cap=۱۰۰ بدون تأیید تازه debit=۰؛ با cap=۱۰۰ و هزینه=۹۰ اجرا مطابق موجودی آزاد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-067.FE | نمای خدمت مشخص، تقویم، سقف هر نوبت، مبلغ واقعی و درخواست تایید افزایش | CORE-W-067.FE.T01: کاربر تغییر نرخ به ۱۱۰ را قبل اجرای دوره‌ای ببیند و بدون مجوز جدید پرداخت نکند؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-067.QA | تست نوبت تکراری، نرخ متغیر، کمبود اعتبار و افزایش خارج سقف | CORE-W-067.QA.T01: retry یک نوبت دوره‌ای دو debit نسازد؛ هدیه نامجاز در پرداخت دوره‌ای مصرف نشود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-068 — ۶.۷.۴. لغو مجوز
 **مرجع:** کیف پول ۶.۷.۴، خط 1121؛ **مالک:** CORE-US-11.
@@ -1001,10 +1001,10 @@
 - پاسخ مصوب: برای نوبت‌های بعد فوری باشد؛ عملیات در جریان فقط در صورت امکان توقف امن متوقف شود. وضعیت و تعهد قبلی پیگیری و ثبت شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-068.DB | RevocationEvent با effective_at و scope و linked_inflight_operations؛ تاریخچه عملیات قبلی immutable | CORE-W-068.DB.T01؛ قبولی/شکست: پس از revocation هیچ سررسید جدید صادر نشود و عملیات قبلی حذف نشود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-068.BE | Core Consent API لغو را برای نوبت آینده فوری مؤثر کند؛ عملیات در جریان را فقط در توقف امن متوقف و تعهد قبلی را بازیابی کند | CORE-W-068.BE.T01؛ قبولی/شکست: cancel پس از settled نباید اثر مالی را پاک کند؛ race لغو و scheduler نباید new-charge پس از لغو بسازد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-068.FE | نمای مؤثرشدن لغو در نوبت بعد و وضعیت عملیات در جریان؛ عدم ادعای لغو قطعی پرداخت پردازش‌شده | CORE-W-068.FE.T01؛ قبولی/شکست: برای پرداخت already-submitted پیام «لغو در جریان» و نتیجه نیازمند پیگیری نشان دهد، نه refund خودکار؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-068.QA | آزمون race بین revoke و schedule، پرداخت pending و settled و restore after restart | CORE-W-068.QA.T01؛ قبولی/شکست: هر job بعد effective_at با consent revoked رد؛ ledger historical ثابت و عملیات قبلی resolve؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-068.DB | RevocationEvent نسخه‌دار با effective_at و پیوند به pending operations؛ عدم حذف تاریخچه | CORE-W-068.DB.T01: در revocation، گذشته posted حذف نشود و consent فعال false شود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-068.BE | لغو مجوز مانع نوبت‌های بعد شود؛ عملیات در جریان در نقطه امن متوقف/تعیین تکلیف؛ قطعی گذشته حفظ | CORE-W-068.BE.T01: بعد revoke، job جدید reject؛ عملیات submitted همچنان پیگیری تا نتیجه معتبر شود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-068.FE | دکمه لغو فوری و نمایش وضعیت عملیات در جریان/قطعی گذشته بدون حذف رسید | CORE-W-068.FE.T01: بعد لغو، نوبت آینده «فعال» نمایش داده نشود؛ pending با شناسه پیگیری باقی بماند؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-068.QA | تست لغو قبل trigger، بعد ارسال بانکی، callback دیررس و worker restart | CORE-W-068.QA.T01: callback بعد revoke نباید دوباره هزینه یا شارژ تازه بسازد؛ رکورد posted قبلی محفوظ؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-069 — ۶.۷.۵. شکست و کمبود اعتبار
 **مرجع:** کیف پول ۶.۷.۵، خط 1133؛ **مالک:** CORE-US-40.
@@ -1012,10 +1012,10 @@
 - پاسخ مصوب: در نسخهٔ اولِ ارائهٔ قابلیت، پس از شکست قطعی اعلان و همان نوبت متوقف شود؛ تکرار با اقدام مشتری باشد. در کمبود اعتبار، هزینهٔ بدون پشتوانه ایجاد نشود. نتیجهٔ نامعلوم ابتدا بررسی شود و شکست قطعی فرض نشود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-069.DB | RecurringAttempt با status definite_failed/unknown/succeeded و customer_retry_authorization؛ شناسه نوبت یکتا | CORE-W-069.DB.T01؛ قبولی/شکست: unknown و definite failure در یک state ادغام نشوند؛ failed auto-new-attempt نسازد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-069.BE | پس از شکست قطعی اعلان و توقف همان نوبت؛ شروع مجدد با اقدام مشتری؛ unknown ابتدا استعلام، کمبود مانده بدون کسر | CORE-W-069.BE.T01؛ قبولی/شکست: با definite failed، scheduler retry در نوبت جدید بدون action مشتری صفر؛ در unknown settlement inquiry قبل از retry؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-069.FE | اعلان شکست قطعی با مسیر اقدام کاربر و نمایش «در حال بررسی» در unknown؛ عدم وعده پرداخت موفق | CORE-W-069.FE.T01؛ قبولی/شکست: در unknown نباید دکمه تکرار قطعی با احتمال دوباره‌پرداخت ارائه شود؛ insufficient balance error روشن باشد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-069.QA | آزمون failed/unknown، قطع provider، شارژ تکراری و recovery بعد restart | CORE-W-069.QA.T01؛ قبولی/شکست: در definite_failed اعلان ۱ و charge جدید ۰؛ در unknown inquiry حداقل ۱ و payment جدید ۰ تا تأیید؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-069.DB | RecurringAttempt شامل status unknown/failed/confirmed و retry_requires_user، insufficient_funds reason | CORE-W-069.DB.T01: در insufficient_funds هیچ journal debit یا مانده منفی ایجاد نشود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-069.BE | در شکست قطعی اعلان و توقف همان نوبت؛ retry صرفاً اقدام صریح مشتری؛ unknown قبل تصمیم استعلام شود؛ بدهی منفی ممنوع | CORE-W-069.BE.T01: unknown به failed قطعی تبدیل نشود؛ بعد failed همان نوبت automatic_retry=۰؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-069.FE | نمای شکست قطعی در برابر نتیجه نامعلوم و گزینه تلاش مجدد به انتخاب کاربر | CORE-W-069.FE.T01: کاربر پس از failed پیام و کنترل retry اختیاری ببیند، نه چرخه تکرار پنهانی؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-069.QA | تست کمبود اعتبار، timeout/unknown، شکست قطعی، retry خودکار ممنوع | CORE-W-069.QA.T01: دو پیام شکست یا دو کلیک retry فقط با idempotency یک اثر مالی داشته باشند؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-070 — ۶.۸. محدودیت مصرف
 **مرجع:** کیف پول ۶.۸، خط 1145؛ **مالک:** CORE-US-36.
@@ -1023,10 +1023,10 @@
 - پاسخ مصوب: ادمین بتواند سقف هر عملیات، روزانه و ماهانه را فعال یا غیرفعال کند؛ تعریف دوره و منطقهٔ زمانی مشخص باشد. همهٔ سقف‌های فعال هم‌زمان رعایت شوند. بودجهٔ عضو فقط مجوز مصرف است و پشتوانهٔ موجودی اختصاصی ندارد؛ ماندهٔ آزاد سازمان نیز کنترل شود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-070.DB | OrgMemberSpendLimitPolicy با per_operation,daily,monthly،timezone،period_usage و reservation_usage مستقل از wallet balance | CORE-W-070.DB.T01؛ قبولی/شکست: هر سه قید قابل روشن/خاموش و نسخه‌دار باشند؛ جمع pending و reserved در ظرفیت مجوز منظور شود؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-070.BE | کنترل اتمیک min(available org wallet, remaining member allowance, all enabled limits) قبل hold و capture | CORE-W-070.BE.T01؛ قبولی/شکست: عضو با daily cap ۱۰۰ و مصرف/رزرو ۸۰ برای هزینه جدید ۳۰ رد شود؛ اضافه‌شدن پول به کیف شخصی از allowance ممنوع؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-070.FE | پنل ادمین با سه سقف و timezone و نمایش تفکیک «مجوز مصرف» از دارایی؛ خطای حد مشخص | CORE-W-070.FE.T01؛ قبولی/شکست: کاهش سقف عضو در میانه کار اجازه افزایش رزرو ندهد؛ UI سقف روز را موجودی نقدی نشان ندهد؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-070.QA | آزمون مرز روز/ماه و منطقه زمانی، درخواست موازی، تغییر سقف و رد cross-org | CORE-W-070.QA.T01؛ قبولی/شکست: two concurrent holds نتوانند از daily/monthly/organisational balance عبور کنند؛ با cap خاموش فقط سایر قیود معتبر باقی بمانند؛ شاهد وضعیت/دفترکل، fixture و assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-070.DB | AllowanceLimitPolicy با per_operation/day/month جدا، timezone و period_start؛ عضو با org wallet لینک شود نه موجودی شخصی | CORE-W-070.DB.T01: برای عضو سقف روزانه=۱۰۰ و مصرف ۸۰، رزرو تازه ۳۰ رد؛ سقف غیرفعال به معنی موجودی نامحدود نیست؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-070.BE | قبل هر رزرو/capture سقف‌های فعال و موجودی آزاد سازمان همزمان بررسی و قفل شوند | CORE-W-070.BE.T01: درمانده آزاد سازمان=۲۰، حتی اگر مجوز عضو ۱۰۰ باشد رزرو ۳۰ رد؛ روز/ماه جدا رعایت شوند؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-070.FE | ادمین هر سه سقف را مستقل روشن/خاموش کند؛ عضو مانده مجاز خود را نه دارایی شخصی ببیند | CORE-W-070.FE.T01: ادمين سه سوییچ و منطقه زمانی ببیند؛ گزارش بودجه را «موجودی شخصی» ننویسد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-070.QA | تست روز/ماه مرزی، دو عضو، دو رزرو همزمان، لغو سقف و time-zone | CORE-W-070.QA.T01: رقابت دو رزرو ۸۰ در ظرفیت ۱۰۰ حداکثر یکی را بپذیرد؛ تغییر ساعت مرز دوره درست باشد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-071 — ۷.۱. پول و تعهدها در چه حساب‌هایی ثبت شوند؟
 **مرجع:** کیف پول ۷.۱، خط 1161؛ **مالک:** CORE-US-26.
@@ -1035,10 +1035,10 @@
 - ثبت مالی دوطرفه و متوازن باشد و هر تراکنش مرتبط به‌صورت اتمیک ثبت شود؛ یعنی همهٔ ورودی‌های آن ثبت شوند یا هیچ‌کدام. مدل دقیق بدهکار و بستانکار هدیه و نام نهایی حساب‌ها باید با مسئول حسابداری تکمیل شود؛ تصویب این گروه‌ها مجوز ثبت خودکار هدیه به‌عنوان درآمد نیست. فناوری یا خرید سرویس MT با این تصمیم انتخاب نشده است.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-071.DB | ریالی DoubleEntryLedger با سرفصل‌های وجه بانک/درراه، بدهی کیف، درآمد/کارمزد، تأمین‌کننده، هدیه و مغایرت؛ حساب مالک شخص/سازمان جدا | CORE-W-071.DB.T01؛ قبولی/رد: هر JournalEntry مجموع بدهکار=بستانکار و تمامی legs در یک transaction commit شود؛ حساب بانکی مستقل برای هر کیف الزام نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-071.BE | LedgerPosting API اتمیک با کنترل تراز و طبقه‌بندی هدیه به سیاست حسابداری تأییدنشده وابسته؛ فناوری ledger engine باز | CORE-W-071.BE.T01؛ قبولی/رد: اگر یک leg خطا دهد همه legs rollback؛ شارژ صرف یا gift grant به‌صورت خودکار revenue نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-071.FE | نمای خواندنی و محدود مانده حساب/تعهد برای حسابداری مجاز، بدون افشای حساب سایر سازمان‌ها | CORE-W-071.FE.T01؛ قبولی/رد: جمع حساب‌ها دقیقاً برابر JournalEntries و gift liability از revenue مستقل باشد؛ نقش نامجاز 403 بگیرد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-071.QA | آزمون transaction fault injection، تراز ریالی، منشأ هدیه و جداسازی مالکیت؛ گیت حسابداری | CORE-W-071.QA.T01؛ قبولی/رد: در credit نقدی و gift، Journal balanced و نه revenue phantom؛ انتخاب نام حساب بدهکار/بستانکار هدیه تا تأیید متخصص قطعی تلقی نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-071.DB | دفترکل مشترک ریالی با حساب‌های تفکیک‌شده بانک/درراه، بدهی کیف‌ها، درآمد، هزینه/تأمین‌کننده، هدیه و اختلاف؛ ثبت دوطرفه | CORE-W-071.DB.T01: هر entry عدد صحیح ریال و مجموع debit=credit باشد؛ یک کیف چند دفترکل مستقل نسازد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-071.BE | پردازش همه خطوط سند در تراکنش اتمیک و تراز بدهکار/بستانکار؛ schema حساب هدیه تا تصمیم حسابدار باز | CORE-W-071.BE.T01: خطا در ثبت یکی از ۴ entry یک journal همه ۴ را rollback کند؛ credit هدیه خودکار revenue نسازد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-071.FE | نمای حساب‌های مالی و تراز برای مسئول مجاز، بدون نمایش حساب هدیه به‌عنوان درآمد قطعی | CORE-W-071.FE.T01: کاربر معمولی حساب‌های عملیاتی شرکت را نبیند؛ اپراتور دارای مجوز بتواند عدم تراز را مشاهده کند؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-071.QA | تست تراز هر journal، شکست ثبت نیمه‌کاره، تفکیک حساب سازمان/شخص و گیت حسابداری هدیه | CORE-W-071.QA.T01: journal با یک leg حذف‌شده هیچ posted نامتوازن نداشته باشد؛ مانده کیف از دفترکل بازسازی شود؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-072 — ۷.۲. منشأ و حق مصرف هر جزء اعتبار چگونه نگهداری شود؟
 **مرجع:** کیف پول ۷.۲، خط 1177؛ **مالک:** CORE-US-26.
@@ -1049,10 +1049,10 @@
 - ارتباط با بخش‌های دیگر: ترتیب مصرف بخش ۵.۳، انتقال بخش ۶.۵ و بازگشت نسبتی بخش ۶.۶ از همین اجزا استفاده می‌کنند. رزرو بخش ۷.۶ باید اجزای مشخص را کنار بگذارد، نه فقط یک مبلغ کل را.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-072.DB | CreditLot جدول ساختاری با owner,origin,creation_event,parents,initial/remaining/reserved/consumed,cashout,expiry,service_scope,refund links | CORE-W-072.DB.T01؛ قبولی/رد: حسابی با ۲ lot نقد/هدیه مبلغ ۲۰/۳۰ باید منشأ و حقوق جدا ذخیره کند؛ free-text به تنهایی policy محسوب نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-072.BE | ثبت تغییر lots و ledger مالی در یک transaction پایگاه مشترک؛ در دو سیستم اجرای قرارداد بازیابی الزام گیت مستقل باشد | CORE-W-072.BE.T01؛ قبولی/رد: اگر ثبت ledger موفق و update lot شکست خورد، هر دو rollback؛ با سامانه جدا بدون saga/settlement قطعی انتشار ممنوع؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-072.FE | نمای منشأ و حق برداشت/انقضا هر lot در سطح دسترسی همان کیف، بدون تکیه به موجودی کلی | CORE-W-072.FE.T01؛ قبولی/رد: هدیه ۳۰ در کنار نقد ۲۰ حق برداشت ۳۰ ندهد؛ تغییر service_scope در UI بدون backend rejection معتبر نباشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-072.QA | property/invariant: جمع lots با ledger، rollback on failure، چندانتقال و رزرو lot مشخص | CORE-W-072.QA.T01؛ قبولی/رد: در fault وسط تراکنش، مانده ledger و lot ثابت بمانند؛ سهم رزرو فقط lotهای مجاز را محدود کند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-072.DB | CreditLot با owner/origin/lineage/initial/remaining/held/spent/withdrawable/expiry/scope/reversal و FK به ledger_event | CORE-W-072.DB.T01: lot باقی‌مانده + consumed + held با مبنای اولیه بعد احتساب اصلاح سازگار باشد؛ مقدار منفی رد؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-072.BE | یک تراکنش محلی ledger+lot update؛ در معماری دو سامانه گیت atomicity/recovery قبل انتشار الزامی | CORE-W-072.BE.T01: خطا بعد نوشتن ledger و قبل lot update هر دو را rollback کند؛ در دو سامانه بدون recovery تأییدشده انتشار blocked؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-072.FE | نمای تفکیک مانده با نوع منشأ و حق برداشت/انقضا؛ داده حساس میان کاربران نشت نکند | CORE-W-072.FE.T01: در هر مقدار قابل‌برداشت، فقط اجزای eligible نقد خود نمایش داده شوند؛ هدیه در cashout صفر؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
+| CORE-W-072.QA | تست partial hold/capture/refund، split/retransfer، failure وسط ثبت و بازسازی اجزا | CORE-W-072.QA.T01: بازسازی ledger و lot پس از restart برابر باشد؛ هیچ double debit در retry؛ شاهد: fixture/contract، assertion و شناسه عملیات؛ طراحی، اجرا نشده |
 
 #### CORE-W-073 — ۷.۲.۱. ردیابی کامل زنجیرهٔ اعتبار در طول زمان
 **مرجع:** کیف پول ۷.۲.۱، خط 1193؛ **مالک:** CORE-US-26.
