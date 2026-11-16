@@ -154,7 +154,7 @@
 | CORE-US-43.MAIN | حسابداری تعهد مشتری، درآمد و بدهی تأمین‌کننده بساز | تسویه تأمین‌کننده کسر دوم مشتری نسازد |
 | CORE-US-44.MAIN | داشبورد عملیات مالی، مغایرت، Job و هشدار بساز | اپراتور مجاز بتواند وضعیت نامعلوم را پیگیری کند |
 | CORE-US-45.MAIN | تست property-based دفترکل، قرارداد، E2E، بار و fault injection بساز | گیت‌ها تکرار، رقابت و خرابی را کشف کنند |
-| CORE-US-46.MAIN | Pipeline CI/CD، migration، rollback و restore را تست کن | استقرار قابل بازگشت و بازیابی قابل تکرار باشد |
+| CORE-US-46.MAIN | Pipeline CI/CD و manifest نسخه انتشار با tag، commit SHA، image digest و migration version؛ rollback/restore در محیط ایزوله، تفکیک مبنای نرم‌افزار `v.1.08` از نسخه سند V1.6 و تاریخچه `v0.1.8`؛ کنترل منبع فعلی در برابر متن تاریخی | CORE-US-46.MAIN.T01: برای manifest دارای tag=v.1.08، SHA و digest تطبیق مستقل، گزارش PASS فقط پس از تطبیق واقعی؛ tag قدیمی یا digest ناسازگار FAIL و انتشار BLOCKED؛ CORE-US-46.MAIN.T02: migration نیمه‌تمام و rollback با fixture موجودی/پرونده، مانده و سوابق را بدون حذف بازیابی کند؛ PR پیشنهادی قدیمی baseline ادغام‌شده فرض نشود؛ شواهد workflow و artifact نسخه‌دار لازم؛ آزمون طراحی، اجرا نشده |
 
 ### ۱.۳. دامنه کیف پول: بسته‌های مستقل و معیار پذیرش
 
