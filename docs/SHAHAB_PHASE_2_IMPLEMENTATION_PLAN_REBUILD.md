@@ -17,7 +17,9 @@
 
 | Story | بازیگر | هدف | سناریوی اصلی | شکست یا استثنای قابل بازبینی | مرجع | تسک |
 |---|---|---|---|---|---|---|
-| C-US-03 | کاربر حقیقی | احراز شخص با OTP و شاهکار | موجب فراهم‌شدن سازوکار اعتبارسنجی شماره و کد ملی با وضعیت معتبر/نامعلوم، بدون فرض صحت از پیامک صرف | OTP موفق اما شماره به فرد دیگر تعلق دارد؛ فعال‌شدن حساب مردود است | W:168 | C-ID-01 |
+| C-US-03 | کاربر حقیقی | احراز شخص با OTP و شاهکار | موجب فراهم‌شدن سازوکار اعتبارسنجی شماره و کد ملی با وضعیت معتبر/نامعلوم، بدون فرض صحت از پیامک صرف | OTP موفق اما شماره به فرد دیگر تعلق دارد؛ فعال‌شدن حساب مردود است | W:168 | C-ARC-01 | C-US-27 | B:20، B:24 | آزمون معماری ممنوعیت وابستگی دوری و دسترسی مستقیم از Adviser/Assistant به داده Core؛ استقلال ماژول‌های Identity/Catalog/Wallet/Plan/Recommendation | با fixture import خطا، آزمون architecture fail شود؛ Core module owner تنها از API نسخه‌دار خوانده شود | مصرف جدول Wallet از Adviser یا مالکیت مشترک بدون قرارداد | T-C-ARC-01 | — | مصوبه A01/A02، بدون فرض جداشدن فیزیکی DB | طراحی؛ اجرا نشده |
+| C-CFG-01 | C-US-28 | B:25 | Schema نوع‌دار و نسخه‌دار برای config عملیاتی، secret، feature flag و policy؛ migration و audit هر تغییر | کلید ناشناخته/secret در log رد؛ تغییر هزینه بدون approval policy رد؛ rollback نسخه‌دار با actor | تغییر مالی از طریق خاموش/روشن‌کردن flag عمومی | T-C-CFG-01 | C-ARC-01 | انتخاب تکنولوژی مستقل config مصوب نیست | طراحی؛ اجرا نشده |
+| C-ID-01 |
 | C-US-01 | شخص و سازمان | کیف اصلی شخص و سازمان | موجب فراهم‌شدن مدل مالکیت یکتای شخص/سازمان و ایجاد idempotent پس از احراز مناسب، با رابطه immutable مالک | دو کیف شخصی اصلی یا انتقال مالکیت سازمان به کارمند | W:136 | C-ACC-01 |
 | C-US-02 | نماینده مجاز سازمان | فعال‌سازی مالی سازمان | موجب فراهم‌شدن فرایند قرارداد رسمی محضری، شواهد هویت، مالک واقعی، سمت و اختیار؛ حالت inactive/verified/active | سازمان بدون تأیید قرارداد بتواند کیف را شارژ کند | W:156 | C-ORG-01 |
 | C-US-04 | کارمند و ادمین سازمان | عضویت چندسازمانی و دعوت | موجب فراهم‌شدن مدل مستقل Invitation/Membership با پذیرش صریح، revocation، حقوق رسید عضو سابق و جداسازی org | عضویت از بارگذاری صرف؛ نشت رسید org دیگر | W:180، W:196، W:208 | C-ORG-02 |
@@ -61,6 +63,12 @@
 | S-US-09 | متقاضی ضمانت‌نامه | پرونده ضمانت‌نامه با شواهد معتبر | موجب فراهم‌شدن گردش‌کار انتخاب حوزه→گزینه معتبر CAT/RAG→انتخاب مشتری→مجوز→Computer Use→رسید؛ matcher اختیاری | پیشنهاد حدسی یا submit بدون تأیید نهایی | B:1639، B:1645، B:1647 | S-JRN-01 |
 | S-US-06 | مشتری و اپراتور | Feedback و Feedforward دارای شواهد | موجب فراهم‌شدن event candidate→policy/entitlement/consent/evidence→dedup→alert؛ عدم اجازه اجرای عملیات از رویداد | پایش بی‌اجازه یا اعلان تکراری ناموجه | B:1684، B:944 | S-FF-01 |
 
+| C-US-27 | معمار Core | مرزبندی ماژول‌های Core و استقلال مالکیت داده | طراحی و تست قواعد وابستگی ماژولار، جداسازی مدل مالکیت، اعتبارسنجی import و API داخلی | دسترسی Adviser به جداول خصوصی Core یا چرخه import | B:20، B:24 | C-ARC-01 |
+| C-US-28 | مالک پیکربندی Core | تفکیک تنظیمات، اسرار، پرچم و سیاست مالی | تعریف Schema نوع‌دار، اعتبارسنجی، نسخه، audit و تفکیک محرمانگی | feature flag جایگزین مصوبه هزینه یا secret در config عمومی شود | B:25 | C-CFG-01 |
+| X-US-01 | مالک قرارداد و تیم‌های مصرف‌کننده | سازگاری نسخه‌ای API Core/Adviser/Assistant | producer schema پیش از تغییر، consumer contract و migration Expand/Migrate/Contract | قرارداد ناسازگار در انتشار بدون گیت مصرف‌کننده | B:24-25 | X-CTR-06 |
+| X-US-02 | مسئول تاب‌آوری و مالک هر سرویس | اجرای ایمن و جداسازی ظرفیت تعامل/پس‌زمینه | Job پایدار، Timeout Budget، Retry محدود، Circuit Breaker، Bulkhead و بازیابی | timeout تراکنش به submit دوم یا ازدحام OCR به قطع Adviser منجر شود | B:25 | X-REL-01 |
+| X-US-03 | مسئول مشاهده‌پذیری و SRE | صحت مالی و هشدار وابسته به اثر کاربر | OpenTelemetry، baseline SLO، trace همبسته و Incident، ارزیابی مشروط SigNoz | نصب روی VM تولید بدون ظرفیت یا ذخیره OTP در trace | B:24-25 | X-OBS-01 |
+| X-US-04 | مالک انتشار فاز دوم | حفظ دامنه مصوب R1 و گیت تصمیم | انتشار فقط Core+Adviser؛ Assistant طراحی قرارداد و غیرفعال؛ گیت شواهد/ظرفیت/نسخه | Assistant بدون مجوز در R1 مستقر شود یا سه VM اجباری تلقی شود | B:7، B:12، B:18-24 | X-R1-01 |
 | C-US-23 | مسئول مالی و توسعه‌دهنده | سازمان‌دهی دفترکل و lineage عملیاتی | حساب‌های بانکی/تعهد/درآمد/تأمین‌کننده/هدیه و journal متوازن؛ credit lot lineage و سه چرخه وضعیت مستقل؛ idempotency هر اقدام | journal ناتراز، حذف پیوند واسط یا دو debit از یک موجودی | W:1167، W:1169، W:1183، W:1199، W:1211، W:1227، W:1241، W:1257، W:1271 | C-LED-02 |
 | C-US-24 | مسئول عملیات مالی | تطبیق، رسیدگی اختلاف و نتیجه نامعلوم | تطبیق حداقل روزانه با cutoff/tz مشخص، پرونده مغایرت دارای مالک و عامل، inquiry/جبران وابسته به عملیات اولیه | تطبیق غیرروزانه بدون گیت، تغییر مستقیم دفترکل، payout مجدد قبل inquiry | W:1289، W:1303، W:1369 | C-REC-02 |
 | C-US-25 | مسئول امنیت و مالی | امنیت مالی و نگهداری دائمی سوابق | reauth تغییر بانکی/ادمین/برداشت، نگهداری دائمی lineage مالی، حذف راز و OTP از audit، هشدار امنیتی/پوشش، اتصال رویه انطباق موجود | حذف رخداد بعد ۲۰ سال یا استفاده از نشست قدیمی برای تغییر حساب | W:1317، W:1331، W:1343، W:1355 | C-SEC-02 |
@@ -142,6 +150,10 @@
 | X-CTR-05 | توصیه وام | Core: C-RCMD-01/C-CAT-01 | Adviser: A-RET-01؛ Assistant: S-REC-01 | B:1631, B:1633 | API timeout بدون پیشنهاد ساختگی؛ نسخه کاتالوگ و قاعده در پاسخ؛ Adviser داده Core را مستقیم نخواند | گیت قرارداد API |
 | X-E2E-01 | ضمانت‌نامه | Core: C-CAT-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-JRN-01/S-CU-01 | B:1637-1655 | بدون موتور matcher رتبه قطعی تولید نشود؛ submit نهایی بدون تأیید متصل به مبلغ/ذی‌نفع صفر؛ شماره پیگیری قابل بازسازی | گیت خدمت منتخب و مجوز بانک |
 | X-E2E-02 | نتیجه نامعلوم و لغو | Core: C-HLD-01/C-REF-01 | Assistant: S-WFL-01/S-SEC-01 | W:801, W:815, B:918, B:1694 | پس cancel/timeout هزینه تازه صفر؛ hold تعهد unknown تا inquiry حفظ؛ retry external idempotent | گیت بازیابی |
+| X-CTR-06 | قرارداد APIهای سه‌سرویس و مهاجرت سازگار (X-US-01) | مالک هر API تولیدکننده؛ تیم قرارداد و QA پاسخ‌گو برای سازگاری | Core/Adviser/Assistant مصرف‌کنندگان نسخه‌دار | B:24-25 | T-X-CTR-06: تغییر breaking بدون نسخه جدید/consumer tests در CI fail؛ مسیر Expand→Migrate→Contract نسخه قدیم را تا مهاجرت حفظ کند؛ direct DB access رد | گیت A02/A07 |
+| X-REL-01 | قرارداد تاب‌آوری و Jobهای بین‌سرویسی (X-US-02) | مالک Job در سرویس مولد؛ SRE/QA آزمون مشترک | مصرف‌کنندگان با timeout/retry محدود و fallback | B:25 | T-X-REL-01: restart job durable state را حفظ کند؛ retry اثر مالی دوگانه صفر؛ backpressure پس‌زمینه SLO تعاملی را نشکند؛ outage پاسخ قطعی نسازد | گیت A03/A06 |
+| X-OBS-01 | استاندارد ردیابی OTel و کنترل SLI/Incident (X-US-03) | Platform/SRE مالک قرارداد Telemetry؛ هر سرویس مالک رخداد خودش | Core/Adviser/Assistant مصرف‌کننده استاندارد | B:24-25 | T-X-OBS-01: trace همبسته و baseline واقعی؛ هیچ متن محرمانه/OTP؛ هشدار ledger discrepancy؛ نصب SigNoz self-hosted روی VM تولید ممنوع | گیت A09 و capacity evidence |
+| X-R1-01 | گیت معماری، زیرساخت و انتشار R1 (X-US-04) | مالک انتشار/محصول؛ هر سرویس مالک شواهد خودش | Core+Adviser فعال؛ Assistant فقط قرارداد/مرز | B:7، B:12، B:14، B:18-25 | T-X-R1-01: manifest R1 بدون Assistant فعال، tag/commit/digest تطبیق، Release Plan مصوب؛ استقرار/فناوری/VM تازه بدون ظرفیت و مجوز رد | گیت انتشار مستقل R1 |
 | X-E2E-03 | پیش‌آگاهی | Core: C-PLN-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-FF-01 | B:942-970, B:1684 | رویداد بدون consent فقط candidate؛ alert duplicate حذف و هیچ پرداختی از هشدار مجاز نشود | گیت D02/D03 |
 
 ### ۱.۷. ملاک تکمیل واقعی هر تسک و قاعده تفکیک
@@ -469,6 +481,60 @@ flowchart LR
 | P2-W-1529-01 | W:1529 | فیلتر نوع، وضعیت و زمان | APPROVED_EXPLICIT | CORE/C-US-26 | C-UX-01 | T-C-UX-01 | history filter and receipt include amount/time/status/tracking, org isolation | member sees colleague receipt | DESIGN_PENDING |
 | P2-W-1541-01 | W:1541 | رویدادهای مالی اعلان درون‌برنامه داشته باشند | APPROVED_EXPLICIT | CORE/C-US-26 | C-UX-01 | T-C-UX-01 | money events in-app; urgent security SMS; reminders opt configurable | silent urgent security event | DESIGN_PENDING |
 
+| P2-B-7-01 | B:7 | جزئیات اجرایی، شواهد، آستانه‌های عددی، بودجه و مجوز هر انتشار نیازمند اعتبارسنجی و تصویب مستقل‌اند | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | گیت نشر فقط پس شواهد/تصویب همان نسخه pass شود | اعلام Go خودکار از روی متن معماری | DESIGN_PENDING |
+| P2-B-12-01 | B:12 | برای تأیید تطابق tag، commit و digestهای محیط عملیاتی باید شواهد مستقل جمع‌آوری شود | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | پیش از R1 تطبیق tag/commit/digest محیط ثبت و مقایسه شود | استناد به نام نسخه بدون digest | DESIGN_PENDING |
+| P2-B-14-01 | B:14 | تصمیم‌های مصوب محصول و معماری فقط با تأیید مالک قابل تغییرند | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | تغییر ADR یا قاعده محصول بدون شناسه تصویب مالک مسدود شود | پذیرش خودکار تصمیم باز در release | DESIGN_PENDING |
+| P2-B-18-01 | B:18 | بدون مجوز اجرای کد، انتشار یا تغییر زیرساخت | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | وجود تصویب معماری به‌تنهایی اجازه deployment یا provisioning ایجاد نکند | استقرار Assistant به استناد A01 بدون گیت | DESIGN_PENDING |
+| P2-B-20-01 | B:20 | مونولیت ماژولار با مرزهای داخلی روشن | APPROVED_EXPLICIT | CORE/C-US-27 | C-ARC-01 | T-C-ARC-01 | تست dependency rule واردکردن مستقیم Wallet از ماژول Recommendation را رد کند | وابستگی دوری Identity/Wallet | DESIGN_PENDING |
+| P2-B-21-01 | B:21 | سرویس مستقل مشاور هوشمند و RAG با چرخه استقرار مستقل از Core | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | Adviser بتواند با قرارداد نسخه‌دار مستقل از Core deploy/rollback شود | انتشار Adviser مستلزم merge کد Core بدون تغییر قرارداد | DESIGN_PENDING |
+| P2-B-22-01 | B:22 | در انتشار RAG R1 فقط مرزها و قراردادهای آن طراحی می‌شوند و خود سرویس پیاده‌سازی یا مستقر نمی‌شود | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | manifest انتشار R1 هیچ deployment فعال Assistant نداشته باشد | فعال‌شدن Computer Use در R1 | DESIGN_PENDING |
+| P2-B-23-01 | B:23 | فقط Core و Adviser واحدهای استقرار فعال این انتشارند | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | inventory استقرار R1 تنها Core و Adviser را فعال ثبت کند | Assistant در مسیر production فعال باشد | DESIGN_PENDING |
+| P2-B-23-02 | B:23 | جزئیات Release Plan همچنان نیازمند تصویب مستقل است | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | بدون تأیید release plan و artifact شواهد، مرحله Go=BLOCKED باشد | فرض تاریخ/بودجه قطعی از معماری | DESIGN_PENDING |
+| P2-B-24-01 | B:24 | VM فعلی و زیرساخت PostgreSQL/Redis موجود مبنا هستند | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | طرح R1 از منابع موجود شروع کند و گسترش نیازمند capacity evidence باشد | سه VM اجباری بدون آزمون | DESIGN_PENDING |
+| P2-B-24-02 | B:24 | سه سرویس به معنی الزام به سه VM یا سه نمونه مستقل PostgreSQL نیست | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | پیکربندی یک VM با مالکیت منطقی مستقل در امکان‌سنجی رد نشود | ساخت اجباری سه DB فیزیکی | DESIGN_PENDING |
+| P2-B-24-03 | B:24 | تفکیک منطقی مالکیت داده ضروری است | APPROVED_EXPLICIT | CORE/C-US-27 | C-ARC-01 | T-C-ARC-01 | تست contract دسترسی مستقیم سرویس به جدول خصوصی دیگری را رد کند | خواندن DB Wallet از Adviser | DESIGN_PENDING |
+| P2-B-24-04 | B:24 | تفکیک فیزیکی با شواهد امنیت، ظرفیت یا تاب‌آوری و تصویب جداگانه انجام می‌شود | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | درخواست DB/VM جدید بدون capacity/security evidence و تأیید release مسدود شود | خرید خودکار زیرساخت از روی diagram | DESIGN_PENDING |
+| P2-B-24-05 | B:24 | مشاهده‌پذیری استاندارد OpenTelemetry الزام معماری است | APPROVED_EXPLICIT | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | برای هر سرویس trace/span استاندارد OTel قابل همبستگی باشد | گزارش بدون correlation ID | DESIGN_PENDING |
+| P2-B-24-06 | B:24 | SigNoz گزینه منتخب برای ارزیابی مشروط Cloud/Self-hosted است | CONDITIONAL | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | ارزیابی Cloud/Self-hosted ثبت شود و نصب را شرط همیشگی نکند | معرفی SigNoz به‌عنوان استقرار تصویب‌شده | DESIGN_PENDING |
+| P2-B-24-07 | B:24 | استقرار Self-hosted روی VM تولید فعلی با ظرفیت ثبت‌شده مجاز نیست | APPROVED_EXPLICIT | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | استقرار SigNoz self-hosted بر VM تولید فعلی در plan رد شود | خنثی‌شدن ظرفیت production توسط monitoring | DESIGN_PENDING |
+| P2-B-25-01 | B:25 | تنظیمات عملیاتی، اسرار، Feature Flag و سیاست‌های کسب‌وکار چهار دسته با مالکیت و چرخه تأیید متفاوت‌اند | APPROVED_EXPLICIT | CORE/C-US-28 | C-CFG-01 | T-C-CFG-01 | schema چهار دسته را تفکیک کند و secret در config عمومی نباشد | جایگزینی سیاست مالی با feature flag | DESIGN_PENDING |
+| P2-B-25-02 | B:25 | پیکربندی نوع‌دار، نسخه‌دار، اعتبارسنجی‌شده و قابل ممیزی است | APPROVED_EXPLICIT | CORE/C-US-28 | C-CFG-01 | T-C-CFG-01 | نوع نامعتبر reject و تغییر config با actor/version قابل rollback باشد | اعمال بی‌ردپای feature flag | DESIGN_PENDING |
+| P2-B-25-03 | B:25 | R1 به سرویس مستقل مدیریت پیکربندی نیاز ندارد | APPROVED_EXPLICIT | CORE/C-US-28 | C-CFG-01 | T-C-CFG-01 | راهکار داخلی با secret store و audit قابل قبول باشد | اجبار microservice config قبل از R1 | DESIGN_PENDING |
+| P2-B-25-04 | B:25 | مالکیت مستقل داده و APIهای نسخه‌دار را مصوب کرده است | APPROVED_EXPLICIT | PLATFORM/X-US-01 | X-CTR-06 | T-X-CTR-06 | producer و consumer با schema/version تعریف شوند | SQL cross-service به‌جای API | DESIGN_PENDING |
+| P2-B-25-05 | B:25 | مالک هر API قرارداد OpenAPI/Schema را پیش از پیاده‌سازی تغییر می‌دهد | APPROVED_EXPLICIT | PLATFORM/X-US-01 | X-CTR-06 | T-X-CTR-06 | نسخه schema قبل از تغییر breaking commit و consumer test آن ثبت شود | شکستن API بدون قرارداد | DESIGN_PENDING |
+| P2-B-25-06 | B:25 | تغییر شکننده با نسخه جدید یا مهاجرت Expand → Migrate → Contract | APPROVED_EXPLICIT | PLATFORM/X-US-01 | X-CTR-06 | T-X-CTR-06 | نسخه قدیم در migration تا گذر مصرف‌کنندگان باقی بماند | حذف field قبل از consumer migration | DESIGN_PENDING |
+| P2-B-25-07 | B:25 | آزمون مصرف‌کننده، ماتریس سازگاری آزموده و دروازه انتشار کنترل می‌شود | APPROVED_EXPLICIT | PLATFORM/X-US-01 | X-CTR-06 | T-X-CTR-06 | ناسازگاری نسخه در ماتریس به NO-GO منجر شود | deployment با contract test شکست‌خورده | DESIGN_PENDING |
+| P2-B-25-08 | B:25 | عملیات کوتاه و قطعی از API هم‌زمان و عملیات طولانیِ نیازمند پردازش پس‌زمینه از Job غیرهم‌زمان پایدار استفاده می‌کنند | APPROVED_EXPLICIT | PLATFORM/X-US-02 | X-REL-01 | T-X-REL-01 | با restart worker Job طولانی بازیابی شود و API کوتاه queue نشود | ازبین‌رفتن Job پس restart | DESIGN_PENDING |
+| P2-B-25-09 | B:25 | صف یا Message Broker مستقل پیش‌نیاز نیست | APPROVED_EXPLICIT | PLATFORM/X-US-02 | X-REL-01 | T-X-REL-01 | راهکار Job فعلی بدون broker مستقل با آزمون پایداری مجاز باشد | تحمیل Kafka به‌عنوان تصمیم مصوب | DESIGN_PENDING |
+| P2-B-25-10 | B:25 | Timeout Budget، Circuit Breaker، Retry محدود و Idempotent | APPROVED_EXPLICIT | PLATFORM/X-US-02 | X-REL-01 | T-X-REL-01 | پس timeout retry از سقف policy تجاوز نکند و effect مالی تکراری صفر باشد | retry نامحدود تراکنش | DESIGN_PENDING |
+| P2-B-25-11 | B:25 | جداسازی ظرفیت بار تعاملی و پس‌زمینه (Bulkhead) | APPROVED_EXPLICIT | PLATFORM/X-US-02 | X-REL-01 | T-X-REL-01 | با backlog حداکثری Worker، ترافیک تعاملی تا SLO مصوب پاسخ دهد | اشباع پاسخ مشاور توسط OCR | DESIGN_PENDING |
+| P2-B-25-12 | B:25 | کاهش کنترل‌شده قابلیت‌ها و پایش بازیابی الزامی‌اند | APPROVED_EXPLICIT | PLATFORM/X-US-02 | X-REL-01 | T-X-REL-01 | در قطع منبع، degradation با علت و recovery signal دیده شود | اعلام پاسخ قطعی در outage منبع | DESIGN_PENDING |
+| P2-B-25-13 | B:25 | Logs/Metrics/Traces ساختاریافته و حداقل‌داده | APPROVED_EXPLICIT | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | span و metric قابل اتصال بدون ذخیره متن محرمانه باشد | OTP یا متن محرمانه در trace | DESIGN_PENDING |
+| P2-B-25-14 | B:25 | شاخص‌های صحت مالی، SLI/SLO مبتنی بر Baseline | APPROVED_EXPLICIT | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | ledger reconciliation و baseline SLI به owner و هشدار متصل شود | SLO عددی ساختگی بدون baseline | DESIGN_PENDING |
+| P2-B-25-15 | B:25 | هشدار متناسب با اثر بر کاربر و مدیریت Incident لازم‌اند | APPROVED_EXPLICIT | PLATFORM/X-US-03 | X-OBS-01 | T-X-OBS-01 | failure حساس Incident دارای owner و زمان تشخیص/بازیابی باشد | خطای ledger بدون هشدار | DESIGN_PENDING |
+| P2-B-36-01 | B:36 | نه پیاده‌سازی نهایی، نه تأیید دسترسی فنی به وب‌سایت‌های مرجع، و نه تضمین صحت حقوقی پاسخ‌ها | APPROVED_EXPLICIT | ADVISER/A-US-09 | A-QA-01 | T-A-QA-01 | UI/API هیچ تأیید blanket نسبت به منبع/حکم/سایت منتشر نکند | ادعای دسترسی قطعی به منبع آزمون‌نشده | DESIGN_PENDING |
+| P2-B-44-01 | B:44 | دریافت و نمایه‌سازی کامل اسناد عمدتاً در پاسخ به نیاز کاربران یا شواهد مشخصِ اثرگذاری بر دانش موجود انجام می‌شود | APPROVED_EXPLICIT | ADVISER/A-US-04 | A-DDI-01 | T-A-DDI-01 | بدون demand یا impact معتبر ingestion کامل شروع نشود | خزش بی‌قید همه اسناد | DESIGN_PENDING |
+| P2-B-45-01 | B:45 | کشف عنوان و فراداده یک سند، به معنی ورود متن کامل آن به مخزن RAG نیست | APPROVED_EXPLICIT | ADVISER/A-US-05 | A-SCM-01 | T-A-SCM-01 | Discovered سند بدون fulltext در Catalog قابل خواندن بماند | اجبار ingestion در discovery | DESIGN_PENDING |
+| P2-B-46-01 | B:46 | متن، نسخه، زمان دریافت، زمان بررسی و شواهد تغییرات هر سند مستقل ثبت می‌شود | APPROVED_EXPLICIT | ADVISER/A-US-07 | A-STR-01 | T-A-STR-01 | بازیابی نسخه قدیم همه پنج بُعد را مستقل برگرداند | بازنویسی نسخه با URL جدید | DESIGN_PENDING |
+| P2-B-47-01 | B:47 | شباهت معنایی، به‌تنهایی اثبات‌کننده اصلاح، نسخ یا جایگزینی یک مقرره نیست | APPROVED_EXPLICIT | ADVISER/A-US-05 | A-SCM-01 | T-A-SCM-01 | similarity تنها candidate_relation ایجاد کند | repeals بدون سند/بند شاهد | DESIGN_PENDING |
+| P2-B-48-01 | B:48 | اگر وضعیت حقوقی منبع قابل احراز نباشد، پاسخ باید محدودیت را اعلام کند | APPROVED_EXPLICIT | ADVISER/A-US-08 | A-EVD-01 | T-A-EVD-01 | در unknown validity پاسخ مشروط/امتناع باشد | اعلام قانون معتبر بدون شواهد | DESIGN_PENDING |
+| P2-B-49-01 | B:49 | اسناد جدید ابتدا با روش‌های کم‌هزینه غربال | APPROVED_EXPLICIT | ADVISER/A-US-04 | A-DDI-01 | T-A-DDI-01 | نامزد کم‌ارتباط پیش از fulltext screened باشد | دانلود تمام سندهای نامرتبط | DESIGN_PENDING |
+| P2-B-50-01 | B:50 | هر پاسخ، رابطه و تصمیم به‌روزرسانی باید قابل ردیابی به منبع، نسخه و شواهد باشد | APPROVED_EXPLICIT | ADVISER/A-US-08 | A-EVD-01 | T-A-EVD-01 | claim در پاسخ پیوند provision/version/evidence داشته باشد | citation URL بدون بند و زمان | DESIGN_PENDING |
+| P2-B-58-01 | B:58 | افزودن هر منبع منوط به بررسی شرایط دسترسی، ساختار انتشار، سیاست‌های استفاده و قابلیت بازیابی مستندات است | APPROVED_EXPLICIT | ADVISER/A-US-03 | A-SRC-01 | T-A-SRC-01 | source بدون rights/ToS/endpoint validation فعال نشود | فعال‌سازی API غیرمجاز | DESIGN_PENDING |
+| P2-B-60-01 | B:60 | پیاده‌سازی Source Discovery و Live Retrieval باید با آزمون فنی هر منبع آغاز شود | APPROVED_EXPLICIT | ADVISER/A-US-03 | A-SRC-01 | T-A-SRC-01 | برای هر منبع extraction و rate/ToS evidence ثبت شود | فرض API سایت با جست‌وجو | DESIGN_PENDING |
+| P2-B-74-01 | B:74 | پرسش کاربر، زمینه گفت‌وگو و سطح حساسیت تصمیم | APPROVED_EXPLICIT | ADVISER/A-US-01 | A-ADM-01 | T-A-ADM-01 | ورودی Router شامل سه field type-safe با consent بررسی شود | ارسال context شخصی بدون مجوز | DESIGN_PENDING |
+| P2-B-75-01 | B:75 | تبدیل پرسش پذیرفته‌شده به نیازهای اطلاعاتی و استنادی مستقل | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | پرسش مرکب به نیازهای جدا با مستند پاسخ منشعب شود | پاسخ کلی بدون evidence per claim | DESIGN_PENDING |
+| P2-B-75-02 | B:75 | داده محصول از قرارداد نسخه‌دار Core | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | مشاور فقط core product DTO نسخه‌دار مصرف کند | دسترسی مستقیم به Core DB | DESIGN_PENDING |
+| P2-B-76-01 | B:76 | تصمیم مسیریابی به همراه دلیل ثبت‌شده | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | route reason قابل ممیزی بدون متن محرمانه ثبت شود | انتخاب live بدون دلیل | DESIGN_PENDING |
+| P2-B-80-01 | B:80 | شواهد مرتبط و کافی + وضعیت بازبینی قابل قبول + ریسک مجاز | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | در sufficient/current/low-risk پاسخ از KB باشد | جست‌وجوی live بی‌دلیل برای همه پرسش‌ها | DESIGN_PENDING |
+| P2-B-81-01 | B:81 | Live Retrieval یا بازاعتبارسنجی هدفمند همان نیاز | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | فقط نیاز stale/insufficient target live برود | تکرار live برای subclaim کافی | DESIGN_PENDING |
+| P2-B-82-01 | B:82 | بررسی زنده/بازاعتبارسنجی پیش از ادعای جاری بودن | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | stale به ادعای current تبدیل نشود | استناد قطعی به نسخه stale | DESIGN_PENDING |
+| P2-B-83-01 | B:83 | حساسیت بالا یا الزام به تأیید وضعیت روز | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | در high-risk اعتبار جاری کنترل و در نبود آن پاسخ محدود شود | اعلام وضعیت امروز از snapshot قدیمی | DESIGN_PENDING |
+| P2-B-84-01 | B:84 | در نبود تأیید معتبر، عدم ادعای تأیید جاری و پاسخ مشروط یا توقف متناسب با ریسک | APPROVED_EXPLICIT | ADVISER/A-US-08 | A-EVD-01 | T-A-EVD-01 | outage منبع با fallback مجاز یا abstention پاسخ دهد | اختراع تأیید جاری پس 503 | DESIGN_PENDING |
+| P2-B-86-01 | B:86 | امتیاز شباهت برداری، به‌تنهایی معیار کفایت پاسخ نیست | APPROVED_EXPLICIT | ADVISER/A-US-08 | A-EVD-01 | T-A-EVD-01 | similarity بالا بدون coverage معتبر پاسخ قطعی نسازد | hallucinated claim با cosine بالا | DESIGN_PENDING |
+| P2-B-86-02 | B:86 | نتیجه زنده نیز قبل از استناد از دروازه‌های C01 و کنترل کفایت شواهد عبور می‌کند | APPROVED_EXPLICIT | ADVISER/A-US-08 | A-EVD-01 | T-A-EVD-01 | Live result بدون source authenticity استناد نشود | استناد خام API غیرمجاز | DESIGN_PENDING |
+| P2-B-86-03 | B:86 | مسیریابی و علت آن با فراداده غیرحساس | APPROVED_EXPLICIT | ADVISER/A-US-02 | A-RET-01 | T-A-RET-01 | trace route هیچ متن محرمانه کاربر ذخیره نکند | prompt text در log | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -522,19 +588,28 @@ flowchart LR
 | C-SEC-02 | CORE | C-US-25 | P2-W-1317-01، P2-W-1331-01، P2-W-1331-02، P2-W-1343-01، P2-W-1355-01 | W:1317، W:1331، W:1343، W:1355 | T-C-SEC-02 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
 | C-UX-01 | CORE | C-US-26 | P2-W-1517-01، P2-W-1529-01، P2-W-1541-01 | W:1517، W:1529، W:1541 | T-C-UX-01 | منبع عینی؛ اجرا نشده؛ INCOMPLETE |
 
+| X-R1-01 | PLATFORM | X-US-04 | P2-B-7-01، P2-B-12-01، P2-B-14-01، P2-B-18-01، P2-B-21-01، P2-B-22-01، P2-B-23-01، P2-B-23-02، P2-B-24-01، P2-B-24-02، P2-B-24-04 | B:7، B:12، B:14، B:18، B:21، B:22، B:23، B:24 | T-X-R1-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| C-ARC-01 | CORE | C-US-27 | P2-B-20-01، P2-B-24-03 | B:20، B:24 | T-C-ARC-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| X-OBS-01 | PLATFORM | X-US-03 | P2-B-24-05، P2-B-24-06، P2-B-24-07، P2-B-25-13، P2-B-25-14، P2-B-25-15 | B:24، B:25 | T-X-OBS-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| C-CFG-01 | CORE | C-US-28 | P2-B-25-01، P2-B-25-02، P2-B-25-03 | B:25 | T-C-CFG-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| X-CTR-06 | PLATFORM | X-US-01 | P2-B-25-04، P2-B-25-05، P2-B-25-06، P2-B-25-07 | B:25 | T-X-CTR-06 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| X-REL-01 | PLATFORM | X-US-02 | P2-B-25-08، P2-B-25-09، P2-B-25-10، P2-B-25-11، P2-B-25-12 | B:25 | T-X-REL-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+
 ## فصل نهم — گیت‌های ممیزی و گزارش وضعیت جاری
 
 | شاخص | مقدار قابل اثبات | وضعیت |
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 180 | استخراج اولیه؛ تأیید کامل خیر |
-| تسک‌های طراحی‌شده بر مبنای گزاره‌های اولیه | 47 | فقط specification |
-| داستان‌های کاربر مبنا | 47 | فقط specification |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 233 | استخراج اولیه؛ تأیید کامل خیر |
+| تسک‌های طراحی‌شده بر مبنای گزاره‌های اولیه | 53 | فقط specification |
+| داستان‌های کاربر مبنا | 53 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
 | خطوط با تأیید معنایی کامل | نامعلوم | ۲٬۸۰۶ واحد هنوز نیازمند G2 کامل |
 | روابط و استثناهای باقیمانده | نامعلوم | گیت‌های G3/G7/G8 باز |
 | برنامه رسمی جایگزین‌شده | خیر | این فایل موقت تا موفقیت G10 است |
 | CI آخرین کامیت | باید مجدداً بررسی شود | این سند به‌تنهایی CI را پاس نمی‌کند |
+
+**بسته معماری A01 و اصول اولیه RAG:** 53 الزام با عبارت عینی B:7–86 و Story/Task/Test جدید ثبت شد؛ اصل مصوبه حفظ، اجرای آزمون و تفکیک باقیمانده هنوز باز است.
 
 **نقطه بازیابی:** بازبینی فردی تمام ۲٬۸۰۶ خط، کامل‌کردن استخراج مرکب/ضمنی و پوشش جدول‌ها/نمودارها؛ تفکیک بیشتر تسک‌های بزرگ به خروجی فنی اختصاصی؛ آزمون قرارداد و E2E با fixture و شواهد اجرا؛ کنترل G8 معکوس؛ اجرای CI این شاخه؛ تنها بعد از عبور گیت‌ها جابه‌جایی فایل موقت به مسیر رسمی و PR جدید. تا آن زمان وضعیت INCOMPLETE است.
