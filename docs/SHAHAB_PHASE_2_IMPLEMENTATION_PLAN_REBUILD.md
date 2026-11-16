@@ -143,18 +143,18 @@
 
 | شناسه | زنجیره | تولیدکننده/مالک داده | مصرف‌کننده/مالک رفتار | منشأ | آزمون قرارداد و E2E قابل رد | گیت |
 |---|---|---|---|---|---|---|
-| X-CTR-01 | سرویس و حوزه | Core: C-CAT-01/C-POL-01 | Adviser: A-ADM-01؛ Assistant: S-JRN-01 | B:871, B:270, B:1639 | consumer contract نسخه‌دار: inactive_service در هر دو مصرف‌کننده رد؛ تغییر حوزه بدون اقدام مشتری رد | گیت انتشار قابلیت حوزه |
-| X-CTR-02 | محصول/مقرره | Core: C-CAT-01 | Adviser: A-EVD-01/A-PUB-01؛ Assistant: S-JRN-01 | B:261, B:405, B:1633, B:1645 | snapshot mismatch یا شواهد stale فقط حالت محدود، نه توصیه قطعی؛ فیلد provenance محفوظ | گیت شواهد C01..C07 |
-| X-CTR-03 | پلن و رضایت | Core: C-PLN-01/C-POL-01 | Assistant: S-SEC-01/S-FF-01؛ Adviser: A-ADM-01 | B:1147, B:1688, B:1689 | بعد consent revoke هر دو مسیر اقدام مؤثر deny؛ دسترسی عمومی حقوقی جدا از داده شخصی | گیت حریم خصوصی |
-| X-CTR-04 | هزینه و کیف پول | Core: C-PRC-01/C-HLD-01/C-REF-01 | Assistant: S-WFL-01/S-CU-01 | W:773, W:787, W:815, W:845 | با برآورد۱۰۰/hold۳۰ cap۱۲۰؛ timeout تنها تعهد نامعلوم محفوظ؛ هیچ ledger mutation در Assistant | گیت مالی |
-| X-CTR-05 | توصیه وام | Core: C-RCMD-01/C-CAT-01 | Adviser: A-RET-01؛ Assistant: S-REC-01 | B:1631, B:1633 | API timeout بدون پیشنهاد ساختگی؛ نسخه کاتالوگ و قاعده در پاسخ؛ Adviser داده Core را مستقیم نخواند | گیت قرارداد API |
-| X-E2E-01 | ضمانت‌نامه | Core: C-CAT-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-JRN-01/S-CU-01 | B:1637-1655 | بدون موتور matcher رتبه قطعی تولید نشود؛ submit نهایی بدون تأیید متصل به مبلغ/ذی‌نفع صفر؛ شماره پیگیری قابل بازسازی | گیت خدمت منتخب و مجوز بانک |
-| X-E2E-02 | نتیجه نامعلوم و لغو | Core: C-HLD-01/C-REF-01 | Assistant: S-WFL-01/S-SEC-01 | W:801, W:815, B:918, B:1694 | پس cancel/timeout هزینه تازه صفر؛ hold تعهد unknown تا inquiry حفظ؛ retry external idempotent | گیت بازیابی |
+| X-CTR-01 | سرویس و حوزه | Core: C-CAT-01/C-POL-01 | Adviser: A-ADM-01؛ Assistant: S-JRN-01 | B:871, B:270, B:1639 | T-X-CTR-01: consumer contract نسخه‌دار: inactive_service در هر دو مصرف‌کننده رد؛ تغییر حوزه بدون اقدام مشتری رد | گیت انتشار قابلیت حوزه |
+| X-CTR-02 | محصول/مقرره | Core: C-CAT-01 | Adviser: A-EVD-01/A-PUB-01؛ Assistant: S-JRN-01 | B:261, B:405, B:1633, B:1645 | T-X-CTR-02: snapshot mismatch یا شواهد stale فقط حالت محدود، نه توصیه قطعی؛ فیلد provenance محفوظ | گیت شواهد C01..C07 |
+| X-CTR-03 | پلن و رضایت | Core: C-PLN-01/C-POL-01 | Assistant: S-SEC-01/S-FF-01؛ Adviser: A-ADM-01 | B:1147, B:1688, B:1689 | T-X-CTR-03: بعد consent revoke هر دو مسیر اقدام مؤثر deny؛ دسترسی عمومی حقوقی جدا از داده شخصی | گیت حریم خصوصی |
+| X-CTR-04 | هزینه و کیف پول | Core: C-PRC-01/C-HLD-01/C-REF-01 | Assistant: S-WFL-01/S-CU-01 | W:773, W:787, W:815, W:845 | T-X-CTR-04: با برآورد۱۰۰/hold۳۰ cap۱۲۰؛ timeout تنها تعهد نامعلوم محفوظ؛ هیچ ledger mutation در Assistant | گیت مالی |
+| X-CTR-05 | توصیه وام | Core: C-RCMD-01/C-CAT-01 | Adviser: A-RET-01؛ Assistant: S-REC-01 | B:1631, B:1633 | T-X-CTR-05: API timeout بدون پیشنهاد ساختگی؛ نسخه کاتالوگ و قاعده در پاسخ؛ Adviser داده Core را مستقیم نخواند | گیت قرارداد API |
+| X-E2E-01 | ضمانت‌نامه | Core: C-CAT-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-JRN-01/S-CU-01 | B:1637-1655 | T-X-E2E-01: بدون موتور matcher رتبه قطعی تولید نشود؛ submit نهایی بدون تأیید متصل به مبلغ/ذی‌نفع صفر؛ شماره پیگیری قابل بازسازی | گیت خدمت منتخب و مجوز بانک |
+| X-E2E-02 | نتیجه نامعلوم و لغو | Core: C-HLD-01/C-REF-01 | Assistant: S-WFL-01/S-SEC-01 | W:801, W:815, B:918, B:1694 | T-X-E2E-02: پس cancel/timeout هزینه تازه صفر؛ hold تعهد unknown تا inquiry حفظ؛ retry external idempotent | گیت بازیابی |
 | X-CTR-06 | قرارداد APIهای سه‌سرویس و مهاجرت سازگار (X-US-01) | مالک هر API تولیدکننده؛ تیم قرارداد و QA پاسخ‌گو برای سازگاری | Core/Adviser/Assistant مصرف‌کنندگان نسخه‌دار | B:24-25 | T-X-CTR-06: تغییر breaking بدون نسخه جدید/consumer tests در CI fail؛ مسیر Expand→Migrate→Contract نسخه قدیم را تا مهاجرت حفظ کند؛ direct DB access رد | گیت A02/A07 |
 | X-REL-01 | قرارداد تاب‌آوری و Jobهای بین‌سرویسی (X-US-02) | مالک Job در سرویس مولد؛ SRE/QA آزمون مشترک | مصرف‌کنندگان با timeout/retry محدود و fallback | B:25 | T-X-REL-01: restart job durable state را حفظ کند؛ retry اثر مالی دوگانه صفر؛ backpressure پس‌زمینه SLO تعاملی را نشکند؛ outage پاسخ قطعی نسازد | گیت A03/A06 |
 | X-OBS-01 | استاندارد ردیابی OTel و کنترل SLI/Incident (X-US-03) | Platform/SRE مالک قرارداد Telemetry؛ هر سرویس مالک رخداد خودش | Core/Adviser/Assistant مصرف‌کننده استاندارد | B:24-25 | T-X-OBS-01: trace همبسته و baseline واقعی؛ هیچ متن محرمانه/OTP؛ هشدار ledger discrepancy؛ نصب SigNoz self-hosted روی VM تولید ممنوع | گیت A09 و capacity evidence |
 | X-R1-01 | گیت معماری، زیرساخت و انتشار R1 (X-US-04) | مالک انتشار/محصول؛ هر سرویس مالک شواهد خودش | Core+Adviser فعال؛ Assistant فقط قرارداد/مرز | B:7، B:12، B:14، B:18-25 | T-X-R1-01: manifest R1 بدون Assistant فعال، tag/commit/digest تطبیق، Release Plan مصوب؛ استقرار/فناوری/VM تازه بدون ظرفیت و مجوز رد | گیت انتشار مستقل R1 |
-| X-E2E-03 | پیش‌آگاهی | Core: C-PLN-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-FF-01 | B:942-970, B:1684 | رویداد بدون consent فقط candidate؛ alert duplicate حذف و هیچ پرداختی از هشدار مجاز نشود | گیت D02/D03 |
+| X-E2E-03 | پیش‌آگاهی | Core: C-PLN-01/C-POL-01 | Adviser: A-EVD-01؛ Assistant: S-FF-01 | B:942-970, B:1684 | T-X-E2E-03: رویداد بدون consent فقط candidate؛ alert duplicate حذف و هیچ پرداختی از هشدار مجاز نشود | گیت D02/D03 |
 
 ### ۱.۷. ملاک تکمیل واقعی هر تسک و قاعده تفکیک
 
@@ -698,6 +698,13 @@ flowchart LR
 | P2-B-466-01 | B:466 | تصویب اصول معماری مجوز اجرای یکجای ۴۰ قابلیت، تغییر کد، ایجاد تسک یا تصویب نقشه راه نیست | APPROVED_EXPLICIT | PLATFORM/X-US-04 | X-R1-01 | T-X-R1-01 | Release بدون separate approval blocked؛ ADR policy as proposal scope only | اجرای ۴۰ ADR خودکار پس بازبینی | DESIGN_PENDING |
 | P2-B-466-02 | B:466 | مونولیت ماژولار نقطه شروع پیشنهادی است | APPROVED_EXPLICIT | CORE/C-US-27 | C-ARC-01 | T-C-ARC-01 | اصول Core modular monolith با A01 سازگار بماند | میکروسرویس اجباری بدون تصویب | DESIGN_PENDING |
 
+| P2-B-1147-02 | B:1147 | دسترسی ناشی از پلن/خرید، مجوز معتبر مشتری و امکان قانونی/فنی اجرای اقدام | DERIVED_REQUIRED | PLATFORM/C-US-16 | X-CTR-03 | T-X-CTR-03 | consumer policy contract سه gate را با نسخه، scope و denial reason منتقل کند | Assistant با plan alone submit کند | DESIGN_PENDING |
+| P2-W-787-02 | W:787 | برآورد کل اولیهٔ همان فرایند و سقف افزایش مجاز، پیش از شروع به تأیید مشتری برسند | DERIVED_REQUIRED | PLATFORM/C-US-10 | X-CTR-04 | T-X-CTR-04 | Quote/Approval/Hold API چهار شناسه ثابت quote_version/operation/payer/consent داشته باشد؛ Assistant ledger ننویسد | hold به‌عنوان کسر قطعی نشان داده شود | DESIGN_PENDING |
+| P2-B-1631-13 | B:1631 | شکست API یا Adviser باید با Timeout، Trace، پیام خطای کنترل‌شده، تلاش مجدد محدود و بدون ارائه نتیجه ساختگی مدیریت شود | DERIVED_REQUIRED | PLATFORM/C-US-17 | X-CTR-05 | T-X-CTR-05 | consumer timeout contract بدون match% ساختگی و با correlation id پاسخ محدود بدهد | Assistant LLM درصد حدسی بسازد | DESIGN_PENDING |
+| P2-B-1647-12 | B:1647 | بدون موتور اختصاصی ادعای رتبه‌بندی قطعی ندارد | CONDITIONAL | PLATFORM/S-US-09 | X-E2E-01 | T-X-E2E-01 | در نمونه ضمانت‌نامه بدون matcher، ادعای رتبه‌بندی صفر و submit بدون final consent صفر باشد | اعلام رتبه قطعی از گزینه‌های کاتالوگ | DESIGN_PENDING |
+| P2-W-801-02 | W:801 | در نتیجهٔ نامعلوم هزینهٔ خارجی، هزینه‌سازی جدید متوقف، فقط سهم مرتبط با تعهد نامعلوم نگهداری | DERIVED_REQUIRED | PLATFORM/S-US-01 | X-E2E-02 | T-X-E2E-02 | در E2E timeout خارجی، action_count جدید=۰ و hold فقط unresolved portion بماند | retry بانکی بدون inquiry | DESIGN_PENDING |
+| P2-B-1684-13 | B:1684 | هیچ رویدادی به‌تنهایی مجوز اجرای اقدام حساس ایجاد نمی‌کند | DERIVED_REQUIRED | PLATFORM/S-US-06 | X-E2E-03 | T-X-E2E-03 | در trigger feedforward بدون consent، bank-submit_count=۰ و تنها candidate_event مجاز باشد | اجرای خودکار پرداخت از هشدار | DESIGN_PENDING |
+
 ## فصل هشتم — ماتریس B: تسک به حکم و منبع
 
 | تسک | مالک | Story | اتم‌های مرجع | خط‌های اصلی | تست | وضعیت |
@@ -757,6 +764,14 @@ flowchart LR
 | C-CFG-01 | CORE | C-US-28 | P2-B-25-01، P2-B-25-02، P2-B-25-03، P2-B-406-02 | B:25، B:406 | T-C-CFG-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
 | X-CTR-06 | PLATFORM | X-US-01 | P2-B-25-04، P2-B-25-05، P2-B-25-06، P2-B-25-07، P2-B-390-04، P2-B-391-01 | B:25، B:390، B:391 | T-X-CTR-06 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
 | X-REL-01 | PLATFORM | X-US-02 | P2-B-25-08، P2-B-25-09، P2-B-25-10، P2-B-25-11، P2-B-25-12، P2-B-371-02، P2-B-371-03 | B:25، B:371 | T-X-REL-01 | متن بندها بررسی و linked شد؛ تست اجرا نشده؛ INCOMPLETE |
+| X-CTR-01 | PLATFORM | A-US-01 | P2-B-270-03 | B:270 | T-X-CTR-01 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-CTR-02 | PLATFORM | A-US-05 | P2-B-400-03، P2-B-406-01 | B:400، B:406 | T-X-CTR-02 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-CTR-03 | PLATFORM | C-US-16 | P2-B-1147-02 | B:1147 | T-X-CTR-03 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-CTR-04 | PLATFORM | C-US-10 | P2-W-787-02 | W:787 | T-X-CTR-04 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-CTR-05 | PLATFORM | C-US-17 | P2-B-1631-13 | B:1631 | T-X-CTR-05 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-E2E-01 | PLATFORM | S-US-09 | P2-B-1647-12 | B:1647 | T-X-E2E-01 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-E2E-02 | PLATFORM | S-US-01 | P2-W-801-02 | W:801 | T-X-E2E-02 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
+| X-E2E-03 | PLATFORM | S-US-06 | P2-B-1684-13 | B:1684 | T-X-E2E-03 | بررسی قراردادی و E2E طراحی شده؛ اجرا نشده؛ INCOMPLETE |
 
 ## فصل نهم — گیت‌های ممیزی و گزارش وضعیت جاری
 
@@ -764,7 +779,7 @@ flowchart LR
 |---|---|---|
 | واحدهای خطی B + W | ۱٬۸۴۲ + ۹۶۴ = ۲٬۸۰۶ | G1 ثبت و منبع SHA-locked |
 | شمار ۵٬۲۵۸ تاریخی | روش بازتولید موجود نیست | GAP / NOT REPRODUCED |
-| گزاره‌های اولیه استخراج با عبارت دقیق | 392 | استخراج اولیه؛ تأیید کامل خیر |
+| گزاره‌های اولیه استخراج با عبارت دقیق | 398 | استخراج اولیه؛ تأیید کامل خیر |
 | تسک‌های طراحی‌شده بر مبنای گزاره‌های اولیه | 53 | فقط specification |
 | داستان‌های کاربر مبنا | 53 | فقط specification |
 | تست‌های اجراشده قابلیت‌های جدید | ۰ در این سند | هیچ شاهد اجرایی ارائه نشده |
@@ -782,5 +797,7 @@ flowchart LR
 **بازبینی ADR-RAG-21..30:** 39 گزاره مستقل دیگر با مالک، story، task و تست ردپذیر ثبت شد؛ تصمیم‌های مشروط بدون تغییر باقی‌اند.
 
 **بازبینی تکمیلی ADR-RAG-31..40:** 39 الزام با مرزبندی Core/Adviser/Platform و وضعیت آزمون طراحی‌شده ثبت شد؛ آزمون واقعی و گیت مستقل انتشار باز است.
+
+**کنترل قراردادهای بین‌سرویسی:** هشت تسک X-CTR-01..05 و X-E2E-01..03 در ماتریس معکوس به متن مرجع و آزمون وابسته شدند؛ شش حکم اجرایی استنتاجی با منشأ و ضرورت ثبت شد.
 
 **نقطه بازیابی:** بازبینی فردی تمام ۲٬۸۰۶ خط، کامل‌کردن استخراج مرکب/ضمنی و پوشش جدول‌ها/نمودارها؛ تفکیک بیشتر تسک‌های بزرگ به خروجی فنی اختصاصی؛ آزمون قرارداد و E2E با fixture و شواهد اجرا؛ کنترل G8 معکوس؛ اجرای CI این شاخه؛ تنها بعد از عبور گیت‌ها جابه‌جایی فایل موقت به مسیر رسمی و PR جدید. تا آن زمان وضعیت INCOMPLETE است.
