@@ -1061,10 +1061,10 @@
 - ارتباط با بخش‌های دیگر: مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-073.DB | DirectedAcyclic provenance graph? نه الزام DAG؛ link والد-فرزند چندانتقالی با مبلغ دقیق، owner تاریخی، زمان، agent و event immutable | CORE-W-073.DB.T01؛ قبولی/رد: انتقال A→B→A چرخه جریان مالکیت را ثبت کند و ancestor provenance حذف نشود؛ فناوری Graph DB اجباری نباشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-073.BE | API lineage traversal عقب/جلو با مجوز دسترسی، تجمیع سهم ریالی و snapshot تاریخی؛ حفظ همه واسطه‌ها | CORE-W-073.BE.T01؛ قبولی/رد: در split ۱۰۰ به ۳۰/۷۰، سهم descendants مجموع ۱۰۰ بماند؛ ردیابی forward/backward حتی پس از refund معتبر باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-073.FE | نمای زنجیره برای شخص/سازمان مجاز با redaction واسطه‌های غیرمجاز و زمان رویداد | CORE-W-073.FE.T01؛ قبولی/رد: مالک A نباید اطلاعات بانکی خصوصی B را ببیند؛ lineage عددی در حدود مجوز همچنان قابل فهم باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-073.QA | آزمون split/merge/retransfer A→B→A، refund، اصلاح و reconstruction تاریخی | CORE-W-073.QA.T01؛ قبولی/رد: تعداد رویدادهای مرتبط قبل/بعد اصلاح کاهش نیابد؛ کل مبلغ منشأ حفظ و بازسازی T1/T2 ممکن باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-073.DB | Lineage DAG از parent_lot_id،child_lot_id،amount،actor،event_time و valid_from؛ وقایع immutable دائمی | CORE-W-073.DB.T01: یک lot با split ۴۰/۶۰ دو edge با جمع ۱۰۰ و parent مشخص داشته باشد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-073.BE | API trace backward/forward با حلقه بازگشت حساب و split/merge؛ کنترل جمع فرزندها و snapshot تاریخی | CORE-W-073.BE.T01: A→B→A lineage به A اولیه برگردد ولی حق برداشت عادی احیا نشود؛ هیچ edge حذف نشود؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-073.FE | گزارش زنجیره با فیلتر مجوز، مالک واسط، مبلغ و وضعیت تاریخی؛ داده دیگران فقط در حد مجاز | CORE-W-073.FE.T01: نمای زمان گذشته رویداد آینده را نشان ندهد و شخص غیرمجاز شبکه حساب دیگر را نبیند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-073.QA | property test split چند گیرنده، بازانتقال، refund، حلقه A→B→A و بازسازی as-of | CORE-W-073.QA.T01: از منشأ ۱۰۰ بعد split/merge sum descendants=۱۰۰ و برگشت عادی lineage محفوظ؛ عملکرد گراف مستقل تصمیم باز؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-074 — ۷.۳. وضعیت خدمت، بانک و ثبت مالی چگونه از هم جدا شوند؟
 **مرجع:** کیف پول ۷.۳، خط 1205؛ **مالک:** CORE-US-26.
@@ -1073,10 +1073,10 @@
 - ارتباط با بخش‌های دیگر: نتیجهٔ نامعلوم شارژ در بخش ۶.۱ و برداشت در بخش ۶.۵ با این مدل ثبت می‌شوند. سیاست لغو و هزینهٔ اجرای ناقص در بخش ۹ هنوز باید مبلغ تعهد را تعیین کند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-074.DB | سه جدول/ماشین وضعیت مستقل service_execution،bank_operation،ledger_posting با event refs و history | CORE-W-074.DB.T01؛ قبولی/رد: بانک unknown با service failed و ledger pending ترکیب‌شدنی باشد؛ enum هر کدام مستقل بماند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-074.BE | API transition guards و event correlation؛ bank confirmed به‌تنهایی بدون policy ledger posted نسازد | CORE-W-074.BE.T01؛ قبولی/رد: وقتی بانک unknown است، service success به‌تنهایی ledger final نشود؛ transition نامعتبر rejected و audit شود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-074.FE | نمای مجزا وضعیت خدمت، بانک و مالی در رسید/پشتیبانی با نشان unknown به‌عنوان نامعلوم | CORE-W-074.FE.T01؛ قبولی/رد: بانک unknown را «پرداخت موفق قطعی» نمایش ندهد؛ جدول مجاز status تا طراحی اجرایی گیت باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-074.QA | آزمون تمام حالت‌های مجاز/نامجاز و out-of-order callback سه ماشین | CORE-W-074.QA.T01؛ قبولی/رد: پس از callback متناقض bank، وضعیت قبلی بدون ثبت reconciliation به‌طور خاموش overwrite نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-074.DB | ServiceCaseState،BankOperationState،LedgerPostingState جدا با correlation_id و جدول انتقال مجاز نسخه‌دار | CORE-W-074.DB.T01: خدمت failed و بانک unknown می‌توانند هم‌زمان ثبت شوند؛ state مشترک تخت ممنوع؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-074.BE | API تغییر هر ماشین تنها با رویداد معتبر؛ bank_unknown به ledger_posted بدون وصول معتبر جهش نکند | CORE-W-074.BE.T01: event بانک موفق تنها پس اثبات وصول ledger posted سازد؛ unknown آن را قطعی نکند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-074.FE | نمای وضعیت خدمت، بانک و ثبت مالی جدا؛ «موفق خدمت» معادل «وصول بانک» نباشد | CORE-W-074.FE.T01: در خدمت completed و بانک pending، UI موفقیت مالی قطعی نشان ندهد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-074.QA | تست ترتیب رویداد out-of-order، unknown، partial service، callback دوباره | CORE-W-074.QA.T01: transition بدون مجوز از unknown به succeeded رد؛ جدول نهایی enum نیازمند طراحی ولی استقلال سه چرخه مصوب؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-075 — ۷.۴. چگونه تمام ثبت‌های یک عملیات به هم متصل شوند؟
 **مرجع:** کیف پول ۷.۴، خط 1221؛ **مالک:** CORE-US-26.
@@ -1085,10 +1085,10 @@
 - ارتباط با بخش‌های دیگر: رسید و تاریخچهٔ بخش ۱۰، تطبیق بخش ۸ و اصلاح اشتباه بخش ۶.۵ از این ارتباط‌ها استفاده می‌کنند. بخش ۷.۵ تعیین می‌کند تکرار کدام شناسه نباید اثر تازه بسازد.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-075.DB | Correlation graph شناسه‌های operation,wallet,journal,credit_lot,hold,bank_reference,received_event,correction و invoice جدا | CORE-W-075.DB.T01؛ قبولی/رد: یک operation با ۳ journal بتواند به همان operation برگردد؛ invoice_id جای payment_id نوشته نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-075.BE | API خواندن زنجیره correlated و enforce uniqueness در جای صحیح هر entity با trace کمینه | CORE-W-075.BE.T01؛ قبولی/رد: دو events بانکی با external_id یکسان double charge ندهند؛ correction بدون original_id رد شود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-075.FE | تاریخچه قابل ردیابی با operation/reference متمایز از invoice و receipt، بدون نشت داده شخص ثالث | CORE-W-075.FE.T01؛ قبولی/رد: جست‌وجو با invoice_id نباید bank_reference جعلی برگرداند؛ خطای ردیابی به پیام «نیازمند بررسی» منجر شود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-075.QA | آزمون چند Journal برای یک operation و اصلاح مرتبط، شناسه تکراری، لغو و بانک timeout | CORE-W-075.QA.T01؛ قبولی/رد: از هر journal به operation و origin بازگردیم؛ orphan correction=۰ و شناسه‌ها با هم خلط نشوند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-075.DB | شناسه مستقل Operation/Wallet/Journal/Lot/Hold/BankEvidence/InboundEvent/Correction/Invoice و FK | CORE-W-075.DB.T01: دو journal زیر یک operation_id مجاز، یک bank evidence به پرداخت معتبر متصل باشد؛ FK شکست را رد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-075.BE | API correlation trace رویداد به همه ثبت‌ها و اصلاح؛ invoice_id جای payment_id نباشد | CORE-W-075.BE.T01: با invoice_id ثابت و payment_id متفاوت، duplicate-payment حذف نشود و ارتباط معتبر حفظ شود؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-075.FE | رسید شناسه پرداخت/خدمت و فاکتور را جدا و قابل پیگیری نمایش دهد | CORE-W-075.FE.T01: کاربر با شماره فاکتور نتواند شماره پرداخت را به‌عنوان همان شناسه ببیند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-075.QA | تست یک عملیات با چند journal، callback بانک، اصلاح و invoice مستقل | CORE-W-075.QA.T01: correlation مسیر original→correction→new journal بدون حذف اصلی، با retry یکتایی پایدار؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-076 — ۷.۵. درخواست و پیام تکراری چگونه فقط یک اثر مالی داشته باشند؟
 **مرجع:** کیف پول ۷.۵، خط 1235؛ **مالک:** CORE-US-27.
@@ -1099,10 +1099,10 @@
 - ارتباط با بخش‌های دیگر: یکتایی شارژ بخش ۶.۱.۴، برداشت و اصلاح بخش ۶.۵ و بازیابی بخش ۸.۳ همگی باید این قاعده را رعایت کنند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-076.DB | Durable IdempotencyRecord برای action_type + operation + fingerprint درخواست و financial_event unique؛ مستقل از cache provider | CORE-W-076.DB.T01؛ قبولی/رد: بعد TTL/cache expiration، replay همان event ledger جدید نسازد؛ hold/capture/refund کلیدهای جدا داشته باشند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-076.BE | API idempotency هر action با conflict اگر مبلغ/مقصد همان key عوض شد، retry همان درخواست پاسخ قبلی بدهد | CORE-W-076.BE.T01؛ قبولی/رد: دو درخواست موازی same key exactly one effect؛ key یکسان با مبلغ جدید 409 و نه overwrite یا debit تازه؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-076.FE | وضعیت processing/done/unknown و retry safe در رابط با شناسه ثابت، بدون ساخت سفارش تازه با refresh | CORE-W-076.FE.T01؛ قبولی/رد: فشردن دوباره پرداخت با همان key رسید دوم نسازد و متن pending را به failed قطعی تبدیل نکند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-076.QA | تست race و TTL cache expire و retry چندمنبعی bank callback، Hold/Capture/Refund | CORE-W-076.QA.T01؛ قبولی/رد: پس از ۳ replay و پاک‌سازی cache، journal_effects=۱؛ mismatch key→409 و balance unchanged؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-076.DB | IdempotencyLedger با key per action و payload_hash، event_id/financial_effect_id پایدار مستقل از TTL کش | CORE-W-076.DB.T01: action_type=hold/capture/refund در idempotency key لحاظ شود؛ effect UNIQUE برای رویداد خارجی؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-076.BE | API hold/capture/refund هر یک namespace مستقل؛ same key+payload همان نتیجه، same key+different payload conflict | CORE-W-076.BE.T01: پس از پاک‌شدن cache، همان receipt بانکی credit دوباره نسازد؛ same key و مبلغ متفاوت 409؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-076.FE | نمای نتیجه درخواست تکراری بدون صدور موفقیت مالی دوم؛ خطای conflict قابل فهم | CORE-W-076.FE.T01: با double-click، UI یک نتیجه مالی با یک transaction ID نشان دهد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-076.QA | تست callback همزمان، key expiry موقت، پیام تکراری بعد restart و payload متفاوت | CORE-W-076.QA.T01: با ۱۰۰ retry و ۲ worker، ledger effect count=۱؛ key متفاوت با event مالی یکسان دوباره شارژ نسازد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-077 — ۷.۶. رزرو چگونه به مصرف قطعی یا آزادسازی تبدیل شود؟
 **مرجع:** کیف پول ۷.۶، خط 1251؛ **مالک:** CORE-US-33.
@@ -1112,10 +1112,10 @@
 - ارتباط با بخش‌های دیگر: سیاست مبلغ، مدت، افزایش رزرو و انقضای اعتبار هنگام رزرو در بخش ۶.۴ مصوب است؛ پارامتر عددی هر خدمت هنوز باید تعیین شود. تعرفهٔ بخش ۹ میزان کسر و بخش ۶.۶ قواعد بازگشت پس از کسر را مشخص می‌کنند؛ آزادسازی رزرو، استرداد مصرف قطعی نیست.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-077.DB | HoldAllocation per lot با reserved,posted,released و version در transaction immutable-linked | CORE-W-077.DB.T01؛ قبولی/رد: hold ۱۰۰ از سه lot، capture ۶۰ و release ۴۰؛ هیچ reserved negative یا double release ثبت نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-077.BE | partial capture کاهش hold و ثبت مالی اتمیک در یک commit؛ pending unknown تا تعیین تکلیف حفاظت شود | CORE-W-077.BE.T01؛ قبولی/رد: قطع تراکنش بعد capture و پیش کاهش hold نباید دوباره‌مصرف بسازد؛ uncommitted عملیات rollback؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-077.FE | نمای رزرو/مصرف/آزادسازی جدا و سهم lotهای gift/cash؛ آزادسازی را با refund قطعی یکی نکند | CORE-W-077.FE.T01؛ قبولی/رد: بعد capture ۶۰ از hold ۱۰۰، «هزینه قطعی ۶۰/رزرو مانده ۴۰» نشان دهد؛ refund فقط برای ۶۰ capture؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-077.QA | آزمون partial capture/release، race، gift expiry و fault injection | CORE-W-077.QA.T01؛ قبولی/رد: sum reserved+captured+released invariant هر original hold حفظ؛ ledger balanced و batch idempotent؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-077.DB | HoldAllocation روی lot و captured_amount/released_amount با قید conservation و transaction_id | CORE-W-077.DB.T01: hold ۱۰۰، capture ۶۰ و release ۴۰ باید captured+released+remaining=۱۰۰ شود؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-077.BE | capture و کاهش hold در تراکنش واحد؛ release سهم بی‌تعهد بدون refund posted | CORE-W-077.BE.T01: در crash بعد ledger capture و قبل hold decrement هیچ ثبت نیمه‌کاره visible نباشد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-077.FE | نمای وضعیت رزرو/قطعی/آزاد برای هر lot و جزئیات درآمد تنها پس capture | CORE-W-077.FE.T01: پس از hold=۱۰۰ و capture=۶۰، available سهم released ۴۰ را برگرداند و ۶۰ قطعی نشان دهد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-077.QA | تست partial capture و release، crash بین دو update، retry و هدیه انقضا | CORE-W-077.QA.T01: دو capture همزمان مجموعشان از hold تجاوز نکند؛ release به refund تبدیل نشود؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-078 — ۷.۷. چگونه جلوی مصرف هم‌زمان یک اعتبار گرفته شود؟
 **مرجع:** کیف پول ۷.۷، خط 1265؛ **مالک:** CORE-US-27.
@@ -1124,10 +1124,10 @@
 - پاسخ مصوب: ثبت اثر مالی به مانده یا نسخهٔ معتبر حساب و اجزای اعتبار مشروط شود. بررسی و مصرف، دو مرحلهٔ مستقل و بدون محافظ نباشند. در همان مرز ثبت، حق برداشت، انقضا، خدمت مجاز، سهم اجزا، رزروهای قبلی، سقف‌های فرد و سازمان، عضویت و فهرست مجاز سازمان و ظرفیت عملیات در انتظار کنترل شوند. تغییر شرایط باعث رد یا محاسبهٔ مجدد شود؛ محاسبهٔ مجدد اجازهٔ تغییر پنهان پرداخت‌کننده، گیرنده یا مبلغ تأییدشده نیست.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-078.DB | OptimisticLock version یا row lock روی account/lot/allowance/capacity؛ guard condition همه منابع مجوز | CORE-W-078.DB.T01؛ قبولی/رد: دو مصرف هم‌زمان از available=۱۰۰ هرکدام ۷۰ نتوانند هر دو commit شوند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-078.BE | API commit-time check روی مالکیت، service_scope، expiry، cap، org whitelist، holds و pending؛ تغییر شرایط reject/requote | CORE-W-078.BE.T01؛ قبولی/رد: بعد تغییر recipient، amount یا payer از snapshot تأیید شده، transaction بدون confirmation تازه رد شود؛ ۷۰+۷۰ از ۱۰۰ یکی reject؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-078.FE | نمای نتیجه re-quote و دلیل کمبود یا نقض مجوز بدون تغییر پنهان سفارش تأییدشده | CORE-W-078.FE.T01؛ قبولی/رد: کاربر تغییر مبلغ/پرداخت‌کننده را قبل درخواست تازه ببیند؛ UI ممکن است stale باشد ولی Backend هرگز overspend نکند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-078.QA | آزمون رقابت ۲+ مصرف، کاهش سقف وسط hold، expired lot، لغو عضویت و تغییر service | CORE-W-078.QA.T01؛ قبولی/رد: از ۱۰۰، دو درخواست ۷۰ فقط یکی موفق؛ no negative balance, no unauthorized payer switch؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-078.DB | AccountVersion و LotVersion با constraint available≥۰ و entitlement/scope snapshot در مرز تراکنش | CORE-W-078.DB.T01: two holds=۸۰ از موجودی ۱۰۰، at most one commit؛ نسخه بازنده conflict بدهد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-078.BE | بررسی و debit/hold اتمیک با نسخه حساب، سهم هدیه، مجوز سازمان و pending؛ تغییر payer/destination نیازمند تأیید جدید | CORE-W-078.BE.T01: بعد از revoke عضویت سازمان، retry/hold تازه رد؛ هیچ fallback خودکار به کیف شخصی ایجاد نشود؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-078.FE | در stale state پیام نیاز به بازتأیید و نمایش مبالغ جدید بدون انتخاب پنهانی کیف | CORE-W-078.FE.T01: اگر قیمت/مقصد تغییر کرد، کاربر باید پیش از اقدام مؤثر دوباره ببیند و تأیید کند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-078.QA | تست double-spend، همزمانی حد عضو/سازمان، expiry هدیه و تغییر مقصد | CORE-W-078.QA.T01: ۲ worker متقارن نتوانند posted منفی، هدیه منقضی مصرف‌شده یا سقف فرد تجاوزکرده بسازند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-079 — ۸.۱. تطبیق و رسیدگی به مغایرت
 **مرجع:** کیف پول ۸.۱، خط 1283؛ **مالک:** CORE-US-34.
@@ -1137,10 +1137,10 @@
 - ارتباط با بخش‌های دیگر: شارژ بخش ۶ و شناسه‌های بخش ۷ مبنای تطبیق‌اند؛ مهلت رسیدگی و حدود اختیار اجرایی هنوز باید تعیین شوند.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-079.DB | ReconciliationBatch با bank_statement_ref، ledger_event_ref، cutoff_time، discrepancy_type و case owner/shadow correction | CORE-W-079.DB.T01؛ قبولی/رد: هر اختلاف بانکی/دفترکل بدون سند معکوس مخفی نشود؛ correction original link داشته باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-079.BE | job روزانه تطبیق وضعیت و مبلغ و ساخت پرونده برای unresolved؛ اصلاح ثبت append-only با علت/actor | CORE-W-079.BE.T01؛ قبولی/رد: در یک روز بدون reconciliation موفق، وضعیت «تطبیق‌شده» ادعا نشود؛ هر unmatched item یک case باز داشته باشد؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-079.FE | پنل مالی شهاب با مورد اختلاف، آخرین بررسی، مسئول رسیدگی و evidence پوشانده؛ نه نقش ادمین سازمان مشتری | CORE-W-079.FE.T01؛ قبولی/رد: اختلاف resolved فقط با سند reconciliation قابل بستن باشد؛ مشتری داده مشتری دیگر را نبیند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-079.QA | آزمون مغایرت واریز، callback دیررس، partial settlement و duplicate statement | CORE-W-079.QA.T01؛ قبولی/رد: هر روز حداقل یک run موفق/هشدار failure؛ unmatched بدون case=۰ و correction بدون actor=۰؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-079.DB | ReconciliationCase با bank_statement_id، ledger_ref، diff_amount، owner،reason و correction_event immutable | CORE-W-079.DB.T01: هر mismatch فاقد تطبیق باید پرونده باز با bank_ref یا ledger_ref ایجاد کند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-079.BE | Job تطبیق حداقل روزانه با وضعیت مغایرت، ارجاع مسئول عملیات مالی و ثبت علت/عامل هر اصلاح | CORE-W-079.BE.T01: اختلاف ۱۰۰ بانک در برابر ۹۰ دفترکل به case اختلاف ۱۰ منجر شود؛ اصلاح تنها با journal جبرانی؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-079.FE | پنل پرونده اختلاف با شناسه، شاهد بانکی و وضعیت رسیدگی؛ بدون امکان حذف بی‌سابقه | CORE-W-079.FE.T01: کاربر غیرمسئول قادر به بستن پرونده یا ویرایش مبلغ نبود؛ مسئول تاریخچه را ببیند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-079.QA | تست سند بانکی مفقود، mismatch مبلغ، duplicate و اصلاح جبرانی | CORE-W-079.QA.T01: اجرای دوباره Job روی mismatch یک پرونده یکتا نگه دارد؛ SLA عددی باز باقی بماند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-080 — ۸.۱.۱. برش زمانی و پوشش تعهد
 **مرجع:** کیف پول ۸.۱.۱، خط 1297؛ **مالک:** CORE-US-26.
@@ -1148,10 +1148,10 @@
 - پاسخ مصوب: برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-080.DB | DailyCutoffPolicy با timezone و گزارش bank-in-transit, gift obligation, pending, unsettled برحسب cut | CORE-W-080.DB.T01؛ قبولی/رد: برش روزانه با زمان و timezone ثابت قابل بازسازی باشد؛ gift و in-transit در یک عدد درآمد ادغام نشوند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-080.BE | گزارش پوشش تعهد با ورودی حساب‌های مستقل و گیت فرمول نهایی تأیید حسابدار؛ عدد نامصوب قطعی محاسبه نشود | CORE-W-080.BE.T01؛ قبولی/رد: وقتی فرمول نهایی تأیید نشده، status=AWAITING_FINANCE_APPROVAL باشد؛ اقلام باز حذف نشوند؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-080.FE | داشبورد زمان برش، تفکیک منابع و پرچم گیت حسابداری، بدون ادعای حسابرسی کامل | CORE-W-080.FE.T01؛ قبولی/رد: برای bank pending یا gift موجود، رقم کل نباید به‌عنوان نقد قابل برداشت نمایش یابد؛ فرمول تاییدنشده منتشر نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
-| CORE-W-080.QA | آزمون cutoff روز مرزی منطقه زمانی و انواع منابع و بازبودن فرمول پوشش | CORE-W-080.QA.T01؛ قبولی/رد: داده قبل و بعد cutoff جدا باشد؛ با عدم تأیید متخصص report coverage-ratio با label approved ساخته نشود؛ شاهد migration، API و ledger assertions؛ آزمون طراحی شده، اجرا نشده |
+| CORE-W-080.DB | DailyCutoff با timezone، pending/in_transit/gift separation و معادله تعهد به‌صورت PolicyVersion با status pending_accountant_approval | CORE-W-080.DB.T01: یک تراکنش ۲۳:۵۹ و دیگری ۰۰:۰۱ در دو برش زمانی مشخص قرار بگیرند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-080.BE | گزارش روزانه پوشش تعهد با سه دسته وجوه و استثنا؛ تا تصویب فرمول قطعی، عدد coverage «تأییدشده» منتشر نشود | CORE-W-080.BE.T01: گزارش با policy هنوز pending، وضعیت unapproved داشته باشد و ادعای کفایت پوشش نکند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-080.FE | داشبورد برش روزانه timezone و اقلام باز/هدیه را جدا نشان دهد؛ هشدار provisional | CORE-W-080.FE.T01: اقلام در راه و هدیه در یک عدد «وجه نقد قطعی» جمع نشوند؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-080.QA | تست مرز روز در timezone، settlement دیررس، gift و تصمیم باز فرمول حسابداری | CORE-W-080.QA.T01: نتیجه فرمول نهایی بدون تأیید حسابدار BLOCKED باشد؛ نمونه fixture جای مصوبه را نگیرد؛ شواهد: fixture/trace/ledger assertion؛ طراحی‌شده، اجرا نشده |
 
 #### CORE-W-081 — ۸.۲. احراز عملیات حساس
 **مرجع:** کیف پول ۸.۲، خط 1311؛ **مالک:** CORE-US-11.
