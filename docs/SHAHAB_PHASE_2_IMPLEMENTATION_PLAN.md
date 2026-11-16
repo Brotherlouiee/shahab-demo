@@ -866,10 +866,23 @@
 - منابع: دستور پرداخت، لغو پرداخت و ارتباط دفترکل و پرداخت. نگاشت دقیق وضعیت‌های داخلی و زمان سرویس ایرانی باید طراحی شود.
 | تسک | خروجی اجرایی | آزمون پذیرش |
 |---|---|---|
-| CORE-W-057.DB | WithdrawalCase با hold و status requested/submitted/settled/failed/cancelled/unknown و زمان/شناسه بانک | CORE-W-057.DB.T01: در حالت submitted/unknown مبلغ نگه‌داشته‌شده مجدداً available نشود؛ شاهد: fixture، نسخه/شناسه، assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-057.BE | API ثبت برداشت، نگهداری مانده تا نتیجه، بررسی قبل ارسال و لغو فقط در وضعیت مجاز؛ timeout شکست تلقی نشود | CORE-W-057.BE.T01: timeout بانکی state=unknown و hold محفوظ؛ cancellation پس از پردازش بانک بدون تضمین موفقیت بماند؛ شاهد: fixture، نسخه/شناسه، assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-057.FE | نمای مرحله و شماره پیگیری، برآورد زمان فقط از ارائه‌دهنده منتخب و امکان لغو مشروط | CORE-W-057.FE.T01: پس از submitted متن «لغو حتمی» یا «برداشت آنی» نشان داده نشود؛ شناسه پیگیری موجود باشد؛ شاهد: fixture، نسخه/شناسه، assertion؛ طراحی شده، اجرا نشده |
-| CORE-W-057.QA | تست قطع ارتباط بعد ارسال، callback دیررس، لغو قبل/بعد ارسال و تکرار درخواست | CORE-W-057.QA.T01: retry با operation_id یکسان دستور برداشت بانکی دوم نسازد؛ final failure فقط پس از تأیید معتبر آزاد کند؛ شاهد: fixture، نسخه/شناسه، assertion؛ طراحی شده، اجرا نشده |
+| CORE-W-057.DB | WithdrawalCase با operation_id و wallet_id/owner، مقصد بانکی تأییدشده و نسخه آن، مبلغ اصل/کارمزد و quote_version، held_amount، status_version، external_reference، refund_origin و رویدادهای immutable؛ وضعیت preview صرفاً محاسباتی، نه رکورد رزرو | CORE-W-057.DB.T01: پیش‌نمایش ۱۰۰+۲ ریال هیچ held journal نسازد؛ پس از تأیید معتبر held=۱۰۲ و available به همان مقدار کاهش یابد؛ submitted و unknown hold را نگه دارند؛ duplicate operation_id یک WithdrawalCase و یک hold باشد؛ شواهد: fixture ریالی، event log، response بانک/mock، Ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-057.BE | API پیش‌نمایش بدون Hold؛ تأیید نهایی با احراز/مجوز و مقصد ثابت موجب Hold اتمیک اصل+کارمزد شود؛ submit بانکی idempotent، success معتبر→capture، failed قطعی پیش از خروج وجه→release، unknown→استعلام با Hold محفوظ، برگشت پس از خروج→ثبت جبرانی مستقل؛ لغو فقط در نقطه مجاز | CORE-W-057.BE.T01: روی timeout پس از submit، status=unknown و held=اصل+کارمزد باقی بماند و دستور بانکی دوم صادر نشود؛ گزارش موفق فقط با پاسخ معتبر بانک و journal capture؛ refund بعد از خروج وجه به همان operation مرتبط شود؛ شواهد: fixture ریالی، event log، response بانک/mock، Ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-057.FE | نمای هفت حالت مجزا: پیش‌نمایش بدون رزرو، تأیید و رزرو، ارسال در انتظار، موفق قطعی با مرجع بانک، شکست قطعی و آزادسازی، نتیجه نامعلوم با پیگیری، برگشت پس از خروج وجه؛ عدم وعده زمان ثابت و نمایش لغو فقط اگر مجاز | CORE-W-057.FE.T01: قبل تأیید، مانده آزاد و hold تغییر نکند؛ بعد تأیید مبلغ رزرو نشان داده شود؛ در unknown برچسب «موفق» نباشد؛ پس از submitted دکمه «لغو فوری تضمینی» نشان داده نشود؛ برای return وضعیت استرداد جدا باشد؛ شواهد: fixture ریالی، event log، response بانک/mock، Ledger assertion؛ طراحی‌شده، اجرا نشده |
+| CORE-W-057.QA | ماتریس آزمون هفت گذار مالی جدول ۶.۵.۸ با سناریوهای retry، callback دیررس، قطع ارتباط، احراز، مقصد و لغو زودهنگام/دیرهنگام؛ اجرای E2E فقط در محیط بانکی کنترل‌شده | CORE-W-057.QA.T01: قطع ارتباط بعد ارسال و دو callback یک bank_instruction و یک capture بسازد؛ unknown تا استعلام hold محفوظ؛ شکست قطعی پیش از خروج وجه فقط یک release؛ عملیات پس از خروج وجه از مسیر bank_return با reversal مستقل برگردد؛ شواهد: fixture ریالی، event log، response بانک/mock، Ledger assertion؛ طراحی‌شده، اجرا نشده |
+
+**ریزآزمون‌های مستقل گردش برداشت (مرجع جدول کیف پول ۶.۵.۸؛ مالک Core / CORE-US-39):**
+
+| شناسه آزمون | منشأ و حالت | شرط قبولی | شرط رد |
+|---|---|---|---|
+| CORE-W-057.QA.T02 | W:969 پیش‌نمایش | بدون تأیید، preview مبلغ و مقصد و کارمزد برگردد، تعداد Hold=۰ و available بدون تغییر بماند | preview باعث reservation یا کسر وجه شود |
+| CORE-W-057.QA.T03 | W:970 تأیید نهایی | پس از احراز/تأیید همان quote و مقصد، دقیقاً یک Hold به مبلغ اصل+کارمزد بر کیف پرداخت‌کننده ثبت شود | بدون تأیید، تغییر مقصد یا کمبود موجودی Hold ثبت شود |
+| CORE-W-057.QA.T04 | W:971 ارسال بانکی | در submitted تمام مبلغ Hold از available/cashout دیگر خارج بماند؛ ارسال مجدد همان operation_id دستور جدید نسازد | مبلغ هم‌زمان خرج شود یا دومین دستور بانکی ایجاد شود |
+| CORE-W-057.QA.T05 | W:972 موفقیت معتبر | فقط پس از evidence بانکی معتبر، یک capture قطعی و bank_reference ثبت شود | callback نامعتبر یا مرورگر «موفق» را قطعی کند یا capture تکراری شود |
+| CORE-W-057.QA.T06 | W:973 شکست قطعی پیش از خروج | با تأیید بانکی نبود خروج وجه، تمام اصل و کارمزد رزروشده فقط یک بار آزاد شوند | صرف timeout یا خطای شبکه Hold آزاد کند یا هزینه قطعی بسازد |
+| CORE-W-057.QA.T07 | W:974 نتیجه نامعلوم | پس از timeout وضعیت unknown و Hold پابرجا باشد؛ inquiry قبل از هر retry به همان bank_operation_id متصل شود | unknown به failed قطعی تبدیل شود، Hold آزاد شود یا پرداخت دوم بدون استعلام رخ دهد |
+| CORE-W-057.QA.T08 | W:975 برگشت پس از خروج | bank_return پس از settlement در journal جبرانی با شناسه payout اصلی و مسیر بازگشت واقعی ثبت شود | return به آزادسازی hold پیش از خروج تبدیل یا ledger اصلی حذف شود |
+| CORE-W-057.QA.T09 | W:977 قطع مرورگر | بستن صفحه پس از confirmation، operation/hold را لغو نکند و بازگشت به UI همان status server را نشان دهد | refresh صفحه پرداخت جدید بسازد یا Hold را خودسرانه آزاد کند |
 
 #### CORE-W-058 — ۶.۵.۹. شناسایی گیرندهٔ فردبه‌فرد
 **مرجع:** کیف پول ۶.۵.۹، خط 985؛ **مالک:** CORE-US-38.
