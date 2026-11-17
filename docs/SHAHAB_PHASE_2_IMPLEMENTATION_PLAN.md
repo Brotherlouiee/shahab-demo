@@ -2085,167 +2085,567 @@
 
 ### C03 — قراردادها، داده و زیرساخت مشترک
 
-**وضعیت:** `RA=PASS` / `IPA=PASS` در Bundle ممیزی‌شده؛ **۰** Requirement جدید، **۰** Task جدید؛ 6 Task و 18 Subtask پذیرفته‌شده C01 با مالک اجرای C03؛ **۲۲** Requirement مرتبط با این شش Task؛ 22 Test طراحی اختصاصی C03 با 66 Case؛ اجرای محصول: **صفر**.
+**وضعیت برنامه‌ریزی:** `RA=PASS` / `IPA=PASS` بر مبنای Bundle نهایی C03. **وضعیت محصول:** `NOT_IMPLEMENTED / NOT_EXECUTED`؛ شش Task برنامه‌ریزی شده‌اند اما مجوز اجرای آن‌ها صادر نشده و پیش‌نیازهای تصمیمی باقی است. این فصل اطلاعات اجرایی و ردیابی لازم را از رجیستری نهایی مستقیماً وارد **همین سند** می‌کند؛ مراجعه به Bundle برای فهم و استفاده از برنامه الزامی نیست. Bundle فقط مدرک ممیزی و بازیابی است.
 
-**اصل عدم تکرار:** Requirements و Taskهای این بسته از C01 بازیافت می‌شوند. مالکیت برنامه‌ریزی C01 باقی می‌ماند و مالکیت پیاده‌سازی C03 طبق Registry ثبت شده است. این ردیابی به معنی اجرای Task نیست.
+| شاخص | مقدار پذیرفته‌شده | نکته کاربردی |
+| --- | --- | --- |
+| Requirement جدید C03 | 0 | از Requirements پذیرفته‌شده C01 استفاده می‌شود |
+| Requirement در دامنه شش Task | 22 | تمام ۲۲ مورد Test اختصاصی C03 دارند؛ عدد ۲۰ در شواهد P2 مربوط به مجموعه اولیه بازیافتی است، نه پوشش نهایی Taskها |
+| Story/Enabler جدید C03 | 0 | دو Enabler موجود C01 با شناسه TE:CORE:002 و TE:CORE:003 |
+| Task / Subtask جدید C03 | ۰ / ۰ | ۶ Task و ۱۸ Subtask پذیرفته‌شده C01 با مالک پیاده‌سازی C03 |
+| AC و Test بازیافتی C01 | ۲۲ AC / ۲۲ Test | متن کامل AC و Testهای C01 در بخش C01 همین سند موجود است |
+| Test و Case اختصاصی C03 | ۲۲ Test / ۶۶ Case | تعاریف آینده؛ هیچ Case محصولی اجرا نشده است |
+| Contract / Dependency / Delivery Link / Handoff | ۵ / ۱۰ / ۱۱ / ۹ | مالکیت و پیوند بین بسته‌ها در ادامه همین فصل |
+| تحقق DoD | `C03-DOD-V5-001` | فقط پذیرش طراحی و برنامه، نه پیاده‌سازی، استقرار یا صدور مجوز |
 
-#### Taskها و Subtaskهای مسئولیت اجرایی C03
+**قاعده عدم تکرار:** C01 مالک برنامه‌ریزی ۲۲ Requirement و شش Task است؛ C03 مالک پیاده‌سازی همان Taskهاست. محتوای پذیرفته‌شده در C01 تغییر نکرده است. هر شناسه و معیار پذیرش در این فصل با همان هویت C01 مصرف می‌شود. شناسه جدید برای تکرار الزام یا Task ساخته نشده است.
+
+#### محدوده و مبنای تعیین مالکیت C03
+- **منابع ثابت:** Blueprint `9681c2bf6c3149317c3788516748084cfb6eac7c` و Wallet `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`
+- **G1 و Scope:** ۲٬۲۳۰ واحد منبع، دسته‌بندی نهایی {'CROSS_REFERENCE': 299, 'EXCLUDED_WITH_REASON': 1913, 'SHARED_CONTRACT': 18}؛ 18 بازخوانی عمیق از ۱۸ واحد الزامی؛ عدم قطعیت باز = 0؛ Digest `SCOPE:V4:C03` برابر `0cf1ba978b66b7b2303fa5ee89d955626e66af001995fd6e23de67a4463fe5e3`؛ F01/F03 رفع شده‌اند
+- **نتیجه P1:** COMPLETE_WITH_F01_F02_F03_REMEDIATION
+- **نتیجه P2 تا P6:** P2_status=COMPLETE؛ P3_status=COMPLETE؛ P4_status=COMPLETE_WITH_TARGETED_STATE_AND_PERMISSION_REMEDIATION؛ P5_status=COMPLETE؛ P6_status=COMPLETE_WITH_TARGETED_STATE_AND_PERMISSION_REMEDIATION
+- **استقلال بازبین:** SAME_AUTHOR_TARGETED_READBACK؛ شواهد فرایندی و منبع‌خوانی، نه داوری مستقل بیرونی یا اجرای محصول
+در بندهای `B:477–478` ساختار جدول، نه الزام اجرایی، تشخیص داده شد؛ بند `B:486` موضوع باز Adviser است و به مصوبه C03 تبدیل نشد. برای ۲۱ Source Unit تعیین‌تکلیف اختصاصی در زیر ثبت شده است. موارد conceptual/Adviser متعلق به C03 نیستند و Handoff آن‌ها همچنان باز است.
+
+##### دفتر تعیین‌تکلیف مالکیت ۲۱ واحد اثرگذار
+- **`DISPOSITION:C03:SU-B-00224`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00224`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00225`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00225`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00226`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00226`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00227`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00227`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00228`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00228`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00229`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00229`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00230`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00230`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00232`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00232`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
+- **`DISPOSITION:C03:SU-B-00233`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00233`؛ مالک دامنه: Each producing service owns its own Job/Event; C03 implements the common delivery boundary؛ مالک بسته: `PENDING`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`؛ دلیل: Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
+- **`DISPOSITION:C03:SU-B-00572`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00572`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00573`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00573`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00584`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00584`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ Task: `TASK:CORE:005`؛ قرارداد: `CONTRACT:C01:03`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00589`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00589`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00590`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00590`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00591`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00591`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:04`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00692`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00692`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00693`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00693`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00694`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00694`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00222`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00222`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Table heading only.
+- **`DISPOSITION:C03:SU-B-00223`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00223`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Markdown table separator only.
+- **`DISPOSITION:C03:SU-B-00231`**: `CROSS_REFERENCE` / `OPEN_ADVISER_DECISION_NOT_ACCEPTED`؛ Source Unit `SU-B-00231`؛ مالک دامنه: RAG/Adviser retrieval decision policy (OPEN_DECISION)؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: G1 explicitly records an open proposal; it is not elevated to a C03 requirement.
+
+#### بررسی وضعیت فعلی کد (فقط شواهد استاتیک)
+- **شناسه ممیزی:** INSPECT:C03:001
+- **Commit مبنای بازبینی:** f28033b6496e39f4a59644cccf5fb2c9886fceb4
+- **نتیجه بازبینی:** FastAPI composition and versioned API v1 routes exist; SQLAlchemy/PostgreSQL schema and Alembic migrations exist; Redis is a best-effort questionnaire cache and not a durable queue; Docker Compose local/production definitions and restricted health endpoints exist. Search of backend/app for outbox, standalone durable job runner, queue worker, circuit-breaker package and OpenTelemetry SDK found no implementation. Custom request timing/logging/correlation middleware exists. Presence is inventory evidence only; it does not verify runtime, production configuration or C03 target behavior.
+- `FastAPI_API`: `EXISTING_VERIFIED_BY_SOURCE`
+- `SQLAlchemy_and_Alembic`: `EXISTING_VERIFIED_BY_SOURCE`
+- `PostgreSQL`: `EXISTING_VERIFIED_BY_SOURCE`
+- `Redis_cache`: `EXISTING_PARTIAL_BEST_EFFORT`
+- `Docker_Compose`: `EXISTING_VERIFIED_BY_SOURCE`
+- `health_live_ready`: `EXISTING_VERIFIED_BY_SOURCE`
+- `durable_outbox`: `NEW_REQUIRED_ONLY_WHEN_EVENT_PROVEN`
+- `job_worker`: `BLOCKED_BY_OWNER_ENGINE_DECISIONS`
+- `circuit_breaker`: `NEW_OR_REUSE_DECISION_REQUIRED`
+- `OpenTelemetry`: `NOT_FOUND_IN_REVIEWED_BACKEND_APP`
+- `runtime_verified`: `False`
+- `product_tests_executed`: `0`
+**مسیرهای مطالعه‌شده (نسخه فایل در Commit مبنا):**
+- `backend/app/main.py` — Blob `2e8659b22f93d8d84b456453548ca336feb88f56`
+- `backend/app/api/v1/health.py` — Blob `fffa3b61012920d2f7443535fea8b4280200dda7`
+- `backend/app/api/observability.py` — Blob `7ca27109bc1806c52416a3120594216da3ec9ae6`
+- `backend/app/core/logging.py` — Blob `70e44f9643f98e035d65968236737fa8b4863a06`
+- `backend/app/infrastructure/db/models.py` — Blob `4516bad0c1dd877b3961a8c5bbd44fc57050a0e2`
+- `backend/app/questionnaire/infrastructure/redis_cache.py` — Blob `134440ca29d321545a13a94335b211045828abcd`
+- `alembic/env.py` — Blob `632880bfd1c58152719b50b3198558d6427c50ff`
+- `alembic/versions/7b3f2f4a9c10_add_questionnaire_sessions.py` — Blob `d6b441ce16bb46d600619a3cefb0c46aea8b0fb1`
+- `docker-compose.yml` — Blob `bff45ca31ae7a6deec2bed0d3d5dad2cf8d61b72`
+- `docker-compose.prod.yml` — Blob `377755738b763008420dd8b94a45fb1ae7236943`
+این بررسی، وجود واقعی رفتار در Runtime، کیفیت استقرار یا نتیجه آزمون محصول را اثبات نمی‌کند.
+
+#### Enabler، Task و Subtaskهای مسئولیت اجرایی C03
 ##### `TASK:CORE:005` — Design service-owned durable job pattern without imposing one universal workflow engine
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
-- **خروجی:** versioned job pattern and worker-crash/migration test contract
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `ARCHITECTURE_DESIGN`؛ PostgreSQL job state; Port/Adapter; service-owned worker
+- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T002 service ownership; owner-specific long-running use case
-- `TASK:CORE:005.S01`: Separate short synchronous calls from actual long jobs؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
-- `TASK:CORE:005.S02`: Specify persistent job state/version and safe recovery؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
-- `TASK:CORE:005.S03`: Define old-job completion vs new-engine routing criteria؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
+- **خروجی دقیق:** versioned job pattern and worker-crash/migration test contract
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
+- **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
+- **Testهای C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
+- **Testهای C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
+- **قراردادهای وابسته:** `CONTRACT:C01:03`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:02`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:005:01`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:002 (HARD)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
 ##### `TASK:CORE:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **خروجی:** minimal event/outbox protocol with fault-injection acceptance
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `CONDITIONAL_DESIGN`؛ Owner transaction; outbox; event schema; subscribers
+- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T002 data ownership; demonstrable event consumer/use case
-- `TASK:CORE:006.S01`: Identify truly necessary reliable events؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- `TASK:CORE:006.S02`: Specify atomic local writes and publisher recovery؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- `TASK:CORE:006.S03`: Specify duplicate/out-of-order/unknown-schema consumer behavior؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **خروجی دقیق:** minimal event/outbox protocol with fault-injection acceptance
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
+- **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **Testهای C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
+- **Testهای C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
+- **قراردادهای وابسته:** `CONTRACT:C01:04`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:02`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:006:01`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:002 (HARD)؛ TASK:CORE:005 (CONTRACT)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
 ##### `TASK:CORE:007` — Specify bounded cross-service resilience and interactive/background isolation
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
-- **خروجی:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `CONTRACT_HARDENING`؛ HTTP client; job queue; rate/timeout/circuit policy
+- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T003 and T008 service-contract interfaces
-- `TASK:CORE:007.S01`: Set timeout budget from tested path baseline؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
-- `TASK:CORE:007.S02`: Bound transient retry and circuit state transitions؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
-- `TASK:CORE:007.S03`: Separate concurrency pools and graceful degradation؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
+- **خروجی دقیق:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
+- **ACهای C01:** `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
+- **Testهای C01:** `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`
+- **Testهای C03:** `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`
+- **قراردادهای وابسته:** `CONTRACT:C01:03`، `CONTRACT:C01:06`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:03`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:007:01`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:003 (CONTRACT)؛ TASK:CORE:008 (CONTRACT)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
 ##### `TASK:CORE:008` — Design Core API versioning and semantic provider/consumer compatibility verification
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **خروجی:** contract matrix and migration-safe OpenAPI evolution plan
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `CONTRACT_CHANGE`؛ FastAPI OpenAPI; API v1 router; schema fixtures; CI
+- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T002 authority matrix and existing API schema
-- `TASK:CORE:008.S01`: Inventory existing versioned API and consumers؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- `TASK:CORE:008.S02`: Specify schema-first compatible and breaking change protocol؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- `TASK:CORE:008.S03`: Define consumer contract, semantic field and error tests؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **خروجی دقیق:** contract matrix and migration-safe OpenAPI evolution plan
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
+- **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **Testهای C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
+- **Testهای C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
+- **قراردادهای وابسته:** `CONTRACT:C01:02`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:05`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:008:01`، `EVIDENCE:C01:CODE:008:02`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:002 (HARD)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
 ##### `TASK:CORE:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **خروجی:** four-category config contract and validation/rollback tests
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `POLICY_AND_CONFIG_DESIGN`؛ core/config.py; CI security; configuration deployment
+- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T001 baseline and known policy owners
-- `TASK:CORE:009.S01`: Inventory present Settings and secret paths؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
-- `TASK:CORE:009.S02`: Define schema, policy authorization, flag dependency and change audit؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
-- `TASK:CORE:009.S03`: Design compatible config rollback and negative gate cases؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
+- **خروجی دقیق:** four-category config contract and validation/rollback tests
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
+- **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
+- **Testهای C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
+- **Testهای C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
+- **قراردادهای وابسته:** `CONTRACT:C01:05`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:09`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:009:01`، `EVIDENCE:C01:CODE:009:02`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:008 (CONTRACT)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
 ##### `TASK:CORE:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
-- **مالکیت:** Planning `C01` / Implementation `C03`
-- **Requirementهای مرتبط:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
-- **خروجی:** telemetry data-classification and SLO measurement/runbook acceptance contract
+- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
+- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
+- **نوع کار، اجزا:** `OBSERVABILITY_DESIGN`؛ api/observability.py; metrics/logging; tracing; CI and runbooks
+- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
+- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
 - **شرط ورود:** T001 operational footprint and realistic workload
-- `TASK:CORE:010.S01`: Map existing low-cardinality API observability؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- `TASK:CORE:010.S02`: Specify trace context propagation without PII/OTP؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- `TASK:CORE:010.S03`: Define measurement experiment and SigNoz decision gate؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
+- **خروجی دقیق:** telemetry data-classification and SLO measurement/runbook acceptance contract
+- **Requirementهای پذیرفته‌شده:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
+- **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
+- **Testهای C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
+- **Testهای C03:** `TEST:CORE:C03:021`، `TEST:CORE:C03:022`، `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
+- **قراردادهای وابسته:** `CONTRACT:C01:06`
+- **گیت‌های تصمیمی لازم:** `DECISION:C01:04`
+- **شواهد کد C01:** `EVIDENCE:C01:CODE:010:01`، `EVIDENCE:C01:CODE:010:02`
+- **تخمین:** ESTIMATION_REQUIRED
+- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
+- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:007 (PREFERENCE)
+- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
+**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
+- **`TASK:CORE:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
+- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
+- Provider/consumer and decision gates resolved before dependent implementation or activation
+- Future tests executed in stated authorized environment with versioned evidence before product Done
+- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-#### فهرست مشترک Requirements با مالک C01
-- `REQ:CORE:006` (مرجع B:869;B:1212-1214): Core exposes versioned and authorized data/domain/catalogue interfaces with minimal fields, provenance, version and error behavior.
-- `REQ:CORE:010` (مرجع B:1192;B:2075): Short deterministic operations use synchronous APIs; long owner-controlled work uses durable asynchronous Job workflows when needed.
-- `REQ:CORE:011` (مرجع B:916-918;B:1835): Each Job owner persists state/result in PostgreSQL and exposes versioned ports/adapters, safe cancel/resume and recovery.
-- `REQ:CORE:012` (مرجع B:1192;B:1216;B:1833): Use transactional outbox only where reliable events are necessary; consumers deduplicate and publishers recover safely.
-- `REQ:CORE:015` (مرجع B:1827;B:1907): Contracts are defined in versioned OpenAPI/schema before breaking changes and tested for structural and semantic consumer compatibility.
-- `REQ:CORE:016` (مرجع B:1827;B:1907;B:2075): Breaking changes use new version or expand/migrate/contract with tested provider-consumer matrix and error contract.
-- `REQ:CORE:017` (مرجع B:25;B:1917): Separate typed/validated operational config, secrets, feature flags and business policies; financial policy cannot be a free-form toggle.
-- `REQ:CORE:018` (مرجع B:1917;B:2106): Config/flag changes require owner permission, diff, audit, secret protection, dependency checks and rollback safety.
-- `REQ:CORE:019` (مرجع B:1192;B:1837): OpenTelemetry logs/metrics/traces use nonidentifying correlation IDs; no OTP, token, identity or raw questionnaire in telemetry.
-- `REQ:CORE:020` (مرجع B:1837;B:1903;B:1913;B:2332): SLO, alerts, runbooks, CPU/RAM and incident controls require measured baselines, not invented thresholds.
-- `REQ:CORE:021` (مرجع B:24;B:1837): SigNoz is a conditional evaluation; self-hosting on the current production VM is prohibited under recorded capacity; revised deployment requires new evidence and separate approval.
-- `REQ:CORE:037` (مرجع B:1192;B:1913): Every synchronous cross-service call must obey a bounded timeout budget; failures must be surfaced and contained.
-- `REQ:CORE:038` (مرجع B:1192;B:1913): Use circuit breaker where unstable external service can cascade failures; recover without spreading failure.
-- `REQ:CORE:039` (مرجع B:918;B:1192;B:1913): Retry only transient/retriable outcomes with backoff and a bounded attempt count; uncertain financial effects are reconciled before retry.
-- `REQ:CORE:040` (مرجع B:1192;B:1913): Separate capacity of interactive requests and heavy background work using bulkhead or controlled concurrency.
-- `REQ:CORE:041` (مرجع B:918;B:1835): Recover pending in-service jobs after worker restart while preserving owner authority and avoiding repeated effect.
-- `REQ:CORE:042` (مرجع B:918;B:1835): On engine migration, deliberately route new jobs to the new engine and complete in-flight jobs on the prior engine; adapters alone do not prove zero-change migration.
-- `REQ:CORE:043` (مرجع B:1216;B:1833;B:1915): Event consumers deduplicate identity and enforce versioned ordering/compatibility; unknown versions are rejected or quarantined, never blindly applied.
-- `REQ:CORE:044` (مرجع B:1216;B:1915): Outbox publisher must persist unsent local records and recover after commit-before-send crash without missing necessary events.
-- `REQ:CORE:045` (مرجع B:406;B:1917): Scoring, catalogue freshness and publication policies require versioned authorized change with regression evidence, never a free operational toggle.
-- `REQ:CORE:046` (مرجع B:1917;B:2106;B:1690): Configuration and flags need schema validation, dependency validation, secret scanning, audit/change authorization and compatible rollback.
-- `REQ:CORE:047` (مرجع B:1192;B:1837;B:1690): Telemetry and correlation identifiers must exclude real identities, OTPs, tokens and raw form/questionnaire payloads.
+#### Requirementهای مشترک C01 و ردگیری کامل C03
+متن کامل تعریف ACهای C01، شامل Given/When/Then/Negative/Boundary، و تعریف Testهای تاریخی C01 در فصل C01 همین سند موجود است. جدول زیر برای تمام Requirements تحت مسئولیت اجرایی C03، ردیابی صریح Source Unit، رفتار اتمی، Task و Test اختصاصی C03 را نیز حفظ می‌کند. این شناسه‌ها نسخه جدید Requirement محسوب نمی‌شوند.
 
-#### Testهای اختصاصی C03 و Caseها
-##### `TEST:CORE:C03:021` — Requirement: `REQ:CORE:020`
-- **Task:** TASK:CORE:010
-- **AC:** `AC:CORE:C01:020`
-- **رفتارها:** `REQ:CORE:020.B01`، `REQ:CORE:020.B02`، `REQ:CORE:020.B03`، `REQ:CORE:020.B04`
-- **Environment:** Versioned synthetic workload, SLI definitions, owner, alert route, runbook and measured CPU/RAM/latency/throughput/cost evidence are supplied; no numeric target is pre-approved.
-- **Oracle:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
-- **Status:** NOT_EXECUTED
-- **`TEST:CORE:C03:021.P` — `POSITIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Record and inspect the permitted planning/evidence path for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
-  - Input: Synthetic run with measured baseline and a non-sensitive worker/DB fault at a declared probe point.
-  - Observable Oracle: SLO/SLI and Error Budget are tied to versioned measurements and named owner; alert maps to user impact and a usable runbook; capacity claim cites measurements, not an invented threshold.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
-- **`TEST:CORE:C03:021.N` — `NEGATIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Challenge the unsupported or explicitly prohibited proposal for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
-  - Input: Proposed SLO uses a historical VM size as its capacity proof; no workload measurement, runbook action, or owner decision is attached.
-  - Observable Oracle: The claimed threshold/capacity value has no measurement provenance or decision owner; validator marks the evidence insufficient and no value becomes accepted.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
-- **`TEST:CORE:C03:021.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Exercise the decision boundary for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload and inspect recorded approval/deployment state.
-  - Input: Run the probe during the declared workload, then inject a worker/DB fault and collect alert, escalation and runbook drill records.
-  - Observable Oracle: Fault is detected through the declared alert route; drill records escalation, containment/recovery and instrumentation overhead without inventing a numeric pass threshold.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the boundary probe must leave deployment disabled until the explicitly required separate decision is recorded.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: A complete dossier without separate approval is the boundary; no race or concurrent operation is asserted.
+##### `REQ:CORE:006` — Core exposes versioned and authorized data/domain/catalogue interfaces with minimal fields, provenance, version and error behavior.
+- **منابع و Source Unit:** B:869;B:1212-1214؛ `SU-B-00435`، `SU-B-00589`، `SU-B-00590`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Core data, domain and catalogue consumers
+- **استثنا:** Catalogue visibility alone grants neither personal-data access nor an action
+- **رفتار `REQ:CORE:006.B01`:** Expose versioned contracts with owner, consumer, purpose and minimal fields
+- **رفتار `REQ:CORE:006.B02`:** Enforce identity, scope and authorization before releasing data
+- **رفتار `REQ:CORE:006.B03`:** Preserve stable reference, provenance, version/freshness, approval and access metadata
+- **رفتار `REQ:CORE:006.B04`:** Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result
+- **Taskهای اجرایی:** `TASK:CORE:008`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:006`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:006`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:001`
 
-##### `TEST:CORE:C03:022` — Requirement: `REQ:CORE:021`
-- **Task:** TASK:CORE:010
-- **AC:** `AC:CORE:C01:021`
-- **رفتارها:** `REQ:CORE:021.B01`، `REQ:CORE:021.B02`، `REQ:CORE:021.B03`
-- **Environment:** Current production VM has the recorded capacity limitation; proposal selects SigNoz only for conditional evaluation; no revised approval is present.
-- **Oracle:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
-- **Status:** NOT_EXECUTED
-- **`TEST:CORE:C03:022.P` — `POSITIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Record and inspect the permitted planning/evidence path for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
-  - Input: Submit a self-hosted SigNoz deployment proposal targeting the current production VM under recorded capacity.
-  - Observable Oracle: Evaluation remains conditional; no deployment is initiated, and each decision dimension is evidenced for the decision owner.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
-- **`TEST:CORE:C03:022.N` — `NEGATIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Challenge the unsupported or explicitly prohibited proposal for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
-  - Input: Supply a Cloud preference or apparent spare-capacity claim without measured capacity/cost/security/retention/sampling evidence or separate approval.
-  - Observable Oracle: Current-VM self-hosting proposal is rejected; Cloud is not silently accepted from preference alone and unsupported measurements do not authorize either option.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
-- **`TEST:CORE:C03:022.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Evaluate the technically complete SigNoz decision dossier while independent deployment approval is still absent; inspect decision status and deployment state.
-  - Input: Prepare a technically complete revised dossier containing measured capacity, cost, security, retention, sampling and host evidence; record that separate owner deployment approval has not been issued; keep deployment unexecuted.
-  - Observable Oracle: Even when a dossier is complete, status remains decision-pending until separate approval; the fixture records no deployment or configuration activation.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — evidence completeness alone does not authorize deployment; no approval, deployment, or configuration activation is created by this case.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or Cloud/self-hosted choice changes without the separately recorded approval; current-VM self-hosting remains prohibited.
-  - Boundary/Race: Boundary: all technical evidence is complete, but separate owner approval is absent; current-VM self-hosting remains prohibited and deployment remains unexecuted.
+##### `REQ:CORE:010` — Short deterministic operations use synchronous APIs; long owner-controlled work uses durable asynchronous Job workflows when needed.
+- **منابع و Source Unit:** B:1192;B:2075؛ `SU-B-00572`، `SU-B-00942`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Classifying a real operation
+- **استثنا:** An independent broker is not a prerequisite
+- **رفتار `REQ:CORE:010.B01`:** Use authenticated versioned synchronous API for short deterministic work
+- **رفتار `REQ:CORE:010.B02`:** Use durable service-owned asynchronous Job only for actual long background work
+- **رفتار `REQ:CORE:010.B03`:** Do not move short loan scoring behind a queue
+- **Taskهای اجرایی:** `TASK:CORE:005`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:010`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:010`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:002`
+
+##### `REQ:CORE:011` — Each Job owner persists state/result in PostgreSQL and exposes versioned ports/adapters, safe cancel/resume and recovery.
+- **منابع و Source Unit:** B:916-918;B:1835؛ `SU-B-00449`، `SU-B-00450`، `SU-B-00835`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** A service has a justified durable job
+- **استثنا:** Redis is an optional execution queue, not authoritative state
+- **رفتار `REQ:CORE:011.B01`:** Persist Job identity, state, attempts, error and result in owner PostgreSQL
+- **رفتار `REQ:CORE:011.B02`:** Separate domain logic from engine via versioned Job/Workflow ports and adapters
+- **رفتار `REQ:CORE:011.B03`:** Provide safe pause, resume and cancellation with audit and owner authority
+- **Taskهای اجرایی:** `TASK:CORE:005`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:011`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:011`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:003`
+
+##### `REQ:CORE:012` — Use transactional outbox only where reliable events are necessary; consumers deduplicate and publishers recover safely.
+- **منابع و Source Unit:** B:1192;B:1216;B:1833؛ `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** A data change must emit a reliable event to a real consumer
+- **استثنا:** No event bus, independent broker or distributed transaction required without demonstrated need
+- **رفتار `REQ:CORE:012.B01`:** Commit business data and Outbox record in the same local transaction
+- **رفتار `REQ:CORE:012.B02`:** Use outbox only for justified reliable asynchronous flows
+- **رفتار `REQ:CORE:012.B03`:** Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots
+- **Taskهای اجرایی:** `TASK:CORE:006`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:012`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:012`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:004`
+
+##### `REQ:CORE:015` — Contracts are defined in versioned OpenAPI/schema before breaking changes and tested for structural and semantic consumer compatibility.
+- **منابع و Source Unit:** B:1827;B:1907؛ `SU-B-00831`، `SU-B-00860`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Every public contract change
+- **استثنا:** Optional additions are compatible only when the consumer tolerates them
+- **رفتار `REQ:CORE:015.B01`:** Owner changes versioned OpenAPI/Schema before implementation
+- **رفتار `REQ:CORE:015.B02`:** Validate request/response structure, field meaning and financial units
+- **رفتار `REQ:CORE:015.B03`:** Specify negative, boundary, property-based and consumer-driven contract tests
+- **رفتار `REQ:CORE:015.B04`:** Treat financial semantic incompatibility as blocking, not a cosmetic schema warning
+- **Taskهای اجرایی:** `TASK:CORE:008`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:015`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:015`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:005`
+
+##### `REQ:CORE:016` — Breaking changes use new version or expand/migrate/contract with tested provider-consumer matrix and error contract.
+- **منابع و Source Unit:** B:1827;B:1907;B:2075؛ `SU-B-00831`، `SU-B-00860`، `SU-B-00942`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Breaking field/type/meaning or consumer change
+- **استثنا:** Shadow/Canary only after feasibility and capacity evidence
+- **رفتار `REQ:CORE:016.B01`:** Use new version or expand/migrate/contract for breaking changes
+- **رفتار `REQ:CORE:016.B02`:** Test a provider/consumer version matrix and block incompatible deployment
+- **رفتار `REQ:CORE:016.B03`:** Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class
+- **رفتار `REQ:CORE:016.B04`:** Identify impacted UI, Job and event consumers and controlled old-version retirement
+- **Taskهای اجرایی:** `TASK:CORE:008`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:016`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:016`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:006`
+
+##### `REQ:CORE:017` — Separate typed/validated operational config, secrets, feature flags and business policies; financial policy cannot be a free-form toggle.
+- **منابع و Source Unit:** B:25;B:1917؛ `SU-B-00014`، `SU-B-00865`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Configuration design
+- **استثنا:** R1 needs no independent configuration-management service
+- **رفتار `REQ:CORE:017.B01`:** Separate operational config, secrets, feature flags and business policies
+- **رفتار `REQ:CORE:017.B02`:** Use typed versioned validated configuration
+- **رفتار `REQ:CORE:017.B03`:** Financial business rules cannot become freely editable runtime toggles
+- **Taskهای اجرایی:** `TASK:CORE:009`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:017`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:017`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:007`
+
+##### `REQ:CORE:018` — Config/flag changes require owner permission, diff, audit, secret protection, dependency checks and rollback safety.
+- **منابع و Source Unit:** B:1917;B:2106؛ `SU-B-00865`، `SU-B-00963`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Configuration or flag change
+- **استثنا:** A rollback must remain compatible with code, API, valid Snapshot and Job
+- **رفتار `REQ:CORE:018.B01`:** Require authorized owner and pre-deployment Config Diff
+- **رفتار `REQ:CORE:018.B02`:** Record actor, time, environment, permission and change history
+- **رفتار `REQ:CORE:018.B03`:** Check dependency and secret safety before activation
+- **رفتار `REQ:CORE:018.B04`:** Reject incompatible rollback or stop the affected capability
+- **Taskهای اجرایی:** `TASK:CORE:009`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:018`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:018`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:008`
+
+##### `REQ:CORE:019` — OpenTelemetry logs/metrics/traces use nonidentifying correlation IDs; no OTP, token, identity or raw questionnaire in telemetry.
+- **منابع و Source Unit:** B:1192;B:1837؛ `SU-B-00572`، `SU-B-00836`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Core/Adviser/Job observability
+- **استثنا:** Clarity/RUM is not the operational telemetry authority
+- **رفتار `REQ:CORE:019.B01`:** Use portable OpenTelemetry structured logs, metrics and traces
+- **رفتار `REQ:CORE:019.B02`:** Propagate random nonpersonal correlation across service and Job boundaries
+- **رفتار `REQ:CORE:019.B03`:** Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery
+- **Taskهای اجرایی:** `TASK:CORE:010`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:019`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:019`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:009`
+
+##### `REQ:CORE:020` — SLO, alerts, runbooks, CPU/RAM and incident controls require measured baselines, not invented thresholds.
+- **منابع و Source Unit:** B:1837;B:1903;B:1913;B:2332؛ `SU-B-00836`، `SU-B-00858`، `SU-B-00863`، `SU-B-01125`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Critical-path SLO, alert or infrastructure claims
+- **استثنا:** No numeric threshold or production capacity accepted from an unmeasured historical host
+- **رفتار `REQ:CORE:020.B01`:** Measure SLI/SLO and Error Budget from a versioned baseline with owner
+- **رفتار `REQ:CORE:020.B02`:** Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review
+- **رفتار `REQ:CORE:020.B03`:** Define non-sensitive synthetic probe and alert/recovery drill
+- **رفتار `REQ:CORE:020.B04`:** Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment
+- **Taskهای اجرایی:** `TASK:CORE:010`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:020`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:020`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:021`
+
+##### `REQ:CORE:021` — SigNoz is a conditional evaluation; self-hosting on the current production VM is prohibited under recorded capacity; revised deployment requires new evidence and separate approval.
+- **منابع و Source Unit:** B:24;B:1837؛ `SU-B-00013`، `SU-B-00836`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Telemetry tool and deployment choice
+- **استثنا:** Current recorded production VM capacity prohibits self-hosted SigNoz; new evidence and separate approval required for any revised choice
+- **رفتار `REQ:CORE:021.B01`:** Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted
+- **رفتار `REQ:CORE:021.B02`:** Do not deploy self-hosted SigNoz on the current production VM under recorded capacity
+- **رفتار `REQ:CORE:021.B03`:** Decide retention, sampling, channel, security, cost and host only after measured evidence and approval
+- **Taskهای اجرایی:** `TASK:CORE:010`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:021`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:021`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:022`
+
+##### `REQ:CORE:037` — Every synchronous cross-service call must obey a bounded timeout budget; failures must be surfaced and contained.
+- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Every synchronous cross-service call
+- **استثنا:** Circuit breakers are conditional on instability; the timeout budget itself is not
+- **رفتار `REQ:CORE:037.B01`:** Bound each synchronous call by an approved timeout budget
+- **رفتار `REQ:CORE:037.B02`:** Surface timeout and contain dependent failure without inventing success
+- **Taskهای اجرایی:** `TASK:CORE:007`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:037`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:037`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:010`
+
+##### `REQ:CORE:038` — Use circuit breaker where unstable external service can cascade failures; recover without spreading failure.
+- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Unstable dependency capable of cascading failure
+- **استثنا:** No claim all calls require the same breaker thresholds
+- **رفتار `REQ:CORE:038.B01`:** Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery
+- **رفتار `REQ:CORE:038.B02`:** Preserve independent capabilities during failure and recovery
+- **Taskهای اجرایی:** `TASK:CORE:007`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:038`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:038`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:011`
+
+##### `REQ:CORE:039` — Retry only transient/retriable outcomes with backoff and a bounded attempt count; uncertain financial effects are reconciled before retry.
+- **منابع و Source Unit:** B:918;B:1192;B:1913؛ `SU-B-00450`، `SU-B-00572`، `SU-B-00863`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Retry of a failed operation
+- **استثنا:** Unknown financial effect must be reconciled before retry, not treated as transient failure
+- **رفتار `REQ:CORE:039.B01`:** Retry only classified transient outcomes with backoff and bounded attempts
+- **رفتار `REQ:CORE:039.B02`:** Do not retry permanent or validation errors
+- **رفتار `REQ:CORE:039.B03`:** Use idempotency for side effects and reconcile unknown financial result before retry
+- **Taskهای اجرایی:** `TASK:CORE:007`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:039`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:039`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:012`
+
+##### `REQ:CORE:040` — Separate capacity of interactive requests and heavy background work using bulkhead or controlled concurrency.
+- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Interactive and heavy background work compete
+- **استثنا:** Numeric concurrency/share needs measurement and approval
+- **رفتار `REQ:CORE:040.B01`:** Separate interactive and background capacity with bulkhead/quota/concurrency control
+- **رفتار `REQ:CORE:040.B02`:** A saturated or failed worker cannot exhaust interactive API capacity
+- **رفتار `REQ:CORE:040.B03`:** Define visible controlled degradation rather than fabricated success
+- **Taskهای اجرایی:** `TASK:CORE:007`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:040`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:040`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:013`
+
+##### `REQ:CORE:041` — Recover pending in-service jobs after worker restart while preserving owner authority and avoiding repeated effect.
+- **منابع و Source Unit:** B:918;B:1835؛ `SU-B-00450`، `SU-B-00835`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Worker crash/restart with pending jobs
+- **استثنا:** A recovery may not bypass current authorization or duplicate financial/publication effect
+- **رفتار `REQ:CORE:041.B01`:** Resume pending owner-controlled jobs from persisted state after restart
+- **رفتار `REQ:CORE:041.B02`:** Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements
+- **رفتار `REQ:CORE:041.B03`:** Keep durable audit and trace of recovery outcome
+- **Taskهای اجرایی:** `TASK:CORE:005`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:041`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:041`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:014`
+
+##### `REQ:CORE:042` — On engine migration, deliberately route new jobs to the new engine and complete in-flight jobs on the prior engine; adapters alone do not prove zero-change migration.
+- **منابع و Source Unit:** B:918;B:1835؛ `SU-B-00450`، `SU-B-00835`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Workflow-engine/version migration
+- **استثنا:** An adapter alone does not prove migration without code changes
+- **رفتار `REQ:CORE:042.B01`:** Route new jobs deliberately to the new engine
+- **رفتار `REQ:CORE:042.B02`:** Complete in-flight jobs on the prior engine under original compatible semantics
+- **رفتار `REQ:CORE:042.B03`:** Test adapter/orchestration changes and failure/cancel/resume across migration
+- **Taskهای اجرایی:** `TASK:CORE:005`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:042`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:042`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:015`
+
+##### `REQ:CORE:043` — Event consumers deduplicate identity and enforce versioned ordering/compatibility; unknown versions are rejected or quarantined, never blindly applied.
+- **منابع و Source Unit:** B:1216;B:1833;B:1915؛ `SU-B-00591`، `SU-B-00834`، `SU-B-00864`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Event consumer receives delivery
+- **استثنا:** Unknown schema is explicitly rejected/quarantined, not blindly applied
+- **رفتار `REQ:CORE:043.B01`:** Deduplicate event identity before applying side effects
+- **رفتار `REQ:CORE:043.B02`:** Handle duplicate and out-of-order delivery according to versioned contract
+- **رفتار `REQ:CORE:043.B03`:** Test unknown-version handling and consumer compatibility
+- **رفتار `REQ:CORE:043.B04`:** Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine
+- **Taskهای اجرایی:** `TASK:CORE:006`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:043`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:043`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:016`
+
+##### `REQ:CORE:044` — Outbox publisher must persist unsent local records and recover after commit-before-send crash without missing necessary events.
+- **منابع و Source Unit:** B:1216;B:1915؛ `SU-B-00591`، `SU-B-00864`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Publisher crashes after local commit before send
+- **استثنا:** Delivery can be at least once; effective application must remain idempotent
+- **رفتار `REQ:CORE:044.B01`:** Keep unsent Outbox records durable and recover publishing after restart
+- **رفتار `REQ:CORE:044.B02`:** Do not lose necessary events or repeat business effects after send/ack crash
+- **رفتار `REQ:CORE:044.B03`:** Expose publisher lag, retry/final failure, recovery and periodic reconciliation
+- **Taskهای اجرایی:** `TASK:CORE:006`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:044`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:044`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:017`
+
+##### `REQ:CORE:045` — Scoring, catalogue freshness and publication policies require versioned authorized change with regression evidence, never a free operational toggle.
+- **منابع و Source Unit:** B:406;B:1917؛ `SU-B-00193`، `SU-B-00865`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Scoring, catalogue freshness or publication-policy change
+- **استثنا:** Technical rollback cannot activate obsolete legal evidence or incompatible Snapshot
+- **رفتار `REQ:CORE:045.B01`:** Version policy changes with authorized approval, regression and controlled publication
+- **رفتار `REQ:CORE:045.B02`:** Keep historical versions and reject invalid/obsolete Snapshot rollback
+- **رفتار `REQ:CORE:045.B03`:** Do not mutate financial results through a free operational flag
+- **Taskهای اجرایی:** `TASK:CORE:009`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:045`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:045`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:018`
+
+##### `REQ:CORE:046` — Configuration and flags need schema validation, dependency validation, secret scanning, audit/change authorization and compatible rollback.
+- **منابع و Source Unit:** B:1917;B:2106;B:1690؛ `SU-B-00865`، `SU-B-00963`، `SU-B-00763`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Config/flag deployment pipeline
+- **استثنا:** Secret-storage tool and key-rotation period remain design decisions
+- **رفتار `REQ:CORE:046.B01`:** Validate type, default, range and environment differences
+- **رفتار `REQ:CORE:046.B02`:** Validate feature dependencies, kill switch and change authorization
+- **رفتار `REQ:CORE:046.B03`:** Scan secrets and audit changes without exposing secret value
+- **رفتار `REQ:CORE:046.B04`:** Test compatible rollback and block invalid config, leakage or unintended financial change
+- **Taskهای اجرایی:** `TASK:CORE:009`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:046`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:046`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:019`
+
+##### `REQ:CORE:047` — Telemetry and correlation identifiers must exclude real identities, OTPs, tokens and raw form/questionnaire payloads.
+- **منابع و Source Unit:** B:1192;B:1837;B:1690؛ `SU-B-00572`، `SU-B-00836`، `SU-B-00763`
+- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
+- **شرط:** Telemetry, analytics and correlation
+- **استثنا:** Financial audit retention is independent of technical-log retention
+- **رفتار `REQ:CORE:047.B01`:** Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads
+- **رفتار `REQ:CORE:047.B02`:** Use safe low-cardinality labels and nonpersonal correlation IDs
+- **رفتار `REQ:CORE:047.B03`:** Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation
+- **Taskهای اجرایی:** `TASK:CORE:010`
+- **AC پذیرفته‌شده C01:** `AC:CORE:C01:047`
+- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:047`
+- **Testهای اختصاصی C03:** `TEST:CORE:C03:020`
+
+#### Testهای طراحی اختصاصی C03 — ورودی، عملیات و Oracle مستقل
+همه Testها **تعریف طراحی پذیرفته‌شده** با وضعیت `NOT_EXECUTED` هستند. برای اجرای آینده، Evidence و مجوزهای مالک لازم‌اند. PASSهای P4/P6 نشان‌دهنده اجرای این Testها روی محصول نیست.
 
 ##### `TEST:CORE:C03:001` — Requirement: `REQ:CORE:006`
-- **Task:** TASK:CORE:008
+- **Task:** `TASK:CORE:008`
 - **AC:** `AC:CORE:C01:006`
-- **رفتارها:** `REQ:CORE:006.B01`، `REQ:CORE:006.B02`، `REQ:CORE:006.B03`، `REQ:CORE:006.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:006.B01`، `REQ:CORE:006.B02`، `REQ:CORE:006.B03`، `REQ:CORE:006.B04`
+- **Source Unitها:** `SU-B-00435`، `SU-B-00589`، `SU-B-00590`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:05`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:001.P` — `POSITIVE`**
   - Actor/Fixture: Synthetic Adviser consumer requests a published loan catalogue through the authorized Core v1 port.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:006 and AC:CORE:C01:006; Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone.
@@ -2275,12 +2675,19 @@
   - Boundary/Race: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone; Injected stimulus: Between request A and request B, revoke Adviser scope and change catalogue version from fixture 8 to 9.
 
 ##### `TEST:CORE:C03:002` — Requirement: `REQ:CORE:010`
-- **Task:** TASK:CORE:005
+- **Task:** `TASK:CORE:005`
 - **AC:** `AC:CORE:C01:010`
-- **رفتارها:** `REQ:CORE:010.B01`، `REQ:CORE:010.B02`، `REQ:CORE:010.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:010.B01`، `REQ:CORE:010.B02`، `REQ:CORE:010.B03`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00942`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:002.P` — `POSITIVE`**
   - Actor/Fixture: Core API consumer performs deterministic scoring and the owning service handles a separate long ingestion job.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:010 and AC:CORE:C01:010; Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture.
@@ -2310,12 +2717,19 @@
   - Boundary/Race: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture; Injected stimulus: With no independent broker but owner PostgreSQL and worker available, scoring remains synchronous and the long job remains addressable by its durable id.
 
 ##### `TEST:CORE:C03:003` — Requirement: `REQ:CORE:011`
-- **Task:** TASK:CORE:005
+- **Task:** `TASK:CORE:005`
 - **AC:** `AC:CORE:C01:011`
-- **رفتارها:** `REQ:CORE:011.B01`، `REQ:CORE:011.B02`، `REQ:CORE:011.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:011.B01`، `REQ:CORE:011.B02`، `REQ:CORE:011.B03`
+- **Source Unitها:** `SU-B-00449`، `SU-B-00450`، `SU-B-00835`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:003.P` — `POSITIVE`**
   - Actor/Fixture: The job-owning service receives a valid long-running job request.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:011 and AC:CORE:C01:011; Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture.
@@ -2345,12 +2759,19 @@
   - Boundary/Race: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: Restart occurs after state commit but before acknowledgement.
 
 ##### `TEST:CORE:C03:004` — Requirement: `REQ:CORE:012`
-- **Task:** TASK:CORE:006
+- **Task:** `TASK:CORE:006`
 - **AC:** `AC:CORE:C01:012`
-- **رفتارها:** `REQ:CORE:012.B01`، `REQ:CORE:012.B02`، `REQ:CORE:012.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:012.B01`، `REQ:CORE:012.B02`، `REQ:CORE:012.B03`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:004.P` — `POSITIVE`**
   - Actor/Fixture: An approved async flow requires a reliable event after a local business update.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:012 and AC:CORE:C01:012; Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
@@ -2380,12 +2801,19 @@
   - Boundary/Race: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld; Injected stimulus: Crash after local commit before send: durable event is eventually sent after restart.
 
 ##### `TEST:CORE:C03:005` — Requirement: `REQ:CORE:015`
-- **Task:** TASK:CORE:008
+- **Task:** `TASK:CORE:008`
 - **AC:** `AC:CORE:C01:015`
-- **رفتارها:** `REQ:CORE:015.B01`، `REQ:CORE:015.B02`، `REQ:CORE:015.B03`، `REQ:CORE:015.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:015.B01`، `REQ:CORE:015.B02`، `REQ:CORE:015.B03`، `REQ:CORE:015.B04`
+- **Source Unitها:** `SU-B-00831`، `SU-B-00860`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:05`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:005.P` — `POSITIVE`**
   - Actor/Fixture: Provider and consumer review a proposed versioned contract before a breaking implementation change.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:015 and AC:CORE:C01:015; Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units.
@@ -2415,12 +2843,19 @@
   - Boundary/Race: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units; Injected stimulus: A compatible additive field is tested against both current consumers.
 
 ##### `TEST:CORE:C03:006` — Requirement: `REQ:CORE:016`
-- **Task:** TASK:CORE:008
+- **Task:** `TASK:CORE:008`
 - **AC:** `AC:CORE:C01:016`
-- **رفتارها:** `REQ:CORE:016.B01`، `REQ:CORE:016.B02`، `REQ:CORE:016.B03`، `REQ:CORE:016.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:016.B01`، `REQ:CORE:016.B02`، `REQ:CORE:016.B03`، `REQ:CORE:016.B04`
+- **Source Unitها:** `SU-B-00831`، `SU-B-00860`، `SU-B-00942`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:05`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:006.P` — `POSITIVE`**
   - Actor/Fixture: Provider proposes a change that may break two registered consumer versions.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:016 and AC:CORE:C01:016; Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id.
@@ -2450,12 +2885,19 @@
   - Boundary/Race: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id; Injected stimulus: During migration, old and new consumers run concurrently.
 
 ##### `TEST:CORE:C03:007` — Requirement: `REQ:CORE:017`
-- **Task:** TASK:CORE:009
+- **Task:** `TASK:CORE:009`
 - **AC:** `AC:CORE:C01:017`
-- **رفتارها:** `REQ:CORE:017.B01`، `REQ:CORE:017.B02`، `REQ:CORE:017.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:017.B01`، `REQ:CORE:017.B02`، `REQ:CORE:017.B03`
+- **Source Unitها:** `SU-B-00014`، `SU-B-00865`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:09`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:007.P` — `POSITIVE`**
   - Actor/Fixture: An operator prepares a runtime configuration change that must stay separate from protected business policy.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:017 and AC:CORE:C01:017; Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3.
@@ -2485,12 +2927,19 @@
   - Boundary/Race: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3; Injected stimulus: Config omits timeout_ms or supplies timeout_ms=-1.
 
 ##### `TEST:CORE:C03:008` — Requirement: `REQ:CORE:018`
-- **Task:** TASK:CORE:009
+- **Task:** `TASK:CORE:009`
 - **AC:** `AC:CORE:C01:018`
-- **رفتارها:** `REQ:CORE:018.B01`، `REQ:CORE:018.B02`، `REQ:CORE:018.B03`، `REQ:CORE:018.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:018.B01`، `REQ:CORE:018.B02`، `REQ:CORE:018.B03`، `REQ:CORE:018.B04`
+- **Source Unitها:** `SU-B-00865`، `SU-B-00963`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:09`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:008.P` — `POSITIVE`**
   - Actor/Fixture: An authorized owner submits a config change through the controlled change path.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:018 and AC:CORE:C01:018; Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2.
@@ -2520,12 +2969,19 @@
   - Boundary/Race: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2; Injected stimulus: Rollback to revision 11 conflicts with current schema dependency.
 
 ##### `TEST:CORE:C03:009` — Requirement: `REQ:CORE:019`
-- **Task:** TASK:CORE:010
+- **Task:** `TASK:CORE:010`
 - **AC:** `AC:CORE:C01:019`
-- **رفتارها:** `REQ:CORE:019.B01`، `REQ:CORE:019.B02`، `REQ:CORE:019.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:019.B01`، `REQ:CORE:019.B02`، `REQ:CORE:019.B03`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00836`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:04`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:009.P` — `POSITIVE`**
   - Actor/Fixture: Operations review the telemetry emitted for a synthetic request and its background job.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:019 and AC:CORE:C01:019; Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite.
@@ -2555,12 +3011,19 @@
   - Boundary/Race: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite; Injected stimulus: Request retries across Core and Adviser retain corr-7fa1 while labels remain route-template and outcome enums.
 
 ##### `TEST:CORE:C03:010` — Requirement: `REQ:CORE:037`
-- **Task:** TASK:CORE:007
+- **Task:** `TASK:CORE:007`
 - **AC:** `AC:CORE:C01:037`
-- **رفتارها:** `REQ:CORE:037.B01`، `REQ:CORE:037.B02`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:037.B01`، `REQ:CORE:037.B02`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:03`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:010.P` — `POSITIVE`**
   - Actor/Fixture: A service makes a synchronous call under its approved dependency budget.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:037 and AC:CORE:C01:037; Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case.
@@ -2590,12 +3053,19 @@
   - Boundary/Race: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case; Injected stimulus: At the 100ms boundary the timeout is surfaced and downstream failure is contained.
 
 ##### `TEST:CORE:C03:011` — Requirement: `REQ:CORE:038`
-- **Task:** TASK:CORE:007
+- **Task:** `TASK:CORE:007`
 - **AC:** `AC:CORE:C01:038`
-- **رفتارها:** `REQ:CORE:038.B01`، `REQ:CORE:038.B02`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:038.B01`، `REQ:CORE:038.B02`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:03`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:011.P` — `POSITIVE`**
   - Actor/Fixture: A dependency with measured fixture instability is guarded by a circuit policy.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:038 and AC:CORE:C01:038; Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only.
@@ -2625,12 +3095,19 @@
   - Boundary/Race: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only; Injected stimulus: While Adviser circuit is open, independent health and Core catalogue reads remain available.
 
 ##### `TEST:CORE:C03:012` — Requirement: `REQ:CORE:039`
-- **Task:** TASK:CORE:007
+- **Task:** `TASK:CORE:007`
 - **AC:** `AC:CORE:C01:039`
-- **رفتارها:** `REQ:CORE:039.B01`، `REQ:CORE:039.B02`، `REQ:CORE:039.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:039.B01`، `REQ:CORE:039.B02`، `REQ:CORE:039.B03`
+- **Source Unitها:** `SU-B-00450`، `SU-B-00572`، `SU-B-00863`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:03`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:012.P` — `POSITIVE`**
   - Actor/Fixture: Retry policy evaluates transient, permanent and unknown outcomes before repeating an operation.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:039 and AC:CORE:C01:039; Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment.
@@ -2660,12 +3137,19 @@
   - Boundary/Race: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment; Injected stimulus: For UNKNOWN_RESULT, caller queries the owning financial operation result first.
 
 ##### `TEST:CORE:C03:013` — Requirement: `REQ:CORE:040`
-- **Task:** TASK:CORE:007
+- **Task:** `TASK:CORE:007`
 - **AC:** `AC:CORE:C01:040`
-- **رفتارها:** `REQ:CORE:040.B01`، `REQ:CORE:040.B02`، `REQ:CORE:040.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:040.B01`، `REQ:CORE:040.B02`، `REQ:CORE:040.B03`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:03`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:013.P` — `POSITIVE`**
   - Actor/Fixture: Interactive and background workloads run under separate capacity controls.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:040 and AC:CORE:C01:040; Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request.
@@ -2695,12 +3179,19 @@
   - Boundary/Race: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request; Injected stimulus: When background quota is full, next job receives explicit backpressure while the interactive API stays responsive and no synthetic success is returned.
 
 ##### `TEST:CORE:C03:014` — Requirement: `REQ:CORE:041`
-- **Task:** TASK:CORE:005
+- **Task:** `TASK:CORE:005`
 - **AC:** `AC:CORE:C01:041`
-- **رفتارها:** `REQ:CORE:041.B01`، `REQ:CORE:041.B02`، `REQ:CORE:041.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:041.B01`، `REQ:CORE:041.B02`، `REQ:CORE:041.B03`
+- **Source Unitها:** `SU-B-00450`، `SU-B-00835`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:014.P` — `POSITIVE`**
   - Actor/Fixture: Owner service resumes a pending job after worker restart.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:041 and AC:CORE:C01:041; Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed.
@@ -2730,12 +3221,19 @@
   - Boundary/Race: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed; Injected stimulus: Side effect committed but acknowledgment lost.
 
 ##### `TEST:CORE:C03:015` — Requirement: `REQ:CORE:042`
-- **Task:** TASK:CORE:005
+- **Task:** `TASK:CORE:005`
 - **AC:** `AC:CORE:C01:042`
-- **رفتارها:** `REQ:CORE:042.B01`، `REQ:CORE:042.B02`، `REQ:CORE:042.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:042.B01`، `REQ:CORE:042.B02`، `REQ:CORE:042.B03`
+- **Source Unitها:** `SU-B-00450`، `SU-B-00835`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:015.P` — `POSITIVE`**
   - Actor/Fixture: A service changes Job engine while jobs are in flight.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:042 and AC:CORE:C01:042; Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available.
@@ -2765,12 +3263,19 @@
   - Boundary/Race: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available; Injected stimulus: Cancel/resume job-old during rollout.
 
 ##### `TEST:CORE:C03:016` — Requirement: `REQ:CORE:043`
-- **Task:** TASK:CORE:006
+- **Task:** `TASK:CORE:006`
 - **AC:** `AC:CORE:C01:043`
-- **رفتارها:** `REQ:CORE:043.B01`، `REQ:CORE:043.B02`، `REQ:CORE:043.B03`، `REQ:CORE:043.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:043.B01`، `REQ:CORE:043.B02`، `REQ:CORE:043.B03`، `REQ:CORE:043.B04`
+- **Source Unitها:** `SU-B-00591`، `SU-B-00834`، `SU-B-00864`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:016.P` — `POSITIVE`**
   - Actor/Fixture: Consumer receives versioned events including duplicate, out-of-order and unknown versions.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:043 and AC:CORE:C01:043; Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6.
@@ -2800,12 +3305,19 @@
   - Boundary/Race: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6; Injected stimulus: Duplicate and delayed events arrive concurrently.
 
 ##### `TEST:CORE:C03:017` — Requirement: `REQ:CORE:044`
-- **Task:** TASK:CORE:006
+- **Task:** `TASK:CORE:006`
 - **AC:** `AC:CORE:C01:044`
-- **رفتارها:** `REQ:CORE:044.B01`، `REQ:CORE:044.B02`، `REQ:CORE:044.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:044.B01`، `REQ:CORE:044.B02`، `REQ:CORE:044.B03`
+- **Source Unitها:** `SU-B-00591`، `SU-B-00864`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:02`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:017.P` — `POSITIVE`**
   - Actor/Fixture: Publisher sends an event required by a committed local state change.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:044 and AC:CORE:C01:044; Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send.
@@ -2835,12 +3347,19 @@
   - Boundary/Race: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send; Injected stimulus: Crash after send but before acknowledgment.
 
 ##### `TEST:CORE:C03:018` — Requirement: `REQ:CORE:045`
-- **Task:** TASK:CORE:009
+- **Task:** `TASK:CORE:009`
 - **AC:** `AC:CORE:C01:045`
-- **رفتارها:** `REQ:CORE:045.B01`، `REQ:CORE:045.B02`، `REQ:CORE:045.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:045.B01`، `REQ:CORE:045.B02`، `REQ:CORE:045.B03`
+- **Source Unitها:** `SU-B-00193`، `SU-B-00865`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:09`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:018.P` — `POSITIVE`**
   - Actor/Fixture: Owner publishes a scoring/catalogue policy revision.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:045 and AC:CORE:C01:045; Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17.
@@ -2870,12 +3389,19 @@
   - Boundary/Race: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17; Injected stimulus: Attempt rollback to obsolete snapshot S15 after incompatibility.
 
 ##### `TEST:CORE:C03:019` — Requirement: `REQ:CORE:046`
-- **Task:** TASK:CORE:009
+- **Task:** `TASK:CORE:009`
 - **AC:** `AC:CORE:C01:046`
-- **رفتارها:** `REQ:CORE:046.B01`، `REQ:CORE:046.B02`، `REQ:CORE:046.B03`، `REQ:CORE:046.B04`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:046.B01`، `REQ:CORE:046.B02`، `REQ:CORE:046.B03`، `REQ:CORE:046.B04`
+- **Source Unitها:** `SU-B-00865`، `SU-B-00963`، `SU-B-00763`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:09`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:019.P` — `POSITIVE`**
   - Actor/Fixture: Deployment validates typed config and dependent flags before activation.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:046 and AC:CORE:C01:046; Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture.
@@ -2905,12 +3431,19 @@
   - Boundary/Race: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture; Injected stimulus: Enable adviser-read-v2 while contract-v1 is active.
 
 ##### `TEST:CORE:C03:020` — Requirement: `REQ:CORE:047`
-- **Task:** TASK:CORE:010
+- **Task:** `TASK:CORE:010`
 - **AC:** `AC:CORE:C01:047`
-- **رفتارها:** `REQ:CORE:047.B01`، `REQ:CORE:047.B02`، `REQ:CORE:047.B03`
-- **Environment:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Status:** NOT_EXECUTED
+- **رفتارهای اتمی:** `REQ:CORE:047.B01`، `REQ:CORE:047.B02`، `REQ:CORE:047.B03`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00836`، `SU-B-00763`
+- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
+- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
+- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
+- **گیت تصمیمی:** `DECISION:C01:04`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
+- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
 - **`TEST:CORE:C03:020.P` — `POSITIVE`**
   - Actor/Fixture: Privacy reviewer inspects all telemetry sinks for a synthetic request.
   - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:047 and AC:CORE:C01:047; Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1.
@@ -2939,48 +3472,370 @@
   - Side-effect Invariant: No sensitive identity, authentication, financial or raw form value is leaked into general telemetry.
   - Boundary/Race: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1; Injected stimulus: Concurrent errors and retries preserve correlation while every sink remains free of the canaries.
 
-#### پیوندهای تحویل C03، قرارداد و وابستگی
-- **`DELIVERY:C03:001`**؛ Source `SU-B-00572`؛ Requirements: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`؛ Tasks: `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:002`**؛ Source `SU-B-00573`؛ Requirements: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Tasks: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:003`**؛ Source `SU-B-00584`؛ Requirements: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ Tasks: `TASK:CORE:005`؛ قرارداد: `CONTRACT:C01:03`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:004`**؛ Source `SU-B-00589`؛ Requirements: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Tasks: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:005`**؛ Source `SU-B-00590`؛ Requirements: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Tasks: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:006`**؛ Source `SU-B-00591`؛ Requirements: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Tasks: `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:04`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:007`**؛ Source `SU-W-00692`؛ Requirements: `REQ:CORE:019`، `REQ:CORE:047`؛ Tasks: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:008`**؛ Source `SU-W-00693`؛ Requirements: `REQ:CORE:019`، `REQ:CORE:047`؛ Tasks: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:009`**؛ Source `SU-W-00694`؛ Requirements: `REQ:CORE:019`، `REQ:CORE:047`؛ Tasks: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:010`**؛ Source `SU-B-00233`؛ Requirements: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Tasks: `TASK:CORE:005`، `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`؛ مالک برنامه/اجرا: `C01` / `C03`
-- **`DELIVERY:C03:011`**؛ Source `SU-B-00865`؛ Requirements: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ Tasks: `TASK:CORE:009`؛ قرارداد: `CONTRACT:C01:05`؛ مالک برنامه/اجرا: `C01` / `C03`
+##### `TEST:CORE:C03:021` — Requirement: `REQ:CORE:020`
+- **Task:** `TASK:CORE:010`
+- **AC:** `AC:CORE:C01:020`
+- **رفتارهای اتمی:** `REQ:CORE:020.B01`، `REQ:CORE:020.B02`، `REQ:CORE:020.B03`، `REQ:CORE:020.B04`
+- **Source Unitها:** `SU-B-00836`، `SU-B-00858`، `SU-B-00863`، `SU-B-01125`
+- **محیط/Fixture کلی:** Versioned synthetic workload, SLI definitions, owner, alert route, runbook and measured CPU/RAM/latency/throughput/cost evidence are supplied; no numeric target is pre-approved.
+- **Oracle کلی:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
+- **Evidence لازم برای ارزیابی آینده:** Versioned synthetic fixture; source/requirement/AC revision; measured-evidence references or explicit absence; decision owner and approval status; deployment-state diff demonstrating no unapproved activation.
+- **گیت تصمیمی:** `DECISION:C01:04`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission. These define future design and product validation; no production, runtime, cloud or infrastructure test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_SECOND_READ; no independent reviewer
+- **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
+- **`TEST:CORE:C03:021.P` — `POSITIVE`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Record and inspect the permitted planning/evidence path for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
+  - Input: Synthetic run with measured baseline and a non-sensitive worker/DB fault at a declared probe point.
+  - Observable Oracle: SLO/SLI and Error Budget are tied to versioned measurements and named owner; alert maps to user impact and a usable runbook; capacity claim cites measurements, not an invented threshold.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
+  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
+- **`TEST:CORE:C03:021.N` — `NEGATIVE`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Challenge the unsupported or explicitly prohibited proposal for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
+  - Input: Proposed SLO uses a historical VM size as its capacity proof; no workload measurement, runbook action, or owner decision is attached.
+  - Observable Oracle: The claimed threshold/capacity value has no measurement provenance or decision owner; validator marks the evidence insufficient and no value becomes accepted.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
+  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
+- **`TEST:CORE:C03:021.B` — `BOUNDARY_OR_CONCURRENCY`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Exercise the decision boundary for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload and inspect recorded approval/deployment state.
+  - Input: Run the probe during the declared workload, then inject a worker/DB fault and collect alert, escalation and runbook drill records.
+  - Observable Oracle: Fault is detected through the declared alert route; drill records escalation, containment/recovery and instrumentation overhead without inventing a numeric pass threshold.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the boundary probe must leave deployment disabled until the explicitly required separate decision is recorded.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
+  - Boundary/Race: A complete dossier without separate approval is the boundary; no race or concurrent operation is asserted.
 
-- **`CONTRACT-LINK:C03:02`** → `CONTRACT:C01:02`؛ Core recommendation/catalogue evidence API؛ مالک: `Core`؛ وضعیت: `NOT_IMPLEMENTED`؛ Task: `TASK:CORE:008`
-- **`CONTRACT-LINK:C03:03`** → `CONTRACT:C01:03`؛ Service-owned Job/Workflow port؛ مالک: `Each service owns its Job state`؛ وضعیت: `NOT_IMPLEMENTED`؛ Task: `TASK:CORE:005`، `TASK:CORE:007`
-- **`CONTRACT-LINK:C03:04`** → `CONTRACT:C01:04`؛ Reliable event/Outbox envelope؛ مالک: `Data owner service`؛ وضعیت: `NOT_IMPLEMENTED`؛ Task: `TASK:CORE:006`
-- **`CONTRACT-LINK:C03:05`** → `CONTRACT:C01:05`؛ Typed config/flag/policy change and rollback؛ مالک: `Config or policy owner`؛ وضعیت: `NOT_IMPLEMENTED`؛ Task: `TASK:CORE:009`
-- **`CONTRACT-LINK:C03:06`** → `CONTRACT:C01:06`؛ Operational telemetry and critical-path incident evidence؛ مالک: `Service operator`؛ وضعیت: `NOT_IMPLEMENTED`؛ Task: `TASK:CORE:007`، `TASK:CORE:010`
+##### `TEST:CORE:C03:022` — Requirement: `REQ:CORE:021`
+- **Task:** `TASK:CORE:010`
+- **AC:** `AC:CORE:C01:021`
+- **رفتارهای اتمی:** `REQ:CORE:021.B01`، `REQ:CORE:021.B02`، `REQ:CORE:021.B03`
+- **Source Unitها:** `SU-B-00013`، `SU-B-00836`
+- **محیط/Fixture کلی:** Current production VM has the recorded capacity limitation; proposal selects SigNoz only for conditional evaluation; no revised approval is present.
+- **Oracle کلی:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
+- **Evidence لازم برای ارزیابی آینده:** Versioned synthetic fixture; source/requirement/AC revision; measured-evidence references or explicit absence; decision owner and approval status; deployment-state diff demonstrating no unapproved activation.
+- **گیت تصمیمی:** `DECISION:C01:04`
+- **پذیرش طراحی:** ACCEPTED_DEFINITION
+- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
+- **دلیل عدم اجرا:** Planning-only mission. These define future design and product validation; no production, runtime, cloud or infrastructure test was executed.
+- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_SECOND_READ; no independent reviewer
+- **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
+- **`TEST:CORE:C03:022.P` — `POSITIVE`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Record and inspect the permitted planning/evidence path for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
+  - Input: Submit a self-hosted SigNoz deployment proposal targeting the current production VM under recorded capacity.
+  - Observable Oracle: Evaluation remains conditional; no deployment is initiated, and each decision dimension is evidenced for the decision owner.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
+  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
+- **`TEST:CORE:C03:022.N` — `NEGATIVE`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Challenge the unsupported or explicitly prohibited proposal for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
+  - Input: Supply a Cloud preference or apparent spare-capacity claim without measured capacity/cost/security/retention/sampling evidence or separate approval.
+  - Observable Oracle: Current-VM self-hosting proposal is rejected; Cloud is not silently accepted from preference alone and unsupported measurements do not authorize either option.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
+  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
+- **`TEST:CORE:C03:022.B` — `BOUNDARY_OR_CONCURRENCY`**
+  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Action: Evaluate the technically complete SigNoz decision dossier while independent deployment approval is still absent; inspect decision status and deployment state.
+  - Input: Prepare a technically complete revised dossier containing measured capacity, cost, security, retention, sampling and host evidence; record that separate owner deployment approval has not been issued; keep deployment unexecuted.
+  - Observable Oracle: Even when a dossier is complete, status remains decision-pending until separate approval; the fixture records no deployment or configuration activation.
+  - Expected State Change: NO_STATE_CHANGE_EXPECTED — evidence completeness alone does not authorize deployment; no approval, deployment, or configuration activation is created by this case.
+  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or Cloud/self-hosted choice changes without the separately recorded approval; current-VM self-hosting remains prohibited.
+  - Boundary/Race: Boundary: all technical evidence is complete, but separate owner approval is absent; current-VM self-hosting remains prohibited and deployment remains unexecuted.
 
-- **`DEP:C03:001`**: `TASK:CORE:005` → `TASK:CORE:002`؛ نوع `HARD`؛ دلیل: C03 implements TASK:CORE:005; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:002`**: `TASK:CORE:006` → `TASK:CORE:002`؛ نوع `HARD`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:003`**: `TASK:CORE:006` → `TASK:CORE:005`؛ نوع `CONTRACT`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:005 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:004`**: `TASK:CORE:007` → `TASK:CORE:003`؛ نوع `CONTRACT`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:003 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:005`**: `TASK:CORE:007` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:006`**: `TASK:CORE:008` → `TASK:CORE:002`؛ نوع `HARD`؛ دلیل: C03 implements TASK:CORE:008; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:007`**: `TASK:CORE:009` → `TASK:CORE:001`؛ نوع `HARD`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:008`**: `TASK:CORE:009` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:009`**: `TASK:CORE:010` → `TASK:CORE:001`؛ نوع `HARD`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:010`**: `TASK:CORE:010` → `TASK:CORE:007`؛ نوع `PREFERENCE`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:007 and dependency type PREFERENCE from the C01 task model. No duration or schedule is inferred.
+#### پیوندهای تحویل بین Source، Requirement، Task، AC، Test و قرارداد
+##### `DELIVERY:C03:001` — `SU-B-00572`
+- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`
+- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`
+- **Enablerها:** `TE:CORE:002`، `TE:CORE:003`
+- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`، `TASK:CORE:007.S01`، `TASK:CORE:007.S02`، `TASK:CORE:007.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
+- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
+- **قراردادها:** `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
 
-- **`HANDOFF:C03:001`**؛ مرجع `SU-B-00635`؛ دامنه مقصد: B05 user-memory, privacy, retention, and transfer contract owners across Adviser/Assistant؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When the relevant Adviser/Assistant data-owner package is opened, allocate the B05 retention/transfer clauses and record acceptance without changing C03 ownership.
-- **`HANDOFF:C03:002`**؛ مرجع `SU-B-00224`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:003`**؛ مرجع `SU-B-00225`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:004`**؛ مرجع `SU-B-00226`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:005`**؛ مرجع `SU-B-00227`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:006`**؛ مرجع `SU-B-00228`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:007`**؛ مرجع `SU-B-00229`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:008`**؛ مرجع `SU-B-00230`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:009`**؛ مرجع `SU-B-00232`؛ دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ وضعیت: `PENDING_PACKAGE_ALLOCATION`؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+##### `DELIVERY:C03:002` — `SU-B-00573`
+- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
+- **Taskها:** `TASK:CORE:008`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
+- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
+- **قراردادها:** `CONTRACT:C01:02`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
 
-#### پذیرش C03
-- `RA=PASS` و `IPA=PASS` در Bundle مصوب؛ DoD ثابت `C03-DOD-V5-001`؛ Testهای طراحی `NOT_EXECUTED`؛ ۴۳/۴۳ Mutation تاریخی رد، ۹/۹ Transition موفق، سه Fixture مثبت و ۲۴ Fixture منفی موفق در شواهد پذیرش؛ این اعداد مربوط به گیت برنامه‌ریزی‌اند نه اجرای محصول.
+##### `DELIVERY:C03:003` — `SU-B-00584`
+- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
+- **Taskها:** `TASK:CORE:005`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
+- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
+- **قراردادها:** `CONTRACT:C01:03`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:004` — `SU-B-00589`
+- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
+- **Taskها:** `TASK:CORE:008`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
+- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
+- **قراردادها:** `CONTRACT:C01:02`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:005` — `SU-B-00590`
+- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
+- **Taskها:** `TASK:CORE:008`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
+- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
+- **قراردادها:** `CONTRACT:C01:02`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:006` — `SU-B-00591`
+- **Requirementهای بازیافتی:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
+- **Taskها:** `TASK:CORE:006`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
+- **Testهای طراحی C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
+- **قراردادها:** `CONTRACT:C01:04`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:007` — `SU-W-00692`
+- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
+- **Taskها:** `TASK:CORE:010`
+- **Enablerها:** `TE:CORE:003`
+- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
+- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
+- **قراردادها:** `CONTRACT:C01:06`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:008` — `SU-W-00693`
+- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
+- **Taskها:** `TASK:CORE:010`
+- **Enablerها:** `TE:CORE:003`
+- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
+- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
+- **قراردادها:** `CONTRACT:C01:06`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:009` — `SU-W-00694`
+- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
+- **Taskها:** `TASK:CORE:010`
+- **Enablerها:** `TE:CORE:003`
+- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
+- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
+- **قراردادها:** `CONTRACT:C01:06`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+
+##### `DELIVERY:C03:010` — `SU-B-00233`
+- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
+- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`
+- **Enablerها:** `TE:CORE:002`
+- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
+- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
+- **قراردادها:** `CONTRACT:C01:03`، `CONTRACT:C01:04`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
+
+##### `DELIVERY:C03:011` — `SU-B-00865`
+- **Requirementهای بازیافتی:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
+- **Taskها:** `TASK:CORE:009`
+- **Enablerها:** `TE:CORE:003`
+- **Subtaskها:** `TASK:CORE:009.S01`، `TASK:CORE:009.S02`، `TASK:CORE:009.S03`
+- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
+- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
+- **Testهای طراحی C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
+- **قراردادها:** `CONTRACT:C01:05`
+- **مالک برنامه/اجرا:** `C01` / `C03`
+- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
+- **وضعیت اجرا:** BLOCKED_BY_DECISION
+- **دلیل:** The source unit is C01-owned policy, not reclassified into C03. The accepted C01 Task explicitly assigns implementation_owner C03; this record captures delivery responsibility without copying policy ownership.
+
+#### قراردادهای مشترک که C03 مالک پیاده‌سازی آن‌هاست
+این پنج رکورد **پیوند به قراردادهای موجود C01** هستند؛ قرارداد تازه یا Schema منتشرشده‌ای اختراع نشده است.
+
+##### `CONTRACT-LINK:C03:02` → `CONTRACT:C01:02` — Core recommendation/catalogue evidence API
+- **مالک قرارداد:** Core
+- **مصرف‌کنندگان:** Adviser; future Assistant
+- **نسخه طراحی:** PLANNING_CONTRACT_1
+- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
+- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
+- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
+- **تصمیم‌های مرتبط:** A02؛ A05؛ A07؛ B06؛ E02
+- **Requirementها:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
+- **Source Unitها:** `SU-B-00589`، `SU-B-00590`، `SU-B-00942`
+- **Taskهای اجرا:** `TASK:CORE:008`
+- **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
+- **Testهای C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
+- **Testهای C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
+- **وضعیت اجرا:** NOT_IMPLEMENTED
+- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
+
+##### `CONTRACT-LINK:C03:03` → `CONTRACT:C01:03` — Service-owned Job/Workflow port
+- **مالک قرارداد:** Each service owns its Job state
+- **مصرف‌کنندگان:** Authorized job consumer
+- **نسخه طراحی:** PLANNING_CONTRACT_1
+- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
+- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
+- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
+- **تصمیم‌های مرتبط:** A03؛ A04؛ A07
+- **Requirementها:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:041`، `REQ:CORE:042`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00942`
+- **Taskهای اجرا:** `TASK:CORE:005`، `TASK:CORE:007`
+- **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
+- **Testهای C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
+- **Testهای C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
+- **وضعیت اجرا:** NOT_IMPLEMENTED
+- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
+
+##### `CONTRACT-LINK:C03:04` → `CONTRACT:C01:04` — Reliable event/Outbox envelope
+- **مالک قرارداد:** Data owner service
+- **مصرف‌کنندگان:** Registered asynchronous consumer
+- **نسخه طراحی:** PLANNING_CONTRACT_1
+- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
+- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
+- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
+- **تصمیم‌های مرتبط:** A05؛ A07
+- **Requirementها:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
+- **Source Unitها:** `SU-B-00572`، `SU-B-00591`
+- **Taskهای اجرا:** `TASK:CORE:006`
+- **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
+- **Testهای C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
+- **Testهای C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
+- **وضعیت اجرا:** NOT_IMPLEMENTED
+- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
+
+##### `CONTRACT-LINK:C03:05` → `CONTRACT:C01:05` — Typed config/flag/policy change and rollback
+- **مالک قرارداد:** Config or policy owner
+- **مصرف‌کنندگان:** Deployment/configuration consumer
+- **نسخه طراحی:** PLANNING_CONTRACT_1
+- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
+- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
+- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
+- **تصمیم‌های مرتبط:** A08
+- **Requirementها:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
+- **Source Unitها:** `SU-B-00963`
+- **Taskهای اجرا:** `TASK:CORE:009`
+- **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
+- **Testهای C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
+- **Testهای C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
+- **وضعیت اجرا:** NOT_IMPLEMENTED
+- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
+
+##### `CONTRACT-LINK:C03:06` → `CONTRACT:C01:06` — Operational telemetry and critical-path incident evidence
+- **مالک قرارداد:** Service operator
+- **مصرف‌کنندگان:** Authorized operations/security
+- **نسخه طراحی:** PLANNING_CONTRACT_1
+- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
+- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
+- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
+- **تصمیم‌های مرتبط:** A09
+- **Requirementها:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:047`
+- **Source Unitها:** `SU-B-00572`، `SU-B-01125`
+- **Taskهای اجرا:** `TASK:CORE:007`، `TASK:CORE:010`
+- **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:047`
+- **Testهای C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:047`
+- **Testهای C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:020`، `TEST:CORE:C03:021`، `TEST:CORE:C03:022`
+- **وضعیت اجرا:** NOT_IMPLEMENTED
+- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
+
+#### وابستگی‌ها و وضعیت‌های آغاز کار
+- **`DEP:C03:001`**: `TASK:CORE:005` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ دلیل: C03 implements TASK:CORE:005; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:002`**: `TASK:CORE:006` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:003`**: `TASK:CORE:006` → `TASK:CORE:005`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:005 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:004`**: `TASK:CORE:007` → `TASK:CORE:003`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:003 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:005`**: `TASK:CORE:007` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:006`**: `TASK:CORE:008` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ دلیل: C03 implements TASK:CORE:008; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:007`**: `TASK:CORE:009` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:008`**: `TASK:CORE:009` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:009`**: `TASK:CORE:010` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:010`**: `TASK:CORE:010` → `TASK:CORE:007`؛ نوع `PREFERENCE`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:007 and dependency type PREFERENCE from the C01 task model. No duration or schedule is inferred.
+
+#### Handoffهای باز برای بسته‌های بعدی
+- **`HANDOFF:C03:001`**: Source `SU-B-00635`؛ مالک دامنه مقصد: B05 user-memory, privacy, retention, and transfer contract owners across Adviser/Assistant؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: B:1332 leaves exact retention and transfer implementation details open under approved B05 policy. C03 does not own user memory; only its common authorization and telemetry interfaces are consumed. Exact receiving package is not proven in the current package registry.؛ تریگر: When the relevant Adviser/Assistant data-owner package is opened, allocate the B05 retention/transfer clauses and record acceptance without changing C03 ownership.
+- **`HANDOFF:C03:002`**: Source `SU-B-00224`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:003`**: Source `SU-B-00225`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:004`**: Source `SU-B-00226`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:005`**: Source `SU-B-00227`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:006`**: Source `SU-B-00228`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:007`**: Source `SU-B-00229`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:008`**: Source `SU-B-00230`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+- **`HANDOFF:C03:009`**: Source `SU-B-00232`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
+
+#### پذیرش برنامه C03 و مرز اجرا
+- **DoD ثابت:** `C03-DOD-V5-001`؛ `criteria_frozen=True`
+- **معیار مصوب:** Complete SCOPE:V4:C03 with evidence-backed disposition for every 2,230 source units and valid digest.
+- **معیار مصوب:** Deep-review every OWNED and materially ownership/contract-affecting SHARED_CONTRACT/UNCERTAIN unit; reuse G1/C01/C02 evidence without duplicating accepted work.
+- **معیار مصوب:** Accept only atomic, source-traced C03 requirements with correct normative status, owner, conditions, exceptions, risk, and implementation gate.
+- **معیار مصوب:** Trace accepted requirements to genuine enablers/stories, tasks/subtasks, falsifiable AC/tests, contracts, dependencies, and owner-bearing handoffs.
+- **معیار مصوب:** Generalize validator minimally for package selection, scope/RA/IPA/checkpoint/render/transition validation; preserve C01/C02 history and all prior regression checks.
+- **معیار مصوب:** Pass structural, regression, mutation, transition, trace, cycle, render-reproducibility, diff/security, and final-head documentation QA; keep product tests NOT_EXECUTED and do not claim independent review.
+- **معیار مصوب:** Record evidence and derived views from the same registry version; commit locally on isolated branch; provide a recoverable local Git bundle without push/PR/merge.
+- **گیت RA:** `PASS`؛ blockers=0؛ evidence=`EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ C03 planning evidence and package-specific acceptance checks are complete; product implementation remains outside this gate.
+- **گیت IPA:** `PASS`؛ blockers=0؛ evidence=`EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ C03 planning evidence and package-specific acceptance checks are complete; product implementation remains outside this gate.
+- **شاهد پذیرش نهایی:** `EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ `result=PASS`؛ `product_tests_executed=0`
+مرجع شواهد ماشینی و تاریخچه Mutation/Fixture در Bundle نگهداری شده است؛ این فصل همه **مقادیر اجرایی، روابط مالکیت، تعریف Testها و شرایط تصمیم‌گیری** لازم برای برنامه را حمل می‌کند. صرفاً آرشیو ۲٬۲۳۰ ردیف G1، تغییرات تاریخی Registry و لاگ‌های اجرای Validator در این سند تکرار نشده‌اند.
+- **محدودیت قطعی:** پیاده‌سازی، اجرای تست محصول، تصمیم معماری/ظرفیت باز، استقرار، انتشار و مجوز امنیت/مالی در این Gate انجام یا تصویب نشده‌اند.
 
 ### C04 — اشتراک، پلن و Billing
 
