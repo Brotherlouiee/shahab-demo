@@ -1,38 +1,62 @@
-# Core/Wallet Phase 2 — checkpoint (WIP)
+# Core/Wallet Phase 2 — checkpoint (C01 recovery)
 
-**State: IN_PROGRESS — no package RA/IPA accepted; no software implemented.**
+**Derived from [CORE_REGISTRY.jsonl](CORE_REGISTRY.jsonl); no independent status authority.**
 
-## Immutable baseline
-- Main commit: `f4167f8ceccec24cc10d70e158c82cbf3c9eeacf`.
-- Blueprint V1.6 blob: `9681c2bf6c3149317c3788516748084cfb6eac7c`.
-- Wallet V0.20 blob: `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`.
+**C01 RA=PASS; IPA=PASS at planning-definition level. Core overall: NOT_COMPLETE.**
 
-## Canonical registry
-- `docs/phase2/core/CORE_REGISTRY.jsonl` is the sole unit-level source register; it holds exactly 2,230 deterministic units indexed from both approved documents, including Markdown table rows and Mermaid diagrams.
-- All source units are indexed only: `U` (unreviewed) or `I` (structural/index-only). **No requirement count or RA claim derives from this inventory.**
-- Excluded as sources: deleted obsolete Phase 2 plan and audit, PR #247 and rebuild branches.
+Source main: `f4167f8ceccec24cc10d70e158c82cbf3c9eeacf`. Recovery parent: `6a52b8ded941b39e4439b338e1c25f541a3b528e`. Recovery branch: `docs/phase2-c01-ra-ipa-recovery-20261117`.
 
-## Package execution order
-1. C01 (RA then IPA pilot)
-2. C02, C03, C04, C05a, C05b, C06
-3. C07, C12a, C08, C09
-4. C10, C11a, C11b, C12b, C13a
-5. C13b, C14, cross-package semantic audit
+Blueprint V1.6: `9681c2bf6c3149317c3788516748084cfb6eac7c`. Wallet V0.20: `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`.
 
-## Current evidence / decisions
-- Existing Phase 1 code inspected read-only: `backend/app/main.py`, `backend/app/api/v1/router.py`, `backend/app/accounts/access.py`, `backend/app/questionnaire/infrastructure/sqlalchemy_sessions.py`, `backend/app/recommendation/application/use_cases.py`, `backend/app/recommendation/engine/canonical_scoring.py`, `backend/app/data_pipeline/application/publish_serving_version.py`, `backend/app/infrastructure/db/models.py`, and Docker Compose files.
-- Code files are **evidence of implementation footprint, not running/verified product acceptance**.
-- Blueprint §22.8 line 1923 contains an older assertion that target architecture is not selected. The later explicitly approved A01 at lines 16–26 and §5.12 line 2140 governs; do not reopen architecture choice.
-- No new fixed dates, budgets, physical storage choices or software tasks inferred from undecided implementation details.
+## Verified state
 
-## Restart protocol
-- Read this checkpoint and latest branch HEAD; compare with recorded baseline; preserve concurrent work.
-- Verify registry readback and size (<1 MB), then inspect relevant source units for C01 and independently challenge each proposed requirement.
-- **Do not create accepted Story/Task/AC/Test until C01 RA passed.**
-- After RA, inspect further live code evidence, perform C01 IPA and assess pilot method before moving to C02.
-- Next source context to inspect: Blueprint A01 lines 16–26, §§5.2.1 lines 1960–2022, §§22.1–22.8 lines 1770–1923, A02–A09 lines 1192–1216 and cross-section 2254, Wallet §2 infrastructure and §7 ledger.
+| Metric | Count |
+| --- | --- |
+| records | 2554 |
+| source_units | 2230 |
+| C01_reviewed | 510 |
+| requirements | 40 |
+| atomic_behaviours | 128 |
+| enablers | 4 |
+| tasks | 13 |
+| subtasks | 39 |
+| dependencies | 23 |
+| AC | 40 |
+| test_definitions | 40 |
+| test_scenarios | 120 |
+| product_test_executions | 0 |
+| decision_gates | 9 |
+| contracts | 7 |
+| code_inspections | 28 |
 
-## Gates
-- C01: RA=NOT_STARTED; IPA=NOT_STARTED.
-- All other packages: RA=NOT_STARTED; IPA=NOT_STARTED.
-- Core overall: **NOT_COMPLETE**. No PR, merge, or implementation as part of this planning checkpoint.
+The original 2,230 count is source units, not all JSONL records. 510 C01 units now carry RA dispositions; all non-C01 source-unit records are unchanged. 40 REQ, four Enablers, 13 Tasks and 23 dependency edges are preserved. 128 atomic behaviours, 40 AC, 40 test definitions/120 scenarios are linked. Product tests executed: zero.
+
+## Recovery corrections
+
+- Prior checkpoint predated six later commits and incorrectly reported RA/IPA NOT_STARTED.
+- RA readback had PASS with units still U/I; C01 semantic classifications, qualifiers and precise references are now explicit.
+- The old readable RA view predated IPA task creation. Both views now derive from the current registry.
+- Restore explicit current-VM SigNoz prohibition, universal synchronous-call timeout and old-engine in-flight completion.
+- Original candidate dispositions and 22 planning principles remain in the registry.
+
+## Open decisions and implementation boundary
+
+Nine OPEN_DECISION records cover physical schema/topology, worker technology, numeric resilience, telemetry/hosting, API support/EOL, runtime/environment evidence, release dossier, financial activation and secret lifecycle. Dependent implementation is BLOCKED_BY_DECISION. No code/deploy/banking or production test is authorized by planning PASS. C03/C05b/C07/C12a and other handoffs are not accepted packages.
+
+## Evidence and checks
+
+28 source inspections are pinned to commit/blob; they prove footprint, not runtime. Source/trace/DAG/unchanged-scope validation and eight corruption rejection checks passed. The embedded VALIDATE:C01:RECOVERY procedure reproduces checks. Semantic review and negative/concurrency sufficiency review are separate from structural PASS; both passes used the same agent. Independent high-risk specialist review remains a future release requirement.
+
+## Safe restart and next boundary
+
+- Read latest remote HEADs and source blobs; compare any new original-branch commits.
+- Continue in the isolated recovery worktree/branch. Never reset/delete/force-push the original planning branch. Stable remote HEAD does not prove prior execution stopped.
+- C01 last complete step: IPA planning definitions and validation. Next action in this mission: STOP; do not start C02.
+- Before any later implementation, resolve applicable decisions, authorize task scope/environment and execute its defined tests; missing runtime evidence stays unknown.
+- Preserve five planning stages: 18 Core/Wallet, 10 RAG/Adviser, 8 Assistant, integrated dependency graph, weekly roadmap under 22 principles.
+
+## Execution discipline
+
+Three golden rules retained: isolated staged changes; source/canonical/protocol constraints and phase-one design preserved; evidence/validation/checkpoint/commit before planning completion. This change touches only the three authorized planning files. Runtime, UI, scoring, data and workflows are unchanged. No previous plan/PR247 is an extraction source.
+
+Timing: earlier review/specification duration was not measured. Recorded validation/publication interval starts `2026-11-17T10:09:54.508087+00:00`; commit timestamps do not measure active time. Token/cost figures are unavailable and are not estimated.
