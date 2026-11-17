@@ -1,62 +1,73 @@
-# Core/Wallet Phase 2 — checkpoint (C01 recovery)
+# ادامه برنامه Core/Wallet — وضعیت اصلاح C02: RA=PASS / IPA=PASS
 
-**Derived from [CORE_REGISTRY.jsonl](CORE_REGISTRY.jsonl); no independent status authority.**
+**نمای مشتق از [CORE_REGISTRY.jsonl](CORE_REGISTRY.jsonl). وضعیت کل: PARTIAL؛ آمادگی ممیزی نهایی: خیر.**
 
-**C01 RA=PASS; IPA=PASS at planning-definition level. Core overall: NOT_COMPLETE.**
+C01 با RA=PASS و IPA=PASS در سطح تعریف برنامه حفظ شده است. C02 اکنون RA=PASS و IPA=PASS است؛ پذیرش تعریف برنامه مجوز پیاده‌سازی نیست.
 
-Source main: `f4167f8ceccec24cc10d70e158c82cbf3c9eeacf`. Recovery parent: `6a52b8ded941b39e4439b338e1c25f541a3b528e`. Recovery branch: `docs/phase2-c01-ra-ipa-recovery-20261117`.
+شاخه `docs/phase2-core-remaining-20261117-gpt6`؛ مبنای معتبر `3030623ddb669c9d6cd311d2e032bb911d0cc612`. SHA حامل Checkpoint از Git خوانده شود.
 
-Blueprint V1.6: `9681c2bf6c3149317c3788516748084cfb6eac7c`. Wallet V0.20: `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`.
+Blob رجیستری مبنا `0b85912bd9b63179fe3572131ea5a6239c130f5b`؛ hash پیشوند تغییرناپذیر `a0c10e1a98e7848a5db43e49857ba9a2b41a9ee0cf6f744289a06e578b84628f`؛ ۲۵۵۴ رکورد قبلی حفظ شده‌اند.
 
-## Verified state
+## وضعیت ۱۷ بسته
 
-| Metric | Count |
+| بسته | عنوان | واحدهای مرورشده | نامزد/اتمی | نیازمندی فعال / TE / Task / AC-Test | RA | IPA |
+| --- | --- | --- | --- | --- | --- | --- |
+| C02 | هویت، سازمان‌ها و مجوزها | 1102 | 102 | 69 / 1 / 5 / 69-69 | PASS | PASS |
+| C03 | قراردادها، داده و زیرساخت مشترک | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C04 | اشتراک، پلن و Billing | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C05a | کاتالوگ خدمات شهاب | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C05b | کاتالوگ محصولات مالی و توصیه‌گر | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C06 | پوسته سوپراپ و UI مشترک | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C07 | مالکیت وجوه و مدل اعتبار | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C12a | دفترکل و یکپارچگی مالی | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C08 | شارژ، هدیه و تخفیف | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C09 | مصرف و رزرو | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C10 | انتقال و برداشت | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C11a | استرداد و اصلاحات مالی | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C11b | عملیات دوره‌ای و محدودیت‌ها | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C12b | تطبیق و بازیابی مالی | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C13a | قیمت‌گذاری، تسویه و حسابداری | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C13b | تجربه و پشتیبانی کیف پول | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+| C14 | سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک | 0 | 0 | ۰ / ۰ / ۰ / ۰ | NOT_STARTED | NOT_STARTED |
+
+## پوشش دو سند و ممیزی معنایی
+
+فهرست G1 نسخه V4 برای هر ۲٬۲۳۰ واحد شناسه، سند، موقعیت و hash دارد. 1363 بازبینی معتبر قبلی استفاده شد و ۸۶۷ واحد تازه در سطح غربال‌گری مشترک تعیین تکلیف شدند؛ ابهام‌های مالکیت با رابطه UNCERTAIN و دلیل ثبت شده‌اند. G1=COMPLETE. از ۳۶ Scope View، یک نما (C02) کامل و ۳۵ نمای بسته‌های آینده INITIAL هستند. C02: 1102 بازبینی عمیق ثبت‌شده، 102 نامزد/رد اتمی، 69 الزام پذیرفته‌شده. شمارش از Commit پایه: ۶۰ Case تکرار سه‌گانه در کل ۲۴۳ مورد (۲۴ فعال و ۳۶ منسوخ/Handoff) و صفر موردِ تکرار فقط دوتایی؛ ۲۴ مورد فعال اصلاح شدند. از ۲۰۷ Case فعال فعلی، 0 مورد با فیلدهای برابر باقی است. RA/IPA=PASS/PASS.
+
+تخصیص بستهٔ دقیق برای حوزه‌های RAG/Assistant در این شاخه قابل اثبات نبود؛ موارد مربوط با owner_domain و pending_package_allocation ثبت شده‌اند. هیچ alias نامعتبر به شناسهٔ بسته تبدیل نشده است. تصمیم‌های باز، اجرای محصول و مستقل‌بودن بازبین ادعا نشده‌اند.
+
+## استفادهٔ مجدد از کد
+
+Existing personal account generation, OTP/session lifecycle and account access tests are reusable for personal identity only. No C02 organization, membership, representative, Shahkar or tenant-scoped customer authorization implementation was found in reviewed backend inventory. Operational admin roles are distinct and not evidence of customer org IAM.
+
+## تعریف برنامه و آزمون
+
+Validator ساختاری و آزمون‌های جهش مستقل اجرا شدند؛ محصول یا رفتار runtime آزموده نشده است. Testهای C02 تعریف دقیق برنامه‌اند و در وضعیت NOT_EXECUTED مانده‌اند.
+
+| مترک | مقدار |
 | --- | --- |
-| records | 2554 |
-| source_units | 2230 |
-| C01_reviewed | 510 |
-| requirements | 40 |
-| atomic_behaviours | 128 |
-| enablers | 4 |
-| tasks | 13 |
-| subtasks | 39 |
-| dependencies | 23 |
-| AC | 40 |
-| test_definitions | 40 |
-| test_scenarios | 120 |
-| product_test_executions | 0 |
-| decision_gates | 9 |
-| contracts | 7 |
-| code_inspections | 28 |
+| registry records | 6468 |
+| C02 candidates and atomic traces | 102 |
+| C02 semantic reviews | 1102 |
+| accepted atomic requirements | 69 |
+| tasks | 5 |
+| AC/Test | 69/69 |
+| product tests executed | 0 |
+| RA/IPA | PASS/PASS |
 
-The original 2,230 count is source units, not all JSONL records. 510 C01 units now carry RA dispositions; all non-C01 source-unit records are unchanged. 40 REQ, four Enablers, 13 Tasks and 23 dependency edges are preserved. 128 atomic behaviours, 40 AC, 40 test definitions/120 scenarios are linked. Product tests executed: zero.
+## وضعیت ادامه
 
-## Recovery corrections
+آخرین بستهٔ برنامه‌ریزی‌شدهٔ کامل C02 است؛ C03 شروع نشده است. C02 در سطح برنامه با RA/IPA تکمیل شده است. C03 را در این Checkpoint آغاز نکن؛ ادامهٔ مجاز بعدی از C03 و با استفاده از G1 تکمیل‌شده و Scope View اولیهٔ همان بسته شروع می‌شود.
 
-- Prior checkpoint predated six later commits and incorrectly reported RA/IPA NOT_STARTED.
-- RA readback had PASS with units still U/I; C01 semantic classifications, qualifiers and precise references are now explicit.
-- The old readable RA view predated IPA task creation. Both views now derive from the current registry.
-- Restore explicit current-VM SigNoz prohibition, universal synchronous-call timeout and old-engine in-flight completion.
-- Original candidate dispositions and 22 planning principles remain in the registry.
+کل برنامه ۱۷ بسته هنوز PARTIAL است؛ `CORE_REMAINING_17_PLANNING_COMPLETE` و آمادگی ممیزی نهایی Core اعلام نمی‌شود.
 
-## Open decisions and implementation boundary
+## انتشار
 
-Nine OPEN_DECISION records cover physical schema/topology, worker technology, numeric resilience, telemetry/hosting, API support/EOL, runtime/environment evidence, release dossier, financial activation and secret lifecycle. Dependent implementation is BLOCKED_BY_DECISION. No code/deploy/banking or production test is authorized by planning PASS. C03/C05b/C07/C12a and other handoffs are not accepted packages.
+انتشار این شاخه برای ایجاد PR به `main` با دستور صریح مالک مجاز شده است؛ Push/PR هنوز انجام نشده و Merge مجاز یا انجام‌شده نیست.
 
-## Evidence and checks
+## اعتبارسنجی
 
-28 source inspections are pinned to commit/blob; they prove footprint, not runtime. Source/trace/DAG/unchanged-scope validation and eight corruption rejection checks passed. The embedded VALIDATE:C01:RECOVERY procedure reproduces checks. Semantic review and negative/concurrency sufficiency review are separate from structural PASS; both passes used the same agent. Independent high-risk specialist review remains a future release requirement.
-
-## Safe restart and next boundary
-
-- Read latest remote HEADs and source blobs; compare any new original-branch commits.
-- Continue in the isolated recovery worktree/branch. Never reset/delete/force-push the original planning branch. Stable remote HEAD does not prove prior execution stopped.
-- C01 last complete step: IPA planning definitions and validation. Next action in this mission: STOP; do not start C02.
-- Before any later implementation, resolve applicable decisions, authorize task scope/environment and execute its defined tests; missing runtime evidence stays unknown.
-- Preserve five planning stages: 18 Core/Wallet, 10 RAG/Adviser, 8 Assistant, integrated dependency graph, weekly roadmap under 22 principles.
-
-## Execution discipline
-
-Three golden rules retained: isolated staged changes; source/canonical/protocol constraints and phase-one design preserved; evidence/validation/checkpoint/commit before planning completion. This change touches only the three authorized planning files. Runtime, UI, scoring, data and workflows are unchanged. No previous plan/PR247 is an extraction source.
-
-Timing: earlier review/specification duration was not measured. Recorded validation/publication interval starts `2026-11-17T10:09:54.508087+00:00`; commit timestamps do not measure active time. Token/cost figures are unavailable and are not estimated.
+```text
+python docs/phase2/core/remaining_registry_tools.py --render
+python docs/phase2/core/remaining_registry_tools.py --check --mutations
+```
