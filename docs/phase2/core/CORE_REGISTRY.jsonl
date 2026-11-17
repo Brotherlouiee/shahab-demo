@@ -98,7 +98,7 @@
 {"t":"u","id":"SU-B-00097","s":"B","a":187,"z":187,"k":"P","h":"e517aea1","st":"U"}
 {"t":"u","id":"SU-B-00098","s":"B","a":189,"z":189,"k":"L","h":"cf699c61","st":"U"}
 {"t":"u","id":"SU-B-00099","s":"B","a":190,"z":190,"k":"L","h":"3276c61b","st":"U"}
-{"t":"u","id":"SU-B-00100","s":"B","a":192,"z":192,"k":"P","h":"05d99acc","st":"U"}
+{"t":"u","id":"SU-B-00100","s":"B","a":192,"z":192,"k":"P","h":"05d99acc","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00101","s":"B","a":194,"z":194,"k":"H","h":"a9af375b","st":"I"}
 {"t":"u","id":"SU-B-00102","s":"B","a":196,"z":196,"k":"P","h":"dd669c6d","st":"U"}
 {"t":"u","id":"SU-B-00103","s":"B","a":198,"z":198,"k":"H","h":"2a8e323c","st":"I"}
@@ -134,7 +134,7 @@
 {"t":"u","id":"SU-B-00133","s":"B","a":259,"z":259,"k":"H","h":"96628318","st":"I"}
 {"t":"u","id":"SU-B-00134","s":"B","a":261,"z":261,"k":"P","h":"2414543a","st":"U"}
 {"t":"u","id":"SU-B-00135","s":"B","a":263,"z":263,"k":"H","h":"9c2ca2b6","st":"I"}
-{"t":"u","id":"SU-B-00136","s":"B","a":265,"z":265,"k":"P","h":"8502185e","st":"U"}
+{"t":"u","id":"SU-B-00136","s":"B","a":265,"z":265,"k":"P","h":"8502185e","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00137","s":"B","a":267,"z":267,"k":"H","h":"3d4d4596","st":"I"}
 {"t":"u","id":"SU-B-00138","s":"B","a":269,"z":269,"k":"H","h":"6b3ef950","st":"I"}
 {"t":"u","id":"SU-B-00139","s":"B","a":270,"z":272,"k":"P","h":"886a6ff5","st":"U"}
@@ -145,7 +145,7 @@
 {"t":"u","id":"SU-B-00144","s":"B","a":284,"z":284,"k":"H","h":"7cd4bc81","st":"I"}
 {"t":"u","id":"SU-B-00145","s":"B","a":285,"z":287,"k":"P","h":"4ff2dd59","st":"U"}
 {"t":"u","id":"SU-B-00146","s":"B","a":289,"z":289,"k":"H","h":"089e51f1","st":"I"}
-{"t":"u","id":"SU-B-00147","s":"B","a":290,"z":292,"k":"P","h":"335cdb15","st":"U"}
+{"t":"u","id":"SU-B-00147","s":"B","a":290,"z":292,"k":"P","h":"335cdb15","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00148","s":"B","a":294,"z":294,"k":"H","h":"2f44c44e","st":"I"}
 {"t":"u","id":"SU-B-00149","s":"B","a":295,"z":297,"k":"P","h":"369242f0","st":"U"}
 {"t":"u","id":"SU-B-00150","s":"B","a":299,"z":299,"k":"H","h":"cbd02a7d","st":"I"}
@@ -153,7 +153,7 @@
 {"t":"u","id":"SU-B-00152","s":"B","a":304,"z":304,"k":"H","h":"7f7f0c8f","st":"I"}
 {"t":"u","id":"SU-B-00153","s":"B","a":305,"z":307,"k":"P","h":"4a7d4620","st":"U"}
 {"t":"u","id":"SU-B-00154","s":"B","a":309,"z":309,"k":"H","h":"35297e1b","st":"I"}
-{"t":"u","id":"SU-B-00155","s":"B","a":310,"z":312,"k":"P","h":"367e15b1","st":"U"}
+{"t":"u","id":"SU-B-00155","s":"B","a":310,"z":312,"k":"P","h":"367e15b1","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00156","s":"B","a":314,"z":314,"k":"H","h":"90710831","st":"I"}
 {"t":"u","id":"SU-B-00157","s":"B","a":315,"z":317,"k":"P","h":"1a4f57e5","st":"U"}
 {"t":"u","id":"SU-B-00158","s":"B","a":319,"z":319,"k":"H","h":"a53643c9","st":"I"}
@@ -173,13 +173,13 @@
 {"t":"u","id":"SU-B-00172","s":"B","a":354,"z":354,"k":"H","h":"b3601aba","st":"I"}
 {"t":"u","id":"SU-B-00173","s":"B","a":355,"z":357,"k":"P","h":"8e5a8ea4","st":"U"}
 {"t":"u","id":"SU-B-00174","s":"B","a":359,"z":359,"k":"H","h":"d69e442c","st":"I"}
-{"t":"u","id":"SU-B-00175","s":"B","a":360,"z":362,"k":"P","h":"316fb7d1","st":"U"}
+{"t":"u","id":"SU-B-00175","s":"B","a":360,"z":362,"k":"P","h":"316fb7d1","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00176","s":"B","a":364,"z":364,"k":"H","h":"e5de00ef","st":"I"}
 {"t":"u","id":"SU-B-00177","s":"B","a":365,"z":367,"k":"P","h":"a38e8486","st":"U"}
 {"t":"u","id":"SU-B-00178","s":"B","a":369,"z":369,"k":"H","h":"5303999c","st":"I"}
-{"t":"u","id":"SU-B-00179","s":"B","a":370,"z":372,"k":"P","h":"fb2e2c79","st":"U"}
+{"t":"u","id":"SU-B-00179","s":"B","a":370,"z":372,"k":"P","h":"fb2e2c79","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00180","s":"B","a":374,"z":374,"k":"H","h":"84c9b729","st":"I"}
-{"t":"u","id":"SU-B-00181","s":"B","a":375,"z":377,"k":"P","h":"31a0b607","st":"U"}
+{"t":"u","id":"SU-B-00181","s":"B","a":375,"z":377,"k":"P","h":"31a0b607","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00182","s":"B","a":379,"z":379,"k":"H","h":"e25e0144","st":"I"}
 {"t":"u","id":"SU-B-00183","s":"B","a":380,"z":382,"k":"P","h":"c1c1d442","st":"U"}
 {"t":"u","id":"SU-B-00184","s":"B","a":384,"z":384,"k":"H","h":"4769d21b","st":"I"}
@@ -207,7 +207,7 @@
 {"t":"u","id":"SU-B-00206","s":"B","a":439,"z":439,"k":"H","h":"263bda2f","st":"I"}
 {"t":"u","id":"SU-B-00207","s":"B","a":440,"z":442,"k":"P","h":"94d93b74","st":"U"}
 {"t":"u","id":"SU-B-00208","s":"B","a":444,"z":444,"k":"H","h":"6d87173a","st":"I"}
-{"t":"u","id":"SU-B-00209","s":"B","a":445,"z":447,"k":"P","h":"b4e66d37","st":"U"}
+{"t":"u","id":"SU-B-00209","s":"B","a":445,"z":447,"k":"P","h":"b4e66d37","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00210","s":"B","a":449,"z":449,"k":"H","h":"5447d20e","st":"I"}
 {"t":"u","id":"SU-B-00211","s":"B","a":450,"z":452,"k":"P","h":"ff510f52","st":"U"}
 {"t":"u","id":"SU-B-00212","s":"B","a":454,"z":454,"k":"H","h":"c301c36a","st":"I"}
@@ -215,7 +215,7 @@
 {"t":"u","id":"SU-B-00214","s":"B","a":459,"z":459,"k":"H","h":"deb6f93f","st":"I"}
 {"t":"u","id":"SU-B-00215","s":"B","a":460,"z":462,"k":"P","h":"1884c1f9","st":"U"}
 {"t":"u","id":"SU-B-00216","s":"B","a":464,"z":464,"k":"H","h":"0021cf7f","st":"I"}
-{"t":"u","id":"SU-B-00217","s":"B","a":465,"z":467,"k":"P","h":"a28acea0","st":"U"}
+{"t":"u","id":"SU-B-00217","s":"B","a":465,"z":467,"k":"P","h":"a28acea0","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00218","s":"B","a":469,"z":469,"k":"H","h":"a2d448d0","st":"I","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"RAG_HANDOFF"}
 {"t":"u","id":"SU-B-00219","s":"B","a":471,"z":471,"k":"P","h":"63479840","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"RAG_HANDOFF"}
 {"t":"u","id":"SU-B-00220","s":"B","a":473,"z":473,"k":"P","h":"2ea5c91d","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"RAG_HANDOFF"}
@@ -232,7 +232,7 @@
 {"t":"u","id":"SU-B-00231","s":"B","a":486,"z":486,"k":"T","h":"b37c247c","st":"U"}
 {"t":"u","id":"SU-B-00232","s":"B","a":487,"z":487,"k":"T","h":"9ca32c68","st":"U"}
 {"t":"u","id":"SU-B-00233","s":"B","a":488,"z":488,"k":"T","h":"2fa7ad8d","st":"U"}
-{"t":"u","id":"SU-B-00234","s":"B","a":490,"z":490,"k":"P","h":"d22b52f2","st":"U"}
+{"t":"u","id":"SU-B-00234","s":"B","a":490,"z":490,"k":"P","h":"d22b52f2","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00235","s":"B","a":492,"z":492,"k":"H","h":"128fe0ba","st":"I"}
 {"t":"u","id":"SU-B-00236","s":"B","a":494,"z":494,"k":"T","h":"04e4160b","st":"U"}
 {"t":"u","id":"SU-B-00237","s":"B","a":495,"z":495,"k":"-","h":"b22ecf4c","st":"I"}
@@ -242,8 +242,8 @@
 {"t":"u","id":"SU-B-00241","s":"B","a":499,"z":499,"k":"T","h":"7dfc797d","st":"U"}
 {"t":"u","id":"SU-B-00242","s":"B","a":500,"z":500,"k":"T","h":"27c40c9a","st":"U"}
 {"t":"u","id":"SU-B-00243","s":"B","a":502,"z":502,"k":"H","h":"499d5501","st":"I"}
-{"t":"u","id":"SU-B-00244","s":"B","a":504,"z":504,"k":"P","h":"46f0e1df","st":"U"}
-{"t":"u","id":"SU-B-00245","s":"B","a":506,"z":506,"k":"H","h":"5e0c1d2b","st":"I"}
+{"t":"u","id":"SU-B-00244","s":"B","a":504,"z":504,"k":"P","h":"46f0e1df","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
+{"t":"u","id":"SU-B-00245","s":"B","a":506,"z":506,"k":"H","h":"5e0c1d2b","st":"I","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00246","s":"B","a":508,"z":508,"k":"P","h":"0aab5619","st":"U"}
 {"t":"u","id":"SU-B-00247","s":"B","a":510,"z":510,"k":"H","h":"28154e06","st":"I"}
 {"t":"u","id":"SU-B-00248","s":"B","a":512,"z":512,"k":"L","h":"1354e896","st":"U"}
@@ -346,7 +346,7 @@
 {"t":"u","id":"SU-B-00345","s":"B","a":693,"z":693,"k":"L","h":"07e1b1aa","st":"U"}
 {"t":"u","id":"SU-B-00346","s":"B","a":694,"z":694,"k":"L","h":"ce1b863a","st":"U"}
 {"t":"u","id":"SU-B-00347","s":"B","a":695,"z":695,"k":"L","h":"72f481db","st":"U"}
-{"t":"u","id":"SU-B-00348","s":"B","a":696,"z":696,"k":"L","h":"67caafc8","st":"U"}
+{"t":"u","id":"SU-B-00348","s":"B","a":696,"z":696,"k":"L","h":"67caafc8","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00349","s":"B","a":697,"z":697,"k":"L","h":"bd787f5a","st":"U"}
 {"t":"u","id":"SU-B-00350","s":"B","a":698,"z":698,"k":"L","h":"81f28c38","st":"U"}
 {"t":"u","id":"SU-B-00351","s":"B","a":700,"z":700,"k":"P","h":"8d4be411","st":"U"}
@@ -412,8 +412,8 @@
 {"t":"u","id":"SU-B-00411","s":"B","a":776,"z":776,"k":"L","h":"3903c0d1","st":"U"}
 {"t":"u","id":"SU-B-00412","s":"B","a":777,"z":777,"k":"L","h":"55d8f3d0","st":"U"}
 {"t":"u","id":"SU-B-00413","s":"B","a":778,"z":778,"k":"L","h":"326d83d0","st":"U"}
-{"t":"u","id":"SU-B-00414","s":"B","a":780,"z":780,"k":"H","h":"fbd7095b","st":"I"}
-{"t":"u","id":"SU-B-00415","s":"B","a":782,"z":782,"k":"P","h":"0e419c5b","st":"U"}
+{"t":"u","id":"SU-B-00414","s":"B","a":780,"z":780,"k":"H","h":"fbd7095b","st":"I","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
+{"t":"u","id":"SU-B-00415","s":"B","a":782,"z":782,"k":"P","h":"0e419c5b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00416","s":"B","a":784,"z":784,"k":"P","h":"c4e4dc86","st":"U"}
 {"t":"u","id":"SU-B-00417","s":"B","a":786,"z":786,"k":"H","h":"2ed72f10","st":"I"}
 {"t":"u","id":"SU-B-00418","s":"B","a":788,"z":788,"k":"P","h":"1d240b94","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"ARCH","refs":["REQ:CORE:002"]}
@@ -455,7 +455,7 @@
 {"t":"u","id":"SU-B-00454","s":"B","a":944,"z":944,"k":"P","h":"dcee0853","st":"U"}
 {"t":"u","id":"SU-B-00455","s":"B","a":946,"z":946,"k":"P","h":"15fd1af5","st":"U"}
 {"t":"u","id":"SU-B-00456","s":"B","a":948,"z":967,"k":"D","h":"a29a5084","st":"U"}
-{"t":"u","id":"SU-B-00457","s":"B","a":969,"z":969,"k":"P","h":"eb6127f9","st":"U"}
+{"t":"u","id":"SU-B-00457","s":"B","a":969,"z":969,"k":"P","h":"eb6127f9","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00458","s":"B","a":971,"z":971,"k":"H","h":"5b703e66","st":"I"}
 {"t":"u","id":"SU-B-00459","s":"B","a":973,"z":973,"k":"P","h":"a7e1b9b4","st":"U"}
 {"t":"u","id":"SU-B-00460","s":"B","a":975,"z":975,"k":"P","h":"d69d792b","st":"U"}
@@ -497,16 +497,16 @@
 {"t":"u","id":"SU-B-00496","s":"B","a":1066,"z":1066,"k":"P","h":"dd96983d","st":"U"}
 {"t":"u","id":"SU-B-00497","s":"B","a":1068,"z":1068,"k":"P","h":"bed0204b","st":"U"}
 {"t":"u","id":"SU-B-00498","s":"B","a":1070,"z":1070,"k":"P","h":"91c536e7","st":"U"}
-{"t":"u","id":"SU-B-00499","s":"B","a":1072,"z":1072,"k":"P","h":"f866689c","st":"U"}
-{"t":"u","id":"SU-B-00500","s":"B","a":1074,"z":1074,"k":"P","h":"45da078d","st":"U"}
+{"t":"u","id":"SU-B-00499","s":"B","a":1072,"z":1072,"k":"P","h":"f866689c","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00500","s":"B","a":1074,"z":1074,"k":"P","h":"45da078d","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00501","s":"B","a":1076,"z":1076,"k":"P","h":"7bc0ed2f","st":"U"}
 {"t":"u","id":"SU-B-00502","s":"B","a":1077,"z":1077,"k":"L","h":"5fb4c590","st":"U"}
 {"t":"u","id":"SU-B-00503","s":"B","a":1078,"z":1078,"k":"L","h":"b9d0d07e","st":"U"}
 {"t":"u","id":"SU-B-00504","s":"B","a":1079,"z":1079,"k":"L","h":"8aff6258","st":"U"}
 {"t":"u","id":"SU-B-00505","s":"B","a":1080,"z":1080,"k":"L","h":"6d7bc812","st":"U"}
 {"t":"u","id":"SU-B-00506","s":"B","a":1081,"z":1081,"k":"L","h":"8de5a342","st":"U"}
-{"t":"u","id":"SU-B-00507","s":"B","a":1082,"z":1082,"k":"L","h":"d5e6088b","st":"U"}
-{"t":"u","id":"SU-B-00508","s":"B","a":1083,"z":1083,"k":"L","h":"e4720a09","st":"U"}
+{"t":"u","id":"SU-B-00507","s":"B","a":1082,"z":1082,"k":"L","h":"d5e6088b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
+{"t":"u","id":"SU-B-00508","s":"B","a":1083,"z":1083,"k":"L","h":"e4720a09","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00509","s":"B","a":1085,"z":1085,"k":"P","h":"ea94f0fe","st":"U"}
 {"t":"u","id":"SU-B-00510","s":"B","a":1087,"z":1087,"k":"H","h":"c8e01a9f","st":"I"}
 {"t":"u","id":"SU-B-00511","s":"B","a":1089,"z":1089,"k":"P","h":"b66f4ec0","st":"U"}
@@ -631,8 +631,8 @@
 {"t":"u","id":"SU-B-00630","s":"B","a":1322,"z":1322,"k":"L","h":"2545b379","st":"U"}
 {"t":"u","id":"SU-B-00631","s":"B","a":1324,"z":1324,"k":"L","h":"49031147","st":"U"}
 {"t":"u","id":"SU-B-00632","s":"B","a":1326,"z":1326,"k":"L","h":"a66440de","st":"U"}
-{"t":"u","id":"SU-B-00633","s":"B","a":1328,"z":1328,"k":"L","h":"f0fc05b5","st":"U"}
-{"t":"u","id":"SU-B-00634","s":"B","a":1330,"z":1330,"k":"L","h":"364adfbd","st":"U"}
+{"t":"u","id":"SU-B-00633","s":"B","a":1328,"z":1328,"k":"L","h":"f0fc05b5","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00634","s":"B","a":1330,"z":1330,"k":"L","h":"364adfbd","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00635","s":"B","a":1332,"z":1332,"k":"L","h":"917d1f5c","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"OPEN_ARCH_DETAIL"}
 {"t":"u","id":"SU-B-00636","s":"B","a":1334,"z":1334,"k":"L","h":"b5c291d6","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"OPEN_ARCH_DETAIL"}
 {"t":"u","id":"SU-B-00637","s":"B","a":1336,"z":1336,"k":"H","h":"596132f3","st":"I"}
@@ -646,7 +646,7 @@
 {"t":"u","id":"SU-B-00645","s":"B","a":1352,"z":1352,"k":"L","h":"75c2530f","st":"U"}
 {"t":"u","id":"SU-B-00646","s":"B","a":1354,"z":1354,"k":"L","h":"cc2ad61f","st":"U"}
 {"t":"u","id":"SU-B-00647","s":"B","a":1356,"z":1356,"k":"L","h":"dff971bc","st":"U"}
-{"t":"u","id":"SU-B-00648","s":"B","a":1358,"z":1358,"k":"P","h":"1a4976ec","st":"U"}
+{"t":"u","id":"SU-B-00648","s":"B","a":1358,"z":1358,"k":"P","h":"1a4976ec","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00649","s":"B","a":1360,"z":1360,"k":"H","h":"575a885d","st":"I"}
 {"t":"u","id":"SU-B-00650","s":"B","a":1362,"z":1362,"k":"L","h":"7369da85","st":"U"}
 {"t":"u","id":"SU-B-00651","s":"B","a":1363,"z":1363,"k":"L","h":"0ddcac69","st":"U"}
@@ -674,7 +674,7 @@
 {"t":"u","id":"SU-B-00673","s":"B","a":1399,"z":1399,"k":"T","h":"c4159726","st":"U"}
 {"t":"u","id":"SU-B-00674","s":"B","a":1400,"z":1400,"k":"T","h":"0edd96f7","st":"U"}
 {"t":"u","id":"SU-B-00675","s":"B","a":1401,"z":1401,"k":"T","h":"10e02f32","st":"U"}
-{"t":"u","id":"SU-B-00676","s":"B","a":1402,"z":1402,"k":"T","h":"c9685a57","st":"U"}
+{"t":"u","id":"SU-B-00676","s":"B","a":1402,"z":1402,"k":"T","h":"c9685a57","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00677","s":"B","a":1403,"z":1403,"k":"T","h":"f4c5a2be","st":"U"}
 {"t":"u","id":"SU-B-00678","s":"B","a":1404,"z":1404,"k":"T","h":"cde3a3a3","st":"U"}
 {"t":"u","id":"SU-B-00679","s":"B","a":1405,"z":1405,"k":"T","h":"34d1929c","st":"U"}
@@ -688,7 +688,7 @@
 {"t":"u","id":"SU-B-00687","s":"B","a":1441,"z":1441,"k":"P","h":"f10a6be2","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"B05_HANDOFF","refs":["REQ:CORE:028"]}
 {"t":"u","id":"SU-B-00688","s":"B","a":1443,"z":1443,"k":"P","h":"2d471932","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"B05_HANDOFF","refs":["REQ:CORE:028"]}
 {"t":"u","id":"SU-B-00689","s":"B","a":1445,"z":1445,"k":"H","h":"94ea2c94","st":"I"}
-{"t":"u","id":"SU-B-00690","s":"B","a":1447,"z":1447,"k":"P","h":"0b45522a","st":"U"}
+{"t":"u","id":"SU-B-00690","s":"B","a":1447,"z":1447,"k":"P","h":"0b45522a","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00691","s":"B","a":1449,"z":1449,"k":"P","h":"91edd689","st":"U"}
 {"t":"u","id":"SU-B-00692","s":"B","a":1451,"z":1451,"k":"H","h":"b5115047","st":"I"}
 {"t":"u","id":"SU-B-00693","s":"B","a":1453,"z":1453,"k":"P","h":"9cbafe30","st":"U"}
@@ -715,17 +715,17 @@
 {"t":"u","id":"SU-B-00714","s":"B","a":1540,"z":1553,"k":"D","h":"ab8ec9ca","st":"U"}
 {"t":"u","id":"SU-B-00715","s":"B","a":1555,"z":1555,"k":"P","h":"e645e9d0","st":"U"}
 {"t":"u","id":"SU-B-00716","s":"B","a":1557,"z":1557,"k":"H","h":"e06034de","st":"I"}
-{"t":"u","id":"SU-B-00717","s":"B","a":1559,"z":1559,"k":"P","h":"2b1ccc08","st":"U"}
-{"t":"u","id":"SU-B-00718","s":"B","a":1561,"z":1561,"k":"P","h":"a4c3ad55","st":"U"}
+{"t":"u","id":"SU-B-00717","s":"B","a":1559,"z":1559,"k":"P","h":"2b1ccc08","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00718","s":"B","a":1561,"z":1561,"k":"P","h":"a4c3ad55","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00719","s":"B","a":1563,"z":1563,"k":"P","h":"e55988cf","st":"U"}
 {"t":"u","id":"SU-B-00720","s":"B","a":1565,"z":1580,"k":"D","h":"869c7090","st":"U"}
 {"t":"u","id":"SU-B-00721","s":"B","a":1582,"z":1582,"k":"P","h":"226297cb","st":"U"}
 {"t":"u","id":"SU-B-00722","s":"B","a":1584,"z":1584,"k":"H","h":"8e60cd2b","st":"I"}
 {"t":"u","id":"SU-B-00723","s":"B","a":1586,"z":1586,"k":"P","h":"72ca8eef","st":"U"}
-{"t":"u","id":"SU-B-00724","s":"B","a":1588,"z":1588,"k":"L","h":"526228b1","st":"U"}
+{"t":"u","id":"SU-B-00724","s":"B","a":1588,"z":1588,"k":"L","h":"526228b1","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00725","s":"B","a":1590,"z":1590,"k":"L","h":"d4234804","st":"U"}
 {"t":"u","id":"SU-B-00726","s":"B","a":1592,"z":1592,"k":"P","h":"65cee962","st":"U"}
-{"t":"u","id":"SU-B-00727","s":"B","a":1594,"z":1594,"k":"P","h":"16c52518","st":"U"}
+{"t":"u","id":"SU-B-00727","s":"B","a":1594,"z":1594,"k":"P","h":"16c52518","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00728","s":"B","a":1596,"z":1596,"k":"T","h":"4ad597b4","st":"U"}
 {"t":"u","id":"SU-B-00729","s":"B","a":1597,"z":1597,"k":"-","h":"b22ecf4c","st":"I"}
 {"t":"u","id":"SU-B-00730","s":"B","a":1598,"z":1598,"k":"T","h":"ed901923","st":"U"}
@@ -741,9 +741,9 @@
 {"t":"u","id":"SU-B-00740","s":"B","a":1612,"z":1623,"k":"D","h":"0352be2f","st":"U","refs":["REQ:CORE:030"]}
 {"t":"u","id":"SU-B-00741","s":"B","a":1625,"z":1625,"k":"P","h":"77f8149b","st":"U","refs":["REQ:CORE:030"]}
 {"t":"u","id":"SU-B-00742","s":"B","a":1627,"z":1627,"k":"H","h":"20142dbe","st":"I","refs":["REQ:CORE:008","REQ:CORE:030"]}
-{"t":"u","id":"SU-B-00743","s":"B","a":1629,"z":1629,"k":"P","h":"8ed66206","st":"U","refs":["REQ:CORE:008","REQ:CORE:030"]}
-{"t":"u","id":"SU-B-00744","s":"B","a":1631,"z":1631,"k":"P","h":"fbf42d2c","st":"U","refs":["REQ:CORE:008"]}
-{"t":"u","id":"SU-B-00745","s":"B","a":1633,"z":1633,"k":"P","h":"1c0302db","st":"U","refs":["REQ:CORE:008"]}
+{"t":"u","id":"SU-B-00743","s":"B","a":1629,"z":1629,"k":"P","h":"8ed66206","st":"U","refs":["REQ:CORE:008","REQ:CORE:030"],"scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00744","s":"B","a":1631,"z":1631,"k":"P","h":"fbf42d2c","st":"U","refs":["REQ:CORE:008"],"scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00745","s":"B","a":1633,"z":1633,"k":"P","h":"1c0302db","st":"U","refs":["REQ:CORE:008"],"scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00746","s":"B","a":1635,"z":1635,"k":"P","h":"24e2b008","st":"U"}
 {"t":"u","id":"SU-B-00747","s":"B","a":1637,"z":1637,"k":"H","h":"195f0029","st":"I"}
 {"t":"u","id":"SU-B-00748","s":"B","a":1639,"z":1639,"k":"L","h":"d4a17654","st":"U"}
@@ -761,7 +761,7 @@
 {"t":"u","id":"SU-B-00760","s":"B","a":1686,"z":1686,"k":"H","h":"b0ed3ac2","st":"I"}
 {"t":"u","id":"SU-B-00761","s":"B","a":1688,"z":1688,"k":"L","h":"7e0c3c15","st":"U","refs":["REQ:CORE:029"]}
 {"t":"u","id":"SU-B-00762","s":"B","a":1689,"z":1689,"k":"L","h":"e6f7e1ce","st":"U","refs":["REQ:CORE:029"]}
-{"t":"u","id":"SU-B-00763","s":"B","a":1690,"z":1690,"k":"L","h":"4192a764","st":"U","refs":["REQ:CORE:029"]}
+{"t":"u","id":"SU-B-00763","s":"B","a":1690,"z":1690,"k":"L","h":"4192a764","st":"U","refs":["REQ:CORE:029"],"scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00764","s":"B","a":1691,"z":1691,"k":"L","h":"bffeae81","st":"U"}
 {"t":"u","id":"SU-B-00765","s":"B","a":1692,"z":1692,"k":"L","h":"e1ef5f5c","st":"U"}
 {"t":"u","id":"SU-B-00766","s":"B","a":1693,"z":1693,"k":"L","h":"fff0aa75","st":"U"}
@@ -798,9 +798,9 @@
 {"t":"u","id":"SU-B-00797","s":"B","a":1739,"z":1739,"k":"L","h":"bda06593","st":"U"}
 {"t":"u","id":"SU-B-00798","s":"B","a":1741,"z":1741,"k":"L","h":"58dfb762","st":"U"}
 {"t":"u","id":"SU-B-00799","s":"B","a":1743,"z":1743,"k":"L","h":"368520de","st":"U"}
-{"t":"u","id":"SU-B-00800","s":"B","a":1745,"z":1745,"k":"L","h":"a80c8002","st":"U"}
+{"t":"u","id":"SU-B-00800","s":"B","a":1745,"z":1745,"k":"L","h":"a80c8002","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00801","s":"B","a":1747,"z":1747,"k":"L","h":"d8317bdd","st":"U"}
-{"t":"u","id":"SU-B-00802","s":"B","a":1749,"z":1749,"k":"L","h":"3281e9d2","st":"U"}
+{"t":"u","id":"SU-B-00802","s":"B","a":1749,"z":1749,"k":"L","h":"3281e9d2","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00803","s":"B","a":1751,"z":1751,"k":"L","h":"5f217f74","st":"U"}
 {"t":"u","id":"SU-B-00804","s":"B","a":1753,"z":1753,"k":"H","h":"f614c22c","st":"I"}
 {"t":"u","id":"SU-B-00805","s":"B","a":1755,"z":1755,"k":"P","h":"74a3f46b","st":"U"}
@@ -870,9 +870,9 @@
 {"t":"u","id":"SU-B-00869","s":"B","a":1925,"z":1925,"k":"P","h":"c4e4dc86","st":"U"}
 {"t":"u","id":"SU-B-00870","s":"B","a":1927,"z":1927,"k":"H","h":"43efeffc","st":"I"}
 {"t":"u","id":"SU-B-00871","s":"B","a":1929,"z":1929,"k":"P","h":"32770006","st":"U"}
-{"t":"u","id":"SU-B-00872","s":"B","a":1932,"z":1932,"k":"P","h":"9d97125b","st":"U"}
+{"t":"u","id":"SU-B-00872","s":"B","a":1932,"z":1932,"k":"P","h":"9d97125b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00873","s":"B","a":1934,"z":1934,"k":"H","h":"561d2836","st":"I"}
-{"t":"u","id":"SU-B-00874","s":"B","a":1936,"z":1936,"k":"P","h":"087fe5e9","st":"U"}
+{"t":"u","id":"SU-B-00874","s":"B","a":1936,"z":1936,"k":"P","h":"087fe5e9","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-00875","s":"B","a":1938,"z":1938,"k":"P","h":"be72fb65","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"PRINCIPLES","refs":["REQ:CORE:024"]}
 {"t":"u","id":"SU-B-00876","s":"B","a":1940,"z":1940,"k":"P","h":"6e929322","st":"U","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"PRINCIPLES","refs":["REQ:CORE:024"]}
 {"t":"u","id":"SU-B-00877","s":"B","a":1942,"z":1942,"k":"H","h":"646d62bb","st":"I","scope":["C01"],"review":"C01_SOURCE_SCOPE_CLASSIFIED","disposition":"PRINCIPLES","refs":["REQ:CORE:025"]}
@@ -971,18 +971,18 @@
 {"t":"u","id":"SU-B-00970","s":"B","a":2115,"z":2115,"k":"T","h":"3e35a9e4","st":"U"}
 {"t":"u","id":"SU-B-00971","s":"B","a":2116,"z":2116,"k":"T","h":"944554fe","st":"U"}
 {"t":"u","id":"SU-B-00972","s":"B","a":2117,"z":2117,"k":"T","h":"e1e2df57","st":"U"}
-{"t":"u","id":"SU-B-00973","s":"B","a":2118,"z":2118,"k":"T","h":"aa30ad22","st":"U"}
-{"t":"u","id":"SU-B-00974","s":"B","a":2120,"z":2120,"k":"P","h":"4ad4c1e9","st":"U"}
+{"t":"u","id":"SU-B-00973","s":"B","a":2118,"z":2118,"k":"T","h":"aa30ad22","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
+{"t":"u","id":"SU-B-00974","s":"B","a":2120,"z":2120,"k":"P","h":"4ad4c1e9","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00975","s":"B","a":2122,"z":2122,"k":"H","h":"6e82118d","st":"I"}
 {"t":"u","id":"SU-B-00976","s":"B","a":2124,"z":2124,"k":"P","h":"428dd3af","st":"U"}
 {"t":"u","id":"SU-B-00977","s":"B","a":2126,"z":2126,"k":"P","h":"d164ce26","st":"U"}
-{"t":"u","id":"SU-B-00978","s":"B","a":2128,"z":2128,"k":"P","h":"7e7ca840","st":"U"}
+{"t":"u","id":"SU-B-00978","s":"B","a":2128,"z":2128,"k":"P","h":"7e7ca840","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00979","s":"B","a":2130,"z":2130,"k":"H","h":"fff8796c","st":"I"}
 {"t":"u","id":"SU-B-00980","s":"B","a":2132,"z":2132,"k":"P","h":"160cf9ae","st":"U"}
 {"t":"u","id":"SU-B-00981","s":"B","a":2134,"z":2134,"k":"P","h":"808e8eb9","st":"U"}
 {"t":"u","id":"SU-B-00982","s":"B","a":2136,"z":2136,"k":"H","h":"fc7f5ff6","st":"I"}
 {"t":"u","id":"SU-B-00983","s":"B","a":2138,"z":2138,"k":"P","h":"b1d2c0df","st":"U"}
-{"t":"u","id":"SU-B-00984","s":"B","a":2140,"z":2140,"k":"P","h":"c8d64b4b","st":"U"}
+{"t":"u","id":"SU-B-00984","s":"B","a":2140,"z":2140,"k":"P","h":"c8d64b4b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK"}
 {"t":"u","id":"SU-B-00985","s":"B","a":2142,"z":2142,"k":"H","h":"36cd1de2","st":"I"}
 {"t":"u","id":"SU-B-00986","s":"B","a":2144,"z":2144,"k":"P","h":"4bd7f884","st":"U"}
 {"t":"u","id":"SU-B-00987","s":"B","a":2146,"z":2146,"k":"T","h":"7679068a","st":"U"}
@@ -1136,16 +1136,16 @@
 {"t":"u","id":"SU-B-01135","s":"B","a":2350,"z":2350,"k":"T","h":"501d8785","st":"U"}
 {"t":"u","id":"SU-B-01136","s":"B","a":2351,"z":2351,"k":"T","h":"6edf2db8","st":"U"}
 {"t":"u","id":"SU-B-01137","s":"B","a":2352,"z":2352,"k":"T","h":"db1fae39","st":"U"}
-{"t":"u","id":"SU-B-01138","s":"B","a":2353,"z":2353,"k":"T","h":"a4c386fa","st":"U"}
-{"t":"u","id":"SU-B-01139","s":"B","a":2354,"z":2354,"k":"T","h":"0bdc315b","st":"U"}
+{"t":"u","id":"SU-B-01138","s":"B","a":2353,"z":2353,"k":"T","h":"a4c386fa","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
+{"t":"u","id":"SU-B-01139","s":"B","a":2354,"z":2354,"k":"T","h":"0bdc315b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01140","s":"B","a":2355,"z":2355,"k":"T","h":"a7e074ed","st":"U"}
 {"t":"u","id":"SU-B-01141","s":"B","a":2356,"z":2356,"k":"T","h":"557d45db","st":"U"}
 {"t":"u","id":"SU-B-01142","s":"B","a":2357,"z":2357,"k":"T","h":"ef08cf61","st":"U"}
-{"t":"u","id":"SU-B-01143","s":"B","a":2359,"z":2359,"k":"T","h":"db97854b","st":"U"}
+{"t":"u","id":"SU-B-01143","s":"B","a":2359,"z":2359,"k":"T","h":"db97854b","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01144","s":"B","a":2360,"z":2360,"k":"T","h":"4d5090de","st":"U"}
 {"t":"u","id":"SU-B-01145","s":"B","a":2362,"z":2362,"k":"T","h":"124d1c6e","st":"U"}
 {"t":"u","id":"SU-B-01146","s":"B","a":2364,"z":2364,"k":"P","h":"f443cfae","st":"U"}
-{"t":"u","id":"SU-B-01147","s":"B","a":2366,"z":2366,"k":"P","h":"38e2a496","st":"U"}
+{"t":"u","id":"SU-B-01147","s":"B","a":2366,"z":2366,"k":"P","h":"38e2a496","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01148","s":"B","a":2369,"z":2369,"k":"P","h":"c4e4dc86","st":"U"}
 {"t":"u","id":"SU-B-01149","s":"B","a":2371,"z":2371,"k":"H","h":"dd07f728","st":"I"}
 {"t":"u","id":"SU-B-01150","s":"B","a":2373,"z":2375,"k":"P","h":"4758e7bf","st":"U"}
@@ -1195,7 +1195,7 @@
 {"t":"u","id":"SU-B-01194","s":"B","a":2433,"z":2433,"k":"L","h":"09df6b9d","st":"U"}
 {"t":"u","id":"SU-B-01195","s":"B","a":2434,"z":2434,"k":"L","h":"8f65f718","st":"U"}
 {"t":"u","id":"SU-B-01196","s":"B","a":2435,"z":2435,"k":"L","h":"b5c16759","st":"U"}
-{"t":"u","id":"SU-B-01197","s":"B","a":2436,"z":2436,"k":"L","h":"2d950d3c","st":"U"}
+{"t":"u","id":"SU-B-01197","s":"B","a":2436,"z":2436,"k":"L","h":"2d950d3c","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01198","s":"B","a":2438,"z":2438,"k":"P","h":"d9995715","st":"U"}
 {"t":"u","id":"SU-B-01199","s":"B","a":2440,"z":2440,"k":"H","h":"a77665b0","st":"I"}
 {"t":"u","id":"SU-B-01200","s":"B","a":2442,"z":2442,"k":"L","h":"64a85fca","st":"U"}
@@ -1245,9 +1245,9 @@
 {"t":"u","id":"SU-B-01244","s":"B","a":2507,"z":2507,"k":"L","h":"3c1cdb00","st":"U"}
 {"t":"u","id":"SU-B-01245","s":"B","a":2508,"z":2508,"k":"L","h":"f7688f91","st":"U"}
 {"t":"u","id":"SU-B-01246","s":"B","a":2509,"z":2509,"k":"L","h":"74efbbcf","st":"U"}
-{"t":"u","id":"SU-B-01247","s":"B","a":2511,"z":2511,"k":"P","h":"b29ba12f","st":"U"}
+{"t":"u","id":"SU-B-01247","s":"B","a":2511,"z":2511,"k":"P","h":"b29ba12f","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01248","s":"B","a":2513,"z":2513,"k":"H","h":"76ed41d6","st":"I"}
-{"t":"u","id":"SU-B-01249","s":"B","a":2515,"z":2515,"k":"P","h":"2f2948bc","st":"U"}
+{"t":"u","id":"SU-B-01249","s":"B","a":2515,"z":2515,"k":"P","h":"2f2948bc","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-B-01250","s":"B","a":2517,"z":2517,"k":"H","h":"b31e1414","st":"I"}
 {"t":"u","id":"SU-B-01251","s":"B","a":2519,"z":2519,"k":"L","h":"b9feddc0","st":"U"}
 {"t":"u","id":"SU-B-01252","s":"B","a":2520,"z":2520,"k":"L","h":"126d6855","st":"U"}
@@ -1268,7 +1268,7 @@
 {"t":"u","id":"SU-B-01267","s":"B","a":2544,"z":2544,"k":"P","h":"7f7798e7","st":"U"}
 {"t":"u","id":"SU-B-01268","s":"B","a":2546,"z":2546,"k":"P","h":"c4e4dc86","st":"U"}
 {"t":"u","id":"SU-B-01269","s":"B","a":2548,"z":2548,"k":"H","h":"5ac1f462","st":"I"}
-{"t":"u","id":"SU-B-01270","s":"B","a":2550,"z":2550,"k":"P","h":"f08f3f64","st":"U"}
+{"t":"u","id":"SU-B-01270","s":"B","a":2550,"z":2550,"k":"P","h":"f08f3f64","st":"U","scope":["C01"],"review":"C01_CROSSREF_SECOND_PASS","disposition":"HISTORICAL_OR_OTHER_PACKAGE"}
 {"t":"u","id":"SU-W-00001","s":"W","a":1,"z":1,"k":"H","h":"3adf95de","st":"I"}
 {"t":"u","id":"SU-W-00002","s":"W","a":3,"z":5,"k":"P","h":"9ea2e6e1","st":"U"}
 {"t":"u","id":"SU-W-00003","s":"W","a":7,"z":7,"k":"H","h":"617a1cfb","st":"I"}
@@ -2302,3 +2302,74 @@
 {"t":"coverage_scope","pkg":"C01","source":"W","from":1161,"to":1175,"disposition":"FINANCE_HANDOFF","review":"SECOND_PASS_C01"}
 {"t":"coverage_scope","pkg":"C01","source":"W","from":1329,"to":1335,"disposition":"RETENTION_HANDOFF","review":"SECOND_PASS_C01"}
 {"t":"coverage_scope","pkg":"C01","source":"W","from":1583,"to":1610,"disposition":"TEST_EXAMPLES","review":"SECOND_PASS_C01"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:01","source":"B","ln":1966,"source_unit":"SU-B-00889","text":"۱. **انتشار هفتگی ارزش واقعی:** هر چرخه حداکثر هفت روز تقویمی دارد و هدف آن تحویل نسخه‌ای قابل‌استقرار، یکپارچه و واقعاً قابل‌استفاده برای کاربر یا بهره‌بردار مجاز است. پایان Task، ادغام PR، API بدون مصرف‌کننده یا PoC داخلی به‌تنهایی تحویل محصول نیست. استقرار واقعی به عبور از گیت‌های مصوب وابسته است؛ اگر انتشار به‌علت مانع معتبر ایمنی یا کیفیت متوقف شود، نباید موفقیت انتشار اعلام شود.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:02","source":"B","ln":1968,"source_unit":"SU-B-00890","text":"۲. **افزایش پیوسته محصول:** هر انتشار باید بر نسخه کارای قبلی بنا شود و قابلیت‌های منتشرشده را حفظ کند؛ یکپارچگی، سازگاری قراردادها، آزمون رگرسیون و مسیر بازگشت بخشی از تحویل‌اند. انتشار جزیره‌ای و اجزای غیرقابل‌استفاده خروجی معمول چرخه نیستند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:03","source":"B","ln":1970,"source_unit":"SU-B-00891","text":"۳. **استثنای محدود و اثبات‌پذیر:** عبور یک قابلیت از مرز هفت روز فقط وقتی مجاز است که تقسیم آن به برش‌های مستقل و ایمنِ دارای ارزش واقعی، به دلیل مستند فنی، کارکردی یا امنیتی ممکن یا منطقی نباشد. دلیل، گزینه‌های تقسیم بررسی‌شده، وابستگی‌ها، سقف زمان/هزینه، خروجی میانی قابل‌آزمون و تاریخ بازبینی باید در برنامه ثبت شوند؛ خروجی میانی جای انتشار محصول را نمی‌گیرد.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:04","source":"B","ln":1974,"source_unit":"SU-B-00893","text":"۴. **اولویت با آسان‌ترین قابلیت ارزشمند:** شروع با برش‌های کوچک، کم‌ریسک، سریع و کم‌هزینه‌ای است که مسئله واقعی کاربر را حل می‌کنند؛ سادگیِ فاقد ارزش یا ارزشِ بدون امکان تحویل ملاک اولویت نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:05","source":"B","ln":1976,"source_unit":"SU-B-00894","text":"۵. **تقدم وابستگی‌های واقعی:** قبل از ترتیب انتشار، نقشه وابستگی قابلیت‌ها، قراردادها، داده‌ها، مجوزها و زیرساخت‌ها تهیه می‌شود؛ قابلیت پایه مشترک در نخستین نقطه نیاز و با مصرف‌کننده واقعی ساخته می‌شود تا دوباره‌کاری ایجاد نشود.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:06","source":"B","ln":1978,"source_unit":"SU-B-00895","text":"۶. **زیرساخت به‌اندازه نیاز، با مرز توسعه‌پذیر:** زیرساخت فقط تا سطح لازم برای انتشارهای نزدیک ساخته می‌شود، بدون نقض معماری مصوب Core ماژولار، Adviser مستقل و Assistant مستقل هدف؛ توسعه پیش‌دستانه کامل سامانه‌های فاقد مصرف‌کننده ممنوع است مگر وابستگی/ریسک آن اثبات شود.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:07","source":"B","ln":1980,"source_unit":"SU-B-00896","text":"۷. **یکپارچگی تجربه و داده:** ورود کاربر، هویت، انتخاب حوزه، وضعیت عملیات، قراردادهای نسخه‌دار، مالکیت داده و رابط کاربری باید در همه انتشارها سازگار بمانند؛ راه‌حل موقت نباید مسیر موازی ناسازگار ایجاد کند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:08","source":"B","ln":1984,"source_unit":"SU-B-00898","text":"۸. **دو جریان هماهنگ و متناوب:** کار بر مشاور و دستیار با تقدم وابستگی‌ها و به‌صورت برش‌های مرتبط و متناوب پیش می‌رود؛ تحقیق و آماده‌سازی مستقل دستیار می‌تواند پیش از پایان تمام توسعه مشاور شروع شود، اما فعال‌سازی و Delivery عملیاتی دستیار تابع گیت G1، توالی سیاستی مصوب و مجوز انتشار است. این اصل مرحله‌بندی سه‌گانه را حذف نمی‌کند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:09","source":"B","ln":1986,"source_unit":"SU-B-00899","text":"۹. **استفاده مجدد کنترل‌شده:** هویت، مجوز، مشاهده‌پذیری، قرارداد و زیرساخت مشترک در مالک مناسب توسعه می‌یابند؛ منطق تخصصی RAG/Adviser و اجرای Assistant، داده‌ها و مجوزهای حوزه‌ای مستقل می‌مانند. استفاده مجدد به معنی موتور واحد اجباری یا دسترسی مستقیم Adviser به داده Core نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:10","source":"B","ln":1988,"source_unit":"SU-B-00900","text":"۱۰. **آزمون زودهنگام عدم‌قطعیت‌های دشوار:** امکان‌سنجی محدود و زمان‌بندی‌شده Computer Use، کشف فلو، تغییر رابط، OTP، محدودیت وب/Android/iOS و بازیابی عملیات می‌تواند هم‌زمان با انتشار قابلیت‌های آسان انجام شود؛ PoC و Discovery جایگزین انتشار هفتگی قابل‌استفاده نیستند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:11","source":"B","ln":1992,"source_unit":"SU-B-00902","text":"۱۱. **برآورد پیش از تعهد:** هر برش قبل از ورود به چرخه، دارای دامنه، تعداد/پیچیدگی Task، وابستگی، نفرساعت، هفته تقویمی، ظرفیت واقعی، ریسک، حاشیه عدم‌قطعیت، هزینه و برآورد توکن است؛ اعداد بدون داده به‌عنوان تعهد قطعی ثبت نمی‌شوند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:12","source":"B","ln":1994,"source_unit":"SU-B-00903","text":"۱۲. **تفکیک هزینه ساخت و استفاده:** هزینه توسعه (انسان، ایجنت کدنویسی، توکن تحلیل/کد/تست/اصلاح، ابزار و آزمون) از هزینه بهره‌برداری (توکن هر درخواست، API/بانکداری باز، زیرساخت، پایش، نگهداری و هزینه هر عملیات موفق) مستقل برآورد و پایش می‌شود. MCPهای اتصال به منابع و خدمات تحت مالکیت و کنترل شهاب توسعه می‌یابند؛ استفاده از APIهای مجاز بانکداری باز بر اساس دسترسی، قرارداد، امنیت و هزینه بررسی می‌شود و اتصال MCP به‌خودی‌خود مزیت رقابتی فرض نمی‌شود.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:13","source":"B","ln":1996,"source_unit":"SU-B-00904","text":"۱۳. **ظرفیت واقعی و حفظ تحقیق:** تعهد هفتگی بر اساس ظرفیت واقعی توسعه، تست و استقرار تعیین می‌شود؛ تخصیص Discovery/Delivery مطابق نسبت‌های مصوب O5-09 و شرایط تغییر آن است، نه تقسیم مصنوعی و ثابت میان دو سرویس.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:14","source":"B","ln":1998,"source_unit":"SU-B-00905","text":"۱۴. **اصلاح تخمین با شواهد:** در پایان هر چرخه، زمان، نفرساعت، توکن، هزینه و خطاهای پیش‌بینی‌شده با مقدار واقعی مقایسه و مبنای تخمین چرخه‌های بعد به‌روزرسانی می‌شود؛ علت اختلاف و هزینه دوباره‌کاری ثبت می‌شود.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:15","source":"B","ln":2002,"source_unit":"SU-B-00907","text":"۱۵. **تعریف پایان مبتنی بر کارکرد:** قابلیت فقط با تکمیل اتصال سرتاسری، تجربه کاربری، آزمون‌های لازم، معیار پذیرش، پایش متناسب، مستندات ضروری و اثبات عملکرد در محیط هدف «انجام‌شده» است؛ سبزشدن تست واحد یا Merge به‌تنهایی کافی نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:16","source":"B","ln":2004,"source_unit":"SU-B-00908","text":"۱۶. **انتشار ایمن و قابل‌بازگشت:** هر نسخه باید گیت‌های ریسک R1–R4، RG/REL و F06 متناسب با دامنه را بگذراند؛ انتشار آزمایشی برای کاربران مجاز، استقرار و انتشار عمومی یکسان نیستند. Rollback/Restore و توقف اضطراری پیش از فعال‌سازی بررسی می‌شوند.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:17","source":"B","ln":2006,"source_unit":"SU-B-00909","text":"۱۷. **یادگیری زیر بار واقعی:** انتشارهای مجاز در اولین فرصت به کاربران واقعی یا گروه پایلوت می‌رسند؛ موفقیت، شکست، زمان، هزینه، خطا و بازخورد با حداقل داده لازم و رعایت حریم خصوصی سنجیده می‌شود؛ RUM به داده‌های عملکردی محدود می‌ماند و به معنی ضبط نشست/فرم نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:18","source":"B","ln":2008,"source_unit":"SU-B-00910","text":"۱۸. **اثبات تدریجی تمایز:** RAG معتبر، کشف فلو، Computer Use سازگارشونده، مدیریت وابستگی خدمت و Feedback/Feedforward با سناریو و شاخص واقعی (صحت، نرخ موفقیت، مداخله انسانی، زمان و هزینه هر عملیات موفق) ارزیابی می‌شوند؛ نمایش فنی یا تعداد MCP/API شاخص مزیت رقابتی نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:19","source":"B","ln":2012,"source_unit":"SU-B-00912","text":"۱۹. **تفکیک مرجع سیاست از برنامه اجرا:** سند جامع فاز دوم و اسناد مصوب مرتبط از جمله سند کیف پول، مرجع الزامات باقی می‌مانند؛ «سند برنامه پیاده‌سازی فاز دوم شهاب» فقط ترتیب، برش انتشار، وابستگی، منابع، هزینه، توکن و معیار پذیرش را تعیین می‌کند و بدون تصمیم مستقل، مصوبه‌ای را تغییر نمی‌دهد.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:20","source":"B","ln":2014,"source_unit":"SU-B-00913","text":"۲۰. **ردیابی دوسویه الزامات:** برای هر برش و Task باید شناسه الزام/مصوبه، مالک، وابستگی، نسخه انتشار، آزمون و شاهد پذیرش مشخص باشد؛ ماتریس پوشش باید الزامات اجراشده، برنامه‌ریزی‌شده و باقی‌مانده را نشان دهد تا ساده‌سازی به حذف خاموش دامنه نینجامد.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:21","source":"B","ln":2016,"source_unit":"SU-B-00914","text":"۲۱. **کنترل تغییر و جلوگیری از تکرار:** قبل از ساخت، کد و قابلیت‌های موجود Core/Adviser/زیرساخت بررسی می‌شوند؛ تغییر قرارداد، داده، UI یا وابستگی با تحلیل اثر، سازگاری با پروتکل اجرای تسک و آزمون رگرسیون انجام می‌شود؛ اصلاح متن و کد موجود بر ایجاد مسیر موازی ترجیح دارد.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"policy_principle","id":"POL:BLUEPRINT:5.2.1:22","source":"B","ln":2018,"source_unit":"SU-B-00915","text":"۲۲. **اولویت‌بندی پویا بدون تغییر خاموش دامنه:** ترتیب برش‌ها بر اساس ارزش، وابستگی، ظرفیت، هزینه، ریسک و یادگیری واقعی بازتنظیم می‌شود؛ حذف الزام، تغییر معماری، جابه‌جایی گیت یا فعال‌سازی قابلیت مالی بدون تصویب مستقل مجاز نیست.","status":"APPROVED_PROCESS","applies_to":"ALL_PACKAGES","task_creation":"only when the applicable implementation slice is planned"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":192,"to":192,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":265,"to":265,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":291,"to":291,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":311,"to":311,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":361,"to":361,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":371,"to":371,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":376,"to":376,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":446,"to":446,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":466,"to":466,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":490,"to":490,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":504,"to":504,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":506,"to":506,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":696,"to":696,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":780,"to":780,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":782,"to":782,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":969,"to":969,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1072,"to":1072,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1074,"to":1074,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1082,"to":1082,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1083,"to":1083,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1328,"to":1328,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1330,"to":1330,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1358,"to":1358,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1402,"to":1402,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1447,"to":1447,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1559,"to":1559,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1561,"to":1561,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1588,"to":1588,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1594,"to":1594,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1629,"to":1629,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1631,"to":1631,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1633,"to":1633,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1690,"to":1690,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1745,"to":1745,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1749,"to":1749,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1932,"to":1932,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":1936,"to":1936,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2118,"to":2118,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2120,"to":2120,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2128,"to":2128,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2140,"to":2140,"disposition":"NORMATIVE_OR_CROSS_SERVICE_LINK","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2353,"to":2353,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2354,"to":2354,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2359,"to":2359,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2366,"to":2366,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2436,"to":2436,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2511,"to":2511,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2515,"to":2515,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
+{"t":"coverage_scope","pkg":"C01","source":"B","from":2550,"to":2550,"disposition":"HISTORICAL_OR_OTHER_PACKAGE","review":"SECOND_PASS_C01"}
