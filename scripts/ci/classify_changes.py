@@ -43,18 +43,43 @@ def main() -> int:
         paths = ["<full-run>"]
     else:
         if is_pull_request:
-            # pull_request.base.sha can be stale on long-lived PRs. GitHub checks
-            # out a synthetic merge commit; its first parent is the exact base
-            # snapshot used for this run, even if main advanced since the PR opened.
-            parent = run("git", "rev-parse", "--verify", f"{head}^1")
-            base = parent.stdout.strip() if parent.returncode == 0 else ""
+            # Long-lived PR event payloads can carry an old base.sha. Fetch the
+            # current target branch instead; GitHub's PR merge commit includes
+            # that target snapshot plus this PR's changes.
+            base_ref = os.environ.get("GITHUB_BASE_REF", "").strip()
+            if base_ref:
+                base = f"refs/remotes/origin/{base_ref}"
+                fetched = run(
+                    "git",
+                    "fetch",
+                    "--no-tags",
+                    "--depth=1",
+                    "origin",
+                    f"refs/heads/{base_ref}:{base}",
+                )
+            else:
+                fetched = subprocess.CompletedProcess(
+                    args=["git", "fetch"],
+                    returncode=1,
+                    stdout="",
+                    stderr="GITHUB_BASE_REF is unavailable",
+                )
+        elif base:
+            fetched = run("git", "fetch", "--no-tags", "--depth=1", "origin", base)
+        else:
+            fetched = subprocess.CompletedProcess(
+                args=["git", "fetch"],
+                returncode=1,
+                stdout="",
+                stderr="BASE_SHA is unavailable",
+            )
 
-        if not base or set(base) == {"0"}:
+        compare_ref = base if base else ""
+        if fetched.returncode or not compare_ref:
             paths = ["<classification-failed>"]
         else:
-            fetched = run("git", "fetch", "--no-tags", "--depth=1", "origin", base)
-            diff = run("git", "diff", "--name-only", "--no-renames", base, head)
-            if fetched.returncode or diff.returncode:
+            diff = run("git", "diff", "--name-only", "--no-renames", compare_ref, head)
+            if diff.returncode:
                 print("::warning::Could not classify changed files; running all relevant jobs.")
                 paths = ["<classification-failed>"]
             else:
