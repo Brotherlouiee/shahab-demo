@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "source_checkout_head": "f28033b6496e39f4a59644cccf5fb2c9886fceb4",
+  "source_hashes": "PASS",
+  "input_files": 25,
+  "nodes": 1180,
+  "active_links": 1345,
+  "quarantined_links": 2,
+  "node_variants": 2,
+  "recovered_sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+  "replay_sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+  "package_bytes_unchanged": true,
+  "all_original_records_and_witnesses_preserved": true,
+  "unit_tests": "PASS",
+  "graphify_query_path_explain": "PASS"
+}

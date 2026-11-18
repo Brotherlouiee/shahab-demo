@@ -1,0 +1,16 @@
+Node: مالکیت کیف پول شخصی و سازمانی
+  ID:        docs_shahab_digital_wallet_wallet_ownership_model
+  Source:    docs/SHAHAB_DIGITAL_WALLET.md L136
+  Type:      rationale
+  Community:
+  Degree:    8
+
+Connections (8):
+  --> Organization Credit Transfer or Shared-Balance Spending [conceptually_related_to] [INFERRED 0.75] docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146
+  --> Segregate customer-obligation funds from company operating funds [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L136, docs/SHAHAB_DIGITAL_WALLET.md:L405
+  --> Create a unique server-side top-up request for a designated wallet and verify authorization [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146
+  --> دفترکل ریالی مشترک با حساب‌های تفکیک‌شده [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146, docs/SHAHAB_DIGITAL_WALLET.md:L1167
+  <-- تفکیک انواع اعتبار و حقوق کیف پول [conceptually_related_to] [INFERRED 0.75] docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1054, docs/SHAHAB_DIGITAL_WALLET.md:L393
+  --> فعال‌سازی مالی سازمان پس از قرارداد و احراز [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:L156
+  --> عضویت یک شخص در چند سازمان با جدایی دسترسی [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:L180
+  --> کیف پول نمایشی با حساب‌های داخلی یکی نیست [conceptually_related_to] [INFERRED 0.85] docs/SHAHAB_DIGITAL_WALLET.md:L138

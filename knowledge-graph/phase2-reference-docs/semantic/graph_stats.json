@@ -1,0 +1,78 @@
+{
+  "sources": [
+    {
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "lines": 2550,
+      "headings": 196
+    },
+    {
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "lines": 1780,
+      "headings": 130
+    }
+  ],
+  "chunks": 22,
+  "covered_source_lines": 4330,
+  "headings_manifest_covered": 326,
+  "table_blocks_manifest_covered": 58,
+  "node_records_audited": 854,
+  "chunk_edge_records_reviewed": 611,
+  "boundary_relation_records_reviewed": 30,
+  "semantic_confidence_raw": {
+    "EXTRACTED": 479,
+    "INFERRED": 153,
+    "AMBIGUOUS": 9
+  },
+  "nodes_active_unique": 1180,
+  "node_variants_preserved": 2,
+  "active_graph_links": 1345,
+  "quarantined_invalid_edges": 2,
+  "structural_nodes": 328,
+  "structural_links": 706,
+  "communities_existing_structural_labels": 24,
+  "unassigned_nodes": 852,
+  "community_distribution": {
+    "Community 6": 20,
+    "Community 8": 15,
+    "Community 11": 9,
+    "Community 7": 17,
+    "Community 13": 8,
+    "Community 2": 24,
+    "Community 3": 23,
+    "Community 14": 8,
+    "Community 5": 22,
+    "Community 15": 8,
+    "Community 4": 23,
+    "Community 17": 7,
+    "Community 18": 7,
+    "Community 9": 12,
+    "Community 21": 5,
+    "Community 1": 26,
+    "Community 23": 5,
+    "Community 12": 9,
+    "Community 16": 8,
+    "Community 19": 7,
+    "Community 22": 5,
+    "Community 10": 11,
+    "Community 20": 7,
+    "Community 0": 42,
+    "UNASSIGNED": 852
+  },
+  "owners": {
+    "nodes": {
+      "unspecified": 783,
+      "specified": 71
+    },
+    "chunk_edges": {
+      "unspecified": 602,
+      "specified": 9
+    },
+    "boundary_edges": {
+      "unspecified": 30,
+      "specified": 0
+    }
+  },
+  "missing_status_or_owner_fields": 0
+}

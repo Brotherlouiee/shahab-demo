@@ -1,0 +1,44 @@
+{
+  "state": "PASS",
+  "chunk_count": 22,
+  "source_hashes": [
+    {
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "lines": 2550,
+      "headings": 196
+    },
+    {
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "lines": 1780,
+      "headings": 130
+    }
+  ],
+  "chunk_hashes": {
+    "GSEM-001": "67de436cd312ca3282817a88fbb90b9e160ae0bc6cdf6efb2b408a61827eab06",
+    "GSEM-002": "97c42318eb2b0269a1b366f3f77b6dda6b072ed4b531cbf7ed8aa2493f9063d2",
+    "GSEM-003": "eea7b077de5a32eb4f6b2547f7102c387d7bd80d0238fdc8d919c70eec411cd7",
+    "GSEM-004": "4366db1555d5d407afefee017254ee5acaf72336735ff9d4cd9db1a9f211ef6a",
+    "GSEM-005": "4b842d779d827fb93755330f2b5670f1782040e918e837baa6c0e8745dd5f1ec",
+    "GSEM-006": "d6a977aa8c361e135c7d57288558f5799dcad9152c4e5da1771bdf920a43372f",
+    "GSEM-007": "00fef7f0a17f4f92b2ce3a4318b0d0f92379180f51a7f251d4a74784f5e5b420",
+    "GSEM-008": "2ab062aa739f61f8ca812427d7cd2bda3bba01d7e9cc0a9b4b26800114c17bbb",
+    "GSEM-009": "ea7afbacae90a7e21a6e5e4d278b08463c6aa721701c9ce22cdfa8f7051eb79a",
+    "GSEM-010": "29ae1d543581d4ca2d907a27287f011b0928450fbe98441f63061e6bcb74de15",
+    "GSEM-011": "228ee49681eef43a2ddec799ec94d75b3d1f89c0a7cd6f946fa373bf5145d156",
+    "GSEM-012": "5c0332b6ebcd7c7dd5759879935b2fdf942b452c649d494144c2d56e1935fec6",
+    "GSEM-013": "d41e4dd38058944720ba74c107cb18965c0e690aed032a654198e93df811ff5d",
+    "GSEM-014": "3c954f2bdcd42dad75bc281610b28be613316aaed59f00c2815a94a539473581",
+    "GSEM-015": "da841b8acace1eaa99b357f7bc2d8e84de1f5d8672f3ddf4b9c99bd9284d8624",
+    "GSEM-016": "87c254d9aba2d0888d13d9e7e0c5bf86fc662a7e769dce96e53a22b8e5aafab0",
+    "GSEM-017": "e42a9e1249d8b04667a20234ee78df8f7dd020d7db7b9c1508eb3a53d62668a0",
+    "GSEM-018": "fe8d61a97c4eccaaaf0dfe63973d4012571598793a8cba67bfc23908c76a73e2",
+    "GSEM-019": "f1e2abcbd8466975f4f86056ff23b35d1dcee7b077bfbfe56a50a9dab08e87a4",
+    "GSEM-020": "a5df8e72ad5a9ee10013a6c4614fef21b61c1a67436e7c5b7b147cc8984281c9",
+    "GSEM-021": "45b0f6ee614e17f278730b53ffbbbea8b553acb7634ba3f7da918f995d374d79",
+    "GSEM-022": "72fee56976b5b217d37d719f09dd93e209aca3ad5985f01e112930d105153307"
+  },
+  "source_coverage": "contiguous, non-overlapping ranges across 4,330/4,330 lines",
+  "replay_sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93"
+}

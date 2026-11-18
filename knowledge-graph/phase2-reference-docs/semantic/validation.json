@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "metrics": {
+    "headings": 326,
+    "table_blocks": 58,
+    "chunk_nodes": 854,
+    "chunk_edges": 611,
+    "review_edges": 30,
+    "graph_nodes": 1180,
+    "graph_edges": 1345,
+    "graph_hyperedges": 0,
+    "structural_nodes": 328,
+    "structural_edges": 706,
+    "node_variants": 2,
+    "quarantined_edges": 2,
+    "chunks": 22
+  },
+  "issue_count": 0,
+  "issues": [],
+  "warnings": [
+    "PASS means mechanical checks passed only; semantic entailment, ownership classification and atomic completeness require independently recorded source-based review."
+  ]
+}

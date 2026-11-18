@@ -1,0 +1,2602 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_database_service_design",
+      "label": "Database and service design constraints A02–A05",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1190-1194",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**قواعد مصوب A02 تا A05:** Core و Adviser مالک مستقل جداول و Schema خود هستند، حتی اگر از PostgreSQL/Redis مشترک استفاده کنند؛ دسترسی مستقیم به جداول سرویس دیگر ممنوع است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1190-1194",
+      "decision_status": "approved",
+      "owner": "Core and Adviser (separate ownership of their own tables/schema)",
+      "owner_status": "NAMED_COMPONENT_OR_ROLE; qualifiers retained",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECTION_REQUIRED",
+        "basis": "explicit_owner_in_evidence_missing_or_underrepresented_in_owner_field"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_database_service_design",
+            "label": "Database and service design constraints A02–A05",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1190-1194",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**قواعد مصوب A02 تا A05:** Core و Adviser مالک مستقل جداول و Schema خود هستند، حتی اگر از PostgreSQL/Redis مشترک استفاده کنند؛ دسترسی مستقیم به جداول سرویس دیگر ممنوع است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1190-1194",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+      "label": "Service-local transaction boundary",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "طبق A05، هر سرویس تراکنش محلی داده‌های خودش را مدیریت می‌کند و تراکنش توزیع‌شده Core–Adviser پیش‌فرض نیست؛ برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+            "label": "Service-local transaction boundary",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "طبق A05، هر سرویس تراکنش محلی داده‌های خودش را مدیریت می‌کند و تراکنش توزیع‌شده Core–Adviser پیش‌فرض نیست؛ برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+      "label": "Transactional Outbox pattern",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192,1216",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛ ناشرِ قابل‌بازیابی رکوردهای ارسال‌نشده را پردازش می‌کند و مصرف‌کننده با شناسه رویداد و کنترل تکرار اثر، Idempotent عمل می‌کند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+            "label": "Transactional Outbox pattern",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192,1216",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛ ناشرِ قابل‌بازیابی رکوردهای ارسال‌نشده را پردازش می‌کند و مصرف‌کننده با شناسه رویداد و کنترل تکرار اثر، Idempotent عمل می‌کند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_idempotent_event_consumer",
+      "label": "Idempotent event consumer",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مصرف‌کننده رویداد باید Idempotent باشد؛ همگام‌سازی غیرحساس می‌تواند با سازگاری نهایی کنترل‌شده انجام شود، اما تصمیم قطعی مالی باید بر Snapshot معتبر و نسخه مشخص متکی باشد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_idempotent_event_consumer",
+            "label": "Idempotent event consumer",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مصرف‌کننده رویداد باید Idempotent باشد؛ همگام‌سازی غیرحساس می‌تواند با سازگاری نهایی کنترل‌شده انجام شود، اما تصمیم قطعی مالی باید بر Snapshot معتبر و نسخه مشخص متکی باشد.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_job_ownership_and_adapter",
+      "label": "Job ownership and Port/Adapter boundary",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "طبق A04، هر سرویس وضعیت و نتیجه Job خود را در PostgreSQL نگه می‌دارد و دسترسی سرویس دیگر فقط از قرارداد API مجاز است؛ اجرای Job پشت Port/Adapter مستقل از منطق دامنه قرار می‌گیرد تا موتور اجرا در آینده به‌تدریج قابل جایگزینی باشد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_job_ownership_and_adapter",
+            "label": "Job ownership and Port/Adapter boundary",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "طبق A04، هر سرویس وضعیت و نتیجه Job خود را در PostgreSQL نگه می‌دارد و دسترسی سرویس دیگر فقط از قرارداد API مجاز است؛ اجرای Job پشت Port/Adapter مستقل از منطق دامنه قرار می‌گیرد تا موتور اجرا در آینده به‌تدریج قابل جایگزینی باشد.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_sync_async_operations",
+      "label": "Synchronous API and asynchronous Job policy",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "عملیات کوتاه و قطعی با API هم‌زمان نسخه‌دار، احراز هویت‌شده و مجاز انجام می‌شوند؛ عملیات طولانیِ نیازمند پردازش پس‌زمینه با Job غیرهم‌زمان دارای شناسه، وضعیت پایدار و Worker متعلق به سرویس مسئول اجرا می‌شوند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_sync_async_operations",
+            "label": "Synchronous API and asynchronous Job policy",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "عملیات کوتاه و قطعی با API هم‌زمان نسخه‌دار، احراز هویت‌شده و مجاز انجام می‌شوند؛ عملیات طولانیِ نیازمند پردازش پس‌زمینه با Job غیرهم‌زمان دارای شناسه، وضعیت پایدار و Worker متعلق به سرویس مسئول اجرا می‌شوند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_reliability_and_telemetry",
+      "label": "Reliability, telemetry and sensitive-data restrictions",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "Bulkhead/سهمیه منابع بار تعاملی را از Workerهای سنگین جدا می‌کند؛ طبق A09، Trace/Correlation ID تصادفی و غیرشخصی بین Core/Adviser و Jobها، خطا و نسخه قرارداد، وضعیت Circuit Breaker، سن و تعداد Jobهای معوق، Retry/شکست نهایی، تأخیر Outbox و زمان بازیابی Worker پایش می‌شوند؛ هیچ متن پرسشنامه، بدنه درخواست/پاسخ، Token، OTP یا شناسه واقعی مشتری وارد Telemetry نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_reliability_and_telemetry",
+            "label": "Reliability, telemetry and sensitive-data restrictions",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1192",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "Bulkhead/سهمیه منابع بار تعاملی را از Workerهای سنگین جدا می‌کند؛ طبق A09، Trace/Correlation ID تصادفی و غیرشخصی بین Core/Adviser و Jobها، خطا و نسخه قرارداد، وضعیت Circuit Breaker، سن و تعداد Jobهای معوق، Retry/شکست نهایی، تأخیر Outbox و زمان بازیابی Worker پایش می‌شوند؛ هیچ متن پرسشنامه، بدنه درخواست/پاسخ، Token، OTP یا شناسه واقعی مشتری وارد Telemetry نمی‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+      "label": "Logical data responsibility and R1 deployment boundaries",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1194",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "در R1 فقط Core و Adviser مستقر می‌شوند و می‌توانند از یک میزبان و زیرساخت PostgreSQL/Redis موجود با جداسازی منطقی استفاده کنند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+            "label": "Logical data responsibility and R1 deployment boundaries",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1194",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "در R1 فقط Core و Adviser مستقر می‌شوند و می‌توانند از یک میزبان و زیرساخت PostgreSQL/Redis موجود با جداسازی منطقی استفاده کنند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+      "label": "Logical data ownership map",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1196-1210",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| دامنه داده | مسئول منطقی | محل اصلی پیشنهادی |\n|---|---|---|\n| کاربران و حساب‌ها | حساب و هویت | PostgreSQL |\n| اشتراک و قابلیت‌ها | عضویت و سیاست دسترسی | PostgreSQL |\n| حوزه‌ها، خدمات و تعرفه‌ها | کاتالوگ خدمات شهاب | PostgreSQL |\n| محصولات مالی، ویژگی‌ها، نسخه‌ها و شواهد | کاتالوگ پویای محصولات | PostgreSQL و مخزن اسناد |\n| نقشه‌های UI، اثرانگشت‌ها و نتایج آزمون | دانش رابط و کشف تغییرات | ذخیره‌سازی نسخه‌دار؛ انتخاب فناوری باز |\n| سفارش، پرداخت، کیف پول و دفترکل | سرویس مالی | PostgreSQL |\n| پرونده‌ها و مراحل | موتور گردش‌کار | PostgreSQL |\n| مجوزها و تاریخچه تأیید | سرویس مجوز | PostgreSQL |\n| رویدادها و وضعیت پردازش | سرویس مالک Job / زیرساخت رویداد در صورت نیاز | PostgreSQL برای وضعیت پایدار؛ Worker و صف Redis اختیاری؛ Broker مستقل فقط با نیاز اثبات‌شده |\n| موجودیت‌ها و روابط مقرراتی | سرویس دانش | Neo4j |\n| متن و نسخه مستندات | سرویس اسناد | مخزن اسناد |\n| نمایه‌های بازیابی حقوقی | Adviser / سرویس دانش | لایه بازیابی حقوقی؛ بدون نمایه‌سازی عمومی داده شخصی |\n| زمینه شخصی و حافظه کاربر | سرویس مالک داده طبق B05 | ذخیره‌سازی منطقی جدا؛ بازیابی از قرارداد مجاز و محدود به حوزه |",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1196-1210",
+      "decision_status": "unspecified",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+            "label": "Logical data ownership map",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1196-1210",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| دامنه داده | مسئول منطقی | محل اصلی پیشنهادی |\n|---|---|---|\n| کاربران و حساب‌ها | حساب و هویت | PostgreSQL |\n| اشتراک و قابلیت‌ها | عضویت و سیاست دسترسی | PostgreSQL |\n| حوزه‌ها، خدمات و تعرفه‌ها | کاتالوگ خدمات شهاب | PostgreSQL |\n| محصولات مالی، ویژگی‌ها، نسخه‌ها و شواهد | کاتالوگ پویای محصولات | PostgreSQL و مخزن اسناد |\n| نقشه‌های UI، اثرانگشت‌ها و نتایج آزمون | دانش رابط و کشف تغییرات | ذخیره‌سازی نسخه‌دار؛ انتخاب فناوری باز |\n| سفارش، پرداخت، کیف پول و دفترکل | سرویس مالی | PostgreSQL |\n| پرونده‌ها و مراحل | موتور گردش‌کار | PostgreSQL |\n| مجوزها و تاریخچه تأیید | سرویس مجوز | PostgreSQL |\n| رویدادها و وضعیت پردازش | سرویس مالک Job / زیرساخت رویداد در صورت نیاز | PostgreSQL برای وضعیت پایدار؛ Worker و صف Redis اختیاری؛ Broker مستقل فقط با نیاز اثبات‌شده |\n| موجودیت‌ها و روابط مقرراتی | سرویس دانش | Neo4j |\n| متن و نسخه مستندات | سرویس اسناد | مخزن اسناد |\n| نمایه‌های بازیابی حقوقی | Adviser / سرویس دانش | لایه بازیابی حقوقی؛ بدون نمایه‌سازی عمومی داده شخصی |\n| زمینه شخصی و حافظه کاربر | سرویس مالک داده طبق B05 | ذخیره‌سازی منطقی جدا؛ بازیابی از قرارداد مجاز و محدود به حوزه |",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1196-1210",
+            "decision_status": "unspecified",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_postgresql_first",
+      "label": "PostgreSQL operational and knowledge-data baseline",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**PostgreSQL** مبنای داده عملیاتی و مسیر PostgreSQL-first دانش مطابق ADRهای فصل اول است؛ قرارداد شواهد B06 باید نوع، شناسه مرجع، منشأ، نسخه یا زمان اعتبار، وضعیت تأیید و محدوده دسترسی را حفظ کند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_postgresql_first",
+            "label": "PostgreSQL operational and knowledge-data baseline",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1212",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**PostgreSQL** مبنای داده عملیاتی و مسیر PostgreSQL-first دانش مطابق ADRهای فصل اول است؛ قرارداد شواهد B06 باید نوع، شناسه مرجع، منشأ، نسخه یا زمان اعتبار، وضعیت تأیید و محدوده دسترسی را حفظ کند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_neoj_historical_option",
+      "label": "Neo4j is a historical/investigable option",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "اشاره به **Neo4j** در جدول بالا صرفاً گزینه تاریخی/قابل‌بررسی برای روابط دانش است، نه فناوری مصوب یا پیش‌نیاز RAG R1.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+      "decision_status": "not_approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_neoj_historical_option",
+            "label": "Neo4j is a historical/investigable option",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1212",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "اشاره به **Neo4j** در جدول بالا صرفاً گزینه تاریخی/قابل‌بررسی برای روابط دانش است، نه فناوری مصوب یا پیش‌نیاز RAG R1.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+            "decision_status": "not_approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_document_repository",
+      "label": "Document repository stores full text and versions",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**مخزن اسناد** متن کامل و نسخه‌ها را نگه می‌دارد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_document_repository",
+            "label": "Document repository stores full text and versions",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1212",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**مخزن اسناد** متن کامل و نسخه‌ها را نگه می‌دارد.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
+      "label": "Cross-service data access only through authorized contracts",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212-1214",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "استفاده مشترک Core و Adviser از سرور PostgreSQL/Redis موجود در R1 به‌معنای مالکیت مشترک جداول نیست؛ طبق A02، خواندن مستقیم جداول سرویس دیگر ممنوع و تبادل از طریق API نسخه‌دار و مجاز است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212-1214",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
+            "label": "Cross-service data access only through authorized contracts",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1212-1214",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "استفاده مشترک Core و Adviser از سرور PostgreSQL/Redis موجود در R1 به‌معنای مالکیت مشترک جداول نیست؛ طبق A02، خواندن مستقیم جداول سرویس دیگر ممنوع و تبادل از طریق API نسخه‌دار و مجاز است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212-1214",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+      "label": "Personal context remains isolated from shared knowledge",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛ داده موقت هر نقش باید مالک، هدف و چرخه عمر مشخص داشته باشد و مدت نگهداری/حذف و انتقال زمینه تابع B05 و طراحی اجرایی است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+            "label": "Personal context remains isolated from shared knowledge",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1212",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛ داده موقت هر نقش باید مالک، هدف و چرخه عمر مشخص داشته باشد و مدت نگهداری/حذف و انتقال زمینه تابع B05 و طراحی اجرایی است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
+      "label": "Inter-service contract requirements E02",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1214",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**الزامات قرارداد میان‌سرویسی E02:** مالک و مصرف‌کننده، شناسه و نسخه قرارداد، هدف و فیلدهای حداقلی، مرز مجوز و هویت، نسخه/تازگی داده، وضعیت خطا و روش بازیابی باید تعریف‌پذیر و آزمون‌پذیر باشند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
+            "label": "Inter-service contract requirements E02",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1214",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**الزامات قرارداد میان‌سرویسی E02:** مالک و مصرف‌کننده، شناسه و نسخه قرارداد، هدف و فیلدهای حداقلی، مرز مجوز و هویت، نسخه/تازگی داده، وضعیت خطا و روش بازیابی باید تعریف‌پذیر و آزمون‌پذیر باشند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_safe_failure_behavior",
+      "label": "Safe behavior when valid data or access is missing",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1214",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "نبود داده معتبر یا دسترسی مجاز در پاسخ حساس باید به خطای قابل تشخیص، تکمیل اطلاعات یا توقف امن منجر شود، نه خواندن جدول مالک یا پاسخ ساختگی.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_safe_failure_behavior",
+            "label": "Safe behavior when valid data or access is missing",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1214",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "نبود داده معتبر یا دسترسی مجاز در پاسخ حساس باید به خطای قابل تشخیص، تکمیل اطلاعات یا توقف امن منجر شود، نه خواندن جدول مالک یا پاسخ ساختگی.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+      "label": "A05 consistency policy",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1216",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**سیاست سازگاری مصوب A05:** مرز تراکنش درون سرویس مالک است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+            "label": "A05 consistency policy",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1216",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**سیاست سازگاری مصوب A05:** مرز تراکنش درون سرویس مالک است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_financial_snapshot_consistency",
+      "label": "Financial decisions use a stable published snapshot",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1216",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "در محاسبه وام، Core باید Snapshot منتشرشده واحد و نسخه قواعد را در یک درخواست ثابت نگه دارد و Adviser از API هم‌زمان Core استفاده کند، نه کپی غیرهم‌زمان موتور محاسبه.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_financial_snapshot_consistency",
+            "label": "Financial decisions use a stable published snapshot",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1216",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "در محاسبه وام، Core باید Snapshot منتشرشده واحد و نسخه قواعد را در یک درخواست ثابت نگه دارد و Adviser از API هم‌زمان Core استفاده کند، نه کپی غیرهم‌زمان موتور محاسبه.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_broker_not_required",
+      "label": "Independent broker is not mandatory for R1",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1214,1216",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "Broker مستقل یا تراکنش توزیع‌شده الزامی نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214,1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_broker_not_required",
+            "label": "Independent broker is not mandatory for R1",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1214,1216",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "Broker مستقل یا تراکنش توزیع‌شده الزامی نمی‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214,1216",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+      "label": "End-to-end service request flow example",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1218-1249",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مثال: مشتری طلایی برای یک تسهیلات درخواست ثبت می‌کند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1218-1249",
+      "decision_status": "illustrative",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+            "label": "End-to-end service request flow example",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1218-1249",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مثال: مشتری طلایی برای یک تسهیلات درخواست ثبت می‌کند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1218-1249",
+            "decision_status": "illustrative",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
+      "label": "Authorization is checked before each sensitive action",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1249",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "این نمودار جریان طلایی را ساده می‌کند؛ در حالت واقعی بررسی مجوز پیش از هر اقدام حساس تکرار می‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
+            "label": "Authorization is checked before each sensitive action",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1249",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "این نمودار جریان طلایی را ساده می‌کند؛ در حالت واقعی بررسی مجوز پیش از هر اقدام حساس تکرار می‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_feedback_and_forward_rules",
+      "label": "Feedback and feedforward plan eligibility",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1249",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "فیدبک مبتنی بر شواهد در هر سه پلن برنزی، نقره‌ای و طلایی مجاز است و به وقوع خطا محدود نیست؛ فیدفوروارد تنها برای نقره‌ای و طلایی با کنترل‌های مصوب E01 و D01–D03 فعال است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_feedback_and_forward_rules",
+            "label": "Feedback and feedforward plan eligibility",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1249",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "فیدبک مبتنی بر شواهد در هر سه پلن برنزی، نقره‌ای و طلایی مجاز است و به وقوع خطا محدود نیست؛ فیدفوروارد تنها برای نقره‌ای و طلایی با کنترل‌های مصوب E01 و D01–D03 فعال است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
+      "label": "Alternative loan requires customer consent",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1251",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**رفتار در درخواست‌های چندوامی:** اگر یک وام انتخاب‌شده قابل ادامه نبود، دستیار می‌تواند وام جایگزین پیشنهاد کند؛ افزودن جایگزین فقط با تأیید مشتری انجام می‌شود و جریان وام‌های باقی‌مانده متوقف نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1251",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
+            "label": "Alternative loan requires customer consent",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1251",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**رفتار در درخواست‌های چندوامی:** اگر یک وام انتخاب‌شده قابل ادامه نبود، دستیار می‌تواند وام جایگزین پیشنهاد کند؛ افزودن جایگزین فقط با تأیید مشتری انجام می‌شود و جریان وام‌های باقی‌مانده متوقف نمی‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1251",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_r1_superapp_experience",
+      "label": "R1 domain-based superapp experience",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1253-1255",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "از R1 صفحه اصلی حوزه‌های خدمات را به‌صورت آیکن نمایش می‌دهد؛ پروفایل، تنظیمات و رابط‌های عمومی مستقل‌اند. پس از انتخاب حوزه، کاربر وارد گفت‌وگوی همان حوزه می‌شود و از زبانه بالا Adviser یا Assistant را انتخاب می‌کند؛ ورود از Adviser اجباری نیست.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1253-1255",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_r1_superapp_experience",
+            "label": "R1 domain-based superapp experience",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1253-1255",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "از R1 صفحه اصلی حوزه‌های خدمات را به‌صورت آیکن نمایش می‌دهد؛ پروفایل، تنظیمات و رابط‌های عمومی مستقل‌اند. پس از انتخاب حوزه، کاربر وارد گفت‌وگوی همان حوزه می‌شود و از زبانه بالا Adviser یا Assistant را انتخاب می‌کند؛ ورود از Adviser اجباری نیست.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1253-1255",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+      "label": "Explicit domain selection, session boundary, and consent for cross-domain data",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1281",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**اصل تعامل:** صفحه اصلی هم آیکن‌های حوزه و هم ورودی عمومیِ صرفاً پیشنهاددهنده حوزه دارد؛ پیشنهاد حوزه بدون تأیید کاربر نشست تخصصی نمی‌سازد. پس از انتخاب آیکن یا تأیید مقصد پیشنهادی، شناسه حوزه ثابت می‌ماند؛ تغییر نقش با اقدام صریح کاربر مجاز است و زمینه حوزه با رعایت مجوزها حفظ می‌شود. درخواست مستقل خارج از حوزه در نشست فعلی پاسخ تخصصی نمی‌گیرد؛ مقصد مناسب پیشنهاد و انتقال تنها با اقدام کاربر انجام می‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+            "label": "Explicit domain selection, session boundary, and consent for cross-domain data",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1281",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**اصل تعامل:** صفحه اصلی هم آیکن‌های حوزه و هم ورودی عمومیِ صرفاً پیشنهاددهنده حوزه دارد؛ پیشنهاد حوزه بدون تأیید کاربر نشست تخصصی نمی‌سازد. پس از انتخاب آیکن یا تأیید مقصد پیشنهادی، شناسه حوزه ثابت می‌ماند؛ تغییر نقش با اقدام صریح کاربر مجاز است و زمینه حوزه با رعایت مجوزها حفظ می‌شود. درخواست مستقل خارج از حوزه در نشست فعلی پاسخ تخصصی نمی‌گیرد؛ مقصد مناسب پیشنهاد و انتقال تنها با اقدام کاربر انجام می‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+      "label": "B05 context retrieval and cross-domain consent boundary",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1281",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "طبق B05، زمینه مرتبط گفتگوهای قبلی **در همان حوزه** پس از کنترل دسترسی به‌صورت خودکار و حداقلی بازیابی می‌شود؛ انتقال داده و زمینه به **حوزه دیگر** هرگز عمومی یا خودکار نیست و برای داده، مقصد، هدف و مدت مشخص به مجوز هدفمند نیاز دارد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+            "label": "B05 context retrieval and cross-domain consent boundary",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1281",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "طبق B05، زمینه مرتبط گفتگوهای قبلی **در همان حوزه** پس از کنترل دسترسی به‌صورت خودکار و حداقلی بازیابی می‌شود؛ انتقال داده و زمینه به **حوزه دیگر** هرگز عمومی یا خودکار نیست و برای داده، مقصد، هدف و مدت مشخص به مجوز هدفمند نیاز دارد.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_assistant_r1_scope",
+      "label": "Assistant is not deployed in R1",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1281,1255",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**مرز R1:** صفحه اصلی حوزه‌محور، گفت‌وگوی Adviser و پرسشنامه/نتایج تعبیه‌شده توصیه‌گر در دامنه تجربه انتشار نخست‌اند؛ ورودی عمومی پیشنهاد حوزه در معماری محصول تعریف شده اما زمان پیاده‌سازی آن تابع برنامه انتشار مصوب است. Assistant در R1 مستقر نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281,1255",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_assistant_r1_scope",
+            "label": "Assistant is not deployed in R1",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1281,1255",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**مرز R1:** صفحه اصلی حوزه‌محور، گفت‌وگوی Adviser و پرسشنامه/نتایج تعبیه‌شده توصیه‌گر در دامنه تجربه انتشار نخست‌اند؛ ورودی عمومی پیشنهاد حوزه در معماری محصول تعریف شده اما زمان پیاده‌سازی آن تابع برنامه انتشار مصوب است. Assistant در R1 مستقر نمی‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281,1255",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_quality_requirements",
+      "label": "Quality and reliability requirements",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1283-1293",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| بخش | الزامات |\n|---|---|\n| مشاور | استناد معتبر، اعلام عدم قطعیت، کنترل هزینه پرامپت، حفظ محرمانگی |\n| دستیار | وضعیت پایدار، مجوز معتبر، اجرای بدون تکرار اثر، مدیریت توقف و ادامه |\n| گردش‌کار | نسخه‌بندی، خطاپذیری کنترل‌شده، تلاش مجدد، حسابرسی |\n| فیدبک | تشخیص مسئله واقعی، شواهد و راهکار قابل اجرا |\n| فیدفوروارد، پایش و اعلان | دروازه D02؛ چرخه عمر و اولویت D03، تکرارزدایی معنایی نسخه‌آگاه، ابطال/جایگزینی، سوابق پایدار و قابل بازیابی، کنترل ترجیحات و آزمون Push/SMS بدون ادعای تحویل قطعی |\n| مالی | صحت دفترکل، جلوگیری از برداشت تکراری، بازپرداخت و مغایرت |\n| دانش | نسخه منبع، تازگی، ردیابی رابطه و عدم ادعای حقوقی بی‌پشتوانه |",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1283-1293",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_quality_requirements",
+            "label": "Quality and reliability requirements",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1283-1293",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| بخش | الزامات |\n|---|---|\n| مشاور | استناد معتبر، اعلام عدم قطعیت، کنترل هزینه پرامپت، حفظ محرمانگی |\n| دستیار | وضعیت پایدار، مجوز معتبر، اجرای بدون تکرار اثر، مدیریت توقف و ادامه |\n| گردش‌کار | نسخه‌بندی، خطاپذیری کنترل‌شده، تلاش مجدد، حسابرسی |\n| فیدبک | تشخیص مسئله واقعی، شواهد و راهکار قابل اجرا |\n| فیدفوروارد، پایش و اعلان | دروازه D02؛ چرخه عمر و اولویت D03، تکرارزدایی معنایی نسخه‌آگاه، ابطال/جایگزینی، سوابق پایدار و قابل بازیابی، کنترل ترجیحات و آزمون Push/SMS بدون ادعای تحویل قطعی |\n| مالی | صحت دفترکل، جلوگیری از برداشت تکراری، بازپرداخت و مغایرت |\n| دانش | نسخه منبع، تازگی، ردیابی رابطه و عدم ادعای حقوقی بی‌پشتوانه |",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1283-1293",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_proposed_evaluation_metrics",
+      "label": "Proposed evaluation metrics",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1295-1310",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| حوزه | شاخص |\n|---|---|\n| شبکه دانش | کیفیت بازیابی و صحت استناد |\n| کشف روابط | دقت و فراخوانی روابط |\n| مشاور | نرخ پاسخ مستند، هزینه پاسخ |\n| دستیار | نرخ تکمیل موفق خدمت |\n| گردش‌کار | شکست، بازیابی و تکرار ناخواسته |\n| فیدبک | نرخ تشخیص و حل مسئله |\n| فیدفوروارد، پایش و اعلان | دقت/سودمندی، هشدار کاذب و تکراری، تأخیر کشف تا اعلان، نرخ مشاهده/تعامل، هزینه هر هشدار مفید، انقضا/ابطال و وضعیت کانال با تفکیک ارسال از نمایش |\n| اتصال‌دهنده‌ها | موفقیت فراخوانی و زمان پاسخ |\n| مالی | مغایرت دفترکل و خطاهای پرداخت |\n| محصول | استفاده، تبدیل و تمدید عضویت |",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1295-1310",
+      "decision_status": "proposed",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_proposed_evaluation_metrics",
+            "label": "Proposed evaluation metrics",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1295-1310",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| حوزه | شاخص |\n|---|---|\n| شبکه دانش | کیفیت بازیابی و صحت استناد |\n| کشف روابط | دقت و فراخوانی روابط |\n| مشاور | نرخ پاسخ مستند، هزینه پاسخ |\n| دستیار | نرخ تکمیل موفق خدمت |\n| گردش‌کار | شکست، بازیابی و تکرار ناخواسته |\n| فیدبک | نرخ تشخیص و حل مسئله |\n| فیدفوروارد، پایش و اعلان | دقت/سودمندی، هشدار کاذب و تکراری، تأخیر کشف تا اعلان، نرخ مشاهده/تعامل، هزینه هر هشدار مفید، انقضا/ابطال و وضعیت کانال با تفکیک ارسال از نمایش |\n| اتصال‌دهنده‌ها | موفقیت فراخوانی و زمان پاسخ |\n| مالی | مغایرت دفترکل و خطاهای پرداخت |\n| محصول | استفاده، تبدیل و تمدید عضویت |",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1295-1310",
+            "decision_status": "proposed",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_open_implementation_questions",
+      "label": "Open implementation details requiring validation",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1312-1334",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "### ۱۸. جزئیات اجرایی باز و موضوعات نیازمند اعتبارسنجی",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1312-1334",
+      "decision_status": "open",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_open_implementation_questions",
+            "label": "Open implementation details requiring validation",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1312-1334",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "### ۱۸. جزئیات اجرایی باز و موضوعات نیازمند اعتبارسنجی",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1312-1334",
+            "decision_status": "open",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+      "label": "Conceptual development dependencies and approved phasing distinction",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1336-1358",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "این فهرست صرفاً وابستگی‌های مفهومی را بیان می‌کند؛ سیاست سه مرحله و انتشارهای مستقل تابع فصل پنجم و O5-01 تا O5-14 است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1336-1358",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+            "label": "Conceptual development dependencies and approved phasing distinction",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1336-1358",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "این فهرست صرفاً وابستگی‌های مفهومی را بیان می‌کند؛ سیاست سه مرحله و انتشارهای مستقل تابع فصل پنجم و O5-01 تا O5-14 است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1336-1358",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+      "label": "Wallet, payments, plans and Assistant are not RAG R1 prerequisites",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1358",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مطابق A01، نخستین انتشار RAG تنها Core و Adviser را روی زیرساخت موجود مستقر می‌کند؛ ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند؛ تجربه حوزه‌محور صفحه اصلی و Adviser با توصیه‌گر تعبیه‌شده جزو دامنه R1 است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1358",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+            "label": "Wallet, payments, plans and Assistant are not RAG R1 prerequisites",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1358",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مطابق A01، نخستین انتشار RAG تنها Core و Adviser را روی زیرساخت موجود مستقر می‌کند؛ ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند؛ تجربه حوزه‌محور صفحه اصلی و Adviser با توصیه‌گر تعبیه‌شده جزو دامنه R1 است.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1358",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_compatibility_requirements",
+      "label": "Document integration and compatibility requirements",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1360-1372",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "- فصل نخست بدون حذف معماری Demand-Driven Hybrid RAG، کشف انتشار، بازاعتبارسنجی و کشف روابط حفظ می‌شود.\n- مفاهیم دامنه‌محور، رویدادمحور، کاتالوگ خدمات، هماهنگ‌کننده ایجنت و موتور گردش‌کار باید در قراردادهای معماری صریح باشند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1360-1372",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_compatibility_requirements",
+            "label": "Document integration and compatibility requirements",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1360-1372",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "- فصل نخست بدون حذف معماری Demand-Driven Hybrid RAG، کشف انتشار، بازاعتبارسنجی و کشف روابط حفظ می‌شود.\n- مفاهیم دامنه‌محور، رویدادمحور، کاتالوگ خدمات، هماهنگ‌کننده ایجنت و موتور گردش‌کار باید در قراردادهای معماری صریح باشند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1360-1372",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+      "label": "Final architecture principle: AI coordinates, critical controls remain deterministic",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1374-1378",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**اصل نهایی:** شهاب نباید به یک ایجنت یکپارچه تبدیل شود که به‌تنهایی قانون تفسیر کند، مجوز بدهد، وجه کسر کند و عملیات بانکی انجام دهد. هوش مصنوعی هماهنگ‌کننده و تحلیل‌گر است؛ کنترل‌های حساس در سرویس‌های قطعی، قابل آزمون و قابل حسابرسی باقی می‌مانند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1374-1378",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+            "label": "Final architecture principle: AI coordinates, critical controls remain deterministic",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1374-1378",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**اصل نهایی:** شهاب نباید به یک ایجنت یکپارچه تبدیل شود که به‌تنهایی قانون تفسیر کند، مجوز بدهد، وجه کسر کند و عملیات بانکی انجام دهد. هوش مصنوعی هماهنگ‌کننده و تحلیل‌گر است؛ کنترل‌های حساس در سرویس‌های قطعی، قابل آزمون و قابل حسابرسی باقی می‌مانند.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1374-1378",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_chapter3_architecture_appendix",
+      "label": "Chapter 3 A01 architecture alignment and deployment status",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1383-1392",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "> **الحاق معماری مصوب A01 (۲۰۲۶-۱۱-۰۹):** طراحی تفصیلی این فصل باید با سه مرز Core / Adviser / Assistant سازگار باشد. استقلال Adviser از Core برای RAG R1 لازم است؛ Assistant تا انتشار مربوط به خود مستقر نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1383-1392",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "confidence": "EXTRACTED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "unspecified_preserved_no_owner_in_node"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_chapter3_architecture_appendix",
+            "label": "Chapter 3 A01 architecture alignment and deployment status",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1383-1392",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "> **الحاق معماری مصوب A01 (۲۰۲۶-۱۱-۰۹):** طراحی تفصیلی این فصل باید با سه مرز Core / Adviser / Assistant سازگار باشد. استقلال Adviser از Core برای RAG R1 لازم است؛ Assistant تا انتشار مربوط به خود مستقر نمی‌شود.",
+            "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1383-1392",
+            "decision_status": "approved",
+            "owner": null,
+            "owner_status": "unspecified",
+            "confidence": "EXTRACTED"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_database_service_design",
+      "target": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "weight": 1.0,
+      "evidence_quote": "طبق A05، هر سرویس تراکنش محلی داده‌های خودش را مدیریت می‌کند و تراکنش توزیع‌شده Core–Adviser پیش‌فرض نیست؛ برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_database_service_design",
+          "target": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1192",
+          "weight": 1.0,
+          "evidence_quote": "طبق A05، هر سرویس تراکنش محلی داده‌های خودش را مدیریت می‌کند و تراکنش توزیع‌شده Core–Adviser پیش‌فرض نیست؛ برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+      "target": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192,1216",
+      "weight": 1.0,
+      "evidence_quote": "برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_service_local_transactions",
+          "target": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1192,1216",
+          "weight": 1.0,
+          "evidence_quote": "برای انتشار رویدادِ واقعاً لازم و قابل اتکا، داده و رکورد Outbox در همان تراکنش محلی ثبت می‌شوند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+      "target": "docs_shahab_phase_2_development_blueprint_idempotent_event_consumer",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192,1216",
+      "weight": 1.0,
+      "evidence_quote": "ناشرِ قابل‌بازیابی رکوردهای ارسال‌نشده را پردازش می‌کند و مصرف‌کننده با شناسه رویداد و کنترل تکرار اثر، Idempotent عمل می‌کند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+          "target": "docs_shahab_phase_2_development_blueprint_idempotent_event_consumer",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1192,1216",
+          "weight": 1.0,
+          "evidence_quote": "ناشرِ قابل‌بازیابی رکوردهای ارسال‌نشده را پردازش می‌کند و مصرف‌کننده با شناسه رویداد و کنترل تکرار اثر، Idempotent عمل می‌کند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192,1216",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1216,
+          "quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛ ناشرِ قابل‌بازیابی رکوردهای ارسال‌نشده را پردازش می‌کند و مصرف‌کننده با شناسه رویداد و کنترل تکرار اثر، Idempotent عمل می‌کند."
+        }
+      ]
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_job_ownership_and_adapter",
+      "target": "docs_shahab_phase_2_development_blueprint_sync_async_operations",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1192",
+      "weight": 1.0,
+      "evidence_quote": "عملیات کوتاه و قطعی با API هم‌زمان نسخه‌دار، احراز هویت‌شده و مجاز انجام می‌شوند؛ عملیات طولانیِ نیازمند پردازش پس‌زمینه با Job غیرهم‌زمان دارای شناسه، وضعیت پایدار و Worker متعلق به سرویس مسئول اجرا می‌شوند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source and target address compatible constraints but the cited wording does not directly assert that one implements the other.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_job_ownership_and_adapter",
+          "target": "docs_shahab_phase_2_development_blueprint_sync_async_operations",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1192",
+          "weight": 1.0,
+          "evidence_quote": "عملیات کوتاه و قطعی با API هم‌زمان نسخه‌دار، احراز هویت‌شده و مجاز انجام می‌شوند؛ عملیات طولانیِ نیازمند پردازش پس‌زمینه با Job غیرهم‌زمان دارای شناسه، وضعیت پایدار و Worker متعلق به سرویس مسئول اجرا می‌شوند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1192",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+      "target": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1194,1196-1210",
+      "weight": 1.0,
+      "evidence_quote": "جدول زیر نقش‌های منطقی داده را نشان می‌دهد و به‌تنهایی مرز استقرار یا مجوز دسترسی مستقیم ایجاد نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194,1196-1210",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+          "target": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1194,1196-1210",
+          "weight": 1.0,
+          "evidence_quote": "جدول زیر نقش‌های منطقی داده را نشان می‌دهد و به‌تنهایی مرز استقرار یا مجوز دسترسی مستقیم ایجاد نمی‌کند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194,1196-1210",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+      "target": "docs_shahab_phase_2_development_blueprint_neoj_historical_option",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1207,1212",
+      "weight": 1.0,
+      "evidence_quote": "اشاره به **Neo4j** در جدول بالا صرفاً گزینه تاریخی/قابل‌بررسی برای روابط دانش است، نه فناوری مصوب یا پیش‌نیاز RAG R1.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1207,1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+          "target": "docs_shahab_phase_2_development_blueprint_neoj_historical_option",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1207,1212",
+          "weight": 1.0,
+          "evidence_quote": "اشاره به **Neo4j** در جدول بالا صرفاً گزینه تاریخی/قابل‌بررسی برای روابط دانش است، نه فناوری مصوب یا پیش‌نیاز RAG R1.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1207,1212",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+      "target": "docs_shahab_phase_2_development_blueprint_document_repository",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1208,1212",
+      "weight": 1.0,
+      "evidence_quote": "**مخزن اسناد** متن کامل و نسخه‌ها را نگه می‌دارد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1208,1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
+          "target": "docs_shahab_phase_2_development_blueprint_document_repository",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1208,1212",
+          "weight": 1.0,
+          "evidence_quote": "**مخزن اسناد** متن کامل و نسخه‌ها را نگه می‌دارد.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1208,1212",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
+      "target": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212",
+      "weight": 1.0,
+      "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source and target address compatible constraints but the cited wording does not directly assert that one implements the other.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
+          "target": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1212",
+          "weight": 1.0,
+          "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
+      "target": "docs_shahab_phase_2_development_blueprint_safe_failure_behavior",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1214",
+      "weight": 1.0,
+      "evidence_quote": "نبود داده معتبر یا دسترسی مجاز در پاسخ حساس باید به خطای قابل تشخیص، تکمیل اطلاعات یا توقف امن منجر شود، نه خواندن جدول مالک یا پاسخ ساختگی.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
+          "target": "docs_shahab_phase_2_development_blueprint_safe_failure_behavior",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1214",
+          "weight": 1.0,
+          "evidence_quote": "نبود داده معتبر یا دسترسی مجاز در پاسخ حساس باید به خطای قابل تشخیص، تکمیل اطلاعات یا توقف امن منجر شود، نه خواندن جدول مالک یا پاسخ ساختگی.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1214",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+      "target": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1216",
+      "weight": 1.0,
+      "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+          "target": "docs_shahab_phase_2_development_blueprint_transactional_outbox",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1216",
+          "weight": 1.0,
+          "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+      "target": "docs_shahab_phase_2_development_blueprint_financial_snapshot_consistency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1216",
+      "weight": 1.0,
+      "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+          "target": "docs_shahab_phase_2_development_blueprint_financial_snapshot_consistency",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1216",
+          "weight": 1.0,
+          "evidence_quote": "در مواردی که تغییر داده باید رویداد قابل اتکایی منتشر کند، **Transactional Outbox** به‌کار می‌رود؛",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1216,
+          "quote": "در محاسبه وام، Core باید Snapshot منتشرشده واحد و نسخه قواعد را در یک درخواست ثابت نگه دارد و Adviser از API هم‌زمان Core استفاده کند، نه کپی غیرهم‌زمان موتور محاسبه."
+        }
+      ]
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+      "target": "docs_shahab_phase_2_development_blueprint_broker_not_required",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1216",
+      "weight": 1.0,
+      "evidence_quote": "انتخاب فناوری انتقال، TTL کش و آستانه تأخیر پس از آزمون باز است؛ RabbitMQ یا تراکنش توزیع‌شده الزام نیست.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+          "target": "docs_shahab_phase_2_development_blueprint_broker_not_required",
+          "relation": "rationale_for",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1216",
+          "weight": 1.0,
+          "evidence_quote": "انتخاب فناوری انتقال، TTL کش و آستانه تأخیر پس از آزمون باز است؛ RabbitMQ یا تراکنش توزیع‌شده الزام نیست.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1216",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+      "target": "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1220-1249",
+      "weight": 1.0,
+      "evidence_quote": "این نمودار جریان طلایی را ساده می‌کند؛ در حالت واقعی بررسی مجوز پیش از هر اقدام حساس تکرار می‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1220-1249",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+          "target": "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1220-1249",
+          "weight": 1.0,
+          "evidence_quote": "این نمودار جریان طلایی را ساده می‌کند؛ در حالت واقعی بررسی مجوز پیش از هر اقدام حساس تکرار می‌شود.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1220-1249",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+      "target": "docs_shahab_phase_2_development_blueprint_feedback_and_forward_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1249",
+      "weight": 1.0,
+      "evidence_quote": "فیدبک مبتنی بر شواهد در هر سه پلن برنزی، نقره‌ای و طلایی مجاز است و به وقوع خطا محدود نیست؛ فیدفوروارد تنها برای نقره‌ای و طلایی با کنترل‌های مصوب E01 و D01–D03 فعال است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+          "target": "docs_shahab_phase_2_development_blueprint_feedback_and_forward_rules",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1249",
+          "weight": 1.0,
+          "evidence_quote": "فیدبک مبتنی بر شواهد در هر سه پلن برنزی، نقره‌ای و طلایی مجاز است و به وقوع خطا محدود نیست؛ فیدفوروارد تنها برای نقره‌ای و طلایی با کنترل‌های مصوب E01 و D01–D03 فعال است.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1249",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
+      "target": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1251",
+      "weight": 1.0,
+      "evidence_quote": "اگر یک وام انتخاب‌شده قابل ادامه نبود، دستیار می‌تواند وام جایگزین پیشنهاد کند؛ افزودن جایگزین فقط با تأیید مشتری انجام می‌شود و جریان وام‌های باقی‌مانده متوقف نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1251",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
+          "target": "docs_shahab_phase_2_development_blueprint_service_flow_example",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1251",
+          "weight": 1.0,
+          "evidence_quote": "اگر یک وام انتخاب‌شده قابل ادامه نبود، دستیار می‌تواند وام جایگزین پیشنهاد کند؛ افزودن جایگزین فقط با تأیید مشتری انجام می‌شود و جریان وام‌های باقی‌مانده متوقف نمی‌شود.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1251",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_r1_superapp_experience",
+      "target": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1255,1281",
+      "weight": 1.0,
+      "evidence_quote": "پس از انتخاب حوزه، کاربر وارد گفت‌وگوی همان حوزه می‌شود و از زبانه بالا Adviser یا Assistant را انتخاب می‌کند؛ ورود از Adviser اجباری نیست.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1255,1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_r1_superapp_experience",
+          "target": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1255,1281",
+          "weight": 1.0,
+          "evidence_quote": "پس از انتخاب حوزه، کاربر وارد گفت‌وگوی همان حوزه می‌شود و از زبانه بالا Adviser یا Assistant را انتخاب می‌کند؛ ورود از Adviser اجباری نیست.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1255,1281",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+      "target": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1281",
+      "weight": 1.0,
+      "evidence_quote": "طبق B05، زمینه مرتبط گفتگوهای قبلی **در همان حوزه** پس از کنترل دسترسی به‌صورت خودکار و حداقلی بازیابی می‌شود؛ انتقال داده و زمینه به **حوزه دیگر** هرگز عمومی یا خودکار نیست و برای داده، مقصد، هدف و مدت مشخص به مجوز هدفمند نیاز دارد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source and target address compatible constraints but the cited wording does not directly assert that one implements the other.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_domain_selection_and_context",
+          "target": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1281",
+          "weight": 1.0,
+          "evidence_quote": "طبق B05، زمینه مرتبط گفتگوهای قبلی **در همان حوزه** پس از کنترل دسترسی به‌صورت خودکار و حداقلی بازیابی می‌شود؛ انتقال داده و زمینه به **حوزه دیگر** هرگز عمومی یا خودکار نیست و برای داده، مقصد، هدف و مدت مشخص به مجوز هدفمند نیاز دارد.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1281",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+      "target": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1212,1281",
+      "weight": 1.0,
+      "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212,1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source and target address compatible constraints but the cited wording does not directly assert that one implements the other.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary",
+          "target": "docs_shahab_phase_2_development_blueprint_personal_data_isolation",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1212,1281",
+          "weight": 1.0,
+          "evidence_quote": "داده شخصی و زمینه نشست نباید در نمایه عمومی دانش یا کاتالوگ مشترک ادغام شوند؛",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1212,1281",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_assistant_r1_scope",
+      "target": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1194,1281",
+      "weight": 1.0,
+      "evidence_quote": "در R1 فقط Core و Adviser مستقر می‌شوند و می‌توانند از یک میزبان و زیرساخت PostgreSQL/Redis موجود با جداسازی منطقی استفاده کنند.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194,1281",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_assistant_r1_scope",
+          "target": "docs_shahab_phase_2_development_blueprint_r1_data_ownership_boundaries",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1194,1281",
+          "weight": 1.0,
+          "evidence_quote": "در R1 فقط Core و Adviser مستقر می‌شوند و می‌توانند از یک میزبان و زیرساخت PostgreSQL/Redis موجود با جداسازی منطقی استفاده کنند.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1194,1281",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_quality_requirements",
+      "target": "docs_shahab_phase_2_development_blueprint_proposed_evaluation_metrics",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1285-1308",
+      "weight": 0.75,
+      "evidence_quote": "| دانش | نسخه منبع، تازگی، ردیابی رابطه و عدم ادعای حقوقی بی‌پشتوانه |",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1285-1308",
+      "decision_status": "unspecified",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The original inference is retained; related concepts occur in separate passages and this is not an approved requirement.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_quality_requirements",
+          "target": "docs_shahab_phase_2_development_blueprint_proposed_evaluation_metrics",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1285-1308",
+          "weight": 0.75,
+          "evidence_quote": "| دانش | نسخه منبع، تازگی، ردیابی رابطه و عدم ادعای حقوقی بی‌پشتوانه |",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1285-1308",
+          "decision_status": "unspecified",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_open_implementation_questions",
+      "target": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1328-1358",
+      "weight": 1.0,
+      "evidence_quote": "این فهرست صرفاً وابستگی‌های مفهومی را بیان می‌کند؛ سیاست سه مرحله و انتشارهای مستقل تابع فصل پنجم و O5-01 تا O5-14 است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1328-1358",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source directly relates the cited section, map or explicit text to the target; approval and operational readiness remain as in source.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_open_implementation_questions",
+          "target": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1328-1358",
+          "weight": 1.0,
+          "evidence_quote": "این فهرست صرفاً وابستگی‌های مفهومی را بیان می‌کند؛ سیاست سه مرحله و انتشارهای مستقل تابع فصل پنجم و O5-01 تا O5-14 است.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1328-1358",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+      "target": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1358",
+      "weight": 1.0,
+      "evidence_quote": "ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند؛ تجربه حوزه‌محور صفحه اصلی و Adviser با توصیه‌گر تعبیه‌شده جزو دامنه R1 است.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1358",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The policy or section explicitly states/references the target rule; this does not establish implementation or causal rationale.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_phase_dependency_sequence",
+          "target": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+          "relation": "rationale_for",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1358",
+          "weight": 1.0,
+          "evidence_quote": "ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند؛ تجربه حوزه‌محور صفحه اصلی و Adviser با توصیه‌گر تعبیه‌شده جزو دامنه R1 است.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1358",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_compatibility_requirements",
+      "target": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1362-1378",
+      "weight": 0.75,
+      "evidence_quote": "تفکیک مشاور و دستیار باید در ابزارها، داده‌ها، امنیت، صورتحساب و تجربه کاربر منعکس شود.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1362-1378",
+      "decision_status": "unspecified",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The original inference is retained; related concepts occur in separate passages and this is not an approved requirement.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_compatibility_requirements",
+          "target": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1362-1378",
+          "weight": 0.75,
+          "evidence_quote": "تفکیک مشاور و دستیار باید در ابزارها، داده‌ها، امنیت، صورتحساب و تجربه کاربر منعکس شود.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1362-1378",
+          "decision_status": "unspecified",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+      "target": "docs_shahab_phase_2_development_blueprint_chapter3_architecture_appendix",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1378,1385",
+      "weight": 1.0,
+      "evidence_quote": "طراحی تفصیلی این فصل باید با سه مرز Core / Adviser / Assistant سازگار باشد.",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1378,1385",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "unspecified",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source and target address compatible constraints but the cited wording does not directly assert that one implements the other.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_final_architecture_principle",
+          "target": "docs_shahab_phase_2_development_blueprint_chapter3_architecture_appendix",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1378,1385",
+          "weight": 1.0,
+          "evidence_quote": "طراحی تفصیلی این فصل باید با سه مرز Core / Adviser / Assistant سازگار باشد.",
+          "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1378,1385",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      }
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": 203
+  },
+  "coverage_range": {
+    "start_line": 1190,
+    "end_line": 1392
+  },
+  "coverage_manifest": {
+    "headings": [
+      {
+        "line": 1190,
+        "text": "### ۱۳. اثر بر طراحی دیتابیس و سرویس‌ها"
+      },
+      {
+        "line": 1218,
+        "text": "### ۱۴. جریان جامع اجرای درخواست"
+      },
+      {
+        "line": 1253,
+        "text": "### ۱۵. تجربه کاربری و سوپراپ"
+      },
+      {
+        "line": 1283,
+        "text": "### ۱۶. الزامات کیفیت و قابلیت اطمینان"
+      },
+      {
+        "line": 1295,
+        "text": "### ۱۷. شاخص‌های ارزیابی پیشنهادی"
+      },
+      {
+        "line": 1312,
+        "text": "### ۱۸. جزئیات اجرایی باز و موضوعات نیازمند اعتبارسنجی"
+      },
+      {
+        "line": 1336,
+        "text": "### ۱۹. مسیر مفهومی توسعه و نسبت آن با مرحله‌بندی مصوب"
+      },
+      {
+        "line": 1360,
+        "text": "### ۲۰. الزامات الحاق و سازگاری با سند قبلی"
+      },
+      {
+        "line": 1374,
+        "text": "### ۲۱. نتیجه معماری فصل دوم"
+      },
+      {
+        "line": 1383,
+        "text": "## فصل سوم — معماری تفصیلی ایجنت‌های دامنه‌محور و اجرای خدمات"
+      }
+    ],
+    "tables": [
+      {
+        "lines": "1196-1210",
+        "description": "Data domain, logical owner and primary proposed location"
+      },
+      {
+        "lines": "1285-1293",
+        "description": "Quality and reliability requirements"
+      },
+      {
+        "lines": "1297-1308",
+        "description": "Proposed evaluation metrics"
+      }
+    ],
+    "executable_decisions": [
+      {
+        "line": 1192,
+        "decision": "Separate Core/Adviser data ownership and tables; prohibit direct cross-service table access; local transactions; Outbox for reliable events; idempotent consumers; durable service-owned jobs; authenticated versioned sync APIs; async jobs for long work; resilience and privacy-safe telemetry."
+      },
+      {
+        "line": 1194,
+        "decision": "R1 deploys only Core and Adviser; shared host/PostgreSQL/Redis permitted with logical isolation; logical data responsibility does not itself grant deployment boundary or direct access."
+      },
+      {
+        "line": 1212,
+        "decision": "Use PostgreSQL as operational and PostgreSQL-first knowledge baseline; Neo4j is not approved or an R1 prerequisite; document repository stores full text and versions; exchange via authorized versioned APIs; prohibit direct cross-service table access and public-index merging of personal data."
+      },
+      {
+        "line": 1214,
+        "decision": "Contracts define owner/consumer, contract ID/version, purpose/minimal fields, authorization/identity, data version/freshness, errors/recovery; incompatible changes require version/migration; sensitive missing data/access leads to explicit error, completion or safe stop; broker/distributed transactions are not mandatory."
+      },
+      {
+        "line": 1216,
+        "decision": "A05 local transaction boundary; Transactional Outbox for reliable publication; controlled eventual consistency for non-sensitive data; stable published snapshot and rules version for loan calculations; Adviser uses synchronous Core API; monitoring excludes sensitive payload; technology thresholds remain open."
+      },
+      {
+        "line": 1249,
+        "decision": "Repeat authorization check before every sensitive action; evidence-based feedback is allowed in Bronze/Silver/Gold; feedforward only Silver/Gold under E01 and D01-D03."
+      },
+      {
+        "line": 1251,
+        "decision": "Alternative loan may be proposed, but addition requires customer approval and does not stop remaining loan flows; distinguish missing document, unmet condition and unavailable bank service."
+      },
+      {
+        "line": 1255,
+        "decision": "R1 has domain-icon home and domain chat; Adviser entry is not mandatory; only Adviser is active in R1; Assistant tab may say coming soon."
+      },
+      {
+        "line": 1281,
+        "decision": "Domain suggestion requires user confirmation; domain remains fixed in session; role changes require explicit user action; out-of-domain independent requests do not receive specialist answer; transfer requires user action; same-domain context may be minimally retrieved after access check; cross-domain transfer requires scoped consent; role change does not transfer execution authority; Assistant not deployed in R1."
+      },
+      {
+        "line": 1310,
+        "decision": "Acceptance thresholds, sampling method and target values are set after real experiments."
+      },
+      {
+        "line": 1314,
+        "decision": "Open question: final plan/service/prompt prices."
+      },
+      {
+        "line": 1316,
+        "decision": "Open question: exact services and plan scope."
+      },
+      {
+        "line": 1318,
+        "decision": "Plan access remains an open design detail, but independent out-of-domain requests are prohibited; cross-domain subtask requires specialized contract and separate authorization."
+      },
+      {
+        "line": 1322,
+        "decision": "Retention numbers, priority thresholds, retry timing, SMS cost/conditions are open; D03 lifecycle/dedup/quality/channel/history principles, D02 alert conditions, and D01 capability separation are approved; plan quotas remain open."
+      },
+      {
+        "line": 1324,
+        "decision": "Open question: authorization and customer representation levels."
+      },
+      {
+        "line": 1326,
+        "decision": "Open question: permitted Computer Use access and availability of bank product APIs."
+      },
+      {
+        "line": 1328,
+        "decision": "A04 PostgreSQL job-state authority and Port/Adapter isolation are fixed; queue/worker technology and Temporal migration criteria remain open."
+      },
+      {
+        "line": 1330,
+        "decision": "Open question: Neo4j data model, deployment and operating cost."
+      },
+      {
+        "line": 1332,
+        "decision": "B05 architecture and automation policy approved; retention/deletion, memory/transfer contracts, sensitive-data processing basis, controls and legal retention details remain open."
+      },
+      {
+        "line": 1334,
+        "decision": "A01 target architecture is fixed; module boundaries, contracts, control implementation, resource/operational cost, resilience, existing-infrastructure tests and separation/migration criteria remain open."
+      },
+      {
+        "line": 1338,
+        "decision": "The conceptual dependency list is not the approved three-stage release plan; commercial/financial capabilities activate only in a release needing them after independent gates; no automatic stage four."
+      },
+      {
+        "line": 1358,
+        "decision": "The historical conceptual order is not binding release order or approved task; first RAG release deploys Core and Adviser only; wallet/payments/commercial plans and Assistant are not prerequisites; domain-based home and Adviser with embedded recommender are R1 scope."
+      },
+      {
+        "line": 1362,
+        "decision": "Preserve chapter one Demand-Driven Hybrid RAG, discovery, revalidation and relationship discovery."
+      },
+      {
+        "line": 1364,
+        "decision": "Plans, wallet, pricing and permissions are product architecture, not UI-only settings."
+      },
+      {
+        "line": 1366,
+        "decision": "Backend locks the domain selected/confirmed; no independent out-of-domain request, even in Gold; cross-domain contractual prerequisite does not change session domain or authorize destination tools."
+      },
+      {
+        "line": 1367,
+        "decision": "Computer Use is the operational execution backbone; bank API is a complementary option for catalog data updates/commercial opportunity."
+      },
+      {
+        "line": 1369,
+        "decision": "Frontend changes are not prerequisite to core phase-two execution."
+      },
+      {
+        "line": 1371,
+        "decision": "Conflicts must be reported; no existing principle changes without review and approval."
+      },
+      {
+        "line": 1372,
+        "decision": "Record every decision with status agreed, proposed, needs validation or open."
+      },
+      {
+        "line": 1378,
+        "decision": "Do not centralize law interpretation, authorization, debiting and bank operations in one agent; AI coordinates/analyzes while sensitive controls remain deterministic, testable and auditable."
+      },
+      {
+        "line": 1385,
+        "decision": "Chapter 3 design must align with Core/Adviser/Assistant boundaries; Adviser independent from Core in R1; Assistant not deployed until its release; diagrams of extractable monolith are logical/history, not alternate deployment decision."
+      },
+      {
+        "line": 1388,
+        "decision": "Agents/tools consume only evidence permitted by publication, authorization, scope, time and Claim-Level Citation Guard; web/document content is not executable instruction; financial calculations use deterministic versioned tools; user authorization and safe stop are independent of RAG evidence."
+      },
+      {
+        "line": 1391,
+        "decision": "Architecture/product rules with approval IDs are in force; execution tools, OS capabilities and bank interactions require validation; chapter is neither implementation instruction nor legal approval."
+      }
+    ]
+  }
+}

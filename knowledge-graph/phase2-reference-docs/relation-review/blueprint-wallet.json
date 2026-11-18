@@ -1,0 +1,506 @@
+{
+  "review": "missing_cross_document_edges_blueprint_wallet",
+  "source_hashes": {
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+    "docs/SHAHAB_DIGITAL_WALLET.md": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74"
+  },
+  "review_scope": {
+    "blueprint_chunks": "GSEM-001..013",
+    "wallet_chunks": "GSEM-014..022",
+    "existing_cross_document_edges_found": 0
+  },
+  "allowed_relation_types": [
+    "references",
+    "conceptually_related_to",
+    "implements",
+    "rationale_for",
+    "shares_data_with"
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+      "target": "docs_shahab_digital_wallet_approved_wallet_policy_summary",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1050,
+          "quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1631,
+          "quote": "مدل داینامیک، رزرو، حقوق اجزای اعتبار، انتقال و برداشت، گردکردن، لغو و شکست و اصلاح، تسویهٔ قراردادی و الزام فاکتور پیش از پرداخت نیز مطابق بخش‌های اصلی مصوب‌اند."
+        }
+      ],
+      "interpretation_note": "Explicit source-of-detail mapping; implementation choices remain open where the source says so.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "L1050 cites the Wallet document as a whole, not its L1631 summary; mapping to this particular summary is an inference.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+          "target": "docs_shahab_digital_wallet_approved_wallet_policy_summary",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1050,
+              "quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 1631,
+              "quote": "مدل داینامیک، رزرو، حقوق اجزای اعتبار، انتقال و برداشت، گردکردن، لغو و شکست و اصلاح، تسویهٔ قراردادی و الزام فاکتور پیش از پرداخت نیز مطابق بخش‌های اصلی مصوب‌اند."
+            }
+          ],
+          "interpretation_note": "Explicit source-of-detail mapping; implementation choices remain open where the source says so.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1050, docs/SHAHAB_DIGITAL_WALLET.md:L1631",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+      "target": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1054,
+          "quote": "موجودی نقدی، هدیه، رزروشده، قابل‌مصرف، قابل‌انتقال و قابل‌برداشت معادل نیستند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 393,
+          "quote": "سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست."
+        }
+      ],
+      "interpretation_note": "Blueprint explicitly delegates credit rights/routes to Wallet §§3, 5 and 6; Wallet provides the matching ownership/source distinction.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "The quoted L1054 distinguishes balance rights and Wallet L393 distinguishes ownership dimension. Neither quote explicitly references the particular Wallet §3.1 ownership node; the mapping is inferred.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+          "target": "docs_shahab_digital_wallet_wallet_ownership_model",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1054,
+              "quote": "موجودی نقدی، هدیه، رزروشده، قابل‌مصرف، قابل‌انتقال و قابل‌برداشت معادل نیستند."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 393,
+              "quote": "سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست."
+            }
+          ],
+          "interpretation_note": "Blueprint explicitly delegates credit rights/routes to Wallet §§3, 5 and 6; Wallet provides the matching ownership/source distinction.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1054, docs/SHAHAB_DIGITAL_WALLET.md:L393",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+      "target": "docs_shahab_digital_wallet_balance_state_definitions",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1054,
+          "quote": "منشأ و شرایط هر جزء در انتقال، مصرف و بازگشت حفظ می‌شود. انتقال بین کاربران، تخصیص سازمانی و برداشت صرفاً با مسیرها، گیرندگان و سقف‌های مصوب §§۳، ۵ و ۶ سند کیف پول انجام می‌شوند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 503,
+          "quote": "| رزروشده | برای عملیات مشخص کنار گذاشته شده و فعلاً جای دیگر خرج نمی‌شود |"
+        }
+      ],
+      "interpretation_note": "Explicit Wallet-section delegation; Wallet table defines the reserved balance state.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Blueprint L1054 cites Wallet sections 3, 5 and 6 generally; the selected balance-state table is in §5.2, without an explicit citation to this table.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+          "target": "docs_shahab_digital_wallet_balance_state_definitions",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1054,
+              "quote": "منشأ و شرایط هر جزء در انتقال، مصرف و بازگشت حفظ می‌شود. انتقال بین کاربران، تخصیص سازمانی و برداشت صرفاً با مسیرها، گیرندگان و سقف‌های مصوب §§۳، ۵ و ۶ سند کیف پول انجام می‌شوند."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 503,
+              "quote": "| رزروشده | برای عملیات مشخص کنار گذاشته شده و فعلاً جای دیگر خرج نمی‌شود |"
+            }
+          ],
+          "interpretation_note": "Explicit Wallet-section delegation; Wallet table defines the reserved balance state.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1054, docs/SHAHAB_DIGITAL_WALLET.md:L503",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+      "target": "docs_shahab_digital_wallet_immutable_posted_entries",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1056,
+          "quote": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده، ثبت تغییرناپذیر و اصلاح جبرانی، idempotency، کنترل هم‌زمانی، تطبیق بانکی، بازیابی نتیجه نامعلوم و **ردیابی تمام زنجیره انتقال اعتبار و گره‌های واسط** الزامی است."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1213,
+          "quote": "ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند."
+        }
+      ],
+      "interpretation_note": "Matching ledger immutability and compensating-record policy detail.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Both cited lines state compatible ledger immutability rules, but neither explicitly cites the other particular passage; similarity mapping is inferred.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+          "target": "docs_shahab_digital_wallet_immutable_posted_entries",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1056,
+              "quote": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده، ثبت تغییرناپذیر و اصلاح جبرانی، idempotency، کنترل هم‌زمانی، تطبیق بانکی، بازیابی نتیجه نامعلوم و **ردیابی تمام زنجیره انتقال اعتبار و گره‌های واسط** الزامی است."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 1213,
+              "quote": "ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند."
+            }
+          ],
+          "interpretation_note": "Matching ledger immutability and compensating-record policy detail.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1056, docs/SHAHAB_DIGITAL_WALLET.md:L1213",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+      "target": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1056,
+          "quote": "شارژ، رزرو موقت، کسر قطعی، آزادسازی و استرداد رویدادهای مستقل و قابل ردیابی‌اند. رزرو عملیات فعال، اجزای مشخص اعتبار را کنار می‌گذارد؛ نتیجه نامعلوم نباید بدون تعیین تعهد آزاد شود."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1257,
+          "quote": "هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود."
+        }
+      ],
+      "interpretation_note": "Blueprint operations correspond to Wallet reservation, capture and release lifecycle.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Both cited lines contain corresponding reservation/capture/release rules, but no specific cross-reference to Wallet §7.6 is stated in the cited Blueprint quote.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+          "target": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1056,
+              "quote": "شارژ، رزرو موقت، کسر قطعی، آزادسازی و استرداد رویدادهای مستقل و قابل ردیابی‌اند. رزرو عملیات فعال، اجزای مشخص اعتبار را کنار می‌گذارد؛ نتیجه نامعلوم نباید بدون تعیین تعهد آزاد شود."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 1257,
+              "quote": "هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود."
+            }
+          ],
+          "interpretation_note": "Blueprint operations correspond to Wallet reservation, capture and release lifecycle.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1056, docs/SHAHAB_DIGITAL_WALLET.md:L1257",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+      "target": "docs_shahab_digital_wallet_reserve_estimate_approval_and_formula",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1027,
+          "quote": "مبلغ برآوردی و سقف افزایش مجاز خودکار مطابق §۶.۴.۴ سند کیف پول اعلام می‌شود؛ **حداکثر افزایش خودکار ۲۰ درصد** است و کارمزد یا درآمد قطعی محسوب نمی‌شود."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 787,
+          "quote": "برآورد کل اولیهٔ همان فرایند و سقف افزایش مجاز، پیش از شروع به تأیید مشتری برسند."
+        }
+      ],
+      "interpretation_note": "Blueprint explicitly cites Wallet §6.4.4; Wallet states customer approval boundary.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Blueprint L1027 explicitly cites Wallet §6.4.4 but the selected endpoint at L787 is in §6.4.2. The relationship between the common estimate/cap concepts is inferred; the exact §6.4.4 approved cap is at L815.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+          "target": "docs_shahab_digital_wallet_reserve_estimate_approval_and_formula",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1027,
+              "quote": "مبلغ برآوردی و سقف افزایش مجاز خودکار مطابق §۶.۴.۴ سند کیف پول اعلام می‌شود؛ **حداکثر افزایش خودکار ۲۰ درصد** است و کارمزد یا درآمد قطعی محسوب نمی‌شود."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 787,
+              "quote": "برآورد کل اولیهٔ همان فرایند و سقف افزایش مجاز، پیش از شروع به تأیید مشتری برسند."
+            }
+          ],
+          "interpretation_note": "Blueprint explicitly cites Wallet §6.4.4; Wallet states customer approval boundary.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1027, docs/SHAHAB_DIGITAL_WALLET.md:L787",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+      "target": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1120,
+          "quote": "مشاوره محدود در گردش‌کار دستیار مطابق §۹.۱.۱ سند کیف پول با **ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل** محاسبه می‌شود؛ این ضریب تصمیم باز نیست."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1391,
+          "quote": "هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود."
+        }
+      ],
+      "interpretation_note": "Explicit reference to Wallet §9.1.1 and matching approved half-rate rule.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "explicit reference only; source policy scope preserved",
+      "status_scope": "source policy or explicit relationship as described",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Blueprint L1120 explicitly cites Wallet §9.1.1, which contains the matched half-rate answer at L1391. The approval concerns the half-rate; numerical tariff choices remain open.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+          "target": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1120,
+              "quote": "مشاوره محدود در گردش‌کار دستیار مطابق §۹.۱.۱ سند کیف پول با **ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل** محاسبه می‌شود؛ این ضریب تصمیم باز نیست."
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 1391,
+              "quote": "هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود."
+            }
+          ],
+          "interpretation_note": "Explicit reference to Wallet §9.1.1 and matching approved half-rate rule.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "explicit reference only; source policy scope preserved",
+          "status_scope": "source policy or explicit relationship as described"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1120, docs/SHAHAB_DIGITAL_WALLET.md:L1391",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_financial_invariants",
+      "target": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "status": "approved_policy_reference",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1706,
+          "quote": "الزامات دفترکل ریالی، حساب‌های تفکیک‌شده، ثبت تغییرناپذیر، اصلاح جبرانی"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 379,
+          "quote": "اعتبار مصرف‌نشده به‌خودی‌خود درآمد نیست؛ تعهد متناظر مشتری جدا و قابل‌ردیابی ثبت شود."
+        }
+      ],
+      "interpretation_note": "Blueprint explicitly defers approved ledger invariants to Wallet; this is matching liability policy detail.",
+      "decision_status": "approved_policy_reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Blueprint L1706 mentions ledger constraints without stating the Wallet L379 unspent-credit liability rule; relating the two is a conceptual inference, not a direct citation.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_financial_invariants",
+          "target": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "status": "approved_policy_reference",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1706,
+              "quote": "الزامات دفترکل ریالی، حساب‌های تفکیک‌شده، ثبت تغییرناپذیر، اصلاح جبرانی"
+            },
+            {
+              "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+              "line": 379,
+              "quote": "اعتبار مصرف‌نشده به‌خودی‌خود درآمد نیست؛ تعهد متناظر مشتری جدا و قابل‌ردیابی ثبت شود."
+            }
+          ],
+          "interpretation_note": "Blueprint explicitly defers approved ledger invariants to Wallet; this is matching liability policy detail.",
+          "decision_status": "approved_policy_reference",
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      },
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1706, docs/SHAHAB_DIGITAL_WALLET.md:L379",
+      "weight": 1.0
+    }
+  ],
+  "review_notes": [
+    "Only explicit source/reference mappings and direct policy-detail correspondences are included as EXTRACTED.",
+    "No speculative service-ownership, deployment, R1 sequencing, or Core/Wallet runtime dependency edge is asserted.",
+    "Each evidence quote was validated as an exact substring on its cited numeric source line in the supplied byte-for-byte copies."
+  ]
+}
