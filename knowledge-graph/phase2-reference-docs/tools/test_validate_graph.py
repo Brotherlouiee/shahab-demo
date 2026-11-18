@@ -15,6 +15,9 @@ def dump(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(obj,ensure_ascii=False),encoding='utf-8')
 
+def digest(obj):
+    return hashlib.sha256(json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()
+
 def init(tmp):
     root=Path(tmp); sources=['docs/b.md','docs/w.md']; chunks=root/'chunks';reviews=root/'review'; entries=[]; nodes=[];edges=[]
     for source in sources:
@@ -34,7 +37,8 @@ def init(tmp):
     graph={'directed':True,'multigraph':True,'nodes':nodes,'links':edges,'hyperedges':[],'lossless_merge':{'node_variants':[]}}
     dump(root/'progress.json',{'chunks':entries});dump(root/'base.json',base);dump(root/'graph.json',graph)
     v.STRUCTURAL_SHA256=hashlib.sha256((root/'base.json').read_bytes()).hexdigest()
-    return SimpleNamespace(repo=root,graph=root/'graph.json',structural=root/'base.json',progress=root/'progress.json',chunks=chunks,reviews=reviews,output=None)
+    corrections=root/'corrections.json';dump(corrections,{'quarantine':[]})
+    return SimpleNamespace(repo=root,graph=root/'graph.json',structural=root/'base.json',progress=root/'progress.json',chunks=chunks,reviews=reviews,corrections=corrections,output=None)
 
 class TestValidation(unittest.TestCase):
     def setUp(self): self.tmp=tempfile.TemporaryDirectory();self.args=init(self.tmp.name)
@@ -43,13 +47,35 @@ class TestValidation(unittest.TestCase):
     def test_fixture_passes(self): self.assertEqual(self.issues(),[])
     def test_lost_parallel_edge_detected(self):
         g=json.loads(self.args.graph.read_text());g['links'].pop();dump(self.args.graph,g)
-        self.assertTrue(any('missing or changed in controlled union' in x for x in self.issues()))
+        self.assertTrue(any('controlled semantic edge missing or changed' in x for x in self.issues()))
     def test_quarantine_preserves_original_evidence(self):
         g=json.loads(self.args.graph.read_text());edge=g['links'].pop()
-        g['lossless_merge']['quarantined_edges']=[{'original_edge':edge,'reason':'misattributed witness','evidence':'source line','action':'excluded'}];dump(self.args.graph,g)
+        correction={'record_sha256':digest(edge),'reason':'misattributed witness','evidence':edge['evidence']}
+        dump(self.args.corrections,{'quarantine':[correction]})
+        g['lossless_merge']['quarantined_edges']=[{**correction,'original_edge':edge,'allowed_replacement_sha256':[],'action':'quarantined_from_active_graph'}];dump(self.args.graph,g)
         self.assertEqual(self.issues(),[])
+        wrong_evidence=[{'source_file':'docs/w.md','line':11,'quote':'line 11'}]
+        bad_correction={**correction,'evidence':wrong_evidence};dump(self.args.corrections,{'quarantine':[bad_correction]})
+        g['lossless_merge']['quarantined_edges'][0]['evidence']=wrong_evidence;dump(self.args.graph,g)
+        self.assertTrue(any('does not match original edge witness' in x for x in self.issues()))
+        dump(self.args.corrections,{'quarantine':[correction]})
+        g['lossless_merge']['quarantined_edges'][0]['evidence']=correction['evidence']
         del g['lossless_merge']['quarantined_edges'][0]['reason'];dump(self.args.graph,g)
         self.assertTrue(any('reason missing' in x for x in self.issues()))
+    def test_fabricated_quarantine_cannot_hide_missing_input_edge(self):
+        g=json.loads(self.args.graph.read_text());edge=g['links'].pop(3)
+        g['lossless_merge']['quarantined_edges']=[{'original_edge':edge,'record_sha256':digest(edge),'reason':'invented','evidence':[{'source_file':'docs/w.md','line':11,'quote':'line 11'}],'allowed_replacement_sha256':[],'action':'quarantined_from_active_graph'}]
+        dump(self.args.graph,g)
+        self.assertTrue(any('no matching reviewed correction record' in x for x in self.issues()))
+    def test_unexpected_node_is_rejected(self):
+        g=json.loads(self.args.graph.read_text());g['nodes'].append({'id':'unreviewed-node'});dump(self.args.graph,g)
+        self.assertTrue(any('unconsumed node record' in x for x in self.issues()))
+    def test_unexpected_link_is_rejected(self):
+        g=json.loads(self.args.graph.read_text());g['links'].append({'source':'GSEM-001','target':'GSEM-002','relation':'references'});dump(self.args.graph,g)
+        self.assertTrue(any('unconsumed link record' in x for x in self.issues()))
+    def test_missing_correction_ledger_is_rejected(self):
+        self.args.corrections.unlink()
+        self.assertTrue(any('reviewed corrections file missing' in x for x in self.issues()))
     def test_missing_owner_detected(self):
         p=self.args.chunks/'GSEM-001.json';d=json.loads(p.read_text());del d['edges'][0]['owner'];dump(p,d)
         self.assertTrue(any('missing owner field' in x for x in self.issues()))

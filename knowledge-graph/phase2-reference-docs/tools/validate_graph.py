@@ -102,6 +102,24 @@ def valid_known_kb_witness(typ, obj, source, numbers):
     return not (is_kb and 246 in numbers)
 
 
+def quarantine_evidence_matches_edge(edge, evidence, sources):
+    """Require correction citations to be among the quarantined edge's witnesses."""
+    if not isinstance(evidence,list) or not evidence:
+        return False
+    cited=[]
+    embedded=edge.get('evidence')
+    if isinstance(embedded,list):
+        cited=[(item.get('source_file'),item.get('line'),item.get('quote')) for item in embedded if isinstance(item,dict)]
+    else:
+        source=edge.get('source_file')
+        quote=attr(edge,'evidence_quote')
+        locator=attr(edge,'evidence_locator') or edge.get('source_location')
+        numbers=loc_lines(locator,edge.get('source_location'),1,len(sources.get(source,[])))
+        cited=[(source,n,quote) for n in numbers]
+    cited_set=set(cited)
+    return all(isinstance(item,dict) and (item.get('source_file'),item.get('line'),item.get('quote')) in cited_set for item in evidence)
+
+
 def manifest_items(manifest):
     if isinstance(manifest, list):
         return [x for x in manifest if isinstance(x, dict)]
@@ -260,23 +278,67 @@ def audit(args):
             key=canon(node)
             a.check(available[key]>0, f'{cid}: node[{ix}] missing or changed in controlled union')
             if available[key]>0: available[key]-=1
+    for key,count in available.items():
+        a.check(count==0,f'graph contains {count} unconsumed node record(s) absent from structural/chunk inputs: {key[:160]}')
     available=collections.Counter(canon(e) for e in edges)
     for ix,e in enumerate(base.get('links',[])):
         a.check(available[canon(e)]>0,f'structural link[{ix}] missing or mutated')
         if available[canon(e)]>0: available[canon(e)]-=1
     quarantined=graph.get('lossless_merge',{}).get('quarantined_edges',[])
+    corrections_exists=bool(args.corrections and args.corrections.is_file())
+    a.check(corrections_exists,'reviewed corrections file missing')
+    corrections_data=json.loads(args.corrections.read_text(encoding='utf-8')) if corrections_exists else {}
+    corrections=corrections_data.get('quarantine',[])
+    a.check(isinstance(corrections,list),'corrections file must contain a quarantine array')
+    correction_by_hash={}
+    for ix,c in enumerate(corrections if isinstance(corrections,list) else []):
+        digest=c.get('record_sha256') if isinstance(c,dict) else None
+        a.check(isinstance(digest,str) and len(digest)==64,f'corrections quarantine[{ix}]: invalid record hash')
+        if isinstance(digest,str):
+            a.check(digest not in correction_by_hash,f'corrections quarantine[{ix}]: duplicate record hash')
+            correction_by_hash[digest]=c
+        a.check(isinstance(c,dict) and isinstance(c.get('reason'),str) and bool(c['reason'].strip()),f'corrections quarantine[{ix}]: reason missing')
+        evidence=c.get('evidence',[]) if isinstance(c,dict) else []
+        a.check(isinstance(evidence,list) and bool(evidence),f'corrections quarantine[{ix}]: evidence missing')
+        for j,ev in enumerate(evidence if isinstance(evidence,list) else []):
+            name=ev.get('source_file') if isinstance(ev,dict) else None
+            number=ev.get('line') if isinstance(ev,dict) else None
+            quote=ev.get('quote') if isinstance(ev,dict) else None
+            valid=name in sources and isinstance(number,int) and 1<=number<=len(sources[name]) and isinstance(quote,str) and bool(quote) and quote in sources[name][number-1]
+            a.check(valid,f'corrections quarantine[{ix}]: evidence[{j}] is not exact source line')
+    # Quarantine can account only for an authentic semantic input edge. Build
+    # that inventory before considering quarantine metadata, so fabricated
+    # `original_edge` values cannot conceal missing chunk/review records.
+    expected_semantic_edges=collections.Counter()
+    for _,data in chunks:
+        expected_semantic_edges.update(canon(e) for e in data.get('edges',[]))
+    review_paths=sorted(args.reviews.glob('*.json')) if args.reviews else []
+    for path in review_paths:
+        reviewed=json.loads(path.read_text(encoding='utf-8'))
+        expected_semantic_edges.update(canon(e) for e in reviewed.get('edges',[]))
+    structural_edges=collections.Counter(canon(e) for e in base.get('links',[]))
     for ix,q in enumerate(quarantined):
         original=q.get('original_edge')
         a.check(isinstance(original,dict),f'quarantined edge[{ix}]: original record missing')
         a.check(isinstance(q.get('reason'),str) and bool(q['reason'].strip()),f'quarantined edge[{ix}]: reason missing')
         a.check(bool(q.get('evidence')),f'quarantined edge[{ix}]: source-based evidence missing')
-        a.check(bool(q.get('action')),f'quarantined edge[{ix}]: action missing')
-        if isinstance(original,dict): available[canon(original)]+=1
-    for cid,data in chunks:
-        for ix,e in enumerate(data.get('edges', [])):
-            key=canon(e)
-            a.check(available[key]>0, f'{cid}: edge[{ix}] missing or changed in controlled union')
-            if available[key]>0: available[key]-=1
+        a.check(q.get('action')=='quarantined_from_active_graph',f'quarantined edge[{ix}]: invalid action')
+        if isinstance(original,dict):
+            key=canon(original)
+            digest=hashlib.sha256(key.encode('utf-8')).hexdigest()
+            a.check(q.get('record_sha256')==digest,f'quarantined edge[{ix}]: record hash does not match original')
+            correction=correction_by_hash.get(digest)
+            a.check(correction is not None,f'quarantined edge[{ix}]: no matching reviewed correction record')
+            if correction is not None:
+                a.check(q.get('reason')==correction.get('reason'),f'quarantined edge[{ix}]: reason differs from reviewed correction')
+                a.check(q.get('evidence')==correction.get('evidence'),f'quarantined edge[{ix}]: evidence differs from reviewed correction')
+                a.check(quarantine_evidence_matches_edge(original,correction.get('evidence'),sources),f'quarantined edge[{ix}]: correction evidence does not match original edge witness')
+                a.check(q.get('allowed_replacement_sha256',[])==correction.get('allowed_replacement_sha256',[]),f'quarantined edge[{ix}]: replacement hashes differ from reviewed correction')
+                correction_by_hash.pop(digest)
+            a.check(structural_edges[key]==0,f'quarantined edge[{ix}]: protected structural record cannot be quarantined')
+            a.check(expected_semantic_edges[key]>0,f'quarantined edge[{ix}]: original record is absent from controlled inputs')
+            if expected_semantic_edges[key]>0: expected_semantic_edges[key]-=1
+    a.check(not correction_by_hash,f'{len(correction_by_hash)} reviewed correction record(s) missing from graph quarantine')
     available_hyper=collections.Counter(canon(h) for h in graph.get('hyperedges',[]))
     for h in base.get('hyperedges',[]):
         a.check(available_hyper[canon(h)]>0,'structural hyperedge missing or mutated')
@@ -286,7 +348,6 @@ def audit(args):
             a.check(available_hyper[canon(h)]>0,f'{cid}: hyperedge[{ix}] missing or mutated')
             if available_hyper[canon(h)]>0: available_hyper[canon(h)]-=1
     if args.reviews:
-        review_paths=sorted(args.reviews.glob('*.json'))
         a.check(len(review_paths)==3,'expected three independent relation-review files')
         for path in review_paths:
             reviewed=json.loads(path.read_text(encoding='utf-8'))
@@ -306,10 +367,21 @@ def audit(args):
                     name=ev.get('source_file'); n=ev.get('line'); quote=ev.get('quote')
                     valid=name in sources and isinstance(n,int) and 1<=n<=len(sources[name]) and isinstance(quote,str) and bool(quote) and quote in sources[name][n-1]
                     a.check(valid,f'{key}: evidence[{j}] is not exact source line')
-                record=canon(e)
-                a.check(available[record]>0,f'{key}: missing or changed in controlled union')
-                if available[record]>0: available[record]-=1
                 a.metrics['review_edges']+=1
+    # Every non-structural active edge must be accounted for exactly once by
+    # the chunk/review inputs, and every expected edge must be active or
+    # validly quarantined. Reject unreviewed extras as well as omissions.
+    active_semantic_edges=collections.Counter(canon(e) for e in edges)
+    for edge,count in structural_edges.items():
+        if active_semantic_edges[edge]>=count: active_semantic_edges[edge]-=count
+        else: active_semantic_edges[edge]=0
+    for key,count in expected_semantic_edges.items():
+        a.check(active_semantic_edges[key]>=count,f'controlled semantic edge missing or changed: {key[:160]}')
+        if active_semantic_edges[key]>=count: active_semantic_edges[key]-=count
+    for key,count in active_semantic_edges.items():
+        a.check(count==0,f'graph contains {count} unconsumed link record(s) absent from structural/chunk/review inputs: {key[:160]}')
+    for key,count in available_hyper.items():
+        a.check(count==0,f'graph contains {count} unconsumed hyperedge record(s): {key[:160]}')
     a.metrics.update({'graph_nodes':len(nodes),'graph_edges':len(edges),'graph_hyperedges':len(graph.get('hyperedges',[])),'structural_nodes':len(base.get('nodes',[])),'structural_edges':len(base.get('links',[])),'node_variants':len(variants),'quarantined_edges':len(quarantined),'chunks':len(chunks)})
     a.warnings.append('PASS means mechanical checks passed only; semantic entailment, ownership classification and atomic completeness require independently recorded source-based review.')
     return a
@@ -323,6 +395,7 @@ def main():
     p.add_argument('--progress',type=Path,required=True)
     p.add_argument('--chunks',type=Path,required=True)
     p.add_argument('--reviews',type=Path,required=True,help='directory containing exactly three reviewed relation JSON files')
+    p.add_argument('--corrections',type=Path,required=True,help='reviewed exact quarantine corrections JSON')
     p.add_argument('--output',type=Path)
     args=p.parse_args()
     a=audit(args)
