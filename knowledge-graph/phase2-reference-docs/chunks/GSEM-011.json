@@ -1,0 +1,2775 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_weekly_value_release",
+      "label": "انتشار هفتگی ارزش واقعی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1966",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هر چرخه حداکثر هفت روز تقویمی دارد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1966",
+      "decision_status": "approved operating principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_weekly_value_release",
+            "label": "انتشار هفتگی ارزش واقعی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1966",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هر چرخه حداکثر هفت روز تقویمی دارد",
+            "evidence_locator": "§5, lines 1966",
+            "decision_status": "approved operating principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_continuous_product_growth",
+      "label": "افزایش پیوسته محصول",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1968",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هر انتشار باید بر نسخه کارای قبلی بنا شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1968",
+      "decision_status": "approved operating principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_continuous_product_growth",
+            "label": "افزایش پیوسته محصول",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1968",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هر انتشار باید بر نسخه کارای قبلی بنا شود",
+            "evidence_locator": "§5, lines 1968",
+            "decision_status": "approved operating principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_seven_day_exception",
+      "label": "استثنای مستدل چرخه هفت‌روزه",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1970",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "عبور یک قابلیت از مرز هفت روز فقط وقتی مجاز است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1970",
+      "decision_status": "approved with documented evidence requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_seven_day_exception",
+            "label": "استثنای مستدل چرخه هفت‌روزه",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1970",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "عبور یک قابلیت از مرز هفت روز فقط وقتی مجاز است",
+            "evidence_locator": "§5, lines 1970",
+            "decision_status": "approved with documented evidence requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_valuable_slice_priority",
+      "label": "اولویت آسان‌ترین قابلیت ارزشمند",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1974",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "شروع با برش‌های کوچک، کم‌ریسک، سریع و کم‌هزینه‌ای است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1974",
+      "decision_status": "approved priority principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_valuable_slice_priority",
+            "label": "اولویت آسان‌ترین قابلیت ارزشمند",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1974",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "شروع با برش‌های کوچک، کم‌ریسک، سریع و کم‌هزینه‌ای است",
+            "evidence_locator": "§5, lines 1974",
+            "decision_status": "approved priority principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+      "label": "تقدم وابستگی‌های واقعی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1976",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "قبل از ترتیب انتشار، نقشه وابستگی قابلیت‌ها، قراردادها، داده‌ها، مجوزها و زیرساخت‌ها تهیه می‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1976",
+      "decision_status": "approved planning requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+            "label": "تقدم وابستگی‌های واقعی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1976",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "قبل از ترتیب انتشار، نقشه وابستگی قابلیت‌ها، قراردادها، داده‌ها، مجوزها و زیرساخت‌ها تهیه می‌شود",
+            "evidence_locator": "§5, lines 1976",
+            "decision_status": "approved planning requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_just_enough_infrastructure",
+      "label": "زیرساخت به‌اندازه نیاز",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1978",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "زیرساخت فقط تا سطح لازم برای انتشارهای نزدیک ساخته می‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1978",
+      "decision_status": "approved architecture principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_just_enough_infrastructure",
+            "label": "زیرساخت به‌اندازه نیاز",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1978",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "زیرساخت فقط تا سطح لازم برای انتشارهای نزدیک ساخته می‌شود",
+            "evidence_locator": "§5, lines 1978",
+            "decision_status": "approved architecture principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_integrated_experience_and_data",
+      "label": "یکپارچگی تجربه و داده",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1980",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "ورود کاربر، هویت، انتخاب حوزه، وضعیت عملیات، قراردادهای نسخه‌دار، مالکیت داده و رابط کاربری باید در همه انتشارها سازگار بمانند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1980",
+      "decision_status": "approved requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_integrated_experience_and_data",
+            "label": "یکپارچگی تجربه و داده",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1980",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "ورود کاربر، هویت، انتخاب حوزه، وضعیت عملیات، قراردادهای نسخه‌دار، مالکیت داده و رابط کاربری باید در همه انتشارها سازگار بمانند",
+            "evidence_locator": "§5, lines 1980",
+            "decision_status": "approved requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_coordinated_adviser_assistant",
+      "label": "پیشروی هماهنگ مشاور و دستیار",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1984",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "کار بر مشاور و دستیار با تقدم وابستگی‌ها و به‌صورت برش‌های مرتبط و متناوب پیش می‌رود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1984",
+      "decision_status": "approved sequencing principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_coordinated_adviser_assistant",
+            "label": "پیشروی هماهنگ مشاور و دستیار",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1984",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "کار بر مشاور و دستیار با تقدم وابستگی‌ها و به‌صورت برش‌های مرتبط و متناوب پیش می‌رود",
+            "evidence_locator": "§5, lines 1984",
+            "decision_status": "approved sequencing principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_controlled_reuse",
+      "label": "استفاده مجدد کنترل‌شده",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1986",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "استفاده مجدد به معنی موتور واحد اجباری یا دسترسی مستقیم Adviser به داده Core نیست",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1986",
+      "decision_status": "approved boundary",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_controlled_reuse",
+            "label": "استفاده مجدد کنترل‌شده",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1986",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "استفاده مجدد به معنی موتور واحد اجباری یا دسترسی مستقیم Adviser به داده Core نیست",
+            "evidence_locator": "§5, lines 1986",
+            "decision_status": "approved boundary",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_early_uncertainty_tests",
+      "label": "آزمون زودهنگام عدم‌قطعیت‌های دشوار",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1988",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "امکان‌سنجی محدود و زمان‌بندی‌شده Computer Use، کشف فلو، تغییر رابط، OTP، محدودیت وب/Android/iOS و بازیابی عملیات",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1988",
+      "decision_status": "approved discovery principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_early_uncertainty_tests",
+            "label": "آزمون زودهنگام عدم‌قطعیت‌های دشوار",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1988",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "امکان‌سنجی محدود و زمان‌بندی‌شده Computer Use، کشف فلو، تغییر رابط، OTP، محدودیت وب/Android/iOS و بازیابی عملیات",
+            "evidence_locator": "§5, lines 1988",
+            "decision_status": "approved discovery principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+      "label": "برآورد پیش از تعهد",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1992",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هر برش قبل از ورود به چرخه، دارای دامنه، تعداد/پیچیدگی Task، وابستگی، نفرساعت، هفته تقویمی، ظرفیت واقعی، ریسک، حاشیه عدم‌قطعیت، هزینه و برآورد توکن است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1992",
+      "decision_status": "approved; estimates are not commitments without data",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+            "label": "برآورد پیش از تعهد",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1992",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هر برش قبل از ورود به چرخه، دارای دامنه، تعداد/پیچیدگی Task، وابستگی، نفرساعت، هفته تقویمی، ظرفیت واقعی، ریسک، حاشیه عدم‌قطعیت، هزینه و برآورد توکن است",
+            "evidence_locator": "§5, lines 1992",
+            "decision_status": "approved; estimates are not commitments without data",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_build_vs_operate_cost",
+      "label": "تفکیک هزینه ساخت و استفاده",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1994",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هزینه توسعه (انسان، ایجنت کدنویسی، توکن تحلیل/کد/تست/اصلاح، ابزار و آزمون) از هزینه بهره‌برداری",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1994",
+      "decision_status": "approved cost-accounting requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_build_vs_operate_cost",
+            "label": "تفکیک هزینه ساخت و استفاده",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1994",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هزینه توسعه (انسان، ایجنت کدنویسی، توکن تحلیل/کد/تست/اصلاح، ابزار و آزمون) از هزینه بهره‌برداری",
+            "evidence_locator": "§5, lines 1994",
+            "decision_status": "approved cost-accounting requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_capacity_and_discovery",
+      "label": "ظرفیت واقعی و حفظ تحقیق",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1996",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "تعهد هفتگی بر اساس ظرفیت واقعی توسعه، تست و استقرار تعیین می‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1996",
+      "decision_status": "approved capacity principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_capacity_and_discovery",
+            "label": "ظرفیت واقعی و حفظ تحقیق",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1996",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "تعهد هفتگی بر اساس ظرفیت واقعی توسعه، تست و استقرار تعیین می‌شود",
+            "evidence_locator": "§5, lines 1996",
+            "decision_status": "approved capacity principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_estimate_learning_loop",
+      "label": "اصلاح تخمین با شواهد",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1998",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "در پایان هر چرخه، زمان، نفرساعت، توکن، هزینه و خطاهای پیش‌بینی‌شده با مقدار واقعی مقایسه",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1998",
+      "decision_status": "approved process",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_estimate_learning_loop",
+            "label": "اصلاح تخمین با شواهد",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1998",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "در پایان هر چرخه، زمان، نفرساعت، توکن، هزینه و خطاهای پیش‌بینی‌شده با مقدار واقعی مقایسه",
+            "evidence_locator": "§5, lines 1998",
+            "decision_status": "approved process",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_definition_of_done",
+      "label": "تعریف پایان مبتنی بر کارکرد",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2002",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "قابلیت فقط با تکمیل اتصال سرتاسری، تجربه کاربری، آزمون‌های لازم، معیار پذیرش، پایش متناسب، مستندات ضروری و اثبات عملکرد در محیط هدف «انجام‌شده» است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2002",
+      "decision_status": "approved acceptance requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_definition_of_done",
+            "label": "تعریف پایان مبتنی بر کارکرد",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2002",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "قابلیت فقط با تکمیل اتصال سرتاسری، تجربه کاربری، آزمون‌های لازم، معیار پذیرش، پایش متناسب، مستندات ضروری و اثبات عملکرد در محیط هدف «انجام‌شده» است",
+            "evidence_locator": "§5, lines 2002",
+            "decision_status": "approved acceptance requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+      "label": "انتشار ایمن و قابل‌بازگشت",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2004",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هر نسخه باید گیت‌های ریسک R1–R4، RG/REL و F06 متناسب با دامنه را بگذراند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2004",
+      "decision_status": "approved release requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+            "label": "انتشار ایمن و قابل‌بازگشت",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2004",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هر نسخه باید گیت‌های ریسک R1–R4، RG/REL و F06 متناسب با دامنه را بگذراند",
+            "evidence_locator": "§5, lines 2004",
+            "decision_status": "approved release requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_real_user_learning",
+      "label": "یادگیری زیر بار واقعی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2006",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "انتشارهای مجاز در اولین فرصت به کاربران واقعی یا گروه پایلوت می‌رسند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2006",
+      "decision_status": "approved learning requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_real_user_learning",
+            "label": "یادگیری زیر بار واقعی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2006",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "انتشارهای مجاز در اولین فرصت به کاربران واقعی یا گروه پایلوت می‌رسند",
+            "evidence_locator": "§5, lines 2006",
+            "decision_status": "approved learning requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_measured_differentiation",
+      "label": "اثبات تدریجی تمایز",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2008",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "با سناریو و شاخص واقعی (صحت، نرخ موفقیت، مداخله انسانی، زمان و هزینه هر عملیات موفق) ارزیابی می‌شوند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2008",
+      "decision_status": "approved evaluation principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_measured_differentiation",
+            "label": "اثبات تدریجی تمایز",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2008",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "با سناریو و شاخص واقعی (صحت، نرخ موفقیت، مداخله انسانی، زمان و هزینه هر عملیات موفق) ارزیابی می‌شوند",
+            "evidence_locator": "§5, lines 2008",
+            "decision_status": "approved evaluation principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+      "label": "تفکیک مرجع سیاست از برنامه اجرا",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2012",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "سند جامع فاز دوم و اسناد مصوب مرتبط از جمله سند کیف پول، مرجع الزامات باقی می‌مانند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2012",
+      "decision_status": "approved governance rule",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+            "label": "تفکیک مرجع سیاست از برنامه اجرا",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2012",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "سند جامع فاز دوم و اسناد مصوب مرتبط از جمله سند کیف پول، مرجع الزامات باقی می‌مانند",
+            "evidence_locator": "§5, lines 2012",
+            "decision_status": "approved governance rule",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+      "label": "ردیابی دوسویه الزامات",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2014",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "برای هر برش و Task باید شناسه الزام/مصوبه، مالک، وابستگی، نسخه انتشار، آزمون و شاهد پذیرش مشخص باشد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2014",
+      "decision_status": "approved traceability requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+            "label": "ردیابی دوسویه الزامات",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2014",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "برای هر برش و Task باید شناسه الزام/مصوبه، مالک، وابستگی، نسخه انتشار، آزمون و شاهد پذیرش مشخص باشد",
+            "evidence_locator": "§5, lines 2014",
+            "decision_status": "approved traceability requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_change_control_no_duplication",
+      "label": "کنترل تغییر و جلوگیری از تکرار",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2016",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "قبل از ساخت، کد و قابلیت‌های موجود Core/Adviser/زیرساخت بررسی می‌شوند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2016",
+      "decision_status": "approved change-control rule",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_change_control_no_duplication",
+            "label": "کنترل تغییر و جلوگیری از تکرار",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2016",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "قبل از ساخت، کد و قابلیت‌های موجود Core/Adviser/زیرساخت بررسی می‌شوند",
+            "evidence_locator": "§5, lines 2016",
+            "decision_status": "approved change-control rule",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_dynamic_priority_no_silent_scope_change",
+      "label": "اولویت‌بندی پویا بدون تغییر خاموش دامنه",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2018",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "حذف الزام، تغییر معماری، جابه‌جایی گیت یا فعال‌سازی قابلیت مالی بدون تصویب مستقل مجاز نیست",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2018",
+      "decision_status": "approved scope control",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_dynamic_priority_no_silent_scope_change",
+            "label": "اولویت‌بندی پویا بدون تغییر خاموش دامنه",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2018",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "حذف الزام، تغییر معماری، جابه‌جایی گیت یا فعال‌سازی قابلیت مالی بدون تصویب مستقل مجاز نیست",
+            "evidence_locator": "§5, lines 2018",
+            "decision_status": "approved scope control",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+      "label": "سه مرحله مصوب سیاستی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2024",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "سه مرحله مصوب در سطح سیاست — برنامه اجرایی در انتظار گیت",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2024",
+      "decision_status": "approved policy; execution gates remain open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+            "label": "سه مرحله مصوب سیاستی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2024",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "سه مرحله مصوب در سطح سیاست — برنامه اجرایی در انتظار گیت",
+            "evidence_locator": "§5.3, line 2024",
+            "decision_status": "approved policy; execution gates remain open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_release_readiness_vs_stage_completion",
+      "label": "آمادگی انتشار در برابر تکمیل مرحله",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2038-2043",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "دو معیار جداگانه باید تعریف شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2038-2043",
+      "decision_status": "approved distinction",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_release_readiness_vs_stage_completion",
+            "label": "آمادگی انتشار در برابر تکمیل مرحله",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2038-2043",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "دو معیار جداگانه باید تعریف شود",
+            "evidence_locator": "§5, lines 2038-2043",
+            "decision_status": "approved distinction",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+      "label": "معماری ماژولار مصوب A01",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2063",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "Core مونولیت ماژولار و Adviser سرویس مستقل است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2063",
+      "decision_status": "approved architecture; implementation details evolve by stages",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+            "label": "معماری ماژولار مصوب A01",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2063",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "Core مونولیت ماژولار و Adviser سرویس مستقل است",
+            "evidence_locator": "§5, lines 2063",
+            "decision_status": "approved architecture; implementation details evolve by stages",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+      "label": "مالکیت داده و مرز API Core/Adviser",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2063",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "Adviser صرفاً از API نسخه‌دار Core استفاده می‌کند؛ دسترسی مستقیم به جداول Core ممنوع است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2063",
+      "decision_status": "approved boundary",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+            "label": "مالکیت داده و مرز API Core/Adviser",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2063",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "Adviser صرفاً از API نسخه‌دار Core استفاده می‌کند؛ دسترسی مستقیم به جداول Core ممنوع است",
+            "evidence_locator": "§5, lines 2063",
+            "decision_status": "approved boundary",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_contract_gate_a07",
+      "label": "گیت سازگاری قرارداد A07",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2071,2075",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "اصل آزمون قراردادی و گیت سازگاری تصویب شده است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2071,2075",
+      "decision_status": "approved principle; tooling, EOL, Shadow/Canary details open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_contract_gate_a07",
+            "label": "گیت سازگاری قرارداد A07",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2071,2075",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "اصل آزمون قراردادی و گیت سازگاری تصویب شده است",
+            "evidence_locator": "§5, lines 2071,2075",
+            "decision_status": "approved principle; tooling, EOL, Shadow/Canary details open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+      "label": "دامنه مرحله ۱ RAG",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2077-2077",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "در **دامنه مرحله**",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2077-2077",
+      "decision_status": "approved scope; technology and thresholds not yet fixed",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+            "label": "دامنه مرحله ۱ RAG",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2077-2077",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "در **دامنه مرحله**",
+            "evidence_locator": "§5, lines 2077-2077",
+            "decision_status": "approved scope; technology and thresholds not yet fixed",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_superapp_r1_experience",
+      "label": "تجربه سوپراپ R1",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2079-2079",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "دامنه تجربه R1 مصوب است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2079-2079",
+      "decision_status": "approved scope; detailed schedule and acceptance criteria open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_superapp_r1_experience",
+            "label": "تجربه سوپراپ R1",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2079-2079",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "دامنه تجربه R1 مصوب است",
+            "evidence_locator": "§5, lines 2079-2079",
+            "decision_status": "approved scope; detailed schedule and acceptance criteria open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_catalog_stage_scope",
+      "label": "دامنه مرحله ۲ کاتالوگ",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2081-2081",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "داده نامطمئن نباید بی‌صدا به‌عنوان محصول معتبر وارد توصیه‌گر شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2081-2081",
+      "decision_status": "approved quality boundary",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_catalog_stage_scope",
+            "label": "دامنه مرحله ۲ کاتالوگ",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2081-2081",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "داده نامطمئن نباید بی‌صدا به‌عنوان محصول معتبر وارد توصیه‌گر شود",
+            "evidence_locator": "§5, lines 2081-2081",
+            "decision_status": "approved quality boundary",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_assistant_stage_scope",
+      "label": "دامنه مرحله ۳ دستیار",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2083-2083",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هیچ اجرای حساس بدون رضایت و مجوز معتبر مفروض گرفته نشود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2083-2083",
+      "decision_status": "approved safety requirement; platform feasibility open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_assistant_stage_scope",
+            "label": "دامنه مرحله ۳ دستیار",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2083-2083",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هیچ اجرای حساس بدون رضایت و مجوز معتبر مفروض گرفته نشود",
+            "evidence_locator": "§5, lines 2083-2083",
+            "decision_status": "approved safety requirement; platform feasibility open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_delivery_track",
+      "label": "مسیر Delivery",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2087-2087",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "تولید خروجی قابل استفاده، تست پذیرش، انتشار محدود/عمومی، پایش کیفیت و بازگشت ایمن",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2087-2087",
+      "decision_status": "approved execution track",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_delivery_track",
+            "label": "مسیر Delivery",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2087-2087",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "تولید خروجی قابل استفاده، تست پذیرش، انتشار محدود/عمومی، پایش کیفیت و بازگشت ایمن",
+            "evidence_locator": "§5, lines 2087-2087",
+            "decision_status": "approved execution track",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_discovery_risk_track",
+      "label": "مسیر Discovery / Risk Reduction",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2088-2090",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "نتیجه Discovery باید تصمیم Go/No-Go یا اصلاح دامنه باشد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2088-2090",
+      "decision_status": "approved discovery governance",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_discovery_risk_track",
+            "label": "مسیر Discovery / Risk Reduction",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2088-2090",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "نتیجه Discovery باید تصمیم Go/No-Go یا اصلاح دامنه باشد",
+            "evidence_locator": "§5, lines 2088-2090",
+            "decision_status": "approved discovery governance",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_capability_brief_template",
+      "label": "قالب شناسنامه قابلیت قابل انتشار",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2094-2107",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هنوز هیچ فهرست تسک یا شماره User Story تصویب نشده است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2094-2107",
+      "decision_status": "proposed template; task list/story IDs not approved",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_capability_brief_template",
+            "label": "قالب شناسنامه قابلیت قابل انتشار",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2094-2107",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هنوز هیچ فهرست تسک یا شماره User Story تصویب نشده است",
+            "evidence_locator": "§5, lines 2094-2107",
+            "decision_status": "proposed template; task list/story IDs not approved",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_evaluation_metrics_f06",
+      "label": "شاخص‌ها و گیت شواهد F06",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2111-2120",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "آستانه‌ها، گروه آزمایش، زمان‌بندی و مالک شاخص‌ها هنوز برای هر انتشار تعیین نشده‌اند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2111-2120",
+      "decision_status": "metrics proposed; per-release thresholds/owners open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_evaluation_metrics_f06",
+            "label": "شاخص‌ها و گیت شواهد F06",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2111-2120",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "آستانه‌ها، گروه آزمایش، زمان‌بندی و مالک شاخص‌ها هنوز برای هر انتشار تعیین نشده‌اند",
+            "evidence_locator": "§5, lines 2111-2120",
+            "decision_status": "metrics proposed; per-release thresholds/owners open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_four_budget_ledgers",
+      "label": "تفکیک چهار دفتر بودجه",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2124-2124",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "چهار دفتر بودجه توسعه/Discovery، عملیات و مصرف، قابلیت اطمینان (Error Budget مبتنی بر SLO)، و ظرفیت مهار/بازیابی از هم تفکیک می‌شوند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2124-2124",
+      "decision_status": "approved budgeting principle",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_four_budget_ledgers",
+            "label": "تفکیک چهار دفتر بودجه",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2124-2124",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "چهار دفتر بودجه توسعه/Discovery، عملیات و مصرف، قابلیت اطمینان (Error Budget مبتنی بر SLO)، و ظرفیت مهار/بازیابی از هم تفکیک می‌شوند",
+            "evidence_locator": "§5, lines 2124-2124",
+            "decision_status": "approved budgeting principle",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_release_governance_f06",
+      "label": "حاکمیت انتشار مصوب F06",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2128-2128",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "اختیار صدور مجوز انتشار از اختیار توقف اضطراری و بازفعال‌سازی تفکیک می‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2128-2128",
+      "decision_status": "approved governance; no new deployment authorization",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_release_governance_f06",
+            "label": "حاکمیت انتشار مصوب F06",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2128-2128",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "اختیار صدور مجوز انتشار از اختیار توقف اضطراری و بازفعال‌سازی تفکیک می‌شود",
+            "evidence_locator": "§5, lines 2128-2128",
+            "decision_status": "approved governance; no new deployment authorization",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_work_breakdown_and_protocols",
+      "label": "ساختار شکست کار و پروتکل‌های مرجع",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2132-2134",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "این ساختار فقط برای بحث است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2132-2134",
+      "decision_status": "conceptual only; must conform to project protocols",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_work_breakdown_and_protocols",
+            "label": "ساختار شکست کار و پروتکل‌های مرجع",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2132-2134",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "این ساختار فقط برای بحث است",
+            "evidence_locator": "§5, lines 2132-2134",
+            "decision_status": "conceptual only; must conform to project protocols",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_conflict_rule_a01",
+      "label": "قاعده تعارض با اولویت A01",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2140-2140",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "تصمیم مصوب A01 بر تفسیر معماری هدف حاکم است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2140-2140",
+      "decision_status": "approved conflict rule",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_conflict_rule_a01",
+            "label": "قاعده تعارض با اولویت A01",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2140-2140",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "تصمیم مصوب A01 بر تفسیر معماری هدف حاکم است",
+            "evidence_locator": "§5, lines 2140-2140",
+            "decision_status": "approved conflict rule",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+      "label": "موضوعات باز مالی FD-01 تا FD-03",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2144-2152",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هیچ‌یک از سه موضوع زیر **در اولین انتشار RAG قرار ندارند**",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2144-2152",
+      "decision_status": "scope exclusion approved; later timing/sequence open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+            "label": "موضوعات باز مالی FD-01 تا FD-03",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2144-2152",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هیچ‌یک از سه موضوع زیر **در اولین انتشار RAG قرار ندارند**",
+            "evidence_locator": "§5, lines 2144-2152",
+            "decision_status": "scope exclusion approved; later timing/sequence open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_dynamic_pricing_fd04",
+      "label": "موضوع باز قیمت‌گذاری پویا FD-04",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2154-2154",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "موارد باز صرفاً معیار و ضرایب عددی سنجش مصرف، مدل هزینه و قیمت، تعرفه‌های عددی، جزئیات اجرایی صریحاً باز و زمان عرضه‌اند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2154-2154",
+      "decision_status": "open details; approved wallet principles are not reopened",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "SUPPORTED",
+        "basis": "no_owner_recorded"
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_dynamic_pricing_fd04",
+            "label": "موضوع باز قیمت‌گذاری پویا FD-04",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "2154-2154",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "موارد باز صرفاً معیار و ضرایب عددی سنجش مصرف، مدل هزینه و قیمت، تعرفه‌های عددی، جزئیات اجرایی صریحاً باز و زمان عرضه‌اند",
+            "evidence_locator": "§5, lines 2154-2154",
+            "decision_status": "open details; approved wallet principles are not reopened",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_valuable_slice_priority",
+      "target": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1974-1976",
+      "weight": 1.0,
+      "evidence_quote": "قبل از ترتیب انتشار، نقشه وابستگی قابلیت‌ها",
+      "evidence_locator": "§5, lines 1974-1976",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_valuable_slice_priority",
+          "target": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1974-1976",
+          "weight": 1.0,
+          "evidence_quote": "قبل از ترتیب انتشار، نقشه وابستگی قابلیت‌ها",
+          "evidence_locator": "§5, lines 1974-1976",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+      "target": "docs_shahab_phase_2_development_blueprint_just_enough_infrastructure",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1976-1978",
+      "weight": 1.0,
+      "evidence_quote": "قابلیت پایه مشترک در نخستین نقطه نیاز و با مصرف‌کننده واقعی ساخته می‌شود",
+      "evidence_locator": "§5, lines 1976-1978",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_real_dependencies_first",
+          "target": "docs_shahab_phase_2_development_blueprint_just_enough_infrastructure",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1976-1978",
+          "weight": 1.0,
+          "evidence_quote": "قابلیت پایه مشترک در نخستین نقطه نیاز و با مصرف‌کننده واقعی ساخته می‌شود",
+          "evidence_locator": "§5, lines 1976-1978",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_coordinated_adviser_assistant",
+      "target": "docs_shahab_phase_2_development_blueprint_controlled_reuse",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1984-1986",
+      "weight": 1.0,
+      "evidence_quote": "هویت، مجوز، مشاهده‌پذیری، قرارداد و زیرساخت مشترک در مالک مناسب توسعه می‌یابند",
+      "evidence_locator": "§5, lines 1984-1986",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_coordinated_adviser_assistant",
+          "target": "docs_shahab_phase_2_development_blueprint_controlled_reuse",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1984-1986",
+          "weight": 1.0,
+          "evidence_quote": "هویت، مجوز، مشاهده‌پذیری، قرارداد و زیرساخت مشترک در مالک مناسب توسعه می‌یابند",
+          "evidence_locator": "§5, lines 1984-1986",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_early_uncertainty_tests",
+      "target": "docs_shahab_phase_2_development_blueprint_weekly_value_release",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1988",
+      "weight": 1.0,
+      "evidence_quote": "PoC و Discovery جایگزین انتشار هفتگی قابل‌استفاده نیستند",
+      "evidence_locator": "§5, lines 1988",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_early_uncertainty_tests",
+          "target": "docs_shahab_phase_2_development_blueprint_weekly_value_release",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1988",
+          "weight": 1.0,
+          "evidence_quote": "PoC و Discovery جایگزین انتشار هفتگی قابل‌استفاده نیستند",
+          "evidence_locator": "§5, lines 1988",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+      "target": "docs_shahab_phase_2_development_blueprint_build_vs_operate_cost",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1992-1994",
+      "weight": 1.0,
+      "evidence_quote": "مستقل برآورد و پایش می‌شود",
+      "evidence_locator": "§5, lines 1992-1994",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+          "target": "docs_shahab_phase_2_development_blueprint_build_vs_operate_cost",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1992-1994",
+          "weight": 1.0,
+          "evidence_quote": "مستقل برآورد و پایش می‌شود",
+          "evidence_locator": "§5, lines 1992-1994",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_capacity_and_discovery",
+      "target": "docs_shahab_phase_2_development_blueprint_estimate_learning_loop",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1996-1998",
+      "weight": 1.0,
+      "evidence_quote": "در پایان هر چرخه، زمان، نفرساعت، توکن، هزینه و خطاهای پیش‌بینی‌شده با مقدار واقعی مقایسه",
+      "evidence_locator": "§5, lines 1996-1998",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_capacity_and_discovery",
+          "target": "docs_shahab_phase_2_development_blueprint_estimate_learning_loop",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1996-1998",
+          "weight": 1.0,
+          "evidence_quote": "در پایان هر چرخه، زمان، نفرساعت، توکن، هزینه و خطاهای پیش‌بینی‌شده با مقدار واقعی مقایسه",
+          "evidence_locator": "§5, lines 1996-1998",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_definition_of_done",
+      "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1966",
+      "weight": 1.0,
+      "evidence_quote": "استقرار واقعی به عبور از گیت‌های مصوب وابسته است",
+      "evidence_locator": "§5, lines 1966",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_definition_of_done",
+          "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1966",
+          "weight": 1.0,
+          "evidence_quote": "استقرار واقعی به عبور از گیت‌های مصوب وابسته است",
+          "evidence_locator": "§5, lines 1966",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+      "target": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2012-2014",
+      "weight": 1.0,
+      "evidence_quote": "برای هر برش و Task باید شناسه الزام/مصوبه، مالک، وابستگی، نسخه انتشار، آزمون و شاهد پذیرش مشخص باشد",
+      "evidence_locator": "§5, lines 2012-2014",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+          "target": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2012-2014",
+          "weight": 1.0,
+          "evidence_quote": "برای هر برش و Task باید شناسه الزام/مصوبه، مالک، وابستگی، نسخه انتشار، آزمون و شاهد پذیرش مشخص باشد",
+          "evidence_locator": "§5, lines 2012-2014",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_change_control_no_duplication",
+      "target": "docs_shahab_phase_2_development_blueprint_dynamic_priority_no_silent_scope_change",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2016-2018",
+      "weight": 1.0,
+      "evidence_quote": "حذف الزام، تغییر معماری، جابه‌جایی گیت یا فعال‌سازی قابلیت مالی بدون تصویب مستقل مجاز نیست",
+      "evidence_locator": "§5, lines 2016-2018",
+      "decision_status": "OWNER_APPROVED_IMPLEMENTATION_PRINCIPLE_EXECUTION_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_change_control_no_duplication",
+          "target": "docs_shahab_phase_2_development_blueprint_dynamic_priority_no_silent_scope_change",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2016-2018",
+          "weight": 1.0,
+          "evidence_quote": "حذف الزام، تغییر معماری، جابه‌جایی گیت یا فعال‌سازی قابلیت مالی بدون تصویب مستقل مجاز نیست",
+          "evidence_locator": "§5, lines 2016-2018",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+      "target": "docs_shahab_phase_2_development_blueprint_release_readiness_vs_stage_completion",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2043",
+      "weight": 1.0,
+      "evidence_quote": "**این مثال نه تقسیم‌بندی قطعی فصل اول است و نه اجازه حذف هر جزء از پایان مرحله.**",
+      "evidence_locator": "§5, lines 2043",
+      "decision_status": "POLICY_STAGES_APPROVED_RELEASE_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+          "target": "docs_shahab_phase_2_development_blueprint_release_readiness_vs_stage_completion",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2043",
+          "weight": 1.0,
+          "evidence_quote": "**این مثال نه تقسیم‌بندی قطعی فصل اول است و نه اجازه حذف هر جزء از پایان مرحله.**",
+          "evidence_locator": "§5, lines 2043",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+      "target": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2063",
+      "weight": 1.0,
+      "evidence_quote": "مالکیت داده در A02 تفکیک شده و Adviser صرفاً از API نسخه‌دار Core استفاده می‌کند",
+      "evidence_locator": "§5, lines 2063",
+      "decision_status": "A01_A02_POLICY_APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+          "target": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2063",
+          "weight": 1.0,
+          "evidence_quote": "مالکیت داده در A02 تفکیک شده و Adviser صرفاً از API نسخه‌دار Core استفاده می‌کند",
+          "evidence_locator": "§5, lines 2063",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_contract_gate_a07",
+      "target": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2075",
+      "weight": 1.0,
+      "evidence_quote": "انتشار مستقل Core/Adviser مشروط به آزمون قرارداد مصرف‌کننده",
+      "evidence_locator": "§5, lines 2075",
+      "decision_status": "A07_POLICY_APPROVED_TECHNICAL_CHOICES_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_contract_gate_a07",
+          "target": "docs_shahab_phase_2_development_blueprint_ownership_boundary_a02",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2075",
+          "weight": 1.0,
+          "evidence_quote": "انتشار مستقل Core/Adviser مشروط به آزمون قرارداد مصرف‌کننده",
+          "evidence_locator": "§5, lines 2075",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+      "target": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2024-2028",
+      "weight": 1.0,
+      "evidence_quote": "پیاده‌سازی تمام دامنه فصل اول",
+      "evidence_locator": "§5, lines 2024-2028",
+      "decision_status": "POLICY_STAGES_APPROVED_RELEASE_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+          "target": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2024-2028",
+          "weight": 1.0,
+          "evidence_quote": "پیاده‌سازی تمام دامنه فصل اول",
+          "evidence_locator": "§5, lines 2024-2028",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+      "target": "docs_shahab_phase_2_development_blueprint_catalog_stage_scope",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2024-2029",
+      "weight": 1.0,
+      "evidence_quote": "گسترش چرخه واحد کاتالوگ محصولات و خدمات مالی",
+      "evidence_locator": "§5, lines 2024-2029",
+      "decision_status": "POLICY_STAGES_APPROVED_RELEASE_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+          "target": "docs_shahab_phase_2_development_blueprint_catalog_stage_scope",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2024-2029",
+          "weight": 1.0,
+          "evidence_quote": "گسترش چرخه واحد کاتالوگ محصولات و خدمات مالی",
+          "evidence_locator": "§5, lines 2024-2029",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+      "target": "docs_shahab_phase_2_development_blueprint_assistant_stage_scope",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2030",
+      "weight": 1.0,
+      "evidence_quote": "پیاده‌سازی Computer Use برای **یک نوع خدمت**",
+      "evidence_locator": "§5, lines 2030",
+      "decision_status": "POLICY_STAGES_APPROVED_RELEASE_DETAILS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_three_policy_stages",
+          "target": "docs_shahab_phase_2_development_blueprint_assistant_stage_scope",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2030",
+          "weight": 1.0,
+          "evidence_quote": "پیاده‌سازی Computer Use برای **یک نوع خدمت**",
+          "evidence_locator": "§5, lines 2030",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+      "target": "docs_shahab_phase_2_development_blueprint_superapp_r1_experience",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2077-2079",
+      "weight": 1.0,
+      "evidence_quote": "پرسشنامه و نتایج توصیه‌گر در Adviser تعبیه شوند و محاسبه قطعی در Core بماند",
+      "evidence_locator": "§5, lines 2077-2079",
+      "decision_status": "R1_EXPERIENCE_SCOPE_APPROVED_SCHEDULE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_rag_stage_scope",
+          "target": "docs_shahab_phase_2_development_blueprint_superapp_r1_experience",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2077-2079",
+          "weight": 1.0,
+          "evidence_quote": "پرسشنامه و نتایج توصیه‌گر در Adviser تعبیه شوند و محاسبه قطعی در Core بماند",
+          "evidence_locator": "§5, lines 2077-2079",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 2028,
+          "quote": "**پیاده‌سازی تمام دامنه فصل اول** درباره RAG، نه فقط نمونه اولیه بازیابی؛ همراه با تغییر تجربه صفحه نخست به سوپراپ مالی، انتخاب حوزه، نمایش مشاور فعال و دستیار غیرفعال/«به‌زودی»"
+        }
+      ]
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_delivery_track",
+      "target": "docs_shahab_phase_2_development_blueprint_discovery_risk_track",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2087-2090",
+      "weight": 1.0,
+      "evidence_quote": "این دو مسیر می‌توانند هم‌پوشانی زمانی داشته باشند",
+      "evidence_locator": "§5, lines 2087-2090",
+      "decision_status": "PARALLEL_TRACKS_SPECIFIED_SCHEDULE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Source passage, table or diagram explicitly associates the named concepts in context; retain approval/open boundaries of the passage.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_delivery_track",
+          "target": "docs_shahab_phase_2_development_blueprint_discovery_risk_track",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2087-2090",
+          "weight": 1.0,
+          "evidence_quote": "این دو مسیر می‌توانند هم‌پوشانی زمانی داشته باشند",
+          "evidence_locator": "§5, lines 2087-2090",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_capability_brief_template",
+      "target": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2101",
+      "weight": 1.0,
+      "evidence_quote": "پیش‌نیازهای فنی، داده، قانونی و قراردادی؛ تفکیک سخت/نرم",
+      "evidence_locator": "§5.8, line 2101",
+      "decision_status": "RELEASE_BRIEF_CONCEPT_TASKS_NOT_APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_capability_brief_template",
+          "target": "docs_shahab_phase_2_development_blueprint_bidirectional_requirement_traceability",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2101",
+          "weight": 1.0,
+          "evidence_quote": "پیش‌نیازهای فنی، داده، قانونی و قراردادی؛ تفکیک سخت/نرم",
+          "evidence_locator": "§5.8, line 2101",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_evaluation_metrics_f06",
+      "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2120",
+      "weight": 1.0,
+      "evidence_quote": "برای هر انتشار باید علاوه بر شاخص‌های این جدول، پرونده شواهد دامنه/ارزش، سطح ریسک R1–R4",
+      "evidence_locator": "§5, lines 2120",
+      "decision_status": "F06_POLICY_APPROVED_RELEASE_EVIDENCE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_evaluation_metrics_f06",
+          "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2120",
+          "weight": 1.0,
+          "evidence_quote": "برای هر انتشار باید علاوه بر شاخص‌های این جدول، پرونده شواهد دامنه/ارزش، سطح ریسک R1–R4",
+          "evidence_locator": "§5, lines 2120",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_four_budget_ledgers",
+      "target": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2124",
+      "weight": 1.0,
+      "evidence_quote": "برای هر انتشار، آستانه هشدار، سقف عملیاتی، سقف سخت تعهد، مسئول و اختیار افزایش بودجه",
+      "evidence_locator": "§5, lines 2124",
+      "decision_status": "BUDGET_GOVERNANCE_AMOUNTS_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_four_budget_ledgers",
+          "target": "docs_shahab_phase_2_development_blueprint_estimate_before_commitment",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2124",
+          "weight": 1.0,
+          "evidence_quote": "برای هر انتشار، آستانه هشدار، سقف عملیاتی، سقف سخت تعهد، مسئول و اختیار افزایش بودجه",
+          "evidence_locator": "§5, lines 2124",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_release_governance_f06",
+      "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2128",
+      "weight": 1.0,
+      "evidence_quote": "مالک انتشار در چارچوب عبور از گیت‌های مصوب و بودجه مجاز",
+      "evidence_locator": "§5, lines 2128",
+      "decision_status": "F06_POLICY_APPROVED_RELEASE_EVIDENCE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_release_governance_f06",
+          "target": "docs_shahab_phase_2_development_blueprint_safe_reversible_release",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2128",
+          "weight": 1.0,
+          "evidence_quote": "مالک انتشار در چارچوب عبور از گیت‌های مصوب و بودجه مجاز",
+          "evidence_locator": "§5, lines 2128",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_work_breakdown_and_protocols",
+      "target": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2132",
+      "weight": 1.0,
+      "evidence_quote": "این ساختار فقط برای بحث است",
+      "evidence_locator": "§5, lines 2132",
+      "decision_status": "CONCEPT_FOR_DISCUSSION_NOT_APPROVED_TASKS",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Both ideas occur in the source and are plausibly related, but the cited quote does not explicitly assert this relationship between these two graph nodes; keep as inference only.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_work_breakdown_and_protocols",
+          "target": "docs_shahab_phase_2_development_blueprint_policy_vs_execution_plan",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2132",
+          "weight": 1.0,
+          "evidence_quote": "این ساختار فقط برای بحث است",
+          "evidence_locator": "§5, lines 2132",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_conflict_rule_a01",
+      "target": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2140",
+      "weight": 1.0,
+      "evidence_quote": "تصمیم مصوب A01 بر تفسیر معماری هدف حاکم است",
+      "evidence_locator": "§5, lines 2140",
+      "decision_status": "A01_APPROVED_PREVAILS_OVER_HISTORICAL_OPTIONS",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Line 2140 explicitly states approved A01 prevails over historical architecture interpretations.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_conflict_rule_a01",
+          "target": "docs_shahab_phase_2_development_blueprint_modular_architecture_a01",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2140",
+          "weight": 1.0,
+          "evidence_quote": "تصمیم مصوب A01 بر تفسیر معماری هدف حاکم است",
+          "evidence_locator": "§5, lines 2140",
+          "decision_status": "explicit relationship"
+        }
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+      "target": "docs_shahab_phase_2_development_blueprint_dynamic_pricing_fd04",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "2152",
+      "weight": 1.0,
+      "evidence_quote": "کیف پول پیش‌نیاز پیش‌فرض فروش اشتراک نیست",
+      "evidence_locator": "§5, lines 2152",
+      "decision_status": "FINANCIAL_POLICY_AND_EXECUTION_OPEN_ITEMS_SEPARATE_RELATION_AMBIGUOUS",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The quoted passage does not establish the asserted pair; the apparent connection could refer to a different object or only share context. Retain as an unresolved candidate, not a requirement.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+          "target": "docs_shahab_phase_2_development_blueprint_dynamic_pricing_fd04",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "2152",
+          "weight": 1.0,
+          "evidence_quote": "کیف پول پیش‌نیاز پیش‌فرض فروش اشتراک نیست",
+          "evidence_locator": "§5, lines 2152",
+          "decision_status": "explicit relationship"
+        }
+      }
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": 196
+  },
+  "coverage_range": {
+    "start_line": 1960,
+    "end_line": 2155
+  },
+  "coverage_manifest": [
+    {
+      "type": "heading",
+      "label": "§5.2.1 اصول پیاده‌سازی نرم‌افزار",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1960,
+      "end_line": 1960
+    },
+    {
+      "type": "heading",
+      "label": "§5.3 سه مرحله مصوب",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2024,
+      "end_line": 2024
+    },
+    {
+      "type": "heading",
+      "label": "§5.4 دامنه مرحله و انتشار تدریجی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2036,
+      "end_line": 2036
+    },
+    {
+      "type": "heading",
+      "label": "§5.5 تحقق معماری A01",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2061,
+      "end_line": 2061
+    },
+    {
+      "type": "heading",
+      "label": "§5.6 محتوای تخصصی مراحل",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2073,
+      "end_line": 2073
+    },
+    {
+      "type": "heading",
+      "label": "§5.7 مسیرهای اجرا و تحقیق",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2085,
+      "end_line": 2085
+    },
+    {
+      "type": "heading",
+      "label": "§5.8 قالب قابلیت قابل انتشار",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2092,
+      "end_line": 2092
+    },
+    {
+      "type": "heading",
+      "label": "§5.9 شاخص‌ها و دروازه‌های تصمیم",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2109,
+      "end_line": 2109
+    },
+    {
+      "type": "heading",
+      "label": "§5.10 هزینه و استفاده مجدد",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2122,
+      "end_line": 2122
+    },
+    {
+      "type": "heading",
+      "label": "§5.11 WBS و فرایند پروژه",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2130,
+      "end_line": 2130
+    },
+    {
+      "type": "heading",
+      "label": "§5.12 تغییرات و تعارض",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2136,
+      "end_line": 2136
+    },
+    {
+      "type": "heading",
+      "label": "§5.12.1 موضوعات باز مالی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2142,
+      "end_line": 2142
+    },
+    {
+      "type": "table",
+      "label": "جدول سه مرحله سیاستی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2026,
+      "end_line": 2030,
+      "decision_status": "all rows and cells covered"
+    },
+    {
+      "type": "table",
+      "label": "جدول تمرکز معماری برحسب مرحله",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2065,
+      "end_line": 2069,
+      "decision_status": "all rows and cells covered"
+    },
+    {
+      "type": "table",
+      "label": "جدول شناسنامه قابلیت",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2096,
+      "end_line": 2107,
+      "decision_status": "all rows and cells covered"
+    },
+    {
+      "type": "table",
+      "label": "جدول شاخص‌های ارزیابی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2111,
+      "end_line": 2118,
+      "decision_status": "all rows and cells covered"
+    },
+    {
+      "type": "table",
+      "label": "جدول FD-01 تا FD-03",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2146,
+      "end_line": 2150,
+      "decision_status": "all rows and cells covered"
+    },
+    {
+      "type": "decision",
+      "label": "وضعیت و قیود اصول ۵.۲.۱",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1962,
+      "end_line": 1962,
+      "decision_status": "approved principles; schedule, budget, backlog independently estimated and approved"
+    },
+    {
+      "type": "decision",
+      "label": "اصول اجرایی شماره‌دار ۱ تا ۲۲",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1966,
+      "end_line": 2020,
+      "decision_status": "approved operating, architecture, estimation, quality, governance principles"
+    },
+    {
+      "type": "decision",
+      "label": "شرط ورود به برنامه هفتگی و گیت نقشه راه",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2022,
+      "end_line": 2022,
+      "decision_status": "approval follows code/doc review, capacity, estimates"
+    },
+    {
+      "type": "decision",
+      "label": "مرزهای مراحل و جایگاه رابط سوپراپ",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2032,
+      "end_line": 2034,
+      "decision_status": "policy boundaries approved; component placement/timing open"
+    },
+    {
+      "type": "decision",
+      "label": "تمایز Release Readiness و Stage Completion و تفسیر ترتیب مراحل",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2038,
+      "end_line": 2059,
+      "decision_status": "approved distinction; stage examples are non-binding"
+    },
+    {
+      "type": "decision",
+      "label": "معماری A01/A02/A07 و پرسش‌های اجرایی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2063,
+      "end_line": 2071,
+      "decision_status": "architecture boundaries approved; tooling and timing open"
+    },
+    {
+      "type": "decision",
+      "label": "مرز داده R1 و محتوای تخصصی مرحله‌های ۱ تا ۳",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2075,
+      "end_line": 2083,
+      "decision_status": "approved constraints; feasibility and detailed acceptance remain to be tested"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم Go/No-Go یا اصلاح دامنه برای Discovery",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2090,
+      "end_line": 2090,
+      "decision_status": "approved decision output"
+    },
+    {
+      "type": "decision",
+      "label": "وضعیت عدم تصویب Task/User Story و اجزای شناسنامه",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2094,
+      "end_line": 2107,
+      "decision_status": "proposed template only; task list and story numbers not approved"
+    },
+    {
+      "type": "decision",
+      "label": "نگاشت پرونده شواهد به گیت‌های REL",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2120,
+      "end_line": 2120,
+      "decision_status": "approved mapping; thresholds and owners per release open"
+    },
+    {
+      "type": "decision",
+      "label": "بودجه، کنترل دامنه و اختیار توقف/بازفعال‌سازی F06",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2124,
+      "end_line": 2128,
+      "decision_status": "approved governance principles; not authorization for a new deployment"
+    },
+    {
+      "type": "decision",
+      "label": "الگوی WBS و ارجاع به پروتکل‌های پروژه",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2132,
+      "end_line": 2134,
+      "decision_status": "concept only; creation and timing governed by cited project protocols"
+    },
+    {
+      "type": "decision",
+      "label": "رتروسپکتیو و قاعده حل تعارض",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2138,
+      "end_line": 2140,
+      "decision_status": "draft remains until review; A01 governs stated architecture conflict"
+    },
+    {
+      "type": "decision",
+      "label": "مرز و وضعیت تصمیم‌های مالی FD-01…FD-04",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 2144,
+      "end_line": 2154,
+      "decision_status": "RAG exclusion approved; later timing open; FD-04 specifics open"
+    }
+  ]
+}

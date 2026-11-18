@@ -1,0 +1,2481 @@
+{
+  "scope": "first 100 edges in GSEM-014 through GSEM-017, preserving chunk order",
+  "method": "independent source and endpoint review; unreviewed are explicit; inference is not policy approval",
+  "edges": [
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_wallet_purpose_and_value_rights",
+      "target": "docs_shahab_digital_wallet_wallet_balance_tranche_example",
+      "source_label": "هدف کیف پول: منشأ پول و حق مصرف",
+      "target_label": "مثال نقدی و هدیه با حق برداشت متفاوت",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L11 explicitly gives the cash/gift example, different withdrawal rights, and keeping origin and rights.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 11,
+          "quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_shahab_policy_vs_external_reference",
+      "target": "docs_shahab_digital_wallet_wallet_internal_shahab_acceptance",
+      "source_label": "تفکیک تصمیم شهاب از منبع خارجی",
+      "target_label": "مصرف اعتبار فقط برای خدمات خود شهاب",
+      "original_relation": "rationale_for",
+      "original_confidence": "EXTRACTED",
+      "verdict": "AMBIGUOUS",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "AMBIGUOUS",
+      "recommended_score": 0.2,
+      "reason": "L33 concerns correct attribution of nonwithdrawability and external sources; it does not establish a rationale for the separate closed-loop-only spending policy. Remove or retain as unresolved, not EXTRACTED rationale.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 33,
+          "quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_77",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "شناسه و مالک کیف پول",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 77,
+          "quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_78",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "نمایش موجودی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 78,
+          "quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_79",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "شارژ",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 79,
+          "quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_80",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "پرداخت و کسر هزینه",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 80,
+          "quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_81",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "تاریخچهٔ تراکنش‌ها",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 81,
+          "quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_82",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "رسید و جزئیات عملیات",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 82,
+          "quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_83",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "اصلاح و بازگشت اعتبار",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 83,
+          "quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_84",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "امنیت و کنترل دسترسی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 84,
+          "quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_85",
+      "source_label": "جدول قابلیت‌های پایه",
+      "target_label": "پشتیبانی و پیگیری اختلاف",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 85,
+          "quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_91",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "رزرو موقت مبلغ",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 91,
+          "quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_92",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "برداشت به حساب بانکی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 92,
+          "quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_93",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "انتقال بین کاربران",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 93,
+          "quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_94",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "اعتبار هدیه و تخفیفی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 94,
+          "quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_95",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "شارژ خودکار",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 95,
+          "quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_96",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "پرداخت دوره‌ای",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 96,
+          "quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_97",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "کیف پول سازمانی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 97,
+          "quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_98",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "سقف و محدودیت مصرف",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 98,
+          "quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_99",
+      "source_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "target_label": "اعلان‌ها",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 99,
+          "quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_105",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "دفترکل مالی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 105,
+          "quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_106",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "مدیریت وضعیت تراکنش",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 106,
+          "quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 22,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_107",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "جلوگیری از ثبت تکراری",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 107,
+          "quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 23,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_108",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "کنترل مصرف هم‌زمان",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 108,
+          "quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 24,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_109",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "موتور محاسبهٔ هزینه",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 109,
+          "quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 25,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_110",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "تطبیق مالی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 110,
+          "quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 26,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_111",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "ثبت سوابق و نظارت",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 111,
+          "quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 27,
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_112",
+      "source_label": "جدول زیرساخت‌های پشت صحنه",
+      "target_label": "بازیابی پس از خطا",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The cited table row explicitly contains the target capability within the source capability table; this is document membership and does not establish a release date or deployed implementation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 112,
+          "quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 28,
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_base_feature_table",
+      "source_label": "دامنه شامل ۲۶ قابلیت انتخابی",
+      "target_label": "جدول قابلیت‌های پایه",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "Wallet L69-L71 explicitly identify the three tables as the 26 selected product capabilities; the cited heading points to the respective table. This is scope, not a delivery date.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 75,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند.",
+          "purpose": "supplemental context; see reason"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند.",
+          "purpose": "supplemental context; see reason"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 29,
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "source_label": "دامنه شامل ۲۶ قابلیت انتخابی",
+      "target_label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "Wallet L69-L71 explicitly identify the three tables as the 26 selected product capabilities; the cited heading points to the respective table. This is scope, not a delivery date.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 89,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند.",
+          "purpose": "supplemental context; see reason"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند.",
+          "purpose": "supplemental context; see reason"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 30,
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "source_label": "دامنه شامل ۲۶ قابلیت انتخابی",
+      "target_label": "جدول زیرساخت‌های پشت صحنه",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "Wallet L69-L71 explicitly identify the three tables as the 26 selected product capabilities; the cited heading points to the respective table. This is scope, not a delivery date.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 103,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند.",
+          "purpose": "supplemental context; see reason"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند.",
+          "purpose": "supplemental context; see reason"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 31,
+      "source": "docs_shahab_digital_wallet_phased_release_order",
+      "target": "docs_shahab_digital_wallet_selected_feature_count",
+      "source_label": "ترتیب عرضه مرحله‌ای قابلیت‌ها",
+      "target_label": "دامنه شامل ۲۶ قابلیت انتخابی",
+      "original_relation": "rationale_for",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L120 states both staged rollout and whole-product scope, but does not state that staged rollout is the rationale for inclusion; use conceptual association with no causal claim.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 120,
+          "quote": "همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 32,
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_wallet_vs_ledger_accounts",
+      "source_label": "مالکیت کیف پول شخصی و سازمانی",
+      "target_label": "کیف پول نمایشی با حساب‌های داخلی یکی نیست",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "INFERRED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L136 and L138 distinguish legal wallet ownership from displayed wallet/internal accounts; their linkage is conceptual, without an explicit dependency.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 138,
+          "quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 33,
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_organization_financial_activation",
+      "source_label": "مالکیت کیف پول شخصی و سازمانی",
+      "target_label": "فعال‌سازی مالی سازمان پس از قرارداد و احراز",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L136 states organization wallet ownership and L156 states onboarding requirements; association is by same organization, not a direct reference between the rules.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 156,
+          "quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 34,
+      "source": "docs_shahab_digital_wallet_natural_person_identity_verification",
+      "target": "docs_shahab_digital_wallet_organization_financial_activation",
+      "source_label": "شناسایی معمول شخص حقیقی با OTP و شاهکار",
+      "target_label": "فعال‌سازی مالی سازمان پس از قرارداد و احراز",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "INFERRED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L168 natural-person OTP/Shahkar and L156 organization contract are separate identity procedures; no dependency between them is asserted.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 168,
+          "quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 35,
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_multi_organization_membership",
+      "source_label": "مالکیت کیف پول شخصی و سازمانی",
+      "target_label": "عضویت یک شخص در چند سازمان با جدایی دسترسی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L180 describes personal membership in multiple organizations; relation to the L136 wallet ownership model is contextual, not a direct reference.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 180,
+          "quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-014",
+      "edge_index": 36,
+      "source": "docs_shahab_digital_wallet_multi_organization_membership",
+      "target": "docs_shahab_digital_wallet_organization_member_invitation_acceptance",
+      "source_label": "عضویت یک شخص در چند سازمان با جدایی دسترسی",
+      "target_label": "فعال‌شدن عضو پس از احراز و پذیرش دعوت",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L196 states membership activation; its conceptual association with L180 multi-organization membership is not an explicit direct reference.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 196,
+          "quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_former_member_receipt_access",
+      "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "source_label": "Former Member Receipt Access",
+      "target_label": "Wallet Actor Permissions Table",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L212 references sections 8 and 10, but the chosen target is the permissions table in section 3.3; it does not explicitly refer to that particular table.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 212,
+          "quote": "**ارتباط با بخش‌های دیگر:** کنترل دسترسی بخش ۸ و تاریخچهٔ بخش ۱۰ این مرز را اعمال می‌کنند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "source_label": "Single Organization Admin Role",
+      "target_label": "Wallet Actor Permissions Table",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L220 defines the sole admin role; the target is a permissions table, and no software implementation is asserted. Replace implements with conceptual linkage; do not claim deployed capability.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 220,
+          "quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "target": "docs_shahab_digital_wallet_organization_admin_authority_and_server_enforcement",
+      "source_label": "Wallet Actor Permissions Table",
+      "target_label": "Organization Admin Authority and Server-Side Enforcement",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L225 lists admin powers and L230 illustrates server-side boundaries; relating the table to this example is contextual, without an explicit table-to-example reference.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 230,
+          "quote": "**مثال:** ادمین می‌تواند سقف مصرف کارمند را از ۵۰۰ هزار به یک میلیون تومان تغییر دهد؛ لازم نیست فرد دیگری این تغییر را تأیید کند. او به کیف پول شخصی کارمند یا کیف پول سازمان دیگر دسترسی مدیریتی ندارد. کنترل این مرزها باید در سرور انجام شود، نه فقط با مخفی‌کردن دکمه‌ها."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 225,
+          "quote": "| ادمین سازمان | اعضا و دسترسی‌ها را مدیریت کند؛ شارژ، تخصیص بودجه و سقف، مشاهدهٔ گزارش، انتقال و برداشت مجاز سازمان را انجام دهد |",
+          "purpose": "table row for admin permissions"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+      "source_label": "Single Organization Admin Role",
+      "target_label": "Multiple Equal Admins and Action Audit",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 244,
+          "quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+      "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+      "source_label": "Multiple Equal Admins and Action Audit",
+      "target_label": "Admin Replacement and Account Closure",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "INFERRED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L260 refers to sections 8 and 9, not explicitly to the separate equal-admin rule; shared admin lifecycle is an inference.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 260,
+          "quote": "**ارتباط با بخش‌های دیگر:** روش و مدارک بازیابی جزئیات اجرایی‌اند؛ احراز حساس بخش ۸ و تسویهٔ بخش ۹ مبنا هستند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+      "source_label": "Single Organization Admin Role",
+      "target_label": "Admin Replacement and Account Closure",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L256 describes admin transfer/closure and L220 defines the role; their association is conceptual, not an explicit reference to L220.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 256,
+          "quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_employee_spending_limit_and_free_org_balance",
+      "source_label": "Organization Budget Is Spending Permission, Not Personal Funds",
+      "target_label": "Employee Spending Requires Both Available Organization Balance and Remaining Limit",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L268 explicitly states both organization-held funds and concurrent available-balance and employee-limit checks; the \"implements\" predicate should be \"references\" or a dedicated contains-rule predicate, not a claim of deployed code.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 268,
+          "quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+      "source_label": "Organization Budget Is Spending Permission, Not Personal Funds",
+      "target_label": "Spending Permission Carryover",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 284,
+          "quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+      "source_label": "Organization Budget Is Spending Permission, Not Personal Funds",
+      "target_label": "Refund Restores Originating Period Capacity Only",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L274 explicitly ties the organization budget rule to subsequent carryover and refund rules; L296 states the refund rule. Preserve that closed-period handling remains a design issue at L300.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 296,
+          "quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 274,
+          "quote": "**وضعیت تصمیم:** بودجه فقط مجوز مصرف و بدون پشتوانهٔ موجودی اختصاصی است. دوره‌ها و ترکیب سقف‌ها در ۶.۸ و مانده و استرداد در ادامه مصوب‌اند؛ ادمین تعیین‌کنندهٔ مقادیر است.",
+          "purpose": "supplemental context; see reason"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+      "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+      "source_label": "Refund Restores Originating Period Capacity Only",
+      "target_label": "Spending Permission Carryover",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 300,
+          "quote": "**ارتباط با بخش‌های دیگر:** انتقال ماندهٔ مجوز قاعدهٔ مستقلی است؛ جزئیات ترکیب آن با استرداد دورهٔ بسته باید در طراحی اجرایی بدون افزایش خودکار ظرفیت دورهٔ جدید مشخص شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+      "target": "docs_shahab_digital_wallet_no_automatic_personal_wallet_fallback",
+      "source_label": "Single Wallet Funding Source per Operation",
+      "target_label": "No Automatic Personal Wallet Fallback",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L308 explicitly requires selecting the paying wallet and says insufficient organization funds never trigger automatic personal fallback. \"implements\" should be \"references\" because this is policy, not proof of implemented software.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 308,
+          "quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+      "target": "docs_shahab_digital_wallet_single_operation_wallet_and_no_split_payment",
+      "source_label": "Single Wallet Funding Source per Operation",
+      "target_label": "One Paying Wallet per Operation; Split Payment Not Initially Active",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 310,
+          "quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_access_revocation_during_service",
+      "target": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+      "source_label": "Access Revocation During Service",
+      "target_label": "Safe Stop and Existing Commitment Handling",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L324 explicitly links revoked access, stopping new cost, safe stop, and treatment of previous obligations. Replace \"implements\" by \"references\" or an explicit policy containment relation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 324,
+          "quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+      "target": "docs_shahab_digital_wallet_mid_execution_limit_reduction",
+      "source_label": "Safe Stop and Existing Commitment Handling",
+      "target_label": "Mid-Execution Limit Reduction",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L340 addresses a limit reduction and L324 an access revocation; they share safeguards, but L340 does not assert these scenarios are identical.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 340,
+          "quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "source_label": "Single Organization Admin Role",
+      "target_label": "Organization Credit Transfer or Shared-Balance Spending",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 357,
+          "quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_eligible_org_recipient_list",
+      "source_label": "Organization Credit Transfer or Shared-Balance Spending",
+      "target_label": "Eligible Organization Recipient List",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L357 explicitly links organizational credit actions to the member list and admin authority. Replace \"implements\" by \"references\"; no implemented software is demonstrated.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 357,
+          "quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+      "source_label": "Organization Credit Transfer or Shared-Balance Spending",
+      "target_label": "Organization Funding Route Constraints",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L361 states the person-to-organization funding prohibition and its scope while preserving personal top-ups.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 361,
+          "quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+      "target": "docs_shahab_digital_wallet_open_execution_decisions_org_credit",
+      "source_label": "Organization Funding Route Constraints",
+      "target_label": "Open Execution Decisions for Organization Credit",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L361 funding route restrictions and L363 open list/allocation/account-verification execution decisions are related in the same section but are separate decisions; preserve the open state.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 363,
+          "quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "source_label": "Organization Credit Transfer or Shared-Balance Spending",
+      "target_label": "Organization Budget Is Spending Permission, Not Personal Funds",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 367,
+          "quote": "**ارتباط با سایر بخش‌ها:** سقف مصرف مشترک تابع بخش ۳.۴ است. گیرندگان مجاز و جهت‌های انتقال در بخش ۶.۵ کنترل می‌شوند. منشأ شارژ واقعی و درخواست آن در بخش ۶.۱ مستقل از انتقال بررسی می‌شوند. قطع عضویت طبق بخش ۳.۶ پیگیری می‌شود و انتقال قطعی گذشته خودکار به مالکیت سازمان برنمی‌گردد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+      "target": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+      "source_label": "Customer Wallet Balance Is a Liability, Not Automatically Revenue",
+      "target_label": "Separate Fund Source, Ownership, and Shahab Service Revenue",
+      "original_relation": "implements",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L379 states unspent balance is a customer obligation; L393 separately requires source/revenue separation. Their link is interpretive and is not proof that either implements the other.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 393,
+          "quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+      "target": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+      "source_label": "Separate Fund Source, Ownership, and Shahab Service Revenue",
+      "target_label": "Wallet Ownership and Credit Source Are Separate Dimensions",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 393,
+          "quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-015",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+      "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "source_label": "Wallet Ownership and Credit Source Are Separate Dimensions",
+      "target_label": "Organization Credit Transfer or Shared-Balance Spending",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "INFERRED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L395 illustrates an organizational wallet containing cash and gifts; linking this to the transfer/shared-spending node is contextual rather than an explicit transfer rule.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 395,
+          "quote": "**مثال:** کیف پول سازمان می‌تواند نقدی و هدیه داشته باشد؛ سهم هر جزء و مالک سازمانی حفظ می‌شود. مصرف خدمت و پرداخت هزینهٔ API دو رویداد مستقل‌اند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_customer_funds_segregation",
+      "target": "docs_shahab_digital_wallet_inventory_rights_section_5",
+      "source_label": "Segregate customer-obligation funds from company operating funds",
+      "target_label": "Inventory rights in section 5",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 411,
+          "quote": "حقوق موجودی در بخش ۵"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_customer_funds_segregation",
+      "target": "docs_shahab_digital_wallet_collection_and_invoice_section_6",
+      "source_label": "Segregate customer-obligation funds from company operating funds",
+      "target_label": "Collection and invoice operations in section 6",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 411,
+          "quote": "وصول و فاکتور در بخش ۶"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_customer_funds_segregation",
+      "target": "docs_shahab_digital_wallet_bank_reconciliation_section_8",
+      "source_label": "Segregate customer-obligation funds from company operating funds",
+      "target_label": "Bank reconciliation in section 8",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 411,
+          "quote": "تطبیق بانک در بخش ۸ آن را کنترل می‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_bank_shahab_responsibilities",
+      "target": "docs_shahab_digital_wallet_operations_owner_for_reconciliation_and_customer_issues",
+      "source_label": "Bank/payment partner handles actual money movement; Shahab records customer credit and manages authorization/operations",
+      "target_label": "A designated responsible person follows financial reconciliation and customer issues",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 419,
+          "quote": "مسئول مشخصی نیز باید تطبیق مالی و مشکلات مشتری را پیگیری کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_bank_shahab_responsibilities",
+      "target": "docs_shahab_digital_wallet_customer_org_admin_role_boundary",
+      "source_label": "Bank/payment partner handles actual money movement; Shahab records customer credit and manages authorization/operations",
+      "target_label": "Shahab operational responsibility differs from customer organization admin role",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 419,
+          "quote": "این مسئولیت عملیاتی شهاب با نقش ادمین سازمان مشتری متفاوت است"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_closed_loop_wallet_scope_assessment",
+      "target": "docs_shahab_digital_wallet_regulatory_applicability_verification",
+      "source_label": "Closed-loop scope is a basis for review, not a confirmed blanket exemption",
+      "target_label": "Verify applicability of operator/account/intermediary limits and current rules before treating as Shahab requirements",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 435,
+          "quote": "الزامات خاص راهبر، حساب واسط و سقف‌های آن فقط پس از احراز شمول، الزام شهاب معرفی شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_liquidation_customer_claims",
+      "target": "docs_shahab_digital_wallet_gift_and_transferred_components_in_liquidation",
+      "source_label": "Service end does not by itself extinguish cash-repayable customer claims",
+      "target_label": "Separate gift/transferred components from withdrawable funds during liquidation",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 449,
+          "quote": "هدیه و اجزای انتقال‌یافته جدا از وجه واجد برداشت شناسایی شوند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_liquidation_customer_claims",
+      "target": "docs_shahab_digital_wallet_no_general_expiry_in_normal_operations",
+      "source_label": "Service end does not by itself extinguish cash-repayable customer claims",
+      "target_label": "No general expiration date is created for normal operations",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 449,
+          "quote": "این بخش تاریخ انقضای عمومی در فعالیت عادی ایجاد نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_balance_origin_controls_rights",
+      "target": "docs_shahab_digital_wallet_origin_permissions_table",
+      "source_label": "Credit rights depend on the origin of the credit",
+      "target_label": "Wallet credit-origin permissions table",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 465,
+          "quote": "حقوق به منشأ اعتبار بستگی دارد:"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_origin_permissions_table",
+      "target": "docs_shahab_digital_wallet_ordinary_transfer_does_not_create_withdrawal_right",
+      "source_label": "Wallet credit-origin permissions table",
+      "target_label": "Ordinary transfer does not grant withdrawal eligibility to recipient",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 471,
+          "quote": "انتقال عادی حق برداشت ایجاد نمی‌کند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_balance_origin_controls_rights",
+      "target": "docs_shahab_digital_wallet_retain_origin_in_internal_records",
+      "source_label": "Credit rights depend on the origin of the credit",
+      "target_label": "Retain credit origin in internal records even if UI shows aggregate balance",
+      "original_relation": "rationale_for",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L465 states rights depend on origin and L475 requires provenance to be retained; plausible basis, but the \"rationale_for\" direction and causal explanation are not explicit.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 475,
+          "quote": "منشأ باید در ثبت‌های داخلی بماند، حتی اگر رابط یک موجودی کلی نشان دهد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_normal_expiry_policy_by_origin",
+      "target": "docs_shahab_digital_wallet_spend_order_by_origin_and_expiry",
+      "source_label": "Cash-origin credit has no normal expiry; gifts follow business policy and transferred gifts retain original deadline",
+      "target_label": "Spend eligible nonwithdrawable expiring credit first, then nonexpiring nonwithdrawable credit, then owner cash",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L526-L530 state spend order while the separate expiry rule is elsewhere. This is a conceptual association; the chosen witness does not explicitly cite the cash/gift expiry provision.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 526,
+          "quote": "۱. اعتبارهای غیرقابل‌برداشت دارای انقضا، از نزدیک‌ترین تاریخ انقضا؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_balance_state_definitions",
+      "target": "docs_shahab_digital_wallet_pending_and_reserved_balance_rule",
+      "source_label": "Balance state definitions: confirmed, pending, reserved, spendable, withdrawable, transferable",
+      "target_label": "Pending inflows are not spendable until valid confirmation; pending outflows and reservations reduce spendable credit",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 508,
+          "quote": "ورودی در انتظار تا تأیید معتبر قابل‌مصرف نشود؛ خروجی در انتظار و رزرو از اعتبار قابل‌مصرف کم کنند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_pending_and_reserved_balance_rule",
+      "target": "docs_shahab_digital_wallet_browser_success_not_valid_confirmation",
+      "source_label": "Pending inflows are not spendable until valid confirmation; pending outflows and reservations reduce spendable credit",
+      "target_label": "A browser success page alone is not valid confirmation",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 508,
+          "quote": "نوشتن «موفق» در صفحهٔ مرورگر به‌تنهایی تأیید معتبر نیست."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_spend_order_by_origin_and_expiry",
+      "target": "docs_shahab_digital_wallet_spend_order_constraints",
+      "source_label": "Spend eligible nonwithdrawable expiring credit first, then nonexpiring nonwithdrawable credit, then owner cash",
+      "target_label": "Eligibility, expiry and reservation precede ordering; payment caps and permitted shares supersede ordering",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 530,
+          "quote": "سقف هر پرداخت، سهم مجاز هدیه، محدودیت دوره‌ای و خدمات مجاز بر این ترتیب مقدم‌اند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_rial_storage_toman_display",
+      "target": "docs_shahab_digital_wallet_cumulative_cost_rounding",
+      "source_label": "Store integer rial amounts and display toman; convert explicitly without floating point",
+      "target_label": "Use exact/scaled arithmetic and round cumulative operation cost to nearest rial, half rial up",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L558 requires integer rial financial records and cumulative rounding; the particular separate display/conversion node has additional claims not stated at this witness.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 558,
+          "quote": "ثبت مالی ریال صحیح است؛ نرخ یا مصرف تازه فقط به دلیل گردکردن ساخته نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_cumulative_cost_rounding",
+      "target": "docs_shahab_digital_wallet_rounding_stage_deduction",
+      "source_label": "Use exact/scaled arithmetic and round cumulative operation cost to nearest rial, half rial up",
+      "target_label": "Each stage deduction is rounded cumulative cost less previously deducted amount",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 558,
+          "quote": "در کسر مرحله‌ای، مبلغ قابل کسر برابر هزینهٔ تجمعی گرد‌شده منهای مبلغ قبلاً کسرشده باشد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_cumulative_cost_rounding",
+      "target": "docs_shahab_digital_wallet_rounding_does_not_create_new_rate_or_usage",
+      "source_label": "Use exact/scaled arithmetic and round cumulative operation cost to nearest rial, half rial up",
+      "target_label": "Rounding must not create a new rate or consumption",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 558,
+          "quote": "نرخ یا مصرف تازه فقط به دلیل گردکردن ساخته نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_personal_and_organization_topup_routes",
+      "target": "docs_shahab_digital_wallet_server_side_topup_request",
+      "source_label": "Person uses bank gateway; organization may use gateway or bank transfer",
+      "target_label": "Create a unique server-side top-up request for a designated wallet and verify authorization",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 580,
+          "quote": "شخص از درگاه بانکی استفاده می‌کند. سازمان می‌تواند از درگاه یا واریز بانکی استفاده کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_server_side_topup_request",
+      "target": "docs_shahab_digital_wallet_topup_destination_immutable_after_context_change",
+      "source_label": "Create a unique server-side top-up request for a designated wallet and verify authorization",
+      "target_label": "Changing page or active organization after payment does not change request destination",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 580,
+          "quote": "تغییر صفحه یا سازمان فعال پس از پرداخت، مقصد این درخواست را تغییر نمی‌دهد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_personal_and_organization_topup_routes",
+      "target": "docs_shahab_digital_wallet_bank_transfer_attribution",
+      "source_label": "Person uses bank gateway; organization may use gateway or bank transfer",
+      "target_label": "Bank transfer must match an authoritative bank report and reliable identifier/data to the same organization",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 582,
+          "quote": "واریز بانکی باید در گزارش معتبر بانک پیدا"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_bank_transfer_attribution",
+      "target": "docs_shahab_digital_wallet_unidentified_deposit_held_pending_review",
+      "source_label": "Bank transfer must match an authoritative bank report and reliable identifier/data to the same organization",
+      "target_label": "Do not credit deposit while owner unclear or multiple destinations possible",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 582,
+          "quote": "اگر مالک واریز روشن نیست یا چند مقصد ممکن است، مبلغ تا بررسی به کیف پولی اضافه نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 22,
+      "source": "docs_shahab_digital_wallet_personal_and_organization_topup_routes",
+      "target": "docs_shahab_digital_wallet_organization_personal_admin_card_topup_restriction",
+      "source_label": "Person uses bank gateway; organization may use gateway or bank transfer",
+      "target_label": "Direct organization top-up using customer admin personal card is unsupported in initial version",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 582,
+          "quote": "شارژ مستقیم سازمان با کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 23,
+      "source": "docs_shahab_digital_wallet_credit_available_after_verified_receipt",
+      "target": "docs_shahab_digital_wallet_payment_approved_receipt_pending_state",
+      "source_label": "Credit becomes spendable after valid confirmation of receipt into Shahab account and correct linkage to top-up request",
+      "target_label": "If payment is approved but not fully received, show receipt-pending status without increasing spendable balance",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 596,
+          "quote": "اگر پرداخت تأیید شده اما وصول کامل نشده، وضعیت «پرداخت تأیید شده؛ شارژ در انتظار وصول» نشان داده شود و هنوز موجودی قابل‌مصرف زیاد نشود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-016",
+      "edge_index": 24,
+      "source": "docs_shahab_digital_wallet_payment_approved_receipt_pending_state",
+      "target": "docs_shahab_digital_wallet_announce_receipt_delay_before_payment",
+      "source_label": "If payment is approved but not fully received, show receipt-pending status without increasing spendable balance",
+      "target_label": "Potential receipt delay must be disclosed before payment",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 596,
+          "quote": "این تأخیر احتمالی قبل از پرداخت اعلام شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_result",
+      "target": "docs_shahab_digital_wallet_uncertain_topup_reconcile",
+      "source_label": "Uncertain top-up outcome after customer debit",
+      "target_label": "Unknown payment result is not definitive failure; check and show history",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 610,
+          "quote": "**پاسخ مصوب:** قطع ارتباط به معنی شکست قطعی نیست. شهاب باید پرداخت را بررسی کند و نتیجه را در تاریخچه نشان دهد:"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_reconcile",
+      "target": "docs_shahab_digital_wallet_uncertain_topup_behavior_table",
+      "source_label": "Unknown payment result is not definitive failure; check and show history",
+      "target_label": "Behavior by known payment state",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 612,
+          "quote": "| آنچه معلوم است | رفتار شهاب |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_reconcile",
+      "target": "docs_shahab_digital_wallet_topup_status_reconciliation_without_72h_wait",
+      "source_label": "Unknown payment result is not definitive failure; check and show history",
+      "target_label": "Start reconciliation immediately; no general 72-hour refund promise",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "AMBIGUOUS",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "AMBIGUOUS",
+      "recommended_score": 0.2,
+      "reason": "L620 says not to wait until 72 hours for inquiry, but does not establish the stronger claimed requirement to start reconciliation immediately. Correct node wording to match source or find a direct witness; keep 72-hour promise denial explicit.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 620,
+          "quote": "سیستم نباید تا پایان ۷۲ ساعت برای استعلام صبر کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_reconcile",
+      "target": "docs_shahab_digital_wallet_topup_72_hour_promise_not_general",
+      "source_label": "Unknown payment result is not definitive failure; check and show history",
+      "target_label": "72-hour refund is not a general Shahab promise",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 620,
+          "quote": "بازگشت ظرف ۷۲ ساعت وعدهٔ عمومی شهاب نیست؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_reconcile",
+      "target": "docs_shahab_digital_wallet_topup_success_same_wallet_once",
+      "source_label": "Unknown payment result is not definitive failure; check and show history",
+      "target_label": "Confirmed receipt credits same wallet exactly once",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L615 explicitly requires a confirmed receipt to credit the same wallet only once; L624 supplies the example. The corrected witness supports the target accurately.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 624,
+          "quote": "نتیجه باید به شارژ همان کیف پول منجر شود، نه اعلام شکست صرفاً به‌علت قطع ارتباط."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 636,
+          "quote": "**پاسخ مصوب:** فقط یک‌بار. درخواست شارژ و دریافت واقعی پول شناسه‌های قابل‌اتکا داشته باشند. نتیجهٔ بازگشت درگاه، استعلام و تطبیق باید به همان رویداد مالی متصل شوند؛ هیچ‌کدام حق ایجاد شارژ دوم برای همان دریافت را ندارند.",
+          "purpose": "supplemental context; see reason"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 615,
+          "quote": "| وصول معتبر تأیید شد | شارژ همان کیف پول، فقط یک‌بار |",
+          "purpose": "explicit same-wallet and exactly-once rule"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_uncertain_topup_result",
+      "target": "docs_shahab_digital_wallet_topup_cross_section_ledger_bank_tariff",
+      "source_label": "Uncertain top-up outcome after customer debit",
+      "target_label": "Top-up outcome connects to ledger bank follow-up and service tariff",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 626,
+          "quote": "**ارتباط با بخش‌های دیگر:** اثر این عملیات در دفترکل بخش ۷ ثبت و با بانک در بخش ۸ پیگیری می‌شود؛ مبلغ خدمت از تعرفهٔ بخش ۹ می‌آید."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_duplicate_confirmation_once",
+      "target": "docs_shahab_digital_wallet_duplicate_payment_event_idempotency",
+      "source_label": "Duplicate payment confirmation results in one credit",
+      "target_label": "Reliable payment/request IDs and idempotency prevent duplicate credit",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L636 expressly says one credit, reliable request/payment identifiers, and no second credit for the same receipt; L638 names idempotency and uniqueness. Both witnesses are needed.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 636,
+          "quote": "**پاسخ مصوب:** فقط یک‌بار. درخواست شارژ و دریافت واقعی پول شناسه‌های قابل‌اتکا داشته باشند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 638,
+          "quote": "**مثال:** تأیید پرداخت یک‌میلیونی سه بار می‌رسد؛ اعتبار فقط یک میلیون تومان زیاد می‌شود. برای این کار، شناسهٔ پیام تکراری، کلید درخواست تکرار امن و یکتایی پایدار در ثبت مالی مکمل هم‌اند.",
+          "purpose": "supplemental context; see reason"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_duplicate_payment_event_idempotency",
+      "target": "docs_shahab_digital_wallet_duplicate_event_controls",
+      "source_label": "Reliable payment/request IDs and idempotency prevent duplicate credit",
+      "target_label": "Duplicate message ID, idempotency key, and persistent uniqueness are complementary",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 638,
+          "quote": "برای این کار، شناسهٔ پیام تکراری، کلید درخواست تکرار امن و یکتایی پایدار در ثبت مالی مکمل هم‌اند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_topup_minimum_and_rolling_cap",
+      "target": "docs_shahab_digital_wallet_topup_limits_approved",
+      "source_label": "Personal and organizational top-up minimums and rolling 24-hour aggregate caps",
+      "target_label": "Approved minimum and aggregate 24-hour rolling caps",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 650,
+          "quote": "**پاسخ مصوب:** حداقل هر درخواست شارژ شخصی ۱۰ هزار تومان و سقف مجموع شارژ هر حساب شخصی ۲۰۰ میلیون تومان در ۲۴ ساعت شناور است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_topup_limits_approved",
+      "target": "docs_shahab_digital_wallet_topup_limit_table",
+      "source_label": "Approved minimum and aggregate 24-hour rolling caps",
+      "target_label": "Personal and organization top-up limit table",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 652,
+          "quote": "| حساب | حداقل هر درخواست | سقف مجموع شارژ در ۲۴ ساعت شناور |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 654,
+          "quote": "| شخصی | ۱۰ هزار تومان | ۲۰۰ میلیون تومان |",
+          "purpose": "actual row of caps table"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 655,
+          "quote": "| سازمانی | ۱ میلیون تومان | ۱ میلیارد تومان؛ مشترک بین درگاه و واریز بانکی |",
+          "purpose": "actual row of caps table"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_topup_limits_approved",
+      "target": "docs_shahab_digital_wallet_rolling_24_hour_window",
+      "source_label": "Approved minimum and aggregate 24-hour rolling caps",
+      "target_label": "Rolling 24-hour window ignores midnight and payment-route switching",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 657,
+          "quote": "۲۴ ساعت شناور یعنی در هر لحظه، بازهٔ ۲۴ ساعت قبل بررسی می‌شود؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_rolling_24_hour_window",
+      "target": "docs_shahab_digital_wallet_pending_topups_reserve_capacity",
+      "source_label": "Rolling 24-hour window ignores midnight and payment-route switching",
+      "target_label": "Pending top-up requests count toward capacity and release on definite failure",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 663,
+          "quote": "برای جلوگیری از عبور هم‌زمان، درخواست‌های در انتظار در کنترل ظرفیت لحاظ و با شکست قطعی آزاد شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_topup_limits_approved",
+      "target": "docs_shahab_digital_wallet_over_limit_bank_deposit_review",
+      "source_label": "Approved minimum and aggregate 24-hour rolling caps",
+      "target_label": "Unexpected over-limit bank deposits are recorded for review; acceptance/refund/partial receipt/timing remain open",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 665,
+          "quote": "واریز بانکی بالاتر از سقف ممکن است قبلاً رسیده باشد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_organization_pre_payment_invoice",
+      "target": "docs_shahab_digital_wallet_prepayment_invoice_not_wallet_funding",
+      "source_label": "Organization receives formal invoice before payment",
+      "target_label": "Pre-payment invoice linked to top-up request and destination wallet does not create money or credit",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 677,
+          "quote": "صدور سند به‌تنهایی پول یا اعتبار ایجاد نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_prepayment_invoice_not_wallet_funding",
+      "target": "docs_shahab_digital_wallet_invoice_legal_tax_details_open",
+      "source_label": "Pre-payment invoice linked to top-up request and destination wallet does not create money or credit",
+      "target_label": "Legal/tax invoice details require current Iran regulatory review",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 681,
+          "quote": "**تصمیم باز:** منظور حقوقی و مالیاتی از سند باید دقیق شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_invoice_formal_is_product_requirement",
+      "target": "docs_shahab_digital_wallet_prepayment_invoice_not_wallet_funding",
+      "source_label": "Formal invoice is product requirement; no completed evidence proves universal refusal without it",
+      "target_label": "Pre-payment invoice linked to top-up request and destination wallet does not create money or credit",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "The quoted source provision, read with the nearby source and target node text, states the associated rule or section reference. Keep proposal, approval, examples, exceptions and open parameters as described in source.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 683,
+          "quote": "الزام صدور سند، خواسته و مصوبهٔ محصول است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    }
+  ],
+  "unreviewed": [
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 16,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 17,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 18,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 19,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 20,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 21,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 22,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 23,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 24,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 25,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 26,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 27,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 28,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 29,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 30,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 31,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 32,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 33,
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 34,
+      "status": "NOT_REVIEWED"
+    }
+  ]
+}

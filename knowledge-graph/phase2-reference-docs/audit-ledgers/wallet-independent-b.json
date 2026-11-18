@@ -1,0 +1,1662 @@
+{
+  "scope": "GSEM-017 edge 16 to end, and all edges GSEM-018 and GSEM-019",
+  "method": "independent per-edge source and endpoint review; values mark source support, not implementation status; inferred associations are not approved requirements",
+  "edges": [
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_gift_code_discount_distinct",
+      "target": "docs_shahab_digital_wallet_gift_vs_discount_semantics",
+      "source_label": "Gift code and discount code are distinct capabilities",
+      "target_label": "Gift creates wallet credit; discount lowers eligible price without creating balance",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L699 explicitly distinguishes gift balance creation and a discount reducing price without creating balance.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 699,
+          "quote": "کد هدیه، اعتبار مشخص به کیف پول اضافه می‌کند؛ کد تخفیف قیمت خدمت یا سفارش مجاز را کاهش می‌دهد و به‌خودی‌خود موجودی ایجاد نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_gift_vs_discount_semantics",
+      "target": "docs_shahab_digital_wallet_discount_before_credit_application",
+      "source_label": "Gift creates wallet credit; discount lowers eligible price without creating balance",
+      "target_label": "Calculate discounted price before consuming credits",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L699 explicitly orders discount calculation before consuming eligible wallet credit.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 699,
+          "quote": "ابتدا قیمت پس از تخفیف محاسبه، سپس اعتبارها برای پرداخت آن مصرف شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_campaign_configuration",
+      "target": "docs_shahab_digital_wallet_campaign_parameters_approved",
+      "source_label": "Business campaign configurable parameters",
+      "target_label": "Approved gift campaign amount audience scope expiry limits budget and status controls",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L713 enumerates configurable campaign parameters and states values are business-selected.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 713,
+          "quote": "**پاسخ مصوب:** مبلغ هدیه، مخاطبان شخصی یا سازمانی و گروه یا حساب منتخب، خدمات مجاز، مهلت فعال‌سازی و مصرف، تعداد کل استفاده، تعداد استفادهٔ هر حساب، بودجهٔ کل کمپین و وضعیت فعال، متوقف یا پایان‌یافته قابل تنظیم باشند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_campaign_parameters_approved",
+      "target": "docs_shahab_digital_wallet_campaign_atomic_budget_and_count",
+      "source_label": "Approved gift campaign amount audience scope expiry limits budget and status controls",
+      "target_label": "Campaign budget and activation count are jointly controlled under concurrency",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L715 explicitly requires joint budget and activation count controls to prevent parallel oversubscription; example values are not global defaults.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 715,
+          "quote": "بودجهٔ کمپین و تعداد مجاز باید هنگام فعال‌سازی هم‌زمان کنترل شوند تا درخواست موازی اعتبار اضافه نسازد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_gift_usage_caps",
+      "target": "docs_shahab_digital_wallet_gift_three_independent_caps",
+      "source_label": "Independent configurable gift spending limits",
+      "target_label": "Three optional gift caps must all hold; aggregate gift share cap prevents multi-gift bypass",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L727 explicitly names three independent optional limits, concurrent enforcement, and aggregate gift-share protection.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 727,
+          "quote": "**پاسخ مصوب:** سه محدودیت مستقل و اختیاری پشتیبانی شوند: حداکثر مبلغ هدیه در هر پرداخت، حداکثر سهم هدیه از قیمت نهایی خدمت و حداکثر مصرف در یک دوره."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_gift_three_independent_caps",
+      "target": "docs_shahab_digital_wallet_gift_cap_amount_formula",
+      "source_label": "Three optional gift caps must all hold; aggregate gift share cap prevents multi-gift bypass",
+      "target_label": "Permitted gift use is bounded by actual balance and remaining active caps",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L727 explicitly bounds allowable use by actual balance and all remaining active limits.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 727,
+          "quote": "مبلغ مجاز از ماندهٔ واقعی و ظرفیت باقی‌ماندهٔ تمام سقف‌های فعال بیشتر نباشد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 22,
+      "source": "docs_shahab_digital_wallet_gift_activation_and_spend_expiry",
+      "target": "docs_shahab_digital_wallet_gift_expiry_two_clocks",
+      "source_label": "Gift-code activation expiry and credit spending expiry are separate settings",
+      "target_label": "Activation and spend deadlines are independent; expiry timestamp and timezone must be clear",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L741 explicitly separates activation and spending deadlines and requires an explicit expiry time and time zone.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 741,
+          "quote": "**پاسخ مصوب:** دو تنظیم مستقل‌اند. مهلت فعال‌سازی، آخرین زمان دریافت هدیه با کد است؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 23,
+      "source": "docs_shahab_digital_wallet_gift_expiry_two_clocks",
+      "target": "docs_shahab_digital_wallet_gift_transfer_does_not_reset_expiry",
+      "source_label": "Activation and spend deadlines are independent; expiry timestamp and timezone must be clear",
+      "target_label": "Ordinary transfer does not restart expiry; compensation return and reservation expiry are separate rules",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L747 explicitly states ordinary transfer does not restart expiry and identifies separate compensation-return and reservation rules; numerical reservation duration remains open.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 747,
+          "quote": "انتقال عادی مهلت را از نو آغاز نمی‌کند؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 24,
+      "source": "docs_shahab_digital_wallet_service_cost_wallet_debit",
+      "target": "docs_shahab_digital_wallet_debit_payment_source_and_cost_model",
+      "source_label": "Service cost debit from wallet",
+      "target_label": "Cash and gift allowed; one paying wallet initially; dynamic price model and debit event specified elsewhere",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L755 states both credit types and the one payer wallet rule; L757 explicitly cites dynamic costing and the permitted debit event rules.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 755,
+          "quote": "**پاسخ فعلی:** مصرف نقدی و هدیه هر دو مجاز است."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 757,
+          "quote": "**پاسخ مصوب دربارهٔ هزینه:** مدل داینامیک بخش ۹ مبنای محاسبه است؛ رویداد مجاز کسر و رفتار کمبود اعتبار در بخش ۶.۴، ترتیب مصرف در ۵.۳ و ثبت اجزا در ۷ تعیین شده‌اند. انتخاب معیار دقیق پردازش فعلاً به تعویق افتاده است؛ سیاست هزینهٔ لغو و شکست در ۹.۱.۵ آمده است.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 25,
+      "source": "docs_shahab_digital_wallet_debit_payment_source_and_cost_model",
+      "target": "docs_shahab_digital_wallet_exact_processing_metric_deferred",
+      "source_label": "Cash and gift allowed; one paying wallet initially; dynamic price model and debit event specified elsewhere",
+      "target_label": "Exact processing metric deferred; cancellation/failure policy specified separately",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L757 explicitly defers exact processing metric and refers cancellation/failure cost policy to §9.1.5.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 757,
+          "quote": "انتخاب معیار دقیق پردازش فعلاً به تعویق افتاده است؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 26,
+      "source": "docs_shahab_digital_wallet_assistant_operation_temporary_reserve",
+      "target": "docs_shahab_digital_wallet_reservation_not_debit_or_revenue",
+      "source_label": "Temporary reservation for assistant operations",
+      "target_label": "Reservation earmarks credit for one operation; no spending transfer withdrawal or revenue until capture",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L773 explicitly ties reservation to one operation, no spending/transfer/withdrawal, and no revenue merely from reservation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 773,
+          "quote": "**پاسخ مصوب:** رزرو، کنارگذاشتن موقت سهم مشخصی از اعتبار برای یک عملیات مشخص است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 27,
+      "source": "docs_shahab_digital_wallet_reservation_not_debit_or_revenue",
+      "target": "docs_shahab_digital_wallet_reservation_preserves_cash_gift_origin",
+      "source_label": "Reservation earmarks credit for one operation; no spending transfer withdrawal or revenue until capture",
+      "target_label": "Reservation preserves cash and gift origins and their conditions",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L773 explicitly says reserved cash/gift origins and conditions are preserved.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 773,
+          "quote": "منشأ و شرایط اجزای نقدی و هدیه در رزرو حفظ شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 28,
+      "source": "docs_shahab_digital_wallet_reservation_not_debit_or_revenue",
+      "target": "docs_shahab_digital_wallet_release_vs_refund",
+      "source_label": "Reservation earmarks credit for one operation; no spending transfer withdrawal or revenue until capture",
+      "target_label": "Release returns unspent reserved credit; refund returns previously debited amount",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L773 explicitly distinguishes release of unspent reserve from refund of a prior deduction.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 773,
+          "quote": "آزادسازی، اعتبار خرج‌نشده را از حالت رزرو خارج می‌کند؛ استرداد، مبلغ قبلاً کسرشده را بازمی‌گرداند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 29,
+      "source": "docs_shahab_digital_wallet_initial_reserve_amount",
+      "target": "docs_shahab_digital_wallet_reserve_estimate_approval_and_formula",
+      "source_label": "Initial reserve amount from dynamic pricing; staged reserve covers next stage and insufficient credit blocks start",
+      "target_label": "Customer approves initial total estimate and increase cap before start; staged reserve differs from estimate; no start without sufficient credit",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L787 states dynamic model, approval of total estimate and cap, staged reservation, and no start when eligible credit is insufficient.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 787,
+          "quote": "**پاسخ مصوب:** مبلغ اولیه از مدل داینامیک بخش ۹ محاسبه شود:"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 30,
+      "source": "docs_shahab_digital_wallet_reserve_estimate_approval_and_formula",
+      "target": "docs_shahab_digital_wallet_reserve_stage_amount_not_total_estimate",
+      "source_label": "Customer approves initial total estimate and increase cap before start; staged reserve differs from estimate; no start without sufficient credit",
+      "target_label": "Reserve stage covers next stage, not total estimate; increase cap does not compound",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L789 expressly shows next-stage reservation is separate from the total estimate and increase cap does not compound; figures are an example, not a universal tariff.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 789,
+          "quote": "اگر مرحلهٔ اول حداکثر ۳۰ هزار تومان نیاز دارد، ابتدا ۳۰ هزار تومان رزرو می‌شود؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 31,
+      "source": "docs_shahab_digital_wallet_reservation_duration_and_unknown_result",
+      "target": "docs_shahab_digital_wallet_reservation_expiry_by_service",
+      "source_label": "Reservation duration and handling for pending/unknown outcome",
+      "target_label": "For not-started/user-wait operations, apply service-specific deadline and release uncommitted reserve; controlled extension only with real progress",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L801 explicitly links waiting/not-started deadlines, release of uncommitted portions, and conditional progress-based extension.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 801,
+          "quote": "برای اجرای شروع‌نشده یا انتظار کاربر، مهلت مشخص همان خدمت اعمال شود؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 32,
+      "source": "docs_shahab_digital_wallet_reservation_duration_and_unknown_result",
+      "target": "docs_shahab_digital_wallet_unknown_external_cost_hold_only_exposure",
+      "source_label": "Reservation duration and handling for pending/unknown outcome",
+      "target_label": "For unknown external cost stop new cost, hold only exposed portion, refer case, release remaining reserve after no further obligation confirmed",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L801 explicitly stops new cost, holds the exposure, refers unknown outcome, and conditions release on absence of other obligations.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 801,
+          "quote": "در نتیجهٔ نامعلوم هزینهٔ خارجی، هزینه‌سازی جدید متوقف، فقط سهم مرتبط با تعهد نامعلوم نگهداری و پرونده برای تعیین نتیجه ارجاع شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 33,
+      "source": "docs_shahab_digital_wallet_reservation_expiry_by_service",
+      "target": "docs_shahab_digital_wallet_no_universal_reservation_deadline",
+      "source_label": "For not-started/user-wait operations, apply service-specific deadline and release uncommitted reserve; controlled extension only with real progress",
+      "target_label": "No single numeric reservation duration for all services",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L801 explicitly says no common numeric deadline exists for all services; any service-specific numbers remain open.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 801,
+          "quote": "یک مهلت عددی مشترک برای همهٔ خدمات تعیین نشده است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-017",
+      "edge_index": 34,
+      "source": "docs_shahab_digital_wallet_unknown_external_cost_hold_only_exposure",
+      "target": "docs_shahab_digital_wallet_reservation_service_catalog_and_bank_resolution_dependencies",
+      "source_label": "For unknown external cost stop new cost, hold only exposed portion, refer case, release remaining reserve after no further obligation confirmed",
+      "target_label": "Service catalog specifies duration; section 8 supplies unknown-outcome inquiry/handling; cancellation does not resolve bank/external cost",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L801 unknown-outcome handling and L807 service catalog/section 8 referral describe related controls; the selected source concept does not explicitly reference all target details as a single dependency.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 807,
+          "quote": "مدت دقیق انتظار و اجرای هر خدمت در کاتالوگ تعیین شود؛"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_reservation_increase_cap",
+      "target": "docs_shahab_digital_wallet_unauthorized_overrun_shahab_liability",
+      "source_label": "سقف افزایش رزرو تا ۱۲۰٪ برآورد اولیه",
+      "target_label": "مسئولیت مازاد غیرمجاز ناشی از خطای شهاب",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "INFERRED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L815 sets the 120% cap and L817 assigns unauthorized cost from Shahab error to Shahab; association of these two distinct obligations is an inference; authorized in-cap actual costs are not automatically unauthorized.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 817,
+          "quote": "اگر هزینهٔ اضافه به علت خطای برآورد یا کنترل شهاب بدون مجوز لازم ایجاد شده باشد، مازاد غیرمجاز بر عهدهٔ شهاب است؛ از سقف پذیرفته‌شده بی‌اجازه کسر یا کیف پول منفی نشود."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 815,
+          "quote": "**پاسخ مصوب:** پیش از ایجاد هزینهٔ بیشتر، اعتبار لازم رزرو شود. سقف افزایش خودکار برابر ۱۲۰ درصد برآورد کل اولیهٔ مورد تأیید همان فرایند است؛ مبنا با هر افزایش رزرو تغییر نمی‌کند و افزایش‌های ۲۰ درصدی روی هم انباشته نمی‌شوند. این ۲۰ درصد کارمزد، سود یا مبلغی برای کسر قطعی نیست؛ فقط مجوز افزایش هزینهٔ واقعی تا سقف مشخص است. مجموع مصرف قطعی و رزرو باقیمانده، با اعتبار و مجوز کافی، تا این سقف خودکار اصلاح شود. پیش از عبور از آن، تأیید تازهٔ مشتری لازم است؛ تأیید تازه مجوز زنجیره‌ای افزایش‌های ۲۰ درصدی ایجاد نمی‌کند. در کمبود اعتبار یا اختیار، پیش از هزینهٔ تازه در نقطهٔ امن متوقف شود. سقف کارمند و سازمان مستقل رعایت شوند.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_reservation_increase_cap",
+      "target": "docs_shahab_digital_wallet_reservation_increase_example",
+      "source_label": "سقف افزایش رزرو تا ۱۲۰٪ برآورد اولیه",
+      "target_label": "مثال محاسبه افزایش رزرو",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L819 explicitly illustrates the L815 cap and distinguishes actual charge from reservation authorization.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 819,
+          "quote": "**مثال:** برآورد کل اولیه ۱۰۰ هزار تومان است. هزینهٔ واقعی ۱۱۲ هزار تومانی با موجودی و اختیار کافی خودکار پوشش داده می‌شود و فقط ۱۱۲ هزار تومان کسر می‌شود، نه ۱۲۰ هزار تومان. برای هزینهٔ ۱۲۵ هزار تومانی، قبل از ایجاد تعهدِ بیش از ۱۲۰ هزار تومان تأیید تازه لازم است. رزرو مرحلهٔ اول ۳۰ هزار تومانی، مبنای حاشیه را تغییر نمی‌دهد."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 815,
+          "quote": "**پاسخ مصوب:** پیش از ایجاد هزینهٔ بیشتر، اعتبار لازم رزرو شود. سقف افزایش خودکار برابر ۱۲۰ درصد برآورد کل اولیهٔ مورد تأیید همان فرایند است؛ مبنا با هر افزایش رزرو تغییر نمی‌کند و افزایش‌های ۲۰ درصدی روی هم انباشته نمی‌شوند. این ۲۰ درصد کارمزد، سود یا مبلغی برای کسر قطعی نیست؛ فقط مجوز افزایش هزینهٔ واقعی تا سقف مشخص است. مجموع مصرف قطعی و رزرو باقیمانده، با اعتبار و مجوز کافی، تا این سقف خودکار اصلاح شود. پیش از عبور از آن، تأیید تازهٔ مشتری لازم است؛ تأیید تازه مجوز زنجیره‌ای افزایش‌های ۲۰ درصدی ایجاد نمی‌کند. در کمبود اعتبار یا اختیار، پیش از هزینهٔ تازه در نقطهٔ امن متوقف شود. سقف کارمند و سازمان مستقل رعایت شوند.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_gift_expiry_during_reservation",
+      "target": "docs_shahab_digital_wallet_gift_expiry_reservation_example",
+      "source_label": "هدیه رزروشده فقط تا مهلت رزرو همان عملیات معتبر است",
+      "target_label": "مثال انقضای هدیه در رزرو",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L833 illustrates the L831 reserved-gift rule; unused expired gift is not restored as generally spendable credit.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 833,
+          "quote": "**مثال:** ساعت ۲۳:۵۵، مبلغ ۴۰ هزار تومان از هدیه‌ای با انقضای نیمه‌شب رزرو شده است. عملیات در مهلت مجاز خود ساعت ۰۰:۰۵ با هزینهٔ ۳۰ هزار تومان پایان می‌یابد؛ آن ۳۰ هزار تومان مصرف می‌شود، اما ۱۰ هزار تومان باقی‌مانده پس از آزادسازی، منقضی و غیرقابل مصرف عمومی است."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 831,
+          "quote": "**پاسخ مصوب:** سهم هدیه‌ای که در زمان اعتبارش برای عملیات مشخص رزرو شده، تا پایان مهلت مجاز همان رزرو فقط برای همان عملیات قابل مصرف باشد. پس از انقضا، رزرو تازه، افزایش سهم هدیه یا انتقال آن مجاز نیست. سهم مصرف‌نشده پس از آزادسازی تابع انقضای اصلی است و به اعتبار آزاد معتبر تبدیل نمی‌شود. رزرو نباید راه تمدید نامحدود مهلت هدیه باشد.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_billable_event_predefined",
+      "target": "docs_shahab_digital_wallet_billable_event_example",
+      "source_label": "هر خدمت پیش از شروع رویداد قابل صورتحساب خود را تعیین می‌کند",
+      "target_label": "نمونه تمایز ارسال درخواست و پذیرش بانک",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L847 explicitly exemplifies billable-event distinction between submission and bank acceptance; quoted event depends on the service definition.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 847,
+          "quote": "**مثال:** ارسال موفق درخواست با پذیرش آن توسط بانک متفاوت است. اگر خدمت فروخته‌شده «ارسال موفق درخواست» است، رویداد کسر به همان خروجی تعریف‌شده مربوط می‌شود؛ نتیجهٔ بانک نباید بدون تعریف قبلی مبنای تازهٔ هزینه شود."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 845,
+          "quote": "**پاسخ مصوب:** هر خدمت پیش از شروع، رویداد قابل صورتحساب خود را مشخص کند. برای مشاور، پرامپت و میزان پردازش واقعی پاسخ طبق مبنای محاسبهٔ همان اجرا ملاک‌اند؛ برای دستیار، رویداد قابل صورتحسابِ عملیات و مشاوره‌های حین اجرا با ضریب یک‌دوم مطابق بخش ۹ محاسبه شوند. تعرفهٔ مشخص عملیات به معنی تضمین قیمت ثابت برای اجراهای آینده نیست. پیشرفت داخلی، کلیک مرورگر یا گذشت زمان به‌تنهایی مجوز کسر نیست، مگر آنکه همان واحد تعرفهٔ اعلام‌شده باشد. فقط هزینهٔ قابل دریافت قطعی و ماندهٔ بدون تعهد آزاد شود؛ ثبت مرحله‌ای طبق بخش ۷.۶ انجام شود.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_withdrawal_transfer_eligibility",
+      "target": "docs_shahab_digital_wallet_transfer_chain_example",
+      "source_label": "شرایط برداشت و جهت‌های مجاز انتقال",
+      "target_label": "مثال انتقال مجدد اعتبار دریافتی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L865 explicitly illustrates retransfers without converting received credit into the sender’s own cash charge.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 865,
+          "quote": "**مثال:** علی به رضا و رضا به مریم منتقل می‌کند. انتقال بعدی مریم به علی، پول دریافتی را به شارژ نقدی خود علی تبدیل نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_transfer_component_provenance",
+      "target": "docs_shahab_digital_wallet_transfer_component_example",
+      "source_label": "انتقال ترکیبی اجزای ردیابی‌پذیر",
+      "target_label": "مثال اجزای هدیه و نقدی با انقضای مستقل",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L879 is an illustrative mixed cash/gift transfer preserving components and individual conditions.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 879,
+          "quote": "**مثال:** کاربر ۳۰ هزار تومان هدیه با پنج روز مهلت و موجودی نقدی دارد. برای انتقال ۴۰ هزار تومان می‌تواند ترکیب ۳۰ هزار هدیه و ۱۰ هزار نقدی را تأیید کند. گیرنده دو جزء دریافت می‌کند؛ هر دو غیرقابل‌برداشت‌اند. پس از پنج روز فقط ماندهٔ مصرف‌نشدهٔ جزء هدیه منقضی می‌شود؛ ۱۰ هزار تومان بدون انقضا باقی می‌ماند. اگر ۲۰ هزار تومان از هدیه مصرف شده باشد، فقط ۱۰ هزار تومان هدیه منقضی می‌شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_transfer_component_provenance",
+      "target": "docs_shahab_digital_wallet_multi_origin_transfer_example",
+      "source_label": "انتقال ترکیبی اجزای ردیابی‌پذیر",
+      "target_label": "مثال انتقال چندمنشأیی با چهار جزء",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L881 illustrates multi-origin transfer components; amounts are examples only.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 881,
+          "quote": "مثال چندمنشأ: انتقال ۷۰ هزار تومانی می‌تواند از ۳۰ هزار هدیهٔ کمپین اول، ۱۰ هزار هدیهٔ کمپین دوم، ۲۰ هزار شارژ نقدی و ۱۰ هزار اعتبار دریافتی قبلی تشکیل شود. هر جزء و سهم منتقل‌شده، تاریخ و محدودیت مستقل خود را حفظ می‌کند؛ موجودی‌ها صرفاً به عدد بی‌منشأ تبدیل نمی‌شوند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_withdrawal_transfer_eligibility",
+      "target": "docs_shahab_digital_wallet_gift_conditions_preserved_on_transfer",
+      "source_label": "شرایط برداشت و جهت‌های مجاز انتقال",
+      "target_label": "انتقال هدیه شرایط و انقضای آن را حفظ می‌کند",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L893 explicitly requires transfer to preserve expiry, eligible services, origin and limits; it does not create withdrawal rights.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 893,
+          "quote": "انتقال، تاریخ انقضا، خدمات مجاز، منشأ و محدودیت‌ها را حذف یا بهتر نمی‌کند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_withdrawal_bank_account_ownership_verification",
+      "target": "docs_shahab_digital_wallet_bank_verification_implementation_open",
+      "source_label": "تطبیق مالکیت حساب مقصد برداشت",
+      "target_label": "جزئیات اجرایی API و شبا باز است",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L909 explicitly keeps Iranian API, account/IBAN format, inquiry validity and organization verification as open implementation details.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 909,
+          "quote": "MT تأیید را در همهٔ مسیرها اجبار نمی‌کند؛ الزام بالا سیاست مصوب شهاب است. انتخاب API ایرانی، قالب شمارهٔ حساب و شبا، اعتبار زمانی استعلام و روش احراز سازمان هنوز جزئیات اجرایی‌اند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_organization_transfer_recipients",
+      "target": "docs_shahab_digital_wallet_org_recipient_membership_example",
+      "source_label": "انتقال سازمانی فقط به اعضای فهرست",
+      "target_label": "مثال گیرنده خارج از فهرست سازمان",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L921 explicitly illustrates the organization recipient list restriction and distinguishes transfer from shared spending permission.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 921,
+          "quote": "**مثال:** شخص ج حساب فعال دارد، ولی در فهرست شرکت نیست؛ شرکت نمی‌تواند به او منتقل کند. برای شخص الف در فهرست، ادمین می‌تواند اعتبار منتقل کند یا سقف مصرف مشترک بدهد؛ این دو روش اثر مالکیتی متفاوت دارند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_withdrawal_transfer_limits",
+      "target": "docs_shahab_digital_wallet_withdrawal_transfer_limit_values_open",
+      "source_label": "محدودیت تعداد و مبلغ برداشت/انتقال",
+      "target_label": "مقدارهای اولیه سقف برداشت/انتقال باز است",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L937 explicitly separates the approved limits structure from still-open numeric values.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 937,
+          "quote": "ساختار محدودیت‌ها مصوب است؛ مقدارهایی که در پیشنهاد گزارش تعیین نشده بودند همچنان بازند."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_withdrawal_transfer_fee_policy",
+      "target": "docs_shahab_digital_wallet_withdrawal_fee_calculation_example",
+      "source_label": "سیاست کارمزد انتقال و برداشت",
+      "target_label": "مثال آموزشی کارمزد برداشت",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L951 identifies withdrawal fee amounts as an educational example, not approved rates.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 951,
+          "quote": "**مثال آموزشی:** برای دریافت ۱۰۰ هزار تومان در بانک و کارمزد ۲ هزار تومان، مجموع کسر ۱۰۲ هزار تومان است. این عددها نرخ مصوب نیستند؛ مبلغ واقعی تابع قرارداد و تعرفه است."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_withdrawal_transfer_fee_policy",
+      "target": "docs_shahab_digital_wallet_withdrawal_fee_failure_policy",
+      "source_label": "سیاست کارمزد انتقال و برداشت",
+      "target_label": "شکست برداشت و کارمزد غیرقابل‌بازگشت بانک",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L953 explicitly conditions deducting nonrefundable bank costs on an advance-disclosed policy; rate and announcement details remain open.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 953,
+          "quote": "در شکست، اصل مبلغ آزاد یا بازگردانده شود. هزینهٔ واقعاً اخذشده و غیرقابل‌بازگشت بانک فقط با سیاست ازپیش‌اعلام‌شده قابل کسر است؛ شکست نباید کارمزد نامعلوم بسازد. نرخ دقیق و سیاست اعلام و بازگشت آن هنوز باید اجرایی شود."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_969",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "پیش‌نمایش بدون رزرو",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L969 is the table row for withdrawal preview without reservation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 969,
+          "quote": "| پیش‌نمایش مبلغ، مقصد و کارمزد | هنوز رزرو انجام نشود |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_970",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "تأیید و رزرو اتمیک اصل و کارمزد",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L970 requires atomic reservation of principal and estimated fee at final confirmation.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 970,
+          "quote": "| تأیید نهایی و پذیرش درخواست | مبلغ برداشت و کارمزد برآوردشده با کنترل اتمیک رزرو شوند |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_971",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "پردازش: مبلغ دیگر قابل مصرف/برداشت نیست",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L971 states the amount is unavailable during processing or bank submission.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 971,
+          "quote": "| پردازش یا ارسال بانکی | مبلغ برای مصرف و برداشت دیگر در دسترس نباشد |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_972",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "موفقیت معتبر: کسر نهایی و ثبت مرجع بانکی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L972 requires final deduction and bank reference on valid success.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 972,
+          "quote": "| موفقیت معتبر | کسر نهایی و مرجع بانکی ثبت شود |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_973",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "شکست قطعی پیش از خروج وجه: آزادسازی رزرو",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L973 requires release after definite failure before funds leave.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 973,
+          "quote": "| شکست قطعی پیش از خروج وجه | رزرو آزاد شود |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_974",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "نتیجه نامعلوم: نگهداری رزرو تا تعیین تکلیف",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L974 requires retaining reservation until inquiry resolves unknown result.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 974,
+          "quote": "| نتیجهٔ نامعلوم | تا استعلام و تعیین تکلیف رزرو باقی بماند |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_975",
+      "source_label": "جدول مراحل برداشت و اثر مالی",
+      "target_label": "برگشت پس از خروج: پیگیری بازگشت واقعی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L975 requires following the actual return with related financial recording after funds leave.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 975,
+          "quote": "| برگشت پس از خروج وجه | بازگشت واقعی با ثبت مالی مرتبط پیگیری شود |"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_withdrawal_stages_and_reservation",
+      "target": "docs_shahab_digital_wallet_withdrawal_stage_effect_table",
+      "source_label": "مراحل برداشت و اثر مالی هر وضعیت",
+      "target_label": "جدول مراحل برداشت و اثر مالی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L967 is the heading of the financial consequences by withdrawal stage table, whose rows are L969-L975.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 967,
+          "quote": "| مرحله | اثر مالی |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 969,
+          "quote": "| پیش‌نمایش مبلغ، مقصد و کارمزد | هنوز رزرو انجام نشود |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 970,
+          "quote": "| تأیید نهایی و پذیرش درخواست | مبلغ برداشت و کارمزد برآوردشده با کنترل اتمیک رزرو شوند |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 971,
+          "quote": "| پردازش یا ارسال بانکی | مبلغ برای مصرف و برداشت دیگر در دسترس نباشد |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 972,
+          "quote": "| موفقیت معتبر | کسر نهایی و مرجع بانکی ثبت شود |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 973,
+          "quote": "| شکست قطعی پیش از خروج وجه | رزرو آزاد شود |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 974,
+          "quote": "| نتیجهٔ نامعلوم | تا استعلام و تعیین تکلیف رزرو باقی بماند |",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 975,
+          "quote": "| برگشت پس از خروج وجه | بازگشت واقعی با ثبت مالی مرتبط پیگیری شود |",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_withdrawal_stages_and_reservation",
+      "target": "docs_shahab_digital_wallet_withdrawal_no_duplicate_on_unknown",
+      "source_label": "مراحل برداشت و اثر مالی هر وضعیت",
+      "target_label": "عدم اجرای دوباره برداشت بدون استعلام",
+      "original_relation": "rationale_for",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L977 explicitly prohibits repeating without inquiry in a way that creates a second withdrawal. The original rationale_for predicate is not evidenced as a causal rationale; use references.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 977,
+          "quote": "اجرای دوباره بدون استعلام نباید برداشت دوم بسازد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 22,
+      "source": "docs_shahab_digital_wallet_withdrawal_stages_and_reservation",
+      "target": "docs_shahab_digital_wallet_withdrawal_cancellation_boundary",
+      "source_label": "مراحل برداشت و اثر مالی هر وضعیت",
+      "target_label": "لغو برداشت مشروط به مرحله اجرایی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L979 explicitly limits cancellation to the stage in which the execution cycle permits it.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 979,
+          "quote": "لغو فقط تا جایی مجاز است که چرخهٔ اجرایی اجازه دهد."
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-018",
+      "edge_index": 23,
+      "source": "docs_shahab_digital_wallet_p2p_recipient_identity_confirmation",
+      "target": "docs_shahab_digital_wallet_p2p_recipient_review_example",
+      "source_label": "شناسایی گیرنده با شناسه ثابت کیف پول",
+      "target_label": "مثال بازبینی حساب مقصد شخصی",
+      "original_relation": "references",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "references",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L991 specifies stable wallet identifier and search/display requirements; L993 illustrates lookup and the ban on person-to-organization transfer.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 993,
+          "quote": "**مثال:** فرستنده شمارهٔ همراه را وارد و مشخصات حساب شخصی گیرنده را بازبینی می‌کند. اگر نتیجه سازمان باشد، انتقال فرد به آن مجاز نیست؛ نمایش نوع حساب مجوز انتقال به سازمان ایجاد نمی‌کند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 991,
+          "quote": "**پاسخ مصوب:** شناسهٔ یکتای حساب یا کیف پول مرجع اصلی باشد. شمارهٔ همراه تأییدشده می‌تواند ابزار جست‌وجو باشد، ولی ثبت انتقال به شناسهٔ ثابت کیف پول متصل شود. پیش از تأیید، نام گیرنده، نوع حساب، شناسهٔ مقصد، مبلغ و ترکیب اعتبار نشان داده شوند. در نسخهٔ اولیه فقط حساب موجود و فعال مقصد باشد؛ انتقال به شماره‌ای که حساب ندارد فرایند مستقل می‌خواهد و فعلاً پشتیبانی نمی‌شود.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 0,
+      "source": "docs_shahab_digital_wallet_wrong_transfer_correction",
+      "target": "docs_shahab_digital_wallet_no_unilateral_reversal",
+      "source_label": "اصلاح انتقال اشتباه",
+      "target_label": "منع برگشت یک‌طرفه و کسر صرفاً بر مبنای ادعا",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1005 explicitly ties mistaken transfer handling to no automatic unilateral reversal and no debit solely based on assertion.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1005,
+          "quote": "صرف ادعا مجوز کسر نیست"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 1,
+      "source": "docs_shahab_digital_wallet_wrong_transfer_correction",
+      "target": "docs_shahab_digital_wallet_formal_transfer_reversal",
+      "source_label": "اصلاح انتقال اشتباه",
+      "target_label": "اصلاح رسمی انتقال و بازیابی حق برداشت",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1011 explicitly limits possible restoration of prior withdrawal status to complete formal correction with verified mistake and restored original components.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1011,
+          "quote": "فقط در اصلاح رسمی و کاملِ انتقال اولیه"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 2,
+      "source": "docs_shahab_digital_wallet_formal_transfer_reversal",
+      "target": "docs_shahab_digital_wallet_transfer_correction_traceability",
+      "source_label": "اصلاح رسمی انتقال و بازیابی حق برداشت",
+      "target_label": "پیوند اصلاح به رویداد انتقال اولیه",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1011 explicitly links formal correction to the prior transfer; ordinary transfer back does not restore withdrawal rights.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1011,
+          "quote": "اصلاح به رویداد قبلی متصل است"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 3,
+      "source": "docs_shahab_digital_wallet_organization_cash_topup",
+      "target": "docs_shahab_digital_wallet_admin_personal_card_exclusion",
+      "source_label": "شارژ نقدی خود سازمان",
+      "target_label": "عدم پشتیبانی شارژ سازمان از کارت شخصی ادمین",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1025 and L1027 distinguish organization-origin top-up from unsupported direct top-up using a personal account/card of the administrator.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1027,
+          "quote": "شارژ مستقیم سازمان از حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نشود"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1025,
+          "quote": "**پاسخ مصوب:** پرداختی که منشأ بانکی متعلق به همان سازمان، احراز و به کیف پول آن منتسب شده باشد، شارژ نقدی خود سازمان محسوب شود. این اعتبار طبق شرایط عمومی، قابلیت برداشت به حساب تأییدشدهٔ همان سازمان دارد.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 4,
+      "source": "docs_shahab_digital_wallet_organization_cash_topup",
+      "target": "docs_shahab_digital_wallet_individual_to_org_transfer_prohibition",
+      "source_label": "شارژ نقدی خود سازمان",
+      "target_label": "ممنوعیت انتقال از شخص به سازمان",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1027 explicitly says the personal-wallet-to-organization transfer alternative is prohibited.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1027,
+          "quote": "انتقال فرد به سازمان ممنوع است"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 5,
+      "source": "docs_shahab_digital_wallet_refund_same_payer_wallet",
+      "target": "docs_shahab_digital_wallet_partial_refund_proportional_allocation",
+      "source_label": "بازگشت به کیف پول پرداخت‌کننده",
+      "target_label": "تخصیص نسبتی استرداد چندمنشئی",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1045 explicitly returns payment to the payer wallet and allocates partial refund in proportion to original payment components.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1045,
+          "quote": "بازگشت جزئی به نسبت سهم‌های پرداخت تقسیم شود"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 6,
+      "source": "docs_shahab_digital_wallet_partial_refund_proportional_allocation",
+      "target": "docs_shahab_digital_wallet_refund_preserve_source_rights",
+      "source_label": "تخصیص نسبتی استرداد چندمنشئی",
+      "target_label": "حفظ منشأ و حق برداشت در استرداد",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1045 explicitly keeps credit origin and withdrawal rights when amounts are returned.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1045,
+          "quote": "منشأ و حق برداشت حفظ شوند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 7,
+      "source": "docs_shahab_digital_wallet_refund_operations_distinction",
+      "target": "docs_shahab_digital_wallet_refund_same_payer_wallet",
+      "source_label": "تمایز آزادسازی رزرو، بازگشت اعتبار و استرداد بانکی",
+      "target_label": "بازگشت به کیف پول پرداخت‌کننده",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L1051-L1053 distinguishes release, wallet-credit return and bank refund; the link from this distinction to the separate L1045 payer-wallet rule is contextual and must not imply every refund goes through the bank.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1053,
+          "quote": "استرداد بانکی | پول از مسیر بانکی یا پرداخت بازمی‌گردد؛ نتیجهٔ مستقل دارد"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1045,
+          "quote": "**پاسخ مصوب:** به همان کیف پول پرداخت‌کننده و با اجزای واقعی پرداخت برگردد. بازگشت کامل، سهم‌های اصلی را بازیابی و بازگشت جزئی به نسبت سهم‌های پرداخت تقسیم شود. منشأ و حق برداشت حفظ شوند و سقف‌ها بدون قاعده بازنشانی نشوند. ثبت قطعی حذف یا بازنویسی نشود؛ ثبت معکوس یا جبرانی به عملیات اولیه متصل باشد.",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1052,
+          "quote": "| بازگشت اعتبار | اجزای مصرف‌شده در کیف پول بازیابی می‌شوند |",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED",
+      "relationship_qualifier": "SEPARATE_RELEASE_CREDIT_RETURN_BANK_REFUND"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 8,
+      "source": "docs_shahab_digital_wallet_refund_preserve_source_rights",
+      "target": "docs_shahab_digital_wallet_returned_gift_expiry",
+      "source_label": "حفظ منشأ و حق برداشت در استرداد",
+      "target_label": "مهلت جبرانی هدیهٔ برگشتی",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L1045 preserves origin/withdrawal rights and L1065 defines treatment of returned gift expiry; their alignment is inferred from the two rules. Compensation only applies in the specified failure/Shahab-cancellation cases.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1065,
+          "quote": "هدیهٔ هنوز معتبر با تاریخ قبلی"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1045,
+          "quote": "**پاسخ مصوب:** به همان کیف پول پرداخت‌کننده و با اجزای واقعی پرداخت برگردد. بازگشت کامل، سهم‌های اصلی را بازیابی و بازگشت جزئی به نسبت سهم‌های پرداخت تقسیم شود. منشأ و حق برداشت حفظ شوند و سقف‌ها بدون قاعده بازنشانی نشوند. ثبت قطعی حذف یا بازنویسی نشود؛ ثبت معکوس یا جبرانی به عملیات اولیه متصل باشد.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 9,
+      "source": "docs_shahab_digital_wallet_returned_gift_expiry",
+      "target": "docs_shahab_digital_wallet_gift_grace_period_formula",
+      "source_label": "مهلت جبرانی هدیهٔ برگشتی",
+      "target_label": "فرمول مهلت جبرانی هفت روز یا زمان باقی‌مانده",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1067 explicitly defines the compensation interval as max(seven days, time left at payment), without adding the periods; it is the same component and not new money.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1067,
+          "quote": "مهلت جبرانی یعنی فرصت مصرف دوبارهٔ همان جزء هدیه، نه اعتبار تازه یا وجه نقد"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 10,
+      "source": "docs_shahab_digital_wallet_refund_same_payer_wallet",
+      "target": "docs_shahab_digital_wallet_employee_capacity_refund_effect",
+      "source_label": "بازگشت به کیف پول پرداخت‌کننده",
+      "target_label": "اثر استرداد بر ظرفیت کارمند",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1075 explicitly states refunded spending restores only original-period employee capacity; a closed period does not increase the new period.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1075,
+          "quote": "استرداد فقط ظرفیت دورهٔ اصلی را به اندازهٔ مبلغ بازگشتی احیا می‌کند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 11,
+      "source": "docs_shahab_digital_wallet_employee_capacity_refund_effect",
+      "target": "docs_shahab_digital_wallet_refund_implementation_open_items",
+      "source_label": "اثر استرداد بر ظرفیت کارمند",
+      "target_label": "جزئیات اجرایی باز استرداد",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L1075 defines employee-capacity refund and L1077 lists open return-processing decisions in the same section; applying every item in L1077 specifically to employee capacity is contextual, not a direct requirement.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1077,
+          "quote": "زمان پردازش بازگشت، روش تشخیص علت لغو"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 12,
+      "source": "docs_shahab_digital_wallet_auto_topup_authorization",
+      "target": "docs_shahab_digital_wallet_auto_topup_customer_limits",
+      "source_label": "مجوز شارژ خودکار",
+      "target_label": "آستانه، مبلغ هر شارژ و سقف دوره",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1103 explicitly states customer-configured threshold, fixed top-up and periodic total, with overall caps and pending requests checked.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1103,
+          "quote": "مشتری آستانهٔ اعتبار، مبلغ ثابت هر شارژ و سقف مجموع دوره را تنظیم کند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 13,
+      "source": "docs_shahab_digital_wallet_auto_topup_authorization",
+      "target": "docs_shahab_digital_wallet_periodic_wallet_payment_scope",
+      "source_label": "مجوز شارژ خودکار",
+      "target_label": "دامنه مجوز پرداخت دوره‌ای از کیف پول",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1111 explicitly distinguishes recurring wallet payments from automatic bank top-up; L1115 sets the separate recurring-payment authorization scope. Preserve the negative distinction and do not merge permissions.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1115,
+          "quote": "افزایش خارج از مجوز به پذیرش تازه نیاز دارد"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1091,
+          "quote": "**پاسخ مصوب:** اختیاری، با مجوز صریح مشتری، سقف مبلغ و امکان لغو؛ فقط پس از تأیید پشتیبانی فنی و قراردادی ارائه‌دهنده فعال شود.",
+          "purpose": "supplementary full source context"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1111,
+          "quote": "**مسئله و هدف:** مصرف دوره‌ای با شارژ بانکی خودکار متفاوت است.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED",
+      "relationship_qualifier": "AUTOMATIC_TOPUP_DISTINCT_FROM_RECURRING_PAYMENT"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 14,
+      "source": "docs_shahab_digital_wallet_periodic_wallet_payment_scope",
+      "target": "docs_shahab_digital_wallet_authorization_revocation_effect",
+      "source_label": "دامنه مجوز پرداخت دوره‌ای از کیف پول",
+      "target_label": "اثر لغو مجوز بر عملیات جاری و آینده",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L1115 describes recurring payment authorization and L1127 describes future/in-flight authorization cancellation; relation is contextual to the same section, and cancellation is immediate for future installments only.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1127,
+          "quote": "برای نوبت‌های بعد فوری باشد"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1115,
+          "quote": "**پاسخ مصوب:** برای خدمت مشخص، زمان‌بندی و سقف هر نوبت باشد؛ افزایش خارج از مجوز به پذیرش تازه نیاز دارد.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 15,
+      "source": "docs_shahab_digital_wallet_authorization_revocation_effect",
+      "target": "docs_shahab_digital_wallet_periodic_payment_failure_handling",
+      "source_label": "اثر لغو مجوز بر عملیات جاری و آینده",
+      "target_label": "شکست پرداخت دوره‌ای و جلوگیری از تکرار خودکار",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "INFERRED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "INFERRED",
+      "recommended_score": 0.85,
+      "reason": "L1127 describes cancellation while L1139 describes definitive failure; they are separate cases and their connection is contextual, not a rule that cancellation causes failure.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1139,
+          "quote": "تکرار با اقدام مشتری باشد"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1127,
+          "quote": "**پاسخ مصوب:** برای نوبت‌های بعد فوری باشد؛ عملیات در جریان فقط در صورت امکان توقف امن متوقف شود. وضعیت و تعهد قبلی پیگیری و ثبت شوند.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED",
+      "relationship_qualifier": "CANCELLATION_DISTINCT_FROM_DEFINITE_FAILURE"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 16,
+      "source": "docs_shahab_digital_wallet_wallet_spend_limits",
+      "target": "docs_shahab_digital_wallet_member_budget_not_owned_balance",
+      "source_label": "سقف‌های مصرف هم‌زمان عملیات/روزانه/ماهانه",
+      "target_label": "بودجه عضو مجوز مصرف است نه مالکیت موجودی",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1151 explicitly combines optional operation/daily/monthly limits and states member budget is permission rather than segregated funds.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1151,
+          "quote": "بودجهٔ عضو فقط مجوز مصرف است و پشتوانهٔ موجودی اختصاصی ندارد"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 17,
+      "source": "docs_shahab_digital_wallet_shared_ledger_segregated_accounts",
+      "target": "docs_shahab_digital_wallet_balanced_atomic_ledger_entries",
+      "source_label": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده",
+      "target_label": "ثبت دوطرفه و متوازن اتمیک",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1169 explicitly requires balanced double-entry and atomic recording of each related transaction; it does not decide provider or exact gift accounting.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1169,
+          "quote": "ثبت مالی دوطرفه و متوازن باشد و هر تراکنش مرتبط به‌صورت اتمیک ثبت شود"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 18,
+      "source": "docs_shahab_digital_wallet_shared_ledger_segregated_accounts",
+      "target": "docs_shahab_digital_wallet_no_automatic_gift_revenue",
+      "source_label": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده",
+      "target_label": "عدم ثبت خودکار هدیه به‌عنوان درآمد",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1169 explicitly says the approved account groups do not permit automatically recognizing gifts as revenue; the accounting treatment remains open.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1169,
+          "quote": "مجوز ثبت خودکار هدیه به‌عنوان درآمد نیست"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 19,
+      "source": "docs_shahab_digital_wallet_credit_component_provenance",
+      "target": "docs_shahab_digital_wallet_component_constraints_enforced",
+      "source_label": "تفصیل ساختاریافته منشأ و حقوق اجزای اعتبار",
+      "target_label": "کنترل سیستمی شرایط اجزای اعتبار",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1183 explicitly requires structured credit-component provenance and conditions enforceable by the system.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1183,
+          "quote": "سیستم باید بتواند آن‌ها را کنترل کند"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 20,
+      "source": "docs_shahab_digital_wallet_credit_component_provenance",
+      "target": "docs_shahab_digital_wallet_ledger_component_atomic_coordination",
+      "source_label": "تفصیل ساختاریافته منشأ و حقوق اجزای اعتبار",
+      "target_label": "هماهنگی اتمیک دفترکل و اجزای اعتبار",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1185 requires coordinated recording and an atomic transaction when changes share one database; cross-system coordination/recovery require prior design.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1185,
+          "quote": "اثر مالی و تغییر اجزای مربوط باید هماهنگ ثبت شوند"
+        }
+      ],
+      "semantic_review": "REVIEWED",
+      "relationship_qualifier": "ATOMIC_SINGLE_DATABASE_CROSS_SYSTEM_DESIGN_OPEN"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 21,
+      "source": "docs_shahab_digital_wallet_ledger_component_atomic_coordination",
+      "target": "docs_shahab_digital_wallet_cross_system_atomicity_limit",
+      "source_label": "هماهنگی اتمیک دفترکل و اجزای اعتبار",
+      "target_label": "محدودیت اتمیک‌بودن بین سامانه‌ها",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1185 explicitly says a single API cannot by itself guarantee cross-system atomicity; do not assume distributed atomicity.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1185,
+          "quote": "اتمیک‌بودن یک API به‌تنهایی تضمین اتمیک‌بودن دو سامانه نیست"
+        }
+      ],
+      "semantic_review": "REVIEWED",
+      "relationship_qualifier": "NO_IMPLIED_CROSS_SYSTEM_ATOMICITY"
+    },
+    {
+      "chunk": "GSEM-019",
+      "edge_index": 22,
+      "source": "docs_shahab_digital_wallet_credit_component_provenance",
+      "target": "docs_shahab_digital_wallet_refund_preserve_source_rights",
+      "source_label": "تفصیل ساختاریافته منشأ و حقوق اجزای اعتبار",
+      "target_label": "حفظ منشأ و حق برداشت در استرداد",
+      "original_relation": "conceptually_related_to",
+      "original_confidence": "EXTRACTED",
+      "verdict": "GROUNDED",
+      "recommended_relation": "conceptually_related_to",
+      "recommended_confidence": "EXTRACTED",
+      "recommended_score": 1.0,
+      "reason": "L1191 explicitly states consumption, transfer and proportional refund use the tracked components; preservation of origin and withdrawal rights is directly stated at L1045 as well.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1191,
+          "quote": "ترتیب مصرف بخش ۵.۳، انتقال بخش ۶.۵ و بازگشت نسبتی بخش ۶.۶ از همین اجزا استفاده می‌کنند"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1045,
+          "quote": "**پاسخ مصوب:** به همان کیف پول پرداخت‌کننده و با اجزای واقعی پرداخت برگردد. بازگشت کامل، سهم‌های اصلی را بازیابی و بازگشت جزئی به نسبت سهم‌های پرداخت تقسیم شود. منشأ و حق برداشت حفظ شوند و سقف‌ها بدون قاعده بازنشانی نشوند. ثبت قطعی حذف یا بازنویسی نشود؛ ثبت معکوس یا جبرانی به عملیات اولیه متصل باشد.",
+          "purpose": "supplementary full source context"
+        }
+      ],
+      "semantic_review": "REVIEWED"
+    }
+  ],
+  "unreviewed": []
+}

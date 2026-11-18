@@ -1,0 +1,26 @@
+{
+  "quarantine": [
+    {
+      "record_sha256": "e3fcd195c35576a2b5e9cc540c3aa1be1a03b77a93e456bfbb73f56c00d6d37d",
+      "reason": "L1593 is the top-up scenario row and does not support the claimed link to supplier settlement. Quarantine the edge unless another valid row is found.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1593,
+          "quote": "| شارژ | پول رسیده ولی پیام نتیجه نرسیده؛ پیام تأیید چند بار آمده؛ پرداخت قبل از وصول تأیید شده | بخش ۶.۱ |"
+        }
+      ]
+    },
+    {
+      "record_sha256": "2c6a0b7e7814f1949ca8f4826ade5564f61b10c073b197e9820d5fa99aa7cdbb",
+      "reason": "L1633 lists two distinct approved policies in one example; it asserts no connection between multi-admin recovery and daily reconciliation. Quarantine.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1633,
+          "quote": "تطبیق روزانه مصوب است؛ ساعت دقیق برش هنوز تعیین نشده است."
+        }
+      ]
+    }
+  ]
+}

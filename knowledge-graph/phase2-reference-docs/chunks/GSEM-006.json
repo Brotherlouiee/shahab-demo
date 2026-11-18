@@ -1,0 +1,2182 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_entitlement_engine",
+      "label": "موتور قابلیت‌ها (Entitlement Engine)",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1016",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "باید داده‌محور، نسخه‌دار و در Backend قابل اعمال باشد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§9, line 1016",
+      "decision_status": "approved principle; implementation parameters unspecified",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_entitlement_engine",
+            "label": "موتور قابلیت‌ها (Entitlement Engine)",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1016",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "باید داده‌محور، نسخه‌دار و در Backend قابل اعمال باشد",
+            "evidence_locator": "§9, line 1016",
+            "decision_status": "approved principle; implementation parameters unspecified",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+      "label": "استحقاق اشتراک و دامنه خدمات پلن‌ها",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "999-1014",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "رابطه شمول دامنه خدمات:",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§9, line 1012",
+      "decision_status": "approved E01 principles; numeric caps and signup incentive remain open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+            "label": "استحقاق اشتراک و دامنه خدمات پلن‌ها",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "999-1014",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "رابطه شمول دامنه خدمات:",
+            "evidence_locator": "§9, line 1012",
+            "decision_status": "approved E01 principles; numeric caps and signup incentive remain open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+      "label": "سهمیه Monitoring و Scheduled",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1008",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "محدود؛ سقف عددی باز",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§9 plan matrix, line 1008",
+      "decision_status": "availability by plan approved; numeric caps open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+            "label": "سهمیه Monitoring و Scheduled",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1008",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "محدود؛ سقف عددی باز",
+            "evidence_locator": "§9 plan matrix, line 1008",
+            "decision_status": "availability by plan approved; numeric caps open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_subscription_lifecycle",
+      "label": "چرخه عمر اشتراک E01",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1014",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "انقضای هر اشتراک پولی بدون تمدید معتبر، مستقیماً به برنزی بازمی‌گردد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§9 lifecycle E01, line 1014",
+      "decision_status": "approved principle; numeric timing/default selection open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_subscription_lifecycle",
+            "label": "چرخه عمر اشتراک E01",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1014",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "انقضای هر اشتراک پولی بدون تمدید معتبر، مستقیماً به برنزی بازمی‌گردد",
+            "evidence_locator": "§9 lifecycle E01, line 1014",
+            "decision_status": "approved principle; numeric timing/default selection open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_revenue_model_e01",
+      "label": "مدل سه‌جریانی درآمد E01",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1019-1027",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "سه جریان درآمدی مستقل در مدل مصوب E01 وجود دارد",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10, line 1019",
+      "decision_status": "approved model; numerical prices open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_revenue_model_e01",
+            "label": "مدل سه‌جریانی درآمد E01",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1019-1027",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "سه جریان درآمدی مستقل در مدل مصوب E01 وجود دارد",
+            "evidence_locator": "§10, line 1019",
+            "decision_status": "approved model; numerical prices open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_public_wallet_balance",
+      "label": "موجودی عمومی کیف پول",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1025",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "هر وجه واریزی مشتری بدون برچسب هدف شارژ یا نوع خدمت وارد موجودی عمومی می‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10 public wallet, line 1025",
+      "decision_status": "approved principle; wallet details governed by Wallet document",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_public_wallet_balance",
+            "label": "موجودی عمومی کیف پول",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1025",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "هر وجه واریزی مشتری بدون برچسب هدف شارژ یا نوع خدمت وارد موجودی عمومی می‌شود",
+            "evidence_locator": "§10 public wallet, line 1025",
+            "decision_status": "approved principle; wallet details governed by Wallet document",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+      "label": "برآورد و سقف افزایش خودکار عملیات",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1027",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**حداکثر افزایش خودکار ۲۰ درصد**",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10 reserve and cap, line 1027",
+      "decision_status": "20% cap approved; implementation details governed by Wallet document",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+            "label": "برآورد و سقف افزایش خودکار عملیات",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1027",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**حداکثر افزایش خودکار ۲۰ درصد**",
+            "evidence_locator": "§10 reserve and cap, line 1027",
+            "decision_status": "20% cap approved; implementation details governed by Wallet document",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+      "label": "FD-01 کیف پول",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1050-1058",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "قواعد محصول و مالی تصویب شده‌اند؛ انتخاب فناوری، بانک، قراردادها، برخی پارامترهای اجرایی، انطباق نهایی حقوقی و تاریخ انتشار بازند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.1, line 1050",
+      "decision_status": "product and financial rules approved; technical, legal, and release choices open",
+      "owner": null,
+      "owner_status": "owner decision required for changes; identity unspecified",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+            "label": "FD-01 کیف پول",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1050-1058",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "قواعد محصول و مالی تصویب شده‌اند؛ انتخاب فناوری، بانک، قراردادها، برخی پارامترهای اجرایی، انطباق نهایی حقوقی و تاریخ انتشار بازند",
+            "evidence_locator": "§10.1, line 1050",
+            "decision_status": "product and financial rules approved; technical, legal, and release choices open",
+            "owner": null,
+            "owner_status": "owner decision required for changes; identity unspecified"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+      "label": "سند کیف پول نسخه ۰٫۲۰ به‌عنوان مرجع جزئیات",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1050",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.1, line 1050",
+      "decision_status": "explicit source-of-detail reference",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+            "label": "سند کیف پول نسخه ۰٫۲۰ به‌عنوان مرجع جزئیات",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1050",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+            "evidence_locator": "§10.1, line 1050",
+            "decision_status": "explicit source-of-detail reference",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+      "label": "تفکیک انواع اعتبار و حقوق کیف پول",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1052-1056",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "موجودی نقدی، هدیه، رزروشده، قابل‌مصرف، قابل‌انتقال و قابل‌برداشت معادل نیستند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.1, line 1054",
+      "decision_status": "approved rules; detailed routes and limits referenced to Wallet §§3, 5, 6",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+            "label": "تفکیک انواع اعتبار و حقوق کیف پول",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1052-1056",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "موجودی نقدی، هدیه، رزروشده، قابل‌مصرف، قابل‌انتقال و قابل‌برداشت معادل نیستند",
+            "evidence_locator": "§10.1, line 1054",
+            "decision_status": "approved rules; detailed routes and limits referenced to Wallet §§3, 5, 6",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+      "label": "کنترل‌های دفترکل و رویدادهای کیف پول",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1056",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده، ثبت تغییرناپذیر و اصلاح جبرانی، idempotency، کنترل هم‌زمانی، تطبیق بانکی، بازیابی نتیجه نامعلوم",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.1, line 1056",
+      "decision_status": "approved requirements; implementation choices open under FD-01",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+            "label": "کنترل‌های دفترکل و رویدادهای کیف پول",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1056",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "دفترکل ریالی مشترک با حساب‌های تفکیک‌شده، ثبت تغییرناپذیر و اصلاح جبرانی، idempotency، کنترل هم‌زمانی، تطبیق بانکی، بازیابی نتیجه نامعلوم",
+            "evidence_locator": "§10.1, line 1056",
+            "decision_status": "approved requirements; implementation choices open under FD-01",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+      "label": "قواعد مصوب اشتراک E04",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1064-1072",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "سیاست‌های تجاری و چرخه عمر اشتراک E04 تصویب شده‌اند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.2, line 1064",
+      "decision_status": "approved policies; numeric/open parameters remain open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+            "label": "قواعد مصوب اشتراک E04",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1064-1072",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "سیاست‌های تجاری و چرخه عمر اشتراک E04 تصویب شده‌اند",
+            "evidence_locator": "§10.2, line 1064",
+            "decision_status": "approved policies; numeric/open parameters remain open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_fd02_activation_architecture",
+      "label": "تصمیم باز FD-02 درباره معماری و فعال‌سازی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1064,1074-1085",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "FD-02 فقط از نظر معماری اجرایی، زمان و دامنه فعال‌سازی همچنان باز است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.2, line 1064",
+      "decision_status": "open; outside first RAG release; does not reopen E04 commercial rules",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_fd02_activation_architecture",
+            "label": "تصمیم باز FD-02 درباره معماری و فعال‌سازی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1064,1074-1085",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "FD-02 فقط از نظر معماری اجرایی، زمان و دامنه فعال‌سازی همچنان باز است",
+            "evidence_locator": "§10.2, line 1064",
+            "decision_status": "open; outside first RAG release; does not reopen E04 commercial rules",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_entitlement_backend_enforcement",
+      "label": "اعمال استحقاق در Backend",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1079",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "enforce در backend، نه صرفاً frontend",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.2 investigation axes, line 1079",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_entitlement_backend_enforcement",
+            "label": "اعمال استحقاق در Backend",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1079",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "enforce در backend، نه صرفاً frontend",
+            "evidence_locator": "§10.2 investigation axes, line 1079",
+            "decision_status": "explicit requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_subscription_payment_states",
+      "label": "تفکیک وضعیت اشتراک، سفارش، پرداخت، رزرو و خدمت",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1072",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "وضعیت‌های اشتراک، سفارش، پرداخت، رزرو، خدمت و دفترکل مستقل و با شناسه مشترک مرتبط‌اند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.2 control and execution, line 1072",
+      "decision_status": "approved requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_subscription_payment_states",
+            "label": "تفکیک وضعیت اشتراک، سفارش، پرداخت، رزرو و خدمت",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1072",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "وضعیت‌های اشتراک، سفارش، پرداخت، رزرو، خدمت و دفترکل مستقل و با شناسه مشترک مرتبط‌اند",
+            "evidence_locator": "§10.2 control and execution, line 1072",
+            "decision_status": "approved requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+      "label": "تصمیم باز FD-03 پرداخت و اسناد حسابداری",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1087-1103",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "پرداخت و سند حسابداری دو موضوع وابسته اما متمایزند و نباید بدون تعیین دامنه به یک تسک واحد تبدیل شوند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.3, line 1089",
+      "decision_status": "open; outside first RAG release",
+      "owner": null,
+      "owner_status": "decision owner role required; identity unspecified",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+            "label": "تصمیم باز FD-03 پرداخت و اسناد حسابداری",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1087-1103",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "پرداخت و سند حسابداری دو موضوع وابسته اما متمایزند و نباید بدون تعیین دامنه به یک تسک واحد تبدیل شوند",
+            "evidence_locator": "§10.3, line 1089",
+            "decision_status": "open; outside first RAG release",
+            "owner": null,
+            "owner_status": "decision owner role required; identity unspecified"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_payment_verification",
+      "label": "تأیید سمت سرور پرداخت",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1095",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "callback به‌تنهایی اثبات پرداخت نیست",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.3 payment cycle, line 1095",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_payment_verification",
+            "label": "تأیید سمت سرور پرداخت",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1095",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "callback به‌تنهایی اثبات پرداخت نیست",
+            "evidence_locator": "§10.3 payment cycle, line 1095",
+            "decision_status": "explicit requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_accounting_document_types",
+      "label": "چهار نوع خروجی سند حسابداری",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1097-1100",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**چهار خروجی متفاوت‌اند**",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.3, line 1097",
+      "decision_status": "distinction approved; selected document scope open",
+      "owner": null,
+      "owner_status": "financial/accounting approver role specified; identity unspecified",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_accounting_document_types",
+            "label": "چهار نوع خروجی سند حسابداری",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1097-1100",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**چهار خروجی متفاوت‌اند**",
+            "evidence_locator": "§10.3, line 1097",
+            "decision_status": "distinction approved; selected document scope open",
+            "owner": null,
+            "owner_status": "financial/accounting approver role specified; identity unspecified"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+      "label": "جزئیات مدل درآمدی و پارامترهای باز",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1107-1144",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "ضریب یک‌دوم مشاوره حین دستیار و قواعد رزرو/استرداد در سند کیف پول نسخه ۰٫۲۰ مصوب‌اند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.4, line 1107",
+      "decision_status": "model and cited wallet rules approved; numerical prices and measurement details open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+            "label": "جزئیات مدل درآمدی و پارامترهای باز",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1107-1144",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "ضریب یک‌دوم مشاوره حین دستیار و قواعد رزرو/استرداد در سند کیف پول نسخه ۰٫۲۰ مصوب‌اند",
+            "evidence_locator": "§10.4, line 1107",
+            "decision_status": "model and cited wallet rules approved; numerical prices and measurement details open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_adviser_billing_basis",
+      "label": "مبنای صورتحساب مشاور",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1118,1124,1126",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مبنای تجاری مصوب مشاور **تعداد پرامپت × شدت تحلیل متناظر**",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.4.2, line 1124",
+      "decision_status": "commercial basis approved; formula coefficients and numeric prices open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_adviser_billing_basis",
+            "label": "مبنای صورتحساب مشاور",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1118,1124,1126",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مبنای تجاری مصوب مشاور **تعداد پرامپت × شدت تحلیل متناظر**",
+            "evidence_locator": "§10.4.2, line 1124",
+            "decision_status": "commercial basis approved; formula coefficients and numeric prices open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+      "label": "تعرفه دستیار و ضریب یک‌دوم مشاوره حین اجرا",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1120",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.4.1, line 1120",
+      "decision_status": "half-rate approved; assistant tariff numerics open",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+            "label": "تعرفه دستیار و ضریب یک‌دوم مشاوره حین اجرا",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1120",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل",
+            "evidence_locator": "§10.4.1, line 1120",
+            "decision_status": "half-rate approved; assistant tariff numerics open",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_monitoring_fee_open",
+      "label": "تعرفه مستقل احتمالی Monitoring",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1120,1144",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "تعرفه مستقل احتمالی Monitoring هنوز باز است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§10.4.1, line 1120",
+      "decision_status": "open; monitoring quota does not imply a fee",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_monitoring_fee_open",
+            "label": "تعرفه مستقل احتمالی Monitoring",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1120,1144",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "تعرفه مستقل احتمالی Monitoring هنوز باز است",
+            "evidence_locator": "§10.4.1, line 1120",
+            "decision_status": "open; monitoring quota does not imply a fee",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_customer_action_gates",
+      "label": "سه دروازه اقدام مؤثر مشتری",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1147-1156",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "دسترسی ناشی از پلن/خرید، مجوز معتبر مشتری و امکان قانونی/فنی اجرای اقدام",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§11, line 1147",
+      "decision_status": "explicit requirement",
+      "owner": "customer for consent and confirmation",
+      "owner_status": "customer consent explicitly required; other accountable owner unspecified",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_customer_action_gates",
+            "label": "سه دروازه اقدام مؤثر مشتری",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1147-1156",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "دسترسی ناشی از پلن/خرید، مجوز معتبر مشتری و امکان قانونی/فنی اجرای اقدام",
+            "evidence_locator": "§11, line 1147",
+            "decision_status": "explicit requirement",
+            "owner": "customer for consent and confirmation",
+            "owner_status": "customer consent explicitly required; other accountable owner unspecified"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_sensitive_data_controls",
+      "label": "کنترل داده‌های حساس",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1156",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "رمز عبور بانکی ذخیره نمی‌شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§11 security, line 1156",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_sensitive_data_controls",
+            "label": "کنترل داده‌های حساس",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1156",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "رمز عبور بانکی ذخیره نمی‌شود",
+            "evidence_locator": "§11 security, line 1156",
+            "decision_status": "explicit requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_permitted_access_methods",
+      "label": "ارزیابی روش‌های دسترسی مجاز",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1160-1168",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "نبود API مستقیم یا عمومی یک وب‌سایت نباید باعث حذف پیش‌فرض آن منبع یا خدمت از امکان‌سنجی شود",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§11.1, line 1160",
+      "decision_status": "evaluation principle explicit; access legality and feasibility require per-source proof",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_permitted_access_methods",
+            "label": "ارزیابی روش‌های دسترسی مجاز",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1160-1168",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "نبود API مستقیم یا عمومی یک وب‌سایت نباید باعث حذف پیش‌فرض آن منبع یا خدمت از امکان‌سنجی شود",
+            "evidence_locator": "§11.1, line 1160",
+            "decision_status": "evaluation principle explicit; access legality and feasibility require per-source proof",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
+      "label": "محدودیت حقوقی و فنی API غیرمستقیم",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1165,1168",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مشاهده آن در ترافیک مرورگر به‌تنهایی مجوز فراخوانی یا استفاده مجدد از توکن/نشست نیست",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§11.1, line 1165",
+      "decision_status": "explicit constraint; source-specific permissions remain to be tested",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
+            "label": "محدودیت حقوقی و فنی API غیرمستقیم",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1165,1168",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مشاهده آن در ترافیک مرورگر به‌تنهایی مجوز فراخوانی یا استفاده مجدد از توکن/نشست نیست",
+            "evidence_locator": "§11.1, line 1165",
+            "decision_status": "explicit constraint; source-specific permissions remain to be tested",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+      "label": "Computer Use به‌عنوان ستون فقرات عملیات",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1174-1188",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "ستون فقرات معماری، Computer Use بر روی رابط واقعی وب، اندروید یا iOS است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§12, line 1175",
+      "decision_status": "explicit architecture principle; use remains subject to legality, feasibility, and customer consent",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+            "label": "Computer Use به‌عنوان ستون فقرات عملیات",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1174-1188",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "ستون فقرات معماری، Computer Use بر روی رابط واقعی وب، اندروید یا iOS است",
+            "evidence_locator": "§12, line 1175",
+            "decision_status": "explicit architecture principle; use remains subject to legality, feasibility, and customer consent",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_bank_api_supplementary",
+      "label": "API رسمی بانک به‌عنوان گزینه مکمل",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1174-1175",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "گزینه مکمل و مزیت رقابتی تجاری است",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§12 knowledge and product information, line 1174",
+      "decision_status": "explicitly supplementary, not a critical dependency",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_bank_api_supplementary",
+            "label": "API رسمی بانک به‌عنوان گزینه مکمل",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1174-1175",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "گزینه مکمل و مزیت رقابتی تجاری است",
+            "evidence_locator": "§12 knowledge and product information, line 1174",
+            "decision_status": "explicitly supplementary, not a critical dependency",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_phase_2_development_blueprint_catalog_freshness_confidence",
+      "label": "برچسب تازگی و اطمینان کاتالوگ",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1188",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "داده‌های قبلی باید با برچسب تازگی و اطمینان مدیریت شوند",
+      "evidence_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:§12 non-dependency principle, line 1188",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "unspecified in excerpt",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Compared node label, decision/owner metadata and quoted evidence against the pinned source section; literal quote was located at recorded evidence locator."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_phase_2_development_blueprint_catalog_freshness_confidence",
+            "label": "برچسب تازگی و اطمینان کاتالوگ",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+            "source_location": "1188",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "داده‌های قبلی باید با برچسب تازگی و اطمینان مدیریت شوند",
+            "evidence_locator": "§12 non-dependency principle, line 1188",
+            "decision_status": "explicit requirement",
+            "owner": null,
+            "owner_status": "unspecified in excerpt"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+      "target": "docs_shahab_phase_2_development_blueprint_entitlement_engine",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1012,1016",
+      "weight": 1,
+      "evidence_quote": "جزئیات دسترسی در کاتالوگ نسخه‌دار و کنترل Backend مشخص می‌شود",
+      "evidence_locator": "§9, lines 1012 and 1016",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Subscription entitlements are in versioned catalog and controlled by Backend; the precise engine relationship is contextual.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+          "target": "docs_shahab_phase_2_development_blueprint_entitlement_engine",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1012,1016",
+          "weight": 1,
+          "evidence_quote": "جزئیات دسترسی در کاتالوگ نسخه‌دار و کنترل Backend مشخص می‌شود",
+          "evidence_locator": "§9, lines 1012 and 1016",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+      "target": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1008,1012",
+      "weight": 1,
+      "evidence_quote": "Monitoring / Scheduled؛ تعداد پایش فعال هم‌زمان",
+      "evidence_locator": "§9 plan matrix, line 1008",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Monitoring/Scheduled simultaneous quota is within subscription access scope.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
+          "target": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1008,1012",
+          "weight": 1,
+          "evidence_quote": "Monitoring / Scheduled؛ تعداد پایش فعال هم‌زمان",
+          "evidence_locator": "§9 plan matrix, line 1008",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_subscription_lifecycle",
+      "target": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1014",
+      "weight": 1,
+      "evidence_quote": "پایش‌های فاقد دسترسی یا مازاد بر سهمیه **معلق** می‌شوند",
+      "evidence_locator": "§9 lifecycle E01, line 1014",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Subscription lifecycle suspends monitoring beyond entitlement or quota.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_subscription_lifecycle",
+          "target": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1014",
+          "weight": 1,
+          "evidence_quote": "پایش‌های فاقد دسترسی یا مازاد بر سهمیه **معلق** می‌شوند",
+          "evidence_locator": "§9 lifecycle E01, line 1014",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_revenue_model_e01",
+      "target": "docs_shahab_phase_2_development_blueprint_public_wallet_balance",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1025",
+      "weight": 1,
+      "evidence_quote": "موجودی عمومی",
+      "evidence_locator": "§10, line 1025",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "General wallet balance is mentioned in financial model; the original one-word excerpt needs surrounding clause.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_revenue_model_e01",
+          "target": "docs_shahab_phase_2_development_blueprint_public_wallet_balance",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1025",
+          "weight": 1,
+          "evidence_quote": "موجودی عمومی",
+          "evidence_locator": "§10, line 1025",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1023,
+          "quote": "۳. **پرداخت به‌اندازه مصرف مشاور** از کیف پول عمومی مشتری، بر اساس تعداد پرامپت‌های قابل صورتحساب و شدت تحلیل هر پاسخ؛ عمق تحلیل به پلن وابسته نیست. مشاوره محدود حین عملیات دستیار طبق §۹.۱.۱ سند کیف پول با ضریب ثابت یک‌دوم نرخ متناظر مستقل محاسبه می‌شود."
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1025,
+          "quote": "**کیف پول عمومی:** هر وجه واریزی مشتری بدون برچسب هدف شارژ یا نوع خدمت وارد موجودی عمومی می‌شود و می‌تواند برای هر خدمت مجاز مصرف شود؛ شارژ به قصد ده درخواست وام مانع مصرف همان پول برای جریمه خودرو یا قبوض نیست. نوع خدمت، تعرفه، فراخوانی‌های هزینه‌دار و نتیجه فقط در سفارش، فاکتور، رسید و تراکنش ثبت می‌شوند. وجه خدمت شروع‌نشده همچنان در کیف پول مشتری می‌ماند تا خودش تعیین تکلیف کند؛ سفارش، مالکیت اختصاصی بر موجودی ایجاد نمی‌کند. کنترل یا رزرو **موقت** اعتبار در عملیات آغازشده، صرفاً برای جلوگیری از خرج هم‌زمان و تسویه است و پول را به‌طور دائمی برچسب‌گذاری نمی‌کند. اعتبار هدیه و تخفیفی مطابق قواعد مصوب §§۵ و ۶ سند کیف پول، منشأ، قابلیت مصرف، محدودیت انتقال/برداشت و انقضای مستقل دارند؛ مبلغ و شرایط کمپین تشویقی ثبت‌نام همچنان تعیین نشده است."
+        }
+      ],
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+      "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1027",
+      "weight": 1,
+      "evidence_quote": "مطابق §۶.۴.۴ سند کیف پول اعلام می‌شود",
+      "evidence_locator": "§10, line 1027",
+      "decision_status": "explicit reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Automatic increase estimate explicitly refers to Wallet §6.4.4.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_retry_estimate_cap",
+          "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1027",
+          "weight": 1,
+          "evidence_quote": "مطابق §۶.۴.۴ سند کیف پول اعلام می‌شود",
+          "evidence_locator": "§10, line 1027",
+          "decision_status": "explicit reference"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+      "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1050",
+      "weight": 1,
+      "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+      "evidence_locator": "§10.1, line 1050",
+      "decision_status": "explicit reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "FD-01 names Wallet v0.20 as specialized source of detail; technical/legal/release decisions remain open.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+          "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1050",
+          "weight": 1,
+          "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+          "evidence_locator": "§10.1, line 1050",
+          "decision_status": "explicit reference"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+      "target": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1054-1056",
+      "weight": 1,
+      "evidence_quote": "منشأ و شرایط هر جزء در انتقال، مصرف و بازگشت حفظ می‌شود",
+      "evidence_locator": "§10.1, lines 1054 and 1056",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Credit origins and ledger controls occur in adjacent FD-01 clauses; their linkage is inferred rather than an explicit named relationship.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_credit_types_and_rights",
+          "target": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1054-1056",
+          "weight": 1,
+          "evidence_quote": "منشأ و شرایط هر جزء در انتقال، مصرف و بازگشت حفظ می‌شود",
+          "evidence_locator": "§10.1, lines 1054 and 1056",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1054,
+          "quote": "**انواع اعتبار و حقوق:** موجودی نقدی، هدیه، رزروشده، قابل‌مصرف، قابل‌انتقال و قابل‌برداشت معادل نیستند. وجه پرداختی مشتری به سفارش خاص قفل دائمی نمی‌شود و برای خدمات مجاز شهاب قابل مصرف است؛ اما هدیه و تخفیف حق برداشت و انتقال نقدی ایجاد نمی‌کنند. منشأ و شرایط هر جزء در انتقال، مصرف و بازگشت حفظ می‌شود. انتقال بین کاربران، تخصیص سازمانی و برداشت صرفاً با مسیرها، گیرندگان و سقف‌های مصوب §§۳، ۵ و ۶ سند کیف پول انجام می‌شوند."
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1056,
+          "quote": "**عملیات و ثبت مالی:** شارژ، رزرو موقت، کسر قطعی، آزادسازی و استرداد رویدادهای مستقل و قابل ردیابی‌اند. رزرو عملیات فعال، اجزای مشخص اعتبار را کنار می‌گذارد؛ نتیجه نامعلوم نباید بدون تعیین تعهد آزاد شود. سقف افزایش خودکار مجاز **۲۰ درصد** طبق §۶.۴.۴ است، نه کارمزد یا کسر قطعی. دفترکل ریالی مشترک با حساب‌های تفکیک‌شده، ثبت تغییرناپذیر و اصلاح جبرانی، idempotency، کنترل هم‌زمانی، تطبیق بانکی، بازیابی نتیجه نامعلوم و **ردیابی تمام زنجیره انتقال اعتبار و گره‌های واسط** الزامی است. ثبت مالی، وضعیت خدمت و رویداد بانک شناسه‌ها و چرخه‌های مستقل اما مرتبط دارند."
+        }
+      ],
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+      "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1050",
+      "weight": 1,
+      "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+      "evidence_locator": "§10.1, line 1050",
+      "decision_status": "explicit reference",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Wallet document is explicitly the detailed policy reference; ledger topics are specified at line 1056.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_ledger_controls",
+          "target": "docs_shahab_phase_2_development_blueprint_wallet_source_of_detail",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1050",
+          "weight": 1,
+          "evidence_quote": "سند مستقل [کیف پول دیجیتال شهاب، نسخه ۰٫۲۰](SHAHAB_DIGITAL_WALLET.md) متن کامل و مرجع جزئیات تخصصی است",
+          "evidence_locator": "§10.1, line 1050",
+          "decision_status": "explicit reference"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+      "target": "docs_shahab_phase_2_development_blueprint_fd02_activation_architecture",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1064,1074",
+      "weight": 1,
+      "evidence_quote": "این پرسش قواعد تجاری E04 را باز نمی‌کند",
+      "evidence_locator": "§10.2, lines 1064 and 1074",
+      "decision_status": "E04_RULES_APPROVED_FD02_IMPLEMENTATION_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "FD-02 is an open implementation question and explicitly does not reopen E04 business rules.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+          "target": "docs_shahab_phase_2_development_blueprint_fd02_activation_architecture",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1064,1074",
+          "weight": 1,
+          "evidence_quote": "این پرسش قواعد تجاری E04 را باز نمی‌کند",
+          "evidence_locator": "§10.2, lines 1064 and 1074",
+          "decision_status": "explicit distinction between approved policy and open execution decision"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+      "target": "docs_shahab_phase_2_development_blueprint_entitlement_backend_enforcement",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1077-1079",
+      "weight": 1,
+      "evidence_quote": "منبع حقیقت وضعیت اشتراک و مجوز قابلیت‌ها؛ enforce در backend",
+      "evidence_locator": "§10.2 investigation axes, lines 1077-1079",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "E04 specifies Backend enforcement and source of truth; it does not identify a named accountable owner.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+          "target": "docs_shahab_phase_2_development_blueprint_entitlement_backend_enforcement",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1077-1079",
+          "weight": 1,
+          "evidence_quote": "منبع حقیقت وضعیت اشتراک و مجوز قابلیت‌ها؛ enforce در backend",
+          "evidence_locator": "§10.2 investigation axes, lines 1077-1079",
+          "decision_status": "explicit requirement"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+      "target": "docs_shahab_phase_2_development_blueprint_subscription_payment_states",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1072",
+      "weight": 1,
+      "evidence_quote": "وضعیت‌های اشتراک، سفارش، پرداخت، رزرو، خدمت و دفترکل مستقل و با شناسه مشترک مرتبط‌اند",
+      "evidence_locator": "§10.2, line 1072",
+      "decision_status": "explicit requirement",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Subscription, order, payment, reserve, service and ledger are separate states linked by identifier.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_e04_subscription_rules",
+          "target": "docs_shahab_phase_2_development_blueprint_subscription_payment_states",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1072",
+          "weight": 1,
+          "evidence_quote": "وضعیت‌های اشتراک، سفارش، پرداخت، رزرو، خدمت و دفترکل مستقل و با شناسه مشترک مرتبط‌اند",
+          "evidence_locator": "§10.2, line 1072",
+          "decision_status": "explicit requirement"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+      "target": "docs_shahab_phase_2_development_blueprint_payment_verification",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1095",
+      "weight": 1,
+      "evidence_quote": "callback به‌تنهایی اثبات پرداخت نیست",
+      "evidence_locator": "§10.3, line 1095",
+      "decision_status": "PAYMENT_CONTROL_SPECIFIED_FD03_DESIGN_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "FD-03 remains open while callback alone is not proof of payment; do not transfer open status to the control.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+          "target": "docs_shahab_phase_2_development_blueprint_payment_verification",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1095",
+          "weight": 1,
+          "evidence_quote": "callback به‌تنهایی اثبات پرداخت نیست",
+          "evidence_locator": "§10.3, line 1095",
+          "decision_status": "explicit requirement"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+      "target": "docs_shahab_phase_2_development_blueprint_accounting_document_types",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1097-1100",
+      "weight": 1,
+      "evidence_quote": "**چهار خروجی متفاوت‌اند**",
+      "evidence_locator": "§10.3, line 1097",
+      "decision_status": "explicit distinction; selection open",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Four distinct accounting outputs are described; detailed selection remains open.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_fd03_payment_accounting",
+          "target": "docs_shahab_phase_2_development_blueprint_accounting_document_types",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1097-1100",
+          "weight": 1,
+          "evidence_quote": "**چهار خروجی متفاوت‌اند**",
+          "evidence_locator": "§10.3, line 1097",
+          "decision_status": "explicit distinction; selection open"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+      "target": "docs_shahab_phase_2_development_blueprint_adviser_billing_basis",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1118,1124",
+      "weight": 1,
+      "evidence_quote": "مبنای تجاری مصوب مشاور **تعداد پرامپت × شدت تحلیل متناظر**",
+      "evidence_locator": "§10.4.2, line 1124",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Adviser billing uses prompt count and corresponding analytical intensity; maintain any open numeric parameters.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+          "target": "docs_shahab_phase_2_development_blueprint_adviser_billing_basis",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1118,1124",
+          "weight": 1,
+          "evidence_quote": "مبنای تجاری مصوب مشاور **تعداد پرامپت × شدت تحلیل متناظر**",
+          "evidence_locator": "§10.4.2, line 1124",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+      "target": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1120",
+      "weight": 1,
+      "evidence_quote": "ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل",
+      "evidence_locator": "§10.4.1, line 1120",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "One-half coefficient for advice during Assistant service is explicitly approved.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
+          "target": "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1120",
+          "weight": 1,
+          "evidence_quote": "ضریب مصوب یک‌دوم نرخ متناظر مشاوره مستقل",
+          "evidence_locator": "§10.4.1, line 1120",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+      "target": "docs_shahab_phase_2_development_blueprint_monitoring_fee_open",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1120",
+      "weight": 1,
+      "evidence_quote": "تعرفه مستقل احتمالی Monitoring هنوز باز است و از مصوبه سقف پایش فعال نتیجه نمی‌شود",
+      "evidence_locator": "§10.4.1, line 1120",
+      "decision_status": "QUOTA_APPROVED_NUMERIC_CAP_AND_FEE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Monitoring quota and possible independent fee are distinct; fee remains open.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
+          "target": "docs_shahab_phase_2_development_blueprint_monitoring_fee_open",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1120",
+          "weight": 1,
+          "evidence_quote": "تعرفه مستقل احتمالی Monitoring هنوز باز است و از مصوبه سقف پایش فعال نتیجه نمی‌شود",
+          "evidence_locator": "§10.4.1, line 1120",
+          "decision_status": "explicitly separate quota from unresolved fee"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_customer_action_gates",
+      "target": "docs_shahab_phase_2_development_blueprint_sensitive_data_controls",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1147,1156",
+      "weight": 1,
+      "evidence_quote": "توکن‌ها، نشست‌ها، مدارک هویتی و سوابق عملیات نیز داده حساس‌اند",
+      "evidence_locator": "§11, lines 1147 and 1156",
+      "decision_status": "explicit security/control relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Sensitive data controls and action gates are related by context; line 1156 does not explicitly connect them as a relationship.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_customer_action_gates",
+          "target": "docs_shahab_phase_2_development_blueprint_sensitive_data_controls",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1147,1156",
+          "weight": 1,
+          "evidence_quote": "توکن‌ها، نشست‌ها، مدارک هویتی و سوابق عملیات نیز داده حساس‌اند",
+          "evidence_locator": "§11, lines 1147 and 1156",
+          "decision_status": "explicit security/control relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1147,
+          "quote": "هر اقدام مؤثر سه دروازه دارد: **دسترسی ناشی از پلن/خرید، مجوز معتبر مشتری و امکان قانونی/فنی اجرای اقدام**."
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1156,
+          "quote": "رمز عبور بانکی ذخیره نمی‌شود. توکن‌ها، نشست‌ها، مدارک هویتی و سوابق عملیات نیز داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند."
+        }
+      ],
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_permitted_access_methods",
+      "target": "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1160,1165",
+      "weight": 1,
+      "evidence_quote": "endpoint غیرمستقیم ممکن است خصوصی، ناپایدار یا ممنوع‌الاستفاده باشد",
+      "evidence_locator": "§11.1, lines 1160 and 1165",
+      "decision_status": "explicit constraint",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Permitted access evaluation explicitly flags indirect endpoint legal and technical limitations.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_permitted_access_methods",
+          "target": "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1160,1165",
+          "weight": 1,
+          "evidence_quote": "endpoint غیرمستقیم ممکن است خصوصی، ناپایدار یا ممنوع‌الاستفاده باشد",
+          "evidence_locator": "§11.1, lines 1160 and 1165",
+          "decision_status": "explicit constraint"
+        }
+      },
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+      "target": "docs_shahab_phase_2_development_blueprint_bank_api_supplementary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1174-1175",
+      "weight": 1,
+      "evidence_quote": "اتصال مستقیم به API بانکی مسیر اصلی یا پیش‌شرط اجرای خدمات نیست",
+      "evidence_locator": "§12, line 1175",
+      "decision_status": "explicit architecture relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Computer Use is primary and direct bank API is supplementary; preserve the negative non-prerequisite.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+          "target": "docs_shahab_phase_2_development_blueprint_bank_api_supplementary",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1174-1175",
+          "weight": 1,
+          "evidence_quote": "اتصال مستقیم به API بانکی مسیر اصلی یا پیش‌شرط اجرای خدمات نیست",
+          "evidence_locator": "§12, line 1175",
+          "decision_status": "explicit architecture relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1174,
+          "quote": "- **دریافت دانش و اطلاعات محصولات:** اتصال به منابع رسمی برای کشف و بازاعتبارسنجی مقررات و محصولات؛ مسیرهای قابل‌ارزیابی شامل مشاهده و استخراج کنترل‌شده از وب/اپ، API رسمی، **API غیرمستقیم مجاز** و API واسط ثالث مجاز از طریق ابزارهای MCP هستند؛ روش اصلی باید برای هر منبع بر اساس مجوز و شواهد فنی انتخاب شود. **دریافت داده از API رسمی بانک‌ها یا مؤسسات، اگر در آینده در دسترس باشد، گزینه مکمل و مزیت رقابتی تجاری است**: می‌تواند تازگی، دقت، پوشش و سرعت به‌روزرسانی کاتالوگ را افزایش دهد و همکاری‌های تجاری را تقویت کند. اما هیچ وابستگی حیاتی به ارائه API یا همکاری بانک نباید ایجاد شود؛ نبود یا قطع API نباید مسیر اصلی کشف و اجرای خدمت را متوقف کند."
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1175,
+          "quote": "- **اجرای عملیات مشتری:** **ستون فقرات معماری، Computer Use بر روی رابط واقعی وب، اندروید یا iOS است**. اتصال مستقیم به API بانکی مسیر اصلی یا پیش‌شرط اجرای خدمات نیست. استفاده از رابط نیز مشروط به مجازبودن روش، امکان فنی و کنترل رضایت مشتری است."
+        }
+      ],
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+      "target": "docs_shahab_phase_2_development_blueprint_catalog_freshness_confidence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "1188",
+      "weight": 1,
+      "evidence_quote": "خرابی، نبود دسترسی یا توقف همکاری API نباید گردش‌کار اجرایی مبتنی بر Computer Use را از کار بیندازد",
+      "evidence_locator": "§12 non-dependency principle, line 1188",
+      "decision_status": "explicit relationship",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_RELATION_EVIDENCE",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "API outage must not stop Computer Use and catalog data must have freshness labeling; both are explicit independent constraints, not an approval of a positive dependency.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_computer_use_operational_backbone",
+          "target": "docs_shahab_phase_2_development_blueprint_catalog_freshness_confidence",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "1188",
+          "weight": 1,
+          "evidence_quote": "خرابی، نبود دسترسی یا توقف همکاری API نباید گردش‌کار اجرایی مبتنی بر Computer Use را از کار بیندازد",
+          "evidence_locator": "§12 non-dependency principle, line 1188",
+          "decision_status": "explicit relationship"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1188,
+          "quote": "**اصل عدم وابستگی:** خرابی، نبود دسترسی یا توقف همکاری API نباید گردش‌کار اجرایی مبتنی بر Computer Use را از کار بیندازد؛ در مسیر کاتالوگ نیز داده‌های قبلی باید با برچسب تازگی و اطمینان مدیریت شوند، نه اینکه اطلاعات منقضی به‌عنوان قطعی ارائه شوند. جزئیات در فصل سوم آمده است."
+        }
+      ],
+      "status_scope": "source statement only; relationship approval remains separately recorded"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": 191
+  },
+  "coverage_range": {
+    "start_line": 999,
+    "end_line": 1189
+  },
+  "coverage_manifest": [
+    {
+      "type": "heading",
+      "label": "§9 مدل محصول و سطوح عضویت",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 999,
+      "end_line": 999
+    },
+    {
+      "type": "heading",
+      "label": "§10 مدل تجاری و معماری مالی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1017,
+      "end_line": 1017
+    },
+    {
+      "type": "heading",
+      "label": "§10.1 کیف پول شهاب",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1048,
+      "end_line": 1048
+    },
+    {
+      "type": "heading",
+      "label": "§10.2 اشتراک E04 و FD-02",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1062,
+      "end_line": 1062
+    },
+    {
+      "type": "heading",
+      "label": "§10.3 تصمیم باز FD-03",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1087,
+      "end_line": 1087
+    },
+    {
+      "type": "heading",
+      "label": "§10.4 مدل درآمدی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1105,
+      "end_line": 1105
+    },
+    {
+      "type": "heading",
+      "label": "§10.4.1 منطق کلان کسب درآمد",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1109,
+      "end_line": 1109
+    },
+    {
+      "type": "heading",
+      "label": "§10.4.2 سنجش مصرف",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1122,
+      "end_line": 1122
+    },
+    {
+      "type": "heading",
+      "label": "§10.4.3 کیف پول و تسویه",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1128,
+      "end_line": 1128
+    },
+    {
+      "type": "heading",
+      "label": "§10.4.4 طراحی مالی و انتشار",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1136,
+      "end_line": 1136
+    },
+    {
+      "type": "heading",
+      "label": "§11 مجوز مشتری و امنیت",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1145,
+      "end_line": 1145
+    },
+    {
+      "type": "heading",
+      "label": "§11.1 ابزارهای MCP و API غیرمستقیم",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1158,
+      "end_line": 1158
+    },
+    {
+      "type": "heading",
+      "label": "§12 منابع خارجی و استقلال عملیاتی",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1170,
+      "end_line": 1170
+    },
+    {
+      "type": "table",
+      "label": "ماتریس قابلیت پلن‌های Bronze/Silver/Gold",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1003,
+      "end_line": 1010,
+      "decision_status": "table rows and cells included"
+    },
+    {
+      "type": "table",
+      "label": "مقایسه کلان مدل درآمدی مشاور و دستیار",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1111,
+      "end_line": 1116,
+      "decision_status": "table rows and cells included"
+    },
+    {
+      "type": "table",
+      "label": "ماتریس سطح اقدام و کنترل مجوز مشتری",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1149,
+      "end_line": 1154,
+      "decision_status": "table rows and cells included"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E01: کاتالوگ نسخه‌دار، شمول پلن‌ها، ممنوعیت دورزدن مجوز و سقف‌های باز",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1012,
+      "end_line": 1012,
+      "decision_status": "approved principles; signup incentive and numeric caps open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E01: انقضا، تعلیق Monitoring، حفظ تاریخچه، تعهد خریداری‌شده و مانده کیف پول",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1014,
+      "end_line": 1014,
+      "decision_status": "approved principles; timing and parameters open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم: جداسازی Entitlement Engine از تعرفه و دفترکل",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1016,
+      "end_line": 1016,
+      "decision_status": "approved design requirement"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E01: سه جریان درآمدی، کیف پول عمومی و سقف ۲۰٪ عملیات",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1019,
+      "end_line": 1027,
+      "decision_status": "model approved; amounts and open parameters remain open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E03 / FD-01: قواعد محصول و مالی کیف پول در برابر انتخاب‌های اجرایی باز",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1050,
+      "end_line": 1058,
+      "decision_status": "product and financial rules approved; technical, legal, release details open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E04: قواعد اشتراک، استرداد، رضایت و جداسازی وضعیت‌ها",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1064,
+      "end_line": 1072,
+      "decision_status": "policies approved; numeric and operational parameters open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم FD-02: تعیین زمان و معماری فعال‌سازی پلن‌ها",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1074,
+      "end_line": 1085,
+      "decision_status": "open; does not reopen E04"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم FD-03: تفکیک دامنه پرداخت از سند حسابداری",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1089,
+      "end_line": 1103,
+      "decision_status": "open; outside first RAG release"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم E01 و Wallet: مدل درآمدی، half-rate، اصول رزرو و استرداد در برابر اعداد باز",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1107,
+      "end_line": 1144,
+      "decision_status": "principles approved; pricing and specific parameters open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم: سه دروازه اقدام و کنترل داده حساس",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1147,
+      "end_line": 1156,
+      "decision_status": "explicit requirements"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم: ارزیابی روش‌های دسترسی و اثبات دسترسی مجاز",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1160,
+      "end_line": 1168,
+      "decision_status": "method selection per source; source-specific proof open"
+    },
+    {
+      "type": "decision",
+      "label": "تصمیم: Computer Use مسیر اصلی عملیات و API بانک مکمل",
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "start_line": 1174,
+      "end_line": 1188,
+      "decision_status": "explicit architecture principle; access remains conditional"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+Graph: graph-repair/staging/package/semantic/graph.json (1180 nodes) | Traversal: BFS depth=1 | Start (given): ['مالکیت کیف پول شخصی و سازمانی'] | 9 nodes found
+
+NODE مالکیت کیف پول شخصی و سازمانی [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L136 community=]
+NODE Organization Credit Transfer or Shared-Balance Spending [src=docs/SHAHAB_DIGITAL_WALLET.md loc=352 community= attrs={decision_status="approved", evidence_locator="352", evidence_quote="**پاسخ مصوب:** انتقال فرد به سازمان و سازمان به سازمان و..., owner="Organization admin", owner_status="explicit approval stated"}]
+NODE Segregate customer-obligation funds from company operating funds [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L405 community=]
+NODE Create a unique server-side top-up request for a designated wallet and verify authorization [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L580 community=]
+NODE دفترکل ریالی مشترک با حساب‌های تفکیک‌شده [src=docs/SHAHAB_DIGITAL_WALLET.md loc=1167 community=]
+NODE تفکیک انواع اعتبار و حقوق کیف پول [src=docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md loc=1052-1056 community=]
+NODE عضویت یک شخص در چند سازمان با جدایی دسترسی [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L180 community=]
+NODE فعال‌سازی مالی سازمان پس از قرارداد و احراز [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L156 community=]
+NODE کیف پول نمایشی با حساب‌های داخلی یکی نیست [src=docs/SHAHAB_DIGITAL_WALLET.md loc=L138 community=]
+EDGE تفکیک انواع اعتبار و حقوق کیف پول --conceptually_related_to [INFERRED]--> مالکیت کیف پول شخصی و سازمانی at=docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1054, docs/SHAHAB_DIGITAL_WALLET.md:L393
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> کیف پول نمایشی با حساب‌های داخلی یکی نیست at=docs/SHAHAB_DIGITAL_WALLET.md:L138
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> فعال‌سازی مالی سازمان پس از قرارداد و احراز at=docs/SHAHAB_DIGITAL_WALLET.md:L156
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> عضویت یک شخص در چند سازمان با جدایی دسترسی at=docs/SHAHAB_DIGITAL_WALLET.md:L180
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> Create a unique server-side top-up request for a designated wallet and verify authorization at=docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> Organization Credit Transfer or Shared-Balance Spending at=docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> دفترکل ریالی مشترک با حساب‌های تفکیک‌شده at=docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L146, docs/SHAHAB_DIGITAL_WALLET.md:L1167
+EDGE مالکیت کیف پول شخصی و سازمانی --conceptually_related_to [INFERRED]--> Segregate customer-obligation funds from company operating funds at=docs/SHAHAB_DIGITAL_WALLET.md:docs/SHAHAB_DIGITAL_WALLET.md:L136, docs/SHAHAB_DIGITAL_WALLET.md:L405

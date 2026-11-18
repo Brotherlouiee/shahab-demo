@@ -50,11 +50,13 @@ def assess_runtime_inventory(report, name):
     packages = [package for result in report.get("Results", []) for package in result.get("Packages", [])]
     expected = {"zlib": "1.4-r0", "musl": "1.2.6-r3", "musl-utils": "1.2.6-r3"}
     if name == "api":
+        expected["krb5-libs"] = "1.22.3-r0"
         if any(package.get("Name") == "pip" for package in packages):
             raise ValueError("Runtime API image contains the removed installer")
     elif name == "web":
         expected["libxpm"] = "3.5.20-r0"
         expected["brotli-libs"] = "1.2.1-r0"
+        expected["libxslt"] = "1.1.43-r4"
     else:
         raise ValueError("Unknown runtime image")
     os_packages = [

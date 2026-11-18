@@ -1,0 +1,273 @@
+{
+  "review_scope": {
+    "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+    "chunks": [
+      "GSEM-001",
+      "GSEM-002",
+      "GSEM-003",
+      "GSEM-004",
+      "GSEM-005",
+      "GSEM-006",
+      "GSEM-007",
+      "GSEM-008",
+      "GSEM-009",
+      "GSEM-010",
+      "GSEM-011",
+      "GSEM-012",
+      "GSEM-013"
+    ],
+    "review_kind": "independent cross-chunk boundary edge review",
+    "relation_vocabulary": "Graphify extraction-spec allowed relations"
+  },
+  "edges": [
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_adr_rag_28",
+      "target": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L406, docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1216",
+      "weight": 1.0,
+      "decision_status": "Both are approved policies. ADR-RAG-28 explicitly constrains computations according to A05; this edge records the stated reference and does not expand either policy.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 406,
+          "quote": "طبق A05، هر محاسبه باید روی یک Snapshot معتبر و سازگار با نسخه معلوم انجام شود"
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1216,
+          "quote": "**سیاست سازگاری مصوب A05:** مرز تراکنش درون سرویس مالک است."
+        }
+      ],
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "explicit reference only; source policy scope preserved",
+      "status_scope": "source policy or explicit relationship as described",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "The source line explicitly says the snapshot rule follows A05; target is A05.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_adr_rag_28",
+          "target": "docs_shahab_phase_2_development_blueprint_a05_consistency_policy",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "L406,L1216",
+          "weight": 1.0,
+          "decision_status": "Both are approved policies. ADR-RAG-28 explicitly constrains computations according to A05; this edge records the stated reference and does not expand either policy.",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 406,
+              "quote": "طبق A05، هر محاسبه باید روی یک Snapshot معتبر و سازگار با نسخه معلوم انجام شود"
+            },
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1216,
+              "quote": "**سیاست سازگاری مصوب A05:** مرز تراکنش درون سرویس مالک است."
+            }
+          ],
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "explicit reference only; source policy scope preserved",
+          "status_scope": "source policy or explicit relationship as described"
+        },
+        "relationship_qualifier": null
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_service_catalog_router",
+      "target": "docs_shahab_phase_2_development_blueprint_shared_dynamic_catalog_principle",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L869, docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1559",
+      "weight": 1.0,
+      "decision_status": "Explicit distinction and chapter reference: the Shahab service catalog is distinct from the dynamic bank product catalog. The edge preserves the distinction; it does not merge the catalogs.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 869,
+          "quote": "کاتالوگ خدمت شهاب با کاتالوگ پویای محصولات و خدمات واقعی بانک‌ها متفاوت است (فصل سوم)"
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1559,
+          "quote": "کاتالوگ پویای محصولات و خدمات مالی زیرساخت مشترک همه حوزه‌هاست"
+        }
+      ],
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "explicit reference only; source policy scope preserved",
+      "status_scope": "source policy or explicit relationship as described",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Blueprint L869 explicitly names and distinguishes the two catalog types; L1559 identifies the dynamic catalog. Distinction is negative; do not imply equivalence or dependence.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_service_catalog_router",
+          "target": "docs_shahab_phase_2_development_blueprint_shared_dynamic_catalog_principle",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "L869,L1559",
+          "weight": 1.0,
+          "decision_status": "Explicit distinction and chapter reference: the Shahab service catalog is distinct from the dynamic bank product catalog. The edge preserves the distinction; it does not merge the catalogs.",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 869,
+              "quote": "کاتالوگ خدمت شهاب با کاتالوگ پویای محصولات و خدمات واقعی بانک‌ها متفاوت است (فصل سوم)"
+            },
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1559,
+              "quote": "کاتالوگ پویای محصولات و خدمات مالی زیرساخت مشترک همه حوزه‌هاست"
+            }
+          ],
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "explicit reference only; source policy scope preserved",
+          "status_scope": "source policy or explicit relationship as described"
+        },
+        "relationship_qualifier": "DISTINCT_CATALOGS_NOT_EQUIVALENT"
+      },
+      "relationship_qualifier": "DISTINCT_CATALOGS_NOT_EQUIVALENT"
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+      "target": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L2148, docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1702",
+      "weight": 1.0,
+      "decision_status": "FD-01 product and financial rules are approved, while future release timing is unspecified. This cross-chunk edge links the roadmap decision row to the technical review row; it does not imply RAG scope or authorize execution.",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 2148,
+          "quote": "| FD-01 / E03 | کیف پول | قواعد محصول و مالی طبق سند کیف پول نسخه ۰٫۲۰ مصوب؛ انتشار آتی نامشخص |"
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1702,
+          "quote": "| FD-01 — کیف پول | مرز دامنه Wallet/Ledger، پیاده‌سازی مدل مصوب منشأ اعتبار، دفترکل ریالی، رزرو، idempotency، ردیابی زنجیره انتقال، تسویه/بازپرداخت، مغایرت‌گیری و کنترل همزمانی |"
+        }
+      ],
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "Both passages discuss the same FD-01 identifier but L2148 does not explicitly reference the technical review row at L1702. Preserve approved policy vs open release and technical details.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_financial_decisions_fd01_fd03",
+          "target": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "L2148,L1702",
+          "weight": 1.0,
+          "decision_status": "FD-01 product and financial rules are approved, while future release timing is unspecified. This cross-chunk edge links the roadmap decision row to the technical review row; it does not imply RAG scope or authorize execution.",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 2148,
+              "quote": "| FD-01 / E03 | کیف پول | قواعد محصول و مالی طبق سند کیف پول نسخه ۰٫۲۰ مصوب؛ انتشار آتی نامشخص |"
+            },
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1702,
+              "quote": "| FD-01 — کیف پول | مرز دامنه Wallet/Ledger، پیاده‌سازی مدل مصوب منشأ اعتبار، دفترکل ریالی، رزرو، idempotency، ردیابی زنجیره انتقال، تسویه/بازپرداخت، مغایرت‌گیری و کنترل همزمانی |"
+            }
+          ],
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": null
+      }
+    },
+    {
+      "source": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+      "target": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "source_location": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1358, docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:L1702",
+      "weight": 1.0,
+      "decision_status": "APPROVED_NON_PREREQUISITE: this edge carries explicit negative dependency semantics. Wallet is identified as outside the RAG R1 prerequisite set; it must not be interpreted as a positive dependency or execution approval.",
+      "polarity": "explicit_non_dependency",
+      "evidence": [
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1358,
+          "quote": "ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند"
+        },
+        {
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "line": 1702,
+          "quote": "| FD-01 — کیف پول | مرز دامنه Wallet/Ledger"
+        }
+      ],
+      "owner": null,
+      "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+      "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+      "status_scope": "underlying source policy; not independent approval of relationship",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "reason": "The non-prerequisite is explicit at L1358; identifying the FD-01 technical-review node as this wallet concept is a cross-section correspondence, not an explicit reference to L1702. Preserve negative polarity.",
+        "previous_record": {
+          "source": "docs_shahab_phase_2_development_blueprint_wallet_not_r1_prerequisite",
+          "target": "docs_shahab_phase_2_development_blueprint_fd01_wallet",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "source_location": "L1358,L1702",
+          "weight": 1.0,
+          "decision_status": "APPROVED_NON_PREREQUISITE: this edge carries explicit negative dependency semantics. Wallet is identified as outside the RAG R1 prerequisite set; it must not be interpreted as a positive dependency or execution approval.",
+          "polarity": "explicit_non_dependency",
+          "evidence": [
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1358,
+              "quote": "ایجاد کیف پول/پرداخت/پلن تجاری، اجرای Assistant و پیاده‌سازی Assistant پیش‌نیاز این انتشار نیستند"
+            },
+            {
+              "source_file": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+              "line": 1702,
+              "quote": "| FD-01 — کیف پول | مرز دامنه Wallet/Ledger"
+            }
+          ],
+          "owner": null,
+          "owner_status": "UNSPECIFIED_IN_QUOTED_EDGE_EVIDENCE",
+          "relationship_approval": "UNSPECIFIED: inferred links are not approved policy",
+          "status_scope": "underlying source policy; not independent approval of relationship"
+        },
+        "relationship_qualifier": "NEGATIVE_NON_PREREQUISITE_FOR_RAG_R1"
+      },
+      "relationship_qualifier": "NEGATIVE_NON_PREREQUISITE_FOR_RAG_R1"
+    }
+  ],
+  "review_summary": {
+    "chunks_reviewed": 13,
+    "candidate_edges_added": 4,
+    "extracted_edges": 4,
+    "inferred_edges": 0,
+    "ambiguous_edges": 0,
+    "uncertain_cases": 0,
+    "rationale": "Added only cross-chunk links grounded by explicit source wording/reference or explicit topic mapping. Strong conceptual overlaps without a source-level linkage were omitted. Existing within-chunk edges were not duplicated."
+  }
+}

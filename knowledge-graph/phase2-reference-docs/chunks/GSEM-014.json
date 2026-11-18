@@ -1,0 +1,3865 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_digital_wallet_document_status",
+      "label": "وضعیت سند: تصمیم‌های اصلی مشخص، جزئیات باز",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "وضعیت: تصمیم‌های اصلی محصول و مالی مشخص شده‌اند؛ جزئیات باز در کنار سؤال مربوط آمده‌اند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L5",
+      "decision_status": "DOCUMENT_STATUS",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_document_status",
+            "label": "وضعیت سند: تصمیم‌های اصلی مشخص، جزئیات باز",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L5",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "وضعیت: تصمیم‌های اصلی محصول و مالی مشخص شده‌اند؛ جزئیات باز در کنار سؤال مربوط آمده‌اند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L5",
+            "decision_status": "DOCUMENT_STATUS",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_purpose_and_value_rights",
+      "label": "هدف کیف پول: منشأ پول و حق مصرف",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**مسئله و هدف:** یک عدد با عنوان «موجودی» برای ادارهٔ کیف پول کافی نیست. باید بدانیم این عدد از کجا آمده، چه کسی حق مصرف آن را دارد و اگر عملیاتی شکست خورد چه اتفاقی برای پول می‌افتد. این سند رفتار کیف پول شهاب را برای مدیر محصول، طراح، توسعه‌دهنده و مسئول مالی توضیح می‌دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L9",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "rationale": "نمایش یک عدد موجودی کافی نیست، چون منشأ وجوه، حق مصرف و پیامد شکست عملیات باید قابل پیگیری باشد.",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_purpose_and_value_rights",
+            "label": "هدف کیف پول: منشأ پول و حق مصرف",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L9",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**مسئله و هدف:** یک عدد با عنوان «موجودی» برای ادارهٔ کیف پول کافی نیست. باید بدانیم این عدد از کجا آمده، چه کسی حق مصرف آن را دارد و اگر عملیاتی شکست خورد چه اتفاقی برای پول می‌افتد. این سند رفتار کیف پول شهاب را برای مدیر محصول، طراح، توسعه‌دهنده و مسئول مالی توضیح می‌دهد.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L9",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED",
+            "rationale": "نمایش یک عدد موجودی کافی نیست، چون منشأ وجوه، حق مصرف و پیامد شکست عملیات باید قابل پیگیری باشد."
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_balance_tranche_example",
+      "label": "مثال نقدی و هدیه با حق برداشت متفاوت",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L11",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند. او می‌تواند از اعتبارش برای خدمات استفاده کند؛ اما همهٔ ۶۰۰ هزار تومان قابل برداشت نیست. اگر بخشی را به دیگری منتقل کند یا هزینهٔ خدمتی برگردد، سیستم باید همچنان منشأ و حقوق آن مبلغ را بداند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L11",
+      "decision_status": "ILLUSTRATIVE_EXAMPLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_balance_tranche_example",
+            "label": "مثال نقدی و هدیه با حق برداشت متفاوت",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L11",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند. او می‌تواند از اعتبارش برای خدمات استفاده کند؛ اما همهٔ ۶۰۰ هزار تومان قابل برداشت نیست. اگر بخشی را به دیگری منتقل کند یا هزینهٔ خدمتی برگردد، سیستم باید همچنان منشأ و حقوق آن مبلغ را بداند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L11",
+            "decision_status": "ILLUSTRATIVE_EXAMPLE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_document_reading_order",
+      "label": "ترتیب وابستگی مطالعه سند",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ:** ابتدا امکانات را در بخش ۲ می‌شناسیم. سپس در بخش ۳ می‌فهمیم کیف پول متعلق به چه کسی است و چه کسی اجازهٔ کار با آن را دارد. بخش ۴ محل پول واقعی و تعهد شهاب را روشن می‌کند؛ بخش ۵ انواع اعتبار و موجودی را توضیح می‌دهد. با این مقدمات، بخش ۶ مسیر شارژ، مصرف، انتقال و بازگشت را شرح می‌دهد. بخش‌های ۷ تا ۱۰ صحت ثبت، تطبیق با بانک، محاسبهٔ قیمت و تجربهٔ کاربر را تکمیل می‌کنند. بخش ۱۱ سناریوهای بررسی و بخش ۱۲ کارهای باقی‌مانده را نشان می‌دهند. منابع و سابقهٔ ویرایش در پایان آمده‌اند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L19",
+      "decision_status": "DOCUMENT_GUIDANCE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_document_reading_order",
+            "label": "ترتیب وابستگی مطالعه سند",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L19",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ:** ابتدا امکانات را در بخش ۲ می‌شناسیم. سپس در بخش ۳ می‌فهمیم کیف پول متعلق به چه کسی است و چه کسی اجازهٔ کار با آن را دارد. بخش ۴ محل پول واقعی و تعهد شهاب را روشن می‌کند؛ بخش ۵ انواع اعتبار و موجودی را توضیح می‌دهد. با این مقدمات، بخش ۶ مسیر شارژ، مصرف، انتقال و بازگشت را شرح می‌دهد. بخش‌های ۷ تا ۱۰ صحت ثبت، تطبیق با بانک، محاسبهٔ قیمت و تجربهٔ کاربر را تکمیل می‌کنند. بخش ۱۱ سناریوهای بررسی و بخش ۱۲ کارهای باقی‌مانده را نشان می‌دهند. منابع و سابقهٔ ویرایش در پایان آمده‌اند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L19",
+            "decision_status": "DOCUMENT_GUIDANCE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_decision_status_vocabulary",
+      "label": "واژگان وضعیت تصمیم: مصوب، انتخاب‌شده، باز",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ:** عبارت «مصوب» یعنی قاعده به تأیید مالک محصول رسیده است. «قابلیت انتخاب‌شده» یعنی آن امکان درخواست شده، ولی همهٔ جزئیاتش هنوز تعیین نشده است. «تصمیم باز» یعنی هنوز پاسخ نهایی نداریم. مثال‌های عددی فقط برای توضیح‌اند؛ مبلغ تعرفه یا سقف تازه ایجاد نمی‌کنند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L31",
+      "decision_status": "APPROVED_GOVERNANCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_decision_status_vocabulary",
+            "label": "واژگان وضعیت تصمیم: مصوب، انتخاب‌شده، باز",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L31",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ:** عبارت «مصوب» یعنی قاعده به تأیید مالک محصول رسیده است. «قابلیت انتخاب‌شده» یعنی آن امکان درخواست شده، ولی همهٔ جزئیاتش هنوز تعیین نشده است. «تصمیم باز» یعنی هنوز پاسخ نهایی نداریم. مثال‌های عددی فقط برای توضیح‌اند؛ مبلغ تعرفه یا سقف تازه ایجاد نمی‌کنند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L31",
+            "decision_status": "APPROVED_GOVERNANCE_RULE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_shahab_policy_vs_external_reference",
+      "label": "تفکیک تصمیم شهاب از منبع خارجی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L33",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند. این سند انتخاب فناوری، بانک یا قرارداد خاص و همچنین تأیید نهایی انطباق حقوقی نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L33",
+      "decision_status": "SCOPE_LIMITATION",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_shahab_policy_vs_external_reference",
+            "label": "تفکیک تصمیم شهاب از منبع خارجی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L33",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند. این سند انتخاب فناوری، بانک یا قرارداد خاص و همچنین تأیید نهایی انطباق حقوقی نیست.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L33",
+            "decision_status": "SCOPE_LIMITATION",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_document_maintenance_rule",
+      "label": "قاعده نگهداری: متن جدید جایگزین/تکمیل همان پاسخ",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L45",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ — قاعدهٔ نگهداری:** پاسخ تازه جای متن قبلی همان سؤال می‌نشیند یا آن را تکمیل می‌کند. مصوبه نباید هم‌زمان در جایی قطعی و در جای دیگر باز معرفی شود. هر بخش باید مسئله و هدف، سؤال، پاسخ، مثال لازم و ارتباطش با بقیهٔ مدل را روشن کند. افزودن پی‌درپی نتیجهٔ گفتگو به انتهای سند روش نگهداری این فایل نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L45",
+      "decision_status": "APPROVED_DOCUMENT_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_document_maintenance_rule",
+            "label": "قاعده نگهداری: متن جدید جایگزین/تکمیل همان پاسخ",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L45",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ — قاعدهٔ نگهداری:** پاسخ تازه جای متن قبلی همان سؤال می‌نشیند یا آن را تکمیل می‌کند. مصوبه نباید هم‌زمان در جایی قطعی و در جای دیگر باز معرفی شود. هر بخش باید مسئله و هدف، سؤال، پاسخ، مثال لازم و ارتباطش با بقیهٔ مدل را روشن کند. افزودن پی‌درپی نتیجهٔ گفتگو به انتهای سند روش نگهداری این فایل نیست.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L45",
+            "decision_status": "APPROVED_DOCUMENT_RULE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_internal_shahab_acceptance",
+      "label": "مصرف اعتبار فقط برای خدمات خود شهاب",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L57",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** همهٔ اعتبارها فقط در سیستم شهاب و برای خدمات خود شهاب مصرف می‌شوند؛ پذیرندهٔ مستقل وجود ندارد. تأمین‌کنندهٔ مدل، API یا زیرساخت، طرف هزینه و قرارداد خود شهاب است و از این جهت پذیرندهٔ مستقل اعتبار مشتری نیست. این تعریف، دامنهٔ محصول است؛ نتیجهٔ نهایی مجوز و شمول قانونی را به‌تنهایی تعیین نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L57",
+      "decision_status": "APPROVED_PRODUCT_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_internal_shahab_acceptance",
+            "label": "مصرف اعتبار فقط برای خدمات خود شهاب",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L57",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** همهٔ اعتبارها فقط در سیستم شهاب و برای خدمات خود شهاب مصرف می‌شوند؛ پذیرندهٔ مستقل وجود ندارد. تأمین‌کنندهٔ مدل، API یا زیرساخت، طرف هزینه و قرارداد خود شهاب است و از این جهت پذیرندهٔ مستقل اعتبار مشتری نیست. این تعریف، دامنهٔ محصول است؛ نتیجهٔ نهایی مجوز و شمول قانونی را به‌تنهایی تعیین نمی‌کند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L57",
+            "decision_status": "APPROVED_PRODUCT_SCOPE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_selected_feature_count",
+      "label": "دامنه شامل ۲۶ قابلیت انتخابی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L71",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_selected_feature_count",
+            "label": "دامنه شامل ۲۶ قابلیت انتخابی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L71",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L71",
+            "decision_status": "SELECTED_SCOPE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_base_feature_table",
+      "label": "جدول قابلیت‌های پایه",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L75",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L75",
+      "decision_status": "SELECTED_FEATURE_TABLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_base_feature_table",
+            "label": "جدول قابلیت‌های پایه",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L75",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L75",
+            "decision_status": "SELECTED_FEATURE_TABLE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "label": "جدول قابلیت‌های وابسته به مدل محصول",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L89",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L89",
+      "decision_status": "SELECTED_FEATURE_TABLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_product_dependent_feature_table",
+            "label": "جدول قابلیت‌های وابسته به مدل محصول",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L89",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L89",
+            "decision_status": "SELECTED_FEATURE_TABLE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "label": "جدول زیرساخت‌های پشت صحنه",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L103",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L103",
+      "decision_status": "SELECTED_FEATURE_TABLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_infrastructure_feature_table",
+            "label": "جدول زیرساخت‌های پشت صحنه",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L103",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L103",
+            "decision_status": "SELECTED_FEATURE_TABLE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_77",
+      "label": "شناسه و مالک کیف پول",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L77",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L77",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_77",
+            "label": "شناسه و مالک کیف پول",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L77",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L77",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_78",
+      "label": "نمایش موجودی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L78",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L78",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_78",
+            "label": "نمایش موجودی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L78",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L78",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_79",
+      "label": "شارژ",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L79",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L79",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_79",
+            "label": "شارژ",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L79",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L79",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_80",
+      "label": "پرداخت و کسر هزینه",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L80",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L80",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_80",
+            "label": "پرداخت و کسر هزینه",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L80",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L80",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_81",
+      "label": "تاریخچهٔ تراکنش‌ها",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L81",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L81",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_81",
+            "label": "تاریخچهٔ تراکنش‌ها",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L81",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L81",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_82",
+      "label": "رسید و جزئیات عملیات",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L82",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L82",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_82",
+            "label": "رسید و جزئیات عملیات",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L82",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L82",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_83",
+      "label": "اصلاح و بازگشت اعتبار",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L83",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L83",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_83",
+            "label": "اصلاح و بازگشت اعتبار",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L83",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L83",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_84",
+      "label": "امنیت و کنترل دسترسی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L84",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L84",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_84",
+            "label": "امنیت و کنترل دسترسی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L84",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L84",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_85",
+      "label": "پشتیبانی و پیگیری اختلاف",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L85",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L85",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_85",
+            "label": "پشتیبانی و پیگیری اختلاف",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L85",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L85",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_91",
+      "label": "رزرو موقت مبلغ",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L91",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L91",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_91",
+            "label": "رزرو موقت مبلغ",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L91",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L91",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_92",
+      "label": "برداشت به حساب بانکی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L92",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L92",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_92",
+            "label": "برداشت به حساب بانکی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L92",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L92",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_93",
+      "label": "انتقال بین کاربران",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L93",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L93",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_93",
+            "label": "انتقال بین کاربران",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L93",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L93",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_94",
+      "label": "اعتبار هدیه و تخفیفی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L94",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L94",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_94",
+            "label": "اعتبار هدیه و تخفیفی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L94",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L94",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_95",
+      "label": "شارژ خودکار",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L95",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L95",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_95",
+            "label": "شارژ خودکار",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L95",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L95",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_96",
+      "label": "پرداخت دوره‌ای",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L96",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L96",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_96",
+            "label": "پرداخت دوره‌ای",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L96",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L96",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_97",
+      "label": "کیف پول سازمانی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L97",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L97",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_97",
+            "label": "کیف پول سازمانی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L97",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L97",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_98",
+      "label": "سقف و محدودیت مصرف",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L98",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L98",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_98",
+            "label": "سقف و محدودیت مصرف",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L98",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L98",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_99",
+      "label": "اعلان‌ها",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L99",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L99",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_99",
+            "label": "اعلان‌ها",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L99",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L99",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_105",
+      "label": "دفترکل مالی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L105",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L105",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_105",
+            "label": "دفترکل مالی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L105",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L105",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_106",
+      "label": "مدیریت وضعیت تراکنش",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L106",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L106",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_106",
+            "label": "مدیریت وضعیت تراکنش",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L106",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L106",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_107",
+      "label": "جلوگیری از ثبت تکراری",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L107",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L107",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_107",
+            "label": "جلوگیری از ثبت تکراری",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L107",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L107",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_108",
+      "label": "کنترل مصرف هم‌زمان",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L108",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L108",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_108",
+            "label": "کنترل مصرف هم‌زمان",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L108",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L108",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_109",
+      "label": "موتور محاسبهٔ هزینه",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L109",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L109",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_109",
+            "label": "موتور محاسبهٔ هزینه",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L109",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L109",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_110",
+      "label": "تطبیق مالی",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L110",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L110",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_110",
+            "label": "تطبیق مالی",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L110",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L110",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_111",
+      "label": "ثبت سوابق و نظارت",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L111",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L111",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_111",
+            "label": "ثبت سوابق و نظارت",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L111",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L111",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_feature_112",
+      "label": "بازیابی پس از خطا",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L112",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L112",
+      "decision_status": "SELECTED_CAPABILITY",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_feature_112",
+            "label": "بازیابی پس از خطا",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L112",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L112",
+            "decision_status": "SELECTED_CAPABILITY",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_phased_release_order",
+      "label": "ترتیب عرضه مرحله‌ای قابلیت‌ها",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L120",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** عرضه مرحله‌ای باشد: ابتدا شارژ دستی، مصرف، تاریخچه و بازگشت؛ سپس سازمان، انتقال و برداشت؛ امکانات خودکار در مرحلهٔ بعد. همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند. چندارزی انتخاب نشده و تصمیم تازه‌ای دربارهٔ آن گرفته نشده است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L120",
+      "decision_status": "APPROVED_RELEASE_ORDER",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_phased_release_order",
+            "label": "ترتیب عرضه مرحله‌ای قابلیت‌ها",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L120",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** عرضه مرحله‌ای باشد: ابتدا شارژ دستی، مصرف، تاریخچه و بازگشت؛ سپس سازمان، انتقال و برداشت؛ امکانات خودکار در مرحلهٔ بعد. همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند. چندارزی انتخاب نشده و تصمیم تازه‌ای دربارهٔ آن گرفته نشده است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L120",
+            "decision_status": "APPROVED_RELEASE_ORDER",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "label": "مالکیت کیف پول شخصی و سازمانی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L136",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** هر شخص یک کیف پول شخصی اصلی دارد که با فعال‌شدن حساب او ایجاد می‌شود. هر سازمان نیز پس از ایجاد و تأیید حساب سازمانی، یک کیف پول سازمانی اصلی دارد. مالک آن سازمان است، نه کارمندی که حساب را ساخته یا مدیر فعلی آن.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L136",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_ownership_model",
+            "label": "مالکیت کیف پول شخصی و سازمانی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L136",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** هر شخص یک کیف پول شخصی اصلی دارد که با فعال‌شدن حساب او ایجاد می‌شود. هر سازمان نیز پس از ایجاد و تأیید حساب سازمانی، یک کیف پول سازمانی اصلی دارد. مالک آن سازمان است، نه کارمندی که حساب را ساخته یا مدیر فعلی آن.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L136",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_vs_ledger_accounts",
+      "label": "کیف پول نمایشی با حساب‌های داخلی یکی نیست",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L138",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست. ممکن است برای ثبت منشأ نقدی و هدیه، چند حساب مالی داخلی لازم باشد؛ این به معنی چند کیف پول قابل‌نمایش نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L138",
+      "decision_status": "APPROVED_CONCEPT",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_vs_ledger_accounts",
+            "label": "کیف پول نمایشی با حساب‌های داخلی یکی نیست",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L138",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست. ممکن است برای ثبت منشأ نقدی و هدیه، چند حساب مالی داخلی لازم باشد؛ این به معنی چند کیف پول قابل‌نمایش نیست.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L138",
+            "decision_status": "APPROVED_CONCEPT",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_modern_treasury_ledger_reference",
+      "label": "مرجع بیرونی درباره حساب‌های دفترکل",
+      "file_type": "paper",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L140",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**منبع و حدود استفاده:** [حساب‌های دفترکل در Modern Treasury](https://docs.moderntreasury.com/ledgers/docs/ledger-accounts-overview) توضیح می‌دهد حساب مالی نمایندهٔ موجودی است. تعداد کیف پول اصلی و زمان ایجاد آن، تصمیم محصول شهاب است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L140",
+      "decision_status": "EXTERNAL_REFERENCE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_modern_treasury_ledger_reference",
+            "label": "مرجع بیرونی درباره حساب‌های دفترکل",
+            "file_type": "paper",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L140",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**منبع و حدود استفاده:** [حساب‌های دفترکل در Modern Treasury](https://docs.moderntreasury.com/ledgers/docs/ledger-accounts-overview) توضیح می‌دهد حساب مالی نمایندهٔ موجودی است. تعداد کیف پول اصلی و زمان ایجاد آن، تصمیم محصول شهاب است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L140",
+            "decision_status": "EXTERNAL_REFERENCE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_contract_details_open",
+      "label": "جزئیات اجرایی قرارداد سازمان باز است",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L142",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**جزئیات اجرایی نیازمند تصمیم:** قالب و مدارک اجرایی قرارداد رسمی محضری و روش اتصال به سرویس‌های احراز باید نهایی شوند؛ اصل ثبت هویت سازمان، مالک واقعی و نماینده در قرارداد و سیاست فعال‌سازی و بستن حساب مصوب است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L142",
+      "decision_status": "OPEN_DETAILS_WITH_APPROVED_PRINCIPLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_contract_details_open",
+            "label": "جزئیات اجرایی قرارداد سازمان باز است",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L142",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**جزئیات اجرایی نیازمند تصمیم:** قالب و مدارک اجرایی قرارداد رسمی محضری و روش اتصال به سرویس‌های احراز باید نهایی شوند؛ اصل ثبت هویت سازمان، مالک واقعی و نماینده در قرارداد و سیاست فعال‌سازی و بستن حساب مصوب است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L142",
+            "decision_status": "OPEN_DETAILS_WITH_APPROVED_PRINCIPLE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_financial_activation",
+      "label": "فعال‌سازی مالی سازمان پس از قرارداد و احراز",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L156",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L156",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_financial_activation",
+            "label": "فعال‌سازی مالی سازمان پس از قرارداد و احراز",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L156",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L156",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_natural_person_identity_verification",
+      "label": "شناسایی معمول شخص حقیقی با OTP و شاهکار",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L168",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L168",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_natural_person_identity_verification",
+            "label": "شناسایی معمول شخص حقیقی با OTP و شاهکار",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L168",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L168",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_multi_organization_membership",
+      "label": "عضویت یک شخص در چند سازمان با جدایی دسترسی",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L180",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L180",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_multi_organization_membership",
+            "label": "عضویت یک شخص در چند سازمان با جدایی دسترسی",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L180",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L180",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_external_organization_membership_references",
+      "label": "منابع الگوی مدیریت سازمان و SCIM",
+      "file_type": "paper",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L184",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**منبع و حدود استفاده:** [مدیریت سازمان](https://docs.moderntreasury.com/platform/docs/organizations-overview) و [مدیریت کاربران با SCIM](https://docs.moderntreasury.com/platform/docs/managing-users-and-roles-with-scim)، الگوهای مدیریت دسترسی را توضیح می‌دهند؛ عضویت چندسازمانی مشتریان شهاب تصمیم خود محصول است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L184",
+      "decision_status": "EXTERNAL_REFERENCE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_external_organization_membership_references",
+            "label": "منابع الگوی مدیریت سازمان و SCIM",
+            "file_type": "paper",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L184",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**منبع و حدود استفاده:** [مدیریت سازمان](https://docs.moderntreasury.com/platform/docs/organizations-overview) و [مدیریت کاربران با SCIM](https://docs.moderntreasury.com/platform/docs/managing-users-and-roles-with-scim)، الگوهای مدیریت دسترسی را توضیح می‌دهند؛ عضویت چندسازمانی مشتریان شهاب تصمیم خود محصول است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L184",
+            "decision_status": "EXTERNAL_REFERENCE",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_member_invitation_acceptance",
+      "label": "فعال‌شدن عضو پس از احراز و پذیرش دعوت",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L196",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "evidence_quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L196",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "PASS",
+        "basis": "Label and decision-status meaning were checked against the node quote; quote occurs verbatim in the cited source span. Owner is explicitly absent/unspecified or was checked against source."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_member_invitation_acceptance",
+            "label": "فعال‌شدن عضو پس از احراز و پذیرش دعوت",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "L196",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "evidence_quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است.",
+            "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L196",
+            "decision_status": "APPROVED",
+            "owner": null,
+            "owner_status": "UNSPECIFIED"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_digital_wallet_wallet_purpose_and_value_rights",
+      "target": "docs_shahab_digital_wallet_wallet_balance_tranche_example",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "evidence_quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L11",
+      "decision_status": "ILLUSTRATIVE_EXAMPLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Wallet objective and adjacent example are textually linked; example illustrates, not an independent requirement.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_purpose_and_value_rights",
+          "target": "docs_shahab_digital_wallet_wallet_balance_tranche_example",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L11",
+          "weight": 1.0,
+          "evidence_quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L11"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 11,
+          "quote": "مثلاً کاربری ۵۰۰ هزار تومان نقدی شارژ و ۱۰۰ هزار تومان هدیه دریافت می‌کند."
+        }
+      ],
+      "source_claim_status": "ILLUSTRATIVE_EXAMPLE",
+      "decision_review": "Line 11 is an example; its figures are not normative. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_shahab_policy_vs_external_reference",
+      "target": "docs_shahab_digital_wallet_wallet_internal_shahab_acceptance",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "evidence_quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L33",
+      "decision_status": "UNSPECIFIED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Line 33 concerns non-withdrawability and external-source attribution; it does not connect that rationale to the internal-only spending rule.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_shahab_policy_vs_external_reference",
+          "target": "docs_shahab_digital_wallet_wallet_internal_shahab_acceptance",
+          "relation": "rationale_for",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L33",
+          "weight": 1.0,
+          "evidence_quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L33"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 33,
+          "quote": "قواعدی مانند غیرقابل‌برداشت‌بودن اعتبار دریافتی، تصمیم شهاب‌اند و نباید به Modern Treasury نسبت داده شوند."
+        }
+      ],
+      "source_claim_status": "UNSPECIFIED",
+      "decision_review": "The cited phrase is a product-decision attribution, but does not substantiate this edge. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "AMBIGUOUS"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_77",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L77",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_77",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L77",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L77"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 77,
+          "quote": "| پایه‌ـ۰۱ | شناسه و مالک کیف پول | بخش ۳ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_78",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L78",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_78",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L78",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L78"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 78,
+          "quote": "| پایه‌ـ۰۲ | نمایش موجودی | بخش ۵ و ۱۰ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_79",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L79",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_79",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L79",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L79"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 79,
+          "quote": "| پایه‌ـ۰۳ | شارژ | بخش ۶.۱ و ۶.۲ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_80",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L80",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_80",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L80",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L80"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 80,
+          "quote": "| پایه‌ـ۰۴ | پرداخت و کسر هزینه | بخش ۶.۳ و ۹ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_81",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L81",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_81",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L81",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L81"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 81,
+          "quote": "| پایه‌ـ۰۵ | تاریخچهٔ تراکنش‌ها | بخش ۱۰ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_82",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L82",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_82",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L82",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L82"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 82,
+          "quote": "| پایه‌ـ۰۶ | رسید و جزئیات عملیات | بخش ۱۰ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_83",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L83",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_83",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L83",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L83"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 83,
+          "quote": "| پایه‌ـ۰۷ | اصلاح و بازگشت اعتبار | بخش ۶.۶ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_84",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L84",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_84",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L84",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L84"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 84,
+          "quote": "| پایه‌ـ۰۸ | امنیت و کنترل دسترسی | بخش ۳ و ۸ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_base_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_85",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "evidence_quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L85",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_base_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_85",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L85",
+          "weight": 1.0,
+          "evidence_quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L85"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 85,
+          "quote": "| پایه‌ـ۰۹ | پشتیبانی و پیگیری اختلاف | بخش ۸ و ۱۰ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_91",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L91",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_91",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L91",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L91"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 91,
+          "quote": "| محصول‌ـ۰۱ | رزرو موقت مبلغ | بخش ۶.۴ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_92",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L92",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_92",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L92",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L92"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 92,
+          "quote": "| محصول‌ـ۰۲ | برداشت به حساب بانکی | بخش ۶.۵ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_93",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L93",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_93",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L93",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L93"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 93,
+          "quote": "| محصول‌ـ۰۳ | انتقال بین کاربران | بخش ۶.۵ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_94",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L94",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_94",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L94",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L94"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 94,
+          "quote": "| محصول‌ـ۰۴ | اعتبار هدیه و تخفیفی | بخش ۶.۲ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_95",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L95",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L95",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_95",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L95",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L95"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 95,
+          "quote": "| محصول‌ـ۰۵ | شارژ خودکار | بخش ۶.۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_96",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L96",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_96",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L96",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L96"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 96,
+          "quote": "| محصول‌ـ۰۶ | پرداخت دوره‌ای | بخش ۶.۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_97",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L97",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_97",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L97",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L97"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 97,
+          "quote": "| محصول‌ـ۰۷ | کیف پول سازمانی | بخش ۳ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_98",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L98",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_98",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L98",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L98"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 98,
+          "quote": "| محصول‌ـ۰۸ | سقف و محدودیت مصرف | بخش ۶.۸ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_99",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "evidence_quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L99",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_99",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L99",
+          "weight": 1.0,
+          "evidence_quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L99"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 99,
+          "quote": "| محصول‌ـ۰۹ | اعلان‌ها | بخش ۱۰ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_105",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L105",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L105",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_105",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L105",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L105"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 105,
+          "quote": "| زیرساخت‌ـ۰۱ | دفترکل مالی | بخش ۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_106",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L106",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_106",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L106",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L106"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 106,
+          "quote": "| زیرساخت‌ـ۰۲ | مدیریت وضعیت تراکنش | بخش ۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_107",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L107",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_107",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L107",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L107"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 107,
+          "quote": "| زیرساخت‌ـ۰۳ | جلوگیری از ثبت تکراری | بخش ۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_108",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L108",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_108",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L108",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L108"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 108,
+          "quote": "| زیرساخت‌ـ۰۴ | کنترل مصرف هم‌زمان | بخش ۷ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_109",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L109",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_109",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L109",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L109"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 109,
+          "quote": "| زیرساخت‌ـ۰۵ | موتور محاسبهٔ هزینه | بخش ۹ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_110",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L110",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L110",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_110",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L110",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L110"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 110,
+          "quote": "| زیرساخت‌ـ۰۶ | تطبیق مالی | بخش ۸ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_111",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L111",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_111",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L111",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L111"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 111,
+          "quote": "| زیرساخت‌ـ۰۷ | ثبت سوابق و نظارت | بخش ۸ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "target": "docs_shahab_digital_wallet_feature_112",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "evidence_quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L112",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited table row explicitly names this capability under its corresponding table heading.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "target": "docs_shahab_digital_wallet_feature_112",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L112",
+          "weight": 1.0,
+          "evidence_quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L112"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 112,
+          "quote": "| زیرساخت‌ـ۰۸ | بازیابی پس از خطا | بخش ۸ |"
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_base_feature_table",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L75",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The table header is present under the selected capability scope.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_selected_feature_count",
+          "target": "docs_shahab_digital_wallet_base_feature_table",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L75",
+          "weight": 1.0,
+          "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L75"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 75,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند."
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_product_dependent_feature_table",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L89",
+      "weight": 1.0,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L89",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The table header is present under the selected capability scope.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_selected_feature_count",
+          "target": "docs_shahab_digital_wallet_product_dependent_feature_table",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L89",
+          "weight": 1.0,
+          "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L89"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 89,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند."
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_selected_feature_count",
+      "target": "docs_shahab_digital_wallet_infrastructure_feature_table",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L103",
+      "weight": 1.0,
+      "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L103",
+      "decision_status": "SELECTED_SCOPE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The table header is present under the selected capability scope.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_selected_feature_count",
+          "target": "docs_shahab_digital_wallet_infrastructure_feature_table",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L103",
+          "weight": 1.0,
+          "evidence_quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L103"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 103,
+          "quote": "| شناسه | قابلیت انتخاب‌شده | محل شرح و تصمیم |"
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 69,
+          "quote": "**پاسخ:** قابلیت‌های جدول‌های زیر در دامنهٔ محصول هستند. قواعد مصوب و پرسش‌های باز هرکدام در بخش ارجاع‌شده شرح داده شده‌اند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 71,
+          "quote": "فهرست انتخابی کاربر شامل **۲۶ قابلیت** است: ۹ قابلیت پایه، ۹ قابلیت وابسته به مدل محصول و ۸ زیرساخت. در نسخه‌های قبلی مجموع به‌اشتباه ۲۷ نوشته شده بود؛ اصلاح شمارش هیچ قابلیتی را حذف نکرده است. شناسه‌های زیر فقط برای ارجاع سندند و شمارهٔ تسک پروژه نیستند."
+        }
+      ],
+      "source_claim_status": "SELECTED_SCOPE",
+      "decision_review": "The table lists selected capabilities, not a blanket approval of all technical details. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_phased_release_order",
+      "target": "docs_shahab_digital_wallet_selected_feature_count",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L120",
+      "weight": 1.0,
+      "evidence_quote": "همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L120",
+      "decision_status": "APPROVED_POLICY_RELEASE_DATE_OPEN",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Line 120 states staged timing does not remove capabilities from scope; a causal rationale is not explicit. Related scope/timing association can be inferred.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_phased_release_order",
+          "target": "docs_shahab_digital_wallet_selected_feature_count",
+          "relation": "rationale_for",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L120",
+          "weight": 1.0,
+          "evidence_quote": "همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L120"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 120,
+          "quote": "همهٔ قابلیت‌های انتخاب‌شده در دامنهٔ کل محصول می‌مانند؛ این ترتیب تاریخ انتشار تعیین نمی‌کند."
+        }
+      ],
+      "source_claim_status": "APPROVED_POLICY_RELEASE_DATE_OPEN",
+      "decision_review": "The source line 120 labels staged release as approved while saying dates remain unset. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_wallet_vs_ledger_accounts",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L138",
+      "weight": 0.95,
+      "evidence_quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L138",
+      "decision_status": "APPROVED_SOURCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Line 138 states the displayed wallet differs from backend accounts; linkage to ownership is contextual rather than explicit.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+          "target": "docs_shahab_digital_wallet_wallet_vs_ledger_accounts",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.95,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L138",
+          "weight": 0.95,
+          "evidence_quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L138"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 138,
+          "quote": "کیف پولی که کاربر می‌بیند با حساب‌های پشت صحنه یکسان نیست."
+        }
+      ],
+      "source_claim_status": "APPROVED_SOURCE_RULE",
+      "decision_review": "The cited or nearby source text includes a labelled approved answer; inferred edge status stays independent. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_organization_financial_activation",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L156",
+      "decision_status": "APPROVED_SOURCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited source states the target rule but does not explicitly assert the specific source-to-target relation; contextual relationship needs inference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+          "target": "docs_shahab_digital_wallet_organization_financial_activation",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L156",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L156"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 156,
+          "quote": "**پاسخ مصوب:** پیش از دریافت خدمات، قرارداد رسمی محضری مطابق اسناد خود سازمان و قانون تنظیم و نهایی شود؛ هویت سازمان، مالک واقعی، سمت و اختیار نماینده در همین فرایند مشخص و مستند شوند. پس از نهایی‌شدن قرارداد و تأیید موارد فوق، داشبورد سازمانی تخصیص و امکان شارژ و تخصیص اعتبار فعال شود؛ تا آن زمان فقط پیش‌ثبت‌نام و مشاهدهٔ وضعیت مجاز است."
+        }
+      ],
+      "source_claim_status": "APPROVED_SOURCE_RULE",
+      "decision_review": "The cited or nearby source text includes a labelled approved answer; inferred edge status stays independent. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_natural_person_identity_verification",
+      "target": "docs_shahab_digital_wallet_organization_financial_activation",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L168",
+      "weight": 0.85,
+      "evidence_quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L168",
+      "decision_status": "APPROVED_SOURCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited source states the target rule but does not explicitly assert the specific source-to-target relation; contextual relationship needs inference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_natural_person_identity_verification",
+          "target": "docs_shahab_digital_wallet_organization_financial_activation",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L168",
+          "weight": 0.85,
+          "evidence_quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L168"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 168,
+          "quote": "**پاسخ مصوب:** کنترل شماره با OTP و تطبیق مالکیت شمارهٔ تلفن همراه با کد ملی از طریق شاهکار انجام شود. نتیجهٔ ناموفق یا نامعلوم، تطبیق موفق محسوب نشود. این مسیر عادی، جای تطبیق مالکیت حساب بانکی هنگام برداشت یا بررسی تکمیلی در موارد الزام قانونی و اطلاعات متعارض را نمی‌گیرد."
+        }
+      ],
+      "source_claim_status": "APPROVED_SOURCE_RULE",
+      "decision_review": "The cited or nearby source text includes a labelled approved answer; inferred edge status stays independent. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+      "target": "docs_shahab_digital_wallet_multi_organization_membership",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L180",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L180",
+      "decision_status": "APPROVED_SOURCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited source states the target rule but does not explicitly assert the specific source-to-target relation; contextual relationship needs inference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_ownership_model",
+          "target": "docs_shahab_digital_wallet_multi_organization_membership",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L180",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L180"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 180,
+          "quote": "**پاسخ مصوب:** بله؛ یک شخص می‌تواند عضو چند سازمان باشد. دسترسی، بودجه و سوابق هر سازمان جدا می‌مانند. حذف عضویت، اجازهٔ شروع عملیات جدید برای همان سازمان را قطع می‌کند؛ کیف پول شخصی کاربر، پول سازمان و سوابق مالی قبلی حذف نمی‌شوند."
+        }
+      ],
+      "source_claim_status": "APPROVED_SOURCE_RULE",
+      "decision_review": "The cited or nearby source text includes a labelled approved answer; inferred edge status stays independent. This status concerns source text, not a separate approval of a semantic edge.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_multi_organization_membership",
+      "target": "docs_shahab_digital_wallet_organization_member_invitation_acceptance",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "L196",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L196",
+      "decision_status": "APPROVED_SOURCE_RULE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited source states the target rule but does not explicitly assert the specific source-to-target relation; contextual relationship needs inference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_multi_organization_membership",
+          "target": "docs_shahab_digital_wallet_organization_member_invitation_acceptance",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "L196",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است.",
+          "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L196"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 196,
+          "quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است."
+        }
+      ],
+      "source_claim_status": "APPROVED_SOURCE_RULE",
+      "decision_review": "The cited or nearby source text includes a labelled approved answer; inferred edge status stays independent. This status concerns source text, not a separate approval of a semantic edge.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "بارگذاری فهرست افراد",
+          "evidence_quote": "**پاسخ مصوب:** ادمین فهرست افراد را بارگذاری کند؛ فرد پس از احراز هویت و پذیرش دعوت عضو فعال شود. تطبیق فرد با حساب صحیح لازم است.",
+          "source_location": "docs/SHAHAB_DIGITAL_WALLET.md:L196",
+          "note": "فرد پس از احراز هویت و پذیرش دعوت عضو فعال می‌شود."
+        }
+      ],
+      "independent_verdict": "INFERRED"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": 201
+  },
+  "coverage_range": {
+    "start_line": 1,
+    "end_line": 201
+  },
+  "coverage_manifest": {
+    "headings": [
+      {
+        "heading": "# کیف پول دیجیتال شهاب",
+        "witness_lines": [
+          1
+        ]
+      },
+      {
+        "heading": "## ۱. این سند چه مسئله‌ای را حل می‌کند؟",
+        "witness_lines": [
+          7
+        ]
+      },
+      {
+        "heading": "### ۱.۱. سند را با چه ترتیبی بخوانیم",
+        "witness_lines": [
+          13
+        ]
+      },
+      {
+        "heading": "### ۱.۲. از کجا بدانیم کدام پاسخ قطعی است",
+        "witness_lines": [
+          25
+        ]
+      },
+      {
+        "heading": "### ۱.۳. مطالب جدید چگونه وارد سند شوند",
+        "witness_lines": [
+          39
+        ]
+      },
+      {
+        "heading": "### ۱.۴. اعتبار داخلی برای خدمات خود شهاب",
+        "witness_lines": [
+          51
+        ]
+      },
+      {
+        "heading": "## ۲. کیف پول شهاب چه امکاناتی دارد؟",
+        "witness_lines": [
+          63
+        ]
+      },
+      {
+        "heading": "### ۲.۱. ویژگی‌های پایه",
+        "witness_lines": [
+          73
+        ]
+      },
+      {
+        "heading": "### ۲.۲. قابلیت‌های وابسته به مدل محصول",
+        "witness_lines": [
+          87
+        ]
+      },
+      {
+        "heading": "### ۲.۳. زیرساخت‌های پشت صحنه",
+        "witness_lines": [
+          101
+        ]
+      },
+      {
+        "heading": "### ۲.۴. دامنه و ترتیب انتشار",
+        "witness_lines": [
+          114
+        ]
+      },
+      {
+        "heading": "## ۳. کیف پول متعلق به چه کسی است و چه کسی از آن استفاده می‌کند؟",
+        "witness_lines": [
+          126
+        ]
+      },
+      {
+        "heading": "### ۳.۱. هر شخص و سازمان چند کیف پول دارد",
+        "witness_lines": [
+          130
+        ]
+      },
+      {
+        "heading": "#### ۳.۱.۱. فعال‌سازی مالی سازمان",
+        "witness_lines": [
+          150
+        ]
+      },
+      {
+        "heading": "#### ۳.۱.۲. شناسایی معمول شخص حقیقی",
+        "witness_lines": [
+          162
+        ]
+      },
+      {
+        "heading": "### ۳.۲. کاربر می‌تواند عضو چند سازمان باشد و با خروج او چه می‌شود",
+        "witness_lines": [
+          174
+        ]
+      },
+      {
+        "heading": "#### ۳.۲.۱. دعوت و پذیرش عضو",
+        "witness_lines": [
+          190
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "ویژگی‌های پایه",
+        "header_line": 75,
+        "rows": [
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85
+        ]
+      },
+      {
+        "name": "قابلیت‌های وابسته به مدل محصول",
+        "header_line": 89,
+        "rows": [
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99
+        ]
+      },
+      {
+        "name": "زیرساخت‌های پشت صحنه",
+        "header_line": 103,
+        "rows": [
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112
+        ]
+      }
+    ],
+    "executable_decisions": [
+      {
+        "topic": "wallet value must retain origin, consumption rights and failure outcome; numerical example does not make all funds withdrawable",
+        "witness_lines": [
+          9,
+          11
+        ]
+      },
+      {
+        "topic": "reading order and status vocabulary distinguish approved, selected, open and illustrative values",
+        "witness_lines": [
+          19,
+          21,
+          31,
+          35
+        ]
+      },
+      {
+        "topic": "document maintenance prevents the same decision from being both approved and open",
+        "witness_lines": [
+          45,
+          47
+        ]
+      },
+      {
+        "topic": "wallet credits may only be spent inside Shahab for Shahab services; external vendors are not independent merchants",
+        "witness_lines": [
+          57,
+          59
+        ]
+      },
+      {
+        "topic": "selected feature count is 26 across 9 base, 9 product-dependent and 8 infrastructure; identifiers are document references",
+        "witness_lines": [
+          69,
+          71
+        ]
+      },
+      {
+        "topic": "all selected features remain in total scope; staged release sequence; no multi-currency selection",
+        "witness_lines": [
+          120,
+          122
+        ]
+      },
+      {
+        "topic": "one primary personal wallet and one primary organizational wallet; org owns its wallet; internal ledger accounts need not equal visible wallets",
+        "witness_lines": [
+          136,
+          138,
+          140,
+          142
+        ]
+      },
+      {
+        "topic": "organization wallet activation requires notarized contract, verified org/beneficial owner/representative; only pre-registration/status view before completion",
+        "witness_lines": [
+          156,
+          158
+        ]
+      },
+      {
+        "topic": "natural person usual identity flow uses OTP and Shahkar match; unknown/failure is not success and does not replace bank account ownership verification",
+        "witness_lines": [
+          168,
+          170,
+          172
+        ]
+      },
+      {
+        "topic": "multi-org membership keeps access/budget/history separate; removing membership blocks new operations without deleting personal/org funds or prior records",
+        "witness_lines": [
+          180,
+          182,
+          186
+        ]
+      },
+      {
+        "topic": "member invitation requires uploaded list, identity verification, invitation acceptance, and correct account matching",
+        "witness_lines": [
+          196,
+          198,
+          200
+        ]
+      }
+    ]
+  }
+}

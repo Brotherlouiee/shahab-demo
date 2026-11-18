@@ -1,0 +1,2817 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+      "label": "Full Credit Component Lineage Across Time",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1199",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** بله؛ ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف، انتقال، بازگشت یا انقضا فراهم شود. تمام کاربران و سازمان‌های واسط در جهت‌های انتقال مجاز، پیوند والد و فرزند اجزا، سهم ریالی هر منشأ، زمان، شناسه، وضعیت و عامل هر رویداد حفظ شوند. تقسیم میان چند گیرنده، ترکیب منشأها، بازانتقال و حلقهٔ بازگشت به حساب قبلی، پیوندها را حذف نکنند. اصلاح و استرداد رویداد مرتبط تازه‌اند؛ سابقه پاک نشود. وضعیت مسیر در هر مقطع زمانی و کل شبکهٔ مرتبط با حساب قابل بازسازی و گزارش باشد؛ پیوندها دائمی نگهداری شوند.",
+        "evidence_locator": "1199",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approved answer",
+        "rationale": "Enable reconstruction from origin through use, transfer, return or expiry while preserving parent/child amounts, intermediaries and events."
+      },
+      "evidence_quote": "**پاسخ مصوب:** بله؛ ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف، انتقال، بازگشت یا انقضا فراهم شود. تمام کاربران و سازمان‌های واسط در جهت‌های انتقال مجاز، پیوند والد و فرزند اجزا، سهم ریالی هر منشأ، زمان، شناسه، وضعیت و عامل هر رویداد حفظ شوند. تقسیم میان چند گیرنده، ترکیب منشأها، بازانتقال و حلقهٔ بازگشت به حساب قبلی، پیوندها را حذف نکنند. اصلاح و استرداد رویداد مرتبط تازه‌اند؛ سابقه پاک نشود. وضعیت مسیر در هر مقطع زمانی و کل شبکهٔ مرتبط با حساب قابل بازسازی و گزارش باشد؛ پیوندها دائمی نگهداری شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1199",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+            "label": "Full Credit Component Lineage Across Time",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1199",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** بله؛ ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف، انتقال، بازگشت یا انقضا فراهم شود. تمام کاربران و سازمان‌های واسط در جهت‌های انتقال مجاز، پیوند والد و فرزند اجزا، سهم ریالی هر منشأ، زمان، شناسه، وضعیت و عامل هر رویداد حفظ شوند. تقسیم میان چند گیرنده، ترکیب منشأها، بازانتقال و حلقهٔ بازگشت به حساب قبلی، پیوندها را حذف نکنند. اصلاح و استرداد رویداد مرتبط تازه‌اند؛ سابقه پاک نشود. وضعیت مسیر در هر مقطع زمانی و کل شبکهٔ مرتبط با حساب قابل بازسازی و گزارش باشد؛ پیوندها دائمی نگهداری شوند.",
+              "evidence_locator": "1199",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approved answer",
+              "rationale": "Enable reconstruction from origin through use, transfer, return or expiry while preserving parent/child amounts, intermediaries and events."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_credit_lineage_reconstruction_and_reporting",
+      "label": "Historical Credit Path and Network Reconstruction",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1203",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.",
+        "evidence_locator": "1203",
+        "decision_status": "approved; graph/database technology remains an implementation decision",
+        "owner": "unspecified",
+        "owner_status": "cross-reference only"
+      },
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1203",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_credit_lineage_reconstruction_and_reporting",
+            "label": "Historical Credit Path and Network Reconstruction",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1203",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.",
+              "evidence_locator": "1203",
+              "decision_status": "approved; graph/database technology remains an implementation decision",
+              "owner": "unspecified",
+              "owner_status": "cross-reference only"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+      "label": "Independent Service, Bank, and Ledger Status Lifecycles",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1211",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** سه چرخهٔ مستقل و مرتبط نگهداری شود: اجرای خدمت مانند ایجاد، اجرا، انتظار کاربر، موفق، ناقص، لغو یا شکست؛ عملیات بانکی مانند انتظار، ارسال، نتیجهٔ نامعلوم، موفق، ناموفق یا برگشت؛ و ثبت دفترکل شامل در انتظار، قطعی یا بایگانی‌شده. نام فنی نهایی و جدول انتقال مجاز وضعیت‌ها در طراحی اجرایی تکمیل شوند.",
+        "evidence_locator": "1211",
+        "decision_status": "approved; technical names and allowed transitions remain open",
+        "owner": "unspecified",
+        "owner_status": "three lifecycle domains explicitly specified"
+      },
+      "evidence_quote": "**پاسخ مصوب:** سه چرخهٔ مستقل و مرتبط نگهداری شود: اجرای خدمت مانند ایجاد، اجرا، انتظار کاربر، موفق، ناقص، لغو یا شکست؛ عملیات بانکی مانند انتظار، ارسال، نتیجهٔ نامعلوم، موفق، ناموفق یا برگشت؛ و ثبت دفترکل شامل در انتظار، قطعی یا بایگانی‌شده. نام فنی نهایی و جدول انتقال مجاز وضعیت‌ها در طراحی اجرایی تکمیل شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1211",
+      "decision_status": "APPROVED_POLICY_TABLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+            "label": "Independent Service, Bank, and Ledger Status Lifecycles",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1211",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** سه چرخهٔ مستقل و مرتبط نگهداری شود: اجرای خدمت مانند ایجاد، اجرا، انتظار کاربر، موفق، ناقص، لغو یا شکست؛ عملیات بانکی مانند انتظار، ارسال، نتیجهٔ نامعلوم، موفق، ناموفق یا برگشت؛ و ثبت دفترکل شامل در انتظار، قطعی یا بایگانی‌شده. نام فنی نهایی و جدول انتقال مجاز وضعیت‌ها در طراحی اجرایی تکمیل شوند.",
+              "evidence_locator": "1211",
+              "decision_status": "approved; technical names and allowed transitions remain open",
+              "owner": "unspecified",
+              "owner_status": "three lifecycle domains explicitly specified"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_immutable_posted_entries",
+      "label": "Immutable Posted Ledger Entries",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1213",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد.",
+        "evidence_locator": "1213",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit rule"
+      },
+      "evidence_quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1213",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_immutable_posted_entries",
+            "label": "Immutable Posted Ledger Entries",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1213",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد.",
+              "evidence_locator": "1213",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit rule"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+      "label": "Linked but Independent Operation and Financial Identifiers",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1227",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند.",
+        "evidence_locator": "1227",
+        "decision_status": "approved; identifier formats and uniqueness constraints remain open",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1227",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+            "label": "Linked but Independent Operation and Financial Identifiers",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1227",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند.",
+              "evidence_locator": "1227",
+              "decision_status": "approved; identifier formats and uniqueness constraints remain open",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_multi_layer_idempotency",
+      "label": "Multi-Layer Idempotency for Actions, Events, and Incoming Messages",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1241",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** کنترل چندلایه باشد: کلید تکرار امن برای هر اقدام مشخص از یک عملیات، یکتایی پایدار رویداد مالی در شهاب و شناسایی پیام‌های تکراری ورودی. رزرو، قطعی‌کردن و بازگشت اقدام‌های متفاوت‌اند و کلید یکدیگر را استفاده نکنند. تکرار همان اقدام با همان داده اثر دوم نسازد؛ تغییر مبلغ یا مقصد زیر همان کلید نیز نباید بی‌صدا به اقدام تازه تبدیل شود.",
+        "evidence_locator": "1241",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** کنترل چندلایه باشد: کلید تکرار امن برای هر اقدام مشخص از یک عملیات، یکتایی پایدار رویداد مالی در شهاب و شناسایی پیام‌های تکراری ورودی. رزرو، قطعی‌کردن و بازگشت اقدام‌های متفاوت‌اند و کلید یکدیگر را استفاده نکنند. تکرار همان اقدام با همان داده اثر دوم نسازد؛ تغییر مبلغ یا مقصد زیر همان کلید نیز نباید بی‌صدا به اقدام تازه تبدیل شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1241",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_multi_layer_idempotency",
+            "label": "Multi-Layer Idempotency for Actions, Events, and Incoming Messages",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1241",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** کنترل چندلایه باشد: کلید تکرار امن برای هر اقدام مشخص از یک عملیات، یکتایی پایدار رویداد مالی در شهاب و شناسایی پیام‌های تکراری ورودی. رزرو، قطعی‌کردن و بازگشت اقدام‌های متفاوت‌اند و کلید یکدیگر را استفاده نکنند. تکرار همان اقدام با همان داده اثر دوم نسازد؛ تغییر مبلغ یا مقصد زیر همان کلید نیز نباید بی‌صدا به اقدام تازه تبدیل شود.",
+              "evidence_locator": "1241",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_durable_processed_event_identity",
+      "label": "Durable Processed Event Identity Beyond Provider Cache",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1243",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+        "evidence_locator": "1243",
+        "decision_status": "approved; retention/recovery details specified in section 8",
+        "owner": "unspecified",
+        "owner_status": "explicit rule"
+      },
+      "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1243",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_durable_processed_event_identity",
+            "label": "Durable Processed Event Identity Beyond Provider Cache",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1243",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+              "evidence_locator": "1243",
+              "decision_status": "approved; retention/recovery details specified in section 8",
+              "owner": "unspecified",
+              "owner_status": "explicit rule"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+      "label": "Reservation, Partial Capture, and Release Lifecycle",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1257",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+        "evidence_locator": "1257",
+        "decision_status": "approved; service-specific numeric parameters remain open",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1257",
+      "decision_status": "ILLUSTRATIVE_EXAMPLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+            "label": "Reservation, Partial Capture, and Release Lifecycle",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1257",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+              "evidence_locator": "1257",
+              "decision_status": "approved; service-specific numeric parameters remain open",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_atomic_reservation_capture_adjustment",
+      "label": "Atomic Capture and Reservation Reduction",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1257",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+        "evidence_locator": "1257",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1257",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_atomic_reservation_capture_adjustment",
+            "label": "Atomic Capture and Reservation Reduction",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1257",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+              "evidence_locator": "1257",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+      "label": "Concurrent Balance, Credit Component, and Authorization Checks",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1271",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** ثبت اثر مالی به مانده یا نسخهٔ معتبر حساب و اجزای اعتبار مشروط شود. بررسی و مصرف، دو مرحلهٔ مستقل و بدون محافظ نباشند. در همان مرز ثبت، حق برداشت، انقضا، خدمت مجاز، سهم اجزا، رزروهای قبلی، سقف‌های فرد و سازمان، عضویت و فهرست مجاز سازمان و ظرفیت عملیات در انتظار کنترل شوند. تغییر شرایط باعث رد یا محاسبهٔ مجدد شود؛ محاسبهٔ مجدد اجازهٔ تغییر پنهان پرداخت‌کننده، گیرنده یا مبلغ تأییدشده نیست.",
+        "evidence_locator": "1271",
+        "decision_status": "approved; database/API/coordinated-system design remains open",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** ثبت اثر مالی به مانده یا نسخهٔ معتبر حساب و اجزای اعتبار مشروط شود. بررسی و مصرف، دو مرحلهٔ مستقل و بدون محافظ نباشند. در همان مرز ثبت، حق برداشت، انقضا، خدمت مجاز، سهم اجزا، رزروهای قبلی، سقف‌های فرد و سازمان، عضویت و فهرست مجاز سازمان و ظرفیت عملیات در انتظار کنترل شوند. تغییر شرایط باعث رد یا محاسبهٔ مجدد شود؛ محاسبهٔ مجدد اجازهٔ تغییر پنهان پرداخت‌کننده، گیرنده یا مبلغ تأییدشده نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1271",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+            "label": "Concurrent Balance, Credit Component, and Authorization Checks",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1271",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** ثبت اثر مالی به مانده یا نسخهٔ معتبر حساب و اجزای اعتبار مشروط شود. بررسی و مصرف، دو مرحلهٔ مستقل و بدون محافظ نباشند. در همان مرز ثبت، حق برداشت، انقضا، خدمت مجاز، سهم اجزا، رزروهای قبلی، سقف‌های فرد و سازمان، عضویت و فهرست مجاز سازمان و ظرفیت عملیات در انتظار کنترل شوند. تغییر شرایط باعث رد یا محاسبهٔ مجدد شود؛ محاسبهٔ مجدد اجازهٔ تغییر پنهان پرداخت‌کننده، گیرنده یا مبلغ تأییدشده نیست.",
+              "evidence_locator": "1271",
+              "decision_status": "approved; database/API/coordinated-system design remains open",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+      "label": "At-Least-Daily Reconciliation and Exception Cases",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1289",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** تطبیق خودکار دست‌کم روزانه انجام شود. موارد حل‌نشده پرونده شوند و مسئول عملیات مالی شهاب با مستندات رسیدگی کند. هر اصلاح مالی ثبت مرتبط، علت و عامل داشته باشد.",
+        "evidence_locator": "1289",
+        "decision_status": "approved; resolution SLA and operational authority limits remain open",
+        "owner": "Shahab financial operations owner",
+        "owner_status": "role stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** تطبیق خودکار دست‌کم روزانه انجام شود. موارد حل‌نشده پرونده شوند و مسئول عملیات مالی شهاب با مستندات رسیدگی کند. هر اصلاح مالی ثبت مرتبط، علت و عامل داشته باشد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1289",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+            "label": "At-Least-Daily Reconciliation and Exception Cases",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1289",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** تطبیق خودکار دست‌کم روزانه انجام شود. موارد حل‌نشده پرونده شوند و مسئول عملیات مالی شهاب با مستندات رسیدگی کند. هر اصلاح مالی ثبت مرتبط، علت و عامل داشته باشد.",
+              "evidence_locator": "1289",
+              "decision_status": "approved; resolution SLA and operational authority limits remain open",
+              "owner": "Shahab financial operations owner",
+              "owner_status": "role stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_reconciliation_time_cut_and_obligation_coverage",
+      "label": "Daily Reconciliation Cut and Obligation Coverage",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1303",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.",
+        "evidence_locator": "1303",
+        "decision_status": "approved; obligation coverage formula requires specialist approval",
+        "owner": "specialist for final formula",
+        "owner_status": "explicitly stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1303",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_reconciliation_time_cut_and_obligation_coverage",
+            "label": "Daily Reconciliation Cut and Obligation Coverage",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1303",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.",
+              "evidence_locator": "1303",
+              "decision_status": "approved; obligation coverage formula requires specialist approval",
+              "owner": "specialist for final formula",
+              "owner_status": "explicitly stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_sensitive_operation_reauthentication",
+      "label": "Reauthentication for Sensitive Financial Operations",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1317",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم، احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک داشته باشند. سازمان به تأییدکنندهٔ دوم اجباری نیاز ندارد.",
+        "evidence_locator": "1317",
+        "decision_status": "approved; implementation details remain to be defined",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم، احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک داشته باشند. سازمان به تأییدکنندهٔ دوم اجباری نیاز ندارد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1317",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_sensitive_operation_reauthentication",
+            "label": "Reauthentication for Sensitive Financial Operations",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1317",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم، احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک داشته باشند. سازمان به تأییدکنندهٔ دوم اجباری نیاز ندارد.",
+              "evidence_locator": "1317",
+              "decision_status": "approved; implementation details remain to be defined",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+      "label": "Permanent Financial Record and Provenance Retention",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1331",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+        "evidence_locator": "1331",
+        "decision_status": "approved; backups, migrations, recovery testing and long-term protection remain implementation details",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1331",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+            "label": "Permanent Financial Record and Provenance Retention",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1331",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+              "evidence_locator": "1331",
+              "decision_status": "approved; backups, migrations, recovery testing and long-term protection remain implementation details",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_financial_history_access_audit",
+      "label": "Restricted Record Access with Access Audit",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1331",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+        "evidence_locator": "1331",
+        "decision_status": "approved",
+        "owner": "authorized persons",
+        "owner_status": "authorized access stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1331",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_financial_history_access_audit",
+            "label": "Restricted Record Access with Access Audit",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1331",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+              "evidence_locator": "1331",
+              "decision_status": "approved",
+              "owner": "authorized persons",
+              "owner_status": "authorized access stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_operational_security_alerts",
+      "label": "Immediate Alerts for Material Financial and Security Risks",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1343",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+        "evidence_locator": "1343",
+        "decision_status": "approved; threshold/channel/owner/escalation path open",
+        "owner": "unspecified",
+        "owner_status": "open operational parameters stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1343",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_operational_security_alerts",
+            "label": "Immediate Alerts for Material Financial and Security Risks",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1343",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+              "evidence_locator": "1343",
+              "decision_status": "approved; threshold/channel/owner/escalation path open",
+              "owner": "unspecified",
+              "owner_status": "open operational parameters stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_aml_traceability_scope_boundary",
+      "label": "Traceability Does Not Replace Applicable AML Duties",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1355",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** در این مرحله تمرکز توسعه بر ردیابی کامل زنجیره است و ساخت سامانهٔ مستقل تازه برای چهار موضوع گزارش مشکوک، کنترل داخلی و آموزش، محرمانگی و اجرای دستور قانونی به برنامه اضافه نمی‌شود. به اعلام مالک، سازوکارهای موجود سازمان مبنای انجام تکالیف‌اند؛ این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست. حسابرسی یا ردیابی جای تکلیف قانونیِ قابل اعمال به گزارش، محرمانگی و اجرای دستور معتبر را نمی‌گیرد؛ روش انجام و مسئولیت در فرایندهای موجود باید قابل ارجاع و مستند باشد. کفایت مسیر معمول OTP و شاهکار برای تمام وضعیت‌های استثنایی قطعی فرض نشود.",
+        "evidence_locator": "1355",
+        "decision_status": "approved scope; no independent new system added at this stage; legal compliance not certified",
+        "owner": "existing organizational processes; accountable roles unspecified",
+        "owner_status": "explicit scope decision and caveat"
+      },
+      "evidence_quote": "**پاسخ مصوب:** در این مرحله تمرکز توسعه بر ردیابی کامل زنجیره است و ساخت سامانهٔ مستقل تازه برای چهار موضوع گزارش مشکوک، کنترل داخلی و آموزش، محرمانگی و اجرای دستور قانونی به برنامه اضافه نمی‌شود. به اعلام مالک، سازوکارهای موجود سازمان مبنای انجام تکالیف‌اند؛ این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست. حسابرسی یا ردیابی جای تکلیف قانونیِ قابل اعمال به گزارش، محرمانگی و اجرای دستور معتبر را نمی‌گیرد؛ روش انجام و مسئولیت در فرایندهای موجود باید قابل ارجاع و مستند باشد. کفایت مسیر معمول OTP و شاهکار برای تمام وضعیت‌های استثنایی قطعی فرض نشود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1355",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_aml_traceability_scope_boundary",
+            "label": "Traceability Does Not Replace Applicable AML Duties",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1355",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** در این مرحله تمرکز توسعه بر ردیابی کامل زنجیره است و ساخت سامانهٔ مستقل تازه برای چهار موضوع گزارش مشکوک، کنترل داخلی و آموزش، محرمانگی و اجرای دستور قانونی به برنامه اضافه نمی‌شود. به اعلام مالک، سازوکارهای موجود سازمان مبنای انجام تکالیف‌اند؛ این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست. حسابرسی یا ردیابی جای تکلیف قانونیِ قابل اعمال به گزارش، محرمانگی و اجرای دستور معتبر را نمی‌گیرد؛ روش انجام و مسئولیت در فرایندهای موجود باید قابل ارجاع و مستند باشد. کفایت مسیر معمول OTP و شاهکار برای تمام وضعیت‌های استثنایی قطعی فرض نشود.",
+              "evidence_locator": "1355",
+              "decision_status": "approved scope; no independent new system added at this stage; legal compliance not certified",
+              "owner": "existing organizational processes; accountable roles unspecified",
+              "owner_status": "explicit scope decision and caveat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+      "label": "Safe Recovery of Incomplete Work and Unknown Outcomes",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1369",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+        "evidence_locator": "1369",
+        "decision_status": "approved; retry count, intervals, deadline and escalation path open",
+        "owner": "Shahab operations queue owner",
+        "owner_status": "operational queue stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1369",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+            "label": "Safe Recovery of Incomplete Work and Unknown Outcomes",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1369",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+              "evidence_locator": "1369",
+              "decision_status": "approved; retry count, intervals, deadline and escalation path open",
+              "owner": "Shahab operations queue owner",
+              "owner_status": "operational queue stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_service_cost_and_bank_settlement_distinction",
+      "label": "Service Cost, Supplier Cost, and Settlement Are Distinct",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1379",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**مسئله و هدف:** هزینهٔ اجرای خدمت برای شهاب لزوماً همان مبلغی نیست که مشتری می‌پردازد. همچنین قطعی‌شدن هزینه در کیف پول با انتقال پول بانکی یکسان نیست.",
+        "evidence_locator": "1379",
+        "decision_status": "specified by section purpose",
+        "owner": "unspecified",
+        "owner_status": "section framing"
+      },
+      "evidence_quote": "**مسئله و هدف:** هزینهٔ اجرای خدمت برای شهاب لزوماً همان مبلغی نیست که مشتری می‌پردازد. همچنین قطعی‌شدن هزینه در کیف پول با انتقال پول بانکی یکسان نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1379",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_service_cost_and_bank_settlement_distinction",
+            "label": "Service Cost, Supplier Cost, and Settlement Are Distinct",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1379",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**مسئله و هدف:** هزینهٔ اجرای خدمت برای شهاب لزوماً همان مبلغی نیست که مشتری می‌پردازد. همچنین قطعی‌شدن هزینه در کیف پول با انتقال پول بانکی یکسان نیست.",
+              "evidence_locator": "1379",
+              "decision_status": "specified by section purpose",
+              "owner": "unspecified",
+              "owner_status": "section framing"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+      "label": "Dynamic Adviser and Assistant Cost Calculation",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+        "evidence_locator": "1391",
+        "decision_status": "approved; exact processing metric and numeric unit rates remain open",
+        "owner": "service owner for processing metric",
+        "owner_status": "decision and deferred parameter stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1391",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+            "label": "Dynamic Adviser and Assistant Cost Calculation",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1391",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+              "evidence_locator": "1391",
+              "decision_status": "approved; exact processing metric and numeric unit rates remain open",
+              "owner": "service owner for processing metric",
+              "owner_status": "decision and deferred parameter stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+      "label": "Assistant Embedded Advice Charged at Half Independent Advice Cost",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+        "evidence_locator": "1391",
+        "decision_status": "approved; one-third is not current option",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1391",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+            "label": "Assistant Embedded Advice Charged at Half Independent Advice Cost",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1391",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+              "evidence_locator": "1391",
+              "decision_status": "approved; one-third is not current option",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_twenty_percent_increase_cap_not_fee",
+      "label": "20% Increase Margin Is a Cap, Not a Fee",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+        "evidence_locator": "1391",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1391",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_twenty_percent_increase_cap_not_fee",
+            "label": "20% Increase Margin Is a Cap, Not a Fee",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1391",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+              "evidence_locator": "1391",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_capture_only_calculated_receivable",
+      "label": "Capture Only the Calculated Receivable Amount",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+        "evidence_locator": "1391",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit approved answer"
+      },
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L1391",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_capture_only_calculated_receivable",
+            "label": "Capture Only the Calculated Receivable Amount",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "1391",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+              "evidence_locator": "1391",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit approved answer"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+      "target": "docs_shahab_digital_wallet_credit_lineage_reconstruction_and_reporting",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1203",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.",
+      "evidence_locator": "1203",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+          "target": "docs_shahab_digital_wallet_credit_lineage_reconstruction_and_reporting",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1203",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است.",
+          "evidence_locator": "1203",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1203,
+          "quote": "**ارتباط با بخش‌های دیگر:** مدل اجزای ۶.۵.۲ و شناسه‌های ۷.۴ مبنا هستند؛ ثبت و کنترل جمع سهم‌ها اتمیک باشند. دسترسی و نگهداری در ۸.۲ و نمایش مجاز و آزمون در ۱۰ و ۱۱ تکمیل می‌شوند؛ انتخاب فناوری گراف یا پایگاه داده هنوز تصمیم اجرایی است."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1199,
+          "quote": "**پاسخ مصوب:** بله؛ ردیابی به عقب تا منشأ اولیه و به جلو تا مصرف، انتقال، بازگشت یا انقضا فراهم شود. تمام کاربران و سازمان‌های واسط در جهت‌های انتقال مجاز، پیوند والد و فرزند اجزا، سهم ریالی هر منشأ، زمان، شناسه، وضعیت و عامل هر رویداد حفظ شوند. تقسیم میان چند گیرنده، ترکیب منشأها، بازانتقال و حلقهٔ بازگشت به حساب قبلی، پیوندها را حذف نکنند. اصلاح و استرداد رویداد مرتبط تازه‌اند؛ سابقه پاک نشود. وضعیت مسیر در هر مقطع زمانی و کل شبکهٔ مرتبط با حساب قابل بازسازی و گزارش باشد؛ پیوندها دائمی نگهداری شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+      "target": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1215",
+      "weight": 1.0,
+      "evidence_quote": "**مثال:** دستیار متوقف شده، اما نتیجهٔ یک هزینهٔ خارجی نامعلوم است. خدمت متوقف می‌ماند، وضعیت خارجی نامعلوم ثبت می‌شود و رزرو مرتبط تا روشن‌شدن تعهد آزاد نمی‌شود. برگشت بعدی بانک نیز رویداد مستقلی با سابقهٔ خودش است.",
+      "evidence_locator": "1215",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited text describes only the target and does not connect the named source endpoint. Quarantine unless an independently verified relation is found.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+          "target": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1215",
+          "weight": 1.0,
+          "evidence_quote": "**مثال:** دستیار متوقف شده، اما نتیجهٔ یک هزینهٔ خارجی نامعلوم است. خدمت متوقف می‌ماند، وضعیت خارجی نامعلوم ثبت می‌شود و رزرو مرتبط تا روشن‌شدن تعهد آزاد نمی‌شود. برگشت بعدی بانک نیز رویداد مستقلی با سابقهٔ خودش است.",
+          "evidence_locator": "1215",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1215,
+          "quote": "**مثال:** دستیار متوقف شده، اما نتیجهٔ یک هزینهٔ خارجی نامعلوم است. خدمت متوقف می‌ماند، وضعیت خارجی نامعلوم ثبت می‌شود و رزرو مرتبط تا روشن‌شدن تعهد آزاد نمی‌شود. برگشت بعدی بانک نیز رویداد مستقلی با سابقهٔ خودش است."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+      "target": "docs_shahab_digital_wallet_immutable_posted_entries",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1213",
+      "weight": 1.0,
+      "evidence_quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد.",
+      "evidence_locator": "1213",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+          "target": "docs_shahab_digital_wallet_immutable_posted_entries",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1213",
+          "weight": 1.0,
+          "evidence_quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد.",
+          "evidence_locator": "1213",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1213,
+          "quote": "ثبت در انتظار می‌تواند مطابق قواعد و همراه سابقه تغییر کند. ورودی‌های ثبت قطعی حذف یا بازنویسی نشوند؛ بازگشت و اصلاح با رویداد جدید و پیوند به اصل عملیات ثبت شوند. بایگانی‌کردن ثبت در انتظار، جای معکوس‌کردن ثبت قطعی را نمی‌گیرد."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1211,
+          "quote": "**پاسخ مصوب:** سه چرخهٔ مستقل و مرتبط نگهداری شود: اجرای خدمت مانند ایجاد، اجرا، انتظار کاربر، موفق، ناقص، لغو یا شکست؛ عملیات بانکی مانند انتظار، ارسال، نتیجهٔ نامعلوم، موفق، ناموفق یا برگشت؛ و ثبت دفترکل شامل در انتظار، قطعی یا بایگانی‌شده. نام فنی نهایی و جدول انتقال مجاز وضعیت‌ها در طراحی اجرایی تکمیل شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+      "target": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1227",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند.",
+      "evidence_locator": "1227",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+          "target": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1227",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند.",
+          "evidence_locator": "1227",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1227,
+          "quote": "**پاسخ مصوب:** شناسهٔ عملیات، کیف پول، تراکنش دفترکل، جزء اعتبار، رزرو، مرجع بانکی، رویداد دریافتی و مرجع اصلاح مستقل و به هم مرتبط باشند. هر عملیات می‌تواند چند ثبت مالی داشته باشد؛ هر اصلاح نیز به رویداد اصلی اشاره کند. شناسهٔ فاکتور جای شناسهٔ پرداخت یا عملیات را نگیرد. قالب فنی و قیود یکتایی هر شناسه در طراحی اجرایی تعیین شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+      "target": "docs_shahab_digital_wallet_multi_layer_idempotency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1233",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** رسید و تاریخچهٔ بخش ۱۰، تطبیق بخش ۸ و اصلاح اشتباه بخش ۶.۵ از این ارتباط‌ها استفاده می‌کنند. بخش ۷.۵ تعیین می‌کند تکرار کدام شناسه نباید اثر تازه بسازد.",
+      "evidence_locator": "1233",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+          "target": "docs_shahab_digital_wallet_multi_layer_idempotency",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1233",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** رسید و تاریخچهٔ بخش ۱۰، تطبیق بخش ۸ و اصلاح اشتباه بخش ۶.۵ از این ارتباط‌ها استفاده می‌کنند. بخش ۷.۵ تعیین می‌کند تکرار کدام شناسه نباید اثر تازه بسازد.",
+          "evidence_locator": "1233",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1233,
+          "quote": "**ارتباط با بخش‌های دیگر:** رسید و تاریخچهٔ بخش ۱۰، تطبیق بخش ۸ و اصلاح اشتباه بخش ۶.۵ از این ارتباط‌ها استفاده می‌کنند. بخش ۷.۵ تعیین می‌کند تکرار کدام شناسه نباید اثر تازه بسازد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_multi_layer_idempotency",
+      "target": "docs_shahab_digital_wallet_durable_processed_event_identity",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1243",
+      "weight": 1.0,
+      "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+      "evidence_locator": "1243",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_multi_layer_idempotency",
+          "target": "docs_shahab_digital_wallet_durable_processed_event_identity",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1243",
+          "weight": 1.0,
+          "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+          "evidence_locator": "1243",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1243,
+          "quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1241,
+          "quote": "**پاسخ مصوب:** کنترل چندلایه باشد: کلید تکرار امن برای هر اقدام مشخص از یک عملیات، یکتایی پایدار رویداد مالی در شهاب و شناسایی پیام‌های تکراری ورودی. رزرو، قطعی‌کردن و بازگشت اقدام‌های متفاوت‌اند و کلید یکدیگر را استفاده نکنند. تکرار همان اقدام با همان داده اثر دوم نسازد؛ تغییر مبلغ یا مقصد زیر همان کلید نیز نباید بی‌صدا به اقدام تازه تبدیل شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+      "target": "docs_shahab_digital_wallet_durable_processed_event_identity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1243",
+      "weight": 1.0,
+      "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+      "evidence_locator": "1243",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_separate_operation_and_financial_identifiers",
+          "target": "docs_shahab_digital_wallet_durable_processed_event_identity",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1243",
+          "weight": 1.0,
+          "evidence_quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد.",
+          "evidence_locator": "1243",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1243,
+          "quote": "شناسهٔ رویداد پردازش‌شده و پیوند اثر مالی آن مستقل از حافظهٔ موقت ارائه‌دهنده نگهداری شود. زمان نگهداری سوابق و جزئیات بازیابی مطابق بخش ۸ تکمیل شوند، ولی پاک‌شدن پاسخ کش‌شدهٔ API نباید یکتایی مالی را از بین ببرد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+      "target": "docs_shahab_digital_wallet_atomic_reservation_capture_adjustment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1257",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+      "evidence_locator": "1257",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+          "target": "docs_shahab_digital_wallet_atomic_reservation_capture_adjustment",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1257",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند.",
+          "evidence_locator": "1257",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1257,
+          "quote": "**پاسخ مصوب:** هر رزرو به عملیات و سهم دقیق اجزای اعتبار متصل باشد و همان سهم‌ها را از اعتبار آزاد کم کند. هزینهٔ تأییدشده می‌تواند مرحله‌ای قطعی شود؛ ماندهٔ رزرو تا تعیین نتیجه محفوظ بماند و بخش بدون تعهد پس از روشن‌شدن نتیجه آزاد شود. قطعی‌کردن مبلغ و کاهش رزرو متناظر باید هماهنگ و بدون فاصلهٔ قابل مصرف دوباره انجام شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+      "target": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1267",
+      "weight": 1.0,
+      "evidence_quote": "**مسئله و هدف:** دیدن موجودی کافی پیش از ثبت تضمین نمی‌کند که درخواست دیگری آن را مصرف نکرده باشد. کنترل فقط ماندهٔ کل نیز برای رعایت هدیه و سقف کارمند کافی نیست.",
+      "evidence_locator": "1267",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_reservation_to_capture_or_release",
+          "target": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1267",
+          "weight": 1.0,
+          "evidence_quote": "**مسئله و هدف:** دیدن موجودی کافی پیش از ثبت تضمین نمی‌کند که درخواست دیگری آن را مصرف نکرده باشد. کنترل فقط ماندهٔ کل نیز برای رعایت هدیه و سقف کارمند کافی نیست.",
+          "evidence_locator": "1267",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1267,
+          "quote": "**مسئله و هدف:** دیدن موجودی کافی پیش از ثبت تضمین نمی‌کند که درخواست دیگری آن را مصرف نکرده باشد. کنترل فقط ماندهٔ کل نیز برای رعایت هدیه و سقف کارمند کافی نیست."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+      "target": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1277",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** حقوق بخش ۵، سقف بخش‌های ۶.۵ و ۶.۸ و اجزای بخش ۷.۲ با این کنترل اجرا می‌شوند. انتخاب پایگاه داده، قرارداد API، جداول و روش هماهنگی چندسامانه‌ای هنوز کار طراحی اجرایی است.",
+      "evidence_locator": "1277",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_concurrent_balance_component_authorization_checks",
+          "target": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1277",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** حقوق بخش ۵، سقف بخش‌های ۶.۵ و ۶.۸ و اجزای بخش ۷.۲ با این کنترل اجرا می‌شوند. انتخاب پایگاه داده، قرارداد API، جداول و روش هماهنگی چندسامانه‌ای هنوز کار طراحی اجرایی است.",
+          "evidence_locator": "1277",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1277,
+          "quote": "**ارتباط با بخش‌های دیگر:** حقوق بخش ۵، سقف بخش‌های ۶.۵ و ۶.۸ و اجزای بخش ۷.۲ با این کنترل اجرا می‌شوند. انتخاب پایگاه داده، قرارداد API، جداول و روش هماهنگی چندسامانه‌ای هنوز کار طراحی اجرایی است."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+      "target": "docs_shahab_digital_wallet_reconciliation_time_cut_and_obligation_coverage",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1303",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.",
+      "evidence_locator": "1303",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+          "target": "docs_shahab_digital_wallet_reconciliation_time_cut_and_obligation_coverage",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1303",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود.",
+          "evidence_locator": "1303",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1303,
+          "quote": "**پاسخ مصوب:** برش روزانه با زمان و منطقهٔ زمانی مشخص باشد؛ هدیه و وجوه در راه تفکیک و اقلام باز گزارش شوند. فرمول پوشش تعهد با تأیید متخصص نهایی شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+      "target": "docs_shahab_digital_wallet_operational_security_alerts",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1343",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+      "evidence_locator": "1343",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_daily_bank_ledger_reconciliation",
+          "target": "docs_shahab_digital_wallet_operational_security_alerts",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1343",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+          "evidence_locator": "1343",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1343,
+          "quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_sensitive_operation_reauthentication",
+      "target": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1331",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+      "evidence_locator": "1331",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited text describes only the target and does not connect the named source endpoint. Quarantine unless an independently verified relation is found.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_sensitive_operation_reauthentication",
+          "target": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1331",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+          "evidence_locator": "1331",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1331,
+          "quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1317,
+          "quote": "**پاسخ مصوب:** برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم، احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک داشته باشند. سازمان به تأییدکنندهٔ دوم اجباری نیاز ندارد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+      "target": "docs_shahab_digital_wallet_financial_history_access_audit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1331",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+      "evidence_locator": "1331",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+          "target": "docs_shahab_digital_wallet_financial_history_access_audit",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1331",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد.",
+          "evidence_locator": "1331",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1331,
+          "quote": "**پاسخ مصوب:** همهٔ رخدادهای مالی اشخاص حقیقی و حقوقی و پیوندهای منشأ و زنجیرهٔ انتقال، دائمی نگهداری شوند؛ دورهٔ بیست‌ساله یا حذف زمان‌دار برای این سوابق ملاک نیست. مدارک و قراردادهای مرتبطِ لازم برای توضیح رویداد و عامل و علت و زمان آن با سابقه پیوند داشته و قابل بازیابی بمانند. لاگ‌های صرفاً فنی و مدیریتی فاقد اثر مالی، رده‌بندی و سیاست مدت جدا داشته باشند؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیرهٔ مالی حفظ شود. رمز و OTP ذخیره نشوند. مشاهده و خروجی سوابق محدود به اشخاص مجاز و همراه ثبت سابقهٔ دسترسی باشد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+      "target": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1335",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** دفترکل و زنجیرهٔ ۷ مبنا هستند؛ رسیدهای عضو سابق دسترسی محدود خود را طبق ۳ حفظ می‌کنند. پشتیبان‌گیری، مهاجرت، آزمون بازیابی و حفاظت بلندمدت جزئیات اجرایی لازم‌اند.",
+      "evidence_locator": "1335",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+          "target": "docs_shahab_digital_wallet_permanent_financial_history_and_access_control",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1335",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** دفترکل و زنجیرهٔ ۷ مبنا هستند؛ رسیدهای عضو سابق دسترسی محدود خود را طبق ۳ حفظ می‌کنند. پشتیبان‌گیری، مهاجرت، آزمون بازیابی و حفاظت بلندمدت جزئیات اجرایی لازم‌اند.",
+          "evidence_locator": "1335",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1335,
+          "quote": "**ارتباط با بخش‌های دیگر:** دفترکل و زنجیرهٔ ۷ مبنا هستند؛ رسیدهای عضو سابق دسترسی محدود خود را طبق ۳ حفظ می‌کنند. پشتیبان‌گیری، مهاجرت، آزمون بازیابی و حفاظت بلندمدت جزئیات اجرایی لازم‌اند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_financial_history_access_audit",
+      "target": "docs_shahab_digital_wallet_operational_security_alerts",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1343",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+      "evidence_locator": "1343",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_financial_history_access_audit",
+          "target": "docs_shahab_digital_wallet_operational_security_alerts",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1343",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند.",
+          "evidence_locator": "1343",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1343,
+          "quote": "**پاسخ مصوب:** کسری پوشش، مغایرت مهم، تراکنش نامعلوم طولانی و دسترسی مشکوک هشدار فوری داشته باشند؛ موارد کم‌اهمیت دوره‌ای گزارش شوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+      "target": "docs_shahab_digital_wallet_aml_traceability_scope_boundary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1361",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** بندهای مرتبط مادهٔ ۷، مادهٔ ۸ و قواعد دستور قانونی در متن ارسالی، در بررسی انطباق لحاظ شوند؛ دامنه و نحوهٔ اجرای مقررات جاری نیازمند بررسی تخصصی است. ردیابی ۷.۲.۱ جایگزین این بررسی نیست.",
+      "evidence_locator": "1361",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_credit_lineage_full_lifecycle",
+          "target": "docs_shahab_digital_wallet_aml_traceability_scope_boundary",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1361",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** بندهای مرتبط مادهٔ ۷، مادهٔ ۸ و قواعد دستور قانونی در متن ارسالی، در بررسی انطباق لحاظ شوند؛ دامنه و نحوهٔ اجرای مقررات جاری نیازمند بررسی تخصصی است. ردیابی ۷.۲.۱ جایگزین این بررسی نیست.",
+          "evidence_locator": "1361",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1361,
+          "quote": "**ارتباط با بخش‌های دیگر:** بندهای مرتبط مادهٔ ۷، مادهٔ ۸ و قواعد دستور قانونی در متن ارسالی، در بررسی انطباق لحاظ شوند؛ دامنه و نحوهٔ اجرای مقررات جاری نیازمند بررسی تخصصی است. ردیابی ۷.۲.۱ جایگزین این بررسی نیست."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1355,
+          "quote": "**پاسخ مصوب:** در این مرحله تمرکز توسعه بر ردیابی کامل زنجیره است و ساخت سامانهٔ مستقل تازه برای چهار موضوع گزارش مشکوک، کنترل داخلی و آموزش، محرمانگی و اجرای دستور قانونی به برنامه اضافه نمی‌شود. به اعلام مالک، سازوکارهای موجود سازمان مبنای انجام تکالیف‌اند؛ این اعلام، گواهی حقوقی یا اثبات ممیزی‌شدهٔ انطباق نیست. حسابرسی یا ردیابی جای تکلیف قانونیِ قابل اعمال به گزارش، محرمانگی و اجرای دستور معتبر را نمی‌گیرد؛ روش انجام و مسئولیت در فرایندهای موجود باید قابل ارجاع و مستند باشد. کفایت مسیر معمول OTP و شاهکار برای تمام وضعیت‌های استثنایی قطعی فرض نشود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "relationship_qualifier": "TRACEABILITY_DOES_NOT_REPLACE_AML_REVIEW",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+      "target": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1369",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+      "evidence_locator": "1369",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_independent_service_bank_ledger_statuses",
+          "target": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1369",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+          "evidence_locator": "1369",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1369,
+          "quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "explicit_source_roles": [
+        {
+          "role": "مسئول عملیات شهاب",
+          "responsibility": "پیگیری موارد بازیابی حل‌نشده در صف عملیات",
+          "evidence_quote": "**پاسخ مصوب:** پس از بررسی نتیجه، بازیابی خودکار و تکرار محدودِ امن انجام شود؛ موارد حل‌نشده به صف مسئول عملیات شهاب بروند. تا تعیین نتیجه، عملیات قبلی ناموفق فرض نشود. بازیابی پیام یا نتیجهٔ قبلی کسر تازه نیست؛ اجرای تازه پس از پایان یا توقف، طبق ۹.۱.۳ نرخ روز می‌گیرد. انتظار عادی همان اجرا نرخ را تغییر نمی‌دهد.",
+          "source_location": "1369",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_multi_layer_idempotency",
+      "target": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1373",
+      "weight": 1.0,
+      "evidence_quote": "**منبع و حدود استفاده:** [بهترین روش‌های وبهوک MT](https://docs.moderntreasury.com/platform/docs/webhook-endpoint-best-practices) مرجع پردازش مطمئن و تکرار است؛ سیاست صف مسئول شهاب تصمیم محصول است.",
+      "evidence_locator": "1373",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "Explicit 7.5→8.3 reference states safe recovery follows the same idempotency rule; the recorded provider-source quote is not by itself sufficient. Add L1249.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_multi_layer_idempotency",
+          "target": "docs_shahab_digital_wallet_safe_recovery_of_unknown_operations",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1373",
+          "weight": 1.0,
+          "evidence_quote": "**منبع و حدود استفاده:** [بهترین روش‌های وبهوک MT](https://docs.moderntreasury.com/platform/docs/webhook-endpoint-best-practices) مرجع پردازش مطمئن و تکرار است؛ سیاست صف مسئول شهاب تصمیم محصول است.",
+          "evidence_locator": "1373",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1373,
+          "quote": "**منبع و حدود استفاده:** [بهترین روش‌های وبهوک MT](https://docs.moderntreasury.com/platform/docs/webhook-endpoint-best-practices) مرجع پردازش مطمئن و تکرار است؛ سیاست صف مسئول شهاب تصمیم محصول است."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Underlying idempotency/recovery rule approved; numerical retry parameters remain open.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_service_cost_and_bank_settlement_distinction",
+      "target": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1383",
+      "weight": 1.0,
+      "evidence_quote": "**مسئله و هدف:** هزینهٔ مشاوره با میزان پردازش و هزینهٔ عملیات با تعرفهٔ خدمت پایه تغییر می‌کند. باید معلوم باشد قیمت چه زمانی به‌روز می‌شود و کدام اجرا از تغییر میان‌کار مصون است.",
+      "evidence_locator": "1383",
+      "decision_status": "specified",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The evidence supports the individual target or associated policy, but the specific source-to-target link is a contextual inference rather than a stated cross-reference.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_service_cost_and_bank_settlement_distinction",
+          "target": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1383",
+          "weight": 1.0,
+          "evidence_quote": "**مسئله و هدف:** هزینهٔ مشاوره با میزان پردازش و هزینهٔ عملیات با تعرفهٔ خدمت پایه تغییر می‌کند. باید معلوم باشد قیمت چه زمانی به‌روز می‌شود و کدام اجرا از تغییر میان‌کار مصون است.",
+          "evidence_locator": "1383",
+          "decision_status": "specified",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1383,
+          "quote": "**مسئله و هدف:** هزینهٔ مشاوره با میزان پردازش و هزینهٔ عملیات با تعرفهٔ خدمت پایه تغییر می‌کند. باید معلوم باشد قیمت چه زمانی به‌روز می‌شود و کدام اجرا از تغییر میان‌کار مصون است."
+        }
+      ],
+      "source_claim_status": "specified",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+      "target": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "1391",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+          "target": "docs_shahab_digital_wallet_assistant_embedded_advice_half_rate",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1391",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+          "evidence_locator": "1391",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1391,
+          "quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+      "target": "docs_shahab_digital_wallet_twenty_percent_increase_cap_not_fee",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "1391",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+          "target": "docs_shahab_digital_wallet_twenty_percent_increase_cap_not_fee",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1391",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+          "evidence_locator": "1391",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1391,
+          "quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+      "target": "docs_shahab_digital_wallet_capture_only_calculated_receivable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "1391",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+      "evidence_locator": "1391",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited rule, section reference or stated component links the named endpoints directly. Source implementation choices remain as qualified.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_dynamic_adviser_and_assistant_costing",
+          "target": "docs_shahab_digital_wallet_capture_only_calculated_receivable",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "1391",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد.",
+          "evidence_locator": "1391",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 1391,
+          "quote": "**پاسخ مصوب:** هزینهٔ مشاور داینامیک و بر حسب تعداد پرامپت‌ها و میزان پردازش انجام‌شده برای پاسخ به هر پرامپت محاسبه شود؛ هر پرامپت قیمت ثابت و یکسان ندارد. هزینهٔ دستیار از تعرفهٔ پایهٔ عملیات به‌علاوهٔ مجموع هزینهٔ مشاوره‌های مرتبط حین همان عملیات با ضریب همواره یک‌دوم تشکیل شود. یک‌سوم گزینهٔ جاری نیست. حاشیهٔ افزایش مجاز ۲۰ درصدی طبق ۶.۴.۴، سقف اجازهٔ افزایش است و به مبلغ خدمت به‌عنوان کارمزد یا سود افزوده نمی‌شود. کسر قطعی فقط هزینهٔ محاسبه‌شدهٔ قابل دریافت را پوشش دهد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Cited source policy retains its actual approved, open or illustrative status; a relationship classification does not approve an implementation.",
+      "independent_verdict": "GROUNDED"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": 206
+  },
+  "coverage_range": {
+    "start_line": 1193,
+    "end_line": 1398
+  },
+  "coverage_manifest": [
+    {
+      "kind": "heading",
+      "label": "۷.۲.۱. ردیابی کامل زنجیرهٔ اعتبار در طول زمان",
+      "witness_lines": [
+        1193
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Reconstruct credit from original source through use, transfer, return/expiry; retain components, intermediaries, events and durable links",
+      "witness_lines": [
+        1195,
+        1197,
+        1199
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Split credit among recipients and combine sources without losing provenance or creating withdrawal rights",
+      "witness_lines": [
+        1201
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Section 6.5.2 component model and 7.4 identifiers; atomic shares; access/retention/history/testing; graph tech remains open",
+      "witness_lines": [
+        1203
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۷.۳. وضعیت خدمت، بانک و ثبت مالی چگونه از هم جدا شوند؟",
+      "witness_lines": [
+        1205
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Keep three related but independent service, bank-operation and ledger-entry lifecycles; technical names and transition table open",
+      "witness_lines": [
+        1207,
+        1209,
+        1211
+      ]
+    },
+    {
+      "kind": "executable_rule",
+      "label": "Pending entries may change with history; posted entries immutable; corrections/reversals new linked events; archive does not reverse posted entry",
+      "witness_lines": [
+        1213
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Unknown external cost keeps associated reserve until obligation resolved; later bank reversal is independent event",
+      "witness_lines": [
+        1215
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT transaction states source; three-lifecycle separation is Shahab-approved model",
+      "witness_lines": [
+        1217
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Unknown top-up/withdrawal handling and unresolved service-cancellation obligation amount",
+      "witness_lines": [
+        1219
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۷.۴. چگونه تمام ثبت‌های یک عملیات به هم متصل شوند؟",
+      "witness_lines": [
+        1221
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Independent linked identifiers for operation, wallet, ledger transaction, credit component, reservation, bank reference, inbound event and correction",
+      "witness_lines": [
+        1223,
+        1225,
+        1227
+      ]
+    },
+    {
+      "kind": "executable_rule",
+      "label": "Operations may have multiple financial entries; corrections link to original; invoice ID cannot replace payment/operation ID; identifier format and uniqueness open",
+      "witness_lines": [
+        1227
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Associate processing amount, valid rate, calculation coefficient and operation-level reservation/capture/release identifiers",
+      "witness_lines": [
+        1229
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Ledger object/external ID references; correlation ID alone is not idempotency/uniqueness",
+      "witness_lines": [
+        1231
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Receipt/history, reconciliation, correction and duplicate control use identifiers",
+      "witness_lines": [
+        1233
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۷.۵. درخواست و پیام تکراری چگونه فقط یک اثر مالی داشته باشند؟",
+      "witness_lines": [
+        1235
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Multi-layer idempotency: per-action key, durable internal financial-event uniqueness and inbound duplicate-message detection; distinct action keys; altered input under same key cannot silently create new action",
+      "witness_lines": [
+        1237,
+        1239,
+        1241
+      ]
+    },
+    {
+      "kind": "executable_rule",
+      "label": "Persist processed event ID and financial effect independent of provider cache; cache expiry cannot remove financial uniqueness",
+      "witness_lines": [
+        1243
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Delayed duplicate bank success notification does not recharge; real reversal is a new linked event",
+      "witness_lines": [
+        1245
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Provider 24-hour key scope does not replace durable internal uniqueness; webhook processing guidance",
+      "witness_lines": [
+        1247
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Top-up, withdrawal/correction and recovery flows all obey idempotency",
+      "witness_lines": [
+        1249
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۷.۶. رزرو چگونه به مصرف قطعی یا آزادسازی تبدیل شود؟",
+      "witness_lines": [
+        1251
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Reservation linked to operation and exact credit components; capture may be partial; retain reserve pending outcome; release uncommitted balance after outcome; capture and reserve reduction atomic",
+      "witness_lines": [
+        1253,
+        1255,
+        1257
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Partial captures and remaining reserve; numeric figures are illustrative only",
+      "witness_lines": [
+        1259
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Partial post API reference does not imply arbitrary accounts or automatic Shahab component allocation",
+      "witness_lines": [
+        1261
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Reservation policies approved elsewhere; service numeric parameters open; release is not refund of captured use",
+      "witness_lines": [
+        1263
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۷.۷. چگونه جلوی مصرف هم‌زمان یک اعتبار گرفته شود؟",
+      "witness_lines": [
+        1265
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Condition financial effect on valid account/component version; no unprotected check-then-use; check withdrawal right, expiry, allowed service, component shares, reserves, employee/org caps, membership/list and pending operation capacity at commit boundary",
+      "witness_lines": [
+        1267,
+        1269,
+        1271
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Concurrent requests cannot both consume same balance or exceed employee cap",
+      "witness_lines": [
+        1273
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Balance lock does not by itself enforce campaign or org permission; preserve change history; DB/API coordination remains design work",
+      "witness_lines": [
+        1275,
+        1277
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸. چگونه خطا، اختلاف با بانک و دسترسی غیرمجاز را مدیریت کنیم؟",
+      "witness_lines": [
+        1279
+      ]
+    },
+    {
+      "kind": "principle",
+      "label": "Internal ledger must reconcile with cash, remain traceable and recover without duplicate effects; Shahab operations and customer org admin are distinct roles",
+      "witness_lines": [
+        1281
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۱. تطبیق و رسیدگی به مغایرت",
+      "witness_lines": [
+        1283
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "At-least-daily automated reconciliation; unresolved cases assigned to Shahab financial operations; every correction linked with reason and actor",
+      "witness_lines": [
+        1285,
+        1287,
+        1289
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Bank funds without matching top-up creates case linked to receipt/request",
+      "witness_lines": [
+        1291
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT reconciliation reference; case workflow is Shahab policy",
+      "witness_lines": [
+        1293
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Funding/identifiers basis; SLA and operational authority limits open",
+      "witness_lines": [
+        1295
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۱.۱. برش زمانی و پوشش تعهد",
+      "witness_lines": [
+        1297
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Daily cut has explicit time/timezone; gift and in-transit funds separated; open items reported; obligation coverage formula needs specialist approval",
+      "witness_lines": [
+        1299,
+        1301,
+        1303
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "In-transit timing difference distinguished from unexplained shortfall",
+      "witness_lines": [
+        1305
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT balance timing reference does not determine Shahab accounting formula",
+      "witness_lines": [
+        1307
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Source types/account model; exact cut time and formula open",
+      "witness_lines": [
+        1309
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۲. احراز عملیات حساس",
+      "witness_lines": [
+        1311
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Reauthenticate withdrawals, bank-account changes, admin changes and material financial permission changes; risk controls for other operations; no required second approver",
+      "witness_lines": [
+        1313,
+        1315,
+        1317
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Admin reauthenticates before bank account change; second manager signature not required",
+      "witness_lines": [
+        1319
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT roles reference; named sensitive actions are Shahab policy",
+      "witness_lines": [
+        1321
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Auth method and definition of material permission open; admin/account ownership elsewhere",
+      "witness_lines": [
+        1323
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۲.۱. نگهداری دائمی و دسترسی سوابق مالی",
+      "witness_lines": [
+        1325
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Keep all personal/legal-entity financial events and provenance/transfer links permanently; attach supporting documents; separate nonfinancial technical/admin logs; preserve financially material admin trail; never store password/OTP; restrict record access and audit it",
+      "witness_lines": [
+        1327,
+        1329,
+        1331
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Membership removal/account closure does not erase financial history; transient server-performance log need not be permanent",
+      "witness_lines": [
+        1333
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Ledger/lineage and former-member receipt access; backup/migration/recovery and long-term protection open",
+      "witness_lines": [
+        1335
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۲.۲. هشدارهای عملیاتی و امنیتی",
+      "witness_lines": [
+        1337
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Immediate alerts for coverage shortfall, material discrepancy, long-running unknown transaction, suspicious access; low priority periodic report",
+      "witness_lines": [
+        1339,
+        1341,
+        1343
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Unknown transaction beyond approved threshold alerts response owner",
+      "witness_lines": [
+        1345
+      ]
+    },
+    {
+      "kind": "open_implementation_detail",
+      "label": "Threshold, channel, owner and escalation path open; customer notifications distinct",
+      "witness_lines": [
+        1347
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۲.۳. نسبت ردیابی با تکالیف مبارزه با پول‌شویی",
+      "witness_lines": [
+        1349
+      ]
+    },
+    {
+      "kind": "approved_scope_decision",
+      "label": "Focus on traceability; no new independent systems for four named AML areas; existing org mechanisms are not legal certification; traceability does not replace applicable legal duties; OTP/Shahkar coverage for exceptions not assumed",
+      "witness_lines": [
+        1351,
+        1353,
+        1355
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Authorized specialist can extract trace; not automatic statutory report; customer org admin gets no general suspicious-case access",
+      "witness_lines": [
+        1357
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Submitted AML law is a review source, not evidence all current regulations/amendments reviewed",
+      "witness_lines": [
+        1359
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Specified legal provisions and current regulatory application require specialist review; lineage does not replace review",
+      "witness_lines": [
+        1361
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۸.۳. بازیابی کارهای ناتمام و نتیجهٔ نامعلوم",
+      "witness_lines": [
+        1363
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Check outcome then recover automatically with bounded safe retry; unresolved cases enter Shahab operations queue; do not assume prior failure; replay result is not new charge; new execution after completion/stop uses current rate",
+      "witness_lines": [
+        1365,
+        1367,
+        1369
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Query bank status before restarting payment with unknown response",
+      "witness_lines": [
+        1371
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT webhook guidance; retry queue is Shahab product decision",
+      "witness_lines": [
+        1373
+      ]
+    },
+    {
+      "kind": "open_implementation_detail",
+      "label": "Attempt count/interval/deadline/escalation open; customer-retry rule distinct",
+      "witness_lines": [
+        1375
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۹. قیمت خدمت، هزینهٔ تأمین‌کننده و تسویه چگونه از هم جدا می‌شوند؟",
+      "witness_lines": [
+        1377
+      ]
+    },
+    {
+      "kind": "principle",
+      "label": "Service price differs from Shahab supplier cost; wallet capture differs from bank settlement",
+      "witness_lines": [
+        1379
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۹.۱. مدل داینامیک هزینهٔ مشاور و دستیار",
+      "witness_lines": [
+        1381
+      ]
+    },
+    {
+      "kind": "principle",
+      "label": "Adviser cost varies with processing; assistant service has base tariff; define price update timing and protect running execution from mid-run changes",
+      "witness_lines": [
+        1383
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۹.۱.۱. مبنای محاسبهٔ مشاور و دستیار",
+      "witness_lines": [
+        1385
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Dynamic adviser charge by prompt count and processing; assistant cost equals base operation tariff plus half of related in-operation adviser cost; one-third not current; 20% margin is an increase cap, not fee/profit; capture only calculated receivable",
+      "witness_lines": [
+        1387,
+        1389,
+        1391
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Example demonstrates base plus half adviser component and cap; amounts are not approved commercial rates",
+      "witness_lines": [
+        1393
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "MT cited for balance/revenue separation; pricing coefficients and margin are Shahab decisions, not MT-derived",
+      "witness_lines": [
+        1395
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Reservation, capture, display details; processing metric and per-unit rates remain deferred",
+      "witness_lines": [
+        1397
+      ]
+    }
+  ]
+}

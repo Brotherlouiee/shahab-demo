@@ -16,7 +16,7 @@ FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:782bb89768cc87b7f95c18b95b
 # Package installation needs root only while building; final USER remains 101:101.
 USER 0
 # Pin base fixes; keep CA certificates explicit and remove curl, which runtime and health checks do not use.
-RUN apk add --no-cache --upgrade ca-certificates-bundle=20260909-r0 musl=1.2.6-r3 musl-utils=1.2.6-r3 libexpat=2.10.0-r0 libx11=1.8.14-r0 zlib=1.4-r0 libxpm=3.5.20-r0 brotli-libs=1.2.1-r0 \
+RUN apk add --no-cache --upgrade ca-certificates-bundle=20260909-r0 libxslt=1.1.43-r4 musl=1.2.6-r3 musl-utils=1.2.6-r3 libexpat=2.10.0-r0 libx11=1.8.14-r0 zlib=1.4-r0 libxpm=3.5.20-r0 brotli-libs=1.2.1-r0 \
     && apk del curl libcurl
 COPY frontend/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY frontend/nginx/api-disabled.conf /etc/nginx/shahab-api.conf

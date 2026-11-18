@@ -1,0 +1,2717 @@
+{
+  "nodes": [
+    {
+      "id": "docs_shahab_digital_wallet_former_member_receipt_access",
+      "label": "Former Member Receipt Access",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "208",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** مشاهدهٔ محدود رسید عملیات خودش باقی بماند؛ اطلاعات سایر اعضا و موجودی سازمان نمایش داده نشوند.",
+        "evidence_locator": "208",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** مشاهدهٔ محدود رسید عملیات خودش باقی بماند؛ اطلاعات سایر اعضا و موجودی سازمان نمایش داده نشوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L208",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_former_member_receipt_access",
+            "label": "Former Member Receipt Access",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "208",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** مشاهدهٔ محدود رسید عملیات خودش باقی بماند؛ اطلاعات سایر اعضا و موجودی سازمان نمایش داده نشوند.",
+              "evidence_locator": "208",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_admin_role",
+      "label": "Single Organization Admin Role",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "220",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+        "evidence_locator": "220",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L220",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_admin_role",
+            "label": "Single Organization Admin Role",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "220",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+              "evidence_locator": "220",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "label": "Wallet Actor Permissions Table",
+      "file_type": "document",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "224",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "| صاحب کیف پول شخصی | موجودی خودش را ببیند، شارژ کند، خدمت بگیرد، انتقال دهد و برداشت مجاز درخواست کند |",
+        "evidence_locator": "224",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "table rows enumerate actor permissions"
+      },
+      "evidence_quote": "| صاحب کیف پول شخصی | موجودی خودش را ببیند، شارژ کند، خدمت بگیرد، انتقال دهد و برداشت مجاز درخواست کند |",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L224",
+      "decision_status": "APPROVED_TABLE_ROW",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+            "label": "Wallet Actor Permissions Table",
+            "file_type": "document",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "224",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "| صاحب کیف پول شخصی | موجودی خودش را ببیند، شارژ کند، خدمت بگیرد، انتقال دهد و برداشت مجاز درخواست کند |",
+              "evidence_locator": "224",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "table rows enumerate actor permissions"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_admin_authority_and_server_enforcement",
+      "label": "Organization Admin Authority and Server-Side Enforcement",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "228",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "ادمین تصمیم می‌گیرد به هر کارمند چه مبلغ و سقفی بدهد. شهاب ابزار فنی این کنترل‌ها را فراهم می‌کند و روش تصمیم‌گیری داخلی سازمان را تحمیل نمی‌کند. ادمین می‌تواند خودش درخواست مجاز را ثبت و نهایی کند. کنترل هویت، موجودی و حقوق اعتبار همچنان اجرا می‌شوند؛ مثلاً ادمین هم نمی‌تواند هدیهٔ غیرقابل‌برداشت را نقد کند.",
+        "evidence_locator": "228",
+        "decision_status": "approved",
+        "owner": "Organization admin for allocations; Shahab provides controls",
+        "owner_status": "owners/roles directly stated"
+      },
+      "evidence_quote": "ادمین تصمیم می‌گیرد به هر کارمند چه مبلغ و سقفی بدهد. شهاب ابزار فنی این کنترل‌ها را فراهم می‌کند و روش تصمیم‌گیری داخلی سازمان را تحمیل نمی‌کند. ادمین می‌تواند خودش درخواست مجاز را ثبت و نهایی کند. کنترل هویت، موجودی و حقوق اعتبار همچنان اجرا می‌شوند؛ مثلاً ادمین هم نمی‌تواند هدیهٔ غیرقابل‌برداشت را نقد کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L228",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_admin_authority_and_server_enforcement",
+            "label": "Organization Admin Authority and Server-Side Enforcement",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "228",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "ادمین تصمیم می‌گیرد به هر کارمند چه مبلغ و سقفی بدهد. شهاب ابزار فنی این کنترل‌ها را فراهم می‌کند و روش تصمیم‌گیری داخلی سازمان را تحمیل نمی‌کند. ادمین می‌تواند خودش درخواست مجاز را ثبت و نهایی کند. کنترل هویت، موجودی و حقوق اعتبار همچنان اجرا می‌شوند؛ مثلاً ادمین هم نمی‌تواند هدیهٔ غیرقابل‌برداشت را نقد کند.",
+              "evidence_locator": "228",
+              "decision_status": "approved",
+              "owner": "Organization admin for allocations; Shahab provides controls",
+              "owner_status": "owners/roles directly stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+      "label": "Multiple Equal Admins and Action Audit",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "244",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود.",
+        "evidence_locator": "244",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L244",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+            "label": "Multiple Equal Admins and Action Audit",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "244",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود.",
+              "evidence_locator": "244",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+      "label": "Admin Replacement and Account Closure",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "256",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+        "evidence_locator": "256",
+        "decision_status": "approved",
+        "owner": "Current admin; organizational representative for recovery",
+        "owner_status": "responsibilities stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L256",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+            "label": "Admin Replacement and Account Closure",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "256",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+              "evidence_locator": "256",
+              "decision_status": "approved",
+              "owner": "Current admin; organizational representative for recovery",
+              "owner_status": "responsibilities stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "label": "Organization Budget Is Spending Permission, Not Personal Funds",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "268",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+        "evidence_locator": "268",
+        "decision_status": "approved",
+        "owner": "Organization admin sets employee limit",
+        "owner_status": "explicit rule"
+      },
+      "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L268",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+            "label": "Organization Budget Is Spending Permission, Not Personal Funds",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "268",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+              "evidence_locator": "268",
+              "decision_status": "approved",
+              "owner": "Organization admin sets employee limit",
+              "owner_status": "explicit rule"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_employee_spending_limit_and_free_org_balance",
+      "label": "Employee Spending Requires Both Available Organization Balance and Remaining Limit",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "270",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**مثال:** سازمان ۱۰ میلیون تومان دارد و ادمین سقف ماهانهٔ کارمند را ۲ میلیون تومان تعیین کرده است. اگر موجودی آزاد سازمان فقط ۳۰۰ هزار تومان باشد، کارمند نمی‌تواند به اتکای سقف ۲ میلیونی بیشتر از موجودی آزاد خرج کند. سقف، تضمین کنارگذاشتن پول نیست. مجموع سقف‌های اعضا می‌تواند بیش از موجودی باشد، ولی مصرف واقعی نباید از آن عبور کند.",
+        "evidence_locator": "270",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "two controls explicitly required"
+      },
+      "evidence_quote": "**مثال:** سازمان ۱۰ میلیون تومان دارد و ادمین سقف ماهانهٔ کارمند را ۲ میلیون تومان تعیین کرده است. اگر موجودی آزاد سازمان فقط ۳۰۰ هزار تومان باشد، کارمند نمی‌تواند به اتکای سقف ۲ میلیونی بیشتر از موجودی آزاد خرج کند. سقف، تضمین کنارگذاشتن پول نیست. مجموع سقف‌های اعضا می‌تواند بیش از موجودی باشد، ولی مصرف واقعی نباید از آن عبور کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L270",
+      "decision_status": "ILLUSTRATIVE_EXAMPLE",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_employee_spending_limit_and_free_org_balance",
+            "label": "Employee Spending Requires Both Available Organization Balance and Remaining Limit",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "270",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**مثال:** سازمان ۱۰ میلیون تومان دارد و ادمین سقف ماهانهٔ کارمند را ۲ میلیون تومان تعیین کرده است. اگر موجودی آزاد سازمان فقط ۳۰۰ هزار تومان باشد، کارمند نمی‌تواند به اتکای سقف ۲ میلیونی بیشتر از موجودی آزاد خرج کند. سقف، تضمین کنارگذاشتن پول نیست. مجموع سقف‌های اعضا می‌تواند بیش از موجودی باشد، ولی مصرف واقعی نباید از آن عبور کند.",
+              "evidence_locator": "270",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "two controls explicitly required"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_spending_permission_carryover",
+      "label": "Spending Permission Carryover",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "284",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+        "evidence_locator": "284",
+        "decision_status": "approved",
+        "owner": "Organization admin chooses per budget",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L284",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_spending_permission_carryover",
+            "label": "Spending Permission Carryover",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "284",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+              "evidence_locator": "284",
+              "decision_status": "approved",
+              "owner": "Organization admin chooses per budget",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+      "label": "Refund Restores Originating Period Capacity Only",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "296",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند.",
+        "evidence_locator": "296",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L296",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+            "label": "Refund Restores Originating Period Capacity Only",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "296",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند.",
+              "evidence_locator": "296",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+      "label": "Single Wallet Funding Source per Operation",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "308",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+        "evidence_locator": "308",
+        "decision_status": "approved",
+        "owner": "User selects/identifies source; Shahab stops if authorization or balance insufficient",
+        "owner_status": "policy and actor stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L308",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+            "label": "Single Wallet Funding Source per Operation",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "308",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+              "evidence_locator": "308",
+              "decision_status": "approved",
+              "owner": "User selects/identifies source; Shahab stops if authorization or balance insufficient",
+              "owner_status": "policy and actor stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_no_automatic_personal_wallet_fallback",
+      "label": "No Automatic Personal Wallet Fallback",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "308",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+        "evidence_locator": "308",
+        "decision_status": "approved",
+        "owner": "Shahab product policy",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L308",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_no_automatic_personal_wallet_fallback",
+            "label": "No Automatic Personal Wallet Fallback",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "308",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+              "evidence_locator": "308",
+              "decision_status": "approved",
+              "owner": "Shahab product policy",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_single_operation_wallet_and_no_split_payment",
+      "label": "One Paying Wallet per Operation; Split Payment Not Initially Active",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "310",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است.",
+        "evidence_locator": "310",
+        "decision_status": "approved for initial release; future split requires separate decision/design",
+        "owner": "unspecified",
+        "owner_status": "explicit scope distinction"
+      },
+      "evidence_quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L310",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_single_operation_wallet_and_no_split_payment",
+            "label": "One Paying Wallet per Operation; Split Payment Not Initially Active",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "310",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است.",
+              "evidence_locator": "310",
+              "decision_status": "approved for initial release; future split requires separate decision/design",
+              "owner": "unspecified",
+              "owner_status": "explicit scope distinction"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_access_revocation_during_service",
+      "label": "Access Revocation During Service",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "324",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود.",
+        "evidence_locator": "324",
+        "decision_status": "approved",
+        "owner": "Shahab policy; admin authorization for continuation",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L324",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_access_revocation_during_service",
+            "label": "Access Revocation During Service",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "324",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود.",
+              "evidence_locator": "324",
+              "decision_status": "approved",
+              "owner": "Shahab policy; admin authorization for continuation",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+      "label": "Safe Stop and Existing Commitment Handling",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "330",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب دربارهٔ کاهش سقف یا قطع دسترسی:** هزینهٔ تازه و افزایش رزرو متوقف شود؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و احراز مجدد اختیار معتبر ممکن باشد. جزئیات نقطهٔ امن برای هر خدمت نیازمند طراحی اجرایی است؛ هزینهٔ قبلی طبق بخش ۹ تعیین می‌شود.",
+        "evidence_locator": "330",
+        "decision_status": "approved; service-specific safe point remains to be designed",
+        "owner": "Admin for explicit continuation approval",
+        "owner_status": "decision and open detail stated"
+      },
+      "evidence_quote": "**پاسخ مصوب دربارهٔ کاهش سقف یا قطع دسترسی:** هزینهٔ تازه و افزایش رزرو متوقف شود؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و احراز مجدد اختیار معتبر ممکن باشد. جزئیات نقطهٔ امن برای هر خدمت نیازمند طراحی اجرایی است؛ هزینهٔ قبلی طبق بخش ۹ تعیین می‌شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L330",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+            "label": "Safe Stop and Existing Commitment Handling",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "330",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب دربارهٔ کاهش سقف یا قطع دسترسی:** هزینهٔ تازه و افزایش رزرو متوقف شود؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و احراز مجدد اختیار معتبر ممکن باشد. جزئیات نقطهٔ امن برای هر خدمت نیازمند طراحی اجرایی است؛ هزینهٔ قبلی طبق بخش ۹ تعیین می‌شود.",
+              "evidence_locator": "330",
+              "decision_status": "approved; service-specific safe point remains to be designed",
+              "owner": "Admin for explicit continuation approval",
+              "owner_status": "decision and open detail stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_mid_execution_limit_reduction",
+      "label": "Mid-Execution Limit Reduction",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "340",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود.",
+        "evidence_locator": "340",
+        "decision_status": "approved",
+        "owner": "Admin approval required to continue",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L340",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_mid_execution_limit_reduction",
+            "label": "Mid-Execution Limit Reduction",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "340",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود.",
+              "evidence_locator": "340",
+              "decision_status": "approved",
+              "owner": "Admin approval required to continue",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "label": "Organization Credit Transfer or Shared-Balance Spending",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "352",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** انتقال فرد به سازمان و سازمان به سازمان وجود ندارد. سازمان فقط می‌تواند برای افراد موجود در فهرستی که خودش بارگذاری کرده یکی از دو روش را به کار بگیرد:",
+        "evidence_locator": "352",
+        "decision_status": "approved",
+        "owner": "Organization admin",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** انتقال فرد به سازمان و سازمان به سازمان وجود ندارد. سازمان فقط می‌تواند برای افراد موجود در فهرستی که خودش بارگذاری کرده یکی از دو روش را به کار بگیرد:",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L352",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+            "label": "Organization Credit Transfer or Shared-Balance Spending",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "352",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** انتقال فرد به سازمان و سازمان به سازمان وجود ندارد. سازمان فقط می‌تواند برای افراد موجود در فهرستی که خودش بارگذاری کرده یکی از دو روش را به کار بگیرد:",
+              "evidence_locator": "352",
+              "decision_status": "approved",
+              "owner": "Organization admin",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_eligible_org_recipient_list",
+      "label": "Eligible Organization Recipient List",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "357",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+        "evidence_locator": "357",
+        "decision_status": "approved",
+        "owner": "Organization admin; server validates membership and authority",
+        "owner_status": "explicit rule"
+      },
+      "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L357",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_eligible_org_recipient_list",
+            "label": "Eligible Organization Recipient List",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "357",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+              "evidence_locator": "357",
+              "decision_status": "approved",
+              "owner": "Organization admin; server validates membership and authority",
+              "owner_status": "explicit rule"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+      "label": "Organization Funding Route Constraints",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "361",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است.",
+        "evidence_locator": "361",
+        "decision_status": "approved; operational details open",
+        "owner": "Shahab product policy",
+        "owner_status": "explicitly distinguished from open execution decisions"
+      },
+      "evidence_quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L361",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+            "label": "Organization Funding Route Constraints",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "361",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است.",
+              "evidence_locator": "361",
+              "decision_status": "approved; operational details open",
+              "owner": "Shahab product policy",
+              "owner_status": "explicitly distinguished from open execution decisions"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_open_execution_decisions_org_credit",
+      "label": "Open Execution Decisions for Organization Credit",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "363",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند.",
+        "evidence_locator": "363",
+        "decision_status": "open / requires implementation design",
+        "owner": "unspecified",
+        "owner_status": "explicitly marked open"
+      },
+      "evidence_quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L363",
+      "decision_status": "APPROVED_POLICY_WITH_OPEN_IMPLEMENTATION",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_open_execution_decisions_org_credit",
+            "label": "Open Execution Decisions for Organization Credit",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "363",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند.",
+              "evidence_locator": "363",
+              "decision_status": "open / requires implementation design",
+              "owner": "unspecified",
+              "owner_status": "explicitly marked open"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+      "label": "Customer Wallet Balance Is a Liability, Not Automatically Revenue",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "379",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** وجه مشتری در حساب بانکی شهاب نگهداری می‌شود و اعتبار مصرف‌نشده به‌خودی‌خود درآمد نیست؛ تعهد متناظر مشتری جدا و قابل‌ردیابی ثبت شود. ماندهٔ آزاد واجد شرایط از شارژ نقدی خود مشتری طبق ۶.۵ قابل بازپرداخت است؛ اعتبار هدیه و انتقال‌یافته حق برداشت ایجاد نمی‌کنند، ولی غیرقابل‌برداشت‌بودن به‌تنهایی تعهد ارائهٔ خدمت را حذف یا مبلغ را درآمد نمی‌کند. وجه بانکی و بدهی متناظر در ثبت حسابداری از هم تفکیک شوند؛ عبارت «درآمد نیست» به معنی حذف حساب وجه بانکی از ثبت دارایی نیست. طبقه‌بندی نهایی حسابداری با متخصص تعیین شود. درآمد و هزینهٔ عملیاتی نیز حساب‌های مستقل دارند.",
+        "evidence_locator": "379",
+        "decision_status": "approved; accounting classification requires specialist determination",
+        "owner": "Shahab; accounting specialist for final classification",
+        "owner_status": "explicit approval with unresolved specialist detail"
+      },
+      "evidence_quote": "**پاسخ مصوب:** وجه مشتری در حساب بانکی شهاب نگهداری می‌شود و اعتبار مصرف‌نشده به‌خودی‌خود درآمد نیست؛ تعهد متناظر مشتری جدا و قابل‌ردیابی ثبت شود. ماندهٔ آزاد واجد شرایط از شارژ نقدی خود مشتری طبق ۶.۵ قابل بازپرداخت است؛ اعتبار هدیه و انتقال‌یافته حق برداشت ایجاد نمی‌کنند، ولی غیرقابل‌برداشت‌بودن به‌تنهایی تعهد ارائهٔ خدمت را حذف یا مبلغ را درآمد نمی‌کند. وجه بانکی و بدهی متناظر در ثبت حسابداری از هم تفکیک شوند؛ عبارت «درآمد نیست» به معنی حذف حساب وجه بانکی از ثبت دارایی نیست. طبقه‌بندی نهایی حسابداری با متخصص تعیین شود. درآمد و هزینهٔ عملیاتی نیز حساب‌های مستقل دارند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L379",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+            "label": "Customer Wallet Balance Is a Liability, Not Automatically Revenue",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "379",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** وجه مشتری در حساب بانکی شهاب نگهداری می‌شود و اعتبار مصرف‌نشده به‌خودی‌خود درآمد نیست؛ تعهد متناظر مشتری جدا و قابل‌ردیابی ثبت شود. ماندهٔ آزاد واجد شرایط از شارژ نقدی خود مشتری طبق ۶.۵ قابل بازپرداخت است؛ اعتبار هدیه و انتقال‌یافته حق برداشت ایجاد نمی‌کنند، ولی غیرقابل‌برداشت‌بودن به‌تنهایی تعهد ارائهٔ خدمت را حذف یا مبلغ را درآمد نمی‌کند. وجه بانکی و بدهی متناظر در ثبت حسابداری از هم تفکیک شوند؛ عبارت «درآمد نیست» به معنی حذف حساب وجه بانکی از ثبت دارایی نیست. طبقه‌بندی نهایی حسابداری با متخصص تعیین شود. درآمد و هزینهٔ عملیاتی نیز حساب‌های مستقل دارند.",
+              "evidence_locator": "379",
+              "decision_status": "approved; accounting classification requires specialist determination",
+              "owner": "Shahab; accounting specialist for final classification",
+              "owner_status": "explicit approval with unresolved specialist detail"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+      "label": "Separate Fund Source, Ownership, and Shahab Service Revenue",
+      "file_type": "concept",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "393",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+        "evidence_locator": "393",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit approval stated"
+      },
+      "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L393",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+            "label": "Separate Fund Source, Ownership, and Shahab Service Revenue",
+            "file_type": "concept",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "393",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+              "evidence_locator": "393",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit approval stated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+      "label": "Wallet Ownership and Credit Source Are Separate Dimensions",
+      "file_type": "rationale",
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "393",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "attributes": {
+        "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+        "evidence_locator": "393",
+        "decision_status": "approved",
+        "owner": "unspecified",
+        "owner_status": "explicit rule"
+      },
+      "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+      "evidence_locator": "docs/SHAHAB_DIGITAL_WALLET.md:L393",
+      "decision_status": "APPROVED",
+      "owner": null,
+      "owner_status": "UNSPECIFIED",
+      "semantic_audit": {
+        "status": "REVIEWED",
+        "verdict": "CORRECT_EVIDENCE_AND_METADATA_MISSING",
+        "basis": "Node has no evidence_quote and no decision_status in source chunk; the cited line contains a directly attributable witness. Owner is not stated by the node/source witness; preserve as unspecified."
+      },
+      "correction_history": [
+        {
+          "audit": "independent_node_audit",
+          "previous_record": {
+            "id": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+            "label": "Wallet Ownership and Credit Source Are Separate Dimensions",
+            "file_type": "rationale",
+            "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+            "source_location": "393",
+            "source_url": null,
+            "captured_at": null,
+            "author": null,
+            "contributor": null,
+            "attributes": {
+              "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+              "evidence_locator": "393",
+              "decision_status": "approved",
+              "owner": "unspecified",
+              "owner_status": "explicit rule"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_shahab_digital_wallet_former_member_receipt_access",
+      "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "212",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** کنترل دسترسی بخش ۸ و تاریخچهٔ بخش ۱۰ این مرز را اعمال می‌کنند.",
+      "evidence_locator": "212",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_former_member_receipt_access",
+          "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "212",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** کنترل دسترسی بخش ۸ و تاریخچهٔ بخش ۱۰ این مرز را اعمال می‌کنند.",
+          "evidence_locator": "212",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 212,
+          "quote": "**ارتباط با بخش‌های دیگر:** کنترل دسترسی بخش ۸ و تاریخچهٔ بخش ۱۰ این مرز را اعمال می‌کنند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "220",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+      "evidence_locator": "220",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_admin_role",
+          "target": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "220",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+          "evidence_locator": "220",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 220,
+          "quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "تنها نوع نقش مدیریتی سازمان",
+          "evidence_quote": "**پاسخ مصوب:** تنها نوع نقش مدیریتی سازمان، **ادمین سازمان** است و تمام دسترسی‌های لازم را در همان سازمان دارد. شهاب سازمان را ملزم به داشتن مسئول مالی، تأییدکنندهٔ دوم یا گردش چندمرحله‌ای نمی‌کند.",
+          "source_location": "220",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+      "target": "docs_shahab_digital_wallet_organization_admin_authority_and_server_enforcement",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "230",
+      "weight": 1.0,
+      "evidence_quote": "**مثال:** ادمین می‌تواند سقف مصرف کارمند را از ۵۰۰ هزار به یک میلیون تومان تغییر دهد؛ لازم نیست فرد دیگری این تغییر را تأیید کند. او به کیف پول شخصی کارمند یا کیف پول سازمان دیگر دسترسی مدیریتی ندارد. کنترل این مرزها باید در سرور انجام شود، نه فقط با مخفی‌کردن دکمه‌ها.",
+      "evidence_locator": "230",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The passage supports the target rule or example, but the exact relationship between both endpoint concepts is contextual rather than expressly stated.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_actor_permissions_table",
+          "target": "docs_shahab_digital_wallet_organization_admin_authority_and_server_enforcement",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "230",
+          "weight": 1.0,
+          "evidence_quote": "**مثال:** ادمین می‌تواند سقف مصرف کارمند را از ۵۰۰ هزار به یک میلیون تومان تغییر دهد؛ لازم نیست فرد دیگری این تغییر را تأیید کند. او به کیف پول شخصی کارمند یا کیف پول سازمان دیگر دسترسی مدیریتی ندارد. کنترل این مرزها باید در سرور انجام شود، نه فقط با مخفی‌کردن دکمه‌ها.",
+          "evidence_locator": "230",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 230,
+          "quote": "**مثال:** ادمین می‌تواند سقف مصرف کارمند را از ۵۰۰ هزار به یک میلیون تومان تغییر دهد؛ لازم نیست فرد دیگری این تغییر را تأیید کند. او به کیف پول شخصی کارمند یا کیف پول سازمان دیگر دسترسی مدیریتی ندارد. کنترل این مرزها باید در سرور انجام شود، نه فقط با مخفی‌کردن دکمه‌ها."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 225,
+          "quote": "| ادمین سازمان | اعضا و دسترسی‌ها را مدیریت کند؛ شارژ، تخصیص بودجه و سقف، مشاهدهٔ گزارش، انتقال و برداشت مجاز سازمان را انجام دهد |"
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Approved source rule remains approved where explicitly stated; an illustrative example does not establish additional policy.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "244",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود.",
+      "evidence_locator": "244",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_admin_role",
+          "target": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "244",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود.",
+          "evidence_locator": "244",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 244,
+          "quote": "**پاسخ مصوب:** بله؛ چند ادمین با اختیارات یکسان در همان سازمان مجازند و سوابق کامل اقدامات هرکدام ثبت شود. نقش مالی یا تأییدکنندهٔ دوم اجباری ایجاد نشود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+      "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "260",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** روش و مدارک بازیابی جزئیات اجرایی‌اند؛ احراز حساس بخش ۸ و تسویهٔ بخش ۹ مبنا هستند.",
+      "evidence_locator": "260",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The passage supports the target rule or example, but the exact relationship between both endpoint concepts is contextual rather than expressly stated.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_multiple_equal_admins_and_action_audit",
+          "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "260",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** روش و مدارک بازیابی جزئیات اجرایی‌اند؛ احراز حساس بخش ۸ و تسویهٔ بخش ۹ مبنا هستند.",
+          "evidence_locator": "260",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 260,
+          "quote": "**ارتباط با بخش‌های دیگر:** روش و مدارک بازیابی جزئیات اجرایی‌اند؛ احراز حساس بخش ۸ و تسویهٔ بخش ۹ مبنا هستند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Approved source rule remains approved where explicitly stated; an illustrative example does not establish additional policy.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "256",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+      "evidence_locator": "256",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_admin_role",
+          "target": "docs_shahab_digital_wallet_admin_replacement_and_account_closure",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "256",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+          "evidence_locator": "256",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 256,
+          "quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین فعلی",
+          "responsibility": "انتقال با احراز مجدد",
+          "evidence_quote": "**پاسخ مصوب:** انتقال توسط ادمین فعلی با احراز مجدد انجام شود؛ اگر او در دسترس نیست، بازیابی با احراز نمایندگی سازمان صورت گیرد. بستن حساب پس از تعیین تکلیف تعهدات انجام شود؛ سوابق مالی حذف نشوند.",
+          "source_location": "256",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_employee_spending_limit_and_free_org_balance",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "268",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+      "evidence_locator": "268",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+          "target": "docs_shahab_digital_wallet_employee_spending_limit_and_free_org_balance",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "268",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+          "evidence_locator": "268",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 268,
+          "quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "تعیین سقف مجاز مصرف کارمند",
+          "evidence_quote": "**پاسخ مصوب:** خیر. در مدل پایه، پول در کیف پول سازمان می‌ماند و کارمند اجازهٔ مصرف تا سقف تعیین‌شده توسط ادمین را می‌گیرد. در شروع خدمت، هم موجودی آزاد سازمان و هم سقف باقیماندهٔ کارمند بررسی می‌شوند. مبلغ رزروشده نیز در هر دو کنترل لحاظ می‌شود.",
+          "source_location": "268",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "284",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+      "evidence_locator": "284",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+          "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "284",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+          "evidence_locator": "284",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 284,
+          "quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "انتخاب انتقال مانده مجوز مصرف برای هر بودجه",
+          "evidence_quote": "**پاسخ مصوب:** ادمین برای هر بودجه انتخاب کند ماندهٔ مجوز مصرف به دورهٔ بعد منتقل شود یا نشود. این انتخاب انتقال پول به کیف پول شخصی نیست.",
+          "source_location": "284",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "target": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "296",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند.",
+      "evidence_locator": "296",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+          "target": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "296",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند.",
+          "evidence_locator": "296",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 296,
+          "quote": "**پاسخ مصوب:** فقط ظرفیت دورهٔ اصلی به اندازهٔ استرداد احیا شود؛ اگر دوره تمام شده، ظرفیت دورهٔ جدید افزایش نیابد. مبلغ و اجزای اعتبار به کیف پول پرداخت‌کننده طبق ۶.۶ بازگردند."
+        },
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 274,
+          "quote": "**وضعیت تصمیم:** بودجه فقط مجوز مصرف و بدون پشتوانهٔ موجودی اختصاصی است. دوره‌ها و ترکیب سقف‌ها در ۶.۸ و مانده و استرداد در ادامه مصوب‌اند؛ ادمین تعیین‌کنندهٔ مقادیر است."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+      "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "300",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با بخش‌های دیگر:** انتقال ماندهٔ مجوز قاعدهٔ مستقلی است؛ جزئیات ترکیب آن با استرداد دورهٔ بسته باید در طراحی اجرایی بدون افزایش خودکار ظرفیت دورهٔ جدید مشخص شود.",
+      "evidence_locator": "300",
+      "decision_status": "approved; period carryover and refund are distinct rules",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_refund_restores_origin_period_capacity",
+          "target": "docs_shahab_digital_wallet_spending_permission_carryover",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "300",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با بخش‌های دیگر:** انتقال ماندهٔ مجوز قاعدهٔ مستقلی است؛ جزئیات ترکیب آن با استرداد دورهٔ بسته باید در طراحی اجرایی بدون افزایش خودکار ظرفیت دورهٔ جدید مشخص شود.",
+          "evidence_locator": "300",
+          "decision_status": "approved; period carryover and refund are distinct rules",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 300,
+          "quote": "**ارتباط با بخش‌های دیگر:** انتقال ماندهٔ مجوز قاعدهٔ مستقلی است؛ جزئیات ترکیب آن با استرداد دورهٔ بسته باید در طراحی اجرایی بدون افزایش خودکار ظرفیت دورهٔ جدید مشخص شود."
+        }
+      ],
+      "source_claim_status": "approved; period carryover and refund are distinct rules",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+      "target": "docs_shahab_digital_wallet_no_automatic_personal_wallet_fallback",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "308",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+      "evidence_locator": "308",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+          "target": "docs_shahab_digital_wallet_no_automatic_personal_wallet_fallback",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "308",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند.",
+          "evidence_locator": "308",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 308,
+          "quote": "**پاسخ مصوب:** پیش از رزرو یا شروع کار هزینه‌زا، کیف پول پرداخت‌کننده و سقف مجاز هزینه روشن شوند. سازمان فعال می‌تواند انتخاب پیش‌فرض باشد، ولی کاربر نام منبع پرداخت را ببیند. اگر مجوز یا اعتبار سازمان کافی نیست، شهاب توقف می‌کند و انتخاب تازه می‌گیرد؛ خودکار از کیف پول شخصی کسر نمی‌کند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+      "target": "docs_shahab_digital_wallet_single_operation_wallet_and_no_split_payment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "310",
+      "weight": 1.0,
+      "evidence_quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است.",
+      "evidence_locator": "310",
+      "decision_status": "approved for initial release",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_single_wallet_funding_source_per_operation",
+          "target": "docs_shahab_digital_wallet_single_operation_wallet_and_no_split_payment",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "310",
+          "weight": 1.0,
+          "evidence_quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است.",
+          "evidence_locator": "310",
+          "decision_status": "approved for initial release",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 310,
+          "quote": "در نسخهٔ اولیه، هر عملیات یک کیف پول پرداخت‌کننده دارد. تقسیم هزینهٔ یک عملیات بین شخص و سازمان فعلاً فعال نیست؛ افزودن آن در آینده به تصمیم و طراحی جدا نیاز دارد. این موضوع با مصرف ترکیبی نقدی و هدیه داخل یک کیف پول فرق دارد؛ ترتیب آن در بخش ۵.۳ مصوب است."
+        }
+      ],
+      "source_claim_status": "approved for initial release",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_access_revocation_during_service",
+      "target": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "324",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود.",
+      "evidence_locator": "324",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_access_revocation_during_service",
+          "target": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "324",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود.",
+          "evidence_locator": "324",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 324,
+          "quote": "**پاسخ مصوب:** پیش از رزرو، افزایش رزرو یا اقدام هزینه‌زای جدید، مجوز بررسی شود. پس از لغو دسترسی، ایجاد هزینهٔ تازه متوقف و عملیات در اولین نقطهٔ امن متوقف یا منتظر تصمیم ادمین شود. هزینهٔ واقعاً ایجادشده و مجاز طبق تعهد قبلی و تعرفه تعیین تکلیف و باقی رزرو پس از روشن‌شدن نتیجه آزاد شود. هزینه به کیف پول شخصی منتقل نشود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+      "target": "docs_shahab_digital_wallet_mid_execution_limit_reduction",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "340",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود.",
+      "evidence_locator": "340",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The passage supports the target rule or example, but the exact relationship between both endpoint concepts is contextual rather than expressly stated.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_safe_stop_and_existing_commitment_handling",
+          "target": "docs_shahab_digital_wallet_mid_execution_limit_reduction",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "340",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود.",
+          "evidence_locator": "340",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 340,
+          "quote": "**پاسخ مصوب:** ایجاد هزینهٔ تازه و افزایش رزرو متوقف شوند؛ تعهد قبلی رسیدگی و ادامه فقط با اجازهٔ صریح ادمین و اعتبار و اختیار معتبر انجام شود. باقی بدون تعهد پس از روشن‌شدن نتیجه آزاد شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Approved source rule remains approved where explicitly stated; an illustrative example does not establish additional policy.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_admin_role",
+      "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "357",
+      "weight": 1.0,
+      "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+      "evidence_locator": "357",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_admin_role",
+          "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+          "relation": "references",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "357",
+          "weight": 1.0,
+          "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+          "evidence_locator": "357",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 357,
+          "quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "تصمیم تخصیص و سقف در سازمان",
+          "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+          "source_location": "357",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_eligible_org_recipient_list",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "357",
+      "weight": 1.0,
+      "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+      "evidence_locator": "357",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+          "target": "docs_shahab_digital_wallet_eligible_org_recipient_list",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "357",
+          "weight": 1.0,
+          "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+          "evidence_locator": "357",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 357,
+          "quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "explicit_source_roles": [
+        {
+          "role": "ادمین سازمان",
+          "responsibility": "تعیین گیرنده و مبلغ یا سقف",
+          "evidence_quote": "ادمین تصمیم می‌گیرد چه کسی چه مبلغ یا سقفی بگیرد. در هر اقدام سازمانی، تعلق فرد به فهرست همان سازمان و اختیار ادمین باید در سرور بررسی شود. نقش مدیریتی یا تأییدکنندهٔ دوم اجباری ایجاد نمی‌شود.",
+          "source_location": "357",
+          "note": "Actor or responsibility stated in source; not automatically owner of all implementation."
+        }
+      ],
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "361",
+      "weight": 1.0,
+      "evidence_quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است.",
+      "evidence_locator": "361",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+          "target": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "361",
+          "weight": 1.0,
+          "evidence_quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است.",
+          "evidence_locator": "361",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 361,
+          "quote": "**توضیح مسیر ادمین:** ادمین نمی‌تواند با شارژ کیف پول شخصی و انتقال آن به سازمان، منابع سازمان را تأمین کند؛ این مسیر به‌دلیل نبود انتقال فرد به سازمان پشتیبانی نمی‌شود. این تصمیم به معنی ممنوعیت شارژ عادی کیف پول شخصی ادمین برای مصرف شخصی خودش نیست. شارژ مستقیم سازمان با حساب یا کارت شخصی ادمین در نسخهٔ اولیه پشتیبانی نمی‌شود؛ تعریف شارژ نقدی خود سازمان در بخش ۶.۵.۱۱ آمده است."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+      "target": "docs_shahab_digital_wallet_open_execution_decisions_org_credit",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "363",
+      "weight": 1.0,
+      "evidence_quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند.",
+      "evidence_locator": "363",
+      "decision_status": "approved constraint with open implementation details",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_funding_route_constraints",
+          "target": "docs_shahab_digital_wallet_open_execution_decisions_org_credit",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "363",
+          "weight": 1.0,
+          "evidence_quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند.",
+          "evidence_locator": "363",
+          "decision_status": "approved constraint with open implementation details",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 363,
+          "quote": "**تصمیم‌های اجرایی باز:** قالب و شناسه‌های فهرست، تطبیق فرد با حساب شهاب، به‌روزرسانی یا حذف اعضا، رفتار حساب ایجادنشده و جزئیات تخصیص باید مشخص شوند. تعریف «شارژ نقدی خود سازمان» در بخش ۶.۵.۱۱ مصوب است؛ انتخاب سرویس و جزئیات اجرایی احراز حساب بانکی سازمان هنوز باید تکمیل شوند."
+        }
+      ],
+      "source_claim_status": "approved constraint with open implementation details",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "target": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "367",
+      "weight": 1.0,
+      "evidence_quote": "**ارتباط با سایر بخش‌ها:** سقف مصرف مشترک تابع بخش ۳.۴ است. گیرندگان مجاز و جهت‌های انتقال در بخش ۶.۵ کنترل می‌شوند. منشأ شارژ واقعی و درخواست آن در بخش ۶.۱ مستقل از انتقال بررسی می‌شوند. قطع عضویت طبق بخش ۳.۶ پیگیری می‌شود و انتقال قطعی گذشته خودکار به مالکیت سازمان برنمی‌گردد.",
+      "evidence_locator": "367",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+          "target": "docs_shahab_digital_wallet_organization_budget_is_spending_permission",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "367",
+          "weight": 1.0,
+          "evidence_quote": "**ارتباط با سایر بخش‌ها:** سقف مصرف مشترک تابع بخش ۳.۴ است. گیرندگان مجاز و جهت‌های انتقال در بخش ۶.۵ کنترل می‌شوند. منشأ شارژ واقعی و درخواست آن در بخش ۶.۱ مستقل از انتقال بررسی می‌شوند. قطع عضویت طبق بخش ۳.۶ پیگیری می‌شود و انتقال قطعی گذشته خودکار به مالکیت سازمان برنمی‌گردد.",
+          "evidence_locator": "367",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 367,
+          "quote": "**ارتباط با سایر بخش‌ها:** سقف مصرف مشترک تابع بخش ۳.۴ است. گیرندگان مجاز و جهت‌های انتقال در بخش ۶.۵ کنترل می‌شوند. منشأ شارژ واقعی و درخواست آن در بخش ۶.۱ مستقل از انتقال بررسی می‌شوند. قطع عضویت طبق بخش ۳.۶ پیگیری می‌شود و انتقال قطعی گذشته خودکار به مالکیت سازمان برنمی‌گردد."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+      "target": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "393",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+      "evidence_locator": "393",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_balance_is_customer_liability_not_revenue",
+          "target": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+          "relation": "implements",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "393",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+          "evidence_locator": "393",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 393,
+          "quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "INFERRED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+      "target": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "393",
+      "weight": 1.0,
+      "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+      "evidence_locator": "393",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "EXPLICIT_RELATION_ONLY; approval scope recorded in decision_status",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The cited section or rule explicitly connects the named concepts or describes the target as a component of the cited policy; implementation links describe policy decomposition, not evidence that software exists.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_separate_funds_sources_ownership_and_revenue",
+          "target": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+          "relation": "conceptually_related_to",
+          "confidence": "EXTRACTED",
+          "confidence_score": 1.0,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "393",
+          "weight": 1.0,
+          "evidence_quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند.",
+          "evidence_locator": "393",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 393,
+          "quote": "**پاسخ مصوب:** اعتبار نقدی مشتری، اعتبار تبلیغاتی و حساب مشتری سازمانی، از درآمد خدمات شهاب تفکیک شوند. سازمانی‌بودن یک بُعد مالکیت است و می‌تواند اجزای نقدی و هدیه داشته باشد؛ جمع‌زدن دوبارهٔ آن با اجزا مجاز نیست. وجوه فروش پذیرندهٔ مستقل در مدل فعلی وجود ندارد؛ بدهی و هزینهٔ تأمین‌کنندگان، تعهدات خود شهاب هستند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Source policy as recorded; edge 17 expressly retains open organization implementation details and edge 9 retains separate rules.",
+      "independent_verdict": "GROUNDED"
+    },
+    {
+      "source": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+      "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "source_location": "395",
+      "weight": 1.0,
+      "evidence_quote": "**مثال:** کیف پول سازمان می‌تواند نقدی و هدیه داشته باشد؛ سهم هر جزء و مالک سازمانی حفظ می‌شود. مصرف خدمت و پرداخت هزینهٔ API دو رویداد مستقل‌اند.",
+      "evidence_locator": "395",
+      "decision_status": "approved",
+      "owner": null,
+      "owner_status": "UNSPECIFIED_RELATION_OWNER",
+      "relationship_approval": "UNSPECIFIED: source policy approval is not approval of the edge",
+      "semantic_review": {
+        "status": "REVIEWED",
+        "finding": "The passage supports the target rule or example, but the exact relationship between both endpoint concepts is contextual rather than expressly stated.",
+        "previous_record": {
+          "source": "docs_shahab_digital_wallet_wallet_ownership_and_credit_source_dimensions",
+          "target": "docs_shahab_digital_wallet_organization_credit_transfer_and_shared_spending",
+          "relation": "conceptually_related_to",
+          "confidence": "INFERRED",
+          "confidence_score": 0.75,
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "source_location": "395",
+          "weight": 1.0,
+          "evidence_quote": "**مثال:** کیف پول سازمان می‌تواند نقدی و هدیه داشته باشد؛ سهم هر جزء و مالک سازمانی حفظ می‌شود. مصرف خدمت و پرداخت هزینهٔ API دو رویداد مستقل‌اند.",
+          "evidence_locator": "395",
+          "decision_status": "approved",
+          "owner": null,
+          "owner_status": "unspecified"
+        }
+      },
+      "supporting_witnesses": [
+        {
+          "source_file": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "line": 395,
+          "quote": "**مثال:** کیف پول سازمان می‌تواند نقدی و هدیه داشته باشد؛ سهم هر جزء و مالک سازمانی حفظ می‌شود. مصرف خدمت و پرداخت هزینهٔ API دو رویداد مستقل‌اند."
+        }
+      ],
+      "source_claim_status": "approved",
+      "decision_review": "Approved source rule remains approved where explicitly stated; an illustrative example does not establish additional policy.",
+      "independent_verdict": "INFERRED"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "coverage": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": 197
+  },
+  "coverage_range": {
+    "start_line": 202,
+    "end_line": 398
+  },
+  "coverage_manifest": [
+    {
+      "kind": "heading",
+      "label": "۳.۲.۲. دسترسی عضو سابق به رسید",
+      "witness_lines": [
+        202
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Former member receipt scope and privacy boundary",
+      "witness_lines": [
+        204,
+        208,
+        210
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Receipt access boundary uses access control section 8 and history section 10",
+      "witness_lines": [
+        212
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۳. سازمان برای مدیریت کیف پول به چند نقش مدیریتی نیاز دارد",
+      "witness_lines": [
+        214
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "One admin role; no forced second approver or multi-step process",
+      "witness_lines": [
+        216,
+        218,
+        220
+      ]
+    },
+    {
+      "kind": "table",
+      "label": "Wallet actor permission matrix (personal wallet owner, organization admin, employee with access)",
+      "witness_lines": [
+        222,
+        223,
+        224,
+        225,
+        226
+      ]
+    },
+    {
+      "kind": "executable_rule",
+      "label": "Admin sets employee amount/limit; control identity, balance and credit rights; no access across personal/other-org wallets; server-side enforcement",
+      "witness_lines": [
+        228,
+        230
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Modern Treasury references are permission examples; Shahab chooses simple admin model",
+      "witness_lines": [
+        232
+      ]
+    },
+    {
+      "kind": "decision_status",
+      "label": "Multiple persons may hold same admin role; replacement details continue below",
+      "witness_lines": [
+        234
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Ownership rules connect to recharge/transfer section 6 and balance/permission section 7",
+      "witness_lines": [
+        236
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۳.۱. چند ادمین با یک نوع نقش",
+      "witness_lines": [
+        238
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Multiple equal-scope admins allowed; complete actor audit; no required finance/second-approver role",
+      "witness_lines": [
+        240,
+        242,
+        244,
+        246
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Authority section 3.3 and audit trail section 8",
+      "witness_lines": [
+        248
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۳.۲. جایگزینی ادمین و بستن حساب",
+      "witness_lines": [
+        250
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Admin transfer with re-authentication; representative recovery; settle obligations before closure; retain financial history",
+      "witness_lines": [
+        252,
+        254,
+        256,
+        258
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Recovery detail is implementation work; sensitive authentication section 8 and settlement section 9 are bases",
+      "witness_lines": [
+        260
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۴. اختصاص بودجه به کارمند، پول را وارد کیف پول شخصی او می‌کند",
+      "witness_lines": [
+        262
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Budget grants spending permission; funds remain in organization wallet; check available organization balance and employee remaining limit including reserved amount",
+      "witness_lines": [
+        264,
+        266,
+        268
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Organization balance and employee cap example; cap does not reserve funds; total caps may exceed balance but actual spending may not",
+      "witness_lines": [
+        270
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Ledger concurrency reference; employee allocation is organization policy; payment approval amount is not periodic budget",
+      "witness_lines": [
+        272
+      ]
+    },
+    {
+      "kind": "decision_status",
+      "label": "Budget has no dedicated backing; admin determines amounts; periods/combined caps and refunds specified elsewhere",
+      "witness_lines": [
+        274
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Ownership rules connect to section 6 and balance/permissions section 7",
+      "witness_lines": [
+        276
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۴.۱. انتقال ماندهٔ مجوز مصرف",
+      "witness_lines": [
+        278
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Admin chooses carryover per budget; carryover is capacity, not personal-wallet funds",
+      "witness_lines": [
+        280,
+        282,
+        284,
+        286
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Budget period section 6.8 and free organization balance both apply",
+      "witness_lines": [
+        288
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۴.۲. اثر استرداد بر ظرفیت کارمند",
+      "witness_lines": [
+        290
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Refund restores only original-period capacity; closed period does not increase new-period limit; refund money/components to payer wallet",
+      "witness_lines": [
+        292,
+        294,
+        296,
+        298
+      ]
+    },
+    {
+      "kind": "open_implementation_detail",
+      "label": "Combined behavior of refund and closed-period carryover needs implementation design without increasing new-period capacity",
+      "witness_lines": [
+        300
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۵. هزینه از کیف پول شخصی پرداخت می‌شود یا سازمانی",
+      "witness_lines": [
+        302
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Show paying wallet and permitted cost before reserve/cost; no automatic personal-wallet fallback",
+      "witness_lines": [
+        304,
+        306,
+        308
+      ]
+    },
+    {
+      "kind": "scope_decision",
+      "label": "One wallet per operation; no split of one operation across personal and organization wallets in initial release; distinguish mixed cash/gift within one wallet",
+      "witness_lines": [
+        310
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Do not silently debit employee personal wallet to cover shortfall",
+      "witness_lines": [
+        312
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "Ledger objects explain multi-account recording; payer selection and no auto-debit are Shahab policy; UI detail open",
+      "witness_lines": [
+        314
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Ownership rules connect to section 6 and balance/permissions section 7",
+      "witness_lines": [
+        316
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۶. اگر دسترسی کارمند در میانهٔ کار قطع شود، هزینه چه می‌شود",
+      "witness_lines": [
+        318
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Check authorization before reserve/increase/new cost; stop new cost after revocation; resolve actual prior commitment; release remainder after outcome; no transfer to personal wallet",
+      "witness_lines": [
+        320,
+        322,
+        324
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Unknown result of already submitted external request means revocation does not automatically cancel it or justify immediate full release",
+      "witness_lines": [
+        326
+      ]
+    },
+    {
+      "kind": "source_and_boundary",
+      "label": "External transaction/cancellation references explain why access revocation differs from financial cancellation; assistant stopping policy is Shahab-specific",
+      "witness_lines": [
+        328
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "For reduced limit or revoked access stop new cost/reserve increase; continuation only with explicit admin authorization and valid authority",
+      "witness_lines": [
+        330
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Ownership section 6, permissions section 7",
+      "witness_lines": [
+        332
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۶.۱. کاهش سقف در میانهٔ اجرا",
+      "witness_lines": [
+        334
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Limit reduction stops new cost and reserve growth; resolve existing commitment; continue only with explicit admin approval; release uncommitted remainder after outcome",
+      "witness_lines": [
+        336,
+        338,
+        340,
+        342
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Permission recording section 7; execution pricing section 9",
+      "witness_lines": [
+        344
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۳.۷. سازمان با چه اشخاصی و به چه روشی اعتبار در اختیار می‌گذارد",
+      "witness_lines": [
+        346
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "No person-to-organization or organization-to-organization transfers; only org-listed people; two distinct routes: transfer credit or shared-balance spending cap",
+      "witness_lines": [
+        348,
+        350,
+        352,
+        354,
+        355
+      ]
+    },
+    {
+      "kind": "executable_rule",
+      "label": "Admin decides recipients/amounts; server checks same-organization list membership and authority; no mandatory second approver",
+      "witness_lines": [
+        357
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Listed recipients can receive distinct transfer/shared-cap treatment; out-of-list, other-org and personal-admin-wallet transfer routes prohibited",
+      "witness_lines": [
+        359
+      ]
+    },
+    {
+      "kind": "policy_boundary",
+      "label": "No personal-wallet-to-organization funding; ordinary personal top-up remains allowed; direct organization top-up by admin personal card unsupported in initial release",
+      "witness_lines": [
+        361
+      ]
+    },
+    {
+      "kind": "open_implementation_detail",
+      "label": "List format/IDs, account matching, member updates/removal, absent account behavior and allocation details remain open; bank-account service selection/auth details incomplete",
+      "witness_lines": [
+        363
+      ]
+    },
+    {
+      "kind": "decision_basis",
+      "label": "Organization interaction scope comes from explicit product-owner instruction, not generic MT transfer pattern",
+      "witness_lines": [
+        365
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Shared cap section 3.4; recipients/directions section 6.5; funding origin section 6.1; revocation section 3.6",
+      "witness_lines": [
+        367
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۴. پول واقعی مشتری کجاست و چه نسبتی با درآمد شهاب دارد؟",
+      "witness_lines": [
+        369
+      ]
+    },
+    {
+      "kind": "principle",
+      "label": "Customer funds, Shahab revenue, and company expense are distinct",
+      "witness_lines": [
+        371
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۴.۱. شارژ مشتری چه اثری دارد",
+      "witness_lines": [
+        373
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Customer money held in Shahab bank account; unused balance is not itself revenue; track corresponding customer liability; only qualifying cash top-up refundable; gift/transferred credit not withdrawable but does not remove service obligation or become revenue",
+      "witness_lines": [
+        375,
+        377,
+        379
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Top-up creates customer obligation; later consumption is separately recorded; exact revenue recognition/accounting for gift remains open",
+      "witness_lines": [
+        381
+      ]
+    },
+    {
+      "kind": "source",
+      "label": "Modern Treasury wallet tutorial reference",
+      "witness_lines": [
+        383
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Balance rights section 5, collection/invoice section 6, bank reconciliation section 8",
+      "witness_lines": [
+        385
+      ]
+    },
+    {
+      "kind": "heading",
+      "label": "۴.۱.۱. تفکیک منابع و درآمد",
+      "witness_lines": [
+        387
+      ]
+    },
+    {
+      "kind": "approved_decision",
+      "label": "Separate customer cash, promotional credit and organizational customer account from Shahab service revenue; organization ownership is a dimension, not an additive duplicate; no independent merchant-sales funds in current model",
+      "witness_lines": [
+        389,
+        391,
+        393
+      ]
+    },
+    {
+      "kind": "worked_example",
+      "label": "Organizational wallet retains cash/gift components and owner; service consumption and API expense are separate events",
+      "witness_lines": [
+        395
+      ]
+    },
+    {
+      "kind": "cross_reference",
+      "label": "Accounts sections 7.1/7.2 implement; section 9 pricing unchanged",
+      "witness_lines": [
+        397
+      ]
+    }
+  ]
+}
