@@ -74,5 +74,19 @@
       "specified": 0
     }
   },
-  "missing_status_or_owner_fields": 0
+  "missing_status_or_owner_fields": 0,
+  "reconciled_legacy_gaps": {
+    "previously_missing_edge_decision_status": {
+      "total": 230,
+      "now_filled_from_source_review": 230,
+      "unknown_explicitly_retained": 1
+    },
+    "previously_missing_edge_owner": {
+      "total": 406,
+      "now_classified": 406,
+      "source_named_owner": 1,
+      "explicitly_unspecified_owner": 405
+    },
+    "missing_status_owner_owner_status_after_review": 0
+  }
 }
