@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R03.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R03 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R04.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R04 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -20,9 +20,9 @@
 | دامنه | بسته‌ها | تعداد | وضعیت |
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
-| RAG / Adviser | R01–R10 | 10 | R01–R03 پذیرفته؛ R04–R10 در انتظار |
+| RAG / Adviser | R01–R10 | 10 | R01–R04 پذیرفته؛ R05–R10 در انتظار |
 | Assistant | A01–A08 | 8 | NOT_STARTED |
-| کل | ۳۶ بسته | 36 | ۲۱ پذیرفته‌شده؛ ۱۵ در انتظار |
+| کل | ۳۶ بسته | 36 | ۲۲ پذیرفته‌شده؛ ۱۴ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -48,7 +48,7 @@
 | R01 | پذیرش خدمت، فهم پرسش و مسیریابی بازیابی ریسک‌محور | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R02 | دسترسی کنترل‌شده به منابع و ورود تقاضامحور دانش | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R03 | مخزن دانش، هویت و نسخه، Lineage و انتشار Snapshot | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| R04 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| R04 | کشف منبع و کاتالوگ فراداده | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R05 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R06 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R07 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -5880,7 +5880,7 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 **تعداد:** 25 Requirement جدید؛ C12b: 12 Candidate منطقی، 11 R، 1 Enabler، 5 Task، 15 Subtask، 11 AC/Test، 33 Test Case. C13a: 18 Candidate منطقی، 14 R، 1 Enabler، 5 Task، 15 Subtask، 14 AC/Test، 42 Test Case. 15 گره گراف مستقیم در بازه تطبیق/بازیابی و 36 در بازه قیمت/تسویه Wallet؛ بخش مالی Blueprint نیز گره‌های مرتبط را فراهم کرد. معیار precision نسبت به gold set و زمان تفکیکی: NOT_MEASURED. زمان‌سنج از آغاز فعال نبود. نقص‌های بازبینی اولیه: 4 مرز مالکیت/تعریف (ledger posting، subscription ownership، replay/new execution، open tax/provider); همگی قبل از PASS به Handoff/قید/OPEN تبدیل شدند؛ نقص مسدودکننده نهایی صفر؛ یک چرخه بازکاری.
 
-**شمارنده:** رجیستری 36 واحد مستقل را نشان می‌دهد؛ 21/36 پذیرفته و 15/36 باقی‌مانده‌اند. Core/Wallet=18/18، RAG/Adviser=3/10، Assistant=0/8. وضعیت محصول NOT_IMPLEMENTED / NOT_EXECUTED.
+**شمارنده:** رجیستری 36 واحد مستقل را نشان می‌دهد؛ 22/36 پذیرفته و 14/36 باقی‌مانده‌اند. Core/Wallet=18/18، RAG/Adviser=4/10، Assistant=0/8. وضعیت محصول NOT_IMPLEMENTED / NOT_EXECUTED.
 
 ### C13b — تجربه و پشتیبانی کیف پول
 
@@ -6077,9 +6077,9 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 | CPA-07 Traceability | PASS | 28 R با منبع، Story/E, Task/Subtask, AC, TD، سه TC و dependency؛ reverse links کامل |
 | CPA-08 مصوبات قبلی | PASS | C02/C03/C04/C11a/C11b/C12a/C12b/C13a و دو سند مرجع حفظ؛ historical registry records دست‌نخورده |
 
-**شمارنده و شاهد ممیزی:** C13b و C14 طبق سابقه بالا. R01 تا R03 هرکدام: 10 Candidate/Requirement، 4 Story/Enabler، 5 Task، 10 Subtask، 10 AC/TD و 20 planned TC. مجموع RAG پذیرفته‌شده: 30 Candidate، 30 Requirement، 12 Story/Enabler، 15 Task، 30 Subtask، 30 AC/TD و 60 planned TC. کل بسته‌ها 21/36 پذیرفته‌اند؛ Product tests اجرا نشده‌اند؛ precision و زمان واقعی NOT_MEASURED.
+**شمارنده و شاهد ممیزی:** C13b و C14 طبق سابقه بالا. R01 تا R04 هرکدام: 10 Candidate/Requirement، 4 Story/Enabler، 5 Task، 10 Subtask، 10 AC/TD و 20 planned TC. مجموع RAG پذیرفته‌شده: 40 Candidate، 40 Requirement، 16 Story/Enabler، 20 Task، 40 Subtask، 40 AC/TD و 80 planned TC. کل بسته‌ها 22/36 پذیرفته‌اند؛ Product tests اجرا نشده‌اند؛ precision و زمان واقعی NOT_MEASURED.
 
-**شمارنده کل:** 20/36 بسته پذیرفته‌شده برنامه‌ریزی، 16/36 باقی‌مانده؛ Core/Wallet=18/18، RAG/Adviser=3/10، Assistant=0/8. محصول NOT_IMPLEMENTED / NOT_EXECUTED.
+**شمارنده کل:** 22/36 بسته پذیرفته‌شده برنامه‌ریزی، 14/36 باقی‌مانده؛ Core/Wallet=18/18، RAG/Adviser=4/10، Assistant=0/8. محصول NOT_IMPLEMENTED / NOT_EXECUTED.
 ---
 
 ## ۲. برنامه RAG / Adviser — ۱۰ بسته
@@ -6363,14 +6363,14 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 | Gate | کنترل مشترک | شاهد / نتیجه |
 | --- | --- | --- |
-| CPA-01 Coverage | ۱۰ Requirement اتمی در هر یک از R01–R03؛ متن Blueprint و nodeهای گراف مرور شدند | PASS؛ ۳۰/۳۰ Requirement |
-| CPA-02 Ownership | R01 Admission/Query/Route؛ R02 Source Access/DDI/Extraction؛ R03 Knowledge Store/Lineage/Publication؛ R04 هنوز تدوین نشده | PASS؛ مرزها روشن؛ مالکیت اجرایی نامشخص OPEN |
-| CPA-03 Dependencies | C01/C04/C05–C07؛ R01→R02 درخواست/دسترسی؛ candidate ورودی R02 به چرخه R03؛ چرخه وابستگی=0 | PASS؛ مسیرها جهت‌دار |
-| CPA-04 Duplicates | ۳۰ Candidate/Requirement به C01–C14 و یکدیگر تطبیق داده شدند؛ دریافت/استخراج با ذخیره/انتشار ادغام نشده | PASS؛ تکرار Requirement صفر |
-| CPA-05 Contracts | SourceAccessResult و DocumentIdentity/Version، LegalRelation و KnowledgeSnapshot به‌عنوان قرارداد مفهومی مصرف می‌شوند | PASS؛ API/Schema فیزیکی یا Migration ادعا نشده |
-| CPA-06 Decisions | فناوری، مجوز منابع، OCR/Embedding، schema و retention باز ماندند | PASS؛ تصمیم باز به مصوبه تبدیل نشده |
-| CPA-07 Traceability | Source/Candidate→Requirement→Story→Task/Subtask→AC→Test/Case و reverse trace در R01–R03 | PASS؛ ۳۰/۳۰ دوسویه؛ ۶۰ Test Case برنامه‌ای |
-| CPA-08 Consistency | وضعیت بسته‌ها، شمارنده ۳۶بسته‌ای و PRODUCT_NOT_EXECUTED سازگارند | PASS؛ ۲۱/۳۶ پذیرفته، ۱۵ باقی |
+| CPA-01 Coverage | ۱۰ Requirement اتمی در هر یک از R01–R04؛ متن Blueprint و nodeهای گراف مرور شدند؛ موارد خارج از Scope نزد مالک مربوط ماندند | PASS؛ ۴۰/۴۰ Requirement |
+| CPA-02 Ownership | R01 Admission/Query/Route؛ R02 Source Access/DDI/Extraction؛ R03 Knowledge Store/Lineage/Publication؛ R04 Source Discovery/Catalog/Registry؛ RDE و trust/مجوز در مرز مالکان مصوب | PASS؛ مالکیت اجرایی نامشخص OPEN |
+| CPA-03 Dependencies | C01/C04/C05–C07؛ R01→R02 درخواست/دسترسی؛ candidate ورودی R02 به چرخه R03؛ R04 از قرارداد دسترسی/Job R02 استفاده می‌کند؛ چرخه وابستگی=0 | PASS؛ مسیرها جهت‌دار |
+| CPA-04 Duplicates | ۴۰ Candidate/Requirement به C01–C14 و یکدیگر تطبیق داده شدند؛ کشف R04 با دریافت R02 و انتشار R03 ادغام نشده | PASS؛ تکرار Requirement صفر |
+| CPA-05 Contracts | SourceAccessResult، DocumentIdentity/Version، LegalRelation، KnowledgeSnapshot، SourceLifecyclePolicy و Job/Event به‌عنوان قرارداد مفهومی مصرف می‌شوند | PASS؛ API/Schema فیزیکی یا Migration ادعا نشده |
+| CPA-06 Decisions | فناوری، مجوز منبع، OCR/Embedding، schema، تناوب/آستانه، retention و SLA باز مانده‌اند | PASS؛ تصمیم باز به مصوبه تبدیل نشده |
+| CPA-07 Traceability | Source/Candidate→Requirement→Story→Task/Subtask→AC→Test/Case و reverse trace در R01–R04 | PASS؛ ۴۰/۴۰ دوسویه؛ ۸۰ Test Case برنامه‌ای |
+| CPA-08 Consistency | وضعیت بسته‌ها، شمارنده ۳۶بسته‌ای و PRODUCT_NOT_EXECUTED سازگارند | PASS؛ ۲۲/۳۶ پذیرفته، ۱۴ باقی |
 
 **CPA:** ۸/۸ PASS؛ آمادگی برنامه‌ریزی، نه اجرای محصول.
 
@@ -6386,7 +6386,7 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 **وابستگی:** داده candidate از R02؛ قرارداد کاننیکال C04؛ gateهای C01 و کنترل‌های C05–C07. R01 مصرف‌کننده Snapshot است. این وابستگی با توالی طراحی §3.9.7 سازگار است.
 
-**گراف و منابع:** Graphify موجود در `main`، Graph validation=PASS و SHA-256 پین‌شده Blueprint/Wallet (به‌ترتیب `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266` و `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`) تطبیق داده شد. Nodeهای مستقیم R03: `docs_shahab_phase_2_development_blueprint_knowledge_base`, `docs_shahab_phase_2_development_blueprint_adr_rag_03`, `docs_shahab_phase_2_development_blueprint_adr_rag_12`, `docs_shahab_phase_2_development_blueprint_adr_rag_20`, `docs_shahab_phase_2_development_blueprint_adr_rag_25`, `docs_shahab_phase_2_development_blueprint_adr_rag_28`, `docs_shahab_phase_2_development_blueprint_adr_rag_37`؛ ۱۳ یال incident یکتا: ۳ EXTRACTED و ۱۰ INFERRED. یال‌های استنباطی الزام نسازند؛ هر Requirement به متن تأییدشده Blueprint و locator دقیق زیر متصل است.
+**گراف و منابع:** Graphify موجود در `main`، Graph validation=PASS و SHA-256 پین‌شده Blueprint/Wallet (به‌ترتیب `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266` و `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`) تطبیق داده شد. Nodeهای R03: `docs_shahab_phase_2_development_blueprint_knowledge_base`, `docs_shahab_phase_2_development_blueprint_adr_rag_03`, `docs_shahab_phase_2_development_blueprint_adr_rag_12`, `docs_shahab_phase_2_development_blueprint_adr_rag_20`, `docs_shahab_phase_2_development_blueprint_adr_rag_25`, `docs_shahab_phase_2_development_blueprint_adr_rag_28`, `docs_shahab_phase_2_development_blueprint_adr_rag_37`؛ از ۱۳ یال incident یکتا، ۳ EXTRACTED و ۱۰ INFERRED بود. Nodeهای R04: `docs_shahab_phase_2_development_blueprint_source_discovery_metadata_catalog`, `docs_shahab_phase_2_development_blueprint_adr_rag_05`, `docs_shahab_phase_2_development_blueprint_adr_rag_23`, `docs_shahab_phase_2_development_blueprint_adr_rag_24`, `docs_shahab_phase_2_development_blueprint_adr_rag_34`؛ از ۶ یال incident، ۳ EXTRACTED و ۳ INFERRED بود. یال‌های INFERRED/AMBIGUOUS الزام نسازند؛ هر Requirement به متن تأییدشده Blueprint و locator دقیق زیر متصل است؛ گراف برای کشف و کنترل پوشش استفاده شد.
 
 **Source → Requirement → Task → AC → Test:**
 
@@ -6407,20 +6407,20 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 | ID | خروجی | نیازمندی‌ها | معیار تحقق |
 |---|---|---|---|
-| EN:RAG:R03:001 | هویت سند و نسخه‌های دو‌زمانه پایدار ثبت شوند. | REQ R03:001–003 | قرارداد مفهومی و وضعیت‌ها روشن؛ تصمیم باز مصوب فرض نشود. |
-| EN:RAG:R03:002 | شواهد و روابط به نسخه و provenance متصل باشند. | REQ R03:004–005 | منشأ و خطا قابل ممیزی بماند. |
-| EN:RAG:R03:003 | مشتقات دانش lineage داشته و تغییر هدفمند مدیریت شود. | REQ R03:006–008 | جداسازی candidate از معتبر/منتشرشده اعمال شود. |
-| EN:RAG:R03:004 | انتشار تنها به‌صورت Snapshot سازگار پس از Gateهای مصوب انجام شود. | REQ R03:009–010 | تاریخچه، وابستگی و بازیابی امن پوشش یابد. |
+| EN:RAG:R03:001 | هویت سند و نسخه‌های دو‌زمانه پایدار ثبت شوند. | REQ:RAG:R03:001–003 | قرارداد مفهومی و وضعیت‌ها روشن؛ تصمیم باز مصوب فرض نشود. |
+| EN:RAG:R03:002 | شواهد و روابط به نسخه و provenance متصل باشند. | REQ:RAG:R03:004–005 | منشأ و خطا قابل ممیزی بماند. |
+| EN:RAG:R03:003 | مشتقات دانش lineage داشته و تغییر هدفمند مدیریت شود. | REQ:RAG:R03:006–008 | جداسازی candidate از معتبر/منتشرشده اعمال شود. |
+| EN:RAG:R03:004 | انتشار تنها به‌صورت Snapshot سازگار پس از Gateهای مصوب انجام شود. | REQ:RAG:R03:009–010 | تاریخچه، وابستگی و بازیابی امن پوشش یابد. |
 
 **Taskها و Subtaskها:**
 
 | Task ID | خروجی | Subtask 1 | Subtask 2 | Requirements | وابستگی |
 |---|---|---|---|---|---|
-| TASK:RAG:R03:001 | قرارداد منطقی و دامنه مالکیت | SUBTASK:RAG:R03:001.01 — استخراج فیلد/حالت | SUBTASK:RAG:R03:001.02 — ثبت مرز و تصمیم باز | REQ R03:001–002 | قرارداد C04؛ داده candidate از R02؛ قرارداد کاننیکال C04؛ gateهای C01 و کنترل‌های C05–C07. R01 مصرف‌کننده Snapshot است. این وابستگی با توالی طراحی §3.9.7 سازگار است. |
-| TASK:RAG:R03:002 | وضعیت و provenance | SUBTASK:RAG:R03:002.01 — تعریف رویداد/تاریخچه | SUBTASK:RAG:R03:002.02 — مسیر ابهام و خطا | REQ R03:003–004 | TASK R03:001 |
-| TASK:RAG:R03:003 | داده و روابط نسخه‌پذیر | SUBTASK:RAG:R03:003.01 — نگاشت موجودیت‌ها | SUBTASK:RAG:R03:003.02 — ثبت lineage/version binding | REQ R03:005–006 | TASK R03:001–002 |
-| TASK:RAG:R03:004 | کنترل سیاست و ایمنی | SUBTASK:RAG:R03:004.01 — نگاشت Gate/منع | SUBTASK:RAG:R03:004.02 — سناریوی مرزی/شکست | REQ R03:007–008 | C01/C04/C07 حسب مورد |
-| TASK:RAG:R03:005 | یکپارچگی و آمادگی برنامه | SUBTASK:RAG:R03:005.01 — ردیابی دوسویه | SUBTASK:RAG:R03:005.02 — ممیزی و ثبت نتیجه | REQ R03:009–010 | TASK R03:001–004 |
+| TASK:RAG:R03:001 | قرارداد منطقی و دامنه مالکیت | SUBTASK:RAG:R03:001.01 — استخراج فیلد/حالت | SUBTASK:RAG:R03:001.02 — ثبت مرز و تصمیم باز | REQ:RAG:R03:001–002 | قرارداد C04؛ داده candidate از R02؛ قرارداد کاننیکال C04؛ gateهای C01 و کنترل‌های C05–C07. R01 مصرف‌کننده Snapshot است. این وابستگی با توالی طراحی §3.9.7 سازگار است. |
+| TASK:RAG:R03:002 | وضعیت و provenance | SUBTASK:RAG:R03:002.01 — تعریف رویداد/تاریخچه | SUBTASK:RAG:R03:002.02 — مسیر ابهام و خطا | REQ:RAG:R03:003–004 | TASK R03:001 |
+| TASK:RAG:R03:003 | داده و روابط نسخه‌پذیر | SUBTASK:RAG:R03:003.01 — نگاشت موجودیت‌ها | SUBTASK:RAG:R03:003.02 — ثبت lineage/version binding | REQ:RAG:R03:005–006 | TASK R03:001–002 |
+| TASK:RAG:R03:004 | کنترل سیاست و ایمنی | SUBTASK:RAG:R03:004.01 — نگاشت Gate/منع | SUBTASK:RAG:R03:004.02 — سناریوی مرزی/شکست | REQ:RAG:R03:007–008 | C01/C04/C07 حسب مورد |
+| TASK:RAG:R03:005 | یکپارچگی و آمادگی برنامه | SUBTASK:RAG:R03:005.01 — ردیابی دوسویه | SUBTASK:RAG:R03:005.02 — ممیزی و ثبت نتیجه | REQ:RAG:R03:009–010 | TASK R03:001–004 |
 
 **معیار پذیرش:**
 
@@ -6461,8 +6461,90 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 **تصمیم‌های باز حفظ‌شده:** schema فیزیکی و مهاجرت؛ فناوری ذخیره‌سازی/نمایه؛ زمان‌بند/صف؛ تناوب و آستانه‌های پایش/تازگی؛ مدت نگهداری artifact؛ فهرست نهایی منابع و مجوز تک‌تک آن‌ها؛ SLA و معیار عددی پذیرش. این بسته هیچ‌کدام را تصویب نمی‌کند.
 
 
-### R04 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### R04 — کشف منبع و کاتالوگ فراداده
+
+**وضعیت:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+**Scope و مرز مالکیت:** کشف انتشار/تغییر قابل مشاهده و ثبت سرنخ و فراداده سبک به‌شکل تطبیقی. دریافت متن/استخراج و لایه دسترسی متعلق به R02؛ اصالت و اعتماد C01/ADR-RAG-23؛ قواعد مجوز ADR-RAG-34؛ اعتبارسنجی اثر حقوقی RDE است. Catalog مرجع حقیقت حقوقی نیست و با Revalidation اسناد شناخته‌شده یکی نیست.
+
+**مالکیت منطقی:** Source Discovery؛ Source Catalog؛ Source Registry & Governance؛ Discovery Event/Job Coordination؛ Source Usage Policy. مرزها منطقی‌اند؛ مالک تیمی/فردی، schema فیزیکی، API/مهاجرت و فناوری جزو تصمیم‌های بازند مگر صریحاً تصویب شده باشند.
+
+**وابستگی:** قرارداد دسترسی و Job از R02؛ سیاست C01 و ADR-RAG-34؛ داده کشف‌شده برای بررسی/نسخه در R03 و ارجاع هدفمند به RDE. §3.3:216 تمایز discovery از revalidation را تصریح می‌کند.
+
+**گراف و منابع:** Graphify موجود در `main`، Graph validation=PASS و SHA-256 پین‌شده Blueprint/Wallet (به‌ترتیب `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266` و `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`) تطبیق داده شد. Nodeهای مستقیم R04: `docs_shahab_phase_2_development_blueprint_source_discovery_metadata_catalog`, `docs_shahab_phase_2_development_blueprint_adr_rag_05`, `docs_shahab_phase_2_development_blueprint_adr_rag_23`, `docs_shahab_phase_2_development_blueprint_adr_rag_24`, `docs_shahab_phase_2_development_blueprint_adr_rag_34`؛ ۶ یال incident: ۳ EXTRACTED و ۳ INFERRED. یال‌های استنباطی الزام نسازند؛ هر Requirement به متن تأییدشده Blueprint و locator دقیق زیر متصل است.
+
+**Source → Requirement → Task → AC → Test:**
+
+| Candidate ID | Package | Requirement ID | رفتار اتمی | Source Unit / شاهد | مالک رفتار | Task | AC | Test Definition | Disposition |
+|---|---|---|---|---|---|---|---|---|---|
+| CAND:RAG:R04:001 | R04 | REQ:RAG:R04:001 | پایش انتشار/تغییر تطبیقی و ریسک‌محور باشد؛ تناوب ثابت سراسری الزام نشود. | §3.3:210–216؛ ADR-RAG-05:289–292 | Source Discovery | TASK:RAG:R04:001 | AC:RAG:R04:001 | TEST:RAG:R04:001 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:002 | R04 | REQ:RAG:R04:002 | Catalog فراداده سبک را ثبت کند؛ دریافت متن کامل شرط ثبت سرنخ نیست. | §3.3:213–214 | Source Catalog | TASK:RAG:R04:001 | AC:RAG:R04:002 | TEST:RAG:R04:002 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:003 | R04 | REQ:RAG:R04:003 | مشاهده به source_id وصل شود و زمان، روش/وضعیت و خطا ثبت گردد. | §3.9.3 SourceLifecyclePolicy:487؛ SourceAccessResult:479 | Source Catalog/Access | TASK:RAG:R04:002 | AC:RAG:R04:003 | TEST:RAG:R04:003 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:004 | R04 | REQ:RAG:R04:004 | کشف به‌تنهایی اصالت، اعتبار حقوقی، شمول یا مجوز را تأیید نکند. | §3.3:212–216؛ ADR-RAG-23:379–382؛ ADR-RAG-24:384–387 | Source Governance | TASK:RAG:R04:002 | AC:RAG:R04:004 | TEST:RAG:R04:004 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:005 | R04 | REQ:RAG:R04:005 | منابع اولیه، بازنشر/تنقیح، بانک، رسانه و روایت کاربر از حیث نقش/اعتماد تفکیک شوند. | ADR-RAG-23:379–382؛ §3.3:213 | Source Trust | TASK:RAG:R04:003 | AC:RAG:R04:005 | TEST:RAG:R04:005 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:006 | R04 | REQ:RAG:R04:006 | چرخه منبع از کشف تا بازنشستگی تاریخچه‌دار و از وضعیت سند/ادعا مستقل بماند. | ADR-RAG-24:384–387؛ SourceLifecyclePolicy:487 | Source Registry | TASK:RAG:R04:003 | AC:RAG:R04:006 | TEST:RAG:R04:006 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:007 | R04 | REQ:RAG:R04:007 | مجوز، ToS، احراز هویت، نرخ، attribution و حدود نگهداری پیش از استفاده کنترل شود. | ADR-RAG-34:434–437؛ ADR-RAG-04:284–287 | Source Usage Policy | TASK:RAG:R04:004 | AC:RAG:R04:007 | TEST:RAG:R04:007 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:008 | R04 | REQ:RAG:R04:008 | آخرین بررسی موفق، شکست/تأخیر و سطح اطمینان ثبت؛ شکست به معنی نبود تغییر نیست. | §3.3:216؛ ADR-RAG-05:289–292 | Discovery Audit | TASK:RAG:R04:004 | AC:RAG:R04:008 | TEST:RAG:R04:008 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:009 | R04 | REQ:RAG:R04:009 | کشف پرریسک می‌تواند بازبینی هدفمند RDE/بازاعتبارسنجی را تحریک کند، نه انتشار خودکار. | §3.3:216؛ ADR-RAG-05:289–292 | Discovery Event | TASK:RAG:R04:005 | AC:RAG:R04:009 | TEST:RAG:R04:009 | RA_ACCEPTED / source-backed |
+| CAND:RAG:R04:010 | R04 | REQ:RAG:R04:010 | Job discovery دارای شناسه پایدار/idempotency، وضعیت و recovery باشد؛ زمان‌بند و آستانه باز بماند. | ADR-RAG-05:289–292؛ Job/Event:488؛ §3.3:212 | Event/Job Coordination | TASK:RAG:R04:005 | AC:RAG:R04:010 | TEST:RAG:R04:010 | RA_ACCEPTED / source-backed |
+
+**Story / Enablerها:**
+
+| ID | خروجی | نیازمندی‌ها | معیار تحقق |
+|---|---|---|---|
+| EN:RAG:R04:001 | انتشارهای جدید به‌صورت تطبیقی کشف و فراداده سبک ثبت شوند. | REQ:RAG:R04:001–003 | قرارداد مفهومی و وضعیت‌ها روشن؛ تصمیم باز مصوب فرض نشود. |
+| EN:RAG:R04:002 | مجوز و وضعیت منبع از اصالت/وضعیت سند جدا بمانند. | REQ:RAG:R04:004–005 | منشأ و خطا قابل ممیزی بماند. |
+| EN:RAG:R04:003 | شکست پایش و محدودیت پوشش آشکار ثبت شوند. | REQ:RAG:R04:006–008 | جداسازی candidate از معتبر/منتشرشده اعمال شود. |
+| EN:RAG:R04:004 | سرنخ تغییر بازبینی هدفمند را تحریک کند، نه انتشار خودکار. | REQ:RAG:R04:009–010 | تاریخچه، وابستگی و بازیابی امن پوشش یابد. |
+
+**Taskها و Subtaskها:**
+
+| Task ID | خروجی | Subtask 1 | Subtask 2 | Requirements | وابستگی |
+|---|---|---|---|---|---|
+| TASK:RAG:R04:001 | قرارداد منطقی و دامنه مالکیت | SUBTASK:RAG:R04:001.01 — استخراج فیلد/حالت | SUBTASK:RAG:R04:001.02 — ثبت مرز و تصمیم باز | REQ:RAG:R04:001–002 | قرارداد C04؛ قرارداد دسترسی و Job از R02؛ سیاست C01 و ADR-RAG-34؛ داده کشف‌شده برای بررسی/نسخه در R03 و ارجاع هدفمند به RDE. §3.3:216 تمایز discovery از revalidation را تصریح می‌کند. |
+| TASK:RAG:R04:002 | وضعیت و provenance | SUBTASK:RAG:R04:002.01 — تعریف رویداد/تاریخچه | SUBTASK:RAG:R04:002.02 — مسیر ابهام و خطا | REQ:RAG:R04:003–004 | TASK R04:001 |
+| TASK:RAG:R04:003 | داده و روابط نسخه‌پذیر | SUBTASK:RAG:R04:003.01 — نگاشت موجودیت‌ها | SUBTASK:RAG:R04:003.02 — ثبت lineage/version binding | REQ:RAG:R04:005–006 | TASK R04:001–002 |
+| TASK:RAG:R04:004 | کنترل سیاست و ایمنی | SUBTASK:RAG:R04:004.01 — نگاشت Gate/منع | SUBTASK:RAG:R04:004.02 — سناریوی مرزی/شکست | REQ:RAG:R04:007–008 | C01/C04/C07 حسب مورد |
+| TASK:RAG:R04:005 | یکپارچگی و آمادگی برنامه | SUBTASK:RAG:R04:005.01 — ردیابی دوسویه | SUBTASK:RAG:R04:005.02 — ممیزی و ثبت نتیجه | REQ:RAG:R04:009–010 | TASK R04:001–004 |
+
+**معیار پذیرش:**
+
+| AC ID | معیار قابل مشاهده | Requirement |
+|---|---|---|
+| AC:RAG:R04:001 | آزمون رفتار 001 نشان دهد: پایش انتشار/تغییر تطبیقی و ریسک‌محور باشد؛ تناوب ثابت سراسری الزام نشود. | REQ:RAG:R04:001 |
+| AC:RAG:R04:002 | آزمون رفتار 002 نشان دهد: Catalog فراداده سبک را ثبت کند؛ دریافت متن کامل شرط ثبت سرنخ نیست. | REQ:RAG:R04:002 |
+| AC:RAG:R04:003 | آزمون رفتار 003 نشان دهد: مشاهده به source_id وصل شود و زمان، روش/وضعیت و خطا ثبت گردد. | REQ:RAG:R04:003 |
+| AC:RAG:R04:004 | آزمون رفتار 004 نشان دهد: کشف به‌تنهایی اصالت، اعتبار حقوقی، شمول یا مجوز را تأیید نکند. | REQ:RAG:R04:004 |
+| AC:RAG:R04:005 | آزمون رفتار 005 نشان دهد: منابع اولیه، بازنشر/تنقیح، بانک، رسانه و روایت کاربر از حیث نقش/اعتماد تفکیک شوند. | REQ:RAG:R04:005 |
+| AC:RAG:R04:006 | آزمون رفتار 006 نشان دهد: چرخه منبع از کشف تا بازنشستگی تاریخچه‌دار و از وضعیت سند/ادعا مستقل بماند. | REQ:RAG:R04:006 |
+| AC:RAG:R04:007 | آزمون رفتار 007 نشان دهد: مجوز، ToS، احراز هویت، نرخ، attribution و حدود نگهداری پیش از استفاده کنترل شود. | REQ:RAG:R04:007 |
+| AC:RAG:R04:008 | آزمون رفتار 008 نشان دهد: آخرین بررسی موفق، شکست/تأخیر و سطح اطمینان ثبت؛ شکست به معنی نبود تغییر نیست. | REQ:RAG:R04:008 |
+| AC:RAG:R04:009 | آزمون رفتار 009 نشان دهد: کشف پرریسک می‌تواند بازبینی هدفمند RDE/بازاعتبارسنجی را تحریک کند، نه انتشار خودکار. | REQ:RAG:R04:009 |
+| AC:RAG:R04:010 | آزمون رفتار 010 نشان دهد: Job discovery دارای شناسه پایدار/idempotency، وضعیت و recovery باشد؛ زمان‌بند و آستانه باز بماند. | REQ:RAG:R04:010 |
+
+**Test Definitions و موارد آزمون برنامه‌ای:**
+
+| Test Definition | هدف | Test Case مثبت | Test Case منفی/مرزی |
+|---|---|---|---|
+| TEST:RAG:R04:001 | پایش انتشار/تغییر تطبیقی و ریسک‌محور باشد؛ تناوب ثابت سراسری الزام نشود. | TC:RAG:R04:001-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:001-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:002 | Catalog فراداده سبک را ثبت کند؛ دریافت متن کامل شرط ثبت سرنخ نیست. | TC:RAG:R04:002-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:002-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:003 | مشاهده به source_id وصل شود و زمان، روش/وضعیت و خطا ثبت گردد. | TC:RAG:R04:003-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:003-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:004 | کشف به‌تنهایی اصالت، اعتبار حقوقی، شمول یا مجوز را تأیید نکند. | TC:RAG:R04:004-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:004-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:005 | منابع اولیه، بازنشر/تنقیح، بانک، رسانه و روایت کاربر از حیث نقش/اعتماد تفکیک شوند. | TC:RAG:R04:005-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:005-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:006 | چرخه منبع از کشف تا بازنشستگی تاریخچه‌دار و از وضعیت سند/ادعا مستقل بماند. | TC:RAG:R04:006-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:006-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:007 | مجوز، ToS، احراز هویت، نرخ، attribution و حدود نگهداری پیش از استفاده کنترل شود. | TC:RAG:R04:007-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:007-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:008 | آخرین بررسی موفق، شکست/تأخیر و سطح اطمینان ثبت؛ شکست به معنی نبود تغییر نیست. | TC:RAG:R04:008-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:008-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:009 | کشف پرریسک می‌تواند بازبینی هدفمند RDE/بازاعتبارسنجی را تحریک کند، نه انتشار خودکار. | TC:RAG:R04:009-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:009-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+| TEST:RAG:R04:010 | Job discovery دارای شناسه پایدار/idempotency، وضعیت و recovery باشد؛ زمان‌بند و آستانه باز بماند. | TC:RAG:R04:010-P: مشاهده مجاز در کاتالوگ با زمان و وضعیت قابل ردیابی ثبت شود. | TC:RAG:R04:010-N: منبع نامطمئن/مجوز نامشخص/پایش شکست‌خورده، معتبر یا بدون تغییر تلقی نشود. |
+
+تعداد برنامه‌ای: ۱۰ Candidate/Requirement، ۴ Story/Enabler، ۵ Task، ۱۰ Subtask، ۱۰ AC، ۱۰ Test Definition و ۲۰ Test Case (۱۰ مثبت و ۱۰ منفی/مرزی). این آزمون‌های محصول در این مأموریت اجرا نشده‌اند.
+
+**RA — پوشش و اتمی‌بودن: PASS.** ۱۰/۱۰ Candidate تعیین تکلیف و به Requirement مستقل وصل‌اند؛ رفتار قابل آزمون، Source Unit و مالک منطقی مشخص است. دریافت/کشف با اصالت یا انتشار خلط نشده؛ الزام بی‌منبع، تکراری یا مرکبِ حل‌نشده وجود ندارد.
+
+**IPA — یکپارچگی برنامه: PASS.** ۱۰/۱۰ الزام به Task، AC و Test Definition و دو Test Case متصل است؛ ۵ Task خروجی و ۱۰ Subtask دارند؛ وابستگی‌ها جهت‌دارند و مرز بسته‌های پیشین حفظ شده. فناوری/آستانه/مجوز/مالکیت اجراییِ تصویب‌نشده به‌صورت تصمیم باز باقی مانده است.
+
+**تصمیم‌های باز حفظ‌شده:** schema فیزیکی و مهاجرت؛ فناوری ذخیره‌سازی/نمایه؛ زمان‌بند/صف؛ تناوب و آستانه‌های پایش/تازگی؛ مدت نگهداری artifact؛ فهرست نهایی منابع و مجوز تک‌تک آن‌ها؛ SLA و معیار عددی پذیرش. این بسته هیچ‌کدام را تصویب نمی‌کند.
+
 
 ### R05 — در انتظار تدوین
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
@@ -6568,4 +6650,4 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 - `RA/IPA PASS` به معنی کامل‌شدن *برنامه* همان بسته است؛ به معنی اجرای کد، تأیید امنیت/مالی، استقرار یا کسب ارزش واقعی برای کاربر نیست.
 - هیچ واحد پولی، ظرفیت، فناوری، آستانه، سیاست یا تصمیم اجرایی باز از خود این سند تصویب نمی‌شود؛ هر کدام باید در Gate مصوب مربوط تعیین تکلیف شوند.
-- در وضعیت جاری C01 تا C14 و R01–R03 در سطح برنامه‌ریزی پذیرفته‌اند؛ R04–R10 و A01–A08 هنوز تدوین نشده‌اند. عدد «۲۱ از ۳۶» تعداد بسته‌های پذیرفته‌شدهٔ برنامه است، نه تکمیل فاز دوم.
+- در وضعیت جاری C01 تا C14 و R01–R04 در سطح برنامه‌ریزی پذیرفته‌اند؛ R05–R10 و A01–A08 هنوز تدوین نشده‌اند. عدد «۲۲ از ۳۶» تعداد بسته‌های پذیرفته‌شدهٔ برنامه است، نه تکمیل فاز دوم.
