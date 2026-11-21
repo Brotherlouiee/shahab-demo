@@ -1503,31 +1503,8 @@
 - **رفتارهای اتمی:** `REQ:CORE:090.B01` تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.
 - **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
 - **AC `AC:CORE:C02:041`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:090 ('تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:090: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.؛ Then: The authoritative Core state enforces this exact clause: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس �
-... 385288 bytes omitted ...
-wledgement; worker reacquires the owner record and does not create a second job effect.
-  - Expected State Change: Before: job-test-17 has committed its state transition but its acknowledgement is absent. After: restart reacquires that same owner record; the job id and committed effect remain singular and no duplicate job effect appears.
-  - Side-effect Invariant: Only the owning service may change its Job state; duplicate resume cannot duplicate the effect.
-  - Boundary/Race: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: Restart occurs after state commit but before acknowledgement.
-
-##### `TEST:CORE:C03:004` — Requirement: `REQ:CORE:012`
-- **Task:** `TASK:CORE:006`
-- **AC:** `AC:CORE:C01:012`
-- **رفتارهای اتمی:** `REQ:CORE:012.B01`، `REQ:CORE:012.B02`، `REQ:CORE:012.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:004.P` — `POSITIVE`**
-  - Actor/Fixture: An approved async flow requires a reliable event after a local business update.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:012 and AC:CORE:C01:012; Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
-  - Action: Invoke the authorized fixture to commit the owner row and required Outbox envelope in one local transaction.
-  - Input: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
+... 388108 bytes omitted ...
+ one owner-local transaction; delivery acknowledgment is withheld.
   - Observable Oracle: The committed local row and its outbox entry are both present; after publisher recovery event-41 is delivered and one consumer effect is recorded.
   - Expected State Change: Before: record-41 and event-41 are absent from the owner transaction. After: both are committed atomically; recovery delivers event-41 and the consumer effect count is exactly one.
   - Side-effect Invariant: No distributed transaction is introduced and no necessary event is lost.
@@ -4257,6 +4234,19 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | کشف مشترک | C11b: زیرگراف Wallet §۶.۷ و §۶.۸، W:1081–1155، ۳۸ واحد `SU-W-00570..00607`؛ پیوند `CAND:C02:033` در W:284 فقط برای مرز مالکیت سازمانی. C12a: ۵۹ واحد مستقیم W:1161–1277، `SU-W-00610..00668`، به‌علاوهٔ نامزدهای صریح Blueprint و Handoffهای پذیرفته‌شدهٔ C01–C11a. بازه‌های مجاور §۸ به‌عنوان مرز تطبیق/بازیابی C12b و کنترل دسترسی C02 بررسی شدند، نه الزام تکراری C12a. |
 | جست‌وجوی متنی مستقل | عبارت‌های دفترکل، توازن، اتمیک، تغییرناپذیر، اصلاح جبرانی، شناسه، تکرار امن، رزرو/قطعی‌سازی، هم‌زمانی، زنجیره منشأ و عملیات دوره‌ای در هر دو سند جست‌وجو و به متن منبع بازگشت داده شدند. یافتهٔ گراف و بازبینی مستقیم در Candidate Register جدا مشخص است. |
 | محدودیت گراف | گراف راهنمای کشف و مسیریابی است، نه رجیستری بسته یا مرجع مصوبه. واحدهای G1 بدون متن حکم یا وضعیت مصوبه به Requirement ارتقا نیافتند. فناوری ledger، سرویس مستقل، DB/schema، API، provider، اعداد عملیاتی و سیاست حسابداریِ باز انتخاب نشدند. |
+
+#### رجیستری منطقی مشترک Candidateهای C11b/C12a
+
+این نمای واحد، تمام Candidateهای کشف‌شده را با مرز بسته، مالک رفتار/داده/قرارداد و disposition نهایی به هم وصل می‌کند؛ شناسه‌های جزئی و شاهد هر واحد در رجیستری هر بسته پایین‌تر آمده‌اند. بازهٔ Source Unit در شمارش، هر واحد را جداگانه نگه می‌دارد.
+
+| Candidate / Source | بسته‌های مرتبط | مالک موجود/قرارداد بازیافتی | مالک نهایی رفتار / داده / قرارداد | Disposition |
+|---|---|---|---|---|
+| `SU-W-00570..00607` (۳۸ واحد)، W:1081–1155 | C11b؛ C08؛ C09؛ C12a؛ C12b؛ C02؛ C03 | C02: اختیار/عضویت؛ C03: Job/event/idempotency؛ C08: وصول؛ C09: رزرو | C11b: trigger، زمان‌بندی، لغو و سقف مصرف؛ C12a: ثبت یکتای اثر؛ C12b: نتیجهٔ نامعلوم بانک | ۹ Requirement جدید C11b؛ سایر قراردادها بازیافت/Handoff/OPEN؛ بدون Requirement ledger تکراری |
+| `CAND:C02:033`، W:284، و Handoffهای C10/C11a | C02؛ C10؛ C11a؛ C11b؛ C07 | C02: اختیار و بودجه عضو؛ C10/C11a: انتقال/اصلاح | C11b: مصرف دوره‌ای و اثر ظرفیت همان دوره؛ C07: حقوق اعتبار | مرزی بازیافتی/Handoff؛ مالکیت یا Requirement قبلی بازنویسی نشد |
+| `SU-W-00610..00668` (۵۹ واحد)، W:1161–1277 | C12a؛ C07؛ C08–C11b؛ C02؛ C03؛ C12b؛ C13a؛ C13b؛ C14 | C01/C03: مالکیت داده و event envelope؛ C07: منشأ/حقوق؛ C09–C11a: intent هر عملیات | C12a: account/ledger, invariants, lineage, idempotency و reference؛ هر domain مبدا: رفتار؛ C12b: inquiry/reconciliation | ۱۱ Requirement جدید C12a؛ قراردادهای مشترک بازیافت؛ موارد باز و Handoff ثبت شدند |
+| Blueprint B:1056 و B:1702–1708 (۸ واحد بین‌سندی) | C12a؛ C12b؛ C13a؛ C01/C03 | C01/C03: قرارداد؛ C12b: تطبیق؛ C13a: حسابداری/صورتحساب | C12a: دفترکل و اثر مالی؛ C12b: نتیجه/بازیابی؛ C13a: نگاشت حسابداری | Candidateهای بین‌سندی به Requirementهای C12a، Handoff یا OPEN؛ پیشنهاد بررسی فنی به الزام اجرایی تبدیل نشد |
+
+**نتیجه رجیستری مشترک:** ۱۰۶ Candidate در دو دامنهٔ جاری (۳۹ برای C11b و ۶۷ برای C12a)، با ۲۰ Requirement جدید مستقل. Requirement مشترک تکراری صفر؛ هم‌پوشانی قراردادی با ارجاع به مالک اصلی مدیریت شد.
 
 ### C11b — عملیات دوره‌ای و محدودیت‌ها
 
