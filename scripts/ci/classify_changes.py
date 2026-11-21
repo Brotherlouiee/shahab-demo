@@ -37,16 +37,53 @@ def main() -> int:
     force_full = os.environ.get("FORCE_FULL", "").casefold() in {"1", "true", "yes"}
 
     paths: list[str]
-    if force_full or not base or not head or set(base) == {"0"}:
+    is_pull_request = os.environ.get("GITHUB_EVENT_NAME", "").casefold() == "pull_request"
+
+    if force_full or not head or set(head) == {"0"}:
         paths = ["<full-run>"]
     else:
-        fetched = run("git", "fetch", "--no-tags", "--depth=1", "origin", base)
-        diff = run("git", "diff", "--name-only", "--no-renames", base, head)
-        if fetched.returncode or diff.returncode:
-            print("::warning::Could not classify changed files; running all relevant jobs.")
+        if is_pull_request:
+            # Long-lived PR event payloads can carry an old base.sha. Fetch the
+            # current target branch instead; GitHub's PR merge commit includes
+            # that target snapshot plus this PR's changes.
+            base_ref = os.environ.get("GITHUB_BASE_REF", "").strip()
+            if base_ref:
+                base = f"refs/remotes/origin/{base_ref}"
+                fetched = run(
+                    "git",
+                    "fetch",
+                    "--no-tags",
+                    "--depth=1",
+                    "origin",
+                    f"refs/heads/{base_ref}:{base}",
+                )
+            else:
+                fetched = subprocess.CompletedProcess(
+                    args=["git", "fetch"],
+                    returncode=1,
+                    stdout="",
+                    stderr="GITHUB_BASE_REF is unavailable",
+                )
+        elif base:
+            fetched = run("git", "fetch", "--no-tags", "--depth=1", "origin", base)
+        else:
+            fetched = subprocess.CompletedProcess(
+                args=["git", "fetch"],
+                returncode=1,
+                stdout="",
+                stderr="BASE_SHA is unavailable",
+            )
+
+        compare_ref = base if base else ""
+        if fetched.returncode or not compare_ref:
             paths = ["<classification-failed>"]
         else:
-            paths = [line for line in diff.stdout.splitlines() if line]
+            diff = run("git", "diff", "--name-only", "--no-renames", compare_ref, head)
+            if diff.returncode:
+                print("::warning::Could not classify changed files; running all relevant jobs.")
+                paths = ["<classification-failed>"]
+            else:
+                paths = [line for line in diff.stdout.splitlines() if line]
 
     docs_only = bool(paths) and all(is_document(path) for path in paths)
     full_product = not docs_only
