@@ -5882,15 +5882,6 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 **شمارنده:** رجیستری 36 واحد مستقل را نشان می‌دهد؛ 16/36 پذیرفته و 20/36 باقی‌مانده‌اند. Core/Wallet=16/18 (C13b و C14 مانده)، RAG/Adviser=0/10، Assistant=0/8. وضعیت محصول NOT_IMPLEMENTED / NOT_EXECUTED.
 
-#### SHAHAB_PHASE2_NEXT_MISSION_HANDOFF
-
-- **هویت پروژه:** Brotherlouiee/shahab-demo؛ PR #251؛ branch docs/phase2-unified-implementation-plan؛ base main؛ سند docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md. در checkpoint بازبینی پیش از این Commit، HEAD برابر 693b8108d15595e1fb8d790989a1bea7fe08bb6b بود؛ HEAD جاری را چت بعدی از PR بخواند.
-- **منابع حاکم و هش‌های تأییدشده:** Blueprint V1.6، ۲٬۵۵۰ خط، SHA-256 0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266؛ Wallet V0.20، ۱٬۷۸۰ خط، SHA-256 8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74؛ هش‌ها از Blobهای main محاسبه و با Graph Report تطبیق داده شدند. گراف knowledge-graph/phase2-reference-docs: validation PASS، ۱٬۱۸۰ node، ۱٬۳۴۵ edge، ۲۲ chunk؛ بازسازی/تغییر نشد. AGENTS.md و docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md از main خوانده شدند؛ PR #253 و #255 Merge و تغییراتشان در main تأیید شد.
-- **وضعیت برنامه:** ۳۶ واحد مستقل؛ ۱۶ پذیرفته و ۲۰ باقی؛ C12b و C13a هر دو RA/IPA PASS؛ CPA-01..08 PASS. تصمیم‌های باز: cut/فرمول/SLA/حدود Retry؛ metric و نرخ عددی؛ Monitoring؛ نوع سند و درآمد/مالیات؛ provider و فعال‌سازی.
-- **مأموریت بعدی:** C13b — تجربه و پشتیبانی کیف پول، سپس C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک؛ هر دو در رجیستری NOT_STARTED و بدون blocker ثبت‌شده‌اند. عنوان/وضعیت و وابستگی‌ها را چت بعدی دوباره از رجیستری احراز کند.
-- **Git و CI:** Commitهای مأموریت تا checkpoint بازبینی: 35cb324a1e018a67da87ed76f18381a8838dc1e1 (تدوین دو بسته) و 693b8108d15595e1fb8d790989a1bea7fe08bb6b (تکمیل جدول‌های AC/Test). این Commit سوم فقط شناسه‌های Test Definition را از شناسه Task جدا و Handoff را با شواهد تکمیل می‌کند؛ SHA آن از تاریخچه PR قابل مشاهده است. Diff فقط سند Markdown است. CI روی 693b8108: Classification/Markdown و secret scan PASS؛ Quality، PostgreSQL، Browser، SAST/SCA، Container و US-13 SKIPPED؛ Redis/Trivy NOT_TRIGGERED. پس از این Commit، CI جاری را از HEAD جدید بخوان. Build/Product Test اجرا نشد؛ هیچ Workflow دستی rerun نشد.
-- **درس‌آموخته:** fetch_file برای سند حجیم محتوای خالی برگرداند؛ Blob با SHA از Git Tree خوانده و طول/خطوط کنترل شد. پاسخ خالی ابزار را نبود فایل تلقی نکن؛ متن کامل، ساختار Git و هش ریموت را جداگانه کنترل کن.
-
 ### C13b — تجربه و پشتیبانی کیف پول
 
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. هیچ Requirement، Story/Enabler، Task، Subtask، AC یا Test برای این بسته در این نسخه مصوب نیست. در مرحله تدوین همین بسته، احکام اختصاصی دو سند مرجع در همین بخش استخراج، اتمی، ردیابی و پس از تأیید ثبت می‌شوند؛ Handoffهای C01 تا C03 باید بررسی شوند.
