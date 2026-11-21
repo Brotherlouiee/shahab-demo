@@ -4777,44 +4777,6 @@ IPA روی 16/16 الزام اجرا شد: هرکدام Story/Task/Subtask/AC/Te
 | CAN:C07:034 خاتمه بدون حذف طلب نقدی | W:449 | — | C07 | C12b/C13a | C07 rule / C12b/C13a execution | REQ جدید |
 | CAN:C07:035 بدهی/هزینه تأمین‌کننده تعهد شهاب است | W:393 | — | C07 | — | C13a | Handoff؛ تعهد تأمین‌کننده در مدل درآمد/تسویه |
 
-| Candidate | Source | Package A | Package B | Existing Owner | Final Owner | Disposition |
-|---|---|---|---|---|---|---|
-| CAN:C07:001 wallet شخصی اصلی | W:136 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:002 wallet سازمانی اصلی و مالکیت سازمان | W:136 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:003 تمایز wallet نمایشی از ledger | W:138 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:004 حساب‌های داخلی تفکیک‌شده | W:138 | Package B | — | C12a | C12a | Handoff؛ مدل فیزیکی در C12a |
-| CAN:C07:005 موجودی عمومی بی‌برچسب خدمت | B:1025/W:51 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:006 پول مصرف‌نشده تعهد مشتری است | W:379 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:007 تفکیک بدهی از درآمد خدمات | W:379 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:008 تفکیک مالک سازمان از کارمند سازنده حساب | W:136 | Package B | — | C07/C02 | C07/C02 | REQ + dependency |
-| CAN:C07:009 بُعد مالکیت شخص/سازمان مستقل از منشأ | W:393 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:010 تفکیک نقدی/تبلیغاتی/سازمانی از درآمد | W:393 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:011 عدم دوباره‌شماری کیف سازمانی و اجزای منشأ | W:393 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:012 پوشش وجه مشتری جدا از هزینه جاری | W:405 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:013 عدم فرض حساب بانکی شخصی/امانی | W:405 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:014 تفکیک مسئولیت بانک و شهاب | W:419 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:015 مسئول پیگیری تطبیق/مشکل مشتری | W:419 | Package B | — | C12b | C12b | Handoff |
-| CAN:C07:016 مدل مصرف داخلی بدون پذیرنده مستقل | W:435 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:017 عدم ادعای معافیت قانونی قطعی | W:435 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:018 حق برداشت شارژ نقدی واجدشرایط | W:467 | Package B | — | C07/C10 | C07/C10 | REQ + dependency |
-| CAN:C07:019 هدیه خرج‌پذیر ولی غیرقابل برداشت | W:467 | Package B | — | C07/C08 | C07/C08 | REQ + dependency |
-| CAN:C07:020 اعتبار دریافتی غیرقابل برداشت | W:471 | Package B | — | C07/C10 | C07/C10 | REQ + dependency |
-| CAN:C07:021 انتقال عادی حق برداشت ایجاد نکند | W:471 | Package B | — | C07/C10 | C07/C10 | REQ + dependency |
-| CAN:C07:022 حفظ منشأ در ثبت داخلی | W:475 | Package B | — | C07/C12a | C07/C12a | REQ + dependency |
-| CAN:C07:023 نقدی و نقدی انتقال‌یافته بی‌انقضا | W:485 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:024 مهلت هدیه پس از انتقال حفظ شود | W:485 | Package B | — | C07/C08/C10 | C07/C08/C10 | REQ + dependency |
-| CAN:C07:025 فعال‌سازی کد و انقضای اعتبار جدا | W:485 | Package B | — | C08 | C08 | Handoff |
-| CAN:C07:026 مانده قطعی از pending جدا | W:499 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:027 رزروشده از قابل‌مصرف جدا | W:499 | Package B | — | C07/C09 | C07/C09 | REQ + dependency |
-| CAN:C07:028 قابل‌برداشت از قابل‌انتقال جدا | W:499 | Package B | — | C07 | C07 | REQ جدید |
-| CAN:C07:029 ورودی pending تا تایید خرج‌پذیر نیست | W:508 | Package B | — | C07/C08 | C07/C08 | REQ + dependency |
-| CAN:C07:030 موفقیت مرورگر مرجع تایید نیست | W:508 | Package B | — | C07/C08 | C07/C08 | REQ + dependency |
-| CAN:C07:031 ترتیب مصرف طبق منشأ/انقضا | W:524–530 | Package B | — | C07/C09 | C07/C09 | REQ + dependency |
-| CAN:C07:032 سقف/محدودیت بر ترتیب مصرف مقدم | W:530 | Package B | — | C07/C09 | C07/C09 | REQ + dependency |
-| CAN:C07:033 ثبت ریالی صحیح و نمایش تومان | W:544 | Package B | — | C07/C12a | C07/C12a | REQ + dependency |
-| CAN:C07:034 گردکردن هزینه تجمعی نیم به بالا | W:558 | Package B | — | C07/C09 | C07/C09 | REQ + dependency |
-| CAN:C07:035 خاتمه بدون حذف طلب نقدی | W:449 | Package B | — | C07/C12b/C13a | C07/C12b/C13a | REQ + handoff | زمان و مخرج مستقل Precision/Coverage موجود نیست: NOT_MEASURED.
-
 #### Requirements اتمی
 
 | Requirement | شاهد/وضعیت | الزام | Task | AC/Test |
