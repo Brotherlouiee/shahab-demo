@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R04.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R04 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R06.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R06 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -20,9 +20,9 @@
 | دامنه | بسته‌ها | تعداد | وضعیت |
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
-| RAG / Adviser | R01–R10 | 10 | R01–R04 پذیرفته؛ R05–R10 در انتظار |
+| RAG / Adviser | R01–R10 | 10 | R01–R06 پذیرفته؛ R07–R10 در انتظار |
 | Assistant | A01–A08 | 8 | NOT_STARTED |
-| کل | ۳۶ بسته | 36 | ۲۲ پذیرفته‌شده؛ ۱۴ در انتظار |
+| کل | ۳۶ بسته | 36 | ۲۴ پذیرفته‌شده؛ ۱۲ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -49,8 +49,8 @@
 | R02 | دسترسی کنترل‌شده به منابع و ورود تقاضامحور دانش | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R03 | مخزن دانش، هویت و نسخه، Lineage و انتشار Snapshot | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R04 | کشف منبع و کاتالوگ فراداده | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| R05 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
-| R06 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| R05 | بازیابی چندمرحله‌ای و سنجش کفایت شواهد | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
+| R06 | تجمیع پاسخ، Citation Guard و ارزیابی کیفیت Adviser | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R07 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R08 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R09 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -1502,3242 +1502,9 @@
 - **شرط/استثنا:** Role change requires an explicit user action; permissions are reevaluated for the new role. / Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.
 - **رفتارهای اتمی:** `REQ:CORE:090.B01` تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.
 - **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:041`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:090 ('تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:090: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.؛ Then: The authoritative Core state enforces this exact clause: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-090 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:090 under this exact counterexample: Remove the single required predicate stated by (Role change requires an explicit user action; permissions are reevaluated for the new role) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-090: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد. Expected denial/no prohibited transition for c02-fixture-090. Read back the authoritative state and verify the clause-specific result: Role change requires an explicit user action; permissions are reevaluated for the new role. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Role change requires an explicit user action; permissions are reevaluated for the new role.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:090 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-090 against the single boundary variation. Paired synthetic inputs for c02-fixture-090: baseline values satisfy (Role change requires an explicit user action; permissions are reevaluated for the new role.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Role change requires an explicit user action; permissions are reevaluated for the new role. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-090, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Role change requires an explicit user action; permissions are reevaluated for the new role.
-- **Test `TEST:CORE:C02:041`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 90: compare the exact allowed/denied source behavior (تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:041.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:090 using fixture c02-fixture-090. The precondition fixture is configured from the accepted condition: Role change requires an explicit user action; permissions are reevaluated for the new role. Synthetic request fixture c02-fixture-090: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.; required state/predicates=Role change requires an explicit user action; permissions are reevaluated for the new role.; exception/gate context=Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد. Expected persisted decision/state for fixture c02-fixture-090: Read back the authoritative state and verify the clause-specific result: Role change requires an explicit user action; permissions are reevaluated for the new role. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Role change requires an explicit user action; permissions are reevaluated for the new role.
-  - `TEST:CORE:C02:041.N` (NEGATIVE): With fixture c02-fixture-090 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:090 under this exact counterexample: Remove the single required predicate stated by (Role change requires an explicit user action; permissions are reevaluated for the new role) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-090: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد. Expected denial/no prohibited transition for c02-fixture-090. Read back the authoritative state and verify the clause-specific result: Role change requires an explicit user action; permissions are reevaluated for the new role. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Role change requires an explicit user action; permissions are reevaluated for the new role.
-  - `TEST:CORE:C02:041.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:090 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-090 against the single boundary variation. Paired synthetic inputs for c02-fixture-090: baseline values satisfy (Role change requires an explicit user action; permissions are reevaluated for the new role.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Role change requires an explicit user action; permissions are reevaluated for the new role. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-090, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Role change requires an explicit user action; permissions are reevaluated for the new role.
-
-##### `REQ:CORE:091` — نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.
-- **مرجع:** B:1414:1414
-- **Source Unit:** `SU-B-00685`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:091.B01` نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:042`**؛ Task: `TASK:CORE:C02:004`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.؛ Then: نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:042`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:042.P` (POSITIVE): Provide the exact authorized preconditions for نشست به دامنه، نقش، هویت مشتری، پلن، ابزار مجاز و سیاست داده مقید شود؛ تغییر حوزه فقط با اقدام صریح و ایجاد یا انتقال کنترل‌شده نشست انجام شود.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:042.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:042.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:092` — پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.
-- **مرجع:** B:1441:1441
-- **Source Unit:** `SU-B-00687`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. / Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.
-- **رفتارهای اتمی:** `REQ:CORE:092.B01` پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:043`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:092 ('پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:092: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.؛ Then: The authoritative Core state enforces this exact clause: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-092 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:092 under this exact counterexample: Remove the single required predicate stated by (Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-092: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند. Expected denial/no prohibited transition for c02-fixture-092. Read back the authoritative state and verify the clause-specific result: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:092 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-092 against the single boundary variation. Paired synthetic inputs for c02-fixture-092: baseline values satisfy (Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.); boundary input changes only the named condition or exception (Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-092; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.
-- **Test `TEST:CORE:C02:043`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 92: compare the exact allowed/denied source behavior (پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:043.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:092 using fixture c02-fixture-092. The precondition fixture is configured from the accepted condition: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Synthetic request fixture c02-fixture-092: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.; required state/predicates=Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.; exception/gate context=Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند. Expected persisted decision/state for fixture c02-fixture-092: Read back the authoritative state and verify the clause-specific result: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.
-  - `TEST:CORE:C02:043.N` (NEGATIVE): With fixture c02-fixture-092 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:092 under this exact counterexample: Remove the single required predicate stated by (Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-092: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند. Expected denial/no prohibited transition for c02-fixture-092. Read back the authoritative state and verify the clause-specific result: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.
-  - `TEST:CORE:C02:043.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:092 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-092 against the single boundary variation. Paired synthetic inputs for c02-fixture-092: baseline values satisfy (Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.); boundary input changes only the named condition or exception (Explicit source limitation: پیشنهاد مدل ورودی تصمیم است؛ Backend پیش از ایجاد نشست یا اجرای ابزار مقصد، وضعیت انتشار، نقش، توان واقعی و مجوز را کنترل کند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-092; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Backend checks release status, role, actual capability and permission before creating a session or invoking a target tool.
-
-##### `REQ:CORE:093` — تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.
-- **مرجع:** B:1443:1443
-- **Source Unit:** `SU-B-00688`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. / Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.
-- **رفتارهای اتمی:** `REQ:CORE:093.B01` تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:044`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:093 ('تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:093: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.؛ Then: The authoritative Core state enforces this exact clause: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-093 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:093 under this exact counterexample: Attempt the exact prohibited condition in (Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-093: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد. Expected denial/no prohibited transition for c02-fixture-093. Read back the authoritative state and verify the clause-specific result: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:093 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-093 against the single boundary variation. Paired synthetic inputs for c02-fixture-093: baseline values satisfy (Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-093, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.
-- **Test `TEST:CORE:C02:044`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 93: compare the exact allowed/denied source behavior (تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:044.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:093 using fixture c02-fixture-093. The precondition fixture is configured from the accepted condition: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Synthetic request fixture c02-fixture-093: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.; required state/predicates=Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.; exception/gate context=Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد. Expected persisted decision/state for fixture c02-fixture-093: Read back the authoritative state and verify the clause-specific result: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.
-  - `TEST:CORE:C02:044.N` (NEGATIVE): With fixture c02-fixture-093 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:093 under this exact counterexample: Attempt the exact prohibited condition in (Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-093: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد. Expected denial/no prohibited transition for c02-fixture-093. Read back the authoritative state and verify the clause-specific result: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.
-  - `TEST:CORE:C02:044.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:093 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-093 against the single boundary variation. Paired synthetic inputs for c02-fixture-093: baseline values satisfy (Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر نقش مجوز نقش پیشین را منتقل نکند؛ داده خارجی بازیابی‌شده حق تغییر حوزه یا مجوز ندارد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-093, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Role switch does not inherit prior-role permissions; retrieved external data cannot change scope or authorization.
-
-##### `REQ:CORE:094` — مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.
-- **مرجع:** B:1688:1688
-- **Source Unit:** `SU-B-00761`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Permission is bound simultaneously to customer, domain, service, session, action type and validity window. / Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.
-- **رفتارهای اتمی:** `REQ:CORE:094.B01` مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:045`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:094 ('مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:094: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.؛ Then: The authoritative Core state enforces this exact clause: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-094 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:094 under this exact counterexample: Remove the single required predicate stated by (Permission is bound simultaneously to customer, domain, service, session, action type and validity window) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-094: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود. Expected denial/no prohibited transition for c02-fixture-094. Read back the authoritative state and verify the clause-specific result: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Permission is bound simultaneously to customer, domain, service, session, action type and validity window.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:094 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-094 against the single boundary variation. Paired synthetic inputs for c02-fixture-094: baseline values satisfy (Permission is bound simultaneously to customer, domain, service, session, action type and validity window.); boundary input changes only the named condition or exception (Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-094; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Permission is bound simultaneously to customer, domain, service, session, action type and validity window.
-- **Test `TEST:CORE:C02:045`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 94: compare the exact allowed/denied source behavior (مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:045.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:094 using fixture c02-fixture-094. The precondition fixture is configured from the accepted condition: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Synthetic request fixture c02-fixture-094: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.; required state/predicates=Permission is bound simultaneously to customer, domain, service, session, action type and validity window.; exception/gate context=Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود. Expected persisted decision/state for fixture c02-fixture-094: Read back the authoritative state and verify the clause-specific result: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Permission is bound simultaneously to customer, domain, service, session, action type and validity window.
-  - `TEST:CORE:C02:045.N` (NEGATIVE): With fixture c02-fixture-094 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:094 under this exact counterexample: Remove the single required predicate stated by (Permission is bound simultaneously to customer, domain, service, session, action type and validity window) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-094: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود. Expected denial/no prohibited transition for c02-fixture-094. Read back the authoritative state and verify the clause-specific result: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Permission is bound simultaneously to customer, domain, service, session, action type and validity window.
-  - `TEST:CORE:C02:045.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:094 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-094 against the single boundary variation. Paired synthetic inputs for c02-fixture-094: baseline values satisfy (Permission is bound simultaneously to customer, domain, service, session, action type and validity window.); boundary input changes only the named condition or exception (Explicit source limitation: مجوز به مشتری، حوزه، خدمت، نشست، نوع عمل و بازه زمانی محدود شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Permission is bound simultaneously to customer, domain, service, session, action type and validity window. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-094; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Permission is bound simultaneously to customer, domain, service, session, action type and validity window.
-
-##### `REQ:CORE:095` — مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.
-- **مرجع:** B:1688:1688
-- **Source Unit:** `SU-B-00761`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:095.B01` مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:046`**؛ Task: `TASK:CORE:C02:004`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.؛ Then: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:046`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:046.P` (POSITIVE): Provide the exact authorized preconditions for مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است؛ فقط فیلد ضروری برای مقصد تخصصی، هدف و اعتبار زمانی مشخص با کنترل Backend منتقل شود؛ انتقال تاریخچه کامل و دسترسی سراسری ممنوع است.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:046.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:046.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:096` — ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.
-- **مرجع:** B:1689:1689
-- **Source Unit:** `SU-B-00762`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. / Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.
-- **رفتارهای اتمی:** `REQ:CORE:096.B01` ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:047`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:096 ('ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:096: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.؛ Then: The authoritative Core state enforces this exact clause: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-096 and actor synthetic customer, attempt operation REQ:CORE:096 under this exact counterexample: Attempt the exact prohibited condition in (Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-096: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست. Expected denial/no prohibited transition for c02-fixture-096. Read back the authoritative state and verify the clause-specific result: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:096 with actor synthetic customer; compare the valid fixture c02-fixture-096 against the single boundary variation. Paired synthetic inputs for c02-fixture-096: baseline values satisfy (Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.); boundary input changes only the named condition or exception (Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-096, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.
-- **Test `TEST:CORE:C02:047`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 96: compare the exact allowed/denied source behavior (ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:047.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:096 using fixture c02-fixture-096. The precondition fixture is configured from the accepted condition: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Synthetic request fixture c02-fixture-096: actor=synthetic customer; operation=ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.; required state/predicates=Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.; exception/gate context=Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست. Expected persisted decision/state for fixture c02-fixture-096: Read back the authoritative state and verify the clause-specific result: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.
-  - `TEST:CORE:C02:047.N` (NEGATIVE): With fixture c02-fixture-096 and actor synthetic customer, attempt operation REQ:CORE:096 under this exact counterexample: Attempt the exact prohibited condition in (Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-096: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست. Expected denial/no prohibited transition for c02-fixture-096. Read back the authoritative state and verify the clause-specific result: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.
-  - `TEST:CORE:C02:047.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:096 with actor synthetic customer; compare the valid fixture c02-fixture-096 against the single boundary variation. Paired synthetic inputs for c02-fixture-096: baseline values satisfy (Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.); boundary input changes only the named condition or exception (Explicit source limitation: ارسال نهایی، تعهد، امضا، پرداخت و تغییر مؤثر تأیید صریح متناسب می‌خواهند؛ تأیید کلی اولیه کافی نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-096, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Initial blanket approval is insufficient for final submission, obligation, signature, payment or consequential change.
-
-##### `REQ:CORE:097` — رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.
-- **مرجع:** B:1690:1690
-- **Source Unit:** `SU-B-00763`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:097.B01` رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:048`**؛ Task: `TASK:CORE:C02:004`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.؛ Then: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:048`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:048.P` (POSITIVE): Provide the exact authorized preconditions for رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، RAG، لاگ مکالمه یا عامل کشف منتقل نشوند؛ نشست‌ها رمزنگاری، محدود و منقضی شوند.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:048.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:048.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:098` — رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.
-- **مرجع:** B:1691:1691
-- **Source Unit:** `SU-B-00764`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. / Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.
-- **رفتارهای اتمی:** `REQ:CORE:098.B01` رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:049`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:098 ('رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:098: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.؛ Then: The authoritative Core state enforces this exact clause: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-098 and actor synthetic customer, attempt operation REQ:CORE:098 under this exact counterexample: Attempt the exact prohibited condition in (Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-098: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست. Expected denial/no prohibited transition for c02-fixture-098. Read back the authoritative state and verify the clause-specific result: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:098 with actor synthetic customer; compare the valid fixture c02-fixture-098 against the single boundary variation. Paired synthetic inputs for c02-fixture-098: baseline values satisfy (Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.); boundary input changes only the named condition or exception (Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-098, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.
-- **Test `TEST:CORE:C02:049`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: REQ 98: compare the exact allowed/denied source behavior (رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:049.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:098 using fixture c02-fixture-098. The precondition fixture is configured from the accepted condition: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Synthetic request fixture c02-fixture-098: actor=synthetic customer; operation=رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.; required state/predicates=Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.; exception/gate context=Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست. Expected persisted decision/state for fixture c02-fixture-098: Read back the authoritative state and verify the clause-specific result: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.
-  - `TEST:CORE:C02:049.N` (NEGATIVE): With fixture c02-fixture-098 and actor synthetic customer, attempt operation REQ:CORE:098 under this exact counterexample: Attempt the exact prohibited condition in (Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-098: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست. Expected denial/no prohibited transition for c02-fixture-098. Read back the authoritative state and verify the clause-specific result: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.
-  - `TEST:CORE:C02:049.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:098 with actor synthetic customer; compare the valid fixture c02-fixture-098 against the single boundary variation. Paired synthetic inputs for c02-fixture-098: baseline values satisfy (Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.); boundary input changes only the named condition or exception (Explicit source limitation: رضایت مشتری مجوز دورزدن CAPTCHA، ضدربات، احراز هویت یا سیاست ارائه‌دهنده نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-098, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Customer consent cannot bypass CAPTCHA, anti-bot, authentication, or provider policy.
-
-##### `REQ:CORE:099` — هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.
-- **مرجع:** B:1693:1693
-- **Source Unit:** `SU-B-00766`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:099.B01` هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:050`**؛ Task: `TASK:CORE:C02:004`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.؛ Then: هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:050`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:050.P` (POSITIVE): Provide the exact authorized preconditions for هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان، نتیجه و شواهد حداقلیِ فاقد داده حساس داشته باشد.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:050.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:050.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:100` — برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.
-- **مرجع:** W:1317:1317
-- **Source Unit:** `SU-W-00688`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:100.B01` برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:051`**؛ Task: `TASK:CORE:C02:005`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.؛ Then: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:051`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:051.P` (POSITIVE): Provide the exact authorized preconditions for برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:051.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:051.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:101` — مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:101.B01` مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:052`**؛ Task: `TASK:CORE:C02:005`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.؛ Then: مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:052`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:052.P` (POSITIVE): Provide the exact authorized preconditions for مشاهده و خروجی سوابق مالی فقط برای اشخاص مجاز و همراه ثبت سابقه دسترسی باشد؛ این کنترل پس از خروج عضو یا بستن حساب هم برقرار است.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:052.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:052.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:102` — OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.
-- **مرجع:** W:1355:1355
-- **Source Unit:** `SU-W-00707`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:102.B01` OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:053`**؛ Task: `TASK:CORE:C02:005`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.؛ Then: OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
-- **Test `TEST:CORE:C02:053`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:053.P` (POSITIVE): Provide the exact authorized preconditions for OTP و شاهکار برای تمام وضعیت‌های استثنایی کافی فرض نشود؛ ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک گواهی انطباق نیست.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
-  - `TEST:CORE:C02:053.N` (NEGATIVE): Repeat with wrong organization/actor, stale or revoked authority, unknown identity result, missing consent, or unmet legal/plan gate as applicable; reject before protected side effect and disclose no protected data.
-  - `TEST:CORE:C02:053.B` (BOUNDARY_OR_CONCURRENCY): Race revocation/scope change or submit duplicate cross-tenant requests; no stale authorization or cross-scope result is accepted.
-
-##### `REQ:CORE:103` — خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.
-- **مرجع:** W:1529:1529
-- **Source Unit:** `SU-W-00794`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Organizational export is admin-only and excludes other organizations and members. / Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.
-- **رفتارهای اتمی:** `REQ:CORE:103.B01` خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:003`
-- **AC `AC:CORE:C02:054`**؛ Task: `TASK:CORE:C02:003`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:103 ('خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.'), using synthetic identities and the owning task boundary: Tenant-scoped actor authorization.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:103: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.؛ Then: The authoritative Core state enforces this exact clause: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-103 and actor synthetic organization admin, attempt operation REQ:CORE:103 under this exact counterexample: Keep all positive predicates of (Organizational export is admin-only and excludes other organizations and members) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-103: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد. Expected denial/no prohibited transition for c02-fixture-103. Read back the authoritative state and verify the clause-specific result: Organizational export is admin-only and excludes other organizations and members. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Organizational export is admin-only and excludes other organizations and members.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:103 with actor synthetic organization admin; compare the valid fixture c02-fixture-103 against the single boundary variation. Paired synthetic inputs for c02-fixture-103: baseline values satisfy (Organizational export is admin-only and excludes other organizations and members.); boundary input changes only the named condition or exception (Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Organizational export is admin-only and excludes other organizations and members. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-103, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Organizational export is admin-only and excludes other organizations and members.
-- **Test `TEST:CORE:C02:054`**؛ Environment: Future isolated API and database test with synthetic organizations O/P and synthetic member/administrator accounts.؛ Oracle: REQ 103: compare the exact allowed/denied source behavior (خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:054.P` (POSITIVE): As synthetic organization admin, execute the single operation described by REQ:CORE:103 using fixture c02-fixture-103. The precondition fixture is configured from the accepted condition: Organizational export is admin-only and excludes other organizations and members. Synthetic request fixture c02-fixture-103: actor=synthetic organization admin; operation=خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.; required state/predicates=Organizational export is admin-only and excludes other organizations and members.; exception/gate context=Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد. Expected persisted decision/state for fixture c02-fixture-103: Read back the authoritative state and verify the clause-specific result: Organizational export is admin-only and excludes other organizations and members. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Organizational export is admin-only and excludes other organizations and members.
-  - `TEST:CORE:C02:054.N` (NEGATIVE): With fixture c02-fixture-103 and actor synthetic organization admin, attempt operation REQ:CORE:103 under this exact counterexample: Keep all positive predicates of (Organizational export is admin-only and excludes other organizations and members) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-103: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد. Expected denial/no prohibited transition for c02-fixture-103. Read back the authoritative state and verify the clause-specific result: Organizational export is admin-only and excludes other organizations and members. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Organizational export is admin-only and excludes other organizations and members.
-  - `TEST:CORE:C02:054.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:103 with actor synthetic organization admin; compare the valid fixture c02-fixture-103 against the single boundary variation. Paired synthetic inputs for c02-fixture-103: baseline values satisfy (Organizational export is admin-only and excludes other organizations and members.); boundary input changes only the named condition or exception (Explicit source limitation: خروجی سازمانی فقط برای ادمین فراهم شود؛ شخص به اطلاعات سازمان دیگر یا سایر اعضا دسترسی نگیرد.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Organizational export is admin-only and excludes other organizations and members. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-103, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Organizational export is admin-only and excludes other organizations and members.
-
-##### `REQ:CORE:104` — رمز عبور بانکی ذخیره نمی‌شود.
-- **مرجع:** B:1156:1156
-- **Source Unit:** `SU-B-00556`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Bank password is never stored. / Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود.
-- **رفتارهای اتمی:** `REQ:CORE:104.B01` رمز عبور بانکی ذخیره نمی‌شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:055`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:104 ('رمز عبور بانکی ذخیره نمی‌شود.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:104: رمز عبور بانکی ذخیره نمی‌شود.؛ Then: The authoritative Core state enforces this exact clause: رمز عبور بانکی ذخیره نمی‌شود.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-104 and actor synthetic customer, attempt operation REQ:CORE:104 under this exact counterexample: Attempt the exact prohibited condition in (Bank password is never stored) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-104: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود. Expected denial/no prohibited transition for c02-fixture-104. Read back the authoritative state and verify the clause-specific result: Bank password is never stored. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Bank password is never stored.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:104 with actor synthetic customer; compare the valid fixture c02-fixture-104 against the single boundary variation. Paired synthetic inputs for c02-fixture-104: baseline values satisfy (Bank password is never stored.); boundary input changes only the named condition or exception (Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Bank password is never stored. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-104, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Bank password is never stored.
-- **Test `TEST:CORE:C02:055`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 104: compare the exact allowed/denied source behavior (رمز عبور بانکی ذخیره نمی‌شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:055.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:104 using fixture c02-fixture-104. The precondition fixture is configured from the accepted condition: Bank password is never stored. Synthetic request fixture c02-fixture-104: actor=synthetic customer; operation=رمز عبور بانکی ذخیره نمی‌شود.; required state/predicates=Bank password is never stored.; exception/gate context=Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود. Expected persisted decision/state for fixture c02-fixture-104: Read back the authoritative state and verify the clause-specific result: Bank password is never stored. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Bank password is never stored.
-  - `TEST:CORE:C02:055.N` (NEGATIVE): With fixture c02-fixture-104 and actor synthetic customer, attempt operation REQ:CORE:104 under this exact counterexample: Attempt the exact prohibited condition in (Bank password is never stored) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-104: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود. Expected denial/no prohibited transition for c02-fixture-104. Read back the authoritative state and verify the clause-specific result: Bank password is never stored. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Bank password is never stored.
-  - `TEST:CORE:C02:055.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:104 with actor synthetic customer; compare the valid fixture c02-fixture-104 against the single boundary variation. Paired synthetic inputs for c02-fixture-104: baseline values satisfy (Bank password is never stored.); boundary input changes only the named condition or exception (Explicit source limitation: رمز عبور بانکی ذخیره نمی‌شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Bank password is never stored. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-104, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Bank password is never stored.
-
-##### `REQ:CORE:105` — توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.
-- **مرجع:** B:1156:1156
-- **Source Unit:** `SU-B-00556`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Treat tokens/sessions as sensitive; minimize, encrypt and expire. / Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.
-- **رفتارهای اتمی:** `REQ:CORE:105.B01` توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:056`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:105 ('توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:105: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.؛ Then: The authoritative Core state enforces this exact clause: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-105 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:105 under this exact counterexample: Remove the single required predicate stated by (Treat tokens/sessions as sensitive; minimize, encrypt and expire) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-105: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند. Expected denial/no prohibited transition for c02-fixture-105. Read back the authoritative state and verify the clause-specific result: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Treat tokens/sessions as sensitive; minimize, encrypt and expire.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:105 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-105 against the single boundary variation. Paired synthetic inputs for c02-fixture-105: baseline values satisfy (Treat tokens/sessions as sensitive; minimize, encrypt and expire.); boundary input changes only the named condition or exception (Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-105; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Treat tokens/sessions as sensitive; minimize, encrypt and expire.
-- **Test `TEST:CORE:C02:056`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 105: compare the exact allowed/denied source behavior (توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:056.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:105 using fixture c02-fixture-105. The precondition fixture is configured from the accepted condition: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Synthetic request fixture c02-fixture-105: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.; required state/predicates=Treat tokens/sessions as sensitive; minimize, encrypt and expire.; exception/gate context=Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند. Expected persisted decision/state for fixture c02-fixture-105: Read back the authoritative state and verify the clause-specific result: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Treat tokens/sessions as sensitive; minimize, encrypt and expire.
-  - `TEST:CORE:C02:056.N` (NEGATIVE): With fixture c02-fixture-105 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:105 under this exact counterexample: Remove the single required predicate stated by (Treat tokens/sessions as sensitive; minimize, encrypt and expire) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-105: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند. Expected denial/no prohibited transition for c02-fixture-105. Read back the authoritative state and verify the clause-specific result: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Treat tokens/sessions as sensitive; minimize, encrypt and expire.
-  - `TEST:CORE:C02:056.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:105 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-105 against the single boundary variation. Paired synthetic inputs for c02-fixture-105: baseline values satisfy (Treat tokens/sessions as sensitive; minimize, encrypt and expire.); boundary input changes only the named condition or exception (Explicit source limitation: توکن و نشست داده حساس‌اند و حداقل‌سازی، رمزنگاری و انقضا می‌خواهند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Treat tokens/sessions as sensitive; minimize, encrypt and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-105; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Treat tokens/sessions as sensitive; minimize, encrypt and expire.
-
-##### `REQ:CORE:106` — مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.
-- **مرجع:** B:1156:1156
-- **Source Unit:** `SU-B-00556`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Identity documents and operation history require minimization, encryption, expiry, access control and audit. / Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.
-- **رفتارهای اتمی:** `REQ:CORE:106.B01` مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:057`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:106 ('مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:106: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.؛ Then: The authoritative Core state enforces this exact clause: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-106 and actor synthetic customer, attempt operation REQ:CORE:106 under this exact counterexample: Remove the single required predicate stated by (Identity documents and operation history require minimization, encryption, expiry, access control and audit) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-106: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند. Expected denial/no prohibited transition for c02-fixture-106. Read back the authoritative state and verify the clause-specific result: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Identity documents and operation history require minimization, encryption, expiry, access control and audit.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:106 with actor synthetic customer; compare the valid fixture c02-fixture-106 against the single boundary variation. Paired synthetic inputs for c02-fixture-106: baseline values satisfy (Identity documents and operation history require minimization, encryption, expiry, access control and audit.); boundary input changes only the named condition or exception (Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-106; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Identity documents and operation history require minimization, encryption, expiry, access control and audit.
-- **Test `TEST:CORE:C02:057`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 106: compare the exact allowed/denied source behavior (مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:057.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:106 using fixture c02-fixture-106. The precondition fixture is configured from the accepted condition: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Synthetic request fixture c02-fixture-106: actor=synthetic customer; operation=مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.; required state/predicates=Identity documents and operation history require minimization, encryption, expiry, access control and audit.; exception/gate context=Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند. Expected persisted decision/state for fixture c02-fixture-106: Read back the authoritative state and verify the clause-specific result: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Identity documents and operation history require minimization, encryption, expiry, access control and audit.
-  - `TEST:CORE:C02:057.N` (NEGATIVE): With fixture c02-fixture-106 and actor synthetic customer, attempt operation REQ:CORE:106 under this exact counterexample: Remove the single required predicate stated by (Identity documents and operation history require minimization, encryption, expiry, access control and audit) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-106: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند. Expected denial/no prohibited transition for c02-fixture-106. Read back the authoritative state and verify the clause-specific result: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Identity documents and operation history require minimization, encryption, expiry, access control and audit.
-  - `TEST:CORE:C02:057.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:106 with actor synthetic customer; compare the valid fixture c02-fixture-106 against the single boundary variation. Paired synthetic inputs for c02-fixture-106: baseline values satisfy (Identity documents and operation history require minimization, encryption, expiry, access control and audit.); boundary input changes only the named condition or exception (Explicit source limitation: مدارک هویتی و سوابق عملیات داده حساس‌اند و به حداقل‌سازی، رمزنگاری، انقضا، کنترل دسترسی و حسابرسی نیاز دارند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Identity documents and operation history require minimization, encryption, expiry, access control and audit. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-106; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Identity documents and operation history require minimization, encryption, expiry, access control and audit.
-
-##### `REQ:CORE:107` — پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.
-- **مرجع:** B:1412:1412
-- **Source Unit:** `SU-B-00684`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Session end cannot authorize data recovery from another domain. / Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.
-- **رفتارهای اتمی:** `REQ:CORE:107.B01` پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:058`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:107 ('پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:107: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.؛ Then: The authoritative Core state enforces this exact clause: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-107 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:107 under this exact counterexample: Attempt the exact prohibited condition in (Session end cannot authorize data recovery from another domain) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-107: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست. Expected denial/no prohibited transition for c02-fixture-107. Read back the authoritative state and verify the clause-specific result: Session end cannot authorize data recovery from another domain. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Session end cannot authorize data recovery from another domain.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:107 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-107 against the single boundary variation. Paired synthetic inputs for c02-fixture-107: baseline values satisfy (Session end cannot authorize data recovery from another domain.); boundary input changes only the named condition or exception (Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Session end cannot authorize data recovery from another domain. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-107; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Session end cannot authorize data recovery from another domain.
-- **Test `TEST:CORE:C02:058`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 107: compare the exact allowed/denied source behavior (پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:058.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:107 using fixture c02-fixture-107. The precondition fixture is configured from the accepted condition: Session end cannot authorize data recovery from another domain. Synthetic request fixture c02-fixture-107: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.; required state/predicates=Session end cannot authorize data recovery from another domain.; exception/gate context=Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست. Expected persisted decision/state for fixture c02-fixture-107: Read back the authoritative state and verify the clause-specific result: Session end cannot authorize data recovery from another domain. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Session end cannot authorize data recovery from another domain.
-  - `TEST:CORE:C02:058.N` (NEGATIVE): With fixture c02-fixture-107 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:107 under this exact counterexample: Attempt the exact prohibited condition in (Session end cannot authorize data recovery from another domain) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-107: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست. Expected denial/no prohibited transition for c02-fixture-107. Read back the authoritative state and verify the clause-specific result: Session end cannot authorize data recovery from another domain. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Session end cannot authorize data recovery from another domain.
-  - `TEST:CORE:C02:058.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:107 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-107 against the single boundary variation. Paired synthetic inputs for c02-fixture-107: baseline values satisfy (Session end cannot authorize data recovery from another domain.); boundary input changes only the named condition or exception (Explicit source limitation: پایان نشست مجوز بازیابی داده از حوزه دیگر نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Session end cannot authorize data recovery from another domain. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-107; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Session end cannot authorize data recovery from another domain.
-
-##### `REQ:CORE:108` — انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.
-- **مرجع:** B:1412:1412
-- **Source Unit:** `SU-B-00684`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Cross-domain context transfer needs target-specific permission and Backend enforcement. / Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.
-- **رفتارهای اتمی:** `REQ:CORE:108.B01` انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:059`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:108 ('انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:108: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.؛ Then: The authoritative Core state enforces this exact clause: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-108 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:108 under this exact counterexample: Remove the single required predicate stated by (Cross-domain context transfer needs target-specific permission and Backend enforcement) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-108: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود. Expected denial/no prohibited transition for c02-fixture-108. Read back the authoritative state and verify the clause-specific result: Cross-domain context transfer needs target-specific permission and Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Cross-domain context transfer needs target-specific permission and Backend enforcement.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:108 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-108 against the single boundary variation. Paired synthetic inputs for c02-fixture-108: baseline values satisfy (Cross-domain context transfer needs target-specific permission and Backend enforcement.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Cross-domain context transfer needs target-specific permission and Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-108, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Cross-domain context transfer needs target-specific permission and Backend enforcement.
-- **Test `TEST:CORE:C02:059`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 108: compare the exact allowed/denied source behavior (انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:059.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:108 using fixture c02-fixture-108. The precondition fixture is configured from the accepted condition: Cross-domain context transfer needs target-specific permission and Backend enforcement. Synthetic request fixture c02-fixture-108: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.; required state/predicates=Cross-domain context transfer needs target-specific permission and Backend enforcement.; exception/gate context=Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود. Expected persisted decision/state for fixture c02-fixture-108: Read back the authoritative state and verify the clause-specific result: Cross-domain context transfer needs target-specific permission and Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Cross-domain context transfer needs target-specific permission and Backend enforcement.
-  - `TEST:CORE:C02:059.N` (NEGATIVE): With fixture c02-fixture-108 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:108 under this exact counterexample: Remove the single required predicate stated by (Cross-domain context transfer needs target-specific permission and Backend enforcement) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-108: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود. Expected denial/no prohibited transition for c02-fixture-108. Read back the authoritative state and verify the clause-specific result: Cross-domain context transfer needs target-specific permission and Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Cross-domain context transfer needs target-specific permission and Backend enforcement.
-  - `TEST:CORE:C02:059.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:108 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-108 against the single boundary variation. Paired synthetic inputs for c02-fixture-108: baseline values satisfy (Cross-domain context transfer needs target-specific permission and Backend enforcement.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال زمینه میان حوزه‌ها فقط با مجوز هدفمند و کنترل Backend انجام می‌شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Cross-domain context transfer needs target-specific permission and Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-108, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Cross-domain context transfer needs target-specific permission and Backend enforcement.
-
-##### `REQ:CORE:109` — شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.
-- **مرجع:** B:1414:1414
-- **Source Unit:** `SU-B-00685`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Bind customer, domain, role, plan, allowed tools and data policy to each session. / Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.
-- **رفتارهای اتمی:** `REQ:CORE:109.B01` شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:060`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:109 ('شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:109: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.؛ Then: The authoritative Core state enforces this exact clause: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-109 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:109 under this exact counterexample: Remove the single required predicate stated by (Bind customer, domain, role, plan, allowed tools and data policy to each session) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-109: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند. Expected denial/no prohibited transition for c02-fixture-109. Read back the authoritative state and verify the clause-specific result: Bind customer, domain, role, plan, allowed tools and data policy to each session. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Bind customer, domain, role, plan, allowed tools and data policy to each session.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:109 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-109 against the single boundary variation. Paired synthetic inputs for c02-fixture-109: baseline values satisfy (Bind customer, domain, role, plan, allowed tools and data policy to each session.); boundary input changes only the named condition or exception (Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Bind customer, domain, role, plan, allowed tools and data policy to each session. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-109, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Bind customer, domain, role, plan, allowed tools and data policy to each session.
-- **Test `TEST:CORE:C02:060`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 109: compare the exact allowed/denied source behavior (شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:060.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:109 using fixture c02-fixture-109. The precondition fixture is configured from the accepted condition: Bind customer, domain, role, plan, allowed tools and data policy to each session. Synthetic request fixture c02-fixture-109: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.; required state/predicates=Bind customer, domain, role, plan, allowed tools and data policy to each session.; exception/gate context=Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند. Expected persisted decision/state for fixture c02-fixture-109: Read back the authoritative state and verify the clause-specific result: Bind customer, domain, role, plan, allowed tools and data policy to each session. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Bind customer, domain, role, plan, allowed tools and data policy to each session.
-  - `TEST:CORE:C02:060.N` (NEGATIVE): With fixture c02-fixture-109 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:109 under this exact counterexample: Remove the single required predicate stated by (Bind customer, domain, role, plan, allowed tools and data policy to each session) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-109: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند. Expected denial/no prohibited transition for c02-fixture-109. Read back the authoritative state and verify the clause-specific result: Bind customer, domain, role, plan, allowed tools and data policy to each session. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Bind customer, domain, role, plan, allowed tools and data policy to each session.
-  - `TEST:CORE:C02:060.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:109 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-109 against the single boundary variation. Paired synthetic inputs for c02-fixture-109: baseline values satisfy (Bind customer, domain, role, plan, allowed tools and data policy to each session.); boundary input changes only the named condition or exception (Explicit source limitation: شناسه مشتری، حوزه، نقش، پلن، ابزارهای مجاز و سیاست داده به نشست مقید باشند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Bind customer, domain, role, plan, allowed tools and data policy to each session. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-109, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Bind customer, domain, role, plan, allowed tools and data policy to each session.
-
-##### `REQ:CORE:110` — تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.
-- **مرجع:** B:1414:1414
-- **Source Unit:** `SU-B-00685`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Changing session domain needs explicit customer action and controlled create/transfer. / Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.
-- **رفتارهای اتمی:** `REQ:CORE:110.B01` تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:061`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:110 ('تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:110: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.؛ Then: The authoritative Core state enforces this exact clause: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-110 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:110 under this exact counterexample: Remove the single required predicate stated by (Changing session domain needs explicit customer action and controlled create/transfer) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-110: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود. Expected denial/no prohibited transition for c02-fixture-110. Read back the authoritative state and verify the clause-specific result: Changing session domain needs explicit customer action and controlled create/transfer. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Changing session domain needs explicit customer action and controlled create/transfer.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:110 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-110 against the single boundary variation. Paired synthetic inputs for c02-fixture-110: baseline values satisfy (Changing session domain needs explicit customer action and controlled create/transfer.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Changing session domain needs explicit customer action and controlled create/transfer. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-110, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Changing session domain needs explicit customer action and controlled create/transfer.
-- **Test `TEST:CORE:C02:061`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 110: compare the exact allowed/denied source behavior (تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:061.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:110 using fixture c02-fixture-110. The precondition fixture is configured from the accepted condition: Changing session domain needs explicit customer action and controlled create/transfer. Synthetic request fixture c02-fixture-110: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.; required state/predicates=Changing session domain needs explicit customer action and controlled create/transfer.; exception/gate context=Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود. Expected persisted decision/state for fixture c02-fixture-110: Read back the authoritative state and verify the clause-specific result: Changing session domain needs explicit customer action and controlled create/transfer. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Changing session domain needs explicit customer action and controlled create/transfer.
-  - `TEST:CORE:C02:061.N` (NEGATIVE): With fixture c02-fixture-110 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:110 under this exact counterexample: Remove the single required predicate stated by (Changing session domain needs explicit customer action and controlled create/transfer) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-110: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود. Expected denial/no prohibited transition for c02-fixture-110. Read back the authoritative state and verify the clause-specific result: Changing session domain needs explicit customer action and controlled create/transfer. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Changing session domain needs explicit customer action and controlled create/transfer.
-  - `TEST:CORE:C02:061.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:110 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-110 against the single boundary variation. Paired synthetic inputs for c02-fixture-110: baseline values satisfy (Changing session domain needs explicit customer action and controlled create/transfer.); boundary input changes only the named condition or exception (Explicit source limitation: تغییر حوزه نشست تنها با اقدام صریح مشتری و ایجاد یا انتقال کنترل‌شده انجام شود.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Changing session domain needs explicit customer action and controlled create/transfer. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-110, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Changing session domain needs explicit customer action and controlled create/transfer.
-
-##### `REQ:CORE:111` — مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.
-- **مرجع:** B:1688:1688
-- **Source Unit:** `SU-B-00761`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Memory-transfer permission is independent from service-execution permission. / Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.
-- **رفتارهای اتمی:** `REQ:CORE:111.B01` مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:062`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:111 ('مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:111: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.؛ Then: The authoritative Core state enforces this exact clause: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-111 and actor synthetic customer, attempt operation REQ:CORE:111 under this exact counterexample: Remove the single required predicate stated by (Memory-transfer permission is independent from service-execution permission) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-111: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است. Expected denial/no prohibited transition for c02-fixture-111. Read back the authoritative state and verify the clause-specific result: Memory-transfer permission is independent from service-execution permission. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Memory-transfer permission is independent from service-execution permission.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:111 with actor synthetic customer; compare the valid fixture c02-fixture-111 against the single boundary variation. Paired synthetic inputs for c02-fixture-111: baseline values satisfy (Memory-transfer permission is independent from service-execution permission.); boundary input changes only the named condition or exception (Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Memory-transfer permission is independent from service-execution permission. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-111, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Memory-transfer permission is independent from service-execution permission.
-- **Test `TEST:CORE:C02:062`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 111: compare the exact allowed/denied source behavior (مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:062.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:111 using fixture c02-fixture-111. The precondition fixture is configured from the accepted condition: Memory-transfer permission is independent from service-execution permission. Synthetic request fixture c02-fixture-111: actor=synthetic customer; operation=مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.; required state/predicates=Memory-transfer permission is independent from service-execution permission.; exception/gate context=Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است. Expected persisted decision/state for fixture c02-fixture-111: Read back the authoritative state and verify the clause-specific result: Memory-transfer permission is independent from service-execution permission. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Memory-transfer permission is independent from service-execution permission.
-  - `TEST:CORE:C02:062.N` (NEGATIVE): With fixture c02-fixture-111 and actor synthetic customer, attempt operation REQ:CORE:111 under this exact counterexample: Remove the single required predicate stated by (Memory-transfer permission is independent from service-execution permission) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-111: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است. Expected denial/no prohibited transition for c02-fixture-111. Read back the authoritative state and verify the clause-specific result: Memory-transfer permission is independent from service-execution permission. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Memory-transfer permission is independent from service-execution permission.
-  - `TEST:CORE:C02:062.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:111 with actor synthetic customer; compare the valid fixture c02-fixture-111 against the single boundary variation. Paired synthetic inputs for c02-fixture-111: baseline values satisfy (Memory-transfer permission is independent from service-execution permission.); boundary input changes only the named condition or exception (Explicit source limitation: مجوز انتقال حافظه از مجوز اجرای خدمت مستقل است.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Memory-transfer permission is independent from service-execution permission. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-111, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Memory-transfer permission is independent from service-execution permission.
-
-##### `REQ:CORE:112` — انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.
-- **مرجع:** B:1688:1688
-- **Source Unit:** `SU-B-00761`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. / Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.
-- **رفتارهای اتمی:** `REQ:CORE:112.B01` انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:063`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:112 ('انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:112: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.؛ Then: The authoritative Core state enforces this exact clause: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-112 and actor synthetic customer, attempt operation REQ:CORE:112 under this exact counterexample: Keep all positive predicates of (Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-112: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند. Expected denial/no prohibited transition for c02-fixture-112. Read back the authoritative state and verify the clause-specific result: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:112 with actor synthetic customer; compare the valid fixture c02-fixture-112 against the single boundary variation. Paired synthetic inputs for c02-fixture-112: baseline values satisfy (Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-112, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.
-- **Test `TEST:CORE:C02:063`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 112: compare the exact allowed/denied source behavior (انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:063.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:112 using fixture c02-fixture-112. The precondition fixture is configured from the accepted condition: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Synthetic request fixture c02-fixture-112: actor=synthetic customer; operation=انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.; required state/predicates=Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.; exception/gate context=Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند. Expected persisted decision/state for fixture c02-fixture-112: Read back the authoritative state and verify the clause-specific result: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.
-  - `TEST:CORE:C02:063.N` (NEGATIVE): With fixture c02-fixture-112 and actor synthetic customer, attempt operation REQ:CORE:112 under this exact counterexample: Keep all positive predicates of (Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-112: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند. Expected denial/no prohibited transition for c02-fixture-112. Read back the authoritative state and verify the clause-specific result: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.
-  - `TEST:CORE:C02:063.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:112 with actor synthetic customer; compare the valid fixture c02-fixture-112 against the single boundary variation. Paired synthetic inputs for c02-fixture-112: baseline values satisfy (Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال فقط فیلد ضروری و مقصد تخصصی و هدف و اعتبار زمانی مشخص را شامل شود و Backend آن را کنترل کند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-112, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Transfer only necessary fields to the specialized destination for a stated purpose and validity period, with Backend enforcement.
-
-##### `REQ:CORE:113` — انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.
-- **مرجع:** B:1688:1688
-- **Source Unit:** `SU-B-00761`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** No full-history transfer or global agent access. / Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.
-- **رفتارهای اتمی:** `REQ:CORE:113.B01` انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:064`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:113 ('انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:113: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.؛ Then: The authoritative Core state enforces this exact clause: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-113 and actor synthetic customer, attempt operation REQ:CORE:113 under this exact counterexample: Attempt the exact prohibited condition in (No full-history transfer or global agent access) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-113: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است. Expected denial/no prohibited transition for c02-fixture-113. Read back the authoritative state and verify the clause-specific result: No full-history transfer or global agent access. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: No full-history transfer or global agent access.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:113 with actor synthetic customer; compare the valid fixture c02-fixture-113 against the single boundary variation. Paired synthetic inputs for c02-fixture-113: baseline values satisfy (No full-history transfer or global agent access.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: No full-history transfer or global agent access. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-113, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: No full-history transfer or global agent access.
-- **Test `TEST:CORE:C02:064`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 113: compare the exact allowed/denied source behavior (انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:064.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:113 using fixture c02-fixture-113. The precondition fixture is configured from the accepted condition: No full-history transfer or global agent access. Synthetic request fixture c02-fixture-113: actor=synthetic customer; operation=انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.; required state/predicates=No full-history transfer or global agent access.; exception/gate context=Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است. Expected persisted decision/state for fixture c02-fixture-113: Read back the authoritative state and verify the clause-specific result: No full-history transfer or global agent access. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: No full-history transfer or global agent access.
-  - `TEST:CORE:C02:064.N` (NEGATIVE): With fixture c02-fixture-113 and actor synthetic customer, attempt operation REQ:CORE:113 under this exact counterexample: Attempt the exact prohibited condition in (No full-history transfer or global agent access) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-113: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است. Expected denial/no prohibited transition for c02-fixture-113. Read back the authoritative state and verify the clause-specific result: No full-history transfer or global agent access. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: No full-history transfer or global agent access.
-  - `TEST:CORE:C02:064.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:113 with actor synthetic customer; compare the valid fixture c02-fixture-113 against the single boundary variation. Paired synthetic inputs for c02-fixture-113: baseline values satisfy (No full-history transfer or global agent access.); boundary input changes only the named condition or exception (Explicit source limitation: انتقال تاریخچه کامل یا دسترسی سراسری ایجنت‌ها ممنوع است.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: No full-history transfer or global agent access. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-113, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: No full-history transfer or global agent access.
-
-##### `REQ:CORE:114` — رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.
-- **مرجع:** B:1690:1690
-- **Source Unit:** `SU-B-00763`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. / Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.
-- **رفتارهای اتمی:** `REQ:CORE:114.B01` رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:065`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:114 ('رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:114: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.؛ Then: The authoritative Core state enforces this exact clause: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-114 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:114 under this exact counterexample: Attempt the exact prohibited condition in (Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-114: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند. Expected denial/no prohibited transition for c02-fixture-114. Read back the authoritative state and verify the clause-specific result: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:114 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-114 against the single boundary variation. Paired synthetic inputs for c02-fixture-114: baseline values satisfy (Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.); boundary input changes only the named condition or exception (Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-114, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.
-- **Test `TEST:CORE:C02:065`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 114: compare the exact allowed/denied source behavior (رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:065.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:114 using fixture c02-fixture-114. The precondition fixture is configured from the accepted condition: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Synthetic request fixture c02-fixture-114: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.; required state/predicates=Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.; exception/gate context=Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند. Expected persisted decision/state for fixture c02-fixture-114: Read back the authoritative state and verify the clause-specific result: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.
-  - `TEST:CORE:C02:065.N` (NEGATIVE): With fixture c02-fixture-114 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:114 under this exact counterexample: Attempt the exact prohibited condition in (Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-114: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند. Expected denial/no prohibited transition for c02-fixture-114. Read back the authoritative state and verify the clause-specific result: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.
-  - `TEST:CORE:C02:065.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:114 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-114 against the single boundary variation. Paired synthetic inputs for c02-fixture-114: baseline values satisfy (Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.); boundary input changes only the named condition or exception (Explicit source limitation: رمز، OTP، توکن و اسرار احراز به مدل، حافظه شخصی، خلاصه گفتگو، حافظه RAG، لاگ مکالمه یا عامل کشف منتقل نشوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-114, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Do not pass password, OTP, token or auth secrets into model, personal memory, conversation summary, RAG memory, conversation logs or discovery agent.
-
-##### `REQ:CORE:115` — نشست‌ها رمزنگاری، محدود و منقضی شوند.
-- **مرجع:** B:1690:1690
-- **Source Unit:** `SU-B-00763`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Sessions are encrypted, scoped and expire. / Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند.
-- **رفتارهای اتمی:** `REQ:CORE:115.B01` نشست‌ها رمزنگاری، محدود و منقضی شوند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:066`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:115 ('نشست‌ها رمزنگاری، محدود و منقضی شوند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:115: نشست‌ها رمزنگاری، محدود و منقضی شوند.؛ Then: The authoritative Core state enforces this exact clause: نشست‌ها رمزنگاری، محدود و منقضی شوند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-115 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:115 under this exact counterexample: Remove the single required predicate stated by (Sessions are encrypted, scoped and expire) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-115: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند. Expected denial/no prohibited transition for c02-fixture-115. Read back the authoritative state and verify the clause-specific result: Sessions are encrypted, scoped and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Sessions are encrypted, scoped and expire.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:115 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-115 against the single boundary variation. Paired synthetic inputs for c02-fixture-115: baseline values satisfy (Sessions are encrypted, scoped and expire.); boundary input changes only the named condition or exception (Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Sessions are encrypted, scoped and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-115; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Sessions are encrypted, scoped and expire.
-- **Test `TEST:CORE:C02:066`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 115: compare the exact allowed/denied source behavior (نشست‌ها رمزنگاری، محدود و منقضی شوند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:066.P` (POSITIVE): As synthetic customer plus policy-controlled assistant/tool fixture, execute the single operation described by REQ:CORE:115 using fixture c02-fixture-115. The precondition fixture is configured from the accepted condition: Sessions are encrypted, scoped and expire. Synthetic request fixture c02-fixture-115: actor=synthetic customer plus policy-controlled assistant/tool fixture; operation=نشست‌ها رمزنگاری، محدود و منقضی شوند.; required state/predicates=Sessions are encrypted, scoped and expire.; exception/gate context=Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند. Expected persisted decision/state for fixture c02-fixture-115: Read back the authoritative state and verify the clause-specific result: Sessions are encrypted, scoped and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Sessions are encrypted, scoped and expire.
-  - `TEST:CORE:C02:066.N` (NEGATIVE): With fixture c02-fixture-115 and actor synthetic customer plus policy-controlled assistant/tool fixture, attempt operation REQ:CORE:115 under this exact counterexample: Remove the single required predicate stated by (Sessions are encrypted, scoped and expire) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-115: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند. Expected denial/no prohibited transition for c02-fixture-115. Read back the authoritative state and verify the clause-specific result: Sessions are encrypted, scoped and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Sessions are encrypted, scoped and expire.
-  - `TEST:CORE:C02:066.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:115 with actor synthetic customer plus policy-controlled assistant/tool fixture; compare the valid fixture c02-fixture-115 against the single boundary variation. Paired synthetic inputs for c02-fixture-115: baseline values satisfy (Sessions are encrypted, scoped and expire.); boundary input changes only the named condition or exception (Explicit source limitation: نشست‌ها رمزنگاری، محدود و منقضی شوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Sessions are encrypted, scoped and expire. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. Order the relevant state-change and operation both ways for fixture c02-fixture-115; if the state-change commits first, apply the restriction before the operation. Verify the exact source rule: Sessions are encrypted, scoped and expire.
-
-##### `REQ:CORE:116` — هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.
-- **مرجع:** B:1693:1693
-- **Source Unit:** `SU-B-00766`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Every consequential action records case ID, reason, authorization, time and result. / No separate exception is specified by the cited operative clause.
-- **رفتارهای اتمی:** `REQ:CORE:116.B01` هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:067`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:116 ('هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:116: هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.؛ Then: The authoritative Core state enforces this exact clause: هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-116 and actor synthetic customer, attempt operation REQ:CORE:116 under this exact counterexample: Remove the single required predicate stated by (Every consequential action records case ID, reason, authorization, time and result) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-116: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-116. Read back the authoritative state and verify the clause-specific result: Every consequential action records case ID, reason, authorization, time and result. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Every consequential action records case ID, reason, authorization, time and result.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:116 with actor synthetic customer; compare the valid fixture c02-fixture-116 against the single boundary variation. Paired synthetic inputs for c02-fixture-116: baseline values satisfy (Every consequential action records case ID, reason, authorization, time and result.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Every consequential action records case ID, reason, authorization, time and result. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-116, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Every consequential action records case ID, reason, authorization, time and result.
-- **Test `TEST:CORE:C02:067`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 116: compare the exact allowed/denied source behavior (هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:067.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:116 using fixture c02-fixture-116. The precondition fixture is configured from the accepted condition: Every consequential action records case ID, reason, authorization, time and result. Synthetic request fixture c02-fixture-116: actor=synthetic customer; operation=هر اقدام مؤثر شناسه پرونده، علت، مجوز، زمان و نتیجه داشته باشد.; required state/predicates=Every consequential action records case ID, reason, authorization, time and result.; exception/gate context=No separate exception is specified by the cited operative clause. Expected persisted decision/state for fixture c02-fixture-116: Read back the authoritative state and verify the clause-specific result: Every consequential action records case ID, reason, authorization, time and result. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Every consequential action records case ID, reason, authorization, time and result.
-  - `TEST:CORE:C02:067.N` (NEGATIVE): With fixture c02-fixture-116 and actor synthetic customer, attempt operation REQ:CORE:116 under this exact counterexample: Remove the single required predicate stated by (Every consequential action records case ID, reason, authorization, time and result) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-116: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-116. Read back the authoritative state and verify the clause-specific result: Every consequential action records case ID, reason, authorization, time and result. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Every consequential action records case ID, reason, authorization, time and result.
-  - `TEST:CORE:C02:067.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:116 with actor synthetic customer; compare the valid fixture c02-fixture-116 against the single boundary variation. Paired synthetic inputs for c02-fixture-116: baseline values satisfy (Every consequential action records case ID, reason, authorization, time and result.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Every consequential action records case ID, reason, authorization, time and result. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-116, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Every consequential action records case ID, reason, authorization, time and result.
-
-##### `REQ:CORE:117` — شواهد ممیزی حداقلی و فاقد داده حساس باشند.
-- **مرجع:** B:1693:1693
-- **Source Unit:** `SU-B-00766`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Audit evidence is minimal and contains no sensitive data. / Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند.
-- **رفتارهای اتمی:** `REQ:CORE:117.B01` شواهد ممیزی حداقلی و فاقد داده حساس باشند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:004`
-- **AC `AC:CORE:C02:068`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:117 ('شواهد ممیزی حداقلی و فاقد داده حساس باشند.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:117: شواهد ممیزی حداقلی و فاقد داده حساس باشند.؛ Then: The authoritative Core state enforces this exact clause: شواهد ممیزی حداقلی و فاقد داده حساس باشند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-117 and actor synthetic customer, attempt operation REQ:CORE:117 under this exact counterexample: Attempt the exact prohibited condition in (Audit evidence is minimal and contains no sensitive data) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-117: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند. Expected denial/no prohibited transition for c02-fixture-117. Read back the authoritative state and verify the clause-specific result: Audit evidence is minimal and contains no sensitive data. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Audit evidence is minimal and contains no sensitive data.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:117 with actor synthetic customer; compare the valid fixture c02-fixture-117 against the single boundary variation. Paired synthetic inputs for c02-fixture-117: baseline values satisfy (Audit evidence is minimal and contains no sensitive data.); boundary input changes only the named condition or exception (Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Audit evidence is minimal and contains no sensitive data. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-117, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Audit evidence is minimal and contains no sensitive data.
-- **Test `TEST:CORE:C02:068`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 117: compare the exact allowed/denied source behavior (شواهد ممیزی حداقلی و فاقد داده حساس باشند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:068.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:117 using fixture c02-fixture-117. The precondition fixture is configured from the accepted condition: Audit evidence is minimal and contains no sensitive data. Synthetic request fixture c02-fixture-117: actor=synthetic customer; operation=شواهد ممیزی حداقلی و فاقد داده حساس باشند.; required state/predicates=Audit evidence is minimal and contains no sensitive data.; exception/gate context=Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند. Expected persisted decision/state for fixture c02-fixture-117: Read back the authoritative state and verify the clause-specific result: Audit evidence is minimal and contains no sensitive data. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Audit evidence is minimal and contains no sensitive data.
-  - `TEST:CORE:C02:068.N` (NEGATIVE): With fixture c02-fixture-117 and actor synthetic customer, attempt operation REQ:CORE:117 under this exact counterexample: Attempt the exact prohibited condition in (Audit evidence is minimal and contains no sensitive data) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-117: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند. Expected denial/no prohibited transition for c02-fixture-117. Read back the authoritative state and verify the clause-specific result: Audit evidence is minimal and contains no sensitive data. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Audit evidence is minimal and contains no sensitive data.
-  - `TEST:CORE:C02:068.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:117 with actor synthetic customer; compare the valid fixture c02-fixture-117 against the single boundary variation. Paired synthetic inputs for c02-fixture-117: baseline values satisfy (Audit evidence is minimal and contains no sensitive data.); boundary input changes only the named condition or exception (Explicit source limitation: شواهد ممیزی حداقلی و فاقد داده حساس باشند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Audit evidence is minimal and contains no sensitive data. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-117, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Audit evidence is minimal and contains no sensitive data.
-
-##### `REQ:CORE:118` — برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.
-- **مرجع:** W:1317:1317
-- **Source Unit:** `SU-W-00688`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. / Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.
-- **رفتارهای اتمی:** `REQ:CORE:118.B01` برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:069`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:118 ('برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:118: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.؛ Then: The authoritative Core state enforces this exact clause: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-118 and actor synthetic organization admin, attempt operation REQ:CORE:118 under this exact counterexample: Remove the single required predicate stated by (Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-118: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند. Expected denial/no prohibited transition for c02-fixture-118. Read back the authoritative state and verify the clause-specific result: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:118 with actor synthetic organization admin; compare the valid fixture c02-fixture-118 against the single boundary variation. Paired synthetic inputs for c02-fixture-118: baseline values satisfy (Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.); boundary input changes only the named condition or exception (Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-118, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.
-- **Test `TEST:CORE:C02:069`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 118: compare the exact allowed/denied source behavior (برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:069.P` (POSITIVE): As synthetic organization admin, execute the single operation described by REQ:CORE:118 using fixture c02-fixture-118. The precondition fixture is configured from the accepted condition: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Synthetic request fixture c02-fixture-118: actor=synthetic organization admin; operation=برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.; required state/predicates=Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.; exception/gate context=Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند. Expected persisted decision/state for fixture c02-fixture-118: Read back the authoritative state and verify the clause-specific result: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.
-  - `TEST:CORE:C02:069.N` (NEGATIVE): With fixture c02-fixture-118 and actor synthetic organization admin, attempt operation REQ:CORE:118 under this exact counterexample: Remove the single required predicate stated by (Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-118: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند. Expected denial/no prohibited transition for c02-fixture-118. Read back the authoritative state and verify the clause-specific result: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.
-  - `TEST:CORE:C02:069.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:118 with actor synthetic organization admin; compare the valid fixture c02-fixture-118 against the single boundary variation. Paired synthetic inputs for c02-fixture-118: baseline values satisfy (Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.); boundary input changes only the named condition or exception (Explicit source limitation: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد می‌خواهند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-118, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Withdrawal, bank-account change, admin change and important financial-permission change require reauthentication.
-
-##### `REQ:CORE:119` — سایر عملیات کنترل ریسک دارند.
-- **مرجع:** W:1317:1317
-- **Source Unit:** `SU-W-00688`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Risk controls apply to operations outside the enumerated high-risk step-up set. / Explicit source limitation: سایر عملیات کنترل ریسک دارند.
-- **رفتارهای اتمی:** `REQ:CORE:119.B01` سایر عملیات کنترل ریسک دارند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:070`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:119 ('سایر عملیات کنترل ریسک دارند.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:119: سایر عملیات کنترل ریسک دارند.؛ Then: The authoritative Core state enforces this exact clause: سایر عملیات کنترل ریسک دارند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-119 and actor synthetic customer, attempt operation REQ:CORE:119 under this exact counterexample: Remove the single required predicate stated by (Risk controls apply to operations outside the enumerated high-risk step-up set) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-119: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: سایر عملیات کنترل ریسک دارند. Expected denial/no prohibited transition for c02-fixture-119. Read back the authoritative state and verify the clause-specific result: Risk controls apply to operations outside the enumerated high-risk step-up set. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Risk controls apply to operations outside the enumerated high-risk step-up set.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:119 with actor synthetic customer; compare the valid fixture c02-fixture-119 against the single boundary variation. Paired synthetic inputs for c02-fixture-119: baseline values satisfy (Risk controls apply to operations outside the enumerated high-risk step-up set.); boundary input changes only the named condition or exception (Explicit source limitation: سایر عملیات کنترل ریسک دارند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Risk controls apply to operations outside the enumerated high-risk step-up set. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-119, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Risk controls apply to operations outside the enumerated high-risk step-up set.
-- **Test `TEST:CORE:C02:070`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 119: compare the exact allowed/denied source behavior (سایر عملیات کنترل ریسک دارند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:070.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:119 using fixture c02-fixture-119. The precondition fixture is configured from the accepted condition: Risk controls apply to operations outside the enumerated high-risk step-up set. Synthetic request fixture c02-fixture-119: actor=synthetic customer; operation=سایر عملیات کنترل ریسک دارند.; required state/predicates=Risk controls apply to operations outside the enumerated high-risk step-up set.; exception/gate context=Explicit source limitation: سایر عملیات کنترل ریسک دارند. Expected persisted decision/state for fixture c02-fixture-119: Read back the authoritative state and verify the clause-specific result: Risk controls apply to operations outside the enumerated high-risk step-up set. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Risk controls apply to operations outside the enumerated high-risk step-up set.
-  - `TEST:CORE:C02:070.N` (NEGATIVE): With fixture c02-fixture-119 and actor synthetic customer, attempt operation REQ:CORE:119 under this exact counterexample: Remove the single required predicate stated by (Risk controls apply to operations outside the enumerated high-risk step-up set) while keeping the actor and other fixture values unchanged; expect the action to remain denied, pending, or uncommitted as the clause requires. Negative input for c02-fixture-119: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: سایر عملیات کنترل ریسک دارند. Expected denial/no prohibited transition for c02-fixture-119. Read back the authoritative state and verify the clause-specific result: Risk controls apply to operations outside the enumerated high-risk step-up set. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Risk controls apply to operations outside the enumerated high-risk step-up set.
-  - `TEST:CORE:C02:070.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:119 with actor synthetic customer; compare the valid fixture c02-fixture-119 against the single boundary variation. Paired synthetic inputs for c02-fixture-119: baseline values satisfy (Risk controls apply to operations outside the enumerated high-risk step-up set.); boundary input changes only the named condition or exception (Explicit source limitation: سایر عملیات کنترل ریسک دارند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Risk controls apply to operations outside the enumerated high-risk step-up set. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-119, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Risk controls apply to operations outside the enumerated high-risk step-up set.
-
-##### `REQ:CORE:120` — تأییدکننده دوم سازمان اجباری نیست.
-- **مرجع:** W:1317:1317
-- **Source Unit:** `SU-W-00688`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Second organization approver is not mandatory. / Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست.
-- **رفتارهای اتمی:** `REQ:CORE:120.B01` تأییدکننده دوم سازمان اجباری نیست.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:071`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:120 ('تأییدکننده دوم سازمان اجباری نیست.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:120: تأییدکننده دوم سازمان اجباری نیست.؛ Then: The authoritative Core state enforces this exact clause: تأییدکننده دوم سازمان اجباری نیست.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-120 and actor synthetic organization member/admin as stated by the clause, attempt operation REQ:CORE:120 under this exact counterexample: Attempt the exact prohibited condition in (Second organization approver is not mandatory) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-120: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست. Expected denial/no prohibited transition for c02-fixture-120. Read back the authoritative state and verify the clause-specific result: Second organization approver is not mandatory. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Second organization approver is not mandatory.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:120 with actor synthetic organization member/admin as stated by the clause; compare the valid fixture c02-fixture-120 against the single boundary variation. Paired synthetic inputs for c02-fixture-120: baseline values satisfy (Second organization approver is not mandatory.); boundary input changes only the named condition or exception (Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Second organization approver is not mandatory. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-120, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Second organization approver is not mandatory.
-- **Test `TEST:CORE:C02:071`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 120: compare the exact allowed/denied source behavior (تأییدکننده دوم سازمان اجباری نیست.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:071.P` (POSITIVE): As synthetic organization member/admin as stated by the clause, execute the single operation described by REQ:CORE:120 using fixture c02-fixture-120. The precondition fixture is configured from the accepted condition: Second organization approver is not mandatory. Synthetic request fixture c02-fixture-120: actor=synthetic organization member/admin as stated by the clause; operation=تأییدکننده دوم سازمان اجباری نیست.; required state/predicates=Second organization approver is not mandatory.; exception/gate context=Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست. Expected persisted decision/state for fixture c02-fixture-120: Read back the authoritative state and verify the clause-specific result: Second organization approver is not mandatory. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Second organization approver is not mandatory.
-  - `TEST:CORE:C02:071.N` (NEGATIVE): With fixture c02-fixture-120 and actor synthetic organization member/admin as stated by the clause, attempt operation REQ:CORE:120 under this exact counterexample: Attempt the exact prohibited condition in (Second organization approver is not mandatory) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-120: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست. Expected denial/no prohibited transition for c02-fixture-120. Read back the authoritative state and verify the clause-specific result: Second organization approver is not mandatory. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Second organization approver is not mandatory.
-  - `TEST:CORE:C02:071.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:120 with actor synthetic organization member/admin as stated by the clause; compare the valid fixture c02-fixture-120 against the single boundary variation. Paired synthetic inputs for c02-fixture-120: baseline values satisfy (Second organization approver is not mandatory.); boundary input changes only the named condition or exception (Explicit source limitation: تأییدکننده دوم سازمان اجباری نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Second organization approver is not mandatory. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-120, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Second organization approver is not mandatory.
-
-##### `REQ:CORE:121` — تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** C12a
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:121.B01` تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:072`**؛ Task: `None`؛ Given: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ When: تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.؛ Then: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ Negative: Attempt time-based deletion or unlinking of an event/chain record; reject and preserve referential chain.؛ Boundary: Test account closure and retention boundary; do not apply ordinary technical-log retention to financial events.
-- **Test `TEST:CORE:C02:072`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Compare immutable event IDs, provenance links and retrieval after closure; no legal retention duration is inferred beyond permanent source rule.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:072.P` (POSITIVE): Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.
-  - `TEST:CORE:C02:072.N` (NEGATIVE): Attempt time-based deletion or unlinking of an event/chain record; reject and preserve referential chain.
-  - `TEST:CORE:C02:072.B` (BOUNDARY_OR_CONCURRENCY): Test account closure and retention boundary; do not apply ordinary technical-log retention to financial events.
-
-##### `REQ:CORE:122` — مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** C12a
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:122.B01` مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:073`**؛ Task: `None`؛ Given: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ When: مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.؛ Then: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ Negative: Remove or misbind document/actor/reason/time linkage; reject incomplete chain or mark it unresolved without fabricating evidence.؛ Boundary: Update identity or close account; previously linked evidence remains retrievable under authorized access.
-- **Test `TEST:CORE:C02:073`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Resolve event→actor/reason/time→document links and verify provenance and access control.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:073.P` (POSITIVE): Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.
-  - `TEST:CORE:C02:073.N` (NEGATIVE): Remove or misbind document/actor/reason/time linkage; reject incomplete chain or mark it unresolved without fabricating evidence.
-  - `TEST:CORE:C02:073.B` (BOUNDARY_OR_CONCURRENCY): Update identity or close account; previously linked evidence remains retrievable under authorized access.
-
-##### `REQ:CORE:123` — لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** C12a/C03/C14 pending atomic routing
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** — / —
-- **رفتارهای اتمی:** `REQ:CORE:123.B01` لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:074`**؛ Task: `None`؛ Given: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ When: لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.؛ Then: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ Negative: Delete or shorten retention for financially consequential evidence; deny. Do not inherit permanent financial retention automatically for unrelated technical logs.؛ Boundary: Test event classification boundary and reclassification; financially effective actions cannot be downgraded to ordinary logs.
-- **Test `TEST:CORE:C02:074`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Assert classification, retention policy and chain membership for paired fixtures.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:074.P` (POSITIVE): Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.
-  - `TEST:CORE:C02:074.N` (NEGATIVE): Delete or shorten retention for financially consequential evidence; deny. Do not inherit permanent financial retention automatically for unrelated technical logs.
-  - `TEST:CORE:C02:074.B` (BOUNDARY_OR_CONCURRENCY): Test event classification boundary and reclassification; financially effective actions cannot be downgraded to ordinary logs.
-
-##### `REQ:CORE:124` — رمز و OTP ذخیره نشوند.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Password and OTP are excluded from storage. / No separate exception is specified by the cited operative clause.
-- **رفتارهای اتمی:** `REQ:CORE:124.B01` رمز و OTP ذخیره نشوند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:075`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:124 ('رمز و OTP ذخیره نشوند.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:124: رمز و OTP ذخیره نشوند.؛ Then: The authoritative Core state enforces this exact clause: رمز و OTP ذخیره نشوند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-124 and actor synthetic customer, attempt operation REQ:CORE:124 under this exact counterexample: Attempt the exact prohibited condition in (Password and OTP are excluded from storage) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-124: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-124. Read back the authoritative state and verify the clause-specific result: Password and OTP are excluded from storage. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Password and OTP are excluded from storage.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:124 with actor synthetic customer; compare the valid fixture c02-fixture-124 against the single boundary variation. Paired synthetic inputs for c02-fixture-124: baseline values satisfy (Password and OTP are excluded from storage.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Password and OTP are excluded from storage. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-124, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Password and OTP are excluded from storage.
-- **Test `TEST:CORE:C02:075`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 124: compare the exact allowed/denied source behavior (رمز و OTP ذخیره نشوند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:075.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:124 using fixture c02-fixture-124. The precondition fixture is configured from the accepted condition: Password and OTP are excluded from storage. Synthetic request fixture c02-fixture-124: actor=synthetic customer; operation=رمز و OTP ذخیره نشوند.; required state/predicates=Password and OTP are excluded from storage.; exception/gate context=No separate exception is specified by the cited operative clause. Expected persisted decision/state for fixture c02-fixture-124: Read back the authoritative state and verify the clause-specific result: Password and OTP are excluded from storage. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Password and OTP are excluded from storage.
-  - `TEST:CORE:C02:075.N` (NEGATIVE): With fixture c02-fixture-124 and actor synthetic customer, attempt operation REQ:CORE:124 under this exact counterexample: Attempt the exact prohibited condition in (Password and OTP are excluded from storage) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-124: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-124. Read back the authoritative state and verify the clause-specific result: Password and OTP are excluded from storage. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Password and OTP are excluded from storage.
-  - `TEST:CORE:C02:075.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:124 with actor synthetic customer; compare the valid fixture c02-fixture-124 against the single boundary variation. Paired synthetic inputs for c02-fixture-124: baseline values satisfy (Password and OTP are excluded from storage.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Password and OTP are excluded from storage. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-124, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Password and OTP are excluded from storage.
-
-##### `REQ:CORE:125` — مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.
-- **مرجع:** W:1331:1331
-- **Source Unit:** `SU-W-00695`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Only authorized persons may view/export and every access is logged. / No separate exception is specified by the cited operative clause.
-- **رفتارهای اتمی:** `REQ:CORE:125.B01` مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:076`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:125 ('مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:125: مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.؛ Then: The authoritative Core state enforces this exact clause: مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-125 and actor synthetic customer, attempt operation REQ:CORE:125 under this exact counterexample: Keep all positive predicates of (Only authorized persons may view/export and every access is logged) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-125: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-125. Read back the authoritative state and verify the clause-specific result: Only authorized persons may view/export and every access is logged. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Only authorized persons may view/export and every access is logged.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:125 with actor synthetic customer; compare the valid fixture c02-fixture-125 against the single boundary variation. Paired synthetic inputs for c02-fixture-125: baseline values satisfy (Only authorized persons may view/export and every access is logged.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Only authorized persons may view/export and every access is logged. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-125, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Only authorized persons may view/export and every access is logged.
-- **Test `TEST:CORE:C02:076`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 125: compare the exact allowed/denied source behavior (مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:076.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:125 using fixture c02-fixture-125. The precondition fixture is configured from the accepted condition: Only authorized persons may view/export and every access is logged. Synthetic request fixture c02-fixture-125: actor=synthetic customer; operation=مشاهده/خروجی فقط برای اشخاص مجاز و با ثبت دسترسی باشد.; required state/predicates=Only authorized persons may view/export and every access is logged.; exception/gate context=No separate exception is specified by the cited operative clause. Expected persisted decision/state for fixture c02-fixture-125: Read back the authoritative state and verify the clause-specific result: Only authorized persons may view/export and every access is logged. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Only authorized persons may view/export and every access is logged.
-  - `TEST:CORE:C02:076.N` (NEGATIVE): With fixture c02-fixture-125 and actor synthetic customer, attempt operation REQ:CORE:125 under this exact counterexample: Keep all positive predicates of (Only authorized persons may view/export and every access is logged) but substitute a principal, organization, scope, action, or object outside the permitted set; expect the protected effect to be denied. Negative input for c02-fixture-125: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: No separate exception is specified by the cited operative clause. Expected denial/no prohibited transition for c02-fixture-125. Read back the authoritative state and verify the clause-specific result: Only authorized persons may view/export and every access is logged. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Only authorized persons may view/export and every access is logged.
-  - `TEST:CORE:C02:076.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:125 with actor synthetic customer; compare the valid fixture c02-fixture-125 against the single boundary variation. Paired synthetic inputs for c02-fixture-125: baseline values satisfy (Only authorized persons may view/export and every access is logged.); boundary input changes only the named condition or exception (No separate exception is specified by the cited operative clause.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Only authorized persons may view/export and every access is logged. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-125, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Only authorized persons may view/export and every access is logged.
-
-##### `REQ:CORE:126` — OTP و شاهکار برای تمام استثناها کافی فرض نشوند.
-- **مرجع:** W:1355:1355
-- **Source Unit:** `SU-W-00707`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** OTP/Shahkar alone do not satisfy every exception case. / Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند.
-- **رفتارهای اتمی:** `REQ:CORE:126.B01` OTP و شاهکار برای تمام استثناها کافی فرض نشوند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:001`
-- **AC `AC:CORE:C02:077`**؛ Task: `TASK:CORE:C02:001`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:126 ('OTP و شاهکار برای تمام استثناها کافی فرض نشوند.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:126: OTP و شاهکار برای تمام استثناها کافی فرض نشوند.؛ Then: The authoritative Core state enforces this exact clause: OTP و شاهکار برای تمام استثناها کافی فرض نشوند.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-126 and actor synthetic customer, attempt operation REQ:CORE:126 under this exact counterexample: Attempt the exact prohibited condition in (OTP/Shahkar alone do not satisfy every exception case) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-126: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند. Expected denial/no prohibited transition for c02-fixture-126. Read back the authoritative state and verify the clause-specific result: OTP/Shahkar alone do not satisfy every exception case. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: OTP/Shahkar alone do not satisfy every exception case.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:126 with actor synthetic customer; compare the valid fixture c02-fixture-126 against the single boundary variation. Paired synthetic inputs for c02-fixture-126: baseline values satisfy (OTP/Shahkar alone do not satisfy every exception case.); boundary input changes only the named condition or exception (Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: OTP/Shahkar alone do not satisfy every exception case. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-126, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: OTP/Shahkar alone do not satisfy every exception case.
-- **Test `TEST:CORE:C02:077`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 126: compare the exact allowed/denied source behavior (OTP و شاهکار برای تمام استثناها کافی فرض نشوند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:077.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:126 using fixture c02-fixture-126. The precondition fixture is configured from the accepted condition: OTP/Shahkar alone do not satisfy every exception case. Synthetic request fixture c02-fixture-126: actor=synthetic customer; operation=OTP و شاهکار برای تمام استثناها کافی فرض نشوند.; required state/predicates=OTP/Shahkar alone do not satisfy every exception case.; exception/gate context=Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند. Expected persisted decision/state for fixture c02-fixture-126: Read back the authoritative state and verify the clause-specific result: OTP/Shahkar alone do not satisfy every exception case. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: OTP/Shahkar alone do not satisfy every exception case.
-  - `TEST:CORE:C02:077.N` (NEGATIVE): With fixture c02-fixture-126 and actor synthetic customer, attempt operation REQ:CORE:126 under this exact counterexample: Attempt the exact prohibited condition in (OTP/Shahkar alone do not satisfy every exception case) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-126: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند. Expected denial/no prohibited transition for c02-fixture-126. Read back the authoritative state and verify the clause-specific result: OTP/Shahkar alone do not satisfy every exception case. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: OTP/Shahkar alone do not satisfy every exception case.
-  - `TEST:CORE:C02:077.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:126 with actor synthetic customer; compare the valid fixture c02-fixture-126 against the single boundary variation. Paired synthetic inputs for c02-fixture-126: baseline values satisfy (OTP/Shahkar alone do not satisfy every exception case.); boundary input changes only the named condition or exception (Explicit source limitation: OTP و شاهکار برای تمام استثناها کافی فرض نشوند.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: OTP/Shahkar alone do not satisfy every exception case. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-126, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: OTP/Shahkar alone do not satisfy every exception case.
-
-##### `REQ:CORE:127` — ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.
-- **مرجع:** W:1355:1355
-- **Source Unit:** `SU-W-00707`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Traceability/owner declaration do not substitute for legal duty or prove compliance. / Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.
-- **رفتارهای اتمی:** `REQ:CORE:127.B01` ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:001`
-- **AC `AC:CORE:C02:078`**؛ Task: `TASK:CORE:C02:001`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:127 ('ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.'), using synthetic identities and the owning task boundary: Step-up authorization and access evidence.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:127: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.؛ Then: The authoritative Core state enforces this exact clause: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.؛ Assert the resulting persisted state and authorization principal/scope; UI visibility alone is not evidence.؛ Negative: With fixture c02-fixture-127 and actor synthetic customer, attempt operation REQ:CORE:127 under this exact counterexample: Attempt the exact prohibited condition in (Traceability/owner declaration do not substitute for legal duty or prove compliance) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-127: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست. Expected denial/no prohibited transition for c02-fixture-127. Read back the authoritative state and verify the clause-specific result: Traceability/owner declaration do not substitute for legal duty or prove compliance. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Traceability/owner declaration do not substitute for legal duty or prove compliance.؛ Boundary: Run the requirement-specific boundary case for REQ:CORE:127 with actor synthetic customer; compare the valid fixture c02-fixture-127 against the single boundary variation. Paired synthetic inputs for c02-fixture-127: baseline values satisfy (Traceability/owner declaration do not substitute for legal duty or prove compliance.); boundary input changes only the named condition or exception (Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Traceability/owner declaration do not substitute for legal duty or prove compliance. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-127, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Traceability/owner declaration do not substitute for legal duty or prove compliance.
-- **Test `TEST:CORE:C02:078`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: REQ 127: compare the exact allowed/denied source behavior (ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:078.P` (POSITIVE): As synthetic customer, execute the single operation described by REQ:CORE:127 using fixture c02-fixture-127. The precondition fixture is configured from the accepted condition: Traceability/owner declaration do not substitute for legal duty or prove compliance. Synthetic request fixture c02-fixture-127: actor=synthetic customer; operation=ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.; required state/predicates=Traceability/owner declaration do not substitute for legal duty or prove compliance.; exception/gate context=Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست. Expected persisted decision/state for fixture c02-fixture-127: Read back the authoritative state and verify the clause-specific result: Traceability/owner declaration do not substitute for legal duty or prove compliance. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. No financial transfer, identity proof, role grant, or data disclosure is inferred unless the cited clause permits it. Change one condition predicate at a time from the accepted fixture and confirm the positive result is limited to the exact allowed state: Traceability/owner declaration do not substitute for legal duty or prove compliance.
-  - `TEST:CORE:C02:078.N` (NEGATIVE): With fixture c02-fixture-127 and actor synthetic customer, attempt operation REQ:CORE:127 under this exact counterexample: Attempt the exact prohibited condition in (Traceability/owner declaration do not substitute for legal duty or prove compliance) while all other fixture state is valid; expect the forbidden disclosure, persistence, authorization, or transition not to occur. Negative input for c02-fixture-127: preserve all source predicates except the named violation; include the relevant exception/gate exactly as recorded: Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست. Expected denial/no prohibited transition for c02-fixture-127. Read back the authoritative state and verify the clause-specific result: Traceability/owner declaration do not substitute for legal duty or prove compliance. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. Persisted state must show no unauthorized change and protected data must not be returned. Restore the violated condition without changing actor or target, then repeat; the result must change only when the source condition is satisfied: Traceability/owner declaration do not substitute for legal duty or prove compliance.
-  - `TEST:CORE:C02:078.B` (BOUNDARY_OR_CONCURRENCY): Run the requirement-specific boundary case for REQ:CORE:127 with actor synthetic customer; compare the valid fixture c02-fixture-127 against the single boundary variation. Paired synthetic inputs for c02-fixture-127: baseline values satisfy (Traceability/owner declaration do not substitute for legal duty or prove compliance.); boundary input changes only the named condition or exception (Explicit source limitation: ردیابی جای تکلیف قانونی را نمی‌گیرد و اعلام مالک اثبات انطباق نیست.). No unspecified timeout, provider code, endpoint, or legal result is assumed. Compare persisted state/result for the two inputs: Read back the authoritative state and verify the clause-specific result: Traceability/owner declaration do not substitute for legal duty or prove compliance. Also verify the corresponding denied/allowed transition is not inferred from UI visibility or a generic success signal. An invalid boundary input creates no extra authorization, movement of funds, or disclosure. At the edge of the named scope/state for fixture c02-fixture-127, change exactly one required predicate from true to false and back; the observed outcome must track that predicate and preserve this clause: Traceability/owner declaration do not substitute for legal duty or prove compliance.
-
-##### `REQ:CORE:128` — نمایش زنجیره برای کاربر عادی یا ادمین سازمان، داده اشخاص دیگر را افشا نکند.
-- **مرجع:** W:1561:1561
-- **Source Unit:** `SU-W-00810`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Access is evaluated for the requesting actor and the exact chain/report object on the server. / C12a/C13b own chain contents, report format and investigative workflow; this C02 requirement covers authorization and access evidence only.
-- **رفتارهای اتمی:** `REQ:CORE:128.B01` نمایش زنجیره برای کاربر عادی یا ادمین سازمان، داده اشخاص دیگر را افشا نکند.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:003`
-- **AC `AC:CORE:C02:079`**؛ Task: `TASK:CORE:C02:003`؛ Given: Given a synthetic actor requesting the Wallet 10.1.5 chain/report object under REQ:CORE:128: نمایش زنجیره برای کاربر عادی یا ادمین سازمان، داده اشخاص دیگر را افشا نکند.؛ When: The actor requests the exact chain read/export governed by REQ:CORE:128.؛ Then: نمایش زنجیره برای کاربر عادی یا ادمین سازمان، داده اشخاص دیگر را افشا نکند.؛ Assert response rows and persisted access event against actor, organization and object identifiers; UI hiding is not evidence.؛ Negative: Pre-state: Initial state is explicit in fixture fx-c02-128: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-128, attempt the same organization administration operation as synthetic organization admin after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied organization administration transition must not occur.؛ Boundary: Pre-state: Three principals exist: ordinary member M-79, current same-org admin A-79 and other-org admin A-80. Input: Requests by M-79 and A-79 target CHAIN-79; A-80 targets the same record from ORG-80 context. Action: Issue all three requests while asserting each principal and tenant scope at the server boundary. Expected observable result: No principal receives another person’s restricted fields; A-80 receives no ORG-79 data; permitted fields follow the source rule.
-- **Test `TEST:CORE:C02:079`**؛ Environment: Future isolated API/database harness with synthetic customer, organization and investigator principals; never production or real financial data.؛ Oracle: REQ 128: compare the exact allowed/denied source behavior (نمایش زنجیره برای کاربر عادی یا ادمین سازمان، داده اشخاص دیگر را افشا نکند.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:079.P` (POSITIVE): Pre-state: A-79 is an ordinary administrator of ORG-79; target chain includes fields belonging to another person. Input: actor=A-79, org=ORG-79, target=CHAIN-79, target contains own-org and other-person restricted fields. Action: Request the chain view as A-79, then repeat after A-79 membership is removed. Expected observable result: Response excludes other-person restricted fields; after membership removal, the former role does not restore access.
-  - `TEST:CORE:C02:079.N` (NEGATIVE): Pre-state: Initial state is explicit in fixture fx-c02-128: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-128, attempt the same organization administration operation as synthetic organization admin after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied organization administration transition must not occur.
-  - `TEST:CORE:C02:079.B` (BOUNDARY_OR_CONCURRENCY): Pre-state: Three principals exist: ordinary member M-79, current same-org admin A-79 and other-org admin A-80. Input: Requests by M-79 and A-79 target CHAIN-79; A-80 targets the same record from ORG-80 context. Action: Issue all three requests while asserting each principal and tenant scope at the server boundary. Expected observable result: No principal receives another person’s restricted fields; A-80 receives no ORG-79 data; permitted fields follow the source rule.
-
-##### `REQ:CORE:129` — نمایش زنجیره به اشخاص دارای مجوز رسیدگی محدود شود؛ مجوز در سمت سرور کنترل شود.
-- **مرجع:** W:1565:1565
-- **Source Unit:** `SU-W-00812`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Access is evaluated for the requesting actor and the exact chain/report object on the server. / C12a/C13b own chain contents, report format and investigative workflow; this C02 requirement covers authorization and access evidence only.
-- **رفتارهای اتمی:** `REQ:CORE:129.B01` نمایش زنجیره به اشخاص دارای مجوز رسیدگی محدود شود؛ مجوز در سمت سرور کنترل شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:003`
-- **AC `AC:CORE:C02:080`**؛ Task: `TASK:CORE:C02:003`؛ Given: Given a synthetic actor requesting the Wallet 10.1.5 chain/report object under REQ:CORE:129: نمایش زنجیره به اشخاص دارای مجوز رسیدگی محدود شود؛ مجوز در سمت سرور کنترل شود.؛ When: The actor requests the exact chain read/export governed by REQ:CORE:129.؛ Then: نمایش زنجیره به اشخاص دارای مجوز رسیدگی محدود شود؛ مجوز در سمت سرور کنترل شود.؛ Assert response rows and persisted access event against actor, organization and object identifiers; UI hiding is not evidence.؛ Negative: Pre-state: Initial state is explicit in fixture fx-c02-129: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-129, attempt the same restricted record access operation as synthetic customer after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied restricted record access transition must not occur.؛ Boundary: Pre-state: I-80 has active, revoked, expired and wrong-scope grant fixtures; client retains a prior link. Input: Same request for CHAIN-80 with grant statuses active/revoked/expired/wrong-scope. Action: Submit each request after the corresponding server grant state is committed. Expected observable result: Only the active matching grant permits access; revoked, expired or wrong-scope grants are denied regardless of the client-held link.
-- **Test `TEST:CORE:C02:080`**؛ Environment: Future isolated API/database harness with synthetic customer, organization and investigator principals; never production or real financial data.؛ Oracle: REQ 129: compare the exact allowed/denied source behavior (نمایش زنجیره به اشخاص دارای مجوز رسیدگی محدود شود؛ مجوز در سمت سرور کنترل شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:080.P` (POSITIVE): Pre-state: Investigator I-80 has an active server-side grant scoped to CHAIN-80; client contains no authority beyond that grant. Input: actor=I-80, grant=GRANT-80, status=active, scope=CHAIN-80, requested_object=CHAIN-80. Grant fixture is server-side and scoped to the named object. Action: Request CHAIN-80 through the server authorization path. Expected observable result: Only the granted chain scope is returned and the server-side authorization decision is recorded with the access event.
-  - `TEST:CORE:C02:080.N` (NEGATIVE): Pre-state: Initial state is explicit in fixture fx-c02-129: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-129, attempt the same restricted record access operation as synthetic customer after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied restricted record access transition must not occur.
-  - `TEST:CORE:C02:080.B` (BOUNDARY_OR_CONCURRENCY): Pre-state: I-80 has active, revoked, expired and wrong-scope grant fixtures; client retains a prior link. Input: Same request for CHAIN-80 with grant statuses active/revoked/expired/wrong-scope. Action: Submit each request after the corresponding server grant state is committed. Expected observable result: Only the active matching grant permits access; revoked, expired or wrong-scope grants are denied regardless of the client-held link.
-
-##### `REQ:CORE:130` — هر مشاهده و خروجی زنجیره باید با هویت عامل و زمان دسترسی ثبت شود.
-- **مرجع:** W:1565:1565
-- **Source Unit:** `SU-W-00812`
-- **مالک:** CoreIdentityAuthorization
-- **وضعیت حکم:** APPROVED_EXPLICIT
-- **شرط/استثنا:** Access is evaluated for the requesting actor and the exact chain/report object on the server. / C12a/C13b own chain contents, report format and investigative workflow; this C02 requirement covers authorization and access evidence only.
-- **رفتارهای اتمی:** `REQ:CORE:130.B01` هر مشاهده و خروجی زنجیره باید با هویت عامل و زمان دسترسی ثبت شود.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005`
-- **AC `AC:CORE:C02:081`**؛ Task: `TASK:CORE:C02:005`؛ Given: Given a synthetic actor requesting the Wallet 10.1.5 chain/report object under REQ:CORE:130: هر مشاهده و خروجی زنجیره باید با هویت عامل و زمان دسترسی ثبت شود.؛ When: The actor requests the exact chain read/export governed by REQ:CORE:130.؛ Then: هر مشاهده و خروجی زنجیره باید با هویت عامل و زمان دسترسی ثبت شود.؛ Assert response rows and persisted access event against actor, organization and object identifiers; UI hiding is not evidence.؛ Negative: Pre-state: Initial state is explicit in fixture fx-c02-130: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-130, attempt the same restricted record access operation as synthetic customer after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied restricted record access transition must not occur.؛ Boundary: Pre-state: A-81 is authorized for read/export; each operation may be retried after an uncertain response. Input: actor=A-81, object=CHAIN-81, operation ids=READ-81 and EXPORT-81, each submitted twice with same idempotency key. Action: Retry each operation once after simulating an uncertain response. Expected observable result: Each accepted logical operation has exactly one correctly typed actor/time event; read and export remain distinct and retries add no duplicate event.
-- **Test `TEST:CORE:C02:081`**؛ Environment: Future isolated API/database harness with synthetic customer, organization and investigator principals; never production or real financial data.؛ Oracle: REQ 130: compare the exact allowed/denied source behavior (هر مشاهده و خروجی زنجیره باید با هویت عامل و زمان دسترسی ثبت شود.) with the API result and persisted state; verify actor/scope and required audit fields. A status code or file presence alone is not a pass.؛ وضعیت: `NOT_EXECUTED`
-  - `TEST:CORE:C02:081.P` (POSITIVE): Pre-state: A-81 has explicit permission to read and export CHAIN-81; no access event has yet been recorded. Input: actor=A-81, object=CHAIN-81, permissions={read,export}, requests={read-1,export-1}. Use synthetic data and a separate audit stream. Action: Perform one read and one export as separate authorized operations. Expected observable result: Two distinct audit events are recorded with actor and time, one tagged read and one export; audit payload contains no secret fields.
-  - `TEST:CORE:C02:081.N` (NEGATIVE): Pre-state: Initial state is explicit in fixture fx-c02-130: only the source-authorized customer, organization, scope and action tuple is active. This case states its deviation or unchanged condition separately; all identifiers are synthetic. Input: One request carries the target fixture but lacks required actor/scope authorization; record the exact pre-state and principal before invocation. Action: Using fx-c02-130, attempt the same restricted record access operation as synthetic customer after deliberately removing required actor/scope authorization; do not substitute another permission. Expected observable result: The operation is denied or remains pending as required by the source; persisted identity, role, balance, membership, consent and audit state changes only if the source explicitly permits it. In particular, the denied restricted record access transition must not occur.
-  - `TEST:CORE:C02:081.B` (BOUNDARY_OR_CONCURRENCY): Pre-state: A-81 is authorized for read/export; each operation may be retried after an uncertain response. Input: actor=A-81, object=CHAIN-81, operation ids=READ-81 and EXPORT-81, each submitted twice with same idempotency key. Action: Retry each operation once after simulating an uncertain response. Expected observable result: Each accepted logical operation has exactly one correctly typed actor/time event; read and export remain distinct and retries add no duplicate event.
-
-#### تصمیم‌های باز و کنترل‌های اختصاصی
-- `DECISION:C02:01` — Organization contract, beneficial owner and representative evidence؛ وضعیت: `OPEN_DECISION`؛ مرجع: W:156;W:256;W:1650؛ Taskهای متأثر: `TASK:CORE:C02:001`، `TASK:CORE:C02:002`؛ زمان/شرط تصمیم: Before implementation/activation of organization identity flows.
-- `DECISION:C02:02` — Identity provider, Shahkar, roster matching and exception policy؛ وضعیت: `OPEN_DECISION`؛ مرجع: W:168;W:196;W:1650;W:1652؛ Taskهای متأثر: `TASK:CORE:C02:001`، `TASK:CORE:C02:002`؛ زمان/شرط تصمیم: Before enabling external verification or bulk invitation.
-- `DECISION:C02:03` — Authorization freshness, safe continuation and retention implementation details؛ وضعیت: `OPEN_DECISION`؛ مرجع: W:324;W:330;W:340;W:1331;W:1650;W:1651;B:1168;B:1693;B:1696؛ Taskهای متأثر: `TASK:CORE:C02:003`، `TASK:CORE:C02:004`، `TASK:CORE:C02:005`؛ زمان/شرط تصمیم: Before dependent feature activation or release.
-
-### C03 — قراردادها، داده و زیرساخت مشترک
-
-**وضعیت برنامه‌ریزی:** `RA=PASS` / `IPA=PASS` بر مبنای Bundle نهایی C03. **وضعیت محصول:** `NOT_IMPLEMENTED / NOT_EXECUTED`؛ شش Task برنامه‌ریزی شده‌اند اما مجوز اجرای آن‌ها صادر نشده و پیش‌نیازهای تصمیمی باقی است. این فصل اطلاعات اجرایی و ردیابی لازم را از رجیستری نهایی مستقیماً وارد **همین سند** می‌کند؛ مراجعه به Bundle برای فهم و استفاده از برنامه الزامی نیست. Bundle فقط مدرک ممیزی و بازیابی است.
-
-| شاخص | مقدار پذیرفته‌شده | نکته کاربردی |
-| --- | --- | --- |
-| Requirement جدید C03 | 0 | از Requirements پذیرفته‌شده C01 استفاده می‌شود |
-| Requirement در دامنه شش Task | 22 | تمام ۲۲ مورد Test اختصاصی C03 دارند؛ عدد ۲۰ در شواهد P2 مربوط به مجموعه اولیه بازیافتی است، نه پوشش نهایی Taskها |
-| Story/Enabler جدید C03 | 0 | دو Enabler موجود C01 با شناسه TE:CORE:002 و TE:CORE:003 |
-| Task / Subtask جدید C03 | ۰ / ۰ | ۶ Task و ۱۸ Subtask پذیرفته‌شده C01 با مالک پیاده‌سازی C03 |
-| AC و Test بازیافتی C01 | ۲۲ AC / ۲۲ Test | متن کامل AC و Testهای C01 در بخش C01 همین سند موجود است |
-| Test و Case اختصاصی C03 | ۲۲ Test / ۶۶ Case | تعاریف آینده؛ هیچ Case محصولی اجرا نشده است |
-| Contract / Dependency / Delivery Link / Handoff | ۵ / ۱۰ / ۱۱ / ۹ | مالکیت و پیوند بین بسته‌ها در ادامه همین فصل |
-| تحقق DoD | `C03-DOD-V5-001` | فقط پذیرش طراحی و برنامه، نه پیاده‌سازی، استقرار یا صدور مجوز |
-
-**قاعده عدم تکرار:** C01 مالک برنامه‌ریزی ۲۲ Requirement و شش Task است؛ C03 مالک پیاده‌سازی همان Taskهاست. محتوای پذیرفته‌شده در C01 تغییر نکرده است. هر شناسه و معیار پذیرش در این فصل با همان هویت C01 مصرف می‌شود. شناسه جدید برای تکرار الزام یا Task ساخته نشده است.
-
-#### محدوده و مبنای تعیین مالکیت C03
-- **منابع ثابت:** Blueprint `9681c2bf6c3149317c3788516748084cfb6eac7c` و Wallet `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`
-- **G1 و Scope:** ۲٬۲۳۰ واحد منبع، دسته‌بندی نهایی {'CROSS_REFERENCE': 299, 'EXCLUDED_WITH_REASON': 1913, 'SHARED_CONTRACT': 18}؛ 18 بازخوانی عمیق از ۱۸ واحد الزامی؛ عدم قطعیت باز = 0؛ Digest `SCOPE:V4:C03` برابر `0cf1ba978b66b7b2303fa5ee89d955626e66af001995fd6e23de67a4463fe5e3`؛ F01/F03 رفع شده‌اند
-- **نتیجه P1:** COMPLETE_WITH_F01_F02_F03_REMEDIATION
-- **نتیجه P2 تا P6:** P2_status=COMPLETE؛ P3_status=COMPLETE؛ P4_status=COMPLETE_WITH_TARGETED_STATE_AND_PERMISSION_REMEDIATION؛ P5_status=COMPLETE؛ P6_status=COMPLETE_WITH_TARGETED_STATE_AND_PERMISSION_REMEDIATION
-- **استقلال بازبین:** SAME_AUTHOR_TARGETED_READBACK؛ شواهد فرایندی و منبع‌خوانی، نه داوری مستقل بیرونی یا اجرای محصول
-در بندهای `B:477–478` ساختار جدول، نه الزام اجرایی، تشخیص داده شد؛ بند `B:486` موضوع باز Adviser است و به مصوبه C03 تبدیل نشد. برای ۲۱ Source Unit تعیین‌تکلیف اختصاصی در زیر ثبت شده است. موارد conceptual/Adviser متعلق به C03 نیستند و Handoff آن‌ها همچنان باز است.
-
-##### دفتر تعیین‌تکلیف مالکیت ۲۱ واحد اثرگذار
-- **`DISPOSITION:C03:SU-B-00224`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00224`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00225`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00225`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00226`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00226`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00227`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00227`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00228`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00228`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00229`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00229`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00230`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00230`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00232`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00232`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00233`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00233`؛ مالک دامنه: Each producing service owns its own Job/Event; C03 implements the common delivery boundary؛ مالک بسته: `PENDING`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`؛ دلیل: Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
-- **`DISPOSITION:C03:SU-B-00572`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00572`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00573`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00573`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00584`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00584`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ Task: `TASK:CORE:005`؛ قرارداد: `CONTRACT:C01:03`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00589`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00589`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00590`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00590`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00591`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00591`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:04`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00692`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00692`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00693`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00693`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00694`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00694`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00222`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00222`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Table heading only.
-- **`DISPOSITION:C03:SU-B-00223`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00223`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Markdown table separator only.
-- **`DISPOSITION:C03:SU-B-00231`**: `CROSS_REFERENCE` / `OPEN_ADVISER_DECISION_NOT_ACCEPTED`؛ Source Unit `SU-B-00231`؛ مالک دامنه: RAG/Adviser retrieval decision policy (OPEN_DECISION)؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: G1 explicitly records an open proposal; it is not elevated to a C03 requirement.
-
-#### بررسی وضعیت فعلی کد (فقط شواهد استاتیک)
-- **شناسه ممیزی:** INSPECT:C03:001
-- **Commit مبنای بازبینی:** f28033b6496e39f4a59644cccf5fb2c9886fceb4
-- **نتیجه بازبینی:** FastAPI composition and versioned API v1 routes exist; SQLAlchemy/PostgreSQL schema and Alembic migrations exist; Redis is a best-effort questionnaire cache and not a durable queue; Docker Compose local/production definitions and restricted health endpoints exist. Search of backend/app for outbox, standalone durable job runner, queue worker, circuit-breaker package and OpenTelemetry SDK found no implementation. Custom request timing/logging/correlation middleware exists. Presence is inventory evidence only; it does not verify runtime, production configuration or C03 target behavior.
-- `FastAPI_API`: `EXISTING_VERIFIED_BY_SOURCE`
-- `SQLAlchemy_and_Alembic`: `EXISTING_VERIFIED_BY_SOURCE`
-- `PostgreSQL`: `EXISTING_VERIFIED_BY_SOURCE`
-- `Redis_cache`: `EXISTING_PARTIAL_BEST_EFFORT`
-- `Docker_Compose`: `EXISTING_VERIFIED_BY_SOURCE`
-- `health_live_ready`: `EXISTING_VERIFIED_BY_SOURCE`
-- `durable_outbox`: `NEW_REQUIRED_ONLY_WHEN_EVENT_PROVEN`
-- `job_worker`: `BLOCKED_BY_OWNER_ENGINE_DECISIONS`
-- `circuit_breaker`: `NEW_OR_REUSE_DECISION_REQUIRED`
-- `OpenTelemetry`: `NOT_FOUND_IN_REVIEWED_BACKEND_APP`
-- `runtime_verified`: `False`
-- `product_tests_executed`: `0`
-**مسیرهای مطالعه‌شده (نسخه فایل در Commit مبنا):**
-- `backend/app/main.py` — Blob `2e8659b22f93d8d84b456453548ca336feb88f56`
-- `backend/app/api/v1/health.py` — Blob `fffa3b61012920d2f7443535fea8b4280200dda7`
-- `backend/app/api/observability.py` — Blob `7ca27109bc1806c52416a3120594216da3ec9ae6`
-- `backend/app/core/logging.py` — Blob `70e44f9643f98e035d65968236737fa8b4863a06`
-- `backend/app/infrastructure/db/models.py` — Blob `4516bad0c1dd877b3961a8c5bbd44fc57050a0e2`
-- `backend/app/questionnaire/infrastructure/redis_cache.py` — Blob `134440ca29d321545a13a94335b211045828abcd`
-- `alembic/env.py` — Blob `632880bfd1c58152719b50b3198558d6427c50ff`
-- `alembic/versions/7b3f2f4a9c10_add_questionnaire_sessions.py` — Blob `d6b441ce16bb46d600619a3cefb0c46aea8b0fb1`
-- `docker-compose.yml` — Blob `bff45ca31ae7a6deec2bed0d3d5dad2cf8d61b72`
-- `docker-compose.prod.yml` — Blob `377755738b763008420dd8b94a45fb1ae7236943`
-این بررسی، وجود واقعی رفتار در Runtime، کیفیت استقرار یا نتیجه آزمون محصول را اثبات نمی‌کند.
-
-#### Enabler، Task و Subtaskهای مسئولیت اجرایی C03
-##### `TASK:CORE:005` — Design service-owned durable job pattern without imposing one universal workflow engine
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `ARCHITECTURE_DESIGN`؛ PostgreSQL job state; Port/Adapter; service-owned worker
-- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 service ownership; owner-specific long-running use case
-- **خروجی دقیق:** versioned job pattern and worker-crash/migration test contract
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
-- **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
-- **Testهای C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
-- **Testهای C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
-- **قراردادهای وابسته:** `CONTRACT:C01:03`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:02`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:005:01`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-##### `TASK:CORE:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `CONDITIONAL_DESIGN`؛ Owner transaction; outbox; event schema; subscribers
-- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 data ownership; demonstrable event consumer/use case
-- **خروجی دقیق:** minimal event/outbox protocol with fault-injection acceptance
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- **Testهای C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
-- **Testهای C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
-- **قراردادهای وابسته:** `CONTRACT:C01:04`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:02`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:006:01`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)؛ TASK:CORE:005 (CONTRACT)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-##### `TASK:CORE:007` — Specify bounded cross-service resilience and interactive/background isolation
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `CONTRACT_HARDENING`؛ HTTP client; job queue; rate/timeout/circuit policy
-- **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T003 and T008 service-contract interfaces
-- **خروجی دقیق:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
-- **ACهای C01:** `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
-- **Testهای C01:** `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`
-- **Testهای C03:** `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`
-- **قراردادهای وابسته:** `CONTRACT:C01:03`، `CONTRACT:C01:06`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:03`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:007:01`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:003 (CONTRACT)؛ TASK:CORE:008 (CONTRACT)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-##### `TASK:CORE:008` — Design Core API versioning and semantic provider/consumer compatibility verification
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `CONTRACT_CHANGE`؛ FastAPI OpenAPI; API v1 router; schema fixtures; CI
-- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 authority matrix and existing API schema
-- **خروجی دقیق:** contract matrix and migration-safe OpenAPI evolution plan
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- **Testهای C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
-- **Testهای C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
-- **قراردادهای وابسته:** `CONTRACT:C01:02`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:05`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:008:01`، `EVIDENCE:C01:CODE:008:02`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-##### `TASK:CORE:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `POLICY_AND_CONFIG_DESIGN`؛ core/config.py; CI security; configuration deployment
-- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T001 baseline and known policy owners
-- **خروجی دقیق:** four-category config contract and validation/rollback tests
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
-- **Testهای C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
-- **Testهای C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
-- **قراردادهای وابسته:** `CONTRACT:C01:05`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:09`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:009:01`، `EVIDENCE:C01:CODE:009:02`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:008 (CONTRACT)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-##### `TASK:CORE:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
-- **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
-- **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
-- **نوع کار، اجزا:** `OBSERVABILITY_DESIGN`؛ api/observability.py; metrics/logging; tracing; CI and runbooks
-- **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
-- **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T001 operational footprint and realistic workload
-- **خروجی دقیق:** telemetry data-classification and SLO measurement/runbook acceptance contract
-- **Requirementهای پذیرفته‌شده:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
-- **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- **Testهای C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
-- **Testهای C03:** `TEST:CORE:C03:021`، `TEST:CORE:C03:022`، `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
-- **قراردادهای وابسته:** `CONTRACT:C01:06`
-- **گیت‌های تصمیمی لازم:** `DECISION:C01:04`
-- **شواهد کد C01:** `EVIDENCE:C01:CODE:010:01`، `EVIDENCE:C01:CODE:010:02`
-- **تخمین:** ESTIMATION_REQUIRED
-- **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:007 (PREFERENCE)
-- **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
-**Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
-**DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
-- Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
-- Provider/consumer and decision gates resolved before dependent implementation or activation
-- Future tests executed in stated authorized environment with versioned evidence before product Done
-- No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
-
-#### Requirementهای مشترک C01 و ردگیری کامل C03
-متن کامل تعریف ACهای C01، شامل Given/When/Then/Negative/Boundary، و تعریف Testهای تاریخی C01 در فصل C01 همین سند موجود است. جدول زیر برای تمام Requirements تحت مسئولیت اجرایی C03، ردیابی صریح Source Unit، رفتار اتمی، Task و Test اختصاصی C03 را نیز حفظ می‌کند. این شناسه‌ها نسخه جدید Requirement محسوب نمی‌شوند.
-
-##### `REQ:CORE:006` — Core exposes versioned and authorized data/domain/catalogue interfaces with minimal fields, provenance, version and error behavior.
-- **منابع و Source Unit:** B:869;B:1212-1214؛ `SU-B-00435`، `SU-B-00589`، `SU-B-00590`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Core data, domain and catalogue consumers
-- **استثنا:** Catalogue visibility alone grants neither personal-data access nor an action
-- **رفتار `REQ:CORE:006.B01`:** Expose versioned contracts with owner, consumer, purpose and minimal fields
-- **رفتار `REQ:CORE:006.B02`:** Enforce identity, scope and authorization before releasing data
-- **رفتار `REQ:CORE:006.B03`:** Preserve stable reference, provenance, version/freshness, approval and access metadata
-- **رفتار `REQ:CORE:006.B04`:** Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result
-- **Taskهای اجرایی:** `TASK:CORE:008`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:006`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:006`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:001`
-
-##### `REQ:CORE:010` — Short deterministic operations use synchronous APIs; long owner-controlled work uses durable asynchronous Job workflows when needed.
-- **منابع و Source Unit:** B:1192;B:2075؛ `SU-B-00572`، `SU-B-00942`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Classifying a real operation
-- **استثنا:** An independent broker is not a prerequisite
-- **رفتار `REQ:CORE:010.B01`:** Use authenticated versioned synchronous API for short deterministic work
-- **رفتار `REQ:CORE:010.B02`:** Use durable service-owned asynchronous Job only for actual long background work
-- **رفتار `REQ:CORE:010.B03`:** Do not move short loan scoring behind a queue
-- **Taskهای اجرایی:** `TASK:CORE:005`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:010`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:010`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:002`
-
-##### `REQ:CORE:011` — Each Job owner persists state/result in PostgreSQL and exposes versioned ports/adapters, safe cancel/resume and recovery.
-- **منابع و Source Unit:** B:916-918;B:1835؛ `SU-B-00449`، `SU-B-00450`، `SU-B-00835`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** A service has a justified durable job
-- **استثنا:** Redis is an optional execution queue, not authoritative state
-- **رفتار `REQ:CORE:011.B01`:** Persist Job identity, state, attempts, error and result in owner PostgreSQL
-- **رفتار `REQ:CORE:011.B02`:** Separate domain logic from engine via versioned Job/Workflow ports and adapters
-- **رفتار `REQ:CORE:011.B03`:** Provide safe pause, resume and cancellation with audit and owner authority
-- **Taskهای اجرایی:** `TASK:CORE:005`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:011`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:011`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:003`
-
-##### `REQ:CORE:012` — Use transactional outbox only where reliable events are necessary; consumers deduplicate and publishers recover safely.
-- **منابع و Source Unit:** B:1192;B:1216;B:1833؛ `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** A data change must emit a reliable event to a real consumer
-- **استثنا:** No event bus, independent broker or distributed transaction required without demonstrated need
-- **رفتار `REQ:CORE:012.B01`:** Commit business data and Outbox record in the same local transaction
-- **رفتار `REQ:CORE:012.B02`:** Use outbox only for justified reliable asynchronous flows
-- **رفتار `REQ:CORE:012.B03`:** Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots
-- **Taskهای اجرایی:** `TASK:CORE:006`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:012`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:012`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:004`
-
-##### `REQ:CORE:015` — Contracts are defined in versioned OpenAPI/schema before breaking changes and tested for structural and semantic consumer compatibility.
-- **منابع و Source Unit:** B:1827;B:1907؛ `SU-B-00831`، `SU-B-00860`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Every public contract change
-- **استثنا:** Optional additions are compatible only when the consumer tolerates them
-- **رفتار `REQ:CORE:015.B01`:** Owner changes versioned OpenAPI/Schema before implementation
-- **رفتار `REQ:CORE:015.B02`:** Validate request/response structure, field meaning and financial units
-- **رفتار `REQ:CORE:015.B03`:** Specify negative, boundary, property-based and consumer-driven contract tests
-- **رفتار `REQ:CORE:015.B04`:** Treat financial semantic incompatibility as blocking, not a cosmetic schema warning
-- **Taskهای اجرایی:** `TASK:CORE:008`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:015`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:015`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:005`
-
-##### `REQ:CORE:016` — Breaking changes use new version or expand/migrate/contract with tested provider-consumer matrix and error contract.
-- **منابع و Source Unit:** B:1827;B:1907;B:2075؛ `SU-B-00831`، `SU-B-00860`، `SU-B-00942`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Breaking field/type/meaning or consumer change
-- **استثنا:** Shadow/Canary only after feasibility and capacity evidence
-- **رفتار `REQ:CORE:016.B01`:** Use new version or expand/migrate/contract for breaking changes
-- **رفتار `REQ:CORE:016.B02`:** Test a provider/consumer version matrix and block incompatible deployment
-- **رفتار `REQ:CORE:016.B03`:** Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class
-- **رفتار `REQ:CORE:016.B04`:** Identify impacted UI, Job and event consumers and controlled old-version retirement
-- **Taskهای اجرایی:** `TASK:CORE:008`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:016`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:016`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:006`
-
-##### `REQ:CORE:017` — Separate typed/validated operational config, secrets, feature flags and business policies; financial policy cannot be a free-form toggle.
-- **منابع و Source Unit:** B:25;B:1917؛ `SU-B-00014`، `SU-B-00865`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Configuration design
-- **استثنا:** R1 needs no independent configuration-management service
-- **رفتار `REQ:CORE:017.B01`:** Separate operational config, secrets, feature flags and business policies
-- **رفتار `REQ:CORE:017.B02`:** Use typed versioned validated configuration
-- **رفتار `REQ:CORE:017.B03`:** Financial business rules cannot become freely editable runtime toggles
-- **Taskهای اجرایی:** `TASK:CORE:009`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:017`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:017`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:007`
-
-##### `REQ:CORE:018` — Config/flag changes require owner permission, diff, audit, secret protection, dependency checks and rollback safety.
-- **منابع و Source Unit:** B:1917;B:2106؛ `SU-B-00865`، `SU-B-00963`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Configuration or flag change
-- **استثنا:** A rollback must remain compatible with code, API, valid Snapshot and Job
-- **رفتار `REQ:CORE:018.B01`:** Require authorized owner and pre-deployment Config Diff
-- **رفتار `REQ:CORE:018.B02`:** Record actor, time, environment, permission and change history
-- **رفتار `REQ:CORE:018.B03`:** Check dependency and secret safety before activation
-- **رفتار `REQ:CORE:018.B04`:** Reject incompatible rollback or stop the affected capability
-- **Taskهای اجرایی:** `TASK:CORE:009`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:018`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:018`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:008`
-
-##### `REQ:CORE:019` — OpenTelemetry logs/metrics/traces use nonidentifying correlation IDs; no OTP, token, identity or raw questionnaire in telemetry.
-- **منابع و Source Unit:** B:1192;B:1837؛ `SU-B-00572`، `SU-B-00836`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Core/Adviser/Job observability
-- **استثنا:** Clarity/RUM is not the operational telemetry authority
-- **رفتار `REQ:CORE:019.B01`:** Use portable OpenTelemetry structured logs, metrics and traces
-- **رفتار `REQ:CORE:019.B02`:** Propagate random nonpersonal correlation across service and Job boundaries
-- **رفتار `REQ:CORE:019.B03`:** Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery
-- **Taskهای اجرایی:** `TASK:CORE:010`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:019`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:019`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:009`
-
-##### `REQ:CORE:020` — SLO, alerts, runbooks, CPU/RAM and incident controls require measured baselines, not invented thresholds.
-- **منابع و Source Unit:** B:1837;B:1903;B:1913;B:2332؛ `SU-B-00836`، `SU-B-00858`، `SU-B-00863`، `SU-B-01125`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Critical-path SLO, alert or infrastructure claims
-- **استثنا:** No numeric threshold or production capacity accepted from an unmeasured historical host
-- **رفتار `REQ:CORE:020.B01`:** Measure SLI/SLO and Error Budget from a versioned baseline with owner
-- **رفتار `REQ:CORE:020.B02`:** Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review
-- **رفتار `REQ:CORE:020.B03`:** Define non-sensitive synthetic probe and alert/recovery drill
-- **رفتار `REQ:CORE:020.B04`:** Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment
-- **Taskهای اجرایی:** `TASK:CORE:010`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:020`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:020`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:021`
-
-##### `REQ:CORE:021` — SigNoz is a conditional evaluation; self-hosting on the current production VM is prohibited under recorded capacity; revised deployment requires new evidence and separate approval.
-- **منابع و Source Unit:** B:24;B:1837؛ `SU-B-00013`، `SU-B-00836`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Telemetry tool and deployment choice
-- **استثنا:** Current recorded production VM capacity prohibits self-hosted SigNoz; new evidence and separate approval required for any revised choice
-- **رفتار `REQ:CORE:021.B01`:** Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted
-- **رفتار `REQ:CORE:021.B02`:** Do not deploy self-hosted SigNoz on the current production VM under recorded capacity
-- **رفتار `REQ:CORE:021.B03`:** Decide retention, sampling, channel, security, cost and host only after measured evidence and approval
-- **Taskهای اجرایی:** `TASK:CORE:010`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:021`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:021`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:022`
-
-##### `REQ:CORE:037` — Every synchronous cross-service call must obey a bounded timeout budget; failures must be surfaced and contained.
-- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Every synchronous cross-service call
-- **استثنا:** Circuit breakers are conditional on instability; the timeout budget itself is not
-- **رفتار `REQ:CORE:037.B01`:** Bound each synchronous call by an approved timeout budget
-- **رفتار `REQ:CORE:037.B02`:** Surface timeout and contain dependent failure without inventing success
-- **Taskهای اجرایی:** `TASK:CORE:007`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:037`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:037`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:010`
-
-##### `REQ:CORE:038` — Use circuit breaker where unstable external service can cascade failures; recover without spreading failure.
-- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Unstable dependency capable of cascading failure
-- **استثنا:** No claim all calls require the same breaker thresholds
-- **رفتار `REQ:CORE:038.B01`:** Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery
-- **رفتار `REQ:CORE:038.B02`:** Preserve independent capabilities during failure and recovery
-- **Taskهای اجرایی:** `TASK:CORE:007`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:038`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:038`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:011`
-
-##### `REQ:CORE:039` — Retry only transient/retriable outcomes with backoff and a bounded attempt count; uncertain financial effects are reconciled before retry.
-- **منابع و Source Unit:** B:918;B:1192;B:1913؛ `SU-B-00450`، `SU-B-00572`، `SU-B-00863`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Retry of a failed operation
-- **استثنا:** Unknown financial effect must be reconciled before retry, not treated as transient failure
-- **رفتار `REQ:CORE:039.B01`:** Retry only classified transient outcomes with backoff and bounded attempts
-- **رفتار `REQ:CORE:039.B02`:** Do not retry permanent or validation errors
-- **رفتار `REQ:CORE:039.B03`:** Use idempotency for side effects and reconcile unknown financial result before retry
-- **Taskهای اجرایی:** `TASK:CORE:007`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:039`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:039`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:012`
-
-##### `REQ:CORE:040` — Separate capacity of interactive requests and heavy background work using bulkhead or controlled concurrency.
-- **منابع و Source Unit:** B:1192;B:1913؛ `SU-B-00572`، `SU-B-00863`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Interactive and heavy background work compete
-- **استثنا:** Numeric concurrency/share needs measurement and approval
-- **رفتار `REQ:CORE:040.B01`:** Separate interactive and background capacity with bulkhead/quota/concurrency control
-- **رفتار `REQ:CORE:040.B02`:** A saturated or failed worker cannot exhaust interactive API capacity
-- **رفتار `REQ:CORE:040.B03`:** Define visible controlled degradation rather than fabricated success
-- **Taskهای اجرایی:** `TASK:CORE:007`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:040`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:040`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:013`
-
-##### `REQ:CORE:041` — Recover pending in-service jobs after worker restart while preserving owner authority and avoiding repeated effect.
-- **منابع و Source Unit:** B:918;B:1835؛ `SU-B-00450`، `SU-B-00835`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Worker crash/restart with pending jobs
-- **استثنا:** A recovery may not bypass current authorization or duplicate financial/publication effect
-- **رفتار `REQ:CORE:041.B01`:** Resume pending owner-controlled jobs from persisted state after restart
-- **رفتار `REQ:CORE:041.B02`:** Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements
-- **رفتار `REQ:CORE:041.B03`:** Keep durable audit and trace of recovery outcome
-- **Taskهای اجرایی:** `TASK:CORE:005`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:041`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:041`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:014`
-
-##### `REQ:CORE:042` — On engine migration, deliberately route new jobs to the new engine and complete in-flight jobs on the prior engine; adapters alone do not prove zero-change migration.
-- **منابع و Source Unit:** B:918;B:1835؛ `SU-B-00450`، `SU-B-00835`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Workflow-engine/version migration
-- **استثنا:** An adapter alone does not prove migration without code changes
-- **رفتار `REQ:CORE:042.B01`:** Route new jobs deliberately to the new engine
-- **رفتار `REQ:CORE:042.B02`:** Complete in-flight jobs on the prior engine under original compatible semantics
-- **رفتار `REQ:CORE:042.B03`:** Test adapter/orchestration changes and failure/cancel/resume across migration
-- **Taskهای اجرایی:** `TASK:CORE:005`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:042`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:042`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:015`
-
-##### `REQ:CORE:043` — Event consumers deduplicate identity and enforce versioned ordering/compatibility; unknown versions are rejected or quarantined, never blindly applied.
-- **منابع و Source Unit:** B:1216;B:1833;B:1915؛ `SU-B-00591`، `SU-B-00834`، `SU-B-00864`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Event consumer receives delivery
-- **استثنا:** Unknown schema is explicitly rejected/quarantined, not blindly applied
-- **رفتار `REQ:CORE:043.B01`:** Deduplicate event identity before applying side effects
-- **رفتار `REQ:CORE:043.B02`:** Handle duplicate and out-of-order delivery according to versioned contract
-- **رفتار `REQ:CORE:043.B03`:** Test unknown-version handling and consumer compatibility
-- **رفتار `REQ:CORE:043.B04`:** Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine
-- **Taskهای اجرایی:** `TASK:CORE:006`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:043`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:043`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:016`
-
-##### `REQ:CORE:044` — Outbox publisher must persist unsent local records and recover after commit-before-send crash without missing necessary events.
-- **منابع و Source Unit:** B:1216;B:1915؛ `SU-B-00591`، `SU-B-00864`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Publisher crashes after local commit before send
-- **استثنا:** Delivery can be at least once; effective application must remain idempotent
-- **رفتار `REQ:CORE:044.B01`:** Keep unsent Outbox records durable and recover publishing after restart
-- **رفتار `REQ:CORE:044.B02`:** Do not lose necessary events or repeat business effects after send/ack crash
-- **رفتار `REQ:CORE:044.B03`:** Expose publisher lag, retry/final failure, recovery and periodic reconciliation
-- **Taskهای اجرایی:** `TASK:CORE:006`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:044`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:044`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:017`
-
-##### `REQ:CORE:045` — Scoring, catalogue freshness and publication policies require versioned authorized change with regression evidence, never a free operational toggle.
-- **منابع و Source Unit:** B:406;B:1917؛ `SU-B-00193`، `SU-B-00865`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Scoring, catalogue freshness or publication-policy change
-- **استثنا:** Technical rollback cannot activate obsolete legal evidence or incompatible Snapshot
-- **رفتار `REQ:CORE:045.B01`:** Version policy changes with authorized approval, regression and controlled publication
-- **رفتار `REQ:CORE:045.B02`:** Keep historical versions and reject invalid/obsolete Snapshot rollback
-- **رفتار `REQ:CORE:045.B03`:** Do not mutate financial results through a free operational flag
-- **Taskهای اجرایی:** `TASK:CORE:009`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:045`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:045`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:018`
-
-##### `REQ:CORE:046` — Configuration and flags need schema validation, dependency validation, secret scanning, audit/change authorization and compatible rollback.
-- **منابع و Source Unit:** B:1917;B:2106;B:1690؛ `SU-B-00865`، `SU-B-00963`، `SU-B-00763`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Config/flag deployment pipeline
-- **استثنا:** Secret-storage tool and key-rotation period remain design decisions
-- **رفتار `REQ:CORE:046.B01`:** Validate type, default, range and environment differences
-- **رفتار `REQ:CORE:046.B02`:** Validate feature dependencies, kill switch and change authorization
-- **رفتار `REQ:CORE:046.B03`:** Scan secrets and audit changes without exposing secret value
-- **رفتار `REQ:CORE:046.B04`:** Test compatible rollback and block invalid config, leakage or unintended financial change
-- **Taskهای اجرایی:** `TASK:CORE:009`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:046`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:046`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:019`
-
-##### `REQ:CORE:047` — Telemetry and correlation identifiers must exclude real identities, OTPs, tokens and raw form/questionnaire payloads.
-- **منابع و Source Unit:** B:1192;B:1837;B:1690؛ `SU-B-00572`، `SU-B-00836`، `SU-B-00763`
-- **مالک / وضعیت هنجاری:** CoreArchitecture / APPROVED_EXPLICIT
-- **شرط:** Telemetry, analytics and correlation
-- **استثنا:** Financial audit retention is independent of technical-log retention
-- **رفتار `REQ:CORE:047.B01`:** Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads
-- **رفتار `REQ:CORE:047.B02`:** Use safe low-cardinality labels and nonpersonal correlation IDs
-- **رفتار `REQ:CORE:047.B03`:** Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation
-- **Taskهای اجرایی:** `TASK:CORE:010`
-- **AC پذیرفته‌شده C01:** `AC:CORE:C01:047`
-- **Test پذیرفته‌شده C01:** `TEST:CORE:C01:047`
-- **Testهای اختصاصی C03:** `TEST:CORE:C03:020`
-
-#### Testهای طراحی اختصاصی C03 — ورودی، عملیات و Oracle مستقل
-همه Testها **تعریف طراحی پذیرفته‌شده** با وضعیت `NOT_EXECUTED` هستند. برای اجرای آینده، Evidence و مجوزهای مالک لازم‌اند. PASSهای P4/P6 نشان‌دهنده اجرای این Testها روی محصول نیست.
-
-##### `TEST:CORE:C03:001` — Requirement: `REQ:CORE:006`
-- **Task:** `TASK:CORE:008`
-- **AC:** `AC:CORE:C01:006`
-- **رفتارهای اتمی:** `REQ:CORE:006.B01`، `REQ:CORE:006.B02`، `REQ:CORE:006.B03`، `REQ:CORE:006.B04`
-- **Source Unitها:** `SU-B-00435`، `SU-B-00589`، `SU-B-00590`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:05`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:001.P` — `POSITIVE`**
-  - Actor/Fixture: Synthetic Adviser consumer requests a published loan catalogue through the authorized Core v1 port.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:006 and AC:CORE:C01:006; Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone.
-  - Action: Invoke the authorized fixture to read the published catalogue through the versioned Core port.
-  - Input: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone.
-  - Observable Oracle: Authorized consumer receives productId, eligibilityVersion and provenance; private accountPhone is absent and access audit records the allowed purpose.
-  - Expected State Change: Before: no request-specific access audit row exists. After: the authorized catalogue response is returned and one audit row records purpose and allowed fields; catalogue business data remains unchanged.
-  - Side-effect Invariant: No unauthorized field, private-table read, fabricated result, or stale approval is exposed.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:001.N` — `NEGATIVE`**
-  - Actor/Fixture: Synthetic Adviser consumer requests a published loan catalogue through the authorized Core v1 port.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:006 and AC:CORE:C01:006; Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone.
-  - Action: Submit the negative fixture to read the published catalogue through the versioned Core port and capture the decision and persisted-state diff.
-  - Input: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone; Injected stimulus: Consumer with scope=public_catalogue requests accountPhone from private account repository.
-  - Observable Oracle: Consumer with scope=public_catalogue requests accountPhone from private account repository; the request is denied before the private repository is read.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No unauthorized field, private-table read, fabricated result, or stale approval is exposed.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:001.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Synthetic Adviser consumer requests a published loan catalogue through the authorized Core v1 port.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:006 and AC:CORE:C01:006; Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone.
-  - Action: Inject the stated lifecycle or concurrency event while executing read the published catalogue through the versioned Core port; inspect the owner state and recovery evidence.
-  - Input: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone; Injected stimulus: Between request A and request B, revoke Adviser scope and change catalogue version from fixture 8 to 9.
-  - Observable Oracle: Between request A and request B, revoke Adviser scope and change catalogue version from fixture 8 to 9; next response is explicit denied/stale and never falls back to a private table or fabricated result.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the request returns a denied/stale response; no catalogue, private account, or owner data changes. Only a sanitized authorization-decision audit observation may be appended.
-  - Side-effect Invariant: No unauthorized field, private-table read, fabricated result, or stale approval is exposed.
-  - Boundary/Race: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone; Injected stimulus: Between request A and request B, revoke Adviser scope and change catalogue version from fixture 8 to 9.
-
-##### `TEST:CORE:C03:002` — Requirement: `REQ:CORE:010`
-- **Task:** `TASK:CORE:005`
-- **AC:** `AC:CORE:C01:010`
-- **رفتارهای اتمی:** `REQ:CORE:010.B01`، `REQ:CORE:010.B02`، `REQ:CORE:010.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00942`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:002.P` — `POSITIVE`**
-  - Actor/Fixture: Core API consumer performs deterministic scoring and the owning service handles a separate long ingestion job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:010 and AC:CORE:C01:010; Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture.
-  - Action: Invoke the authorized fixture to route scoring and long-running ingestion through their declared synchronous and durable-job paths.
-  - Input: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture.
-  - Observable Oracle: Scoring returns its deterministic response through the authorized synchronous port; ingestion returns a durable job id owned by its service.
-  - Expected State Change: Before: no durable job record exists for the ingestion request. After: scoring returns synchronously and the ingestion owner persists one addressable job id; no broker dependency is introduced.
-  - Side-effect Invariant: No short scoring action is made dependent on background-job availability.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:002.N` — `NEGATIVE`**
-  - Actor/Fixture: Core API consumer performs deterministic scoring and the owning service handles a separate long ingestion job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:010 and AC:CORE:C01:010; Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture.
-  - Action: Submit the negative fixture to route scoring and long-running ingestion through their declared synchronous and durable-job paths and capture the decision and persisted-state diff.
-  - Input: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture; Injected stimulus: Architecture fixture routes scoring through a mandatory broker or performs the 12-document ingestion inline in the request handler.
-  - Observable Oracle: Architecture fixture routes scoring through a mandatory broker or performs the 12-document ingestion inline in the request handler; validator rejects either design.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No short scoring action is made dependent on background-job availability.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:002.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Core API consumer performs deterministic scoring and the owning service handles a separate long ingestion job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:010 and AC:CORE:C01:010; Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture.
-  - Action: Inject the stated lifecycle or concurrency event while executing route scoring and long-running ingestion through their declared synchronous and durable-job paths; inspect the owner state and recovery evidence.
-  - Input: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture; Injected stimulus: With no independent broker but owner PostgreSQL and worker available, scoring remains synchronous and the long job remains addressable by its durable id.
-  - Observable Oracle: With no independent broker but owner PostgreSQL and worker available, scoring remains synchronous and the long job remains addressable by its durable id.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the fixture only observes synchronous scoring and an existing durable job id; owner data and job state remain unchanged and no independent broker is added.
-  - Side-effect Invariant: No short scoring action is made dependent on background-job availability.
-  - Boundary/Race: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture; Injected stimulus: With no independent broker but owner PostgreSQL and worker available, scoring remains synchronous and the long job remains addressable by its durable id.
-
-##### `TEST:CORE:C03:003` — Requirement: `REQ:CORE:011`
-- **Task:** `TASK:CORE:005`
-- **AC:** `AC:CORE:C01:011`
-- **رفتارهای اتمی:** `REQ:CORE:011.B01`، `REQ:CORE:011.B02`، `REQ:CORE:011.B03`
-- **Source Unitها:** `SU-B-00449`، `SU-B-00450`، `SU-B-00835`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:003.P` — `POSITIVE`**
-  - Actor/Fixture: The job-owning service receives a valid long-running job request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:011 and AC:CORE:C01:011; Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture.
-  - Action: Invoke the authorized fixture to resume the persisted owner job after worker restart.
-  - Input: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture.
-  - Observable Oracle: After worker restart the same job resumes from persisted state, records one terminal result, and retains its owner and attempt history.
-  - Expected State Change: Before: job-test-17 is QUEUED with attempt=0 and no result. After: the same owner record contains one terminal result and retained attempt history; no second job id or effect is created.
-  - Side-effect Invariant: Only the owning service may change its Job state; duplicate resume cannot duplicate the effect.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:003.N` — `NEGATIVE`**
-  - Actor/Fixture: The job-owning service receives a valid long-running job request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:011 and AC:CORE:C01:011; Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture.
-  - Action: Submit the negative fixture to resume the persisted owner job after worker restart and capture the decision and persisted-state diff.
-  - Input: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: A Core admin from another owner requests cancellation of job-test-17.
-  - Observable Oracle: A Core admin from another owner requests cancellation of job-test-17; the operation is rejected and no job state changes.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Only the owning service may change its Job state; duplicate resume cannot duplicate the effect.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:003.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: The job-owning service receives a valid long-running job request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:011 and AC:CORE:C01:011; Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture.
-  - Action: Inject the stated lifecycle or concurrency event while executing resume the persisted owner job after worker restart; inspect the owner state and recovery evidence.
-  - Input: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: Restart occurs after state commit but before acknowledgement.
-  - Observable Oracle: Restart occurs after state commit but before acknowledgement; worker reacquires the owner record and does not create a second job effect.
-  - Expected State Change: Before: job-test-17 has committed its state transition but its acknowledgement is absent. After: restart reacquires that same owner record; the job id and committed effect remain singular and no duplicate job effect appears.
-  - Side-effect Invariant: Only the owning service may change its Job state; duplicate resume cannot duplicate the effect.
-  - Boundary/Race: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: Restart occurs after state commit but before acknowledgement.
-
-##### `TEST:CORE:C03:004` — Requirement: `REQ:CORE:012`
-- **Task:** `TASK:CORE:006`
-- **AC:** `AC:CORE:C01:012`
-- **رفتارهای اتمی:** `REQ:CORE:012.B01`، `REQ:CORE:012.B02`، `REQ:CORE:012.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:004.P` — `POSITIVE`**
-  - Actor/Fixture: An approved async flow requires a reliable event after a local business update.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:012 and AC:CORE:C01:012; Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
-  - Action: Invoke the authorized fixture to commit the owner row and required Outbox envelope in one local transaction.
-  - Input: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
-  - Observable Oracle: The committed local row and its outbox entry are both present; after publisher recovery event-41 is delivered and one consumer effect is recorded.
-  - Expected State Change: Before: record-41 and event-41 are absent from the owner transaction. After: both are committed atomically; recovery delivers event-41 and the consumer effect count is exactly one.
-  - Side-effect Invariant: No distributed transaction is introduced and no necessary event is lost.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:004.N` — `NEGATIVE`**
-  - Actor/Fixture: An approved async flow requires a reliable event after a local business update.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:012 and AC:CORE:C01:012; Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
-  - Action: Submit the negative fixture to commit the owner row and required Outbox envelope in one local transaction and capture the decision and persisted-state diff.
-  - Input: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld; Injected stimulus: A flow marked synchronous-only adds a mandatory outbox/broker dependency without a proven reliable-event need.
-  - Observable Oracle: A flow marked synchronous-only adds a mandatory outbox/broker dependency without a proven reliable-event need; architecture acceptance rejects it.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No distributed transaction is introduced and no necessary event is lost.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:004.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: An approved async flow requires a reliable event after a local business update.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:012 and AC:CORE:C01:012; Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld.
-  - Action: Inject the stated lifecycle or concurrency event while executing commit the owner row and required Outbox envelope in one local transaction; inspect the owner state and recovery evidence.
-  - Input: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld; Injected stimulus: Crash after local commit before send: durable event is eventually sent after restart.
-  - Observable Oracle: Crash after local commit before send: durable event is eventually sent after restart; repeated delivery leaves one effect.
-  - Expected State Change: Before: the owner row and durable event-41 are committed, but publication has not completed. After: recovery sends the same event id and the consumer effect count remains one despite redelivery.
-  - Side-effect Invariant: No distributed transaction is introduced and no necessary event is lost.
-  - Boundary/Race: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld; Injected stimulus: Crash after local commit before send: durable event is eventually sent after restart.
-
-##### `TEST:CORE:C03:005` — Requirement: `REQ:CORE:015`
-- **Task:** `TASK:CORE:008`
-- **AC:** `AC:CORE:C01:015`
-- **رفتارهای اتمی:** `REQ:CORE:015.B01`، `REQ:CORE:015.B02`، `REQ:CORE:015.B03`، `REQ:CORE:015.B04`
-- **Source Unitها:** `SU-B-00831`، `SU-B-00860`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:05`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:005.P` — `POSITIVE`**
-  - Actor/Fixture: Provider and consumer review a proposed versioned contract before a breaking implementation change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:015 and AC:CORE:C01:015; Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units.
-  - Action: Invoke the authorized fixture to validate provider and consumer schema plus semantic units for the proposed version.
-  - Input: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units.
-  - Observable Oracle: The v1 provider contract validates the required fields and currency meaning before the implementation change is accepted.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — schema and currency semantics are validated in the fixture; no provider contract version or deployed field meaning changes.
-  - Side-effect Invariant: No financial unit or field meaning changes silently.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:005.N` — `NEGATIVE`**
-  - Actor/Fixture: Provider and consumer review a proposed versioned contract before a breaking implementation change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:015 and AC:CORE:C01:015; Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units.
-  - Action: Submit the negative fixture to validate provider and consumer schema plus semantic units for the proposed version and capture the decision and persisted-state diff.
-  - Input: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units; Injected stimulus: Provider removes amountMinor or changes its unit while retaining v1.
-  - Observable Oracle: Provider removes amountMinor or changes its unit while retaining v1; structural or semantic contract validation rejects the change.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No financial unit or field meaning changes silently.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:005.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Provider and consumer review a proposed versioned contract before a breaking implementation change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:015 and AC:CORE:C01:015; Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units.
-  - Action: Inject the stated lifecycle or concurrency event while executing validate provider and consumer schema plus semantic units for the proposed version; inspect the owner state and recovery evidence.
-  - Input: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units; Injected stimulus: A compatible additive field is tested against both current consumers.
-  - Observable Oracle: A compatible additive field is tested against both current consumers; a versioned incompatible proposal remains blocked pending consumer evidence.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — both consumers are evaluated against the additive proposal; provider and consumer deployed versions remain unchanged until compatibility evidence is accepted.
-  - Side-effect Invariant: No financial unit or field meaning changes silently.
-  - Boundary/Race: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units; Injected stimulus: A compatible additive field is tested against both current consumers.
-
-##### `TEST:CORE:C03:006` — Requirement: `REQ:CORE:016`
-- **Task:** `TASK:CORE:008`
-- **AC:** `AC:CORE:C01:016`
-- **رفتارهای اتمی:** `REQ:CORE:016.B01`، `REQ:CORE:016.B02`، `REQ:CORE:016.B03`، `REQ:CORE:016.B04`
-- **Source Unitها:** `SU-B-00831`، `SU-B-00860`، `SU-B-00942`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:05`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:006.P` — `POSITIVE`**
-  - Actor/Fixture: Provider proposes a change that may break two registered consumer versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:016 and AC:CORE:C01:016; Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id.
-  - Action: Invoke the authorized fixture to run the old/new consumer compatibility matrix during provider migration.
-  - Input: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id.
-  - Observable Oracle: New version or expand/migrate/contract plan is recorded; compatible consumers pass and incompatible consumer deployment is blocked with a typed error.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the compatibility matrix produces versioned pass/block evidence; no provider or consumer deployment occurs in this planning test.
-  - Side-effect Invariant: No silent consumer break or personal identifier in the error trace.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:006.N` — `NEGATIVE`**
-  - Actor/Fixture: Provider proposes a change that may break two registered consumer versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:016 and AC:CORE:C01:016; Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id.
-  - Action: Submit the negative fixture to run the old/new consumer compatibility matrix during provider migration and capture the decision and persisted-state diff.
-  - Input: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id; Injected stimulus: Provider-v2 is deployed to consumer-v1 without migration/version routing.
-  - Observable Oracle: Provider-v2 is deployed to consumer-v1 without migration/version routing; matrix oracle reports incompatible and blocks release.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No silent consumer break or personal identifier in the error trace.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:006.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Provider proposes a change that may break two registered consumer versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:016 and AC:CORE:C01:016; Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id.
-  - Action: Inject the stated lifecycle or concurrency event while executing run the old/new consumer compatibility matrix during provider migration; inspect the owner state and recovery evidence.
-  - Input: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id; Injected stimulus: During migration, old and new consumers run concurrently.
-  - Observable Oracle: During migration, old and new consumers run concurrently; old calls receive a supported response or explicit typed error with nonpersonal trace id.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — concurrent old/new requests produce supported responses or typed errors and trace evidence; deployed contract versions and persisted business state remain unchanged.
-  - Side-effect Invariant: No silent consumer break or personal identifier in the error trace.
-  - Boundary/Race: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id; Injected stimulus: During migration, old and new consumers run concurrently.
-
-##### `TEST:CORE:C03:007` — Requirement: `REQ:CORE:017`
-- **Task:** `TASK:CORE:009`
-- **AC:** `AC:CORE:C01:017`
-- **رفتارهای اتمی:** `REQ:CORE:017.B01`، `REQ:CORE:017.B02`، `REQ:CORE:017.B03`
-- **Source Unitها:** `SU-B-00014`، `SU-B-00865`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:09`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:007.P` — `POSITIVE`**
-  - Actor/Fixture: An operator prepares a runtime configuration change that must stay separate from protected business policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:017 and AC:CORE:C01:017; Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3.
-  - Action: Invoke the authorized fixture to validate typed operational configuration separately from protected business policy.
-  - Input: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3.
-  - Observable Oracle: Typed operational values validate; secret remains a reference; financial policy remains at protected version 3 and cannot be changed by the free flag.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — typed values and policy separation are validated; active configuration and protected financial policy revision remain unchanged.
-  - Side-effect Invariant: Secrets and financial policy values never become ordinary free-form runtime toggles.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:007.N` — `NEGATIVE`**
-  - Actor/Fixture: An operator prepares a runtime configuration change that must stay separate from protected business policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:017 and AC:CORE:C01:017; Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3.
-  - Action: Submit the negative fixture to validate typed operational configuration separately from protected business policy and capture the decision and persisted-state diff.
-  - Input: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3; Injected stimulus: Config flag attempts to set financialFeePolicy=0.
-  - Observable Oracle: Config flag attempts to set financialFeePolicy=0; schema/policy validation rejects the change and keeps version 3 active.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Secrets and financial policy values never become ordinary free-form runtime toggles.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:007.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: An operator prepares a runtime configuration change that must stay separate from protected business policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:017 and AC:CORE:C01:017; Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3.
-  - Action: Inject the stated lifecycle or concurrency event while executing validate typed operational configuration separately from protected business policy; inspect the owner state and recovery evidence.
-  - Input: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3; Injected stimulus: Config omits timeout_ms or supplies timeout_ms=-1.
-  - Observable Oracle: Config omits timeout_ms or supplies timeout_ms=-1; default/range validation is explicit and no invalid config activates.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — missing/out-of-range config is reported by validation and cannot activate; active configuration and protected policy remain at their initial revisions.
-  - Side-effect Invariant: Secrets and financial policy values never become ordinary free-form runtime toggles.
-  - Boundary/Race: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3; Injected stimulus: Config omits timeout_ms or supplies timeout_ms=-1.
-
-##### `TEST:CORE:C03:008` — Requirement: `REQ:CORE:018`
-- **Task:** `TASK:CORE:009`
-- **AC:** `AC:CORE:C01:018`
-- **رفتارهای اتمی:** `REQ:CORE:018.B01`، `REQ:CORE:018.B02`، `REQ:CORE:018.B03`، `REQ:CORE:018.B04`
-- **Source Unitها:** `SU-B-00865`، `SU-B-00963`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:09`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:008.P` — `POSITIVE`**
-  - Actor/Fixture: An authorized owner submits a config change through the controlled change path.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:018 and AC:CORE:C01:018; Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2.
-  - Action: Invoke the authorized fixture to record and authorize the versioned configuration change and rollback.
-  - Input: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2.
-  - Observable Oracle: Change record stores actor, time, environment, permission and diff; dependency validation passes before activation.
-  - Expected State Change: Before: active config revision is 12 and no revision-13 change record exists. After: an authorized staged change record captures actor, environment, permission, diff and dependency validation; activation remains pending and active revision stays 12.
-  - Side-effect Invariant: Unauthorized change and secret material never persist in audit payloads.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:008.N` — `NEGATIVE`**
-  - Actor/Fixture: An authorized owner submits a config change through the controlled change path.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:018 and AC:CORE:C01:018; Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2.
-  - Action: Submit the negative fixture to record and authorize the versioned configuration change and rollback and capture the decision and persisted-state diff.
-  - Input: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2; Injected stimulus: Actor=read-only operator submits the same change or includes a raw secret value.
-  - Observable Oracle: Actor=read-only operator submits the same change or includes a raw secret value; system rejects and does not activate it.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Unauthorized change and secret material never persist in audit payloads.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:008.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: An authorized owner submits a config change through the controlled change path.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:018 and AC:CORE:C01:018; Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2.
-  - Action: Inject the stated lifecycle or concurrency event while executing record and authorize the versioned configuration change and rollback; inspect the owner state and recovery evidence.
-  - Input: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2; Injected stimulus: Rollback to revision 11 conflicts with current schema dependency.
-  - Observable Oracle: Rollback to revision 11 conflicts with current schema dependency; rollback is blocked and the affected capability remains stopped safely.
-  - Expected State Change: Before: config revision 13 is active with the current schema dependency. After: rollback to revision 11 is not activated; the affected capability is stopped safely and the active revision is not silently downgraded.
-  - Side-effect Invariant: Unauthorized change and secret material never persist in audit payloads.
-  - Boundary/Race: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2; Injected stimulus: Rollback to revision 11 conflicts with current schema dependency.
-
-##### `TEST:CORE:C03:009` — Requirement: `REQ:CORE:019`
-- **Task:** `TASK:CORE:010`
-- **AC:** `AC:CORE:C01:019`
-- **رفتارهای اتمی:** `REQ:CORE:019.B01`، `REQ:CORE:019.B02`، `REQ:CORE:019.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00836`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:04`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:009.P` — `POSITIVE`**
-  - Actor/Fixture: Operations review the telemetry emitted for a synthetic request and its background job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:019 and AC:CORE:C01:019; Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite.
-  - Action: Invoke the authorized fixture to propagate nonpersonal correlation through the declared request and job trace.
-  - Input: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite.
-  - Observable Oracle: Logs, metrics and traces correlate the request/job, expose error and retry state, and contain no user identity, OTP, token or raw payload.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — request/job business state is unchanged; the emitted telemetry is correlated by corr-7fa1 and contains no user identity, OTP, token, or raw payload.
-  - Side-effect Invariant: No sensitive request, auth secret or high-cardinality personal value enters telemetry.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:009.N` — `NEGATIVE`**
-  - Actor/Fixture: Operations review the telemetry emitted for a synthetic request and its background job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:019 and AC:CORE:C01:019; Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite.
-  - Action: Submit the negative fixture to propagate nonpersonal correlation through the declared request and job trace and capture the decision and persisted-state diff.
-  - Input: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite; Injected stimulus: Inject OTP=123456 and token=tok-fixture into an exception/header.
-  - Observable Oracle: Inject OTP=123456 and token=tok-fixture into an exception/header; telemetry export rejects or redacts both before persistence.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No sensitive request, auth secret or high-cardinality personal value enters telemetry.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:009.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Operations review the telemetry emitted for a synthetic request and its background job.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:019 and AC:CORE:C01:019; Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite.
-  - Action: Inject the stated lifecycle or concurrency event while executing propagate nonpersonal correlation through the declared request and job trace; inspect the owner state and recovery evidence.
-  - Input: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite; Injected stimulus: Request retries across Core and Adviser retain corr-7fa1 while labels remain route-template and outcome enums.
-  - Observable Oracle: Request retries across Core and Adviser retain corr-7fa1 while labels remain route-template and outcome enums; no user id is used as a metric label.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — retries append correlated trace evidence using corr-7fa1 and finite labels; request/job business state and identity data remain unchanged.
-  - Side-effect Invariant: No sensitive request, auth secret or high-cardinality personal value enters telemetry.
-  - Boundary/Race: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite; Injected stimulus: Request retries across Core and Adviser retain corr-7fa1 while labels remain route-template and outcome enums.
-
-##### `TEST:CORE:C03:010` — Requirement: `REQ:CORE:037`
-- **Task:** `TASK:CORE:007`
-- **AC:** `AC:CORE:C01:037`
-- **رفتارهای اتمی:** `REQ:CORE:037.B01`، `REQ:CORE:037.B02`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:03`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:010.P` — `POSITIVE`**
-  - Actor/Fixture: A service makes a synchronous call under its approved dependency budget.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:037 and AC:CORE:C01:037; Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case.
-  - Action: Invoke the authorized fixture to measure the defined request path and classify its operational error outcome.
-  - Input: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case.
-  - Observable Oracle: 80ms response returns success within the supplied budget; 120ms call terminates at budget and returns a typed dependency timeout.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the 80ms fixture returns a response and the 120ms fixture returns a typed timeout; dependency and business-owner records are unchanged.
-  - Side-effect Invariant: The fixture threshold is test input, not a product-wide timeout decision.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:010.N` — `NEGATIVE`**
-  - Actor/Fixture: A service makes a synchronous call under its approved dependency budget.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:037 and AC:CORE:C01:037; Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case.
-  - Action: Submit the negative fixture to measure the defined request path and classify its operational error outcome and capture the decision and persisted-state diff.
-  - Input: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case; Injected stimulus: Call has no timeout and waits for the 120ms fixture indefinitely.
-  - Observable Oracle: Call has no timeout and waits for the 120ms fixture indefinitely; architecture test rejects unbounded wait.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: The fixture threshold is test input, not a product-wide timeout decision.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:010.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: A service makes a synchronous call under its approved dependency budget.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:037 and AC:CORE:C01:037; Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case.
-  - Action: Inject the stated lifecycle or concurrency event while executing measure the defined request path and classify its operational error outcome; inspect the owner state and recovery evidence.
-  - Input: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case; Injected stimulus: At the 100ms boundary the timeout is surfaced and downstream failure is contained.
-  - Observable Oracle: At the 100ms boundary the timeout is surfaced and downstream failure is contained; caller does not fabricate a successful payload.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — at the fixture 100ms boundary a typed timeout is observed and no successful payload is fabricated; no downstream business effect is committed.
-  - Side-effect Invariant: The fixture threshold is test input, not a product-wide timeout decision.
-  - Boundary/Race: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case; Injected stimulus: At the 100ms boundary the timeout is surfaced and downstream failure is contained.
-
-##### `TEST:CORE:C03:011` — Requirement: `REQ:CORE:038`
-- **Task:** `TASK:CORE:007`
-- **AC:** `AC:CORE:C01:038`
-- **رفتارهای اتمی:** `REQ:CORE:038.B01`، `REQ:CORE:038.B02`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:03`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:011.P` — `POSITIVE`**
-  - Actor/Fixture: A dependency with measured fixture instability is guarded by a circuit policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:038 and AC:CORE:C01:038; Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only.
-  - Action: Invoke the authorized fixture to evaluate bounded retry behavior for transient and permanent dependency outcomes.
-  - Input: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only.
-  - Observable Oracle: After the third failure, next request fails fast without contacting the dependency; one half-open probe after cooldown succeeds and closes the circuit.
-  - Expected State Change: Before: circuit is CLOSED with zero consecutive failed probes. After: the third failed probe moves it to OPEN; after cooldown one HALF_OPEN probe succeeds and the circuit returns to CLOSED, as the fixture oracle specifies.
-  - Side-effect Invariant: No circuit policy value is asserted as a production default.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:011.N` — `NEGATIVE`**
-  - Actor/Fixture: A dependency with measured fixture instability is guarded by a circuit policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:038 and AC:CORE:C01:038; Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only.
-  - Action: Submit the negative fixture to evaluate bounded retry behavior for transient and permanent dependency outcomes and capture the decision and persisted-state diff.
-  - Input: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only; Injected stimulus: Circuit remains closed and forwards repeated calls during the configured outage.
-  - Observable Oracle: Circuit remains closed and forwards repeated calls during the configured outage; failure containment assertion fails.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No circuit policy value is asserted as a production default.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:011.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: A dependency with measured fixture instability is guarded by a circuit policy.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:038 and AC:CORE:C01:038; Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only.
-  - Action: Inject the stated lifecycle or concurrency event while executing evaluate bounded retry behavior for transient and permanent dependency outcomes; inspect the owner state and recovery evidence.
-  - Input: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only; Injected stimulus: While Adviser circuit is open, independent health and Core catalogue reads remain available.
-  - Observable Oracle: While Adviser circuit is open, independent health and Core catalogue reads remain available; concurrent probes do not flood the dependency.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — health and Core catalogue reads remain available while the Adviser circuit is OPEN; concurrent probes do not change the circuit beyond the configured probe policy or flood the dependency.
-  - Side-effect Invariant: No circuit policy value is asserted as a production default.
-  - Boundary/Race: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only; Injected stimulus: While Adviser circuit is open, independent health and Core catalogue reads remain available.
-
-##### `TEST:CORE:C03:012` — Requirement: `REQ:CORE:039`
-- **Task:** `TASK:CORE:007`
-- **AC:** `AC:CORE:C01:039`
-- **رفتارهای اتمی:** `REQ:CORE:039.B01`، `REQ:CORE:039.B02`، `REQ:CORE:039.B03`
-- **Source Unitها:** `SU-B-00450`، `SU-B-00572`، `SU-B-00863`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:03`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:012.P` — `POSITIVE`**
-  - Actor/Fixture: Retry policy evaluates transient, permanent and unknown outcomes before repeating an operation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:039 and AC:CORE:C01:039; Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment.
-  - Action: Invoke the authorized fixture to classify dependency timeout and circuit-breaker state for the owning service.
-  - Input: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment.
-  - Observable Oracle: Transient read retries with backoff then succeeds; attempt count is at most 2 and permanent validation error is not retried.
-  - Expected State Change: Before: transient read attempt count is zero. After: the fixture records no more than two attempts before success; the 400 validation case has no retry and the financial effect count remains unchanged.
-  - Side-effect Invariant: No duplicate financial effect is caused by generic transport retry.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:012.N` — `NEGATIVE`**
-  - Actor/Fixture: Retry policy evaluates transient, permanent and unknown outcomes before repeating an operation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:039 and AC:CORE:C01:039; Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment.
-  - Action: Submit the negative fixture to classify dependency timeout and circuit-breaker state for the owning service and capture the decision and persisted-state diff.
-  - Input: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment; Injected stimulus: Retry loop repeats the 400 validation error or exceeds 2 fixture attempts.
-  - Observable Oracle: Retry loop repeats the 400 validation error or exceeds 2 fixture attempts; test rejects both.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No duplicate financial effect is caused by generic transport retry.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:012.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Retry policy evaluates transient, permanent and unknown outcomes before repeating an operation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:039 and AC:CORE:C01:039; Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment.
-  - Action: Inject the stated lifecycle or concurrency event while executing classify dependency timeout and circuit-breaker state for the owning service; inspect the owner state and recovery evidence.
-  - Input: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment; Injected stimulus: For UNKNOWN_RESULT, caller queries the owning financial operation result first.
-  - Observable Oracle: For UNKNOWN_RESULT, caller queries the owning financial operation result first; if effect exists no retry occurs, and if outcome cannot be resolved processing stops for reconciliation.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — while UNKNOWN_RESULT is unresolved, retry count and external financial effect count do not increase; owner lookup/reconciliation remains required and no unapproved outcome state is invented.
-  - Side-effect Invariant: No duplicate financial effect is caused by generic transport retry.
-  - Boundary/Race: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment; Injected stimulus: For UNKNOWN_RESULT, caller queries the owning financial operation result first.
-
-##### `TEST:CORE:C03:013` — Requirement: `REQ:CORE:040`
-- **Task:** `TASK:CORE:007`
-- **AC:** `AC:CORE:C01:040`
-- **رفتارهای اتمی:** `REQ:CORE:040.B01`، `REQ:CORE:040.B02`، `REQ:CORE:040.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00863`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:03`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:013.P` — `POSITIVE`**
-  - Actor/Fixture: Interactive and background workloads run under separate capacity controls.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:040 and AC:CORE:C01:040; Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request.
-  - Action: Invoke the authorized fixture to submit background work under quota while probing the reserved interactive path.
-  - Input: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request.
-  - Observable Oracle: Background submissions are queued or backpressured within quota; interactive request completes using its reserved slot.
-  - Expected State Change: Before: interactive pool has two reserved slots and background quota is one. After: background accepted/queued work stays within quota, excess submissions are backpressured, and the catalogue request completes using a reserved interactive slot.
-  - Side-effect Invariant: No background saturation can exhaust reserved interactive capacity.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:013.N` — `NEGATIVE`**
-  - Actor/Fixture: Interactive and background workloads run under separate capacity controls.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:040 and AC:CORE:C01:040; Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request.
-  - Action: Submit the negative fixture to submit background work under quota while probing the reserved interactive path and capture the decision and persisted-state diff.
-  - Input: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request; Injected stimulus: Four background jobs consume all interactive slots.
-  - Observable Oracle: Four background jobs consume all interactive slots; capacity-isolation assertion rejects this configuration.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No background saturation can exhaust reserved interactive capacity.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:013.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Interactive and background workloads run under separate capacity controls.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:040 and AC:CORE:C01:040; Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request.
-  - Action: Inject the stated lifecycle or concurrency event while executing submit background work under quota while probing the reserved interactive path; inspect the owner state and recovery evidence.
-  - Input: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request; Injected stimulus: When background quota is full, next job receives explicit backpressure while the interactive API stays responsive and no synthetic success is returned.
-  - Observable Oracle: When background quota is full, next job receives explicit backpressure while the interactive API stays responsive and no synthetic success is returned.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the over-quota background submission creates no accepted job record; the reserved interactive slot remains available and no synthetic success is persisted.
-  - Side-effect Invariant: No background saturation can exhaust reserved interactive capacity.
-  - Boundary/Race: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request; Injected stimulus: When background quota is full, next job receives explicit backpressure while the interactive API stays responsive and no synthetic success is returned.
-
-##### `TEST:CORE:C03:014` — Requirement: `REQ:CORE:041`
-- **Task:** `TASK:CORE:005`
-- **AC:** `AC:CORE:C01:041`
-- **رفتارهای اتمی:** `REQ:CORE:041.B01`، `REQ:CORE:041.B02`، `REQ:CORE:041.B03`
-- **Source Unitها:** `SU-B-00450`، `SU-B-00835`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:014.P` — `POSITIVE`**
-  - Actor/Fixture: Owner service resumes a pending job after worker restart.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:041 and AC:CORE:C01:041; Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed.
-  - Action: Restart the owner worker for job-88, resume it from persisted step 2, and compare the owner job record, effect key, and recovery trace before and after execution.
-  - Input: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed.
-  - Observable Oracle: Restarted owner worker resumes at step 2 and records one completion using the same effect key.
-  - Expected State Change: Before: owner record job-88 is RUNNING at step 2/3; step 1 is committed and effect key effect-88 identifies the prior effect. After: following restart, the same job record reaches one completion result at step 3/3, records effect-88 once, and appends one recovery trace; no second external effect occurs.
-  - Side-effect Invariant: The effect key effect-88 is applied at most once; job ownership remains unchanged and no unrelated job or financial/publication effect is created.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:014.N` — `NEGATIVE`**
-  - Actor/Fixture: Owner service resumes a pending job after worker restart.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:041 and AC:CORE:C01:041; Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed.
-  - Action: Submit the negative fixture to resume a persisted multi-step job with the same idempotency key and capture the decision and persisted-state diff.
-  - Input: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed; Injected stimulus: Duplicate delivery reaches two workers.
-  - Observable Oracle: Duplicate delivery reaches two workers; the owner lock/idempotency guard permits one effect and rejects the duplicate.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Job state and recovery trace remain under owner authority; no repeated external effect.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:014.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Owner service resumes a pending job after worker restart.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:041 and AC:CORE:C01:041; Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed.
-  - Action: Inject the stated lifecycle or concurrency event while executing resume a persisted multi-step job with the same idempotency key; inspect the owner state and recovery evidence.
-  - Input: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed; Injected stimulus: Side effect committed but acknowledgment lost.
-  - Observable Oracle: Side effect committed but acknowledgment lost; recovery queries the prior effect result and does not apply it again.
-  - Expected State Change: Before: job-88 has a committed effect under effect-88 but its acknowledgement is lost. After: following recovery, the owner reads that existing effect, records the recovered result/trace once, and the effect count for effect-88 remains one.
-  - Side-effect Invariant: Job state and recovery trace remain under owner authority; no repeated external effect.
-  - Boundary/Race: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed; Injected stimulus: Side effect committed but acknowledgment lost.
-
-##### `TEST:CORE:C03:015` — Requirement: `REQ:CORE:042`
-- **Task:** `TASK:CORE:005`
-- **AC:** `AC:CORE:C01:042`
-- **رفتارهای اتمی:** `REQ:CORE:042.B01`، `REQ:CORE:042.B02`، `REQ:CORE:042.B03`
-- **Source Unitها:** `SU-B-00450`، `SU-B-00835`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:015.P` — `POSITIVE`**
-  - Actor/Fixture: A service changes Job engine while jobs are in flight.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:042 and AC:CORE:C01:042; Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available.
-  - Action: Invoke the authorized fixture to route in-flight and new jobs across the declared engine-version boundary.
-  - Input: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available.
-  - Observable Oracle: New job routes to v2; job-old completes on old engine using original semantics and persisted state.
-  - Expected State Change: Before: job-old is at step 2/3 on the old engine and no new job has been submitted. After: the new job is assigned route version new-engine-v2; job-old completes on the old engine with its original persisted semantics.
-  - Side-effect Invariant: No in-flight job silently changes engine or semantics.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:015.N` — `NEGATIVE`**
-  - Actor/Fixture: A service changes Job engine while jobs are in flight.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:042 and AC:CORE:C01:042; Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available.
-  - Action: Submit the negative fixture to route in-flight and new jobs across the declared engine-version boundary and capture the decision and persisted-state diff.
-  - Input: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available; Injected stimulus: Router sends job-old to incompatible v2 without migration.
-  - Observable Oracle: Router sends job-old to incompatible v2 without migration; validation blocks routing and preserves the old job state.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No in-flight job silently changes engine or semantics.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:015.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: A service changes Job engine while jobs are in flight.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:042 and AC:CORE:C01:042; Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available.
-  - Action: Inject the stated lifecycle or concurrency event while executing route in-flight and new jobs across the declared engine-version boundary; inspect the owner state and recovery evidence.
-  - Input: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available; Injected stimulus: Cancel/resume job-old during rollout.
-  - Observable Oracle: Cancel/resume job-old during rollout; prior engine accepts it or returns an explicit recoverable error without losing state.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — if the old engine returns a recoverable error, job-old keeps its persisted id/state; if it accepts cancel/resume, only that authorized old-engine transition occurs. No migration or state loss is inferred.
-  - Side-effect Invariant: No in-flight job silently changes engine or semantics.
-  - Boundary/Race: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available; Injected stimulus: Cancel/resume job-old during rollout.
-
-##### `TEST:CORE:C03:016` — Requirement: `REQ:CORE:043`
-- **Task:** `TASK:CORE:006`
-- **AC:** `AC:CORE:C01:043`
-- **رفتارهای اتمی:** `REQ:CORE:043.B01`، `REQ:CORE:043.B02`، `REQ:CORE:043.B03`، `REQ:CORE:043.B04`
-- **Source Unitها:** `SU-B-00591`، `SU-B-00834`، `SU-B-00864`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:016.P` — `POSITIVE`**
-  - Actor/Fixture: Consumer receives versioned events including duplicate, out-of-order and unknown versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:043 and AC:CORE:C01:043; Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6.
-  - Action: Invoke the authorized fixture to consume a versioned event envelope with duplicate and out-of-order deliveries.
-  - Input: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6.
-  - Observable Oracle: First event applies once; duplicate is deduplicated; out-of-order version follows the declared ordering policy.
-  - Expected State Change: Before: entity state is below entityVersion 7 and event e-41 has not been applied. After: version 7 is applied once, e-41 is recorded for deduplication, and delayed version 6 follows the already declared ordering policy.
-  - Side-effect Invariant: Unknown event payload cannot mutate owner data.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:016.N` — `NEGATIVE`**
-  - Actor/Fixture: Consumer receives versioned events including duplicate, out-of-order and unknown versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:043 and AC:CORE:C01:043; Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6.
-  - Action: Submit the negative fixture to consume a versioned event envelope with duplicate and out-of-order deliveries and capture the decision and persisted-state diff.
-  - Input: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6; Injected stimulus: Unknown schemaVersion=99.
-  - Observable Oracle: Unknown schemaVersion=99 is rejected or quarantined before side effect; it is never blindly applied.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Unknown event payload cannot mutate owner data.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:016.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Consumer receives versioned events including duplicate, out-of-order and unknown versions.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:043 and AC:CORE:C01:043; Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6.
-  - Action: Inject the stated lifecycle or concurrency event while executing consume a versioned event envelope with duplicate and out-of-order deliveries; inspect the owner state and recovery evidence.
-  - Input: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6; Injected stimulus: Duplicate and delayed events arrive concurrently.
-  - Observable Oracle: Duplicate and delayed events arrive concurrently; resulting entity state matches the versioned ordering rule and one idempotent effect.
-  - Expected State Change: Before: event e-41/version 7 and a delayed lower-version event are concurrently available. After: entity state matches the declared ordering policy and the idempotent effect count is one; no new ordering rule is selected.
-  - Side-effect Invariant: Unknown event payload cannot mutate owner data.
-  - Boundary/Race: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6; Injected stimulus: Duplicate and delayed events arrive concurrently.
-
-##### `TEST:CORE:C03:017` — Requirement: `REQ:CORE:044`
-- **Task:** `TASK:CORE:006`
-- **AC:** `AC:CORE:C01:044`
-- **رفتارهای اتمی:** `REQ:CORE:044.B01`، `REQ:CORE:044.B02`، `REQ:CORE:044.B03`
-- **Source Unitها:** `SU-B-00591`، `SU-B-00864`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:02`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:017.P` — `POSITIVE`**
-  - Actor/Fixture: Publisher sends an event required by a committed local state change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:044 and AC:CORE:C01:044; Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send.
-  - Action: Invoke the authorized fixture to recover and redeliver a persisted Outbox event after publisher interruption.
-  - Input: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send.
-  - Observable Oracle: After restart, publisher finds event-41, sends it, records delivery state, and consumer records one effect.
-  - Expected State Change: Before: record-41 and outbox event event-41 are durable while publisher delivery is pending. After: following restart, event-41 has delivery evidence and the consumer records exactly one effect.
-  - Side-effect Invariant: No required event is lost and retries do not duplicate business effects.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:017.N` — `NEGATIVE`**
-  - Actor/Fixture: Publisher sends an event required by a committed local state change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:044 and AC:CORE:C01:044; Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send.
-  - Action: Submit the negative fixture to recover and redeliver a persisted Outbox event after publisher interruption and capture the decision and persisted-state diff.
-  - Input: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send; Injected stimulus: Outbox row is absent after committed required business update.
-  - Observable Oracle: Outbox row is absent after committed required business update; atomicity check fails and blocks design.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No required event is lost and retries do not duplicate business effects.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:017.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Publisher sends an event required by a committed local state change.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:044 and AC:CORE:C01:044; Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send.
-  - Action: Inject the stated lifecycle or concurrency event while executing recover and redeliver a persisted Outbox event after publisher interruption; inspect the owner state and recovery evidence.
-  - Input: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send; Injected stimulus: Crash after send but before acknowledgment.
-  - Observable Oracle: Crash after send but before acknowledgment; publisher retries same event id and consumer deduplicates, with lag/recovery evidence visible.
-  - Expected State Change: Before: event-41 was sent but publisher acknowledgement is absent. After: following retry, the same event id is used, consumer deduplication leaves one effect, and publisher recovery/lag evidence records eventual acknowledgement.
-  - Side-effect Invariant: No required event is lost and retries do not duplicate business effects.
-  - Boundary/Race: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send; Injected stimulus: Crash after send but before acknowledgment.
-
-##### `TEST:CORE:C03:018` — Requirement: `REQ:CORE:045`
-- **Task:** `TASK:CORE:009`
-- **AC:** `AC:CORE:C01:045`
-- **رفتارهای اتمی:** `REQ:CORE:045.B01`، `REQ:CORE:045.B02`، `REQ:CORE:045.B03`
-- **Source Unitها:** `SU-B-00193`، `SU-B-00865`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:09`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:018.P` — `POSITIVE`**
-  - Actor/Fixture: Owner publishes a scoring/catalogue policy revision.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:045 and AC:CORE:C01:045; Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17.
-  - Action: Invoke the authorized fixture to approve and activate a versioned policy only after its regression evidence.
-  - Input: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17.
-  - Observable Oracle: Change has an approved version and passing regression evidence before new snapshot activation; old version remains addressable.
-  - Expected State Change: Before: policy-v4 is a proposed revision and snapshot S17 is current. After: approval and regression evidence are attached before a new published snapshot becomes active; S17 remains addressable and is not rewritten.
-  - Side-effect Invariant: No silent historical rewrite or uncontrolled financial outcome change.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:018.N` — `NEGATIVE`**
-  - Actor/Fixture: Owner publishes a scoring/catalogue policy revision.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:045 and AC:CORE:C01:045; Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17.
-  - Action: Submit the negative fixture to approve and activate a versioned policy only after its regression evidence and capture the decision and persisted-state diff.
-  - Input: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17; Injected stimulus: Runtime feature flag directly changes financial scoring result without a policy version or approval.
-  - Observable Oracle: Runtime feature flag directly changes financial scoring result without a policy version or approval; release oracle blocks it.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No silent historical rewrite or uncontrolled financial outcome change.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:018.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Owner publishes a scoring/catalogue policy revision.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:045 and AC:CORE:C01:045; Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17.
-  - Action: Inject the stated lifecycle or concurrency event while executing approve and activate a versioned policy only after its regression evidence; inspect the owner state and recovery evidence.
-  - Input: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17; Injected stimulus: Attempt rollback to obsolete snapshot S15 after incompatibility.
-  - Observable Oracle: Attempt rollback to obsolete snapshot S15 after incompatibility; rollback is rejected with an explicit reason and current valid snapshot remains active.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — rollback to obsolete S15 is rejected; current snapshot S17 remains active and addressable with no policy or publication revision change.
-  - Side-effect Invariant: No silent historical rewrite or uncontrolled financial outcome change.
-  - Boundary/Race: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17; Injected stimulus: Attempt rollback to obsolete snapshot S15 after incompatibility.
-
-##### `TEST:CORE:C03:019` — Requirement: `REQ:CORE:046`
-- **Task:** `TASK:CORE:009`
-- **AC:** `AC:CORE:C01:046`
-- **رفتارهای اتمی:** `REQ:CORE:046.B01`، `REQ:CORE:046.B02`، `REQ:CORE:046.B03`، `REQ:CORE:046.B04`
-- **Source Unitها:** `SU-B-00865`، `SU-B-00963`، `SU-B-00763`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:09`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:019.P` — `POSITIVE`**
-  - Actor/Fixture: Deployment validates typed config and dependent flags before activation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:046 and AC:CORE:C01:046; Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture.
-  - Action: Invoke the authorized fixture to validate configuration schema, dependencies and secret-safe audit output.
-  - Input: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture.
-  - Observable Oracle: Schema, range, environment diff and dependency validation pass; audit records owner and revision; secret canary is absent from logs/artifacts.
-  - Expected State Change: Before: config revision cfg-13 is supplied but not activated by this validation case. After: schema/range/dependency validation and owner audit evidence are recorded for cfg-13; active configuration is unchanged and the secret canary is absent from artifacts.
-  - Side-effect Invariant: Invalid config, secret exposure and unintended finance changes do not activate.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:019.N` — `NEGATIVE`**
-  - Actor/Fixture: Deployment validates typed config and dependent flags before activation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:046 and AC:CORE:C01:046; Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture.
-  - Action: Submit the negative fixture to validate configuration schema, dependencies and secret-safe audit output and capture the decision and persisted-state diff.
-  - Input: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture; Injected stimulus: Set timeout_ms="fast" or commit canary secret.
-  - Observable Oracle: Set timeout_ms="fast" or commit canary secret; validation blocks activation and reports field/path without echoing the secret.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: Invalid config, secret exposure and unintended finance changes do not activate.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:019.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Deployment validates typed config and dependent flags before activation.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:046 and AC:CORE:C01:046; Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture.
-  - Action: Inject the stated lifecycle or concurrency event while executing validate configuration schema, dependencies and secret-safe audit output; inspect the owner state and recovery evidence.
-  - Input: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture; Injected stimulus: Enable adviser-read-v2 while contract-v1 is active.
-  - Observable Oracle: Enable adviser-read-v2 while contract-v1 is active; activation is blocked; incompatible rollback is blocked or service is stopped safely.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — incompatible adviser-read-v2 activation is blocked; no invalid configuration is activated, and any safe-stop response follows the existing service contract without inventing a state label.
-  - Side-effect Invariant: Invalid config, secret exposure and unintended finance changes do not activate.
-  - Boundary/Race: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture; Injected stimulus: Enable adviser-read-v2 while contract-v1 is active.
-
-##### `TEST:CORE:C03:020` — Requirement: `REQ:CORE:047`
-- **Task:** `TASK:CORE:010`
-- **AC:** `AC:CORE:C01:047`
-- **رفتارهای اتمی:** `REQ:CORE:047.B01`، `REQ:CORE:047.B02`، `REQ:CORE:047.B03`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00836`، `SU-B-00763`
-- **محیط/Fixture کلی:** Contract/design fixture; synthetic configuration values are test data only and do not decide production thresholds or select a queue/worker technology.
-- **Oracle کلی:** Compare response/error, persisted owner state, emitted event, authorization decision and sanitized telemetry with the stated independent expected oracle. A present file, nonempty response or shared wording alone does not pass.
-- **Evidence لازم برای ارزیابی آینده:** Fixture input; provider/consumer/config version; expected and observed output; persisted-state diff; owner authorization; delivery/retry record or sanitized telemetry where applicable.
-- **گیت تصمیمی:** `DECISION:C01:04`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission; no product runtime test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_READBACK; no independent reviewer
-- **شاهد بازخوانی سناریو:** Each case was read against this requirement and its linked C01 AC; action is the fixture operation, input contains stimuli only, oracle is observable, and state/invariant are separately stated.
-- **`TEST:CORE:C03:020.P` — `POSITIVE`**
-  - Actor/Fixture: Privacy reviewer inspects all telemetry sinks for a synthetic request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:047 and AC:CORE:C01:047; Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1.
-  - Action: Invoke the authorized fixture to inspect exported telemetry for sensitive values while preserving safe correlation.
-  - Input: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1.
-  - Observable Oracle: Exported logs/traces contain only corr-7fa1 and safe low-cardinality route/outcome labels; all listed sensitive values are absent.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the exported telemetry fixture is inspected and sensitive canaries are verified absent; application, financial, and questionnaire business state remains unchanged.
-  - Side-effect Invariant: No sensitive identity, authentication, financial or raw form value is leaked into general telemetry.
-  - Boundary/Race: Applicable boundary is exercised by the linked negative and boundary cases; this positive case uses one stable fixture revision.
-- **`TEST:CORE:C03:020.N` — `NEGATIVE`**
-  - Actor/Fixture: Privacy reviewer inspects all telemetry sinks for a synthetic request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:047 and AC:CORE:C01:047; Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1.
-  - Action: Submit the negative fixture to inspect exported telemetry for sensitive values while preserving safe correlation and capture the decision and persisted-state diff.
-  - Input: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1; Injected stimulus: Inject one canary into URL, header, exception, metric label or response log.
-  - Observable Oracle: Inject one canary into URL, header, exception, metric label or response log; scan finds it and blocks/redacts before persistence.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the rejected design/input must leave the protected owner record, policy, and external-effect count unchanged.
-  - Side-effect Invariant: No sensitive identity, authentication, financial or raw form value is leaked into general telemetry.
-  - Boundary/Race: Not applicable to this single invalid submission; race and lifecycle behavior are isolated in the boundary case.
-- **`TEST:CORE:C03:020.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: Privacy reviewer inspects all telemetry sinks for a synthetic request.
-  - Initial State/Authority: Planning-only synthetic fixture; owner=C03; accepted authority/contract is defined by REQ:CORE:047 and AC:CORE:C01:047; Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1.
-  - Action: Inject the stated lifecycle or concurrency event while executing inspect exported telemetry for sensitive values while preserving safe correlation; inspect the owner state and recovery evidence.
-  - Input: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1; Injected stimulus: Concurrent errors and retries preserve correlation while every sink remains free of the canaries.
-  - Observable Oracle: Concurrent errors and retries preserve correlation while every sink remains free of the canaries; financial audit record remains separately owned.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — concurrent errors/retries produce correlated telemetry free of canaries; the separately owned financial audit record is not modified by general telemetry export.
-  - Side-effect Invariant: No sensitive identity, authentication, financial or raw form value is leaked into general telemetry.
-  - Boundary/Race: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1; Injected stimulus: Concurrent errors and retries preserve correlation while every sink remains free of the canaries.
-
-##### `TEST:CORE:C03:021` — Requirement: `REQ:CORE:020`
-- **Task:** `TASK:CORE:010`
-- **AC:** `AC:CORE:C01:020`
-- **رفتارهای اتمی:** `REQ:CORE:020.B01`، `REQ:CORE:020.B02`، `REQ:CORE:020.B03`، `REQ:CORE:020.B04`
-- **Source Unitها:** `SU-B-00836`، `SU-B-00858`، `SU-B-00863`، `SU-B-01125`
-- **محیط/Fixture کلی:** Versioned synthetic workload, SLI definitions, owner, alert route, runbook and measured CPU/RAM/latency/throughput/cost evidence are supplied; no numeric target is pre-approved.
-- **Oracle کلی:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
-- **Evidence لازم برای ارزیابی آینده:** Versioned synthetic fixture; source/requirement/AC revision; measured-evidence references or explicit absence; decision owner and approval status; deployment-state diff demonstrating no unapproved activation.
-- **گیت تصمیمی:** `DECISION:C01:04`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission. These define future design and product validation; no production, runtime, cloud or infrastructure test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_SECOND_READ; no independent reviewer
-- **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
-- **`TEST:CORE:C03:021.P` — `POSITIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Record and inspect the permitted planning/evidence path for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
-  - Input: Synthetic run with measured baseline and a non-sensitive worker/DB fault at a declared probe point.
-  - Observable Oracle: SLO/SLI and Error Budget are tied to versioned measurements and named owner; alert maps to user impact and a usable runbook; capacity claim cites measurements, not an invented threshold.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
-- **`TEST:CORE:C03:021.N` — `NEGATIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Challenge the unsupported or explicitly prohibited proposal for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
-  - Input: Proposed SLO uses a historical VM size as its capacity proof; no workload measurement, runbook action, or owner decision is attached.
-  - Observable Oracle: The claimed threshold/capacity value has no measurement provenance or decision owner; validator marks the evidence insufficient and no value becomes accepted.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
-- **`TEST:CORE:C03:021.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Exercise the decision boundary for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload and inspect recorded approval/deployment state.
-  - Input: Run the probe during the declared workload, then inject a worker/DB fault and collect alert, escalation and runbook drill records.
-  - Observable Oracle: Fault is detected through the declared alert route; drill records escalation, containment/recovery and instrumentation overhead without inventing a numeric pass threshold.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — the boundary probe must leave deployment disabled until the explicitly required separate decision is recorded.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: A complete dossier without separate approval is the boundary; no race or concurrent operation is asserted.
-
-##### `TEST:CORE:C03:022` — Requirement: `REQ:CORE:021`
-- **Task:** `TASK:CORE:010`
-- **AC:** `AC:CORE:C01:021`
-- **رفتارهای اتمی:** `REQ:CORE:021.B01`، `REQ:CORE:021.B02`، `REQ:CORE:021.B03`
-- **Source Unitها:** `SU-B-00013`، `SU-B-00836`
-- **محیط/Fixture کلی:** Current production VM has the recorded capacity limitation; proposal selects SigNoz only for conditional evaluation; no revised approval is present.
-- **Oracle کلی:** Compare the decision/evidence record, deployment authorization and production-state diff with the requirement-specific oracle; a planning pass is not product/runtime acceptance.
-- **Evidence لازم برای ارزیابی آینده:** Versioned synthetic fixture; source/requirement/AC revision; measured-evidence references or explicit absence; decision owner and approval status; deployment-state diff demonstrating no unapproved activation.
-- **گیت تصمیمی:** `DECISION:C01:04`
-- **پذیرش طراحی:** ACCEPTED_DEFINITION
-- **اجرا / Product Acceptance:** NOT_EXECUTED / NOT_EXECUTED
-- **دلیل عدم اجرا:** Planning-only mission. These define future design and product validation; no production, runtime, cloud or infrastructure test was executed.
-- **سطح بازخوانی:** SAME_AUTHOR_TARGETED_SECOND_READ; no independent reviewer
-- **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
-- **`TEST:CORE:C03:022.P` — `POSITIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Record and inspect the permitted planning/evidence path for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
-  - Input: Submit a self-hosted SigNoz deployment proposal targeting the current production VM under recorded capacity.
-  - Observable Oracle: Evaluation remains conditional; no deployment is initiated, and each decision dimension is evidenced for the decision owner.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — planning validation records evidence only; no production threshold, tool choice, or deployment is committed.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
-- **`TEST:CORE:C03:022.N` — `NEGATIVE`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Challenge the unsupported or explicitly prohibited proposal for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
-  - Input: Supply a Cloud preference or apparent spare-capacity claim without measured capacity/cost/security/retention/sampling evidence or separate approval.
-  - Observable Oracle: Current-VM self-hosting proposal is rejected; Cloud is not silently accepted from preference alone and unsupported measurements do not authorize either option.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — invalid evidence or prohibited deployment proposal cannot change production state or create an accepted decision.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or cloud/self-hosted choice is changed without its specified evidence and approval.
-  - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
-- **`TEST:CORE:C03:022.B` — `BOUNDARY_OR_CONCURRENCY`**
-  - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
-  - Action: Evaluate the technically complete SigNoz decision dossier while independent deployment approval is still absent; inspect decision status and deployment state.
-  - Input: Prepare a technically complete revised dossier containing measured capacity, cost, security, retention, sampling and host evidence; record that separate owner deployment approval has not been issued; keep deployment unexecuted.
-  - Observable Oracle: Even when a dossier is complete, status remains decision-pending until separate approval; the fixture records no deployment or configuration activation.
-  - Expected State Change: NO_STATE_CHANGE_EXPECTED — evidence completeness alone does not authorize deployment; no approval, deployment, or configuration activation is created by this case.
-  - Side-effect Invariant: No production host, monitoring service, numeric SLO, capacity commitment, retention, sampling, or Cloud/self-hosted choice changes without the separately recorded approval; current-VM self-hosting remains prohibited.
-  - Boundary/Race: Boundary: all technical evidence is complete, but separate owner approval is absent; current-VM self-hosting remains prohibited and deployment remains unexecuted.
-
-#### پیوندهای تحویل بین Source، Requirement، Task، AC، Test و قرارداد
-##### `DELIVERY:C03:001` — `SU-B-00572`
-- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`
-- **Enablerها:** `TE:CORE:002`، `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`، `TASK:CORE:007.S01`، `TASK:CORE:007.S02`، `TASK:CORE:007.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
-- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
-- **قراردادها:** `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:002` — `SU-B-00573`
-- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
-- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
-- **قراردادها:** `CONTRACT:C01:02`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:003` — `SU-B-00584`
-- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
-- **Taskها:** `TASK:CORE:005`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
-- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
-- **قراردادها:** `CONTRACT:C01:03`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:004` — `SU-B-00589`
-- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
-- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
-- **قراردادها:** `CONTRACT:C01:02`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:005` — `SU-B-00590`
-- **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
-- **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
-- **قراردادها:** `CONTRACT:C01:02`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:006` — `SU-B-00591`
-- **Requirementهای بازیافتی:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:006`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
-- **Testهای طراحی C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
-- **قراردادها:** `CONTRACT:C01:04`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:007` — `SU-W-00692`
-- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
-- **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
-- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
-- **قراردادها:** `CONTRACT:C01:06`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:008` — `SU-W-00693`
-- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
-- **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
-- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
-- **قراردادها:** `CONTRACT:C01:06`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:009` — `SU-W-00694`
-- **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
-- **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
-- **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
-- **قراردادها:** `CONTRACT:C01:06`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-
-##### `DELIVERY:C03:010` — `SU-B-00233`
-- **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`
-- **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
-- **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
-- **قراردادها:** `CONTRACT:C01:03`، `CONTRACT:C01:04`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
-
-##### `DELIVERY:C03:011` — `SU-B-00865`
-- **Requirementهای بازیافتی:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **Taskها:** `TASK:CORE:009`
-- **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:009.S01`، `TASK:CORE:009.S02`، `TASK:CORE:009.S03`
-- **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
-- **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
-- **Testهای طراحی C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
-- **قراردادها:** `CONTRACT:C01:05`
-- **مالک برنامه/اجرا:** `C01` / `C03`
-- **رابطه:** REUSE_ACCEPTED_REQUIREMENT_AND_IMPLEMENTATION_TASK
-- **وضعیت اجرا:** BLOCKED_BY_DECISION
-- **دلیل:** The source unit is C01-owned policy, not reclassified into C03. The accepted C01 Task explicitly assigns implementation_owner C03; this record captures delivery responsibility without copying policy ownership.
-
-#### قراردادهای مشترک که C03 مالک پیاده‌سازی آن‌هاست
-این پنج رکورد **پیوند به قراردادهای موجود C01** هستند؛ قرارداد تازه یا Schema منتشرشده‌ای اختراع نشده است.
-
-##### `CONTRACT-LINK:C03:02` → `CONTRACT:C01:02` — Core recommendation/catalogue evidence API
-- **مالک قرارداد:** Core
-- **مصرف‌کنندگان:** Adviser; future Assistant
-- **نسخه طراحی:** PLANNING_CONTRACT_1
-- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
-- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
-- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
-- **تصمیم‌های مرتبط:** A02؛ A05؛ A07؛ B06؛ E02
-- **Requirementها:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Source Unitها:** `SU-B-00589`، `SU-B-00590`، `SU-B-00942`
-- **Taskهای اجرا:** `TASK:CORE:008`
-- **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
-- **Testهای C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
-- **Testهای C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
-- **وضعیت اجرا:** NOT_IMPLEMENTED
-- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
-
-##### `CONTRACT-LINK:C03:03` → `CONTRACT:C01:03` — Service-owned Job/Workflow port
-- **مالک قرارداد:** Each service owns its Job state
-- **مصرف‌کنندگان:** Authorized job consumer
-- **نسخه طراحی:** PLANNING_CONTRACT_1
-- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
-- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
-- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
-- **تصمیم‌های مرتبط:** A03؛ A04؛ A07
-- **Requirementها:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:041`، `REQ:CORE:042`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00942`
-- **Taskهای اجرا:** `TASK:CORE:005`، `TASK:CORE:007`
-- **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
-- **Testهای C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
-- **Testهای C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
-- **وضعیت اجرا:** NOT_IMPLEMENTED
-- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
-
-##### `CONTRACT-LINK:C03:04` → `CONTRACT:C01:04` — Reliable event/Outbox envelope
-- **مالک قرارداد:** Data owner service
-- **مصرف‌کنندگان:** Registered asynchronous consumer
-- **نسخه طراحی:** PLANNING_CONTRACT_1
-- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
-- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
-- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
-- **تصمیم‌های مرتبط:** A05؛ A07
-- **Requirementها:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Source Unitها:** `SU-B-00572`، `SU-B-00591`
-- **Taskهای اجرا:** `TASK:CORE:006`
-- **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
-- **Testهای C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
-- **Testهای C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
-- **وضعیت اجرا:** NOT_IMPLEMENTED
-- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
-
-##### `CONTRACT-LINK:C03:05` → `CONTRACT:C01:05` — Typed config/flag/policy change and rollback
-- **مالک قرارداد:** Config or policy owner
-- **مصرف‌کنندگان:** Deployment/configuration consumer
-- **نسخه طراحی:** PLANNING_CONTRACT_1
-- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
-- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
-- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
-- **تصمیم‌های مرتبط:** A08
-- **Requirementها:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **Source Unitها:** `SU-B-00963`
-- **Taskهای اجرا:** `TASK:CORE:009`
-- **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
-- **Testهای C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
-- **Testهای C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
-- **وضعیت اجرا:** NOT_IMPLEMENTED
-- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
-
-##### `CONTRACT-LINK:C03:06` → `CONTRACT:C01:06` — Operational telemetry and critical-path incident evidence
-- **مالک قرارداد:** Service operator
-- **مصرف‌کنندگان:** Authorized operations/security
-- **نسخه طراحی:** PLANNING_CONTRACT_1
-- **وضعیت Schema:** DESIGN_REQUIRED_NOT_PUBLISHED_API
-- **سازگاری نسخه/معنا:** Provider/consumer must demonstrate structural, semantic, negative/boundary and version matrix tests before integration; no private table bypass
-- **مجوزدهی/امنیت:** Least-purpose access remains mandatory independently of version compatibility
-- **تصمیم‌های مرتبط:** A09
-- **Requirementها:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:047`
-- **Source Unitها:** `SU-B-00572`، `SU-B-01125`
-- **Taskهای اجرا:** `TASK:CORE:007`، `TASK:CORE:010`
-- **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:047`
-- **Testهای C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:047`
-- **Testهای C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:020`، `TEST:CORE:C03:021`، `TEST:CORE:C03:022`
-- **وضعیت اجرا:** NOT_IMPLEMENTED
-- **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
-
-#### وابستگی‌ها و وضعیت‌های آغاز کار
-- **`DEP:C03:001`**: `TASK:CORE:005` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ دلیل: C03 implements TASK:CORE:005; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:002`**: `TASK:CORE:006` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:003`**: `TASK:CORE:006` → `TASK:CORE:005`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:005 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:004`**: `TASK:CORE:007` → `TASK:CORE:003`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:003 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:005`**: `TASK:CORE:007` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:006`**: `TASK:CORE:008` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ دلیل: C03 implements TASK:CORE:008; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:007`**: `TASK:CORE:009` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:008`**: `TASK:CORE:009` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:009`**: `TASK:CORE:010` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:010`**: `TASK:CORE:010` → `TASK:CORE:007`؛ نوع `PREFERENCE`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:007 and dependency type PREFERENCE from the C01 task model. No duration or schedule is inferred.
-
-#### Handoffهای باز برای بسته‌های بعدی
-- **`HANDOFF:C03:001`**: Source `SU-B-00635`؛ مالک دامنه مقصد: B05 user-memory, privacy, retention, and transfer contract owners across Adviser/Assistant؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: B:1332 leaves exact retention and transfer implementation details open under approved B05 policy. C03 does not own user memory; only its common authorization and telemetry interfaces are consumed. Exact receiving package is not proven in the current package registry.؛ تریگر: When the relevant Adviser/Assistant data-owner package is opened, allocate the B05 retention/transfer clauses and record acceptance without changing C03 ownership.
-- **`HANDOFF:C03:002`**: Source `SU-B-00224`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:003`**: Source `SU-B-00225`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:004`**: Source `SU-B-00226`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:005`**: Source `SU-B-00227`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:006`**: Source `SU-B-00228`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:007`**: Source `SU-B-00229`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:008`**: Source `SU-B-00230`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-- **`HANDOFF:C03:009`**: Source `SU-B-00232`؛ مالک دامنه مقصد: RAG/Adviser model owner; shared boundary listed by G1 for R01/R04؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: The Blueprint lists a conceptual Adviser contract shared across C03/R01/R04, but the exact receiving package for this specific model is not established. Keep the field semantics with Adviser; do not invent a package owner or a C03 implementation requirement.؛ تریگر: When R01/R04 package ownership is accepted, assign the specific model to the receiving package and reconcile its shared C03 interface without changing its domain owner.
-
-#### پذیرش برنامه C03 و مرز اجرا
-- **DoD ثابت:** `C03-DOD-V5-001`؛ `criteria_frozen=True`
-- **معیار مصوب:** Complete SCOPE:V4:C03 with evidence-backed disposition for every 2,230 source units and valid digest.
-- **معیار مصوب:** Deep-review every OWNED and materially ownership/contract-affecting SHARED_CONTRACT/UNCERTAIN unit; reuse G1/C01/C02 evidence without duplicating accepted work.
-- **معیار مصوب:** Accept only atomic, source-traced C03 requirements with correct normative status, owner, conditions, exceptions, risk, and implementation gate.
-- **معیار مصوب:** Trace accepted requirements to genuine enablers/stories, tasks/subtasks, falsifiable AC/tests, contracts, dependencies, and owner-bearing handoffs.
-- **معیار مصوب:** Generalize validator minimally for package selection, scope/RA/IPA/checkpoint/render/transition validation; preserve C01/C02 history and all prior regression checks.
-- **معیار مصوب:** Pass structural, regression, mutation, transition, trace, cycle, render-reproducibility, diff/security, and final-head documentation QA; keep product tests NOT_EXECUTED and do not claim independent review.
-- **معیار مصوب:** Record evidence and derived views from the same registry version; commit locally on isolated branch; provide a recoverable local Git bundle without push/PR/merge.
-- **گیت RA:** `PASS`؛ blockers=0؛ evidence=`EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ C03 planning evidence and package-specific acceptance checks are complete; product implementation remains outside this gate.
-- **گیت IPA:** `PASS`؛ blockers=0؛ evidence=`EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ C03 planning evidence and package-specific acceptance checks are complete; product implementation remains outside this gate.
-- **شاهد پذیرش نهایی:** `EVIDENCE:C03:IPA_AUDIT_REMEDIATION:002`؛ `result=PASS`؛ `product_tests_executed=0`
-مرجع شواهد ماشینی و تاریخچه Mutation/Fixture در Bundle نگهداری شده است؛ این فصل همه **مقادیر اجرایی، روابط مالکیت، تعریف Testها و شرایط تصمیم‌گیری** لازم برای برنامه را حمل می‌کند. صرفاً آرشیو ۲٬۲۳۰ ردیف G1، تغییرات تاریخی Registry و لاگ‌های اجرای Validator در این سند تکرار نشده‌اند.
-- **محدودیت قطعی:** پیاده‌سازی، اجرای تست محصول، تصمیم معماری/ظرفیت باز، استقرار، انتشار و مجوز امنیت/مالی در این Gate انجام یا تصویب نشده‌اند.
-
-### C04 — اشتراک، پلن و Billing
-
-**وضعیت برنامه‌ریزی:** RA=PASS / IPA=PASS، بر پایهٔ منابع پین‌شده و Scope View همین بسته. **وضعیت محصول:** NOT_IMPLEMENTED / NOT_EXECUTED؛ هیچ مجوز پرداخت، فعال‌سازی پلن پولی یا انتشار مالی صادر نمی‌شود. تصمیم اجرایی FD-02 همچنان باز است.
-
-#### مبنا، دامنه و روش
-
-- Blueprint V1.6، Blob 9681c2bf6c3149317c3788516748084cfb6eac7c، SHA-256 فایل 0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266.
-- Wallet V0.20، Blob 1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a، SHA-256 فایل 8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74.
-- گراف مصرف‌شده از semantic/graph.json در main با built_at_commit برابر f28033b6496e39f4a59644cccf5fb2c9886fceb4 است: 1,180 گره یکتا، 1,345 یال فعال، 2 یال قرنطینه؛ validation.json برابر PASS و 0 خطا است. گراف، متن مرجع نیست؛ هر قاعده زیر در خطوط سند بازخوانی شده است. روابط INFERRED/AMBIGUOUS به مصوبه ارتقا نیافته‌اند.
-
-**زیرگراف C04 استخراج‌شده از JSON واقعی:**
-
-| گره/رابطه در گراف | شاهد منبع | نتیجه بررسی متن |
-|---|---|---|
-| docs_shahab_phase_2_development_blueprint_subscription_entitlements → docs_shahab_phase_2_development_blueprint_entitlement_engine | B:999–1016 | relation=conceptually_related_to، confidence=EXTRACTED؛ Entitlement از plan state، tariff و ledger جداست. |
-| docs_shahab_phase_2_development_blueprint_subscription_entitlements → docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps؛ docs_shahab_phase_2_development_blueprint_subscription_lifecycle → docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps | B:1008–1014 | روابط EXTRACTED؛ سقف Monitoring، تعلیق در downgrade/expiry و حفظ تاریخچه بازخوانی شدند. |
-| docs_shahab_phase_2_development_blueprint_e04_subscription_rules → docs_shahab_phase_2_development_blueprint_fd02_activation_architecture؛ docs_shahab_phase_2_development_blueprint_e04_subscription_rules → docs_shahab_phase_2_development_blueprint_entitlement_backend_enforcement؛ docs_shahab_phase_2_development_blueprint_e04_subscription_rules → docs_shahab_phase_2_development_blueprint_subscription_payment_states | B:1062–1085، B:1072، B:1077–1079 | پیوندهای EXTRACTED؛ قواعد E04 مصوب از FD-02 و وضعیت‌های مستقل تفکیک شدند. |
-| docs_shahab_phase_2_development_blueprint_fd03_payment_accounting → docs_shahab_phase_2_development_blueprint_payment_verification؛ docs_shahab_phase_2_development_blueprint_fd03_payment_accounting → docs_shahab_phase_2_development_blueprint_accounting_document_types | B:1087–1104 | پیوندهای EXTRACTED؛ FD-03 و معنای سند حسابداری باز ماند و انتخاب provider/سند قطعی نشد. |
-| docs_shahab_phase_2_development_blueprint_revenue_model_detail → docs_shahab_phase_2_development_blueprint_adviser_billing_basis؛ docs_shahab_phase_2_development_blueprint_revenue_model_detail → docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate؛ docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps → docs_shahab_phase_2_development_blueprint_monitoring_fee_open | B:1107–1144 | پیوندهای EXTRACTED؛ ضریب مصوب ۱/۲ حفظ شد و تعرفه‌های عددی/هزینه مستقل Monitoring باز ماند. |
-
-شناسه‌ها عین node IDهای گراف هستند؛ هر رابطه با متن مرجع دوباره بررسی شد و حضور در گراف به‌تنهایی دلیل تصویب تلقی نشد.
-- Scope View C04 با شناسه SCOPE:CORE:C04:V1 فقط واحدهای مرتبط و قراردادهای مرزی را شامل می‌شود؛ تریاژ سراسری G1 بازیافت شده و از نو اجرا نشده است.
-
-| وضعیت Scope | برش منبع | تعیین تکلیف |
-|---|---|---|
-| OWNED | Blueprint B:999–1016 | سه سطح عضویت، قابلیت‌ها، Entitlement، چرخه عمر، حفظ تعهد |
-| OWNED | Blueprint B:1019–1027، B:1062–1085 | مدل درآمد، صورت‌بندی Billing، قواعد مصوب E04، FD-02 و گیت فعال‌سازی |
-| OWNED | Blueprint B:1107–1144 | مصرف قابل صورتحساب، قیمت نسخه‌دار، استقلال تعرفه/پلن، آزمون‌های چرخه عمر و مرز انتشار |
-| OWNED | Wallet W:1081–1143؛ B:1066–1072 | دامنه مجوز پرداخت دوره‌ای اشتراک، لغو مجوز، نتیجه نامعلوم و عدم Retry مالی خودکار پس از شکست قطعی |
-| SHARED_CONTRACT | Wallet W:604–642، W:671–687، W:1047–1057 و W:1471–1502؛ Blueprint B:1050–1058 | نتیجه پرداخت نامعلوم/تکرار امن، فاکتور سازمانی، استرداد، ledger، تطبیق و اسناد؛ C04 مالک قرارداد اشتراک است و بسته‌های کیف پول مالک اجرای مالی |
-| SHARED_CONTRACT | Blueprint B:1447–1449 و B:1696–1710 | C01/C03 قراردادهای عمومی، C02 هویت/مجوز، C05a کاتالوگ، C06 پوسته، C07–C13b مالی؛ فقط مصرف Contract، بدون ساخت الزام تکراری |
-| CROSS_REFERENCE | Wallet W:801، W:1381–1470؛ B:1025–1027 | قیمت و مصرف مشاور/دستیار، رزرو، مصرف، خطای خدمت و نرخ خارجی؛ فقط قواعد تعامل C04 ثبت می‌شوند، مالکیت سنجش/دفترکل/تسویه به C09/C12a/C12b/C13a ارجاع دارد |
-| CROSS_REFERENCE | Blueprint B:973–997، B:1447–1453 | Feedback، Feedforward، Monitoring و اعلان؛ رفتار دسترسی در C04، خود قابلیت/اعلان در بسته دامنه‌ای متناظر |
-| UNCERTAIN | Blueprint B:1074–1085، B:1087–1104، B:1120، B:1141–1144؛ Wallet W:681، W:1437 | FD-02/FD-03، قیمت‌های عددی، سقف/هزینه Monitoring، زمان‌محدوده تقویمی، نوع سند/قانون مالیاتی، SLA و پارامترهای اجرایی بازند؛ هیچ انتخابی جعل نشده است |
-| EXCLUDED_WITH_REASON | Wallet W:1–1080 و W:1145–1502، به‌جز برش‌های صریح بالا | حقوق مالکیت و انواع اعتبار، شارژ/هدیه، مصرف و رزرو عمومی، انتقال/برداشت، عملیات ledger، تسویه تأمین‌کننده و تجربه عمومی کیف پول متعلق به C07–C13b؛ C04 فقط قرارداد مالی اشتراک را ارائه می‌کند |
-| EXCLUDED_WITH_REASON | Blueprint خارج از برش‌های بالا | معماری RAG/Assistant و رفتار اختصاصی آن‌ها بسته‌های بعدی است؛ C04 برایشان API/Entitlement مصرفی می‌دهد و پیشاپیش دامنه‌شان را نمی‌نویسد |
-
-**Digest دامنه:** منابع فوق با SHAهای ثابت؛ فهرست Scope و dispositionها با SHA-256 `6b8a54fb14ecc6b34f3c5399010b163c0d8dcc3db1788a4baecce850e3b01775` ثبت شده است. در Scope C04 همهٔ برش‌های هنجاری فهرست‌شده بازخوانی و تعیین‌تکلیف شده‌اند؛ ابهام‌های باقیمانده صریحاً در Decision/Handoff با شرط و مالک مقصد ثبت شده‌اند.
-
-**مرز مالکیت:** C04 مالک معنا و وضعیت Plan, Price (حق عضویت), Subscription, Entitlement و Subscription Billing است. تعرفه اجرای خدمت، سنجش مصرف، رزرو/کسر اعتبار، پرداخت واقعی، دفترکل، تطبیق بانکی، حسابداری/تسویه و قالب سند عمومی در بسته‌های کیف پول و کاتالوگ مالک دارند. C04 مجوز قانونی، نتیجه پرداخت، رضایت، عضویت سازمانی یا وضعیت کاتالوگ را جعل یا دور نمی‌زند.
-
-#### تصمیم‌ها و Requirementهای اتمی
-
-وضعیت مصوبه فقط به قاعده‌ای داده شده که متن Blueprint/Wallet آن را صریحاً مصوب کرده است. موارد دارای «باز» در ستون شرح، نیازمند تعیین مقدار یا تصمیم اجرایی‌اند و از آن‌ها رفتار پیش‌فرض ساخته نشده است.
-
-| شناسه | الزام قابل ردیابی | منبع | Task |
-|---|---|---|---|
-| REQ:CORE:131 | مشتری پس از ثبت‌نام بدون اشتراک پولی، وضعیت پلن برنزی دارد؛ برنزی مقصد مستقیم انقضای نقره‌ای/طلایی است. | B:1001,1014 | TASK:CORE:C04:001 |
-| REQ:CORE:132 | پلن‌های نقره‌ای و طلایی حق عضویت سالانه دارند؛ مبلغ عددی و کمپین خوش‌آمدگویی هنوز باز است. | B:1001,1012,1021 | TASK:CORE:C04:001 |
-| REQ:CORE:133 | پلن، دامنه قابلیت و خدمات قابل درخواست دستیار را تعیین می‌کند؛ عمق/کیفیت تحلیل مشاور را تغییر نمی‌دهد. | B:1001,1005,1009 | TASK:CORE:C04:001 |
-| REQ:CORE:134 | شمول خدمات پلن‌ها برنزی ⊆ نقره‌ای ⊆ طلایی است؛ نمونه‌های جدول فقط مثال‌اند تا کاتالوگ نسخه‌دار C05a تعیین شود. | B:1003–1012 | TASK:CORE:C04:001 |
-| REQ:CORE:135 | Feedback در هر سه پلن در دسترس است. | B:1005–1006,973 | TASK:CORE:C04:001 |
-| REQ:CORE:136 | Feedforward در نقره‌ای/طلایی مجاز و بدون تعرفه مستقل و سقف شمارشی است؛ برنزی آن را ندارد. | B:1007,975,1120 | TASK:CORE:C04:001 |
-| REQ:CORE:137 | Monitoring/Scheduled در نقره‌ای و طلایی با سهمیه فعال هم‌زمان محدود می‌شود؛ مقدار عددی سقف و هزینه مستقل احتمالی باز است. | B:977,1008,1120,1141 | TASK:CORE:C04:001 |
-| REQ:CORE:138 | Entitlement داده‌محور، نسخه‌دار و Backend-enforced است و از وضعیت اشتراک، کاتالوگ، سهمیه، تعرفه، مصرف و دفترکل تفکیک می‌شود. | B:1016,1077–1083 | TASK:CORE:C04:002 |
-| REQ:CORE:139 | پلن هیچ خدمت منتشرنشده، غیرمجاز یا خارج از توان شهاب را مجاز نمی‌کند و مجوز داده/اقدام و قفل حوزه را دور نمی‌زند. | B:1001,1012 | TASK:CORE:C04:002 |
-| REQ:CORE:140 | حق عضویت، تعرفه خدمت دستیار و مصرف مشاور سه جریان مستقل‌اند؛ فعال‌سازی هرکدام ثبت مالی یا صورتحساب جریان دیگر ایجاد نمی‌کند. | B:1019–1025 | TASK:CORE:C04:001 |
-| REQ:CORE:141 | قیمت و ترکیب پلن نسخه‌دار است؛ تغییر قیمت برای خریدهای جدید اعمال می‌شود و نرخ یک سفارش/دوره پذیرفته‌شده را بی‌اطلاع بازنویسی نمی‌کند. | B:1066,1077,1126,1138 | TASK:CORE:C04:001 |
-| REQ:CORE:142 | تعرفه خدمت دستیار با نوع خدمت و تعداد اجرای قابل‌صورتحساب مرتبط است و از حق عضویت پلن جدا می‌ماند؛ مبلغ عددی هنوز تعیین نشده است. | B:1022,1120,1138–1141 | TASK:CORE:C04:001 |
-| REQ:CORE:143 | مصرف مشاور بر مبنای تعداد پرامپت قابل‌صورتحساب × شدت تحلیل متناظر است؛ عمق تحلیل به پلن وابسته نیست و نرخ/معیار عددی باز است. | B:1023,1124–1126 | TASK:CORE:C04:001 |
-| REQ:CORE:144 | مشاوره حین عملیات دستیار با نصف نرخ متناظر مشاور مستقل محاسبه می‌شود؛ تعرفه پایه خدمت جداست و ضریب یک‌سوم مجاز نیست. | B:1023,1058,1120; W:1385–1397 | TASK:CORE:C04:001 |
-| REQ:CORE:145 | قیمت مشتری، هزینه داخلی/تأمین‌کننده و مصرف سنجیده‌شده جدا و قابل پیوند/بازسازی‌اند؛ انتخاب واحد شدت تحلیل مصوب نشده است. | B:1124–1126; W:1399–1411,1427–1441 | TASK:CORE:C04:001 |
-| REQ:CORE:146 | سفارش اشتراک، فاکتور/رسید و تراکنش خدمت با شناسه‌های قابل پیوند به هم متصل‌اند؛ تفصیل اسناد عمومی و دفترکل با بسته مالی مالک هماهنگ می‌شود. | B:1025–1027,1130–1134; W:1489–1502 | TASK:CORE:C04:007 |
-| REQ:CORE:147 | سفارش اشتراک، تا وقتی تعهد مالی معتبر ایجاد نشده، به‌تنهایی موجب کسر از کیف پول یا تخصیص دائمی وجه به خدمت نمی‌شود. | B:1025,1130 | TASK:CORE:C04:007 |
-| REQ:CORE:148 | تغییر ترکیب پلن نیازمند بازنویسی هسته Agent نیست؛ مصرف‌کنندگان از قرارداد Entitlement استفاده می‌کنند. | B:1016,1077–1085 | TASK:CORE:C04:002 |
-| REQ:CORE:149 | پیش از اشتراک پولی، کاربر/سازمان و پرداخت‌کننده از قرارداد هویت و مجوز C02 احراز می‌شوند؛ C04 هویت یا نقش جدید تعریف نمی‌کند. | B:1052,1082; C02 plan | TASK:CORE:C04:002 |
-| REQ:CORE:150 | ساختار سرویس/کاتالوگ نسخه‌دار منبع عرضه‌پذیری خدمت است؛ ماتریس قطعی قابلیت و خدمت فقط با C05a تکمیل می‌شود. | B:1012,1077–1085 | TASK:CORE:C04:001 |
-| REQ:CORE:151 | اشتراک پرداختی فقط پس از پرداخت معتبر و فعال‌سازی آغاز می‌شود؛ callback به‌تنهایی اثبات وصول نیست. | B:1066,1094–1096 | TASK:CORE:C04:002 |
-| REQ:CORE:152 | تأخیر داخلی پس از پرداخت معتبر از مدت خریداری‌شده کم نمی‌کند. | B:1066,1120 | TASK:CORE:C04:002 |
-| REQ:CORE:153 | دوره اشتراک تقویمی است؛ مرز، منطقه زمانی و قواعد تاریخ انتهایی در پیاده‌سازی باید با تصمیم ثبت‌شده تعیین شوند و تا آن زمان فعال‌سازی مسدود است. | B:1066,1074 | TASK:CORE:C04:003 |
-| REQ:CORE:154 | سفارش پرداخت‌نشده ۱۵ دقیقه قیمت و نسخه قیمت ثبت‌شده را حفظ می‌کند؛ انقضای سفارش پرداخت معتبر قبلی را بی‌اثر نمی‌کند. | B:1066 | TASK:CORE:C04:002 |
-| REQ:CORE:155 | تأیید پرداخت سمت سرور و تطبیق منبع معتبر لازم است؛ وضعیت پرداخت از وضعیت اشتراک و خدمت مستقل است. | B:1072,1094–1096 | TASK:CORE:C04:002 |
-| REQ:CORE:156 | Subscription, Order, Payment, Reservation, Service و Ledger state مستقل و با شناسه همبسته‌اند؛ چرخه‌هایشان ادغام نمی‌شود. | B:1072; W:626,642,1131 | TASK:CORE:C04:007 |
-| REQ:CORE:157 | یک callback/رویداد تکراری یا درخواست هم‌زمان نباید اشتراک یا پرداخت قطعی دوم برای همان سفارش/دوره بسازد. | B:1072,1096; W:630–640 | TASK:CORE:C04:007 |
-| REQ:CORE:158 | نتیجه نامعلوم پرداخت پیش از Retry یا انقضا/بازگشت وضعیت، ابتدا از مرجع پرداخت/دفترکل تطبیق می‌شود؛ نامعلوم مساوی شکست نیست. | B:1066,1070,1095–1096; W:604–642 | TASK:CORE:C04:002 |
-| REQ:CORE:159 | تمدید زودهنگام یک دوره کامل ۱۲ماهه را پس از پایان دوره جاری اضافه می‌کند؛ دوره بعد پیش از موعد شروع نمی‌شود. | B:1066,1070 | TASK:CORE:C04:003 |
-| REQ:CORE:160 | ارتقای نقره‌ای به طلایی فوراً با مابه‌التفاوت/اعتبار باقی‌مانده مؤثر می‌شود و تاریخ انقضای دوره جاری را تغییر نمی‌دهد. | B:1066 | TASK:CORE:C04:003 |
-| REQ:CORE:161 | محاسبه ارتقای میان‌دوره‌ای از یک نسخه قیمت واحد برای هر دو پلن استفاده می‌کند. | B:1066 | TASK:CORE:C04:003 |
-| REQ:CORE:162 | تنزل عادی در پایان دوره مؤثر است و خودبه‌خود استرداد عادی میان‌دوره‌ای نمی‌سازد. | B:1066 | TASK:CORE:C04:003 |
-| REQ:CORE:163 | انقضا یا شکست قطعی تمدید معتبر، مشتری را مستقیماً به برنزی می‌برد؛ پرداخت معتبر دیررس باید تمام مدت خریداری‌شده را حفظ کند. | B:1014,1070 | TASK:CORE:C04:003 |
-| REQ:CORE:164 | پرداخت قطعی هر دوره به یک رکورد مالی و order یکتا نسبت داده می‌شود؛ تلاش‌های جداگانه، نتیجه‌های نامعلوم و تکرار پیام از هم تفکیک و idempotent ثبت می‌شوند. | B:1070,1072; W:630–640 | TASK:CORE:C04:007 |
-| REQ:CORE:165 | تمدید خودکار پیش‌فرض خاموش است و بدون مجوز صریح، نسخه‌دار و محدود فعال نمی‌شود. | B:1070 | TASK:CORE:C04:004 |
-| REQ:CORE:166 | مجوز تمدید به پلن، قیمت، پرداخت‌کننده، مسیر پرداخت، دوره و سقف مجاز مقید و قابل ممیزی است. | B:1070; W:1085–1107 | TASK:CORE:C04:004 |
-| REQ:CORE:167 | افزایش قیمت تمدید نیازمند اطلاع پیشینی و رضایت صریح برای همان قیمت جدید است؛ بدون رضایت، تمدید به نرخ جدید انجام نمی‌شود. | B:1070 | TASK:CORE:C04:004 |
-| REQ:CORE:168 | تلاش پرداخت پیش از انقضا مجاز است، اما دوره بعد زودتر آغاز نمی‌شود؛ بیش از یک پرداخت قطعی برای دوره پذیرفته نیست. | B:1070 | TASK:CORE:C04:004 |
-| REQ:CORE:169 | شکست قطعی تمدید از کیف پول فقط با اقدام مشتری دوباره تلاش می‌شود؛ نتیجه نامعلوم ابتدا تطبیق و Retry خودکار مسیر مستقل بانکی تا تصمیم جداگانه غیرفعال است. | B:1070; W:1133–1143 | TASK:CORE:C04:004 |
-| REQ:CORE:170 | لغو مجوز برداشت، پرداخت‌های آینده را متوقف می‌کند اما پرداخت/تعهد/عملیات پیشین یا نامعلوم را پاک یا ناموفق نمی‌کند. | B:1070; W:1121–1131 | TASK:CORE:C04:004 |
-| REQ:CORE:171 | تغییر اختیار پرداخت‌کننده، مجوزهای آتی را معلق می‌کند؛ تأییدکننده دوم سازمانی از خود متن استنباط نمی‌شود. | B:1070,1082 | TASK:CORE:C04:004 |
-| REQ:CORE:172 | لغو در ۱۶۸ ساعت پس از فعال‌سازی، در صورت عدم استفاده از مزیت اختصاصی استرداد کامل و در صورت استفاده استرداد نسبتیِ بخش استفاده‌نشده دارد. | B:1068 | TASK:CORE:C04:005 |
-| REQ:CORE:173 | پس از پنجره ۱۶۸ ساعته، استرداد عادی ایجاد نمی‌شود مگر قانون/قرارداد؛ ادامه تا انقضا یا پایان فوری فقط با رضایت جداگانه انتخاب می‌شود. | B:1068 | TASK:CORE:C04:005 |
-| REQ:CORE:174 | تمدید زودهنگام پیش از شروع دوره جدید قابل استرداد کامل است. | B:1068 | TASK:CORE:C04:005 |
-| REQ:CORE:175 | محاسبه میانی با دقت کامل است؛ مبلغ مابه‌التفاوت ارتقا به ریال پایین و استرداد نسبتی به ریال بالا گرد می‌شود، با سقف مانده استحقاق و مبلغ همان قرارداد. | B:1068; W:1057,1664 | TASK:CORE:C04:005 |
-| REQ:CORE:176 | بازپرداخت اشتراک از قرارداد/روش پرداخت اصلی و برگشت اعتبار کیف پول از ledger همان کیف پول انجام می‌شود؛ مالک، منبع نقدی/هدیه/سازمانی و محدودیت‌ها حفظ می‌شوند. | B:1068; W:1047–1057 | TASK:CORE:C04:005 |
-| REQ:CORE:177 | تخصیص ریال باقیمانده استرداد چندمنشئی با روش بزرگ‌ترین باقیمانده است؛ شکست تساوی و ترتیب قطعی نسخه‌دار هنوز باز است. | B:1068; W:1047 | TASK:CORE:C04:005 |
-| REQ:CORE:178 | استرداد نامعلوم پیش از تکرار تطبیق می‌شود و هر بازپرداخت کلید تکرارناپذیری دارد. | B:1068,1072; W:604–642 | TASK:CORE:C04:005 |
-| REQ:CORE:179 | در اختلال گسترده بررسی گروهی ممکن است، اما استحقاق و جبران هر مشتری مستقل است؛ فرمول عددی جبران باز و از استرداد خطای خدمت جداست. | B:1068 | TASK:CORE:C04:005 |
-| REQ:CORE:180 | در تنزل برنامه‌ریزی‌شده مشتری پیش از مؤثرشدن انتخاب می‌کند کدام پایش در سقف جدید بماند؛ از زمان اثر، پایش فاقد استحقاق یا مازاد معلق می‌شود و تنظیمات/تاریخچه مجاز حفظ می‌شود. | B:1014,1008 | TASK:CORE:C04:006 |
-| REQ:CORE:181 | مهلت انتخاب و ترتیب پیش‌فرض در نبود انتخاب هنوز باز است و باید پیش از فعال‌سازی تنزل دارای Monitoring تعیین شود. | B:1014 | TASK:CORE:C04:006 |
-| REQ:CORE:182 | خرید معتبر/تعهد خدمت با تغییر پلن خودکار حذف نمی‌شود؛ ادامه تابع مجوز معتبر، قانون، توان فنی و قرارداد خدمت است. | B:1014,1130–1134 | TASK:CORE:C04:006 |
-| REQ:CORE:183 | مهلت آغاز خدمت خریداری‌شده اما شروع‌نشده در قرارداد نسخه‌دار همان خدمت تعیین می‌شود؛ مقدار عددی در این اسناد باز است. | B:1014; W:801 | TASK:CORE:C04:006 |
-| REQ:CORE:184 | اختلاف مالی دارای مراحل ثبت، پذیرش، بررسی، تطبیق، تصمیم و تسویه، پرونده و مسئول مشخص است؛ SLA عددی باز می‌ماند. | B:1072 | TASK:CORE:C04:007 |
-| REQ:CORE:185 | رخدادها و APIهای مرتبط با اشتراک نسخه‌دار، دارای شناسه مشترک/قابل همبسته‌سازی، Idempotency و مالک داده مشخص‌اند؛ C04 وضعیت دامنه خود را مالک می‌ماند. | B:1072–1083; C01:03–06 | TASK:CORE:C04:007 |
-| REQ:CORE:186 | سوابق قیمت/رضایت/سفارش/تلاش تمدید/نتیجه پرداخت/لغو/بازپرداخت و علت تصمیم باید قابل بازسازی و ممیزی باشند، بدون ثبت اسرار پرداخت. | B:1070–1072,1126; C01:06 | TASK:CORE:C04:007 |
-| REQ:CORE:187 | فاکتور رسمی سازمانی پیش از پرداخت حفظ می‌شود؛ فاکتور، وصول، مصرف، رسید و سند مالیاتی معانی جدا دارند و الزامات قانونی/قالب نهایی نیازمند متخصص ایران است. | W:671–687,1489–1502; B:1097–1100 | TASK:CORE:C04:007 |
-| REQ:CORE:188 | اعلان مالی داخل برنامه و پیامک امنیتی/اقدام فوری از Web Push هشدار جدا هستند؛ اعلان یا Push رضایت مالی ایجاد نمی‌کند. | B:997,1070; W:1117 | TASK:CORE:C04:007 |
-| REQ:CORE:189 | Feature Flag نسخه‌دار و Kill Switch می‌تواند زیرساخت را فقط در حالت آماده/غیرفعال نگه دارد؛ Flag جایگزین مجوز، پرداخت معتبر، Backend enforcement یا گیت مالی نیست. | B:1072,1083,1696–1710; C01:05,:07 | TASK:CORE:C04:008 |
-| REQ:CORE:190 | هیچ فعال‌سازی مالی تا تکمیل آزمون شکست/بازیابی، کنترل مالی، امنیت، مجوز، بررسی حقوقی و ثبت شواهد انتشار مجاز نیست؛ این قابلیت‌ها پیش‌نیاز انتشار نخست RAG نیستند. | B:1064,1072–1085,1696–1710 | TASK:CORE:C04:008 |
-
-**جمع:** 60 Requirement اتمی؛ 4 Story/Enabler؛ 8 Task؛ 24 Subtask؛ 60 AC و 60 Test definition. مقادیر مالی/زمانی باز در Decisionها و شروط ورود حفظ شده‌اند؛ تعداد الزام‌ها از دامنه سند استخراج شده، نه هدف ازپیش‌تعیین‌شده.
-
-#### Story / Enablerها
-
-| شناسه | نتیجه قابل تحویل | Taskها |
-|---|---|---|
-| TE:CORE:C04:001 | تعریف پلن، Price حق عضویت، ماتریس Entitlement و قرارداد دسترسی نسخه‌دار | TASK:CORE:C04:001, :002 |
-| TE:CORE:C04:002 | خرید، سفارش قیمت‌ثابت‌شده، فعال‌سازی و چرخه تقویمی اشتراک با پرداخت قابل‌تطبیق | TASK:CORE:C04:002, :003 |
-| TE:CORE:C04:003 | تمدید اختیاری و رضایت نسخه‌دار؛ ارتقا/تنزل/لغو و استرداد قابل بازسازی | TASK:CORE:C04:003, :004, :005, :006 |
-| TE:CORE:C04:004 | اتصال Billing به ledger/receipt/dispute و گیت غیرفعال‌سازی ایمن | TASK:CORE:C04:006, :007, :008 |
-
-#### Taskها و Subtaskهای اجرایی
-
-همه Taskهای C04 برنامه‌ریزی‌اند و اجرای محصول ندارند. مالکیت اجرای دامنه: Subscription and Entitlement (C04). مالکیت قراردادهای مشترک حفظ می‌شود.
-
-| Task | مالکیت، پیش‌شرط و خروجی | Subtask |
-|---|---|---|
-| TASK:CORE:C04:001 — مدل Plan/Price/Entitlement | مالک: C04. پیش‌شرط: C01:01 و کاتالوگ مصرفی C05a. خروجی: مدل نسخه‌دار Bronze/Silver/Gold، قیمت حق عضویت و طرح ماتریس Entitlement؛ اعداد باز به Decision. Req 131–145,148,150. | S01 ممیزی و مدل دامنه/نسخه‌ها؛ S02 قرارداد Plan×Entitlement×Service با تفکیک هزینه‌ها؛ S03 AC/Test و قیود ناشی از مقادیر باز. |
-| TASK:CORE:C04:002 — ثبت‌نام پولی، سفارش و تأیید پرداخت | مالک: C04 برای وضعیت اشتراک/سفارش؛ C02 برای هویت/اختیار و C12b برای تطبیق. پیش‌شرط: قرارداد هویت C02 و قرارداد مالی مصرف‌کننده‌ها. خروجی: سفارش با snapshot قیمت و فعال‌سازی پس از اثبات وصول. Req 138–139,148–158. | S01 اتصال به حساب/پرداخت‌کننده مجاز؛ S02 سفارش ۱۵ دقیقه‌ای، تأیید سمت سرور و همبستگی شناسه‌ها؛ S03 پوشش نتیجه نامعلوم، تأخیر، تکرار و انقضا. |
-| TASK:CORE:C04:003 — چرخه تقویمی، ارتقا و تنزل | مالک: C04. پیش‌شرط: قیمت نسخه‌دار TASK 001؛ Decision درباره مرز تقویم پیش از اجرا. خروجی: دوره، محاسبه مابه‌التفاوت، اعتبار باقیمانده، تاریخ انقضا و تغییر زمان‌بندی‌شده. Req 153,159–163. | S01 مدل دوره و تاریخ؛ S02 محاسبه ارتقا با نسخه قیمت یکتا و گردکردن مصوب؛ S03 تنزل پایان‌دوره و انتقال مستقیم به Bronze. |
-| TASK:CORE:C04:004 — تمدید و رضایت پرداخت | مالک: C04 برای policy/renewal state؛ C12a/C12b برای پرداخت/ledger. خروجی: مجوز تمدید خاموش، محدود و قابل لغو؛ گام بعدی بدون برداشت تکراری. Req 165–171. | S01 ثبت رضایت نسخه‌دار و snapshot دامنه؛ S02 برنامه‌ریزی پرداخت و تطبیق نتیجه؛ S03 لغو مجوز/تغییر پرداخت‌کننده و آزمون خطا. |
-| TASK:CORE:C04:005 — لغو، استرداد و اختلال | مالک: C04 برای استحقاق/محاسبه؛ C11a و C12b برای عملیات استرداد/تطبیق. خروجی: قواعد پنجره لغو، مبلغ قراردادی، مقصد و وضعیت بازپرداخت. Req 172–179. | S01 محاسبه لغو/استرداد و سقف قراردادی؛ S02 اتصال به مسیر پرداخت اصلی/ledger و allocation؛ S03 رسیدگی به نتیجه نامعلوم و پرونده اختلال مشتری‌محور. |
-| TASK:CORE:C04:006 — پایش و تعهد خدمت در تغییر پلن | مالک: C04 برای استحقاق و تعهد؛ C05a مالک نوع خدمت و C13b مالک تجربه کیف پول. خروجی: انتخاب/تعلیق سهمیه Monitoring و حفظ سرویس خریداری‌شده. Req 180–183. | S01 قرارداد Entitlement با Monitoring؛ S02 عملیات انتخاب/تعلیق و حفظ سوابق؛ S03 انتقال تعهد خرید خدمت و مهلت شروع از کاتالوگ نسخه‌دار. |
-| TASK:CORE:C04:007 — قراردادهای Billing، اسناد و اختلاف | مالک: C04 برای رویداد Subscription؛ C12a/C12b/C13a/C13b برای دفترکل، تطبیق، حسابداری و receipt. خروجی: API/Event envelope، audit/history، پیوند فاکتور و پرونده اختلاف. Req 146–147,156–157,164,184–188. | S01 قرارداد API/Event نسخه‌دار، idempotent و مالکیت‌دار؛ S02 اتصال receipt/invoice و اعلان مالی؛ S03 ماشین‌حالت اختلاف با مسئول و SLA باز. |
-| TASK:CORE:C04:008 — گیت فعال‌سازی/حالت آماده | مالک: Release/Finance Governance با مصرف‌کننده C04. وابستگی: CONTRACT:C01:05 و :07؛ تصمیم FD-02 و شواهد قانونی/مالی. خروجی: تصمیم ثبت‌شده Enable Now / Prepare Only / Defer و Kill Switch آزموده. Req 189–190. | S01 فهرست gate و evidence dossier؛ S02 قرارداد flag و کنترل عدم ایجاد اثر مالی در حالت غیرفعال؛ S03 آزمون نفوذ/شکست/بازیابی پیش از درخواست فعال‌سازی. |
-
-**Subtask-ID:** TASK:CORE:C04:001.S01–S03 تا TASK:CORE:C04:008.S01–S03. این‌ها واحدهای تحویل واقعی‌اند؛ Subtask تکمیلی برای پرکردن قالب ساخته نشده است.
-
-#### معیار پذیرش و Test Definitionهای اختصاصی
-
-هر TEST یک fixture و ورودی جدا دارد؛ در هر ردیف مسیر مثبت، رد منفی و مرز/رقابت مرتبط ثبت شده است. همه Testها تعریف برنامه‌ای‌اند و هنوز اجرا نشده‌اند.
-
-| AC / Test | Fixture، ورودی و اقدام | Oracle مثبت، رد منفی و مرز |
-|---|---|---|
-| AC:CORE:C04:001 / TEST:CORE:C04:001 | حساب تازه ثبت‌شده؛ ثبت‌نام عادی بدون سفارش پولی. | مثبت: Bronze؛ منفی: نبود پلن یا ارتقای خودکار. مرز: پرداخت نامعلوم هیچ Entitlement پولی نسازد. |
-| AC:CORE:C04:002 / TEST:CORE:C04:002 | کاربر با قیمت پلن Annual؛ ایجاد دو quote برای Silver/Gold. | مثبت: مدت سالانه و snapshot قیمت؛ منفی: قیمت اختراعی/تغییر جاری؛ مرز: تعویض نسخه قیمت سفارش قدیم را تغییر ندهد. |
-| AC:CORE:C04:003 / TEST:CORE:C04:003 | درخواست یک قابلیت دستیار روی سه پلن. | مثبت: فقط قابلیت‌های ماتریس نسخه‌دار؛ منفی: دسترسی خارج از پلن؛ مرز: عمق تحلیل مشاور ثابت بماند. |
-| AC:CORE:C04:004 / TEST:CORE:C04:004 | کاتالوگ خدمات نسخه N و Entitlement سه‌پلنی. | مثبت: زیرمجموعه بودن دامنه‌ها؛ منفی: مثال تبدیل به کاتالوگ قطعی نشود؛ مرز: انتشار نسخه جدید، snapshot قبلی را حفظ کند. |
-| AC:CORE:C04:005 / TEST:CORE:C04:005 | درخواست Feedback در Bronze/Silver/Gold. | مثبت: هر سه پذیرفته؛ منفی: رد ناشی از عضویت پولی؛ مرز: revoke حساب طبق C02 همچنان دسترسی را قطع کند. |
-| AC:CORE:C04:006 / TEST:CORE:C04:006 | درخواست Feedforward از Bronze و Silver. | مثبت: Silver/Gold بدون قیمت مستقل؛ منفی: Bronze رد شود؛ مرز: تکرار درخواست سقف شمارشی نسازد. |
-| AC:CORE:C04:007 / TEST:CORE:C04:007 | چند Monitoring فعال و مقدار cap باز/بعداً پیکربندی‌شده. | مثبت: enforcement روی cap نسخه‌دار؛ منفی: قابلیت در Bronze یا بیش از cap؛ مرز: cap نامشخص، فعال‌سازی محدود را متوقف کند. |
-| AC:CORE:C04:008 / TEST:CORE:C04:008 | API entitlement با snapshot نسخه N و policy N+1. | مثبت: Backend نتیجه قابل بازسازی؛ منفی: UI تنها اجازه ندهد؛ مرز: rollout نسخه، در درخواست جاری سازگار باشد. |
-| AC:CORE:C04:009 / TEST:CORE:C04:009 | داده شواهد/مجوز نامعتبر، حتی با Gold. | مثبت: پلن فقط شرط خدمت را می‌سنجد؛ منفی: پلن مجوز/قانون را دور نزند؛ مرز: revoke مجوز هم‌زمان با درخواست رد شود. |
-| AC:CORE:C04:010 / TEST:CORE:C04:010 | ثبت سه جریان درآمد در یک خرید و یک مشاوره. | مثبت: سه ردیف مستقل؛ منفی: عضویت به‌عنوان مصرف خدمت ثبت نشود؛ مرز: کسر ledger تکراری نباشد. |
-| AC:CORE:C04:011 / TEST:CORE:C04:011 | قیمت N برای اشتراک جاری، قیمت N+1 برای خرید تازه. | مثبت: خرید تازه N+1؛ منفی: renewal بدون رضایت با افزایش قیمت رد شود؛ مرز: اشتراک جاری با N حفظ شود. |
-| AC:CORE:C04:012 / TEST:CORE:C04:012 | دو اجرای یک خدمت از یک پلن واجد؛ درخواست یک و دو اجرا. | مثبت: تعرفه × اجرای پذیرفته‌شده؛ منفی: تعرفه در حق عضویت ادغام نشود؛ مرز: پرداخت یک اجرا فقط یک بار. |
-| AC:CORE:C04:013 / TEST:CORE:C04:013 | دو مشاوره با تعداد پرامپت/شدت مختلف و پلن‌های مختلف. | مثبت: مقدار مصرف طبق policy قیمت نسخه‌دار؛ منفی: توکن یا عدد نمونه به‌عنوان قیمت مصوب فرض نشود؛ مرز: اختلاف شدت در نتیجه محفوظ بماند. |
-| AC:CORE:C04:014 / TEST:CORE:C04:014 | اجرای دستیار با تعرفه پایه و مشاوره حین آن. | مثبت: نصف نرخ متناظر علاوه بر تعرفه پایه؛ منفی: یک‌سوم یا کسر دوباره رد شود؛ مرز: سهم مشاوره صفر، تعرفه پایه را حذف نکند. |
-| AC:CORE:C04:015 / TEST:CORE:C04:015 | fixture مصرف سنجیده، هزینه داخلی و مبلغ مشتری جدا. | مثبت: هر سه جدا و مرتبط؛ منفی: هزینه تأمین‌کننده دوباره به مشتری کسر نشود؛ مرز: نرخ در اجرای تازه تغییر کند اما اجرای پیوسته ثابت بماند. |
-| AC:CORE:C04:016 / TEST:CORE:C04:016 | سفارش خدمت، تعرفه، رسید و تراکنش با شناسه‌های مستقل. | مثبت: زنجیره قابل ردیابی؛ منفی: رویداد بی‌منبع/مبلغ تکراری؛ مرز: نتیجه نامعلوم تا تطبیق قطعی نشود. |
-| AC:CORE:C04:017 / TEST:CORE:C04:017 | سفارش خدمت شروع‌نشده و کیف پول با مانده. | مثبت: وجه در موجودی عمومی می‌ماند؛ منفی: سفارش به‌تنهایی رزرو/کسر نسازد؛ مرز: شروع عملیات فقط رزرو موقت طبق C09. |
-| AC:CORE:C04:018 / TEST:CORE:C04:018 | مصرف‌کننده Agent با دو نسخه entitlement. | مثبت: Agent قرارداد را می‌خواند؛ منفی: تغییر plan هسته را fork نکند؛ مرز: نسخه ناسازگار fail-closed. |
-| AC:CORE:C04:019 / TEST:CORE:C04:019 | شخص/سازمان با وضعیت هویت و role مختلف از C02. | مثبت: فقط actor مجاز خرید می‌کند؛ منفی: عضو یا سازمان تأییدنشده رد شود؛ مرز: نقش عوض‌شده قبل از commit دوباره ارزیابی شود. |
-| AC:CORE:C04:020 / TEST:CORE:C04:020 | کاتالوگ دو نسخه با خدمت منتشرنشده. | مثبت: فقط خدمت منتشرشده/مجاز قابل انتخاب؛ منفی: نام مثال به معنای عرضه نباشد؛ مرز: انتشار جدید بر سفارش قدیمی اثر خاموش نگذارد. |
-| AC:CORE:C04:021 / TEST:CORE:C04:021 | سفارش پرداختی با callback و تأیید مستقل provider. | مثبت: پس از تأیید معتبر فعال؛ منفی: callback تنها یا امضای نامعتبر رد؛ مرز: تأخیر داخلی مدت را کم نکند. |
-| AC:CORE:C04:022 / TEST:CORE:C04:022 | پرداخت معتبر با فعال‌سازی فوری و با تأخیر کنترل‌شده. | مثبت: طول دوره یکسان؛ منفی: تأخیر از مدت نخورد؛ مرز: فعال‌سازی تکراری دوره دوم نسازد. |
-| AC:CORE:C04:023 / TEST:CORE:C04:023 | دوره سالانه روی مرز ماه/سال کبیسه/منطقه زمانی. | مثبت: نتیجه مطابق تصمیم ثبت‌شده؛ منفی: زمان‌بندی پیش از تصمیم باز فعال نشود؛ مرز: لحظه مرزی دو دوره نسازد. |
-| AC:CORE:C04:024 / TEST:CORE:C04:024 | سفارش unpaid با quote نسخه N و انقضای دقیقه ۱۵. | مثبت: قیمت N تا ۱۵ دقیقه؛ منفی: بعد از مهلت استفاده از quote جدید؛ مرز: پرداخت معتبر در حال تطبیق بی‌اثر نشود. |
-| AC:CORE:C04:025 / TEST:CORE:C04:025 | callback صحیح/نامعتبر و status مستقل subscription/service. | مثبت: verify سمت سرور؛ منفی: callback جعلی بدون فعال‌سازی؛ مرز: پرداخت موفق ولی خدمت blocked، وضعیت‌ها را جدا نگه دارد. |
-| AC:CORE:C04:026 / TEST:CORE:C04:026 | یک پرداخت با دو پیام تکراری و درخواست موازی. | مثبت: یک تمدید/ثبت؛ منفی: اثر دوم رد؛ مرز: race روی قید یکتایی پایدار عبور نکند. |
-| AC:CORE:C04:027 / TEST:CORE:C04:027 | provider timeout پس از برداشت احتمالی. | مثبت: pending reconciliation؛ منفی: فرض شکست/پرداخت دوم ممنوع؛ مرز: نتیجه دیررس به همان order وصل شود. |
-| AC:CORE:C04:028 / TEST:CORE:C04:028 | پایان دوره با تمدید زودهنگام انجام‌شده. | مثبت: ۱۲ ماه پس از انتهای جاری؛ منفی: تاریخ شروع فوری رد؛ مرز: چند تمدید پشت‌سرهم بدون gap/هم‌پوشانی. |
-| AC:CORE:C04:029 / TEST:CORE:C04:029 | Silver جاری به Gold، با snapshot واحد دو قیمت. | مثبت: فوری و همان expiry؛ منفی: تمدید ناخواسته/افزایش دوره رد؛ مرز: مابه‌التفاوت طبق محاسبه دقیق. |
-| AC:CORE:C04:030 / TEST:CORE:C04:030 | تغییر قیمت بین دو نسخه هنگام ارتقای میان‌دوره‌ای. | مثبت: یک نسخه قیمت برای هر دو پلن؛ منفی: ترکیب N و N+1 رد؛ مرز: quote قدیمی در مهلتش معتبر. |
-| AC:CORE:C04:031 / TEST:CORE:C04:031 | درخواست downgrade در میانه دوره. | مثبت: pending until period end؛ منفی: استرداد عادی خودکار ندارد؛ مرز: لغو جداگانه با حقوق متفاوت ارزیابی شود. |
-| AC:CORE:C04:032 / TEST:CORE:C04:032 | پایان اشتراک، با پرداخت قطعی ناموفق یا معتبر دیررس. | مثبت: شکست قطعی به Bronze؛ پرداخت دیررس دوره کامل؛ منفی: رفتن به tier پولی پایین‌تر؛ مرز: نتیجه unknown تا reconciliation بدون تغییر قطعی. |
-| AC:CORE:C04:033 / TEST:CORE:C04:033 | پرداخت تمدید پیش از انقضا. | مثبت: پول/تمدید به دوره بعد وصل؛ منفی: دسترسی دوره بعد زودتر شروع نشود؛ مرز: دوره جاری overlap نکند. |
-| AC:CORE:C04:034 / TEST:CORE:C04:034 | دو webhook برای یک دوره renewal. | مثبت: یک موفقیت معتبر؛ منفی: شارژ دوم ثبت نشود؛ مرز: دو callback هم‌زمان. |
-| AC:CORE:C04:035 / TEST:CORE:C04:035 | تنظیم اولیه تمدید خودکار در حساب تازه. | مثبت: خاموش؛ منفی: برداشت بدون consent رد؛ مرز: مهاجرت حساب قدیمی بدون رضایت صریح خاموش بماند. |
-| AC:CORE:C04:036 / TEST:CORE:C04:036 | consent شامل plan/price/payer/route/period/cap و version. | مثبت: فقط دامنه مجاز؛ منفی: mismatch هر فیلد برداشت را رد؛ مرز: revoke و renew هم‌زمان، revoke آینده را ببندد. |
-| AC:CORE:C04:037 / TEST:CORE:C04:037 | قیمت renewal افزایش و consent قیمت قدیم. | مثبت: اطلاع و رضایت جدید پیش‌شرط قیمت جدید؛ منفی: سکوت/عدم رضایت تمدید نمی‌کند؛ مرز: قیمت ثابت با consent معتبر ادامه یابد. |
-| AC:CORE:C04:038 / TEST:CORE:C04:038 | تمدید با attempt قبل از پایان و مصرف کیف پول. | مثبت: یک attempt مجاز، دوره جدید سر موعد؛ منفی: شکست قطعی از کیف پول خودکار retry نشود؛ مرز: نتیجه unknown ابتدا تطبیق. |
-| AC:CORE:C04:039 / TEST:CORE:C04:039 | کاربر مجوز را revoke کند درحالی‌که یک پرداخت قبلی pending است. | مثبت: پرداخت‌های آینده متوقف؛ منفی: سابقه حذف یا pending شکست قطعی نشود؛ مرز: safe-stop برای عملیات جاری. |
-| AC:CORE:C04:040 / TEST:CORE:C04:040 | تغییر actor/مالک کیف پول پرداخت‌کننده. | مثبت: مجوز آینده suspend تا صدور مجدد؛ منفی: برداشت با actor قبلی رد؛ مرز: تأیید دوم فرضی برای سازمان مطالبه نشود. |
-| AC:CORE:C04:041 / TEST:CORE:C04:041 | لغو ساعت ۱۶۷ و ۱۶۹ پس از فعال‌سازی؛ حالت استفاده/بدون استفاده. | مثبت: داخل پنجره full بدون استفاده، pro-rata با استفاده؛ منفی: مبلغ بیش از قرارداد؛ مرز: مرز دقیق ۱۶۸ ساعت. |
-| AC:CORE:C04:042 / TEST:CORE:C04:042 | لغو پس از ۱۶۸ ساعت با retain تا expiry یا terminate now. | مثبت: انتخاب جدا و قابل ثبت؛ منفی: استرداد عادی/پایان فوری بدون consent؛ مرز: استثنای قانون/قرارداد به پرونده ارجاع شود. |
-| AC:CORE:C04:043 / TEST:CORE:C04:043 | تمدید آینده با شروع‌نشده در دو حالت قبل/بعد از شروع دوره. | مثبت: full refund پیش از شروع؛ منفی: به‌عنوان دوره فعال طبقه‌بندی نشود؛ مرز: unknown payment تطبیق شود. |
-| AC:CORE:C04:044 / TEST:CORE:C04:044 | مبلغ مابه‌التفاوت fractional ریال/استرداد در حد ceiling. | مثبت: full precision و گردکردن مصوب، مبلغ زیر caps؛ منفی: تجاوز از مانده/قرارداد؛ مرز: مبلغ صفر/کمتر از یک ریال. |
-| AC:CORE:C04:045 / TEST:CORE:C04:045 | پرداخت نقدی/هدیه/سازمانی و قرارداد اشتراک. | مثبت: مسیر اصلی و همان wallet/مالک؛ منفی: انتقال refund به شخص دیگر؛ مرز: ledger provenance و محدودیت gift محفوظ. |
-| AC:CORE:C04:046 / TEST:CORE:C04:046 | استرداد جزئی چندمنشئی با remainder. | مثبت: بزرگ‌ترین remainder و جمع دقیق؛ منفی: priority فرضی cash/gift رد؛ مرز: tie-break تا تصمیم جداگانه block بماند. |
-| AC:CORE:C04:047 / TEST:CORE:C04:047 | پاسخ refund timeout و پیام retry. | مثبت: پرونده تطبیق و یک idempotency key؛ منفی: refund دوباره اجرا نشود؛ مرز: نتیجه دیررس همان refund را ببندد. |
-| AC:CORE:C04:048 / TEST:CORE:C04:048 | اختلال مصدق برای چند مشتری با استفاده متفاوت. | مثبت: هر claim مستقل محاسبه؛ منفی: cohort یک مبلغ مشترک خودکار نگیرد؛ مرز: فرمول عددی باز مانده و double benefit رد. |
-| AC:CORE:C04:049 / TEST:CORE:C04:049 | downgrade Monitoring با N پایش، cap N−1 و انتخاب کاربر. | مثبت: انتخاب در سقف حفظ، بقیه معلق و تاریخچه سالم؛ منفی: حذف خودکار تنظیمات؛ مرز: نبود انتخاب تا تعیین default مانع فعال‌سازی. |
-| AC:CORE:C04:050 / TEST:CORE:C04:050 | خدمت خریداری‌شده پیش و پس از downgrade/expiry. | مثبت: تعهد معتبر حفظ؛ ادامه فقط با مجوز/قانون/توان/قرارداد؛ منفی: لغو خودکار تعهد؛ مرز: مجوز revoked اجازه هزینه جدید نمی‌دهد. |
-| AC:CORE:C04:051 / TEST:CORE:C04:051 | قرارداد نسخه‌دار خدمت با مهلت شروع و قرارداد بدون مقدار. | مثبت: مهلت نسخه مشخص اجرا شود؛ منفی: مقدار مشترک اختراع نشود؛ مرز: مقدار نامعلوم اجرای خدمتی را که نیازمند مهلت است متوقف کند. |
-| AC:CORE:C04:052 / TEST:CORE:C04:052 | اختلاف با مراحل ثبت تا تسویه و دو پرونده جدا. | مثبت: actor/owner و state history هر پرونده؛ منفی: پرونده بی‌مسئول؛ مرز: SLA باز به‌صورت عدد جعل نشود. |
-| AC:CORE:C04:053 / TEST:CORE:C04:053 | رویداد تمدید با schema version و correlation id. | مثبت: مصرف‌کننده سازگار و تکرار امن؛ منفی: schema ناسازگار/پیام duplicate رد یا quarantine؛ مرز: replay همان outcome را تغییر ندهد. |
-| AC:CORE:C04:054 / TEST:CORE:C04:054 | بازسازی از رضایت، snapshot، سفارش، پرداخت و لغو. | مثبت: تصمیم و نسخه قابل بازسازی؛ منفی: اسرار پرداخت وارد log نشود؛ مرز: داده actor مجاز به خودش محدود باشد. |
-| AC:CORE:C04:055 / TEST:CORE:C04:055 | سازمان، invoice پیش از درگاه/واریز و receipt بعد از وصول. | مثبت: سند اشتراک به رویداد مربوط نگاشت شود و الزام فاکتور پیش‌پرداخت Wallet به مصرف‌کننده ارجاع شود؛ منفی: فاکتور مساوی وجه/درآمد فرض نشود؛ مرز: قالب مالیاتی با gate حقوقی باز بماند. |
-| AC:CORE:C04:056 / TEST:CORE:C04:056 | رویداد مالی حساس با In-App، Push و SMS preference. | مثبت: In-App durable؛ SMS فقط طبق policy؛ منفی: Push معادل consent یا تحویل فرض نشود؛ مرز: متن مالی حساس بیرون احراز افشا نشود. |
-| AC:CORE:C04:057 / TEST:CORE:C04:057 | مصرف flag در حالت PREPARE_ONLY و KILL_SWITCH. | مثبت: API/مدل آماده ولی اثر مالی صفر؛ منفی: flag دسترسی/پرداخت را مجاز نکند؛ مرز: kill switch تمدیدهای آتی را متوقف و وضعیت قبلی را حفظ کند. |
-| AC:CORE:C04:058 / TEST:CORE:C04:058 | تلاش rollout با یکی از گیت‌های حقوقی، مالی، امنیتی یا failure-test ناقص. | مثبت: فقط بعد از شواهد همه gateها درخواست Enable؛ منفی: هیچ پرداخت/اشتراک واقعی پیش از gate؛ مرز: عدم حضور در RAG R1 با feature flag اثبات شود. |
-| AC:CORE:C04:059 / TEST:CORE:C04:059 | دسترسی کاربر سابق/مجاز به receipt اشتراک خود و receipt سازمان دیگر. | مثبت: دسترسی محدود C02؛ منفی: افشای رکورد tenant دیگر؛ مرز: خروج عضو تاریخچه را حذف نکند. |
-| AC:CORE:C04:060 / TEST:CORE:C04:060 | تکمیل audit linkage Requirement→Task→AC→Test→Source. | مثبت: شناسه‌ها دوسویه و یکتا؛ منفی: هر قلم بی‌منبع/بی‌Task/بی‌Test validator را fail کند؛ مرز: Handoff مقصد آینده C04 را بی‌دلیل block نکند. |
-
-#### قراردادها، وابستگی‌ها و Handoff
-
-| Handoff:H04:002 | W:1047–1057، W:1471–1502، B:1087–1104 | C11a refunds; C12a ledger; C12b payment reconciliation; C13a accounting/settlement; C13b receipts/support | PENDING_PACKAGE_ALLOCATION در سطح Task مقصد؛ دریافت و پذیرش جزئیات در Scope View بسته مقصد | C04 فقط مبلغ/استحقاق اشتراک و شناسه ارجاعی را می‌دهد؛ مقصد باید قرارداد اجرایی خود را ثبت کند. |
-| Handoff:H04:003 | B:973–1016، B:1077–1085 | RAG/Adviser و Assistant consumers؛ بسته دقیق هنوز تعیین نشده | PENDING_PACKAGE_ALLOCATION | مصرف‌کنندگان باید نسخه Entitlement را از API بخوانند؛ مالک دقیق هر Feature با بازشدن بسته مقصد تثبیت می‌شود. |
-
-| مورد | مالک و قرارداد | وضعیت و پذیرش |
-|---|---|---|
-| Plan/Entitlement API | C04 صاحب معنای پلن؛ CONTRACT:C04:001 مصرف‌کننده‌ها: C05a، C06 و سرویس‌های Adviser/Assistant در بسته‌های آتی؛ نسخه/Schema قبل از اجرا باید منتشر و سازگار شود. | قرارداد برنامه‌ریزی؛ implementation schema هنوز منتشر نشده |
-| Subscription lifecycle/order/payment correlation | C04 صاحب Subscription/Order؛ C02 صاحب هویت/اختیار؛ payment provider و Ledger در C12a/C12b. | CONTRACT:C04:002؛ هر منبع حقیقت وضعیت خودش را حفظ می‌کند |
-| Billing event/reconciliation | C04 مالک event business؛ C03 اجرای مشترک job/event را با Taskهای پذیرفته‌شده C01 و CONTRACT:C01:03/:04 ارائه می‌کند؛ C12b مالک تطبیق/بازیابی. | CONTRACT:C04:003؛ idempotency با CONTRACT:C01:04 و :06 هم‌راستا |
-| Flag/rollback/evidence | C01 مالک CONTRACT:C01:05 و :07؛ C04 مصرف‌کننده؛ C03 زیرساخت و رویدادهای مشترک را طبق Taskهای پذیرفته‌شده اجرا می‌کند. | Enable Now تا FD-02 و گیت‌های مالی/حقوقی/امنیتی مسدود |
-| هویت و مجوز | C02: TASK:CORE:C02:001–003 و C02:005؛ CONTRACT:C01:01 برای مرز ماژول/مالکیت داده. | C04 هویت، role یا مدل اختیار پرداخت تکراری تعریف نمی‌کند |
-| کاتالوگ/تجربه | C05a مالک کاتالوگ خدمت؛ C06 پوسته مشترک؛ C13b receipt/support کیف پول. | ماتریس نهایی خدمت/پلن هنگام پذیرش بسته مقصد آشتی شود |
-| کیف پول/ledger/refund/settlement | C07–C13b براساس عنوان و دامنه برنامه؛ C04 فقط سیاست اشتراک را به Contract/Handoff می‌دهد. | از این گیت C04 مجوز اجرای کیف پول صادر نمی‌شود |
-| RAG/Assistant consumers | R01–R10 و A01–A08 مصرف‌کننده‌های احتمالی Entitlement؛ مالک بسته دقیق هر مصرف‌کننده تا تدوین خود بسته تعیین می‌شود. | Handoff:H04:001، target_package=UNASSIGNED، receiving_state=PENDING_PACKAGE_ALLOCATION؛ هنگام آغاز هر بسته مقصد باید دریافت/رد و نسخه قرارداد را ثبت کند |
-
-**Dependency / گیت‌ها**
-
-- DEP:C04:001 از C02 identity/authorization و CONTRACT:C01:01 به TASK:C04:002 نوع HARD؛ اجرای خرید تا پذیرش قرارداد مجاز نیست.
-- DEP:C04:002 از TASK:CORE:C04:001 به :002 نوع CONTRACT؛ snapshot پلن/قیمت قبل از سفارش لازم است.
-- DEP:C04:003 از CONTRACT:C01:03/:04 و کار C03 روی Event/Job به TASK:C04:004/:005 نوع CONTRACT؛ سیستم C04 مالک وضعیت Subscription باقی می‌ماند.
-- DEP:C04:004 از C12a/C12b برای پرداخت/تطبیق و C11a برای استرداد به TASK:C04:004/:005 نوع HARD برای فعال‌سازی، نه برای تکمیل تعریف برنامه.
-- DEP:C04:005 از C05a به TASK:C04:001/:006 نوع CONTRACT؛ فقدان کاتالوگ نهایی مانع ادعای دسترسی به خدمت است، نه مانع تعریف entitlement contract.
-- DEP:C04:006 از CONTRACT:C01:05/:07 و DECISION:C04:01 FD-02 به TASK:C04:008 نوع HARD برای Enable Now.
-- چرخه HARD/CONTRACT در زیرگراف C04: 0 چرخه ناسازگار؛ PREFERENCE اجرایی به تقدم قطعی تبدیل نشده است.
-
-**Decision register**
-
-| شناسه | موضوع و وضعیت | اثر/تریگر تعیین تکلیف |
-|---|---|---|
-| DECISION:C04:01 | FD-02: Enable Now / Prepare Only / Defer، انتشار و دامنه فعال‌سازی؛ OPEN | قبل از پرداخت واقعی یا فعال‌سازی پلن |
-| DECISION:C04:02 | مرز تقویم، timezone و تاریخ‌های انتهایی؛ OPEN | پیش از آزمون/فعال‌سازی دوره واقعی |
-| DECISION:C04:03 | قیمت عددی Silver/Gold، intensity rate مشاور، مبلغ کمپین ثبت‌نام؛ OPEN | پیش از انتشار قیمت/checkout؛ هیچ عدد نمونه‌ای نرخ محسوب نشود |
-| DECISION:C04:04 | سقف عددی Monitoring و fee مستقل احتمالی؛ OPEN | قبل از فروش/فعال‌سازی Monitoring |
-| DECISION:C04:05 | tie-break روش بزرگ‌ترین باقیمانده، SLA اختلاف، فرمول جبران اختلال؛ OPEN | قبل از استرداد/عملیات مالی مربوط |
-| DECISION:C04:06 | سیاست Retry بانکی پس از شکست قطعی، مرز انتخاب و default پایش در downgrade، مهلت شروع هر خدمت؛ OPEN | پیش از فعال‌سازی جریان مربوط |
-| DECISION:C04:07 | نوع نهایی سند سازمانی/مالیاتی، فیلدهای الزامی، مالیات و شناسایی حسابداری؛ OPEN و نیازمند بررسی متخصص مقررات ایران | پیش از صدور/ثبت مالیاتی |
-| DECISION:C04:08 | انتخاب provider، بانک، فناوری، مرز سرویس مالی و پذیرش عملیاتی؛ OPEN/خارج از تصمیم تجاری مصوب | FD-01/03 و گیت عرضه |
-
-#### RA و IPA — نتایج اجراشده
-
-| کنترل | نتیجه و شاهد |
-|---|---|
-| P0: pin منابع/حفاظت پذیرفته‌ها | PASS؛ Blob دو منبع برابر منشأ plan و خط مبنای PR #251؛ بخش‌های C01–C03 در متن ورودی بدون تغییر مصرف شدند؛ فقط stub C04 جایگزین می‌شود. |
-| P1-GLOBAL | PASS (reused)؛ طبق continuity v7، inventory برابر 2,230 Source Unit و G1=COMPLETE؛ گراف منتشرشده برای کشف/مسیریابی استفاده شد، نه به‌عنوان گیت معنایی. |
-| P1-PACKAGE | PASS؛ SCOPE:CORE:C04:V1 همه برش‌های OWNED/SHARED/UNCERTAIN و EXCLUDED را تعیین‌تکلیف می‌کند؛ بلوکر بی‌شاهد صفر. |
-| P2: RA | PASS؛ تمام 60 الزام به شاهد منبع، وضعیت مصوبه، شرط/مقدار باز، مالک دامنه و مرز استثنا متصل‌اند؛ هیچ قیمت/قانون/تأیید مالی جدیدی جعل نشده است. |
-| P3: IPA Task path | PASS؛ 4 Enabler → 8 Task → 24 Subtask؛ هر Requirement حداقل به یک Task و هر Task تحویل/وابستگی/شرط ورود دارد. |
-| P4: AC/Test | PASS؛ 60 AC و 60 Test مجزا؛ هر آزمون fixture/input/action/oracle و مثبت/منفی/مرز یا رقابت مرتبط دارد؛ سناریوها با رفتار مربوط بازخوانی شدند. |
-| P5: Contract/Dependency/Handoff | PASS؛ C01/C02/C03 مصرف شده‌اند، مالکیت Ledger/Payment/Catalogue منتقل نشده، 8 Decision باز، 1 Handoff مقصدنامشخص و 6 dependency ثبت شد؛ چرخه سخت حل‌نشده صفر. |
-| P6: Structural/Mutation/readback | PASS؛ یکتایی شناسه، شمار و نگاشت دوسویه و ارجاع منبع به‌صورت برنامه‌ای بررسی شد؛ author semantic readback روی 100٪ احکام حساس مالی/رضایت/پرداخت/استرداد و مرزهای مجوز انجام شد. آزمون محصول اجرا نشده و ممیزی مستقل شخص دیگر ادعا نمی‌شود. |
-| جمع نتیجه | RA=PASS / IPA=PASS در سطح برنامه‌ریزی. Implementation status برای اجرای واقعی همچنان BLOCKED_BY_DECISION/NOT_GRANTED طبق DECISION:C04:01 و Decisionهای متأثر است. |
-
-#### حفاظت و تغییرات
-
-هیچ Requirement، Task، شناسه، مالک یا متن پذیرفته‌شده C01–C03 بازنویسی نشده است. RAG/Assistant و کیف پول خارج از C04 تکمیل نشده‌اند. این فصل، مجوز اجرای محصول، مجوز مالی/بانکی، انتشار یا Merge ایجاد نمی‌کند.
-
-
-### C05a — کاتالوگ خدمات شهاب
-
-**وضعیت:** این فصل فقط برنامه‌ریزی C05a را می‌پذیرد؛ پیاده‌سازی محصول و اجرای Test محصول انجام نشده است.
-
-#### هویت، دامنه و مرز مسئولیت
-
-- **شناسه/عنوان رسمی:** `C05a — کاتالوگ خدمات شهاب`؛ نخستین بسته رسمی پس از C04. C05b («کاتالوگ محصولات مالی و توصیه‌گر») بسته بعدی است و در این مأموریت تدوین نشده.
-- **دامنه مصوب:** مدل معنایی حوزه/خدمت/قابلیت، وضعیت انتشار، مسیریاب تجربه و قرارداد خواندن مشترک سرویس؛ بر اساس Blueprint §۴ فصل دوم و §۱–۴ فصل سوم. C05a مالک معنای کاتالوگ خدماتی است که خود شهاب عرضه می‌کند و خروجی مسیریابی مبتنی بر آن.
-- **مرز مالکیت:** C05a مالک رکورد و قواعد کاتالوگ/مسیریاب است. Core مالک عمومی API و مرز داده طبق `CONTRACT:C01:01/:02` می‌ماند؛ C02 مالک هویت/مجوز/رضایت؛ C03 مالک قراردادهای عمومی Job/Event/تاب‌آوری/Telemetry؛ C04 مالک Plan/Entitlement؛ هر سرویس مسئول اجرای قرارداد خودش است. این فصل نام سرویس اجرایی یا مالک سازمانیِ نامشخص را حدس نمی‌زند.
-- **خارج از دامنه:** کاتالوگ محصولات واقعی بانک‌ها، کشف/اعتبارسنجی/Snapshot محصول و توصیه‌گر (`C05b`)، دانش حقوقی (`R06`)، نقشه مسیر UI (`A06`)، مسیر نصب/کنترل اپ‌های وب/Android/iOS (`A04`)، پوسته و آیکن‌های UI (`C06`)، اجرای گردش‌کار و زیرکار بین‌حوزه‌ای (`A02`)، پلن/تعرفه و entitlement (`C04/C13a`)، پرداخت/رزرو/دفترکل/تطبیق (`C09/C12a/C12b`) و اعلان/سوابق مشترک (`C14`). هیچ API بانکی یا روش اجرای واقعی، با این بسته تصویب نمی‌شود.
-- **مصوبه بازِ ثبت‌شده:** Blueprint در `B:906` دسترسی به مشاوره در همان حوزه را به تصمیم پلن ارجاع می‌دهد، اما جواب نمی‌دهد. این مورد در `DECISION:C05A:001` و Handoff به C04 باز می‌ماند؛ تعیین ماتریس entitlement را مسدود می‌کند، نه مدل کاتالوگ یا آزمون‌های مستقل آن را.
-- **مرز مراحل:** فقط برنامه اجرایی C05a تدوین شده است؛ مراحل برنامه‌ریزی ۴ و ۵ و هیچ بسته دیگری آغاز نشده‌اند.
-
-#### خط مبنا و روش Graph-First
-
-- آخرین `main` هنگام شروع: `16377d3767d75de3ae4363cfc897a388f3caa412` (ادغام #252). گراف مورد استفاده در `main` و منبعش به Commit `f28033b6496e39f4a59644cccf5fb2c9886fceb4` پین است. `graphify` CLI در محیط موجود نصب نبود؛ JSONهای مرجع مستقیماً و بدون بازسازی/تغییر گراف پردازش شدند.
-- Schema واقعی: `directed`, `multigraph`, `nodes[]`, `links[]`, `hyperedges[]`; گره معنایی می‌تواند `evidence_quote`, `evidence_locator`, `decision_status`, `owner`, `owner_status`, `confidence` داشته باشد. گره‌های `STRUCTURAL_ONLY` صرفاً محل برش را نشان می‌دهند.
-- تطبیق با گزارش گراف: ۳۲۸ گره و ۷۰۶ یال ساختاری؛ ۱٬۱۸۰ گره یکتا و ۱٬۳۴۵ یال فعال؛ ۲ یال قرنطینه؛ ۲۲ قطعه و پوشش ۴٬۳۳۰ خط؛ ۳۲۶ عنوان و ۵۸ بلوک جدول. عدد ۸۵۲ در آمار، گره‌های `UNASSIGNED` از نظر Community است، نه کل گره‌های معنایی یکتا؛ ۸۵۴ رکورد معنایی ممیزی شده‌اند. `validation.json=PASS` و `issue_count=0` است؛ این PASS مکانیکی، اثبات کفایت معنایی بسته نیست. این گراف OSS دو سند مرجع در مخزن است و با گراف Cloud کد مخزن یکی نیست؛ گراف Cloud در این مأموریت مصرف نشد.
-- گره‌های/برش‌های مستقیم مصرف‌شده: `shahab_phase_2_development_blueprint_section_867_۴_کاتالوگ_خدمات_و_مسیریاب_تجربه` (`B:867–907`)، فصل دوم (`B:786–795`)، فصل سوم اجرای خدمات (`B:1383–1392`)، API کاتالوگ (`B:1584–1603`)، تفکیک انواع دانش (`B:1604–1626`) و `shahab_digital_wallet_section_749_۶_۳_پرداخت_هزینه_خدمات` (`W:749–762`). روابط ساختاری `contains_section`/`has_subsection` برای یافتن برش‌ها استفاده شدند؛ هیچ رابطه `INFERRED` یا `AMBIGUOUS` مبنای الزام نشد.
-- برش‌های گراف‌نیافته در جست‌وجوی اولیه که با جست‌وجوی متنی/همسایه ضروری اضافه شدند: `B:1393–1444` (انتخاب حوزه/نقش و نشست)، `B:1445–1449` (مرز Adviser/Assistant و پلن)، `B:1502–1522` (مالکیت A04)، `B:1190–1217` (قراردادهای C03) و `W:1205–1219` (تفکیک وضعیت خدمت/بانک/دفترکل). بخش‌های `B:1557–1636` و `W:749–852` نیز برای جلوگیری از اختلاط C05b و C09 بازخوانی شدند.
-- محدودیت گراف: Graphify ابزار کشف/مسیریابی است؛ پوشش کامل دامنه بسته، مالکیت یا تصویب را اثبات نمی‌کند. فیلتر واژگانی گسترده «service/catalog/خدمت» ۶۷ گره نامزد ایجاد کرد که بخشی از آن‌ها موضوعات نامرتبط RAG/محصول/کیف پول بودند؛ چون این فیلتر شمارش رسمی query یا نمونه‌گیری مستقل نبود، Precision و Coverage درصدی `NOT_MEASURED` ثبت می‌شود.
-
-#### برش‌ها و Scope View بسته
-
-| برش منبع | تعیین تکلیف | دلیل/مرز |
-|---|---|---|
-| `B:867–906` | `OWNED` | تعریف Domain/Service/Capability، فیلدهای خدمت، وضعیت انتشار، مسیریابی و قواعد صریح تجربه؛ شاهد اصلی C05a. |
-| `B:1393–1414` | `OWNED` + `SHARED_CONTRACT` | ورود با انتخاب/تأیید حوزه، انتخاب نقش و قفل حوزه؛ C05a قرارداد کاتالوگ/مسیریاب را می‌دهد، C02 قرارداد هویت و مجوز را حفظ می‌کند. |
-| `B:1445–1449` | `SHARED_CONTRACT` | تمایز مشاور/دستیار و اثر پلن؛ قرارداد/قواعد Plan از C04 مصرف می‌شوند، نه بازتعریف. |
-| `B:1190–1217` | `SHARED_CONTRACT` | مالکیت داده، API نسخه‌دار و مرز سرویس؛ C01/C03 مالک قرارداد مشترک‌اند. |
-| `B:1502–1522` | `CROSS_REFERENCE` | انتخاب اپ/وب، نصب و محدودیت سیستم‌عامل به A04؛ C05a مسیر اجرایی پلتفرمی را طراحی نمی‌کند. |
-| `B:1557–1636` | `EXCLUDED_WITH_REASON` | داده محصولات بانکی، کشف/اعتبارسنجی/Snapshot و توصیه‌گر متعلق به C05b است؛ فقط تمایز مفهومی حفظ می‌شود. |
-| `B:1604–1626` | `CROSS_REFERENCE` | دانش مقرراتی/محصول/رابط سه دارایی جدا هستند؛ C05a فقط مدل خدمات شهاب را تعریف می‌کند. |
-| `B:1253–1282` | `CROSS_REFERENCE` | پوسته/آیکن/تجربه عمومی به C06؛ قرارداد دادهٔ کاتالوگ مصرف‌کننده آن است. |
-| `B:1019–1027`, `B:999–1016` | `SHARED_CONTRACT` | تفکیک خدمت از پلن، entitlement، تعرفه و موجودی کیف پول؛ C04 و C13a مالک قواعد مالی خود می‌مانند. |
-| `B:906` | `UNCERTAIN` | میزان دسترسی مشاوره همان حوزه در پلن تصمیم نشده؛ `DECISION:C05A:001`؛ تا تعیین مصوبه، فرض دسترسی ساخته نمی‌شود. |
-| `W:749–852` | `CROSS_REFERENCE` | پرداخت/مصرف/رزرو خدمت متعلق به C09؛ C05a فقط نوع خدمت و ارجاع به تعرفه را عرضه می‌کند. |
-| `W:1205–1219` | `CROSS_REFERENCE` | وضعیت اجرای خدمت، عملیات بانکی و ثبت Ledger مستقل‌اند؛ به C09/C12a/C12b تحویل می‌شوند. |
-| `W:1503–1624`, `B:942–999`, `B:1682–1685` | `CROSS_REFERENCE` | receipt/support، اعلان/Monitoring و ترجیحات متعلق به C13b/C14 هستند. |
-| `B:250–258` | `EXCLUDED_WITH_REASON` | مخزن اسناد و روابط حقوقی متعلق به R06 است؛ کاتالوگ خدمات جای Knowledge Base نیست. |
-
-#### Requirementهای جدید و تصمیم مصوبه
-
-وضعیت `APPROVED` فقط برای رفتار صریح در Blueprint/Wallet است. مالک منطقی تمام الزامات جدید این فصل `C05a` است؛ هرجا API مشترک، مجوز یا اجرای خدمت دخیل است، Contract مالک مشترک در ستون وابستگی ثبت شده و مسئولیت آن به C05a منتقل نمی‌شود.
-
-| شناسه | الزام اتمی و آزمون‌پذیر | شاهد/وضعیت | مالک و وابستگی |
-|---|---|---|---|
-| `REQ:CORE:191` | مدل کاتالوگ باید «حوزه» را مرز مسئله، «خدمت» را نتیجه قابل عرضه و «قابلیت» را عملکرد تخصصی/مشترکِ قابل استفاده مجدد نگه دارد؛ این سه نوع رکورد با هم یکی نشوند. | `B:869`; `APPROVED` | C05a؛ قرارداد داده C01:01 |
-| `REQ:CORE:192` | هر خدمت باید شناسه پایدار و یکتای خود را داشته باشد که با تغییر عنوان یا انتشار نسخه تازه عوض نشود. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:193` | هر خدمت باید هدف/نتیجه عرضه‌اش را در رکورد خود ثبت کند. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:194` | هر خدمت باید حوزه مالک خود را در رکورد خود ثبت کند. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:195` | قرارداد ورودی هر خدمت باید به‌طور ساختاریافته تعریف شود؛ مصرف‌کننده باید ورودی را با نسخه قرارداد همان خدمت اعتبارسنجی کند. | `B:869`; `APPROVED` | C05a؛ C01:02 |
-| `REQ:CORE:196` | قرارداد خروجی هر خدمت باید به‌طور ساختاریافته تعریف شود؛ مصرف‌کننده باید خروجی را با نسخه قرارداد همان خدمت اعتبارسنجی کند. | `B:869`; `APPROVED` | C05a؛ C01:02 |
-| `REQ:CORE:197` | هر خدمت باید قابلیت‌های وابسته خود را ثبت کند تا رابطه خدمت و قابلیت در کاتالوگ قابل مشاهده باشد. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:198` | هر خدمت باید مسئول اجرای مشخصی را معرفی کند؛ کاتالوگ برای خدمت بدون مسئول اعلام‌شده، مالک اجرا جعل نمی‌کند. | `B:869`; `APPROVED` | C05a (ثبت ارجاع)؛ مقصد اجرایی طبق رکورد خدمت |
-| `REQ:CORE:199` | وضعیت انتشار خدمت باید یکی از وضعیت‌های متمایز «فعال، آزمایشی، غیرفعال، برنامه‌ریزی‌شده» باشد؛ وضعیت‌ها در API به یک Boolean فروکاسته نشوند. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:200` | هر خدمت باید نسخه قرارداد خود را همراه رکورد انتشار نگه دارد تا مصرف‌کننده نسخه مورد استفاده را بداند. | `B:869`; `APPROVED` | C05a؛ C01:02 |
-| `REQ:CORE:201` | الزام‌های دسترسی خدمت باید از فیلدهای توصیفی و وضعیت انتشار جداگانه ثبت شوند تا مصرف‌کننده بتواند آن‌ها را به کنترل مجوز بسپارد. | `B:869`; `APPROVED` | C05a؛ ارزیابی مجوز C02:02 |
-| `REQ:CORE:202` | نیاز تعرفه‌ای خدمت باید از خودِ مبلغ، مصرف و ثبت مالی جدا بماند؛ C05a مبلغ عددی، تعرفه تصویب‌نشده یا کسر وجه تعیین نمی‌کند. | `B:869`, `B:1019–1027`; `APPROVED` | C05a برای ارجاع؛ مبلغ/محاسبه C04/C13a؛ مصرف C09 |
-| `REQ:CORE:203` | کاتالوگ باید خدمت مشاوره‌ای و خدمت عملیاتی را از هم متمایز کند؛ تعریف خدمت عملیاتی شامل اقدام مشخص و مجاز است. | `B:869`, `B:1445–1447`; `APPROVED` | C05a |
-| `REQ:CORE:204` | پرسش‌های متنوع مشاور نباید به تعریف یک رکورد خدمت جداگانه برای هر پرسش منجر شوند. | `B:1445–1447`; `APPROVED` | C05a |
-| `REQ:CORE:205` | وجود رکورد خدمت در کاتالوگ به‌تنهایی به معنی انتشار یا فعال‌بودن آن نیست؛ وضعیت انتشار مستقل ثبت می‌شود. | `B:869`; `APPROVED` | C05a |
-| `REQ:CORE:206` | وجود یا فعال‌بودن رکورد خدمت به‌تنهایی مجوز دسترسی به داده شخصی، تغییر Snapshot یا اجرای اقدام نیست. | `B:869` و `E02`; `APPROVED` | C05a؛ مجوز C02:02 و رضایت C02:03 |
-| `REQ:CORE:207` | مصرف‌کننده‌های Adviser و Assistant باید اطلاعات کاتالوگ را از API نسخه‌دار Core دریافت کنند؛ قرارداد مشترک `C01:02` حفظ می‌شود. | `B:869`; `APPROVED` | C05a برای معنای داده؛ Core مالک API مشترک طبق C01:02 |
-| `REQ:CORE:208` | اجرای تخصصی خدمت فقط از قرارداد نسخه‌دار سرویس مسئول انجام می‌شود؛ کاتالوگ جایگزین منطق اجرایی آن سرویس نیست. | `B:869`; `APPROVED` | C05a برای ارجاع؛ سرویس مسئول برای اجرا |
-| `REQ:CORE:209` | Adviser/Assistant برای خواندن کاتالوگ نباید به جدول خصوصی Core دسترسی مستقیم داشته باشند. | `B:869`, `B:1447`; `APPROVED` | C05a؛ مرز ماژول/API در C01:01/:02 |
-| `REQ:CORE:210` | ورود به حوزه تخصصی فقط پس از انتخاب آیکن حوزه یا تأیید صریح پیشنهاد حوزه ممکن است؛ ورودی عمومی پیش از آن پاسخ تخصصی/عملیات نمی‌دهد. | `B:871`, `B:1395–1414`; `APPROVED` | C05a برای قرارداد انتخاب/مسیر؛ نمایش آیکن C06 |
-| `REQ:CORE:211` | کاربر باید بتواند نقش مشاور/دستیار را بدون اجبار به آغاز از مشاور انتخاب یا با اقدام خودش عوض کند؛ مجوز نقش تازه دوباره ارزیابی می‌شود. | `B:871`, `B:1414`; `APPROVED` | C05a برای تجربه/مسیر؛ C02:02 برای مجوز |
-| `REQ:CORE:212` | تصمیم مسیریابی باید هدف درخواست را بسنجد، نه یک واژه منفرد را. | `B:871`, `B:906`; `APPROVED` | C05a برای قرارداد مسیریاب؛ R02 مصرف‌کننده/هماهنگ‌کننده query |
-| `REQ:CORE:213` | نتیجه ارزیابی درخواست باید حالت‌های مرتبط/داخل حوزه، ابهام، حوزه مستقل دیگر، نامرتبط، خارج از توان و نامجاز را قابل‌تمایز کند؛ این حالت‌ها الزاماً mutually-exclusive نیستند. | `B:906`; `APPROVED` | C05a؛ سیاست پذیرش B03 مصرف می‌شود |
-| `REQ:CORE:214` | درخواست مستقلِ حوزه دیگر نباید در نشست حوزه جاری پاسخ تخصصی یا اجرا شود؛ مقصد درست به کاربر پیشنهاد می‌شود. | `B:871`, `B:906`; `APPROVED` | C05a برای نتیجه مسیر؛ B02/R02 برای مصرف |
-| `REQ:CORE:215` | انتقال کنترل به حوزه دیگر فقط پس از اقدام صریح کاربر انجام می‌شود؛ مسیریاب نشست را خودکار عوض نمی‌کند. | `B:871`, `B:906`; `APPROVED` | C05a؛ C02:03 و پوسته C06 |
-| `REQ:CORE:216` | اشاره به مفهوم حوزه دیگر، اگر در خدمت هدف جاری باشد، به‌تنهایی موجب ارجاع یا تعویض حوزه نمی‌شود. | `B:871`, `B:906`; `APPROVED` | C05a |
-| `REQ:CORE:217` | اگر ابهام درخواست بر مسیر یا اقدام حساس اثر دارد، سامانه باید پیش از شروع اقدام سؤال روشن‌کننده بپرسد. | `B:871`, `B:906`; `APPROVED` | C05a برای نتیجه مسیر؛ اجرا/مجوز مصرف‌کننده |
-| `REQ:CORE:218` | درخواست نامرتبط باید با توضیح محدوده واقعی خدمات شهاب پاسخ داده شود، نه با پاسخ تخصصی خارج از دامنه. | `B:906`; `APPROVED` | C05a |
-| `REQ:CORE:219` | درخواست خارج از توان واقعی باید محدودیت را صادقانه اعلام کند و فقط جایگزین معتبرِ قابل ارائه را پیشنهاد دهد. | `B:906`; `APPROVED` | C05a |
-| `REQ:CORE:220` | درخواست نامجاز باید متوقف شود؛ در صورت وجود مسیر مجاز، همان مسیر جداگانه توضیح داده می‌شود. | `B:906`, `B:1388`; `APPROVED` | C05a برای مسیر؛ C02:02/:03 برای ارزیابی مجوز |
-| `REQ:CORE:221` | LLM فقط می‌تواند مسیر را پیشنهاد کند؛ Backend مرجع اعتبارسنجی حوزه/نقش/وضعیت خدمت/توان اجرا و مجوز باقی می‌ماند و تغییر خودکار نشست یا مجوز را نمی‌پذیرد. | `B:871`, `B:906`, `B:1414`; `APPROVED` | C05a برای مسیریابی؛ C02:02 برای ارزیابی مجوز |
-| `REQ:CORE:222` | پیش‌نیاز حوزه دیگر برای خدمت جاری باید از قرارداد نسخه‌دار زیرکار به سرویس مقصد سپرده شود؛ مقصد مسئول اجرای تخصصی زیرکار است. | `B:871`, `B:1447`; `APPROVED` | C05a برای ارجاع؛ A02/B01 برای اجرای زیرکار |
-| `REQ:CORE:223` | واگذاری زیرکار نباید حوزه/نقش پرونده اصلی را تغییر دهد یا اختیار/رضایت تازه‌ای بسازد؛ مجوز هر اقدام حساس در مرز همان اقدام کنترل می‌شود. | `B:871`, `B:1447`, `B:1388`; `APPROVED` | C05a برای قرارداد مسیر؛ C02:02/:03 و A02 |
-| `REQ:CORE:224` | پرونده اصلی و زیرکار باید شناسه، مالک تخصصی، وابستگی و وضعیت مستقل داشته باشند؛ پرونده اصلی مسئول هماهنگی و نمایش وضعیت یکپارچه باقی می‌ماند. | `B:871`; `APPROVED` | C05a برای رابطه کاتالوگ/مسیر؛ A02 برای وضعیت پایدار |
-| `REQ:CORE:225` | مسیر خدمت باید برای کاربر هدف، مجوز موردنیاز، پیشرفت، انتظار، شکست و نتیجه را قابل نمایش کند؛ واگذاری داخلی نباید کاربر را به جابه‌جایی دستی میان آیکن‌ها مجبور کند. | `B:871`, `W:1205–1219`; `APPROVED` | C05a برای خروجی مسیریاب؛ A02 وضعیت؛ C06 نمایش؛ C14 پیام پایدار |
-
-`DECISION:C05A:001` — میزان دسترسی به مشاوره همان حوزه در هر پلن؛ منبع `B:906`؛ وضعیت `OPEN`; مالک `UNSPECIFIED` تا تعیین صریح مالک محصول؛ اثر: ماتریس نهایی Service×Plan/Entitlement را نمی‌توان قطعی کرد. ثبت خدمت و قرارداد خواندن آن به این تصمیم وابسته نیست. Handoff `Handoff:H05A:001` به C04 برای پذیرش/رد در Change Control بسته پذیرفته‌شده؛ این ثبت، تصمیم جدیدی را به نام مالک جعل نمی‌کند.
-
-#### Story / Enablerها
-
-| شناسه | نقش/مصرف‌کننده، نیاز و ارزش | Requirements | معیار پذیرش |
-|---|---|---|---|
-| `TE:CORE:C05A:001` | مالک کاتالوگ/Core نیاز دارد حوزه، خدمت و قابلیت را با هویت، مسئولیت، قرارداد و چرخه انتشار قابل اتکا تعریف کند تا خدمت نسخه‌دار و قابل فهم باشد. | 191–200, 203–204 | AC 001–010, 013–014 پاس شوند؛ شناسه/قرارداد/وضعیت مبهم یا رکورد خدمت برای هر پرسش پذیرفته نشود. |
-| `TE:CORE:C05A:002` | C04 و مصرف‌کننده‌های مجاز نیاز دارند وضعیت دسترسی و ارجاع تعرفه خدمت را بدون اختلاط با قیمت یا مجوز ببینند. | 201–202, 205–209 | AC 011–012, 015–020 پاس؛ وضعیت انتشار و مجوز مستقل بمانند و API مشترک/مالک اجرا رعایت شود. |
-| `TE:CORE:C05A:003` | کاربر و مصرف‌کننده‌های RAG/Assistant نیاز دارند انتخاب حوزه/نقش و تصمیم مسیر قابل پیش‌بینی و امن باشد. | 210–221 | AC 021–032 پاس؛ ارزیابی مبتنی بر هدف، backend-authoritative و بدون پاسخ/انتقال حساسِ بی‌مجوز باشد. |
-| `TE:CORE:C05A:004` | سرویس مبدأ و مقصد نیاز دارند زیرکار بین‌حوزه‌ای را از مسیر قرارداد دنبال کنند و کاربر وضعیت واحد ببیند. | 222–225 | AC 033–035 پاس؛ مالکیت/وضعیت مستقل، مجوز مستقل و نمایش پیشرفت/نتیجه رعایت شود. |
-
-#### Taskها و Subtaskهای اجرایی
-
-همه موارد برنامه‌ریزی هستند و اجرای محصول ندارند. مالک منطقی بسته و مدل کاتالوگ `C05a` است. قراردادهای مشترک و مالکیت مقصد در هر Task محفوظ می‌مانند؛ «مالک C05a» به معنی مالک همه سرویس‌های اجرایی نیست.
-
-| Task | مالک، پیش‌شرط و خروجی/DoD | Subtaskهای قابل اجرا |
-|---|---|---|
-| `TASK:CORE:C05A:001` — مدل Domain/Service/Capability | مالک: C05a. پیش‌شرط: قرارداد مالکیت داده C01:01. خروجی: مدل و قیود رکوردهای مجزا، شناسه پایدار، purpose/domain owner، input/output schema، وابستگی capability، executor ref و contract version. DoD: invariantها و migration plan/rollback طرح‌ریزی و هر فیلد به REQ/AC/Test متصل باشد. REQ 191–200,203–204. | `.S01` استخراج schema مفهومی و مرزهای رکورد؛ `.S02` تعریف شناسه‌ها، ارجاع‌ها و قید کامل‌بودن؛ `.S03` سیاست نسخه قرارداد و سازگاری انتشار. |
-| `TASK:CORE:C05A:002` — وضعیت انتشار و metadata دسترسی/تعرفه | مالک: C05a. پیش‌شرط: قراردادهای C04/C13a فقط به‌صورت ارجاع حفظ شوند؛ هیچ تصمیم عددی برای ساختار کاتالوگ لازم نیست. خروجی: وضعیت‌های متمایز و ارجاع access/tariff، بدون قیمت یا تصمیم entitlement جدید. DoD: وضعیت/مجوز/تعرفه در مدل و آزمون جدا باشند؛ داده نامشخص خودکار فعال نشود. REQ 201–206. | `.S01` مدل دسترسی و ارجاع تعرفه؛ `.S02` قواعد transition و وضعیت انتشار؛ `.S03` آزمون عدم استنتاج انتشار/مجوز از وجود رکورد. |
-| `TASK:CORE:C05A:003` — قرارداد خواندن Catalog API | مالک معنای داده: C05a؛ مالک API مشترک: Core طبق C01:02. پیش‌شرط: نسخه قرارداد C01 و permission port C02. خروجی: طراحی API فقط‌خواندنی نسخه‌دار برای مصرف‌کنندگان مجاز Adviser/Assistant/C04؛ Schema و endpoint دقیق هنوز طراحی اجرایی‌اند. DoD: مصرف‌کننده از قرارداد نسخه‌دار استفاده کند، مالک جدول حفظ و دسترسی مستقیم بسته باشد. REQ 207–209. | `.S01` توافق روی projection و نسخه؛ `.S02` قرارداد خطا/فیلتر بر اساس وضعیت، دسترسی و scope؛ `.S03` آزمون دسترسی API و منع خواندن مستقیم. |
-| `TASK:CORE:C05A:004` — مسیریاب تجربه و نتیجه ارزیابی | مالک: C05a برای قرارداد/سیاست مسیریابی مبتنی بر کاتالوگ. پیش‌شرط: Domain ID/role از C02 و ورودی/نمایش C06/R02؛ سیاست‌های B02/B03 از منبع مرجع. خروجی: قرارداد نتیجه مسیر، طبقه‌بندی هدف‌محور و کنترل backend. DoD: دسته‌ها/ابهام/عدم مجوز قابل تمایز باشند، LLM فقط پیشنهاد دهد، انتقال فقط با اقدام کاربر. REQ 210–221. | `.S01` قرارداد ورود/تأیید حوزه و انتخاب نقش؛ `.S02` ماتریس route result و خطاهای نامرتبط/محدود/نامجاز؛ `.S03` اعتبارسنجی سمت Backend و اتصال permission بدون کپی C02. |
-| `TASK:CORE:C05A:005` — Contract زیرکار و وضعیت یکپارچه | مالک قرارداد مسیریابی: C05a؛ مالک اجرای پایدار workflow: A02؛ مالک نمایش UI: C06/C14. پیش‌شرط: قرارداد نسخه‌دار مقصد، مجوز مستقل C02 و پرونده/Job متعلق به سرویس. خروجی: envelope برنامه‌ریزی برای parent/child و وضعیت کاربر. DoD: parent/context ثابت، target owner مشخص، مجوز تازه استنباط نشود، نتیجه شکست/انتظار قابل پیگیری باشد. REQ 222–225. | `.S01` قرارداد ارجاع/وابستگی و شناسه parent-child؛ `.S02` ماتریس مالکیت و permission handoff؛ `.S03` تعریف پیام‌های پیشرفت، انتظار، شکست و نتیجه با مصرف C06/C14. |
-
-**شناسه‌های کامل Subtask:** `TASK:CORE:C05A:001.S01–S03`، `TASK:CORE:C05A:002.S01–S03`، `TASK:CORE:C05A:003.S01–S03`، `TASK:CORE:C05A:004.S01–S03` و `TASK:CORE:C05A:005.S01–S03`؛ جمع ۱۵. هرکدام خروجی و DoD مستقل دارد و Testهایش به AC/Test اختصاصی متصل‌اند. هیچ Task برای پرکردن قالب یا ساخت فناوری/Worker پیش‌دستانه تعریف نشده است.
-
-#### AC و Test Definition اختصاصی
-
-هر `TEST` یک fixture و اقدام مستقل دارد و سه Case مثبت/منفی/مرزی مشخص دارد. این‌ها تعریف آزمون برنامه‌ای‌اند؛ هیچ‌یک روی محصول اجرا نشده‌اند.
-
-| AC / Test | Fixture و ورودی/اقدام | Oracle مثبت / منفی / مرزی |
-|---|---|---|
-| `AC:CORE:C05A:001 / TEST:CORE:C05A:001` | fixture شامل Domain، Service و Capability جدا؛ ورودی تلاش برای ذخیره هر نوع به‌عنوان نوع دیگر. | P: هر سه رکورد با نوع خود خوانده شوند؛ N: نوع/رابطه نامعتبر رد؛ B: Service بدون Domain رد شود. Cases `TC:C05A:001:P`, `TC:C05A:001:N`, `TC:C05A:001:B`. |
-| `AC:CORE:C05A:002 / TEST:CORE:C05A:002` | ثبت دو خدمت با ID برابر و سپس تغییر عنوان/نسخه خدمت اول. | P: IDهای یکتا باقی بمانند؛ N: ID تکراری رد؛ B: تغییر عنوان/نسخه ID قبلی را عوض نکند. `TC:C05A:002:P`, `TC:C05A:002:N`, `TC:C05A:002:B`. |
-| `AC:CORE:C05A:003 / TEST:CORE:C05A:003` | Service با هدف تعریف‌شده و یک رکورد بدون هدف. | P: هدف در پاسخ کاتالوگ دیده شود؛ N: رکورد بدون هدف با هدف ساختگی تکمیل نشود؛ B: متن خالی به‌عنوان هدف ثبت نشود. `TC:C05A:003:P`, `TC:C05A:003:N`, `TC:C05A:003:B`. |
-| `AC:CORE:C05A:004 / TEST:CORE:C05A:004` | خدمت متصل به Domain معتبر در برابر Domain حذف‌شده. | P: مالک دامنه قابل خواندن باشد؛ N: ارجاع به Domain ناموجود رد؛ B: حذف Domain دارای خدمت وابسته بدون تعیین تکلیف رد شود. `TC:C05A:004:P`, `TC:C05A:004:N`, `TC:C05A:004:B`. |
-| `AC:CORE:C05A:005 / TEST:CORE:C05A:005` | درخواست اجرا با payload مطابق input schema نسخه خدمت و یک payload نامعتبر. | P: payload معتبر نسخه‌دار پذیرفته شود؛ N: ورودی ناسازگار رد شود؛ B: مصرف‌کننده با نسخه قدیمی، خطای سازگاری قابل تشخیص بگیرد. `TC:C05A:005:P`, `TC:C05A:005:N`, `TC:C05A:005:B`. |
-| `AC:CORE:C05A:006 / TEST:CORE:C05A:006` | قرارداد پاسخ نمونه در نسخه خدمت و پاسخ با فیلد ناسازگار. | P: پاسخ مطابق schema همان نسخه پذیرفته شود؛ N: پاسخ نادرست رد؛ B: پاسخ با نسخه متفاوت با خطای نسخه مشخص شود. `TC:C05A:006:P`, `TC:C05A:006:N`, `TC:C05A:006:B`. |
-| `AC:CORE:C05A:007 / TEST:CORE:C05A:007` | Service با دو capability معتبر و یک ارجاع ناموجود. | P: وابستگی‌های ثبت‌شده قابل مشاهده باشند؛ N: ارجاع ناموجود به‌عنوان قابلیت معتبر نمایش داده نشود؛ B: حذف یک ارجاع، رابطه ثبت‌شده با قابلیت دیگر را تغییر ندهد. `TC:C05A:007:P`, `TC:C05A:007:N`, `TC:C05A:007:B`. |
-| `AC:CORE:C05A:008 / TEST:CORE:C05A:008` | Service دارای executor مشخص در برابر Service با executor خالی. | P: ارجاع مسئول اجرا در پاسخ باشد؛ N: مسئول نامشخص با owner ساختگی جایگزین نشود؛ B: تغییر ارجاع owner، مالکیت اجرای جاری را بی‌صدا منتقل نکند. `TC:C05A:008:P`, `TC:C05A:008:N`, `TC:C05A:008:B`. |
-| `AC:CORE:C05A:009 / TEST:CORE:C05A:009` | چهار رکورد در وضعیت‌های active/experimental/inactive/planned. | P: هر چهار مقدار بدون ادغام برگردند؛ N: وضعیت ناشناخته به active نگاشت نشود؛ B: تغییر وضعیت با مقدار قبلی اشتباه نشود. `TC:C05A:009:P`, `TC:C05A:009:N`, `TC:C05A:009:B`. |
-| `AC:CORE:C05A:010 / TEST:CORE:C05A:010` | دو نسخه قرارداد برای یک Service و مصرف‌کننده هر نسخه. | P: پاسخ، نسخه صریح داشته باشد؛ N: درخواست نسخه ناموجود رد؛ B: انتشار N+1 snapshot درخواست N را عوض نکند. `TC:C05A:010:P`, `TC:C05A:010:N`, `TC:C05A:010:B`. |
-| `AC:CORE:C05A:011 / TEST:CORE:C05A:011` | Service با access requirement و درخواست از Actor با permission متفاوت. | P: requirement قابل ارزیابی به C02 تحویل شود؛ N: کاتالوگ به‌تنهایی اجازه دسترسی ندهد؛ B: permission لغوشده در درخواست جدید رد شود. `TC:C05A:011:P`, `TC:C05A:011:N`, `TC:C05A:011:B`. |
-| `AC:CORE:C05A:012 / TEST:CORE:C05A:012` | Service دارای ارجاع تعرفه، بدون قیمت عددی مصوب. | P: نوع/ارجاع تعرفه محفوظ باشد؛ N: مبلغ اختراعی یا کسر ledger از C05a پذیرفته نشود؛ B: نبود مبلغ، انتشار کاتالوگ را به قیمت جعلی تبدیل نکند و اجرای مالی را طبق گیت مالک متوقف کند. `TC:C05A:012:P`, `TC:C05A:012:N`, `TC:C05A:012:B`. |
-| `AC:CORE:C05A:013 / TEST:CORE:C05A:013` | یک Service مشاوره‌ای و یک عملیات ثبت درخواست. | P: نوع تعامل از هم قابل تشخیص باشد؛ N: عملیات بدون قرارداد/اجازه operational معرفی نشود؛ B: یک خدمت با هر دو رفتار فقط با دو قرارداد/نوع صریح نمایش یابد. `TC:C05A:013:P`, `TC:C05A:013:N`, `TC:C05A:013:B`. |
-| `AC:CORE:C05A:014 / TEST:CORE:C05A:014` | چند پرسش متفاوت مشاور با هدف همان Domain. | P: درخواست‌ها به خدمت مشاوره‌ای همان Domain ارجاع شوند؛ N: برای هر متن پرسش Service تازه ساخته نشود؛ B: پرسش با نتیجه عملیاتی به Service عملیاتی مستقل برود. `TC:C05A:014:P`, `TC:C05A:014:N`, `TC:C05A:014:B`. |
-| `AC:CORE:C05A:015 / TEST:CORE:C05A:015` | رکوردهای planned/inactive/experimental/active و مصرف‌کننده API. | P: وضعیت هر مورد صریح برگردد؛ N: وجود رکورد planned/inactive آن را منتشرشده نشان ندهد؛ B: تغییر وضعیت به‌صورت نسخه‌دار و قابل بازسازی باشد. `TC:C05A:015:P`, `TC:C05A:015:N`, `TC:C05A:015:B`. |
-| `AC:CORE:C05A:016 / TEST:CORE:C05A:016` | کاربر مجاز پلن با Service فعال ولی permission داده/اقدام ندارد. | P: فقط مجوز مستقل C02 اجازه می‌دهد؛ N: active بودن یا Gold بودن مجوز نسازد؛ B: revoke هم‌زمان پیش از اقدام، درخواست را متوقف کند. `TC:C05A:016:P`, `TC:C05A:016:N`, `TC:C05A:016:B`. |
-| `AC:CORE:C05A:017 / TEST:CORE:C05A:017` | Adviser و Assistant با نسخه مشخص API کاتالوگ را می‌خوانند. | P: هر دو projection نسخه‌دار سازگار بگیرند؛ N: API بدون نسخه یا جدول مستقیم رد؛ B: نسخه deprecated پاسخ کنترل‌شده دهد و نسخه فعال را تغییر پنهان نکند. `TC:C05A:017:P`, `TC:C05A:017:N`, `TC:C05A:017:B`. |
-| `AC:CORE:C05A:018 / TEST:CORE:C05A:018` | یک Service عملیاتی با owner contract مشخص و درخواست اجرای آن. | P: درخواست به owner contract route شود؛ N: catalog service خودش اجرا را جعل نکند؛ B: شکست/عدم دسترس owner، نتیجه موفق نمایشی ندهد. `TC:C05A:018:P`, `TC:C05A:018:N`, `TC:C05A:018:B`. |
-| `AC:CORE:C05A:019 / TEST:CORE:C05A:019` | Adviser/Assistant از API و سپس با درخواست مستقیم به جدول کاتالوگ. | P: API مجاز داده را بدهد؛ N: دسترسی مستقیم جدول رد شود؛ B: تغییر schema داخلی، قرارداد API مصرف‌کننده را بی‌اعلان نشکند. `TC:C05A:019:P`, `TC:C05A:019:N`, `TC:C05A:019:B`. |
-| `AC:CORE:C05A:020 / TEST:CORE:C05A:020` | ورودی صفحه عمومی و ورودی پس از انتخاب آیکن/تأیید پیشنهاد حوزه. | P: پاسخ تخصصی فقط بعد از انتخاب/تأیید؛ N: ورودی عمومی عملیات/پاسخ تخصصی ندهد؛ B: پیشنهاد ردشده نشست را به حوزه پیشنهادی نبرد. `TC:C05A:020:P`, `TC:C05A:020:N`, `TC:C05A:020:B`. |
-| `AC:CORE:C05A:021 / TEST:CORE:C05A:021` | نشست کاربر با نقش Adviser، تغییر صریح به Assistant و permission متفاوت. | P: تغییر صریح پذیرفته و مجوز تازه ارزیابی شود؛ N: LLM نقش/نشست را از متن عوض نکند؛ B: permission revoke هم‌زمان دسترسی role جدید را ببندد. `TC:C05A:021:P`, `TC:C05A:021:N`, `TC:C05A:021:B`. |
-| `AC:CORE:C05A:022 / TEST:CORE:C05A:022` | دو درخواست با هدف یکسان و واژه‌های متفاوت؛ یک درخواست با واژه مشترک اما هدف متفاوت. | P: مسیر مطابق هدف باشد؛ N: واژه مشترک به‌تنهایی مسیر را عوض نکند؛ B: هدف مبهم وارد مرحله clarification شود. `TC:C05A:022:P`, `TC:C05A:022:N`, `TC:C05A:022:B`. |
-| `AC:CORE:C05A:023 / TEST:CORE:C05A:023` | مجموعه ورودی‌های داخل حوزه، مبهم، مستقل حوزه دیگر، نامرتبط، خارج توان و نامجاز. | P: route result هر حالت متمایز باشد؛ N: forbidden به accepted فروکاسته نشود؛ B: درخواست دارای دو ویژگی مجاز است چند tag داشته باشد و مجبور به حالت انحصاری جعلی نشود. `TC:C05A:023:P`, `TC:C05A:023:N`, `TC:C05A:023:B`. |
-| `AC:CORE:C05A:024 / TEST:CORE:C05A:024` | درخواست مستقل حوزه B در نشست حوزه A. | P: مقصد B پیشنهاد و درخواست در A پاسخ تخصصی/اجرا نشود؛ N: پاسخ تخصصی حوزه B در A رد؛ B: پیش از انتخاب مقصد، `domain_id` نشست A ثابت بماند. `TC:C05A:024:P`, `TC:C05A:024:N`, `TC:C05A:024:B`. |
-| `AC:CORE:C05A:025 / TEST:CORE:C05A:025` | پیشنهاد انتقال به Domain B، با اقدام/بدون اقدام کاربر. | P: پس از اقدام صریح، انتقال کنترل‌شده انجام شود؛ N: بدون اقدام نشست تغییر نکند؛ B: تکرار درخواست انتقال یک نشست/اثر تکراری نسازد. `TC:C05A:025:P`, `TC:C05A:025:N`, `TC:C05A:025:B`. |
-| `AC:CORE:C05A:026 / TEST:CORE:C05A:026` | هدف فعلی حوزه A با اشاره به یک مفهوم تخصصی حوزه B. | P: درخواست مرتبط در A پردازش شود؛ N: فقط mention باعث handoff مستقل نشود؛ B: اگر هدف واقعاً مستقل B باشد، آزمون 024 اعمال شود. `TC:C05A:026:P`, `TC:C05A:026:N`, `TC:C05A:026:B`. |
-| `AC:CORE:C05A:027 / TEST:CORE:C05A:027` | درخواست مبهمی که دو مسیر دارد و یکی اثر حساس دارد. | P: سؤال روشن‌کننده پیش از اقدام؛ N: اقدام حساس بر پایه حدس رد؛ B: پس از پاسخ کاربر، route و permission دوباره اعتبارسنجی شوند. `TC:C05A:027:P`, `TC:C05A:027:N`, `TC:C05A:027:B`. |
-| `AC:CORE:C05A:028 / TEST:CORE:C05A:028` | درخواست نامرتبط با فهرست خدمات شهاب. | P: محدوده واقعی و قابل عرضه اعلام شود؛ N: پاسخ ساختگی حوزه نامرتبط رد؛ B: پیشنهاد جایگزین فقط اگر در کاتالوگ/توان واقعی موجود باشد. `TC:C05A:028:P`, `TC:C05A:028:N`, `TC:C05A:028:B`. |
-| `AC:CORE:C05A:029 / TEST:CORE:C05A:029` | درخواست خدمتی که قابلیت اجرایی آن موجود/قابل تأیید نیست. | P: محدودیت واقعی و جایگزین معتبر اعلام شود؛ N: موفقیت یا قابلیت ساختگی گزارش نشود؛ B: وجود داده قدیمی بدون تازگی معتبر، توان فعلی را اثبات نکند. `TC:C05A:029:P`, `TC:C05A:029:N`, `TC:C05A:029:B`. |
-| `AC:CORE:C05A:030 / TEST:CORE:C05A:030` | درخواست ممنوع یا فاقد permission با مسیر مجاز جایگزین. | P: اقدام ممنوع متوقف و در صورت وجود مسیر مجاز توضیح داده شود؛ N: role/plan بالاتر منع را دور نزند؛ B: اگر جایگزین مجاز وجود ندارد، هیچ action آغاز نشود. `TC:C05A:030:P`, `TC:C05A:030:N`, `TC:C05A:030:B`. |
-| `AC:CORE:C05A:031 / TEST:CORE:C05A:031` | LLM پیشنهاد حوزه/نقش می‌دهد؛ backend با session/domain/permission متفاوت بررسی می‌کند. | P: backend تصمیم نهایی را از state معتبر بگیرد؛ N: پیشنهاد LLM مجوز/انتقال خودکار نسازد؛ B: تغییر هم‌زمان state یا revoke پیش از action، درخواست قبلی را invalidate کند. `TC:C05A:031:P`, `TC:C05A:031:N`, `TC:C05A:031:B`. |
-| `AC:CORE:C05A:032 / TEST:CORE:C05A:032` | خدمت A به پیش‌نیاز تخصصی حوزه B وابسته است؛ contract و permission مقصد وجود دارد/ندارد. | P: فقط با contract نسخه‌دار و owner مقصد، subtask ساخته شود؛ N: اجرای مستقیم ابزار خصوصی مقصد از مبدأ رد؛ B: نبود/انقضای contract، subtask را متوقف کند. `TC:C05A:032:P`, `TC:C05A:032:N`, `TC:C05A:032:B`. |
-| `AC:CORE:C05A:033 / TEST:CORE:C05A:033` | زیرکار بین‌حوزه‌ای درخواست permission اضافی می‌کند و پرونده اصلی دارای role/domain ثابت است. | P: permission مستقل در مرز اقدام بررسی شود؛ N: delegation رضایت/اختیار اضافه نکند؛ B: تغییر نقش/لغو رضایت هم‌زمان subtask را متوقف کند ولی پرونده اصلی را جابه‌جا نکند. `TC:C05A:033:P`, `TC:C05A:033:N`, `TC:C05A:033:B`. |
-| `AC:CORE:C05A:034 / TEST:CORE:C05A:034` | parent workflow و child در انتظار، شکست و موفقیت. | P: ID/owner/state/relationship مستقل و parent قابل پیگیری بماند؛ N: child state، parent owner را بازنویسی نکند؛ B: نتیجه تکراری child، رابطه و status قطعی را دوباره اعمال نکند. `TC:C05A:034:P`, `TC:C05A:034:N`, `TC:C05A:034:B`. |
-| `AC:CORE:C05A:035 / TEST:CORE:C05A:035` | child در انتظار نتیجه، سپس شکست و نتیجه نهایی؛ کاربر بدون تغییر آیکن حوزه پیگیری می‌کند. | P: هدف/permission/progress/wait/failure/result نمایش داده شود؛ N: تحویل داخلی بدون انتقال دستی کاربر؛ B: timeout/نتیجه نامعلوم موفقیت یا شکست قطعی جعل نکند و status قابل پیگیری بماند. `TC:C05A:035:P`, `TC:C05A:035:N`, `TC:C05A:035:B`. |
-
-**شمار آزمون‌ها:** ۳۵ AC، ۳۵ Test Definition مستقل و ۱۰۵ Case مجزا (`P/N/B` برای هر Test). این تعریف‌ها برنامه‌اند؛ `PRODUCT_TEST_EXECUTED=0`.
-
-#### قراردادها، وابستگی‌ها و Handoffها
-
-| شناسه/نوع | تولیدکننده/مالک → مصرف‌کننده | قرارداد و پیش‌شرط/آمادگی | Handoff/آزمون یکپارچگی |
-|---|---|---|---|
-| `DEP:C05A:001` / `CONTRACT:C01:01/:02` | Core data/API owner → C05a و Adviser/Assistant مجاز | مالکیت جدول و API نسخه‌دار؛ `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ پیش از انتشار، schema و سازگاری نسخه باید ثبت شود. | `TEST:C05A:017/019`; C05a منطق API مشترک را بازنویسی نمی‌کند. |
-| `DEP:C05A:002` / `CONTRACT:C02:02/:03` | Core Identity/Authorization → C05a Router و سرویس مصرف‌کننده | actor/session/domain/role/scope و consent معتبر؛ هیچ مجوزی از catalog استنباط نمی‌شود. | `TEST:C05A:011/016/021/030–033`; C02 مالک ارزیابی باقی می‌ماند. |
-| `DEP:C05A:003` / Contract کاتالوگ C05a | C05a → C04، C06، Adviser/Assistant آینده | شناسه/نوع/نسخه/وضعیت و ارجاع capability/owner در projection؛ انتشار schema نهایی پیش‌نیاز پیاده‌سازی مصرف‌کننده است. | `TEST:C05A:017–019`; مصرف‌کننده باید نسخه و وضعیت را بررسی کند. |
-| `DEP:C05A:004` / Contract مسیریاب C05a | C05a → R02/A01/A02/C06 | ورودی هدف و context مجاز؛ نتیجه route/clarification/target؛ قرارداد مقصد پیش از زیرکار لازم است. | `TEST:C05A:020–035`; اجرای A02 و UI در بسته مالک انجام می‌شود. |
-
-| Handoff | شاهد/نامزد | مالک حوزه و بسته مقصد | وضعیت دریافت/موعد و اثر |
-|---|---|---|---|
-| `Handoff:H05A:001` | `B:906`, `CAN:C05A:048`, `DECISION:C05A:001` | Plan/Entitlement؛ `C04` | `PENDING_PACKAGE_ALLOCATION`; پیش از قطعی‌کردن ماتریس Service×Plan؛ پذیرش C05a را متوقف نمی‌کند. |
-| `Handoff:H05A:002` | `B:1557–1636`, `CAN:C05A:040` | کاتالوگ محصول؛ `C05b` | `ACCEPTED_BY_SCOPE` در برنامه C05b؛ پیاده‌سازی/قرارداد اجرایی همچنان باز است؛ C05a داده/Worker/Snapshot محصول بانکی را نمی‌سازد. |
-| `Handoff:H05A:003` | `B:250–258`, `CAN:C05A:041` | دانش مقررات؛ `R06` | `PENDING_PACKAGE_ALLOCATION`; مدل Knowledge Base و روابط حقوقی جدا بمانند. |
-| `Handoff:H05A:004` | `B:1609`, `CAN:C05A:042` | نقشه دانش UI؛ `A06` | `PENDING_PACKAGE_ALLOCATION`; C05a مسیر عنصر/نسخه UI را تعیین نمی‌کند. |
-| `Handoff:H05A:005` | `B:1502–1522`, `CAN:C05A:043` | پلتفرم/کشف اپ؛ `A04` | `PENDING_PACKAGE_ALLOCATION`; هیچ نصب یا کنترل اپ در C05a تعهد نمی‌شود. |
-| `Handoff:H05A:006` | `B:871`, `B:1218–1252`, `CAN:C05A:044` | Workflow/زیرکار؛ `A02` | `PENDING_PACKAGE_ALLOCATION`; اجرای واقعی چندحوزه‌ای در R1 تعهد نشده؛ قرارداد و owner مقصد باید پیش از آن پذیرفته شود. |
-| `Handoff:H05A:007` | `B:1253–1282`, `CAN:C05A:045` | پوسته/آیکن/UI؛ `C06` | `PENDING_PACKAGE_ALLOCATION`; C06 projection کاتالوگ را مصرف می‌کند، داده موازی نمی‌سازد. |
-| `Handoff:H05A:008` | `B:1393–1444`, `CAN:C05A:046` | Query/admission Adviser؛ `R02` | `PENDING_PACKAGE_ALLOCATION`; R02/C05a قرارداد intent/query را می‌پذیرند؛ C05a قاعده B02/B03 را تغییر نمی‌دهد. |
-| `Handoff:H05A:009` | `B:1019–1027`, `B:1449`, `CAN:C05A:047` | Plan/Entitlement؛ `C04` | `PENDING_PACKAGE_ALLOCATION`; REQهای پذیرفته‌شده C04 مصرف می‌شوند و قیمت/دسترسی تازه ساخته نمی‌شود. |
-| `Handoff:H05A:010` | `B:1022–1027`, `W:1381–1442`, `CAN:C05A:047` | قیمت و محاسبه؛ `C13a` | `PENDING_PACKAGE_ALLOCATION`; تعرفه عددی/فرمول پردازش باز را مالک C05a انتخاب نمی‌کند. |
-| `Handoff:H05A:011` | `W:749–852`, `CAN:C05A:049` | مصرف/رزرو؛ `C09` | `PENDING_PACKAGE_ALLOCATION`; کاتالوگ مبلغ کسر نمی‌کند و رزرو نمی‌سازد. |
-| `Handoff:H05A:012` | `W:1205–1219`, `CAN:C05A:050` | Ledger state؛ `C12a` | `PENDING_PACKAGE_ALLOCATION`; وضعیت قطعی ledger مستقل از وضعیت کاتالوگ/خدمت است. |
-| `Handoff:H05A:013` | `W:1205–1219`, `CAN:C05A:050` | تطبیق و وضعیت بانک؛ `C12b` | `PENDING_PACKAGE_ALLOCATION`; نتیجه نامعلوم بانک به شکست خدمت فروکاسته نمی‌شود. |
-| `Handoff:H05A:014` | `W:1503–1624`, `CAN:C05A:051` | receipt/support کیف پول؛ `C13b` | `PENDING_PACKAGE_ALLOCATION`; C05a فقط status payload خدمت را به قرارداد می‌دهد. |
-| `Handoff:H05A:015` | `B:942–999`, `B:1682–1685`, `CAN:C05A:052` | پیام/اعلان/Monitoring؛ `C14` | `PENDING_PACKAGE_ALLOCATION`; پایش/پیام پایدار از Router کاتالوگ مستقل است. |
-
-برای هر Handoff مقصد هنوز تدوین‌نشده، پذیرش مقصد هنگام آغاز همان بسته و پیش از RA آن الزامی است. Handoff خارج از مالکیت C05a و بدون قرارداد مسدودکننده، مانع PASS این بسته نیست.
-
-#### Decision و تعارض
-
-| شناسه | گزاره/منبع و وضعیت | اثر و اقدام |
-|---|---|---|
-| `DECISION:C05A:001` | سطح دسترسی مشاوره همان حوزه به تفکیک پلن؛ `B:906`؛ `OPEN`؛ مالک `UNSPECIFIED`. | هیچ سطحی حدس زده نمی‌شود؛ Handoff:H05A:001 به C04؛ ماتریس نهایی entitlement پیش از فعال‌سازی/فروش باید با تصمیم مالک تکمیل شود. |
-| تعارض حل‌نشده | صفر | گزاره متعارض بین B/W احراز نشد؛ مورد باز بالا سؤال صریحِ بی‌پاسخ است، نه تعارضی که با حدس حل شده باشد. |
-
-#### ماتریس پوشش نامزد → Requirement → Task → AC → Test
-
-`CAN:C05A:001–035` نامزدهای هنجاری اصلی‌اند و یک‌به‌یک به `REQ:CORE:191–225` متصل‌اند. `CAN:C05A:036–053` در جدول Scope View/Handoff/Dependency تعیین تکلیف شده‌اند؛ نامزدهای C04 با شناسه‌های واقعی موجود مصرف شده‌اند.
-
-| Candidate | شاهد | طبقه‌بندی | Requirement/Disposition | Task | AC | Test | وضعیت |
-|---|---|---|---|---|---|---|---|
-| `CAN:C05A:001` | B:869 | OWNED | REQ:CORE:191 | TASK:C05A:001 | AC:C05A:001 | TEST:C05A:001 | CLOSED |
-| `CAN:C05A:002` | B:869 | OWNED | REQ:CORE:192 | TASK:C05A:001 | AC:C05A:002 | TEST:C05A:002 | CLOSED |
-| `CAN:C05A:003` | B:869 | OWNED | REQ:CORE:193 | TASK:C05A:001 | AC:C05A:003 | TEST:C05A:003 | CLOSED |
-| `CAN:C05A:004` | B:869 | OWNED | REQ:CORE:194 | TASK:C05A:001 | AC:C05A:004 | TEST:C05A:004 | CLOSED |
-| `CAN:C05A:005` | B:869 | OWNED | REQ:CORE:195 | TASK:C05A:001 | AC:C05A:005 | TEST:C05A:005 | CLOSED |
-| `CAN:C05A:006` | B:869 | OWNED | REQ:CORE:196 | TASK:C05A:001 | AC:C05A:006 | TEST:C05A:006 | CLOSED |
-| `CAN:C05A:007` | B:869 | OWNED | REQ:CORE:197 | TASK:C05A:001 | AC:C05A:007 | TEST:C05A:007 | CLOSED |
-| `CAN:C05A:008` | B:869 | OWNED | REQ:CORE:198 | TASK:C05A:001 | AC:C05A:008 | TEST:C05A:008 | CLOSED |
-| `CAN:C05A:009` | B:869 | OWNED | REQ:CORE:199 | TASK:C05A:001 | AC:C05A:009 | TEST:C05A:009 | CLOSED |
-| `CAN:C05A:010` | B:869 | OWNED | REQ:CORE:200 | TASK:C05A:001 | AC:C05A:010 | TEST:C05A:010 | CLOSED |
-| `CAN:C05A:011` | B:869 | OWNED | REQ:CORE:201 | TASK:C05A:002 | AC:C05A:011 | TEST:C05A:011 | CLOSED |
-| `CAN:C05A:012` | B:869, B:1019–1027 | OWNED/CROSS_REFERENCE | REQ:CORE:202 | TASK:C05A:002 | AC:C05A:012 | TEST:C05A:012 | CLOSED |
-| `CAN:C05A:013` | B:869 | OWNED | REQ:CORE:203 | TASK:C05A:001 | AC:C05A:013 | TEST:C05A:013 | CLOSED |
-| `CAN:C05A:014` | B:1445–1447 | OWNED | REQ:CORE:204 | TASK:C05A:001 | AC:C05A:014 | TEST:C05A:014 | CLOSED |
-| `CAN:C05A:015` | B:869 | OWNED | REQ:CORE:205 | TASK:C05A:002 | AC:C05A:015 | TEST:C05A:015 | CLOSED |
-| `CAN:C05A:016` | B:869, E02 | OWNED/SHARED_CONTRACT | REQ:CORE:206 | TASK:C05A:002 | AC:C05A:016 | TEST:C05A:016 | CLOSED |
-| `CAN:C05A:017` | B:869 | OWNED/SHARED_CONTRACT | REQ:CORE:207 | TASK:C05A:003 | AC:C05A:017 | TEST:C05A:017 | CLOSED |
-| `CAN:C05A:018` | B:869 | OWNED | REQ:CORE:208 | TASK:C05A:003 | AC:C05A:018 | TEST:C05A:018 | CLOSED |
-| `CAN:C05A:019` | B:869, B:1447 | SHARED_CONTRACT | REQ:CORE:209 | TASK:C05A:003 | AC:C05A:019 | TEST:C05A:019 | CLOSED |
-| `CAN:C05A:020` | B:871, B:1395–1414 | OWNED/CROSS_REFERENCE | REQ:CORE:210 | TASK:C05A:004 | AC:C05A:020 | TEST:C05A:020 | CLOSED |
-| `CAN:C05A:021` | B:871, B:1414 | OWNED/SHARED_CONTRACT | REQ:CORE:211 | TASK:C05A:004 | AC:C05A:021 | TEST:C05A:021 | CLOSED |
-| `CAN:C05A:022` | B:871, B:906 | OWNED | REQ:CORE:212 | TASK:C05A:004 | AC:C05A:022 | TEST:C05A:022 | CLOSED |
-| `CAN:C05A:023` | B:906 | OWNED | REQ:CORE:213 | TASK:C05A:004 | AC:C05A:023 | TEST:C05A:023 | CLOSED |
-| `CAN:C05A:024` | B:871, B:906 | OWNED | REQ:CORE:214 | TASK:C05A:004 | AC:C05A:024 | TEST:C05A:024 | CLOSED |
-| `CAN:C05A:025` | B:871, B:906 | OWNED | REQ:CORE:215 | TASK:C05A:004 | AC:C05A:025 | TEST:C05A:025 | CLOSED |
-| `CAN:C05A:026` | B:871, B:906 | OWNED | REQ:CORE:216 | TASK:C05A:004 | AC:C05A:026 | TEST:C05A:026 | CLOSED |
-| `CAN:C05A:027` | B:871, B:906 | OWNED | REQ:CORE:217 | TASK:C05A:004 | AC:C05A:027 | TEST:C05A:027 | CLOSED |
-| `CAN:C05A:028` | B:906 | OWNED | REQ:CORE:218 | TASK:C05A:004 | AC:C05A:028 | TEST:C05A:028 | CLOSED |
-| `CAN:C05A:029` | B:906 | OWNED | REQ:CORE:219 | TASK:C05A:004 | AC:C05A:029 | TEST:C05A:029 | CLOSED |
-| `CAN:C05A:030` | B:906, B:1388 | OWNED | REQ:CORE:220 | TASK:C05A:004 | AC:C05A:030 | TEST:C05A:030 | CLOSED |
-| `CAN:C05A:031` | B:871, B:906, B:1414 | OWNED/SHARED_CONTRACT | REQ:CORE:221 | TASK:C05A:004 | AC:C05A:031 | TEST:C05A:031 | CLOSED |
-| `CAN:C05A:032` | B:871, B:1447 | OWNED/CROSS_REFERENCE | REQ:CORE:222 | TASK:C05A:005 | AC:C05A:032 | TEST:C05A:032 | CLOSED |
-| `CAN:C05A:033` | B:871, B:1447, B:1388 | OWNED/SHARED_CONTRACT | REQ:CORE:223 | TASK:C05A:005 | AC:C05A:033 | TEST:C05A:033 | CLOSED |
-| `CAN:C05A:034` | B:871 | OWNED/CROSS_REFERENCE | REQ:CORE:224 | TASK:C05A:005 | AC:C05A:034 | TEST:C05A:034 | CLOSED |
-| `CAN:C05A:035` | B:871 | OWNED/CROSS_REFERENCE | REQ:CORE:225 | TASK:C05A:005 | AC:C05A:035 | TEST:C05A:035 | CLOSED |
-| `CAN:C05A:036` | C04 REQ:CORE:134,138,139,150 | REUSED_REQUIREMENT | Existing REQ/AC/TEST; no new REQ | TASK:C04:001/002 | AC:C04:004/008/009 | TEST:C04:004/008/009 | REUSED |
-| `CAN:C05A:037` | CONTRACT:C01:01/:02 | REUSED_CONTRACT | API/data ownership; no new REQ | TASK:CORE:003 | Existing | Existing | REUSED |
-| `CAN:C05A:038` | CONTRACT:C02:02/:03 | REUSED_CONTRACT | identity/permission/consent; no new REQ | TASK:C02:002–004 | Existing | Existing | REUSED |
-| `CAN:C05A:039` | B:1190–1217; C03 accepted | CROSS_REFERENCE | API/Job/Event/Telemetry ownership remains C03; C05a read path uses C01:02 and does not add a Job | — | — | — | CLOSED_WITH_REASON |
-| `CAN:C05A:040` | B:1557–1636 | FUTURE_DEPENDENCY | Handoff:H05A:002 to C05b | — | — | — | ACCEPTED_BY_SCOPE |
-| `CAN:C05A:041` | B:250–258 | FUTURE_DEPENDENCY | Handoff:H05A:003 to R06 | — | — | — | PENDING |
-| `CAN:C05A:042` | B:1609 | FUTURE_DEPENDENCY | Handoff:H05A:004 to A06 | — | — | — | PENDING |
-| `CAN:C05A:043` | B:1502–1522 | FUTURE_DEPENDENCY | Handoff:H05A:005 to A04 | — | — | — | PENDING |
-| `CAN:C05A:044` | B:871, B:1218–1252 | FUTURE_DEPENDENCY | Handoff:H05A:006 to A02 | — | — | — | PENDING |
-| `CAN:C05A:045` | B:1253–1282 | FUTURE_DEPENDENCY | Handoff:H05A:007 to C06 | — | — | — | PENDING |
-| `CAN:C05A:046` | B:1393–1444 | FUTURE_DEPENDENCY | Handoff:H05A:008 to R02 | — | — | — | PENDING |
-| `CAN:C05A:047` | B:1019–1027, B:1449, W:1381–1442 | SHARED_CONTRACT | Handoff:H05A:009 to C04; H05A:010 to C13a; REQ C04 reused | TASK:C04:001 | AC:C04:004/008/009 | TEST:C04:004/008/009 | REUSED/PENDING |
-| `CAN:C05A:048` | B:906 | DECISION_OPEN | DECISION:C05A:001; Handoff:H05A:001 to C04 | — | — | — | OPEN |
-| `CAN:C05A:049` | W:749–852 | FUTURE_DEPENDENCY | Handoff:H05A:011 to C09 | — | — | — | PENDING |
-| `CAN:C05A:050` | W:1205–1219 | FUTURE_DEPENDENCY | Handoff:H05A:012 to C12a; H05A:013 to C12b | — | — | — | PENDING |
-| `CAN:C05A:051` | W:1503–1624 | FUTURE_DEPENDENCY | Handoff:H05A:014 to C13b | — | — | — | PENDING |
-| `CAN:C05A:052` | B:942–999, B:1682–1685 | FUTURE_DEPENDENCY | Handoff:H05A:015 to C14 | — | — | — | PENDING |
-| `CAN:C05A:053` | B:871 | OUTSIDE_CURRENT_RELEASE | اجرای زیرکار چندحوزه‌ای در R1 تعهد نشده؛ فقط قرارداد مسیر C05a برنامه‌ریزی می‌شود | TASK:C05A:005 | AC:C05A:032–035 | TEST:C05A:032–035 | ROUTER_CONTRACT_ONLY |
-
-#### RA / IPA — گیت‌ها و نتیجه اجراشده
-
-گیت‌ها مطابق DoD ثابت نسخه ۷ continuity و الگوی C04 (`P0`, `P1-GLOBAL`, `P1-PACKAGE`, `P2–P6`) اجرا شدند. گیت‌ها پذیرش **برنامه** را می‌سنجند، نه اجرای محصول.
-
-| گیت | نتیجه و شاهد |
-|---|---|
-| `P0` منبع/شاخه/حفاظت | PASS؛ B=`9681c2bf…` و W=`1f3dc55f…` و SHA-256 هر دو با مقدار موردانتظار برابر؛ Worktree ایزوله از HEAD PR `5011e032…` ساخته شد؛ فایل قبل از تغییر تمیز؛ C01–C04 و شناسه‌هایشان untouched ماندند. |
-| `P1-GLOBAL` | PASS (reused)؛ G1=`COMPLETE`, ۲٬۲۳۰ Source Unit از پذیرش قبلی و C04 استفاده شد؛ G1 از نو اجرا نشد. |
-| `P1-PACKAGE` | PASS؛ Scope View digest `8c60b79d7c75a8138dc0263c1b1ce236c098039b7103f1912c2a06c6875c8f99` (SHA-256 خطوط دادهٔ دو جدول «برش‌ها» و «ماتریس پوشش نامزد» پس از اتصال با newline؛ قابل بازتولید از سند)؛ Scope View C05a همه ۵۳ نامزد را با OWNED/SHARED_CONTRACT/CROSS_REFERENCE/UNCERTAIN/EXCLUDED/FUTURE/REUSE تعیین‌تکلیف می‌کند؛ قلم بی‌شاهد/بی‌مالکِ متعلق صفر. |
-| `P2` RA | PASS؛ ۳۵ الزام جدید اتمی، شاهد دقیق/وضعیت/مالک/وابستگی دارند؛ ۴ الزام موجود C04 و ۳ گروه قرارداد C01/C02/C04 مصرف شدند؛ هیچ حکم باز به مصوبه ارتقا نیافت؛ C05a با C01–C04 سازگار است. |
-| `P3` IPA مسیر Task | PASS؛ ۴ Story → ۵ Task → ۱۵ Subtask؛ هر REQ به Task/Story و هر Task به خروجی/DoD/پیش‌شرط متصل است. |
-| `P4` AC/Test | PASS؛ ۳۵ AC و ۳۵ Test Definition مستقل با Fixture/Action/Oracle مثبت/منفی/مرزی و ۱۰۵ Case؛ آزمون‌ها رفتار واقعی همین الزام را می‌سنجند. |
-| `P5` Contract/Dependency/Handoff | PASS؛ ۴ dependency و ۱۵ Handoff مقصددار؛ مرزهای C01–C04، C05b، R/A و C07–C14 حفظ؛ Handoffهای بسته‌های آینده غیرمسدودکننده‌اند؛ تعارض HARD/CONTRACT صفر؛ `DECISION:C05A:001` مستند و خارج از پذیرش رفتارهای مستقل. |
-| `P6` ساختاری/Mutation/readback | PASS؛ شمار و یکتایی شناسه‌ها، نگاشت دوسویه، ارجاع منبع، Handoff، تغییر فقط فایل برنامه، `git diff --check` و سند مرجع بازخوانی‌شده بررسی شدند. ممیزی مستقل عامل دیگر ادعا نمی‌شود. |
-| `نتیجه` | `RA=PASS / IPA=PASS` در سطح برنامه‌ریزی؛ `PRODUCT_TEST_EXECUTED=0`; PASS مجوز اجرای محصول، مالی/حقوقی، فعال‌سازی، Merge یا انتشار نیست. |
-
-| شناسه نقص | Gate/شدت | شاهد و اثر | اصلاح کمینه / regression | وضعیت |
-|---|---|---|---|---|
-| `DEF:C05A:RA:001` | P1-PACKAGE / MAJOR اولیه | `B:1502–1522` می‌توانست با مسیرهای کاتالوگ اشتباه و به C05a نسبت داده شود. | مالکیت Android/iOS/Web route به A04 تحویل شد؛ Scope View و dependency دوباره خوانده شد. | CLOSED |
-| `DEF:C05A:RA:002` | P2 / FUTURE_DEPENDENCY | سؤال B:906 درباره مشاوره همان حوزه پاسخ ندارد و در Decision C04 ثبت نبود. | `DECISION:C05A:001` و Handoff:H05A:001 با مالک UNSPECIFIED ثبت شد؛ رفتار حدس زده نشد. | CLOSED_WITH_OPEN_DECISION |
-| `DEF:C05A:IPA:001` | P5 / BLOCKER در draft | وابستگی دوطرفه C04→C05a و C05a→C04 چرخه CONTRACT می‌ساخت. | یال ورودی حذف شد؛ C05a فقط خروجی قرارداد به C04 دارد. DAG regression روی ۴ dependency نهایی اجرا شد. | CLOSED |
-
-**یافته‌های گیت و اصلاح:** دو مسئله RA و یک نقص IPA در تریاژ اولیه رفع/تعیین‌تکلیف شد: مسیر نصب/پلتفرم `B:1502–1522` از مالکیت کاتالوگ جدا و به A04 تحویل شد؛ سؤال باز `B:906` به‌جای فرض entitlement، با شناسه تصمیم/Handoff ثبت شد. پس از اصلاح، بازاجرای P1-PACKAGE/P2/P5/P6 بدون نقص مسدودکننده بود. نقص IPA شامل چرخه وابستگی قراردادی C04↔C05a در نسخه اولیه بود؛ با تبدیل Catalog به تولیدکننده قرارداد مصرفی C04 اصلاح و آزمون DAG مجدداً اجرا شد. نقص IPA باقی نماند؛ هیچ‌یک به‌عنوان مصوبه جدید ثبت نشد.
-
-#### ممیزی نهایی معکوس، تعارض و محدودیت
-
-- از منبع به Requirement و از Requirement/Task/Test به شاهد برگشت انجام شد؛ ۳۵/۳۵ الزام جدید و ۵۳/۵۳ نامزد تعیین‌تکلیف شده‌اند. پوشش ردیابی اتمی: ۳۵/۳۵ (۱۰۰٪)؛ این درصد فقط مخرج همین بسته را دارد.
-- نامزدهای متنی که از زیرگراف آغازین به‌تنهایی نیامدند در Scope View ثبت شدند: نشست/نقش (`B:1393–1414`)، مصرف‌کننده Adviser/Assistant (`B:1445–1449`)، مسیر پلتفرمی (`B:1502–1522`)، مرز API/Job (`B:1190–1217`) و تفکیک وضعیت مالی (`W:1205–1219`).
-- تعارض واقعی بین دو سند: صفر. ابهام مصوبه: فقط `DECISION:C05A:001`؛ مقدار تصمیم جعل نشده.
-- دوباره‌کاری جلوگیری‌شده: REQهای C04 `134,138,139,150` و قراردادهای C01/C02/C03/C04 مصرف شدند و نسخه تازه/تکراری تولید نشد.
-
-#### ارزیابی کارایی روش
-
-| شاخص | نتیجه |
-|---|---|
-| Graph Discovery Coverage | `NOT_MEASURED`؛ گراف، ledger مستقل از همه نامزدهای معتبر ندارد. |
-| Graph Evidence Precision | `NOT_MEASURED`؛ ۶۷ hit واژگانی گسترده، query حسابرسی‌شده/نمونه‌گیری مستقل نیست. |
-| Cross-Package Reuse | ۴ Requirement موجود C04 + ۳ گروه قرارداد مشترک C01/C02/C04 ارجاع/مصرف‌شده؛ بدون ایجاد نسخه تکراری. |
-| Duplicate Prevention | ۴ نامزد C04 به شناسه‌های واقعی بازیافت؛ هیچ Task/REQ هم‌رفتار دوباره ساخته نشد. |
-| Traceability Coverage | ۳۵/۳۵ Requirement جدید (۱۰۰٪) دارای شاهد→Story/Task→AC/Test؛ ۵۳/۵۳ نامزد disposition دارند. |
-| RA Defect Count | ۲ یافته اولیه؛ ۲ مورد اصلاح/ثبت تصمیم؛ صفر blocker باقی‌مانده. |
-| IPA Defect Count | ۱ نقص P5 (چرخه CONTRACT در draft)؛ ۱ اصلاح؛ ۰ باقی‌مانده. |
-| Rework Cycles | ۲ دور: اصلاح دامنه/تصمیم باز؛ سپس اصلاح چرخه CONTRACT و اجرای مجدد P5/P6. |
-| Extraction Time | `NOT_MEASURED`؛ timestamp آغازِ استخراج ثبت نشده بود. |
-| Total Planning Time | `NOT_MEASURED`؛ timestamp آغاز مأموریت ثبت نشده بود. |
-| مقایسه با C04 | `NOT_MEASURED` برای زمان/کیفیت قابل قیاس؛ سند C04 عدد قبلی قابل مقایسه برای این شاخص‌ها ثبت نمی‌کند. |
-
-#### حفاظت، شمارش و وضعیت نهایی
-
-- **جمع بسته:** ۵۳ نامزد بررسی‌شده؛ ۳۵ Requirement جدید؛ ۴ Requirement پذیرفته‌شده C04 بازیافت‌شده؛ ۴ Story؛ ۵ Task؛ ۱۵ Subtask؛ ۳۵ AC؛ ۳۵ Test Definition؛ ۱۰۵ Test Case؛ ۱ تصمیم باز؛ ۱۵ Handoff؛ صفر تعارض حل‌نشده.
-- Requirementهای C04/C01/C02/C03 بازنویسی نشده‌اند. C05b و هیچ بسته دیگری تدوین نشده. سند Blueprint، Wallet و گراف تغییر نکرده‌اند. کد محصول تغییر نکرده و آزمون محصول اجرا نشده است.
-- پس از پذیرش برنامه C05a، رجیستری کل: ۵/۳۶ بسته پذیرفته‌شده؛ ۱۳ بسته Core/Wallet، ۱۰ بسته RAG/Adviser و ۸ بسته Assistant هنوز مانده‌اند. Merge کل PR همچنان فقط پس از ۳۶/۳۶ و تأیید صریح مالک مجاز است.
-- گیت‌های RA/IPA در این فصل پذیرش برنامه‌اند؛ هیچ قیمت/مجوز قانونی/تأیید محصولی/مجوز پرداخت یا انتشار ایجاد نمی‌کنند.
-
-
-### C05b — کاتالوگ محصولات مالی و توصیه‌گر
-
-**وضعیت برنامه‌ریزی:** RA=PASS / IPA=PASS؛ **وضعیت محصول:** PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED. این PASS پذیرش برنامه‌ریزی است و مجوز Build، اجرای سرویس، انتشار کاتالوگ، توصیه مالی، عملیات بانکی یا انتشار محصول نیست.
-
-#### هویت، دامنه، مالکیت و مرز مسئولیت
-
-- **دامنه:** مدل و چرخه کاتالوگ پویای محصولات مالی واقعی بانک‌ها/مؤسسات، کشف و استخراج مجاز داده محصول، ثبت منشأ و نسخه، تشخیص تکرار/تغییر، اعتبارسنجی و رسیدگی به داده نامطمئن، انتشار Snapshot معتبر، و اتصال برنامه‌ای به توصیه‌گر قطعی فعلی تسهیلات.
-- **مالک منطقی داده و تصمیم‌های محصولی کاتالوگ:** Core؛ Blueprint کاتالوگ محصولات منتشرشده و موتور توصیه‌گر قطعی را در Core قرار می‌دهد. نام تیم/مسئول اجرایی کاتالوگ در سند مرجع تعیین نشده و در این بسته ساخته نمی‌شود.
-- **مرز C05a:** C05a مالک حوزه/خدمت/قابلیت و مسیریاب خدماتی خود شهاب است؛ C05b مالک داده محصولات مالی ارائه‌دهندگان بیرونی و چرخه انتشار آن‌هاست. نام/شناسه خدمت یا نوع خدمت می‌تواند به‌عنوان ارجاع مصرف شود، اما کاتالوگ خدمات C05a و کاتالوگ محصولات مالی C05b یک مدل یا مالکیت واحد نیستند.
-- **مرز توصیه‌گر:** مالکیت منطق قطعی تطبیق، رتبه‌بندی و دلیل‌های توصیه وام در Core است و با REQ:CORE:008 پذیرفته‌شده C01 و TASK:CORE:004 بازیافت می‌شود. C05b مدل محصول و چرخه داده را تکمیل می‌کند؛ منطق امتیازدهی را بازنویسی نمی‌کند. قواعد/آستانه‌های تازه برای سایر حوزه‌ها تصویب نشده‌اند.
-- **مرز Adviser:** Adviser نیاز را در گفت‌وگوی حوزه وام تشخیص می‌دهد، پرسشنامه را آغاز/نمایش می‌دهد، در شرایط مصوب توصیه‌گر را از API نسخه‌دار Core می‌خواند و نتیجه را ارائه می‌کند. Adviser و فرانت‌اند منطق قطعی یا دسترسی به جدول خصوصی Core نمی‌سازند.
-- **مرز RAG، Assistant و UI:** دانش حقوقی و تفسیر مقررات به R06/بسته مربوط Adviser؛ نقشه و پایش UI به A06؛ امکان‌سنجی/مسیر اپ و پلتفرم به A04؛ اجرای عملیات به بسته‌های Assistant/گردش‌کار تخصیص‌یافته واگذار می‌شوند. C05b نتیجه توصیه را تضمین پذیرش بانک یا اجرای درخواست نمی‌داند.
-- **مرز Wallet:** قیمت خدمت، کسر، رزرو، تسویه، دفترکل و وضعیت قطعی مالی در C09 و C12a/C12b/C13a و سایر بسته‌های مالی مالک دارند؛ هیچ‌کدام از C05b مالکیت نمی‌گیرند.
-- **ورودی پذیرفته‌شده از C05a:** Handoff:H05A:002 از B:1557–1636 و CAN:C05A:040، «کاتالوگ محصولات، کشف/اعتبارسنجی/Snapshot محصول بانکی» را برای C05b نگه داشته است. این بسته دامنه را تعیین تکلیف می‌کند؛ پیاده‌سازی Handoff هنوز موضوع بسته‌های اجرایی آینده است.
-
-#### خط مبنا و روش Graph-First
-
-- سند برنامه در شاخه PR از Commit 9b5a469bb88046de2f9d6ab38a2fdca009d28e62 خوانده شد. main در پیش‌بررسی روی 47dee95bb459334b044534a7fa3f54520ea3d0db بود؛ PR #251 باز بود و تغییرات ثبت‌شده‌اش فقط همین سند برنامه بود.
-- Blueprint V1.6 با Git blob 9681c2bf6c3149317c3788516748084cfb6eac7c و Wallet V0.20 با Git blob 1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a خوانده شدند. GRAPH_REPORT و graph_stats همان SHA-256های مرجع ثبت‌شده برای Blueprint، 0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266، و Wallet، 8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74 را گزارش می‌کنند؛ تعداد خطوط نیز 2,550 و 1,780 است. گراف در این بسته بازسازی یا تغییر داده نشد.
-- داده‌های گراف مستقیماً از JSONهای موجود خوانده شدند. CLI Graphify و محیط محلی مخزن در این نشست در دسترس نبودند؛ استفاده از CLI شرط مأموریت نبود. در محدوده B:1557–1636، 30 گره مرتبط از گراف بازیابی شد: 4 گره ساختاری بخش و 26 گره معنایی؛ 23 رابطه فعال بین این گره‌ها برای مسیریابی بررسی شد. همچنین گره‌های B:867–907، B:1190–1217، B:1393–1449 و B:2075 در بازخوانی متن/مرزهای مالکیت بررسی شدند.
-- فقط شاهد مستقیم Blueprint مبنای Requirement جدید شد. یال‌های گراف با برچسب نمودار/مسیر، سرنخ ترتیب کشف‌اند، نه مصوبه مستقل؛ هیچ رابطه INFERRED، AMBIGUOUS یا قرنطینه‌شده برای ساخت الزام استفاده نشد.
-- G1 و پذیرش جهانی C01 تا C05a بازیافت شدند؛ در این بسته ادعای اجرای دوباره G1 یا ممیزی مستقل توسط شخص دیگر نمی‌شود. Wallet با جست‌وجوی واژگانی کامل برای محصول بانکی/وام/کاتالوگ/توصیه‌گر بازبینی شد: هیچ الزام مستقیم C05b در آن نیامد. W:749–852 و W:807 به مصرف هزینه/رزرو و وضعیت اجرای خدمت مربوط‌اند و به C09/C05a/C13b تحویل می‌شوند؛ W:1205–1219 مرز دفترکل/تطبیق را حفظ می‌کند.
-
-#### Scope View و تعیین تکلیف نامزدها
-
-هر نامزد در جدول یکی از وضعیت‌های OWNED، REUSED، DEPENDENCY، HANDOFF، CROSS_REFERENCE یا OUTSIDE را دارد. REQ جدید فقط از حکم صریح منبع ساخته شده است؛ دامنه مالکیت از قراردادهای موجود بازیافت می‌شود.
-
-| Candidate | شاهد | طبقه‌بندی و تعیین تکلیف |
-|---|---|---|
-| CAN:C05B:001 | B:1559 | OWNED؛ کاتالوگ محصولات مالی زیرساخت مشترک دامنه‌ها؛ REQ:CORE:226 |
-| CAN:C05B:002 | B:1559، B:1635 | OWNED؛ وجود کاتالوگ، توصیه‌گر اختصاصی برای هر خدمت را الزامی نمی‌کند؛ REQ:CORE:226 |
-| CAN:C05B:003 | B:1561 | OWNED؛ وام‌ها نیز عضو چرخه واحد کاتالوگ می‌شوند؛ REQ:CORE:239 |
-| CAN:C05B:004 | B:1561، B:1633 | OWNED / REUSED؛ Snapshot معتبر منتشرشده و حفظ نسخه معتبر قبلی؛ REQ:CORE:234 و REQ:CORE:009 بازیافتی |
-| CAN:C05B:005 | B:1563 | OWNED؛ رویکرد کاتالوگ خودتوسعه‌دهنده مصوب است؛ REQ:CORE:229 |
-| CAN:C05B:006 | B:1563، B:1566 | OWNED؛ کشف منابع رسمی شناخته‌شده و فهرست بانک‌ها؛ REQ:CORE:228 |
-| CAN:C05B:007 | B:1563 | OWNED؛ محرک‌های زمان‌بندی‌شده، تقاضامحور و تغییرمحور؛ بدون تعیین دوره عددی؛ REQ:CORE:229 |
-| CAN:C05B:008 | B:1563، B:1592 | OWNED؛ مشاهده/استخراج مجاز و آزموده‌شده؛ API غیرمستقیم مجاز، نه خودکار یا فرض‌شده؛ REQ:CORE:228 و REQ:CORE:235 |
-| CAN:C05B:009 | B:1567 | OWNED؛ استخراج ساختاریافته؛ REQ:CORE:230 |
-| CAN:C05B:010 | B:1567 | OWNED؛ تطبیق محصول، حذف تکرار و تشخیص تغییر؛ REQ:CORE:231 |
-| CAN:C05B:011 | B:1567، B:1609 | OWNED؛ ثبت منشأ، زمان و شواهد و ویژگی‌های محصول؛ REQ:CORE:227 و REQ:CORE:230 |
-| CAN:C05B:012 | B:1567 | OWNED؛ اعتبارسنجی و حل تعارض؛ REQ:CORE:233 |
-| CAN:C05B:013 | B:1567، B:1582 | OWNED؛ داده نامطمئن/متعارض به بازبینی می‌رود و توصیه قطعی نمی‌گیرد؛ REQ:CORE:232–233 |
-| CAN:C05B:014 | B:1566 | OWNED؛ داده حساب‌محور نباید شرایط عمومی محصول تلقی شود؛ REQ:CORE:228 |
-| CAN:C05B:015 | B:1582 | OWNED؛ وضعیت تأییدشده با تاریخ مشاهده، بازاعتبارسنجی و نامطمئن/متعارض؛ REQ:CORE:232 |
-| CAN:C05B:016 | B:1582، B:1633 | OWNED؛ وضعیت کاتالوگ تضمین عرضه یا پذیرش درخواست در لحظه نیست؛ REQ:CORE:240 |
-| CAN:C05B:017 | B:1590 | OWNED؛ API داده محصول بانکی مکمل اختیاری است؛ REQ:CORE:235 |
-| CAN:C05B:018 | B:1592 | OWNED؛ MCP/واسط ثالث فقط با مجازبودن و آزمون؛ MCP خودش API غیرمستقیم ایجاد نمی‌کند؛ REQ:CORE:235 |
-| CAN:C05B:019 | B:1594 | OWNED؛ شکست API باید مسیر جایگزین معتبر یا توقف آشکار بدهد؛ REQ:CORE:236 |
-| CAN:C05B:020 | B:1604–1610، B:1625 | OWNED؛ دانش مقررات، محصول و UI جدا و با شناسه پایدار مرتبط‌اند؛ REQ:CORE:237 |
-| CAN:C05B:021 | B:1609 | OWNED؛ شناسه بانک/محصول، نوع خدمت، شرایط، مدارک، نرخ، محدودیت، منبع، نسخه، زمان مشاهده و اعتبار؛ REQ:CORE:227 |
-| CAN:C05B:022 | B:1619–1625 | OWNED / DECISION_OPEN؛ PostgreSQL مرجع عملیاتی پیشنهادی، مخزن اسناد برای متن/شواهد؛ فناوری UI و همگام‌سازی باز؛ REQ:CORE:237 |
-| CAN:C05B:023 | B:1627–1633 | REUSED؛ مالکیت Core بر تطبیق/رتبه‌بندی/دلایل در REQ:CORE:008 و TASK:CORE:004 |
-| CAN:C05B:024 | B:1627–1633 | REUSED؛ API نسخه‌دار، عدم بازپیاده‌سازی در Adviser/فرانت و منع دسترسی به جدول Core؛ CONTRACT:C01:02 و REQ:CORE:008 |
-| CAN:C05B:025 | B:1629 | OWNED؛ دو محرک کاربر و پذیرش/رد پیشنهاد، پرسشنامه غیر اجباری ورود؛ REQ:CORE:238 |
-| CAN:C05B:026 | B:1629، B:1190–1217، B:2075 | REUSED؛ محاسبه کوتاه هم‌زمان، نسخه‌بندی قرارداد، خطا/Retry/Trace و آزمون مصرف‌کننده از قراردادهای C01/C03 |
-| CAN:C05B:027 | B:1633 | REUSED؛ یک Snapshot و نسخه قواعد سازگار برای کل محاسبه؛ REQ:CORE:009 و TASK:CORE:004 |
-| CAN:C05B:028 | B:1633 | OWNED؛ داده وام موجود به چرخه کشف/اعتبارسنجی/انتشار منتقل می‌شود؛ REQ:CORE:239 |
-| CAN:C05B:029 | B:1633، B:1635، B:1647 | OWNED؛ پیشنهاد معتبر تضمین پذیرش نیست و نبود موتور تخصصی ادعای رتبه‌بندی قطعی نمی‌سازد؛ REQ:CORE:240 |
-| CAN:C05B:030 | B:1635 | OWNED؛ کاتالوگ برای حوزه‌های دیگر بدون موتور اختصاصی قابل استفاده است؛ REQ:CORE:226 |
-| CAN:C05B:031 | B:2075، CONTRACT:C01:02 | REUSED / DEPENDENCY؛ انتشار نسخه‌دار Core/Adviser و آزمون معنایی مصرف‌کننده؛ بدون کپی منطق |
-| CAN:C05B:032 | B:1557–1636، Handoff:H05A:002 / CAN:C05A:040 | DEPENDENCY؛ Handoff ورودی کاتالوگ محصول از C05a با این Scope دریافت شد؛ C05a داده محصول بانکی نمی‌سازد |
-| CAN:C05B:033 | B:867–907، C05a REQ:CORE:191–225 | CROSS_REFERENCE؛ شناسه و قرارداد خدمت شهاب متعلق به C05a است؛ محصول بانکی جای خدمت شهاب را نمی‌گیرد |
-| CAN:C05B:034 | B:1393–1449، B:1627–1633 | CROSS_REFERENCE / HANDOFF؛ انتخاب نقش و مصرف Adviser با C02/R02 و پلن با C04؛ C05b اختیار یا پلن تازه نمی‌سازد |
-| CAN:C05B:035 | B:1502–1522، B:1609 | HANDOFF؛ مسیر UI/اپ/پلتفرم و نقشه رابط به A04/A06؛ محصول کاتالوگ به نقشه UI تبدیل نمی‌شود |
-| CAN:C05B:036 | B:250–258، B:1608 | HANDOFF؛ R06 مالک دانش و روابط حقوقی است؛ کاتالوگ محصول جای تفسیر قانون نیست |
-| CAN:C05B:037 | B:1635، R01–R10/A01–A08 | HANDOFF؛ مصرف آتی توسط Assistant فقط با قرارداد و مجوز بسته مقصد؛ تخصیص دقیق بسته Assistant باز می‌ماند |
-| CAN:C05B:038 | W:749–852، W:807 | OUTSIDE؛ قیمت‌گذاری/مصرف/رزرو/وضعیت اجرای خدمت در C09 و بسته‌های خدماتی است |
-| CAN:C05B:039 | W:1205–1219 | OUTSIDE؛ وضعیت Ledger/تطبیق بانک در C12a/C12b؛ وضعیت محصول با وضعیت مالی یکی نیست |
-| CAN:C05B:040 | Wallet V0.20، جست‌وجوی کامل 1,780 خط | OUTSIDE؛ الزام مستقیم کاتالوگ بانکی یا توصیه‌گر از این سند پشتیبانی نمی‌شود |
-
-#### Requirementهای جدید C05b و قراردادهای بازیافتی
-
-مالک منطقی Requirementهای جدید داده/چرخه کاتالوگ Core است؛ مالک نام‌برده تیم یا فرد اجرایی در مرجع وجود ندارد. وضعیت هر Requirement جدید APPROVED به‌معنای استخراج رفتار صریح از Blueprint است، نه تصویب فناوری، زمان‌بندی، آستانه یا مجوز اجرای محصول.
-
-| شناسه | الزام اتمی | شاهد و وضعیت | AC مستقل | Test مستقل | Task مالک |
-|---|---|---|---|---|---|
-| REQ:CORE:226 | کاتالوگ ساختاریافته محصولات مالی باید مستقل از کاتالوگ خدمات شهاب و قابل استفاده در چند حوزه باشد؛ وجود محصول در کاتالوگ، موتور تطبیق/توصیه‌گر اختصاصی برای آن حوزه را اجباری نمی‌کند. | B:1559، B:1635؛ APPROVED | AC:CORE:C05B:001 | TEST:CORE:C05B:001 | TASK:CORE:C05B:001 |
-| REQ:CORE:227 | رکورد محصول باید شناسه ارائه‌دهنده و شناسه پایدار محصول، نوع خدمت، شرایط، مدارک، نرخ‌ها، محدودیت‌ها، منبع، نسخه، زمان مشاهده و وضعیت اعتبار را قابل ثبت و بازیابی نگه دارد؛ قالب و قواعد نرمال‌سازی تصویب نشده‌اند. | B:1609؛ APPROVED | AC:CORE:C05B:002 | TEST:CORE:C05B:002 | TASK:CORE:C05B:001 |
-| REQ:CORE:228 | هر ورودی کاتالوگ باید منبع و روش دریافت مجاز/قابل ردیابی داشته باشد؛ مشاهده اطلاعات حساب‌محور به‌تنهایی شرایط عمومی محصول را اثبات نمی‌کند. | B:1563، B:1566؛ APPROVED | AC:CORE:C05B:003 | TEST:CORE:C05B:003 | TASK:CORE:C05B:001 |
-| REQ:CORE:229 | کشف محصولات باید از منابع رسمی شناخته‌شده پشتیبانی کند و بتواند از زمان‌بندی، تقاضای پوشش جدید و هشدار تغییر منبع آغاز شود؛ دوره عددی یا پوشش بانک‌ها تعیین نشده است. | B:1563، B:1567؛ APPROVED | AC:CORE:C05B:004 | TEST:CORE:C05B:004 | TASK:CORE:C05B:002 |
-| REQ:CORE:230 | داده استخراج‌شده باید ساختاریافته باشد و به منبع، زمان مشاهده، نسخه/شواهد و وضعیت اعتبار خودش قابل ردیابی بماند. | B:1567، B:1609؛ APPROVED | AC:CORE:C05B:005 | TEST:CORE:C05B:005 | TASK:CORE:C05B:002 |
-| REQ:CORE:231 | چرخه کشف باید محصولات تکراری را تطبیق دهد، تکرار را کنترل کند و تغییر منبع/محصول را پیش از انتشار قابل تشخیص کند؛ قاعده ادغام موجودیت‌ها نیازمند طراحی مبتنی بر شاهد است. | B:1567؛ APPROVED | AC:CORE:C05B:006 | TEST:CORE:C05B:006 | TASK:CORE:C05B:002 |
-| REQ:CORE:232 | وضعیت اعتبار محصول باید دست‌کم «تأییدشده با تاریخ مشاهده»، «نیازمند بازاعتبارسنجی» و «نامطمئن/متعارض» را از هم جدا کند؛ تأیید کاتالوگ تضمین عرضه لحظه‌ای نیست. | B:1582؛ APPROVED | AC:CORE:C05B:007 | TEST:CORE:C05B:007 | TASK:CORE:C05B:003 |
-| REQ:CORE:233 | داده ناقص، نامطمئن یا متعارض باید پیش از انتشار به اعتبارسنجی/حل تعارض یا بازبینی برود و تا احراز اعتبار به‌عنوان توصیه قطعی منتشر نشود؛ آستانه کامل‌بودن و نقش بازبین باز است. | B:1567، B:1582؛ APPROVED | AC:CORE:C05B:008 | TEST:CORE:C05B:008 | TASK:CORE:C05B:003 |
-| REQ:CORE:234 | توصیه‌گر باید فقط از Snapshot معتبر و منتشرشده استفاده کند؛ Snapshot جاری تا جایگزینی معتبر حفظ شود و یک اجرای توصیه Snapshot و نسخه قواعد سازگار واحد داشته باشد. | B:1561، B:1633، REQ:CORE:009؛ APPROVED + REUSED | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | TASK:CORE:C05B:003 / TASK:CORE:004 |
-| REQ:CORE:235 | API رسمی دریافت داده محصول و API/واسط غیرمستقیم یا MCP فقط مسیرهای مکمل‌اند؛ هر مسیر باید مجاز و آزموده‌شده باشد و نبود API رسمی به وابستگی اجباری کاتالوگ تبدیل نشود. | B:1571، B:1590–1592؛ APPROVED | AC:CORE:C05B:010 | TEST:CORE:C05B:010 | TASK:CORE:C05B:004 |
-| REQ:CORE:236 | در اختلال API مکمل، کاتالوگ باید داده قبلی را فقط مطابق سیاست تازگی و با هشدار مناسب ارائه کند؛ اگر مسیر جایگزین معتبر/مجاز وجود ندارد، عملیات وابسته آشکارا متوقف شود و داده نامطمئن توصیه قطعی نگیرد. | B:1594؛ APPROVED | AC:CORE:C05B:011 | TEST:CORE:C05B:011 | TASK:CORE:C05B:004 |
-| REQ:CORE:237 | دانش محصول باید از دانش مقررات و دانش رابط جدا بماند و با شناسه پایدار به آن‌ها ارجاع دهد؛ C05b مخزن RAG عمومی یا مخزن UI را جایگزین نمی‌کند. | B:1604–1610، B:1619–1625؛ APPROVED | AC:CORE:C05B:012 | TEST:CORE:C05B:012 | TASK:CORE:C05B:004 |
-| REQ:CORE:238 | توصیه‌گر وام فقط با درخواست کاربر یا پس از پیشنهاد Adviser و پذیرش کاربر فعال می‌شود؛ پرسشنامه الزام ورود/صفحه نخست نیست و رد پیشنهاد، درخواست اجرا ایجاد نمی‌کند. | B:1629؛ APPROVED | AC:CORE:C05B:013 | TEST:CORE:C05B:013 | TASK:CORE:C05B:005 |
-| REQ:CORE:239 | داده‌های وام موجود باید منبع اولیه مهاجرت به چرخه واحد کشف/اعتبارسنجی/انتشار باشند و تا انتشار Snapshot معتبر وارد توصیه قطعی نشوند. | B:1561، B:1633؛ APPROVED | AC:CORE:C05B:014 | TEST:CORE:C05B:014 | TASK:CORE:C05B:005 |
-| REQ:CORE:240 | نتیجه توصیه یا فهرست محصول نباید به‌عنوان تضمین عرضه یا پذیرش درخواست بانک نمایش/ثبت شود؛ نبود موتور اختصاصی معتبر در یک خدمت، ادعای رتبه‌بندی قطعی ایجاد نمی‌کند. | B:1582، B:1633، B:1647؛ APPROVED | AC:CORE:C05B:015 | TEST:CORE:C05B:015 | TASK:CORE:C05B:005 |
-
-**Requirements بازیافتی بدون نسخه تکراری:** REQ:CORE:008 و REQ:CORE:009 به همراه AC:CORE:C01:008/:009 و TASK:CORE:004 از C01 حفظ می‌شوند. CONTRACT:C01:01/:02 مالکیت ماژول و API نسخه‌دار، CONTRACT:C01:03/:04 الگوی Job/Event فقط در صورت نیاز اثبات‌شده، و قراردادهای مجوز/رضایت C02:02/:03 بازیافت می‌شوند. C03 مالک قراردادهای عمومی API/Event/Job/Telemetry و تاب‌آوری مشترک خود می‌ماند. هیچ الزام C04 یا C05a برای تعرفه، پلن، کاتالوگ خدمت یا اجرای مالی دوباره ساخته نشده است.
-
-#### AC و Test Caseهای برنامه‌ریزی
-
-هر AC و Test زیر تعریف برنامه‌ای برای اجرای آینده است؛ هیچ‌یک در این مأموریت به‌عنوان آزمون محصول اجرا نشده‌اند. برای هر Requirement جدید یک AC و Test مستقل ثبت شده و برای هر Test سه Case مثبت، منفی یا مرزی تعریف شده است.
-
-| AC / Test | Fixture و اقدام | Oracle / Caseهای مستقل |
-|---|---|---|
-| AC:CORE:C05B:001 / TEST:CORE:C05B:001 | Fixture: خدمت شهاب و محصول مالی مستقل؛ اقدام: ثبت محصول با/بدون موتور اختصاصی | Case 001.A: محصول قابل معرفی با اطلاعات معتبر و بدون موتور اختصاصی پذیرفته شود؛ 001.B: ثبت خودکار همان محصول به‌عنوان خدمت شهاب رد شود؛ 001.C: نبود موتور، رتبه‌بندی قطعی جعل نکند. |
-| AC:CORE:C05B:002 / TEST:CORE:C05B:002 | Fixture: دو ارائه‌دهنده با نام محصول مشابه و فیلدهای کاتالوگ؛ اقدام: ذخیره و بازیابی نسخه | 002.A: شناسه‌ها و فیلدهای منبع/زمان/نسخه حفظ شوند؛ 002.B: تغییر نام نمایشی شناسه پایدار را عوض نکند؛ 002.C: فیلد فاقد شاهد به‌عنوان مقدار تأییدشده برنگردد. |
-| AC:CORE:C05B:003 / TEST:CORE:C05B:003 | Fixture: منبع رسمی عمومی و صفحه مختص حساب؛ اقدام: ثبت منشأ و شرایط دریافت | 003.A: منبع و روش مجاز قابل ردیابی باشد؛ 003.B: دسترسی/شرایط استفاده نامعلوم انتشار را متوقف کند؛ 003.C: مقدار صفحه حساب خاص به کل محصول تعمیم داده نشود. |
-| AC:CORE:C05B:004 / TEST:CORE:C05B:004 | Fixture: منبع تازه، تقاضای پوشش و هشدار تغییر؛ اقدام: آغاز Discovery | 004.A: هر سه محرک مجاز چرخه را آغاز کنند؛ 004.B: منبع بدون تغییر/تقاضا خارج از برنامه بی‌قاعده واکشی نشود؛ 004.C: دوره عددی نامصوب به‌عنوان سیاست قطعی اعمال نشود. |
-| AC:CORE:C05B:005 / TEST:CORE:C05B:005 | Fixture: صفحه/داده رسمی دارای نرخ و محدودیت؛ اقدام: استخراج ساختاریافته | 005.A: مقادیر استخراج‌شده به شاهد و زمان مشاهده متصل باشند؛ 005.B: خروجی بدون منشأ برای تأیید/انتشار رد شود؛ 005.C: تغییر متن منبع، سابقه نسخه پیشین را از بین نبرد. |
-| AC:CORE:C05B:006 / TEST:CORE:C05B:006 | Fixture: alias یک محصول، محصول همنام بانک دیگر و نسخه جدید همان محصول؛ اقدام: تطبیق/تشخیص تغییر | 006.A: alias مستند به یک محصول واحد پیوند بخورد؛ 006.B: همنامی دو بانک موجب ادغام نشود؛ 006.C: نسخه/شرط تغییرکرده به‌عنوان تغییر کاندید شود. |
-| AC:CORE:C05B:007 / TEST:CORE:C05B:007 | Fixture: داده با سه حالت اعتبار؛ اقدام: تعیین وضعیت و نمایش | 007.A: تاریخ مشاهده و وضعیت تأییدشده نمایش داده شود؛ 007.B: مورد نیازمند بازاعتبارسنجی به‌عنوان تازه معرفی نشود؛ 007.C: نامطمئن/متعارض از تأییدشده جدا بماند. |
-| AC:CORE:C05B:008 / TEST:CORE:C05B:008 | Fixture: محصول با فیلد لازم نامعلوم، دو منبع متعارض و یک رکورد کامل؛ اقدام: اعتبارسنجی | 008.A: رکورد کاملِ معتبر به مرحله انتشار برسد؛ 008.B: تعارض حل‌نشده در صف بررسی بماند؛ 008.C: مقدار مجهول حدس زده نشود و از توصیه قطعی حذف/متوقف شود. |
-| AC:CORE:C05B:009 / TEST:CORE:C05B:009 | Fixture: Snapshot منتشرشده N و نامزد N+1 نامعتبر؛ اقدام: انتشار و محاسبه هم‌زمان | 009.A: توصیه از Snapshot منتشرشده و نسخه قاعده سازگار بخواند؛ 009.B: نامزد نامعتبر جای N را نگیرد؛ 009.C: یک نتیجه ترکیبی از دو Snapshot/نسخه نسازد. |
-| AC:CORE:C05B:010 / TEST:CORE:C05B:010 | Fixture: API بانکی موجود، غایب و واسط MCP؛ اقدام: انتخاب منبع داده | 010.A: API رسمی مکمل پس از بررسی مجوز و قرارداد استفاده شود؛ 010.B: نبود API رسمی چرخه منبع رسمی را خاموش نکند؛ 010.C: MCP/واسط آزموده‌نشده یا نامجاز پذیرفته نشود. |
-| AC:CORE:C05B:011 / TEST:CORE:C05B:011 | Fixture: API قطع، Snapshot در سیاست تازگی و Snapshot منقضی؛ اقدام: پاسخ کاتالوگ | 011.A: نسخه قبلی فقط در محدوده تازگی مجاز و با برچسب برگردد؛ 011.B: داده منقضی توصیه قطعی نشود؛ 011.C: نبود منبع جایگزین معتبر، توقف آشکار ایجاد کند. |
-| AC:CORE:C05B:012 / TEST:CORE:C05B:012 | Fixture: شناسه محصول، شناسه سند حقوقی و شناسه نقشه UI؛ اقدام: ذخیره/بازیابی | 012.A: سه دارایی جدا و قابل ارجاع بمانند؛ 012.B: متن حقوقی یا نقشه UI در رکورد عمومی محصول ادغام نشود؛ 012.C: مصرف محصول از API مالک انجام شود نه جدول خصوصی/RAG واحد. |
-| AC:CORE:C05B:013 / TEST:CORE:C05B:013 | Fixture: کاربر درخواست پرسشنامه، پیشنهاد Adviser و پاسخ رد کاربر؛ اقدام: کنترل آغاز | 013.A: درخواست صریح کاربر می‌تواند آغاز کند؛ 013.B: پس از رد پیشنهاد، توصیه‌گر آغاز نشود؛ 013.C: صفحه ورود بدون درخواست/پذیرش، پرسشنامه اجباری نشان ندهد. |
-| AC:CORE:C05B:014 / TEST:CORE:C05B:014 | Fixture: رکوردهای فعلی وام و چرخه جدید؛ اقدام: برنامه‌ریزی مهاجرت و انتشار | 014.A: رکوردهای فعلی به منشأ/وضعیت/نسخه وصل شوند؛ 014.B: رکورد مهاجرتی نامعتبر وارد Snapshot توصیه نشود؛ 014.C: Snapshot قبلی معتبر تا جایگزینی معتبر حفظ شود. |
-| AC:CORE:C05B:015 / TEST:CORE:C05B:015 | Fixture: محصول تأییدشده، محصول نامطمئن و حوزه بدون موتور اختصاصی؛ اقدام: ساخت خروجی قابل ارائه | 015.A: خروجی وضعیت و منشأ محدودیت را حفظ کند؛ 015.B: متن تضمین پذیرش بانک تولید نشود؛ 015.C: حوزه بی‌موتور فقط معرفی/مقایسه مستند داشته باشد و رتبه قطعی نسازد. |
-
-**فهرست Test Caseها:** TEST:CORE:C05B:001 تا 015، هرکدام با پسوند .A، .B و .C؛ جمعاً 45 Case برنامه‌ای. ورودی‌ها باید در طراحی آزمون محصول از داده ساختگی/غیرحساس استفاده کنند مگر مجوز و محیط آزمون جداگانه تصویب شود؛ داده واقعی مشتری برای پذیرش کاتالوگ لازم فرض نشده است.
-
-#### Story / Enablerها
-
-| شناسه | نیاز و ارزش | Requirements | معیار پذیرش برنامه |
-|---|---|---|---|
-| TE:CORE:C05B:001 | مالک Core نیاز دارد محصولات بانکی را با منشأ و اعتبارشان به‌صورت پایدار کشف و منتشر کند، تا داده نامطمئن وارد توصیه قطعی نشود. | REQ:CORE:226–237، REQ:CORE:239–240 | مدل/چرخه و مرز با C05a، R06 و A06 ثبت شود؛ 15 AC و Test مستقل نگاشت و حالات ناقص/تعارض‌دار دیده شوند. |
-| TE:CORE:C05B:002 | Adviser و مصرف‌کننده مجاز نیاز دارند Snapshot محصول را از قرارداد نسخه‌دار Core با وضعیت و منشأ دریافت کنند. | REQ:CORE:234–237، REQ:CORE:008–009 بازیافتی | CONTRACT:C05B:001 به‌عنوان بسط دامنه‌ای CONTRACT:C01:02 طراحی شود؛ مصرف‌کننده به جدول خصوصی وابسته نشود. |
-| TE:CORE:C05B:003 | کاربر و Core نیاز دارند توصیه وام با درخواست/رضایت کاربر و Snapshot معتبر، با معنای قطعی موجود و بدون وعده پذیرش بانک ارائه شود. | REQ:CORE:238–240، REQ:CORE:008–009 بازیافتی | TASK:CORE:004 و Golden/consumer contract C01 حفظ شوند؛ قاعده امتیازدهی جدید ساخته نشود. |
-
-#### Taskها و Subtaskهای اجرایی آینده
-
-این جدول دامنه کار آینده را تعریف می‌کند و مجوز اجرای آن‌ها در این مأموریت نیست. Core مالک منطقی مدل و داده کاتالوگ است؛ اجرای عمومی API/Job/Telemetry، هویت/مجوز و تحلیل حقوقی در مالکیت قراردادهای C01/C03/C02/R06 می‌مانند.
-
-| Task | مالک، ورودی/وابستگی و خروجی/DoD | Subtaskها |
-|---|---|---|
-| TASK:CORE:C05B:001 — مدل محصول و رجیستری منبع | مالک منطقی: Core Catalog؛ پیش‌شرط: CONTRACT:C01:01 و دریافت Handoff:H05A:002؛ خروجی: طرح مدل محصول/ارائه‌دهنده، ارجاع به نوع خدمت، فهرست منبع دارای وضعیت مجازبودن، و نقشه مهاجرت بدون تصمیم‌سازی برای فیلدهای نامعلوم. | .S01 تطبیق مدل با شناسه/فیلدهای B:1609 و مرز C05a؛ .S02 ثبت منابع/روش‌های مجاز و شرایط دسترسی/نگهداری؛ .S03 تهیه نگاشت داده وام موجود و ثبت فیلد/واحد/تبدیل نامشخص به DECISION، نه حدس. |
-| TASK:CORE:C05B:002 — کشف، استخراج، منشأ و تشخیص تغییر | مالک منطقی: Core Catalog؛ ورودی: TASK 001؛ CONTRACT:C01:03 فقط اگر پردازش طولانی/Job اثبات شود؛ خروجی: طراحی مسیر محرک زمان‌بندی/تقاضا/تغییر، استخراج ساختاریافته، lineage، تطبیق موجودیت و گزارش تغییر. | .S01 تعریف محرک‌ها و قرارداد ورودیِ تقاضا/هشدار؛ .S02 طرح استخراج و اتصال فیلد به منبع/زمان/نسخه؛ .S03 طرح تطبیق و تشخیص تغییر با حفظ سابقه و عدم ادغام نامستند. |
-| TASK:CORE:C05B:003 — اعتبارسنجی و انتشار Snapshot محصول | مالک منطقی: Core Catalog؛ ورودی: TASK 001–002؛ REQ:CORE:009 و سیاست انتشار C01/C03؛ خروجی: مدل وضعیت اعتبار، صف نامطمئن/متعارض و طرح انتشار اتمیک Snapshot معتبر. | .S01 تعریف وضعیت‌ها و طراحی آزمون تازگی؛ .S02 ثبت معیارهای ناقص‌بودن/تعارض و مسیر بازبینی به‌عنوان تصمیم باز تا تصویب؛ .S03 طرح حفظ Snapshot قبلی، انتشار نسخه معتبر و آزمون عدم اختلاط. |
-| TASK:CORE:C05B:004 — قرارداد خواندن محصول و رفتار تاب‌آوری | مالک قرارداد API: Core طبق CONTRACT:C01:02؛ مالک داده: Core Catalog؛ خروجی: بسط دامنه‌ای CONTRACT:C05B:001 با Snapshot/منشأ/اعتبار، نسخه Schema، خطاهای قابل تشخیص و رفتار قطع منبع. | .S01 تعیین مدل پاسخ و سازگاری مصرف‌کننده Adviser؛ .S02 تعریف خطای stale/uncertain/unavailable و هشدار/توقف؛ .S03 آزمون قراردادی، timeout/retry محدود و سازگاری انتشار، با بازیافت C03 و بدون Job اجباری. |
-| TASK:CORE:C05B:005 — انطباق داده وام و فراخوانی توصیه‌گر قطعی | مالک منطق: Core؛ ورودی: C01 TASK:CORE:004، REQ:CORE:008/:009، Snapshot معتبر و قرارداد C05B:001؛ خروجی: برنامه مهاجرت منبع فعلی و اتصال هم‌زمان Adviser به موتور موجود. | .S01 تثبیت Golden semantics/داده فعلی و طبقه‌بندی تفاوت‌ها؛ .S02 قرارداد ورودی/خروجی Adviser و آغاز اختیاری پرسشنامه؛ .S03 آزمون شکست API، نسخه Snapshot/قواعد، دلیل نتیجه و منع وعده پذیرش بانک. |
-
-#### قراردادها، وابستگی‌ها و Handoff
-
-| نوع | شناسه/مقصد | وضعیت و مرز |
-|---|---|---|
-| Contract extension | CONTRACT:C05B:001 — Product catalog snapshot/read and recommendation evidence extension | طراحی لازم، هنوز API/Schema منتشرشده نیست؛ بسط دامنه‌ای CONTRACT:C01:02 است، مالک عمومی API Core و مالک داده Core Catalog؛ معنای خدمت را از C05a مصرف می‌کند. |
-| Dependency | TASK:C05B:001 → CONTRACT:C01:01 | HARD برای طراحی مالکیت/مرز داده؛ قرارداد پذیرفته‌شده بازیافت می‌شود. |
-| Dependency | TASK:C05B:002 → TASK:C05B:001 | HARD؛ استخراج پیش از مدل منبع/فیلد، ادغام خودکار نمی‌شود. |
-| Dependency | TASK:C05B:003 → TASK:C05B:001/002 | HARD؛ انتشار بدون هویت، منشأ و اعتبارسنجی ممنوع در برنامه است. |
-| Dependency | TASK:C05B:004 → TASK:C05B:003 و CONTRACT:C01:02 | CONTRACT؛ خواندن فقط Snapshot معتبر از API نسخه‌دار. |
-| Dependency | TASK:C05B:005 → TASK:C05B:003/004 و TASK:CORE:004 | HARD/CONTRACT؛ محاسبه بر Snapshot معتبر، منطق scorer و golden semantics C01 حفظ می‌شوند. |
-| Handoff ورودی | Handoff:H05A:002 / CAN:C05A:040 → C05b | ACCEPTED_BY_SCOPE؛ کاتالوگ محصول بانکی در این بسته پوشش یافت. تأیید کد/قرارداد اجرایی مقصد هنوز انجام نشده است. |
-| Handoff خروجی | Handoff:H05B:001 → R06 | دانش حقوقی/صلاحیت سند/تفسیر مقرره به R06؛ C05b فقط منشأ و ارجاع محصول را نگه می‌دارد. برای مدل و داده محصول blocker نیست. |
-| Handoff خروجی | Handoff:H05B:002 → A06 | نقشه رابط و پایش تغییر UI؛ Product Catalog منبع دانش UI نمی‌شود. |
-| Handoff خروجی | Handoff:H05B:003 → A04 | امکان‌سنجی پلتفرم و مسیر Computer Use؛ C05b API اجرای بانکی ایجاد نمی‌کند. |
-| Handoff خروجی | Handoff:H05B:004 → بسته Assistant هنوز تخصیص‌نیافته | B:1635 مصرف آتی مجاز را بیان می‌کند؛ بسته دقیق A01–A08 تا تدوین مقصد نامعلوم است و پذیرش مقصد در همان بسته لازم خواهد بود. |
-| عدم چرخه | C05a / C05b | C05a تعریف خدمت و API خواندن خدمات را مالک است؛ C05b تعریف محصول/داده بانکی را مالک است. ارجاع به شناسه خدمت قرارداد مصرفی است، نه وابستگی دوسویه الزام‌آور؛ جزئیات schema میان دو بسته DECISION می‌ماند. |
-
-#### تصمیم‌های باز و تعارض
-
-| شناسه | تصمیم باز و شاهد | اثر و زمان تعیین تکلیف |
-|---|---|---|
-| DECISION:C05B:001 | فهرست دقیق بانک/مؤسسه/منبع، وضعیت مجوز دسترسی/نگهداری/Attribution هر منبع؛ B:1563، B:1566، B:1592؛ مالک اجرایی نام‌برده نشده. | پیش از فعال‌کردن هر منبع؛ تا آن زمان منبع نامعلوم یا نامجاز ingest/publish نمی‌شود. |
-| DECISION:C05B:002 | بودجه تازگی، دوره/ساعت پایش و نقطه انتقال به نیازمند بازاعتبارسنجی؛ B:1563، B:1582، B:1594؛ اعداد مصوب وجود ندارد. | پیش از زمان‌بندی production؛ مثال ساعت یا بازه از متن مصوب فرض نمی‌شود. |
-| DECISION:C05B:003 | Schema نهایی، واحدها، تبدیل/نرمال‌سازی، داده گمشده/نامعلوم و قواعد واجدشرایط‌بودن؛ B:1609 و B:1629؛ بخشی از تصمیم‌های فنی باز. | پیش از تکمیل مهاجرت/انتشار رکورد؛ هیچ مقدار یا قاعده استحقاقی از خود برنامه ساخته نمی‌شود. |
-| DECISION:C05B:004 | آستانه اعتبارسنجی، نقش/بازبین تعارض، معیار کامل‌بودن و اجازه انتشار؛ B:1567، B:1582؛ نقش سازمانی نامشخص. | پیش از انتشار Snapshot؛ داده نامطمئن تا آن زمان در حالت hold باقی می‌ماند. |
-| DECISION:C05B:005 | Schema/نسخه دقیق API بانک، MCP یا CONTRACT:C05B:001 و ماتریس سازگاری مصرف‌کننده؛ B:1590–1594، B:1629، B:2075. | پیش از پیاده‌سازی/استقرار مصرف‌کننده؛ API بانک اختیاری است و API داخلی Core باید با C01:02 هماهنگ شود. |
-| تعارض حل‌نشده | صفر تعارض صریح بین Blueprint و Wallet برای دامنه C05b احراز شد. | موارد بالا سؤال‌های بی‌پاسخ/جزئیات اجرایی‌اند، نه تعارضی که با حدس حل شده باشد. |
-
-#### گیت‌های برنامه‌ریزی RA و IPA
-
-| کنترل | نتیجه و شاهد |
-|---|---|
-| P0 — حفاظت و منبع | PASS؛ PR #251 Open بود؛ خط مبنای سند/شاخه و SHAهای blob مرجع ثبت شد؛ Blueprint و Wallet مطابق گراف‌گزارش و blobهای پین‌شده خوانده شدند؛ C01–C05a به‌عنوان baseline مصرف شدند؛ فایل تغییرکرده در PR فقط سند برنامه بود. |
-| P1-GLOBAL | PASS (REUSED)؛ G1/پوشش سراسری از پذیرش برنامه و Scope View C05a بازیافت شد؛ در این بسته ادعای بازاجرای ممیزی جهانی یا تغییر Graphify نیست. |
-| P1-PACKAGE — Scope View | PASS؛ CAN:C05B:001–040، برابر 40/40 نامزد، دارای شاهد و تعیین تکلیف‌اند؛ OWNED/REUSED/DEPENDENCY/HANDOFF/CROSS_REFERENCE/OUTSIDE از هم جدا هستند؛ نامزد بی‌تعیین‌تکلیف صفر. |
-| P2 — RA | PASS؛ 15 Requirement جدید اتمی به متن مصوب/شاهد دقیق وصل‌اند؛ دو Requirement C01 و قراردادهای C01/C02/C03 بازیافت شدند؛ داده Wallet نامرتبط حذف شد؛ فناوری، نرخ، آستانه، owner فردی یا قاعده scoring تازه جعل نشد؛ تعارض مسدودکننده صفر. |
-| P3 — IPA Task path | PASS؛ 3 Enabler → 5 Task → 15 Subtask؛ تمام 15 Requirement جدید به AC/Test و Task وصل‌اند؛ REQ:CORE:008/:009 به Task موجود C01:004 ارجاع می‌شوند، نه Task تکراری. |
-| P4 — AC/Test | PASS؛ 15 AC و 15 Test مستقل؛ 45 Test Case مثبت/منفی/مرزی؛ هر Test دارای Fixture/Action/Oracle و شناسه‌های یکتا است. این‌ها تعریف آزمون آینده‌اند؛ اجرا نشدند. |
-| P5 — Contract/Dependency/Handoff | PASS؛ CONTRACT:C05B:001 به‌عنوان specialization طرحی از C01:02 مشخص شد؛ 5 dependency جهت‌دار، 4 Handoff خروجی و Handoff ورودی C05a ثبت شد؛ graph وظایف DAG است؛ مالکیت Core/C05a/C02/C03/R06/A04/A06/Wallet جداست؛ چرخه HARD/CONTRACT مسدودکننده صفر. |
-| P6 — Structural/Trace/Readback | PASS؛ کنترل برنامه‌ای متن نهایی: یکتایی شناسه، تعداد Candidate/REQ/AC/Test/Test Case، اتصال دوسویه REQ و آزمون، تعیین تکلیف تمام نامزدها، Source citation برای هر Requirement، شمار Story/Task/Subtask و ثبات مرز PR؛ 8/8 کنترل مستنداتی PASS. بازخوانی دستی شاهدهای حساس Snapshot، API اختیاری، Core ownership و داده حساب‌محور انجام شد. این ممیزی مستقل شخص دیگر نیست. |
-| جمع نتیجه | RA=PASS / IPA=PASS در سطح پذیرش برنامه. اجرای Product Test، Build، Migration، Container، Browser و استقرار در این بسته صفر است. |
-
-**عیب‌یابی اولیه:** بازبینی اولیه دو خطر پوشش را یافت: تداخل با کاتالوگ خدمت C05a و امکان تلقی API بانکی به‌عنوان مسیر اجباری. اصلاح نهایی مرز Service Catalog و Product Catalog را صریح کرد و API داده بانکی را مکمل اختیاری نگه داشت. دو مورد، نقص مسدودکننده باقیمانده نیستند؛ هیچ مصوبه قبلی تغییر نکرد.
-
-#### ماتریس مستقل Candidate → Requirement → Task → AC → Test
-
-| Candidate | Classification | Requirement / disposition | Task | AC | Test | Status |
-|---|---|---|---|---|---|---|
-| CAN:C05B:001–002 | OWNED | REQ:CORE:226 | TASK:CORE:C05B:001 | AC:CORE:C05B:001 | TEST:CORE:C05B:001 | CLOSED |
-| CAN:C05B:003 | OWNED | REQ:CORE:239 | TASK:CORE:C05B:005 | AC:CORE:C05B:014 | TEST:CORE:C05B:014 | CLOSED |
-| CAN:C05B:004 | OWNED/REUSED | REQ:CORE:234; reuse REQ:CORE:009 | TASK:CORE:C05B:003/TASK:CORE:004 | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | CLOSED |
-| CAN:C05B:005–008 | OWNED | REQ:CORE:228–229,235 | TASK:CORE:C05B:001/002/004 | AC:CORE:C05B:003–004/010 | TEST:CORE:C05B:003–004/010 | CLOSED |
-| CAN:C05B:009,011 | OWNED | REQ:CORE:227,230 | TASK:CORE:C05B:001/002 | AC:CORE:C05B:002/005 | TEST:CORE:C05B:002/005 | CLOSED |
-| CAN:C05B:010 | OWNED | REQ:CORE:231 | TASK:CORE:C05B:002 | AC:CORE:C05B:006 | TEST:CORE:C05B:006 | CLOSED |
-| CAN:C05B:012–016 | OWNED | REQ:CORE:232–234,240 | TASK:CORE:C05B:003/005 | AC:CORE:C05B:007–009/015 | TEST:CORE:C05B:007–009/015 | CLOSED |
-| CAN:C05B:017–019 | OWNED | REQ:CORE:235–236 | TASK:CORE:C05B:004 | AC:CORE:C05B:010–011 | TEST:CORE:C05B:010–011 | CLOSED |
-| CAN:C05B:020–022 | OWNED/DECISION | REQ:CORE:227,237; DECISION:C05B:003 | TASK:CORE:C05B:001/004 | AC:CORE:C05B:002/012 | TEST:CORE:C05B:002/012 | CLOSED_WITH_OPEN_DECISION |
-| CAN:C05B:023–024 | REUSED | REQ:CORE:008; CONTRACT:C01:02 | TASK:CORE:004/TASK:CORE:C05B:005 | AC:CORE:C01:008 | TEST:CORE:C01:008 | REUSED |
-| CAN:C05B:025 | OWNED | REQ:CORE:238 | TASK:CORE:C05B:005 | AC:CORE:C05B:013 | TEST:CORE:C05B:013 | CLOSED |
-| CAN:C05B:026–027 | REUSED | REQ:CORE:008–009; CONTRACT:C01:02/:03/:04 as applicable | TASK:CORE:004/TASK:CORE:C05B:004–005 | AC:CORE:C01:008/:009 | TEST:CORE:C01:008/:009 | REUSED |
-| CAN:C05B:028–029 | OWNED | REQ:CORE:239–240 | TASK:CORE:C05B:005 | AC:CORE:C05B:014–015 | TEST:CORE:C05B:014–015 | CLOSED |
-| CAN:C05B:030 | OWNED | REQ:CORE:226 | TASK:CORE:C05B:001 | AC:CORE:C05B:001 | TEST:CORE:C05B:001 | CLOSED |
-| CAN:C05B:031–032 | DEPENDENCY | Handoff:H05A:002 accepted by scope; C01:02 contract boundary | TASK:CORE:C05B:001/004 | Existing | Existing | ACCEPTED_BY_SCOPE |
-| CAN:C05B:033–037 | HANDOFF/CROSS_REFERENCE | C05a, C02/C04/R02, A04/A06, R06, future Assistant; no duplicate REQ | No owner transfer | — | — | RECORDED |
-| CAN:C05B:038–040 | OUTSIDE | W:749–852, W:807, W:1205–1219; C09/C12a/C12b/C13b | — | — | — | CLOSED_WITH_REASON |
-
-ردیابی معکوس نیز کنترل شد: هر REQ جدید از شاهد مشخص به یک Task، یک AC و یک Test می‌رسد؛ هر Test دقیقاً یک رفتار C05b یا مورد بازیافتی را می‌سنجد. تمام نامزدها تعیین تکلیف شدند و هیچ آزمون محصولی در ممیزی اجرا نشد.
-
-#### سنجش روش Graph-First
-
-| شاخص | مقدار/وضعیت | روش یا محدودیت |
-|---|---|---|
-| گره‌های ساختاری/معنایی محدوده مستقیم | 4 / 26 | از JSON گراف، B:1557–1636 |
-| رابطه فعال بین گره‌های محدوده | 23 | مسیر کشف؛ رابطه نموداری به‌تنهایی مصوبه نیست |
-| نامزدهای C05b بررسی‌شده | 40 | Scope View نهایی |
-| Graph Discovery Coverage | NOT_MEASURED | مخرج مستقل کاملِ نامزدهای معتبر قابل احراز نبود |
-| Graph Evidence Precision | NOT_MEASURED | نمونه‌گیری سراسری رسمی از همه یافته‌های واژگانی اجرا نشد |
-| Requirement بازیافتی | 2 | REQ:CORE:008 و :009 از C01 |
-| قراردادهای مشترک بازیافتی | 6 | C01:01–04 و C02:02–03؛ دامنه مالکیت تغییر نکرد |
-| تکرار جلوگیری‌شده | 2 Requirement | منطق scorer/Snapshot جدید تولید نشد؛ C05a Service Catalog و C04 billing تکرار نشدند |
-| Traceability Coverage | 100% از REQهای جدید | 15/15 Requirement به Task/AC/Test وصل‌اند |
-| RA defects / IPA defects باقی‌مانده | 0 / 0 | پس از اصلاح نهایی |
-| Rework cycles | 1 اصلاح متنی | دو خطر مرزی رفع شد؛ چرخه خارجی/CI محسوب نمی‌شود |
-| Extraction time / Total planning time | NOT_MEASURED | زمان‌بندی جداگانه ثبت نشده است |
-
-#### حفاظت و وضعیت بسته
-
-فقط همین سند برنامه در این Commit تغییر می‌کند. Blueprint، Wallet، گراف، CI، Registry بیرونی و کد محصول تغییر نکردند؛ ساخت مجدد Graphify، اجرای تست محصول، Migration، Build، Image، Compose، سرویس دیتابیس/Redis، Browser/E2E، Deploy و انتشار انجام نشد. موارد اجرایی آینده به تصمیم‌ها و گیت‌های مستقل خود وابسته‌اند.
-
-### C06 — پوسته سوپراپ و UI مشترک
-
-**هویت، دامنه و مالکیت:** C06 مالک پوسته و ناوبری مشترک است: صفحهٔ اصلی حوزه‌محور، قاب گفت‌وگو، انتخاب نقش و slotهای عمومی رابط. تیم و فناوری اجرایی در منابع نامشخص‌اند و حدس زده نمی‌شوند. C05a مالک کاتالوگ خدمت/مسیریاب؛ C02 هویت، رضایت، مجوز و نشست؛ C01/C03 قراردادهای عمومی؛ C05b دادهٔ محصول/توصیه‌گر؛ C14 سوابق/اعلان؛ C13b تجربهٔ کیف پول؛ A04 مسیر اپ/پلتفرم؛ A06 نقشه/پایش UI هستند. UI کنترل سمت سرور یا رابط تخصصی دیگر بسته‌ها را جایگزین نمی‌کند.
-
-**مبنای مصوب:** Blueprint V1.6 §§15 (B:1253–1282), فصل سوم §§1–4 (B:1393–1453). R1 شامل صفحه حوزه‌ها، گفت‌وگوی Adviser و پرسشنامه/نتیجه تعبیه‌شده است؛ Assistant مستقر نمی‌شود. پیشنهاد حوزه نشست تخصصی نمی‌سازد تا مشتری مقصد را تأیید کند؛ تغییر حوزه/نقش صریح است.
-
-#### شناسایی قطعی
-
-| ویژگی | مقدار |
-|---|---|
-| شناسه/عنوان | C06 — پوسته سوپراپ و UI مشترک |
-| وضعیت اولیه | NOT_STARTED |
-| دامنه | shell مشترک، ناوبری حوزه/نقش، قاب چت و نمایش مؤلفه‌های نوع‌دار |
-| مالکیت | C06 پوسته؛ مالکان اختصاصی C02/C01/C03/C05a/C05b/C13b/C14/A04/A06 حفظ می‌شوند |
-| وابستگی اصلی | C01:01/:02؛ C02:02/:03؛ C03:05/:06؛ C05a و C05b؛ C13b/C14؛ A04/A06 |
-| علت انتخاب | اولین بسته NOT_STARTED بعد از C05b در رجیستری 36بسته‌ای |
-
-#### Shared Discovery و شواهد
-
-HEAD مبنا 3cae38247bfc0031cd647b7b286ca269e8968389؛ PR #251 فقط سند برنامه را تغییر می‌داد. PR #253 با Merge Commit ac57fbabcd1ed2725df98db96c15266fc705b5ea در main ادغام شده است. scripts/ci/classify_changes.py بازخوانی شد: در pull_request، ref فعلی شاخه مقصد را fetch می‌کند و با HEAD می‌سنجد؛ خروجی‌های docs_only/has_docs/run_quality/run_security/run_images/run_us13 را می‌سازد.
-
-JSONهای موجود knowledge-graph/phase2-reference-docs از main در commit 16377d3767d75de3ae4363cfc897a388f3caa412 مصرف شدند؛ گراف بازسازی/تغییر نشد. GRAPH_REPORT و graph_stats منبع را با SHA-256 Blueprint=0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266 و Wallet=8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74 پین می‌کنند؛ blobهای خوانده‌شده همان نسخه‌های مرجع ثبت‌شده در برنامه‌اند و اختلافی یافت نشد. گراف: 1,180 گره، 1,345 یال؛ validation PASS، issue_count=0. نمای مشترک: B:1253–1293, B:1393–1453, B:1017–1056, W:130–449, W:459–565, W:1161–1185. بازیابی گراف 5 گره معنایی در B:1253–1283 و 34 گره مجاور در B:1393–1481 را نشان داد. متن هر نامزد بازخوانی شد؛ INFERRED/AMBIGUOUS مبنای الزام نبود. نامزد C06: 22 بررسی‌شده؛ 16 REQ، 6 reuse/handoff/outside. زمان/مخرج مستقل برای Precision/Coverage موجود نیست: NOT_MEASURED.
-
-#### رجیستری موقت نامزدها
-
-| Candidate | شاهد | تعیین‌تکلیف/مالک نهایی |
-|---|---|---|
-| CAN:C06:001 | B:1253 | خانه/آیکن حوزه — REQ:001 |
-| CAN:C06:002 | B:1281 | پیشنهاد حوزه و تأیید مشتری — REQ:002 |
-| CAN:C06:003 | B:1253 | پروفایل/تنظیمات عمومی — REQ:003 |
-| CAN:C06:004 | B:1253–1255 | انتخاب نقش، Adviser غیر اجباری — REQ:004 |
-| CAN:C06:005 | B:1255/B:1414 | Assistant خاموش در R1 — REQ:005 |
-| CAN:C06:006 | B:1281/B:1414 | ثبات حوزه و تغییر صریح نقش — REQ:006–007 |
-| CAN:C06:007 | B:1281/B:1430 | ارجاع خارج‌حوزه — REQ:008 |
-| CAN:C06:008 | B:1412/B:1281 | زمینه همان حوزه — REQ:009؛ مجوز/داده C02 |
-| CAN:C06:009 | B:1453 | slotهای عمومی چت — REQ:010 |
-| CAN:C06:010 | B:1453 | UI نوع‌دار — REQ:011؛ قرارداد C01/C03 |
-| CAN:C06:011 | B:1414/B:1443 | وضعیت/مجوز از مالک معتبر — REQ:012؛ enforcement به C02/A02 |
-| CAN:C06:012 | B:1412–1414 | نشست و پرونده — REQ:013؛ مالک C02/C03 |
-| CAN:C06:013 | B:1407/B:1478 | OTP/رمز خارج از متن مدل/log — REQ:014؛ C02 |
-| CAN:C06:014 | B:1255 | تجربه R1 — REQ:015 |
-| CAN:C06:015 | B:1453 | رسید/اعلان — REQ:016؛ C14/C13b |
-| CAN:C06:016 | B:867–907 | کاتالوگ/مسیریاب — C05a، قرارداد بازیافتی |
-| CAN:C06:017 | B:1557–1636 | محصول بانکی/توصیه — C05b |
-| CAN:C06:018 | B:1502–1522 | اپ/پلتفرم — A04، Handoff |
-| CAN:C06:019 | B:1609 | نقشه UI — A06، Handoff |
-| CAN:C06:020 | B:1190–1217 | API/مرز داده — C01/C03، Handoff |
-| CAN:C06:021 | B:1447 | اختیار نقش‌ها — C02/A02 |
-| CAN:C06:022 | B:1453 | تاریخچه/ارسال — C14 |
-
-#### Requirements اتمی و ردیابی
-
-| Requirement | شاهد/وضعیت | الزام برنامه‌ای | Task | AC/Test |
-|---|---|---|---|---|
-| REQ:CORE:C06:001 | B:1253 approved | صفحه خانه حوزه‌های فعال را به‌صورت ورودی قابل انتخاب نشان دهد. | T01 | 001 |
-| REQ:CORE:C06:002 | B:1281 approved | پیشنهاد عمومی تا تأیید مقصد نشست تخصصی نسازد. | T01 | 002 |
-| REQ:CORE:C06:003 | B:1253 approved | پروفایل/تنظیمات از قاب چت حوزه مستقل بمانند. | T01 | 003 |
-| REQ:CORE:C06:004 | B:1253–1255 approved | کاربر نقش را صریح انتخاب کند؛ Adviser اجباری نباشد. | T02 | 004 |
-| REQ:CORE:C06:005 | B:1255/B:1414 approved | Assistant در R1 غیرفعال/به‌زودی باشد و اجرا نشود. | T02 | 005 |
-| REQ:CORE:C06:006 | B:1281 approved | حوزه بدون اقدام صریح تغییر نکند. | T02 | 006 |
-| REQ:CORE:C06:007 | B:1281/B:1414 approved | نقش از متن/خروجی مدل تغییر نکند؛ تغییر نقش مجوز را دوباره بررسی کند. | T02 | 007 |
-| REQ:CORE:C06:008 | B:1281/B:1430 approved | مقصد مستقل خارج‌حوزه پیشنهاد شود و انتقال فقط با اقدام کاربر باشد. | T02 | 008 |
-| REQ:CORE:C06:009 | B:1412 approved | فقط زمینهٔ حداقلی مجاز همان حوزه از مالک خوانده شود؛ حافظه مدل مرجع پرونده نباشد. | T03 | 009 |
-| REQ:CORE:C06:010 | B:1453 approved | قاب چت slot متن، کارت، فرم، نتیجه، وضعیت، تأیید و خطا داشته باشد. | T03 | 010 |
-| REQ:CORE:C06:011 | B:1453 approved | مؤلفه پویا با قرارداد نوع‌دار معتبر باشد؛ کد دلخواه تزریق نشود. | T03 | 011 |
-| REQ:CORE:C06:012 | B:1414/B:1443 approved | وضعیت خدمت/مجوز از متن مدل نتیجه نشود؛ پاسخ مالک معتبر باشد. | T03 | 012 |
-| REQ:CORE:C06:013 | B:1412–1414 approved | انقضای نشست پرونده پایدار را حذف یا دسترسی عمومی ایجاد نکند. | T04 | 013 |
-| REQ:CORE:C06:014 | B:1407/B:1478 approved | OTP/رمز/کلید/توکن در متن مدل یا log عمومی نباشد. | T04 | 014 |
-| REQ:CORE:C06:015 | B:1255 approved | R1 تجربه Adviser و پرسشنامه/نتیجه را مصرف کند، بدون Assistant. | T05 | 015 |
-| REQ:CORE:C06:016 | B:1453 approved | رسید/اعلان با شناسه و وضعیت منبع نمایش یابد؛ مالکیت ارسال/تاریخچه منتقل نشود. | T05 | 016 |
-
-#### Enabler، Task، Subtask، AC و Test
-
-- EN:C06:001 پوسته حوزه‌محور (REQ 001–008)؛ EN:C06:002 چت نوع‌دار (009–014)؛ EN:C06:003 اتصال R1 (015–016).
-- TASK:CORE:C06:001 (T01): خانه، انتخاب حوزه، رابط عمومی؛ S01 قرارداد state/catalog؛ S02 ناوبری/بازگشت؛ S03 حوزه غیرفعال.
-- TASK:CORE:C06:002 (T02): نقش/حوزه و R1؛ S01 زبانه نقش؛ S02 اتصال C02؛ S03 ارجاع خارج‌حوزه.
-- TASK:CORE:C06:003 (T03): slotها/status؛ S01 schema مجاز؛ S02 payload خطا/ناشناخته؛ S03 وضعیت از API مالک.
-- TASK:CORE:C06:004 (T04): پرونده و ورودی امن؛ S01 نمایش پرونده؛ S02 secure input؛ S03 جداسازی log.
-- TASK:CORE:C06:005 (T05): اتصال Adviser و وضعیت مالکان؛ S01 C05b؛ S02 C14/C13b؛ S03 gate انتشار R1.
-- AC:CORE:C06:001–016 و TEST:CORE:C06:001–016، یک جفت برای هر Requirement. Oracleها به‌ترتیب: حوزه فعال قابل انتخاب؛ پیشنهاد نشست نسازد؛ رابط عمومی جدا؛ نقش مستقیم؛ Assistant خاموش؛ حوزه ثابت؛ نقش صریح؛ انتقال پس از اقدام؛ زمینه مجاز؛ مؤلفه مجاز؛ schema نامعتبر رد؛ status از API؛ پرونده باقی؛ secrets در transcript/log صفر؛ R1 فقط Adviser؛ رسید به مالک وصل. هر Test سه کیس (موفق، منفی، مرزی) دارد؛ 48 Test Case آینده. در این مأموریت اجرا نشده‌اند.
-
-#### وابستگی و Handoff
-
-قراردادهای بازیافتی C01:01/:02 و C02:02/:03؛ کاتالوگ از C05a؛ کارت/نتیجه از C05b؛ schema/telemetry از C01/C03؛ رسید/اعلان از C13b/C14؛ پلتفرم/UI map به A04/A06. فناوری، تیم، design system و معیارهای بصری تصمیم اجرایی باز هستند؛ عدد/ابزار اختراع نشده است.
-
-#### RA/IPA مستقل و وضعیت
-
-RA روی 22/22 نامزد اجرا شد: تعیین تکلیف=100%، 16 الزام مستقیم، 6 reuse/handoff/outside، تکرار=0، تعارض مسدودکننده=0. نقص اولیه: UI می‌توانست با enforcement اشتباه شود؛ REQ:012/Handoff به C02 اصلاح شد. نتیجه C06 RA=PASS، نقص باز=0.
-
-IPA روی 16/16 الزام اجرا شد: هرکدام Story/Task/Subtask/AC/Test دارند؛ ردیابی معکوس=100%؛ 5 Task، 15 Subtask، 48 Test Case مشخص؛ وابستگی چرخه‌ای=0. نقص اولیه مالک رسید/اعلان با REQ:016/Handoff C14/C13b رفع شد. نتیجه C06 IPA=PASS، نقص باز=0. این گیت فقط پذیرش برنامه است.
-
-**وضعیت:** RA=PASS / IPA=PASS / PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED. شمارنده پس از C06: 7/36 پذیرفته، 29 باقی‌مانده؛ 11 Core/Wallet، 10 RAG/Adviser، 8 Assistant.
-
-### C07 — مالکیت وجوه و مدل اعتبار
-
-**دامنه و مالکیت:** این بسته مالک معنای کیف پول اصلی، مالکیت مانده، جدایی بُعد شخص/سازمان از منشأ اعتبار، حالت‌های موجودی و حقوق اعتبار وابسته به منشأ است. مالک منطقی در Core؛ تیم اجرا نامشخص. C02 هویت/عضویت، C01/C03 قراردادهای مشترک، C08 شارژ/هدیه، C09 مصرف/رزرو، C10 انتقال/برداشت، C11a اصلاح/استرداد، C12a دفترکل، C12b تطبیق، C13a تسویه/حسابداری و C13b رابط کیف پول را مالک‌اند. انتخاب بانک، schema دفترکل و احراز انطباق در این بسته انجام نمی‌شود.
-
-#### شناسایی
-
-| ویژگی | مقدار |
-|---|---|
-| شناسه/عنوان | C07 — مالکیت وجوه و مدل اعتبار |
-| وضعیت اولیه | NOT_STARTED |
-| دامنه | کیف پول، تعهد مشتری، منشأ/مالکیت اجزای اعتبار، حقوق و معنای موجودی |
-| وابستگی | C02:01/:02؛ C01:01/:05/:07؛ C03:01/:04؛ C08–C13b |
-| علت انتخاب | دومین بسته NOT_STARTED پس از C05b در رجیستری رسمی |
-
-#### Graph-First مشترک
-
-همان زیرگراف مشترک C06/C07 استفاده شد؛ شواهد نسخه و CI در فصل C06 آمده‌اند. از گراف معنایی 84 گره در W:100–455 (56)، W:455–565 (14)، W:1160–1190 (7)، B:1017–1058 (7) بررسی شد و متن منبع بازخوانی شد. 35 ردیف نامزد/شاهد بررسی شد؛ چند شاهد به REQ واحد تجمیع شدند. فقط متن تأییدشده مبنای الزام شد؛ روابط INFERRED/AMBIGUOUS مبنا نبودند.
+- **AC `AC:CORE:C02:041`**؛ Task: `TASK:CORE:C02:004`؛ Given: Given the exact actor, organization/session and state addressed by REQ REQ:CORE:090 ('تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.'), using synthetic identities and the owning task boundary: Consent, sessions and cross-domain boundaries.؛ When: The actor attempts the specific action governed by REQ REQ:CORE:090: تغییر نقش فقط با اقدام صریح کاربر انجام شود؛ مجوزهای نقش جدید دوباره ارزیابی شوند و مدل حق حدس یا تغییر خودکار نقش و حوزه را ندارد.؛ Then: The authoritative Core state enforces this exact clause: تغییر نقش 
+... 714821 bytes omitted ...
+ر W:100–455 (56)، W:455–565 (14)، W:1160–1190 (7)، B:1017–1058 (7) بررسی شد و متن منبع بازخوانی شد. 35 ردیف نامزد/شاهد بررسی شد؛ چند شاهد به REQ واحد تجمیع شدند. فقط متن تأییدشده مبنای الزام شد؛ روابط INFERRED/AMBIGUOUS مبنا نبودند.
 
 | Candidate | Source | Package A | Package B | Existing Owner | Final Owner | Disposition |
 |---|---|---|---|---|---|---|
@@ -6077,14 +2844,12 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 | CPA-07 Traceability | PASS | 28 R با منبع، Story/E, Task/Subtask, AC, TD، سه TC و dependency؛ reverse links کامل |
 | CPA-08 مصوبات قبلی | PASS | C02/C03/C04/C11a/C11b/C12a/C12b/C13a و دو سند مرجع حفظ؛ historical registry records دست‌نخورده |
 
-**شمارنده و شاهد ممیزی:** C13b و C14 طبق سابقه بالا. R01 تا R04 هرکدام: 10 Candidate/Requirement، 4 Story/Enabler، 5 Task، 15 Subtask، 10 AC/TD و 20 planned TC. مجموع RAG پذیرفته‌شده: 40 Candidate، 40 Requirement، 16 Story/Enabler، 20 Task، 60 Subtask، 40 AC/TD و 80 planned TC. کل بسته‌ها 22/36 پذیرفته‌اند؛ Product tests اجرا نشده‌اند؛ precision و زمان واقعی NOT_MEASURED.
-
-**شمارنده کل:** 22/36 بسته پذیرفته‌شده برنامه‌ریزی، 14/36 باقی‌مانده؛ Core/Wallet=18/18، RAG/Adviser=4/10، Assistant=0/8. محصول NOT_IMPLEMENTED / NOT_EXECUTED.
+**Checkpoint زمان تدوین R01–R04 (تاریخی):** شمارنده آن مأموریت ۲۲/۳۶ بود؛ تاریخچه حفظ شده است. وضعیت جاری پس از R05/R06 در Checkpoint جاری انتهای فصل RAG ثبت می‌شود. Product tests اجرا نشده‌اند؛ precision و زمان واقعی NOT_MEASURED.
 ---
 
 ## ۲. برنامه RAG / Adviser — ۱۰ بسته
 
-این بخش پس از تدوین واقعی هر بسته با همان زنجیره Source → Requirement → Story → Task/Subtask → AC/Test و وابستگی به Core تکمیل می‌شود. هیچ خروجی تکمیل‌نشده‌ای پذیرفته تلقی نشود.
+R01–R06 دارای بسته‌بندی، ممیزی و وضعیت مستقل‌اند؛ R07–R10 تا تدوین و عبور از گیت‌های خود NOT_STARTED می‌مانند. هیچ خروجی بسته‌ای از PASS بسته دیگر استنباط نمی‌شود.
 ### R01 — پذیرش خدمت، فهم پرسش و مسیریابی بازیابی ریسک‌محور
 
 **وضعیت:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`. این بسته دامنه پذیرش خدمت، فهم نیاز و انتخاب مسیر Adviser را می‌پوشاند؛ منطق پاسخ/استناد نهایی و چرخه دانش کامل در بسته‌های بعدی تکمیل می‌شوند.
@@ -6607,11 +3372,406 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 **تصمیم‌های باز حفظ‌شده:** schema فیزیکی و مهاجرت؛ فناوری ذخیره‌سازی/نمایه؛ زمان‌بند/صف؛ تناوب و آستانه‌های پایش/تازگی؛ مدت نگهداری artifact؛ فهرست نهایی منابع و مجوز تک‌تک آن‌ها؛ SLA و معیار عددی پذیرش. این بسته هیچ‌کدام را تصویب نمی‌کند.
 
 
-### R05 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### R05 — بازیابی چندمرحله‌ای و سنجش کفایت شواهد
 
-### R06 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**وضعیت:** `RA=PASS` / `IPA=PASS`؛ `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+**Scope و مرز مالکیت:** اجرای read-only جست‌وجو روی Snapshot منتشرشده، تولید candidate با روش‌های مجاز، حفظ زمینه ساختاری، اعمال eligibility و relation gates، محاسبه پوشش/کفایت/تازگی و بازیابی محدود/کش معتبر. R01 مالک admission/query decomposition/routing است؛ R02 مالک source access/ingestion؛ R03 مالک canonical document/version/evidence/relation/Snapshot/lineage؛ R04 مالک discovery/source catalog. R05 مالک schema ذخیره‌سازی یا منبع حقیقت هیچ‌یک نیست.
+
+**مالکیت منطقی:** Adviser Retrieval Planner/Execution؛ Eligibility Filter؛ Evidence Sufficiency Adapter؛ Freshness/Recovery/Cache adapters. C01 authenticity/contract، C02 permission، C05b service evidence contract و R03 canonical records مالکیت خود را حفظ می‌کنند.
+
+**وابستگی:** R01 query need + route; R02 source-access result only when router requests live path; R03 published Snapshot/versions/relations/evidence; R04 check outcome; C05b service evidence contract; C01/C02 gates. DAG: R01→R05; R05→R01 for follow-up decision; R05→R02 authorized acquisition via R01 only; R03/R04/C05b are dependencies, not owner transfers.
+
+**منابع پین‌شده:** Blueprint SHA-256 `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266`؛ Wallet SHA-256 `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`. گراف از `main` همان منبع‌ها را پین می‌کند؛ validation سراسری PASS.
+
+
+**گراف R05:** ۲۳ گره معنایی منتخب از گراف `main` و ۳۵ یال incident (۱۸ `EXTRACTED`، ۱۷ `INFERRED`) برای کشف مسیر retrieval، sufficiency، freshness، relation، budget و cache مرور شد؛ تمام IDها در `semantic/graph.json` resolve شدند. گراف validation=PASS؛ روابط INFERRED فقط مسیر مرور دادند و هیچ Requirement بر آن‌ها متکی نیست. queryهای Graphify: `query "retrieval ranking search index lexical semantic retrieval query"` و `query "legal scope applicability conflict resolution evidence sufficiency claim citation"`.
+
+**Candidate / Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک رفتار | Enabler / Task | AC / Test | Disposition |
+| --- | --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R05:001 / REQ:RAG:R05:001 | نتیجه هر عملیات بازیابی به Snapshot شناسه‌دار آغاز همان عملیات مقید بماند و فقط اعضای منتشرشده و سازگار آن خوانده شوند. | B:252, 3.9.5:504; ADR-RAG-20:364–367; ADR-RAG-28:404–407; Graph nodes: `docs_shahab_phase_2_development_blueprint_knowledge_base`, `docs_shahab_phase_2_development_blueprint_adr_rag_28` | Knowledge Snapshot consumer (R03 owns data and active pointer) | EN:RAG:R05:001 / TASK:RAG:R05:001 | AC:RAG:R05:001 / TEST:RAG:R05:001 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:002 / REQ:RAG:R05:002 | برای هر نیاز اطلاعاتی ورودی، مسیر جست‌وجوی ساختاری، فراداده، واژگانی و معنایی را با provenance روش اجرا نگه دارد؛ موتور/مدل خاصی از پیش تثبیت نشود. | B:123–131; 3.1:72–86; §3.4:223–230; ADR-RAG-03:279–282; Graph nodes: `docs_shahab_phase_2_development_blueprint_query_understanding_router`, `docs_shahab_phase_2_development_blueprint_risk_based_routing_rules` | Retrieval Planner / Adviser | EN:RAG:R05:002 / TASK:RAG:R05:002 | AC:RAG:R05:002 / TEST:RAG:R05:002 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:003 / REQ:RAG:R05:003 | بازیابی قطعه باید شناسه نسخه و جایگاه دقیق در ماده/تبصره/جدول/سرستون/پاورقی و زمینه لازم برای فهم را حفظ کند؛ مرجع provision و raw artifact را R03/R02 نگه می‌دارند. | B:125–131, 3.7:252; ADR-RAG-15:339–342; ADR-RAG-11:319–323; Graph nodes: `docs_shahab_phase_2_development_blueprint_answer_generation_citation_guard`, `docs_shahab_phase_2_development_blueprint_adr_rag_15` | Evidence Context Assembler (R02 owns extraction; R03 owns evidence IDs) | EN:RAG:R05:002 / TASK:RAG:R05:002 | AC:RAG:R05:003 / TEST:RAG:R05:003 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:004 / REQ:RAG:R05:004 | پیش از رتبه‌بندی نهایی، اصالت، نقش/صلاحیت منبع، قلمرو موضوعی/بانک/محصول، زمان اعتبار و کیفیت شاهد به‌عنوان قیود مستقل اعمال شوند؛ امتیاز ارتباط این قیود را جبران نکند. | B:75–86, 3.4:225–233; ADR-RAG-06:294–298; ADR-RAG-23:379–383; ADR-RAG-30:414–418; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_06`, `docs_shahab_phase_2_development_blueprint_adr_rag_23`, `docs_shahab_phase_2_development_blueprint_adr_rag_30` | Evidence Eligibility Filter (C01 owns authenticity; R03 owns legal state) | EN:RAG:R05:002 / TASK:RAG:R05:003 | AC:RAG:R05:004 / TEST:RAG:R05:004 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:005 / REQ:RAG:R05:005 | گسترش بازیابی از رابطه حقوقی فقط با LegalRelation تأییدشده و endpoint نسخه‌دار انجام شود؛ رابطه موضوعی یا مبهم تنها سرنخ review باشد. | B:218–233, 3.7:254; ADR-RAG-06:294–298; R03 REQ:RAG:R03:006; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_06`, `docs_shahab_phase_2_development_blueprint_rde` | Legal Relation Retrieval Adapter (R03 owns relation records) | EN:RAG:R05:002 / TASK:RAG:R05:003 | AC:RAG:R05:005 / TEST:RAG:R05:005 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:006 / REQ:RAG:R05:006 | برای هر service/query need، فیلدهای شواهد ضروری از قرارداد سرویس خوانده و فقط شکاف‌های همان نیاز برای بازیابی تکمیلی بازگردانده شوند؛ سیاست/فیلد خدمت جدید اختراع نشود. | ADR-RAG-10:314–318; ADR-RAG-16:344–348; B:1604–1625; C05b CONTRACT:C05B:001; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_16`, `docs_shahab_phase_2_development_blueprint_catalog_service_metadata` | Coverage Checker (C05b owns product/service evidence definition) | EN:RAG:R05:002 / TASK:RAG:R05:003 | AC:RAG:R05:006 / TEST:RAG:R05:006 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:007 / REQ:RAG:R05:007 | کفایت شواهد را برای هر ادعای مؤثر جدا بسنج؛ تعداد قطعه‌ها یا mirrorهای یک منبع را شاهد مستقل حساب نکن و تعارض حل‌نشده را حفظ کن. | B:86, ADR-RAG-07:299–303; ADR-RAG-23:379–383; C06; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_07`, `docs_shahab_phase_2_development_blueprint_adr_rag_23` | Evidence Sufficiency Evaluator (R06 owns answer disposition) | EN:RAG:R05:003 / TASK:RAG:R05:004 | AC:RAG:R05:007 / TEST:RAG:R05:007 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:008 / REQ:RAG:R05:008 | آخرین بررسی موفق، اعتبار حقوقی، سطح اطمینان نبود تغییر و الزام تازگی خدمت/ادعا جدا بمانند؛ ادعای «فعلی» فقط وقتی شرط Freshness Policy برقرار است مجاز شود. | B:82–86, 3.6:244–250; ADR-RAG-35:439–443; ADR-RAG-05:289–292; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_35`, `docs_shahab_phase_2_development_blueprint_document_revalidation_service`, `docs_shahab_phase_2_development_blueprint_adr_rag_05` | Freshness Evidence Adapter (R01 owns routing choice; R04 check observations) | EN:RAG:R05:003 / TASK:RAG:R05:004 | AC:RAG:R05:008 / TEST:RAG:R05:008 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:009 / REQ:RAG:R05:009 | بودجه/شرط توقف و شکست retrieval طبق policy نسخه‌دار محدود شود؛ failover فقط به منبع یا روش مجاز و هم‌صلاحیت با پوشش/تازگی کافی، بدون unbounded retry. | B:81–86, ADR-RAG-09:309–313; ADR-RAG-10:314–318; ADR-RAG-21:369–373; ADR-RAG-36:444–448; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_09`, `docs_shahab_phase_2_development_blueprint_adr_rag_10`, `docs_shahab_phase_2_development_blueprint_adr_rag_36`, `docs_shahab_phase_2_development_blueprint_adr_rag_21` | Retrieval Recovery Policy (R01 owns routing; R02 executes source access) | EN:RAG:R05:004 / TASK:RAG:R05:005 | AC:RAG:R05:009 / TEST:RAG:R05:009 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R05:010 / REQ:RAG:R05:010 | کش retrieval فقط با Snapshot، نسخه مشتقات، زمان/قلمرو، service و scope مجاز کاربر key شود و با تغییر معتبر فقط ورودی‌های متأثر invalidate شوند. | ADR-RAG-12:324–328; ADR-RAG-17:349–353; ADR-RAG-26:394–398; R03 REQ:RAG:R03:009; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_17`, `docs_shahab_phase_2_development_blueprint_adr_rag_26`, `docs_shahab_phase_2_development_blueprint_adr_rag_12` | Retrieval Cache Adapter (R03 owns lineage; C02 owns permission/scope) | EN:RAG:R05:001 / TASK:RAG:R05:005 | AC:RAG:R05:010 / TEST:RAG:R05:010 | ACCEPTED / source-backed; reopened only by this scoped audit |
+
+
+**Enablerها:**
+
+| ID | خروجی | Requirements | معیار تحقق |
+| --- | --- | --- | --- |
+| EN:RAG:R05:001 | پاسخ بازیابی همیشه به شواهد منتشرشده و Snapshot ثابت متصل باشد. | REQ:RAG:R05:001,010 | نتایج و cache هرگز snapshot/user scope را مخلوط نکنند. |
+| EN:RAG:R05:002 | کاندیداهای بازیابی چندروش و ساختاری با قواعد صلاحیت و relation محدود شوند. | REQ:RAG:R05:002–005 | روش/مدل باز؛ candidate relation حکم حقوقی نمی‌شود. |
+| EN:RAG:R05:003 | کفایت هر claim/service need و تازگی آن سنجیده شود. | REQ:RAG:R05:006–008 | gap، conflict، validity و last-check جدا گزارش می‌شوند. |
+| EN:RAG:R05:004 | بازیابی زیر بودجه، شکست ایمن و invalidation دقیق انجام دهد. | REQ:RAG:R05:009–010 | no unbounded retry؛ فقط dependency های متاثر invalidate شوند. |
+
+
+**Taskها و خروجی اجرایی:**
+
+| Task ID / هدف | مالک | Requirements | وابستگی | خروجی و completion oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R05:001 — Snapshot-bound retrieval input and candidate contract | Adviser Retrieval | REQ:RAG:R05:001 | R03 published Snapshot/DocumentVersion/Provision refs; CONTRACT:C01:02 | query context binds snapshot_id, source version, scope and evidence result; repeat readers see one snapshot |
+| TASK:RAG:R05:002 — Hybrid candidate generation and structural context | Adviser Retrieval / Index Adapter | REQ:RAG:R05:002–003 | R01 information needs; R02 extracted text; R03 evidence/provision references | method-tagged candidates preserve structural parent, table headers, page/span, version; no model/backend selected |
+| TASK:RAG:R05:003 — Eligibility, relation expansion and service coverage | Eligibility Filter / Coverage Checker | REQ:RAG:R05:004–006 | C01 authenticity; R03 relation states; C05b service evidence contract; ADR-RAG-30/16 | candidate eligibility, confirmed relation traversal and per-need missing field list with reasons |
+| TASK:RAG:R05:004 — Claim-level sufficiency and freshness evidence | Evidence Sufficiency Evaluator | REQ:RAG:R05:007–008 | R01 route policy; R03 validity/version; R04 last-success observations | per-claim state, independent-source lineage and separate currentness evidence; no thresholds invented |
+| TASK:RAG:R05:005 — Budgeted recovery and validity-aware cache | Recovery/Cache adapters | REQ:RAG:R05:009–010 | R01 route/stop; R02 authorized access/failure; R03 lineage; C02 permission scope | bounded attempt trace, permitted equivalent fallback, exact cache key contract and selective invalidation |
+
+
+**Subtaskها:**
+
+| Subtask | خروجی مستقل قابل بازبینی | ورودی / dependency | Requirements | Oracle / test link |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R05:001.S01 | تعریف ورودی read-only retrieval و pin کردن snapshot/version در شروع هر query. | R01 need; R03 active pointer | R05:001 | TC:P/N/B/F snapshot consistency oracle |
+| TASK:RAG:R05:001.S02 | تعریف eligibility فقط برای memberهای published و سازگار. | R03 status gate; C01 authenticity | R05:001 | candidate/review excluded; R03 remains data owner |
+| TASK:RAG:R05:001.S03 | تعریف cursor/pagination که snapshot یک request را عوض نکند. | snapshot-pinned query context | R05:001 | S0/S1 concurrent-page fixtures |
+| TASK:RAG:R05:002.S01 | تعریف candidate provenance per method: structural, metadata, lexical, semantic. | R01 subquery; configured retrieval policy | R05:002 | configured methods only; method-specific result |
+| TASK:RAG:R05:002.S02 | تعریف ترکیب candidateها بدون تثبیت مدل/embedding/reranker. | method-tagged candidates | R05:002 | model choice remains OPEN |
+| TASK:RAG:R05:002.S03 | بازگرداندن exact source span, parent provision, table/header/footnote context. | R02 extraction; R03 EvidenceUnit | R05:003 | raw hash and location resolve |
+| TASK:RAG:R05:003.S01 | اعمال authority/authenticity/scope/time/quality gates پیش از relevance rank. | C01 source trust; R03 temporal relation | R05:004 | out-of-scope/high score rejected |
+| TASK:RAG:R05:003.S02 | گسترش traversal فقط از relation confirmed با endpoint versioned. | R03 LegalRelation record | R05:005 | candidate_relation not traversed |
+| TASK:RAG:R05:003.S03 | محاسبه gap list بر اساس قرارداد C05b برای هر service need. | versioned service evidence contract | R05:006 | field gaps neither invented nor cross-need |
+| TASK:RAG:R05:004.S01 | تعیین sufficiency مستقل برای هر claim و distinct source lineage. | claim list; source IDs/mirror graph | R05:007 | mirror count = one logical source |
+| TASK:RAG:R05:004.S02 | حفظ conflict set و حالت unknown بدون similarity confidence shortcut. | R03 conflict status; C06 policy | R05:007 | supported/partial/conflicted independent |
+| TASK:RAG:R05:004.S03 | محاسبه freshness از valid-time + last successful observation + policy. | R03 validity; R04 outcome; service/risk | R05:008 | last check != valid state |
+| TASK:RAG:R05:005.S01 | اجرای attempt/stop/failover با policy version و stop reason. | R01 policy; R02 access outcomes | R05:009 | attempt bounded by fixture policy |
+| TASK:RAG:R05:005.S02 | تعریف cache key شامل snapshot/version/scope/service/user boundary. | ADR-RAG-17/26; C02 permission | R05:010 | cross-user/snapshot miss |
+| TASK:RAG:R05:005.S03 | تعریف invalidation set از lineage فقط برای مشتقات متاثر. | R03 lineage graph | R05:010 | unrelated derivative remains available |
+
+
+**معیارهای پذیرش:** هر AC شرایط اولیه، محرک، خروجی قابل مشاهده، مرز شکست و oracle قابل‌اندازه‌گیری دارد.
+
+| AC ID / Requirement | Given / پیش‌شرط | When / محرک | Then / خروجی قابل مشاهده و PASS oracle | FAIL / boundary |
+| --- | --- | --- | --- | --- |
+| AC:RAG:R05:001 / REQ:RAG:R05:001 | دو Snapshot کامل S0/S1 و یک پاسخ طولانی در حین تعویض pointer | آغاز جست‌وجو روی S0؛ فعال‌سازی S1؛ ادامه جست‌وجو و آغاز درخواست دوم | درخواست اول فقط نتیجه کامل S0 و درخواست دوم فقط نتیجه کامل S1 می‌بیند؛ مورد candidate/review اصلاً وارد نتایج نمی‌شود؛ oracle: هر evidence ref شامل snapshot_id و version_id است؛ مجموعه نتایج برابر اعضای Snapshot همان درخواست است | S0/S1 هیچ‌گاه به پاسخ ترکیبی یا candidate منتشرنشده وصل نمی‌شوند |
+| AC:RAG:R05:002 / REQ:RAG:R05:002 | پرس‌وجوی «ضامن دوم»؛ یک hit صریح ساختاری، یک hit واژگانی و موردی با صرفاً شباهت معنایی | اجرای retrieve برای یک زیرپرسش با سه روش فعال/در دسترس و یک روش غیرفعال | نتایج هر روش جدا و قابل ترکیب‌اند؛ query id و روش/نسخه پیکربندی ثبت می‌شود؛ similarity تنها نتیجه را به شاهد قطعی تبدیل نمی‌کند؛ oracle: خروجی candidates شامل method, source reference, snapshot; روش غیرفعال در audit به‌عنوان اجراشده ثبت نمی‌شود | بازیابی از نیازهای فرعی R01 مشتق است؛ R05 پرسش را دوباره تجزیه نمی‌کند |
+| AC:RAG:R05:003 / REQ:RAG:R05:003 | PDF فارسی شامل ماده، تبصره، جدول دو سطحی با سرستون و پانویس | بازیابی قطعه مرتبط با عدد/استثنا و ساخت retrieval context | قطعه و context لازم همراه page/span/table/header/provision/version برمی‌گردد؛ شناسه chunk جای شناسه بند نمی‌نشیند؛ oracle: assert span داخل hash همان artifact و header/footnote lineage قابل resolve؛ context با parent provision برابر fixture | هیچ رقم یا استثنا از ردیف/بند مجاور به شاهد انتخاب‌شده نچسبد |
+| AC:RAG:R05:004 / REQ:RAG:R05:004 | چهار سند: اولیه معتبر خارج‌قلمرو، بازنشر تازه، سند منسوخ مرتبط، سند اولیه معتبر و مشمول | ساخت candidate set و مرتب‌سازی برای یک ادعای جاری مشخص | فقط منابع مجاز، اصیل، قابل‌اعمال، معتبر در زمان درخواست و با کیفیت کافی eligible می‌شوند؛ rank فقط داخل eligible set اثر دارد؛ oracle: eligibility reason برای هر رد/قبول ثبت؛ candidate منسوخ یا خارج‌قلمرو به خروجی ادعای جاری راه ندارد | هر بعد provenance مستقل است؛ freshness یا popularity به جای authority/validity استفاده نمی‌شود |
+| AC:RAG:R05:005 / REQ:RAG:R05:005 | گراف سند A→بند B با relation confirmed و سند C با candidate_relation معنایی | جست‌وجوی query که از A به اسناد وابسته گسترش می‌یابد | فقط edge تأییدشده اسناد مجاز را می‌افزاید؛ candidate رابطه در نتایج review باقی می‌ماند و اثر حقوقی را تعیین نمی‌کند؛ oracle: هر traversed edge دارای status, source/target version, witness, scope; هیچ edge candidate در legal expansion نیست | وجود relation به‌تنهایی precedence یا applicability را تعیین نمی‌کند |
+| AC:RAG:R05:006 / REQ:RAG:R05:006 | خدمت مشخص با evidence contract نسخه‌دار و زیرپرسش دارای دو فیلد از سه فیلد لازم | ارزیابی پوشش قبل از تصمیم کافی بودن بازیابی | فقط فیلدهای غایب در همان service/scope به‌صورت gap list برمی‌گردند و به R01 برای مسیر هدفمند داده می‌شوند؛ oracle: gap list برابر تفاوت required fields و evidenced fields؛ همه فیلدها contract version دارند | نه کاتالوگ وام تازه تعریف می‌شود نه query مستقل خارج از حوزه/مجاز ساخته می‌شود |
+| AC:RAG:R05:007 / REQ:RAG:R05:007 | سه claim، دو source lineage که یکی mirror از دیگری است و دو سند متعارض | ساختن evidence sufficiency result به ازای هر claim | هر claim وضعیت مستقل supported/partial/insufficient/conflicted می‌گیرد؛ mirrorها یک lineage محسوب و conflict به پاسخ می‌رسد؛ oracle: assert evidence lineage distinct count؛ result per claim؛ unresolved conflict field present | کفایت کل پاسخ یا similarity score نمی‌تواند claim بی‌شاهد را مجاز کند |
+| AC:RAG:R05:008 / REQ:RAG:R05:008 | سند last_checked تازه اما بررسی ناقص و سند قدیمی با وضعیت valid-time قابل اعمال | ارزیابی ادعای «قانون فعلی» تحت دو freshness policy متفاوت | نتیجه freshness جدا از last_checked است؛ در الزام روز و عدم احراز، claim جاری مجاز نیست؛ oracle: assert policy id, valid-time, last-success, check outcome و decision جدا؛ هیچ stale/unknown به current تبدیل نمی‌شود | R05 مصرف‌کننده زمان/اعتبار R03 و observation R04 است؛ مالک schedule یا validity نیست |
+| AC:RAG:R05:009 / REQ:RAG:R05:009 | policy نسخه‌دار با budget test fixture، منبع اصلی timeout، fallback مجاز و fallback نامشابه | اجرای retrieval با sufficient result، timeout و exhaustion | عملیات با کفایت یا رسیدن به بودجه متوقف؛ retry محدود و failure آشکار؛ fallback ناهم‌صلاحیت ممنوع؛ oracle: attempt count ≤ policy fixture limit؛ stop reason و fallback chain ثبت؛ completion با شواهد کافی | هیچ عدد زمانی/بودجه‌ای این بسته مصوب نمی‌کند؛ fixture مقدار policy را می‌دهد |
+| AC:RAG:R05:010 / REQ:RAG:R05:010 | دو کاربر، دو Snapshot، دو product scope و یک تغییر که فقط سند A را متأثر می‌کند | cache read/write سپس تغییر A و invalidate کردن lineage | hit فقط در key کاملاً برابر؛ داده کاربر/سازمان دیگر یا snapshot قدیم hit نمی‌شود؛ B unrelated معتبر می‌ماند؛ oracle: assert key dimensions, hit/miss per pair, impacted derivative set equals descendants(A) | هیچ TTL جهانی یا schema/cache technology از خود ساخته نمی‌شود |
+
+
+**Test Definitions:** همه `NOT_EXECUTED` هستند؛ چهار Planned Test Case مستقل برای هر رفتار (positive, negative, boundary, failure).
+
+| Test Definition | Requirement | وجه‌های اختصاصی آزمون | Planned Test Cases | وضعیت |
+| --- | --- | --- | --- | --- |
+| TEST:RAG:R05:001 | REQ:RAG:R05:001 | نتیجه هر عملیات بازیابی به Snapshot شناسه‌دار آغاز همان عملیات مقید بماند و فقط اعضای منتشرشده و سازگار آن خوانده شوند. | TC:RAG:R05:001-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:002 | REQ:RAG:R05:002 | برای هر نیاز اطلاعاتی ورودی، مسیر جست‌وجوی ساختاری، فراداده، واژگانی و معنایی را با provenance روش اجرا نگه دارد؛ موتور/مدل خاصی از پیش تثبیت نشود. | TC:RAG:R05:002-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:003 | REQ:RAG:R05:003 | بازیابی قطعه باید شناسه نسخه و جایگاه دقیق در ماده/تبصره/جدول/سرستون/پاورقی و زمینه لازم برای فهم را حفظ کند؛ مرجع provision و raw artifact را R03/R02 نگه می‌دارند. | TC:RAG:R05:003-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:004 | REQ:RAG:R05:004 | پیش از رتبه‌بندی نهایی، اصالت، نقش/صلاحیت منبع، قلمرو موضوعی/بانک/محصول، زمان اعتبار و کیفیت شاهد به‌عنوان قیود مستقل اعمال شوند؛ امتیاز ارتباط این قیود را جبران نکند. | TC:RAG:R05:004-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:005 | REQ:RAG:R05:005 | گسترش بازیابی از رابطه حقوقی فقط با LegalRelation تأییدشده و endpoint نسخه‌دار انجام شود؛ رابطه موضوعی یا مبهم تنها سرنخ review باشد. | TC:RAG:R05:005-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:006 | REQ:RAG:R05:006 | برای هر service/query need، فیلدهای شواهد ضروری از قرارداد سرویس خوانده و فقط شکاف‌های همان نیاز برای بازیابی تکمیلی بازگردانده شوند؛ سیاست/فیلد خدمت جدید اختراع نشود. | TC:RAG:R05:006-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:007 | REQ:RAG:R05:007 | کفایت شواهد را برای هر ادعای مؤثر جدا بسنج؛ تعداد قطعه‌ها یا mirrorهای یک منبع را شاهد مستقل حساب نکن و تعارض حل‌نشده را حفظ کن. | TC:RAG:R05:007-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:008 | REQ:RAG:R05:008 | آخرین بررسی موفق، اعتبار حقوقی، سطح اطمینان نبود تغییر و الزام تازگی خدمت/ادعا جدا بمانند؛ ادعای «فعلی» فقط وقتی شرط Freshness Policy برقرار است مجاز شود. | TC:RAG:R05:008-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:009 | REQ:RAG:R05:009 | بودجه/شرط توقف و شکست retrieval طبق policy نسخه‌دار محدود شود؛ failover فقط به منبع یا روش مجاز و هم‌صلاحیت با پوشش/تازگی کافی، بدون unbounded retry. | TC:RAG:R05:009-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R05:010 | REQ:RAG:R05:010 | کش retrieval فقط با Snapshot، نسخه مشتقات، زمان/قلمرو، service و scope مجاز کاربر key شود و با تغییر معتبر فقط ورودی‌های متأثر invalidate شوند. | TC:RAG:R05:010-P/N/B/F | NOT_EXECUTED |
+
+
+**Planned Test Cases — NOT_EXECUTED:**
+
+| Case ID | Req | Precondition / fixture | Action | Expected observable result | Assertion / oracle | Invariant |
+| --- | --- | --- | --- | --- | --- | --- |
+| TC:RAG:R05:001-P | REQ:RAG:R05:001 | دو Snapshot کامل S0/S1 و یک پاسخ طولانی در حین تعویض pointer | آغاز جست‌وجو روی S0؛ فعال‌سازی S1؛ ادامه جست‌وجو و آغاز درخواست دوم | درخواست اول فقط نتیجه کامل S0 و درخواست دوم فقط نتیجه کامل S1 می‌بیند؛ مورد candidate/review اصلاً وارد نتایج نمی‌شود | هر evidence ref شامل snapshot_id و version_id است؛ مجموعه نتایج برابر اعضای Snapshot همان درخواست است | S0/S1 هیچ‌گاه به پاسخ ترکیبی یا candidate منتشرنشده وصل نمی‌شوند |
+| TC:RAG:R05:001-N | REQ:RAG:R05:001 | دو Snapshot کامل S0/S1 و یک پاسخ طولانی در حین تعویض pointer؛ حالت منفی: candidate/review سند در S1 و نسخه published در S0 | جست‌وجو در S1 انجام شود | سند candidate هیچ نتیجه‌ای نمی‌دهد؛ رفتار published S0 باقی است | assert no candidate IDs in result | S0/S1 هیچ‌گاه به پاسخ ترکیبی یا candidate منتشرنشده وصل نمی‌شوند |
+| TC:RAG:R05:001-B | REQ:RAG:R05:001 | دو Snapshot کامل S0/S1 و یک پاسخ طولانی در حین تعویض pointer؛ مرز آزمون: ادامه همان request صفحه‌بندی‌شده پس از publish S1 | صفحه دوم با cursor امضاشدهٔ request اول از S0 خوانده شود | صفحه دوم فقط S0 IDs دارد؛ درخواست تازه جداگانه S1 را می‌بیند | assert request snapshot ثابت، cursor معتبر و جدایی از درخواست جدید | S0/S1 هیچ‌گاه به پاسخ ترکیبی یا candidate منتشرنشده وصل نمی‌شوند |
+| TC:RAG:R05:001-F | REQ:RAG:R05:001 | دو Snapshot کامل S0/S1 و یک پاسخ طولانی در حین تعویض pointer؛ شکست وابستگی: هم‌زمانی بدون snapshot mixing | active pointer store قطع شود | جست‌وجو کامل/مستند متوقف؛ mixed result برنمی‌گردد | assert error state + no partial result | S0/S1 هیچ‌گاه به پاسخ ترکیبی یا candidate منتشرنشده وصل نمی‌شوند |
+| TC:RAG:R05:002-P | REQ:RAG:R05:002 | پرس‌وجوی «ضامن دوم»؛ یک hit صریح ساختاری، یک hit واژگانی و موردی با صرفاً شباهت معنایی | اجرای retrieve برای یک زیرپرسش با سه روش فعال/در دسترس و یک روش غیرفعال | نتایج هر روش جدا و قابل ترکیب‌اند؛ query id و روش/نسخه پیکربندی ثبت می‌شود؛ similarity تنها نتیجه را به شاهد قطعی تبدیل نمی‌کند | خروجی candidates شامل method, source reference, snapshot; روش غیرفعال در audit به‌عنوان اجراشده ثبت نمی‌شود | بازیابی از نیازهای فرعی R01 مشتق است؛ R05 پرسش را دوباره تجزیه نمی‌کند |
+| TC:RAG:R05:002-N | REQ:RAG:R05:002 | پرس‌وجوی «ضامن دوم»؛ یک hit صریح ساختاری، یک hit واژگانی و موردی با صرفاً شباهت معنایی؛ حالت منفی: semantic model برای این query غیرفعال است | درخواست سه روش در plan | صرفاً روش‌های configured در output؛ semantic execution claim absent | assert executed methods subset configured | بازیابی از نیازهای فرعی R01 مشتق است؛ R05 پرسش را دوباره تجزیه نمی‌کند |
+| TC:RAG:R05:002-B | REQ:RAG:R05:002 | پرس‌وجوی «ضامن دوم»؛ یک hit صریح ساختاری، یک hit واژگانی و موردی با صرفاً شباهت معنایی؛ مرز آزمون: روش‌های اجرا شده درست ثبت شوند | واژه‌ای به ظاهر یکسان در service/domain دیگر | query محدود به زیرپرسش و domain مجاز | assert no cross-domain candidates | بازیابی از نیازهای فرعی R01 مشتق است؛ R05 پرسش را دوباره تجزیه نمی‌کند |
+| TC:RAG:R05:002-F | REQ:RAG:R05:002 | پرس‌وجوی «ضامن دوم»؛ یک hit صریح ساختاری، یک hit واژگانی و موردی با صرفاً شباهت معنایی؛ شکست وابستگی: پیکربندی method در نسخه بعد تغییر می‌کند | index یکی از روش‌ها timeout می‌دهد | روش‌های مستقل نتیجه خود را نگه می‌دارند؛ شکست به no-hit تبدیل نمی‌شود | assert per-method status/error | بازیابی از نیازهای فرعی R01 مشتق است؛ R05 پرسش را دوباره تجزیه نمی‌کند |
+| TC:RAG:R05:003-P | REQ:RAG:R05:003 | PDF فارسی شامل ماده، تبصره، جدول دو سطحی با سرستون و پانویس | بازیابی قطعه مرتبط با عدد/استثنا و ساخت retrieval context | قطعه و context لازم همراه page/span/table/header/provision/version برمی‌گردد؛ شناسه chunk جای شناسه بند نمی‌نشیند | assert span داخل hash همان artifact و header/footnote lineage قابل resolve؛ context با parent provision برابر fixture | هیچ رقم یا استثنا از ردیف/بند مجاور به شاهد انتخاب‌شده نچسبد; raw artifact/source location مرجع است |
+| TC:RAG:R05:003-N | REQ:RAG:R05:003 | PDF فارسی شامل ماده، تبصره، جدول دو سطحی با سرستون و پانویس؛ حالت منفی: chunk فاقد provision_id یا span خارج از artifact | ساخت evidence context تلاش شود | candidate غیرقابل استناد و gap structural visible | assert citation eligibility=false | هیچ رقم یا استثنا از ردیف/بند مجاور به شاهد انتخاب‌شده نچسبد; raw artifact/source location مرجع است |
+| TC:RAG:R05:003-B | REQ:RAG:R05:003 | PDF فارسی شامل ماده، تبصره، جدول دو سطحی با سرستون و پانویس؛ مرز آزمون: قطعه‌بندی دقیق روی مرز صفحه/تبصره | retrieve clause and context | ماده+تبصره دقیق و parent linkage | assert provision tree/span continuity | هیچ رقم یا استثنا از ردیف/بند مجاور به شاهد انتخاب‌شده نچسبد; raw artifact/source location مرجع است |
+| TC:RAG:R05:003-F | REQ:RAG:R05:003 | PDF فارسی شامل ماده، تبصره، جدول دو سطحی با سرستون و پانویس؛ شکست وابستگی: صفحه از دو ستون فارسی و راست‌به‌چپ | متن OCR یا جدول parse نمی‌شود | item quarantine/non-citable؛ عدد/واحد حدس زده نمی‌شود | assert QA state and no numeric assertion | هیچ رقم یا استثنا از ردیف/بند مجاور به شاهد انتخاب‌شده نچسبد; raw artifact/source location مرجع است |
+| TC:RAG:R05:004-P | REQ:RAG:R05:004 | چهار سند: اولیه معتبر خارج‌قلمرو، بازنشر تازه، سند منسوخ مرتبط، سند اولیه معتبر و مشمول | ساخت candidate set و مرتب‌سازی برای یک ادعای جاری مشخص | فقط منابع مجاز، اصیل، قابل‌اعمال، معتبر در زمان درخواست و با کیفیت کافی eligible می‌شوند؛ rank فقط داخل eligible set اثر دارد | eligibility reason برای هر رد/قبول ثبت؛ candidate منسوخ یا خارج‌قلمرو به خروجی ادعای جاری راه ندارد | هر بعد provenance مستقل است؛ freshness یا popularity به جای authority/validity استفاده نمی‌شود; rank فقط پس از eligibility |
+| TC:RAG:R05:004-N | REQ:RAG:R05:004 | چهار سند: اولیه معتبر خارج‌قلمرو، بازنشر تازه، سند منسوخ مرتبط، سند اولیه معتبر و مشمول؛ حالت منفی: منبع popular و تازه ولی no authority یا out-of-scope | نهایی‌کردن eligibility | رد/کاندیدای review حتی با score بالا | assert score cannot override reason | هر بعد provenance مستقل است؛ freshness یا popularity به جای authority/validity استفاده نمی‌شود; rank فقط پس از eligibility |
+| TC:RAG:R05:004-B | REQ:RAG:R05:004 | چهار سند: اولیه معتبر خارج‌قلمرو، بازنشر تازه، سند منسوخ مرتبط، سند اولیه معتبر و مشمول؛ مرز آزمون: سند منسوخ برای ادعای جاری | query current-law claim | سند منسوخ eligible نیست و limitation در selection record | assert validity gate | هر بعد provenance مستقل است؛ freshness یا popularity به جای authority/validity استفاده نمی‌شود; rank فقط پس از eligibility |
+| TC:RAG:R05:004-F | REQ:RAG:R05:004 | چهار سند: اولیه معتبر خارج‌قلمرو، بازنشر تازه، سند منسوخ مرتبط، سند اولیه معتبر و مشمول؛ شکست وابستگی: سند primary معتبر اما در استثنای scope درخواست نیست | source metadata authority malformed | claim current blocked، source reason logged | assert fail-closed | هر بعد provenance مستقل است؛ freshness یا popularity به جای authority/validity استفاده نمی‌شود; rank فقط پس از eligibility |
+| TC:RAG:R05:005-P | REQ:RAG:R05:005 | گراف سند A→بند B با relation confirmed و سند C با candidate_relation معنایی | جست‌وجوی query که از A به اسناد وابسته گسترش می‌یابد | فقط edge تأییدشده اسناد مجاز را می‌افزاید؛ candidate رابطه در نتایج review باقی می‌ماند و اثر حقوقی را تعیین نمی‌کند | هر traversed edge دارای status, source/target version, witness, scope; هیچ edge candidate در legal expansion نیست | وجود relation به‌تنهایی precedence یا applicability را تعیین نمی‌کند; only confirmed scoped edge |
+| TC:RAG:R05:005-N | REQ:RAG:R05:005 | گراف سند A→بند B با relation confirmed و سند C با candidate_relation معنایی؛ حالت منفی: candidate_relation معنایی با score بالا | قانونی relation traversal شود | یال candidate در legal path وارد نمی‌شود | assert traversed_edges excludes candidate | وجود relation به‌تنهایی precedence یا applicability را تعیین نمی‌کند; only confirmed scoped edge |
+| TC:RAG:R05:005-B | REQ:RAG:R05:005 | گراف سند A→بند B با relation confirmed و سند C با candidate_relation معنایی؛ مرز آزمون: AMENDS برای یک ماده با endpoints مشخص | query ماده مرتبط | همان ماده و مشتقات مجاز وارد candidate list، سند کامل بی‌قید نه | assert target provisions exact | وجود relation به‌تنهایی precedence یا applicability را تعیین نمی‌کند; only confirmed scoped edge |
+| TC:RAG:R05:005-F | REQ:RAG:R05:005 | گراف سند A→بند B با relation confirmed و سند C با candidate_relation معنایی؛ شکست وابستگی: relation به نسخه‌ای که به‌روزرسانی شده اشاره دارد | LegalRelation service returns inconsistent version | traversal stops, conflict/gap emitted | assert no stale endpoint expansion | وجود relation به‌تنهایی precedence یا applicability را تعیین نمی‌کند; only confirmed scoped edge |
+| TC:RAG:R05:006-P | REQ:RAG:R05:006 | خدمت مشخص با evidence contract نسخه‌دار و زیرپرسش دارای دو فیلد از سه فیلد لازم | ارزیابی پوشش قبل از تصمیم کافی بودن بازیابی | فقط فیلدهای غایب در همان service/scope به‌صورت gap list برمی‌گردند و به R01 برای مسیر هدفمند داده می‌شوند | gap list برابر تفاوت required fields و evidenced fields؛ همه فیلدها contract version دارند | نه کاتالوگ وام تازه تعریف می‌شود نه query مستقل خارج از حوزه/مجاز ساخته می‌شود; service contract source of truth |
+| TC:RAG:R05:006-N | REQ:RAG:R05:006 | خدمت مشخص با evidence contract نسخه‌دار و زیرپرسش دارای دو فیلد از سه فیلد لازم؛ حالت منفی: contract نسخه خدمت unavailable/unknown field | coverage checker اجرا شود | هیچ فیلد فرضی/نمونه‌ای ساخته نمی‌شود و status unavailable | assert no fabricated required fields | نه کاتالوگ وام تازه تعریف می‌شود نه query مستقل خارج از حوزه/مجاز ساخته می‌شود; service contract source of truth |
+| TC:RAG:R05:006-B | REQ:RAG:R05:006 | خدمت مشخص با evidence contract نسخه‌دار و زیرپرسش دارای دو فیلد از سه فیلد لازم؛ مرز آزمون: قرارداد به دو نیاز فرعی وصل است و یک فیلد فقط برای نیاز اول لازم | run coverage per query id | نیاز دوم با gap غیرمرتبط incomplete نمی‌شود | assert gap scope per need | نه کاتالوگ وام تازه تعریف می‌شود نه query مستقل خارج از حوزه/مجاز ساخته می‌شود; service contract source of truth |
+| TC:RAG:R05:006-F | REQ:RAG:R05:006 | خدمت مشخص با evidence contract نسخه‌دار و زیرپرسش دارای دو فیلد از سه فیلد لازم؛ شکست وابستگی: مقدار «نامعلوم» کاربر در یک فیلد optional | Core service API returns version mismatch | no complete status; dependency error visible | assert contract version exact | نه کاتالوگ وام تازه تعریف می‌شود نه query مستقل خارج از حوزه/مجاز ساخته می‌شود; service contract source of truth |
+| TC:RAG:R05:007-P | REQ:RAG:R05:007 | سه claim، دو source lineage که یکی mirror از دیگری است و دو سند متعارض | ساختن evidence sufficiency result به ازای هر claim | هر claim وضعیت مستقل supported/partial/insufficient/conflicted می‌گیرد؛ mirrorها یک lineage محسوب و conflict به پاسخ می‌رسد | assert evidence lineage distinct count؛ result per claim؛ unresolved conflict field present | کفایت کل پاسخ یا similarity score نمی‌تواند claim بی‌شاهد را مجاز کند; هیچ جمع تعداد قطعه sufficiency نسازد |
+| TC:RAG:R05:007-N | REQ:RAG:R05:007 | سه claim، دو source lineage که یکی mirror از دیگری است و دو سند متعارض؛ حالت منفی: دو source URLs mirror و چند chunk از همان lineage | sufficiency count محاسبه شود | شاهد مستقل همان lineage=1؛ duplicate count نمایش داده نمی‌شود | assert lineage dedupe | کفایت کل پاسخ یا similarity score نمی‌تواند claim بی‌شاهد را مجاز کند; هیچ جمع تعداد قطعه sufficiency نسازد |
+| TC:RAG:R05:007-B | REQ:RAG:R05:007 | سه claim، دو source lineage که یکی mirror از دیگری است و دو سند متعارض؛ مرز آزمون: یکی از claims supported و دیگری conflict | evaluate each separately | فقط claim conflict unresolved علامت می‌خورد | assert claim-level state | کفایت کل پاسخ یا similarity score نمی‌تواند claim بی‌شاهد را مجاز کند; هیچ جمع تعداد قطعه sufficiency نسازد |
+| TC:RAG:R05:007-F | REQ:RAG:R05:007 | سه claim، دو source lineage که یکی mirror از دیگری است و دو سند متعارض؛ شکست وابستگی: یک contradiction مربوط به تاریخ قدیم خارج از as-of scope | lineage database unavailable | sufficiency unknown; no supported default | assert no PASS | کفایت کل پاسخ یا similarity score نمی‌تواند claim بی‌شاهد را مجاز کند; هیچ جمع تعداد قطعه sufficiency نسازد |
+| TC:RAG:R05:008-P | REQ:RAG:R05:008 | سند last_checked تازه اما بررسی ناقص و سند قدیمی با وضعیت valid-time قابل اعمال | ارزیابی ادعای «قانون فعلی» تحت دو freshness policy متفاوت | نتیجه freshness جدا از last_checked است؛ در الزام روز و عدم احراز، claim جاری مجاز نیست | assert policy id, valid-time, last-success, check outcome و decision جدا؛ هیچ stale/unknown به current تبدیل نمی‌شود | R05 مصرف‌کننده زمان/اعتبار R03 و observation R04 است؛ مالک schedule یا validity نیست; last_checked != validity |
+| TC:RAG:R05:008-N | REQ:RAG:R05:008 | سند last_checked تازه اما بررسی ناقص و سند قدیمی با وضعیت valid-time قابل اعمال؛ حالت منفی: check جدید timestamp دارد اما parse failed | assess fresh currentness | last_success معتبر قدیمی باقی؛ check جدید نشان‌دهنده failure نه fresh | assert status failed/unknown | R05 مصرف‌کننده زمان/اعتبار R03 و observation R04 است؛ مالک schedule یا validity نیست; last_checked != validity |
+| TC:RAG:R05:008-B | REQ:RAG:R05:008 | سند last_checked تازه اما بررسی ناقص و سند قدیمی با وضعیت valid-time قابل اعمال؛ مرز آزمون: query as-of historical date | freshness policy for as-of query | historical result preserves requested date; no current claim | assert valid-time selection | R05 مصرف‌کننده زمان/اعتبار R03 و observation R04 است؛ مالک schedule یا validity نیست; last_checked != validity |
+| TC:RAG:R05:008-F | REQ:RAG:R05:008 | سند last_checked تازه اما بررسی ناقص و سند قدیمی با وضعیت valid-time قابل اعمال؛ شکست وابستگی: policy requires live for high-risk claim | clock/observation source unavailable | current claim is blocked; status unknown | assert no fabricated check time | R05 مصرف‌کننده زمان/اعتبار R03 و observation R04 است؛ مالک schedule یا validity نیست; last_checked != validity |
+| TC:RAG:R05:009-P | REQ:RAG:R05:009 | policy نسخه‌دار با budget test fixture، منبع اصلی timeout، fallback مجاز و fallback نامشابه | اجرای retrieval با sufficient result، timeout و exhaustion | عملیات با کفایت یا رسیدن به بودجه متوقف؛ retry محدود و failure آشکار؛ fallback ناهم‌صلاحیت ممنوع | attempt count ≤ policy fixture limit؛ stop reason و fallback chain ثبت؛ completion با شواهد کافی | هیچ عدد زمانی/بودجه‌ای این بسته مصوب نمی‌کند؛ fixture مقدار policy را می‌دهد; no silent degradation |
+| TC:RAG:R05:009-N | REQ:RAG:R05:009 | policy نسخه‌دار با budget test fixture، منبع اصلی timeout، fallback مجاز و fallback نامشابه؛ حالت منفی: fallback uses site with different authority/jurisdiction | attempt failover | fallback rejected; failure visible; no answer from inequivalent source | assert source class/scope mismatch blocks | هیچ عدد زمانی/بودجه‌ای این بسته مصوب نمی‌کند؛ fixture مقدار policy را می‌دهد; no silent degradation |
+| TC:RAG:R05:009-B | REQ:RAG:R05:009 | policy نسخه‌دار با budget test fixture، منبع اصلی timeout، fallback مجاز و fallback نامشابه؛ مرز آزمون: sufficient internal result before second retrieval | attempt next source suppressed by stop condition | no extra call; cost/attempts within fixture | assert call count exact | هیچ عدد زمانی/بودجه‌ای این بسته مصوب نمی‌کند؛ fixture مقدار policy را می‌دهد; no silent degradation |
+| TC:RAG:R05:009-F | REQ:RAG:R05:009 | policy نسخه‌دار با budget test fixture، منبع اصلی timeout، fallback مجاز و fallback نامشابه؛ شکست وابستگی: budget stops at configured boundary | Job/source access adapter crashes during retry | state marks failed and bounded retry; no claim current | assert attempts <= fixture limit | هیچ عدد زمانی/بودجه‌ای این بسته مصوب نمی‌کند؛ fixture مقدار policy را می‌دهد; no silent degradation |
+| TC:RAG:R05:010-P | REQ:RAG:R05:010 | دو کاربر، دو Snapshot، دو product scope و یک تغییر که فقط سند A را متأثر می‌کند | cache read/write سپس تغییر A و invalidate کردن lineage | hit فقط در key کاملاً برابر؛ داده کاربر/سازمان دیگر یا snapshot قدیم hit نمی‌شود؛ B unrelated معتبر می‌ماند | assert key dimensions, hit/miss per pair, impacted derivative set equals descendants(A) | هیچ TTL جهانی یا schema/cache technology از خود ساخته نمی‌شود; personal context bound to owner |
+| TC:RAG:R05:010-N | REQ:RAG:R05:010 | دو کاربر، دو Snapshot، دو product scope و یک تغییر که فقط سند A را متأثر می‌کند؛ حالت منفی: user A cache entry then request user B with same query | cache lookup for B | miss/isolated result; no A refs or content exposed | assert no cross-scope match | هیچ TTL جهانی یا schema/cache technology از خود ساخته نمی‌شود; personal context bound to owner |
+| TC:RAG:R05:010-B | REQ:RAG:R05:010 | دو کاربر، دو Snapshot، دو product scope و یک تغییر که فقط سند A را متأثر می‌کند؛ مرز آزمون: same user/query with different snapshot | cache lookup | miss and retrieve fresh snapshot | assert snapshot key | هیچ TTL جهانی یا schema/cache technology از خود ساخته نمی‌شود; personal context bound to owner |
+| TC:RAG:R05:010-F | REQ:RAG:R05:010 | دو کاربر، دو Snapshot، دو product scope و یک تغییر که فقط سند A را متأثر می‌کند؛ شکست وابستگی: document A changes; B unrelated | lineage invalidation service times out | affected content not served from stale cache; unrelated record state preserved | assert stale miss + error | هیچ TTL جهانی یا schema/cache technology از خود ساخته نمی‌شود; personal context bound to owner |
+
+**کنترل لایه‌ها و مالکیت (R05):**
+
+| لایه | Task / پوشش | مالک واقعی و مرز |
+|---|---|---|
+| Architecture / Adviser runtime | T001–T005 | Adviser consumer؛ مرز Core/Adviser طبق A01/A02؛ synchronous retrieval بر حسب policy، worker مستقل فرض نیست. |
+| Backend / Retrieval API | T002–T005 | read ports/versioned contracts؛ API schema جدید مصوب نشده؛ R01 query decomposition و route دارد. |
+| Database / Index | T001–T003,T005 | R03 مالک سند/نسخه/relation/Snapshot/lineage؛ فناوری و schema فیزیکی OPEN؛ R05 read-only. |
+| Security / Privacy | T003–T005 | C01 source trust و C02 authorization؛ user/tenant scope روی cache/نتیجه اعمال می‌شود. |
+| Infrastructure / Resilience | T005 | C01 job/failure contracts و R02 access adapter؛ bounded retry, stop, circuit/bulkhead طبق policy؛ عددها OPEN. |
+| Observability | T001,T004,T005 | consume `CONTRACT:C01:06`; selection/stop/error reasons با metadata حداقلی؛ no user prompt/raw PII پیش‌فرض. |
+| Testing | AC/TEST 001–010 | Snapshot concurrency, multi-method, structure, eligibility, relation, gap, sufficiency, freshness, budget/fallback, cache isolation. همه برنامه‌ای‌اند. |
+| Frontend | Handoff to R06 / existing Adviser UI owner | R05 خروجی typed evidence/status می‌دهد؛ UI response/citation presentation در R06/Adviser UX؛ UI feature جدید تعریف نمی‌کند. |
+
+**تصمیم‌های باز:**
+
+- فناوری index/database، vector/embedding/reranker، مدل query expansion و آستانه ranking/sufficiency انتخاب نشده‌اند؛ ADR-RAG-03/11/40 به آزمون و شواهد می‌سپارند.
+- مقادیر بودجه، timeout، retry، نرخ/تناوب، SLA، freshness threshold و معیار هزینه پس از benchmark/گیت تعیین می‌شوند؛ هیچ مقدار نمونه‌ای مصوب تلقی نمی‌شود.
+- فهرست نهایی منابع، مجوز هر نوع استفاده، و امکان دسترسی runtime متعلق به R02/R04 و گیت حقوقی/فنی است.
+- قرارداد داده فیزیکی/جدول/endpoint جدید ایجاد نمی‌شود؛ Read ports و C01/R03 قراردادهای برنامه‌ریزی‌شده‌اند، نه API منتشرشده.
+
+**RA مستقل:** Candidateهای منبع‌دار و گراف‌دار با متن pinned تطبیق داده شدند؛ extracted/inferred تفکیک شد؛ atomicity، owner، overlap، decision state، source coverage و conflict بررسی شد.
+
+**IPA مستقل:** 10/10 Requirement به Enabler/Task/Subtask/AC/TD/چهار TC اختصاصی و برگشت‌پذیر متصل است؛ هر Task خروجی و oracle دارد؛ test product اجرا نشده.
+
+### R06 — تجمیع پاسخ، Citation Guard و ارزیابی کیفیت Adviser
+
+**وضعیت:** `RA=PASS` / `IPA=PASS`؛ `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+**Scope و مرز مالکیت:** تبدیل نتایج R05 به پاسخ claim-by-claim، بررسی معنایی مستقل Citation Guard، بازنمایی عدم‌قطعیت/تعارض، انتخاب پاسخ کامل/جزئی/پرسش/امتناع، ارجاع محدود، رندر فارسی، امنیت/حریم خصوصی، trace، ارزیابی نسخه‌دار و بهبود کنترل‌شده. R03 مالک data/evidence/Snapshot persistence؛ C14 تاریخچه/feedback و C01 observability/release contract؛ R01 admission/risk routing؛ C02 identity/consent؛ C05b محصول/محاسبه؛ R06 مالک منطق پاسخ/guard/ارزیابی Adviser است.
+
+**مالکیت منطقی:** Adviser Answer/Claim Guard; Citation Renderer; Evaluation Harness; Quality Feedback Adapter; Release Governance consumer. هیچ تیم/داشبورد/جدول جدید یا expert team فرض نمی‌شود.
+
+**وابستگی:** R05 evidence/sufficiency; R03 provision/snapshot/relations; R01 risk/query route; C01:02/06/07; C02:01–03; C05b versioned product port; C14 history/feedback owner. R06→C14 برای trace persistence؛ R06→C01 release/telemetry; no DB write across boundaries.
+
+**منابع پین‌شده:** Blueprint SHA-256 `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266`؛ Wallet SHA-256 `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`. گراف از `main` همان منبع‌ها را پین می‌کند؛ validation سراسری PASS.
+
+
+**گراف R06:** ۱۶ گره معنایی منتخب و ۱۵ یال incident (۵ `EXTRACTED`، ۱۰ `INFERRED`) برای Answer/Citation, evidence sufficiency, privacy, evaluation, feedback و release مرور شد؛ همه IDها resolve شدند. گراف validation=PASS؛ ۱۰ یال inferred صرفاً navigation hint بودند و به‌تنهایی الزام نساختند. queryهای Graphify: `query "response answer generation citation confidence refusal followup"` و `query "evaluation benchmark feedback learning retrieval quality"`.
+
+**Candidate / Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک رفتار | Enabler / Task | AC / Test | Disposition |
+| --- | --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R06:001 / REQ:RAG:R06:001 | ادعاهای مادی پاسخ مالی/حقوقی به واحدهای مستقل شکسته و هر واحد به شاهد یا وضعیت صریحِ بی‌شاهد وصل شود. | 3.8:259–264; ADR-RAG-07:299–303; ADR-RAG-37:449–453; Graph nodes: `docs_shahab_phase_2_development_blueprint_answer_generation_citation_guard`, `docs_shahab_phase_2_development_blueprint_adr_rag_07` | Claim Evidence Ledger logical producer (R03/C14 own persistence) | EN:RAG:R06:001 / TASK:RAG:R06:001 | AC:RAG:R06:001 / TEST:RAG:R06:001 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:002 / REQ:RAG:R06:002 | شواهد حقوقی، محصولی و شخصی نوع‌دار و با مالک حقیقت خود باقی بمانند؛ محصول/محاسبه فقط از API نسخه‌دار Core و زمینه شخصی فقط از قرارداد مجاز مالک مصرف شود. | B:75,192; فصل دوم §11:1604–1625; ADR-RAG-26:394–398; C01:02/C02:01–03; Graph nodes: `docs_shahab_phase_2_development_blueprint_role_boundaries_b05_b06`, `docs_shahab_phase_2_development_blueprint_adr_rag_26` | Adviser Evidence Adapter (Core Identity/Product owners retain data) | EN:RAG:R06:001 / TASK:RAG:R06:001 | AC:RAG:R06:002 / TEST:RAG:R06:002 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:003 / REQ:RAG:R06:003 | Citation Guard مستقل از text generation هر claim مادی را از حیث پشتیبانی معنایی و exact provision/version/authority/time/scope/hash بررسی کند؛ URL مرتبط به‌تنهایی citation نیست. | 3.8:261–264; ADR-RAG-07:299–303; ADR-RAG-37:449–453; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_37`, `docs_shahab_phase_2_development_blueprint_adr_rag_07` | Citation Guard (R06 logical owner; R03 owns canonical evidence) | EN:RAG:R06:002 / TASK:RAG:R06:002 | AC:RAG:R06:003 / TEST:RAG:R06:003 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:004 / REQ:RAG:R06:004 | تعارض واقعی، تفاوت قلمرو، زمان، استثنا و عدم قطعیت مرحله‌ای را در نتیجه پاسخ جدا کند و precedence را از تازگی/شباهت به‌تنهایی نتیجه نگیرد. | ADR-RAG-06:294–298; ADR-RAG-30:414–418; ADR-RAG-31:419–423; ADR-RAG-08:304–308; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_06`, `docs_shahab_phase_2_development_blueprint_adr_rag_30`, `docs_shahab_phase_2_development_blueprint_adr_rag_31` | Answer Guard / Legal Evidence Presentation (R03 owns relation/version state) | EN:RAG:R06:002 / TASK:RAG:R06:002 | AC:RAG:R06:004 / TEST:RAG:R06:004 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:005 / REQ:RAG:R06:005 | سیاست پاسخ با توجه به پوشش/ریسک هر claim یکی از پاسخ کامل، پاسخ جزئی/مشروط، پرسش تکمیلی یا امتناع هدفمند را تعیین کند؛ بخش مستند به‌خاطر یک gap بی‌ربط حذف نشود. | ADR-RAG-07:299–303; ADR-RAG-18:354–358; §3.1:80–86; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_07`, `docs_shahab_phase_2_development_blueprint_adr_rag_18` | Answer Disposition Policy (R01 owns service admission/router decision) | EN:RAG:R06:002 / TASK:RAG:R06:002 | AC:RAG:R06:005 / TEST:RAG:R06:005 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:006 / REQ:RAG:R06:006 | در ریسک/ابهام حقوقی پاسخ محدودیت را بیان و فقط پیشنهاد تماس با پشتیبانی شهاب برای بررسی کارشناسی دهد؛ وجود تیم یا ثبت خودکار پرونده را وعده ندهد. | ADR-RAG-18:354–358; ADR-RAG-07:299–303; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_18` | Answer UX / Support Referral (no assumed ticket owner) | EN:RAG:R06:003 / TASK:RAG:R06:003 | AC:RAG:R06:006 / TEST:RAG:R06:006 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:007 / REQ:RAG:R06:007 | استناد قابل‌نمایش باید برای کاربر عنوان/منبع/نسخه یا تاریخ و بند/مکان را در صورت وجود روشن کند؛ rendering فارسی، جدول، عدد، واحد و استثنا را بدون تغییر معنای شاهد حفظ کند. | 3.8:259–264; ADR-RAG-11:319–323; ADR-RAG-15:339–343; F05; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_11`, `docs_shahab_phase_2_development_blueprint_answer_generation_citation_guard` | Citation Renderer / Persian Response Formatter | EN:RAG:R06:003 / TASK:RAG:R06:003 | AC:RAG:R06:007 / TEST:RAG:R06:007 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:008 / REQ:RAG:R06:008 | محتوای retrieved خارجی داده غیرقابل اعتماد بماند؛ prompt/page/PDF دستور ابزار یا policy را تغییر ندهد و دسترسی شخصی با مجوز/حدود C02 حفظ شود. | ADR-RAG-13:329–333; ADR-RAG-26:394–398; B:192; C02:02–03; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_13`, `docs_shahab_phase_2_development_blueprint_adr_rag_26` | Adviser Security Boundary (C02 owns authz/session; R02 source fetch) | EN:RAG:R06:004 / TASK:RAG:R06:004 | AC:RAG:R06:008 / TEST:RAG:R06:008 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:009 / REQ:RAG:R06:009 | trace پاسخ/claim به Snapshot، evidence نسخه‌دار، policy و نتیجه Guard پیوند بخورد و پاسخ تاریخی با تغییر URL/Snapshot بازنویسی نشود؛ ذخیره پایدار در مالک C14/R03 بماند. | ADR-RAG-14:334–338; ADR-RAG-28:404–408; ADR-RAG-37:449–453; C14; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_14`, `docs_shahab_phase_2_development_blueprint_adr_rag_28` | Answer Trace Producer (C01 trace; R03 snapshot; C14 history owners) | EN:RAG:R06:004 / TASK:RAG:R06:005 | AC:RAG:R06:009 / TEST:RAG:R06:009 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:010 / REQ:RAG:R06:010 | Evaluation Harness نسخه‌دار کیفیت retrieval، extraction، relation، routing، answer، citation، refusal، time, security, cost و service outcome را جداگانه می‌سنجد و خطای حساس را در میانگین پنهان نمی‌کند؛ آستانه تا benchmark باز بماند. | ADR-RAG-11:319–323; B:723–740,1295–1310; F05; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_11`, `docs_shahab_phase_2_development_blueprint_proposed_evaluation_metrics` | Evaluation Harness (RAG quality owner; no product runtime inference) | EN:RAG:R06:004 / TASK:RAG:R06:005 | AC:RAG:R06:010 / TEST:RAG:R06:010 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:011 / REQ:RAG:R06:011 | بازخورد کاربر/ارزیاب فقط به دسته علت ریشه‌ای کیفیت نگاشت شود و بدون شواهد/مجوز به حقیقت حقوقی، داده آموزشی شخصی یا تغییر خودکار policy تبدیل نشود. | ADR-RAG-38:454–458; ADR-RAG-11:319–323; ADR-RAG-26:394–398; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_38` | Quality Feedback Loop (data owner for feedback not assumed) | EN:RAG:R06:004 / TASK:RAG:R06:006 | AC:RAG:R06:011 / TEST:RAG:R06:011 | ACCEPTED / source-backed; reopened only by this scoped audit |
+| CAND:RAG:R06:012 / REQ:RAG:R06:012 | تغییر مدل/Prompt/retrieval policy با نسخه، آزمون رگرسیون، مالک/تأیید و سازگاری code/API/Snapshot منتشر و rollback شود؛ برگشت به دانش حقوقی منسوخ ممنوع باشد. | ADR-RAG-19:359–363; ADR-RAG-28:404–408; ADR-RAG-38:454–458; A08; Graph nodes: `docs_shahab_phase_2_development_blueprint_adr_rag_19`, `docs_shahab_phase_2_development_blueprint_adr_rag_28` | Adviser Release Governance (C01 release contract owner) | EN:RAG:R06:004 / TASK:RAG:R06:006 | AC:RAG:R06:012 / TEST:RAG:R06:012 | ACCEPTED / source-backed; reopened only by this scoped audit |
+
+
+**Enablerها:**
+
+| ID | خروجی | Requirements | معیار تحقق |
+| --- | --- | --- | --- |
+| EN:RAG:R06:001 | هر پاسخ از claim map و شواهد type-safe ساخته شود. | REQ:RAG:R06:001–002 | ادعای شخصی/محصولی/حقوقی مالک حقیقت خود را حفظ کند. |
+| EN:RAG:R06:002 | Citation Guard و سیاست عدم قطعیت در سطح claim اعمال شود. | REQ:RAG:R06:003–005 | claim بی‌شاهد حذف/محدود یا امتناع هدفمند؛ no false confidence. |
+| EN:RAG:R06:003 | پاسخ قابل‌فهم، محدود و قابل نمایش باشد. | REQ:RAG:R06:006–007 | ارجاع انسانی وعده اجرایی نیست؛ اعداد و استناد بدون تغییر. |
+| EN:RAG:R06:004 | امنیت، trace و بهبود کیفیت در چرخه نسخه‌دار نگه داشته شوند. | REQ:RAG:R06:008–012 | C02/C14/C01 مالک قراردادهایشان؛ feedback محرک انتشار خودکار نیست. |
+
+
+**Taskها و خروجی اجرایی:**
+
+| Task ID / هدف | مالک | Requirements | وابستگی | خروجی و completion oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R06:001 — Claim map and typed evidence assembly | Adviser Response Evidence Adapter | REQ:RAG:R06:001–002 | R05 sufficiency result; R03 provision/Snapshot; C05b versioned product API; C02 purpose scope | ephemeral claim-to-evidence map preserving legal/product/personal evidence types and owner references |
+| TASK:RAG:R06:002 — Independent Citation Guard and uncertainty decision | Citation Guard / Answer Policy | REQ:RAG:R06:003–005 | R05 eligibility/sufficiency; R03 legal relations; R01 service/risk route; ADR-RAG-06/07/31/37 | per-claim guard verdict and full/partial/clarify/refuse output with reasons |
+| TASK:RAG:R06:003 — Support referral and Persian citation renderer | Answer UX / Citation Renderer | REQ:RAG:R06:006–007 | ADR-RAG-18; source evidence refs from R03; locale/source presentation contract | rendered answer with bounded referral and evidence-faithful Persian citation presentation |
+| TASK:RAG:R06:004 — Prompt, authorization and privacy boundary | Adviser Security Adapter | REQ:RAG:R06:008 | C02 identity/consent/session; C01 tool boundary; R02 untrusted external content | fail-closed tool/data policy and minimized trace fields; no alternate ACL |
+| TASK:RAG:R06:005 — Answer trace and evaluation harness | Answer Trace Producer / Evaluation Harness | REQ:RAG:R06:009–010 | C01:06 trace contract; C14 history; R03 Snapshot; F05 dataset requirements | versioned per-layer evaluation result and trace event; persistence remains owning service |
+| TASK:RAG:R06:006 — Feedback classification and versioned release gate | Quality Feedback / Release Governance | REQ:RAG:R06:011–012 | ADR-RAG-19/38; C01:07 release evidence; C14 feedback/history ownership | reviewed feedback category plus regression/approval/compatibility record; no threshold invented |
+
+
+**Subtaskها:**
+
+| Subtask | خروجی مستقل قابل بازبینی | ورودی / dependency | Requirements | Oracle / test link |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R06:001.S01 | تبدیل draft به claimهای مستقل و ثبت evidence/gap per claim. | R05 sufficiency; generated draft | R06:001 | compound claim split oracle |
+| TASK:RAG:R06:001.S02 | نگهداری type, authority, version, scope و verification status برای هر datum. | R03 legal; C05b product; C02 user context | R06:002 | no authority/type coercion |
+| TASK:RAG:R06:001.S03 | استفاده از نسخه‌های API مجاز و بدون query مستقیم DB/Core. | C01:02; C02 purpose port | R06:002 | API failure no bypass |
+| TASK:RAG:R06:002.S01 | اعتبارسنجی entailment و exact citation fields به‌شکل مستقل از model prose. | R05 eligible evidence; R03 span/hash | R06:003 | related URL cannot pass |
+| TASK:RAG:R06:002.S02 | ارزیابی ambiguity/conflict by scope/time/hierarchy and preserve unresolved state. | ADR-RAG-06/30/31; R03 relation records | R06:004 | date alone no precedence |
+| TASK:RAG:R06:002.S03 | انتخاب disposition per claim: full/partial/clarify/refuse by evidence/risk. | R01 risk; R05 sufficiency | R06:005 | one unsupported claim does not erase supported answer |
+| TASK:RAG:R06:003.S01 | ارائه محدودیت و referral suggestion بدون promise of ticket/expert service. | ADR-RAG-18 | R06:006 | no external case side effect |
+| TASK:RAG:R06:003.S02 | رندر citation به زبان/جهت درست با title, source, version/date, provision where present. | citation metadata; locale contract | R06:007 | raw location opens |
+| TASK:RAG:R06:003.S03 | حفظ عدد، واحد، تقویم، ستون، تبصره و پاورقی مطابق raw evidence. | F05 fixtures; R02/R03 source locations | R06:007 | numeric/date/exception equivalence |
+| TASK:RAG:R06:004.S01 | علامت‌گذاری retrieved text به‌عنوان untrusted و جداکردن policy/system instruction. | R02 source content; C01 tool contract | R06:008 | prompt injection has no tool authority |
+| TASK:RAG:R06:004.S02 | درخواست user data را با C02 actor/tenant/consent هر بار scope کن. | C02:01–03; owner service API | R06:008 | revocation/current membership check |
+| TASK:RAG:R06:004.S03 | حذف PII/CoT غیرضروری از trace و حفظ failure audit لازم. | ADR-RAG-14; C01 trace | R06:008 | no sensitive prompt storage |
+| TASK:RAG:R06:005.S01 | تولید trace refs به snapshot/version/claim/citation/guard reason برای پاسخ. | R03 snapshot; C01:06 | R06:009 | historical trace replay |
+| TASK:RAG:R06:005.S02 | ساخت dataset versioned با retrieval/extraction/answer/citation/refusal/security layers. | ADR-RAG-11; F05 | R06:010 | per-layer metrics and severe-error bucket |
+| TASK:RAG:R06:005.S03 | ثبت test/report status و عدم PASS در runner/fixture failure. | dataset manifest & runner | R06:010 | incomplete run cannot pass |
+| TASK:RAG:R06:006.S01 | دسته‌بندی feedback به root cause و ثبت provenance/consent حداقل لازم. | ADR-RAG-38; C14 owner | R06:011 | feedback not truth |
+| TASK:RAG:R06:006.S02 | تبدیل feedback به آزمون regression پیشنهادی و review انسانی. | approved data policy; versioned evaluation set | R06:011 | no auto knowledge mutation |
+| TASK:RAG:R06:006.S03 | انتشار/rollback prompt/config فقط پس از compatibility and regression gate. | ADR-RAG-19; C01:07; R03 Snapshot | R06:012 | tuple compatible and no stale law reactivated |
+
+
+**معیارهای پذیرش:** هر AC شرایط اولیه، محرک، خروجی قابل مشاهده، مرز شکست و oracle قابل‌اندازه‌گیری دارد.
+
+| AC ID / Requirement | Given / پیش‌شرط | When / محرک | Then / خروجی قابل مشاهده و PASS oracle | FAIL / boundary |
+| --- | --- | --- | --- | --- |
+| AC:RAG:R06:001 / REQ:RAG:R06:001 | پاسخ پیش‌نویس شامل سه ادعای مستقل و یک جمله ترکیبی عددی/شرطی | ساخت claim map قبل از render | سه claim مستقل و اجزای عدد/شرط به شاهدهای متفاوت یا gap صریح map می‌شوند؛ جمله ترکیبی مبهم منتشر نمی‌شود؛ oracle: claim_id set برابر ادعاهای معنایی مادی fixture؛ هر claim evidence_refs یا disposition دارد | این map نتیجه حقوقی تازه یا evidence data store فیزیکی ایجاد نمی‌کند |
+| AC:RAG:R06:002 / REQ:RAG:R06:002 | مجموعه evidence دارای legal instrument، محصول در Snapshot و خوداظهاری کاربر | ترکیب evidence برای پاسخ شرط محصول و وضعیت شخصی | هر فیلد source_type/owner/snapshot/verification_state جدا دارد؛ هیچ ادعایی نوع/مالک دیگری را به ارث نمی‌برد؛ oracle: field provenance equals fixture; product fields from versioned Core API; personal field with absent consent omitted | سه منبع حقیقت ممکن است در زیرساخت مشترک باشند اما نوع/ACL مخلوط نمی‌شوند |
+| AC:RAG:R06:003 / REQ:RAG:R06:003 | Claim گفته «بانک مکلف است ضامن دوم بپذیرد» و شاهدی فقط شرایط عمومی تضامین را نشان می‌دهد | اعتبارسنجی draft claim علیه evidence span | claim فقط در محدوده‌ای که متن/قلمرو واقعاً entail می‌کند accepted؛ لینک مرتبط بدون شاهد exact fail می‌شود؛ oracle: assert exact document/version/provision/hash/scope and entailment result; citation location resolves raw artifact | تشابه موضوع، domain match یا وجود لینک جای گزاره پشتیبان را نمی‌گیرد |
+| AC:RAG:R06:004 / REQ:RAG:R06:004 | دو حکم یکسان‌نما با قلمرو بانک متفاوت و یک amendment تاریخ‌جدید اما بدون رابطه تأییدشده | ارزیابی claim و تولید conflict/uncertainty output | قلمرو متفاوت به‌عنوان conflict واقعی گزارش نمی‌شود؛ precedence فقط با authority/applicability/relation evidence تاییدشده نتیجه می‌شود؛ oracle: assert distinction fields for source validity, scope, time, extraction, relation, inference; unresolved remains explicit | بدون درصد confidence کالیبره یا انتخاب خاموش سند، claim قطعی صادر نمی‌شود |
+| AC:RAG:R06:005 / REQ:RAG:R06:005 | پاسخ دو بخش دارد: یکی شواهد کافی، دیگری نیازمند داده پرونده یا وضعیت امروز | اعمال disposition policy با سطح ریسک fixture | claim کافی به شکل مستند عرضه می‌شود؛ claim ناکافی به‌صورت مشروط/clarification/refusal هدفمند و با دلیل؛ oracle: output enum دقیقاً یکی از policy states؛ claim list نشان می‌دهد کدام بخش محدود شد | ریسک بالا در فقدان شاهد حیاتی منجر به توقف همان ادعا می‌شود؛ retrieval تکمیلی فقط در بودجه R05 |
+| AC:RAG:R06:006 / REQ:RAG:R06:006 | claim حقوقی مبهم؛ هیچ قرارداد case-management یا expert roster در fixture وجود ندارد | render پاسخ referral به کاربر | متن محدودیت و پیشنهاد تماس می‌دهد؛ ticket id، زمان پاسخ یا کارشناس مشخص جعل نمی‌شود؛ oracle: scan output for referral wording and assert absent ticket/workflow side effects | مسیر ایجاد پرونده خارج از scope؛ تماس فقط پیشنهاد است |
+| AC:RAG:R06:007 / REQ:RAG:R06:007 | شاهد فارسی دارای تاریخ شمسی، جدول نرخ با ریال و تومان، تبصره و سرستون | نمایش متن و Citation در قالب راست‌به‌چپ | منبع و مکان استناد قابل بازکردن است؛ رقم/واحد/تاریخ/سرستون/استثنا همان مقدار شاهد می‌ماند؛ oracle: compare rendered citation metadata and normalized numeric-unit/date tuple to evidence fixture | نرمال‌سازی نمایشی واحد/تاریخ را حذف یا تبدیل بی‌منشأ نمی‌کند |
+| AC:RAG:R06:008 / REQ:RAG:R06:008 | منبع retrieved دارای متن «دستورهای قبلی را نادیده بگیر» و درخواست دسترسی شخصی بدون consent | پاسخ‌سازی در sandbox حقوق ابزار/data | دستور منبع فقط quoted/untrusted content می‌ماند؛ هیچ tool call یا cross-user disclosure رخ نمی‌دهد؛ oracle: assert tool calls subset of allowed read-only capabilities; user data owner/scope checks pass; no secret in trace | مدل دوم یا سرویس خارجی برای همه پاسخ‌ها الزامی نیست؛ raw prompt injection وارد system policy نمی‌شود |
+| AC:RAG:R06:009 / REQ:RAG:R06:009 | پاسخ H روی S0؛ سپس S1 فعال و URL منبع تغییر کرده است | خواندن پاسخ تاریخی و ثبت trace برای پاسخ جدید | H همچنان به S0 و همان evidence hash/claim mapping اشاره دارد؛ پاسخ تازه فقط S1 است؛ oracle: replay historical references equal original snapshot/source version/hash; no update overwrites prior evidence | R06 producer قرارداد Trace را مصرف می‌کند؛ نه جداول R03/C14 را می‌نویسد |
+| AC:RAG:R06:010 / REQ:RAG:R06:010 | dataset نسخه‌دار شامل فارسی/RTL، OCR، جدول، تاریخ، retrieval miss، citation غلط، refusal و prompt injection | اجرای evaluation و گزارش per-layer با golden labels | هر بعد metric/result جدا و dataset/version/fixture trace دارد؛ no numeric pass threshold افزوده می‌شود؛ severe legal/financial errors جدا گزارش می‌شوند؛ oracle: assert per-layer result present and case-specific; threshold field OPEN; aggregate cannot hide severity bucket | برنامه تست با اجرای واقعی source/OCR/runtime اشتباه گرفته نمی‌شود |
+| AC:RAG:R06:011 / REQ:RAG:R06:011 | بازخورد «پاسخ اشتباه بود» بدون منبع و اعتراض دارای source span معتبر؛ رضایت داده متفاوت | ثبت feedback case و دسته‌بندی root cause | بازخورد بی‌شاهد queue review می‌شود؛ دسته‌ها فهم/استخراج/chunk/rank/route/citation و تغییر policy فقط پس از آزمون/release approved؛ oracle: assert feedback record has consent/provenance/minimal fields; no active policy/Snapshot mutation | بازخورد خود به‌تنهایی حکم حقوقی یا مجوز آموزش نیست |
+| AC:RAG:R06:012 / REQ:RAG:R06:012 | نسخه active model/prompt/config M1 با S1 و candidate M2 با S2؛ رگرسیون citation دارد | تأیید انتشار محدود یا rollback به نسخه قبلی | انتشار تنها پس از test/approval/compatibility؛ rollback فقط به tuple سازگار با Snapshot معتبر؛ قانون منسوخ current نمی‌شود؛ oracle: assert release tuple code/API/model/prompt/policy/snapshot compatibility and approval evidence | Feature flag/runtime secret، policy business را دور نمی‌زند؛ Numeric threshold باز باقی می‌ماند |
+
+
+**Test Definitions:** همه `NOT_EXECUTED` هستند؛ چهار Planned Test Case مستقل برای هر رفتار (positive, negative, boundary, failure).
+
+| Test Definition | Requirement | وجه‌های اختصاصی آزمون | Planned Test Cases | وضعیت |
+| --- | --- | --- | --- | --- |
+| TEST:RAG:R06:001 | REQ:RAG:R06:001 | ادعاهای مادی پاسخ مالی/حقوقی به واحدهای مستقل شکسته و هر واحد به شاهد یا وضعیت صریحِ بی‌شاهد وصل شود. | TC:RAG:R06:001-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:002 | REQ:RAG:R06:002 | شواهد حقوقی، محصولی و شخصی نوع‌دار و با مالک حقیقت خود باقی بمانند؛ محصول/محاسبه فقط از API نسخه‌دار Core و زمینه شخصی فقط از قرارداد مجاز مالک مصرف شود. | TC:RAG:R06:002-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:003 | REQ:RAG:R06:003 | Citation Guard مستقل از text generation هر claim مادی را از حیث پشتیبانی معنایی و exact provision/version/authority/time/scope/hash بررسی کند؛ URL مرتبط به‌تنهایی citation نیست. | TC:RAG:R06:003-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:004 | REQ:RAG:R06:004 | تعارض واقعی، تفاوت قلمرو، زمان، استثنا و عدم قطعیت مرحله‌ای را در نتیجه پاسخ جدا کند و precedence را از تازگی/شباهت به‌تنهایی نتیجه نگیرد. | TC:RAG:R06:004-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:005 | REQ:RAG:R06:005 | سیاست پاسخ با توجه به پوشش/ریسک هر claim یکی از پاسخ کامل، پاسخ جزئی/مشروط، پرسش تکمیلی یا امتناع هدفمند را تعیین کند؛ بخش مستند به‌خاطر یک gap بی‌ربط حذف نشود. | TC:RAG:R06:005-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:006 | REQ:RAG:R06:006 | در ریسک/ابهام حقوقی پاسخ محدودیت را بیان و فقط پیشنهاد تماس با پشتیبانی شهاب برای بررسی کارشناسی دهد؛ وجود تیم یا ثبت خودکار پرونده را وعده ندهد. | TC:RAG:R06:006-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:007 | REQ:RAG:R06:007 | استناد قابل‌نمایش باید برای کاربر عنوان/منبع/نسخه یا تاریخ و بند/مکان را در صورت وجود روشن کند؛ rendering فارسی، جدول، عدد، واحد و استثنا را بدون تغییر معنای شاهد حفظ کند. | TC:RAG:R06:007-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:008 | REQ:RAG:R06:008 | محتوای retrieved خارجی داده غیرقابل اعتماد بماند؛ prompt/page/PDF دستور ابزار یا policy را تغییر ندهد و دسترسی شخصی با مجوز/حدود C02 حفظ شود. | TC:RAG:R06:008-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:009 | REQ:RAG:R06:009 | trace پاسخ/claim به Snapshot، evidence نسخه‌دار، policy و نتیجه Guard پیوند بخورد و پاسخ تاریخی با تغییر URL/Snapshot بازنویسی نشود؛ ذخیره پایدار در مالک C14/R03 بماند. | TC:RAG:R06:009-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:010 | REQ:RAG:R06:010 | Evaluation Harness نسخه‌دار کیفیت retrieval، extraction، relation، routing، answer، citation، refusal، time, security, cost و service outcome را جداگانه می‌سنجد و خطای حساس را در میانگین پنهان نمی‌کند؛ آستانه تا benchmark باز بماند. | TC:RAG:R06:010-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:011 | REQ:RAG:R06:011 | بازخورد کاربر/ارزیاب فقط به دسته علت ریشه‌ای کیفیت نگاشت شود و بدون شواهد/مجوز به حقیقت حقوقی، داده آموزشی شخصی یا تغییر خودکار policy تبدیل نشود. | TC:RAG:R06:011-P/N/B/F | NOT_EXECUTED |
+| TEST:RAG:R06:012 | REQ:RAG:R06:012 | تغییر مدل/Prompt/retrieval policy با نسخه، آزمون رگرسیون، مالک/تأیید و سازگاری code/API/Snapshot منتشر و rollback شود؛ برگشت به دانش حقوقی منسوخ ممنوع باشد. | TC:RAG:R06:012-P/N/B/F | NOT_EXECUTED |
+
+
+**Planned Test Cases — NOT_EXECUTED:**
+
+| Case ID | Req | Precondition / fixture | Action | Expected observable result | Assertion / oracle | Invariant |
+| --- | --- | --- | --- | --- | --- | --- |
+| TC:RAG:R06:001-P | REQ:RAG:R06:001 | پاسخ پیش‌نویس شامل سه ادعای مستقل و یک جمله ترکیبی عددی/شرطی | ساخت claim map قبل از render | سه claim مستقل و اجزای عدد/شرط به شاهدهای متفاوت یا gap صریح map می‌شوند؛ جمله ترکیبی مبهم منتشر نمی‌شود | claim_id set برابر ادعاهای معنایی مادی fixture؛ هر claim evidence_refs یا disposition دارد | این map نتیجه حقوقی تازه یا evidence data store فیزیکی ایجاد نمی‌کند; claim-level granularity |
+| TC:RAG:R06:001-N | REQ:RAG:R06:001 | پاسخ پیش‌نویس شامل سه ادعای مستقل و یک جمله ترکیبی عددی/شرطی؛ حالت منفی: draft includes compound claim with one unsupported clause | claim map built | unsupported clause has own insufficient status; not linked to nearby evidence | assert claim count/refs | این map نتیجه حقوقی تازه یا evidence data store فیزیکی ایجاد نمی‌کند; claim-level granularity |
+| TC:RAG:R06:001-B | REQ:RAG:R06:001 | پاسخ پیش‌نویس شامل سه ادعای مستقل و یک جمله ترکیبی عددی/شرطی؛ مرز آزمون: standalone claim has exact paragraph support | build map | one claim links to source span | assert one-to-one semantic coverage | این map نتیجه حقوقی تازه یا evidence data store فیزیکی ایجاد نمی‌کند; claim-level granularity |
+| TC:RAG:R06:001-F | REQ:RAG:R06:001 | پاسخ پیش‌نویس شامل سه ادعای مستقل و یک جمله ترکیبی عددی/شرطی؛ شکست وابستگی: amount and exception have separate reference locations | claim parser returns malformed output | render blocked/limited; failure visible | assert no unsupported draft publish | این map نتیجه حقوقی تازه یا evidence data store فیزیکی ایجاد نمی‌کند; claim-level granularity |
+| TC:RAG:R06:002-P | REQ:RAG:R06:002 | مجموعه evidence دارای legal instrument، محصول در Snapshot و خوداظهاری کاربر | ترکیب evidence برای پاسخ شرط محصول و وضعیت شخصی | هر فیلد source_type/owner/snapshot/verification_state جدا دارد؛ هیچ ادعایی نوع/مالک دیگری را به ارث نمی‌برد | field provenance equals fixture; product fields from versioned Core API; personal field with absent consent omitted | سه منبع حقیقت ممکن است در زیرساخت مشترک باشند اما نوع/ACL مخلوط نمی‌شوند; owner-specific access |
+| TC:RAG:R06:002-N | REQ:RAG:R06:002 | مجموعه evidence دارای legal instrument، محصول در Snapshot و خوداظهاری کاربر؛ حالت منفی: self-asserted eligibility plus no personal consent | evidence adapter called | personal field omitted; legal/product fields stay typed | assert provenance and consent | سه منبع حقیقت ممکن است در زیرساخت مشترک باشند اما نوع/ACL مخلوط نمی‌شوند; owner-specific access |
+| TC:RAG:R06:002-B | REQ:RAG:R06:002 | مجموعه evidence دارای legal instrument، محصول در Snapshot و خوداظهاری کاربر؛ مرز آزمون: Core product API returns published snapshot | compose evidence | product evidence carries snapshot_id/version | assert API response provenance | سه منبع حقیقت ممکن است در زیرساخت مشترک باشند اما نوع/ACL مخلوط نمی‌شوند; owner-specific access |
+| TC:RAG:R06:002-F | REQ:RAG:R06:002 | مجموعه evidence دارای legal instrument، محصول در Snapshot و خوداظهاری کاربر؛ شکست وابستگی: personal data pertains to another organization tenant | permission service unavailable | no personal data consumed; error not bypassed | assert fail-closed | سه منبع حقیقت ممکن است در زیرساخت مشترک باشند اما نوع/ACL مخلوط نمی‌شوند; owner-specific access |
+| TC:RAG:R06:003-P | REQ:RAG:R06:003 | Claim گفته «بانک مکلف است ضامن دوم بپذیرد» و شاهدی فقط شرایط عمومی تضامین را نشان می‌دهد | اعتبارسنجی draft claim علیه evidence span | claim فقط در محدوده‌ای که متن/قلمرو واقعاً entail می‌کند accepted؛ لینک مرتبط بدون شاهد exact fail می‌شود | assert exact document/version/provision/hash/scope and entailment result; citation location resolves raw artifact | تشابه موضوع، domain match یا وجود لینک جای گزاره پشتیبان را نمی‌گیرد; relevant link alone insufficient |
+| TC:RAG:R06:003-N | REQ:RAG:R06:003 | Claim گفته «بانک مکلف است ضامن دوم بپذیرد» و شاهدی فقط شرایط عمومی تضامین را نشان می‌دهد؛ حالت منفی: only topical URL provided with no exact span | Citation Guard run | claim rejected or qualified; exact citation absent not disguised | assert guard=false | تشابه موضوع، domain match یا وجود لینک جای گزاره پشتیبان را نمی‌گیرد; relevant link alone insufficient |
+| TC:RAG:R06:003-B | REQ:RAG:R06:003 | Claim گفته «بانک مکلف است ضامن دوم بپذیرد» و شاهدی فقط شرایط عمومی تضامین را نشان می‌دهد؛ مرز آزمون: claim scope matches direct legal provision | guard run | claim accepted with exact artifact/hash/provision | assert all citation keys | تشابه موضوع، domain match یا وجود لینک جای گزاره پشتیبان را نمی‌گیرد; relevant link alone insufficient |
+| TC:RAG:R06:003-F | REQ:RAG:R06:003 | Claim گفته «بانک مکلف است ضامن دوم بپذیرد» و شاهدی فقط شرایط عمومی تضامین را نشان می‌دهد؛ شکست وابستگی: source provision covers related topic but not demanded conclusion | artifact hash mismatch | publish blocked | assert hash compare and no citation display | تشابه موضوع، domain match یا وجود لینک جای گزاره پشتیبان را نمی‌گیرد; relevant link alone insufficient |
+| TC:RAG:R06:004-P | REQ:RAG:R06:004 | دو حکم یکسان‌نما با قلمرو بانک متفاوت و یک amendment تاریخ‌جدید اما بدون رابطه تأییدشده | ارزیابی claim و تولید conflict/uncertainty output | قلمرو متفاوت به‌عنوان conflict واقعی گزارش نمی‌شود؛ precedence فقط با authority/applicability/relation evidence تاییدشده نتیجه می‌شود | assert distinction fields for source validity, scope, time, extraction, relation, inference; unresolved remains explicit | بدون درصد confidence کالیبره یا انتخاب خاموش سند، claim قطعی صادر نمی‌شود; date freshness not legal precedence |
+| TC:RAG:R06:004-N | REQ:RAG:R06:004 | دو حکم یکسان‌نما با قلمرو بانک متفاوت و یک amendment تاریخ‌جدید اما بدون رابطه تأییدشده؛ حالت منفی: newer publication date but no confirmed repeal relation | answer conflict evaluation | no precedence inferred; both relevant states visible as uncertainty | assert no automatic supersession | بدون درصد confidence کالیبره یا انتخاب خاموش سند، claim قطعی صادر نمی‌شود; date freshness not legal precedence |
+| TC:RAG:R06:004-B | REQ:RAG:R06:004 | دو حکم یکسان‌نما با قلمرو بانک متفاوت و یک amendment تاریخ‌جدید اما بدون رابطه تأییدشده؛ مرز آزمون: specific rule has confirmed applicability and valid hierarchy | evaluate conflict | resolution scoped to matching product/date | assert authority + scope | بدون درصد confidence کالیبره یا انتخاب خاموش سند، claim قطعی صادر نمی‌شود; date freshness not legal precedence |
+| TC:RAG:R06:004-F | REQ:RAG:R06:004 | دو حکم یکسان‌نما با قلمرو بانک متفاوت و یک amendment تاریخ‌جدید اما بدون رابطه تأییدشده؛ شکست وابستگی: general and specific rule apply to different entities | relation store unavailable | uncertainty retained and definitive answer blocked | assert safe disposition | بدون درصد confidence کالیبره یا انتخاب خاموش سند، claim قطعی صادر نمی‌شود; date freshness not legal precedence |
+| TC:RAG:R06:005-P | REQ:RAG:R06:005 | پاسخ دو بخش دارد: یکی شواهد کافی، دیگری نیازمند داده پرونده یا وضعیت امروز | اعمال disposition policy با سطح ریسک fixture | claim کافی به شکل مستند عرضه می‌شود؛ claim ناکافی به‌صورت مشروط/clarification/refusal هدفمند و با دلیل | output enum دقیقاً یکی از policy states؛ claim list نشان می‌دهد کدام بخش محدود شد | ریسک بالا در فقدان شاهد حیاتی منجر به توقف همان ادعا می‌شود؛ retrieval تکمیلی فقط در بودجه R05; no gap guessed |
+| TC:RAG:R06:005-N | REQ:RAG:R06:005 | پاسخ دو بخش دارد: یکی شواهد کافی، دیگری نیازمند داده پرونده یا وضعیت امروز؛ حالت منفی: one claim supported; one high-risk claim lacks mandatory evidence | choose answer disposition | supported part remains; high-risk unsupported claim refused/qualified | assert per-claim output modes | ریسک بالا در فقدان شاهد حیاتی منجر به توقف همان ادعا می‌شود؛ retrieval تکمیلی فقط در بودجه R05; no gap guessed |
+| TC:RAG:R06:005-B | REQ:RAG:R06:005 | پاسخ دو بخش دارد: یکی شواهد کافی، دیگری نیازمند داده پرونده یا وضعیت امروز؛ مرز آزمون: all claims supported, low risk | evaluate | documented answer disposition | assert policy state | ریسک بالا در فقدان شاهد حیاتی منجر به توقف همان ادعا می‌شود؛ retrieval تکمیلی فقط در بودجه R05; no gap guessed |
+| TC:RAG:R06:005-F | REQ:RAG:R06:005 | پاسخ دو بخش دارد: یکی شواهد کافی، دیگری نیازمند داده پرونده یا وضعیت امروز؛ شکست وابستگی: missing one named required field | risk policy input missing | full answer not chosen; policy error surfaced | assert no default full | ریسک بالا در فقدان شاهد حیاتی منجر به توقف همان ادعا می‌شود؛ retrieval تکمیلی فقط در بودجه R05; no gap guessed |
+| TC:RAG:R06:006-P | REQ:RAG:R06:006 | claim حقوقی مبهم؛ هیچ قرارداد case-management یا expert roster در fixture وجود ندارد | render پاسخ referral به کاربر | متن محدودیت و پیشنهاد تماس می‌دهد؛ ticket id، زمان پاسخ یا کارشناس مشخص جعل نمی‌شود | scan output for referral wording and assert absent ticket/workflow side effects | مسیر ایجاد پرونده خارج از scope؛ تماس فقط پیشنهاد است; do not promise workflow |
+| TC:RAG:R06:006-N | REQ:RAG:R06:006 | claim حقوقی مبهم؛ هیچ قرارداد case-management یا expert roster در fixture وجود ندارد؛ حالت منفی: no support team/ticket integration registered | create user-facing referral copy | suggest contact only; no case or SLA assertion | assert no side effect | مسیر ایجاد پرونده خارج از scope؛ تماس فقط پیشنهاد است; do not promise workflow |
+| TC:RAG:R06:006-B | REQ:RAG:R06:006 | claim حقوقی مبهم؛ هیچ قرارداد case-management یا expert roster در fixture وجود ندارد؛ مرز آزمون: legal ambiguity exists | render response | explicit limitation and suggestion | assert wording class | مسیر ایجاد پرونده خارج از scope؛ تماس فقط پیشنهاد است; do not promise workflow |
+| TC:RAG:R06:006-F | REQ:RAG:R06:006 | claim حقوقی مبهم؛ هیچ قرارداد case-management یا expert roster در fixture وجود ندارد؛ شکست وابستگی: ordinary answer is unambiguous | referral template unavailable | safe limitation remains; no invented ticket ID | assert no ticket token | مسیر ایجاد پرونده خارج از scope؛ تماس فقط پیشنهاد است; do not promise workflow |
+| TC:RAG:R06:007-P | REQ:RAG:R06:007 | شاهد فارسی دارای تاریخ شمسی، جدول نرخ با ریال و تومان، تبصره و سرستون | نمایش متن و Citation در قالب راست‌به‌چپ | منبع و مکان استناد قابل بازکردن است؛ رقم/واحد/تاریخ/سرستون/استثنا همان مقدار شاهد می‌ماند | compare rendered citation metadata and normalized numeric-unit/date tuple to evidence fixture | نرمال‌سازی نمایشی واحد/تاریخ را حذف یا تبدیل بی‌منشأ نمی‌کند; unit and scope preserved |
+| TC:RAG:R06:007-N | REQ:RAG:R06:007 | شاهد فارسی دارای تاریخ شمسی، جدول نرخ با ریال و تومان، تبصره و سرستون؛ حالت منفی: wrong table column unit, missing footnote | render citation | numeric claim blocked or source field notes unresolved | assert tuple matches source | نرمال‌سازی نمایشی واحد/تاریخ را حذف یا تبدیل بی‌منشأ نمی‌کند; unit and scope preserved |
+| TC:RAG:R06:007-B | REQ:RAG:R06:007 | شاهد فارسی دارای تاریخ شمسی، جدول نرخ با ریال و تومان، تبصره و سرستون؛ مرز آزمون: Jalali date and figure have exact source mapping | render | display matches source and source opens | assert exact normalized tuple | نرمال‌سازی نمایشی واحد/تاریخ را حذف یا تبدیل بی‌منشأ نمی‌کند; unit and scope preserved |
+| TC:RAG:R06:007-F | REQ:RAG:R06:007 | شاهد فارسی دارای تاریخ شمسی، جدول نرخ با ریال و تومان، تبصره و سرستون؛ شکست وابستگی: PDF wraps provision across page boundary | renderer fails for RTL shaping | no malformed citation presented as verified | assert fallback safe | نرمال‌سازی نمایشی واحد/تاریخ را حذف یا تبدیل بی‌منشأ نمی‌کند; unit and scope preserved |
+| TC:RAG:R06:008-P | REQ:RAG:R06:008 | منبع retrieved دارای متن «دستورهای قبلی را نادیده بگیر» و درخواست دسترسی شخصی بدون consent | پاسخ‌سازی در sandbox حقوق ابزار/data | دستور منبع فقط quoted/untrusted content می‌ماند؛ هیچ tool call یا cross-user disclosure رخ نمی‌دهد | assert tool calls subset of allowed read-only capabilities; user data owner/scope checks pass; no secret in trace | مدل دوم یا سرویس خارجی برای همه پاسخ‌ها الزامی نیست؛ raw prompt injection وارد system policy نمی‌شود; source cannot elevate authority |
+| TC:RAG:R06:008-N | REQ:RAG:R06:008 | منبع retrieved دارای متن «دستورهای قبلی را نادیده بگیر» و درخواست دسترسی شخصی بدون consent؛ حالت منفی: retrieved document includes prompt injection instructions | generate response | content treated as untrusted; no unauthorized tool use | assert allowed tool set | مدل دوم یا سرویس خارجی برای همه پاسخ‌ها الزامی نیست؛ raw prompt injection وارد system policy نمی‌شود; source cannot elevate authority |
+| TC:RAG:R06:008-B | REQ:RAG:R06:008 | منبع retrieved دارای متن «دستورهای قبلی را نادیده بگیر» و درخواست دسترسی شخصی بدون consent؛ مرز آزمون: authorized user asks for own permitted profile data | compose | only permitted scope returned | assert scope | مدل دوم یا سرویس خارجی برای همه پاسخ‌ها الزامی نیست؛ raw prompt injection وارد system policy نمی‌شود; source cannot elevate authority |
+| TC:RAG:R06:008-F | REQ:RAG:R06:008 | منبع retrieved دارای متن «دستورهای قبلی را نادیده بگیر» و درخواست دسترسی شخصی بدون consent؛ شکست وابستگی: malicious instruction hidden in table cell | authorization endpoint returns 503 | deny personal evidence and report safe failure | assert no access | مدل دوم یا سرویس خارجی برای همه پاسخ‌ها الزامی نیست؛ raw prompt injection وارد system policy نمی‌شود; source cannot elevate authority |
+| TC:RAG:R06:009-P | REQ:RAG:R06:009 | پاسخ H روی S0؛ سپس S1 فعال و URL منبع تغییر کرده است | خواندن پاسخ تاریخی و ثبت trace برای پاسخ جدید | H همچنان به S0 و همان evidence hash/claim mapping اشاره دارد؛ پاسخ تازه فقط S1 است | replay historical references equal original snapshot/source version/hash; no update overwrites prior evidence | R06 producer قرارداد Trace را مصرف می‌کند؛ نه جداول R03/C14 را می‌نویسد; no silent rewrite |
+| TC:RAG:R06:009-N | REQ:RAG:R06:009 | پاسخ H روی S0؛ سپس S1 فعال و URL منبع تغییر کرده است؛ حالت منفی: source URL now points to different version and S1 active | replay historic answer | historic answer still points to S0 old hash | assert immutable trace refs | R06 producer قرارداد Trace را مصرف می‌کند؛ نه جداول R03/C14 را می‌نویسد; no silent rewrite |
+| TC:RAG:R06:009-B | REQ:RAG:R06:009 | پاسخ H روی S0؛ سپس S1 فعال و URL منبع تغییر کرده است؛ مرز آزمون: new answer emitted after S1 | trace producer called | new trace bound S1 | assert only S1 refs | R06 producer قرارداد Trace را مصرف می‌کند؛ نه جداول R03/C14 را می‌نویسد; no silent rewrite |
+| TC:RAG:R06:009-F | REQ:RAG:R06:009 | پاسخ H روی S0؛ سپس S1 فعال و URL منبع تغییر کرده است؛ شکست وابستگی: historic and new responses share same doc but distinct version | C14 trace sink down | no claim that trace/history persisted; error observed | assert persistence status not success | R06 producer قرارداد Trace را مصرف می‌کند؛ نه جداول R03/C14 را می‌نویسد; no silent rewrite |
+| TC:RAG:R06:010-P | REQ:RAG:R06:010 | dataset نسخه‌دار شامل فارسی/RTL، OCR، جدول، تاریخ، retrieval miss، citation غلط، refusal و prompt injection | اجرای evaluation و گزارش per-layer با golden labels | هر بعد metric/result جدا و dataset/version/fixture trace دارد؛ no numeric pass threshold افزوده می‌شود؛ severe legal/financial errors جدا گزارش می‌شوند | assert per-layer result present and case-specific; threshold field OPEN; aggregate cannot hide severity bucket | برنامه تست با اجرای واقعی source/OCR/runtime اشتباه گرفته نمی‌شود; aggregate cannot mask severe defect |
+| TC:RAG:R06:010-N | REQ:RAG:R06:010 | dataset نسخه‌دار شامل فارسی/RTL، OCR، جدول، تاریخ، retrieval miss، citation غلط، refusal و prompt injection؛ حالت منفی: fluent response has citation error in golden set | evaluation batch run | citation layer records fail even when fluency succeeds | assert per-layer failure | برنامه تست با اجرای واقعی source/OCR/runtime اشتباه گرفته نمی‌شود; aggregate cannot mask severe defect |
+| TC:RAG:R06:010-B | REQ:RAG:R06:010 | dataset نسخه‌دار شامل فارسی/RTL، OCR، جدول، تاریخ، retrieval miss، citation غلط، refusal و prompt injection؛ مرز آزمون: all fixtures pass known expected results | run dataset version | metrics per requested layer and version outputs | assert required dimensions | برنامه تست با اجرای واقعی source/OCR/runtime اشتباه گرفته نمی‌شود; aggregate cannot mask severe defect |
+| TC:RAG:R06:010-F | REQ:RAG:R06:010 | dataset نسخه‌دار شامل فارسی/RTL، OCR، جدول، تاریخ، retrieval miss، citation غلط، refusal و prompt injection؛ شکست وابستگی: severe legal claim fail among many simple passes | test data version mismatch | run marked incomplete, no pass | assert incomplete status | برنامه تست با اجرای واقعی source/OCR/runtime اشتباه گرفته نمی‌شود; aggregate cannot mask severe defect |
+| TC:RAG:R06:011-P | REQ:RAG:R06:011 | بازخورد «پاسخ اشتباه بود» بدون منبع و اعتراض دارای source span معتبر؛ رضایت داده متفاوت | ثبت feedback case و دسته‌بندی root cause | بازخورد بی‌شاهد queue review می‌شود؛ دسته‌ها فهم/استخراج/chunk/rank/route/citation و تغییر policy فقط پس از آزمون/release approved | assert feedback record has consent/provenance/minimal fields; no active policy/Snapshot mutation | بازخورد خود به‌تنهایی حکم حقوقی یا مجوز آموزش نیست; feedback not truth |
+| TC:RAG:R06:011-N | REQ:RAG:R06:011 | بازخورد «پاسخ اشتباه بود» بدون منبع و اعتراض دارای source span معتبر؛ رضایت داده متفاوت؛ حالت منفی: negative feedback with no evidence/source and no allowed training consent | feedback intake | review signal only; no KB/prompt/model/personal dataset change | assert no state mutation | بازخورد خود به‌تنهایی حکم حقوقی یا مجوز آموزش نیست; feedback not truth |
+| TC:RAG:R06:011-B | REQ:RAG:R06:011 | بازخورد «پاسخ اشتباه بود» بدون منبع و اعتراض دارای source span معتبر؛ رضایت داده متفاوت؛ مرز آزمون: evaluator gives source span pinpointing OCR error | categorize | root cause=extraction with evidence reference | assert category | بازخورد خود به‌تنهایی حکم حقوقی یا مجوز آموزش نیست; feedback not truth |
+| TC:RAG:R06:011-F | REQ:RAG:R06:011 | بازخورد «پاسخ اشتباه بود» بدون منبع و اعتراض دارای source span معتبر؛ رضایت داده متفاوت؛ شکست وابستگی: same root cause repeated by separate authorized reviewers | feedback store unavailable | do not drop silently or alter source of truth; intake failure visible | assert failure event | بازخورد خود به‌تنهایی حکم حقوقی یا مجوز آموزش نیست; feedback not truth |
+| TC:RAG:R06:012-P | REQ:RAG:R06:012 | نسخه active model/prompt/config M1 با S1 و candidate M2 با S2؛ رگرسیون citation دارد | تأیید انتشار محدود یا rollback به نسخه قبلی | انتشار تنها پس از test/approval/compatibility؛ rollback فقط به tuple سازگار با Snapshot معتبر؛ قانون منسوخ current نمی‌شود | assert release tuple code/API/model/prompt/policy/snapshot compatibility and approval evidence | Feature flag/runtime secret، policy business را دور نمی‌زند؛ Numeric threshold باز باقی می‌ماند; no obsolete current state |
+| TC:RAG:R06:012-N | REQ:RAG:R06:012 | نسخه active model/prompt/config M1 با S1 و candidate M2 با S2؛ رگرسیون citation دارد؛ حالت منفی: rollback target references superseded Snapshot with incompatible API | validate rollback | activation rejected; current compatible tuple remains | assert compatibility and legal status | Feature flag/runtime secret، policy business را دور نمی‌زند؛ Numeric threshold باز باقی می‌ماند; no obsolete current state |
+| TC:RAG:R06:012-B | REQ:RAG:R06:012 | نسخه active model/prompt/config M1 با S1 و candidate M2 با S2؛ رگرسیون citation دارد؛ مرز آزمون: approved prior tuple compatible with current Snapshot | rollback | prior software/config restored with current valid knowledge tuple | assert tuple | Feature flag/runtime secret، policy business را دور نمی‌زند؛ Numeric threshold باز باقی می‌ماند; no obsolete current state |
+| TC:RAG:R06:012-F | REQ:RAG:R06:012 | نسخه active model/prompt/config M1 با S1 و candidate M2 با S2؛ رگرسیون citation دارد؛ شکست وابستگی: prompt regression only impacts disclaimer wording | registry/approval evidence unavailable | rollout blocked and active tuple unchanged | assert no partial activation | Feature flag/runtime secret، policy business را دور نمی‌زند؛ Numeric threshold باز باقی می‌ماند; no obsolete current state |
+
+**کنترل لایه‌ها و مالکیت (R06):**
+
+| لایه | Task / پوشش | مالک واقعی و مرز |
+|---|---|---|
+| Architecture / Adviser | T001–T006 | پاسخ/guard در Adviser مستقل؛ Core فقط API نسخه‌دار؛ Assistant اجرا و action در R06 نیست. |
+| Backend / API | T001,T002,T005 | consume R05/C01/C05b/C02 contracts؛ R06 endpoint/schema تازه تصویب نمی‌کند. |
+| Database / history | T005,T006 | R03 Snapshot/evidence; C14 messages/feedback; C01 traces/release evidence؛ R06 producer است نه data owner. |
+| Frontend / answer UX | T003 | claim limitations, source citations, clarification/referral text؛ route/presentation shell مالک بسته UI موجود است. |
+| Security / privacy | T001,T004,T006 | C02 identity/consent/current scope؛ ADR-RAG-13/26/14؛ logs minimize PII/CoT. |
+| Infrastructure / operations | T005,T006 | C01 observability/release; no mandatory broker, second LLM, expert team or monitoring vendor. |
+| Evaluation / testing | T005,T006 | per-layer test harness, versioned fixtures; actual test cases NOT_EXECUTED; numeric gates OPEN. |
+| Failure / recovery | T002,T004,T005,T006 | fail-closed when evidence/auth/trace/eval/compatibility unavailable; never claim audit success without sink. |
+
+**تصمیم‌های باز:**
+
+- مقادیر عددی benchmark و حد pass برای quality/cost/latency/coverage باز می‌ماند؛ ADR-RAG-11 فقط ابعاد را تصویب کرده است.
+- نوع/مدل LLM، روش Citation entailment، ابزارهای moderation، provider و نسخه Prompt انتخاب نشده‌اند.
+- سیاست دقیق پاسخ به هر رده ریسک و جزئیات presentation پس از آزمون فارسی/حقوقی تنظیم می‌شود؛ اصل پاسخ محتاطانه و Claim-level guard مصوب است.
+- پشتیبانی انسانی/ارجاع خودکار، Case Management، SLA، نگهداری trace، consent برای feedback/training و تنظیمات rollout نیاز به قرارداد/تصمیم مستقل دارند.
+
+**RA مستقل:** Candidateهای منبع‌دار و گراف‌دار با متن pinned تطبیق داده شدند؛ extracted/inferred تفکیک شد؛ atomicity، owner، overlap، decision state، source coverage و conflict بررسی شد.
+
+**IPA مستقل:** 12/12 Requirement به Enabler/Task/Subtask/AC/TD/چهار TC اختصاصی و برگشت‌پذیر متصل است؛ هر Task خروجی و oracle دارد؛ test product اجرا نشده.
+
+### اصلاح مرزهای تاریخی C05a/C05b و CPA مشترک R05/R06
+
+**نقص یافت‌شده و اصلاح‌شده:** ارجاع‌های قدیمی Handoff در C05a/C05b، R06 را مالک خود Knowledge Base و LegalRelation می‌خواندند؛ این با Requirement پذیرفته‌شده R03 و CPA قبلی R01–R04 که R03 را مالک store/version/relation/Snapshot می‌داند تعارض داشت. قرارداد مرزی اصلاح شد: **R03 مالک canonical data, versioned legal relation, evidence, lineage, publication و Snapshot است؛ R05 مالک read/retrieval eligibility و کفایت؛ R06 مالک تحلیل claim/Answer/Citation Guard است و داده را فقط از قرارداد R03 مصرف می‌کند.** C05a/C05b همچنان مالک کاتالوگ و داده محصول Core هستند. اصلاح، رفتار محصول یا تصمیم معماری جدید ایجاد نمی‌کند.
+
+| سابقه / Source | مرجعیت نهایی | تغییر کمینه | إعادةممیزی |
+|---|---|---|---|
+| Handoff:H05A:003 / B:250–258 و CAN:C05A:041 | R03 canonical legal store/relation; R06 Adviser legal evidence analysis | مالکیت storage به R03، تحلیل/پاسخ به R06، R05 بازیابی | ownership/dependency disposition و reverse trace بازبینی شد. |
+| CAN:C05B:036 / B:250–258,1608 | C05b محصول؛ R03 legal KB؛ R05/R06 مصرف/پاسخ | جمله «R06 مالک knowledge and relations» حذف و به قرارداد فوق نگاشت شد. | محصول/حقوقی no duplicate; no owner transfer. |
+| Handoff:H05B:001 / C05b handoff | C05b provenance محصول؛ R03 قانونی؛ R06 مصرف evidence | مالک پاسخ/تحلیل از مالک canonical store جدا شد. | dependencies remain non-blocking for C05b data model. |
+
+**CPA-01 Coverage union:** 22/22 Candidate/Requirement برای R05/R06 source-mapped؛ extracted edge فقط discovery aid و هر req با متن source تأیید شد؛ inferred edges=0 الزام مستقل ساخت.
+
+**CPA-02 Semantic duplicates:** R01 admission/query split؛ R02 source access/ingestion؛ R03 canonical data/evidence/relation/snapshot; R04 discovery/catalog/source observations؛ R05 retrieval/eligibility/sufficiency; R06 response/citation/evaluation؛ C05b product data؛ C14 history/feedback. duplicate behavior=0 پس از اصلاح handoff.
+
+**CPA-03 Ownership:** data/job/API/contract/UI/recovery owners در دو جدول لایه و هر Task ثبت شدند؛ API/DB و budget/threshold جدید تصویب نشد؛ inferred owner=0.
+
+**CPA-04 Dependencies/DAG:** R01→R05→R06؛ R02/R03/R04/C01/C02/C05b/C14 فقط contract/data dependencies؛ R06 output/persistence به C14/C01 جهت‌دار؛ cycle hard/contract=0.
+
+**CPA-05 Contract compatibility:** C01:02/06/07، C02:01–03، C05b:001، R03 evidence/Snapshot/LegalRelation و C14 history/feedback مصرف شدند؛ private table access، canonical relation duplicate، API/schema جدید=0.
+
+**CPA-06 Decisions:** index/model/reranker, budgets/timeouts/thresholds, freshness targets, retention, expert workflow, service contract details و consent for learning همگی OPEN ماندند؛ هیچ عدد نمونه یا inferred relation به policy تبدیل نشد.
+
+**CPA-07 Bidirectional trace:** R05:10/10 و R06:12/12 از Source→Candidate→Requirement→Enabler→Task/Subtask→AC/TD→4×TC و برگشت؛ orphan Requirement/Task/Subtask/AC/TD/TC=0.
+
+**CPA-08 Regression/status:** C01–C14، R01–R04 و Assistant boundaries دست‌نخورده در رفتار پذیرفته‌شده ماندند؛ فقط 3 handoff توضیحی متناقض در C05a/C05b برای مرجعیت corrected شدند؛ R03 source contract حفظ شد؛ محصول و Test Caseها اجرا نشده‌اند.
+
+**نتیجه:** CPA-01..CPA-08 = PASS پس از اصلاح؛ تعداد اصلاح بین‌بسته‌ای: 3 handoff clarifications؛ بسته‌های جدید R05/R06: `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+### Checkpoint جاری پس از R05/R06
+
+- بسته‌های پذیرفته برنامه: **۲۴/۳۶**؛ باقی‌مانده **۱۲/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۶/۱۰؛ Assistant: ۰/۸.
+- R05: ۱۰ Requirement، ۵ Task، ۱۵ Subtask، ۱۰ AC، ۱۰ Test Definition، ۴۰ Planned Test Case؛ RA/IPA=PASS.
+- R06: ۱۲ Requirement، ۶ Task، ۱۸ Subtask، ۱۲ AC، ۱۲ Test Definition، ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- RAG مجموع R01–R06: ۶۲ Requirement/Candidate، ۲۶ Enabler، ۳۱ Task، ۹۳ Subtask، ۶۲ AC/TD و ۱۶۸ Planned Test Case. Product Tests NOT_EXECUTED.
 
 ### R07 — در انتظار تدوین
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
