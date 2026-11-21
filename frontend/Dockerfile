@@ -12,11 +12,11 @@ COPY public ./public
 COPY data/contracts ./data/contracts
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:782bb89768cc87b7f95c18b95baa1af250e5d451f26794f59363540161147c01 AS runtime
+FROM nginx/nginx-unprivileged:1.30.7-alpine3.24@sha256:0c53a1f2890c3526bfd201440f0fd3970e5b78f80630f58284aad0d34b5ec7bd AS runtime
 # Package installation needs root only while building; final USER remains 101:101.
 USER 0
 # Pin base fixes; keep CA certificates explicit and remove curl, which runtime and health checks do not use.
-RUN apk add --no-cache --upgrade ca-certificates-bundle=20260909-r0 libxslt=1.1.43-r4 musl=1.2.6-r3 musl-utils=1.2.6-r3 libexpat=2.10.0-r0 libx11=1.8.14-r0 zlib=1.4-r0 libxpm=3.5.20-r0 brotli-libs=1.2.1-r0 \
+RUN apk add --no-cache --upgrade ca-certificates-bundle=20260909-r0 libxslt=1.1.43-r4 musl=1.2.6-r3 musl-utils=1.2.6-r3 libexpat=2.10.0-r0 libx11=1.8.14-r0 zlib=1.4-r0 libxpm=3.5.20-r0 brotli-libs=1.2.1-r0 libxml2=2.13.9-r3 \
     && apk del curl libcurl
 COPY frontend/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY frontend/nginx/api-disabled.conf /etc/nginx/shahab-api.conf
