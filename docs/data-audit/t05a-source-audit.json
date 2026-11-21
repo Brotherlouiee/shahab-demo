@@ -1,0 +1,198 @@
+{
+  "source": ".agents/documents/دیتابیس وام های بانکی.unitext",
+  "sha256": "598052635954071b192bb43505e572f30ee88efd99b4d5ae757f6d555bfaae45",
+  "loanCount": 102,
+  "conditionsPresent": 102,
+  "rankableCount": 88,
+  "needsReviewCount": 14,
+  "duplicateLenderLoanIdentities": [],
+  "statesByVariable": {
+    "maxAmount": {
+      "classified": 90,
+      "variable": 9,
+      "unmapped": 3
+    },
+    "monthlyInstallment": {
+      "classified": 90,
+      "variable": 12
+    },
+    "maxRepaymentMonths": {
+      "classified": 98,
+      "variable": 4
+    },
+    "interestRate": {
+      "classified": 101,
+      "unknown": 1
+    },
+    "depositRequired": {
+      "classified": 66,
+      "unknown": 36
+    },
+    "depositHoldingMonths": {
+      "classified": 65,
+      "unknown": 37
+    },
+    "loanToDepositRatio": {
+      "classified": 48,
+      "unknown": 54
+    },
+    "guaranteeType": {
+      "classified": 102
+    }
+  },
+  "unclassifiedValues": {
+    "maxAmount": {
+      "متغیر": 9,
+      "50 میلیارد تومان": 2,
+      "40 میلیارد تومان": 1
+    },
+    "monthlyInstallment": {
+      "متغیر": 12
+    },
+    "maxRepaymentMonths": {
+      "متغیر": 4
+    },
+    "interestRate": {
+      "نامشخص": 1
+    },
+    "depositRequired": {
+      "نامشخص": 34,
+      "<blank>": 2
+    },
+    "depositHoldingMonths": {
+      "نامشخص": 37
+    },
+    "loanToDepositRatio": {
+      "نامشخص": 54
+    }
+  },
+  "rankingExclusions": [
+    {
+      "row": 6,
+      "lender": "بانک پارسیان",
+      "loan": "پژواک",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 7,
+      "lender": "بانک پارسیان",
+      "loan": "شرکت‌های دانش‌بنیان",
+      "coreVariables": [
+        "maxAmount"
+      ]
+    },
+    {
+      "row": 9,
+      "lender": "بانک پاسارگاد",
+      "loan": "تسهیلات مبتنی بر مراوده",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment",
+        "maxRepaymentMonths"
+      ]
+    },
+    {
+      "row": 10,
+      "lender": "پست بانک",
+      "loan": "احداث نیروگاه‌های خورشیدی",
+      "coreVariables": [
+        "maxAmount"
+      ]
+    },
+    {
+      "row": 22,
+      "lender": "بانک توسعه تعاون",
+      "loan": "طرح رویان",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 24,
+      "lender": "بانک توسعه صادرات",
+      "loan": "واحدهای تولیدی و طرح های سرمایه گذاری",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment",
+        "maxRepaymentMonths"
+      ]
+    },
+    {
+      "row": 31,
+      "lender": "بانک رفاه کارگران",
+      "loan": "طرح ارزبان",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 32,
+      "lender": "بانک رفاه کارگران",
+      "loan": "طرح ارزیار",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 38,
+      "lender": "بانک رفاه کارگران",
+      "loan": "تامینو",
+      "coreVariables": [
+        "monthlyInstallment",
+        "maxRepaymentMonths",
+        "interestRate"
+      ]
+    },
+    {
+      "row": 45,
+      "lender": "بانک سامان",
+      "loan": "دستگاه کارتخوان",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 58,
+      "lender": "بانک سینا",
+      "loan": "طرح تابان",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 59,
+      "lender": "بانک سینا",
+      "loan": "طرح شایان",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 72,
+      "lender": "بانک صادرات",
+      "loan": "وام با پشتوانه اعتبار اسنادی",
+      "coreVariables": [
+        "maxAmount",
+        "monthlyInstallment"
+      ]
+    },
+    {
+      "row": 97,
+      "lender": "بانک ملت",
+      "loan": "نیروگاه خورشیدی خانگی",
+      "coreVariables": [
+        "monthlyInstallment",
+        "maxRepaymentMonths"
+      ]
+    }
+  ]
+}

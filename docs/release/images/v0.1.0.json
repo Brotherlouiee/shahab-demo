@@ -1,0 +1,50 @@
+{
+  "sourceSha": "2c1a0acc5ed487b48df5bd87b816277bd41f9b35",
+  "versionTag": "v0.1.0",
+  "namespace": "shahab2026",
+  "status": "complete",
+  "images": [
+    {
+      "repository": "shahab2026/shahab-backend",
+      "imageId": "sha256:2e9578e2764356b80368cb396802242fd575405ecde5f1da7fd3b0635fa23427",
+      "status": "verified",
+      "digest": "sha256:7e9366e8ad69aaba5fcbba702d0cbd60a935c3816daf89841b490f53bb73fb7e",
+      "tags": [
+        "v0.1.0",
+        "sha-2c1a0acc5ed487b48df5bd87b816277bd41f9b35"
+      ],
+      "evidenceDigest": "sha256:58801e07c14f8b4427cda33dddff44c9840506550226febc1e1b6b9b5382b06b"
+    },
+    {
+      "repository": "shahab2026/shahab-frontend",
+      "imageId": "sha256:4da9b88087c533681dd606c6cbee38e5956f7331838f80b5886d3574fc199ce0",
+      "status": "verified",
+      "digest": "sha256:ad0129b5cdc9998afd838ff8ab11b9dcdc5b5ad946f13b39f75f47589110089a",
+      "tags": [
+        "v0.1.0",
+        "sha-2c1a0acc5ed487b48df5bd87b816277bd41f9b35"
+      ],
+      "evidenceDigest": "sha256:ef9583df5428a535c7914699ef8238a4f9a20e705553e3d0e4fba5702749ea80"
+    }
+  ],
+  "deployed": false,
+  "runId": "39224423986",
+  "createdAt": "2026-10-19T08:44:08.740228+00:00",
+  "completedAt": "2026-10-19T08:44:53.226794+00:00",
+  "schemaVersion": 1,
+  "publicationEvidence": {
+    "artifactId": 12172903771,
+    "journalSha256": "874a41a04719ef0999aa6a30e8bf5fc47c10797c5eace2ccde629be783277e83",
+    "runUrl": "https://github.com/Brotherlouiee/shahab-demo/actions/runs/39224423986"
+  },
+  "compatibility": {
+    "apiVersion": "/api/v1",
+    "sourceBundleSha": "2c1a0acc5ed487b48df5bd87b816277bd41f9b35",
+    "databaseRevision": "ff11b02f0001",
+    "dataSnapshot": null,
+    "configSnapshot": null,
+    "deploymentEligible": false,
+    "scope": "isolated-no-database-smoke; real serving snapshot/config must be audited before deployment"
+  },
+  "previousRelease": null
+}

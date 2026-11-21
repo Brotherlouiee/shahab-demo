@@ -1,0 +1,25 @@
+# Repository-root context, limited to the actual Vite application and its inputs.
+**
+!package.json
+!package-lock.json
+!index.html
+!vite.config.js
+!scripts/
+scripts/**
+!scripts/vite-dev-config.mjs
+!src/
+!src/**
+!assets/
+!assets/**
+!public/
+!public/**
+!data/
+data/**
+!data/contracts/
+!data/contracts/**
+!frontend/
+frontend/**
+!frontend/nginx/
+!frontend/nginx/**
+**/.env*
+**/__pycache__

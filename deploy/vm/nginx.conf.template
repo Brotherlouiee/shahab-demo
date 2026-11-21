@@ -1,0 +1,69 @@
+# TLS terminates here, on the same VM as the unpublished API bridge port.
+worker_processes auto;
+pid /tmp/nginx.pid;
+error_log /dev/stderr crit;
+events { worker_connections 1024; }
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    log_format bounded '$request_method $status';
+    access_log /dev/stdout bounded;
+    server_tokens off;
+    client_body_temp_path /tmp/client_temp;
+    proxy_temp_path /tmp/proxy_temp;
+    fastcgi_temp_path /tmp/fastcgi_temp;
+    uwsgi_temp_path /tmp/uwsgi_temp;
+    scgi_temp_path /tmp/scgi_temp;
+    client_max_body_size 1m;
+    client_body_timeout 15s;
+    client_header_timeout 15s;
+    send_timeout 30s;
+    limit_req_zone $binary_remote_addr zone=api_requests:10m rate=10r/s;
+    limit_req_status 429;
+    server {
+        listen 8090;
+        server_name localhost;
+        access_log off;
+        location = /health { return 200; }
+        location / { return 404; }
+    }
+    server {
+        listen 8080;
+        server_name ${SHAHAB_PUBLIC_HOST};
+        if ($host != '${SHAHAB_PUBLIC_HOST}') { return 444; }
+        return 308 https://${SHAHAB_PUBLIC_HOST}$request_uri;
+    }
+    server {
+        listen 8443 ssl;
+        server_name ${SHAHAB_PUBLIC_HOST};
+        if ($host != '${SHAHAB_PUBLIC_HOST}') { return 444; }
+        ssl_certificate /etc/nginx/tls/fullchain.pem;
+        ssl_certificate_key /etc/nginx/tls/privkey.pem;
+        ssl_protocols TLSv1.2 TLSv1.3;
+        add_header Strict-Transport-Security 'max-age=31536000' always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header X-Frame-Options DENY always;
+        add_header Referrer-Policy no-referrer always;
+        root /srv/shahab;
+        index index.html;
+        location = /api/v1 { return 404; }
+        location /api/v1/ {
+            limit_req zone=api_requests burst=30 nodelay;
+            # Preserve method/path/query/body/Origin and Set-Cookie. Discard
+            # client-supplied forwarding headers; API trusts only this peer IP.
+            proxy_pass http://api:8000;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header Connection '';
+            proxy_connect_timeout 5s;
+            proxy_send_timeout 30s;
+            proxy_read_timeout 30s;
+            proxy_cache off;
+            proxy_intercept_errors off;
+            proxy_next_upstream off;
+        }
+        location /assets/ { try_files $uri =404; }
+        location / { try_files $uri $uri/ /index.html; }
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "taskId": "US-12.T03",
+  "status": "pending-online-evidence",
+  "environment": "staging",
+  "releaseSha": null,
+  "frontendArtifactDigest": null,
+  "backendArtifactDigest": null,
+  "frontendOrigin": null,
+  "apiOrigin": null,
+  "operator": null,
+  "startedAtUtc": null,
+  "finishedAtUtc": null,
+  "dataVersion": null,
+  "configVersion": null,
+  "migrationRevision": null,
+  "checks": {
+    "deploymentAuthorization": "not-run",
+    "isolatedDatabaseAndRestore": "not-run",
+    "publicationAudit": "not-run",
+    "tlsAndProxyOrigin": "not-run",
+    "authorizedReadOnlySecuritySmoke": "not-run",
+    "questionnaireProofCookie": "not-run",
+    "anonymousRecommendationAndDetails": "not-run",
+    "mobileDesktopNavigation": "not-run",
+    "realOtpAndAccountRestoreLogout": "blocked-provider-approval-and-authorization",
+    "restartAndPersistence": "not-run"
+  },
+  "evidenceReferences": [],
+  "blockers": ["T081/T07 deployment prerequisites", "Actual Kavenegar approval and authorized live test"]
+}

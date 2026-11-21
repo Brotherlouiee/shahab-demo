@@ -1,0 +1,56 @@
+# Disposable, laptop-only PostgreSQL for the protected-tool fixture regression.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?local .env required}
+      POSTGRES_USER: ${POSTGRES_USER:?local .env required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?local .env required}
+    ports:
+      - "127.0.0.1:55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
+      start_period: 30s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [internal]
+
+  redis:
+    image: redis:7-alpine
+    profiles: [http]
+    networks: [internal]
+
+  api:
+    image: shahab-t081-http-api:local
+    build:
+      context: ..
+    profiles: [http]
+    env_file: ../.env
+    environment:
+      SHAHAB_ENVIRONMENT: local
+      SHAHAB_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      SHAHAB_REDIS_URL: redis://redis:6379/0
+      SHAHAB_PROFILE_MOCK_OTP_ENABLED: "true"
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "127.0.0.1:58001:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+networks:
+  internal:
+    driver: bridge
+volumes:
+  postgres_data:

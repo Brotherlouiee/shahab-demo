@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contractVersion": "1.0.0",
+  "sourceEncoding": "UTF-16LE",
+  "questionIds": [
+    "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "S7", "S8", "S10", "S13"
+  ],
+  "answerIdConvention": "<questionId>.<semantic-answer-key>",
+  "loanVariableIds": [
+    "maxAmount", "monthlyInstallment", "maxRepaymentMonths", "interestRate", "depositRequired", "depositHoldingMonths", "loanToDepositRatio", "guaranteeType"
+  ],
+  "questionnaireRouteMap": {
+    "/question/3": "Q1",
+    "/question/4": "Q2",
+    "/question/5": "Q3",
+    "/question/6": "Q4",
+    "/question/7": "Q5",
+    "/question/8": "Q6",
+    "/question/9": "S7",
+    "/question/10": "S8",
+    "/question/11": "S10",
+    "/question/12": "S13"
+  },
+  "questions": {
+    "Q1": ["incomeInvestment", "inflationHedge", "essentialPurchase", "discretionaryLifestyle", "debtRepayment"],
+    "Q2": ["highCostBorrowing", "sellAssets", "findLowerCostOption", "postponeAndSave", "abandonNeed"],
+    "Q3": ["minimumInterestAnyFriction", "lowInterestModerateFriction", "balancedTradeoff", "speedOverLowInterest", "immediateNoGuarantor"],
+    "Q4": ["shortestTermMaximumInstallment", "shortTermHighInstallment", "balancedTermInstallment", "longTermLowInstallment", "longestTermMinimumInstallment"],
+    "Q5": ["variableInstallmentAbility", "deferInstallments", "flexibleDueDate", "fixedWithGrace", "fixedNoChange"],
+    "Q6": ["noDebtBurden", "underTwentyPercent", "twentyToFortyPercent", "fortyToSixtyPercent", "overSixtyPercent"],
+    "S7": ["lockDepositOverThreeMonths", "lockDepositOneToThreeMonths", "accountTurnoverOnly", "minimalDeposit", "noInitialDeposit"],
+    "S8": ["immediateHighCost", "twoWeekWait", "oneMonthWait", "threeMonthWait", "selfFundBySaving"],
+    "S10": ["sixtyMonthHighCost", "fortyEightMonthSalaryDeduction", "thirtySixMonthGuarantors", "twelveMonthPersonalCheque", "lumpSumWithPropertyCollateral"],
+    "S13": ["requestEffectiveRateSchedule", "chooseNoDepositHigherRate", "chooseLowerInstallment", "chooseLowerNominalRate", "chooseFastWithoutComparison"]
+  },
+  "categoryIds": {
+    "maxAmount": ["amount_0_50m", "amount_50_150m", "amount_150_300m", "amount_300_600m", "amount_600m_1_5b", "amount_1_5b_5b", "amount_5b_15b", "amount_15b_35b"],
+    "monthlyInstallment": ["installment_lt_5m", "installment_5_15m", "installment_15_50m", "installment_50_200m", "installment_200m_1b", "installment_gt_1b"],
+    "maxRepaymentMonths": ["term_lt_5m", "term_6_12m", "term_13_24m", "term_25_48m", "term_49_60m", "term_gt_60m"],
+    "interestRate": ["rate_0_4", "rate_5_14", "rate_15_20", "rate_21_23", "rate_gt_23"],
+    "depositRequired": ["deposit_required", "deposit_not_required"],
+    "depositHoldingMonths": ["holding_up_to_1m", "holding_1_3m", "holding_3_6m", "holding_6_12m", "holding_gt_12m"],
+    "loanToDepositRatio": ["ratio_lt_100", "ratio_100_200", "ratio_200_400", "ratio_gt_400"],
+    "guaranteeType": ["hardCollateral", "thirdPartyUndertaking", "personalUndertaking"]
+  },
+  "loanIdRule": "A loanId is an immutable opaque UUID assigned when an approved loan version first enters core data. It must not be a display name, spreadsheet row number, or runtime slug.",
+  "sourceIdentityRule": "Raw source rows keep a separate sourceRowFingerprint and provenance record; source identity never replaces loanId."
+}

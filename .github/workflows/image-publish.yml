@@ -1,0 +1,105 @@
+name: Publish approved images to Docker Hub
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Existing approved vX.Y.Z tag; never creates a Git tag'
+        type: string
+        required: true
+      approved_sha:
+        description: 'Exact full commit with seven successful main-push gates'
+        type: string
+        required: true
+      security_review:
+        description: 'Owner-approved JSON decisions for every current MEDIUM/LOW finding (see runbook)'
+        type: string
+        required: true
+        default: '{}'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: dockerhub-publication
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    if: github.ref == 'refs/heads/main'
+    name: Validate approved version and seven gates before building
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_TAG: ${{ inputs.version_tag }}
+          APPROVED_SHA: ${{ inputs.approved_sha }}
+        run: python tests/images/release_policy.py
+  candidate:
+    needs: eligibility
+    uses: ./.github/workflows/image-smoke.yml
+    with:
+      source_sha: ${{ inputs.approved_sha }}
+      export_images: true
+    # No secrets are passed into the build/scan workflow.
+  publish:
+    needs: [eligibility, candidate]
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    name: Owner-approved publication of the tested images
+    environment: dockerhub-publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION_TAG: ${{ inputs.version_tag }}
+      APPROVED_SHA: ${{ inputs.approved_sha }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      SECURITY_REVIEW: ${{ inputs.security_review }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: shahab-release-images
+          path: candidate
+      - uses: actions/download-artifact@v4
+        with:
+          name: container-build-contract-evidence
+          path: test-results
+      - name: Revalidate tag and main-SHA gates after environment approval
+        run: python tests/images/release_policy.py
+      - name: Install checksum-pinned ORAS
+        run: |
+          tool_dir="$RUNNER_TEMP/shahab-oras"
+          mkdir -p "$tool_dir"
+          curl --fail --silent --show-error --location --retry 2 --max-time 90 \
+            https://github.com/oras-project/oras/releases/download/v1.3.5/oras_1.3.5_linux_amd64.tar.gz \
+            -o "$tool_dir/oras.tar.gz"
+          echo "f48a73ea6d026a862c3919fc773da9a8c86fc259c2c737d5baed3b8b9614ad22  $tool_dir/oras.tar.gz" | sha256sum --check
+          tar -xzf "$tool_dir/oras.tar.gz" -C "$tool_dir" oras
+          echo "$tool_dir" >> "$GITHUB_PATH"
+      - name: Login only inside the approved environment
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish, attach SBOM/provenance, and read back both remote digests
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: python tests/images/publish.py
+      - name: Preserve publication journal including partial failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dockerhub-publication-evidence
+          path: test-results
+          if-no-files-found: error
+          retention-days: 30

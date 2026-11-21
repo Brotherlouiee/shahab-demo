@@ -1,0 +1,205 @@
+{
+  "auditVersion": "1.0.0",
+  "mode": "read_only",
+  "provenance": [
+    {
+      "role": "questionnaire",
+      "repositoryPath": ".agents/documents/پرسشنامه سنجش متغیرهای رفتاری.unitext",
+      "inputPath": "../upload/پرسشنامه سنجش متغیرهای رفتاری.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "8db132f2147b79f659f51b61754f0d97f0c4ba90c312ae4cca2948770a83accd",
+      "byteCount": 14346,
+      "rowCount": 51
+    },
+    {
+      "role": "loan_categories",
+      "repositoryPath": ".agents/documents/ماتریس گزینه های متغیرهای وام.unitext",
+      "inputPath": "../upload/ماتریس گزینه های متغیرهای وام.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "29bf4189894e4fc07c656ceee82cd202771af7b30fcc80e732bfca90a583985e",
+      "byteCount": 1818,
+      "rowCount": 56
+    },
+    {
+      "role": "question_variable_weights",
+      "repositoryPath": ".agents/documents/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.unitext",
+      "inputPath": "../upload/ماتریس نگاشت متغیرهای پرسشنامه بر متغیرهای وام.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "462185978dd0aeaf4479cf761a092c99d6bccf783cde31645448097577c3fe4e",
+      "byteCount": 2366,
+      "rowCount": 31
+    },
+    {
+      "role": "answer_weights",
+      "repositoryPath": ".agents/documents/تبدیل پاسخ‌ها به وزن‌های عددی.unitext",
+      "inputPath": "../upload/تبدیل پاسخ‌ها به وزن‌های عددی.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "f786ff278f58a5abb998dafca46625cbf3da5922db1e5c68d505487b57133749",
+      "byteCount": 35062,
+      "rowCount": 153
+    },
+    {
+      "role": "compatibility_coefficients",
+      "repositoryPath": ".agents/documents/ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها با هریک از دسته بندی‌ها متغیرهای وام.unitext",
+      "inputPath": "../upload/ضرایب تناسب یک به یک گزینه‌های هر یک از سئوالاتسناریوها با هریک از دسته بندی‌ها متغیرهای وام.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "65859d3de5addef6c164c263100e0fc672897e1518a7b05091ec7b91dbfdcf56",
+      "byteCount": 10952,
+      "rowCount": 57
+    },
+    {
+      "role": "loan_database",
+      "repositoryPath": ".agents/documents/دیتابیس وام های بانکی.unitext",
+      "inputPath": "../upload/دیتابیس وام های بانکی.txt",
+      "encoding": "UTF-16LE",
+      "sha256": "598052635954071b192bb43505e572f30ee88efd99b4d5ae757f6d555bfaae45",
+      "byteCount": 211824,
+      "rowCount": 1000
+    }
+  ],
+  "questionnaire": {
+    "questionRows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      13
+    ],
+    "optionCounts": {
+      "1": 5,
+      "2": 5,
+      "3": 5,
+      "4": 5,
+      "5": 5,
+      "6": 5,
+      "7": 5,
+      "8": 5,
+      "10": 5,
+      "13": 5
+    },
+    "duplicates": [],
+    "missingExpectedRows": [],
+    "wrongOptionCounts": {}
+  },
+  "loanCategories": {
+    "categoryCounts": {
+      "حداکثر مبلغ": 8,
+      "مبلغ قسط": 6,
+      "حداکثر زمان بازپرداخت": 6,
+      "نرخ سود": 5,
+      "نیاز به سپرده": 2,
+      "مدت زمان خواب سپرده": 5,
+      "نسبت مبلغ وام به میزان سپرده": 4,
+      "نوع ضمانت": 3
+    },
+    "missingVariables": [],
+    "wrongCounts": {}
+  },
+  "questionVariableMapping": {
+    "weightTotals": {
+      "حداکثر مبلغ": "1.0",
+      "مبلغ قسط": "1.0",
+      "حداکثر زمان بازپرداخت": "1.00",
+      "نرخ سود": "1.00",
+      "نیاز به سپرده": "1.0",
+      "مدت زمان خواب سپرده": "1.0",
+      "نسبت مبلغ وام به میزان سپرده": "1.00",
+      "نوع ضمانت": "1.00"
+    },
+    "mappingRows": {
+      "حداکثر مبلغ": 2,
+      "مبلغ قسط": 3,
+      "حداکثر زمان بازپرداخت": 5,
+      "نرخ سود": 5,
+      "نیاز به سپرده": 2,
+      "مدت زمان خواب سپرده": 4,
+      "نسبت مبلغ وام به میزان سپرده": 4,
+      "نوع ضمانت": 5
+    },
+    "invalidWeights": [],
+    "missingVariables": [],
+    "nonUnitTotals": {}
+  },
+  "answerWeightCells": {
+    "numericCellCount": 180,
+    "minimum": "0.02",
+    "maximum": "0.65",
+    "outOfRange": []
+  },
+  "compatibilityCoefficientCells": {
+    "numericCellCount": 860,
+    "minimum": "0",
+    "maximum": "0.95",
+    "outOfRange": []
+  },
+  "loanDatabase": {
+    "headerCount": 17,
+    "nonEmptyHeaderCount": 14,
+    "emptyHeaderCount": 3,
+    "loanRowCount": 102,
+    "duplicateLoanNames": [
+      "طرح کارگشا",
+      "طرح شایان"
+    ],
+    "unknownCounts": {
+      "نرخ سود وام": {
+        "نامشخص": 1
+      },
+      "حداکثر مبلغ": {
+        "متغیر": 9
+      },
+      "مبلغ قسط": {
+        "متغیر": 12
+      },
+      "حداکثر زمان بازپرداخت": {
+        "متغیر": 4
+      },
+      "نیاز به سپرده": {
+        "نامشخص": 34,
+        "blank": 2
+      },
+      "مدت زمان خواب سپرده": {
+        "نامشخص": 37
+      },
+      "نسبت مبلغ وام به میزان سپرده": {
+        "نامشخص": 54
+      }
+    }
+  },
+  "issues": [
+    {
+      "severity": "info",
+      "code": "LOAN_DB_EMPTY_HEADERS",
+      "message": "Trailing loan database headers are empty; importer must ignore only proven-empty columns."
+    },
+    {
+      "severity": "blocking",
+      "code": "CORE_LOAN_VALUE_UNKNOWN",
+      "column": "نرخ سود وام",
+      "message": "Core values need the versioned extraction/exclusion decision required by the canonical guide."
+    },
+    {
+      "severity": "blocking",
+      "code": "CORE_LOAN_VALUE_UNKNOWN",
+      "column": "حداکثر مبلغ",
+      "message": "Core values need the versioned extraction/exclusion decision required by the canonical guide."
+    },
+    {
+      "severity": "blocking",
+      "code": "CORE_LOAN_VALUE_UNKNOWN",
+      "column": "مبلغ قسط",
+      "message": "Core values need the versioned extraction/exclusion decision required by the canonical guide."
+    },
+    {
+      "severity": "blocking",
+      "code": "CORE_LOAN_VALUE_UNKNOWN",
+      "column": "حداکثر زمان بازپرداخت",
+      "message": "Core values need the versioned extraction/exclusion decision required by the canonical guide."
+    }
+  ]
+}

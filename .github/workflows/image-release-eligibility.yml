@@ -1,0 +1,39 @@
+name: Image release eligibility (no publish)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Explicitly approved existing vX.Y.Z tag (no tag is created)'
+        type: string
+        required: true
+      approved_sha:
+        description: 'Full 40-character commit approved for this candidate'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  eligibility:
+    name: Check approved tag and seven main-SHA gates (no publish)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate explicit version, main ancestry and exact-SHA gates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_TAG: ${{ inputs.version_tag }}
+          APPROVED_SHA: ${{ inputs.approved_sha }}
+        run: python tests/images/release_policy.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-release-eligibility
+          path: test-results/release-eligibility.json
+          if-no-files-found: error
+          retention-days: 7

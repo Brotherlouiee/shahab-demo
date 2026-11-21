@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Recommendation result E2E harness</title></head>
+<body><div id="root"></div>
+<script type="module">
+import { createElement, useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import RecommendationResultScreen from "/src/features/recommendation/presentation/recommendationResultScreen.mjs";
+import { fetchRecommendationResult } from "/src/features/recommendation/presentation/recommendationResultClient.mjs";
+import "/src/App.css";
+const activeTabSessionId = "opaque-e2e-session";
+function Harness() {
+  const [attempt, setAttempt] = useState(0);
+  const [state, setState] = useState({ status: "loading", result: null });
+  useEffect(() => {
+    let active = true;
+    setState({ status: "loading", result: null });
+    fetchRecommendationResult(activeTabSessionId)
+      .then((result) => active && setState({ status: "ready", result }))
+      .catch(() => active && setState({ status: "error", result: null }));
+    return () => { active = false; };
+  }, [attempt]);
+  return createElement(RecommendationResultScreen, { result: state.result, status: state.status, onRetry: () => setAttempt((current) => current + 1) });
+}
+createRoot(document.getElementById("root")).render(createElement(Harness));
+</script></body></html>

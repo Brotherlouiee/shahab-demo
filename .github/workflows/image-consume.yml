@@ -1,0 +1,99 @@
+name: Consume published image pair by digest
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Committed release manifest version (vX.Y.Z)'
+        type: string
+        default: 'v0.1.0'
+        required: true
+      previous_version:
+        description: 'Recorded compatible previous version; empty for first release'
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: image-consumption
+  cancel-in-progress: false
+
+jobs:
+  consume:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    name: Pull and smoke the published pair without deployment
+    environment: dockerhub-publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_VERSION: ${{ inputs.version }}
+      PREVIOUS_VERSION: ${{ inputs.previous_version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          path: tooling
+      - name: Validate protected environment and publication evidence before login
+        id: prepare
+        working-directory: tooling
+        run: |
+          python - <<'PY'
+          import os, sys
+          sys.path.insert(0, 'tests/images')
+          from release_policy import api
+          from publish import validate_environment
+          prefix = 'repos/' + os.environ['GITHUB_REPOSITORY'] + '/environments/dockerhub-publish'
+          validate_environment(api(prefix)[0], api(prefix + '/deployment-branch-policies')[0], os.environ['GITHUB_REPOSITORY_OWNER'])
+          PY
+          python tests/images/consume.py prepare --version "$RELEASE_VERSION" --previous-version "$PREVIOUS_VERSION"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.prepare.outputs.source_sha }}
+          persist-credentials: false
+          path: source
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build independent static reference from the published source
+        working-directory: source
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/checkout@v4
+        if: steps.prepare.outputs.previous_sha != ''
+        with:
+          ref: ${{ steps.prepare.outputs.previous_sha }}
+          persist-credentials: false
+          path: previous
+      - name: Build independent previous static reference
+        if: steps.prepare.outputs.previous_sha != ''
+        working-directory: previous
+        run: |
+          npm ci
+          npm run build
+      - name: Login for private backend pull only after approval
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Pull exact remote digests and run isolated smoke and available rollback
+        working-directory: tooling
+        run: >-
+          python tests/images/consume.py run --version "$RELEASE_VERSION"
+          --previous-version "$PREVIOUS_VERSION" --source ../source --previous-source ../previous
+      - name: Preserve consumption result including blocked rollback
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-consumption-evidence
+          path: |
+            tooling/test-results/image-consumption.json
+            source/test-results/image-smoke.json
+            previous/test-results/image-smoke.json
+          if-no-files-found: warn
+          retention-days: 30

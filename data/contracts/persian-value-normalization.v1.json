@@ -1,0 +1,26 @@
+{
+  "contractVersion": "1.0.0",
+  "normalization": {
+    "digitSets": ["Persian", "Arabic-Indic", "ASCII"],
+    "percentGlyphs": ["٪", "%"],
+    "decimalSeparators": ["٫", "."],
+    "thousandsSeparators": ["٬", ",", "/"],
+    "sourceEncoding": "UTF-16LE"
+  },
+  "unknownTokens": {
+    "blank": "blank",
+    "نامشخص": "unknown_label",
+    "متغیر": "variable_label"
+  },
+  "units": {
+    "money": "toman",
+    "rialToTomanDivisor": 10,
+    "percentage": "percent",
+    "duration": "months"
+  },
+  "safetyRules": [
+    "No range, prose, or free-text condition is inferred as a scalar.",
+    "Unknown values are typed and never coerced to zero.",
+    "Category assignment and ranking policy are outside this contract."
+  ]
+}

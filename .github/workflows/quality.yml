@@ -1,0 +1,196 @@
+name: Quality gates
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  change-scope:
+    name: Classify changes and run lightweight documentation checks
+    runs-on: ubuntu-24.04
+    outputs:
+      run_quality: ${{ steps.scope.outputs.run_quality }}
+      run_us13: ${{ steps.scope.outputs.run_us13 }}
+      has_docs: ${{ steps.scope.outputs.has_docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: scope
+        name: Classify changed files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          HEAD_SHA: ${{ github.sha }}
+          FORCE_FULL: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
+        run: python scripts/ci/classify_changes.py
+      - name: Validate changed Markdown links and whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          HEAD_SHA: ${{ github.sha }}
+        run: python scripts/ci/validate_markdown.py
+  quality:
+    name: Quality gates
+    needs: change-scope
+    if: needs.change-scope.outputs.run_quality == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,quality]"
+      - run: npm ci
+      - name: Verify generated API artifacts
+        run: python -m scripts.export_api_docs --check
+      - name: Verify CI harness and complete browser test partition
+        run: |
+          node --test tests/ci/local-container.test.mjs tests/ci/e2e-partition.test.mjs
+          python -m unittest discover -s tests/ci -p test_python_environment_cache.py
+          python -m unittest discover -s tests/ci -p test_postgresql_suite_runner.py
+      - run: npm run quality
+  postgresql-migrations:
+    name: PostgreSQL migration verification
+    needs: change-scope
+    if: needs.change-scope.outputs.run_quality == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: shahab_test
+          POSTGRES_USER: shahab_test
+          POSTGRES_PASSWORD: test-password-not-a-secret
+        options: >-
+          --health-cmd "pg_isready -U shahab_test -d shahab_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports:
+          - 5432:5432
+    env:
+      SHAHAB_TEST_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@127.0.0.1:5432/shahab_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[test,quality]"
+      - run: python -m unittest backend.tests.test_postgresql_migrations
+      - name: Verify account identity migration and generation isolation on PostgreSQL
+        run: python -m unittest backend.tests.test_account_identity_postgresql
+      - name: Verify durable questionnaire creator proof and safe legacy migration
+        run: python -m unittest backend.tests.test_questionnaire_proof_postgresql
+      - name: Verify durable one-hour account sessions and shared OTP races
+        run: python -m unittest backend.tests.test_account_access_postgresql
+      - name: Verify independent raw-answer retention and snapshot preservation
+        run: python -m unittest backend.tests.test_questionnaire_retention_postgresql
+      - name: Verify account bookmarks ownership, migration and transaction races
+        run: python -m unittest backend.tests.test_account_bookmarks_postgresql
+      - run: python -m unittest backend.tests.test_t06_postgresql
+      - name: Verify durable operations audit and transaction races
+        run: python -m unittest backend.tests.test_operations_postgresql
+      - name: Verify protected operations tool with least-privilege PostgreSQL
+        run: python -m unittest backend.tests.test_operations_tool_postgresql
+  loan-details-e2e:
+    name: Loan details browser verification
+    needs: change-scope
+    if: needs.change-scope.outputs.run_quality == 'true'
+    env:
+      SHAHAB_BOOKMARK_BASELINE_DIR: /tmp/shahab-bookmark-baseline
+      SHAHAB_BOOKMARK_BASELINE_URL: http://127.0.0.1:4175
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Prepare independent accepted pre-F frontend baseline
+        run: |
+          git fetch --no-tags --depth=1 origin d4197e94b24da8cb91e277a7cb1d82be936bbd07
+          git worktree add --detach "$SHAHAB_BOOKMARK_BASELINE_DIR" d4197e94b24da8cb91e277a7cb1d82be936bbd07
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$SHAHAB_BOOKMARK_BASELINE_DIR/node_modules"
+      - name: Verify built application and dev-only tests without omissions
+        run: |
+          npm run build
+          npm --prefix "$SHAHAB_BOOKMARK_BASELINE_DIR" run build
+          echo '::group::Verify every original browser test is assigned exactly once'
+          mkdir -p test-results
+          npx playwright test --list --reporter=json > test-results/e2e-original-list.json
+          SHAHAB_E2E_BUILT=1 npx playwright test --list --reporter=json > test-results/e2e-built-list.json
+          npx playwright test tests/e2e/initial-and-questionnaire-loading.spec.mjs tests/e2e/recommendation-result-journey.spec.mjs --list --reporter=json > test-results/e2e-development-list.json
+          node scripts/ci/verify_e2e_partition.mjs test-results/e2e-original-list.json test-results/e2e-built-list.json test-results/e2e-development-list.json
+          echo '::endgroup::'
+          echo '::group::Verify built application'
+          SHAHAB_E2E_BUILT=1 npx playwright test --reporter=line --output=test-results/built
+          echo '::endgroup::'
+          echo '::group::Verify dev-only loading and HTML harness'
+          env -u SHAHAB_BOOKMARK_BASELINE_DIR -u SHAHAB_BOOKMARK_BASELINE_URL npx playwright test tests/e2e/initial-and-questionnaire-loading.spec.mjs tests/e2e/recommendation-result-journey.spec.mjs --reporter=line --output=test-results/development
+          echo '::endgroup::'
+      - name: Upload synthetic visual comparison evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-visual-evidence
+          path: test-results/
+          retention-days: 7
+
+  profile-live-e2e:
+    name: Profile OTP real API browser verification
+    needs: change-scope
+    if: needs.change-scope.outputs.run_quality == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: shahab_profile_test
+          POSTGRES_USER: shahab_test
+          POSTGRES_PASSWORD: test-password-not-a-secret
+        options: >-
+          --health-cmd "pg_isready -U shahab_test -d shahab_profile_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports:
+          - 5432:5432
+    env:
+      SHAHAB_ENVIRONMENT: local
+      SHAHAB_API_DOCS_INCLUDE_OPERATIONS: "true"
+      SHAHAB_DATABASE_URL: postgresql+psycopg://shahab_test:test-password-not-a-secret@127.0.0.1:5432/shahab_profile_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: python -m pip install -e ".[test,quality]"
+      - run: python -m alembic upgrade head
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.profile-live.config.mjs
+      - name: Verify questionnaire refresh and ordering with real PostgreSQL
+        run: npx playwright test --config playwright.questionnaire-live.config.mjs
+      - name: Upload real API browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-11-t02f-real-api-evidence
+          path: test-results/
+          retention-days: 7
