@@ -5891,10 +5891,6 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 - **Git و CI:** Commitهای مأموریت تا checkpoint بازبینی: 35cb324a1e018a67da87ed76f18381a8838dc1e1 (تدوین دو بسته) و 693b8108d15595e1fb8d790989a1bea7fe08bb6b (تکمیل جدول‌های AC/Test). این Commit سوم فقط شناسه‌های Test Definition را از شناسه Task جدا و Handoff را با شواهد تکمیل می‌کند؛ SHA آن از تاریخچه PR قابل مشاهده است. Diff فقط سند Markdown است. CI روی 693b8108: Classification/Markdown و secret scan PASS؛ Quality، PostgreSQL، Browser، SAST/SCA، Container و US-13 SKIPPED؛ Redis/Trivy NOT_TRIGGERED. پس از این Commit، CI جاری را از HEAD جدید بخوان. Build/Product Test اجرا نشد؛ هیچ Workflow دستی rerun نشد.
 - **درس‌آموخته:** fetch_file برای سند حجیم محتوای خالی برگرداند؛ Blob با SHA از Git Tree خوانده و طول/خطوط کنترل شد. پاسخ خالی ابزار را نبود فایل تلقی نکن؛ متن کامل، ساختار Git و هش ریموت را جداگانه کنترل کن.
 
-#### NEXT_CHAT_BOOTSTRAP_PROMPT
-
-تو مسئول طراحی مأموریت بعدی برنامه فاز دوم شهاب هستی. مخزن Brotherlouiee/shahab-demo و PR #251 را بررسی کن. ابتدا رجیستری 36 بسته، HEAD و Open/Draft بودن PR را بخوان؛ سپس Merge بودن PR #253 و #255 و حضور تغییرات در main را احراز کن. AGENTS.md و docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md را کامل از main بخوان. از SHAHAB_PHASE2_NEXT_MISSION_HANDOFF استفاده کن ولی همه وضعیت‌ها را با GitHub و رجیستری تطبیق بده. دو واحد مستقل بعدی را از رجیستری انتخاب کن؛ احتمالاً C13b و C14 هستند، اما حدس نزن. فقط پرامپت اجرایی کامل و قابل Copy/Paste تولید کن؛ فایل یا Git را تغییر نده، Commit/Push نکن و PR نساز. قواعد Graph-First، RA/IPA مستقل، CPA-01..08، صحت سند حجیم، Git Tree Integrity، Docs-only CI و Continuity Handoff را حفظ کن.
-
 ### C13b — تجربه و پشتیبانی کیف پول
 
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. هیچ Requirement، Story/Enabler، Task، Subtask، AC یا Test برای این بسته در این نسخه مصوب نیست. در مرحله تدوین همین بسته، احکام اختصاصی دو سند مرجع در همین بخش استخراج، اتمی، ردیابی و پس از تأیید ثبت می‌شوند؛ Handoffهای C01 تا C03 باید بررسی شوند.
