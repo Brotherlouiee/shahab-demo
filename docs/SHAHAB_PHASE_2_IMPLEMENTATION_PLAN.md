@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R06.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R06 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R08.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R08 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -20,9 +20,9 @@
 | دامنه | بسته‌ها | تعداد | وضعیت |
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
-| RAG / Adviser | R01–R10 | 10 | R01–R06 پذیرفته؛ R07–R10 در انتظار |
+| RAG / Adviser | R01–R10 | 10 | R01–R08 پذیرفته؛ R09–R10 در انتظار |
 | Assistant | A01–A08 | 8 | NOT_STARTED |
-| کل | ۳۶ بسته | 36 | ۲۴ پذیرفته‌شده؛ ۱۲ در انتظار |
+| کل | ۳۶ بسته | 36 | ۲۶ پذیرفته‌شده؛ ۱۰ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -51,8 +51,8 @@
 | R04 | کشف منبع و کاتالوگ فراداده | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R05 | بازیابی چندمرحله‌ای و سنجش کفایت شواهد | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R06 | تجمیع پاسخ، Citation Guard و ارزیابی کیفیت Adviser | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| R07 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
-| R08 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| R07 | کشف و ارزیابی رابطهٔ اسناد و ورود انتخابی | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
+| R08 | بازاعتبارسنجی سند و هماهنگی اثر تغییر | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R09 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R10 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | A01 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -6082,7 +6082,7 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 ## ۲. برنامه RAG / Adviser — ۱۰ بسته
 
-R01–R06 دارای بسته‌بندی، ممیزی و وضعیت مستقل‌اند؛ R07–R10 تا تدوین و عبور از گیت‌های خود NOT_STARTED می‌مانند. هیچ خروجی بسته‌ای از PASS بسته دیگر استنباط نمی‌شود.
+R01–R08 دارای بسته‌بندی، ممیزی و وضعیت مستقل‌اند؛ R09–R10 تا تدوین و عبور از گیت‌های خود NOT_STARTED می‌مانند. هیچ خروجی بسته‌ای از PASS بسته دیگر استنباط نمی‌شود.
 ### R01 — پذیرش خدمت، فهم پرسش و مسیریابی بازیابی ریسک‌محور
 
 **وضعیت:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`. این بسته دامنه پذیرش خدمت، فهم نیاز و انتخاب مسیر Adviser را می‌پوشاند؛ منطق پاسخ/استناد نهایی و چرخه دانش کامل در بسته‌های بعدی تکمیل می‌شوند.
@@ -6999,18 +6999,302 @@ R01–R06 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 
 **نتیجه:** CPA-01..CPA-08 = PASS پس از اصلاح؛ تعداد اصلاح بین‌بسته‌ای: 3 handoff clarifications؛ بسته‌های جدید R05/R06: `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
 
-### Checkpoint جاری پس از R05/R06
+### Checkpoint جاری پس از R07/R08
 
-- بسته‌های پذیرفته برنامه: **۲۴/۳۶**؛ باقی‌مانده **۱۲/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۶/۱۰؛ Assistant: ۰/۸.
+- بسته‌های پذیرفته برنامه: **۲۶/۳۶**؛ باقی‌مانده **۱۰/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۸/۱۰؛ Assistant: ۰/۸.
 - R05: ۱۰ Requirement، ۵ Task، ۱۵ Subtask، ۱۰ AC، ۱۰ Test Definition، ۴۰ Planned Test Case؛ RA/IPA=PASS.
 - R06: ۱۲ Requirement، ۶ Task، ۱۸ Subtask، ۱۲ AC، ۱۲ Test Definition، ۴۸ Planned Test Case؛ RA/IPA=PASS.
-- RAG مجموع R01–R06: ۶۲ Requirement/Candidate، ۲۶ Enabler، ۳۱ Task، ۹۳ Subtask، ۶۲ AC/TD و ۱۶۸ Planned Test Case. Product Tests NOT_EXECUTED.
+- R07: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC/TD و ۳۲ Planned Test Case؛ RA/IPA=PASS.
+- R08: ۹ Requirement، ۳ Enabler، ۵ Task، ۱۵ Subtask، ۹ AC/TD و ۳۶ Planned Test Case؛ RA/IPA=PASS.
+- RAG مجموع R01–R08: ۷۹ Requirement/Candidate، ۳۲ Enabler، ۴۰ Task، ۱۲۰ Subtask، ۷۹ AC/TD و ۲۳۶ Planned Test Case. Product Tests NOT_EXECUTED.
 
-### R07 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### R07 — کشف و ارزیابی رابطهٔ اسناد و ورود انتخابی
 
-### R08 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**وضعیت:** `RA=PASS` / `IPA=PASS`؛ `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+**Scope و مالکیت:** R07 مالک RDE، candidate matching، توضیح سیگنال‌ها، انتخاب selective ingestion و workflow خودش است. R04 مالک source observation/catalog؛ R02 مالک اجازه و اجرای access/ingestion؛ R03 مالک DocumentIdentity/Version/Provision/LegalRelation و canonical write؛ C01/C02 مالک قراردادهای shared job/authz؛ R05/R06 مصرف‌کنندگان downstream. هیچ دسترسی مستقیم یا درج canonical از R07 مجاز نیست.
+
+**تعیین دامنه و گراف مشترک:**
+ترتیب اجرایی از گراف و Blueprint استخراج شد: R04 مالک Source Catalog و مشاهدهٔ انتشار است؛ خروجی آن به RDE در R07 می‌رسد؛ RDE سندهای مرتبط را به‌صورت candidate می‌یابد و فقط مورد منتخب را برای دریافت متن کامل به R02 می‌فرستد. این ترتیب، تخصیص برنامه‌ای برای جایگاه‌های خالی R07/R08 است، نه تصمیم سیاستی تازه. ذخیرهٔ سند/رابطهٔ canonical همچنان R03 است.
+
+گراف pinned `knowledge-graph/phase2-reference-docs/semantic/graph.json` با Graphify 0.9.112 خوانده شد. Nodeهای RDE و selective ingestion resolve شدند: `docs_shahab_phase_2_development_blueprint_source_discovery_metadata_catalog`, `..._rde`, `..._selective_document_ingestion`, `..._adr_rag_04`, `..._adr_rag_06`, `..._adr_rag_11`, `..._adr_rag_15`, `..._adr_rag_23`, `..._adr_rag_24`, `..._adr_rag_25`, `..._adr_rag_30`, `..._adr_rag_34`. یال‌های `EXTRACTED` مستقیمِ Catalog→RDE (B:216) و RDE→Selective Ingestion (B:236) مسیر بسته را پشتیبانی می‌کنند؛ روابط `INFERRED/AMBIGUOUS` مبنای الزام نشدند. منبع کامل با SHAهای ثبت‌شده در §۰ تطبیق شد؛ خطوط B:210–240 و ADRهای مربوطه بازخوانی شدند.
+
+**Candidate/Requirement Registry — Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک رفتار / داده | Enabler / Task | AC / Test | Disposition |
+| --- | --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R07:001 / REQ:RAG:R07:001 | هر ورودی RDE باید به مشاهدهٔ فرادادهٔ ثبت‌شده در R04، شناسهٔ پایدار منبع/رکورد، زمان و روش مشاهده وصل بماند؛ رخداد تکراری همان مشاهده را تکثیر نکند. | B:210–217؛ ADR-RAG-05:289–293؛ ADR-RAG-24:384–388; Graph: `docs_shahab_phase_2_development_blueprint_source_discovery_metadata_catalog; docs_shahab_phase_2_development_blueprint_adr_rag_05` | RDE intake / R04 owns source observation | EN:RAG:R07:001 / TASK:RAG:R07:001 | AC:RAG:R07:001 / TEST:RAG:R07:001 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:002 / REQ:RAG:R07:002 | RDE باید نامزدهای رابطه را با تطبیق قطعی/ساختاری شناسه، شماره، تاریخ، صادرکننده و ارجاع صریح کشف کند؛ نبود تطبیق قطعی به‌تنهایی رد رابطه نیست. | B:218–222؛ ADR-RAG-06:294–298; Graph: `docs_shahab_phase_2_development_blueprint_rde; docs_shahab_phase_2_development_blueprint_adr_rag_06` | RDE structural matcher | EN:RAG:R07:001 / TASK:RAG:R07:002 | AC:RAG:R07:002 / TEST:RAG:R07:002 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:003 / REQ:RAG:R07:003 | RDE باید نامزدهای واژگانی را با نرمال‌سازی فارسی، مترادف/کلیدواژه و جست‌وجوی واژگانی مجاز تولید کند و provenance واژه/روش را نگه دارد. | B:218–225؛ ADR-RAG-15:339–343; Graph: `docs_shahab_phase_2_development_blueprint_rde; docs_shahab_phase_2_development_blueprint_adr_rag_15` | RDE lexical candidate adapter | EN:RAG:R07:001 / TASK:RAG:R07:002 | AC:RAG:R07:003 / TEST:RAG:R07:003 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:004 / REQ:RAG:R07:004 | RDE می‌تواند embedding/semantic matching و reranker را به‌عنوان سیگنال نامزد به‌کار گیرد؛ فناوری، مدل، وزن و آستانه تا ارزیابی مصوب باز می‌ماند. | B:218–226، 700؛ ADR-RAG-03:279–283؛ ADR-RAG-11:319–323; Graph: `docs_shahab_phase_2_development_blueprint_rde; docs_shahab_phase_2_development_blueprint_adr_rag_11` | RDE semantic adapter (replaceable) | EN:RAG:R07:001 / TASK:RAG:R07:002 | AC:RAG:R07:004 / TEST:RAG:R07:004 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:005 / REQ:RAG:R07:005 | RDE باید سیگنال‌های ساختاری، واژگانی، معنایی و موضوعی را با دلیل جداگانه نگه دارد؛ مرتب‌سازی نامزدها نباید به‌تنهایی اعتبار منبع، اثر حقوقی یا تقدم را تعیین کند. | B:218–233؛ ADR-RAG-06:294–298؛ ADR-RAG-23:379–383؛ ADR-RAG-30:414–418; Graph: `docs_shahab_phase_2_development_blueprint_rde; docs_shahab_phase_2_development_blueprint_adr_rag_23; docs_shahab_phase_2_development_blueprint_adr_rag_30` | RDE candidate ranker; R03 owns legal relation state | EN:RAG:R07:001 / TASK:RAG:R07:003 | AC:RAG:R07:005 / TEST:RAG:R07:005 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:006 / REQ:RAG:R07:006 | متن کامل فقط برای نامزد منتخب طبق معیارهای مصوب/قابل ردیابی دریافت شود؛ R07 انتخاب و دلیل handoff را تولید می‌کند و دسترسی/دریافت را فقط از R02 و policy مجاز می‌خواهد. | B:234–240؛ ADR-RAG-04:284–288؛ ADR-RAG-34:434–438; Graph: `docs_shahab_phase_2_development_blueprint_selective_document_ingestion; docs_shahab_phase_2_development_blueprint_adr_rag_04; docs_shahab_phase_2_development_blueprint_adr_rag_34` | R07 selection; R02 source access & ingestion | EN:RAG:R07:002 / TASK:RAG:R07:003 | AC:RAG:R07:006 / TEST:RAG:R07:006 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:007 / REQ:RAG:R07:007 | رابطهٔ پیشنهادی باید با شاهد متنی/نسخه و قلمرو مشخص در سطح سند یا بند طبقه‌بندی شود؛ موضوع مشابه با اثر حقوقی یکی نیست و R03 تنها مالک ثبت canonical relation است. | B:221–233, 250–258؛ ADR-RAG-06:294–298؛ ADR-RAG-08:304–308؛ ADR-RAG-25:389–393; ADR-RAG-30:414–418; Graph: `docs_shahab_phase_2_development_blueprint_rde; docs_shahab_phase_2_development_blueprint_adr_rag_06; docs_shahab_phase_2_development_blueprint_adr_rag_08; docs_shahab_phase_2_development_blueprint_adr_rag_25; docs_shahab_phase_2_development_blueprint_adr_rag_30` | R07 relation evidence proposal; R03 canonical relation owner | EN:RAG:R07:002 / TASK:RAG:R07:003 | AC:RAG:R07:007 / TEST:RAG:R07:007 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R07:008 / REQ:RAG:R07:008 | RDE workflow باید وضعیت candidate، تلاش‌ها، دلیل توقف/ابهام و خطا را به‌شکل پایدار و idempotent نگه دارد؛ retry/backpressure از قرارداد C01 و کار مالک پیروی کند. | B:289–293, 369–378؛ ADR-RAG-21:369–373؛ ADR-RAG-22:374–378; Graph: `docs_shahab_phase_2_development_blueprint_adr_rag_05; docs_shahab_phase_2_development_blueprint_adr_rag_21; docs_shahab_phase_2_development_blueprint_adr_rag_22` | RDE job owner within Adviser; C01 shared job/runtime contract | EN:RAG:R07:002 / TASK:RAG:R07:004 | AC:RAG:R07:008 / TEST:RAG:R07:008 | ACCEPTED / source-backed; no new policy value |
+
+**Enablerها:**
+
+| ID | خروجی مستقل | Requirements | معیار تحقق |
+| --- | --- | --- | --- |
+| EN:RAG:R07:001 | candidateهای رابطه با شواهد چندسیگنالی ساخته و توضیح داده شوند. | REQ:RAG:R07:001–005 | نبود threshold یا فناوری مصوب مانع ثبت raw evidence نیست؛ candidate به حکم تبدیل نمی‌شود. |
+| EN:RAG:R07:002 | ورود کامل فقط برای candidate منتخب و از مسیر مجاز R02 هماهنگ شود. | REQ:RAG:R07:006–007 | R02 access؛ R03 canonical storage/relation؛ R07 فقط candidate/handoff. |
+| EN:RAG:R07:003 | چرخه candidate پایدار، امن و قابل ممیزی بماند. | REQ:RAG:R07:008 | idempotency/backpressure با قرارداد C01؛ failure هرگز موفقیت یا پوشش کامل نیست. |
+
+**Taskها و خروجی اجرایی:**
+
+| Task ID / هدف | مالک | Requirements | وابستگی/قرارداد | خروجی و completion oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R07:001 — پذیرفتن و normalize کردن observation candidate | RDE Intake | REQ:RAG:R07:001 | R04 source observation; C01:03 durable-job contract | candidate envelope, provenance, dedupe key and validation outcome; oracle: one persisted logical candidate per observation key. |
+| TASK:RAG:R07:002 — ساخت candidate با matcherهای ساختاری/واژگانی/معنایی قابل‌تعویض | RDE Candidate Engine | REQ:RAG:R07:002–004 | R03 IDs/index read contracts; ADR-RAG-11; no forced vector tech | per-signal candidate set with evidence spans, adapter/version and explicit unknowns; oracle: fixture-derived matched fields and provenance. |
+| TASK:RAG:R07:003 — ارزیابی candidate و صدور درخواست selective-ingestion/relation review | RDE Workflow Coordinator | REQ:RAG:R07:005–007 | R02 access permission/ingestion API; R03 canonical write owner; ADR-RAG-06/23/30/34 | auditable selection/handoff or review outcome; oracle: no direct fetch/write and handoff scope/policy exact. |
+| TASK:RAG:R07:004 — durable job، dedupe، retry و مشاهده‌پذیری workflow | RDE Job Owner | REQ:RAG:R07:008 | C01/C03 job persistence, limits, trace; C14 event history | recoverable status/attempt envelope; oracle: replay stable ID, bounded retries, terminal failure observable. |
+
+**Subtaskها:**
+
+| Subtask | خروجی مستقل | Requirement | ورودی/وابستگی | Oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R07:001.S01 | اعتبارسنجی observation/source identity و ثبت ردّ ورودی نامعتبر | R07:001 | R04 event contract | one valid envelope or explicit quarantine |
+| TASK:RAG:R07:001.S02 | ساخت کلید dedupe و candidate identity پایدار | R07:001,008 | C01 idempotency contract | same event maps to same logical id |
+| TASK:RAG:R07:001.S03 | ثبت provenance شامل زمان/روش/source ref | R07:001 | R04 observation | all required refs resolve |
+| TASK:RAG:R07:002.S01 | اجرای structural matcher و نگهداری field-level evidence | R07:002 | R03 read-only identities | matched fields exact |
+| TASK:RAG:R07:002.S02 | اجرای lexical matcher و provenance واژه/span | R07:003 | source text/catalog | token and span trace |
+| TASK:RAG:R07:002.S03 | adapter معنایی optional با مدل/version و fail status | R07:004 | ADR-RAG-03/11 | no hard-coded tech/threshold |
+| TASK:RAG:R07:003.S01 | ترکیب و نمایش سیگنال‌ها بدون استنتاج legal precedence | R07:005 | C01/C05 rules, R03 legal state | each signal independently inspectable |
+| TASK:RAG:R07:003.S02 | ساخت درخواست انتخابی R02 با policy ref/scope/reason | R07:006 | R02 source-access | no access when denied |
+| TASK:RAG:R07:003.S03 | ساخت relation evidence proposal برای بررسی/ثبت توسط R03 | R07:007 | R03 canonical endpoint | no write outside owner |
+| TASK:RAG:R07:004.S01 | ثبت state/attempt/error و recovery stage | R07:008 | C01/C03 persistence | resume same job |
+| TASK:RAG:R07:004.S02 | اعمال retry/backpressure طبق policy مالک | R07:008 | C01/C03 workload | bounded retry |
+| TASK:RAG:R07:004.S03 | ارسال event/trace کمینه به C14/C01 و ثبت delivery state | R07:008 | C14 history; C01 telemetry | delivery failure does not erase job state |
+
+**Acceptance Criteria مستقل و Test Definitions — طراحی برنامه‌ای، اجرا نشده:**
+
+| AC / Requirement | Given / پیش‌شرط | When / محرک | Then / خروجی | PASS oracle | FAIL / مرز | TD / رفتار آزمون |
+| --- | --- | --- | --- | --- | --- | --- |
+| AC:RAG:R07:001 / REQ:RAG:R07:001 | source observation ناموجود یا شناسه/زمان مفقود → رد یا quarantine؛ RDE مشاهدهٔ منبع جعل نمی‌کند. | R04 observation موجود با source_id، observed_at و method معتبر | رویداد جدید از Catalog پذیرفته شود | candidate با observation_ref و provenance ثبت شود | RDE خودش fetch یا Source Catalog write نکند | TEST:RAG:R07:001 — هر ورودی RDE باید به مشاهدهٔ فرادادهٔ ثبت‌شده در R04، شناسهٔ پایدار منبع/رکورد، زمان و روش مشاهده وصل بماند؛ رخداد تکراری همان مشاهده را تکثیر نکند.؛ invariant: برابری شناسهٔ ورودی، provenance و observation؛ شمار candidateهای ایجادشده دقیقاً ۱ |
+| AC:RAG:R07:002 / REQ:RAG:R07:002 | شناسه‌های مشابه ولی متعارض به candidate قطعی ارتقا نیابند؛ نتیجهٔ مبهم review باشد. | سند جدید شمارهٔ اصلاحیهٔ ارجاع‌شده به سند موجود را دارد | اجرای structural matching | پیوند candidate با سند مقصد پیشنهاد شود | شناسهٔ صرفاً مشابه به رابطهٔ حقوقی تبدیل نشود | TEST:RAG:R07:002 — RDE باید نامزدهای رابطه را با تطبیق قطعی/ساختاری شناسه، شماره، تاریخ، صادرکننده و ارجاع صریح کشف کند؛ نبود تطبیق قطعی به‌تنهایی رد رابطه نیست.؛ invariant: مجموع فیلدهای matched دقیقاً با fixture و source span برابر باشد |
+| AC:RAG:R07:003 / REQ:RAG:R07:003 | تطبیق واژگانی به‌تنهایی هیچ AMENDS/REPEALS/REFERS_TO تأییدشده‌ای ایجاد نکند. | عنوان و موضوع از لغات فارسی و معادل ثبت‌شده تشکیل شده‌اند | اجرای lexical matching | کاندیداها با term evidence ثبت شوند | lexical match فقط سرنخ است | TEST:RAG:R07:003 — RDE باید نامزدهای واژگانی را با نرمال‌سازی فارسی، مترادف/کلیدواژه و جست‌وجوی واژگانی مجاز تولید کند و provenance واژه/روش را نگه دارد.؛ invariant: مجموعه term_hit دقیقاً از واژه‌های fixture و provenance دارای span باشد |
+| AC:RAG:R07:004 / REQ:RAG:R07:004 | تغییر مدل یا score به حکم حقوقی/تأیید relation منجر نشود و آستانهٔ فرضی hard-code نشود. | دو عبارت هم‌معنا با واژگان متفاوت و semantic adapter versioned | اجرای semantic candidate search | نامزد مرتبط با semantic provenance برگردد | هیچ حد عددی جدید تصویب نشود | TEST:RAG:R07:004 — RDE می‌تواند embedding/semantic matching و reranker را به‌عنوان سیگنال نامزد به‌کار گیرد؛ فناوری، مدل، وزن و آستانه تا ارزیابی مصوب باز می‌ماند.؛ invariant: نتیجه قابل تکرار با همان adapter/version و fixture؛ threshold_ref تهی یا مصوب |
+| AC:RAG:R07:005 / REQ:RAG:R07:005 | recency/popularity/similarity نتواند صلاحیت، قلمرو، سلسله‌مراتب یا رابطهٔ حقوقی را نتیجه‌گیری کند. | سه candidate با سیگنال‌های جدا و یکی با تاریخ جدیدتر اما شاهد ضعیف‌تر | محاسبه و مرتب‌سازی candidate فقط طبق policy/config ثبت‌شده | دلیل هر signal و ترتیب خروجی قابل مشاهده باشد | ترتیب، حکم یا precedence نیست | TEST:RAG:R07:005 — RDE باید سیگنال‌های ساختاری، واژگانی، معنایی و موضوعی را با دلیل جداگانه نگه دارد؛ مرتب‌سازی نامزدها نباید به‌تنهایی اعتبار منبع، اثر حقوقی یا تقدم را تعیین کند.؛ invariant: هر rank به ورودی‌های fixture برگردد؛ signal غایب صریحاً absent باشد |
+| AC:RAG:R07:006 / REQ:RAG:R07:006 | مجوز ناموجود/نامعلوم/منقضی یا متن صرفاً موضوعاً مشابه → هیچ fetch/storage؛ R07 دور زدن R02 نمی‌کند. | candidate انتخاب‌شده با ارجاع صریح/ریسک مستند و policy معتبر R02 | ساخت ingestion request | R02 درخواست محدود و مجاز دریافت کند | catalog/candidate معادل دریافت متن نیست | TEST:RAG:R07:006 — متن کامل فقط برای نامزد منتخب طبق معیارهای مصوب/قابل ردیابی دریافت شود؛ R07 انتخاب و دلیل handoff را تولید می‌کند و دسترسی/دریافت را فقط از R02 و policy مجاز می‌خواهد.؛ invariant: یک درخواست دارای candidate_id، policy_ref، محدوده و علت؛ zero direct fetch از R07 |
+| AC:RAG:R07:007 / REQ:RAG:R07:007 | عنوان مشابه، citation مبهم یا متن ناموجود به AMENDS/REPEALS معتبر ارتقا نیابد. | دو متن کامل versioned با بند اصلاح‌کننده و محدوده اثر روشن | استخراج relation evidence proposal | پیشنهاد قابل ممیزی به R03 ارسال شود | LegalRelation تاییدشده متعلق به R03 است | TEST:RAG:R07:007 — رابطهٔ پیشنهادی باید با شاهد متنی/نسخه و قلمرو مشخص در سطح سند یا بند طبقه‌بندی شود؛ موضوع مشابه با اثر حقوقی یکی نیست و R03 تنها مالک ثبت canonical relation است.؛ invariant: شناسه دو endpoint و span/hash/version مطابق fixture؛ R03 write count از R07 صفر |
+| AC:RAG:R07:008 / REQ:RAG:R07:008 | duplicate, crash یا resource saturation اثر تکراری، retry نامحدود یا candidate success جعلی نسازد. | یک RDE job ثبت‌شده در store مالک، event key و attempt state دارد | تحویل/بازیابی job | همان job ادامه یافته یا terminal failure می‌شود | policy و ذخیره‌سازی shared در C01/C03 می‌ماند | TEST:RAG:R07:008 — RDE workflow باید وضعیت candidate، تلاش‌ها، دلیل توقف/ابهام و خطا را به‌شکل پایدار و idempotent نگه دارد؛ retry/backpressure از قرارداد C01 و کار مالک پیروی کند.؛ invariant: یک logical job id؛ attempt count مطابق policy؛ event history بازسازی‌پذیر |
+
+**Planned Test Cases مستقل (P/N/B/F) — همه `NOT_EXECUTED`:**
+
+| Case ID | Requirement | نوع | Preconditions / Fixture | Action | Expected / Oracle | Invariant | Failure / boundary |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| TC:RAG:R07:001-P | REQ:RAG:R07:001 | مثبت | Catalog observation valid; source_id, observed_at and method present | RDE accepts new event | one candidate keeps exact observation_ref and provenance; oracle: candidate count=1 and all envelope fields equal input | برابری شناسهٔ ورودی، provenance و observation؛ شمار candidateهای ایجادشده دقیقاً ۱ | RDE must not fetch source or alter Catalog |
+| TC:RAG:R07:001-N | REQ:RAG:R07:001 | منفی | source_id or observed_at missing | submit malformed event | quarantine/reject; no usable candidate; oracle: usable candidate count=0; reject reason identifies missing field | برابری شناسهٔ ورودی، provenance و observation؛ شمار candidateهای ایجادشده دقیقاً ۱ | cannot infer source/time from title |
+| TC:RAG:R07:001-B | REQ:RAG:R07:001 | مرزی | same observation delivered twice concurrently | deliver both with same event key | one logical candidate/job and stable ID; oracle: candidate count=1 and both receipts resolve to same ID | برابری شناسهٔ ورودی، provenance و observation؛ شمار candidateهای ایجادشده دقیقاً ۱ | dedupe must be persistent across workers |
+| TC:RAG:R07:001-F | REQ:RAG:R07:001 | شکست | worker crashes after persisting candidate before ack | restart and replay event | existing candidate recovered; no duplicate; oracle: candidate count remains 1 after restart | برابری شناسهٔ ورودی، provenance و observation؛ شمار candidateهای ایجادشده دقیقاً ۱ | persistence outage would be failure, not acknowledged success |
+| TC:RAG:R07:002-P | REQ:RAG:R07:002 | مثبت | new document includes exact official amendment number and explicit reference to a known document | run structural matcher | candidate links to exact target with matched fields and spans; oracle: target identity and matched field set equal fixture | مجموع فیلدهای matched دقیقاً با fixture و source span برابر باشد | does not assert legal effect |
+| TC:RAG:R07:002-N | REQ:RAG:R07:002 | منفی | two documents share similar number but issuer and date conflict | run structural matcher | no exact-match classification; ambiguity recorded; oracle: exact-match flag false; mismatch fields listed | مجموع فیلدهای matched دقیقاً با fixture و source span برابر باشد | similar ID alone is insufficient |
+| TC:RAG:R07:002-B | REQ:RAG:R07:002 | مرزی | identifier exists but two target versions are plausible | run matcher with both versions | candidate records both alternatives or review state; oracle: candidate targets count=2 or explicit ambiguous; silent single choice fails | مجموع فیلدهای matched دقیقاً با fixture و source span برابر باشد | bounded ambiguity set follows implementation policy |
+| TC:RAG:R07:002-F | REQ:RAG:R07:002 | شکست | destination index unavailable during lookup | execute matching request | lookup failure/unknown; no no-match success; oracle: status=failed/unknown, no successful coverage flag | مجموع فیلدهای matched دقیقاً با fixture و source span برابر باشد | preserve source event for retry |
+| TC:RAG:R07:003-P | REQ:RAG:R07:003 | مثبت | titles use Persian/Arabic character variants and approved synonym | run lexical search | intended candidate returned with normalized term and span; oracle: candidate ID and source span equal fixture oracle | مجموعه term_hit دقیقاً از واژه‌های fixture و provenance دارای span باشد | term evidence is only a lead |
+| TC:RAG:R07:003-N | REQ:RAG:R07:003 | منفی | generic term occurs in unrelated documents only | run lexical search | unrelated docs remain leads or are excluded by evidence; none becomes legal relation; oracle: relation state remains candidate/none | مجموعه term_hit دقیقاً از واژه‌های fixture و provenance دارای span باشد | no false legal classification from keyword |
+| TC:RAG:R07:003-B | REQ:RAG:R07:003 | مرزی | query uses a boundary spelling with/without half-space | run normalized search | same intended candidate found once; oracle: unique candidate identity and term normalization recorded | مجموعه term_hit دقیقاً از واژه‌های fixture و provenance دارای span باشد | normalization collision retained as ambiguity |
+| TC:RAG:R07:003-F | REQ:RAG:R07:003 | شکست | full-text index times out | run lexical search | failure/partial coverage exposed; oracle: retrieval status not complete; error code recorded | مجموعه term_hit دقیقاً از واژه‌های fixture و provenance دارای span باشد | never report no matches |
+| TC:RAG:R07:004-P | REQ:RAG:R07:004 | مثبت | semantic adapter available with pinned version and paraphrased title | run semantic matching | semantic candidate with adapter/version/raw signal; oracle: adapter ID/version and raw result match fixture | نتیجه قابل تکرار با همان adapter/version و fixture؛ threshold_ref تهی یا مصوب | candidate does not become approved relation |
+| TC:RAG:R07:004-N | REQ:RAG:R07:004 | منفی | semantic-only similarity exists but issuer/scope not proven | run semantic matching and inspect state | candidate only; no relation or authority status; oracle: legal-state writes=0 | نتیجه قابل تکرار با همان adapter/version و fixture؛ threshold_ref تهی یا مصوب | semantic score cannot establish eligibility |
+| TC:RAG:R07:004-B | REQ:RAG:R07:004 | مرزی | score equals configured decision boundary if one exists; otherwise config absent | evaluate candidate | use configured behavior or retain unclassified score; oracle: threshold_ref equals approved config or null | نتیجه قابل تکرار با همان adapter/version و fixture؛ threshold_ref تهی یا مصوب | do not invent threshold |
+| TC:RAG:R07:004-F | REQ:RAG:R07:004 | شکست | provider times out or returns invalid payload | run semantic adapter | semantic signal marked unavailable; other signals preserved; oracle: candidate coverage=partial; error observable | نتیجه قابل تکرار با همان adapter/version و fixture؛ threshold_ref تهی یا مصوب | no empty result interpreted as no candidate |
+| TC:RAG:R07:005-P | REQ:RAG:R07:005 | مثبت | three candidates have separate structural, lexical, semantic evidence | rank candidates | rank explanation exposes each signal and reason; oracle: all ranked items have explicit signal vector | هر rank به ورودی‌های fixture برگردد؛ signal غایب صریحاً absent باشد | ordering is discovery aid only |
+| TC:RAG:R07:005-N | REQ:RAG:R07:005 | منفی | newer repost has more textual similarity but unknown issuer vs older primary-reference match | rank and inspect legal classification | candidate ordering may reflect configured policy; no legal precedence asserted; oracle: precedence/legal-state mutation=0 | هر rank به ورودی‌های fixture برگردد؛ signal غایب صریحاً absent باشد | recency and popularity are not authority |
+| TC:RAG:R07:005-B | REQ:RAG:R07:005 | مرزی | one candidate lacks semantic signal while structural signal exists | rank with partial vector | missing signal remains unknown/absent, not zero proof; oracle: serialized signal is null/absent as contract states | هر rank به ورودی‌های fixture برگردد؛ signal غایب صریحاً absent باشد | no hidden numeric weighting |
+| TC:RAG:R07:005-F | REQ:RAG:R07:005 | شکست | ranking policy config cannot load | execute candidate ranking | raw candidates returned unranked or workflow fails explicitly; oracle: no default numeric score emitted | هر rank به ورودی‌های fixture برگردد؛ signal غایب صریحاً absent باشد | candidate evidence retained for recovery |
+| TC:RAG:R07:006-P | REQ:RAG:R07:006 | مثبت | selected candidate has explicit source scope and R02 policy_ref active | create selective-ingestion request | one scoped request to R02 with reason and candidate ID; oracle: R02 request count=1 and fields equal selection | یک درخواست دارای candidate_id، policy_ref، محدوده و علت؛ zero direct fetch از R07 | R07 performs no direct HTTP/browser request |
+| TC:RAG:R07:006-N | REQ:RAG:R07:006 | منفی | source policy missing, expired or unclear | attempt selection for full-text fetch | no R02 invocation/fetch; deny or review reason; oracle: request count=0 | یک درخواست دارای candidate_id، policy_ref، محدوده و علت؛ zero direct fetch از R07 | public reachability is not permission |
+| TC:RAG:R07:006-B | REQ:RAG:R07:006 | مرزی | only one provision is authorized for retrieval | request selective ingestion | scope limited to permitted provision; oracle: requested scope equals approved scope exactly | یک درخواست دارای candidate_id، policy_ref، محدوده و علت؛ zero direct fetch از R07 | must not expand to whole document |
+| TC:RAG:R07:006-F | REQ:RAG:R07:006 | شکست | R02 unavailable or denies access after request | dispatch handoff | pending/denied result visible; no local artifact saved; oracle: R07 artifact writes=0 and handoff failure recorded | یک درخواست دارای candidate_id، policy_ref، محدوده و علت؛ zero direct fetch از R07 | retry only under R02/C01 policy |
+| TC:RAG:R07:007-P | REQ:RAG:R07:007 | مثبت | full text contains explicit clause-level amendment with scope/date evidence | build relation proposal | proposal contains endpoint IDs, clause span/version/hash and scope; oracle: all proposal fields resolve to fixture artifacts | شناسه دو endpoint و span/hash/version مطابق fixture؛ R03 write count از R07 صفر | R03 alone accepts canonical relation |
+| TC:RAG:R07:007-N | REQ:RAG:R07:007 | منفی | titles are similar but full text has no linking evidence | evaluate relation | candidate_relation only; canonical relation unchanged; oracle: R03 relation write count=0 | شناسه دو endpoint و span/hash/version مطابق fixture؛ R03 write count از R07 صفر | no AMENDS/REPEALS inference |
+| TC:RAG:R07:007-B | REQ:RAG:R07:007 | مرزی | evidence supports effect on one paragraph and exception only | prepare proposal | impact scope limited to exact paragraph and exception; oracle: proposal endpoint spans equal those two clauses only | شناسه دو endpoint و span/hash/version مطابق fixture؛ R03 write count از R07 صفر | do not supersede full document |
+| TC:RAG:R07:007-F | REQ:RAG:R07:007 | شکست | R03 contract rejects stale version/hash | submit proposal | quarantine or failed handoff, no canonical state change; oracle: R03 canonical relation state unchanged | شناسه دو endpoint و span/hash/version مطابق fixture؛ R03 write count از R07 صفر | retain candidate evidence for review |
+| TC:RAG:R07:008-P | REQ:RAG:R07:008 | مثبت | durable job store available and transient retry allowed by existing policy | execute job and restart worker | same logical ID resumes; attempt history appended; oracle: job ID stable and attempts within existing policy | یک logical job id؛ attempt count مطابق policy؛ event history بازسازی‌پذیر | no duplicate candidate side effect |
+| TC:RAG:R07:008-N | REQ:RAG:R07:008 | منفی | same job message delivered after completion | redeliver event | terminal result returned idempotently; oracle: logical job count=1 | یک logical job id؛ attempt count مطابق policy؛ event history بازسازی‌پذیر | no duplicate relation or fetch |
+| TC:RAG:R07:008-B | REQ:RAG:R07:008 | مرزی | resource quota is at approved boundary with interactive query active | submit background RDE load | background work deferred/throttled under C01 contract; oracle: interactive request remains within existing contract | یک logical job id؛ attempt count مطابق policy؛ event history بازسازی‌پذیر | no new quotas invented |
+| TC:RAG:R07:008-F | REQ:RAG:R07:008 | شکست | durable job store unavailable before acknowledgement | submit RDE event | no success acknowledgement; event remains retryable; oracle: ack count=0 or durable outbox ref exists | یک logical job id؛ attempt count مطابق policy؛ event history بازسازی‌پذیر | cannot silently lose job |
+
+**قراردادها، وابستگی‌ها و Handoff:**
+
+| مبدأ/مقصد | مرز اجرایی | مالک حقیقت/قرارداد | کنترل جلوگیری از تعارض |
+| --- | --- | --- | --- |
+| R04→R07 | candidate input از observation/catalog؛ no source inventory ownership change | R04 | observation_ref mandatory; never infer source approval |
+| R07→R02 | request selective ingestion only | R02 | scope and active usage policy required; deny means zero access |
+| R07→R03 | relation/document evidence proposal only | R03 | canonical persistence/approval stays R03; no direct DB/table write |
+| R07→R05/R06 | candidate evidence may inform later retrieval/answer after R03 gates | R05/R06 | candidate not citable or current by default |
+| R07→C01/C14 | job, trace and notification via existing contracts | C01/C14 | no parallel auth, job store, audit or notification service |
+
+**تصمیم‌های باز (بدون جعل مصوبه):**
+
+- نحوهٔ ترکیب سیگنال‌ها، مدل/embedding/reranker، وزن و آستانه پس از baseline و benchmark؛ تا آن زمان score/threshold جدید نداریم.
+- قواعد انتخاب candidate برای دریافت کامل سند و resource budget؛ استفاده از policy موجود و عدم دسترسی در نبود مجوز قطعی است.
+- جزئیات physical schema و قرارداد نهایی relation proposal با R03؛ این بسته قرارداد جدیدی بدون تأیید owner تعریف نمی‌کند.
+- آستانه‌های قانونی/اعتماد/ترتیب حقوقی و پذیرش expert بر اساس سند/قلمرو؛ candidate matching به‌تنهایی نتیجه نمی‌دهد.
+
+**RA مستقل — Source Coverage/Graph Evidence/Atomicity/Ownership/Decision/Dependencies/Duplicates: PASS. 8/8 candidate به source unit و graph node resolved وصل؛ هرکدام یک behavior مستقل؛ owner/source boundary صریح؛ duplicate source observations idempotent؛ inferred edges=0 الزام جدید.**
+
+**IPA مستقل — Implementation readiness/Traceability/AC-Test/Reverse links: PASS. 8/8 requirement → enabler/task/subtask/AC/TD → چهار case مجزا P/N/B/F؛ Task outputs و oracles قابل مشاهده‌اند؛ dependency DAG بدون cycle؛ هیچ product test ادعای اجرا ندارد.**
+
+**Test design status:** 8 Test Definition و 32 Planned Test Case (برای هر requirement یک مثبت، منفی، مرزی و شکست)؛ همه `NOT_EXECUTED`. اینها آزمون محصول نیستند و اجرای محصول/کیفیت مدل یا منبع را اثبات نمی‌کنند.
+
+### R08 — بازاعتبارسنجی سند و هماهنگی اثر تغییر
+
+**وضعیت:** `RA=PASS` / `IPA=PASS`؛ `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
+
+**Scope و مالکیت:** R08 مالک trigger/workflow بازاعتبارسنجی و impact manifest؛ R04 مالک Source Catalog/check observation؛ R02 مالک fetch؛ R03 مالک نسخه، lineage، وضعیت canonical و active Snapshot/publishing؛ R05 مالک retrieval index/cache؛ R06 مالک پاسخ/عدم قطعیت؛ C01 job/telemetry/release contract؛ C14 history/notification. R08 مستقیماً canonical state, index یا Snapshot را نمی‌نویسد.
+
+**تعیین دامنه و گراف مشترک:**
+R08 از DRS صریح در Blueprint §3.6 و یال استخراج‌شده ADR-RAG-05→DRS استفاده می‌کند. بستهٔ R07 فقط candidate سند تازه و relation evidence تولید می‌کند؛ R08 بازبینی نسخهٔ سند شناخته‌شده، freshness، اثر تغییر و درخواست بازسازی مشتقات را هماهنگ می‌کند. R04 source discovery/check و R02 دسترسی را انجام می‌دهند؛ این بسته مرزهای آن‌ها را منتقل نمی‌کند.
+
+Nodeهای pinned Graphify برای DRS، Catalog، ADR-RAG-05/12/15/19/20/21/22/24/27/28/31/35/39 در گراف resolve شدند. رابطهٔ `EXTRACTED` بین `docs_shahab_phase_2_development_blueprint_adr_rag_05` و `docs_shahab_phase_2_development_blueprint_drs` در B:289 تأیید شد. Source Unitهای Blueprint §3.3 (210–217)، §3.6 (242–249)، §3.7 (250–258)، §3.9.4–5 (492–504) و ADRهای فوق به متن کامل تطبیق شدند؛ hash اسناد با §۰ برابر است. گراف/منبع حد عددی، scheduler، SLA یا RPO/RTO تصویب نمی‌کند؛ این‌ها باز می‌مانند.
+
+**Candidate/Requirement Registry — Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک رفتار / داده | Enabler / Task | AC / Test | Disposition |
+| --- | --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R08:001 / REQ:RAG:R08:001 | بازبینی سند موجود باید با تغییر مشاهده‌شده، زمان بازبینی تطبیقی بر پایهٔ ریسک/استفاده/سابقه، یا trigger هدفمند تأییدشده فعال شود؛ یک cadence یا آستانهٔ عددی سراسری جعل نشود. | B:242–249, 3.3:210–217؛ ADR-RAG-35:439–443; Graph: `docs_shahab_phase_2_development_blueprint_drs; docs_shahab_phase_2_development_blueprint_adr_rag_35; docs_shahab_phase_2_development_blueprint_source_discovery_metadata_catalog` | DRS trigger policy; R04 owns source discovery signals | EN:RAG:R08:001 / TASK:RAG:R08:001 | AC:RAG:R08:001 / TEST:RAG:R08:001 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:002 / REQ:RAG:R08:002 | دریافت/بررسی نسخهٔ جاری فقط از Source Access مجاز R02 انجام شود و نتیجهٔ هر تلاش به source/document identity، زمان مشاهده، روش، policy و raw evidence وصل بماند. | B:242–249؛ ADR-RAG-04:284–288؛ ADR-RAG-34:434–438; Graph: `docs_shahab_phase_2_development_blueprint_drs; docs_shahab_phase_2_development_blueprint_adr_rag_04; docs_shahab_phase_2_development_blueprint_adr_rag_34` | R02 source-access owner; R08 revalidation coordinator | EN:RAG:R08:001 / TASK:RAG:R08:001 | AC:RAG:R08:002 / TEST:RAG:R08:002 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:003 / REQ:RAG:R08:003 | R08 باید محتوای مشاهده‌شده را با نسخه/اثر canonical قبلی به‌صورت قابل ردیابی مقایسه کند و تغییر متن/قالب، تغییر extraction و تغییر اثر حقوقی را از هم جدا نگه دارد. | B:242–249, 250–258; ADR-RAG-15:339–343; ADR-RAG-25:389–393; Graph: `docs_shahab_phase_2_development_blueprint_drs; docs_shahab_phase_2_development_blueprint_adr_rag_15; docs_shahab_phase_2_development_blueprint_adr_rag_25` | R03 canonical version/evidence owner; DRS comparison producer | EN:RAG:R08:001 / TASK:RAG:R08:002 | AC:RAG:R08:003 / TEST:RAG:R08:003 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:004 / REQ:RAG:R08:004 | وضعیت Source، DocumentVersion، LegalRelation، Extraction/Evidence و Snapshot باید جدا و مطابق قرارداد مالک نگهداری شود؛ DRS آن‌ها را به وضعیت یکسان فرو نکاهد یا enum موازی نسازد. | B:242–258, 3.9.4–3.9.5:492–504؛ ADR-RAG-12:324–328؛ ADR-RAG-20:364–368؛ ADR-RAG-24:384–388; Graph: `docs_shahab_phase_2_development_blueprint_adr_rag_12; docs_shahab_phase_2_development_blueprint_adr_rag_20; docs_shahab_phase_2_development_blueprint_adr_rag_24` | R03 owns canonical state; R04 source lifecycle; R08 consumes/coordinates | EN:RAG:R08:001 / TASK:RAG:R08:002 | AC:RAG:R08:004 / TEST:RAG:R08:004 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:005 / REQ:RAG:R08:005 | برای تغییر تأییدشده/محتمل، DRS باید از lineage و رابطهٔ نسخه‌دار فقط اقلام و مشتقات وابسته را برای ارزیابی اثر انتخاب کند؛ دامنهٔ تاثیر حدسی یا کل پایگاه نباشد. | B:242–249, 3.9.5:504; ADR-RAG-12:324–328; ADR-RAG-27:399–403; Graph: `docs_shahab_phase_2_development_blueprint_adr_rag_12; docs_shahab_phase_2_development_blueprint_adr_rag_27` | R03 lineage owner; R08 impact-analysis coordinator | EN:RAG:R08:002 / TASK:RAG:R08:003 | AC:RAG:R08:005 / TEST:RAG:R08:005 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:006 / REQ:RAG:R08:006 | بازاعتبارسنجی باید مشتقات نیازمند بازسازی/بازآزمون را با شناسه و نسخه درخواست کند؛ دادهٔ canonical/Index/Snapshot فقط توسط مالک مربوطه تولید/منتشر شود. | B:242–258, 3.9.5:504؛ ADR-RAG-19:359–363؛ ADR-RAG-28:404–408؛ ADR-RAG-39:459–463; Graph: `docs_shahab_phase_2_development_blueprint_drs; docs_shahab_phase_2_development_blueprint_adr_rag_19; docs_shahab_phase_2_development_blueprint_adr_rag_28; docs_shahab_phase_2_development_blueprint_adr_rag_39` | R03 canonical/snapshot and R05 index owners; R08 emits scoped validation/rebuild request | EN:RAG:R08:002 / TASK:RAG:R08:004 | AC:RAG:R08:006 / TEST:RAG:R08:006 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:007 / REQ:RAG:R08:007 | فعال‌شدن Snapshot جدید فقط پس از گیت سازگاری و انتشار اتمیک مالک R03 ممکن است؛ پاسخ‌های درحال اجرا به Snapshot آغازین متصل بمانند و نسخهٔ تاریخی بازنویسی نشود. | B:3.9.5:504؛ ADR-RAG-19:359–363؛ ADR-RAG-28:404–408; Graph: `docs_shahab_phase_2_development_blueprint_adr_rag_28; docs_shahab_phase_2_development_blueprint_adr_rag_19` | R03 publication owner; R05/R06 consume snapshot contract; R08 observes outcome | EN:RAG:R08:002 / TASK:RAG:R08:004 | AC:RAG:R08:007 / TEST:RAG:R08:007 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:008 / REQ:RAG:R08:008 | وضعیت تازگی و نتیجهٔ هر revalidation باید success/current_as_checked، changed_pending_validation، stale یا verification_failed/unknown را از هم تمیز دهد؛ شکست پایش هرگز «بدون تغییر» نیست. | B:210–217, 242–249؛ ADR-RAG-09:309–313؛ ADR-RAG-31:419–423؛ ADR-RAG-35:439–443; Graph: `docs_shahab_phase_2_development_blueprint_drs; docs_shahab_phase_2_development_blueprint_adr_rag_09; docs_shahab_phase_2_development_blueprint_adr_rag_31; docs_shahab_phase_2_development_blueprint_adr_rag_35` | DRS status producer; C02 owns user-facing uncertainty/risk policy; R06 answer owner | EN:RAG:R08:001 / TASK:RAG:R08:004 | AC:RAG:R08:008 / TEST:RAG:R08:008 | ACCEPTED / source-backed; no new policy value |
+| CAND:RAG:R08:009 / REQ:RAG:R08:009 | هر revalidation job باید شناسهٔ پایدار، attempt history، retry ایمن و نتیجهٔ قابل بازیابی داشته باشد؛ ظرفیت کار پس‌زمینه از مسیر تعاملی جدا و شکست به C14/C01 observability handoff شود. | B:369–378, 3.9.5:504؛ ADR-RAG-21:369–373؛ ADR-RAG-22:374–378؛ ADR-RAG-14:334–338; Graph: `docs_shahab_phase_2_development_blueprint_adr_rag_21; docs_shahab_phase_2_development_blueprint_adr_rag_22; docs_shahab_phase_2_development_blueprint_adr_rag_14` | DRS job owner; C01 shared runtime/telemetry; C14 notifications/history | EN:RAG:R08:003 / TASK:RAG:R08:005 | AC:RAG:R08:009 / TEST:RAG:R08:009 | ACCEPTED / source-backed; no new policy value |
+
+**Enablerها:**
+
+| ID | خروجی مستقل | Requirements | معیار تحقق |
+| --- | --- | --- | --- |
+| EN:RAG:R08:001 | بازبینی هدفمند نسخهٔ موجود و تشخیص شواهد تغییر/تازگی | REQ:RAG:R08:001–004,008 | R04 observations و R02 retrieval مصرف می‌شوند؛ Source/Document/Legal states مستقل می‌مانند. |
+| EN:RAG:R08:002 | اثر تغییر بر مشتقات/مصرف‌کنندگان فقط با lineage و قرارداد owner هماهنگ شود. | REQ:RAG:R08:005–007 | R03 canonical/snapshot؛ R05 index؛ R06 response; no cross-owner writes. |
+| EN:RAG:R08:003 | اجرای DRS پایدار و شکست‌پذیر قابل‌بازیابی/مشاهده باشد. | REQ:RAG:R08:009 | C01 durable jobs, bulkhead, telemetry؛ C14 history/alerts. |
+
+**Taskها و خروجی اجرایی:**
+
+| Task ID / هدف | مالک | Requirements | وابستگی/قرارداد | خروجی و completion oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R08:001 — trigger تطبیقی و دسترسی مجاز برای بازبینی شناخته‌شده | DRS Coordinator | REQ:RAG:R08:001–002 | R04 check events; R02 authorized source access; ADR-RAG-34/35 | version-bound revalidation request/result envelope; oracle: reason+permission provenance, no direct fetch. |
+| TASK:RAG:R08:002 — compare versions و ثبت uncertainty/state به owner صحیح | DRS Comparison Adapter | REQ:RAG:R08:003–004,008 | R03 canonical version/evidence contracts; C02/R06 uncertainty interfaces | comparison/state proposal with exact version evidence; oracle: source/document/legal/extraction dimensions do not collapse. |
+| TASK:RAG:R08:003 — impact analysis مبتنی بر dependency lineage | DRS Impact Coordinator | REQ:RAG:R08:005 | R03 lineage and confirmed legal relations; C05b service evidence consumer contract | scoped impact manifest with path and reason; oracle: exact fixture closure only. |
+| TASK:RAG:R08:004 — بازسازی مشتقات و گیت‌های انتشار ownerها | DRS Validation Handoff | REQ:RAG:R08:006–007 | R03 publication; R05 index; R06 answers; C01 release gates | versioned rebuild/test handoffs and observed publication outcome; oracle: R08 writes no canonical/index/snapshot pointer. |
+| TASK:RAG:R08:005 — durable recovery، backpressure، trace و notification | DRS Job Owner | REQ:RAG:R08:009 | C01/C03 shared job and telemetry; C14 history/alerts | recoverable job and terminal outcome; oracle: stable id and bounded work with interactive capacity preserved. |
+
+**Subtaskها:**
+
+| Subtask | خروجی مستقل | Requirement | ورودی/وابستگی | Oracle |
+| --- | --- | --- | --- | --- |
+| TASK:RAG:R08:001.S01 | دریافت trigger از تغییر/زمان‌بندی/ریسک با source ref و reason | R08:001 | R04/C02 policy contract | trigger fact and origin resolve |
+| TASK:RAG:R08:001.S02 | ساخت revalidation target از document identity/version | R08:001 | R03 identity API | no URL/title-only identity |
+| TASK:RAG:R08:001.S03 | درخواست check از R02 با policy/scope | R08:002 | R02 permissioned access | deny no fetch |
+| TASK:RAG:R08:002.S01 | مقایسهٔ content/version/structure با old-new refs | R08:003 | R03 artifacts; R02 observation | diff reproducible |
+| TASK:RAG:R08:002.S02 | طبقه‌بندی وضعیت source/document/legal/extraction به ownerها | R08:004 | R03/R04 state contracts | no invented enum/state |
+| TASK:RAG:R08:002.S03 | ثبت freshness uncertainty و last-success مستقل از current attempt | R08:008 | R02 result; C02/R06 policy | failure not no-change |
+| TASK:RAG:R08:003.S01 | پیمایش lineage/relation تأییدشده برای تغییر محدود | R08:005 | R03 lineage API | only confirmed paths |
+| TASK:RAG:R08:003.S02 | ساخت impact manifest و downstream owner handoff | R08:005 | R05/R06/C05b contracts | every item has path/reason |
+| TASK:RAG:R08:003.S03 | حفظ unresolved scope به‌صورت review/unknown | R08:005 | ADR-RAG-31 | no broad guessed invalidation |
+| TASK:RAG:R08:004.S01 | درخواست rebuild/check با version tuple و dependency list | R08:006 | R03/R05 owners | versioned request |
+| TASK:RAG:R08:004.S02 | انتظار owner validation و publication outcome بدون نوشتن pointer | R08:006–007 | R03/C01 release contract | pointer mutations=0 by R08 |
+| TASK:RAG:R08:004.S03 | حفظ in-flight response snapshot و notify downstream of invalidation | R08:007 | R05/R06/C14 | no mixed/historical rewrite |
+| TASK:RAG:R08:005.S01 | ثبت durable job state/attempt/retry/restart | R08:009 | C01/C03 runtime | idempotent resume |
+| TASK:RAG:R08:005.S02 | جداکردن queue/bulkhead از work تعاملی | R08:009 | C01 capacity contract | interactive service remains available |
+| TASK:RAG:R08:005.S03 | ارسال trace/alert/history با minimized data | R08:009 | C01/C14 | delivery and privacy assertions |
+
+**Acceptance Criteria مستقل و Test Definitions — طراحی برنامه‌ای، اجرا نشده:**
+
+| AC / Requirement | Given / پیش‌شرط | When / محرک | Then / خروجی | PASS oracle | FAIL / مرز | TD / رفتار آزمون |
+| --- | --- | --- | --- | --- | --- | --- |
+| AC:RAG:R08:001 / REQ:RAG:R08:001 | نبود policy/factor کافی نباید به اعلام current یا اجرای cadence فرضی منجر شود. | سند دارای سابقه استفاده/تغییر/ریسک و signal معتبر از R04 | ارزیابی trigger | DRS کار هدفمند می‌سازد یا دلیل عدم برنامه‌ریزی را ثبت می‌کند | R04 مشاهده می‌سازد؛ R08 revalidation را هماهنگ می‌کند | TEST:RAG:R08:001 — بازبینی سند موجود باید با تغییر مشاهده‌شده، زمان بازبینی تطبیقی بر پایهٔ ریسک/استفاده/سابقه، یا trigger هدفمند تأییدشده فعال شود؛ یک cadence یا آستانهٔ عددی سراسری جعل نشود.؛ invariant: trigger دارای source ref و reason؛ هیچ numeric threshold خارج از config مصوب |
+| AC:RAG:R08:002 / REQ:RAG:R08:002 | غیبت مجوز، partial response یا نشانی نامعتبر success/current تلقی نشود؛ دسترسی مستقیم از R08 ممنوع. | R02 returns successful source result for known document/version | ثبت نتیجهٔ بررسی | R08 نتیجهٔ version-check را به job/document target وصل کند | R08 مالک Source Access نیست | TEST:RAG:R08:002 — دریافت/بررسی نسخهٔ جاری فقط از Source Access مجاز R02 انجام شود و نتیجهٔ هر تلاش به source/document identity، زمان مشاهده، روش، policy و raw evidence وصل بماند.؛ invariant: تمام provenance fields از envelope حفظ؛ مستقیم fetch count=0 |
+| AC:RAG:R08:003 / REQ:RAG:R08:003 | تغییر layout یا hash نابرابر به‌تنهایی اثر حقوقی، repeal یا current validity نتیجه نمی‌دهد. | previous canonical artifact and successful newly observed artifact with comparable identity | مقایسهٔ version/content/structure | comparison envelope تولید شود | no-change فقط پس از compare کامل موفق | TEST:RAG:R08:003 — R08 باید محتوای مشاهده‌شده را با نسخه/اثر canonical قبلی به‌صورت قابل ردیابی مقایسه کند و تغییر متن/قالب، تغییر extraction و تغییر اثر حقوقی را از هم جدا نگه دارد.؛ invariant: هر diff قابل برگشت به نسخه و source span؛ status تابع fixture truth table |
+| AC:RAG:R08:004 / REQ:RAG:R08:004 | source retired/blocked نباید document را repeal کند؛ candidate/needs_review نباید citable current شود. | source active، document version current_as_checked و Snapshot S0 | پردازش revalidation outcome | تنها state متعلق به owner مقصد تغییر کند | نمی‌توان state چند مالک را یک transaction نوشت | TEST:RAG:R08:004 — وضعیت Source، DocumentVersion، LegalRelation، Extraction/Evidence و Snapshot باید جدا و مطابق قرارداد مالک نگهداری شود؛ DRS آن‌ها را به وضعیت یکسان فرو نکاهد یا enum موازی نسازد.؛ invariant: owner-specific event/state دقیق مطابق قرارداد؛ Snapshot S0 تا publication ثابت |
+| AC:RAG:R08:005 / REQ:RAG:R08:005 | شباهت موضوعی تنها رابطهٔ نامزد است و نمی‌تواند invalidation یا legal impact را گسترش دهد. | سند A با lineage ثبت‌شده به provision B و مشتقات مشخص وابسته است | تحلیل اثر تغییر A | فقط وابستگان مستند به مالک مربوطه handoff شوند | R08، canonical graph/lineage را مالک نمی‌شود | TEST:RAG:R08:005 — برای تغییر تأییدشده/محتمل، DRS باید از lineage و رابطهٔ نسخه‌دار فقط اقلام و مشتقات وابسته را برای ارزیابی اثر انتخاب کند؛ دامنهٔ تاثیر حدسی یا کل پایگاه نباشد.؛ invariant: manifest برابر closure روابط/lineage fixture؛ هر عضو edge path دارد |
+| AC:RAG:R08:006 / REQ:RAG:R08:006 | build ناقص/ناسازگار هرگز فعال نشود؛ failed validation نتیجهٔ publish/rollback خودکار نسازد. | impact manifest معتبر و نسخهٔ نامزد ساخته‌نشده | ساخت handoff به owner سرویس | R03/R05 دریافت درخواست scoped و versioned کنند | تولید/انتشار همچنان در R03/C01 مالک است | TEST:RAG:R08:006 — بازاعتبارسنجی باید مشتقات نیازمند بازسازی/بازآزمون را با شناسه و نسخه درخواست کند؛ دادهٔ canonical/Index/Snapshot فقط توسط مالک مربوطه تولید/منتشر شود.؛ invariant: درخواست‌ها با مجموعه impact manifest و check set برابر باشند |
+| AC:RAG:R08:007 / REQ:RAG:R08:007 | rollback فنی به snapshot/قانون منسوخ یا ناسازگار را مجاز نکند؛ mixed-version answer ساخته نشود. | answer request began on S0; candidate S1 awaits R03 compatibility gates | هم‌زمان با publish S1، پاسخ جاری/تاریخی بررسی شود | درخواست جاری از S0 بماند؛ درخواست بعدی طبق R03 active pointer عمل کند | exception safety stop فقط طبق policy مصوب | TEST:RAG:R08:007 — فعال‌شدن Snapshot جدید فقط پس از گیت سازگاری و انتشار اتمیک مالک R03 ممکن است؛ پاسخ‌های درحال اجرا به Snapshot آغازین متصل بمانند و نسخهٔ تاریخی بازنویسی نشود.؛ invariant: response snapshot ثابت؛ R08 write active_pointer=0؛ release event owned by R03 |
+| AC:RAG:R08:008 / REQ:RAG:R08:008 | timeout/denial/partial coverage/ambiguous result را stale/no-change/current قطعی اشتباه نگیرد. | یک successful check با previous last_success و یک attempt متفاوت | ثبت outcome و مصرف آن در evidence freshness | state و freshness envelope منتشر شود | R08 state diagnostic است؛ output policy در R01/R06 می‌ماند | TEST:RAG:R08:008 — وضعیت تازگی و نتیجهٔ هر revalidation باید success/current_as_checked، changed_pending_validation، stale یا verification_failed/unknown را از هم تمیز دهد؛ شکست پایش هرگز «بدون تغییر» نیست.؛ invariant: outcome→state mapping با truth table برابر؛ last_success در failure ثابت |
+| AC:RAG:R08:009 / REQ:RAG:R08:009 | retry نامحدود، repeated fetch side effect یا فقدان alert برای terminal failure ممنوع است. | queued DRS job, existing last_success, interactive R01 query concurrent | worker restart و load/backpressure scenario | job resume/status/telemetry به ownerها ثبت شود | worker/queue infra از C01/C03 استفاده می‌کند | TEST:RAG:R08:009 — هر revalidation job باید شناسهٔ پایدار، attempt history، retry ایمن و نتیجهٔ قابل بازیابی داشته باشد؛ ظرفیت کار پس‌زمینه از مسیر تعاملی جدا و شکست به C14/C01 observability handoff شود.؛ invariant: job_id ثابت، attempts policy-bounded، interactive test budget contract unchanged |
+
+**Planned Test Cases مستقل (P/N/B/F) — همه `NOT_EXECUTED`:**
+
+| Case ID | Requirement | نوع | Preconditions / Fixture | Action | Expected / Oracle | Invariant | Failure / boundary |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| TC:RAG:R08:001-P | REQ:RAG:R08:001 | مثبت | existing document has documented risk/use/change factors and R04 emits valid trigger | evaluate trigger | one targeted revalidation job created with factors/reason; oracle: job target and reasons equal input evidence | trigger دارای source ref و reason؛ هیچ numeric threshold خارج از config مصوب | no universal cadence inserted |
+| TC:RAG:R08:001-N | REQ:RAG:R08:001 | منفی | no approved freshness schedule and incomplete risk factors | evaluate scheduling decision | no numeric due time invented; state remains unclassified/review; oracle: numeric schedule field absent or references approved policy | trigger دارای source ref و reason؛ هیچ numeric threshold خارج از config مصوب | absence of a date is not current |
+| TC:RAG:R08:001-B | REQ:RAG:R08:001 | مرزی | same high-risk trigger emitted twice for same document/version/scope | process trigger twice | one logical job with both event references; oracle: job count=1 for idempotency key | trigger دارای source ref و reason؛ هیچ numeric threshold خارج از config مصوب | dedupe must not discard distinct scopes |
+| TC:RAG:R08:001-F | REQ:RAG:R08:001 | شکست | risk policy service unavailable | evaluate trigger | trigger status unknown/pending and error recorded; oracle: no current/low-risk claim; failure evidence exists | trigger دارای source ref و reason؛ هیچ numeric threshold خارج از config مصوب | safe recovery follows shared policy |
+| TC:RAG:R08:002-P | REQ:RAG:R08:002 | مثبت | R02 returns complete allowed result for known document and version | consume result | version check binds to source identity/time/method/policy/evidence; oracle: all required provenance fields match R02 envelope | تمام provenance fields از envelope حفظ؛ مستقیم fetch count=0 | R08 never fetches directly |
+| TC:RAG:R08:002-N | REQ:RAG:R08:002 | منفی | permission expired or fetch denied | request check through R02 | denied; previous successful check remains last_success; oracle: no success timestamp advance | تمام provenance fields از envelope حفظ؛ مستقیم fetch count=0 | no bypass through alternate endpoint |
+| TC:RAG:R08:002-B | REQ:RAG:R08:002 | مرزی | source redirects to different document identity | compare response identity | mismatch recorded and candidate not trusted as same doc; oracle: identity mismatch flag true; canonical identity unchanged | تمام provenance fields از envelope حفظ؛ مستقیم fetch count=0 | redirect cannot silently merge docs |
+| TC:RAG:R08:002-F | REQ:RAG:R08:002 | شکست | R02 times out after previous successful check | consume failed result | verification_failed/unknown while preserving last_success; oracle: last_success unchanged and current_attempt failure recorded | تمام provenance fields از envelope حفظ؛ مستقیم fetch count=0 | must not say unchanged |
+| TC:RAG:R08:003-P | REQ:RAG:R08:003 | مثبت | old and new artifacts share identity and content/provision structure | compare versions | unchanged with evidence of completed comparison; oracle: hash/version/span comparison references resolve | هر diff قابل برگشت به نسخه و source span؛ status تابع fixture truth table | only successful comparable check permits unchanged |
+| TC:RAG:R08:003-N | REQ:RAG:R08:003 | منفی | PDF metadata/layout changes but normalized text and provisions are equal | compare artifacts | format/extraction change separated from legal effect; oracle: legal state unchanged; structural/extraction note present | هر diff قابل برگشت به نسخه و source span؛ status تابع fixture truth table | hash difference alone is not legal change |
+| TC:RAG:R08:003-B | REQ:RAG:R08:003 | مرزی | a clause text changed while source identity remains same | compare artifacts | changed_pending_validation, with exact diff span; oracle: diff points to changed provision; no current assertion | هر diff قابل برگشت به نسخه و source span؛ status تابع fixture truth table | changed content is not a legal conclusion |
+| TC:RAG:R08:003-F | REQ:RAG:R08:003 | شکست | OCR/parser fails on new artifact | run comparison | uncomparable/extraction uncertainty; oracle: no unchanged result and no legal status transition | هر diff قابل برگشت به نسخه و source span؛ status تابع fixture truth table | failure distinct from no change |
+| TC:RAG:R08:004-P | REQ:RAG:R08:004 | مثبت | source active; document current; relation reviewed; Snapshot S0 published | apply source-only status transition | only source owner state changes; document/legal/S0 unchanged; oracle: R03 and Snapshot mutation counts=0 | owner-specific event/state دقیق مطابق قرارداد؛ Snapshot S0 تا publication ثابت | independent lifecycle states preserved |
+| TC:RAG:R08:004-N | REQ:RAG:R08:004 | منفی | source is retired but historical source artifact remains; caller requests repeal | process event | no legal repeal; source retirement recorded separately; oracle: legal relation state unchanged | owner-specific event/state دقیق مطابق قرارداد؛ Snapshot S0 تا publication ثابت | source lifecycle is not law lifecycle |
+| TC:RAG:R08:004-B | REQ:RAG:R08:004 | مرزی | candidate version has extraction uncertainty while prior current version exists | record validation state | candidate remains needs_review; prior state and Snapshot remain distinct; oracle: published S0 has zero candidate membership | owner-specific event/state دقیق مطابق قرارداد؛ Snapshot S0 تا publication ثابت | do not collapse candidate into current |
+| TC:RAG:R08:004-F | REQ:RAG:R08:004 | شکست | R03 state API is unavailable | send proposed state event | no canonical state claimed; event pending/retriable; oracle: R08 local canonical writes=0 | owner-specific event/state دقیق مطابق قرارداد؛ Snapshot S0 تا publication ثابت | owner failure cannot be hidden |
+| TC:RAG:R08:005-P | REQ:RAG:R08:005 | مثبت | changed clause has two confirmed lineage descendants and one unrelated document | build impact manifest | only two descendants selected with paths/reasons; oracle: manifest set exactly equals confirmed graph closure | manifest برابر closure روابط/lineage fixture؛ هر عضو edge path دارد | no topic-only expansion |
+| TC:RAG:R08:005-N | REQ:RAG:R08:005 | منفی | potential relation is inferred-only and no confirmed lineage edge exists | analyze impact | impact remains unknown/review, no confirmed invalidation; oracle: confirmed affected set empty | manifest برابر closure روابط/lineage fixture؛ هر عضو edge path دارد | inferred edge is navigation hint only |
+| TC:RAG:R08:005-B | REQ:RAG:R08:005 | مرزی | one confirmed relation affects an exception paragraph only | calculate affected scope | scope includes exception and required parent context, not whole corpus; oracle: impact paths resolve to exact parent/child clauses | manifest برابر closure روابط/lineage fixture؛ هر عضو edge path دارد | preserve structural context |
+| TC:RAG:R08:005-F | REQ:RAG:R08:005 | شکست | lineage API returns partial graph | build manifest | manifest incomplete and workflow marked review/unknown; oracle: coverage flag incomplete; broad invalidation count=0 | manifest برابر closure روابط/lineage fixture؛ هر عضو edge path دارد | do not interpret partial as full coverage |
+| TC:RAG:R08:006-P | REQ:RAG:R08:006 | مثبت | impact manifest complete and owners R03/R05 available | request rebuild/validation | versioned requests include affected IDs and checks; oracle: requests exactly match manifest and owner contracts | درخواست‌ها با مجموعه impact manifest و check set برابر باشند | R08 does not own rebuilt artifacts |
+| TC:RAG:R08:006-N | REQ:RAG:R08:006 | منفی | one index regression check fails | receive owner validation | candidate remains unpublished; oracle: R03 active pointer unchanged | درخواست‌ها با مجموعه impact manifest و check set برابر باشند | failed candidate cannot be activated |
+| TC:RAG:R08:006-B | REQ:RAG:R08:006 | مرزی | affected item has no owner/dependency contract | prepare handoff | quarantine unresolved item with reason; oracle: no guessed endpoint or write | درخواست‌ها با مجموعه impact manifest و check set برابر باشند | do not create shadow tables |
+| TC:RAG:R08:006-F | REQ:RAG:R08:006 | شکست | R03/R05 owner endpoint unavailable | submit rebuild handoff | pending job survives and retries per policy; oracle: handoff ID stable and no publish claim | درخواست‌ها با مجموعه impact manifest و check set برابر باشند | retry bound from existing contract |
+| TC:RAG:R08:007-P | REQ:RAG:R08:007 | مثبت | R03 has passed compatible publication gates for S1 while a response began on S0 | observe publication outcome | in-flight response remains pinned to S0; future request reads owner-active version; oracle: trace snapshot ID remains S0 for in-flight answer | response snapshot ثابت؛ R08 write active_pointer=0؛ release event owned by R03 | no mixed Snapshot answer |
+| TC:RAG:R08:007-N | REQ:RAG:R08:007 | منفی | S1 fails compatibility gate | observe failure | S0 remains active and S1 candidate remains isolated; oracle: active pointer equals S0 | response snapshot ثابت؛ R08 write active_pointer=0؛ release event owned by R03 | no R08 auto rollback/publish |
+| TC:RAG:R08:007-B | REQ:RAG:R08:007 | مرزی | confirmed revocation affects active evidence during answer | consume owner invalidation event | response follows C01/C06 safe revalidation/stop policy; historical trace preserved; oracle: no stale current claim; old trace immutable | response snapshot ثابت؛ R08 write active_pointer=0؛ release event owned by R03 | no resurrecting legally invalid Snapshot |
+| TC:RAG:R08:007-F | REQ:RAG:R08:007 | شکست | R03 publication service unavailable | await outcome | publication status unknown; active version not asserted new; oracle: R08 active-pointer writes=0 | response snapshot ثابت؛ R08 write active_pointer=0؛ release event owned by R03 | service failure not publication success |
+| TC:RAG:R08:008-P | REQ:RAG:R08:008 | مثبت | comparison succeeded and source returned same comparable version | publish freshness result | current_as_checked with new checked_at and evidence ref; oracle: status mapping and timestamps match truth table | outcome→state mapping با truth table برابر؛ last_success در failure ثابت | current means as checked, not all legal effects resolved |
+| TC:RAG:R08:008-N | REQ:RAG:R08:008 | منفی | check timed out after last_success T1 | publish result | verification_failed/unknown; T1 stays last_success; oracle: last_success==T1; no unchanged event | outcome→state mapping با truth table برابر؛ last_success در failure ثابت | failure cannot mean no change |
+| TC:RAG:R08:008-B | REQ:RAG:R08:008 | مرزی | service requires same-day evidence but check is delayed and numeric threshold is OPEN | provide freshness to R06 | unverified freshness is explicit; answer policy retains limitation; oracle: uncertainty flag propagated and no invented freshness window | outcome→state mapping با truth table برابر؛ last_success در failure ثابت | response decision owned by R06 |
+| TC:RAG:R08:008-F | REQ:RAG:R08:008 | شکست | timestamp malformed/clock-skewed | validate envelope | quarantine timestamp and freshness unproven; oracle: freshness status not current; validation error recorded | outcome→state mapping با truth table برابر؛ last_success در failure ثابت | do not repair time silently |
+| TC:RAG:R08:009-P | REQ:RAG:R08:009 | مثبت | DRS job stored durably with one worker and active user query | restart worker during processing | job resumes under same ID; interactive route remains available; oracle: same job ID; interactive contract passes; retry policy bounded | job_id ثابت، attempts policy-bounded، interactive test budget contract unchanged | separate bulkhead/priority according to C01 |
+| TC:RAG:R08:009-N | REQ:RAG:R08:009 | منفی | completed job event replayed after acknowledgement | redeliver event | no duplicate check, publication, or notification side effect; oracle: logical job/effect count remains 1 | job_id ثابت، attempts policy-bounded، interactive test budget contract unchanged | idempotency spans delivery and restart |
+| TC:RAG:R08:009-B | REQ:RAG:R08:009 | مرزی | background capacity at approved limit while interactive request arrives | submit revalidation job and interactive query | background is deferred; interactive capacity remains reserved; oracle: interactive request admitted under existing capacity contract | job_id ثابت، attempts policy-bounded، interactive test budget contract unchanged | no assumed quota or numeric limit |
+| TC:RAG:R08:009-F | REQ:RAG:R08:009 | شکست | terminal permission failure plus C14 delivery outage | process and report failure | job terminal denial persists; alert delivery remains pending/retriable; oracle: job state durable and notification delivery state visible | job_id ثابت، attempts policy-bounded، interactive test budget contract unchanged | telemetry outage cannot erase task outcome |
+
+**قراردادها، وابستگی‌ها و Handoff:**
+
+| مبدأ/مقصد | مرز اجرایی | مالک حقیقت/قرارداد | کنترل جلوگیری از تعارض |
+| --- | --- | --- | --- |
+| R04→R08 | source change/check observation only | R04 | successful check and failed attempt remain distinct |
+| R08→R02 | authorized revalidation fetch only | R02 | policy ref/scope required; R08 performs no direct source access |
+| R08→R03 | comparison and impact request; canonical update/publication | R03 | R03 owns document/legal state, lineage, Snapshot pointer and rollback |
+| R08→R05 | targeted index/cache revalidation request | R05 | R05 owns retrieval runtime/index/cache; stale cache policy stays R05/C07 |
+| R08→R06/R01 | freshness/uncertainty/safe-stop evidence | R06/R01 | response disposition and user-facing route stay receiving owners |
+| R08→C01/C14 | job status/trace/alert/history | C01/C14 | reuse existing shared contract; no parallel monitoring store |
+
+**تصمیم‌های باز (بدون جعل مصوبه):**
+
+- cadence، numeric risk/freshness thresholds، SLA و cost budget؛ require real baseline and owner approval.
+- فناوری scheduler/queue, retry count, timing, retention, RPO/RTO و restore targets؛ ADRها اصل durable workflow و recoverability را می‌دهند، عدد نمی‌دهند.
+- physical impact graph/table/schema و exact R03/R05 API endpoints؛ تعیین جزئیات با مالک سرویس و بدون cross-package DB write.
+- تشخیص خودکار حقوقیِ اثر اصلاحیه/نسخ؛ DRS فقط evidence and review/revalidation می‌سازد، حکم حقوقی را از diff استخراج نمی‌کند.
+
+**RA مستقل — Source Coverage/Graph Evidence/Atomicity/Ownership/Decision/Dependencies/Duplicates: PASS. 9/9 behaviorها به DRS/Catalog/ADR source units و graph nodeهای resolve شده وصل‌اند؛ source observation, legal state, lineage و publication تفکیک شد؛ inferred relations الزام نشده‌اند.**
+
+**IPA مستقل — Implementation readiness/Traceability/AC-Test/Reverse links: PASS. 9/9 Requirement به Task/Subtask/AC/TD و چهار case P/N/B/F مخصوص همان رفتار وصل؛ impact DAG بدون چرخه؛ owner API/output و failure oracle مشخص؛ هیچ تست محصول اجراشده ادعا نشده است.**
+
+**Test design status:** 9 Test Definition و 36 Planned Test Case (برای هر requirement یک مثبت، منفی، مرزی و شکست)؛ همه `NOT_EXECUTED`. اینها آزمون محصول نیستند و اجرای محصول/کیفیت مدل یا منبع را اثبات نمی‌کنند.
+
+**جمع‌بندی اجرای R07/R08:** R07: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC، ۸ Test Definition و ۳۲ Planned Test Case؛ R08: ۹ Requirement، ۳ Enabler، ۵ Task، ۱۵ Subtask، ۹ AC، ۹ Test Definition و ۳۶ Planned Test Case. مجموع افزودنی‌ها: ۱۷ Requirement/Candidate، ۶ Enabler، ۹ Task، ۲۷ Subtask، ۱۷ AC/TD و ۶۸ Planned Test Case. همهٔ Product Tests `NOT_EXECUTED` هستند.
+
+**CPA مشترک R07/R08 — PASS پس از ممیزی مستقل:**
+
+| CPA Gate | نتیجه و شاهد |
+| --- | --- |
+| CPA-01 پوشش بین‌بسته‌ای | PASS — مسیر Catalog→RDE→selective access→canonical store و DRS→lineage/owners کامل؛ candidate تازه با revalidation سند موجود یکی نشده است. |
+| CPA-02 مالکیت | PASS — R02 دسترسی/ورود، R03 canonical/legal/Snapshot، R04 catalog، R05 index، R06 پاسخ، C01/C14 زیرساخت/سوابق؛ write ownership تکراری=۰. |
+| CPA-03 وابستگی | PASS — R07 و R08 به R03/R04 وابسته‌اند؛ R08 به R05/R06 handoff می‌دهد؛ چرخه hard dependency وجود ندارد. |
+| CPA-04 تکرار و تعارض | PASS — هیچ requirement از R01–R06 تکرار نشده؛ R07 candidate relation؛ R08 known-document revalidation؛ منبع جدید/تغییر سند مرز مستقل. |
+| CPA-05 قرارداد | PASS — R02/R03/R04/R05/R06/C01/C14 قراردادهای موجود مصرف می‌شوند؛ قرارداد فیزیکی تازه یا endpoint جعل نشده است. |
+| CPA-06 تصمیم‌ها | PASS — مدل/threshold/cadence/SLA/schema/retention/RPO-RTO باز ثبت شدند؛ تصمیم مصوب موجود حفظ شده است. |
+| CPA-07 ردیابی | PASS — 17/17 REQ با Source/Graph→EN→Task→Subtask→AC→TD و چهار TC مرتبط؛ reverse links کامل. |
+| CPA-08 انسجام و وضعیت | PASS — top status, per-package status, RAG counts and product-not-executed boundary synchronized. |
 
 ### R09 — در انتظار تدوین
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
