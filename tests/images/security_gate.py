@@ -58,7 +58,7 @@ def assess_runtime_inventory(report, name):
         expected["brotli-libs"] = "1.2.1-r0"
         expected["libxslt"] = "1.1.43-r4"
         expected["libxml2"] = "2.13.9-r3"
-        expected["nginx"] = "1.30.7-r0"
+        expected["nginx"] = "1.30.7-r1"
     else:
         raise ValueError("Unknown runtime image")
     os_packages = [

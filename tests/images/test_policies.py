@@ -131,7 +131,7 @@ class ScanPolicyTests(unittest.TestCase):
 
     def test_runtime_package_regression_uses_actual_inventory(self):
         report = self.report()
-        packages = [{"Name": "zlib", "Version": "1.4-r0"}, {"Name": "libxpm", "Version": "3.5.20-r0"}, {"Name": "brotli-libs", "Version": "1.2.1-r0"}, {"Name": "libxslt", "Version": "1.1.43-r4"}, {"Name": "libxml2", "Version": "2.13.9-r3"}, {"Name": "nginx", "Version": "1.30.7-r0"}, {"Name": "krb5-libs", "Version": "1.22.3-r0"}, {"Name": "musl", "Version": "1.2.6-r3"}, {"Name": "musl-utils", "Version": "1.2.6-r3"}]
+        packages = [{"Name": "zlib", "Version": "1.4-r0"}, {"Name": "libxpm", "Version": "3.5.20-r0"}, {"Name": "brotli-libs", "Version": "1.2.1-r0"}, {"Name": "libxslt", "Version": "1.1.43-r4"}, {"Name": "libxml2", "Version": "2.13.9-r3"}, {"Name": "nginx", "Version": "1.30.7-r1"}, {"Name": "krb5-libs", "Version": "1.22.3-r0"}, {"Name": "musl", "Version": "1.2.6-r3"}, {"Name": "musl-utils", "Version": "1.2.6-r3"}]
         report["Results"][0]["Packages"] = packages
         assess_runtime_inventory(report, "api")
         assess_runtime_inventory(report, "web")
@@ -153,7 +153,7 @@ class ScanPolicyTests(unittest.TestCase):
                 for version in (None, "1.2.6-r2"):
                     packages = [{"Name": n, "Version": v} for n, v in (
                         ("zlib", "1.4-r0"), ("libxpm", "3.5.20-r0"), ("brotli-libs", "1.2.1-r0"),
-                        ("libxslt", "1.1.43-r4"), ("libxml2", "2.13.9-r3"), ("nginx", "1.30.7-r0"),
+                        ("libxslt", "1.1.43-r4"), ("libxml2", "2.13.9-r3"), ("nginx", "1.30.7-r1"),
                         ("krb5-libs", "1.22.3-r0"),
                         ("musl", "1.2.6-r3"), ("musl-utils", "1.2.6-r3"))]
                     packages = [p for p in packages if p["Name"] != name or version is not None]
@@ -169,7 +169,7 @@ class ScanPolicyTests(unittest.TestCase):
         for version in (None, "1.2.0-r1", "1.2.1-r0"):
             packages = [{"Name": n, "Version": v} for n, v in (
                 ("zlib", "1.4-r0"), ("libxpm", "3.5.20-r0"),
-                ("libxslt", "1.1.43-r4"), ("libxml2", "2.13.9-r3"), ("nginx", "1.30.7-r0"),
+                ("libxslt", "1.1.43-r4"), ("libxml2", "2.13.9-r3"), ("nginx", "1.30.7-r1"),
                 ("krb5-libs", "1.22.3-r0"),
                 ("musl", "1.2.6-r3"), ("musl-utils", "1.2.6-r3"))]
             if version is not None:
