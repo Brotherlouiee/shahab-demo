@@ -1,6 +1,6 @@
-# C02 — الزامات اتمی، والدهای مرکب و Handoff
+# C02 — نمای استخراج Source Unit، الزامات اتمی و Handoff
 
-**RA=PASS؛ IPA=PASS؛ منبع داده CORE_REGISTRY.jsonl.**
+**RA=PASS؛ IPA=PASS برای ممیزی Scope C02؛ این فایل رجیستری پذیرش برنامه ۳۶بسته‌ای نیست. مرجع پذیرش جاری: جدول و فصل‌های docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md.**
 
 | ID | Source | Owner | Normative status | Disposition | Clause |
 | --- | --- | --- | --- | --- | --- |
