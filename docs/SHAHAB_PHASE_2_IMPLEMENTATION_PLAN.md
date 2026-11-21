@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01 تا C13a.** این فایل برنامهٔ پذیرفته‌شدهٔ C01 تا C13a و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01 تا C14.** این فایل برنامهٔ پذیرفته‌شدهٔ C01 تا C14 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -19,7 +19,7 @@
 ### تصویر کل برنامه
 | دامنه | بسته‌ها | تعداد | وضعیت |
 | --- | --- | --- | --- |
-| Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۶ بسته برنامه‌ریزی پذیرفته‌شده؛ ۲ بسته در انتظار تدوین |
+| Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
 | RAG / Adviser | R01–R10 | 10 | NOT_STARTED |
 | Assistant | A01–A08 | 8 | NOT_STARTED |
 | کل | ۳۶ بسته | 36 | ۱۶ پذیرفته‌شده؛ ۲۰ در انتظار |
@@ -43,8 +43,8 @@
 | C12a | دفترکل و یکپارچگی مالی | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | C12b | تطبیق و بازیابی مالی | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | C13a | قیمت‌گذاری، تسویه و حسابداری | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| C13b | تجربه و پشتیبانی کیف پول | NOT_STARTED | NOT_STARTED | NOT_STARTED |
-| C14 | سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| C13b | تجربه و پشتیبانی کیف پول | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
+| C14 | سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R01 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R02 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | R03 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -5880,16 +5880,206 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 **تعداد:** 25 Requirement جدید؛ C12b: 12 Candidate منطقی، 11 R، 1 Enabler، 5 Task، 15 Subtask، 11 AC/Test، 33 Test Case. C13a: 18 Candidate منطقی، 14 R، 1 Enabler، 5 Task، 15 Subtask، 14 AC/Test، 42 Test Case. 15 گره گراف مستقیم در بازه تطبیق/بازیابی و 36 در بازه قیمت/تسویه Wallet؛ بخش مالی Blueprint نیز گره‌های مرتبط را فراهم کرد. معیار precision نسبت به gold set و زمان تفکیکی: NOT_MEASURED. زمان‌سنج از آغاز فعال نبود. نقص‌های بازبینی اولیه: 4 مرز مالکیت/تعریف (ledger posting، subscription ownership، replay/new execution، open tax/provider); همگی قبل از PASS به Handoff/قید/OPEN تبدیل شدند؛ نقص مسدودکننده نهایی صفر؛ یک چرخه بازکاری.
 
-**شمارنده:** رجیستری 36 واحد مستقل را نشان می‌دهد؛ 16/36 پذیرفته و 20/36 باقی‌مانده‌اند. Core/Wallet=16/18 (C13b و C14 مانده)، RAG/Adviser=0/10، Assistant=0/8. وضعیت محصول NOT_IMPLEMENTED / NOT_EXECUTED.
+**شمارنده:** رجیستری 36 واحد مستقل را نشان می‌دهد؛ 18/36 پذیرفته و 18/36 باقی‌مانده‌اند. Core/Wallet=18/18، RAG/Adviser=0/10، Assistant=0/8. وضعیت محصول NOT_IMPLEMENTED / NOT_EXECUTED.
 
 ### C13b — تجربه و پشتیبانی کیف پول
 
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. هیچ Requirement، Story/Enabler، Task، Subtask، AC یا Test برای این بسته در این نسخه مصوب نیست. در مرحله تدوین همین بسته، احکام اختصاصی دو سند مرجع در همین بخش استخراج، اتمی، ردیابی و پس از تأیید ثبت می‌شوند؛ Handoffهای C01 تا C03 باید بررسی شوند.
+**وضعیت:** RA=PASS / IPA=PASS؛ PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED. این بسته تجربه خواندن سابقه مالی، رسید، دسترسی به سوابق و گردش پشتیبانی را برنامه‌ریزی می‌کند. دفترکل C12a، نتیجه تطبیق و وضعیت نامعلوم بانکی C12b، مجوز C02، استرداد/اصلاح C11a و قیمت/سند مالی C13a در مالکیت بسته‌های خود باقی‌اند.
 
-### C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک
+#### منبع، Graph-First و تعیین تکلیف Candidateها
 
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. هیچ Requirement، Story/Enabler، Task، Subtask، AC یا Test برای این بسته در این نسخه مصوب نیست. در مرحله تدوین همین بسته، احکام اختصاصی دو سند مرجع در همین بخش استخراج، اتمی، ردیابی و پس از تأیید ثبت می‌شوند؛ Handoffهای C01 تا C03 باید بررسی شوند.
+Graph-First مشترک بر Blueprint V1.6 و Wallet V0.20 و گراف موجود knowledge-graph/phase2-reference-docs در main (source commit f28033b6496e39f4a59644cccf5fb2c9886fceb4) انجام شد؛ گراف بازسازی یا تغییر نکرد. semantic/validation.json نتیجه مکانیکی PASS و صفر issue دارد؛ این نتیجه به‌تنهایی کفایت معنایی یا مالکیت را اثبات نمی‌کند. هر قاعده با متن سند اصلی تطبیق داده شد. EXTRACTED برای کشف مستقیم، INFERRED برای همسایه/فرضیه، و AMBIGUOUS برای سؤال باز استفاده شد؛ هیچ Requirement صرفاً از دو رابطه اخیر ساخته نشد.
 
+| ناحیه منبع / گره گراف | رابطه | Candidate و تعیین تکلیف |
+|---|---|---|
+| Wallet W:1331؛ financial_history_access_audit | EXTRACTED | تاریخچه و ممیزی دسترسی؛ C13b تجربه، C02 مجوز و C12a سابقه مالی |
+| Wallet W:1343–1351؛ operational_security_alerts | EXTRACTED | هشدار مادی؛ C14 تحویل، C12b/مالک حوزه رخداد |
+| Wallet W:1369–1380؛ safe_recovery_of_unknown_operations | EXTRACTED | نمایش بازیابی بی‌خطر؛ تعیین نتیجه C12b و اجرای Job مالک حوزه |
+| Wallet W:1523–1533؛ history_receipt_controls | EXTRACTED | فیلتر سابقه/رسید/حریم سازمان؛ C13b رابط، C12a داده، C02 دسترسی |
+| Wallet W:1535–1545؛ customer_notifications | EXTRACTED | پیام مالی و عدم استنباط رضایت؛ C14 قرارداد، C13b مصرف تجربه |
+| Wallet W:1547–1557؛ support_case_linked_to_transaction | EXTRACTED | پرونده مرتبط با تراکنش/مالک/وضعیت؛ C13b گردش تجربه |
+| Wallet W:1571–1581 | EXTRACTED | receipt، invoice و service receipt جدا؛ C13b فقط ارجاع، مالکان سند C04/C13a |
+| Blueprint B:997؛ notification_channels / notification_service_not_required_r1 | EXTRACTED | In-App پایدار، Web Push ترجیحی، SMS مشروط؛ سرویس مستقل R1 اجباری نیست |
+| Blueprint B:1682–1685؛ D02/D03 | EXTRACTED | شروط eligibility و dedup نسخه‌دار؛ event به‌تنهایی مجوز اعلان نیست |
+| Blueprint B:1192–1216؛ outbox/job ownership | EXTRACTED | Outbox محلی و اتمیک فقط برای نیاز واقعی؛ Job مساوی Event Bus نیست |
+| Blueprint B:977,1833–1837,1913–1915؛ Monitoring/resilience/privacy | EXTRACTED | کمینه‌گرایی و تاب‌آوری؛ داده/Job متعلق به سرویس مبدأ |
+| Wallet W:208,244,324؛ Blueprint B:2006 | EXTRACTED | عضو سابق/ممیزی اقدام/RUM فقط عملکرد؛ C02/C13b/C14 |
+| روابط همسایگی زیرگراف | INFERRED | فقط کشف مسیر؛ متن اولیه بازخوانی شد، الزام از inference به‌تنهایی ساخته نشد |
+| روابط مالکیت مبهم زیرگراف | AMBIGUOUS | retention مالی/فنی، Provider و SLA با Handoff/OPEN تفکیک شد |
+
+**گزارش پوشش گراف:** جست‌وجوی نامزد روی nodeهای مرتبط Wallet/Blueprint 28 گره معنایی را برگرداند؛ 33 یال incident داشتند: 24 EXTRACTED، 8 INFERRED، 1 AMBIGUOUS. یال‌های inferred/ambiguous صرفاً برای ردیابی همسایه/مرز بررسی شدند و به الزام جدید ارتقا نیافتند؛ متن canonical مبنای تعیین تکلیف بود. پس از ادغام موارد تکراری، 14 Candidate منطقی C13b و 16 Candidate C14 در 12 و 16 الزام یا Handoff/تصمیم باز ثبت شدند؛ overlap یک بار مالک‌گذاری شد. منبع گراف: 4,330/4,330 خطوط، 22 chunk، 326 heading، 58 table در Graph Report؛ graph validation PASS/0 issue. Precision نسبت به gold set و زمان تفکیکی NOT_MEASURED.
+
+#### دفتر Candidateهای C13b
+
+| Candidate | Source Unit | تعیین تکلیف | مالک/Requirement |
+|---|---|---|---|
+| CAND-13B-01 | W:1523–1527 | سابقه پایدار و فهرست؛ پذیرفته | C13b / C13B-R01 |
+| CAND-13B-02 | W:1523–1533 | فیلتر نوع/وضعیت/زمان؛ پذیرفته | C13b / C13B-R02 |
+| CAND-13B-03 | W:1523–1533 | جست‌وجوی شناسه و رسید؛ پذیرفته | C13b / C13B-R01,C13B-R04 |
+| CAND-13B-04 | W:1523–1533 | privacy سازمانی؛ scope با C02 | C13b+C02 / C13B-R05 |
+| CAND-13B-05 | W:208,324 | دسترسی عضو سابق پس از revoke؛ پذیرفته | C02 تصمیم، C13b نمایش / C13B-R05 |
+| CAND-13B-06 | W:1571–1581 | receipt/invoice/service receipt تفکیک؛ پذیرفته | C04/C13a مالک سند، C13b link / C13B-R03 |
+| CAND-13B-07 | W:1547–1557 | case linked به transaction؛ پذیرفته | C13b / C13B-R07 |
+| CAND-13B-08 | W:1547–1557 | case owner/status؛ پذیرفته با SLA باز | C13b / C13B-R08 |
+| CAND-13B-09 | W:1547–1557 | evidence کمینه و کنترل‌شده؛ پذیرفته | C13b+C02 / C13B-R09 |
+| CAND-13B-10 | W:610,1369–1380 | unknown outcome قابل نمایش، نه failure؛ پذیرفته | C12b outcome, C13b view / C13B-R10 |
+| CAND-13B-11 | W:1369–1380; B:918 | inquiry پیش از retry و recovery؛ پذیرفته با مالک Job | C12b/C11b / C13B-R10 |
+| CAND-13B-12 | W:1331,1369–1380 | correction/refund به اصل لینک؛ پذیرفته | C11a/C12a / C13B-R11 |
+| CAND-13B-13 | W:1535–1545 | پیام مالی In-App؛ C14 delivery | C14 contract, C13b view / C13B-R12 |
+| CAND-13B-14 | W:1545 | دریافت/خواندن اعلان رضایت مالی نیست؛ پذیرفته | C13b+C04 / C13B-R12 |
+
+#### Requirements، Stories/Enablers، Tasks و Subtasks
+
+| Requirement / Source Unit | نیازمندی اتمی | Story | Task و سه Subtask | Dependency / مالک |
+|---|---|---|---|---|
+| C13B-R01 / W:1523–1527,B:1453 | تاریخچه عملیات مالی پایدار، شناسه‌دار، زمان‌دار و source-owned نمایش داده شود | C13B-S01 سابقه عملیات مجاز را بفهمد | C13B-T01 تاریخچه: C13B-T01.S01 read contract؛ C13B-T01.S02 type/status/time filters؛ C13B-T01.S03 empty/pagination state | C12a data؛ C03 API؛ C02 authorization |
+| C13B-R02 / W:1523–1533 | فیلتر نوع/وضعیت/بازه هم‌زمان و در scope باشد | C13B-S01 | C13B-T01.S02–C13B-T01.S03، query boundary و scope | C02؛ سازمان فقط در scope مجاز |
+| C13B-R03 / W:1523–1533,1571–1581 | رسید پرداخت، فاکتور و رسید خدمت نوع و وضعیت جدا داشته باشند | C13B-S02 مدرک عملیات را پیدا کند | C13B-T02 رسید: C13B-T02.S01 linked reference؛ C13B-T02.S02 document type؛ C13B-T02.S03 صادرنشده/دسترس‌ناپذیر | C04/C13a سند اشتراک/حسابداری؛ C12a پرداخت |
+| C13B-R04 / W:1331,1523–1533 | جزئیات رسید به operation/provenance اصلی لینک باشد، دفترکل را بازسازی نکند | C13B-S02 | C13B-T02.S01–C13B-T02.S03؛ حداقل فیلد و trace | C12a provenance؛ C12b bank result |
+| C13B-R05 / W:208,244,1331; B:1393–1444 | هر خواندن scope شخص/سازمان/عضو سابق را با تصمیم C02 رعایت کند | C13B-S03 فقط دامنه مجاز را ببیند | C13B-T03 دسترسی: C13B-T03.S01 recheck؛ C13B-T03.S02 tenant/member scope؛ C13B-T03.S03 audit result | C02 owner تصمیم/ممیزی؛ ACL موازی ممنوع |
+| C13B-R06 / W:1331,1523–1533 | export فقط با capability مصوب و scope همان سازمان | C13B-S03 | C13B-T03.S02–C13B-T03.S03؛ خروجی محدود و audit | C02؛ قالب/نقش export OPEN |
+| C13B-R07 / W:1547–1557 | پرونده پشتیبانی به تراکنش همان tenant متصل باشد؛ پرونده اثر مالی نسازد | C13B-S04 پیگیری تراکنش | C13B-T04 پرونده: C13B-T04.S01 transaction link؛ C13B-T04.S02 شرح کمینه؛ C13B-T04.S03 validate tenant/reference | C12b outcome؛ C11a اصلاح؛ C02 دسترسی |
+| C13B-R08 / W:1547–1557 | پرونده مالک و وضعیت دارد؛ SLA عددی بدون ظرفیت/تصویب وعده داده نشود | C13B-S04 | C13B-T04.S01–C13B-T04.S03؛ نمایش owner/state معتبر | صف/مالک/SLA OPEN؛ C14 اعلان |
+| C13B-R09 / W:1547–1557 | شاهد فقط در صورت نیاز، کمینه و بدون secret/OTP/token | C13B-S04 | C13B-T04.S02–C13B-T04.S03؛ attachment/text controls | C02 access/audit؛ retention فنی C14 |
+| C13B-R10 / W:610,1369–1380; B:918 | unknown از failure قطعی جدا؛ inquiry قبل از retry | C13B-S05 وضعیت نامعلوم امن پیگیری شود | C13B-T05 بازیابی: C13B-T05.S01 source state؛ C13B-T05.S02 inquiry؛ C13B-T05.S03 ارجاع امن | C12b نتیجه؛ C11b/owner Job؛ C12a ledger |
+| C13B-R11 / W:1331,1369–1380 | refund/correction رویداد linked باشد؛ اصل immutable | C13B-S05 | C13B-T05.S01–C13B-T05.S03؛ linked correction view | C11a correction؛ C12a entries؛ C12b reconcile |
+| C13B-R12 / W:1535–1545 | read/notification رضایت پرداخت/تمدید/تغییر قیمت نیست | C13B-S06 پیام مالی را بی‌ابهام ببیند | C13B-T06 نمایش پیام: C13B-T06.S01 consume C14؛ C13B-T06.S02 authorized link؛ C13B-T06.S03 prevent implied consent | C14 delivery/history؛ C04 price؛ C02 permission |
+
+#### Acceptance Criteria، Test Definitions و Planned Test Cases
+
+| Req / AC / Test Definition | معیار پذیرش قابل رد | تعریف آزمون | سه planned cases: موفق؛ خطا؛ مرزی |
+|---|---|---|---|
+| C13B-R01 / C13B-AC01 / C13B-TD01 | داده C12a با شناسه/زمان/status؛ خالی ≠ موفق | source read/list/detail | C13B-TC01 row+link؛ C13B-TC02 empty؛ C13B-TC03 timeout unknown |
+| C13B-R02 / C13B-AC02 / C13B-TD02 | فیلتر ترکیبی بدون خروج از scope | filter and time boundaries | C13B-TC04 combined؛ C13B-TC05 boundary؛ C13B-TC06 cross-tenant denied |
+| C13B-R03 / C13B-AC03 / C13B-TD03 | سه نوع سند جدا؛ عدم صدور صادقانه | type and availability | C13B-TC07 distinct types؛ C13B-TC08 not issued؛ C13B-TC09 invalid reference |
+| C13B-R04 / C13B-AC04 / C13B-TD04 | linked provenance و عدم افشای ledger/secret | receipt detail authorization | C13B-TC10 valid trace؛ C13B-TC11 missing trace queued؛ C13B-TC12 forbidden field hidden |
+| C13B-R05 / C13B-AC05 / C13B-TD05 | هر خواندن current C02 scope؛ عضو سابق/سازمان دیگر منع | actor and membership state | C13B-TC13 authorized owner؛ C13B-TC14 revoked former member؛ C13B-TC15 other tenant denied/audited |
+| C13B-R06 / C13B-AC06 / C13B-TD06 | export فقط با capability مصوب؛ policy ناموجود fail-closed | role, scope, unresolved policy | C13B-TC16 allowed role؛ C13B-TC17 denied role؛ C13B-TC18 unset policy blocks |
+| C13B-R07 / C13B-AC07 / C13B-TD07 | linked same-tenant case؛ ایجاد پرونده پول جابه‌جا نمی‌کند | valid/missing/foreign reference | C13B-TC19 valid case؛ C13B-TC20 fabricated ID rejected؛ C13B-TC21 cross-tenant rejected |
+| C13B-R08 / C13B-AC08 / C13B-TD08 | owner/status نمایش؛ وعده زمان فقط پس از تصویب | case lifecycle | C13B-TC22 owner/status؛ C13B-TC23 owner missing flagged؛ C13B-TC24 no invented deadline |
+| C13B-R09 / C13B-AC09 / C13B-TD09 | evidence کمینه و authorized؛ secretها حذف/رد | upload/read/redaction | C13B-TC25 minimum evidence؛ C13B-TC26 OTP/token rejected؛ C13B-TC27 other-case denied |
+| C13B-R10 / C13B-AC10 / C13B-TD10 | unknown ≠ failed؛ inquiry قبل از retry و same execution | unknown/recovery | C13B-TC28 pending unknown؛ C13B-TC29 late success no duplicate action؛ C13B-TC30 inquiry fails to ops queue |
+| C13B-R11 / C13B-AC11 / C13B-TD11 | correction/refund linked؛ original immutable | correction history | C13B-TC31 linked correction؛ C13B-TC32 update/delete denied؛ C13B-TC33 no-reference halted |
+| C13B-R12 / C13B-AC12 / C13B-TD12 | message read/click no consent/payment state | in-app message / action | C13B-TC34 history link؛ C13B-TC35 read does not alter subscription/payment؛ C13B-TC36 foreign link denied |
+
+#### وابستگی‌ها و تصمیم‌های باز C13b
+
+| Dependency | مرز |
+|---|---|
+| C02 | permission، organization/member scope و audit؛ C13b فقط اعمال می‌کند |
+| C03 | versioned API/event/correlation/job contracts؛ schema مشترک موازی ساخته نمی‌شود |
+| C04/C13a | subscription، price، invoice/accounting docs مالک خود؛ receipt فقط reference |
+| C11a/C12a/C12b | refund/correction؛ immutable ledger؛ bank/reconciliation outcome به‌ترتیب |
+| C11b | Job و تکرار؛ C13b retry/job مستقل نمی‌سازد |
+| C14 | message history، delivery state، monitoring؛ C13b consumer تجربه |
+| C07–C10 | rights/funding/reservation/transfer مالکیتشان باقی است |
+
+OPEN:C13B:01 export roles/policy؛ 02 receipt fields/format؛ 03 case taxonomy/owner؛ 04 support capacity/escalation/SLA؛ 05 evidence retention؛ 06 attachment and notification preferences. هیچ مقدار/قابلیت باز فرض نشده است.
+
+**Dependency register C13b:** `HARD` C02 current permission result پیش‌شرط هر read/export؛ `CONTRACT` C03 versioned read/event envelope؛ `CONTRACT` C12a ledger/history reference؛ `CONTRACT` C12b unknown/reconciliation state؛ `CONTRACT` C11a correction link و C11b Job status؛ `CONTRACT` C14 message history/delivery. Export و SLA تا رفع OPEN فعال فرض نمی‌شوند.
+
+**RA C13b: PASS** — 14 Candidate تعیین تکلیف؛ 12/12 اتمی و منبع‌دار؛ 6 Story، 6 Task، 18 Subtask، 12 AC، 12 Test Definition و 36 Test Case؛ تکرار با C02/C03/C04/C11a/C11b/C12a/C12b/C13a صفر.
+**IPA C13b: PASS** — بازبینی ساختاری مستقل از تدوین؛ trace دوسویه Source→R→Story→Task/Subtask→AC→TD→TC و reverse mapping کامل؛ برای هر R کیس موفق/خطا/مرزی؛ تست محصول اجرا نشده است.### C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک
+
+**وضعیت:** RA=PASS / IPA=PASS؛ PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED. C14 قرارداد پیام/اعلان، history تحویل و مشاهده‌پذیری مشترک را برنامه‌ریزی می‌کند. داده/Job/outbox متعلق به سرویس مبدأ می‌ماند؛ دسترسی مستقیم به جداول سرویس‌ها، Broker اجباری و سرویس مستقل notification برای R1 مقرر نیست.
+
+#### دفتر Candidateهای C14
+
+| Candidate | Source Unit | تعیین تکلیف | مالک/Requirement |
+|---|---|---|---|
+| CAND-14-01 | B:1192–1216 | Outbox محلی فقط در نیاز واقعی؛ پذیرفته | Source service/C03 / C14-R01 |
+| CAND-14-02 | B:1833,1835 | Job با event جدا؛ Broker اجباری نیست | C03/C11b / C14-R02 |
+| CAND-14-03 | B:1682–1684 | D02 eligibility gates؛ پذیرفته | C14 + C02/C04/domain / C14-R03 |
+| CAND-14-04 | B:1682–1684 | event نامزد است نه مجوز اقدام/اعلان | C02/C14 / C14-R04 |
+| CAND-14-05 | B:1684–1685 | D03 نسخه‌آگاه dedup؛ پذیرفته | C14 / C14-R05 |
+| CAND-14-06 | B:1684 | تغییر شواهد: replace/invalidate/history؛ پذیرفته | C14/source owner / C14-R05 |
+| CAND-14-07 | B:997,1453 | تاریخچه In-App پایدار؛ پذیرفته | C14 / C14-R07 |
+| CAND-14-08 | B:1684; W:1545 | send/read/action state مستقل؛ پذیرفته | C14/C13b / C14-R15 |
+| CAND-14-09 | B:997 | Web Push ترجیحی؛ سرویس مستقل R1 لازم نیست | C14 / C14-R08 |
+| CAND-14-10 | B:997; W:1535–1545 | SMS مشروط؛ مالی In-App/security urgent policy | C14/C13b / C14-R09 |
+| CAND-14-11 | B:1837,1913–1915; W:1331 | structured, correlated, redacted telemetry | C01/C03/C14 / C14-R10 |
+| CAND-14-12 | B:25,1192,1913 | timeout/retry/breaker/bulkhead/recovery | C03/C11b/C14 / C14-R11 |
+| CAND-14-13 | B:2006 | RUM عملکردی فقط؛ recording ممنوع | frontend/C14 / C14-R12 |
+| CAND-14-14 | B:1837,1913 | version compatibility/outbox lag/recovery signals | source/C03/C14 / C14-R13 |
+| CAND-14-15 | W:1331,1343 | مالی permanent، technical retention جدا | C12a/C02/C14 / C14-R14 |
+| CAND-14-16 | B:977,1008,1120–1144 | Monitoring user feature جدا از ops telemetry؛ cap/fee باز | C04/C13a/C14 / C14-R16 |
+
+#### Requirements، Stories/Enablers، Tasks و Subtasks
+
+| Requirement / Source Unit | نیازمندی اتمی | Story / Enabler | Task و سه Subtask | Dependency / مالک |
+|---|---|---|---|---|
+| C14-R01 / B:1192–1216 | رخداد فقط با مصرف واقعی؛ تغییر محلی و outbox اتمیک | C14-E01 رخداد versioned سالم منتشر شود | C14-T01 event contract: C14-T01.S01 event candidate/owner؛ C14-T01.S02 local transaction condition؛ C14-T01.S03 schema/version/correlation | C03؛ سرویس مالک data/job |
+| C14-R02 / B:1833,1835 | Job و event bus جدا؛ broker پیش‌شرط نیست | C14-E01 | C14-T01.S02–C14-T01.S03؛ queue/adapter choice open | C03/C11b؛ انتخاب فناوری باز |
+| C14-R03 / B:1682–1684 | D02 gates: entitlement, purpose, consent, minimum data, freshness/scope, relevance/importance/cost | C14-S01 پیام فقط با شرایط معتبر | C14-T02 eligibility: C14-T02.S01 gate matrix؛ C14-T02.S02 evidence freshness؛ C14-T02.S03 fail-closed | C02 auth؛ C04 entitlement؛ domain evidence |
+| C14-R04 / B:1682–1684 | event candidate خودکار اختیار اعلان/عمل حساس نیست | C14-S01 | C14-T02.S01–C14-T02.S03؛ notification/action permission جدا | C02 authorization |
+| C14-R05 / B:1682–1685 | D03 dedup/version, replace/invalidate با lineage | C14-S02 پیام تکراری/منسوخ کنترل شود | C14-T03 lifecycle: C14-T03.S01 identity/version؛ C14-T03.S02 supersede/revoke؛ C14-T03.S03 audit lineage | C03 versioned source event |
+| C14-R06 / B:1684; W:1337–1351 | اولویت بر اثر/ریسک؛ آستانه باز | C14-S02 | C14-T03.S01–C14-T03.S03؛ impact priority؛ numeric threshold OPEN | C12b/domain owner |
+| C14-R07 / B:997,1453; W:1535–1545 | تاریخچه In-App پایدار مستقل از channel send | C14-S03 پیام در history قابل بازیابی باشد | C14-T04 history: C14-T04.S01 logical persistence؛ C14-T04.S02 read/unread/time/origin/status؛ C14-T04.S03 authorized query | C02; C13b consumer |
+| C14-R08 / B:997 | Web Push ترجیحی، SMS مشروط؛ R1 نیازمند سرویس مستقل نیست | C14-S04 delivery state قابل فهم باشد | C14-T05 channel: C14-T05.S01 channel capability؛ C14-T05.S02 send/provider outcome؛ C14-T05.S03 policy fallback | provider/template OPEN |
+| C14-R09 / W:1343–1351,1535–1545 | مالی In-App، security/urgent SMS طبق policy، reminder configurable؛ پیام رضایت نیست | C14-S04 | C14-T05.S01–C14-T05.S03؛ channel class separation | C13b UI؛ C04 price؛ C02 security |
+| C14-R10 / B:1837,1913–1915; W:1331 | structured/redacted logs, metrics, traces با correlation | C14-E02 رخداد فنی بدون افشای داده تشخیص‌پذیر | C14-T06 observability: C14-T06.S01 schema/redaction؛ C14-T06.S02 correlation/version؛ C14-T06.S03 baseline dashboards | C01/C03; source owns record; C12a financial audit |
+| C14-R11 / B:25,1192,1913 | bounded timeout/retry, idempotence, circuit breaker, bulkhead, recovery | C14-E02 | C14-T07 reliability: C14-T07.S01 budget/retry؛ C14-T07.S02 breaker/isolation؛ C14-T07.S03 recovery visibility | C03/C11b؛ اعداد OPEN |
+| C14-R12 / B:2006 | RUM فقط load/Web Vitals/frontend errors؛ بدون session/form/click recording | C14-E02 | C14-T06.S01–C14-T06.S03؛ allowlist privacy | C02 privacy; frontend owner |
+| C14-R13 / B:1837,1913 | version mismatch, outbox lag, duplicate, retry exhaustion, worker recovery قابل پایش | C14-E02 | C14-T07.S02–C14-T07.S03؛ compatibility/lag/recovery signals | C03 contract؛ source owner؛ thresholds OPEN |
+| C14-R14 / W:1331,1343 | financial history permanent؛ technical/nonfinancial logs retention جدا و access audited | C14-S05 اطلاعات با مالک و retention جدا | C14-T08 privacy/incident: C14-T08.S01 data classification؛ C14-T08.S02 retention/access؛ C14-T08.S03 incident owner/escalation | C12a finance؛ C02 access؛ values OPEN |
+| C14-R15 / B:997,1684; W:1545 | created/queued/accepted/delivered/unknown/read/action stateها مستقل | C14-S03/C14-S04 | C14-T04.S02–C14-T04.S03 و C14-T05.S02؛ callback correlation/state transitions | C13b presentation؛ provider eventual state |
+| C14-R16 / B:977,1008,1120–1144 | user-facing Monitoring از operational observability جدا؛ entitlement/cap/fee مصوب | C14-S06 feature فقط entitlement مصوب مصرف کند | C14-T08.S01–C14-T08.S03؛ product telemetry access boundary | C04 entitlement؛ C13a pricing؛ quota/fee OPEN |
+
+#### Acceptance Criteria، Test Definitions و Planned Test Cases
+
+| Req / AC / TD | Acceptance Criteria | Test Definition | سه planned cases: موفق؛ خطا؛ مرزی |
+|---|---|---|---|
+| C14-R01 / C14-AC01 / C14-TD01 | فقط رخداد لازم؛ mutation+outbox اتمیک | commit/rollback/owner | C14-TC01 commit both؛ C14-TC02 rollback no orphan؛ C14-TC03 no consumer no unnecessary event |
+| C14-R02 / C14-AC02 / C14-TD02 | Job lifecycle جدا؛ نبود broker مانع R1 نشود | job/event independent | C14-TC04 job alone؛ C14-TC05 event without job state؛ C14-TC06 no mandatory broker |
+| C14-R03 / C14-AC03 / C14-TD03 | همه D02 gates پیش از ساخت؛ stale/out-of-scope fail-closed | complete gate matrix | C14-TC07 eligible؛ C14-TC08 consent/entitlement missing؛ C14-TC09 stale evidence |
+| C14-R04 / C14-AC04 / C14-TD04 | event بدون policy پیام/عمل حساس نسازد | candidate and authorization | C14-TC10 candidate denied؛ C14-TC11 allowed policy message؛ C14-TC12 separate action permission |
+| C14-R05 / C14-AC05 / C14-TD05 | version-aware dedup؛ update/revoke با lineage | duplicate/version/revocation | C14-TC13 same-version retry one logical message؛ C14-TC14 newer version supersedes؛ C14-TC15 revoke invalidates with audit |
+| C14-R06 / C14-AC06 / C14-TD06 | priority از impact؛ threshold OPEN محترم | impact/severity open | C14-TC16 material prioritized؛ C14-TC17 low impact periodic؛ C14-TC18 no invented threshold |
+| C14-R07 / C14-AC07 / C14-TD07 | history پایدار پس از failure کانال و access-scoped | channel fail/read/access | C14-TC19 history persists؛ C14-TC20 read/unread retained؛ C14-TC21 unauthorized denied/audited |
+| C14-R08 / C14-AC08 / C14-TD08 | Web Push preferred، in-app مستقل؛ provider unset false-delivery ندهد | channel/provider outcome | C14-TC22 push permitted؛ C14-TC23 in-app retained without push؛ C14-TC24 provider OPEN no claim |
+| C14-R09 / C14-AC09 / C14-TD09 | channel طبق کلاس و policy؛ read ≠ consent/payment | financial/security/reminder | C14-TC25 financial in-app؛ C14-TC26 urgent SMS only if authorized؛ C14-TC27 click no subscription/payment change |
+| C14-R10 / C14-AC10 / C14-TD10 | structured/correlated/redacted; no secret/OTP/token | valid/missing IDs/redaction | C14-TC28 opaque correlation joins؛ C14-TC29 OTP redacted؛ C14-TC30 missing ID measurable without identity |
+| C14-R11 / C14-AC11 / C14-TD11 | bounded idempotent retries, isolation, recovery; tuning after baseline | timeout/retry/saturation | C14-TC31 timeout unknown/recovery؛ C14-TC32 retry same idempotency capped؛ C14-TC33 background saturation isolates interactive |
+| C14-R12 / C14-AC12 / C14-TD12 | RUM allowlist only performance; no replay/content | allowed/disallowed collection | C14-TC34 Web Vital captured؛ C14-TC35 form/session absent؛ C14-TC36 click replay disabled |
+| C14-R13 / C14-AC13 / C14-TD13 | compatibility, lag, duplicate/recovery visible; thresholds owner/baseline-led | skew/lag/replay | C14-TC37 incompatible version signaled؛ C14-TC38 lag visible without arbitrary threshold؛ C14-TC39 idempotent recovery measurable |
+| C14-R14 / C14-AC14 / C14-TD14 | financial vs technical retention split; scoped audited access | deletion/access retention | C14-TC40 financial survives technical deletion؛ C14-TC41 technical expiry follows future policy؛ C14-TC42 privileged read audited |
+| C14-R15 / C14-AC15 / C14-TD15 | logical/send/delivery/read/action separate | async/out-of-order callback | C14-TC43 accepted but delivery unknown؛ C14-TC44 duplicate callback idempotent؛ C14-TC45 read not delivery/action |
+| C14-R16 / C14-AC16 / C14-TD16 | Monitoring product entitlement/fee/cap from C04/C13a; telemetry not silently monetized | entitlement/cap open | C14-TC46 entitled user؛ C14-TC47 no entitlement denied؛ C14-TC48 unresolved cap/fee blocks assumptions |
+
+#### Handoff، وابستگی و تصمیم‌های باز C14
+
+| From → To | قرارداد و مرز |
+|---|---|
+| C01/C03 → C14 | telemetry/envelope/outbox/timeout/retry/circuit/bulkhead and compatibility contracts؛ C14 observes, source retains state |
+| C02 → C14/C13b | actor/tenant/consent/permission; each history/export/evidence query scoped |
+| C04/C13a → C14 | entitlement/subscription/price/invoice events؛ message is not acceptance |
+| C11b → C14 | Job trigger/capacity; C14 is not a scheduler/queue owner |
+| C12a/C12b → C14 | immutable financial facts and reconciliation/unknown outcome; telemetry never replaces finance record |
+| C13b → C14 | C13b consumes logical notification/history/delivery; C14 provides shared contract |
+| Each source service → C14 | source owns data/Job/outbox; local transaction only for real event need; consumers idempotent |
+
+OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidence source؛ 03 templates/preferences/SMS/fallback؛ 04 provider/API/cost؛ 05 nonfinancial retention/access roles؛ 06 SLI/SLO baseline/threshold/routing/on-call؛ 07 retry/deadline tuning؛ 08 outbox lag/severity؛ 09 Monitoring entitlement/cap/fee؛ 10 RUM tooling/retention. هیچ عدد، provider، channel یا technology انتخاب نشده است.
+
+**Dependency register C14:** `HARD` C02 authorization/privacy controls and C03 common contracts precede shared consumers; `CONTRACT` source services own transaction/outbox/job; C04 supplies entitlement/subscription facts; C11b supplies job lifecycle; C12a/C12b supply financial facts/reconciliation outcomes; C13b consumes message history. C14 does not own upstream state. No cycle exists among these directed ownership/dependency edges; advisory feedback/alerts to source owners are not prerequisites.
+
+**RA C14: PASS** — 16 Candidate تعیین تکلیف؛ 16/16 الزام اتمی/منبع‌دار؛ 8 Story/Enabler (6 Story و 2 Enabler)، 8 Task، 24 Subtask، 16 AC/TD و 48 Test Case. **IPA C14: PASS** — independent structural review و دوطرفه Source→R→Story/Enabler→Task/Subtask→AC→TD→TC؛ هر R سه حالت موفق/خطا/مرزی؛ تست runtime اجرا نشده است.
+
+#### CPA-01 تا CPA-08 — ممیزی مشترک C13b/C14
+
+| Gate | نتیجه | شاهد و آزمون مرز |
+|---|---|---|
+| CPA-01 پوشش اجتماع منابع | PASS | 28 graph candidate node؛ 33 یال incident (24 EXTRACTED، 8 INFERRED، 1 AMBIGUOUS)؛ 30 Candidate منطقی؛ متن مرجع و handoffهای C12a/b/C13a بازخوانی شدند؛ graph discovery بود نه تصویب |
+| CPA-02 نبود تکرار | PASS | 28 R مستقل؛ C13b تجربه و پرونده، C14 history/delivery/telemetry؛ ledger/permission/refund/reconciliation/job/entitlement تکرار نشده |
+| CPA-03 مالکیت | PASS | C02 permission/audit؛ C03 shared contracts؛ C04 subscription؛ C11a correction؛ C11b Job؛ C12a ledger؛ C12b reconciliation؛ C13a accounting؛ service owns outbox |
+| CPA-04 وابستگی و cycle | PASS | C13b مصرف‌کننده C14 و C14 قرارداد مشترک؛ hard dependencies یک‌طرفه؛ چرخه اجرایی صفر |
+| CPA-05 قرارداد مالی/داده | PASS | unknown != failed؛ message != consent؛ immutable financial history؛ technical retention جدا؛ idempotent consumer، بدون debit/posting/Job دوم |
+| CPA-06 تصمیم باز | PASS | export, case owner/SLA, event inventory, consent, provider/channel, thresholds/retry, RUM retention و Monitoring fee/cap OPEN |
+| CPA-07 Traceability | PASS | 28 R با منبع، Story/E, Task/Subtask, AC, TD، سه TC و dependency؛ reverse links کامل |
+| CPA-08 مصوبات قبلی | PASS | C02/C03/C04/C11a/C11b/C12a/C12b/C13a و دو سند مرجع حفظ؛ historical registry records دست‌نخورده |
+
+**شمارنده و شاهد ممیزی:** C13b: 14 Candidate / 12 R / 6 Story / 6 Task / 18 Subtask / 12 AC / 12 TD / 36 planned TC. C14: 16 Candidate / 16 R / 8 Story/Enabler (6 Story و 2 Enabler) / 8 Task / 24 Subtask / 16 AC / 16 TD / 48 planned TC. جمع: 30 Candidate منطقی، 28 R، 14 Story/Enabler، 14 Task، 42 Subtask، 28 AC/TD، 84 planned TC. هیچ تست محصولی اجرا نشده؛ precision/time NOT_MEASURED. پس از اصلاح نقص‌های ممیزی، blocker باقی نماند.
+
+**شمارنده کل:** 18/36 بسته پذیرفته‌شده برنامه‌ریزی، 18/36 باقی‌مانده؛ Core/Wallet=18/18، RAG/Adviser=0/10، Assistant=0/8. محصول NOT_IMPLEMENTED / NOT_EXECUTED.
 ---
 
 ## ۲. برنامه RAG / Adviser — ۱۰ بسته
@@ -6011,4 +6201,4 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 - `RA/IPA PASS` به معنی کامل‌شدن *برنامه* همان بسته است؛ به معنی اجرای کد، تأیید امنیت/مالی، استقرار یا کسب ارزش واقعی برای کاربر نیست.
 - هیچ واحد پولی، ظرفیت، فناوری، آستانه، سیاست یا تصمیم اجرایی باز از خود این سند تصویب نمی‌شود؛ هر کدام باید در Gate مصوب مربوط تعیین تکلیف شوند.
-- در وضعیت جاری C01 تا C12a در سطح برنامه‌ریزی پذیرفته‌اند؛ C12b تا A08 هنوز تدوین نشده‌اند. عدد «۱۴ از ۳۶» تعداد بسته‌های پذیرفته‌شدهٔ برنامه است، نه تکمیل فاز دوم.
+- در وضعیت جاری C01 تا C14 در سطح برنامه‌ریزی پذیرفته‌اند؛ بسته‌های R01–R10 و A01–A08 هنوز تدوین نشده‌اند. عدد «۱۸ از ۳۶» تعداد بسته‌های پذیرفته‌شدهٔ برنامه است، نه تکمیل فاز دوم.
