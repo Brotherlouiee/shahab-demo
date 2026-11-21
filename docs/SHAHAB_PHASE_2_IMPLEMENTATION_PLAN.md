@@ -4262,7 +4262,7 @@
 | Handoff | شاهد/نامزد | مالک حوزه و بسته مقصد | وضعیت دریافت/موعد و اثر |
 |---|---|---|---|
 | `Handoff:H05A:001` | `B:906`, `CAN:C05A:048`, `DECISION:C05A:001` | Plan/Entitlement؛ `C04` | `PENDING_PACKAGE_ALLOCATION`; پیش از قطعی‌کردن ماتریس Service×Plan؛ پذیرش C05a را متوقف نمی‌کند. |
-| `Handoff:H05A:002` | `B:1557–1636`, `CAN:C05A:040` | کاتالوگ محصول؛ `C05b` | `PENDING_PACKAGE_ALLOCATION`; C05a داده/Worker/Snapshot محصول بانکی را نمی‌سازد. |
+| `Handoff:H05A:002` | `B:1557–1636`, `CAN:C05A:040` | کاتالوگ محصول؛ `C05b` | `ACCEPTED_BY_SCOPE` در برنامه C05b؛ پیاده‌سازی/قرارداد اجرایی همچنان باز است؛ C05a داده/Worker/Snapshot محصول بانکی را نمی‌سازد. |
 | `Handoff:H05A:003` | `B:250–258`, `CAN:C05A:041` | دانش مقررات؛ `R06` | `PENDING_PACKAGE_ALLOCATION`; مدل Knowledge Base و روابط حقوقی جدا بمانند. |
 | `Handoff:H05A:004` | `B:1609`, `CAN:C05A:042` | نقشه دانش UI؛ `A06` | `PENDING_PACKAGE_ALLOCATION`; C05a مسیر عنصر/نسخه UI را تعیین نمی‌کند. |
 | `Handoff:H05A:005` | `B:1502–1522`, `CAN:C05A:043` | پلتفرم/کشف اپ؛ `A04` | `PENDING_PACKAGE_ALLOCATION`; هیچ نصب یا کنترل اپ در C05a تعهد نمی‌شود. |
@@ -4331,7 +4331,7 @@
 | `CAN:C05A:037` | CONTRACT:C01:01/:02 | REUSED_CONTRACT | API/data ownership; no new REQ | TASK:CORE:003 | Existing | Existing | REUSED |
 | `CAN:C05A:038` | CONTRACT:C02:02/:03 | REUSED_CONTRACT | identity/permission/consent; no new REQ | TASK:C02:002–004 | Existing | Existing | REUSED |
 | `CAN:C05A:039` | B:1190–1217; C03 accepted | CROSS_REFERENCE | API/Job/Event/Telemetry ownership remains C03; C05a read path uses C01:02 and does not add a Job | — | — | — | CLOSED_WITH_REASON |
-| `CAN:C05A:040` | B:1557–1636 | FUTURE_DEPENDENCY | Handoff:H05A:002 to C05b | — | — | — | PENDING |
+| `CAN:C05A:040` | B:1557–1636 | FUTURE_DEPENDENCY | Handoff:H05A:002 to C05b | — | — | — | ACCEPTED_BY_SCOPE |
 | `CAN:C05A:041` | B:250–258 | FUTURE_DEPENDENCY | Handoff:H05A:003 to R06 | — | — | — | PENDING |
 | `CAN:C05A:042` | B:1609 | FUTURE_DEPENDENCY | Handoff:H05A:004 to A06 | — | — | — | PENDING |
 | `CAN:C05A:043` | B:1502–1522 | FUTURE_DEPENDENCY | Handoff:H05A:005 to A04 | — | — | — | PENDING |
