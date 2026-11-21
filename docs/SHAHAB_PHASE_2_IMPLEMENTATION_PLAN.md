@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R08.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R08 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R10.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R10 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -20,9 +20,9 @@
 | دامنه | بسته‌ها | تعداد | وضعیت |
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
-| RAG / Adviser | R01–R10 | 10 | R01–R08 پذیرفته؛ R09–R10 در انتظار |
+| RAG / Adviser | R01–R10 | 10 | R01–R10 پذیرفته‌شدهٔ برنامه‌ریزی؛ محصول اجرا نشده |
 | Assistant | A01–A08 | 8 | NOT_STARTED |
-| کل | ۳۶ بسته | 36 | ۲۶ پذیرفته‌شده؛ ۱۰ در انتظار |
+| کل | ۳۶ بسته | 36 | ۲۸ پذیرفته‌شده؛ ۸ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -53,8 +53,8 @@
 | R06 | تجمیع پاسخ، Citation Guard و ارزیابی کیفیت Adviser | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R07 | کشف و ارزیابی رابطهٔ اسناد و ورود انتخابی | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R08 | بازاعتبارسنجی سند و هماهنگی اثر تغییر | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| R09 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
-| R10 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| R09 | زمینهٔ ساختاریافتهٔ گفت‌وگو و تداوم Adviser | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
+| R10 | محاسبهٔ قطعی و قرارداد Adviser–Core | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | A01 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | A02 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | A03 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -6082,7 +6082,7 @@ OPEN:C14:01 event inventory/domain owners؛ 02 consent/purpose/freshness evidenc
 
 ## ۲. برنامه RAG / Adviser — ۱۰ بسته
 
-R01–R08 دارای بسته‌بندی، ممیزی و وضعیت مستقل‌اند؛ R09–R10 تا تدوین و عبور از گیت‌های خود NOT_STARTED می‌مانند. هیچ خروجی بسته‌ای از PASS بسته دیگر استنباط نمی‌شود.
+R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل‌اند؛ پذیرش هر بسته فقط بر گیت‌های همان بسته استوار است. هیچ خروجی بسته‌ای از PASS بسته دیگر استنباط نمی‌شود.
 ### R01 — پذیرش خدمت، فهم پرسش و مسیریابی بازیابی ریسک‌محور
 
 **وضعیت:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`. این بسته دامنه پذیرش خدمت، فهم نیاز و انتخاب مسیر Adviser را می‌پوشاند؛ منطق پاسخ/استناد نهایی و چرخه دانش کامل در بسته‌های بعدی تکمیل می‌شوند.
@@ -6999,7 +6999,7 @@ R01–R08 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 
 **نتیجه:** CPA-01..CPA-08 = PASS پس از اصلاح؛ تعداد اصلاح بین‌بسته‌ای: 3 handoff clarifications؛ بسته‌های جدید R05/R06: `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`.
 
-### Checkpoint جاری پس از R07/R08
+### Checkpoint ثبت‌شده پس از R07/R08
 
 - بسته‌های پذیرفته برنامه: **۲۶/۳۶**؛ باقی‌مانده **۱۰/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۸/۱۰؛ Assistant: ۰/۸.
 - R05: ۱۰ Requirement، ۵ Task، ۱۵ Subtask، ۱۰ AC، ۱۰ Test Definition، ۴۰ Planned Test Case؛ RA/IPA=PASS.
@@ -7296,13 +7296,191 @@ Nodeهای pinned Graphify برای DRS، Catalog، ADR-RAG-05/12/15/19/20/21/22
 | CPA-07 ردیابی | PASS — 17/17 REQ با Source/Graph→EN→Task→Subtask→AC→TD و چهار TC مرتبط؛ reverse links کامل. |
 | CPA-08 انسجام و وضعیت | PASS — top status, per-package status, RAG counts and product-not-executed boundary synchronized. |
 
-### R09 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### R09 — زمینهٔ ساختاریافتهٔ گفت‌وگو و تداوم Adviser
 
-### R10 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**وضعیت:** RA=PASS / IPA=PASS؛ PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED.
+
+**Scope و مرز مالکیت:** وضعیت نشست Adviser، تفکیک دادهٔ تأییدشده از فرضیه، تثبیت دامنه/نقش/خدمت/موجودیت و Snapshot فعال، تداوم حداقلی همان‌حوزه، و بازاعتبارسنجی شواهد پس از تغییر زمینه. R09 مالک Conversation Context Manager است؛ C02 مالک هویت، نشست، مجوز و رضایت؛ User Memory در مالک داده‌ای می‌ماند که B05 و قراردادهای مصوب تعیین می‌کنند؛ C05a مالک شناسه/کاتالوگ خدمت؛ C05b/Core مالک شناسهٔ پایدار محصول؛ R03 مالک نسخه و Snapshot؛ R01 مالک پذیرش/مسیر؛ R05 مالک retrieval؛ R06 مالک پاسخ و Citation Guard؛ C01/C14 مالک trace/history مشترک. R09 حافظه یا جدول موازی نمی‌سازد و دادهٔ مالک دیگر را مستقیم نمی‌خواند.
+
+**تعیین دامنه و گراف مشترک:** nodeهای Graphify از semantic/graph.json بازیابی و با structural graph تطبیق شدند: docs_shahab_phase_2_development_blueprint_adr_rag_33، docs_shahab_phase_2_development_blueprint_adr_rag_26، docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary، docs_shahab_phase_2_development_blueprint_personal_data_isolation، docs_shahab_phase_2_development_blueprint_adr_rag_29 و docs_shahab_phase_2_development_blueprint_adr_rag_14. validation گراف PASS؛ در استخراج مشترک R09/R10 هر 13/13 گرهٔ معنایی resolve و 8 رابطهٔ structural با confidence=EXTRACTED پیمایش شدند؛ hashهای Blueprint/Wallet مطابق §۰. Source Unitهای تطبیق‌شده: Blueprint §3.9.1 ADR-RAG-26 (394–398)، ADR-RAG-33 (429–433)؛ §3.9.3 (480–488)؛ §3.9.4 (492–500)؛ فصل دوم §13 (1190–1216) و اصل تعامل (1281)؛ فصل سوم §2/B05 (1410–1428). گراف برای کشف و ردیابی استفاده شد؛ تصمیم فقط از متن مصوب استخراج شده و هیچ یال INFERRED/AMBIGUOUS الزام نساخته است. Wallet V0.20 کامل از نظر زمینهٔ نشست بررسی شد؛ قاعده‌ای برای Context Manager Adviser به این بسته اضافه نمی‌کند.
+
+**Candidate / Requirement Registry — Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک | Enabler / Task | AC / Test |
+| --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R09:001 / REQ:RAG:R09:001 | fact تأییدشده، فرضیه/نامطمئن و دادهٔ مرجع‌دار جدا بمانند؛ متن مدل وضعیت تأیید را تغییر ندهد. | B:429–433، 1412–1414؛ docs_shahab_phase_2_development_blueprint_adr_rag_33، docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary | Conversation Context Manager؛ C02 مالک هویت/نشست | EN:RAG:R09:001 / TASK:RAG:R09:001 | AC:RAG:R09:001 / TEST:RAG:R09:001 |
+| CAND:RAG:R09:002 / REQ:RAG:R09:002 | domain_id و experience_mode از Backend خوانده شوند؛ تغییر دامنه/نقش فقط با اقدام صریح کاربر و ارزیابی مجدد مجوز انجام شود. | B:1192–1194، 1281، 1414؛ docs_shahab_phase_2_development_blueprint_adr_rag_01، docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary | C02 و Backend Scope Guard | EN:RAG:R09:001 / TASK:RAG:R09:001 | AC:RAG:R09:002 / TEST:RAG:R09:002 |
+| CAND:RAG:R09:003 / REQ:RAG:R09:003 | خدمت، موجودیت مالی و evidence فعال با شناسهٔ پایدار و version مرجع‌دار شوند؛ display name/alias به‌تنهایی هویت نیست. | B:429–433، 480–486، 1606–1610؛ docs_shahab_phase_2_development_blueprint_adr_rag_29، docs_shahab_phase_2_development_blueprint_adr_rag_33 | C05a/C05b IDs؛ R03 evidence؛ R09 consumer | EN:RAG:R09:001 / TASK:RAG:R09:002 | AC:RAG:R09:003 / TEST:RAG:R09:003 |
+| CAND:RAG:R09:004 / REQ:RAG:R09:004 | تغییر بانک/محصول/خدمت، فقط evidence وابسته به entity قبلی را پیش از claim جدید به R01/R05 برای ارزیابی مجدد بفرستد؛ evidence مشترک فقط با تأیید دامنهٔ R05 قابل استفاده بماند. | B:75–86، 242–249، ADR-RAG-33:429–433؛ docs_shahab_phase_2_development_blueprint_adr_rag_33، docs_shahab_phase_2_development_blueprint_adr_rag_35 | R09 state; R01 route; R05 retrieve; R03 snapshot | EN:RAG:R09:001 / TASK:RAG:R09:002 | AC:RAG:R09:004 / TEST:RAG:R09:004 |
+| CAND:RAG:R09:005 / REQ:RAG:R09:005 | continuity خودکار فقط حداقلی و همان‌حوزه پس از دسترسی مجاز است؛ انتقال حوزه‌ای نیازمند رضایت هدفمند و کنترل Backend است. | B:1210–1214، 1281، 1412؛ docs_shahab_phase_2_development_blueprint_adr_rag_26، docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary | C02 consent; owner service projection | EN:RAG:R09:002 / TASK:RAG:R09:003 | AC:RAG:R09:005 / TEST:RAG:R09:005 |
+| CAND:RAG:R09:006 / REQ:RAG:R09:006 | Session Context، Conversation Continuity، User Memory و Case/Workflow State چهار مرجع مستقل بمانند؛ session expiry پرونده را حذف یا مجوز حوزه‌ای ایجاد نکند. | B:1192–1214، 1412–1414؛ docs_shahab_phase_2_development_blueprint_b05_context_retrieval_boundary، docs_shahab_phase_2_development_blueprint_personal_data_isolation | C02 session/consent؛ designated memory owner؛ workflow owner؛ Adviser temporary context | EN:RAG:R09:002 / TASK:RAG:R09:003 | AC:RAG:R09:006 / TEST:RAG:R09:006 |
+| CAND:RAG:R09:007 / REQ:RAG:R09:007 | زمینهٔ شخصی وارد shared knowledge index/catalog نشود و R09 از جداول خصوصی Core/مالک دیگر دسترسی مستقیم نداشته باشد. | B:1192–1214، 1412؛ ADR-RAG-26:394–398؛ docs_shahab_phase_2_development_blueprint_adr_rag_26، docs_shahab_phase_2_development_blueprint_personal_data_isolation | data owner/C02؛ C01 boundary | EN:RAG:R09:002 / TASK:RAG:R09:004 | AC:RAG:R09:007 / TEST:RAG:R09:007 |
+| CAND:RAG:R09:008 / REQ:RAG:R09:008 | trace، نسخه و علت انتقال state را با دادهٔ حداقلی ثبت کند؛ متن کامل، دادهٔ شخصی و secret وارد telemetry عمومی نشود. | ADR-RAG-14:334–338؛ B:486،1192؛ docs_shahab_phase_2_development_blueprint_adr_rag_14، docs_shahab_phase_2_development_blueprint_personal_data_isolation | C01 telemetry؛ C14 history؛ R09 emitter | EN:RAG:R09:003 / TASK:RAG:R09:004 | AC:RAG:R09:008 / TEST:RAG:R09:008 |
+
+**Enablerها:** EN:RAG:R09:001 قرارداد state مرجع‌دار برای domain/role/service/entity/Snapshot (REQ 001–004؛ oracle: هیچ entity/evidence از tuple پیشین پس از تغییر مصرف نمی‌شود). EN:RAG:R09:002 تداوم مجاز و جداسازی مالک داده (REQ 005–007؛ oracle: projection فقط از owner API و subset مجاز). EN:RAG:R09:003 trace کمینه (REQ 008؛ oracle: state قابل بازسازی و payload حساس صفر).
+
+**Taskها و خروجی اجرایی:**
+
+| Task | مالک / نیازمندی | خروجی و completion oracle |
+| --- | --- | --- |
+| TASK:RAG:R09:001 — قرارداد state نشست و Backend validation | Conversation Context Manager؛ R09:001–002؛ C02/R01 | state type/status و transition contract؛ فقط domain/role تأییدشدهٔ Backend می‌پذیرد. |
+| TASK:RAG:R09:002 — اتصال entity/evidence و transition revalidation | Conversation Context Manager؛ R09:003–004؛ C05a/C05b/R03/R01/R05 | reference tuple و handoff؛ تغییر entity، evidence وابسته را برای claim جدید رد و shared evidence را به scope validation می‌فرستد. |
+| TASK:RAG:R09:003 — continuity مجاز و interaction تغییر حوزه | Conversation Context Manager / Adviser integration؛ R09:005–006؛ C02/C06 | projection حداقلی همان‌حوزه و اقدام صریح تغییر؛ انتقال بی‌رضایت صفر. |
+| TASK:RAG:R09:004 — privacy boundary و trace | Adviser platform integration؛ R09:007–008؛ C01/C14 | API-only dependency، allowlist trace و آزمون منع payload؛ direct private DB reads=0. |
+
+**Subtaskها و oracle مستقل:**
+
+| Subtask | Requirement | Oracle |
+| --- | --- | --- |
+| TASK:RAG:R09:001.S01 تفکیک fact/فرضیه/evidence status | 001 | status فقط با رویداد تأیید مجاز تغییر کند. |
+| TASK:RAG:R09:001.S02 اعتبارسنجی domain/role در Backend | 002 | model-supplied domain تغییر ایجاد نکند. |
+| TASK:RAG:R09:001.S03 trace state version و owner refs | 001–002 | هر درخواست یک state version مشخص داشته باشد. |
+| TASK:RAG:R09:002.S01 اتصال stable IDs و Snapshot از owner APIs | 003 | alias بی‌شاهد canonical نشود. |
+| TASK:RAG:R09:002.S02 invalidate dependency پس از تغییر entity | 004 | R01/R05 handoff پیش از ادعای جدید ثبت شود. |
+| TASK:RAG:R09:002.S03 کنترل congruence entity/version/evidence | 003–004 | tuple نامتجانس قابل‌مصرف نباشد. |
+| TASK:RAG:R09:003.S01 خواندن projection مجاز همان حوزه | 005 | بدون permission response fields=0. |
+| TASK:RAG:R09:003.S02 UI نمایش حوزه و اقدام صریح switch | 002,005 | UI action و Backend state برابر باشند. |
+| TASK:RAG:R09:003.S03 تفکیک expiry از memory/case lifecycle | 006 | expiry نه case delete کند نه scope را گسترش دهد. |
+| TASK:RAG:R09:004.S01 منع personal data در shared index | 007 | private index write count=0. |
+| TASK:RAG:R09:004.S02 ثبت trace با allowlisted fields | 008 | scan متن/secret در payload=0. |
+| TASK:RAG:R09:004.S03 منع import/query جداول خصوصی | 007 | dependency scan private DB access=0. |
+
+**Acceptance Criteria — Given/When/Then و PASS/FAIL:**
+
+| AC / REQ | Given | When | PASS oracle | FAIL boundary |
+| --- | --- | --- | --- | --- |
+| AC:RAG:R09:001 / TEST:RAG:R09:001 | fact تأییدشده، فرضیهٔ مدل و evidence مرجع‌دار | مدل پاسخ تولید می‌کند | statusها جدا؛ فقط رویداد صریح کاربر یا مالک مجاز state hash را تغییر می‌دهد | فرضیه silent-confirm شود. |
+| AC:RAG:R09:002 / TEST:RAG:R09:002 | domain/role ثبت‌شده؛ درخواست تغییر domain در متن مدل | مدل پیام می‌دهد، سپس کاربر UI switch صریح می‌کند | قبل از action transition=0؛ پس از action Backend مجوز را دوباره می‌سنجد | model text به‌تنهایی مقصد را عوض کند. |
+| AC:RAG:R09:003 / TEST:RAG:R09:003 | دو محصول همنام از دو بانک و یک alias مستند | resolution اجرا می‌شود | دو stable IDs حفظ؛ alias فقط به mapping مستند وصل | همنامی باعث merge شود. |
+| AC:RAG:R09:004 / TEST:RAG:R09:004 | entity P1/S1 و evidenceهای entity-specific و مشترک؛ کاربر P2 را انتخاب می‌کند | query جدید برای P2 اجرا می‌شود | evidence وابسته به P1 رد؛ R05 فقط evidence مشترکی را نگه می‌دارد که scope آن برای P2 تأیید شده؛ oracle: prior-entity-only refs=0 | P1-specific evidence به‌عنوان شاهد P2 مصرف شود یا evidence مشترک بدون scope proof بماند. |
+| AC:RAG:R09:005 / TEST:RAG:R09:005 | درخواست انتقال یک field؛ consent دقیق غایب و سپس موجود | owner projection خوانده می‌شود | بی‌رضایت field=0؛ پس از consent خروجی subset مجاز | consent کلی/قدیمی سایر fieldها را باز کند. |
+| AC:RAG:R09:006 / TEST:RAG:R09:006 | session منقضی، memory و پروندهٔ باز | نشست جدید ساخته می‌شود | state موقت تازه؛ memory/case فقط از owner و policy خود | expiry پرونده را حذف/حوزه‌ای دیگر را بخواند. |
+| AC:RAG:R09:007 / TEST:RAG:R09:007 | پیام دارای personal data به index عمومی پیشنهاد می‌شود | ingestion اجرا می‌شود | shared index write=0 و API owner تنها مسیر داده | private DB fallback یا indexing رخ دهد. |
+| AC:RAG:R09:008 / TEST:RAG:R09:008 | trace حاوی random ID/status/reason؛ fixture دارای OTP | telemetry ثبت می‌شود | transition قابل بازسازی؛ secret/raw text scan=0 | OTP، prompt یا customer ID واقعی ثبت شود. |
+
+**Test Definitions و Planned Test Cases؛ اجرا نشده:**
+
+| TD | مثبت | منفی | مرزی | شکست |
+| --- | --- | --- | --- | --- |
+| TEST:RAG:R09:001 | TC:RAG:R09:001-P — event مالک fact را verified کند؛ status/event match | TC:RAG:R09:001-N — مدل فرضیه را fact بنامد؛ hash unchanged | TC:RAG:R09:001-B — کاربر مقدار فرضیه را اصلاح کند؛ فقط همان field update | TC:RAG:R09:001-F — verification API قطع؛ pending و بدون claim قطعی |
+| TEST:RAG:R09:002 | TC:RAG:R09:002-P — کاربر دامنه را تأیید کند؛ Backend انتقال را ثبت کند | TC:RAG:R09:002-N — model domain_id را جعل کند؛ reject/count=0 | TC:RAG:R09:002-B — تغییر به نقش Assistant منتشرنشده در R1؛ session فعال نشود و permission انتقال=0 | TC:RAG:R09:002-F — identity API خطا؛ نقش جدید فعال نشود |
+| TEST:RAG:R09:003 | TC:RAG:R09:003-P — alias شاهددار به ID درست وصل شود | TC:RAG:R09:003-N — دو بانک همنام ادغام نشوند؛ IDs=2 | TC:RAG:R09:003-B — display name تغییر؛ stable ID حفظ | TC:RAG:R09:003-F — owner ID resolve نشود؛ unresolved و غیرقطعی |
+| TEST:RAG:R09:004 | TC:RAG:R09:004-P — P1→P2، retrieval جدید با P2 | TC:RAG:R09:004-N — پاسخ P2 از evidence مختص P1؛ Citation Guard reject | TC:RAG:R09:004-B — همان product ID با Snapshot تازه؛ طبق R05/R06 بازبینی | TC:RAG:R09:004-F — R05 unavailable؛ P1-specific claim متوقف؛ هیچ shared evidence بدون scope validation مصرف نشود |
+| TEST:RAG:R09:005 | TC:RAG:R09:005-P — consent محدود field+purpose+target؛ همان subset برگردد | TC:RAG:R09:005-N — بدون consent؛ خروجی field=0 | TC:RAG:R09:005-B — consent یک field؛ سایر fieldها=0 | TC:RAG:R09:005-F — consent service timeout؛ transfer متوقف |
+| TEST:RAG:R09:006 | TC:RAG:R09:006-P — expiry نشست؛ case در owner باقی، memory طبق policy سرویس مالک | TC:RAG:R09:006-N — expiry سبب delete/revive case نشود | TC:RAG:R09:006-B — همان‌حوزه continuity حداقلی، داده غیرمرتبط omitted | TC:RAG:R09:006-F — owner unavailable؛ context unknown و بدون حدس |
+| TEST:RAG:R09:007 | TC:RAG:R09:007-P — projection مجاز؛ shared index ثابت | TC:RAG:R09:007-N — private DB/index write؛ architecture gate fail | TC:RAG:R09:007-B — پیام ترکیبی؛ فقط public refs در index | TC:RAG:R09:007-F — access denied؛ private fallback ممنوع |
+| TEST:RAG:R09:008 | TC:RAG:R09:008-P — trace allowlist بازسازی state کند | TC:RAG:R09:008-N — OTP/raw text در log؛ scan fail | TC:RAG:R09:008-B — event replay؛ transition count=1 | TC:RAG:R09:008-F — telemetry sink down؛ C01 handoff، بدون payload حساس |
+
+**قراردادها و Handoff:** C02→R09: actor/session/consent از C02؛ memory projection از سرویس مالک مشخص‌شده در B05؛ C05a/C05b→R09: stable service/product IDs از مالکان؛ R03→R09: evidence/Snapshot refs؛ R09→R01/R05/R06: context/change event؛ R09→C01/C14: minimized trace/history. هر مرز از API/قرارداد نسخه‌دار موجود استفاده می‌کند؛ R09 canonical write ندارد.
+
+**تصمیم‌های باز:** schema/API دقیق، UI نمایش فرضیه، retention/deletion طبق B05/C02، alias merge در C05b، confidence و جزئیات consent. مقدار یا policy جدید تعیین نشده است.
+
+**RA مستقل — PASS:** 8/8 source/graph resolved و متن مصوب تطبیق؛ atomicity، ownership، dependency، privacy، security، frontend/backend/API و failure پوشش داده شد؛ duplicate=0؛ inferred-edge requirement=0. **IPA مستقل — PASS:** 8/8 Requirement→EN→Task→Subtask→AC→TD و reverse=8/8؛ 32 case اختصاصی؛ DAG cycle=0؛ Product Tests اجرا نشده. **Test design:** 8 TD/32 planned cases، همه NOT_EXECUTED.
+
+### R10 — محاسبهٔ قطعی و قرارداد Adviser–Core
+
+**وضعیت:** RA=PASS / IPA=PASS؛ PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED.
+
+**Scope و مرز مالکیت:** قرارداد/adapter فراخوانی محاسبهٔ مالی قطعی از Adviser با ورودی، Snapshot/قاعدهٔ نسخه‌دار، نتیجهٔ قابل‌استناد و شکست امن. مالک محاسبه و API آن Core/Deterministic Calculation Adapter؛ C01 مالک قرارداد مشترک و توصیه‌گر فعلی؛ C05b مالک محصول/Snapshot؛ R09 context؛ R05 evidence؛ R06 Claim/Citation/answer disposition؛ C02 authorization؛ C01/C14 observability/history. R10 scoring، eligibility، ثبت درخواست یا دفترکل تازه ایجاد نمی‌کند.
+
+**تعیین دامنه و گراف مشترک:** Graph nodes docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_adr_rag_29، docs_shahab_phase_2_development_blueprint_adr_rag_37، docs_shahab_phase_2_development_blueprint_adr_rag_07، docs_shahab_phase_2_development_blueprint_core_recommender_ownership و قراردادهای DocumentIdentity/Version، EvidenceUnit/Provision، ClaimEvidenceLink و KnowledgeSnapshot resolve شدند. Blueprint §3.9.1 ADR-RAG-29/32/37 (409–453)، §3.9.3 (480–490)، §3.9.4 (492–500)، فصل دوم §13 (1192–1216)، §12 (1627–1635) و §5.6 (2075) بازخوانی شد. ADR-RAG-32 محاسبهٔ اقساط/نرخ/سناریو را deterministic، آزموده و نسخه‌دار می‌داند؛ B:1627–1633 مالکیت Core و فراخوانی هم‌زمان را تثبیت می‌کند. ADR-RAG-29 فقط شناسه پایدار را الزام می‌کند؛ Core/C05b مالک canonical identity می‌ماند. Hashها با §۰ برابر و یال‌های inferred مبنای الزام نیستند. Wallet V0.20 کامل بررسی شد؛ W:1385–1427 قیمت مشاوره/عملیات و هزینهٔ کیف پول است و فرمول محاسبهٔ اقساط/نرخ RAG محسوب نمی‌شود؛ قواعد کیف پولی یا مالی دیگری به R10 منتقل نشده‌اند.
+
+**Candidate / Requirement Registry — Source → Requirement → Enabler → Task → AC → Test:**
+
+| Candidate / Requirement | رفتار اتمی | Source Unit / Graph Reference | مالک | Enabler / Task | AC / Test |
+| --- | --- | --- | --- | --- | --- |
+| CAND:RAG:R10:001 / REQ:RAG:R10:001 | هر محاسبه از API نسخه‌دار Core باشد؛ LLM/browser arithmetic ممنوع. | B:424–428، 1627–1633؛ docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_core_recommender_ownership | Core calculator؛ Adviser adapter | EN:RAG:R10:001 / TASK:RAG:R10:001 | AC:RAG:R10:001 / TEST:RAG:R10:001 |
+| CAND:RAG:R10:002 / REQ:RAG:R10:002 | ورودی نوع‌دار، همراه provenance/status تأیید باشد؛ نرخ/شرط/پیش‌فرض مالی از متن حدس زده نشود. | B:424–428، 480–488؛ ADR-RAG-31:419–423؛ docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_adr_rag_31 | Core contract؛ C02 data access | EN:RAG:R10:001 / TASK:RAG:R10:001 | AC:RAG:R10:002 / TEST:RAG:R10:002 |
+| CAND:RAG:R10:003 / REQ:RAG:R10:003 | هر محاسبه یک Snapshot محصول و یک نسخه سازگار قواعد/محاسبه داشته و tuple در خروجی بماند. | B:485,490، 1216، 1631–1633؛ docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_core_recommender_ownership | Core/C05b | EN:RAG:R10:001 / TASK:RAG:R10:002 | AC:RAG:R10:003 / TEST:RAG:R10:003 |
+| CAND:RAG:R10:004 / REQ:RAG:R10:004 | خروجی با واحد/فرض/نسخه/شناسه محصول سازگار به R06 برسد تا به claim/evidence درست وصل شود. | B:261، 424–428، 450–453، 480–486 و 508؛ docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_adr_rag_37 | Core result; R06 citation | EN:RAG:R10:002 / TASK:RAG:R10:002 | AC:RAG:R10:004 / TEST:RAG:R10:004 |
+| CAND:RAG:R10:005 / REQ:RAG:R10:005 | computed value، eligibility، recommendation ranking و transaction/action status خروجی جدا داشته باشند. | B:424–428، 1627–1635؛ docs_shahab_phase_2_development_blueprint_adr_rag_32، docs_shahab_phase_2_development_blueprint_core_recommender_ownership | Core calculator/recommender؛ owners مربوط | EN:RAG:R10:002 / TASK:RAG:R10:003 | AC:RAG:R10:005 / TEST:RAG:R10:005 |
+| CAND:RAG:R10:006 / REQ:RAG:R10:006 | input نامعتبر، Snapshot ناسازگار یا calculator unavailable status روشن بدهد؛ LLM عدد جایگزین نسازد. | B:261، 424–428، 492–500، 1631؛ docs_shahab_phase_2_development_blueprint_adr_rag_07، docs_shahab_phase_2_development_blueprint_adr_rag_32 | Core status؛ R06 disposition | EN:RAG:R10:002 / TASK:RAG:R10:003 | AC:RAG:R10:006 / TEST:RAG:R10:006 |
+| CAND:RAG:R10:007 / REQ:RAG:R10:007 | Adviser نتیجه را با source/version/time/limits قابل پشتیبانی نمایش دهد و پذیرش بانک را تضمین نکند. | B:261، 450–453، 496–500، 1633؛ docs_shahab_phase_2_development_blueprint_adr_rag_37، docs_shahab_phase_2_development_blueprint_adr_rag_32 | R06 answer; C05b evidence | EN:RAG:R10:002 / TASK:RAG:R10:004 | AC:RAG:R10:007 / TEST:RAG:R10:007 |
+| CAND:RAG:R10:008 / REQ:RAG:R10:008 | call کوتاه authenticated/authorized، timeout-limited، traceable و privacy-minimized باشد؛ شکست Core پاسخ ساختگی نسازد. | B:1192–1216، 1631، 2075؛ docs_shahab_phase_2_development_blueprint_adr_rag_14، docs_shahab_phase_2_development_blueprint_adr_rag_32 | C01/C02/Core | EN:RAG:R10:003 / TASK:RAG:R10:004 | AC:RAG:R10:008 / TEST:RAG:R10:008 |
+
+**Enablerها:** EN:RAG:R10:001 ورودی و اجرای versioned Core (001–003؛ oracle: یک tuple و صفر محاسبهٔ client/LLM). EN:RAG:R10:002 نتیجهٔ مستند و جدا از eligibility/ranking (004–007؛ oracle: هر عدد به result/source وصل است). EN:RAG:R10:003 API امن و قابل مشاهده (008؛ oracle: auth, timeout, bounded retry, trace، بدون payload).
+
+**Taskها:**
+
+| Task | مالک / نیازمندی | خروجی و completion oracle |
+| --- | --- | --- |
+| TASK:RAG:R10:001 — قرارداد ورودی و اتصال deterministic port | Core owner؛ R10 consumer؛ 001–002 | type/provenance contract؛ unknown required input مانع invocation است؛ API version از C01. |
+| TASK:RAG:R10:002 — Snapshot binding و result provenance | Core/C05b producer؛ Adviser consumer؛ 003–004 | result envelope به یک tuple و ClaimEvidenceLink قابل resolve متصل است. |
+| TASK:RAG:R10:003 — جداسازی outputها و خطای دامنه | Core/R06؛ 005–006 | disposition برای error/unknown؛ failure هرگز numeric result ندارد. |
+| TASK:RAG:R10:004 — API hardening، UI، trace/monitoring | Adviser/C01/C14؛ 007–008 | کارت نتیجه مطابق response؛ latency/error/version کمینه؛ secrets/personal payload صفر. |
+
+**Subtaskها:**
+
+| Subtask | Requirement | Oracle |
+| --- | --- | --- |
+| TASK:RAG:R10:001.S01 type/requiredness و input provenance | 002 | required unknown invoke نشود؛ no LLM defaults. |
+| TASK:RAG:R10:001.S02 اتصال به Core port و منع client math | 001 | تنها یک owner calculator در dependency map. |
+| TASK:RAG:R10:001.S03 version negotiation و consumer contract | 001–002 | unsupported version پیش از محاسبه رد شود. |
+| TASK:RAG:R10:002.S01 bind product Snapshot و calc/rule version | 003 | mixed tuple count=0. |
+| TASK:RAG:R10:002.S02 اتصال result provenance به claim/evidence | 004 | هر ref به source/version حل شود. |
+| TASK:RAG:R10:002.S03 قرارداد نمایش unit/source/assumption | 004,007 | فقط fields مجاز owner در UI. |
+| TASK:RAG:R10:003.S01 جداسازی computed value/eligibility/ranking/action | 005 | fixtureها چهار مقدار را مستقل تغییر دهند. |
+| TASK:RAG:R10:003.S02 map کردن error به clarification/limited/abstain | 006 | بدون successful Core result هیچ عدد منتشر نشود. |
+| TASK:RAG:R10:003.S03 حفظ status در mismatch/timeout | 006,008 | unavailable واضح و traceable بماند. |
+| TASK:RAG:R10:004.S01 auth/scope و data minimization | 008 | unauthorized call قبل از ارسال payload رد شود. |
+| TASK:RAG:R10:004.S02 timeout/retry/correlation metrics | 008 | bounded طبق policy موجود؛ حد جدید ساخته نشود. |
+| TASK:RAG:R10:004.S03 render result یا error در چت | 007 | UI با response/Core status برابر باشد. |
+
+**Acceptance Criteria:**
+
+| AC / REQ | Given | When | PASS oracle | FAIL boundary |
+| --- | --- | --- | --- | --- |
+| AC:RAG:R10:001 / TEST:RAG:R10:001 | API version معتبر و درخواست محاسبه | Adviser invoke کند | Core port تنها calculator؛ invocation client/LLM=0 | محاسبهٔ browser/مدل نتیجه برگرداند. |
+| AC:RAG:R10:002 / TEST:RAG:R10:002 | مبلغ تأییدشده، نرخ نامطمئن و term لازم نامعلوم | محاسبه درخواست شود | unknown مانع call یا status missing می‌دهد؛ no synthesized numeric input | نرخ یا term پیش‌فرض حدس زده شود. |
+| AC:RAG:R10:003 / TEST:RAG:R10:003 | Core S1/R1؛ S2 هم‌زمان staged | call شروع و تمام شود | تمام response با S1/R1 متصل؛ mixed-version fields=0 | نتیجه از Snapshotهای مختلف ساخته شود. |
+| AC:RAG:R10:004 / TEST:RAG:R10:004 | result دارای source, assumption, version و claim | R06 answer بسازد | هر عدد نمایشی به result/source tuple resolve و support status داشته باشد | URL موضوعی تنها شاهد شمرده شود. |
+| AC:RAG:R10:005 / TEST:RAG:R10:005 | محاسبه و eligibility/ranking/action fixtures مستقل | output compose شود | typed fields مستقل باقی بمانند؛ تغییر یکی بقیه را overwrite نکند | ranking به approval یا transaction تعبیر شود. |
+| AC:RAG:R10:006 / TEST:RAG:R10:006 | invalid_input، version mismatch یا unavailable | Adviser پاسخ می‌سازد | exact error به R06 برسد و clarify/limited/abstain شود؛ numeric fallback=0 | LLM مقدار را تخمین/ترمیم کند. |
+| AC:RAG:R10:007 / TEST:RAG:R10:007 | result معتبر با source/version/limits | chat card render شود | مقدار/واحد/فرض/حدود برابر envelope؛ no acceptance guarantee | client عدد را تغییر دهد یا هشدار حذف شود. |
+| AC:RAG:R10:008 / TEST:RAG:R10:008 | authorized session، delayed Core، sensitive input، outage | API call انجام شود | auth قبل از payload؛ bounded retries؛ trace بدون raw data؛ payload scan=0 | unbounded retry، OTP/log یا success روی timeout. |
+
+**Test Definitions و Planned Cases؛ محصول اجرا نشده:**
+
+| TD | مثبت | منفی | مرزی | شکست |
+| --- | --- | --- | --- | --- |
+| TEST:RAG:R10:001 | TC:RAG:R10:001-P — supported version نتیجهٔ Core بدهد؛ contract IDs برابر | TC:RAG:R10:001-N — پیشنهاد arithmetic در browser reject شود | TC:RAG:R10:001-B — نسخه جدید فقط در صورت compatibility صریح انتخاب شود | TC:RAG:R10:001-F — Core port غایب؛ no local fallback |
+| TEST:RAG:R10:002 | TC:RAG:R10:002-P — ورودی تأییدشده و provenance وارد envelope شود | TC:RAG:R10:002-N — unverified rate به confirmed تبدیل نشود | TC:RAG:R10:002-B — optional field مجاز غایب؛ omission مطابق قرارداد | TC:RAG:R10:002-F — required term نامعلوم؛ R06 clarification |
+| TEST:RAG:R10:003 | TC:RAG:R10:003-P — S1/R1 در تمام نتیجه یکسان | TC:RAG:R10:003-N — S2 در request S1 mix؛ validation fail | TC:RAG:R10:003-B — pointer حین درخواست عوض شود؛ call pin شود | TC:RAG:R10:003-F — Core tuple ناسازگار؛ result quarantine |
+| TEST:RAG:R10:004 | TC:RAG:R10:004-P — عدد هر claim به نتیجه و source وصل | TC:RAG:R10:004-N — عدد بی‌ارجاع Citation Guard block | TC:RAG:R10:004-B — source validity uncertain؛ R06 policy عدم‌قطعیت را حفظ | TC:RAG:R10:004-F — evidence resolver down؛ هیچ claim legal/product نشود |
+| TEST:RAG:R10:005 | TC:RAG:R10:005-P — computed amount مستقل از ranking/status | TC:RAG:R10:005-N — ranking به eligibility approval تبدیل نشود | TC:RAG:R10:005-B — محصول معتبر اما پذیرش بانک نامعلوم؛ distinction حفظ | TC:RAG:R10:005-F — downstream eligibility down؛ calc خروجی را جعل نکند |
+| TEST:RAG:R10:006 | TC:RAG:R10:006-P — invalid input error دقیق و قابل‌رفع | TC:RAG:R10:006-N — LLM estimate جایگزین نشود | TC:RAG:R10:006-B — out-of-scope به route/abstain محدود شود | TC:RAG:R10:006-F — timeout؛ status unavailable/unknown |
+| TEST:RAG:R10:007 | TC:RAG:R10:007-P — result card با units/source/version دقیق | TC:RAG:R10:007-N — UI عدد یا warning را تغییر ندهد | TC:RAG:R10:007-B — partial envelope فقط supported fieldها را نشان دهد | TC:RAG:R10:007-F — schema ناشناخته؛ card مخفی و خطای کنترل‌شده |
+| TEST:RAG:R10:008 | TC:RAG:R10:008-P — scoped call و privacy-safe trace | TC:RAG:R10:008-N — unauthorized request قبل از payload denied | TC:RAG:R10:008-B — transient timeout از policy retry موجود تبعیت کند | TC:RAG:R10:008-F — outage تکراری؛ failure آشکار، بدون داده حساس |
+
+**قراردادها و Handoff:** R10→Core/C01: API محاسبهٔ هم‌زمان نسخه‌دار؛ C05b→R10: product Snapshot و stable IDs؛ R09/C02→R10: context/consent/input projection؛ R03/R05→R10: evidence/version refs؛ R10→R06: result/status/provenance؛ R10→C01/C14: trace/latency/error. Core مالک محاسبه و داده؛ Adviser private tables نمی‌خواند.
+
+**تصمیم‌های باز:** فرمول و فیلد هر use case، endpoint/schema، واحد و rounding دامنه، timeout/retry/circuit threshold، confidence و acceptance target. REQ:CORE:008/:009 و TASK:CORE:004 برای recommendation reuse می‌شوند؛ R10 scorer یا قواعد صلاحیت را بازتعریف نمی‌کند.
+
+**RA مستقل — PASS:** 8/8 source و Graph node resolved؛ atomicity، ownership، decision state، source coverage و dependencies بررسی؛ duplicate scorer/API=0؛ Backend/API/DB-boundary/UI/security/privacy/monitoring/failure پوشش دارد. **IPA مستقل — PASS:** 8/8 Requirement به EN/Task/Subtask/AC/TD و چهار Case P/N/B/F متصل؛ reverse trace=8/8؛ hard dependency cycle=0. **Test design:** 8 TD/32 planned cases، NOT_EXECUTED.
+
+**جمع‌بندی R09/R10:** هر بسته: 8 Requirement، 3 Enabler، 4 Task، 12 Subtask، 8 AC و TD، 32 Planned Test Case. مجموع افزوده‌شده: 16 Requirement/Candidate، 6 Enabler، 8 Task، 24 Subtask، 16 AC/TD و 64 Test Case. Product Tests همگی NOT_EXECUTED هستند.
+
+**CPA مشترک R09/R10 — PASS پس از بازبینی مستقل:**
+
+| CPA Gate | نتیجه و شاهد |
+| --- | --- |
+| CPA-01 پوشش | PASS — context/session/entity/evidence و calculation/API/claim هرکدام مسیر اجرایی مستقل دارند. |
+| CPA-02 مالکیت | PASS — C02 identity/permission؛ designated User Memory owner؛ C05a service؛ C05b product؛ R03 canonical evidence؛ R01/R05 route/retrieval؛ R06 answer؛ Core calculator؛ C01/C14 shared controls؛ cross-owner writes=0. |
+| CPA-03 وابستگی | PASS — R09 از owners مصرف و به R01/R05/R06 handoff می‌کند؛ R10 به R09/C02/Core/C05b/R03/R05 و R06 وابسته؛ hard cycle=0. |
+| CPA-04 تکرار/تعارض | PASS — R09 حافظه/مجوز/catalog/retrieval را بازنویسی نمی‌کند؛ R10 scorer/eligibility/ledger را کپی نمی‌کند؛ duplicate=0. |
+| CPA-05 قرارداد | PASS — API versioned Core و owner APIs موجود مصرف می‌شوند؛ physical schema/endpoint جعل نشده است. |
+| CPA-06 تصمیم‌ها | PASS — retention/schema/formula/units/rounding/threshold/SLA/confidence باز می‌مانند؛ سیاست تازه=0. |
+| CPA-07 ردیابی | PASS — 16/16 REQ با Source/Graph→EN→Task→Subtask→AC→TD→4 cases و reverse trace. |
+| CPA-08 Regression | PASS — قرارداد C01/C02/C05a/C05b و مرز R01–R08 حفظ؛ موضوعات R09/R10 در مالکیت‌های پیشین تکرار نشده‌اند. |
 
 ---
+
+### Checkpoint جاری پس از R09/R10
+
+- بسته‌های پذیرفته‌شدهٔ برنامه: **۲۸/۳۶**؛ باقی‌مانده **۸/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۰/۸.
+- R09: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC/TD و ۳۲ Planned Test Case؛ RA/IPA=PASS.
+- R10: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC/TD و ۳۲ Planned Test Case؛ RA/IPA=PASS.
+- RAG مجموع R01–R10: ۹۵ Requirement/Candidate، ۳۸ Enabler، ۴۸ Task، ۱۴۴ Subtask، ۹۵ AC/TD و ۳۰۰ Planned Test Case. Product Tests NOT_EXECUTED.
 
 ## ۳. برنامه Assistant — ۸ بسته
 
