@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01 تا C12a.** این فایل برنامهٔ پذیرفته‌شدهٔ C01 تا C12a و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01 تا C13a.** این فایل برنامهٔ پذیرفته‌شدهٔ C01 تا C13a و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -5732,17 +5732,17 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 
 | Requirement | AC ID | Test ID | معیار پذیرش | Test Definition |
 |---|---|---|---|---|
-| C12B-R01 | C12B-AC01 | C12B-T01 | حداقل روزانه و قابل بازتولید | آزمون نوبت روزانه و اجرای تکراری |
-| C12B-R02 | C12B-AC02 | C12B-T02 | پرونده با شناسه، مدرک، علت و عامل | بانک بدون ثبت متناظر و پرونده ناقص |
-| C12B-R03 | C12B-AC03 | C12B-T03 | cut، هدیه و وجه در راه جدا؛ فرمول نیازمند تایید | مرز زمانی و نبود تایید متخصص |
-| C12B-R04 | C12B-AC04 | C12B-T04 | نتیجه نامعلوم قبل از تصمیم استعلام شود | callback نامعلوم با inquiry موفق/نامعلوم |
-| C12B-R05 | C12B-AC05 | C12B-T05 | retry فقط همان operation و محدود | timeout، retry تکراری و عبور از سقف |
-| C12B-R06 | C12B-AC06 | C12B-T06 | پیام/replay اثر مالی دوم نسازد | duplicate event و provider redelivery |
-| C12B-R07 | C12B-AC07 | C12B-T07 | سه چرخه مستقل و linked بمانند | وضعیت خدمت، بانک و ledger متفاوت |
-| C12B-R08 | C12B-AC08 | C12B-T08 | فقط exposure نامعلوم نگه داشته شود | تعهد جزئی و آزادسازی پس از resolution |
-| C12B-R09 | C12B-AC09 | C12B-T09 | سابقه پایدار و access audit | بسته‌شدن حساب و دسترسی مجاز/غیرمجاز |
-| C12B-R10 | C12B-AC10 | C12B-T10 | هشدار مادی؛ تنظیمات باز بدون مقدار جعلی | کسری، نامعلومی طولانی و رخداد زیر آستانه |
-| C12B-R11 | C12B-AC11 | C12B-T11 | ارجاع به process موجود؛ بدون ادعای compliance | درخواست گزارش و مرزبندی وظیفه قانونی |
+| C12B-R01 | C12B-AC01 | C12B-TD01 | حداقل روزانه و قابل بازتولید | آزمون نوبت روزانه و اجرای تکراری |
+| C12B-R02 | C12B-AC02 | C12B-TD02 | پرونده با شناسه، مدرک، علت و عامل | بانک بدون ثبت متناظر و پرونده ناقص |
+| C12B-R03 | C12B-AC03 | C12B-TD03 | cut، هدیه و وجه در راه جدا؛ فرمول نیازمند تایید | مرز زمانی و نبود تایید متخصص |
+| C12B-R04 | C12B-AC04 | C12B-TD04 | نتیجه نامعلوم قبل از تصمیم استعلام شود | callback نامعلوم با inquiry موفق/نامعلوم |
+| C12B-R05 | C12B-AC05 | C12B-TD05 | retry فقط همان operation و محدود | timeout، retry تکراری و عبور از سقف |
+| C12B-R06 | C12B-AC06 | C12B-TD06 | پیام/replay اثر مالی دوم نسازد | duplicate event و provider redelivery |
+| C12B-R07 | C12B-AC07 | C12B-TD07 | سه چرخه مستقل و linked بمانند | وضعیت خدمت، بانک و ledger متفاوت |
+| C12B-R08 | C12B-AC08 | C12B-TD08 | فقط exposure نامعلوم نگه داشته شود | تعهد جزئی و آزادسازی پس از resolution |
+| C12B-R09 | C12B-AC09 | C12B-TD09 | سابقه پایدار و access audit | بسته‌شدن حساب و دسترسی مجاز/غیرمجاز |
+| C12B-R10 | C12B-AC10 | C12B-TD10 | هشدار مادی؛ تنظیمات باز بدون مقدار جعلی | کسری، نامعلومی طولانی و رخداد زیر آستانه |
+| C12B-R11 | C12B-AC11 | C12B-TD11 | ارجاع به process موجود؛ بدون ادعای compliance | درخواست گزارش و مرزبندی وظیفه قانونی |
 
 | Test Case | سناریوی برنامه‌ای | انتظار |
 |---|---|---|
@@ -5835,20 +5835,20 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 | Requirement | AC ID | Test ID | معیار پذیرش | Test Definition |
 |---|---|---|---|---|
-| C13A-R01 | C13A-AC01 | C13A-T01 | سه جریان درآمدی تفکیک؛ اشتراک به C04 | اشتراک و دو جریان خدمت در یک گزارش |
-| C13A-R02 | C13A-AC02 | C13A-T02 | prompt × شدت؛ metric/rate باز | دو شدت با metric تاییدنشده |
-| C13A-R03 | C13A-AC03 | C13A-T03 | نیم‌نرخ مصوب؛ سقف 20% fee نیست | مبلغ محاسبه‌شده پایین‌تر از cap |
-| C13A-R04 | C13A-AC04 | C13A-T04 | نرخ آغاز اجرا ثابت؛ اجرای تازه نرخ جاری | تغییر قیمت حین اجرا و اجرای تازه |
-| C13A-R05 | C13A-AC05 | C13A-T05 | replay/inquiry مصرف تازه نیست | پاسخ/رسید دوباره و اجرای تازه |
-| C13A-R06 | C13A-AC06 | C13A-T06 | usage، internal cost و customer price جدا | mismatch هزینه تامین‌کننده و قیمت |
-| C13A-R07 | C13A-AC07 | C13A-T07 | لغو/شکست و unknown جدا | خروجی تحویل‌شده، failure و unknown |
-| C13A-R08 | C13A-AC08 | C13A-T08 | اصلاح همان دامنه رایگان برای مشتری | اصلاح همان سفارش در برابر درخواست جدید |
-| C13A-R09 | C13A-AC09 | C13A-T09 | settlement پس از match؛ debit دوم صفر | اختلاف reconciliation و پرداخت تامین‌کننده |
-| C13A-R10 | C13A-AC10 | C13A-T10 | فاکتور رسمی پیش از پرداخت و linked | مسیر سازمانی درگاه و واریز |
-| C13A-R11 | C13A-AC11 | C13A-T11 | invoice به‌تنهایی credit/collection نیست | صدور invoice بدون وصول |
-| C13A-R12 | C13A-AC12 | C13A-T12 | چهار نوع سند جدا و OPEN | طبقه‌بندی چهار خروجی |
-| C13A-R13 | C13A-AC13 | C13A-T13 | tax/revenue recognition تایید تخصصی می‌خواهد | تلاش برای نتیجه‌گیری بدون تایید |
-| C13A-R14 | C13A-AC14 | C13A-T14 | نرخ/provider/activation صریحاً OPEN | گزارش بدون پیش‌فرض عددی/فنی |
+| C13A-R01 | C13A-AC01 | C13A-TD01 | سه جریان درآمدی تفکیک؛ اشتراک به C04 | اشتراک و دو جریان خدمت در یک گزارش |
+| C13A-R02 | C13A-AC02 | C13A-TD02 | prompt × شدت؛ metric/rate باز | دو شدت با metric تاییدنشده |
+| C13A-R03 | C13A-AC03 | C13A-TD03 | نیم‌نرخ مصوب؛ سقف 20% fee نیست | مبلغ محاسبه‌شده پایین‌تر از cap |
+| C13A-R04 | C13A-AC04 | C13A-TD04 | نرخ آغاز اجرا ثابت؛ اجرای تازه نرخ جاری | تغییر قیمت حین اجرا و اجرای تازه |
+| C13A-R05 | C13A-AC05 | C13A-TD05 | replay/inquiry مصرف تازه نیست | پاسخ/رسید دوباره و اجرای تازه |
+| C13A-R06 | C13A-AC06 | C13A-TD06 | usage، internal cost و customer price جدا | mismatch هزینه تامین‌کننده و قیمت |
+| C13A-R07 | C13A-AC07 | C13A-TD07 | لغو/شکست و unknown جدا | خروجی تحویل‌شده، failure و unknown |
+| C13A-R08 | C13A-AC08 | C13A-TD08 | اصلاح همان دامنه رایگان برای مشتری | اصلاح همان سفارش در برابر درخواست جدید |
+| C13A-R09 | C13A-AC09 | C13A-TD09 | settlement پس از match؛ debit دوم صفر | اختلاف reconciliation و پرداخت تامین‌کننده |
+| C13A-R10 | C13A-AC10 | C13A-TD10 | فاکتور رسمی پیش از پرداخت و linked | مسیر سازمانی درگاه و واریز |
+| C13A-R11 | C13A-AC11 | C13A-TD11 | invoice به‌تنهایی credit/collection نیست | صدور invoice بدون وصول |
+| C13A-R12 | C13A-AC12 | C13A-TD12 | چهار نوع سند جدا و OPEN | طبقه‌بندی چهار خروجی |
+| C13A-R13 | C13A-AC13 | C13A-TD13 | tax/revenue recognition تایید تخصصی می‌خواهد | تلاش برای نتیجه‌گیری بدون تایید |
+| C13A-R14 | C13A-AC14 | C13A-TD14 | نرخ/provider/activation صریحاً OPEN | گزارش بدون پیش‌فرض عددی/فنی |
 
 | Test Case | سناریوی برنامه‌ای | انتظار |
 |---|---|---|
@@ -5884,14 +5884,12 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 #### SHAHAB_PHASE2_NEXT_MISSION_HANDOFF
 
-- Repo Brotherlouiee/shahab-demo؛ PR #251؛ branch docs/phase2-unified-implementation-plan؛ base main؛ سند docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md. HEAD و Commitهای نهایی در این مأموریت پس از انتشار واقعی ثبت شوند.
-- PR #253 (اصلاح classifier) و #255 (AGENTS/Runbook) در main بررسی و Merge بودن تأیید شد. Runbook از main خوانده شد.
-- منابع: Blueprint V1.6 و Wallet V0.20؛ Graph Report و semantic/structural graphs و validation در knowledge-graph/phase2-reference-docs؛ AGENTS.md و docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md.
-- برنامه: 36 بسته؛ 16 پذیرفته؛ 20 باقی؛ C12b و C13a RA/IPA PASS؛ CPA 8/8 PASS.
-- بعدی از رجیستری: C13b «تجربه و پشتیبانی کیف پول»، سپس C14 «سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک»؛ هر دو NOT_STARTED و باید در چت بعدی دوباره احراز شوند.
-- Open decisions مهم: SLA/cut/formula/retry reconciliation؛ metric و نرخ‌های عددی؛ هزینه Monitoring؛ نوع سند/زمان درآمد/مالیات؛ provider و زمان فعال‌سازی.
-- درس‌آموخته: fetch_file برای سند حجیم محتوای خالی داد؛ Blob کامل از SHA گرفته شد و متن/طول/خطوط مبنا بررسی شد. در چت بعدی نبود محتوا را از پاسخ خالی ابزار نتیجه نگیر.
-- Git/CI: این مأموریت باید دو Commit مستقل و یک Push داشته باشد؛ فقط سند Markdown مجاز؛ CI بر HEAD واقعی بررسی شود. Build/Test محصول و rerun دستی ممنوع.
+- **هویت پروژه:** Brotherlouiee/shahab-demo؛ PR #251؛ branch docs/phase2-unified-implementation-plan؛ base main؛ سند docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md. در checkpoint بازبینی پیش از این Commit، HEAD برابر 693b8108d15595e1fb8d790989a1bea7fe08bb6b بود؛ HEAD جاری را چت بعدی از PR بخواند.
+- **منابع حاکم و هش‌های تأییدشده:** Blueprint V1.6، ۲٬۵۵۰ خط، SHA-256 0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266؛ Wallet V0.20، ۱٬۷۸۰ خط، SHA-256 8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74؛ هش‌ها از Blobهای main محاسبه و با Graph Report تطبیق داده شدند. گراف knowledge-graph/phase2-reference-docs: validation PASS، ۱٬۱۸۰ node، ۱٬۳۴۵ edge، ۲۲ chunk؛ بازسازی/تغییر نشد. AGENTS.md و docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md از main خوانده شدند؛ PR #253 و #255 Merge و تغییراتشان در main تأیید شد.
+- **وضعیت برنامه:** ۳۶ واحد مستقل؛ ۱۶ پذیرفته و ۲۰ باقی؛ C12b و C13a هر دو RA/IPA PASS؛ CPA-01..08 PASS. تصمیم‌های باز: cut/فرمول/SLA/حدود Retry؛ metric و نرخ عددی؛ Monitoring؛ نوع سند و درآمد/مالیات؛ provider و فعال‌سازی.
+- **مأموریت بعدی:** C13b — تجربه و پشتیبانی کیف پول، سپس C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک؛ هر دو در رجیستری NOT_STARTED و بدون blocker ثبت‌شده‌اند. عنوان/وضعیت و وابستگی‌ها را چت بعدی دوباره از رجیستری احراز کند.
+- **Git و CI:** Commitهای مأموریت تا checkpoint بازبینی: 35cb324a1e018a67da87ed76f18381a8838dc1e1 (تدوین دو بسته) و 693b8108d15595e1fb8d790989a1bea7fe08bb6b (تکمیل جدول‌های AC/Test). این Commit سوم فقط شناسه‌های Test Definition را از شناسه Task جدا و Handoff را با شواهد تکمیل می‌کند؛ SHA آن از تاریخچه PR قابل مشاهده است. Diff فقط سند Markdown است. CI روی 693b8108: Classification/Markdown و secret scan PASS؛ Quality، PostgreSQL، Browser، SAST/SCA، Container و US-13 SKIPPED؛ Redis/Trivy NOT_TRIGGERED. پس از این Commit، CI جاری را از HEAD جدید بخوان. Build/Product Test اجرا نشد؛ هیچ Workflow دستی rerun نشد.
+- **درس‌آموخته:** fetch_file برای سند حجیم محتوای خالی برگرداند؛ Blob با SHA از Git Tree خوانده و طول/خطوط کنترل شد. پاسخ خالی ابزار را نبود فایل تلقی نکن؛ متن کامل، ساختار Git و هش ریموت را جداگانه کنترل کن.
 
 #### NEXT_CHAT_BOOTSTRAP_PROMPT
 
