@@ -1,0 +1,26 @@
+{
+  "source_blobs": [
+    {
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "lines": 2551
+    },
+    {
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "lines": 1780
+    }
+  ],
+  "heading_count": 326,
+  "table_count": 58,
+  "source_unit_count": 384,
+  "candidate_paragraph_count": 1110,
+  "method": "Heading extraction and Markdown table delimiter detection; paragraph candidates are NOT validated atomic requirements",
+  "limitations": [
+    "Semantic classification and Graphify mapping not yet completed",
+    "No claim of executable requirement coverage",
+    "Execution trace is intentionally UNVERIFIED",
+    "Tables inside fenced code excluded"
+  ],
+  "status": "STRUCTURAL_BASELINE_ONLY"
+}
