@@ -18,12 +18,19 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 96 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 6 نگاشت معنایی بررسی‌شده |
-| ردیف‌های pending review | 1537؛ این‌ها شکاف قطعی نیستند |
-| Atomic Obligationهای تأییدشده | 4 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 4/2/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 97 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 7 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 84 از 470 ردیف جدول، 0 از 27 بلوک fenced |
+| ردیف‌های pending review | 1536؛ این‌ها شکاف قطعی نیستند |
+| Atomic Obligationهای دارای نگاشت Covered | 9 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 9/3/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
+
+## پیشرفت دسته‌ای
+
+| Batch ID | Candidate IDs | Reviewed Before→After | Pending Before→After | Atomic Obligations | Covered/Partial/Uncovered | Open Decisions |
+|---|---|---:|---:|---:|---:|---:|
+| PILOT-001 | BP-TR-007-03, WL-C-1098, BP-C-0100 | 96→97 | 1537→1536 | 9 | 5/4/0 | 4 |
 
 ## کنترل‌های ماشینی
 
@@ -35,9 +42,10 @@
 | محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکتایی Atomic Obligation ID | PASS | 4 ID ثبت‌شده؛ فعلاً هیچ الزام اتمی نهایی نشده است |
+| یکپارچگی دفتر Atomic Obligation | PASS | 13 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 3 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8766؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8767؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |

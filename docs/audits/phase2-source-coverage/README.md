@@ -4,31 +4,32 @@
 
 ## وضعیت فعلی
 
-- ۳۲۶ عنوان و ۵۸ جدول Markdown (۳۸۴ واحد ساختاری) ثبت شده‌اند.
-- ۱٬۱۳۶ محدودهٔ متنی غیرجدولی، ۴۷۰ سطر سرآیند/دادهٔ جدول و ۲۷ بلوک fenced ثبت شده‌اند. از ۱٬۱۱۰ candidate اولیه، ۲۶ محدودهٔ متنی از قلم افتاده بود و با شناسه‌های افزوده بازیابی شد.
+شمارنده‌ها و وضعیت جاری از اجرای `build_and_validate.py` در `validation-report.json` و `semantic-validation-report.md` خوانده می‌شوند؛ اعداد این فایل راهنما منبع حقیقت نیستند.
+
+- عنوان‌ها، جدول‌ها، محدوده‌های متنی، سطرهای داده و بلوک‌های fenced از متن مرجع بازاستخراج می‌شوند؛ شمارندهٔ جاری و کنترل اختلاف با baseline در گزارش تولیدشده است.
 - Git blob SHA و SHA-256 هر دو منبع در `extraction-manifest.json` هستند؛ گراف پین‌شده Graphify با SHA-256 محتوای این دو منبع هم‌خوان است.
 - تمام ۳۶ بسته در `package-execution-index.csv` ثبت شده‌اند.
-- ۳٬۰۶۴ locator و disposition قبلی بسته‌ها از سند برنامه در `package-semantic-evidence.csv` وارد شده‌اند؛ این شواهد پیشین‌اند و بازبینی مستقل تازه محسوب نمی‌شوند. خلاصهٔ بسته‌ای در `package-semantic-audit.csv` این محدودیت را صریح ثبت می‌کند.
-- دفتر `semantic-review-dispositions.csv` تعیین‌تکلیف مستقل ۵۸ سرستون جدول و ۱۱ جداکنندهٔ صرفاً قالب‌بندی را نگه می‌دارد؛ سطرهای داده، متن‌ها و بلوک‌های کد همچنان نیازمند بازبینی هستند.
-- هر ۳۲۶ عنوان و ۵۸ ظرف جدول در `source-unit-review-dispositions.csv` به‌عنوان locator ساختاری تعیین‌تکلیف شده‌اند؛ این کار محتوای متنی زیرعنوان یا سطرهای دادهٔ جدول را تأیید نمی‌کند.
-- طبقه‌بندی‌های ماشینی صرفاً سرنخ‌اند. هیچ Atomic Obligation یا نگاشت اجرا به‌عنوان معنایی‌تأییدشده/`VERIFIED_COVERED` ثبت نشده است.
-- تا زمان بازبینی انسانی، ستون `normative_status` برای همهٔ candidateها `NEEDS_REVIEW` است؛ دسته‌بندی قاعده‌محور جداگانه با عنوان `classification_suggestion` نگه‌داری می‌شود.
+- `package-semantic-evidence.csv` شواهد قبلی برنامه را برای مسیریابی نگه می‌دارد؛ واردشدن آن به دفتر به معنی بازبینی مستقل تازه نیست. خلاصهٔ بسته‌ای در `package-semantic-audit.csv` این محدودیت را ثبت می‌کند.
+- دفتر `semantic-review-dispositions.csv` نگه‌دارندهٔ تعیین‌تکلیف معنایی Candidateهاست. Ledger ساختاری فقط عنوان/ظرف جدول را به‌عنوان locator ثبت می‌کند و محتوای متن یا سطرهای داده را تأیید نمی‌کند.
+- طبقه‌بندی‌های ماشینی صرفاً سرنخ‌اند. قضاوت Candidateها در `semantic-review-dispositions.csv` و الزام‌های اتمی در `atomic-obligation-dispositions.csv` ثبت می‌شوند؛ یک Candidate مرکب می‌تواند چند الزام مستقل داشته باشد.
+- `semantic-batch-progress.csv` فقط عضویت و ترتیب Candidateهای هر دسته را نگه می‌دارد. نتیجه، شمارنده‌ها و پوشش از اتصال آن به Ledger معنایی و دفتر Atomic Obligation بازتولید می‌شوند.
+- تا زمان بازبینی هر Candidate، `normative_status` آن `NEEDS_REVIEW` می‌ماند؛ پیشنهاد قاعده‌محور در `classification_suggestion` جداست.
 
-**MATRIX_BUILD_STATUS: `INCOMPLETE`** — ساختارها، متن‌ها، سطرهای جدول و index بسته‌ها ثبت شده‌اند؛ بازبینی معنایی و اتمی‌سازی کامل نشده است.
-
-**PROGRAM_COVERAGE_STATUS: `INDETERMINATE`** — هنوز نمی‌توان پوشش کامل یا تعداد شکاف‌های واقعی را نتیجه گرفت.
+وضعیت‌های `MATRIX_BUILD_STATUS` و `PROGRAM_COVERAGE_STATUS` مستقل و پویا هستند؛ مقدار آخرین اجرا در ابتدای `semantic-validation-report.md` آمده است.
 
 ## فایل‌ها
 
 | فایل | محتوا |
 |---|---|
 | `source-inventory.csv` | عنوان‌ها، جدول‌ها، محدوده‌های متنی و fenced blocks؛ همراه hierarchy، خطوط، هش، graph references و وضعیت بازبینی |
-| `atomic-obligations.csv` | ۱٬۶۳۳ source candidate شامل پاراگراف‌ها، ردیف‌های جدول و code blocks؛ ستون Atomic Obligation ID تا بازبینی انسانی خالی می‌ماند |
-| `execution-trace.csv` | نگاشت‌های واژگانیِ پیشنهادی Source→Package/Requirement/Task/AC/Test؛ همه pending/unverified هستند |
+| `atomic-obligations.csv` | موجودی Candidateهای استخراج‌شده از متن، ردیف‌های جدول و code blockها؛ این فایل به‌تنهایی دفتر الزام‌های اتمی نیست |
+| `atomic-obligation-dispositions.csv` | یک یا چند الزام اتمی برای هر Candidate مرکب، با ردیابی منبع، Requirement، Task، AC/Test، شواهد برنامه و وضعیت تصمیم |
+| `semantic-batch-progress.csv` | فهرست و ترتیب Candidateهای انتخاب‌شده برای هر دسته؛ شمارنده‌ها از این فهرست و Ledgerهای مرجع بازتولید می‌شوند |
+| `execution-trace.csv` | نمای Candidateمحور از مسیرهای احتمالی Source→Package/Requirement/Task/AC/Test؛ تأییدهای معنایی از Ledgerهای جدا می‌آیند |
 | `package-execution-index.csv` | ۳۶ بسته و شناسه‌ها/ارجاع‌های استخراج‌شده از سند برنامه؛ شناسه‌های ذکرشده ممکن است مصرف‌کننده باشند، نه مالک |
 | `package-semantic-evidence.csv` | locatorهای منبع، candidate، requirement، task و AC/Test ثبت‌شده در بسته‌ها؛ برای مسیریابی شواهد، نه تأیید معنایی جدید |
 | `package-semantic-audit.csv` | شمارش شواهد واردشده برای ۳۶ بسته و وضعیت مستقل‌بودن بازبینی؛ فعلاً `NOT_CLAIMED` |
-| `semantic-review-dispositions.csv` | قضاوت‌های معنایی ردیفی با locator منبع، علت و بازبین؛ ورودی بازتولید وضعیت ردیف‌های review شده |
+| `semantic-review-dispositions.csv` | قضاوت معنایی هر Candidate با locator منبع، علت و بازبین؛ ورودی بازتولید وضعیت Candidate |
 | `source-unit-review-dispositions.csv` | تعیین‌تکلیف مستقل ۳۲۶ عنوان و ۵۸ ظرف جدول به‌عنوان locator ساختاری |
 | `coverage-gap-register.csv` | موارد نیازمند بازبینی؛ ردیف `PENDING_SEMANTIC_REVIEW` شکاف قطعی محسوب نمی‌شود |
 | `extraction-manifest.json` | منبع، blob SHA، SHA-256، آمار استخراج، گراف و محدودیت‌ها |

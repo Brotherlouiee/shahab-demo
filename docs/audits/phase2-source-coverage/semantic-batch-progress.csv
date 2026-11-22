@@ -1,0 +1,4 @@
+batch_id,selection_order,candidate_id,source_scope,already_reviewed_before_batch
+PILOT-001,1,BP-TR-007-03,"Blueprint §5.1, Table 5.1, row 03 (line 581)",true
+PILOT-001,2,WL-C-1098,"Wallet §12.2, decision-status paragraph (line 1664)",false
+PILOT-001,3,BP-C-0100,"Blueprint §5.1, prose row on threshold selection (line 586)",true
