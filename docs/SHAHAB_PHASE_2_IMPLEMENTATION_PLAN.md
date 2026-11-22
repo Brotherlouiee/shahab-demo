@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14، R01–R10 و A01–A04.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14، R01–R10 و A01–A04 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14، R01–R10 و A01–A06.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14، R01–R10 و A01–A06 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -21,8 +21,8 @@
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
 | RAG / Adviser | R01–R10 | 10 | R01–R10 پذیرفته‌شدهٔ برنامه‌ریزی؛ محصول اجرا نشده |
-| Assistant | A01–A08 | 8 | A01–A04 پذیرفته؛ A05–A08 در انتظار |
-| کل | ۳۶ بسته | 36 | ۳۰ پذیرفته‌شده؛ ۶ در انتظار |
+| Assistant | A01–A08 | 8 | A01–A06 پذیرفته؛ A07–A08 در انتظار |
+| کل | ۳۶ بسته | 36 | ۳۴ پذیرفته‌شده؛ ۲ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -8027,25 +8027,252 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 
 ### Checkpoint جاری پس از A03/A04
 
-- بسته‌های پذیرفتهٔ برنامه: **۳۲/۳۶**؛ باقی‌مانده **۴/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۴/۸.
+- بسته‌های پذیرفتهٔ برنامه: **۳۴/۳۶**؛ باقی‌مانده **۲/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۶/۸.
 - A03: ۱۵ Candidate، ۱۲ Requirement، ۳ Enabler، ۴ Task، ۱۳ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
 - A04: ۱۶ Candidate، ۱۳ Requirement، ۴ Enabler، ۴ Task، ۱۳ Subtask، ۱۳ AC/TD و ۵۲ Planned Test Case؛ RA/IPA=PASS.
-- مجموع A01–A04: ۵۱ Candidate، ۵۱ Requirement، ۱۴ Enabler، ۱۷ Task، ۵۷ Subtask، ۵۱ AC/TD و ۲۰۴ Planned Test Case؛ CPA A03/A04=8/8 PASS. همهٔ planned testها اجرا نشده‌اند؛ elapsed time `NOT_MEASURED`.
-- وضعیت PR: برنامهٔ مستنداتی؛ Product Tests اجرا نشده‌اند؛ A05–A08 تدوین نشده؛ هیچ پیاده‌سازی محصولی ادعا نمی‌شود.
+- A05: ۱۲ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- A06: ۱۴ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- مجموع A01–A06: ۷۷ Candidate، ۷۵ Requirement، ۲۲ Enabler، ۲۷ Task، ۸۹ Subtask، ۷۵ AC/TD و ۳۰۰ Planned Test Case؛ CPA A05/A06=8/8 PASS. همهٔ planned testها اجرا نشده‌اند؛ elapsed time `NOT_MEASURED`.
+- وضعیت جاری: ۳۴/۳۶ بستهٔ برنامه‌ریزی پذیرفته‌اند؛ A07–A08 باقی‌اند. Product Tests اجرا نشده‌اند؛ هیچ پیاده‌سازی محصولی ادعا نمی‌شود.
 
 ---
 
-### A05 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### A05 — سه جریان مالی آغازین دستیار: موجودی، قبض و انتقال فردبه‌فرد
 
-### A06 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**شناسه:** `PKG:ASSISTANT:A05`؛ **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`؛ **مالک رفتار:** Assistant؛ **مالک گردش‌کار پایدار و وضعیت Job:** A02؛ **مالک capability و route خدمت:** C05a و ارائه‌دهنده/سرویس مالک؛ **مالک هویت، هدف، رضایت و مجوز:** C02؛ **مالک پلن و entitlement:** C04؛ **مالک اجرای UI:** A04؛ **مالک نقشه و وضعیت تازگی UI:** بسته A06؛ **مالک اثر مالی کیف پول شهاب:** سرویس مالی Core در مرزهای پذیرفته‌شده C09–C13b؛ **مالک نتیجه بانکی/قبض:** ارائه‌دهنده/سرویس مقصد؛ **مالک اعلان و رسیدهای رابطی:** C14/C13b. شناسهٔ بسته `A05` با تصمیم معماری `A05` دربارهٔ تراکنش محلی و Outbox یکی نیست. دامنهٔ قابلیت‌های آغازین از تصمیم محصولی مصوب O5-05 گرفته شده است؛ هیچ اتصال بانکی، روش استعلام، ابزار Computer Use، سقف جدید یا جزئیات احراز نشده‌ای در این بسته تصویب نمی‌شود.
+
+#### دامنه و مرزهای مالکیت
+
+این بسته برنامه‌ریزی می‌کند که Assistant بتواند در صورت انتشار capability معتبر، (الف) ماندهٔ حساب/خدمتِ مشخص و مجاز را به‌صورت فقط‌خواندنی استعلام کند، (ب) قبض مشخص را تا مرحلهٔ پرداخت با پیش‌نمایش و تأیید صریح مشتری پیش ببرد، و (ج) انتقال فردبه‌فرد را با گیرنده و مبلغ تأییدشده هدایت کند. کارهای بانکی از مسیر Computer Use اجرا می‌شوند؛ API بانکی عملیاتی، پذیرندهٔ مستقل، فهرست بانک‌ها، قالب شناسهٔ قبض، شناسهٔ حساب، تعرفهٔ خدمت، سقف بانکی، روش احراز خاص یا SLO در این بسته تعیین نشده است. انتقال کیف پول شهاب تابع سیاست‌های مصوب کیف پول و سرویس مالی Core است؛ انتقال فردبه‌فرد بانکی فقط در صورت route/capability جداگانهٔ منتشرشده و آزموده‌شده مجاز خواهد بود. موجودی کیف پول شهاب با ماندهٔ حساب بانکی یکی نیست. سفارش خدمت، کیف پول عمومی و پرداخت قبض/انتقال بانکی نیز یک دارایی یا مالکیت داده ندارند.
+
+در همهٔ جریان‌های مؤثر، Backend پیش از اجرا وضعیت پرونده، route و capability نسخه‌دار، مجوز/رضایت فعلی و تأیید همان عملیات را دوباره می‌سنجد. مرورگر/اپ، کلیک موفق یا پاسخ مدل اثبات پرداخت نیست. نتیجهٔ نامعلوم ابتدا استعلام/تطبیق می‌شود و اجرای مجدد کورکورانه ممنوع است. عملیات کیف پول از نظر رزرو، ثبت اتمیک، capture/release، منشأ اجزا و idempotency به مالک مالی واگذار می‌شوند؛ این بسته الگوریتم مالی یا جدول خصوصی تازه تعریف نمی‌کند.
+
+#### استخراج Graph-first و تعیین تکلیف Candidateها
+
+گراف معنایی `knowledge-graph/phase2-reference-docs/semantic/graph.json` با `graph_stats.json` از همان Graphify pinned بررسی شد؛ SHA-256 دو سند با `sources[]` گراف دقیقاً برابر است: Blueprint=`0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266` و Wallet=`8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`. `semantic/validation.json=PASS` با `issue_count=0` و `recovery-validation.json=PASS` از commit منبع `f28033b6496e39f4a59644cccf5fb2c9886fceb4` ثبت است؛ این‌ها اعتبار مکانیکی/بازیابی گراف را می‌سنجند، نه کفایت معنایی. گره‌های معنایی و پیوندهای `EXTRACTED` پیرامون دامنه/نقش، Computer Use، ورودی محرمانه، چرخه نتیجه و بازیابی، پلن/کیف پول، event مالی، انتقال P2P، منع اثر تکراری، رزرو و رسید انتخاب شدند؛ تفسیر هر گره با متن منبع دوباره کنترل شد. گره‌های زیر شناسه‌های واقعی گراف‌اند؛ تصمیم‌های کاربر O5-05 و قراردادهای پذیرفته‌شدهٔ قبلی به‌عنوان source of scope/owner به کار رفتند، نه اینکه از یال `INFERRED` الزام ساخته شود.
+
+| Candidate | Source / Graph reference | Disposition |
+| --- | --- | --- |
+| `CAND:ASSISTANT:A05:001` | O5-05؛ `docs_shahab_phase_2_development_blueprint_assistant_future_path` (B:1437) | سه قابلیت شروع؛ REQ:ASSISTANT:A05:001/002/003 |
+| `CAND:ASSISTANT:A05:002` | `docs_shahab_phase_2_development_blueprint_computer_use_target_architecture` (B:1402)، `docs_shahab_phase_2_development_blueprint_computer_use_execution_boundary` (B:1482) | Computer Use و مشاهده زنده؛ REQ:ASSISTANT:A05:004 |
+| `CAND:ASSISTANT:A05:003` | `docs_shahab_phase_2_development_blueprint_bank_code_secure_handling` (B:1407)، `docs_shahab_phase_2_development_blueprint_secure_code_workflow_sequence` (B:1462)، `docs_shahab_phase_2_development_blueprint_workflow_secure_input` (B:1470) | ورودی محرمانه خارج از متن مدل/لاگ؛ REQ:ASSISTANT:A05:005 |
+| `CAND:ASSISTANT:A05:004` | `docs_shahab_phase_2_development_blueprint_sensitive_action_gate` (B:1489) | تأیید روشن پیش از اثر حساس؛ REQ:ASSISTANT:A05:006 |
+| `CAND:ASSISTANT:A05:005` | `docs_shahab_phase_2_development_blueprint_verify_execution_result` (B:1494)، W:977، W:1363 | اثبات نتیجه و توقف در نتیجه نامعلوم؛ REQ:ASSISTANT:A05:007/008 |
+| `CAND:ASSISTANT:A05:006` | `docs_shahab_phase_2_development_blueprint_plan_and_wallet_usage_rules` (B:1449)، W:749–762، W:763–852 | entitlement/صورتحساب و رزرو فقط از owner؛ REQ:ASSISTANT:A05:009 و REUSE:C04/C09 |
+| `CAND:ASSISTANT:A05:007` | W:`docs_shahab_digital_wallet_withdrawal_transfer_eligibility` (W:863)، `docs_shahab_digital_wallet_p2p_recipient_identity_confirmation` (W:991) | P2P با نوع حساب و گیرنده معتبر؛ REQ:ASSISTANT:A05:010 |
+| `CAND:ASSISTANT:A05:008` | `docs_shahab_digital_wallet_transfer_component_provenance` (W:877)، `docs_shahab_digital_wallet_gift_conditions_preserved_on_transfer` (W:893) | حفظ منشأ و شرایط در انتقال کیف پول؛ REQ:ASSISTANT:A05:011 |
+| `CAND:ASSISTANT:A05:009` | `docs_shahab_digital_wallet_withdrawal_transfer_limits` (W:933) و `docs_shahab_digital_wallet_withdrawal_transfer_limit_values_open` (W:937) | کنترل محدودیت ساختاری؛ مقدارها OPEN و جعل نمی‌شوند؛ REQ:ASSISTANT:A05:012 |
+| `CAND:ASSISTANT:A05:010` | `docs_shahab_digital_wallet_billable_event_predefined` (W:845)، `docs_shahab_digital_wallet_withdrawal_stages_and_reservation` (W:965) | event مالی و مرحله اثر از owner؛ REQ:ASSISTANT:A05:009/011 |
+| `CAND:ASSISTANT:A05:011` | `docs_shahab_phase_2_development_blueprint_persistent_notifications_history` (B:1453)، W:1511–1546 | رسید/اعلان رابطی؛ Handoff به C14/C13b، الزام موازی ساخته نشد |
+| `CAND:ASSISTANT:A05:012` | `docs_shahab_phase_2_development_blueprint_adviser_assistant_authority_boundary` (B:1447)، `docs_shahab_phase_2_development_blueprint_domain_multilayer_enforcement` (B:1443) | جدایی دستیار از مشاور و کنترل حوزه؛ REUSE:A01/A02/C02/C05a |
+
+#### Requirements اتمی
+
+| Requirement | رفتار مستقل و منبع |
+| --- | --- |
+| `REQ:ASSISTANT:A05:001` | برای استعلام موجودی، Assistant فقط حساب/خدمت انتخاب‌شده و مجاز را می‌خواند؛ موجودی کیف پول شهاب را از API مالک کیف پول/Core می‌گیرد و فقط برای موجودی بانکی از route فعال همان provider استفاده می‌کند؛ حساب نامشخص یا capability منتشرنشده هیچ ابزار عملیاتی را فراخوانی نمی‌کند. O5-05؛ B:1402,1437؛ Graph `docs_shahab_phase_2_development_blueprint_computer_use_target_architecture` |
+| `REQ:ASSISTANT:A05:002` | پاسخ موجودی، نوع منبع (حساب بانکی یا کیف پول شهاب)، واحد/واحد پولِ برگشتی از مرجع، زمان مشاهده و وضعیت تازگی موجود در نتیجهٔ owner را کنار مقدار نمایش می‌دهد؛ مقدار کهنه/نامعلوم به‌عنوان ماندهٔ جاری قطعی ارائه نمی‌شود. B:1474,1482؛ W:1511–1522 |
+| `REQ:ASSISTANT:A05:003` | پرداخت قبض فقط برای شناسه/قبضی که route مالک توان شناسایی‌اش را دارد ادامه می‌یابد و مبلغ/مرجع برگشتی مقصد را پیش از هر اقدام قابل مشاهده می‌کند؛ قبض مبهم یا تطبیق‌نیافته متوقف می‌شود. O5-05؛ B:1437,1482–1494 |
+| `REQ:ASSISTANT:A05:004` | هر عمل Computer Use پس از مشاهدهٔ زنده UI و تطبیق خدمت، مرحله و target با workflow جاری اجرا می‌شود؛ نقشه/مختصات ثابت به‌تنهایی مجوز dispatch نیست. B:1482,1486؛ Graph `docs_shahab_phase_2_development_blueprint_live_ui_observation` |
+| `REQ:ASSISTANT:A05:005` | رمز/OTP/token فقط از ورودی امن محدود به نشست و adapter مجاز به مقصد می‌رسد و در متن قابل مشاهده مدل، تاریخچه پیام، لاگ عمومی و RAG ظاهر نمی‌شود. B:1462–1478؛ Graph `docs_shahab_phase_2_development_blueprint_workflow_secure_input`, `docs_shahab_phase_2_development_blueprint_otp_exclusion` |
+| `REQ:ASSISTANT:A05:006` | پیش از پرداخت قبض یا انتقال، Backend خلاصهٔ نهایی شامل خدمت/گیرنده، مبلغ و هزینهٔ برگشتیِ قابل تعیین، منبع/مقصد و اثر قابل مشاهده را نشان می‌دهد و فقط تأیید صریح همان نسخهٔ خلاصه اجازه ادامه می‌دهد؛ تغییر هر جزء تأیید قبلی را باطل می‌کند. B:1489–1492؛ W:943–958 |
+| `REQ:ASSISTANT:A05:007` | نتیجهٔ عملیات فقط با شواهد/مرجع نتیجهٔ سرویس مالک به وضعیت `confirmed success` می‌رود؛ click/submit، timeout یا پیام مدل به‌تنهایی موفقیت محسوب نمی‌شود. B:1474,1494؛ W:965–977 |
+| `REQ:ASSISTANT:A05:008` | نتیجهٔ خارجی نامعلوم، workflow را در حالت قابل پیگیری/تطبیق نگه می‌دارد و تا استعلام نتیجه از همان owner، retry غیرهمسان یا پرداخت دوم صادر نمی‌کند. B:1494–1496؛ W:977,1363–1376 |
+| `REQ:ASSISTANT:A05:009` | پیش از شروع کار billable، entitlement، تعرفهٔ فعال و مبنای ثبت هزینه از C04/مالک تعرفه خوانده می‌شود؛ Assistant قیمت، پلن یا کسر را در منطق محلی بازسازی نمی‌کند. B:1449؛ W:749–762,1381–1456 |
+| `REQ:ASSISTANT:A05:010` | انتقال P2P کیف پول فقط به گیرندهٔ شخصی معتبر پس از بازبینی هویت مقصد و تأیید مشتری انجام می‌شود؛ مقصد سازمانی و مسیرهای ممنوع طبق W:863/919 رد می‌شوند. W:863–870,985–998؛ Graph `docs_shahab_digital_wallet_p2p_recipient_identity_confirmation` |
+| `REQ:ASSISTANT:A05:011` | انتقال کیف پول منشأ، اجزا، انقضا و محدودیت‌های هر جزء را از ledger owner حفظ می‌کند و برداشت‌پذیریِ اعتبار دریافتی را با انتقال عادی ایجاد نمی‌کند. W:871–898؛ Graph `docs_shahab_digital_wallet_transfer_component_provenance` |
+| `REQ:ASSISTANT:A05:012` | پیش از رزرو/ثبت انتقال کیف پول، سرویس مالی مالک در یک مرز اتمیک حق مصرف، مانده/نسخه، اجزای رزرو و محدودیت‌های مصوب را کنترل می‌کند؛ تغییر شرایط به رد/محاسبه مجدد منجر می‌شود و مبلغ/گیرندهٔ تأییدشده را بی‌صدا تغییر نمی‌دهد. W:1235–1278؛ Graph `docs_shahab_digital_wallet_withdrawal_stage_effect_table` |
+
+#### Enablerها، Taskها و Subtaskها
+
+**Enablerها:** `EN:ASSISTANT:A05:001` قرارداد capability و درخواست‌های فقط‌خواندنی/مالی؛ `EN:ASSISTANT:A05:002` تأیید حساس و ورودی امن Computer Use؛ `EN:ASSISTANT:A05:003` نتیجه، idempotency و تطبیق اثر خارجی؛ `EN:ASSISTANT:A05:004` اتصال امن رزرو/رسید و UI بدون انتقال مالکیت.
+
+| Task | خروجی اجرایی و Subtaskها |
+| --- | --- |
+| `TASK:ASSISTANT:A05:001` | **Enabler:** `EN:ASSISTANT:A05:001`.  قرارداد سه capability آغازین با C05a و سرویس‌های owner؛ `TASK:ASSISTANT:A05:001.S01` تفکیک balance query، bill payment و P2P با service/provider/capability version، REQ:ASSISTANT:A05:001–003؛ `TASK:ASSISTANT:A05:001.S02` اعتبارسنجی ورودی‌های route و پاسخ owner بدون فرض schema بانکی، REQ:ASSISTANT:A05:001–003؛ `TASK:ASSISTANT:A05:001.S03` نگاشت خطاهای unsupported/ambiguous/unavailable به توقف قابل مشاهده، REQ:ASSISTANT:A05:001/003. |
+| `TASK:ASSISTANT:A05:002` | **Enabler:** `EN:ASSISTANT:A05:002`.  ارکستراسیون بالانس و جریان تأیید قبض؛ `TASK:ASSISTANT:A05:002.S01` خواندن فقط‌خواندنی مقدار و زمان مشاهده از adapter، REQ:ASSISTANT:A05:001/002؛ `TASK:ASSISTANT:A05:002.S02` ساخت پیش‌نمایش قبض از پاسخ مقصد و باطل‌کردن آن با هر تغییر، REQ:ASSISTANT:A05:003/006؛ `TASK:ASSISTANT:A05:002.S03` اتصال secure-input به مرحله مجاز و حذف credential از کانال مدل، REQ:ASSISTANT:A05:005. |
+| `TASK:ASSISTANT:A05:003` | **Enabler:** `EN:ASSISTANT:A05:001 / EN:ASSISTANT:A05:003`.  مسیر انتقال P2P و guardهای پولی؛ `TASK:ASSISTANT:A05:003.S01` تطبیق شخص/نوع حساب/گیرنده طبق مالک کیف پول، REQ:ASSISTANT:A05:010؛ `TASK:ASSISTANT:A05:003.S02` ارائه منشأ و ترکیب اعتبار بر اساس پاسخ ledger و حفظ شرایط اجزا، REQ:ASSISTANT:A05:011؛ `TASK:ASSISTANT:A05:003.S03` ارسال یک درخواست idempotent به owner پس از preflight اتمیک و عدم بازپیاده‌سازی ledger، REQ:ASSISTANT:A05:011/012. |
+| `TASK:ASSISTANT:A05:004` | **Enabler:** `EN:ASSISTANT:A05:003`.  اتصال عملیات طولانی به A02/A04 و بازیابی؛ `TASK:ASSISTANT:A05:004.S01` bind هر dispatch به job/workflow step و capability version، REQ:ASSISTANT:A05:004/006؛ `TASK:ASSISTANT:A05:004.S02` ذخیره owner reference و تفکیک success/failure/unknown، REQ:ASSISTANT:A05:007/008؛ `TASK:ASSISTANT:A05:004.S03` استعلام پیش از retry، resume یا reconciliation، REQ:ASSISTANT:A05:008. |
+| `TASK:ASSISTANT:A05:005` | **Enabler:** `EN:ASSISTANT:A05:004`.  مجوز، تعرفه، رسید و شواهد حداقل‌داده؛ `TASK:ASSISTANT:A05:005.S01` revalidate C02 consent/permission و C04 entitlement قبل از اثر، REQ:ASSISTANT:A05:006/009/010؛ `TASK:ASSISTANT:A05:005.S02` ثبت تعرفه/رویداد billable و reserve/capture/release فقط از owner، REQ:ASSISTANT:A05:009/012؛ `TASK:ASSISTANT:A05:005.S03` خواندن موجودی کیف پول از API مالک C13b/Core و منع دسترسی مستقیم به ledger، REQ:ASSISTANT:A05:001/002؛ `TASK:ASSISTANT:A05:005.S04` handoff رسید/اعلان و trace reference غیرحساس به C13b/C14، REQ:ASSISTANT:A05:002/007. |
+
+#### Acceptance Criteria با oracle قابل‌اندازه‌گیری
+
+| AC | پیش‌شرط | محرک | PASS قابل مشاهده | FAIL |
+| --- | --- | --- | --- | --- |
+| `AC:ASSISTANT:A05:001` | یک account route فعال و یک route ناشناخته fixture شده‌اند | درخواست balance | route فعال فقط یک read-only call دارد؛ مقدار و observed-at از owner نمایش می‌شود؛ unknown=0 call | مانده تخمینی/حساب حدسی یا write call |
+| `AC:ASSISTANT:A05:002` | پاسخ owner شامل مقدار تازه، stale و timestamp نامعلوم است | نمایش balance | منبع و زمان کنار مقدار؛ stale/unknown با وضعیت غیرقطعی؛ current assertion برای دو حالت آخر=0 | حذف timestamp یا ادعای مانده جاری |
+| `AC:ASSISTANT:A05:003` | قبض یکتا، قبض تکراری و شناسه نامعتبر fixture شده‌اند | آغاز پرداخت قبض | فقط قبض یکتا به preview مبلغ/مرجع منبع می‌رسد؛ مبهم/نامعتبر dispatch=0 | پرداخت با مبلغ یا قبض حدسی |
+| `AC:ASSISTANT:A05:004` | UI ابتدا مطابق و سپس متفاوت از مشاهده اولیه است | رسیدن به مرحله effect | مشاهده تازه قبل از dispatch و تطبیق step/target؛ stale-map-only dispatch=0 | کلیک با نقشه قدیمی یا مرحله اشتباه |
+| `AC:ASSISTANT:A05:005` | ورودی شامل markerهای OTP/token/رمز است | تکمیل challenge در fixture امن | مقصد مجاز یک بار ورودی را دریافت می‌کند؛ جستجوی marker در prompt/history/log/RAG=0 | هر marker در کانال غیرمجاز |
+| `AC:ASSISTANT:A05:006` | preview نسخه 1 با گیرنده/مبلغ مشخص تأیید شده است | پیش از اجرا مبلغ یا گیرنده به نسخه 2 تغییر می‌کند | تأیید نسخه 1 رد؛ effect count=0 تا preview و تأیید جدید | استفاده از تأیید منقضی/مغایر |
+| `AC:ASSISTANT:A05:007` | مقصد پاسخ success با مرجع، failure و timeout می‌دهد | نتیجهٔ dispatch پردازش شود | فقط success همراه reference به success نهایی می‌رود؛ failure/timeout success claim=0 | submit یا timeout موفقیت شمرده شود |
+| `AC:ASSISTANT:A05:008` | درخواست اول timeout شده ولی مقصد ممکن است آن را ثبت کرده باشد | resume/retry | ابتدا همان owner reference استعلام؛ تا پاسخ تعیین‌کننده dispatch دوم=0 | پرداخت/انتقال دوم کورکورانه |
+| `AC:ASSISTANT:A05:009` | entitlement و تعرفه از C04 معتبر/منقضی و نسخه‌دارند | شروع عمل billable | فقط entitlement و quote فعال پذیرفته؛ local price calculation=0 | پلن/تعرفه از prompt حدس زده شود |
+| `AC:ASSISTANT:A05:010` | مقصد شخصی، سازمانی، ناشناس و شخص خارج از recipient list وجود دارد | درخواست wallet P2P | فقط گیرندهٔ شخصی و مجاز ادامه می‌گیرد؛ انواع ممنوع effect=0 | انتقال به سازمان/گیرنده نامعتبر |
+| `AC:ASSISTANT:A05:011` | مبدأ شامل cash، gift و received-credit با محدودیت جداست | preview و ثبت انتقال | اجزا/مبلغ/انقضا در owner ledger حفظ؛ received-credit withdrawable=0 | اعتبار دریافتی به cash تبدیل یا شرط هدیه حذف شود |
+| `AC:ASSISTANT:A05:012` | دو درخواست همزمان از مانده/جزء محدود یکسان استفاده می‌کنند | commit هر دو درخواست | حداکثر یک اثر سازگار با مانده/قفل owner ثبت؛ مبلغ/گیرنده از preview تأییدشده تغییر نکند | مصرف همزمان مازاد یا تغییر خاموش مقصد/مبلغ |
+
+#### Test Definitions و Planned Test Cases (اجرا نشده)
+
+هر Test چهار سناریوی مستقل و مخصوص رفتار دارد؛ این شناسه‌ها برنامه‌اند و اجرای محصولی گزارش نمی‌کنند.
+
+| Test Definition | Positive | Negative | Boundary | Failure / Recovery |
+| --- | --- | --- | --- | --- |
+| `TEST:ASSISTANT:A05:001` | `TC:ASSISTANT:A05:001-P` balance مجاز مقدار owner را برمی‌گرداند | `TC:ASSISTANT:A05:001-N` account خارج از مالکیت رد می‌شود | `TC:ASSISTANT:A05:001-B` پاسخ صفر/واحد متفاوت با همان source حفظ می‌شود | `TC:ASSISTANT:A05:001-F` route timeout → unknown بدون مقدار ساختگی |
+| `TEST:ASSISTANT:A05:002` | `TC:ASSISTANT:A05:002-P` timestamp تازه کنار مقدار است | `TC:ASSISTANT:A05:002-N` stale به‌عنوان current نمایش نمی‌یابد | `TC:ASSISTANT:A05:002-B` timestamp غایب به unknown تبدیل می‌شود | `TC:ASSISTANT:A05:002-F` پاسخ جزئی سرویس → نتیجه ناموجود/توقف |
+| `TEST:ASSISTANT:A05:003` | `TC:ASSISTANT:A05:003-P` قبض یکتا از preview مقصد می‌آید | `TC:ASSISTANT:A05:003-N` شناسه مبهم/تکراری dispatch نمی‌شود | `TC:ASSISTANT:A05:003-B` مبلغ صفر یا فیلد لازم ناقص رد می‌شود | `TC:ASSISTANT:A05:003-F` issuer unavailable → draft حفظ، پرداخت صفر |
+| `TEST:ASSISTANT:A05:004` | `TC:ASSISTANT:A05:004-P` UI live برابر route و step مجاز است | `TC:ASSISTANT:A05:004-N` UI خارج از route به executor نمی‌رسد | `TC:ASSISTANT:A05:004-B` عنصر تکراری به ambiguity می‌رود | `TC:ASSISTANT:A05:004-F` observation timeout → pause و بدون click |
+| `TEST:ASSISTANT:A05:005` | `TC:ASSISTANT:A05:005-P` OTP از secure input فقط به مقصد می‌رسد | `TC:ASSISTANT:A05:005-N` تلاش مدل برای خواندن secret رد می‌شود | `TC:ASSISTANT:A05:005-B` challenge منقضی‌شده dispatch نمی‌شود | `TC:ASSISTANT:A05:005-F` secure channel قطع → secret پاک/عمل متوقف |
+| `TEST:ASSISTANT:A05:006` | `TC:ASSISTANT:A05:006-P` preview تأییدشده همان payload را اجرا می‌کند | `TC:ASSISTANT:A05:006-N` عدم تأیید هیچ اثر نمی‌سازد | `TC:ASSISTANT:A05:006-B` تغییر یک ریال/شناسه preview را باطل می‌کند | `TC:ASSISTANT:A05:006-F` C02 revalidation unavailable → fail closed |
+| `TEST:ASSISTANT:A05:007` | `TC:ASSISTANT:A05:007-P` reference مقصد success ثبت می‌شود | `TC:ASSISTANT:A05:007-N` کلیک بدون confirmation success نیست | `TC:ASSISTANT:A05:007-B` پاسخ دیرهنگام به همان operation reference متصل می‌شود | `TC:ASSISTANT:A05:007-F` نتیجه متناقض → unknown و reconciliation |
+| `TEST:ASSISTANT:A05:008` | `TC:ASSISTANT:A05:008-P` وضعیت قطعی موجود از owner بازیابی می‌شود | `TC:ASSISTANT:A05:008-N` retry پیش از استعلام مسدود است | `TC:ASSISTANT:A05:008-B` استعلام هم timeout می‌شود و state unknown می‌ماند | `TC:ASSISTANT:A05:008-F` owner outage → job معلق و اخطار داخلی owner |
+| `TEST:ASSISTANT:A05:009` | `TC:ASSISTANT:A05:009-P` quote فعال entitlement را می‌پذیرد | `TC:ASSISTANT:A05:009-N` پلن فاقد capability رد می‌شود | `TC:ASSISTANT:A05:009-B` quote منقضی در لحظه شروع دوباره خوانده می‌شود | `TC:ASSISTANT:A05:009-F` C04 unavailable → اثر و charge شروع نمی‌شوند |
+| `TEST:ASSISTANT:A05:010` | `TC:ASSISTANT:A05:010-P` گیرنده شخصی تأییدشده آماده preview است | `TC:ASSISTANT:A05:010-N` سازمان/خارج از فهرست رد می‌شود | `TC:ASSISTANT:A05:010-B` تغییر نوع حساب بعد از lookup تأیید را باطل می‌کند | `TC:ASSISTANT:A05:010-F` lookup ناموجود → بدون انتقال |
+| `TEST:ASSISTANT:A05:011` | `TC:ASSISTANT:A05:011-P` انتقال چندجزئی شرط هر جزء را نگه می‌دارد | `TC:ASSISTANT:A05:011-N` received-credit قابل برداشت نمی‌شود | `TC:ASSISTANT:A05:011-B` انقضای جزء هدیه قبل از commit اعمال می‌شود | `TC:ASSISTANT:A05:011-F` ledger owner در دسترس نیست → هیچ write محلی |
+| `TEST:ASSISTANT:A05:012` | `TC:ASSISTANT:A05:012-P` یک commit با نسخه مانده فعلی پذیرفته می‌شود | `TC:ASSISTANT:A05:012-N` commit دوم متعارض رد می‌شود | `TC:ASSISTANT:A05:012-B` درست روی limit مجاز است و یک واحد بیش رد می‌شود؛ مقدار limit از policy owner | `TC:ASSISTANT:A05:012-F` commit پاسخ گم‌شده → جستجوی operation reference پیش از هر retry |
+
+#### Traceability، Dependencies و تصمیم‌های باز
+
+| مسیر | ردیابی/مالکیت |
+| --- | --- |
+| Source→Requirement | O5-05→REQ:ASSISTANT:A05:001–003؛ B:1402,1437,1462–1496؛ W:845,863–998,1235–1278؛ Graph refs ثبت‌شده در Candidate register. |
+| Requirement→Enabler→Task→Subtask | ۱۲/۱۲ Requirement به EN و TASK/S متصل‌اند؛ شناسهٔ هر Task در جدول بالا، شناسه Subtask پسوند `.S01`… است و نگاشت Req روی همان ردیف مشخص شده است. |
+| Requirement→AC→Test→Cases | `REQ:A05:nnn`↔`AC:A05:nnn`↔`TEST:A05:nnn`؛ هر ۱۲ رفتار چهار کیس مثبت/منفی/مرزی/شکست یکتا دارند؛ ۴۸ مورد planned. |
+| Dependencies | C02 consent/permission؛ C04 entitlement/quote؛ C05a published capability; A02 durable state; A04 execution; A06 UI map; C09–C13b wallet controls; C14/C13b receipt/notice. dependency رابطه است و مالکیت را منتقل نمی‌کند. |
+| Open | فهرست بانک/قبض، APIهای بانکی، route/credential method، فرم و شناسه قبض، SLA، fee schedule و حدود/مبالغ انتقال بانکی OPEN؛ فقط مقادیر مصوب Wallet در owner قابل اعمال‌اند. |
+
+#### ممیزی مستقل A05 — RA و IPA
+
+- **RA:** Candidate 12/12 تعیین تکلیف؛ O5-05 به‌عنوان دامنه قابلیت و متن B:1402,1407,1437,1447–1496 و W:845,863–998,1235–1278,1363–1376,1511–1546 تطبیق شد؛ مرز bank balance/wallet balance، P2P کیف پول/بانکی، service fee/اثر بانکی تفکیک؛ duplication با C02/C04/C05a/C09–C14/A01–A04=0؛ inferred/ambiguous-to-requirement=0؛ **PASS**.
+- **IPA:** ۱۲/۱۲ Requirement به Task/Subtask، AC و Test اختصاصی وصل؛ oracleها شرط اولیه، trigger، خروجی قابل مشاهده و مرز fail دارند؛ ۴۸ case شامل ۱۲ مثبت/۱۲ منفی/۱۲ مرزی/۱۲ شکست است؛ dependency cycle=0؛ schema/fact بانکی باز مانده؛ **PASS**.
+
+### A06 — دانش رابط بانکی، آزمون و پایش تغییرات UI
+
+**شناسه:** `PKG:ASSISTANT:A06`؛ **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`؛ **مالک رفتار:** Assistant UI Knowledge؛ **مالک capability و خدمت:** C05a/سرویس مالک؛ **مالک اجرا و مشاهده زنده:** A04؛ **مالک گردش‌کار/Job کشف:** سرویس اجراکنندهٔ مجاز با وضعیت Job متعلق به خود؛ **مالک شناسه/مجوز/رضایت و محدوده دسترسی:** C02؛ **مالک پوسته و نمایش کاربر:** C06؛ **مالک اعلان سوابق مشتری:** C14. شناسه بسته `A06` با تصمیم معماری `A06` دربارهٔ تاب‌آوری یکسان نیست؛ الزامات timeout/retry/bulkhead مصوب در نقش کنترل‌های وابستگی رعایت می‌شوند، اما package A06 در این برنامه به «دانش رابط و پایش تغییر UI» محدود است. **User Monitoring** و Feedforward موضوع‌محور قابلیت‌های محصولی مستقلی هستند؛ کشف و پایش UI عملیاتی، خودبه‌خود پایش کاربر محسوب نمی‌شود.
+
+#### استخراج Graph-first و تعیین تکلیف Candidateها
+
+در گراف Graphify pinned، فصل «کشف، آزمون و پایش تغییرات رابط کاربری» و روابط آن با مشاهدهٔ زنده Computer Use، تشخیص اپ/محدودیت پلتفرم، ایزوله‌سازی دستگاه، کاتالوگ محصول، نتیجه/خطا و سوابق بررسی شد. Source Unitهای B:1482–1501,1502–1556,1604–1626 و W:1363–1376,1511–1546 با متن اصلی تطبیق شدند. قواعد `INFERRED` درباره ابزار، زمان‌بندی، حساب‌ها یا ساختار فیزیکی به Requirement تبدیل نشدند.
+
+| Candidate | Source / Graph reference | Disposition |
+| --- | --- | --- |
+| `CAND:ASSISTANT:A06:001` | `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring` (B:1538) | چرخه discovery/change; REQ:ASSISTANT:A06:001 |
+| `CAND:ASSISTANT:A06:002` | `docs_shahab_phase_2_development_blueprint_ui_monitor_flow` (B:1542) | diff و چرخه draft→test→publish؛ REQ:ASSISTANT:A06:002/006/007 |
+| `CAND:ASSISTANT:A06:003` | `docs_shahab_phase_2_development_blueprint_ui_monitor_non_destructive` (B:1538) | منع اثر واقعی؛ REQ:ASSISTANT:A06:003 |
+| `CAND:ASSISTANT:A06:004` | `docs_shahab_phase_2_development_blueprint_session_device_isolation` (B:1534) | جداسازی محیط/دستگاه/مشتری؛ REQ:ASSISTANT:A06:004 |
+| `CAND:ASSISTANT:A06:005` | `docs_shahab_phase_2_development_blueprint_os_platform_limitations` (B:1522)، `docs_shahab_phase_2_development_blueprint_execution_location_open` (B:1526) | capability واقعی پلتفرم؛ deployment option OPEN؛ REQ:ASSISTANT:A06:005 |
+| `CAND:ASSISTANT:A06:006` | `docs_shahab_phase_2_development_blueprint_ui_runtime_recheck` (B:1555)، `docs_shahab_phase_2_development_blueprint_live_ui_observation` (B:1482) | نقشه جایگزین بررسی زنده نیست؛ REQ:ASSISTANT:A06:008 |
+| `CAND:ASSISTANT:A06:007` | B:1542–1552 | version/route/element/consent/evidence/test metadata؛ REQ:ASSISTANT:A06:001/002 |
+| `CAND:ASSISTANT:A06:008` | B:1542–1556 | انتشار فقط بعد از آزمون معتبر؛ REQ:ASSISTANT:A06:006/007 |
+| `CAND:ASSISTANT:A06:009` | B:1500، `docs_shahab_phase_2_development_blueprint_tooling_unapproved` | Playwright/Appium/tool choice باز؛ REQ:ASSISTANT:A06:010 (عدم تحمیل ابزار) |
+| `CAND:ASSISTANT:A06:010` | `docs_shahab_phase_2_development_blueprint_verify_execution_result` (B:1494)، W:1363 | توقف امن/unknown و بازیابی؛ REQ:ASSISTANT:A06:008/009 |
+| `CAND:ASSISTANT:A06:011` | B:1462–1478,1500؛ W:1325–1346 | redaction و دسترسی مجاز؛ REQ:ASSISTANT:A06:011 |
+| `CAND:ASSISTANT:A06:012` | B:1453، W:1511–1546 | نمایش وضعیت عملیات/رسید به owner UI؛ REUSE:C06/C14 |
+| `CAND:ASSISTANT:A06:013` | `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring` (B:1538)، B:1295–1311 | متریک/پایش عملیاتی کم‌داده؛ REQ:ASSISTANT:A06:012 |
+| `CAND:ASSISTANT:A06:014` | B:1500,1526–1535 | محل اجرا و فناوری نهایی تصمیم نشده؛ OPEN و بدون ادعای امکان‌سنجی تکمیل‌شده |
+
+#### Requirements اتمی A06
+
+| Requirement | رفتار مستقل و منبع |
+| --- | --- |
+| `REQ:ASSISTANT:A06:001` | هر نقشهٔ UI به هویت پایدار provider، خدمت، platform، route/capability و نسخه یا fingerprint رابط متصل است؛ کلید مبهم/تکراری قابل انتشار نیست. B:1542–1552؛ Graph `docs_shahab_phase_2_development_blueprint_ui_monitor_flow` |
+| `REQ:ASSISTANT:A06:002` | هر route map نقش عناصر و ترتیب مراحل، نقطه احراز/تأیید، شواهد مشاهده و نتیجه آزمون همان نسخه را ثبت می‌کند؛ عنصر بدون نقش/شاهد با وضعیت unknown باقی می‌ماند. B:1542–1552 |
+| `REQ:ASSISTANT:A06:003` | discovery فقط روی مسیر رسمی/مجاز و محیط/حساب آزمونی که owner مجاز کرده اجرا می‌شود؛ هیچ پرداخت، ثبت سفارش یا تعهد مالی واقعی در پایش UI انجام نمی‌شود. B:1538–1544 |
+| `REQ:ASSISTANT:A06:004` | هر اجرای discovery در device/session آزمون از سایر مشتریان و نشست‌هایشان جدا است و پس از پایان یا خطا پاک‌سازی/بسته می‌شود طبق سیاست امنیتی owner. B:1524–1535 |
+| `REQ:ASSISTANT:A06:005` | adapter فقط capability مجاز همان OS/platform را مصرف می‌کند؛ نتیجهٔ unsupported/unknown به‌جای فرض کنترل آزاد یا نصب‌شده ثبت می‌شود. B:1502–1523 |
+| `REQ:ASSISTANT:A06:006` | تغییر رابط با نسخه قبلی route مقایسه می‌شود و عنصر/گام/مجوز تغییرکرده به‌عنوان تغییر نیازمند بازآزمون علامت می‌خورد؛ نبود baseline به‌عنوان «بدون تغییر» گزارش نمی‌شود. B:1538–1548 |
+| `REQ:ASSISTANT:A06:007` | نقشهٔ جدید تنها پس از اجرای آزمون غیرمخرب و تأیید خروجی pass برای همان route/platform/version قابل active شدن است؛ fail/ambiguous در draft می‌ماند. B:1542–1552 |
+| `REQ:ASSISTANT:A06:008` | مصرف‌کنندهٔ A04 در هر اجرای مشتری UI را زنده مشاهده و map version را با UI فعلی تطبیق می‌دهد؛ پایش دوره‌ای/نقشه ذخیره‌شده مجوز کلیک یا تأیید effect نیست. B:1482,1555 |
+| `REQ:ASSISTANT:A06:009` | اگر UI ناشناخته، متناقض، تغییرکرده یا نتیجهٔ عملیات مبهم باشد، map به مسیر اجرای قطعی معرفی نمی‌شود و A04/A02 را به توقف/بازبینی/تطبیق هدایت می‌کند. B:1494–1501,1555؛ W:1363–1376 |
+| `REQ:ASSISTANT:A06:010` | فناوری crawl/browser/device و زمان‌بندی discovery configurable در طراحی تفصیلی می‌مانند؛ هیچ ابزار یا ساعت ثابت از مثال سند به‌عنوان الزام انتخاب نمی‌شود. B:1500,1538 |
+| `REQ:ASSISTANT:A06:011` | capture/log/trace نقشه فقط شواهد و metadata حداقل و redacted نگه می‌دارد؛ OTP، credential، raw personal data یا screenshot حاوی اطلاعات حساب در log عمومی/دسترسی بی‌مجاز ذخیره نمی‌شود. B:1462–1478,1538–1552 |
+| `REQ:ASSISTANT:A06:012` | job discovery و وابستگی‌هایش با timeout budget، retry محدود idempotent، circuit breaker/bulkhead متناسب و وضعیت شکست قابل پایش اجرا می‌شوند؛ اختلال job نباید API تعاملی/A04 را اشباع یا map ناسالم را فعال کند. B:1283–1294؛ ADR-A06/A09؛ Graph `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring` |
+
+#### Enablerها، Taskها و Subtaskها
+
+**Enablerها:** `EN:ASSISTANT:A06:001` مدل منطقی UI Map و نسخه‌ها؛ `EN:ASSISTANT:A06:002` discovery امن/غیرمخرب؛ `EN:ASSISTANT:A06:003` change detection، regression و انتشار کنترل‌شده؛ `EN:ASSISTANT:A06:004` runtime consumption، امنیت و تاب‌آوری.
+
+| Task | خروجی اجرایی و Subtaskها |
+| --- | --- |
+| `TASK:ASSISTANT:A06:001` | **Enabler:** `EN:ASSISTANT:A06:001`.  قرارداد منطقی UI Map با owner خدمت و C05a؛ `TASK:ASSISTANT:A06:001.S01` شناسه provider/service/platform/capability/version یکتا، REQ:ASSISTANT:A06:001؛ `TASK:ASSISTANT:A06:001.S02` route/step/element/consent/evidence/test metadata nullable و provenanceدار، REQ:ASSISTANT:A06:002؛ `TASK:ASSISTANT:A06:001.S03` draft/validated/active/superseded/unknown lifecycle با نسخه سازگار، REQ:ASSISTANT:A06:006/007/009. |
+| `TASK:ASSISTANT:A06:002` | **Enabler:** `EN:ASSISTANT:A06:002`.  discovery runner و محیط ایمن؛ `TASK:ASSISTANT:A06:002.S01` allowlist منبع و مجوز/حساب آزمون owner، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S02` non-destructive mode که action مالی را قبل از dispatch رد کند، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S03` isolate session/device و cleanup پس از success/failure، REQ:ASSISTANT:A06:004/005. |
+| `TASK:ASSISTANT:A06:003` | **Enabler:** `EN:ASSISTANT:A06:003`.  comparer، test harness و publication gate؛ `TASK:ASSISTANT:A06:003.S01` مقایسهٔ نسخه/fingerprint و ساخت change set مشخص، REQ:ASSISTANT:A06:006؛ `TASK:ASSISTANT:A06:003.S02` اجرای تست route/step در محیط آزمون مصوب، REQ:ASSISTANT:A06:007؛ `TASK:ASSISTANT:A06:003.S03` نگهداری map قبلی و فعال‌سازی/بازگشت فقط به نسخه آزموده‌شده و سازگار، REQ:ASSISTANT:A06:007/009. |
+| `TASK:ASSISTANT:A06:004` | **Enabler:** `EN:ASSISTANT:A06:004`.  runtime map API برای A04؛ `TASK:ASSISTANT:A06:004.S01` lookup محدود به capability/platform/version و return status freshness، REQ:ASSISTANT:A06:001/008؛ `TASK:ASSISTANT:A06:004.S02` signal mismatch/unknown به A04 برای pause/handoff، REQ:ASSISTANT:A06:008/009؛ `TASK:ASSISTANT:A06:004.S03` map مصرفی را راهنما بداند و زنده‌خوانی UI را پیش از effect حفظ کند، REQ:ASSISTANT:A06:008. |
+| `TASK:ASSISTANT:A06:005` | **Enabler:** `EN:ASSISTANT:A06:004`.  security, resilience, monitoring و operator handoff؛ `TASK:ASSISTANT:A06:005.S01` secret/PII redaction و access audit به C01/C02 controls، REQ:ASSISTANT:A06:011؛ `TASK:ASSISTANT:A06:005.S02` job isolation, timeout, bounded retry, circuit/bulkhead؛ REQ:ASSISTANT:A06:012؛ `TASK:ASSISTANT:A06:005.S03` metrics نتیجه کشف، map age، diff/test/publish/failure و incident reference بدون payload حساس، REQ:ASSISTANT:A06:012؛ `TASK:ASSISTANT:A06:005.S04` گزارش وضعیت و رسیدگی به C06/C14 بدون ساختن User Monitoring، REQ:ASSISTANT:A06:009/012. |
+
+#### Acceptance Criteria با oracle قابل‌اندازه‌گیری
+
+| AC | پیش‌شرط | محرک | PASS قابل مشاهده | FAIL |
+| --- | --- | --- | --- | --- |
+| `AC:ASSISTANT:A06:001` | دو provider یا دو platform با route مشابه و یک route duplicate fixture شده‌اند | ثبت map | mapها کلید مستقل دارند؛ duplicate با conflict رد می‌شود؛ provider/platform cross-match=0 | route provider دیگری resolve شود |
+| `AC:ASSISTANT:A06:002` | map با step/element شواهددار و یک element بدون شاهد وجود دارد | validate draft | عناصر مستند role/evidence دارند؛ عنصر بی‌شاهد unknown و non-dispatchable است | عنصر حدسی active شود |
+| `AC:ASSISTANT:A06:003` | آزمون فقط‌خواندنی با control مالی sentinel فراهم است | discovery run شود | test account/source مجاز ثبت؛ financial submit/commit calls=0 | پرداخت/تعهد واقعی یا منبع غیرمجاز |
+| `AC:ASSISTANT:A06:004` | دو نشست آزمون و یک نشست مشتری fixture شده‌اند | دو job همزمان و cleanup | session/device ids جدا؛ customer-session access=0؛ هر دو test session پس از خاتمه بسته | اشتراک cookie/session یا باقی‌ماندن دسترسی |
+| `AC:ASSISTANT:A06:005` | OS adapter پاسخ supported/unsupported/unknown می‌دهد | capability probe | سه نتیجه جدا ثبت؛ unsupported action=0 و نصب خودکار=0 | unknown به available تبدیل شود |
+| `AC:ASSISTANT:A06:006` | baseline دارد یک control و یک auth step؛ candidate تغییرشان می‌دهد | compare versions | diff هر دو تغییر را mark؛ baseline نبودن برابر no-change نشود | تغییر مجوز/مرحله از diff جا بماند |
+| `AC:ASSISTANT:A06:007` | draft map شامل route موفق، fail و ambiguous است | publication gate | فقط pass همان route/version به active می‌رود؛ بقیه draft/held؛ نسخه قبلی قابل ارجاع است | map fail/ambiguous active شود |
+| `AC:ASSISTANT:A06:008` | map active است ولی UI runtime با آن اختلاف دارد | A04 پیش از effect مشاهده کند | mismatch به pause/refresh/handoff می‌رود؛ effect قبل از observation=0 | map دوره‌ای مستقیماً effect را مجاز کند |
+| `AC:ASSISTANT:A06:009` | runtime element ambiguous و outcome unknown fixture شده‌اند | resolve/consume | status `unknown/needs-review` به A04/A02؛ dispatch/claimed-success=0 | حدس عنصر یا موفقیت ساختگی |
+| `AC:ASSISTANT:A06:010` | نمونه ابزار Playwright و ساعت 03:00 فقط به‌عنوان option آمده‌اند | پیکربندی برنامه validate شود | هیچ ابزار/زمانی hard-coded به مصوبه تبدیل نشده | تصمیم اجرایی از مثال سند استخراج شود |
+| `AC:ASSISTANT:A06:011` | صفحه آزمایشی markerهای OTP، شماره حساب و PII دارد | تولید trace/artifact | marker raw در log عمومی/screenshot artifact=0؛ access به evidence با principal مجاز و audit | secret marker یا evidence عمومی |
+| `AC:ASSISTANT:A06:012` | policy fixture با `max_attempts=k` متناهی و ظرفیت رزروشدهٔ interactive تعریف شده؛ worker و API تعاملی آماده‌اند | dependency تا عبور از حد تنظیم‌شده fail شود و worker pool اشباع را تجربه کند | کل تلاش‌ها `≤k`؛ breaker به وضعیت open برسد؛ یک درخواست تعاملی در ظرفیت رزروشده پاسخ بگیرد؛ job age/failure/status metric موجود؛ مقدار k از policy owner می‌آید و در سند عددگذاری نشده | retry بی‌حد، استفاده worker از ظرفیت رزروشده یا map سالم‌نمایی‌شده |
+
+#### Test Definitions و Planned Test Cases (اجرا نشده)
+
+| Test Definition | Positive | Negative | Boundary | Failure / Recovery |
+| --- | --- | --- | --- | --- |
+| `TEST:ASSISTANT:A06:001` | `TC:ASSISTANT:A06:001-P` route شناخته‌شده برای همان provider/version resolve | `TC:ASSISTANT:A06:001-N` duplicate key/provider دیگر reject | `TC:ASSISTANT:A06:001-B` همان خدمت در iOS و web دو map می‌گیرد | `TC:ASSISTANT:A06:001-F` identity source unavailable → map unknown |
+| `TEST:ASSISTANT:A06:002` | `TC:ASSISTANT:A06:002-P` همه عناصر مسیر شاهد دارند | `TC:ASSISTANT:A06:002-N` عنصر بدون role/شاهد publish نمی‌شود | `TC:ASSISTANT:A06:002-B` تغییر نام ظاهری بدون تغییر نقش نیاز به classification دارد | `TC:ASSISTANT:A06:002-F` evidence fetch شکست → draft ناقص held |
+| `TEST:ASSISTANT:A06:003` | `TC:ASSISTANT:A06:003-P` scan حساب آزمون مجاز را بررسی می‌کند | `TC:ASSISTANT:A06:003-N` URL/source خارج allowlist مسدود | `TC:ASSISTANT:A06:003-B` dry-run به دکمه پرداخت می‌رسد ولی commit نمی‌کند | `TC:ASSISTANT:A06:003-F` test environment unavailable → هیچ fallback به حساب واقعی |
+| `TEST:ASSISTANT:A06:004` | `TC:ASSISTANT:A06:004-P` jobهای دو provider session جدا دارند | `TC:ASSISTANT:A06:004-N` دسترسی به cookie مشتری رد | `TC:ASSISTANT:A06:004-B` cleanup هنگام job نیمه‌تمام هم اجرا می‌شود | `TC:ASSISTANT:A06:004-F` crash → lease/session منقضی و revoke می‌شود |
+| `TEST:ASSISTANT:A06:005` | `TC:ASSISTANT:A06:005-P` platform-supported capability شناسایی | `TC:ASSISTANT:A06:005-N` OS forbidden API رد | `TC:ASSISTANT:A06:005-B` probe unknown از unavailable تفکیک می‌شود | `TC:ASSISTANT:A06:005-F` OS API timeout → capability unknown و pause |
+| `TEST:ASSISTANT:A06:006` | `TC:ASSISTANT:A06:006-P` تغییر step و consent در diff مشخص | `TC:ASSISTANT:A06:006-N` map جدید بدون baseline no-change نیست | `TC:ASSISTANT:A06:006-B` تغییر fingerprint جزئی علامت بازبینی می‌گیرد | `TC:ASSISTANT:A06:006-F` comparator fail → هیچ انتشار خودکار |
+| `TEST:ASSISTANT:A06:007` | `TC:ASSISTANT:A06:007-P` route کامل پس از آزمون active می‌شود | `TC:ASSISTANT:A06:007-N` fail/ambiguous به active نمی‌رسد | `TC:ASSISTANT:A06:007-B` تنها یک platform از چند platform pass است و فقط همان فعال می‌شود | `TC:ASSISTANT:A06:007-F` publication transaction timeout → وضعیت مشخص/نسخه قبلی active |
+| `TEST:ASSISTANT:A06:008` | `TC:ASSISTANT:A06:008-P` live observation منطبق dispatch را اجازه می‌دهد | `TC:ASSISTANT:A06:008-N` stale map بدون observation effect=0 | `TC:ASSISTANT:A06:008-B` UI در فاصله observe و effect عوض می‌شود؛ observe مجدد/stop | `TC:ASSISTANT:A06:008-F` screenshot/observation unavailable → paused |
+| `TEST:ASSISTANT:A06:009` | `TC:ASSISTANT:A06:009-P` mismatch به A04 pause منتقل می‌شود | `TC:ASSISTANT:A06:009-N` ambiguous locator به کلیک حدسی نمی‌رسد | `TC:ASSISTANT:A06:009-B` چند نتیجه ظاهراً موفق به unknown می‌رود | `TC:ASSISTANT:A06:009-F` owner unavailable → reconciliation pending |
+| `TEST:ASSISTANT:A06:010` | `TC:ASSISTANT:A06:010-P` tool choice با آزمون تفصیلی ثبت می‌شود | `TC:ASSISTANT:A06:010-N` Playwright از مثال به MUST تبدیل نمی‌شود | `TC:ASSISTANT:A06:010-B` scheduling sample قابل override می‌ماند | `TC:ASSISTANT:A06:010-F` tool PoC ناکام → گزینه دیگر/hold، نه ادعای آماده‌بودن |
+| `TEST:ASSISTANT:A06:011` | `TC:ASSISTANT:A06:011-P` trace دارای version/outcome non-sensitive است | `TC:ASSISTANT:A06:011-N` OTP/PII از log/artifact حذف | `TC:ASSISTANT:A06:011-B` field جدید تا classification/redaction وارد telemetry نمی‌شود | `TC:ASSISTANT:A06:011-F` redaction service outage → artifact انتشار نمی‌یابد |
+| `TEST:ASSISTANT:A06:012` | `TC:ASSISTANT:A06:012-P` job با latency عادی پایان می‌یابد | `TC:ASSISTANT:A06:012-N` policy بدون سقف تلاش یا retry پس از breaker رد می‌شود | `TC:ASSISTANT:A06:012-B` attemptهای k−1، k و k+1 سنجیده می‌شوند؛ تعداد از k عبور نمی‌کند و interactive reserve پاسخ‌گو می‌ماند | `TC:ASSISTANT:A06:012-F` dependency outage → breaker، job recoverable و map active قبلی حفظ |
+
+#### Traceability، Dependencies و تصمیم‌های باز
+
+| مسیر | ردیابی/مالکیت |
+| --- | --- |
+| Source→Requirement | B:1482–1556,1604–1626؛ W:1363–1376,1511–1546؛ Graph `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring`, `docs_shahab_phase_2_development_blueprint_ui_monitor_flow`, `docs_shahab_phase_2_development_blueprint_ui_monitor_non_destructive`, `docs_shahab_phase_2_development_blueprint_ui_runtime_recheck`, `docs_shahab_phase_2_development_blueprint_live_ui_observation`, `docs_shahab_phase_2_development_blueprint_session_device_isolation`. |
+| Requirement→Enabler→Task→Subtask | ۱۲/۱۲ Requirement به EN و TASK/S متصل‌اند؛ رابطه مالکیت با A04/C02/C05a/C06/C14 حفظ است. |
+| Requirement→AC→Test→Cases | `REQ:A06:nnn`↔`AC:A06:nnn`↔`TEST:A06:nnn`؛ ۱۲/۱۲ مسیر دوسویه و چهار case اختصاصی برای هر رفتار؛ ۴۸ Planned Cases. |
+| Dependencies | C05a service/provider identity؛ C02 auth/consent؛ A04 live UI executor؛ A02 jobs/recovery؛ C01/A09 logging/resilience; C06 shell و C14 history/notice. dependency هیچ data ownership جدیدی ایجاد نمی‌کند. |
+| Open | UI Knowledge Store schema/technology، browser/device hosting، account/test access، cadence، thresholds، provider permissions و ابزار runner پس از PoC/تأیید مالک؛ مثال‌های سند مصوبه نیستند. UI Monitoring با User Monitoring جدا باقی می‌ماند. |
+
+#### ممیزی مستقل A06 — RA و IPA
+
+- **RA:** Candidate 14/14 تعیین تکلیف؛ B:1482–1556 و تصمیم‌های A06/A09 با متن اصلی تطبیق؛ non-destructive test، runtime recheck، platform limits، data/privacy، recovery و ownerهای A04/C02/C05a/C06/C14 حفظ؛ انتخاب ابزار/time/DB و آستانه‌های باز به الزام تبدیل نشدند؛ duplication=0 و inferred/ambiguous-to-requirement=0؛ **PASS**.
+- **IPA:** ۱۲/۱۲ Requirement به Task/Subtask، AC، TD و ۴ case اختصاصی P/N/B/F وصل؛ ۱۲ AC دارای precondition/trigger/oracle/fail؛ تست‌های test-account، publish gate، UI stale، privacy و failure جدایند؛ DAG cycle=0؛ product discovery/test اجرا نشده؛ **PASS**.#### CPA مشترک A05/A06 — کنترل‌های دوبسته‌ای
+
+| Gate | کنترل | نتیجه |
+| --- | --- | --- |
+| `CPA:A05-A06:01` Ownership | A05 عملیات و نتیجهٔ مالی؛ A06 UI map و چرخهٔ کشف؛ A04 اجرا/مشاهده زنده؛ A02 workflow؛ C02 مجوز؛ C04 entitlement؛ C05a capability؛ سرویس مالی/بانکی مالک effect؛ C13b/C14 UI history/notice. | PASS |
+| `CPA:A05-A06:02` Contract | route/version و result reference برای A05؛ map version/evidence/status برای A06؛ schema اجرایی/API هنوز OPEN و جعل نشده. | PASS |
+| `CPA:A05-A06:03` Dependency DAG | C05a/C02/C04→A05→A02/A04→owner؛ discovery source/test environment→A06→A04؛ cycles=0. | PASS |
+| `CPA:A05-A06:04` Coverage | O5-05 capabilityهای آغازین فقط در A05؛ UI map/update/runtime check فقط در A06؛ سه capability بانک/کیف پول و UI map یک موضوع واحد نشدند. | PASS |
+| `CPA:A05-A06:05` Security/Privacy | secure input، consent revalidation، PII/OTP redaction، isolated test session، non-destructive discovery، no bank effect before approval. | PASS |
+| `CPA:A05-A06:06` Failure/Idempotency | unknown external result به استعلام؛ retry محدود؛ discovery failure map منتشرشده را جایگزین نمی‌کند؛ stale UI باعث pause؛ duplicate effect=0. | PASS |
+| `CPA:A05-A06:07` AC/Test traceability | A05: 12 REQ/AC/TD, 48 cases؛ A06: 12 REQ/AC/TD, 48 cases؛ reverse links یک‌به‌یک و شرح scenario مجزا. | PASS |
+| `CPA:A05-A06:08` Status/decision consistency | برنامه‌ریزی پذیرفته، محصول اجرا نشده؛ ابزار/بانک/threshold/SLA/physical schema باز؛ C/R و A01–A04 مالکیت بازنویسی نشد؛ A07/A08 باقی. | PASS |
+
+#### Checkpoint جاری پس از A05/A06
+
+- A05: ۱۲ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- A06: ۱۴ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- جمع A05/A06: ۲۶ Candidate، ۲۴ Requirement، ۸ Enabler، ۱۰ Task، ۳۲ Subtask، ۲۴ AC/TD و ۹۶ Planned Test Case؛ CPA=8/8 PASS. هر Test Case برنامه‌ای است و اجرا نشده.
+- مجموع A01–A06: ۷۷ Candidate، ۷۵ Requirement، ۲۲ Enabler، ۲۷ Task، ۸۹ Subtask، ۷۵ AC/TD و ۳۰۰ Planned Test Case؛ Assistant=۶/۸ و کل برنامه=۳۴/۳۶. A07/A08 شروع نشده‌اند.
+- هیچ Product Test، اتصال بانکی، Computer Use واقعی یا پایش UI واقعی در این مأموریت اجرا نشده؛ وضعیت PR همچنان Draft است.
 
 ### A07 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان و دامنه باید از گراف و منابع مصوب، مستقل از دامنه‌های پذیرفته A01–A06 استخراج شود.
 
 ### A08 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان و دامنه باید از گراف و منابع مصوب، مستقل از دامنه‌های پذیرفته A01–A07 استخراج شود.
 
 ---
 
@@ -8105,4 +8332,4 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 
 - `RA/IPA PASS` به معنی کامل‌شدن *برنامه* همان بسته است؛ به معنی اجرای کد، تأیید امنیت/مالی، استقرار یا کسب ارزش واقعی برای کاربر نیست.
 - هیچ واحد پولی، ظرفیت، فناوری، آستانه، سیاست یا تصمیم اجرایی باز از خود این سند تصویب نمی‌شود؛ هر کدام باید در Gate مصوب مربوط تعیین تکلیف شوند.
-- در وضعیت جاری C01 تا C14، R01–R10 و A01–A04 در سطح برنامه‌ریزی پذیرفته‌اند؛ A05–A08 هنوز تدوین نشده‌اند. تعداد بسته‌های پذیرفته‌شدهٔ برنامه ۳۲ از ۳۶ است و به معنی تکمیل فاز دوم نیست.
+- در وضعیت جاری C01 تا C14، R01–R10 و A01–A06 در سطح برنامه‌ریزی پذیرفته‌اند؛ A07–A08 هنوز تدوین نشده‌اند. تعداد بسته‌های پذیرفته‌شدهٔ برنامه ۳۴ از ۳۶ است و به معنی تکمیل فاز دوم نیست.
