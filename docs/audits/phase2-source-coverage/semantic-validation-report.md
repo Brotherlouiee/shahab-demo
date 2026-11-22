@@ -34,9 +34,12 @@
 | محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
+| یکتایی Atomic Obligation ID | PASS | 0 ID ثبت‌شده؛ فعلاً هیچ الزام اتمی نهایی نشده است |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
 | صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8814؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
+| علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
 | پیوندهای Source→Package→Req→Task→AC/Test | UNVERIFIED | همهٔ ارجاع‌های واژگانی فقط candidate هستند |
 | وضعیت نگاشت نامعتبر/شکسته | OPEN | پس از اعتبارسنجی IDهای درون برنامه و بازبینی معنایی تعیین می‌شود |
 

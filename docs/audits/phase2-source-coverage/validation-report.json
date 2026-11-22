@@ -97,6 +97,12 @@
       "result": "PASS",
       "examples": []
     },
+    "atomic_obligation_id_uniqueness": {
+      "checked": 0,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
     "source_line_ranges": {
       "checked": 1547,
       "errors": 0,
@@ -145,6 +151,12 @@
       "result": "PASS",
       "examples": []
     },
+    "package_index_reference_integrity": {
+      "checked": 3706,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
     "candidate_package_references": {
       "checked": 1104,
       "errors": 0,
@@ -182,6 +194,12 @@
       "examples": []
     },
     "no_unverified_mapping_marked_verified": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "review_required_rows_have_reason": {
       "checked": 1633,
       "errors": 0,
       "result": "PASS",

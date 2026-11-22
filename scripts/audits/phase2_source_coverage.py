@@ -625,6 +625,8 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     record("table_count", sum(r["unit_type"] == "TABLE" for r in inventory), [f"found {sum(r['unit_type']=='TABLE' for r in inventory)}"] if sum(r["unit_type"] == "TABLE" for r in inventory) != 58 else [])
     record("source_unit_id_uniqueness", len(unit_ids), [f"duplicate {x}" for x,n in Counter(unit_ids).items() if n > 1])
     record("atomic_candidate_id_uniqueness", len(candidate_ids), [f"duplicate {x}" for x,n in Counter(candidate_ids).items() if n > 1])
+    obligation_ids = [r["atomic_obligation_id"] for r in candidates if r.get("atomic_obligation_id")]
+    record("atomic_obligation_id_uniqueness", len(obligation_ids), [f"duplicate {x}" for x,n in Counter(obligation_ids).items() if n > 1])
     bad_ranges=[]
     for row in inventory:
         maximum=source_hashes[row["document"]]["physical_lines"]
@@ -663,6 +665,13 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             for value in filter(None,row[col].split(";")):
                 if value not in plan_ids:ref_errors.append(f"{col}: {value} not found in plan")
     record("requirement_task_ac_test_references", sum(len(r[c].split(";")) for r in trace for c in ["requirement_candidates","task_subtask_candidates","ac_test_candidates","story_enabler_candidates"]), ref_errors)
+    package_ref_columns = ["mentioned_candidate_ids", "mentioned_requirement_ids", "mentioned_story_enabler_ids", "mentioned_task_subtask_ids", "mentioned_ac_ids", "mentioned_test_definition_ids", "mentioned_test_case_ids", "mentioned_dependency_ids", "mentioned_contract_ids", "mentioned_handoff_ids"]
+    package_ref_errors=[]
+    for row in packages:
+        for col in package_ref_columns:
+            for value in filter(None, row.get(col, "").split(";")):
+                if value not in plan_ids:package_ref_errors.append(f"{row['package_id']} {col}: {value} not found in plan")
+    record("package_index_reference_integrity", sum(len(r.get(c, "").split(";")) for r in packages for c in package_ref_columns), package_ref_errors)
     owner_errors=[]
     for row in trace:
         for owner in filter(None,row["owner_package_candidates"].split(";")):
@@ -681,6 +690,8 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     record("execution_trace_row_integrity", len(trace), trace_errors)
     verified_errors=[r["candidate_id"] for r in trace if r["coverage_status"] in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"} or r["review_status"]=="VERIFIED"]
     record("no_unverified_mapping_marked_verified", len(trace), [f"unexpected verified mapping {x}" for x in verified_errors])
+    missing_review_reasons=[r["candidate_id"] for r in candidates if not r.get("review_reason", "").strip()]
+    record("review_required_rows_have_reason", len(candidates), missing_review_reasons)
     record("structural_parse", sum(1 for _ in inventory), structural_errors)
     return checks
 
@@ -797,9 +808,12 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "| محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |",
         f"| Package Execution Index | {'PASS' if len(packages) == 36 else 'FAIL'} | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |",
         f"| تکراری نبودن IDهای منبع/candidate | {validations['source_unit_id_uniqueness']['result']}/{validations['atomic_candidate_id_uniqueness']['result']} | IDs بررسی‌شده: {validations['source_unit_id_uniqueness']['checked']} source units، {validations['atomic_candidate_id_uniqueness']['checked']} candidateها |",
+        f"| یکتایی Atomic Obligation ID | {validations['atomic_obligation_id_uniqueness']['result']} | {validations['atomic_obligation_id_uniqueness']['checked']} ID ثبت‌شده؛ فعلاً هیچ الزام اتمی نهایی نشده است |",
         "| شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |",
         f"| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | {validations['requirement_task_ac_test_references']['result']} | تعداد tokenهای کنترل‌شده: {validations['requirement_task_ac_test_references']['checked']}؛ معنای نگاشت‌ها هنوز UNVERIFIED است |",
+        f"| یکپارچگی ارجاع‌های Package Index | {validations['package_index_reference_integrity']['result']} | {validations['package_index_reference_integrity']['checked']} شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |",
         f"| پوشش کامل trace rowها | {validations['execution_trace_row_integrity']['result']} | {validations['execution_trace_row_integrity']['checked']} ردیف |",
+        f"| علت‌دار بودن candidateهای نیازمند بازبینی | {validations['review_required_rows_have_reason']['result']} | {validations['review_required_rows_have_reason']['checked']} ردیف |",
         "| پیوندهای Source→Package→Req→Task→AC/Test | UNVERIFIED | همهٔ ارجاع‌های واژگانی فقط candidate هستند |",
         "| وضعیت نگاشت نامعتبر/شکسته | OPEN | پس از اعتبارسنجی IDهای درون برنامه و بازبینی معنایی تعیین می‌شود |",
         "",
