@@ -18,12 +18,12 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 306 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 30 ردیف مثال و 116 نگاشت معنایی بررسی‌شده |
-| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 128 از 470 ردیف جدول، 0 از 27 بلوک fenced |
-| Candidateهای pending review | 1327؛ pending بودن به‌تنهایی شکاف قطعی نیست |
-| رکوردهای Gap Register | 1347؛ 1327 بازبینی محتوایی + 20 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 261 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 261/21/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 354 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 34 ردیف مثال و 159 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 159 از 470 ردیف جدول، 1 از 27 بلوک fenced |
+| Candidateهای pending review | 1279؛ pending بودن به‌تنهایی شکاف قطعی نیست |
+| رکوردهای Gap Register | 1309؛ 1279 بازبینی محتوایی + 30 تصمیم باز |
+| Atomic Obligationهای دارای نگاشت Covered | 370 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 370/31/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -42,6 +42,7 @@
 | BLUEPRINT-ROUTER-EXAMPLES-001 | BP-TR-004-05, BP-TR-004-06 | 220→222 | 1413→1411 | 0 | 0/0/0 | 0 |
 | BLUEPRINT-RAG-CONTRACTS-001 | BP-C-0077, BP-C-0078, BP-C-0079, BP-C-0080, BP-C-0081, BP-C-0082, BP-C-0083, BP-C-0084, BP-C-0085, BP-C-0086, BP-C-0087, BP-C-0088, BP-C-0089, BP-C-0090, BP-C-0091, BP-C-0092, BP-TR-005-02, BP-TR-005-03, BP-TR-005-04, BP-TR-005-05, BP-TR-005-06, BP-TR-005-07, BP-TR-005-08, BP-TR-005-09, BP-TR-005-10, BP-TR-005-11, BP-C-0093, BP-TR-006-02, BP-TR-006-03, BP-TR-006-04, BP-TR-006-05, BP-TR-006-06, BP-C-0094, BP-C-0095, BP-C-0096, BP-C-0097, BP-C-0098 | 222→259 | 1411→1374 | 63 | 59/4/0 | 2 |
 | BLUEPRINT-RAG-DISCOVERY-F05-001 | BP-TR-008-02, BP-TR-008-03, BP-TR-008-04, BP-TR-009-02, BP-TR-009-03, BP-TR-009-04, BP-TR-009-05, BP-TR-010-02, BP-TR-010-03, BP-TR-010-04, BP-TR-010-05, BP-TR-010-06, BP-TR-010-07, BP-TR-010-08, BP-TR-011-02, BP-TR-011-03, BP-TR-011-04, BP-TR-011-05, BP-TR-011-06, BP-TR-011-07, BP-TR-011-08, BP-TR-011-09, BP-TR-011-10, BP-TR-011-11, BP-C-0103, BP-C-0104, BP-C-0105, BP-C-0106, BP-C-0107, BP-C-0108, BP-C-0109, BP-C-0110, BP-C-0111, BP-C-0112, BP-C-0113, BP-C-0114, BP-C-0115, BP-C-0116, BP-C-0117, BP-C-0118, BP-C-0119, BP-C-0120, BP-C-0121, BP-C-0122, BP-C-0123, BP-C-0124, BP-C-0125 | 259→306 | 1374→1327 | 86 | 86/0/0 | 0 |
+| BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001 | BP-TR-013-02, BP-TR-013-03, BP-TR-013-04, BP-TR-013-05, BP-CODE-007, BP-C-0142, BP-C-0143, BP-C-0144, BP-TR-014-02, BP-TR-014-03, BP-TR-014-04, BP-TR-014-05, BP-TR-014-06, BP-TR-014-07, BP-C-0158, BP-C-0159, BP-C-0160, BP-C-0161, BP-TR-015-02, BP-TR-015-03, BP-TR-015-04, BP-TR-015-05, BP-C-0186, BP-C-0187, BP-TR-016-02, BP-TR-016-03, BP-TR-016-04, BP-TR-016-05, BP-C-0195, BP-C-0196, BP-TR-017-02, BP-TR-017-03, BP-TR-017-04, BP-TR-017-05, BP-TR-017-06, BP-TR-017-07, BP-TR-017-08, BP-TR-017-09, BP-TR-017-10, BP-TR-017-11, BP-TR-017-12, BP-TR-017-13, BP-TR-017-14, BP-C-0203, BP-C-0204, BP-C-0205, BP-C-0206, BP-C-0207 | 306→354 | 1327→1279 | 122 | 109/13/0 | 13 |
 
 ## کنترل‌های ماشینی
 
@@ -50,17 +51,17 @@
 | تعداد Heading/Table | PASS | 326 Heading و 58 Table |
 | هش Git blob دو منبع | PASS | برابر manifest جاری |
 | SHA-256 دو منبع | PASS | با اثر انگشت graph پین‌شده تطبیق داده شد |
-| محدوده‌های متنی و سطرهای جدول | PARTIAL | 306 از 1633 Candidate بررسی شده؛ 1327 باقی است |
+| محدوده‌های متنی و سطرهای جدول | PARTIAL | 354 از 1633 Candidate بررسی شده؛ 1279 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 303 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 212 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 425 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 260 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9312؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
-| یکپارچگی ارجاع‌های Package Index | PASS | 3708 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9439؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| یکپارچگی ارجاع‌های Package Index | PASS | 3711 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 282 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 401 obligation dispositions mapped; remaining candidates are pending |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -73,7 +74,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labels فقط سرنخ‌اند. تا این اجرا، 306 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 303 Atomic Obligation ثبت شده؛ 1327 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 354 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 425 Atomic Obligation ثبت شده؛ 1279 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 

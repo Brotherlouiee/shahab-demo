@@ -4812,6 +4812,8 @@ EN:C07:001 مدل مالکیت و تعهد (001–009)؛ EN:C07:002 منشأ و 
 
 برای هر Requirement یک AC:CORE:C07:001–020 و TEST:CORE:C07:001–020 تعریف شد. Oracleها: حساب/مالک درست؛ ledger داخلی جدا؛ تعهد با درآمد خلط نشود؛ منبع و حق برداشت حفظ؛ انتقال حق نسازد؛ مهلت درست؛ state و pending مجزا؛ تخصیص تحت سقف؛ محاسبه ریالی دقیق؛ طلب در خاتمه حذف نشود. هر Test سه کیس موفق/منفی/مرزی (60 مورد برنامه‌ای) دارد؛ اجرا نشده.
 
+`AC:CORE:C07:004` / `TEST:CORE:C07:004` — مانده عمومی مشتری پس از تغییر Plan حفظ می‌شود و به تعهد/موجودی اختصاصی خدمت تبدیل نمی‌شود؛ تغییر Plan یا ثبت سفارش نباید موجودی کیف پول را حذف/قفل کند. Planned cases: plan-change before/after service order; reject deletion or service-tagging of public balance; prove balance continuity from the authoritative wallet record. این Test برنامه‌ای است و اجرا نشده.
+
 #### قرارداد و Handoff
 
 قراردادهای C02:01/:02 و C01/C03 بازیافت می‌شوند؛ REQ:CORE:121–123 و :125–130 درباره دوام/دسترسی سوابق به‌عنوان ارجاع مشترک حفظ می‌شوند، نه کپی. Handoff: C08 شارژ/هدیه؛ C09 مصرف/رزرو؛ C10 انتقال/برداشت؛ C11a استرداد؛ C12a ledger/schema؛ C12b تطبیق/بازیابی؛ C13a تسویه/حسابداری؛ C13b رابط. موارد باز: بانک/حساب، قانون جاری، حسابداری هدیه و شناسایی درآمد، تصفیه، debit/credit و نام فنی state/schema.
@@ -5645,7 +5647,7 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | `AC/TEST:C12A:005` | lineage همه مسیرهای مصوب و اصلاحات را بدون گم‌شدن سهم بازسازی کند. | T05: split/merge/relay chain قابل بازسازی؛ حذف parent edge رد؛ حلقه انتقال به مالک پیشین حق برداشت تازه ایجاد نمی‌کند. |
 | `AC/TEST:C12A:006` | سه چرخه مستقل باشند و correlation برقرار بماند. | T06: service fail ولی bank unknown، ledger reservation را حفظ می‌کند؛ state یک چرخه به دیگری کپی نمی‌شود؛ نتیجه دیررس مرزی به چرخه خود اعمال می‌شود. |
 | `AC/TEST:C12A:007` | posted entry immutable؛ اصلاحی تازه به اصل پیوند بخورد. | T07: اصلاح، سابقه و اصل را حفظ می‌کند؛ update/delete ثبت قطعی رد؛ archive pending به جای reversal پذیرفته نمی‌شود. |
-| `AC/TEST:C12A:008` | شناسه‌ها نقش مستقل داشته و روابط قابل پیمایش باشند. | T08: یک operation چند entry را دارد؛ invoice id جای payment id نمی‌شود؛ شناسه تکراری یا پیوند به operation دیگر رد می‌شود. |
+| `AC/TEST:C12A:008`; `AC:CORE:C12A:008` / `TEST:CORE:C12A:008` | شناسه‌ها نقش مستقل داشته و روابط قابل پیمایش باشند. | T08: یک operation چند entry را دارد؛ invoice id جای payment id نمی‌شود؛ شناسه تکراری یا پیوند به operation دیگر رد می‌شود. |
 | `AC/TEST:C12A:009` | تکرار اقدام/پیام اثر دوم نداشته و تغییر payload با همان کلید reject شود. | T09: retry همان action یک posting دارد؛ inbound duplicate بی‌اثر؛ همان key با مبلغ/مقصد دیگر رد؛ correction واقعی با action/ref مستقل ثبت می‌شود. |
 | `AC/TEST:C12A:010` | reserve componentized؛ post جزئی و کاهش رزرو هماهنگ؛ release فقط پس از روشن‌شدن تعهد. | T10: post جزئی با reserve متناظر؛ failure میان دو تغییر rollback؛ unknown تعهد را نگه می‌دارد؛ release بیش از باقیمانده رد. |
 | `AC/TEST:C12A:011` | parallel posting، حق مصرف/مانده/limit را در همان مرز کنترل کند. | T11: دو درخواست رقیب فقط یک بار ظرفیت را می‌گیرند؛ expired/unauthorized component رد؛ تغییر payer/payee/amount پس از تأیید نیازمند پذیرش دوباره است. |
@@ -5813,7 +5815,7 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 | Requirement | منبع مصوب | الزام اتمی | Task |
 |---|---|---|---|
 | C13A-R01 | Blueprint B:1019–1027; 1109–1120 | سه جریان اشتراک، تعرفه هر اجرای دستیار و مصرف مشاور تفکیک شوند؛ چرخه و قیمت اشتراک در C04 می‌ماند. | C13A-T01 |
-| C13A-R02 | Wallet W:1385–1398; Blueprint B:1118–1126 | قیمت مشاور از پرامپت قابل صورتحساب و شدت متناظر استفاده کند؛ metric، ضریب و نرخ عددی باز بمانند. | C13A-T01 |
+| C13A-R02 | Wallet W:1385–1398; Blueprint B:1118–1126 | قیمت مشاور از واحد پرامپت قابل‌صورتحساب و شدت متناظر استفاده کند؛ تجمیع شدت‌های متفاوت برای هر واحد فقط یک‌بار صورتحساب شود؛ فراخوانی درونی، Retry و زیرگام مدل پرامپت مشتری محسوب نشوند مگر واحد قابل‌صورتحساب جداگانه تعریف شده باشد؛ metric، ضریب و نرخ عددی باز بمانند. | C13A-T01 |
 | C13A-R03 | Wallet W:1385–1398; Blueprint B:1120 | هزینه دستیار شامل پایه خدمت و ضریب مصوب یک‌دوم مشاوره حین همان عملیات باشد؛ حاشیه 20% سقف افزایش مجاز است، نه fee یا مبلغ قطعی. | C13A-T01 |
 | C13A-R04 | Wallet W:1399–1412; Blueprint B:1138 | نرخ اجرا در آغاز snapshot شود؛ اجرای پیوسته همان مبنا را نگه دارد؛ اجرای تازه نرخ زمان شروع را بگیرد؛ گذشته repricing نشود. | C13A-T02 |
 | C13A-R05 | Wallet W:1413–1426; 1211–1234 | انتظار، replay، پاسخ قبلی یا inquiry به‌تنهایی اجرای قابل صورتحساب تازه نسازد؛ نتیجه نامعلوم تحت C12b است. | C13A-T02 |
@@ -5842,7 +5844,7 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 | Requirement | AC ID | Test ID | معیار پذیرش | Test Definition |
 |---|---|---|---|---|
 | C13A-R01 | C13A-AC01 | C13A-TD01 | سه جریان درآمدی تفکیک؛ اشتراک به C04 | اشتراک و دو جریان خدمت در یک گزارش |
-| C13A-R02 | C13A-AC02 | C13A-TD02 | prompt × شدت؛ metric/rate باز | دو شدت با metric تاییدنشده |
+| C13A-R02 | C13A-AC02 | C13A-TD02 | prompt قابل‌صورتحساب × شدت؛ تجمیع بدون صورتحساب تکراری؛ فراخوانی درونی/Retry/substep بدون واحد تعریف‌شده صورتحساب نشود؛ metric/rate باز | تجمیع چند prompt با شدت‌های متفاوت، retry و زیرگام در برابر prompt مستقل؛ یک charge برای هر واحد مجاز و هیچ نرخ/metric فرضی |
 | C13A-R03 | C13A-AC03 | C13A-TD03 | نیم‌نرخ مصوب؛ سقف 20% fee نیست | مبلغ محاسبه‌شده پایین‌تر از cap |
 | C13A-R04 | C13A-AC04 | C13A-TD04 | نرخ آغاز اجرا ثابت؛ اجرای تازه نرخ جاری | تغییر قیمت حین اجرا و اجرای تازه |
 | C13A-R05 | C13A-AC05 | C13A-TD05 | replay/inquiry مصرف تازه نیست | پاسخ/رسید دوباره و اجرای تازه |
@@ -7952,8 +7954,8 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `REQ:ASSISTANT:A04:007` | پس از نصب یا تغییر مجوز، نصب/capability/permission دوباره بررسی می‌شود؛ نتیجه پیشین به‌تنهایی مجوز اجرا نیست. | B:1502–1514؛ A04/C02 |
 | `REQ:ASSISTANT:A04:008` | adapter هر platform محدودیت‌های واقعی OS را اعمال می‌کند؛ در iOS فهرست/کنترل آزاد اپ ثالث و در Android کشف عمومی خارج از مجوز فرض نمی‌شود. | B:1406, 1502–1522؛ A04 |
 | `REQ:ASSISTANT:A04:009` | مدل فقط observation مجاز UI و proposed next action تولید می‌کند و هیچ action را مستقیماً اجرا نمی‌کند. | B:1482؛ Assistant/A01 |
-| `REQ:ASSISTANT:A04:010` | executor فقط action نوع‌دار، محدود به workflow step و target/capability معتبر را اجرا می‌کند؛ متن آزاد مدل قابل اجرا نیست. | B:1482–1492؛ A04/A02 |
-| `REQ:ASSISTANT:A04:011` | پیش از هر UI effect، workflow status و permission/consent/شرط جاری از owner دوباره معتبر می‌شود. | B:1482–1496؛ A02/C02/owner |
+| `REQ:ASSISTANT:A04:010` | executor فقط action نوع‌دار، محدود به workflow step و target/capability معتبر را اجرا می‌کند؛ متن آزاد مدل قابل اجرا نیست. برای پرداخت یا امضا، اقدام مستقیم مشتری در محیط امن ارائه‌دهنده در صورت دسترس‌بودن مسیر ترجیح دارد؛ این ترجیح به‌تنهایی ارائه‌دهنده یا API مشخصی را تصویب نمی‌کند. | B:1151–1154, 1482–1492؛ A04/A02/C02 |
+| `REQ:ASSISTANT:A04:011` | پیش از هر UI effect، workflow status، entitlement پلن/خرید از C04، مجوز و رضایت جاری از C02، و امکان قانونی/فنی از owner هم‌زمان دوباره معتبر می‌شوند؛ اثر فقط وقتی آغاز می‌شود که هر سه دروازهٔ مصوب دسترسی، اختیار مشتری و امکان اجرا برقرار باشند؛ وضعیت نامعلوم/رد در هر دروازه fail-closed است. | B:1147, 1482–1496؛ C04/C02/A02/A04/owner |
 | `REQ:ASSISTANT:A04:012` | locator ambiguity، صفحه تغییرکرده یا نشانه‌های متناقض باعث توقف امن و درخواست بررسی/تأیید مجاز می‌شود؛ executor action حدسی نمی‌زند. | B:1482–1501؛ A04 |
 | `REQ:ASSISTANT:A04:013` | log/trace فقط metadata حداقلی و redacted ثبت می‌کند و screenshot، OTP، credential، متن فرم یا payload محرمانه را ذخیره نمی‌کند. | B:1482–1501؛ C01/A04 |
 
@@ -7965,7 +7967,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 |---|---|---|
 | `TASK:ASSISTANT:A04:001` | Route capability registry/adapter contract؛ Assistant با ورودی C05a | `TASK:ASSISTANT:A04:001.S01` schema خدمت/platform route شامل capability/version/permission requirement؛ `REQ:ASSISTANT:A04:001`/002. `TASK:ASSISTANT:A04:001.S02` resolver فقط route منتشر/مجاز را برمی‌گزیند؛ `REQ:ASSISTANT:A04:001`/005. `TASK:ASSISTANT:A04:001.S03` adapter capability probe برای Web/Android/iOS با unknown state؛ `REQ:ASSISTANT:A04:003`/008. |
 | `TASK:ASSISTANT:A04:002` | Installed-app/permission decision flow؛ Assistant/C02 | `TASK:ASSISTANT:A04:002.S01` probe با حداقل OS permission و بدون inventory غیرمجاز؛ `REQ:ASSISTANT:A04:003`/008. `TASK:ASSISTANT:A04:002.S02` explicit install prompt و ثبت consent reference؛ `REQ:ASSISTANT:A04:006`. `TASK:ASSISTANT:A04:002.S03` post-install/regrant recheck؛ `REQ:ASSISTANT:A04:007`. |
-| `TASK:ASSISTANT:A04:003` | UI observation and typed action adapter تحت A02؛ Assistant | `TASK:ASSISTANT:A04:003.S01` observation output محدود به task/capability context؛ `REQ:ASSISTANT:A04:009`. `TASK:ASSISTANT:A04:003.S02` action schema allowlist و workflow step binding؛ `REQ:ASSISTANT:A04:010`. `TASK:ASSISTANT:A04:003.S03` pre-effect permission/consent/status revalidation؛ `REQ:ASSISTANT:A04:011`. `TASK:ASSISTANT:A04:003.S04` ambiguity/stale UI stop & human handoff؛ `REQ:ASSISTANT:A04:012`. |
+| `TASK:ASSISTANT:A04:003` | UI observation and typed action adapter تحت A02؛ Assistant | `TASK:ASSISTANT:A04:003.S01` observation output محدود به task/capability context؛ `REQ:ASSISTANT:A04:009`. `TASK:ASSISTANT:A04:003.S02` action schema allowlist و workflow step binding؛ `REQ:ASSISTANT:A04:010`. `TASK:ASSISTANT:A04:003.S03` pre-effect revalidation of workflow state, C04 entitlement, C02 permission/consent and owner-confirmed legal/technical capability as one conjunctive gate; unknown/denied predicate blocks the effect؛ `REQ:ASSISTANT:A04:011`. `TASK:ASSISTANT:A04:003.S04` ambiguity/stale UI stop & human handoff؛ `REQ:ASSISTANT:A04:012`. |
 | `TASK:ASSISTANT:A04:004` | Secure session handling, telemetry & recovery boundary؛ Assistant/C01 | `TASK:ASSISTANT:A04:004.S01` secret/OTP input path خارج از LLM context/history؛ `REQ:ASSISTANT:A04:013`. `TASK:ASSISTANT:A04:004.S02` log redaction + screenshot/payload retention disabled by default; retention decision OPEN؛ `REQ:ASSISTANT:A04:013`. `TASK:ASSISTANT:A04:004.S03` outcome/unknown map به سرویس owner و A02 reconciliation؛ result fabrication=0؛ `REQ:ASSISTANT:A04:010`/012. |
 
 #### Acceptance Criteria
@@ -7981,8 +7983,8 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `AC:ASSISTANT:A04:007` | نصب یا permission بعد از prompt تغییر یافته | resume workflow شود | probe جدید قبل اولین action انجام شده؛ stale probe=0 | استفاده از probe قبلی |
 | `AC:ASSISTANT:A04:008` | iOS و Android adapterها در OS capability fixture هستند | probe اجرا شود | فقط OS/API مجاز صدا زده شود؛ unsupported capability اعلام شود | ادعای app enumeration/control آزاد |
 | `AC:ASSISTANT:A04:009` | مدل observation + action پیشنهاد می‌کند | planner پاسخ دهد | direct execution from model=0 و proposal typed است | مدل فراخوانی مستقیم OS/browser |
-| `AC:ASSISTANT:A04:010` | typed action معتبر و free-form action در fixture | executor dispatch کند | فقط allowlisted workflow-bound action اجرا می‌شود؛ free-form count=0 | اجرای رشته خام/خارج از step |
-| `AC:ASSISTANT:A04:011` | permission/consent بین plan و execute لغو شده | executor اثر را آماده کند | fresh validation failure و UI effect=0 | استفاده از consent stale |
+| `AC:ASSISTANT:A04:010` | typed action معتبر و free-form action در fixture؛ برای pay/sign مسیر امن مستقیم ارائه‌دهنده موجود/ناموجود | executor dispatch کند | فقط allowlisted workflow-bound action اجرا می‌شود؛ free-form count=0؛ مسیر امن مستقیم در صورت وجود ترجیح داده می‌شود و provider خاصی انتخاب نمی‌شود | اجرای رشته خام/خارج از step؛ نادیده‌گرفتن مسیر امن مستقیمِ موجود یا استنتاج اجباری provider/API |
+| `AC:ASSISTANT:A04:011` | workflow step موجود است، اما fixtureهای entitlement پلن، مجوز/رضایت مشتری و قابلیت قانونی/فنی owner به‌طور مستقل مثبت، منفی یا نامعلوم‌اند | پیش از UI effect هر سه gate هم‌زمان ارزیابی شوند | اثر فقط وقتی آغاز شود که entitlement، اختیار معتبر مشتری و قابلیت مجاز/فنی همگی مثبت باشند | هر gate منفی/نامعلوم، حتی با مثبت‌بودن دو gate دیگر، UI effect=0؛ status یا prompt به‌تنهایی مجوز نیست |
 | `AC:ASSISTANT:A04:012` | UI locator ambiguous یا صفحه نسبت به expected version تغییر کرده | اقدام بعدی ارزیابی شود | effect=0 و handoff/clarify reason ثبت شود | click/type حدسی |
 | `AC:ASSISTANT:A04:013` | صفحه شامل markerهای OTP، token و PII است | logging/tracing انجام شود | secret-marker matches=0؛ trace metadata correlation/outcome موجود | screenshot/form/OTP/credential ذخیره شود |
 
@@ -7999,8 +8001,8 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `TEST:ASSISTANT:A04:007` | `TC:ASSISTANT:A04:007-P` پس از نصب re-probe موفق می‌شود | `TC:ASSISTANT:A04:007-N` install reported success اما app absent؛ action=0 | `TC:ASSISTANT:A04:007-B` app version/permission تغییرکرده پس از probe | `TC:ASSISTANT:A04:007-F` re-probe failure=workflow paused |
 | `TEST:ASSISTANT:A04:008` | `TC:ASSISTANT:A04:008-P` قابلیت مجاز platform استفاده می‌شود | `TC:ASSISTANT:A04:008-N` iOS app enumeration ممنوع رد می‌شود | `TC:ASSISTANT:A04:008-B` دو OS نسخه capability متفاوت دارند | `TC:ASSISTANT:A04:008-F` unsupported OS API=capability unavailable |
 | `TEST:ASSISTANT:A04:009` | `TC:ASSISTANT:A04:009-P` model observation proposal را در context می‌دهد | `TC:ASSISTANT:A04:009-N` direct model tool call رد می‌شود | `TC:ASSISTANT:A04:009-B` output شامل action خارج از schema است | `TC:ASSISTANT:A04:009-F` vision/model unavailable=بدون action |
-| `TEST:ASSISTANT:A04:010` | `TC:ASSISTANT:A04:010-P` action allowlisted برای workflow step اجرا می‌شود | `TC:ASSISTANT:A04:010-N` free text action rejected | `TC:ASSISTANT:A04:010-B` locator تکراری به ambiguity می‌رود | `TC:ASSISTANT:A04:010-F` executor timeout=unknown/no claimed result |
-| `TEST:ASSISTANT:A04:011` | `TC:ASSISTANT:A04:011-P` revalidation معتبر اجازه action می‌دهد | `TC:ASSISTANT:A04:011-N` consent revoked action=0 | `TC:ASSISTANT:A04:011-B` condition عوض‌شده پس از validation مجدد رد می‌شود | `TC:ASSISTANT:A04:011-F` C02/A02 outage=fail closed |
+| `TEST:ASSISTANT:A04:010` | `TC:ASSISTANT:A04:010-P` typed action معتبر؛ pay/sign با مسیر امن مستقیم provider در صورت دسترس‌بودن انتخاب می‌شود | `TC:ASSISTANT:A04:010-N` free text action rejected | `TC:ASSISTANT:A04:010-B` target/action schema mismatch یا مسیر امن مستقیمِ موجود نادیده گرفته شود | `TC:ASSISTANT:A04:010-F` owner action API unknown=dispatch zero؛ provider/API مشخص از fixture استنتاج نمی‌شود |
+| `TEST:ASSISTANT:A04:011` | `TC:ASSISTANT:A04:011-P` سه gate entitlement/permission/legal-technical capability هم‌زمان معتبرند و action مجاز است | `TC:ASSISTANT:A04:011-N` هر یک از سه gate به‌تنهایی رد شود؛ action=0 | `TC:ASSISTANT:A04:011-B` یکی از gateها پس از برنامه‌ریزی و پیش از اثر تغییر/لغو شود؛ action متوقف شود | `TC:ASSISTANT:A04:011-F` وضعیت هر owner نامعلوم/timeout باشد؛ fail-closed و علت قابل تشخیص |
 | `TEST:ASSISTANT:A04:012` | `TC:ASSISTANT:A04:012-P` صفحه مطابق مشاهده و action schema است | `TC:ASSISTANT:A04:012-N` page changed/ambiguous بدون action | `TC:ASSISTANT:A04:012-B` partial render منتظر observation تازه می‌ماند | `TC:ASSISTANT:A04:012-F` selector lost=paused/manual handoff |
 | `TEST:ASSISTANT:A04:013` | `TC:ASSISTANT:A04:013-P` log شامل platform/capability/outcome refs غیرحساس است | `TC:ASSISTANT:A04:013-N` OTP/PII marker scrub/blocked | `TC:ASSISTANT:A04:013-B` field جدید به allowlist وارد نمی‌شود | `TC:ASSISTANT:A04:013-F` logging sink unavailable بدون fallback raw |
 

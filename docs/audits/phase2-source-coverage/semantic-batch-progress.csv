@@ -1,4 +1,4 @@
-batch_id,selection_order,candidate_id,source_scope,already_reviewed_before_batch
+﻿batch_id,selection_order,candidate_id,source_scope,already_reviewed_before_batch
 PILOT-001,1,BP-TR-007-03,"Blueprint §5.1, Table 5.1, row 03 (line 581)",true
 PILOT-001,2,WL-C-1098,"Wallet §12.2, decision-status paragraph (line 1664)",false
 PILOT-001,3,BP-C-0100,"Blueprint §5.1, prose row on threshold selection (line 586)",true
@@ -211,3 +211,51 @@ BLUEPRINT-RAG-DISCOVERY-F05-001,44,BP-C-0122,"Blueprint §6.2–§10, B:596–74
 BLUEPRINT-RAG-DISCOVERY-F05-001,45,BP-C-0123,"Blueprint §6.2–§10, B:596–740; RAG discovery scenarios, conceptual model/states, F05 and initial evaluation criteria",false
 BLUEPRINT-RAG-DISCOVERY-F05-001,46,BP-C-0124,"Blueprint §6.2–§10, B:596–740; RAG discovery scenarios, conceptual model/states, F05 and initial evaluation criteria",false
 BLUEPRINT-RAG-DISCOVERY-F05-001,47,BP-C-0125,"Blueprint §6.2–§10, B:596–740; RAG discovery scenarios, conceptual model/states, F05 and initial evaluation criteria",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,1,BP-TR-013-02,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,2,BP-TR-013-03,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,3,BP-TR-013-04,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,4,BP-TR-013-05,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,5,BP-CODE-007,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,6,BP-C-0142,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,7,BP-C-0143,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,8,BP-C-0144,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,9,BP-TR-014-02,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,10,BP-TR-014-03,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,11,BP-TR-014-04,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,12,BP-TR-014-05,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,13,BP-TR-014-06,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,14,BP-TR-014-07,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,15,BP-C-0158,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,16,BP-C-0159,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,17,BP-C-0160,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,18,BP-C-0161,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,19,BP-TR-015-02,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,20,BP-TR-015-03,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,21,BP-TR-015-04,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,22,BP-TR-015-05,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,23,BP-C-0186,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,24,BP-C-0187,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,25,BP-TR-016-02,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,26,BP-TR-016-03,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,27,BP-TR-016-04,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,28,BP-TR-016-05,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,29,BP-C-0195,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,30,BP-C-0196,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,31,BP-TR-017-02,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,32,BP-TR-017-03,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,33,BP-TR-017-04,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,34,BP-TR-017-05,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,35,BP-TR-017-06,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,36,BP-TR-017-07,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,37,BP-TR-017-08,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,38,BP-TR-017-09,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,39,BP-TR-017-10,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,40,BP-TR-017-11,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,41,BP-TR-017-12,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,42,BP-TR-017-13,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,43,BP-TR-017-14,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,44,BP-C-0203,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,45,BP-C-0204,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,46,BP-C-0205,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,47,BP-C-0206,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
+BLUEPRINT-SERVICE-ENTITLEMENT-DATA-BOUNDARIES-001,48,BP-C-0207,"Blueprint §4, §10–§13, B:869–1216؛ کاتالوگ/مسیریاب، پلن و قیمت، مجوز مؤثر، مالکیت داده و قرارداد میان‌سرویسی",false
