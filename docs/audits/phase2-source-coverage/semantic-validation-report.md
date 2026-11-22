@@ -24,6 +24,10 @@
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
+## شواهد بسته‌های موجود
+
+۳٬۰۶۴ رکورد locator و disposition پیشین از سند برنامه برای ۳۶/۳۶ بسته به `package-semantic-evidence.csv` وارد شده است. این واردسازی فقط محل شواهد و ارجاع‌های قبلی به Requirement/Task/AC/Test را قابل جست‌وجو می‌کند؛ بازبینی مستقل معنایی محسوب نمی‌شود و هیچ candidate را verified نمی‌کند. تطبیق مکانی locatorهای واردشده با candidateها، ۱٬۴۶۳ هم‌پوشانی خطی و ۱۷۰ candidate بدون هم‌پوشانی مستقیم نشان می‌دهد. هم‌پوشانی خطی نیز entailment یا پوشش معنایی را اثبات نمی‌کند. خلاصه هر بسته، شمار این ردیف‌ها و وضعیت `NOT_CLAIMED` را در `package-semantic-audit.csv` ثبت می‌کند.
+
 ## کنترل‌های ماشینی
 
 | کنترل | نتیجه | توضیح |
@@ -60,7 +64,7 @@ Rule-based labelها صرفاً برای اولویت‌بندی‌اند. مت�
 - `docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md`: Git blob `9681c2bf6c3149317c3788516748084cfb6eac7c`, SHA-256 `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266`, خطوط واقعی `2550`.
 - `docs/SHAHAB_DIGITAL_WALLET.md`: Git blob `1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a`, SHA-256 `8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74`, خطوط واقعی `1780`.
 - گراف: `17622bf4dd56108bee10d880a9dc5eb9617482fd:knowledge-graph/phase2-reference-docs/semantic/graph.json`؛ SHA-256 `f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93`؛ استفاده برای کشف/ارجاع، نه تأیید نگاشت.
-- متن کامل RTF معیارها (در پیوست قبلی) از QG-14 قطع می‌شود؛ این مأموریت براساس پرامپت تکمیلی جاری اجرا شده است.
+- پرامپت یکپارچهٔ پیوست‌شده، متن اصلی و الحاقیه را دربر دارد و کامل است. ادعای نسخهٔ قبلی دربارهٔ قطع‌شدن متن از QG-14 پس گرفته می‌شود. وضعیت ماتریس همچنان به‌علت انجام‌نشدن بازبینی معنایی کامل `INCOMPLETE` است، نه به‌علت نقص پرامپت.
 
 ## مرحلهٔ بعد
 

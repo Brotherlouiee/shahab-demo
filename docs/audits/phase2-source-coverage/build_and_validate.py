@@ -36,7 +36,7 @@ TABLE_SEPARATOR = re.compile(r"^\s*\|?\s*:?-{3,}.*\|.*-+:?\s*\|?\s*$")
 SOURCE_REF = re.compile(r"\b([BW]):\s*(\d+)(?:\s*[-–—]\s*(\d+))?")
 GRAPH_NODE_REF = re.compile(r"\bdocs_[a-z0-9_]+\b")
 ID_RE = re.compile(
-    r"\b(?:CAND|REQ|EN|TE|STORY|TASK|AC|TD|TEST|TC|OPEN|PKG|CPA|CONTRACT|HANDOFF|DEP|DEPENDENCY)"
+    r"\b(?:CAN|CAND|REQ|EN|TE|STORY|TASK|AC|TD|TEST|TC|OPEN|PKG|CPA|CONTRACT|HANDOFF|DEP|DEPENDENCY)"
     r"(?::[A-Z0-9]+)+(?:\.S\d+)?\b"
     r"|\bCAND(?:IDATE)?-[A-Z0-9-]+\b"
     r"|\b(?:C\d{2}[A-Z]?|R\d{2}|A\d{2})-(?:REQ|R|EN|E|STORY|TE|TASK|T|SUBTASK|S|AC|TD|TEST|TC)\d{1,4}(?:\.S\d{1,3})?\b"

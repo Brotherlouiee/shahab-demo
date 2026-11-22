@@ -8,6 +8,7 @@
 - ۱٬۱۳۶ محدودهٔ متنی غیرجدولی، ۴۷۰ سطر سرآیند/دادهٔ جدول و ۲۷ بلوک fenced ثبت شده‌اند. از ۱٬۱۱۰ candidate اولیه، ۲۶ محدودهٔ متنی از قلم افتاده بود و با شناسه‌های افزوده بازیابی شد.
 - Git blob SHA و SHA-256 هر دو منبع در `extraction-manifest.json` هستند؛ گراف پین‌شده Graphify با SHA-256 محتوای این دو منبع هم‌خوان است.
 - تمام ۳۶ بسته در `package-execution-index.csv` ثبت شده‌اند.
+- ۳٬۰۶۴ locator و disposition قبلی بسته‌ها از سند برنامه در `package-semantic-evidence.csv` وارد شده‌اند؛ این شواهد پیشین‌اند و بازبینی مستقل تازه محسوب نمی‌شوند. خلاصهٔ بسته‌ای در `package-semantic-audit.csv` این محدودیت را صریح ثبت می‌کند.
 - طبقه‌بندی‌های ماشینی صرفاً سرنخ‌اند. هیچ Atomic Obligation یا نگاشت اجرا به‌عنوان معنایی‌تأییدشده/`VERIFIED_COVERED` ثبت نشده است.
 - تا زمان بازبینی انسانی، ستون `normative_status` برای همهٔ candidateها `NEEDS_REVIEW` است؛ دسته‌بندی قاعده‌محور جداگانه با عنوان `classification_suggestion` نگه‌داری می‌شود.
 
@@ -23,6 +24,8 @@
 | `atomic-obligations.csv` | ۱٬۶۳۳ source candidate شامل پاراگراف‌ها، ردیف‌های جدول و code blocks؛ ستون Atomic Obligation ID تا بازبینی انسانی خالی می‌ماند |
 | `execution-trace.csv` | نگاشت‌های واژگانیِ پیشنهادی Source→Package/Requirement/Task/AC/Test؛ همه pending/unverified هستند |
 | `package-execution-index.csv` | ۳۶ بسته و شناسه‌ها/ارجاع‌های استخراج‌شده از سند برنامه؛ شناسه‌های ذکرشده ممکن است مصرف‌کننده باشند، نه مالک |
+| `package-semantic-evidence.csv` | locatorهای منبع، candidate، requirement، task و AC/Test ثبت‌شده در بسته‌ها؛ برای مسیریابی شواهد، نه تأیید معنایی جدید |
+| `package-semantic-audit.csv` | شمارش شواهد واردشده برای ۳۶ بسته و وضعیت مستقل‌بودن بازبینی؛ فعلاً `NOT_CLAIMED` |
 | `coverage-gap-register.csv` | موارد نیازمند بازبینی؛ ردیف `PENDING_SEMANTIC_REVIEW` شکاف قطعی محسوب نمی‌شود |
 | `extraction-manifest.json` | منبع، blob SHA، SHA-256، آمار استخراج، گراف و محدودیت‌ها |
 | `semantic-validation-report.md` | نتیجهٔ ممیزی، خطاهای استخراج اصلاح‌شده، کنترل‌ها و محدودیت معناشناختی |
@@ -35,6 +38,7 @@
 ```bash
 python docs/audits/phase2-source-coverage/build_and_validate.py
 python docs/audits/phase2-source-coverage/build_and_validate.py --check-only
+python docs/audits/phase2-source-coverage/build_semantic_evidence.py
 ```
 
 اسکریپت گراف پین‌شدهٔ Graphify را از commit ثبت‌شده در manifest می‌خواند. ارجاع گراف یا هم‌پوشانی خطوط به‌تنهایی شاهد نگاشت معنایی نیست. فقط پس از خواندن متن اصلی و Requirement/Task/AC/Test واقعی، نگاشت را verified کن.
