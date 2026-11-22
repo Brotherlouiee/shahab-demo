@@ -2,25 +2,43 @@
   "source_blobs": [
     {
       "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
-      "sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
-      "lines": 2551
+      "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "physical_lines": 2550,
+      "final_newline": true
     },
     {
       "path": "docs/SHAHAB_DIGITAL_WALLET.md",
-      "sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
-      "lines": 1780
+      "git_blob_sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "physical_lines": 1780,
+      "final_newline": false
     }
   ],
   "heading_count": 326,
   "table_count": 58,
   "source_unit_count": 384,
-  "candidate_paragraph_count": 1110,
-  "method": "Heading extraction and Markdown table delimiter detection; paragraph candidates are NOT validated atomic requirements",
+  "candidate_paragraph_count": 1136,
+  "method": "Preserve baseline candidate IDs; reconcile current source headings/table blocks; enumerate every non-table text range, every table header/data row and fenced block; heuristic labels only; package links remain unverified.",
   "limitations": [
-    "Semantic classification and Graphify mapping not yet completed",
-    "No claim of executable requirement coverage",
-    "Execution trace is intentionally UNVERIFIED",
-    "Tables inside fenced code excluded"
+    "No semantic source row is promoted to an atomic approved obligation by this script.",
+    "All 1,136 text ranges, 470 table rows and fenced blocks require source-context review.",
+    "Execution references are candidate citations and must be confirmed against package behavior.",
+    "Graph node overlap is only a retrieval aid; inferred/ambiguous edges do not approve requirements.",
+    "The 1,110 baseline paragraph candidates are preserved; 26 previously omitted prose ranges are appended with new IDs."
   ],
-  "status": "STRUCTURAL_BASELINE_ONLY"
+  "status": "SEMANTIC_REVIEW_PENDING",
+  "paragraph_range_count": 1136,
+  "table_row_candidate_count": 470,
+  "code_block_count": 27,
+  "candidate_record_count": 1633,
+  "graph": {
+    "commit": "17622bf4dd56108bee10d880a9dc5eb9617482fd",
+    "path": "knowledge-graph/phase2-reference-docs/semantic/graph.json",
+    "sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+    "usage": "discovery and locator references only; no semantic mapping is accepted from graph edges alone"
+  },
+  "baseline_paragraph_candidate_count": 1110,
+  "newly_recovered_paragraph_range_count": 26,
+  "inventory_row_count": 1547
 }

@@ -1,0 +1,206 @@
+{
+  "baseline_commit": "6fdf68020cb57134bb0f12b473e5dbb81a304211",
+  "plan_blob_sha": "6fdf68020cb57134bb0f12b473e5dbb81a304211",
+  "sources": {
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
+      "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "physical_lines": 2550,
+      "final_newline": true
+    },
+    "docs/SHAHAB_DIGITAL_WALLET.md": {
+      "git_blob_sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "physical_lines": 1780,
+      "final_newline": false
+    }
+  },
+  "graph": {
+    "commit": "17622bf4dd56108bee10d880a9dc5eb9617482fd",
+    "path": "knowledge-graph/phase2-reference-docs/semantic/graph.json",
+    "sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+    "status": "DISCOVERY_ONLY"
+  },
+  "counts": {
+    "headings": 326,
+    "tables": 58,
+    "structural_units": 384,
+    "paragraph_ranges": 1136,
+    "text_ranges_semantically_reviewed": 0,
+    "table_rows": 470,
+    "table_rows_semantically_reviewed": 0,
+    "code_blocks": 27,
+    "code_blocks_semantically_reviewed": 0,
+    "candidate_records": 1633,
+    "candidate_records_pending_semantic_review": 1633,
+    "packages_indexed": 36,
+    "package_index_rows": 36,
+    "execution_trace_rows": 1633,
+    "pending_review_rows": 1633,
+    "atomic_obligations_extracted_and_verified": 0,
+    "approved_obligations_verified": 0,
+    "open_decisions_verified": 0,
+    "descriptive_units_verified": 0,
+    "verified_covered_obligations": 0,
+    "partially_covered_obligations": 0,
+    "confirmed_uncovered_obligations": 0,
+    "semantic_reviews_pending": 1633,
+    "unverified_normative_cue_suggestions": 506,
+    "unverified_open_decision_cue_suggestions": 19,
+    "needs_review_candidates": 1633,
+    "classification_suggestions_unverified": {
+      "DESCRIPTIVE": 125,
+      "NEEDS_REVIEW": 762,
+      "NORMATIVE_APPROVED": 506,
+      "SUPERSEDED": 5,
+      "NORMATIVE_OPEN_DECISION": 19,
+      "EXAMPLE": 111,
+      "MIXED": 104,
+      "OUT_OF_SCOPE": 1
+    },
+    "review_statuses": {
+      "REVIEW_REQUIRED": 1633
+    }
+  },
+  "controls": {
+    "structural_counts": "PASS",
+    "source_git_blob_shas": "PASS",
+    "source_sha256_matches_graph": "PASS",
+    "all_classifications_semantically_reviewed": "FAIL",
+    "all_trace_mappings_verified": "FAIL",
+    "package_ids_indexed": "PASS",
+    "no_unverified_mapping_claimed_as_verified": "PASS",
+    "validation_errors": []
+  },
+  "machine_controls": {
+    "heading_count": {
+      "checked": 326,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "table_count": {
+      "checked": 58,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "source_unit_id_uniqueness": {
+      "checked": 1547,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "atomic_candidate_id_uniqueness": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "source_line_ranges": {
+      "checked": 1547,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "source_blob_sha": {
+      "checked": 2,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "graph_node_references": {
+      "checked": 1156,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "candidate_source_unit_references": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "parent_heading_references": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "table_row_enumeration": {
+      "checked": 470,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "package_ids": {
+      "checked": 36,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "requirement_task_ac_test_references": {
+      "checked": 8814,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "candidate_package_references": {
+      "checked": 1104,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "baseline_rows_preserved": {
+      "checked": 1520,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "classification_status_values": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "heuristic_status_not_promoted": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "classification_suggestion_values": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "execution_trace_row_integrity": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "no_unverified_mapping_marked_verified": {
+      "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "structural_parse": {
+      "checked": 1547,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    }
+  },
+  "matrix_build_status": "INCOMPLETE",
+  "program_coverage_status": "INDETERMINATE",
+  "limitations": [
+    "Rule-based classifications are discovery aids and are not accepted normative decisions.",
+    "No atomic obligation is marked verified; no package mapping is marked verified covered.",
+    "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
+    "The source matrix is structurally complete; semantic review of all 1136 text ranges and table rows is not complete.",
+    "Graph node overlap is a retrieval reference, not semantic entailment."
+  ]
+}
