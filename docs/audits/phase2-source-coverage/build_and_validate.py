@@ -50,7 +50,10 @@ def sha256(path: Path) -> str:
 
 
 def git_blob(path: str) -> str:
-    return subprocess.check_output(["git", "rev-parse", f"HEAD:{path}"], cwd=ROOT, text=True).strip()
+    """Return the Git blob SHA for the current file bytes, not the local HEAD."""
+    content = (ROOT / path).read_bytes()
+    header = b"blob " + str(len(content)).encode("ascii") + bytes([0])
+    return hashlib.sha1(header + content).hexdigest()
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
