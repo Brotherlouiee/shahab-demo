@@ -96,6 +96,8 @@ def apply_review_dispositions(candidates: list[dict[str, Any]]) -> None:
         candidate["review_status"] = "SEMANTICALLY_REVIEWED"
         candidate["review_reason"] = review["review_rationale"]
         candidate["atomicity_status"] = review["atomicity_status"]
+        for column, key in (("atomic_obligation_id","atomic_obligation_id"),("normalized_obligation","normalized_obligation"),("logical_owner","related_packages"),("decision_reference","plan_evidence")):
+            candidate[column]=review.get(key,"")
 
 
 def apply_source_unit_dispositions(inventory: list[dict[str, Any]]) -> None:
@@ -556,6 +558,8 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
     trace_fields = ["candidate_id", "atomic_obligation_id", "source_unit_id", "source_document", "source_lines", "owner_package_candidates", "requirement_candidates", "story_enabler_candidates", "task_subtask_candidates", "ac_test_candidates", "graph_node_ids", "coverage_status", "evidence", "review_status"]
     # Citation-bearing plan lines are leads, not verified semantic relationships.
     source_index: dict[str, dict[int, list[dict[str, Any]]]] = {"B": defaultdict(list), "W": defaultdict(list)}
+    review_rows=read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
+    reviewed_by_id={r["candidate_id"]:r for r in review_rows}
     for i, line in enumerate(plan_lines, 1):
         pkg = ""
         for ident, positions in heading_positions.items():
@@ -592,26 +596,35 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
         tasks = sorted({x for lead in leads for x in lead["ids"] if x.startswith("TASK:") or package_qualified(lead,x,"(?:TASK|T|SUBTASK)")})
         ac_tests = sorted({x for lead in leads for x in lead["ids"] if x.startswith(("AC:", "TEST:", "TD:", "TC:")) or package_qualified(lead,x,"(?:AC|TD|TEST|TC)")})
         evidence = sorted({f"plan:L{x['plan_line']} {x['source_ref']}" for x in leads})
-        not_applicable = row["review_status"] == "SEMANTICALLY_REVIEWED" and row["normative_status"] in {"NOT_APPLICABLE", "EXAMPLE"}
+        reviewed=reviewed_by_id.get(row["candidate_id"],{})
+        not_applicable = reviewed.get("coverage_status")=="NOT_APPLICABLE"
+        verified_status=reviewed.get("coverage_status") if reviewed.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"} else ""
+        if verified_status:
+            owners=[x for x in reviewed.get("related_packages","").split(";") if x]
+            reqs=[x for x in reviewed.get("requirement_ids","").split(";") if x]
+            tasks=[x for x in reviewed.get("task_ids","").split(";") if x]
+            ac_tests=[x for x in reviewed.get("ac_test_ids","").split(";") if x]
+            evidence=[f"{reviewed.get('source_evidence','')}; {reviewed.get('plan_evidence','')}; {reviewed.get('review_rationale','')}"]
         trace_rows.append({
-            "candidate_id": row["candidate_id"], "atomic_obligation_id": "", "source_unit_id": row["source_unit_id"],
+            "candidate_id": row["candidate_id"], "atomic_obligation_id": row.get("atomic_obligation_id", ""), "source_unit_id": row["source_unit_id"],
             "source_document": row["document"], "source_lines": f"{row['start_line']}-{row['end_line']}",
             "owner_package_candidates": "" if not_applicable else ";".join(owners), "requirement_candidates": "" if not_applicable else ";".join(reqs),
             "story_enabler_candidates": "" if not_applicable else ";".join(stories), "task_subtask_candidates": "" if not_applicable else ";".join(tasks),
             "ac_test_candidates": "" if not_applicable else ";".join(ac_tests), "graph_node_ids": row["graph_node_ids"],
-            "coverage_status": "NOT_APPLICABLE" if not_applicable else "PENDING_REVIEW" if leads else "NOT_MAPPED_CANDIDATE",
-            "evidence": row["review_reason"] if not_applicable else ";".join(evidence), "review_status": "SEMANTICALLY_REVIEWED" if not_applicable else "UNVERIFIED_SEMANTIC_MAPPING",
+            "coverage_status": "NOT_APPLICABLE" if not_applicable else verified_status or ("PENDING_REVIEW" if leads else "NOT_MAPPED_CANDIDATE"),
+            "evidence": row["review_reason"] if not_applicable else ";".join(evidence), "review_status": "SEMANTICALLY_REVIEWED" if (not_applicable or verified_status) else "UNVERIFIED_SEMANTIC_MAPPING",
         })
-        if not_applicable:
+        open_decision = reviewed.get("normative_status")=="NORMATIVE_OPEN_DECISION" and verified_status=="VERIFIED_PARTIAL"
+        if not_applicable or (verified_status and not open_decision):
             continue
         gap_rows.append({
             "gap_id": f"REV-{row['candidate_id']}", "candidate_id": row["candidate_id"], "atomic_obligation_id": "",
             "source_unit_id": row["source_unit_id"], "source_document": row["document"], "source_lines": f"{row['start_line']}-{row['end_line']}",
             "source_evidence": row["source_excerpt"], "related_packages": ";".join(owners),
-            "gap_type": "PENDING_SEMANTIC_REVIEW", "severity": "UNASSESSED",
-            "description": "Candidate classification and package coverage have not been semantically verified; this is not a confirmed uncovered obligation or a confirmed gap.",
-            "suggested_resolution": "Review source against package requirement, task, AC and test; then classify as covered/partial/uncovered/open/not-applicable.",
-            "confidence": row["classification_confidence"], "review_status": "OPEN_REVIEW",
+            "gap_type": "OPEN_DECISION" if open_decision else "PENDING_SEMANTIC_REVIEW", "severity": "DECISION_REQUIRED" if open_decision else "UNASSESSED",
+            "description": "The approved evaluation method is represented by the linked R07 requirement and tests; the numeric threshold remains an explicit owner decision and is not approved by this audit." if open_decision else "Candidate classification and package coverage have not been semantically verified; this is not a confirmed uncovered obligation or a confirmed gap.",
+            "suggested_resolution": "Keep threshold unset; collect labeled data, evaluate Recall/Precision, and record an owner-approved threshold decision before configuration." if open_decision else "Review source against package requirement, task, AC and test; then classify as covered/partial/uncovered/open/not-applicable.",
+            "confidence": "HIGH" if open_decision else row["classification_confidence"], "review_status": "OPEN_DECISION" if open_decision else "OPEN_REVIEW",
         })
 
     package_index_fields = ["package_id", "package_name", "scope_excerpt", "program_family", "planning_status", "declared_ra", "declared_ipa", "product_status", "plan_heading_lines", "mentioned_candidate_ids", "mentioned_requirement_ids", "mentioned_story_enabler_ids", "mentioned_task_subtask_ids", "mentioned_ac_ids", "mentioned_test_definition_ids", "mentioned_test_case_ids", "mentioned_ac_td_test_case_ids", "mentioned_dependency_ids", "mentioned_contract_ids", "mentioned_handoff_ids", "source_reference_count", "graph_node_reference_ids", "ownership_evidence", "dependency_evidence", "contract_evidence", "handoff_evidence", "index_status"]
@@ -672,7 +685,9 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     graph_ids = {n["id"] for n in graph_nodes if n.get("id")}
     unit_ids = [r["source_unit_id"] for r in inventory]
     candidate_ids = [r["candidate_id"] for r in candidates]
-    plan_ids = set(ID_RE.findall(PLAN.read_text(encoding="utf-8")))
+    plan_text = PLAN.read_text(encoding="utf-8")
+    plan_ids = set(ID_RE.findall(plan_text))
+    plan_lines = plan_text.splitlines()
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
     trace_fields, trace = read_csv(COVERAGE / "execution-trace.csv")
     valid_statuses = {"NORMATIVE_APPROVED", "NORMATIVE_OPEN_DECISION", "DESCRIPTIVE", "EXAMPLE", "OUT_OF_SCOPE", "SUPERSEDED", "MIXED", "NEEDS_REVIEW", "NOT_APPLICABLE"}
@@ -761,8 +776,24 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
         valid_header = row["candidate_class"] == "TABLE_HEADER" and review.get("semantic_disposition") == "STRUCTURAL_HEADER_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
         valid_separator = row["candidate_class"] == "TEXT_RANGE_CANDIDATE" and row["source_excerpt"].strip() == "---" and review.get("semantic_disposition") == "MARKDOWN_HORIZONTAL_RULE_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
         valid_example = row["candidate_class"] == "TABLE_ROW_CANDIDATE" and row["document"].endswith("SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md") and 100 < int(row["start_line"]) < 140 and "صراحت وضعیت مثال در B:90" in review.get("source_evidence","") and review.get("semantic_disposition") == "EXAMPLE_CONTEXT_ROW" and review.get("normative_status") == "EXAMPLE"
-        if not (valid_header or valid_separator or valid_example) or review.get("coverage_status") != "NOT_APPLICABLE":
-            disposition_errors.append(f"invalid structural/example disposition {review['candidate_id']}")
+        mapped_status=review.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"}
+        open_decision=review.get("normative_status")=="NORMATIVE_OPEN_DECISION" and review.get("coverage_status")=="VERIFIED_PARTIAL"
+        valid_mapping=mapped_status and bool(review.get("related_packages")) and bool(review.get("requirement_ids")) and bool(review.get("task_ids")) and bool(review.get("ac_test_ids")) and bool(review.get("plan_evidence")) and (review.get("normative_status")=="NORMATIVE_APPROVED" or open_decision)
+        if valid_mapping:
+            cited=set()
+            for lo,hi in re.findall(r":(\d+)(?:-(\d+))?",review.get("plan_evidence","")):
+                a=int(lo);b=int(hi or lo)
+                if a<1 or b>len(plan_lines) or b<a:
+                    valid_mapping=False
+                    break
+                cited.update(range(a,b+1))
+            cited_text="\n".join(plan_lines[n-1] for n in cited)
+            mapped_ids=set(review.get("requirement_ids","").split(";")+review.get("task_ids","").split(";")+review.get("ac_test_ids","").split(";"))
+            if not cited or any(item and item not in cited_text for item in mapped_ids):
+                valid_mapping=False
+        valid_na=(valid_header or valid_separator or valid_example) and review.get("coverage_status")=="NOT_APPLICABLE"
+        if not (valid_na or valid_mapping):
+            disposition_errors.append(f"invalid disposition or semantic mapping {review['candidate_id']}")
         if row["normative_status"] != review.get("normative_status") or row["review_status"] != "SEMANTICALLY_REVIEWED":
             disposition_errors.append(f"candidate does not reflect ledger disposition {review['candidate_id']}")
     record("semantic_review_disposition_integrity", len(ledger_rows), disposition_errors)
@@ -779,7 +810,14 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     trace_ids={r["candidate_id"] for r in trace}
     trace_errors=[f"missing trace row {x}" for x in set(candidate_ids)-trace_ids] + [f"orphan trace row {x}" for x in trace_ids-set(candidate_ids)]
     record("execution_trace_row_integrity", len(trace), trace_errors)
-    verified_errors=[r["candidate_id"] for r in trace if r["coverage_status"] in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"} or r["review_status"]=="VERIFIED"]
+    manual_by_id={r["candidate_id"]:r for r in ledger_rows}
+    verified_errors=[]
+    for row in trace:
+        if row["coverage_status"] not in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"} and row["review_status"]!="VERIFIED":
+            continue
+        review=manual_by_id.get(row["candidate_id"])
+        if not review or row["coverage_status"]!=review.get("coverage_status") or row["owner_package_candidates"]!=review.get("related_packages") or row["requirement_candidates"]!=review.get("requirement_ids") or row["task_subtask_candidates"]!=review.get("task_ids") or row["ac_test_candidates"]!=review.get("ac_test_ids"):
+            verified_errors.append(row["candidate_id"])
     record("no_unverified_mapping_marked_verified", len(trace), [f"unexpected verified mapping {x}" for x in verified_errors])
     missing_review_reasons=[r["candidate_id"] for r in candidates if not r.get("review_reason", "").strip()]
     record("review_required_rows_have_reason", len(candidates), missing_review_reasons)
@@ -848,11 +886,16 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
     gap_fields, gaps = read_csv(COVERAGE / "coverage-gap-register.csv")
     candidate_fields, candidate_rows = read_csv(COVERAGE / "atomic-obligations.csv")
+    verified_covered=sum(r.get("coverage_status")=="VERIFIED_COVERED" for r in trace)
+    verified_partial=sum(r.get("coverage_status")=="VERIFIED_PARTIAL" for r in trace)
+    verified_uncovered=sum(r.get("coverage_status")=="VERIFIED_UNCOVERED" for r in trace)
+    atomic_verified=sum(bool(r.get("atomic_obligation_id")) and r.get("coverage_status")=="VERIFIED_COVERED" for r in trace)
     reviewed_count=sum(r.get("review_status")=="SEMANTICALLY_REVIEWED" for r in candidates)
     pending_count=len(candidates)-reviewed_count
     source_dispositions=read_csv(COVERAGE / "source-unit-review-dispositions.csv")[1] if (COVERAGE / "source-unit-review-dispositions.csv").exists() else []
     reviewed_ledger=read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
     reviewed_kinds=Counter(r["semantic_disposition"] for r in reviewed_ledger)
+    mapped_review_count=sum(r.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"} for r in reviewed_ledger)
     output = {
         "baseline_commit": BASELINE_COMMIT,
         "plan_blob_sha": git_blob("docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),
@@ -867,9 +910,9 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "structural_source_units_dispositioned_as_locators": len(source_dispositions),
             "packages_indexed": len(packages), "package_index_rows": len(packages), "execution_trace_rows": len(trace), "pending_review_rows": len(gaps),
             "candidate_records_semantically_reviewed": reviewed_count,
-            "atomic_obligations_extracted_and_verified": 0, "approved_obligations_verified": 0, "open_decisions_verified": 0,
-            "descriptive_units_verified": 0, "verified_covered_obligations": 0, "partially_covered_obligations": 0,
-            "confirmed_uncovered_obligations": 0, "semantic_reviews_pending": pending_count,
+            "atomic_obligations_extracted_and_verified": atomic_verified, "approved_obligations_verified": atomic_verified, "open_decisions_verified": 0,
+            "descriptive_units_verified": 0, "verified_covered_obligations": verified_covered, "partially_covered_obligations": verified_partial,
+            "confirmed_uncovered_obligations": verified_uncovered, "semantic_reviews_pending": pending_count,
             "unverified_normative_cue_suggestions": statuses["NORMATIVE_APPROVED"], "unverified_open_decision_cue_suggestions": statuses["NORMATIVE_OPEN_DECISION"],
             "needs_review_candidates": pending_count, "classification_suggestions_unverified": dict(statuses), "review_statuses": dict(review_states),
         },
@@ -888,7 +931,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "program_coverage_status": "INDETERMINATE",
         "limitations": [
             "Rule-based classifications are discovery aids and are not accepted normative decisions.",
-            "No atomic obligation is marked verified; no package mapping is marked verified covered.",
+            "Only individually evidenced rows listed in the semantic review ledger may carry a verified mapping; remaining mappings are unverified.",
             "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
             "The source matrix is structurally complete; semantic review of all 1136 text ranges and table rows is not complete.",
             "Graph node overlap is a retrieval reference, not semantic entailment.",
@@ -916,10 +959,10 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| بلوک fenced ثبت‌شده | {candidate_counts['CODE_BLOCK']} |",
         f"| کل candidate row | {len(candidates)} |",
         f"| بسته‌های index شده | {len(packages)} / 36 |",
-        f"| تعیین‌تکلیف ردیفی انجام‌شده | {reviewed_count} از {len(candidates)} candidate؛ {reviewed_kinds['STRUCTURAL_HEADER_ONLY']} سرستون، {reviewed_kinds['MARKDOWN_HORIZONTAL_RULE_ONLY']} جداکننده و {reviewed_kinds['EXAMPLE_CONTEXT_ROW']} ردیف مثال فرضی |",
+        f"| تعیین‌تکلیف ردیفی انجام‌شده | {reviewed_count} از {len(candidates)} candidate؛ {reviewed_kinds['STRUCTURAL_HEADER_ONLY']} سرستون، {reviewed_kinds['MARKDOWN_HORIZONTAL_RULE_ONLY']} جداکننده، {reviewed_kinds['EXAMPLE_CONTEXT_ROW']} ردیف مثال و {mapped_review_count} نگاشت معنایی بررسی‌شده |",
         f"| ردیف‌های pending review | {pending_count}؛ این‌ها شکاف قطعی نیستند |",
-        "| Atomic Obligationهای تأییدشده | 0 |",
-        "| نگاشت تأییدشدهٔ covered | 0 |",
+        f"| Atomic Obligationهای تأییدشده | {atomic_verified} |",
+        f"| نگاشت تأییدشدهٔ covered/partial/uncovered | {verified_covered}/{verified_partial}/{verified_uncovered} |",
         "| شکاف معنایی قطعی | هنوز تعیین نشده |",
         f"| پیشنهادهای قاعده‌محورِ تأییدنشده | {json.dumps(dict(statuses), ensure_ascii=False, sort_keys=True)} |",
         "",

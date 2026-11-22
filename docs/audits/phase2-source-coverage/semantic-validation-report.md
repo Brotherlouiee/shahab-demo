@@ -18,10 +18,10 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 90 از 1633 candidate؛ 58 سرستون، 11 جداکننده و 21 ردیف مثال فرضی |
-| ردیف‌های pending review | 1543؛ این‌ها شکاف قطعی نیستند |
-| Atomic Obligationهای تأییدشده | 0 |
-| نگاشت تأییدشدهٔ covered | 0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 96 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 6 نگاشت معنایی بررسی‌شده |
+| ردیف‌های pending review | 1537؛ این‌ها شکاف قطعی نیستند |
+| Atomic Obligationهای تأییدشده | 4 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 4/2/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -35,9 +35,9 @@
 | محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکتایی Atomic Obligation ID | PASS | 0 ID ثبت‌شده؛ فعلاً هیچ الزام اتمی نهایی نشده است |
+| یکتایی Atomic Obligation ID | PASS | 4 ID ثبت‌شده؛ فعلاً هیچ الزام اتمی نهایی نشده است |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8756؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8766؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |

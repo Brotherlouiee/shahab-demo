@@ -32,24 +32,24 @@
     "code_blocks": 27,
     "code_blocks_semantically_reviewed": 0,
     "candidate_records": 1633,
-    "candidate_records_pending_semantic_review": 1543,
+    "candidate_records_pending_semantic_review": 1537,
     "structural_source_units_dispositioned_as_locators": 384,
     "packages_indexed": 36,
     "package_index_rows": 36,
     "execution_trace_rows": 1633,
-    "pending_review_rows": 1543,
-    "candidate_records_semantically_reviewed": 90,
-    "atomic_obligations_extracted_and_verified": 0,
-    "approved_obligations_verified": 0,
+    "pending_review_rows": 1538,
+    "candidate_records_semantically_reviewed": 96,
+    "atomic_obligations_extracted_and_verified": 4,
+    "approved_obligations_verified": 4,
     "open_decisions_verified": 0,
     "descriptive_units_verified": 0,
-    "verified_covered_obligations": 0,
-    "partially_covered_obligations": 0,
+    "verified_covered_obligations": 4,
+    "partially_covered_obligations": 2,
     "confirmed_uncovered_obligations": 0,
-    "semantic_reviews_pending": 1543,
+    "semantic_reviews_pending": 1537,
     "unverified_normative_cue_suggestions": 506,
     "unverified_open_decision_cue_suggestions": 19,
-    "needs_review_candidates": 1543,
+    "needs_review_candidates": 1537,
     "classification_suggestions_unverified": {
       "DESCRIPTIVE": 125,
       "NEEDS_REVIEW": 762,
@@ -61,8 +61,8 @@
       "OUT_OF_SCOPE": 1
     },
     "review_statuses": {
-      "SEMANTICALLY_REVIEWED": 90,
-      "REVIEW_REQUIRED": 1543
+      "SEMANTICALLY_REVIEWED": 96,
+      "REVIEW_REQUIRED": 1537
     }
   },
   "controls": {
@@ -101,7 +101,7 @@
       "examples": []
     },
     "atomic_obligation_id_uniqueness": {
-      "checked": 0,
+      "checked": 4,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -149,7 +149,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 8756,
+      "checked": 8766,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -161,7 +161,7 @@
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 1072,
+      "checked": 1078,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -179,10 +179,12 @@
       "examples": []
     },
     "semantic_review_disposition_integrity": {
-      "checked": 90,
-      "errors": 0,
-      "result": "PASS",
-      "examples": []
+      "checked": 96,
+      "errors": 1,
+      "result": "FAIL",
+      "examples": [
+        "invalid disposition or semantic mapping BP-C-0100"
+      ]
     },
     "heuristic_status_not_promoted": {
       "checked": 1633,
@@ -231,7 +233,7 @@
   "program_coverage_status": "INDETERMINATE",
   "limitations": [
     "Rule-based classifications are discovery aids and are not accepted normative decisions.",
-    "No atomic obligation is marked verified; no package mapping is marked verified covered.",
+    "Only individually evidenced rows listed in the semantic review ledger may carry a verified mapping; remaining mappings are unverified.",
     "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
     "The source matrix is structurally complete; semantic review of all 1136 text ranges and table rows is not complete.",
     "Graph node overlap is a retrieval reference, not semantic entailment."
