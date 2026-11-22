@@ -786,7 +786,8 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             disposition_errors.append(f"source locator drift {review['candidate_id']}")
         valid_header = row["candidate_class"] == "TABLE_HEADER" and review.get("semantic_disposition") == "STRUCTURAL_HEADER_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
         valid_separator = row["candidate_class"] == "TEXT_RANGE_CANDIDATE" and row["source_excerpt"].strip() == "---" and review.get("semantic_disposition") == "MARKDOWN_HORIZONTAL_RULE_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
-        valid_example = row["candidate_class"] == "TABLE_ROW_CANDIDATE" and review.get("semantic_disposition") == "EXAMPLE_CONTEXT_ROW" and review.get("normative_status") == "EXAMPLE" and bool(review.get("review_rationale", "").strip())
+        valid_example = row["candidate_class"] in {"TABLE_ROW_CANDIDATE", "TEXT_RANGE_CANDIDATE", "UNCLASSIFIED_CANDIDATE", "NORMATIVE_CANDIDATE"} and review.get("semantic_disposition") in {"EXAMPLE_CONTEXT_ROW", "EXAMPLE_CONTEXT_CONTENT"} and review.get("normative_status") == "EXAMPLE" and bool(review.get("review_rationale", "").strip())
+        valid_descriptive = row["candidate_class"] in {"TABLE_ROW_CANDIDATE", "TEXT_RANGE_CANDIDATE", "CODE_BLOCK_CANDIDATE", "UNCLASSIFIED_CANDIDATE", "NORMATIVE_CANDIDATE"} and review.get("semantic_disposition") in {"DESCRIPTIVE_CONTEXT_ONLY", "QUESTION_CONTEXT_ONLY", "SOURCE_REFERENCE_ONLY"} and review.get("normative_status") == "DESCRIPTIVE" and bool(review.get("review_rationale", "").strip())
         mapped_status=review.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"}
         open_decision=review.get("normative_status")=="NORMATIVE_OPEN_DECISION" and review.get("coverage_status")=="VERIFIED_PARTIAL"
         candidate_atoms=[a for a in atom_rows if a.get("candidate_id")==review["candidate_id"]]
@@ -805,7 +806,7 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             mapped_ids=set(review.get("requirement_ids","").split(";")+review.get("task_ids","").split(";")+review.get("ac_test_ids","").split(";"))
             if not cited or any(item and item not in cited_text for item in mapped_ids):
                 valid_mapping=False
-        valid_na=(valid_header or valid_separator or valid_example) and review.get("coverage_status")=="NOT_APPLICABLE"
+        valid_na=(valid_header or valid_separator or valid_example or valid_descriptive) and review.get("coverage_status")=="NOT_APPLICABLE"
         if not (valid_na or valid_mapping):
             disposition_errors.append(f"invalid disposition or semantic mapping {review['candidate_id']}")
         if row["normative_status"] != review.get("normative_status") or row["review_status"] != "SEMANTICALLY_REVIEWED":

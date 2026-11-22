@@ -2,3 +2,22 @@ batch_id,selection_order,candidate_id,source_scope,already_reviewed_before_batch
 PILOT-001,1,BP-TR-007-03,"Blueprint §5.1, Table 5.1, row 03 (line 581)",true
 PILOT-001,2,WL-C-1098,"Wallet §12.2, decision-status paragraph (line 1664)",false
 PILOT-001,3,BP-C-0100,"Blueprint §5.1, prose row on threshold selection (line 586)",true
+WALLET-REFUND-001,1,WL-C-0854,"Wallet §6.6, lines 1037–1037 (WL-P-1037-1037)",false
+WALLET-REFUND-001,2,WL-C-0855,"Wallet §6.6, lines 1041–1041 (WL-P-1041-1041)",false
+WALLET-REFUND-001,3,WL-C-0856,"Wallet §6.6, lines 1043–1043 (WL-P-1043-1043)",false
+WALLET-REFUND-001,4,WL-C-0857,"Wallet §6.6, lines 1045–1045 (WL-P-1045-1045)",false
+WALLET-REFUND-001,5,WL-C-0858,"Wallet §6.6, lines 1047–1047 (WL-P-1047-1047)",false
+WALLET-REFUND-001,6,WL-C-0859,"Wallet §6.6, lines 1055–1055 (WL-P-1055-1055)",false
+WALLET-REFUND-001,7,WL-C-0860,"Wallet §6.6, lines 1057–1057 (WL-P-1057-1057)",false
+WALLET-REFUND-001,8,WL-C-0861,"Wallet §6.6, lines 1061–1061 (WL-P-1061-1061)",false
+WALLET-REFUND-001,9,WL-C-0862,"Wallet §6.6, lines 1063–1063 (WL-P-1063-1063)",false
+WALLET-REFUND-001,10,WL-C-0863,"Wallet §6.6, lines 1065–1065 (WL-P-1065-1065)",false
+WALLET-REFUND-001,11,WL-C-0864,"Wallet §6.6, lines 1067–1067 (WL-P-1067-1067)",false
+WALLET-REFUND-001,12,WL-C-0865,"Wallet §6.6, lines 1069–1071 (WL-P-1069-1071)",false
+WALLET-REFUND-001,13,WL-C-0866,"Wallet §6.6, lines 1073–1073 (WL-P-1073-1073)",false
+WALLET-REFUND-001,14,WL-C-0867,"Wallet §6.6, lines 1075–1075 (WL-P-1075-1075)",false
+WALLET-REFUND-001,15,WL-C-0868,"Wallet §6.6, lines 1077–1077 (WL-P-1077-1077)",false
+WALLET-REFUND-001,16,WL-C-0869,"Wallet §6.6, lines 1079–1079 (WL-P-1079-1079)",false
+WALLET-REFUND-001,17,WL-TR-053-02,"Wallet §6.6, lines 1051–1051 (WL-T-053)",false
+WALLET-REFUND-001,18,WL-TR-053-03,"Wallet §6.6, lines 1052–1052 (WL-T-053)",false
+WALLET-REFUND-001,19,WL-TR-053-04,"Wallet §6.6, lines 1053–1053 (WL-T-053)",false

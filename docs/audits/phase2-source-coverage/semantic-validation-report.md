@@ -18,11 +18,11 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 97 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 7 نگاشت معنایی بررسی‌شده |
-| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 84 از 470 ردیف جدول، 0 از 27 بلوک fenced |
-| ردیف‌های pending review | 1536؛ این‌ها شکاف قطعی نیستند |
-| Atomic Obligationهای دارای نگاشت Covered | 9 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 9/3/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 116 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 18 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 87 از 470 ردیف جدول، 0 از 27 بلوک fenced |
+| ردیف‌های pending review | 1517؛ این‌ها شکاف قطعی نیستند |
+| Atomic Obligationهای دارای نگاشت Covered | 26 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 26/5/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -31,6 +31,7 @@
 | Batch ID | Candidate IDs | Reviewed Before→After | Pending Before→After | Atomic Obligations | Covered/Partial/Uncovered | Open Decisions |
 |---|---|---:|---:|---:|---:|---:|
 | PILOT-001 | BP-TR-007-03, WL-C-1098, BP-C-0100 | 96→97 | 1537→1536 | 9 | 5/4/0 | 4 |
+| WALLET-REFUND-001 | WL-C-0854, WL-C-0855, WL-C-0856, WL-C-0857, WL-C-0858, WL-C-0859, WL-C-0860, WL-C-0861, WL-C-0862, WL-C-0863, WL-C-0864, WL-C-0865, WL-C-0866, WL-C-0867, WL-C-0868, WL-C-0869, WL-TR-053-02, WL-TR-053-03, WL-TR-053-04 | 97→116 | 1536→1517 | 24 | 17/7/0 | 6 |
 
 ## کنترل‌های ماشینی
 
@@ -42,10 +43,10 @@
 | محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 13 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 3 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 37 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 22 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8767؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8762؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
