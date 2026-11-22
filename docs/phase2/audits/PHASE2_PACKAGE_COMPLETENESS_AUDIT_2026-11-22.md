@@ -1,9 +1,9 @@
 # ممیزی مستقل کامل‌بودن بسته‌های فاز دوم شهاب
 
-**تاریخ:** ۲۲ نوامبر ۲۰۲۶  
-**مخزن/PR:** Brotherlouiee/shahab-demo / #251  
-**HEAD مبنا:** ecca8c24398591e6042717a4ff094458a336389e  
-**حکم:** B — PACKAGE_SET_REQUIRES_EXTENSION  
+**تاریخ:** ۲۲ نوامبر ۲۰۲۶
+**مخزن/PR:** Brotherlouiee/shahab-demo / #251
+**HEAD مبنا:** ecca8c24398591e6042717a4ff094458a336389e
+**حکم:** B — PACKAGE_SET_REQUIRES_EXTENSION
 **بسته جدید:** لازم نیست؛ بستهٔ موجود C12a باید تکمیل شود.
 
 ## نتیجهٔ مدیریتی
