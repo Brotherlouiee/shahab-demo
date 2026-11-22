@@ -127,3 +127,40 @@ WALLET-RECONCILIATION-RETENTION-001,21,WL-C-0973,"Wallet §8.1–§8.2.1, line 1
 WALLET-RECONCILIATION-RETENTION-001,22,WL-C-0974,"Wallet §8.1–§8.2.1, line 1331-1331 (WL-P-1331-1331)",false
 BLUEPRINT-ROUTER-EXAMPLES-001,1,BP-TR-004-05,"Blueprint §3.1.1 hypothetical routing example, B:135–143, Q4/Q5 rows",false
 BLUEPRINT-ROUTER-EXAMPLES-001,2,BP-TR-004-06,"Blueprint §3.1.1 hypothetical routing example, B:135–143, Q4/Q5 rows",false
+BLUEPRINT-RAG-CONTRACTS-001,1,BP-C-0077,"Blueprint §3.9.1–§3.9.8, B:400 (BP-P-0400-0402); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,2,BP-C-0078,"Blueprint §3.9.1–§3.9.8, B:405 (BP-P-0405-0407); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,3,BP-C-0079,"Blueprint §3.9.1–§3.9.8, B:410 (BP-P-0410-0412); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,4,BP-C-0080,"Blueprint §3.9.1–§3.9.8, B:415 (BP-P-0415-0417); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,5,BP-C-0081,"Blueprint §3.9.1–§3.9.8, B:420 (BP-P-0420-0422); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,6,BP-C-0082,"Blueprint §3.9.1–§3.9.8, B:425 (BP-P-0425-0427); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,7,BP-C-0083,"Blueprint §3.9.1–§3.9.8, B:430 (BP-P-0430-0432); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,8,BP-C-0084,"Blueprint §3.9.1–§3.9.8, B:435 (BP-P-0435-0437); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,9,BP-C-0085,"Blueprint §3.9.1–§3.9.8, B:440 (BP-P-0440-0442); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,10,BP-C-0086,"Blueprint §3.9.1–§3.9.8, B:445 (BP-P-0445-0447); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,11,BP-C-0087,"Blueprint §3.9.1–§3.9.8, B:450 (BP-P-0450-0452); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,12,BP-C-0088,"Blueprint §3.9.1–§3.9.8, B:455 (BP-P-0455-0457); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,13,BP-C-0089,"Blueprint §3.9.1–§3.9.8, B:460 (BP-P-0460-0462); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,14,BP-C-0090,"Blueprint §3.9.1–§3.9.8, B:465 (BP-P-0465-0467); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,15,BP-C-0091,"Blueprint §3.9.1–§3.9.8, B:471 (BP-P-0471-0471); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,16,BP-C-0092,"Blueprint §3.9.1–§3.9.8, B:473 (BP-P-0473-0473); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,17,BP-TR-005-02,"Blueprint §3.9.1–§3.9.8, B:479 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,18,BP-TR-005-03,"Blueprint §3.9.1–§3.9.8, B:480 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,19,BP-TR-005-04,"Blueprint §3.9.1–§3.9.8, B:481 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,20,BP-TR-005-05,"Blueprint §3.9.1–§3.9.8, B:482 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,21,BP-TR-005-06,"Blueprint §3.9.1–§3.9.8, B:483 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,22,BP-TR-005-07,"Blueprint §3.9.1–§3.9.8, B:484 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,23,BP-TR-005-08,"Blueprint §3.9.1–§3.9.8, B:485 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,24,BP-TR-005-09,"Blueprint §3.9.1–§3.9.8, B:486 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,25,BP-TR-005-10,"Blueprint §3.9.1–§3.9.8, B:487 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,26,BP-TR-005-11,"Blueprint §3.9.1–§3.9.8, B:488 (BP-T-005); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,27,BP-C-0093,"Blueprint §3.9.1–§3.9.8, B:490 (BP-P-0490-0490); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,28,BP-TR-006-02,"Blueprint §3.9.1–§3.9.8, B:496 (BP-T-006); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,29,BP-TR-006-03,"Blueprint §3.9.1–§3.9.8, B:497 (BP-T-006); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,30,BP-TR-006-04,"Blueprint §3.9.1–§3.9.8, B:498 (BP-T-006); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,31,BP-TR-006-05,"Blueprint §3.9.1–§3.9.8, B:499 (BP-T-006); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,32,BP-TR-006-06,"Blueprint §3.9.1–§3.9.8, B:500 (BP-T-006); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,33,BP-C-0094,"Blueprint §3.9.1–§3.9.8, B:504 (BP-P-0504-0504); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,34,BP-C-0095,"Blueprint §3.9.1–§3.9.8, B:508 (BP-P-0508-0508); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,35,BP-C-0096,"Blueprint §3.9.1–§3.9.8, B:512 (BP-P-0512-0516); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,36,BP-C-0097,"Blueprint §3.9.1–§3.9.8, B:518 (BP-P-0518-0518); contiguous scope B:400–522",false
+BLUEPRINT-RAG-CONTRACTS-001,37,BP-C-0098,"Blueprint §3.9.1–§3.9.8, B:522 (BP-P-0522-0522); contiguous scope B:400–522",false
