@@ -103,3 +103,61 @@
 | Risks / readiness | مالی و reputational high risk؛ پرچم به‌اشتباه مجوز تلقی شود. **مشخصات و آزمون fail-closed آماده‌اند؛ Enable مسدود تا تأیید تمام gates.** |
 
 **وضعیت شبیه‌سازی:** دو Task متمایز C04 (یکی پیچیده، یکی پرریسک) ثبت شد. این‌ها مجوز فعال‌سازی پرداخت یا پذیرش محصول نیستند.
+
+## C02 — هویت، سازمان‌ها و مجوزها
+
+### Task پیچیده: `TASK:CORE:C02:002` — چرخهٔ عضویت سازمان
+
+**انتخاب:** پیچیدگی از چند حالت عضویت (فهرست اولیه، دعوت، احراز، پذیرش، تطبیق حساب، فعال، سابق و بازیابی مدیر)، حفظ جدایی عضویت‌های چندسازمانی، و اثر حذف عضو بر سوابق ناشی می‌شود. این Task به‌تنهایی برای معیار ریسک مالی انتخاب نشد؛ Task 005 شبیه‌سازی پرریسک جداگانه دارد.
+
+| بُعد | شبیه‌سازی و شاهد برنامه |
+|---|---|
+| Preconditions | قرارداد سازمانی TASK 001 بازبینی شده باشد؛ baseline رفتار حساب شخصی ثبت شود؛ تصمیم‌های DECISION:C02:01/:02 فقط پیش از تطبیق بیرونی، بازیابی نماینده یا فعال‌سازی حل شوند. |
+| Required Inputs | synthetic org/member/account IDs؛ ورودی roster؛ دعوت و پذیرش؛ وضعیت حساب؛ نقش/وابستگی؛ سوابق متعلق به عضو؛ شواهد قرارداد/نمایندگی و audit transition. |
+| Dependencies | TASK 001 برای هویت/قرارداد؛ TASK 003 برای scope/مجوز؛ C01 قرارداد API و migration؛ C13b برای receipt شخصی عضو سابق در حد handoff. |
+| Relevant Architecture | سرویس Core مالک هویت و چرخه عضویت است؛ فهرست roster به‌تنهایی عضویت فعال نمی‌سازد؛ خروجی‌های Ledger، حسابداری یا Wallet با خروج عضو منتقل یا حذف نمی‌شوند. |
+| Affected Components | مدل سازمان/عضو/دعوت، قیدهای پایگاه داده، import roster، پذیرش دعوت، لغو عضویت، بازیابی مدیر و مجوز دسترسی عضو سابق. |
+| Data/API Contracts | transition و actor/tenant/object scope باید ثبت شود؛ کلیدهای پایدار سازمان و عضو؛ یکتایی دعوت/عضویت؛ API version و خطای قابل مشاهده از قرارداد C01؛ قرارداد فیزیکی تا تصمیم مالک باز می‌ماند. |
+| Security Requirements | fail-closed در تطبیق حساب/نماینده؛ جدایی tenant؛ فقط عضو سابق به receipt متعلق به خودش دسترسی دارد؛ حذف عضویت حق مالکیت یا مشاهدهٔ دادهٔ شخصی دیگران نمی‌دهد. |
+| Implementation Work Sequence | ۱) مدل فعلی را inventory کن؛ ۲) transition table را با 056/057/060–063/070/072–074 تطبیق بده؛ ۳) قیود و idempotency دعوت را طرح کن؛ ۴) import roster را بدون activation اجراپذیر کن؛ ۵) پذیرش/لغو/بازیابی را در transaction مرزبندی کن؛ ۶) دسترسی عضو سابق و حفظ سوابق را بیازمای؛ ۷) migration/backfill را فقط پس از baseline و تصمیم‌های لازم پیشنهاد کن. |
+| Deliverables | state machine عضویت؛ قرارداد roster/import/invitation؛ ماتریس دسترسی چندسازمانی؛ طرح constraint و migration؛ آزمون‌های انتقال/حذف/بازیابی. |
+| Failure Scenarios | roster تکراری؛ دعوت replay؛ حساب متعلق به شخص دیگری؛ عضو در دو سازمان؛ نمایندهٔ نامعتبر؛ لغو همزمان با read؛ بازیابی مدیر بدون مدرک؛ حساب legacy ناسازگار. |
+| Recovery Strategy | import قابل تکرار و بدون activation؛ transition نامعتبر rollback شود؛ عضویت مبهم قرنطینه و handoff شود؛ دادهٔ مالی/receipt حذف یا منتقل نشود؛ بازیابی مدیر تا شواهد معتبر متوقف بماند. |
+| Required Tests | `AC:CORE:C02:007/008/011–014/021/023–025`; `TEST:CORE:C02:*` سناریوهای synthetic برای roster-only عدم activation، جدایی tenant، دسترسی receipt عضو سابق و حفظ سوابق پس از removal؛ همه `NOT_EXECUTED`. |
+| Acceptance Criteria | roster-only inactive بماند؛ دو سازمان دادهٔ یکدیگر را نخوانند؛ حذف دسترسی آینده را ببندد ولی سوابق متعلق را حفظ کند؛ receipt سابق محدود به خودش باشد؛ بازیابی مدیر بدون شواهد رد شود. |
+| Definition of Done | هر transition مالک و oracle دارد؛ قیود مانع duplicate هستند؛ positive/negative/boundary/failure برای import، invitation، revoke و recovery مشخص است؛ baseline و migration risk مستندند. |
+| Integration Dependencies | C01 API/migration؛ TASK 001 identity evidence؛ TASK 003 authorization؛ C13b receipt boundary؛ هرگونه دفترکل/تعهد مالی فقط از مالک Wallet/Ledger مصرف می‌شود. |
+| PR/Delivery Boundary | طراحی و پیاده‌سازی برنامه‌ای Core Identity، constraints و تست‌های ایزوله؛ بدون اتصال شاهکار/ثبت احوال واقعی، فعال‌سازی سازمان یا migration روی داده مشترک. |
+| Open Decisions | provider و شروط تطبیق بیرونی، بازیابی نماینده و الزامات قانونی/قرارداد طبق DECISION:C02:01/:02 باز می‌مانند. |
+| Blockers | فعال‌سازی تطبیق بیرونی/بازیابی نماینده تا تصمیم‌های بالا؛ baseline و طراحی transition محلی مستقل قابل انجام است. |
+| Implementation Risks | roster به‌اشتباه authority شود؛ membership مشترک بین tenantها؛ حذف سوابق به همراه دسترسی؛ race عضویت/revoke؛ تغییر رفتار حساب شخصی. |
+| Execution Readiness Verdict | **آماده برای state/contract/fixture و طراحی migration؛ بخش‌های متکی به DECISION:C02:01/:02 مسدود.** بررسی واقعی baseline پروژه پیش‌نیاز تغییر اجرایی است و محصول هنوز اجرا/تست نشده. |
+
+### Task پرریسک: `TASK:CORE:C02:005` — step-up و شواهد دسترسی
+
+**انتخاب:** ریسک بالا به علت تغییر مجوز یا limit در فاصلهٔ بررسی و اثر حساس (برداشت/افزایش هزینه)، stale authorization و احتمال باقی‌ماندن دسترسی پس از revoke. TASK 003/004 پیش‌نیازند.
+
+| بُعد | شبیه‌سازی و شاهد برنامه |
+|---|---|
+| Preconditions | ماتریس مجوز TASK 003 و قرارداد session TASK 004 بازبینی شوند؛ DECISION:C02:03 پیش از فعال‌کردن freshness threshold یا retention حل شود؛ حالت اولیه synthetic و کم‌دسترسی باشد. |
+| Required Inputs | actor/tenant/action/object؛ permission و limit version؛ timestamp/revalidation state؛ تغییر نقش/revoke؛ نیاز step-up؛ action checkpoint؛ حداقل access-event fields. |
+| Dependencies | C02 TASK 003/004؛ C01 config/flag/error/API contract؛ C12a/C03/C14 فقط برای handoff نگهداری مالی/Job/event، نه تصاحب IAM access evidence. |
+| Relevant Architecture | authorization server-side در Core؛ gate در نقطهٔ پیش از reservation/increase/new cost؛ بازبینی مجدد نزدیک commit؛ IAM access log مستقل از ledger retention. |
+| Affected Components | policy evaluator، session/auth cache، step-up adapter، action checkpoint، safe-stop/hold، audit-event schema. |
+| Data/API Contracts | action، scope، policy version، decision، time و trace reference حداقلی؛ بدون secret/OTP/raw credential؛ قرارداد access event و نسخه با ownerهای مشترک ثبت شود. |
+| Security Requirements | deny-by-default؛ revoke و کاهش limit فوراً مؤثر در next critical checkpoint؛ step-up مختص action؛ عدم ثبت secret؛ no UI-only authority. |
+| Implementation Work Sequence | ۱) حساسیت actionها را طبق مصوبه فهرست کن؛ ۲) trigger و revalidation predicate را به قرارداد موجود وصل کن؛ ۳) نقطهٔ check پیش از reservation/cost مشخص کن؛ ۴) تغییر مجوز میان check/commit را inject کن؛ ۵) safe-stop/hold را طراحی و بازیابی امن را بیازمای؛ ۶) IAM event حداقلی را از مالی جدا کن؛ ۷) DECISION:C02:03 را گیت تنظیمات باقی بگذار. |
+| Deliverables | action-specific step-up matrix؛ state machine revoke/hold؛ قرارداد access-event؛ ماتریس تست race، limit و secret exclusion؛ handoff retention. |
+| Failure Scenarios | revoke بعد از pre-check؛ کاهش limit میان رزرو و commit؛ step-up timeout/ناموفق؛ cache stale؛ event sink unavailable؛ تلاش logging برای secret. |
+| Recovery Strategy | state را hold/deny کن؛ state مجوز را تازه بخوان؛ پس از رفع فقط همان action را دوباره ارزیابی کن؛ اقدام مالی تکراری نساز؛ logging failure را بی‌صدا موفق اعلام نکن؛ طبق قرارداد safe-stop مسیر رسیدگی. |
+| Required Tests | AC C02:022/027–029/069–071/075–076/081 و `TEST:CORE:C02:*`; revoke race، limit boundary، allowed access event، نبود secret، و جدایی retention ledger. `NOT_EXECUTED`. |
+| Acceptance Criteria | revoke/limit جدید در checkpoint enforce شود؛ action حساس بدون step-up لازم commit نشود؛ deny هیچ اثر مالی نداشته باشد؛ audit فقط حداقل داده را نگه دارد؛ ledger retention به آزمون IAM نسبت داده نشود. |
+| Definition of Done | هر action trigger/oracle/خطا/recovery دارد؛ race و cache freshness پوشش آزمونی دارند؛ event owner/fields/retention handoff مشخص است؛ DECISION باز به مقدار فرضی تبدیل نشده است. |
+| Integration Dependencies | C01 برای config/error/change audit؛ C02 TASK 003/004؛ C12a مالک ledger؛ C03/C14 طبق قرارداد خود برای رویداد/نگهداری. |
+| PR/Delivery Boundary | IAM authorization, checkpoints و test harness synthetic؛ بدون دسترسی credential واقعی، اثر مالی واقعی، تعیین threshold یا تنظیم production. |
+| Open Decisions | DECISION:C02:03 درباره freshness/retention و جزئیات step-up باز است؛ عدد یا SLA تازه تعریف نمی‌شود. |
+| Blockers | فعال‌سازی threshold/retention دقیق تا DECISION:C02:03؛ policy و fail-closed tests با threshold unset قابل تدوین است. |
+| Implementation Risks | race در check/commit؛ bypass در یکی از endpointها؛ confusion میان audit مالی و IAM؛ cache invalidation ناقص؛ نگهداری PII بیش از حد. |
+| Execution Readiness Verdict | **آمادهٔ طراحی fail-closed و آزمون synthetic؛ تنظیم آستانه/retention و اجرای محصول BLOCKED_BY_DECISION.** برنامه مالک، Task، AC و سناریوهای متناظر می‌دهد؛ محصول آزموده نشده است. |
+
+**نتیجهٔ QG-13 برای C02:** دو مسیر واقعی از Taskهای موجود شبیه‌سازی شدند؛ یکی پیچیده و دیگری پرریسک. آمادگی بخش‌های وابسته به تصمیم باز صریحاً محدود است. این نتیجه قبولی QG-13 کل برنامه را تغییر نمی‌دهد.

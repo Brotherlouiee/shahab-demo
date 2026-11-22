@@ -180,11 +180,9 @@
     },
     "semantic_review_disposition_integrity": {
       "checked": 96,
-      "errors": 1,
-      "result": "FAIL",
-      "examples": [
-        "invalid disposition or semantic mapping BP-C-0100"
-      ]
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
     },
     "heuristic_status_not_promoted": {
       "checked": 1633,
