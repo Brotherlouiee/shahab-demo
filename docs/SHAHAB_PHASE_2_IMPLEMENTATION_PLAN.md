@@ -1,6 +1,6 @@
 # برنامه یکپارچه پیاده‌سازی فاز دوم شهاب
 
-> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14 و R01–R10.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14 و R01–R10 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
+> **سند اجرایی واحد و تدریجی — نسخه یکپارچه C01–C14، R01–R10 و A01–A02.** این فایل برنامهٔ پذیرفته‌شدهٔ C01–C14، R01–R10 و A01–A02 و بسته‌های باقی‌ماندهٔ NOT_STARTED را در یک سند نگهداری می‌کند. این سند، برنامه است و نشانه پیاده‌سازی یا اجرای محصول نیست.
 
 ## ۰. حاکمیت سند، وضعیت واقعی و قواعد به‌روزرسانی
 
@@ -21,8 +21,8 @@
 | --- | --- | --- | --- |
 | Core / Wallet | C01، C02، C03، C04، C05a، C05b، C06، C07، C08، C09، C10، C11a، C11b، C12a، C12b، C13a، C13b، C14 | 18 | ۱۸ بسته برنامه‌ریزی پذیرفته‌شده |
 | RAG / Adviser | R01–R10 | 10 | R01–R10 پذیرفته‌شدهٔ برنامه‌ریزی؛ محصول اجرا نشده |
-| Assistant | A01–A08 | 8 | NOT_STARTED |
-| کل | ۳۶ بسته | 36 | ۲۸ پذیرفته‌شده؛ ۸ در انتظار |
+| Assistant | A01–A08 | 8 | A01–A02 پذیرفته؛ A03–A08 در انتظار |
+| کل | ۳۶ بسته | 36 | ۳۰ پذیرفته‌شده؛ ۶ در انتظار |
 
 ### جدول وضعیت واحد بسته‌ها
 | بسته | عنوان/دامنه | RA | IPA | اجرای محصول |
@@ -55,8 +55,8 @@
 | R08 | بازاعتبارسنجی سند و هماهنگی اثر تغییر | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R09 | زمینهٔ ساختاریافتهٔ گفت‌وگو و تداوم Adviser | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | R10 | محاسبهٔ قطعی و قرارداد Adviser–Core | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
-| A01 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
-| A02 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
+| A01 | تفسیر درخواست و پیشنهاد ابزار دستیار | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
+| A02 | گردش‌کار پایدار دستیار و هماهنگی زیرکار | PASS | PASS | PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED |
 | A03 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | A04 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
 | A05 | عنوان دقیق پس از مراجعه به سند مرجع ثبت شود | NOT_STARTED | NOT_STARTED | NOT_STARTED |
@@ -4047,14 +4047,14 @@
 
 | مورد | مالک و قرارداد | وضعیت و پذیرش |
 |---|---|---|
-| Plan/Entitlement API | C04 صاحب معنای پلن؛ CONTRACT:C04:001 مصرف‌کننده‌ها: C05a، C06 و سرویس‌های Adviser/Assistant در بسته‌های آتی؛ نسخه/Schema قبل از اجرا باید منتشر و سازگار شود. | قرارداد برنامه‌ریزی؛ implementation schema هنوز منتشر نشده |
+| Plan/Entitlement API | C04 صاحب معنای پلن؛ CONTRACT:C04:001 مصرف‌کننده‌ها: C05a، C06، A01/A02 (planning accepted) و سرویس‌های Adviser/Assistant آینده؛ نسخه/Schema قبل از اجرا باید منتشر و سازگار شود. | قرارداد برنامه‌ریزی؛ implementation schema هنوز منتشر نشده |
 | Subscription lifecycle/order/payment correlation | C04 صاحب Subscription/Order؛ C02 صاحب هویت/اختیار؛ payment provider و Ledger در C12a/C12b. | CONTRACT:C04:002؛ هر منبع حقیقت وضعیت خودش را حفظ می‌کند |
 | Billing event/reconciliation | C04 مالک event business؛ C03 اجرای مشترک job/event را با Taskهای پذیرفته‌شده C01 و CONTRACT:C01:03/:04 ارائه می‌کند؛ C12b مالک تطبیق/بازیابی. | CONTRACT:C04:003؛ idempotency با CONTRACT:C01:04 و :06 هم‌راستا |
 | Flag/rollback/evidence | C01 مالک CONTRACT:C01:05 و :07؛ C04 مصرف‌کننده؛ C03 زیرساخت و رویدادهای مشترک را طبق Taskهای پذیرفته‌شده اجرا می‌کند. | Enable Now تا FD-02 و گیت‌های مالی/حقوقی/امنیتی مسدود |
 | هویت و مجوز | C02: TASK:CORE:C02:001–003 و C02:005؛ CONTRACT:C01:01 برای مرز ماژول/مالکیت داده. | C04 هویت، role یا مدل اختیار پرداخت تکراری تعریف نمی‌کند |
 | کاتالوگ/تجربه | C05a مالک کاتالوگ خدمت؛ C06 پوسته مشترک؛ C13b receipt/support کیف پول. | ماتریس نهایی خدمت/پلن هنگام پذیرش بسته مقصد آشتی شود |
 | کیف پول/ledger/refund/settlement | C07–C13b براساس عنوان و دامنه برنامه؛ C04 فقط سیاست اشتراک را به Contract/Handoff می‌دهد. | از این گیت C04 مجوز اجرای کیف پول صادر نمی‌شود |
-| RAG/Assistant consumers | R01–R10 و A01–A08 مصرف‌کننده‌های احتمالی Entitlement؛ مالک بسته دقیق هر مصرف‌کننده تا تدوین خود بسته تعیین می‌شود. | Handoff:H04:001، target_package=UNASSIGNED، receiving_state=PENDING_PACKAGE_ALLOCATION؛ هنگام آغاز هر بسته مقصد باید دریافت/رد و نسخه قرارداد را ثبت کند |
+| RAG/Assistant consumers | C04 entitlement را مالک است؛ A01/A02 دریافت/مصرف برنامه‌ریزی را ثبت کرده‌اند؛ بسته‌های R01–R10 مصرف‌کننده احتمالی آتی‌اند. | Handoff:H04:001؛ دریافت A01/A02=ACCEPTED_FOR_PLANNING؛ تخصیص مصرف‌کننده‌های R به بسته‌های مشخص همچنان PENDING؛ نسخه/Schema عملیاتی C04 هنوز منتشر نشده |
 
 **Dependency / گیت‌ها**
 
@@ -4553,7 +4553,7 @@
 | Handoff خروجی | Handoff:H05B:001 → R03/R05/R06 | مدل/نسخه/روابط حقوقی canonical به R03؛ بازیابی به R05 و تفسیر/پاسخ Adviser به R06؛ C05b فقط منشأ و ارجاع محصول را نگه می‌دارد. برای مدل و داده محصول blocker نیست. |
 | Handoff خروجی | Handoff:H05B:002 → A06 | نقشه رابط و پایش تغییر UI؛ Product Catalog منبع دانش UI نمی‌شود. |
 | Handoff خروجی | Handoff:H05B:003 → A04 | امکان‌سنجی پلتفرم و مسیر Computer Use؛ C05b API اجرای بانکی ایجاد نمی‌کند. |
-| Handoff خروجی | Handoff:H05B:004 → بسته Assistant هنوز تخصیص‌نیافته | B:1635 مصرف آتی مجاز را بیان می‌کند؛ بسته دقیق A01–A08 تا تدوین مقصد نامعلوم است و پذیرش مقصد در همان بسته لازم خواهد بود. |
+| Handoff خروجی | Handoff:H05B:004 → A02 پذیرفته برای workflow مبتنی بر توصیه | A02:REQ:013–015 مصرف محدود B:1635 را می‌پذیرد؛ A02 نتیجه/نسخهٔ توصیه را تولید نمی‌کند. A01 مصرف‌کنندهٔ این handoff نیست؛ سایر کاربردهای Assistant باز می‌مانند. |
 | عدم چرخه | C05a / C05b | C05a تعریف خدمت و API خواندن خدمات را مالک است؛ C05b تعریف محصول/داده بانکی را مالک است. ارجاع به شناسه خدمت قرارداد مصرفی است، نه وابستگی دوسویه الزام‌آور؛ جزئیات schema میان دو بسته DECISION می‌ماند. |
 
 #### تصمیم‌های باز و تعارض
@@ -7475,20 +7475,328 @@ Nodeهای pinned Graphify برای DRS، Catalog، ADR-RAG-05/12/15/19/20/21/22
 
 ---
 
-### Checkpoint جاری پس از R09/R10
+### Checkpoint پس از R09/R10 (تاریخی)
 
-- بسته‌های پذیرفته‌شدهٔ برنامه: **۲۸/۳۶**؛ باقی‌مانده **۸/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۰/۸.
+- در آن checkpoint بسته‌های پذیرفته‌شدهٔ برنامه **۲۸/۳۶** بود؛ این عدد تاریخی است. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۰/۸.
 - R09: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC/TD و ۳۲ Planned Test Case؛ RA/IPA=PASS.
 - R10: ۸ Requirement، ۳ Enabler، ۴ Task، ۱۲ Subtask، ۸ AC/TD و ۳۲ Planned Test Case؛ RA/IPA=PASS.
 - RAG مجموع R01–R10: ۹۵ Requirement/Candidate، ۳۸ Enabler، ۴۸ Task، ۱۴۴ Subtask، ۹۵ AC/TD و ۳۰۰ Planned Test Case. Product Tests NOT_EXECUTED.
 
+### Checkpoint جاری پس از A01/A02
+
+- بسته‌های پذیرفته‌شدهٔ برنامه: **۳۰/۳۶**؛ باقی‌مانده **۶/۳۶**. Core/Wallet: ۱۸/۱۸؛ RAG/Adviser: ۱۰/۱۰؛ Assistant: ۲/۸.
+- A01: ۱۳ Candidate، ۱۱ Requirement، ۳ Enabler، ۴ Task، ۱۳ Subtask، ۱۱ AC/TD و ۴۴ Planned Test Case؛ RA/IPA=PASS.
+- A02: ۱۵ Candidate، ۱۵ Requirement، ۴ Enabler، ۵ Task، ۱۸ Subtask، ۱۵ AC/TD و ۶۰ Planned Test Case؛ RA/IPA=PASS.
+- Assistant مجموع A01–A02: ۲۶ Requirement، ۷ Enabler، ۹ Task، ۳۱ Subtask، ۲۶ AC/TD و ۱۰۴ Planned Test Case. Product Tests NOT_EXECUTED؛ elapsed time `NOT_MEASURED`.
+
 ## ۳. برنامه Assistant — ۸ بسته
 
-### A01 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+### A01 — تفسیر درخواست و پیشنهاد ابزار دستیار
 
-### A02 — در انتظار تدوین
-**وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
+**شناسهٔ بسته:** `PKG:A01`؛ **عنوان اجرایی پیشنهادی:** «تفسیر درخواست و پیشنهاد ابزار دستیار»؛ **مالک رفتار:** Assistant؛ **مالک قواعد پذیرش خدمت/مسیریابی:** C05a و برای Adviser، بسته‌های R؛ **مالک هویت/نشست/مجوز/رضایت:** C02؛ **مالک قرارداد عمومی Core:** C01؛ **مالک نمایش مشترک:** C06/C14. این عنوان یک تقسیم‌بندی برنامه‌ریزی بر مبنای B04 و Handoff:C05A است، نه تصمیم سیاستی تازه و نه بازخوانی شناسهٔ معماری `A01` در Blueprint.
+
+**دامنه:** تبدیل ورودی پذیرفته‌شده در نقش Assistant به پیشنهاد نوع‌دار برای یک capability/tool و واگذاری آن به Backend برای اعتبارسنجی؛ حفظ مرز «پیشنهاد مدل» با «اختیار اجرا». A01 ابزار بانکی را اجرا نمی‌کند، گردش‌کار پایدار نمی‌سازد، مجوز مستقل صادر نمی‌کند و مسیرهای تخصصی کاتالوگ، Computer Use، UI، احراز هویت یا پاسخ Adviser را بازنویسی نمی‌کند.
+
+**حالت R1:** Assistant در RAG R1 پیاده یا مستقر نمی‌شود. آزمون‌های این بسته مشخصات آزمون آینده‌اند؛ این بسته مجوز اجرای ابزار، دسترسی بانکی، انتشار یا استقرار نیست. در R1 فقط حفظ مرز و مصرف‌کنندهٔ آیندهٔ قراردادها ثبت می‌شود.
+
+#### کشف Graph-first و رجیستری مشترک Candidateها
+
+گراف مرجع از `main` خوانده شد؛ Graphify CLI در محیط موجود نبود، بنابراین خروجی lossless رسمی `knowledge-graph/phase2-reference-docs/semantic/graph.json` مستقیماً پیمایش شد. `GRAPH_REPORT.md` و `semantic/validation.json` خوانده شدند؛ validator رسمی گراف `PASS` با ۱٬۱۸۰ گره، ۱٬۳۴۵ یال و صفر issue گزارش کرد. Blueprint در Graph Report با SHA-256 `0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266` برابر است. روابط `EXTRACTED` فقط سرنخ یافتن بند بودند و هر رفتار زیر با متن مصوب Blueprint تطبیق داده شد؛ هیچ رابطهٔ `INFERRED` یا `AMBIGUOUS` مبنای Requirement نیست.
+
+| Candidate | Source Unit / وضعیت | Graph Reference | تعیین تکلیف، مالک و ردیابی |
+|---|---|---|---|
+| `CAND:A01:001` | B:910–912؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_b04_hybrid_orchestration`; `docs_shahab_phase_2_development_blueprint_llm_proposes_backend_authorizes` | مدل فقط هدف/ابزار/مرحله پیشنهاد می‌کند؛ Backend اختیار قطعی دارد؛ Assistant؛ REQ:001,008 |
+| `CAND:A01:002` | B:871, 906؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_router_three_request_cases`; `docs_shahab_phase_2_development_blueprint_session_domain_role_backend_validated` | پذیرش و route خدمت از C05a بازیافت می‌شود؛ REQ جدید برای همان تصمیم ساخته نشد؛ REQ:002,007 |
+| `CAND:A01:003` | B:869؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_catalog_entry_not_permission`; `docs_shahab_phase_2_development_blueprint_catalog_service_metadata`; `docs_shahab_phase_2_development_blueprint_catalog_api_core` | کاتالوگ Core شناسه/قرارداد/وضعیت می‌دهد؛ وجود خدمت مجوز نیست؛ C05a/C01؛ REQ:003,005 |
+| `CAND:A01:004` | B:912, 1414–1424؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_domain_scope_guard` | دامنه/نقش و فهرست ابزار مجاز در Backend کنترل می‌شود، نه در prompt؛ REQ:002,003 |
+| `CAND:A01:005` | B:865, 1214؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_e02_exchange_contract_fields`; `docs_shahab_phase_2_development_blueprint_cross_service_data_access` | مالک/مصرف‌کننده، هدف، نسخه، فیلد حداقلی، مجوز و خطا در قرارداد؛ REQ:003,005 |
+| `CAND:A01:006` | B:1160–1168؛ `APPROVED_WITH_OPEN_FEASIBILITY` | `docs_shahab_phase_2_development_blueprint_indirect_api_limits` | ابزار خواندنی و نوشتنی تفکیک؛ endpoint، مجوز یا روش اجرایی تأییدنشده مجاز فرض نمی‌شود؛ REQ:004 |
+| `CAND:A01:007` | B:918؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_effectful_action_revalidation` | قرارداد، مجوز، رضایت، انتشار، شرط جاری و تأیید حساس در مرز هر اثر دوباره کنترل می‌شوند؛ REQ:005,006 |
+| `CAND:A01:008` | B:1388, 1482–1501؛ `REUSED / HANDOFF` | `docs_shahab_phase_2_development_blueprint_computer_use_execution_boundary`; `docs_shahab_phase_2_development_blueprint_tooling_unapproved` | اجرای Computer Use و ارزیابی ابزار به A04/مصوبه‌های اجرایی آینده؛ این بسته ابزار بانک انتخاب نمی‌کند؛ خارج از دامنه اجرای A01 |
+| `CAND:A01:009` | B:1253–1269, 1414؛ `REUSED / HANDOFF` | `docs_shahab_phase_2_development_blueprint_r1_adviser_only_scope` | زبانه و تجربه UI در C06؛ Assistant در R1 فقط «به‌زودی»؛ هیچ UI موازی در A01 ساخته نمی‌شود |
+| `CAND:A01:010` | B:1831؛ `APPROVED_SHARED_BOUNDARY` | `docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split` | A01 فقط پیشنهاد می‌دهد؛ A02 مالک گردش‌کار پایدار و A04 مالک جزئیات Computer Use می‌مانند؛ REQ:001,008 |
+| `CAND:A01:011` | B:1837؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_observability_pre_migration_a09` | OpenTelemetry/Telemetry، baseline و رخداد مشترک از C01/C14؛ A01 فقط producer مجاز؛ REQ:010 |
+| `CAND:A01:012` | B:910–912، 1214؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_b04_hybrid_orchestration`; `docs_shahab_phase_2_development_blueprint_e02_contract_requirements` | پاسخ سرویس مالک مرجع وضعیت است؛ داده/نتیجه مدل جایگزین نمی‌شود؛ REQ:008,009 |
+| `CAND:A01:013` | Handoff:H04:001؛ C04:AC:CORE:C04:018؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_catalog_entry_not_permission`; `docs_shahab_phase_2_development_blueprint_e02_contract_requirements`; `docs_shahab_phase_2_development_blueprint_e02_exchange_contract_fields` | Assistant entitlement را از قرارداد C04 می‌خواند؛ معنای پلن و ماتریس دسترسی در C04 می‌ماند؛ fail-closed برای نسخه ناسازگار؛ REQ:011 |
+
+**کنترل Candidate مشترک:** C05a:REQ:CORE:210–225، C02:REQ:CORE:001–069 و قراردادهای C01:01/:02/:03/:04/:06 به‌عنوان مالکیت/قرارداد پذیرفته‌شده ارجاع می‌شوند؛ دوباره‌نویسی نمی‌شوند. Handoff:C05A:004 (route/capability→R02/A01/A02/C06) مصرف A01 را پشتیبانی می‌کند؛ Handoff:C05A:006 و CAN:C05A:044 مالکیت workflow را به A02 می‌سپارند. B:1502–1522 و A04 برای قیود دستگاه/Computer Use صرفاً handoff هستند؛ Handoff:H04:001 در این بسته به‌عنوان قرارداد entitlement مصرف و از حالت مقصد نامعین خارج می‌شود. دامنهٔ Candidate این بسته ۱۳ مورد است؛ همه در جدول تعیین تکلیف شدند.
+
+#### Requirements اتمی
+
+| Requirement | رفتار مستقل و قابل‌آزمون | Source / Candidate | مالک رفتار | Enabler → Task → Subtask | AC / TD |
+|---|---|---|---|---|---|
+| `REQ:ASSISTANT:A01:001` | خروجی LLM برای هدف/ابزار/مرحله فقط پیشنهاد باشد و به‌تنهایی عملیات یا تغییر وضعیت معتبر ایجاد نکند. | B:910–912; CAND:001,010 | Assistant؛ اثر فقط از Backend/مالک سرویس | EN:001 → T:001 → S01 | AC/TEST:001 |
+| `REQ:ASSISTANT:A01:002` | Backend پیش از dispatch، نقش Assistant و `domain_id`/route جاری را با قرارداد معتبر نشست تطبیق دهد؛ مغایرت = صفر dispatch. | B:871,912,1414; CAND:002,004 | C02 برای نشست/مجوز؛ Assistant برای gate مصرف‌کننده | EN:002 → T:003 → S01 | AC/TEST:002 |
+| `REQ:ASSISTANT:A01:003` | پیشنهاد فقط به capability منتشرشده و نسخه‌دار در فهرست مجاز همان دامنه و owner contract resolve شود. | B:869,912,1214; CAND:003–005 | C05a معنا/انتشار؛ C01 API؛ Assistant resolve | EN:001 → T:002 → S01 | AC/TEST:003 |
+| `REQ:ASSISTANT:A01:004` | capability خواندنی و اثرگذار نوع‌های جدا داشته باشند؛ درخواست دارای اثر جانبی از رابط خواندنی اجرا نشود. | B:1162–1165; CAND:006 | مالک capability؛ Assistant در مرز dispatch | EN:001 → T:002 → S02 | AC/TEST:004 |
+| `REQ:ASSISTANT:A01:005` | dispatch اقدام حساس بدون مجوز معتبر C02، رضایت لازم و تأیید صریح همان اقدام متوقف شود. | B:1163,918; CAND:005–007 | C02 مرجع مجوز/رضایت؛ Backend/مالک اقدام اجرا را رد می‌کند | EN:002 → T:003 → S02 | AC/TEST:005 |
+| `REQ:ASSISTANT:A01:006` | Backend بلافاصله پیش از هر اثر، مجوز/رضایت/وضعیت انتشار و شرط جاری لازم را دوباره ارزیابی کند؛ تصمیم قبلی منقضی یا تغییرکرده قابل استفاده مجدد نیست. | B:918; CAND:007 | سرویس مالک هر اثر؛ Assistant فقط gate را فراخوانی می‌کند | EN:002 → T:003 → S03 | AC/TEST:006 |
+| `REQ:ASSISTANT:A01:007` | نتیجهٔ clarification، خارج‌ازدامنه، نامجاز یا route مستقل C05a پیش از dispatch رعایت شود؛ route نامعلوم/نیازمند تأیید موجب توقف پیشنهاد اجرایی است. | B:871,906,912; CAND:002,004 | C05a برای طبقه‌بندی؛ C02 برای مجوز؛ Assistant برای مصرف نتیجه | EN:001 → T:001 → S02 | AC/TEST:007 |
+| `REQ:ASSISTANT:A01:008` | فقط نتیجهٔ معتبر قرارداد سرویس مالک می‌تواند وضعیت اقدام را موفق/ناموفق اعلام کند؛ متن مدل یا نتیجهٔ مقصد دیگر جایگزین آن نمی‌شود. | B:910–912,1214,1831; CAND:001,010,012 | سرویس مالک نتیجه؛ Assistant نگاشت‌کنندهٔ مصرفی | EN:003 → T:004 → S01 | AC/TEST:008 |
+| `REQ:ASSISTANT:A01:009` | نبود/timeout/نسخه ناسازگار سرویس به وضعیت قابل‌تشخیص unavailable/unknown و عدم ادعای موفقیت منجر شود. | B:912,1214; CAND:005,012 | سرویس مالک خطا؛ Assistant نگاشت‌کننده | EN:003 → T:004 → S02 | AC/TEST:009 |
+| `REQ:ASSISTANT:A01:010` | Telemetry مصرف‌کنندهٔ A01 correlation/version/outcome غیرشخصی را ثبت کند و متن prompt، token، OTP، داده مالی/هویتی یا payload را ثبت نکند. | B:1837; CAND:011 | C14 قرارداد telemetry؛ Assistant producer | EN:003 → T:004 → S03 | AC/TEST:010 |
+| `REQ:ASSISTANT:A01:011` | پیش از dispatch، entitlement actor/خدمت از قرارداد نسخه‌دار C04 ارزیابی شود؛ فقدان یا ناسازگاری قرارداد/استحقاق موجب عدم dispatch است و A01 ماتریس پلن را بازتعریف نمی‌کند. | Handoff:H04:001؛ C04:AC:CORE:C04:018; CAND:013 | C04 مالک entitlement؛ A01 مصرف‌کننده | EN:002 → T:003 → S04 | AC/TEST:011 |
+
+#### Enablerها و Taskهای تخصصی A01
+
+| Enabler | خروجی لازم | Requirements |
+|---|---|---|
+| `EN:ASSISTANT:A01:001` | قرارداد پیشنهاد نوع‌دار دستیار که از route/capability موجود استفاده می‌کند و اختیار اجرا ندارد. | 001,003,004,007 |
+| `EN:ASSISTANT:A01:002` | gate مصرف‌کننده برای role/domain، مجوز، entitlement و شرایط جاری، متصل به مالک‌های C02/C04/C05a و سرویس مقصد. | 002,005,006,011 |
+| `EN:ASSISTANT:A01:003` | نگاشت نتیجهٔ owner به وضعیت شفاف و telemetry حداقلی امن. | 008,009,010 |
+
+| Task | مالک / پیش‌نیاز | خروجی و PASS oracle |
+|---|---|---|
+| `TASK:ASSISTANT:A01:001` — قرارداد پیشنهاد و مصرف route | Assistant؛ پیش‌نیاز route/capability contract از C05a و نشست C02 | پیشنهاد شامل capability/version/هدف/دامنه و ورودی مجاز است؛ proposal-only هیچ اثری ندارد؛ outcomeهای clarification/route پیش از dispatch رعایت می‌شوند. REQ 001,002,007. |
+| `TASK:ASSISTANT:A01:002` — catalog binding و taxonomy ابزار | Assistant؛ قرارداد read API C01/C05a، بدون انتخاب endpoint/schema فیزیکی | ابزار ناموجود/منسوخ رد؛ read/write semantics جدا و owner/version معلوم؛ no private-table/tool access. REQ 003,004. |
+| `TASK:ASSISTANT:A01:003` — Backend action gate | مصرف‌کنندهٔ C02/C04؛ تصمیم authoritative در C02/C04 و سرویس owner | هر dispatch با actor/domain/capability/entitlement/current consent و شرایط اقدام تطبیق دارد؛ عمل حساس فاقد استحقاق/تأیید متوقف می‌شود. REQ 002,005,006,011. |
+| `TASK:ASSISTANT:A01:004` — نتیجه، خطا و شواهد telemetry | Assistant/C14؛ قرارداد خطای مالک و trace مشترک C01 | نتیجه فقط از owner پذیرفته؛ unavailable/unknown بدون موفقیت کاذب؛ payload حساس ثبت‌نشده. REQ 008–010. |
+
+| Subtask | Requirement | خروجی و oracle مستقل |
+|---|---|---|
+| `TASK:ASSISTANT:A01:001.S01` | 001,003 | نمونهٔ proposal صرفاً دادهٔ برنامه است؛ شمار side-effect پس از تولید proposal برابر صفر. |
+| `TASK:ASSISTANT:A01:001.S02` | 002,007 | ماتریس route outcome؛ clarification/deny/out-of-domain به dispatch=0 منجر شود. |
+| `TASK:ASSISTANT:A01:001.S03` | 001,007 | مرز Planner→Backend→Owner؛ هیچ مسیر direct LLM→tool وجود ندارد. |
+| `TASK:ASSISTANT:A01:002.S01` | 003 | catalog/version resolver؛ شناسهٔ unknown/inactive در dispatch قابل resolve نیست. |
+| `TASK:ASSISTANT:A01:002.S02` | 004 | taxonomy read/effectful؛ write semantic روی read-only schema با validation failure رد شود. |
+| `TASK:ASSISTANT:A01:002.S03` | 003,004 | owner contract reference؛ مسیر table/ORM/private tool در dependency map صفر باشد. |
+| `TASK:ASSISTANT:A01:003.S01` | 002 | gate actor/domain/session از C02؛ mismatch پیش از ارسال ورودی به owner رد شود. |
+| `TASK:ASSISTANT:A01:003.S02` | 005 | اثر حساس بدون consent/confirmation معتبر dispatch نشود. |
+| `TASK:ASSISTANT:A01:003.S03` | 006 | context مجوز و شرایط برای هر اثر تازه ارزیابی شود؛ stale approval رد شود. |
+| `TASK:ASSISTANT:A01:003.S04` | 011 | entitlement از C04 contract/version بخوان؛ missing/invalid/version mismatch با dispatch=0؛ بدون plan matrix محلی. |
+| `TASK:ASSISTANT:A01:004.S01` | 008 | adapter نتیجهٔ owner را به وضعیت مصرفی نگاشت کند؛ output مدل نتواند status را overwrite کند. |
+| `TASK:ASSISTANT:A01:004.S02` | 009 | map timeout/version error به unknown/unavailable؛ success fabricated=0. |
+| `TASK:ASSISTANT:A01:004.S03` | 010 | telemetry contract با allowlist فیلد؛ scan خروجی برای prompt/OTP/token/PII=0. |
+
+#### Acceptance Criteria — oracleهای دقیق
+
+| AC / REQ | Given (پیش‌شرط) | When (محرک) | PASS (قابل‌اندازه‌گیری) | FAIL |
+|---|---|---|---|---|
+| `AC:ASSISTANT:A01:001` | proposal تولید شده؛ هیچ owner call شروع نشده | مدل پیشنهاد write یا success بسازد | DB/HTTP/tool side effect قبل از Backend approval=0 و system status تغییرنکرده | هر اثر یا تغییر status با output مدل |
+| `AC:ASSISTANT:A01:002` | `role!=Assistant` یا domain/route در C02/C05a متفاوت/منقضی است | dispatcher درخواست را آماده کند | dispatch count=0؛ رد با reason code قراردادی | یک tool call یا خودتغییر domain/role |
+| `AC:ASSISTANT:A01:003` | capability غایب، inactive یا version ناشناخته است | proposal resolve شود | owner call=0؛ `unsupported_capability/version` در outcome | fallback به ابزار حدسی یا private interface |
+| `AC:ASSISTANT:A01:004` | registry ابزار read-only است و payload دارای write intent است | validation قبل از dispatch اجرا شود | validation fail و side-effect=0 | write از رابط read-only یا طبقه‌بندی مبهم |
+| `AC:ASSISTANT:A01:005` | عمل حساس؛ consent یا confirmation برای همان عمل موجود نیست | Backend gate اجرا شود | owner call=0؛ پاسخ درخواست تأیید/توقف | call با consent کلی/قدیمی/مفقود |
+| `AC:ASSISTANT:A01:006` | approval معتبر در زمان plan بوده ولی مجوز/وضعیت/شرط پیش از invoke تغییر کرده | effectful call آغاز شود | fresh check mismatch را رد کند؛ side-effect=0 | استفاده از snapshot مجوز قبلی |
+| `AC:ASSISTANT:A01:007` | C05a outcome=`CLARIFY`، `DENY` یا route نیازمند اقدام کاربر است | Assistant planner اجرا شود | effectful dispatch=0 تا outcome مجاز/تأییدشده | ارسال درخواست مبهم به owner یا تغییر route |
+| `AC:ASSISTANT:A01:008` | owner پاسخ typed و امضای schema/version معتبر داده و مدل متن متناقض ساخته | result mapping اجرا شود | نمایش status دقیقاً با owner response برابر؛ status overwrite=0 | status موفق از متن LLM یا سرویس غیرمالک |
+| `AC:ASSISTANT:A01:009` | timeout، owner unavailable یا contract mismatch | پاسخ برای کاربر ساخته شود | outcome=`UNKNOWN/UNAVAILABLE` طبق قرارداد و success claim=0 | جعل نتیجه، retry بی‌حد یا موفقیت فرضی |
+| `AC:ASSISTANT:A01:010` | trace correlation/version موجود و ورودی شامل markerهای حساس است | telemetry صادر و با allowlist scan شود | correlation/version/outcome موجود؛ match فیلد ممنوع=0 | prompt/OTP/token/شناسه/PII در log/trace |
+| `AC:ASSISTANT:A01:011` | actor، خدمت و قرارداد C04 با یک وضعیت entitlement معلوم | entitlement پیش از dispatch خوانده شود | فقط entitlement معتبر طبق پاسخ نسخه‌دار C04 dispatch می‌شود؛ نبود/نسخه ناسازگار/رد=dispatch صفر | دسترسی از روی نام پلن یا cache قدیمی/ماتریس محلی استنتاج شود |
+
+#### Test Definitions و Planned Test Cases (اجرا نشده)
+
+| Test Definition | مثبت | منفی | مرزی | شکست |
+|---|---|---|---|---|
+| `TEST:ASSISTANT:A01:001` | `TC:ASSISTANT:A01:001-P` proposal ابزار را می‌سازد ولی call=0 | `TC:ASSISTANT:A01:001-N` خروجی success مدل بدون owner reject می‌شود | `TC:ASSISTANT:A01:001-B` چند proposal تولید؛ فقط proposal پذیرفته‌شده منتظر gate است | `TC:ASSISTANT:A01:001-F` planner timeout؛ هیچ عملیات/وضعیت ساخته نمی‌شود |
+| `TEST:ASSISTANT:A01:002` | `TC:ASSISTANT:A01:002-P` role/domain معتبر؛ gate به مسیر owner می‌رسد | `TC:ASSISTANT:A01:002-N` domain mismatch؛ dispatch=0 | `TC:ASSISTANT:A01:002-B` session expiry بین plan و dispatch؛ gate رد می‌کند | `TC:ASSISTANT:A01:002-F` C02 unavailable؛ fail closed و no call |
+| `TEST:ASSISTANT:A01:003` | `TC:ASSISTANT:A01:003-P` capability فعال و version پشتیبانی‌شده resolve می‌شود | `TC:ASSISTANT:A01:003-N` capability ناشناخته؛ owner call=0 | `TC:ASSISTANT:A01:003-B` version قدیمی سازگار فقط طبق ماتریس آزموده پذیرفته می‌شود | `TC:ASSISTANT:A01:003-F` catalog API قطع؛ fallback خصوصی=0 |
+| `TEST:ASSISTANT:A01:004` | `TC:ASSISTANT:A01:004-P` read intent از ابزار read-only پاسخ می‌گیرد | `TC:ASSISTANT:A01:004-N` write payload روی ابزار read-only reject | `TC:ASSISTANT:A01:004-B` intent دوپهلو؛ به clarification برمی‌گردد | `TC:ASSISTANT:A01:004-F` taxonomy/schema نامعتبر؛ تمام dispatchهای آن ابزار مسدود |
+| `TEST:ASSISTANT:A01:005` | `TC:ASSISTANT:A01:005-P` action دارای consent و confirmation تازه به gate می‌رسد | `TC:ASSISTANT:A01:005-N` بدون consent؛ call=0 | `TC:ASSISTANT:A01:005-B` consent برای action متفاوت؛ call=0 | `TC:ASSISTANT:A01:005-F` consent service timeout؛ fail closed |
+| `TEST:ASSISTANT:A01:006` | `TC:ASSISTANT:A01:006-P` owner شرایط فعلی را دوباره تأیید می‌کند | `TC:ASSISTANT:A01:006-N` approval پس از تغییر شرط stale؛ reject | `TC:ASSISTANT:A01:006-B` شرط در فاصلهٔ دو action تغییر کند؛ فقط action بعدی رد | `TC:ASSISTANT:A01:006-F` revalidation unavailable؛ effect اجرا نمی‌شود |
+| `TEST:ASSISTANT:A01:007` | `TC:ASSISTANT:A01:007-P` route=`IN_DOMAIN/ACCEPTED`؛ پیشنهاد معتبر آماده gate | `TC:ASSISTANT:A01:007-N` route=`DENY`؛ tool call=0 | `TC:ASSISTANT:A01:007-B` route=`CLARIFY`؛ dispatch پس از clarification جدید | `TC:ASSISTANT:A01:007-F` route API unknown؛ Assistant تغییر مسیر نمی‌دهد |
+| `TEST:ASSISTANT:A01:008` | `TC:ASSISTANT:A01:008-P` owner success response به همان status نگاشت می‌شود | `TC:ASSISTANT:A01:008-N` مدل success بسازد ولی owner failure؛ failure حفظ شود | `TC:ASSISTANT:A01:008-B` پاسخ جزئی/فیلد optional غایب؛ فقط status قابل‌اثبات نگاشت شود | `TC:ASSISTANT:A01:008-F` schema نامعتبر؛ success claim=0 |
+| `TEST:ASSISTANT:A01:009` | `TC:ASSISTANT:A01:009-P` owner unavailable به unavailable نمایش داده شود | `TC:ASSISTANT:A01:009-N` LLM از نتیجهٔ حدسی success نگوید | `TC:ASSISTANT:A01:009-B` timeout پس از ارسال؛ وضعیت unknown بماند | `TC:ASSISTANT:A01:009-F` error mapping service قطع؛ پاسخ بدون ادعای نتیجه |
+| `TEST:ASSISTANT:A01:010` | `TC:ASSISTANT:A01:010-P` trace با correlation/version/outcome غیرشخصی ثبت شود | `TC:ASSISTANT:A01:010-N` marker OTP/token در output؛ test fail و log scrub | `TC:ASSISTANT:A01:010-B` فیلد ناشناختهٔ حساس به allowlist راه نمی‌یابد | `TC:ASSISTANT:A01:010-F` telemetry backend قطع؛ اقدام اصلی دادهٔ حساس به fallback log نمی‌ریزد |
+| `TEST:ASSISTANT:A01:011` | `TC:ASSISTANT:A01:011-P` C04 entitlement معتبر/نسخه سازگار؛ dispatch مجاز | `TC:ASSISTANT:A01:011-N` استحقاق رد؛ dispatch صفر | `TC:ASSISTANT:A01:011-B` contract نسخه قدیمی/ناسازگار؛ fail-closed | `TC:ASSISTANT:A01:011-F` C04 entitlement API timeout؛ dispatch صفر و نتیجه نامعلوم/قابل‌تشخیص |
+
+هر `TEST` چهار Case اختصاصی P/N/B/F دارد؛ جمع **۱۱ Test Definition و ۴۴ Planned Test Case**؛ محصول/تست اجرا نشده است.
+
+#### قراردادها، وابستگی‌ها و مرز لایه‌ها
+
+| رابطه | مالک → مصرف‌کننده | قرارداد/مرز |
+|---|---|---|
+| route/capability | C05a → A01/A02/C06/R02 | A01 طبقه‌بندی route را بازنویسی نمی‌کند؛ فقط نتیجه و capability مجاز را مصرف می‌کند. |
+| identity/permission/consent | C02 → Backend gate A01/A02 | C02 authority است؛ A01 تصمیم permission یا consent مستقل نمی‌سازد. |
+| plan entitlement | C04 → A01/A02 | قرارداد entitlement C04 خوانده می‌شود؛ plan rules/price/access matrix در C04 می‌ماند؛ پاسخ ناموجود یا ناسازگار fail-closed است. |
+| Core API/public contract | Core/C01 → Assistant | قرارداد نسخه‌دار؛ endpoint و schema عملیاتی هنوز طراحی می‌خواهد؛ direct ORM/table access=0. |
+| proposal → workflow | A01 → A02 | A01 proposal/capability refs می‌دهد؛ A02 تنها durable workflow owner است؛ هیچ چرخهٔ dependency مجاز نیست. |
+| operation execution | A02 → سرویس مقصد/A04 | A04 رابط Computer Use را مالک است؛ سرویس مقصد effect/result را مالک می‌ماند؛ این بسته API بانکی یا ابزار اجرایی را تصویب نمی‌کند. |
+| UI/result | A01/A02 → C06/C14 | C06 مالک UI و C14 مالک history/notification/monitoring مشترک؛ A01 صفحه/اعلان موازی نمی‌سازد. |
+| telemetry | Assistant → C14/C01 | schema و کنترل redaction مشترک بازیافت می‌شود؛ retention، sampling، threshold باز می‌مانند. |
+
+**پوشش لایه‌ای:** Backend (planner gate) و API (owner contract) در A01؛ Database/Job و durable state فقط A02/سرویس مالک؛ Frontend فقط handoff به C06؛ Infrastructure Assistant در R1 مستقر نمی‌شود؛ Security/Privacy از C02/C14 enforce و به‌شکل مصرف‌کننده آزموده می‌شوند؛ Monitoring از C14؛ Testهای contract/negative/boundary/failure تعریف شده‌اند و اجرا نشده‌اند.
+
+**تصمیم‌ها و گزینه‌های باز:** tool inventory و legal permission هر منبع، endpoint/schema نهایی، policy دقیق same-domain plan, retention/sampling/threshold, timeout/retry values و زمان/محیط فعال‌سازی Assistant. هیچ گزینه‌ای در این بسته مصوب فرض نمی‌شود.
+
+#### ممیزی A01 — RA و IPA
+
+- **RA:** Candidate 13/13 تعیین تکلیف؛ Source→Graph→Candidate/Reuse/Handoff برای همه ثبت؛ متن B:869, 871, 910–912, 1160–1168, 1214, 1388, 1414–1424, 1482–1501, 1831, 1837 بازخوانی شد؛ owner و مصوبهٔ هر کدام مشخص؛ duplication با C05a/C02/C01/C06/C14/A04=0؛ inferred/ambiguous-to-requirement=0؛ **PASS**.
+- **IPA:** 11/11 Requirement به Enabler/Task/Subtask/AC/TD و Caseهای P/N/B/F پیوند دارد؛ reverse link Requirement↔AC/Test و Task↔Subtask برقرار؛ 44/44 Case سناریوی مجزا؛ orphan/duplicate ID=0؛ چرخهٔ سخت A01→A02→A01=0؛ **PASS**.
+- **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED` پس از CPA مشترک؛ هیچ کد یا محصولی اجرا نشده است.
+
+### A02 — گردش‌کار پایدار دستیار و هماهنگی زیرکار
+
+**شناسهٔ بسته:** `PKG:A02`؛ **عنوان اجرایی پیشنهادی:** «گردش‌کار پایدار دستیار و هماهنگی زیرکار»؛ **مالک رفتار:** Assistant Workflow؛ **مالک ذخیرهٔ داده و اجرای هر Job:** سرویس مالک همان خدمت؛ **مالک مجوز/هویت/رضایت:** C02؛ **مالک route/capability:** C05a. این عنوان از B04، B:916–918 و Handoff:C05A:006/CAN:C05A:044 استخراج شده است. شناسهٔ بسته `A02` با تصمیم معماری A02 دربارهٔ مالکیت داده یکی نیست؛ و `A04` در Blueprint یک تصمیم Job/Port-Adapter است، نه بستهٔ A04 برنامه.
+
+**دامنه:** وضعیت پایدار پرونده/Job، رابطهٔ parent/child، انتظار و ادامه، توقف/لغو/انقضا، revalidation پیش از اثر، نتیجهٔ نامعلوم، Retry محدود، جلوگیری از تکرار، بازیابی Worker و سازگاری نسخهٔ گردش‌کار. هماهنگ‌کنندهٔ اصلی فقط مالک هماهنگی پروندهٔ اصلی است؛ سرویس تخصصی مقصد مالک اجرای زیرکار است. رابط Computer Use، انتخاب بانک/ابزار، مدل هویت/permission، API عمومی C01، Outbox مشترک و UI/اعلان بسته‌های مالک خود باقی می‌مانند.
+
+**مرز تصمیم:** PostgreSQL در سرویس مالک مرجع پایدار وضعیت Job است؛ Redis فقط صف اجراییِ ممکن و Temporal گزینهٔ ارزیابی آینده است. نوع صف، موتور workflow، state enum دقیق، schema فیزیکی، SLA، حد retry، timeout و threshold تعیین نشده‌اند و این بسته آن‌ها را جعل نمی‌کند. مثال state diagram در B:920–940 پیشنهاد/ساده‌سازی است، نه enum مصوب. اجرای زیرکار چندحوزه‌ای در R1 تعهد نشده است.
+
+#### استخراج Graph-first و تعیین تکلیف Candidateها
+
+برای گراف، گزارش `GRAPH_REPORT.md`، محدودیت ۸۵۲ node بدون community و validation رسمی بررسی شد؛ گراف با Source SHA متصل و مکانیکی `PASS` است. مسیر روابط مستقیم `EXTRACTED` فقط برای کشف استفاده شد؛ منبع B به‌صورت مستقیم تطبیق شد. هیچ relation استنباطی/مبهم به Requirement تبدیل نشده است.
+
+| Candidate | Source Unit / وضعیت | Graph Reference | تعیین تکلیف و ردیابی |
+|---|---|---|---|
+| `CAND:A02:001` | B:871؛ `SHARED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_cross_domain_subtask` | C05a مالک route/envelope؛ A02 دریافت‌کنندهٔ اجرای پایدار؛ REQ:003,004 |
+| `CAND:A02:002` | B:916؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_workflow_engine` | اجرای چندمرحله‌ای و lifecycle پایدار Assistant؛ REQ:001,002,005,006 |
+| `CAND:A02:003` | B:916؛ `APPROVED_WITH_TECH_OPEN` | `docs_shahab_phase_2_development_blueprint_a04_postgresql_redis_temporal` | PostgreSQL state owner؛ Redis queue اختیاری؛ Temporal صرفاً ارزیابی؛ REQ:001,002,012 |
+| `CAND:A02:004` | B:918؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_effectful_action_revalidation` | هر اقدام حساس revalidate می‌شود؛ C02/owner مرجع؛ REQ:007 |
+| `CAND:A02:005` | B:918؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_unknown_bank_result_no_blind_retry` | unknown ابتدا با owner بررسی، retry کور ممنوع؛ REQ:008 |
+| `CAND:A02:006` | B:1212–1214؛ `APPROVED_SHARED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_cross_service_data_access`; `docs_shahab_phase_2_development_blueprint_e02_contract_requirements` | مالک/مصرف‌کننده، هدف، نسخه، حداقل فیلد، خطا/recovery؛ reuse C01/C02؛ REQ:001,003,007 |
+| `CAND:A02:007` | B:1215–1216؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_transactional_outbox` | event/Outbox/consumer idempotency فقط طبق C01/C03؛ A02 Outbox تازه نمی‌سازد؛ REQ:009–011 به قرارداد مشترک متصل‌اند |
+| `CAND:A02:008` | B:1218–1252؛ `EXAMPLE/CONTEXT` | `docs_shahab_phase_2_development_blueprint_service_flow_example`; `docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat`; `docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent` | مثال جریان برای سناریوی مرزی؛ پلن، پرداخت و قواعد چندوامی مالک‌های C04/C09/C13a/C05b/C02 هستند؛ REQ:004–008 |
+| `CAND:A02:009` | B:1831؛ `APPROVED_SHARED_BOUNDARY` | `docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split` | Workflow وضعیت کسب‌وکار؛ Computer Use پیمایش UI؛ A02/A04 مرز مستقل؛ REQ:001,006 |
+| `CAND:A02:010` | B:1835؛ `APPROVED_WITH_MIGRATION_OPEN` | `docs_shahab_phase_2_development_blueprint_durable_job_state_and_engine_migration`; `docs_shahab_phase_2_development_blueprint_temporal_migration_not_code_free` | in-flight/current engine و انتقال تدریجی باید آزموده شود؛ Temporal/API/migration design باز؛ REQ:010–012 |
+| `CAND:A02:011` | B:940؛ `EXAMPLE_NOT_NORMATIVE` | `docs_shahab_phase_2_development_blueprint_workflow_states_proposed` | state diagram مثال ساده‌شده؛ هیچ enum/ترتیب ثابتی از آن تصویب نمی‌شود؛ REQ:005,006 و Open Decision |
+| `CAND:A02:012` | B:1903؛ `BASELINE_NOT_CAPACITY` | `docs_shahab_phase_2_development_blueprint_phase_one_vm_not_phase_two_capacity` | ۲ vCPU/۴ GB فقط baseline فاز اول است، ظرفیت فاز دوم نیست؛ Open Decision و آزمون بار |
+| `CAND:A02:013` | B:1907–1917؛ `APPROVED_TEST_REQUIREMENTS` | `docs_shahab_phase_2_development_blueprint_contract_test_blocking_gate`; `docs_shahab_phase_2_development_blueprint_data_evidence_compatibility_tests_b06` | آزمون مرز/قرارداد، failure/recovery، داده و telemetry برای طراحی لازم؛ محصول اجرا نشده |
+| `CAND:A02:014` | Handoff:H04:001؛ C04:AC:CORE:C04:018؛ `REUSED_CONTRACT` | `docs_shahab_phase_2_development_blueprint_e02_contract_requirements` | هر effect مصرف کننده باید entitlement جاری را از C04 بسنجد؛ C04 ماتریس پلن را مالک است |
+| `CAND:A02:015` | B:1635؛ `APPROVED` | `docs_shahab_phase_2_development_blueprint_warranty_recommender_optional` | شروع از توصیه معتبر C05b با اجازه کاربر؛ پرونده‌ها مستقل؛ جایگزین فقط با تأیید مشتری |
+
+Candidateها 15/15 تعیین تکلیف شدند؛ تمام Graph Referenceها node ID کامل و موجود در `semantic/graph.json` هستند.
+
+**مرز C05a/A02:** C05a:REQ:CORE:222–225 و Handoff:C05A:006 «چه وقت زیرکار ارجاع می‌شود، قرارداد/owner مقصد و خروجی قابل‌نمایش» را تعیین می‌کنند. A02 فقط پس از ارجاع معتبر lifecycle و durable state را اجرا می‌کند. C02 permission را دوباره تعریف نمی‌کند؛ A04 حرکت UI را پیاده نمی‌کند؛ C01/C03 قرارداد job/event/idempotency را بازیافت می‌کند؛ C06/C14 نمایش و اعلان را می‌گیرند. هیچ انتقال permission/consent از parent به child به‌صورت ضمنی رخ نمی‌دهد.
+
+#### Requirements اتمی
+
+| Requirement | رفتار مستقل و قابل‌آزمون | Source / Candidate | مالک رفتار | Enabler → Task → Subtask | AC / TD |
+|---|---|---|---|---|---|
+| `REQ:ASSISTANT:A02:001` | فقط سرویس مالک workflow می‌تواند داده/وضعیت/نتیجهٔ Job خود را ایجاد یا تغییر دهد؛ هماهنگ‌کنندهٔ parent مالک دادهٔ فرزند نیست. | B:916,1212–1214,1831; CAND:002,003,006,009 | سرویس مالک هر workflow | EN:001 → T:001 → S01 | AC/TEST:001 |
+| `REQ:ASSISTANT:A02:002` | وضعیت معتبر و پیشرفت Job در مخزن پایدار سرویس مالک باقی بماند و به memory مدل یا نشست چت وابسته نباشد. | B:916,918; CAND:002,003 | سرویس مالک؛ PostgreSQL مرجع پایدار مصوب | EN:002 → T:002 → S01 | AC/TEST:002 |
+| `REQ:ASSISTANT:A02:003` | پروندهٔ اصلی و هر زیرکار شناسه، مالک اجرا، وابستگی و وضعیت قابل تفکیک داشته باشند؛ سرویس مقصد زیرکار را اجرا کند. | B:871,918; CAND:001,002 | coordinator برای parent؛ target service برای child | EN:001 → T:001 → S02 | AC/TEST:003 |
+| `REQ:ASSISTANT:A02:004` | اجرای زیرکار بین‌حوزه‌ای `domain_id` و role اصلی نشست را خودکار تغییر ندهد. | B:871,912; CAND:001 | C05a/C02 برای route/role؛ A02 برای حفظ مرز parent | EN:001 → T:001 → S03 | AC/TEST:004 |
+| `REQ:ASSISTANT:A02:005` | انتظار برای کاربر/سرویس بیرونی به‌صورت وضعیت پایدار ثبت شود و پاسخ معتبر همان workflow را ادامه دهد، نه workflow تازهٔ بی‌ارتباط. | B:916,918; CAND:002,008 | سرویس مالک workflow | EN:002 → T:002 → S02 | AC/TEST:005 |
+| `REQ:ASSISTANT:A02:006` | لغو/انقضای workflow از اجرای effectful stepهای بعدی جلوگیری کند و وضعیت خاتمه را در owner record نگه دارد. | B:916,918; CAND:002,011 | سرویس مالک workflow؛ state enum باز است | EN:002 → T:002 → S03 | AC/TEST:006 |
+| `REQ:ASSISTANT:A02:007` | مجوز، رضایت، entitlement از قرارداد C04، نسخه/وضعیت خدمت و شرط جاری پیش از هر effectful step دوباره اعتبارسنجی شود؛ قواعد پلن محلی تکرار نشود. | B:918,1214,1249; Handoff:H04:001; CAND:004,006,008,014 | C02 برای permission؛ سرویس owner برای شرایط/عمل | EN:003 → T:003 → S01 | AC/TEST:007 |
+| `REQ:ASSISTANT:A02:008` | نتیجهٔ `unknown` اقدام بانکی قبل از هر retry از سرویس مالک استعلام/تطبیق شود؛ تا تعیین وضعیت، اقدام هم‌ارز دوباره ارسال نشود. | B:918; CAND:005 | سرویس owner نتیجه؛ A02 orchestrator | EN:003 → T:003 → S02 | AC/TEST:008 |
+| `REQ:ASSISTANT:A02:009` | تحویل تکراری همان logical action با همان شناسهٔ idempotency بیش از یک اثر دامنه‌ای در owner ایجاد نکند. | B:918,1215–1216,1835; CAND:007,010 | سرویس مالک اثر؛ C01/C03 قرارداد مشترک | EN:003 → T:004 → S01 | AC/TEST:009 |
+| `REQ:ASSISTANT:A02:010` | Retry فقط برای خطای گذرای طبقه‌بندی‌شده و در حد policy پیکربندی‌شده انجام شود؛ validation/authorization/permanent error retry نمی‌شود. | B:918,1215–1216,1835; CAND:007,010 | سرویس owner/Job adapter | EN:003 → T:004 → S02 | AC/TEST:010 |
+| `REQ:ASSISTANT:A02:011` | پس از قطع/راه‌اندازی مجدد Worker، اجرای Job از checkpoint پایدار ادامه یابد و effect پیشین را تکرار یا مرحلهٔ ثبت‌نشده را گم نکند. | B:916,918,1835; CAND:002,010 | سرویس مالک Job | EN:003 → T:004 → S03 | AC/TEST:011 |
+| `REQ:ASSISTANT:A02:012` | Workflow/Job به نسخهٔ تعریف خود bind شود؛ تغییر نسخه، Job جاری را بی‌تصمیم به engine/تعریف دیگر منتقل نکند. | B:916,918,1835; CAND:003,010,011 | workflow owner؛ migration decision مستقل | EN:004 → T:005 → S01 | AC/TEST:012 |
+| `REQ:ASSISTANT:A02:013` | workflow مبتنی بر خروجی معتبر C05b فقط پس از اجازهٔ صریح کاربر آغاز شود؛ مرجع توصیه همچنان C05b است. | B:1635; CAND:015 | C05b مالک توصیه؛ C02 رضایت؛ A02 lifecycle | EN:001 → T:001 → S04 | AC/TEST:013 |
+| `REQ:ASSISTANT:A02:014` | افزودن گزینه/محصول جایگزین به workflow مبتنی بر توصیه نیازمند تأیید صریح مشتری باشد. | B:1635,1251; CAND:015 | C05b مالک نتیجه؛ C02 تأیید/رضایت؛ A02 gate | EN:003 → T:003 → S04 | AC/TEST:014 |
+| `REQ:ASSISTANT:A02:015` | توقف، لغو یا شکست یک پروندهٔ مستقل، اجرای workflowهای مستقل دیگر را متوقف نکند. | B:1635,916; CAND:015,002 | owner هر workflow؛ A02 isolation | EN:002 → T:002 → S04 | AC/TEST:015 |
+
+#### Enablerها، Taskها و Subtaskهای اختصاصی A02
+
+| Enabler | خروجی لازم | Requirements |
+|---|---|---|
+| `EN:ASSISTANT:A02:001` | قرارداد parent/child با مالک و شناسهٔ owner-specific؛ جلوگیری از تغییر role/domain در زیرکار و اتصال مجاز به پیشنهاد پذیرفته‌شده. | 001,003,004,013 |
+| `EN:ASSISTANT:A02:002` | lifecycle پایدار، انتظار/ادامه، لغو و انقضا در state store سرویس مالک، مستقل‌ماندن پرونده‌ها. | 002,005,006,015 |
+| `EN:ASSISTANT:A02:003` | اثر امن با entitlement/permission revalidation، تأیید جایگزین، reconciliation unknown، idempotency، retry و recovery. | 007–011,014 |
+| `EN:ASSISTANT:A02:004` | قرارداد نسخه‌دار Workflow/Job و شواهد امکان‌سنجی مهاجرت بدون جابه‌جایی خاموش in-flight jobs. | 012 |
+
+| Task | مالک / پیش‌شرط | خروجی و PASS oracle |
+|---|---|---|
+| `TASK:ASSISTANT:A02:001` — قرارداد Workflow/Parent–Child | A02 برای هماهنگی؛ C05a برای route/service ID؛ C01 برای Job envelope؛ C05b برای recommendation ref | شناسهٔ parent/child، owner target، dependency/version و scope ثابت؛ parent فقط coordination؛ task domain owner اجرا می‌کند. REQ 001,003,004,012,013. |
+| `TASK:ASSISTANT:A02:002` — ذخیره و lifecycle پایدار | هر سرویس برای Job/دادهٔ خود؛ PostgreSQL منبع پایدار مصوب | پیشرفت/انتظار/لغو/انقضا بعد از process restart از owner record قابل بازیابی است؛ enum و schema نهایی باز. REQ 002,005,006. |
+| `TASK:ASSISTANT:A02:003` — action gate و reconciliation | C02 permission؛ target service current conditions/result | مجوز و وضعیت قبل از هر اثر تازه؛ unknown ابتدا inquiry؛ user confirmation از مالک؛ no blind retry. REQ 007,008,014. |
+| `TASK:ASSISTANT:A02:004` — idempotent retry و Worker recovery | سرویس مالک و C01/C03 Job/Event contracts | duplicate delivery=اثر تکراری صفر؛ retry فقط transient؛ restart از آخرین checkpoint امن. REQ 009–011. |
+| `TASK:ASSISTANT:A02:005` — versioning، migration و عملیات | Workflow owner؛ benchmark/CI evidence قبل از انتخاب engine | version compatibility، in-flight job continuity و اندازه‌گیری صف/خطا/بازیابی؛ Temporal/provider/threshold بدون تصویب انتخاب نمی‌شود. REQ 012. |
+
+| Subtask | Requirement | خروجی و oracle مستقل |
+|---|---|---|
+| `TASK:ASSISTANT:A02:001.S01` | 001 | ماتریس workflow-data/job owner؛ writer خارج از owner=0. |
+| `TASK:ASSISTANT:A02:001.S02` | 003 | parent/child envelope با ID/owner/dependency مستقل و join قابل‌ردیابی. |
+| `TASK:ASSISTANT:A02:001.S03` | 004,012 | قرارداد scope/version؛ child بدون domain/role switch و بدون pin نسخهٔ تعریف نامشخص. |
+| `TASK:ASSISTANT:A02:001.S04` | 013 | start gate برای توصیه معتبر C05b؛ ثبت authorization/consent reference؛ بدون بازتولید توصیه یا محصول. |
+| `TASK:ASSISTANT:A02:002.S01` | 002 | persistence contract و تست restart/session reset برای همان owner record. |
+| `TASK:ASSISTANT:A02:002.S02` | 005 | transitions برای انتظار user/external و resume همان ID؛ بدون enum مصوب‌فرض. |
+| `TASK:ASSISTANT:A02:002.S03` | 006 | cancel/expiry transition، no future side-effect و نگهداری status طبق policy مالک. |
+| `TASK:ASSISTANT:A02:002.S04` | 015 | fault isolation fixture برای دو Job مستقل؛ terminal/failure یک Job بر دیگری اثر نگذارد. |
+| `TASK:ASSISTANT:A02:003.S01` | 007 | pre-effect revalidation contract؛ permission/consent از C02، entitlement از C04، condition از owner. |
+| `TASK:ASSISTANT:A02:003.S02` | 008 | unknown outcome inquiry/reference؛ retry gate تا پاسخ authoritative مسدود است. |
+| `TASK:ASSISTANT:A02:003.S03` | 003,004,007 | تحویل subtask به owner مجاز بدون تغییر primary domain یا ارث‌دادن مجوز. |
+| `TASK:ASSISTANT:A02:003.S04` | 014 | consent gate برای ثبت/ادامهٔ گزینهٔ جایگزین؛ بدون تأیید تازه آن گزینه به workflow اضافه نشود. |
+| `TASK:ASSISTANT:A02:004.S01` | 009 | test fixture تحویل دوگانه با یک logical operation ID؛ effect count=1. |
+| `TASK:ASSISTANT:A02:004.S02` | 010 | error taxonomy transient/permanent/validation/permission؛ retry فقط transient و bounded طبق policy موجود. |
+| `TASK:ASSISTANT:A02:004.S03` | 011 | worker crash/restart از checkpoint؛ اثر قبلی duplicate=0 و گام بعدی گم‌شده=0. |
+| `TASK:ASSISTANT:A02:005.S01` | 012 | workflow definition/version reference immutable برای Job جاری؛ engine choice باز. |
+| `TASK:ASSISTANT:A02:005.S02` | 002,011 | evidence plan برای queue age/retry/recovery/error بدون payload؛ numeric thresholds پس از baseline. |
+| `TASK:ASSISTANT:A02:005.S03` | 012 | migration test: old jobs safe completion, new-job routing controlled and compatibility gate enforced. |
+
+#### Acceptance Criteria — oracleهای دقیق
+
+| AC / REQ | Given | When | PASS | FAIL |
+|---|---|---|---|---|
+| `AC:ASSISTANT:A02:001` | workflow متعلق به سرویس مقصد X | هماهنگ‌کننده یا سرویس Y قصد write کند | تنها X اجازه write دارد؛ rejected writes خارج owner=0 | parent/coordinator مستقیماً child data را تغییر دهد |
+| `AC:ASSISTANT:A02:002` | Job با progress ذخیره‌شده و LLM/session غیرقابل‌دسترس | process restart و resume درخواست شود | همان Job ID و آخرین status معتبر برگردد؛ loss=0 | تکیه به memory چت یا ساخت پروندهٔ بی‌ارتباط |
+| `AC:ASSISTANT:A02:003` | parent و subtask با دو owner | مقصد task را بپذیرد | ID/status/owner جدا و link parent برقرار؛ مقصد مسئول effect | یک status مبهم/owner mismatch/اجرای parent به‌جای مقصد |
+| `AC:ASSISTANT:A02:004` | parent در domain D و child مقصد تخصصی E | child آغاز شود | session domain/role پیش و پس از شروع برابر؛ permission تازه=0 | نشست خودکار به E منتقل شود یا مجوز ارث برسد |
+| `AC:ASSISTANT:A02:005` | Job در انتظار پاسخ بیرونی/کاربر با owner record موجود | پاسخ معتبر به همان correlation برسد | همان Job به ادامهٔ مجاز می‌رود؛ orphan/new duplicate=0 | پاسخ به Job دیگر وصل یا workflow از صفر ساخته شود |
+| `AC:ASSISTANT:A02:006` | workflow cancel/expire شده و action بعدی آماده است | Worker پیام دیررس را بگیرد | effect بعد از terminal state=0؛ final state قابل خواندن | عملیات بعد از لغو/انقضا انجام شود |
+| `AC:ASSISTANT:A02:007` | permission، consent، entitlement C04 و شرط زمان plan معتبر بوده ولی یکی پیش از effect تغییر کرده | owner effect gate اجرا شود | همهٔ checks تازه معتبر باشند تا dispatch=1؛ هر مورد رد/ناموجود/ناسازگار=dispatch صفر | plan-time approval یا plan matrix محلی جای پاسخ جاری C02/C04 را بگیرد |
+| `AC:ASSISTANT:A02:008` | پاسخ اقدام بانک `unknown` است | retry درخواست شود | ابتدا inquiry به owner؛ تا نتیجهٔ authoritative effect تکراری=0 | ارسال مجدد کور یا `unknown=failed` فرض شود |
+| `AC:ASSISTANT:A02:009` | یک operation ID دوبار/با delivery تکراری رسید | دو درخواست در owner پردازش شوند | effect count=1 و نتیجهٔ دو پاسخ به همان action متصل | یک logical action دوبار اعمال شود |
+| `AC:ASSISTANT:A02:010` | خطاهای transient و validation/permission/permanent تفکیک شده‌اند | retry policy اجرا شود | retry count فقط برای transient و ≤حد policy موجود؛ non-transient=0 retry | retry نامحدود یا retry مجوز/اعتبارسنجی |
+| `AC:ASSISTANT:A02:011` | Worker پس از commit مرحله و پیش از ثبت گام بعدی قطع شد | Worker دوباره بالا آید | از state owner بازیابی؛ effect مرحلهٔ commit‌شده duplicate=0؛ گام باقی‌مانده قابل مشاهده | مرحله گم/دو بار انجام شود |
+| `AC:ASSISTANT:A02:012` | Job نسخهٔ V قدیمی درحال اجرا و تعریف جدید آمادهٔ ارزیابی است | deployment/version change رخ دهد | Job جاری با V/engine سازگار ادامه یابد؛ new routing فقط پس از contract gate؛ mixed semantics=0 | تغییر خاموش تعریف یا انتقال ناسازگار Job جاری |
+| `AC:ASSISTANT:A02:013` | توصیه C05b نسخه‌دار و معتبر است؛ اجازهٔ شروع هنوز ثبت نشده | کاربر start را می‌پذیرد یا رد می‌کند | فقط acceptance صریح و قابل ردیابی همان پیشنهاد، Job را آغاز می‌کند؛ رد/ابهام=Job جدید صفر | شروع با صرف نمایش/تولید پیشنهاد یا نتیجهٔ توصیهٔ غیرمعتبر |
+| `AC:ASSISTANT:A02:014` | workflow فعال و جایگزین پیشنهادی مشخص است؛ تأیید جایگزین ثبت نشده | گزینهٔ جایگزین به workflow افزوده شود | تا تأیید مشتری جایگزین attach/dispatch=0؛ پس از تأیید فقط همان گزینه ثبت می‌شود | جایگزین بی‌تأیید یا consent مربوط به گزینه دیگر پذیرفته شود |
+| `AC:ASSISTANT:A02:015` | دو Job مستقل A و B فعال‌اند؛ A در مرحلهٔ شکست/لغو است | A terminal شود | B همان state/worker/dispatch plan قبلی را حفظ کند؛ اثر متقاطع=0 | توقف یا cancel آبشاری B بدون وابستگی مصوب |
+
+#### Test Definitions و Planned Test Cases (اجرا نشده)
+
+| TD | مثبت | منفی | مرزی | شکست |
+|---|---|---|---|---|
+| `TEST:ASSISTANT:A02:001` | `TC:ASSISTANT:A02:001-P` owner X دادهٔ Job خود را ذخیره می‌کند | `TC:ASSISTANT:A02:001-N` write سرویس Y به رکورد X رد می‌شود | `TC:ASSISTANT:A02:001-B` coordinator فقط parent ref/status projection می‌خواند | `TC:ASSISTANT:A02:001-F` owner DB unavailable؛ state به DB مشترک دیگر نوشته نمی‌شود |
+| `TEST:ASSISTANT:A02:002` | `TC:ASSISTANT:A02:002-P` restart؛ همان ID/status ادامه می‌یابد | `TC:ASSISTANT:A02:002-N` chat memory حذف شده؛ state از آن خوانده نمی‌شود | `TC:ASSISTANT:A02:002-B` restart میان دو transition؛ آخرین commit پایدار بازیابی می‌شود | `TC:ASSISTANT:A02:002-F` store unavailable؛ اقدام جدید آغاز نمی‌شود |
+| `TEST:ASSISTANT:A02:003` | `TC:ASSISTANT:A02:003-P` parent/child IDs و owner target مستقل ثبت | `TC:ASSISTANT:A02:003-N` مقصد نامعتبر یا بدون owner؛ child اجرا نمی‌شود | `TC:ASSISTANT:A02:003-B` parent تکمیل و child منتظر؛ statusها جدا می‌مانند | `TC:ASSISTANT:A02:003-F` owner مقصد قطع؛ parent status unknown/awaiting باقی می‌ماند |
+| `TEST:ASSISTANT:A02:004` | `TC:ASSISTANT:A02:004-P` task وابسته در مقصد بدون role/domain switch اجراپذیر می‌شود | `TC:ASSISTANT:A02:004-N` درخواست تغییر خودکار دامنه رد می‌شود | `TC:ASSISTANT:A02:004-B` ارجاع مستقل حوزهٔ دیگر به C05a/C06 handoff می‌شود نه child | `TC:ASSISTANT:A02:004-F` target route unavailable؛ context ثابت و task متوقف |
+| `TEST:ASSISTANT:A02:005` | `TC:ASSISTANT:A02:005-P` پاسخ external به همان waiting Job resume می‌دهد | `TC:ASSISTANT:A02:005-N` response با correlation نامربوط reject | `TC:ASSISTANT:A02:005-B` duplicate response همان result را idempotent می‌کند | `TC:ASSISTANT:A02:005-F` external response دیررس پس از cancel به effect منجر نمی‌شود |
+| `TEST:ASSISTANT:A02:006` | `TC:ASSISTANT:A02:006-P` cancel پیش از گام بعدی و worker متوقف می‌شود | `TC:ASSISTANT:A02:006-N` پیام execute بعد از cancel رد | `TC:ASSISTANT:A02:006-B` cancel هم‌زمان با transition؛ فقط یک terminal outcome | `TC:ASSISTANT:A02:006-F` ذخیره final status شکست؛ effect جدید fail-closed |
+| `TEST:ASSISTANT:A02:007` | `TC:ASSISTANT:A02:007-P` C02 مجوز/رضایت و C04 entitlement جاری معتبر؛ owner condition معتبر؛ یک action اجرا می‌شود | `TC:ASSISTANT:A02:007-N` entitlement رد/منقضی یا consent لغو؛ اثر=0 | `TC:ASSISTANT:A02:007-B` condition بین دو گام تغییر؛ گام اول حفظ، دومی متوقف | `TC:ASSISTANT:A02:007-F` C02/owner check timeout؛ action dispatch=0 |
+| `TEST:ASSISTANT:A02:008` | `TC:ASSISTANT:A02:008-P` inquiry وضعیت confirmed-success می‌دهد؛ workflow بدون ارسال مجدد reconcile می‌شود | `TC:ASSISTANT:A02:008-N` unknown را failed فرض و retry کور می‌کند؛ gate رد | `TC:ASSISTANT:A02:008-B` inquiry هنوز unknown؛ هیچ تکراری تا نتیجهٔ تازه | `TC:ASSISTANT:A02:008-F` inquiry unavailable؛ status unknown و retry=0 |
+| `TEST:ASSISTANT:A02:009` | `TC:ASSISTANT:A02:009-P` operation ID یکتا effect را یک‌بار اعمال می‌کند | `TC:ASSISTANT:A02:009-N` duplicate request همان ID اثر دوم نمی‌سازد | `TC:ASSISTANT:A02:009-B` دو Worker هم‌زمان؛ uniqueness owner count=1 | `TC:ASSISTANT:A02:009-F` acknowledgement گم شده؛ retry همان ID نتیجهٔ قبلی را بازیابی می‌کند |
+| `TEST:ASSISTANT:A02:010` | `TC:ASSISTANT:A02:010-P` transient قابل retry؛ count زیر policy باقی | `TC:ASSISTANT:A02:010-N` validation/permission error؛ retry count=0 | `TC:ASSISTANT:A02:010-B` سقف policy؛ تلاش بعدی دیگر dispatch نمی‌شود | `TC:ASSISTANT:A02:010-F` backoff scheduler unavailable؛ retry storm=0 |
+| `TEST:ASSISTANT:A02:011` | `TC:ASSISTANT:A02:011-P` worker restart از checkpoint گام بعدی مجاز را انجام می‌دهد | `TC:ASSISTANT:A02:011-N` اجرای دوبارهٔ گام commit‌شده اثر دوم نمی‌سازد | `TC:ASSISTANT:A02:011-B` crash میان external effect و local status؛ inquiry پیش از تصمیم | `TC:ASSISTANT:A02:011-F` checkpoint store corrupt/unavailable؛ workflow متوقف و قابل تشخیص |
+| `TEST:ASSISTANT:A02:012` | `TC:ASSISTANT:A02:012-P` Job قدیمی با نسخهٔ خود تا پایان حفظ می‌شود | `TC:ASSISTANT:A02:012-N` تغییر schema ناسازگار CI/deployment gate را رد می‌کند | `TC:ASSISTANT:A02:012-B` Job جدید و قدیمی هم‌زمان؛ ماتریس سازگاری هر دو را مشخص می‌کند | `TC:ASSISTANT:A02:012-F` engine جدید آماده نیست؛ route جدید فعال نمی‌شود و Job جاری می‌ماند |
+| `TEST:ASSISTANT:A02:013` | `TC:ASSISTANT:A02:013-P` کاربر start پیشنهاد معتبر را صریحاً می‌پذیرد؛ همان reference به Job متصل می‌شود | `TC:ASSISTANT:A02:013-N` پیشنهاد نامعتبر/منقضی؛ Job ساخته نمی‌شود | `TC:ASSISTANT:A02:013-B` کاربر فقط می‌بیند یا clarification می‌دهد؛ start=0 | `TC:ASSISTANT:A02:013-F` C05b نتیجه/نسخه را نمی‌توان خواند؛ آغاز متوقف و قابل تشخیص |
+| `TEST:ASSISTANT:A02:014` | `TC:ASSISTANT:A02:014-P` تأیید صریح گزینه X؛ فقط X به Job افزوده می‌شود | `TC:ASSISTANT:A02:014-N` بدون تأیید؛ attach/dispatch=0 | `TC:ASSISTANT:A02:014-B` تأیید گزینه Y به X تعمیم داده نمی‌شود | `TC:ASSISTANT:A02:014-F` ثبت تأیید timeout؛ گزینه اعمال نمی‌شود و وضعیت pending/unknown می‌ماند |
+| `TEST:ASSISTANT:A02:015` | `TC:ASSISTANT:A02:015-P` A خاتمه می‌یابد؛ B به‌طور مستقل ادامه دارد | `TC:ASSISTANT:A02:015-N` cancel/failure A به B propagate نمی‌شود | `TC:ASSISTANT:A02:015-B` هم‌زمانی terminal A و transition B؛ B نتیجه معتبر خود را حفظ می‌کند | `TC:ASSISTANT:A02:015-F` پیام شکست A با correlation B؛ اثر روی B=0 و خطای correlation ثبت می‌شود |
+
+هر `TEST:ASSISTANT:A02:nnn` چهار Case مستقل P/N/B/F دارد؛ جمع **۱۵ Test Definition و ۶۰ Planned Test Case**. هیچ Product Test یا workflow واقعی اجرا نشده است.
+
+#### قراردادها، وابستگی‌ها و لایه‌ها
+
+| رابطه | مالک → مصرف‌کننده | قرارداد/مرز |
+|---|---|---|
+| service route/capability | C05a → A01/A02/owner service | parent/child فقط پس از route مجاز؛ C05a مسئول catalog/routing است، نه Job runtime. |
+| identity/authorization | C02 → A02/owner service | permission/consent و audit در C02؛ هر action effectful مجدداً کنترل می‌شود. |
+| entitlement | C04 → A02/owner service | entitlement پیش از هر effect؛ قرارداد C04 مرجع است و قواعد پلن تکرار نمی‌شود. |
+| recommendation/consent | C05b → A02 | C05b نتیجه/نسخه را مالک است؛ C02 رضایت را؛ A02 فقط با اجازهٔ صریح workflow آغاز می‌کند و جایگزین را پس از تأیید می‌پذیرد. |
+| Job/workflow | owner service → A02/coordinator | هر owner state/Job خودش را نگه می‌دارد؛ C01:03/:04 contract بازیافت؛ schema/engine دقیق باز. |
+| action/result | A02 → owner service/A04 | target owner effect/result؛ Computer Use فقط UI action adapter؛ A02 موفقیت بانکی جعل نمی‌کند. |
+| parent/child state | parent owner → target service | شناسه و وابستگی مشترک، owner/status مستقل؛ بدون foreign-key یا table access بین سرویس‌ها. |
+| status UI/history | A02 → C06/C14 | A02 state contract را ارائه می‌دهد؛ UI/notification/history مشترک در مالک خود. |
+| monitoring | Job owner → C14/C01 | queue age/retry/failure/recovery با low-cardinality و redaction؛ numeric SLO پس از baseline. |
+
+**پوشش لایه‌ای:** Backend lifecycle/action gate؛ Database persistence در owner PostgreSQL؛ API/Job envelope نسخه‌دار؛ Frontend status handoff به C06/C14؛ Infrastructure worker/queue فقط به نیاز واقعی و بدون broker اجباری؛ Security C02 و effect revalidation؛ Monitoring C14/A09؛ Testing قرارداد، state transition، race/retry/recovery تعریف شده، اجرا نشده.
+
+**تصمیم‌های باز:** state enum و transitionهای کامل؛ schema/API و Job envelope فیزیکی؛ engine/adapter (Temporal فقط گزینهٔ PoC)، queue provider؛ retry/timeout/backoff values؛ retention؛ SLO/threshold و ظرفیت هم‌زمانی؛ روش دقیق inquiry هر بانک؛ دامنه و مجوز اجرای Computer Use. این‌ها OPEN هستند و هیچکدام PASS/مصوبهٔ مالی یا مجوز اجرا ایجاد نمی‌کند.
+
+#### ممیزی A02 — RA و IPA
+
+- **RA:** Candidate 15/15 تعیین تکلیف؛ B:871, 916, 918, 920–940, 1212–1216, 1218–1252, 1831, 1835, 1903, 1907–1917 با متن تطبیق؛ A02 package=workflow، A02 policy=logical data ownership تفکیک؛ state diagram=EXAMPLE؛ C05a/C02/C01/C03/C06/C14/A04 مالکیت حفظ؛ duplicate Requirement/Task=0؛ inferred/ambiguous-to-requirement=0؛ **PASS**.
+- **IPA:** 15/15 Requirement به Enabler/Task/Subtask/AC/TD وصل و برگشت‌پذیر؛ 60/60 Case اختصاصی P/N/B/F؛ owner/state/version/recovery و reverse trace بررسی؛ orphan/duplicate ID=0؛ cycle سخت=0؛ **PASS**.
+- **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED` پس از CPA مشترک؛ هیچ Job، Worker، DB schema یا محصولی پیاده/اجرا نشده است.
+
+#### ممیزی یکپارچگی بین‌بسته‌ای A01/A02 — CPA-01 تا CPA-08
+
+| گیت | کنترل معنایی و شاهد | نتیجه |
+|---|---|---|
+| CPA-01 مالکیت رفتار/داده | C05a مالک route/capability؛ C02 هویت/permission/consent؛ C04 entitlement؛ C05b نتیجهٔ توصیه؛ سرویس مقصد اثر و وضعیت؛ A01 پیشنهاد و gate مصرفی؛ A02 lifecycle هماهنگ‌کننده. مرزها تکرار یا جابه‌جا نشده‌اند. | PASS |
+| CPA-02 قراردادهای ورودی/خروجی | A01 capability و outcome مالک را با قراردادهای C01/C05a مصرف می‌کند؛ C04 plan entitlement را ارائه می‌دهد؛ A01 فقط reference/version را به A02 می‌دهد؛ C05b recommendation reference/validity را مالک می‌ماند. | PASS |
+| CPA-03 DAG و چرخه وابستگی | مسیر A01 proposal → A02 workflow → owner service یک‌طرفه است؛ A02 به A01 برای تصمیم‌های runtime بازگشت نمی‌کند؛ چرخهٔ A01↔A02=0. | PASS |
+| CPA-04 هویت، رضایت و استحقاق | parent مجوز child را به ارث نمی‌دهد؛ C02 authorization را می‌سنجد؛ C04 entitlement پیش از dispatch/effect مصرف می‌شود؛ start توصیه و جایگزین آن رضایت جداگانه/متناسب می‌خواهد. | PASS |
+| CPA-05 اثر، unknown و تکرار | اثر فقط نزد owner؛ result فقط از owner؛ unknown ابتدا reconciliation؛ idempotency و retry محدود؛ A01 outcome را جعل نمی‌کند و A02 effect بانکی را اجرا نمی‌کند. | PASS |
+| CPA-06 داده/زیرساخت/نسخه | Job state نزد owner، PostgreSQL پایدار؛ هیچ shared-table ownership یا engine/provider اجباری ساخته نشده؛ قرارداد و version باز با پذیرش صریح ناسازگاری fail-closed. | PASS |
+| CPA-07 UI، مانیتورینگ و حریم خصوصی | UI/status مشترک C06 و history/notification/monitoring C14؛ telemetry کمینه و redacted؛ event/prompt/OTP/payload حساس در log ممنوع. | PASS |
+| CPA-08 پوشش و انتقال به بسته‌های بعد | مالکیت C05a/C02/C04/C05b/C01/C03/C06/C14/A04 و Rها در ماتریس dependency آمده؛ ۲۶ Req فقط با ۲۶ AC/TD و ۱۰۴ Case دوبسته‌ تعریف شده؛ API/schema، policyهای حل‌نشده و اجرای محصول OPEN/NOT_EXECUTED مانده‌اند. | PASS |
+
+**نتیجه CPA:** ۸/۸ PASS پس از اصلاح؛ تضاد، duplicate Requirement یا dependency cycle باز=۰. موردهای بازِ صریح (schema/provider/engine/SLO/entitlement policy و execution enablement) تصمیم مصوب جعل نمی‌کنند و مانع پذیرش برنامه‌ای مستقل نیستند.
 
 ### A03 — در انتظار تدوین
 **وضعیت:** `RA=NOT_STARTED` / `IPA=NOT_STARTED`. عنوان، مالکیت، الزامات، Storyها، Taskها، معیارها، Testها و قراردادهای این بسته پس از بازخوانی مرجع و بررسی Handoffها در همین فصل ثبت خواهند شد.
@@ -7566,4 +7874,4 @@ Nodeهای pinned Graphify برای DRS، Catalog، ADR-RAG-05/12/15/19/20/21/22
 
 - `RA/IPA PASS` به معنی کامل‌شدن *برنامه* همان بسته است؛ به معنی اجرای کد، تأیید امنیت/مالی، استقرار یا کسب ارزش واقعی برای کاربر نیست.
 - هیچ واحد پولی، ظرفیت، فناوری، آستانه، سیاست یا تصمیم اجرایی باز از خود این سند تصویب نمی‌شود؛ هر کدام باید در Gate مصوب مربوط تعیین تکلیف شوند.
-- در وضعیت جاری C01 تا C14 و R01–R04 در سطح برنامه‌ریزی پذیرفته‌اند؛ R05–R10 و A01–A08 هنوز تدوین نشده‌اند. عدد «۲۲ از ۳۶» تعداد بسته‌های پذیرفته‌شدهٔ برنامه است، نه تکمیل فاز دوم.
+- در وضعیت جاری C01 تا C14، R01–R10 و A01–A02 در سطح برنامه‌ریزی پذیرفته‌اند؛ A03–A08 هنوز تدوین نشده‌اند. تعداد بسته‌های پذیرفته‌شدهٔ برنامه ۳۰ از ۳۶ است و به معنی تکمیل فاز دوم نیست.
