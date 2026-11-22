@@ -19,8 +19,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[2]
-COVERAGE = ROOT / "docs/audits/phase2-source-coverage"
+ROOT = Path(__file__).resolve().parents[3]
+COVERAGE = Path(__file__).resolve().parent
 PLAN = ROOT / "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"
 SOURCES = [
     ("BP", "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md"),

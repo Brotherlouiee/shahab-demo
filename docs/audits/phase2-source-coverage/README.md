@@ -33,8 +33,8 @@
 از ریشهٔ مخزن اجرا کن:
 
 ```bash
-python scripts/audits/phase2_source_coverage.py
-python scripts/audits/phase2_source_coverage.py --check-only
+python docs/audits/phase2-source-coverage/build_and_validate.py
+python docs/audits/phase2-source-coverage/build_and_validate.py --check-only
 ```
 
 اسکریپت گراف پین‌شدهٔ Graphify را از commit ثبت‌شده در manifest می‌خواند. ارجاع گراف یا هم‌پوشانی خطوط به‌تنهایی شاهد نگاشت معنایی نیست. فقط پس از خواندن متن اصلی و Requirement/Task/AC/Test واقعی، نگاشت را verified کن.
