@@ -5985,7 +5985,9 @@ OPEN:C13B:01 export roles/policy؛ 02 receipt fields/format؛ 03 case taxonomy/o
 **Dependency register C13b:** `HARD` C02 current permission result پیش‌شرط هر read/export؛ `CONTRACT` C03 versioned read/event envelope؛ `CONTRACT` C12a ledger/history reference؛ `CONTRACT` C12b unknown/reconciliation state؛ `CONTRACT` C11a correction link و C11b Job status؛ `CONTRACT` C14 message history/delivery. Export و SLA تا رفع OPEN فعال فرض نمی‌شوند.
 
 **RA C13b: PASS** — 14 Candidate تعیین تکلیف؛ 12/12 اتمی و منبع‌دار؛ 6 Story، 6 Task، 18 Subtask، 12 AC، 12 Test Definition و 36 Test Case؛ تکرار با C02/C03/C04/C11a/C11b/C12a/C12b/C13a صفر.
-**IPA C13b: PASS** — بازبینی ساختاری مستقل از تدوین؛ trace دوسویه Source→R→Story→Task/Subtask→AC→TD→TC و reverse mapping کامل؛ برای هر R کیس موفق/خطا/مرزی؛ تست محصول اجرا نشده است.### C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک
+**IPA C13b: PASS** — بازبینی ساختاری مستقل از تدوین؛ trace دوسویه Source→R→Story→Task/Subtask→AC→TD→TC و reverse mapping کامل؛ برای هر R کیس موفق/خطا/مرزی؛ تست محصول اجرا نشده است.
+
+### C14 — سوابق پیام‌ها، اعلان‌ها و Monitoring مشترک
 
 **وضعیت:** RA=PASS / IPA=PASS؛ PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED. C14 قرارداد پیام/اعلان، history تحویل و مشاهده‌پذیری مشترک را برنامه‌ریزی می‌کند. داده/Job/outbox متعلق به سرویس مبدأ می‌ماند؛ دسترسی مستقیم به جداول سرویس‌ها، Broker اجباری و سرویس مستقل notification برای R1 مقرر نیست.
 
@@ -8253,7 +8255,9 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 #### ممیزی مستقل A06 — RA و IPA
 
 - **RA:** Candidate 14/14 تعیین تکلیف؛ B:1482–1556 و تصمیم‌های A06/A09 با متن اصلی تطبیق؛ non-destructive test، runtime recheck، platform limits، data/privacy، recovery و ownerهای A04/C02/C05a/C06/C14 حفظ؛ انتخاب ابزار/time/DB و آستانه‌های باز به الزام تبدیل نشدند؛ duplication=0 و inferred/ambiguous-to-requirement=0؛ **PASS**.
-- **IPA:** ۱۲/۱۲ Requirement به Task/Subtask، AC، TD و ۴ case اختصاصی P/N/B/F وصل؛ ۱۲ AC دارای precondition/trigger/oracle/fail؛ تست‌های test-account، publish gate، UI stale، privacy و failure جدایند؛ DAG cycle=0؛ product discovery/test اجرا نشده؛ **PASS**.#### CPA مشترک A05/A06 — کنترل‌های دوبسته‌ای
+- **IPA:** ۱۲/۱۲ Requirement به Task/Subtask، AC، TD و ۴ case اختصاصی P/N/B/F وصل؛ ۱۲ AC دارای precondition/trigger/oracle/fail؛ تست‌های test-account، publish gate، UI stale، privacy و failure جدایند؛ DAG cycle=0؛ product discovery/test اجرا نشده؛ **PASS**.
+
+#### CPA مشترک A05/A06 — کنترل‌های دوبسته‌ای
 
 | Gate | کنترل | نتیجه |
 | --- | --- | --- |
