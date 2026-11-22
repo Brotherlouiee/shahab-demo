@@ -1645,8 +1645,7 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** — / —
 - **رفتارهای اتمی:** `REQ:CORE:100.B01` برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C02:005` (step-up authorization).
 - **AC `AC:CORE:C02:051`**؛ Task: `TASK:CORE:C02:005`؛ Given: A request is made for this exact C02-controlled identity, organization, authorization, session, or record behaviour.؛ When: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.؛ Then: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.؛ The assertion is evaluated by the Core-side authoritative state, not by UI visibility or model output.؛ Negative: Use a mismatched, revoked, expired, missing, or wrong-organization actor/consent/credential where relevant; reject the protected action and prove no protected data or state change.؛ Boundary: Revoke or change scope immediately before the operation, or issue concurrent requests across two tenants; stale authority must not authorize the protected effect.
 - **Test `TEST:CORE:C02:051`**؛ Environment: Future isolated test DB and API/auth harness; exact provider/legal decisions gated; never production or a real bank endpoint.؛ Oracle: Assert exact source behaviour: برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.; verify negative response and unchanged persisted state, correct actor/org scope, and redacted audit evidence. File existence or UI hiding is not a pass.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C02:051.P` (POSITIVE): Provide the exact authorized preconditions for برداشت، تغییر حساب بانکی، تغییر ادمین و تغییر مجوز مالی مهم احراز مجدد بخواهند؛ سایر عملیات کنترل ریسک دارند و تأییدکننده دوم سازمان اجباری نیست.; the declared allowed effect occurs and actor/organization/scope provenance is returned.
@@ -1942,9 +1941,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** — / —
 - **رفتارهای اتمی:** `REQ:CORE:121.B01` تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:072`**؛ Task: `None`؛ Given: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ When: تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.؛ Then: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ Negative: Attempt time-based deletion or unlinking of an event/chain record; reject and preserve referential chain.؛ Boundary: Test account closure and retention boundary; do not apply ordinary technical-log retention to financial events.
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C12A:005`.
+- **AC `AC:CORE:C02:072`**؛ Task: `TASK:CORE:C12A:005`؛ Given: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ When: تمام رخدادهای مالی و پیوندهای منشأ/زنجیره دائمی بمانند.؛ Then: Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.؛ Negative: Attempt time-based deletion or unlinking of an event/chain record; reject and preserve referential chain.؛ Boundary: Test account closure and retention boundary; do not apply ordinary technical-log retention to financial events.
 - **Test `TEST:CORE:C02:072`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Compare immutable event IDs, provenance links and retrieval after closure; no legal retention duration is inferred beyond permanent source rule.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C02:072.P` (POSITIVE): Create synthetic financial events and origin/transfer links, close the customer account, and confirm the defined financial chain remains retrievable permanently.
   - `TEST:CORE:C02:072.N` (NEGATIVE): Attempt time-based deletion or unlinking of an event/chain record; reject and preserve referential chain.
@@ -1957,9 +1955,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** — / —
 - **رفتارهای اتمی:** `REQ:CORE:122.B01` مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:073`**؛ Task: `None`؛ Given: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ When: مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.؛ Then: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ Negative: Remove or misbind document/actor/reason/time linkage; reject incomplete chain or mark it unresolved without fabricating evidence.؛ Boundary: Update identity or close account; previously linked evidence remains retrievable under authorized access.
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C12A:005`.
+- **AC `AC:CORE:C02:073`**؛ Task: `TASK:CORE:C12A:005`؛ Given: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ When: مدارک مرتبط لازم به رویداد و عامل و علت و زمان پیوند بخورند و بازیابی‌پذیر باشند.؛ Then: Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.؛ Negative: Remove or misbind document/actor/reason/time linkage; reject incomplete chain or mark it unresolved without fabricating evidence.؛ Boundary: Update identity or close account; previously linked evidence remains retrievable under authorized access.
 - **Test `TEST:CORE:C02:073`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Resolve event→actor/reason/time→document links and verify provenance and access control.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C02:073.P` (POSITIVE): Attach the required synthetic document to its event, actor, reason and timestamp; retrieve the chain by the event identifier.
   - `TEST:CORE:C02:073.N` (NEGATIVE): Remove or misbind document/actor/reason/time linkage; reject incomplete chain or mark it unresolved without fabricating evidence.
@@ -1972,9 +1969,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** — / —
 - **رفتارهای اتمی:** `REQ:CORE:123.B01` لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.
-- **Taskهای ردیابی‌شده:** —
-**احتیاط:** این Requirement در بسته حاضر Task مستقیم ندارد؛ ارجاع بین‌بسته‌ای باید از Registry حفظ شود.
-- **AC `AC:CORE:C02:074`**؛ Task: `None`؛ Given: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ When: لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.؛ Then: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ Negative: Delete or shorten retention for financially consequential evidence; deny. Do not inherit permanent financial retention automatically for unrelated technical logs.؛ Boundary: Test event classification boundary and reclassification; financially effective actions cannot be downgraded to ordinary logs.
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C12A:005`; `TASK:CORE:C02:005` for IAM access evidence.
+- **AC `AC:CORE:C02:074`**؛ Task: `TASK:CORE:C12A:005`; IAM access evidence: `TASK:CORE:C02:005`؛ Given: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ When: لاگ صرفاً فنی/مدیریتی فاقد اثر مالی retention جدا دارد؛ ردپای مدیریتی مؤثر بر حق مالی در زنجیره حفظ شود.؛ Then: Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.؛ Negative: Delete or shorten retention for financially consequential evidence; deny. Do not inherit permanent financial retention automatically for unrelated technical logs.؛ Boundary: Test event classification boundary and reclassification; financially effective actions cannot be downgraded to ordinary logs.
 - **Test `TEST:CORE:C02:074`**؛ Environment: Future isolated API/database harness with synthetic actors and tenants; provider/legal gates must be resolved before provider-dependent cases.؛ Oracle: Assert classification, retention policy and chain membership for paired fixtures.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C02:074.P` (POSITIVE): Write a non-financial technical/admin event and a financially consequential admin event; apply separate retention to the first and preserve the second in the financial chain.
   - `TEST:CORE:C02:074.N` (NEGATIVE): Delete or shorten retention for financially consequential evidence; deny. Do not inherit permanent financial retention automatically for unrelated technical logs.
@@ -5765,6 +5761,10 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | C12B-TC31–TC33 | outage reconciliation؛ هشدار فوری؛ بازه برش تغییر منطقه زمانی | gap گزارش و بازیابی؛ هشدار متناسب؛ cut/timezone ثبت و بازتولیدپذیر |
 
 **وابستگی/Handoff:** C11b owns Job trigger/limits; C12a owns postings, account balances and ledger idempotency; C02 owns permissions; C03 owns shared job/event contracts; C14 owns notification/monitoring delivery. C12b owns reconciliation case lifecycle and safe recovery evidence.
+
+**تصمیم باز C12B:** `DECISION:C12B:01` — مهلت رسیدگی به مغایرت و حدود اختیار اجرایی مسئول عملیات مالی؛ مقدار یا اختیار جدیدی تعیین نشده است و تا تصویب مالک، این جزئیات مسدود می‌مانند.
+
+**تصمیم باز C12B:** `DECISION:C12B:02` — تایید تخصصی فرمول پوشش تعهد و ساعت دقیق برش پیش از تعیین مقدار نهایی؛ هیچ فرمول یا ساعت جدیدی مفروض نیست.
 
 **RA:** PASS؛ 11/11 Requirement منبع‌دار و اتمی؛ Candidateهای مربوط تعیین تکلیف؛ مالکیت و موارد باز روشن؛ تکرار و تعارض مسدودکننده صفر.
 **IPA:** PASS؛ 11/11 به Task، سه Subtask برای هر Task، AC، Test و 33 Test Case برنامه‌ای وصل؛ ردیابی معکوس کامل؛ تست محصولی اجرا نشد.

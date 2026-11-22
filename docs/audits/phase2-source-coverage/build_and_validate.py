@@ -958,11 +958,13 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
     trace_fields, trace = read_csv(COVERAGE / "execution-trace.csv")
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
     gap_fields, gaps = read_csv(COVERAGE / "coverage-gap-register.csv")
+    gap_states=Counter(r.get("review_status", "") for r in gaps)
     candidate_fields, candidate_rows = read_csv(COVERAGE / "atomic-obligations.csv")
     reviewed_count=sum(r.get("review_status")=="SEMANTICALLY_REVIEWED" for r in candidates)
     pending_count=len(candidates)-reviewed_count
     source_dispositions=read_csv(COVERAGE / "source-unit-review-dispositions.csv")[1] if (COVERAGE / "source-unit-review-dispositions.csv").exists() else []
     reviewed_ledger=read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
+    reviewed_ledger_ids={r["candidate_id"] for r in reviewed_ledger}
     reviewed_kinds=Counter(r["semantic_disposition"] for r in reviewed_ledger)
     reviewed_candidate_ids={r["candidate_id"] for r in reviewed_ledger}
     reviewed_by_class=Counter(r["candidate_class"] for r in candidates if r["candidate_id"] in reviewed_candidate_ids)
@@ -997,7 +999,8 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "code_blocks": candidate_counts["CODE_BLOCK"], "code_blocks_semantically_reviewed": reviewed_by_class["CODE_BLOCK_CANDIDATE"],
             "candidate_records": len(candidates), "candidate_records_pending_semantic_review": pending_count,
             "structural_source_units_dispositioned_as_locators": len(source_dispositions),
-            "packages_indexed": len(packages), "package_index_rows": len(packages), "execution_trace_rows": len(trace), "pending_review_rows": len(gaps),
+            "packages_indexed": len(packages), "package_index_rows": len(packages), "execution_trace_rows": len(trace),
+            "candidate_review_pending_rows": pending_count, "coverage_gap_records": len(gaps), "open_decision_gap_records": gap_states["OPEN_DECISION"],
             "candidate_records_semantically_reviewed": reviewed_count,
             "atomic_obligations_extracted_and_verified": len(atom_ledger), "approved_obligations_verified": sum(a.get("normative_status")=="NORMATIVE_APPROVED" for a in atom_ledger),
             "open_decisions_verified": sum(a.get("normative_status")=="NORMATIVE_OPEN_DECISION" for a in atom_ledger),
@@ -1054,7 +1057,8 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| بسته‌های index شده | {len(packages)} / 36 |",
         f"| تعیین‌تکلیف ردیفی انجام‌شده | {reviewed_count} از {len(candidates)} candidate؛ {reviewed_kinds['STRUCTURAL_HEADER_ONLY']} سرستون، {reviewed_kinds['MARKDOWN_HORIZONTAL_RULE_ONLY']} جداکننده، {reviewed_kinds['EXAMPLE_CONTEXT_ROW']} ردیف مثال و {mapped_review_count} نگاشت معنایی بررسی‌شده |",
         f"| تعیین‌تکلیف Candidateهای متنی | {reviewed_by_class['TEXT_RANGE_CANDIDATE']} از {candidate_counts['TEXT_RANGE']} محدودهٔ متن، {reviewed_by_class['TABLE_ROW_CANDIDATE']+reviewed_by_class['TABLE_HEADER']} از {candidate_counts['TABLE_ROW']} ردیف جدول، {reviewed_by_class['CODE_BLOCK_CANDIDATE']} از {candidate_counts['CODE_BLOCK']} بلوک fenced |",
-        f"| ردیف‌های pending review | {pending_count}؛ این‌ها شکاف قطعی نیستند |",
+        f"| Candidateهای pending review | {pending_count}؛ pending بودن به‌تنهایی شکاف قطعی نیست |",
+        f"| رکوردهای Gap Register | {len(gaps)}؛ {gap_states['OPEN_REVIEW']} بازبینی محتوایی + {gap_states['OPEN_DECISION']} تصمیم باز |",
         f"| Atomic Obligationهای دارای نگاشت Covered | {verified_covered} |",
         f"| نگاشت تأییدشدهٔ covered/partial/uncovered | {verified_covered}/{verified_partial}/{verified_uncovered} |",
         "| شکاف معنایی قطعی | هنوز تعیین نشده |",
@@ -1073,7 +1077,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| تعداد Heading/Table | {'PASS' if not structural_errors else 'FAIL'} | {structural['HEADING']} Heading و {structural['TABLE']} Table |",
         f"| هش Git blob دو منبع | {output['controls']['source_git_blob_shas']} | برابر manifest جاری |",
         f"| SHA-256 دو منبع | {output['controls']['source_sha256_matches_graph']} | با اثر انگشت graph پین‌شده تطبیق داده شد |",
-        "| محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |",
+        f"| محدوده‌های متنی و سطرهای جدول | {'PASS' if pending_count == 0 else 'PARTIAL'} | {reviewed_count} از {len(candidates)} Candidate بررسی شده؛ {pending_count} باقی است |",
         f"| Package Execution Index | {'PASS' if len(packages) == 36 else 'FAIL'} | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |",
         f"| تکراری نبودن IDهای منبع/candidate | {validations['source_unit_id_uniqueness']['result']}/{validations['atomic_candidate_id_uniqueness']['result']} | IDs بررسی‌شده: {validations['source_unit_id_uniqueness']['checked']} source units، {validations['atomic_candidate_id_uniqueness']['checked']} candidateها |",
         f"| یکپارچگی دفتر Atomic Obligation | {validations['atomic_obligation_ledger_integrity']['result']} | {validations['atomic_obligation_ledger_integrity']['checked']} الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |",
@@ -1083,8 +1087,8 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| یکپارچگی ارجاع‌های Package Index | {validations['package_index_reference_integrity']['result']} | {validations['package_index_reference_integrity']['checked']} شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |",
         f"| پوشش کامل trace rowها | {validations['execution_trace_row_integrity']['result']} | {validations['execution_trace_row_integrity']['checked']} ردیف |",
         f"| علت‌دار بودن candidateهای نیازمند بازبینی | {validations['review_required_rows_have_reason']['result']} | {validations['review_required_rows_have_reason']['checked']} ردیف |",
-        "| پیوندهای Source→Package→Req→Task→AC/Test | UNVERIFIED | همهٔ ارجاع‌های واژگانی فقط candidate هستند |",
-        "| وضعیت نگاشت نامعتبر/شکسته | OPEN | پس از اعتبارسنجی IDهای درون برنامه و بازبینی معنایی تعیین می‌شود |",
+        f"| پیوندهای معنایی Source→Package→Req→Task→AC/Test | {validations['semantic_review_disposition_integrity']['result']} | {verified_covered + verified_partial + verified_uncovered} obligation dispositions mapped; remaining candidates are pending |",
+        f"| وضعیت نگاشت نامعتبر/شکسته | {validations['atomic_obligation_ledger_integrity']['result']} | {validations['atomic_obligation_ledger_integrity']['errors']} ledger errors; coverage claims remain limited to cited evidence |",
         "",
         "## نقص‌های استخراج که اصلاح شدند",
         "",
@@ -1096,7 +1100,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "",
         "## محدودیت معنایی",
         "",
-        "Rule-based labelها صرفاً برای اولویت‌بندی‌اند. متن چندرفتاری، نمونه، تصمیم باز و قاعده مصوب ممکن است در یک paragraph یا یک سطر جدول کنار هم آمده باشند؛ بنابراین تا تطبیق مستقیم با متن منبع، `Atomic Obligation ID` تخصیص نیافته و هیچ trace به `VERIFIED_COVERED` ارتقا نیافته است. تعداد candidateها با تعداد الزام‌های اتمی برابر نیست.",
+        f"Rule-based labels فقط سرنخ‌اند. تا این اجرا، {reviewed_count} از {len(candidates)} Candidate با متن منبع و مقصد بررسی شده‌اند و {len(atom_ledger)} Atomic Obligation ثبت شده؛ {pending_count} Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.",
         "",
         "## منابع و گراف",
         "",
@@ -1109,7 +1113,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "",
         "## مرحلهٔ بعد",
         "",
-        "بازبین باید candidateها را به ترتیب ریسک و section بررسی کند، موارد MIXED را به اجزای مستقل تقسیم کند، وضعیت هنجاری را با متن مصوب تثبیت کند، سپس فقط پس از تطبیق متن واقعی Requirement/Task/AC/Test به trace وضعیت verified بدهد. موارد باقی‌مانده با علت در `coverage-gap-register.csv` می‌مانند؛ این فایل هنوز gapهای قطعی ادعا نمی‌کند.",
+        f"ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `{next((r['candidate_id'] for r in candidates if r['candidate_id'] not in reviewed_ledger_ids), 'NONE')}` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.",
         "",
     ])
     (COVERAGE / "semantic-validation-report.md").write_text("\n".join(report), encoding="utf-8")

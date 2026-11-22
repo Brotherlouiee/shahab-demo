@@ -48,6 +48,6 @@ python docs/audits/phase2-source-coverage/build_semantic_evidence.py
 
 اسکریپت گراف پین‌شدهٔ Graphify را از commit ثبت‌شده در manifest می‌خواند. ارجاع گراف یا هم‌پوشانی خطوط به‌تنهایی شاهد نگاشت معنایی نیست. فقط پس از خواندن متن اصلی و Requirement/Task/AC/Test واقعی، نگاشت را verified کن.
 
-## مرحلهٔ بعد
+## ادامهٔ ممیزی
 
-۱. طبقه‌بندی هنجاری هر range و محتوای هر جدول/بلوک کد را با متن کامل و وضعیت تصمیم تطبیق بده. ۲. رفتارهای مصوب را بدون ادغام یا خردکردن مصنوعی به Atomic Obligation تبدیل کن. ۳. index برنامه را با مرز مالکیت و dependency تطبیق بده. ۴. فقط نگاشت‌های دارای شاهد معنایی را تأیید کن؛ بقیه را `VERIFIED_PARTIAL`، `VERIFIED_UNCOVERED`، `OPEN_DECISION`، `NOT_APPLICABLE` یا `PENDING_REVIEW` نگه دار. ۵. هر نقص برنامه را در gap register ثبت کن؛ این مرحله مجوز اصلاح بسته‌ها را نمی‌دهد.
+Candidate بعدی از `semantic-validation-report.md` و `semantic-batch-progress.csv` تعیین می‌شود. هر دسته باید از متن مرجع تا Requirement/Task/AC/Test مقصد بازبینی شود؛ دسته فقط پس از اصلاح نقص‌های قابل‌رفع، بازتولید ماتریس و قبولی کنترل‌ها `COMPLETE` است. دفتر دسته‌ای فقط انتخاب‌ها را نگه می‌دارد و Ledgerهای معنایی/اتمی مرجع وضعیت و نتیجه‌اند. کارهای برنامه‌ای مجاز این مأموریت شامل اصلاح نقص‌های قابل‌رفع‌اند؛ Blueprint و Wallet مرجع تغییرناپذیر باقی می‌مانند.

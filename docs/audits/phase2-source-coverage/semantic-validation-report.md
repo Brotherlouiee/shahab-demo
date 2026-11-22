@@ -18,11 +18,12 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 198 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 55 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف ردیفی انجام‌شده | 220 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 62 نگاشت معنایی بررسی‌شده |
 | تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 87 از 470 ردیف جدول، 0 از 27 بلوک fenced |
-| ردیف‌های pending review | 1435؛ این‌ها شکاف قطعی نیستند |
-| Atomic Obligationهای دارای نگاشت Covered | 102 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 102/15/0 |
+| Candidateهای pending review | 1413؛ pending بودن به‌تنهایی شکاف قطعی نیست |
+| رکوردهای Gap Register | 1431؛ 1413 بازبینی محتوایی + 18 تصمیم باز |
+| Atomic Obligationهای دارای نگاشت Covered | 116 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 116/19/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -37,6 +38,7 @@
 | WALLET-LEDGER-FOUNDATION-001 | WL-C-0902, WL-C-0903, WL-C-0904, WL-C-0905, WL-C-0906, WL-C-0907, WL-C-0908, WL-C-0909, WL-C-0910, WL-C-0911, WL-C-0912, WL-C-0913, WL-C-0914, WL-C-0915, WL-C-0916, WL-C-0917, WL-C-0918, WL-C-0919, WL-C-0920 | 147→166 | 1486→1467 | 21 | 17/4/0 | 3 |
 | WALLET-LIFECYCLE-IDEMPOTENCY-001 | WL-C-0921, WL-C-0922, WL-C-0923, WL-C-0924, WL-C-0925, WL-C-0926, WL-C-0927, WL-C-0928, WL-C-0929, WL-C-0930, WL-C-0931, WL-C-0932, WL-C-0933, WL-C-0934, WL-C-0935, WL-C-0936, WL-C-0937, WL-C-0938, WL-C-0939, WL-C-0940 | 166→186 | 1467→1447 | 22 | 19/3/0 | 2 |
 | WALLET-COMMIT-INVARIANTS-001 | WL-C-0941, WL-C-0942, WL-C-0943, WL-C-0944, WL-C-0945, WL-C-0946, WL-C-0947, WL-C-0948, WL-C-0949, WL-C-0950, WL-C-0951, WL-C-0952 | 186→198 | 1447→1435 | 16 | 14/2/0 | 2 |
+| WALLET-RECONCILIATION-RETENTION-001 | WL-C-0953, WL-C-0954, WL-C-0955, WL-C-0956, WL-C-0957, WL-C-0958, WL-C-0959, WL-C-0960, WL-C-0961, WL-C-0962, WL-C-0963, WL-C-0964, WL-C-0965, WL-C-0966, WL-C-0967, WL-C-0968, WL-C-0969, WL-C-0970, WL-C-0971, WL-C-0972, WL-C-0973, WL-C-0974 | 198→220 | 1435→1413 | 22 | 14/8/0 | 4 |
 
 ## کنترل‌های ماشینی
 
@@ -45,18 +47,18 @@
 | تعداد Heading/Table | PASS | 326 Heading و 58 Table |
 | هش Git blob دو منبع | PASS | برابر manifest جاری |
 | SHA-256 دو منبع | PASS | با اثر انگشت graph پین‌شده تطبیق داده شد |
-| محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
+| محدوده‌های متنی و سطرهای جدول | PARTIAL | 220 از 1633 Candidate بررسی شده؛ 1413 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 132 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 104 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 154 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 126 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8651؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
-| یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8666؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| یکپارچگی ارجاع‌های Package Index | PASS | 3707 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای Source→Package→Req→Task→AC/Test | UNVERIFIED | همهٔ ارجاع‌های واژگانی فقط candidate هستند |
-| وضعیت نگاشت نامعتبر/شکسته | OPEN | پس از اعتبارسنجی IDهای درون برنامه و بازبینی معنایی تعیین می‌شود |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 135 obligation dispositions mapped; remaining candidates are pending |
+| وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
 
@@ -68,7 +70,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labelها صرفاً برای اولویت‌بندی‌اند. متن چندرفتاری، نمونه، تصمیم باز و قاعده مصوب ممکن است در یک paragraph یا یک سطر جدول کنار هم آمده باشند؛ بنابراین تا تطبیق مستقیم با متن منبع، `Atomic Obligation ID` تخصیص نیافته و هیچ trace به `VERIFIED_COVERED` ارتقا نیافته است. تعداد candidateها با تعداد الزام‌های اتمی برابر نیست.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 220 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 154 Atomic Obligation ثبت شده؛ 1413 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 
@@ -79,4 +81,4 @@ Rule-based labelها صرفاً برای اولویت‌بندی‌اند. مت�
 
 ## مرحلهٔ بعد
 
-بازبین باید candidateها را به ترتیب ریسک و section بررسی کند، موارد MIXED را به اجزای مستقل تقسیم کند، وضعیت هنجاری را با متن مصوب تثبیت کند، سپس فقط پس از تطبیق متن واقعی Requirement/Task/AC/Test به trace وضعیت verified بدهد. موارد باقی‌مانده با علت در `coverage-gap-register.csv` می‌مانند؛ این فایل هنوز gapهای قطعی ادعا نمی‌کند.
+ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-TR-004-05` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.

@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "d58d3ea71ebe5295df298075039f40902acdf236",
+  "plan_blob_sha": "31f79d42205a740a9ddc96a2dee281301766f76d",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -32,28 +32,30 @@
     "code_blocks": 27,
     "code_blocks_semantically_reviewed": 0,
     "candidate_records": 1633,
-    "candidate_records_pending_semantic_review": 1435,
+    "candidate_records_pending_semantic_review": 1413,
     "structural_source_units_dispositioned_as_locators": 384,
     "packages_indexed": 36,
     "package_index_rows": 36,
     "execution_trace_rows": 1633,
-    "pending_review_rows": 1449,
-    "candidate_records_semantically_reviewed": 198,
-    "atomic_obligations_extracted_and_verified": 132,
-    "approved_obligations_verified": 110,
-    "open_decisions_verified": 22,
-    "atomic_obligation_records": 132,
-    "descriptive_units_verified": 46,
-    "verified_covered_obligations": 102,
-    "partially_covered_obligations": 15,
-    "candidate_rows_marked_covered": 33,
-    "candidate_rows_marked_partial": 22,
+    "candidate_review_pending_rows": 1413,
+    "coverage_gap_records": 1431,
+    "open_decision_gap_records": 18,
+    "candidate_records_semantically_reviewed": 220,
+    "atomic_obligations_extracted_and_verified": 154,
+    "approved_obligations_verified": 128,
+    "open_decisions_verified": 26,
+    "atomic_obligation_records": 154,
+    "descriptive_units_verified": 58,
+    "verified_covered_obligations": 116,
+    "partially_covered_obligations": 19,
+    "candidate_rows_marked_covered": 34,
+    "candidate_rows_marked_partial": 28,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
-    "semantic_reviews_pending": 1435,
+    "semantic_reviews_pending": 1413,
     "unverified_normative_cue_suggestions": 506,
     "unverified_open_decision_cue_suggestions": 19,
-    "needs_review_candidates": 1435,
+    "needs_review_candidates": 1413,
     "classification_suggestions_unverified": {
       "DESCRIPTIVE": 125,
       "NEEDS_REVIEW": 762,
@@ -65,8 +67,8 @@
       "OUT_OF_SCOPE": 1
     },
     "review_statuses": {
-      "SEMANTICALLY_REVIEWED": 198,
-      "REVIEW_REQUIRED": 1435
+      "SEMANTICALLY_REVIEWED": 220,
+      "REVIEW_REQUIRED": 1413
     }
   },
   "controls": {
@@ -105,7 +107,7 @@
       "examples": []
     },
     "atomic_obligation_id_uniqueness": {
-      "checked": 52,
+      "checked": 59,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -153,19 +155,19 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 8651,
+      "checked": 8666,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "package_index_reference_integrity": {
-      "checked": 3706,
+      "checked": 3707,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 1025,
+      "checked": 1010,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -183,19 +185,19 @@
       "examples": []
     },
     "semantic_review_disposition_integrity": {
-      "checked": 198,
+      "checked": 220,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 132,
+      "checked": 154,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "semantic_batch_ledger_integrity": {
-      "checked": 104,
+      "checked": 126,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -445,6 +447,42 @@
       "partial": 2,
       "uncovered": 0,
       "open_decisions": 2
+    },
+    {
+      "batch_id": "WALLET-RECONCILIATION-RETENTION-001",
+      "candidate_ids": [
+        "WL-C-0953",
+        "WL-C-0954",
+        "WL-C-0955",
+        "WL-C-0956",
+        "WL-C-0957",
+        "WL-C-0958",
+        "WL-C-0959",
+        "WL-C-0960",
+        "WL-C-0961",
+        "WL-C-0962",
+        "WL-C-0963",
+        "WL-C-0964",
+        "WL-C-0965",
+        "WL-C-0966",
+        "WL-C-0967",
+        "WL-C-0968",
+        "WL-C-0969",
+        "WL-C-0970",
+        "WL-C-0971",
+        "WL-C-0972",
+        "WL-C-0973",
+        "WL-C-0974"
+      ],
+      "reviewed_before": 198,
+      "reviewed_after": 220,
+      "pending_before": 1435,
+      "pending_after": 1413,
+      "atomic_obligations": 22,
+      "covered": 14,
+      "partial": 8,
+      "uncovered": 0,
+      "open_decisions": 4
     }
   ],
   "matrix_build_status": "INCOMPLETE",
@@ -453,7 +491,7 @@
     "Rule-based classifications are discovery aids and are not accepted normative decisions.",
     "Only individually evidenced rows listed in the semantic review ledger may carry a verified mapping; remaining mappings are unverified.",
     "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
-    "The matrix contains 1633 candidate records; 1435 still require semantic review.",
+    "The matrix contains 1633 candidate records; 1413 still require semantic review.",
     "Graph node overlap is a retrieval reference, not semantic entailment."
   ]
 }
