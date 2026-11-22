@@ -36,7 +36,7 @@ TABLE_SEPARATOR = re.compile(r"^\s*\|?\s*:?-{3,}.*\|.*-+:?\s*\|?\s*$")
 SOURCE_REF = re.compile(r"\b([BW]):\s*(\d+)(?:\s*[-–—]\s*(\d+))?")
 GRAPH_NODE_REF = re.compile(r"\bdocs_[a-z0-9_]+\b")
 ID_RE = re.compile(
-    r"\b(?:CAND|REQ|EN|TE|STORY|TASK|AC|TD|TEST|TC|OPEN|PKG|CPA)"
+    r"\b(?:CAND|REQ|EN|TE|STORY|TASK|AC|TD|TEST|TC|OPEN|PKG|CPA|CONTRACT|HANDOFF|DEP|DEPENDENCY)"
     r"(?::[A-Z0-9]+)+(?:\.S\d+)?\b"
     r"|\bCAND(?:IDATE)?-[A-Z0-9-]+\b"
     r"|\b(?:C\d{2}[A-Z]?|R\d{2}|A\d{2})-(?:REQ|R|EN|E|STORY|TE|TASK|T|SUBTASK|S|AC|TD|TEST|TC)\d{1,4}(?:\.S\d{1,3})?\b"
@@ -551,7 +551,7 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
             "confidence": row["classification_confidence"], "review_status": "OPEN_REVIEW",
         })
 
-    package_index_fields = ["package_id", "package_name", "scope_excerpt", "program_family", "planning_status", "declared_ra", "declared_ipa", "product_status", "plan_heading_lines", "mentioned_candidate_ids", "mentioned_requirement_ids", "mentioned_story_enabler_ids", "mentioned_task_subtask_ids", "mentioned_ac_td_test_case_ids", "source_reference_count", "graph_node_reference_ids", "ownership_evidence", "dependency_evidence", "contract_evidence", "handoff_evidence", "index_status"]
+    package_index_fields = ["package_id", "package_name", "scope_excerpt", "program_family", "planning_status", "declared_ra", "declared_ipa", "product_status", "plan_heading_lines", "mentioned_candidate_ids", "mentioned_requirement_ids", "mentioned_story_enabler_ids", "mentioned_task_subtask_ids", "mentioned_ac_ids", "mentioned_test_definition_ids", "mentioned_test_case_ids", "mentioned_ac_td_test_case_ids", "mentioned_dependency_ids", "mentioned_contract_ids", "mentioned_handoff_ids", "source_reference_count", "graph_node_reference_ids", "ownership_evidence", "dependency_evidence", "contract_evidence", "handoff_evidence", "index_status"]
     for pkg, name in package_names.items():
         positions = heading_positions.get(pkg, [])
         if positions:
@@ -568,6 +568,12 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
         code=pkg.upper()
         def select(prefixes: tuple[str, ...], suffixes: tuple[str, ...] = ()) -> str:
             return ";".join(x for x in ids if x.startswith(prefixes) or any(x.upper().startswith(code+"-"+suffix) for suffix in suffixes))
+        ac_ids = select(("AC:",), ("AC",))
+        test_definition_ids = select(("TD:", "TEST:"), ("TD", "TEST"))
+        test_case_ids = select(("TC:",), ("TC",))
+        dependency_ids = select(("DEP:", "DEPENDENCY:"), ("DEP", "DEPENDENCY"))
+        contract_ids = select(("CONTRACT:",), ("CONTRACT",))
+        handoff_ids = select(("HANDOFF:",), ("HANDOFF",))
         family = "Core/Wallet" if pkg.startswith("C") else "RAG/Adviser" if pkg.startswith("R") else "Assistant"
         status_line = next((line for line in plan_lines[:75] if STATUS_RE.match(line) and STATUS_RE.match(line).group(1) == pkg), "")
         sm = STATUS_RE.match(status_line) if status_line else None
@@ -584,7 +590,9 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
             "product_status": sm.group(5).strip() if sm else "NOT_FOUND", "plan_heading_lines": hlines,
             "mentioned_candidate_ids": select(("CAND:", "CAND-", "CANDIDATE-")), "mentioned_requirement_ids": select(("REQ:",), ("REQ", "R")),
             "mentioned_story_enabler_ids": select(("TE:", "STORY:", "EN:"), ("EN", "E", "STORY", "S")), "mentioned_task_subtask_ids": select(("TASK:",), ("TASK", "T", "SUBTASK", "S")),
-            "mentioned_ac_td_test_case_ids": select(("AC:", "TD:", "TEST:", "TC:"), ("AC", "TD", "TEST", "TC")),
+            "mentioned_ac_ids": ac_ids, "mentioned_test_definition_ids": test_definition_ids, "mentioned_test_case_ids": test_case_ids,
+            "mentioned_ac_td_test_case_ids": ";".join(x for x in (ac_ids, test_definition_ids, test_case_ids) if x),
+            "mentioned_dependency_ids": dependency_ids, "mentioned_contract_ids": contract_ids, "mentioned_handoff_ids": handoff_ids,
             "source_reference_count": len(refs) + len(pkg_graph_refs), "graph_node_reference_ids": ";".join(pkg_graph_refs),
             "ownership_evidence": " || ".join(owner_lines), "dependency_evidence": " || ".join(dependency_lines),
             "contract_evidence": " || ".join(contract_lines), "handoff_evidence": " || ".join(handoff_lines),
@@ -713,7 +721,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
     gap_fields, gaps = read_csv(COVERAGE / "coverage-gap-register.csv")
     candidate_fields, candidate_rows = read_csv(COVERAGE / "atomic-obligations.csv")
     output = {
-        "baseline_commit": git_blob("docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),
+        "baseline_commit": BASELINE_COMMIT,
         "plan_blob_sha": git_blob("docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),
         "sources": source_hashes,
         "graph": {"commit": GRAPH_COMMIT, "path": GRAPH_PATH, "sha256": graph_sha, "status": "DISCOVERY_ONLY"},
