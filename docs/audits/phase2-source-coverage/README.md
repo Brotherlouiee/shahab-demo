@@ -9,6 +9,8 @@
 - Git blob SHA و SHA-256 هر دو منبع در `extraction-manifest.json` هستند؛ گراف پین‌شده Graphify با SHA-256 محتوای این دو منبع هم‌خوان است.
 - تمام ۳۶ بسته در `package-execution-index.csv` ثبت شده‌اند.
 - ۳٬۰۶۴ locator و disposition قبلی بسته‌ها از سند برنامه در `package-semantic-evidence.csv` وارد شده‌اند؛ این شواهد پیشین‌اند و بازبینی مستقل تازه محسوب نمی‌شوند. خلاصهٔ بسته‌ای در `package-semantic-audit.csv` این محدودیت را صریح ثبت می‌کند.
+- دفتر `semantic-review-dispositions.csv` تعیین‌تکلیف مستقل ۵۸ سرستون جدول و ۱۱ جداکنندهٔ صرفاً قالب‌بندی را نگه می‌دارد؛ سطرهای داده، متن‌ها و بلوک‌های کد همچنان نیازمند بازبینی هستند.
+- هر ۳۲۶ عنوان و ۵۸ ظرف جدول در `source-unit-review-dispositions.csv` به‌عنوان locator ساختاری تعیین‌تکلیف شده‌اند؛ این کار محتوای متنی زیرعنوان یا سطرهای دادهٔ جدول را تأیید نمی‌کند.
 - طبقه‌بندی‌های ماشینی صرفاً سرنخ‌اند. هیچ Atomic Obligation یا نگاشت اجرا به‌عنوان معنایی‌تأییدشده/`VERIFIED_COVERED` ثبت نشده است.
 - تا زمان بازبینی انسانی، ستون `normative_status` برای همهٔ candidateها `NEEDS_REVIEW` است؛ دسته‌بندی قاعده‌محور جداگانه با عنوان `classification_suggestion` نگه‌داری می‌شود.
 
@@ -26,6 +28,8 @@
 | `package-execution-index.csv` | ۳۶ بسته و شناسه‌ها/ارجاع‌های استخراج‌شده از سند برنامه؛ شناسه‌های ذکرشده ممکن است مصرف‌کننده باشند، نه مالک |
 | `package-semantic-evidence.csv` | locatorهای منبع، candidate، requirement، task و AC/Test ثبت‌شده در بسته‌ها؛ برای مسیریابی شواهد، نه تأیید معنایی جدید |
 | `package-semantic-audit.csv` | شمارش شواهد واردشده برای ۳۶ بسته و وضعیت مستقل‌بودن بازبینی؛ فعلاً `NOT_CLAIMED` |
+| `semantic-review-dispositions.csv` | قضاوت‌های معنایی ردیفی با locator منبع، علت و بازبین؛ ورودی بازتولید وضعیت ردیف‌های review شده |
+| `source-unit-review-dispositions.csv` | تعیین‌تکلیف مستقل ۳۲۶ عنوان و ۵۸ ظرف جدول به‌عنوان locator ساختاری |
 | `coverage-gap-register.csv` | موارد نیازمند بازبینی؛ ردیف `PENDING_SEMANTIC_REVIEW` شکاف قطعی محسوب نمی‌شود |
 | `extraction-manifest.json` | منبع، blob SHA، SHA-256، آمار استخراج، گراف و محدودیت‌ها |
 | `semantic-validation-report.md` | نتیجهٔ ممیزی، خطاهای استخراج اصلاح‌شده، کنترل‌ها و محدودیت معناشناختی |

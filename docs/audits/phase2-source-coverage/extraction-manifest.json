@@ -19,9 +19,9 @@
   "table_count": 58,
   "source_unit_count": 384,
   "candidate_paragraph_count": 1136,
-  "method": "Preserve baseline candidate IDs; reconcile current source headings/table blocks; enumerate every non-table text range, every table header/data row and fenced block; heuristic labels only; package links remain unverified.",
+  "method": "Preserve baseline candidate IDs; reconcile source units; apply only individually evidenced dispositions from semantic-review-dispositions.csv; all other classifications remain pending; package links remain unverified.",
   "limitations": [
-    "No semantic source row is promoted to an atomic approved obligation by this script.",
+    "90 individually reviewed non-content structural candidates are marked not applicable; 1543 other candidates remain pending semantic review.",
     "All 1,136 text ranges, 470 table rows and fenced blocks require source-context review.",
     "Execution references are candidate citations and must be confirmed against package behavior.",
     "Graph node overlap is only a retrieval aid; inferred/ambiguous edges do not approve requirements.",
@@ -40,5 +40,10 @@
   },
   "baseline_paragraph_candidate_count": 1110,
   "newly_recovered_paragraph_range_count": 26,
-  "inventory_row_count": 1547
+  "inventory_row_count": 1547,
+  "semantic_review_disposition_ledger": "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv",
+  "semantic_reviewed_candidate_count": 90,
+  "pending_semantic_candidate_count": 1543,
+  "structural_source_unit_disposition_ledger": "docs/audits/phase2-source-coverage/source-unit-review-dispositions.csv",
+  "structural_source_units_dispositioned": 384
 }

@@ -67,6 +67,64 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, Any]]) -> None
         writer.writerows(rows)
 
 
+def apply_review_dispositions(candidates: list[dict[str, Any]]) -> None:
+    """Apply only manually evidenced dispositions from the separate review ledger."""
+    path = COVERAGE / "semantic-review-dispositions.csv"
+    if not path.exists():
+        return
+    ledger_fields, ledger = read_csv(path)
+    required = {"candidate_id", "semantic_disposition", "normative_status", "coverage_status", "atomicity_status", "source_evidence", "review_rationale", "reviewer", "review_date"}
+    if not required.issubset(ledger_fields):
+        raise ValueError(f"Review ledger missing columns: {sorted(required - set(ledger_fields))}")
+    by_id = {row["candidate_id"]: row for row in candidates}
+    seen: set[str] = set()
+    for review in ledger:
+        cid = review["candidate_id"]
+        if cid in seen:
+            raise ValueError(f"Duplicate semantic review: {cid}")
+        seen.add(cid)
+        if cid not in by_id:
+            raise ValueError(f"Semantic review references unknown candidate: {cid}")
+        if not all(review.get(key, "").strip() for key in ("semantic_disposition", "normative_status", "coverage_status", "atomicity_status", "source_evidence", "review_rationale", "reviewer", "review_date")):
+            raise ValueError(f"Semantic review is missing evidence or rationale: {cid}")
+        candidate = by_id[cid]
+        if review["source_evidence"].split(";",1)[0] != f"{candidate['document']}:{candidate['start_line']} ({candidate['source_unit_id']})":
+            raise ValueError(f"Semantic review source locator drift: {cid}")
+        candidate["normative_status"] = review["normative_status"]
+        candidate["classification_method"] = "HUMAN_SEMANTIC_REVIEW"
+        candidate["classification_confidence"] = "HIGH"
+        candidate["review_status"] = "SEMANTICALLY_REVIEWED"
+        candidate["review_reason"] = review["review_rationale"]
+        candidate["atomicity_status"] = review["atomicity_status"]
+
+
+def apply_source_unit_dispositions(inventory: list[dict[str, Any]]) -> None:
+    """Keep headings and table containers distinct from their content units."""
+    path = COVERAGE / "source-unit-review-dispositions.csv"
+    if not path.exists():
+        return
+    fields, ledger = read_csv(path)
+    required={"source_unit_id","unit_type","semantic_disposition","normative_status","coverage_status","source_evidence","review_rationale","reviewer","review_date"}
+    if not required.issubset(fields):
+        raise ValueError(f"Source-unit review ledger missing columns: {sorted(required - set(fields))}")
+    by_id={row["source_unit_id"]:row for row in inventory}
+    seen=set()
+    for review in ledger:
+        uid=review["source_unit_id"]
+        if uid in seen or uid not in by_id:
+            raise ValueError(f"Duplicate or unknown source unit in review ledger: {uid}")
+        seen.add(uid)
+        row=by_id[uid]
+        expected=f"{row['document']}:{row['start_line']}-{row['end_line']} ({uid})"
+        expected_disposition="STRUCTURAL_SECTION_LOCATOR" if row["unit_type"]=="HEADING" else "STRUCTURAL_TABLE_CONTAINER" if row["unit_type"]=="TABLE" else ""
+        if row["unit_type"] not in {"HEADING","TABLE"} or review["unit_type"]!=row["unit_type"] or review["semantic_disposition"]!=expected_disposition or review["source_evidence"]!=expected:
+            raise ValueError(f"Invalid source-unit disposition or locator: {uid}")
+        row["normative_status"]="NOT_APPLICABLE"
+        row["coverage_status"]="NOT_APPLICABLE"
+        row["classification_method"]="HUMAN_SEMANTIC_REVIEW"
+        row["review_reason"]=review["review_rationale"]
+
+
 def excerpt_text(text: str) -> str:
     """Keep readable source excerpts while dropping Markdown hard-break padding."""
     return "\n".join(line.rstrip() for line in text.splitlines())
@@ -461,6 +519,8 @@ def main() -> int:
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         return 1 if any(v["result"] != "PASS" for v in machine.values()) else 0
 
+    apply_source_unit_dispositions(inventory_rows)
+    apply_review_dispositions(candidate_rows)
     write_csv(inventory_path, inv_fields, inventory_rows)
     write_csv(candidate_path, candidate_fields, candidate_rows)
     # Package index and trace are built below from the versioned plan source.
@@ -532,15 +592,18 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
         tasks = sorted({x for lead in leads for x in lead["ids"] if x.startswith("TASK:") or package_qualified(lead,x,"(?:TASK|T|SUBTASK)")})
         ac_tests = sorted({x for lead in leads for x in lead["ids"] if x.startswith(("AC:", "TEST:", "TD:", "TC:")) or package_qualified(lead,x,"(?:AC|TD|TEST|TC)")})
         evidence = sorted({f"plan:L{x['plan_line']} {x['source_ref']}" for x in leads})
+        not_applicable = row["review_status"] == "SEMANTICALLY_REVIEWED" and row["normative_status"] in {"NOT_APPLICABLE", "EXAMPLE"}
         trace_rows.append({
             "candidate_id": row["candidate_id"], "atomic_obligation_id": "", "source_unit_id": row["source_unit_id"],
             "source_document": row["document"], "source_lines": f"{row['start_line']}-{row['end_line']}",
-            "owner_package_candidates": ";".join(owners), "requirement_candidates": ";".join(reqs),
-            "story_enabler_candidates": ";".join(stories), "task_subtask_candidates": ";".join(tasks),
-            "ac_test_candidates": ";".join(ac_tests), "graph_node_ids": row["graph_node_ids"],
-            "coverage_status": "PENDING_REVIEW" if leads else "NOT_MAPPED_CANDIDATE",
-            "evidence": ";".join(evidence), "review_status": "UNVERIFIED_SEMANTIC_MAPPING",
+            "owner_package_candidates": "" if not_applicable else ";".join(owners), "requirement_candidates": "" if not_applicable else ";".join(reqs),
+            "story_enabler_candidates": "" if not_applicable else ";".join(stories), "task_subtask_candidates": "" if not_applicable else ";".join(tasks),
+            "ac_test_candidates": "" if not_applicable else ";".join(ac_tests), "graph_node_ids": row["graph_node_ids"],
+            "coverage_status": "NOT_APPLICABLE" if not_applicable else "PENDING_REVIEW" if leads else "NOT_MAPPED_CANDIDATE",
+            "evidence": row["review_reason"] if not_applicable else ";".join(evidence), "review_status": "SEMANTICALLY_REVIEWED" if not_applicable else "UNVERIFIED_SEMANTIC_MAPPING",
         })
+        if not_applicable:
+            continue
         gap_rows.append({
             "gap_id": f"REV-{row['candidate_id']}", "candidate_id": row["candidate_id"], "atomic_obligation_id": "",
             "source_unit_id": row["source_unit_id"], "source_document": row["document"], "source_lines": f"{row['start_line']}-{row['end_line']}",
@@ -612,7 +675,7 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     plan_ids = set(ID_RE.findall(PLAN.read_text(encoding="utf-8")))
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
     trace_fields, trace = read_csv(COVERAGE / "execution-trace.csv")
-    valid_statuses = {"NORMATIVE_APPROVED", "NORMATIVE_OPEN_DECISION", "DESCRIPTIVE", "EXAMPLE", "OUT_OF_SCOPE", "SUPERSEDED", "MIXED", "NEEDS_REVIEW"}
+    valid_statuses = {"NORMATIVE_APPROVED", "NORMATIVE_OPEN_DECISION", "DESCRIPTIVE", "EXAMPLE", "OUT_OF_SCOPE", "SUPERSEDED", "MIXED", "NEEDS_REVIEW", "NOT_APPLICABLE"}
     old_inventory_ids = {r["source_unit_id"] for r in old_inventory}
     old_candidate_ids = {r["candidate_id"] for r in old_candidates}
     allowed_package_ids = {r["package_id"] for r in packages}
@@ -681,7 +744,35 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     record("baseline_rows_preserved", len(old_inventory_ids)+len(old_candidate_ids), [f"dropped {x}" for x in missing_refs])
     status_errors=[f"{r['candidate_id']} invalid status {r['normative_status']}" for r in candidates if r["normative_status"] not in valid_statuses]
     record("classification_status_values", len(candidates), status_errors)
-    promoted_suggestions=[f"{r['candidate_id']} promoted {r['classification_suggestion']} without review" for r in candidates if r["normative_status"] != "NEEDS_REVIEW" or r["review_status"] != "REVIEW_REQUIRED"]
+    ledger_rows = read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
+    ledger_by_id = {r["candidate_id"]: r for r in ledger_rows}
+    promoted_suggestions=[]
+    disposition_errors=[]
+    if len(ledger_rows) != len(ledger_by_id):
+        disposition_errors.append("duplicate candidate ID in semantic review ledger")
+    for review in ledger_rows:
+        row=next((x for x in candidates if x["candidate_id"]==review["candidate_id"]),None)
+        if not row:
+            disposition_errors.append(f"unknown candidate {review['candidate_id']}")
+            continue
+        expected=f"{row['document']}:{row['start_line']} ({row['source_unit_id']})"
+        if review.get("source_evidence","").split(";",1)[0] != expected:
+            disposition_errors.append(f"source locator drift {review['candidate_id']}")
+        valid_header = row["candidate_class"] == "TABLE_HEADER" and review.get("semantic_disposition") == "STRUCTURAL_HEADER_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
+        valid_separator = row["candidate_class"] == "TEXT_RANGE_CANDIDATE" and row["source_excerpt"].strip() == "---" and review.get("semantic_disposition") == "MARKDOWN_HORIZONTAL_RULE_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
+        valid_example = row["candidate_class"] == "TABLE_ROW_CANDIDATE" and row["document"].endswith("SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md") and 100 < int(row["start_line"]) < 140 and "صراحت وضعیت مثال در B:90" in review.get("source_evidence","") and review.get("semantic_disposition") == "EXAMPLE_CONTEXT_ROW" and review.get("normative_status") == "EXAMPLE"
+        if not (valid_header or valid_separator or valid_example) or review.get("coverage_status") != "NOT_APPLICABLE":
+            disposition_errors.append(f"invalid structural/example disposition {review['candidate_id']}")
+        if row["normative_status"] != review.get("normative_status") or row["review_status"] != "SEMANTICALLY_REVIEWED":
+            disposition_errors.append(f"candidate does not reflect ledger disposition {review['candidate_id']}")
+    record("semantic_review_disposition_integrity", len(ledger_rows), disposition_errors)
+    for row in candidates:
+        review = ledger_by_id.get(row["candidate_id"])
+        if review:
+            if row["normative_status"] != review["normative_status"] or row["review_status"] != "SEMANTICALLY_REVIEWED":
+                promoted_suggestions.append(f"{row['candidate_id']} does not match its reviewed disposition")
+        elif row["normative_status"] != "NEEDS_REVIEW" or row["review_status"] != "REVIEW_REQUIRED":
+            promoted_suggestions.append(f"{row['candidate_id']} promoted {row['classification_suggestion']} without a review ledger entry")
     record("heuristic_status_not_promoted", len(candidates), promoted_suggestions)
     suggestion_errors=[f"{r['candidate_id']} invalid suggestion {r['classification_suggestion']}" for r in candidates if r["classification_suggestion"] not in valid_statuses]
     record("classification_suggestion_values", len(candidates), suggestion_errors)
@@ -692,6 +783,24 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     record("no_unverified_mapping_marked_verified", len(trace), [f"unexpected verified mapping {x}" for x in verified_errors])
     missing_review_reasons=[r["candidate_id"] for r in candidates if not r.get("review_reason", "").strip()]
     record("review_required_rows_have_reason", len(candidates), missing_review_reasons)
+    unit_ledger=read_csv(COVERAGE / "source-unit-review-dispositions.csv")[1] if (COVERAGE / "source-unit-review-dispositions.csv").exists() else []
+    unit_by_id={r["source_unit_id"]:r for r in unit_ledger}
+    unit_disposition_errors=[]
+    if len(unit_by_id)!=len(unit_ledger):
+        unit_disposition_errors.append("duplicate source-unit ID")
+    inventory_by_id={r["source_unit_id"]:r for r in inventory}
+    for review in unit_ledger:
+        row=inventory_by_id.get(review["source_unit_id"])
+        if not row:
+            unit_disposition_errors.append(f"unknown source unit {review['source_unit_id']}")
+            continue
+        expected=f"{row['document']}:{row['start_line']}-{row['end_line']} ({row['source_unit_id']})"
+        expected_disposition="STRUCTURAL_SECTION_LOCATOR" if row["unit_type"]=="HEADING" else "STRUCTURAL_TABLE_CONTAINER" if row["unit_type"]=="TABLE" else ""
+        if row["unit_type"] not in {"HEADING","TABLE"} or review.get("unit_type")!=row["unit_type"] or review.get("semantic_disposition")!=expected_disposition or review.get("source_evidence")!=expected:
+            unit_disposition_errors.append(f"invalid source-unit disposition or locator {review['source_unit_id']}")
+        if row["normative_status"]!="NOT_APPLICABLE" or row["coverage_status"]!="NOT_APPLICABLE":
+            unit_disposition_errors.append(f"source unit does not reflect disposition {review['source_unit_id']}")
+    record("structural_source_unit_disposition_integrity",len(unit_ledger),unit_disposition_errors)
     record("structural_parse", sum(1 for _ in inventory), structural_errors)
     return checks
 
@@ -712,9 +821,17 @@ def update_manifest(structural: Counter[str], candidate_counts: Counter[str], so
     original["inventory_row_count"]=sum(structural.values())+candidate_counts["TEXT_RANGE"]+candidate_counts["CODE_BLOCK_UNIT"]
     original["candidate_record_count"]=len(candidates)
     original["graph"]={"commit":GRAPH_COMMIT,"path":GRAPH_PATH,"sha256":graph_sha,"usage":"discovery and locator references only; no semantic mapping is accepted from graph edges alone"}
-    original["method"]="Preserve baseline candidate IDs; reconcile current source headings/table blocks; enumerate every non-table text range, every table header/data row and fenced block; heuristic labels only; package links remain unverified."
+    reviewed=sum(r.get("review_status")=="SEMANTICALLY_REVIEWED" for r in candidates)
+    pending=len(candidates)-reviewed
+    source_dispositions=read_csv(COVERAGE / "source-unit-review-dispositions.csv")[1] if (COVERAGE / "source-unit-review-dispositions.csv").exists() else []
+    original["structural_source_unit_disposition_ledger"]="docs/audits/phase2-source-coverage/source-unit-review-dispositions.csv"
+    original["structural_source_units_dispositioned"]=len(source_dispositions)
+    original["semantic_review_disposition_ledger"]="docs/audits/phase2-source-coverage/semantic-review-dispositions.csv"
+    original["semantic_reviewed_candidate_count"]=reviewed
+    original["pending_semantic_candidate_count"]=pending
+    original["method"]="Preserve baseline candidate IDs; reconcile source units; apply only individually evidenced dispositions from semantic-review-dispositions.csv; all other classifications remain pending; package links remain unverified."
     original["limitations"]=[
-        "No semantic source row is promoted to an atomic approved obligation by this script.",
+        f"{reviewed} individually reviewed non-content structural candidates are marked not applicable; {pending} other candidates remain pending semantic review.",
         "All 1,136 text ranges, 470 table rows and fenced blocks require source-context review.",
         "Execution references are candidate citations and must be confirmed against package behavior.",
         "Graph node overlap is only a retrieval aid; inferred/ambiguous edges do not approve requirements.",
@@ -731,6 +848,11 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
     gap_fields, gaps = read_csv(COVERAGE / "coverage-gap-register.csv")
     candidate_fields, candidate_rows = read_csv(COVERAGE / "atomic-obligations.csv")
+    reviewed_count=sum(r.get("review_status")=="SEMANTICALLY_REVIEWED" for r in candidates)
+    pending_count=len(candidates)-reviewed_count
+    source_dispositions=read_csv(COVERAGE / "source-unit-review-dispositions.csv")[1] if (COVERAGE / "source-unit-review-dispositions.csv").exists() else []
+    reviewed_ledger=read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
+    reviewed_kinds=Counter(r["semantic_disposition"] for r in reviewed_ledger)
     output = {
         "baseline_commit": BASELINE_COMMIT,
         "plan_blob_sha": git_blob("docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),
@@ -741,13 +863,15 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "paragraph_ranges": candidate_counts["TEXT_RANGE"], "text_ranges_semantically_reviewed": 0,
             "table_rows": candidate_counts["TABLE_ROW"], "table_rows_semantically_reviewed": 0,
             "code_blocks": candidate_counts["CODE_BLOCK"], "code_blocks_semantically_reviewed": 0,
-            "candidate_records": len(candidates), "candidate_records_pending_semantic_review": len(candidates),
+            "candidate_records": len(candidates), "candidate_records_pending_semantic_review": pending_count,
+            "structural_source_units_dispositioned_as_locators": len(source_dispositions),
             "packages_indexed": len(packages), "package_index_rows": len(packages), "execution_trace_rows": len(trace), "pending_review_rows": len(gaps),
+            "candidate_records_semantically_reviewed": reviewed_count,
             "atomic_obligations_extracted_and_verified": 0, "approved_obligations_verified": 0, "open_decisions_verified": 0,
             "descriptive_units_verified": 0, "verified_covered_obligations": 0, "partially_covered_obligations": 0,
-            "confirmed_uncovered_obligations": 0, "semantic_reviews_pending": len(candidates),
+            "confirmed_uncovered_obligations": 0, "semantic_reviews_pending": pending_count,
             "unverified_normative_cue_suggestions": statuses["NORMATIVE_APPROVED"], "unverified_open_decision_cue_suggestions": statuses["NORMATIVE_OPEN_DECISION"],
-            "needs_review_candidates": len(candidates), "classification_suggestions_unverified": dict(statuses), "review_statuses": dict(review_states),
+            "needs_review_candidates": pending_count, "classification_suggestions_unverified": dict(statuses), "review_statuses": dict(review_states),
         },
         "controls": {
             "structural_counts": "PASS" if not structural_errors else "FAIL",
@@ -786,13 +910,14 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| Heading | {structural['HEADING']} |",
         f"| Table block | {structural['TABLE']} |",
         f"| واحد ساختاری | {structural['HEADING'] + structural['TABLE']} |",
+        f"| عنوان/ظرف جدول تعیین‌تکلیف‌شده به‌عنوان locator | {len(source_dispositions)} از {structural['HEADING'] + structural['TABLE']}؛ محتوای بخش و سطرهای جدول جداگانه بررسی می‌شوند |",
         f"| محدودهٔ متنی غیرجدولی استخراج‌شده | {candidate_counts['TEXT_RANGE']} |",
         f"| سطرهای سرآیند/دادهٔ جدول استخراج‌شده | {candidate_counts['TABLE_ROW']} |",
         f"| بلوک fenced ثبت‌شده | {candidate_counts['CODE_BLOCK']} |",
         f"| کل candidate row | {len(candidates)} |",
         f"| بسته‌های index شده | {len(packages)} / 36 |",
-        f"| بازبینی معنایی انجام‌شده | ۰ از {len(candidates)} candidate |",
-        f"| ردیف‌های pending review | {len(gaps)}؛ این‌ها شکاف قطعی نیستند |",
+        f"| تعیین‌تکلیف ردیفی انجام‌شده | {reviewed_count} از {len(candidates)} candidate؛ {reviewed_kinds['STRUCTURAL_HEADER_ONLY']} سرستون، {reviewed_kinds['MARKDOWN_HORIZONTAL_RULE_ONLY']} جداکننده و {reviewed_kinds['EXAMPLE_CONTEXT_ROW']} ردیف مثال فرضی |",
+        f"| ردیف‌های pending review | {pending_count}؛ این‌ها شکاف قطعی نیستند |",
         "| Atomic Obligationهای تأییدشده | 0 |",
         "| نگاشت تأییدشدهٔ covered | 0 |",
         "| شکاف معنایی قطعی | هنوز تعیین نشده |",

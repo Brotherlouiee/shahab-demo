@@ -32,11 +32,13 @@
     "code_blocks": 27,
     "code_blocks_semantically_reviewed": 0,
     "candidate_records": 1633,
-    "candidate_records_pending_semantic_review": 1633,
+    "candidate_records_pending_semantic_review": 1543,
+    "structural_source_units_dispositioned_as_locators": 384,
     "packages_indexed": 36,
     "package_index_rows": 36,
     "execution_trace_rows": 1633,
-    "pending_review_rows": 1633,
+    "pending_review_rows": 1543,
+    "candidate_records_semantically_reviewed": 90,
     "atomic_obligations_extracted_and_verified": 0,
     "approved_obligations_verified": 0,
     "open_decisions_verified": 0,
@@ -44,10 +46,10 @@
     "verified_covered_obligations": 0,
     "partially_covered_obligations": 0,
     "confirmed_uncovered_obligations": 0,
-    "semantic_reviews_pending": 1633,
+    "semantic_reviews_pending": 1543,
     "unverified_normative_cue_suggestions": 506,
     "unverified_open_decision_cue_suggestions": 19,
-    "needs_review_candidates": 1633,
+    "needs_review_candidates": 1543,
     "classification_suggestions_unverified": {
       "DESCRIPTIVE": 125,
       "NEEDS_REVIEW": 762,
@@ -59,7 +61,8 @@
       "OUT_OF_SCOPE": 1
     },
     "review_statuses": {
-      "REVIEW_REQUIRED": 1633
+      "SEMANTICALLY_REVIEWED": 90,
+      "REVIEW_REQUIRED": 1543
     }
   },
   "controls": {
@@ -146,7 +149,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 8814,
+      "checked": 8756,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -158,7 +161,7 @@
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 1104,
+      "checked": 1072,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -171,6 +174,12 @@
     },
     "classification_status_values": {
       "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "semantic_review_disposition_integrity": {
+      "checked": 90,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -201,6 +210,12 @@
     },
     "review_required_rows_have_reason": {
       "checked": 1633,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
+    },
+    "structural_source_unit_disposition_integrity": {
+      "checked": 384,
       "errors": 0,
       "result": "PASS",
       "examples": []
