@@ -18,11 +18,11 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 186 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 49 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف ردیفی انجام‌شده | 198 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 21 ردیف مثال و 55 نگاشت معنایی بررسی‌شده |
 | تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 87 از 470 ردیف جدول، 0 از 27 بلوک fenced |
-| ردیف‌های pending review | 1447؛ این‌ها شکاف قطعی نیستند |
-| Atomic Obligationهای دارای نگاشت Covered | 88 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 88/15/0 |
+| ردیف‌های pending review | 1435؛ این‌ها شکاف قطعی نیستند |
+| Atomic Obligationهای دارای نگاشت Covered | 102 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 102/15/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -36,6 +36,7 @@
 | WALLET-PERIODIC-LIMITS-001 | WL-C-0881, WL-C-0882, WL-C-0883, WL-C-0884, WL-C-0885, WL-C-0886, WL-C-0887, WL-C-0888, WL-C-0889, WL-C-0890, WL-C-0891, WL-C-0892, WL-C-0893, WL-C-0894, WL-C-0895, WL-C-0896, WL-C-0897, WL-C-0898, WL-C-0899, WL-C-0900 | 127→147 | 1506→1486 | 22 | 17/5/0 | 1 |
 | WALLET-LEDGER-FOUNDATION-001 | WL-C-0902, WL-C-0903, WL-C-0904, WL-C-0905, WL-C-0906, WL-C-0907, WL-C-0908, WL-C-0909, WL-C-0910, WL-C-0911, WL-C-0912, WL-C-0913, WL-C-0914, WL-C-0915, WL-C-0916, WL-C-0917, WL-C-0918, WL-C-0919, WL-C-0920 | 147→166 | 1486→1467 | 21 | 17/4/0 | 3 |
 | WALLET-LIFECYCLE-IDEMPOTENCY-001 | WL-C-0921, WL-C-0922, WL-C-0923, WL-C-0924, WL-C-0925, WL-C-0926, WL-C-0927, WL-C-0928, WL-C-0929, WL-C-0930, WL-C-0931, WL-C-0932, WL-C-0933, WL-C-0934, WL-C-0935, WL-C-0936, WL-C-0937, WL-C-0938, WL-C-0939, WL-C-0940 | 166→186 | 1467→1447 | 22 | 19/3/0 | 2 |
+| WALLET-COMMIT-INVARIANTS-001 | WL-C-0941, WL-C-0942, WL-C-0943, WL-C-0944, WL-C-0945, WL-C-0946, WL-C-0947, WL-C-0948, WL-C-0949, WL-C-0950, WL-C-0951, WL-C-0952 | 186→198 | 1447→1435 | 16 | 14/2/0 | 2 |
 
 ## کنترل‌های ماشینی
 
@@ -47,10 +48,10 @@
 | محدوده‌های متنی و سلول‌های جدول | PARTIAL | تمام rangeها و rowها ثبت شده‌اند؛ طبقه‌بندی معنایی و اتمی‌سازی هنوز باز است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 116 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 92 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 132 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 104 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8671؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 8651؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3706 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |

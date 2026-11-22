@@ -32,28 +32,28 @@
     "code_blocks": 27,
     "code_blocks_semantically_reviewed": 0,
     "candidate_records": 1633,
-    "candidate_records_pending_semantic_review": 1447,
+    "candidate_records_pending_semantic_review": 1435,
     "structural_source_units_dispositioned_as_locators": 384,
     "packages_indexed": 36,
     "package_index_rows": 36,
     "execution_trace_rows": 1633,
-    "pending_review_rows": 1460,
-    "candidate_records_semantically_reviewed": 186,
-    "atomic_obligations_extracted_and_verified": 116,
-    "approved_obligations_verified": 96,
-    "open_decisions_verified": 20,
-    "atomic_obligation_records": 116,
-    "descriptive_units_verified": 41,
-    "verified_covered_obligations": 88,
+    "pending_review_rows": 1449,
+    "candidate_records_semantically_reviewed": 198,
+    "atomic_obligations_extracted_and_verified": 132,
+    "approved_obligations_verified": 110,
+    "open_decisions_verified": 22,
+    "atomic_obligation_records": 132,
+    "descriptive_units_verified": 46,
+    "verified_covered_obligations": 102,
     "partially_covered_obligations": 15,
-    "candidate_rows_marked_covered": 29,
-    "candidate_rows_marked_partial": 20,
+    "candidate_rows_marked_covered": 33,
+    "candidate_rows_marked_partial": 22,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
-    "semantic_reviews_pending": 1447,
+    "semantic_reviews_pending": 1435,
     "unverified_normative_cue_suggestions": 506,
     "unverified_open_decision_cue_suggestions": 19,
-    "needs_review_candidates": 1447,
+    "needs_review_candidates": 1435,
     "classification_suggestions_unverified": {
       "DESCRIPTIVE": 125,
       "NEEDS_REVIEW": 762,
@@ -65,8 +65,8 @@
       "OUT_OF_SCOPE": 1
     },
     "review_statuses": {
-      "SEMANTICALLY_REVIEWED": 186,
-      "REVIEW_REQUIRED": 1447
+      "SEMANTICALLY_REVIEWED": 198,
+      "REVIEW_REQUIRED": 1435
     }
   },
   "controls": {
@@ -105,7 +105,7 @@
       "examples": []
     },
     "atomic_obligation_id_uniqueness": {
-      "checked": 46,
+      "checked": 52,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -153,7 +153,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 8671,
+      "checked": 8651,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -165,7 +165,7 @@
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 1031,
+      "checked": 1025,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -183,19 +183,19 @@
       "examples": []
     },
     "semantic_review_disposition_integrity": {
-      "checked": 186,
+      "checked": 198,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 116,
+      "checked": 132,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "semantic_batch_ledger_integrity": {
-      "checked": 92,
+      "checked": 104,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -419,6 +419,32 @@
       "partial": 3,
       "uncovered": 0,
       "open_decisions": 2
+    },
+    {
+      "batch_id": "WALLET-COMMIT-INVARIANTS-001",
+      "candidate_ids": [
+        "WL-C-0941",
+        "WL-C-0942",
+        "WL-C-0943",
+        "WL-C-0944",
+        "WL-C-0945",
+        "WL-C-0946",
+        "WL-C-0947",
+        "WL-C-0948",
+        "WL-C-0949",
+        "WL-C-0950",
+        "WL-C-0951",
+        "WL-C-0952"
+      ],
+      "reviewed_before": 186,
+      "reviewed_after": 198,
+      "pending_before": 1447,
+      "pending_after": 1435,
+      "atomic_obligations": 16,
+      "covered": 14,
+      "partial": 2,
+      "uncovered": 0,
+      "open_decisions": 2
     }
   ],
   "matrix_build_status": "INCOMPLETE",
@@ -427,7 +453,7 @@
     "Rule-based classifications are discovery aids and are not accepted normative decisions.",
     "Only individually evidenced rows listed in the semantic review ledger may carry a verified mapping; remaining mappings are unverified.",
     "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
-    "The matrix contains 1633 candidate records; 1447 still require semantic review.",
+    "The matrix contains 1633 candidate records; 1435 still require semantic review.",
     "Graph node overlap is a retrieval reference, not semantic entailment."
   ]
 }
