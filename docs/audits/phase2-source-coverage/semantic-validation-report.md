@@ -18,12 +18,12 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 259 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 23 ردیف مثال و 95 نگاشت معنایی بررسی‌شده |
-| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 104 از 470 ردیف جدول، 0 از 27 بلوک fenced |
-| Candidateهای pending review | 1374؛ pending بودن به‌تنهایی شکاف قطعی نیست |
-| رکوردهای Gap Register | 1394؛ 1374 بازبینی محتوایی + 20 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 175 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 175/21/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 306 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 30 ردیف مثال و 116 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 128 از 470 ردیف جدول، 0 از 27 بلوک fenced |
+| Candidateهای pending review | 1327؛ pending بودن به‌تنهایی شکاف قطعی نیست |
+| رکوردهای Gap Register | 1347؛ 1327 بازبینی محتوایی + 20 تصمیم باز |
+| Atomic Obligationهای دارای نگاشت Covered | 261 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 261/21/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -41,6 +41,7 @@
 | WALLET-RECONCILIATION-RETENTION-001 | WL-C-0953, WL-C-0954, WL-C-0955, WL-C-0956, WL-C-0957, WL-C-0958, WL-C-0959, WL-C-0960, WL-C-0961, WL-C-0962, WL-C-0963, WL-C-0964, WL-C-0965, WL-C-0966, WL-C-0967, WL-C-0968, WL-C-0969, WL-C-0970, WL-C-0971, WL-C-0972, WL-C-0973, WL-C-0974 | 198→220 | 1435→1413 | 22 | 14/8/0 | 4 |
 | BLUEPRINT-ROUTER-EXAMPLES-001 | BP-TR-004-05, BP-TR-004-06 | 220→222 | 1413→1411 | 0 | 0/0/0 | 0 |
 | BLUEPRINT-RAG-CONTRACTS-001 | BP-C-0077, BP-C-0078, BP-C-0079, BP-C-0080, BP-C-0081, BP-C-0082, BP-C-0083, BP-C-0084, BP-C-0085, BP-C-0086, BP-C-0087, BP-C-0088, BP-C-0089, BP-C-0090, BP-C-0091, BP-C-0092, BP-TR-005-02, BP-TR-005-03, BP-TR-005-04, BP-TR-005-05, BP-TR-005-06, BP-TR-005-07, BP-TR-005-08, BP-TR-005-09, BP-TR-005-10, BP-TR-005-11, BP-C-0093, BP-TR-006-02, BP-TR-006-03, BP-TR-006-04, BP-TR-006-05, BP-TR-006-06, BP-C-0094, BP-C-0095, BP-C-0096, BP-C-0097, BP-C-0098 | 222→259 | 1411→1374 | 63 | 59/4/0 | 2 |
+| BLUEPRINT-RAG-DISCOVERY-F05-001 | BP-TR-008-02, BP-TR-008-03, BP-TR-008-04, BP-TR-009-02, BP-TR-009-03, BP-TR-009-04, BP-TR-009-05, BP-TR-010-02, BP-TR-010-03, BP-TR-010-04, BP-TR-010-05, BP-TR-010-06, BP-TR-010-07, BP-TR-010-08, BP-TR-011-02, BP-TR-011-03, BP-TR-011-04, BP-TR-011-05, BP-TR-011-06, BP-TR-011-07, BP-TR-011-08, BP-TR-011-09, BP-TR-011-10, BP-TR-011-11, BP-C-0103, BP-C-0104, BP-C-0105, BP-C-0106, BP-C-0107, BP-C-0108, BP-C-0109, BP-C-0110, BP-C-0111, BP-C-0112, BP-C-0113, BP-C-0114, BP-C-0115, BP-C-0116, BP-C-0117, BP-C-0118, BP-C-0119, BP-C-0120, BP-C-0121, BP-C-0122, BP-C-0123, BP-C-0124, BP-C-0125 | 259→306 | 1374→1327 | 86 | 86/0/0 | 0 |
 
 ## کنترل‌های ماشینی
 
@@ -49,17 +50,17 @@
 | تعداد Heading/Table | PASS | 326 Heading و 58 Table |
 | هش Git blob دو منبع | PASS | برابر manifest جاری |
 | SHA-256 دو منبع | PASS | با اثر انگشت graph پین‌شده تطبیق داده شد |
-| محدوده‌های متنی و سطرهای جدول | PARTIAL | 259 از 1633 Candidate بررسی شده؛ 1374 باقی است |
+| محدوده‌های متنی و سطرهای جدول | PARTIAL | 306 از 1633 Candidate بررسی شده؛ 1327 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 217 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 165 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 303 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 212 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9122؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9312؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3708 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 196 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 282 obligation dispositions mapped; remaining candidates are pending |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -72,7 +73,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labels فقط سرنخ‌اند. تا این اجرا، 259 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 217 Atomic Obligation ثبت شده؛ 1374 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 306 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 303 Atomic Obligation ثبت شده؛ 1327 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 
@@ -83,4 +84,4 @@ Rule-based labels فقط سرنخ‌اند. تا این اجرا، 259 از 1633
 
 ## مرحلهٔ بعد
 
-ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-TR-008-02` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
+ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-TR-012-02` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
