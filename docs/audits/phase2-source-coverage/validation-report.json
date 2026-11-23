@@ -41,15 +41,15 @@
     "coverage_gap_records": 658,
     "open_decision_gap_records": 45,
     "candidate_records_semantically_reviewed": 1033,
-    "atomic_obligations_extracted_and_verified": 887,
-    "approved_obligations_verified": 827,
+    "atomic_obligations_extracted_and_verified": 891,
+    "approved_obligations_verified": 831,
     "open_decisions_verified": 60,
-    "atomic_obligation_records": 887,
+    "atomic_obligation_records": 891,
     "descriptive_units_verified": 364,
-    "verified_covered_obligations": 648,
-    "partially_covered_obligations": 179,
-    "candidate_rows_marked_covered": 261,
-    "candidate_rows_marked_partial": 210,
+    "verified_covered_obligations": 663,
+    "partially_covered_obligations": 168,
+    "candidate_rows_marked_covered": 266,
+    "candidate_rows_marked_partial": 205,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 600,
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 10270,
+      "checked": 10320,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -169,7 +169,7 @@
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 898,
+      "checked": 899,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -199,7 +199,7 @@
       "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 887,
+      "checked": 891,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -856,8 +856,8 @@
       "pending_before": 1191,
       "pending_after": 1190,
       "atomic_obligations": 5,
-      "covered": 2,
-      "partial": 3,
+      "covered": 3,
+      "partial": 2,
       "uncovered": 0,
       "open_decisions": 1
     },
@@ -895,8 +895,8 @@
       "pending_before": 1180,
       "pending_after": 1179,
       "atomic_obligations": 5,
-      "covered": 2,
-      "partial": 3,
+      "covered": 3,
+      "partial": 2,
       "uncovered": 0,
       "open_decisions": 1
     },
@@ -911,8 +911,8 @@
       "pending_before": 1179,
       "pending_after": 1177,
       "atomic_obligations": 3,
-      "covered": 2,
-      "partial": 1,
+      "covered": 3,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -926,8 +926,8 @@
       "pending_before": 1177,
       "pending_after": 1176,
       "atomic_obligations": 5,
-      "covered": 4,
-      "partial": 1,
+      "covered": 5,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -971,8 +971,8 @@
       "pending_before": 1174,
       "pending_after": 1173,
       "atomic_obligations": 1,
-      "covered": 0,
-      "partial": 1,
+      "covered": 1,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -986,8 +986,8 @@
       "pending_before": 1173,
       "pending_after": 1172,
       "atomic_obligations": 7,
-      "covered": 5,
-      "partial": 2,
+      "covered": 7,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -1001,8 +1001,8 @@
       "pending_before": 1172,
       "pending_after": 1171,
       "atomic_obligations": 5,
-      "covered": 1,
-      "partial": 4,
+      "covered": 4,
+      "partial": 1,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -1608,9 +1608,9 @@
       "reviewed_after": 958,
       "pending_before": 750,
       "pending_after": 675,
-      "atomic_obligations": 76,
-      "covered": 7,
-      "partial": 69,
+      "atomic_obligations": 80,
+      "covered": 12,
+      "partial": 68,
       "uncovered": 0,
       "open_decisions": 0
     },
