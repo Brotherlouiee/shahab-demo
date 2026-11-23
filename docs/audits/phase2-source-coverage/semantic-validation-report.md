@@ -18,12 +18,12 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 533 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 65 ردیف مثال و 196 نگاشت معنایی بررسی‌شده |
-| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 320 از 470 ردیف جدول، 1 از 27 بلوک fenced |
-| Candidateهای pending review | 1100؛ pending بودن به‌تنهایی شکاف قطعی نیست |
-| رکوردهای Gap Register | 1133؛ 1100 بازبینی محتوایی + 33 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 460 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 460/52/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 548 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 65 ردیف مثال و 209 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 11 از 1136 محدودهٔ متن، 335 از 470 ردیف جدول، 1 از 27 بلوک fenced |
+| Candidateهای pending review | 1085؛ pending بودن به‌تنهایی شکاف قطعی نیست |
+| رکوردهای Gap Register | 1121؛ 1085 بازبینی محتوایی + 36 تصمیم باز |
+| Atomic Obligationهای دارای نگاشت Covered | 462 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 462/64/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -59,6 +59,7 @@
 | BLUEPRINT-R1-DATA-BOUNDARY-001 | BP-C-0381 | 460→461 | 1173→1172 | 7 | 5/2/0 | 0 |
 | RAG-R1-SCOPE-2026-11-23-01 | BP-C-0382 | 461→462 | 1172→1171 | 5 | 1/4/0 | 0 |
 | BLUEPRINT-APPENDIX-EVIDENCE-AND-REUSE-001 | BP-TR-032-02, BP-TR-032-03, BP-TR-032-04, BP-TR-032-05, BP-TR-032-06, BP-TR-032-07, BP-TR-032-08, BP-TR-032-09, BP-TR-032-10, BP-TR-032-11, BP-TR-032-12, BP-TR-032-13, BP-TR-032-14, BP-TR-032-15, BP-TR-034-02, BP-TR-034-03, BP-TR-034-04, BP-TR-034-05, BP-TR-034-06, BP-TR-034-07, BP-TR-036-02, BP-TR-036-03, BP-TR-036-04, BP-TR-036-05, BP-TR-036-06, BP-TR-038-02, BP-TR-038-03, BP-TR-038-04, BP-TR-038-05, BP-TR-038-06, BP-TR-038-07, BP-TR-038-08, BP-TR-038-09, BP-TR-039-02, BP-TR-039-03, BP-TR-039-04, BP-TR-039-05, BP-TR-039-06, BP-TR-039-07, BP-TR-039-08, BP-TR-039-09, BP-TR-039-10, BP-TR-039-11, BP-TR-040-02, BP-TR-040-03, BP-TR-040-04, BP-TR-040-05, BP-TR-040-06, BP-TR-040-07, BP-TR-040-08, BP-TR-041-02, BP-TR-041-03, BP-TR-041-04, BP-TR-041-05, BP-TR-041-06, BP-TR-041-07, BP-TR-041-08, BP-TR-041-09, BP-TR-041-10, BP-TR-041-11, BP-TR-041-12, BP-TR-042-02, BP-TR-042-03, BP-TR-042-04, BP-TR-042-05, BP-TR-042-06, BP-TR-043-02, BP-TR-035-03, BP-TR-035-05, BP-TR-035-08, BP-TR-035-09 | 462→533 | 1171→1100 | 10 | 3/7/0 | 0 |
+| BLUEPRINT-FD-O5-COMPLIANCE-002 | BP-TR-031-02, BP-TR-031-03, BP-TR-031-04, BP-TR-033-02, BP-TR-033-03, BP-TR-033-04, BP-TR-033-05, BP-TR-033-06, BP-TR-033-07, BP-TR-033-08, BP-TR-033-09, BP-TR-033-10, BP-TR-033-11, BP-TR-037-02, BP-TR-037-03 | 533→548 | 1100→1085 | 19 | 2/17/0 | 5 |
 
 ## کنترل‌های ماشینی
 
@@ -67,17 +68,17 @@
 | تعداد Heading/Table | PASS | 326 Heading و 58 Table |
 | هش Git blob دو منبع | PASS | برابر manifest جاری |
 | SHA-256 دو منبع | PASS | با اثر انگشت graph پین‌شده تطبیق داده شد |
-| محدوده‌های متنی و سطرهای جدول | PARTIAL | 533 از 1633 Candidate بررسی شده؛ 1100 باقی است |
+| محدوده‌های متنی و سطرهای جدول | PARTIAL | 548 از 1633 Candidate بررسی شده؛ 1085 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 539 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 439 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 558 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 454 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9904؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 9986؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 3748 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 512 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 526 obligation dispositions mapped; remaining candidates are pending |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -90,7 +91,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labels فقط سرنخ‌اند. تا این اجرا، 533 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 539 Atomic Obligation ثبت شده؛ 1100 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 548 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 558 Atomic Obligation ثبت شده؛ 1085 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 
@@ -101,4 +102,4 @@ Rule-based labels فقط سرنخ‌اند. تا این اجرا، 533 از 1633
 
 ## مرحلهٔ بعد
 
-ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-TR-031-02` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
+ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-TR-033-12` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
