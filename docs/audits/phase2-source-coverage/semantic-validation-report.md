@@ -22,8 +22,8 @@
 | تعیین‌تکلیف Candidateهای متنی | 14 از 1136 محدودهٔ متن، 470 از 470 ردیف جدول، 27 از 27 بلوک fenced |
 | Candidateهای pending review | 600؛ pending بودن به‌تنهایی شکاف قطعی نیست |
 | رکوردهای Gap Register | 658؛ 613 بازبینی محتوایی + 45 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 680 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 680/151/0 |
+| Atomic Obligationهای دارای نگاشت Covered | 688 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 688/143/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -110,3 +110,8 @@ Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1033 از 163
 ## مرحلهٔ بعد
 
 ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `BP-C-0244` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
+
+
+## بازبینی Partialها — 2026-11-23
+
+۸ الزام اتمی با شواهد Plan زنده بازسنجی و Covered شدند؛ دو Candidate تک‌الزامی نیز پوشش برنامه کامل گرفتند. معیارهای C11b/C13a و مرز Monitoring با release فاز سوم صریح شدند. اجرای محصول `NOT_EXECUTED` است. Ledger: ۶۸۸ Covered، ۱۴۳ Partial، ۶۰ Open Decision از ۸۹۱ الزام؛ ماتریس `INCOMPLETE` و پوشش کلی `INDETERMINATE`.

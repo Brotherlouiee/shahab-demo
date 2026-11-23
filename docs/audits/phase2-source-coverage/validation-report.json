@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "d3bc93dcfc054d460592a45a1b22caffe284cadc",
+  "plan_blob_sha": "f1e32d3b94089778187eace6bc34431fe99a28e7",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -46,10 +46,10 @@
     "open_decisions_verified": 60,
     "atomic_obligation_records": 891,
     "descriptive_units_verified": 364,
-    "verified_covered_obligations": 680,
-    "partially_covered_obligations": 151,
-    "candidate_rows_marked_covered": 279,
-    "candidate_rows_marked_partial": 192,
+    "verified_covered_obligations": 688,
+    "partially_covered_obligations": 143,
+    "candidate_rows_marked_covered": 281,
+    "candidate_rows_marked_partial": 190,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 600,
