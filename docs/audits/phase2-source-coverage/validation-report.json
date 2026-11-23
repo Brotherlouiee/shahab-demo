@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "3426482a3cbfe2e7d88bde5e11ac5246f87944d5",
+  "plan_blob_sha": "9fd17576c9975203249e335b0c5803e5866b53de",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -32,30 +32,30 @@
     "code_blocks": 27,
     "code_blocks_semantically_reviewed": 1,
     "candidate_records": 1633,
-    "candidate_records_pending_semantic_review": 1180,
+    "candidate_records_pending_semantic_review": 1173,
     "structural_source_units_dispositioned_as_locators": 384,
     "packages_indexed": 36,
     "package_index_rows": 36,
     "execution_trace_rows": 1633,
-    "candidate_review_pending_rows": 1180,
-    "coverage_gap_records": 1212,
-    "open_decision_gap_records": 32,
-    "candidate_records_semantically_reviewed": 453,
-    "atomic_obligations_extracted_and_verified": 497,
-    "approved_obligations_verified": 454,
-    "open_decisions_verified": 43,
-    "atomic_obligation_records": 497,
-    "descriptive_units_verified": 112,
-    "verified_covered_obligations": 437,
-    "partially_covered_obligations": 34,
+    "candidate_review_pending_rows": 1173,
+    "coverage_gap_records": 1206,
+    "open_decision_gap_records": 33,
+    "candidate_records_semantically_reviewed": 460,
+    "atomic_obligations_extracted_and_verified": 517,
+    "approved_obligations_verified": 473,
+    "open_decisions_verified": 44,
+    "atomic_obligation_records": 517,
+    "descriptive_units_verified": 114,
+    "verified_covered_obligations": 451,
+    "partially_covered_obligations": 39,
     "candidate_rows_marked_covered": 139,
-    "candidate_rows_marked_partial": 46,
+    "candidate_rows_marked_partial": 51,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
-    "semantic_reviews_pending": 1180,
+    "semantic_reviews_pending": 1173,
     "unverified_normative_cue_suggestions": 506,
     "unverified_open_decision_cue_suggestions": 19,
-    "needs_review_candidates": 1180,
+    "needs_review_candidates": 1173,
     "classification_suggestions_unverified": {
       "DESCRIPTIVE": 125,
       "NEEDS_REVIEW": 762,
@@ -67,8 +67,8 @@
       "OUT_OF_SCOPE": 1
     },
     "review_statuses": {
-      "SEMANTICALLY_REVIEWED": 453,
-      "REVIEW_REQUIRED": 1180
+      "SEMANTICALLY_REVIEWED": 460,
+      "REVIEW_REQUIRED": 1173
     }
   },
   "controls": {
@@ -109,7 +109,7 @@
       "examples": []
     },
     "atomic_obligation_id_uniqueness": {
-      "checked": 143,
+      "checked": 148,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -157,19 +157,19 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 9588,
+      "checked": 9724,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "package_index_reference_integrity": {
-      "checked": 3743,
+      "checked": 3748,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 1003,
+      "checked": 1007,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -193,19 +193,19 @@
       "examples": []
     },
     "semantic_review_disposition_integrity": {
-      "checked": 453,
+      "checked": 460,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 497,
+      "checked": 517,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "semantic_batch_ledger_integrity": {
-      "checked": 359,
+      "checked": 366,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -829,4 +829,161 @@
       "covered": 4,
       "partial": 1,
       "uncovered": 0,
- 
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-PHASE-2-CATALOG-SCOPE-001",
+      "candidate_ids": [
+        "BP-TR-027-03"
+      ],
+      "reviewed_before": 441,
+      "reviewed_after": 442,
+      "pending_before": 1192,
+      "pending_after": 1191,
+      "atomic_obligations": 9,
+      "covered": 9,
+      "partial": 0,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-PHASE-3-ASSISTANT-SCOPE-001",
+      "candidate_ids": [
+        "BP-TR-027-04"
+      ],
+      "reviewed_before": 442,
+      "reviewed_after": 443,
+      "pending_before": 1191,
+      "pending_after": 1190,
+      "atomic_obligations": 5,
+      "covered": 2,
+      "partial": 3,
+      "uncovered": 0,
+      "open_decisions": 1
+    },
+    {
+      "batch_id": "BLUEPRINT-PROPOSED-RELEASE-TEMPLATE-001",
+      "candidate_ids": [
+        "BP-TR-029-02",
+        "BP-TR-029-03",
+        "BP-TR-029-04",
+        "BP-TR-029-05",
+        "BP-TR-029-06",
+        "BP-TR-029-07",
+        "BP-TR-029-08",
+        "BP-TR-029-09",
+        "BP-TR-029-10",
+        "BP-TR-029-11"
+      ],
+      "reviewed_before": 443,
+      "reviewed_after": 453,
+      "pending_before": 1190,
+      "pending_after": 1180,
+      "atomic_obligations": 0,
+      "covered": 0,
+      "partial": 0,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-PHASE-3-DETAIL-001",
+      "candidate_ids": [
+        "BP-C-0385"
+      ],
+      "reviewed_before": 453,
+      "reviewed_after": 454,
+      "pending_before": 1180,
+      "pending_after": 1179,
+      "atomic_obligations": 5,
+      "covered": 2,
+      "partial": 3,
+      "uncovered": 0,
+      "open_decisions": 1
+    },
+    {
+      "batch_id": "BLUEPRINT-DISCOVERY-RELEASE-GATES-001",
+      "candidate_ids": [
+        "BP-C-0386",
+        "BP-C-0387"
+      ],
+      "reviewed_before": 454,
+      "reviewed_after": 456,
+      "pending_before": 1179,
+      "pending_after": 1177,
+      "atomic_obligations": 3,
+      "covered": 2,
+      "partial": 1,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-PHASE-1-SUPERAPP-DETAIL-001",
+      "candidate_ids": [
+        "BP-C-0383"
+      ],
+      "reviewed_before": 456,
+      "reviewed_after": 457,
+      "pending_before": 1177,
+      "pending_after": 1176,
+      "atomic_obligations": 5,
+      "covered": 4,
+      "partial": 1,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-PHASE-2-CATALOG-DETAIL-001",
+      "candidate_ids": [
+        "BP-C-0384"
+      ],
+      "reviewed_before": 457,
+      "reviewed_after": 458,
+      "pending_before": 1176,
+      "pending_after": 1175,
+      "atomic_obligations": 6,
+      "covered": 6,
+      "partial": 0,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-ARCH-OPEN-QUESTION-001",
+      "candidate_ids": [
+        "BP-C-0380"
+      ],
+      "reviewed_before": 458,
+      "reviewed_after": 459,
+      "pending_before": 1175,
+      "pending_after": 1174,
+      "atomic_obligations": 0,
+      "covered": 0,
+      "partial": 0,
+      "uncovered": 0,
+      "open_decisions": 0
+    },
+    {
+      "batch_id": "BLUEPRINT-RELEASE-DOSSIER-GATE-001",
+      "candidate_ids": [
+        "BP-C-0388"
+      ],
+      "reviewed_before": 459,
+      "reviewed_after": 460,
+      "pending_before": 1174,
+      "pending_after": 1173,
+      "atomic_obligations": 1,
+      "covered": 0,
+      "partial": 1,
+      "uncovered": 0,
+      "open_decisions": 0
+    }
+  ],
+  "matrix_build_status": "INCOMPLETE",
+  "program_coverage_status": "INDETERMINATE",
+  "limitations": [
+    "Rule-based classifications are discovery aids and are not accepted normative decisions.",
+    "Only individually evidenced rows listed in the semantic review ledger may carry a verified mapping; remaining mappings are unverified.",
+    "Table rows are enumerated, but compound-row splitting and semantic status require source review.",
+    "The matrix contains 1633 candidate records; 1173 still require semantic review.",
+    "Graph node overlap is a retrieval reference, not semantic entailment."
+  ]
+}
