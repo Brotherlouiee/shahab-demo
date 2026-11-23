@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "d500e717ae73c128f5ff33a8e35d04b2072828b0",
+  "plan_blob_sha": "fbab2ad7e0366907772fa02198856178ec0c3ba7",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -46,10 +46,10 @@
     "open_decisions_verified": 58,
     "atomic_obligation_records": 883,
     "descriptive_units_verified": 364,
-    "verified_covered_obligations": 627,
-    "partially_covered_obligations": 215,
-    "candidate_rows_marked_covered": 245,
-    "candidate_rows_marked_partial": 226,
+    "verified_covered_obligations": 632,
+    "partially_covered_obligations": 210,
+    "candidate_rows_marked_covered": 250,
+    "candidate_rows_marked_partial": 221,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 600,
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 10206,
+      "checked": 10246,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -1276,8 +1276,8 @@
       "pending_before": 1013,
       "pending_after": 952,
       "atomic_obligations": 94,
-      "covered": 79,
-      "partial": 15,
+      "covered": 82,
+      "partial": 12,
       "uncovered": 0,
       "open_decisions": 1
     },
@@ -1350,8 +1350,8 @@
       "pending_before": 952,
       "pending_after": 892,
       "atomic_obligations": 17,
-      "covered": 11,
-      "partial": 6,
+      "covered": 13,
+      "partial": 4,
       "uncovered": 0,
       "open_decisions": 0
     },
