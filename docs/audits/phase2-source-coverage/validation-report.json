@@ -47,7 +47,7 @@
     "atomic_obligation_records": 883,
     "descriptive_units_verified": 364,
     "verified_covered_obligations": 632,
-    "partially_covered_obligations": 210,
+    "partially_covered_obligations": 200,
     "candidate_rows_marked_covered": 250,
     "candidate_rows_marked_partial": 221,
     "candidate_rows_marked_uncovered": 0,
