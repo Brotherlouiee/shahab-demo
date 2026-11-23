@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "ca74c2bc88673b270ffe5f4585516d39ae743472",
+  "plan_blob_sha": "d500e717ae73c128f5ff33a8e35d04b2072828b0",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -46,10 +46,10 @@
     "open_decisions_verified": 58,
     "atomic_obligation_records": 883,
     "descriptive_units_verified": 364,
-    "verified_covered_obligations": 537,
-    "partially_covered_obligations": 305,
-    "candidate_rows_marked_covered": 178,
-    "candidate_rows_marked_partial": 293,
+    "verified_covered_obligations": 627,
+    "partially_covered_obligations": 215,
+    "candidate_rows_marked_covered": 245,
+    "candidate_rows_marked_partial": 226,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 600,
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 10158,
+      "checked": 10206,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -1201,8 +1201,8 @@
       "pending_before": 1085,
       "pending_after": 1013,
       "atomic_obligations": 34,
-      "covered": 0,
-      "partial": 34,
+      "covered": 26,
+      "partial": 8,
       "uncovered": 0,
       "open_decisions": 8
     },
@@ -1276,8 +1276,8 @@
       "pending_before": 1013,
       "pending_after": 952,
       "atomic_obligations": 94,
-      "covered": 75,
-      "partial": 19,
+      "covered": 79,
+      "partial": 15,
       "uncovered": 0,
       "open_decisions": 1
     },
@@ -1350,8 +1350,8 @@
       "pending_before": 952,
       "pending_after": 892,
       "atomic_obligations": 17,
-      "covered": 0,
-      "partial": 17,
+      "covered": 11,
+      "partial": 6,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -1434,8 +1434,8 @@
       "pending_before": 892,
       "pending_after": 822,
       "atomic_obligations": 13,
-      "covered": 0,
-      "partial": 13,
+      "covered": 13,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
@@ -1520,8 +1520,8 @@
       "pending_before": 822,
       "pending_after": 750,
       "atomic_obligations": 37,
-      "covered": 0,
-      "partial": 37,
+      "covered": 36,
+      "partial": 1,
       "uncovered": 0,
       "open_decisions": 0
     },
