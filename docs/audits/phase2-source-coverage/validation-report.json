@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "fbab2ad7e0366907772fa02198856178ec0c3ba7",
+  "plan_blob_sha": "9022d7953e8f86e6fbd07ed5936dd597363e9384",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -42,14 +42,14 @@
     "open_decision_gap_records": 45,
     "candidate_records_semantically_reviewed": 1033,
     "atomic_obligations_extracted_and_verified": 883,
-    "approved_obligations_verified": 825,
-    "open_decisions_verified": 58,
+    "approved_obligations_verified": 823,
+    "open_decisions_verified": 60,
     "atomic_obligation_records": 883,
     "descriptive_units_verified": 364,
-    "verified_covered_obligations": 632,
-    "partially_covered_obligations": 193,
-    "candidate_rows_marked_covered": 250,
-    "candidate_rows_marked_partial": 221,
+    "verified_covered_obligations": 641,
+    "partially_covered_obligations": 182,
+    "candidate_rows_marked_covered": 258,
+    "candidate_rows_marked_partial": 213,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 600,
@@ -157,13 +157,13 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 10246,
+      "checked": 10249,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "package_index_reference_integrity": {
-      "checked": 3997,
+      "checked": 4001,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -493,10 +493,10 @@
       "pending_before": 1435,
       "pending_after": 1413,
       "atomic_obligations": 22,
-      "covered": 14,
-      "partial": 8,
+      "covered": 15,
+      "partial": 7,
       "uncovered": 0,
-      "open_decisions": 4
+      "open_decisions": 6
     },
     {
       "batch_id": "BLUEPRINT-ROUTER-EXAMPLES-001",
@@ -1276,8 +1276,8 @@
       "pending_before": 1013,
       "pending_after": 952,
       "atomic_obligations": 94,
-      "covered": 82,
-      "partial": 12,
+      "covered": 89,
+      "partial": 5,
       "uncovered": 0,
       "open_decisions": 1
     },
@@ -1520,8 +1520,8 @@
       "pending_before": 822,
       "pending_after": 750,
       "atomic_obligations": 37,
-      "covered": 36,
-      "partial": 1,
+      "covered": 37,
+      "partial": 0,
       "uncovered": 0,
       "open_decisions": 0
     },
