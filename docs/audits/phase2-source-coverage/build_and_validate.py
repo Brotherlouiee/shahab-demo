@@ -695,6 +695,21 @@ def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hash
     write_csv(COVERAGE / "coverage-gap-register.csv", gap_fields, gap_rows)
 
 
+def source_locator_matches(evidence: str, candidate: dict[str, Any]) -> bool:
+    """Accept a locator only when its exact line/range stays inside its source unit."""
+    locator = evidence.split(";", 1)[0].strip()
+    match = re.fullmatch(r"(.+):([0-9]+)(?:-([0-9]+))? [(]([^)]+)[)]", locator)
+    if not match:
+        return False
+    document, first, last, unit_id = match.groups()
+    lo, hi = int(first), int(last or first)
+    return (
+        document == candidate.get("document")
+        and unit_id == candidate.get("source_unit_id")
+        and int(candidate["start_line"]) <= lo <= hi <= int(candidate["end_line"])
+    )
+
+
 def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[dict[str, str]], inventory: list[dict[str, Any]], candidates: list[dict[str, Any]], source_hashes: dict[str, dict[str, Any]], graph_nodes: list[dict[str, Any]], structural_errors: list[str]) -> dict[str, dict[str, Any]]:
     graph_ids = {n["id"] for n in graph_nodes if n.get("id")}
     unit_ids = [r["source_unit_id"] for r in inventory]
@@ -795,7 +810,7 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             disposition_errors.append(f"unknown candidate {review['candidate_id']}")
             continue
         expected=f"{row['document']}:{row['start_line']} ({row['source_unit_id']})"
-        if review.get("source_evidence","").split(";",1)[0] != expected:
+        if not source_locator_matches(review.get("source_evidence",""), row):
             disposition_errors.append(f"source locator drift {review['candidate_id']}")
         valid_header = row["candidate_class"] == "TABLE_HEADER" and review.get("semantic_disposition") == "STRUCTURAL_HEADER_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
         valid_separator = row["candidate_class"] == "TEXT_RANGE_CANDIDATE" and row["source_excerpt"].strip() == "---" and review.get("semantic_disposition") == "MARKDOWN_HORIZONTAL_RULE_ONLY" and review.get("normative_status") == "NOT_APPLICABLE"
@@ -842,7 +857,7 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             atom_errors.append(f"unknown candidate {atom.get('candidate_id')}")
             continue
         expected=f"{candidate['document']}:{candidate['start_line']} ({candidate['source_unit_id']})"
-        if atom.get("source_evidence","").split(";",1)[0]!=expected:
+        if not source_locator_matches(atom.get("source_evidence",""), candidate):
             atom_errors.append(f"source locator drift {atom.get('atomic_obligation_id')}")
         if not all(atom.get(k,"").strip() for k in ("atomic_obligation_id","normalized_obligation","normative_status","coverage_status","source_evidence","review_rationale","reviewer","review_date")):
             atom_errors.append(f"missing obligation evidence {atom.get('atomic_obligation_id')}")
