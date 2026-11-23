@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "c7eacd8277426933a729c79a631a79074b3c564a",
+  "plan_blob_sha": "b7c1283a1d08670ec2b1c21eb33cc58df1609ef9",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -46,10 +46,10 @@
     "open_decisions_verified": 83,
     "atomic_obligation_records": 1019,
     "descriptive_units_verified": 386,
-    "verified_covered_obligations": 800,
-    "partially_covered_obligations": 136,
-    "candidate_rows_marked_covered": 398,
-    "candidate_rows_marked_partial": 178,
+    "verified_covered_obligations": 801,
+    "partially_covered_obligations": 135,
+    "candidate_rows_marked_covered": 399,
+    "candidate_rows_marked_partial": 177,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 450,
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 11482,
+      "checked": 11496,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -200,9 +200,11 @@
     },
     "atomic_obligation_ledger_integrity": {
       "checked": 1019,
-      "errors": 0,
-      "result": "PASS",
-      "examples": []
+      "errors": 1,
+      "result": "FAIL",
+      "examples": [
+        "source locator drift AO:BP-C-0039:01"
+      ]
     },
     "semantic_batch_ledger_integrity": {
       "checked": 1096,
@@ -1609,8 +1611,8 @@
       "pending_before": 750,
       "pending_after": 675,
       "atomic_obligations": 80,
-      "covered": 12,
-      "partial": 68,
+      "covered": 13,
+      "partial": 67,
       "uncovered": 0,
       "open_decisions": 0
     },
