@@ -1,6 +1,6 @@
 {
   "baseline_commit": "e69a483f11058711048f1ba7b15b5225e33c7fc9",
-  "plan_blob_sha": "a3e31a53f5809960c2444e66770a529702d0ac98",
+  "plan_blob_sha": "2d0a305862e7158227d868b562d474ee36315095",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -41,12 +41,12 @@
     "coverage_gap_records": 1258,
     "open_decision_gap_records": 31,
     "candidate_records_semantically_reviewed": 406,
-    "atomic_obligations_extracted_and_verified": 469,
-    "approved_obligations_verified": 427,
+    "atomic_obligations_extracted_and_verified": 478,
+    "approved_obligations_verified": 436,
     "open_decisions_verified": 42,
-    "atomic_obligation_records": 469,
+    "atomic_obligation_records": 478,
     "descriptive_units_verified": 78,
-    "verified_covered_obligations": 413,
+    "verified_covered_obligations": 422,
     "partially_covered_obligations": 31,
     "candidate_rows_marked_covered": 139,
     "candidate_rows_marked_partial": 43,
@@ -157,13 +157,13 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 9458,
+      "checked": 9502,
       "errors": 0,
       "result": "PASS",
       "examples": []
     },
     "package_index_reference_integrity": {
-      "checked": 3733,
+      "checked": 3739,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -199,7 +199,7 @@
       "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 469,
+      "checked": 478,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -748,8 +748,8 @@
       "reviewed_after": 406,
       "pending_before": 1279,
       "pending_after": 1227,
-      "atomic_obligations": 44,
-      "covered": 43,
+      "atomic_obligations": 53,
+      "covered": 52,
       "partial": 1,
       "uncovered": 0,
       "open_decisions": 1
