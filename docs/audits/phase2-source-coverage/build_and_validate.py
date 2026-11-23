@@ -802,12 +802,13 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
         valid_example = row["candidate_class"] in {"TABLE_ROW_CANDIDATE", "TEXT_RANGE_CANDIDATE", "UNCLASSIFIED_CANDIDATE", "NORMATIVE_CANDIDATE"} and review.get("semantic_disposition") in {"EXAMPLE_CONTEXT_ROW", "EXAMPLE_CONTEXT_CONTENT"} and review.get("normative_status") == "EXAMPLE" and bool(review.get("review_rationale", "").strip())
         valid_descriptive = row["candidate_class"] in {"TABLE_ROW_CANDIDATE", "TEXT_RANGE_CANDIDATE", "CODE_BLOCK_CANDIDATE", "UNCLASSIFIED_CANDIDATE", "NORMATIVE_CANDIDATE"} and review.get("semantic_disposition") in {"DESCRIPTIVE_CONTEXT_ONLY", "QUESTION_CONTEXT_ONLY", "SOURCE_REFERENCE_ONLY"} and review.get("normative_status") == "DESCRIPTIVE" and bool(review.get("review_rationale", "").strip())
         mapped_status=review.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"}
-        open_decision=review.get("normative_status")=="NORMATIVE_OPEN_DECISION" and review.get("coverage_status")=="VERIFIED_PARTIAL"
+        open_decision=review.get("normative_status")=="NORMATIVE_OPEN_DECISION" and review.get("coverage_status") in {"VERIFIED_PARTIAL","OPEN_DECISION"}
         candidate_atoms=[a for a in atom_rows if a.get("candidate_id")==review["candidate_id"]]
         mixed_atoms={a.get("normative_status") for a in candidate_atoms}
         mixed_decomposed=review.get("normative_status")=="MIXED" and bool(candidate_atoms) and {"NORMATIVE_APPROVED","NORMATIVE_OPEN_DECISION"}.issubset(mixed_atoms)
         valid_mapping=mapped_status and bool(review.get("related_packages")) and bool(review.get("requirement_ids")) and bool(review.get("task_ids")) and bool(review.get("ac_test_ids")) and bool(review.get("plan_evidence")) and (review.get("normative_status")=="NORMATIVE_APPROVED" or open_decision or mixed_decomposed)
-        if valid_mapping:
+        explicit_gap=(review.get("coverage_status")=="VERIFIED_PARTIAL" and review.get("mapping_status") in {"UNMAPPED_GAP","INCOMPLETE_CROSSWALK"} and review.get("normative_status")=="NORMATIVE_APPROVED" and bool(review.get("atomic_obligation_id")))
+        if explicit_gap or valid_mapping:
             cited=set()
             for lo,hi in re.findall(r":(\d+)(?:-(\d+))?",review.get("plan_evidence","")):
                 a=int(lo);b=int(hi or lo)
@@ -817,10 +818,13 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
                 cited.update(range(a,b+1))
             cited_text="\n".join(plan_lines[n-1] for n in cited)
             mapped_ids=set(review.get("requirement_ids","").split(";")+review.get("task_ids","").split(";")+review.get("ac_test_ids","").split(";"))
-            if not cited or any(item and item not in cited_text for item in mapped_ids):
+            if (valid_mapping and not cited) or any(item and item not in cited_text for item in mapped_ids):
                 valid_mapping=False
+            if explicit_gap and any(item and item not in cited_text for item in mapped_ids):
+                explicit_gap=False
         valid_na=(valid_header or valid_separator or valid_example or valid_descriptive) and review.get("coverage_status")=="NOT_APPLICABLE"
-        if not (valid_na or valid_mapping):
+        valid_open=review.get("semantic_disposition")=="OPEN_DECISION" and review.get("normative_status")=="NORMATIVE_OPEN_DECISION" and review.get("coverage_status")=="OPEN_DECISION" and bool(review.get("review_rationale",""))
+        if not (valid_na or valid_mapping or explicit_gap or valid_open):
             disposition_errors.append(f"invalid disposition or semantic mapping {review['candidate_id']}")
         if row["normative_status"] != review.get("normative_status") or row["review_status"] != "SEMANTICALLY_REVIEWED":
             disposition_errors.append(f"candidate does not reflect ledger disposition {review['candidate_id']}")
@@ -844,12 +848,13 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
             atom_errors.append(f"missing obligation evidence {atom.get('atomic_obligation_id')}")
         if atom.get("normative_status") not in valid_atom_statuses or atom.get("coverage_status") not in valid_atom_coverage:
             atom_errors.append(f"invalid obligation status {atom.get('atomic_obligation_id')}")
+        mapping_gap=atom.get("coverage_status")=="VERIFIED_PARTIAL" and atom.get("mapping_status") in {"UNMAPPED_GAP","INCOMPLETE_CROSSWALK"}
         if atom.get("coverage_status") in {"VERIFIED_COVERED","VERIFIED_PARTIAL","VERIFIED_UNCOVERED"}:
             mapped=[x for k in ("related_packages","requirement_ids","task_ids","ac_test_ids","plan_evidence") for x in atom.get(k,"").split(";") if x.strip()]
-            if len(mapped)<5:
+            if not mapping_gap and len(mapped)<5:
                 atom_errors.append(f"incomplete mapping {atom.get('atomic_obligation_id')}")
             cited=set()
-            for ref in atom.get("plan_evidence","").split(";"):
+            for ref in filter(None, atom.get("plan_evidence","").split(";")):
                 m=re.search(r":(\d+)(?:-(\d+))?$",ref.strip())
                 if not m: atom_errors.append(f"invalid plan locator {atom.get('atomic_obligation_id')}: {ref}"); continue
                 lo,hi=int(m.group(1)),int(m.group(2) or m.group(1))
@@ -858,7 +863,7 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
                 cited.update(range(lo,hi+1))
             cited_text="\n".join(plan_lines[n-1] for n in cited)
             identifiers=[x for k in ("requirement_ids","story_enabler_ids","task_ids","ac_test_ids") for x in atom.get(k,"").split(";") if x.strip()]
-            if not cited or any(identifier not in cited_text for identifier in identifiers):
+            if ((not mapping_gap and not cited) or any(identifier not in cited_text for identifier in identifiers)):
                 atom_errors.append(f"plan evidence does not contain mapped IDs {atom.get('atomic_obligation_id')}")
         elif atom.get("coverage_status")=="OPEN_DECISION" and not atom.get("decision_reference","").strip():
             atom_errors.append(f"open obligation lacks decision reference {atom.get('atomic_obligation_id')}")
