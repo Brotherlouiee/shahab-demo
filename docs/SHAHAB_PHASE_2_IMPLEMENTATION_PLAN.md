@@ -4704,6 +4704,14 @@ JSONهای موجود knowledge-graph/phase2-reference-docs از main در commi
 - TASK:CORE:C06:004 (T04): پرونده و ورودی امن؛ S01 نمایش پرونده؛ S02 secure input؛ S03 جداسازی log.
 - TASK:CORE:C06:005 (T05): اتصال Adviser و وضعیت مالکان؛ S01 C05b؛ S02 C14/C13b؛ S03 gate انتشار R1.
 - AC:CORE:C06:001–016 و TEST:CORE:C06:001–016، یک جفت برای هر Requirement. Oracleها به‌ترتیب: حوزه فعال قابل انتخاب؛ پیشنهاد نشست نسازد؛ رابط عمومی جدا؛ نقش مستقیم؛ Assistant خاموش؛ حوزه ثابت؛ نقش صریح؛ انتقال پس از اقدام؛ زمینه مجاز؛ مؤلفه مجاز؛ schema نامعتبر رد؛ status از API؛ پرونده باقی؛ secrets در transcript/log صفر؛ R1 فقط Adviser؛ رسید به مالک وصل. هر Test سه کیس (موفق، منفی، مرزی) دارد؛ 48 Test Case آینده. در این مأموریت اجرا نشده‌اند.
+- نگاشت‌های صریح AC/Test برای شناسه‌های مصرف‌شده در ماتریس منبع:
+  - AC:CORE:C06:001 / TEST:CORE:C06:001: خانه حوزه فعال را نشان می‌دهد؛ انتخاب حوزه غیرفعال یا نامعتبر تغییری در نشست نمی‌دهد.
+  - AC:CORE:C06:004 / TEST:CORE:C06:004: انتخاب نقش ثبت می‌شود؛ Adviser اجباری یا نقش استنباط‌شده از متن مدل پذیرفته نیست.
+  - AC:CORE:C06:008 / TEST:CORE:C06:008: مقصد خارج‌حوزه فقط پس از اقدام صریح کاربر فعال می‌شود؛ پیشنهاد مدل به‌تنهایی انتقال ایجاد نمی‌کند.
+  - AC:CORE:C06:010 / TEST:CORE:C06:010: قاب چت برای متن، کارت، فرم، نتیجه، وضعیت، تأیید و خطا slot نوع‌دار دارد؛ payload ناشناخته یا خارج از schema رد می‌شود.
+  - AC:CORE:C06:014 / TEST:CORE:C06:014: OTP/secret در transcript و log عمومی صفر است؛ مسیر ورودی امن آن را به متن مدل اضافه نمی‌کند.
+  - AC:CORE:C06:016 / TEST:CORE:C06:016: رسید/اعلان وضعیت و شناسه منبع را نشان می‌دهد؛ مالکیت ارسال/تاریخچه نزد C14/C13b باقی می‌ماند.
+  این‌ها معیارهای برنامه‌ای هستند؛ هیچ‌یک در این مأموریت به‌عنوان آزمون محصول اجرا نشده‌اند.
 
 #### وابستگی و Handoff
 
@@ -5641,6 +5649,7 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | AC / Test | شرط پذیرش قابل رد | Test Caseهای برنامه‌ای (موفق؛ خطا؛ مرزی) |
 |---|---|---|
 | `AC/TEST:C12A:001` | گروه‌های حساب تفکیک و هر ثبت به مالک/موضوع مالی معین وصل باشد. | T01: شارژ میان bank/custody liability توازن دارد؛ انتقال دو wallet درآمد نمی‌سازد؛ ثبت به حساب نامشخص بدون disposition رد/نگه‌داشته می‌شود. |
+| `AC:CORE:C12A:001` / `TEST:CORE:C12A:001` | گروه‌های حساب تفکیک و ثبت به مالک/موضوع مالی معین وصل باشد؛ ثبت نامشخص بدون disposition رد/نگه‌داشته شود. | T01: شارژ میان bank/custody liability توازن دارد؛ انتقال دو wallet درآمد نمی‌سازد؛ گروه حساب مصوب آزموده می‌شود. آزمون محصول اجرا نشده است. |
 | `AC/TEST:C12A:002` | همهٔ entryهای transaction توازن دارند؛ failure میان entryها هیچ بخشی را commit نمی‌کند. | T02: transaction متوازن commit؛ entry نامتوازن رد؛ failure پیش/میان entryها صفر اثر جزئی؛ gift account mapping تا تصمیم مسئول مالی متوقف می‌ماند. |
 | `AC/TEST:C12A:003` | فیلدهای هویت/منشأ/شرط و lineage جزء موجود و قابل ردیابی‌اند. | T03: انتقال چندمنشأ parent links را حفظ می‌کند؛ missing source ref رد؛ component منقضی/محدود روی مرز زمان بر مبنای policy مالک ارزیابی می‌شود. |
 | `AC/TEST:C12A:004` | update اجزا و entry یک اتمیک؛ مرز چندسامانه‌ای دارای coordination/recovery design قبل از activation است. | T04: rollback local transaction هر دو را برمی‌گرداند؛ قطع سامانه دوم وضعیت را نامعلوم/قابل‌بازیابی نگه می‌دارد؛ atomic API ادعای distributed atomicity نمی‌شود. |
@@ -7847,7 +7856,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `REQ:ASSISTANT:A03:004` | پیش از تحلیل، نسخه جاری D02 و هدف، حوزه، مجوز داده، رضایت و ارتباط با کاربر از ownerهایشان اعتبارسنجی می‌شوند؛ هر mismatch candidate را به توقف/نیاز به بررسی می‌برد. | B:946–950؛ C02 و owner سیاست |
 | `REQ:ASSISTANT:A03:005` | تحلیل و نتیجه قابل اطلاع‌رسانی فقط برای entitlement معتبر و capability فعال مجاز است؛ عدم دسترسی با پاسخ fail-closed پایان می‌یابد. | B:946–950، C04 contract؛ C04 owner |
 | `REQ:ASSISTANT:A03:006` | شواهد ناموجود، ناکافی یا منقضی، نتیجه را به تکمیل شواهد/پاسخ مشروط می‌برد و هشدار قطعی نمی‌سازد. | B:946–950؛ R evidence owner |
-| `REQ:ASSISTANT:A03:007` | Feedback به وضعیت/نتیجه مشاهده‌شده و مرجع معتبر آن وصل می‌شود و ادعای فراتر از همان evidence ندارد. | B:946–953، 1249–1252؛ Assistant |
+| `REQ:ASSISTANT:A03:007` | Feedback یک مسئلهٔ واقعی را از outcome مشاهده‌شده تشخیص می‌دهد، به مرجع معتبر owner وصل می‌کند و اقدام اصلاحی قابل اجرا را فقط در حدی پیشنهاد می‌دهد که evidence آن را پشتیبانی کند؛ اگر راهکار هنوز اثبات نشده، unresolved می‌ماند و راهکار جعل نمی‌شود. | B:946–953, 1249–1252, 1290؛ Assistant |
 | `REQ:ASSISTANT:A03:008` | Feedforward ریسک/فرصت آینده را با evidence و علت قابل ارائه می‌کند؛ نبود risk معنادار، هشدار تولید نمی‌کند. | B:946–953، 975؛ Assistant |
 | `REQ:ASSISTANT:A03:009` | Feedback در Bronze/Silver/Gold قابل استفاده و Feedforward فقط در entitlement پلن Silver/Gold مجاز است؛ تصمیم از C04 خوانده می‌شود. | B:975، 1249–1252؛ C04 owner |
 | `REQ:ASSISTANT:A03:010` | پیش از تحلیل/اطلاع‌رسانی، importance و پردازش مجاز طبق policy و بودجه بررسی می‌شود؛ نامزد خارج از budget به صف/رد کنترل‌شده می‌رود، نه اجرای بی‌حد. | B:946–950؛ owner policy؛ آستانه باز |
@@ -7862,7 +7871,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 |---|---|---|
 | `TASK:ASSISTANT:A03:001` | قرارداد event intake و adapter ورودی با owner producer؛ Assistant | `TASK:ASSISTANT:A03:001.S01` event envelope به source owner/version/reference و حداقل فیلد لازم مقید؛ `REQ:ASSISTANT:A03:001`/002. `TASK:ASSISTANT:A03:001.S02` idempotency/redelivery و آزمون replay با owner event ID؛ `REQ:ASSISTANT:A03:002`/003. `TASK:ASSISTANT:A03:001.S03` ordering فقط برای کلید/جریانی که owner نیاز را اعلام کرده؛ `REQ:ASSISTANT:A03:003`. |
 | `TASK:ASSISTANT:A03:002` | policy gate orchestrator که C02/C04 و owner policy/evidence را مصرف کند؛ Assistant | `TASK:ASSISTANT:A03:002.S01` تطبیق domain/goal/consent/data permission با C02؛ `REQ:ASSISTANT:A03:004`. `TASK:ASSISTANT:A03:002.S02` entitlement/capability از C04 و رد نسخه/پاسخ نامعتبر؛ `REQ:ASSISTANT:A03:005`/009. `TASK:ASSISTANT:A03:002.S03` freshness/evidence readiness از R؛ ناکافی→defer/conditional؛ `REQ:ASSISTANT:A03:006`. `TASK:ASSISTANT:A03:002.S04` budget/importance outcome قابل پیکربندی توسط owner policy؛ `REQ:ASSISTANT:A03:010`. |
-| `TASK:ASSISTANT:A03:003` | تحلیل‌گر event-to-insight برای وضعیت گذشته و ریسک/فرصت آینده؛ Assistant | `TASK:ASSISTANT:A03:003.S01` Feedback فقط از outcome/evidence owner؛ `REQ:ASSISTANT:A03:007`. `TASK:ASSISTANT:A03:003.S02` Feedforward با evidence، علت و uncertainty؛ `REQ:ASSISTANT:A03:008`. `TASK:ASSISTANT:A03:003.S03` پلن gating بر اساس C04؛ `REQ:ASSISTANT:A03:009`. |
+| `TASK:ASSISTANT:A03:003` | تحلیل‌گر event-to-insight برای وضعیت گذشته و ریسک/فرصت آینده؛ Assistant | `TASK:ASSISTANT:A03:003.S01` Feedback مسئله را از outcome/evidence owner تشخیص دهد، شاهد را پیوند بزند و اقدام اصلاحی قابل اجرا را فقط با پشتوانه همان شاهد ارائه کند؛ راهکار بی‌شاهد unresolved بماند؛ `REQ:ASSISTANT:A03:007`. `TASK:ASSISTANT:A03:003.S02` Feedforward با evidence، علت و uncertainty؛ `REQ:ASSISTANT:A03:008`. `TASK:ASSISTANT:A03:003.S03` پلن gating بر اساس C04؛ `REQ:ASSISTANT:A03:009`. |
 | `TASK:ASSISTANT:A03:004` | audit و handoff امن به C14/A02؛ Assistant | `TASK:ASSISTANT:A03:004.S01` ثبت decision reference و redacted reason؛ `REQ:ASSISTANT:A03:011`. `TASK:ASSISTANT:A03:004.S02` event outcome را به اعلان C14 بسپارد؛ اعلان بدون اجازه/تنظیمات C14=0؛ `REQ:ASSISTANT:A03:011`. `TASK:ASSISTANT:A03:004.S03` event-to-action ممنوع؛ فقط A02 route پس از تصمیم/رضایت تازه؛ `REQ:ASSISTANT:A03:012`. |
 
 #### Acceptance Criteria با oracle قابل‌اندازه‌گیری
@@ -7875,7 +7884,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `AC:ASSISTANT:A03:004` | consent/data permission یا domain mismatch/expired است | policy gate اجرا شود | analysis and user notice=0؛ outcome دقیق deny/defer reason ثبت شود | تحلیل/هشدار با scope نامعتبر |
 | `AC:ASSISTANT:A03:005` | entitlement معتبر و invalid در دو fixture | تحلیل candidateها اجرا شود | فقط مجازها به analysis می‌رسند؛ denied=analysis 0 | پلن از متن/نام کاربر حدس زده شود |
 | `AC:ASSISTANT:A03:006` | evidence تازه/کافی و stale/missing هر دو آماده | readiness gate اجرا شود | fresh candidate مجاز؛ stale/missing قطعی alert=0 و conditional/defer outcome | هشدار قطعی بر evidence نامعتبر |
-| `AC:ASSISTANT:A03:007` | outcome مشاهده‌شده با مرجع owner وجود دارد | Feedback اجرا شود | هر claim به outcome reference پیوند دارد؛ claims ungrounded=0 | پیش‌بینی به‌عنوان واقعیت گذشته |
+| `AC:ASSISTANT:A03:007` | outcome مشاهده‌شده و مرجع owner موجود است؛ fixture مسئلهٔ واقعی، راهکار پشتیبانی‌شده و مسئلهٔ بی‌راهکار دارد | Feedback اجرا شود | مسئلهٔ واقعی به outcome و evidence مرجع متصل؛ اقدام اصلاحی فقط برای راهکار پشتیبانی‌شده؛ مورد بی‌راهکار با وضعیت unresolved و next-step محدود ثبت شود؛ claims ungrounded=0 | ساخت مسئله از پیش‌بینی، راهکار بی‌شاهد یا اقدام بانکی مستقیم |
 | `AC:ASSISTANT:A03:008` | evidence ریسک معنادار و مورد فاقد risk موجود است | Feedforward اجرا شود | risk case دارای evidence/reason/uncertainty؛ no-risk notice=0 | هشدار بدون شواهد یا علت |
 | `AC:ASSISTANT:A03:009` | 3 پلن با entitlementهای مصوب fixture شده‌اند | eligibility بررسی شود | Feedback سه پلن مجاز؛ Feedforward فقط Silver/Gold؛ entitlement local matrix=0 | Feedforward در Bronze یا رد آن در Gold/Silver مجاز |
 | `AC:ASSISTANT:A03:010` | candidate درون و بیرون budget policy | budget gate اجرا شود | out-of-budget processing=0؛ threshold از policy owner خوانده شود | اجرای نامحدود یا threshold ساختگی |
@@ -7892,7 +7901,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `TEST:ASSISTANT:A03:004` | `TC:ASSISTANT:A03:004-P` policy/scope معتبر candidate را عبور می‌دهد | `TC:ASSISTANT:A03:004-N` revoked consent آن را متوقف می‌کند | `TC:ASSISTANT:A03:004-B` consent revoke میان intake و evaluation مانع تحلیل است | `TC:ASSISTANT:A03:004-F` C02/policy timeout=analysis 0 |
 | `TEST:ASSISTANT:A03:005` | `TC:ASSISTANT:A03:005-P` C04 entitlement فعال و version معتبر | `TC:ASSISTANT:A03:005-N` entitlement expired رد می‌شود | `TC:ASSISTANT:A03:005-B` entitlement در فاصله بررسی تا notice revoke شود، notice متوقف می‌شود | `TC:ASSISTANT:A03:005-F` C04 unavailable=fail closed |
 | `TEST:ASSISTANT:A03:006` | `TC:ASSISTANT:A03:006-P` evidence تازه و کافی نتیجه مشروط/مجاز می‌دهد | `TC:ASSISTANT:A03:006-N` evidence جعلی/نامعتبر قطعیت نمی‌دهد | `TC:ASSISTANT:A03:006-B` مرز تازگیِ تعریف‌شده توسط owner دقیقاً اعمال می‌شود | `TC:ASSISTANT:A03:006-F` evidence service timeout=conditional/defer |
-| `TEST:ASSISTANT:A03:007` | `TC:ASSISTANT:A03:007-P` feedback به outcome owner پیوند دارد | `TC:ASSISTANT:A03:007-N` مدل outcome ناموجود را نمی‌سازد | `TC:ASSISTANT:A03:007-B` چند نتیجه متعارض به ادعای واحد collapse نمی‌شوند | `TC:ASSISTANT:A03:007-F` outcome owner unavailable=بدون ادعای نتیجه |
+| `TEST:ASSISTANT:A03:007` | `TC:ASSISTANT:A03:007-P` مسئله و اقدام اصلاحی با outcome/evidence owner پشتیبانی‌شده پیوند دارد | `TC:ASSISTANT:A03:007-N` مسئله یا راهکار بدون شاهد ساخته نمی‌شود | `TC:ASSISTANT:A03:007-B` مسئله شاهد دارد ولی راهکار ندارد؛ unresolved ثبت می‌شود و راهکار قطعی صادر نمی‌شود | `TC:ASSISTANT:A03:007-F` outcome/evidence owner unavailable؛ بدون ادعای مسئله/راهکار و با failure قابل مشاهده |
 | `TEST:ASSISTANT:A03:008` | `TC:ASSISTANT:A03:008-P` risk با evidence/reason ارائه می‌شود | `TC:ASSISTANT:A03:008-N` no-risk candidate هشدار ندارد | `TC:ASSISTANT:A03:008-B` evidence متناقض uncertainty را بالا می‌برد/قطعی نمی‌کند | `TC:ASSISTANT:A03:008-F` retrieval failure=بدون هشدار قطعی |
 | `TEST:ASSISTANT:A03:009` | `TC:ASSISTANT:A03:009-P` سه پلن بر اساس C04 پاسخ مورد انتظار می‌دهند | `TC:ASSISTANT:A03:009-N` Bronze feedforward رد می‌شود | `TC:ASSISTANT:A03:009-B` پلن در حین evaluation تغییر کند، تازه‌خوانی اعمال شود | `TC:ASSISTANT:A03:009-F` entitlement API unavailable=رد/تعویق |
 | `TEST:ASSISTANT:A03:010` | `TC:ASSISTANT:A03:010-P` candidate داخل بودجه پردازش می‌شود | `TC:ASSISTANT:A03:010-N` خارج بودجه از analysis سنگین بازمی‌ماند | `TC:ASSISTANT:A03:010-B` candidate درست روی حد owner-defined policy بررسی می‌شود | `TC:ASSISTANT:A03:010-F` policy/budget read unavailable=defer |
@@ -7912,7 +7921,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 #### ممیزی مستقل A03
 
 - **RA:** 15/15 candidate تعیین‌تکلیف؛ B:946–953، 975، 1249–1252 با متن تطبیق؛ entitlement به C04 و اعلان/Monitoring به C14 واگذار؛ تکرار A02/C02/R=0؛ inferred/ambiguous-to-requirement=0؛ آستانه/فناوری اختراع‌شده=0؛ **PASS**.
-- **IPA:** 12/12 Requirement به Enabler/Task/Subtask/AC/TD/TestCase و مسیر معکوس وصل؛ P/N/B/F=48/48؛ outcome/event/policy/scope/recovery oracle قابل شمارش؛ orphan/duplicate=0؛ dependency cycle=0؛ **PASS**.
+- **IPA:** 12/12 Requirement به Enabler/Task/Subtask/AC/TD/TestCase و مسیر معکوس وصل؛ P/N/B/F=48/48؛ outcome/event/policy/scope/recovery oracle قابل شمارش؛ orphan/duplicate=0؛ dependency cycle=0؛ **PASS**. AC/TEST:ASSISTANT:A03:007 همچنین issue/evidence/actionability و حالت unresolved بدون راهکار مستند را می‌سنجد؛ این اصلاح تعداد Requirement/AC/Test را تغییر نمی‌دهد.
 - **وضعیت محصول:** هیچ consumer، job، broker، policy یا اعلان واقعی در این بسته پیاده یا اجرا نشده؛ Planned Test Caseها اجرا نشده‌اند.
 ### A04 — انتخاب و اجرای مسیر Computer Use در وب و اپ
 
@@ -8042,7 +8051,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 - A03: ۱۵ Candidate، ۱۲ Requirement، ۳ Enabler، ۴ Task، ۱۳ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
 - A04: ۱۶ Candidate، ۱۳ Requirement، ۴ Enabler، ۴ Task، ۱۳ Subtask، ۱۳ AC/TD و ۵۲ Planned Test Case؛ RA/IPA=PASS.
 - A05: ۱۲ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
-- A06: ۱۴ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- A06: ۱۴ Candidate، ۱۴ Requirement، ۴ Enabler، ۵ Task، ۱۸ Subtask، ۱۴ AC/TD و ۵۶ Planned Test Case؛ RA/IPA=PASS.
 - مجموع A01–A06: ۷۷ Candidate، ۷۵ Requirement، ۲۲ Enabler، ۲۷ Task، ۸۹ Subtask، ۷۵ AC/TD و ۳۰۰ Planned Test Case؛ CPA A05/A06=8/8 PASS. همهٔ planned testها اجرا نشده‌اند؛ elapsed time `NOT_MEASURED`.
 - در آن checkpoint: ۳۴/۳۶ بستهٔ برنامه‌ریزی پذیرفته بودند؛ Product Tests اجرا نشده بود و پیاده‌سازی محصولی ادعا نشد.
 
@@ -8198,6 +8207,8 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `REQ:ASSISTANT:A06:010` | فناوری crawl/browser/device و زمان‌بندی discovery configurable در طراحی تفصیلی می‌مانند؛ هیچ ابزار یا ساعت ثابت از مثال سند به‌عنوان الزام انتخاب نمی‌شود. B:1500,1538 |
 | `REQ:ASSISTANT:A06:011` | capture/log/trace نقشه فقط شواهد و metadata حداقل و redacted نگه می‌دارد؛ OTP، credential، raw personal data یا screenshot حاوی اطلاعات حساب در log عمومی/دسترسی بی‌مجاز ذخیره نمی‌شود. B:1462–1478,1538–1552 |
 | `REQ:ASSISTANT:A06:012` | job discovery و وابستگی‌هایش با timeout budget، retry محدود idempotent، circuit breaker/bulkhead متناسب و وضعیت شکست قابل پایش اجرا می‌شوند؛ اختلال job نباید API تعاملی/A04 را اشباع یا map ناسالم را فعال کند. B:1283–1294؛ ADR-A06/A09؛ Graph `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring` |
+| `REQ:ASSISTANT:A06:013` | در اجرای واقعی مشتری، device/browser session به یک workflow/case فعال و owner مشخص متصل و میان مشتریان یا عملیات هم‌زمان قابل اشتراک نیست؛ reconnect فقط پس از تطبیق دوبارهٔ customer/session/device/workflow correlation ادامه می‌یابد؛ session منقضی، نامتصل یا متناقض به pause/reconciliation می‌رود و cleanup انجام می‌شود. B:1534؛ topology مستقل از محل اجرا باز می‌ماند. |
+| `REQ:ASSISTANT:A06:014` | هر ترکیب platform/host پیش از `supported` شدن به شواهد امکان‌سنجی مجاز و مختص همان ترکیب نیاز دارد؛ برای iOS روی Linux فرض شبیه‌سازی آزاد شاهد نیست. نبود/تعارض شاهد به `unknown/unsupported` می‌انجامد و action dispatch نمی‌شود. B:1534,1406؛ انتخاب محل اجرا همچنان تصمیم باز است. |
 
 #### Enablerها، Taskها و Subtaskها
 
@@ -8206,9 +8217,9 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | Task | خروجی اجرایی و Subtaskها |
 | --- | --- |
 | `TASK:ASSISTANT:A06:001` | **Enabler:** `EN:ASSISTANT:A06:001`.  قرارداد منطقی UI Map با owner خدمت و C05a؛ `TASK:ASSISTANT:A06:001.S01` شناسه provider/service/platform/capability/version یکتا، REQ:ASSISTANT:A06:001؛ `TASK:ASSISTANT:A06:001.S02` route/step/element/consent/evidence/test metadata nullable و provenanceدار، REQ:ASSISTANT:A06:002؛ `TASK:ASSISTANT:A06:001.S03` draft/validated/active/superseded/unknown lifecycle با نسخه سازگار، REQ:ASSISTANT:A06:006/007/009. |
-| `TASK:ASSISTANT:A06:002` | **Enabler:** `EN:ASSISTANT:A06:002`.  discovery runner و محیط ایمن؛ `TASK:ASSISTANT:A06:002.S01` allowlist منبع و مجوز/حساب آزمون owner، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S02` non-destructive mode که action مالی را قبل از dispatch رد کند، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S03` isolate session/device و cleanup پس از success/failure، REQ:ASSISTANT:A06:004/005. |
+| `TASK:ASSISTANT:A06:002` | **Enabler:** `EN:ASSISTANT:A06:002`.  discovery runner و محیط ایمن؛ `TASK:ASSISTANT:A06:002.S01` allowlist منبع و مجوز/حساب آزمون owner، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S02` non-destructive mode که action مالی را قبل از dispatch رد کند، REQ:ASSISTANT:A06:003؛ `TASK:ASSISTANT:A06:002.S03` isolate session/device و cleanup پس از success/failure، REQ:ASSISTANT:A06:004/005. `TASK:ASSISTANT:A06:002.S04` برای هر ترکیب platform/host شواهد امکان‌سنجی مجاز ثبت کند؛ simulator-only برای iOS/Linux به `supported` ارتقا نیابد؛ `REQ:ASSISTANT:A06:014`. |
 | `TASK:ASSISTANT:A06:003` | **Enabler:** `EN:ASSISTANT:A06:003`.  comparer، test harness و publication gate؛ `TASK:ASSISTANT:A06:003.S01` مقایسهٔ نسخه/fingerprint و ساخت change set مشخص، REQ:ASSISTANT:A06:006؛ `TASK:ASSISTANT:A06:003.S02` اجرای تست route/step در محیط آزمون مصوب، REQ:ASSISTANT:A06:007؛ `TASK:ASSISTANT:A06:003.S03` نگهداری map قبلی و فعال‌سازی/بازگشت فقط به نسخه آزموده‌شده و سازگار، REQ:ASSISTANT:A06:007/009. |
-| `TASK:ASSISTANT:A06:004` | **Enabler:** `EN:ASSISTANT:A06:004`.  runtime map API برای A04؛ `TASK:ASSISTANT:A06:004.S01` lookup محدود به capability/platform/version و return status freshness، REQ:ASSISTANT:A06:001/008؛ `TASK:ASSISTANT:A06:004.S02` signal mismatch/unknown به A04 برای pause/handoff، REQ:ASSISTANT:A06:008/009؛ `TASK:ASSISTANT:A06:004.S03` map مصرفی را راهنما بداند و زنده‌خوانی UI را پیش از effect حفظ کند، REQ:ASSISTANT:A06:008. |
+| `TASK:ASSISTANT:A06:004` | **Enabler:** `EN:ASSISTANT:A06:004`.  runtime map API برای A04؛ `TASK:ASSISTANT:A06:004.S01` lookup محدود به capability/platform/version و return status freshness، REQ:ASSISTANT:A06:001/008؛ `TASK:ASSISTANT:A06:004.S02` signal mismatch/unknown به A04 برای pause/handoff، REQ:ASSISTANT:A06:008/009؛ `TASK:ASSISTANT:A06:004.S03` map مصرفی را راهنما بداند و زنده‌خوانی UI را پیش از effect حفظ کند، REQ:ASSISTANT:A06:008. `TASK:ASSISTANT:A06:004.S04` در اجرای واقعی، device/session/workflow/case را با correlation یکتا متصل کند و پس از reconnect/expiry پیش از resume دوباره اعتبارسنجی کند؛ `REQ:ASSISTANT:A06:013`. |
 | `TASK:ASSISTANT:A06:005` | **Enabler:** `EN:ASSISTANT:A06:004`.  security, resilience, monitoring و operator handoff؛ `TASK:ASSISTANT:A06:005.S01` secret/PII redaction و access audit به C01/C02 controls، REQ:ASSISTANT:A06:011؛ `TASK:ASSISTANT:A06:005.S02` job isolation, timeout, bounded retry, circuit/bulkhead؛ REQ:ASSISTANT:A06:012؛ `TASK:ASSISTANT:A06:005.S03` metrics نتیجه کشف، map age، diff/test/publish/failure و incident reference بدون payload حساس، REQ:ASSISTANT:A06:012؛ `TASK:ASSISTANT:A06:005.S04` گزارش وضعیت و رسیدگی به C06/C14 بدون ساختن User Monitoring، REQ:ASSISTANT:A06:009/012. |
 
 #### Acceptance Criteria با oracle قابل‌اندازه‌گیری
@@ -8227,6 +8238,8 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `AC:ASSISTANT:A06:010` | نمونه ابزار Playwright و ساعت 03:00 فقط به‌عنوان option آمده‌اند | پیکربندی برنامه validate شود | هیچ ابزار/زمانی hard-coded به مصوبه تبدیل نشده | تصمیم اجرایی از مثال سند استخراج شود |
 | `AC:ASSISTANT:A06:011` | صفحه آزمایشی markerهای OTP، شماره حساب و PII دارد | تولید trace/artifact | marker raw در log عمومی/screenshot artifact=0؛ access به evidence با principal مجاز و audit | secret marker یا evidence عمومی |
 | `AC:ASSISTANT:A06:012` | policy fixture با `max_attempts=k` متناهی و ظرفیت رزروشدهٔ interactive تعریف شده؛ worker و API تعاملی آماده‌اند | dependency تا عبور از حد تنظیم‌شده fail شود و worker pool اشباع را تجربه کند | کل تلاش‌ها `≤k`؛ breaker به وضعیت open برسد؛ یک درخواست تعاملی در ظرفیت رزروشده پاسخ بگیرد؛ job age/failure/status metric موجود؛ مقدار k از policy owner می‌آید و در سند عددگذاری نشده | retry بی‌حد، استفاده worker از ظرفیت رزروشده یا map سالم‌نمایی‌شده |
+| `AC:ASSISTANT:A06:013` | دو عملیات واقعی مشتری با case/session/deviceهای مجزا آماده‌اند؛ یکی reconnect و دیگری expiry/mismatch دارد | هر دو اجرا و سپس یکی resume شود | هر operation به همان customer/case/session/device owner متصل؛ cross-customer access/effect=0؛ resume فقط پس از تطبیق correlation معتبر؛ session بسته/منقضی dispatch نمی‌کند | session مشترک، case عوض‌شده یا resume از context نامعلوم |
+| `AC:ASSISTANT:A06:014` | platform/host matrix شامل iOS/Linux و یک platform/host دارای شواهد پشتیبانی است | capability/feasibility gate اجرا شود | فقط ترکیب دارای evidence مجاز و آزموده `supported` می‌شود؛ simulator-only یا evidence missing=`unknown/unsupported` و dispatch=0؛ انتخاب topology از آزمون استنتاج نمی‌شود | فرض کنترل آزاد iOS یا ادعای پشتیبانی از PoC نامعتبر |
 
 #### Test Definitions و Planned Test Cases (اجرا نشده)
 
@@ -8244,21 +8257,23 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 | `TEST:ASSISTANT:A06:010` | `TC:ASSISTANT:A06:010-P` tool choice با آزمون تفصیلی ثبت می‌شود | `TC:ASSISTANT:A06:010-N` Playwright از مثال به MUST تبدیل نمی‌شود | `TC:ASSISTANT:A06:010-B` scheduling sample قابل override می‌ماند | `TC:ASSISTANT:A06:010-F` tool PoC ناکام → گزینه دیگر/hold، نه ادعای آماده‌بودن |
 | `TEST:ASSISTANT:A06:011` | `TC:ASSISTANT:A06:011-P` trace دارای version/outcome non-sensitive است | `TC:ASSISTANT:A06:011-N` OTP/PII از log/artifact حذف | `TC:ASSISTANT:A06:011-B` field جدید تا classification/redaction وارد telemetry نمی‌شود | `TC:ASSISTANT:A06:011-F` redaction service outage → artifact انتشار نمی‌یابد |
 | `TEST:ASSISTANT:A06:012` | `TC:ASSISTANT:A06:012-P` job با latency عادی پایان می‌یابد | `TC:ASSISTANT:A06:012-N` policy بدون سقف تلاش یا retry پس از breaker رد می‌شود | `TC:ASSISTANT:A06:012-B` attemptهای k−1، k و k+1 سنجیده می‌شوند؛ تعداد از k عبور نمی‌کند و interactive reserve پاسخ‌گو می‌ماند | `TC:ASSISTANT:A06:012-F` dependency outage → breaker، job recoverable و map active قبلی حفظ |
+| `TEST:ASSISTANT:A06:013` | `TC:ASSISTANT:A06:013-P` اجرای واقعی session به customer/case owner خودش متصل است | `TC:ASSISTANT:A06:013-N` دسترسی/dispatch میان دو customer session رد می‌شود | `TC:ASSISTANT:A06:013-B` reconnect با correlation معتبر resume می‌شود؛ mismatch/expiry=pause | `TC:ASSISTANT:A06:013-F` device/session owner unavailable؛ reconciliation pending و effect=0 |
+| `TEST:ASSISTANT:A06:014` | `TC:ASSISTANT:A06:014-P` ترکیب platform/host با evidence واقعی مجاز supported ثبت می‌شود | `TC:ASSISTANT:A06:014-N` API/مجوز OS ناسازگار supported نمی‌شود | `TC:ASSISTANT:A06:014-B` فقط simulator برای iOS/Linux عرضه می‌شود؛ status=unknown و dispatch=0 | `TC:ASSISTANT:A06:014-F` feasibility evidence unavailable/contradictory؛ hold/unknown و بدون action |
 
 #### Traceability، Dependencies و تصمیم‌های باز
 
 | مسیر | ردیابی/مالکیت |
 | --- | --- |
 | Source→Requirement | B:1482–1556,1604–1626؛ W:1363–1376,1511–1546؛ Graph `docs_shahab_phase_2_development_blueprint_ui_discovery_change_monitoring`, `docs_shahab_phase_2_development_blueprint_ui_monitor_flow`, `docs_shahab_phase_2_development_blueprint_ui_monitor_non_destructive`, `docs_shahab_phase_2_development_blueprint_ui_runtime_recheck`, `docs_shahab_phase_2_development_blueprint_live_ui_observation`, `docs_shahab_phase_2_development_blueprint_session_device_isolation`. |
-| Requirement→Enabler→Task→Subtask | ۱۲/۱۲ Requirement به EN و TASK/S متصل‌اند؛ رابطه مالکیت با A04/C02/C05a/C06/C14 حفظ است. |
-| Requirement→AC→Test→Cases | `REQ:A06:nnn`↔`AC:A06:nnn`↔`TEST:A06:nnn`؛ ۱۲/۱۲ مسیر دوسویه و چهار case اختصاصی برای هر رفتار؛ ۴۸ Planned Cases. |
+| Requirement→Enabler→Task→Subtask | ۱۴/۱۴ Requirement به EN و TASK/S متصل‌اند؛ A06 فقط session/device coordination را مصرف می‌کند، A02 مالک durable workflow/job و A04 مالک live UI execution می‌مانند؛ رابطه مالکیت با C02/C05a/C06/C14 حفظ است. |
+| Requirement→AC→Test→Cases | `REQ:A06:nnn`↔`AC:A06:nnn`↔`TEST:A06:nnn`؛ ۱۴/۱۴ مسیر دوسویه و چهار case اختصاصی برای هر رفتار؛ ۵۶ Planned Cases. |
 | Dependencies | C05a service/provider identity؛ C02 auth/consent؛ A04 live UI executor؛ A02 jobs/recovery؛ C01/A09 logging/resilience; C06 shell و C14 history/notice. dependency هیچ data ownership جدیدی ایجاد نمی‌کند. |
-| Open | UI Knowledge Store schema/technology، browser/device hosting، account/test access، cadence، thresholds، provider permissions و ابزار runner پس از PoC/تأیید مالک؛ مثال‌های سند مصوبه نیستند. UI Monitoring با User Monitoring جدا باقی می‌ماند. |
+| Open | `OPEN:ASSISTANT:A06:EXECUTION_TOPOLOGY`: انتخاب اجرای محلی، زیرساخت شهاب یا ترکیبی؛ تا تکمیل شواهد مجاز و امکان‌سنجی platform/host، مدیریت نشست، تداوم اجرای طولانی، امنیت، تجربه و هزینه و تصویب صاحب پروژه، هیچ گزینه‌ای منتخب نیست. این تصمیم فقط محل اجرا را مسدود می‌کند؛ session isolation، correlation، cleanup و safe pause مستقل از topology اجراپذیرند. همچنین UI Knowledge Store schema/technology، account/test access، cadence، thresholds، provider permissions و ابزار runner باز می‌مانند. UI Monitoring با User Monitoring جدا باقی می‌ماند. |
 
 #### ممیزی مستقل A06 — RA و IPA
 
-- **RA:** Candidate 14/14 تعیین تکلیف؛ B:1482–1556 و تصمیم‌های A06/A09 با متن اصلی تطبیق؛ non-destructive test، runtime recheck، platform limits، data/privacy، recovery و ownerهای A04/C02/C05a/C06/C14 حفظ؛ انتخاب ابزار/time/DB و آستانه‌های باز به الزام تبدیل نشدند؛ duplication=0 و inferred/ambiguous-to-requirement=0؛ **PASS**.
-- **IPA:** ۱۲/۱۲ Requirement به Task/Subtask، AC، TD و ۴ case اختصاصی P/N/B/F وصل؛ ۱۲ AC دارای precondition/trigger/oracle/fail؛ تست‌های test-account، publish gate، UI stale، privacy و failure جدایند؛ DAG cycle=0؛ product discovery/test اجرا نشده؛ **PASS**.
+- **RA:** Candidate 14/14 تعیین تکلیف؛ B:1482–1556 و تصمیم‌های A06/A09 با متن اصلی تطبیق؛ non-destructive test، runtime recheck، customer session/device correlation، platform feasibility، data/privacy، recovery و ownerهای A02/A04/C02/C05a/C06/C14 حفظ؛ topology local/cloud/hybrid باز ماند و هیچ ابزار/time/DB یا انتخابی به الزام تبدیل نشد؛ duplication=0 و inferred/ambiguous-to-requirement=0؛ **PASS**.
+- **IPA:** ۱۴/۱۴ Requirement به Task/Subtask، AC، TD و ۴ case اختصاصی P/N/B/F وصل؛ ۱۴ AC دارای precondition/trigger/oracle/fail؛ تست‌های test-account، live customer session correlation/isolation، reconnect/expiry recovery، platform feasibility، iOS/Linux simulator-only، publish gate، UI stale و privacy جدا هستند؛ DAG cycle=0؛ product discovery/test اجرا نشده؛ **PASS**.
 
 #### CPA مشترک A05/A06 — کنترل‌های دوبسته‌ای
 
@@ -8276,7 +8291,7 @@ Candidateهای 001–012 و 014–015 پوشش Requirementهای همین بس�
 #### تصویر تاریخی برنامه پس از A05/A06 (پیش از تدوین A07/A08)
 
 - A05: ۱۲ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
-- A06: ۱۴ Candidate، ۱۲ Requirement، ۴ Enabler، ۵ Task، ۱۶ Subtask، ۱۲ AC/TD و ۴۸ Planned Test Case؛ RA/IPA=PASS.
+- A06: ۱۴ Candidate، ۱۴ Requirement، ۴ Enabler، ۵ Task، ۱۸ Subtask، ۱۴ AC/TD و ۵۶ Planned Test Case؛ RA/IPA=PASS.
 - جمع A05/A06: ۲۶ Candidate، ۲۴ Requirement، ۸ Enabler، ۱۰ Task، ۳۲ Subtask، ۲۴ AC/TD و ۹۶ Planned Test Case؛ CPA=8/8 PASS. هر Test Case برنامه‌ای است و اجرا نشده.
 - مجموع A01–A06: ۷۷ Candidate، ۷۵ Requirement، ۲۲ Enabler، ۲۷ Task، ۸۹ Subtask، ۷۵ AC/TD و ۳۰۰ Planned Test Case؛ Assistant=۶/۸ و کل برنامه=۳۴/۳۶. A07/A08 شروع نشده‌اند.
 - هیچ Product Test، اتصال بانکی، Computer Use واقعی یا پایش UI واقعی در این مأموریت اجرا نشده؛ وضعیت PR همچنان Draft است.

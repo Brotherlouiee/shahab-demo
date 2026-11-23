@@ -540,6 +540,7 @@ def main() -> int:
     write_csv(candidate_path, candidate_fields, candidate_rows)
     # Package index and trace are built below from the versioned plan source.
     build_package_index_and_traces(candidate_rows, source_hashes, graph_sha)
+    subprocess.run([sys.executable, str(COVERAGE / "build_evidence_join_index.py")], cwd=ROOT, check=True, capture_output=True, text=True)
     validations = validate_outputs(baseline_inventory, baseline_candidates, inventory_rows, candidate_rows, source_hashes, graph_nodes, structural_errors)
     update_manifest(structural_count, candidate_count, source_hashes, graph_sha, candidate_rows)
     write_reports(candidate_rows, structural_count, candidate_count, source_hashes, graph_sha, structural_errors, validations)
@@ -774,6 +775,15 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
     record("classification_status_values", len(candidates), status_errors)
     ledger_rows = read_csv(COVERAGE / "semantic-review-dispositions.csv")[1] if (COVERAGE / "semantic-review-dispositions.csv").exists() else []
     ledger_by_id = {r["candidate_id"]: r for r in ledger_rows}
+    candidate_class_counts = Counter(r.get("candidate_class", "") for r in candidates)
+    reconciliation_errors = []
+    if sum(candidate_class_counts.values()) != len(candidates):
+        reconciliation_errors.append(f"candidate classes total {sum(candidate_class_counts.values())} != candidate records {len(candidates)}")
+    reviewed_count = len(ledger_by_id)
+    pending_count = len(set(candidate_ids) - set(ledger_by_id))
+    if reviewed_count + pending_count != len(candidates):
+        reconciliation_errors.append(f"reviewed {reviewed_count} + pending {pending_count} != candidate records {len(candidates)}")
+    record("candidate_count_reconciliation", len(candidates), reconciliation_errors)
     atom_fields, atom_rows = read_csv(COVERAGE / "atomic-obligation-dispositions.csv") if (COVERAGE / "atomic-obligation-dispositions.csv").exists() else ([], [])
     promoted_suggestions=[]
     disposition_errors=[]
@@ -910,6 +920,22 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
         if row["normative_status"]!="NOT_APPLICABLE" or row["coverage_status"]!="NOT_APPLICABLE":
             unit_disposition_errors.append(f"source unit does not reflect disposition {review['source_unit_id']}")
     record("structural_source_unit_disposition_integrity",len(unit_ledger),unit_disposition_errors)
+    join_errors=[]
+    join_path=COVERAGE / "evidence-join-index.json"
+    try:
+        join=json.loads(join_path.read_text(encoding="utf-8"))
+        join_items=join.get("candidate_index",[])
+        join_ids=[r.get("candidate_id") for r in join_items]
+        join_atoms=sum(len(r.get("atomic_obligation_ids",[])) for r in join_items)
+        package_locator_count=len(read_csv(COVERAGE / "package-semantic-evidence.csv")[1])
+        if join.get("graph",{}).get("commit")!="17622bf4dd56108bee10d880a9dc5eb9617482fd":join_errors.append("pinned graph commit mismatch")
+        if join.get("graph",{}).get("sha256")!="f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93":join_errors.append("pinned graph SHA-256 mismatch")
+        if len(join_items)!=len(candidates) or set(join_ids)!=set(candidate_ids):join_errors.append("candidate index count/IDs mismatch")
+        if join_atoms!=len(atom_rows):join_errors.append(f"join atomic obligation count {join_atoms} != ledger {len(atom_rows)}")
+        if join.get("totals",{}).get("package_evidence_locators")!=package_locator_count:join_errors.append("package evidence locator count mismatch")
+    except Exception as exc:
+        join_errors.append(f"evidence join index unavailable or invalid: {exc}")
+    record("evidence_join_index_integrity",len(candidates),join_errors)
     record("structural_parse", sum(1 for _ in inventory), structural_errors)
     return checks
 
@@ -1021,6 +1047,8 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "all_classifications_semantically_reviewed": "PASS" if pending_count == 0 else "PENDING",
             "all_trace_mappings_verified": "PASS" if all(r.get("review_status") in {"SEMANTICALLY_REVIEWED", "VERIFIED"} for r in trace) else "PENDING",
             "package_ids_indexed": "PASS" if len(packages) == 36 else "FAIL",
+            "candidate_count_reconciliation": "PASS" if validations.get("candidate_count_reconciliation",{}).get("result")=="PASS" else "FAIL",
+            "evidence_join_index_integrity": "PASS" if validations.get("evidence_join_index_integrity",{}).get("result")=="PASS" else "FAIL",
             "no_unverified_mapping_claimed_as_verified": "PASS",
             "validation_errors": structural_errors,
         },
