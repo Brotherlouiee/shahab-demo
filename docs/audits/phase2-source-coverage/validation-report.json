@@ -41,12 +41,12 @@
     "coverage_gap_records": 518,
     "open_decision_gap_records": 43,
     "candidate_records_semantically_reviewed": 1183,
-    "atomic_obligations_extracted_and_verified": 1021,
-    "approved_obligations_verified": 938,
+    "atomic_obligations_extracted_and_verified": 1026,
+    "approved_obligations_verified": 943,
     "open_decisions_verified": 83,
-    "atomic_obligation_records": 1021,
-    "descriptive_units_verified": 386,
-    "verified_covered_obligations": 809,
+    "atomic_obligation_records": 1026,
+    "descriptive_units_verified": 387,
+    "verified_covered_obligations": 814,
     "partially_covered_obligations": 129,
     "candidate_rows_marked_covered": 404,
     "candidate_rows_marked_partial": 171,
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 11530,
+      "checked": 11545,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -194,29 +194,15 @@
     },
     "semantic_review_disposition_integrity": {
       "checked": 1183,
-      "errors": 4,
-      "result": "FAIL",
-      "examples": [
-        "invalid disposition or semantic mapping BP-C-0040",
-        "invalid disposition or semantic mapping BP-C-0459",
-        "invalid disposition or semantic mapping BP-C-0042",
-        "invalid disposition or semantic mapping BP-C-0046"
-      ]
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 1021,
-      "errors": 15,
-      "result": "FAIL",
-      "examples": [
-        "source locator drift AO:BP-C-0039:01",
-        "source locator drift AO:BP-C-0040:01",
-        "plan evidence does not contain mapped IDs AO:BP-C-0040:01",
-        "source locator drift AO:BP-C-0042:01",
-        "plan evidence does not contain mapped IDs AO:BP-C-0042:01",
-        "source locator drift AO:BP-C-0044:01",
-        "source locator drift AO:BP-C-0046:01",
-        "plan evidence does not contain mapped IDs AO:BP-C-0046:01"
-      ]
+      "checked": 1026,
+      "errors": 0,
+      "result": "PASS",
+      "examples": []
     },
     "semantic_batch_ledger_integrity": {
       "checked": 1096,
@@ -1622,8 +1608,8 @@
       "reviewed_after": 958,
       "pending_before": 750,
       "pending_after": 675,
-      "atomic_obligations": 82,
-      "covered": 21,
+      "atomic_obligations": 87,
+      "covered": 26,
       "partial": 61,
       "uncovered": 0,
       "open_decisions": 0
