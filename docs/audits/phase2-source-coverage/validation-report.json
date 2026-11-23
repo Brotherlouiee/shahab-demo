@@ -41,15 +41,15 @@
     "coverage_gap_records": 518,
     "open_decision_gap_records": 43,
     "candidate_records_semantically_reviewed": 1183,
-    "atomic_obligations_extracted_and_verified": 1022,
-    "approved_obligations_verified": 939,
+    "atomic_obligations_extracted_and_verified": 1021,
+    "approved_obligations_verified": 938,
     "open_decisions_verified": 83,
-    "atomic_obligation_records": 1022,
+    "atomic_obligation_records": 1021,
     "descriptive_units_verified": 386,
-    "verified_covered_obligations": 805,
-    "partially_covered_obligations": 134,
-    "candidate_rows_marked_covered": 400,
-    "candidate_rows_marked_partial": 176,
+    "verified_covered_obligations": 809,
+    "partially_covered_obligations": 129,
+    "candidate_rows_marked_covered": 404,
+    "candidate_rows_marked_partial": 171,
     "candidate_rows_marked_uncovered": 0,
     "confirmed_uncovered_obligations": 0,
     "semantic_reviews_pending": 450,
@@ -109,7 +109,7 @@
       "examples": []
     },
     "atomic_obligation_id_uniqueness": {
-      "checked": 534,
+      "checked": 533,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -157,7 +157,7 @@
       "examples": []
     },
     "requirement_task_ac_test_references": {
-      "checked": 11514,
+      "checked": 11530,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -169,7 +169,7 @@
       "examples": []
     },
     "candidate_package_references": {
-      "checked": 935,
+      "checked": 934,
       "errors": 0,
       "result": "PASS",
       "examples": []
@@ -194,23 +194,28 @@
     },
     "semantic_review_disposition_integrity": {
       "checked": 1183,
-      "errors": 0,
-      "result": "PASS",
-      "examples": []
+      "errors": 4,
+      "result": "FAIL",
+      "examples": [
+        "invalid disposition or semantic mapping BP-C-0040",
+        "invalid disposition or semantic mapping BP-C-0459",
+        "invalid disposition or semantic mapping BP-C-0042",
+        "invalid disposition or semantic mapping BP-C-0046"
+      ]
     },
     "atomic_obligation_ledger_integrity": {
-      "checked": 1022,
-      "errors": 8,
+      "checked": 1021,
+      "errors": 15,
       "result": "FAIL",
       "examples": [
         "source locator drift AO:BP-C-0039:01",
-        "plan evidence does not contain mapped IDs AO:BP-C-0038:01",
-        "source locator drift AO:BP-C-0038:02",
-        "plan evidence does not contain mapped IDs AO:BP-C-0038:02",
-        "source locator drift AO:BP-C-0038:03",
-        "plan evidence does not contain mapped IDs AO:BP-C-0038:03",
-        "source locator drift AO:BP-C-0038:04",
-        "plan evidence does not contain mapped IDs AO:BP-C-0038:04"
+        "source locator drift AO:BP-C-0040:01",
+        "plan evidence does not contain mapped IDs AO:BP-C-0040:01",
+        "source locator drift AO:BP-C-0042:01",
+        "plan evidence does not contain mapped IDs AO:BP-C-0042:01",
+        "source locator drift AO:BP-C-0044:01",
+        "source locator drift AO:BP-C-0046:01",
+        "plan evidence does not contain mapped IDs AO:BP-C-0046:01"
       ]
     },
     "semantic_batch_ledger_integrity": {
@@ -1617,9 +1622,9 @@
       "reviewed_after": 958,
       "pending_before": 750,
       "pending_after": 675,
-      "atomic_obligations": 83,
-      "covered": 17,
-      "partial": 66,
+      "atomic_obligations": 82,
+      "covered": 21,
+      "partial": 61,
       "uncovered": 0,
       "open_decisions": 0
     },
