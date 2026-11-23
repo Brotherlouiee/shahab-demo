@@ -23,7 +23,7 @@
 | Candidateهای pending review | 600؛ pending بودن به‌تنهایی شکاف قطعی نیست |
 | رکوردهای Gap Register | 658؛ 613 بازبینی محتوایی + 45 تصمیم باز |
 | Atomic Obligationهای دارای نگاشت Covered | 632 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 632/200/0 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 632/193/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -85,7 +85,7 @@
 | یکپارچگی ارجاع‌های Package Index | PASS | 3997 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 832 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 825 obligation dispositions mapped; remaining candidates are pending |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
