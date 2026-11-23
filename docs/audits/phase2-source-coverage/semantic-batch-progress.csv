@@ -365,3 +365,5 @@ BLUEPRINT-PHASE-1-SUPERAPP-DETAIL-001,1,BP-C-0383,Blueprint line 2079 (BP-P-2079
 BLUEPRINT-PHASE-2-CATALOG-DETAIL-001,1,BP-C-0384,Blueprint line 2081 (BP-P-2081-2081); source text verified against pinned Graphify findings,false
 BLUEPRINT-ARCH-OPEN-QUESTION-001,1,BP-C-0380,"Blueprint §5.5, line 2071; explicit open implementation question",false
 BLUEPRINT-RELEASE-DOSSIER-GATE-001,1,BP-C-0388,"Blueprint §5.8, line 2094; proposal status checked against C01:026",false
+BLUEPRINT-R1-DATA-BOUNDARY-001,1,BP-C-0381,"Blueprint §5.6, line 2075; Graphify graph nodes for snapshot, synchronous Core API, durable jobs and failure resilience cross-checked with source",false
+RAG-R1-SCOPE-2026-11-23-01,368,BP-C-0382,"Blueprint stage-1 RAG semantic scope; provenance/version, hybrid retrieval, source change/relations, answer quality and stage boundary",FALSE
