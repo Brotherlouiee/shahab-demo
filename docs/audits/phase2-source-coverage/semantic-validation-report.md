@@ -22,8 +22,8 @@
 | تعیین‌تکلیف Candidateهای متنی | 14 از 1136 محدودهٔ متن، 470 از 470 ردیف جدول، 27 از 27 بلوک fenced |
 | Candidateهای pending review | 600؛ pending بودن به‌تنهایی شکاف قطعی نیست |
 | رکوردهای Gap Register | 658؛ 613 بازبینی محتوایی + 45 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 641 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 641/182/0 |
+| Atomic Obligationهای دارای نگاشت Covered | 648 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 648/179/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -65,7 +65,7 @@
 | BLUEPRINT-FLOW-AND-REUSE-005 | BP-TR-037-07, BP-TR-037-08, BP-CODE-001, BP-CODE-002, BP-CODE-003, BP-CODE-004, BP-CODE-005, BP-CODE-006, BP-CODE-008, BP-CODE-009, BP-CODE-010, BP-CODE-011, BP-CODE-012, BP-CODE-013, BP-CODE-014, BP-CODE-015, BP-CODE-016, BP-CODE-017, BP-CODE-018, BP-CODE-019, BP-CODE-020, BP-CODE-021, BP-CODE-022, BP-CODE-023, BP-CODE-024, BP-CODE-025, BP-CODE-026, BP-CODE-027, BP-C-0001, BP-C-0002, BP-C-0003, BP-C-0004, BP-C-0005, BP-C-0008, BP-C-0012, BP-C-0013, BP-C-0018, BP-C-0019, BP-C-0020, BP-C-0022, BP-C-0023, BP-C-0024, BP-C-0026, BP-C-0028, BP-C-0030, BP-C-0006, BP-C-0007, BP-C-0009, BP-C-0010, BP-C-0011, BP-C-0014, BP-C-0015, BP-C-0016, BP-C-0017, BP-C-0021, BP-C-0025, BP-C-0027, BP-C-0029, BP-C-0031, BP-C-0032 | 681→741 | 952→892 | 17 | 13/4/0 | 0 |
 | WALLET-CHARGE-AND-GIFT-006 | WL-C-0666, WL-C-0667, WL-C-0668, WL-C-0669, WL-C-0670, WL-C-0671, WL-C-0672, WL-C-0673, WL-C-0674, WL-C-0675, WL-C-0676, WL-C-0677, WL-C-0678, WL-C-0679, WL-C-0680, WL-C-0681, WL-C-0682, WL-C-0683, WL-C-0684, WL-C-0685, WL-C-0686, WL-C-0687, WL-C-0688, WL-C-0689, WL-C-0690, WL-C-0691, WL-C-0692, WL-C-0693, WL-C-0694, WL-C-0695, WL-C-0696, WL-C-0697, WL-C-0698, WL-C-0699, WL-C-0700, WL-C-0701, WL-C-0702, WL-C-0703, WL-C-0704, WL-C-0705, WL-C-0706, WL-C-0707, WL-C-0708, WL-C-0709, WL-C-0710, WL-C-0711, WL-C-0712, WL-C-0713, WL-C-0714, WL-C-0715, WL-C-0716, WL-C-0717, WL-C-0718, WL-C-0719, WL-C-0720, WL-C-0721, WL-C-0722, WL-C-0723, WL-C-0724, WL-C-0725, WL-C-0726, WL-C-0727, WL-C-0728, WL-C-0729, WL-C-0730, WL-C-0731, WL-C-0732, WL-C-0733, WL-C-0734, WL-C-0735 | 741→811 | 892→822 | 13 | 13/0/0 | 0 |
 | WALLET-CONSUMPTION-AND-RESERVATION-007 | WL-C-0563, WL-C-0564, WL-C-0565, WL-C-0566, WL-C-0567, WL-C-0647, WL-C-0648, WL-C-0649, WL-C-0736, WL-C-0737, WL-C-0738, WL-C-0739, WL-C-0740, WL-C-0741, WL-C-0742, WL-C-0743, WL-C-0744, WL-C-0745, WL-C-0746, WL-C-0747, WL-C-0748, WL-C-0749, WL-C-0750, WL-C-0751, WL-C-0752, WL-C-0753, WL-C-0754, WL-C-0755, WL-C-0756, WL-C-0757, WL-C-0758, WL-C-0759, WL-C-0760, WL-C-0761, WL-C-0762, WL-C-0763, WL-C-0764, WL-C-0765, WL-C-0766, WL-C-0767, WL-C-0768, WL-C-0769, WL-C-0770, WL-C-0771, WL-C-0772, WL-C-0773, WL-C-0774, WL-C-0775, WL-C-0776, WL-C-0777, WL-C-0778, WL-C-0779, WL-C-0901, WL-C-0998, WL-C-1004, WL-C-1005, WL-C-1006, WL-C-1007, WL-C-1021, WL-C-1022, WL-C-1023, WL-C-1024, WL-C-1025, WL-C-1026, WL-C-0478, WL-C-0479, WL-C-0568, WL-C-0569, WL-C-0570, WL-C-0571, WL-C-0572, WL-C-0573 | 811→883 | 822→750 | 37 | 37/0/0 | 0 |
-| BLUEPRINT-RAG-AND-ARCH-008 | BP-C-0457, BP-C-0458, BP-C-0033, BP-C-0034, BP-C-0035, BP-C-0036, BP-C-0037, BP-C-0038, BP-C-0039, BP-C-0040, BP-C-0459, BP-C-0041, BP-C-0042, BP-C-0043, BP-C-0044, BP-C-0045, BP-C-0046, BP-C-0047, BP-C-0048, BP-C-0049, BP-C-0050, BP-C-0051, BP-C-0052, BP-C-0053, BP-C-0054, BP-C-0055, BP-C-0056, BP-C-0057, BP-C-0058, BP-C-0059, BP-C-0060, BP-C-0061, BP-C-0062, BP-C-0063, BP-C-0064, BP-C-0065, BP-C-0066, BP-C-0067, BP-C-0068, BP-C-0069, BP-C-0070, BP-C-0071, BP-C-0072, BP-C-0073, BP-C-0074, BP-C-0075, BP-C-0076, BP-C-0099, BP-C-0101, BP-C-0102, BP-C-0126, BP-C-0127, BP-C-0128, BP-C-0129, BP-C-0130, BP-C-0131, BP-C-0132, BP-C-0133, BP-C-0134, BP-C-0135, BP-C-0136, BP-C-0137, BP-C-0138, BP-C-0139, BP-C-0140, BP-C-0141, BP-C-0145, BP-C-0146, BP-C-0147, BP-C-0148, BP-C-0149, BP-C-0150, BP-C-0151, BP-C-0152, BP-C-0153 | 883→958 | 750→675 | 72 | 0/72/0 | 0 |
+| BLUEPRINT-RAG-AND-ARCH-008 | BP-C-0457, BP-C-0458, BP-C-0033, BP-C-0034, BP-C-0035, BP-C-0036, BP-C-0037, BP-C-0038, BP-C-0039, BP-C-0040, BP-C-0459, BP-C-0041, BP-C-0042, BP-C-0043, BP-C-0044, BP-C-0045, BP-C-0046, BP-C-0047, BP-C-0048, BP-C-0049, BP-C-0050, BP-C-0051, BP-C-0052, BP-C-0053, BP-C-0054, BP-C-0055, BP-C-0056, BP-C-0057, BP-C-0058, BP-C-0059, BP-C-0060, BP-C-0061, BP-C-0062, BP-C-0063, BP-C-0064, BP-C-0065, BP-C-0066, BP-C-0067, BP-C-0068, BP-C-0069, BP-C-0070, BP-C-0071, BP-C-0072, BP-C-0073, BP-C-0074, BP-C-0075, BP-C-0076, BP-C-0099, BP-C-0101, BP-C-0102, BP-C-0126, BP-C-0127, BP-C-0128, BP-C-0129, BP-C-0130, BP-C-0131, BP-C-0132, BP-C-0133, BP-C-0134, BP-C-0135, BP-C-0136, BP-C-0137, BP-C-0138, BP-C-0139, BP-C-0140, BP-C-0141, BP-C-0145, BP-C-0146, BP-C-0147, BP-C-0148, BP-C-0149, BP-C-0150, BP-C-0151, BP-C-0152, BP-C-0153 | 883→958 | 750→675 | 76 | 7/69/0 | 0 |
 | BLUEPRINT-WALLET-AND-INTERACTION-009 | BP-C-0154, BP-C-0155, BP-C-0156, BP-C-0157, BP-C-0162, BP-C-0163, BP-C-0164, BP-C-0165, BP-C-0166, BP-C-0167, BP-C-0168, BP-C-0169, BP-C-0170, BP-C-0171, BP-C-0172, BP-C-0173, BP-C-0174, BP-C-0175, BP-C-0176, BP-C-0177, BP-C-0178, BP-C-0179, BP-C-0180, BP-C-0181, BP-C-0182, BP-C-0183, BP-C-0184, BP-C-0185, BP-C-0188, BP-C-0189, BP-C-0190, BP-C-0191, BP-C-0192, BP-C-0193, BP-C-0194, BP-C-0197, BP-C-0198, BP-C-0199, BP-C-0200, BP-C-0201, BP-C-0202, BP-C-0208, BP-C-0209, BP-C-0210, BP-C-0211, BP-C-0212, BP-C-0214, BP-C-0215, BP-C-0216, BP-C-0217, BP-C-0218, BP-C-0219, BP-C-0220, BP-C-0221, BP-C-0222, BP-C-0223, BP-C-0224, BP-C-0225, BP-C-0226, BP-C-0227, BP-C-0228, BP-C-0229, BP-C-0230, BP-C-0231, BP-C-0232, BP-C-0233, BP-C-0234, BP-C-0235, BP-C-0236, BP-C-0237, BP-C-0238, BP-C-0239, BP-C-0240, BP-C-0241, BP-C-0243 | 958→1033 | 675→600 | 58 | 0/58/0 | 0 |
 
 ## کنترل‌های ماشینی
@@ -78,14 +78,14 @@
 | محدوده‌های متنی و سطرهای جدول | PARTIAL | 1033 از 1633 Candidate بررسی شده؛ 600 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 883 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر Atomic Obligation | PASS | 887 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
 | یکپارچگی دفتر دسته‌ها | PASS | 939 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 10249؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 10270؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 4001 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 823 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 827 obligation dispositions mapped; remaining candidates are pending |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -98,7 +98,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1033 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 883 Atomic Obligation ثبت شده؛ 600 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1033 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 887 Atomic Obligation ثبت شده؛ 600 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 
