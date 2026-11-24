@@ -138,7 +138,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** ARCHITECTURE_HARDENING / EXISTING_PARTIAL
 - **مولفه‌ها:** backend/app/*; SQLAlchemy; architecture import checks
-- **شرط ورود:** T001 baseline
+- **شرط ورود:** `TASK:CORE:001` baseline
 - **خروجی اجرایی:** module ownership map, architecture policy test specification and service data authority matrix
 - **Requirement:** `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}
@@ -150,7 +150,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** CONTRACT_DESIGN / NEW
 - **مولفه‌ها:** Docker Compose; Core API; Adviser deployment contract; PostgreSQL/Redis ownership
-- **شرط ورود:** T002 authority map and R1 scope approval
+- **شرط ورود:** `TASK:CORE:002` authority map and R1 scope approval
 - **خروجی اجرایی:** R1 topology and independent release-boundary acceptance contract without deployment
 - **Requirement:** `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
@@ -162,7 +162,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C05b
 - **نوع کار / وضعیت کد:** CONTRACT_ADAPTATION / REUSE
 - **مولفه‌ها:** recommendation/application/use_cases.py; canonical_scoring.py; data_pipeline/publish_serving_version.py; API
-- **شرط ورود:** T001 baseline, T008 contract design
+- **شرط ورود:** `TASK:CORE:001` baseline, `TASK:CORE:008` contract design
 - **خروجی اجرایی:** Core recommendation consumer contract and golden/nonregression test plan
 - **Requirement:** `REQ:CORE:008`، `REQ:CORE:009`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
@@ -174,7 +174,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** ARCHITECTURE_DESIGN / NEW
 - **مولفه‌ها:** PostgreSQL job state; Port/Adapter; service-owned worker
-- **شرط ورود:** T002 service ownership; owner-specific long-running use case
+- **شرط ورود:** `TASK:CORE:002` service ownership; owner-specific long-running use case
 - **خروجی اجرایی:** versioned job pattern and worker-crash/migration test contract
 - **Requirement:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
@@ -186,7 +186,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONDITIONAL_DESIGN / NEW
 - **مولفه‌ها:** Owner transaction; outbox; event schema; subscribers
-- **شرط ورود:** T002 data ownership; demonstrable event consumer/use case
+- **شرط ورود:** `TASK:CORE:002` data ownership; demonstrable event consumer/use case
 - **خروجی اجرایی:** minimal event/outbox protocol with fault-injection acceptance
 - **Requirement:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}؛ {'task': 'TASK:CORE:005', 'type': 'CONTRACT'}
@@ -198,7 +198,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONTRACT_HARDENING / NEW
 - **مولفه‌ها:** HTTP client; job queue; rate/timeout/circuit policy
-- **شرط ورود:** T003 and T008 service-contract interfaces
+- **شرط ورود:** `TASK:CORE:003` and `TASK:CORE:008` service-contract interfaces
 - **خروجی اجرایی:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
 - **Requirement:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:003', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
@@ -210,7 +210,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONTRACT_CHANGE / EXISTING_PARTIAL
 - **مولفه‌ها:** FastAPI OpenAPI; API v1 router; schema fixtures; CI
-- **شرط ورود:** T002 authority matrix and existing API schema
+- **شرط ورود:** `TASK:CORE:002` authority matrix and existing API schema
 - **خروجی اجرایی:** contract matrix and migration-safe OpenAPI evolution plan
 - **Requirement:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
@@ -222,7 +222,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** POLICY_AND_CONFIG_DESIGN / EXISTING_PARTIAL
 - **مولفه‌ها:** core/config.py; CI security; configuration deployment
-- **شرط ورود:** T001 baseline and known policy owners
+- **شرط ورود:** `TASK:CORE:001` baseline and known policy owners
 - **خروجی اجرایی:** four-category config contract and validation/rollback tests
 - **Requirement:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
@@ -234,7 +234,7 @@
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** OBSERVABILITY_DESIGN / EXISTING_PARTIAL
 - **مولفه‌ها:** api/observability.py; metrics/logging; tracing; CI and runbooks
-- **شرط ورود:** T001 operational footprint and realistic workload
+- **شرط ورود:** `TASK:CORE:001` operational footprint and realistic workload
 - **خروجی اجرایی:** telemetry data-classification and SLO measurement/runbook acceptance contract
 - **Requirement:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
 - **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:007', 'type': 'PREFERENCE'}
@@ -2170,7 +2170,7 @@
 - **نوع کار، اجزا:** `ARCHITECTURE_DESIGN`؛ PostgreSQL job state; Port/Adapter; service-owned worker
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 service ownership; owner-specific long-running use case
+- **شرط ورود:** `TASK:CORE:002` service ownership; owner-specific long-running use case
 - **خروجی دقیق:** versioned job pattern and worker-crash/migration test contract
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
 - **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
@@ -2199,7 +2199,7 @@
 - **نوع کار، اجزا:** `CONDITIONAL_DESIGN`؛ Owner transaction; outbox; event schema; subscribers
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 data ownership; demonstrable event consumer/use case
+- **شرط ورود:** `TASK:CORE:002` data ownership; demonstrable event consumer/use case
 - **خروجی دقیق:** minimal event/outbox protocol with fault-injection acceptance
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
 - **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
@@ -2228,7 +2228,7 @@
 - **نوع کار، اجزا:** `CONTRACT_HARDENING`؛ HTTP client; job queue; rate/timeout/circuit policy
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T003 and T008 service-contract interfaces
+- **شرط ورود:** `TASK:CORE:003` and `TASK:CORE:008` service-contract interfaces
 - **خروجی دقیق:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
 - **ACهای C01:** `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
@@ -2257,7 +2257,7 @@
 - **نوع کار، اجزا:** `CONTRACT_CHANGE`؛ FastAPI OpenAPI; API v1 router; schema fixtures; CI
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T002 authority matrix and existing API schema
+- **شرط ورود:** `TASK:CORE:002` authority matrix and existing API schema
 - **خروجی دقیق:** contract matrix and migration-safe OpenAPI evolution plan
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
 - **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
@@ -2286,7 +2286,7 @@
 - **نوع کار، اجزا:** `POLICY_AND_CONFIG_DESIGN`؛ core/config.py; CI security; configuration deployment
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T001 baseline and known policy owners
+- **شرط ورود:** `TASK:CORE:001` baseline and known policy owners
 - **خروجی دقیق:** four-category config contract and validation/rollback tests
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
 - **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
@@ -2315,7 +2315,7 @@
 - **نوع کار، اجزا:** `OBSERVABILITY_DESIGN`؛ api/observability.py; metrics/logging; tracing; CI and runbooks
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** T001 operational footprint and realistic workload
+- **شرط ورود:** `TASK:CORE:001` operational footprint and realistic workload
 - **خروجی دقیق:** telemetry data-classification and SLO measurement/runbook acceptance contract
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
 - **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
@@ -6831,12 +6831,12 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 
 | لایه | Task / پوشش | مالک واقعی و مرز |
 |---|---|---|
-| Architecture / Adviser runtime | T001–T005 | Adviser consumer؛ مرز Core/Adviser طبق A01/A02؛ synchronous retrieval بر حسب policy، worker مستقل فرض نیست. |
-| Backend / Retrieval API | T002–T005 | read ports/versioned contracts؛ API schema جدید مصوب نشده؛ R01 query decomposition و route دارد. |
-| Database / Index | T001–T003,T005 | R03 مالک سند/نسخه/relation/Snapshot/lineage؛ فناوری و schema فیزیکی OPEN؛ R05 read-only. |
-| Security / Privacy | T003–T005 | C01 source trust و C02 authorization؛ user/tenant scope روی cache/نتیجه اعمال می‌شود. |
-| Infrastructure / Resilience | T005 | C01 job/failure contracts و R02 access adapter؛ bounded retry, stop, circuit/bulkhead طبق policy؛ عددها OPEN. |
-| Observability | T001,T004,T005 | consume `CONTRACT:C01:06`; selection/stop/error reasons با metadata حداقلی؛ no user prompt/raw PII پیش‌فرض. |
+| Architecture / Adviser runtime | `TASK:RAG:R05:001`–`TASK:RAG:R05:005` | Adviser consumer؛ مرز Core/Adviser طبق A01/A02؛ synchronous retrieval بر حسب policy، worker مستقل فرض نیست. |
+| Backend / Retrieval API | `TASK:RAG:R05:002`–`TASK:RAG:R05:005` | read ports/versioned contracts؛ API schema جدید مصوب نشده؛ R01 query decomposition و route دارد. |
+| Database / Index | `TASK:RAG:R05:001`–`TASK:RAG:R05:003`,`TASK:RAG:R05:005` | R03 مالک سند/نسخه/relation/Snapshot/lineage؛ فناوری و schema فیزیکی OPEN؛ R05 read-only. |
+| Security / Privacy | `TASK:RAG:R05:003`–`TASK:RAG:R05:005` | C01 source trust و C02 authorization؛ user/tenant scope روی cache/نتیجه اعمال می‌شود. |
+| Infrastructure / Resilience | `TASK:RAG:R05:005` | C01 job/failure contracts و R02 access adapter؛ bounded retry, stop, circuit/bulkhead طبق policy؛ عددها OPEN. |
+| Observability | `TASK:RAG:R05:001`,`TASK:RAG:R05:004`,`TASK:RAG:R05:005` | consume `CONTRACT:C01:06`; selection/stop/error reasons با metadata حداقلی؛ no user prompt/raw PII پیش‌فرض. |
 | Testing | AC/TEST 001–010 | Snapshot concurrency, multi-method, structure, eligibility, relation, gap, sufficiency, freshness, budget/fallback, cache isolation. همه برنامه‌ای‌اند. |
 | Frontend | Handoff to R06 / existing Adviser UI owner | R05 خروجی typed evidence/status می‌دهد؛ UI response/citation presentation در R06/Adviser UX؛ UI feature جدید تعریف نمی‌کند. |
 
@@ -7023,14 +7023,14 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 
 | لایه | Task / پوشش | مالک واقعی و مرز |
 |---|---|---|
-| Architecture / Adviser | T001–T006 | پاسخ/guard در Adviser مستقل؛ Core فقط API نسخه‌دار؛ Assistant اجرا و action در R06 نیست. |
-| Backend / API | T001,T002,T005 | consume R05/C01/C05b/C02 contracts؛ R06 endpoint/schema تازه تصویب نمی‌کند. |
-| Database / history | T005,T006 | R03 Snapshot/evidence; C14 messages/feedback; C01 traces/release evidence؛ R06 producer است نه data owner. |
-| Frontend / answer UX | T003 | claim limitations, source citations, clarification/referral text؛ route/presentation shell مالک بسته UI موجود است. |
-| Security / privacy | T001,T004,T006 | C02 identity/consent/current scope؛ ADR-RAG-13/26/14؛ logs minimize PII/CoT. |
-| Infrastructure / operations | T005,T006 | C01 observability/release; no mandatory broker, second LLM, expert team or monitoring vendor. |
-| Evaluation / testing | T005,T006 | per-layer test harness, versioned fixtures; actual test cases NOT_EXECUTED; numeric gates OPEN. |
-| Failure / recovery | T002,T004,T005,T006 | fail-closed when evidence/auth/trace/eval/compatibility unavailable; never claim audit success without sink. |
+| Architecture / Adviser | `TASK:RAG:R06:001`–`TASK:RAG:R06:006` | پاسخ/guard در Adviser مستقل؛ Core فقط API نسخه‌دار؛ Assistant اجرا و action در R06 نیست. |
+| Backend / API | `TASK:RAG:R06:001`,`TASK:RAG:R06:002`,`TASK:RAG:R06:005` | consume R05/C01/C05b/C02 contracts؛ R06 endpoint/schema تازه تصویب نمی‌کند. |
+| Database / history | `TASK:RAG:R06:005`,`TASK:RAG:R06:006` | R03 Snapshot/evidence; C14 messages/feedback; C01 traces/release evidence؛ R06 producer است نه data owner. |
+| Frontend / answer UX | `TASK:RAG:R06:003` | claim limitations, source citations, clarification/referral text؛ route/presentation shell مالک بسته UI موجود است. |
+| Security / privacy | `TASK:RAG:R06:001`,`TASK:RAG:R06:004`,`TASK:RAG:R06:006` | C02 identity/consent/current scope؛ ADR-RAG-13/26/14؛ logs minimize PII/CoT. |
+| Infrastructure / operations | `TASK:RAG:R06:005`,`TASK:RAG:R06:006` | C01 observability/release; no mandatory broker, second LLM, expert team or monitoring vendor. |
+| Evaluation / testing | `TASK:RAG:R06:005`,`TASK:RAG:R06:006` | per-layer test harness, versioned fixtures; actual test cases NOT_EXECUTED; numeric gates OPEN. |
+| Failure / recovery | `TASK:RAG:R06:002`,`TASK:RAG:R06:004`,`TASK:RAG:R06:005`,`TASK:RAG:R06:006` | fail-closed when evidence/auth/trace/eval/compatibility unavailable; never claim audit success without sink. |
 
 **تصمیم‌های باز:**
 
