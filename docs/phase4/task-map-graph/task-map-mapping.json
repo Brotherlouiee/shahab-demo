@@ -35867,6 +35867,688 @@
       "cycle_task_count": 0,
       "cross_package_nonstructural_edges": 0,
       "semantic_regeneration": "NOT_VERIFIED_NO_COMMITTED_GENERATOR"
+    },
+    "task_name_evidence_override_count": 80,
+    "task_name_evidence_override_source": "Plan task headings or explicit task-row labels only; source Task graph name fields remain unchanged.",
+    "task_name_evidence_override_unresolved": [
+      {
+        "task_ref": "TASK:CORE:C13B:008",
+        "reason": "No explicit Task title/label located in the pinned Plan; inferred name deliberately omitted."
+      }
+    ],
+    "stage4_high_finding_followup": {
+      "AUD-01": {
+        "status": "PARTIALLY_MITIGATED_SOURCE_GRAPH_IMMUTABLE",
+        "evidence_backed_labels_added": 80,
+        "unresolved_task_refs": [
+          "TASK:CORE:C13B:008"
+        ],
+        "source_graph_unchanged": true
+      },
+      "AUD-02": {
+        "status": "PHASE5_INPUT",
+        "reason": "Plan handoff text names package-level transfers but does not establish a complete task-level dependency relation type/order for every pair; no edge was invented."
+      },
+      "AUD-03": {
+        "status": "RESOLVED_IN_MAPPING",
+        "open_decisions_preserved": 134,
+        "blocked": 115,
+        "unmapped_in_task_graph": 19
+      },
+      "AUD-04": {
+        "status": "PARTIALLY_RESOLVED_MAPPING_ONLY",
+        "reason": "Mapping links now follow cited Plan/source evidence; original Ledger decision_reference inconsistencies remain for separately governed Ledger correction."
+      },
+      "AUD-06": {
+        "status": "PHASE5_INPUT",
+        "reason": "No committed deterministic semantic Mapping generator/replay exists; JSON/hash checks are not semantic regeneration."
+      },
+      "AUD-07": {
+        "status": "PHASE5_INPUT",
+        "reason": "No current-code node link means no counterpart was found in the pinned Graphify graph; it does not prove repository-wide absence."
+      }
     }
-  }
+  },
+  "task_name_evidence_overrides": [
+    {
+      "task_ref": "TASK:ASSISTANT:A07:004",
+      "graph_name": ",",
+      "plan_display_label": "گذار نشست و نقش",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8413",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:ASSISTANT:A08:001",
+      "graph_name": ",",
+      "plan_display_label": "inventory و مالکیت API اجرایی",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8531",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:ASSISTANT:A08:004",
+      "graph_name": ",",
+      "plan_display_label": "کلاس‌بندی و schema پیکربندی",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8534",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:001",
+      "graph_name": "، `TASK:CORE:C01:002`، `TASK:CORE:C01:003",
+      "plan_display_label": "Verify phase-one code/data/migration and regression baseline without assuming production state",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:125",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:002",
+      "graph_name": "، `TASK:CORE:C01:003",
+      "plan_display_label": "Define and test modular Core boundaries and independent service data ownership",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:137",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:004",
+      "graph_name": "، `TASK:CORE:C01:005`، `TASK:CORE:C01:006`، `TASK:CORE:C01:008",
+      "plan_display_label": "Preserve deterministic loan recommendation under one published snapshot and expose versioned contract",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:161",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:005",
+      "graph_name": "، `TASK:CORE:C01:006`، `TASK:CORE:C01:008",
+      "plan_display_label": "Design service-owned durable job pattern without imposing one universal workflow engine",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:173",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:006",
+      "graph_name": "، `TASK:CORE:C01:008",
+      "plan_display_label": "Specify transactional outbox and idempotent event consumption only for proven asynchronous flows",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:185",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:007",
+      "graph_name": "، `TASK:CORE:C01:009`، `TASK:CORE:C01:010",
+      "plan_display_label": "Specify bounded cross-service resilience and interactive/background isolation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:197",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:009",
+      "graph_name": "، `TASK:CORE:C01:010",
+      "plan_display_label": "Separate typed runtime config, secrets, feature flags and protected financial business policy",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:221",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:011",
+      "graph_name": "، `TASK:CORE:C01:012`، `TASK:CORE:C01:013",
+      "plan_display_label": "Implement planning-level stage/release separation and RG/REL/F06/COV evidence mapping",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:245",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C01:012",
+      "graph_name": "، `TASK:CORE:C01:013",
+      "plan_display_label": "Protect modular Wallet/Ledger boundary and future service/contract integration without early financial activation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:257",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C02:001",
+      "graph_name": "، `TASK:CORE:C02:002`، `TASK:CORE:C02:003`، `TASK:CORE:C02:004`، `TASK:CORE:C02:005",
+      "plan_display_label": "Personal and organization identity proof",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:874",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C02:002",
+      "graph_name": "، `TASK:CORE:C02:003`، `TASK:CORE:C02:004`، `TASK:CORE:C02:005",
+      "plan_display_label": "Organization membership lifecycle",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:887",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C02:003",
+      "graph_name": "، `TASK:CORE:C02:004`، `TASK:CORE:C02:005",
+      "plan_display_label": "Tenant-scoped actor authorization",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:900",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C02:004",
+      "graph_name": "، `TASK:CORE:C02:005",
+      "plan_display_label": "Consent, sessions and cross-domain boundaries",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:913",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C12A:005",
+      "graph_name": ".",
+      "plan_display_label": "معماری، دوام و پذیرش ledger",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5681",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:001",
+      "graph_name": "تاریخچه:",
+      "plan_display_label": "تاریخچه",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5991",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:002",
+      "graph_name": "رسید:",
+      "plan_display_label": "رسید",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5993",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:003",
+      "graph_name": "دسترسی:",
+      "plan_display_label": "دسترسی",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5995",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:004",
+      "graph_name": "پرونده:",
+      "plan_display_label": "پرونده",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5997",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:005",
+      "graph_name": "بازیابی:",
+      "plan_display_label": "بازیابی",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6000",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:006",
+      "graph_name": "نمایش پیام:",
+      "plan_display_label": "نمایش پیام",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6002",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C13B:007",
+      "graph_name": "/ مانده و اجزای آن:",
+      "plan_display_label": "/ مانده و اجزای آن",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6003",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:001",
+      "graph_name": "event contract:",
+      "plan_display_label": "event contract",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6077",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:002",
+      "graph_name": "eligibility:",
+      "plan_display_label": "eligibility",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6079",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:003",
+      "graph_name": "lifecycle:",
+      "plan_display_label": "lifecycle",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6081",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:004",
+      "graph_name": "history:",
+      "plan_display_label": "history",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6083",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:005",
+      "graph_name": "channel:",
+      "plan_display_label": "channel",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6084",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:006",
+      "graph_name": "observability:",
+      "plan_display_label": "observability",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6086",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:007",
+      "graph_name": "reliability:",
+      "plan_display_label": "reliability",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6087",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:CORE:C14:008",
+      "graph_name": "privacy/incident:",
+      "plan_display_label": "privacy/incident",
+      "label_source_type": "PLAN_TASK_ROW_LABEL",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6090",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R01:001",
+      "graph_name": "AC:RAG:R01:001",
+      "plan_display_label": "Admission Gate and authoritative scope validation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6190",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R01:002",
+      "graph_name": "AC:RAG:R01:003",
+      "plan_display_label": "Query understanding and question decomposition",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6191",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R01:003",
+      "graph_name": "AC:RAG:R01:004",
+      "plan_display_label": "Evidence sufficiency and route selection",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6192",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R01:004",
+      "graph_name": "AC:RAG:R01:007",
+      "plan_display_label": "Failure recovery and risk/budget stop policy",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6193",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R01:005",
+      "graph_name": "AC:RAG:R01:009",
+      "plan_display_label": "Privacy-aware trace and claim outcome guard",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6194",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R02:001",
+      "graph_name": "AC:RAG:R02:001",
+      "plan_display_label": "Authorized source-access adapters and capability boundary",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6317",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R02:002",
+      "graph_name": "AC:RAG:R02:003",
+      "plan_display_label": "Versioned SourceAccessResult contract",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6318",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R02:003",
+      "graph_name": "AC:RAG:R02:004",
+      "plan_display_label": "Demand-driven ingestion job and R03 candidate handoff",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6319",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R02:004",
+      "graph_name": "AC:RAG:R02:006",
+      "plan_display_label": "Persian extraction, normalization and quality/quarantine",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6320",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R02:005",
+      "graph_name": "AC:RAG:R02:008",
+      "plan_display_label": "Untrusted-source and prompt-injection defense",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6321",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R03:001",
+      "graph_name": "AC:RAG:R03:001",
+      "plan_display_label": "Stable document identity, legal version, PostgreSQL/FTS V0.1 baseline, bitemporal record and versioned logical contracts",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6459",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R03:002",
+      "graph_name": "AC:RAG:R03:005",
+      "plan_display_label": "Evidence/provision binding and legal relation records",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6460",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R03:003",
+      "graph_name": "AC:RAG:R03:007",
+      "plan_display_label": "Knowledge candidate and review lifecycle",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6461",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R03:004",
+      "graph_name": "AC:RAG:R03:008",
+      "plan_display_label": "Compatible snapshot validation and atomic activation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6462",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R03:005",
+      "graph_name": "AC:RAG:R03:009",
+      "plan_display_label": "Dependency lineage, selective invalidation and historical citation/rollback",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6463",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R04:001",
+      "graph_name": "AC:RAG:R04:001",
+      "plan_display_label": "Adaptive discovery priority and monitoring policy",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6591",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R04:002",
+      "graph_name": "AC:RAG:R04:002",
+      "plan_display_label": "Lightweight source catalog and observation provenance",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6592",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R04:003",
+      "graph_name": "AC:RAG:R04:004",
+      "plan_display_label": "Source classification, trust and use-rights metadata",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6593",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R04:004",
+      "graph_name": "AC:RAG:R04:006",
+      "plan_display_label": "Source lifecycle, monitoring outcome and RDE handoff",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6594",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R04:005",
+      "graph_name": "AC:RAG:R04:010",
+      "plan_display_label": "Idempotent discovery job and recovery contract",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6595",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R05:001",
+      "graph_name": "AC:RAG:R05:001 / TEST:RAG:R05:001",
+      "plan_display_label": "Snapshot-bound retrieval input and candidate contract",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6725",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R05:002",
+      "graph_name": "AC:RAG:R05:002 / TEST:RAG:R05:002",
+      "plan_display_label": "Hybrid candidate generation and structural context",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6726",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R05:003",
+      "graph_name": "AC:RAG:R05:004 / TEST:RAG:R05:004",
+      "plan_display_label": "Eligibility, relation expansion and service coverage",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6727",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R05:004",
+      "graph_name": "AC:RAG:R05:007 / TEST:RAG:R05:007",
+      "plan_display_label": "Claim-level sufficiency and freshness evidence",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6728",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R05:005",
+      "graph_name": "AC:RAG:R05:009 / TEST:RAG:R05:009",
+      "plan_display_label": "Budgeted recovery and validity-aware cache",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6729",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:001",
+      "graph_name": "AC:RAG:R06:001 / TEST:RAG:R06:001",
+      "plan_display_label": "Claim map and typed evidence assembly",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6901",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:002",
+      "graph_name": "AC:RAG:R06:003 / TEST:RAG:R06:003",
+      "plan_display_label": "Independent Citation Guard and uncertainty decision",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6902",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:003",
+      "graph_name": "AC:RAG:R06:006 / TEST:RAG:R06:006",
+      "plan_display_label": "Support referral and Persian citation renderer",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6903",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:004",
+      "graph_name": "AC:RAG:R06:008 / TEST:RAG:R06:008",
+      "plan_display_label": "Prompt, authorization and privacy boundary",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6904",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:005",
+      "graph_name": "AC:RAG:R06:009 / TEST:RAG:R06:009",
+      "plan_display_label": "Answer trace and evaluation harness",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6905",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R06:006",
+      "graph_name": "AC:RAG:R06:011 / TEST:RAG:R06:011",
+      "plan_display_label": "Feedback classification and versioned release gate",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6906",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R07:001",
+      "graph_name": "AC:RAG:R07:001 / TEST:RAG:R07:001",
+      "plan_display_label": "پذیرفتن و normalize کردن observation candidate",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7119",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R07:002",
+      "graph_name": "AC:RAG:R07:002 / TEST:RAG:R07:002",
+      "plan_display_label": "ساخت candidate با matcherهای ساختاری/واژگانی/معنایی قابل‌تعویض",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7120",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R07:003",
+      "graph_name": "AC:RAG:R07:005 / TEST:RAG:R07:005",
+      "plan_display_label": "ارزیابی candidate و صدور درخواست selective-ingestion/relation review",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7121",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R07:004",
+      "graph_name": "AC:RAG:R07:008 / TEST:RAG:R07:008",
+      "plan_display_label": "durable job، dedupe، retry و مشاهده‌پذیری workflow",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7122",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R08:001",
+      "graph_name": "AC:RAG:R08:001 / TEST:RAG:R08:001",
+      "plan_display_label": "trigger تطبیقی و دسترسی مجاز برای بازبینی شناخته‌شده",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7251",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R08:002",
+      "graph_name": "AC:RAG:R08:003 / TEST:RAG:R08:003",
+      "plan_display_label": "compare versions و ثبت uncertainty/state به owner صحیح",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7252",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R08:003",
+      "graph_name": "AC:RAG:R08:005 / TEST:RAG:R08:005",
+      "plan_display_label": "impact analysis مبتنی بر dependency lineage",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7253",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R08:004",
+      "graph_name": "AC:RAG:R08:006 / TEST:RAG:R08:006",
+      "plan_display_label": "بازسازی مشتقات و گیت‌های انتشار ownerها",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7254",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R08:005",
+      "graph_name": "AC:RAG:R08:009 / TEST:RAG:R08:009",
+      "plan_display_label": "durable recovery، backpressure، trace و notification",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7255",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R09:001",
+      "graph_name": "AC:RAG:R09:001 / TEST:RAG:R09:001",
+      "plan_display_label": "قرارداد state نشست و Backend validation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7399",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R09:002",
+      "graph_name": "AC:RAG:R09:003 / TEST:RAG:R09:003",
+      "plan_display_label": "اتصال entity/evidence و transition revalidation",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7400",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R09:003",
+      "graph_name": "AC:RAG:R09:005 / TEST:RAG:R09:005",
+      "plan_display_label": "continuity مجاز و interaction تغییر حوزه",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7401",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R09:004",
+      "graph_name": "AC:RAG:R09:007 / TEST:RAG:R09:007",
+      "plan_display_label": "privacy boundary و trace",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7402",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R10:001",
+      "graph_name": "AC:RAG:R10:001 / TEST:RAG:R10:001",
+      "plan_display_label": "قرارداد ورودی و اتصال deterministic port",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7480",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R10:002",
+      "graph_name": "AC:RAG:R10:003 / TEST:RAG:R10:003",
+      "plan_display_label": "Snapshot binding و result provenance",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7481",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R10:003",
+      "graph_name": "AC:RAG:R10:005 / TEST:RAG:R10:005",
+      "plan_display_label": "جداسازی outputها و خطای دامنه",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7482",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    },
+    {
+      "task_ref": "TASK:RAG:R10:004",
+      "graph_name": "AC:RAG:R10:007 / TEST:RAG:R10:007",
+      "plan_display_label": "API hardening، UI، trace/monitoring",
+      "label_source_type": "PLAN_TASK_TITLE",
+      "source_ref": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7483",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+    }
+  ]
 }
