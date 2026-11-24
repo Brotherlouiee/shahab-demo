@@ -1227,7 +1227,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"| یکپارچگی ارجاع‌های Package Index | {validations['package_index_reference_integrity']['result']} | {validations['package_index_reference_integrity']['checked']} شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |",
         f"| پوشش کامل trace rowها | {validations['execution_trace_row_integrity']['result']} | {validations['execution_trace_row_integrity']['checked']} ردیف |",
         f"| علت‌دار بودن candidateهای نیازمند بازبینی | {validations['review_required_rows_have_reason']['result']} | {validations['review_required_rows_have_reason']['checked']} ردیف |",
-        f"| پیوندهای معنایی Source→Package→Req→Task→AC/Test | {validations['semantic_review_disposition_integrity']['result']} | {verified_covered + verified_partial + verified_uncovered} obligation dispositions mapped; remaining candidates are pending |",
+        f"| پیوندهای معنایی Source→Package→Req→Task→AC/Test | {validations['semantic_review_disposition_integrity']['result']} | {len(atom_ledger)} Atomic Obligation؛ {reviewed_count}/{len(candidates)} Candidate بررسی شده؛ Pending={pending_count} |",
         f"| وضعیت نگاشت نامعتبر/شکسته | {validations['atomic_obligation_ledger_integrity']['result']} | {validations['atomic_obligation_ledger_integrity']['errors']} ledger errors; coverage claims remain limited to cited evidence |",
         "",
         "## نقص‌های استخراج که اصلاح شدند",
@@ -1253,7 +1253,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "",
         "## مرحلهٔ بعد",
         "",
-        f"ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `{next((r['candidate_id'] for r in candidates if r['candidate_id'] not in reviewed_ledger_ids), 'NONE')}` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.",
+        f"وضعیت بازبینی Candidateها: {reviewed_count}/{len(candidates)} بررسی‌شده؛ Pending={pending_count}. تصمیم‌های باز و شکاف‌های تأییدشده جداگانه در Ledger ثبت شده‌اند؛ Pending بودن به‌تنهایی شکاف قطعی محسوب نمی‌شود.",
         "",
     ])
     (COVERAGE / "semantic-validation-report.md").write_text("\n".join(report), encoding="utf-8")

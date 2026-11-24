@@ -95,7 +95,7 @@
 | یکپارچگی ارجاع‌های Package Index | PASS | 4596 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 1151 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 1285 Atomic Obligation؛ 1633/1633 Candidate بررسی شده؛ Pending=0 |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -119,4 +119,4 @@ Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1633 از 163
 
 ## مرحلهٔ بعد
 
-ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `NONE` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
+وضعیت بازبینی Candidateها: 1633/1633 بررسی‌شده؛ Pending=0. تصمیم‌های باز و شکاف‌های تأییدشده جداگانه در Ledger ثبت شده‌اند؛ Pending بودن به‌تنهایی شکاف قطعی محسوب نمی‌شود.
