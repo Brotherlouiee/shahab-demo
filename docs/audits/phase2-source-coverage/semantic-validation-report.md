@@ -1,8 +1,8 @@
 # گزارش اعتبارسنجی پوشش منابع فاز دوم
 
-**MATRIX_BUILD_STATUS:** `INCOMPLETE`
+**MATRIX_BUILD_STATUS:** `COMPLETE`
 
-**PROGRAM_COVERAGE_STATUS:** `INDETERMINATE`
+**PROGRAM_COVERAGE_STATUS:** `ASSESSED_WITH_GAPS`
 **گیت‌ها:** هیچ گیت RA/IPA/CPA یا QG در این گزارش PASS اعلام نمی‌شود.
 
 ## شمارش واقعی
@@ -18,12 +18,12 @@
 | بلوک fenced ثبت‌شده | 27 |
 | کل candidate row | 1633 |
 | بسته‌های index شده | 36 / 36 |
-| تعیین‌تکلیف ردیفی انجام‌شده | 1483 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 88 ردیف مثال و 653 نگاشت معنایی بررسی‌شده |
-| تعیین‌تکلیف Candidateهای متنی | 16 از 1136 محدودهٔ متن، 470 از 470 ردیف جدول، 27 از 27 بلوک fenced |
-| Candidateهای pending review | 150؛ pending بودن به‌تنهایی شکاف قطعی نیست |
-| رکوردهای Gap Register | 219؛ 176 بازبینی محتوایی + 43 تصمیم باز |
-| Atomic Obligationهای دارای نگاشت Covered | 973 |
-| نگاشت تأییدشدهٔ covered/partial/uncovered | 973/98/0 |
+| تعیین‌تکلیف ردیفی انجام‌شده | 1633 از 1633 candidate؛ 58 سرستون، 11 جداکننده، 88 ردیف مثال و 667 نگاشت معنایی بررسی‌شده |
+| تعیین‌تکلیف Candidateهای متنی | 26 از 1136 محدودهٔ متن، 470 از 470 ردیف جدول، 27 از 27 بلوک fenced |
+| Candidateهای pending review | 0؛ pending بودن به‌تنهایی شکاف قطعی نیست |
+| رکوردهای Gap Register | 75؛ 32 بازبینی محتوایی + 43 تصمیم باز |
+| Atomic Obligationهای دارای نگاشت Covered | 1050 |
+| نگاشت تأییدشدهٔ covered/partial/uncovered | 1050/78/0 |
 | شکاف معنایی قطعی | هنوز تعیین نشده |
 | پیشنهادهای قاعده‌محورِ تأییدنشده | {"DESCRIPTIVE": 125, "EXAMPLE": 111, "MIXED": 104, "NEEDS_REVIEW": 762, "NORMATIVE_APPROVED": 506, "NORMATIVE_OPEN_DECISION": 19, "OUT_OF_SCOPE": 1, "SUPERSEDED": 5} |
 
@@ -66,11 +66,12 @@
 | WALLET-CHARGE-AND-GIFT-006 | WL-C-0666, WL-C-0667, WL-C-0668, WL-C-0669, WL-C-0670, WL-C-0671, WL-C-0672, WL-C-0673, WL-C-0674, WL-C-0675, WL-C-0676, WL-C-0677, WL-C-0678, WL-C-0679, WL-C-0680, WL-C-0681, WL-C-0682, WL-C-0683, WL-C-0684, WL-C-0685, WL-C-0686, WL-C-0687, WL-C-0688, WL-C-0689, WL-C-0690, WL-C-0691, WL-C-0692, WL-C-0693, WL-C-0694, WL-C-0695, WL-C-0696, WL-C-0697, WL-C-0698, WL-C-0699, WL-C-0700, WL-C-0701, WL-C-0702, WL-C-0703, WL-C-0704, WL-C-0705, WL-C-0706, WL-C-0707, WL-C-0708, WL-C-0709, WL-C-0710, WL-C-0711, WL-C-0712, WL-C-0713, WL-C-0714, WL-C-0715, WL-C-0716, WL-C-0717, WL-C-0718, WL-C-0719, WL-C-0720, WL-C-0721, WL-C-0722, WL-C-0723, WL-C-0724, WL-C-0725, WL-C-0726, WL-C-0727, WL-C-0728, WL-C-0729, WL-C-0730, WL-C-0731, WL-C-0732, WL-C-0733, WL-C-0734, WL-C-0735 | 741→811 | 892→822 | 13 | 13/0/0 | 0 |
 | WALLET-CONSUMPTION-AND-RESERVATION-007 | WL-C-0563, WL-C-0564, WL-C-0565, WL-C-0566, WL-C-0567, WL-C-0647, WL-C-0648, WL-C-0649, WL-C-0736, WL-C-0737, WL-C-0738, WL-C-0739, WL-C-0740, WL-C-0741, WL-C-0742, WL-C-0743, WL-C-0744, WL-C-0745, WL-C-0746, WL-C-0747, WL-C-0748, WL-C-0749, WL-C-0750, WL-C-0751, WL-C-0752, WL-C-0753, WL-C-0754, WL-C-0755, WL-C-0756, WL-C-0757, WL-C-0758, WL-C-0759, WL-C-0760, WL-C-0761, WL-C-0762, WL-C-0763, WL-C-0764, WL-C-0765, WL-C-0766, WL-C-0767, WL-C-0768, WL-C-0769, WL-C-0770, WL-C-0771, WL-C-0772, WL-C-0773, WL-C-0774, WL-C-0775, WL-C-0776, WL-C-0777, WL-C-0778, WL-C-0779, WL-C-0901, WL-C-0998, WL-C-1004, WL-C-1005, WL-C-1006, WL-C-1007, WL-C-1021, WL-C-1022, WL-C-1023, WL-C-1024, WL-C-1025, WL-C-1026, WL-C-0478, WL-C-0479, WL-C-0568, WL-C-0569, WL-C-0570, WL-C-0571, WL-C-0572, WL-C-0573 | 811→883 | 822→750 | 37 | 37/0/0 | 0 |
 | BLUEPRINT-RAG-AND-ARCH-008 | BP-C-0457, BP-C-0458, BP-C-0033, BP-C-0034, BP-C-0035, BP-C-0036, BP-C-0037, BP-C-0038, BP-C-0039, BP-C-0040, BP-C-0459, BP-C-0041, BP-C-0042, BP-C-0043, BP-C-0044, BP-C-0045, BP-C-0046, BP-C-0047, BP-C-0048, BP-C-0049, BP-C-0050, BP-C-0051, BP-C-0052, BP-C-0053, BP-C-0054, BP-C-0055, BP-C-0056, BP-C-0057, BP-C-0058, BP-C-0059, BP-C-0060, BP-C-0061, BP-C-0062, BP-C-0063, BP-C-0064, BP-C-0065, BP-C-0066, BP-C-0067, BP-C-0068, BP-C-0069, BP-C-0070, BP-C-0071, BP-C-0072, BP-C-0073, BP-C-0074, BP-C-0075, BP-C-0076, BP-C-0099, BP-C-0101, BP-C-0102, BP-C-0126, BP-C-0127, BP-C-0128, BP-C-0129, BP-C-0130, BP-C-0131, BP-C-0132, BP-C-0133, BP-C-0134, BP-C-0135, BP-C-0136, BP-C-0137, BP-C-0138, BP-C-0139, BP-C-0140, BP-C-0141, BP-C-0145, BP-C-0146, BP-C-0147, BP-C-0148, BP-C-0149, BP-C-0150, BP-C-0151, BP-C-0152, BP-C-0153 | 883→958 | 750→675 | 128 | 77/50/0 | 1 |
-| BLUEPRINT-WALLET-AND-INTERACTION-009 | BP-C-0154, BP-C-0155, BP-C-0156, BP-C-0157, BP-C-0162, BP-C-0163, BP-C-0164, BP-C-0165, BP-C-0166, BP-C-0167, BP-C-0168, BP-C-0169, BP-C-0170, BP-C-0171, BP-C-0172, BP-C-0173, BP-C-0174, BP-C-0175, BP-C-0176, BP-C-0177, BP-C-0178, BP-C-0179, BP-C-0180, BP-C-0181, BP-C-0182, BP-C-0183, BP-C-0184, BP-C-0185, BP-C-0188, BP-C-0189, BP-C-0190, BP-C-0191, BP-C-0192, BP-C-0193, BP-C-0194, BP-C-0197, BP-C-0198, BP-C-0199, BP-C-0200, BP-C-0201, BP-C-0202, BP-C-0208, BP-C-0209, BP-C-0210, BP-C-0211, BP-C-0212, BP-C-0214, BP-C-0215, BP-C-0216, BP-C-0217, BP-C-0218, BP-C-0219, BP-C-0220, BP-C-0221, BP-C-0222, BP-C-0223, BP-C-0224, BP-C-0225, BP-C-0226, BP-C-0227, BP-C-0228, BP-C-0229, BP-C-0230, BP-C-0231, BP-C-0232, BP-C-0233, BP-C-0234, BP-C-0235, BP-C-0236, BP-C-0237, BP-C-0238, BP-C-0239, BP-C-0240, BP-C-0241, BP-C-0243 | 958→1033 | 675→600 | 67 | 19/48/0 | 0 |
+| BLUEPRINT-WALLET-AND-INTERACTION-009 | BP-C-0154, BP-C-0155, BP-C-0156, BP-C-0157, BP-C-0162, BP-C-0163, BP-C-0164, BP-C-0165, BP-C-0166, BP-C-0167, BP-C-0168, BP-C-0169, BP-C-0170, BP-C-0171, BP-C-0172, BP-C-0173, BP-C-0174, BP-C-0175, BP-C-0176, BP-C-0177, BP-C-0178, BP-C-0179, BP-C-0180, BP-C-0181, BP-C-0182, BP-C-0183, BP-C-0184, BP-C-0185, BP-C-0188, BP-C-0189, BP-C-0190, BP-C-0191, BP-C-0192, BP-C-0193, BP-C-0194, BP-C-0197, BP-C-0198, BP-C-0199, BP-C-0200, BP-C-0201, BP-C-0202, BP-C-0208, BP-C-0209, BP-C-0210, BP-C-0211, BP-C-0212, BP-C-0214, BP-C-0215, BP-C-0216, BP-C-0217, BP-C-0218, BP-C-0219, BP-C-0220, BP-C-0221, BP-C-0222, BP-C-0223, BP-C-0224, BP-C-0225, BP-C-0226, BP-C-0227, BP-C-0228, BP-C-0229, BP-C-0230, BP-C-0231, BP-C-0232, BP-C-0233, BP-C-0234, BP-C-0235, BP-C-0236, BP-C-0237, BP-C-0238, BP-C-0239, BP-C-0240, BP-C-0241, BP-C-0243 | 958→1033 | 675→600 | 115 | 65/28/0 | 22 |
 | BLUEPRINT-INTERACTION-AND-RELEASE-010-PARTIALS | BP-TR-027-04, BP-TR-033-04, BP-TR-033-05, BP-TR-033-06, BP-TR-033-08, BP-TR-033-09, BP-C-0243 | 1033→1033 | 600→600 | 13 | 10/0/0 | 3 |
 | BLUEPRINT-INTERACTION-AND-RELEASE-010 | BP-C-0244, BP-C-0245, BP-C-0246, BP-C-0247, BP-C-0248, BP-C-0249, BP-C-0250, BP-C-0251, BP-C-0252, BP-C-0253, BP-C-0254, BP-C-0257, BP-C-0258, BP-C-0259, BP-C-0260, BP-C-0261, BP-C-0262, BP-C-0268, BP-C-0269, BP-C-0270, BP-C-0271, BP-C-0272, BP-C-0273, BP-C-0274, BP-C-0275, BP-C-0276, BP-C-0277, BP-C-0278, BP-C-0279, BP-C-0280, BP-C-0281, BP-C-0282, BP-C-0283, BP-C-0284, BP-C-0285, BP-C-0286, BP-C-0287, BP-C-0288, BP-C-0289, BP-C-0290, BP-C-0291, BP-C-0292, BP-C-0293, BP-C-0294, BP-C-0295, BP-C-0296, BP-C-0297, BP-C-0298, BP-C-0299, BP-C-0300, BP-C-0301, BP-C-0302, BP-C-0303, BP-C-0304, BP-C-0305, BP-C-0306, BP-C-0307, BP-C-0308, BP-C-0309, BP-C-0310, BP-C-0311, BP-C-0312, BP-C-0313, BP-C-0314, BP-C-0315, BP-C-0316, BP-C-0317, BP-C-0318, BP-C-0319, BP-C-0320, BP-C-0321, BP-C-0322, BP-C-0323, BP-C-0324, BP-C-0325, BP-C-0326, BP-C-0327, BP-C-0328, BP-C-0329, BP-C-0330, BP-C-0331, BP-C-0332, BP-C-0333, BP-C-0334, BP-C-0335, BP-C-0336, BP-C-0337, BP-C-0338, BP-C-0339, BP-C-0340, BP-C-0341, BP-C-0342, BP-C-0343, BP-C-0344, BP-C-0345, BP-C-0346, BP-C-0347, BP-C-0348, BP-C-0349, BP-C-0350, BP-C-0351, BP-C-0352, BP-C-0353, BP-C-0354, BP-C-0355, BP-C-0356, BP-C-0357, BP-C-0358, BP-C-0359, BP-C-0360, BP-C-0361, BP-C-0362, BP-C-0363, BP-C-0364, BP-C-0365, BP-C-0366, BP-C-0367, BP-C-0368, BP-C-0369, BP-C-0370, BP-C-0371, BP-C-0372, BP-C-0373, BP-C-0374, BP-C-0375, BP-C-0376, BP-C-0377, BP-C-0378, BP-C-0379, BP-C-0389, BP-C-0390, BP-C-0391, BP-C-0392, BP-C-0393, BP-C-0394, BP-C-0395, BP-C-0396, BP-C-0397, BP-C-0398, BP-C-0399, BP-C-0400, BP-C-0401, BP-C-0402, BP-C-0403, BP-C-0404, BP-C-0405, BP-C-0406, BP-C-0407, BP-C-0408, BP-C-0409 | 1033→1183 | 600→450 | 127 | 105/0/0 | 22 |
 | AUDIT-2026-11-24-011 | BP-C-0410, BP-C-0411, BP-C-0412, BP-C-0413, BP-C-0414, BP-C-0415, BP-C-0416, BP-C-0417, BP-C-0418, BP-C-0419, BP-C-0420, BP-C-0421, BP-C-0422, BP-C-0423, BP-C-0424, BP-C-0425, BP-C-0426, BP-C-0466, BP-C-0467, BP-C-0427, BP-C-0428, BP-C-0429, BP-C-0430, BP-C-0431, BP-C-0432, BP-C-0433, BP-C-0434, BP-C-0435, BP-C-0436, BP-C-0437, BP-C-0438, BP-C-0439, BP-C-0440, BP-C-0441, BP-C-0442, BP-C-0443, BP-C-0444, BP-C-0445, BP-C-0446, BP-C-0447, BP-C-0448, BP-C-0449, BP-C-0450, BP-C-0451, BP-C-0452, BP-C-0453, BP-C-0454, BP-C-0455, BP-C-0456, WL-C-0457, WL-C-0458, WL-C-0459, WL-C-0460, WL-C-0461, WL-C-0462, WL-C-0463, WL-C-0464, WL-C-0465, WL-C-0466, WL-C-0467, WL-C-0468, WL-C-0469, WL-C-0470, WL-C-0471, WL-C-0472, WL-C-0473, WL-C-0474, WL-C-0475, WL-C-0476, WL-C-0477, WL-C-0480, WL-C-0481, WL-C-0482, WL-C-0483, WL-C-0484, WL-C-0485, WL-C-0486, WL-C-0487, WL-C-0488, WL-C-0489, WL-C-0490, WL-C-0491, WL-C-0492, WL-C-0493, WL-C-0494, WL-C-0495, WL-C-0496, WL-C-0497, WL-C-0498, WL-C-0499, WL-C-0500, WL-C-0501, WL-C-0502, WL-C-0503, WL-C-0504, WL-C-0505, WL-C-0506, WL-C-0507, WL-C-0508, WL-C-0509, WL-C-0510, WL-C-0511, WL-C-0512, WL-C-0513, WL-C-0514, WL-C-0515, WL-C-0516, WL-C-0517, WL-C-0518, WL-C-0519, WL-C-0520, WL-C-0521, WL-C-0522, WL-C-0523, WL-C-0524, WL-C-0525, WL-C-0526, WL-C-0527, WL-C-0528, WL-C-0529, WL-C-0530, WL-C-0531, WL-C-0532, WL-C-0533, WL-C-0534, WL-C-0535, WL-C-0536, WL-C-0537, WL-C-0538, WL-C-0539, WL-C-0540, WL-C-0541, WL-C-0542, WL-C-0543, WL-C-0544, WL-C-0545, WL-C-0546, WL-C-0547, WL-C-0548, WL-C-0549, WL-C-0550, WL-C-0551, WL-C-0552, WL-C-0553, WL-C-0554, WL-C-0555, WL-C-0556, WL-C-0557, WL-C-0558, WL-C-0559 | 1183→1333 | 450→300 | 52 | 50/0/0 | 2 |
 | AUDIT-2026-11-24-012 | WL-C-0560, WL-C-0561, WL-C-0562, WL-C-0574, WL-C-0575, WL-C-0576, WL-C-0577, WL-C-0578, WL-C-0579, WL-C-0580, WL-C-0581, WL-C-0582, WL-C-0583, WL-C-0584, WL-C-0585, WL-C-0586, WL-C-0587, WL-C-0588, WL-C-0589, WL-C-0590, WL-C-0591, WL-C-0592, WL-C-0593, WL-C-0594, WL-C-0595, WL-C-0596, WL-C-0597, WL-C-0598, WL-C-0599, WL-C-0600, WL-C-0601, WL-C-0602, WL-C-0603, WL-C-0604, WL-C-0605, WL-C-0606, WL-C-0607, WL-C-0608, WL-C-0609, WL-C-0610, WL-C-0611, WL-C-0612, WL-C-0613, WL-C-0614, WL-C-0615, WL-C-0616, WL-C-0617, WL-C-0618, WL-C-0619, WL-C-0620, WL-C-0621, WL-C-0622, WL-C-0623, WL-C-0624, WL-C-0625, WL-C-0626, WL-C-0627, WL-C-0628, WL-C-0629, WL-C-0630, WL-C-0631, WL-C-0632, WL-C-0633, WL-C-0634, WL-C-0635, WL-C-0636, WL-C-0637, WL-C-0638, WL-C-0639, WL-C-0640, WL-C-0641, WL-C-0642, WL-C-0643, WL-C-0644, WL-C-0645, WL-C-0646, WL-C-0650, WL-C-0651, WL-C-0652, WL-C-0653, WL-C-0654, WL-C-0655, WL-C-0656, WL-C-0657, WL-C-0658, WL-C-0659, WL-C-0660, WL-C-0661, WL-C-0662, WL-C-0663, WL-C-0664, WL-C-0665, WL-C-0780, WL-C-0781, WL-C-0782, WL-C-0783, WL-C-0784, WL-C-0785, WL-C-0786, WL-C-0787, WL-C-0788, WL-C-0789, WL-C-0790, WL-C-0791, WL-C-0792, WL-C-0793, WL-C-0794, WL-C-0795, WL-C-0796, WL-C-0797, WL-C-0798, WL-C-0799, WL-C-0800, WL-C-0801, WL-C-0802, WL-C-0803, WL-C-0804, WL-C-0805, WL-C-0806, WL-C-0807, WL-C-0808, WL-C-0809, WL-C-0810, WL-C-0811, WL-C-0812, WL-C-0813, WL-C-0814, WL-C-0815, WL-C-0816, WL-C-0817, WL-C-0818, WL-C-0819, WL-C-0820, WL-C-0821, WL-C-0822, WL-C-0823, WL-C-0824, WL-C-0825, WL-C-0826, WL-C-0827, WL-C-0828, WL-C-0829, WL-C-0830, WL-C-0831, WL-C-0832, WL-C-0833, WL-C-0834, WL-C-0835, WL-C-0836, WL-C-0837 | 1333→1483 | 300→150 | 34 | 29/0/0 | 5 |
+| WALLET-AUDIT-2026-11-24-013 | WL-C-0838, WL-C-0839, WL-C-0840, WL-C-0841, WL-C-0842, WL-C-0843, WL-C-0844, WL-C-0845, WL-C-0846, WL-C-0847, WL-C-0848, WL-C-0849, WL-C-0850, WL-C-0851, WL-C-0852, WL-C-0853, WL-C-0975, WL-C-0976, WL-C-0977, WL-C-0978, WL-C-0979, WL-C-0980, WL-C-0981, WL-C-0982, WL-C-0983, WL-C-0984, WL-C-0985, WL-C-0986, WL-C-0987, WL-C-0988, WL-C-0989, WL-C-0990, WL-C-0991, WL-C-0992, WL-C-0993, WL-C-0994, WL-C-0995, WL-C-0996, WL-C-0997, WL-C-0999, WL-C-1000, WL-C-1001, WL-C-1002, WL-C-1003, WL-C-1008, WL-C-1009, WL-C-1010, WL-C-1011, WL-C-1012, WL-C-1013, WL-C-1014, WL-C-1015, WL-C-1016, WL-C-1017, WL-C-1018, WL-C-1019, WL-C-1020, WL-C-1027, WL-C-1028, WL-C-1029, WL-C-1030, WL-C-1031, WL-C-1032, WL-C-1033, WL-C-1034, WL-C-1035, WL-C-1036, WL-C-1037, WL-C-1038, WL-C-1039, WL-C-1040, WL-C-1041, WL-C-1042, WL-C-1043, WL-C-1044, WL-C-1045, WL-C-1046, WL-C-1047, WL-C-1048, WL-C-1049, WL-C-1050, WL-C-1051, WL-C-1052, WL-C-1053, WL-C-1054, WL-C-1055, WL-C-1056, WL-C-1057, WL-C-1058, WL-C-1059, WL-C-1060, WL-C-1061, WL-C-1062, WL-C-1063, WL-C-1064, WL-C-1065, WL-C-1066, WL-C-1067, WL-C-1068, WL-C-1069, WL-C-1070, WL-C-1071, WL-C-1072, WL-C-1073, WL-C-1074, WL-C-1075, WL-C-1076, WL-C-1077, WL-C-1078, WL-C-1079, WL-C-1080, WL-C-1081, WL-C-1082, WL-C-1083, WL-C-1084, WL-C-1085, WL-C-1086, WL-C-1087, WL-C-1088, WL-C-1089, WL-C-1090, WL-C-1091, WL-C-1092, WL-C-1093, WL-C-1094, WL-C-1095, WL-C-1096, WL-C-1097, WL-C-1099, WL-C-1100, WL-C-1101, WL-C-1102, WL-C-1103, WL-C-1104, WL-C-1105, WL-C-1111, WL-C-1112, WL-C-1113, WL-C-1114, WL-C-1106, WL-C-1107, WL-C-1108, WL-C-1109, WL-C-1110, WL-C-1115, WL-C-1116, WL-C-1117, WL-C-1118, WL-C-1119, WL-C-1120 | 1483→1633 | 150→0 | 32 | 31/0/0 | 1 |
 
 ## کنترل‌های ماشینی
 
@@ -79,17 +80,17 @@
 | تعداد Heading/Table | PASS | 326 Heading و 58 Table |
 | هش Git blob دو منبع | PASS | برابر manifest جاری |
 | SHA-256 دو منبع | PASS | با اثر انگشت graph پین‌شده تطبیق داده شد |
-| محدوده‌های متنی و سطرهای جدول | PARTIAL | 1483 از 1633 Candidate بررسی شده؛ 150 باقی است |
+| محدوده‌های متنی و سطرهای جدول | PASS | 1633 از 1633 Candidate بررسی شده؛ 0 باقی است |
 | Package Execution Index | PASS | ردیف‌های برنامه‌ای استخراج شدند؛ پیوند معنایی مستقل هنوز بررسی نشده |
 | تکراری نبودن IDهای منبع/candidate | PASS/PASS | IDs بررسی‌شده: 1547 source units، 1633 candidateها |
-| یکپارچگی دفتر Atomic Obligation | PASS | 1162 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
-| یکپارچگی دفتر دسته‌ها | PASS | 1396 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
+| یکپارچگی دفتر Atomic Obligation | PASS | 1242 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
+| یکپارچگی دفتر دسته‌ها | PASS | 1546 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 12736؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
-| یکپارچگی ارجاع‌های Package Index | PASS | 4042 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 12915؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| یکپارچگی ارجاع‌های Package Index | PASS | 4096 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
-| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 1071 obligation dispositions mapped; remaining candidates are pending |
+| پیوندهای معنایی Source→Package→Req→Task→AC/Test | PASS | 1050 Covered، 78 Partial، 0 Uncovered؛ candidate review pending=0. اثبات معنایی trace فقط برای نگاشت‌های دارای شاهد مستقل ادعا می‌شود. |
 | وضعیت نگاشت نامعتبر/شکسته | PASS | 0 ledger errors; coverage claims remain limited to cited evidence |
 
 ## نقص‌های استخراج که اصلاح شدند
@@ -102,7 +103,7 @@
 
 ## محدودیت معنایی
 
-Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1483 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 1162 Atomic Obligation ثبت شده؛ 150 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
+Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1633 از 1633 Candidate با متن منبع و مقصد بررسی شده‌اند و 1242 Atomic Obligation ثبت شده؛ 0 Candidate هنوز نیازمند بازبینی‌اند. Candidate و obligation دو شمارش متفاوت‌اند. وضعیت Covered/Partial/Uncovered از دفتر اتمی و شواهد مشخص آن بازتولید شده است.
 
 ## منابع و گراف
 
@@ -113,8 +114,4 @@ Rule-based labels فقط سرنخ‌اند. تا این اجرا، 1483 از 163
 
 ## مرحلهٔ بعد
 
-ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `WL-C-0838` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
-
-## بازبینی تکمیلی AC/Test در C07 — 2026-11-24
-
-بررسی معنایی Requirementهای `C07:011` و `C07:012` در برابر متن Wallet نشان داد AC/Testهای هم‌شماره جابه‌جا/ناهم‌راستا بودند. `C07:011` اکنون فیلدهای ساختاریافتهٔ جزء اعتبار و حفظ آن‌ها پس از انتقال را می‌آزماید؛ `C07:012` حق برداشت وابسته به منشأ را می‌سنجد. مالکیت کیف پول سازمانی پیش‌تر در `C07:002` پوشش صریح داشت. شمار Candidateها و وضعیت‌های Covered/Partial/Open Decision از این اصلاح تغییری نکرده‌اند؛ این اصلاح به‌تنهایی ادعای افزایش پوشش اتمی ایجاد نمی‌کند. پس از اصلاح، کنترل‌های ساختاری Ledger و ۲۹ کنترل ماشینی PASS هستند؛ وضعیت‌های کلی برنامه و گیت‌ها همان مقادیر گزارش‌شده در بالاست.
+ادامهٔ دسته‌ای از اولین Candidate بررسی‌نشده `NONE` است. هر دسته باید با بازبینی متن، زمینه، تصمیم، ردیابی واقعی Requirement/Task/AC/Test، اصلاح نقص و اعتبارسنجی کامل شود. Candidateهای باقی‌ماندهٔ pending به‌خودی‌خود شکاف قطعی محسوب نمی‌شوند.
