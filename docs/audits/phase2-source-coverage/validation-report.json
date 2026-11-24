@@ -97,7 +97,7 @@
       "partial": 0
     }
   },
-  "plan_blob_sha": "8a1d8b6e952720737430bca50d1baf9a9dd0117d",
+  "plan_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
   "sources": {
     "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": {
       "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
@@ -142,6 +142,22 @@
     "approved_obligations_verified": 1151,
     "open_decisions_verified": 134,
     "atomic_obligation_records": 1285,
+    "canonical_task_records": 189,
+    "canonical_subtask_records": 471,
+    "canonical_task_ids_by_domain": {
+      "CORE": {
+        "tasks": 103,
+        "subtasks": 201
+      },
+      "RAG": {
+        "tasks": 48,
+        "subtasks": 146
+      },
+      "ASSISTANT": {
+        "tasks": 38,
+        "subtasks": 124
+      }
+    },
     "descriptive_units_verified": 689,
     "verified_covered_obligations": 1149,
     "partially_covered_obligations": 0,
@@ -259,7 +275,7 @@
       "examples": []
     },
     "package_index_reference_integrity": {
-      "checked": 4596,
+      "checked": 4692,
       "errors": 0,
       "result": "PASS",
       "examples": []

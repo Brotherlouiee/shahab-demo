@@ -828,6 +828,47 @@ def validate_outputs(old_inventory: list[dict[str, str]], old_candidates: list[d
         for row in task_ledger:
             for alias in task_alias_pattern.findall(row.get("task_ids","")):
                 ref_errors.append(f"non-canonical Task alias in {ledger_name}: {alias}")
+    # Enforce the package-owned canonical form throughout executable and audit references.
+    # The only intentional home for legacy spellings is the historical mapping CSV.
+    canonical_task_pattern=re.compile(r"(?<![A-Za-z0-9_])TASK:(CORE|RAG|ASSISTANT):([A-Z0-9]+):(\d{3})(?:\.S(\d{2}))?(?![A-Za-z0-9_])")
+    defined_tasks={m.group(0) for m in canonical_task_pattern.finditer(plan_text)}
+    operational_files=subprocess.run(["git","ls-files","-z"],cwd=ROOT,check=True,capture_output=True).stdout.decode("utf-8").split("\0")
+    legacy_task_pattern=re.compile(r"(?<![A-Za-z0-9_])(?:TASK:CORE:\d{3}(?:\.S\d{2})?|TASK:(?:C\d{2}[A-Z]?|R\d{2}|A\d{2}):\d{3}(?:\.S\d{2})?|C(?:\d{2}[A-Z]?)-T\d{2}(?:\.\d{2}|\.S\d{2})?)(?![A-Za-z0-9_])")
+    ref_paths=set()
+    for rel in operational_files:
+        if not rel or rel.endswith("task-id-canonical-mapping.csv") or rel.endswith("validation-report.json"):
+            continue
+        path=ROOT/rel
+        try:
+            content=path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for alias in sorted(set(legacy_task_pattern.findall(content))):
+            ref_errors.append(f"legacy Task alias outside mapping table {rel}: {alias}")
+        for task_id in canonical_task_pattern.findall(content):
+            pass
+        for match in canonical_task_pattern.finditer(content):
+            if match.group(0) not in defined_tasks:
+                ref_errors.append(f"canonical Task reference absent from Plan in {rel}: {match.group(0)}")
+    mapping_path=COVERAGE/"task-id-canonical-mapping.csv"
+    registry_path=COVERAGE/"task-subtask-canonical-registry.csv"
+    if mapping_path.exists():
+        _, mapping_rows=read_csv(mapping_path)
+        legacy_ids=[r.get("legacy_id","") for r in mapping_rows]
+        if len(legacy_ids)!=len(set(legacy_ids)):
+            ref_errors.append("legacy Task mapping contains duplicate alias rows")
+        if any(r.get("canonical_id","") not in defined_tasks and r.get("canonical_id")!="UNMAPPED" for r in mapping_rows):
+            ref_errors.append("legacy Task mapping targets an ID absent from Plan")
+    if registry_path.exists():
+        _, registry_rows=read_csv(registry_path)
+        registry_ids=[r.get("canonical_id","") for r in registry_rows]
+        if len(registry_ids)!=len(set(registry_ids)) or set(registry_ids)!=defined_tasks:
+            ref_errors.append("canonical Task registry does not uniquely match Plan IDs")
+        for row in registry_rows:
+            if row.get("unit_type")=="SUBTASK" and row.get("parent_task_id") not in defined_tasks:
+                ref_errors.append(f"canonical subtask has missing parent: {row.get('canonical_id')}")
+    else:
+        ref_errors.append("canonical Task registry is missing")
     record("requirement_task_ac_test_references", sum(len(r[c].split(";")) for r in trace for c in ["requirement_candidates","task_subtask_candidates","ac_test_candidates","story_enabler_candidates"]), ref_errors)
     package_ref_columns = ["mentioned_candidate_ids", "mentioned_requirement_ids", "mentioned_story_enabler_ids", "mentioned_task_subtask_ids", "mentioned_ac_ids", "mentioned_test_definition_ids", "mentioned_test_case_ids", "mentioned_dependency_ids", "mentioned_contract_ids", "mentioned_handoff_ids"]
     package_ref_errors=[]
@@ -1075,6 +1116,9 @@ def update_manifest(structural: Counter[str], candidate_counts: Counter[str], so
 
 def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], candidate_counts: Counter[str], source_hashes: dict[str, dict[str, Any]], graph_sha: str, structural_errors: list[str], validations: dict[str, dict[str, Any]]) -> None:
     statuses = Counter(r["classification_suggestion"] for r in candidates)
+    registry_path=COVERAGE/"task-subtask-canonical-registry.csv"
+    registry_rows=read_csv(registry_path)[1] if registry_path.exists() else []
+    mapping_rows=read_csv(COVERAGE/"task-id-canonical-mapping.csv")[1] if (COVERAGE/"task-id-canonical-mapping.csv").exists() else []
     review_states = Counter(r["review_status"] for r in candidates)
     trace_fields, trace = read_csv(COVERAGE / "execution-trace.csv")
     package_fields, packages = read_csv(COVERAGE / "package-execution-index.csv")
@@ -1139,6 +1183,9 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "atomic_obligations_extracted_and_verified": len(atom_ledger), "approved_obligations_verified": sum(a.get("normative_status")=="NORMATIVE_APPROVED" for a in atom_ledger),
             "open_decisions_verified": sum(a.get("normative_status")=="NORMATIVE_OPEN_DECISION" for a in atom_ledger),
             "atomic_obligation_records":len(atom_ledger),
+            "canonical_task_records": sum(r.get("unit_type")=="TASK" for r in registry_rows) if registry_path.exists() else 0,
+            "canonical_subtask_records": sum(r.get("unit_type")=="SUBTASK" for r in registry_rows) if registry_path.exists() else 0,
+            "canonical_task_ids_by_domain": {d: {"tasks": sum(r.get("domain")==d and r.get("unit_type")=="TASK" for r in registry_rows), "subtasks": sum(r.get("domain")==d and r.get("unit_type")=="SUBTASK" for r in registry_rows)} for d in ("CORE","RAG","ASSISTANT")} if registry_path.exists() else {},
             "descriptive_units_verified": sum(r.get("normative_status")=="DESCRIPTIVE" for r in reviewed_ledger), "verified_covered_obligations": verified_covered, "partially_covered_obligations": verified_partial,
             "candidate_rows_marked_covered": sum(r.get("coverage_status")=="VERIFIED_COVERED" for r in trace), "candidate_rows_marked_partial": sum(r.get("coverage_status")=="VERIFIED_PARTIAL" for r in trace), "candidate_rows_marked_uncovered": sum(r.get("coverage_status")=="VERIFIED_UNCOVERED" for r in trace),
             "confirmed_uncovered_obligations": verified_uncovered, "semantic_reviews_pending": pending_count,
@@ -1209,6 +1256,16 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         "| Batch ID | Candidate IDs | Reviewed Before→After | Pending Before→After | Atomic Obligations | Covered/Partial/Uncovered | Open Decisions |",
         "|---|---|---:|---:|---:|---:|---:|",
         *[f"| {b['batch_id']} | {', '.join(b['candidate_ids'])} | {b['reviewed_before']}→{b['reviewed_after']} | {b['pending_before']}→{b['pending_after']} | {b['atomic_obligations']} | {b['covered']}/{b['partial']}/{b['uncovered']} | {b['open_decisions']} |" for b in batch_summaries],
+        "",
+        "## یکپارچه‌سازی شناسه‌های Task و Subtask",
+        "",
+        f"رجیستری یکتا شامل {sum(r.get('unit_type')=='TASK' for r in registry_rows)} Task و {sum(r.get('unit_type')=='SUBTASK' for r in registry_rows)} Subtask است. {sum(r.get('canonical_id')!='UNMAPPED' for r in mapping_rows)} شکل شناسهٔ قدیمی به شناسهٔ canonical تبدیل و در جدول نگاشت تاریخی ثبت شد؛ شناسه‌های قدیمی در ارجاع‌های عملیاتی باقی نمانده‌اند.",
+        "",
+        "| دامنه | Task یکتا | Subtask یکتا |",
+        "|---|---:|---:|",
+        *[f"| {domain} | {sum(r.get('domain')==domain and r.get('unit_type')=='TASK' for r in registry_rows)} | {sum(r.get('domain')==domain and r.get('unit_type')=='SUBTASK' for r in registry_rows)} |" for domain in ("CORE","RAG","ASSISTANT")],
+        "",
+        "دو شناسهٔ تاریخی C11B به `UNMAPPED` ثبت شدند: در سند شبیه‌سازی به Requirementهای R007/R008 نسبت داده شده بودند، اما Plan رفتارها را بین Taskهای 002/003/004 تقسیم می‌کند و نگاشت یک‌به‌یک مستند نیست. ارجاع‌های اجرایی به Taskهای معتبر Plan اصلاح شدند؛ شکل دقیق تاریخی فقط در جدول نگاشت آمده است.",
         "",
         "## کنترل‌های ماشینی",
         "",

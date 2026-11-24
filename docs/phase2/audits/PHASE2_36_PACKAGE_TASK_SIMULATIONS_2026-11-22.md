@@ -37,7 +37,7 @@
 
 ## C12b — تطبیق و بازیابی مالی
 
-### انتخاب Task: `C12B-T03` — بازیابی و جلوگیری از تکرار
+### انتخاب Task: `TASK:CORE:C12B:003` — بازیابی و جلوگیری از تکرار
 
 **انتخاب پیچیدگی و ریسک:** این Task هر دو معیار را دارد: نتیجهٔ بانکی ممکن است نامعلوم بماند و همزمان callback/replay/retry خطر اثر مالی تکراری ایجاد می‌کند. برای این Task یک شبیه‌سازی مشترک ثبت می‌شود؛ این هم‌پوشانی فقط برای همین Task مستدل است.
 
@@ -180,15 +180,15 @@
 
 ## C01 — معماری و مبانی مشترک Core
 
-### Task پیچیده: `TASK:CORE:006` — Outbox تراکنشی و مصرف idempotent
+### Task پیچیده: `TASK:CORE:C01:006` — Outbox تراکنشی و مصرف idempotent
 
 **انتخاب پیچیدگی:** ترتیب atomic write، publish، duplicate/out-of-order و schema evolution در چند مالک سرویس مداخله می‌کند؛ شرط برنامه این است که فقط برای جریان async اثبات‌شده اعمال شود.
 
 | بُعد | شبیه‌سازی مبتنی بر `REQ:CORE:012/043/044`, `AC:CORE:C01:012/043/044` |
 |---|---|
-| Preconditions | مالک داده و public port از `TASK:CORE:002` روشن؛ use case واقعاً async و consumer مشخص؛ job contract از `TASK:CORE:005` موجود؛ اگر مصرف‌کنندهٔ لازم نیست، outbox تحمیل نشود. |
+| Preconditions | مالک داده و public port از `TASK:CORE:C01:002` روشن؛ use case واقعاً async و consumer مشخص؛ job contract از `TASK:CORE:C01:005` موجود؛ اگر مصرف‌کنندهٔ لازم نیست، outbox تحمیل نشود. |
 | Required Inputs | owner transaction، event purpose/schema/version، producer و consumer، idempotency key، ordering need، failure/replay fixtures و مرجع تغییر سازگار. |
-| Dependencies | `TASK:CORE:002` hard؛ `TASK:CORE:005` contract؛ سرویس مالک event و consumer مربوط؛ C03 فقط طبق data/Job ownership. |
+| Dependencies | `TASK:CORE:C01:002` hard؛ `TASK:CORE:C01:005` contract؛ سرویس مالک event و consumer مربوط؛ C03 فقط طبق data/Job ownership. |
 | Relevant Architecture | modular monolith و ماژول‌های مالک داده؛ outbox محلی با تراکنش مالک؛ publisher/consumer از port؛ broker/engine جدید پیش‌فرض نیست. |
 | Affected Components | transaction boundary، outbox table/interface، publisher، consumer inbox/dedup، schema registry/compatibility check و runbook recovery. |
 | Data/API Contracts | event ID، owner, type, version, correlation, occurred-at و payload حداقلی؛ consumer نسخه ناشناخته را رد/قرنطینه کند؛ payload حساس بی‌جهت منتشر نشود. |
@@ -200,22 +200,22 @@
 | Required Tests | AC/TEST مربوط به `C01:012/043/044`: commit atomicity، crash/replay، duplicate و schema incompatibility؛ هیچ مورد برنامه‌ای اجراشده محسوب نمی‌شود. |
 | Acceptance Criteria | رویداد بدون transaction معتبر منتشر نشود؛ crash منجر به گم‌شدن خاموش یا اثر دوگانه نشود؛ consumer/version ثبت؛ async فقط برای جریان مصوب؛ unknown schema از مسیر عادی جدا شود. |
 | Definition of Done | مرز مالک/consumer، قرارداد نسخه‌دار، oracleهای fault-injection و rollback/replay review شده؛ use case ضرورت دارد؛ acceptance به broker یا فناوری جدید وابسته نشده. |
-| Integration Dependencies | `TASK:CORE:005`, C03 data/Job contract، producer/consumerهای مشخص؛ اگر مسیر financial است، C12a مالک posting باقی می‌ماند. |
+| Integration Dependencies | `TASK:CORE:C01:005`, C03 data/Job contract، producer/consumerهای مشخص؛ اگر مسیر financial است، C12a مالک posting باقی می‌ماند. |
 | PR/Delivery Boundary | contract, test fixture و تغییر Core در scope؛ بدون راه‌اندازی broker/engine جدید، انتشار production یا توسعهٔ مسیرهای فرضی. |
 | Open Decisions | انتخاب engine/transport و هر SLA/retention عددی فقط در صورت نیاز مستند، با owner decision؛ از این Task استنتاج نمی‌شود. |
 | Blockers | consumer/use case واقعی نامشخص مانع فعال‌سازی event می‌شود؛ قراردادهای محلی و fault matrix قابل تهیه‌اند. |
 | Implementation Risks | outbox عمومی و بی‌دلیل؛ consumer به source of truth تبدیل شود؛ dedupe window فرضی؛ schema version bypass؛ مخلوط‌شدن رویداد مالی با telemetry. |
 | Execution Readiness Verdict | **آماده برای طراحی مشروط و آزمون قراردادی پس از اثبات use case؛ اجرای event flow تا producer/consumer واقعی متوقف است.** بدون انتخاب معماری تازه قابل تحویل است. |
 
-### Task پرریسک: `TASK:CORE:009` — پیکربندی، اسرار و سیاست مالی
+### Task پرریسک: `TASK:CORE:C01:009` — پیکربندی، اسرار و سیاست مالی
 
 **انتخاب ریسک:** اختلاط secret، feature flag و policy مالی می‌تواند افشای credential یا فعال‌سازی ناخواستهٔ رفتار مالی ایجاد کند. عدد/سیاست جدید وارد نمی‌شود.
 
 | بُعد | شبیه‌سازی مبتنی بر `REQ:CORE:017/018/045/046`, `AC:CORE:C01:017/018/045/046` |
 |---|---|
-| Preconditions | baseline موجود از `TASK:CORE:001`؛ قرارداد versioning از `TASK:CORE:008`؛ owner مشخص برای هر config و policy؛ تصمیم secret storage/rotation مطابق `DECISION:C01:09` باز بماند. |
+| Preconditions | baseline موجود از `TASK:CORE:C01:001`؛ قرارداد versioning از `TASK:CORE:C01:008`؛ owner مشخص برای هر config و policy؛ تصمیم secret storage/rotation مطابق `DECISION:C01:09` باز بماند. |
 | Required Inputs | نام/نوع/مصرف config موجود؛ طبقه‌بندی secret/runtime/flag/financial policy؛ consumer؛ validation rules؛ compatibility version؛ rollback state و audit. |
-| Dependencies | `TASK:CORE:001` hard؛ `TASK:CORE:008` contract؛ C03 deploy/config ownership؛ policy owners در C04/C07/C08 حسب دامنه. |
+| Dependencies | `TASK:CORE:C01:001` hard؛ `TASK:CORE:C01:008` contract؛ C03 deploy/config ownership؛ policy owners در C04/C07/C08 حسب دامنه. |
 | Relevant Architecture | config فقط مقدار typed runtime؛ secret جدا و محافظت‌شده؛ flag فقط control exposure؛ policy مالی از owner domain می‌آید؛ Core modular authority حفظ می‌شود. |
 | Affected Components | `core/config.py`، settings/schema، deployment injection، CI secret checks، flag gate، policy reader، audit/rollback path. |
 | Data/API Contracts | کلید/نوع/version/owner/environment؛ ممنوعیت secret در logs/errors; default برای required secret fail-closed؛ policy envelope با owner/version/effective status، نه مقدار فرضی. |
@@ -238,15 +238,15 @@
 
 ## C03 — قراردادها، داده و زیرساخت مشترک
 
-### Task پیچیده: `TASK:CORE:005` — الگوی Job پایدارِ تحت مالکیت سرویس
+### Task پیچیده: `TASK:CORE:C01:005` — الگوی Job پایدارِ تحت مالکیت سرویس
 
 **انتخاب:** چند سرویس مصرف‌کننده با نوع کار و lifecycle متفاوت‌اند و برنامه عمداً یک workflow engine واحد تحمیل نمی‌کند. آزمون از C03 perspective است: پیاده‌سازی قرارداد مشترک توسط C03، در حالی‌که state Job نزد سرویس مالک می‌ماند.
 
 | بُعد | مسیر شبیه‌سازی |
 |---|---|
-| Preconditions | مالک سرویس/داده طبق `TASK:CORE:002` روشن؛ use case طولانی واقعاً شناسایی شده باشد؛ قرارداد `CONTRACT:C01:03` هنوز design-only و versioned. |
+| Preconditions | مالک سرویس/داده طبق `TASK:CORE:C01:002` روشن؛ use case طولانی واقعاً شناسایی شده باشد؛ قرارداد `CONTRACT:C01:03` هنوز design-only و versioned. |
 | Required Inputs | service/job owner، job type/version، requester/correlation، input ref، states، retry/recovery policy source، retention owner و consumer scope. |
-| Dependencies | `TASK:CORE:002` hard؛ `TASK:CORE:005`; `CONTRACT-LINK:C03:03`→`CONTRACT:C01:03`; consumer `TEST:CORE:C03:002/003/010–015`. |
+| Dependencies | `TASK:CORE:C01:002` hard؛ `TASK:CORE:C01:005`; `CONTRACT-LINK:C03:03`→`CONTRACT:C01:03`; consumer `TEST:CORE:C03:002/003/010–015`. |
 | Relevant Architecture | هر سرویس مالک state و Jobهایش است؛ C03 الگوی reusable/port را پیاده می‌کند؛ synchronous calls جدا؛ shared table/engine اجباری نیست. |
 | Affected Components | Job contract/port، service-owned persistence adapter، worker lifecycle، status API، recovery/runbook و integration fixtures. |
 | Data/API Contracts | job ID پایدار، owner/type/version/status/timestamps/correlation/input reference؛ بدون private table access؛ error/status معنایی ثابت؛ consumer مجاز. |
@@ -265,15 +265,15 @@
 | Implementation Risks | C03 تصاحب state؛ universal engine؛ retry side effect؛ jobهای کوتاه بی‌دلیل؛ migration که state نامعلوم را overwrite کند. |
 | Execution Readiness Verdict | **آماده برای قرارداد و adapter محدود پس از تعیین use case؛ انتخاب فناوری و SLA باز می‌ماند.** |
 
-### Task پرریسک: `TASK:CORE:006` — Outbox و مصرف idempotent در C03
+### Task پرریسک: `TASK:CORE:C01:006` — Outbox و مصرف idempotent در C03
 
 **انتخاب:** شکست بین commit محلی و انتشار event یا مصرف تکراری می‌تواند وضعیت دو سرویس را divergent کند. این شبیه‌سازی اجرای مالکیت C03 برای همان قرارداد C01 است؛ قرارداد C01 تغییر معنایی یا کپی نمی‌شود.
 
 | بُعد | مسیر شبیه‌سازی |
 |---|---|
-| Preconditions | event producer/consumer و transaction owner مشخص؛ `CONTRACT:C01:04` و ownership `TASK:CORE:002` معتبر؛ async use case اثبات شده باشد. |
+| Preconditions | event producer/consumer و transaction owner مشخص؛ `CONTRACT:C01:04` و ownership `TASK:CORE:C01:002` معتبر؛ async use case اثبات شده باشد. |
 | Required Inputs | owner transaction، event ID، schema/version، correlation، consumer registry، idempotency record، fault points و rollback/replay rules. |
-| Dependencies | C01 `TASK:CORE:006` contract; C03 data/job boundary; producer/consumer package owners؛ C12a هر اثر دفترکل را مستقل مالک است. |
+| Dependencies | C01 `TASK:CORE:C01:006` contract; C03 data/job boundary; producer/consumer package owners؛ C12a هر اثر دفترکل را مستقل مالک است. |
 | Relevant Architecture | outbox محلی در data owner؛ C03 مسئول قرارداد/اجرا فقط در حیطه پذیرفته‌شده؛ consumer state نزد consumer؛ no mandatory broker. |
 | Affected Components | transaction adapter، outbox publisher, consumer dedupe/inbox, schema compatibility gate, retry/replay observability. |
 | Data/API Contracts | event ID/version/correlation/owner/purpose؛ payload حداقلی؛ unknown schema explicit; consumer acknowledgment semantics؛ no implicit ledger authority. |
@@ -626,7 +626,7 @@
 
 ### Task پیچیده: `TASK:CORE:C10:004` — چرخهٔ برداشت و نتیجه
 
-| بُعد | شبیه‌سازی بر مبنای C10-T04 و AC/TEST:CORE:C10:008–009 |
+| بُعد | شبیه‌سازی بر مبنای TASK:CORE:C10:004 و AC/TEST:CORE:C10:008–009 |
 |---|---|
 | Preconditions | مقصد و اختیار C02 تأیید؛ component rights از C07؛ سقف/feeهای مصوب یا OPEN مشخص؛ قرارداد inquiry C12b و ledger C12a. |
 | Required Inputs | intent ID، source components، payee/account ref، amount/fee preview، consent version، provider status/correlation. |
@@ -676,7 +676,7 @@
 
 ## C11a — استرداد و اصلاحات مالی
 
-### Task پیچیده: `C11A-T02` — تخصیص جزءبه‌جزء بازگشت
+### Task پیچیده: `TASK:CORE:C11A:002` — تخصیص جزءبه‌جزء بازگشت
 
 | بُعد | شبیه‌سازی بر مبنای C11A-R002/003/005 و AC/TEST 002/003/005 |
 |---|---|
@@ -701,7 +701,7 @@
 | Implementation Risks | float drift; gift gains cashability; original overwritten; total mismatch. |
 | Execution Readiness Verdict | **Core arithmetic contract ready; affected tie cases BLOCKED_BY_OWNER_DECISION.** |
 
-### Task پرریسک: `C11A-T05` — correction idempotency و unknown
+### Task پرریسک: `TASK:CORE:C11A:005` — correction idempotency و unknown
 
 | بُعد | شبیه‌سازی بر مبنای C11A-R009 و AC/TEST 009 |
 |---|---|
@@ -728,7 +728,7 @@
 
 ## C11b — عملیات دوره‌ای و محدودیت‌ها
 
-### Task پیچیده: `C11B-T08` — اعمال هم‌زمان سقف‌های فعال
+### Task پیچیده: `TASK:CORE:C11B:002` و `TASK:CORE:C11B:004` — اعمال هم‌زمان سقف‌های فعال
 
 | بُعد | شبیه‌سازی بر مبنای C11B-R008 و AC/TEST:C11B:008 |
 |---|---|
@@ -753,7 +753,7 @@
 | Implementation Risks | off-by-one boundary; pending ignored; duplicate capacity; wrong tenant aggregation. |
 | Execution Readiness Verdict | **Evaluator and concurrency design are ready; enabling requires owner-approved period and values.** |
 
-### Task پرریسک: `C11B-T07` — نتیجه نامعلوم و retry همان درخواست
+### Task پرریسک: `TASK:CORE:C11B:003` — نتیجه نامعلوم و retry همان درخواست
 
 | بُعد | شبیه‌سازی بر مبنای C11B-R007 و AC/TEST:C11B:007 |
 |---|---|
@@ -785,7 +785,7 @@
 
 این شش شبیه‌سازی به Task، AC و Test Definition موجود در برنامه متصل‌اند؛ وضعیت‌ها همچنان برنامه‌ای‌اند و اجرای محصول را ادعا نمی‌کنند.
 
-### C13a — `C13A-T03`: failure, same-scope correction and supplier settlement
+### C13a — `TASK:CORE:C13A:003`: failure, same-scope correction and supplier settlement
 
 **انتخاب:** Task complex؛ سناریوها مستقیماً از معیارهای C13A-R07–R09; C13A-AC07–09; C13A-TD07–09 انتخاب شده‌اند.
 
@@ -795,7 +795,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای failure, same-scope correction and supplier settlement. |
 | Dependencies | وابستگی‌ها: C12b inquiry and reconciliation; C12a immutable posting; C11a customer correction; supplier contract. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C13A-T03 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C13A:003 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای cancellation with delivered output; internal failure without output; unknown provider outcome; correction of same scope vs new customer request; supplier payable before/after reconciliation؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |
@@ -812,7 +812,7 @@
 | Implementation risks | ریسک: اشتباه گرفتن حالت unknown با failure، پذیرش side effect تکراری، scope نادرست یا ساختن مقدار پیش‌فرض. |
 | Execution readiness verdict | حکم آمادگی: **Unknown remains unresolved pending inquiry; internal failure has no customer charge; same-scope correction has zero added customer charge; supplier payment waits for matched evidence and never creates a second debit.** شبیه‌سازی برنامه‌ای است؛ اجرای محصول هنوز انجام نشده است. |
 
-### C13a — `C13A-T02`: usage measurement and execution price snapshot
+### C13a — `TASK:CORE:C13A:002`: usage measurement and execution price snapshot
 
 **انتخاب:** Task high-risk؛ سناریوها مستقیماً از معیارهای C13A-R04–R06; C13A-AC04–06; C13A-TD04–06 انتخاب شده‌اند.
 
@@ -822,7 +822,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای usage measurement and execution price snapshot. |
 | Dependencies | وابستگی‌ها: execution ID and tariff version; start-time snapshot; usage/internal cost/customer price as separate linked facts; metric and numeric rate remain OPEN. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C13A-T02 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C13A:002 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای price changes during a running execution; replayed answer; new execution after stop; provider cost differs from customer price; missing usage metric؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |
@@ -839,7 +839,7 @@
 | Implementation risks | ریسک: اشتباه گرفتن حالت unknown با failure، پذیرش side effect تکراری، scope نادرست یا ساختن مقدار پیش‌فرض. |
 | Execution readiness verdict | حکم آمادگی: **Current execution keeps start snapshot; replay/inquiry is not fresh billable usage; a new authorized execution uses then-current tariff; no guessed metric or numeric rate; all three financial measures remain distinct.** شبیه‌سازی برنامه‌ای است؛ اجرای محصول هنوز انجام نشده است. |
 
-### C13b — `C13B-T01`: financial history with combined filters and scoped query
+### C13b — `TASK:CORE:C13B:001`: financial history with combined filters and scoped query
 
 **انتخاب:** Task complex؛ سناریوها مستقیماً از معیارهای C13B-R01–R02; C13B-AC01–02; C13B-TD01–02 انتخاب شده‌اند.
 
@@ -849,7 +849,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای financial history with combined filters and scoped query. |
 | Dependencies | وابستگی‌ها: C12a source-owned operation ID/time/status; C03 read API; C02 current membership/tenant scope. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C13B-T01 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C13B:001 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای combined type/status/time filters; empty result; timeout; date boundary; former organization member; other tenant؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |
@@ -866,7 +866,7 @@
 | Implementation risks | ریسک: اشتباه گرفتن حالت unknown با failure، پذیرش side effect تکراری، scope نادرست یا ساختن مقدار پیش‌فرض. |
 | Execution readiness verdict | حکم آمادگی: **Authorized rows alone appear; filters compose without widening scope; empty is not success; timeout is not empty; former member and foreign tenant are denied/audited.** شبیه‌سازی برنامه‌ای است؛ اجرای محصول هنوز انجام نشده است. |
 
-### C13b — `C13B-T03`: access checks and controlled export
+### C13b — `TASK:CORE:C13B:003`: access checks and controlled export
 
 **انتخاب:** Task high-risk؛ سناریوها مستقیماً از معیارهای C13B-R05–R06; C13B-AC05–06; C13B-TD05–06 انتخاب شده‌اند.
 
@@ -876,7 +876,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای access checks and controlled export. |
 | Dependencies | وابستگی‌ها: C02 is sole authorization owner; organization/member scope; export policy/capability remains OPEN until approved. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C13B-T03 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C13B:003 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای active owner; revoked former member; other tenant; export role absent; export capability unset؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |
@@ -893,7 +893,7 @@
 | Implementation risks | ریسک: اشتباه گرفتن حالت unknown با failure، پذیرش side effect تکراری، scope نادرست یا ساختن مقدار پیش‌فرض. |
 | Execution readiness verdict | حکم آمادگی: **Recheck authorization on every read/export; deny revoked/foreign actor; fail closed if export policy is unset; record audit metadata without copying protected financial details.** شبیه‌سازی برنامه‌ای است؛ اجرای محصول هنوز انجام نشده است. |
 
-### C14 — `C14-T03`: versioned message lifecycle, deduplication and revocation
+### C14 — `TASK:CORE:C14:003`: versioned message lifecycle, deduplication and revocation
 
 **انتخاب:** Task complex؛ سناریوها مستقیماً از معیارهای C14-R05–R06; C14-AC05–06; C14-TD05–06 انتخاب شده‌اند.
 
@@ -903,7 +903,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای versioned message lifecycle, deduplication and revocation. |
 | Dependencies | وابستگی‌ها: C03 source event identity/version and lineage; C02 authorization; C12b/domain impact evidence; priority threshold remains OPEN. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C14-T03 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C14:003 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای same event redelivery; newer version supersedes; revoke; out-of-order stale version; material vs low impact with numeric threshold unset؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |
@@ -920,7 +920,7 @@
 | Implementation risks | ریسک: اشتباه گرفتن حالت unknown با failure، پذیرش side effect تکراری، scope نادرست یا ساختن مقدار پیش‌فرض. |
 | Execution readiness verdict | حکم آمادگی: **One logical message per same version; newer valid version supersedes with lineage; revoke invalidates; stale delivery cannot restore; prioritize by impact without inventing a numeric threshold.** شبیه‌سازی برنامه‌ای است؛ اجرای محصول هنوز انجام نشده است. |
 
-### C14 — `C14-T08`: privacy, retention, incident ownership and Monitoring boundary
+### C14 — `TASK:CORE:C14:008`: privacy, retention, incident ownership and Monitoring boundary
 
 **انتخاب:** Task high-risk؛ سناریوها مستقیماً از معیارهای C14-R12–R14/R16; C14-AC12–14/16; C14-TD12–14/16 انتخاب شده‌اند.
 
@@ -930,7 +930,7 @@
 | Required inputs | ورودی‌ها: شناسه، نسخه/وضعیت مبدأ، actor و رخدادهای ورودی لازم برای privacy, retention, incident ownership and Monitoring boundary. |
 | Dependencies | وابستگی‌ها: C02 privacy/access; C12a financial-history ownership; C04 entitlement; C13a pricing; retention/incident owner and fee/cap values remain OPEN. |
 | Relevant architecture | معماری: مالکیت دامنه و منبع حقیقت در بستهٔ مالک باقی می‌ماند؛ این Task orchestration/مصرف را انجام می‌دهد. |
-| Affected components | اجزای متاثر: C14-T08 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
+| Affected components | اجزای متاثر: TASK:CORE:C14:008 و Subtaskهای تعریف‌شده در plan؛ مصرف‌کنندگان و مسیر خطای مرتبط با سناریوها. |
 | Data/API contracts | قرارداد داده/API: شناسه و correlation پایدار؛ version/status صریح؛ هیچ مقدار یا endpoint تعریف‌نشده جعل نمی‌شود. |
 | Security | امنیت: least privilege، scope جاری، redaction داده حساس و ثبت ممیزی بدون افشای secret/OTP/token. |
 | Implementation sequence | توالی: آماده‌سازی منبع و مجوز؛ اجرای سناریوهای RUM Web Vital vs form/session/click replay; financial record vs technical log expiry; privileged read; Monitoring without entitlement; unresolved fee/cap؛ بررسی state/side effect؛ ثبت شاهد و نتیجه؛ توقف در تصمیم باز. |

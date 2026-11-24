@@ -101,28 +101,28 @@
 - **هدف:** Baseline and modular Core architecture
 - **ارزش:** Source-locked implementable boundary and validation specification; no standalone user release claimed
 - **دامنه:** C01 architecture/phase-one compatibility design only
-- **Taskهای عضو:** `TASK:CORE:001`، `TASK:CORE:002`، `TASK:CORE:003`
+- **Taskهای عضو:** `TASK:CORE:C01:001`، `TASK:CORE:C01:002`، `TASK:CORE:C01:003`
 
 **`TE:CORE:002` — Core/Adviser contracts, snapshots and job/event boundaries**
 - **هدف:** Core/Adviser contracts, snapshots and job/event boundaries
 - **ارزش:** Source-locked implementable boundary and validation specification; no standalone user release claimed
 - **دامنه:** C01 architecture/phase-one compatibility design only
-- **Taskهای عضو:** `TASK:CORE:004`، `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:008`
+- **Taskهای عضو:** `TASK:CORE:C01:004`، `TASK:CORE:C01:005`، `TASK:CORE:C01:006`، `TASK:CORE:C01:008`
 
 **`TE:CORE:003` — Resilience, configuration and privacy-aware telemetry**
 - **هدف:** Resilience, configuration and privacy-aware telemetry
 - **ارزش:** Source-locked implementable boundary and validation specification; no standalone user release claimed
 - **دامنه:** C01 architecture/phase-one compatibility design only
-- **Taskهای عضو:** `TASK:CORE:007`، `TASK:CORE:009`، `TASK:CORE:010`
+- **Taskهای عضو:** `TASK:CORE:C01:007`، `TASK:CORE:C01:009`، `TASK:CORE:C01:010`
 
 **`TE:CORE:004` — Incremental rollout, capacity and finance boundary protection**
 - **هدف:** Incremental rollout, capacity and finance boundary protection
 - **ارزش:** Source-locked implementable boundary and validation specification; no standalone user release claimed
 - **دامنه:** C01 architecture/phase-one compatibility design only
-- **Taskهای عضو:** `TASK:CORE:011`، `TASK:CORE:012`، `TASK:CORE:013`
+- **Taskهای عضو:** `TASK:CORE:C01:011`، `TASK:CORE:C01:012`، `TASK:CORE:C01:013`
 
 #### Taskها و Subtaskهای اجرایی
-##### `TASK:CORE:001` — Verify phase-one code/data/migration and regression baseline without assuming production state
+##### `TASK:CORE:C01:001` — Verify phase-one code/data/migration and regression baseline without assuming production state
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** VALIDATION / EXISTING_PARTIAL
 - **مولفه‌ها:** FastAPI router; account; questionnaire; canonical scorer; serving publication; Alembic; Docker
@@ -130,154 +130,154 @@
 - **خروجی اجرایی:** source-locked current-vs-target capability and migration baseline
 - **Requirement:** `REQ:CORE:022`، `REQ:CORE:023`
 - **وابستگی/قرارداد/پیش‌نیاز:** —
-- **`TASK:CORE:001.S01`:** Map real routes/schemas/dependencies and preserved behavior؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:001.S02`:** Verify Alembic heads/history against actual PostgreSQL test environment؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:001.S03`:** Record tag/release digest and E2E evidence; mark unknown if runtime inaccessible؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:001.S01`:** Map real routes/schemas/dependencies and preserved behavior؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:001.S02`:** Verify Alembic heads/history against actual PostgreSQL test environment؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:001.S03`:** Record tag/release digest and E2E evidence; mark unknown if runtime inaccessible؛ Requirement: `REQ:CORE:022`، `REQ:CORE:023`؛ AC: `AC:CORE:C01:022`، `AC:CORE:C01:023`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:002` — Define and test modular Core boundaries and independent service data ownership
+##### `TASK:CORE:C01:002` — Define and test modular Core boundaries and independent service data ownership
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** ARCHITECTURE_HARDENING / EXISTING_PARTIAL
 - **مولفه‌ها:** backend/app/*; SQLAlchemy; architecture import checks
-- **شرط ورود:** `TASK:CORE:001` baseline
+- **شرط ورود:** `TASK:CORE:C01:001` baseline
 - **خروجی اجرایی:** module ownership map, architecture policy test specification and service data authority matrix
 - **Requirement:** `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}
-- **`TASK:CORE:002.S01`:** Map module ownership and public ports؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:002.S02`:** Specify forbidden private ORM/table access and dependency DAG؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:002.S03`:** Specify local transaction boundaries and regression safety؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:001', 'type': 'HARD'}
+- **`TASK:CORE:C01:002.S01`:** Map module ownership and public ports؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:002.S02`:** Specify forbidden private ORM/table access and dependency DAG؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:002.S03`:** Specify local transaction boundaries and regression safety؛ Requirement: `REQ:CORE:001`، `REQ:CORE:005`، `REQ:CORE:007`، `REQ:CORE:013`؛ AC: `AC:CORE:C01:001`، `AC:CORE:C01:005`، `AC:CORE:C01:007`، `AC:CORE:C01:013`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:003` — Specify R1 Core/Adviser deployment and future Assistant boundary on existing infrastructure
+##### `TASK:CORE:C01:003` — Specify R1 Core/Adviser deployment and future Assistant boundary on existing infrastructure
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** CONTRACT_DESIGN / NEW
 - **مولفه‌ها:** Docker Compose; Core API; Adviser deployment contract; PostgreSQL/Redis ownership
-- **شرط ورود:** `TASK:CORE:002` authority map and R1 scope approval
+- **شرط ورود:** `TASK:CORE:C01:002` authority map and R1 scope approval
 - **خروجی اجرایی:** R1 topology and independent release-boundary acceptance contract without deployment
 - **Requirement:** `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
-- **`TASK:CORE:003.S01`:** Define two R1 deployment units, Assistant interface only؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:003.S02`:** Define shared-host resource and logical tenant/schema separation؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:003.S03`:** Specify R1 boot/integration and no-Wallet dependency checks؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:002', 'type': 'HARD'}
+- **`TASK:CORE:C01:003.S01`:** Define two R1 deployment units, Assistant interface only؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:003.S02`:** Define shared-host resource and logical tenant/schema separation؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:003.S03`:** Specify R1 boot/integration and no-Wallet dependency checks؛ Requirement: `REQ:CORE:002`، `REQ:CORE:003`، `REQ:CORE:004`، `REQ:CORE:049`؛ AC: `AC:CORE:C01:002`، `AC:CORE:C01:003`، `AC:CORE:C01:004`، `AC:CORE:C01:049`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:004` — Preserve deterministic loan recommendation under one published snapshot and expose versioned contract
+##### `TASK:CORE:C01:004` — Preserve deterministic loan recommendation under one published snapshot and expose versioned contract
 - **مالک برنامه‌ریزی / اجرا:** C01 / C05b
 - **نوع کار / وضعیت کد:** CONTRACT_ADAPTATION / REUSE
 - **مولفه‌ها:** recommendation/application/use_cases.py; canonical_scoring.py; data_pipeline/publish_serving_version.py; API
-- **شرط ورود:** `TASK:CORE:001` baseline, `TASK:CORE:008` contract design
+- **شرط ورود:** `TASK:CORE:C01:001` baseline, `TASK:CORE:C01:008` contract design
 - **خروجی اجرایی:** Core recommendation consumer contract and golden/nonregression test plan
 - **Requirement:** `REQ:CORE:008`، `REQ:CORE:009`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
-- **`TASK:CORE:004.S01`:** Freeze existing golden semantics and published snapshot authority؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:004.S02`:** Specify synchronous recommendation result schema, version and provenance؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:004.S03`:** Specify failure/invalid-snapshot handling without fabricated match؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:C01:008', 'type': 'CONTRACT'}
+- **`TASK:CORE:C01:004.S01`:** Freeze existing golden semantics and published snapshot authority؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:004.S02`:** Specify synchronous recommendation result schema, version and provenance؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:004.S03`:** Specify failure/invalid-snapshot handling without fabricated match؛ Requirement: `REQ:CORE:008`، `REQ:CORE:009`؛ AC: `AC:CORE:C01:008`، `AC:CORE:C01:009`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:005` — Design service-owned durable job pattern without imposing one universal workflow engine
+##### `TASK:CORE:C01:005` — Design service-owned durable job pattern without imposing one universal workflow engine
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** ARCHITECTURE_DESIGN / NEW
 - **مولفه‌ها:** PostgreSQL job state; Port/Adapter; service-owned worker
-- **شرط ورود:** `TASK:CORE:002` service ownership; owner-specific long-running use case
+- **شرط ورود:** `TASK:CORE:C01:002` service ownership; owner-specific long-running use case
 - **خروجی اجرایی:** versioned job pattern and worker-crash/migration test contract
 - **Requirement:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
-- **`TASK:CORE:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:002', 'type': 'HARD'}
+- **`TASK:CORE:C01:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
+##### `TASK:CORE:C01:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONDITIONAL_DESIGN / NEW
 - **مولفه‌ها:** Owner transaction; outbox; event schema; subscribers
-- **شرط ورود:** `TASK:CORE:002` data ownership; demonstrable event consumer/use case
+- **شرط ورود:** `TASK:CORE:C01:002` data ownership; demonstrable event consumer/use case
 - **خروجی اجرایی:** minimal event/outbox protocol with fault-injection acceptance
 - **Requirement:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}؛ {'task': 'TASK:CORE:005', 'type': 'CONTRACT'}
-- **`TASK:CORE:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:002', 'type': 'HARD'}؛ {'task': 'TASK:CORE:C01:005', 'type': 'CONTRACT'}
+- **`TASK:CORE:C01:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:007` — Specify bounded cross-service resilience and interactive/background isolation
+##### `TASK:CORE:C01:007` — Specify bounded cross-service resilience and interactive/background isolation
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONTRACT_HARDENING / NEW
 - **مولفه‌ها:** HTTP client; job queue; rate/timeout/circuit policy
-- **شرط ورود:** `TASK:CORE:003` and `TASK:CORE:008` service-contract interfaces
+- **شرط ورود:** `TASK:CORE:C01:003` and `TASK:CORE:C01:008` service-contract interfaces
 - **خروجی اجرایی:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
 - **Requirement:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:003', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
-- **`TASK:CORE:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:003', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:008', 'type': 'CONTRACT'}
+- **`TASK:CORE:C01:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:008` — Design Core API versioning and semantic provider/consumer compatibility verification
+##### `TASK:CORE:C01:008` — Design Core API versioning and semantic provider/consumer compatibility verification
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** CONTRACT_CHANGE / EXISTING_PARTIAL
 - **مولفه‌ها:** FastAPI OpenAPI; API v1 router; schema fixtures; CI
-- **شرط ورود:** `TASK:CORE:002` authority matrix and existing API schema
+- **شرط ورود:** `TASK:CORE:C01:002` authority matrix and existing API schema
 - **خروجی اجرایی:** contract matrix and migration-safe OpenAPI evolution plan
 - **Requirement:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'HARD'}
-- **`TASK:CORE:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:002', 'type': 'HARD'}
+- **`TASK:CORE:C01:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
+##### `TASK:CORE:C01:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** POLICY_AND_CONFIG_DESIGN / EXISTING_PARTIAL
 - **مولفه‌ها:** core/config.py; CI security; configuration deployment
-- **شرط ورود:** `TASK:CORE:001` baseline and known policy owners
+- **شرط ورود:** `TASK:CORE:C01:001` baseline and known policy owners
 - **خروجی اجرایی:** four-category config contract and validation/rollback tests
 - **Requirement:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:008', 'type': 'CONTRACT'}
-- **`TASK:CORE:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:C01:008', 'type': 'CONTRACT'}
+- **`TASK:CORE:C01:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
+##### `TASK:CORE:C01:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
 - **مالک برنامه‌ریزی / اجرا:** C01 / C03
 - **نوع کار / وضعیت کد:** OBSERVABILITY_DESIGN / EXISTING_PARTIAL
 - **مولفه‌ها:** api/observability.py; metrics/logging; tracing; CI and runbooks
-- **شرط ورود:** `TASK:CORE:001` operational footprint and realistic workload
+- **شرط ورود:** `TASK:CORE:C01:001` operational footprint and realistic workload
 - **خروجی اجرایی:** telemetry data-classification and SLO measurement/runbook acceptance contract
 - **Requirement:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:007', 'type': 'PREFERENCE'}
-- **`TASK:CORE:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:001', 'type': 'HARD'}؛ {'task': 'TASK:CORE:C01:007', 'type': 'PREFERENCE'}
+- **`TASK:CORE:C01:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:011` — Implement planning-level stage/release separation and RG/REL/F06/COV evidence mapping
+##### `TASK:CORE:C01:011` — Implement planning-level stage/release separation and RG/REL/F06/COV evidence mapping
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** RELEASE_GOVERNANCE_DESIGN / REUSE
 - **مولفه‌ها:** quality/security workflows; release policy; documentation checkpoint
 - **شرط ورود:** source-locked 22 principles and approved governance decision texts
 - **خروجی اجرایی:** go/no-go and scope-completeness release evidence schema; no release authorized
 - **Requirement:** `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:001', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:004', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:009', 'type': 'POLICY'}؛ {'task': 'TASK:CORE:010', 'type': 'POLICY'}
-- **`TASK:CORE:011.S01`:** Map risk and RG/REL/F06 controls without replacing them؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:011.S02`:** Define stage completion vs incremental readiness evidence and record the O5-09 capacity allocation class and actual Discovery/Delivery split؛ baseline 80/20، critical work 90/10، uncertain work 70/30 with an explicit timebox؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:011.S03`:** Define independent high-risk reviewer, conditional go and rollback records؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:001', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:004', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:009', 'type': 'POLICY'}؛ {'task': 'TASK:CORE:C01:010', 'type': 'POLICY'}
+- **`TASK:CORE:C01:011.S01`:** Map risk and RG/REL/F06 controls without replacing them؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:011.S02`:** Define stage completion vs incremental readiness evidence and record the O5-09 capacity allocation class and actual Discovery/Delivery split؛ baseline 80/20، critical work 90/10، uncertain work 70/30 with an explicit timebox؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:011.S03`:** Define independent high-risk reviewer, conditional go and rollback records؛ Requirement: `REQ:CORE:024`، `REQ:CORE:026`، `REQ:CORE:027`، `REQ:CORE:048`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:026`، `AC:CORE:C01:027`، `AC:CORE:C01:048`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:012` — Protect modular Wallet/Ledger boundary and future service/contract integration without early financial activation
+##### `TASK:CORE:C01:012` — Protect modular Wallet/Ledger boundary and future service/contract integration without early financial activation
 - **مالک برنامه‌ریزی / اجرا:** C01 / C07
 - **نوع کار / وضعیت کد:** BOUNDARY_DESIGN / NEW
 - **مولفه‌ها:** Future wallet module interface; Core financial authority
 - **شرط ورود:** W V0.20 and B A01/O5-13; finance-specific packages later
 - **خروجی اجرایی:** wallet module boundary and finance handoff contract
 - **Requirement:** `REQ:CORE:033`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:002', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:011', 'type': 'POLICY'}
-- **`TASK:CORE:012.S01`:** Document closed-loop scope and Core module ownership؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:012.S02`:** Prohibit external-merchant acceptance and early paid-flow assumption؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:012.S03`:** Handoff ledger/credit policies to C07-C13 without duplicate implementation؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:002', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:011', 'type': 'POLICY'}
+- **`TASK:CORE:C01:012.S01`:** Document closed-loop scope and Core module ownership؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:012.S02`:** Prohibit external-merchant acceptance and early paid-flow assumption؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:012.S03`:** Handoff ledger/credit policies to C07-C13 without duplicate implementation؛ Requirement: `REQ:CORE:033`؛ AC: `AC:CORE:C01:033`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
-##### `TASK:CORE:013` — Benchmark real phase-two service capacity and justify any physical split or VM/telemetry deployment
+##### `TASK:CORE:C01:013` — Benchmark real phase-two service capacity and justify any physical split or VM/telemetry deployment
 - **مالک برنامه‌ریزی / اجرا:** C01 / C01
 - **نوع کار / وضعیت کد:** MEASUREMENT_AND_DECISION / BLOCKED
 - **مولفه‌ها:** docker-compose.prod.yml; VM and runtime metrics; load fixtures
 - **شرط ورود:** authorized performance environment and safe workload; numeric budget gate pending
 - **خروجی اجرایی:** evidence-based capacity decision; no arbitrary VM/SigNoz deployment
 - **Requirement:** `REQ:CORE:032`
-- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:003', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:007', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:010', 'type': 'CONTRACT'}
-- **`TASK:CORE:013.S01`:** Collect existing production/runtime resource baseline when authorized؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:013.S02`:** Measure equal workloads and failure isolation؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:013.S03`:** Compare cost and define explicit physical-extraction decision record؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:013.S04`:** Separate development from operating cost, use measured team capacity/uncertainty, and compare actual time/person-hours/tokens/cost/rework with the estimate after each cycle؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **وابستگی/قرارداد/پیش‌نیاز:** {'task': 'TASK:CORE:C01:003', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:007', 'type': 'CONTRACT'}؛ {'task': 'TASK:CORE:C01:010', 'type': 'CONTRACT'}
+- **`TASK:CORE:C01:013.S01`:** Collect existing production/runtime resource baseline when authorized؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:013.S02`:** Measure equal workloads and failure isolation؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:013.S03`:** Compare cost and define explicit physical-extraction decision record؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:013.S04`:** Separate development from operating cost, use measured team capacity/uncertainty, and compare actual time/person-hours/tokens/cost/rework with the estimate after each cycle؛ Requirement: `REQ:CORE:032`؛ AC: `AC:CORE:C01:032`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
 
 #### ردیابی اتمی Requirement → AC → Test
 هر ردیف زیر حکم منبع را به معیار پذیرش و آزمون طراحی متصل می‌کند. سناریوهای تست طراحی‌اند؛ `NOT_EXECUTED` به معنای تأیید عملکرد واقعی نیست.
@@ -289,8 +289,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** All Core modules / No service-per-module mandate
 - **رفتارهای اتمی:** `REQ:CORE:001.B01` Core remains a modular monolith؛ `REQ:CORE:001.B02` Module public boundaries and data authority are explicit
-- **Taskهای ردیابی‌شده:** `TASK:CORE:002`
-- **AC `AC:CORE:C01:001`**؛ Task: `TASK:CORE:002`؛ Given: All Core modules؛ When: Compose Core with declared modules and public ports: deployment is one modular Core with a single owner per module؛ Then: Core remains a modular monolith؛ Module public boundaries and data authority are explicit؛ Negative: Propose one standalone service per module without evidence: architecture review rejects it؛ Boundary: Add a module calling a private neighbour: boundary checker flags the edge rather than silently expanding public authority
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:002`
+- **AC `AC:CORE:C01:001`**؛ Task: `TASK:CORE:C01:002`؛ Given: All Core modules؛ When: Compose Core with declared modules and public ports: deployment is one modular Core with a single owner per module؛ Then: Core remains a modular monolith؛ Module public boundaries and data authority are explicit؛ Negative: Propose one standalone service per module without evidence: architecture review rejects it؛ Boundary: Add a module calling a private neighbour: boundary checker flags the edge rather than silently expanding public authority
 - **Test `TEST:CORE:C01:001`**؛ Environment: Static topology/module review plus architecture-policy fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:001.P` (POSITIVE): Compose Core with declared modules and public ports: deployment is one modular Core with a single owner per module
   - `TEST:CORE:C01:001.N` (NEGATIVE): Propose one standalone service per module without evidence: architecture review rejects it
@@ -303,8 +303,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Core and Adviser integration / A shared host is permitted, shared private-table authority is not
 - **رفتارهای اتمی:** `REQ:CORE:002.B01` Adviser is independently deployable from Core؛ `REQ:CORE:002.B02` Adviser owns its knowledge data and accesses Core only through authorized contracts
-- **Taskهای ردیابی‌شده:** `TASK:CORE:003`
-- **AC `AC:CORE:C01:002`**؛ Task: `TASK:CORE:003`؛ Given: Core and Adviser integration؛ When: Deploy a compatible Adviser revision independently while Core version stays fixed: authorized API calls remain valid؛ Then: Adviser is independently deployable from Core؛ Adviser owns its knowledge data and accesses Core only through authorized contracts؛ Negative: Configure Adviser credentials to SELECT/UPDATE a Core-private table: DB access denied and no data leaked؛ Boundary: Shared PostgreSQL instance with separate roles: own schema works while cross-schema grants remain absent
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:003`
+- **AC `AC:CORE:C01:002`**؛ Task: `TASK:CORE:C01:003`؛ Given: Core and Adviser integration؛ When: Deploy a compatible Adviser revision independently while Core version stays fixed: authorized API calls remain valid؛ Then: Adviser is independently deployable from Core؛ Adviser owns its knowledge data and accesses Core only through authorized contracts؛ Negative: Configure Adviser credentials to SELECT/UPDATE a Core-private table: DB access denied and no data leaked؛ Boundary: Shared PostgreSQL instance with separate roles: own schema works while cross-schema grants remain absent
 - **Test `TEST:CORE:C01:002`**؛ Environment: Isolated Core/Adviser integration with PostgreSQL16 separate roles and versioned contract harness؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:002.P` (POSITIVE): Deploy a compatible Adviser revision independently while Core version stays fixed: authorized API calls remain valid
   - `TEST:CORE:C01:002.N` (NEGATIVE): Configure Adviser credentials to SELECT/UPDATE a Core-private table: DB access denied and no data leaked
@@ -317,8 +317,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** RAG R1 / Future Assistant deployment needs its own approved release
 - **رفتارهای اتمی:** `REQ:CORE:003.B01` R1 defines Assistant boundaries and versioned interfaces؛ `REQ:CORE:003.B02` R1 contains no running Assistant deployment or operational banking execution
-- **Taskهای ردیابی‌شده:** `TASK:CORE:003`
-- **AC `AC:CORE:C01:003`**؛ Task: `TASK:CORE:003`؛ Given: RAG R1؛ When: Review R1 manifest and interfaces: only Core/Adviser run; Assistant contract is recorded without worker or banking action؛ Then: R1 defines Assistant boundaries and versioned interfaces؛ R1 contains no running Assistant deployment or operational banking execution؛ Negative: Enable Assistant worker or transactional route through a flag in R1: release gate blocks activation؛ Boundary: A UI Coming Soon tab is allowed but cannot invoke an operational tool
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:003`
+- **AC `AC:CORE:C01:003`**؛ Task: `TASK:CORE:C01:003`؛ Given: RAG R1؛ When: Review R1 manifest and interfaces: only Core/Adviser run; Assistant contract is recorded without worker or banking action؛ Then: R1 defines Assistant boundaries and versioned interfaces؛ R1 contains no running Assistant deployment or operational banking execution؛ Negative: Enable Assistant worker or transactional route through a flag in R1: release gate blocks activation؛ Boundary: A UI Coming Soon tab is allowed but cannot invoke an operational tool
 - **Test `TEST:CORE:C01:003`**؛ Environment: R1 Compose/activation-manifest fixture; no production execution؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:003.P` (POSITIVE): Review R1 manifest and interfaces: only Core/Adviser run; Assistant contract is recorded without worker or banking action
   - `TEST:CORE:C01:003.N` (NEGATIVE): Enable Assistant worker or transactional route through a flag in R1: release gate blocks activation
@@ -331,8 +331,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Initial deployment planning / Physical separation requires security/capacity/resilience evidence and separate approval
 - **رفتارهای اتمی:** `REQ:CORE:004.B01` Use current VM and PostgreSQL/Redis as a starting hypothesis, not proven capacity؛ `REQ:CORE:004.B02` Preserve logical service ownership on shared infrastructure؛ `REQ:CORE:004.B03` Do not infer three VMs or three database instances from three target services
-- **Taskهای ردیابی‌شده:** `TASK:CORE:003`
-- **AC `AC:CORE:C01:004`**؛ Task: `TASK:CORE:003`؛ Given: Initial deployment planning؛ When: Evaluate existing-host Core/Adviser topology with measured limits and separate logical data roles؛ Then: Use current VM and PostgreSQL/Redis as a starting hypothesis, not proven capacity؛ Preserve logical service ownership on shared infrastructure؛ Do not infer three VMs or three database instances from three target services؛ Negative: Demand three VMs solely from three target services: reject unsupported infrastructure commitment؛ Boundary: Overload shared host in an authorized sandbox: report limit/hold decision without pretending existing host is sufficient
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:003`
+- **AC `AC:CORE:C01:004`**؛ Task: `TASK:CORE:C01:003`؛ Given: Initial deployment planning؛ When: Evaluate existing-host Core/Adviser topology with measured limits and separate logical data roles؛ Then: Use current VM and PostgreSQL/Redis as a starting hypothesis, not proven capacity؛ Preserve logical service ownership on shared infrastructure؛ Do not infer three VMs or three database instances from three target services؛ Negative: Demand three VMs solely from three target services: reject unsupported infrastructure commitment؛ Boundary: Overload shared host in an authorized sandbox: report limit/hold decision without pretending existing host is sufficient
 - **Test `TEST:CORE:C01:004`**؛ Environment: Authorized shared-host performance sandbox; PostgreSQL16/Redis logical roles؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:004.P` (POSITIVE): Evaluate existing-host Core/Adviser topology with measured limits and separate logical data roles
   - `TEST:CORE:C01:004.N` (NEGATIVE): Demand three VMs solely from three target services: reject unsupported infrastructure commitment
@@ -345,8 +345,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** All service and module private data / Only owner-authorized public contracts cross the boundary
 - **رفتارهای اتمی:** `REQ:CORE:005.B01` Assign exactly one logical owner to private tables, schema, jobs and mutations؛ `REQ:CORE:005.B02` Deny direct cross-service private-table reads and writes؛ `REQ:CORE:005.B03` Deny direct cross-database foreign-key coupling and private tool access
-- **Taskهای ردیابی‌شده:** `TASK:CORE:002`
-- **AC `AC:CORE:C01:005`**؛ Task: `TASK:CORE:002`؛ Given: All service and module private data؛ When: Owner mutates own data through its transaction and exposes only permitted contract data؛ Then: Assign exactly one logical owner to private tables, schema, jobs and mutations؛ Deny direct cross-service private-table reads and writes؛ Deny direct cross-database foreign-key coupling and private tool access؛ Negative: Adviser SELECT/UPDATE private Core table or import neighbour private ORM: deny and record boundary violation؛ Boundary: Concurrent owner/consumer operations keep each commit local and reject a cross-database FK or consumer private-tool call
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:002`
+- **AC `AC:CORE:C01:005`**؛ Task: `TASK:CORE:C01:002`؛ Given: All service and module private data؛ When: Owner mutates own data through its transaction and exposes only permitted contract data؛ Then: Assign exactly one logical owner to private tables, schema, jobs and mutations؛ Deny direct cross-service private-table reads and writes؛ Deny direct cross-database foreign-key coupling and private tool access؛ Negative: Adviser SELECT/UPDATE private Core table or import neighbour private ORM: deny and record boundary violation؛ Boundary: Concurrent owner/consumer operations keep each commit local and reject a cross-database FK or consumer private-tool call
 - **Test `TEST:CORE:C01:005`**؛ Environment: PostgreSQL16 separate service roles plus import-boundary fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:005.P` (POSITIVE): Owner mutates own data through its transaction and exposes only permitted contract data
   - `TEST:CORE:C01:005.N` (NEGATIVE): Adviser SELECT/UPDATE private Core table or import neighbour private ORM: deny and record boundary violation
@@ -359,8 +359,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Core data, domain and catalogue consumers / Catalogue visibility alone grants neither personal-data access nor an action
 - **رفتارهای اتمی:** `REQ:CORE:006.B01` Expose versioned contracts with owner, consumer, purpose and minimal fields؛ `REQ:CORE:006.B02` Enforce identity, scope and authorization before releasing data؛ `REQ:CORE:006.B03` Preserve stable reference, provenance, version/freshness, approval and access metadata؛ `REQ:CORE:006.B04` Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result
-- **Taskهای ردیابی‌شده:** `TASK:CORE:008`
-- **AC `AC:CORE:C01:006`**؛ Task: `TASK:CORE:008`؛ Given: Core data, domain and catalogue consumers؛ When: Authorized consumer with correct purpose requests minimal catalogue evidence: returns stable ID, source, version/freshness and approval؛ Then: Expose versioned contracts with owner, consumer, purpose and minimal fields؛ Enforce identity, scope and authorization before releasing data؛ Preserve stable reference, provenance, version/freshness, approval and access metadata؛ Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result؛ Negative: Unauthorized or wrong-domain consumer requests private field: deny before response and do not query private table as fallback؛ Boundary: Revoke access between prior read and next call or supply stale/missing data: explicit stop/error, no fabricated recommendation
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:008`
+- **AC `AC:CORE:C01:006`**؛ Task: `TASK:CORE:C01:008`؛ Given: Core data, domain and catalogue consumers؛ When: Authorized consumer with correct purpose requests minimal catalogue evidence: returns stable ID, source, version/freshness and approval؛ Then: Expose versioned contracts with owner, consumer, purpose and minimal fields؛ Enforce identity, scope and authorization before releasing data؛ Preserve stable reference, provenance, version/freshness, approval and access metadata؛ Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result؛ Negative: Unauthorized or wrong-domain consumer requests private field: deny before response and do not query private table as fallback؛ Boundary: Revoke access between prior read and next call or supply stale/missing data: explicit stop/error, no fabricated recommendation
 - **Test `TEST:CORE:C01:006`**؛ Environment: Core data/catalogue API fixture with PostgreSQL16 isolated roles, purpose/domain authorization and revocation races؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:006.P` (POSITIVE): Authorized consumer with correct purpose requests minimal catalogue evidence: returns stable ID, source, version/freshness and approval
   - `TEST:CORE:C01:006.N` (NEGATIVE): Unauthorized or wrong-domain consumer requests private field: deny before response and do not query private table as fallback
@@ -373,8 +373,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Cross-module use and reuse / Reuse does not merge Adviser/Assistant domain logic or authorities
 - **رفتارهای اتمی:** `REQ:CORE:007.B01` Prevent module dependency cycles؛ `REQ:CORE:007.B02` Forbid private ORM imports across public module boundaries؛ `REQ:CORE:007.B03` Reuse existing identity, permission and shared infrastructure authorities
-- **Taskهای ردیابی‌شده:** `TASK:CORE:002`
-- **AC `AC:CORE:C01:007`**؛ Task: `TASK:CORE:002`؛ Given: Cross-module use and reuse؛ When: Build ownership map and directed imports through public ports, reusing existing account/permission authority؛ Then: Prevent module dependency cycles؛ Forbid private ORM imports across public module boundaries؛ Reuse existing identity, permission and shared infrastructure authorities؛ Negative: Inject domain-to-private-infrastructure import or cross-module ORM access: architecture check rejects؛ Boundary: Add A-to-B and B-to-A edges or duplicate identity authority: cycle/parallel-authority check fails
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:002`
+- **AC `AC:CORE:C01:007`**؛ Task: `TASK:CORE:C01:002`؛ Given: Cross-module use and reuse؛ When: Build ownership map and directed imports through public ports, reusing existing account/permission authority؛ Then: Prevent module dependency cycles؛ Forbid private ORM imports across public module boundaries؛ Reuse existing identity, permission and shared infrastructure authorities؛ Negative: Inject domain-to-private-infrastructure import or cross-module ORM access: architecture check rejects؛ Boundary: Add A-to-B and B-to-A edges or duplicate identity authority: cycle/parallel-authority check fails
 - **Test `TEST:CORE:C01:007`**؛ Environment: Static import DAG and facade checks with forbidden-edge fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:007.P` (POSITIVE): Build ownership map and directed imports through public ports, reusing existing account/permission authority
   - `TEST:CORE:C01:007.N` (NEGATIVE): Inject domain-to-private-infrastructure import or cross-module ORM access: architecture check rejects
@@ -387,8 +387,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Loan recommendation in Adviser / Other domains need no recommendation engine merely because they have catalogue entries
 - **رفتارهای اتمی:** `REQ:CORE:008.B01` Keep deterministic matching, ranking, reasons and rules in Core؛ `REQ:CORE:008.B02` Reuse the existing scorer and publication authority without reimplementing them in Adviser or frontend؛ `REQ:CORE:008.B03` Call Core synchronously for the short deterministic calculation
-- **Taskهای ردیابی‌شده:** `TASK:CORE:004`
-- **AC `AC:CORE:C01:008`**؛ Task: `TASK:CORE:004`؛ Given: Loan recommendation in Adviser؛ When: Run existing golden loan fixtures through Core API consumer: matching, reasons and versions retain canonical meaning؛ Then: Keep deterministic matching, ranking, reasons and rules in Core؛ Reuse the existing scorer and publication authority without reimplementing them in Adviser or frontend؛ Call Core synchronously for the short deterministic calculation؛ Negative: Frontend/Adviser supplies its own computed score or modifies rules: consumer/integrity test rejects it؛ Boundary: Present catalogue-only product in another domain: no dedicated engine is created without validated rules/use case
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:004`
+- **AC `AC:CORE:C01:008`**؛ Task: `TASK:CORE:C01:004`؛ Given: Loan recommendation in Adviser؛ When: Run existing golden loan fixtures through Core API consumer: matching, reasons and versions retain canonical meaning؛ Then: Keep deterministic matching, ranking, reasons and rules in Core؛ Reuse the existing scorer and publication authority without reimplementing them in Adviser or frontend؛ Call Core synchronously for the short deterministic calculation؛ Negative: Frontend/Adviser supplies its own computed score or modifies rules: consumer/integrity test rejects it؛ Boundary: Present catalogue-only product in another domain: no dedicated engine is created without validated rules/use case
 - **Test `TEST:CORE:C01:008`**؛ Environment: Existing backend golden/publication fixtures and Core/Adviser consumer harness؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:008.P` (POSITIVE): Run existing golden loan fixtures through Core API consumer: matching, reasons and versions retain canonical meaning
   - `TEST:CORE:C01:008.N` (NEGATIVE): Frontend/Adviser supplies its own computed score or modifies rules: consumer/integrity test rejects it
@@ -401,8 +401,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Every loan recommendation run / Non-sensitive cache can be eventually consistent but cannot supply authoritative scoring
 - **رفتارهای اتمی:** `REQ:CORE:009.B01` Use one valid published catalogue Snapshot and compatible rule version for the whole run؛ `REQ:CORE:009.B02` Concurrent publication never mixes versions within a result؛ `REQ:CORE:009.B03` Expose catalogue and rule versions, and reject invalid or unapproved input؛ `REQ:CORE:009.B04` Core failure produces explicit unavailability rather than synthetic recommendation
-- **Taskهای ردیابی‌شده:** `TASK:CORE:004`
-- **AC `AC:CORE:C01:009`**؛ Task: `TASK:CORE:004`؛ Given: Every loan recommendation run؛ When: Recommend with approved catalogue S1 and rule R1: result and reasons identify exactly S1/R1؛ Then: Use one valid published catalogue Snapshot and compatible rule version for the whole run؛ Concurrent publication never mixes versions within a result؛ Expose catalogue and rule versions, and reject invalid or unapproved input؛ Core failure produces explicit unavailability rather than synthetic recommendation؛ Negative: Supply draft/invalid Snapshot or sever Core API: return typed failure, no cached/synthetic match score؛ Boundary: Publish S2/R2 while S1/R1 run is paused: old run finishes consistently at S1/R1 and next run uses a compatible published pair
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:004`
+- **AC `AC:CORE:C01:009`**؛ Task: `TASK:CORE:C01:004`؛ Given: Every loan recommendation run؛ When: Recommend with approved catalogue S1 and rule R1: result and reasons identify exactly S1/R1؛ Then: Use one valid published catalogue Snapshot and compatible rule version for the whole run؛ Concurrent publication never mixes versions within a result؛ Expose catalogue and rule versions, and reject invalid or unapproved input؛ Core failure produces explicit unavailability rather than synthetic recommendation؛ Negative: Supply draft/invalid Snapshot or sever Core API: return typed failure, no cached/synthetic match score؛ Boundary: Publish S2/R2 while S1/R1 run is paused: old run finishes consistently at S1/R1 and next run uses a compatible published pair
 - **Test `TEST:CORE:C01:009`**؛ Environment: PostgreSQL16 publication/concurrent recommendation fixture and controlled Core outage؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:009.P` (POSITIVE): Recommend with approved catalogue S1 and rule R1: result and reasons identify exactly S1/R1
   - `TEST:CORE:C01:009.N` (NEGATIVE): Supply draft/invalid Snapshot or sever Core API: return typed failure, no cached/synthetic match score
@@ -415,8 +415,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Classifying a real operation / An independent broker is not a prerequisite
 - **رفتارهای اتمی:** `REQ:CORE:010.B01` Use authenticated versioned synchronous API for short deterministic work؛ `REQ:CORE:010.B02` Use durable service-owned asynchronous Job only for actual long background work؛ `REQ:CORE:010.B03` Do not move short loan scoring behind a queue
-- **Taskهای ردیابی‌شده:** `TASK:CORE:005`
-- **AC `AC:CORE:C01:010`**؛ Task: `TASK:CORE:005`؛ Given: Classifying a real operation؛ When: Short scoring call uses authorized synchronous API; actual long ingestion job returns durable job identity؛ Then: Use authenticated versioned synchronous API for short deterministic work؛ Use durable service-owned asynchronous Job only for actual long background work؛ Do not move short loan scoring behind a queue؛ Negative: Move scoring to mandatory broker or execute long job in request router with no durable state: reject design؛ Boundary: No broker available but existing owner PostgreSQL/worker supported: long work remains recoverable while scoring stays synchronous
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:005`
+- **AC `AC:CORE:C01:010`**؛ Task: `TASK:CORE:C01:005`؛ Given: Classifying a real operation؛ When: Short scoring call uses authorized synchronous API; actual long ingestion job returns durable job identity؛ Then: Use authenticated versioned synchronous API for short deterministic work؛ Use durable service-owned asynchronous Job only for actual long background work؛ Do not move short loan scoring behind a queue؛ Negative: Move scoring to mandatory broker or execute long job in request router with no durable state: reject design؛ Boundary: No broker available but existing owner PostgreSQL/worker supported: long work remains recoverable while scoring stays synchronous
 - **Test `TEST:CORE:C01:010`**؛ Environment: Synchronous API and durable long-job harness without independent broker؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:010.P` (POSITIVE): Short scoring call uses authorized synchronous API; actual long ingestion job returns durable job identity
   - `TEST:CORE:C01:010.N` (NEGATIVE): Move scoring to mandatory broker or execute long job in request router with no durable state: reject design
@@ -429,8 +429,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** A service has a justified durable job / Redis is an optional execution queue, not authoritative state
 - **رفتارهای اتمی:** `REQ:CORE:011.B01` Persist Job identity, state, attempts, error and result in owner PostgreSQL؛ `REQ:CORE:011.B02` Separate domain logic from engine via versioned Job/Workflow ports and adapters؛ `REQ:CORE:011.B03` Provide safe pause, resume and cancellation with audit and owner authority
-- **Taskهای ردیابی‌شده:** `TASK:CORE:005`
-- **AC `AC:CORE:C01:011`**؛ Task: `TASK:CORE:005`؛ Given: A service has a justified durable job؛ When: Create, pause and resume owned job: ID, state, attempts, error/result persist across process restart؛ Then: Persist Job identity, state, attempts, error and result in owner PostgreSQL؛ Separate domain logic from engine via versioned Job/Workflow ports and adapters؛ Provide safe pause, resume and cancellation with audit and owner authority؛ Negative: Read status from transient LLM/session memory or consumer's private table: reject as authority؛ Boundary: Cancel concurrently with completion/resume: one valid terminal outcome and durable audit, never duplicate side effect
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:005`
+- **AC `AC:CORE:C01:011`**؛ Task: `TASK:CORE:C01:005`؛ Given: A service has a justified durable job؛ When: Create, pause and resume owned job: ID, state, attempts, error/result persist across process restart؛ Then: Persist Job identity, state, attempts, error and result in owner PostgreSQL؛ Separate domain logic from engine via versioned Job/Workflow ports and adapters؛ Provide safe pause, resume and cancellation with audit and owner authority؛ Negative: Read status from transient LLM/session memory or consumer's private table: reject as authority؛ Boundary: Cancel concurrently with completion/resume: one valid terminal outcome and durable audit, never duplicate side effect
 - **Test `TEST:CORE:C01:011`**؛ Environment: PostgreSQL16 Job state plus controlled worker/cancel/resume races؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:011.P` (POSITIVE): Create, pause and resume owned job: ID, state, attempts, error/result persist across process restart
   - `TEST:CORE:C01:011.N` (NEGATIVE): Read status from transient LLM/session memory or consumer's private table: reject as authority
@@ -443,8 +443,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** A data change must emit a reliable event to a real consumer / No event bus, independent broker or distributed transaction required without demonstrated need
 - **رفتارهای اتمی:** `REQ:CORE:012.B01` Commit business data and Outbox record in the same local transaction؛ `REQ:CORE:012.B02` Use outbox only for justified reliable asynchronous flows؛ `REQ:CORE:012.B03` Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots
-- **Taskهای ردیابی‌شده:** `TASK:CORE:006`
-- **AC `AC:CORE:C01:012`**؛ Task: `TASK:CORE:006`؛ Given: A data change must emit a reliable event to a real consumer؛ When: Commit owner data and necessary Outbox event in one local transaction; non-sensitive cache may lag؛ Then: Commit business data and Outbox record in the same local transaction؛ Use outbox only for justified reliable asynchronous flows؛ Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots؛ Negative: Roll back business mutation: no event may escape; an event without real consumer does not justify a new broker؛ Boundary: Crash at commit boundary and retry: event/data either both committed or neither, no mixed financial Snapshot accepted
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:006`
+- **AC `AC:CORE:C01:012`**؛ Task: `TASK:CORE:C01:006`؛ Given: A data change must emit a reliable event to a real consumer؛ When: Commit owner data and necessary Outbox event in one local transaction; non-sensitive cache may lag؛ Then: Commit business data and Outbox record in the same local transaction؛ Use outbox only for justified reliable asynchronous flows؛ Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots؛ Negative: Roll back business mutation: no event may escape; an event without real consumer does not justify a new broker؛ Boundary: Crash at commit boundary and retry: event/data either both committed or neither, no mixed financial Snapshot accepted
 - **Test `TEST:CORE:C01:012`**؛ Environment: PostgreSQL16 local transaction/Outbox fault injection؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:012.P` (POSITIVE): Commit owner data and necessary Outbox event in one local transaction; non-sensitive cache may lag
   - `TEST:CORE:C01:012.N` (NEGATIVE): Roll back business mutation: no event may escape; an event without real consumer does not justify a new broker
@@ -457,8 +457,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Service data mutation / Cross-service distributed transaction is not the default
 - **رفتارهای اتمی:** `REQ:CORE:013.B01` Keep transaction and commit authority local to data owner؛ `REQ:CORE:013.B02` Do not introduce a global database owner or distributed commit dependency
-- **Taskهای ردیابی‌شده:** `TASK:CORE:002`
-- **AC `AC:CORE:C01:013`**؛ Task: `TASK:CORE:002`؛ Given: Service data mutation؛ When: Commit a Core-owned mutation without remote commit authority while Adviser may be unavailable؛ Then: Keep transaction and commit authority local to data owner؛ Do not introduce a global database owner or distributed commit dependency؛ Negative: Require Adviser commit to complete local Core transaction or grant global table ownership: reject boundary؛ Boundary: Remote failure after local commit is handled by explicit contract/recovery, not silent two-phase commit or lost local state
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:002`
+- **AC `AC:CORE:C01:013`**؛ Task: `TASK:CORE:C01:002`؛ Given: Service data mutation؛ When: Commit a Core-owned mutation without remote commit authority while Adviser may be unavailable؛ Then: Keep transaction and commit authority local to data owner؛ Do not introduce a global database owner or distributed commit dependency؛ Negative: Require Adviser commit to complete local Core transaction or grant global table ownership: reject boundary؛ Boundary: Remote failure after local commit is handled by explicit contract/recovery, not silent two-phase commit or lost local state
 - **Test `TEST:CORE:C01:013`**؛ Environment: Isolated service DB transaction harness with remote service unavailable؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:013.P` (POSITIVE): Commit a Core-owned mutation without remote commit authority while Adviser may be unavailable
   - `TEST:CORE:C01:013.N` (NEGATIVE): Require Adviser commit to complete local Core transaction or grant global table ownership: reject boundary
@@ -471,8 +471,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Every public contract change / Optional additions are compatible only when the consumer tolerates them
 - **رفتارهای اتمی:** `REQ:CORE:015.B01` Owner changes versioned OpenAPI/Schema before implementation؛ `REQ:CORE:015.B02` Validate request/response structure, field meaning and financial units؛ `REQ:CORE:015.B03` Specify negative, boundary, property-based and consumer-driven contract tests؛ `REQ:CORE:015.B04` Treat financial semantic incompatibility as blocking, not a cosmetic schema warning
-- **Taskهای ردیابی‌شده:** `TASK:CORE:008`
-- **AC `AC:CORE:C01:015`**؛ Task: `TASK:CORE:008`؛ Given: Every public contract change؛ When: Provider changes schema before implementation and runs consumer/property/negative fixtures covering financial field units؛ Then: Owner changes versioned OpenAPI/Schema before implementation؛ Validate request/response structure, field meaning and financial units؛ Specify negative, boundary, property-based and consumer-driven contract tests؛ Treat financial semantic incompatibility as blocking, not a cosmetic schema warning؛ Negative: Keep JSON type unchanged but reinterpret match-percent as approval probability: semantic contract gate fails؛ Boundary: Optional field plus intolerant old consumer: version matrix detects incompatibility; do not call it backward-compatible
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:008`
+- **AC `AC:CORE:C01:015`**؛ Task: `TASK:CORE:C01:008`؛ Given: Every public contract change؛ When: Provider changes schema before implementation and runs consumer/property/negative fixtures covering financial field units؛ Then: Owner changes versioned OpenAPI/Schema before implementation؛ Validate request/response structure, field meaning and financial units؛ Specify negative, boundary, property-based and consumer-driven contract tests؛ Treat financial semantic incompatibility as blocking, not a cosmetic schema warning؛ Negative: Keep JSON type unchanged but reinterpret match-percent as approval probability: semantic contract gate fails؛ Boundary: Optional field plus intolerant old consumer: version matrix detects incompatibility; do not call it backward-compatible
 - **Test `TEST:CORE:C01:015`**؛ Environment: Versioned OpenAPI/provider-consumer/property-based fixture matrix؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:015.P` (POSITIVE): Provider changes schema before implementation and runs consumer/property/negative fixtures covering financial field units
   - `TEST:CORE:C01:015.N` (NEGATIVE): Keep JSON type unchanged but reinterpret match-percent as approval probability: semantic contract gate fails
@@ -485,8 +485,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Breaking field/type/meaning or consumer change / Shadow/Canary only after feasibility and capacity evidence
 - **رفتارهای اتمی:** `REQ:CORE:016.B01` Use new version or expand/migrate/contract for breaking changes؛ `REQ:CORE:016.B02` Test a provider/consumer version matrix and block incompatible deployment؛ `REQ:CORE:016.B03` Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class؛ `REQ:CORE:016.B04` Identify impacted UI, Job and event consumers and controlled old-version retirement
-- **Taskهای ردیابی‌شده:** `TASK:CORE:008`
-- **AC `AC:CORE:C01:016`**؛ Task: `TASK:CORE:008`؛ Given: Breaking field/type/meaning or consumer change؛ When: Introduce breaking schema via new version or tested expand/migrate/contract with provider-consumer combinations؛ Then: Use new version or expand/migrate/contract for breaking changes؛ Test a provider/consumer version matrix and block incompatible deployment؛ Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class؛ Identify impacted UI, Job and event consumers and controlled old-version retirement؛ Negative: Deploy an untested old/new pair or remove required field without migration: deployment blocked؛ Boundary: Unknown field/version and transient/permanent/validation errors carry agreed status/code/nonpersonal trace; infeasible Canary cannot be mandated
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:008`
+- **AC `AC:CORE:C01:016`**؛ Task: `TASK:CORE:C01:008`؛ Given: Breaking field/type/meaning or consumer change؛ When: Introduce breaking schema via new version or tested expand/migrate/contract with provider-consumer combinations؛ Then: Use new version or expand/migrate/contract for breaking changes؛ Test a provider/consumer version matrix and block incompatible deployment؛ Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class؛ Identify impacted UI, Job and event consumers and controlled old-version retirement؛ Negative: Deploy an untested old/new pair or remove required field without migration: deployment blocked؛ Boundary: Unknown field/version and transient/permanent/validation errors carry agreed status/code/nonpersonal trace; infeasible Canary cannot be mandated
 - **Test `TEST:CORE:C01:016`**؛ Environment: Provider/consumer matrix, versioned error fixtures and deployment gate harness؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:016.P` (POSITIVE): Introduce breaking schema via new version or tested expand/migrate/contract with provider-consumer combinations
   - `TEST:CORE:C01:016.N` (NEGATIVE): Deploy an untested old/new pair or remove required field without migration: deployment blocked
@@ -499,8 +499,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Configuration design / R1 needs no independent configuration-management service
 - **رفتارهای اتمی:** `REQ:CORE:017.B01` Separate operational config, secrets, feature flags and business policies؛ `REQ:CORE:017.B02` Use typed versioned validated configuration؛ `REQ:CORE:017.B03` Financial business rules cannot become freely editable runtime toggles
-- **Taskهای ردیابی‌شده:** `TASK:CORE:009`
-- **AC `AC:CORE:C01:017`**؛ Task: `TASK:CORE:009`؛ Given: Configuration design؛ When: Inventory settings into runtime, secret, flag and business-policy classes with distinct owner/approval؛ Then: Separate operational config, secrets, feature flags and business policies؛ Use typed versioned validated configuration؛ Financial business rules cannot become freely editable runtime toggles؛ Negative: Expose scoring coefficients as unrestricted runtime flag: reject as unauthorized policy mutation؛ Boundary: R1 works without a new configuration microservice; typed config error stops activation rather than silently defaulting
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:009`
+- **AC `AC:CORE:C01:017`**؛ Task: `TASK:CORE:C01:009`؛ Given: Configuration design؛ When: Inventory settings into runtime, secret, flag and business-policy classes with distinct owner/approval؛ Then: Separate operational config, secrets, feature flags and business policies؛ Use typed versioned validated configuration؛ Financial business rules cannot become freely editable runtime toggles؛ Negative: Expose scoring coefficients as unrestricted runtime flag: reject as unauthorized policy mutation؛ Boundary: R1 works without a new configuration microservice; typed config error stops activation rather than silently defaulting
 - **Test `TEST:CORE:C01:017`**؛ Environment: Typed Settings plus four-category ownership/policy fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:017.P` (POSITIVE): Inventory settings into runtime, secret, flag and business-policy classes with distinct owner/approval
   - `TEST:CORE:C01:017.N` (NEGATIVE): Expose scoring coefficients as unrestricted runtime flag: reject as unauthorized policy mutation
@@ -513,8 +513,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Configuration or flag change / A rollback must remain compatible with code, API, valid Snapshot and Job
 - **رفتارهای اتمی:** `REQ:CORE:018.B01` Require authorized owner and pre-deployment Config Diff؛ `REQ:CORE:018.B02` Record actor, time, environment, permission and change history؛ `REQ:CORE:018.B03` Check dependency and secret safety before activation؛ `REQ:CORE:018.B04` Reject incompatible rollback or stop the affected capability
-- **Taskهای ردیابی‌شده:** `TASK:CORE:009`
-- **AC `AC:CORE:C01:018`**؛ Task: `TASK:CORE:009`؛ Given: Configuration or flag change؛ When: Authorized owner submits reviewed Config Diff and audit with actor/time/environment; compatible version activates؛ Then: Require authorized owner and pre-deployment Config Diff؛ Record actor, time, environment, permission and change history؛ Check dependency and secret safety before activation؛ Reject incompatible rollback or stop the affected capability؛ Negative: Unprivileged actor changes flag or secret appears in diff/log: reject activation without value disclosure؛ Boundary: Rollback code/config/API/Snapshot/Job mismatch: block rollback and stop affected scope until a compatible version is approved
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:009`
+- **AC `AC:CORE:C01:018`**؛ Task: `TASK:CORE:C01:009`؛ Given: Configuration or flag change؛ When: Authorized owner submits reviewed Config Diff and audit with actor/time/environment; compatible version activates؛ Then: Require authorized owner and pre-deployment Config Diff؛ Record actor, time, environment, permission and change history؛ Check dependency and secret safety before activation؛ Reject incompatible rollback or stop the affected capability؛ Negative: Unprivileged actor changes flag or secret appears in diff/log: reject activation without value disclosure؛ Boundary: Rollback code/config/API/Snapshot/Job mismatch: block rollback and stop affected scope until a compatible version is approved
 - **Test `TEST:CORE:C01:018`**؛ Environment: Config Diff/authorization/audit and rollback compatibility harness؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:018.P` (POSITIVE): Authorized owner submits reviewed Config Diff and audit with actor/time/environment; compatible version activates
   - `TEST:CORE:C01:018.N` (NEGATIVE): Unprivileged actor changes flag or secret appears in diff/log: reject activation without value disclosure
@@ -527,8 +527,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Core/Adviser/Job observability / Clarity/RUM is not the operational telemetry authority
 - **رفتارهای اتمی:** `REQ:CORE:019.B01` Use portable OpenTelemetry structured logs, metrics and traces؛ `REQ:CORE:019.B02` Propagate random nonpersonal correlation across service and Job boundaries؛ `REQ:CORE:019.B03` Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery
-- **Taskهای ردیابی‌شده:** `TASK:CORE:010`
-- **AC `AC:CORE:C01:019`**؛ Task: `TASK:CORE:010`؛ Given: Core/Adviser/Job observability؛ When: Propagate a random trace across Core/API/job with structured logs/metrics/traces and state/contract versions؛ Then: Use portable OpenTelemetry structured logs, metrics and traces؛ Propagate random nonpersonal correlation across service and Job boundaries؛ Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery؛ Negative: Instrument only generic request counts while omitting Outbox/job/circuit recovery: critical telemetry acceptance fails؛ Boundary: Crash worker/publisher and replay: pending age/retry/final failure/lag/recovery visible without identifying metric labels
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:010`
+- **AC `AC:CORE:C01:019`**؛ Task: `TASK:CORE:C01:010`؛ Given: Core/Adviser/Job observability؛ When: Propagate a random trace across Core/API/job with structured logs/metrics/traces and state/contract versions؛ Then: Use portable OpenTelemetry structured logs, metrics and traces؛ Propagate random nonpersonal correlation across service and Job boundaries؛ Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery؛ Negative: Instrument only generic request counts while omitting Outbox/job/circuit recovery: critical telemetry acceptance fails؛ Boundary: Crash worker/publisher and replay: pending age/retry/final failure/lag/recovery visible without identifying metric labels
 - **Test `TEST:CORE:C01:019`**؛ Environment: OpenTelemetry test collector plus worker/Outbox/circuit fault fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:019.P` (POSITIVE): Propagate a random trace across Core/API/job with structured logs/metrics/traces and state/contract versions
   - `TEST:CORE:C01:019.N` (NEGATIVE): Instrument only generic request counts while omitting Outbox/job/circuit recovery: critical telemetry acceptance fails
@@ -541,8 +541,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Critical-path SLO, alert or infrastructure claims / No numeric threshold or production capacity accepted from an unmeasured historical host
 - **رفتارهای اتمی:** `REQ:CORE:020.B01` Measure SLI/SLO and Error Budget from a versioned baseline with owner؛ `REQ:CORE:020.B02` Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review؛ `REQ:CORE:020.B03` Define non-sensitive synthetic probe and alert/recovery drill؛ `REQ:CORE:020.B04` Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment؛ `REQ:CORE:020.B05` Collect permitted post-release outcome signals (success/failure, elapsed time, cost, error and feedback) with minimum data; RUM is restricted to page-load/Web Vitals/frontend errors and excludes click/session/form recording
-- **Taskهای ردیابی‌شده:** `TASK:CORE:010`
-- **AC `AC:CORE:C01:020`**؛ Task: `TASK:CORE:010`؛ Given: Critical-path SLO, alert or infrastructure claims؛ When: Measure defined workload baseline, assign SLO/Error Budget owner and drill alert, escalation, runbook and recovery؛ Then: Measure SLI/SLO and Error Budget from a versioned baseline with owner؛ Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review؛ Define non-sensitive synthetic probe and alert/recovery drill؛ Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment؛ Collect authorized pilot outcome signals with minimum data and only the approved performance RUM allowlist؛ Negative: Use historical VM size or arbitrary p95 as capacity guarantee: decision gate rejects claim؛ Boundary: Synthetic non-sensitive Core/worker/DB fault triggers user-impact alert and post-incident evidence; instrumentation overhead measured
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:010`
+- **AC `AC:CORE:C01:020`**؛ Task: `TASK:CORE:C01:010`؛ Given: Critical-path SLO, alert or infrastructure claims؛ When: Measure defined workload baseline, assign SLO/Error Budget owner and drill alert, escalation, runbook and recovery؛ Then: Measure SLI/SLO and Error Budget from a versioned baseline with owner؛ Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review؛ Define non-sensitive synthetic probe and alert/recovery drill؛ Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment؛ Collect authorized pilot outcome signals with minimum data and only the approved performance RUM allowlist؛ Negative: Use historical VM size or arbitrary p95 as capacity guarantee: decision gate rejects claim؛ Boundary: Synthetic non-sensitive Core/worker/DB fault triggers user-impact alert and post-incident evidence; instrumentation overhead measured
 - **Test `TEST:CORE:C01:020`**؛ Environment: Authorized representative workload and non-sensitive synthetic incident sandbox؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:020.P` (POSITIVE): Measure defined workload baseline, assign SLO/Error Budget owner and drill alert, escalation, runbook and recovery; after an authorized pilot, retain aggregate success/failure/time/cost/error/feedback measures with minimum permitted data; collect only page-load/Web Vitals/frontend errors through RUM
   - `TEST:CORE:C01:020.N` (NEGATIVE): Reject historical VM/p95 as capacity proof, or click/session/form recording and unnecessary customer payload under RUM/outcome-measurement label
@@ -555,8 +555,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Telemetry tool and deployment choice / Current recorded production VM capacity prohibits self-hosted SigNoz; new evidence and separate approval required for any revised choice
 - **رفتارهای اتمی:** `REQ:CORE:021.B01` Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted؛ `REQ:CORE:021.B02` Do not deploy self-hosted SigNoz on the current production VM under recorded capacity؛ `REQ:CORE:021.B03` Decide retention, sampling, channel, security, cost and host only after measured evidence and approval
-- **Taskهای ردیابی‌شده:** `TASK:CORE:010`
-- **AC `AC:CORE:C01:021`**؛ Task: `TASK:CORE:010`؛ Given: Telemetry tool and deployment choice؛ When: Compare Cloud/self-hosted SigNoz using security, retention, sampling and capacity evidence in a decision dossier؛ Then: Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted؛ Do not deploy self-hosted SigNoz on the current production VM under recorded capacity؛ Decide retention, sampling, channel, security, cost and host only after measured evidence and approval؛ Negative: Place self-hosted SigNoz on current production VM under recorded capacity: explicit rejection؛ Boundary: Even an apparently spare host or new evidence does not silently grant deployment: require revised approval and cost/capacity evidence
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:010`
+- **AC `AC:CORE:C01:021`**؛ Task: `TASK:CORE:C01:010`؛ Given: Telemetry tool and deployment choice؛ When: Compare Cloud/self-hosted SigNoz using security, retention, sampling and capacity evidence in a decision dossier؛ Then: Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted؛ Do not deploy self-hosted SigNoz on the current production VM under recorded capacity؛ Decide retention, sampling, channel, security, cost and host only after measured evidence and approval؛ Negative: Place self-hosted SigNoz on current production VM under recorded capacity: explicit rejection؛ Boundary: Even an apparently spare host or new evidence does not silently grant deployment: require revised approval and cost/capacity evidence
 - **Test `TEST:CORE:C01:021`**؛ Environment: Security/cost/capacity decision review; never current production VM deployment؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:021.P` (POSITIVE): Compare Cloud/self-hosted SigNoz using security, retention, sampling and capacity evidence in a decision dossier
   - `TEST:CORE:C01:021.N` (NEGATIVE): Place self-hosted SigNoz on current production VM under recorded capacity: explicit rejection
@@ -569,8 +569,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Any phase-two change affecting phase one / Existing phase-one deferrals remain open, not silently promoted to done
 - **رفتارهای اتمی:** `REQ:CORE:022.B01` Preserve routes, identity, questionnaire/proof, scoring and publication behaviour؛ the published Snapshot and deterministic Core scorer remain authoritative؛ `REQ:CORE:022.B02` Preserve accepted UI, RTL, accessibility and mobile/desktop paths؛ `REQ:CORE:022.B03` Retain existing CI/security gates and targeted regression evidence؛ `REQ:CORE:022.B04` Record differences against canonical guide, protocol, retrospective and handoff without changing sources؛ `REQ:CORE:022.B05` RAG/adviser changes do not alter golden Core scoring, coefficients, published Snapshot or result semantics؛ `REQ:CORE:022.B06` A refactor alone does not activate a capability or change phase-one product behavior؛ `REQ:CORE:022.B07` Preserve PostgreSQL questionnaire/session authority while Redis remains an isolated cache; expired-session/proof errors do not leak data or break compatible consumers
-- **Taskهای ردیابی‌شده:** `TASK:CORE:001`
-- **AC `AC:CORE:C01:022`**؛ Task: `TASK:CORE:001`؛ Given: Any phase-two change affecting phase one؛ When: Replay locked phase-one route/OTP/proof/questionnaire/golden/publication and approved UI baseline in isolated fixtures؛ Then: Preserve routes, identity, questionnaire/proof, scoring and publication behaviour؛ preserve the published Snapshot and deterministic Core scorer as the only scoring authority؛ Preserve accepted UI, RTL, accessibility and mobile/desktop paths؛ Retain existing CI/security gates and targeted regression evidence؛ Record differences against canonical guide, protocol, retrospective and handoff without changing sources؛ RAG-only changes leave the golden Core output unchanged؛ a refactor-only change does not activate a capability؛ PostgreSQL remains questionnaire/session authority and Redis remains an isolated cache؛ Negative: Break a route, permit account-B access, change score or Snapshot, serve session state from Redis as authority, activate a feature by refactor, or remove a security gate: regression review blocks acceptance؛ Boundary: Expired proof/session, refresh/restart, compatible consumer error handling and mobile/desktop RTL/a11y preserve prior semantics; deferred phase-one work stays open
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:001`
+- **AC `AC:CORE:C01:022`**؛ Task: `TASK:CORE:C01:001`؛ Given: Any phase-two change affecting phase one؛ When: Replay locked phase-one route/OTP/proof/questionnaire/golden/publication and approved UI baseline in isolated fixtures؛ Then: Preserve routes, identity, questionnaire/proof, scoring and publication behaviour؛ preserve the published Snapshot and deterministic Core scorer as the only scoring authority؛ Preserve accepted UI, RTL, accessibility and mobile/desktop paths؛ Retain existing CI/security gates and targeted regression evidence؛ Record differences against canonical guide, protocol, retrospective and handoff without changing sources؛ RAG-only changes leave the golden Core output unchanged؛ a refactor-only change does not activate a capability؛ PostgreSQL remains questionnaire/session authority and Redis remains an isolated cache؛ Negative: Break a route, permit account-B access, change score or Snapshot, serve session state from Redis as authority, activate a feature by refactor, or remove a security gate: regression review blocks acceptance؛ Boundary: Expired proof/session, refresh/restart, compatible consumer error handling and mobile/desktop RTL/a11y preserve prior semantics; deferred phase-one work stays open
 - **Test `TEST:CORE:C01:022`**؛ Environment: Existing isolated phase-one backend/PostgreSQL16/browser suites and accepted visual baseline؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:022.P` (POSITIVE): Replay locked phase-one route/OTP/proof/questionnaire/golden/publication and approved UI baseline in isolated fixtures
   - `TEST:CORE:C01:022.N` (NEGATIVE): Break a route, permit account-B access, change score or remove security gate: regression review blocks acceptance
@@ -586,8 +586,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Database or runtime baseline claim / File count alone proves neither effective revisions nor runtime schema; no production access assumed
 - **رفتارهای اتمی:** `REQ:CORE:023.B01` Use Alembic as DDL authority and independently inspect heads/history؛ `REQ:CORE:023.B02` Plan PostgreSQL 16 upgrade/downgrade, data preservation, rollback and restore checks before production migration؛ `REQ:CORE:023.B03` Correlate authorized runtime SHA/tag/image digest and schema, marking inaccessible state unknown؛ `REQ:CORE:023.B04` Any loan/account table change requires the owning authority, an approved migration and regression evidence; silent schema changes are prohibited
-- **Taskهای ردیابی‌شده:** `TASK:CORE:001`
-- **AC `AC:CORE:C01:023`**؛ Task: `TASK:CORE:001`؛ Given: Database or runtime baseline claim؛ When: Inspect actual Alembic graph then exercise supported upgrade/downgrade and restore on disposable PostgreSQL16 with preserved fixture data؛ Then: Use Alembic as DDL authority and independently inspect heads/history؛ Plan PostgreSQL 16 upgrade/downgrade, data preservation, rollback and restore checks before production migration؛ Correlate authorized runtime SHA/tag/image digest and schema, marking inaccessible state unknown؛ Require explicit owner approval, migration plan and regression before a loan/account table change; reject silent DDL؛ Negative: Infer schema readiness from migration-file count or Compose digest alone, or apply a silent loan/account schema change: mark claim unverified/block؛ Boundary: Code tag/digest differs from accessible runtime or runtime inaccessible: report drift/unknown; never mutate production or reset user DB
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:001`
+- **AC `AC:CORE:C01:023`**؛ Task: `TASK:CORE:C01:001`؛ Given: Database or runtime baseline claim؛ When: Inspect actual Alembic graph then exercise supported upgrade/downgrade and restore on disposable PostgreSQL16 with preserved fixture data؛ Then: Use Alembic as DDL authority and independently inspect heads/history؛ Plan PostgreSQL 16 upgrade/downgrade, data preservation, rollback and restore checks before production migration؛ Correlate authorized runtime SHA/tag/image digest and schema, marking inaccessible state unknown؛ Require explicit owner approval, migration plan and regression before a loan/account table change; reject silent DDL؛ Negative: Infer schema readiness from migration-file count or Compose digest alone, or apply a silent loan/account schema change: mark claim unverified/block؛ Boundary: Code tag/digest differs from accessible runtime or runtime inaccessible: report drift/unknown; never mutate production or reset user DB
 - **Test `TEST:CORE:C01:023`**؛ Environment: Disposable PostgreSQL16 only; Alembic graph/history and fixture restore; authorized runtime readback optional/unknown؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:023.P` (POSITIVE): Inspect actual Alembic graph then exercise supported upgrade/downgrade and restore on disposable PostgreSQL16 with preserved fixture data
   - `TEST:CORE:C01:023.N` (NEGATIVE): Infer schema readiness from migration-file count or Compose digest alone, or change loan/account tables without owner approval, migration plan and regression: mark unverified/block
@@ -600,10 +600,10 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Release planning / Stage sequence is policy, not proof of every hard technical dependency
 - **رفتارهای اتمی:** `REQ:CORE:024.B01` Track Release Readiness independently from full Stage Completion؛ `REQ:CORE:024.B02` Keep Wallet, billing, gateway and Assistant off RAG R1 hard prerequisites؛ `REQ:CORE:024.B03` Preserve the full stage scope after an early independent release؛ `REQ:CORE:024.B04` Record actual Discovery/Delivery capacity allocation by O5-09 class: baseline 80/20, critical work 90/10, and uncertain work 70/30 with an explicit timebox; do not invent a new class, duration or commitment؛ `REQ:CORE:024.B05` Plan a value-bearing, integrated and usable increment within a maximum seven-calendar-day cycle; if safe independent slicing is infeasible, record the technical/functional/security reason, alternatives, dependencies, time/cost cap, testable interim output and review date؛ `REQ:CORE:024.B06` Prioritize the smallest feasible high-value slice, make real dependencies and shared capability consumers explicit, and build infrastructure only for near-term approved consumers or evidenced risk؛ `REQ:CORE:024.B07` Allow timeboxed parallel discovery of uncertain Adviser/Assistant work, while Assistant delivery remains gated by valid G1؛ `REQ:CORE:024.B08` A cycle is Done only after end-to-end integration, required regression/acceptance checks, applicable release gates, deployable user/operator value and recorded learning; task completion, PR merge, API-only work or internal PoC alone is not Done؛ `REQ:CORE:024.B09` Evaluate product value and differentiation through permitted real-user/pilot scenarios using outcome correctness/success, human intervention, time and cost per successful operation; endpoint/MCP counts, demos or internal PoCs alone are not evidence of competitive value؛ `REQ:CORE:024.B10` Block Wallet financial release/activation until applicable controls for financial correctness, duplicate/concurrent consumption, authorization, refund and recovery have acceptable evidence; missing or unexecuted tests are not passes. Set experience/performance criteria for each release with its accountable owner, without inventing thresholds.
-- **Taskهای ردیابی‌شده:** `TASK:CORE:011`
-- **`TASK:CORE:011.S04`:** Select and estimate the smallest independently valuable seven-day increment; record actual dependency/consumer links and any justified, timeboxed exception؛ Requirement: `REQ:CORE:024`، `REQ:CORE:027`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:027`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **`TASK:CORE:011.S05`:** For each Wallet financial release, enumerate applicable correctness, idempotency/concurrent-consumption, authorization, refund and recovery controls; require and record their evidence before activation, and set release-specific experience/performance criteria with the accountable owner؛ Requirement: `REQ:CORE:024.B10`؛ AC: `AC:CORE:C01:024`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
-- **AC `AC:CORE:C01:024`**؛ Task: `TASK:CORE:011`؛ Given: Release planning؛ When: Record independently usable RAG increment and a separate full stage-coverage ledger that reconciles every approved Chapter 1 RAG scope item to R01–R10 and records Assistant Delivery after valid G1؛ Then: Track Release Readiness independently from full Stage Completion؛ Keep Wallet, billing and gateway off RAG R1 hard prerequisites؛ Preserve the complete approved RAG scope and post-G1 Assistant Delivery after an early independent increment؛ Limit each planned cycle to seven calendar days and require the documented exception record before any planned slice exceeds it؛ prioritize feasible user value and dependencies; forbid unconsumed speculative infrastructure؛ permit timeboxed parallel discovery without pre-G1 Assistant delivery؛ define Done as integrated, tested and release-gate-ready end-to-end value؛ Record actual Discovery/Delivery allocation as baseline 80/20, critical 90/10, or uncertain 70/30 with timebox, and retain capacity evidence؛ Record the selected value-bearing slice, dependency map and consumer of each shared capability; include integration, regression, acceptance, deployment decision and learning in the cycle definition؛ collect post-release success/failure, time, cost, errors and feedback with minimum permitted data; judge differentiation using scenario outcomes and intervention/time/cost rather than technology counts؛ Any >7-day exception contains every required justification/review field and does not label an interim PoC a release؛ Negative: Label one early response feature Stage Complete or misapply a ratio without the corresponding O5-09 class/timebox or make Wallet/Assistant hard prerequisite of free RAG R1: reject؛ Boundary: Parallel safe discovery does not waive stage-policy delivery gates and does not silently delete deferred features؛ classify uncertain allocation explicitly and timebox 70/30; ratios do not create fixed dates or increase total available capacity؛ Wallet activation/release remains blocked until applicable financial-control evidence exists; NOT_EXECUTED is not PASS; experience/performance thresholds are release-specific and owner-set
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:011`
+- **`TASK:CORE:C01:011.S04`:** Select and estimate the smallest independently valuable seven-day increment; record actual dependency/consumer links and any justified, timeboxed exception؛ Requirement: `REQ:CORE:024`، `REQ:CORE:027`؛ AC: `AC:CORE:C01:024`، `AC:CORE:C01:027`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:011.S05`:** For each Wallet financial release, enumerate applicable correctness, idempotency/concurrent-consumption, authorization, refund and recovery controls; require and record their evidence before activation, and set release-specific experience/performance criteria with the accountable owner؛ Requirement: `REQ:CORE:024.B10`؛ AC: `AC:CORE:C01:024`؛ وضعیت اجرای محصول: `NOT_IMPLEMENTED`
+- **AC `AC:CORE:C01:024`**؛ Task: `TASK:CORE:C01:011`؛ Given: Release planning؛ When: Record independently usable RAG increment and a separate full stage-coverage ledger that reconciles every approved Chapter 1 RAG scope item to R01–R10 and records Assistant Delivery after valid G1؛ Then: Track Release Readiness independently from full Stage Completion؛ Keep Wallet, billing and gateway off RAG R1 hard prerequisites؛ Preserve the complete approved RAG scope and post-G1 Assistant Delivery after an early independent increment؛ Limit each planned cycle to seven calendar days and require the documented exception record before any planned slice exceeds it؛ prioritize feasible user value and dependencies; forbid unconsumed speculative infrastructure؛ permit timeboxed parallel discovery without pre-G1 Assistant delivery؛ define Done as integrated, tested and release-gate-ready end-to-end value؛ Record actual Discovery/Delivery allocation as baseline 80/20, critical 90/10, or uncertain 70/30 with timebox, and retain capacity evidence؛ Record the selected value-bearing slice, dependency map and consumer of each shared capability; include integration, regression, acceptance, deployment decision and learning in the cycle definition؛ collect post-release success/failure, time, cost, errors and feedback with minimum permitted data; judge differentiation using scenario outcomes and intervention/time/cost rather than technology counts؛ Any >7-day exception contains every required justification/review field and does not label an interim PoC a release؛ Negative: Label one early response feature Stage Complete or misapply a ratio without the corresponding O5-09 class/timebox or make Wallet/Assistant hard prerequisite of free RAG R1: reject؛ Boundary: Parallel safe discovery does not waive stage-policy delivery gates and does not silently delete deferred features؛ classify uncertain allocation explicitly and timebox 70/30; ratios do not create fixed dates or increase total available capacity؛ Wallet activation/release remains blocked until applicable financial-control evidence exists; NOT_EXECUTED is not PASS; experience/performance thresholds are release-specific and owner-set
 - **Test `TEST:CORE:C01:024`**؛ Environment: Stage/release and dependency-policy planning fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:024.P` (POSITIVE): Record an independently usable increment; reconcile all approved stage scope; record a cycle of at most seven calendar days with user/operator value, actual dependencies, shared-capability consumer, integration, regression/acceptance, release-gate evidence and learning; accept a longer capability only with the approved exception fields (reason, alternatives, dependencies, cap, testable interim output and review date); record O5-09 80/20 baseline, 90/10 critical or timeboxed 70/30 uncertain allocation and preserve total actual capacity
   - `TEST:CORE:C01:024.N` (NEGATIVE): Reject a cycle over seven days without the complete exception record; reject a task/merge/API/PoC as Done without integrated user/operator value and required tests/gates; reject speculative infrastructure without an approved near-term consumer/evidence; reject claiming differentiation from API/MCP count or internal demo without scenario outcome evidence; reject dropping approved stage scope, premature Assistant delivery, or a Wallet/billing/gateway hard dependency for free RAG R1; reject misclassified O5-09 ratios or missing uncertain-work timebox
@@ -616,8 +616,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Any future release / Commercial risk acceptance cannot override valid security, safety, financial or legal blocker
 - **رفتارهای اتمی:** `REQ:CORE:026.B01` Map versioned original RG/REL texts and R1-R4 risk class into each release dossier؛ `REQ:CORE:026.B02` Record Go/Conditional Go/Hold/No-Go with scoped authority, evidence and reason؛ `REQ:CORE:026.B03` Retain four budgets, limits, alerts, escalation authority and recovery reserve؛ `REQ:CORE:026.B04` Bind authorization to code/config/contract/Snapshot/audience/budget versions؛ `REQ:CORE:026.B05` Define stop, compatible rollback/restore, post-release monitoring and expiring non-auto-renewed Conditional Go
-- **Taskهای ردیابی‌شده:** `TASK:CORE:011`
-- **AC `AC:CORE:C01:026`**؛ Task: `TASK:CORE:011`؛ Given: Any future release؛ When: Prepare dossier with original RG/REL version, risk class, four budgets, authority, recovery and scoped decision; map each of F06’s 16 execution rules and ten evidence domains to the applicable one of the eight approved REL gates؛ Then: Map versioned original RG/REL texts and R1-R4 risk class into each release dossier; block any first operational sample whose required safety controls lack implementation evidence؛ Record Go/Conditional Go/Hold/No-Go with scoped authority, evidence and reason؛ Retain four budgets, limits, alerts, escalation authority and recovery reserve؛ Bind authorization to code/config/contract/Snapshot/audience/budget versions؛ Define stop, compatible rollback/restore, post-release monitoring and expiring non-auto-renewed Conditional Go؛ Numeric thresholds, cohort, schedule and metric owners remain OPEN until independently approved; absence of those values cannot be interpreted as a pass؛ Negative: Commercial owner accepts financial/security/legal blocker, replaces eight REL with an F06 summary, or treats an F06 evidence domain as a ninth gate: No-Go/Hold؛ Boundary: Conditional Go expires or code/config/Snapshot/audience/budget materially changes: require reevaluation; no auto-renewal or obsolete legal rollback; if an owner-gated numeric threshold is absent, retain OPEN/HOLD and do not invent a value
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:011`
+- **AC `AC:CORE:C01:026`**؛ Task: `TASK:CORE:C01:011`؛ Given: Any future release؛ When: Prepare dossier with original RG/REL version, risk class, four budgets, authority, recovery and scoped decision; map each of F06’s 16 execution rules and ten evidence domains to the applicable one of the eight approved REL gates؛ Then: Map versioned original RG/REL texts and R1-R4 risk class into each release dossier; block any first operational sample whose required safety controls lack implementation evidence؛ Record Go/Conditional Go/Hold/No-Go with scoped authority, evidence and reason؛ Retain four budgets, limits, alerts, escalation authority and recovery reserve؛ Bind authorization to code/config/contract/Snapshot/audience/budget versions؛ Define stop, compatible rollback/restore, post-release monitoring and expiring non-auto-renewed Conditional Go؛ Numeric thresholds, cohort, schedule and metric owners remain OPEN until independently approved; absence of those values cannot be interpreted as a pass؛ Negative: Commercial owner accepts financial/security/legal blocker, replaces eight REL with an F06 summary, or treats an F06 evidence domain as a ninth gate: No-Go/Hold؛ Boundary: Conditional Go expires or code/config/Snapshot/audience/budget materially changes: require reevaluation; no auto-renewal or obsolete legal rollback; if an owner-gated numeric threshold is absent, retain OPEN/HOLD and do not invent a value
 - **Test `TEST:CORE:C01:026`**؛ Environment: Original approved RG/REL text and versioned release dossier control fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:026.P` (POSITIVE): Prepare a dossier with original versioned RG/REL, R1–R4 risk class, authority, budgets, recovery and scoped decision; check F06 rules individually: (1) F06 adds no gate; (2) evidence/review/authority match R1–R4; (3) record scoped Go/Conditional Go/Hold/No-Go and reason; (4) never waive a valid security/safety/financial/legal blocker; (5) release owner acts only within authority/budget; (6) specialist can document a blocker/request affected-scope stop; (7) authorized Operations/Security can emergency-stop without prior product-owner approval; (8) restart requires remedy, relevant tests and reapproval; (9) high-risk change gets independent specialist review; (10) dispute keeps blocker until evidence-led independent review resolves it; (11) separate development/Discovery, operations/consumption, reliability Error Budget and containment/recovery budgets; (12) set owner-approved caps, alerts, budget-increase authority and recovery reserve before release; (13) Conditional Go is scoped, time-limited, compensating-control monitored and non-auto-renewing; (14) stop/rollback/restore is compatible with code/contract/config/data/Snapshot/Job and cannot revive obsolete regulation; (15) attach F05, SLO/Error Budget, contract-test, telemetry and runbook evidence; (16) make decision, dissent, permitted exception, budget and post-release result auditable. Map the ten evidence domains—scope/value, risk, quality/accuracy, security/privacy, data/contract/Snapshot, budget/capacity, monitoring/reliability, stop/recovery, authority/dispute and post-release monitoring—to the applicable eight approved REL gates; verify first-sample safety evidence. Numeric thresholds/cohort/schedule/metric owner remain OPEN unless separately approved.
   - `TEST:CORE:C01:026.N` (NEGATIVE): Reject a commercial override of a valid safety/security/financial/legal blocker, replacing the eight REL gates with F06, adding a ninth F06 gate, self-certifying a high-risk change, or claiming an absent owner-approved threshold passed: No-Go/Hold
@@ -630,8 +630,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Coverage and deferral accounting / No automatic stage four, growth budget or dated commitment follows from deferral
 - **رفتارهای اتمی:** `REQ:CORE:027.B01` Maintain bidirectional versioned requirement/owner/task/test/release/deferral trace؛ `REQ:CORE:027.B02` Preserve all approved Wallet V0.20 and other capability scope, including deferred items؛ `REQ:CORE:027.B03` Retain selected/approved/released/deferred distinctions and approve scope/release changes؛ `REQ:CORE:027.B04` Keep G-COV-1..3 and referenced COV/AC controls without replacing them by a checklist؛ `REQ:CORE:027.B05` Keep approved source documents authoritative; the implementation plan may sequence and estimate only, never alter a policy/decision without explicit owner approval؛ `REQ:CORE:027.B06` Before work, inspect current code/capability/contract and record effect, compatibility and regression evidence rather than building a duplicate path؛ `REQ:CORE:027.B07` Reprioritize only through evidence-backed value/dependency/capacity/cost/risk learning while preserving approved scope, architecture and gates؛ `REQ:CORE:027.B08` Treat service/domain expansion, operational-capacity increase and architecture evolution as separate owner decisions; no automatic stage four, budget or release commitment; assess each opportunity for demand, value, permission, risk, build/compliance/operating cost, reuse and failure blast radius؛ `REQ:CORE:027.B09` Apply approved O5-14/EXP rules, criteria and growth gates with Go/Conditional Go/Hold/No-Go outcomes, evidence, scope and owner; invent no numeric threshold, do not replace O5-10, and retain O5-13 deferrals
-- **Taskهای ردیابی‌شده:** `TASK:CORE:011`
-- **AC `AC:CORE:C01:027`**؛ Task: `TASK:CORE:011`؛ Given: Coverage and deferral accounting؛ When: Traverse source-to-REQ-to-task-to-AC/test-to-future-release and backwards including Wallet V0.20 deferrals؛ Then: Maintain bidirectional versioned requirement/owner/task/test/release/deferral trace؛ Preserve all approved Wallet V0.20 and other capability scope, including deferred items؛ Retain selected/approved/released/deferred distinctions and approve scope/release changes؛ Keep G-COV-1..3 and referenced COV/AC controls without replacing them by a checklist؛ Negative: Remove an approved deferred Wallet feature because it is absent from first three stages: coverage gate fails؛ Boundary: Change first required release or grow after stage3: effect review and owner decision required, no implicit stage4 or fabricated commitment؛ For a new service/bank/channel require an opportunity dossier covering demand, value, permission, risk, build/compliance/operating cost, reuse and blast radius; portfolio review alone grants no development permission؛ Apply EXP-G01..10 and the approved O5-14 evaluation without inventing thresholds or bypassing O5-10; keep O5-13 deferred capabilities visible
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:011`
+- **AC `AC:CORE:C01:027`**؛ Task: `TASK:CORE:C01:011`؛ Given: Coverage and deferral accounting؛ When: Traverse source-to-REQ-to-task-to-AC/test-to-future-release and backwards including Wallet V0.20 deferrals؛ Then: Maintain bidirectional versioned requirement/owner/task/test/release/deferral trace؛ Preserve all approved Wallet V0.20 and other capability scope, including deferred items؛ Retain selected/approved/released/deferred distinctions and approve scope/release changes؛ Keep G-COV-1..3 and referenced COV/AC controls without replacing them by a checklist؛ Negative: Remove an approved deferred Wallet feature because it is absent from first three stages: coverage gate fails؛ Boundary: Change first required release or grow after stage3: effect review and owner decision required, no implicit stage4 or fabricated commitment؛ For a new service/bank/channel require an opportunity dossier covering demand, value, permission, risk, build/compliance/operating cost, reuse and blast radius; portfolio review alone grants no development permission؛ Apply EXP-G01..10 and the approved O5-14 evaluation without inventing thresholds or bypassing O5-10; keep O5-13 deferred capabilities visible
 - **Test `TEST:CORE:C01:027`**؛ Environment: Registry and COV trace/deferral mutation fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:027.P` (POSITIVE): Traverse approved source/decision to owner, Requirement, Task, AC/Test and release/deferral and backwards; verify the source remains authoritative, existing capability was inspected, compatibility/change-impact evidence is attached, and reprioritization changes sequence only while preserving approved scope and gates; review a growth dossier with every required evidence field and record the approved growth-gate outcome/owner without a fabricated threshold
   - `TEST:CORE:C01:027.N` (NEGATIVE): Reject deleting deferred approved scope, changing an approved policy from the plan, duplicating an existing capability without reuse analysis, making an unreviewed breaking change, or changing a release gate through reprioritization; reject automatic stage four, a growth commitment without the dossier/owner decision, a portfolio review treated as development approval, a fabricated numeric threshold, bypass of O5-10, or deletion of O5-13 deferrals
@@ -644,8 +644,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Physical split, new host or service extraction proposal / User count or historical 2-vCPU/4GB host is not sufficient justification
 - **رفتارهای اتمی:** `REQ:CORE:032.B01` Measure equal-workload latency, throughput, CPU/RAM, failure isolation, security/transaction risk and cost؛ `REQ:CORE:032.B02` Separate architecture overhead from intrinsic browser/model/workflow load؛ `REQ:CORE:032.B03` Require RFC and independent owner approval before any physical extraction or infrastructure commitment؛ `REQ:CORE:032.B04` Before weekly commitment, estimate development and operating cost separately with actual capacity/uncertainty; after a cycle compare person-hours, elapsed time, tokens, costs and rework against estimates and record the cause for the next forecast
-- **Taskهای ردیابی‌شده:** `TASK:CORE:013`
-- **AC `AC:CORE:C01:032`**؛ Task: `TASK:CORE:013`؛ Given: Physical split, new host or service extraction proposal؛ When: Compare same representative workload with measured resource/failure/transaction/security/cost data in extraction RFC؛ Then: Measure equal-workload latency, throughput, CPU/RAM, failure isolation, security/transaction risk and cost؛ Separate architecture overhead from intrinsic browser/model/workflow load؛ Require RFC and independent owner approval before any physical extraction or infrastructure commitment؛ Before a cycle commitment, separate build cost from operating/model/API/device/support cost; after each cycle, compare estimates with actual time, person-hours, tokens, costs and rework and carry evidence into the next estimate؛ Negative: Justify extra VM or service extraction only from user count or 2-vCPU/4GB statement: reject؛ Boundary: Include browser/model load separately from process overhead; inconclusive measurement yields Hold, not an invented capacity number
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:013`
+- **AC `AC:CORE:C01:032`**؛ Task: `TASK:CORE:C01:013`؛ Given: Physical split, new host or service extraction proposal؛ When: Compare same representative workload with measured resource/failure/transaction/security/cost data in extraction RFC؛ Then: Measure equal-workload latency, throughput, CPU/RAM, failure isolation, security/transaction risk and cost؛ Separate architecture overhead from intrinsic browser/model/workflow load؛ Require RFC and independent owner approval before any physical extraction or infrastructure commitment؛ Before a cycle commitment, separate build cost from operating/model/API/device/support cost; after each cycle, compare estimates with actual time, person-hours, tokens, costs and rework and carry evidence into the next estimate؛ Negative: Justify extra VM or service extraction only from user count or 2-vCPU/4GB statement: reject؛ Boundary: Include browser/model load separately from process overhead; inconclusive measurement yields Hold, not an invented capacity number
 - **Test `TEST:CORE:C01:032`**؛ Environment: Authorized identical-workload performance sandbox with cost/resource measurements؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:032.P` (POSITIVE): Compare same representative workload with measured resource/failure/transaction/security/cost data in extraction RFC; separately estimate build and operating costs, then record estimate-versus-actual time/person-hours/tokens/cost/rework and the evidenced forecast adjustment
   - `TEST:CORE:C01:032.N` (NEGATIVE): Reject infrastructure/extraction from user count or historical VM size alone; reject a commitment lacking separate build/run costs, actual capacity/uncertainty, or an estimate-versus-actual review
@@ -658,8 +658,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Wallet boundary planning / Legal applicability remains separately assessed; no external merchant acceptance
 - **رفتارهای اتمی:** `REQ:CORE:033.B01` Keep Wallet as a modular Core financial capability؛ `REQ:CORE:033.B02` Keep credits closed-loop for Shahab services, suppliers are Shahab costs rather than independent merchants؛ `REQ:CORE:033.B03` Do not require Wallet activation for first RAG release؛ `REQ:CORE:033.B04` Handoff single IRR ledger, per-owner accounts and atomic balanced postings without selecting an external ledger vendor
-- **Taskهای ردیابی‌شده:** `TASK:CORE:012`
-- **AC `AC:CORE:C01:033`**؛ Task: `TASK:CORE:012`؛ Given: Wallet boundary planning؛ When: Review modular Wallet interface: only Shahab service credits, separate supplier cost, single IRR ledger with per-owner accounts؛ Then: Keep Wallet as a modular Core financial capability؛ Keep credits closed-loop for Shahab services, suppliers are Shahab costs rather than independent merchants؛ Do not require Wallet activation for first RAG release؛ Handoff single IRR ledger, per-owner accounts and atomic balanced postings without selecting an external ledger vendor؛ Negative: Treat supplier as independent credit merchant or make Wallet necessary for free RAG: reject boundary؛ Boundary: Two accounts in one ledger can post atomically; gift accounting/vendor choice stays blocked for specialist decision, not assumed approved
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:012`
+- **AC `AC:CORE:C01:033`**؛ Task: `TASK:CORE:C01:012`؛ Given: Wallet boundary planning؛ When: Review modular Wallet interface: only Shahab service credits, separate supplier cost, single IRR ledger with per-owner accounts؛ Then: Keep Wallet as a modular Core financial capability؛ Keep credits closed-loop for Shahab services, suppliers are Shahab costs rather than independent merchants؛ Do not require Wallet activation for first RAG release؛ Handoff single IRR ledger, per-owner accounts and atomic balanced postings without selecting an external ledger vendor؛ Negative: Treat supplier as independent credit merchant or make Wallet necessary for free RAG: reject boundary؛ Boundary: Two accounts in one ledger can post atomically; gift accounting/vendor choice stays blocked for specialist decision, not assumed approved
 - **Test `TEST:CORE:C01:033`**؛ Environment: Wallet interface/ledger contract review and isolated balanced-posting design fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:033.P` (POSITIVE): Review modular Wallet interface: only Shahab service credits, separate supplier cost, single IRR ledger with per-owner accounts
   - `TEST:CORE:C01:033.N` (NEGATIVE): Treat supplier as independent credit merchant or make Wallet necessary for free RAG: reject boundary
@@ -672,8 +672,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Every synchronous cross-service call / Circuit breakers are conditional on instability; the timeout budget itself is not
 - **رفتارهای اتمی:** `REQ:CORE:037.B01` Bound each synchronous call by an approved timeout budget؛ `REQ:CORE:037.B02` Surface timeout and contain dependent failure without inventing success
-- **Taskهای ردیابی‌شده:** `TASK:CORE:007`
-- **AC `AC:CORE:C01:037`**؛ Task: `TASK:CORE:007`؛ Given: Every synchronous cross-service call؛ When: Every synchronous cross-service path has measured/approved timeout and returns typed timeout within budget؛ Then: Bound each synchronous call by an approved timeout budget؛ Surface timeout and contain dependent failure without inventing success؛ Negative: Stable-seeming endpoint hangs indefinitely: timeout requirement still fails even without a breaker؛ Boundary: At timeout/late-response boundary, no success fabricated and dependent request is contained under chosen budget
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:007`
+- **AC `AC:CORE:C01:037`**؛ Task: `TASK:CORE:C01:007`؛ Given: Every synchronous cross-service call؛ When: Every synchronous cross-service path has measured/approved timeout and returns typed timeout within budget؛ Then: Bound each synchronous call by an approved timeout budget؛ Surface timeout and contain dependent failure without inventing success؛ Negative: Stable-seeming endpoint hangs indefinitely: timeout requirement still fails even without a breaker؛ Boundary: At timeout/late-response boundary, no success fabricated and dependent request is contained under chosen budget
 - **Test `TEST:CORE:C01:037`**؛ Environment: Controlled synchronous provider with latency/late response injection؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:037.P` (POSITIVE): Every synchronous cross-service path has measured/approved timeout and returns typed timeout within budget
   - `TEST:CORE:C01:037.N` (NEGATIVE): Stable-seeming endpoint hangs indefinitely: timeout requirement still fails even without a breaker
@@ -686,8 +686,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Unstable dependency capable of cascading failure / No claim all calls require the same breaker thresholds
 - **رفتارهای اتمی:** `REQ:CORE:038.B01` Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery؛ `REQ:CORE:038.B02` Preserve independent capabilities during failure and recovery
-- **Taskهای ردیابی‌شده:** `TASK:CORE:007`
-- **AC `AC:CORE:C01:038`**؛ Task: `TASK:CORE:007`؛ Given: Unstable dependency capable of cascading failure؛ When: Inject transient dependency failures: open, fail-fast, half-open probe and measured recovery follow approved policy؛ Then: Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery؛ Preserve independent capabilities during failure and recovery؛ Negative: Circuit stays closed through cascading outage or opens unrelated independent capability: failure isolation test rejects؛ Boundary: Simultaneous half-open probes obey controlled concurrency and restore only after recovery criterion
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:007`
+- **AC `AC:CORE:C01:038`**؛ Task: `TASK:CORE:C01:007`؛ Given: Unstable dependency capable of cascading failure؛ When: Inject transient dependency failures: open, fail-fast, half-open probe and measured recovery follow approved policy؛ Then: Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery؛ Preserve independent capabilities during failure and recovery؛ Negative: Circuit stays closed through cascading outage or opens unrelated independent capability: failure isolation test rejects؛ Boundary: Simultaneous half-open probes obey controlled concurrency and restore only after recovery criterion
 - **Test `TEST:CORE:C01:038`**؛ Environment: Circuit state machine fixture with fake clock and controlled probe races؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:038.P` (POSITIVE): Inject transient dependency failures: open, fail-fast, half-open probe and measured recovery follow approved policy
   - `TEST:CORE:C01:038.N` (NEGATIVE): Circuit stays closed through cascading outage or opens unrelated independent capability: failure isolation test rejects
@@ -700,8 +700,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Retry of a failed operation / Unknown financial effect must be reconciled before retry, not treated as transient failure
 - **رفتارهای اتمی:** `REQ:CORE:039.B01` Retry only classified transient outcomes with backoff and bounded attempts؛ `REQ:CORE:039.B02` Do not retry permanent or validation errors؛ `REQ:CORE:039.B03` Use idempotency for side effects and reconcile unknown financial result before retry
-- **Taskهای ردیابی‌شده:** `TASK:CORE:007`
-- **AC `AC:CORE:C01:039`**؛ Task: `TASK:CORE:007`؛ Given: Retry of a failed operation؛ When: Transient failure retries with bounded attempts/backoff and same effect-idempotency context؛ Then: Retry only classified transient outcomes with backoff and bounded attempts؛ Do not retry permanent or validation errors؛ Use idempotency for side effects and reconcile unknown financial result before retry؛ Negative: Validation/permanent error or unknown bank outcome triggers blind retry: reject; unknown enters reconciliation؛ Boundary: Lost acknowledgement after financial success plus concurrent retry produces at most one effect after verified reconciliation
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:007`
+- **AC `AC:CORE:C01:039`**؛ Task: `TASK:CORE:C01:007`؛ Given: Retry of a failed operation؛ When: Transient failure retries with bounded attempts/backoff and same effect-idempotency context؛ Then: Retry only classified transient outcomes with backoff and bounded attempts؛ Do not retry permanent or validation errors؛ Use idempotency for side effects and reconcile unknown financial result before retry؛ Negative: Validation/permanent error or unknown bank outcome triggers blind retry: reject; unknown enters reconciliation؛ Boundary: Lost acknowledgement after financial success plus concurrent retry produces at most one effect after verified reconciliation
 - **Test `TEST:CORE:C01:039`**؛ Environment: Retry/failure-classification and idempotent side-effect/reconciliation harness؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:039.P` (POSITIVE): Transient failure retries with bounded attempts/backoff and same effect-idempotency context
   - `TEST:CORE:C01:039.N` (NEGATIVE): Validation/permanent error or unknown bank outcome triggers blind retry: reject; unknown enters reconciliation
@@ -714,8 +714,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Interactive and heavy background work compete / Numeric concurrency/share needs measurement and approval
 - **رفتارهای اتمی:** `REQ:CORE:040.B01` Separate interactive and background capacity with bulkhead/quota/concurrency control؛ `REQ:CORE:040.B02` A saturated or failed worker cannot exhaust interactive API capacity؛ `REQ:CORE:040.B03` Define visible controlled degradation rather than fabricated success
-- **Taskهای ردیابی‌شده:** `TASK:CORE:007`
-- **AC `AC:CORE:C01:040`**؛ Task: `TASK:CORE:007`؛ Given: Interactive and heavy background work compete؛ When: Saturate heavy-worker pool with controlled fixtures while independent interactive requests keep reserved capacity؛ Then: Separate interactive and background capacity with bulkhead/quota/concurrency control؛ A saturated or failed worker cannot exhaust interactive API capacity؛ Define visible controlled degradation rather than fabricated success؛ Negative: Shared unbounded pool starves interactive API: bulkhead acceptance fails؛ Boundary: Worker crash/restart and queue surge remain within approved resource split; dependent capability degrades visibly
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:007`
+- **AC `AC:CORE:C01:040`**؛ Task: `TASK:CORE:C01:007`؛ Given: Interactive and heavy background work compete؛ When: Saturate heavy-worker pool with controlled fixtures while independent interactive requests keep reserved capacity؛ Then: Separate interactive and background capacity with bulkhead/quota/concurrency control؛ A saturated or failed worker cannot exhaust interactive API capacity؛ Define visible controlled degradation rather than fabricated success؛ Negative: Shared unbounded pool starves interactive API: bulkhead acceptance fails؛ Boundary: Worker crash/restart and queue surge remain within approved resource split; dependent capability degrades visibly
 - **Test `TEST:CORE:C01:040`**؛ Environment: Separate-capacity interactive/worker load fixture in authorized sandbox؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:040.P` (POSITIVE): Saturate heavy-worker pool with controlled fixtures while independent interactive requests keep reserved capacity
   - `TEST:CORE:C01:040.N` (NEGATIVE): Shared unbounded pool starves interactive API: bulkhead acceptance fails
@@ -728,8 +728,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Worker crash/restart with pending jobs / A recovery may not bypass current authorization or duplicate financial/publication effect
 - **رفتارهای اتمی:** `REQ:CORE:041.B01` Resume pending owner-controlled jobs from persisted state after restart؛ `REQ:CORE:041.B02` Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements؛ `REQ:CORE:041.B03` Keep durable audit and trace of recovery outcome
-- **Taskهای ردیابی‌شده:** `TASK:CORE:005`
-- **AC `AC:CORE:C01:041`**؛ Task: `TASK:CORE:005`؛ Given: Worker crash/restart with pending jobs؛ When: Restart worker with persisted pending jobs: owner resumes and records result/recovery trace؛ Then: Resume pending owner-controlled jobs from persisted state after restart؛ Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements؛ Keep durable audit and trace of recovery outcome؛ Negative: Restart relies on expired session state or skips current owner authorization: recovery denied؛ Boundary: Two workers race on same job after lost ack: one effective mutation/publication, audit records replay without duplicate effect
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:005`
+- **AC `AC:CORE:C01:041`**؛ Task: `TASK:CORE:C01:005`؛ Given: Worker crash/restart with pending jobs؛ When: Restart worker with persisted pending jobs: owner resumes and records result/recovery trace؛ Then: Resume pending owner-controlled jobs from persisted state after restart؛ Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements؛ Keep durable audit and trace of recovery outcome؛ Negative: Restart relies on expired session state or skips current owner authorization: recovery denied؛ Boundary: Two workers race on same job after lost ack: one effective mutation/publication, audit records replay without duplicate effect
 - **Test `TEST:CORE:C01:041`**؛ Environment: PostgreSQL16 job queue/worker crash and duplicate-worker race fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:041.P` (POSITIVE): Restart worker with persisted pending jobs: owner resumes and records result/recovery trace
   - `TEST:CORE:C01:041.N` (NEGATIVE): Restart relies on expired session state or skips current owner authorization: recovery denied
@@ -742,8 +742,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Workflow-engine/version migration / An adapter alone does not prove migration without code changes
 - **رفتارهای اتمی:** `REQ:CORE:042.B01` Route new jobs deliberately to the new engine؛ `REQ:CORE:042.B02` Complete in-flight jobs on the prior engine under original compatible semantics؛ `REQ:CORE:042.B03` Test adapter/orchestration changes and failure/cancel/resume across migration
-- **Taskهای ردیابی‌شده:** `TASK:CORE:005`
-- **AC `AC:CORE:C01:042`**؛ Task: `TASK:CORE:005`؛ Given: Workflow-engine/version migration؛ When: Start J1 on old engine, switch routing, start J2 on new engine: J1 completes on old and J2 on new؛ Then: Route new jobs deliberately to the new engine؛ Complete in-flight jobs on the prior engine under original compatible semantics؛ Test adapter/orchestration changes and failure/cancel/resume across migration؛ Negative: Move J1 to new engine with changed semantics or claim interface proves free migration: reject؛ Boundary: Cancel/resume/crash around routing switch: both engines respect version, current authority and exactly one business effect
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:005`
+- **AC `AC:CORE:C01:042`**؛ Task: `TASK:CORE:C01:005`؛ Given: Workflow-engine/version migration؛ When: Start J1 on old engine, switch routing, start J2 on new engine: J1 completes on old and J2 on new؛ Then: Route new jobs deliberately to the new engine؛ Complete in-flight jobs on the prior engine under original compatible semantics؛ Test adapter/orchestration changes and failure/cancel/resume across migration؛ Negative: Move J1 to new engine with changed semantics or claim interface proves free migration: reject؛ Boundary: Cancel/resume/crash around routing switch: both engines respect version, current authority and exactly one business effect
 - **Test `TEST:CORE:C01:042`**؛ Environment: Old/new engine adapters and persisted job routing fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:042.P` (POSITIVE): Start J1 on old engine, switch routing, start J2 on new engine: J1 completes on old and J2 on new
   - `TEST:CORE:C01:042.N` (NEGATIVE): Move J1 to new engine with changed semantics or claim interface proves free migration: reject
@@ -756,8 +756,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Event consumer receives delivery / Unknown schema is explicitly rejected/quarantined, not blindly applied
 - **رفتارهای اتمی:** `REQ:CORE:043.B01` Deduplicate event identity before applying side effects؛ `REQ:CORE:043.B02` Handle duplicate and out-of-order delivery according to versioned contract؛ `REQ:CORE:043.B03` Test unknown-version handling and consumer compatibility؛ `REQ:CORE:043.B04` Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine
-- **Taskهای ردیابی‌شده:** `TASK:CORE:006`
-- **AC `AC:CORE:C01:043`**؛ Task: `TASK:CORE:006`؛ Given: Event consumer receives delivery؛ When: Deliver versioned event with stable identity to compatible consumer: effect and dedup state applied safely؛ Then: Deduplicate event identity before applying side effects؛ Handle duplicate and out-of-order delivery according to versioned contract؛ Test unknown-version handling and consumer compatibility؛ Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine؛ Negative: Deliver duplicate identity or unknown schema: no repeated effect; unknown version rejected/quarantined under contract؛ Boundary: Deliver e2 before e1 and race duplicate deliveries: required ordering/version policy preserves coherent final state
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:006`
+- **AC `AC:CORE:C01:043`**؛ Task: `TASK:CORE:C01:006`؛ Given: Event consumer receives delivery؛ When: Deliver versioned event with stable identity to compatible consumer: effect and dedup state applied safely؛ Then: Deduplicate event identity before applying side effects؛ Handle duplicate and out-of-order delivery according to versioned contract؛ Test unknown-version handling and consumer compatibility؛ Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine؛ Negative: Deliver duplicate identity or unknown schema: no repeated effect; unknown version rejected/quarantined under contract؛ Boundary: Deliver e2 before e1 and race duplicate deliveries: required ordering/version policy preserves coherent final state
 - **Test `TEST:CORE:C01:043`**؛ Environment: PostgreSQL16 consumer dedup plus version/order/race fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:043.P` (POSITIVE): Deliver versioned event with stable identity to compatible consumer: effect and dedup state applied safely
   - `TEST:CORE:C01:043.N` (NEGATIVE): Deliver duplicate identity or unknown schema: no repeated effect; unknown version rejected/quarantined under contract
@@ -770,8 +770,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Publisher crashes after local commit before send / Delivery can be at least once; effective application must remain idempotent
 - **رفتارهای اتمی:** `REQ:CORE:044.B01` Keep unsent Outbox records durable and recover publishing after restart؛ `REQ:CORE:044.B02` Do not lose necessary events or repeat business effects after send/ack crash؛ `REQ:CORE:044.B03` Expose publisher lag, retry/final failure, recovery and periodic reconciliation
-- **Taskهای ردیابی‌شده:** `TASK:CORE:006`
-- **AC `AC:CORE:C01:044`**؛ Task: `TASK:CORE:006`؛ Given: Publisher crashes after local commit before send؛ When: Crash publisher after local commit before send: unsent event survives restart and is delivered؛ Then: Keep unsent Outbox records durable and recover publishing after restart؛ Do not lose necessary events or repeat business effects after send/ack crash؛ Expose publisher lag, retry/final failure, recovery and periodic reconciliation؛ Negative: Mark unsent record delivered or lose necessary event after crash: reconciliation/lag gate fails؛ Boundary: Crash after send before ack and restart: resend is safe, consumer applies once; periodic reconcile finds any pending discrepancy
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:006`
+- **AC `AC:CORE:C01:044`**؛ Task: `TASK:CORE:C01:006`؛ Given: Publisher crashes after local commit before send؛ When: Crash publisher after local commit before send: unsent event survives restart and is delivered؛ Then: Keep unsent Outbox records durable and recover publishing after restart؛ Do not lose necessary events or repeat business effects after send/ack crash؛ Expose publisher lag, retry/final failure, recovery and periodic reconciliation؛ Negative: Mark unsent record delivered or lose necessary event after crash: reconciliation/lag gate fails؛ Boundary: Crash after send before ack and restart: resend is safe, consumer applies once; periodic reconcile finds any pending discrepancy
 - **Test `TEST:CORE:C01:044`**؛ Environment: PostgreSQL16 Outbox/publisher kill-before-send/kill-before-ack fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:044.P` (POSITIVE): Crash publisher after local commit before send: unsent event survives restart and is delivered
   - `TEST:CORE:C01:044.N` (NEGATIVE): Mark unsent record delivered or lose necessary event after crash: reconciliation/lag gate fails
@@ -784,8 +784,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Scoring, catalogue freshness or publication-policy change / Technical rollback cannot activate obsolete legal evidence or incompatible Snapshot
 - **رفتارهای اتمی:** `REQ:CORE:045.B01` Version policy changes with authorized approval, regression and controlled publication؛ `REQ:CORE:045.B02` Keep historical versions and reject invalid/obsolete Snapshot rollback؛ `REQ:CORE:045.B03` Do not mutate financial results through a free operational flag
-- **Taskهای ردیابی‌شده:** `TASK:CORE:009`
-- **AC `AC:CORE:C01:045`**؛ Task: `TASK:CORE:009`؛ Given: Scoring, catalogue freshness or publication-policy change؛ When: Authorized scoring/freshness/publication policy change uses version, golden regression, approval and controlled publish؛ Then: Version policy changes with authorized approval, regression and controlled publication؛ Keep historical versions and reject invalid/obsolete Snapshot rollback؛ Do not mutate financial results through a free operational flag؛ Negative: Use runtime flag to alter score or activate obsolete legal Snapshot on rollback: reject policy activation؛ Boundary: Concurrent request and policy activation keep each run on valid version; history retained and incompatible rollback blocked
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:009`
+- **AC `AC:CORE:C01:045`**؛ Task: `TASK:CORE:C01:009`؛ Given: Scoring, catalogue freshness or publication-policy change؛ When: Authorized scoring/freshness/publication policy change uses version, golden regression, approval and controlled publish؛ Then: Version policy changes with authorized approval, regression and controlled publication؛ Keep historical versions and reject invalid/obsolete Snapshot rollback؛ Do not mutate financial results through a free operational flag؛ Negative: Use runtime flag to alter score or activate obsolete legal Snapshot on rollback: reject policy activation؛ Boundary: Concurrent request and policy activation keep each run on valid version; history retained and incompatible rollback blocked
 - **Test `TEST:CORE:C01:045`**؛ Environment: Versioned policy/snapshot and golden scoring regression fixture؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:045.P` (POSITIVE): Authorized scoring/freshness/publication policy change uses version, golden regression, approval and controlled publish
   - `TEST:CORE:C01:045.N` (NEGATIVE): Use runtime flag to alter score or activate obsolete legal Snapshot on rollback: reject policy activation
@@ -798,8 +798,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Config/flag deployment pipeline / Secret-storage tool and key-rotation period remain design decisions
 - **رفتارهای اتمی:** `REQ:CORE:046.B01` Validate type, default, range and environment differences؛ `REQ:CORE:046.B02` Validate feature dependencies, kill switch and change authorization؛ `REQ:CORE:046.B03` Scan secrets and audit changes without exposing secret value؛ `REQ:CORE:046.B04` Test compatible rollback and block invalid config, leakage or unintended financial change
-- **Taskهای ردیابی‌شده:** `TASK:CORE:009`
-- **AC `AC:CORE:C01:046`**؛ Task: `TASK:CORE:009`؛ Given: Config/flag deployment pipeline؛ When: Validate typed/default/range config, env diff, flag dependencies, kill switch, audit and secret scan before deployment؛ Then: Validate type, default, range and environment differences؛ Validate feature dependencies, kill switch and change authorization؛ Scan secrets and audit changes without exposing secret value؛ Test compatible rollback and block invalid config, leakage or unintended financial change؛ Negative: Invalid type/range, unauthorized policy edit, secret canary or unintended financial result: deployment blocked؛ Boundary: Missing flag dependency or config rollback incompatible with API/Snapshot/Job fails; no automatic production fallback
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:009`
+- **AC `AC:CORE:C01:046`**؛ Task: `TASK:CORE:C01:009`؛ Given: Config/flag deployment pipeline؛ When: Validate typed/default/range config, env diff, flag dependencies, kill switch, audit and secret scan before deployment؛ Then: Validate type, default, range and environment differences؛ Validate feature dependencies, kill switch and change authorization؛ Scan secrets and audit changes without exposing secret value؛ Test compatible rollback and block invalid config, leakage or unintended financial change؛ Negative: Invalid type/range, unauthorized policy edit, secret canary or unintended financial result: deployment blocked؛ Boundary: Missing flag dependency or config rollback incompatible with API/Snapshot/Job fails; no automatic production fallback
 - **Test `TEST:CORE:C01:046`**؛ Environment: Typed config/env/policy/flag/secret canaries and rollback matrix؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:046.P` (POSITIVE): Validate typed/default/range config, env diff, flag dependencies, kill switch, audit and secret scan before deployment
   - `TEST:CORE:C01:046.N` (NEGATIVE): Invalid type/range, unauthorized policy edit, secret canary or unintended financial result: deployment blocked
@@ -812,8 +812,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Telemetry, analytics and correlation / Financial audit retention is independent of technical-log retention
 - **رفتارهای اتمی:** `REQ:CORE:047.B01` Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads؛ `REQ:CORE:047.B02` Use safe low-cardinality labels and nonpersonal correlation IDs؛ `REQ:CORE:047.B03` Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation
-- **Taskهای ردیابی‌شده:** `TASK:CORE:010`
-- **AC `AC:CORE:C01:047`**؛ Task: `TASK:CORE:010`؛ Given: Telemetry, analytics and correlation؛ When: Export success/error traces with synthetic identity/OTP/token/raw payload canaries: none occur in logs/metrics/traces/analytics/model memory؛ Then: Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads؛ Use safe low-cardinality labels and nonpersonal correlation IDs؛ Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation؛ Negative: Inject secret in exception, URL, header or correlation and high-cardinality identifier label: reject leakage and relabel safely؛ Boundary: Concurrent retries/errors across services retain nonpersonal correlation; permanent financial audit remains separate from technical log retention
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:010`
+- **AC `AC:CORE:C01:047`**؛ Task: `TASK:CORE:C01:010`؛ Given: Telemetry, analytics and correlation؛ When: Export success/error traces with synthetic identity/OTP/token/raw payload canaries: none occur in logs/metrics/traces/analytics/model memory؛ Then: Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads؛ Use safe low-cardinality labels and nonpersonal correlation IDs؛ Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation؛ Negative: Inject secret in exception, URL, header or correlation and high-cardinality identifier label: reject leakage and relabel safely؛ Boundary: Concurrent retries/errors across services retain nonpersonal correlation; permanent financial audit remains separate from technical log retention
 - **Test `TEST:CORE:C01:047`**؛ Environment: Synthetic privacy canaries, test telemetry collector and failure/retry paths؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:047.P` (POSITIVE): Export success/error traces with synthetic identity/OTP/token/raw payload canaries: none occur in logs/metrics/traces/analytics/model memory
   - `TEST:CORE:C01:047.N` (NEGATIVE): Inject secret in exception, URL, header or correlation and high-cardinality identifier label: reject leakage and relabel safely
@@ -826,8 +826,8 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** High-risk release or emergency stop / Preparer alone cannot approve safety; missing valid review holds/limits the risky scope
 - **رفتارهای اتمی:** `REQ:CORE:048.B01` Require specialist safety review independent of change preparer؛ `REQ:CORE:048.B02` Honor documented blocker and authorized immediate operations/security stop without waiting for product owner؛ `REQ:CORE:048.B03` Require evidence of remedy, relevant tests and renewed authorization before restart؛ `REQ:CORE:048.B04` Material version/audience/budget change invalidates prior decision for affected scope؛ `REQ:CORE:048.B05` Every production change is risk-classified and independently reviewed at the matching level before release
-- **Taskهای ردیابی‌شده:** `TASK:CORE:011`
-- **AC `AC:CORE:C01:048`**؛ Task: `TASK:CORE:011`؛ Given: Production change or emergency stop؛ When: Classify risk, obtain independent review at the matching level and scoped release authority; for high-risk change an independent specialist reviews and an authorized operator can stop the affected scope immediately؛ Then: Every production change has independent risk-matched review and authority؛ Require specialist safety review independent of change preparer for high-risk change؛ Honor documented blocker and authorized immediate operations/security stop without waiting for product owner؛ Require evidence of remedy, relevant tests and renewed authorization before restart؛ Material version/audience/budget change invalidates prior decision for affected scope؛ Negative: Preparer self-approves, a production change lacks its risk-matched independent review/authority, or business owner bypasses a valid blocker: gate remains Hold؛ Boundary: After stop or material version/audience/budget change, old approval cannot restart service: remedy/tests and new approval required
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:011`
+- **AC `AC:CORE:C01:048`**؛ Task: `TASK:CORE:C01:011`؛ Given: Production change or emergency stop؛ When: Classify risk, obtain independent review at the matching level and scoped release authority; for high-risk change an independent specialist reviews and an authorized operator can stop the affected scope immediately؛ Then: Every production change has independent risk-matched review and authority؛ Require specialist safety review independent of change preparer for high-risk change؛ Honor documented blocker and authorized immediate operations/security stop without waiting for product owner؛ Require evidence of remedy, relevant tests and renewed authorization before restart؛ Material version/audience/budget change invalidates prior decision for affected scope؛ Negative: Preparer self-approves, a production change lacks its risk-matched independent review/authority, or business owner bypasses a valid blocker: gate remains Hold؛ Boundary: After stop or material version/audience/budget change, old approval cannot restart service: remedy/tests and new approval required
 - **Test `TEST:CORE:C01:048`**؛ Environment: Independent-review, stop/restart and decision-version mutation fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:048.P` (POSITIVE): Independent specialist reviews risky change and authorized operator can stop affected scope immediately
   - `TEST:CORE:C01:048.N` (NEGATIVE): Preparer self-approves, a production change lacks its risk-matched independent review/authority, or business owner bypasses a valid blocker: gate remains Hold
@@ -840,24 +840,24 @@
 - **وضعیت حکم:** APPROVED_EXPLICIT
 - **شرط/استثنا:** Paid flow activation versus first RAG release / Subscription sale has no default mandatory Wallet dependency
 - **رفتارهای اتمی:** `REQ:CORE:049.B01` Prohibit implicit payment/Wallet prerequisite for first RAG release؛ `REQ:CORE:049.B02` Before a paid flow activates, require all applicable finance, entitlement, idempotency, reconciliation, audit and specialist-review controls؛ `REQ:CORE:049.B03` Preserve approved Wallet/E04 policies while leaving only explicitly open technical/numeric choices undecided
-- **Taskهای ردیابی‌شده:** `TASK:CORE:003`
-- **AC `AC:CORE:C01:049`**؛ Task: `TASK:CORE:003`؛ Given: Paid flow activation versus first RAG release؛ When: Free first RAG increment starts without Wallet; future paid-flow dossier lists applicable financial/entitlement controls؛ Then: Prohibit implicit payment/Wallet prerequisite for first RAG release؛ Before a paid flow activates, require all applicable finance, entitlement, idempotency, reconciliation, audit and specialist-review controls؛ Preserve approved Wallet/E04 policies while leaving only explicitly open technical/numeric choices undecided؛ Negative: Activate paid service before idempotency/reconciliation/audit/permission controls, or force Wallet merely for subscription: reject؛ Boundary: Flagged-off financial preparation grants no right to charge; unknown financial result reconciles before any repeat charge
+- **Taskهای ردیابی‌شده:** `TASK:CORE:C01:003`
+- **AC `AC:CORE:C01:049`**؛ Task: `TASK:CORE:C01:003`؛ Given: Paid flow activation versus first RAG release؛ When: Free first RAG increment starts without Wallet; future paid-flow dossier lists applicable financial/entitlement controls؛ Then: Prohibit implicit payment/Wallet prerequisite for first RAG release؛ Before a paid flow activates, require all applicable finance, entitlement, idempotency, reconciliation, audit and specialist-review controls؛ Preserve approved Wallet/E04 policies while leaving only explicitly open technical/numeric choices undecided؛ Negative: Activate paid service before idempotency/reconciliation/audit/permission controls, or force Wallet merely for subscription: reject؛ Boundary: Flagged-off financial preparation grants no right to charge; unknown financial result reconciles before any repeat charge
 - **Test `TEST:CORE:C01:049`**؛ Environment: Free-RAG and disabled/paid activation policy/finance contract fixtures؛ Oracle: Check every linked atomic behaviour and exception against the source-locked contract; all positive assertions must hold and the injected violation must be rejected. A passing API/file-existence check is insufficient.؛ وضعیت: `NOT_EXECUTED`
   - `TEST:CORE:C01:049.P` (POSITIVE): Free first RAG increment starts without Wallet; future paid-flow dossier lists applicable financial/entitlement controls
   - `TEST:CORE:C01:049.N` (NEGATIVE): Activate paid service before idempotency/reconciliation/audit/permission controls, or force Wallet merely for subscription: reject
   - `TEST:CORE:C01:049.B` (BOUNDARY_OR_CONCURRENCY): Flagged-off financial preparation grants no right to charge; unknown financial result reconciles before any repeat charge
 
 #### تصمیم‌های باز و کنترل‌های اختصاصی
-- `DECISION:C01:01` — Physical module/schema isolation and exact topology؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1334;B:1749;B:2071؛ Taskهای متأثر: `TASK:CORE:002`، `TASK:CORE:003`، `TASK:CORE:012`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:02` — Worker/queue technology and tested workflow migration mechanics؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1328;B:1835;B:2075؛ Taskهای متأثر: `TASK:CORE:005`، `TASK:CORE:006`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:03` — Timeout/retry/breaker thresholds and interactive resource shares؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1192;B:1913;B:2075؛ Taskهای متأثر: `TASK:CORE:007`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:04` — Operational telemetry retention/sampling/hosting/SLO/alert channel؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:24;B:1837;B:1903؛ Taskهای متأثر: `TASK:CORE:010`، `TASK:CORE:013`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:05` — Consumer schemas, version-support period, EOL and shadow/canary feasibility؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1214;B:2071؛ Taskهای متأثر: `TASK:CORE:003`، `TASK:CORE:004`، `TASK:CORE:008`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:06` — Runtime SHA/tag/digest, Alembic/schema evidence and authorized performance environment؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2296-2298;B:2340؛ Taskهای متأثر: `TASK:CORE:001`، `TASK:CORE:013`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:07` — Per-release risk class, budget, reviewer and original RG/REL/COV control dossier؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2192;B:2219;B:2238؛ Taskهای متأثر: `TASK:CORE:011`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:10` — Numeric thresholds and accountable approver for the approved O5-14/EXP growth gates; threshold values and the decision owner for each future release are not specified by the current approval and must be set in the relevant execution design without retroactively inventing policy؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2246;B:2334؛ Taskهای متأثر: `TASK:CORE:011`، `TASK:CORE:013`؛ زمان/شرط تصمیم: Before using a numeric growth threshold or committing a growth release; no arbitrary date
-- `DECISION:C01:08` — Financial activation, legal applicability, gift accounts and policy details؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1702-1708;W:57;W:1169؛ Taskهای متأثر: `TASK:CORE:012`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
-- `DECISION:C01:09` — Secret storage, rotation/revocation and environment-isolation design؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1690؛ Taskهای متأثر: `TASK:CORE:009`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:01` — Physical module/schema isolation and exact topology؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1334;B:1749;B:2071؛ Taskهای متأثر: `TASK:CORE:C01:002`، `TASK:CORE:C01:003`، `TASK:CORE:C01:012`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:02` — Worker/queue technology and tested workflow migration mechanics؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1328;B:1835;B:2075؛ Taskهای متأثر: `TASK:CORE:C01:005`، `TASK:CORE:C01:006`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:03` — Timeout/retry/breaker thresholds and interactive resource shares؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1192;B:1913;B:2075؛ Taskهای متأثر: `TASK:CORE:C01:007`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:04` — Operational telemetry retention/sampling/hosting/SLO/alert channel؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:24;B:1837;B:1903؛ Taskهای متأثر: `TASK:CORE:C01:010`، `TASK:CORE:C01:013`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:05` — Consumer schemas, version-support period, EOL and shadow/canary feasibility؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1214;B:2071؛ Taskهای متأثر: `TASK:CORE:C01:003`، `TASK:CORE:C01:004`، `TASK:CORE:C01:008`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:06` — Runtime SHA/tag/digest, Alembic/schema evidence and authorized performance environment؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2296-2298;B:2340؛ Taskهای متأثر: `TASK:CORE:C01:001`، `TASK:CORE:C01:013`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:07` — Per-release risk class, budget, reviewer and original RG/REL/COV control dossier؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2192;B:2219;B:2238؛ Taskهای متأثر: `TASK:CORE:C01:011`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:10` — Numeric thresholds and accountable approver for the approved O5-14/EXP growth gates; threshold values and the decision owner for each future release are not specified by the current approval and must be set in the relevant execution design without retroactively inventing policy؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:2246;B:2334؛ Taskهای متأثر: `TASK:CORE:C01:011`، `TASK:CORE:C01:013`؛ زمان/شرط تصمیم: Before using a numeric growth threshold or committing a growth release; no arbitrary date
+- `DECISION:C01:08` — Financial activation, legal applicability, gift accounts and policy details؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1702-1708;W:57;W:1169؛ Taskهای متأثر: `TASK:CORE:C01:012`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
+- `DECISION:C01:09` — Secret storage, rotation/revocation and environment-isolation design؛ وضعیت: `OPEN_DECISION`؛ مرجع: B:1690؛ Taskهای متأثر: `TASK:CORE:C01:009`؛ زمان/شرط تصمیم: Before affected task implementation or release commitment; no arbitrary date
 
 ### C02 — هویت، سازمان‌ها و مجوزها
 
@@ -2120,16 +2120,16 @@
 - **`DISPOSITION:C03:SU-B-00229`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00229`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
 - **`DISPOSITION:C03:SU-B-00230`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00230`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
 - **`DISPOSITION:C03:SU-B-00232`**: `SHARED_CONTRACT` / `DOMAIN_OWNED_OUTSIDE_C03_PENDING_PACKAGE_ALLOCATION`؛ Source Unit `SU-B-00232`؛ مالک دامنه: RAG/Adviser owns the model semantics; C03 only the common inter-service boundary if consumed؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: The row defines an Adviser-owned conceptual model, not a common executable behavior owned by C03. Exact R-package allocation and acceptance remain open; C03 adds no duplicate requirement and the current C01 reusable implementation contracts do not require this domain schema.
-- **`DISPOSITION:C03:SU-B-00233`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00233`؛ مالک دامنه: Each producing service owns its own Job/Event; C03 implements the common delivery boundary؛ مالک بسته: `PENDING`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`؛ دلیل: Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
-- **`DISPOSITION:C03:SU-B-00572`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00572`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00573`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00573`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00584`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00584`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ Task: `TASK:CORE:005`؛ قرارداد: `CONTRACT:C01:03`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00589`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00589`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00590`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00590`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-B-00591`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00591`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:006`؛ قرارداد: `CONTRACT:C01:04`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00692`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00692`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00693`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00693`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
-- **`DISPOSITION:C03:SU-W-00694`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00694`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00233`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00233`؛ مالک دامنه: Each producing service owns its own Job/Event; C03 implements the common delivery boundary؛ مالک بسته: `PENDING`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:C01:005`، `TASK:CORE:C01:006`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`؛ دلیل: Generic Job/Event behaviors are already accepted in C01 and implemented under C03 ownership by existing planned tasks; no duplicate requirement is created.
+- **`DISPOSITION:C03:SU-B-00572`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00572`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:C01:005`، `TASK:CORE:C01:006`، `TASK:CORE:C01:007`؛ قرارداد: `CONTRACT:C01:03`، `CONTRACT:C01:04`، `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00573`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00573`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:C01:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00584`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00584`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ Task: `TASK:CORE:C01:005`؛ قرارداد: `CONTRACT:C01:03`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00589`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00589`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:C01:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00590`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00590`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ Task: `TASK:CORE:C01:008`؛ قرارداد: `CONTRACT:C01:02`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-B-00591`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-B-00591`؛ مالک دامنه: Core/Assistant shared؛ مالک بسته: `C01`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ Task: `TASK:CORE:C01:006`؛ قرارداد: `CONTRACT:C01:04`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00692`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00692`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:C01:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00693`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00693`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:C01:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
+- **`DISPOSITION:C03:SU-W-00694`**: `SHARED_CONTRACT` / `REUSE_ACCEPTED_C01_REQUIREMENTS_AND_TASKS`؛ Source Unit `SU-W-00694`؛ مالک دامنه: Core/Wallet؛ مالک بسته: `C12a`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ Task: `TASK:CORE:C01:010`؛ قرارداد: `CONTRACT:C01:06`؛ دلیل: No duplicate C03 requirement or task is created; ownership and implementation responsibility are explicit from the accepted C01 requirement/task records.
 - **`DISPOSITION:C03:SU-B-00222`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00222`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Table heading only.
 - **`DISPOSITION:C03:SU-B-00223`**: `EXCLUDED_WITH_REASON` / `STRUCTURAL_NOT_A_REQUIREMENT`؛ Source Unit `SU-B-00223`؛ مالک دامنه: RAG/Adviser table structure؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: Markdown table separator only.
 - **`DISPOSITION:C03:SU-B-00231`**: `CROSS_REFERENCE` / `OPEN_ADVISER_DECISION_NOT_ACCEPTED`؛ Source Unit `SU-B-00231`؛ مالک دامنه: RAG/Adviser retrieval decision policy (OPEN_DECISION)؛ مالک بسته: `PENDING`؛ Requirement: —؛ Task: —؛ قرارداد: —؛ دلیل: G1 explicitly records an open proposal; it is not elevated to a C03 requirement.
@@ -2164,13 +2164,13 @@
 این بررسی، وجود واقعی رفتار در Runtime، کیفیت استقرار یا نتیجه آزمون محصول را اثبات نمی‌کند.
 
 #### Enabler، Task و Subtaskهای مسئولیت اجرایی C03
-##### `TASK:CORE:005` — Design service-owned durable job pattern without imposing one universal workflow engine
+##### `TASK:CORE:C01:005` — Design service-owned durable job pattern without imposing one universal workflow engine
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `ARCHITECTURE_DESIGN`؛ PostgreSQL job state; Port/Adapter; service-owned worker
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:002` service ownership; owner-specific long-running use case
+- **شرط ورود:** `TASK:CORE:C01:002` service ownership; owner-specific long-running use case
 - **خروجی دقیق:** versioned job pattern and worker-crash/migration test contract
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
 - **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
@@ -2181,25 +2181,25 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:005:01`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)
+- **وابستگی‌ها:** TASK:CORE:C01:002 (HARD)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:005.S01`:** Separate short synchronous calls from actual long jobs؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:005.S02`:** Specify persistent job state/version and safe recovery؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:005.S03`:** Define old-job completion vs new-engine routing criteria؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ AC: `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
 - Future tests executed in stated authorized environment with versioned evidence before product Done
 - No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-##### `TASK:CORE:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
+##### `TASK:CORE:C01:006` — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `CONDITIONAL_DESIGN`؛ Owner transaction; outbox; event schema; subscribers
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:002` data ownership; demonstrable event consumer/use case
+- **شرط ورود:** `TASK:CORE:C01:002` data ownership; demonstrable event consumer/use case
 - **خروجی دقیق:** minimal event/outbox protocol with fault-injection acceptance
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
 - **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
@@ -2210,25 +2210,25 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:006:01`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)؛ TASK:CORE:005 (CONTRACT)
+- **وابستگی‌ها:** TASK:CORE:C01:002 (HARD)؛ TASK:CORE:C01:005 (CONTRACT)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:006.S01`:** Identify truly necessary reliable events؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:006.S02`:** Specify atomic local writes and publisher recovery؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:006.S03`:** Specify duplicate/out-of-order/unknown-schema consumer behavior؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ AC: `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
 - Future tests executed in stated authorized environment with versioned evidence before product Done
 - No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-##### `TASK:CORE:007` — Specify bounded cross-service resilience and interactive/background isolation
+##### `TASK:CORE:C01:007` — Specify bounded cross-service resilience and interactive/background isolation
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `CONTRACT_HARDENING`؛ HTTP client; job queue; rate/timeout/circuit policy
 - **وضعیت کد/برنامه/اجرای محصول:** `NEW` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:003` and `TASK:CORE:008` service-contract interfaces
+- **شرط ورود:** `TASK:CORE:C01:003` and `TASK:CORE:C01:008` service-contract interfaces
 - **خروجی دقیق:** fault matrix and testable resilience contract, numeric thresholds ESTIMATION_REQUIRED
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`
 - **ACهای C01:** `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`
@@ -2239,25 +2239,25 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:007:01`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:003 (CONTRACT)؛ TASK:CORE:008 (CONTRACT)
+- **وابستگی‌ها:** TASK:CORE:C01:003 (CONTRACT)؛ TASK:CORE:C01:008 (CONTRACT)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:007.S01`:** Set timeout budget from tested path baseline؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:007.S02`:** Bound transient retry and circuit state transitions؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:007.S03`:** Separate concurrency pools and graceful degradation؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ AC: `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
 - Future tests executed in stated authorized environment with versioned evidence before product Done
 - No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-##### `TASK:CORE:008` — Design Core API versioning and semantic provider/consumer compatibility verification
+##### `TASK:CORE:C01:008` — Design Core API versioning and semantic provider/consumer compatibility verification
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:002`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `CONTRACT_CHANGE`؛ FastAPI OpenAPI; API v1 router; schema fixtures; CI
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:002` authority matrix and existing API schema
+- **شرط ورود:** `TASK:CORE:C01:002` authority matrix and existing API schema
 - **خروجی دقیق:** contract matrix and migration-safe OpenAPI evolution plan
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
 - **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
@@ -2268,25 +2268,25 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:008:01`، `EVIDENCE:C01:CODE:008:02`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:002 (HARD)
+- **وابستگی‌ها:** TASK:CORE:C01:002 (HARD)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:008.S01`:** Inventory existing versioned API and consumers؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:008.S02`:** Specify schema-first compatible and breaking change protocol؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:008.S03`:** Define consumer contract, semantic field and error tests؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ AC: `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
 - Future tests executed in stated authorized environment with versioned evidence before product Done
 - No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-##### `TASK:CORE:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
+##### `TASK:CORE:C01:009` — Separate typed runtime config, secrets, feature flags and protected financial business policy
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `POLICY_AND_CONFIG_DESIGN`؛ core/config.py; CI security; configuration deployment
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:001` baseline and known policy owners
+- **شرط ورود:** `TASK:CORE:C01:001` baseline and known policy owners
 - **خروجی دقیق:** four-category config contract and validation/rollback tests
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
 - **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
@@ -2297,25 +2297,25 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:009:01`، `EVIDENCE:C01:CODE:009:02`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:008 (CONTRACT)
+- **وابستگی‌ها:** TASK:CORE:C01:001 (HARD)؛ TASK:CORE:C01:008 (CONTRACT)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:009.S01`:** Inventory present Settings and secret paths؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:009.S02`:** Define schema, policy authorization, flag dependency and change audit؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:009.S03`:** Design compatible config rollback and negative gate cases؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ AC: `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
 - Future tests executed in stated authorized environment with versioned evidence before product Done
 - No parallel authority, UI/scoring drift, secret or unapproved production change; existing gates preserved
 
-##### `TASK:CORE:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
+##### `TASK:CORE:C01:010` — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
 - **Enabler پذیرفته‌شده C01:** `TE:CORE:003`
 - **مالک برنامه‌ریزی / اجرا:** `C01` / `C03`
 - **نوع کار، اجزا:** `OBSERVABILITY_DESIGN`؛ api/observability.py; metrics/logging; tracing; CI and runbooks
 - **وضعیت کد/برنامه/اجرای محصول:** `EXISTING_PARTIAL` / `IPA_ACCEPTED` / `BLOCKED_BY_DECISION`
 - **اجازه پیاده‌سازی:** `NOT_GRANTED`؛ وضعیت PLANNED_NOT_IMPLEMENTED
-- **شرط ورود:** `TASK:CORE:001` operational footprint and realistic workload
+- **شرط ورود:** `TASK:CORE:C01:001` operational footprint and realistic workload
 - **خروجی دقیق:** telemetry data-classification and SLO measurement/runbook acceptance contract
 - **Requirementهای پذیرفته‌شده:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`
 - **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
@@ -2326,12 +2326,12 @@
 - **شواهد کد C01:** `EVIDENCE:C01:CODE:010:01`، `EVIDENCE:C01:CODE:010:02`
 - **تخمین:** ESTIMATION_REQUIRED
 - **دروازه تخمین:** Before stage-5 weekly commitment: development, test, review, deployment effort/cost/tokens and uncertainty from actual baseline; no invented numeric promise
-- **وابستگی‌ها:** TASK:CORE:001 (HARD)؛ TASK:CORE:007 (PREFERENCE)
+- **وابستگی‌ها:** TASK:CORE:C01:001 (HARD)؛ TASK:CORE:C01:007 (PREFERENCE)
 - **وضعیت تحویل به مالک اجرا:** DESIGN_SPEC_ONLY_RECEIVING_PACKAGE_NOT_ACCEPTED
 **Subtaskهای مصوب (هنوز اجرا نشده‌اند):**
-- **`TASK:CORE:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
-- **`TASK:CORE:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:010.S01`:** Map existing low-cardinality API observability؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:010.S02`:** Specify trace context propagation without PII/OTP؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
+- **`TASK:CORE:C01:010.S03`:** Define measurement experiment and SigNoz decision gate؛ Requirement: `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:047`؛ AC: `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`؛ اجرا: `NOT_IMPLEMENTED`
 **DoD اجرایی Task (برای مرحله پیاده‌سازی آینده؛ تحقق نیافته):**
 - Owner-approved source-traced deliverable covers all linked atomic behaviours and AC
 - Provider/consumer and decision gates resolved before dependent implementation or activation
@@ -2350,7 +2350,7 @@
 - **رفتار `REQ:CORE:006.B02`:** Enforce identity, scope and authorization before releasing data
 - **رفتار `REQ:CORE:006.B03`:** Preserve stable reference, provenance, version/freshness, approval and access metadata
 - **رفتار `REQ:CORE:006.B04`:** Absent valid data or authorization produces detectable error/completion request/safe stop, never table bypass or fabricated result
-- **Taskهای اجرایی:** `TASK:CORE:008`
+- **Taskهای اجرایی:** `TASK:CORE:C01:008`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:006`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:006`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:001`
@@ -2363,7 +2363,7 @@
 - **رفتار `REQ:CORE:010.B01`:** Use authenticated versioned synchronous API for short deterministic work
 - **رفتار `REQ:CORE:010.B02`:** Use durable service-owned asynchronous Job only for actual long background work
 - **رفتار `REQ:CORE:010.B03`:** Do not move short loan scoring behind a queue
-- **Taskهای اجرایی:** `TASK:CORE:005`
+- **Taskهای اجرایی:** `TASK:CORE:C01:005`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:010`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:010`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:002`
@@ -2376,7 +2376,7 @@
 - **رفتار `REQ:CORE:011.B01`:** Persist Job identity, state, attempts, error and result in owner PostgreSQL
 - **رفتار `REQ:CORE:011.B02`:** Separate domain logic from engine via versioned Job/Workflow ports and adapters
 - **رفتار `REQ:CORE:011.B03`:** Provide safe pause, resume and cancellation with audit and owner authority
-- **Taskهای اجرایی:** `TASK:CORE:005`
+- **Taskهای اجرایی:** `TASK:CORE:C01:005`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:011`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:011`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:003`
@@ -2389,7 +2389,7 @@
 - **رفتار `REQ:CORE:012.B01`:** Commit business data and Outbox record in the same local transaction
 - **رفتار `REQ:CORE:012.B02`:** Use outbox only for justified reliable asynchronous flows
 - **رفتار `REQ:CORE:012.B03`:** Allow controlled eventual consistency only for non-sensitive cache/notification, not mixed financial Snapshots
-- **Taskهای اجرایی:** `TASK:CORE:006`
+- **Taskهای اجرایی:** `TASK:CORE:C01:006`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:012`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:012`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:004`
@@ -2403,7 +2403,7 @@
 - **رفتار `REQ:CORE:015.B02`:** Validate request/response structure, field meaning and financial units
 - **رفتار `REQ:CORE:015.B03`:** Specify negative, boundary, property-based and consumer-driven contract tests
 - **رفتار `REQ:CORE:015.B04`:** Treat financial semantic incompatibility as blocking, not a cosmetic schema warning
-- **Taskهای اجرایی:** `TASK:CORE:008`
+- **Taskهای اجرایی:** `TASK:CORE:C01:008`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:015`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:015`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:005`
@@ -2417,7 +2417,7 @@
 - **رفتار `REQ:CORE:016.B02`:** Test a provider/consumer version matrix and block incompatible deployment
 - **رفتار `REQ:CORE:016.B03`:** Error contract includes HTTP status, machine code, nonpersonal trace ID and transient/permanent/validation class
 - **رفتار `REQ:CORE:016.B04`:** Identify impacted UI, Job and event consumers and controlled old-version retirement
-- **Taskهای اجرایی:** `TASK:CORE:008`
+- **Taskهای اجرایی:** `TASK:CORE:C01:008`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:016`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:016`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:006`
@@ -2430,7 +2430,7 @@
 - **رفتار `REQ:CORE:017.B01`:** Separate operational config, secrets, feature flags and business policies
 - **رفتار `REQ:CORE:017.B02`:** Use typed versioned validated configuration
 - **رفتار `REQ:CORE:017.B03`:** Financial business rules cannot become freely editable runtime toggles
-- **Taskهای اجرایی:** `TASK:CORE:009`
+- **Taskهای اجرایی:** `TASK:CORE:C01:009`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:017`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:017`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:007`
@@ -2444,7 +2444,7 @@
 - **رفتار `REQ:CORE:018.B02`:** Record actor, time, environment, permission and change history
 - **رفتار `REQ:CORE:018.B03`:** Check dependency and secret safety before activation
 - **رفتار `REQ:CORE:018.B04`:** Reject incompatible rollback or stop the affected capability
-- **Taskهای اجرایی:** `TASK:CORE:009`
+- **Taskهای اجرایی:** `TASK:CORE:C01:009`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:018`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:018`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:008`
@@ -2457,7 +2457,7 @@
 - **رفتار `REQ:CORE:019.B01`:** Use portable OpenTelemetry structured logs, metrics and traces
 - **رفتار `REQ:CORE:019.B02`:** Propagate random nonpersonal correlation across service and Job boundaries
 - **رفتار `REQ:CORE:019.B03`:** Observe contract errors, circuit state, pending job age/count, retries/final failure, Outbox lag and worker/publisher recovery
-- **Taskهای اجرایی:** `TASK:CORE:010`
+- **Taskهای اجرایی:** `TASK:CORE:C01:010`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:019`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:019`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:009`
@@ -2471,7 +2471,7 @@
 - **رفتار `REQ:CORE:020.B02`:** Prioritize alerts by user impact and define severity, escalation, runbook, containment, recovery and post-incident review
 - **رفتار `REQ:CORE:020.B03`:** Define non-sensitive synthetic probe and alert/recovery drill
 - **رفتار `REQ:CORE:020.B04`:** Measure CPU/RAM, latency, throughput, workload and per-success cost before capacity commitment
-- **Taskهای اجرایی:** `TASK:CORE:010`
+- **Taskهای اجرایی:** `TASK:CORE:C01:010`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:020`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:020`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:021`
@@ -2484,7 +2484,7 @@
 - **رفتار `REQ:CORE:021.B01`:** Treat SigNoz as selected for conditional evaluation of Cloud versus self-hosted
 - **رفتار `REQ:CORE:021.B02`:** Do not deploy self-hosted SigNoz on the current production VM under recorded capacity
 - **رفتار `REQ:CORE:021.B03`:** Decide retention, sampling, channel, security, cost and host only after measured evidence and approval
-- **Taskهای اجرایی:** `TASK:CORE:010`
+- **Taskهای اجرایی:** `TASK:CORE:C01:010`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:021`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:021`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:022`
@@ -2496,7 +2496,7 @@
 - **استثنا:** Circuit breakers are conditional on instability; the timeout budget itself is not
 - **رفتار `REQ:CORE:037.B01`:** Bound each synchronous call by an approved timeout budget
 - **رفتار `REQ:CORE:037.B02`:** Surface timeout and contain dependent failure without inventing success
-- **Taskهای اجرایی:** `TASK:CORE:007`
+- **Taskهای اجرایی:** `TASK:CORE:C01:007`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:037`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:037`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:010`
@@ -2508,7 +2508,7 @@
 - **استثنا:** No claim all calls require the same breaker thresholds
 - **رفتار `REQ:CORE:038.B01`:** Open circuit on measured failure policy, fail fast while open and test controlled half-open recovery
 - **رفتار `REQ:CORE:038.B02`:** Preserve independent capabilities during failure and recovery
-- **Taskهای اجرایی:** `TASK:CORE:007`
+- **Taskهای اجرایی:** `TASK:CORE:C01:007`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:038`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:038`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:011`
@@ -2521,7 +2521,7 @@
 - **رفتار `REQ:CORE:039.B01`:** Retry only classified transient outcomes with backoff and bounded attempts
 - **رفتار `REQ:CORE:039.B02`:** Do not retry permanent or validation errors
 - **رفتار `REQ:CORE:039.B03`:** Use idempotency for side effects and reconcile unknown financial result before retry
-- **Taskهای اجرایی:** `TASK:CORE:007`
+- **Taskهای اجرایی:** `TASK:CORE:C01:007`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:039`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:039`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:012`
@@ -2534,7 +2534,7 @@
 - **رفتار `REQ:CORE:040.B01`:** Separate interactive and background capacity with bulkhead/quota/concurrency control
 - **رفتار `REQ:CORE:040.B02`:** A saturated or failed worker cannot exhaust interactive API capacity
 - **رفتار `REQ:CORE:040.B03`:** Define visible controlled degradation rather than fabricated success
-- **Taskهای اجرایی:** `TASK:CORE:007`
+- **Taskهای اجرایی:** `TASK:CORE:C01:007`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:040`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:040`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:013`
@@ -2547,7 +2547,7 @@
 - **رفتار `REQ:CORE:041.B01`:** Resume pending owner-controlled jobs from persisted state after restart
 - **رفتار `REQ:CORE:041.B02`:** Enforce idempotency across duplicate deliveries, concurrent workers and lost acknowledgements
 - **رفتار `REQ:CORE:041.B03`:** Keep durable audit and trace of recovery outcome
-- **Taskهای اجرایی:** `TASK:CORE:005`
+- **Taskهای اجرایی:** `TASK:CORE:C01:005`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:041`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:041`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:014`
@@ -2560,7 +2560,7 @@
 - **رفتار `REQ:CORE:042.B01`:** Route new jobs deliberately to the new engine
 - **رفتار `REQ:CORE:042.B02`:** Complete in-flight jobs on the prior engine under original compatible semantics
 - **رفتار `REQ:CORE:042.B03`:** Test adapter/orchestration changes and failure/cancel/resume across migration
-- **Taskهای اجرایی:** `TASK:CORE:005`
+- **Taskهای اجرایی:** `TASK:CORE:C01:005`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:042`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:042`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:015`
@@ -2574,7 +2574,7 @@
 - **رفتار `REQ:CORE:043.B02`:** Handle duplicate and out-of-order delivery according to versioned contract
 - **رفتار `REQ:CORE:043.B03`:** Test unknown-version handling and consumer compatibility
 - **رفتار `REQ:CORE:043.B04`:** Version the event envelope with identity, schema version, time, origin and nonpersonal correlation; define required ordering and unknown-version rejection/quarantine
-- **Taskهای اجرایی:** `TASK:CORE:006`
+- **Taskهای اجرایی:** `TASK:CORE:C01:006`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:043`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:043`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:016`
@@ -2587,7 +2587,7 @@
 - **رفتار `REQ:CORE:044.B01`:** Keep unsent Outbox records durable and recover publishing after restart
 - **رفتار `REQ:CORE:044.B02`:** Do not lose necessary events or repeat business effects after send/ack crash
 - **رفتار `REQ:CORE:044.B03`:** Expose publisher lag, retry/final failure, recovery and periodic reconciliation
-- **Taskهای اجرایی:** `TASK:CORE:006`
+- **Taskهای اجرایی:** `TASK:CORE:C01:006`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:044`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:044`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:017`
@@ -2600,7 +2600,7 @@
 - **رفتار `REQ:CORE:045.B01`:** Version policy changes with authorized approval, regression and controlled publication
 - **رفتار `REQ:CORE:045.B02`:** Keep historical versions and reject invalid/obsolete Snapshot rollback
 - **رفتار `REQ:CORE:045.B03`:** Do not mutate financial results through a free operational flag
-- **Taskهای اجرایی:** `TASK:CORE:009`
+- **Taskهای اجرایی:** `TASK:CORE:C01:009`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:045`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:045`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:018`
@@ -2614,7 +2614,7 @@
 - **رفتار `REQ:CORE:046.B02`:** Validate feature dependencies, kill switch and change authorization
 - **رفتار `REQ:CORE:046.B03`:** Scan secrets and audit changes without exposing secret value
 - **رفتار `REQ:CORE:046.B04`:** Test compatible rollback and block invalid config, leakage or unintended financial change
-- **Taskهای اجرایی:** `TASK:CORE:009`
+- **Taskهای اجرایی:** `TASK:CORE:C01:009`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:046`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:046`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:019`
@@ -2627,7 +2627,7 @@
 - **رفتار `REQ:CORE:047.B01`:** Exclude identity, OTP, token, financial data and raw request/response/questionnaire payloads
 - **رفتار `REQ:CORE:047.B02`:** Use safe low-cardinality labels and nonpersonal correlation IDs
 - **رفتار `REQ:CORE:047.B03`:** Keep secrets outside model memory, RAG, chat logs and discovery, with least privilege and protected test/production separation
-- **Taskهای اجرایی:** `TASK:CORE:010`
+- **Taskهای اجرایی:** `TASK:CORE:C01:010`
 - **AC پذیرفته‌شده C01:** `AC:CORE:C01:047`
 - **Test پذیرفته‌شده C01:** `TEST:CORE:C01:047`
 - **Testهای اختصاصی C03:** `TEST:CORE:C03:020`
@@ -2636,7 +2636,7 @@
 همه Testها **تعریف طراحی پذیرفته‌شده** با وضعیت `NOT_EXECUTED` هستند. برای اجرای آینده، Evidence و مجوزهای مالک لازم‌اند. PASSهای P4/P6 نشان‌دهنده اجرای این Testها روی محصول نیست.
 
 ##### `TEST:CORE:C03:001` — Requirement: `REQ:CORE:006`
-- **Task:** `TASK:CORE:008`
+- **Task:** `TASK:CORE:C01:008`
 - **AC:** `AC:CORE:C01:006`
 - **رفتارهای اتمی:** `REQ:CORE:006.B01`، `REQ:CORE:006.B02`، `REQ:CORE:006.B03`، `REQ:CORE:006.B04`
 - **Source Unitها:** `SU-B-00435`، `SU-B-00589`، `SU-B-00590`
@@ -2678,7 +2678,7 @@
   - Boundary/Race: Consumer=Adviser; purpose=loan comparison; scope=published catalogue; version=v1; requested fields=[productId, eligibilityVersion]; forbidden field=accountPhone; Injected stimulus: Between request A and request B, revoke Adviser scope and change catalogue version from fixture 8 to 9.
 
 ##### `TEST:CORE:C03:002` — Requirement: `REQ:CORE:010`
-- **Task:** `TASK:CORE:005`
+- **Task:** `TASK:CORE:C01:005`
 - **AC:** `AC:CORE:C01:010`
 - **رفتارهای اتمی:** `REQ:CORE:010.B01`، `REQ:CORE:010.B02`، `REQ:CORE:010.B03`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00942`
@@ -2720,7 +2720,7 @@
   - Boundary/Race: Request A=score published loan snapshot S17 synchronously; Request B=ingest 12 synthetic source documents; queue service is absent in fixture; Injected stimulus: With no independent broker but owner PostgreSQL and worker available, scoring remains synchronous and the long job remains addressable by its durable id.
 
 ##### `TEST:CORE:C03:003` — Requirement: `REQ:CORE:011`
-- **Task:** `TASK:CORE:005`
+- **Task:** `TASK:CORE:C01:005`
 - **AC:** `AC:CORE:C01:011`
 - **رفتارهای اتمی:** `REQ:CORE:011.B01`، `REQ:CORE:011.B02`، `REQ:CORE:011.B03`
 - **Source Unitها:** `SU-B-00449`، `SU-B-00450`، `SU-B-00835`
@@ -2762,7 +2762,7 @@
   - Boundary/Race: Owner=Adviser; jobId=job-test-17; attempt=0; state=QUEUED; result=null; record committed to the owner PostgreSQL fixture; Injected stimulus: Restart occurs after state commit but before acknowledgement.
 
 ##### `TEST:CORE:C03:004` — Requirement: `REQ:CORE:012`
-- **Task:** `TASK:CORE:006`
+- **Task:** `TASK:CORE:C01:006`
 - **AC:** `AC:CORE:C01:012`
 - **رفتارهای اتمی:** `REQ:CORE:012.B01`، `REQ:CORE:012.B02`، `REQ:CORE:012.B03`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00591`، `SU-B-00834`
@@ -2804,7 +2804,7 @@
   - Boundary/Race: Local row id=record-41; event id=event-41; both writes use one owner-local transaction; delivery acknowledgment is withheld; Injected stimulus: Crash after local commit before send: durable event is eventually sent after restart.
 
 ##### `TEST:CORE:C03:005` — Requirement: `REQ:CORE:015`
-- **Task:** `TASK:CORE:008`
+- **Task:** `TASK:CORE:C01:008`
 - **AC:** `AC:CORE:C01:015`
 - **رفتارهای اتمی:** `REQ:CORE:015.B01`، `REQ:CORE:015.B02`، `REQ:CORE:015.B03`، `REQ:CORE:015.B04`
 - **Source Unitها:** `SU-B-00831`، `SU-B-00860`
@@ -2846,7 +2846,7 @@
   - Boundary/Race: Schema fixture v1 requires productId:string and amountMinor:integer with currency=IRR; consumer fixture validates structure and semantic units; Injected stimulus: A compatible additive field is tested against both current consumers.
 
 ##### `TEST:CORE:C03:006` — Requirement: `REQ:CORE:016`
-- **Task:** `TASK:CORE:008`
+- **Task:** `TASK:CORE:C01:008`
 - **AC:** `AC:CORE:C01:016`
 - **رفتارهای اتمی:** `REQ:CORE:016.B01`، `REQ:CORE:016.B02`، `REQ:CORE:016.B03`، `REQ:CORE:016.B04`
 - **Source Unitها:** `SU-B-00831`، `SU-B-00860`، `SU-B-00942`
@@ -2888,7 +2888,7 @@
   - Boundary/Race: Consumer matrix contains consumer-v1 and consumer-v2; proposed provider-v2 removes a required v1 field; error fixture is HTTP 503, code=DEPENDENCY_UNAVAILABLE, random trace id; Injected stimulus: During migration, old and new consumers run concurrently.
 
 ##### `TEST:CORE:C03:007` — Requirement: `REQ:CORE:017`
-- **Task:** `TASK:CORE:009`
+- **Task:** `TASK:CORE:C01:009`
 - **AC:** `AC:CORE:C01:017`
 - **رفتارهای اتمی:** `REQ:CORE:017.B01`، `REQ:CORE:017.B02`، `REQ:CORE:017.B03`
 - **Source Unitها:** `SU-B-00014`، `SU-B-00865`
@@ -2930,7 +2930,7 @@
   - Boundary/Race: Config fixture has typed timeout_ms=200, feature flag=adviser-read-v2, secret reference=secret://fixture/db, financialFeePolicy=protected-version-3; Injected stimulus: Config omits timeout_ms or supplies timeout_ms=-1.
 
 ##### `TEST:CORE:C03:008` — Requirement: `REQ:CORE:018`
-- **Task:** `TASK:CORE:009`
+- **Task:** `TASK:CORE:C01:009`
 - **AC:** `AC:CORE:C01:018`
 - **رفتارهای اتمی:** `REQ:CORE:018.B01`، `REQ:CORE:018.B02`، `REQ:CORE:018.B03`، `REQ:CORE:018.B04`
 - **Source Unitها:** `SU-B-00865`، `SU-B-00963`
@@ -2972,7 +2972,7 @@
   - Boundary/Race: Actor=service-owner; environment=staging; config revision=12→13; diff lists timeout_ms 200→250 and feature dependency adviser-read-v2; Injected stimulus: Rollback to revision 11 conflicts with current schema dependency.
 
 ##### `TEST:CORE:C03:009` — Requirement: `REQ:CORE:019`
-- **Task:** `TASK:CORE:010`
+- **Task:** `TASK:CORE:C01:010`
 - **AC:** `AC:CORE:C01:019`
 - **رفتارهای اتمی:** `REQ:CORE:019.B01`، `REQ:CORE:019.B02`، `REQ:CORE:019.B03`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00836`
@@ -3014,7 +3014,7 @@
   - Boundary/Race: Trace fixture uses random correlation=corr-7fa1; route template=/catalogue/{id}; job id is nonpersonal; label set is finite; Injected stimulus: Request retries across Core and Adviser retain corr-7fa1 while labels remain route-template and outcome enums.
 
 ##### `TEST:CORE:C03:010` — Requirement: `REQ:CORE:037`
-- **Task:** `TASK:CORE:007`
+- **Task:** `TASK:CORE:C01:007`
 - **AC:** `AC:CORE:C01:037`
 - **رفتارهای اتمی:** `REQ:CORE:037.B01`، `REQ:CORE:037.B02`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00863`
@@ -3056,7 +3056,7 @@
   - Boundary/Race: Fixture contract supplies timeout_budget=100ms for this test only; dependency response delay=80ms on success and 120ms on timeout case; Injected stimulus: At the 100ms boundary the timeout is surfaced and downstream failure is contained.
 
 ##### `TEST:CORE:C03:011` — Requirement: `REQ:CORE:038`
-- **Task:** `TASK:CORE:007`
+- **Task:** `TASK:CORE:C01:007`
 - **AC:** `AC:CORE:C01:038`
 - **رفتارهای اتمی:** `REQ:CORE:038.B01`، `REQ:CORE:038.B02`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00863`
@@ -3098,7 +3098,7 @@
   - Boundary/Race: Circuit fixture opens after 3 consecutive failed probes; cooldown=50ms; these are synthetic harness values only; Injected stimulus: While Adviser circuit is open, independent health and Core catalogue reads remain available.
 
 ##### `TEST:CORE:C03:012` — Requirement: `REQ:CORE:039`
-- **Task:** `TASK:CORE:007`
+- **Task:** `TASK:CORE:C01:007`
 - **AC:** `AC:CORE:C01:039`
 - **رفتارهای اتمی:** `REQ:CORE:039.B01`، `REQ:CORE:039.B02`، `REQ:CORE:039.B03`
 - **Source Unitها:** `SU-B-00450`، `SU-B-00572`، `SU-B-00863`
@@ -3140,7 +3140,7 @@
   - Boundary/Race: Fixture max_attempts=2; first response=503 transient; separate fixtures return 400 validation and UNKNOWN_RESULT for a side-effecting payment; Injected stimulus: For UNKNOWN_RESULT, caller queries the owning financial operation result first.
 
 ##### `TEST:CORE:C03:013` — Requirement: `REQ:CORE:040`
-- **Task:** `TASK:CORE:007`
+- **Task:** `TASK:CORE:C01:007`
 - **AC:** `AC:CORE:C01:040`
 - **رفتارهای اتمی:** `REQ:CORE:040.B01`، `REQ:CORE:040.B02`، `REQ:CORE:040.B03`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00863`
@@ -3182,7 +3182,7 @@
   - Boundary/Race: Fixture interactive pool=2 slots, background quota=1; submit 4 background jobs while sending an authorized catalogue request; Injected stimulus: When background quota is full, next job receives explicit backpressure while the interactive API stays responsive and no synthetic success is returned.
 
 ##### `TEST:CORE:C03:014` — Requirement: `REQ:CORE:041`
-- **Task:** `TASK:CORE:005`
+- **Task:** `TASK:CORE:C01:005`
 - **AC:** `AC:CORE:C01:041`
 - **رفتارهای اتمی:** `REQ:CORE:041.B01`، `REQ:CORE:041.B02`، `REQ:CORE:041.B03`
 - **Source Unitها:** `SU-B-00450`، `SU-B-00835`
@@ -3224,7 +3224,7 @@
   - Boundary/Race: Persisted jobId=job-88; state=RUNNING; step=2/3; effect key=effect-88; prior step 1 is committed; Injected stimulus: Side effect committed but acknowledgment lost.
 
 ##### `TEST:CORE:C03:015` — Requirement: `REQ:CORE:042`
-- **Task:** `TASK:CORE:005`
+- **Task:** `TASK:CORE:C01:005`
 - **AC:** `AC:CORE:C01:042`
 - **رفتارهای اتمی:** `REQ:CORE:042.B01`، `REQ:CORE:042.B02`، `REQ:CORE:042.B03`
 - **Source Unitها:** `SU-B-00450`، `SU-B-00835`
@@ -3266,7 +3266,7 @@
   - Boundary/Race: Old engine has job-old at step 2/3; new submissions carry route version=new-engine-v2; old adapter remains available; Injected stimulus: Cancel/resume job-old during rollout.
 
 ##### `TEST:CORE:C03:016` — Requirement: `REQ:CORE:043`
-- **Task:** `TASK:CORE:006`
+- **Task:** `TASK:CORE:C01:006`
 - **AC:** `AC:CORE:C01:043`
 - **رفتارهای اتمی:** `REQ:CORE:043.B01`، `REQ:CORE:043.B02`، `REQ:CORE:043.B03`، `REQ:CORE:043.B04`
 - **Source Unitها:** `SU-B-00591`، `SU-B-00834`، `SU-B-00864`
@@ -3308,7 +3308,7 @@
   - Boundary/Race: Envelope fixture eventId=e-41, schemaVersion=1, entityVersion=7, correlation=corr-7fa1; then duplicate e-41 and entityVersion=6; Injected stimulus: Duplicate and delayed events arrive concurrently.
 
 ##### `TEST:CORE:C03:017` — Requirement: `REQ:CORE:044`
-- **Task:** `TASK:CORE:006`
+- **Task:** `TASK:CORE:C01:006`
 - **AC:** `AC:CORE:C01:044`
 - **رفتارهای اتمی:** `REQ:CORE:044.B01`، `REQ:CORE:044.B02`، `REQ:CORE:044.B03`
 - **Source Unitها:** `SU-B-00591`، `SU-B-00864`
@@ -3350,7 +3350,7 @@
   - Boundary/Race: Local transaction commits row=record-41 and outbox event=event-41; publisher crashes before network send; Injected stimulus: Crash after send but before acknowledgment.
 
 ##### `TEST:CORE:C03:018` — Requirement: `REQ:CORE:045`
-- **Task:** `TASK:CORE:009`
+- **Task:** `TASK:CORE:C01:009`
 - **AC:** `AC:CORE:C01:045`
 - **رفتارهای اتمی:** `REQ:CORE:045.B01`، `REQ:CORE:045.B02`، `REQ:CORE:045.B03`
 - **Source Unitها:** `SU-B-00193`، `SU-B-00865`
@@ -3392,7 +3392,7 @@
   - Boundary/Race: Policy revision=policy-v4; actor=authorized owner; regression fixture has 3 expected decisions; published snapshot=current S17; Injected stimulus: Attempt rollback to obsolete snapshot S15 after incompatibility.
 
 ##### `TEST:CORE:C03:019` — Requirement: `REQ:CORE:046`
-- **Task:** `TASK:CORE:009`
+- **Task:** `TASK:CORE:C01:009`
 - **AC:** `AC:CORE:C01:046`
 - **رفتارهای اتمی:** `REQ:CORE:046.B01`، `REQ:CORE:046.B02`، `REQ:CORE:046.B03`، `REQ:CORE:046.B04`
 - **Source Unitها:** `SU-B-00865`، `SU-B-00963`، `SU-B-00763`
@@ -3434,7 +3434,7 @@
   - Boundary/Race: Config revision=cfg-13; integer field timeout_ms=250, allowed fixture range 1..1000; adviser-read-v2 depends on contract-v2; secret scanner has canary=secret-fixture; Injected stimulus: Enable adviser-read-v2 while contract-v1 is active.
 
 ##### `TEST:CORE:C03:020` — Requirement: `REQ:CORE:047`
-- **Task:** `TASK:CORE:010`
+- **Task:** `TASK:CORE:C01:010`
 - **AC:** `AC:CORE:C01:047`
 - **رفتارهای اتمی:** `REQ:CORE:047.B01`، `REQ:CORE:047.B02`، `REQ:CORE:047.B03`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00836`، `SU-B-00763`
@@ -3476,7 +3476,7 @@
   - Boundary/Race: Request fixture includes phone=09120000000, otp=123456, token=tok-fixture, financialAmount=1250000 and raw questionnaire body; correlation=corr-7fa1; Injected stimulus: Concurrent errors and retries preserve correlation while every sink remains free of the canaries.
 
 ##### `TEST:CORE:C03:021` — Requirement: `REQ:CORE:020`
-- **Task:** `TASK:CORE:010`
+- **Task:** `TASK:CORE:C01:010`
 - **AC:** `AC:CORE:C01:020`
 - **رفتارهای اتمی:** `REQ:CORE:020.B01`، `REQ:CORE:020.B02`، `REQ:CORE:020.B03`، `REQ:CORE:020.B04`
 - **Source Unitها:** `SU-B-00836`، `SU-B-00858`، `SU-B-00863`، `SU-B-01125`
@@ -3491,7 +3491,7 @@
 - **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
 - **`TEST:CORE:C03:021.P` — `POSITIVE`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:C01:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Record and inspect the permitted planning/evidence path for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
   - Input: Synthetic run with measured baseline and a non-sensitive worker/DB fault at a declared probe point.
   - Observable Oracle: SLO/SLI and Error Budget are tied to versioned measurements and named owner; alert maps to user impact and a usable runbook; capacity claim cites measurements, not an invented threshold.
@@ -3500,7 +3500,7 @@
   - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
 - **`TEST:CORE:C03:021.N` — `NEGATIVE`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:C01:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Challenge the unsupported or explicitly prohibited proposal for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload.
   - Input: Proposed SLO uses a historical VM size as its capacity proof; no workload measurement, runbook action, or owner decision is attached.
   - Observable Oracle: The claimed threshold/capacity value has no measurement provenance or decision owner; validator marks the evidence insufficient and no value becomes accepted.
@@ -3509,7 +3509,7 @@
   - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
 - **`TEST:CORE:C03:021.B` — `BOUNDARY_OR_CONCURRENCY`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:020, task TASK:CORE:C01:010, AC AC:CORE:C01:020; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Exercise the decision boundary for measure SLI/SLO, alert/runbook response, and workload capacity from the approved synthetic workload and inspect recorded approval/deployment state.
   - Input: Run the probe during the declared workload, then inject a worker/DB fault and collect alert, escalation and runbook drill records.
   - Observable Oracle: Fault is detected through the declared alert route; drill records escalation, containment/recovery and instrumentation overhead without inventing a numeric pass threshold.
@@ -3518,7 +3518,7 @@
   - Boundary/Race: A complete dossier without separate approval is the boundary; no race or concurrent operation is asserted.
 
 ##### `TEST:CORE:C03:022` — Requirement: `REQ:CORE:021`
-- **Task:** `TASK:CORE:010`
+- **Task:** `TASK:CORE:C01:010`
 - **AC:** `AC:CORE:C01:021`
 - **رفتارهای اتمی:** `REQ:CORE:021.B01`، `REQ:CORE:021.B02`، `REQ:CORE:021.B03`
 - **Source Unitها:** `SU-B-00013`، `SU-B-00836`
@@ -3533,7 +3533,7 @@
 - **شاهد بازخوانی سناریو:** Three cases distinguish accepted evidence handling, prohibited/unsupported proposals, and the separate-approval boundary; all stimuli are synthetic and execution remains unclaimed.
 - **`TEST:CORE:C03:022.P` — `POSITIVE`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:C01:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Record and inspect the permitted planning/evidence path for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
   - Input: Submit a self-hosted SigNoz deployment proposal targeting the current production VM under recorded capacity.
   - Observable Oracle: Evaluation remains conditional; no deployment is initiated, and each decision dimension is evidenced for the decision owner.
@@ -3542,7 +3542,7 @@
   - Boundary/Race: No deployment or production setting changes in the positive planning fixture.
 - **`TEST:CORE:C03:022.N` — `NEGATIVE`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:C01:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Challenge the unsupported or explicitly prohibited proposal for evaluate Cloud versus self-hosted SigNoz options and the independent approval dossier.
   - Input: Supply a Cloud preference or apparent spare-capacity claim without measured capacity/cost/security/retention/sampling evidence or separate approval.
   - Observable Oracle: Current-VM self-hosting proposal is rejected; Cloud is not silently accepted from preference alone and unsupported measurements do not authorize either option.
@@ -3551,7 +3551,7 @@
   - Boundary/Race: No production deployment, configuration, or approval record is created by the rejected proposal.
 - **`TEST:CORE:C03:022.B` — `BOUNDARY_OR_CONCURRENCY`**
   - Actor/Fixture: C03 implementation planner and authorized Core operations/architecture decision owner; synthetic evidence only.
-  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
+  - Initial State/Authority: Planning-only fixture; accepted requirement REQ:CORE:021, task TASK:CORE:C01:010, AC AC:CORE:C01:021; implementation authorization NOT_GRANTED; deployment state=NOT_DEPLOYED.
   - Action: Evaluate the technically complete SigNoz decision dossier while independent deployment approval is still absent; inspect decision status and deployment state.
   - Input: Prepare a technically complete revised dossier containing measured capacity, cost, security, retention, sampling and host evidence; record that separate owner deployment approval has not been issued; keep deployment unexecuted.
   - Observable Oracle: Even when a dossier is complete, status remains decision-pending until separate approval; the fixture records no deployment or configuration activation.
@@ -3562,9 +3562,9 @@
 #### پیوندهای تحویل بین Source، Requirement، Task، AC، Test و قرارداد
 ##### `DELIVERY:C03:001` — `SU-B-00572`
 - **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`، `TASK:CORE:007`
+- **Taskها:** `TASK:CORE:C01:005`، `TASK:CORE:C01:006`، `TASK:CORE:C01:007`
 - **Enablerها:** `TE:CORE:002`، `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`، `TASK:CORE:007.S01`، `TASK:CORE:007.S02`، `TASK:CORE:007.S03`
+- **Subtaskها:** `TASK:CORE:C01:005.S01`، `TASK:CORE:C01:005.S02`، `TASK:CORE:C01:005.S03`، `TASK:CORE:C01:006.S01`، `TASK:CORE:C01:006.S02`، `TASK:CORE:C01:006.S03`، `TASK:CORE:C01:007.S01`، `TASK:CORE:C01:007.S02`، `TASK:CORE:C01:007.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
 - **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
@@ -3576,9 +3576,9 @@
 
 ##### `DELIVERY:C03:002` — `SU-B-00573`
 - **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
+- **Taskها:** `TASK:CORE:C01:008`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **Subtaskها:** `TASK:CORE:C01:008.S01`، `TASK:CORE:C01:008.S02`، `TASK:CORE:C01:008.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
 - **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
@@ -3590,9 +3590,9 @@
 
 ##### `DELIVERY:C03:003` — `SU-B-00584`
 - **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`
-- **Taskها:** `TASK:CORE:005`
+- **Taskها:** `TASK:CORE:C01:005`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`
+- **Subtaskها:** `TASK:CORE:C01:005.S01`، `TASK:CORE:C01:005.S02`، `TASK:CORE:C01:005.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
 - **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
@@ -3604,9 +3604,9 @@
 
 ##### `DELIVERY:C03:004` — `SU-B-00589`
 - **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
+- **Taskها:** `TASK:CORE:C01:008`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **Subtaskها:** `TASK:CORE:C01:008.S01`، `TASK:CORE:C01:008.S02`، `TASK:CORE:C01:008.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
 - **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
@@ -3618,9 +3618,9 @@
 
 ##### `DELIVERY:C03:005` — `SU-B-00590`
 - **Requirementهای بازیافتی:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
-- **Taskها:** `TASK:CORE:008`
+- **Taskها:** `TASK:CORE:C01:008`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:008.S01`، `TASK:CORE:008.S02`، `TASK:CORE:008.S03`
+- **Subtaskها:** `TASK:CORE:C01:008.S01`، `TASK:CORE:C01:008.S02`، `TASK:CORE:C01:008.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
 - **Testهای طراحی C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
@@ -3632,9 +3632,9 @@
 
 ##### `DELIVERY:C03:006` — `SU-B-00591`
 - **Requirementهای بازیافتی:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:006`
+- **Taskها:** `TASK:CORE:C01:006`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
+- **Subtaskها:** `TASK:CORE:C01:006.S01`، `TASK:CORE:C01:006.S02`، `TASK:CORE:C01:006.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
 - **Testهای طراحی C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
@@ -3646,9 +3646,9 @@
 
 ##### `DELIVERY:C03:007` — `SU-W-00692`
 - **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
+- **Taskها:** `TASK:CORE:C01:010`
 - **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **Subtaskها:** `TASK:CORE:C01:010.S01`، `TASK:CORE:C01:010.S02`، `TASK:CORE:C01:010.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
 - **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
@@ -3660,9 +3660,9 @@
 
 ##### `DELIVERY:C03:008` — `SU-W-00693`
 - **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
+- **Taskها:** `TASK:CORE:C01:010`
 - **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **Subtaskها:** `TASK:CORE:C01:010.S01`، `TASK:CORE:C01:010.S02`، `TASK:CORE:C01:010.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
 - **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
@@ -3674,9 +3674,9 @@
 
 ##### `DELIVERY:C03:009` — `SU-W-00694`
 - **Requirementهای بازیافتی:** `REQ:CORE:019`، `REQ:CORE:047`
-- **Taskها:** `TASK:CORE:010`
+- **Taskها:** `TASK:CORE:C01:010`
 - **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:010.S01`، `TASK:CORE:010.S02`، `TASK:CORE:010.S03`
+- **Subtaskها:** `TASK:CORE:C01:010.S01`، `TASK:CORE:C01:010.S02`، `TASK:CORE:C01:010.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:047`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:047`
 - **Testهای طراحی C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:020`
@@ -3688,9 +3688,9 @@
 
 ##### `DELIVERY:C03:010` — `SU-B-00233`
 - **Requirementهای بازیافتی:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
-- **Taskها:** `TASK:CORE:005`، `TASK:CORE:006`
+- **Taskها:** `TASK:CORE:C01:005`، `TASK:CORE:C01:006`
 - **Enablerها:** `TE:CORE:002`
-- **Subtaskها:** `TASK:CORE:005.S01`، `TASK:CORE:005.S02`، `TASK:CORE:005.S03`، `TASK:CORE:006.S01`، `TASK:CORE:006.S02`، `TASK:CORE:006.S03`
+- **Subtaskها:** `TASK:CORE:C01:005.S01`، `TASK:CORE:C01:005.S02`، `TASK:CORE:C01:005.S03`، `TASK:CORE:C01:006.S01`، `TASK:CORE:C01:006.S02`، `TASK:CORE:C01:006.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:012`، `AC:CORE:C01:041`، `AC:CORE:C01:042`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:012`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
 - **Testهای طراحی C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
@@ -3702,9 +3702,9 @@
 
 ##### `DELIVERY:C03:011` — `SU-B-00865`
 - **Requirementهای بازیافتی:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
-- **Taskها:** `TASK:CORE:009`
+- **Taskها:** `TASK:CORE:C01:009`
 - **Enablerها:** `TE:CORE:003`
-- **Subtaskها:** `TASK:CORE:009.S01`، `TASK:CORE:009.S02`، `TASK:CORE:009.S03`
+- **Subtaskها:** `TASK:CORE:C01:009.S01`، `TASK:CORE:C01:009.S02`، `TASK:CORE:C01:009.S03`
 - **ACهای پذیرفته‌شده C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
 - **Testهای پذیرفته‌شده C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
 - **Testهای طراحی C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
@@ -3727,7 +3727,7 @@
 - **تصمیم‌های مرتبط:** A02؛ A05؛ A07؛ B06؛ E02
 - **Requirementها:** `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`
 - **Source Unitها:** `SU-B-00589`، `SU-B-00590`، `SU-B-00942`
-- **Taskهای اجرا:** `TASK:CORE:008`
+- **Taskهای اجرا:** `TASK:CORE:C01:008`
 - **ACهای C01:** `AC:CORE:C01:006`، `AC:CORE:C01:015`، `AC:CORE:C01:016`
 - **Testهای C01:** `TEST:CORE:C01:006`، `TEST:CORE:C01:015`، `TEST:CORE:C01:016`
 - **Testهای C03:** `TEST:CORE:C03:001`، `TEST:CORE:C03:005`، `TEST:CORE:C03:006`
@@ -3744,7 +3744,7 @@
 - **تصمیم‌های مرتبط:** A03؛ A04؛ A07
 - **Requirementها:** `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:041`، `REQ:CORE:042`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00942`
-- **Taskهای اجرا:** `TASK:CORE:005`، `TASK:CORE:007`
+- **Taskهای اجرا:** `TASK:CORE:C01:005`، `TASK:CORE:C01:007`
 - **ACهای C01:** `AC:CORE:C01:010`، `AC:CORE:C01:011`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:041`، `AC:CORE:C01:042`
 - **Testهای C01:** `TEST:CORE:C01:010`، `TEST:CORE:C01:011`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:041`، `TEST:CORE:C01:042`
 - **Testهای C03:** `TEST:CORE:C03:002`، `TEST:CORE:C03:003`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:014`، `TEST:CORE:C03:015`
@@ -3761,7 +3761,7 @@
 - **تصمیم‌های مرتبط:** A05؛ A07
 - **Requirementها:** `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`
 - **Source Unitها:** `SU-B-00572`، `SU-B-00591`
-- **Taskهای اجرا:** `TASK:CORE:006`
+- **Taskهای اجرا:** `TASK:CORE:C01:006`
 - **ACهای C01:** `AC:CORE:C01:012`، `AC:CORE:C01:043`، `AC:CORE:C01:044`
 - **Testهای C01:** `TEST:CORE:C01:012`، `TEST:CORE:C01:043`، `TEST:CORE:C01:044`
 - **Testهای C03:** `TEST:CORE:C03:004`، `TEST:CORE:C03:016`، `TEST:CORE:C03:017`
@@ -3778,7 +3778,7 @@
 - **تصمیم‌های مرتبط:** A08
 - **Requirementها:** `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`
 - **Source Unitها:** `SU-B-00963`
-- **Taskهای اجرا:** `TASK:CORE:009`
+- **Taskهای اجرا:** `TASK:CORE:C01:009`
 - **ACهای C01:** `AC:CORE:C01:017`، `AC:CORE:C01:018`، `AC:CORE:C01:045`، `AC:CORE:C01:046`
 - **Testهای C01:** `TEST:CORE:C01:017`، `TEST:CORE:C01:018`، `TEST:CORE:C01:045`، `TEST:CORE:C01:046`
 - **Testهای C03:** `TEST:CORE:C03:007`، `TEST:CORE:C03:008`، `TEST:CORE:C03:018`، `TEST:CORE:C03:019`
@@ -3795,7 +3795,7 @@
 - **تصمیم‌های مرتبط:** A09
 - **Requirementها:** `REQ:CORE:019`، `REQ:CORE:020`، `REQ:CORE:021`، `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`، `REQ:CORE:047`
 - **Source Unitها:** `SU-B-00572`، `SU-B-01125`
-- **Taskهای اجرا:** `TASK:CORE:007`، `TASK:CORE:010`
+- **Taskهای اجرا:** `TASK:CORE:C01:007`، `TASK:CORE:C01:010`
 - **ACهای C01:** `AC:CORE:C01:019`، `AC:CORE:C01:020`، `AC:CORE:C01:021`، `AC:CORE:C01:037`، `AC:CORE:C01:038`، `AC:CORE:C01:039`، `AC:CORE:C01:040`، `AC:CORE:C01:047`
 - **Testهای C01:** `TEST:CORE:C01:019`، `TEST:CORE:C01:020`، `TEST:CORE:C01:021`، `TEST:CORE:C01:037`، `TEST:CORE:C01:038`، `TEST:CORE:C01:039`، `TEST:CORE:C01:040`، `TEST:CORE:C01:047`
 - **Testهای C03:** `TEST:CORE:C03:009`، `TEST:CORE:C03:010`، `TEST:CORE:C03:011`، `TEST:CORE:C03:012`، `TEST:CORE:C03:013`، `TEST:CORE:C03:020`، `TEST:CORE:C03:021`، `TEST:CORE:C03:022`
@@ -3803,16 +3803,16 @@
 - **مبنای تصمیم:** C03 records its implementation/consumer relationship to the existing C01 contract. C01 remains contract owner; no contract schema or version is duplicated or published by C03.
 
 #### وابستگی‌ها و وضعیت‌های آغاز کار
-- **`DEP:C03:001`**: `TASK:CORE:005` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ دلیل: C03 implements TASK:CORE:005; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:002`**: `TASK:CORE:006` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:003`**: `TASK:CORE:006` → `TASK:CORE:005`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:006; preserve its accepted predecessor TASK:CORE:005 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:004`**: `TASK:CORE:007` → `TASK:CORE:003`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:003 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:005`**: `TASK:CORE:007` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:007; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:006`**: `TASK:CORE:008` → `TASK:CORE:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ دلیل: C03 implements TASK:CORE:008; preserve its accepted predecessor TASK:CORE:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:007`**: `TASK:CORE:009` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:008`**: `TASK:CORE:009` → `TASK:CORE:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:009; preserve its accepted predecessor TASK:CORE:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:009`**: `TASK:CORE:010` → `TASK:CORE:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
-- **`DEP:C03:010`**: `TASK:CORE:010` → `TASK:CORE:007`؛ نوع `PREFERENCE`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:010; preserve its accepted predecessor TASK:CORE:007 and dependency type PREFERENCE from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:001`**: `TASK:CORE:C01:005` → `TASK:CORE:C01:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:010`، `REQ:CORE:011`، `REQ:CORE:041`، `REQ:CORE:042`؛ دلیل: C03 implements TASK:CORE:C01:005; preserve its accepted predecessor TASK:CORE:C01:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:002`**: `TASK:CORE:C01:006` → `TASK:CORE:C01:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:C01:006; preserve its accepted predecessor TASK:CORE:C01:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:003`**: `TASK:CORE:C01:006` → `TASK:CORE:C01:005`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:012`، `REQ:CORE:043`، `REQ:CORE:044`؛ دلیل: C03 implements TASK:CORE:C01:006; preserve its accepted predecessor TASK:CORE:C01:005 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:004`**: `TASK:CORE:C01:007` → `TASK:CORE:C01:003`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:C01:007; preserve its accepted predecessor TASK:CORE:C01:003 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:005`**: `TASK:CORE:C01:007` → `TASK:CORE:C01:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:037`، `REQ:CORE:038`، `REQ:CORE:039`، `REQ:CORE:040`؛ دلیل: C03 implements TASK:CORE:C01:007; preserve its accepted predecessor TASK:CORE:C01:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:006`**: `TASK:CORE:C01:008` → `TASK:CORE:C01:002`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:006`، `REQ:CORE:015`، `REQ:CORE:016`؛ دلیل: C03 implements TASK:CORE:C01:008; preserve its accepted predecessor TASK:CORE:C01:002 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:007`**: `TASK:CORE:C01:009` → `TASK:CORE:C01:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:C01:009; preserve its accepted predecessor TASK:CORE:C01:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:008`**: `TASK:CORE:C01:009` → `TASK:CORE:C01:008`؛ نوع `CONTRACT`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:017`، `REQ:CORE:018`، `REQ:CORE:045`، `REQ:CORE:046`؛ دلیل: C03 implements TASK:CORE:C01:009; preserve its accepted predecessor TASK:CORE:C01:008 and dependency type CONTRACT from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:009`**: `TASK:CORE:C01:010` → `TASK:CORE:C01:001`؛ نوع `HARD`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:C01:010; preserve its accepted predecessor TASK:CORE:C01:001 and dependency type HARD from the C01 task model. No duration or schedule is inferred.
+- **`DEP:C03:010`**: `TASK:CORE:C01:010` → `TASK:CORE:C01:007`؛ نوع `PREFERENCE`؛ وضعیت `BLOCKED_BY_DECISION`؛ برنامه `IPA_ACCEPTED`؛ Requirement: `REQ:CORE:019`، `REQ:CORE:047`؛ دلیل: C03 implements TASK:CORE:C01:010; preserve its accepted predecessor TASK:CORE:C01:007 and dependency type PREFERENCE from the C01 task model. No duration or schedule is inferred.
 
 #### Handoffهای باز برای بسته‌های بعدی
 - **`HANDOFF:C03:001`**: Source `SU-B-00635`؛ مالک دامنه مقصد: B05 user-memory, privacy, retention, and transfer contract owners across Adviser/Assistant؛ بسته مقصد: `UNASSIGNED`؛ وضعیت `PENDING_PACKAGE_ALLOCATION`؛ دلیل: B:1332 leaves exact retention and transfer implementation details open under approved B05 policy. C03 does not own user memory; only its common authorization and telemetry interfaces are consumed. Exact receiving package is not proven in the current package registry.؛ تریگر: When the relevant Adviser/Assistant data-owner package is opened, allocate the B05 retention/transfer clauses and record acceptance without changing C03 ownership.
@@ -4201,11 +4201,11 @@
 
 | Task | مالک، پیش‌شرط و خروجی/DoD | Subtaskهای قابل اجرا |
 |---|---|---|
-| `TASK:CORE:C05A:001` — مدل Domain/Service/Capability | مالک: C05a. پیش‌شرط: قرارداد مالکیت داده C01:01. خروجی: مدل و قیود رکوردهای مجزا، شناسه پایدار، purpose/domain owner، input/output schema، وابستگی capability، executor ref و contract version. DoD: invariantها و migration plan/rollback طرح‌ریزی و هر فیلد به REQ/AC/Test متصل باشد. REQ 191–200,203–204. | `.S01` استخراج schema مفهومی و مرزهای رکورد؛ `.S02` تعریف شناسه‌ها، ارجاع‌ها و قید کامل‌بودن؛ `.S03` سیاست نسخه قرارداد و سازگاری انتشار. |
-| `TASK:CORE:C05A:002` — وضعیت انتشار و metadata دسترسی/تعرفه | مالک: C05a. پیش‌شرط: قراردادهای C04/C13a فقط به‌صورت ارجاع حفظ شوند؛ هیچ تصمیم عددی برای ساختار کاتالوگ لازم نیست. خروجی: وضعیت‌های متمایز و ارجاع access/tariff، بدون قیمت یا تصمیم entitlement جدید. DoD: وضعیت/مجوز/تعرفه در مدل و آزمون جدا باشند؛ داده نامشخص خودکار فعال نشود. REQ 201–206. | `.S01` مدل دسترسی و ارجاع تعرفه؛ `.S02` قواعد transition و وضعیت انتشار؛ `.S03` آزمون عدم استنتاج انتشار/مجوز از وجود رکورد. |
-| `TASK:CORE:C05A:003` — قرارداد خواندن Catalog API | مالک معنای داده: C05a؛ مالک API مشترک: Core طبق C01:02. پیش‌شرط: نسخه قرارداد C01 و permission port C02. خروجی: طراحی API فقط‌خواندنی نسخه‌دار برای مصرف‌کنندگان مجاز Adviser/Assistant/C04؛ Schema و endpoint دقیق هنوز طراحی اجرایی‌اند. DoD: مصرف‌کننده از قرارداد نسخه‌دار استفاده کند، مالک جدول حفظ و دسترسی مستقیم بسته باشد. REQ 207–209. | `.S01` توافق روی projection و نسخه؛ `.S02` قرارداد خطا/فیلتر بر اساس وضعیت، دسترسی و scope؛ `.S03` آزمون دسترسی API و منع خواندن مستقیم. |
-| `TASK:CORE:C05A:004` — مسیریاب تجربه و نتیجه ارزیابی | مالک: C05a برای قرارداد/سیاست مسیریابی مبتنی بر کاتالوگ. پیش‌شرط: Domain ID/role از C02 و ورودی/نمایش C06/R02؛ سیاست‌های B02/B03 از منبع مرجع. خروجی: قرارداد نتیجه مسیر، طبقه‌بندی هدف‌محور و کنترل backend. DoD: دسته‌ها/ابهام/عدم مجوز قابل تمایز باشند، LLM فقط پیشنهاد دهد، انتقال فقط با اقدام کاربر. REQ 210–221. | `.S01` قرارداد ورود/تأیید حوزه و انتخاب نقش؛ `.S02` ماتریس route result و خطاهای نامرتبط/محدود/نامجاز؛ `.S03` اعتبارسنجی سمت Backend و اتصال permission بدون کپی C02. |
-| `TASK:CORE:C05A:005` — Contract زیرکار و وضعیت یکپارچه | مالک قرارداد مسیریابی: C05a؛ مالک اجرای پایدار workflow: A02؛ مالک نمایش UI: C06/C14. پیش‌شرط: قرارداد نسخه‌دار مقصد، مجوز مستقل C02 و پرونده/Job متعلق به سرویس. خروجی: envelope برنامه‌ریزی برای parent/child و وضعیت کاربر. DoD: parent/context ثابت، target owner مشخص، مجوز تازه استنباط نشود، نتیجه شکست/انتظار قابل پیگیری باشد. REQ 222–225. | `.S01` قرارداد ارجاع/وابستگی و شناسه parent-child؛ `.S02` ماتریس مالکیت و permission handoff؛ `.S03` تعریف پیام‌های پیشرفت، انتظار، شکست و نتیجه با مصرف C06/C14. |
+| `TASK:CORE:C05A:001` — مدل Domain/Service/Capability | مالک: C05a. پیش‌شرط: قرارداد مالکیت داده C01:01. خروجی: مدل و قیود رکوردهای مجزا، شناسه پایدار، purpose/domain owner، input/output schema، وابستگی capability، executor ref و contract version. DoD: invariantها و migration plan/rollback طرح‌ریزی و هر فیلد به REQ/AC/Test متصل باشد. REQ 191–200,203–204. | `TASK:CORE:C05A:001.S01` استخراج schema مفهومی و مرزهای رکورد؛ `TASK:CORE:C05A:001.S02` تعریف شناسه‌ها، ارجاع‌ها و قید کامل‌بودن؛ `TASK:CORE:C05A:001.S03` سیاست نسخه قرارداد و سازگاری انتشار. |
+| `TASK:CORE:C05A:002` — وضعیت انتشار و metadata دسترسی/تعرفه | مالک: C05a. پیش‌شرط: قراردادهای C04/C13a فقط به‌صورت ارجاع حفظ شوند؛ هیچ تصمیم عددی برای ساختار کاتالوگ لازم نیست. خروجی: وضعیت‌های متمایز و ارجاع access/tariff، بدون قیمت یا تصمیم entitlement جدید. DoD: وضعیت/مجوز/تعرفه در مدل و آزمون جدا باشند؛ داده نامشخص خودکار فعال نشود. REQ 201–206. | `TASK:CORE:C05A:002.S01` مدل دسترسی و ارجاع تعرفه؛ `TASK:CORE:C05A:002.S02` قواعد transition و وضعیت انتشار؛ `TASK:CORE:C05A:002.S03` آزمون عدم استنتاج انتشار/مجوز از وجود رکورد. |
+| `TASK:CORE:C05A:003` — قرارداد خواندن Catalog API | مالک معنای داده: C05a؛ مالک API مشترک: Core طبق C01:02. پیش‌شرط: نسخه قرارداد C01 و permission port C02. خروجی: طراحی API فقط‌خواندنی نسخه‌دار برای مصرف‌کنندگان مجاز Adviser/Assistant/C04؛ Schema و endpoint دقیق هنوز طراحی اجرایی‌اند. DoD: مصرف‌کننده از قرارداد نسخه‌دار استفاده کند، مالک جدول حفظ و دسترسی مستقیم بسته باشد. REQ 207–209. | `TASK:CORE:C05A:003.S01` توافق روی projection و نسخه؛ `TASK:CORE:C05A:003.S02` قرارداد خطا/فیلتر بر اساس وضعیت، دسترسی و scope؛ `TASK:CORE:C05A:003.S03` آزمون دسترسی API و منع خواندن مستقیم. |
+| `TASK:CORE:C05A:004` — مسیریاب تجربه و نتیجه ارزیابی | مالک: C05a برای قرارداد/سیاست مسیریابی مبتنی بر کاتالوگ. پیش‌شرط: Domain ID/role از C02 و ورودی/نمایش C06/R02؛ سیاست‌های B02/B03 از منبع مرجع. خروجی: قرارداد نتیجه مسیر، طبقه‌بندی هدف‌محور و کنترل backend. DoD: دسته‌ها/ابهام/عدم مجوز قابل تمایز باشند، LLM فقط پیشنهاد دهد، انتقال فقط با اقدام کاربر. REQ 210–221. | `TASK:CORE:C05A:004.S01` قرارداد ورود/تأیید حوزه و انتخاب نقش؛ `TASK:CORE:C05A:004.S02` ماتریس route result و خطاهای نامرتبط/محدود/نامجاز؛ `TASK:CORE:C05A:004.S03` اعتبارسنجی سمت Backend و اتصال permission بدون کپی C02. |
+| `TASK:CORE:C05A:005` — Contract زیرکار و وضعیت یکپارچه | مالک قرارداد مسیریابی: C05a؛ مالک اجرای پایدار workflow: A02؛ مالک نمایش UI: C06/C14. پیش‌شرط: قرارداد نسخه‌دار مقصد، مجوز مستقل C02 و پرونده/Job متعلق به سرویس. خروجی: envelope برنامه‌ریزی برای parent/child و وضعیت کاربر. DoD: parent/context ثابت، target owner مشخص، مجوز تازه استنباط نشود، نتیجه شکست/انتظار قابل پیگیری باشد. REQ 222–225. | `TASK:CORE:C05A:005.S01` قرارداد ارجاع/وابستگی و شناسه parent-child؛ `TASK:CORE:C05A:005.S02` ماتریس مالکیت و permission handoff؛ `TASK:CORE:C05A:005.S03` تعریف پیام‌های پیشرفت، انتظار، شکست و نتیجه با مصرف C06/C14. |
 
 **شناسه‌های کامل Subtask:** `TASK:CORE:C05A:001.S01–S03`، `TASK:CORE:C05A:002.S01–S03`، `TASK:CORE:C05A:003.S01–S03`، `TASK:CORE:C05A:004.S01–S03` و `TASK:CORE:C05A:005.S01–S03`؛ جمع ۱۵. هرکدام خروجی و DoD مستقل دارد و Testهایش به AC/Test اختصاصی متصل‌اند. هیچ Task برای پرکردن قالب یا ساخت فناوری/Worker پیش‌دستانه تعریف نشده است.
 
@@ -4331,7 +4331,7 @@
 | `CAN:C05A:034` | B:871 | OWNED/CROSS_REFERENCE | REQ:CORE:224 | TASK:CORE:C05A:005 | AC:C05A:034 | TEST:C05A:034 | CLOSED |
 | `CAN:C05A:035` | B:871 | OWNED/CROSS_REFERENCE | REQ:CORE:225 | TASK:CORE:C05A:005 | AC:C05A:035 | TEST:C05A:035 | CLOSED |
 | `CAN:C05A:036` | C04 REQ:CORE:134,138,139,150 | REUSED_REQUIREMENT | Existing REQ/AC/TEST; no new REQ | TASK:CORE:C04:001/002 | AC:C04:004/008/009 | TEST:C04:004/008/009 | REUSED |
-| `CAN:C05A:037` | CONTRACT:C01:01/:02 | REUSED_CONTRACT | API/data ownership; no new REQ | TASK:CORE:003 | Existing | Existing | REUSED |
+| `CAN:C05A:037` | CONTRACT:C01:01/:02 | REUSED_CONTRACT | API/data ownership; no new REQ | TASK:CORE:C01:003 | Existing | Existing | REUSED |
 | `CAN:C05A:038` | CONTRACT:C02:02/:03 | REUSED_CONTRACT | identity/permission/consent; no new REQ | TASK:CORE:C02:002–004 | Existing | Existing | REUSED |
 | `CAN:C05A:039` | B:1190–1217; C03 accepted | CROSS_REFERENCE | API/Job/Event/Telemetry ownership remains C03; C05a read path uses C01:02 and does not add a Job | — | — | — | CLOSED_WITH_REASON |
 | `CAN:C05A:040` | B:1557–1636 | FUTURE_DEPENDENCY | Handoff:H05A:002 to C05b | — | — | — | ACCEPTED_BY_SCOPE |
@@ -4413,7 +4413,7 @@
 - **دامنه:** مدل و چرخه کاتالوگ پویای محصولات مالی واقعی بانک‌ها/مؤسسات، کشف و استخراج مجاز داده محصول، ثبت منشأ و نسخه، تشخیص تکرار/تغییر، اعتبارسنجی و رسیدگی به داده نامطمئن، انتشار Snapshot معتبر، و اتصال برنامه‌ای به توصیه‌گر قطعی فعلی تسهیلات.
 - **مالک منطقی داده و تصمیم‌های محصولی کاتالوگ:** Core؛ Blueprint کاتالوگ محصولات منتشرشده و موتور توصیه‌گر قطعی را در Core قرار می‌دهد. نام تیم/مسئول اجرایی کاتالوگ در سند مرجع تعیین نشده و در این بسته ساخته نمی‌شود.
 - **مرز C05a:** C05a مالک حوزه/خدمت/قابلیت و مسیریاب خدماتی خود شهاب است؛ C05b مالک داده محصولات مالی ارائه‌دهندگان بیرونی و چرخه انتشار آن‌هاست. نام/شناسه خدمت یا نوع خدمت می‌تواند به‌عنوان ارجاع مصرف شود، اما کاتالوگ خدمات C05a و کاتالوگ محصولات مالی C05b یک مدل یا مالکیت واحد نیستند.
-- **مرز توصیه‌گر:** مالکیت منطق قطعی تطبیق، رتبه‌بندی و دلیل‌های توصیه وام در Core است و با REQ:CORE:008 پذیرفته‌شده C01 و TASK:CORE:004 بازیافت می‌شود. C05b مدل محصول و چرخه داده را تکمیل می‌کند؛ منطق امتیازدهی را بازنویسی نمی‌کند. قواعد/آستانه‌های تازه برای سایر حوزه‌ها تصویب نشده‌اند.
+- **مرز توصیه‌گر:** مالکیت منطق قطعی تطبیق، رتبه‌بندی و دلیل‌های توصیه وام در Core است و با REQ:CORE:008 پذیرفته‌شده C01 و TASK:CORE:C01:004 بازیافت می‌شود. C05b مدل محصول و چرخه داده را تکمیل می‌کند؛ منطق امتیازدهی را بازنویسی نمی‌کند. قواعد/آستانه‌های تازه برای سایر حوزه‌ها تصویب نشده‌اند.
 - **مرز Adviser:** Adviser نیاز را در گفت‌وگوی حوزه وام تشخیص می‌دهد، پرسشنامه را آغاز/نمایش می‌دهد، در شرایط مصوب توصیه‌گر را از API نسخه‌دار Core می‌خواند و نتیجه را ارائه می‌کند. Adviser و فرانت‌اند منطق قطعی یا دسترسی به جدول خصوصی Core نمی‌سازند.
 - **مرز RAG، Assistant و UI:** مدل و ذخیره دانش حقوقی/رابطه در R03؛ بازیابی و کفایت در R05؛ تحلیل Claim، Citation Guard و پاسخ Adviser در R06؛ نقشه و پایش UI به A06؛ امکان‌سنجی/مسیر اپ و پلتفرم به A04؛ اجرای عملیات به بسته‌های Assistant/گردش‌کار تخصیص‌یافته واگذار می‌شوند. C05b نتیجه توصیه را تضمین پذیرش بانک یا اجرای درخواست نمی‌داند.
 - **مرز Wallet:** قیمت خدمت، کسر، رزرو، تسویه، دفترکل و وضعیت قطعی مالی در C09 و C12a/C12b/C13a و سایر بسته‌های مالی مالک دارند؛ هیچ‌کدام از C05b مالکیت نمی‌گیرند.
@@ -4455,11 +4455,11 @@
 | CAN:C05B:020 | B:1604–1610، B:1625 | OWNED؛ دانش مقررات، محصول و UI جدا و با شناسه پایدار مرتبط‌اند؛ REQ:CORE:237 |
 | CAN:C05B:021 | B:1609 | OWNED؛ شناسه بانک/محصول، نوع خدمت، شرایط، مدارک، نرخ، محدودیت، منبع، نسخه، زمان مشاهده و اعتبار؛ REQ:CORE:227 |
 | CAN:C05B:022 | B:1619–1625 | OWNED / DECISION_OPEN؛ PostgreSQL مرجع عملیاتی پیشنهادی، مخزن اسناد برای متن/شواهد؛ فناوری UI و همگام‌سازی باز؛ REQ:CORE:237 |
-| CAN:C05B:023 | B:1627–1633 | REUSED؛ مالکیت Core بر تطبیق/رتبه‌بندی/دلایل در REQ:CORE:008 و TASK:CORE:004 |
+| CAN:C05B:023 | B:1627–1633 | REUSED؛ مالکیت Core بر تطبیق/رتبه‌بندی/دلایل در REQ:CORE:008 و TASK:CORE:C01:004 |
 | CAN:C05B:024 | B:1627–1633 | REUSED؛ API نسخه‌دار، عدم بازپیاده‌سازی در Adviser/فرانت و منع دسترسی به جدول Core؛ CONTRACT:C01:02 و REQ:CORE:008 |
 | CAN:C05B:025 | B:1629 | OWNED؛ دو محرک کاربر و پذیرش/رد پیشنهاد، پرسشنامه غیر اجباری ورود؛ REQ:CORE:238 |
 | CAN:C05B:026 | B:1629، B:1190–1217، B:2075 | REUSED؛ محاسبه کوتاه هم‌زمان، نسخه‌بندی قرارداد، خطا/Retry/Trace و آزمون مصرف‌کننده از قراردادهای C01/C03 |
-| CAN:C05B:027 | B:1633 | REUSED؛ یک Snapshot و نسخه قواعد سازگار برای کل محاسبه؛ REQ:CORE:009 و TASK:CORE:004 |
+| CAN:C05B:027 | B:1633 | REUSED؛ یک Snapshot و نسخه قواعد سازگار برای کل محاسبه؛ REQ:CORE:009 و TASK:CORE:C01:004 |
 | CAN:C05B:028 | B:1633 | OWNED؛ داده وام موجود به چرخه کشف/اعتبارسنجی/انتشار منتقل می‌شود؛ REQ:CORE:239 |
 | CAN:C05B:029 | B:1633، B:1635، B:1647 | OWNED؛ پیشنهاد معتبر تضمین پذیرش نیست و نبود موتور تخصصی ادعای رتبه‌بندی قطعی نمی‌سازد؛ REQ:CORE:240 |
 | CAN:C05B:030 | B:1635 | OWNED؛ کاتالوگ برای حوزه‌های دیگر بدون موتور اختصاصی قابل استفاده است؛ REQ:CORE:226 |
@@ -4488,7 +4488,7 @@
 | REQ:CORE:231 | چرخه کشف باید محصولات تکراری را تطبیق دهد، تکرار را کنترل کند و تغییر منبع/محصول را پیش از انتشار قابل تشخیص کند؛ قاعده ادغام موجودیت‌ها نیازمند طراحی مبتنی بر شاهد است. | B:1567؛ APPROVED | AC:CORE:C05B:006 | TEST:CORE:C05B:006 | TASK:CORE:C05B:002 |
 | REQ:CORE:232 | وضعیت اعتبار محصول باید دست‌کم «تأییدشده با تاریخ مشاهده»، «نیازمند بازاعتبارسنجی» و «نامطمئن/متعارض» را از هم جدا کند؛ تأیید کاتالوگ تضمین عرضه لحظه‌ای نیست. | B:1582؛ APPROVED | AC:CORE:C05B:007 | TEST:CORE:C05B:007 | TASK:CORE:C05B:003 |
 | REQ:CORE:233 | داده ناقص، نامطمئن یا متعارض باید پیش از انتشار به اعتبارسنجی/حل تعارض یا بازبینی برود و تا احراز اعتبار به‌عنوان توصیه قطعی منتشر نشود؛ آستانه کامل‌بودن و نقش بازبین باز است. | B:1567، B:1582؛ APPROVED | AC:CORE:C05B:008 | TEST:CORE:C05B:008 | TASK:CORE:C05B:003 |
-| REQ:CORE:234 | توصیه‌گر باید فقط از Snapshot معتبر و منتشرشده استفاده کند؛ Snapshot جاری تا جایگزینی معتبر حفظ شود و یک اجرای توصیه Snapshot و نسخه قواعد سازگار واحد داشته باشد. | B:1561، B:1633، REQ:CORE:009؛ APPROVED + REUSED | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | TASK:CORE:C05B:003 / TASK:CORE:004 |
+| REQ:CORE:234 | توصیه‌گر باید فقط از Snapshot معتبر و منتشرشده استفاده کند؛ Snapshot جاری تا جایگزینی معتبر حفظ شود و یک اجرای توصیه Snapshot و نسخه قواعد سازگار واحد داشته باشد. | B:1561، B:1633، REQ:CORE:009؛ APPROVED + REUSED | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | TASK:CORE:C05B:003 / TASK:CORE:C01:004 |
 | REQ:CORE:235 | API رسمی دریافت داده محصول و API/واسط غیرمستقیم یا MCP فقط مسیرهای مکمل‌اند؛ هر مسیر باید مجاز و آزموده‌شده باشد و نبود API رسمی به وابستگی اجباری کاتالوگ تبدیل نشود. | B:1571، B:1590–1592؛ APPROVED | AC:CORE:C05B:010 | TEST:CORE:C05B:010 | TASK:CORE:C05B:004 |
 | REQ:CORE:236 | در اختلال API مکمل، کاتالوگ باید داده قبلی را فقط مطابق سیاست تازگی و با هشدار مناسب ارائه کند؛ اگر مسیر جایگزین معتبر/مجاز وجود ندارد، عملیات وابسته آشکارا متوقف شود و داده نامطمئن توصیه قطعی نگیرد. | B:1594؛ APPROVED | AC:CORE:C05B:011 | TEST:CORE:C05B:011 | TASK:CORE:C05B:004 |
 | REQ:CORE:237 | دانش محصول باید از دانش مقررات و دانش رابط جدا بماند و با شناسه پایدار به آن‌ها ارجاع دهد؛ C05b مخزن RAG عمومی یا مخزن UI را جایگزین نمی‌کند. | B:1604–1610، B:1619–1625؛ APPROVED | AC:CORE:C05B:012 | TEST:CORE:C05B:012 | TASK:CORE:C05B:004 |
@@ -4496,7 +4496,7 @@
 | REQ:CORE:239 | داده‌های وام موجود باید منبع اولیه مهاجرت به چرخه واحد کشف/اعتبارسنجی/انتشار باشند و تا انتشار Snapshot معتبر وارد توصیه قطعی نشوند. | B:1561، B:1633؛ APPROVED | AC:CORE:C05B:014 | TEST:CORE:C05B:014 | TASK:CORE:C05B:005 |
 | REQ:CORE:240 | نتیجه توصیه یا فهرست محصول نباید به‌عنوان تضمین عرضه یا پذیرش درخواست بانک نمایش/ثبت شود؛ نبود موتور اختصاصی معتبر در یک خدمت، ادعای رتبه‌بندی قطعی ایجاد نمی‌کند. | B:1582، B:1633، B:1647؛ APPROVED | AC:CORE:C05B:015 | TEST:CORE:C05B:015 | TASK:CORE:C05B:005 |
 
-**Requirements بازیافتی بدون نسخه تکراری:** REQ:CORE:008 و REQ:CORE:009 به همراه AC:CORE:C01:008/:009 و TASK:CORE:004 از C01 حفظ می‌شوند. CONTRACT:C01:01/:02 مالکیت ماژول و API نسخه‌دار، CONTRACT:C01:03/:04 الگوی Job/Event فقط در صورت نیاز اثبات‌شده، و قراردادهای مجوز/رضایت C02:02/:03 بازیافت می‌شوند. C03 مالک قراردادهای عمومی API/Event/Job/Telemetry و تاب‌آوری مشترک خود می‌ماند. هیچ الزام C04 یا C05a برای تعرفه، پلن، کاتالوگ خدمت یا اجرای مالی دوباره ساخته نشده است.
+**Requirements بازیافتی بدون نسخه تکراری:** REQ:CORE:008 و REQ:CORE:009 به همراه AC:CORE:C01:008/:009 و TASK:CORE:C01:004 از C01 حفظ می‌شوند. CONTRACT:C01:01/:02 مالکیت ماژول و API نسخه‌دار، CONTRACT:C01:03/:04 الگوی Job/Event فقط در صورت نیاز اثبات‌شده، و قراردادهای مجوز/رضایت C02:02/:03 بازیافت می‌شوند. C03 مالک قراردادهای عمومی API/Event/Job/Telemetry و تاب‌آوری مشترک خود می‌ماند. هیچ الزام C04 یا C05a برای تعرفه، پلن، کاتالوگ خدمت یا اجرای مالی دوباره ساخته نشده است.
 
 #### AC و Test Caseهای برنامه‌ریزی
 
@@ -4528,7 +4528,7 @@
 |---|---|---|---|
 | TE:CORE:C05B:001 | مالک Core نیاز دارد محصولات بانکی را با منشأ و اعتبارشان به‌صورت پایدار کشف و منتشر کند، تا داده نامطمئن وارد توصیه قطعی نشود. | REQ:CORE:226–237، REQ:CORE:239–240 | مدل/چرخه و مرز با C05a، R06 و A06 ثبت شود؛ 15 AC و Test مستقل نگاشت و حالات ناقص/تعارض‌دار دیده شوند. |
 | TE:CORE:C05B:002 | Adviser و مصرف‌کننده مجاز نیاز دارند Snapshot محصول را از قرارداد نسخه‌دار Core با وضعیت و منشأ دریافت کنند. | REQ:CORE:234–237، REQ:CORE:008–009 بازیافتی | CONTRACT:C05B:001 به‌عنوان بسط دامنه‌ای CONTRACT:C01:02 طراحی شود؛ مصرف‌کننده به جدول خصوصی وابسته نشود. |
-| TE:CORE:C05B:003 | کاربر و Core نیاز دارند توصیه وام با درخواست/رضایت کاربر و Snapshot معتبر، با معنای قطعی موجود و بدون وعده پذیرش بانک ارائه شود. | REQ:CORE:238–240، REQ:CORE:008–009 بازیافتی | TASK:CORE:004 و Golden/consumer contract C01 حفظ شوند؛ قاعده امتیازدهی جدید ساخته نشود. |
+| TE:CORE:C05B:003 | کاربر و Core نیاز دارند توصیه وام با درخواست/رضایت کاربر و Snapshot معتبر، با معنای قطعی موجود و بدون وعده پذیرش بانک ارائه شود. | REQ:CORE:238–240، REQ:CORE:008–009 بازیافتی | TASK:CORE:C01:004 و Golden/consumer contract C01 حفظ شوند؛ قاعده امتیازدهی جدید ساخته نشود. |
 
 #### Taskها و Subtaskهای اجرایی آینده
 
@@ -4536,11 +4536,11 @@
 
 | Task | مالک، ورودی/وابستگی و خروجی/DoD | Subtaskها |
 |---|---|---|
-| TASK:CORE:C05B:001 — مدل محصول و رجیستری منبع | مالک منطقی: Core Catalog؛ پیش‌شرط: CONTRACT:C01:01 و دریافت Handoff:H05A:002؛ خروجی: طرح مدل محصول/ارائه‌دهنده، ارجاع به نوع خدمت، فهرست منبع دارای وضعیت مجازبودن، و نقشه مهاجرت بدون تصمیم‌سازی برای فیلدهای نامعلوم. | .S01 تطبیق مدل با شناسه/فیلدهای B:1609 و مرز C05a؛ .S02 ثبت منابع/روش‌های مجاز و شرایط دسترسی/نگهداری؛ .S03 تهیه نگاشت داده وام موجود و ثبت فیلد/واحد/تبدیل نامشخص به DECISION، نه حدس. |
-| TASK:CORE:C05B:002 — کشف، استخراج، منشأ و تشخیص تغییر | مالک منطقی: Core Catalog؛ ورودی: TASK 001؛ CONTRACT:C01:03 فقط اگر پردازش طولانی/Job اثبات شود؛ خروجی: طراحی مسیر محرک زمان‌بندی/تقاضا/تغییر، استخراج ساختاریافته، lineage، تطبیق موجودیت و گزارش تغییر. | .S01 تعریف محرک‌ها و قرارداد ورودیِ تقاضا/هشدار؛ .S02 طرح استخراج و اتصال فیلد به منبع/زمان/نسخه؛ .S03 طرح تطبیق و تشخیص تغییر با حفظ سابقه و عدم ادغام نامستند. |
-| TASK:CORE:C05B:003 — اعتبارسنجی و انتشار Snapshot محصول | مالک منطقی: Core Catalog؛ ورودی: TASK 001–002؛ REQ:CORE:009 و سیاست انتشار C01/C03؛ خروجی: مدل وضعیت اعتبار، صف نامطمئن/متعارض و طرح انتشار اتمیک Snapshot معتبر. | .S01 تعریف وضعیت‌ها و طراحی آزمون تازگی؛ .S02 ثبت معیارهای ناقص‌بودن/تعارض و مسیر بازبینی به‌عنوان تصمیم باز تا تصویب؛ .S03 طرح حفظ Snapshot قبلی، انتشار نسخه معتبر و آزمون عدم اختلاط. |
-| TASK:CORE:C05B:004 — قرارداد خواندن محصول و رفتار تاب‌آوری | مالک قرارداد API: Core طبق CONTRACT:C01:02؛ مالک داده: Core Catalog؛ خروجی: بسط دامنه‌ای CONTRACT:C05B:001 با Snapshot/منشأ/اعتبار، نسخه Schema، خطاهای قابل تشخیص و رفتار قطع منبع. | .S01 تعیین مدل پاسخ و سازگاری مصرف‌کننده Adviser؛ .S02 تعریف خطای stale/uncertain/unavailable و هشدار/توقف؛ .S03 آزمون قراردادی، timeout/retry محدود و سازگاری انتشار، با بازیافت C03 و بدون Job اجباری. |
-| TASK:CORE:C05B:005 — انطباق داده وام و فراخوانی توصیه‌گر قطعی | مالک منطق: Core؛ ورودی: C01 TASK:CORE:004، REQ:CORE:008/:009، Snapshot معتبر و قرارداد C05B:001؛ خروجی: برنامه مهاجرت منبع فعلی و اتصال هم‌زمان Adviser به موتور موجود. | .S01 تثبیت Golden semantics/داده فعلی و طبقه‌بندی تفاوت‌ها؛ .S02 قرارداد ورودی/خروجی Adviser و آغاز اختیاری پرسشنامه؛ .S03 آزمون شکست API، نسخه Snapshot/قواعد، دلیل نتیجه و منع وعده پذیرش بانک. |
+| TASK:CORE:C05B:001 — مدل محصول و رجیستری منبع | مالک منطقی: Core Catalog؛ پیش‌شرط: CONTRACT:C01:01 و دریافت Handoff:H05A:002؛ خروجی: طرح مدل محصول/ارائه‌دهنده، ارجاع به نوع خدمت، فهرست منبع دارای وضعیت مجازبودن، و نقشه مهاجرت بدون تصمیم‌سازی برای فیلدهای نامعلوم. | TASK:CORE:C05B:001.S01 تطبیق مدل با شناسه/فیلدهای B:1609 و مرز C05a؛ TASK:CORE:C05B:001.S02 ثبت منابع/روش‌های مجاز و شرایط دسترسی/نگهداری؛ TASK:CORE:C05B:001.S03 تهیه نگاشت داده وام موجود و ثبت فیلد/واحد/تبدیل نامشخص به DECISION، نه حدس. |
+| TASK:CORE:C05B:002 — کشف، استخراج، منشأ و تشخیص تغییر | مالک منطقی: Core Catalog؛ ورودی: TASK 001؛ CONTRACT:C01:03 فقط اگر پردازش طولانی/Job اثبات شود؛ خروجی: طراحی مسیر محرک زمان‌بندی/تقاضا/تغییر، استخراج ساختاریافته، lineage، تطبیق موجودیت و گزارش تغییر. | TASK:CORE:C05B:002.S01 تعریف محرک‌ها و قرارداد ورودیِ تقاضا/هشدار؛ TASK:CORE:C05B:002.S02 طرح استخراج و اتصال فیلد به منبع/زمان/نسخه؛ TASK:CORE:C05B:002.S03 طرح تطبیق و تشخیص تغییر با حفظ سابقه و عدم ادغام نامستند. |
+| TASK:CORE:C05B:003 — اعتبارسنجی و انتشار Snapshot محصول | مالک منطقی: Core Catalog؛ ورودی: TASK 001–002؛ REQ:CORE:009 و سیاست انتشار C01/C03؛ خروجی: مدل وضعیت اعتبار، صف نامطمئن/متعارض و طرح انتشار اتمیک Snapshot معتبر. | TASK:CORE:C05B:003.S01 تعریف وضعیت‌ها و طراحی آزمون تازگی؛ TASK:CORE:C05B:003.S02 ثبت معیارهای ناقص‌بودن/تعارض و مسیر بازبینی به‌عنوان تصمیم باز تا تصویب؛ TASK:CORE:C05B:003.S03 طرح حفظ Snapshot قبلی، انتشار نسخه معتبر و آزمون عدم اختلاط. |
+| TASK:CORE:C05B:004 — قرارداد خواندن محصول و رفتار تاب‌آوری | مالک قرارداد API: Core طبق CONTRACT:C01:02؛ مالک داده: Core Catalog؛ خروجی: بسط دامنه‌ای CONTRACT:C05B:001 با Snapshot/منشأ/اعتبار، نسخه Schema، خطاهای قابل تشخیص و رفتار قطع منبع. | TASK:CORE:C05B:004.S01 تعیین مدل پاسخ و سازگاری مصرف‌کننده Adviser؛ TASK:CORE:C05B:004.S02 تعریف خطای stale/uncertain/unavailable و هشدار/توقف؛ TASK:CORE:C05B:004.S03 آزمون قراردادی، timeout/retry محدود و سازگاری انتشار، با بازیافت C03 و بدون Job اجباری. |
+| TASK:CORE:C05B:005 — انطباق داده وام و فراخوانی توصیه‌گر قطعی | مالک منطق: Core؛ ورودی: C01 TASK:CORE:C01:004، REQ:CORE:008/:009، Snapshot معتبر و قرارداد C05B:001؛ خروجی: برنامه مهاجرت منبع فعلی و اتصال هم‌زمان Adviser به موتور موجود. | TASK:CORE:C01:004.S01 تثبیت Golden semantics/داده فعلی و طبقه‌بندی تفاوت‌ها؛ TASK:CORE:C01:004.S02 قرارداد ورودی/خروجی Adviser و آغاز اختیاری پرسشنامه؛ TASK:CORE:C01:004.S03 آزمون شکست API، نسخه Snapshot/قواعد، دلیل نتیجه و منع وعده پذیرش بانک. |
 
 #### قراردادها، وابستگی‌ها و Handoff
 
@@ -4551,7 +4551,7 @@
 | Dependency | TASK:CORE:C05B:002 → TASK:CORE:C05B:001 | HARD؛ استخراج پیش از مدل منبع/فیلد، ادغام خودکار نمی‌شود. |
 | Dependency | TASK:CORE:C05B:003 → TASK:CORE:C05B:001/002 | HARD؛ انتشار بدون هویت، منشأ و اعتبارسنجی ممنوع در برنامه است. |
 | Dependency | TASK:CORE:C05B:004 → TASK:CORE:C05B:003 و CONTRACT:C01:02 | CONTRACT؛ خواندن فقط Snapshot معتبر از API نسخه‌دار. |
-| Dependency | TASK:CORE:C05B:005 → TASK:CORE:C05B:003/004 و TASK:CORE:004 | HARD/CONTRACT؛ محاسبه بر Snapshot معتبر، منطق scorer و golden semantics C01 حفظ می‌شوند. |
+| Dependency | TASK:CORE:C05B:005 → TASK:CORE:C05B:003/004 و TASK:CORE:C01:004 | HARD/CONTRACT؛ محاسبه بر Snapshot معتبر، منطق scorer و golden semantics C01 حفظ می‌شوند. |
 | Handoff ورودی | Handoff:H05A:002 / CAN:C05A:040 → C05b | ACCEPTED_BY_SCOPE؛ کاتالوگ محصول بانکی در این بسته پوشش یافت. تأیید کد/قرارداد اجرایی مقصد هنوز انجام نشده است. |
 | Handoff خروجی | Handoff:H05B:001 → R03/R05/R06 | مدل/نسخه/روابط حقوقی canonical به R03؛ بازیابی به R05 و تفسیر/پاسخ Adviser به R06؛ C05b فقط منشأ و ارجاع محصول را نگه می‌دارد. برای مدل و داده محصول blocker نیست. |
 | Handoff خروجی | Handoff:H05B:002 → A06 | نقشه رابط و پایش تغییر UI؛ Product Catalog منبع دانش UI نمی‌شود. |
@@ -4592,16 +4592,16 @@
 |---|---|---|---|---|---|---|
 | CAN:C05B:001–002 | OWNED | REQ:CORE:226 | TASK:CORE:C05B:001 | AC:CORE:C05B:001 | TEST:CORE:C05B:001 | CLOSED |
 | CAN:C05B:003 | OWNED | REQ:CORE:239 | TASK:CORE:C05B:005 | AC:CORE:C05B:014 | TEST:CORE:C05B:014 | CLOSED |
-| CAN:C05B:004 | OWNED/REUSED | REQ:CORE:234; reuse REQ:CORE:009 | TASK:CORE:C05B:003/TASK:CORE:004 | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | CLOSED |
+| CAN:C05B:004 | OWNED/REUSED | REQ:CORE:234; reuse REQ:CORE:009 | TASK:CORE:C05B:003/TASK:CORE:C01:004 | AC:CORE:C05B:009 | TEST:CORE:C05B:009 | CLOSED |
 | CAN:C05B:005–008 | OWNED | REQ:CORE:228–229,235 | TASK:CORE:C05B:001/002/004 | AC:CORE:C05B:003–004/010 | TEST:CORE:C05B:003–004/010 | CLOSED |
 | CAN:C05B:009,011 | OWNED | REQ:CORE:227,230 | TASK:CORE:C05B:001/002 | AC:CORE:C05B:002/005 | TEST:CORE:C05B:002/005 | CLOSED |
 | CAN:C05B:010 | OWNED | REQ:CORE:231 | TASK:CORE:C05B:002 | AC:CORE:C05B:006 | TEST:CORE:C05B:006 | CLOSED |
 | CAN:C05B:012–016 | OWNED | REQ:CORE:232–234,240 | TASK:CORE:C05B:003/005 | AC:CORE:C05B:007–009/015 | TEST:CORE:C05B:007–009/015 | CLOSED |
 | CAN:C05B:017–019 | OWNED | REQ:CORE:235–236 | TASK:CORE:C05B:004 | AC:CORE:C05B:010–011 | TEST:CORE:C05B:010–011 | CLOSED |
 | CAN:C05B:020–022 | OWNED/DECISION | REQ:CORE:227,237; DECISION:C05B:003 | TASK:CORE:C05B:001/004 | AC:CORE:C05B:002/012 | TEST:CORE:C05B:002/012 | CLOSED_WITH_OPEN_DECISION |
-| CAN:C05B:023–024 | REUSED | REQ:CORE:008; CONTRACT:C01:02 | TASK:CORE:004/TASK:CORE:C05B:005 | AC:CORE:C01:008 | TEST:CORE:C01:008 | REUSED |
+| CAN:C05B:023–024 | REUSED | REQ:CORE:008; CONTRACT:C01:02 | TASK:CORE:C01:004/TASK:CORE:C05B:005 | AC:CORE:C01:008 | TEST:CORE:C01:008 | REUSED |
 | CAN:C05B:025 | OWNED | REQ:CORE:238 | TASK:CORE:C05B:005 | AC:CORE:C05B:013 | TEST:CORE:C05B:013 | CLOSED |
-| CAN:C05B:026–027 | REUSED | REQ:CORE:008–009; CONTRACT:C01:02/:03/:04 as applicable | TASK:CORE:004/TASK:CORE:C05B:004–005 | AC:CORE:C01:008/:009 | TEST:CORE:C01:008/:009 | REUSED |
+| CAN:C05B:026–027 | REUSED | REQ:CORE:008–009; CONTRACT:C01:02/:03/:04 as applicable | TASK:CORE:C01:004/TASK:CORE:C05B:004–005 | AC:CORE:C01:008/:009 | TEST:CORE:C01:008/:009 | REUSED |
 | CAN:C05B:028–029 | OWNED | REQ:CORE:239–240 | TASK:CORE:C05B:005 | AC:CORE:C05B:014–015 | TEST:CORE:C05B:014–015 | CLOSED |
 | CAN:C05B:030 | OWNED | REQ:CORE:226 | TASK:CORE:C05B:001 | AC:CORE:C05B:001 | TEST:CORE:C05B:001 | CLOSED |
 | CAN:C05B:031–032 | DEPENDENCY | Handoff:H05A:002 accepted by scope; C01:02 contract boundary | TASK:CORE:C05B:001/004 | Existing | Existing | ACCEPTED_BY_SCOPE |
@@ -5327,7 +5327,7 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | TASK:CORE:C10:001 / T01 | ارزیابی حق و ثبت قصد انتقال | S01 دریافت source components از قرارداد C07؛ S02 ارزیابی گیرنده/جهت با C02؛ S03 snapshot ترکیب، محدودیت و هدف را برای preview تثبیت کند. |
 | TASK:CORE:C10:002 / T02 | احراز مقصد بانکی و مجوز | S01 مدل نیازهای verification بدون انتخاب provider؛ S02 fail-closed برای نامنفی/نامعلوم/خطا؛ S03 مرز شخص/سازمان و حساب مقصد تأییدشده را با C02 تثبیت کند. |
 | TASK:CORE:C10:003 / T03 | کنترل سقف و نمایش مبلغ/کارمزد | S01 سیاست limit قابل‌پیکربندی با OPEN values؛ S02 pending capacity و race control به C12a بسپارد؛ S03 مبلغ دریافتی/fee/total و تأیید را با C13a/C13b تعریف کند. |
-| TASK:CORE:C10:004 / T04 | چرخهٔ برداشت و نتیجه | S01 preview/accept/reserve/send/capture/release states را بدون انتخاب schema مشخص کند؛ S02 unknown را نگه دارد و به inquiry C12b ارجاع دهد؛ S03 کلید تکرار امن و شناسه‌های C03/C12a/C12b را ردیابی کند. |
+| TASK:CORE:C10:004 | چرخهٔ برداشت و نتیجه | S01 preview/accept/reserve/send/capture/release states را بدون انتخاب schema مشخص کند؛ S02 unknown را نگه دارد و به inquiry C12b ارجاع دهد؛ S03 کلید تکرار امن و شناسه‌های C03/C12a/C12b را ردیابی کند. |
 | TASK:CORE:C10:005 / T05 | اصلاح، برگشت و کنترل سازمانی | S01 مسیر اشتباه/لغو و شرط رضایت/احراز؛ S02 رویداد اصلاح را به original transaction متصل کند و Handoff به C11a/C12a؛ S03 محدودیت funding سازمانی و برگشت پس از خروج وجه را هماهنگ کند. |
 
 #### AC، Test Definition و Test Caseهای C10
@@ -5438,10 +5438,10 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 | Task | دامنه | Subtaskها |
 |---|---|---|
 | TASK:CORE:C11A:001 / T01 | تعیین eligibility، مبلغ و مقصد مجاز | S01 دریافت علت/خروجی خدمت از C05a و مقدار از C13a؛ S02 تشخیص مالک پرداخت‌کننده و wallet هدف با C02/C07؛ S03 جداکردن سرویس wallet از قرارداد اشتراک C04 و سیاست تخفیف OPEN. |
-| TASK:CORE:C11A:002 / T02 | تخصیص اجزای برگشتی و حقوق منشأ | S01 بازیابی اجزای واقعی همان پرداخت؛ S02 تخصیص نسبتی و largest-remainder مطابق تصمیم مصوب؛ S03 حفظ origin/expiry/cashability/eligibility و ثبت مقدار حل‌نشده tie-break به‌عنوان OPEN؛ S04 حفظ وضعیت سقف/مصرف و منع بازنشانی آن در اثر استرداد، مگر با قاعدهٔ مصوب صریح. |
+| TASK:CORE:C11A:002 | تخصیص اجزای برگشتی و حقوق منشأ | S01 بازیابی اجزای واقعی همان پرداخت؛ S02 تخصیص نسبتی و largest-remainder مطابق تصمیم مصوب؛ S03 حفظ origin/expiry/cashability/eligibility و ثبت مقدار حل‌نشده tie-break به‌عنوان OPEN؛ S04 حفظ وضعیت سقف/مصرف و منع بازنشانی آن در اثر استرداد، مگر با قاعدهٔ مصوب صریح. |
 | TASK:CORE:C11A:003 / T03 | تفکیک restore، release و bank refund | S01 تشخیص وضعیت capture در برابر reserve؛ S02 صدور wallet-return intent به C12a با پیوند original event؛ S03 unknown/bank-return را به C12b/C04 بسپارد و آزادسازی زودرس ممنوع بماند. |
 | TASK:CORE:C11A:004 / T04 | gift compensation و دورهٔ مجوز عضو | S01 ارزیابی زمان اصلی gift expiry و نوع لغو؛ S02 جبران فقط همان gift با max(7d, remaining-at-payment)؛ S03 ظرفیت فقط همان دوره و Handoff تعامل با C11b. |
-| TASK:CORE:C11A:005 / T05 | اصلاح رسمی، تکرار امن و پذیرش | S01 پروندهٔ adjustment متصل به original transaction و مدارک؛ S02 contract idempotency/ledger ownership را به C03/C12a بدهد؛ S03 معیارهای خطا/مرزی و Handoffهای C13b/C14 را ثبت کند. |
+| TASK:CORE:C11A:005 | اصلاح رسمی، تکرار امن و پذیرش | S01 پروندهٔ adjustment متصل به original transaction و مدارک؛ S02 contract idempotency/ledger ownership را به C03/C12a بدهد؛ S03 معیارهای خطا/مرزی و Handoffهای C13b/C14 را ثبت کند. |
 
 #### AC، Test Definition و Test Caseهای C11a
 
@@ -5599,11 +5599,11 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 
 | Task | Subtaskها و خروجی برنامه‌ای | Requirements / Dependency |
 |---|---|---|
-| `TASK:CORE:C11B:001` — مجوز و تنظیمات نوبت | `.S01` مدل مفهومی مجوز صریح/لغوپذیر و قلمرو خدمت؛ `.S02` ثبت تنظیمات threshold/amount/cap به‌عنوان policy بدون ساخت schema؛ `.S03` گیت‌گذاری آمادگی ارائه‌دهنده | 001–003؛ C02، C08، C01/C03 |
-| `TASK:CORE:C11B:002` — زمان‌بندی و ظرفیت | `.S01` تعریف مرز دوره/منطقه زمانی به‌عنوان تصمیم اجرایی؛ `.S02` محاسبه ظرفیت با نوبت‌های pending و تمام سقف‌های فعال؛ `.S03` ثبت مرز/تعهد به C12a و قرارداد کنترل هم‌زمانی | 003، 008–009؛ C12a hard contract |
-| `TASK:CORE:C11B:003` — چرخه پرداخت دوره‌ای و توقف امن | `.S01` transitionهای برنامه/نوبت را بدون انتخاب فناوری مشخص کند؛ `.S02` لغو آتی را از توقف جریان جاری جدا کند؛ `.S03` وضعیت نامعلوم/قطعی را به C12b و C12a بسپارد | 002، 004–007؛ C03، C07، C09، C12a/C12b |
-| `TASK:CORE:C11B:004` — محدودیت و بودجه مصرف | `.S01` محدودیت هر عملیات/روز/ماه و تعریف دوره را مستند کند؛ `.S02` مصرف مجوز عضو را از مانده اختصاصی جدا کند؛ `.S03` تعامل انتقال مانده و اصلاح ظرفیت با C11a را ثبت کند؛ `.S04` انتخاب انتقال ظرفیت را برای هر بودجه نگه دارد و دوره بعد را فقط بر اساس انتخاب ادمین محاسبه کند | 008–010؛ C02/C07/C11a/C12a |
-| `TASK:CORE:C11B:005` — مشاهده‌پذیری و پذیرش | `.S01` شناسه Job/operation و trace مالی مشترک C01/C03 را مصرف کند؛ `.S02` رخدادهای لغو، شکست قطعی و نامعلوم را قابل تشخیص کند؛ `.S03` تست‌های مالی مرزی و Handoff را به پرونده پذیرش متصل کند | 001–009؛ C01/C03/C12a/C12b/C14 |
+| `TASK:CORE:C11B:001` — مجوز و تنظیمات نوبت | `TASK:CORE:C11B:001.S01` مدل مفهومی مجوز صریح/لغوپذیر و قلمرو خدمت؛ `TASK:CORE:C11B:001.S02` ثبت تنظیمات threshold/amount/cap به‌عنوان policy بدون ساخت schema؛ `TASK:CORE:C11B:001.S03` گیت‌گذاری آمادگی ارائه‌دهنده | 001–003؛ C02، C08، C01/C03 |
+| `TASK:CORE:C11B:002` — زمان‌بندی و ظرفیت | `TASK:CORE:C11B:002.S01` تعریف مرز دوره/منطقه زمانی به‌عنوان تصمیم اجرایی؛ `TASK:CORE:C11B:002.S02` محاسبه ظرفیت با نوبت‌های pending و تمام سقف‌های فعال؛ `TASK:CORE:C11B:002.S03` ثبت مرز/تعهد به C12a و قرارداد کنترل هم‌زمانی | 003، 008–009؛ C12a hard contract |
+| `TASK:CORE:C11B:003` — چرخه پرداخت دوره‌ای و توقف امن | `TASK:CORE:C11B:003.S01` transitionهای برنامه/نوبت را بدون انتخاب فناوری مشخص کند؛ `TASK:CORE:C11B:003.S02` لغو آتی را از توقف جریان جاری جدا کند؛ `TASK:CORE:C11B:003.S03` وضعیت نامعلوم/قطعی را به C12b و C12a بسپارد | 002، 004–007؛ C03، C07، C09، C12a/C12b |
+| `TASK:CORE:C11B:004` — محدودیت و بودجه مصرف | `TASK:CORE:C11B:004.S01` محدودیت هر عملیات/روز/ماه و تعریف دوره را مستند کند؛ `TASK:CORE:C11B:004.S02` مصرف مجوز عضو را از مانده اختصاصی جدا کند؛ `TASK:CORE:C11B:004.S03` تعامل انتقال مانده و اصلاح ظرفیت با C11a را ثبت کند؛ `TASK:CORE:C11B:004.S04` انتخاب انتقال ظرفیت را برای هر بودجه نگه دارد و دوره بعد را فقط بر اساس انتخاب ادمین محاسبه کند | 008–010؛ C02/C07/C11a/C12a |
+| `TASK:CORE:C11B:005` — مشاهده‌پذیری و پذیرش | `TASK:CORE:C11B:005.S01` شناسه Job/operation و trace مالی مشترک C01/C03 را مصرف کند؛ `TASK:CORE:C11B:005.S02` رخدادهای لغو، شکست قطعی و نامعلوم را قابل تشخیص کند؛ `TASK:CORE:C11B:005.S03` تست‌های مالی مرزی و Handoff را به پرونده پذیرش متصل کند | 001–009؛ C01/C03/C12a/C12b/C14 |
 
 | AC / Test | شرط پذیرش قابل رد | Test Caseهای برنامه‌ای (موفق؛ خطا؛ مرزی) |
 |---|---|---|
@@ -5674,11 +5674,11 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 
 | Task | Subtaskها و خروجی برنامه‌ای | Requirement / Dependency |
 |---|---|---|
-| `TASK:CORE:C12A:001` — مدل ledger و حساب‌ها | `.S01` گروه حساب‌های مصوب و تفکیک شخص/سازمان را به مدل مفهومی ببرد؛ `.S02` توازن دوطرفه و atomic transaction را به invariant تبدیل کند؛ `.S03` بدهکار/بستانکار هدیه/حساب نهایی را تصمیم باز بگذارد | 001–002؛ C07/C13a |
-| `TASK:CORE:C12A:002` — اجزای اعتبار و lineage | `.S01` contract دادهٔ component را از W:1183 استخراج کند؛ `.S02` parent/child/transfer chain و بازسازی دوطرفه را مشخص کند؛ `.S03` authorization/retention/display را به C02/C13b/C14 handoff کند | 003–005؛ C07/C02/C13b/C14 |
-| `TASK:CORE:C12A:003` — وضعیت، شناسه و تاریخچه | `.S01` سه state lifecycle را مستقل نگه دارد؛ `.S02` correction رویداد جدید linked به اصل باشد؛ `.S03` همه correlation IDs را مستقل کند و constraintهای فنی را باز بگذارد | 006–008؛ C03/C11a/C12b/C13a |
-| `TASK:CORE:C12A:004` — یکتایی، رزرو و کنترل هم‌زمانی | `.S01` idempotency اقدام و یکتایی مالی پایدار را جدا کند؛ `.S02` reserve/post/release را در قرارداد مالی تعریف کند؛ `.S03` component/balance/limit checks را در مرز ثبت اتمیک جا دهد | 009–011؛ C07/C09/C10/C11a/C11b/C12b |
-| `TASK:CORE:C12A:005` — معماری، دوام و پذیرش ledger | `.S01` انتخاب service/DB/schema/vendor را به ADR/طراحی آینده ببرد؛ `.S02` threat/access/audit/recovery controls را با C02/C03/C12b تکمیل کند؛ `.S03` test matrix مالی و گیت migration را تعریف کند، بدون اجرای migration؛ `.S04` ماتریس backup/restore و migration را برای سوابق دائمی و lineage تعریف و در محیط غیرمحصولی کامل‌بودن، توازن و روابط را با منبع تطبیق دهد؛ فناوری، تناوب و recovery objectives را به OPEN بسپارد | 001–013؛ C01/C02/C03/C12b/C13a |
+| `TASK:CORE:C12A:001` — مدل ledger و حساب‌ها | `TASK:CORE:C12A:001.S01` گروه حساب‌های مصوب و تفکیک شخص/سازمان را به مدل مفهومی ببرد؛ `TASK:CORE:C12A:001.S02` توازن دوطرفه و atomic transaction را به invariant تبدیل کند؛ `TASK:CORE:C12A:001.S03` بدهکار/بستانکار هدیه/حساب نهایی را تصمیم باز بگذارد | 001–002؛ C07/C13a |
+| `TASK:CORE:C12A:002` — اجزای اعتبار و lineage | `TASK:CORE:C12A:002.S01` contract دادهٔ component را از W:1183 استخراج کند؛ `TASK:CORE:C12A:002.S02` parent/child/transfer chain و بازسازی دوطرفه را مشخص کند؛ `TASK:CORE:C12A:002.S03` authorization/retention/display را به C02/C13b/C14 handoff کند | 003–005؛ C07/C02/C13b/C14 |
+| `TASK:CORE:C12A:003` — وضعیت، شناسه و تاریخچه | `TASK:CORE:C12A:003.S01` سه state lifecycle را مستقل نگه دارد؛ `TASK:CORE:C12A:003.S02` correction رویداد جدید linked به اصل باشد؛ `TASK:CORE:C12A:003.S03` همه correlation IDs را مستقل کند و constraintهای فنی را باز بگذارد | 006–008؛ C03/C11a/C12b/C13a |
+| `TASK:CORE:C12A:004` — یکتایی، رزرو و کنترل هم‌زمانی | `TASK:CORE:C12A:004.S01` idempotency اقدام و یکتایی مالی پایدار را جدا کند؛ `TASK:CORE:C12A:004.S02` reserve/post/release را در قرارداد مالی تعریف کند؛ `TASK:CORE:C12A:004.S03` component/balance/limit checks را در مرز ثبت اتمیک جا دهد | 009–011؛ C07/C09/C10/C11a/C11b/C12b |
+| `TASK:CORE:C12A:005` — معماری، دوام و پذیرش ledger | `TASK:CORE:C12A:005.S01` انتخاب service/DB/schema/vendor را به ADR/طراحی آینده ببرد؛ `TASK:CORE:C12A:005.S02` threat/access/audit/recovery controls را با C02/C03/C12b تکمیل کند؛ `TASK:CORE:C12A:005.S03` test matrix مالی و گیت migration را تعریف کند، بدون اجرای migration؛ `TASK:CORE:C12A:005.S04` ماتریس backup/restore و migration را برای سوابق دائمی و lineage تعریف و در محیط غیرمحصولی کامل‌بودن، توازن و روابط را با منبع تطبیق دهد؛ فناوری، تناوب و recovery objectives را به OPEN بسپارد | 001–013؛ C01/C02/C03/C12b/C13a |
 
 | AC / Test | شرط پذیرش قابل رد | Test Caseهای برنامه‌ای (موفق؛ خطا؛ مرزی) |
 |---|---|---|
@@ -5756,27 +5756,27 @@ CPA پس از قبولی مستقل هر دو بسته و بدون استنتا�
 
 | Requirement | منبع مصوب | الزام اتمی | Task |
 |---|---|---|---|
-| C12B-R01 | Wallet W:1283–1296 | تطبیق بانک و دفترکل به‌صورت خودکار حداقل روزانه انجام و هر اجرا با زمان و نتیجه قابل ممیزی ثبت شود. | C12B-T01 |
-| C12B-R02 | Wallet W:1283–1296 | هر مغایرت پرونده دارای شناسه‌های مرتبط، مدرک، علت، عامل، وضعیت و ارجاع به مسئول عملیات مالی داشته باشد؛ اصلاح حدسی/بی‌سابقه ممنوع است. | C12B-T01 |
-| C12B-R03 | Wallet W:1297–1310 | برش روزانه، منطقه زمانی، وجوه در راه، هدیه و اقلام باز جدا گزارش شوند؛ فرمول پوشش تعهد تا تایید متخصص OPEN بماند. | C12B-T02 |
-| C12B-R04 | Wallet W:604–626; 1205–1219 | نتیجه نامعلوم بانکی ابتدا استعلام و تطبیق شود؛ موفق یا ناموفق فرض نشود. | C12B-T03 |
-| C12B-R05 | Wallet W:1363–1376; Blueprint B:1095–1101 | بازیابی همان عملیات پس از بررسی وضعیت و با Retry محدود و امن انجام شود؛ تعداد، فاصله، مهلت و escalation باز بمانند؛ retry مجوز عملیات تازه نیست. | C12B-T03 |
-| C12B-R06 | Wallet W:630–643; 1235–1250 | هویت پایدار پیام/رویداد پردازش‌شده حفظ شود تا callback، replay یا status inquiry اثر مالی دوم ایجاد نکند؛ مالک یکتایی و posting دفترکل C12a است. | C12B-T03 |
-| C12B-R07 | Wallet W:1205–1219; Blueprint B:1095–1096 | وضعیت خدمت، بانک و دفترکل مستقل اما مرتبط بمانند؛ C12b نتیجه reconciliation را به قرارداد C12a متصل می‌کند و state دفترکل را تغییر نمی‌دهد. | C12B-T04 |
-| C12B-R08 | Wallet W:795–807; 1363–1376 | در نتیجه نامعلوم فقط مبلغ در معرض تعهد نگه داشته شود؛ آزادسازی/قطعی‌کردن پس از روشن‌شدن وضعیت و با مالکیت C12a/C11b انجام شود. | C12B-T04 |
-| C12B-R09 | Wallet W:1211–1219; 1325–1336 | شواهد مالی و منشأ دائمی بمانند؛ مشاهده و خروجی محدود و با audit دسترسی باشد؛ ثبت قطعی حذف/بازنویسی نشود. | C12B-T05 |
-| C12B-R10 | Wallet W:1337–1348 | کسری پوشش، مغایرت مهم، نتیجه نامعلوم طولانی و دسترسی مشکوک به هشدار متناسب متصل شوند؛ آستانه/کانال/مالک/تشدید باز و زیرساخت اعلان Handoff به C14 است. | C12B-T05 |
-| C12B-R11 | Wallet W:1349–1362 | ردیابی شواهد جایگزین تکالیف AML نیست؛ سامانه مستقل AML یا ادعای انطباق حقوقی ایجاد نشود و ارجاع به فرایند موجود ثبت شود. | C12B-T05 |
+| C12B-R01 | Wallet W:1283–1296 | تطبیق بانک و دفترکل به‌صورت خودکار حداقل روزانه انجام و هر اجرا با زمان و نتیجه قابل ممیزی ثبت شود. | TASK:CORE:C12B:001 |
+| C12B-R02 | Wallet W:1283–1296 | هر مغایرت پرونده دارای شناسه‌های مرتبط، مدرک، علت، عامل، وضعیت و ارجاع به مسئول عملیات مالی داشته باشد؛ اصلاح حدسی/بی‌سابقه ممنوع است. | TASK:CORE:C12B:001 |
+| C12B-R03 | Wallet W:1297–1310 | برش روزانه، منطقه زمانی، وجوه در راه، هدیه و اقلام باز جدا گزارش شوند؛ فرمول پوشش تعهد تا تایید متخصص OPEN بماند. | TASK:CORE:C12B:002 |
+| C12B-R04 | Wallet W:604–626; 1205–1219 | نتیجه نامعلوم بانکی ابتدا استعلام و تطبیق شود؛ موفق یا ناموفق فرض نشود. | TASK:CORE:C12B:003 |
+| C12B-R05 | Wallet W:1363–1376; Blueprint B:1095–1101 | بازیابی همان عملیات پس از بررسی وضعیت و با Retry محدود و امن انجام شود؛ تعداد، فاصله، مهلت و escalation باز بمانند؛ retry مجوز عملیات تازه نیست. | TASK:CORE:C12B:003 |
+| C12B-R06 | Wallet W:630–643; 1235–1250 | هویت پایدار پیام/رویداد پردازش‌شده حفظ شود تا callback، replay یا status inquiry اثر مالی دوم ایجاد نکند؛ مالک یکتایی و posting دفترکل C12a است. | TASK:CORE:C12B:003 |
+| C12B-R07 | Wallet W:1205–1219; Blueprint B:1095–1096 | وضعیت خدمت، بانک و دفترکل مستقل اما مرتبط بمانند؛ C12b نتیجه reconciliation را به قرارداد C12a متصل می‌کند و state دفترکل را تغییر نمی‌دهد. | TASK:CORE:C12B:004 |
+| C12B-R08 | Wallet W:795–807; 1363–1376 | در نتیجه نامعلوم فقط مبلغ در معرض تعهد نگه داشته شود؛ آزادسازی/قطعی‌کردن پس از روشن‌شدن وضعیت و با مالکیت C12a/C11b انجام شود. | TASK:CORE:C12B:004 |
+| C12B-R09 | Wallet W:1211–1219; 1325–1336 | شواهد مالی و منشأ دائمی بمانند؛ مشاهده و خروجی محدود و با audit دسترسی باشد؛ ثبت قطعی حذف/بازنویسی نشود. | TASK:CORE:C12B:005 |
+| C12B-R10 | Wallet W:1337–1348 | کسری پوشش، مغایرت مهم، نتیجه نامعلوم طولانی و دسترسی مشکوک به هشدار متناسب متصل شوند؛ آستانه/کانال/مالک/تشدید باز و زیرساخت اعلان Handoff به C14 است. | TASK:CORE:C12B:005 |
+| C12B-R11 | Wallet W:1349–1362 | ردیابی شواهد جایگزین تکالیف AML نیست؛ سامانه مستقل AML یا ادعای انطباق حقوقی ایجاد نشود و ارجاع به فرایند موجود ثبت شود. | TASK:CORE:C12B:005 |
 
 **Enabler:** EN-C12B-01 — Reconciliation and safe financial recovery؛ تطبیق قابل ممیزی و تعیین تکلیف امن عملیات نامعلوم، بدون تصاحب دفترکل یا سیاست بانکی.
 
 | Task | عنوان | Requirement | Subtasks |
 |---|---|---|---|
-| C12B-T01 | تطبیق روزانه و پرونده مغایرت | R01–R02 | C12B-T01.01 ورودی/قرارداد؛ .02 مقایسه و پرونده؛ .03 علت، عامل و معیار بستن پرونده |
-| C12B-T02 | برش زمانی و پوشش تعهد | R03 | C12B-T02.01 ثبت منطقه زمانی؛ .02 تفکیک اقلام؛ .03 اجرای فرمول فقط پس از تایید متخصص |
-| C12B-T03 | بازیابی و جلوگیری از تکرار | R04–R06 | C12B-T03.01 inquiry قبل از retry؛ .02 شناسه پایدار؛ .03 صف unresolved و توقف مطابق سیاست |
-| C12B-T04 | پیوند وضعیت‌ها و تعهد باز | R07–R08 | C12B-T04.01 چرخه‌های جدا؛ .02 پیوند به C12a؛ .03 محدودکردن اثر نامعلوم به exposure |
-| C12B-T05 | سوابق، مجوز و هشدار | R09–R11 | C12B-T05.01 نگهداری؛ .02 دسترسی/audit؛ .03 هشدار C14 و ارجاع فرایند AML |
+| TASK:CORE:C12B:001 | تطبیق روزانه و پرونده مغایرت | R01–R02 | TASK:CORE:C12B:001.S01 ورودی/قرارداد؛ TASK:CORE:C12B:001.S02 مقایسه و پرونده؛ TASK:CORE:C12B:001.S03 علت، عامل و معیار بستن پرونده |
+| TASK:CORE:C12B:002 | برش زمانی و پوشش تعهد | R03 | TASK:CORE:C12B:002.S01 ثبت منطقه زمانی؛ TASK:CORE:C12B:002.S02 تفکیک اقلام؛ TASK:CORE:C12B:002.S03 اجرای فرمول فقط پس از تایید متخصص |
+| TASK:CORE:C12B:003 | بازیابی و جلوگیری از تکرار | R04–R06 | TASK:CORE:C12B:003.S01 inquiry قبل از retry؛ TASK:CORE:C12B:003.S02 شناسه پایدار؛ TASK:CORE:C12B:003.S03 صف unresolved و توقف مطابق سیاست |
+| TASK:CORE:C12B:004 | پیوند وضعیت‌ها و تعهد باز | R07–R08 | TASK:CORE:C12B:004.S01 چرخه‌های جدا؛ TASK:CORE:C12B:004.S02 پیوند به C12a؛ TASK:CORE:C12B:004.S03 محدودکردن اثر نامعلوم به exposure |
+| TASK:CORE:C12B:005 | سوابق، مجوز و هشدار | R09–R11 | TASK:CORE:C12B:005.S01 نگهداری؛ TASK:CORE:C12B:005.S02 دسترسی/audit؛ TASK:CORE:C12B:005.S03 هشدار C14 و ارجاع فرایند AML |
 
 **AC/Test:** برای هر یک از R01–R11 یک AC و Test Definition مستقل با همان شناسه برقرار است: تطبیق دوره‌ای قابل تکرار؛ پرونده با مدارک و عامل؛ cut بدون جعل فرمول؛ نتیجه نامعلوم بدون فرض؛ retry همان درخواست؛ replay بدون اثر دوم؛ وضعیت‌های مستقل؛ نگهداری exposure تا resolution؛ سابقه و access audit؛ هشدار مادی با تنظیمات باز؛ و ارجاع AML بدون ادعای compliance.
 
@@ -5860,30 +5860,30 @@ Graph-First مشترک گره‌های Wallet در W:1283–1502 و Blueprint د
 
 | Requirement | منبع مصوب | الزام اتمی | Task |
 |---|---|---|---|
-| C13A-R01 | Blueprint B:1019–1027; 1109–1120 | سه جریان اشتراک، تعرفه هر اجرای دستیار و مصرف مشاور تفکیک شوند؛ چرخه و قیمت اشتراک در C04 می‌ماند. | C13A-T01 |
-| C13A-R02 | Wallet W:1385–1398; Blueprint B:1118–1126 | قیمت مشاور از واحد پرامپت قابل‌صورتحساب و شدت متناظر استفاده کند؛ تجمیع شدت‌های متفاوت برای هر واحد فقط یک‌بار صورتحساب شود؛ فراخوانی درونی، Retry و زیرگام مدل پرامپت مشتری محسوب نشوند مگر واحد قابل‌صورتحساب جداگانه تعریف شده باشد؛ metric، ضریب و نرخ عددی باز بمانند. | C13A-T01 |
-| C13A-R03 | Wallet W:1385–1398; Blueprint B:1120 | هزینه دستیار برابر پایهٔ عملیات به‌علاوهٔ نصف هزینهٔ مشاوره‌های قابل‌صورتحساب همان عملیات باشد؛ حاشیهٔ ۲۰٪ فقط سقف افزایش هزینهٔ واقعیِ قابل‌دریافت است، نه fee/سود یا مبلغ قطعی؛ فقط مبلغ محاسبه‌شدهٔ قابل‌دریافت کسر شود. | C13A-T01 |
-| C13A-R04 | Wallet W:1399–1412; Blueprint B:1138 | نرخ اجرا در آغاز snapshot شود؛ اجرای پیوسته همان مبنا را نگه دارد؛ اجرای تازه نرخ زمان شروع را بگیرد؛ گذشته repricing نشود. | C13A-T02 |
-| C13A-R05 | Wallet W:1413–1426; 1211–1234 | انتظار، replay، پاسخ قبلی یا inquiry به‌تنهایی اجرای قابل صورتحساب تازه نسازد؛ نتیجه نامعلوم تحت C12b است. | C13A-T02 |
-| C13A-R06 | Wallet W:1427–1442; Blueprint B:1124–1126 | مقدار مصرف واقعی، تعرفه معتبر، ضریب محاسبه و هزینه داخلی/قیمت مشتری جدا و به شناسه/نسخه اجرا وصل باشند تا محاسبه بازسازی شود؛ metric و نرخ عددی OPEN بمانند. | C13A-T02 |
-| C13A-R07 | Wallet W:1443–1456 | لغو مشتری فقط مصرف مجاز/خروجی قابل دریافت را محاسبه کند؛ شکست داخلی بدون خروجی هزینه مشتری ندارد؛ unknown قبل از تعیین وضعیت قطعی/آزاد فرض نشود. | C13A-T03 |
-| C13A-R08 | Wallet W:1457–1470 | اجرای اصلاحی همان دامنه برای خطای شهاب هزینه اضافه مشتری نداشته باشد؛ هزینه داخلی با نرخ روز به اصل و علت وصل شود؛ درخواست مستقل مستثناست. | C13A-T03 |
-| C13A-R09 | Wallet W:1475–1488; 1283–1310 | بدهی تامین‌کننده از پرداخت بانکی جدا باشد؛ تسویه پس از تطبیق و طبق قرارداد خودش انجام شود؛ debit دوم مشتری رخ ندهد. | C13A-T03 |
-| C13A-R10 | Wallet W:671–687; 1489–1502 | فاکتور رسمی سازمانی پیش از پرداخت در مسیرهای مصوب صادر و به درخواست شارژ، پرداخت، مصرف و اصلاح مرتبط شود. | C13A-T04 |
-| C13A-R11 | Wallet W:677–683; 1491–1497 | فاکتور به‌تنهایی وصول، اعتبار قابل‌مصرف یا مصرف خدمت را اثبات نکند؛ این رخدادها مستقل و مرتبط بمانند. | C13A-T04 |
-| C13A-R12 | Blueprint B:1095–1103; 1704–1708 | دفترکل داخلی، خروجی نرم‌افزار حسابداری، فاکتور مشتری و صورتحساب مالیاتی چهار خروجی متمایزند؛ نوع نهایی OPEN است. | C13A-T05 |
-| C13A-R13 | Wallet W:1491–1502; Blueprint B:1097–1103 | زمان شناسایی درآمد، taxonomy حسابداری و مالیات با بررسی تخصصی مقررات ایران تعیین شوند؛ برنامه حکم جدید نسازد. | C13A-T05 |
-| C13A-R14 | Wallet W:1431–1441; Blueprint B:1074–1085; 2142–2155 | نرخ/metric/Monitoring/provider و دامنه فعال‌سازی FD-02/03 در دفتر OPEN بمانند؛ گزینه‌ای ضمنی انتخاب نشود. | C13A-T05 |
+| C13A-R01 | Blueprint B:1019–1027; 1109–1120 | سه جریان اشتراک، تعرفه هر اجرای دستیار و مصرف مشاور تفکیک شوند؛ چرخه و قیمت اشتراک در C04 می‌ماند. | TASK:CORE:C13A:001 |
+| C13A-R02 | Wallet W:1385–1398; Blueprint B:1118–1126 | قیمت مشاور از واحد پرامپت قابل‌صورتحساب و شدت متناظر استفاده کند؛ تجمیع شدت‌های متفاوت برای هر واحد فقط یک‌بار صورتحساب شود؛ فراخوانی درونی، Retry و زیرگام مدل پرامپت مشتری محسوب نشوند مگر واحد قابل‌صورتحساب جداگانه تعریف شده باشد؛ metric، ضریب و نرخ عددی باز بمانند. | TASK:CORE:C13A:001 |
+| C13A-R03 | Wallet W:1385–1398; Blueprint B:1120 | هزینه دستیار برابر پایهٔ عملیات به‌علاوهٔ نصف هزینهٔ مشاوره‌های قابل‌صورتحساب همان عملیات باشد؛ حاشیهٔ ۲۰٪ فقط سقف افزایش هزینهٔ واقعیِ قابل‌دریافت است، نه fee/سود یا مبلغ قطعی؛ فقط مبلغ محاسبه‌شدهٔ قابل‌دریافت کسر شود. | TASK:CORE:C13A:001 |
+| C13A-R04 | Wallet W:1399–1412; Blueprint B:1138 | نرخ اجرا در آغاز snapshot شود؛ اجرای پیوسته همان مبنا را نگه دارد؛ اجرای تازه نرخ زمان شروع را بگیرد؛ گذشته repricing نشود. | TASK:CORE:C13A:002 |
+| C13A-R05 | Wallet W:1413–1426; 1211–1234 | انتظار، replay، پاسخ قبلی یا inquiry به‌تنهایی اجرای قابل صورتحساب تازه نسازد؛ نتیجه نامعلوم تحت C12b است. | TASK:CORE:C13A:002 |
+| C13A-R06 | Wallet W:1427–1442; Blueprint B:1124–1126 | مقدار مصرف واقعی، تعرفه معتبر، ضریب محاسبه و هزینه داخلی/قیمت مشتری جدا و به شناسه/نسخه اجرا وصل باشند تا محاسبه بازسازی شود؛ metric و نرخ عددی OPEN بمانند. | TASK:CORE:C13A:002 |
+| C13A-R07 | Wallet W:1443–1456 | لغو مشتری فقط مصرف مجاز/خروجی قابل دریافت را محاسبه کند؛ شکست داخلی بدون خروجی هزینه مشتری ندارد؛ unknown قبل از تعیین وضعیت قطعی/آزاد فرض نشود. | TASK:CORE:C13A:003 |
+| C13A-R08 | Wallet W:1457–1470 | اجرای اصلاحی همان دامنه برای خطای شهاب هزینه اضافه مشتری نداشته باشد؛ هزینه داخلی با نرخ روز به اصل و علت وصل شود؛ درخواست مستقل مستثناست. | TASK:CORE:C13A:003 |
+| C13A-R09 | Wallet W:1475–1488; 1283–1310 | بدهی تامین‌کننده از پرداخت بانکی جدا باشد؛ تسویه پس از تطبیق و طبق قرارداد خودش انجام شود؛ debit دوم مشتری رخ ندهد. | TASK:CORE:C13A:003 |
+| C13A-R10 | Wallet W:671–687; 1489–1502 | فاکتور رسمی سازمانی پیش از پرداخت در مسیرهای مصوب صادر و به درخواست شارژ، پرداخت، مصرف و اصلاح مرتبط شود. | TASK:CORE:C13A:004 |
+| C13A-R11 | Wallet W:677–683; 1491–1497 | فاکتور به‌تنهایی وصول، اعتبار قابل‌مصرف یا مصرف خدمت را اثبات نکند؛ این رخدادها مستقل و مرتبط بمانند. | TASK:CORE:C13A:004 |
+| C13A-R12 | Blueprint B:1095–1103; 1704–1708 | دفترکل داخلی، خروجی نرم‌افزار حسابداری، فاکتور مشتری و صورتحساب مالیاتی چهار خروجی متمایزند؛ نوع نهایی OPEN است. | TASK:CORE:C13A:005 |
+| C13A-R13 | Wallet W:1491–1502; Blueprint B:1097–1103 | زمان شناسایی درآمد، taxonomy حسابداری و مالیات با بررسی تخصصی مقررات ایران تعیین شوند؛ برنامه حکم جدید نسازد. | TASK:CORE:C13A:005 |
+| C13A-R14 | Wallet W:1431–1441; Blueprint B:1074–1085; 2142–2155 | نرخ/metric/Monitoring/provider و دامنه فعال‌سازی FD-02/03 در دفتر OPEN بمانند؛ گزینه‌ای ضمنی انتخاب نشود. | TASK:CORE:C13A:005 |
 
 **Enabler:** EN-C13A-01 — Service pricing, supplier settlement and accounting evidence؛ قیمت و ثبت/تسویه خدمت را بدون تصاحب دفترکل یا تصویب تصمیمات باز قابل ردیابی می‌کند.
 
 | Task | عنوان | Requirement | سه Subtask |
 |---|---|---|---|
-| C13A-T01 | مدل و نسخه تعرفه | R01–R03 | .01 مالکیت C04/C13a؛ .02 نسخه نرخ و مرز واحد قابل صورتحساب؛ .03 قید نیم‌نرخ و سقف 20% |
-| C13A-T02 | اندازه‌گیری و snapshot اجرا | R04–R06 | .01 شناسه اجرا/نسخه؛ .02 replay در برابر اجرای تازه؛ .03 جداسازی مصرف/هزینه/قیمت و ثبت open metric |
-| C13A-T03 | شکست، اصلاح و پرداخت تامین‌کننده | R07–R09 | .01 مسیر لغو و خروجی؛ .02 هزینه اصلاح داخلی؛ .03 بدهی، تطبیق و پرداخت قراردادی |
-| C13A-T04 | پیوند اسناد سازمانی | R10–R11 | .01 فاکتور پیش‌پرداخت؛ .02 ارتباط درخواست/وصول/اعتبار؛ .03 کنترل عدم استنتاج وصول از فاکتور |
-| C13A-T05 | ماتریس رویداد و تصمیم تخصصی | R12–R14 | .01 تفکیک انواع سند؛ .02 رویداد→ثبت برای بررسی؛ .03 ثبت OPEN و تایید حسابداری/حقوقی پیش از فعال‌سازی |
+| TASK:CORE:C13A:001 | مدل و نسخه تعرفه | R01–R03 | TASK:CORE:C13A:001.S01 مالکیت C04/C13a؛ TASK:CORE:C13A:001.S02 نسخه نرخ و مرز واحد قابل صورتحساب؛ TASK:CORE:C13A:001.S03 قید نیم‌نرخ و سقف 20% |
+| TASK:CORE:C13A:002 | اندازه‌گیری و snapshot اجرا | R04–R06 | TASK:CORE:C13A:002.S01 شناسه اجرا/نسخه؛ TASK:CORE:C13A:002.S02 replay در برابر اجرای تازه؛ TASK:CORE:C13A:002.S03 جداسازی مصرف/هزینه/قیمت و ثبت open metric |
+| TASK:CORE:C13A:003 | شکست، اصلاح و پرداخت تامین‌کننده | R07–R09 | TASK:CORE:C13A:003.S01 مسیر لغو و خروجی؛ TASK:CORE:C13A:003.S02 هزینه اصلاح داخلی؛ TASK:CORE:C13A:003.S03 بدهی، تطبیق و پرداخت قراردادی |
+| TASK:CORE:C13A:004 | پیوند اسناد سازمانی | R10–R11 | TASK:CORE:C13A:004.S01 فاکتور پیش‌پرداخت؛ TASK:CORE:C13A:004.S02 ارتباط درخواست/وصول/اعتبار؛ TASK:CORE:C13A:004.S03 کنترل عدم استنتاج وصول از فاکتور |
+| TASK:CORE:C13A:005 | ماتریس رویداد و تصمیم تخصصی | R12–R14 | TASK:CORE:C13A:005.S01 تفکیک انواع سند؛ TASK:CORE:C13A:005.S02 رویداد→ثبت برای بررسی؛ TASK:CORE:C13A:005.S03 ثبت OPEN و تایید حسابداری/حقوقی پیش از فعال‌سازی |
 
 **AC/Test:** یک AC و Test Definition مستقل برای هر R01–R14: تفکیک جریان درآمد؛ تعرفه مشاور بدون metric مختلق؛ نیم‌نرخ/سقف به عنوان سقف؛ نرخ snapshot؛ replay بدون charge؛ هزینه/قیمت تفکیک‌شده؛ لغو/شکست صحیح؛ اصلاح بدون هزینه اضافه؛ تسویه پس از تطبیق؛ فاکتور قبل از پرداخت؛ فاکتور غیراثبات وصول؛ چهار سند جدا؛ tax/revenue-recognition باز؛ و provider/metric/open parameters بدون default.
 
@@ -5988,22 +5988,22 @@ Graph-First مشترک بر Blueprint V1.6 و Wallet V0.20 و گراف موجو�
 
 | Requirement / Source Unit | نیازمندی اتمی | Story | Task و سه Subtask | Dependency / مالک |
 |---|---|---|---|---|
-| C13B-R01 / W:1523–1527,B:1453 | تاریخچه عملیات مالی پایدار، شناسه‌دار، زمان‌دار و source-owned نمایش داده شود | C13B-S01 سابقه عملیات مجاز را بفهمد | C13B-T01 تاریخچه: C13B-T01.S01 read contract؛ C13B-T01.S02 type/status/time filters؛ C13B-T01.S03 empty/pagination state | C12a data؛ C03 API؛ C02 authorization |
-| C13B-R02 / W:1523–1533 | فیلتر نوع/وضعیت/بازه هم‌زمان و در scope باشد | C13B-S01 | C13B-T01.S02–C13B-T01.S03، query boundary و scope | C02؛ سازمان فقط در scope مجاز |
-| C13B-R03 / W:1523–1533,1571–1581 | رسید پرداخت، فاکتور و رسید خدمت نوع و وضعیت جدا داشته باشند | C13B-S02 مدرک عملیات را پیدا کند | C13B-T02 رسید: C13B-T02.S01 linked reference؛ C13B-T02.S02 document type؛ C13B-T02.S03 صادرنشده/دسترس‌ناپذیر | C04/C13a سند اشتراک/حسابداری؛ C12a پرداخت |
-| C13B-R04 / W:1331,1523–1533 | جزئیات رسید به operation/provenance اصلی لینک باشد، دفترکل را بازسازی نکند | C13B-S02 | C13B-T02.S01–C13B-T02.S03؛ حداقل فیلد و trace | C12a provenance؛ C12b bank result |
-| C13B-R05 / W:208,244,1331; B:1393–1444 | هر خواندن scope شخص/سازمان/عضو سابق را با تصمیم C02 رعایت کند | C13B-S03 فقط دامنه مجاز را ببیند | C13B-T03 دسترسی: C13B-T03.S01 recheck؛ C13B-T03.S02 tenant/member scope؛ C13B-T03.S03 audit result | C02 owner تصمیم/ممیزی؛ ACL موازی ممنوع |
-| C13B-R06 / W:1331,1523–1533,1565–1569 | export و trace path فقط با capability مصوب و scope مجاز؛ مسیر/منشأ از C12a؛ نمای مشتری محدود؛ گزارش داخلی/مشکوک افشا نشود | C13B-S03 | C13B-T03.S02–C13B-T03.S03؛ خروجی محدود، source-path, audit و fail-closed | C02؛ قالب/نقش export OPEN |
-| C13B-R07 / W:1547–1557 | پرونده پشتیبانی به تراکنش همان tenant متصل باشد؛ پرونده اثر مالی نسازد | C13B-S04 پیگیری تراکنش | C13B-T04 پرونده: C13B-T04.S01 transaction link؛ C13B-T04.S02 شرح کمینه؛ C13B-T04.S03 validate tenant/reference | C12b outcome؛ C11a اصلاح؛ C02 دسترسی |
-| C13B-R08 / W:1547–1557 | پرونده مالک و وضعیت دارد؛ SLA عددی بدون ظرفیت/تصویب وعده داده نشود | C13B-S04 | C13B-T04.S01–C13B-T04.S03؛ نمایش owner/state معتبر | صف/مالک/SLA OPEN؛ C14 اعلان |
-| C13B-R09 / W:1547–1557 | شاهد فقط در صورت نیاز، کمینه و بدون secret/OTP/token | C13B-S04 | C13B-T04.S02–C13B-T04.S03؛ attachment/text controls | C02 access/audit؛ retention فنی C14 |
-| C13B-R10 / W:610,1369–1380; B:918 | unknown از failure قطعی جدا؛ inquiry قبل از retry | C13B-S05 وضعیت نامعلوم امن پیگیری شود | C13B-T05 بازیابی: C13B-T05.S01 source state؛ C13B-T05.S02 inquiry؛ C13B-T05.S03 ارجاع امن | C12b نتیجه؛ C11b/owner Job؛ C12a ledger |
-| C13B-R11 / W:1331,1369–1380 | refund/correction رویداد linked باشد؛ اصل immutable | C13B-S05 | C13B-T05.S01–C13B-T05.S03؛ linked correction view | C11a correction؛ C12a entries؛ C12b reconcile |
-| C13B-R12 / W:1535–1545 | read/notification رضایت پرداخت/تمدید/تغییر قیمت نیست | C13B-S06 پیام مالی را بی‌ابهام ببیند | C13B-T06 نمایش پیام: C13B-T06.S01 consume C14؛ C13B-T06.S02 authorized link؛ C13B-T06.S03 prevent implied consent | C14 delivery/history؛ C04 price؛ C02 permission |
-| C13B-R13 / W:1507–1511؛ C07 canonical states | نمای اصلی مانده، spendable/reserved/withdrawable را جدا و از منبع مالک نشان دهد؛ UI مانده را بازسازی نکند | C13B-S07 مانده را بفهمد | C13B-T07.S01 canonical balance read؛ C13B-T07.S02 separate states؛ C13B-T07.S03 stale/unknown explicit | C07/C12a owner؛ C02 read scope |
-| C13B-R14 / W:1513–1517 | جزئیات هر جزء، منشأ/انقضا/محاسبه را از رکورد مالک نشان دهد | C13B-S07 | C13B-T07.S01–S03؛ provenance drilldown | C07/C12a source fields؛ UI مالی را تعیین نمی‌کند |
-| C13B-R15 / W:1517–1521؛ C13a snapshot | برآورد اولیه، سقف افزایش خودکار و سهم مشاوره قابل فهم و از مبلغ نهایی متمایز باشد؛ snapshot اجرای جاری حفظ شود | C13B-S07 | C13B-T07.S01 pricing snapshot؛ C13B-T07.S02 estimate/cap/advice share؛ C13B-T07.S03 estimate versus final charge | C13a quote owner؛ C09 reserve؛ بدون عددسازی |
-| C13B-R16 / W:1565–1569؛ C12a provenance | نقش رسیدگی مجاز، مسیر زمانی/شبکه‌ای رویدادها و منشأ/سهم‌ها را فقط با مجوز و ثبت دسترسی ببیند؛ نمای عادی مشتری محدود به سوابق خودش بماند؛ گزارش داخلی/مشکوک به مشتری افشا نشود | C13B-S08 مسیر مالی مجاز را بررسی کند | TASK:CORE:C13B:008 / C13B-T08.S01 resolve current investigator capability؛ C13B-T08.S02 render linked source path/proportions from C12a؛ C13B-T08.S03 scope/audit and suppress internal report | C02 permission/audit؛ C12a source chain؛ role/export policy OPEN |
+| C13B-R01 / W:1523–1527,B:1453 | تاریخچه عملیات مالی پایدار، شناسه‌دار، زمان‌دار و source-owned نمایش داده شود | C13B-S01 سابقه عملیات مجاز را بفهمد | TASK:CORE:C13B:001 تاریخچه: TASK:CORE:C13B:001.S01 read contract؛ TASK:CORE:C13B:001.S02 type/status/time filters؛ TASK:CORE:C13B:001.S03 empty/pagination state | C12a data؛ C03 API؛ C02 authorization |
+| C13B-R02 / W:1523–1533 | فیلتر نوع/وضعیت/بازه هم‌زمان و در scope باشد | C13B-S01 | TASK:CORE:C13B:001.S02–TASK:CORE:C13B:001.S03، query boundary و scope | C02؛ سازمان فقط در scope مجاز |
+| C13B-R03 / W:1523–1533,1571–1581 | رسید پرداخت، فاکتور و رسید خدمت نوع و وضعیت جدا داشته باشند | C13B-S02 مدرک عملیات را پیدا کند | TASK:CORE:C13B:002 رسید: TASK:CORE:C13B:002.S01 linked reference؛ TASK:CORE:C13B:002.S02 document type؛ TASK:CORE:C13B:002.S03 صادرنشده/دسترس‌ناپذیر | C04/C13a سند اشتراک/حسابداری؛ C12a پرداخت |
+| C13B-R04 / W:1331,1523–1533 | جزئیات رسید به operation/provenance اصلی لینک باشد، دفترکل را بازسازی نکند | C13B-S02 | TASK:CORE:C13B:002.S01–TASK:CORE:C13B:002.S03؛ حداقل فیلد و trace | C12a provenance؛ C12b bank result |
+| C13B-R05 / W:208,244,1331; B:1393–1444 | هر خواندن scope شخص/سازمان/عضو سابق را با تصمیم C02 رعایت کند | C13B-S03 فقط دامنه مجاز را ببیند | TASK:CORE:C13B:003 دسترسی: TASK:CORE:C13B:003.S01 recheck؛ TASK:CORE:C13B:003.S02 tenant/member scope؛ TASK:CORE:C13B:003.S03 audit result | C02 owner تصمیم/ممیزی؛ ACL موازی ممنوع |
+| C13B-R06 / W:1331,1523–1533,1565–1569 | export و trace path فقط با capability مصوب و scope مجاز؛ مسیر/منشأ از C12a؛ نمای مشتری محدود؛ گزارش داخلی/مشکوک افشا نشود | C13B-S03 | TASK:CORE:C13B:003.S02–TASK:CORE:C13B:003.S03؛ خروجی محدود، source-path, audit و fail-closed | C02؛ قالب/نقش export OPEN |
+| C13B-R07 / W:1547–1557 | پرونده پشتیبانی به تراکنش همان tenant متصل باشد؛ پرونده اثر مالی نسازد | C13B-S04 پیگیری تراکنش | TASK:CORE:C13B:004 پرونده: TASK:CORE:C13B:004.S01 transaction link؛ TASK:CORE:C13B:004.S02 شرح کمینه؛ TASK:CORE:C13B:004.S03 validate tenant/reference | C12b outcome؛ C11a اصلاح؛ C02 دسترسی |
+| C13B-R08 / W:1547–1557 | پرونده مالک و وضعیت دارد؛ SLA عددی بدون ظرفیت/تصویب وعده داده نشود | C13B-S04 | TASK:CORE:C13B:004.S01–TASK:CORE:C13B:004.S03؛ نمایش owner/state معتبر | صف/مالک/SLA OPEN؛ C14 اعلان |
+| C13B-R09 / W:1547–1557 | شاهد فقط در صورت نیاز، کمینه و بدون secret/OTP/token | C13B-S04 | TASK:CORE:C13B:004.S02–TASK:CORE:C13B:004.S03؛ attachment/text controls | C02 access/audit؛ retention فنی C14 |
+| C13B-R10 / W:610,1369–1380; B:918 | unknown از failure قطعی جدا؛ inquiry قبل از retry | C13B-S05 وضعیت نامعلوم امن پیگیری شود | TASK:CORE:C13B:005 بازیابی: TASK:CORE:C13B:005.S01 source state؛ TASK:CORE:C13B:005.S02 inquiry؛ TASK:CORE:C13B:005.S03 ارجاع امن | C12b نتیجه؛ C11b/owner Job؛ C12a ledger |
+| C13B-R11 / W:1331,1369–1380 | refund/correction رویداد linked باشد؛ اصل immutable | C13B-S05 | TASK:CORE:C13B:005.S01–TASK:CORE:C13B:005.S03؛ linked correction view | C11a correction؛ C12a entries؛ C12b reconcile |
+| C13B-R12 / W:1535–1545 | read/notification رضایت پرداخت/تمدید/تغییر قیمت نیست | C13B-S06 پیام مالی را بی‌ابهام ببیند | TASK:CORE:C13B:006 نمایش پیام: TASK:CORE:C13B:006.S01 consume C14؛ TASK:CORE:C13B:006.S02 authorized link؛ TASK:CORE:C13B:006.S03 prevent implied consent | C14 delivery/history؛ C04 price؛ C02 permission |
+| C13B-R13 / W:1507–1511؛ C07 canonical states | نمای اصلی مانده، spendable/reserved/withdrawable را جدا و از منبع مالک نشان دهد؛ UI مانده را بازسازی نکند | C13B-S07 مانده را بفهمد | TASK:CORE:C13B:007 / مانده و اجزای آن: TASK:CORE:C13B:007.S01 canonical balance read؛ TASK:CORE:C13B:007.S02 separate states؛ TASK:CORE:C13B:007.S03 stale/unknown explicit | C07/C12a owner؛ C02 read scope |
+| C13B-R14 / W:1513–1517 | جزئیات هر جزء، منشأ/انقضا/محاسبه را از رکورد مالک نشان دهد | C13B-S07 | TASK:CORE:C13B:007.S01–S03؛ provenance drilldown | C07/C12a source fields؛ UI مالی را تعیین نمی‌کند |
+| C13B-R15 / W:1517–1521؛ C13a snapshot | برآورد اولیه، سقف افزایش خودکار و سهم مشاوره قابل فهم و از مبلغ نهایی متمایز باشد؛ snapshot اجرای جاری حفظ شود | C13B-S07 | TASK:CORE:C13B:007.S01 pricing snapshot؛ TASK:CORE:C13B:007.S02 estimate/cap/advice share؛ TASK:CORE:C13B:007.S03 estimate versus final charge | C13a quote owner؛ C09 reserve؛ بدون عددسازی |
+| C13B-R16 / W:1565–1569؛ C12a provenance | نقش رسیدگی مجاز، مسیر زمانی/شبکه‌ای رویدادها و منشأ/سهم‌ها را فقط با مجوز و ثبت دسترسی ببیند؛ نمای عادی مشتری محدود به سوابق خودش بماند؛ گزارش داخلی/مشکوک به مشتری افشا نشود | C13B-S08 مسیر مالی مجاز را بررسی کند | TASK:CORE:C13B:008 / TASK:CORE:C13B:008.S01 resolve current investigator capability؛ TASK:CORE:C13B:008.S02 render linked source path/proportions from C12a؛ TASK:CORE:C13B:008.S03 scope/audit and suppress internal report | C02 permission/audit؛ C12a source chain؛ role/export policy OPEN |
 
 #### Acceptance Criteria، Test Definitions و Planned Test Cases
 
@@ -6196,20 +6196,20 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 | Subtask ID | کار و واحد خروجی | ورودی/وابستگی | Requirements | آزمون تکمیل و Oracle |
 |---|---|---|---|---|
 | `TASK:RAG:R01:001.S01` | Define the admission outcome matrix: eligible, ambiguous, unrelated, outside capability, out-of-domain, and prohibited; specify which states may co-exist. | Blueprint §3.1 and ADR-RAG-01; C01 service catalogue. | REQ:RAG:R01:001 | Decision table maps each fixture to one expected outcome; TC:RAG:R01:001-P/N. |
-| `TASK:RAG:R01:001.S02` | Specify server-side scope authorization and the explicit user action required before changing the active domain. | C02 identity/session/permission contract; admission outcome from .S01. | REQ:RAG:R01:002 | Backend decision rejects missing action or permission and retains active domain; TC:RAG:R01:002-P/N. |
-| `TASK:RAG:R01:001.S03` | Keep the HTTP/controller adapter limited to versioned request/response and typed error translation; delegate admission/retrieval behavior to its owning application port and never place retrieval logic in HTTP transport. | Blueprint B:2281; C01 versioned contract; .S01/.S02. | REQ:RAG:R01:001 and REQ:CORE:015 | Contract/component fixture proves a typed request is delegated and the transport has no retrieval dependency; rejection has no route side effect; linked AC/TC. |
+| `TASK:RAG:R01:001.S02` | Specify server-side scope authorization and the explicit user action required before changing the active domain. | C02 identity/session/permission contract; admission outcome from TASK:RAG:R01:001.S01. | REQ:RAG:R01:002 | Backend decision rejects missing action or permission and retains active domain; TC:RAG:R01:002-P/N. |
+| `TASK:RAG:R01:001.S03` | Keep the HTTP/controller adapter limited to versioned request/response and typed error translation; delegate admission/retrieval behavior to its owning application port and never place retrieval logic in HTTP transport. | Blueprint B:2281; C01 versioned contract; TASK:RAG:R01:001.S01/TASK:RAG:R01:001.S02. | REQ:RAG:R01:001 and REQ:CORE:015 | Contract/component fixture proves a typed request is delegated and the transport has no retrieval dependency; rejection has no route side effect; linked AC/TC. |
 | `TASK:RAG:R01:002.S01` | Define the pass-through rule for a single information need and the decomposition output for compound questions. | Accepted request from TASK:RAG:R01:001; Blueprint §3.1.1. | REQ:RAG:R01:003 | Simple and three-part fixtures return direct/three-need outputs respectively; TC:RAG:R01:003-P/N. |
-| `TASK:RAG:R01:002.S02` | Define stable parent/child references and per-need context needed to preserve the user’s requested conditions. | Query input plus decomposition rule from .S01. | REQ:RAG:R01:003 | Every child need resolves to its parent and all source conditions survive; trace assertion in TC:RAG:R01:003-P. |
+| `TASK:RAG:R01:002.S02` | Define stable parent/child references and per-need context needed to preserve the user’s requested conditions. | Query input plus decomposition rule from TASK:RAG:R01:002.S01. | REQ:RAG:R01:003 | Every child need resolves to its parent and all source conditions survive; trace assertion in TC:RAG:R01:003-P. |
 | `TASK:RAG:R01:002.S03` | Define ambiguity and partial-decomposition handling so unclear terms trigger clarification rather than invented needs. | Ambiguous and incomplete query fixtures; accepted scope from R01:001. | REQ:RAG:R01:003 | Oracle distinguishes clarification from decomposition and confirms no fabricated child need; TC:RAG:R01:003-N. |
 | `TASK:RAG:R01:003.S01` | Define the evidence sufficiency dimensions and their per-need result: coverage, authenticity, scope, time, conflict, change warning, risk. | R03 evidence/version references; ADR-RAG-02/07; Blueprint §3.1. | REQ:RAG:R01:004 | Matrix rejects a high-similarity stale/out-of-scope fixture and accepts supported in-scope evidence; TC:RAG:R01:004-P/N. |
-| `TASK:RAG:R01:003.S02` | Define route selection among published store, targeted live retrieval, revalidation, clarification, and abstention for each need. | Sufficiency result from .S01; R02 access contract; R03 snapshot. | REQ:RAG:R01:005 | Mixed two-need fixture sends only the insufficient need live; sufficient fixture sends none; TC:RAG:R01:005-P/N. |
+| `TASK:RAG:R01:003.S02` | Define route selection among published store, targeted live retrieval, revalidation, clarification, and abstention for each need. | Sufficiency result from TASK:RAG:R01:003.S01; R02 access contract; R03 snapshot. | REQ:RAG:R01:005 | Mixed two-need fixture sends only the insufficient need live; sufficient fixture sends none; TC:RAG:R01:005-P/N. |
 | `TASK:RAG:R01:003.S03` | Specify typed Core product-data and purpose-limited personal-context calls, including denial behavior. | C01/C02 versioned owner APIs and authorization contract. | REQ:RAG:R01:006 | Contract fixture proves versioned Core call and owner-scoped personal call; direct table/no-consent case is denied; TC:RAG:R01:006-P/N. |
 | `TASK:RAG:R01:004.S01` | Define timeout, bounded retry, allowed alternative, compatible cached evidence and terminal stop transitions. | R02 typed source failures; ADR-RAG-09; approved risk/freshness policy. | REQ:RAG:R01:007 | State-machine fixture reaches a qualified fallback or stop without unbounded retry; TC:RAG:R01:007-P/N. |
 | `TASK:RAG:R01:004.S02` | Define budget counters, stop-reason fields and policy-version reference without setting unapproved numeric limits. | ADR-RAG-10 and open policy decisions; route outcome from TASK:RAG:R01:003. | REQ:RAG:R01:008 | Fixture with an approved policy stops at its configured limit; OPEN policy supplies no invented threshold; TC:RAG:R01:008-P/N. |
-| `TASK:RAG:R01:004.S03` | Specify failure disclosure and stale-evidence qualification in the user-facing outcome contract. | Recovery transitions from .S01 and stop result from .S02; Answer Guard contract. | REQ:RAG:R01:007–008 | Assertions prohibit “verified today” on stale fallback and require a stop reason on exhaustion; linked TC. |
+| `TASK:RAG:R01:004.S03` | Specify failure disclosure and stale-evidence qualification in the user-facing outcome contract. | Recovery transitions from TASK:RAG:R01:004.S01 and stop result from TASK:RAG:R01:004.S02; Answer Guard contract. | REQ:RAG:R01:007–008 | Assertions prohibit “verified today” on stale fallback and require a stop reason on exhaustion; linked TC. |
 | `TASK:RAG:R01:005.S01` | Define the minimum correlated trace fields and explicit redaction/exclusion list. | ADR-RAG-14; C01/C14 telemetry contract; privacy policy owner. | REQ:RAG:R01:009 | Trace fixture retains IDs, route, evidence version and error while excluding raw prompt, personal values and chain-of-thought; TC:RAG:R01:009-P/N. |
 | `TASK:RAG:R01:005.S02` | Define the claim-to-evidence check and per-claim sufficiency result used by the response guard. | R03 evidence and snapshot IDs; ADR-RAG-07; TC:RAG:R01:010 fixtures. | REQ:RAG:R01:010 | Supported and unsupported claims produce separate assertions; unsupported generalization is limited or removed; TC:RAG:R01:010-P/N. |
-| `TASK:RAG:R01:005.S03` | Map guard results to documented, partial/qualified, clarification, or targeted abstention outcomes. | Claim check from .S02; admission/sufficiency results; no new answer policy threshold. | REQ:RAG:R01:010 | Outcome fixture selects the permitted result and preserves supported claims; linked AC/TC. |
+| `TASK:RAG:R01:005.S03` | Map guard results to documented, partial/qualified, clarification, or targeted abstention outcomes. | Claim check from TASK:RAG:R01:005.S02; admission/sufficiency results; no new answer policy threshold. | REQ:RAG:R01:010 | Outcome fixture selects the permitted result and preserves supported claims; linked AC/TC. |
 
 هر 5 Task خروجی، مالک منطقی، وابستگی، AC/Test و معیار تکمیل دارد؛ 15 زیرتسک هرکدام یک خروجی قابل بازبینی و oracle اختصاصی دارند. این معیارها تعریف برنامه‌اند؛ Product Tests همچنان `NOT_EXECUTED` هستند.
 
@@ -6324,7 +6324,7 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 |---|---|---|---|---|
 | `TASK:RAG:R02:001.S01` | Specify adapter capability declarations for MCP, direct/authorized indirect API, HTTP and permitted browser/crawler paths. | ADR-RAG-04; source capability and approved use policy. | REQ:RAG:R02:001 | Fixture with absent adapter/backend returns capability error and cannot claim retrieval; TC:RAG:R02:001-P/N. |
 | `TASK:RAG:R02:001.S02` | Define preflight for authorization, authentication, terms, rate and data-use rights; apply the same destination policy to the initial URL and every redirect. | Source-specific license/ToS evidence; C02 identity when required; approved destination/security policy. | REQ:RAG:R02:002 | Authorized and blocked-source fixtures allow/deny before fetch; redirected-to-out-of-scope or private destination is denied without fetching or writing artifacts; rate limit follows the configured policy without inventing thresholds; TC:RAG:R02:002-P/N. |
-| `TASK:RAG:R02:001.S03` | Define typed adapter failure classes and permitted read-only capability scope; explicitly prohibit CAPTCHA/auth/ToS bypass. | Capability declaration from .S01 and policy result from .S02. | REQ:RAG:R02:001–002 | Oracle checks typed failure, no fallback into a prohibited method, and no content fabrication; linked AC/TC. |
+| `TASK:RAG:R02:001.S03` | Define typed adapter failure classes and permitted read-only capability scope; explicitly prohibit CAPTCHA/auth/ToS bypass. | Capability declaration from TASK:RAG:R02:001.S01 and policy result from TASK:RAG:R02:001.S02. | REQ:RAG:R02:001–002 | Oracle checks typed failure, no fallback into a prohibited method, and no content fabrication; linked AC/TC. |
 | `TASK:RAG:R02:002.S01` | Specify required SourceAccessResult fields and version compatibility behavior. | ADR-RAG-04 and logical SourceAccessResult contract in Blueprint §3.9.3. | REQ:RAG:R02:003 | Success fixture returns source_id/URI, method, retrieved_at, status, hash and provenance; TC:RAG:R02:003-P. |
 | `TASK:RAG:R02:002.S02` | Specify raw artifact reference, content hash and provenance integrity checks. | Adapter bytes and metadata from TASK:RAG:R02:001; storage retention remains OPEN. | REQ:RAG:R02:003,005 | Hash matches exact bytes and provenance points to the same artifact; no fabricated content; TC:RAG:R02:003-P/N. |
 | `TASK:RAG:R02:002.S03` | Specify normalized error/status results for timeout, denial, empty response and unavailable source. | Adapter failure fixtures; C01 observability/error contract. | REQ:RAG:R02:003 | Each failure has source, method, observed time and typed status/error; failure is never no-change/success; TC:RAG:R02:003-N. |
@@ -6336,7 +6336,7 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 | `TASK:RAG:R02:004.S03` | Define retry/review handling for parser failure and distinguish unusual but source-supported values from corruption. | Drift/normal fixture pairs; no numeric threshold unless approved. | REQ:RAG:R02:006–007 | Supported outlier is retained; failed extraction is marked incomplete and sent to review; linked TC. |
 | `TASK:RAG:R02:005.S01` | Threat-model external text, PDF metadata, links and embedded instructions as untrusted input. | ADR-RAG-13; source content fixtures. | REQ:RAG:R02:008 | Threat table maps each input surface to a trusted-control boundary; TC:RAG:R02:008-P/N. |
 | `TASK:RAG:R02:005.S02` | Define least-privilege tool allowlists, secret separation and scope isolation during document processing. | C01/C02 tool and data boundaries; adapter policy from R02:001. | REQ:RAG:R02:008 | Malicious text cannot invoke an ungranted tool or retrieve secrets; assertion checks authorization state is unchanged; TC:RAG:R02:008-N. |
-| `TASK:RAG:R02:005.S03` | Define injection detection/audit output without storing sensitive prompt or source instructions as executable policy. | Threat fixtures from .S01 and processing guard from .S02. | REQ:RAG:R02:008 | The content remains data, processing either safely continues or quarantines, and no policy/tool escalation occurs; TC:RAG:R02:008-P/N. |
+| `TASK:RAG:R02:005.S03` | Define injection detection/audit output without storing sensitive prompt or source instructions as executable policy. | Threat fixtures from TASK:RAG:R02:005.S01 and processing guard from TASK:RAG:R02:005.S02. | REQ:RAG:R02:008 | The content remains data, processing either safely continues or quarantines, and no policy/tool escalation occurs; TC:RAG:R02:008-P/N. |
 
 هر 5 Task خروجی، مالک منطقی، وابستگی، AC/Test و معیار تکمیل دارد؛ 15 زیرتسک هرکدام یک خروجی قابل بازبینی و oracle اختصاصی دارند. این معیارها تعریف برنامه‌اند؛ Product Tests همچنان `NOT_EXECUTED` هستند.
 
@@ -6466,19 +6466,19 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 |---|---|---|---|---|
 | `TASK:RAG:R03:001.S01` | Define stable document identity independent of URL, title and storage location, including duplicate-source resolution inputs. | R02 source URI and artifact; §3.7; ADR-RAG-25. | REQ:RAG:R03:001 | Fixture with two URLs for the same identified instrument resolves to one stable identity; distinct instruments remain distinct; TC:RAG:R03:001-P/N. |
 | `TASK:RAG:R03:001.S02` | Define immutable legal-version creation and separate extraction/representation revision from legal change. | R02 artifact hashes and extraction revision; ADR-RAG-15/25. | REQ:RAG:R03:002,004 | Format/OCR-only change creates a derived revision without mutating prior version or inventing legal version; TC:RAG:R03:002/004-P/N. |
-| `TASK:RAG:R03:001.S03` | Define bitemporal intervals and as-known/as-valid query semantics for discovered-late changes. | Source date claims from R02; ADR-RAG-08; version transition from .S02. | REQ:RAG:R03:003 | Two-time fixtures reconstruct both effective date and what the system knew at recorded date; TC:RAG:R03:003-P/N. |
+| `TASK:RAG:R03:001.S03` | Define bitemporal intervals and as-known/as-valid query semantics for discovered-late changes. | Source date claims from R02; ADR-RAG-08; version transition from TASK:RAG:R03:001.S02. | REQ:RAG:R03:003 | Two-time fixtures reconstruct both effective date and what the system knew at recorded date; TC:RAG:R03:003-P/N. |
 | `TASK:RAG:R03:001.S04` | Define versioned logical contracts and approved PostgreSQL relational/full-text V0.1 storage baseline for identity/version/provision/relation/evidence; preserve clause-level legal history when needed and isolate raw/unverified candidates; evaluate `pgvector` as optional and do not require Neo4j or invent performance thresholds. | C01 contract compatibility; Blueprint B:257; actual workload/evaluation before any extension. | REQ:RAG:R03:011 | Positive: relational records + full-text search resolve stable document/version/provision/relation and preserve clause lineage; Negative: raw/unverified candidate cannot enter published/citable Snapshot and Neo4j is not treated as mandatory; Boundary: `pgvector` absent leaves baseline functional, and selection waits for measured evaluation; Failure: failed index/performance evaluation creates no extension decision and leaves current valid Snapshot unchanged; TC:RAG:R03:011-P/N/B/F. |
 | `TASK:RAG:R03:002.S01` | Define provision/evidence identity and binding to version, exact source span, page/table and extraction quality. | R02 raw location and QA signals; DocumentIdentity/Version from TASK:RAG:R03:001. | REQ:RAG:R03:005 | Evidence lookup resolves exact source span/version and never uses chunk_id as provision_id; TC:RAG:R03:005-P/N. |
-| `TASK:RAG:R03:002.S02` | Define relation record fields: typed source/target version/provision, textual witness, scope, valid-time and review status. | ADR-RAG-06; Blueprint LegalRelation contract; evidence unit from .S01. | REQ:RAG:R03:006 | Confirmed relation requires direct witness and scoped endpoints; semantic-only match remains candidate_relation; TC:RAG:R03:006-P/N. |
-| `TASK:RAG:R03:002.S03` | Define relation review and unresolved-conflict outcomes without inferring legal precedence from recency or similarity. | C01 authenticity; ADR-RAG-06; relation candidate from .S02. | REQ:RAG:R03:006 | Unwitnessed/ambiguous relation is held for review and cannot invalidate an active provision; linked TC. |
+| `TASK:RAG:R03:002.S02` | Define relation record fields: typed source/target version/provision, textual witness, scope, valid-time and review status. | ADR-RAG-06; Blueprint LegalRelation contract; evidence unit from TASK:RAG:R03:002.S01. | REQ:RAG:R03:006 | Confirmed relation requires direct witness and scoped endpoints; semantic-only match remains candidate_relation; TC:RAG:R03:006-P/N. |
+| `TASK:RAG:R03:002.S03` | Define relation review and unresolved-conflict outcomes without inferring legal precedence from recency or similarity. | C01 authenticity; ADR-RAG-06; relation candidate from TASK:RAG:R03:002.S02. | REQ:RAG:R03:006 | Unwitnessed/ambiguous relation is held for review and cannot invalidate an active provision; linked TC. |
 | `TASK:RAG:R03:003.S01` | Define allowed knowledge states and transition preconditions for candidate, needs-review, published and rejected. | Candidate handoff from R02; ADR-RAG-20. | REQ:RAG:R03:007 | Each state transition has explicit gate and actor/record; received candidate cannot jump to published; TC:RAG:R03:007-P/N. |
 | `TASK:RAG:R03:003.S02` | Define quarantine/review requirements for incomplete provenance, extraction quality or unverified legal relation. | R02 quality signal; evidence/relation outputs from TASK:RAG:R03:002. | REQ:RAG:R03:007 | Incomplete candidate remains non-citable and reviewable; no active index change; linked TC. |
-| `TASK:RAG:R03:003.S03` | Define audit evidence for acceptance, rejection and re-review while preserving previous state history. | Lifecycle transitions from .S01/.S02; C01 audit contract. | REQ:RAG:R03:007 | Replay of transition history reproduces state and actor/reason; no destructive overwrite; linked TC. |
+| `TASK:RAG:R03:003.S03` | Define audit evidence for acceptance, rejection and re-review while preserving previous state history. | Lifecycle transitions from TASK:RAG:R03:003.S01/TASK:RAG:R03:003.S02; C01 audit contract. | REQ:RAG:R03:007 | Replay of transition history reproduces state and actor/reason; no destructive overwrite; linked TC. |
 | `TASK:RAG:R03:004.S01` | Define Snapshot membership and compatibility inputs for documents, legal relations, rules, catalog and index. | Validated records from TASK:RAG:R03:001–003; §3.9.3 Snapshot contract. | REQ:RAG:R03:008 | Candidate snapshot enumerates all required version references and compatibility result; TC:RAG:R03:008-P. |
-| `TASK:RAG:R03:004.S02` | Define atomic activation and concurrent-reader semantics for the active Snapshot pointer. | C01 local transaction/outbox boundary; ADR-RAG-28; .S01 validation contract. | REQ:RAG:R03:008 | Readers see either old complete or new complete Snapshot; never a partial mixture; TC:RAG:R03:008-P/N. |
-| `TASK:RAG:R03:004.S03` | Define failure/rollback behavior for validation, index build and activation errors. | Snapshot candidate and injected failure points from .S01/.S02. | REQ:RAG:R03:008 | Injected failure keeps prior valid snapshot active and candidate inactive; TC:RAG:R03:008-N. |
+| `TASK:RAG:R03:004.S02` | Define atomic activation and concurrent-reader semantics for the active Snapshot pointer. | C01 local transaction/outbox boundary; ADR-RAG-28; TASK:RAG:R03:004.S01 validation contract. | REQ:RAG:R03:008 | Readers see either old complete or new complete Snapshot; never a partial mixture; TC:RAG:R03:008-P/N. |
+| `TASK:RAG:R03:004.S03` | Define failure/rollback behavior for validation, index build and activation errors. | Snapshot candidate and injected failure points from TASK:RAG:R03:004.S01/TASK:RAG:R03:004.S02. | REQ:RAG:R03:008 | Injected failure keeps prior valid snapshot active and candidate inactive; TC:RAG:R03:008-N. |
 | `TASK:RAG:R03:005.S01` | Define lineage edges from source version/evidence through derived chunks, embeddings, rules and snapshots. | R02 artifact and extraction provenance; ADR-RAG-12. | REQ:RAG:R03:009 | Fixture builds parent-child graph with stable version refs; TC:RAG:R03:009-P/N. |
-| `TASK:RAG:R03:005.S02` | Define impact traversal and selective invalidation when a source, relation or extraction revision changes. | Lineage model from .S01; R03 current snapshot membership. | REQ:RAG:R03:009 | Only true descendants are marked stale/revalidation-needed; unrelated document derivatives stay usable; TC:RAG:R03:009-P/N. |
+| `TASK:RAG:R03:005.S02` | Define impact traversal and selective invalidation when a source, relation or extraction revision changes. | Lineage model from TASK:RAG:R03:005.S01; R03 current snapshot membership. | REQ:RAG:R03:009 | Only true descendants are marked stale/revalidation-needed; unrelated document derivatives stay usable; TC:RAG:R03:009-P/N. |
 | `TASK:RAG:R03:005.S03` | Define response-time Snapshot/evidence binding and safe rollback guard for legal supersession. | ClaimEvidenceLink and Snapshot contracts; ADR-RAG-28/37; current legal status. | REQ:RAG:R03:010 | Historical response replays original citation; rollback is rejected or restricted if target revives superseded law; TC:RAG:R03:010-P/N. |
 
 هر 5 Task خروجی، مالک منطقی، وابستگی، AC/Test و معیار تکمیل دارد؛ 15 زیرتسک هرکدام یک خروجی قابل بازبینی و oracle اختصاصی دارند. این معیارها تعریف برنامه‌اند؛ Product Tests همچنان `NOT_EXECUTED` هستند.
@@ -6598,10 +6598,10 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 |---|---|---|---|---|
 | `TASK:RAG:R04:001.S01` | Define the approved risk/importance factors used to rank source checks, without assigning unapproved weights. | ADR-RAG-05 and §3.3; source policy values remain OPEN. | REQ:RAG:R04:001 | Factor matrix records input meaning and unknown values; TC:RAG:R04:001-P/N. |
 | `TASK:RAG:R04:001.S02` | Define adaptive check selection from risk, change history, use, decision sensitivity and access cost. | Source catalogue metadata from TASK:RAG:R04:002; available last-success/check outcomes. | REQ:RAG:R04:001 | High-risk/high-change source receives earlier or targeted check than low-risk stable source; no fixed global interval; TC:RAG:R04:001-P. |
-| `TASK:RAG:R04:001.S03` | Define no-schedule/insufficient-data behavior and audit explanation for the selected priority. | Priority model from .S01/.S02; no numeric threshold approval. | REQ:RAG:R04:001 | Oracle distinguishes insufficient metadata from low risk and records reason without invented numeric threshold; TC:RAG:R04:001-N. |
+| `TASK:RAG:R04:001.S03` | Define no-schedule/insufficient-data behavior and audit explanation for the selected priority. | Priority model from TASK:RAG:R04:001.S01/TASK:RAG:R04:001.S02; no numeric threshold approval. | REQ:RAG:R04:001 | Oracle distinguishes insufficient metadata from low risk and records reason without invented numeric threshold; TC:RAG:R04:001-N. |
 | `TASK:RAG:R04:002.S01` | Define lightweight catalog fields and allow recording a clue without downloading full text. | Blueprint §3.3; metadata-only fixture. | REQ:RAG:R04:002 | Catalog stores source/document clue metadata while full-text artifact remains absent; TC:RAG:R04:002-P/N. |
 | `TASK:RAG:R04:002.S02` | Define stable source_id and appendable observation identity with observed time/method/status/error. | SourceLifecyclePolicy and SourceAccessResult logical contracts. | REQ:RAG:R04:003 | Two observations link to same source and preserve distinct time/method/status; TC:RAG:R04:003-P/N. |
-| `TASK:RAG:R04:002.S03` | Define provenance and dedup rules for repeated listing entries without merging different sources/documents. | Source URL/issuer/identifier clues and catalog state from .S01/.S02. | REQ:RAG:R04:002–003 | Repeated clue deduplicates by declared key while distinct issuer/instrument stays distinct; linked TC. |
+| `TASK:RAG:R04:002.S03` | Define provenance and dedup rules for repeated listing entries without merging different sources/documents. | Source URL/issuer/identifier clues and catalog state from TASK:RAG:R04:002.S01/TASK:RAG:R04:002.S02. | REQ:RAG:R04:002–003 | Repeated clue deduplicates by declared key while distinct issuer/instrument stays distinct; linked TC. |
 | `TASK:RAG:R04:003.S01` | Define source-role classification for primary authority, republication/consolidation, bank operational reference, media and user narrative. | ADR-RAG-23; evidence of issuer and source purpose. | REQ:RAG:R04:005 | Classification fixture stores role dimensions separately and does not elevate secondary source to primary; TC:RAG:R04:005-P/N. |
 | `TASK:RAG:R04:003.S02` | Define discovery-state boundary: found/observed is not authenticity, coverage, legal validity or permission approval. | §3.3 and ADR-RAG-23/24; source records from R04:002. | REQ:RAG:R04:004 | Unverified clue remains candidate and cannot enter authoritative response corpus; TC:RAG:R04:004-P/N. |
 | `TASK:RAG:R04:003.S03` | Define license/ToS/authentication/rate/attribution/retention metadata and fail-closed use decision. | ADR-RAG-34/04; R02 owns access execution, R04 owns cataloged source policy metadata. | REQ:RAG:R04:007 | Missing/expired/unclear permission produces deny or review and zero use; TC:RAG:R04:007-P/N. |
@@ -6610,7 +6610,7 @@ R01–R10 دارای بسته‌بندی، ممیزی و وضعیت مستقل�
 | `TASK:RAG:R04:004.S03` | Define event handoff from high-risk clue to RDE/revalidation review with no auto-publication. | Discovery event contract; R03 publication owner; RDE ownership in Blueprint §3.4. | REQ:RAG:R04:009 | Event contains source/clue/risk reason and routes review only; active Snapshot remains unchanged; TC:RAG:R04:009-P/N. |
 | `TASK:RAG:R04:005.S01` | Define stable discovery job ID and idempotency key from source/check scope/approved schedule identity. | C01 Job/Event; scheduler choice and cadence remain OPEN. | REQ:RAG:R04:010 | Duplicate event delivery maps to one logical job/observation; TC:RAG:R04:010-P. |
 | `TASK:RAG:R04:005.S02` | Define worker state transitions and retry classification for transient and permanent failures. | R02 typed source access error; C01 bounded retry/recovery contract. | REQ:RAG:R04:010 | Transient failure can resume safely; permanent denial stops without retrying a prohibited route; TC:RAG:R04:010-P/N. |
-| `TASK:RAG:R04:005.S03` | Define restart/recovery assertions and visible terminal outcome for exhausted retries. | Job state from .S01/.S02; last successful observation from TASK:RAG:R04:004. | REQ:RAG:R04:010 | Crash-after-observation replay does not duplicate; exhausted retry is `failed/unknown`, never `unchanged`; TC:RAG:R04:010-N. |
+| `TASK:RAG:R04:005.S03` | Define restart/recovery assertions and visible terminal outcome for exhausted retries. | Job state from TASK:RAG:R04:005.S01/TASK:RAG:R04:005.S02; last successful observation from TASK:RAG:R04:004. | REQ:RAG:R04:010 | Crash-after-observation replay does not duplicate; exhausted retry is `failed/unknown`, never `unchanged`; TC:RAG:R04:010-N. |
 
 هر 5 Task خروجی، مالک منطقی، وابستگی، AC/Test و معیار تکمیل دارد؛ 15 زیرتسک هرکدام یک خروجی قابل بازبینی و oracle اختصاصی دارند. این معیارها تعریف برنامه‌اند؛ Product Tests همچنان `NOT_EXECUTED` هستند.
 
@@ -7527,7 +7527,7 @@ Nodeهای pinned Graphify برای DRS، Catalog، ADR-RAG-05/12/15/19/20/21/22
 
 **قراردادها و Handoff:** R10→Core/C01: API محاسبهٔ هم‌زمان نسخه‌دار؛ C05b→R10: product Snapshot و stable IDs؛ R09/C02→R10: context/consent/input projection؛ R03/R05→R10: evidence/version refs؛ R10→R06: result/status/provenance؛ R10→C01/C14: trace/latency/error. Core مالک محاسبه و داده؛ Adviser private tables نمی‌خواند.
 
-**تصمیم‌های باز:** فرمول و فیلد هر use case، endpoint/schema، واحد و rounding دامنه، timeout/retry/circuit threshold، confidence و acceptance target. REQ:CORE:008/:009 و TASK:CORE:004 برای recommendation reuse می‌شوند؛ R10 scorer یا قواعد صلاحیت را بازتعریف نمی‌کند.
+**تصمیم‌های باز:** فرمول و فیلد هر use case، endpoint/schema، واحد و rounding دامنه، timeout/retry/circuit threshold، confidence و acceptance target. REQ:CORE:008/:009 و TASK:CORE:C01:004 برای recommendation reuse می‌شوند؛ R10 scorer یا قواعد صلاحیت را بازتعریف نمی‌کند.
 
 **RA مستقل — PASS:** 8/8 source و Graph node resolved؛ atomicity، ownership، decision state، source coverage و dependencies بررسی؛ duplicate scorer/API=0؛ Backend/API/DB-boundary/UI/security/privacy/monitoring/failure پوشش دارد. **IPA مستقل — PASS:** 8/8 Requirement به EN/Task/Subtask/AC/TD و چهار Case P/N/B/F متصل؛ reverse trace=8/8؛ hard dependency cycle=0. **Test design:** 8 TD/32 planned cases، NOT_EXECUTED.
 
@@ -8463,7 +8463,7 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 - **نتیجه:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`. ده Test Definition و ۴۰ Planned Test Case صرفاً طراحی‌اند و اجرا نشده‌اند.
 ### A08 — قراردادهای API و پیکربندی امن سرویس دستیار
 
-**شناسه:** `PKG:ASSISTANT:A08`؛ **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`؛ **مالک API اجرایی و قراردادهای Assistant:** Assistant؛ **مالک استانداردهای مشترک قرارداد، تغییر شکننده و خطا:** C01 (`TASK:CORE:008`, `REQ:CORE:015, REQ:CORE:016`); **مالک پیکربندی مشترک و حاکمیت secret/flag/policy:** C01/C03 (`TASK:CORE:009`, `REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046`); **مالک احراز/مجوز مصرف:** C02؛ **مالک entitlement:** C04؛ **مالک route/capability:** C05a؛ **مالک انتشار و گیت:** سند مرحله‌بندی و REL/O5-10. A08 مشخص می‌کند سرویس Assistant چگونه قرارداد و پیکربندی مصوب را مصرف/مالکیت می‌کند؛ API Gateway، Configuration Service، Secret Store، ابزار schema، دورهٔ پشتیبانی نسخه یا امکان Canary را انتخاب نمی‌کند.
+**شناسه:** `PKG:ASSISTANT:A08`؛ **وضعیت:** `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`؛ **مالک API اجرایی و قراردادهای Assistant:** Assistant؛ **مالک استانداردهای مشترک قرارداد، تغییر شکننده و خطا:** C01 (`TASK:CORE:C01:008`, `REQ:CORE:015, REQ:CORE:016`); **مالک پیکربندی مشترک و حاکمیت secret/flag/policy:** C01/C03 (`TASK:CORE:C01:009`, `REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046`); **مالک احراز/مجوز مصرف:** C02؛ **مالک entitlement:** C04؛ **مالک route/capability:** C05a؛ **مالک انتشار و گیت:** سند مرحله‌بندی و REL/O5-10. A08 مشخص می‌کند سرویس Assistant چگونه قرارداد و پیکربندی مصوب را مصرف/مالکیت می‌کند؛ API Gateway، Configuration Service، Secret Store، ابزار schema، دورهٔ پشتیبانی نسخه یا امکان Canary را انتخاب نمی‌کند.
 
 #### دامنه و مرزهای مالکیت
 
@@ -8475,7 +8475,7 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 
 از گراف `main` و `semantic/validation.json=PASS` گره‌های `docs_shahab_phase_2_development_blueprint_versioned_public_contracts_a07` (B:1827)، `docs_shahab_phase_2_development_blueprint_configuration_observability_cost_tests` (B:1917)، `docs_shahab_phase_2_development_blueprint_api_contract_governance` (B:25)، `docs_shahab_phase_2_development_blueprint_module_api_ownership` و `docs_shahab_phase_2_development_blueprint_secrets_never_enter_models` (B:1690) بازیابی شدند. یال A07→acyclic dependency با وضعیت `INFERRED` صرفاً برای مرور بود؛ الزام چرخه‌نداشتن مستقلاً از متن صریح A01/C01 اخذ شد. Feature Flag و rollback نیز از متن اصلی B:25/B:1083 و `REQ:CORE:018, REQ:CORE:046` بررسی شدند، نه از شناسهٔ گراف حدسی. گره B:1917 در گراف وضعیت `PROPOSED_ARCHITECTURE_TEST` دارد؛ عنوان‌های آزمون پیشنهاد‌شده به‌تنهایی مصوبه فرض نشدند.
 
-متن تأییدشدهٔ بالای Blueprint در B:25 مرز A07/A08 را صریح می‌کند؛ C01 `REQ:CORE:015, REQ:CORE:016`، `REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046` و `TASK:CORE:008/009` جزئیات استاندارد مشترک را از قبل پوشش می‌دهند. B:788 و B:1083 منع فعال‌سازی زودهنگام/جایگزینی مجوز با flag؛ B:1827–1833 جزئیات تکمیلی قرارداد را نشان می‌دهند؛ B:1917 فقط فهرست آزمون پیشنهادی است. بخش‌های مرتبط Blueprint و Wallet دوباره با متن اصلی مقایسه شدند؛ Wallet V0.20 قاعدهٔ مستقلی برای API یا configuration دستیار ندارد.
+متن تأییدشدهٔ بالای Blueprint در B:25 مرز A07/A08 را صریح می‌کند؛ C01 `REQ:CORE:015, REQ:CORE:016`، `REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046` و `TASK:CORE:C01:008/009` جزئیات استاندارد مشترک را از قبل پوشش می‌دهند. B:788 و B:1083 منع فعال‌سازی زودهنگام/جایگزینی مجوز با flag؛ B:1827–1833 جزئیات تکمیلی قرارداد را نشان می‌دهند؛ B:1917 فقط فهرست آزمون پیشنهادی است. بخش‌های مرتبط Blueprint و Wallet دوباره با متن اصلی مقایسه شدند؛ Wallet V0.20 قاعدهٔ مستقلی برای API یا configuration دستیار ندارد.
 
 | Candidate | Source / Graph reference | تعیین تکلیف |
 |---|---|---|
@@ -8578,8 +8578,8 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 | مرز | مالک → مصرف‌کننده | تصمیم/قرارداد |
 |---|---|---|
 | API اجرایی Assistant | Assistant → A01/A02/A04/C05a/سرویس مقصد | Assistant owner نسخهٔ API خود؛ endpointها و Schema فیزیکی هنوز طراحی نشده‌اند. |
-| عمومی OpenAPI/error/compatibility | C01 → Assistant | `TASK:CORE:008`/`REQ:CORE:015, REQ:CORE:016`؛ A08 مصرف‌کننده/مالک endpoint است، نه مالک استاندارد مشترک. |
-| runtime config/secret/flag/business policy | C01/C03 owners → Assistant | `TASK:CORE:009`/`REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046`; بدون Config Service جدید. |
+| عمومی OpenAPI/error/compatibility | C01 → Assistant | `TASK:CORE:C01:008`/`REQ:CORE:015, REQ:CORE:016`؛ A08 مصرف‌کننده/مالک endpoint است، نه مالک استاندارد مشترک. |
+| runtime config/secret/flag/business policy | C01/C03 owners → Assistant | `TASK:CORE:C01:009`/`REQ:CORE:017, REQ:CORE:018, REQ:CORE:045, REQ:CORE:046`; بدون Config Service جدید. |
 | identity/authorization | C02 → Assistant | version compatibility مستقل از permission است؛ schema معتبر مجوز ایجاد نمی‌کند. |
 | entitlement | C04 → Assistant | plan/price/access matrix محلی یا feature flag نمی‌سازد. |
 | route/capability | C05a → Assistant | قرارداد service owner معتبر؛ endpoint خصوصی حدس زده نمی‌شود. |
@@ -8589,7 +8589,7 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 
 #### ممیزی مستقل A08 — RA و IPA
 
-- **RA (پس از رفع نقص):** ۱۸ Candidate تعیین تکلیف شدند: ۱۴ requirement از متن صریح/استاندارد پذیرفته‌شده، ۳ reuse/handoff به C01/C02/C04/C05a/A03 و یک گروه آزمون پیشنهادی که به‌تنهایی مصوبه نشد؛ منبع B:25,788,1083,1827–1833,1917 با وضعیت approval آن تطبیق داده شد. C01 `REQ:CORE:015–018/045/046` و `TASK:CORE:008/009` به‌عنوان مالک استاندارد مشترک حفظ شدند؛ endpoint، ابزار، rollout، SLO و دوره پشتیبانی جعل نشد؛ duplication=0؛ inferred-to-requirement=0. نقص ممیزی اولیه: گره آزمون پیشنهادی B:1917 در فهرست قطعی شمرده شده بود؛ اصلاح شد و فقط Candidate/سرنخ ثبت شد. **Rerun: PASS.**
+- **RA (پس از رفع نقص):** ۱۸ Candidate تعیین تکلیف شدند: ۱۴ requirement از متن صریح/استاندارد پذیرفته‌شده، ۳ reuse/handoff به C01/C02/C04/C05a/A03 و یک گروه آزمون پیشنهادی که به‌تنهایی مصوبه نشد؛ منبع B:25,788,1083,1827–1833,1917 با وضعیت approval آن تطبیق داده شد. C01 `REQ:CORE:015–018/045/046` و `TASK:CORE:C01:008/009` به‌عنوان مالک استاندارد مشترک حفظ شدند؛ endpoint، ابزار، rollout، SLO و دوره پشتیبانی جعل نشد؛ duplication=0؛ inferred-to-requirement=0. نقص ممیزی اولیه: گره آزمون پیشنهادی B:1917 در فهرست قطعی شمرده شده بود؛ اصلاح شد و فقط Candidate/سرنخ ثبت شد. **Rerun: PASS.**
 - **IPA (پس از اصلاح):** ۱۴/۱۴ Requirement به ۴ Enabler، ۶ Task، ۱۸ Subtask، ۱۴ AC/TD و ۵۶ case اختصاصی P/N/B/F متصل‌اند؛ AC schema/error/semantic/rollback هر کدام trigger و oracle متمایز دارد؛ تمام links دوسویه و owner boundaries ثبت؛ orphan/duplicate/cycle=0. نقص ممیزی اولیه: schema compatibility با authorization اشتباه قابل برداشت بود؛ A08:014 و dependency table استقلال این دو gate را صریح کردند. **Rerun: PASS.**
 - **نتیجه:** `RA=PASS` / `IPA=PASS`; `PLANNING_ACCEPTED / PRODUCT_NOT_EXECUTED`. تست‌های قرارداد و پیکربندی برنامه‌ریزی شده‌اند و اجرا نشده‌اند.
 
@@ -8619,41 +8619,41 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 
 ## ۴. قراردادهای مشترک و وابستگی‌های پذیرفته‌شده
 
-- **`CONTRACT:C01:01`** — Module public ports and data ownership؛ مالک `Core`؛ مصرف‌کنندگان: Core modules؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:002`، `TASK:CORE:012`
-- **`CONTRACT:C01:02`** — Core recommendation/catalogue evidence API؛ مالک `Core`؛ مصرف‌کنندگان: Adviser; future Assistant؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:003`، `TASK:CORE:004`، `TASK:CORE:008`
-- **`CONTRACT:C01:03`** — Service-owned Job/Workflow port؛ مالک `Each service owns its Job state`؛ مصرف‌کنندگان: Authorized job consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:005`، `TASK:CORE:007`
-- **`CONTRACT:C01:04`** — Reliable event/Outbox envelope؛ مالک `Data owner service`؛ مصرف‌کنندگان: Registered asynchronous consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:006`
-- **`CONTRACT:C01:05`** — Typed config/flag/policy change and rollback؛ مالک `Config or policy owner`؛ مصرف‌کنندگان: Deployment/configuration consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:009`
-- **`CONTRACT:C01:06`** — Operational telemetry and critical-path incident evidence؛ مالک `Service operator`؛ مصرف‌کنندگان: Authorized operations/security؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:007`، `TASK:CORE:010`، `TASK:CORE:013`
-- **`CONTRACT:C01:07`** — Release and finance-boundary evidence dossier؛ مالک `Release owner`؛ مصرف‌کنندگان: Independent reviewer and deployment gate؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:011`، `TASK:CORE:012`
+- **`CONTRACT:C01:01`** — Module public ports and data ownership؛ مالک `Core`؛ مصرف‌کنندگان: Core modules؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:002`، `TASK:CORE:C01:012`
+- **`CONTRACT:C01:02`** — Core recommendation/catalogue evidence API؛ مالک `Core`؛ مصرف‌کنندگان: Adviser; future Assistant؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:003`، `TASK:CORE:C01:004`، `TASK:CORE:C01:008`
+- **`CONTRACT:C01:03`** — Service-owned Job/Workflow port؛ مالک `Each service owns its Job state`؛ مصرف‌کنندگان: Authorized job consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:005`، `TASK:CORE:C01:007`
+- **`CONTRACT:C01:04`** — Reliable event/Outbox envelope؛ مالک `Data owner service`؛ مصرف‌کنندگان: Registered asynchronous consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:006`
+- **`CONTRACT:C01:05`** — Typed config/flag/policy change and rollback؛ مالک `Config or policy owner`؛ مصرف‌کنندگان: Deployment/configuration consumer؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:009`
+- **`CONTRACT:C01:06`** — Operational telemetry and critical-path incident evidence؛ مالک `Service operator`؛ مصرف‌کنندگان: Authorized operations/security؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:007`، `TASK:CORE:C01:010`، `TASK:CORE:C01:013`
+- **`CONTRACT:C01:07`** — Release and finance-boundary evidence dossier؛ مالک `Release owner`؛ مصرف‌کنندگان: Independent reviewer and deployment gate؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C01:011`، `TASK:CORE:C01:012`
 - **`CONTRACT:C02:01`** — Customer and Organization Identity Boundary؛ مالک `Core Identity`؛ مصرف‌کنندگان: Core Wallet and Assistant via versioned purpose-limited ports؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C02:001`، `TASK:CORE:C02:002`
 - **`CONTRACT:C02:02`** — Membership and Scoped Permission Evaluation؛ مالک `Core Identity and Authorization`؛ مصرف‌کنندگان: Core Wallet, Core services, Assistant authorization adapter؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C02:002`، `TASK:CORE:C02:003`، `TASK:CORE:C02:005`
 - **`CONTRACT:C02:03`** — Consent, Session and Audit Context؛ مالک `Core Identity and Authorization`؛ مصرف‌کنندگان: Core Wallet and Assistant execution boundary؛ نسخه `PLANNING_CONTRACT_1`؛ وضعیت Schema `DESIGN_REQUIRED_NOT_PUBLISHED_API`؛ Taskها `TASK:CORE:C02:003`، `TASK:CORE:C02:004`، `TASK:CORE:C02:005`
 ### وابستگی‌های ثبت‌شده C01/C02 (شاخص ردیابی)
 
-- `DEP:C01:001:002`: `TASK:CORE:001` → `TASK:CORE:002`؛ `HARD`؛ Phase-one footprint baseline constrains the ownership/import policy
-- `DEP:C01:002:003`: `TASK:CORE:002` → `TASK:CORE:003`؛ `HARD`؛ Independent R1 topology requires one owner for each data/module boundary
-- `DEP:C01:001:004`: `TASK:CORE:001` → `TASK:CORE:004`؛ `HARD`؛ Existing scorer/golden/publication must be inventoried before contract adaptation
-- `DEP:C01:008:004`: `TASK:CORE:008` → `TASK:CORE:004`؛ `CONTRACT`؛ Recommendation consumer needs version/meaning/error compatibility, not copied scoring
-- `DEP:C01:002:005`: `TASK:CORE:002` → `TASK:CORE:005`؛ `HARD`؛ A durable Job pattern needs one state owner and local transaction authority
-- `DEP:C01:002:006`: `TASK:CORE:002` → `TASK:CORE:006`؛ `HARD`؛ Atomic data/Outbox commit requires a defined local data owner
-- `DEP:C01:005:006`: `TASK:CORE:005` → `TASK:CORE:006`؛ `CONTRACT`؛ Only the justified owner-controlled long flow defines the needed event consumer; no mandatory event bus
-- `DEP:C01:003:007`: `TASK:CORE:003` → `TASK:CORE:007`؛ `CONTRACT`؛ Fault containment targets the approved two-service R1 boundary
-- `DEP:C01:008:007`: `TASK:CORE:008` → `TASK:CORE:007`؛ `CONTRACT`؛ Retry classification and timeouts depend on the service error/idempotency contract
-- `DEP:C01:002:008`: `TASK:CORE:002` → `TASK:CORE:008`؛ `HARD`؛ Provider/consumer public API and denied private-table access follow authority map
-- `DEP:C01:001:009`: `TASK:CORE:001` → `TASK:CORE:009`؛ `HARD`؛ Reuse typed Settings/secrets without reclassifying approved policy as runtime toggle
-- `DEP:C01:008:009`: `TASK:CORE:008` → `TASK:CORE:009`؛ `CONTRACT`؛ Rollback config must remain compatible with API, Snapshot and job contracts
-- `DEP:C01:001:010`: `TASK:CORE:001` → `TASK:CORE:010`؛ `HARD`؛ Existing metrics/logs baseline determines the telemetry gap; no production proof inferred
-- `DEP:C01:007:010`: `TASK:CORE:007` → `TASK:CORE:010`؛ `PREFERENCE`؛ Resilience fault signals inform alerts; preference only, no hard block on defining observability
-- `DEP:C01:001:011`: `TASK:CORE:001` → `TASK:CORE:011`؛ `CONTRACT`؛ Release dossier records the actual code/runtime unknowns and preserved phase-one baseline
-- `DEP:C01:004:011`: `TASK:CORE:004` → `TASK:CORE:011`؛ `CONTRACT`؛ R1 release contract includes deterministic scoring and valid Snapshot evidence
-- `DEP:C01:009:011`: `TASK:CORE:009` → `TASK:CORE:011`؛ `POLICY`؛ Release activation requires authorized compatible configuration and protected policy
-- `DEP:C01:010:011`: `TASK:CORE:010` → `TASK:CORE:011`؛ `POLICY`؛ Critical-path release requires secure telemetry/runbook evidence, not a new arbitrary gate
-- `DEP:C01:002:012`: `TASK:CORE:002` → `TASK:CORE:012`؛ `CONTRACT`؛ Wallet is a Core module with local ownership, not an external merchant service
-- `DEP:C01:011:012`: `TASK:CORE:011` → `TASK:CORE:012`؛ `POLICY`؛ Any financial activation must preserve release governance without blocking free RAG
-- `DEP:C01:003:013`: `TASK:CORE:003` → `TASK:CORE:013`؛ `CONTRACT`؛ Benchmark compares the scoped R1 topology, not an unapproved replacement architecture
-- `DEP:C01:007:013`: `TASK:CORE:007` → `TASK:CORE:013`؛ `CONTRACT`؛ Load/failure experiments need stated failure isolation and resource-share contracts
-- `DEP:C01:010:013`: `TASK:CORE:010` → `TASK:CORE:013`؛ `CONTRACT`؛ Telemetry measurement schema precedes benchmark; final numeric SLO follows benchmark, not vice versa
+- `DEP:C01:001:002`: `TASK:CORE:C01:001` → `TASK:CORE:C01:002`؛ `HARD`؛ Phase-one footprint baseline constrains the ownership/import policy
+- `DEP:C01:002:003`: `TASK:CORE:C01:002` → `TASK:CORE:C01:003`؛ `HARD`؛ Independent R1 topology requires one owner for each data/module boundary
+- `DEP:C01:001:004`: `TASK:CORE:C01:001` → `TASK:CORE:C01:004`؛ `HARD`؛ Existing scorer/golden/publication must be inventoried before contract adaptation
+- `DEP:C01:008:004`: `TASK:CORE:C01:008` → `TASK:CORE:C01:004`؛ `CONTRACT`؛ Recommendation consumer needs version/meaning/error compatibility, not copied scoring
+- `DEP:C01:002:005`: `TASK:CORE:C01:002` → `TASK:CORE:C01:005`؛ `HARD`؛ A durable Job pattern needs one state owner and local transaction authority
+- `DEP:C01:002:006`: `TASK:CORE:C01:002` → `TASK:CORE:C01:006`؛ `HARD`؛ Atomic data/Outbox commit requires a defined local data owner
+- `DEP:C01:005:006`: `TASK:CORE:C01:005` → `TASK:CORE:C01:006`؛ `CONTRACT`؛ Only the justified owner-controlled long flow defines the needed event consumer; no mandatory event bus
+- `DEP:C01:003:007`: `TASK:CORE:C01:003` → `TASK:CORE:C01:007`؛ `CONTRACT`؛ Fault containment targets the approved two-service R1 boundary
+- `DEP:C01:008:007`: `TASK:CORE:C01:008` → `TASK:CORE:C01:007`؛ `CONTRACT`؛ Retry classification and timeouts depend on the service error/idempotency contract
+- `DEP:C01:002:008`: `TASK:CORE:C01:002` → `TASK:CORE:C01:008`؛ `HARD`؛ Provider/consumer public API and denied private-table access follow authority map
+- `DEP:C01:001:009`: `TASK:CORE:C01:001` → `TASK:CORE:C01:009`؛ `HARD`؛ Reuse typed Settings/secrets without reclassifying approved policy as runtime toggle
+- `DEP:C01:008:009`: `TASK:CORE:C01:008` → `TASK:CORE:C01:009`؛ `CONTRACT`؛ Rollback config must remain compatible with API, Snapshot and job contracts
+- `DEP:C01:001:010`: `TASK:CORE:C01:001` → `TASK:CORE:C01:010`؛ `HARD`؛ Existing metrics/logs baseline determines the telemetry gap; no production proof inferred
+- `DEP:C01:007:010`: `TASK:CORE:C01:007` → `TASK:CORE:C01:010`؛ `PREFERENCE`؛ Resilience fault signals inform alerts; preference only, no hard block on defining observability
+- `DEP:C01:001:011`: `TASK:CORE:C01:001` → `TASK:CORE:C01:011`؛ `CONTRACT`؛ Release dossier records the actual code/runtime unknowns and preserved phase-one baseline
+- `DEP:C01:004:011`: `TASK:CORE:C01:004` → `TASK:CORE:C01:011`؛ `CONTRACT`؛ R1 release contract includes deterministic scoring and valid Snapshot evidence
+- `DEP:C01:009:011`: `TASK:CORE:C01:009` → `TASK:CORE:C01:011`؛ `POLICY`؛ Release activation requires authorized compatible configuration and protected policy
+- `DEP:C01:010:011`: `TASK:CORE:C01:010` → `TASK:CORE:C01:011`؛ `POLICY`؛ Critical-path release requires secure telemetry/runbook evidence, not a new arbitrary gate
+- `DEP:C01:002:012`: `TASK:CORE:C01:002` → `TASK:CORE:C01:012`؛ `CONTRACT`؛ Wallet is a Core module with local ownership, not an external merchant service
+- `DEP:C01:011:012`: `TASK:CORE:C01:011` → `TASK:CORE:C01:012`؛ `POLICY`؛ Any financial activation must preserve release governance without blocking free RAG
+- `DEP:C01:003:013`: `TASK:CORE:C01:003` → `TASK:CORE:C01:013`؛ `CONTRACT`؛ Benchmark compares the scoped R1 topology, not an unapproved replacement architecture
+- `DEP:C01:007:013`: `TASK:CORE:C01:007` → `TASK:CORE:C01:013`؛ `CONTRACT`؛ Load/failure experiments need stated failure isolation and resource-share contracts
+- `DEP:C01:010:013`: `TASK:CORE:C01:010` → `TASK:CORE:C01:013`؛ `CONTRACT`؛ Telemetry measurement schema precedes benchmark; final numeric SLO follows benchmark, not vice versa
 - `DEP:C02:001`: `TASK:CORE:C02:001` → `TASK:CORE:C02:002`؛ `HARD`؛ Verified/held identity state and representative authority are preconditions for organization membership activation.
 - `DEP:C02:002`: `TASK:CORE:C02:002` → `TASK:CORE:C02:003`؛ `HARD`؛ Current organization membership and role are inputs to tenant-scoped permission evaluation.
 - `DEP:C02:003`: `TASK:CORE:C02:003` → `TASK:CORE:C02:004`؛ `HARD`؛ Session and cross-domain actions must consume the same authoritative actor/scope authorization contract.
@@ -8680,9 +8680,9 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 
 | Scenario locator | Atomic obligation | Wallet source / independent case | Package owner(s) | Requirement IDs | Task IDs | AC / Test IDs | Current disposition |
 |---|---|---|---|---|---|---|---|
-| `SC-W054-01` | `AO:WL-TR-054-02:01` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پول رسیده ولی پیام نتیجه نرسیده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;C12B-T03` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-02` | `AO:WL-TR-054-02:02` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پیام تأیید چند بار آمده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;C12B-T03` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-03` | `AO:WL-TR-054-02:03` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پرداخت قبل از وصول تأیید شده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;C12B-T03` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-01` | `AO:WL-TR-054-02:01` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پول رسیده ولی پیام نتیجه نرسیده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;TASK:CORE:C12B:003` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-02` | `AO:WL-TR-054-02:02` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پیام تأیید چند بار آمده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;TASK:CORE:C12B:003` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-03` | `AO:WL-TR-054-02:03` | docs/SHAHAB_DIGITAL_WALLET.md:1593 (WL-T-054): برای ردیف سناریو «شارژ»، مورد مستقل «پرداخت قبل از وصول تأیید شده» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12b | `REQ:CORE:C08:005;REQ:CORE:C08:006;C12B-R04;C12B-R06` | `TASK:CORE:C08:002;TASK:CORE:C12B:003` | `C12B-AC04;C12B-AC06;C12B-TD04;C12B-TD06;AC:CORE:C08:005;TEST:CORE:C08:005;AC:CORE:C08:006;TEST:CORE:C08:006` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-04` | `AO:WL-TR-054-03:01` | docs/SHAHAB_DIGITAL_WALLET.md:1594 (WL-T-054): برای ردیف سناریو «سقف شارژ»، مورد مستقل «دو درخواست هم‌زمان» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12a | `REQ:CORE:C08:007;REQ:CORE:C08:008;REQ:CORE:C12A:011` | `TASK:CORE:C08:003;TASK:CORE:C12A:004` | `TEST:C12A:011;AC:CORE:C08:007;TEST:CORE:C08:007;AC:CORE:C08:008;TEST:CORE:C08:008` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-05` | `AO:WL-TR-054-03:02` | docs/SHAHAB_DIGITAL_WALLET.md:1594 (WL-T-054): برای ردیف سناریو «سقف شارژ»، مورد مستقل «چند مسیر سازمانی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12a | `REQ:CORE:C08:007;REQ:CORE:C08:008;REQ:CORE:C12A:011` | `TASK:CORE:C08:003;TASK:CORE:C12A:004` | `TEST:C12A:011;AC:CORE:C08:007;TEST:CORE:C08:007;AC:CORE:C08:008;TEST:CORE:C08:008` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-06` | `AO:WL-TR-054-03:03` | docs/SHAHAB_DIGITAL_WALLET.md:1594 (WL-T-054): برای ردیف سناریو «سقف شارژ»، مورد مستقل «واریز بانکی بیشتر از سقف» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C08;C12a | `REQ:CORE:C08:007;REQ:CORE:C08:008;REQ:CORE:C12A:011` | `TASK:CORE:C08:003;TASK:CORE:C12A:004` | `TEST:C12A:011;AC:CORE:C08:007;TEST:CORE:C08:007;AC:CORE:C08:008;TEST:CORE:C08:008` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
@@ -8694,12 +8694,12 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 | `SC-W054-12` | `AO:WL-TR-054-06:02` | docs/SHAHAB_DIGITAL_WALLET.md:1597 (WL-T-054): برای ردیف سناریو «رزرو»، مورد مستقل «هزینهٔ کمتر یا بیشتر» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C12a | `REQ:CORE:C09:002;REQ:CORE:C09:003;REQ:CORE:C09:004;REQ:CORE:C09:008;REQ:CORE:C09:015;REQ:CORE:C12A:010` | `TASK:CORE:C09:002;TASK:CORE:C12A:004` | `TEST:C12A:010;AC:CORE:C09:002;TEST:CORE:C09:002;AC:CORE:C09:003;TEST:CORE:C09:003;AC:CORE:C09:004;TEST:CORE:C09:004;AC:CORE:C09:008;TEST:CORE:C09:008;AC:CORE:C09:015;TEST:CORE:C09:015` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-13` | `AO:WL-TR-054-06:03` | docs/SHAHAB_DIGITAL_WALLET.md:1597 (WL-T-054): برای ردیف سناریو «رزرو»، مورد مستقل «نتیجهٔ نامعلوم» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C12a | `REQ:CORE:C09:002;REQ:CORE:C09:003;REQ:CORE:C09:004;REQ:CORE:C09:008;REQ:CORE:C09:015;REQ:CORE:C12A:010` | `TASK:CORE:C09:002;TASK:CORE:C12A:004` | `TEST:C12A:010;AC:CORE:C09:002;TEST:CORE:C09:002;AC:CORE:C09:003;TEST:CORE:C09:003;AC:CORE:C09:004;TEST:CORE:C09:004;AC:CORE:C09:008;TEST:CORE:C09:008;AC:CORE:C09:015;TEST:CORE:C09:015` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-14` | `AO:WL-TR-054-06:04` | docs/SHAHAB_DIGITAL_WALLET.md:1597 (WL-T-054): برای ردیف سناریو «رزرو»، مورد مستقل «افزایش تا ۲۰ درصد مبنای اولیه بدون انباشت و تأیید پیش از عبور» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C12a | `REQ:CORE:C09:002;REQ:CORE:C09:003;REQ:CORE:C09:004;REQ:CORE:C09:008;REQ:CORE:C09:015;REQ:CORE:C12A:010` | `TASK:CORE:C09:002;TASK:CORE:C12A:004` | `TEST:C12A:010;AC:CORE:C09:002;TEST:CORE:C09:002;AC:CORE:C09:003;TEST:CORE:C09:003;AC:CORE:C09:004;TEST:CORE:C09:004;AC:CORE:C09:008;TEST:CORE:C09:008;AC:CORE:C09:015;TEST:CORE:C09:015` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-15` | `AO:WL-TR-054-07:01` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «پرامپت‌های با پردازش متفاوت» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R02` | `C13A-T01` | `C13A-AC02;C13A-TD02` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-16` | `AO:WL-TR-054-07:02` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «مشاورهٔ حین اجرا با ضریب یک‌دوم» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R03` | `C13A-T01` | `C13A-AC03;C13A-TD03` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-17` | `AO:WL-TR-054-07:03` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «تغییر نرخ وسط اجرا» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R04` | `C13A-T02` | `C13A-AC04;C13A-TD04` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-18` | `AO:WL-TR-054-07:04` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «انتظار OTP بدون تجدید قیمت» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R05;REQ:CORE:C09:017` | `C13A-T02;TASK:CORE:C09:005` | `C13A-AC05;C13A-TD05;AC:CORE:C09:017;TEST:CORE:C09:017` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-19` | `AO:WL-TR-054-07:05` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «آغاز تازه پس از توقف یا شکست با نرخ روز» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R07;REQ:CORE:C09:016` | `C13A-T03;TASK:CORE:C09:003` | `C13A-AC07;C13A-TD07;AC:CORE:C09:016;TEST:CORE:C09:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-20` | `AO:WL-TR-054-07:06` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «بازیابی بدون کسر تکراری» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R08;REQ:CORE:C09:015` | `C13A-T03;TASK:CORE:C09:004` | `C13A-AC08;C13A-TD08;AC:CORE:C09:015;TEST:CORE:C09:015` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-15` | `AO:WL-TR-054-07:01` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «پرامپت‌های با پردازش متفاوت» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R02` | `TASK:CORE:C13A:001` | `C13A-AC02;C13A-TD02` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-16` | `AO:WL-TR-054-07:02` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «مشاورهٔ حین اجرا با ضریب یک‌دوم» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R03` | `TASK:CORE:C13A:001` | `C13A-AC03;C13A-TD03` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-17` | `AO:WL-TR-054-07:03` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «تغییر نرخ وسط اجرا» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C13a | `C13A-R04` | `TASK:CORE:C13A:002` | `C13A-AC04;C13A-TD04` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-18` | `AO:WL-TR-054-07:04` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «انتظار OTP بدون تجدید قیمت» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R05;REQ:CORE:C09:017` | `TASK:CORE:C13A:002;TASK:CORE:C09:005` | `C13A-AC05;C13A-TD05;AC:CORE:C09:017;TEST:CORE:C09:017` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-19` | `AO:WL-TR-054-07:05` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «آغاز تازه پس از توقف یا شکست با نرخ روز» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R07;REQ:CORE:C09:016` | `TASK:CORE:C13A:003;TASK:CORE:C09:003` | `C13A-AC07;C13A-TD07;AC:CORE:C09:016;TEST:CORE:C09:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-20` | `AO:WL-TR-054-07:06` | docs/SHAHAB_DIGITAL_WALLET.md:1598 (WL-T-054): برای ردیف سناریو «قیمت داینامیک»، مورد مستقل «بازیابی بدون کسر تکراری» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09 | `C13A-R08;REQ:CORE:C09:015` | `TASK:CORE:C13A:003;TASK:CORE:C09:004` | `C13A-AC08;C13A-TD08;AC:CORE:C09:015;TEST:CORE:C09:015` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-21` | `AO:WL-TR-054-08:01` | docs/SHAHAB_DIGITAL_WALLET.md:1599 (WL-T-054): برای ردیف سناریو «اجرای ناقص»، مورد مستقل «خروجی مستقل قابل استفاده در شکست شهاب» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C11a;C12a | `REQ:CORE:C09:016;REQ:CORE:C11A:009;REQ:CORE:C12A:007;REQ:CORE:C12A:009` | `TASK:CORE:C09:003;TASK:CORE:C11A:005;TASK:CORE:C12A:003` | `AC:CORE:C11A:009;TEST:CORE:C11A:009;TEST:C12A:007;TEST:C12A:009;AC:CORE:C09:016;TEST:CORE:C09:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-22` | `AO:WL-TR-054-08:02` | docs/SHAHAB_DIGITAL_WALLET.md:1599 (WL-T-054): برای ردیف سناریو «اجرای ناقص»، مورد مستقل «مصرف مجاز تا لغو مشتری» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C11a;C12a | `REQ:CORE:C09:016;REQ:CORE:C11A:009;REQ:CORE:C12A:007;REQ:CORE:C12A:009` | `TASK:CORE:C09:003;TASK:CORE:C11A:005;TASK:CORE:C12A:003` | `AC:CORE:C11A:009;TEST:CORE:C11A:009;TEST:C12A:007;TEST:C12A:009;AC:CORE:C09:016;TEST:CORE:C09:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-23` | `AO:WL-TR-054-08:03` | docs/SHAHAB_DIGITAL_WALLET.md:1599 (WL-T-054): برای ردیف سناریو «اجرای ناقص»، مورد مستقل «اصلاح همان دامنه بدون هزینه اضافه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C09;C11a;C12a | `REQ:CORE:C09:016;REQ:CORE:C11A:009;REQ:CORE:C12A:007;REQ:CORE:C12A:009` | `TASK:CORE:C09:003;TASK:CORE:C11A:005;TASK:CORE:C12A:003` | `AC:CORE:C11A:009;TEST:CORE:C11A:009;TEST:C12A:007;TEST:C12A:009;AC:CORE:C09:016;TEST:CORE:C09:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
@@ -8716,25 +8716,25 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 | `SC-W054-34` | `AO:WL-TR-054-11:02` | docs/SHAHAB_DIGITAL_WALLET.md:1602 (WL-T-054): برای ردیف سناریو «انتقال»، مورد مستقل «رد فرد به سازمان و سازمان به سازمان» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C10;C12a | `REQ:CORE:C10:002;REQ:CORE:C10:003;REQ:CORE:C10:009;REQ:CORE:C12A:003;REQ:CORE:C12A:005` | `TASK:CORE:C10:001;TASK:CORE:C12A:003` | `TEST:C12A:003;TEST:C12A:005;AC:CORE:C10:002;TEST:CORE:C10:002;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:009;TEST:CORE:C10:009` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-35` | `AO:WL-TR-054-11:03` | docs/SHAHAB_DIGITAL_WALLET.md:1602 (WL-T-054): برای ردیف سناریو «انتقال»، مورد مستقل «رد گیرندهٔ خارج از فهرست سازمان» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C10;C12a | `REQ:CORE:C10:002;REQ:CORE:C10:003;REQ:CORE:C10:009;REQ:CORE:C12A:003;REQ:CORE:C12A:005` | `TASK:CORE:C10:001;TASK:CORE:C12A:003` | `TEST:C12A:003;TEST:C12A:005;AC:CORE:C10:002;TEST:CORE:C10:002;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:009;TEST:CORE:C10:009` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-36` | `AO:WL-TR-054-11:04` | docs/SHAHAB_DIGITAL_WALLET.md:1602 (WL-T-054): برای ردیف سناریو «انتقال»، مورد مستقل «ایجادنشدن حق برداشت برای دریافتی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C10;C12a | `REQ:CORE:C10:002;REQ:CORE:C10:003;REQ:CORE:C10:009;REQ:CORE:C12A:003;REQ:CORE:C12A:005` | `TASK:CORE:C10:001;TASK:CORE:C12A:003` | `TEST:C12A:003;TEST:C12A:005;AC:CORE:C10:002;TEST:CORE:C10:002;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:009;TEST:CORE:C10:009` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-37` | `AO:WL-TR-054-12:01` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «ردیابی عقب و جلو تا منشأ» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-38` | `AO:WL-TR-054-12:02` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «تقسیم و ادغام» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-39` | `AO:WL-TR-054-12:03` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «همهٔ واسطه‌ها» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-40` | `AO:WL-TR-054-12:04` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «حلقه و بازانتقال» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-41` | `AO:WL-TR-054-12:05` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «بازسازی تاریخی سهم‌ها» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-42` | `AO:WL-TR-054-12:06` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «اصلاح بدون حذف سابقه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-43` | `AO:WL-TR-054-12:07` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «کنترل دسترسی خروجی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;C12B-T05` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-37` | `AO:WL-TR-054-12:01` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «ردیابی عقب و جلو تا منشأ» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-38` | `AO:WL-TR-054-12:02` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «تقسیم و ادغام» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-39` | `AO:WL-TR-054-12:03` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «همهٔ واسطه‌ها» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-40` | `AO:WL-TR-054-12:04` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «حلقه و بازانتقال» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-41` | `AO:WL-TR-054-12:05` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «بازسازی تاریخی سهم‌ها» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-42` | `AO:WL-TR-054-12:06` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «اصلاح بدون حذف سابقه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-43` | `AO:WL-TR-054-12:07` | docs/SHAHAB_DIGITAL_WALLET.md:1603 (WL-T-054): برای ردیف سناریو «منشأ و زنجیره»، مورد مستقل «کنترل دسترسی خروجی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12a;C12b | `REQ:CORE:C12A:003;REQ:CORE:C12A:005;REQ:CORE:C12A:007;C12B-R09` | `TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `C12B-AC09;TEST:C12A:003;TEST:C12A:005;TEST:C12A:007;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-44` | `AO:WL-TR-054-13:01` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «OTP و شاهکار» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02 | `REQ:CORE:064;REQ:CORE:065` | `TASK:CORE:C02:003` | `AC:CORE:C02:016;TEST:CORE:C02:016` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-45` | `AO:WL-TR-054-13:02` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «قرارداد محضری سازمان پیش از خدمات» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02 | `REQ:CORE:065` | `TASK:CORE:C02:003` | `AC:CORE:C02:017;TEST:CORE:C02:017` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-46` | `AO:WL-TR-054-13:03` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «نگهداری دائمی مسیر پس از بستن حساب» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C12b | `REQ:CORE:065;C12B-R09` | `TASK:CORE:C02:003;C12B-T05` | `AC:CORE:C02:017;TEST:CORE:C02:017;C12B-AC09;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-47` | `AO:WL-TR-054-13:04` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «تفکیک مهلت خاتمه از انقضای هدیه و طلب نقدی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C12b | `REQ:CORE:065;C12B-R09` | `TASK:CORE:C02:003;C12B-T05` | `AC:CORE:C02:017;TEST:CORE:C02:017;C12B-AC09;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-46` | `AO:WL-TR-054-13:03` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «نگهداری دائمی مسیر پس از بستن حساب» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C12b | `REQ:CORE:065;C12B-R09` | `TASK:CORE:C02:003;TASK:CORE:C12B:005` | `AC:CORE:C02:017;TEST:CORE:C02:017;C12B-AC09;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-47` | `AO:WL-TR-054-13:04` | docs/SHAHAB_DIGITAL_WALLET.md:1604 (WL-T-054): برای ردیف سناریو «احراز و خاتمه»، مورد مستقل «تفکیک مهلت خاتمه از انقضای هدیه و طلب نقدی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C12b | `REQ:CORE:065;C12B-R09` | `TASK:CORE:C02:003;TASK:CORE:C12B:005` | `AC:CORE:C02:017;TEST:CORE:C02:017;C12B-AC09;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-48` | `AO:WL-TR-054-14:01` | docs/SHAHAB_DIGITAL_WALLET.md:1605 (WL-T-054): برای ردیف سناریو «سازمان»، مورد مستقل «خروج عضو یا تغییر سقف وسط عملیات» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10;C12a | `REQ:CORE:065;REQ:CORE:066;REQ:CORE:C10:003;REQ:CORE:C10:011;REQ:CORE:C12A:011` | `TASK:CORE:C02:003;TASK:CORE:C10:001;TASK:CORE:C12A:004` | `AC:CORE:C02:016;AC:CORE:C02:017;TEST:CORE:C02:016;TEST:CORE:C02:017;TEST:C12A:011;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:011;TEST:CORE:C10:011` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-49` | `AO:WL-TR-054-14:02` | docs/SHAHAB_DIGITAL_WALLET.md:1605 (WL-T-054): برای ردیف سناریو «سازمان»، مورد مستقل «افراد فقط در فهرست سازمان» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10;C12a | `REQ:CORE:065;REQ:CORE:066;REQ:CORE:C10:003;REQ:CORE:C10:011;REQ:CORE:C12A:011` | `TASK:CORE:C02:003;TASK:CORE:C10:001;TASK:CORE:C12A:004` | `AC:CORE:C02:016;AC:CORE:C02:017;TEST:CORE:C02:016;TEST:CORE:C02:017;TEST:C12A:011;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:011;TEST:CORE:C10:011` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-50` | `AO:WL-TR-054-14:03` | docs/SHAHAB_DIGITAL_WALLET.md:1605 (WL-T-054): برای ردیف سناریو «سازمان»، مورد مستقل «تفاوت انتقال با سقف مشترک» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10;C12a | `REQ:CORE:065;REQ:CORE:066;REQ:CORE:C10:003;REQ:CORE:C10:011;REQ:CORE:C12A:011` | `TASK:CORE:C02:003;TASK:CORE:C10:001;TASK:CORE:C12A:004` | `AC:CORE:C02:016;AC:CORE:C02:017;TEST:CORE:C02:016;TEST:CORE:C02:017;TEST:C12A:011;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:011;TEST:CORE:C10:011` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-51` | `AO:WL-TR-054-14:04` | docs/SHAHAB_DIGITAL_WALLET.md:1605 (WL-T-054): برای ردیف سناریو «سازمان»، مورد مستقل «نبود مسیر شارژ شخصی و انتقال به سازمان» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10;C12a | `REQ:CORE:065;REQ:CORE:066;REQ:CORE:C10:003;REQ:CORE:C10:011;REQ:CORE:C12A:011` | `TASK:CORE:C02:003;TASK:CORE:C10:001;TASK:CORE:C12A:004` | `AC:CORE:C02:016;AC:CORE:C02:017;TEST:CORE:C02:016;TEST:CORE:C02:017;TEST:C12A:011;AC:CORE:C10:003;TEST:CORE:C10:003;AC:CORE:C10:011;TEST:CORE:C10:011` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-52` | `AO:WL-TR-054-15:01` | docs/SHAHAB_DIGITAL_WALLET.md:1606 (WL-T-054): برای ردیف سناریو «خودکار»، مورد مستقل «شکست شارژ خودکار یا پرداخت دوره‌ای و کمبود اعتبار» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C11b | `REQ:CORE:C11B:001;REQ:CORE:C11B:006;REQ:CORE:C11B:007` | `TASK:CORE:C11B:003` | `TEST:C11B:001;TEST:C11B:006;TEST:C11B:007` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-53` | `AO:WL-TR-054-16:01` | docs/SHAHAB_DIGITAL_WALLET.md:1607 (WL-T-054): برای ردیف سناریو «مغایرت»، مورد مستقل «اختلاف بانک و دفترکل» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12b | `C12B-R02` | `C12B-T01` | `C12B-AC02;C12B-TD02` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-54` | `AO:WL-TR-054-16:02` | docs/SHAHAB_DIGITAL_WALLET.md:1607 (WL-T-054): برای ردیف سناریو «مغایرت»، مورد مستقل «پول نامشخص یا در راه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12b | `C12B-R03;C12B-R04` | `C12B-T02;C12B-T03` | `C12B-AC03;C12B-TD03;C12B-AC04;C12B-TD04` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
-| `SC-W054-55` | `AO:WL-TR-054-17:01` | docs/SHAHAB_DIGITAL_WALLET.md:1608 (WL-T-054): برای ردیف سناریو «اصلاح»، مورد مستقل «ثبت دلیل، مسئول، زمان و ارتباط با تراکنش اولیه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C11a;C12a;C12b | `REQ:CORE:C11A:009;REQ:CORE:C12A:007;REQ:CORE:C12A:008;C12B-R09` | `TASK:CORE:C11A:005;TASK:CORE:C12A:003;C12B-T05` | `AC:CORE:C11A:009;C12B-AC09;TEST:CORE:C11A:009;TEST:C12A:007;TEST:C12A:008;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-53` | `AO:WL-TR-054-16:01` | docs/SHAHAB_DIGITAL_WALLET.md:1607 (WL-T-054): برای ردیف سناریو «مغایرت»، مورد مستقل «اختلاف بانک و دفترکل» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12b | `C12B-R02` | `TASK:CORE:C12B:001` | `C12B-AC02;C12B-TD02` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-54` | `AO:WL-TR-054-16:02` | docs/SHAHAB_DIGITAL_WALLET.md:1607 (WL-T-054): برای ردیف سناریو «مغایرت»، مورد مستقل «پول نامشخص یا در راه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C12b | `C12B-R03;C12B-R04` | `TASK:CORE:C12B:002;TASK:CORE:C12B:003` | `C12B-AC03;C12B-TD03;C12B-AC04;C12B-TD04` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
+| `SC-W054-55` | `AO:WL-TR-054-17:01` | docs/SHAHAB_DIGITAL_WALLET.md:1608 (WL-T-054): برای ردیف سناریو «اصلاح»، مورد مستقل «ثبت دلیل، مسئول، زمان و ارتباط با تراکنش اولیه» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C11a;C12a;C12b | `REQ:CORE:C11A:009;REQ:CORE:C12A:007;REQ:CORE:C12A:008;C12B-R09` | `TASK:CORE:C11A:005;TASK:CORE:C12A:003;TASK:CORE:C12B:005` | `AC:CORE:C11A:009;C12B-AC09;TEST:CORE:C11A:009;TEST:C12A:007;TEST:C12A:008;C12B-TD09` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-56` | `AO:WL-TR-054-18:01` | docs/SHAHAB_DIGITAL_WALLET.md:1609 (WL-T-054): برای ردیف سناریو «مالکیت حساب شخصی»، مورد مستقل «تطبیق موفق، منفی، نامعلوم یا خطای API برای شمارهٔ حساب و کد ملی» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10 | `REQ:CORE:064;REQ:CORE:065;REQ:CORE:C10:005` | `TASK:CORE:C02:003;TASK:CORE:C10:002` | `AC:CORE:C02:016;TEST:CORE:C02:016;AC:CORE:C02:017;TEST:CORE:C02:017;AC:CORE:C10:005;TEST:CORE:C10:005` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 | `SC-W054-57` | `AO:WL-TR-054-18:02` | docs/SHAHAB_DIGITAL_WALLET.md:1609 (WL-T-054): برای ردیف سناریو «مالکیت حساب شخصی»، مورد مستقل «برداشت فقط پس از موفقیت معتبر» باید در معیار پذیرش و Test بستهٔ مالک جداگانه assert شود؛ این فهرست به‌تنهایی Test اجراشده نیست. | C02;C10 | `REQ:CORE:065;REQ:CORE:C10:001;REQ:CORE:C10:005` | `TASK:CORE:C02:003;TASK:CORE:C10:001;TASK:CORE:C10:002` | `AC:CORE:C02:016;TEST:CORE:C02:016;AC:CORE:C10:001;TEST:CORE:C10:001;AC:CORE:C10:005;TEST:CORE:C10:005` | VERIFIED_COVERED — plan complete; product test NOT_EXECUTED |
 
@@ -8745,7 +8745,7 @@ Assistant باید بتواند زمینهٔ لازم برای پیشبرد یک
 | Atomic obligation | Requirement / Task owner | AC | Test Definition | برنامهٔ پذیرش و نتیجهٔ مورد انتظار | اجرای محصول |
 |---|---|---|---|---|---|
 | `AO:WL-TR-052-02:01` | `REQ:CORE:C10:008`; `TASK:CORE:C10:004` | `AC:CORE:C10:008` | `TEST:CORE:C10:008` | پیش‌نمایش مبلغ، مقصد و کارمزد برآوردی را پیش از پذیرش نشان می‌دهد و هیچ رزروی نمی‌سازد؛ رد یا انقضای پیش‌نمایش اثری مالی ندارد؛ رزرو فقط پس از پذیرش معتبر همان پیش‌نمایش انجام می‌شود. | `NOT_EXECUTED` |
-| `AO:WL-TR-054-04:03` | `REQ:CORE:C08:009`; `C13A-R10`; `TASK:CORE:C08:001`; `C13A-T04` | `AC:CORE:C08:009`; `C13A-AC10`; `C12A-AC09` | `TEST:CORE:C08:009`; `C13A-TD10`; `TEST:CORE:C12A:009` | اصلاح/ابطال سند سازمانی به درخواست و سند قبلی پیوند می‌خورد؛ تکرار اصلاح همان درخواست فاکتور/وصول/اعتبار دوم نمی‌سازد؛ فاکتورِ اصلاح‌شده به‌تنهایی وصول یا اعتبار قابل‌مصرف ایجاد نمی‌کند. | `NOT_EXECUTED` |
+| `AO:WL-TR-054-04:03` | `REQ:CORE:C08:009`; `C13A-R10`; `TASK:CORE:C08:001`; `TASK:CORE:C13A:004` | `AC:CORE:C08:009`; `C13A-AC10`; `C12A-AC09` | `TEST:CORE:C08:009`; `C13A-TD10`; `TEST:CORE:C12A:009` | اصلاح/ابطال سند سازمانی به درخواست و سند قبلی پیوند می‌خورد؛ تکرار اصلاح همان درخواست فاکتور/وصول/اعتبار دوم نمی‌سازد؛ فاکتورِ اصلاح‌شده به‌تنهایی وصول یا اعتبار قابل‌مصرف ایجاد نمی‌کند. | `NOT_EXECUTED` |
 | `AO:WL-TR-054-10:04` | `REQ:CORE:C08:013`; `REQ:CORE:C10:002`; `TASK:CORE:C08:005`; `TASK:CORE:C10:001` | `AC:CORE:C08:013`; `AC:CORE:C10:002` | `TEST:CORE:C08:013`; `TEST:CORE:C10:002` | انتقال اعتبار هدیه منشأ، سقف و مصرف قبلی را حفظ می‌کند؛ انتقال سقف کمپین یا ظرفیت استفاده‌شده را بازنشانی نمی‌کند؛ آزمون ترکیب چند کد و انتقال، سقف تجمیعی واحد را می‌سنجد. | `NOT_EXECUTED` |
 | `AO:WL-TR-054-11:01` | `REQ:CORE:C10:009`; `REQ:CORE:C12A:003`; `TASK:CORE:C10:003`; `TASK:CORE:C12A:003` | `AC:CORE:C10:009`; `AC:CORE:C12A:003` | `TEST:CORE:C10:009`; `TEST:CORE:C12A:003` | در قطع ارتباط میان ثبت فرستنده و گیرنده، همان انتقال قابل استعلام و تعیین تکلیف است؛ retry همان intent حداکثر یک اثر بدهکار/بستانکارِ مرتبط ایجاد می‌کند و وضعیت نامعلوم به موفقیت کامل تعبیر نمی‌شود. | `NOT_EXECUTED` |
 | `AO:WL-TR-054-13:04` | `REQ:CORE:074`; `REQ:CORE:C07:020`; `REQ:CORE:C11A:006`; `TASK:CORE:C02:002`; `TASK:CORE:C07:005`; `TASK:CORE:C11A:004` | `AC:CORE:C02:025`; `AC:CORE:C07:020`; `AC:CORE:C11A:006` | `TEST:CORE:C02:025`; `TEST:CORE:C07:020`; `TEST:CORE:C11A:006` | بستن حساب تا تعیین تکلیف تعهدات مجاز نمی‌شود؛ بستن حساب تاریخ اعتبار هدیه را بازنشانی نمی‌کند و طلب نقدی/سوابق مالی را حذف نمی‌کند. زمان‌های دقیقِ بازپرداخت یا نگهداریِ نیازمند تصمیم جداگانه تعیین نمی‌شوند. | `NOT_EXECUTED` |
