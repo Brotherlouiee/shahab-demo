@@ -1,0 +1,51 @@
+{
+  "source_blobs": [
+    {
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "physical_lines": 2550,
+      "final_newline": true
+    },
+    {
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "git_blob_sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "physical_lines": 1780,
+      "final_newline": false
+    }
+  ],
+  "heading_count": 326,
+  "table_count": 58,
+  "source_unit_count": 384,
+  "candidate_paragraph_count": 1136,
+  "method": "Preserve baseline candidate IDs; reconcile source units; apply only individually evidenced dispositions from semantic-review-dispositions.csv; all other classifications remain pending; package links remain unverified.",
+  "limitations": [
+    "1633 of 1633 candidates have individual dispositions; 0 remain pending semantic review.",
+    "Remaining unreviewed content is derived from candidate rows: 0 text ranges, 0 table data rows, and 0 fenced blocks.",
+    "Execution references are candidate citations and must be confirmed against package behavior.",
+    "Graph node overlap is only a retrieval aid; inferred/ambiguous edges do not approve requirements.",
+    "The 1,110 baseline paragraph candidates are preserved; 26 previously omitted prose ranges are appended with new IDs."
+  ],
+  "status": "SEMANTIC_REVIEW_COMPLETE",
+  "paragraph_range_count": 1136,
+  "table_row_candidate_count": 470,
+  "code_block_count": 27,
+  "candidate_record_count": 1633,
+  "graph": {
+    "commit": "17622bf4dd56108bee10d880a9dc5eb9617482fd",
+    "path": "knowledge-graph/phase2-reference-docs/semantic/graph.json",
+    "sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+    "usage": "discovery and locator references only; no semantic mapping is accepted from graph edges alone"
+  },
+  "baseline_paragraph_candidate_count": 1110,
+  "newly_recovered_paragraph_range_count": 26,
+  "inventory_row_count": 1547,
+  "semantic_review_disposition_ledger": "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv",
+  "semantic_reviewed_candidate_count": 1633,
+  "pending_semantic_candidate_count": 0,
+  "structural_source_unit_disposition_ledger": "docs/audits/phase2-source-coverage/source-unit-review-dispositions.csv",
+  "structural_source_units_dispositioned": 384,
+  "semantic_batch_progress_ledger": "docs/audits/phase2-source-coverage/semantic-batch-progress.csv",
+  "atomic_obligation_disposition_ledger": "docs/audits/phase2-source-coverage/atomic-obligation-dispositions.csv"
+}

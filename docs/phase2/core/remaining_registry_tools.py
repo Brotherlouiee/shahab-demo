@@ -493,13 +493,14 @@ def render(rows):
     else:
         publication_line='درخواست انتشار قبلی مسدود بود؛ وضعیت فعلی در Checkpoint ثبت شده است.'
     common=[
-        f"# ادامه برنامه Core/Wallet — وضعیت اصلاح C02: RA={c02['RA']} / IPA={c02['IPA']}",
-        '**نمای مشتق از [CORE_REGISTRY.jsonl](CORE_REGISTRY.jsonl). وضعیت کل: PARTIAL؛ آمادگی ممیزی نهایی: خیر.**',
+        f"# نمای استخراج Core/Wallet — وضعیت Scope مرور C02: RA={c02['RA']} / IPA={c02['IPA']}",
+        '**این فایل نمای استخراج/Scope View از CORE_REGISTRY.jsonl است، نه رجیستری پذیرش ۳۶بسته‌ای. وضعیت کل همین رجیستری: PARTIAL؛ آمادگی ممیزی نهایی Scope آن: خیر.**',
+        'مرجع رسمی پذیرش برنامه ۳۶ بسته، جدول وضعیت و فصل‌های متناظر در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md است. وضعیت‌های package/gate و Scope View این رجیستری تاریخچه مرور Source Unit را نشان می‌دهد؛ NOT_STARTED در این نما با پذیرش جاری یک بسته در برنامه تعارض ندارد. رکوردهای تاریخی و قرارداد C02 دست‌نخورده می‌مانند.',
         f"C01 با RA=PASS و IPA=PASS در سطح تعریف برنامه حفظ شده است. C02 اکنون RA={c02['RA']} و IPA={c02['IPA']} است؛ پذیرش تعریف برنامه مجوز پیاده‌سازی نیست.",
         f"شاخه `{cp['branch']}`؛ مبنای معتبر `{BASE}`. SHA حامل Checkpoint از Git خوانده شود.",
         f"Blob رجیستری مبنا `{cp['base_registry_blob']}`؛ hash پیشوند تغییرناپذیر `{cp['preserved_prefix_sha256']}`؛ ۲۵۵۴ رکورد قبلی حفظ شده‌اند.",
-        '## وضعیت ۱۷ بسته',
-        table(['بسته','عنوان','واحدهای مرورشده','نامزد/اتمی','نیازمندی فعال / TE / Task / AC-Test','RA','IPA'],[(p['pkg'],p['title'],len({x['source_unit_id'] for x in sem}) if p['pkg']=='C02' else 0,len(cands) if p['pkg']=='C02' else 0,f"{len(reqs)} / 1 / {len(tasks)} / {len(ac)}-{len(tests)}" if p['pkg']=='C02' else '۰ / ۰ / ۰ / ۰',p['RA'],p['IPA']) for p in packages]),
+        '## وضعیت ۱۷ بسته در نمای استخراج (نه شمارنده پذیرش ۳۶بسته‌ای)',
+        table(['بسته','عنوان','واحدهای مرورشده','نامزد/اتمی','نیازمندی فعال / TE / Task / AC-Test','RA رجیستری/Scope','IPA رجیستری/Scope'],[(p['pkg'],p['title'],len({x['source_unit_id'] for x in sem}) if p['pkg']=='C02' else 0,len(cands) if p['pkg']=='C02' else 0,f"{len(reqs)} / 1 / {len(tasks)} / {len(ac)}-{len(tests)}" if p['pkg']=='C02' else '۰ / ۰ / ۰ / ۰',p['RA'],p['IPA']) for p in packages]),
         '## پوشش دو سند و ممیزی معنایی',
         f"فهرست G1 نسخه V4 برای هر ۲٬۲۳۰ واحد شناسه، سند، موقعیت و hash دارد. {sum(x.get('screening_status')=='REUSED_PRIOR_REVIEW' for x in rows if x.get('t')=='global_triage')} بازبینی معتبر قبلی استفاده شد و ۸۶۷ واحد تازه در سطح غربال‌گری مشترک تعیین تکلیف شدند؛ ابهام‌های مالکیت با رابطه UNCERTAIN و دلیل ثبت شده‌اند. G1={by['AUDIT:V4:G1']['status']}. از ۳۶ Scope View، یک نما (C02) کامل و ۳۵ نمای بسته‌های آینده INITIAL هستند. C02: {len({x['source_unit_id'] for x in sem})} بازبینی عمیق ثبت‌شده، {len(cands)} نامزد/رد اتمی، {len(reqs)} الزام پذیرفته‌شده. شمارش از Commit پایه: ۶۰ Case تکرار سه‌گانه در کل ۲۴۳ مورد (۲۴ فعال و ۳۶ منسوخ/Handoff) و صفر موردِ تکرار فقط دوتایی؛ ۲۴ مورد فعال اصلاح شدند. از ۲۰۷ Case فعال فعلی، {sum(1 for t in tests for c in t.get('cases',[]) if len({str(c.get(k,'')).strip().casefold() for k in ('action','input','observable_expectation')})<3)} مورد با فیلدهای برابر باقی است. RA/IPA={c02['RA']}/{c02['IPA']}.",
         'تخصیص بستهٔ دقیق برای حوزه‌های RAG/Assistant در این شاخه قابل اثبات نبود؛ موارد مربوط با owner_domain و pending_package_allocation ثبت شده‌اند. هیچ alias نامعتبر به شناسهٔ بسته تبدیل نشده است. تصمیم‌های باز، اجرای محصول و مستقل‌بودن بازبین ادعا نشده‌اند.',
@@ -508,13 +509,13 @@ def render(rows):
         'Validator ساختاری و آزمون‌های جهش مستقل اجرا شدند؛ محصول یا رفتار runtime آزموده نشده است. Testهای C02 تعریف دقیق برنامه‌اند و در وضعیت NOT_EXECUTED مانده‌اند.',
         table(['مترک','مقدار'],[('registry records',len(rows)),('C02 candidates and atomic traces',len(cands)),('C02 semantic reviews',len(sem)),('accepted atomic requirements',len(reqs)),('tasks',len(tasks)),('AC/Test',f'{len(ac)}/{len(tests)}'),('product tests executed',0),('RA/IPA',f"{gates.get('RA')}/{gates.get('IPA')}")]),
         '## وضعیت ادامه',
-        f"آخرین بستهٔ برنامه‌ریزی‌شدهٔ کامل {cp['last_complete_package']} است؛ C03 شروع نشده است. {cp['next_action']}",
-        'کل برنامه ۱۷ بسته هنوز PARTIAL است؛ `CORE_REMAINING_17_PLANNING_COMPLETE` و آمادگی ممیزی نهایی Core اعلام نمی‌شود.',
+        f"آخرین Scope View کامل رجیستری {cp['last_complete_package']} است؛ مرور عمیق Source Unit برای نماهای بعدی در این workflow ثبت نشده است. {cp['next_action']}",
+        'نمای ممیزی Source Unit این رجیستری هنوز ۱۷ بسته‌ای و PARTIAL است؛ این وضعیت جای شمارنده پذیرش رسمی برنامه در سند یکپارچه را نمی‌گیرد و `CORE_REMAINING_17_PLANNING_COMPLETE` اعلام نمی‌شود.',
         '## انتشار',publication_line,
         '## اعتبارسنجی', '```text\npython docs/phase2/core/remaining_registry_tools.py --render\npython docs/phase2/core/remaining_registry_tools.py --check --mutations\n```',
     ]
     candidate_view=[
-        '# C02 — الزامات اتمی، والدهای مرکب و Handoff',f"**RA={c02['RA']}؛ IPA={c02['IPA']}؛ منبع داده CORE_REGISTRY.jsonl.**",
+        '# C02 — نمای استخراج Source Unit، الزامات اتمی و Handoff',f"**RA={c02['RA']}؛ IPA={c02['IPA']} برای ممیزی Scope C02؛ این فایل رجیستری پذیرش برنامه ۳۶بسته‌ای نیست. مرجع پذیرش جاری: جدول و فصل‌های docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md.**",
         table(['ID','Source','Owner','Normative status','Disposition','Clause'],[(c['id'],':'.join(map(str,c['span'])),c['owner_package'],c['normative_status'],c.get('status'),c['text']) for c in cands]),
         table(['Requirement','Source candidate','Task','AC','Test','Code state'],[(r['id'],','.join(r['source_candidates']),','.join(r['tasks']),','.join(r['acceptance_criteria']),','.join(r['tests']),r['code_state']) for r in reqs]),
         'تصمیم‌های باز با گیت اجرای implementation باقی‌اند؛ این پذیرش برنامه مجوز اجرا یا ادعای انطباق نیست.',

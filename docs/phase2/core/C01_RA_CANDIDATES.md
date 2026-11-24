@@ -71,16 +71,16 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | شناسه | هدف | تسک‌ها |
 | --- | --- | --- |
-| TE:CORE:001 | Baseline and modular Core architecture | TASK:CORE:001, TASK:CORE:002, TASK:CORE:003 |
-| TE:CORE:002 | Core/Adviser contracts, snapshots and job/event boundaries | TASK:CORE:004, TASK:CORE:005, TASK:CORE:006, TASK:CORE:008 |
-| TE:CORE:003 | Resilience, configuration and privacy-aware telemetry | TASK:CORE:007, TASK:CORE:009, TASK:CORE:010 |
-| TE:CORE:004 | Incremental rollout, capacity and finance boundary protection | TASK:CORE:011, TASK:CORE:012, TASK:CORE:013 |
+| TE:CORE:001 | Baseline and modular Core architecture | TASK:CORE:C01:001, TASK:CORE:C01:002, TASK:CORE:C01:003 |
+| TE:CORE:002 | Core/Adviser contracts, snapshots and job/event boundaries | TASK:CORE:C01:004, TASK:CORE:C01:005, TASK:CORE:C01:006, TASK:CORE:C01:008 |
+| TE:CORE:003 | Resilience, configuration and privacy-aware telemetry | TASK:CORE:C01:007, TASK:CORE:C01:009, TASK:CORE:C01:010 |
+| TE:CORE:004 | Incremental rollout, capacity and finance boundary protection | TASK:CORE:C01:011, TASK:CORE:C01:012, TASK:CORE:C01:013 |
 
 ## تسک‌های موجود و طرح نهایی C01
 
 مالک تدوین همه موارد C01 است. ستون مالک پیاده‌سازی فقط handoff برنامه را مشخص می‌کند؛ هیچ بسته دریافت‌کننده در این مأموریت پذیرفته نشده است. `BLOCKED_BY_DECISION` مانع اجرای انتخاب وابسته است؛ وجود تعریف معیار/آزمون این مانع را رفع نمی‌کند. هیچ عدد زمان/هزینه/توکن یا تعهد هفتگی جعل نشده است.
 
-### TASK:CORE:001 — Verify phase-one code/data/migration and regression baseline without assuming production state
+### TASK:CORE:C01:001 — Verify phase-one code/data/migration and regression baseline without assuming production state
 
 مالک پیاده‌سازی: `C01`؛ وضعیت کد: `EXISTING_PARTIAL`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -96,9 +96,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:001.S01 | Map real routes/schemas/dependencies and preserved behavior |
-| TASK:CORE:001.S02 | Verify Alembic heads/history against actual PostgreSQL test environment |
-| TASK:CORE:001.S03 | Record tag/release digest and E2E evidence; mark unknown if runtime inaccessible |
+| TASK:CORE:C01:001.S01 | Map real routes/schemas/dependencies and preserved behavior |
+| TASK:CORE:C01:001.S02 | Verify Alembic heads/history against actual PostgreSQL test environment |
+| TASK:CORE:C01:001.S03 | Record tag/release digest and E2E evidence; mark unknown if runtime inaccessible |
 
 **AC:** AC:CORE:C01:022, AC:CORE:C01:023
 
@@ -113,7 +113,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/tests/test_postgresql_migrations.py` — Destructive test setup downgrades base: use disposable test PostgreSQL only
 - `docker-compose.prod.yml` — Pinned deployment configuration is not proof of actual VM image
 
-### TASK:CORE:002 — Define and test modular Core boundaries and independent service data ownership
+### TASK:CORE:C01:002 — Define and test modular Core boundaries and independent service data ownership
 
 مالک پیاده‌سازی: `C01`؛ وضعیت کد: `EXISTING_PARTIAL`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -129,9 +129,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:002.S01 | Map module ownership and public ports |
-| TASK:CORE:002.S02 | Specify forbidden private ORM/table access and dependency DAG |
-| TASK:CORE:002.S03 | Specify local transaction boundaries and regression safety |
+| TASK:CORE:C01:002.S01 | Map module ownership and public ports |
+| TASK:CORE:C01:002.S02 | Specify forbidden private ORM/table access and dependency DAG |
+| TASK:CORE:C01:002.S03 | Specify local transaction boundaries and regression safety |
 
 **AC:** AC:CORE:C01:001, AC:CORE:C01:005, AC:CORE:C01:007, AC:CORE:C01:013
 
@@ -142,7 +142,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/app/main.py` — Composition root wires repositories and application middleware; ownership hardening needs architecture tests
 - `backend/app/infrastructure/db/models.py` — Shared ORM models exist; not proof of validated phase-two private boundaries
 
-### TASK:CORE:003 — Specify R1 Core/Adviser deployment and future Assistant boundary on existing infrastructure
+### TASK:CORE:C01:003 — Specify R1 Core/Adviser deployment and future Assistant boundary on existing infrastructure
 
 مالک پیاده‌سازی: `C01`؛ وضعیت کد: `NEW`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -158,9 +158,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:003.S01 | Define two R1 deployment units, Assistant interface only |
-| TASK:CORE:003.S02 | Define shared-host resource and logical tenant/schema separation |
-| TASK:CORE:003.S03 | Specify R1 boot/integration and no-Wallet dependency checks |
+| TASK:CORE:C01:003.S01 | Define two R1 deployment units, Assistant interface only |
+| TASK:CORE:C01:003.S02 | Define shared-host resource and logical tenant/schema separation |
+| TASK:CORE:C01:003.S03 | Specify R1 boot/integration and no-Wallet dependency checks |
 
 **AC:** AC:CORE:C01:002, AC:CORE:C01:003, AC:CORE:C01:004, AC:CORE:C01:049
 
@@ -171,7 +171,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `docker-compose.prod.yml` — Current services describe phase-one deployment; independent Adviser topology still design work
 - `backend/app/api/v1/router.py` — No running Assistant/Adviser inferred from route inventory
 
-### TASK:CORE:004 — Preserve deterministic loan recommendation under one published snapshot and expose versioned contract
+### TASK:CORE:C01:004 — Preserve deterministic loan recommendation under one published snapshot and expose versioned contract
 
 مالک پیاده‌سازی: `C05b`؛ وضعیت کد: `REUSE`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -187,9 +187,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:004.S01 | Freeze existing golden semantics and published snapshot authority |
-| TASK:CORE:004.S02 | Specify synchronous recommendation result schema, version and provenance |
-| TASK:CORE:004.S03 | Specify failure/invalid-snapshot handling without fabricated match |
+| TASK:CORE:C01:004.S01 | Freeze existing golden semantics and published snapshot authority |
+| TASK:CORE:C01:004.S02 | Specify synchronous recommendation result schema, version and provenance |
+| TASK:CORE:C01:004.S03 | Specify failure/invalid-snapshot handling without fabricated match |
 
 **AC:** AC:CORE:C01:008, AC:CORE:C01:009
 
@@ -203,7 +203,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/tests/test_recommendation_engine_golden.py` — Existing golden suite is reuse evidence, not executed in planning
 - `backend/tests/test_serving_publication.py` — Existing publication suite is a future regression target
 
-### TASK:CORE:005 — Design service-owned durable job pattern without imposing one universal workflow engine
+### TASK:CORE:C01:005 — Design service-owned durable job pattern without imposing one universal workflow engine
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `NEW`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -219,9 +219,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:005.S01 | Separate short synchronous calls from actual long jobs |
-| TASK:CORE:005.S02 | Specify persistent job state/version and safe recovery |
-| TASK:CORE:005.S03 | Define old-job completion vs new-engine routing criteria |
+| TASK:CORE:C01:005.S01 | Separate short synchronous calls from actual long jobs |
+| TASK:CORE:C01:005.S02 | Specify persistent job state/version and safe recovery |
+| TASK:CORE:C01:005.S03 | Define old-job completion vs new-engine routing criteria |
 
 **AC:** AC:CORE:C01:010, AC:CORE:C01:011, AC:CORE:C01:041, AC:CORE:C01:042
 
@@ -231,7 +231,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 - `backend/app/questionnaire/infrastructure/sqlalchemy_sessions.py` — Existing persistence adapter illustrates boundaries, not a generic job engine
 
-### TASK:CORE:006 — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
+### TASK:CORE:C01:006 — Specify transactional outbox and idempotent event consumption only for proven asynchronous flows
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `NEW`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -247,9 +247,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:006.S01 | Identify truly necessary reliable events |
-| TASK:CORE:006.S02 | Specify atomic local writes and publisher recovery |
-| TASK:CORE:006.S03 | Specify duplicate/out-of-order/unknown-schema consumer behavior |
+| TASK:CORE:C01:006.S01 | Identify truly necessary reliable events |
+| TASK:CORE:C01:006.S02 | Specify atomic local writes and publisher recovery |
+| TASK:CORE:C01:006.S03 | Specify duplicate/out-of-order/unknown-schema consumer behavior |
 
 **AC:** AC:CORE:C01:012, AC:CORE:C01:043, AC:CORE:C01:044
 
@@ -259,7 +259,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 - `backend/app/data_pipeline/application/publish_serving_version.py` — Atomic publishing interface exists; does not establish an Outbox publisher
 
-### TASK:CORE:007 — Specify bounded cross-service resilience and interactive/background isolation
+### TASK:CORE:C01:007 — Specify bounded cross-service resilience and interactive/background isolation
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `NEW`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -275,9 +275,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:007.S01 | Set timeout budget from tested path baseline |
-| TASK:CORE:007.S02 | Bound transient retry and circuit state transitions |
-| TASK:CORE:007.S03 | Separate concurrency pools and graceful degradation |
+| TASK:CORE:C01:007.S01 | Set timeout budget from tested path baseline |
+| TASK:CORE:C01:007.S02 | Bound transient retry and circuit state transitions |
+| TASK:CORE:C01:007.S03 | Separate concurrency pools and graceful degradation |
 
 **AC:** AC:CORE:C01:037, AC:CORE:C01:038, AC:CORE:C01:039, AC:CORE:C01:040
 
@@ -287,7 +287,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 - `backend/app/core/config.py` — Some connection/provider timeouts exist; not a verified cross-service resilience matrix
 
-### TASK:CORE:008 — Design Core API versioning and semantic provider/consumer compatibility verification
+### TASK:CORE:C01:008 — Design Core API versioning and semantic provider/consumer compatibility verification
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `EXISTING_PARTIAL`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -303,9 +303,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:008.S01 | Inventory existing versioned API and consumers |
-| TASK:CORE:008.S02 | Specify schema-first compatible and breaking change protocol |
-| TASK:CORE:008.S03 | Define consumer contract, semantic field and error tests |
+| TASK:CORE:C01:008.S01 | Inventory existing versioned API and consumers |
+| TASK:CORE:C01:008.S02 | Specify schema-first compatible and breaking change protocol |
+| TASK:CORE:C01:008.S03 | Define consumer contract, semantic field and error tests |
 
 **AC:** AC:CORE:C01:006, AC:CORE:C01:015, AC:CORE:C01:016
 
@@ -316,7 +316,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/app/api/v1/router.py` — Existing API v1 route authority is reused
 - `backend/tests/test_recommendation_contract_fixtures.py` — Canonical fixture/version assertions exist; full provider/consumer matrix still absent
 
-### TASK:CORE:009 — Separate typed runtime config, secrets, feature flags and protected financial business policy
+### TASK:CORE:C01:009 — Separate typed runtime config, secrets, feature flags and protected financial business policy
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `EXISTING_PARTIAL`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -332,9 +332,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:009.S01 | Inventory present Settings and secret paths |
-| TASK:CORE:009.S02 | Define schema, policy authorization, flag dependency and change audit |
-| TASK:CORE:009.S03 | Design compatible config rollback and negative gate cases |
+| TASK:CORE:C01:009.S01 | Inventory present Settings and secret paths |
+| TASK:CORE:C01:009.S02 | Define schema, policy authorization, flag dependency and change audit |
+| TASK:CORE:C01:009.S03 | Design compatible config rollback and negative gate cases |
 
 **AC:** AC:CORE:C01:017, AC:CORE:C01:018, AC:CORE:C01:045, AC:CORE:C01:046
 
@@ -345,7 +345,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/app/core/config.py` — Pydantic Settings, SecretStr, env types and CORS validators exist; financial-policy versioned approval is separate
 - `.github/workflows/security.yml` — Repository scan and dependency/SAST gates exist and must remain
 
-### TASK:CORE:010 — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
+### TASK:CORE:C01:010 — Plan privacy-preserving OpenTelemetry and measured SLO/incident evidence
 
 مالک پیاده‌سازی: `C03`؛ وضعیت کد: `EXISTING_PARTIAL`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -361,9 +361,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:010.S01 | Map existing low-cardinality API observability |
-| TASK:CORE:010.S02 | Specify trace context propagation without PII/OTP |
-| TASK:CORE:010.S03 | Define measurement experiment and SigNoz decision gate |
+| TASK:CORE:C01:010.S01 | Map existing low-cardinality API observability |
+| TASK:CORE:C01:010.S02 | Specify trace context propagation without PII/OTP |
+| TASK:CORE:C01:010.S03 | Define measurement experiment and SigNoz decision gate |
 
 **AC:** AC:CORE:C01:019, AC:CORE:C01:020, AC:CORE:C01:021, AC:CORE:C01:047
 
@@ -374,7 +374,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `backend/app/api/observability.py` — Bounded process-local counters and signals exist; explicitly not a durable monitoring sink or complete OpenTelemetry deployment
 - `backend/tests/test_operational_observability.py` — Existing tests use privacy canaries and bounded counters; no production SLO proof
 
-### TASK:CORE:011 — Implement planning-level stage/release separation and RG/REL/F06/COV evidence mapping
+### TASK:CORE:C01:011 — Implement planning-level stage/release separation and RG/REL/F06/COV evidence mapping
 
 مالک پیاده‌سازی: `C01`؛ وضعیت کد: `REUSE`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -390,9 +390,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:011.S01 | Map risk and RG/REL/F06 controls without replacing them |
-| TASK:CORE:011.S02 | Define stage completion vs incremental readiness evidence |
-| TASK:CORE:011.S03 | Define independent high-risk reviewer, conditional go and rollback records |
+| TASK:CORE:C01:011.S01 | Map risk and RG/REL/F06 controls without replacing them |
+| TASK:CORE:C01:011.S02 | Define stage completion vs incremental readiness evidence |
+| TASK:CORE:C01:011.S03 | Define independent high-risk reviewer, conditional go and rollback records |
 
 **AC:** AC:CORE:C01:024, AC:CORE:C01:026, AC:CORE:C01:027, AC:CORE:C01:048
 
@@ -403,7 +403,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 - `.github/workflows/quality.yml` — Existing doc classification, quality, PostgreSQL and browser suites must remain
 - `.github/workflows/security.yml` — Existing repository secret scan preserved
 
-### TASK:CORE:012 — Protect modular Wallet/Ledger boundary and future service/contract integration without early financial activation
+### TASK:CORE:C01:012 — Protect modular Wallet/Ledger boundary and future service/contract integration without early financial activation
 
 مالک پیاده‌سازی: `C07`؛ وضعیت کد: `NEW`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -419,9 +419,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:012.S01 | Document closed-loop scope and Core module ownership |
-| TASK:CORE:012.S02 | Prohibit external-merchant acceptance and early paid-flow assumption |
-| TASK:CORE:012.S03 | Handoff ledger/credit policies to C07-C13 without duplicate implementation |
+| TASK:CORE:C01:012.S01 | Document closed-loop scope and Core module ownership |
+| TASK:CORE:C01:012.S02 | Prohibit external-merchant acceptance and early paid-flow assumption |
+| TASK:CORE:C01:012.S03 | Handoff ledger/credit policies to C07-C13 without duplicate implementation |
 
 **AC:** AC:CORE:C01:033
 
@@ -431,7 +431,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 - `backend/app/api/v1/router.py` — Financial Wallet route not observed; no Wallet implementation assumed
 
-### TASK:CORE:013 — Benchmark real phase-two service capacity and justify any physical split or VM/telemetry deployment
+### TASK:CORE:C01:013 — Benchmark real phase-two service capacity and justify any physical split or VM/telemetry deployment
 
 مالک پیاده‌سازی: `C01`؛ وضعیت کد: `BLOCKED`؛ وضعیت اجرا: `BLOCKED_BY_DECISION`.
 
@@ -447,9 +447,9 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | زیرتسک | اقدام |
 | --- | --- |
-| TASK:CORE:013.S01 | Collect existing production/runtime resource baseline when authorized |
-| TASK:CORE:013.S02 | Measure equal workloads and failure isolation |
-| TASK:CORE:013.S03 | Compare cost and define explicit physical-extraction decision record |
+| TASK:CORE:C01:013.S01 | Collect existing production/runtime resource baseline when authorized |
+| TASK:CORE:C01:013.S02 | Measure equal workloads and failure isolation |
+| TASK:CORE:C01:013.S03 | Compare cost and define explicit physical-extraction decision record |
 
 **AC:** AC:CORE:C01:032
 
@@ -465,7 +465,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:001 — Core is a modular monolith with explicit internal module boundaries; no forced service-per-module split.
 
-مرجع: `B:20;B:1956`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:002`.
+مرجع: `B:20;B:1956`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:002`.
 
 **شرط:** All Core modules
 
@@ -490,7 +490,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:002 — Adviser/RAG has independent deployment and independent data ownership from Core.
 
-مرجع: `B:21;B:788;B:2063`؛ مصوبه: `A01, A02`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:003`.
+مرجع: `B:21;B:788;B:2063`؛ مصوبه: `A01, A02`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:003`.
 
 **شرط:** Core and Adviser integration
 
@@ -515,7 +515,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:003 — Assistant is an independent target service; R1 permits only its boundary/contracts, not running deployment.
 
-مرجع: `B:22-23;B:2063`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:003`.
+مرجع: `B:22-23;B:2063`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:003`.
 
 **شرط:** RAG R1
 
@@ -540,7 +540,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:004 — R1 may reuse current VM, PostgreSQL and Redis, subject to validation; logical ownership remains separate.
 
-مرجع: `B:24;B:2063;B:2071`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:003`.
+مرجع: `B:24;B:2063;B:2071`؛ مصوبه: `A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:003`.
 
 **شرط:** Initial deployment planning
 
@@ -566,7 +566,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:005 — Service private schemas, data, jobs and transactions must have one owner; no direct cross-service private-table reads/writes.
 
-مرجع: `B:1192;B:1212;B:1825`؛ مصوبه: `A02, E02`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:002`.
+مرجع: `B:1192;B:1212;B:1825`؛ مصوبه: `A02, E02`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:002`.
 
 **شرط:** All service and module private data
 
@@ -592,7 +592,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:006 — Core exposes versioned and authorized data/domain/catalogue interfaces with minimal fields, provenance, version and error behavior.
 
-مرجع: `B:869;B:1212-1214`؛ مصوبه: `A02, E02, B06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:008`.
+مرجع: `B:869;B:1212-1214`؛ مصوبه: `A02, E02, B06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:008`.
 
 **شرط:** Core data, domain and catalogue consumers
 
@@ -619,7 +619,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:007 — No cross-module cyclic dependencies or private ORM leakage; reuse existing common capabilities instead of parallel authorities.
 
-مرجع: `B:1827-1829;B:1986`؛ مصوبه: `A01, A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:002`.
+مرجع: `B:1827-1829;B:1986`؛ مصوبه: `A01, A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:002`.
 
 **شرط:** Cross-module use and reuse
 
@@ -645,7 +645,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:008 — Core retains deterministic loan recommendation, matching, reasons, loan rules and published serving Snapshot.
 
-مرجع: `B:1629-1633;B:2284`؛ مصوبه: `B06, A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:004`.
+مرجع: `B:1629-1633;B:2284`؛ مصوبه: `B06, A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:004`.
 
 **شرط:** Loan recommendation in Adviser
 
@@ -671,7 +671,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:009 — A recommendation run uses one compatible published product Snapshot and rule version, never synthetic results after Core failure.
 
-مرجع: `B:1216;B:2075;B:2326`؛ مصوبه: `A05, B06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:004`.
+مرجع: `B:1216;B:2075;B:2326`؛ مصوبه: `A05, B06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:004`.
 
 **شرط:** Every loan recommendation run
 
@@ -698,7 +698,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:010 — Short deterministic operations use synchronous APIs; long owner-controlled work uses durable asynchronous Job workflows when needed.
 
-مرجع: `B:1192;B:2075`؛ مصوبه: `A03`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:005`.
+مرجع: `B:1192;B:2075`؛ مصوبه: `A03`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:005`.
 
 **شرط:** Classifying a real operation
 
@@ -724,7 +724,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:011 — Each Job owner persists state/result in PostgreSQL and exposes versioned ports/adapters, safe cancel/resume and recovery.
 
-مرجع: `B:916-918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:005`.
+مرجع: `B:916-918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:005`.
 
 **شرط:** A service has a justified durable job
 
@@ -750,7 +750,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:012 — Use transactional outbox only where reliable events are necessary; consumers deduplicate and publishers recover safely.
 
-مرجع: `B:1192;B:1216;B:1833`؛ مصوبه: `A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:006`.
+مرجع: `B:1192;B:1216;B:1833`؛ مصوبه: `A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:006`.
 
 **شرط:** A data change must emit a reliable event to a real consumer
 
@@ -776,7 +776,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:013 — Keep local service transaction boundaries; no default cross-service distributed transaction or global database ownership.
 
-مرجع: `B:1192;B:1216`؛ مصوبه: `A02, A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:002`.
+مرجع: `B:1192;B:1216`؛ مصوبه: `A02, A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:002`.
 
 **شرط:** Service data mutation
 
@@ -801,7 +801,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:015 — Contracts are defined in versioned OpenAPI/schema before breaking changes and tested for structural and semantic consumer compatibility.
 
-مرجع: `B:1827;B:1907`؛ مصوبه: `A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:008`.
+مرجع: `B:1827;B:1907`؛ مصوبه: `A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:008`.
 
 **شرط:** Every public contract change
 
@@ -828,7 +828,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:016 — Breaking changes use new version or expand/migrate/contract with tested provider-consumer matrix and error contract.
 
-مرجع: `B:1827;B:1907;B:2075`؛ مصوبه: `A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:008`.
+مرجع: `B:1827;B:1907;B:2075`؛ مصوبه: `A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:008`.
 
 **شرط:** Breaking field/type/meaning or consumer change
 
@@ -855,7 +855,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:017 — Separate typed/validated operational config, secrets, feature flags and business policies; financial policy cannot be a free-form toggle.
 
-مرجع: `B:25;B:1917`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:009`.
+مرجع: `B:25;B:1917`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:009`.
 
 **شرط:** Configuration design
 
@@ -881,7 +881,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:018 — Config/flag changes require owner permission, diff, audit, secret protection, dependency checks and rollback safety.
 
-مرجع: `B:1917;B:2106`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:009`.
+مرجع: `B:1917;B:2106`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:009`.
 
 **شرط:** Configuration or flag change
 
@@ -908,7 +908,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:019 — OpenTelemetry logs/metrics/traces use nonidentifying correlation IDs; no OTP, token, identity or raw questionnaire in telemetry.
 
-مرجع: `B:1192;B:1837`؛ مصوبه: `A09`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:010`.
+مرجع: `B:1192;B:1837`؛ مصوبه: `A09`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:010`.
 
 **شرط:** Core/Adviser/Job observability
 
@@ -934,7 +934,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:020 — SLO, alerts, runbooks, CPU/RAM and incident controls require measured baselines, not invented thresholds.
 
-مرجع: `B:1837;B:1903;B:1913;B:2332`؛ مصوبه: `A09, F06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:010`.
+مرجع: `B:1837;B:1903;B:1913;B:2332`؛ مصوبه: `A09, F06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:010`.
 
 **شرط:** Critical-path SLO, alert or infrastructure claims
 
@@ -961,7 +961,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:021 — SigNoz is a conditional evaluation; self-hosting on the current production VM is prohibited under recorded capacity; revised deployment requires new evidence and separate approval.
 
-مرجع: `B:24;B:1837`؛ مصوبه: `A09, A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:010`.
+مرجع: `B:24;B:1837`؛ مصوبه: `A09, A01`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:010`.
 
 **شرط:** Telemetry tool and deployment choice
 
@@ -987,7 +987,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:022 — Preserve phase-one routes, identity, questionnaire, scoring, data publication and UI with targeted regression evidence.
 
-مرجع: `B:1761-1762;B:2284-2288;B:2326-2332`؛ مصوبه: `A01, O5-12`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:001`.
+مرجع: `B:1761-1762;B:2284-2288;B:2326-2332`؛ مصوبه: `A01, O5-12`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:001`.
 
 **شرط:** Any phase-two change affecting phase one
 
@@ -1014,7 +1014,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:023 — Database evolution follows Alembic and PostgreSQL migration/restore checks; current migration count and runtime SHA require independent proof.
 
-مرجع: `B:2282;B:2295-2299;B:2328`؛ مصوبه: `O5-12`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:001`.
+مرجع: `B:2282;B:2295-2299;B:2328`؛ مصوبه: `O5-12`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:001`.
 
 **شرط:** Database or runtime baseline claim
 
@@ -1040,7 +1040,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:024 — Distinguish stage completion from increment release readiness; Wallet/Billing cannot be hard dependencies of first RAG release.
 
-مرجع: `B:1938-1940;B:2038-2043;B:2236`؛ مصوبه: `O5-01, O5-13`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:011`.
+مرجع: `B:1938-1940;B:2038-2043;B:2236`؛ مصوبه: `O5-01, O5-13`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:011`.
 
 **شرط:** Release planning
 
@@ -1066,7 +1066,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:026 — Map R1-R4, RG/REL and F06 to every future release; safe rollback, security stop and independent high-risk review cannot be waived.
 
-مرجع: `B:2002-2004;B:2192;B:2198-2219`؛ مصوبه: `O5-10, F06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:011`.
+مرجع: `B:2002-2004;B:2192;B:2198-2219`؛ مصوبه: `O5-10, F06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:011`.
 
 **شرط:** Any future release
 
@@ -1094,7 +1094,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:027 — Keep all approved scope including deferred wallet items; COV gate and bidirectional trace cannot be replaced by a feature checklist.
 
-مرجع: `B:2195;B:2234-2250`؛ مصوبه: `O5-13, O5-14`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:011`.
+مرجع: `B:2195;B:2234-2250`؛ مصوبه: `O5-13, O5-14`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:011`.
 
 **شرط:** Coverage and deferral accounting
 
@@ -1121,7 +1121,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:032 — Require workload, cost and failure evidence before adding physical infrastructure or extracting further services.
 
-مرجع: `B:1871-1879;B:1883-1903;B:2071;B:2244`؛ مصوبه: `A01, O5-08, O5-14`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:013`.
+مرجع: `B:1871-1879;B:1883-1903;B:2071;B:2244`؛ مصوبه: `A01, O5-08, O5-14`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:013`.
 
 **شرط:** Physical split, new host or service extraction proposal
 
@@ -1147,7 +1147,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:033 — Wallet remains a modular Core financial capability, not a prerequisite of first RAG increment and not an external-merchant wallet.
 
-مرجع: `B:2236;W:57;W:1167-1169`؛ مصوبه: `A01, O5-13, Wallet-1.4, 7.1`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:012`.
+مرجع: `B:2236;W:57;W:1167-1169`؛ مصوبه: `A01, O5-13, Wallet-1.4, 7.1`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:012`.
 
 **شرط:** Wallet boundary planning
 
@@ -1174,7 +1174,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:037 — Every synchronous cross-service call must obey a bounded timeout budget; failures must be surfaced and contained.
 
-مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:007`.
+مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:007`.
 
 **شرط:** Every synchronous cross-service call
 
@@ -1199,7 +1199,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:038 — Use circuit breaker where unstable external service can cascade failures; recover without spreading failure.
 
-مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:007`.
+مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:007`.
 
 **شرط:** Unstable dependency capable of cascading failure
 
@@ -1224,7 +1224,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:039 — Retry only transient/retriable outcomes with backoff and a bounded attempt count; uncertain financial effects are reconciled before retry.
 
-مرجع: `B:918;B:1192;B:1913`؛ مصوبه: `A06, A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:007`.
+مرجع: `B:918;B:1192;B:1913`؛ مصوبه: `A06, A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:007`.
 
 **شرط:** Retry of a failed operation
 
@@ -1250,7 +1250,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:040 — Separate capacity of interactive requests and heavy background work using bulkhead or controlled concurrency.
 
-مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:007`.
+مرجع: `B:1192;B:1913`؛ مصوبه: `A06`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:007`.
 
 **شرط:** Interactive and heavy background work compete
 
@@ -1276,7 +1276,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:041 — Recover pending in-service jobs after worker restart while preserving owner authority and avoiding repeated effect.
 
-مرجع: `B:918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:005`.
+مرجع: `B:918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:005`.
 
 **شرط:** Worker crash/restart with pending jobs
 
@@ -1302,7 +1302,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:042 — On engine migration, deliberately route new jobs to the new engine and complete in-flight jobs on the prior engine; adapters alone do not prove zero-change migration.
 
-مرجع: `B:918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:005`.
+مرجع: `B:918;B:1835`؛ مصوبه: `A04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:005`.
 
 **شرط:** Workflow-engine/version migration
 
@@ -1328,7 +1328,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:043 — Event consumers deduplicate identity and enforce versioned ordering/compatibility; unknown versions are rejected or quarantined, never blindly applied.
 
-مرجع: `B:1216;B:1833;B:1915`؛ مصوبه: `A05, A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:006`.
+مرجع: `B:1216;B:1833;B:1915`؛ مصوبه: `A05, A07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:006`.
 
 **شرط:** Event consumer receives delivery
 
@@ -1355,7 +1355,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:044 — Outbox publisher must persist unsent local records and recover after commit-before-send crash without missing necessary events.
 
-مرجع: `B:1216;B:1915`؛ مصوبه: `A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:006`.
+مرجع: `B:1216;B:1915`؛ مصوبه: `A05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:006`.
 
 **شرط:** Publisher crashes after local commit before send
 
@@ -1381,7 +1381,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:045 — Scoring, catalogue freshness and publication policies require versioned authorized change with regression evidence, never a free operational toggle.
 
-مرجع: `B:406;B:1917`؛ مصوبه: `A08, C07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:009`.
+مرجع: `B:406;B:1917`؛ مصوبه: `A08, C07`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:009`.
 
 **شرط:** Scoring, catalogue freshness or publication-policy change
 
@@ -1407,7 +1407,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:046 — Configuration and flags need schema validation, dependency validation, secret scanning, audit/change authorization and compatible rollback.
 
-مرجع: `B:1917;B:2106;B:1690`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:009`.
+مرجع: `B:1917;B:2106;B:1690`؛ مصوبه: `A08`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:009`.
 
 **شرط:** Config/flag deployment pipeline
 
@@ -1434,7 +1434,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:047 — Telemetry and correlation identifiers must exclude real identities, OTPs, tokens and raw form/questionnaire payloads.
 
-مرجع: `B:1192;B:1837;B:1690`؛ مصوبه: `A09, B05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:010`.
+مرجع: `B:1192;B:1837;B:1690`؛ مصوبه: `A09, B05`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:010`.
 
 **شرط:** Telemetry, analytics and correlation
 
@@ -1460,7 +1460,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:048 — For high-risk releases require independent safety review, scoped change authority, stop and re-authorization after critical modifications.
 
-مرجع: `B:2198-2219;B:2332`؛ مصوبه: `F06, O5-10`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:011`.
+مرجع: `B:2198-2219;B:2332`؛ مصوبه: `F06, O5-10`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:011`.
 
 **شرط:** High-risk release or emergency stop
 
@@ -1487,7 +1487,7 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 ### REQ:CORE:049 — Wallet and billing are not default prerequisites for first RAG release; activating a paid flow still requires complete financial controls.
 
-مرجع: `B:2236;B:1702-1708`؛ مصوبه: `O5-13, E04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:003`.
+مرجع: `B:2236;B:1702-1708`؛ مصوبه: `O5-13, E04`؛ وضعیت: `APPROVED_EXPLICIT`؛ مالک: `CoreArchitecture`؛ تسک: `TASK:CORE:C01:003`.
 
 **شرط:** Paid flow activation versus first RAG release
 
@@ -1515,29 +1515,29 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | از | به | نوع | دلیل |
 | --- | --- | --- | --- |
-| TASK:CORE:001 | TASK:CORE:002 | HARD | Phase-one footprint baseline constrains the ownership/import policy |
-| TASK:CORE:002 | TASK:CORE:003 | HARD | Independent R1 topology requires one owner for each data/module boundary |
-| TASK:CORE:001 | TASK:CORE:004 | HARD | Existing scorer/golden/publication must be inventoried before contract adaptation |
-| TASK:CORE:008 | TASK:CORE:004 | CONTRACT | Recommendation consumer needs version/meaning/error compatibility, not copied scoring |
-| TASK:CORE:002 | TASK:CORE:005 | HARD | A durable Job pattern needs one state owner and local transaction authority |
-| TASK:CORE:002 | TASK:CORE:006 | HARD | Atomic data/Outbox commit requires a defined local data owner |
-| TASK:CORE:005 | TASK:CORE:006 | CONTRACT | Only the justified owner-controlled long flow defines the needed event consumer; no mandatory event bus |
-| TASK:CORE:003 | TASK:CORE:007 | CONTRACT | Fault containment targets the approved two-service R1 boundary |
-| TASK:CORE:008 | TASK:CORE:007 | CONTRACT | Retry classification and timeouts depend on the service error/idempotency contract |
-| TASK:CORE:002 | TASK:CORE:008 | HARD | Provider/consumer public API and denied private-table access follow authority map |
-| TASK:CORE:001 | TASK:CORE:009 | HARD | Reuse typed Settings/secrets without reclassifying approved policy as runtime toggle |
-| TASK:CORE:008 | TASK:CORE:009 | CONTRACT | Rollback config must remain compatible with API, Snapshot and job contracts |
-| TASK:CORE:001 | TASK:CORE:010 | HARD | Existing metrics/logs baseline determines the telemetry gap; no production proof inferred |
-| TASK:CORE:007 | TASK:CORE:010 | PREFERENCE | Resilience fault signals inform alerts; preference only, no hard block on defining observability |
-| TASK:CORE:001 | TASK:CORE:011 | CONTRACT | Release dossier records the actual code/runtime unknowns and preserved phase-one baseline |
-| TASK:CORE:004 | TASK:CORE:011 | CONTRACT | R1 release contract includes deterministic scoring and valid Snapshot evidence |
-| TASK:CORE:009 | TASK:CORE:011 | POLICY | Release activation requires authorized compatible configuration and protected policy |
-| TASK:CORE:010 | TASK:CORE:011 | POLICY | Critical-path release requires secure telemetry/runbook evidence, not a new arbitrary gate |
-| TASK:CORE:002 | TASK:CORE:012 | CONTRACT | Wallet is a Core module with local ownership, not an external merchant service |
-| TASK:CORE:011 | TASK:CORE:012 | POLICY | Any financial activation must preserve release governance without blocking free RAG |
-| TASK:CORE:003 | TASK:CORE:013 | CONTRACT | Benchmark compares the scoped R1 topology, not an unapproved replacement architecture |
-| TASK:CORE:007 | TASK:CORE:013 | CONTRACT | Load/failure experiments need stated failure isolation and resource-share contracts |
-| TASK:CORE:010 | TASK:CORE:013 | CONTRACT | Telemetry measurement schema precedes benchmark; final numeric SLO follows benchmark, not vice versa |
+| TASK:CORE:C01:001 | TASK:CORE:C01:002 | HARD | Phase-one footprint baseline constrains the ownership/import policy |
+| TASK:CORE:C01:002 | TASK:CORE:C01:003 | HARD | Independent R1 topology requires one owner for each data/module boundary |
+| TASK:CORE:C01:001 | TASK:CORE:C01:004 | HARD | Existing scorer/golden/publication must be inventoried before contract adaptation |
+| TASK:CORE:C01:008 | TASK:CORE:C01:004 | CONTRACT | Recommendation consumer needs version/meaning/error compatibility, not copied scoring |
+| TASK:CORE:C01:002 | TASK:CORE:C01:005 | HARD | A durable Job pattern needs one state owner and local transaction authority |
+| TASK:CORE:C01:002 | TASK:CORE:C01:006 | HARD | Atomic data/Outbox commit requires a defined local data owner |
+| TASK:CORE:C01:005 | TASK:CORE:C01:006 | CONTRACT | Only the justified owner-controlled long flow defines the needed event consumer; no mandatory event bus |
+| TASK:CORE:C01:003 | TASK:CORE:C01:007 | CONTRACT | Fault containment targets the approved two-service R1 boundary |
+| TASK:CORE:C01:008 | TASK:CORE:C01:007 | CONTRACT | Retry classification and timeouts depend on the service error/idempotency contract |
+| TASK:CORE:C01:002 | TASK:CORE:C01:008 | HARD | Provider/consumer public API and denied private-table access follow authority map |
+| TASK:CORE:C01:001 | TASK:CORE:C01:009 | HARD | Reuse typed Settings/secrets without reclassifying approved policy as runtime toggle |
+| TASK:CORE:C01:008 | TASK:CORE:C01:009 | CONTRACT | Rollback config must remain compatible with API, Snapshot and job contracts |
+| TASK:CORE:C01:001 | TASK:CORE:C01:010 | HARD | Existing metrics/logs baseline determines the telemetry gap; no production proof inferred |
+| TASK:CORE:C01:007 | TASK:CORE:C01:010 | PREFERENCE | Resilience fault signals inform alerts; preference only, no hard block on defining observability |
+| TASK:CORE:C01:001 | TASK:CORE:C01:011 | CONTRACT | Release dossier records the actual code/runtime unknowns and preserved phase-one baseline |
+| TASK:CORE:C01:004 | TASK:CORE:C01:011 | CONTRACT | R1 release contract includes deterministic scoring and valid Snapshot evidence |
+| TASK:CORE:C01:009 | TASK:CORE:C01:011 | POLICY | Release activation requires authorized compatible configuration and protected policy |
+| TASK:CORE:C01:010 | TASK:CORE:C01:011 | POLICY | Critical-path release requires secure telemetry/runbook evidence, not a new arbitrary gate |
+| TASK:CORE:C01:002 | TASK:CORE:C01:012 | CONTRACT | Wallet is a Core module with local ownership, not an external merchant service |
+| TASK:CORE:C01:011 | TASK:CORE:C01:012 | POLICY | Any financial activation must preserve release governance without blocking free RAG |
+| TASK:CORE:C01:003 | TASK:CORE:C01:013 | CONTRACT | Benchmark compares the scoped R1 topology, not an unapproved replacement architecture |
+| TASK:CORE:C01:007 | TASK:CORE:C01:013 | CONTRACT | Load/failure experiments need stated failure isolation and resource-share contracts |
+| TASK:CORE:C01:010 | TASK:CORE:C01:013 | CONTRACT | Telemetry measurement schema precedes benchmark; final numeric SLO follows benchmark, not vice versa |
 
 یال‌ها از پیش‌نیاز به مصرف‌کننده‌اند. HARD قبل از طراحی وابسته؛ CONTRACT قبل از یکپارچه‌سازی؛ POLICY قبل از فعال‌سازی؛ PREFERENCE ترتیب ترجیحی است. نام قدیمی PRIORITY فقط به نام استاندارد PREFERENCE تبدیل شد و همان یال حفظ شد. قرارداد ابزار اندازه‌گیری T010 پیش از benchmark T013 است؛ عدد نهایی SLO پس از اندازه‌گیری می‌آید و چرخه وابستگی ایجاد نمی‌کند.
 
@@ -1545,15 +1545,15 @@ P0 منابع؛ P1 تعیین تکلیف دامنه؛ P2 انطباق/شروط؛
 
 | تصمیم | موضوع | مالک | تسک متأثر |
 | --- | --- | --- | --- |
-| DECISION:C01:01 | Physical module/schema isolation and exact topology | C01 | TASK:CORE:002, TASK:CORE:003, TASK:CORE:012 |
-| DECISION:C01:02 | Worker/queue technology and tested workflow migration mechanics | C03 | TASK:CORE:005, TASK:CORE:006 |
-| DECISION:C01:03 | Timeout/retry/breaker thresholds and interactive resource shares | C03 | TASK:CORE:007 |
-| DECISION:C01:04 | Operational telemetry retention/sampling/hosting/SLO/alert channel | C03 | TASK:CORE:010, TASK:CORE:013 |
-| DECISION:C01:05 | Consumer schemas, version-support period, EOL and shadow/canary feasibility | C03 | TASK:CORE:003, TASK:CORE:004, TASK:CORE:008 |
-| DECISION:C01:06 | Runtime SHA/tag/digest, Alembic/schema evidence and authorized performance environment | C01 | TASK:CORE:001, TASK:CORE:013 |
-| DECISION:C01:07 | Per-release risk class, budget, reviewer and original RG/REL/COV control dossier | C01 | TASK:CORE:011 |
-| DECISION:C01:08 | Financial activation, legal applicability, gift accounts and policy details | C07 | TASK:CORE:012 |
-| DECISION:C01:09 | Secret storage, rotation/revocation and environment-isolation design | C03 | TASK:CORE:009 |
+| DECISION:C01:01 | Physical module/schema isolation and exact topology | C01 | TASK:CORE:C01:002, TASK:CORE:C01:003, TASK:CORE:C01:012 |
+| DECISION:C01:02 | Worker/queue technology and tested workflow migration mechanics | C03 | TASK:CORE:C01:005, TASK:CORE:C01:006 |
+| DECISION:C01:03 | Timeout/retry/breaker thresholds and interactive resource shares | C03 | TASK:CORE:C01:007 |
+| DECISION:C01:04 | Operational telemetry retention/sampling/hosting/SLO/alert channel | C03 | TASK:CORE:C01:010, TASK:CORE:C01:013 |
+| DECISION:C01:05 | Consumer schemas, version-support period, EOL and shadow/canary feasibility | C03 | TASK:CORE:C01:003, TASK:CORE:C01:004, TASK:CORE:C01:008 |
+| DECISION:C01:06 | Runtime SHA/tag/digest, Alembic/schema evidence and authorized performance environment | C01 | TASK:CORE:C01:001, TASK:CORE:C01:013 |
+| DECISION:C01:07 | Per-release risk class, budget, reviewer and original RG/REL/COV control dossier | C01 | TASK:CORE:C01:011 |
+| DECISION:C01:08 | Financial activation, legal applicability, gift accounts and policy details | C07 | TASK:CORE:C01:012 |
+| DECISION:C01:09 | Secret storage, rotation/revocation and environment-isolation design | C03 | TASK:CORE:C01:009 |
 
 | قرارداد طراحی | مالک | مصرف‌کننده | وضعیت Schema |
 | --- | --- | --- | --- |

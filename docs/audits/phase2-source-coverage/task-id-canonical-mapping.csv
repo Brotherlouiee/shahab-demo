@@ -1,0 +1,118 @@
+legacy_id,canonical_id,unit_type,domain,package,mapping_basis_and_locator
+C10-T04,TASK:CORE:C10:004,TASK,CORE,C10,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5330
+C11A-T02,TASK:CORE:C11A:002,TASK,CORE,C11A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5441
+C11A-T05,TASK:CORE:C11A:005,TASK,CORE,C11A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5444
+C11B-T07,UNMAPPED,TASK,UNKNOWN,UNKNOWN,شناسه در سند شبیه‌سازی به Requirementهای R007/R008 الصاق شده بود؛ Plan آن رفتارها را بین Taskهای 002/003/004 تقسیم می‌کند و نگاشت یک‌به‌یک اثبات‌پذیر نیست. محل مرجع: docs/phase2/audits/PHASE2_36_PACKAGE_TASK_SIMULATIONS_2026-11-22.md
+C11B-T08,UNMAPPED,TASK,UNKNOWN,UNKNOWN,شناسه در سند شبیه‌سازی به Requirementهای R007/R008 الصاق شده بود؛ Plan آن رفتارها را بین Taskهای 002/003/004 تقسیم می‌کند و نگاشت یک‌به‌یک اثبات‌پذیر نیست. محل مرجع: docs/phase2/audits/PHASE2_36_PACKAGE_TASK_SIMULATIONS_2026-11-22.md
+C12B-T01,TASK:CORE:C12B:001,TASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5759
+C12B-T01.01,TASK:CORE:C12B:001.S01,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5775
+C12B-T01.02,TASK:CORE:C12B:001.S02,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5775
+C12B-T01.03,TASK:CORE:C12B:001.S03,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5775
+C12B-T02,TASK:CORE:C12B:002,TASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5761
+C12B-T02.01,TASK:CORE:C12B:002.S01,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5776
+C12B-T02.02,TASK:CORE:C12B:002.S02,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5776
+C12B-T02.03,TASK:CORE:C12B:002.S03,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5776
+C12B-T03,TASK:CORE:C12B:003,TASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5762
+C12B-T03.01,TASK:CORE:C12B:003.S01,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5777
+C12B-T03.02,TASK:CORE:C12B:003.S02,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5777
+C12B-T03.03,TASK:CORE:C12B:003.S03,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5777
+C12B-T04,TASK:CORE:C12B:004,TASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5765
+C12B-T04.01,TASK:CORE:C12B:004.S01,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5778
+C12B-T04.02,TASK:CORE:C12B:004.S02,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5778
+C12B-T04.03,TASK:CORE:C12B:004.S03,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5778
+C12B-T05,TASK:CORE:C12B:005,TASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5767
+C12B-T05.01,TASK:CORE:C12B:005.S01,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5779
+C12B-T05.02,TASK:CORE:C12B:005.S02,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5779
+C12B-T05.03,TASK:CORE:C12B:005.S03,SUBTASK,CORE,C12B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5779
+C13A-T01,TASK:CORE:C13A:001,TASK,CORE,C13A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5863
+C13A-T02,TASK:CORE:C13A:002,TASK,CORE,C13A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5866
+C13A-T03,TASK:CORE:C13A:003,TASK,CORE,C13A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5869
+C13A-T04,TASK:CORE:C13A:004,TASK,CORE,C13A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5872
+C13A-T05,TASK:CORE:C13A:005,TASK,CORE,C13A,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5874
+C13B-T01,TASK:CORE:C13B:001,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5991
+C13B-T01.S01,TASK:CORE:C13B:001.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5991
+C13B-T01.S02,TASK:CORE:C13B:001.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5991
+C13B-T01.S03,TASK:CORE:C13B:001.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5991
+C13B-T02,TASK:CORE:C13B:002,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5993
+C13B-T02.S01,TASK:CORE:C13B:002.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5993
+C13B-T02.S02,TASK:CORE:C13B:002.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5993
+C13B-T02.S03,TASK:CORE:C13B:002.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5993
+C13B-T03,TASK:CORE:C13B:003,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5995
+C13B-T03.S01,TASK:CORE:C13B:003.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5995
+C13B-T03.S02,TASK:CORE:C13B:003.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5995
+C13B-T03.S03,TASK:CORE:C13B:003.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5995
+C13B-T04,TASK:CORE:C13B:004,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5997
+C13B-T04.S01,TASK:CORE:C13B:004.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5997
+C13B-T04.S02,TASK:CORE:C13B:004.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5997
+C13B-T04.S03,TASK:CORE:C13B:004.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5997
+C13B-T05,TASK:CORE:C13B:005,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6000
+C13B-T05.S01,TASK:CORE:C13B:005.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6000
+C13B-T05.S02,TASK:CORE:C13B:005.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6000
+C13B-T05.S03,TASK:CORE:C13B:005.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6000
+C13B-T06,TASK:CORE:C13B:006,TASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6002
+C13B-T06.S01,TASK:CORE:C13B:006.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6002
+C13B-T06.S02,TASK:CORE:C13B:006.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6002
+C13B-T06.S03,TASK:CORE:C13B:006.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6002
+C13B-T07.S01,TASK:CORE:C13B:007.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6003
+C13B-T07.S02,TASK:CORE:C13B:007.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6003
+C13B-T07.S03,TASK:CORE:C13B:007.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6003
+C13B-T08.S01,TASK:CORE:C13B:008.S01,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6006
+C13B-T08.S02,TASK:CORE:C13B:008.S02,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6006
+C13B-T08.S03,TASK:CORE:C13B:008.S03,SUBTASK,CORE,C13B,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6006
+C14-T03,TASK:CORE:C14:003,TASK,CORE,C14,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6081
+C14-T08,TASK:CORE:C14:008,TASK,CORE,C14,شناسهٔ بسته و شمارهٔ Task/Subtask با مالکیت و تعریف هم‌شماره در Plan تطبیق داده شد. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6090
+TASK:CORE:001,TASK:CORE:C01:001,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:104
+TASK:CORE:001.S01,TASK:CORE:C01:001.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:133
+TASK:CORE:001.S02,TASK:CORE:C01:001.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:134
+TASK:CORE:001.S03,TASK:CORE:C01:001.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:135
+TASK:CORE:002,TASK:CORE:C01:002,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:104
+TASK:CORE:002.S01,TASK:CORE:C01:002.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:145
+TASK:CORE:002.S02,TASK:CORE:C01:002.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:146
+TASK:CORE:002.S03,TASK:CORE:C01:002.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:147
+TASK:CORE:003,TASK:CORE:C01:003,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:104
+TASK:CORE:003.S01,TASK:CORE:C01:003.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:157
+TASK:CORE:003.S02,TASK:CORE:C01:003.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:158
+TASK:CORE:003.S03,TASK:CORE:C01:003.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:159
+TASK:CORE:004,TASK:CORE:C01:004,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:110
+TASK:CORE:004.S01,TASK:CORE:C01:004.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:169
+TASK:CORE:004.S02,TASK:CORE:C01:004.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:170
+TASK:CORE:004.S03,TASK:CORE:C01:004.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:171
+TASK:CORE:005,TASK:CORE:C01:005,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:110
+TASK:CORE:005.S01,TASK:CORE:C01:005.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:181
+TASK:CORE:005.S02,TASK:CORE:C01:005.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:182
+TASK:CORE:005.S03,TASK:CORE:C01:005.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:183
+TASK:CORE:006,TASK:CORE:C01:006,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:110
+TASK:CORE:006.S01,TASK:CORE:C01:006.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:193
+TASK:CORE:006.S02,TASK:CORE:C01:006.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:194
+TASK:CORE:006.S03,TASK:CORE:C01:006.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:195
+TASK:CORE:007,TASK:CORE:C01:007,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:116
+TASK:CORE:007.S01,TASK:CORE:C01:007.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:205
+TASK:CORE:007.S02,TASK:CORE:C01:007.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:206
+TASK:CORE:007.S03,TASK:CORE:C01:007.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:207
+TASK:CORE:008,TASK:CORE:C01:008,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:110
+TASK:CORE:008.S01,TASK:CORE:C01:008.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:217
+TASK:CORE:008.S02,TASK:CORE:C01:008.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:218
+TASK:CORE:008.S03,TASK:CORE:C01:008.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:219
+TASK:CORE:009,TASK:CORE:C01:009,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:116
+TASK:CORE:009.S01,TASK:CORE:C01:009.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:229
+TASK:CORE:009.S02,TASK:CORE:C01:009.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:230
+TASK:CORE:009.S03,TASK:CORE:C01:009.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:231
+TASK:CORE:010,TASK:CORE:C01:010,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:116
+TASK:CORE:010.S01,TASK:CORE:C01:010.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:241
+TASK:CORE:010.S02,TASK:CORE:C01:010.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:242
+TASK:CORE:010.S03,TASK:CORE:C01:010.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:243
+TASK:CORE:011,TASK:CORE:C01:011,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122
+TASK:CORE:011.S01,TASK:CORE:C01:011.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:253
+TASK:CORE:011.S02,TASK:CORE:C01:011.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:254
+TASK:CORE:011.S03,TASK:CORE:C01:011.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:255
+TASK:CORE:011.S04,TASK:CORE:C01:011.S04,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:604
+TASK:CORE:011.S05,TASK:CORE:C01:011.S05,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:605
+TASK:CORE:012,TASK:CORE:C01:012,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122
+TASK:CORE:012.S01,TASK:CORE:C01:012.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:265
+TASK:CORE:012.S02,TASK:CORE:C01:012.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:266
+TASK:CORE:012.S03,TASK:CORE:C01:012.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:267
+TASK:CORE:013,TASK:CORE:C01:013,TASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122
+TASK:CORE:013.S01,TASK:CORE:C01:013.S01,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:277
+TASK:CORE:013.S02,TASK:CORE:C01:013.S02,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:278
+TASK:CORE:013.S03,TASK:CORE:C01:013.S03,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:279
+TASK:CORE:013.S04,TASK:CORE:C01:013.S04,SUBTASK,CORE,C01,شناسهٔ قدیمی CORE در ساختار مالکیت C01؛ نگاشت Task/Subtask متناظر در Plan. محل مرجع: docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:280
