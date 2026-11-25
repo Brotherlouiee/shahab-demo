@@ -81,7 +81,7 @@ DEP:C05A:004 چهار مصرف‌کننده را نام می‌برد. برای 
 
 Replay معنایی، اعتبار هویت‌ها و Locatorها، Scope تصمیم‌ها، Overlay، چرخه‌ها، جست‌وجوی کامل کد و Hash سه گراف را کنترل می‌کند. این ابزار قضاوت معنایی را از متن به‌شکل ماشینی تولید نمی‌کند؛ قضاوت‌های ثبت‌شده را با شواهد و پیکرهٔ ثابت بازبینی‌پذیر می‌سازد.
 
-برای Candidate نهایی این دور، `replay_stage4.py --check-only` PASS شد؛ Projection SHA `858b6a93163e0bd2f57f1227c0cf2679e87b28dc7013ebc7303c14ca12f2b99e` است. اجرای Replay دوم، تطبیق خروجی‌ها، `build_and_validate.py --check-only` و چهار Workflow باید پس از Commit و روی همان HEAD نهایی ثبت شوند؛ نتایج Commit قبلی جای آن‌ها را نمی‌گیرند.
+روی Tree منتشرشدهٔ Commit `1e829e816eeaddec805381ea4b79b6dbace281bc`، `replay_stage4.py --check-only` دو بار PASS شد و خروجی‌ها byte-for-byte یکسان بودند؛ Projection SHA هر دو `858b6a93163e0bd2f57f1227c0cf2679e87b28dc7013ebc7303c14ca12f2b99e` است. `build_and_validate.py --check-only` نیز PASS شد و هر ۲۹ کنترل داخلی موفق بودند. چهار Workflow همان Commit در GitHub Actions موفق شدند: Quality gates (run 45593527180)، Security SAST/SCA/secret gates (run 45593527235)، Container build contract smoke (run 45593527258) و US-13 frozen frontend baseline evidence (run 45593527409). این شناسه‌ها صریحاً به Commit `1e829e8` تعلق دارند؛ نتایج Commit قبلی با آن مخلوط نشده‌اند.
 
 ## تفاوت با گزارش‌های قدیمی و محدودیت‌های باقی‌مانده
 
