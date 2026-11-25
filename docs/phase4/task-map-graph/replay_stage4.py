@@ -6,7 +6,7 @@ from collections import Counter, defaultdict, deque
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 BASELINE='c9e74532d4291e9ed1a7ddd3523ee84f09c940a2'
-PR_BASE='6ff792a1b696e9b97f283aa69be5f84454fc44f9'
+PR_BASE='655daa9d349f00718b0c93ae2016decb4ffbb510'
 FILES={'reference_graph':'knowledge-graph/phase2-reference-docs/semantic/graph.json','current_code_graph':'docs/phase4/task-map-graph/current-project-code-graph.json','task_graph':'docs/phase4/task-map-graph/new-project-task-graph.json','mapping':'docs/phase4/task-map-graph/task-map-mapping.json','plan':'docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md','wallet':'docs/SHAHAB_DIGITAL_WALLET.md','code_manifest':'docs/phase4/task-map-graph/current-project-code-graph-manifest.json'}
 PINS={
  'reference_graph':('a43c1732e85eeebdf83709b9d76233e59ae1a1af','f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93'),
@@ -173,6 +173,7 @@ def main():
   scope=d.get('affected_scope',{})
   if scope.get('execution_effect')!='BLOCKED_BY_DECISION' or scope.get('decision_status')!='OPEN':errors.append('decision missing open decision impact '+str(d.get('open_decision_id')))
   if not d.get('task_refs') and not d.get('package_refs'):errors.append('decision lacks package/task scope '+str(d.get('open_decision_id')))
+  if not scope.get('plan_locators'):errors.append('decision lacks direct Plan/package scope locator '+str(d.get('open_decision_id')))
   if any(x not in ids for x in d.get('task_refs',[])):errors.append('decision references invalid Task '+str(d.get('open_decision_id')))
   if any(x not in package_ids for x in d.get('package_refs',[])):errors.append('decision references invalid Package '+str(d.get('open_decision_id')))
   for loc in scope.get('plan_locators',[]):
@@ -224,6 +225,17 @@ def main():
  unresolved=m.get('task_name_evidence_override_unresolved',{})
  if unresolved.get('task_ref')!='TASK:CORE:C13B:008' or unresolved.get('resolution_status')!='RESOLVED_CONTEXT_DERIVED' or unresolved.get('resolved_label')!='مسیر مالی مجاز را بررسی کند':errors.append('C13B:008 context-derived label not resolved')
  if any(r.get('target')=='UNRESOLVED' or r.get('source')=='UNRESOLVED' for r in rels):errors.append('UNRESOLVED relation endpoint remains')
+ # Package-only relations remain explicit source scopes; four open decisions must not acquire guessed Tasks.
+ for relation_ref in ('Handoff:H04:003','DEP:C05A:003','DEP:C05A:004'):
+  rows=[r for r in rels if relation_ref in r.get('source_relation_refs',[])]
+  if not rows:errors.append('required source relation has no overlay rows '+relation_ref)
+  for r in rows:
+   if r.get('resolution_status')!='SOURCE_SCOPED' or r.get('scope_level')!='PACKAGE':errors.append('source-scoped relation status/scope missing '+str(r.get('relation_id')))
+   if r.get('source_node') in {n.get('id') for n in nodes if n.get('node_type') in ('TASK','SUBTASK')} or r.get('target_node') in {n.get('id') for n in nodes if n.get('node_type') in ('TASK','SUBTASK')}:errors.append('package-only source relation was assigned a Task endpoint '+str(r.get('relation_id')))
+ for oid in ('AO:BP-C-0291:01','AO:BP-C-0294:01','AO:BP-C-0298:01','AO:BP-C-0300:01'):
+  d=next((x for x in decisions if x.get('open_decision_id')==oid),None)
+  if not d or d.get('decision_status','OPEN') not in ('OPEN',None) or d.get('task_refs') or d.get('affected_scope',{}).get('scope_level')!='PACKAGE':errors.append('package-only reference was resolved or guessed '+oid)
+ if m.get('validation',{}).get('stage4_audit',{}).get('open_decisions_without_plan_locator')!=0:errors.append('current audit snapshot has open decisions without Plan locator')
  # Search/replay complete corpus, deterministically.
  audit=m.get('stage4_code_search_audit',{});results,inventory,inventory_sha=build_search(m,tg,cg,manifest,audit)
  counts=Counter(x['search_status'] for x in results)
