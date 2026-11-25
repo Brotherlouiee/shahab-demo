@@ -187,3 +187,11 @@ R02 برای `DEP:C05A:004` و `Handoff:C05A:004` در سطح Package باقی �
 ### حدود این بازبینی
 
 این بازبینی روابط explicit و crosswalkهای مستقیم Story/Task/AC/Test را در تمام package spans پوشش داد، و همهٔ Task/Subtask Plan locatorها را اسکن کرد. یال «هم‌ذکری» میان چند Task در سناریوی مشترک، بدون واژه/جهت provider-consumer/precondition در منبع، به dependency تبدیل نشد. R02 و A02 در مواردی که Plan فقط Package را تخصیص می‌دهد package-scoped مانده‌اند. تصمیم‌های محصولی همچنان ۱۳۴ `OPEN` هستند؛ Stage 4 روابط فنی قابل‌اثبات را ثبت می‌کند و هیچ تصمیم محصولی را حل‌شده نمی‌خواند.
+
+## ثبت اعتبارسنجی و CI انتشار این ممیزی
+
+محتوای Mapping و Replay در Commit `19f3530546d836ab038e27795996445e5fa9c755` منتشر شد. روی همان محتوا، `replay_stage4.py --check-only` دو بار اجرا و خروجی‌ها byte-for-byte مقایسه شدند؛ هر دو PASS با Projection SHA `44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5`، ۹۹ رابطه، ۱۳۴ تصمیم باز و بدون چرخه در ترتیب سخت. `build_and_validate.py --check-only` نیز PASS شد و هر ۲۹ کنترل داخلی خطا نداشتند. سه SHA گراف immutable با Blobهای GitHub تطبیق داشتند.
+
+چهار Workflow مربوط به Commit `19f3530546d836ab038e27795996445e5fa9c755` همگی با conclusion کلی `success` خاتمه یافتند: Quality gates (run `45629931930`)، Security SAST/SCA and secret gates (`45629932009`)، Container build contract smoke (`45629932034`) و US-13 frozen frontend baseline evidence (`45629932205`). این نتیجه فقط به Workflowهای کلی مربوط است: Jobهای Migration و browser/API، ساخت image، route evidence، Quality gates تخصصی، SAST/SCA و بخشی از بررسی‌های اجرایی به‌دلیل docs-only بودن تغییرها `skipped` شدند و PASS اجرایی محسوب نمی‌شوند. Jobهای سبک مستندات موفق بودند و Secret scan در Workflow امنیتی اجرا و PASS شد.
+
+این بند فقط نتیجهٔ اجرای ثبت‌شده برای Commit بالا را توصیف می‌کند؛ وضعیت Workflowهای هر Commit بعدی باید با SHA همان Commit جداگانه خوانده شود.
