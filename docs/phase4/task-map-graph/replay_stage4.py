@@ -277,9 +277,29 @@ def main():
  for rid in ('REL-STAGE4-069','REL-STAGE4-070','REL-STAGE4-071','REL-STAGE4-072','REL-STAGE4-073'):
   r=next((x for x in rels if x.get('relation_id')==rid),None)
   if r and 'Handoff:H04:001' in r.get('source_relation_refs',[]):errors.append('H04 entitlement handoff cross-attributed to C05A '+rid)
- for oid in ('AO:BP-C-0291:01','AO:BP-C-0294:01','AO:BP-C-0298:01','AO:BP-C-0300:01'):
+ # Four previously package-only decisions were re-reviewed against their exact
+ # Plan Task rows. Two now have evidence-backed affected Task scopes; the
+ # decision itself remains OPEN and BLOCKED. Keep the other two package-only
+ # because their source questions do not allocate an execution Task.
+ special_scopes={
+  'AO:BP-C-0291:01':('PACKAGE',[],['PACKAGE:A04'],[]),
+  'AO:BP-C-0294:01':('TASK',['TASK:ASSISTANT:A06:002'],['PACKAGE:A04','PACKAGE:A06'],['docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273']),
+  'AO:BP-C-0298:01':('PACKAGE',[],['PACKAGE:A02','PACKAGE:A04','PACKAGE:C01'],[]),
+  'AO:BP-C-0300:01':('MULTI_TASK',['TASK:ASSISTANT:A01:002','TASK:CORE:C04:001','TASK:CORE:C05A:001','TASK:CORE:C05B:001'],['PACKAGE:A01','PACKAGE:C04','PACKAGE:C05A','PACKAGE:C05B'],['docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3892','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4204','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4483'])}
+ special_review={x.get('open_decision_id'):x for x in special}
+ for oid,(scope,tasks,packages,locators) in special_scopes.items():
   d=next((x for x in decisions if x.get('open_decision_id')==oid),None)
-  if not d or d.get('decision_status','OPEN') not in ('OPEN',None) or d.get('task_refs') or d.get('affected_scope',{}).get('scope_level')!='PACKAGE':errors.append('package-only reference was resolved or guessed '+oid)
+  review=special_review.get(oid)
+  actual=d.get('affected_scope',{}) if d else {}
+  if (not d or d.get('decision_status','OPEN')!='OPEN' or d.get('mapping_status')!='BLOCKED'
+      or d.get('task_refs',[])!=tasks or actual.get('scope_level')!=scope
+      or actual.get('task_refs',[])!=tasks or d.get('package_refs',[])!=packages
+      or actual.get('package_refs',[])!=packages):
+   errors.append('special open-decision scope mismatch '+oid)
+  if any(loc not in actual.get('plan_locators',[]) for loc in locators):
+   errors.append('special open-decision Plan Task evidence missing '+oid)
+  if not review or review.get('decision_status')!='OPEN' or review.get('task_refs',[])!=tasks or review.get('package_refs',[])!=packages:
+   errors.append('special open-decision review crosswalk mismatch '+oid)
  if m.get('validation',{}).get('stage4_audit',{}).get('open_decisions_without_plan_locator')!=0:errors.append('current audit snapshot has open decisions without Plan locator')
  # Search/replay complete corpus, deterministically.
  audit=m.get('stage4_code_search_audit',{});results,inventory,inventory_sha=build_search(m,tg,cg,manifest,audit)
