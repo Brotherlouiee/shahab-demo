@@ -225,6 +225,16 @@ def main():
  unresolved=m.get('task_name_evidence_override_unresolved',{})
  if unresolved.get('task_ref')!='TASK:CORE:C13B:008' or unresolved.get('resolution_status')!='RESOLVED_CONTEXT_DERIVED' or unresolved.get('resolved_label')!='مسیر مالی مجاز را بررسی کند':errors.append('C13B:008 context-derived label not resolved')
  if any(r.get('target')=='UNRESOLVED' or r.get('source')=='UNRESOLVED' for r in rels):errors.append('UNRESOLVED relation endpoint remains')
+ package_rows=[r for r in rels if r.get('scope_level')=='PACKAGE']
+ for r in package_rows:
+  if r.get('resolution_status')!='SOURCE_SCOPED' and not (r.get('resolution_status')=='PACKAGE_ONLY' and r.get('execution_effect')=='BLOCKED_BY_DECISION'):errors.append('Package-scope relation lacks explicit source-scoped status '+str(r.get('relation_id')))
+  if not r.get('scope_limitation') or not r.get('task_allocation_status') or not r.get('execution_order_note'):errors.append('Package-scope relation lacks its allocation/order limitation '+str(r.get('relation_id')))
+ expected_h05b={'REL-STAGE4-028-A02-013':('TASK:ASSISTANT:A02:001.S04','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7751','REQ:ASSISTANT:A02:013'),'REL-STAGE4-028-A02-014':('TASK:ASSISTANT:A02:003.S04','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7752','REQ:ASSISTANT:A02:014'),'REL-STAGE4-028-A02-015':('TASK:ASSISTANT:A02:002.S04','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7753','REQ:ASSISTANT:A02:015')}
+ h05b=[r for r in rels if 'Handoff:H05B:004' in r.get('source_relation_refs',[])]
+ if len(h05b)!=3:errors.append('H05B:004 must resolve to its three explicitly mapped A02 subtask requirements')
+ for rid,(target,loc,req) in expected_h05b.items():
+  r=next((x for x in h05b if x.get('relation_id')==rid),None)
+  if not r or r.get('source_node')!='PACKAGE:C05B' or r.get('target_node')!=target or r.get('scope_level')!='SUBTASK' or r.get('resolution_status')!='TASK_MAPPED' or r.get('task_endpoint_evidence',{}).get('requirement_ref')!=req or loc not in r.get('source_refs',[]):errors.append('H05B:004 direct A02 subtask crosswalk invalid '+rid)
  # Preserve explicit package scopes where the Plan lacks a Task crosswalk; validate the Task-level refinements that are directly evidenced.
  task_ids={n.get('id') for n in nodes if n.get('node_type') in ('TASK','SUBTASK')}
  for relation_ref in ('Handoff:H04:003',):
