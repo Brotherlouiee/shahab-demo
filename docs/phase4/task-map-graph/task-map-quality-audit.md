@@ -81,7 +81,7 @@ DEP:C05A:004 چهار مصرف‌کننده را نام می‌برد. برای 
 
 Replay معنایی، اعتبار هویت‌ها و Locatorها، Scope تصمیم‌ها، Overlay، چرخه‌ها، جست‌وجوی کامل کد و Hash سه گراف را کنترل می‌کند. این ابزار قضاوت معنایی را از متن به‌شکل ماشینی تولید نمی‌کند؛ قضاوت‌های ثبت‌شده را با شواهد و پیکرهٔ ثابت بازبینی‌پذیر می‌سازد.
 
-نتایج Commit `1e829e816eeaddec805381ea4b79b6dbace281bc` تاریخی‌اند و به HEAD جاری تعمیم داده نمی‌شوند. روی درخت محلی جاری، پس از به‌روزرسانی Projection برای Mapping، `replay_stage4.py --check-only` دو بار اجرا شد و هر دو PASS و byte-for-byte یکسان بودند؛ Projection SHA هر دو `b72d4e3f53565f13a2ce4d919146a3d865b902c41ed7a296e9d440bd53e841d2` است. `build_and_validate.py --check-only` نیز PASS شد: هر ۲۹ کنترل داخلی موفق بودند. اجرای GitHub Actions برای Commit نهایی این تغییر پس از Push باید از روی همان SHA گزارش شود؛ اجراهای docs-only قبلی به‌عنوان PASS کنترل‌های skipped‌شده شمرده نمی‌شوند.
+نتایج Commit `1e829e816eeaddec805381ea4b79b6dbace281bc` تاریخی‌اند و به HEAD جاری تعمیم داده نمی‌شوند. روی درخت محلی جاری، پس از به‌روزرسانی Projection برای Mapping، `replay_stage4.py --check-only` دو بار اجرا شد و هر دو PASS و byte-for-byte یکسان بودند؛ Projection SHA هر دو `b72d4e3f53565f13a2ce4d919146a3d865b902c41ed7a296e9d440bd53e841d2` است. `build_and_validate.py --check-only` نیز PASS شد: هر ۲۹ کنترل داخلی موفق بودند. چهار Workflow روی Commit قبلی `453c98abecea3883d9f7a6bcf8a42a8d8f914615` نتیجهٔ کلی `success` داشتند؛ Jobهای اختصاصی Quality gates، SAST/SCA، Container و US-13 به‌علت docs-only بودن تغییرها `skipped` ماندند و نباید PASS تلقی شوند. این نتایج تاریخی در این Snapshot به HEAD تازه تعمیم داده نمی‌شوند؛ شناسه و وضعیت اجرای HEAD جاری در توضیحات PR ثبت می‌شود.
 
 ## تفاوت با گزارش‌های قدیمی و محدودیت‌های باقی‌مانده
 
