@@ -72,10 +72,32 @@ for candidate in candidates:
              "relation": edge["relation"], "confidence": edge["confidence"]}
             for edge in sorted(neighboring.values(), key=lambda e: (-e.get("weight", 0), e["relation"]))
         ][:12],
-        "review_status": reviews.get(cid, {}).get("review_status", "PENDING"),
+        "review_status": (
+            "SEMANTICALLY_REVIEWED"
+            if reviews.get(cid, {}).get("review_date") and reviews.get(cid, {}).get("semantic_disposition")
+            else reviews.get(cid, {}).get("review_status", "PENDING")
+        ),
         "normative_status": reviews.get(cid, {}).get("normative_status", "NEEDS_REVIEW"),
         "coverage_status": reviews.get(cid, {}).get("coverage_status", "PENDING_REVIEW"),
         "atomic_obligation_ids": [a["atomic_obligation_id"] for a in atoms_by_candidate.get(cid, [])],
+        "atomic_obligations": [
+            {
+                "atomic_obligation_id": atom["atomic_obligation_id"],
+                "normative_status": atom["normative_status"],
+                "coverage_status": atom["coverage_status"],
+                "normalized_obligation": atom["normalized_obligation"],
+                "related_packages": atom["related_packages"],
+                "requirement_ids": atom["requirement_ids"],
+                "task_ids": atom["task_ids"],
+                "ac_test_ids": atom["ac_test_ids"],
+                "decision_reference": atom["decision_reference"],
+                "source_evidence": atom["source_evidence"],
+                "plan_evidence": atom["plan_evidence"],
+                "mapping_status": atom["mapping_status"],
+                "review_rationale": atom["review_rationale"],
+            }
+            for atom in atoms_by_candidate.get(cid, [])
+        ],
         "packages": mapped.get("owner_package_candidates", "").split(";") if mapped.get("owner_package_candidates") else [],
         "requirements": mapped.get("requirement_candidates", "").split(";") if mapped.get("requirement_candidates") else [],
         "tasks": mapped.get("task_subtask_candidates", "").split(";") if mapped.get("task_subtask_candidates") else [],
@@ -98,6 +120,8 @@ bundle = {
         "source_units": len(inventory),
         "candidates": len(candidates),
         "atomic_obligations": len(atoms),
+        "candidate_review_status_counts": dict(Counter(item["review_status"] for item in items)),
+        "atomic_coverage_status_counts": dict(Counter(atom["coverage_status"] for atom in atoms)),
         "packages": len(locators_by_package),
         "package_evidence_locators": len(package_evidence),
         "package_evidence_locators_by_package": dict(sorted(locators_by_package.items())),

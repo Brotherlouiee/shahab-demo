@@ -103,7 +103,7 @@
 | یکپارچگی دفتر Atomic Obligation | PASS | 1285 الزام مستقل؛ چند الزام می‌توانند به یک Candidate متصل شوند |
 | یکپارچگی دفتر دسته‌ها | PASS | 1623 انتخاب Candidate با نتیجهٔ متصل به Ledger معنایی |
 | شناسه‌های Graph | DISCOVERY_ONLY | هم‌پوشانی مکانیکی منبع؛ نه شاهد entailment |
-| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 13716؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
+| صحت نحوی ارجاع‌های Package/Req/Task/AC/Test | PASS | تعداد tokenهای کنترل‌شده: 13692؛ معنای نگاشت‌ها هنوز UNVERIFIED است |
 | یکپارچگی ارجاع‌های Package Index | PASS | 4692 شناسهٔ استخراج‌شده با سند برنامه تطبیق شد |
 | پوشش کامل trace rowها | PASS | 1633 ردیف |
 | علت‌دار بودن candidateهای نیازمند بازبینی | PASS | 1633 ردیف |
