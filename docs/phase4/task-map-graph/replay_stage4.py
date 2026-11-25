@@ -263,7 +263,7 @@ def main():
  expected_h04={'REL-STAGE4-001':('TASK:ASSISTANT:A01:003','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625'),'REL-STAGE4-002':('TASK:ASSISTANT:A02:003','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768')}
  for rid,(task,loc) in expected_h04.items():
   r=next((x for x in rels if x.get('relation_id')==rid),None)
-  if not r or r.get('source_relation_refs')!=['Handoff:H04:001'] or r.get('source_node')!='PACKAGE:C04' or r.get('target_node')!=task or r.get('scope_level')!='TASK' or r.get('resolution_status')!='PARTIALLY_RESOLVED' or r.get('confidence')!='AMBIGUOUS' or r.get('execution_effect')!='CONTRACT_ORDER' or loc not in r.get('source_refs',[]):errors.append('H04:001 task consumer/crosswalk ambiguity not recorded '+rid)
+  if not r or r.get('source_relation_refs')!=['Handoff:H04:001'] or r.get('source_node')!='PACKAGE:C04' or r.get('target_node')!=task or r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or r.get('confidence')!='CONFIRMED' or r.get('execution_effect')!='CONTRACT_ORDER' or loc not in r.get('source_refs',[]) or 'Handoff:H04:003' not in r.get('rationale',''):errors.append('H04:001 confirmed C04 entitlement consumer mapping invalid '+rid)
  if any('Handoff:H04:001' in x.get('source_relation_refs',[]) for x in rels if x.get('source_node')=='PACKAGE:C05A'):errors.append('H04:001 was incorrectly attributed to C05A provider')
  expected_c05a_handoffs={'REL-STAGE4-070':('TASK:ASSISTANT:A01:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623'),'REL-STAGE4-071':('TASK:ASSISTANT:A02:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766')}
  for rid,(task,loc) in expected_c05a_handoffs.items():

@@ -37675,7 +37675,7 @@
       },
       "locator": "docs/SHAHAB_DIGITAL_WALLET.md:423",
       "decision_reference": "OPEN:C08:04",
-      "reason": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved.",
+      "reason": "Atomic obligation AO:WL-C-0612:02 is the canonical identity attached to TASK:CORE:C07:002. Wallet W:423 and the C08 decision section in Plan:4932/:4980 identify its source decision as OPEN:C08:04; C07:002 has the exact AO ID and Plan:4829 bank/legal boundary scope. The immutable Task graph metadata incorrectly labels this AO with C13A-R13 (Plan:5875, a distinct accounting/revenue decision). Mapping therefore preserves source-canonical OPEN:C08:04 and the evidence-backed C07:002 impact scope, records the graph metadata discrepancy explicitly, and does not resolve the product decision.",
       "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4829;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4932;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4980",
       "mapping_basis": "Crosswalk از اتم اصلاح‌شده و OPEN ID صریح در Plan گرفته شد؛ این اتصال فقط دامنهٔ اثر را ثبت می‌کند و تصمیم را حل نمی‌کند.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
@@ -37705,10 +37705,12 @@
         "affected_tasks": [
           "TASK:CORE:C07:002"
         ],
-        "blocking_reason": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved.",
-        "impact": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved."
+        "blocking_reason": "Atomic obligation AO:WL-C-0612:02 is the canonical identity attached to TASK:CORE:C07:002. Wallet W:423 and the C08 decision section in Plan:4932/:4980 identify its source decision as OPEN:C08:04; C07:002 has the exact AO ID and Plan:4829 bank/legal boundary scope. The immutable Task graph metadata incorrectly labels this AO with C13A-R13 (Plan:5875, a distinct accounting/revenue decision). Mapping therefore preserves source-canonical OPEN:C08:04 and the evidence-backed C07:002 impact scope, records the graph metadata discrepancy explicitly, and does not resolve the product decision.",
+        "impact": "Atomic obligation AO:WL-C-0612:02 is the canonical identity attached to TASK:CORE:C07:002. Wallet W:423 and the C08 decision section in Plan:4932/:4980 identify its source decision as OPEN:C08:04; C07:002 has the exact AO ID and Plan:4829 bank/legal boundary scope. The immutable Task graph metadata incorrectly labels this AO with C13A-R13 (Plan:5875, a distinct accounting/revenue decision). Mapping therefore preserves source-canonical OPEN:C08:04 and the evidence-backed C07:002 impact scope, records the graph metadata discrepancy explicitly, and does not resolve the product decision."
       },
-      "resolution_status": "SCOPED_OPEN_DECISION"
+      "resolution_status": "SCOPED_OPEN_DECISION",
+      "task_graph_decision_reference": "C13A-R13",
+      "decision_reference_status": "SOURCE_CANONICAL_OPEN_ID"
     },
     {
       "open_decision_id": "AO:WL-C-0815:02",
@@ -42760,7 +42762,7 @@
     "required_22_reference_status_counts": {
       "BLOCKED": 22
     },
-    "semantic_replay_projection_sha256": "b72d4e3f53565f13a2ce4d919146a3d865b902c41ed7a296e9d440bd53e841d2",
+    "semantic_replay_projection_sha256": "4f6197c37eaf1715e2d69dfa05347a86c5d3d95880489c7c7029d8aa790eafac",
     "historical_snapshots": [
       {
         "recorded_at_head": "655daa9d349f00718b0c93ae2016decb4ffbb510",
@@ -44075,18 +44077,20 @@
         "source": "PACKAGE:C04",
         "target": "TASK:ASSISTANT:A01:003",
         "relation_type": "handoff",
-        "confidence": "AMBIGUOUS",
+        "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625",
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7611"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7611",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4059",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
-        "rationale": "Plan:4060 تأیید برنامه‌ریزی مصرف entitlement توسط A01/A02 را ثبت می‌کند. 7625 مصرف را در TASK:ASSISTANT:A01:003 به Task دقیق وصل می‌کند؛ اما REQ همان Task به Handoff:H04:001 ارجاع می‌دهد و ردیف تعریف H04:001 در فهرست Handoffها وجود ندارد، در حالی‌که H04:003 در :4049 مقصد را باز می‌گذارد. بنابراین endpoint Task ثبت می‌شود ولی crosswalk شناسهٔ رابطه مبهم و وضعیت PARTIALLY_RESOLVED باقی می‌ماند.",
+        "rationale": "Plan:4060 و جدول C04 در :4059، Handoff:H04:001 را به‌عنوان قرارداد Entitlement متعلق به C04 ثبت و پذیرش برنامه‌ریزی A01/A02 را صریح می‌کنند؛ docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625 مقصد مصرف‌کنندهٔ دقیق را TASK ثبت می‌کند و docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7611 الزام بازاعتبارسنجی entitlement از قرارداد C04 را به همان Task متصل می‌کند. بنابراین رابطهٔ Package:C04→TASK:ASSISTANT:A01:003 از نوع handoff/CONTRACT_ORDER با اطمینان CONFIRMED است. H04:001 به Handoff:H04:003 نگاشت یا هم‌معنا نشده؛ Handoff:H04:003 (:4049) ارجاع جداگانه برای مصرف‌کنندگان RAG/Adviser/Assistant آینده با تخصیص مقصد باز است.",
         "rework_risk": "MEDIUM",
         "provenance": "plan:Handoff:H04:001",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-001",
@@ -44142,25 +44146,27 @@
           "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
           "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625",
           "contract_owner_package": "PACKAGE:C04",
-          "scope_note": "Task-level consumer is explicit; the cited Handoff:H04:001 has no canonical definition in the Plan, while H04:003 is explicitly unallocated. Keep the relation partial/ambiguous and do not alias the two IDs."
+          "scope_note": "Handoff:H04:001 در جدول entitlement بخش C04 (:4059–4060) و الزامات/candidate این Task به‌طور مستقیم به‌عنوان قرارداد C04 آمده؛ مقصد A01/A02 در ردیف Task دقیقاً تصریح شده است. این قرارداد با Handoff:H04:003 یکی نیست؛ Handoff:H04:003 برای مصرف‌کنندگان آیندهٔ نامشخص جداگانه باز می‌ماند."
         }
       },
       {
         "source": "PACKAGE:C04",
         "target": "TASK:ASSISTANT:A02:003",
         "relation_type": "handoff",
-        "confidence": "AMBIGUOUS",
+        "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768",
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7745"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7745",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4059",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7728"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
-        "rationale": "Plan:4060 تأیید برنامه‌ریزی مصرف entitlement توسط A01/A02 را ثبت می‌کند. 7768 مصرف را در TASK:ASSISTANT:A02:003 به Task دقیق وصل می‌کند؛ اما REQ همان Task به Handoff:H04:001 ارجاع می‌دهد و ردیف تعریف H04:001 در فهرست Handoffها وجود ندارد، در حالی‌که H04:003 در :4049 مقصد را باز می‌گذارد. بنابراین endpoint Task ثبت می‌شود ولی crosswalk شناسهٔ رابطه مبهم و وضعیت PARTIALLY_RESOLVED باقی می‌ماند.",
+        "rationale": "Plan:4060 و جدول C04 در :4059، Handoff:H04:001 را به‌عنوان قرارداد Entitlement متعلق به C04 ثبت و پذیرش برنامه‌ریزی A01/A02 را صریح می‌کنند؛ docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768 مقصد مصرف‌کنندهٔ دقیق را TASK ثبت می‌کند و docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7745 الزام بازاعتبارسنجی entitlement از قرارداد C04 را به همان Task متصل می‌کند. بنابراین رابطهٔ Package:C04→TASK:ASSISTANT:A02:003 از نوع handoff/CONTRACT_ORDER با اطمینان CONFIRMED است. H04:001 به Handoff:H04:003 نگاشت یا هم‌معنا نشده؛ Handoff:H04:003 (:4049) ارجاع جداگانه برای مصرف‌کنندگان RAG/Adviser/Assistant آینده با تخصیص مقصد باز است.",
         "rework_risk": "MEDIUM",
         "provenance": "plan:Handoff:H04:001",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-002",
@@ -44217,7 +44223,7 @@
           "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4060",
           "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768",
           "contract_owner_package": "PACKAGE:C04",
-          "scope_note": "Task-level consumer is explicit; the cited Handoff:H04:001 has no canonical definition in the Plan, while H04:003 is explicitly unallocated. Keep the relation partial/ambiguous and do not alias the two IDs."
+          "scope_note": "Handoff:H04:001 در جدول entitlement بخش C04 (:4059–4060) و الزامات/candidate این Task به‌طور مستقیم به‌عنوان قرارداد C04 آمده؛ مقصد A01/A02 در ردیف Task دقیقاً تصریح شده است. این قرارداد با Handoff:H04:003 یکی نیست؛ Handoff:H04:003 برای مصرف‌کنندگان آیندهٔ نامشخص جداگانه باز می‌ماند."
         }
       },
       {
