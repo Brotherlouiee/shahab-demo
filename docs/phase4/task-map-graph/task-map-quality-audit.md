@@ -2,7 +2,7 @@
 
 ## مبنای بررسی و وضعیت PR
 
-این گزارش از HEAD واقعی شاخه در آغاز ممیزی، `655daa9d349f00718b0c93ae2016decb4ffbb510`، و Blobهای همان شاخه بازتولید شده است. PR شمارهٔ ۲۵۶ باز، Draft، ادغام‌نشده و در وضعیت mergeable است. HEAD مبنا `main` در `c9e74532d4291e9ed1a7ddd3523ee84f09c940a2` است. فایل‌های Mapping و Replay روی Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` منتشر و از Blobهای GitHub با Blobهای فایل‌های مورد بررسی تطبیق شدند. این نسخهٔ گزارش، نتایج محلیِ همان Tree و گردش‌کارهای اجراشده روی آن Commit را ثبت می‌کند.
+این گزارش از HEAD واقعی شاخه هنگام بازبینی زنده، `3d4d596735474392ad1dd9cf98c7015d790ddbff`، و Blobهای همان شاخه بازتولید شده است. PR شمارهٔ ۲۵۶ باز، Draft، ادغام‌نشده و در وضعیت mergeable است. HEAD مبنا `main` در `c9e74532d4291e9ed1a7ddd3523ee84f09c940a2` است. Commitهای بعدیِ `c4ef91e47de27ccce387cabdf4a3e5bb9b07a698` و `3d4d596735474392ad1dd9cf98c7015d790ddbff` به‌ترتیب نتایج اعتبارسنجی و جداسازی Snapshot تاریخی/جاری را ثبت کردند. PR در زمان این بازبینی همچنان Open، Draft، ادغام‌نشده و mergeable است. آخرین اجرای محلی Replay و کنترل‌های Ledger روی Tree همین HEAD انجام شد؛ نتایج چهار Workflow نیز از GitHub و برای همین HEAD خوانده شد.
 
 مقادیر snapshot قدیمی در `validation.historical_snapshots` داخل Mapping حفظ شده‌اند و با برچسب تاریخی مشخص‌اند؛ آن اعداد مبنای وضعیت فعلی نیستند. Snapshot جاری داخل `validation.stage4_audit` از داده‌های فعلی بازسازی شده است.
 
@@ -29,6 +29,15 @@ Replay پین‌های Blob SHA و SHA-256 این سه فایل را در هر �
 Relation Overlay شامل ۹۴ رابطه است: ۴۷ `handoff`، ۱۷ `depends_on`، ۲۹ `requires_contract` و ۱ `requires_policy`. همهٔ ردیف‌ها Source Locator و Plan Locator معتبر دارند. در Overlay، ۲۸ رابطه مستقیماً به Task/Subtask می‌رسند و ۶۶ رابطه در سطح Package هستند. هیچ رابطهٔ `parallel_safe` اثبات یا ثبت نشده است.
 
 اثر اجرایی روابط ثبت‌شده: ۱۲ `HARD_ORDER`، ۲۵ `CONTRACT_ORDER`، ۳۲ `POLICY_IMPACT`، ۲۲ `IMPACT_ONLY` و ۳ `BLOCKED_BY_DECISION`. در ترکیب گراف و Overlay هیچ چرخهٔ ترتیب سخت وجود ندارد. `SOFT_ORDER` در Overlay به‌عنوان اثر مستقل ثبت نشده؛ روابطی که منبع آن‌ها تقدم سخت نمی‌دهد به `IMPACT_ONLY` یا نوع اثر صریح خود محدودند و به ترتیب قطعی تبدیل نشده‌اند.
+
+
+### بازبینی همهٔ ۶۶ رابطهٔ Package-level
+
+در Mapping جاری دقیقاً ۶۶ ردیف Overlay در Scope سطح Package وجود دارد: ۳۶ ردیف `PACKAGE_ONLY` و ۳۰ ردیف `SOURCE_SCOPED`. از نظر اثر اجرا، ۳۲ `POLICY_IMPACT`، ۲۲ `IMPACT_ONLY`، ۹ `CONTRACT_ORDER`، یک `HARD_ORDER` و دو `BLOCKED_BY_DECISION` ثبت شده‌اند. این‌ها رابطه‌های قطعی Task-level محسوب نمی‌شوند. برای ردیف‌های `PACKAGE_ONLY`، endpoint و اثر اجرایی در سطح Package ثبت شده‌اند؛ ردیف‌های `SOURCE_SCOPED` دامنهٔ صریح منبع را حفظ می‌کنند. موارد دارای `BLOCKED_BY_DECISION` عبارت‌اند از `REL-STAGE4-014` برای `DECISION:C05A:001` و `REL-STAGE4-034` برای `OPEN:C08:04`.
+
+یک تناقض crosswalk مانع ارتقای H04:003 به Task-level است: C04 در Plan:4049، مقصد Task را نامشخص می‌گذارد؛ شرح عمومی :4053 و :4060، پذیرش برنامه‌ریزی A01/A02 را می‌گوید؛ اما جزئیات Taskهای A01/A02 در :7611/:7639 و :7745/:7782 entitlement را ذیل `Handoff:H04:001` ثبت می‌کنند، نه H04:003. Taskهای `TASK:ASSISTANT:A01:003.S04` و `TASK:ASSISTANT:A02:003.S01` نامزدهای دقیق و شاهددار برای مصرف entitlement هستند، ولی تا رفع اختلاف شناسهٔ handoff نمی‌توان آن‌ها را به H04:003 نگاشت قطعی کرد. برای R01–R10 منبع فقط مصرف‌کنندهٔ احتمالی آینده را می‌گوید و Task مقصد نمی‌دهد.
+
+این بازبینی شمارش و ارجاع‌های Overlay را از Blob جاری بازتولید می‌کند؛ خودش اثبات نمی‌کند که تمام Taskهای candidate در ۳۶ Package به‌صورت مستقل با AC/Test تطبیق داده شده‌اند. این محدودیتِ دامنهٔ ممیزی باید پیش از ادعای تکمیل معنایی رفع شود.
 
 ### Handoff:H04:003
 
@@ -66,10 +75,10 @@ DEP:C05A:004 چهار مقصد R02، A01، A02 و C06 را برای routing/cont
 
 Replay معنایی، اعتبار هویت‌ها و Locatorها، Scope تصمیم‌ها، Overlay، چرخه‌ها، جست‌وجوی کامل کد و Hash سه گراف را کنترل می‌کند. این ابزار قضاوت معنایی را از متن به‌شکل ماشینی تولید نمی‌کند؛ قضاوت‌های ثبت‌شده را با شواهد و پیکرهٔ ثابت بازبینی‌پذیر می‌سازد.
 
-دو اجرای `replay_stage4.py --check-only` روی Tree منتشرشدهٔ Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` PASS شدند و خروجی JSON byte-for-byte یکسان بود. SHA پروجکشن معنایی هر دو `2de89b2fe98312fe7ed7428eec45865974898ca3d52995b34725112c137a05d3` است؛ هر دو اجرای Replay صفر چرخه و ثابت‌بودن سه گراف immutable را تأیید کردند. اجرای `build_and_validate.py --check-only` PASS شد؛ هر ۲۹ کنترل داخلی PASS و شمارش Candidate/Obligation با مقادیر Ledger تطبیق داشت. هر چهار Workflow روی همان Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` نیز در GitHub Actions با نتیجهٔ `success` تمام شدند: Security SAST/SCA/secret gates؛ US-13 frozen frontend baseline evidence؛ Quality gates؛ Container build contract smoke. چون پس از این Commit، فقط متن همین گزارش به‌روزرسانی خواهد شد، نتیجهٔ Workflowهای Commit گزارش نهایی در توضیحات PR جداگانه و از روی HEAD واقعی ثبت می‌شود.
+دو اجرای `replay_stage4.py --check-only` روی Tree منتشرشدهٔ Commit `3d4d596735474392ad1dd9cf98c7015d790ddbff` PASS شدند و خروجی JSON byte-for-byte یکسان بود. SHA پروجکشن معنایی هر دو `2de89b2fe98312fe7ed7428eec45865974898ca3d52995b34725112c137a05d3` است؛ هر دو اجرای Replay صفر چرخه و ثابت‌بودن سه گراف immutable را تأیید کردند. اجرای `docs/audits/phase2-source-coverage/build_and_validate.py --check-only` روی همین Tree PASS شد؛ هر ۲۹ کنترل داخلی PASS و شمارش Candidate/Obligation با مقادیر Ledger تطبیق داشت. چهار Workflow روی همین HEAD در GitHub Actions با نتیجهٔ `success` ثبت شده‌اند: Security SAST/SCA/secret gates (run 45580582337)، US-13 frozen frontend baseline evidence (run 45580582286)، Quality gates (run 45580582279)، Container build contract smoke (run 45580582282). این نتایج با Workflowهای Commitهای قدیمی‌تر مخلوط نشده‌اند.
 
 ## تفاوت با گزارش‌های قدیمی و محدودیت‌های باقی‌مانده
 
 Snapshotهای تاریخی ۱۵/۲۴/۶۵۷، ۱۲۶ BLOCKED/۸ UNMAPPED و ۷۲ Overlay دیگر وضعیت جاری نیستند. وضعیت فعلی ۱۵/۲۷/۶۵۴، ۱۳۴ BLOCKED/۰ UNMAPPED و ۹۴ Overlay است. سه تغییر Mapping ناشی از بازبینی کد R10 است؛ ۸ تصمیم پیش‌تر UNMAPPED با اتصال شاهددار به Scope موجود به BLOCKED تغییر کردند، در حالی‌که تصمیم محصولی هر ۱۳۴ مورد OPEN باقی ماند؛ Overlay نیز در به‌روزرسانی قبلی کامل شد و این اصلاح، رابطه‌ای حدسی اضافه نمی‌کند.
 
-محدودیت‌های واقعی فعلی عبارت‌اند از تخصیص نشدن Task مصرف‌کننده برای H04:003 و تخصیص Task دقیق مقصدهای Package-level در DEP:C05A:003/004؛ چهار تصمیم ویژه نیز در Scope Package می‌مانند چون منابع Task تصمیم را تعیین نمی‌کنند. این موارد با Scope، اثر اجرایی و Locator ثبت شده‌اند و تا زمان شاهد دقیق، مانع ادعای تکمیل معنایی Mapping آن روابط‌اند.
+محدودیت‌های واقعی فعلی عبارت‌اند از تخصیص نشدن Task مصرف‌کننده برای R01–R10 در H04:003، تخصیص نشدن Task دقیق برای همهٔ مقصدهای DEP:C05A:003/004، و چهار تصمیم ویژه که منابع برای خود تصمیم‌ها Task یکتا تعیین نمی‌کنند. برای A01/A02، Plan در Taskهای `TASK:ASSISTANT:A01:003.S04` و `TASK:ASSISTANT:A02:003.S01` مصرف entitlement را دقیق می‌کند (Plan:7639 و :7782)، اما ردیف‌های همان بخش به `Handoff:H04:001` ارجاع می‌دهند، در حالی‌که منبع C04 در :4049 همین خانوادهٔ مصرف را `Handoff:H04:003` با تخصیص Package نامعلوم می‌نامد. این ناسازگاری شناسهٔ منبع اجازه نمی‌دهد Taskهای A01/A02 را بدون اصلاح/تأیید crosswalk به H04:003 منتسب کنیم؛ هر دو به‌عنوان نامزد شاهددار ثبت می‌شوند و سطح رابطه در Overlay Package باقی می‌ماند. بنابراین این مورد یک محدودیت معنایی واقعی است، نه صرفاً کمبود برچسب. این موارد با Scope، اثر اجرایی و Locator ثبت شده‌اند و مانع ادعای تکمیل معنایی Stage 4 هستند.
