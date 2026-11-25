@@ -32157,9 +32157,13 @@
       "open_decision_id": "AO:BP-TR-033-06:02",
       "candidate_id": "BP-TR-033-06",
       "package_refs": [
-        "PACKAGE:C01"
+        "PACKAGE:C01",
+        "PACKAGE:A05"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:CORE:C01:011",
+        "TASK:ASSISTANT:A05:001"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "DEPENDS_ON",
       "mapping_status": "BLOCKED",
@@ -32176,6 +32180,35 @@
         {
           "source": "execution_trace",
           "locator": null
+        },
+        {
+          "source": "task_graph_open_decision_crosswalk",
+          "task_refs": [
+            "TASK:CORE:C01:011",
+            "TASK:ASSISTANT:A05:001"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:245",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:264",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:603",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:606",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:619",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:620",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:633",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:634",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:829",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:830",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:857",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:858",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8649",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8650",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8651",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8653",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8165"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -32188,20 +32221,27 @@
       },
       "locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2187-2187 (BP-T-033)",
       "decision_reference": "O5-05:pilot-service-and-test-scope",
-      "reason": "انتخاب مشخص‌شده هنوز در منبع به‌عنوان شاهد/جزئیات اجرایی باز است.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
+      "reason": "Atomic Obligation ID appears directly in open_decisions of C01:011 and A05:001. O5-05 remains OPEN; this records affected tasks and does not select the pilot service/test scope.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8165;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
       "mapping_basis": "Atomic disposition ledger explicitly records canonical package/task references.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": null,
       "subtask_ref": null,
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "MULTI_TASK",
         "package_refs": [
-          "PACKAGE:C01"
+          "PACKAGE:C01",
+          "PACKAGE:A05"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:CORE:C01:011",
+          "TASK:ASSISTANT:A05:001"
+        ],
         "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2187-2187 (BP-T-033)",
         "plan_locators": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8165",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95"
         ],
         "execution_effect": "BLOCKED_BY_DECISION",
@@ -32209,11 +32249,15 @@
         "resolution_status": "SCOPED_OPEN_DECISION",
         "decision_scope": "O5-05:pilot-service-and-test-scope",
         "affected_packages": [
-          "PACKAGE:C01"
+          "PACKAGE:C01",
+          "PACKAGE:A05"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "انتخاب مشخص‌شده هنوز در منبع به‌عنوان شاهد/جزئیات اجرایی باز است.",
-        "impact": "انتخاب مشخص‌شده هنوز در منبع به‌عنوان شاهد/جزئیات اجرایی باز است."
+        "affected_tasks": [
+          "TASK:CORE:C01:011",
+          "TASK:ASSISTANT:A05:001"
+        ],
+        "blocking_reason": "Atomic Obligation ID appears directly in open_decisions of C01:011 and A05:001. O5-05 remains OPEN; this records affected tasks and does not select the pilot service/test scope.",
+        "impact": "Atomic Obligation ID appears directly in open_decisions of C01:011 and A05:001. O5-05 remains OPEN; this records affected tasks and does not select the pilot service/test scope."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -32223,7 +32267,9 @@
       "package_refs": [
         "PACKAGE:C01"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:CORE:C01:011"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "DEPENDS_ON",
       "mapping_status": "BLOCKED",
@@ -32240,6 +32286,33 @@
         {
           "source": "execution_trace",
           "locator": null
+        },
+        {
+          "source": "task_graph_open_decision_crosswalk",
+          "task_refs": [
+            "TASK:CORE:C01:011"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:245",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:264",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:603",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:606",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:619",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:620",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:633",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:634",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:829",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:830",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:857",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:858",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8649",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8650",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8651",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8653"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -32252,20 +32325,27 @@
       },
       "locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2192-2192 (BP-T-033)",
       "decision_reference": "O5-10:per-release-owner-threshold-budget-evidence",
-      "reason": "این مصادیق در خود Blueprint باز هستند و از گیت عمومی مقدار مشخصی نتیجه‌گیری نمی‌شود.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
+      "reason": "Atomic Obligation ID appears directly in open_decisions of C01:011. Per-release owner/threshold/budget/evidence values remain OPEN.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8649;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8650;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8651;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
       "mapping_basis": "Atomic disposition ledger explicitly records canonical package/task references.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": null,
       "subtask_ref": null,
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "TASK",
         "package_refs": [
           "PACKAGE:C01"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:CORE:C01:011"
+        ],
         "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2192-2192 (BP-T-033)",
         "plan_locators": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8649",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8650",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8651",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95"
         ],
         "execution_effect": "BLOCKED_BY_DECISION",
@@ -32275,9 +32355,11 @@
         "affected_packages": [
           "PACKAGE:C01"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "این مصادیق در خود Blueprint باز هستند و از گیت عمومی مقدار مشخصی نتیجه‌گیری نمی‌شود.",
-        "impact": "این مصادیق در خود Blueprint باز هستند و از گیت عمومی مقدار مشخصی نتیجه‌گیری نمی‌شود."
+        "affected_tasks": [
+          "TASK:CORE:C01:011"
+        ],
+        "blocking_reason": "Atomic Obligation ID appears directly in open_decisions of C01:011. Per-release owner/threshold/budget/evidence values remain OPEN.",
+        "impact": "Atomic Obligation ID appears directly in open_decisions of C01:011. Per-release owner/threshold/budget/evidence values remain OPEN."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -33448,9 +33530,20 @@
       "open_decision_id": "AO:BP-TR-027-04:06",
       "candidate_id": "BP-TR-027-04",
       "package_refs": [
-        "PACKAGE:C01"
+        "PACKAGE:C01",
+        "PACKAGE:A01",
+        "PACKAGE:A02",
+        "PACKAGE:A03",
+        "PACKAGE:A06"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:CORE:C01:011",
+        "TASK:ASSISTANT:A01:003",
+        "TASK:ASSISTANT:A02:003",
+        "TASK:ASSISTANT:A03:002",
+        "TASK:ASSISTANT:A03:003",
+        "TASK:ASSISTANT:A06:002"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "DEPENDS_ON",
       "mapping_status": "BLOCKED",
@@ -33467,6 +33560,43 @@
         {
           "source": "execution_trace",
           "locator": null
+        },
+        {
+          "source": "task_graph_open_decision_crosswalk",
+          "task_refs": [
+            "TASK:CORE:C01:011",
+            "TASK:ASSISTANT:A01:003",
+            "TASK:ASSISTANT:A02:003",
+            "TASK:ASSISTANT:A03:002",
+            "TASK:ASSISTANT:A03:003",
+            "TASK:ASSISTANT:A06:002"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:122",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:245",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:264",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:603",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:606",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:619",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:620",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:633",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:634",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:829",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:830",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:857",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:858",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8648",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8649",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8650",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8651",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8653",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7926",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7927",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -33479,20 +33609,37 @@
       },
       "locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2030-2030 (BP-T-027)",
       "decision_reference": "O5-10/F06: per-release numeric thresholds, cohort, schedule and metric owner not yet approved",
-      "reason": "پس از جداسازی بخش قابل‌پوشش (AO:BP-TR-027-04:05)، فقط مقادیر/مالک اجرایی‌ای که سند آن‌ها را صریحاً نیازمند تصویب مستقل می‌داند باز مانده‌اند. این یک تصمیم واقعی O5-10/F06 است؛ نقص Plan پوشش‌داده‌شده به آن نسبت داده نشده و اجرای محصول NOT_EXECUTED است.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
+      "reason": "The exact Atomic Obligation ID occurs in each listed Task's open_decisions in the immutable Task graph. These Task endpoints scope the affected release gate; they do not approve thresholds, cohort, schedule, or metric owner.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7926;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7927;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95",
       "mapping_basis": "Atomic disposition ledger explicitly records canonical package/task references.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": null,
       "subtask_ref": null,
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "MULTI_TASK",
         "package_refs": [
-          "PACKAGE:C01"
+          "PACKAGE:C01",
+          "PACKAGE:A01",
+          "PACKAGE:A02",
+          "PACKAGE:A03",
+          "PACKAGE:A06"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:CORE:C01:011",
+          "TASK:ASSISTANT:A01:003",
+          "TASK:ASSISTANT:A02:003",
+          "TASK:ASSISTANT:A03:002",
+          "TASK:ASSISTANT:A03:003",
+          "TASK:ASSISTANT:A06:002"
+        ],
         "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:2030-2030 (BP-T-027)",
         "plan_locators": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7926",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7927",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8628",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:95"
         ],
         "execution_effect": "BLOCKED_BY_DECISION",
@@ -33500,11 +33647,22 @@
         "resolution_status": "SCOPED_OPEN_DECISION",
         "decision_scope": "O5-10/F06: per-release numeric thresholds, cohort, schedule and metric owner not yet approved",
         "affected_packages": [
-          "PACKAGE:C01"
+          "PACKAGE:C01",
+          "PACKAGE:A01",
+          "PACKAGE:A02",
+          "PACKAGE:A03",
+          "PACKAGE:A06"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "پس از جداسازی بخش قابل‌پوشش (AO:BP-TR-027-04:05)، فقط مقادیر/مالک اجرایی‌ای که سند آن‌ها را صریحاً نیازمند تصویب مستقل می‌داند باز مانده‌اند. این یک تصمیم واقعی O5-10/F06 است؛ نقص Plan پوشش‌داده‌شده به آن نسبت داده نشده و اجرای محصول NOT_EXECUTED است.",
-        "impact": "پس از جداسازی بخش قابل‌پوشش (AO:BP-TR-027-04:05)، فقط مقادیر/مالک اجرایی‌ای که سند آن‌ها را صریحاً نیازمند تصویب مستقل می‌داند باز مانده‌اند. این یک تصمیم واقعی O5-10/F06 است؛ نقص Plan پوشش‌داده‌شده به آن نسبت داده نشده و اجرای محصول NOT_EXECUTED است."
+        "affected_tasks": [
+          "TASK:CORE:C01:011",
+          "TASK:ASSISTANT:A01:003",
+          "TASK:ASSISTANT:A02:003",
+          "TASK:ASSISTANT:A03:002",
+          "TASK:ASSISTANT:A03:003",
+          "TASK:ASSISTANT:A06:002"
+        ],
+        "blocking_reason": "The exact Atomic Obligation ID occurs in each listed Task's open_decisions in the immutable Task graph. These Task endpoints scope the affected release gate; they do not approve thresholds, cohort, schedule, or metric owner.",
+        "impact": "The exact Atomic Obligation ID occurs in each listed Task's open_decisions in the immutable Task graph. These Task endpoints scope the affected release gate; they do not approve thresholds, cohort, schedule, or metric owner."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -34776,7 +34934,9 @@
         "PACKAGE:A04",
         "PACKAGE:A06"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:ASSISTANT:A06:002"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "NO_CURRENT_CODE_COUNTERPART",
       "mapping_status": "BLOCKED",
@@ -34801,6 +34961,15 @@
         {
           "source": "reference_graph_node",
           "id": "shahab_phase_2_development_blueprint_section_1731_۱۸_جزئیات_اجرایی_باز_و_آزمایش_های_امکان_سنجی"
+        },
+        {
+          "source": "plan_task_scope_crosswalk",
+          "task_refs": [
+            "TASK:ASSISTANT:A06:002"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -34813,23 +34982,26 @@
       },
       "locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1739-1739 (BP-P-1739-1739)",
       "decision_reference": "Blueprint 1739-1739: explicit unresolved technical/product decision",
-      "reason": "موضوع بر مرز پلتفرم و نمای رابط اثر دارد و به Scope دو Package A04/A06 محدود می‌شود؛ شاهد Task-level یکتا برای آن در Plan ثبت نشده است.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7979;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8222",
+      "reason": "A06:002 directly defines allowlisted sources and authorized test accounts, non-destructive mode, isolated session/device cleanup, and per-platform feasibility evidence (Plan 8273). This scopes the test-account/safe-environment/authenticated-route question to that Task without claiming the required accounts or environments exist.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7979;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8222;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273",
       "mapping_basis": "پیوند فقط بر اساس Scope صریح Source/Plan و شناسهٔ canonical موجود در Task Graph ثبت شده است. این پیوند تصمیم را حل نمی‌کند و مقدار/سیاست اجرایی نمی‌سازد.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": "",
       "subtask_ref": "",
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "TASK",
         "package_refs": [
           "PACKAGE:A04",
           "PACKAGE:A06"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:ASSISTANT:A06:002"
+        ],
         "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1739-1739 (BP-P-1739-1739)",
         "plan_locators": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7979",
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8222"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8222",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:8273"
         ],
         "execution_effect": "BLOCKED_BY_DECISION",
         "decision_status": "OPEN",
@@ -34839,9 +35011,11 @@
           "PACKAGE:A04",
           "PACKAGE:A06"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "بازبینی Blueprint/Plan/Wallet و crosswalkهای package execution/evidence در HEAD فعلی، Task/Subtask مستقیم و یکتایی برای خود تصمیم نشان نداد؛ نگاشت به فرزند Package حدسی محسوب می‌شد. Scope در سطح Package باقی می‌ماند؛ اثر تصمیم بر پیاده‌سازی آن Packageها مسدود است تا تصمیم محصولی باز بماند و Task دقیق از منبع تخصیص یابد.",
-        "impact": "بازبینی Blueprint/Plan/Wallet و crosswalkهای package execution/evidence در HEAD فعلی، Task/Subtask مستقیم و یکتایی برای خود تصمیم نشان نداد؛ نگاشت به فرزند Package حدسی محسوب می‌شد. Scope در سطح Package باقی می‌ماند؛ اثر تصمیم بر پیاده‌سازی آن Packageها مسدود است تا تصمیم محصولی باز بماند و Task دقیق از منبع تخصیص یابد."
+        "affected_tasks": [
+          "TASK:ASSISTANT:A06:002"
+        ],
+        "blocking_reason": "A06:002 directly defines allowlisted sources and authorized test accounts, non-destructive mode, isolated session/device cleanup, and per-platform feasibility evidence (Plan 8273). This scopes the test-account/safe-environment/authenticated-route question to that Task without claiming the required accounts or environments exist.",
+        "impact": "A06:002 directly defines allowlisted sources and authorized test accounts, non-destructive mode, isolated session/device cleanup, and per-platform feasibility evidence (Plan 8273). This scopes the test-account/safe-environment/authenticated-route question to that Task without claiming the required accounts or environments exist."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -35487,7 +35661,12 @@
         "PACKAGE:C05A",
         "PACKAGE:C05B"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:ASSISTANT:A01:002",
+        "TASK:CORE:C04:001",
+        "TASK:CORE:C05A:001",
+        "TASK:CORE:C05B:001"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "NO_CURRENT_CODE_COUNTERPART",
       "mapping_status": "BLOCKED",
@@ -35512,6 +35691,64 @@
         {
           "source": "reference_graph_node",
           "id": "shahab_phase_2_development_blueprint_section_1731_۱۸_جزئیات_اجرایی_باز_و_آزمایش_های_امکان_سنجی"
+        },
+        {
+          "source": "plan_task_scope_crosswalk",
+          "task_refs": [
+            "TASK:ASSISTANT:A01:002",
+            "TASK:CORE:C04:001",
+            "TASK:CORE:C05A:001",
+            "TASK:CORE:C05B:001"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3890",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3891",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3892",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3893",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3894",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3895",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3896",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3899",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3900",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3901",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3902",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3903",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3904",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3909",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3957",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3968",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4065",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4333",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4344",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4204",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4298",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4299",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4300",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4301",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4302",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4303",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4304",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4305",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4306",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4307",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4310",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4311",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4483",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4484",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4485",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4539",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4550",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4551",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4552",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4593",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4596",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4597",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4601",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4606",
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4607"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -35524,27 +35761,37 @@
       },
       "locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1751-1751 (BP-P-1751-1751)",
       "decision_reference": "Blueprint 1751-1751: explicit unresolved technical/product decision",
-      "reason": "مورد اتصال کاتالوگ خدمت/محصول با مصرف‌کنندهٔ Assistant و entitlement را در سطح چهار Package درگیر می‌کند. چون Plan برای همین تصمیم مقصد Task یکتا اعلام نکرده، پیوند Task ساخته نشد.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7567;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3843;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4104;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4407",
+      "reason": "Task plan rows correspond directly to the open list: A01:002 owns tool taxonomy; C04:001 models plan entitlements/capabilities; C05A:001 models domains/services/capabilities; C05B:001 models products/registry. This records impacted tasks only; exact product/domain/tool/plan lists remain an OPEN decision.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3843;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3890;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3892;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4104;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4204;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4407;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4483;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7567;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624",
       "mapping_basis": "پیوند فقط بر اساس Scope صریح Source/Plan و شناسهٔ canonical موجود در Task Graph ثبت شده است. این پیوند تصمیم را حل نمی‌کند و مقدار/سیاست اجرایی نمی‌سازد.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": "",
       "subtask_ref": "",
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "MULTI_TASK",
         "package_refs": [
           "PACKAGE:A01",
           "PACKAGE:C04",
           "PACKAGE:C05A",
           "PACKAGE:C05B"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:ASSISTANT:A01:002",
+          "TASK:CORE:C04:001",
+          "TASK:CORE:C05A:001",
+          "TASK:CORE:C05B:001"
+        ],
         "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md:1751-1751 (BP-P-1751-1751)",
         "plan_locators": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7567",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3843",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3890",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3892",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4104",
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4407"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4204",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4407",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4483",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7567",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624"
         ],
         "execution_effect": "BLOCKED_BY_DECISION",
         "decision_status": "OPEN",
@@ -35556,9 +35803,14 @@
           "PACKAGE:C05A",
           "PACKAGE:C05B"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "بازبینی Blueprint/Plan/Wallet و crosswalkهای package execution/evidence در HEAD فعلی، Task/Subtask مستقیم و یکتایی برای خود تصمیم نشان نداد؛ نگاشت به فرزند Package حدسی محسوب می‌شد. Scope در سطح Package باقی می‌ماند؛ اثر تصمیم بر پیاده‌سازی آن Packageها مسدود است تا تصمیم محصولی باز بماند و Task دقیق از منبع تخصیص یابد.",
-        "impact": "بازبینی Blueprint/Plan/Wallet و crosswalkهای package execution/evidence در HEAD فعلی، Task/Subtask مستقیم و یکتایی برای خود تصمیم نشان نداد؛ نگاشت به فرزند Package حدسی محسوب می‌شد. Scope در سطح Package باقی می‌ماند؛ اثر تصمیم بر پیاده‌سازی آن Packageها مسدود است تا تصمیم محصولی باز بماند و Task دقیق از منبع تخصیص یابد."
+        "affected_tasks": [
+          "TASK:ASSISTANT:A01:002",
+          "TASK:CORE:C04:001",
+          "TASK:CORE:C05A:001",
+          "TASK:CORE:C05B:001"
+        ],
+        "blocking_reason": "Task plan rows correspond directly to the open list: A01:002 owns tool taxonomy; C04:001 models plan entitlements/capabilities; C05A:001 models domains/services/capabilities; C05B:001 models products/registry. This records impacted tasks only; exact product/domain/tool/plan lists remain an OPEN decision.",
+        "impact": "Task plan rows correspond directly to the open list: A01:002 owns tool taxonomy; C04:001 models plan entitlements/capabilities; C05A:001 models domains/services/capabilities; C05B:001 models products/registry. This records impacted tasks only; exact product/domain/tool/plan lists remain an OPEN decision."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -37420,9 +37672,11 @@
       "open_decision_id": "AO:WL-C-0612:02",
       "candidate_id": "WL-C-0612",
       "package_refs": [
-        "PACKAGE:C08"
+        "PACKAGE:C07"
       ],
-      "task_refs": [],
+      "task_refs": [
+        "TASK:CORE:C07:002"
+      ],
       "current_code_node_refs": [],
       "mapping_type": "DEPENDS_ON",
       "mapping_status": "BLOCKED",
@@ -37443,6 +37697,15 @@
         {
           "source": "execution_trace",
           "locator": "docs/audits/phase2-source-coverage/execution-trace.csv:1126"
+        },
+        {
+          "source": "plan_task_scope_crosswalk",
+          "task_refs": [
+            "TASK:CORE:C07:002"
+          ],
+          "plan_locators": [
+            "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4829"
+          ]
         }
       ],
       "graph_source_sha": {
@@ -37455,20 +37718,23 @@
       },
       "locator": "docs/SHAHAB_DIGITAL_WALLET.md:423",
       "decision_reference": "OPEN:C08:04",
-      "reason": "جزء تصمیمیِ این Candidate جدا از بخش مصوب نگه داشته شده است. Package/Task فقط در صورت اتصال صریح اتم به Plan ثبت شده؛ هیچ مقدار یا سیاستی تصویب نشده است.",
-      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4932;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4980",
+      "reason": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved.",
+      "plan_evidence": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4829;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4932;docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4980",
       "mapping_basis": "Crosswalk از اتم اصلاح‌شده و OPEN ID صریح در Plan گرفته شد؛ این اتصال فقط دامنهٔ اثر را ثبت می‌کند و تصمیم را حل نمی‌کند.",
       "rework_risk": "تصمیم مالک باز است؛ پیاده‌سازی یا انتخاب سیاست/مقدار از این Mapping نتیجه‌گیری نمی‌شود.",
       "task_ref": null,
       "subtask_ref": null,
       "affected_scope": {
-        "scope_level": "PACKAGE",
+        "scope_level": "TASK",
         "package_refs": [
-          "PACKAGE:C08"
+          "PACKAGE:C07"
         ],
-        "task_refs": [],
+        "task_refs": [
+          "TASK:CORE:C07:002"
+        ],
         "source_locator": "docs/SHAHAB_DIGITAL_WALLET.md:423",
         "plan_locators": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4829",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4932",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4980"
         ],
@@ -37477,11 +37743,13 @@
         "resolution_status": "SCOPED_OPEN_DECISION",
         "decision_scope": "OPEN:C08:04",
         "affected_packages": [
-          "PACKAGE:C08"
+          "PACKAGE:C07"
         ],
-        "affected_tasks": [],
-        "blocking_reason": "جزء تصمیمیِ این Candidate جدا از بخش مصوب نگه داشته شده است. Package/Task فقط در صورت اتصال صریح اتم به Plan ثبت شده؛ هیچ مقدار یا سیاستی تصویب نشده است.",
-        "impact": "جزء تصمیمیِ این Candidate جدا از بخش مصوب نگه داشته شده است. Package/Task فقط در صورت اتصال صریح اتم به Plan ثبت شده؛ هیچ مقدار یا سیاستی تصویب نشده است."
+        "affected_tasks": [
+          "TASK:CORE:C07:002"
+        ],
+        "blocking_reason": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved.",
+        "impact": "The Task graph lists the exact Atomic Obligation ID on C07:002, whose Plan scope is bank/legal boundary. The wallet source/Plan C08 locators remain on the decision record; the Task graph's attached decision_reference says C13A-R13, which conflicts with this Wallet obligation's OPEN:C08:04. The canonical atomic ID plus matching C07 bank/legal task support the affected Task link, while the stale decision_reference discrepancy is explicitly retained for audit and no decision is resolved."
       },
       "resolution_status": "SCOPED_OPEN_DECISION"
     },
@@ -42185,7 +42453,7 @@
     },
     "reviewed_reference_count": 22,
     "reviewed_reference_ids_unique": 22,
-    "unmapped_reference_semantics": "Current: UNMAPPED_IN_TASK_GRAPH=0. Eight records previously UNMAPPED were linked to evidence-backed Package/Task scopes; all 134 product decisions remain OPEN.",
+    "unmapped_reference_semantics": "Current: UNMAPPED_IN_TASK_GRAPH=0. Eight records were re-reviewed against source/Plan/task graph; six received more exact Task scope and two remain honestly Package-scoped. All 134 product decisions remain OPEN.",
     "cycles_or_conflicts": "No conflicting mapping edges are introduced; this file stores assessments and cross-graph references only. Existing source graph cycles are not inferred or changed.",
     "reproducibility": "The committed mapping artifact is stable JSON, but no committed generator/replay command exists; semantic regeneration and byte-for-byte second-build equivalence have not been demonstrated.",
     "subtasks_with_explicit_current_code_links": 16,
@@ -42313,6 +42581,27 @@
       {
         "finding": "AUD-OD-REF-02",
         "summary": "Withdrawal open atoms W:937/W:953/W:979 were re-linked to source-aligned A05/C10 tasks; unrelated C04/C13A task links were removed and recorded as exclusions."
+      },
+      {
+        "finding": "AUD-OPEN-TASK-SCOPE-03",
+        "summary": "Six of the eight reviewed package-scoped open-decision references were refined to exact Task or multi-Task scope using direct Task-graph Atomic Obligation crosswalks or explicit Plan Task definitions. Two remain package-scoped where the source question is architectural feasibility or cross-component compatibility and does not allocate an execution Task. Product decision status remains OPEN for all 134.",
+        "corrected_ids": [
+          "AO:BP-TR-033-06:02",
+          "AO:BP-TR-033-11:02",
+          "AO:BP-TR-027-04:06",
+          "AO:WL-C-0612:02",
+          "AO:BP-C-0294:01",
+          "AO:BP-C-0300:01"
+        ],
+        "remaining_package_scoped_ids": [
+          "AO:BP-C-0291:01",
+          "AO:BP-C-0298:01"
+        ],
+        "scope_counts": {
+          "TASK": 123,
+          "MULTI_TASK": 9,
+          "PACKAGE": 2
+        }
       }
     ],
     "stage4_audit": {
@@ -42413,6 +42702,11 @@
       "package_scope_resolution_counts": {
         "SOURCE_SCOPED": 57,
         "PACKAGE_ONLY_BLOCKED_BY_DECISION": 2
+      },
+      "current_open_decision_scope_counts": {
+        "TASK": 123,
+        "MULTI_TASK": 9,
+        "PACKAGE": 2
       }
     },
     "task_name_evidence_override_count": 81,
