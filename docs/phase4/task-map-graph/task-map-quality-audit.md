@@ -2,7 +2,7 @@
 
 ## مبنای بررسی و وضعیت PR
 
-این گزارش از HEAD واقعی شاخه در آغاز ممیزی، `655daa9d349f00718b0c93ae2016decb4ffbb510`، و Blobهای همان شاخه بازتولید شده است. PR شمارهٔ ۲۵۶ باز، Draft، ادغام‌نشده و در وضعیت mergeable است. HEAD مبنا `main` در `c9e74532d4291e9ed1a7ddd3523ee84f09c940a2` است. این فایل پس از اعتبارسنجی و انتشار روی HEAD نهایی به‌روزرسانی می‌شود.
+این گزارش از HEAD واقعی شاخه در آغاز ممیزی، `655daa9d349f00718b0c93ae2016decb4ffbb510`، و Blobهای همان شاخه بازتولید شده است. PR شمارهٔ ۲۵۶ باز، Draft، ادغام‌نشده و در وضعیت mergeable است. HEAD مبنا `main` در `c9e74532d4291e9ed1a7ddd3523ee84f09c940a2` است. فایل‌های Mapping و Replay روی Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` منتشر و از Blobهای GitHub با Blobهای فایل‌های مورد بررسی تطبیق شدند. این نسخهٔ گزارش، نتایج محلیِ همان Tree و گردش‌کارهای اجراشده روی آن Commit را ثبت می‌کند.
 
 مقادیر snapshot قدیمی در `validation.historical_snapshots` داخل Mapping حفظ شده‌اند و با برچسب تاریخی مشخص‌اند؛ آن اعداد مبنای وضعیت فعلی نیستند. Snapshot جاری داخل `validation.stage4_audit` از داده‌های فعلی بازسازی شده است.
 
@@ -66,7 +66,7 @@ DEP:C05A:004 چهار مقصد R02، A01، A02 و C06 را برای routing/cont
 
 Replay معنایی، اعتبار هویت‌ها و Locatorها، Scope تصمیم‌ها، Overlay، چرخه‌ها، جست‌وجوی کامل کد و Hash سه گراف را کنترل می‌کند. این ابزار قضاوت معنایی را از متن به‌شکل ماشینی تولید نمی‌کند؛ قضاوت‌های ثبت‌شده را با شواهد و پیکرهٔ ثابت بازبینی‌پذیر می‌سازد.
 
-خروجی نهایی دو اجرای Replay، `build_and_validate.py --check-only`، ۲۹ کنترل داخلی و هر چهار Workflow روی Commit نهایی پس از Push در این بخش ثبت خواهد شد.
+دو اجرای `replay_stage4.py --check-only` روی Tree منتشرشدهٔ Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` PASS شدند و خروجی JSON byte-for-byte یکسان بود. SHA پروجکشن معنایی هر دو `2de89b2fe98312fe7ed7428eec45865974898ca3d52995b34725112c137a05d3` است؛ هر دو اجرای Replay صفر چرخه و ثابت‌بودن سه گراف immutable را تأیید کردند. اجرای `build_and_validate.py --check-only` PASS شد؛ هر ۲۹ کنترل داخلی PASS و شمارش Candidate/Obligation با مقادیر Ledger تطبیق داشت. هر چهار Workflow روی همان Commit `aa30b45c57e2be4de84dfd08a0eb47324246b794` نیز در GitHub Actions با نتیجهٔ `success` تمام شدند: Security SAST/SCA/secret gates؛ US-13 frozen frontend baseline evidence؛ Quality gates؛ Container build contract smoke. چون پس از این Commit، فقط متن همین گزارش به‌روزرسانی خواهد شد، نتیجهٔ Workflowهای Commit گزارش نهایی در توضیحات PR جداگانه و از روی HEAD واقعی ثبت می‌شود.
 
 ## تفاوت با گزارش‌های قدیمی و محدودیت‌های باقی‌مانده
 
