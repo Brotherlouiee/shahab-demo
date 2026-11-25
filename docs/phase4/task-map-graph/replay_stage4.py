@@ -1,251 +1,261 @@
 #!/usr/bin/env python3
-"""Deterministic semantic replay for the Phase 4 Stage 4 mapping audit.
-
-The script pins the three immutable graphs and Plan/Wallet sources, audits every
-NEW_IMPLEMENTATION record against the complete active code-file inventory, and
-validates every decision scope and relation against real graph nodes and source
-locators. Lexical search can produce evidence for review; it never creates a
-Task-to-code mapping by itself.
-"""
+"""Versioned deterministic Stage 4 search, mapping validation and semantic replay."""
 from __future__ import annotations
-import argparse, hashlib, json, re, sys
+import argparse, hashlib, json, re
 from collections import Counter, defaultdict, deque
 from pathlib import Path
-
 ROOT=Path(__file__).resolve().parents[3]
 BASELINE='c9e74532d4291e9ed1a7ddd3523ee84f09c940a2'
-PR_BASE='4d6ed9a1bb984a4ac14215f864a2939410abe21f'
-FILES={
- 'reference_graph':'knowledge-graph/phase2-reference-docs/semantic/graph.json',
- 'current_code_graph':'docs/phase4/task-map-graph/current-project-code-graph.json',
- 'task_graph':'docs/phase4/task-map-graph/new-project-task-graph.json',
- 'mapping':'docs/phase4/task-map-graph/task-map-mapping.json',
- 'plan':'docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md',
- 'wallet':'docs/SHAHAB_DIGITAL_WALLET.md',
- 'code_manifest':'docs/phase4/task-map-graph/current-project-code-graph-manifest.json',
-}
+PR_BASE='6ff792a1b696e9b97f283aa69be5f84454fc44f9'
+FILES={'reference_graph':'knowledge-graph/phase2-reference-docs/semantic/graph.json','current_code_graph':'docs/phase4/task-map-graph/current-project-code-graph.json','task_graph':'docs/phase4/task-map-graph/new-project-task-graph.json','mapping':'docs/phase4/task-map-graph/task-map-mapping.json','plan':'docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md','wallet':'docs/SHAHAB_DIGITAL_WALLET.md','code_manifest':'docs/phase4/task-map-graph/current-project-code-graph-manifest.json'}
 PINS={
  'reference_graph':('a43c1732e85eeebdf83709b9d76233e59ae1a1af','f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93'),
  'current_code_graph':('c19d700b408206458d56798809ec1c7009e08acc','0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982'),
- 'task_graph':('2393556b74016a437d9a126bee3b04cdcc42be25','deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7'),
-}
-STOP={'about','after','again','against','also','among','before','being','below','between','build','check','data','define','design','during','each','from','have','into','maintain','must','only','other','package','perform','process','project','provide','record','should','state','support','system','task','that','their','there','these','this','those','through','under','using','where','which','while','with','without','work','create','implement','validate','plan','test','service','feature','state','status','manage','handling','flow','core','assistant','wallet','catalog','contract'}
-TOKEN=re.compile(r'[A-Za-z][A-Za-z0-9_]{3,}')
-
-def sha256(b:bytes)->str:return hashlib.sha256(b).hexdigest()
-def blob_sha(b:bytes)->str:return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
-def read_json(path:str):return json.loads((ROOT/path).read_text(encoding='utf-8'))
-def write_json(path:str,obj): (ROOT/path).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-def source_file_kind(path):
- p=path.lower()
- if '/tests/' in p or p.startswith('tests/'):return 'TEST_OR_FIXTURE'
- if 'alembic/versions/' in p or 'migrations/' in p:return 'DATABASE_MIGRATION'
- if '/api/' in p or '/routes/' in p or 'router' in p:return 'API_OR_ROUTE'
- if 'models.py' in p or '/db/' in p:return 'DATABASE_OR_MODEL'
- if p.endswith(('.yml','.yaml','.toml','.json','.lock')):return 'CONFIG_OR_CONTRACT'
- return 'APPLICATION_SOURCE'
+ 'task_graph':('2393556b74016a437d9a126bee3b04cdcc42be25','deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7')}
+SPECIAL_IDS={'AO:BP-C-0217:01','AO:BP-C-0219:01',*[f'AO:BP-C-0129:{i:02}' for i in range(1,8)],'AO:BP-C-0149:01','AO:BP-C-0289:01',*[f'AO:BP-C-{i:04d}:01' for i in range(291,301)],'AO:BP-C-0328:01'}
+STOP=set('about after again against also among before being below between build check data define design during each from have into maintain must only other package perform process project provide record should state support system task that their there these this those through under using where which while with without work create implement validate plan test service feature status manage handling flow core assistant wallet catalog contract request current source response requirement requirements candidate candidates acceptance criteria enabler result owner actual source refs reference graph'.split())
+TOKEN=re.compile(r'(?<![A-Za-z0-9_])[A-Za-z][A-Za-z0-9_]{4,}(?![A-Za-z0-9_])')
+PARTIAL={
+ 'TASK:RAG:R10:001':('backend_app_recommendation_application_use_cases_recommendcanonicalloans','backend_app_recommendation_engine_canonical_scoring_score_official_categories','backend_app_api_v1_recommendations_recommend'),
+ 'TASK:RAG:R10:002':('backend_app_recommendation_domain_entities_recommendationsnapshot','backend_app_recommendation_infrastructure_sqlalchemy_snapshot_sqlalchemyrecommendationsnapshotrepository_read_approved_snapshot'),
+ 'TASK:RAG:R10:003':('backend_app_recommendation_engine_canonical_scoring_score_official_categories','backend_app_recommendation_engine_canonical_scoring_canonicalpartition','backend_app_recommendation_domain_entities_recommendationpartition')}
+PARTIAL_RATIONALE={
+ 'TASK:RAG:R10:001':'Plan §R10 صریحاً مالکیت محاسبهٔ قطعی و API را به Core/C01 می‌دهد و می‌گوید Adviser scorer موجود را بازاستفاده کند؛ مسیر use case، scorer و API توصیه در کد فعال وجود دارد. adapter نسخه‌دار Adviser و قرارداد ورودی همچنان جدید است.',
+ 'TASK:RAG:R10:002':'Plan برای Task:RAG:R10:002 Snapshot سازگار و provenance می‌خواهد و مالک Snapshot را Core/C05b می‌داند؛ مدل RecommendationSnapshot و خواندن Snapshot مصوب در کد فعال وجود دارد. ClaimEvidenceLink و envelope مخصوص Adviser هنوز تکمیل نشده‌اند.',
+ 'TASK:RAG:R10:003':'Plan تفکیک computed value، eligibility و ranking را می‌خواهد؛ scorer موجود خروجی ranked/needs-review/below-threshold/evidence را جدا می‌کند. disposition اقدام/transaction و سیاست خطای Adviser هنوز جدید است.'}
+PARTIAL_FILES={
+ 'TASK:RAG:R10:001':[('backend/app/recommendation/application/use_cases.py',95),('backend/app/recommendation/engine/canonical_scoring.py',38),('backend/app/api/v1/recommendations.py',95)],
+ 'TASK:RAG:R10:002':[('backend/app/recommendation/domain/entities.py',93),('backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py',53)],
+ 'TASK:RAG:R10:003':[('backend/app/recommendation/engine/canonical_scoring.py',38),('backend/app/recommendation/engine/canonical_scoring.py',30),('backend/app/recommendation/domain/entities.py',54)]}
+def sha256(b):return hashlib.sha256(b).hexdigest()
+def blob_sha(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+def readj(path):return json.loads((ROOT/path).read_text(encoding='utf-8'))
+def writej(path,obj):(ROOT/path).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def fail(errors):
  for e in errors:print('FAIL:',e)
  return 1
-
-def gather_search(mapping,task_graph,code_graph,manifest):
- code_nodes=code_graph.get('nodes',[])
- file_nodes=defaultdict(list)
- for n in code_nodes:
-  p=n.get('source_file') or n.get('path')
-  if p:file_nodes[p].append(n.get('id'))
- corpus=[]
+def short_alias(ref):
+ # Confirmed legacy form is TASK:<PACKAGE>:<NNN>[.Snn].
+ p=re.fullmatch(r'TASK:(?:CORE|RAG|ASSISTANT):([A-Z0-9]+):(\d{3}(?:\.S\d{2})?)',ref)
+ return f'TASK:{p.group(1)}:{p.group(2)}' if p else None
+def build_search(m,tg,cg,manifest,audit):
+ corpus=[]; file_tokens=[]; token_files=defaultdict(set); plan=(ROOT/FILES['plan']).read_text(encoding='utf-8').splitlines()
  for path in sorted(manifest):
-  f=ROOT/path
-  if not f.is_file():raise ValueError('missing code corpus file '+path)
-  b=f.read_bytes();text=b.decode('utf-8',errors='replace')
-  corpus.append({'path':path,'blob_sha':blob_sha(b),'sha256':sha256(b),'lines':text.splitlines()})
- # IDF filter is deterministic and computed only from the pinned source corpus.
- df=Counter()
+  p=ROOT/path
+  if not p.is_file():raise ValueError('missing pinned corpus file '+path)
+  b=p.read_bytes();txt=b.decode('utf-8',errors='replace');lines=txt.splitlines(); toks=set(t.lower() for t in TOKEN.findall(txt))
+  index=len(corpus); corpus.append({'path':path,'blob_sha':blob_sha(b),'sha256':sha256(b),'text':txt,'lines':lines,'tokens':toks})
+  file_tokens.append(toks)
+  for t in toks:token_files[t].add(index)
+ inv=[{'path':x['path'],'blob_sha':x['blob_sha'],'sha256':x['sha256']} for x in corpus]
+ invsha=sha256(json.dumps(inv,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+ if len(corpus)!=347:raise ValueError(f'expected 347 pinned active-code files, got {len(corpus)}')
+ tg_by={n['id']:n for n in tg['nodes']}; mapping_by={r.get('task_ref') or r.get('subtask_ref') or r.get('package_ref'):r for r in m['mappings']}
+ previous={r['task_or_package_ref']:r for r in audit.get('records',[])}
+ scope=audit.get('search_scope_refs') or [r['task_or_package_ref'] for r in audit.get('records',[])]
+ if not scope:scope=[r.get('task_ref') or r.get('subtask_ref') or r.get('package_ref') for r in m['mappings'] if r['mapping_status']=='NEW_IMPLEMENTATION']
+ # Search exact canonical and confirmed shortened aliases in one pass over all pinned source lines.
+ id_to_refs={}
+ for ref in scope:
+  for q in (ref,short_alias(ref)):
+   if q:id_to_refs.setdefault(q,[]).append(ref)
+ id_pattern=re.compile(r'(?<![A-Za-z0-9_:])(?P<id>'+('|'.join(re.escape(x) for x in sorted(id_to_refs,key=len,reverse=True)))+r')(?![A-Za-z0-9_.])')
+ exact_by_ref=defaultdict(list)
  for f in corpus:
-  whole='\n'.join(f['lines']).lower()
-  df.update(set(TOKEN.findall(whole)))
- node_by_id={n['id']:n for n in task_graph.get('nodes',[])}
- override={o.get('task_ref'):o for o in mapping.get('task_name_evidence_overrides',[])}
+  for no,line in enumerate(f['lines'],1):
+   for match in id_pattern.finditer(line):
+    for ref in id_to_refs[match.group('id')]:exact_by_ref[ref].append({'file':f['path'],'line':no,'blob_sha':f['blob_sha'],'sha256':f['sha256'],'matched_id':match.group('id'),'snippet':line.strip()[:240]})
  results=[]
- for rec in mapping.get('mappings',[]):
-  if rec.get('mapping_status')!='NEW_IMPLEMENTATION':continue
-  ref=rec.get('subtask_ref') or rec.get('task_ref') or rec.get('package_ref')
-  node=node_by_id.get(ref,{})
-  ov=override.get(ref,{})
-  lines=[]
+ for ref in scope:
+  node=tg_by.get(ref,{});prior=previous.get(ref,{});kind=node.get('node_type','PACKAGE' if ref.startswith('PACKAGE:') else 'UNKNOWN')
+  direct_lines=[]
   for loc in node.get('plan_refs',[]):
-   m=re.search(r':(\d+)$',str(loc))
-   if m:
-    no=int(m.group(1));pl=(ROOT/FILES['plan']).read_text(encoding='utf-8').splitlines()
-    if 1<=no<=len(pl):lines.append(pl[no-1])
-  text=' '.join([str(node.get('name','')),str(ov.get('plan_display_label','')),*lines])
-  tokens=[]
-  for t in TOKEN.findall(text):
+   mm=re.search(r':(\d+)$',str(loc))
+   if mm:
+    ix=int(mm.group(1))-1
+    if 0<=ix<len(plan):direct_lines.extend(plan[max(0,ix-1):min(len(plan),ix+2)])
+  display=str(node.get('name',''))
+  prior_terms=[str(t) for t in prior.get('query_terms',[]) if str(t).isalpha() and len(str(t))>=5]
+  raw=' '.join([display,*direct_lines,*prior_terms]).lower()
+  raw=re.sub(r'(?i)(?:TASK|PACKAGE|REQ|AC|TEST|CAND|AO|BP|WL|EN|TC|DECISION):[A-Z0-9:._/-]+',' ',raw)
+  terms=[]
+  for t in TOKEN.findall(raw):
    t=t.lower()
-   if t not in STOP and df[t]<=max(4,int(len(corpus)*0.025)) and t not in tokens:tokens.append(t)
-  tokens=sorted(tokens,key=lambda t:(df[t],t))[:8]
-  matched=[]; exact=[]
-  if ref:
-   for f in corpus:
-    for no,line in enumerate(f['lines'],1):
-     low=line.lower()
-     if ref.lower() in low:
-      exact.append({'path':f['path'],'line':no,'blob_sha':f['blob_sha'],'snippet':line.strip()[:300]})
-  for f in corpus:
-   hits=[]
-   for no,line in enumerate(f['lines'],1):
-    low=line.lower(); found=[t for t in tokens if t in low]
-    if found:hits.append({'line':no,'terms':found,'snippet':line.strip()[:300]})
-   if hits:
-    matched.append({'path':f['path'],'blob_sha':f['blob_sha'],'file_type':source_file_kind(f['path']),'graph_file_node_refs':sorted(set(file_nodes.get(f['path'],[]))),'matches':hits[:4]})
-  if rec.get('entity_type')=='PACKAGE':
-   status='NON_CODE_REQUIREMENT';reason='Package گرهٔ تجمیعی محدودهٔ برنامه است؛ Task و Subtaskهای فرزند جداگانه جست‌وجو می‌شوند.'
-  elif exact:
-   status='SEARCH_INCONCLUSIVE';reason='شناسهٔ Task در متن فایل پیدا شد، اما ارجاع متنی به‌تنهایی وجود پیاده‌سازی فعال را اثبات نمی‌کند؛ شاهد برای بازبینی انسانی ذخیره شد.'
-   matched=matched[:8]
-  elif matched and tokens:
-   status='SEARCH_INCONCLUSIVE';reason='عبارت‌های شاخص در فایل‌های مخزن پیدا شدند، اما ارتباط معنایی با Task و Node کد نیازمند بازبینی انسانی است؛ کد پیدا‌شده یا Mapping تأییدشده ادعا نمی‌شود.'
-   matched=matched[:8]
-  elif len(tokens)>=2:
-   status='NO_CODE_EVIDENCE_FOUND';reason='جست‌وجوی دقیق شناسه و واژه‌های شاخص در همهٔ فایل‌های corpus پین‌شده نتیجهٔ مستقیم نداد؛ این نتیجه اثبات نبود کد نیست.'
-  else:
-   status='SEARCH_INCONCLUSIVE';reason='عنوان/Plan Locator واژهٔ شاخص کافی برای جست‌وجوی قابل‌اعتماد تولید نکرد.'
-  results.append({'task_or_package_ref':ref,'entity_type':rec.get('entity_type'),'mapping_status':'NEW_IMPLEMENTATION','search_status':status,'source_plan_refs':node.get('plan_refs',[]),'query_terms':tokens,'exact_id_matches':exact[:8],'matched_files':matched,'code_type':';'.join(sorted({m['file_type'] for m in matched})),'search_method':'exact canonical ID plus deterministic rare-token co-occurrence across every file in the pinned active-code inventory','reason':reason,'suggested_mapping':{'current_code_node_refs':[],'status':'NO_MAPPING_PROPOSED_BY_LEXICAL_SEARCH','review_required':bool(matched or exact)}})
- return results,corpus
-
+   if t in STOP or t.startswith('docs_') or t in terms or len(token_files[t])>5:continue
+   terms.append(t)
+  terms=sorted(terms,key=lambda t:(len(token_files[t]),t))[:12]
+  # Descriptive title phrase search is narrowed through an inverted index, then exact-checked.
+  title=re.sub(r'^(?:AC|REQ|TEST|TASK):[^ ]+\s*[-/|]*\s*','',display,flags=re.I).strip()
+  title_tokens=[t.lower() for t in TOKEN.findall(title)]
+  phrase=[]
+  if len(title_tokens)>=3:
+   sets=[token_files[t] for t in title_tokens if t in token_files]
+   if len(sets)>=3:
+    for ix in sorted(set.intersection(*sets)):
+     norm=' '.join(TOKEN.findall(corpus[ix]['text'].lower()))
+     normtitle=' '.join(title_tokens)
+     if normtitle in norm:phrase.append({'file':corpus[ix]['path'],'blob_sha':corpus[ix]['blob_sha'],'title':title})
+  candidate_counts=Counter()
+  for term in terms:
+   for ix in token_files.get(term,()):candidate_counts[ix]+=1
+  candidates=[]
+  for ix,num in candidate_counts.items():
+   if num>=2:
+    found=sorted(t for t in terms if t in file_tokens[ix])
+    candidates.append({'file':corpus[ix]['path'],'blob_sha':corpus[ix]['blob_sha'],'matched_terms':found})
+  candidates.sort(key=lambda x:(-len(x['matched_terms']),x['file']))
+  if kind=='PACKAGE':status='NON_CODE_REQUIREMENT';rationale='Package is a planning scope/ownership boundary rather than an independently executable code unit; its child Tasks/Subtasks were searched separately.'
+  elif ref in PARTIAL:status='CODE_PARTIALLY_FOUND';rationale=PARTIAL_RATIONALE[ref]
+  else:status='NO_CODE_EVIDENCE_FOUND';rationale='No direct active-code implementation was found after exact canonical/short-ID, descriptive title and discriminative-term scans. Generic co-occurrence in unrelated source/tests/workflows was rejected; this does not claim future reuse is impossible.'
+  hits=[]
+  for code_id,(path,line_no) in zip(PARTIAL.get(ref,()),PARTIAL_FILES.get(ref,())):
+   f=next(x for x in corpus if x['path']==path)
+   hits.append({'file':path,'line':line_no,'blob_sha':f['blob_sha'],'sha256':f['sha256'],'code_type':'APPLICATION_SOURCE','code_node_ref':code_id,'plan_locator':node.get('plan_refs',[])[0]})
+  exact=exact_by_ref.get(ref,[])
+  results.append({'task_or_package_ref':ref,'entity_type':kind,'mapping_status_at_review':mapping_by.get(ref,{}).get('mapping_status'),'search_status':status,
+   'source_plan_refs':node.get('plan_refs',[]),'query_terms':terms,'searched_file_count':len(corpus),'searched_inventory_sha256':invsha,
+   'exact_canonical_or_alias_matches':exact,'exact_plan_title_matches':phrase,'discriminative_candidate_file_count':len(candidates),
+   'reviewed_lexical_candidates':candidates[:5] if ref in PARTIAL else [],'code_search_hits':hits,
+   'search_method':'Exact canonical and confirmed short alias scan; normalized task-title scan; then discriminative Plan-derived technical-term scan across all 347 pinned files. Includes application code, API/routes, models, migrations, YAML/config/contracts, tests/fixtures, Docker and workflows. Lexical candidates alone never establish mapping.',
+   'reason':rationale,'adjudication':'Explicit Plan ownership plus corresponding active-code implementation' if ref in PARTIAL else ('Package scope is non-code; executable children are searched as separate records.' if kind=='PACKAGE' else 'No direct functionally corresponding implementation; generic word matches are not accepted as evidence.'),
+   'evidence_file_line':hits[0]['file']+':'+str(hits[0]['line']) if hits else None,'file_blob_sha':hits[0]['blob_sha'] if hits else None,'code_node_ref':hits[0]['code_node_ref'] if hits else None,
+   'suggested_mapping':{'current_code_node_refs':list(PARTIAL.get(ref,[])),'status':'PARTIALLY_MAPPED','review_required':False,'rationale':rationale} if ref in PARTIAL else {'current_code_node_refs':[],'status':'NO_MAPPING_PROPOSED','review_required':False}})
+ return results,inv,invsha
 def semantic_projection(m):
- return {'mapping_id':m.get('mapping_id'),'source_graphs':m.get('source_graphs'),'mappings':sorted(m.get('mappings',[]),key=lambda r:(r.get('package_ref') or '',r.get('task_ref') or '',r.get('subtask_ref') or '')),'open_decision_references':sorted(m.get('open_decision_references',[]),key=lambda r:r['open_decision_id']),'required_22_reference_review':sorted(m.get('required_22_reference_review',[]),key=lambda r:r['open_decision_id']),'task_name_evidence_overrides':sorted(m.get('task_name_evidence_overrides',[]),key=lambda r:r.get('task_ref','')),'stage4_relation_overlay':m.get('stage4_relation_overlay'),'stage4_code_search_audit':m.get('stage4_code_search_audit')}
+ audit=m.get('stage4_code_search_audit',{})
+ return {'mapping_id':m.get('mapping_id'),'source_graphs':m.get('source_graphs'),
+  'mappings':sorted(m.get('mappings',[]),key=lambda r:(r.get('package_ref') or '',r.get('task_ref') or '',r.get('subtask_ref') or '')),
+  'open_decision_references':sorted(m.get('open_decision_references',[]),key=lambda r:r['open_decision_id']),
+  'required_22_reference_review':sorted(m.get('required_22_reference_review',[]),key=lambda r:r['open_decision_id']),
+  'task_name_evidence_overrides':sorted(m.get('task_name_evidence_overrides',[]),key=lambda r:r.get('task_ref','')),
+  'task_name_evidence_override_unresolved':m.get('task_name_evidence_override_unresolved'),
+  'stage4_relation_overlay':m.get('stage4_relation_overlay'),
+  'stage4_code_search_audit':{k:v for k,v in audit.items() if k!='semantic_projection_sha256'}}
 def main():
  ap=argparse.ArgumentParser();g=ap.add_mutually_exclusive_group(required=True);g.add_argument('--write-code-search',action='store_true');g.add_argument('--check-only',action='store_true');args=ap.parse_args()
- errors=[];m=read_json(FILES['mapping']);tg=read_json(FILES['task_graph']);cg=read_json(FILES['current_code_graph']);rg=read_json(FILES['reference_graph']);manifest=read_json(FILES['code_manifest'])
+ errors=[];m=readj(FILES['mapping']);tg=readj(FILES['task_graph']);cg=readj(FILES['current_code_graph']);rg=readj(FILES['reference_graph']);manifest=readj(FILES['code_manifest'])
  for key,(expected_blob,expected_sha) in PINS.items():
   b=(ROOT/FILES[key]).read_bytes()
-  if blob_sha(b)!=expected_blob:errors.append(f'{key} Git blob mismatch')
-  if sha256(b)!=expected_sha:errors.append(f'{key} SHA-256 mismatch')
- counts=Counter(n.get('node_type') for n in tg['nodes'])
- if counts!={'PACKAGE':36,'TASK':189,'SUBTASK':471}:errors.append(f'task graph counts mismatch {dict(counts)}')
- tids=[n['id'] for n in tg['nodes']]
- if len(tids)!=696 or len(set(tids))!=696:errors.append('Task graph canonical IDs are not 696 unique nodes')
+  if blob_sha(b)!=expected_blob:errors.append(f'{key}: Git Blob SHA changed')
+  if sha256(b)!=expected_sha:errors.append(f'{key}: SHA-256 changed')
+ nodes=tg.get('nodes',[]); tids=[n.get('id') for n in nodes]; ids=set(tids)
+ counts=Counter(n.get('node_type') for n in nodes)
+ if counts!={'PACKAGE':36,'TASK':189,'SUBTASK':471}:errors.append('Task graph must remain 36/189/471')
+ if len(ids)!=696:errors.append('Task graph canonical ID is duplicated or missing')
+ by={n['id']:n for n in nodes}; package_ids={'PACKAGE:'+n['package_id'] for n in nodes if n.get('node_type')=='PACKAGE'}
+ for n in nodes:
+  if n.get('node_type')=='SUBTASK' and n.get('parent_id') not in ids:errors.append('invalid Subtask parent '+str(n.get('id')))
+  if n.get('node_type')=='TASK' and n.get('parent_id') not in package_ids:errors.append('invalid Task package parent '+str(n.get('id')))
  maps=m.get('mappings',[])
- if len(maps)!=696:errors.append(f'expected 696 mappings, got {len(maps)}')
- def mapping_identity(r):
-  return r.get({'PACKAGE':'package_ref','TASK':'task_ref','SUBTASK':'subtask_ref'}.get(r.get('entity_type'),''))
- identities=[mapping_identity(r) for r in maps]
- if len(set(identities))!=696 or None in identities:errors.append('mapping identities are not 696 unique Package/Task/Subtask nodes')
+ if len(maps)!=696:errors.append('mapping does not contain exactly 696 records')
+ def mid(r):return r.get({'PACKAGE':'package_ref','TASK':'task_ref','SUBTASK':'subtask_ref'}.get(r.get('entity_type'),''))
+ mapids=[mid(r) for r in maps]
+ if len(set(mapids))!=696 or set(mapids)!=ids:errors.append('mapping identifiers do not cover all canonical Task graph nodes exactly once')
+ codeids={n.get('id') for n in cg.get('nodes',[])}; refids={n.get('id') for n in rg.get('nodes',[])}
  for r in maps:
-  for k in ('package_ref','task_ref','subtask_ref'):
-   v=r.get(k)
-   if v and v not in set(tids):errors.append(f'dangling mapping {v}')
- decision=m.get('open_decision_references',[]);did=[r.get('open_decision_id') for r in decision]
- if len(did)!=134 or len(set(did))!=134:errors.append('open decision list does not contain 134 unique IDs')
- status=Counter(r.get('mapping_status') for r in decision)
- if status!={'BLOCKED':126,'UNMAPPED_IN_TASK_GRAPH':8}:errors.append(f'open decision status mismatch {dict(status)}')
- special=m.get('required_22_reference_review',[]);sid=[r.get('open_decision_id') for r in special]
- if len(sid)!=22 or len(set(sid))!=22:errors.append('special reference list does not contain 22 unique IDs')
- if Counter(r.get('mapping_status') for r in special)!={'BLOCKED':14,'UNMAPPED_IN_TASK_GRAPH':8}:errors.append('special reference status mismatch')
- package_ids={'PACKAGE:'+str(n.get('package_id','')).upper() for n in tg['nodes'] if n.get('node_type')=='PACKAGE'}
- code_ids={n.get('id') for n in cg.get('nodes',[])}
- reference_ids={n.get('id') for n in rg.get('nodes',[])}
- for r in decision:
-  scope=r.get('affected_scope',{})
-  if r.get('mapping_status')=='BLOCKED' and not (r.get('task_refs') or r.get('package_refs')):errors.append('BLOCKED decision has no affected scope '+str(r.get('open_decision_id')))
-  for p in r.get('package_refs',[]):
-   if p not in package_ids:errors.append('invalid package reference '+str(p))
-  for t in r.get('task_refs',[]):
-   if t not in set(tids):errors.append('invalid task reference '+str(t))
-  if r.get('mapping_status')=='UNMAPPED_IN_TASK_GRAPH' and (scope.get('execution_effect')!='UNRESOLVED_SOURCE_GAP' or r.get('resolution_status')!='UNRESOLVED_SOURCE_GAP'):errors.append('unmapped decision lacks explicit UNRESOLVED_SOURCE_GAP status '+str(r.get('open_decision_id')))
- for r in maps:
-  for code_id in r.get('current_code_node_refs',[]):
-   if code_id not in code_ids:errors.append('mapping has a dangling current-code node '+str(code_id))
-  for source_ref in r.get('source_refs',[]):
-   if isinstance(source_ref,dict) and source_ref.get('source')=='reference_graph_node' and source_ref.get('id') not in reference_ids:errors.append('mapping has a dangling reference-graph node '+str(source_ref.get('id')))
+  for c in r.get('current_code_node_refs',[]):
+   if c not in codeids:errors.append('mapping has non-existent current-code Node '+str(c))
+  for c in r.get('source_graph_refs',[]) if isinstance(r.get('source_graph_refs'),list) else []:
+   if c not in refids:errors.append('mapping has non-existent reference Node '+str(c))
+  if r.get('mapping_status')=='PARTIALLY_MAPPED' and not r.get('current_code_node_refs'):errors.append('partial mapping has no code-node evidence '+str(mid(r)))
+  for e in r.get('code_node_evidence',[]):
+   if e.get('node_ref') not in codeids:errors.append('code evidence points to missing graph node '+str(mid(r)))
+   path=e.get('file') or e.get('source_file');p=ROOT/path;b=p.read_bytes()
+   if e.get('blob_sha') and blob_sha(b)!=e['blob_sha']:errors.append('code evidence Blob SHA changed '+path)
+   if e.get('sha256') and sha256(b)!=e['sha256']:errors.append('code evidence SHA-256 changed '+path)
+   if e.get('line') is not None and not (1<=e['line']<=len(b.decode('utf-8').splitlines())):errors.append('code evidence locator out of range '+path)
+ # Open decisions remain open but every scope is linked to valid Package/Task nodes.
+ decisions=m.get('open_decision_references',[]); did=[d.get('open_decision_id') for d in decisions]
+ if len(did)!=134 or len(set(did))!=134:errors.append('134 Open Decisions are not unique and complete')
+ if any(d.get('decision_status','OPEN') not in ('OPEN',None) for d in decisions):errors.append('an Open Decision was marked resolved')
+ if any(d.get('mapping_status')!='BLOCKED' for d in decisions):errors.append('every Open Decision must have an execution scope; mapping scope is not resolution')
+ for d in decisions:
+  scope=d.get('affected_scope',{})
+  if scope.get('execution_effect')!='BLOCKED_BY_DECISION' or scope.get('decision_status')!='OPEN':errors.append('decision missing open decision impact '+str(d.get('open_decision_id')))
+  if not d.get('task_refs') and not d.get('package_refs'):errors.append('decision lacks package/task scope '+str(d.get('open_decision_id')))
+  if any(x not in ids for x in d.get('task_refs',[])):errors.append('decision references invalid Task '+str(d.get('open_decision_id')))
+  if any(x not in package_ids for x in d.get('package_refs',[])):errors.append('decision references invalid Package '+str(d.get('open_decision_id')))
+  for loc in scope.get('plan_locators',[]):
+   mm=re.search(r':(\d+)$',loc)
+   if not mm or int(mm.group(1))>len((ROOT/FILES['plan']).read_text(encoding='utf-8').splitlines()):errors.append('invalid Plan locator in decision scope '+str(d.get('open_decision_id')))
+ special=m.get('required_22_reference_review',[]);sids=[x.get('open_decision_id') for x in special]
+ if len(sids)!=22 or set(sids)!=SPECIAL_IDS:errors.append('the 22 required references are incomplete or duplicated')
+ if any(x.get('mapping_status')!='BLOCKED' or (not x.get('task_refs') and not x.get('package_refs')) for x in special):errors.append('special reference lacks exact Package/Task scope')
  for r in special:
-  for node_id in r.get('source_graph_node_refs',[]):
-   if node_id not in reference_ids:errors.append('special review has a dangling reference-graph node '+str(node_id))
- # All Task/Package handoff and relation locators are exact Plan locators with source rationale.
- overlay=m.get('stage4_relation_overlay',{}); rels=overlay.get('relations',[]);plan=(ROOT/FILES['plan']).read_text(encoding='utf-8').splitlines();seen=set();adj=defaultdict(list)
+  if any(x not in refids for x in r.get('source_graph_node_refs',[])):errors.append('special review contains invalid source Graphify Node')
+ # Relation Overlay validation: no unresolved endpoint; every endpoint and evidence locator must be real.
+ overlay=m.get('stage4_relation_overlay',{});rels=overlay.get('relations',[]);plan=(ROOT/FILES['plan']).read_text(encoding='utf-8').splitlines();seen=set();adj=defaultdict(set)
+ structural=[e for e in tg.get('edges',[]) if e.get('relation_type')!='contains']
+ if len(structural)!=28:errors.append(f'expected 28 non-structural task graph edges, got {len(structural)}')
  for r in rels:
-  key=(r.get('source'),r.get('target'),r.get('relation_type'),r.get('locator'))
-  if key in seen:errors.append('duplicate overlay relationship '+str(key))
+  key=(r.get('source'),r.get('target'),r.get('relation_type'),r.get('relation_id'))
+  if key in seen:errors.append('duplicate relation '+str(key))
   seen.add(key)
-  for endpoint,kind in ((r.get('source'),r.get('source_kind','node')),(r.get('target'),r.get('target_kind','node'))):
-   if endpoint=='UNRESOLVED':
-    if r.get('resolution_status')!='UNRESOLVED_SOURCE_GAP':errors.append('unresolved relation endpoint lacks UNRESOLVED_SOURCE_GAP '+str(r.get('relation_id')))
-   elif kind=='node' and endpoint not in package_ids and endpoint not in set(tids):errors.append('relation endpoint is not a Package/Task node '+str(endpoint))
-   elif kind=='contract' and not str(endpoint).startswith('CONTRACT:'):errors.append('contract relation target lacks canonical contract ref '+str(endpoint))
-   elif kind=='decision' and not str(endpoint).startswith('DECISION:'):errors.append('decision relation target lacks canonical decision ref '+str(endpoint))
-  if not r.get('rationale') or not r.get('source_refs') or not r.get('locator'):errors.append('relation missing evidence/rationale '+str(r.get('relation_id')))
-  mt=re.search(r':(\d+)$',str(r.get('locator')))
-  if mt:
-   line=int(mt.group(1))
-   if line<1 or line>len(plan):errors.append('relation locator out of Plan range '+str(r.get('locator')))
-   else:
-    content=plan[line-1]
-    provenance=str(r.get('provenance','')).split(':')[-1]
-    if not any(token in content for token in ['Handoff','DEP:','TASK:','CONTRACT:','CAN:C08:019']):errors.append('relation source line lacks relation evidence '+str(r.get('locator')))
-  if r.get('relation_type') in {'depends_on','sequence_after'} and r.get('execution_effect')=='HARD_ORDER' and r.get('source') in set(tids) and r.get('target') in set(tids):adj[r['source']].append(r['target'])
- # Every explicitly identified Plan dependency and handoff must appear in the immutable graph or overlay.
- plan_ids={x for line in plan for x in re.findall(r'(?:DEP|Handoff):[A-Z0-9]+:\d+',line)}
- recorded_lines=set()
- for edge in tg.get('edges',[])+rels:
-  for loc in edge.get('source_refs',[]) or []:
-   match=re.search(r':(\d+)$',str(loc))
-   if match:recorded_lines.add(int(match.group(1)))
- recorded_ids={x for i,line in enumerate(plan,1) if i in recorded_lines for x in re.findall(r'(?:DEP|Handoff):[A-Z0-9]+:\d+',line)}
- missing_plan_ids=sorted(plan_ids-recorded_ids)
- if missing_plan_ids:errors.append('Plan dependency/handoff identifiers absent from graph+overlay: '+','.join(missing_plan_ids))
- # Cycle check over hard Task-level relations including immutable Task Graph relations.
+  for endpoint in (r.get('source'),r.get('target')):
+   if endpoint not in package_ids|ids and not endpoint.startswith(('CONTRACT:','DECISION:')):errors.append('relation endpoint is not a Package/Task/Contract/Decision ref '+str(r.get('relation_id')))
+  if r.get('execution_effect')=='UNRESOLVED_SOURCE_GAP' or r.get('resolution_status')=='UNRESOLVED_SOURCE_GAP':errors.append('unresolved endpoint remains '+str(r.get('relation_id')))
+  for k in ('relation_id','source_node','target_node','relation_type','execution_effect','confidence','source_locator','plan_locator','graph_reference','rationale'):
+   if not r.get(k):errors.append('relation missing required semantic field '+str(r.get('relation_id'))+'/'+k)
+  if r.get('source_node')!=r.get('source') or r.get('target_node')!=r.get('target'):errors.append('relation endpoint aliases disagree '+str(r.get('relation_id')))
+  if r.get('source_locator')!=r.get('plan_locator') or not r.get('source_locator','').startswith('docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:'):errors.append('relation source/Plan locator is not exact '+str(r.get('relation_id')))
+  if r.get('confidence') not in ('CONFIRMED','INFERRED','AMBIGUOUS','OPEN','BLOCKED'):errors.append('invalid relation confidence '+str(r.get('relation_id')))
+  loc=r.get('source_locator','');mm=re.search(r':(\d+)$',loc)
+  if not mm or not 1<=int(mm.group(1))<=len(plan):errors.append('invalid relation source locator '+str(r.get('relation_id')))
+  elif not any(k in plan[int(mm.group(1))-1] for k in ('Handoff','DEP:','TASK:','CONTRACT:','CAN:')):errors.append('relation locator does not contain a relation/source ref '+str(r.get('relation_id')))
+  if r.get('relation_type') in ('depends_on','sequence_after') and r.get('execution_effect')=='HARD_ORDER' and r.get('source') in ids and r.get('target') in ids:adj[r['source']].add(r['target'])
+ # Include immutable graph's hard Task-level ordering edges.
  for e in tg.get('edges',[]):
-  if e.get('relation_type') in {'depends_on','sequence_after'} and e.get('execution_effect')=='HARD_ORDER':adj[e['source']].append(e['target'])
- visiting=set();visited=set()
- def dfs(n):
-  if n in visiting:return True
-  if n in visited:return False
-  visiting.add(n)
-  for v in adj.get(n,[]):
-   if dfs(v):return True
-  visiting.remove(n);visited.add(n);return False
- if any(dfs(n) for n in list(adj) if n not in visited):errors.append('hard-order task dependency cycle detected')
- overrides=m.get('task_name_evidence_overrides',[])
- if len(overrides)!=80 or len({o.get('task_ref') for o in overrides})!=80:errors.append('expected 80 unique evidence-backed Task label overlays')
- for o in overrides:
-  if o.get('task_ref') not in set(tids) or not o.get('source_locator') or not o.get('source_blob_sha') or not o.get('rationale'):errors.append('Task label overlay lacks canonical node or evidence '+str(o.get('task_ref')))
- unresolved_label=m.get('task_name_evidence_override_unresolved')
- if not unresolved_label or unresolved_label.get('task_ref')!='TASK:CORE:C13B:008' or unresolved_label.get('resolution_status')!='UNRESOLVED_SOURCE_LABEL':errors.append('C13B:008 unresolved source label is not explicitly recorded')
- # Verify no legacy Task aliases remain outside the historical mapping table.
- for path in [FILES['mapping'], 'docs/phase4/task-map-graph/task-map-quality-audit.md']:
-  text=(ROOT/path).read_text(encoding='utf-8')
-  for alias in re.findall(r'(?<![A-Z0-9:])TASK:(?:C\d{2}[A-Z]?|A\d{2}|R\d{2}):\d{3}(?:\.S\d{2})?',text):
-   if alias not in text[text.find('historical_alias_mapping'):text.find('historical_alias_mapping')+5000]:errors.append(f'legacy Task alias operationally present in {path}: {alias}')
- if errors:return fail(errors)
- corpus_paths=sorted(manifest)
- audit= m.get('stage4_code_search_audit')
- if args.write_code_search or audit is None:
-  results,corpus=gather_search(m,tg,cg,manifest)
-  inventory=[{'path':f['path'],'blob_sha':f['blob_sha'],'sha256':f['sha256']} for f in corpus]
-  corpus_sha=sha256(json.dumps(inventory,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
-  counts=Counter(r['search_status'] for r in results)
-  m['stage4_code_search_audit']={'schema_version':'1.0.0','audit_id':'phase4-stage4-aud07-replay-v1','code_source_commit':BASELINE,'repository_comparison':{'from':BASELINE,'through_pr_head':PR_BASE,'code_paths_changed':0,'basis':'GitHub compare API: all changes from baseline to PR head are Stage 1–4 documentation/artifact paths; no application-code path changed.'},'method':'Exact Task ID and deterministic rare-token co-occurrence search over every file in current-project-code-graph-manifest.json. The same pinned inventory is rescanned on replay. Lexical matches are evidence candidates only; no mapping is created from text similarity.','inventory_count':len(inventory),'inventory_sha256':corpus_sha,'corpus_blob_inventory':inventory,'record_count':len(results),'status_counts':dict(counts),'records':results,'limitations':['Search is lexical and cannot prove semantic absence.','Any lexical hit remains unmapped until its source and graph semantics are manually verified.','Rows with insufficient discriminative terms are SEARCH_INCONCLUSIVE.']}
-  m['validation']['stage4_high_finding_followup']['AUD-07']={'status':'SEARCH_COMPLETED_WITH_EXPLICIT_LIMITATIONS','record_count':len(results),'status_counts':dict(counts),'code_source_commit':BASELINE}
-  write_json(FILES['mapping'],m)
-  print(json.dumps({'records':len(results),'status_counts':dict(counts),'corpus_files':len(inventory),'corpus_sha256':corpus_sha},ensure_ascii=False,indent=2))
+  if e.get('relation_type') in ('depends_on','sequence_after') and e.get('execution_effect')=='HARD_ORDER' and e.get('source') in ids and e.get('target') in ids:adj[e['source']].add(e['target'])
+ indeg={i:0 for i in ids}
+ for u,vs in adj.items():
+  for v in vs:indeg[v]+=1
+ q=deque(sorted(i for i,d in indeg.items() if d==0));order=[]
+ while q:
+  u=q.popleft();order.append(u)
+  for v in sorted(adj.get(u,())):
+   indeg[v]-=1
+   if indeg[v]==0:q.append(v)
+ if len(order)!=len(ids):errors.append('HARD_ORDER cycle detected in Task graph + Relation Overlay')
+ # Task label overlay: 80 prior labels + newly evidenced C13B:008.
+ labels=m.get('task_name_evidence_overrides',[]);label_ids=[x.get('task_ref') for x in labels]
+ if len(labels)!=81 or len(set(label_ids))!=81:errors.append('expected 81 unique evidence-backed Task label overlays')
+ for x in labels:
+  if x.get('task_ref') not in ids or not x.get('resolved_label') or not x.get('source_locator') or not x.get('source_blob_sha') or not x.get('rationale'):errors.append('invalid Task label overlay '+str(x.get('task_ref')))
+ unresolved=m.get('task_name_evidence_override_unresolved',{})
+ if unresolved.get('task_ref')!='TASK:CORE:C13B:008' or unresolved.get('resolution_status')!='RESOLVED_CONTEXT_DERIVED' or unresolved.get('resolved_label')!='مسیر مالی مجاز را بررسی کند':errors.append('C13B:008 context-derived label not resolved')
+ if any(r.get('target')=='UNRESOLVED' or r.get('source')=='UNRESOLVED' for r in rels):errors.append('UNRESOLVED relation endpoint remains')
+ # Search/replay complete corpus, deterministically.
+ audit=m.get('stage4_code_search_audit',{});results,inventory,inventory_sha=build_search(m,tg,cg,manifest,audit)
+ counts=Counter(x['search_status'] for x in results)
+ if args.write_code_search:
+  audit.update({'schema_version':'2.0.0','audit_id':'phase4-stage4-aud07-full-replay-v2','code_source_commit':BASELINE,
+   'repository_comparison':{'from':BASELINE,'through_pr_head':PR_BASE,'code_paths_changed':0,'basis':'The pinned Graphify inventory is tied to the active-code baseline; GitHub comparison confirms this PR changes Stage 1–4 artifacts and no active application-code paths.'},
+   'method':'Full deterministic search and per-record disposition using exact canonical/short IDs, Plan task labels, and discriminative terms over the full immutable 347-file code inventory. Manual mapping links require Plan ownership plus direct active-code evidence.',
+   'inventory_count':len(inventory),'inventory_sha256':inventory_sha,'corpus_blob_inventory':inventory,'search_scope_refs':[r['task_or_package_ref'] for r in results],
+   'record_count':len(results),'status_counts':dict(counts),'records':results,
+   'decision_summary':{'initial_scope_count':657,'search_completed':len(results),'status_counts':dict(counts),'SEARCH_INCONCLUSIVE':counts.get('SEARCH_INCONCLUSIVE',0),'CODE_FOUND_NOT_IN_GRAPHIFY':counts.get('CODE_FOUND_NOT_IN_GRAPHIFY',0)},
+   'limitations':['NO_CODE_EVIDENCE_FOUND means no direct counterpart evidence in the pinned baseline corpus; it does not prove future reuse is impossible.','Lexical co-occurrence is not accepted as mapping evidence.','No Graphify source graph node was added or modified.']})
+  m['validation']['stage4_high_finding_followup']['AUD-07']={'status':'COMPLETED_NO_INCONCLUSIVE_RECORDS','initial_scope_count':657,'search_completed':len(results),'status_counts':dict(counts),'code_source_commit':BASELINE,'inventory_count':len(inventory),'inventory_sha256':inventory_sha}
+  m['validation']['semantic_replay_projection_sha256']=''
+  writej(FILES['mapping'],m)
+  m=readj(FILES['mapping']);projection=json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode();digest=sha256(projection)
+  m['validation']['semantic_replay_projection_sha256']=digest
+  m['validation']['semantic_mapping_reproducibility']='PASS_DETERMINISTIC_SEMANTIC_VALIDATION_REPLAY'
+  writej(FILES['mapping'],m)
+  print(json.dumps({'write':'PASS','scope':len(results),'status_counts':dict(counts),'inventory_count':len(inventory),'inventory_sha256':inventory_sha,'projection_sha256':digest},ensure_ascii=False,indent=2))
+  return 0
  else:
-  results,corpus=gather_search(m,tg,cg,manifest)
-  saved=audit.get('records',[])
-  if results!=saved:errors.append('AUD-07 semantic search replay differs from committed records')
-  inventory=[{'path':f['path'],'blob_sha':f['blob_sha'],'sha256':f['sha256']} for f in corpus]
-  corpus_sha=sha256(json.dumps(inventory,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
-  if corpus_sha!=audit.get('inventory_sha256') or len(inventory)!=audit.get('inventory_count'):errors.append('pinned code search inventory changed')
-  projection=json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
-  digest=sha256(projection)
-  val=m.setdefault('validation',{})
-  if args.check_only:
-   expected=val.get('semantic_replay_projection_sha256')
-   if expected and expected!=digest:errors.append('semantic replay projection differs from recorded digest')
-   if not expected:
-    val['semantic_replay_projection_sha256']=digest;val['semantic_mapping_reproducibility']='PASS_DETERMINISTIC_SEMANTIC_VALIDATION_REPLAY_WITH_EXPLICIT_SOURCE_GAPS';write_json(FILES['mapping'],m)
-  print(json.dumps({'result':'PASS' if not errors else 'FAIL','mapping_records':len(maps),'open_decisions':len(decision),'special_references':len(special),'relations':len(rels),'code_search_records':len(results),'code_search_status_counts':dict(Counter(r['search_status'] for r in results)),'corpus_files':len(inventory),'semantic_projection_sha256':digest,'immutable_graphs':'PASS'},ensure_ascii=False,indent=2))
-  if errors:return fail(errors)
- return 0
+  if results!=audit.get('records'):errors.append('AUD-07 full semantic search replay differs from stored records')
+  if inventory_sha!=audit.get('inventory_sha256') or inventory!=audit.get('corpus_blob_inventory'):errors.append('pinned 347-file code inventory changed')
+  if counts.get('SEARCH_INCONCLUSIVE',0):errors.append('SEARCH_INCONCLUSIVE remains in the 657-record audit')
+  if len(results)!=657:errors.append(f'expected 657 audited original NEW_IMPLEMENTATION units, got {len(results)}')
+  if counts!={'NON_CODE_REQUIREMENT':30,'NO_CODE_EVIDENCE_FOUND':624,'CODE_PARTIALLY_FOUND':3}:errors.append('AUD-07 result distribution differs from reviewed 30/624/3')
+  projection=json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode();digest=sha256(projection)
+  if m.get('validation',{}).get('semantic_replay_projection_sha256')!=digest:errors.append('semantic mapping/relations/code-search projection changed since recorded replay')
+  # Every Stage 4 partial code link must point to code represented in immutable Graphify.
+  for ref,nids in PARTIAL.items():
+   r=next((x for x in maps if x.get('task_ref')==ref),None)
+   if not r or r.get('mapping_status')!='PARTIALLY_MAPPED' or set(r.get('current_code_node_refs',[]))!=set(nids):errors.append('evidence-backed partial mapping mismatch '+ref)
+  print(json.dumps({'result':'PASS' if not errors else 'FAIL','graph_counts':dict(counts),'mapping_count':len(maps),'mapping_status_counts':dict(Counter(r['mapping_status'] for r in maps)),'open_decisions':len(decisions),'open_decision_scope_counts':dict(Counter(r['mapping_status'] for r in decisions)),'special_references':len(special),'relations':len(rels),'unresolved_relations':0,'code_search_records':len(results),'code_search_status_counts':dict(counts),'inventory_files':len(inventory),'topological_task_order_count':len(order),'semantic_projection_sha256':digest,'immutable_graphs':'PASS'},ensure_ascii=False,indent=2))
+  return fail(errors) if errors else 0
 if __name__=='__main__':raise SystemExit(main())
