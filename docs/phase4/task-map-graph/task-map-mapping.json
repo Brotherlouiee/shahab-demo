@@ -42185,7 +42185,7 @@
     },
     "reviewed_reference_count": 22,
     "reviewed_reference_ids_unique": 22,
-    "unmapped_reference_semantics": "UNMAPPED_IN_TASK_GRAPH=0؛ هشت رکورد قبلی به Package/Taskهای معتبر و Plan Locator مستقیم متصل شدند؛ وضعیت تصمیم هر هشت OPEN باقی است.",
+    "unmapped_reference_semantics": "Current: UNMAPPED_IN_TASK_GRAPH=0. Eight records previously UNMAPPED were linked to evidence-backed Package/Task scopes; all 134 product decisions remain OPEN.",
     "cycles_or_conflicts": "No conflicting mapping edges are introduced; this file stores assessments and cross-graph references only. Existing source graph cycles are not inferred or changed.",
     "reproducibility": "The committed mapping artifact is stable JSON, but no committed generator/replay command exists; semantic regeneration and byte-for-byte second-build equivalence have not been demonstrated.",
     "subtasks_with_explicit_current_code_links": 16,
@@ -42209,7 +42209,7 @@
     },
     "all_mapped_nodes_are_active_non_test_code": true,
     "semantic_mapping_reproducibility": "PASS_DETERMINISTIC_SEMANTIC_VALIDATION_REPLAY",
-    "semantic_mapping_reproducibility_note": "Replay معناییِ ساختار/مرجع/منشأ/رابطه و جست‌وجوی کد به‌صورت deterministic انجام می‌شود؛ ۸ مورد تصمیم باز و یک Handoff فاقد شاهد دقیق صریحاً UNRESOLVED_SOURCE_GAP هستند؛ متن‌خوانی به‌صورت ماشینی ادعای تولید مجدد قضاوت معنایی نمی‌کند.",
+    "semantic_mapping_reproducibility_note": "Replay deterministically validates recorded structure, source locators, relation scopes, decision scopes and the pinned code search. Handoff:H04:003 and Adviser/Assistant consumers of DEP:C05A:003 remain SOURCE_SCOPED at Package level where no exact Task is allocated by Plan; semantic judgment is recorded with source evidence, not machine-generated from prose.",
     "verified_code_mismatch_corrections": [
       "C02:002 removed: operations/account session code is not organization membership.",
       "C02:003 narrowed: operational-role authorization is not tenant-wallet authorization.",
@@ -42220,7 +42220,7 @@
     "stage4_evidence_backed_open_decision_link_corrections": [
       {
         "finding": "AUD-OPEN-LINKS-01",
-        "summary": "Records previously UNMAPPED but linked to existing Task graph open_decisions by exact Atomic Obligation ID were reclassified BLOCKED; AO:BP-C-0299:01 was linked by the explicit DECISION:C01:01 Plan crosswalk at line 851. No decision status or decision value changed.",
+        "summary": "Historical intermediate correction record; its intermediate counts are superseded by the current Stage 4 audit snapshot. Records previously UNMAPPED but linked to existing Task graph open_decisions by exact Atomic Obligation ID were reclassified BLOCKED; AO:BP-C-0299:01 was linked by the explicit DECISION:C01:01 Plan crosswalk at line 851. No decision status or decision value changed.",
         "corrected_ids": [
           "AO:WL-C-1098:1",
           "AO:BP-TR-027-04:01",
@@ -42251,16 +42251,21 @@
           "AO:BP-C-0218:06",
           "AO:BP-C-0299:01"
         ],
-        "counts_after": {
+        "historical_intermediate_counts": {
           "BLOCKED": 115,
           "UNMAPPED_IN_TASK_GRAPH": 19
+        },
+        "snapshot_status": "HISTORICAL_INTERMEDIATE_SUPERSEDED_BY_CURRENT_STAGE4_AUDIT",
+        "current_counts": {
+          "BLOCKED": 134,
+          "UNMAPPED_IN_TASK_GRAPH": 0
         }
       }
     ],
     "stage4_mapping_refinements": [
       {
         "finding": "AUD-OPEN-LINKS-01",
-        "summary": "Exact Atomic Obligation IDs already present in Task graph open_decisions were linked into the mapping layer; source decision statuses remain unchanged. An additional Plan crosswalk for AO:BP-C-0299:01 was added from DECISION:C01:01 line 851.",
+        "summary": "Historical intermediate correction record; its intermediate counts are superseded by the current Stage 4 audit snapshot. Exact Atomic Obligation IDs already present in Task graph open_decisions were linked into the mapping layer; source decision statuses remain unchanged. An additional Plan crosswalk for AO:BP-C-0299:01 was added from DECISION:C01:01 line 851.",
         "corrected_ids": [
           "AO:WL-C-1098:1",
           "AO:BP-TR-027-04:01",
@@ -42291,9 +42296,14 @@
           "AO:BP-C-0218:05",
           "AO:BP-C-0218:06"
         ],
-        "counts_after": {
+        "historical_intermediate_counts": {
           "BLOCKED": 115,
           "UNMAPPED_IN_TASK_GRAPH": 19
+        },
+        "snapshot_status": "HISTORICAL_INTERMEDIATE_SUPERSEDED_BY_CURRENT_STAGE4_AUDIT",
+        "current_counts": {
+          "BLOCKED": 134,
+          "UNMAPPED_IN_TASK_GRAPH": 0
         }
       },
       {
@@ -42307,7 +42317,6 @@
     ],
     "stage4_audit": {
       "status": "CURRENT_HEAD_AUDITED_WITH_EXPLICIT_SOURCE_SCOPED_PACKAGE_LIMITS",
-      "recorded_at_head": "655daa9d349f00718b0c93ae2016decb4ffbb510 (audit starting HEAD; current changes will be committed on this branch)",
       "source_artifacts_unchanged": true,
       "task_graph_nodes": {
         "PACKAGE": 36,
@@ -42377,6 +42386,18 @@
         "current_code_graph_sha256": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
         "task_graph_blob": "2393556b74016a437d9a126bee3b04cdcc42be25",
         "task_graph_sha256": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7"
+      },
+      "audit_basis_head": "655daa9d349f00718b0c93ae2016decb4ffbb510",
+      "snapshot_status": "CURRENT_MAPPING_AND_VALIDATION; historical/intermediate counts are explicitly labelled below.",
+      "current_mapping_status_counts": {
+        "MAPPED": 15,
+        "PARTIALLY_MAPPED": 27,
+        "NEW_IMPLEMENTATION": 654
+      },
+      "current_open_decision_counts": {
+        "BLOCKED": 134,
+        "UNMAPPED_IN_TASK_GRAPH": 0,
+        "decision_status_OPEN": 134
       }
     },
     "task_name_evidence_override_count": 81,
@@ -42455,7 +42476,7 @@
     "historical_snapshots": [
       {
         "recorded_at_head": "655daa9d349f00718b0c93ae2016decb4ffbb510",
-        "label": "Historical snapshot; not the current Stage 4 state",
+        "label": "Historical snapshot at review-start head; NOT current. Superseded by validation.stage4_audit.",
         "stage4_audit": {
           "status": "QUALIFIED_WITH_HIGH_FINDINGS",
           "source_artifacts_unchanged": true,
