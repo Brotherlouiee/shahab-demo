@@ -247,8 +247,11 @@ def main():
  if not rows:errors.append('required source relation has no overlay rows DEP:C05A:003')
  for r in rows:
   if r.get('relation_id') in ('REL-STAGE4-057','REL-STAGE4-058'):
-   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='PARTIALLY_RESOLVED' or r.get('source_node') not in ('TASK:CORE:C04:001','TASK:CORE:C04:006') or r.get('target_node')!='PACKAGE:C05A':errors.append('DEP:C05A:003 C04 consumer Task crosswalk invalid '+str(r.get('relation_id')))
+   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or r.get('source_node') not in ('TASK:CORE:C04:001','TASK:CORE:C04:006') or r.get('target_node')!='TASK:CORE:C05A:003':errors.append('DEP:C05A:003 C04 consumer/provider Task crosswalk invalid '+str(r.get('relation_id')))
    if 'docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262' not in r.get('source_refs',[]):errors.append('DEP:C05A:003 C04 cross-reference evidence missing '+str(r.get('relation_id')))
+  elif r.get('relation_id') in ('REL-STAGE4-063','REL-STAGE4-064-A01'):
+   expected={'REL-STAGE4-063':('TASK:CORE:C06:001','TASK:CORE:C05A:003'),'REL-STAGE4-064-A01':('TASK:ASSISTANT:A01:002','TASK:CORE:C05A:003')}[r['relation_id']]
+   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or (r.get('source_node'),r.get('target_node'))!=expected:errors.append('DEP:C05A:003 exact consumer/provider crosswalk invalid '+str(r.get('relation_id')))
   elif r.get('resolution_status')!='SOURCE_SCOPED' or r.get('scope_level')!='PACKAGE':errors.append('future/unmapped DEP:C05A:003 consumer must remain source-scoped '+str(r.get('relation_id')))
  rows=[r for r in rels if 'DEP:C05A:004' in r.get('source_relation_refs',[])]
  if not rows:errors.append('required source relation has no overlay rows DEP:C05A:004')
@@ -256,8 +259,10 @@ def main():
  for r in rows:
   if r.get('relation_id') in expected:
    task,loc=expected[r['relation_id']]
-   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='PARTIALLY_RESOLVED' or r.get('source_node')!=task or r.get('target_node')!='PACKAGE:C05A':errors.append('DEP:C05A:004 Task refinement invalid '+str(r.get('relation_id')))
+   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or r.get('source_node')!=task or r.get('target_node')!='TASK:CORE:C05A:004':errors.append('DEP:C05A:004 exact provider Task refinement invalid '+str(r.get('relation_id')))
    if loc not in r.get('source_refs',[]) or r.get('task_endpoint_evidence',{}).get('consumer_task_ref')!=task:errors.append('DEP:C05A:004 task locator/reference missing '+str(r.get('relation_id')))
+  elif r.get('relation_id')=='REL-STAGE4-068':
+   if r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or (r.get('source_node'),r.get('target_node'))!=('TASK:CORE:C06:001','TASK:CORE:C05A:004'):errors.append('DEP:C05A:004 C06 exact Task crosswalk invalid')
   elif r.get('resolution_status')!='SOURCE_SCOPED' or r.get('scope_level')!='PACKAGE':errors.append('unallocated DEP:C05A:004 endpoint must remain source-scoped '+str(r.get('relation_id')))
  # Explicitly separate H04 entitlement, C05A route, and C05A workflow handoffs; never cross-attribute their source IDs.
  expected_h04={'REL-STAGE4-001':('TASK:ASSISTANT:A01:003','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7625'),'REL-STAGE4-002':('TASK:ASSISTANT:A02:003','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7768')}
@@ -265,13 +270,34 @@ def main():
   r=next((x for x in rels if x.get('relation_id')==rid),None)
   if not r or r.get('source_relation_refs')!=['Handoff:H04:001'] or r.get('source_node')!='PACKAGE:C04' or r.get('target_node')!=task or r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or r.get('confidence')!='CONFIRMED' or r.get('execution_effect')!='CONTRACT_ORDER' or loc not in r.get('source_refs',[]) or 'Handoff:H04:003' not in r.get('rationale',''):errors.append('H04:001 confirmed C04 entitlement consumer mapping invalid '+rid)
  if any('Handoff:H04:001' in x.get('source_relation_refs',[]) for x in rels if x.get('source_node')=='PACKAGE:C05A'):errors.append('H04:001 was incorrectly attributed to C05A provider')
- expected_c05a_handoffs={'REL-STAGE4-070':('TASK:ASSISTANT:A01:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623'),'REL-STAGE4-071':('TASK:ASSISTANT:A02:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766')}
- for rid,(task,loc) in expected_c05a_handoffs.items():
+ expected_c05a_handoffs={'REL-STAGE4-070':('TASK:CORE:C05A:004','TASK:ASSISTANT:A01:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623'),'REL-STAGE4-071':('TASK:CORE:C05A:004','TASK:ASSISTANT:A02:001','docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766')}
+ for rid,(provider,consumer,loc) in expected_c05a_handoffs.items():
   r=next((x for x in rels if x.get('relation_id')==rid),None)
-  if not r or r.get('source_relation_refs')!=['Handoff:C05A:004'] or r.get('source_node')!='PACKAGE:C05A' or r.get('target_node')!=task or r.get('scope_level')!='TASK' or r.get('resolution_status')!='PARTIALLY_RESOLVED' or loc not in r.get('source_refs',[]):errors.append('C05A:004 Task handoff/crosswalk invalid '+rid)
- for rid in ('REL-STAGE4-069','REL-STAGE4-072'):
+  if not r or r.get('source_relation_refs')!=['Handoff:C05A:004'] or (r.get('source_node'),r.get('target_node'))!=(provider,consumer) or r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED' or loc not in r.get('source_refs',[]):errors.append('C05A:004 exact provider/consumer Task handoff invalid '+rid)
+ for rid in ('REL-STAGE4-069',):
   r=next((x for x in rels if x.get('relation_id')==rid),None)
   if not r or r.get('source_relation_refs')!=['Handoff:C05A:004'] or r.get('scope_level')!='PACKAGE':errors.append('C05A:004 unallocated Package handoff attribution invalid '+rid)
+ r=next((x for x in rels if x.get('relation_id')=='REL-STAGE4-072'),None)
+ if not r or r.get('source_relation_refs')!=['Handoff:C05A:004'] or (r.get('source_node'),r.get('target_node'))!=('TASK:CORE:C05A:004','TASK:CORE:C06:001') or r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED':errors.append('C05A:004 C06 Task handoff crosswalk invalid')
+ # Three missing Task-level C05B dependencies found by reviewing the Plan row against
+ # the 36-package Task/Subtask locator inventory.
+ expected_c05b={
+  'REL-STAGE4-097':('TASK:CORE:C05B:005','TASK:CORE:C05B:003','depends_on','HARD_ORDER'),
+  'REL-STAGE4-098':('TASK:CORE:C05B:005','TASK:CORE:C05B:004','requires_contract','CONTRACT_ORDER'),
+  'REL-STAGE4-099':('TASK:CORE:C05B:005','TASK:CORE:C01:004','requires_contract','CONTRACT_ORDER')}
+ for rid,expected in expected_c05b.items():
+  r=next((x for x in rels if x.get('relation_id')==rid),None)
+  if not r or (r.get('source'),r.get('target'),r.get('relation_type'),r.get('execution_effect'))!=expected or r.get('source_relation_refs')!=['DEP:C05B:005'] or r.get('scope_level')!='TASK' or r.get('resolution_status')!='RESOLVED':errors.append('C05B explicit Task dependency missing/invalid '+rid)
+ review=overlay.get('review_summary',{}).get('implicit_relation_review',{})
+ coverage=review.get('packages_reviewed',[])
+ if (review.get('package_count')!=36 or len(coverage)!=36
+     or {x.get('package') for x in coverage}!=set(n.get('package_id') for n in nodes if n.get('node_type')=='PACKAGE')
+     or sum(x.get('stories',0) for x in coverage)!=34
+     or sum(x.get('tasks',0) for x in coverage)!=189
+     or sum(x.get('subtasks',0) for x in coverage)!=471
+     or sum(x.get('acceptance_criteria',0) for x in coverage)!=588
+     or sum(x.get('tests',0) for x in coverage)!=610):errors.append('36-package implicit relation review coverage inventory is incomplete')
+ if review.get('new_relation_count')!=3 or set(review.get('new_relations',[]))!=set(expected_c05b):errors.append('new cross-package relation review set differs from explicit C05B findings')
  workflow=[x for x in rels if 'Handoff:C05A:006' in x.get('source_relation_refs',[])]
  if len(workflow)!=1 or workflow[0].get('relation_id')!='REL-STAGE4-073' or workflow[0].get('source_node')!='PACKAGE:C05A' or workflow[0].get('target_node')!='PACKAGE:A02' or workflow[0].get('scope_level')!='PACKAGE' or workflow[0].get('resolution_status')!='SOURCE_SCOPED':errors.append('C05A workflow handoff must be separate and package-scoped')
  for rid in ('REL-STAGE4-069','REL-STAGE4-070','REL-STAGE4-071','REL-STAGE4-072','REL-STAGE4-073'):

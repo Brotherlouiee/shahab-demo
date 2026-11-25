@@ -42762,7 +42762,7 @@
     "required_22_reference_status_counts": {
       "BLOCKED": 22
     },
-    "semantic_replay_projection_sha256": "4f6197c37eaf1715e2d69dfa05347a86c5d3d95880489c7c7029d8aa790eafac",
+    "semantic_replay_projection_sha256": "44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5",
     "historical_snapshots": [
       {
         "recorded_at_head": "655daa9d349f00718b0c93ae2016decb4ffbb510",
@@ -45530,37 +45530,44 @@
         "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
       },
       {
-        "source": "PACKAGE:C05A",
-        "target": "PACKAGE:C06",
+        "source": "TASK:CORE:C05A:003",
+        "target": "TASK:CORE:C06:001",
         "relation_type": "handoff",
         "confidence": "CONFIRMED",
         "execution_effect": "POLICY_IMPACT",
         "source_refs": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273",
-        "rationale": "Handoff:H05A:007 مقصد Package را صریح نام می‌برد؛ چون Plan Task مقصد را تعیین نکرده، فقط پیوند Package-level ثبت شده و از آن ترتیب Task استنتاج نمی‌شود. منبع در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تعیین نمی‌کند؛ بنابراین Scope در سطح Package نگه داشته شده و اثر آن برای ترتیب Taskها فقط همان execution_effect ثبت‌شده است.",
+        "rationale": "Handoff:H05A:007 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273 تحویل را تعریف می‌کند؛ provider آن TASK:CORE:C05A:003 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206 و Task مصرف‌کننده TASK:CORE:C06:001 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710 تعیین شده است. اثر POLICY_IMPACT حفظ شده و از آن HARD_ORDER استنباط نمی‌شود.",
         "rework_risk": "MEDIUM",
         "provenance": "plan:Handoff:H05A:007",
-        "resolution_status": "SOURCE_SCOPED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-016",
         "source_relation_refs": [
           "Handoff:H05A:007"
         ],
-        "source_node": "PACKAGE:C05A",
-        "target_node": "PACKAGE:C06",
+        "source_node": "TASK:CORE:C05A:003",
+        "target_node": "TASK:CORE:C06:001",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273",
         "graph_reference": {
           "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "PACKAGE",
-        "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
-        "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
-        "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "provider_task_ref": "TASK:CORE:C05A:003",
+          "consumer_task_ref": "TASK:CORE:C06:001",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4273",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710",
+          "scope_note": "Task endpoints are named by source crosswalk; individual Subtask assignment is not explicit."
+        }
       },
       {
         "source": "PACKAGE:C05A",
@@ -47383,19 +47390,21 @@
       },
       {
         "source": "TASK:CORE:C04:001",
-        "target": "PACKAGE:C05A",
+        "target": "TASK:CORE:C05A:003",
         "relation_type": "requires_contract",
         "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3968",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
-        "rationale": "DEP:C04:005 برای TASK:CORE:C04:001 قرارداد کاتالوگ C05a را لازم می‌داند؛ مقصد در سطح بسته حفظ شد. DEP:C05A:003 در Plan:4262 همان مصرف قرارداد Catalog را در سطح Package تأیید می‌کند؛ DEP:C04:005 در :4068 این Endpoint را برای C04:001 و C04:006 دقیق می‌کند. Endpoint مالک C05A همچنان Package-level است؛ این ردیف‌ها به‌جای Overlay تکراری C04→C05A استفاده می‌شوند.",
+        "rationale": "DEP:C04:005 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206 و مصرف‌کننده TASK:CORE:C04:001 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3968 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "HIGH",
         "provenance": "plan:relation:4068",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-057",
@@ -47404,62 +47413,40 @@
           "DEP:C05A:003"
         ],
         "source_node": "TASK:CORE:C04:001",
-        "target_node": "PACKAGE:C05A",
+        "target_node": "TASK:CORE:C05A:003",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
         "graph_reference": {
-          "source_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_adviser_billing_basis",
-            "docs_shahab_phase_2_development_blueprint_approved_request_acceptance_rule",
-            "docs_shahab_phase_2_development_blueprint_assistant_tariff_and_half_rate",
-            "docs_shahab_phase_2_development_blueprint_compatibility_requirements",
-            "docs_shahab_phase_2_development_blueprint_domain_data_ownership_table",
-            "docs_shahab_phase_2_development_blueprint_fd01_wallet",
-            "docs_shahab_phase_2_development_blueprint_feedback",
-            "docs_shahab_phase_2_development_blueprint_feedback_all_plans",
-            "docs_shahab_phase_2_development_blueprint_feedforward",
-            "docs_shahab_phase_2_development_blueprint_feedforward_plan_entitlement",
-            "docs_shahab_phase_2_development_blueprint_monitoring_data_boundaries",
-            "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_cap_open",
-            "docs_shahab_phase_2_development_blueprint_monitoring_entitlement_caps",
-            "docs_shahab_phase_2_development_blueprint_monitoring_fee_open",
-            "docs_shahab_phase_2_development_blueprint_monitoring_independent_feature",
-            "docs_shahab_phase_2_development_blueprint_open_same_domain_adviser_access",
-            "docs_shahab_phase_2_development_blueprint_plan_and_wallet_usage_rules",
-            "docs_shahab_phase_2_development_blueprint_revenue_model_detail",
-            "docs_shahab_phase_2_development_blueprint_revenue_model_e01",
-            "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
-            "shahab_phase_2_development_blueprint_section_1017_۱۰_مدل_تجاری_و_معماری_مالی",
-            "shahab_phase_2_development_blueprint_section_1048_۱۰_۱_کیف_پول_شهاب_تصمیم_های_مصوب_e03_و_مرز_اجرا",
-            "shahab_phase_2_development_blueprint_section_1109_۱۰_۴_۱_منطق_کلان_کسب_درآمد",
-            "shahab_phase_2_development_blueprint_section_1122_۱۰_۴_۲_سنجش_مصرف_برآورد_و_تفکیک_قیمت",
-            "shahab_phase_2_development_blueprint_section_1136_۱۰_۴_۴_خروجی_های_لازم_برای_طراحی_مالی_و_انتشار_بعدی",
-            "shahab_phase_2_development_blueprint_section_1190_۱۳_اثر_بر_طراحی_دیتابیس_و_سرویس_ها",
-            "shahab_phase_2_development_blueprint_section_1360_۲۰_الزامات_الحاق_و_سازگاری_با_سند_قبلی",
-            "shahab_phase_2_development_blueprint_section_1445_۳_دو_نقش_مشاور_و_دستیار_و_رابطه_آن_ها_با_پلن",
-            "shahab_phase_2_development_blueprint_section_867_۴_کاتالوگ_خدمات_و_مسیریاب_تجربه",
-            "shahab_phase_2_development_blueprint_section_971_۸_فیدبک_و_فیدفوروارد",
-            "shahab_phase_2_development_blueprint_section_999_۹_مدل_محصول_و_سطوح_عضویت"
-          ],
+          "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "TASK"
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C04:001",
+          "provider_task_ref": "TASK:CORE:C05A:003",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3968",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
       },
       {
         "source": "TASK:CORE:C04:006",
-        "target": "PACKAGE:C05A",
+        "target": "TASK:CORE:C05A:003",
         "relation_type": "requires_contract",
         "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3973",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
-        "rationale": "DEP:C04:005 برای TASK:CORE:C04:006 قرارداد کاتالوگ C05a را لازم می‌داند؛ مقصد در سطح بسته حفظ شد. DEP:C05A:003 در Plan:4262 همان مصرف قرارداد Catalog را در سطح Package تأیید می‌کند؛ DEP:C04:005 در :4068 این Endpoint را برای C04:001 و C04:006 دقیق می‌کند. Endpoint مالک C05A همچنان Package-level است؛ این ردیف‌ها به‌جای Overlay تکراری C04→C05A استفاده می‌شوند.",
+        "rationale": "DEP:C04:005 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206 و مصرف‌کننده TASK:CORE:C04:006 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3973 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "HIGH",
         "provenance": "plan:relation:4068",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-058",
@@ -47468,18 +47455,22 @@
           "DEP:C05A:003"
         ],
         "source_node": "TASK:CORE:C04:006",
-        "target_node": "PACKAGE:C05A",
+        "target_node": "TASK:CORE:C05A:003",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
         "graph_reference": {
-          "source_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_subscription_entitlements",
-            "docs_shahab_phase_2_development_blueprint_subscription_lifecycle",
-            "shahab_phase_2_development_blueprint_section_999_۹_مدل_محصول_و_سطوح_عضویت"
-          ],
+          "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "TASK"
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C04:006",
+          "provider_task_ref": "TASK:CORE:C05A:003",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4068",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:3973",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
       },
       {
         "source": "TASK:CORE:C04:008",
@@ -47610,90 +47601,85 @@
         "scope_level": "TASK"
       },
       {
-        "source": "PACKAGE:C06",
-        "target": "PACKAGE:C05A",
+        "source": "TASK:CORE:C06:001",
+        "target": "TASK:CORE:C05A:003",
         "relation_type": "requires_contract",
         "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262"
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
-        "rationale": "DEP:C05A:003 در Plan Locator :4262 C04 و C06 را مصرف‌کنندهٔ قرارداد projection معرفی می‌کند. رابطه در سطح Package معتبر و SOURCE_SCOPED است؛ Task مقصد از DEP003 تخصیص نمی‌یابد و قرارداد باید پیش از پیاده‌سازی مصرف‌کننده تثبیت شود. منبع در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تعیین نمی‌کند؛ بنابراین Scope در سطح Package نگه داشته شده و اثر آن برای ترتیب Taskها فقط همان execution_effect ثبت‌شده است.",
+        "rationale": "DEP:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206 و مصرف‌کننده TASK:CORE:C06:001 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "HIGH",
         "provenance": "plan:relation:4262",
-        "resolution_status": "SOURCE_SCOPED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-063",
         "source_relation_refs": [
           "DEP:C05A:003"
         ],
-        "source_node": "PACKAGE:C06",
-        "target_node": "PACKAGE:C05A",
+        "source_node": "TASK:CORE:C06:001",
+        "target_node": "TASK:CORE:C05A:003",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
         "graph_reference": {
           "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "PACKAGE",
-        "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
-        "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
-        "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C06:001",
+          "provider_task_ref": "TASK:CORE:C05A:003",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
       },
       {
         "relation_id": "REL-STAGE4-064-A01",
-        "source": "PACKAGE:A01",
-        "target": "PACKAGE:C05A",
-        "source_node": "PACKAGE:A01",
-        "target_node": "PACKAGE:C05A",
+        "source": "TASK:ASSISTANT:A01:002",
+        "target": "TASK:CORE:C05A:003",
+        "source_node": "TASK:ASSISTANT:A01:002",
+        "target_node": "TASK:CORE:C05A:003",
         "relation_type": "requires_contract",
-        "confidence": "OPEN",
+        "confidence": "CONFIRMED",
         "execution_effect": "IMPACT_ONLY",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595"
         ],
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
         "graph_reference": {
-          "source_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_b04_hybrid_orchestration",
-            "docs_shahab_phase_2_development_blueprint_catalog_api_core",
-            "docs_shahab_phase_2_development_blueprint_catalog_entry_not_permission",
-            "docs_shahab_phase_2_development_blueprint_catalog_service_metadata",
-            "docs_shahab_phase_2_development_blueprint_computer_use_execution_boundary",
-            "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
-            "docs_shahab_phase_2_development_blueprint_domain_scope_guard",
-            "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
-            "docs_shahab_phase_2_development_blueprint_e02_exchange_contract_fields",
-            "docs_shahab_phase_2_development_blueprint_effectful_action_revalidation",
-            "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
-            "docs_shahab_phase_2_development_blueprint_llm_proposes_backend_authorizes",
-            "docs_shahab_phase_2_development_blueprint_observability_pre_migration_a09",
-            "docs_shahab_phase_2_development_blueprint_r1_adviser_only_scope",
-            "docs_shahab_phase_2_development_blueprint_router_three_request_cases",
-            "docs_shahab_phase_2_development_blueprint_session_domain_role_backend_validated",
-            "docs_shahab_phase_2_development_blueprint_tooling_unapproved",
-            "docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split"
-          ],
+          "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "rationale": "DEP:C05A:003 در Plan Locator :4262 مصرف Adviser/Assistant آینده را به‌صورت کلی ذکر می‌کند؛ بسته R یا Assistant endpoint این ردیف فقط scope بالقوه است. تعیین Task یا مصرف قطعی در DEP003 وجود ندارد؛ بنابراین SOURCE_SCOPED/OPEN/IMPACT_ONLY ثبت می‌شود و هیچ تقدم Task-level استنتاج نمی‌شود. منبع در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تعیین نمی‌کند؛ بنابراین Scope در سطح Package نگه داشته شده و اثر آن برای ترتیب Taskها فقط همان execution_effect ثبت‌شده است.",
+        "rationale": "DEP:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:003 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206 و مصرف‌کننده TASK:ASSISTANT:A01:002 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "MEDIUM",
         "provenance": "plan:DEP:C05A:003",
-        "resolution_status": "SOURCE_SCOPED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "source_relation_refs": [
           "DEP:C05A:003"
         ],
-        "scope_level": "PACKAGE",
-        "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
-        "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
-        "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:ASSISTANT:A01:002",
+          "provider_task_ref": "TASK:CORE:C05A:003",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4262",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7624",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4206",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
       },
       {
         "relation_id": "REL-STAGE4-064-A02",
@@ -48240,19 +48226,20 @@
       },
       {
         "source": "TASK:ASSISTANT:A01:001",
-        "target": "PACKAGE:C05A",
+        "target": "TASK:CORE:C05A:004",
         "relation_type": "requires_contract",
         "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-        "rationale": "DEP:C05A:004 در Plan:4263 قرارداد route/context/result را از C05a برای A01 مصرف‌کننده می‌داند. Task A01:001 قرارداد route/capability از C05a را پیش‌نیاز دارد و مصرف route outcome را انجام می‌دهد؛ قرارداد/Task تولیدکننده در C05A در همان crosswalk به Task دقیق متصل نشده است؛ Endpoint مبدأ به Task ارتقا یافت، مالک provider در Package:C05A باقی می‌ماند، و رابطه PARTIALLY_RESOLVED است.",
+        "rationale": "DEP:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و مصرف‌کننده TASK:ASSISTANT:A01:001 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "HIGH",
         "provenance": "plan:relation:4263",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-066",
@@ -48260,56 +48247,39 @@
           "DEP:C05A:004"
         ],
         "source_node": "TASK:ASSISTANT:A01:001",
-        "target_node": "PACKAGE:C05A",
+        "target_node": "TASK:CORE:C05A:004",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
         "graph_reference": {
-          "source_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_b04_hybrid_orchestration",
-            "docs_shahab_phase_2_development_blueprint_catalog_api_core",
-            "docs_shahab_phase_2_development_blueprint_catalog_entry_not_permission",
-            "docs_shahab_phase_2_development_blueprint_catalog_service_metadata",
-            "docs_shahab_phase_2_development_blueprint_computer_use_execution_boundary",
-            "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
-            "docs_shahab_phase_2_development_blueprint_domain_scope_guard",
-            "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
-            "docs_shahab_phase_2_development_blueprint_e02_exchange_contract_fields",
-            "docs_shahab_phase_2_development_blueprint_effectful_action_revalidation",
-            "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
-            "docs_shahab_phase_2_development_blueprint_llm_proposes_backend_authorizes",
-            "docs_shahab_phase_2_development_blueprint_observability_pre_migration_a09",
-            "docs_shahab_phase_2_development_blueprint_r1_adviser_only_scope",
-            "docs_shahab_phase_2_development_blueprint_router_three_request_cases",
-            "docs_shahab_phase_2_development_blueprint_session_domain_role_backend_validated",
-            "docs_shahab_phase_2_development_blueprint_tooling_unapproved",
-            "docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split"
-          ],
+          "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
         "scope_level": "TASK",
         "task_endpoint_evidence": {
           "consumer_task_ref": "TASK:ASSISTANT:A01:001",
+          "provider_task_ref": "TASK:CORE:C05A:004",
           "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623",
-          "contract_owner_package": "PACKAGE:C05A",
-          "scope_note": "consumer Task is source-backed; exact provider Task in C05A is not identified, so this is a partial Task-level resolution."
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
         }
       },
       {
         "source": "TASK:ASSISTANT:A02:001",
-        "target": "PACKAGE:C05A",
+        "target": "TASK:CORE:C05A:004",
         "relation_type": "requires_contract",
         "confidence": "CONFIRMED",
         "execution_effect": "CONTRACT_ORDER",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-        "rationale": "DEP:C05A:004 در Plan:4263 قرارداد route/context/result را از C05a برای A02 مصرف‌کننده می‌داند. Task A02:001 برای route/service ID و قرارداد parent/child به C05a متکی است؛ قرارداد/Task تولیدکننده در C05A در همان crosswalk به Task دقیق متصل نشده است؛ Endpoint مبدأ به Task ارتقا یافت، مالک provider در Package:C05A باقی می‌ماند، و رابطه PARTIALLY_RESOLVED است.",
+        "rationale": "DEP:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و مصرف‌کننده TASK:ASSISTANT:A02:001 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
         "rework_risk": "HIGH",
         "provenance": "plan:relation:4263",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-067",
@@ -48317,74 +48287,62 @@
           "DEP:C05A:004"
         ],
         "source_node": "TASK:ASSISTANT:A02:001",
-        "target_node": "PACKAGE:C05A",
-        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-        "graph_reference": {
-          "source_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_a04_postgresql_redis_temporal",
-            "docs_shahab_phase_2_development_blueprint_contract_test_blocking_gate",
-            "docs_shahab_phase_2_development_blueprint_cross_domain_subtask",
-            "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
-            "docs_shahab_phase_2_development_blueprint_data_evidence_compatibility_tests_b06",
-            "docs_shahab_phase_2_development_blueprint_durable_job_state_and_engine_migration",
-            "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
-            "docs_shahab_phase_2_development_blueprint_effectful_action_revalidation",
-            "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
-            "docs_shahab_phase_2_development_blueprint_phase_one_vm_not_phase_two_capacity",
-            "docs_shahab_phase_2_development_blueprint_service_flow_example",
-            "docs_shahab_phase_2_development_blueprint_temporal_migration_not_code_free",
-            "docs_shahab_phase_2_development_blueprint_transactional_outbox",
-            "docs_shahab_phase_2_development_blueprint_unknown_bank_result_no_blind_retry",
-            "docs_shahab_phase_2_development_blueprint_warranty_recommender_optional",
-            "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
-            "docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split",
-            "docs_shahab_phase_2_development_blueprint_workflow_engine",
-            "docs_shahab_phase_2_development_blueprint_workflow_states_proposed"
-          ],
-          "target_task_graph_refs": []
-        },
-        "scope_level": "TASK",
-        "task_endpoint_evidence": {
-          "consumer_task_ref": "TASK:ASSISTANT:A02:001",
-          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766",
-          "contract_owner_package": "PACKAGE:C05A",
-          "scope_note": "consumer Task is source-backed; exact provider Task in C05A is not identified, so this is a partial Task-level resolution."
-        }
-      },
-      {
-        "source": "PACKAGE:C06",
-        "target": "PACKAGE:C05A",
-        "relation_type": "requires_contract",
-        "confidence": "CONFIRMED",
-        "execution_effect": "CONTRACT_ORDER",
-        "source_refs": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263"
-        ],
-        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
-        "rationale": "DEP:C05A:004 در Plan Locator :4263 مصرف route/context/result را برای R02، A01، A02 و C06 تصریح می‌کند. Endpointهای Package تأییدشده‌اند و قرارداد باید پیش از پیاده‌سازی مصرف‌کننده آماده باشد؛ Plan Task/Subtask دقیق برای هر مصرف‌کننده را تعیین نمی‌کند، پس رابطه SOURCE_SCOPED باقی می‌ماند. منبع در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تعیین نمی‌کند؛ بنابراین Scope در سطح Package نگه داشته شده و اثر آن برای ترتیب Taskها فقط همان execution_effect ثبت‌شده است.",
-        "rework_risk": "HIGH",
-        "provenance": "plan:relation:4263",
-        "resolution_status": "SOURCE_SCOPED",
-        "target_kind": "node",
-        "decision_refs": [],
-        "relation_id": "REL-STAGE4-068",
-        "source_relation_refs": [
-          "DEP:C05A:004"
-        ],
-        "source_node": "PACKAGE:C06",
-        "target_node": "PACKAGE:C05A",
+        "target_node": "TASK:CORE:C05A:004",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
         "graph_reference": {
           "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "PACKAGE",
-        "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
-        "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
-        "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:ASSISTANT:A02:001",
+          "provider_task_ref": "TASK:CORE:C05A:004",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
+      },
+      {
+        "source": "TASK:CORE:C06:001",
+        "target": "TASK:CORE:C05A:004",
+        "relation_type": "requires_contract",
+        "confidence": "CONFIRMED",
+        "execution_effect": "CONTRACT_ORDER",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710"
+        ],
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+        "rationale": "DEP:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263 قرارداد را تعیین می‌کند؛ Task ارائه‌دهنده TASK:CORE:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و مصرف‌کننده TASK:CORE:C06:001 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710 مشخص است. هر دو endpoint در سطح Task دقیق‌اند؛ برای Taskهای دیگر یا Subtaskهای منفرد رابطه‌ای فراتر از شاهد متن ثبت نمی‌شود.",
+        "rework_risk": "HIGH",
+        "provenance": "plan:relation:4263",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "relation_id": "REL-STAGE4-068",
+        "source_relation_refs": [
+          "DEP:C05A:004"
+        ],
+        "source_node": "TASK:CORE:C06:001",
+        "target_node": "TASK:CORE:C05A:004",
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C06:001",
+          "provider_task_ref": "TASK:CORE:C05A:004",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4263",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "scope_note": "Provider contract spans its explicitly listed Subtasks; no unsupported one-to-one Subtask edge is inferred."
+        }
       },
       {
         "source": "PACKAGE:C05A",
@@ -48422,152 +48380,124 @@
         "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
       },
       {
-        "source": "PACKAGE:C05A",
+        "source": "TASK:CORE:C05A:004",
         "target": "TASK:ASSISTANT:A01:001",
         "relation_type": "handoff",
         "confidence": "CONFIRMED",
         "execution_effect": "POLICY_IMPACT",
         "source_refs": [
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
           "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623"
         ],
         "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "rationale": "Handoff:C05A:004 در Plan:7595 تحویل route/capability به A01 را تصریح می‌کند؛ 7623 مصرف route/service contract را در Task دقیق مشخص می‌کند. Task تولیدکنندهٔ C05A در crosswalk منبع تعیین نشده، پس endpoint مصرف‌کننده Task و provider همچنان Package است (PARTIALLY_RESOLVED). Handoffهای دیگر به این ردیف منتسب نشده‌اند.",
+        "rationale": "Handoff:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595 تحویل را تعریف می‌کند؛ provider آن TASK:CORE:C05A:004 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و Task مصرف‌کننده TASK:ASSISTANT:A01:001 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623 تعیین شده است. اثر POLICY_IMPACT حفظ شده و از آن HARD_ORDER استنباط نمی‌شود.",
         "rework_risk": "MEDIUM",
         "provenance": "plan:Handoff:C05A:004",
-        "resolution_status": "PARTIALLY_RESOLVED",
+        "resolution_status": "RESOLVED",
         "target_kind": "node",
         "decision_refs": [],
         "relation_id": "REL-STAGE4-070",
         "source_relation_refs": [
           "Handoff:C05A:004"
         ],
-        "source_node": "PACKAGE:C05A",
+        "source_node": "TASK:CORE:C05A:004",
         "target_node": "TASK:ASSISTANT:A01:001",
-        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "graph_reference": {
-          "source_task_graph_refs": [],
-          "target_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_b04_hybrid_orchestration",
-            "docs_shahab_phase_2_development_blueprint_catalog_api_core",
-            "docs_shahab_phase_2_development_blueprint_catalog_entry_not_permission",
-            "docs_shahab_phase_2_development_blueprint_catalog_service_metadata",
-            "docs_shahab_phase_2_development_blueprint_computer_use_execution_boundary",
-            "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
-            "docs_shahab_phase_2_development_blueprint_domain_scope_guard",
-            "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
-            "docs_shahab_phase_2_development_blueprint_e02_exchange_contract_fields",
-            "docs_shahab_phase_2_development_blueprint_effectful_action_revalidation",
-            "docs_shahab_phase_2_development_blueprint_indirect_api_limits",
-            "docs_shahab_phase_2_development_blueprint_llm_proposes_backend_authorizes",
-            "docs_shahab_phase_2_development_blueprint_observability_pre_migration_a09",
-            "docs_shahab_phase_2_development_blueprint_r1_adviser_only_scope",
-            "docs_shahab_phase_2_development_blueprint_router_three_request_cases",
-            "docs_shahab_phase_2_development_blueprint_session_domain_role_backend_validated",
-            "docs_shahab_phase_2_development_blueprint_tooling_unapproved",
-            "docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split"
-          ]
-        },
-        "scope_level": "TASK",
-        "task_endpoint_evidence": {
-          "consumer_task_ref": "TASK:ASSISTANT:A01:001",
-          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623",
-          "provider_package": "PACKAGE:C05A",
-          "scope_note": "Consumer Task is source-backed; provider Task in C05A is not explicitly allocated."
-        }
-      },
-      {
-        "source": "PACKAGE:C05A",
-        "target": "TASK:ASSISTANT:A02:001",
-        "relation_type": "handoff",
-        "confidence": "CONFIRMED",
-        "execution_effect": "POLICY_IMPACT",
-        "source_refs": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766"
-        ],
-        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "rationale": "Handoff:C05A:004 در Plan:7595 تحویل route/capability به A02 را تصریح می‌کند؛ 7766 مصرف route/service contract را در Task دقیق مشخص می‌کند. Task تولیدکنندهٔ C05A در crosswalk منبع تعیین نشده، پس endpoint مصرف‌کننده Task و provider همچنان Package است (PARTIALLY_RESOLVED). Handoffهای دیگر به این ردیف منتسب نشده‌اند.",
-        "rework_risk": "MEDIUM",
-        "provenance": "plan:Handoff:C05A:004",
-        "resolution_status": "PARTIALLY_RESOLVED",
-        "target_kind": "node",
-        "decision_refs": [],
-        "relation_id": "REL-STAGE4-071",
-        "source_relation_refs": [
-          "Handoff:C05A:004"
-        ],
-        "source_node": "PACKAGE:C05A",
-        "target_node": "TASK:ASSISTANT:A02:001",
-        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "graph_reference": {
-          "source_task_graph_refs": [],
-          "target_task_graph_refs": [
-            "docs_shahab_phase_2_development_blueprint_a04_postgresql_redis_temporal",
-            "docs_shahab_phase_2_development_blueprint_contract_test_blocking_gate",
-            "docs_shahab_phase_2_development_blueprint_cross_domain_subtask",
-            "docs_shahab_phase_2_development_blueprint_cross_service_data_access",
-            "docs_shahab_phase_2_development_blueprint_data_evidence_compatibility_tests_b06",
-            "docs_shahab_phase_2_development_blueprint_durable_job_state_and_engine_migration",
-            "docs_shahab_phase_2_development_blueprint_e02_contract_requirements",
-            "docs_shahab_phase_2_development_blueprint_effectful_action_revalidation",
-            "docs_shahab_phase_2_development_blueprint_multi_loan_alternative_consent",
-            "docs_shahab_phase_2_development_blueprint_phase_one_vm_not_phase_two_capacity",
-            "docs_shahab_phase_2_development_blueprint_service_flow_example",
-            "docs_shahab_phase_2_development_blueprint_temporal_migration_not_code_free",
-            "docs_shahab_phase_2_development_blueprint_transactional_outbox",
-            "docs_shahab_phase_2_development_blueprint_unknown_bank_result_no_blind_retry",
-            "docs_shahab_phase_2_development_blueprint_warranty_recommender_optional",
-            "docs_shahab_phase_2_development_blueprint_workflow_authorization_repeat",
-            "docs_shahab_phase_2_development_blueprint_workflow_computer_use_responsibility_split",
-            "docs_shahab_phase_2_development_blueprint_workflow_engine",
-            "docs_shahab_phase_2_development_blueprint_workflow_states_proposed"
-          ]
-        },
-        "scope_level": "TASK",
-        "task_endpoint_evidence": {
-          "consumer_task_ref": "TASK:ASSISTANT:A02:001",
-          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766",
-          "provider_package": "PACKAGE:C05A",
-          "scope_note": "Consumer Task is source-backed; provider Task in C05A is not explicitly allocated."
-        }
-      },
-      {
-        "source": "PACKAGE:C05A",
-        "target": "PACKAGE:C06",
-        "relation_type": "handoff",
-        "confidence": "CONFIRMED",
-        "execution_effect": "POLICY_IMPACT",
-        "source_refs": [
-          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595"
-        ],
-        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
-        "rationale": "Handoff:C05A:004 مقصد UI مشترک C06 را مشخص می‌کند. منبع در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تعیین نمی‌کند؛ بنابراین Scope در سطح Package نگه داشته شده و اثر آن برای ترتیب Taskها فقط همان execution_effect ثبت‌شده است.",
-        "rework_risk": "MEDIUM",
-        "provenance": "plan:Handoff:C05A:004",
-        "resolution_status": "SOURCE_SCOPED",
-        "target_kind": "node",
-        "decision_refs": [],
-        "relation_id": "REL-STAGE4-072",
-        "source_relation_refs": [
-          "Handoff:C05A:004"
-        ],
-        "source_node": "PACKAGE:C05A",
-        "target_node": "PACKAGE:C06",
         "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
         "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
         "graph_reference": {
           "source_task_graph_refs": [],
           "target_task_graph_refs": []
         },
-        "scope_level": "PACKAGE",
-        "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
-        "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
-        "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "provider_task_ref": "TASK:CORE:C05A:004",
+          "consumer_task_ref": "TASK:ASSISTANT:A01:001",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7623",
+          "scope_note": "Task endpoints are named by source crosswalk; individual Subtask assignment is not explicit."
+        }
+      },
+      {
+        "source": "TASK:CORE:C05A:004",
+        "target": "TASK:ASSISTANT:A02:001",
+        "relation_type": "handoff",
+        "confidence": "CONFIRMED",
+        "execution_effect": "POLICY_IMPACT",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766"
+        ],
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "rationale": "Handoff:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595 تحویل را تعریف می‌کند؛ provider آن TASK:CORE:C05A:004 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و Task مصرف‌کننده TASK:ASSISTANT:A02:001 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766 تعیین شده است. اثر POLICY_IMPACT حفظ شده و از آن HARD_ORDER استنباط نمی‌شود.",
+        "rework_risk": "MEDIUM",
+        "provenance": "plan:Handoff:C05A:004",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "relation_id": "REL-STAGE4-071",
+        "source_relation_refs": [
+          "Handoff:C05A:004"
+        ],
+        "source_node": "TASK:CORE:C05A:004",
+        "target_node": "TASK:ASSISTANT:A02:001",
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "provider_task_ref": "TASK:CORE:C05A:004",
+          "consumer_task_ref": "TASK:ASSISTANT:A02:001",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7766",
+          "scope_note": "Task endpoints are named by source crosswalk; individual Subtask assignment is not explicit."
+        }
+      },
+      {
+        "source": "TASK:CORE:C05A:004",
+        "target": "TASK:CORE:C06:001",
+        "relation_type": "handoff",
+        "confidence": "CONFIRMED",
+        "execution_effect": "POLICY_IMPACT",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710"
+        ],
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "rationale": "Handoff:C05A:004 در docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595 تحویل را تعریف می‌کند؛ provider آن TASK:CORE:C05A:004 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207 و Task مصرف‌کننده TASK:CORE:C06:001 طبق docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710 تعیین شده است. اثر POLICY_IMPACT حفظ شده و از آن HARD_ORDER استنباط نمی‌شود.",
+        "rework_risk": "MEDIUM",
+        "provenance": "plan:Handoff:C05A:004",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "relation_id": "REL-STAGE4-072",
+        "source_relation_refs": [
+          "Handoff:C05A:004"
+        ],
+        "source_node": "TASK:CORE:C05A:004",
+        "target_node": "TASK:CORE:C06:001",
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "scope_level": "TASK",
+        "task_endpoint_evidence": {
+          "provider_task_ref": "TASK:CORE:C05A:004",
+          "consumer_task_ref": "TASK:CORE:C06:001",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7595",
+          "provider_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4207",
+          "consumer_task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4710",
+          "scope_note": "Task endpoints are named by source crosswalk; individual Subtask assignment is not explicit."
+        }
       },
       {
         "source": "PACKAGE:C05A",
@@ -48622,17 +48552,131 @@
         "task_allocation_status": "NOT_SPECIFIED_AT_SOURCE_LOCATOR",
         "scope_limitation": "منبع مقصد/مبدأ را در سطح Package مشخص می‌کند؛ در Locator ثبت‌شده Task/Subtask canonical برای این endpoint تخصیص نیافته است. این رابطه به‌عنوان Task-level mapping شمرده نمی‌شود.",
         "execution_order_note": "اثر ثبت‌شده در execution_effect فقط در دامنهٔ Package معتبر است؛ این ردیف به‌تنهایی ترتیب سخت Taskها یا مجوز شروع/اتمام ایجاد نمی‌کند."
+      },
+      {
+        "relation_id": "REL-STAGE4-097",
+        "source": "TASK:CORE:C05B:005",
+        "target": "TASK:CORE:C05B:003",
+        "source_node": "TASK:CORE:C05B:005",
+        "target_node": "TASK:CORE:C05B:003",
+        "relation_type": "depends_on",
+        "confidence": "CONFIRMED",
+        "execution_effect": "HARD_ORDER",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543"
+        ],
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "rationale": "TASK:CORE:C05B:005 consumes the valid Snapshot produced by C05B:003; the Plan marks this predecessor HARD. این Dependency در بخش C05B با Task-level endpoints آمده و Task dependency پس از Task 001–004 را صریح می‌کند؛ رابطهٔ تکراری یا Subtask جزئی‌تر حدس زده نشده.",
+        "rework_risk": "HIGH",
+        "provenance": "plan:explicit_dependency_table",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "source_relation_refs": [
+          "DEP:C05B:005"
+        ],
+        "scope_level": "TASK",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C05B:005",
+          "provider_task_ref": "TASK:CORE:C05B:003",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543",
+          "scope_note": "The Plan explicitly identifies the consumer and required provider; task-level only."
+        }
+      },
+      {
+        "relation_id": "REL-STAGE4-098",
+        "source": "TASK:CORE:C05B:005",
+        "target": "TASK:CORE:C05B:004",
+        "source_node": "TASK:CORE:C05B:005",
+        "target_node": "TASK:CORE:C05B:004",
+        "relation_type": "requires_contract",
+        "confidence": "CONFIRMED",
+        "execution_effect": "CONTRACT_ORDER",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543"
+        ],
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "rationale": "C05B:005 consumes the versioned read contract produced by C05B:004; Plan labels the relation CONTRACT. این Dependency در بخش C05B با Task-level endpoints آمده و Task dependency پس از Task 001–004 را صریح می‌کند؛ رابطهٔ تکراری یا Subtask جزئی‌تر حدس زده نشده.",
+        "rework_risk": "MEDIUM",
+        "provenance": "plan:explicit_dependency_table",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "source_relation_refs": [
+          "DEP:C05B:005"
+        ],
+        "scope_level": "TASK",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C05B:005",
+          "provider_task_ref": "TASK:CORE:C05B:004",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543",
+          "scope_note": "The Plan explicitly identifies the consumer and required provider; task-level only."
+        }
+      },
+      {
+        "relation_id": "REL-STAGE4-099",
+        "source": "TASK:CORE:C05B:005",
+        "target": "TASK:CORE:C01:004",
+        "source_node": "TASK:CORE:C05B:005",
+        "target_node": "TASK:CORE:C01:004",
+        "relation_type": "requires_contract",
+        "confidence": "CONFIRMED",
+        "execution_effect": "CONTRACT_ORDER",
+        "source_refs": [
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543"
+        ],
+        "source_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "plan_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+        "rationale": "C05B:005 explicitly takes C01:004 as input and preserves its existing deterministic scorer/golden semantics; Plan labels this CONTRACT. این Dependency در بخش C05B با Task-level endpoints آمده و Task dependency پس از Task 001–004 را صریح می‌کند؛ رابطهٔ تکراری یا Subtask جزئی‌تر حدس زده نشده.",
+        "rework_risk": "MEDIUM",
+        "provenance": "plan:explicit_dependency_table",
+        "resolution_status": "RESOLVED",
+        "target_kind": "node",
+        "decision_refs": [],
+        "source_relation_refs": [
+          "DEP:C05B:005"
+        ],
+        "scope_level": "TASK",
+        "graph_reference": {
+          "source_task_graph_refs": [],
+          "target_task_graph_refs": []
+        },
+        "task_endpoint_evidence": {
+          "consumer_task_ref": "TASK:CORE:C05B:005",
+          "provider_task_ref": "TASK:CORE:C01:004",
+          "relation_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4554",
+          "task_locator": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:4543",
+          "scope_note": "The Plan explicitly identifies the consumer and required provider; task-level only."
+        }
       }
     ],
     "review_summary": {
-      "overlay_relation_count": 96,
+      "overlay_relation_count": 99,
       "handoff_rows": 50,
-      "depends_on_rows": 17,
-      "requires_contract_rows": 28,
+      "depends_on_rows": 18,
+      "requires_contract_rows": 30,
       "requires_policy_rows": 1,
       "unresolved_source_gap_rows": 0,
-      "task_level_rows": 34,
-      "package_level_or_package_to_task_rows": 59,
+      "task_level_rows": 42,
+      "package_level_or_package_to_task_rows": 54,
       "parallel_safe_assertions": 0,
       "source_inventory": {
         "plan_handoff_ids": 24,
@@ -48646,19 +48690,362 @@
           "execution-trace.csv"
         ]
       },
-      "note": "۵۷ رابطه از ۵۹ ردیف Package-scope با SOURCE_SCOPED و Locator/محدودیت Task ثبت شده‌اند؛ دو مورد PACKAGE_ONLY به BLOCKED_BY_DECISION وابسته‌اند. Handoff:H05B:004 به سه Subtask دقیق A02 برای REQ:013–015 متصل شده است. سایر endpointهای Task/Subtask فقط با crosswalk صریح Plan ثبت شده‌اند.",
+      "note": "۹۹ رابطهٔ Overlay شامل ۵۰ handoff، ۱۸ depends_on، ۳۰ requires_contract و یک requires_policy است. هفت Endpoint مربوط به C05A از Scope Package/ناقص به Task دقیق ارتقا یافته‌اند؛ سه Dependency صریح Task-level از C05B نیز افزوده شده‌اند. ۵۴ رابطه Package-scope باقی است: ۵۲ SOURCE_SCOPED و دو PACKAGE_ONLY وابسته به تصمیم باز. هیچ parallel_safe ثبت نشده است.",
       "package_scope_resolution_counts": {
-        "SOURCE_SCOPED": 57,
+        "SOURCE_SCOPED": 52,
         "PACKAGE_ONLY_BLOCKED_BY_DECISION": 2
       },
       "execution_effect_counts": {
-        "BLOCKED_BY_DECISION": 3,
-        "CONTRACT_ORDER": 26,
-        "HARD_ORDER": 12,
+        "CONTRACT_ORDER": 28,
+        "POLICY_IMPACT": 33,
         "IMPACT_ONLY": 22,
-        "POLICY_IMPACT": 33
+        "HARD_ORDER": 13,
+        "BLOCKED_BY_DECISION": 3
       },
-      "subtask_level_rows": 3
+      "subtask_level_rows": 3,
+      "package_level_rows": 54,
+      "implicit_relation_review": {
+        "method": "Every canonical Task/Subtask Plan locator from all 36 packages was scanned, then package Story/AC/Test identifiers and explicit cross-package dependency tables were checked against current immutable Task graph edges and Relation Overlay. Only source-explicit direction/type/effect was promoted; cross-reference co-coverage in wallet scenarios was not treated as dependency or parallel safety.",
+        "packages_reviewed": [
+          {
+            "package": "C01",
+            "stories": 0,
+            "tasks": 13,
+            "subtasks": 42,
+            "acceptance_criteria": 40,
+            "tests": 40,
+            "new_relations": 0
+          },
+          {
+            "package": "C02",
+            "stories": 1,
+            "tasks": 5,
+            "subtasks": 20,
+            "acceptance_criteria": 81,
+            "tests": 81,
+            "new_relations": 0
+          },
+          {
+            "package": "C03",
+            "stories": 0,
+            "tasks": 0,
+            "subtasks": 0,
+            "acceptance_criteria": 0,
+            "tests": 22,
+            "new_relations": 0
+          },
+          {
+            "package": "C04",
+            "stories": 4,
+            "tasks": 8,
+            "subtasks": 2,
+            "acceptance_criteria": 60,
+            "tests": 60,
+            "new_relations": 0
+          },
+          {
+            "package": "C05A",
+            "stories": 4,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 35,
+            "tests": 35,
+            "new_relations": 0
+          },
+          {
+            "package": "C05B",
+            "stories": 3,
+            "tasks": 5,
+            "subtasks": 12,
+            "acceptance_criteria": 15,
+            "tests": 15,
+            "new_relations": 3
+          },
+          {
+            "package": "C06",
+            "stories": 0,
+            "tasks": 6,
+            "subtasks": 0,
+            "acceptance_criteria": 9,
+            "tests": 9,
+            "new_relations": 0
+          },
+          {
+            "package": "C07",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 0,
+            "acceptance_criteria": 19,
+            "tests": 19,
+            "new_relations": 0
+          },
+          {
+            "package": "C08",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 0,
+            "acceptance_criteria": 14,
+            "tests": 14,
+            "new_relations": 0
+          },
+          {
+            "package": "C09",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 0,
+            "acceptance_criteria": 17,
+            "tests": 17,
+            "new_relations": 0
+          },
+          {
+            "package": "C10",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 0,
+            "acceptance_criteria": 12,
+            "tests": 12,
+            "new_relations": 0
+          },
+          {
+            "package": "C11A",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 0,
+            "acceptance_criteria": 9,
+            "tests": 9,
+            "new_relations": 0
+          },
+          {
+            "package": "C11B",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 16,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "C12A",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 16,
+            "acceptance_criteria": 13,
+            "tests": 13,
+            "new_relations": 0
+          },
+          {
+            "package": "C12B",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 11,
+            "tests": 11,
+            "new_relations": 0
+          },
+          {
+            "package": "C13A",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 14,
+            "tests": 14,
+            "new_relations": 0
+          },
+          {
+            "package": "C13B",
+            "stories": 8,
+            "tasks": 8,
+            "subtasks": 24,
+            "acceptance_criteria": 16,
+            "tests": 16,
+            "new_relations": 0
+          },
+          {
+            "package": "C14",
+            "stories": 6,
+            "tasks": 8,
+            "subtasks": 24,
+            "acceptance_criteria": 16,
+            "tests": 16,
+            "new_relations": 0
+          },
+          {
+            "package": "R01",
+            "stories": 4,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "R02",
+            "stories": 4,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "R03",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 16,
+            "acceptance_criteria": 11,
+            "tests": 11,
+            "new_relations": 0
+          },
+          {
+            "package": "R04",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "R05",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "R06",
+            "stories": 0,
+            "tasks": 6,
+            "subtasks": 18,
+            "acceptance_criteria": 12,
+            "tests": 12,
+            "new_relations": 0
+          },
+          {
+            "package": "R07",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 12,
+            "acceptance_criteria": 8,
+            "tests": 8,
+            "new_relations": 0
+          },
+          {
+            "package": "R08",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 16,
+            "acceptance_criteria": 9,
+            "tests": 9,
+            "new_relations": 0
+          },
+          {
+            "package": "R09",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 12,
+            "acceptance_criteria": 8,
+            "tests": 8,
+            "new_relations": 0
+          },
+          {
+            "package": "R10",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 12,
+            "acceptance_criteria": 8,
+            "tests": 8,
+            "new_relations": 0
+          },
+          {
+            "package": "A01",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 13,
+            "acceptance_criteria": 11,
+            "tests": 11,
+            "new_relations": 0
+          },
+          {
+            "package": "A02",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 18,
+            "acceptance_criteria": 15,
+            "tests": 15,
+            "new_relations": 0
+          },
+          {
+            "package": "A03",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 13,
+            "acceptance_criteria": 12,
+            "tests": 12,
+            "new_relations": 0
+          },
+          {
+            "package": "A04",
+            "stories": 0,
+            "tasks": 4,
+            "subtasks": 13,
+            "acceptance_criteria": 13,
+            "tests": 13,
+            "new_relations": 0
+          },
+          {
+            "package": "A05",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 16,
+            "acceptance_criteria": 12,
+            "tests": 12,
+            "new_relations": 0
+          },
+          {
+            "package": "A06",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 18,
+            "acceptance_criteria": 14,
+            "tests": 14,
+            "new_relations": 0
+          },
+          {
+            "package": "A07",
+            "stories": 0,
+            "tasks": 5,
+            "subtasks": 15,
+            "acceptance_criteria": 10,
+            "tests": 10,
+            "new_relations": 0
+          },
+          {
+            "package": "A08",
+            "stories": 0,
+            "tasks": 6,
+            "subtasks": 18,
+            "acceptance_criteria": 14,
+            "tests": 14,
+            "new_relations": 0
+          }
+        ],
+        "task_node_locators_reviewed": 696,
+        "package_count": 36,
+        "task_count": 189,
+        "subtask_count": 471,
+        "new_relations": [
+          "REL-STAGE4-097",
+          "REL-STAGE4-098",
+          "REL-STAGE4-099"
+        ],
+        "new_relation_count": 3,
+        "parallel_safe_assertions_added": 0,
+        "source_scope_limit": "Explicit source dependency rows and task locators were reviewed. Shared multi-owner Wallet acceptance/test crosswalks remain traceability evidence, not ordering edges unless a source explicitly states a provider/consumer or predecessor.",
+        "scope_method": "All 696 canonical Task Graph nodes across the 36 package scopes were walked via their Plan locators; package Story, AC and Test identifiers were normalized and counted once. Explicit cross-package dependency rows were compared with both immutable task graph and overlay; text co-coverage without explicit direction was not promoted."
+      }
     }
   },
   "stage4_code_search_audit": {
