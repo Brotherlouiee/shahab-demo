@@ -304,17 +304,20 @@ def build() -> dict[str, Any]:
     # the source community identifiers and labels without inventing clusters.
     communities = []
     community_labels = {}
+    community_canonical_ids = {}
     for n in code_nodes:
         if n.get("community") is not None:
-            community_labels.setdefault(str(n["community"]), n.get("community_name") or f"Community {n['community']}")
+            key = str(n["community"])
+            community_labels.setdefault(key, n.get("community_name") or f"Community {n['community']}")
+            community_canonical_ids.setdefault(key, n["community"])
     for key in sorted(community_members, key=lambda x: (not x.isdigit(), int(x) if x.isdigit() else x)):
         communities.append({
             "id": key,
-            "canonical_id": key,
+            "canonical_id": community_canonical_ids.get(key, key),
             "label": community_labels.get(key, f"Community {key}"),
             "origin_graph": "current_project_code_graph",
             "member_node_ids": community_members[key],
-            "source_data": {"community": key, "community_name": community_labels.get(key)},
+            "source_data": {"community": community_canonical_ids.get(key, key), "community_name": community_labels.get(key)},
         })
 
     def add_edge(origin: str, raw: dict[str, Any], source_id: str, target_id: str,
