@@ -16,6 +16,18 @@ import replay_stage4 as replay
 
 sys.path.insert(0, str(replay.ROOT / "docs/audits/phase2-source-coverage"))
 import build_evidence_join_index as join
+import build_and_validate as coverage_builder
+
+
+class CoverageBuilderTests(unittest.TestCase):
+    def test_failed_machine_control_produces_failure_exit(self):
+        validations = {
+            "first": {"result": "PASS"},
+            "second": {"result": "FAIL"},
+        }
+        self.assertTrue(coverage_builder.has_validation_failures([], validations))
+        self.assertTrue(coverage_builder.has_validation_failures(["structural error"], {"first": {"result": "PASS"}}))
+        self.assertFalse(coverage_builder.has_validation_failures([], {"first": {"result": "PASS"}}))
 
 
 class EvidenceJoinTests(unittest.TestCase):
@@ -167,6 +179,17 @@ class EvidenceJoinTests(unittest.TestCase):
     def test_null_identifier_fails_with_controlled_error(self):
         self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows[0].update(candidate_id=None))
         self.assert_preserved_on_error("atomic-obligations.csv: blank candidate_id")
+
+    def test_failed_index_publication_preserves_previous_output(self):
+        output = self.output.read_bytes()
+        printed = io.StringIO()
+        with (patch.object(join, "replace", side_effect=OSError("injected replace failure")),
+              contextlib.redirect_stdout(printed),
+              self.assertRaisesRegex(OSError, "injected replace failure")):
+            join.main()
+        self.assertEqual(self.output.read_bytes(), output)
+        self.assertEqual(list(self.coverage.glob(".evidence-join-index.json.*")), [])
+        self.assertNotIn("PASS", printed.getvalue())
 
     def test_duplicate_candidate_fails_before_publication(self):
         self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows.append(rows[0]))

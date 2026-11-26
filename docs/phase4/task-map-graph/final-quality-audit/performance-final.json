@@ -1,0 +1,10 @@
+{
+  "status": "NOT_MEASURED",
+  "reason": "Interactive correctness was exercised in real Chromium, but timing/memory budgets were not measured. Performance gate remains NOT_RUN.",
+  "browser": "Chrome for Testing 142.0.7444.175",
+  "dpr": [
+    1,
+    2
+  ],
+  "metrics": []
+}

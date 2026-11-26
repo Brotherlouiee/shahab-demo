@@ -1,0 +1,7 @@
+{
+  "status": "NOT_MEASURED",
+  "reason": "A comparable pre-change timing/memory baseline was not captured. Existing baseline HTML SHA-256 is available, but file hashes do not establish runtime performance.",
+  "baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
+  "browser": "Chrome for Testing 142.0.7444.175",
+  "metrics": []
+}

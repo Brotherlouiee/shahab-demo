@@ -9,8 +9,14 @@ async function run(deviceScaleFactor) {
   try {
     const page = await browser.newPage({ viewport: { width: 1500, height: 950 }, deviceScaleFactor });
     const pageErrors = [];
+    const consoleErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));
+    page.on('console', message => {
+      if (message.type() === 'error') consoleErrors.push(message.text());
+    });
     await page.addInitScript(() => {
+      window.unhandledRejections = [];
+      window.addEventListener('unhandledrejection', event => window.unhandledRejections.push(String(event.reason)));
       const prototype = CanvasRenderingContext2D.prototype;
       const metrics = window.painted = { frames: 0, nodes: [], edges: [] };
       function record(name, observe) {
@@ -56,7 +62,16 @@ async function run(deviceScaleFactor) {
     const graph = await page.locator('#graph-data').evaluate(source => {
       const { nodes, edges } = JSON.parse(source.textContent);
       return {
-        nodes: nodes.map(({ id, package_id, node_type }) => [id, { package_id, node_type }]),
+        nodes: nodes.map(node => [node.id, {
+          package_id: node.package_id,
+          mapped_package_refs: node.mapped_package_refs,
+          domain: node.domain,
+          community_id: node.community_id,
+          node_type: node.node_type,
+          mapping_status: node.mapping_status,
+          mapping_statuses: node.mapping_statuses,
+          label: node.label,
+        }]),
         edges: edges.map(({ source, target, origin_graph, relation_type }) =>
           ({ source, target, origin_graph, relation_type })),
       };
@@ -67,21 +82,37 @@ async function run(deviceScaleFactor) {
       assert.ok(nodes.has(edge.target), `Edge has unknown target node: ${edge.target}`);
     }
     const crossEdges = graph.edges.filter(edge => {
-      if (edge.origin_graph === 'current_project_code_graph') return false;
       if (edge.origin_graph === 'task_mapping' || edge.origin_graph === 'decision_scope') return true;
+      if (!['relation_overlay', 'new_project_task_graph'].includes(edge.origin_graph)) return false;
+      if (edge.relation_type === 'contains') return false;
       const source = nodes.get(edge.source), target = nodes.get(edge.target);
       const distinctPackages = source.package_id && target.package_id && source.package_id !== target.package_id;
-      if (edge.relation_type === 'contains') return false;
       if (edge.origin_graph === 'relation_overlay') {
         return distinctPackages || [source, target].some(node => node.node_type.endsWith('_REFERENCE'));
       }
       return edge.origin_graph === 'new_project_task_graph' && distinctPackages;
     });
-    function crossCounts(relation, showDecisions = true) {
-      const edges = crossEdges.filter(edge =>
-        (!relation || edge.relation_type === relation) &&
-        (showDecisions || [edge.source, edge.target].every(id => nodes.get(id).node_type !== 'OPEN_DECISION')));
-      return [new Set(edges.flatMap(edge => [edge.source, edge.target])).size, edges.length];
+    function expectedCounts(filters = {}) {
+      let expectedNodes = graph.nodes.map(([id, node]) => ({ id, ...node })).filter(node => {
+        if (filters.domain && node.domain !== filters.domain) return false;
+        if (filters.package && node.package_id !== filters.package &&
+            !(node.mapped_package_refs || []).includes('PACKAGE:' + filters.package) && node.id !== 'PACKAGE:' + filters.package) return false;
+        if (filters.community && node.community_id !== filters.community) return false;
+        if (filters.nodeType && node.node_type !== filters.nodeType) return false;
+        if (filters.mapping && node.mapping_status !== filters.mapping &&
+            !(node.mapping_statuses || []).includes(filters.mapping)) return false;
+        if (filters.showDecisions === false && node.node_type === 'OPEN_DECISION') return false;
+        return true;
+      });
+      const eligible = new Set(expectedNodes.map(node => node.id));
+      let expectedEdges = graph.edges.filter(edge => eligible.has(edge.source) && eligible.has(edge.target) &&
+        (!filters.relation || edge.relation_type === filters.relation) &&
+        (!filters.crossOnly || crossEdges.includes(edge)));
+      if (filters.crossOnly) {
+        const endpoints = new Set(expectedEdges.flatMap(edge => [edge.source, edge.target]));
+        expectedNodes = expectedNodes.filter(node => endpoints.has(node.id));
+      }
+      return [expectedNodes.length, expectedEdges.length];
     }
     const fullGraphCounts = [nodes.size, graph.edges.length];
     const settle = () => page.evaluate(async () => {
@@ -90,6 +121,7 @@ async function run(deviceScaleFactor) {
     const bitmap = () => page.locator('#graph').evaluate(canvas => canvas.toDataURL());
     const frames = () => page.evaluate(() => window.painted.frames);
     const counts = () => page.evaluate(() => [window.painted.nodes.length, window.painted.edges.length]);
+    const assertCounts = async filters => assert.deepEqual(await counts(), expectedCounts(filters));
     const changed = async (label, action) => {
       await settle();
       const before = await bitmap();
@@ -100,34 +132,117 @@ async function run(deviceScaleFactor) {
       assert.notEqual(await bitmap(), before, label + ' did not change Canvas pixels');
       console.log('PASS', label);
     };
+    const redrawn = async (label, action) => {
+      await settle();
+      const count = await frames();
+      await action();
+      await settle();
+      assert.ok(await frames() > count, label + ' did not redraw');
+      console.log('PASS', label);
+    };
     await settle();
     const initial = await frames();
     assert.ok(initial > 0);
     await settle();
     assert.equal(await frames(), initial, 'Canvas kept repainting while idle');
+    await page.waitForTimeout(1500);
+    assert.equal(await frames(), initial, 'Canvas kept repainting during extended idle');
     assert.deepEqual(await counts(), fullGraphCounts);
+    await assertCounts();
     await changed('relation filter after idle', () => page.selectOption('#relation', 'handoff'));
+    await assertCounts({ relation: 'handoff' });
     await changed('clear relation filter', () => page.selectOption('#relation', ''));
+    await assertCounts();
     await changed('Cross-only', () => page.check('#crossOnly'));
-    assert.deepEqual(await counts(), crossCounts());
+    await assertCounts({ crossOnly: true });
     await changed('Cross-only intersects relation filter', () => page.selectOption('#relation', 'depends_on'));
-    assert.deepEqual(await counts(), crossCounts('depends_on'));
+    await assertCounts({ crossOnly: true, relation: 'depends_on' });
     await changed('Cross-only containment filter', () => page.selectOption('#relation', 'contains'));
-    assert.deepEqual(await counts(), crossCounts('contains'));
+    await assertCounts({ crossOnly: true, relation: 'contains' });
     await changed('Cross-only handoff edges', () => page.selectOption('#relation', 'handoff'));
-    assert.deepEqual(await counts(), crossCounts('handoff'));
+    await assertCounts({ crossOnly: true, relation: 'handoff' });
     await changed('Cross-only and decision filter', async () => {
       await page.selectOption('#relation', '');
       await page.uncheck('#decisions');
     });
-    assert.deepEqual(await counts(), crossCounts('', false));
+    await assertCounts({ crossOnly: true, showDecisions: false });
     await changed('reset filters', async () => {
       await page.uncheck('#crossOnly');
       await page.check('#decisions');
     });
     assert.deepEqual(await counts(), fullGraphCounts);
 
+    const domain = graph.nodes.map(([, node]) => node.domain).find(value => value === 'CORE');
+    const community = graph.nodes.map(([, node]) => node.community_id).find(Boolean);
+    await redrawn('Domain filter', () => page.selectOption('#domain', domain));
+    await assertCounts({ domain });
+    await redrawn('Package filter', () => page.selectOption('#package', 'C05A'));
+    await assertCounts({ domain, package: 'C05A' });
+    await redrawn('Domain and Package order reset', async () => {
+      await page.selectOption('#domain', '');
+      await page.selectOption('#package', '');
+    });
+    await redrawn('Package then Domain', async () => {
+      await page.selectOption('#package', 'C05A');
+      await page.selectOption('#domain', domain);
+    });
+    await assertCounts({ domain, package: 'C05A' });
+    await redrawn('Incompatible Domain and Package filters', () => page.selectOption('#domain', 'RAG'));
+    await assertCounts({ domain: 'RAG', package: 'C05A' });
+    await redrawn('Reset Domain and Package', async () => {
+      await page.selectOption('#domain', '');
+      await page.selectOption('#package', '');
+    });
+    await redrawn('Community filter', () => page.selectOption('#community', community));
+    await assertCounts({ community });
+    await redrawn('Community and Relation filters', () => page.selectOption('#relation', 'calls'));
+    await assertCounts({ community, relation: 'calls' });
+    await redrawn('Reset Community and Relation', async () => {
+      await page.selectOption('#community', '');
+      await page.selectOption('#relation', '');
+    });
+    await redrawn('Node Type filter', () => page.selectOption('#nodeType', 'TASK'));
+    await assertCounts({ nodeType: 'TASK' });
+    await redrawn('Package and Node Type filters', () => page.selectOption('#package', 'C05A'));
+    await assertCounts({ nodeType: 'TASK', package: 'C05A' });
+    await redrawn('Reset Package and Node Type', async () => {
+      await page.selectOption('#package', '');
+      await page.selectOption('#nodeType', '');
+    });
+    await redrawn('Mapping Status filter', () => page.selectOption('#mapping', 'MAPPED'));
+    await assertCounts({ mapping: 'MAPPED' });
+    await redrawn('Package and Mapping Status filters', () => page.selectOption('#package', 'C05A'));
+    await assertCounts({ mapping: 'MAPPED', package: 'C05A' });
+    await redrawn('Cross-only and Package filters', () => page.check('#crossOnly'));
+    await assertCounts({ crossOnly: true, mapping: 'MAPPED', package: 'C05A' });
+    await redrawn('Cross-only and Domain filters', async () => {
+      await page.selectOption('#package', '');
+      await page.selectOption('#domain', domain);
+    });
+    await assertCounts({ crossOnly: true, mapping: 'MAPPED', domain });
+    await redrawn('Cross-only and Mapping Status filters', async () => {
+      await page.selectOption('#domain', '');
+      await page.selectOption('#mapping', 'PARTIALLY_MAPPED');
+    });
+    await assertCounts({ crossOnly: true, mapping: 'PARTIALLY_MAPPED' });
+    await redrawn('Cross-only, Mapping Status, and Open Decision filters', () => page.uncheck('#decisions'));
+    await assertCounts({ crossOnly: true, mapping: 'PARTIALLY_MAPPED', showDecisions: false });
+    await redrawn('Reset all filters', async () => {
+      for (const id of ['domain', 'package', 'community', 'nodeType', 'relation', 'mapping']) {
+        await page.selectOption('#' + id, '');
+      }
+      await page.uncheck('#crossOnly');
+      await page.check('#decisions');
+    });
+    await assertCounts();
+
     const search = page.locator('#search');
+    await changed('Search with no matches', () => search.fill('NO-SUCH-TASK-MATCH-9F2C'));
+    await assertCounts();
+    await search.press('Enter');
+    await settle();
+    assert.equal(await page.locator('#details pre').count(), 0, 'Empty search selected a node');
+    await changed('Clear empty search', () => search.fill(''));
     await changed('Search highlights Canvas nodes', () => search.fill('TASK:CORE:C05A:004'));
     await changed('Search Enter centers node', () => search.press('Enter'));
     const centered = await page.evaluate(() => {
@@ -145,10 +260,15 @@ async function run(deviceScaleFactor) {
     let evidence = JSON.parse(await page.locator('#details pre').textContent());
     assert.equal(evidence.source_data.id, 'TASK:CORE:C05A:004');
     assert.ok(evidence.mapping_data);
-    await changed('clear node selection', () => page.click('#clear'));
+    await changed('Package filter clears a hidden node selection', () => page.selectOption('#package', 'A01'));
+    assert.doesNotMatch(await page.locator('#details').textContent(), /TASK:CORE:C05A:004/);
+    assert.equal(await page.locator('#details pre').count(), 0);
+    await changed('Clear package filter', () => page.selectOption('#package', ''));
     const canvas = await page.locator('#graph').boundingBox();
     await changed('Canvas node selection', () => page.mouse.click(canvas.x + canvas.width / 2, canvas.y + canvas.height / 2));
     assert.match(await page.locator('#details').textContent(), /TASK:CORE:C05A:004/);
+    await changed('clear node selection', () => page.click('#clear'));
+    assert.equal(await page.locator('#details pre').count(), 0);
     await changed('Canvas pan', async () => {
       await page.mouse.move(canvas.x + 90, canvas.y + 90);
       await page.mouse.down();
@@ -191,7 +311,33 @@ async function run(deviceScaleFactor) {
     assert.equal(evidence.relation_type, 'requires_contract');
     assert.ok(evidence.relation_id && evidence.source_refs.length && evidence.plan_locator);
     console.log('PASS Source Evidence for node and overlay edge');
+    await changed('Relation filter clears a hidden edge selection', () => page.selectOption('#relation', 'handoff'));
+    assert.equal(await page.locator('#details pre').count(), 0);
+    assert.doesNotMatch(await page.locator('#details').textContent(), /REL-STAGE4-/);
+    const decisionId = graph.nodes.find(([, node]) => node.node_type === 'OPEN_DECISION')[0];
+    await changed('Open Decision source and mapping details', async () => {
+      await page.selectOption('#relation', '');
+      await page.uncheck('#crossOnly');
+      await search.fill(decisionId);
+      await search.press('Enter');
+    });
+    const decisionDetails = JSON.parse(await page.locator('#details pre').textContent());
+    assert.equal(decisionDetails.decision_status, 'OPEN');
+    assert.equal(decisionDetails.mapping_status, 'BLOCKED');
+    await changed('Decision toggle clears hidden decision selection', () => page.uncheck('#decisions'));
+    assert.equal(await page.locator('#details pre').count(), 0);
+    await page.check('#decisions');
+    const contractId = graph.nodes.find(([, node]) => node.node_type === 'CONTRACT_REFERENCE')[0];
+    await changed('Contract source reference details', async () => {
+      await search.fill(contractId);
+      await search.press('Enter');
+    });
+    const contractDetails = JSON.parse(await page.locator('#details pre').textContent());
+    assert.ok(contractDetails.source_data);
+    assert.equal(contractDetails.source_data.canonical_reference, contractId);
     assert.deepEqual(pageErrors, []);
+    assert.deepEqual(consoleErrors, []);
+    assert.deepEqual(await page.evaluate(() => window.unhandledRejections), []);
     const segments = await page.evaluate(() => {
       const canvas = document.body.appendChild(document.createElement('canvas'));
       try {

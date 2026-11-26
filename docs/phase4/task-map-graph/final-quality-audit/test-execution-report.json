@@ -1,0 +1,74 @@
+{
+  "base_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
+  "environment": {
+    "os": "Linux",
+    "python": "3.12.14",
+    "node": "v24.22.3",
+    "chromium": "Chrome for Testing 142.0.7444.175"
+  },
+  "tests": [
+    {
+      "name": "focused Python regression suite",
+      "command": "PYTHONPATH=docs/phase4/task-map-graph python3 -m unittest discover -s docs/phase4/task-map-graph -p test_graphify_review.py -v",
+      "result": "PASS",
+      "count": 19
+    },
+    {
+      "name": "source coverage official checks",
+      "command": "python3 docs/audits/phase2-source-coverage/build_and_validate.py --check-only",
+      "result": "PASS",
+      "count": "29/29, 0 errors"
+    },
+    {
+      "name": "stage 4 replay",
+      "command": "python3 docs/phase4/task-map-graph/replay_stage4.py --check-only",
+      "result": "PASS",
+      "count": "657 records, 347 files, 696 mappings, 134 OPEN/BLOCKED"
+    },
+    {
+      "name": "combined graph build",
+      "command": "python3 docs/phase4/task-map-graph/build_task_map_graph.py",
+      "result": "PASS",
+      "count": "4,490 nodes; 11,435 edges"
+    },
+    {
+      "name": "browser E2E",
+      "command": "PLAYWRIGHT_MODULE=... CHROME_BIN=... node docs/phase4/task-map-graph/test_graphify_viewer.cjs",
+      "result": "PASS",
+      "count": "Chrome 142 DPR 1 and 2; Canvas pixel-based tests; no page errors"
+    },
+    {
+      "name": "syntax",
+      "command": "python3 -m py_compile ... && node --check ...",
+      "result": "PASS"
+    },
+    {
+      "name": "determinism",
+      "command": "two independent builder runs and PYTHONHASHSEED 1/98765 checks",
+      "result": "PASS",
+      "count": "evidence index, graph JSON, graph HTML byte-identical across repeated builds; replay projection unchanged"
+    },
+    {
+      "name": "mutation / fuzz / stress / performance budget",
+      "result": "NOT_RUN",
+      "reason": "No mutation framework or recorded comparable performance budget/baseline run in this audit."
+    }
+  ],
+  "limitations": [
+    "Windows and Firefox/Edge not tested.",
+    "Graphify review could not be rerun due quota, with one finding description unavailable.",
+    "No mutation score, formal branch coverage, or comparable runtime/memory baseline.",
+    "End-to-end full normal source-coverage builder completed with exit 0; generated canonical ledgers had no diff."
+  ],
+  "immutable_graph_sha256": {
+    "semantic_reference": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+    "code_graph": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
+    "task_graph": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7"
+  },
+  "derived_sha256": {
+    "evidence_join_index": "83f6776478f9c9472bb6f70a45390ceccb45d7b178ef55fe4337618d068dc8aa",
+    "mapping": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
+    "combined_graph_json": "a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9",
+    "combined_graph_html": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5"
+  }
+}

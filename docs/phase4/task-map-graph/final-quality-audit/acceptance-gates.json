@@ -1,0 +1,112 @@
+[
+  {
+    "gate": "GATE-01",
+    "status": "BLOCKED",
+    "evidence": "Function/file inventory generated, but complete human-reviewed path-by-path evidence is not yet independently signed off."
+  },
+  {
+    "gate": "GATE-02",
+    "status": "PASS_WITH_SCOPE_LIMIT",
+    "evidence": "Two confirmed viewer defects and one coverage exit-code defect fixed; no currently reproduced defect remains. Full exhaustive audit remains incomplete."
+  },
+  {
+    "gate": "GATE-03",
+    "status": "BLOCKED",
+    "evidence": "Five of six Graphify possible-issue descriptions were checked. Sixth detail was not returned by the review API and cannot be determined; 8 original Phase 4 findings were previously dispositioned on PR #257."
+  },
+  {
+    "gate": "GATE-04",
+    "status": "PASS",
+    "evidence": "19 Python regression tests and real browser scenarios passed. Mutation/stress methods remain separately unrun."
+  },
+  {
+    "gate": "GATE-05",
+    "status": "PASS",
+    "evidence": "Independent structural checks and 29 controls report zero invalid endpoints, duplicate IDs, orphans, and count mismatches."
+  },
+  {
+    "gate": "GATE-06",
+    "status": "PASS",
+    "evidence": "Three immutable graph Blob SHA and SHA-256 values match baseline."
+  },
+  {
+    "gate": "GATE-07",
+    "status": "PASS",
+    "evidence": "134 decisions remain OPEN; 134 related mappings remain BLOCKED."
+  },
+  {
+    "gate": "GATE-08",
+    "status": "PASS",
+    "evidence": "29/29 source coverage controls passed, zero errors."
+  },
+  {
+    "gate": "GATE-09",
+    "status": "PASS",
+    "evidence": "Stage 4 check-only passed all 657 records across 347 inventory files."
+  },
+  {
+    "gate": "GATE-10",
+    "status": "PASS",
+    "evidence": "Combined graph builder passed with 4,490 nodes and 11,435 edges. Replay validation passed."
+  },
+  {
+    "gate": "GATE-11",
+    "status": "PARTIAL",
+    "evidence": "Independent counts, IDs, endpoints, evidence snapshots and ordering were checked. Full differential/property harness not completed."
+  },
+  {
+    "gate": "GATE-12",
+    "status": "NOT_RUN",
+    "evidence": "100% branch coverage was not measured."
+  },
+  {
+    "gate": "GATE-13",
+    "status": "NOT_RUN",
+    "evidence": "No mutation score collected."
+  },
+  {
+    "gate": "GATE-14",
+    "status": "PARTIAL",
+    "evidence": "Atomic index and mapping replacement failure tests preserve prior output. Full filesystem fault matrix not run."
+  },
+  {
+    "gate": "GATE-15",
+    "status": "NOT_RUN",
+    "evidence": "Repository SAST/SCA workflow status is for prior HEAD; local security scanner suite was not run."
+  },
+  {
+    "gate": "GATE-16",
+    "status": "PASS",
+    "evidence": "Evidence index and combined graph outputs identical across two independent builds; replay and coverage checks stable with PYTHONHASHSEED 1 and 98765."
+  },
+  {
+    "gate": "GATE-17",
+    "status": "PASS",
+    "evidence": "Chrome 142, DPR1/2. Canvas pixel changes, idle stability, all listed interactions and Source Evidence passed with no page errors."
+  },
+  {
+    "gate": "GATE-18",
+    "status": "NOT_RUN",
+    "evidence": "No runtime performance baseline/final measurements or budget comparison."
+  },
+  {
+    "gate": "GATE-19",
+    "status": "PARTIAL",
+    "evidence": "Linux environment only. Windows and alternate browser engines not tested."
+  },
+  {
+    "gate": "GATE-20",
+    "status": "PARTIAL",
+    "evidence": "Combined graph is structurally valid and Phase 5 remains untouched. Full consumer-readiness audit is not complete."
+  },
+  {
+    "gate": "GATE-21",
+    "status": "BLOCKED",
+    "evidence": "CI must be refreshed against the eventual final PR HEAD. Previous PR-head workflows succeeded with skipped jobs reported separately."
+  },
+  {
+    "gate": "GATE-22",
+    "status": "BLOCKED",
+    "evidence": "Graphify monthly quota is 10/10 until 2026-12-01 UTC. Existing review examined 79574bc, not final HEAD; 6 possible issues remain marked unconfirmed, with only five descriptions exposed."
+  }
+]

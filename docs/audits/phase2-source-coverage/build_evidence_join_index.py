@@ -5,7 +5,9 @@ import hashlib
 import subprocess
 import sys
 from collections import Counter, defaultdict
+from os import chmod, fsync, replace
 from pathlib import Path
+import tempfile
 
 from build_and_validate import read_csv
 
@@ -203,12 +205,31 @@ def build():
     return bundle
 
 
+def publish_index(path, bundle):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(bundle, ensure_ascii=False, separators=(",", ":")) + "\n"
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="", dir=path.parent,
+            prefix=f".{path.name}.", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+            chmod(temporary, mode)
+            handle.write(payload)
+            handle.flush()
+            fsync(handle.fileno())
+        replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def main():
     bundle = build()
-    (COVERAGE / "evidence-join-index.json").write_text(
-        json.dumps(bundle, ensure_ascii=False, separators=(",", ":")) + "\n",
-        encoding="utf-8",
-    )
+    publish_index(COVERAGE / "evidence-join-index.json", bundle)
     print(json.dumps(bundle["totals"], ensure_ascii=False))
 
 
