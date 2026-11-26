@@ -1,0 +1,30 @@
+{
+  "status": "PARTIAL",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "injected_publication_faults": 2,
+  "results": [
+    {
+      "target": "Evidence Join Index atomic replace",
+      "injection": "os.replace raises",
+      "result": "old output bytes preserved, temp cleaned, failure returned"
+    },
+    {
+      "target": "Stage 4 Mapping atomic replace",
+      "injection": "os.replace raises",
+      "result": "old output bytes preserved, temp cleaned, no PASS emitted"
+    }
+  ],
+  "additional_failure_inputs": [
+    "missing required CSV headers",
+    "short CSV row",
+    "null/blank identifier",
+    "orphan obligation",
+    "duplicate candidate ID",
+    "duplicate obligation ID",
+    "missing pinned graph",
+    "machine validation returns false",
+    "invalid mapping before publication"
+  ],
+  "results_count": 11,
+  "remaining": "Permission, disk-full, fsync, interrupted-process and concurrent-writer fault matrix not run."
+}

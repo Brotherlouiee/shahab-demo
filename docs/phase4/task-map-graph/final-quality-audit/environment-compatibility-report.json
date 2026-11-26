@@ -1,0 +1,42 @@
+{
+  "status": "PARTIAL",
+  "tested_environment": {
+    "os": "Linux",
+    "python": "3.12.14",
+    "node": "v24.22.3",
+    "browser": "Chrome for Testing 142.0.7444.175",
+    "dpr": [
+      1,
+      2
+    ]
+  },
+  "results": [
+    {
+      "target": "CPython",
+      "result": "PASS",
+      "evidence": "py_compile; 19 unit tests; 29 source controls; Replay and builders"
+    },
+    {
+      "target": "Chromium",
+      "result": "PASS",
+      "evidence": "Browser suite at DPR 1 and 2; actual Canvas pixel checks"
+    },
+    {
+      "target": "Windows",
+      "result": "NOT_RUN"
+    },
+    {
+      "target": "Firefox",
+      "result": "NOT_RUN"
+    },
+    {
+      "target": "Edge",
+      "result": "NOT_RUN"
+    },
+    {
+      "target": "macOS",
+      "result": "NOT_RUN"
+    }
+  ],
+  "reason": "No compatible host/browser was available in the isolated environment."
+}

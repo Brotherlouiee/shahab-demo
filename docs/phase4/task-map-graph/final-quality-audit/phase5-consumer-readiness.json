@@ -1,0 +1,18 @@
+{
+  "status": "PASS_WITH_LIMITS",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "checks": [
+    "All 696 Task-graph node IDs appear in combined graph",
+    "All 3653 current-code nodes are preserved under CODE namespace",
+    "All 9916 current-code links reconcile by source index, endpoint and relation",
+    "All 115 explicit mapping edges preserved",
+    "All 99 overlay relations preserved",
+    "All 617 decision-scope edges preserved",
+    "All source references resolve through decoded snapshots",
+    "All 134 Open Decisions remain OPEN and BLOCKED",
+    "13 HARD_ORDER edges in the task graph are acyclic by independent Kahn check",
+    "Combined output counts and mappings reconcile with original input artifacts"
+  ],
+  "consumer_smoke": "Independent Python consumer parsed the serialized graph and source snapshots and derived node/edge/mapping/decision tables without invoking builders.",
+  "not_performed": "No Phase 5 code was planned, modified, or executed. This is artifact-consumer smoke, not actual Phase 5 integration testing."
+}

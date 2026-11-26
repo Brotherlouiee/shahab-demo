@@ -1,0 +1,35 @@
+{
+  "status": "PARTIAL",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "tools": [
+    {
+      "name": "Bandit",
+      "version": "1.9.4",
+      "exit_code": 1,
+      "files": 4,
+      "issues": {
+        "high": 4,
+        "medium": 0,
+        "low": 16
+      },
+      "review": "All four High findings are SHA-1 calls used solely for Git blob identity compatibility, not security verification. Low findings are fixed-argument git subprocess calls with no shell. No actionable injection or secret finding was confirmed."
+    },
+    {
+      "name": "Ruff",
+      "version": "0.17.6",
+      "exit_code": 1,
+      "files": 5,
+      "reported_findings": 547,
+      "review": "Mostly E501/E701 inherited long/minified lines across established scripts, plus import ordering and test-style findings. Not bulk-fixed to avoid unrelated formatting churn. No runtime/type checker was available."
+    },
+    {
+      "name": "Chromium XSS fixture",
+      "version": "Chrome for Testing 142.0.7444.175",
+      "result": "PASS",
+      "attack": "A task label containing an img/onerror payload was serialized through html_document and selected in the browser. No handler ran, no img element was created, and escaped payload remained text."
+    }
+  ],
+  "github_ci": "Security SAST/SCA job was skipped by change classification on ee23df1. Secret scan passed.",
+  "confirmed_security_defects": 0,
+  "remaining": "No dependency/SCA scan ran on CI. Formal static findings require project-specific lint cleanup or an approved lint baseline."
+}

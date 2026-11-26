@@ -1,5 +1,16 @@
-# Graphify review disposition
+# وضعیت Graphify و تعیین تکلیف یافته‌ها
 
-Latest available API result for PR #257 is run `3d8b2ea8-f719-40b4-a184-18419145964b`, reviewed commit `79574bc806b5a264dca78f5634d0833c1c7e570e`. Gate was PASS with zero blockers and one advisory coupling note (`build_search()` fans out to eight callees). Investigation reports six possible issues, all `needs_checking`, but only five descriptions are exposed. The monthly review limit is 10/10 and resets 2026-12-01 UTC. This is not a review of the current final HEAD.
+آخرین Review قابل‌بازیابی Run `3d8b2ea8-f719-40b4-a184-18419145964b` است و Commit بررسی‌شده `79574bc806b5a264dca78f5634d0833c1c7e570e` بود. Gate آن PASS با صفر Blocker و یک یادداشت Coupling دربارهٔ `build_search()` بود. این Review روی HEAD نهایی `ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35` انجام نشده است.
 
-The five returned descriptions were independently checked and dispositions are in `defect-register.csv`. The missing sixth description is unknown and remains unreviewed. Eight original Graphify findings from the PR body were previously separately dispositioned in that PR, but that is not evidence of a new review of this audit commit. A fresh Graphify review remains BLOCKED by quota.
+API شش مورد احتمالی اعلام کرد، ولی پنج شرح را برگرداند. پنج شرح قابل‌مشاهده با کد، Builder رسمی، Regression Test و آزمون مرورگر بررسی شدند.
+
+| Finding | تعیین تکلیف | شواهد |
+| --- | --- | --- |
+| GF-1، فرض اینکه `read_csv` یک List ساده می‌دهد | `FALSE_POSITIVE` | تابع واقعی `(fields, rows)` برمی‌گرداند. Evidence Join Builder دو بار اجرا شد و خروجی برابر بود. |
+| GF-2، ردیف کوتاه CSV باعث `AttributeError` می‌شود | `FALSE_POSITIVE_FOR_CURRENT_CONTRACT` | Parser مقدار مفقود را با `ValueError` رد می‌کند و CLI آن را می‌گیرد. تست ردیف کوتاه و شناسهٔ خالی موفق است. |
+| GF-3، انتظار صفر برای Cross-only و `contains` | `NO_DEFECT_REPRODUCED` | آزمون Browser روابط `task_mapping` و `decision_scope` را مطابق قرارداد Cross-only لحاظ می‌کند و مقدار صفر ثابت ندارد. |
+| GF-4، Endpoint ناموجود باعث TypeError در Browser Test می‌شود | `CONTRACT_GUARD_PRESENT` | آزمون قبل از دسترسی به Node وجود هر دو Endpoint را Assert می‌کند. اعتبارسنجی Endpointهای گراف نیز موفق است. |
+| GF-5، Enter جست‌وجو مرکز Node را نمی‌سنجد | `ALREADY_TESTED` | Browser Test مرکز Node و جزئیات آن را در DPR ۱ و ۲ می‌سنجد. |
+| GF-6، شرح در دسترس نیست | `UNREVIEWED` | API شش مورد را اعلام کرد ولی پنج شرح داد. هیچ شرحی حدس زده نشد. |
+
+سهمیهٔ Review ماه جاری ۱۰ از ۱۰ مصرف شده و در ۱ دسامبر ۲۰۲۶ UTC بازنشانی می‌شود. Review تازه درخواست نشد. هیچ نتیجه‌ای برای HEAD نهایی ادعا نمی‌شود.

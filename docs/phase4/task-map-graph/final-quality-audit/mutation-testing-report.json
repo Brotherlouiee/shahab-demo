@@ -1,0 +1,51 @@
+{
+  "status": "PARTIAL",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "data_mutations": {
+    "invalid_cases": 100,
+    "detected": 100,
+    "families": {
+      "duplicate_node_id": 20,
+      "duplicate_edge_id": 20,
+      "dangling_endpoint": 20,
+      "node_count_mismatch": 20,
+      "edge_count_mismatch": 20
+    },
+    "score": "100/100 for this five-family independent data-contract mutation set"
+  },
+  "production_behavior_mutations": {
+    "attempted": 4,
+    "killed": 4,
+    "score": "4/4 for exercised browser mutants",
+    "cases": [
+      {
+        "id": "MUT-22",
+        "target": "Canvas invalidate schedules no frame",
+        "detecting_test": "browser test asserts initial Canvas frame count",
+        "result": "KILLED"
+      },
+      {
+        "id": "MUT-23",
+        "target": "task_mapping/decision_scope excluded from Cross-only",
+        "detecting_test": "Cross-only browser count oracle",
+        "result": "KILLED"
+      },
+      {
+        "id": "MUT-24",
+        "target": "hidden selection cleanup removed",
+        "detecting_test": "filter clears hidden selected node details",
+        "result": "KILLED"
+      },
+      {
+        "id": "MUT-25",
+        "target": "node source-data fallback removed",
+        "detecting_test": "Source Evidence browser assertions",
+        "result": "KILLED"
+      }
+    ]
+  },
+  "other_required_mutation_operators": "NOT_RUN",
+  "overall_mutation_score": "NOT_ESTABLISHED",
+  "survivors": 0,
+  "limitation": "The full 30 specified code mutation operators were not executed. The 100 data mutations and 4 browser code mutants are reported separately and are not presented as a 30-mutant score."
+}

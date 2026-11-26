@@ -1,97 +1,120 @@
-# ممیزی مستقل کیفی Phase 4 شهاب
+# گزارش ممیزی کیفی Phase 4
 
-**وضعیت:** `CONDITIONALLY_COMPLETED` برای یافته‌های بازتولیدشده و کنترل‌های اجراشده؛ پذیرش نهایی مسدود است.
+تاریخ بررسی ۲۶ نوامبر ۲۰۲۶
 
-## خلاصه اجرایی
+## نتیجه
 
-در شاخهٔ بررسی PR #257 سه نقص قطعی مرتبط با وضعیت انتخاب نمایشگر، نمایش Source Evidence برای Contract Reference و Exit Code اعتبارسنج Source Coverage اصلاح شدند. انتشار Evidence Join Index نیز اکنون با فایل موقت هم‌مسیر و `os.replace` اتمیک انجام می‌شود. آزمون شکست replace حفظ فایل معتبر قبلی را ثابت کرد. داده‌های Ledger بازنویسی‌شده در بازتولید رسمی بدون diff باقی ماندند. هیچ تغییری در تصمیم‌های محصولی یا گراف‌های مرجع ایجاد نشد.
+ممیزی هنوز به پذیرش کامل نرسیده است. PR #257 باز و از نظر GitHub قابل Merge است، اما از نظر Gateهای این ممیزی آمادهٔ Merge نیست. Branch Coverage، Mutation کامل، Security CI، Performance تولیدی، سازگاری محیط و Graphify نهایی ناقص‌اند. PR را Merge نکردم.
 
-این ممیزی را نمی‌توان «جامعِ نهایی» اعلام کرد، چون سهمیهٔ Graphify برای این ماه تمام شده، شرح یکی از شش مورد بررسی خودکار در API در دسترس نیست، و mutation/performance/branch-coverage و چند Gate از prompt اجرا نشده‌اند. موارد اجرا نشده PASS محسوب نشده‌اند.
+## نسخه و وضعیت مخزن
 
-## وضعیت مخزن و دامنه
-
-- Base: `392751eaeee882fc770069e3dcd3a161d47a9d26` در PR #257، شاخهٔ `fix/phase4-graphify-review`، مبنا `main`
-- PR: https://github.com/Brotherlouiee/shahab-demo/pull/257، باز و هنوز merge نشده
-- فایل‌های اصلاح‌شده: `build_and_validate.py`, `build_evidence_join_index.py`, `build_task_map_graph.py`, `task-map-graph.html`, `test_graphify_review.py`, `test_graphify_viewer.cjs`
-- دامنهٔ اصلی: دو builder Source Coverage، Stage 4 Replay و Combined Graph، خروجی‌های مشتق‌شده و دو آزمون regression؛ فایل‌های مرجع دیگر فقط برای تطبیق خوانده شدند.
-- شناسنامهٔ توابع در `audit-coverage-matrix.csv` ثبت شده است. این رجیستر جایگزین ممیزی دستیِ کامل هر مسیر نیست.
-
-## حوزه‌های ممیزی
-
-| دامنه | نتیجه |
+| مورد | مقدار |
 | --- | --- |
-| AUD-01 صحت الگوریتمی | PASS برای Stage 4 و ترکیب فیلترهای آزموده‌شده؛ بازبینی تمام شاخه‌ها کامل نیست |
-| AUD-02 یکپارچگی داده | PASS؛ شناسه تکراری، orphan یا اختلاف شمارش در داده جاری نیافتیم |
-| AUD-03 صحت ساختار گراف | PASS؛ Node، Edge، Endpoint و DAG/ترتیب وظایف کنترل شد |
-| AUD-04 صحت معنایی | PARTIAL؛ Cross-only طبق قرارداد روابط و شواهد موجود آزموده شد؛ بازبینی معنایی کامل نیست |
-| AUD-05 تبدیل lossless | PASS در حفظ Snapshotها و تطبیق خروجی‌های ثابت |
-| AUD-06 Schema و قرارداد | PASS برای ورودی‌های Evidence Join و کنترل‌های رسمی |
-| AUD-07 مرزها و حالت‌های حدی | PARTIAL؛ شناسه تهی، ردیف کوتاه، ترتیب متفاوت partial evidence و فیلترهای ناسازگار آزموده شد |
-| AUD-08 مدیریت خطا | PARTIAL؛ کنترل خطاهای بحرانی بازتولیدشده بررسی شد، نه کل ماتریس |
-| AUD-09 اتمیک بودن فایل | PARTIAL؛ خطای replace در Evidence Index و Mapping تزریق شد |
-| AUD-10 deterministic replay | PASS برای دو اجرای مستقل، Byte-for-byte و دو مقدار PYTHONHASHSEED |
-| AUD-11 اعتبارسنجی مستقل | PARTIAL؛ شمارش، شناسه، Endpoint، Snapshot و ارتباط تصمیم‌ها مستقلاً بازبینی شدند |
-| AUD-12 کیفیت کد | PARTIAL؛ diff، syntax، regression مرور شد؛ type/lint کامل انجام نشد |
-| AUD-13 امنیت | NOT_RUN برای SAST/SCA محلی؛ هیچ تغییر امنیتی یا وابستگی اضافه نشد |
-| AUD-14 کارایی | PARTIAL؛ سه نمونه baseline و final. میانه load برابر 250ms و 242ms بود؛ budget رسمی وجود ندارد |
-| AUD-15 مقیاس و فشار | NOT_RUN؛ تست فشار بزرگ‌مقیاس انجام نشد |
-| AUD-16 مرورگر واقعی | PASS در Chrome 142، DPR 1/2 و Canvas pixel assertions |
-| AUD-17 ترکیب Filter و State | PASS برای فیلترها و انتخاب‌های Node/Edge/Decision |
-| AUD-18 سازگاری محیط | PARTIAL؛ فقط Linux و Chrome آزمایش شدند |
-| AUD-19 کیفیت آزمون | PARTIAL؛ assertionهای مستقل تقویت شدند؛ mutation/fuzz score موجود نیست |
-| AUD-20 آمادگی Phase 5 | PARTIAL؛ گراف معتبر است؛ بررسی کامل مصرف‌کننده و برنامه‌ریزی تحویل‌ها انجام نشد |
+| PR | https://github.com/Brotherlouiee/shahab-demo/pull/257 |
+| شاخه | fix/phase4-graphify-review |
+| Base واقعی PR | 3df5beb8fbec677515ad9b4cd0ea30b7fd055dce |
+| Baseline ممیزی قبلی | 392751eaeee882fc770069e3dcd3a161d47a9d26 |
+| HEAD بررسی‌شده | ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35 |
+| PR | باز، mergeable، clean |
+| CI | چهار Workflow موفق، پنج Job موفق، هفت Job ردشده، بدون شکست |
 
-## یافته‌ها و اصلاحات
+Base واقعی PR و Baseline ممیزی مفاهیم جداگانه‌اند. در بررسی فایل‌های کامل مشخص شد دو فایل در ثبت قبلی ناقص بودند. Commit ee23df1 آن‌ها را با نسخهٔ کامل جایگزین کرد و Blob SHA آن‌ها پیش از ثبت با GitHub تطبیق داده شد. CI قبلی این نقص را کشف نکرده بود، چون تغییر مستندی طبقه‌بندی شده بود.
 
-1. **انتخاب پنهان و جزئیات قدیمی** — FIXED. فیلتر عادی می‌توانست Node/Edge انتخاب‌شده را مخفی کند ولی جزئیات قبلی را نگه دارد. `rebuild()` اکنون انتخاب نامرئی را پاک می‌کند. آزمون مرورگر برای Node، Edge و Open Decision اضافه شد.
-2. **Source Evidence گره Contract Reference** — FIXED. گره فاقد `source_ref` بود و Evidence داخل `source_data` داشت. نمایشگر اکنون دادهٔ مستقیم گره را به‌عنوان fallback می‌خواند. آزمون Chromium canonical reference را بررسی می‌کند.
-3. **Exit Code اعتبارسنج Source Coverage** — FIXED. Builder فقط `structural_errors` را در Exit Code لحاظ می‌کرد و شکست کنترل ماشینی می‌توانست با Exit موفق خاتمه یابد. شرط خروجی اکنون structural و machine validation را بررسی می‌کند؛ regression سه حالت را می‌آزماید.
-4. **نوشتن غیراتمیک Evidence Join Index** — FIXED. انتشار نهایی اکنون با temp sibling، flush/fsync و replace انجام می‌شود. تزریق شکست `replace` ثابت کرد نسخهٔ قبلی حفظ و فایل موقت پاک می‌شود.
-5. **Graphify: read_csv tuple** — FALSE POSITIVE. تابع واقعی `(fields, rows)` برمی‌گرداند. ساخت Index و تست‌ها موفق‌اند.
-6. **Graphify: short CSV row** — FALSE POSITIVE نسبت به parser واقعی فعلی. ردیف کوتاه و شناسهٔ تهی با خطای کنترل‌شده رد می‌شوند.
-7. **Graphify: Cross-only expectation** — نقص آزمون اصلاح شد. انتظار اکنون از مجموعهٔ روابط مجاز واقعی ساخته می‌شود.
-8. **Graphify: endpoint lookup** — در harness بررسی صریح Endpointها اضافه است و Validator گراف نیز Endpointها را کنترل می‌کند.
-9. **Graphify: Search Enter centering** — نقص آزمون اصلاح شد تا مرکز Node مطابق bitmap و جزئیات انتخابی اثبات شود.
-10. **Graphify مورد ششم** — UNREVIEWED. API شمارش شش مورد را اعلام کرد ولی فقط پنج شرح را بازگرداند. هویت و محتوای مورد ششم قابل استنتاج نیست.
+## ۱۲ مأموریت
 
-توضیح شش مورد و شواهد دقیق در `defect-register.csv` است.
+| مأموریت | وضعیت قبلی | وضعیت فعلی | شواهد و محدودیت |
+| --- | --- | --- | --- |
+| 1. ممیزی خط‌به‌خط | ناقص | PARTIAL | ماتریس تابعی ساخته شد و Coverage اندازه‌گیری شد. مرور کامل خط‌به‌خط JavaScript و امضای انسانی همهٔ خطوط انجام نشده است. |
+| 2. اعتبارسنجی مستقل و Property-based | ناقص | PARTIAL | ۱۰۰ جایگشت معتبر، ۱۰۰ ورودی ساختاری نامعتبر و ۲۰۰ نمونهٔ Hypothesis اجرا شد. پوشش تمام Propertyهای مصوب کامل نیست. |
+| 3. Branch Coverage | اجرا نشده | PARTIAL | Coverage شاخه‌ای Python برابر ۷۲٫۰۴٪ است. Branchهای بحرانی ۱۰۰٪ نیستند و Coverage شاخهٔ JavaScript اندازه‌گیری نشد. |
+| 4. Mutation Testing | اجرا نشده | PARTIAL | ۱۰۰/۱۰۰ تغییر داده و ۴/۴ جهش واقعی مرورگر کشته شدند. مجموعهٔ ۳۰ جهش کد کامل اجرا نشده است. |
+| 5. Fuzz | اجرا نشده | PASS | ۱۰۰۰ سطر CSV تصادفی، ۷۷۹ رد کنترل‌شده و صفر Exception غیرمنتظره. دامنه‌های JSON و HTML Fuzz نشدند. |
+| 6. Fault Injection | جزئی | PARTIAL | شکست os.replace برای Mapping و Evidence Index نسخهٔ قبلی را حفظ کرد. Disk-full، شکست fsync، توقف پردازه و نوشتن هم‌زمان اجرا نشدند. |
+| 7. Security | اجرا نشده | PARTIAL | Bandit، Ruff و آزمایش XSS اجرا شدند. SAST/SCA در CI به‌دلیل طبقه‌بندی تغییرات Skip شد. |
+| 8. Performance/Stress | محدود | PARTIAL | ساختار مصنوعی تا ۱۰ برابر در ۵٫۱۱۴ ثانیه بررسی شد. این آزمون Builder یا رندر Browser را در ۱۰ برابر نمی‌سنجد. |
+| 9. سازگاری محیط | ناقص | PARTIAL | Linux، CPython 3.12.14، Node 24.22.3 و Chrome 142 آزموده شدند. Windows، Firefox، Edge و macOS آزموده نشدند. |
+| 10. Phase 5 Consumer Smoke | ناقص | PARTIAL | مصرف‌کنندهٔ مستقل قرارداد خروجی، DAG، Snapshotها و ارجاعات را خواند. Integration واقعی Phase 5 اجرا نشد. |
+| 11. Graphify Finding ششم | مسدود | BLOCKED | API پنج شرح از شش مورد را برگرداند. شرح ششم در دسترس نیست و سهمیه تا ۱ دسامبر ۲۰۲۶ UTC پر است. |
+| 12. تناقض گزارش‌ها | متناقض | PASS | Base، Baseline ممیزی، HEAD و CI جدا ثبت شدند. CI نهایی پس از مستندسازی باید دوباره بررسی شود. |
 
-## آزمون‌ها و بازتولید
+## آزمون‌ها
 
-- 19 آزمون regression پایتون: PASS.
-- 29 کنترل Source Coverage: PASS، صفر خطا.
-- Stage 4 Replay: PASS، 696 Mapping، 134 تصمیم OPEN و 134 BLOCKED، 99 Relation Overlay، 657 رکورد در 347 فایل. SHA projection برابر `44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5`.
-- Combined Graph: PASS، 4,490 Node، 11,435 Edge، 181 Community.
-- وضعیت Mapping: 15 MAPPED، 27 PARTIALLY_MAPPED، 654 NEW_IMPLEMENTATION. Overlay برابر 99. Candidate برابر 1,633؛ Atomic Obligation برابر 1,285؛ Covered برابر 1,149؛ Partial برابر 0؛ Open Decision برابر 134؛ Uncovered برابر 2.
-- Browser واقعی: Chrome for Testing 142.0.7444.175، DPR 1 و 2. فیلترهای Domain/Package/Community/Node Type/Mapping Status/Relation/Decision، Cross-only و ترکیب فیلترها، Search، انتخاب Node/Edge، Pan، wheel/button Zoom، Fit، Resize، Source Evidence و idle repaint اجرا شدند. Console/page errors برابر صفر.
-- Evidence Index، Graph JSON و HTML در دو بار تولید مستقل Byte-for-byte یکسان بودند. دو مقدار `PYTHONHASHSEED` نیز Replay و کنترل پوشش را بدون تغییر projection یا نتیجه گذراندند.
-- هش خروجی‌ها و immutable graphها در `test-execution-report.json` درج شده‌اند.
+- Python Regression موفق شد، ۱۹ از ۱۹.
+- Source Coverage موفق شد، ۲۹ از ۲۹ کنترل و صفر خطا.
+- Stage 4 Replay موفق شد، ۶۵۷ رکورد، ۳۴۷ فایل Inventory، ۶۹۶ Mapping و ۱۳۴ تصمیم OPEN/BLOCKED.
+- Combined Graph موفق شد، ۴٬۴۹۰ Node و ۱۱٬۴۳۵ Edge.
+- Chrome 142 در DPRهای ۱ و ۲ آزموده شد. تغییر واقعی پیکسل Canvas، Frame، Filter، Cross-only، Search، انتخاب Node/Edge، Pan، Zoom، Fit، Resize و Source Evidence همگی موفق شدند.
+- XSS: Label خصمانه به شکل متن باقی ماند. اسکریپت اجرا و عنصر Image تزریق نشد.
+- Hypothesis: ۱۰۰ عنوان معتبر و ۱۰۰ ورودی مرزی یا نامعتبر.
+- ۱۰۰ جایگشت داده با Seed برابر 25711026 و ۱۰۰ تغییر ساختاری نامعتبر آزموده شدند.
+- Mutation داده ۱۰۰ از ۱۰۰ شناسایی شد. چهار جهش رفتاری موقت Browser نیز کشته شدند. این‌ها معادل مجموعهٔ ۳۰ جهش کد نیستند.
+- CSV Fuzz شامل ۱۰۰۰ ورودی بود، با ۷۷۹ رد کنترل‌شده و صفر Exception غیرمنتظره.
+- Python Coverage شامل ۱٬۶۶۰ Statement بود که ۱٬۲۵۱ مورد پوشش یافتند، برابر ۷۵٫۳۶٪. از ۶۵۸ Branch Arc تعداد ۴۷۴ مورد پوشش یافت، برابر ۷۲٫۰۴٪.
+- Ruff تعداد ۵۴۷ هشدار سبک/Lint گزارش کرد که عمدتاً خطوط طولانی یا چنددستوری در فایل‌های موجود بود. بازنویسی گستردهٔ خارج از دامنه انجام نشد.
+- Bandit بیست هشدار خام داشت. چهار هشدار High مربوط به SHA-1 برای Git Blob identity بود و ۱۶ هشدار Low به فراخوانی ثابت Git بدون shell مربوط شد. مورد تزریق قابل اقدام تأیید نشد. Exit Code ابزار به‌علت هشدارها ۱ بود.
+- Stress مصنوعی ۱۰x شامل ۴۴٬۹۰۰ Node و ۱۱۴٬۳۵۰ Edge بود. زمان ۵٫۱۱۴ ثانیه و Peak tracemalloc برابر ۵۳۱٬۴۱۶٬۷۷۹ بایت بود. این رقم، حافظهٔ Browser یا Builder نیست.
 
-## سه گراف مرجع و تصمیم‌ها
+## Graphify
 
-Git Blob و SHA-256 پیش و پس از بازتولید ثابت ماندند: Semantic Graph `a43c1732e85eeebdf83709b9d76233e59ae1a1af` / `f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93`; Code Graph `c19d700b408206458d56798809ec1c7009e08acc` / `0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982`; Task Graph `2393556b74016a437d9a126bee3b04cdcc42be25` / `deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7`.
+آخرین Review قابل‌بازیابی Run 3d8b2ea8-f719-40b4-a184-18419145964b روی Commit 79574bc806b5a264dca78f5634d0833c1c7e570e است، نه HEAD نهایی. Gate آن PASS، بدون Blocker و با یک یادداشت Coupling دربارهٔ build_search() بود.
 
-تمام 134 Open Decision همچنان OPEN و Mappingهای آن‌ها BLOCKED هستند. هیچ Ledger، Blueprint، Wallet، Implementation Plan یا گراف مرجع در diff نیست.
+| Finding | نتیجه | شواهد |
+| --- | --- | --- |
+| GF-1 فرض List بودن خروجی read_csv | FALSE_POSITIVE | تابع واقعی (fields, rows) برمی‌گرداند. Builder رسمی دو بار اجرا شد. |
+| GF-2 خطای ردیف کوتاه CSV | FALSE_POSITIVE_FOR_CURRENT_CONTRACT | Parser مقدار مفقود را با ValueError کنترل‌شده رد می‌کند. آزمون ردیف کوتاه و شناسهٔ خالی موفق است. |
+| GF-3 انتظار صفر برای Cross-only contains | NO_DEFECT_REPRODUCED | Oracle مرورگر روابط task_mapping و decision_scope را مطابق قرارداد Cross-only در نظر می‌گیرد. |
+| GF-4 احتمال TypeError برای Endpoint ناموجود | CONTRACT_GUARD_PRESENT | آزمون پیش از دسترسی به Node، وجود هر دو Endpoint را Assert می‌کند. |
+| GF-5 جست‌وجو مرکز Node را کنترل نمی‌کند | ALREADY_TESTED | مرورگر مرکز Node مطابق جست‌وجو را در DPR ۱ و ۲ بررسی کرد. |
+| GF-6 شرح در دسترس نیست | UNREVIEWED | API شش مورد اعلام کرد، اما پنج شرح برگرداند. شرح ششم حدس زده نشد. |
 
-## روش‌های آزمون
+## داده و خروجی‌ها
 
-وضعیت مجزای هر 12 روش در `test-execution-report.json` ثبت شده است. Static syntax، unit، integration، end-to-end browser، determinism، دو hash seed و fault injection محدود اجرا شدند. Property-based، mutation، fuzz، stress، performance budget و محیط‌های Windows/Firefox/Edge اجرا نشده یا ناقص‌اند و PASS گزارش نشده‌اند. مقایسه محدود performance سه نمونه برای هر نسخه داشت و میانه بارگذاری 250ms در baseline و 242ms در نسخه نهایی شد.
+Evidence Index، Mapping، Graph JSON و HTML دو بار بازتولید شدند و با cmp بایت‌به‌بایت برابر بودند.
 
-## Graphify و CI
+| خروجی | SHA-256 |
+| --- | --- |
+| evidence-join-index.json | 83f6776478f9c9472bb6f70a45390ceccb45d7b178ef55fe4337618d068dc8aa |
+| task-map-mapping.json | bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c |
+| task-map-graph.json | a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9 |
+| task-map-graph.html | 625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5 |
 
-آخرین بررسی موجود Graphify، PR #257 را روی `79574bc806b5a264dca78f5634d0833c1c7e570e` دیده است؛ gate آن PASS با صفر blocker و یک advisory coupling بود. این بررسی روی HEAD فعلی نیست. سهمیه 10/10 است و تا 2026-12-01 UTC تجدید نمی‌شود. `graphify-final-review.md` شرح محدودیت را دارد.
+| شاخص | مقدار |
+| --- | --- |
+| Combined Graph | ۴٬۴۹۰ Node، ۱۱٬۴۳۵ Edge |
+| Mapping | ۱۵ MAPPED، ۲۷ PARTIALLY_MAPPED، ۶۵۴ NEW_IMPLEMENTATION |
+| Relation Overlay | ۹۹ |
+| Candidate و Pending | ۱٬۶۳۳ و صفر |
+| Atomic Obligation | ۱٬۲۸۵ |
+| Covered، Partial، Open Decision، Uncovered | ۱٬۱۴۹، صفر، ۱۳۴، ۲ |
+| تصمیم‌های باز | هر ۱۳۴ مورد OPEN و Mapping همه BLOCKED |
 
-چهار Workflow روی audit publication commit `d85379e7d90aa5d6a93530d6888a52bc902990bc` با نتیجهٔ success پایان یافتند. پنج Job موفق و هفت Job skipped بودند. Skipped معادل PASS نیست. اجرای اولیهٔ Quality gates روی commit قبلی به‌دلیل CRLF در CSVهای گزارش شکست خورد؛ تبدیل به LF آن را رفع کرد. Run IDها و تفکیک jobها در `test-execution-report.json` ثبت شده‌اند.
+Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب برابرند. Blueprint، Wallet، Implementation Plan، Ledgerها و گراف‌های مرجع تغییر نکردند.
 
-## Gateها و تصمیم نهایی
+## ۲۲ Gate
 
-نتیجهٔ هر 22 Gate در `acceptance-gates.json` ثبت شده است. GATE-01، 03، 21 و 22 مسدودند؛ GATE-12، 13، 15 و 18 اجرا نشده‌اند؛ GATE-11، 14، 19 و 20 محدودیت دارند. بنابراین این کار `COMPLETED` نیست و PR را برای Merge تأیید نمی‌کند. PR باز می‌ماند و Merge انجام نمی‌شود.
+| Gate | وضعیت نهایی |
+| --- | --- |
+| 01 Audit Coverage | PARTIAL |
+| 02 Confirmed Defects | PARTIAL |
+| 03 Findings Disposition | PARTIAL |
+| 04 Regression Tests | PASS |
+| 05 Data Integrity | PASS |
+| 06 Immutable Graphs | PASS |
+| 07 Open Decisions | PASS |
+| 08 Source Coverage | PASS |
+| 09 Stage 4 Replay | PASS |
+| 10 Combined Graph Validation | PASS |
+| 11 Independent Validation | PARTIAL |
+| 12 Critical Branch Coverage | PARTIAL |
+| 13 Mutation Testing | PARTIAL |
+| 14 Fault Injection | PARTIAL |
+| 15 Security | PARTIAL |
+| 16 Determinism | PASS |
+| 17 Real Browser | PASS |
+| 18 Performance | PARTIAL |
+| 19 Environment Compatibility | PARTIAL |
+| 20 Phase 5 Consumer Readiness | PARTIAL |
+| 21 CI | PARTIAL |
+| 22 Final Graphify Review | BLOCKED |
 
-## شواهد
-
-- `audit-coverage-matrix.csv` — رجیستر فایل‌ها و توابع
-- `defect-register.csv` — یافته‌ها و تعیین تکلیف
-- `test-execution-report.json` — دستورها، نسخه‌ها، نتیجه‌ها و SHAها
-- `acceptance-gates.json` — 22 Gate
-- `performance-baseline.json` و `performance-final.json` — وضعیت نبود اندازه‌گیری
-- `graphify-final-review.md` — نتیجه و محدودیت آخرین Graphify
+تنها مانع Graphify نیست. Coverage، Mutation، SAST/SCA، Performance و سازگاری محیط نیز ناقص‌اند. گزارش‌ها و شواهد تازه باید روی PR ثبت و CI آن Commit دوباره بررسی شود. پذیرش کامل یا آمادگی Merge اعلام نمی‌شود.

@@ -1,5 +1,5 @@
 {
-  "status": "MEASURED_LIMITED",
+  "status": "PARTIAL",
   "browser": "Chrome for Testing 142.0.7444.175",
   "dpr": 1,
   "samples": 3,
@@ -26,6 +26,6 @@
     "wall_including_500ms_settle": 750
   },
   "artifact_sha256": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5",
-  "code_commit": "67e03b31539b470e31fff15404a207f6aeaab4ce",
-  "comparison": "Median load 8 ms lower than baseline in this small sample; no regression observed. No formal budget can be claimed."
+  "code_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "comparison": "Historical three-sample Chrome load median was 8 ms lower than baseline (242 vs 250 ms), but this is a small sample. Current deterministic output hash is unchanged. Synthetic graph structural test reached 10x in 5.114 s and 531,416,779-byte tracemalloc peak. No production-builder/browser 10x latency or approved budget was measured."
 }

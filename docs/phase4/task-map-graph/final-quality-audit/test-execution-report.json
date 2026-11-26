@@ -60,13 +60,112 @@
       "baseline_median_load_ms": 250,
       "final_median_load_ms": 242,
       "note": "Small sample, no approved budget, memory or detailed frame timings."
+    },
+    {
+      "name": "independent structural/property checks",
+      "command": "Temporary independent Python oracle; Hypothesis 200 examples; seeded 100 ordering and 100 invalid graph variants",
+      "result": "PASS",
+      "count": "100 valid permutations + 100 invalid structural mutations + 200 Hypothesis examples"
+    },
+    {
+      "name": "CSV fuzz",
+      "command": "Temporary deterministic UTF-8 CSV fuzz against read_csv",
+      "result": "PASS",
+      "count": "1000 generated rows; 779 controlled rejects; 0 unexpected exceptions"
+    },
+    {
+      "name": "mutation tests",
+      "command": "Temporary HTML mutants through Chromium regression harness",
+      "result": "PARTIAL",
+      "count": "4/4 browser code mutants killed; 100/100 data variants detected; full 30-code-operator score not run"
+    },
+    {
+      "name": "Python branch coverage",
+      "command": "coverage.py 7.17.5 --branch",
+      "result": "PARTIAL",
+      "count": "72.04% aggregate branch arcs over four production modules"
+    },
+    {
+      "name": "Bandit security scan",
+      "command": "bandit -q -r on four Python production files",
+      "result": "PARTIAL",
+      "count": "4 high SHA-1 Git blob identity warnings and 16 low constant git subprocess warnings reviewed; no actionable injection finding"
+    },
+    {
+      "name": "Ruff static lint",
+      "command": "ruff check on five Python implementation/test files",
+      "result": "PARTIAL",
+      "count": "547 style/lint findings, predominantly existing long/minified lines; no broad formatting rewrite"
+    },
+    {
+      "name": "XSS browser fixture",
+      "command": "Temporary hostile label passed through html_document and selected in Chrome",
+      "result": "PASS",
+      "count": "No script execution or injected image element"
+    },
+    {
+      "name": "synthetic structural stress",
+      "command": "1x, 2x, 5x, 10x synthetic graph serialization and endpoint validation",
+      "result": "PARTIAL",
+      "count": "10x = 44,900 nodes, 114,350 edges, 5.114s, 531,416,779-byte tracemalloc peak; not browser/builder performance"
+    },
+    {
+      "name": "independent structural/property checks",
+      "command": "Temporary independent Python oracle; Hypothesis 200 examples; seeded 100 ordering and 100 invalid graph variants",
+      "result": "PASS",
+      "count": "100 valid permutations + 100 invalid structural mutations + 200 Hypothesis examples"
+    },
+    {
+      "name": "CSV fuzz",
+      "command": "Temporary deterministic UTF-8 CSV fuzz against read_csv",
+      "result": "PASS",
+      "count": "1000 generated rows; 779 controlled rejects; 0 unexpected exceptions"
+    },
+    {
+      "name": "mutation tests",
+      "command": "Temporary HTML mutants through Chromium regression harness",
+      "result": "PARTIAL",
+      "count": "4/4 browser code mutants killed; 100/100 data variants detected; full 30-code-operator score not run"
+    },
+    {
+      "name": "Python branch coverage",
+      "command": "coverage.py 7.17.5 --branch",
+      "result": "PARTIAL",
+      "count": "72.04% aggregate branch arcs over four production modules"
+    },
+    {
+      "name": "Bandit security scan",
+      "command": "bandit -q -r on four Python production files",
+      "result": "PARTIAL",
+      "count": "4 high SHA-1 Git blob identity warnings and 16 low constant git subprocess warnings reviewed; no actionable injection finding"
+    },
+    {
+      "name": "Ruff static lint",
+      "command": "ruff check on five Python implementation/test files",
+      "result": "PARTIAL",
+      "count": "547 style/lint findings, predominantly existing long/minified lines; no broad formatting rewrite"
+    },
+    {
+      "name": "XSS browser fixture",
+      "command": "Temporary hostile label passed through html_document and selected in Chrome",
+      "result": "PASS",
+      "count": "No script execution or injected image element"
+    },
+    {
+      "name": "synthetic structural stress",
+      "command": "1x, 2x, 5x, 10x synthetic graph serialization and endpoint validation",
+      "result": "PARTIAL",
+      "count": "10x = 44,900 nodes, 114,350 edges, 5.114s, 531,416,779-byte tracemalloc peak; not browser/builder performance"
     }
   ],
   "limitations": [
-    "Windows and Firefox/Edge not tested.",
-    "Graphify review could not be rerun due quota, with one finding description unavailable.",
-    "No mutation score, formal branch coverage, or comparable runtime/memory baseline.",
-    "End-to-end full normal source-coverage builder completed with exit 0; generated canonical ledgers had no diff."
+    "Full 30 source-code mutation set not executed; mutation score remains partial.",
+    "Full manual per-line sign-off and browser JavaScript branch coverage remain incomplete.",
+    "Only one of six latest Graphify investigation descriptions is unavailable. Graphify review remains blocked by quota.",
+    "Security SAST/SCA and several runtime CI jobs skipped by change classification.",
+    "Windows and Firefox/Edge/macOS not tested.",
+    "Synthetic 10x structural stress does not establish browser or production-builder scaling.",
+    "No approved performance budget exists."
   ],
   "immutable_graph_sha256": {
     "semantic_reference": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
@@ -154,47 +253,27 @@
     }
   ],
   "github_ci": {
-    "commit": "d85379e7d90aa5d6a93530d6888a52bc902990bc",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
     "workflows": [
       {
         "name": "Quality gates",
-        "run_id": 45811186416,
-        "conclusion": "success",
-        "jobs": {
-          "success": 1,
-          "skipped": 4,
-          "failure": 0
-        }
+        "run_id": 45814636924,
+        "conclusion": "success"
       },
       {
         "name": "Security SAST, SCA and secret gates",
-        "run_id": 45811185995,
-        "conclusion": "success",
-        "jobs": {
-          "success": 2,
-          "skipped": 1,
-          "failure": 0
-        }
+        "run_id": 45814636899,
+        "conclusion": "success"
       },
       {
         "name": "Container build contract smoke",
-        "run_id": 45811185983,
-        "conclusion": "success",
-        "jobs": {
-          "success": 1,
-          "skipped": 1,
-          "failure": 0
-        }
+        "run_id": 45814636855,
+        "conclusion": "success"
       },
       {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 45811185994,
-        "conclusion": "success",
-        "jobs": {
-          "success": 1,
-          "skipped": 1,
-          "failure": 0
-        }
+        "run_id": 45814636844,
+        "conclusion": "success"
       }
     ],
     "total_jobs": {
@@ -202,6 +281,10 @@
       "skipped": 7,
       "failure": 0
     },
-    "note": "Skipped is not PASS. Initial quality-check failure on earlier commit was caused by CRLF in audit CSVs; changing them to LF made the next run pass."
-  }
+    "note": "Workflow conclusions succeeded, but jobs classified as not applicable were skipped; skipped is not PASS. Quality, SAST/SCA, container and route evidence work did not run on this docs-classified change. Secret scan passed."
+  },
+  "audit_baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
+  "pr_base_commit": "3df5beb8fbec677515ad9b4cd0ea30b7fd055dce",
+  "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "final_pr_head": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
 }

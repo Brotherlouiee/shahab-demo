@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "seed": 25711026,
+  "target": "build_and_validate.read_csv via imported public parser",
+  "cases": 1000,
+  "input": "bounded generated UTF-8 CSV bodies with commas, quotes, semicolons, CR/LF, tabs, Persian letters, K and İ",
+  "controlled_rejections": 779,
+  "accepted_and_width_checked": 221,
+  "unexpected_exceptions": 0,
+  "result": "Every generated row either produced complete string-valued fields or a controlled ValueError. No input produced an unexpected exception."
+}
