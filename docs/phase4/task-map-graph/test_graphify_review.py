@@ -165,6 +165,31 @@ graph.publish_outputs([(targets[name],(mode+'-'+name).encode()) for name in orde
             self.assertEqual(html_path.read_bytes(), b"previous viewer")
             self.assert_no_temporary_files(root, graph_path, html_path)
 
+    def test_failed_rollback_retains_recovery_backup(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            original_replace = combined_graph.atomic_replace
+            def fail_publish_and_rollback(source, target):
+                source, target = Path(source), Path(target)
+                if target == html_path:
+                    raise OSError("injected viewer publication failure")
+                if target == graph_path and ".backup." in source.name:
+                    raise OSError("injected graph rollback failure")
+                return original_replace(source, target)
+            with patch.object(combined_graph, "atomic_replace", side_effect=fail_publish_and_rollback):
+                with self.assertRaisesRegex(OSError, "previous bytes retained at"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"), (html_path, b"new viewer")
+                    ])
+            self.assertEqual(graph_path.read_bytes(), b"new graph")
+            self.assertEqual(html_path.read_bytes(), b"previous viewer")
+            backups = list(root.glob(".graph.json.backup.*"))
+            self.assertEqual(len(backups), 1)
+            self.assertEqual(backups[0].read_bytes(), b"previous graph")
+            self.assertEqual(len(list(root.glob(".graph.json.*"))), 1)
+            self.assertEqual(len(list(root.glob(".graph.html.*"))), 0)
+
     def test_stage_fsync_failure_preserves_previous_outputs(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -246,6 +271,20 @@ class CoverageBuilderTests(unittest.TestCase):
         self.assertTrue(coverage_builder.has_validation_failures([], validations))
         self.assertTrue(coverage_builder.has_validation_failures(["structural error"], {"first": {"result": "PASS"}}))
         self.assertFalse(coverage_builder.has_validation_failures([], {"first": {"result": "PASS"}}))
+
+    def test_duplicate_csv_header_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "duplicate.csv"
+            path.write_text("id,id\nA,B\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "duplicate column.*id"):
+                coverage_builder.read_csv(path)
+
+    def test_unclosed_markdown_fence_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "unclosed.md"
+            path.write_text("# Section\n\n```python\nprint('incomplete')\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, r"Unclosed fenced code block.*:3"):
+                coverage_builder.parse_sources(path)
 
     def test_failed_atomic_csv_publication_preserves_previous_output(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -441,6 +480,31 @@ class EvidenceJoinTests(unittest.TestCase):
         self.assertEqual(list(self.coverage.glob(".evidence-join-index.json.*")), [])
         self.assertNotIn("PASS", printed.getvalue())
 
+    def test_duplicate_csv_headers_fail_before_publication(self):
+        self.edit_csv("source-inventory.csv", lambda fields, rows: fields.append(fields[0]))
+        self.assert_preserved_on_error("duplicate column")
+
+    def test_pinned_graph_hash_mismatch_is_rejected(self):
+        with patch.object(join, "GRAPH_SHA256", "0" * 64):
+            with self.assertRaisesRegex(SystemExit, "Pinned Graphify graph SHA-256 mismatch"):
+                join.build()
+        self.assertEqual(self.output.read_text(encoding="utf-8"), "previous valid index")
+
+    def test_pinned_graph_lookup_failure_is_controlled(self):
+        missing_graph = join.ROOT / "docs/audits/phase2-source-coverage/.missing-pinned-graph.json"
+        failure = subprocess.CalledProcessError(128, ["git", "show"])
+        with patch.object(join, "GRAPH_PATH", missing_graph), patch.object(
+            join.subprocess, "run", side_effect=failure
+        ), self.assertRaisesRegex(ValueError, "Pinned Graphify graph unavailable"):
+            join.build()
+        self.assertEqual(self.output.read_text(encoding="utf-8"), "previous valid index")
+
+    def test_join_main_publishes_valid_index(self):
+        join.main()
+        published = json.loads(self.output.read_text(encoding="utf-8"))
+        self.assertEqual(published["totals"]["candidates"], 1633)
+        self.assertEqual(published["totals"]["atomic_obligations"], 1285)
+
     def test_duplicate_candidate_fails_before_publication(self):
         self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows.append(rows[0]))
         self.assert_preserved_on_error("duplicate candidate_id")
@@ -611,6 +675,66 @@ class CertifiedSnapshotTests(unittest.TestCase):
         with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "certified commit"):
             snapshot_validator.validate(self.manifest_path, self.root)
 
+    def test_manifest_header_contract_rejects_invalid_values(self):
+        cases = [
+            ("manifest_schema_version", "2.0", "manifest_schema_version"),
+            ("repository", "someone/else", "repository does not match"),
+            ("source_pr", 256, "source_pr is not the approved Phase 4 handoff PR"),
+            ("certified_source_commit", "bad", "full Git SHA"),
+            ("certified_source_commit", "0" * 40, "not the project-approved snapshot source"),
+            ("snapshot_id", "phase4-other", "not the approved deterministic snapshot ID"),
+            ("certification_status", "ACCEPTED", "not the approved technical-only status"),
+            ("formal_phase4_acceptance", "ACCEPTED", "preserve conditional formal acceptance"),
+        ]
+        for key, value, message in cases:
+            with self.subTest(key=key, value=value):
+                self.write_manifest(**{key: value})
+                self.commit_manifest()
+                with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, message):
+                    snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_git_ancestry_command_os_error_is_controlled(self):
+        original_run = snapshot_validator.subprocess.run
+        def fail_ancestry(command, *args, **kwargs):
+            if command[:3] == ["git", "merge-base", "--is-ancestor"]:
+                raise OSError("injected git executable failure")
+            return original_run(command, *args, **kwargs)
+        with patch.object(snapshot_validator.subprocess, "run", side_effect=fail_ancestry):
+            with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError,
+                                        "could not verify certified source commit ancestry"):
+                snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_boolean_artifact_size_is_not_an_integer(self):
+        relative = "docs/optional-one-byte.bin"
+        target = self.root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b"x")
+        subprocess.run(["git", "add", relative], cwd=self.root, check=True)
+        subprocess.run(["git", "commit", "-qm", "one-byte optional artifact"], cwd=self.root, check=True)
+        self.commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.root, text=True).strip()
+        self.pin_commit.stop()
+        replacement_pin = patch.object(snapshot_validator, "APPROVED_SOURCE_COMMIT", self.commit)
+        replacement_pin.start()
+        self.addCleanup(replacement_pin.stop)
+        record = {"path": relative, "sha256": hashlib.sha256(b"x").hexdigest(),
+                  "size_bytes": True, "git_blob_sha": subprocess.check_output(
+                      ["git", "hash-object", "-w", str(target)], cwd=self.root, text=True).strip(),
+                  "role": "OPTIONAL_HUMAN_REVIEW", "required_for_phase5": False}
+        values = self.records + [record]
+        references = [r for r in values if r["role"] == "REQUIRED_REFERENCE_INPUT"]
+        self.write_manifest(records=values, reference_inputs=references,
+                            optional_human_review_artifacts=[record])
+        self.commit_manifest()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "invalid size_bytes"):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_non_object_artifact_record_returns_controlled_error(self):
+        self.write_manifest(primary_inputs=[None])
+        self.commit_manifest()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError,
+                                    r"manifest.primary_inputs\[0\] must be an artifact object"):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
     def test_08_failure_returns_nonzero_and_never_changes_artifacts(self):
         before = {r["path"]: (self.root / r["path"]).read_bytes() for r in self.records}
         path = self.records[0]["path"]
@@ -627,6 +751,23 @@ class CertifiedSnapshotTests(unittest.TestCase):
 
 
 class ReplayTests(unittest.TestCase):
+    def test_non_string_relation_endpoint_is_rejected_without_crashing(self):
+        mapping = copy.deepcopy(replay.readj(replay.FILES["mapping"]))
+        relation = mapping["stage4_relation_overlay"]["relations"][0]
+        relation["source"] = None
+        mapping["validation"]["semantic_replay_projection_sha256"] = replay.projection_digest(mapping)
+        inputs = [mapping] + [
+            replay.readj(replay.FILES[key])
+            for key in ("task_graph", "current_code_graph", "reference_graph", "code_manifest")
+        ]
+        output = io.StringIO()
+        with (patch.object(replay, "readj", side_effect=inputs),
+              patch.object(sys, "argv", ["replay_stage4.py", "--check-only"]),
+              contextlib.redirect_stdout(output)):
+            self.assertEqual(replay.main(), 1)
+        self.assertIn("relation endpoint is not a Package/Task/Contract/Decision ref", output.getvalue())
+        self.assertIn("relation endpoint aliases disagree", output.getvalue())
+
     def test_replay_rejects_a_relation_overlay_hard_order_cycle(self):
         mapping = copy.deepcopy(replay.readj(replay.FILES["mapping"]))
         relation = next(

@@ -68,6 +68,9 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fields=list(reader.fieldnames or [])
+        duplicates = [field for field, count in Counter(fields).items() if count > 1]
+        if duplicates:
+            raise ValueError(f"Malformed CSV header in {path}: duplicate column(s): {', '.join(map(str, sorted(duplicates, key=str)))}")
         rows=[]
         for row in reader:
             line=reader.line_num
@@ -233,6 +236,9 @@ def parse_sources(path: Path) -> dict[str, Any]:
             block.append(lines[i])
             i += 1
         paragraphs.append({"start": start + 1, "end": start + len(block), "text": "\n".join(block)})
+
+    if in_fence:
+        raise ValueError(f"Unclosed fenced code block in {path}:{fence_start}")
 
     # Heading section spans end at the next peer/ancestor heading, or EOF.
     for index, heading in enumerate(headings):

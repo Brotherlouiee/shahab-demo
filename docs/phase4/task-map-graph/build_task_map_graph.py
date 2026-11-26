@@ -108,6 +108,7 @@ def _publish_outputs_locked(outputs: list[tuple[Path, bytes]]) -> None:
     staged: list[tuple[Path, Path]] = []
     backups: dict[Path, Path | None] = {}
     published: list[Path] = []
+    preserved_backups: set[Path] = set()
     try:
         for target, payload in outputs:
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -162,7 +163,13 @@ def _publish_outputs_locked(outputs: list[tuple[Path, bytes]]) -> None:
                     atomic_replace(backup, target)
                     backups[target] = None
             except OSError as rollback_error:
-                rollback_errors.append(f"{target}: {rollback_error}")
+                if backup is not None:
+                    preserved_backups.add(backup)
+                    rollback_errors.append(
+                        f"{target}: {rollback_error}; previous bytes retained at {backup}"
+                    )
+                else:
+                    rollback_errors.append(f"{target}: {rollback_error}")
         if rollback_errors:
             raise OSError(
                 f"publication failed: {error}; rollback also failed: {'; '.join(rollback_errors)}"
@@ -172,7 +179,7 @@ def _publish_outputs_locked(outputs: list[tuple[Path, bytes]]) -> None:
         for temporary, target in staged:
             temporary.unlink(missing_ok=True)
             backup = backups[target]
-            if backup is not None:
+            if backup is not None and backup not in preserved_backups:
                 backup.unlink(missing_ok=True)
 
 

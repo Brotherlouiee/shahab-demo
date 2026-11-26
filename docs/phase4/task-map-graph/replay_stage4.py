@@ -254,7 +254,7 @@ def main():
   if key in seen:errors.append('duplicate relation '+str(key))
   seen.add(key)
   for endpoint in (r.get('source'),r.get('target')):
-   if endpoint not in package_ids|ids and not endpoint.startswith(('CONTRACT:','DECISION:')):errors.append('relation endpoint is not a Package/Task/Contract/Decision ref '+str(r.get('relation_id')))
+   if not isinstance(endpoint,str) or (endpoint not in package_ids|ids and not endpoint.startswith(('CONTRACT:','DECISION:'))):errors.append('relation endpoint is not a Package/Task/Contract/Decision ref '+str(r.get('relation_id')))
   if r.get('execution_effect')=='UNRESOLVED_SOURCE_GAP' or r.get('resolution_status')=='UNRESOLVED_SOURCE_GAP':errors.append('unresolved endpoint remains '+str(r.get('relation_id')))
   for k in ('relation_id','source_node','target_node','relation_type','execution_effect','confidence','source_locator','plan_locator','graph_reference','rationale'):
    if not r.get(k):errors.append('relation missing required semantic field '+str(r.get('relation_id'))+'/'+k)

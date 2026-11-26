@@ -154,7 +154,13 @@ def validate(manifest_path: Path, repo_root: Path) -> dict[str, Any]:
     if resolved != commit:
         raise SnapshotValidationError("certified_source_commit did not resolve exactly")
     head = git(root, "rev-parse", "--verify", "HEAD").decode().strip()
-    if subprocess.run(["git", "merge-base", "--is-ancestor", commit, "HEAD"], cwd=root).returncode != 0:
+    try:
+        ancestor_status = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", commit, "HEAD"], cwd=root
+        ).returncode
+    except OSError as exc:
+        raise SnapshotValidationError(f"could not verify certified source commit ancestry: {exc}") from exc
+    if ancestor_status != 0:
         raise SnapshotValidationError("current HEAD does not contain the certified source commit")
 
     records = artifact_records(manifest)
@@ -165,14 +171,15 @@ def validate(manifest_path: Path, repo_root: Path) -> dict[str, Any]:
         "audit_evidence_only": "AUDIT_EVIDENCE_ONLY",
     }
     for group, role in expected_group_roles.items():
-        for item in manifest[group]:
+        for index, item in enumerate(manifest[group]):
+            if not isinstance(item, dict):
+                raise SnapshotValidationError(f"manifest.{group}[{index}] must be an artifact object")
             if item.get("role") != role:
                 raise SnapshotValidationError(f"{item.get('path')}: role does not match manifest.{group}")
     by_path: dict[str, dict[str, Any]] = {}
     committed_files: dict[str, bytes] = {}
+    # Every record was type-checked with a group-specific error above.
     for record in records:
-        if not isinstance(record, dict):
-            raise SnapshotValidationError("artifact entries must be objects")
         relative, _ = safe_relative_path(record.get("path"), root)
         if relative in by_path:
             raise SnapshotValidationError(f"duplicate or ambiguous artifact path: {relative}")
@@ -181,7 +188,7 @@ def validate(manifest_path: Path, repo_root: Path) -> dict[str, Any]:
         size = record.get("size_bytes")
         if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
             raise SnapshotValidationError(f"{relative}: invalid SHA-256 in manifest")
-        if not isinstance(size, int) or size < 0:
+        if type(size) is not int or size < 0:
             raise SnapshotValidationError(f"{relative}: invalid size_bytes in manifest")
         if not isinstance(record.get("role"), str) or not record["role"]:
             raise SnapshotValidationError(f"{relative}: missing artifact role")
