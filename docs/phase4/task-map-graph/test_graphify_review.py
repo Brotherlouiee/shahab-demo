@@ -1,12 +1,15 @@
 """Focused regressions for the Phase 4 Graphify review."""
 import contextlib
+import copy
 import csv
 import hashlib
 import io
 import json
 import shutil
 import sys
+import subprocess
 import tempfile
+import time
 import unittest
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -20,6 +23,61 @@ import build_evidence_join_index as join
 import build_and_validate as coverage_builder
 
 
+class CombinedGraphInputValidationTests(unittest.TestCase):
+    def setUp(self):
+        self.original_load_json = combined_graph.load_json
+        self.sources = [
+            self.original_load_json(combined_graph.ROOT / combined_graph.CODE_PATH),
+            self.original_load_json(combined_graph.ROOT / combined_graph.TASK_PATH),
+            self.original_load_json(combined_graph.ROOT / combined_graph.MAPPING_PATH),
+        ]
+
+    def assert_input_rejected(self, source_index, edit, message):
+        sources = copy.deepcopy(self.sources)
+        edit(sources[source_index])
+        with patch.object(combined_graph, "load_json", side_effect=sources):
+            with self.assertRaisesRegex(ValueError, message):
+                combined_graph.build()
+
+    def test_record_shape_and_identity_failures_are_controlled(self):
+        cases = [
+            (0, lambda data: data["nodes"].__setitem__(0, None), r"code.nodes\[0\] must be an object"),
+            (0, lambda data: data["nodes"][0].pop("id"), r"code.nodes\[0\].id must be a non-empty string"),
+            (0, lambda data: data["nodes"][0].update(id=None), r"code.nodes\[0\].id must be a non-empty string"),
+            (0, lambda data: data["links"].__setitem__(0, None), r"code.links\[0\] must be an object"),
+            (0, lambda data: data["links"][0].update(target="MISSING"), r"invalid edge endpoint"),
+            (1, lambda data: data["nodes"][0].update(id=""), r"task.nodes\[0\].id must be a non-empty string"),
+            (1, lambda data: next(node for node in data["nodes"] if node.get("node_type") == "TASK").update(parent_id="PACKAGE:MISSING"), r"invalid Package parent"),
+            (1, lambda data: next(node for node in data["nodes"] if node.get("node_type") == "TASK").update(node_type="UNKNOWN"), r"node_type is invalid"),
+            (1, lambda data: data["edges"][0].pop("source"), r"task.edges\[0\].source must be a non-empty string"),
+            (2, lambda data: data["mappings"][0].pop("mapping_status"), r"mapping_status is invalid"),
+            (2, lambda data: data["mappings"][0].update(mapping_status="UNKNOWN"), r"mapping_status is invalid"),
+            (2, lambda data: data["mappings"][0].update(mapping_status=None), r"mapping_status is invalid"),
+            (2, lambda data: data["mappings"][0].update(mapping_status=[]), r"mapping_status is invalid"),
+            (2, lambda data: data["mappings"][0].update(current_code_node_refs=None), r"current_code_node_refs must be a list"),
+            (2, lambda data: data["mappings"][0].update(package_ref=data["mappings"][1]["package_ref"]), r"duplicate mapping entity"),
+            (2, lambda data: data["mappings"][0].update({
+                key: None for key in ("entity_ref", "subtask_ref", "task_ref", "package_ref")
+            }), r"lacks a non-empty entity reference"),
+            (2, lambda data: data["open_decision_references"][0].update(mapping_status="MAPPED"), r"must remain BLOCKED"),
+            (2, lambda data: data["open_decision_references"][0].update(mapping_status=[]), r"must remain BLOCKED"),
+            (2, lambda data: data["open_decision_references"][0].update(decision_status="RESOLVED"), r"must remain OPEN"),
+            (2, lambda data: data["open_decision_references"][0].update(task_refs=None), r"task_refs must be a list"),
+            (2, lambda data: data["open_decision_references"][0].update(task_refs=["TASK:MISSING"]), r"decision scope endpoint missing"),
+            (2, lambda data: data["open_decision_references"][0].update(open_decision_id=None), r"lacks a non-empty decision ID"),
+        ]
+        for source_index, edit, message in cases:
+            with self.subTest(message=message):
+                self.assert_input_rejected(source_index, edit, message)
+
+    def test_unknown_non_contract_fields_remain_forward_compatible(self):
+        sources = copy.deepcopy(self.sources)
+        sources[2]["mappings"][0]["future_optional_metadata"] = {"label": "آزمایشی"}
+        with patch.object(combined_graph, "load_json", side_effect=sources):
+            graph = combined_graph.build()
+        self.assertEqual(graph["counts"]["node_total"], 4490)
+
+
 class CombinedGraphPublicationTests(unittest.TestCase):
     def output_pair(self, root):
         graph_path = root / "graph.json"
@@ -30,6 +88,59 @@ class CombinedGraphPublicationTests(unittest.TestCase):
 
     def assert_no_temporary_files(self, root, graph_path, html_path):
         self.assertEqual(set(root.iterdir()), {graph_path, html_path})
+
+    def test_concurrent_processes_publish_one_coherent_generation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            marker = root / "first-publication-started"
+            script = r'''import sys,time
+from pathlib import Path
+import build_task_map_graph as graph
+mode,root,marker=sys.argv[1:]
+original=graph.atomic_replace
+def delayed(source,target):
+    original(source,target)
+    if mode=='A' and Path(target).name=='graph.json' and not Path(marker).exists():
+        Path(marker).write_text('ready',encoding='utf-8')
+        time.sleep(0.4)
+graph.atomic_replace=delayed
+root=Path(root);targets={'graph.json':root/'graph.json','viewer.html':root/'graph.html'}
+order=['graph.json','viewer.html'] if mode=='A' else ['viewer.html','graph.json']
+graph.publish_outputs([(targets[name],(mode+'-'+name).encode()) for name in order])
+'''
+            environment = dict(__import__("os").environ)
+            module_directory = str(Path(combined_graph.__file__).resolve().parent)
+            environment["PYTHONPATH"] = module_directory
+            first = subprocess.Popen(
+                [sys.executable, "-c", script, "A", str(root), str(marker)],
+                cwd=combined_graph.ROOT,
+                env=environment,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            try:
+                deadline = time.monotonic() + 5
+                while not marker.exists() and time.monotonic() < deadline:
+                    time.sleep(0.01)
+                self.assertTrue(marker.exists(), "first publisher did not reach the controlled interleaving")
+                second = subprocess.Popen(
+                    [sys.executable, "-c", script, "B", str(root), str(marker)],
+                    cwd=combined_graph.ROOT,
+                    env=environment,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                )
+                _, first_error = first.communicate(timeout=10)
+                _, second_error = second.communicate(timeout=10)
+                self.assertEqual(first.returncode, 0, first_error.decode(errors="replace"))
+                self.assertEqual(second.returncode, 0, second_error.decode(errors="replace"))
+                self.assertEqual(graph_path.read_bytes(), b"B-graph.json")
+                self.assertEqual(html_path.read_bytes(), b"B-viewer.html")
+            finally:
+                if first.poll() is None:
+                    first.kill()
+                    first.wait(timeout=5)
 
     def test_html_replace_failure_restores_previous_json_and_html(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -335,6 +446,33 @@ class EvidenceJoinTests(unittest.TestCase):
 
 
 class ReplayTests(unittest.TestCase):
+    def test_replay_rejects_a_relation_overlay_hard_order_cycle(self):
+        mapping = copy.deepcopy(replay.readj(replay.FILES["mapping"]))
+        relation = next(
+            item for item in mapping["stage4_relation_overlay"]["relations"]
+            if item.get("relation_id") == "REL-STAGE4-036"
+        )
+        relation.update(
+            source="TASK:CORE:C05B:001",
+            target="TASK:CORE:C05B:002",
+            source_node="TASK:CORE:C05B:001",
+            target_node="TASK:CORE:C05B:002",
+        )
+        mapping["validation"]["semantic_replay_projection_sha256"] = replay.projection_digest(mapping)
+        inputs = [mapping] + [
+            replay.readj(replay.FILES[key])
+            for key in ("task_graph", "current_code_graph", "reference_graph", "code_manifest")
+        ]
+        output = io.StringIO()
+        with (
+            patch.object(replay, "readj", side_effect=inputs),
+            patch.object(sys, "argv", ["replay_stage4.py", "--check-only"]),
+            contextlib.redirect_stdout(output),
+        ):
+            result = replay.main()
+        self.assertEqual(result, 1)
+        self.assertIn("HARD_ORDER cycle detected", output.getvalue())
+
     def test_exact_title_matching(self):
         real_path = "scripts/export_api_docs.py"
         cases = {

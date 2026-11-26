@@ -1253,5 +1253,20 @@
     "uncovered_branch_details": "Istanbul branch maps retain uncovered optional/error and helper branches. Required browser use cases ran, but 100% critical branch coverage is not proven."
   },
   "error_path_coverage": "PARTIAL; malformed input, publication rollback/fsync/interruption and hostile XSS paths executed. Uncovered Python branches and browser error paths remain.",
-  "remaining": "The 100% critical-branch target is not met."
+  "remaining": "The 100% critical-branch target is not met.",
+  "supplemental_delta_review": {
+    "status": "PARTIAL",
+    "critical_branches_covered": [
+      "Node record object shape and non-empty string ID",
+      "Edge record shape and source/target endpoint validity",
+      "Task and Subtask type and parent references",
+      "Mapping canonical entity reference, status enum and code-reference list",
+      "Open Decision ID, OPEN status, BLOCKED mapping and Package/Task scope",
+      "Duplicate mapping errors are raised before graph assembly",
+      "Replay rejects a relation-overlay HARD_ORDER cycle",
+      "Concurrent publication serializes JSON and HTML as one writer generation"
+    ],
+    "non_critical_or_environment_dependent": "Prior optional-parser, platform-specific, browser exception and utility arcs remain outside this targeted delta. They were not individually recounted or reclassified.",
+    "remaining": "Global uncovered arcs across four Python modules and embedded JavaScript have not all been individually adjudicated. GATE-12 remains PARTIAL."
+  }
 }

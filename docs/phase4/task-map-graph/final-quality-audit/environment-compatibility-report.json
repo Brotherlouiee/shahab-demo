@@ -38,5 +38,14 @@
       "result": "NOT_RUN"
     }
   ],
-  "reason": "No compatible host/browser was available in the isolated environment."
+  "reason": "No compatible host/browser was available in the isolated environment.",
+  "delta_environment_check": {
+    "host": "Linux, CPython 3.12.14, Node v24.22.3",
+    "browser_binary": "BLOCKED_ENVIRONMENT",
+    "detail": "/usr/bin/chromium exists as a wrapper and its referenced /usr/lib/chromium/chromium binary is absent. Playwright cache and Chrome for Testing executable paths checked within the time limit.",
+    "firefox": "NOT_AVAILABLE",
+    "edge": "NOT_AVAILABLE",
+    "windows": "NOT_AVAILABLE",
+    "pure_javascript_fuzz": "PASS, 100 Search and 100 Filter cases in Node VM. This is not real-browser coverage."
+  }
 }

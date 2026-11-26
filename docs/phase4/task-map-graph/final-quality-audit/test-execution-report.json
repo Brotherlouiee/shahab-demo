@@ -152,6 +152,66 @@
       "command": "PYTHONPATH=... timeout 15s bash -c ulimit -v 1048576; python /tmp/shahab_phase4_fuzz.py",
       "result": "PARTIAL",
       "count": "Seed 2571126; 1,500 counted samples across malformed JSON, CSV edge rows, identifier/title parsing, PARTIAL_FILES validation, embedded HTML and snapshot decoding; plus 1,000 prior CSV fuzz rows. 0 unexpected exceptions or accepts. Search/filter and graph record fuzz remain."
+    },
+    {
+      "name": "targeted Graph Builder regression suite",
+      "command": "PYTHONPATH=docs/phase4/task-map-graph:docs/audits/phase2-source-coverage python -m unittest test_graphify_review.CombinedGraphInputValidationTests test_graphify_review.CombinedGraphPublicationTests -v",
+      "result": "PASS",
+      "count": "8 targeted tests"
+    },
+    {
+      "name": "Replay HARD_ORDER cycle regression",
+      "command": "python -m unittest test_graphify_review.ReplayTests.test_replay_rejects_a_relation_overlay_hard_order_cycle -v",
+      "result": "PASS",
+      "count": "one cyclic overlay rejected with diagnostic"
+    },
+    {
+      "name": "supplemental record and viewer-helper fuzz",
+      "command": "seed 2571126; temporary Python builder harness and Node VM pure-function harness",
+      "result": "PASS_FOR_TESTED_DOMAINS",
+      "count": "600 total: 100 each Node, Edge, Mapping, Decision, Search and Filter; zero unexpected exceptions or accepts"
+    },
+    {
+      "name": "delta code mutants",
+      "command": "Temporary source copies only",
+      "result": "PASS",
+      "count": "5/5 killed, including Mapping status, BLOCKED Decision, parent endpoint, duplicate Mapping early error and HARD_ORDER cycle"
+    },
+    {
+      "name": "SIGKILL publication injection",
+      "command": "Temporary output paths only",
+      "result": "PARTIAL",
+      "count": "SIGKILL before/between/after replace boundaries; between-replace termination left a mixed pair until rerun"
+    },
+    {
+      "name": "publisher process concurrency",
+      "command": "Two subprocesses with deterministic interleaving",
+      "result": "PASS_AFTER_FIX",
+      "count": "Original race reproduced a mixed pair. Destination lock regression passes."
+    },
+    {
+      "name": "Source Coverage multi-file publication injection",
+      "command": "Temporary files and injected second replace failure",
+      "result": "PARTIAL",
+      "count": "First file new, second old. Group transaction and full consumer detection are not proven."
+    },
+    {
+      "name": "current Graph Builder microbenchmark",
+      "command": "Three in-memory build() calls",
+      "result": "PASS_WITHOUT_BUDGET",
+      "count": "0.721s, 0.536s, 0.515s; median 0.536s"
+    },
+    {
+      "name": "mypy diagnostic classification",
+      "command": "python -m mypy on build_and_validate.py and replay_stage4.py",
+      "result": "BLOCKED_ENVIRONMENT",
+      "reason": "mypy is not installed in the current environment; prior aggregate 34 diagnostics have no retained per-diagnostic listing."
+    },
+    {
+      "name": "Search/Filter browser fuzz",
+      "command": "Chromium/Chrome availability check",
+      "result": "BLOCKED_ENVIRONMENT",
+      "reason": "Chromium wrapper exists but referenced executable is absent. Node VM fuzz is recorded separately and is not a browser pass."
     }
   ],
   "limitations": [
@@ -290,5 +350,7 @@
   "source_test_parent_commit": "9e3f671ae760619d143ca4e61c09e8f29980b48e",
   "tested_source_file_blobs": {
     "docs/phase4/task-map-graph/build_task_map_graph.py": "e74906f906445cb7317c5110b06e58f78542337d"
-  }
+  },
+  "delta_commit": "pending",
+  "github_ci_delta": "PENDING until the code commit is pushed and checks are inspected."
 }

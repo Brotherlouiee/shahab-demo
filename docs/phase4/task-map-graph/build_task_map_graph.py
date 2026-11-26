@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+from contextlib import contextmanager
 import gzip
 import hashlib
 import json
@@ -11,6 +12,7 @@ import os
 import subprocess
 import sys
 import tempfile
+from collections.abc import Iterator
 from collections import Counter, defaultdict
 from os import fsync as file_fsync
 from os import replace as atomic_replace
@@ -66,7 +68,42 @@ def source_ref(artifact: str, collection: str, index: int) -> dict[str, Any]:
     return {"artifact": artifact, "collection": collection, "index": index}
 
 
+@contextmanager
+def publication_lock(outputs: list[tuple[Path, bytes]]) -> Iterator[None]:
+    target_key = "\0".join(sorted(str(target.resolve()) for target, _ in outputs))
+    lock_name = hashlib.sha256(target_key.encode("utf-8")).hexdigest()
+    lock_path = Path(tempfile.gettempdir()) / f"shahab-graph-publication-{lock_name}.lock"
+    with lock_path.open("a+b") as handle:
+        if os.name == "nt":
+            import msvcrt
+
+            handle.seek(0, os.SEEK_END)
+            if handle.tell() == 0:
+                handle.write(b"\0")
+                handle.flush()
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+            try:
+                yield
+            finally:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
 def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
+    with publication_lock(outputs):
+        _publish_outputs_locked(outputs)
+
+
+def _publish_outputs_locked(outputs: list[tuple[Path, bytes]]) -> None:
     """Stage all outputs before replacement and roll back ordinary replace failures."""
     staged: list[tuple[Path, Path]] = []
     backups: dict[Path, Path | None] = {}
@@ -293,15 +330,88 @@ def build() -> dict[str, Any]:
     mappings = mapping.get("mappings", [])
     overlay = mapping.get("stage4_relation_overlay", {}).get("relations", [])
     decisions = mapping.get("open_decision_references", [])
+    def validate_records(name: str, records: Any, required_fields: tuple[str, ...]) -> None:
+        if not isinstance(records, list):
+            errors.append(f"{name} must be a list")
+            return
+        for index, record in enumerate(records):
+            if not isinstance(record, dict):
+                errors.append(f"{name}[{index}] must be an object")
+                continue
+            for field in required_fields:
+                value = record.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    errors.append(f"{name}[{index}].{field} must be a non-empty string")
+
+    validate_records("code.nodes", code_nodes, ("id",))
+    validate_records("code.links", code_links, ("source", "target"))
+    validate_records("task.nodes", task_nodes, ("id",))
+    validate_records("task.edges", task_edges, ("source", "target"))
+    validate_records("mapping.mappings", mappings, ())
+    validate_records("mapping.stage4_relation_overlay.relations", overlay, ())
+    validate_records("mapping.open_decision_references", decisions, ())
+    mapping_statuses = {"MAPPED", "PARTIALLY_MAPPED", "NEW_IMPLEMENTATION"}
+    for index, record in enumerate(mappings if isinstance(mappings, list) else []):
+        if not isinstance(record, dict):
+            continue
+        entity_ref = next((record.get(key) for key in ("entity_ref", "subtask_ref", "task_ref", "package_ref")
+                           if isinstance(record.get(key), str) and record.get(key).strip()), None)
+        if entity_ref is None:
+            errors.append(f"mapping.mappings[{index}] lacks a non-empty entity reference")
+        status = record.get("mapping_status")
+        if not isinstance(status, str) or status not in mapping_statuses:
+            errors.append(f"mapping.mappings[{index}].mapping_status is invalid: {status!r}")
+        for field in ("current_code_node_refs", "source_graph_refs"):
+            refs = record.get(field, [])
+            if not isinstance(refs, list) or any(not isinstance(ref, str) or not ref.strip() for ref in refs):
+                errors.append(f"mapping.mappings[{index}].{field} must be a list of non-empty strings")
+    for index, record in enumerate(decisions if isinstance(decisions, list) else []):
+        if not isinstance(record, dict):
+            continue
+        decision_id = record.get("open_decision_id") or record.get("decision_id")
+        if not isinstance(decision_id, str) or not decision_id.strip():
+            errors.append(f"mapping.open_decision_references[{index}] lacks a non-empty decision ID")
+        if record.get("decision_status", "OPEN") != "OPEN":
+            errors.append(f"open decision row {index} must remain OPEN")
+        if record.get("mapping_status") != "BLOCKED":
+            errors.append(f"open decision row {index} must remain BLOCKED")
+        for field in ("task_refs", "package_refs", "current_code_node_refs", "source_graph_node_refs"):
+            refs = record.get(field, [])
+            if not isinstance(refs, list) or any(not isinstance(ref, str) or not ref.strip() for ref in refs):
+                errors.append(f"open decision row {index}.{field} must be a list of non-empty strings")
+        if not record.get("task_refs") and not record.get("package_refs"):
+            errors.append(f"open decision row {index} has no Package or Task scope")
+    for index, record in enumerate(task_nodes if isinstance(task_nodes, list) else []):
+        if not isinstance(record, dict):
+            continue
+        node_type = record.get("node_type")
+        if not isinstance(node_type, str) or node_type not in {"PACKAGE", "TASK", "SUBTASK"}:
+            errors.append(f"task.nodes[{index}].node_type is invalid: {node_type!r}")
+        if isinstance(node_type, str) and node_type in {"TASK", "SUBTASK"}:
+            parent_id = record.get("parent_id")
+            if not isinstance(parent_id, str) or not parent_id.strip():
+                errors.append(f"task.nodes[{index}].parent_id must be a non-empty string")
+    if errors:
+        raise ValueError("\n".join(errors))
+
     task_label_overrides = {str(x.get("task_ref")): x for x in mapping.get("task_name_evidence_overrides", []) if x.get("task_ref")}
     special_decision_reviews = {str(x.get("open_decision_id")): x for x in mapping.get("required_22_reference_review", []) if x.get("open_decision_id")}
 
     code_by_id = {str(n.get("id")): n for n in code_nodes}
     task_by_id = {str(n.get("id")): n for n in task_nodes}
+    task_node_types = {str(n.get("id")): n.get("node_type") for n in task_nodes}
+    package_ids = {node_id for node_id, node_type in task_node_types.items() if node_type == "PACKAGE"}
     if len(code_by_id) != len(code_nodes):
         errors.append("duplicate code-node ids")
     if len(task_by_id) != len(task_nodes):
         errors.append("duplicate task-graph node ids")
+    for index, item in enumerate(task_nodes):
+        node_id = str(item.get("id"))
+        parent_id = item.get("parent_id")
+        if item.get("node_type") == "TASK" and parent_id not in package_ids:
+            errors.append(f"task.nodes[{index}] has invalid Package parent: {parent_id!r}")
+        elif item.get("node_type") == "SUBTASK" and task_node_types.get(parent_id) != "TASK":
+            errors.append(f"task.nodes[{index}] has invalid Task parent: {parent_id!r}")
     if len({m.get("entity_ref") or m.get("task_ref") or m.get("package_ref") or m.get("subtask_ref") for m in mappings}) < len(mappings):
         # Different mapping schemas use entity-specific refs; exact duplicate check below is canonical.
         pass
@@ -318,6 +428,8 @@ def build() -> dict[str, Any]:
             mapping_index_by_id[mid] = mapping_index
     if set(mapping_by_id) != set(task_by_id):
         errors.append(f"mapping/task node coverage mismatch: mapping_only={len(set(mapping_by_id)-set(task_by_id))}, task_only={len(set(task_by_id)-set(mapping_by_id))}")
+    if errors:
+        raise ValueError("\n".join(errors))
 
     nodes: list[dict[str, Any]] = []
     edges: list[dict[str, Any]] = []

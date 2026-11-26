@@ -43,7 +43,7 @@
   ],
   "github_ci": "Security SAST/SCA job was skipped by change classification on ee23df1. Secret scan passed.",
   "confirmed_security_defects": 0,
-  "remaining": "CI SAST/SCA jobs remain skipped. Ruff reports 547 existing style/type-lint findings. Mypy still reports 34 diagnostics in two modules. No known dependency vulnerabilities were reported by local pip-audit/npm audit.",
+  "remaining": "Previous local dependency and Bandit/XSS evidence remains. Current mypy diagnostic classification and the new commit CI Security result remain unresolved.",
   "type_checker": {
     "name": "mypy",
     "version": "2.4.1",
@@ -56,5 +56,11 @@
       "docs/phase4/task-map-graph/replay_stage4.py"
     ],
     "note": "A first pass found 42 diagnostics, including five in the new multi-file publisher. The publisher diagnostics and three graph-builder diagnostics were corrected. The remaining 34 are in existing parser/data-validation code paths and were not bulk-refactored."
+  },
+  "delta_review": {
+    "mypy": "NOT_RUN_IN_CURRENT_ENVIRONMENT",
+    "reason": "The Python environment does not contain the mypy module or executable. Earlier report retains 34 aggregate diagnostics but no per-diagnostic output, so they cannot be assigned the requested categories from available evidence.",
+    "prior_dependency_scans": "Retained without rerunning. The latest existing CI Security SAST/SCA job was skipped under docs-only classification and must be checked on the new code commit.",
+    "actionable_security_defects_found_in_delta": 0
   }
 }

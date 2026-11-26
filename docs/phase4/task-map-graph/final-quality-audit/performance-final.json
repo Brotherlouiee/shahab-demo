@@ -27,5 +27,15 @@
   },
   "artifact_sha256": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5",
   "code_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "comparison": "Historical three-sample Chrome load median was 8 ms lower than baseline (242 vs 250 ms), but this is a small sample. Current deterministic output hash is unchanged. Synthetic graph structural test reached 10x in 5.114 s and 531,416,779-byte tracemalloc peak. No production-builder/browser 10x latency or approved budget was measured."
+  "comparison": "Historical three-sample Chrome load median was 8 ms lower than baseline (242 vs 250 ms), but this is a small sample. Current deterministic output hash is unchanged. Synthetic graph structural test reached 10x in 5.114 s and 531,416,779-byte tracemalloc peak. No production-builder/browser 10x latency or approved budget was measured.",
+  "delta_microbenchmark": {
+    "path": "Combined Graph Builder in-memory build()",
+    "runs_seconds": [
+      0.721,
+      0.536,
+      0.515
+    ],
+    "median_seconds": 0.536,
+    "comparison": "No comparable pre-delta measurement or approved performance budget was available."
+  }
 }

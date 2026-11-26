@@ -373,11 +373,52 @@
     "artifact_data_mutants": 15,
     "all_target_cases_detected": "30/30",
     "production_code_subset": "15/15 killed",
-    "overall_code_mutation_score": "NOT_CLAIMED; half the requested cases mutate serialized artifacts or independent-oracle inputs rather than production source"
+    "overall_code_mutation_score": "NOT_CLAIMED; half the requested cases mutate serialized artifacts or independent-oracle inputs rather than production source",
+    "supplemental_code_mutants": 5,
+    "production_code_mutants_total": 20,
+    "all_delta_mutants_detected": "5/5"
   },
   "limitations": [
     "MUT-01 through MUT-11 and MUT-26 through MUT-29 mutate isolated serialized fixtures and verify independent contract oracles; they do not remove the corresponding production checks.",
     "All production source mutants were applied in temporary isolated copies/worktrees and restored. No mutation code or fixture was added to the repository.",
-    "The required 30 code-level operator set was not fully executed as source mutations, so GATE-13 remains PARTIAL."
+    "The required 30 code-level operator set was not fully executed as source mutations, so GATE-13 remains PARTIAL.",
+    "The delta tests add five production-source mutants, bringing the recorded source-mutant count to 20. This is not a complete operator-level mutation score for all critical branches."
+  ],
+  "supplemental_delta_mutants": [
+    {
+      "id": "DELTA-MUT-01",
+      "file": "build_task_map_graph.py",
+      "control": "Mapping status enum",
+      "result": "KILLED",
+      "evidence": "Invalid status was accepted when the guard was removed, so the new regression expectation failed."
+    },
+    {
+      "id": "DELTA-MUT-02",
+      "file": "build_task_map_graph.py",
+      "control": "Open Decision mapping remains BLOCKED",
+      "result": "KILLED",
+      "evidence": "MAPPED status was accepted when the guard was removed, so the new regression expectation failed."
+    },
+    {
+      "id": "DELTA-MUT-03",
+      "file": "build_task_map_graph.py",
+      "control": "Task parent endpoint",
+      "result": "KILLED",
+      "evidence": "Dangling Package parent was accepted when the guard was removed, so the new regression expectation failed."
+    },
+    {
+      "id": "DELTA-MUT-04",
+      "file": "build_task_map_graph.py",
+      "control": "Reject duplicate mapping before graph assembly",
+      "result": "KILLED",
+      "evidence": "Removing early error propagation produced an uncaught KeyError instead of the expected controlled ValueError."
+    },
+    {
+      "id": "DELTA-MUT-05",
+      "file": "replay_stage4.py",
+      "control": "Reject HARD_ORDER cycle",
+      "result": "KILLED",
+      "evidence": "Removing the cycle guard made the in-memory cyclic overlay fixture return PASS."
+    }
   ]
 }

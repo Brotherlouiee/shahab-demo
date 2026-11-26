@@ -14,3 +14,9 @@ API شش مورد احتمالی اعلام کرد، ولی پنج شرح را �
 | GF-6، شرح در دسترس نیست | `UNREVIEWED` | API شش مورد را اعلام کرد ولی پنج شرح داد. هیچ شرحی حدس زده نشد. |
 
 سهمیهٔ Review ماه جاری ۱۰ از ۱۰ مصرف شده و در ۱ دسامبر ۲۰۲۶ UTC بازنشانی می‌شود. Review تازه درخواست نشد. هیچ نتیجه‌ای برای HEAD نهایی ادعا نمی‌شود.
+
+
+## Targeted delta review status
+
+One read-only status retrieval for PR #257 returned the completed review on `79574bc806b5a264dca78f5634d0833c1c7e570e`. The gate is PASS with zero blockers and one advisory. Investigation reports zero confirmed bugs and six possible issues marked unconfirmed. The response exposed five descriptions. The sixth remains unavailable and is recorded as `UNREVIEWED — EXTERNAL_BLOCKER`. The quota resets at `2026-12-01T00:00:00Z`. No new review was requested.
+The delta changed Graph Builder validation and publication. It did not change the Viewer, so the five previously adjudicated Viewer investigation leads were not re-opened.
