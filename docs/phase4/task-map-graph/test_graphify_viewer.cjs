@@ -1,10 +1,13 @@
 /* Run with the repository's Playwright or set PLAYWRIGHT_MODULE to playwright-core. */
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 const { resolve } = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || '@playwright/test');
 
-async function run(deviceScaleFactor) {
+async function run(deviceScaleFactor, fixturePath, hostileNodes) {
   const browser = await chromium.launch({ executablePath: process.env.CHROME_BIN, headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 1500, height: 950 }, deviceScaleFactor });
@@ -16,6 +19,7 @@ async function run(deviceScaleFactor) {
     });
     await page.addInitScript(() => {
       window.unhandledRejections = [];
+      window.xssExecuted = false;
       window.addEventListener('unhandledrejection', event => window.unhandledRejections.push(String(event.reason)));
       const prototype = CanvasRenderingContext2D.prototype;
       const metrics = window.painted = { frames: 0, nodes: [], edges: [] };
@@ -52,8 +56,7 @@ async function run(deviceScaleFactor) {
       });
       record('stroke', () => { metrics.edges.push(...segments); });
     });
-    const path = process.argv[2] || resolve(__dirname, 'task-map-graph.html');
-    await page.goto(pathToFileURL(resolve(path)).href);
+    await page.goto(pathToFileURL(resolve(fixturePath)).href);
     await page.evaluate(() => {
       const ready = window.taskMapGraphReady;
       if (typeof ready?.then !== 'function') throw new Error('Viewer readiness promise is missing');
@@ -148,6 +151,21 @@ async function run(deviceScaleFactor) {
     await page.waitForTimeout(1500);
     assert.equal(await frames(), initial, 'Canvas kept repainting during extended idle');
     assert.deepEqual(await counts(), fullGraphCounts);
+    await assertCounts();
+    for (const hostile of hostileNodes) {
+      await page.locator('#search').fill(hostile.id);
+      await page.locator('#search').press('Enter');
+      await settle();
+      assert.equal(await page.locator('#details h3').textContent(), hostile.label);
+      const sourceEvidence = JSON.parse(await page.locator('#details pre').textContent());
+      assert.equal(sourceEvidence.source_data.payload, hostile.source_data.payload);
+      assert.equal(await page.locator('#details img, #details svg, #details iframe, #details script').count(), 0);
+      assert.equal(await page.locator('#details a[href^="javascript:"]').count(), 0);
+      assert.equal(await page.evaluate(() => window.xssExecuted), false);
+      assert.equal(await page.locator('script').count(), 2);
+    }
+    await page.locator('#search').fill('');
+    await settle();
     await assertCounts();
     await changed('relation filter after idle', () => page.selectOption('#relation', 'handoff'));
     await assertCounts({ relation: 'handoff' });
@@ -363,4 +381,47 @@ async function run(deviceScaleFactor) {
   }
 }
 
-run(1).then(() => run(2)).catch(error => { console.error(error); process.exitCode = 1; });
+function makeSecurityFixture(sourcePath) {
+  const html = fs.readFileSync(sourcePath, 'utf8');
+  const match = html.match(/(<script id="graph-data" type="application\/json">)([\s\S]*?)(<\/script>)/);
+  assert.ok(match, 'Standalone graph JSON script was not found');
+  const graph = JSON.parse(match[2]);
+  const payloads = [
+    '<img src=x onerror="window.xssExecuted=true">',
+    '</script><script>window.xssExecuted=true</script>',
+    '"><svg onload="window.xssExecuted=true">',
+    "'><iframe src=javascript:window.xssExecuted=true>",
+    'javascript:alert(1)',
+    'quote " apostrophe \' ampersand & angle < >',
+    'فارسی العربية 日本語 雪 ☃️',
+  ];
+  const hostileNodes = payloads.map((payload, index) => ({
+    id: `XSS:<&"'雪:${index}`,
+    canonical_id: `XSS:<&"'雪:${index}`,
+    source_id: `XSS:<&"'雪:${index}`,
+    node_type: 'CONTRACT_REFERENCE',
+    origin_graph: 'relation_overlay_reference',
+    label: payload,
+    domain: null,
+    package_id: null,
+    community_id: null,
+    mapping_status: null,
+    source_data: { payload, source_text: payload, url: 'javascript:alert(1)' },
+  }));
+  graph.nodes.push(...hostileNodes);
+  graph.counts.node_total = graph.nodes.length;
+  graph.counts.nodes.CONTRACT_REFERENCE = (graph.counts.nodes.CONTRACT_REFERENCE || 0) + hostileNodes.length;
+  const serialized = JSON.stringify(graph).replace(/<\//g, '<\\/');
+  const fixture = html.replace(match[0], `${match[1]}${serialized}${match[3]}`);
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'shahab-xss-'));
+  const fixturePath = path.join(directory, 'viewer.html');
+  fs.writeFileSync(fixturePath, fixture, 'utf8');
+  return { directory, fixturePath, hostileNodes };
+}
+
+const sourcePath = process.argv[2] || resolve(__dirname, 'task-map-graph.html');
+const securityFixture = makeSecurityFixture(sourcePath);
+run(1, securityFixture.fixturePath, securityFixture.hostileNodes)
+  .then(() => run(2, securityFixture.fixturePath, securityFixture.hostileNodes))
+  .catch(error => { console.error(error); process.exitCode = 1; })
+  .finally(() => fs.rmSync(securityFixture.directory, { recursive: true, force: true }));

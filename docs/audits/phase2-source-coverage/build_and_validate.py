@@ -16,7 +16,10 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from collections import Counter, defaultdict
+from os import fsync as file_fsync
+from os import replace as atomic_replace
 from pathlib import Path
 from typing import Any
 
@@ -78,11 +81,32 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, Any]]) -> None:
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n", extrasaction="ignore")
+    writer.writeheader()
+    writer.writerows(rows)
+    atomic_write_text(path, buffer.getvalue())
+
+
+def atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n", extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(rows)
+    temporary = None
+    try:
+        mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="", dir=path.parent,
+            prefix=f".{path.name}.", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            temporary.chmod(mode)
+            handle.write(content)
+            handle.flush()
+            file_fsync(handle.fileno())
+        atomic_replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def apply_review_dispositions(candidates: list[dict[str, Any]]) -> None:
@@ -1115,7 +1139,7 @@ def update_manifest(structural: Counter[str], candidate_counts: Counter[str], so
         "The 1,110 baseline paragraph candidates are preserved; 26 previously omitted prose ranges are appended with new IDs.",
     ]
     original["status"]="SEMANTIC_REVIEW_PENDING" if pending else "SEMANTIC_REVIEW_COMPLETE"
-    path.write_text(json.dumps(original,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    atomic_write_text(path, json.dumps(original, ensure_ascii=False, indent=2) + "\n")
 
 
 def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], candidate_counts: Counter[str], source_hashes: dict[str, dict[str, Any]], graph_sha: str, structural_errors: list[str], validations: dict[str, dict[str, Any]]) -> None:
@@ -1220,7 +1244,10 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "Graph node overlap is a retrieval reference, not semantic entailment.",
         ],
     }
-    (COVERAGE / "validation-report.json").write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(
+        COVERAGE / "validation-report.json",
+        json.dumps(output, ensure_ascii=False, indent=2) + "\n",
+    )
     report = [
         "# گزارش اعتبارسنجی پوشش منابع فاز دوم",
         "",
@@ -1317,7 +1344,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"وضعیت بازبینی Candidateها: {reviewed_count}/{len(candidates)} بررسی‌شده؛ Pending={pending_count}. تصمیم‌های باز و شکاف‌های تأییدشده جداگانه در Ledger ثبت شده‌اند؛ Pending بودن به‌تنهایی شکاف قطعی محسوب نمی‌شود.",
         "",
     ])
-    (COVERAGE / "semantic-validation-report.md").write_text("\n".join(report), encoding="utf-8")
+    atomic_write_text(COVERAGE / "semantic-validation-report.md", "\n".join(report))
 
 
 if __name__ == "__main__":

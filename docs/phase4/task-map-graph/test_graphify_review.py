@@ -13,10 +13,116 @@ from pathlib import Path
 from unittest.mock import patch
 
 import replay_stage4 as replay
+import build_task_map_graph as combined_graph
 
 sys.path.insert(0, str(replay.ROOT / "docs/audits/phase2-source-coverage"))
 import build_evidence_join_index as join
 import build_and_validate as coverage_builder
+
+
+class CombinedGraphPublicationTests(unittest.TestCase):
+    def output_pair(self, root):
+        graph_path = root / "graph.json"
+        html_path = root / "graph.html"
+        graph_path.write_bytes(b"previous graph")
+        html_path.write_bytes(b"previous viewer")
+        return graph_path, html_path
+
+    def assert_no_temporary_files(self, root, graph_path, html_path):
+        self.assertEqual(set(root.iterdir()), {graph_path, html_path})
+
+    def test_html_replace_failure_restores_previous_json_and_html(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            original_replace = combined_graph.atomic_replace
+
+            def fail_viewer_replace(source, target):
+                if Path(target) == html_path:
+                    raise OSError("injected viewer publication failure")
+                return original_replace(source, target)
+
+            with patch.object(combined_graph, "atomic_replace", side_effect=fail_viewer_replace):
+                with self.assertRaisesRegex(OSError, "injected viewer publication failure"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"),
+                        (html_path, b"new viewer"),
+                    ])
+
+            self.assertEqual(graph_path.read_bytes(), b"previous graph")
+            self.assertEqual(html_path.read_bytes(), b"previous viewer")
+            self.assert_no_temporary_files(root, graph_path, html_path)
+
+    def test_stage_fsync_failure_preserves_previous_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            with patch.object(combined_graph, "file_fsync", side_effect=OSError("injected fsync failure")):
+                with self.assertRaisesRegex(OSError, "injected fsync failure"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"),
+                        (html_path, b"new viewer"),
+                    ])
+            self.assertEqual(graph_path.read_bytes(), b"previous graph")
+            self.assertEqual(html_path.read_bytes(), b"previous viewer")
+            self.assert_no_temporary_files(root, graph_path, html_path)
+
+    def test_directory_fsync_failure_restores_previous_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            with patch.object(combined_graph, "directory_fsync", side_effect=OSError("injected directory fsync failure")):
+                with self.assertRaisesRegex(OSError, "injected directory fsync failure"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"),
+                        (html_path, b"new viewer"),
+                    ])
+            self.assertEqual(graph_path.read_bytes(), b"previous graph")
+            self.assertEqual(html_path.read_bytes(), b"previous viewer")
+            self.assert_no_temporary_files(root, graph_path, html_path)
+
+    def test_replace_failure_removes_new_file_when_no_previous_output_existed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path = root / "graph.json"
+            html_path = root / "graph.html"
+            original_replace = combined_graph.atomic_replace
+
+            def fail_viewer_replace(source, target):
+                if Path(target) == html_path:
+                    raise OSError("injected viewer publication failure")
+                return original_replace(source, target)
+
+            with patch.object(combined_graph, "atomic_replace", side_effect=fail_viewer_replace):
+                with self.assertRaisesRegex(OSError, "injected viewer publication failure"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"),
+                        (html_path, b"new viewer"),
+                    ])
+            self.assertFalse(graph_path.exists())
+            self.assertFalse(html_path.exists())
+            self.assertEqual(list(root.iterdir()), [])
+
+    def test_interrupt_during_second_replace_restores_previous_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            graph_path, html_path = self.output_pair(root)
+            original_replace = combined_graph.atomic_replace
+
+            def interrupt_viewer_replace(source, target):
+                if Path(target) == html_path:
+                    raise KeyboardInterrupt("injected interruption")
+                return original_replace(source, target)
+
+            with patch.object(combined_graph, "atomic_replace", side_effect=interrupt_viewer_replace):
+                with self.assertRaisesRegex(KeyboardInterrupt, "injected interruption"):
+                    combined_graph.publish_outputs([
+                        (graph_path, b"new graph"),
+                        (html_path, b"new viewer"),
+                    ])
+            self.assertEqual(graph_path.read_bytes(), b"previous graph")
+            self.assertEqual(html_path.read_bytes(), b"previous viewer")
+            self.assert_no_temporary_files(root, graph_path, html_path)
 
 
 class CoverageBuilderTests(unittest.TestCase):
@@ -28,6 +134,28 @@ class CoverageBuilderTests(unittest.TestCase):
         self.assertTrue(coverage_builder.has_validation_failures([], validations))
         self.assertTrue(coverage_builder.has_validation_failures(["structural error"], {"first": {"result": "PASS"}}))
         self.assertFalse(coverage_builder.has_validation_failures([], {"first": {"result": "PASS"}}))
+
+    def test_failed_atomic_csv_publication_preserves_previous_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "generated.csv"
+            output.write_bytes(b"previous valid csv\n")
+            with patch.object(coverage_builder, "atomic_replace", side_effect=OSError("injected replace failure")):
+                with self.assertRaisesRegex(OSError, "injected replace failure"):
+                    coverage_builder.write_csv(output, ["id", "value"], [{"id": "A", "value": "B"}])
+            self.assertEqual(output.read_bytes(), b"previous valid csv\n")
+            self.assertEqual(set(root.iterdir()), {output})
+
+    def test_atomic_csv_stage_write_failure_preserves_previous_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "generated.csv"
+            output.write_bytes(b"previous valid csv\n")
+            with patch.object(coverage_builder, "file_fsync", side_effect=OSError("injected fsync failure")):
+                with self.assertRaisesRegex(OSError, "injected fsync failure"):
+                    coverage_builder.write_csv(output, ["id", "value"], [{"id": "A", "value": "B"}])
+            self.assertEqual(output.read_bytes(), b"previous valid csv\n")
+            self.assertEqual(set(root.iterdir()), {output})
 
 
 class EvidenceJoinTests(unittest.TestCase):
@@ -68,6 +196,16 @@ class EvidenceJoinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, error):
             join.main()
         self.assertEqual(self.output.read_text(encoding="utf-8"), "previous valid index")
+
+    def test_index_stage_fsync_failure_preserves_previous_output(self):
+        with patch.object(join, "fsync", side_effect=OSError("injected fsync failure")):
+            with self.assertRaisesRegex(OSError, "injected fsync failure"):
+                join.publish_index(self.output, {"example": "new index"})
+        self.assertEqual(self.output.read_text(encoding="utf-8"), "previous valid index")
+        self.assertEqual(
+            [path for path in self.coverage.iterdir() if path.name.startswith(".evidence-join-index.json.")],
+            [],
+        )
 
     def test_missing_required_headers_fail_before_publication(self):
         for name, columns in join.REQUIRED_COLUMNS.items():
@@ -254,6 +392,24 @@ class ReplayTests(unittest.TestCase):
                   patch.object(replay, "replace", side_effect=OSError("injected replace failure")),
                   contextlib.redirect_stdout(output),
                   self.assertRaisesRegex(OSError, "injected replace failure")):
+                replay.main()
+            self.assertEqual(target.read_bytes(), original)
+            self.assertEqual(list(target.parent.iterdir()), [target])
+            self.assertNotIn("PASS", output.getvalue())
+
+    def test_mapping_stage_fsync_failure_preserves_previous_output_and_prints_no_pass(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "mapping.json"
+            original = (replay.ROOT / replay.FILES["mapping"]).read_bytes()
+            target.write_bytes(original)
+            output = io.StringIO()
+            with (
+                patch.dict(replay.FILES, mapping=target),
+                patch.object(sys, "argv", ["replay_stage4.py", "--write-code-search"]),
+                patch.object(replay, "file_fsync", side_effect=OSError("injected fsync failure")),
+                contextlib.redirect_stdout(output),
+                self.assertRaisesRegex(OSError, "injected fsync failure"),
+            ):
                 replay.main()
             self.assertEqual(target.read_bytes(), original)
             self.assertEqual(list(target.parent.iterdir()), [target])

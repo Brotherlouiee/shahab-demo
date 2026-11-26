@@ -1,17 +1,57 @@
 {
   "status": "PARTIAL",
   "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "injected_publication_faults": 2,
+  "injected_publication_faults": 10,
   "results": [
     {
-      "target": "Evidence Join Index atomic replace",
-      "injection": "os.replace raises",
-      "result": "old output bytes preserved, temp cleaned, failure returned"
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "HTML replacement fails after JSON replacement",
+      "result": "Both previous files restored byte-identically; temporary files cleaned."
     },
     {
-      "target": "Stage 4 Mapping atomic replace",
-      "injection": "os.replace raises",
-      "result": "old output bytes preserved, temp cleaned, no PASS emitted"
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "staging file fsync raises",
+      "result": "Neither final output changed; temporary files cleaned."
+    },
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "directory fsync raises after replacement",
+      "result": "Both previous files restored byte-identically."
+    },
+    {
+      "target": "Combined graph first-time publication",
+      "injection": "second replacement fails without previous first output",
+      "result": "New first output removed."
+    },
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "KeyboardInterrupt during second replacement",
+      "result": "Both prior outputs restored."
+    },
+    {
+      "target": "Source Coverage CSV",
+      "injection": "atomic replace raises",
+      "result": "Old output bytes preserved and temporary file removed."
+    },
+    {
+      "target": "Source Coverage CSV",
+      "injection": "file fsync raises",
+      "result": "Old output bytes preserved and temporary file removed."
+    },
+    {
+      "target": "Evidence Join Index",
+      "injection": "staging file fsync raises",
+      "result": "Old output bytes preserved; temporary file removed."
+    },
+    {
+      "target": "Stage 4 Mapping",
+      "injection": "atomic replace raises",
+      "result": "Old mapping preserved; no PASS emitted."
+    },
+    {
+      "target": "Stage 4 Mapping",
+      "injection": "staging file fsync raises",
+      "result": "Old mapping preserved; no PASS emitted."
     }
   ],
   "additional_failure_inputs": [
@@ -25,6 +65,7 @@
     "machine validation returns false",
     "invalid mapping before publication"
   ],
-  "results_count": 11,
-  "remaining": "Permission, disk-full, fsync, interrupted-process and concurrent-writer fault matrix not run."
+  "results_count": 19,
+  "remaining": "Abrupt process/power loss, disk-full, permission failures, concurrent writers/readers and Source Coverage multi-file transaction are not proven.",
+  "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
 }

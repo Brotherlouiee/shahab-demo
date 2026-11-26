@@ -9,9 +9,9 @@
   "tests": [
     {
       "name": "focused Python regression suite",
-      "command": "PYTHONPATH=docs/phase4/task-map-graph python3 -m unittest discover -s docs/phase4/task-map-graph -p test_graphify_review.py -v",
+      "command": "python -m unittest -v test_graphify_review.py (from docs/phase4/task-map-graph)",
       "result": "PASS",
-      "count": 19
+      "count": 28
     },
     {
       "name": "source coverage official checks",
@@ -23,7 +23,7 @@
       "name": "stage 4 replay",
       "command": "python3 docs/phase4/task-map-graph/replay_stage4.py --check-only",
       "result": "PASS",
-      "count": "657 records, 347 files, 696 mappings, 134 OPEN/BLOCKED"
+      "count": "657 records, 347 files, 696 mappings, 134 OPEN/BLOCKED; projection SHA 44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5"
     },
     {
       "name": "combined graph build",
@@ -108,17 +108,44 @@
       "command": "1x, 2x, 5x, 10x synthetic graph serialization and endpoint validation",
       "result": "PARTIAL",
       "count": "10x = 44,900 nodes, 114,350 edges, 5.114s, 531,416,779-byte tracemalloc peak; not browser/builder performance"
+    },
+    {
+      "name": "combined graph publication fault tests",
+      "result": "PASS",
+      "count": "Five replace/fsync/interruption paths restore prior pair or remove partial first-time output."
+    },
+    {
+      "name": "Source Coverage file-publication fault tests",
+      "result": "PASS",
+      "count": "Injected replace and fsync failures preserve old CSV bytes."
+    },
+    {
+      "name": "Python and JavaScript branch coverage",
+      "result": "PARTIAL",
+      "count": "Python 73.17%; JavaScript 85.9% at DPR1/2; critical 100% not established."
+    },
+    {
+      "name": "dependency audit",
+      "command": "pip-audit .; npm audit --omit=dev",
+      "result": "PASS",
+      "count": "No known vulnerabilities found for resolved Python dependencies or locked npm production dependencies. Python dependencies range-resolved because pyproject.toml has no lockfile."
+    },
+    {
+      "name": "hostile-data browser fixture",
+      "result": "PASS",
+      "count": "Seven hostile label/source payloads remain inert at DPR1/2, with no injected active element or executed script."
     }
   ],
   "limitations": [
     "Complete manual per-line review and JavaScript branch coverage are not established.",
     "The 30-case mutation matrix is mixed: 15 production-source mutants and 15 artifact/data mutations. Full 30-code-only score is not claimed.",
     "Property and fuzz testing cover bounded domains, not all specified parsers, browser inputs, snapshots and decoders.",
-    "Disk-full, fsync, interruption, concurrent writes and multi-artifact atomic publication were not fully fault-injected.",
     "Security SAST/SCA and runtime/browser/database/container jobs were skipped by GitHub Actions change classification. Local scans ran, but the CI controls remain incomplete.",
     "Windows, Firefox, Edge and macOS were not tested.",
     "Synthetic 10x structural stress does not establish production-builder or browser-rendering scaling. No approved performance budget exists.",
-    "Latest Graphify review is on an earlier commit. Five of six investigation descriptions were available; the sixth remains unknown, and quota is exhausted through 2026-12-01 UTC."
+    "Latest Graphify review is on an earlier commit. Five of six investigation descriptions were available; the sixth remains unknown, and quota is exhausted through 2026-12-01 UTC.",
+    "Combined graph pair and per-file Source Coverage publishers were fault-injected. Process/power loss, concurrency and Source Coverage set-level atomicity are not established.",
+    "Python and JavaScript branch coverage are below 100%; critical-branch target remains unproven."
   ],
   "immutable_graph_sha256": {
     "semantic_reference": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
@@ -148,7 +175,7 @@
       "id": "TEST-03",
       "method": "Unit tests",
       "status": "PASS",
-      "evidence": "19 focused Python regression tests passed."
+      "evidence": "28/28 focused Python regression tests passed."
     },
     {
       "id": "TEST-04",
@@ -184,7 +211,7 @@
       "id": "TEST-09",
       "method": "Fault injection",
       "status": "PARTIAL",
-      "evidence": "Atomic replace failures preserved previous Mapping and Evidence Index outputs. Disk-full, fsync, process-interruption and concurrent-write scenarios remain untested."
+      "evidence": "Ten injected publication faults across graph, Source Coverage, Evidence Join and Stage 4 Mapping. Crash/power-loss, concurrency and set-level Source Coverage atomicity remain untested."
     },
     {
       "id": "TEST-10",
@@ -239,5 +266,6 @@
   "audit_baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
   "pr_base_commit": "3df5beb8fbec677515ad9b4cd0ea30b7fd055dce",
   "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd"
+  "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
+  "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
 }

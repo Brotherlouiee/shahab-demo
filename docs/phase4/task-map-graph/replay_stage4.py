@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse, hashlib, json, os, re, tempfile
 from collections import Counter, defaultdict, deque
+from os import fsync as file_fsync
 from os import replace
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
@@ -83,7 +84,7 @@ def writej(path,obj):
    temporary.chmod(target.stat().st_mode & 0o777)
    handle.write(payload)
    handle.flush()
-   os.fsync(handle.fileno())
+   file_fsync(handle.fileno())
   replace(temporary,target)
  finally:
   if temporary is not None:

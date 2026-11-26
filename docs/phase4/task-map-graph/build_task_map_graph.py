@@ -7,10 +7,16 @@ import base64
 import gzip
 import hashlib
 import json
+import os
 import subprocess
 import sys
+import tempfile
 from collections import Counter, defaultdict
+from os import fsync as file_fsync
+from os import replace as atomic_replace
+from os import fsync as directory_fsync
 from pathlib import Path
+from stat import S_IMODE
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -58,6 +64,77 @@ def source_node_id(kind: str, node_id: str) -> str:
 
 def source_ref(artifact: str, collection: str, index: int) -> dict[str, Any]:
     return {"artifact": artifact, "collection": collection, "index": index}
+
+
+def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
+    """Stage all outputs before replacement and roll back ordinary replace failures."""
+    staged: list[dict[str, Any]] = []
+    published: list[Path] = []
+    try:
+        for target, payload in outputs:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if target.exists():
+                previous_bytes = target.read_bytes()
+                mode = S_IMODE(target.stat().st_mode)
+            else:
+                previous_bytes = None
+                mode = 0o644
+            with tempfile.NamedTemporaryFile(
+                dir=target.parent, prefix=f".{target.name}.", delete=False
+            ) as handle:
+                temporary = Path(handle.name)
+                entry = {"temporary": temporary, "target": target, "backup": None}
+                staged.append(entry)
+                os.chmod(temporary, mode)
+                handle.write(payload)
+                handle.flush()
+                file_fsync(handle.fileno())
+            if previous_bytes is not None:
+                with tempfile.NamedTemporaryFile(
+                    dir=target.parent, prefix=f".{target.name}.backup.", delete=False
+                ) as handle:
+                    backup = Path(handle.name)
+                    entry["backup"] = backup
+                    os.chmod(backup, mode)
+                    handle.write(previous_bytes)
+                    handle.flush()
+                    file_fsync(handle.fileno())
+
+        for entry in staged:
+            atomic_replace(entry["temporary"], entry["target"])
+            target = entry["target"]
+            published.append(target)
+
+        for parent in {entry["target"].parent for entry in staged}:
+            if hasattr(os, "O_DIRECTORY"):
+                descriptor = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+                try:
+                    directory_fsync(descriptor)
+                finally:
+                    os.close(descriptor)
+    except BaseException as error:
+        rollback_errors = []
+        for target in reversed(published):
+            entry = next(item for item in staged if item["target"] == target)
+            backup = entry["backup"]
+            try:
+                if backup is None:
+                    target.unlink(missing_ok=True)
+                else:
+                    atomic_replace(backup, target)
+                    entry["backup"] = None
+            except OSError as rollback_error:
+                rollback_errors.append(f"{target}: {rollback_error}")
+        if rollback_errors:
+            raise OSError(
+                f"publication failed: {error}; rollback also failed: {'; '.join(rollback_errors)}"
+            ) from error
+        raise
+    finally:
+        for entry in staged:
+            entry["temporary"].unlink(missing_ok=True)
+            if entry["backup"] is not None:
+                entry["backup"].unlink(missing_ok=True)
 
 
 def html_document(graph_json: str) -> str:
@@ -624,14 +701,13 @@ def main() -> int:
     graph = build()
     encoded = json.dumps(graph, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
     if not args.check_only:
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(encoded, encoding="utf-8")
+        publications = [(output, encoded.encode("utf-8"))]
         if not args.no_html:
             html_output = Path(args.html_output)
             if not html_output.is_absolute():
                 html_output = ROOT / html_output
-            html_output.parent.mkdir(parents=True, exist_ok=True)
-            html_output.write_text(html_document(encoded), encoding="utf-8")
+            publications.append((html_output, html_document(encoded).encode("utf-8")))
+        publish_outputs(publications)
     print(json.dumps({
         "result": "PASS",
         "written": None if args.check_only else str(output.relative_to(ROOT) if output.is_relative_to(ROOT) else output),

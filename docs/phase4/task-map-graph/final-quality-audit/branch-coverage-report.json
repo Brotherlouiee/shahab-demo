@@ -1,19 +1,876 @@
 {
   "status": "PARTIAL",
-  "tool": "coverage.py 7.17.5",
-  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "python": [
+  "tools": {
+    "python": "coverage.py 7.17.5 --branch",
+    "javascript": "Istanbul instrumented browser code; Chrome for Testing 142.0.7444.175 at DPR 1 and 2"
+  },
+  "python_files": [
     {
       "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
-      "statements": 923,
-      "statements_covered": 61,
-      "statements_uncovered": 862,
-      "statement_coverage_percent": 6.61,
-      "branch_arcs": 352,
-      "branch_arcs_covered": 6,
-      "branch_arcs_uncovered": 346,
-      "branch_coverage_percent": 1.7,
-      "measurement": "coverage.py 7.17.5; official --check-only or 19 focused unit tests"
+      "statements": 941,
+      "statements_covered": 606,
+      "statements_uncovered": 335,
+      "statement_coverage_percent": 64.4,
+      "branch_arcs": 354,
+      "branch_arcs_covered": 225,
+      "branch_arcs_uncovered": 129,
+      "branch_coverage_percent": 63.56,
+      "uncovered_lines": [
+        75,
+        106,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        232,
+        274,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        290,
+        504,
+        505,
+        506,
+        558,
+        562,
+        564,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        594,
+        595,
+        596,
+        597,
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        609,
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        621,
+        622,
+        623,
+        624,
+        625,
+        626,
+        627,
+        628,
+        629,
+        631,
+        632,
+        633,
+        634,
+        635,
+        636,
+        637,
+        638,
+        639,
+        640,
+        641,
+        642,
+        643,
+        644,
+        645,
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        653,
+        654,
+        655,
+        661,
+        662,
+        663,
+        664,
+        665,
+        666,
+        667,
+        668,
+        669,
+        670,
+        671,
+        672,
+        673,
+        674,
+        675,
+        676,
+        677,
+        678,
+        679,
+        688,
+        689,
+        690,
+        691,
+        701,
+        702,
+        703,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720,
+        721,
+        722,
+        723,
+        724,
+        725,
+        726,
+        727,
+        728,
+        729,
+        730,
+        731,
+        732,
+        733,
+        751,
+        752,
+        753,
+        754,
+        755,
+        756,
+        757,
+        758,
+        759,
+        769,
+        770,
+        771,
+        772,
+        780,
+        818,
+        858,
+        875,
+        880,
+        887,
+        889,
+        894,
+        897,
+        899,
+        909,
+        910,
+        911,
+        927,
+        931,
+        937,
+        941,
+        942,
+        945,
+        967,
+        968,
+        973,
+        975,
+        980,
+        982,
+        988,
+        994,
+        995,
+        998,
+        1000,
+        1002,
+        1007,
+        1014,
+        1019,
+        1023,
+        1025,
+        1028,
+        1046,
+        1047,
+        1048,
+        1062,
+        1070,
+        1075,
+        1076,
+        1080,
+        1082,
+        1097,
+        1098,
+        1105,
+        1106,
+        1107,
+        1108,
+        1109,
+        1110,
+        1111,
+        1112,
+        1113,
+        1114,
+        1115,
+        1116,
+        1117,
+        1118,
+        1119,
+        1120,
+        1121,
+        1122,
+        1123,
+        1124,
+        1125,
+        1126,
+        1127,
+        1128,
+        1129,
+        1130,
+        1131,
+        1132,
+        1133,
+        1134,
+        1141,
+        1142,
+        1146,
+        1147,
+        1148,
+        1149,
+        1150,
+        1151,
+        1152,
+        1153,
+        1154,
+        1155,
+        1156,
+        1157,
+        1158,
+        1159,
+        1160,
+        1161,
+        1162,
+        1163,
+        1164,
+        1165,
+        1166,
+        1167,
+        1168,
+        1169,
+        1170,
+        1171,
+        1172,
+        1173,
+        1174,
+        1175,
+        1176,
+        1177,
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1183,
+        1184,
+        1193,
+        1247,
+        1251,
+        1336,
+        1337,
+        1338,
+        1347,
+        1354,
+        1355
+      ],
+      "uncovered_branches": [
+        [
+          74,
+          75
+        ],
+        [
+          108,
+          -91
+        ],
+        [
+          115,
+          116
+        ],
+        [
+          115,
+          117
+        ],
+        [
+          119,
+          120
+        ],
+        [
+          119,
+          121
+        ],
+        [
+          123,
+          -112
+        ],
+        [
+          123,
+          124
+        ],
+        [
+          125,
+          126
+        ],
+        [
+          125,
+          127
+        ],
+        [
+          128,
+          129
+        ],
+        [
+          128,
+          130
+        ],
+        [
+          130,
+          131
+        ],
+        [
+          130,
+          132
+        ],
+        [
+          133,
+          134
+        ],
+        [
+          133,
+          135
+        ],
+        [
+          141,
+          123
+        ],
+        [
+          141,
+          142
+        ],
+        [
+          148,
+          149
+        ],
+        [
+          148,
+          150
+        ],
+        [
+          152,
+          153
+        ],
+        [
+          152,
+          154
+        ],
+        [
+          156,
+          -145
+        ],
+        [
+          156,
+          157
+        ],
+        [
+          158,
+          159
+        ],
+        [
+          158,
+          160
+        ],
+        [
+          164,
+          165
+        ],
+        [
+          164,
+          166
+        ],
+        [
+          198,
+          202
+        ],
+        [
+          231,
+          232
+        ],
+        [
+          281,
+          282
+        ],
+        [
+          281,
+          283
+        ],
+        [
+          289,
+          290
+        ],
+        [
+          319,
+          321
+        ],
+        [
+          321,
+          323
+        ],
+        [
+          347,
+          345
+        ],
+        [
+          434,
+          436
+        ],
+        [
+          499,
+          504
+        ],
+        [
+          557,
+          558
+        ],
+        [
+          561,
+          562
+        ],
+        [
+          563,
+          564
+        ],
+        [
+          567,
+          594
+        ],
+        [
+          575,
+          576
+        ],
+        [
+          575,
+          577
+        ],
+        [
+          581,
+          582
+        ],
+        [
+          581,
+          583
+        ],
+        [
+          614,
+          615
+        ],
+        [
+          614,
+          618
+        ],
+        [
+          616,
+          614
+        ],
+        [
+          616,
+          617
+        ],
+        [
+          620,
+          621
+        ],
+        [
+          620,
+          625
+        ],
+        [
+          622,
+          620
+        ],
+        [
+          622,
+          623
+        ],
+        [
+          634,
+          635
+        ],
+        [
+          634,
+          647
+        ],
+        [
+          636,
+          637
+        ],
+        [
+          636,
+          640
+        ],
+        [
+          638,
+          636
+        ],
+        [
+          638,
+          639
+        ],
+        [
+          642,
+          634
+        ],
+        [
+          642,
+          643
+        ],
+        [
+          644,
+          642
+        ],
+        [
+          644,
+          645
+        ],
+        [
+          649,
+          650
+        ],
+        [
+          649,
+          701
+        ],
+        [
+          652,
+          653
+        ],
+        [
+          652,
+          654
+        ],
+        [
+          673,
+          674
+        ],
+        [
+          673,
+          679
+        ],
+        [
+          689,
+          690
+        ],
+        [
+          689,
+          691
+        ],
+        [
+          702,
+          703
+        ],
+        [
+          702,
+          751
+        ],
+        [
+          704,
+          705
+        ],
+        [
+          704,
+          711
+        ],
+        [
+          753,
+          754
+        ],
+        [
+          753,
+          769
+        ],
+        [
+          755,
+          756
+        ],
+        [
+          755,
+          757
+        ],
+        [
+          779,
+          780
+        ],
+        [
+          817,
+          818
+        ],
+        [
+          857,
+          858
+        ],
+        [
+          874,
+          875
+        ],
+        [
+          879,
+          880
+        ],
+        [
+          883,
+          890
+        ],
+        [
+          886,
+          887
+        ],
+        [
+          888,
+          889
+        ],
+        [
+          890,
+          899
+        ],
+        [
+          893,
+          894
+        ],
+        [
+          896,
+          897
+        ],
+        [
+          906,
+          909
+        ],
+        [
+          910,
+          905
+        ],
+        [
+          910,
+          911
+        ],
+        [
+          926,
+          927
+        ],
+        [
+          930,
+          931
+        ],
+        [
+          936,
+          937
+        ],
+        [
+          940,
+          941
+        ],
+        [
+          944,
+          945
+        ],
+        [
+          966,
+          967
+        ],
+        [
+          972,
+          973
+        ],
+        [
+          974,
+          975
+        ],
+        [
+          979,
+          980
+        ],
+        [
+          981,
+          982
+        ],
+        [
+          987,
+          988
+        ],
+        [
+          993,
+          994
+        ],
+        [
+          997,
+          998
+        ],
+        [
+          999,
+          1000
+        ],
+        [
+          1001,
+          1002
+        ],
+        [
+          1006,
+          1007
+        ],
+        [
+          1011,
+          1009
+        ],
+        [
+          1013,
+          1014
+        ],
+        [
+          1018,
+          1019
+        ],
+        [
+          1022,
+          1023
+        ],
+        [
+          1024,
+          1025
+        ],
+        [
+          1027,
+          1028
+        ],
+        [
+          1044,
+          1047
+        ],
+        [
+          1045,
+          1046
+        ],
+        [
+          1047,
+          1042
+        ],
+        [
+          1047,
+          1048
+        ],
+        [
+          1061,
+          1062
+        ],
+        [
+          1069,
+          1070
+        ],
+        [
+          1074,
+          1075
+        ],
+        [
+          1079,
+          1080
+        ],
+        [
+          1081,
+          1082
+        ],
+        [
+          1177,
+          1178
+        ],
+        [
+          1177,
+          1183
+        ],
+        [
+          1336,
+          1337
+        ],
+        [
+          1336,
+          1338
+        ]
+      ],
+      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
     },
     {
       "file": "docs/audits/phase2-source-coverage/build_evidence_join_index.py",
@@ -25,49 +882,367 @@
       "branch_arcs_covered": 34,
       "branch_arcs_uncovered": 4,
       "branch_coverage_percent": 89.47,
-      "measurement": "coverage.py 7.17.5; official --check-only or 19 focused unit tests"
+      "uncovered_lines": [
+        53,
+        99,
+        224,
+        233,
+        237,
+        238,
+        239,
+        240
+      ],
+      "uncovered_branches": [
+        [
+          52,
+          53
+        ],
+        [
+          98,
+          99
+        ],
+        [
+          226,
+          -208
+        ],
+        [
+          236,
+          237
+        ]
+      ],
+      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
     },
     {
       "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
-      "statements": 278,
-      "statements_covered": 237,
-      "statements_uncovered": 41,
-      "statement_coverage_percent": 85.25,
-      "branch_arcs": 118,
-      "branch_arcs_covered": 83,
-      "branch_arcs_uncovered": 35,
-      "branch_coverage_percent": 70.34,
-      "measurement": "coverage.py 7.17.5; official --check-only or 19 focused unit tests"
+      "statements": 339,
+      "statements_covered": 296,
+      "statements_uncovered": 43,
+      "statement_coverage_percent": 87.32,
+      "branch_arcs": 140,
+      "branch_arcs_covered": 103,
+      "branch_arcs_uncovered": 37,
+      "branch_coverage_percent": 73.57,
+      "uncovered_lines": [
+        126,
+        127,
+        129,
+        143,
+        144,
+        285,
+        300,
+        302,
+        311,
+        313,
+        318,
+        389,
+        436,
+        437,
+        485,
+        486,
+        509,
+        510,
+        512,
+        513,
+        538,
+        545,
+        546,
+        560,
+        562,
+        566,
+        570,
+        572,
+        624,
+        627,
+        632,
+        639,
+        641,
+        643,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        710,
+        733,
+        734
+      ],
+      "uncovered_branches": [
+        [
+          108,
+          134
+        ],
+        [
+          109,
+          108
+        ],
+        [
+          128,
+          129
+        ],
+        [
+          284,
+          285
+        ],
+        [
+          299,
+          300
+        ],
+        [
+          301,
+          302
+        ],
+        [
+          303,
+          306
+        ],
+        [
+          310,
+          311
+        ],
+        [
+          312,
+          313
+        ],
+        [
+          317,
+          318
+        ],
+        [
+          331,
+          333
+        ],
+        [
+          386,
+          389
+        ],
+        [
+          393,
+          379
+        ],
+        [
+          418,
+          417
+        ],
+        [
+          435,
+          436
+        ],
+        [
+          484,
+          485
+        ],
+        [
+          508,
+          509
+        ],
+        [
+          511,
+          512
+        ],
+        [
+          537,
+          538
+        ],
+        [
+          544,
+          545
+        ],
+        [
+          559,
+          560
+        ],
+        [
+          561,
+          562
+        ],
+        [
+          565,
+          566
+        ],
+        [
+          569,
+          570
+        ],
+        [
+          571,
+          572
+        ],
+        [
+          623,
+          624
+        ],
+        [
+          626,
+          627
+        ],
+        [
+          629,
+          632
+        ],
+        [
+          638,
+          639
+        ],
+        [
+          640,
+          641
+        ],
+        [
+          642,
+          643
+        ],
+        [
+          699,
+          701
+        ],
+        [
+          703,
+          704
+        ],
+        [
+          705,
+          706
+        ],
+        [
+          705,
+          710
+        ],
+        [
+          707,
+          708
+        ],
+        [
+          707,
+          709
+        ]
+      ],
+      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
     },
     {
       "file": "docs/phase4/task-map-graph/replay_stage4.py",
-      "statements": 343,
-      "statements_covered": 324,
-      "statements_uncovered": 19,
-      "statement_coverage_percent": 94.46,
+      "statements": 344,
+      "statements_covered": 333,
+      "statements_uncovered": 11,
+      "statement_coverage_percent": 96.8,
       "branch_arcs": 150,
-      "branch_arcs_covered": 135,
-      "branch_arcs_uncovered": 15,
-      "branch_coverage_percent": 90.0,
-      "measurement": "coverage.py 7.17.5; official --check-only or 19 focused unit tests"
+      "branch_arcs_covered": 137,
+      "branch_arcs_uncovered": 13,
+      "branch_coverage_percent": 91.33,
+      "uncovered_lines": [
+        64,
+        121,
+        132,
+        220,
+        385,
+        387,
+        389,
+        405,
+        419,
+        420,
+        430
+      ],
+      "uncovered_branches": [
+        [
+          63,
+          64
+        ],
+        [
+          90,
+          -77
+        ],
+        [
+          103,
+          -99
+        ],
+        [
+          110,
+          -99
+        ],
+        [
+          120,
+          121
+        ],
+        [
+          131,
+          132
+        ],
+        [
+          139,
+          137
+        ],
+        [
+          219,
+          220
+        ],
+        [
+          265,
+          267
+        ],
+        [
+          381,
+          385
+        ],
+        [
+          386,
+          387
+        ],
+        [
+          388,
+          389
+        ],
+        [
+          404,
+          405
+        ]
+      ],
+      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
     }
   ],
   "python_total": {
-    "statements": 1660,
-    "covered_statements": 730,
-    "statement_coverage_percent": 43.98,
-    "branch_arcs": 658,
-    "covered_branch_arcs": 258,
-    "uncovered_branch_arcs": 400,
-    "branch_coverage_percent": 39.21
+    "functions": 57,
+    "functions_with_executed_lines": 54,
+    "function_coverage_percent": 94.74,
+    "statements": 1740,
+    "covered_statements": 1343,
+    "uncovered_statements": 397,
+    "statement_coverage_percent": 77.18,
+    "branch_arcs": 682,
+    "covered_branch_arcs": 499,
+    "uncovered_branch_arcs": 183,
+    "branch_coverage_percent": 73.17
   },
   "javascript": {
     "file": "docs/phase4/task-map-graph/task-map-graph.html",
-    "function_coverage": "NOT_MEASURED",
-    "statement_coverage": "NOT_MEASURED",
-    "branch_coverage": "NOT_MEASURED",
-    "reason": "Browser E2E passed, but browser V8 coverage was not instrumented. Node --check verifies syntax only."
+    "runs": [
+      {
+        "dpr": 1,
+        "statements": 417,
+        "statements_covered": 398,
+        "statement_coverage_percent": 95.44,
+        "branches": 305,
+        "branches_covered": 262,
+        "branch_coverage_percent": 85.9,
+        "functions": 71,
+        "functions_called": 68,
+        "function_coverage_percent": 95.77
+      },
+      {
+        "dpr": 2,
+        "statements": 417,
+        "statements_covered": 398,
+        "statement_coverage_percent": 95.44,
+        "branches": 305,
+        "branches_covered": 262,
+        "branch_coverage_percent": 85.9,
+        "functions": 71,
+        "functions_called": 68,
+        "function_coverage_percent": 95.77
+      }
+    ],
+    "critical_branch_coverage": "NOT_ESTABLISHED",
+    "uncovered_branch_details": "Istanbul branch maps retain uncovered optional/error and helper branches. Required browser use cases ran, but 100% critical branch coverage is not proven."
   },
-  "critical_branch_coverage": "NOT_ESTABLISHED",
-  "remaining": "Python branch arcs are not all covered. JavaScript branch coverage is unmeasured. Do not claim 100% critical branch coverage."
+  "error_path_coverage": "PARTIAL; malformed input, publication rollback/fsync/interruption and hostile XSS paths executed. Uncovered Python branches and browser error paths remain.",
+  "remaining": "The 100% critical-branch target is not met."
 }
