@@ -122,7 +122,7 @@
     {
       "name": "Python and JavaScript branch coverage",
       "result": "PARTIAL",
-      "count": "Python 73.17%; JavaScript 85.9% at DPR1/2; critical 100% not established."
+      "count": "Python 73.10% branch (500/684); JavaScript 85.90% branch (262/305) at DPR1/2; 100% critical target not established."
     },
     {
       "name": "dependency audit",
@@ -134,6 +134,18 @@
       "name": "hostile-data browser fixture",
       "result": "PASS",
       "count": "Seven hostile label/source payloads remain inert at DPR1/2, with no injected active element or executed script."
+    },
+    {
+      "name": "Mypy type check",
+      "command": "python -m mypy --follow-imports=skip --ignore-missing-imports on four production modules",
+      "result": "PARTIAL",
+      "count": "Graph builder passes with 0 diagnostics. Aggregate check leaves 34 existing diagnostics across build_and_validate.py and replay_stage4.py. Five diagnostics in the new publication helper were corrected."
+    },
+    {
+      "name": "Mypy on combined graph builder",
+      "command": "python -m mypy --follow-imports=skip --ignore-missing-imports docs/phase4/task-map-graph/build_task_map_graph.py",
+      "result": "PASS",
+      "count": "0 type diagnostics after explicit publication entry tracking, community map types, and source-reference artifact validation."
     }
   ],
   "limitations": [
@@ -268,5 +280,9 @@
   "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
   "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
   "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "source_test_commit": "9701feb8df7ab63775b0715bf679f427aadf810a"
+  "source_test_commit": "9701feb8df7ab63775b0715bf679f427aadf810a",
+  "source_test_parent_commit": "9e3f671ae760619d143ca4e61c09e8f29980b48e",
+  "tested_source_file_blobs": {
+    "docs/phase4/task-map-graph/build_task_map_graph.py": "e74906f906445cb7317c5110b06e58f78542337d"
+  }
 }

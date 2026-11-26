@@ -2,7 +2,7 @@
   {
     "gate": "GATE-01",
     "status": "PARTIAL",
-    "evidence": "Publisher helpers received path-specific review and tests. Full line-by-line sign-off across all production functions and embedded JavaScript remains incomplete.",
+    "evidence": "Matrix now includes 98 function/helper rows with current Python line ranges. Targeted publisher paths reviewed and typed. Full manual line-by-line sign-off for all functions and embedded JS remains incomplete.",
     "previous_status": "PARTIAL",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -23,7 +23,7 @@
   {
     "gate": "GATE-04",
     "status": "PASS",
-    "evidence": "28/28 Python regressions passed. Fresh-output Chrome 142 UI/XSS suite passed at DPR 1 and 2.",
+    "evidence": "28/28 Python regressions passed after the publisher typing cleanup. Fresh-output Chrome 142 UI/XSS suite passed at DPR1/2.",
     "previous_status": "PASS",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -65,7 +65,7 @@
   {
     "gate": "GATE-10",
     "status": "PASS",
-    "evidence": "Two builder generations byte-identical; 4,490 nodes, 11,435 edges.",
+    "evidence": "Post-cleanup graph builder check-only passed, and two generated JSON/HTML pairs were byte-identical.",
     "previous_status": "PASS",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -79,7 +79,7 @@
   {
     "gate": "GATE-12",
     "status": "PARTIAL",
-    "evidence": "Python branch coverage 73.17% across four modules; instrumented JavaScript branch coverage 85.9%. Neither reaches 100%, all critical branches not proven.",
+    "evidence": "Python branch coverage 73.10% (500/684 arcs) across four modules; embedded JavaScript branch coverage 85.90% (262/305). Critical 100% not established.",
     "previous_status": "PARTIAL",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -93,14 +93,14 @@
   {
     "gate": "GATE-14",
     "status": "PARTIAL",
-    "evidence": "Ten publication faults exercised. Combined graph JSON+HTML rollback works for injected replacement/fsync/interruption. Source Coverage writes are atomic per file. Crash/power-loss/concurrency and set-level publication remain untested.",
+    "evidence": "Ten publication fault cases pass on publisher blob e74906f. Combined graph outputs roll back on injected failures. Disk/power loss, concurrency and Source Coverage set-level atomicity remain untested.",
     "previous_status": "PARTIAL",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
   {
     "gate": "GATE-15",
     "status": "PARTIAL",
-    "evidence": "Bandit, Ruff, seven-payload XSS browser fixture, pip-audit and npm audit ran. No dependency CVEs reported. CI SAST/SCA remains skipped by docs-only classification; Ruff and Bandit findings remain.",
+    "evidence": "Bandit, Ruff, mypy, seven-payload XSS browser fixture, pip-audit and npm audit ran. No dependency CVEs reported. Graph builder passes mypy, while 34 diagnostics remain in two other modules. CI SAST/SCA remains skipped.",
     "previous_status": "PARTIAL",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },

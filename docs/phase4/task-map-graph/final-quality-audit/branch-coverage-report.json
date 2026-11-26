@@ -7,6 +7,7 @@
   "python_files": [
     {
       "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
+      "functions": 25,
       "statements": 941,
       "statements_covered": 606,
       "statements_uncovered": 335,
@@ -870,10 +871,11 @@
           1338
         ]
       ],
-      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
+      "measurement": "coverage.py 7.17.5; 28 focused regressions plus official Source Coverage, Replay and graph check-only runs"
     },
     {
       "file": "docs/audits/phase2-source-coverage/build_evidence_join_index.py",
+      "functions": 6,
       "statements": 116,
       "statements_covered": 108,
       "statements_uncovered": 8,
@@ -910,83 +912,81 @@
           237
         ]
       ],
-      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
+      "measurement": "coverage.py 7.17.5; 28 focused regressions plus official Source Coverage, Replay and graph check-only runs"
     },
     {
       "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
-      "statements": 339,
-      "statements_covered": 296,
-      "statements_uncovered": 43,
-      "statement_coverage_percent": 87.32,
-      "branch_arcs": 140,
-      "branch_arcs_covered": 103,
-      "branch_arcs_uncovered": 37,
-      "branch_coverage_percent": 73.57,
+      "functions": 12,
+      "statements": 344,
+      "statements_covered": 300,
+      "statements_uncovered": 44,
+      "statement_coverage_percent": 87.21,
+      "branch_arcs": 142,
+      "branch_arcs_covered": 104,
+      "branch_arcs_uncovered": 38,
+      "branch_coverage_percent": 73.24,
       "uncovered_lines": [
-        126,
         127,
-        129,
-        143,
-        144,
-        285,
-        300,
+        128,
+        130,
+        145,
+        146,
+        287,
         302,
-        311,
+        304,
         313,
-        318,
-        389,
-        436,
-        437,
-        485,
-        486,
-        509,
-        510,
+        315,
+        320,
+        391,
+        438,
+        439,
+        487,
+        488,
+        511,
         512,
-        513,
-        538,
-        545,
-        546,
-        560,
+        514,
+        515,
+        540,
+        547,
+        548,
         562,
-        566,
-        570,
+        564,
+        568,
         572,
-        624,
-        627,
+        574,
+        626,
+        629,
         632,
-        639,
-        641,
-        643,
-        704,
-        705,
-        706,
-        707,
-        708,
+        637,
+        644,
+        646,
+        648,
         709,
         710,
-        733,
-        734
+        711,
+        712,
+        713,
+        714,
+        715,
+        738,
+        739
       ],
       "uncovered_branches": [
         [
-          108,
-          134
+          110,
+          135
         ],
         [
-          109,
-          108
+          111,
+          110
         ],
         [
-          128,
-          129
+          129,
+          130
         ],
         [
-          284,
-          285
-        ],
-        [
-          299,
-          300
+          286,
+          287
         ],
         [
           301,
@@ -994,133 +994,142 @@
         ],
         [
           303,
-          306
+          304
         ],
         [
-          310,
-          311
+          305,
+          308
         ],
         [
           312,
           313
         ],
         [
-          317,
-          318
+          314,
+          315
         ],
         [
-          331,
-          333
+          319,
+          320
         ],
         [
-          386,
-          389
+          333,
+          335
         ],
         [
-          393,
-          379
+          388,
+          391
         ],
         [
-          418,
-          417
+          395,
+          381
         ],
         [
-          435,
-          436
+          420,
+          419
         ],
         [
-          484,
-          485
+          437,
+          438
         ],
         [
-          508,
-          509
+          486,
+          487
         ],
         [
-          511,
-          512
+          510,
+          511
         ],
         [
-          537,
-          538
+          513,
+          514
         ],
         [
-          544,
-          545
+          539,
+          540
         ],
         [
-          559,
-          560
+          546,
+          547
         ],
         [
           561,
           562
         ],
         [
-          565,
-          566
+          563,
+          564
         ],
         [
-          569,
-          570
+          567,
+          568
         ],
         [
           571,
           572
         ],
         [
-          623,
-          624
+          573,
+          574
         ],
         [
-          626,
-          627
+          625,
+          626
         ],
         [
-          629,
+          628,
+          629
+        ],
+        [
+          631,
           632
         ],
         [
-          638,
-          639
+          634,
+          637
         ],
         [
-          640,
-          641
+          643,
+          644
         ],
         [
-          642,
-          643
+          645,
+          646
         ],
         [
-          699,
-          701
+          647,
+          648
         ],
         [
-          703,
-          704
-        ],
-        [
-          705,
+          704,
           706
         ],
         [
-          705,
-          710
-        ],
-        [
-          707,
-          708
-        ],
-        [
-          707,
+          708,
           709
+        ],
+        [
+          710,
+          711
+        ],
+        [
+          710,
+          715
+        ],
+        [
+          712,
+          713
+        ],
+        [
+          712,
+          714
         ]
       ],
-      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
+      "measurement": "coverage.py 7.17.5; 28 focused regressions plus official Source Coverage, Replay and graph check-only runs"
     },
     {
       "file": "docs/phase4/task-map-graph/replay_stage4.py",
+      "functions": 14,
       "statements": 344,
       "statements_covered": 333,
       "statements_uncovered": 11,
@@ -1196,21 +1205,21 @@
           405
         ]
       ],
-      "measurement": "coverage.py 7.17.5; 28 focused regressions and official Source Coverage, Replay, graph check-only runs"
+      "measurement": "coverage.py 7.17.5; 28 focused regressions plus official Source Coverage, Replay and graph check-only runs"
     }
   ],
   "python_total": {
     "functions": 57,
     "functions_with_executed_lines": 54,
+    "statements": 1745,
+    "covered_statements": 1347,
+    "branch_arcs": 684,
+    "covered_branch_arcs": 500,
     "function_coverage_percent": 94.74,
-    "statements": 1740,
-    "covered_statements": 1343,
-    "uncovered_statements": 397,
-    "statement_coverage_percent": 77.18,
-    "branch_arcs": 682,
-    "covered_branch_arcs": 499,
-    "uncovered_branch_arcs": 183,
-    "branch_coverage_percent": 73.17
+    "uncovered_statements": 398,
+    "statement_coverage_percent": 77.19,
+    "uncovered_branch_arcs": 184,
+    "branch_coverage_percent": 73.1
   },
   "javascript": {
     "file": "docs/phase4/task-map-graph/task-map-graph.html",

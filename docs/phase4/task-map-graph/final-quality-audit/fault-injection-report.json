@@ -67,5 +67,6 @@
   ],
   "results_count": 19,
   "remaining": "Abrupt process/power loss, disk-full, permission failures, concurrent writers/readers and Source Coverage multi-file transaction are not proven.",
-  "tested_source_commit": "9701feb8df7ab63775b0715bf679f427aadf810a"
+  "tested_source_parent_commit": "9e3f671ae760619d143ca4e61c09e8f29980b48e",
+  "tested_publisher_blob_sha": "e74906f906445cb7317c5110b06e58f78542337d"
 }

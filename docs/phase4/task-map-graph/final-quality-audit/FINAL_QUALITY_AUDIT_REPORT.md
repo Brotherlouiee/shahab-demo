@@ -151,7 +151,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 |---|---|---|---|---|---|---|
 | 1. ممیزی خط‌به‌خط | IN_PROGRESS | PARTIAL | تست‌های ۲۸گانه، بررسی مسیرهای اصلاح‌شده، Istanbul و Python Coverage | AUDIT-05 انتشار ترکیبی JSON/HTML | AUDIT-05 اصلاح شد | Coverage matrix شامل مسیرهای اصلاح‌شده و ۲ helper جدید | مرور امضاشدهٔ تک‌تک خطوط و تمام تابع‌های embedded JS کامل نیست |
 | 2. اعتبارسنجی مستقل و Property-based | PARTIAL | PARTIAL | Oracle مستقل؛ ۱۰۰ ترتیب معتبر، ۱۰۰ حالت نامعتبر، ۲۰۰ نمونه Hypothesis | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | property-testing-report.json | همهٔ ۳۰ Property و سناریوها مولد/مستقل آزموده نشده‌اند |
-| 3. Branch Coverage | PARTIAL | PARTIAL | Python coverage.py و JS Istanbul در DPR1/2 | شاخهٔ پوشش‌نیافتهٔ جدید ثبت نشد | شاخه‌های بحرانی در UI/انتشار آزموده شدند | Python 73.17% branch، JS 85.90% branch | ۱۰۰٪ branchهای بحرانی اثبات نشده |
+| 3. Branch Coverage | PARTIAL | PARTIAL | Python coverage.py و JS Istanbul در DPR1/2 | شاخهٔ پوشش‌نیافتهٔ جدید ثبت نشد | شاخه‌های بحرانی در UI/انتشار آزموده شدند | Python 73.10% branch، JS 85.90% branch | ۱۰۰٪ branchهای بحرانی اثبات نشده |
 | 4. Mutation Testing | PARTIAL | PARTIAL | ۳۰ مورد ترکیبی در ماتریس قبلی | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | ۱۵ جهش کد + ۱۵ mutation داده کشف شدند | ۳۰ جهش code-only اجرا نشده |
 | 5. Fuzz Testing | PARTIAL | PARTIAL | ۱۰۰۰ ورودی CSV و ۲۰۰ مثال Hypothesis | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | ۷۷۹ رد کنترل‌شده، ۲۲۱ پذیرفته، صفر خطای پیش‌بینی‌نشده | JSON/HTML/snapshot/identifier fuzz کامل نیست |
 | 6. Fault Injection | PARTIAL | PARTIAL | ۱۰ خطای انتشار؛ ۲۸ regression | AUDIT-05 mixed generation | rollback چندخروجی گراف اصلاح شد | ده replace/fsync/interruption حفظ فایل معتبر را آزمود | power loss، concurrency و Source Coverage group transaction باقی است |
@@ -178,9 +178,10 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 - بازتولید گراف دو بار: JSON و HTML با `cmp` بایت‌به‌بایت برابر شدند. SHAها با مقادیر موجود یکسان ماندند.
 - Evidence Join Index و Replay Mapping نیز دو بار بازتولید شدند. Index و Mapping بایت‌به‌بایت یکسان ماندند.
 - Chrome for Testing 142 در DPR1 و DPR2: UI، Canvas pixel repaint، idle frames، Filter، Cross-only، Search، Node/Edge selection، Pan، Zoom، Fit، Resize و Source Evidence موفق شدند. هفت payload خصمانهٔ HTML/Unicode به‌صورت متن/داده باقی ماندند و هیچ script یا عنصر فعال تزریق نشد.
-- Python Coverage: ۵۷ تابع، ۵۴ تابع با دست‌کم یک خط اجراشده؛ ۱٬۳۴۳/۱٬۷۴۰ statement یعنی ۷۷٫۱۸٪؛ ۴۹۹/۶۸۲ branch arc یعنی **۷۳٫۱۷٪**.
+- Python Coverage: ۵۷ تابع، ۵۴ تابع با دست‌کم یک خط اجراشده؛ ۱٬۳۴۷/۱٬۷۴۵ statement یعنی ۷۷٫۱۹٪؛ ۵۰۰/۶۸۴ branch arc یعنی **۷۳٫۱۰٪**.
 - JavaScript Istanbul در هر دو DPR: ۶۸/۷۱ function یعنی ۹۵٫۷۷٪؛ ۳۹۸/۴۱۷ statement یعنی ۹۵٫۴۴٪؛ ۲۶۲/۳۰۵ branch یعنی **۸۵٫۹۰٪**. شرط ۱۰۰٪ branchهای بحرانی برآورده و اثبات نشده است.
 - Fault injection: ده خطای انتشار در Graph، Source Coverage، Evidence Index و Mapping آزمایش شد. ۱۹ مسیر خطای ورودی/انتشار در گزارش تفصیلی ثبت است.
+- Type checking: Mypy 2.4.1 برای چهار ماژول اجرا شد. `build_task_map_graph.py` پس از اصلاح نوع‌دهی helper انتشار بدون هشدار است. ۳۴ هشدار باقی‌مانده در دو ماژول قدیمی‌تر `build_and_validate.py` و `replay_stage4.py` هستند و refactor گستردهٔ آن‌ها انجام نشد.
 - SCA محلی: `pip-audit .` و `npm audit --omit=dev` هیچ آسیب‌پذیری شناخته‌شده‌ای گزارش نکردند. Python dependencyها از بازه‌های pyproject حل شدند چون lockfile پایتون وجود ندارد. Bandit چهار هشدار High مربوط به SHA-1 شناسهٔ Git Blob و ۱۶ هشدار Low subprocess ثابت دارد. Ruff نیز ۵۴۷ مورد lint/style از جمله بدهی‌های موجود گزارش کرد. تغییرات گستردهٔ خارج از دامنه انجام نشد.
 - Mutation، Fuzz، Property، Stress و Consumer smoke در حالت محدود قبلی باقی ماندند. ۳۰ مورد mutation ترکیبی شامل ۱۵ جهش کد و ۱۵ جهش داده بود و معادل ۳۰ جهش کد نیست. CSV fuzz برابر ۱۰۰۰ نمونه با ۷۷۹ رد کنترل‌شده و ۲۲۱ ورودی پذیرفته‌شده بود. آزمون‌های property همهٔ ۳۰ invariant خواسته‌شده را پوشش نمی‌دهند.
 
@@ -221,7 +222,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | GATE-09 | PASS | PASS | Replay check-only and two deterministic write replays; 657 records, 347 inventory files, 696 mappings, 134 OPEN/BLOCKED. |
 | GATE-10 | PASS | PASS | Two builder generations byte-identical; 4,490 nodes, 11,435 edges. |
 | GATE-11 | PASS_WITH_SCOPE_LIMIT | PARTIAL | Independent oracle, 100 valid order permutations, 100 invalid structural cases, 200 controlled Hypothesis title examples and 1,000 CSV fuzz rows. Broad property/fuzz contract coverage remains incomplete. |
-| GATE-12 | PARTIAL | PARTIAL | Python branch coverage 73.17% across four modules; instrumented JavaScript branch coverage 85.9%. Neither reaches 100%, all critical branches not proven. |
+| GATE-12 | PARTIAL | PARTIAL | Python branch coverage 73.10% (500/684 arcs) across four modules; instrumented JavaScript branch coverage 85.9%. Neither reaches 100%, all critical branches not proven. |
 | GATE-13 | PARTIAL | PARTIAL | 30/30 mixed target cases detected: 15/15 production-source mutants killed and 15/15 artifact/data mutations detected. Full 30-code-only source mutation set is not claimed, so gate remains PARTIAL. |
 | GATE-14 | PARTIAL | PARTIAL | Ten publication faults exercised. Combined graph JSON+HTML rollback works for injected replacement/fsync/interruption. Source Coverage writes are atomic per file. Crash/power-loss/concurrency and set-level publication remain untested. |
 | GATE-15 | PARTIAL | PARTIAL | Bandit, Ruff, seven-payload XSS browser fixture, pip-audit and npm audit ran. No dependency CVEs reported. CI SAST/SCA remains skipped by docs-only classification; Ruff and Bandit findings remain. |
@@ -240,7 +241,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | 1 | آیا تمام مسیرهای بحرانی کد ممیزی شده‌اند؟ | NO | ماتریس ۹۸ مورد دارد اما مرور امضاشدهٔ تمام خطوط و JS تکمیل نشده است. |
 | 2 | آیا Validatorها مستقلاً آزموده شده‌اند؟ | CONDITIONAL | ۲۹ کنترل رسمی و Oracle مستقل اجرا شدند. همهٔ ۳۰ invariant و تمام مسیرهای Validator پوشش کامل ندارند. |
 | 3 | آیا تمام نقص‌های تأییدشده اصلاح شده‌اند؟ | CONDITIONAL | AUDIT-05 و نقص‌های قبلی اصلاح و Regression شدند. Graphify item ششم شرح ندارد. |
-| 4 | آیا Branch Coverage بحرانی تعیین تکلیف شده است؟ | NO | Python 73.17% و JavaScript 85.90% branch coverage دارند. ۱۰۰٪ بحرانی ثابت نشده است. |
+| 4 | آیا Branch Coverage بحرانی تعیین تکلیف شده است؟ | NO | Python 73.10% و JavaScript 85.90% branch coverage دارند. ۱۰۰٪ بحرانی ثابت نشده است. |
 | 5 | آیا Mutation Testing موفق بوده است؟ | NO | ۳۰ مورد ترکیبی شناسایی شد، اما فقط ۱۵ مورد mutation منبع کد بود؛ امتیاز ۳۰ جهش کدی نداریم. |
 | 6 | آیا Fuzz Testing موفق بوده است؟ | CONDITIONAL | ۱۰۰۰ ورودی CSV بدون خطای پیش‌بینی‌نشده اجرا شد. دامنه‌های دیگر fuzz نشده‌اند. |
 | 7 | آیا Fault Injection موفق بوده است؟ | CONDITIONAL | ده شکست انتشار بازیابی شدند. power-loss، concurrency و تراکنش چندفایلی Source Coverage آزموده نشدند. |
@@ -259,3 +260,10 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 
 
 CI source/test commit `9701feb8df7ab63775b0715bf679f427aadf810a` تکمیل شد. Workflowها: Quality gates `45829248764`، Security `45829248667`، Container smoke `45829248738`، Route evidence `45829248752`. پنج job موفق شدند، هفت job skipped ماندند و failure صفر بود. Skippedها شامل Quality gates کامل، Python SAST/SCA و dependency audit CI، container build، route evidence، browser/API و PostgreSQL بودند. بنابراین CI روی این commit، آزمون‌های محلی یا گیت‌های Skipشده را تأیید نمی‌کند. PR همچنان باز، mergeable و unmerged است.
+
+
+## Source and typing follow-up after 2026-11-26 report commit
+
+Source/test parent was `9e3f671ae760619d143ca4e61c09e8f29980b48e`. The tested graph-builder content has Git blob SHA `e74906f906445cb7317c5110b06e58f78542337d`. Mypy 2.4.1 found five diagnostics in the newly added publisher's optional path bookkeeping plus three type diagnostics in the graph builder's existing community/reference maps. All eight were resolved without changing graph semantics. `build_task_map_graph.py` now passes Mypy with zero diagnostics. The aggregate four-module check retains 34 diagnostics in `build_and_validate.py` and `replay_stage4.py`.
+
+After this cleanup, 28/28 Python regressions passed. Official Source Coverage (29/29), Replay check-only, and Graph check-only passed. Python coverage is 77.19% statement and 73.10% branch (500/684). Rebuilt JSON and HTML matched the previous build byte-for-byte and retained the recorded SHA-256 values. Chrome 142 on the regenerated HTML passed all browser checks at DPR1 and DPR2. These tests ran against the source file blob above.

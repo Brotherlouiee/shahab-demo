@@ -68,7 +68,8 @@ def source_ref(artifact: str, collection: str, index: int) -> dict[str, Any]:
 
 def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
     """Stage all outputs before replacement and roll back ordinary replace failures."""
-    staged: list[dict[str, Any]] = []
+    staged: list[tuple[Path, Path]] = []
+    backups: dict[Path, Path | None] = {}
     published: list[Path] = []
     try:
         for target, payload in outputs:
@@ -83,29 +84,30 @@ def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
                 dir=target.parent, prefix=f".{target.name}.", delete=False
             ) as handle:
                 temporary = Path(handle.name)
-                entry = {"temporary": temporary, "target": target, "backup": None}
-                staged.append(entry)
+                staged.append((temporary, target))
+                backups[target] = None
                 os.chmod(temporary, mode)
                 handle.write(payload)
                 handle.flush()
                 file_fsync(handle.fileno())
+            backup: Path | None = None
             if previous_bytes is not None:
                 with tempfile.NamedTemporaryFile(
                     dir=target.parent, prefix=f".{target.name}.backup.", delete=False
                 ) as handle:
                     backup = Path(handle.name)
-                    entry["backup"] = backup
+                    backups[target] = backup
                     os.chmod(backup, mode)
                     handle.write(previous_bytes)
                     handle.flush()
                     file_fsync(handle.fileno())
+            backups[target] = backup
 
-        for entry in staged:
-            atomic_replace(entry["temporary"], entry["target"])
-            target = entry["target"]
+        for temporary, target in staged:
+            atomic_replace(temporary, target)
             published.append(target)
 
-        for parent in {entry["target"].parent for entry in staged}:
+        for parent in {target.parent for _, target in staged}:
             if hasattr(os, "O_DIRECTORY"):
                 descriptor = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
                 try:
@@ -115,14 +117,13 @@ def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
     except BaseException as error:
         rollback_errors = []
         for target in reversed(published):
-            entry = next(item for item in staged if item["target"] == target)
-            backup = entry["backup"]
+            backup = backups[target]
             try:
                 if backup is None:
                     target.unlink(missing_ok=True)
                 else:
                     atomic_replace(backup, target)
-                    entry["backup"] = None
+                    backups[target] = None
             except OSError as rollback_error:
                 rollback_errors.append(f"{target}: {rollback_error}")
         if rollback_errors:
@@ -131,10 +132,11 @@ def publish_outputs(outputs: list[tuple[Path, bytes]]) -> None:
             ) from error
         raise
     finally:
-        for entry in staged:
-            entry["temporary"].unlink(missing_ok=True)
-            if entry["backup"] is not None:
-                entry["backup"].unlink(missing_ok=True)
+        for temporary, target in staged:
+            temporary.unlink(missing_ok=True)
+            backup = backups[target]
+            if backup is not None:
+                backup.unlink(missing_ok=True)
 
 
 def html_document(graph_json: str) -> str:
@@ -412,8 +414,8 @@ def build() -> dict[str, Any]:
     # Code communities are retained as first-class graph metadata, preserving
     # the source community identifiers and labels without inventing clusters.
     communities = []
-    community_labels = {}
-    community_canonical_ids = {}
+    community_labels: dict[str, str] = {}
+    community_canonical_ids: dict[str, Any] = {}
     for n in code_nodes:
         if n.get("community") is not None:
             key = str(n["community"])
@@ -622,7 +624,10 @@ def build() -> dict[str, Any]:
     def resolves(ref: dict[str, Any] | None) -> bool:
         if not ref:
             return False
-        obj = input_objects.get(ref.get("artifact"))
+        artifact = ref.get("artifact")
+        if not isinstance(artifact, str):
+            return False
+        obj = input_objects.get(artifact)
         if obj is None:
             return False
         for part in str(ref.get("collection", "")).split("."):
