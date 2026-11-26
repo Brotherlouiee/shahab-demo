@@ -15,8 +15,7 @@ GRAPH_PATH = ROOT / "knowledge-graph/phase2-reference-docs/semantic/graph.json"
 GRAPH_COMMIT = "17622bf4dd56108bee10d880a9dc5eb9617482fd"
 
 
-# Required join columns. Historical heading labels are optional because
-# source-inventory's canonical schema has neither title nor heading_text.
+# Columns required to join the ledgers. Heading text can be absent in legacy inventories.
 REQUIRED_COLUMNS = {
     "source-inventory.csv": {"source_unit_id"},
     "atomic-obligations.csv": {
@@ -62,12 +61,18 @@ def unique_ids(rows, field, name):
     return counts.keys()
 
 
+def split_refs(value):
+    return [ref for part in value.split(";") if (ref := part.strip())]
+
+
 def build():
     rows = {name: read_join_rows(name) for name in REQUIRED_COLUMNS}
     candidates = rows["atomic-obligations.csv"]
     atoms = rows["atomic-obligation-dispositions.csv"]
     candidate_ids = unique_ids(candidates, "candidate_id", "atomic-obligations.csv")
     unique_ids(atoms, "atomic_obligation_id", "atomic-obligation-dispositions.csv")
+    for name in ("execution-trace.csv", "semantic-review-dispositions.csv"):
+        unique_ids(rows[name], "candidate_id", name)
     for atom in atoms:
         if atom["candidate_id"] not in candidate_ids:
             raise ValueError(
@@ -104,7 +109,7 @@ def build():
     for candidate in candidates:
         cid = candidate["candidate_id"]
         mapped = trace.get(cid, {})
-        refs = [x for x in mapped.get("graph_node_ids", "").split(";") if x]
+        refs = split_refs(mapped.get("graph_node_ids", ""))
         neighboring = {}
         for node_id in refs:
             for edge in adjacency.get(node_id, []):
@@ -118,7 +123,7 @@ def build():
             "source_unit_id": candidate["source_unit_id"],
             "source_lines": f'{candidate["start_line"]}-{candidate["end_line"]}',
             "parent_heading_id": candidate.get("parent_heading_id", ""),
-            "section_heading": parent.get("title", parent.get("heading_text", "")),
+            "section_heading": parent.get("hierarchy_or_title") or parent.get("title") or parent.get("heading_text", ""),
             "source_excerpt": candidate.get("source_excerpt", ""),
             "graph_nodes": refs,
             "graph_neighbors": [
@@ -152,10 +157,10 @@ def build():
                 }
                 for atom in atoms_by_candidate.get(cid, [])
             ],
-            "packages": mapped.get("owner_package_candidates", "").split(";") if mapped.get("owner_package_candidates") else [],
-            "requirements": mapped.get("requirement_candidates", "").split(";") if mapped.get("requirement_candidates") else [],
-            "tasks": mapped.get("task_subtask_candidates", "").split(";") if mapped.get("task_subtask_candidates") else [],
-            "ac_test": mapped.get("ac_test_candidates", "").split(";") if mapped.get("ac_test_candidates") else [],
+            "packages": split_refs(mapped.get("owner_package_candidates", "")),
+            "requirements": split_refs(mapped.get("requirement_candidates", "")),
+            "tasks": split_refs(mapped.get("task_subtask_candidates", "")),
+            "ac_test": split_refs(mapped.get("ac_test_candidates", "")),
         })
 
     bundle = {

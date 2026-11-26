@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse, hashlib, json, os, re, tempfile
 from collections import Counter, defaultdict, deque
+from os import replace
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 BASELINE='c9e74532d4291e9ed1a7ddd3523ee84f09c940a2'
@@ -83,7 +84,7 @@ def writej(path,obj):
    handle.write(payload)
    handle.flush()
    os.fsync(handle.fileno())
-  os.replace(temporary,target)
+  replace(temporary,target)
  finally:
   if temporary is not None:
    temporary.unlink(missing_ok=True)

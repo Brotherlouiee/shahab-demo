@@ -4,10 +4,10 @@ const { resolve } = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || '@playwright/test');
 
-async function run() {
+async function run(deviceScaleFactor) {
   const browser = await chromium.launch({ executablePath: process.env.CHROME_BIN, headless: true });
   try {
-    const page = await browser.newPage({ viewport: { width: 1500, height: 950 } });
+    const page = await browser.newPage({ viewport: { width: 1500, height: 950 }, deviceScaleFactor });
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));
     await page.addInitScript(() => {
@@ -22,7 +22,12 @@ async function run() {
       }
       function screen(context, x, y) {
         const matrix = context.getTransform();
-        return [matrix.a * x + matrix.e, matrix.d * y + matrix.f];
+        // Canvas transforms use backing-store pixels. Playwright clicks use CSS pixels.
+        const { clientWidth, clientHeight, width, height } = context.canvas;
+        return [
+          (matrix.a * x + matrix.e) * clientWidth / width,
+          (matrix.d * y + matrix.f) * clientHeight / height,
+        ];
       }
       record('clearRect', () => {
         metrics.frames++;
@@ -39,7 +44,11 @@ async function run() {
     });
     const path = process.argv[2] || resolve(__dirname, 'task-map-graph.html');
     await page.goto(pathToFileURL(resolve(path)).href);
-    await page.evaluate(() => window.taskMapGraphReady);
+    await page.evaluate(() => {
+      const ready = window.taskMapGraphReady;
+      if (typeof ready?.then !== 'function') throw new Error('Viewer readiness promise is missing');
+      return ready;
+    });
     const settle = () => page.evaluate(async () => {
       for (let i = 0; i < 5; i++) await new Promise(requestAnimationFrame);
     });
@@ -135,10 +144,10 @@ async function run() {
     assert.ok(evidence.relation_id && evidence.source_refs.length && evidence.plan_locator);
     console.log('PASS Source Evidence for node and overlay edge');
     assert.deepEqual(pageErrors, []);
-    console.log('Browser', browser.version());
+    console.log('Browser', browser.version(), 'DPR', deviceScaleFactor);
   } finally {
     await browser.close();
   }
 }
 
-run().catch(error => { console.error(error); process.exitCode = 1; });
+run(1).then(() => run(2)).catch(error => { console.error(error); process.exitCode = 1; });

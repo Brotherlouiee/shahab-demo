@@ -7,7 +7,7 @@ import shutil
 import sys
 import tempfile
 import unittest
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from unittest.mock import patch
 
@@ -55,14 +55,69 @@ class EvidenceJoinTests(unittest.TestCase):
                 self.assert_preserved_on_error(rf"{name}: missing required columns: {column}")
                 (self.coverage / name).write_bytes(original)
 
-    def test_optional_heading_and_canonical_statuses(self):
+    def test_canonical_headings_and_review_statuses(self):
         index = join.build()
-        self.assertEqual(index["totals"]["candidate_review_status_counts"], {"SEMANTICALLY_REVIEWED": 1633})
+        _, candidates = join.read_csv(self.coverage / "atomic-obligations.csv")
+        _, inventory = join.read_csv(self.coverage / "source-inventory.csv")
+        parents = {row["source_unit_id"]: row["hierarchy_or_title"] for row in inventory}
+        expected = {row["candidate_id"]: parents[row["parent_heading_id"]] for row in candidates}
+        self.assertTrue(expected)
+        self.assertTrue(all(expected.values()))
+        self.assertEqual({r["candidate_id"]: r["section_heading"] for r in index["candidate_index"]}, expected)
+        self.assertEqual(index["totals"]["candidate_review_status_counts"],
+                         dict(Counter(row["review_status"] for row in candidates)))
         nested = [atom for row in index["candidate_index"] for atom in row["atomic_obligations"]]
         self.assertEqual(len(nested), index["totals"]["atomic_obligations"])
         self.assertEqual(len({a["atomic_obligation_id"] for a in nested}), len(nested))
-        self.assertEqual(dict(replay.Counter(a["coverage_status"] for a in nested)),
+        self.assertEqual(dict(Counter(a["coverage_status"] for a in nested)),
                          index["totals"]["atomic_coverage_status_counts"])
+
+    def test_legacy_heading_fallback(self):
+        _, candidates = join.read_csv(self.coverage / "atomic-obligations.csv")
+        candidate = candidates[0]
+
+        def edit(fields, rows):
+            fields.remove("hierarchy_or_title")
+            fields.append("heading_text")
+            parent = next(row for row in rows if row["source_unit_id"] == candidate["parent_heading_id"])
+            parent["heading_text"] = "Legacy heading"
+
+        self.edit_csv("source-inventory.csv", edit)
+        items = join.build()["candidate_index"]
+        self.assertEqual(items[0]["section_heading"], "Legacy heading")
+        self.assertTrue(any(item["section_heading"] == "" for item in items))
+
+    def test_trace_lists_drop_empty_references_consistently(self):
+        fields_by_output = {
+            "graph_node_ids": "graph_nodes",
+            "owner_package_candidates": "packages",
+            "requirement_candidates": "requirements",
+            "task_subtask_candidates": "tasks",
+            "ac_test_candidates": "ac_test",
+        }
+        def edit(fields, rows):
+            rows[0].update(dict.fromkeys(fields_by_output, "; A ; ;B; "))
+
+        self.edit_csv("execution-trace.csv", edit)
+        _, trace = join.read_csv(self.coverage / "execution-trace.csv")
+        item = next(row for row in join.build()["candidate_index"] if row["candidate_id"] == trace[0]["candidate_id"])
+        for key in fields_by_output.values():
+            with self.subTest(key=key):
+                self.assertEqual(item[key], ["A", "B"])
+
+    def test_duplicate_trace_and_review_ids_fail_before_publication(self):
+        for name in ("execution-trace.csv", "semantic-review-dispositions.csv"):
+            with self.subTest(file=name):
+                original = (self.coverage / name).read_bytes()
+                self.edit_csv(name, lambda fields, rows: rows.append(rows[0]))
+                self.assert_preserved_on_error(rf"{name}: duplicate candidate_id")
+                (self.coverage / name).write_bytes(original)
+
+    def test_short_csv_row_fails_before_publication(self):
+        path = self.coverage / "atomic-obligations.csv"
+        header = path.read_text(encoding="utf-8-sig").splitlines()[0]
+        path.write_text(header + "\nID,\n", encoding="utf-8")
+        self.assert_preserved_on_error(r"atomic-obligations.csv:2: missing value\(s\) in source_unit_id")
 
     def test_orphan_obligation_fails_before_publication(self):
         self.edit_csv("atomic-obligation-dispositions.csv",
@@ -133,7 +188,7 @@ class ReplayTests(unittest.TestCase):
             output = io.StringIO()
             with (patch.dict(replay.FILES, mapping=target),
                   patch.object(sys, "argv", ["replay_stage4.py", "--write-code-search"]),
-                  patch.object(replay.os, "replace", side_effect=OSError("injected replace failure")),
+                  patch.object(replay, "replace", side_effect=OSError("injected replace failure")),
                   contextlib.redirect_stdout(output),
                   self.assertRaisesRegex(OSError, "injected replace failure")):
                 replay.main()
