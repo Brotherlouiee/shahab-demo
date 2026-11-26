@@ -1,8 +1,8 @@
 # GATE-01 / GATE-12 Closure Report
 
-Repository: `Brotherlouiee/shahab-demo`  
-PR: #257 (`fix/phase4-graphify-review`)  
-Previous HEAD: `77b664b81c420a36c21a765fae537ffa0e4010cd`  
+Repository: `Brotherlouiee/shahab-demo`
+PR: #257 (`fix/phase4-graphify-review`)
+Previous HEAD: `77b664b81c420a36c21a765fae537ffa0e4010cd`
 Snapshot: `phase4-45ed4ec10d34216cf935` (certified source `8ce742b640bbcbb87be5fc29f3a5a28d92593dec`)
 
 ## Scope and results
