@@ -142,7 +142,7 @@
   {
     "gate": "GATE-21",
     "status": "PARTIAL",
-    "evidence": "New CI must be checked after publication. Prior checks concluded success with seven skipped jobs; skipped is not PASS.",
+    "evidence": "Four workflows completed on source/test commit 9701feb8: five jobs success, seven skipped, zero failure. Skipped quality/SAST/SCA/container/browser/database jobs are not PASS.",
     "previous_status": "PASS_WITH_SKIPS",
     "commit": "63e3891c502f95b3763d5edf872f9257211c5acd"
   },

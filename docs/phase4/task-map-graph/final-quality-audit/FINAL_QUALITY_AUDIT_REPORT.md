@@ -138,12 +138,12 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | Repository | `Brotherlouiee/shahab-demo` |
 | Base commit PR | `3df5beb8fbec677515ad9b4cd0ea30b7fd055dce` |
 | Audit baseline | `392751eaeee882fc770069e3dcd3a161d47a9d26` |
-| Source tree tested | `ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35` به‌علاوهٔ تغییرات کاری ثبت‌شده در این به‌روزرسانی |
-| Final HEAD | pending publication of this continuation commit |
+| Source/test commit | `9701feb8df7ab63775b0715bf679f427aadf810a`؛ آزمون‌ها روی همان محتوای source/test پیش از انتشار commit اجرا شدند |
+| Final HEAD | این گزارش در PR head ثبت می‌شود؛ SHA دقیق در رأس PR #257 درج است |
 | Branch | `fix/phase4-graphify-review` |
 | PR | [#257](https://github.com/Brotherlouiee/shahab-demo/pull/257) |
 | PR state before publication | Open, mergeable, unmerged |
-| CI | CI commit نهایی هنوز باید پس از انتشار بررسی شود. Skip، PASS محسوب نمی‌شود. |
+| CI | چهار Workflow روی source/test commit `9701feb8df7ab63775b0715bf679f427aadf810a` کامل شدند؛ ۵ job موفق، ۷ skipped، صفر failure. Skip، PASS نیست. |
 
 ### ۱۲ مأموریت
 
@@ -256,3 +256,6 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | 17 | آیا PR آماده Merge است؟ | NO | Gateهای جزئی/مسدود و CI روی HEAD نهایی هنوز بررسی‌نشده‌اند. Merge انجام نشده است. |
 
 وضعیت کلان: **CONDITIONALLY_COMPLETED_WITH_OPEN_GATES**. وضعیت `ALL_INTERNAL_GATES_CLOSED` یا `AWAITING_FINAL_GRAPHIFY_REVIEW` ثبت نمی‌شود چون چندین گیت داخلی هنوز بسته نشده‌اند. PR #257 باز و merge نشده می‌ماند.
+
+
+CI source/test commit `9701feb8df7ab63775b0715bf679f427aadf810a` تکمیل شد. Workflowها: Quality gates `45829248764`، Security `45829248667`، Container smoke `45829248738`، Route evidence `45829248752`. پنج job موفق شدند، هفت job skipped ماندند و failure صفر بود. Skippedها شامل Quality gates کامل، Python SAST/SCA و dependency audit CI، container build، route evidence، browser/API و PostgreSQL بودند. بنابراین CI روی این commit، آزمون‌های محلی یا گیت‌های Skipشده را تأیید نمی‌کند. PR همچنان باز، mergeable و unmerged است.

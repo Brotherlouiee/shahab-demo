@@ -233,26 +233,26 @@
     }
   ],
   "github_ci": {
-    "commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
+    "commit": "9701feb8df7ab63775b0715bf679f427aadf810a",
     "workflows": [
       {
         "name": "Quality gates",
-        "run_id": 45820312153,
+        "run_id": 45829248764,
         "conclusion": "success"
       },
       {
         "name": "Security SAST, SCA and secret gates",
-        "run_id": 45820312139,
+        "run_id": 45829248667,
         "conclusion": "success"
       },
       {
         "name": "Container build contract smoke",
-        "run_id": 45820312118,
+        "run_id": 45829248738,
         "conclusion": "success"
       },
       {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 45820312347,
+        "run_id": 45829248752,
         "conclusion": "success"
       }
     ],
@@ -261,11 +261,12 @@
       "skipped": 7,
       "failure": 0
     },
-    "note": "Skipped jobs are not PASS. Python SAST/SCA and runtime/container/browser/database jobs did not run due to docs-only classification. Repository secret scan passed."
+    "note": "Skipped jobs are not PASS. Full quality, Python SAST/SCA, container build, route evidence, browser/API and PostgreSQL jobs did not run because change classification treated this as docs-only."
   },
   "audit_baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
   "pr_base_commit": "3df5beb8fbec677515ad9b4cd0ea30b7fd055dce",
   "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
   "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
-  "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "source_test_commit": "9701feb8df7ab63775b0715bf679f427aadf810a"
 }
