@@ -71,7 +71,7 @@ async function run(deviceScaleFactor) {
       if (edge.origin_graph === 'task_mapping' || edge.origin_graph === 'decision_scope') return true;
       const source = nodes.get(edge.source), target = nodes.get(edge.target);
       const distinctPackages = source.package_id && target.package_id && source.package_id !== target.package_id;
-      if (edge.relation_type === 'contains') return edge.origin_graph === 'new_project_task_graph' && distinctPackages;
+      if (edge.relation_type === 'contains') return false;
       if (edge.origin_graph === 'relation_overlay') {
         return distinctPackages || [source, target].some(node => node.node_type.endsWith('_REFERENCE'));
       }
@@ -112,8 +112,8 @@ async function run(deviceScaleFactor) {
     assert.deepEqual(await counts(), crossCounts());
     await changed('Cross-only intersects relation filter', () => page.selectOption('#relation', 'depends_on'));
     assert.deepEqual(await counts(), crossCounts('depends_on'));
-    await changed('Cross-only excludes Plan containment edges', () => page.selectOption('#relation', 'contains'));
-    assert.deepEqual(await counts(), [0, 0]);
+    await changed('Cross-only containment filter', () => page.selectOption('#relation', 'contains'));
+    assert.deepEqual(await counts(), crossCounts('contains'));
     await changed('Cross-only handoff edges', () => page.selectOption('#relation', 'handoff'));
     assert.deepEqual(await counts(), crossCounts('handoff'));
     await changed('Cross-only and decision filter', async () => {
