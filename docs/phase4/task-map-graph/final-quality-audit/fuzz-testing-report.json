@@ -1,11 +1,49 @@
 {
-  "status": "PASS",
-  "seed": 25711026,
-  "target": "build_and_validate.read_csv via imported public parser",
-  "cases": 1000,
-  "input": "bounded generated UTF-8 CSV bodies with commas, quotes, semicolons, CR/LF, tabs, Persian letters, K and İ",
-  "controlled_rejections": 779,
-  "accepted_and_width_checked": 221,
-  "unexpected_exceptions": 0,
-  "result": "Every generated row either produced complete string-valued fields or a controlled ValueError. No input produced an unexpected exception."
+  "status": "PARTIAL",
+  "campaigns": [
+    {
+      "name": "bounded CSV fuzz",
+      "seed": 25711026,
+      "cases": 1000,
+      "groups": [
+        "quotes",
+        "commas",
+        "semicolons",
+        "CR/LF",
+        "tabs",
+        "Persian",
+        "Unicode"
+      ],
+      "controlled_rejections": 779,
+      "accepted_rows": 221,
+      "unexpected_exceptions": 0,
+      "result": "PASS_FOR_THIS_INPUT_DOMAIN"
+    },
+    {
+      "name": "multi-parser and viewer-helper boundary fuzz",
+      "seed": 2571126,
+      "sample_limit": 4096,
+      "timeout_seconds": 15,
+      "memory_limit_bytes": 1073741824,
+      "cases_by_group": {
+        "malformed_json": 100,
+        "CSV edge rows": 100,
+        "identifier and title token parser iterations": 1000,
+        "PARTIAL_FILES validation": 100,
+        "embedded HTML/JSON": 100,
+        "snapshot base64/gzip decoder": 100
+      },
+      "total_counted_inputs": 1500,
+      "runtime_seconds": "under 1 second after import",
+      "unexpected_exceptions": 0,
+      "unexpected_accepts": 0,
+      "result": "PASS_FOR_TESTED_GROUPS"
+    }
+  ],
+  "total_sample_count": 2500,
+  "limitations": [
+    "Mapping/Node/Edge/Decision record fuzzing and browser Search/Filter input fuzzing do not each have a separate 100-case campaign.",
+    "The tested domain is bounded to 4096 characters. No long-running or memory-pressure corpus was run."
+  ],
+  "overall_result": "PARTIAL"
 }

@@ -72,7 +72,7 @@
   {
     "gate": "GATE-11",
     "status": "PARTIAL",
-    "evidence": "Independent oracle, 100 valid order permutations, 100 invalid structural cases, 200 controlled Hypothesis title examples and 1,000 CSV fuzz rows. Broad property/fuzz contract coverage remains incomplete.",
+    "evidence": "Independent oracle plus 100 order permutations, 100 structural mutations, 200 Hypothesis title cases, 1,000 CSV fuzz rows and 1,500 bounded multi-domain parser/HTML/snapshot cases. Search/filter and graph record fuzz and full 30-property generation remain incomplete.",
     "previous_status": "PASS_WITH_SCOPE_LIMIT",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },

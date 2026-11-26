@@ -146,6 +146,12 @@
       "command": "python -m mypy --follow-imports=skip --ignore-missing-imports docs/phase4/task-map-graph/build_task_map_graph.py",
       "result": "PASS",
       "count": "0 type diagnostics after explicit publication entry tracking, community map types, and source-reference artifact validation."
+    },
+    {
+      "name": "bounded multi-domain fuzz campaign",
+      "command": "PYTHONPATH=... timeout 15s bash -c ulimit -v 1048576; python /tmp/shahab_phase4_fuzz.py",
+      "result": "PARTIAL",
+      "count": "Seed 2571126; 1,500 counted samples across malformed JSON, CSV edge rows, identifier/title parsing, PARTIAL_FILES validation, embedded HTML and snapshot decoding; plus 1,000 prior CSV fuzz rows. 0 unexpected exceptions or accepts. Search/filter and graph record fuzz remain."
     }
   ],
   "limitations": [

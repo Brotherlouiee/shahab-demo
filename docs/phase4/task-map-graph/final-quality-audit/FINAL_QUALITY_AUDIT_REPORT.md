@@ -153,7 +153,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | 2. اعتبارسنجی مستقل و Property-based | PARTIAL | PARTIAL | Oracle مستقل؛ ۱۰۰ ترتیب معتبر، ۱۰۰ حالت نامعتبر، ۲۰۰ نمونه Hypothesis | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | property-testing-report.json | همهٔ ۳۰ Property و سناریوها مولد/مستقل آزموده نشده‌اند |
 | 3. Branch Coverage | PARTIAL | PARTIAL | Python coverage.py و JS Istanbul در DPR1/2 | شاخهٔ پوشش‌نیافتهٔ جدید ثبت نشد | شاخه‌های بحرانی در UI/انتشار آزموده شدند | Python 73.10% branch، JS 85.90% branch | ۱۰۰٪ branchهای بحرانی اثبات نشده |
 | 4. Mutation Testing | PARTIAL | PARTIAL | ۳۰ مورد ترکیبی در ماتریس قبلی | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | ۱۵ جهش کد + ۱۵ mutation داده کشف شدند | ۳۰ جهش code-only اجرا نشده |
-| 5. Fuzz Testing | PARTIAL | PARTIAL | ۱۰۰۰ ورودی CSV و ۲۰۰ مثال Hypothesis | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | ۷۷۹ رد کنترل‌شده، ۲۲۱ پذیرفته، صفر خطای پیش‌بینی‌نشده | JSON/HTML/snapshot/identifier fuzz کامل نیست |
+| 5. Fuzz Testing | PARTIAL | PARTIAL | ۱۰۰۰ CSV + ۱۵۰۰ ورودی در ۶ دامنه با seed ثابت، timeout و memory cap | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | صفر exception یا accept غیرمنتظره | Graph record و Search/Filter fuzz ناقص است |
 | 6. Fault Injection | PARTIAL | PARTIAL | ۱۰ خطای انتشار؛ ۲۸ regression | AUDIT-05 mixed generation | rollback چندخروجی گراف اصلاح شد | ده replace/fsync/interruption حفظ فایل معتبر را آزمود | power loss، concurrency و Source Coverage group transaction باقی است |
 | 7. Security | PARTIAL | PARTIAL | Bandit، Ruff، pip-audit، npm audit، مرورگر XSS | یافتهٔ قابل‌اقدام جدید ندارد | هفت payload خصمانه inert ماندند | SCA بدون CVE شناخته‌شده؛ اسکن secrets در CI قبلی PASS | SAST/SCA کامل CI روی HEAD نهایی هنوز منتظر اجراست |
 | 8. Performance/Stress | PARTIAL | PARTIAL | Stress مصنوعی ۱x تا ۱۰x و نمونه‌گیری browser موجود | یافتهٔ جدید ندارد | یافتهٔ جدید ندارد | ۱۰x ساختاری قبلاً ۵٫۱۱۴ ثانیه ثبت شد | builder/browser ۱۰x و budget مصوب موجود نیست |
@@ -183,7 +183,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 - Fault injection: ده خطای انتشار در Graph، Source Coverage، Evidence Index و Mapping آزمایش شد. ۱۹ مسیر خطای ورودی/انتشار در گزارش تفصیلی ثبت است.
 - Type checking: Mypy 2.4.1 برای چهار ماژول اجرا شد. `build_task_map_graph.py` پس از اصلاح نوع‌دهی helper انتشار بدون هشدار است. ۳۴ هشدار باقی‌مانده در دو ماژول قدیمی‌تر `build_and_validate.py` و `replay_stage4.py` هستند و refactor گستردهٔ آن‌ها انجام نشد.
 - SCA محلی: `pip-audit .` و `npm audit --omit=dev` هیچ آسیب‌پذیری شناخته‌شده‌ای گزارش نکردند. Python dependencyها از بازه‌های pyproject حل شدند چون lockfile پایتون وجود ندارد. Bandit چهار هشدار High مربوط به SHA-1 شناسهٔ Git Blob و ۱۶ هشدار Low subprocess ثابت دارد. Ruff نیز ۵۴۷ مورد lint/style از جمله بدهی‌های موجود گزارش کرد. تغییرات گستردهٔ خارج از دامنه انجام نشد.
-- Mutation، Fuzz، Property، Stress و Consumer smoke در حالت محدود قبلی باقی ماندند. ۳۰ مورد mutation ترکیبی شامل ۱۵ جهش کد و ۱۵ جهش داده بود و معادل ۳۰ جهش کد نیست. CSV fuzz برابر ۱۰۰۰ نمونه با ۷۷۹ رد کنترل‌شده و ۲۲۱ ورودی پذیرفته‌شده بود. آزمون‌های property همهٔ ۳۰ invariant خواسته‌شده را پوشش نمی‌دهند.
+- Mutation، Property، Stress و Consumer smoke محدود باقی ماندند. ۳۰ مورد mutation ترکیبی شامل ۱۵ جهش کد و ۱۵ جهش داده بود و معادل ۳۰ جهش کد نیست. Fuzz برابر ۱۰۰۰ CSV و ۱۵۰۰ ورودی در شش گروه دیگر بود، بدون exception/accept غیرمنتظره. Fuzz کامل Search/Filter و Graph record و تمام ۳۰ property انجام نشد.
 
 ### سلامت داده و بازتولیدپذیری
 
@@ -221,7 +221,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | GATE-08 | PASS | PASS | 29/29 controls, zero errors, rerun on ee23df1. |
 | GATE-09 | PASS | PASS | Replay check-only and two deterministic write replays; 657 records, 347 inventory files, 696 mappings, 134 OPEN/BLOCKED. |
 | GATE-10 | PASS | PASS | Two builder generations byte-identical; 4,490 nodes, 11,435 edges. |
-| GATE-11 | PASS_WITH_SCOPE_LIMIT | PARTIAL | Independent oracle, 100 valid order permutations, 100 invalid structural cases, 200 controlled Hypothesis title examples and 1,000 CSV fuzz rows. Broad property/fuzz contract coverage remains incomplete. |
+| GATE-11 | PASS_WITH_SCOPE_LIMIT | PARTIAL | Independent oracle، ۱۰۰ permutation معتبر، ۱۰۰ ساختار نامعتبر، ۲۰۰ Hypothesis title، ۱۰۰۰ CSV و ۱۵۰۰ نمونه در شش دامنهٔ parser/HTML/snapshot. Fuzz گراف و Search/Filter و تمام ۳۰ property باقی است. |
 | GATE-12 | PARTIAL | PARTIAL | Python branch coverage 73.10% (500/684 arcs) across four modules; instrumented JavaScript branch coverage 85.9%. Neither reaches 100%, all critical branches not proven. |
 | GATE-13 | PARTIAL | PARTIAL | 30/30 mixed target cases detected: 15/15 production-source mutants killed and 15/15 artifact/data mutations detected. Full 30-code-only source mutation set is not claimed, so gate remains PARTIAL. |
 | GATE-14 | PARTIAL | PARTIAL | Ten publication faults exercised. Combined graph JSON+HTML rollback works for injected replacement/fsync/interruption. Source Coverage writes are atomic per file. Crash/power-loss/concurrency and set-level publication remain untested. |
@@ -243,7 +243,7 @@ Blob SHA و SHA-256 سه گراف Immutable با مقادیر مصوب براب�
 | 3 | آیا تمام نقص‌های تأییدشده اصلاح شده‌اند؟ | CONDITIONAL | AUDIT-05 و نقص‌های قبلی اصلاح و Regression شدند. Graphify item ششم شرح ندارد. |
 | 4 | آیا Branch Coverage بحرانی تعیین تکلیف شده است؟ | NO | Python 73.10% و JavaScript 85.90% branch coverage دارند. ۱۰۰٪ بحرانی ثابت نشده است. |
 | 5 | آیا Mutation Testing موفق بوده است؟ | NO | ۳۰ مورد ترکیبی شناسایی شد، اما فقط ۱۵ مورد mutation منبع کد بود؛ امتیاز ۳۰ جهش کدی نداریم. |
-| 6 | آیا Fuzz Testing موفق بوده است؟ | CONDITIONAL | ۱۰۰۰ ورودی CSV بدون خطای پیش‌بینی‌نشده اجرا شد. دامنه‌های دیگر fuzz نشده‌اند. |
+| 6 | آیا Fuzz Testing موفق بوده است؟ | CONDITIONAL | ۲۵۰۰ نمونه در CSV و شش دامنهٔ parser/HTML/snapshot اجرا شد، با صفر خطای پیش‌بینی‌نشده. Search/Filter و Node/Edge/Decision fuzz هنوز ناقص است. |
 | 7 | آیا Fault Injection موفق بوده است؟ | CONDITIONAL | ده شکست انتشار بازیابی شدند. power-loss، concurrency و تراکنش چندفایلی Source Coverage آزموده نشدند. |
 | 8 | آیا ممیزی امنیتی تکمیل شده است؟ | NO | اسکن محلی و XSS اجرا شد، ولی CI SAST/SCA برای تغییر docs-only skip شده و هشدارهای Bandit/Ruff باقی‌اند. |
 | 9 | آیا Performance و Stress Testing تعیین تکلیف شده‌اند؟ | CONDITIONAL | Stress ساختاری ۱۰x و اندازه‌گیری محدود موجود است. بار Builder/Browser و budget مصوب پوشش داده نشدند. |
