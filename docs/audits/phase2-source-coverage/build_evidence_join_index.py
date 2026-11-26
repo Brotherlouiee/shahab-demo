@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[3]
 COVERAGE = ROOT / "docs/audits/phase2-source-coverage"
 GRAPH_PATH = ROOT / "knowledge-graph/phase2-reference-docs/semantic/graph.json"
 GRAPH_COMMIT = "17622bf4dd56108bee10d880a9dc5eb9617482fd"
+GRAPH_SHA256 = "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93"
 
 
 # Columns required to join the ledgers. Heading text can be absent in legacy inventories.
@@ -82,11 +83,15 @@ def build():
     if GRAPH_PATH.exists():
         graph_bytes = GRAPH_PATH.read_bytes()
     else:
-        graph_bytes = subprocess.run(
-            ["git", "show", f"{GRAPH_COMMIT}:knowledge-graph/phase2-reference-docs/semantic/graph.json"],
-            cwd=ROOT, check=True, capture_output=True,
-        ).stdout
-    if hashlib.sha256(graph_bytes).hexdigest() != "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93":
+        graph_ref = f"{GRAPH_COMMIT}:{GRAPH_PATH.relative_to(ROOT).as_posix()}"
+        try:
+            graph_bytes = subprocess.run(
+                ["git", "show", graph_ref], cwd=ROOT, check=True, capture_output=True,
+            ).stdout
+        except subprocess.CalledProcessError as exc:
+            raise ValueError(f"Pinned Graphify graph unavailable in the working tree or Git: {graph_ref}") from exc
+    graph_sha256 = hashlib.sha256(graph_bytes).hexdigest()
+    if graph_sha256 != GRAPH_SHA256:
         raise SystemExit("Pinned Graphify graph SHA-256 mismatch")
     graph = json.loads(graph_bytes.decode("utf-8"))
     nodes = {node["id"]: node for node in graph["nodes"]}
@@ -110,10 +115,14 @@ def build():
         cid = candidate["candidate_id"]
         mapped = trace.get(cid, {})
         refs = split_refs(mapped.get("graph_node_ids", ""))
+        ref_ids = set(refs)
         neighboring = {}
         for node_id in refs:
             for edge in adjacency.get(node_id, []):
                 other = edge["target"] if edge["source"] == node_id else edge["source"]
+                # The directly referenced nodes are already exposed in graph_nodes.
+                if other in ref_ids:
+                    continue
                 key = (other, edge["relation"], edge["confidence"])
                 neighboring[key] = edge
         parent = inventory_by_id.get(candidate.get("parent_heading_id", ""), {})
@@ -127,9 +136,11 @@ def build():
             "source_excerpt": candidate.get("source_excerpt", ""),
             "graph_nodes": refs,
             "graph_neighbors": [
-                {"node_id": edge["target"] if edge["source"] in refs else edge["source"],
-                 "relation": edge["relation"], "confidence": edge["confidence"]}
-                for edge in sorted(neighboring.values(), key=lambda e: (-e.get("weight", 0), e["relation"]))
+                {"node_id": neighbor_id, "relation": relation, "confidence": confidence}
+                for (neighbor_id, relation, confidence), _ in sorted(
+                    neighboring.items(),
+                    key=lambda item: (-item[1].get("weight", 0), item[0][1]),
+                )
             ][:12],
             "review_status": (
                 "SEMANTICALLY_REVIEWED"
@@ -170,7 +181,7 @@ def build():
             "path": "knowledge-graph/phase2-reference-docs/semantic/graph.json",
             "commit": GRAPH_COMMIT,
             "built_at_commit": graph.get("built_at_commit"),
-            "sha256": hashlib.sha256(graph_bytes).hexdigest(),
+            "sha256": graph_sha256,
             "nodes": len(nodes),
             "edges": len(graph["links"]),
             "edge_confidence_counts": dict(Counter(edge.get("confidence", "UNKNOWN") for edge in graph["links"])),

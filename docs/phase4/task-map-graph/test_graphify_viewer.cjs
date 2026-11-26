@@ -34,13 +34,17 @@ async function run(deviceScaleFactor) {
         metrics.nodes = [];
         metrics.edges = [];
       });
-      record('beginPath', () => { metrics.start = null; metrics.end = null; });
+      let cursor = null;
+      let segments = [];
+      record('beginPath', () => { cursor = null; segments = []; });
       record('arc', (context, x, y, radius) => { metrics.nodes.push([...screen(context, x, y), radius]); });
-      record('moveTo', (context, x, y) => { metrics.start = screen(context, x, y); });
-      record('lineTo', (context, x, y) => { metrics.end = screen(context, x, y); });
-      record('stroke', () => {
-        if (metrics.start && metrics.end) metrics.edges.push([metrics.start, metrics.end]);
+      record('moveTo', (context, x, y) => { cursor = screen(context, x, y); });
+      record('lineTo', (context, x, y) => {
+        const end = screen(context, x, y);
+        if (cursor) segments.push([cursor, end]);
+        cursor = end;
       });
+      record('stroke', () => { metrics.edges.push(...segments); });
     });
     const path = process.argv[2] || resolve(__dirname, 'task-map-graph.html');
     await page.goto(pathToFileURL(resolve(path)).href);
@@ -49,6 +53,32 @@ async function run(deviceScaleFactor) {
       if (typeof ready?.then !== 'function') throw new Error('Viewer readiness promise is missing');
       return ready;
     });
+    const graph = await page.locator('#graph-data').evaluate(source => {
+      const { nodes, edges } = JSON.parse(source.textContent);
+      return {
+        nodes: nodes.map(({ id, package_id, node_type }) => [id, { package_id, node_type }]),
+        edges: edges.map(({ source, target, origin_graph, relation_type }) =>
+          ({ source, target, origin_graph, relation_type })),
+      };
+    });
+    const nodes = new Map(graph.nodes);
+    const crossEdges = graph.edges.filter(edge => {
+      if (edge.origin_graph === 'task_mapping' || edge.origin_graph === 'decision_scope') return true;
+      if (edge.relation_type === 'contains') return false;
+      const source = nodes.get(edge.source), target = nodes.get(edge.target);
+      const distinctPackages = source.package_id && target.package_id && source.package_id !== target.package_id;
+      if (edge.origin_graph === 'relation_overlay') {
+        return distinctPackages || [source, target].some(node => node.node_type.endsWith('_REFERENCE'));
+      }
+      return edge.origin_graph === 'new_project_task_graph' && distinctPackages;
+    });
+    function crossCounts(relation, showDecisions = true) {
+      const edges = crossEdges.filter(edge =>
+        (!relation || edge.relation_type === relation) &&
+        (showDecisions || [edge.source, edge.target].every(id => nodes.get(id).node_type !== 'OPEN_DECISION')));
+      return [new Set(edges.flatMap(edge => [edge.source, edge.target])).size, edges.length];
+    }
+    const fullGraphCounts = [nodes.size, graph.edges.length];
     const settle = () => page.evaluate(async () => {
       for (let i = 0; i < 5; i++) await new Promise(requestAnimationFrame);
     });
@@ -70,26 +100,27 @@ async function run(deviceScaleFactor) {
     assert.ok(initial > 0);
     await settle();
     assert.equal(await frames(), initial, 'Canvas kept repainting while idle');
+    assert.deepEqual(await counts(), fullGraphCounts);
     await changed('relation filter after idle', () => page.selectOption('#relation', 'handoff'));
     await changed('clear relation filter', () => page.selectOption('#relation', ''));
     await changed('Cross-only', () => page.check('#crossOnly'));
-    assert.deepEqual(await counts(), [380, 823]);
+    assert.deepEqual(await counts(), crossCounts());
     await changed('Cross-only intersects relation filter', () => page.selectOption('#relation', 'depends_on'));
-    assert.deepEqual(await counts(), [10, 11]);
+    assert.deepEqual(await counts(), crossCounts('depends_on'));
     await changed('Cross-only excludes containment edges', () => page.selectOption('#relation', 'contains'));
     assert.deepEqual(await counts(), [0, 0]);
     await changed('Cross-only handoff edges', () => page.selectOption('#relation', 'handoff'));
-    assert.equal((await counts())[1], 50);
+    assert.deepEqual(await counts(), crossCounts('handoff'));
     await changed('Cross-only and decision filter', async () => {
       await page.selectOption('#relation', '');
       await page.uncheck('#decisions');
     });
-    assert.equal((await counts())[1], 206);
+    assert.deepEqual(await counts(), crossCounts('', false));
     await changed('reset filters', async () => {
       await page.uncheck('#crossOnly');
       await page.check('#decisions');
     });
-    assert.deepEqual(await counts(), [4490, 11435]);
+    assert.deepEqual(await counts(), fullGraphCounts);
 
     const search = page.locator('#search');
     await changed('Search highlights Canvas nodes', () => search.fill('TASK:CORE:C05A:004'));
@@ -144,6 +175,25 @@ async function run(deviceScaleFactor) {
     assert.ok(evidence.relation_id && evidence.source_refs.length && evidence.plan_locator);
     console.log('PASS Source Evidence for node and overlay edge');
     assert.deepEqual(pageErrors, []);
+    const segments = await page.evaluate(() => {
+      const canvas = document.body.appendChild(document.createElement('canvas'));
+      try {
+        canvas.style.cssText = 'position:absolute; width:300px; height:150px';
+        const context = canvas.getContext('2d');
+        const before = window.painted.edges.length;
+        context.beginPath();
+        context.moveTo(3, 4);
+        context.lineTo(7, 8);
+        context.lineTo(11, 12);
+        context.moveTo(17, 18);
+        context.lineTo(21, 22);
+        context.stroke();
+        return window.painted.edges.slice(before);
+      } finally {
+        canvas.remove();
+      }
+    });
+    assert.deepEqual(segments, [[[3, 4], [7, 8]], [[7, 8], [11, 12]], [[17, 18], [21, 22]]]);
     console.log('Browser', browser.version(), 'DPR', deviceScaleFactor);
   } finally {
     await browser.close();

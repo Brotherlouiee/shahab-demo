@@ -1,6 +1,7 @@
 """Focused regressions for the Phase 4 Graphify review."""
 import contextlib
 import csv
+import hashlib
 import io
 import json
 import shutil
@@ -41,6 +42,16 @@ class EvidenceJoinTests(unittest.TestCase):
             writer.writeheader()
             writer.writerows(rows)
 
+    @contextlib.contextmanager
+    def temporary_csv_edit(self, name, edit):
+        path = self.coverage / name
+        original = path.read_bytes()
+        try:
+            self.edit_csv(name, edit)
+            yield
+        finally:
+            path.write_bytes(original)
+
     def assert_preserved_on_error(self, error):
         with self.assertRaisesRegex(ValueError, error):
             join.main()
@@ -48,12 +59,10 @@ class EvidenceJoinTests(unittest.TestCase):
 
     def test_missing_required_headers_fail_before_publication(self):
         for name, columns in join.REQUIRED_COLUMNS.items():
-            with self.subTest(file=name):
-                column = sorted(columns)[0]
-                original = (self.coverage / name).read_bytes()
-                self.edit_csv(name, lambda fields, rows: fields.remove(column))
-                self.assert_preserved_on_error(rf"{name}: missing required columns: {column}")
-                (self.coverage / name).write_bytes(original)
+            for column in sorted(columns):
+                with (self.subTest(file=name, column=column),
+                      self.temporary_csv_edit(name, lambda fields, rows: fields.remove(column))):
+                    self.assert_preserved_on_error(rf"{name}: missing required columns: {column}")
 
     def test_canonical_headings_and_review_statuses(self):
         index = join.build()
@@ -107,17 +116,44 @@ class EvidenceJoinTests(unittest.TestCase):
 
     def test_duplicate_trace_and_review_ids_fail_before_publication(self):
         for name in ("execution-trace.csv", "semantic-review-dispositions.csv"):
-            with self.subTest(file=name):
-                original = (self.coverage / name).read_bytes()
-                self.edit_csv(name, lambda fields, rows: rows.append(rows[0]))
+            with (self.subTest(file=name),
+                  self.temporary_csv_edit(name, lambda fields, rows: rows.append(rows[0]))):
                 self.assert_preserved_on_error(rf"{name}: duplicate candidate_id")
-                (self.coverage / name).write_bytes(original)
 
     def test_short_csv_row_fails_before_publication(self):
         path = self.coverage / "atomic-obligations.csv"
         header = path.read_text(encoding="utf-8-sig").splitlines()[0]
         path.write_text(header + "\nID,\n", encoding="utf-8")
         self.assert_preserved_on_error(r"atomic-obligations.csv:2: missing value\(s\) in source_unit_id")
+
+    def test_missing_pinned_graph_fails_before_publication(self):
+        path = self.coverage / "missing-graph.json"
+        with patch.object(join, "GRAPH_PATH", path), patch.object(join, "ROOT", self.coverage):
+            self.assert_preserved_on_error(r"Pinned Graphify graph unavailable.*missing-graph.json")
+
+    def test_graph_neighbors_only_include_unmapped_endpoints(self):
+        graph = {
+            "nodes": [{"id": name} for name in ("in-a", "in-b", "out-a", "out-b")],
+            "links": [
+                {"source": "in-a", "target": "in-b", "relation": "r", "confidence": "EXTRACTED", "weight": 10},
+                {"source": "in-a", "target": "in-a", "relation": "r", "confidence": "EXTRACTED", "weight": 9},
+                {"source": "out-a", "target": "in-a", "relation": "r", "confidence": "EXTRACTED", "weight": 2},
+                {"source": "in-b", "target": "out-a", "relation": "r", "confidence": "EXTRACTED", "weight": 2},
+                {"source": "in-b", "target": "out-b", "relation": "r", "confidence": "EXTRACTED", "weight": 1},
+            ],
+        }
+        graph_path = self.coverage / "graph.json"
+        graph_path.write_text(json.dumps(graph), encoding="utf-8")
+        self.edit_csv("execution-trace.csv", lambda fields, rows: rows[0].update(graph_node_ids="in-a;in-b"))
+        _, trace = join.read_csv(self.coverage / "execution-trace.csv")
+        digest = hashlib.sha256(graph_path.read_bytes()).hexdigest()
+        with patch.object(join, "GRAPH_PATH", graph_path), patch.object(join, "GRAPH_SHA256", digest):
+            items = join.build()["candidate_index"]
+        item = next(row for row in items if row["candidate_id"] == trace[0]["candidate_id"])
+        self.assertEqual(item["graph_nodes"], ["in-a", "in-b"])
+        self.assertEqual(item["graph_neighbors"], [
+            {"node_id": name, "relation": "r", "confidence": "EXTRACTED"} for name in ("out-a", "out-b")
+        ])
 
     def test_orphan_obligation_fails_before_publication(self):
         self.edit_csv("atomic-obligation-dispositions.csv",
