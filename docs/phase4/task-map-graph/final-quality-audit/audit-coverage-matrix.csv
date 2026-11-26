@@ -1,87 +1,87 @@
 path,unit,line,coverage_status,evidence
-docs/phase4/task-map-graph/build_task_map_graph.py,load_json,38,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,sha256,42,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,git_blob_sha,46,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,stable_id,50,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,source_node_id,55,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,source_ref,59,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,html_document,63,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,build,193,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,main,614,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,add_edge,355,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,resolves,545,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/build_task_map_graph.py,module-level flow,1,INVENTORIED_REVIEWED,"Imports, constants, top-level side effects and CLI entry point checked"
-docs/phase4/task-map-graph/replay_stage4.py,title_search_tokens,38,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,exact_title_matches,42,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,validate_partial_files,55,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,sha256,73,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,blob_sha,74,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,readj,75,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,writej,76,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,fail,91,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,short_alias,94,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,build_search,98,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,semantic_projection,181,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,projection_digest,191,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,main,194,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,mid,211,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/replay_stage4.py,module-level flow,1,INVENTORIED_REVIEWED,"Imports, constants, top-level side effects and CLI entry point checked"
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,read_join_rows,45,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,unique_ids,57,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,split_refs,69,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,build,73,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,publish_index,208,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,main,230,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_evidence_join_index.py,module-level flow,1,INVENTORIED_REVIEWED,"Imports, constants, top-level side effects and CLI entry point checked"
-docs/audits/phase2-source-coverage/build_and_validate.py,sha256,53,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,git_blob,57,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,read_csv,64,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,write_csv,80,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,apply_review_dispositions,88,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,apply_source_unit_dispositions,121,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,excerpt_text,148,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,parse_sources,153,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,line_bounds,242,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,graph_data,247,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,classification,264,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,cells_from_row,293,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,has_validation_failures,302,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,main,306,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,build_package_index_and_traces,584,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,source_locator_matches,751,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,validate_outputs,766,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,update_manifest,1080,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,write_reports,1121,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,parent_at,231,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,record,781,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,package_qualified,639,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,select,692,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,object_blob,555,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/audits/phase2-source-coverage/build_and_validate.py,module-level flow,1,INVENTORIED_REVIEWED,"Imports, constants, top-level side effects and CLI entry point checked"
-docs/phase4/task-map-graph/test_graphify_review.py,test_failed_machine_control_produces_failure_exit,23,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,setUp,34,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,edit_csv,46,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,temporary_csv_edit,58,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,assert_preserved_on_error,67,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_missing_required_headers_fail_before_publication,72,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_canonical_headings_and_review_statuses,79,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_legacy_heading_fallback,96,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_trace_lists_drop_empty_references_consistently,111,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_trace_and_review_ids_fail_before_publication,129,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_short_csv_row_fails_before_publication,135,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_missing_pinned_graph_fails_before_publication,141,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_graph_neighbors_only_include_unmapped_endpoints,146,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_orphan_obligation_fails_before_publication,170,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_obligation_fails_before_publication,175,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_null_identifier_fails_with_controlled_error,179,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_failed_index_publication_preserves_previous_output,183,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_candidate_fails_before_publication,194,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_exact_title_matching,200,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_partial_evidence_by_id_and_validation,220,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_partials_keep_pinned_code_locators,237,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_failed_atomic_publication_preserves_mapping_and_prints_no_pass,246,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,test_invalid_mapping_is_not_published,262,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,edit,100,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,edit,119,INVENTORIED_REVIEWED,Static syntax/contract review; runtime evidence in test-execution-report.json
-docs/phase4/task-map-graph/test_graphify_review.py,module-level flow,1,INVENTORIED_REVIEWED,"Imports, constants, top-level side effects and CLI entry point checked"
-docs/phase4/task-map-graph/test_graphify_viewer.cjs,browser harness / inline viewer logic,1,INVENTORIED_REVIEWED,Real Chromium 142 DPR1/2 browser run; see report
+docs/phase4/task-map-graph/build_task_map_graph.py,load_json,38,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,sha256,42,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,git_blob_sha,46,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,stable_id,50,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,source_node_id,55,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,source_ref,59,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,html_document,63,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,build,193,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,main,614,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,add_edge,355,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,resolves,545,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/build_task_map_graph.py,module-level flow,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,title_search_tokens,38,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,exact_title_matches,42,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,validate_partial_files,55,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,sha256,73,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,blob_sha,74,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,readj,75,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,writej,76,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,fail,91,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,short_alias,94,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,build_search,98,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,semantic_projection,181,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,projection_digest,191,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,main,194,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,mid,211,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/replay_stage4.py,module-level flow,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,read_join_rows,45,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,unique_ids,57,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,split_refs,69,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,build,73,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,publish_index,208,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,main,230,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_evidence_join_index.py,module-level flow,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,sha256,53,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,git_blob,57,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,read_csv,64,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,write_csv,80,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,apply_review_dispositions,88,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,apply_source_unit_dispositions,121,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,excerpt_text,148,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,parse_sources,153,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,line_bounds,242,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,graph_data,247,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,classification,264,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,cells_from_row,293,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,has_validation_failures,302,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,main,306,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,build_package_index_and_traces,584,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,source_locator_matches,751,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,validate_outputs,766,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,update_manifest,1080,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,write_reports,1121,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,parent_at,231,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,record,781,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,package_qualified,639,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,select,692,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,object_blob,555,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/audits/phase2-source-coverage/build_and_validate.py,module-level flow,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_failed_machine_control_produces_failure_exit,23,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,setUp,34,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,edit_csv,46,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,temporary_csv_edit,58,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,assert_preserved_on_error,67,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_missing_required_headers_fail_before_publication,72,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_canonical_headings_and_review_statuses,79,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_legacy_heading_fallback,96,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_trace_lists_drop_empty_references_consistently,111,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_trace_and_review_ids_fail_before_publication,129,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_short_csv_row_fails_before_publication,135,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_missing_pinned_graph_fails_before_publication,141,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_graph_neighbors_only_include_unmapped_endpoints,146,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_orphan_obligation_fails_before_publication,170,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_obligation_fails_before_publication,175,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_null_identifier_fails_with_controlled_error,179,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_failed_index_publication_preserves_previous_output,183,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_duplicate_candidate_fails_before_publication,194,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_exact_title_matching,200,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_partial_evidence_by_id_and_validation,220,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_partials_keep_pinned_code_locators,237,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_failed_atomic_publication_preserves_mapping_and_prints_no_pass,246,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,test_invalid_mapping_is_not_published,262,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,edit,100,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,edit,119,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_review.py,module-level flow,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.
+docs/phase4/task-map-graph/test_graphify_viewer.cjs,browser harness / inline viewer logic,1,INVENTORIED_PARTIAL_REVIEW,Function inventory and focused review; full path-by-path manual review remains incomplete. See gates.

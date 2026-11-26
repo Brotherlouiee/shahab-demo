@@ -86,8 +86,8 @@
   },
   {
     "gate": "GATE-18",
-    "status": "NOT_RUN",
-    "evidence": "No runtime performance baseline/final measurements or budget comparison."
+    "status": "PARTIAL",
+    "evidence": "Three same-browser runs recorded at baseline and final. Median load 250 ms vs 242 ms. No approved budget or memory/frame-time measurements, so no full performance acceptance claim."
   },
   {
     "gate": "GATE-19",

@@ -1,10 +1,31 @@
 {
-  "status": "NOT_MEASURED",
-  "reason": "Interactive correctness was exercised in real Chromium, but timing/memory budgets were not measured. Performance gate remains NOT_RUN.",
+  "status": "MEASURED_LIMITED",
   "browser": "Chrome for Testing 142.0.7444.175",
-  "dpr": [
-    1,
-    2
-  ],
-  "metrics": []
+  "dpr": 1,
+  "samples": 3,
+  "metrics": {
+    "dom_content_loaded_ms": [
+      236,
+      252,
+      240
+    ],
+    "load_ms": [
+      237,
+      253,
+      242
+    ],
+    "wall_including_500ms_settle_ms": [
+      745,
+      760,
+      750
+    ]
+  },
+  "median_ms": {
+    "dom_content_loaded": 240,
+    "load": 242,
+    "wall_including_500ms_settle": 750
+  },
+  "artifact_sha256": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5",
+  "code_commit": "67e03b31539b470e31fff15404a207f6aeaab4ce",
+  "comparison": "Median load 8 ms lower than baseline in this small sample; no regression observed. No formal budget can be claimed."
 }

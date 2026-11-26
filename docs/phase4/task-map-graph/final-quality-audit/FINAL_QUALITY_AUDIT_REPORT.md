@@ -18,15 +18,28 @@
 
 ## حوزه‌های ممیزی
 
-| حوزه | نتیجه |
+| دامنه | نتیجه |
 | --- | --- |
-| صحت الگوریتم و داده، ساختار گراف، معنای روابط، حفظ اطلاعات و Schema | PASS در بررسی مستقل شمارش‌ها، کلیدها، Endpointها، Snapshotها، ارجاعات و روابط؛ کنترل‌های رسمی نیز PASS |
-| مرزها، خطاها و ایمنی فایل | دو سناریوی failure-injection برای انتشار Mapping/Index اجرا شد؛ ماتریس کامل خطای فایل اجرا نشد |
-| بازتولیدپذیری | PASS برای خروجی‌های دو Builder در دو اجرا و دو `PYTHONHASHSEED` در Replay/Source Coverage |
-| اعتبارسنجی مستقل، کیفیت کد و امنیت | بخشی از قراردادها بررسی شد؛ ابزارهای کامل امنیتی و type/lint اجرا نشدند |
-| کارایی و مقیاس | آزمون performance با baseline قابل‌مقایسه انجام نشد |
-| مرورگر واقعی و ترکیب فیلتر/حالت | PASS در Chrome 142، DPR 1/2؛ تغییر Canvas با pixel bitmap سنجیده شد |
-| سازگاری محیط و آمادگی Phase 5 | Linux و ساختار ورودی مصرف‌کننده بررسی شد؛ Windows، مرورگرهای دیگر و ارزیابی کامل مصرف‌کننده Phase 5 اجرا نشد |
+| AUD-01 صحت الگوریتمی | PASS برای Stage 4 و ترکیب فیلترهای آزموده‌شده؛ بازبینی تمام شاخه‌ها کامل نیست |
+| AUD-02 یکپارچگی داده | PASS؛ شناسه تکراری، orphan یا اختلاف شمارش در داده جاری نیافتیم |
+| AUD-03 صحت ساختار گراف | PASS؛ Node، Edge، Endpoint و DAG/ترتیب وظایف کنترل شد |
+| AUD-04 صحت معنایی | PARTIAL؛ Cross-only طبق قرارداد روابط و شواهد موجود آزموده شد؛ بازبینی معنایی کامل نیست |
+| AUD-05 تبدیل lossless | PASS در حفظ Snapshotها و تطبیق خروجی‌های ثابت |
+| AUD-06 Schema و قرارداد | PASS برای ورودی‌های Evidence Join و کنترل‌های رسمی |
+| AUD-07 مرزها و حالت‌های حدی | PARTIAL؛ شناسه تهی، ردیف کوتاه، ترتیب متفاوت partial evidence و فیلترهای ناسازگار آزموده شد |
+| AUD-08 مدیریت خطا | PARTIAL؛ کنترل خطاهای بحرانی بازتولیدشده بررسی شد، نه کل ماتریس |
+| AUD-09 اتمیک بودن فایل | PARTIAL؛ خطای replace در Evidence Index و Mapping تزریق شد |
+| AUD-10 deterministic replay | PASS برای دو اجرای مستقل، Byte-for-byte و دو مقدار PYTHONHASHSEED |
+| AUD-11 اعتبارسنجی مستقل | PARTIAL؛ شمارش، شناسه، Endpoint، Snapshot و ارتباط تصمیم‌ها مستقلاً بازبینی شدند |
+| AUD-12 کیفیت کد | PARTIAL؛ diff، syntax، regression مرور شد؛ type/lint کامل انجام نشد |
+| AUD-13 امنیت | NOT_RUN برای SAST/SCA محلی؛ هیچ تغییر امنیتی یا وابستگی اضافه نشد |
+| AUD-14 کارایی | PARTIAL؛ سه نمونه baseline و final. میانه load برابر 250ms و 242ms بود؛ budget رسمی وجود ندارد |
+| AUD-15 مقیاس و فشار | NOT_RUN؛ تست فشار بزرگ‌مقیاس انجام نشد |
+| AUD-16 مرورگر واقعی | PASS در Chrome 142، DPR 1/2 و Canvas pixel assertions |
+| AUD-17 ترکیب Filter و State | PASS برای فیلترها و انتخاب‌های Node/Edge/Decision |
+| AUD-18 سازگاری محیط | PARTIAL؛ فقط Linux و Chrome آزمایش شدند |
+| AUD-19 کیفیت آزمون | PARTIAL؛ assertionهای مستقل تقویت شدند؛ mutation/fuzz score موجود نیست |
+| AUD-20 آمادگی Phase 5 | PARTIAL؛ گراف معتبر است؛ بررسی کامل مصرف‌کننده و برنامه‌ریزی تحویل‌ها انجام نشد |
 
 ## یافته‌ها و اصلاحات
 
@@ -62,13 +75,13 @@ Git Blob و SHA-256 پیش و پس از بازتولید ثابت ماندند: 
 
 ## روش‌های آزمون
 
-Static syntax، review مستقل محدود، unit، integration، end-to-end browser، determinism، two-hash-seed، fault injection محدود اجرا شدند. Property-based عمومی، mutation، fuzz، stress، performance budget، Windows، Firefox و Edge اجرا نشدند و در gateها NOT_RUN/BLOCKED هستند.
+وضعیت مجزای هر 12 روش در `test-execution-report.json` ثبت شده است. Static syntax، unit، integration، end-to-end browser، determinism، دو hash seed و fault injection محدود اجرا شدند. Property-based، mutation، fuzz، stress، performance budget و محیط‌های Windows/Firefox/Edge اجرا نشده یا ناقص‌اند و PASS گزارش نشده‌اند. مقایسه محدود performance سه نمونه برای هر نسخه داشت و میانه بارگذاری 250ms در baseline و 242ms در نسخه نهایی شد.
 
 ## Graphify و CI
 
 آخرین بررسی موجود Graphify، PR #257 را روی `79574bc806b5a264dca78f5634d0833c1c7e570e` دیده است؛ gate آن PASS با صفر blocker و یک advisory coupling بود. این بررسی روی HEAD فعلی نیست. سهمیه 10/10 است و تا 2026-12-01 UTC تجدید نمی‌شود. `graphify-final-review.md` شرح محدودیت را دارد.
 
-CI commit `392751e` موفق بود؛ skipped jobs به‌عنوان PASS شمرده نشدند. نتیجهٔ CI commit نهایی این تغییرات باید پس از ثبت Commit از GitHub بررسی و در PR گزارش شود.
+CI برای audit commit `67e03b31539b470e31fff15404a207f6aeaab4ce` سه Workflow موفق و Quality gates ناموفق داشت. علت، CRLF در فایل‌های CSV گزارش ممیزی بود که validator آن را trailing whitespace می‌دانست. فایل‌های CSV به LF تبدیل شدند و commit اصلاحی CI تازه را اجرا می‌کند. Jobهای skipped همچنان PASS شمرده نمی‌شوند.
 
 ## Gateها و تصمیم نهایی
 

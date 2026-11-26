@@ -52,6 +52,14 @@
       "name": "mutation / fuzz / stress / performance budget",
       "result": "NOT_RUN",
       "reason": "No mutation framework or recorded comparable performance budget/baseline run in this audit."
+    },
+    {
+      "name": "limited browser performance comparison",
+      "command": "Chrome for Testing 142, three runs per artifact, same viewport and DPR=1",
+      "result": "PARTIAL",
+      "baseline_median_load_ms": 250,
+      "final_median_load_ms": 242,
+      "note": "Small sample, no approved budget, memory or detailed frame timings."
     }
   ],
   "limitations": [
@@ -70,5 +78,79 @@
     "mapping": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
     "combined_graph_json": "a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9",
     "combined_graph_html": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5"
-  }
+  },
+  "methods": [
+    {
+      "id": "TEST-01",
+      "method": "Static analysis",
+      "status": "PARTIAL",
+      "evidence": "py_compile, node --check, git diff --check passed; no dedicated type/security scanner."
+    },
+    {
+      "id": "TEST-02",
+      "method": "Independent code review",
+      "status": "PARTIAL",
+      "evidence": "Focused review of changed code and critical data contracts; coverage matrix inventories all functions."
+    },
+    {
+      "id": "TEST-03",
+      "method": "Unit tests",
+      "status": "PASS",
+      "evidence": "19 regression tests."
+    },
+    {
+      "id": "TEST-04",
+      "method": "Integration tests",
+      "status": "PASS",
+      "evidence": "Official source coverage builder, Evidence Join, Stage 4 replay and graph builder."
+    },
+    {
+      "id": "TEST-05",
+      "method": "End-to-end",
+      "status": "PASS",
+      "evidence": "Generated standalone HTML exercised in Chromium."
+    },
+    {
+      "id": "TEST-06",
+      "method": "Property-based",
+      "status": "NOT_RUN",
+      "evidence": "Determinism and independent invariants tested; no general property-based generator or seed corpus."
+    },
+    {
+      "id": "TEST-07",
+      "method": "Mutation testing",
+      "status": "NOT_RUN",
+      "evidence": "No mutation score collected."
+    },
+    {
+      "id": "TEST-08",
+      "method": "Fuzz testing",
+      "status": "NOT_RUN",
+      "evidence": "No fuzz campaign."
+    },
+    {
+      "id": "TEST-09",
+      "method": "Fault injection",
+      "status": "PARTIAL",
+      "evidence": "Atomic index replacement and mapping replacement failure tests."
+    },
+    {
+      "id": "TEST-10",
+      "method": "Differential testing",
+      "status": "PARTIAL",
+      "evidence": "Independent count/reference checks and prior-vs-final immutable artifact comparison; no full second implementation."
+    },
+    {
+      "id": "TEST-11",
+      "method": "Browser testing",
+      "status": "PASS",
+      "evidence": "Chrome 142 at DPR 1 and 2; Canvas pixel checks."
+    },
+    {
+      "id": "TEST-12",
+      "method": "Stress/performance",
+      "status": "PARTIAL",
+      "evidence": "Three baseline/final load samples; no large-data stress, memory, or approved performance budget."
+    }
+  ]
 }
