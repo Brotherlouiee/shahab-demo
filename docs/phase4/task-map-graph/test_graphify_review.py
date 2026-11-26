@@ -21,6 +21,7 @@ import build_task_map_graph as combined_graph
 sys.path.insert(0, str(replay.ROOT / "docs/audits/phase2-source-coverage"))
 import build_evidence_join_index as join
 import build_and_validate as coverage_builder
+import validate_phase4_snapshot as snapshot_validator
 
 
 class CombinedGraphInputValidationTests(unittest.TestCase):
@@ -443,6 +444,186 @@ class EvidenceJoinTests(unittest.TestCase):
     def test_duplicate_candidate_fails_before_publication(self):
         self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows.append(rows[0]))
         self.assert_preserved_on_error("duplicate candidate_id")
+
+
+class CertifiedSnapshotTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        subprocess.run(["git", "init", "-q"], cwd=self.root, check=True)
+        subprocess.run(["git", "config", "user.email", "snapshot-test@example.invalid"], cwd=self.root, check=True)
+        subprocess.run(["git", "config", "user.name", "Snapshot Test"], cwd=self.root, check=True)
+        subprocess.run(["git", "remote", "add", "origin", "https://github.com/Brotherlouiee/shahab-demo.git"], cwd=self.root, check=True)
+        self.fixture_data = {path: ("fixture:" + path).encode() for path in snapshot_validator.REQUIRED_PATHS}
+        code_path = "docs/phase4/task-map-graph/current-project-code-graph.json"
+        task_path = "docs/phase4/task-map-graph/new-project-task-graph.json"
+        mapping_path = "docs/phase4/task-map-graph/task-map-mapping.json"
+        graph_path = "docs/phase4/task-map-graph/task-map-graph.json"
+        ref_path = "knowledge-graph/phase2-reference-docs/semantic/graph.json"
+        evidence_path = "docs/audits/phase2-source-coverage/evidence-join-index.json"
+        code = {"nodes": []}
+        task = {"nodes": ([{"node_type": "PACKAGE"}] * 36 + [{"node_type": "TASK"}] * 189 + [{"node_type": "SUBTASK"}] * 471)}
+        mapping = {
+            "mappings": ([{"mapping_status": "MAPPED"}] * 15 + [{"mapping_status": "PARTIALLY_MAPPED"}] * 27 + [{"mapping_status": "NEW_IMPLEMENTATION"}] * 654),
+            "stage4_relation_overlay": {"relations": [{}] * 99},
+            "open_decision_references": [{"decision_status": "OPEN", "mapping_status": "BLOCKED"}] * 134,
+            "stage4_code_search_audit": {"records": [{}] * 657},
+        }
+        coverage = {"totals": {"candidates": 1633, "candidate_review_status_counts": {"SEMANTICALLY_REVIEWED": 1633},
+                               "atomic_obligations": 1285,
+                               "atomic_coverage_status_counts": {"VERIFIED_COVERED": 1149, "OPEN_DECISION": 134, "VERIFIED_UNCOVERED": 2}}}
+        for path, obj in ((code_path, code), (task_path, task), (mapping_path, mapping),
+                          (ref_path, {"nodes": []}), (evidence_path, coverage)):
+            self.fixture_data[path] = json.dumps(obj, separators=(",", ":")).encode()
+        graph = {
+            "counts": {"node_total": 4490, "edge_total": 11435, "communities": 181},
+            "source_inputs": {"current_project_code_graph": {"node_count": 3653},
+                              "new_project_task_graph": {"node_count": 696}},
+            "validation": {"result": "PASS", **{key: True for key in (
+                "unique_node_ids", "all_edge_endpoints_valid", "all_task_graph_nodes_preserved",
+                "all_code_graph_nodes_preserved", "all_source_edges_preserved", "lossless_source_snapshots_present",
+                "open_decisions_preserved", "mapping_coverage", "immutable_graphs_unchanged",
+                "all_source_data_references_valid", "lossless_source_payload_round_trip")}},
+            "source_payloads": {name: {"data": __import__("base64").b64encode(__import__("gzip").compress(self.fixture_data[path], mtime=0)).decode(),
+                                       "sha256_uncompressed": hashlib.sha256(self.fixture_data[path]).hexdigest()}
+                                for name, path in (("current_project_code_graph", code_path),
+                                                   ("new_project_task_graph", task_path), ("task_map_mapping", mapping_path))},
+        }
+        self.fixture_data[graph_path] = json.dumps(graph, separators=(",", ":")).encode()
+        self.records = []
+        for path in sorted(snapshot_validator.REQUIRED_PATHS):
+            target = self.root / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(self.fixture_data[path])
+            blob = subprocess.check_output(["git", "hash-object", "-w", str(target)], cwd=self.root, text=True).strip()
+            payload = target.read_bytes()
+            self.records.append({"path": path, "sha256": hashlib.sha256(payload).hexdigest(),
+                                 "size_bytes": len(payload), "git_blob_sha": blob,
+                                 "role": "REQUIRED_PRIMARY_INPUT" if path in snapshot_validator.PRIMARY_PATHS else "REQUIRED_REFERENCE_INPUT",
+                                 "required_for_phase5": True})
+        subprocess.run(["git", "add", "."], cwd=self.root, check=True)
+        subprocess.run(["git", "commit", "-qm", "fixture snapshot"], cwd=self.root, check=True)
+        self.commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.root, text=True).strip()
+        self.pin_commit = patch.object(snapshot_validator, "APPROVED_SOURCE_COMMIT", self.commit)
+        self.pin_commit.start()
+        self.addCleanup(self.pin_commit.stop)
+        self.pin_snapshot = patch.object(snapshot_validator, "APPROVED_SNAPSHOT_ID", "phase4-fixture")
+        self.pin_snapshot.start()
+        self.addCleanup(self.pin_snapshot.stop)
+        self.pin_immutable = patch.object(snapshot_validator, "IMMUTABLE_SHA256", {
+            path: hashlib.sha256(self.fixture_data[path]).hexdigest()
+            for path in (code_path, task_path, ref_path)})
+        self.pin_immutable.start()
+        self.addCleanup(self.pin_immutable.stop)
+        self.manifest_path = self.root / "manifest.json"
+        self.write_manifest()
+        self.commit_manifest()
+
+    def commit_manifest(self):
+        subprocess.run(["git", "add", "manifest.json"], cwd=self.root, check=True)
+        subprocess.run(["git", "commit", "-qm", "fixture manifest"], cwd=self.root, check=True)
+
+    def write_manifest(self, records=None, **overrides):
+        values = list(self.records if records is None else records)
+        primary = [r for r in values if r["role"] == "REQUIRED_PRIMARY_INPUT"]
+        refs = [r for r in values if r["role"] != "REQUIRED_PRIMARY_INPUT"]
+        manifest = {
+            "manifest_schema_version": "1.0", "repository": snapshot_validator.REPOSITORY,
+            "snapshot_id": "phase4-fixture", "certified_source_commit": self.commit,
+            "source_pr": 257,
+            "certification_status": "TECHNICALLY_VALID_FOR_PHASE5; FORMAL_PHASE4_ACCEPTANCE_CONDITIONAL",
+            "formal_phase4_acceptance": "CONDITIONAL",
+            "primary_inputs": primary, "reference_inputs": refs,
+            "optional_human_review_artifacts": [], "audit_evidence_only": [],
+            "graph_statistics": {"combined_graph_nodes": 4490, "combined_graph_edges": 11435,
+                                  "communities": 181, "current_code_nodes": 3653, "task_graph_nodes": 696,
+                                  "packages": 36, "tasks": 189, "subtasks": 471},
+            "mapping_statistics": {"records": 696, "MAPPED": 15, "PARTIALLY_MAPPED": 27,
+                                   "NEW_IMPLEMENTATION": 654, "relation_overlay": 99},
+            "decision_statistics": {"open_decisions": 134, "blocked_mappings": 134,
+                                     "stage4_replay_records": 657},
+            "source_coverage_statistics": {"candidates": 1633, "pending_candidates": 0,
+                                            "atomic_obligations": 1285, "covered": 1149,
+                                            "partial": 0, "open_decision": 134, "uncovered": 2},
+            "artifact_hashes": {r["path"]: r["sha256"] for r in values},
+            "artifact_sizes": {r["path"]: r["size_bytes"] for r in values},
+            "artifact_roles": {r["path"]: r["role"] for r in values},
+        }
+        manifest.update(overrides)
+        self.manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        return manifest
+
+    def test_01_certified_snapshot_is_accepted(self):
+        result = snapshot_validator.validate(self.manifest_path, self.root)
+        self.assertEqual(result["result"], "CERTIFIED_SNAPSHOT_VALID")
+
+    def test_02_missing_required_artifact_is_rejected(self):
+        path = self.records[0]["path"]
+        (self.root / path).unlink()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, path):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_03_changed_artifact_is_rejected(self):
+        path = self.records[0]["path"]
+        (self.root / path).write_bytes(b"tampered")
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, path):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_04_replaced_with_another_artifact_version_is_rejected(self):
+        first, second = self.records[:2]
+        (self.root / first["path"]).write_bytes((self.root / second["path"]).read_bytes())
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, first["path"]):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_05_incomplete_or_invalid_manifest_is_rejected(self):
+        manifest = self.write_manifest()
+        manifest.pop("reference_inputs")
+        self.manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        self.commit_manifest()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "reference_inputs"):
+            snapshot_validator.validate(self.manifest_path, self.root)
+        duplicated = list(self.records) + [dict(self.records[0])]
+        self.write_manifest(duplicated)
+        self.commit_manifest()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "duplicate or ambiguous"):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_06_path_outside_repository_is_rejected(self):
+        records = [dict(r) for r in self.records]
+        records[0]["path"] = "../../outside.json"
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "escapes repository"):
+            snapshot_validator.validate(self.manifest_path, self.root) if False else self._validate_records(records)
+
+    def _validate_records(self, records):
+        self.write_manifest(records)
+        self.commit_manifest()
+        return snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_07_changed_manifest_and_artifact_cannot_recertify_worktree(self):
+        records = [dict(r) for r in self.records]
+        item = records[0]
+        changed = b"new generation"
+        item.update(sha256=hashlib.sha256(changed).hexdigest(), size_bytes=len(changed), git_blob_sha="0" * 40)
+        (self.root / item["path"]).write_bytes(changed)
+        self.write_manifest(records)
+        self.commit_manifest()
+        with self.assertRaisesRegex(snapshot_validator.SnapshotValidationError, "certified commit"):
+            snapshot_validator.validate(self.manifest_path, self.root)
+
+    def test_08_failure_returns_nonzero_and_never_changes_artifacts(self):
+        before = {r["path"]: (self.root / r["path"]).read_bytes() for r in self.records}
+        path = self.records[0]["path"]
+        (self.root / path).write_bytes(b"invalid")
+        before[path] = b"invalid"
+        output, error = io.StringIO(), io.StringIO()
+        with (patch.object(sys, "argv", ["validate_phase4_snapshot.py", "--manifest", str(self.manifest_path), "--repo-root", str(self.root)]),
+              contextlib.redirect_stdout(output), contextlib.redirect_stderr(error)):
+            self.assertEqual(snapshot_validator.main(), 1)
+        self.assertEqual(output.getvalue(), "")
+        self.assertIn("STOP_CONSUMPTION", error.getvalue())
+        after = {r["path"]: (self.root / r["path"]).read_bytes() for r in self.records}
+        self.assertEqual(after, before)
 
 
 class ReplayTests(unittest.TestCase):
