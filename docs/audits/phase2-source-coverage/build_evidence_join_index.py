@@ -53,9 +53,11 @@ def read_join_rows(name):
 
 
 def unique_ids(rows, field, name):
+    for row in rows:
+        key = row.get(field)
+        if not isinstance(key, str) or not key.strip():
+            raise ValueError(f"{name}: blank {field}")
     counts = Counter(row[field] for row in rows)
-    if any(not key.strip() for key in counts):
-        raise ValueError(f"{name}: blank {field}")
     for key, count in counts.items():
         if count > 1:
             raise ValueError(f"{name}: duplicate {field} {key}")

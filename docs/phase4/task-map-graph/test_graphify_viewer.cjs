@@ -62,11 +62,16 @@ async function run(deviceScaleFactor) {
       };
     });
     const nodes = new Map(graph.nodes);
+    for (const edge of graph.edges) {
+      assert.ok(nodes.has(edge.source), `Edge has unknown source node: ${edge.source}`);
+      assert.ok(nodes.has(edge.target), `Edge has unknown target node: ${edge.target}`);
+    }
     const crossEdges = graph.edges.filter(edge => {
+      if (edge.origin_graph === 'current_project_code_graph') return false;
       if (edge.origin_graph === 'task_mapping' || edge.origin_graph === 'decision_scope') return true;
-      if (edge.relation_type === 'contains') return false;
       const source = nodes.get(edge.source), target = nodes.get(edge.target);
       const distinctPackages = source.package_id && target.package_id && source.package_id !== target.package_id;
+      if (edge.relation_type === 'contains') return edge.origin_graph === 'new_project_task_graph' && distinctPackages;
       if (edge.origin_graph === 'relation_overlay') {
         return distinctPackages || [source, target].some(node => node.node_type.endsWith('_REFERENCE'));
       }
@@ -107,7 +112,7 @@ async function run(deviceScaleFactor) {
     assert.deepEqual(await counts(), crossCounts());
     await changed('Cross-only intersects relation filter', () => page.selectOption('#relation', 'depends_on'));
     assert.deepEqual(await counts(), crossCounts('depends_on'));
-    await changed('Cross-only excludes containment edges', () => page.selectOption('#relation', 'contains'));
+    await changed('Cross-only excludes Plan containment edges', () => page.selectOption('#relation', 'contains'));
     assert.deepEqual(await counts(), [0, 0]);
     await changed('Cross-only handoff edges', () => page.selectOption('#relation', 'handoff'));
     assert.deepEqual(await counts(), crossCounts('handoff'));
@@ -125,6 +130,18 @@ async function run(deviceScaleFactor) {
     const search = page.locator('#search');
     await changed('Search highlights Canvas nodes', () => search.fill('TASK:CORE:C05A:004'));
     await changed('Search Enter centers node', () => search.press('Enter'));
+    const centered = await page.evaluate(() => {
+      const query = document.getElementById('search').value.toLowerCase();
+      const graph = JSON.parse(document.getElementById('graph-data').textContent);
+      const match = graph.nodes.find(node => node.id.toLowerCase() === query);
+      if (!match) return null;
+      const matches = window.painted.nodes.filter(([x, y, radius]) =>
+        radius > 2 && Math.abs(x - document.getElementById('graph').clientWidth / 2) < 8 &&
+        Math.abs(y - document.getElementById('graph').clientHeight / 2) < 8);
+      const node = matches.length === 1 && document.getElementById('details').textContent.includes(match.id);
+      return Boolean(node);
+    });
+    assert.ok(centered, 'Enter did not center the matching node');
     let evidence = JSON.parse(await page.locator('#details pre').textContent());
     assert.equal(evidence.source_data.id, 'TASK:CORE:C05A:004');
     assert.ok(evidence.mapping_data);

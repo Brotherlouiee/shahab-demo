@@ -164,6 +164,10 @@ class EvidenceJoinTests(unittest.TestCase):
         self.edit_csv("atomic-obligation-dispositions.csv", lambda fields, rows: rows.append(rows[0]))
         self.assert_preserved_on_error("duplicate atomic_obligation_id")
 
+    def test_null_identifier_fails_with_controlled_error(self):
+        self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows[0].update(candidate_id=None))
+        self.assert_preserved_on_error("atomic-obligations.csv: blank candidate_id")
+
     def test_duplicate_candidate_fails_before_publication(self):
         self.edit_csv("atomic-obligations.csv", lambda fields, rows: rows.append(rows[0]))
         self.assert_preserved_on_error("duplicate candidate_id")
