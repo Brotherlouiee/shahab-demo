@@ -23,14 +23,14 @@
   {
     "gate": "GATE-04",
     "status": "PASS",
-    "evidence": "19/19 Python regressions plus browser suite at DPR1/2. Four injected browser code mutants were killed.",
+    "evidence": "19/19 Python regressions passed; Chrome 142 at DPR 1/2 passed. Browser behavior mutations are documented under GATE-13.",
     "previous_status": "PASS",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
   {
     "gate": "GATE-05",
     "status": "PASS",
-    "evidence": "Independent artifact checks found no duplicate IDs, dangling endpoints, orphan obligations, count mismatches or mapping inconsistencies.",
+    "evidence": "Independent artifact checks found no duplicate IDs, dangling endpoints, orphan obligations, count mismatches or mapping inconsistencies in current outputs.",
     "previous_status": "PASS",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -72,7 +72,7 @@
   {
     "gate": "GATE-11",
     "status": "PARTIAL",
-    "evidence": "Independent oracle, 100 valid ordering permutations, 100 invalid structural mutants, 100+100 Hypothesis title cases and 1,000 CSV fuzz rows. Full 30 mutation set is distinct and incomplete.",
+    "evidence": "Independent oracle, 100 valid order permutations, 100 invalid structural cases, 200 controlled Hypothesis title examples and 1,000 CSV fuzz rows. Broad property/fuzz contract coverage remains incomplete.",
     "previous_status": "PASS_WITH_SCOPE_LIMIT",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -86,7 +86,7 @@
   {
     "gate": "GATE-13",
     "status": "PARTIAL",
-    "evidence": "100/100 invalid data mutants detected and 4/4 injected browser behavior mutants killed. Full 30 specified code mutations and overall score not established.",
+    "evidence": "30/30 mixed target cases detected: 15/15 production-source mutants killed and 15/15 artifact/data mutations detected. Full 30-code-only source mutation set is not claimed, so gate remains PARTIAL.",
     "previous_status": "PARTIAL",
     "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
   },
@@ -142,9 +142,9 @@
   {
     "gate": "GATE-21",
     "status": "PARTIAL",
-    "evidence": "Four workflows completed successfully on ee23df1: five jobs success, seven skipped, zero failures. Skipped security SAST/SCA and runtime/browser/database jobs are not PASS.",
+    "evidence": "Four workflow conclusions success on commit 63e3891; five jobs success, seven skipped, zero failures. Skipped jobs are not PASS.",
     "previous_status": "PASS_WITH_SKIPS",
-    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+    "commit": "63e3891c502f95b3763d5edf872f9257211c5acd"
   },
   {
     "gate": "GATE-22",

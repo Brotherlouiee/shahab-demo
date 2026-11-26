@@ -50,8 +50,8 @@
     },
     {
       "name": "mutation / fuzz / stress / performance budget",
-      "result": "NOT_RUN",
-      "reason": "No mutation framework or recorded comparable performance budget/baseline run in this audit."
+      "result": "PARTIAL",
+      "reason": "These controls were executed in bounded form with separate reports; complete code-only mutation, broad parser/browser fuzz, comparable production-scale performance budgets were not established."
     },
     {
       "name": "limited browser performance comparison",
@@ -64,68 +64,20 @@
     {
       "name": "independent structural/property checks",
       "command": "Temporary independent Python oracle; Hypothesis 200 examples; seeded 100 ordering and 100 invalid graph variants",
-      "result": "PASS",
-      "count": "100 valid permutations + 100 invalid structural mutations + 200 Hypothesis examples"
+      "result": "PARTIAL",
+      "count": "Independent artifact invariants, 100 valid ordering permutations, 100 invalid structural variants, and 200 controlled Hypothesis title examples; this does not cover every requested property."
     },
     {
       "name": "CSV fuzz",
       "command": "Temporary deterministic UTF-8 CSV fuzz against read_csv",
-      "result": "PASS",
-      "count": "1000 generated rows; 779 controlled rejects; 0 unexpected exceptions"
+      "result": "PARTIAL",
+      "count": "1,000 deterministic rows; 779 controlled rejects, 221 complete rows accepted, 0 unexpected errors. Other requested parser/input domains were not fuzzed."
     },
     {
       "name": "mutation tests",
       "command": "Temporary HTML mutants through Chromium regression harness",
       "result": "PARTIAL",
-      "count": "4/4 browser code mutants killed; 100/100 data variants detected; full 30-code-operator score not run"
-    },
-    {
-      "name": "Python branch coverage",
-      "command": "coverage.py 7.17.5 --branch",
-      "result": "PARTIAL",
-      "count": "72.04% aggregate branch arcs over four production modules"
-    },
-    {
-      "name": "Bandit security scan",
-      "command": "bandit -q -r on four Python production files",
-      "result": "PARTIAL",
-      "count": "4 high SHA-1 Git blob identity warnings and 16 low constant git subprocess warnings reviewed; no actionable injection finding"
-    },
-    {
-      "name": "Ruff static lint",
-      "command": "ruff check on five Python implementation/test files",
-      "result": "PARTIAL",
-      "count": "547 style/lint findings, predominantly existing long/minified lines; no broad formatting rewrite"
-    },
-    {
-      "name": "XSS browser fixture",
-      "command": "Temporary hostile label passed through html_document and selected in Chrome",
-      "result": "PASS",
-      "count": "No script execution or injected image element"
-    },
-    {
-      "name": "synthetic structural stress",
-      "command": "1x, 2x, 5x, 10x synthetic graph serialization and endpoint validation",
-      "result": "PARTIAL",
-      "count": "10x = 44,900 nodes, 114,350 edges, 5.114s, 531,416,779-byte tracemalloc peak; not browser/builder performance"
-    },
-    {
-      "name": "independent structural/property checks",
-      "command": "Temporary independent Python oracle; Hypothesis 200 examples; seeded 100 ordering and 100 invalid graph variants",
-      "result": "PASS",
-      "count": "100 valid permutations + 100 invalid structural mutations + 200 Hypothesis examples"
-    },
-    {
-      "name": "CSV fuzz",
-      "command": "Temporary deterministic UTF-8 CSV fuzz against read_csv",
-      "result": "PASS",
-      "count": "1000 generated rows; 779 controlled rejects; 0 unexpected exceptions"
-    },
-    {
-      "name": "mutation tests",
-      "command": "Temporary HTML mutants through Chromium regression harness",
-      "result": "PARTIAL",
-      "count": "4/4 browser code mutants killed; 100/100 data variants detected; full 30-code-operator score not run"
+      "count": "30/30 target cases detected, consisting of 15 production-source mutants and 15 artifact/data mutants. Full 30-source-code mutation score is not claimed."
     },
     {
       "name": "Python branch coverage",
@@ -159,13 +111,14 @@
     }
   ],
   "limitations": [
-    "Full 30 source-code mutation set not executed; mutation score remains partial.",
-    "Full manual per-line sign-off and browser JavaScript branch coverage remain incomplete.",
-    "Only one of six latest Graphify investigation descriptions is unavailable. Graphify review remains blocked by quota.",
-    "Security SAST/SCA and several runtime CI jobs skipped by change classification.",
-    "Windows and Firefox/Edge/macOS not tested.",
-    "Synthetic 10x structural stress does not establish browser or production-builder scaling.",
-    "No approved performance budget exists."
+    "Complete manual per-line review and JavaScript branch coverage are not established.",
+    "The 30-case mutation matrix is mixed: 15 production-source mutants and 15 artifact/data mutations. Full 30-code-only score is not claimed.",
+    "Property and fuzz testing cover bounded domains, not all specified parsers, browser inputs, snapshots and decoders.",
+    "Disk-full, fsync, interruption, concurrent writes and multi-artifact atomic publication were not fully fault-injected.",
+    "Security SAST/SCA and runtime/browser/database/container jobs were skipped by GitHub Actions change classification. Local scans ran, but the CI controls remain incomplete.",
+    "Windows, Firefox, Edge and macOS were not tested.",
+    "Synthetic 10x structural stress does not establish production-builder or browser-rendering scaling. No approved performance budget exists.",
+    "Latest Graphify review is on an earlier commit. Five of six investigation descriptions were available; the sixth remains unknown, and quota is exhausted through 2026-12-01 UTC."
   ],
   "immutable_graph_sha256": {
     "semantic_reference": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
@@ -183,96 +136,96 @@
       "id": "TEST-01",
       "method": "Static analysis",
       "status": "PARTIAL",
-      "evidence": "py_compile, node --check, git diff --check passed; no dedicated type/security scanner."
+      "evidence": "Python and JavaScript syntax checks and diff check passed. Ruff and Bandit ran locally with findings. Dedicated JavaScript branch/type analysis was not available."
     },
     {
       "id": "TEST-02",
       "method": "Independent code review",
       "status": "PARTIAL",
-      "evidence": "Focused review of changed code and critical data contracts; coverage matrix inventories all functions."
+      "evidence": "Critical modified paths and contracts reviewed; complete line-by-line sign-off for all production functions and embedded JavaScript remains incomplete."
     },
     {
       "id": "TEST-03",
       "method": "Unit tests",
       "status": "PASS",
-      "evidence": "19 regression tests."
+      "evidence": "19 focused Python regression tests passed."
     },
     {
       "id": "TEST-04",
       "method": "Integration tests",
       "status": "PASS",
-      "evidence": "Official source coverage builder, Evidence Join, Stage 4 replay and graph builder."
+      "evidence": "Official source coverage, Evidence Join, Stage 4 replay and combined graph builders completed successfully."
     },
     {
       "id": "TEST-05",
       "method": "End-to-end",
       "status": "PASS",
-      "evidence": "Generated standalone HTML exercised in Chromium."
+      "evidence": "Generated standalone viewer exercised in Chromium 142 at DPR 1 and 2."
     },
     {
       "id": "TEST-06",
       "method": "Property-based",
-      "status": "NOT_RUN",
-      "evidence": "Determinism and independent invariants tested; no general property-based generator or seed corpus."
+      "status": "PARTIAL",
+      "evidence": "100 valid ordering permutations, 100 invalid structural variants, and 200 controlled Hypothesis title examples passed. The full 30 requested artifact properties were not each generator-tested."
     },
     {
       "id": "TEST-07",
       "method": "Mutation testing",
-      "status": "NOT_RUN",
-      "evidence": "No mutation score collected."
+      "status": "PARTIAL",
+      "evidence": "30/30 mixed target cases detected; 15/15 production-source mutants killed and 15/15 artifact/data mutations detected. Full 30-code-only operator set not run."
     },
     {
       "id": "TEST-08",
       "method": "Fuzz testing",
-      "status": "NOT_RUN",
-      "evidence": "No fuzz campaign."
+      "status": "PARTIAL",
+      "evidence": "1,000 controlled CSV rows, 779 controlled rejects, 221 valid-width inputs, no unexpected errors. Other requested input domains not covered."
     },
     {
       "id": "TEST-09",
       "method": "Fault injection",
       "status": "PARTIAL",
-      "evidence": "Atomic index replacement and mapping replacement failure tests."
+      "evidence": "Atomic replace failures preserved previous Mapping and Evidence Index outputs. Disk-full, fsync, process-interruption and concurrent-write scenarios remain untested."
     },
     {
       "id": "TEST-10",
       "method": "Differential testing",
       "status": "PARTIAL",
-      "evidence": "Independent count/reference checks and prior-vs-final immutable artifact comparison; no full second implementation."
+      "evidence": "Independent counts, references, snapshots and immutable artifact comparisons ran; no second full semantic implementation was built."
     },
     {
       "id": "TEST-11",
       "method": "Browser testing",
       "status": "PASS",
-      "evidence": "Chrome 142 at DPR 1 and 2; Canvas pixel checks."
+      "evidence": "Chrome 142 at DPR 1 and 2, including Canvas pixel checks and requested interactions."
     },
     {
       "id": "TEST-12",
       "method": "Stress/performance",
       "status": "PARTIAL",
-      "evidence": "Three baseline/final load samples; no large-data stress, memory, or approved performance budget."
+      "evidence": "Synthetic structural graph tested through 10x and limited three-run browser load comparison. Production builder/browser 10x performance, interaction latencies, memory growth and approved budgets are unavailable."
     }
   ],
   "github_ci": {
-    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+    "commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
     "workflows": [
       {
         "name": "Quality gates",
-        "run_id": 45814636924,
+        "run_id": 45820312153,
         "conclusion": "success"
       },
       {
         "name": "Security SAST, SCA and secret gates",
-        "run_id": 45814636899,
+        "run_id": 45820312139,
         "conclusion": "success"
       },
       {
         "name": "Container build contract smoke",
-        "run_id": 45814636855,
+        "run_id": 45820312118,
         "conclusion": "success"
       },
       {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 45814636844,
+        "run_id": 45820312347,
         "conclusion": "success"
       }
     ],
@@ -281,10 +234,10 @@
       "skipped": 7,
       "failure": 0
     },
-    "note": "Workflow conclusions succeeded, but jobs classified as not applicable were skipped; skipped is not PASS. Quality, SAST/SCA, container and route evidence work did not run on this docs-classified change. Secret scan passed."
+    "note": "Skipped jobs are not PASS. Python SAST/SCA and runtime/container/browser/database jobs did not run due to docs-only classification. Repository secret scan passed."
   },
   "audit_baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
   "pr_base_commit": "3df5beb8fbec677515ad9b4cd0ea30b7fd055dce",
   "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
-  "final_pr_head": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd"
 }
