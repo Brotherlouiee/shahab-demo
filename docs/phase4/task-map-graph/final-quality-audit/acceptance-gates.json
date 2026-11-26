@@ -101,8 +101,8 @@
   },
   {
     "gate": "GATE-21",
-    "status": "BLOCKED",
-    "evidence": "CI must be refreshed against the eventual final PR HEAD. Previous PR-head workflows succeeded with skipped jobs reported separately."
+    "status": "PASS_WITH_SKIPS",
+    "evidence": "All four workflows completed successfully on PR audit publication commit d85379e7d90aa5d6a93530d6888a52bc902990bc. Five jobs succeeded and seven were skipped. Skipped jobs are reported separately and are not counted as PASS."
   },
   {
     "gate": "GATE-22",

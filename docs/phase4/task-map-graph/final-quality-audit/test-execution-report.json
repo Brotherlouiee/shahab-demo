@@ -152,5 +152,56 @@
       "status": "PARTIAL",
       "evidence": "Three baseline/final load samples; no large-data stress, memory, or approved performance budget."
     }
-  ]
+  ],
+  "github_ci": {
+    "commit": "d85379e7d90aa5d6a93530d6888a52bc902990bc",
+    "workflows": [
+      {
+        "name": "Quality gates",
+        "run_id": 45811186416,
+        "conclusion": "success",
+        "jobs": {
+          "success": 1,
+          "skipped": 4,
+          "failure": 0
+        }
+      },
+      {
+        "name": "Security SAST, SCA and secret gates",
+        "run_id": 45811185995,
+        "conclusion": "success",
+        "jobs": {
+          "success": 2,
+          "skipped": 1,
+          "failure": 0
+        }
+      },
+      {
+        "name": "Container build contract smoke",
+        "run_id": 45811185983,
+        "conclusion": "success",
+        "jobs": {
+          "success": 1,
+          "skipped": 1,
+          "failure": 0
+        }
+      },
+      {
+        "name": "US-13 frozen frontend baseline evidence",
+        "run_id": 45811185994,
+        "conclusion": "success",
+        "jobs": {
+          "success": 1,
+          "skipped": 1,
+          "failure": 0
+        }
+      }
+    ],
+    "total_jobs": {
+      "success": 5,
+      "skipped": 7,
+      "failure": 0
+    },
+    "note": "Skipped is not PASS. Initial quality-check failure on earlier commit was caused by CRLF in audit CSVs; changing them to LF made the next run pass."
+  }
 }

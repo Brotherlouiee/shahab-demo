@@ -81,7 +81,7 @@ Git Blob و SHA-256 پیش و پس از بازتولید ثابت ماندند: 
 
 آخرین بررسی موجود Graphify، PR #257 را روی `79574bc806b5a264dca78f5634d0833c1c7e570e` دیده است؛ gate آن PASS با صفر blocker و یک advisory coupling بود. این بررسی روی HEAD فعلی نیست. سهمیه 10/10 است و تا 2026-12-01 UTC تجدید نمی‌شود. `graphify-final-review.md` شرح محدودیت را دارد.
 
-CI برای audit commit `67e03b31539b470e31fff15404a207f6aeaab4ce` سه Workflow موفق و Quality gates ناموفق داشت. علت، CRLF در فایل‌های CSV گزارش ممیزی بود که validator آن را trailing whitespace می‌دانست. فایل‌های CSV به LF تبدیل شدند و commit اصلاحی CI تازه را اجرا می‌کند. Jobهای skipped همچنان PASS شمرده نمی‌شوند.
+چهار Workflow روی audit publication commit `d85379e7d90aa5d6a93530d6888a52bc902990bc` با نتیجهٔ success پایان یافتند. پنج Job موفق و هفت Job skipped بودند. Skipped معادل PASS نیست. اجرای اولیهٔ Quality gates روی commit قبلی به‌دلیل CRLF در CSVهای گزارش شکست خورد؛ تبدیل به LF آن را رفع کرد. Run IDها و تفکیک jobها در `test-execution-report.json` ثبت شده‌اند.
 
 ## Gateها و تصمیم نهایی
 
