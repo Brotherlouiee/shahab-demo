@@ -2,58 +2,32 @@
 
 Repository: `Brotherlouiee/shahab-demo`
 PR: #257 (`fix/phase4-graphify-review`)
-Previous HEAD: `77b664b81c420a36c21a765fae537ffa0e4010cd`
-Snapshot: `phase4-45ed4ec10d34216cf935` (certified source `8ce742b640bbcbb87be5fc29f3a5a28d92593dec`)
+Measured local HEAD: `77b664b81c420a36c21a765fae537ffa0e4010cd`
+Current PR HEAD after fast-forward: `4ef61b48a861931b437fc15299f4ea497bac2050`
+Snapshot: `phase4-45ed4ec10d34216cf935` (`8ce742b640bbcbb87be5fc29f3a5a28d92593dec`)
 
-## Scope and results
+## Status
 
-Production scope was held to the five Python builders/replay/validator modules and the single inline Viewer source. Test scope was `test_graphify_review.py` and `test_graphify_viewer.cjs`; generated HTML was not counted as duplicate JavaScript. The full in-scope test execution ran 52 Python tests successfully.
+This update does not close either gate. The previous local coverage run and official checks are retained as evidence, but the suite was not rerun after fast-forwarding and restoring concurrent test changes. The current environment does not have `coverage.py`; prior temporary Istanbul reports are unavailable. No fresh post-rebase coverage claim is made.
 
-| Measure | Baseline | Final |
-|---|---:|---:|
-| Python production branches | 646/878 (73.58%) | 666/884 (75.34%) |
-| Python production statements | 1639/2097 (78.16%) | 1665/2110 (78.91%) |
-| JavaScript Viewer branches (real Chromium 142 + Istanbul) | 262/305 (85.90%) | 262/305 (85.90%) |
-| Python regression-test branches | n/a | 44/46 (95.65%) |
-| JavaScript test branches | n/a | NOT MEASURED (invalid instrumentation result) |
+## GATE-01 — PARTIAL
 
-Python production uncovered branch arcs: 218; JavaScript Viewer uncovered branch arms: 43. The exact arcs and Viewer arms are enumerated in `branch-coverage-completion.json`. Every uncovered Python arc is currently `TYPE-I / UNRESOLVED`; none is silently excluded or claimed unreachable.
+The line matrix still contains `NOT_REVIEWED` scopes, including `build_and_validate.py`, `replay_stage4.py`, `build_task_map_graph.py`, its inline Viewer JavaScript, `test_graphify_review.py`, and `test_graphify_viewer.cjs`. Several matrix line totals predate the latest source/test changes. The matrix therefore cannot support a 100% manual-review claim. See `line-by-line-review-completion.csv` for its exact recorded scopes; its stale counts are disclosed rather than promoted to reviewed.
 
-## Manual review
+## GATE-12 — PARTIAL
 
-The line matrix is preserved and updated with current blob IDs. Full manual review was directly completed for `build_evidence_join_index.py` and `validate_phase4_snapshot.py`; the latter has three fixed findings. Manual review of all remaining production and test executable lines is not complete. GATE-01 is therefore `PARTIAL`, not PASS. The CSV records exact outstanding scopes and line ranges.
+The last measured Python Production result was **867/884 branches (98.08%)**, 2083/2110 statements. The 17 uncovered arcs are inventoried in `branch-coverage-completion.json` with TYPE-F proofs. The last instrumented Chromium 142 Viewer result was **297/305 branches (97.38%)**, 410/417 statements. Seven remaining Viewer arms have invariant-based TYPE-F proofs. The eighth was the DPR-zero fallback: the latest real Chromium run asserted DPR 0 and passed, but the instrumented counter was not recaptured after correcting that fixture. Consequently final reachable-branch coverage is not certified and no PASS is claimed. The instrumentation attempt for JavaScript test code did not produce valid test-code coverage because Playwright serializes callbacks into a separate browser runtime.
 
-## Confirmed defects fixed
+## Completed checks before the rebase
 
-- F-001: reject malformed non-object Snapshot artifact entries with controlled error.
-- F-002: reject JSON boolean values for integer artifact sizes.
-- F-003: translate Git ancestry command OS failure into controlled Snapshot validation failure.
-- F-004: reject non-string Replay relation endpoints without crashing.
-- F-005: retain recovery backup if graph publication rollback itself fails.
-- F-006: reject duplicate CSV headers before processing.
-- F-007: reject unclosed Markdown fences rather than silently dropping content.
+- Python regression suite: 101 tests PASS on the measured local HEAD; the restored conflict-resolution additions were not rerun.
+- Source Coverage: all 29 controls PASS.
+- Replay `--check-only`: PASS; 696 mappings, 99 overlay relations, all 134 decisions OPEN and BLOCKED.
+- Combined Graph `--check-only`: PASS; 4490 nodes, 11435 edges, 181 communities.
+- Snapshot Validator: `CERTIFIED_SNAPSHOT_VALID`, 27 artifacts.
+- Real Chromium 142: DPR 1 and DPR 2 Viewer checks PASS, including idle repaint, filters, Cross-only, search, node/edge selection, pan, zoom, fit, resize and source evidence. The corrected DPR-zero fallback and initialization-error checks also passed in a subsequent browser run.
+- Immutable graph SHA-256 pins and combined graph SHA-256 matched the certified values; no reference data was modified.
 
-All 12 added focused regression tests passed within the 52-test suite. Existing artifacts, canonical data and certified graph JSON were not regenerated by edits.
+## Remaining work / release state
 
-## Integrity and controls
-
-- Source Coverage controls: **29/29 PASS**.
-- Replay: **PASS**, 657 records, 696 mappings, 134 decisions OPEN/BLOCKED; semantic projection SHA-256 `44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5`.
-- Combined graph validation: **PASS**, 4,490 nodes, 11,435 edges, 181 communities, 99 overlay relations.
-- Snapshot Validator: **CERTIFIED_SNAPSHOT_VALID**, 27 registered artifacts.
-- Three immutable reference graphs retained expected SHA-256 pins. Combined graph SHA-256 remains `a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9`.
-- Mapping remains 696 records (15/27/654); all 134 decisions remain OPEN and mappings BLOCKED.
-- Canonical documents and ledgers were not modified.
-
-## Gate decisions
-
-- `GATE-01 = PARTIAL`: all in-scope executable lines are not yet evidenced as manually reviewed.
-- `GATE-12 = PARTIAL`: raw branch coverage is below 100%; 261 production branch outcomes remain uncovered (218 Python arcs and 43 JavaScript arms), with no proven-unreachable exclusions.
-- `PHASE_5_TECHNICAL_READINESS = READY` remains the previously certified status; this mission does not reopen readiness or other gates.
-- CI status must be checked against the pushed commit; skipped jobs must remain reported as skipped.
-
-## Reports
-
-- `line-by-line-review-completion.csv`
-- `branch-coverage-completion.json`
-- `GATE_01_GATE_12_CLOSURE_REPORT.md`
+GATE-01 and GATE-12 remain PARTIAL. A new post-rebase full coverage run, complete manual review matrix, and CI check review are still required before either gate can close. Any acceptance of the documented raw-coverage exclusions requires owner decision. PR #257 remains open; this report does not authorize merge.

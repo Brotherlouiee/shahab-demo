@@ -37,40 +37,368 @@
   "final": {
     "python": {
       "num_statements": 2110,
-      "covered_statements": 1665,
-      "missing_statements": 445,
+      "covered_statements": 2083,
+      "missing_statements": 27,
       "num_branches": 884,
-      "covered_branches": 666,
-      "missing_branches": 218,
-      "partial_branches": 140,
-      "statement_coverage_percent": 78.90995260663507,
-      "branch_coverage_percent": 75.3393665158371
+      "covered_branches": 867,
+      "missing_branches": 17,
+      "partial_branches": 17,
+      "statement_coverage_percent": 98.72037914691944,
+      "branch_coverage_percent": 98.07692307692307,
+      "source": "coverage.py 7.17.5; 101-test Python suite plus official source builder, replay, graph, and snapshot checks; captured before rebase to 4ef61b4; production source was unchanged by rebase."
     },
     "javascript": {
       "tool": "Istanbul in real Chromium 142",
       "total_branches": 305,
-      "covered_branches": 262,
-      "uncovered_branches": 43,
-      "raw_branch_coverage_percent": 85.90163934426229
+      "covered_branches": 297,
+      "uncovered_branches": 8,
+      "raw_branch_coverage_percent": 97.37704918032787,
+      "measurement_status": "LAST_INSTRUMENTED_RUN_PRECEDES_ZERO_DPR_TEST_FIX; do not treat as final counter after that fixture correction.",
+      "latest_browser_behavior": "DPR 1 and 2 real runs PASS; DPR 0 fallback assertion and error-path browser tests PASS, but Istanbul counters were not recaptured after the DPR fixture correction.",
+      "statements_total": 417,
+      "statements_covered": 410,
+      "statements_uncovered": 7
     },
     "python_test_code": {
-      "num_statements": 597,
-      "covered_statements": 594,
+      "num_statements": 1544,
+      "covered_statements": 1541,
       "missing_statements": 3,
-      "num_branches": 46,
-      "covered_branches": 44,
+      "num_branches": 112,
+      "covered_branches": 110,
       "missing_branches": 2,
       "partial_branches": 2,
-      "statement_coverage_percent": 99.49748743718592,
-      "branch_coverage_percent": 95.65217391304348
+      "statement_coverage_percent": 99.80569948186529,
+      "branch_coverage_percent": 98.21428571428571
     },
     "javascript_test_code": {
       "status": "NOT_MEASURED",
-      "reason": "Instrumentation attempt for Playwright callbacks did not yield valid coverage; no test-branch coverage claim is made."
+      "reason": "Istanbul instrumentation of the Playwright test file caused serialized page.evaluate callbacks to reference Node-side coverage variables in Chromium; no valid test-code branch metric was produced."
     }
   },
   "branch_inventory": {
     "python_final_uncovered_arcs": [
+      {
+        "branch_id": "docs/audits/phase2-source-coverage/build_and_validate.py:440->442",
+        "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 440,
+        "destination_line_or_arc": 442,
+        "branch_condition_source": "elif unit_type == \"CODE_BLOCK\"",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "The structure list contains only HEADING, TABLE, and CODE_BLOCK units; the preceding HEADING/TABLE branch consumes the first two kinds, so no other kind can enter this false arm."
+      },
+      {
+        "branch_id": "docs/audits/phase2-source-coverage/build_and_validate.py:932->933",
+        "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 932,
+        "destination_line_or_arc": 933,
+        "branch_condition_source": "sum(candidate_class_counts.values()) != len(candidates)",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "candidate_class_counts is constructed by counting candidate_class for each item in candidates; the sum is definitionally equal to len(candidates)."
+      },
+      {
+        "branch_id": "docs/audits/phase2-source-coverage/build_evidence_join_index.py:52->53",
+        "file": "docs/audits/phase2-source-coverage/build_evidence_join_index.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 52,
+        "destination_line_or_arc": 53,
+        "branch_condition_source": "duplicate header guard after strict shared CSV parser",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "The shared CSV parser rejects duplicate headers before read_join_rows reaches this defensive duplicate-header check."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:376->377",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 376,
+        "destination_line_or_arc": 377,
+        "branch_condition_source": "not isinstance(record, dict) for decision row",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "validate_records validates every decision row as an object and raises before this construction loop."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:429->430",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 429,
+        "destination_line_or_arc": 430,
+        "branch_condition_source": "not mid for canonical mapping entity reference",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "The preflight mapping reference validation rejects a row without any non-empty entity reference before this loop."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:629->630",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 629,
+        "destination_line_or_arc": 630,
+        "branch_condition_source": "not did for decision ID",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Preflight validation rejects missing/blank decision IDs before node construction."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:658->659",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 658,
+        "destination_line_or_arc": 659,
+        "branch_condition_source": "decision_status is not OPEN",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Preflight validation rejects any decision row whose status is not OPEN before node construction."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:682->683",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 682,
+        "destination_line_or_arc": 683,
+        "branch_condition_source": "decision id set coverage mismatch",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "For validated non-empty IDs, both sets are derived from the same decision rows; duplicate IDs are separately rejected."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:690->691",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 690,
+        "destination_line_or_arc": 691,
+        "branch_condition_source": "invalid unified edge endpoint list is non-empty",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Edges are added only after endpoint membership checks; missing endpoints are rejected/skipped before this aggregate check."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:744->745",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 744,
+        "destination_line_or_arc": 745,
+        "branch_condition_source": "source reference is falsy",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Only truthy source references are collected for resolution."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:747->748",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 747,
+        "destination_line_or_arc": 748,
+        "branch_condition_source": "source reference artifact is not a string",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "All source references are emitted by typed internal constructors with string artifact names."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:750->751",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 750,
+        "destination_line_or_arc": 751,
+        "branch_condition_source": "source artifact lookup resolves to None",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Artifact names in emitted references are fixed to the three validated input objects."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:753->756",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 753,
+        "destination_line_or_arc": 756,
+        "branch_condition_source": "resolved collection path traverses a non-dict before completion",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Generated collection paths point to known dict/list paths; invalid external paths are rejected earlier."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:762->763",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 762,
+        "destination_line_or_arc": 763,
+        "branch_condition_source": "invalid source reference list is non-empty",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "All emitted references are built from validated source rows and known collection names."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:764->765",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 764,
+        "destination_line_or_arc": 765,
+        "branch_condition_source": "gzip round-trip is not lossless",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "The bytes are compressed and immediately decompressed by the standard deterministic gzip path; the equality check compares the same input bytes."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/build_task_map_graph.py:766->767",
+        "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 766,
+        "destination_line_or_arc": 767,
+        "branch_condition_source": "post-build error list is non-empty",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "The only post-preflight contributors are generated-reference and lossless-roundtrip checks described above; both are invariant for validated inputs."
+      },
+      {
+        "branch_id": "docs/phase4/task-map-graph/validate_phase4_snapshot.py:193->194",
+        "file": "docs/phase4/task-map-graph/validate_phase4_snapshot.py",
+        "function": "see source line / enclosing scope",
+        "source_line": 193,
+        "destination_line_or_arc": 194,
+        "branch_condition_source": "artifact role missing or empty",
+        "required_execution_state": "Would require violating the validated input/constructor invariant stated in reachability_evidence.",
+        "existing_test": "Current 101-test suite and official --check-only controls; no valid input can reach this arm.",
+        "missing_test": "None added: the arm is classified TYPE-F only with the invariant proof below.",
+        "reachability": "PROVEN_UNREACHABLE",
+        "risk_classification": "TYPE-F",
+        "reachability_evidence": "Each artifact is first checked against its required group role; the group check rejects absent or incorrect roles before this defensive check."
+      }
+    ],
+    "javascript_final_uncovered_arms": [
+      {
+        "branchId": "JS:14:1",
+        "line": 24,
+        "destination": "uncovered arm",
+        "condition": "parent_id || \"\" (task-group derivation)",
+        "required_execution_state": "TASK/SUBTASK parent_id absent or empty",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "The source graph builder requires every TASK/SUBTASK to have a non-empty parent_id; snapshot inputs are schema-pinned."
+      },
+      {
+        "branchId": "JS:15:1",
+        "line": 24,
+        "destination": "uncovered arm",
+        "condition": "parent_id || \"\" (subtask grouping)",
+        "required_execution_state": "TASK/SUBTASK parent_id absent or empty",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "Same validated parent_id invariant."
+      },
+      {
+        "branchId": "JS:19:1",
+        "line": 25,
+        "destination": "uncovered arm",
+        "condition": "taskGroups.get(package_id) || [] inside iterating TASK group",
+        "required_execution_state": "Current package group unexpectedly absent",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "The loop’s TASK records come from that exact taskGroups key, so the group exists while iterating it."
+      },
+      {
+        "branchId": "JS:76:0",
+        "line": 70,
+        "destination": "uncovered arm",
+        "condition": "if(!a||!b) continue",
+        "required_execution_state": "Visible edge endpoint has no position",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "The graph builder validates edge endpoints and assigns positions to every emitted node before draw."
+      },
+      {
+        "branchId": "JS:88:1",
+        "line": 70,
+        "destination": "uncovered arm",
+        "condition": "byId.get(target) || {node_type:\"TASK\"}",
+        "required_execution_state": "Edge target missing from node index",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "Combined graph validation guarantees every edge endpoint exists in byId."
+      },
+      {
+        "branchId": "JS:89:0",
+        "line": 71,
+        "destination": "uncovered arm",
+        "condition": "if(!p) continue for visible node",
+        "required_execution_state": "Visible node has no position",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "The viewer’s final layout fallback assigns a position to every node before rendering."
+      },
+      {
+        "branchId": "JS:114:1",
+        "line": 77,
+        "destination": "uncovered arm",
+        "condition": "String(s ?? \"\") fallback in esc",
+        "required_execution_state": "A nullable value reaches HTML escaping",
+        "count": 0,
+        "status": "PROVEN_UNREACHABLE",
+        "reachability_evidence": "All esc call sites receive fixed non-null display strings or validated node/edge IDs; dangling endpoints are rejected."
+      },
+      {
+        "branchId": "JS:62:1",
+        "line": 63,
+        "destination": "binary expression fallback arm",
+        "condition": "window.devicePixelRatio || 1",
+        "required_execution_state": "DPR is falsy",
+        "count": "NOT_RECAPTURED",
+        "status": "BROWSER_ASSERTION_PASS_IN_LATEST_RUN; INSTRUMENTED_COUNTER_NOT_RECAPTURED",
+        "reachability_evidence": "The corrected Chromium test explicitly overrides devicePixelRatio to 0 and asserts the canvas backing width uses CSS pixels; the instrumentation counter was not preserved after that correction."
+      }
+    ],
+    "historical_pre_checkpoint_python_uncovered_arcs": [
       {
         "branch_id": "docs/audits/phase2-source-coverage/build_and_validate.py:77->78",
         "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
@@ -3342,7 +3670,7 @@
         "coverage_status": "UNCOVERED"
       }
     ],
-    "javascript_final_uncovered_arms": [
+    "historical_pre_checkpoint_javascript_uncovered_arms": [
       {
         "branchId": "JS:0:1",
         "line": 5,
@@ -3689,11 +4017,185 @@
       }
     ]
   },
-  "environment_branches": {
-    "status": "NOT_CLASSIFIED_AS_UNREACHABLE",
-    "note": "No environment-dependent branch was exempted. Python uncovered arcs remain individually UNRESOLVED pending reachability analysis."
-  },
-  "proven_unreachable_branches": [],
+  "environment_branches": [
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 63,
+      "branch": "window.devicePixelRatio || 1",
+      "real_environment_verification": "Chromium 142 DPR 1 and 2 passed",
+      "simulated_branch_coverage": "DPR 0 fallback asserted in latest Playwright run; Istanbul counter not recaptured after fixture correction."
+    }
+  ],
+  "proven_unreachable_branches": [
+    {
+      "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
+      "line": 440,
+      "condition": "elif unit_type == \"CODE_BLOCK\"",
+      "type": "TYPE-F",
+      "evidence": "The structure list contains only HEADING, TABLE, and CODE_BLOCK units; the preceding HEADING/TABLE branch consumes the first two kinds, so no other kind can enter this false arm."
+    },
+    {
+      "file": "docs/audits/phase2-source-coverage/build_and_validate.py",
+      "line": 932,
+      "condition": "sum(candidate_class_counts.values()) != len(candidates)",
+      "type": "TYPE-F",
+      "evidence": "candidate_class_counts is constructed by counting candidate_class for each item in candidates; the sum is definitionally equal to len(candidates)."
+    },
+    {
+      "file": "docs/audits/phase2-source-coverage/build_evidence_join_index.py",
+      "line": 52,
+      "condition": "duplicate header guard after strict shared CSV parser",
+      "type": "TYPE-F",
+      "evidence": "The shared CSV parser rejects duplicate headers before read_join_rows reaches this defensive duplicate-header check."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 376,
+      "condition": "not isinstance(record, dict) for decision row",
+      "type": "TYPE-F",
+      "evidence": "validate_records validates every decision row as an object and raises before this construction loop."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 429,
+      "condition": "not mid for canonical mapping entity reference",
+      "type": "TYPE-F",
+      "evidence": "The preflight mapping reference validation rejects a row without any non-empty entity reference before this loop."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 629,
+      "condition": "not did for decision ID",
+      "type": "TYPE-F",
+      "evidence": "Preflight validation rejects missing/blank decision IDs before node construction."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 658,
+      "condition": "decision_status is not OPEN",
+      "type": "TYPE-F",
+      "evidence": "Preflight validation rejects any decision row whose status is not OPEN before node construction."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 682,
+      "condition": "decision id set coverage mismatch",
+      "type": "TYPE-F",
+      "evidence": "For validated non-empty IDs, both sets are derived from the same decision rows; duplicate IDs are separately rejected."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 690,
+      "condition": "invalid unified edge endpoint list is non-empty",
+      "type": "TYPE-F",
+      "evidence": "Edges are added only after endpoint membership checks; missing endpoints are rejected/skipped before this aggregate check."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 744,
+      "condition": "source reference is falsy",
+      "type": "TYPE-F",
+      "evidence": "Only truthy source references are collected for resolution."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 747,
+      "condition": "source reference artifact is not a string",
+      "type": "TYPE-F",
+      "evidence": "All source references are emitted by typed internal constructors with string artifact names."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 750,
+      "condition": "source artifact lookup resolves to None",
+      "type": "TYPE-F",
+      "evidence": "Artifact names in emitted references are fixed to the three validated input objects."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 753,
+      "condition": "resolved collection path traverses a non-dict before completion",
+      "type": "TYPE-F",
+      "evidence": "Generated collection paths point to known dict/list paths; invalid external paths are rejected earlier."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 762,
+      "condition": "invalid source reference list is non-empty",
+      "type": "TYPE-F",
+      "evidence": "All emitted references are built from validated source rows and known collection names."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 764,
+      "condition": "gzip round-trip is not lossless",
+      "type": "TYPE-F",
+      "evidence": "The bytes are compressed and immediately decompressed by the standard deterministic gzip path; the equality check compares the same input bytes."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py",
+      "line": 766,
+      "condition": "post-build error list is non-empty",
+      "type": "TYPE-F",
+      "evidence": "The only post-preflight contributors are generated-reference and lossless-roundtrip checks described above; both are invariant for validated inputs."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/validate_phase4_snapshot.py",
+      "line": 193,
+      "condition": "artifact role missing or empty",
+      "type": "TYPE-F",
+      "evidence": "Each artifact is first checked against its required group role; the group check rejects absent or incorrect roles before this defensive check."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 24,
+      "condition": "parent_id || \"\" (task-group derivation)",
+      "type": "TYPE-F",
+      "evidence": "The source graph builder requires every TASK/SUBTASK to have a non-empty parent_id; snapshot inputs are schema-pinned."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 24,
+      "condition": "parent_id || \"\" (subtask grouping)",
+      "type": "TYPE-F",
+      "evidence": "Same validated parent_id invariant."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 25,
+      "condition": "taskGroups.get(package_id) || [] inside iterating TASK group",
+      "type": "TYPE-F",
+      "evidence": "The loop’s TASK records come from that exact taskGroups key, so the group exists while iterating it."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 70,
+      "condition": "if(!a||!b) continue",
+      "type": "TYPE-F",
+      "evidence": "The graph builder validates edge endpoints and assigns positions to every emitted node before draw."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 70,
+      "condition": "byId.get(target) || {node_type:\"TASK\"}",
+      "type": "TYPE-F",
+      "evidence": "Combined graph validation guarantees every edge endpoint exists in byId."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 71,
+      "condition": "if(!p) continue for visible node",
+      "type": "TYPE-F",
+      "evidence": "The viewer’s final layout fallback assigns a position to every node before rendering."
+    },
+    {
+      "file": "docs/phase4/task-map-graph/build_task_map_graph.py#Viewer",
+      "line": 77,
+      "condition": "String(s ?? \"\") fallback in esc",
+      "type": "TYPE-F",
+      "evidence": "All esc call sites receive fixed non-null display strings or validated node/edge IDs; dangling endpoints are rejected."
+    }
+  ],
   "new_regression_tests": [
     "test_failed_rollback_retains_recovery_backup",
     "test_duplicate_csv_header_is_rejected",
@@ -3706,7 +4208,10 @@
     "test_git_ancestry_command_os_error_is_controlled",
     "test_boolean_artifact_size_is_not_an_integer",
     "test_non_object_artifact_record_returns_controlled_error",
-    "test_non_string_relation_endpoint_is_rejected_without_crashing"
+    "test_non_string_relation_endpoint_is_rejected_without_crashing",
+    "test_graphify_viewer.cjs: actual DPR 0 simulation with assertion; empty source payload; empty decompressed payload HUD and no-HUD error cases; test passed in Chromium 142 on DPR1/DPR2 and fallback run before rebase.",
+    "test_graphify_viewer.cjs: empty package group, task package fallback via source_data, isolated decision position, empty source collection fallback, and sub-threshold pointer movement; browser suite passed before rebase.",
+    "test_graphify_review.py: controlled CLI failure, nonzero Git ancestry resolution, symlink race, and relation overlay cycle targeted regressions; 4/4 passed after fast-forward to PR HEAD 4ef61b4."
   ],
   "defects": [
     {
@@ -3760,7 +4265,1158 @@
     }
   ],
   "gate_12_status": "PARTIAL",
-  "gate_12_reason": "Production raw coverage is below 100% with 218 Python arcs plus 43 JavaScript branch arms uncovered; all are not yet proven unreachable, so reachable coverage cannot be asserted at 100%.",
+  "gate_12_reason": "Python raw branch coverage is 867/884 (17 TYPE-F exclusions documented). Last instrumented JavaScript result is 297/305 (8 uncovered before the corrected DPR-0 fixture; seven arms have invariant proofs, and the eighth was exercised in Chromium but lacks a post-correction Istanbul capture). Therefore 100% final reachable branch coverage is not certified.",
   "gate_01_status": "PARTIAL",
-  "gate_01_reason": "The current line-by-line matrix contains NOT_REVIEWED scopes; full manual executable-line coverage is not established."
+  "gate_01_reason": "The committed line matrix still contains NOT_REVIEWED rows and does not cover every current test/viewer scope. Manual line coverage is therefore not 100%; see current matrix rows. This remains open.",
+  "measurement_context": {
+    "head_measured": "77b664b81c420a36c21a765fae537ffa0e4010cd",
+    "pr_head_after_rebase": "4ef61b48a861931b437fc15299f4ea497bac2050",
+    "post_rebase_full_coverage_run": "NOT_RUN",
+    "reason": "The available execution image after environment recovery lacks coverage.py and the original temporary Istanbul output artifacts; no substituted estimate is reported as a fresh measurement."
+  },
+  "manual_review_checkpoint": {
+    "matrix_recorded_rows": 176,
+    "matrix_recorded_executable_lines": 3449,
+    "matrix_recorded_reviewed_lines": 368,
+    "matrix_recorded_not_reviewed_lines": 3081,
+    "matrix_recorded_coverage_percent": 10.669759350536387,
+    "not_reviewed_scope_rows": [
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "<module-level executable statements>",
+        "Start Line": "8",
+        "End Line": "1355",
+        "Executable Line Count": "37"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "sha256",
+        "Start Line": "56",
+        "End Line": "57",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "git_blob",
+        "Start Line": "60",
+        "End Line": "64",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "read_csv",
+        "Start Line": "67",
+        "End Line": "80",
+        "Executable Line Count": "14"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "write_csv",
+        "Start Line": "83",
+        "End Line": "88",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "atomic_write_text",
+        "Start Line": "91",
+        "End Line": "109",
+        "Executable Line Count": "15"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "apply_review_dispositions",
+        "Start Line": "112",
+        "End Line": "142",
+        "Executable Line Count": "30"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "apply_source_unit_dispositions",
+        "Start Line": "145",
+        "End Line": "169",
+        "Executable Line Count": "24"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "excerpt_text",
+        "Start Line": "172",
+        "End Line": "174",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "parse_sources",
+        "Start Line": "177",
+        "End Line": "263",
+        "Executable Line Count": "77"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "parse_sources.parent_at",
+        "Start Line": "255",
+        "End Line": "257",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "line_bounds",
+        "Start Line": "266",
+        "End Line": "268",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "graph_data",
+        "Start Line": "271",
+        "End Line": "285",
+        "Executable Line Count": "13"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "classification",
+        "Start Line": "288",
+        "End Line": "314",
+        "Executable Line Count": "27"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "cells_from_row",
+        "Start Line": "317",
+        "End Line": "323",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "has_validation_failures",
+        "Start Line": "326",
+        "End Line": "327",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "main",
+        "Start Line": "330",
+        "End Line": "605",
+        "Executable Line Count": "172"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "build_package_index_and_traces",
+        "Start Line": "608",
+        "End Line": "772",
+        "Executable Line Count": "114"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "source_locator_matches",
+        "Start Line": "775",
+        "End Line": "783",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "validate_outputs",
+        "Start Line": "790",
+        "End Line": "1101",
+        "Executable Line Count": "299"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "validate_outputs.record",
+        "Start Line": "805",
+        "End Line": "806",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "update_manifest",
+        "Start Line": "1104",
+        "End Line": "1142",
+        "Executable Line Count": "33"
+      },
+      {
+        "File Path": "docs/audits/phase2-source-coverage/build_and_validate.py",
+        "Function / Module-level Scope": "write_reports",
+        "Start Line": "1145",
+        "End Line": "1347",
+        "Executable Line Count": "47"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "<module-level executable statements>",
+        "Start Line": "3",
+        "End Line": "430",
+        "Executable Line Count": "22"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "title_search_tokens",
+        "Start Line": "39",
+        "End Line": "40",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "exact_title_matches",
+        "Start Line": "43",
+        "End Line": "49",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "validate_partial_files",
+        "Start Line": "56",
+        "End Line": "71",
+        "Executable Line Count": "16"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "sha256",
+        "Start Line": "74",
+        "End Line": "74",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "blob_sha",
+        "Start Line": "75",
+        "End Line": "75",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "readj",
+        "Start Line": "76",
+        "End Line": "76",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "writej",
+        "Start Line": "77",
+        "End Line": "91",
+        "Executable Line Count": "14"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "fail",
+        "Start Line": "92",
+        "End Line": "94",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "short_alias",
+        "Start Line": "95",
+        "End Line": "98",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "build_search",
+        "Start Line": "99",
+        "End Line": "181",
+        "Executable Line Count": "74"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "semantic_projection",
+        "Start Line": "182",
+        "End Line": "184",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "projection_digest",
+        "Start Line": "192",
+        "End Line": "193",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "main",
+        "Start Line": "195",
+        "End Line": "425",
+        "Executable Line Count": "194"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/replay_stage4.py",
+        "Function / Module-level Scope": "main.mid",
+        "Start Line": "212",
+        "End Line": "212",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "<module-level executable statements>",
+        "Start Line": "3",
+        "End Line": "851",
+        "Executable Line Count": "33"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "load_json",
+        "Start Line": "46",
+        "End Line": "47",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "sha256",
+        "Start Line": "50",
+        "End Line": "51",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "git_blob_sha",
+        "Start Line": "54",
+        "End Line": "55",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "stable_id",
+        "Start Line": "58",
+        "End Line": "60",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "source_node_id",
+        "Start Line": "63",
+        "End Line": "64",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "source_ref",
+        "Start Line": "67",
+        "End Line": "68",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "publication_lock",
+        "Start Line": "72",
+        "End Line": "98",
+        "Executable Line Count": "22"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "publish_outputs",
+        "Start Line": "101",
+        "End Line": "103",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "_publish_outputs_locked",
+        "Start Line": "106",
+        "End Line": "176",
+        "Executable Line Count": "58"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "html_document",
+        "Start Line": "179",
+        "End Line": "183",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "build",
+        "Start Line": "309",
+        "End Line": "762",
+        "Executable Line Count": "258"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "build.validate_records",
+        "Start Line": "333",
+        "End Line": "344",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "build.add_edge",
+        "Start Line": "546",
+        "End Line": "553",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "build.resolves",
+        "Start Line": "736",
+        "End Line": "750",
+        "Executable Line Count": "14"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py",
+        "Function / Module-level Scope": "main",
+        "Start Line": "808",
+        "End Line": "843",
+        "Executable Line Count": "22"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "<module-level executable statements>",
+        "Start Line": "2",
+        "End Line": "798",
+        "Executable Line Count": "23"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphInputValidationTests",
+        "Start Line": "27",
+        "End Line": "27",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphInputValidationTests.setUp",
+        "Start Line": "28",
+        "End Line": "30",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphInputValidationTests.assert_input_rejected",
+        "Start Line": "36",
+        "End Line": "41",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphInputValidationTests.test_record_shape_and_identity_failures_are_controlled",
+        "Start Line": "43",
+        "End Line": "72",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphInputValidationTests.test_unknown_non_contract_fields_remain_forward_compatible",
+        "Start Line": "74",
+        "End Line": "79",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests",
+        "Start Line": "82",
+        "End Line": "82",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.output_pair",
+        "Start Line": "83",
+        "End Line": "88",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.assert_no_temporary_files",
+        "Start Line": "90",
+        "End Line": "91",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_concurrent_processes_publish_one_coherent_generation",
+        "Start Line": "93",
+        "End Line": "144",
+        "Executable Line Count": "25"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_html_replace_failure_restores_previous_json_and_html",
+        "Start Line": "146",
+        "End Line": "166",
+        "Executable Line Count": "15"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_stage_fsync_failure_preserves_previous_outputs",
+        "Start Line": "168",
+        "End Line": "180",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_directory_fsync_failure_restores_previous_outputs",
+        "Start Line": "182",
+        "End Line": "194",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_replace_failure_removes_new_file_when_no_previous_output_existed",
+        "Start Line": "196",
+        "End Line": "216",
+        "Executable Line Count": "16"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CombinedGraphPublicationTests.test_interrupt_during_second_replace_restores_previous_outputs",
+        "Start Line": "218",
+        "End Line": "237",
+        "Executable Line Count": "15"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CoverageBuilderTests",
+        "Start Line": "240",
+        "End Line": "240",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CoverageBuilderTests.test_failed_machine_control_produces_failure_exit",
+        "Start Line": "241",
+        "End Line": "248",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CoverageBuilderTests.test_failed_atomic_csv_publication_preserves_previous_output",
+        "Start Line": "250",
+        "End Line": "259",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CoverageBuilderTests.test_atomic_csv_stage_write_failure_preserves_previous_output",
+        "Start Line": "261",
+        "End Line": "270",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests",
+        "Start Line": "273",
+        "End Line": "297",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.setUp",
+        "Start Line": "274",
+        "End Line": "284",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.edit_csv",
+        "Start Line": "286",
+        "End Line": "295",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.temporary_csv_edit",
+        "Start Line": "298",
+        "End Line": "305",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.assert_preserved_on_error",
+        "Start Line": "307",
+        "End Line": "310",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_index_stage_fsync_failure_preserves_previous_output",
+        "Start Line": "312",
+        "End Line": "317",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_missing_required_headers_fail_before_publication",
+        "Start Line": "322",
+        "End Line": "327",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_canonical_headings_and_review_statuses",
+        "Start Line": "329",
+        "End Line": "343",
+        "Executable Line Count": "14"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_legacy_heading_fallback",
+        "Start Line": "346",
+        "End Line": "359",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_legacy_heading_fallback.edit",
+        "Start Line": "350",
+        "End Line": "354",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_trace_lists_drop_empty_references_consistently",
+        "Start Line": "361",
+        "End Line": "377",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_trace_lists_drop_empty_references_consistently.edit",
+        "Start Line": "369",
+        "End Line": "370",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_duplicate_trace_and_review_ids_fail_before_publication",
+        "Start Line": "379",
+        "End Line": "383",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_short_csv_row_fails_before_publication",
+        "Start Line": "385",
+        "End Line": "389",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_missing_pinned_graph_fails_before_publication",
+        "Start Line": "391",
+        "End Line": "394",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_graph_neighbors_only_include_unmapped_endpoints",
+        "Start Line": "396",
+        "End Line": "416",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_orphan_obligation_fails_before_publication",
+        "Start Line": "420",
+        "End Line": "423",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_duplicate_obligation_fails_before_publication",
+        "Start Line": "425",
+        "End Line": "427",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_null_identifier_fails_with_controlled_error",
+        "Start Line": "429",
+        "End Line": "431",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_failed_index_publication_preserves_previous_output",
+        "Start Line": "433",
+        "End Line": "442",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_duplicate_csv_headers_fail_before_publication",
+        "Start Line": "444",
+        "End Line": "446",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_pinned_graph_hash_mismatch_is_rejected",
+        "Start Line": "448",
+        "End Line": "452",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_pinned_graph_lookup_failure_is_controlled",
+        "Start Line": "454",
+        "End Line": "461",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_join_main_publishes_valid_index",
+        "Start Line": "463",
+        "End Line": "467",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "EvidenceJoinTests.test_duplicate_candidate_fails_before_publication",
+        "Start Line": "469",
+        "End Line": "471",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests",
+        "Start Line": "474",
+        "End Line": "474",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.setUp",
+        "Start Line": "475",
+        "End Line": "546",
+        "Executable Line Count": "46"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.commit_manifest",
+        "Start Line": "548",
+        "End Line": "550",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.write_manifest",
+        "Start Line": "552",
+        "End Line": "580",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_01_certified_snapshot_is_accepted",
+        "Start Line": "582",
+        "End Line": "584",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_02_missing_required_artifact_is_rejected",
+        "Start Line": "586",
+        "End Line": "590",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_03_changed_artifact_is_rejected",
+        "Start Line": "592",
+        "End Line": "596",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_04_replaced_with_another_artifact_version_is_rejected",
+        "Start Line": "598",
+        "End Line": "602",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_05_incomplete_or_invalid_manifest_is_rejected",
+        "Start Line": "604",
+        "End Line": "615",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_06_path_outside_repository_is_rejected",
+        "Start Line": "617",
+        "End Line": "621",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests._validate_records",
+        "Start Line": "623",
+        "End Line": "626",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_07_changed_manifest_and_artifact_cannot_recertify_worktree",
+        "Start Line": "628",
+        "End Line": "637",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_manifest_header_contract_rejects_invalid_values",
+        "Start Line": "639",
+        "End Line": "655",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "CertifiedSnapshotTests.test_08_failure_returns_nonzero_and_never_changes_artifacts",
+        "Start Line": "657",
+        "End Line": "669",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests",
+        "Start Line": "672",
+        "End Line": "672",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_replay_rejects_a_relation_overlay_hard_order_cycle",
+        "Start Line": "673",
+        "End Line": "698",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_exact_title_matching",
+        "Start Line": "700",
+        "End Line": "718",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_partial_evidence_by_id_and_validation",
+        "Start Line": "720",
+        "End Line": "735",
+        "Executable Line Count": "10"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_partials_keep_pinned_code_locators",
+        "Start Line": "737",
+        "End Line": "744",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_failed_atomic_publication_preserves_mapping_and_prints_no_pass",
+        "Start Line": "746",
+        "End Line": "760",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_mapping_stage_fsync_failure_preserves_previous_output_and_prints_no_pass",
+        "Start Line": "762",
+        "End Line": "778",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_review.py",
+        "Function / Module-level Scope": "ReplayTests.test_invalid_mapping_is_not_published",
+        "Start Line": "780",
+        "End Line": "794",
+        "Executable Line Count": "13"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_0)",
+        "Start Line": "2",
+        "End Line": "86",
+        "Executable Line Count": "60"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_1)",
+        "Start Line": "6",
+        "End Line": "6",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "resolveSource",
+        "Start Line": "12",
+        "End Line": "12",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_3)",
+        "Start Line": "13",
+        "End Line": "13",
+        "Executable Line Count": "5"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "hash",
+        "Start Line": "18",
+        "End Line": "18",
+        "Executable Line Count": "6"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_5)",
+        "Start Line": "20",
+        "End Line": "20",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_6)",
+        "Start Line": "22",
+        "End Line": "22",
+        "Executable Line Count": "8"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_8)",
+        "Start Line": "23",
+        "End Line": "23",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_10)",
+        "Start Line": "25",
+        "End Line": "25",
+        "Executable Line Count": "22"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_14)",
+        "Start Line": "26",
+        "End Line": "26",
+        "Executable Line Count": "12"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "val",
+        "Start Line": "28",
+        "End Line": "28",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "matchesNode",
+        "Start Line": "29",
+        "End Line": "29",
+        "Executable Line Count": "15"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "isCrossEdge",
+        "Start Line": "31",
+        "End Line": "34",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "rebuild",
+        "Start Line": "40",
+        "End Line": "59",
+        "Executable Line Count": "17"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_22)",
+        "Start Line": "43",
+        "End Line": "43",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_23)",
+        "Start Line": "44",
+        "End Line": "44",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_24)",
+        "Start Line": "47",
+        "End Line": "47",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_25)",
+        "Start Line": "48",
+        "End Line": "48",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_26)",
+        "Start Line": "50",
+        "End Line": "50",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_28)",
+        "Start Line": "61",
+        "End Line": "61",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "invalidate",
+        "Start Line": "62",
+        "End Line": "62",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "resize",
+        "Start Line": "63",
+        "End Line": "63",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "color",
+        "Start Line": "64",
+        "End Line": "64",
+        "Executable Line Count": "13"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "radius",
+        "Start Line": "65",
+        "End Line": "65",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "resizeTransform",
+        "Start Line": "66",
+        "End Line": "66",
+        "Executable Line Count": "3"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "draw",
+        "Start Line": "67",
+        "End Line": "72",
+        "Executable Line Count": "47"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_35)",
+        "Start Line": "68",
+        "End Line": "68",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "fit",
+        "Start Line": "73",
+        "End Line": "73",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "screenToWorld",
+        "Start Line": "74",
+        "End Line": "74",
+        "Executable Line Count": "1"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "pick",
+        "Start Line": "75",
+        "End Line": "75",
+        "Executable Line Count": "25"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_40)",
+        "Start Line": "76",
+        "End Line": "76",
+        "Executable Line Count": "31"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_45)",
+        "Start Line": "77",
+        "End Line": "77",
+        "Executable Line Count": "2"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_47)",
+        "Start Line": "78",
+        "End Line": "78",
+        "Executable Line Count": "29"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_53)",
+        "Start Line": "79",
+        "End Line": "79",
+        "Executable Line Count": "19"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_55)",
+        "Start Line": "80",
+        "End Line": "80",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_56)",
+        "Start Line": "81",
+        "End Line": "81",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_60)",
+        "Start Line": "82",
+        "End Line": "82",
+        "Executable Line Count": "7"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_61)",
+        "Start Line": "83",
+        "End Line": "83",
+        "Executable Line Count": "11"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_67)",
+        "Start Line": "85",
+        "End Line": "85",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/build_task_map_graph.py (inline Viewer JavaScript; generated HTML not counted separately)",
+        "Function / Module-level Scope": "(anonymous_70)",
+        "Start Line": "87",
+        "End Line": "87",
+        "Executable Line Count": "4"
+      },
+      {
+        "File Path": "docs/phase4/task-map-graph/test_graphify_viewer.cjs",
+        "Function / Module-level Scope": "Playwright browser test harness",
+        "Start Line": "1",
+        "End Line": "427",
+        "Executable Line Count": "416"
+      }
+    ],
+    "scope_caveat": "The matrix spans/counts predate the post-checkpoint Python/JavaScript test additions and are not a complete current executable-line inventory. The row-level ranges are recorded evidence only, not certified 100% line coverage."
+  },
+  "post_rebase_checks": {
+    "py_compile": "PASS for changed Python files",
+    "git_diff_check": "PASS",
+    "targeted_python_regressions": "4/4 PASS after rebase",
+    "full_python_suite": "101 PASS before rebase; not rerun after restoring 4 conflict-resolution tests",
+    "browser_viewer": "PASS before rebase on equivalent production files; post-rebase browser rerun not performed",
+    "coverage_tooling": "coverage.py and Istanbul unavailable in recovered execution environment; no post-rebase measurement"
+  }
 }

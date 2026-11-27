@@ -171,8 +171,16 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     await assertCounts({ relation: 'handoff' });
     await changed('clear relation filter', () => page.selectOption('#relation', ''));
     await assertCounts();
-    await changed('Cross-only', () => page.check('#crossOnly'));
+    const selectedCrossNode = crossEdges[0]?.source;
+    assert.ok(selectedCrossNode, 'Fixture has no cross-only edge to preserve');
+    await page.locator('#search').fill(selectedCrossNode);
+    await page.locator('#search').press('Enter');
+    await settle();
+    assert.match(await page.locator('#details').textContent(), new RegExp(selectedCrossNode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    await changed('Cross-only preserves visible node selection', () => page.check('#crossOnly'));
     await assertCounts({ crossOnly: true });
+    assert.match(await page.locator('#details').textContent(), new RegExp(selectedCrossNode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    await page.click('#clear');
     await changed('Cross-only intersects relation filter', () => page.selectOption('#relation', 'depends_on'));
     await assertCounts({ crossOnly: true, relation: 'depends_on' });
     await changed('Cross-only containment filter', () => page.selectOption('#relation', 'contains'));
@@ -255,11 +263,21 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     await assertCounts();
 
     const search = page.locator('#search');
+    const emptyQueryDetails = await page.locator('#details').textContent();
+    await search.fill('');
+    await search.press('Enter');
+    await settle();
+    assert.equal(await page.locator('#details').textContent(), emptyQueryDetails, 'Empty Enter changed the current selection');
     await changed('Search with no matches', () => search.fill('NO-SUCH-TASK-MATCH-9F2C'));
     await assertCounts();
     await search.press('Enter');
     await settle();
     assert.equal(await page.locator('#details pre').count(), 0, 'Empty search selected a node');
+    await search.fill('TASK:CORE:C05A');
+    await search.press('Enter');
+    await settle();
+    assert.equal(await page.locator('#details pre').count(), 0, 'Ambiguous search selected a node');
+    await search.fill('NO-SUCH-TASK-MATCH-9F2C');
     await changed('Clear empty search', () => search.fill(''));
     await changed('Search highlights Canvas nodes', () => search.fill('TASK:CORE:C05A:004'));
     await changed('Search Enter centers node', () => search.press('Enter'));
@@ -278,6 +296,12 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     let evidence = JSON.parse(await page.locator('#details pre').textContent());
     assert.equal(evidence.source_data.id, 'TASK:CORE:C05A:004');
     assert.ok(evidence.mapping_data);
+    const targetLabel = nodes.get('TASK:CORE:C05A:004').label;
+    assert.ok(targetLabel, 'Target Task fixture has no label');
+    assert.equal(graph.nodes.filter(([, node]) => node.label === targetLabel).length, 1, 'Target label is not unique');
+    await changed('Search highlights node label', () => search.fill(targetLabel));
+    await redrawn('Enter selects exact node label', () => search.press('Enter'));
+    assert.match(await page.locator('#details').textContent(), /TASK:CORE:C05A:004/);
     await changed('Package filter clears a hidden node selection', () => page.selectOption('#package', 'A01'));
     assert.doesNotMatch(await page.locator('#details').textContent(), /TASK:CORE:C05A:004/);
     assert.equal(await page.locator('#details pre').count(), 0);
@@ -287,13 +311,41 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     assert.match(await page.locator('#details').textContent(), /TASK:CORE:C05A:004/);
     await changed('clear node selection', () => page.click('#clear'));
     assert.equal(await page.locator('#details pre').count(), 0);
+    const blankPoint = await page.evaluate(({ width, height }) => {
+      const { nodes, edges } = window.painted;
+      function distance(x, y, [[ax, ay], [bx, by]]) {
+        const dx = bx - ax, dy = by - ay;
+        const t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy || 1)));
+        return Math.hypot(x - ax - dx * t, y - ay - dy * t);
+      }
+      for (let y = 15; y < height - 15; y += 17) {
+        for (let x = 15; x < width - 15; x += 19) {
+          if (nodes.some(([nx, ny, radius]) => Math.hypot(nx - x, ny - y) < radius + 8)) continue;
+          if (edges.some(edge => distance(x, y, edge) < 8)) continue;
+          return { x, y };
+        }
+      }
+      return null;
+    }, await page.locator('#graph').evaluate(canvas => ({ width: canvas.clientWidth, height: canvas.clientHeight })));
+    assert.ok(blankPoint, 'No empty canvas point available for selection-clear check');
+    await page.mouse.click(canvas.x + blankPoint.x, canvas.y + blankPoint.y);
+    await settle();
+    assert.equal(await page.locator('#details pre').count(), 0, 'Empty canvas click selected an item');
     await changed('Canvas pan', async () => {
+      const beforeIdleMove = await frames();
       await page.mouse.move(canvas.x + 90, canvas.y + 90);
+      await settle();
+      assert.equal(await frames(), beforeIdleMove, 'Pointer move without dragging repainted the Canvas');
+      await page.mouse.down();
+      await page.mouse.move(canvas.x + 91, canvas.y + 91);
+      await page.mouse.up();
+      await settle();
       await page.mouse.down();
       await page.mouse.move(canvas.x + 160, canvas.y + 125, { steps: 6 });
       await page.mouse.up();
     });
     await changed('Canvas wheel zoom', () => page.mouse.wheel(0, -100));
+    await changed('Canvas wheel zoom out', () => page.mouse.wheel(0, 100));
     await changed('Canvas button zoom', () => page.click('#zout'));
     await changed('Fit', () => page.click('#fit'));
     await changed('Resize', () => page.setViewportSize({ width: 1600, height: 1000 }));
@@ -329,6 +381,10 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     assert.equal(evidence.relation_type, 'requires_contract');
     assert.ok(evidence.relation_id && evidence.source_refs.length && evidence.plan_locator);
     console.log('PASS Source Evidence for node and overlay edge');
+    await changed('Cross-only toggle preserves visible edge selection', () => page.uncheck('#crossOnly'));
+    evidence = JSON.parse(await page.locator('#details pre').textContent());
+    assert.equal(evidence.relation_type, 'requires_contract');
+    await changed('Restore Cross-only edge selection', () => page.check('#crossOnly'));
     await changed('Relation filter clears a hidden edge selection', () => page.selectOption('#relation', 'handoff'));
     assert.equal(await page.locator('#details pre').count(), 0);
     assert.doesNotMatch(await page.locator('#details').textContent(), /REL-STAGE4-/);
@@ -353,6 +409,42 @@ async function run(deviceScaleFactor, fixturePath, hostileNodes) {
     const contractDetails = JSON.parse(await page.locator('#details pre').textContent());
     assert.ok(contractDetails.source_data);
     assert.equal(contractDetails.source_data.canonical_reference, contractId);
+    await search.fill('COVERAGE:HUB');
+    await search.press('Enter');
+    await settle();
+    const hubDetails = await page.locator('#details').textContent();
+    assert.match(hubDetails, /COVERAGE:HUB/);
+    assert.match(hubDetails, /برای کارایی فقط ۲۵۰ مورد نخست نمایش داده شده است/);
+    const hubEvidence = JSON.parse(await page.locator('#details pre').textContent());
+    assert.equal(hubEvidence.source_data, null);
+    await changed('Synthetic edge source fallback setup', async () => {
+      await page.selectOption('#domain', 'COVERAGE_SINGLE');
+      await page.selectOption('#relation', 'coverage_single');
+      await page.click('#fit');
+    });
+    const syntheticEdgePoint = await page.evaluate(() => {
+      const [[ax, ay], [bx, by]] = window.painted.edges[0] || [];
+      if (![ax, ay, bx, by].every(Number.isFinite)) return null;
+      for (const fraction of [0.5, 0.25, 0.75]) {
+        const x = Math.round(ax + (bx - ax) * fraction), y = Math.round(ay + (by - ay) * fraction);
+        if (!window.painted.nodes.some(([nx, ny]) => Math.hypot(nx - x, ny - y) < 10)) return { x, y };
+      }
+      return null;
+    });
+    assert.ok(syntheticEdgePoint,
+      'Synthetic fixture edge was not drawn: ' + JSON.stringify(await page.evaluate(() => ({
+        relation: document.getElementById('relation').value,
+        crossOnly: document.getElementById('crossOnly').checked,
+        edges: window.painted.edges.length,
+        graphEdges: JSON.parse(document.getElementById('graph-data').textContent).edges.filter(edge => edge.relation_type === 'coverage_single').length,
+      }))));
+    const syntheticBounds = await page.locator('#graph').boundingBox();
+    await page.mouse.click(syntheticBounds.x + syntheticEdgePoint.x, syntheticBounds.y + syntheticEdgePoint.y);
+    await settle();
+    const syntheticEdgeDetails = JSON.parse(await page.locator('#details pre').textContent());
+    assert.equal(syntheticEdgeDetails.relation_type, 'coverage_single');
+    assert.equal(syntheticEdgeDetails.relation_id, 'COVERAGE:EDGE');
+    assert.equal(syntheticEdgeDetails.source_refs[0], 'fixture-only');
     assert.deepEqual(pageErrors, []);
     assert.deepEqual(consoleErrors, []);
     assert.deepEqual(await page.evaluate(() => window.unhandledRejections), []);
@@ -386,6 +478,9 @@ function makeSecurityFixture(sourcePath) {
   const match = html.match(/(<script id="graph-data" type="application\/json">)([\s\S]*?)(<\/script>)/);
   assert.ok(match, 'Standalone graph JSON script was not found');
   const graph = JSON.parse(match[2]);
+  const unclusteredCode = graph.nodes.find(node => node.node_type === 'CODE');
+  assert.ok(unclusteredCode, 'Code node is required to test the optional community fallback');
+  unclusteredCode.community_id = null;
   const payloads = [
     '<img src=x onerror="window.xssExecuted=true">',
     '</script><script>window.xssExecuted=true</script>',
@@ -408,8 +503,70 @@ function makeSecurityFixture(sourcePath) {
     mapping_status: null,
     source_data: { payload, source_text: payload, url: 'javascript:alert(1)' },
   }));
-  graph.nodes.push(...hostileNodes);
+  hostileNodes[0].source_ref = { artifact: 'missing-snapshot', collection: 'nodes', index: 0 };
+  hostileNodes[1].source_ref = { artifact: 'task_map_mapping', collection: '', index: 0 };
+  const hub = {
+    id: 'COVERAGE:HUB', canonical_id: 'COVERAGE:HUB', source_id: 'COVERAGE:HUB',
+    node_type: 'UNCLASSIFIED', label: null, domain: 'COVERAGE_SINGLE', package_id: null,
+    community_id: null, mapping_status: null, source_data: null,
+  };
+  const neighbors = Array.from({ length: 251 }, (_, index) => ({
+    id: `COVERAGE:NEIGHBOR:${index}`, canonical_id: `COVERAGE:NEIGHBOR:${index}`,
+    source_id: `COVERAGE:NEIGHBOR:${index}`, node_type: 'UNCLASSIFIED', label: null,
+    domain: index === 0 ? 'COVERAGE_SINGLE' : 'COVERAGE_OTHER',
+    package_id: null, community_id: null, mapping_status: null,
+  }));
+  const fallbackPackage = {
+    id: 'PACKAGE:COVERAGE', canonical_id: 'PACKAGE:COVERAGE', source_id: 'PACKAGE:COVERAGE',
+    node_type: 'PACKAGE', label: 'Coverage package', domain: 'COVERAGE_PACKAGE',
+    package_id: 'COVERAGE', community_id: null, mapping_status: 'NEW_IMPLEMENTATION',
+  };
+  const fallbackTask = {
+    id: 'TASK:COVERAGE:FALLBACK', canonical_id: 'TASK:COVERAGE:FALLBACK',
+    source_id: 'TASK:COVERAGE:FALLBACK', node_type: 'TASK', label: 'Fallback task',
+    domain: 'COVERAGE_PACKAGE', package_id: null, parent_id: fallbackPackage.id,
+    community_id: null, mapping_status: 'NEW_IMPLEMENTATION', source_data: null,
+  };
+  const fallbackSubtask = {
+    id: 'SUBTASK:COVERAGE:FALLBACK', canonical_id: 'SUBTASK:COVERAGE:FALLBACK',
+    source_id: 'SUBTASK:COVERAGE:FALLBACK', node_type: 'SUBTASK', label: 'Fallback subtask',
+    domain: 'COVERAGE_PACKAGE', package_id: null, parent_id: 'TASK:CORE:C05A:004',
+    community_id: null, mapping_status: 'NEW_IMPLEMENTATION',
+  };
+  const sourceDataTask = {
+    id: 'TASK:COVERAGE:SOURCE-DATA', canonical_id: 'TASK:COVERAGE:SOURCE-DATA',
+    source_id: 'TASK:COVERAGE:SOURCE-DATA', node_type: 'TASK', label: 'Source data task',
+    domain: 'COVERAGE_PACKAGE', package_id: null, parent_id: 'TASK:CORE:C05A:004',
+    community_id: null, mapping_status: 'NEW_IMPLEMENTATION',
+    source_data: { package_id: 'COVERAGE' },
+  };
+  const emptyPackage = {
+    id: 'PACKAGE:COVERAGE:EMPTY', canonical_id: 'PACKAGE:COVERAGE:EMPTY',
+    source_id: 'PACKAGE:COVERAGE:EMPTY', node_type: 'PACKAGE', label: 'Empty package',
+    domain: 'COVERAGE_PACKAGE', package_id: 'COVERAGE:EMPTY', community_id: null,
+    mapping_status: 'NEW_IMPLEMENTATION',
+  };
+  const isolatedDecision = {
+    id: 'DECISION:COVERAGE:ISOLATED', canonical_id: 'DECISION:COVERAGE:ISOLATED',
+    source_id: 'DECISION:COVERAGE:ISOLATED', node_type: 'OPEN_DECISION',
+    label: 'Isolated decision', domain: null, package_id: null, community_id: null,
+    decision_status: 'OPEN', mapping_status: 'BLOCKED',
+  };
+  graph.nodes.push(hub, ...neighbors, fallbackPackage, fallbackTask, fallbackSubtask,
+    sourceDataTask, emptyPackage, isolatedDecision, ...hostileNodes);
+  graph.edges.push(...neighbors.map((node, index) => ({
+    id: `COVERAGE:EDGE:${index}`, source: hub.id, target: node.id,
+    origin_graph: 'coverage_fixture', relation_type: index === 0 ? 'coverage_single' : 'coverage_many',
+    ...(index === 0 ? { relation_id: 'COVERAGE:EDGE', source_refs: ['fixture-only'] } : {}),
+  })));
   graph.counts.node_total = graph.nodes.length;
+  graph.counts.edge_total = graph.edges.length;
+  graph.counts.nodes.UNCLASSIFIED = (graph.counts.nodes.UNCLASSIFIED || 0) + neighbors.length + 1;
+  graph.counts.nodes.PACKAGE++;
+  graph.counts.nodes.PACKAGE++;
+  graph.counts.nodes.TASK += 2;
+  graph.counts.nodes.SUBTASK++;
+  graph.counts.nodes.OPEN_DECISION++;
   graph.counts.nodes.CONTRACT_REFERENCE = (graph.counts.nodes.CONTRACT_REFERENCE || 0) + hostileNodes.length;
   const serialized = JSON.stringify(graph).replace(/<\//g, '<\\/');
   const fixture = html.replace(match[0], `${match[1]}${serialized}${match[3]}`);
@@ -419,9 +576,51 @@ function makeSecurityFixture(sourcePath) {
   return { directory, fixturePath, hostileNodes };
 }
 
+async function runFallbackCases(sourcePath) {
+  const browser = await chromium.launch({ executablePath: process.env.CHROME_BIN, headless: true });
+  let fixtureDirectory;
+  try {
+    const html = fs.readFileSync(sourcePath, 'utf8');
+    const match = html.match(/(<script id="graph-data" type="application\/json">)([\s\S]*?)(<\/script>)/);
+    assert.ok(match, 'Standalone graph JSON script was not found for fallback tests');
+    const graph = JSON.parse(match[2]);
+    const nullPayloadHtml = html.replace(match[0], `${match[1]}${JSON.stringify({ ...graph, source_payloads: null })}${match[3]}`);
+    fixtureDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'shahab-viewer-fallback-'));
+    const nullPayloadPath = path.join(fixtureDirectory, 'null-payload.html');
+    fs.writeFileSync(nullPayloadPath, nullPayloadHtml, 'utf8');
+    const page = await browser.newPage({ viewport: { width: 900, height: 700 } });
+    await page.addInitScript(() => Object.defineProperty(window, 'devicePixelRatio', { configurable: true, value: 0 }));
+    await page.goto(pathToFileURL(nullPayloadPath).href);
+    await page.evaluate(() => window.taskMapGraphReady);
+    assert.equal(await page.evaluate(() => window.devicePixelRatio), 0, 'Zero-DPR fixture did not set the browser environment');
+    const dimensions = await page.locator('#graph').evaluate(canvas => [canvas.width, canvas.clientWidth]);
+    assert.deepEqual(dimensions, [Math.max(1, dimensions[1]), dimensions[1]], 'DPR fallback did not use CSS pixel dimensions');
+    console.log('PASS empty source payloads and zero-DPR fallback');
+
+    const zlib = require('node:zlib');
+    const emptyPayload = { encoding: 'gzip+base64', media_type: 'application/json', data: zlib.gzipSync(Buffer.alloc(0)).toString('base64') };
+    const emptyCompressedHtml = html.replace(match[0], `${match[1]}${JSON.stringify({ ...graph, source_payloads: { empty: emptyPayload } })}${match[3]}`);
+    const errorPage = await browser.newPage();
+    await errorPage.setContent(emptyCompressedHtml);
+    await assert.rejects(errorPage.evaluate(() => window.taskMapGraphReady), /Source snapshot decompressed empty/);
+    assert.match(await errorPage.locator('#hud').textContent(), /خطا در آماده‌سازی منبع گراف/);
+    console.log('PASS empty decompressed snapshot error and HUD reporting');
+
+    const noHudHtml = emptyCompressedHtml.replace(/<div class="hud" id="hud">[\s\S]*?<\/div>/, '');
+    const noHudPage = await browser.newPage();
+    await noHudPage.setContent(noHudHtml);
+    await assert.rejects(noHudPage.evaluate(() => window.taskMapGraphReady), /Source snapshot decompressed empty/);
+    console.log('PASS initialization failure without optional HUD');
+  } finally {
+    await browser.close();
+    if (fixtureDirectory) fs.rmSync(fixtureDirectory, { recursive: true, force: true });
+  }
+}
+
 const sourcePath = process.argv[2] || resolve(__dirname, 'task-map-graph.html');
 const securityFixture = makeSecurityFixture(sourcePath);
 run(1, securityFixture.fixturePath, securityFixture.hostileNodes)
   .then(() => run(2, securityFixture.fixturePath, securityFixture.hostileNodes))
+  .then(() => runFallbackCases(sourcePath))
   .catch(error => { console.error(error); process.exitCode = 1; })
   .finally(() => fs.rmSync(securityFixture.directory, { recursive: true, force: true }));
