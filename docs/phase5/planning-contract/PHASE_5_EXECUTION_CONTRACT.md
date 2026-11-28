@@ -2,7 +2,7 @@
 
 **وضعیت:** پیش‌نویس پیشنهادی؛ `PHASE_5_CONTRACT=PENDING_OWNER_APPROVAL`
 **اجرای فاز پنجم:** `NOT_STARTED`
-**مبنای داده:** Snapshot ثابت `phase4-45ed4ec10d34216cf935` از commit `8ce742b640bbcbb87be5fc29f3a5a28d92593dec`؛ اعتبارسنجی واقعی در HEAD `e207860d82ccaf665241258256565d064ddd901d` نتیجه `CERTIFIED_SNAPSHOT_VALID` و ۲۷ Artifact داد.
+**مبنای داده:** Snapshot ثابت `phase4-45ed4ec10d34216cf935` از commit `8ce742b640bbcbb87be5fc29f3a5a28d92593dec`؛ اعتبارسنجی واقعی پیش از اصلاح در HEAD `3124c39ddec912eac146411be765df0bca0549a3` و در بررسی نهایی این شاخه نتیجه `CERTIFIED_SNAPSHOT_VALID` و ۲۷ Artifact داد.
 
 ## 1. هدف و مرز
 
@@ -53,7 +53,7 @@ Deliverable واحد outcome-based برنامه انتشار است، نه وا�
 | Acceptance Criteria / Test References | outcome oracle و test/evidence references | Required before commitment; test must check outcome/failure/edge where relevant | D13; 5.2–5.3 |
 | Security Requirements / Release Gates | wallet/Blueprint risk/security and approved REL mapping | Required when relevant; exact release source text and evidence; no invented gates | D13; future release case |
 | Monitoring / Rollback Requirements | A09/F06 safety and operational evidence | Required for release candidate as applicable; rollback compatibility checked | before release readiness |
-| Effort Estimate Reference / Cost Estimate Reference / Token Estimate Reference | linked estimate records; unknown permitted | Optional during discovery; required before schedule commitment per approved rules; measure provenance | D04–06; 5.3 |
+| Effort Estimate Reference / Cost Estimate Reference / Token Estimate Reference | linked, typed, evidence-backed estimate records | Unknown may be explicit during proposal/discovery; **all applicable estimates, including cost, are required before any commitment** | D04–06; 5.3 |
 | Resource Requirements / Uncertainty | role/tool/environment + range/confidence/evidence | declare unknown; validate against actual capacity only | D03/D12; 5.3 |
 | Release Readiness / Planning Status | separate state dimensions | enum/version/transition rules; release-ready ≠ stage-complete; approval/evidence required | D13; 5.4 |
 
@@ -93,7 +93,7 @@ Deliverable واحد outcome-based برنامه انتشار است، نه وا�
 | Monitoring Requirements | A09/F06 and value measurement | الزامی for applicable release | minimum-data/privacy and owner/SLI source | thresholds require approval | release prep |
 | Rollback Requirements | F06, compatibility and recovery source | الزامی for applicable release | compatible code/data/API/snapshot/job target and evidence | rollback exception owner | release prep |
 | Effort Estimate Reference | estimate registry/model | قبل از schedule commitment | type/unit/range/source/uncertainty; Unknown allowed until then | model/estimate policy pending | 5.3 |
-| Cost Estimate Reference | cost ledger/tool/labor source | قبل از commitment if cost constrained | build/operate category, currency/date/source; no invented rates | budget/threshold owner | 5.3 |
+| Cost Estimate Reference | evidence-backed development and operating cost records | پیش از هرگونه تعهد، مستقل از وجود cost constraint | ساخت و بهره‌برداری، tool cost و token cost جدا؛ currency/period/source required؛ UNKNOWN تعهد را مسدود می‌کند | مبنای برآورد و تعهد نیازمند تصویب مالک | 5.3 |
 | Token Estimate Reference | provider usage/model record | when agent token cost applies | actual vs predicted, provider/model/version/source | pricing assumptions owner | 5.3 |
 | Resource Requirements | role/tool/environment inventory | before schedule commitment | owner/period/quantity/capacity evidence | availability supplied by owner | 5.3 |
 | Uncertainty | estimate/risk evidence | الزامی پیش از commitment | confidence state and unknown blockers; numeric band only if measured | threshold convention owner | 5.3 |
@@ -102,38 +102,23 @@ Deliverable واحد outcome-based برنامه انتشار است، نه وا�
 
 ## 6. گراف پیشنهادی
 
-نام: **Phase 5 Deliverable Planning Graph**؛ گراف مستقل مشتق از canonical planning source و ارجاع‌دهنده به Phase 4 IDs. Phase 4 graph، mapping، overlay یا source payload بازسازی/تغییر نمی‌شود. Source of truth برای facts یک‌تاست؛ گراف و HTML projection هستند. هر یال `source_kind`, `source_ref`, `assertion_status` (`PROPOSED`, `APPROVED`, `OBSERVED`), `evidence_ref`, `created_by`, `valid_for_snapshot` دارد. فرضیه هرگز به یال تأییدشده تبدیل نمی‌شود بی‌آنکه evidence/owner approval ثبت شود.
+نام: **Phase 5 Deliverable Planning Graph**؛ projection مستقل از canonical source آینده و ارجاع‌دهنده به شناسه‌های immutable فاز چهارم. هیچ Node/Edge به گراف فاز چهارم افزوده نمی‌شود. تعریف رسمی هر Node/Edge، endpoint، cardinality، properties، lifecycle، evidence، وضعیت تصویب و validation در [planning-contract-schema.json](planning-contract-schema.json) ثبت شده است؛ این Schema نیز پیشنهادی و منتظر تأیید مالک است.
 
-| نوع | تعریف و مبدأ→مقصد مجاز | cardinality/properties/evidence | اعتبارسنجی/اثر زمان‌بندی/تصویب |
-|---|---|---|---|
-| DELIVERABLE | outcome؛ هیچ یا چند Capability/Work/Requirement/Decision/Gate/Estimate/Resource را مرتبط می‌کند | یکتا؛ outcome, stage, status, evidence refs | Required acceptance; هیچ schedule تا approval |
-| CAPABILITY | نتیجه/توانایی محصول با owner boundary؛ DELIVERABLE→CAPABILITY | 0..N؛ capability ID، owner، stage | منبع requirement/capability؛ فقط خودش dependency نیست |
-| WEEK | چرخه حداکثر ۷ روز؛ DELIVERABLE→WEEK | هفته شروع/پایان و capacity refs؛ final allocation نیازمند D09 | date span <=7d; no actual assignment in 5.0; owner approval |
-| MILESTONE | checkpoint مرحله/تحویل؛ DELIVERABLE→MILESTONE | milestone ID/stage criteria | Stage completion جدا از release; approved policy reference |
-| RELEASE_GATE | مرجع گیت مصوب O5-10/RG/REL و شواهد آن؛ DELIVERABLE→RELEASE_GATE | source version, result, evidence | دقیقاً به گیت مصوب ارجاع دهد؛ هیچ gate جدید نسازد |
-| DISCOVERY | فعالیت تحقیق timeboxed با سوال/فرضیه | deliverable→discovery or discovery→estimate | duration/ratio فقط پس از O5-09/owner inputs |
-| ESTIMATE | زمان/effort/token/cost range evidence | deliverable→estimate; unit/model/version | Unknown accepted; estimate is not commitment by itself |
-| RESOURCE | نقش، ظرفیت، ابزار یا محیط موردنیاز | deliverable→resource | resource owner/capacity evidence; no invented availability |
-| DECISION_REFERENCE | مصوبه یا تصمیم باز مرتبط؛ deliverable→decision | ID/status/scope owner | OPEN only blocks in affected scope; cannot change status |
+مدل ۹ نوع گره موجود را با رابطه‌های لازم کامل می‌کند. یک `EXTERNAL_REFERENCE` به‌عنوان آدرس نوع‌دارِ گراف/Requirement/Test/Evidence بیرونی اضافه می‌شود تا ارجاع دقیق ممکن باشد؛ این Node محتوای Phase 4 را کپی یا تغییر نمی‌دهد. `MILESTONE` با `CONTRIBUTES_TO_MILESTONE`، `ESTIMATE` با `HAS_ESTIMATE` و `INFORMS_ESTIMATE`، و `DISCOVERY` با `REDUCES_UNCERTAINTY_FOR`، `INFORMS_ESTIMATE` و `INFORMS_DECISION` رابطهٔ رسمی دارند. رابطه‌های trace-only خودبه‌خود تقدم یا تخصیص زمان ایجاد نمی‌کنند.
 
-| رابطه | مبدأ→مقصد مجاز | cardinality/جهت و شاهد | validation و scheduling effect |
-|---|---|---|---|
-| IMPLEMENTS | DELIVERABLE→CAPABILITY/REQUIREMENT | 0..N/0..N؛ evidence to atomic obligation | trace only; no dependency inference |
-| INCLUDES_TASK | DELIVERABLE→Package/Task/Subtask ID | 0..N; allocation portion/ownership evidence if partial | unique effort allocation invariant; no parent+child double count |
-| SCHEDULED_IN | DELIVERABLE→WEEK | 0..1 committed cycle; draft relation distinguished | only post-approval; capacity and hard constraints must pass |
-| REQUIRES_DELIVERABLE | DELIVERABLE→DELIVERABLE | 0..N; source effect + scope | only explicit hard dependency creates schedule order; acyclic |
-| REQUIRES_GATE | DELIVERABLE→RELEASE_GATE | 0..N | gate pass blocks release only within scope; F06 no new gates |
-| REQUIRES_DECISION | DELIVERABLE→DECISION_REFERENCE | 0..N; scope of blocker and owner | blocks affected work only; owner change evidence required |
-| VALIDATED_BY | DELIVERABLE→Test/Evidence (external typed ref) | 1..N before commitment/release state | evidence resolves and version matches artifact |
-| CONSUMES_RESOURCE | DELIVERABLE→RESOURCE | 0..N with quantity/unit/period/evidence | capacity constraint only if resource capacity known |
+### قابلیت چند‌هفته‌ای
 
-Allowed source types must be namespaced (`phase4:<id>`, `blueprint:<locator>`, `wallet:<locator>`, `evidence:<sha>`); unknown IDs reject. Proposal edges never affect the schedule. Cardinalities above are draft assumptions for P5-D14/D15, pending approval.
+چرخهٔ مصوب همچنان حداکثر هفت روز تقویمی است. سه مدل بررسی شده‌اند: (A) یک Deliverable با چند Week و رکورد exception؛ (B) یک outcome/parent با sliceهای هفت‌روزهٔ مستقل و قابل آزمون؛ (C) تفکیک Deliverable انتشار از Work Packageهای اجرایی. پیشنهاد موقت B است؛ تصویب نشده است. در B، رابطهٔ نوع‌دار `HAS_WORK_SLICE` parent outcome را به sliceهای مستقل وصل می‌کند؛ هر slice حداکثر یک Week از طریق `SCHEDULED_IN` دارد و parent فقط roll-up است و دوباره‌شماری نمی‌شود. هیچ slice میانی معادل انتشار محصول نیست.
+
+هر گزینهٔ چند‌هفته‌ای پیش از تعهد به رکورد exception نیاز دارد: دلیل عدم تقسیم ایمن/ارزشمند، گزینه‌های تقسیم و علت رد، وابستگی‌ها، سقف زمان تقویمی و سقف جداگانه هزینه توسعه/بهره‌برداری با تأیید مالک، خروجی میانی و oracle آزمون برای هر چرخه، تاریخ بازبینی، و قاعده reconciliation تخمین والد/برش‌ها. تا تصویب سقف‌ها، مقدار آن‌ها UNKNOWN/PENDING_APPROVAL است و تعهد انجام نمی‌شود.
 
 ## 7. ظرفیت و تخمین پیشنهادی
 
-هر اندازه‌گیری جدا ذخیره شود: calendar elapsed (including wait), human person-hours, Coding Agent runtime, analysis, coding, test, review, correction/rework, deployment, owner-decision wait, tools, tokens, infrastructure, operating cost. Sum must state overlap rules; parallel tasks are not summed as wall time. Record `estimate_id`, Work/Deliverable refs, type/unit, low/most-likely/high if known, confidence/uncertainty, data source, tool/model/version, start/end, environment, exclusions, actual, rework and comparability. `Unknown` is valid and may block scheduling.
+رجیستری Machine-readable تخمین در `planning-contract-schema.json` همه اقلام و stateها را تعریف می‌کند: مدت تقویمی، نفرساعت، runtime عامل، هزینه توسعه، هزینه بهره‌برداری، token، tool cost، نیاز زیرساخت، ظرفیت، ریسک، عدم‌قطعیت، شاهد، فرض‌ها و وضعیت تأیید. برای هر قلم، واحد، مرحله لازم، شاهد، حالت فقدان داده و اثر بر تعهد ثبت شده است.
 
-Historical PRs must be classified by work type and evidence: docs/analysis/Graphify/Snapshot tooling are not automatically comparable to financial capability delivery. Compare only a reference class with same work type, scope/complexity, environment, author/agent composition, and included test/review/deploy phases; report sample count and selection; exclude waiting only in a separately named elapsed metric. Calibrate with forecasts vs actuals across completed cycles, not one PR. If adequate observations absent, return `NOT_MEASURED`, collect data prospectively with timestamps and provider accounting, then revisit P5-D04–06. No capacity, duration, dollar, or token estimate is asserted here.
+`UNKNOWN` صفر نیست؛ `NOT_MEASURED` به‌معنای نبود هزینه نیست؛ `ESTIMATED` با `MEASURED` فرق دارد؛ `NOT_APPLICABLE` بدون rationale/evidence رد می‌شود. هزینه توسعه، بهره‌برداری، ابزار و توکن جدا هستند؛ نفرساعت، runtime عامل و زمان تقویمی جمع یا جایگزین هم نمی‌شوند. هر estimate باید source/method/version، فرض‌ها، uncertainty و approval state داشته باشد؛ دادهٔ عددی واقعی برای این مأموریت ساخته نشده است.
+
+هیچ مقدار نامعلوم در مرحلهٔ پیشنهاد به‌خودی‌خود تخمین صفر نمی‌شود، اما رکوردهای لازم باید state صریح داشته باشند. گذار به `COMMITTED` بدون برآورد معتبر و شاهد برای تمام اقلام ضروری، ظرفیت تأییدشده و مجوز مالک مجاز نیست. هیچ استثنای عمومی برای هزینه به‌علت نبود `cost constraint` تعریف نمی‌شود. قواعد و انتقال lifecycle پیشنهادی‌اند و نیازمند تصویب مالک هستند.
 
 ## 8. ارزش و اولویت‌بندی
 

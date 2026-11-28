@@ -12,8 +12,16 @@
       "consumer": "Validator, graph/schedule/renderers",
       "canonical_or_derived": "Canonical (پیشنهادی)",
       "dependencies": [
-        "P5-D14",
-        "P5-D15"
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D14",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D15",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "Stage 5.1 بعد از تأیید قرارداد",
       "validation_method": "JSON Schema + semantic/cross-reference and provenance validation",
@@ -30,8 +38,56 @@
       "consumer": "Product Owner, delivery team",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "P5-D01..09,13"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D01",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D02",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D03",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D04",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D05",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D06",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D07",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D08",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D09",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "بعد از تصویب تصمیم‌ها و ورودی‌ها",
       "validation_method": "Re-render diff vs canonical; week<=7 days; acceptance references",
@@ -48,8 +104,16 @@
       "consumer": "Owner, validator, graph builder",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "P5-D01,02"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D01",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "مرحله پس از قرارداد",
       "validation_method": "Schema + unique IDs + refs + no duplicate work count",
@@ -66,9 +130,21 @@
       "consumer": "Validator, viewer, planners",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "A02",
-        "P5-D14,15"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A02",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D14",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "پس از registry",
       "validation_method": "Typed edges, provenance, allowed endpoint/cardinality",
@@ -85,7 +161,11 @@
       "consumer": "Owner/reviewers",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A03"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A03",
+          "relation": "DERIVED_FROM"
+        }
       ],
       "generation_stage": "در صورت اثبات نیاز پس از graph",
       "validation_method": "Embedded graph hash equals A03; basic interaction checks",
@@ -102,9 +182,51 @@
       "consumer": "Planning validator, CI, owner",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "A01",
-        "P5-D03..09,13"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A01",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D03",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D04",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D05",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D06",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D07",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D08",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D09",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "پس از owner-approved planning input",
       "validation_method": "Constraint and capacity validation; no week > 7 days",
@@ -121,8 +243,16 @@
       "consumer": "Owner, stakeholders",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A03",
-        "A05"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A03",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A05",
+          "relation": "DERIVED_FROM"
+        }
       ],
       "generation_stage": "بعد از schedule",
       "validation_method": "All labels trace canonical; stage/release distinction",
@@ -139,8 +269,17 @@
       "consumer": "Owner, team, audit",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "snapshot pinned"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "CERTIFIED_SNAPSHOT",
+          "ref_id": "phase4-45ed4ec10d34216cf935",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec"
+        }
       ],
       "generation_stage": "پس از allocation approval",
       "validation_method": "Rows reconcile to pinned 696 nodes; no double count",
@@ -157,8 +296,18 @@
       "consumer": "Owner, quality, auditor",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "Evidence Join Index"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/audits/phase2-source-coverage/evidence-join-index.json",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "5e9402edd10196b5bdc453f753277d6c7014072c"
+        }
       ],
       "generation_stage": "در طول plan/release",
       "validation_method": "1,285 totals reconcile; two Uncovered and 134 Open stay visible",
@@ -175,8 +324,16 @@
       "consumer": "Scheduler, owner",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "P5-D04,05"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D04",
+          "relation": "REQUIRES_APPROVAL"
+        }
       ],
       "generation_stage": "قبل از cycle commitment",
       "validation_method": "Unknown allowed; categories separate; actual/reference provenance",
@@ -193,8 +350,17 @@
       "consumer": "Scheduler, owner",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "O5-09"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "O5-09",
+          "relation": "CONSTRAINED_BY",
+          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.14.2"
+        }
       ],
       "generation_stage": "پیش از schedule",
       "validation_method": "No unapproved capacity number; ratio state and exceptions trace",
@@ -211,9 +377,21 @@
       "consumer": "Owner, finance, team",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "A09",
-        "A10"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A09",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A10",
+          "relation": "DERIVED_FROM"
+        }
       ],
       "generation_stage": "پیش از commitments; actuals after cycle",
       "validation_method": "Unknown preserved; totals reconcile to evidence",
@@ -230,9 +408,23 @@
       "consumer": "Owner, dependent teams",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "D10",
-        "snapshot OPEN ledger"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D10",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/phase4/task-map-graph/task-map-mapping.json",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "d9699534326a7f56b5bb5ec70120fac37885efc7"
+        }
       ],
       "generation_stage": "After impact links validated",
       "validation_method": "No OPEN becomes approved without owner evidence",
@@ -249,9 +441,24 @@
       "consumer": "Owner, CI",
       "canonical_or_derived": "Derived from A00 + approved rules",
       "dependencies": [
-        "P5-D14",
-        "P5-D15",
-        "explicit later scope approval"
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D14",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D15",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-scope-approval",
+          "relation": "REQUIRES_APPROVAL",
+          "description": "Owner approval for any later Phase 5.1 scope",
+          "owner": "Product Owner",
+          "resolution_evidence_required": true
+        }
       ],
       "generation_stage": "Later implementation stage, not Mission 5.0",
       "validation_method": "Golden/constraint/property tests; reproducible build",
@@ -268,8 +475,16 @@
       "consumer": "CI, owner",
       "canonical_or_derived": "Derived checker; does not own facts",
       "dependencies": [
-        "P5-D15",
-        "A00"
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D15",
+          "relation": "REQUIRES_APPROVAL"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        }
       ],
       "generation_stage": "Future implementation stage",
       "validation_method": "Negative/positive tests; fail closed on invalid refs",
@@ -286,9 +501,21 @@
       "consumer": "CI",
       "canonical_or_derived": "Derived verification assets",
       "dependencies": [
-        "A00",
-        "A13",
-        "A14"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A13",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A14",
+          "relation": "DERIVED_FROM"
+        }
       ],
       "generation_stage": "With engine implementation",
       "validation_method": "Known fixtures; test cases mapped to validation rules",
@@ -305,8 +532,19 @@
       "consumer": "Product owner/reviewers",
       "canonical_or_derived": "Derived",
       "dependencies": [
-        "A00",
-        "test/CI evidence"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-ci-evidence",
+          "relation": "REQUIRES_APPROVAL",
+          "description": "CI evidence for the exact final PR commit, reported externally in the PR body or final report",
+          "owner": "Repository CI",
+          "resolution_evidence_required": true
+        }
       ],
       "generation_stage": "At closure",
       "validation_method": "All gates linked; statuses accurately state",
@@ -323,9 +561,27 @@
       "consumer": "Future Phase 6 consumers",
       "canonical_or_derived": "Derived immutable certification record",
       "dependencies": [
-        "A00",
-        "validated outputs",
-        "close gate"
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "DERIVED_FROM"
+        },
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-validated-outputs",
+          "relation": "REQUIRES_APPROVAL",
+          "description": "All approved Phase 5 output artifacts validated against the approved contract",
+          "owner": "Phase 5 validator",
+          "resolution_evidence_required": true
+        },
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-owner-close-gate",
+          "relation": "REQUIRES_APPROVAL",
+          "description": "Owner decision to accept or close the Phase 5 contract gates",
+          "owner": "Product Owner",
+          "resolution_evidence_required": true
+        }
       ],
       "generation_stage": "At closure",
       "validation_method": "Hashes, commit ancestry, artifact manifest and validator PASS",
