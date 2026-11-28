@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.1",
+  "mission": "5.0",
+  "validator_type": "deterministic stdlib contract validator for Phase 5.0 proposal; not a production planning engine",
+  "limitations": [
+    "P5-B03 is PASS_WITH_REVIEW_EVIDENCE for the exact source versions and certified Phase 4 inputs recorded in the coverage/consumption registries. This does not imply owner approval, product execution, release readiness, or Phase 5.1 start.",
+    "Local validation establishes typed structure and synthetic fixture behavior; it does not establish owner approval, product correctness, or operational readiness.",
+    "Phase 4 Snapshot Validator establishes pinned identity and integrity, not semantic completeness of the source review.",
+    "GitHub Actions evidence recorded below is bound to the exact historical PR head 3124c39; all skipped jobs remain SKIPPED. CI for the final corrective commit is pending and must be checked externally without a follow-up evidence commit.",
+    "CI evidence below is pinned to the exact parent PR commit 91f5b322f3b5d03f38a53ac9c346dd85426216a2. CI for any later commit is checked separately and reported against that SHA in the PR description; successful workflow conclusions do not promote skipped jobs."
+  ],
+  "external_ci_evidence": {
+    "latest_verified_pr_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+    "pull_request": 258,
+    "verified_state": "EXACT_COMMIT_CI_VERIFIED",
+    "overall": "4/4 workflow runs completed successfully; job-level skipped outcomes remain SKIPPED.",
+    "workflow_runs": [
+      {
+        "name": "Security SAST, SCA and secret gates",
+        "run_id": 46139089968,
+        "run_number": 852,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Repository secret scan",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Python SAST and Python/Node dependency audit",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      },
+      {
+        "name": "Container build contract smoke",
+        "run_id": 46139089954,
+        "run_number": 769,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Build and run two isolated images",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      },
+      {
+        "name": "Quality gates",
+        "run_id": 46139089953,
+        "run_number": 1369,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Validate changed Markdown links and whitespace",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Loan details browser verification",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          },
+          {
+            "name": "Quality gates",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          },
+          {
+            "name": "PostgreSQL migration verification",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          },
+          {
+            "name": "Profile OTP real API browser verification",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      },
+      {
+        "name": "US-13 frozen frontend baseline evidence",
+        "run_id": 46139089971,
+        "run_number": 810,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Independent original-vs-candidate route evidence",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      }
+    ]
+  },
+  "previous_bootstrap_results": [
+    {
+      "test_id": "P5-V01",
+      "status": "PASS",
+      "detail": {
+        "json_files": 4,
+        "files": [
+          "acceptance-gates.json",
+          "decision-register.json",
+          "output-artifact-registry.json",
+          "planning-contract-validation.json"
+        ]
+      }
+    },
+    {
+      "test_id": "P5-V02",
+      "status": "PASS",
+      "detail": {
+        "rows": 51,
+        "columns": 8
+      }
+    },
+    {
+      "test_id": "P5-V03",
+      "status": "PASS",
+      "detail": {
+        "decisions": 16,
+        "artifacts": 18,
+        "gates": 16
+      }
+    },
+    {
+      "test_id": "P5-V04",
+      "status": "PASS",
+      "detail": "decision dependency and artifact references resolve"
+    },
+    {
+      "test_id": "P5-V05",
+      "status": "PASS",
+      "detail": "16 new decisions OPEN; 14 O5 policies recorded approved"
+    },
+    {
+      "test_id": "P5-V06",
+      "status": "PASS",
+      "detail": "22/22 BP §5.2.1 principles have source locators"
+    },
+    {
+      "test_id": "P5-V07",
+      "status": "PASS",
+      "detail": "18 artifacts include purpose/producer/consumer/validation"
+    },
+    {
+      "test_id": "P5-V08",
+      "status": "PASS",
+      "detail": "16 mission acceptance gates include evidence/failure/validation"
+    },
+    {
+      "test_id": "P5-V09",
+      "status": "PASS",
+      "detail": "no fabricated capacity/effort/cost/token estimate; only approved O5-09 ratios appear"
+    },
+    {
+      "test_id": "P5-V10",
+      "status": "PASS",
+      "detail": "no task-week assignments generated"
+    },
+    {
+      "test_id": "P5-V11",
+      "status": "PASS",
+      "detail": {
+        "lines": 179,
+        "bytes": 26934
+      }
+    },
+    {
+      "test_id": "P5-V12",
+      "status": "PASS",
+      "detail": "git diff --cached --check exit 0"
+    },
+    {
+      "test_id": "P5-V13",
+      "status": "PASS",
+      "detail": {
+        "staged_paths": 7,
+        "only_authorized_directory": true
+      }
+    },
+    {
+      "test_id": "P5-V14",
+      "status": "PASS",
+      "detail": "16 OPEN decisions and 49 alternatives; every alternative has hypothetical example, benefits, drawbacks, risks and qualitative cost; numeric costs remain UNKNOWN"
+    }
+  ],
+  "previous_bootstrap_summary": {
+    "passed": 14,
+    "failed": 0,
+    "overall": "PASS"
+  },
+  "current_local_validation": {
+    "base_pr_head": "a0e6953a41d2967a93bd4614b326cf475b9383f3",
+    "tested_state": "D14 owner approval integration; local checks recorded for the exact final content tree and bound to the published PR HEAD in the PR description.",
+    "validator_command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+    "exit_code": 0,
+    "synthetic_fixtures_passed": 56,
+    "synthetic_fixtures_failed": 0,
+    "real_validation_errors": 0,
+    "decision_count": 16,
+    "owner_approved_decisions": [
+      "P5-D01",
+      "P5-D02",
+      "P5-D14"
+    ],
+    "remaining_open_decision_count": 13,
+    "typed_decision_relations": 58,
+    "future_artifact_count": 18,
+    "gate_count": 36,
+    "csv_trace_rows": 51,
+    "csv_column_count": 14,
+    "policy_rows_BP52": 22,
+    "snapshot_result": "CERTIFIED_SNAPSHOT_VALID",
+    "snapshot_id": "phase4-45ed4ec10d34216cf935",
+    "certified_source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+    "changed_paths_count": 8,
+    "changed_paths_scope": "All changed paths are under docs/phase5/planning-contract; certified Phase 4 files are unchanged.",
+    "json_csv_validation": "PASS",
+    "decision_approval_integrity": "PASS: only P5-D01, P5-D02 and P5-D14 approved with evidence.",
+    "repository_documentation_validation": "PASS on the exact changed Markdown files (validate_markdown.py compares published base/head after publication).",
+    "git_diff_check": "PASS for final working diff before commit; repeated on published base/head.",
+    "CI_for_tested_commit": "PENDING_FINAL_PUBLISHED_SHA; workflows will be inspected against the exact PR HEAD and recorded in PR description; skipped jobs remain SKIPPED.",
+    "skill_build_readiness": "READY; D01/D02/D14 approved, certified knowledge and snapshot available, minimal architecture and 60-minute cap approved. Whole contract remains PENDING_OWNER_APPROVAL if separate approval is required.",
+    "whole_contract_status": "PENDING_OWNER_APPROVAL",
+    "skill_implementation": "NOT_STARTED",
+    "initial_weekly_plan": "NOT_CREATED"
+  },
+  "previous_local_validation": {
+    "base_pr_head": "d5f7ceecf1c3f37661af4fbb7d58bb22e146c396",
+    "tested_commit": "6f4f4a12d0369cc25e37a359b1bcc274d021938e",
+    "tested_state": "Published D01/D02 owner-approval integration and D14 review, immediately before this validation-record refresh; refreshed record is parse-only evidence metadata and was revalidated on the new final PR HEAD.",
+    "validator_command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+    "exit_code": 0,
+    "synthetic_fixtures_passed": 55,
+    "synthetic_fixtures_failed": 0,
+    "real_validation_errors": 0,
+    "decision_count": 16,
+    "owner_approved_decisions": [
+      "P5-D01",
+      "P5-D02"
+    ],
+    "remaining_open_decision_count": 14,
+    "D14_status": "OPEN / PENDING_APPROVAL",
+    "typed_decision_relations": 58,
+    "future_artifact_count": 18,
+    "gate_count": 36,
+    "csv_trace_rows": 51,
+    "csv_column_count": 14,
+    "policy_rows_BP52": 22,
+    "hard_prerequisite_topological_order": "all 16 nodes emitted; no hard prerequisite relations introduced",
+    "snapshot_result": "CERTIFIED_SNAPSHOT_VALID",
+    "snapshot_id": "phase4-45ed4ec10d34216cf935",
+    "certified_source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+    "changed_paths_count": 7,
+    "changed_paths_scope": "all seven changed paths are under docs/phase5/planning-contract; Phase 4 inputs are unchanged",
+    "json_csv_validation": "PASS",
+    "repository_documentation_validation": "PASS",
+    "git_diff_check": "PASS",
+    "CI_for_tested_commit": "all four PR workflows successful; skipped product-specific jobs are not reported as PASS"
+  }
+}

@@ -1,0 +1,1425 @@
+{
+  "schema_version": "0.2-proposed",
+  "approval_status": "PROPOSED_PENDING_OWNER_APPROVAL",
+  "scope": "Lightweight Phase 5.0 planning contract. Existing graph/engine type definitions are retained only as historical proposals and are outside the current MVP.",
+  "reference_types": {
+    "DECISION": {
+      "namespace": "P5-DNN",
+      "required": [
+        "ref_id",
+        "relation"
+      ],
+      "resolver": "decision-register.json#/decisions[].decision_id",
+      "version_fields": [],
+      "missing_behavior": "ERROR"
+    },
+    "APPROVED_POLICY": {
+      "namespace": "O5-NN|BP52-NN|F06|A01-A09|WALLET-v0.20",
+      "required": [
+        "ref_id",
+        "relation"
+      ],
+      "resolver": "decision-register.json#/approved_policy_baseline[].decision_id; ranges must expand to exact IDs",
+      "version_fields": [
+        "source_locator"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "ARTIFACT": {
+      "namespace": "A00-A17 historical registry identifiers; only A01 is active in the proposed MVP",
+      "required": [
+        "ref_id",
+        "relation"
+      ],
+      "resolver": "output-artifact-registry.json#/artifacts[].artifact_id",
+      "version_fields": [
+        "source_commit"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "SOURCE_DOCUMENT": {
+      "namespace": "repository-relative-path",
+      "required": [
+        "ref_id",
+        "relation",
+        "source_commit",
+        "blob_sha"
+      ],
+      "resolver": "Git tree at source_commit; ref_id must be exact path",
+      "version_fields": [
+        "source_commit",
+        "blob_sha"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "SOURCE_LOCATOR": {
+      "namespace": "repository-relative-path#locator",
+      "required": [
+        "ref_id",
+        "relation",
+        "source_commit",
+        "blob_sha",
+        "locator"
+      ],
+      "resolver": "exact document plus heading/line locator",
+      "version_fields": [
+        "source_commit",
+        "blob_sha"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "CERTIFIED_SNAPSHOT": {
+      "namespace": "snapshot_id",
+      "required": [
+        "ref_id",
+        "source_commit",
+        "relation"
+      ],
+      "resolver": "phase4-certified-snapshot.json exact snapshot_id and certified_source_commit",
+      "version_fields": [
+        "source_commit"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "EVIDENCE": {
+      "namespace": "evidence-kind:sha-or-run-id",
+      "required": [
+        "ref_id",
+        "relation",
+        "tested_commit"
+      ],
+      "resolver": "matching recorded command, workflow run, or hashed report",
+      "version_fields": [
+        "tested_commit",
+        "generated_at"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "ACCEPTANCE_GATE": {
+      "namespace": "P5-BNN|P5-CNN|O5-10-RN",
+      "required": [
+        "ref_id",
+        "relation"
+      ],
+      "resolver": "acceptance-gates.json or exact approved release-gate source",
+      "version_fields": [
+        "source_commit"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "EXTERNAL_CONDITION": {
+      "namespace": "external:<stable-slug>",
+      "required": [
+        "ref_id",
+        "relation",
+        "description",
+        "owner",
+        "resolution_evidence_required"
+      ],
+      "resolver": "explicit condition registry in this file; never artifact ID",
+      "version_fields": [
+        "review_by"
+      ],
+      "missing_behavior": "ERROR"
+    },
+    "CONTRACT_ARTIFACT": {
+      "namespace": "docs/phase5/planning-contract/<exact-file-name>",
+      "required": [
+        "ref_id",
+        "relation"
+      ],
+      "resolver": "exact path in this PR; source commit is the final PR head",
+      "version_fields": [
+        "source_commit"
+      ],
+      "missing_behavior": "ERROR"
+    }
+  },
+  "reference_relations": [
+    "REQUIRES_INPUT",
+    "DERIVED_FROM",
+    "REQUIRES_APPROVAL",
+    "CONSTRAINED_BY",
+    "VALIDATED_BY",
+    "EVIDENCED_BY",
+    "BLOCKED_BY",
+    "RELATED_TO",
+    "USES_CONTRACT_ARTIFACT"
+  ],
+  "external_conditions": [
+    {
+      "id": "external:phase5-scope-approval",
+      "description": "Owner approval for any later Phase 5.1 scope",
+      "owner": "Product Owner",
+      "resolution_evidence_required": true
+    },
+    {
+      "id": "external:phase5-owner-contract-approval",
+      "description": "Owner approval of the Phase 5.0 contract",
+      "owner": "Product Owner",
+      "resolution_evidence_required": true
+    },
+    {
+      "id": "external:phase5-owner-close-gate",
+      "description": "Owner decision to accept or close the Phase 5 contract gates",
+      "owner": "Product Owner",
+      "resolution_evidence_required": true
+    },
+    {
+      "id": "external:phase5-ci-evidence",
+      "description": "CI evidence for the exact final PR commit, reported externally in the PR body or final report",
+      "owner": "Repository CI",
+      "resolution_evidence_required": true
+    },
+    {
+      "id": "external:phase5-validated-outputs",
+      "description": "All approved Phase 5 output artifacts validated against the approved contract",
+      "owner": "Phase 5 validator",
+      "resolution_evidence_required": true
+    }
+  ],
+  "decision_relations": {
+    "HARD_PREREQUISITE": {
+      "definition": "Target decision must be resolved before source decision can be finalized",
+      "direction": "source depends on target",
+      "symmetric": false,
+      "required_properties": [
+        "rationale",
+        "approval_status",
+        "evidence_refs"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Source or explicit owner-approved rule",
+      "effect": "Only this type enters proposed decision-order DAG",
+      "approval_status": "PROPOSED"
+    },
+    "INFLUENCES": {
+      "definition": "Target may inform source; no mandatory order",
+      "direction": "source to target influence",
+      "symmetric": false,
+      "required_properties": [
+        "rationale",
+        "approval_status"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Rationale and source locator",
+      "effect": "No blocking or ordering",
+      "approval_status": "PROPOSED"
+    },
+    "RELATED_TO": {
+      "definition": "Topical relationship only",
+      "direction": "undirected semantic link",
+      "symmetric": true,
+      "required_properties": [
+        "rationale",
+        "approval_status"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Shared topic/source",
+      "effect": "No blocking or ordering",
+      "approval_status": "PROPOSED"
+    },
+    "CO_DECISION": {
+      "definition": "Members are reviewed and decided as one coordinated decision package; individual decisions remain distinct",
+      "direction": "group membership",
+      "symmetric": true,
+      "required_properties": [
+        "group_id",
+        "rationale",
+        "approval_status"
+      ],
+      "cardinality": "2..N members per group",
+      "evidence": "Shared contract interface and rationale",
+      "effect": "Suggests joint review only; does not resolve or approve members",
+      "approval_status": "PROPOSED"
+    },
+    "CONSTRAINED_BY_POLICY": {
+      "definition": "Decision is bounded by an already approved policy",
+      "direction": "decision to policy",
+      "symmetric": false,
+      "required_properties": [
+        "policy_ref",
+        "rationale"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Exact approved policy reference",
+      "effect": "Policy constraint; not decision ordering",
+      "approval_status": "TRACE_ONLY"
+    },
+    "REQUIRES_EVIDENCE": {
+      "definition": "Decision requires identified evidence before owner resolution",
+      "direction": "decision to evidence requirement",
+      "symmetric": false,
+      "required_properties": [
+        "evidence_ref",
+        "rationale"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Resolvable evidence requirement",
+      "effect": "Evidence readiness only",
+      "approval_status": "PROPOSED"
+    },
+    "BLOCKS_EXECUTION": {
+      "definition": "Open decision blocks a specified future execution scope",
+      "direction": "decision to scoped execution entity",
+      "symmetric": false,
+      "required_properties": [
+        "scope_ref",
+        "rationale",
+        "approval_status"
+      ],
+      "cardinality": "0..N",
+      "evidence": "Scope-specific impact and owner approval",
+      "effect": "Blocks only specified scope; no Phase 5.0 task allocation",
+      "approval_status": "PROPOSED"
+    }
+  },
+  "decision_relation_policy": {
+    "legacy_dependencies_classification": "INFLUENCES unless source evidence proves a hard prerequisite; all current links lack owner-approved ordering evidence and are not scheduling blockers",
+    "hard_prerequisite_self_edge": "FORBIDDEN",
+    "hard_prerequisite_cycles": "FORBIDDEN",
+    "influence_cycles": "ALLOWED",
+    "co_decision_groups_require": "unique group_id, at least 2 existing distinct P5 decisions; group membership does not change OPEN status",
+    "proposed_relations_are_approval": "NEVER"
+  },
+  "decision_review_groups": [
+    {
+      "group_id": "G-DATA-SHAPE",
+      "members": [
+        "P5-D14",
+        "P5-D15"
+      ],
+      "rationale": "Historical review grouping: D14 JSON format is owner-approved; D15 remains conditional on an uncovered deterministic validation need."
+    },
+    {
+      "group_id": "G-ESTIMATE-CAPACITY",
+      "members": [
+        "P5-D03",
+        "P5-D04",
+        "P5-D05",
+        "P5-D06",
+        "P5-D11"
+      ],
+      "rationale": "capacity, effort, agent/token and cost estimates plus discovery/delivery application"
+    },
+    {
+      "group_id": "G-VALUE-UNCERTAINTY",
+      "members": [
+        "P5-D07",
+        "P5-D08",
+        "P5-D12"
+      ],
+      "rationale": "value, priority and uncertainty inputs are interdependent"
+    },
+    {
+      "group_id": "G-CYCLE-RELEASE",
+      "members": [
+        "P5-D09",
+        "P5-D13",
+        "P5-D16"
+      ],
+      "rationale": "weekly cycle, acceptance and replan need coordinated rules"
+    }
+  ],
+  "proposed_decision_review_order": [
+    "P5-D15",
+    "P5-D10",
+    "P5-D03",
+    "P5-D04",
+    "P5-D05",
+    "P5-D06",
+    "P5-D11",
+    "P5-D07",
+    "P5-D08",
+    "P5-D12",
+    "P5-D09",
+    "P5-D13",
+    "P5-D16"
+  ],
+  "graph_node_types": [
+    {
+      "type_id": "DELIVERABLE",
+      "definition": "Outcome-sized, independently testable/releasable proposal; not a WBS node",
+      "required_properties": [
+        "id",
+        "title",
+        "outcome",
+        "lifecycle_state",
+        "approval_status",
+        "evidence_refs"
+      ],
+      "optional_properties": [
+        "consumer",
+        "scope_in",
+        "scope_out",
+        "product_stage",
+        "owner_boundary"
+      ],
+      "id_namespace": "P5-DEL-NNN",
+      "incoming_relations": [
+        "IMPLEMENTS",
+        "REDUCES_UNCERTAINTY_FOR",
+        "SCHEDULED_IN",
+        "REQUIRES_DELIVERABLE",
+        "HAS_WORK_SLICE"
+      ],
+      "outgoing_relations": [
+        "IMPLEMENTS",
+        "INCLUDES_TASK",
+        "CONTRIBUTES_TO_MILESTONE",
+        "HAS_ESTIMATE",
+        "REQUIRES_DELIVERABLE",
+        "REQUIRES_GATE",
+        "REQUIRES_DECISION",
+        "VALIDATED_BY",
+        "CONSUMES_RESOURCE",
+        "SCHEDULED_IN",
+        "HAS_WORK_SLICE"
+      ],
+      "lifecycle_states": [
+        "PROPOSED",
+        "DISCOVERY",
+        "READY_FOR_ESTIMATION",
+        "ESTIMATED",
+        "READY_FOR_COMMITMENT",
+        "COMMITTED",
+        "RELEASE_CANDIDATE"
+      ],
+      "evidence_requirements": [
+        "source refs for claims; approval evidence for commitment/release"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "no operational deliverables generated in Phase 5.0",
+        "commitment requires required estimate fields and owner approval"
+      ]
+    },
+    {
+      "type_id": "CAPABILITY",
+      "definition": "Product capability reference with bounded owner",
+      "required_properties": [
+        "id",
+        "source_ref",
+        "owner_boundary"
+      ],
+      "optional_properties": [
+        "stage",
+        "status"
+      ],
+      "id_namespace": "Phase 4 or approved capability ID",
+      "incoming_relations": [
+        "IMPLEMENTS"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "REFERENCED"
+      ],
+      "evidence_requirements": [
+        "resolvable source reference"
+      ],
+      "approval_status": "TRACE_ONLY",
+      "validation_rules": [
+        "Phase 4 source is immutable"
+      ]
+    },
+    {
+      "type_id": "WEEK",
+      "definition": "Calendar planning window no longer than seven days",
+      "required_properties": [
+        "id",
+        "starts_on",
+        "ends_on",
+        "capacity_refs"
+      ],
+      "optional_properties": [
+        "exception_ref"
+      ],
+      "id_namespace": "P5-WEEK-NNN",
+      "incoming_relations": [
+        "SCHEDULED_IN"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "PROPOSED",
+        "APPROVED"
+      ],
+      "evidence_requirements": [
+        "measured capacity and approved schedule"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "end-start <= 6 days; multi-cycle capability uses slices or documented exception model; no actual week allocation in Phase 5.0"
+      ]
+    },
+    {
+      "type_id": "MILESTONE",
+      "definition": "Stage or product checkpoint, distinct from release readiness",
+      "required_properties": [
+        "id",
+        "name",
+        "stage_ref",
+        "acceptance_refs",
+        "approval_status"
+      ],
+      "optional_properties": [
+        "target_date",
+        "evidence_refs"
+      ],
+      "id_namespace": "P5-MILESTONE-NNN",
+      "incoming_relations": [
+        "CONTRIBUTES_TO_MILESTONE"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "PROPOSED",
+        "READY",
+        "ACHIEVED"
+      ],
+      "evidence_requirements": [
+        "approved stage policy and observable acceptance"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "achievement requires evidence; no milestone dates invented"
+      ]
+    },
+    {
+      "type_id": "RELEASE_GATE",
+      "definition": "Reference to an existing approved release gate",
+      "required_properties": [
+        "id",
+        "source_ref",
+        "version",
+        "status"
+      ],
+      "optional_properties": [
+        "evidence_refs"
+      ],
+      "id_namespace": "O5-10/RG/REL exact source ID",
+      "incoming_relations": [
+        "REQUIRES_GATE"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "OPEN",
+        "PASS",
+        "FAIL",
+        "SKIPPED"
+      ],
+      "evidence_requirements": [
+        "exact policy version and execution evidence for PASS"
+      ],
+      "approval_status": "TRACE_ONLY",
+      "validation_rules": [
+        "no new gate or SKIPPED-to-PASS coercion"
+      ]
+    },
+    {
+      "type_id": "DISCOVERY",
+      "definition": "Timeboxed uncertainty-reducing investigation",
+      "required_properties": [
+        "id",
+        "question",
+        "hypothesis",
+        "timebox_state",
+        "owner",
+        "approval_status"
+      ],
+      "optional_properties": [
+        "duration_estimate_ref",
+        "evidence_refs",
+        "review_date"
+      ],
+      "id_namespace": "P5-DISC-NNN",
+      "incoming_relations": [],
+      "outgoing_relations": [
+        "REDUCES_UNCERTAINTY_FOR",
+        "INFORMS_ESTIMATE",
+        "INFORMS_DECISION"
+      ],
+      "lifecycle_states": [
+        "PROPOSED",
+        "ACTIVE",
+        "COMPLETE",
+        "CANCELLED"
+      ],
+      "evidence_requirements": [
+        "hypothesis, timebox, result and review date"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "timebox uses approved O5-09 policy; no fabricated durations"
+      ]
+    },
+    {
+      "type_id": "ESTIMATE",
+      "definition": "Evidence-backed forecast or actual measurement for one metric",
+      "required_properties": [
+        "id",
+        "metric",
+        "state",
+        "unit",
+        "source_ref",
+        "assumptions",
+        "uncertainty",
+        "approval_status"
+      ],
+      "optional_properties": [
+        "low",
+        "most_likely",
+        "high",
+        "actual",
+        "measured_at",
+        "currency",
+        "model_version",
+        "tool_version"
+      ],
+      "id_namespace": "P5-EST-NNN",
+      "incoming_relations": [
+        "HAS_ESTIMATE",
+        "INFORMS_ESTIMATE"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "ESTIMATED",
+        "MEASURED",
+        "UNKNOWN",
+        "NOT_MEASURED",
+        "NOT_APPLICABLE",
+        "PENDING_APPROVAL"
+      ],
+      "evidence_requirements": [
+        "source or explicit unknown rationale; measured values require measurement evidence"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "UNKNOWN and NOT_MEASURED are not numeric zero; NOT_APPLICABLE needs rationale/evidence; estimate is not measurement"
+      ]
+    },
+    {
+      "type_id": "RESOURCE",
+      "definition": "Human role, agent, tool, infrastructure or environment capacity",
+      "required_properties": [
+        "id",
+        "resource_type",
+        "owner",
+        "unit",
+        "availability_state"
+      ],
+      "optional_properties": [
+        "capacity",
+        "period",
+        "evidence_refs"
+      ],
+      "id_namespace": "P5-RESOURCE-NNN",
+      "incoming_relations": [
+        "CONSUMES_RESOURCE"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "UNKNOWN",
+        "AVAILABLE",
+        "UNAVAILABLE",
+        "PENDING_APPROVAL"
+      ],
+      "evidence_requirements": [
+        "owner and period-specific availability evidence"
+      ],
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "unknown capacity is not zero or unlimited"
+      ]
+    },
+    {
+      "type_id": "DECISION_REFERENCE",
+      "definition": "Reference to an approved policy or an open owner decision",
+      "required_properties": [
+        "id",
+        "ref_type",
+        "ref_id",
+        "status",
+        "scope"
+      ],
+      "optional_properties": [
+        "owner",
+        "evidence_refs"
+      ],
+      "id_namespace": "P5-DNN or approved policy namespace",
+      "incoming_relations": [
+        "REQUIRES_DECISION",
+        "INFORMS_DECISION"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "OPEN",
+        "APPROVED_POLICY",
+        "RESOLVED_WITH_EVIDENCE"
+      ],
+      "evidence_requirements": [
+        "resolve to register/source; preserve source status"
+      ],
+      "approval_status": "TRACE_ONLY",
+      "validation_rules": [
+        "no decision state upgrade without explicit owner evidence"
+      ]
+    },
+    {
+      "type_id": "EXTERNAL_REFERENCE",
+      "definition": "Typed, immutable reference to an external Phase 4 work item, requirement, test or source; the referenced source is not copied or mutated",
+      "required_properties": [
+        "id",
+        "ref_type",
+        "ref_id",
+        "source_commit",
+        "approval_status"
+      ],
+      "optional_properties": [
+        "source_path",
+        "blob_sha",
+        "locator",
+        "evidence_refs"
+      ],
+      "id_namespace": "typed external namespace; e.g. phase4-work:<id> or evidence:<sha>",
+      "incoming_relations": [
+        "IMPLEMENTS",
+        "INCLUDES_TASK",
+        "VALIDATED_BY"
+      ],
+      "outgoing_relations": [],
+      "lifecycle_states": [
+        "REFERENCED"
+      ],
+      "evidence_requirements": [
+        "exact namespace, source version and resolvable identifier"
+      ],
+      "approval_status": "TRACE_ONLY",
+      "validation_rules": [
+        "Phase 4 graph and mapping remain immutable",
+        "missing external ref is invalid"
+      ]
+    }
+  ],
+  "graph_edge_types": [
+    {
+      "relation_id": "IMPLEMENTS",
+      "definition": "Trace deliverable to capability/requirement",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "CAPABILITY",
+        "EXTERNAL_REFERENCE"
+      ],
+      "direction": "source to target",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "source_ref",
+        "assertion_status",
+        "evidence_ref"
+      ],
+      "evidence_requirements": [
+        "resolvable source and evidence"
+      ],
+      "effect": "TRACE_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "never infer schedule order"
+      ]
+    },
+    {
+      "relation_id": "INCLUDES_TASK",
+      "definition": "Allocates a specific portion of a Phase 4 work node",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "EXTERNAL_REFERENCE"
+      ],
+      "direction": "source to target reference",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "work_ref",
+        "allocation_scope",
+        "evidence_ref"
+      ],
+      "evidence_requirements": [
+        "certified snapshot ref; no ancestor/descendant double count"
+      ],
+      "effect": "TRACE_ONLY_UNTIL_APPROVED",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "no Phase 4 graph mutation; unique allocation invariant"
+      ]
+    },
+    {
+      "relation_id": "SCHEDULED_IN",
+      "definition": "Assigns one deliverable to one cycle; multi-week exception proposal uses weekly slices",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "WEEK"
+      ],
+      "direction": "deliverable to week",
+      "cardinality": "0..1 week per slice; 1..N slices per capability only via approved exception model",
+      "required_attributes": [
+        "assertion_status",
+        "approval_status",
+        "evidence_ref"
+      ],
+      "evidence_requirements": [
+        "approved estimates, measured capacity and documented exception where needed"
+      ],
+      "effect": "SCHEDULING_ONLY_AFTER_OWNER_APPROVAL",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "weekly window <=7 calendar days; trace-only relation cannot commit work"
+      ]
+    },
+    {
+      "relation_id": "REQUIRES_DELIVERABLE",
+      "definition": "Hard prerequisite between deliverables",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "DELIVERABLE"
+      ],
+      "direction": "source depends on target",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "scope",
+        "rationale",
+        "evidence_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "explicit source/owner evidence"
+      ],
+      "effect": "EXECUTION_ORDER_ONLY_IF_APPROVED",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "acyclic when approved as hard prerequisite"
+      ]
+    },
+    {
+      "relation_id": "REQUIRES_GATE",
+      "definition": "Existing release gate required in a scoped release case",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "RELEASE_GATE"
+      ],
+      "direction": "deliverable to gate",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "scope",
+        "source_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "approved gate source"
+      ],
+      "effect": "RELEASE_BLOCK_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "no new gate"
+      ]
+    },
+    {
+      "relation_id": "REQUIRES_DECISION",
+      "definition": "Decision blocks only the affected scoped execution",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "DECISION_REFERENCE"
+      ],
+      "direction": "deliverable to decision",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "scope",
+        "rationale",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "scope-specific source evidence"
+      ],
+      "effect": "SCOPED_BLOCK_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "no Phase 5.0 task allocation"
+      ]
+    },
+    {
+      "relation_id": "VALIDATED_BY",
+      "definition": "Acceptance oracle or evidence validates deliverable",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "EXTERNAL_REFERENCE"
+      ],
+      "direction": "deliverable to evidence reference",
+      "cardinality": "1..N before commitment/release candidate",
+      "required_attributes": [
+        "evidence_ref",
+        "tested_version",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "version-matched evidence"
+      ],
+      "effect": "TRACE_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "must resolve at commitment"
+      ]
+    },
+    {
+      "relation_id": "CONSUMES_RESOURCE",
+      "definition": "Associates required resource quantity and period",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "RESOURCE"
+      ],
+      "direction": "deliverable to resource",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "quantity_state",
+        "unit",
+        "period",
+        "evidence_ref"
+      ],
+      "evidence_requirements": [
+        "owner/capacity evidence for commitment"
+      ],
+      "effect": "CAPACITY_CONSTRAINT_AFTER_APPROVAL",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "unknown availability cannot pass capacity check"
+      ]
+    },
+    {
+      "relation_id": "CONTRIBUTES_TO_MILESTONE",
+      "definition": "Deliverable contributes evidence toward a milestone",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "MILESTONE"
+      ],
+      "direction": "deliverable to milestone",
+      "cardinality": "0..N contributors per milestone; 0..N milestones per deliverable",
+      "required_attributes": [
+        "contribution_scope",
+        "evidence_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "source/acceptance mapping"
+      ],
+      "effect": "TRACE_ONLY; milestone achievement is separately gated",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "does not equate deliverable release with stage completion"
+      ]
+    },
+    {
+      "relation_id": "HAS_ESTIMATE",
+      "definition": "Links deliverable to one typed estimate record per metric and estimate version",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "ESTIMATE"
+      ],
+      "direction": "deliverable to estimate",
+      "cardinality": "0..N; at most one active record per metric and version",
+      "required_attributes": [
+        "metric",
+        "estimate_version",
+        "evidence_ref"
+      ],
+      "evidence_requirements": [
+        "source and assumptions; measured value requires measurement evidence"
+      ],
+      "effect": "READINESS_INPUT_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "unknown states remain explicit; required estimates before commitment"
+      ]
+    },
+    {
+      "relation_id": "REDUCES_UNCERTAINTY_FOR",
+      "definition": "Discovery investigates an uncertainty attached to a deliverable",
+      "source_types": [
+        "DISCOVERY"
+      ],
+      "target_types": [
+        "DELIVERABLE"
+      ],
+      "direction": "discovery to affected deliverable",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "question_ref",
+        "hypothesis",
+        "timebox_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "approved timebox and result evidence"
+      ],
+      "effect": "TRACE_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "does not itself approve an estimate or deliverable"
+      ]
+    },
+    {
+      "relation_id": "INFORMS_ESTIMATE",
+      "definition": "Discovery output informs an estimate record",
+      "source_types": [
+        "DISCOVERY"
+      ],
+      "target_types": [
+        "ESTIMATE"
+      ],
+      "direction": "discovery to estimate",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "evidence_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "observed discovery result"
+      ],
+      "effect": "EVIDENCE_TRACE_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "no automatic estimate approval"
+      ]
+    },
+    {
+      "relation_id": "INFORMS_DECISION",
+      "definition": "Discovery result informs a decision reference",
+      "source_types": [
+        "DISCOVERY"
+      ],
+      "target_types": [
+        "DECISION_REFERENCE"
+      ],
+      "direction": "discovery to decision",
+      "cardinality": "0..N",
+      "required_attributes": [
+        "evidence_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "observed evidence and exact decision ref"
+      ],
+      "effect": "EVIDENCE_TRACE_ONLY",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "does not resolve owner decision"
+      ]
+    },
+    {
+      "relation_id": "HAS_WORK_SLICE",
+      "definition": "Partitions a parent capability outcome into a bounded, independently testable work slice for a documented multi-week exception",
+      "source_types": [
+        "DELIVERABLE"
+      ],
+      "target_types": [
+        "DELIVERABLE"
+      ],
+      "direction": "parent outcome to child weekly slice",
+      "cardinality": "0..N slices per parent; each slice belongs to at most one parent",
+      "required_attributes": [
+        "slice_order",
+        "scope",
+        "allocation_ref",
+        "exception_ref",
+        "assertion_status"
+      ],
+      "evidence_requirements": [
+        "approved exception record, slice oracle and allocation reconciliation"
+      ],
+      "effect": "TRACE_ONLY_UNTIL_APPROVED",
+      "approval_status": "PROPOSED",
+      "validation_rules": [
+        "each slice is <=7 days, independently testable, not product release by itself; parent roll-up is never double counted"
+      ]
+    }
+  ],
+  "multi_week_options": [
+    {
+      "option_id": "A",
+      "model": "one deliverable references multiple weeks plus a scoped exception record",
+      "example": "one capability spans two weekly cycles; each cycle has a testable intermediate outcome",
+      "benefits": [
+        "single outcome ID",
+        "minimal graph nodes"
+      ],
+      "drawbacks": [
+        "risk of treating multiple weeks as one long cycle",
+        "partial acceptance can become ambiguous"
+      ],
+      "data_effect": "SCHEDULED_IN becomes 0..N under explicit exception object",
+      "acceptance_effect": "each week needs intermediate observable criteria and final release criteria",
+      "double_count_effect": "one deliverable estimate split across week allocations; totals reconcile to parent",
+      "capacity_effect": "requires per-cycle capacity and capped effort",
+      "blueprint_alignment": "requires exception evidence; weekly windows remain <=7 days",
+      "recommendation": "Option B is provisionally preferred because the existing conceptual model separates capability/outcome from weekly work slices",
+      "approval_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+    },
+    {
+      "option_id": "B",
+      "model": "parent capability/outcome with independently estimable seven-day work slices",
+      "example": "a capability spanning two cycles is represented by two weekly slices, each testable; user-visible release remains a separate final acceptance",
+      "benefits": [
+        "preserves seven-day cadence",
+        "intermediate test evidence",
+        "parent estimate reconciles to slices"
+      ],
+      "drawbacks": [
+        "more nodes and coordination",
+        "slice boundaries require owner agreement"
+      ],
+      "data_effect": "parent Deliverable has child slices; each slice has one SCHEDULED_IN edge to one week",
+      "acceptance_effect": "per-slice progress evidence does not claim product release; final acceptance references release evidence separately",
+      "double_count_effect": "parent is a roll-up only and never counted alongside child estimate allocations",
+      "capacity_effect": "each slice has independent cap and owner capacity; reforecast at each boundary",
+      "blueprint_alignment": "weekly timebox stays <=7 days; exception requires rationale, alternatives, ceiling, interim output and review date",
+      "recommendation": "provisionally preferred; not approved",
+      "approval_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+    },
+    {
+      "option_id": "C",
+      "model": "separate release deliverable and implementation work packages",
+      "example": "one final release deliverable spans work packages each allocated to separate seven-day weeks",
+      "benefits": [
+        "clear separation of release from work",
+        "usable for multi-team execution"
+      ],
+      "drawbacks": [
+        "introduces extra graph type and ownership boundaries",
+        "may duplicate estimate semantics"
+      ],
+      "data_effect": "adds work-package entity and release relation",
+      "acceptance_effect": "intermediate work package acceptance differs from product release acceptance",
+      "double_count_effect": "requires strict parent/child allocation rules",
+      "capacity_effect": "work-package estimates align with team capacity windows",
+      "blueprint_alignment": "weekly windows remain <=7 days; exception records still required",
+      "recommendation": "not preferred until multiple-team consumer is demonstrated",
+      "approval_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+    }
+  ],
+  "estimate_model": {
+    "states": [
+      "ESTIMATED",
+      "MEASURED",
+      "UNKNOWN",
+      "NOT_MEASURED",
+      "NOT_APPLICABLE",
+      "PENDING_APPROVAL"
+    ],
+    "metrics": {
+      "calendar_duration": {
+        "unit": "calendar_day",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "forecast model/source; actual duration requires timestamps",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "human_effort": {
+        "unit": "person_hour",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "role/task basis; actual time record for MEASURED",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "agent_effort": {
+        "unit": "agent_runtime_second",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "agent/provider/model version and measured runtime for actual",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "development_cost": {
+        "unit": "currency_amount",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "rate/source/date/currency and scope",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "operating_cost": {
+        "unit": "currency_amount_per_period",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "infrastructure/provider/usage basis and period",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "token_estimate": {
+        "unit": "token_count",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "provider/model/version and usage source; actual usage separate",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "tool_cost": {
+        "unit": "currency_amount",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "tool/provider/version/rate and usage",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "infrastructure_requirements": {
+        "unit": "typed_resource_requirement",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "resource type, owner, environment, quantity, period and capacity source",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "capacity": {
+        "unit": "person_hour_or_agent_runtime_second_per_period",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "owner-confirmed availability for period",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "risk": {
+        "unit": "risk_record",
+        "stage": "DISCOVERY",
+        "required_before": "COMMITTED",
+        "evidence": "identified event, impact, mitigation owner and source",
+        "missing": "NOT_APPLICABLE only with rationale/evidence",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "uncertainty": {
+        "unit": "confidence_state_or_evidence-backed_range",
+        "stage": "DISCOVERY",
+        "required_before": "COMMITTED",
+        "evidence": "method, sample/reference class and assumptions",
+        "missing": "UNKNOWN allowed before commitment; blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "estimate_evidence": {
+        "unit": "evidence_reference",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "resolvable reference to source/method/version",
+        "missing": "NOT_APPLICABLE forbidden",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "estimate_assumptions": {
+        "unit": "assumption_list",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "explicit assumptions and exclusions",
+        "missing": "empty only when documented as none",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      },
+      "estimate_approval_status": {
+        "unit": "approval_state",
+        "stage": "READY_FOR_ESTIMATION",
+        "required_before": "COMMITTED",
+        "evidence": "owner and approval record where required",
+        "missing": "PENDING_APPROVAL blocks commitment",
+        "commitment_effect": "Required and must be ESTIMATED or MEASURED with source before COMMITTED; UNKNOWN/NOT_MEASURED/PENDING_APPROVAL blocks commitment; NOT_APPLICABLE needs rationale and evidence.",
+        "approval_requirement": "Owner approval of scope and estimate basis is required before COMMITTED; measurement itself does not imply approval."
+      }
+    },
+    "lifecycle_required_metrics": {
+      "PROPOSED": [
+        "calendar_duration",
+        "human_effort",
+        "agent_effort",
+        "development_cost",
+        "operating_cost",
+        "token_estimate",
+        "tool_cost",
+        "infrastructure_requirements",
+        "capacity",
+        "risk",
+        "uncertainty",
+        "estimate_evidence",
+        "estimate_assumptions",
+        "estimate_approval_status"
+      ],
+      "DISCOVERY": [
+        "risk",
+        "uncertainty",
+        "estimate_evidence",
+        "estimate_assumptions"
+      ],
+      "READY_FOR_ESTIMATION": [
+        "all_metrics"
+      ],
+      "ESTIMATED": [
+        "all_metrics_with_state_and_source"
+      ],
+      "READY_FOR_COMMITMENT": [
+        "all_metrics_resolved_or_approved_exception"
+      ],
+      "COMMITTED": [
+        "all_required_metrics_valid",
+        "owner_approval",
+        "capacity_and_scope_evidence"
+      ],
+      "RELEASE_CANDIDATE": [
+        "commitment_evidence",
+        "release_gate_evidence",
+        "actual_measurements_where_applicable"
+      ]
+    },
+    "lifecycle_transitions": {
+      "PROPOSED": [
+        "DISCOVERY",
+        "READY_FOR_ESTIMATION"
+      ],
+      "DISCOVERY": [
+        "READY_FOR_ESTIMATION",
+        "PROPOSED"
+      ],
+      "READY_FOR_ESTIMATION": [
+        "ESTIMATED",
+        "DISCOVERY"
+      ],
+      "ESTIMATED": [
+        "READY_FOR_COMMITMENT",
+        "DISCOVERY"
+      ],
+      "READY_FOR_COMMITMENT": [
+        "COMMITTED",
+        "DISCOVERY"
+      ],
+      "COMMITTED": [
+        "RELEASE_CANDIDATE"
+      ],
+      "RELEASE_CANDIDATE": []
+    },
+    "rules": [
+      "UNKNOWN is not zero",
+      "NOT_MEASURED is not no cost",
+      "NOT_APPLICABLE requires rationale and evidence",
+      "estimated is not measured",
+      "development and operating cost are separate",
+      "calendar time differs from person effort",
+      "agent runtime is separate from human time",
+      "no real estimates may be fabricated in Phase 5.0",
+      "commitment exceptions require owner approval and cannot be invented",
+      "cost estimate remains required before commitment even when no cost constraint is declared",
+      "development cost, operating cost, tool cost, token usage and infrastructure are distinct metrics"
+    ]
+  },
+  "multi_week_exception_record_required": [
+    "documented reason the capability cannot reasonably be split into safe, independently valuable slices",
+    "split alternatives considered and why rejected",
+    "dependencies",
+    "owner-approved maximum calendar duration",
+    "owner-approved development and operating cost ceilings, with currency and period",
+    "measurable intermediate output and test oracle per <=7-day cycle",
+    "next review date",
+    "explicitly state intermediate output is not a product release",
+    "estimate allocation reconciliation to prevent parent/child double count"
+  ],
+  "multi_week_model": {
+    "recommended_option": "B",
+    "status": "PROPOSED_PENDING_OWNER_APPROVAL",
+    "parent_semantics": "outcome/roll-up only; not independently scheduled or double counted when slices are allocated",
+    "slice_semantics": "each child slice has independent acceptance oracle and at most one SCHEDULED_IN edge to a <=7-day WEEK",
+    "exception_fields": "multi_week_exception_record_required",
+    "release_semantics": "intermediate work evidence cannot be treated as successful public product release"
+  },
+  "current_mvp_contract": {
+    "tool": "One approved Codex Skill: shahab-planner",
+    "request_modes": [
+      "INITIAL PLAN",
+      "REPLAN",
+      "VALIDATE",
+      "EXPLAIN"
+    ],
+    "implementation_time_cap_minutes": 60,
+    "history": "Git commits",
+    "active_output_artifact_id": "A01",
+    "minimum_plan_fields": [
+      "Week ID",
+      "Deliverable ID and outcome",
+      "work node references",
+      "dependencies",
+      "applicable policies",
+      "open decision blockers",
+      "effort estimate",
+      "development cost",
+      "operating cost",
+      "token estimate",
+      "required capacity",
+      "acceptance criteria",
+      "test references",
+      "status",
+      "planning evidence"
+    ],
+    "unknown_policy": "UNKNOWN is neither zero nor permission to commit",
+    "legacy_graph_schema": "Definitions below are not required for MVP implementation and confer no owner approval.",
+    "output_format_status": "OWNER_APPROVED_P5-D14; whole contract status remains PENDING_OWNER_APPROVAL if separate approval is required",
+    "canonical_plan_format": "JSON",
+    "canonical_plan_path": "docs/phase5/weekly-plan.json",
+    "human_readable_presentation": "Requested views are rendered in the shahab-planner Skill response; no parallel Markdown plan file.",
+    "plan_version_history": "Git commits",
+    "validator": "One small Python script inside the Skill; no new dependency or independent engine."
+  },
+  "decision_owner_approval_states": {
+    "decision_status_values": [
+      "OPEN",
+      "APPROVED"
+    ],
+    "owner_approval_status_values": [
+      "PENDING_APPROVAL",
+      "APPROVED"
+    ],
+    "approval_evidence_required": [
+      "approver",
+      "approved_at",
+      "evidence"
+    ],
+    "approved_decision_ids": [
+      "P5-D01",
+      "P5-D02",
+      "P5-D14"
+    ],
+    "required_approved_ids": [
+      "P5-D01",
+      "P5-D02",
+      "P5-D14"
+    ],
+    "all_other_p5_decisions": "OPEN / PENDING_APPROVAL unless later explicit owner evidence is recorded; execution-time inputs do not block building the Skill.",
+    "owner_evidence_locator": "PR #258 owner instructions dated 2026-11-28: mission sections 3 and 4; explicit approval of D14 Option B and its nine rules.",
+    "contract_approval_independent": "The whole Phase 5 contract remains PENDING_OWNER_APPROVAL."
+  }
+}

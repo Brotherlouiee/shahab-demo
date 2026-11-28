@@ -1,0 +1,937 @@
+{
+  "schema_version": "0.1-proposed",
+  "note": "Mission acceptance control list is owner-reviewable. Actual outcomes must be reconciled from bootstrap evidence and final checks.",
+  "gates": [
+    {
+      "gate_id": "P5-B01",
+      "objective": "احراز مخزن، HEAD، شاخه و PR قبلی",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Clone remote usable; origin/main/HEAD and PR #257 metadata available"
+      ],
+      "validation_method": "Git refs/status + GitHub PR metadata",
+      "expected_evidence": "HEAD e207860…, PR257 merged, clean baseline and branch ancestry",
+      "failure_conditions": [
+        "Identity mismatch, dirty user work overwritten, or PR not merged"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B02",
+      "objective": "اعتبار Snapshot certified",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Pinned manifest and validator available"
+      ],
+      "validation_method": "Run exact validator on pinned source bytes",
+      "expected_evidence": "exit 0 and result CERTIFIED_SNAPSHOT_VALID, commit and artifact count recorded",
+      "failure_conditions": [
+        "Nonzero or hash/ancestry mismatch; stop consumption"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B03",
+      "objective": "کامل‌بودن مطالعه منابع",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "All required source manifests and governing sources are identified and version-pinned",
+        "Narrative source coverage is complete and semantic findings are recorded",
+        "Certified Phase 4 inputs are consumed programmatically with recorded scope and limitations"
+      ],
+      "validation_method": "Source manifest + source reading log with locators",
+      "expected_evidence": "Complete source-reading-coverage.csv; semantic knowledge registries; phase4-artifact-consumption.csv; contract crosswalk and validation output",
+      "failure_conditions": [
+        "Any source unreadable or unreviewed; do not claim completeness"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_WITH_REVIEW_EVIDENCE"
+    },
+    {
+      "gate_id": "P5-B04",
+      "objective": "ردیابی سیاست‌های مصوب",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "22 principles and related rules listed"
+      ],
+      "validation_method": "CSV structural check against source locators",
+      "expected_evidence": "Every principle ID and locator; O5/F06/A01..A09 references",
+      "failure_conditions": [
+        "Any principle omitted/untraceable"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_STRUCTURAL_TRACE"
+    },
+    {
+      "gate_id": "P5-B05",
+      "objective": "سلامت تصمیم",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No open decision silently approved"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "POS-06-valid-owner-decision-states",
+          "OWNER-01-unapproved-decision-promotion-rejected"
+        ]
+      },
+      "expected_evidence": "P5-D01, P5-D02 and P5-D14 are APPROVED only with explicit owner/date/evidence; all other 13 P5 decisions remain OPEN/PENDING_APPROVAL; no inferred or Codex-authored approval.",
+      "failure_conditions": [
+        "D01/D02/D14 lacks explicit approval evidence",
+        "any other P5 decision is promoted without explicit owner approval",
+        "an owner approval is inferred from a recommendation or relation edge"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_D01_D02_D14_APPROVED_WITH_EVIDENCE; OTHER_13_OPEN_PENDING_APPROVAL"
+    },
+    {
+      "gate_id": "P5-B06",
+      "objective": "مرز فاز",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No Phase 4 rebuild, mapping, remap, or graph regeneration"
+      ],
+      "validation_method": "diff paths plus changed file hashes",
+      "expected_evidence": "Only docs/phase5/planning-contract changed",
+      "failure_conditions": [
+        "any Phase4 or source coverage changes"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B07",
+      "objective": "کامل‌بودن مدل Deliverable",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Definition/input/output/validation and boundary in contract"
+      ],
+      "validation_method": "manual+schema audit",
+      "expected_evidence": "outcome and multi-WBS referencing; no implied task/week",
+      "failure_conditions": [
+        "missing consumer/value/acceptance semantics"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_PROPOSED_SCHEMA; owner approval pending"
+    },
+    {
+      "gate_id": "P5-B08",
+      "objective": "قرارداد Artifact",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Each artifact has producer/consumer/ownership/format/validation"
+      ],
+      "validation_method": "registry schema audit",
+      "expected_evidence": "all 18 planning artifacts accounted for",
+      "failure_conditions": [
+        "artifact without consumer or validation"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B09",
+      "objective": "سلامت Estimate",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No invented capacity/time/cost/token numbers"
+      ],
+      "validation_method": "search numeric claims and inspect source status",
+      "expected_evidence": "unknown absent evidence; O5-09 approved ratios only",
+      "failure_conditions": [
+        "asserting unmeasured estimates as fact"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_NO_FABRICATED_ESTIMATE"
+    },
+    {
+      "gate_id": "P5-B10",
+      "objective": "تغییرناپذیری گراف Phase4",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Snapshot data unchanged"
+      ],
+      "validation_method": "git diff and hash comparison",
+      "expected_evidence": "no change under phase4/graphs/mapping/overlays",
+      "failure_conditions": [
+        "any bytes change"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B11",
+      "objective": "عدم زمان‌بندی زودرس",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No weekly schedule or actual task allocation"
+      ],
+      "validation_method": "file/content search",
+      "expected_evidence": "none created in Mission 5.0",
+      "failure_conditions": [
+        "any actual task assigned to week"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B12",
+      "objective": "سازگاری رجیستری",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Unique IDs and valid refs"
+      ],
+      "validation_method": "temporary structural validator",
+      "expected_evidence": "all IDs unique; references resolve",
+      "failure_conditions": [
+        "duplicate or dangling required ref"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B13",
+      "objective": "عدم PASS کاذب",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Statuses distinguish PASS/SKIPPED/NOT_EXECUTED/NOT_MEASURED/PENDING_APPROVAL"
+      ],
+      "validation_method": "report and gate audit",
+      "expected_evidence": "only evidence backed outcomes PASS",
+      "failure_conditions": [
+        "unexecuted represented as PASS"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B14",
+      "objective": "کیفیت مستندات",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Valid JSON/parseable CSV/complete Markdown/locators"
+      ],
+      "validation_method": "python json/csv parser, links and diff check",
+      "expected_evidence": "all parse and links resolve locally",
+      "failure_conditions": [
+        "invalid artifact or broken required link"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_LOCAL_VALIDATION; final PR CI pending"
+    },
+    {
+      "gate_id": "P5-B15",
+      "objective": "سلامت Diff",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Diff only authorized mission scope"
+      ],
+      "validation_method": "git diff --name-status and content review",
+      "expected_evidence": "only nine authorized files under docs/phase5/planning-contract; no Phase 4/product changes",
+      "failure_conditions": [
+        "out-of-scope change"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_LOCAL_SCOPE_REVIEW_PENDING_FINAL_COMMIT"
+    },
+    {
+      "gate_id": "P5-B16",
+      "objective": "آمادگی بازبینی",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Draft PR contains scope, evidence, proposals, open decisions and limitations"
+      ],
+      "validation_method": "PR metadata/body + CI result",
+      "expected_evidence": "Draft open; no merge; full evidence/body",
+      "failure_conditions": [
+        "missing PR, nondraft, merged, or false CI"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PENDING_FINAL_COMMIT_CI_AND_PR_DESCRIPTION"
+    },
+    {
+      "gate_id": "P5-C01",
+      "objective": "Verify actual main and PR #258 state",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C01"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "EVIDENCE",
+          "ref_id": "git-state:3124c39",
+          "relation": "EVIDENCED_BY",
+          "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C02",
+      "objective": "Re-run certified Phase 4 Snapshot Validator",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C02"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CERTIFIED_SNAPSHOT",
+          "ref_id": "phase4-45ed4ec10d34216cf935",
+          "relation": "EVIDENCED_BY",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C03",
+      "objective": "Complete governing narrative review and programmatic artifact consumption",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C03"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS_WITH_REVIEW_EVIDENCE",
+      "references": [
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "680d60fd8fd2038e43714ceca24a5ea4bb7351a4"
+        },
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c"
+        },
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/SHAHAB_DIGITAL_WALLET.md",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a"
+        },
+        {
+          "ref_type": "SOURCE_DOCUMENT",
+          "ref_id": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+          "relation": "REQUIRES_INPUT",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+          "blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C04",
+      "objective": "Trace all approved policy constraints",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C04"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "BP52-01",
+          "relation": "CONSTRAINED_BY"
+        },
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "O5-09",
+          "relation": "CONSTRAINED_BY"
+        },
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "F06",
+          "relation": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C05",
+      "objective": "Keep owner decisions separate from approved baseline",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C05"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A00",
+          "relation": "RELATED_TO"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D01",
+          "relation": "RELATED_TO"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C06",
+      "objective": "Use typed decision relations",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C06"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/planning-contract-schema.json",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C07",
+      "objective": "Produce an acyclic hard-prerequisite graph",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C07"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/decision-register.json",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C08",
+      "objective": "Resolve every machine-readable reference",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C08"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/output-artifact-registry.json",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C09",
+      "objective": "Use a consistent typed graph schema",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C09"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/planning-contract-schema.json",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C10",
+      "objective": "Model documented multi-week exception while preserving seven-day cycles",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C10"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "BP52-03",
+          "relation": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C11",
+      "objective": "Preserve mandatory estimate before commitment",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C11"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "APPROVED_POLICY",
+          "ref_id": "BP52-11",
+          "relation": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C12",
+      "objective": "Keep UNKNOWN and NOT_MEASURED semantically distinct",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C12"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/planning-contract-schema.json",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C13",
+      "objective": "Pass positive and negative contract fixtures",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C13"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/validate_planning_contract.py",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C14",
+      "objective": "Record exact-commit CI and per-job outcomes",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C14"
+        ]
+      },
+      "expected_evidence": [
+        "GitHub Actions workflow and per-job conclusions tied to exact tested SHA 91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "Skipped jobs reported as SKIPPED, not PASS"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS_EXACT_COMMIT_WITH_SKIPS_REPORTED",
+      "references": [
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-ci-evidence",
+          "relation": "REQUIRES_INPUT",
+          "description": "Exact-commit CI evidence recorded in planning-contract-validation.json for parent commit 91f5b322f3b5d03f38a53ac9c346dd85426216a2; final commit CI is checked and reported separately.",
+          "owner": "Repository CI",
+          "resolution_evidence_required": true,
+          "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C15",
+      "objective": "Keep certified Phase 4 artifacts unchanged",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C15"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CERTIFIED_SNAPSHOT",
+          "ref_id": "phase4-45ed4ec10d34216cf935",
+          "relation": "EVIDENCED_BY",
+          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C16",
+      "objective": "Avoid product-code changes",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C16"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "EVIDENCE",
+          "ref_id": "scope-diff:3124c39",
+          "relation": "EVIDENCED_BY",
+          "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C17",
+      "objective": "Avoid real task-to-week allocations",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C17"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "ARTIFACT",
+          "ref_id": "A01",
+          "relation": "RELATED_TO"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C18",
+      "objective": "Keep decisions without explicit owner approval open",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "POS-06-valid-owner-decision-states",
+          "OWNER-01-unapproved-decision-promotion-rejected",
+          "OWNER-02-D14-approval-and-nine-rules"
+        ]
+      },
+      "expected_evidence": [
+        "P5-D01, P5-D02 and P5-D14 approved with owner evidence; remaining 13 decisions OPEN/PENDING_APPROVAL",
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "D01/D02/D14 approval evidence missing",
+        "any other decision approved without owner evidence",
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D01",
+          "relation": "RELATED_TO"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D02",
+          "relation": "RELATED_TO"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D14",
+          "relation": "RELATED_TO"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C19",
+      "objective": "Avoid contradictions between contract artifacts",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C19"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PASS",
+      "references": [
+        {
+          "ref_type": "CONTRACT_ARTIFACT",
+          "ref_id": "docs/phase5/planning-contract/PHASE_5_EXECUTION_CONTRACT.md",
+          "relation": "EVIDENCED_BY"
+        }
+      ]
+    },
+    {
+      "gate_id": "P5-C20",
+      "objective": "Leave PR #258 open and Draft for owner review",
+      "scope": "Corrective Mission Phase 5.0 only",
+      "preconditions": [
+        "No Phase 5.1 execution; PR #258 only"
+      ],
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "C20"
+        ]
+      },
+      "expected_evidence": [
+        "reproducible command output and relevant commit/hash"
+      ],
+      "failure_conditions": [
+        "required evidence missing or contrary result"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
+      "observed_status": "PENDING_EXTERNAL_CI",
+      "references": [
+        {
+          "ref_type": "EXTERNAL_CONDITION",
+          "ref_id": "external:phase5-owner-contract-approval",
+          "relation": "REQUIRES_APPROVAL",
+          "description": "Owner approval of the Phase 5.0 contract",
+          "owner": "Product Owner",
+          "resolution_evidence_required": true
+        }
+      ]
+    }
+  ]
+}
