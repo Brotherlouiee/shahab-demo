@@ -75,14 +75,22 @@
       "preconditions": [
         "No open decision silently approved"
       ],
-      "validation_method": "decision registry status and owner approval evidence audit",
-      "expected_evidence": "P5 proposals OPEN; inherited open remains OPEN/BLOCKED",
+      "validation_method": {
+        "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
+        "test_ids": [
+          "POS-06-valid-owner-decision-states",
+          "OWNER-01-unapproved-decision-promotion-rejected"
+        ]
+      },
+      "expected_evidence": "P5-D01 and P5-D02 are APPROVED only with explicit owner/date/evidence; all other 14 P5 decisions remain OPEN/PENDING_APPROVAL; no inferred or Codex-authored approval.",
       "failure_conditions": [
-        "open item with fabricated approval/changed status"
+        "D01/D02 lacks explicit approval evidence",
+        "any other P5 decision is promoted without explicit owner approval",
+        "an owner approval is inferred from a recommendation or relation edge"
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
-      "observed_status": "PASS_NO_OPEN_DECISION_APPROVED"
+      "observed_status": "PASS_D01_D02_APPROVED_WITH_EVIDENCE; OTHER_14_OPEN_PENDING_APPROVAL"
     },
     {
       "gate_id": "P5-B06",
@@ -819,7 +827,7 @@
     },
     {
       "gate_id": "P5-C18",
-      "objective": "Keep all owner decisions open",
+      "objective": "Keep decisions without explicit owner approval open",
       "scope": "Corrective Mission Phase 5.0 only",
       "preconditions": [
         "No Phase 5.1 execution; PR #258 only"
@@ -827,13 +835,17 @@
       "validation_method": {
         "command": "python docs/phase5/planning-contract/validate_planning_contract.py",
         "test_ids": [
-          "C18"
+          "OWNER-01-unapproved-decision-promotion-rejected",
+          "POS-06-valid-owner-decision-states"
         ]
       },
       "expected_evidence": [
+        "P5-D01 and P5-D02 approved with owner evidence; remaining 14 decisions OPEN/PENDING_APPROVAL",
         "reproducible command output and relevant commit/hash"
       ],
       "failure_conditions": [
+        "D01/D02 approval evidence missing",
+        "any other decision approved without owner evidence",
         "required evidence missing or contrary result"
       ],
       "blocking_effect": "BLOCKING",
@@ -843,6 +855,16 @@
         {
           "ref_type": "DECISION",
           "ref_id": "P5-D01",
+          "relation": "RELATED_TO"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D02",
+          "relation": "RELATED_TO"
+        },
+        {
+          "ref_type": "DECISION",
+          "ref_id": "P5-D14",
           "relation": "RELATED_TO"
         }
       ]

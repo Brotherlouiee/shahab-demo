@@ -301,6 +301,22 @@ def approval_errors(state: dict[str,Any]) -> list[str]:
     return []
 
 
+def owner_decision_scope_errors(decisions: list[dict[str,Any]]) -> list[str]:
+    """Allow only the two explicitly owner-approved decisions in this mission."""
+    approved={"P5-D01","P5-D02"}
+    errors=[]
+    for decision in decisions:
+        did=decision.get("decision_id")
+        expected="APPROVED" if did in approved else "OPEN"
+        approval_expected="APPROVED" if did in approved else "PENDING_APPROVAL"
+        if decision.get("status")!=expected or decision.get("owner_approval",{}).get("status")!=approval_expected:
+            errors.append(f"unexpected owner decision state: {did}")
+        errors.extend(approval_errors(decision.get("owner_approval",{})))
+    if {d.get("decision_id") for d in decisions if d.get("status")=="APPROVED"}!=approved:
+        errors.append("only explicitly approved P5-D01/P5-D02 may be approved")
+    return errors
+
+
 def ci_errors(evidence: dict[str,Any]) -> list[str]:
     errors=[]
     latest=evidence.get("latest_verified_pr_commit")
@@ -382,16 +398,20 @@ def fixture_checks(schema: dict[str, Any], real: dict[str, Any]) -> list[dict[st
     record("F05-03-multicycle-without-exception-record-rejected", bool(multicycle_errors(bad_multi,schema)))
     record("F05-04-multicycle-exception-within-scope-accepted", not multicycle_errors({"reason":"not splittable safely","split_alternatives":["split A","split B"],"dependencies":["source-backed dependency"],"max_calendar_duration":{"value":"UNKNOWN","approval":"PENDING_APPROVAL"},"cost_ceilings":{"development":"UNKNOWN","operating":"UNKNOWN","currency":"owner-supplied","period":"owner-supplied"},"intermediate_outputs":[{"cycle_days":7,"output":"testable slice","oracle":"test evidence"}],"review_date":"owner-set-date","intermediate_is_not_release":True,"allocation_reconciliation":"parent roll-up only; no duplicate effort","approval_status":"PROPOSED_PENDING_OWNER_APPROVAL","weekly_cycle_days":7},schema))
     # Positive fixture coverage.
-    record("POS-01-open-decision-preserved", all(d["status"]=="OPEN" for d in real["decisions"]))
+    record("POS-01-unapproved-decisions-remain-open", all(d["status"]=="OPEN" for d in real["decisions"] if d["decision_id"] not in {"P5-D01","P5-D02"}))
     record("POS-02-valid-influence-cycle-accepted", not hard_cycle(dset,[{"source_id":"P5-D01","target_id":"P5-D02","relation_type":"INFLUENCES"},{"source_id":"P5-D02","target_id":"P5-D01","relation_type":"INFLUENCES"}]))
     record("POS-03-valid-reference-to-snapshot", not ref_errors([{"ref_type":"CERTIFIED_SNAPSHOT","ref_id":SNAPSHOT_ID,"source_commit":SOURCE_COMMIT,"relation":"REQUIRES_INPUT"}],dset,pset,aset,schema,gates,snap))
     unknown_metrics={name:{"state":"UNKNOWN"} for name in schema["estimate_model"]["metrics"]}
     record("POS-04-valid-unknown-proposal", not estimate_errors({"lifecycle_state":"PROPOSED","metrics":unknown_metrics},"PROPOSED",schema["estimate_model"]))
     record("POS-05-valid-multicycle-proposal", all(x["approval_status"]=="PROPOSED_PENDING_OWNER_APPROVAL" for x in schema["multi_week_options"]))
-    record("POS-06-valid-open-decision", all(d["status"]=="OPEN" and d["owner_approval"]["status"]=="PENDING_APPROVAL" for d in real["decisions"]))
+    record("POS-06-valid-owner-decision-states", not owner_decision_scope_errors(real["decisions"]))
+    unauthorized=[dict(d,owner_approval=dict(d.get("owner_approval",{}))) for d in real["decisions"]]
+    d03=next(d for d in unauthorized if d["decision_id"]=="P5-D03")
+    d03["status"]="APPROVED"; d03["owner_approval"]={"status":"APPROVED","approver":"owner","approved_at":"2026-11-28","evidence":"unapproved fixture"}
+    record("OWNER-01-unapproved-decision-promotion-rejected", bool(owner_decision_scope_errors(unauthorized)))
     record("POS-07-history-ci-sha-pinned", bool(re.fullmatch(r"[0-9a-f]{40}",real["external_ci_evidence"]["latest_verified_pr_commit"])))
     record("POS-08-schedule-cadence-policy-present", "<= 6 days" in " ".join(sum((x["validation_rules"] for x in schema["graph_node_types"] if x["type_id"]=="WEEK"),[])))
-    record("POS-09-co-decision-groups-preserve-open", all(set(g["members"])<=dset for g in schema["decision_review_groups"]))
+    record("POS-09-co-decision-groups-reference-existing-decisions", all(set(g["members"])<=dset for g in schema["decision_review_groups"]))
     record("SCOPE-01-unauthorized-path-rejected", bool(scope_errors(["src/main.py"])))
     output_registry=read_json(CONTRACT/"output-artifact-registry.json")
     active=set(output_registry.get("current_mvp_artifacts",[]))
@@ -412,10 +432,16 @@ def validate_real() -> tuple[list[str], dict[str, Any]]:
     snap = read_json(ROOT/"docs/phase4/task-map-graph/phase4-certified-snapshot.json")
     dids = {x["decision_id"] for x in decisions}; aids = {x["artifact_id"] for x in artifacts}; gids = {x["gate_id"] for x in gates}
     if len(dids)!=len(decisions) or len(aids)!=len(artifacts) or len(gids)!=len(gates): errors.append("duplicate entity ID")
-    if any(d.get("status")!="OPEN" or d.get("owner_approval",{}).get("status")!="PENDING_APPROVAL" for d in decisions): errors.append("open decision was promoted")
+    errors.extend(owner_decision_scope_errors(decisions))
+    decision_states=schema.get("decision_owner_approval_states",{})
+    if decision_states.get("approved_decision_ids")!=["P5-D01","P5-D02"] or decision_states.get("contract_approval_independent")!="The whole Phase 5 contract remains PENDING_OWNER_APPROVAL.":
+        errors.append("decision approval schema does not isolate explicit D01/D02 owner approval")
     registry=data["output-artifact-registry.json"]
     active=set(registry.get("current_mvp_artifacts",[])); deferred=set(registry.get("deferred_artifact_ids",[]))
     if active!={"A01"} or active|deferred!=aids or active&deferred: errors.append("MVP output registry must contain only A01 and defer the remaining historical proposals")
+    a01=next((a for a in artifacts if a.get("artifact_id")=="A01"),{})
+    if "P5-D14" not in a01.get("format","") or "TBD" not in a01.get("format",""):
+        errors.append("A01 format must remain pending the owner decision on P5-D14")
     if any(d.get("review_disposition") is None or d.get("review_reason") is None for d in decisions): errors.append("decision review disposition missing")
     source_registry=read_json(CONTRACT/"planning-knowledge-registry.json")
     plan_source=next((x for x in source_registry.get("sources",[]) if x.get("source_document")=="docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),{})
@@ -436,7 +462,7 @@ def validate_real() -> tuple[list[str], dict[str, Any]]:
         if r.get("approval_status") not in {"PROPOSED","TRACE_ONLY","OWNER_APPROVED"}: errors.append("invalid decision relation approval state")
     for group in data["decision-register.json"].get("co_decision_groups",[]):
         if len(group.get("members",[]))<2 or len(set(group["members"]))!=len(group["members"]) or not set(group["members"])<=dids: errors.append(f"invalid co-decision group {group}")
-    if any(x.get("status")!="OPEN" for x in decisions): errors.append("decision status invalid")
+    if any(x.get("status") not in {"OPEN","APPROVED"} for x in decisions): errors.append("decision status invalid")
     errors.extend(graph_errors([],[],schema))
     for gate in gates:
         errors.extend(ref_errors(gate.get("references",[]),dids,{x["decision_id"] for x in data["decision-register.json"]["approved_policy_baseline"]},aids,schema,gids,snap))

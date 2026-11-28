@@ -1,7 +1,10 @@
+Warning: truncated output (original token count: 73225)
+Total output lines: 6994
+
 {
   "schema_version": "0.1-proposed",
   "mission": "5.0",
-  "approval_note": "تمام P5-D01..D16 پیشنهاد هستند و PENDING_APPROVAL باقی می‌مانند؛ baselineهای مصوب فقط برای trace ثبت شده‌اند.",
+  "approval_note": "P5-D01 و P5-D02 با دستور صریح مالک در مأموریت PR #258 مورخ 2026-11-28، به‌صورت مشترک با گزینه C و ۹ قاعده اجرایی مصوب شده‌اند. ۱۴ تصمیم دیگر، از جمله D14، همچنان OPEN/PENDING_APPROVAL هستند؛ مصوبات سیاستی baseline جداگانه‌اند و قرارداد کلی نیز هنوز PENDING_OWNER_APPROVAL است.",
   "approved_policy_baseline": [
     {
       "decision_id": "O5-01",
@@ -793,14 +796,16 @@
           "locator": "Blueprint §5.2.1(1–3,15,19–20)"
         }
       ],
-      "existing_approval_evidence": [],
+      "existing_approval_evidence": [
+        "Explicit owner approval in the PR #258 mission instruction dated 2026-11-28, section 3: jointly approve Option C for P5-D01/P5-D02 and all nine listed operational rules. Recorded from the owner instruction; no Codex recommendation is treated as approval."
+      ],
       "options": [
         "A) یک Task",
         "B) Package",
-        "C) outcome-based deliverable با ارجاع چند WBS node (پیشنهاد)."
+        "C) outcome-based deliverable با ارجاع چند WBS node (مصوب مالک در 2026-11-28)."
       ],
-      "recommended_option": "C: ارزش و مصرف واقعی جدا از ساختار تجزیه حفظ می‌شود؛ اتصال چند بسته و گیت‌ها روشن است.",
-      "recommendation_rationale": "ثبت هر Deliverable بدون consumer یا acceptance را رد کند؛ Release Readiness و Stage Completion جدا بمانند.",
+      "recommended_option": "C — APPROVED: outcome-based deliverable linked to exact work nodes; the weekly deliverable expresses a usable/testable result.",
+      "recommendation_rationale": "Owner-approved. Deliverable outcome and real consumer/acceptance remain explicit; a deliverable may draw work from multiple packages without turning a technical task alone into a product outcome.",
       "impacted_artifacts": [
         {
           "ref_type": "CONTRACT_ARTIFACT",
@@ -823,12 +828,12 @@
           "relation": "USES_CONTRACT_ARTIFACT"
         }
       ],
-      "status": "OPEN",
+      "status": "APPROVED",
       "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
+        "status": "APPROVED",
+        "approver": "Project Owner",
+        "approved_at": "2026-11-28",
+        "evidence": "Explicit owner approval in the PR #258 mission instruction dated 2026-11-28, section 3: jointly approve Option C for P5-D01/P5-D02 and all nine listed operational rules. Recorded from the owner instruction; no Codex recommendation is treated as approval."
       },
       "option_tradeoff_analysis": [
         {
@@ -852,7 +857,7 @@
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "C) outcome-based deliverable با ارجاع چند WBS node (پیشنهاد).",
+          "option": "C) outcome-based deliverable با ارجاع چند WBS node (مصوب مالک).",
           "example": "Outcome که چند Task/Subtask از چند Package را با هم مصرف کند؛ مثال فرضی: «کاربر می‌تواند یک محصول وام معتبر را پیدا و با منبعش مقایسه کند».",
           "example_type": "HYPOTHETICAL",
           "benefits": "ارزش و مصرف مستقل را روشن می‌کند؛ مناسب توسعه تدریجی و reuse.",
@@ -1140,8 +1145,8 @@
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
       ],
-      "review_disposition": "OWNER_INPUT_BEFORE_FIRST_COMMITTED_PLAN",
-      "review_reason": "Merge with P5-D02: choose/confirm outcome-based deliverable and work allocation; current recommendation is a deliverable linked to exact work references without parent/child double count."
+      "review_disposition": "OWNER_APPROVED",
+      "review_reason": "Joint owner approval recorded for Option C under the explicit PR #258 instruction dated 2026-11-28. The nine operational rules are stated in PHASE_5_EXECUTION_CONTRACT.md; no implementation, weekly allocation, or approval of other decisions follows."
     },
     {
       "decision_id": "P5-D02",
@@ -1157,14 +1162,16 @@
           "locator": "Snapshot task graph; Blueprint §5.2.1(20–22); Phase 4 audit"
         }
       ],
-      "existing_approval_evidence": [],
+      "existing_approval_evidence": [
+        "Explicit owner approval in the PR #258 mission instruction dated 2026-11-28, section 3: jointly approve Option C for P5-D01/P5-D02 and all nine listed operational rules. Recorded from the owner instruction; no Codex recommendation is treated as approval."
+      ],
       "options": [
         "A) Task only",
         "B) subtask only",
-        "C) mixed leaf allocation to smallest independently estimable unit (پیشنهاد)."
+        "C) mixed allocation to the smallest independently estimable Task or Subtask (مصوب مالک در 2026-11-28)."
       ],
-      "recommended_option": "C: امکان تخصیص برش‌های بخشی و trace دقیق؛ نیازمند قواعد parent/child sum.",
-      "recommendation_rationale": "هر Work Node در baseline یک‌بار شمرده شود؛ درصد mapping پیشرفت تلقی نشود.",
+      "recommended_option": "C — APPROVED: mixed allocation to the smallest independently estimable work unit, which may be a Task or a Subtask.",
+      "recommendation_rationale": "Owner-approved. Preserve original graph identifiers and count a parent Task or its allocated Subtasks once, never both as independent effort.",
       "impacted_artifacts": [
         {
           "ref_type": "CONTRACT_ARTIFACT",
@@ -1187,12 +1194,12 @@
           "relation": "USES_CONTRACT_ARTIFACT"
         }
       ],
-      "status": "OPEN",
+      "status": "APPROVED",
       "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
+        "status": "APPROVED",
+        "approver": "Project Owner",
+        "approved_at": "2026-11-28",
+        "evidence": "Explicit owner approval in the PR #258 mission instruction dated 2026-11-28, section 3: jointly approve Option C for P5-D01/P5-D02 and all nine listed operational rules. Recorded from the owner instruction; no Codex recommendation is treated as approval."
       },
       "option_tradeoff_analysis": [
         {
@@ -1216,7 +1223,7 @@
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "C) mixed leaf allocation to smallest independently estimable unit (پیشنهاد).",
+          "option": "C) mixed allocation to smallest independently estimable Task or Subtask (مصوب مالک).",
           "example": "دانه‌بندی مختلط با یک leaf allocation rule؛ مثال: یک Task کامل یا فقط Subtaskهای بخشی، نه هر دو.",
           "example_type": "HYPOTHETICAL",
           "benefits": "دامنه‌های مستقل را پشتیبانی و شمارش یک‌باره را enforce می‌کند.",
@@ -1504,8 +1511,8 @@
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
       ],
-      "review_disposition": "OWNER_INPUT_BEFORE_FIRST_COMMITTED_PLAN",
-      "review_reason": "Merge with P5-D01; allocation granularity must be clear before commitment. No separate allocation engine."
+      "review_disposition": "OWNER_APPROVED",
+      "review_reason": "Joint owner approval recorded for Option C under the explicit PR #258 instruction dated 2026-11-28. The nine operational rules are stated in PHASE_5_EXECUTION_CONTRACT.md; no implementation, weekly allocation, or approval of other decisions follows."
     },
     {
       "decision_id": "P5-D03",
@@ -2751,1341 +2758,7 @@
         },
         {
           "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-15",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-16",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-17",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-18",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-19",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-20",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-21",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-22",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "F06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        }
-      ],
-      "review_disposition": "OWNER_INPUT_ONLY_WHERE_SOURCE_UNKNOWN",
-      "review_reason": "Keep development and operating costs separate; missing amounts/rates block commitment, not tool construction."
-    },
-    {
-      "decision_id": "P5-D07",
-      "title": "مدل ارزش Deliverable",
-      "problem": "ارزیابی ارزش کاربری/عملیاتی و یادگیری در برابر constraints.",
-      "source_references": [
-        {
-          "ref_type": "SOURCE_LOCATOR",
-          "ref_id": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#BP §5.2.1(4,18); §5.9; O5-05",
-          "relation": "DERIVED_FROM",
-          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
-          "blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
-          "locator": "BP §5.2.1(4,18); §5.9; O5-05"
-        }
-      ],
-      "existing_approval_evidence": [],
-      "options": [
-        "A) weighted score",
-        "B) value evidence with ordinal bands",
-        "C) cost-effectiveness after hard constraints (پیشنهاد ترکیبی)."
-      ],
-      "recommended_option": "C ابتدا feasibility/constraints، سپس evidence/value bands؛ وزن عددی نیازمند تصویب مالک.",
-      "recommendation_rationale": "عدم وجود وزن مصوب؛ هیچ score واقعی ساخته نشود.",
-      "impacted_artifacts": [
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/PHASE_5_EXECUTION_CONTRACT.md",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/decision-register.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/output-artifact-registry.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/acceptance-gates.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        }
-      ],
-      "status": "OPEN",
-      "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
-      },
-      "option_tradeoff_analysis": [
-        {
-          "option": "A) weighted score",
-          "example": "امتیاز وزن‌دار؛ مثال فرضی: ارزش/ریسک/یادگیری با وزن‌های توافق‌شده.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "رتبه عددی ساده برای مقایسه می‌دهد.",
-          "drawbacks": "وزن‌ها و مقیاس‌ها می‌توانند سلیقه‌ای/پنهان باشند.",
-          "risks": "score بالا hard constraint را ظاهراً جبران کند.",
-          "cost_and_effort": "هزینه مدل کم؛ هزینه governance/بحث وزن‌ها؛ weights فعلاً ناموجود.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "B) value evidence with ordinal bands",
-          "example": "باندهای ترتیبی ارزش با evidence؛ مثال: high/medium/low و دلیل قابل مشاهده.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "از دقت کاذب جلوگیری و توضیح‌پذیری را حفظ می‌کند.",
-          "drawbacks": "تفکیک tie و انتخاب بین باندها دشوار است.",
-          "risks": "باندهای مبهم بدون rubrics.",
-          "cost_and_effort": "هزینه شروع پایین‌تر؛ rubric review لازم.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "C) cost-effectiveness after hard constraints (پیشنهاد ترکیبی).",
-          "example": "اول constraints را اعمال و سپس value/cost/learning را با range مقایسه؛ مثال: گزینه مسدود حذف و feasibleها کنار هم.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "ریسک hard constraints و uncertainty را حفظ می‌کند.",
-          "drawbacks": "تصمیم نهایی ممکن است همچنان قضاوت owner بخواهد.",
-          "risks": "constraint classification ناقص یا پنهان‌شدن قضاوت.",
-          "cost_and_effort": "هزینه تحلیل بیش‌تر؛ threshold/weight عددی همچنان نامعلوم؛ پیشنهاد.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        }
-      ],
-      "approved_policy_references": [
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-15",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-16",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-17",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-18",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-19",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-20",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-21",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-22",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "F06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        }
-      ],
-      "review_disposition": "EXECUTION_TIME_OWNER_PRIORITY",
-      "review_reason": "No independent value engine. Owner identifies relative value/learning only where useful among feasible candidates."
-    },
-    {
-      "decision_id": "P5-D08",
-      "title": "مدل اولویت‌بندی",
-      "problem": "انتخاب برش‌ها با عوامل 14‌گانه بدون جبران نقض محدودیت سخت توسط امتیاز.",
-      "source_references": [
-        {
-          "ref_type": "SOURCE_LOCATOR",
-          "ref_id": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#BP §5.2.1(4–6,22); §5.9; O5-01..14",
-          "relation": "DERIVED_FROM",
-          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
-          "blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
-          "locator": "BP §5.2.1(4–6,22); §5.9; O5-01..14"
-        }
-      ],
-      "existing_approval_evidence": [],
-      "options": [
-        "A) WSJF",
-        "B) weighted scoring",
-        "C) constraint-first then multi-criteria Pareto/owner choice (پیشنهاد)."
-      ],
-      "recommended_option": "C تمایز constraint/optimization را حفظ می‌کند و وزن‌های نامصوب نمی‌سازد.",
-      "recommendation_rationale": "امنیت/قانون/وابستگی/مرحله/ظرفیت hard constraints؛ weights OPEN.",
-      "impacted_artifacts": [
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/PHASE_5_EXECUTION_CONTRACT.md",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/decision-register.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/output-artifact-registry.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/acceptance-gates.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        }
-      ],
-      "status": "OPEN",
-      "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
-      },
-      "option_tradeoff_analysis": [
-        {
-          "option": "A) WSJF",
-          "example": "WSJF؛ مثال فرضی: مقایسه کارهای feasible با delay cost و size.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "روش شناخته‌شده برای اولویت‌گذاری بر اساس تأخیر.",
-          "drawbacks": "نمره‌ها و تقسیم‌ها ممکن است برای محصول/داده کم نامناسب باشد.",
-          "risks": "خروجی عددی کاذب یا نقض gate.",
-          "cost_and_effort": "هزینه کالیبراسیون نسبتاً بالا؛ عوامل پولی/زمانی موجود نیست.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "B) weighted scoring",
-          "example": "Weighted score؛ مثال: owner weights برای 14 عامل.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "ترجیحات را به معیارهای آشکار تبدیل می‌کند.",
-          "drawbacks": "به وزن و scale تصویب‌شده نیاز دارد.",
-          "risks": "سیاست/تعصب پنهان در وزن‌دهی.",
-          "cost_and_effort": "هزینه workshop و نگهداری weights؛ هنوز تصویب نشده.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "C) constraint-first then multi-criteria Pareto/owner choice (پیشنهاد).",
-          "example": "Constraint-first سپس Pareto/decision table؛ مثال: سخت‌گیری امنیتی، سپس مقایسه feasibleها در value/cost/risk.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "قیود غیرقابل جبران را جدا و trade-off را قابل‌دیدن می‌کند.",
-          "drawbacks": "رتبه خطی یگانه نمی‌دهد؛ owner choice لازم است.",
-          "risks": "انتخاب معیارها/محدوده Pareto می‌تواند پنهان بماند.",
-          "cost_and_effort": "هزینه تحلیل متوسط؛ عدد سازی نمی‌کند؛ پیشنهاد.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        }
-      ],
-      "approved_policy_references": [
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-15",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-16",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-17",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-18",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-19",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-20",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-21",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-22",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "F06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        }
-      ],
-      "review_disposition": "EXECUTION_TIME_OWNER_PRIORITY",
-      "review_reason": "No weights or scoring engine. Owner sets the order of feasible work; hard constraints cannot be offset."
-    },
-    {
-      "decision_id": "P5-D09",
-      "title": "مدل زمان‌بندی هفتگی",
-      "problem": "تبدیل برش‌های اولویت‌دار و estimate/capacity به چرخه‌های حداکثر ۷ روزه بدون تعیین تعداد هفته از پیش.",
-      "source_references": [
-        {
-          "ref_type": "SOURCE_LOCATOR",
-          "ref_id": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#BP §5.2.1(1–3,13,15–16); §5.8; O5-09/10",
-          "relation": "DERIVED_FROM",
-          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
-          "blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
-          "locator": "BP §5.2.1(1–3,13,15–16); §5.8; O5-09/10"
-        }
-      ],
-      "existing_approval_evidence": [],
-      "options": [
-        "A) manual owner-approved",
-        "B) heuristic auto schedule",
-        "C) constraint solver after validated inputs, human-approved (پیشنهاد)."
-      ],
-      "recommended_option": "C اتوماسیون را به بعد از داده و constraintهای تأییدشده موکول می‌کند.",
-      "recommendation_rationale": "حداکثر ۷ روز؛ include build/test/review/deploy; task/week mapping ممنوع تا تصمیم و داده کامل.",
-      "impacted_artifacts": [
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/PHASE_5_EXECUTION_CONTRACT.md",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/decision-register.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/output-artifact-registry.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/acceptance-gates.json",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        }
-      ],
-      "status": "OPEN",
-      "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
-      },
-      "option_tradeoff_analysis": [
-        {
-          "option": "A) manual owner-approved",
-          "example": "دستی و owner-approved؛ مثال: مالک deliverableها را در چرخه ۷روزه قرار می‌دهد.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "کنترل انسانی و مسئولیت روشن.",
-          "drawbacks": "مقیاس‌پذیری و تکرارپذیری کمتر.",
-          "risks": "نقض ظرفیت یا omission وابستگی با خطای انسانی.",
-          "cost_and_effort": "هزینه ابزار کم؛ زمان دستی نامعلوم.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "B) heuristic auto schedule",
-          "example": "Heuristic auto-schedule؛ مثال: اولویت و estimate را با ظرفیت bin packing ترکیب کند.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "سریع برای پیشنهاد schedule.",
-          "drawbacks": "خروجی حساس به heuristic و tie-break است.",
-          "risks": "پنهان‌کردن infeasibility یا policy order.",
-          "cost_and_effort": "هزینه ساخت/نگهداری متوسط؛ implementation estimate نداریم.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        },
-        {
-          "option": "C) constraint solver after validated inputs, human-approved (پیشنهاد).",
-          "example": "Constraint solver پس از ورودی معتبر و human approval؛ مثال: hard dependencies/capacity, سپس owner تأیید.",
-          "example_type": "HYPOTHETICAL",
-          "benefits": "محدودیت‌ها را صریح و feasibility را قابل‌اثبات می‌کند.",
-          "drawbacks": "مدل‌سازی و داده ورودی دشوار؛ solver output نیاز به توضیح دارد.",
-          "risks": "خطای مدل قیود/داده یا اعتماد بی‌جا به optimum.",
-          "cost_and_effort": "هزینه توسعه/آزمون بالاتر؛ ظرفیت و estimate فعلاً نامعلوم؛ پیشنهاد مرحله‌ای.",
-          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
-        }
-      ],
-      "approved_policy_references": [
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "O5-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-10",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-11",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-12",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-13",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-14",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-15",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-16",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-17",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-18",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-19",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-20",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-21",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "BP52-22",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A01",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A02",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A03",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A04",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A05",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A07",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A08",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "A09",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        },
-        {
-          "ref_type": "APPROVED_POLICY",
-          "ref_id": "F06",
-          "relation": "CONSTRAINED_BY",
-          "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
-        }
-      ],
-      "review_disposition": "NO_SEPARATE_MVP_DECISION",
-      "review_reason": "Use existing dependency/capacity rules and <=7-day cycle; owner resolves only unresolved feasible tie/exception."
-    },
-    {
-      "decision_id": "P5-D10",
-      "title": "مدیریت تصمیم باز",
-      "problem": "ثبت owner decisions with scope, dependency, blocking condition and consequences.",
-      "source_references": [
-        {
-          "ref_type": "SOURCE_LOCATOR",
-          "ref_id": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#Phase 4 snapshot: 134 OPEN/BLOCKED; BP §5.2.1(19–20); Task Protocol",
-          "relation": "DERIVED_FROM",
-          "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
-          "blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
-          "locator": "Phase 4 snapshot: 134 OPEN/BLOCKED; BP §5.2.1(19–20); Task Protocol"
-        }
-      ],
-      "existing_approval_evidence": [],
-      "options": [
-        "A) decision ledger in canonical data",
-        "B) issue/ADR external IDs",
-        "C) both with one authoritative source (پیشنهاد)."
-      ],
-      "recommended_option": "C می‌تواند external issue را evidence کند اما registry canonical owner approval state نگه دارد.",
-      "recommendation_rationale": "هیچ inherited OPEN را approved نکن؛ dependency-scope only blocks linked work.",
-      "impacted_artifacts": [
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/PHASE_5_EXECUTION_CONTRACT.md",
-          "relation": "USES_CONTRACT_ARTIFACT"
-        },
-        {
-          "ref_type": "CONTRACT_ARTIFACT",
-          "ref_id": "docs/phase5/planning-contract/decision-register.json",
+          "ref_id": "O5-…13225 tokens truncated…ning-contract/decision-register.json",
           "relation": "USES_CONTRACT_ARTIFACT"
         },
         {
@@ -5248,7 +3921,7 @@
     {
       "decision_id": "P5-D14",
       "title": "معماری زیرساخت برنامه‌ریزی",
-      "problem": "انتخاب canonical store, graph projection, rendered docs and validator ownership.",
+      "problem": "Choose the simplest Git-versioned data/output format for one Codex Skill that produces an initial weekly plan and proposes valid replans, while keeping a single source of truth, owner readability, machine consumption, deterministic checks, and the 60-minute implementation cap. This is not a choice of a separate planning engine.",
       "source_references": [
         {
           "ref_type": "SOURCE_LOCATOR",
@@ -5261,12 +3934,12 @@
       ],
       "existing_approval_evidence": [],
       "options": [
-        "A) Markdown canonical",
-        "B) JSON canonical with generated Markdown/CSV/HTML (پیشنهاد)",
-        "C) database canonical."
+        "A) One SKILL.md, canonical weekly plan in Markdown, Git history; Skill and existing tools validate; a small script only if a demonstrated control is otherwise uncovered.",
+        "B) One SKILL.md, canonical weekly plan in JSON, Git history; Skill renders a readable Markdown view in its response; deterministic validation only where needed.",
+        "C) One SKILL.md, canonical weekly plan in JSON plus Markdown derived from that same JSON, Git history; a small validator/renderer only if needed; no second source of truth."
       ],
-      "recommended_option": "B versionable, diffable, human-reviewable; if graph is needed derive from same source.",
-      "recommendation_rationale": "Only one authoritative fact source; generation code after separate approval; snapshot read-only.",
+      "recommended_option": "NON-BINDING RECOMMENDATION — Option B: JSON is the single versioned plan source; the Skill renders the owner-readable view in its response. Pending owner decision.",
+      "recommendation_rationale": "The Skill needs structured references to work nodes, dependencies, estimates, capacity, blockers and acceptance. JSON supports deterministic field/reference checks without a Markdown parser or a second committed rendering. The Skill response supplies the readable plan. The existing contract validator is not a weekly-plan validator; any remaining deterministic checks should be a narrowly scoped local script only if required. Recommendation only; owner approval remains pending.",
       "impacted_artifacts": [
         {
           "ref_type": "CONTRACT_ARTIFACT",
@@ -5298,33 +3971,33 @@
       },
       "option_tradeoff_analysis": [
         {
-          "option": "A) Markdown canonical",
-          "example": "Markdown canonical؛ مثال: یک فایل مرکزی برنامه با جدول‌ها.",
+          "option": "A — Markdown canonical",
+          "example": "weekly-plan.md: headings per week with outcome, work refs, dependencies, estimates, capacity, blockers and acceptance.",
           "example_type": "HYPOTHETICAL",
-          "benefits": "برای owner قابل‌خواندن و ساده.",
-          "drawbacks": "parse/query/validation و ساختارهای گرافی دشوارتر می‌شوند.",
-          "risks": "روایت مشتق‌ها با متن همگام نماند.",
-          "cost_and_effort": "هزینه ابزار کم؛ هزینه human reconciliation ممکن است بالا.",
+          "benefits": "Fastest to draft and easiest to read directly in Git; one file and Git history.",
+          "drawbacks": "Free-form Markdown makes reliable checks for duplicate parent/child allocation, dependency order, capacity and blocker scope harder; deterministic validation may require a parser.",
+          "risks": "Formatting variations can hide missing or duplicated fields.",
+          "cost_and_effort": "Lowest initial authoring effort; robust machine checks can consume the time saved.",
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "B) JSON canonical with generated Markdown/CSV/HTML (پیشنهاد)",
-          "example": "JSON canonical با Markdown/CSV/HTML مشتق؛ مثال: یک record مرجع و render در CI.",
+          "option": "B — JSON canonical; Markdown rendered in Skill response",
+          "example": "weekly-plan.json: {\"weeks\":[{\"week_id\":\"W01\",\"deliverables\":[{\"id\":\"DLV-01\",\"outcome\":\"A testable user outcome\",\"work_refs\":[\"TASK:X:01\",\"SUBTASK:Y:02\"],\"dependencies\":[],\"capacity\":\"UNKNOWN\"}]}]} ; Skill presents the same fields as a readable week table.",
           "example_type": "HYPOTHETICAL",
-          "benefits": "ماشین‌خوان، diffable، قابل اعتبارسنجی؛ خروجی انسانی مشتق می‌شود.",
-          "drawbacks": "به schema/version/renderer و discipline نیاز دارد.",
-          "risks": "تولید دستی یکی از خروجی‌ها منبع دوم شود.",
-          "cost_and_effort": "هزینه ساخت validator/renderer متوسط؛ measurable only after prototype; پیشنهاد.",
+          "benefits": "One structured, Git-versioned authority; direct machine consumption and deterministic checks; the user still sees a readable plan without storing a second rendering.",
+          "drawbacks": "The committed JSON is less pleasant to read than Markdown, and the Skill must consistently render the response.",
+          "risks": "A manually rewritten response could diverge visually, although it does not become a second stored authority.",
+          "cost_and_effort": "Small JSON structure plus focused checks; no renderer or Markdown parser required.",
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "C) database canonical.",
-          "example": "Database canonical؛ مثال فرضی: relational DB for registry and graph projections.",
+          "option": "C — JSON canonical plus derived Markdown",
+          "example": "weekly-plan.json contains the only editable facts; weekly-plan.md is generated from it by one local renderer and never edited as a source.",
           "example_type": "HYPOTHETICAL",
-          "benefits": "query/access control/transaction قابلیت دارد.",
-          "drawbacks": "برای repo review/portability و snapshot workflow سربار دارد.",
-          "risks": "service/db dependency زودهنگام بدون مصرف‌کننده.",
-          "cost_and_effort": "هزینه infra/backup/ops بالاتر و نامعلوم؛ فعلاً نیاز اثبات نشده.",
+          "benefits": "Structured validation and a readable, Git-diffable plan file for the owner.",
+          "drawbacks": "Requires generation and a check that the committed view matches JSON; adds another file and workflow.",
+          "risks": "Sync errors if generated Markdown is edited or not regenerated.",
+          "cost_and_effort": "Higher than B because the renderer and reproducibility check are additional work; still avoids a separate service or database.",
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         }
       ],
@@ -5606,8 +4279,8 @@
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
       ],
-      "review_disposition": "OWNER_INPUT_BEFORE_SKILL_BUILD",
-      "review_reason": "Architecture proposal narrowed to one Git-versioned plan. Confirm Markdown vs a demonstrated existing JSON consumer; no database or separate version service."
+      "review_disposition": "PENDING_OWNER_DECISION_BEFORE_SKILL_BUILD",
+      "review_reason": "The architecture question is limited to the three owner-specified Markdown/JSON output forms. Review of the current contract validator and this Codex environment is recorded in the mission report; no option is approved here."
     },
     {
       "decision_id": "P5-D15",
@@ -6924,12 +5597,10 @@
     {
       "group_id": "G-DATA-SHAPE",
       "members": [
-        "P5-D01",
-        "P5-D02",
         "P5-D14",
         "P5-D15"
       ],
-      "rationale": "deliverable definition, allocation, canonical model and validator interfaces"
+      "rationale": "Remaining owner review: plan data format (D14) and whether a small deterministic validator is needed (D15); D01/D02 are already owner-approved."
     },
     {
       "group_id": "G-ESTIMATE-CAPACITY",
@@ -6962,8 +5633,6 @@
     }
   ],
   "proposed_decision_review_order": [
-    "P5-D01",
-    "P5-D02",
     "P5-D14",
     "P5-D15",
     "P5-D10",
@@ -6981,15 +5650,14 @@
   ],
   "current_review_context": {
     "mission": "F01.6/F01.7 lightweight planning contract",
-    "owner_approval_status": "PENDING; no decision approved in this update",
+    "owner_approval_status": "PARTIAL; P5-D01/P5-D02 APPROVED with explicit owner evidence; remaining 14 P5 decisions are OPEN/PENDING_APPROVAL.",
     "historical_decisions_retained": true,
     "active_owner_input_groups": [
-      "P5-D01/P5-D02 before first commitment",
       "P5-D03 before first commitment",
       "P5-D04/P5-D05/P5-D06 only when estimate inputs are unknown",
       "P5-D07/P5-D08 during planning execution when owner priority is needed",
-      "P5-D14 before Skill build"
+      "P5-D14 output format before Skill build"
     ],
-    "disposition_note": "Per-decision review_disposition fields distinguish true owner inputs from items covered by existing policy, removed MVP architecture, or execution-time choices; original status and options remain unchanged."
+    "disposition_note": "Per-decision review_disposition fields separate the two explicit owner approvals, true remaining owner inputs, policy-covered items, and execution-time choices. Historical options and decision identifiers are retained."
   }
 }

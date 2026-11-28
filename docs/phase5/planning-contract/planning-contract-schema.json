@@ -286,12 +286,10 @@
     {
       "group_id": "G-DATA-SHAPE",
       "members": [
-        "P5-D01",
-        "P5-D02",
         "P5-D14",
         "P5-D15"
       ],
-      "rationale": "deliverable definition, allocation, canonical model and validator interfaces"
+      "rationale": "Remaining format/validator boundary review; P5-D01 and P5-D02 have explicit owner approval."
     },
     {
       "group_id": "G-ESTIMATE-CAPACITY",
@@ -324,8 +322,6 @@
     }
   ],
   "proposed_decision_review_order": [
-    "P5-D01",
-    "P5-D02",
     "P5-D14",
     "P5-D15",
     "P5-D10",
@@ -1391,6 +1387,33 @@
       "planning evidence"
     ],
     "unknown_policy": "UNKNOWN is neither zero nor permission to commit",
-    "legacy_graph_schema": "Definitions below are not required for MVP implementation and confer no owner approval."
+    "legacy_graph_schema": "Definitions below are not required for MVP implementation and confer no owner approval.",
+    "output_format_status": "PENDING_OWNER_DECISION_P5-D14; no format is approved by this schema"
+  },
+  "decision_owner_approval_states": {
+    "decision_status_values": [
+      "OPEN",
+      "APPROVED"
+    ],
+    "owner_approval_status_values": [
+      "PENDING_APPROVAL",
+      "APPROVED"
+    ],
+    "approval_evidence_required": [
+      "approver",
+      "approved_at",
+      "evidence"
+    ],
+    "approved_decision_ids": [
+      "P5-D01",
+      "P5-D02"
+    ],
+    "required_approved_ids": [
+      "P5-D01",
+      "P5-D02"
+    ],
+    "all_other_p5_decisions": "OPEN / PENDING_APPROVAL unless later explicit owner evidence is recorded",
+    "owner_evidence_locator": "PR #258 owner instruction dated 2026-11-28, mission section 3",
+    "contract_approval_independent": "The whole Phase 5 contract remains PENDING_OWNER_APPROVAL."
   }
 }
