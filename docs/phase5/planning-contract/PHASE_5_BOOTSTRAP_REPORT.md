@@ -42,7 +42,7 @@ P5-D01…P5-D16 و تاریخچهٔ گزینه‌ها همچنان `OPEN / PENDI
 
 - `F01 = RESOLVED_WITH_EVIDENCE`؛ پوشش روایی کامل، مصرف برنامه‌ای مصنوعات، تطبیق قرارداد و محدودیت‌های باقیمانده ثبت شده‌اند.
 - `P5-B03 = PASS_WITH_REVIEW_EVIDENCE`؛ پذیرش gate به معنی تصویب قرارداد یا آمادگی انتشار محصول نیست.
-- `P5-C03 = PASS_WITH_REVIEW_EVIDENCE`؛ `P5-C02` Snapshot در HEAD ورودی معتبر است و هر ۲۷ Artifact تأیید شدند.
-- ۵۳ fixture محلی قبلی روی HEAD ورودی: PASS؛ اجرای مجدد پس از اصلاحات در گزارش نهایی/commit انتشار ثبت می‌شود.
-- CI قبلی تنها برای SHA آزموده‌شده معتبر است؛ CI HEAD این اصلاح باید پس از انتشار دوباره بررسی و به همان SHA نسبت داده شود.
+- `P5-C03 = PASS_WITH_REVIEW_EVIDENCE`؛ Snapshot Validator روی HEAD شاخهٔ PR، هر ۲۷ Artifact را تأیید کرد.
+- ۵۴ fixture محلی و real validation بدون خطا روی HEAD شاخهٔ PR اجرا شدند.
+- نتیجهٔ هر Workflow و job، با SHA دقیق آزموده‌شده، در شرح PR ثبت شده است؛ `SKIPPED` به‌عنوان PASS گزارش نشده است.
 - PR باید Open/Draft بماند. هیچ تصمیمی تصویب، برنامه‌ای تولید، Taskی تخصیص یا Phase 5.1 آغاز نشده است.
