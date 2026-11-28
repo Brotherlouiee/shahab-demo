@@ -303,7 +303,7 @@ def approval_errors(state: dict[str,Any]) -> list[str]:
 
 def owner_decision_scope_errors(decisions: list[dict[str,Any]]) -> list[str]:
     """Allow only the two explicitly owner-approved decisions in this mission."""
-    approved={"P5-D01","P5-D02"}
+    approved={"P5-D01","P5-D02","P5-D14"}
     errors=[]
     for decision in decisions:
         did=decision.get("decision_id")
@@ -313,7 +313,7 @@ def owner_decision_scope_errors(decisions: list[dict[str,Any]]) -> list[str]:
             errors.append(f"unexpected owner decision state: {did}")
         errors.extend(approval_errors(decision.get("owner_approval",{})))
     if {d.get("decision_id") for d in decisions if d.get("status")=="APPROVED"}!=approved:
-        errors.append("only explicitly approved P5-D01/P5-D02 may be approved")
+        errors.append("only explicitly approved P5-D01/P5-D02/P5-D14 may be approved")
     return errors
 
 
@@ -398,7 +398,7 @@ def fixture_checks(schema: dict[str, Any], real: dict[str, Any]) -> list[dict[st
     record("F05-03-multicycle-without-exception-record-rejected", bool(multicycle_errors(bad_multi,schema)))
     record("F05-04-multicycle-exception-within-scope-accepted", not multicycle_errors({"reason":"not splittable safely","split_alternatives":["split A","split B"],"dependencies":["source-backed dependency"],"max_calendar_duration":{"value":"UNKNOWN","approval":"PENDING_APPROVAL"},"cost_ceilings":{"development":"UNKNOWN","operating":"UNKNOWN","currency":"owner-supplied","period":"owner-supplied"},"intermediate_outputs":[{"cycle_days":7,"output":"testable slice","oracle":"test evidence"}],"review_date":"owner-set-date","intermediate_is_not_release":True,"allocation_reconciliation":"parent roll-up only; no duplicate effort","approval_status":"PROPOSED_PENDING_OWNER_APPROVAL","weekly_cycle_days":7},schema))
     # Positive fixture coverage.
-    record("POS-01-unapproved-decisions-remain-open", all(d["status"]=="OPEN" for d in real["decisions"] if d["decision_id"] not in {"P5-D01","P5-D02"}))
+    record("POS-01-unapproved-decisions-remain-open", all(d["status"]=="OPEN" for d in real["decisions"] if d["decision_id"] not in {"P5-D01","P5-D02","P5-D14"}))
     record("POS-02-valid-influence-cycle-accepted", not hard_cycle(dset,[{"source_id":"P5-D01","target_id":"P5-D02","relation_type":"INFLUENCES"},{"source_id":"P5-D02","target_id":"P5-D01","relation_type":"INFLUENCES"}]))
     record("POS-03-valid-reference-to-snapshot", not ref_errors([{"ref_type":"CERTIFIED_SNAPSHOT","ref_id":SNAPSHOT_ID,"source_commit":SOURCE_COMMIT,"relation":"REQUIRES_INPUT"}],dset,pset,aset,schema,gates,snap))
     unknown_metrics={name:{"state":"UNKNOWN"} for name in schema["estimate_model"]["metrics"]}
@@ -409,6 +409,8 @@ def fixture_checks(schema: dict[str, Any], real: dict[str, Any]) -> list[dict[st
     d03=next(d for d in unauthorized if d["decision_id"]=="P5-D03")
     d03["status"]="APPROVED"; d03["owner_approval"]={"status":"APPROVED","approver":"owner","approved_at":"2026-11-28","evidence":"unapproved fixture"}
     record("OWNER-01-unapproved-decision-promotion-rejected", bool(owner_decision_scope_errors(unauthorized)))
+    approved_d14=next(d for d in real["decisions"] if d["decision_id"]=="P5-D14")
+    record("OWNER-02-D14-approval-and-nine-rules", approved_d14["status"]=="APPROVED" and approved_d14["owner_approval"]["status"]=="APPROVED" and all(approved_d14["owner_approval"].get(k) for k in ["approver","approved_at","evidence"]) and len(approved_d14.get("owner_approved_rules",[]))==9)
     record("POS-07-history-ci-sha-pinned", bool(re.fullmatch(r"[0-9a-f]{40}",real["external_ci_evidence"]["latest_verified_pr_commit"])))
     record("POS-08-schedule-cadence-policy-present", "<= 6 days" in " ".join(sum((x["validation_rules"] for x in schema["graph_node_types"] if x["type_id"]=="WEEK"),[])))
     record("POS-09-co-decision-groups-reference-existing-decisions", all(set(g["members"])<=dset for g in schema["decision_review_groups"]))
@@ -434,14 +436,17 @@ def validate_real() -> tuple[list[str], dict[str, Any]]:
     if len(dids)!=len(decisions) or len(aids)!=len(artifacts) or len(gids)!=len(gates): errors.append("duplicate entity ID")
     errors.extend(owner_decision_scope_errors(decisions))
     decision_states=schema.get("decision_owner_approval_states",{})
-    if decision_states.get("approved_decision_ids")!=["P5-D01","P5-D02"] or decision_states.get("contract_approval_independent")!="The whole Phase 5 contract remains PENDING_OWNER_APPROVAL.":
+    if decision_states.get("approved_decision_ids")!=["P5-D01","P5-D02","P5-D14"] or decision_states.get("contract_approval_independent")!="The whole Phase 5 contract remains PENDING_OWNER_APPROVAL.":
         errors.append("decision approval schema does not isolate explicit D01/D02 owner approval")
     registry=data["output-artifact-registry.json"]
     active=set(registry.get("current_mvp_artifacts",[])); deferred=set(registry.get("deferred_artifact_ids",[]))
     if active!={"A01"} or active|deferred!=aids or active&deferred: errors.append("MVP output registry must contain only A01 and defer the remaining historical proposals")
     a01=next((a for a in artifacts if a.get("artifact_id")=="A01"),{})
-    if "P5-D14" not in a01.get("format","") or "TBD" not in a01.get("format",""):
-        errors.append("A01 format must remain pending the owner decision on P5-D14")
+    canonical_rule=a01.get("canonical_or_derived","").lower()
+    if a01.get("format")!="JSON" or a01.get("path")!="docs/phase5/weekly-plan.json" or "sole canonical" not in canonical_rule:
+        errors.append("A01 must use the approved single-source JSON plan path")
+    if "parallel markdown" not in canonical_rule:
+        errors.append("A01 must explicitly prohibit a parallel Markdown plan authority")
     if any(d.get("review_disposition") is None or d.get("review_reason") is None for d in decisions): errors.append("decision review disposition missing")
     source_registry=read_json(CONTRACT/"planning-knowledge-registry.json")
     plan_source=next((x for x in source_registry.get("sources",[]) if x.get("source_document")=="docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),{})

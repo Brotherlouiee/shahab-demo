@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1-proposed",
   "mission": "5.0",
-  "approval_note": "P5-D01 و P5-D02 با دستور صریح مالک در مأموریت PR #258 مورخ 2026-11-28، به‌صورت مشترک با گزینه C و ۹ قاعده اجرایی مصوب شده‌اند. ۱۴ تصمیم دیگر، از جمله D14، همچنان OPEN/PENDING_APPROVAL هستند؛ مصوبات سیاستی baseline جداگانه‌اند و قرارداد کلی نیز هنوز PENDING_OWNER_APPROVAL است.",
+  "approval_note": "P5-D01 و P5-D02 با گزینه C و ۹ قاعده اجرایی مصوب شده‌اند؛ P5-D14 نیز با گزینه B و ۹ قاعده اجرایی در 2026-11-28 صریحاً به تصویب مالک رسیده است. ۱۳ تصمیم دیگر همچنان OPEN/PENDING_APPROVAL هستند. این مصوبات به معنی تأیید کل قرارداد نیستند؛ وضعیت تأیید قرارداد کلی طبق نیاز، PENDING_OWNER_APPROVAL باقی می‌ماند.",
   "approved_policy_baseline": [
     {
       "decision_id": "O5-01",
@@ -5263,14 +5263,16 @@
           "locator": "BP §5.2.1(19–21); phase4 immutable snapshot; Task Protocol"
         }
       ],
-      "existing_approval_evidence": [],
-      "options": [
-        "A) One SKILL.md, canonical weekly plan in Markdown, Git history; Skill and existing tools validate; a small script only if a demonstrated control is otherwise uncovered.",
-        "B) One SKILL.md, canonical weekly plan in JSON, Git history; Skill renders a readable Markdown view in its response; deterministic validation only where needed.",
-        "C) One SKILL.md, canonical weekly plan in JSON plus Markdown derived from that same JSON, Git history; a small validator/renderer only if needed; no second source of truth."
+      "existing_approval_evidence": [
+        "Explicit owner approval in the conversation dated 2026-11-28: the owner approved Option B for P5-D14 and the first eight execution rules, then explicitly approved rule nine. The owner approved JSON as the single canonical plan source, readable presentation through the Skill response, Git history, one Codex Skill named shahab-planner, one small Python plan validator, the four Skill modes, and the 60-minute cap. This is the owner decision; it does not approve the entire contract or authorize building the Skill in this mission."
       ],
-      "recommended_option": "NON-BINDING RECOMMENDATION — Option B: JSON is the single versioned plan source; the Skill renders the owner-readable view in its response. Pending owner decision.",
-      "recommendation_rationale": "The Skill needs structured references to work nodes, dependencies, estimates, capacity, blockers and acceptance. JSON supports deterministic field/reference checks without a Markdown parser or a second committed rendering. The Skill response supplies the readable plan. The existing contract validator is not a weekly-plan validator; any remaining deterministic checks should be a narrowly scoped local script only if required. Recommendation only; owner approval remains pending.",
+      "options": [
+        "A) One SKILL.md, canonical weekly plan in Markdown, Git history; retained as a rejected historical alternative.",
+        "B) One SKILL.md, canonical weekly plan in JSON at docs/phase5/weekly-plan.json, Git history; readable views in the Skill response; owner-approved on 2026-11-28.",
+        "C) One SKILL.md, canonical JSON plus Markdown derived from that JSON; retained as a rejected historical alternative."
+      ],
+      "recommended_option": "B — APPROVED by the Project Owner on 2026-11-28: JSON is the only stored source of truth; the Skill returns owner-readable views.",
+      "recommendation_rationale": "Explicit owner approval. The Skill uses one JSON plan, displays requested views in its response, and delegates deterministic plan checks to one small local Python script. Git provides version history. No parallel Markdown plan, renderer, service, new dependency, or engine is authorized. The full Phase 5 contract remains PENDING_OWNER_APPROVAL.",
       "impacted_artifacts": [
         {
           "ref_type": "CONTRACT_ARTIFACT",
@@ -5293,16 +5295,16 @@
           "relation": "USES_CONTRACT_ARTIFACT"
         }
       ],
-      "status": "OPEN",
+      "status": "APPROVED",
       "owner_approval": {
-        "status": "PENDING_APPROVAL",
-        "approver": null,
-        "approved_at": null,
-        "evidence": null
+        "status": "APPROVED",
+        "approver": "Project Owner",
+        "approved_at": "2026-11-28",
+        "evidence": "Explicit owner approval in the conversation dated 2026-11-28: the owner approved Option B for P5-D14 and the first eight execution rules, then explicitly approved rule nine. The owner approved JSON as the single canonical plan source, readable presentation through the Skill response, Git history, one Codex Skill named shahab-planner, one small Python plan validator, the four Skill modes, and the 60-minute cap. This is the owner decision; it does not approve the entire contract or authorize building the Skill in this mission."
       },
       "option_tradeoff_analysis": [
         {
-          "option": "A — Markdown canonical",
+          "option": "A — Markdown canonical (rejected historical alternative)",
           "example": "weekly-plan.md: headings per week with outcome, work refs, dependencies, estimates, capacity, blockers and acceptance.",
           "example_type": "HYPOTHETICAL",
           "benefits": "Fastest to draft and easiest to read directly in Git; one file and Git history.",
@@ -5312,7 +5314,7 @@
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "B — JSON canonical; Markdown rendered in Skill response",
+          "option": "B — JSON canonical; Skill response renders requested human-readable views (OWNER APPROVED)",
           "example": "weekly-plan.json: {\"weeks\":[{\"week_id\":\"W01\",\"deliverables\":[{\"id\":\"DLV-01\",\"outcome\":\"A testable user outcome\",\"work_refs\":[\"TASK:X:01\",\"SUBTASK:Y:02\"],\"dependencies\":[],\"capacity\":\"UNKNOWN\"}]}]} ; Skill presents the same fields as a readable week table.",
           "example_type": "HYPOTHETICAL",
           "benefits": "One structured, Git-versioned authority; direct machine consumption and deterministic checks; the user still sees a readable plan without storing a second rendering.",
@@ -5322,7 +5324,7 @@
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         },
         {
-          "option": "C — JSON canonical plus derived Markdown",
+          "option": "C — JSON canonical plus derived Markdown file (rejected historical alternative)",
           "example": "weekly-plan.json contains the only editable facts; weekly-plan.md is generated from it by one local renderer and never edited as a source.",
           "example_type": "HYPOTHETICAL",
           "benefits": "Structured validation and a readable, Git-diffable plan file for the owner.",
@@ -5610,8 +5612,19 @@
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
       ],
-      "review_disposition": "PENDING_OWNER_DECISION_BEFORE_SKILL_BUILD",
-      "review_reason": "The architecture question is limited to the three owner-specified Markdown/JSON output forms. Review of the current contract validator and this Codex environment is recorded in the mission report; no option is approved here."
+      "review_disposition": "OWNER_APPROVED",
+      "review_reason": "The owner explicitly approved Option B and all nine execution rules on 2026-11-28. Implementation remains outside this mission; the entire Phase 5 contract remains pending separate owner approval if required.",
+      "owner_approved_rules": [
+        "One Codex Skill named shahab-planner is the planning tool.",
+        "JSON is the only authoritative stored plan; no parallel Markdown plan or other independent source is allowed.",
+        "The Skill presents readable plans in its response; the owner is not required to read JSON directly.",
+        "Git stores plan history; no separate version-control system is built.",
+        "A small Python script deterministically validates essential plan rules; it is only a validator, not a planning, scheduling, priority, or estimation engine.",
+        "Build no new database, API, UI, dashboard, separate planning/scheduling/estimation/priority engine, duplicate project graph, version system, or software dependency.",
+        "One Skill supports INITIAL PLAN, REPLAN, VALIDATE, and EXPLAIN, including plan display, details, and version comparison.",
+        "Design, implementation, tests, and corrections total at most 60 minutes; planning execution time is separate.",
+        "On request, the Skill can present a comprehensive plan table, weekly view, deliverable and Task/Subtask details, dependencies, acceptance criteria, estimates/capacity/cost/token, version comparison, and optional text Gantt. Missing information remains UNKNOWN; presentation must not invent facts."
+      ]
     },
     {
       "decision_id": "P5-D15",
@@ -5974,8 +5987,8 @@
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
       ],
-      "review_disposition": "NO_SEPARATE_MVP_DECISION_UNLESS_GAP_FOUND",
-      "review_reason": "Use existing validator; a small script only for a documented uncovered deterministic check."
+      "review_disposition": "NO_SEPARATE_MVP_DECISION; MINIMAL_VALIDATOR_SCOPE_APPROVED_UNDER_P5-D14",
+      "review_reason": "P5-D14 owner approval requires one small Python plan validator and defines its bounded deterministic controls. P5-D15 remains OPEN/PENDING_APPROVAL for any further validation-scope choice, but is not a prerequisite to building the approved minimal Skill; do not treat this disposition as approval of D15."
     },
     {
       "decision_id": "P5-D16",
@@ -6931,7 +6944,7 @@
         "P5-D14",
         "P5-D15"
       ],
-      "rationale": "Remaining owner review: plan data format (D14) and whether a small deterministic validator is needed (D15); D01/D02 are already owner-approved."
+      "rationale": "Historical review grouping: D14 format is owner-approved; D15 remains conditional on an uncovered deterministic validation need."
     },
     {
       "group_id": "G-ESTIMATE-CAPACITY",
@@ -6964,7 +6977,6 @@
     }
   ],
   "proposed_decision_review_order": [
-    "P5-D14",
     "P5-D15",
     "P5-D10",
     "P5-D03",
@@ -6981,14 +6993,13 @@
   ],
   "current_review_context": {
     "mission": "F01.6/F01.7 lightweight planning contract",
-    "owner_approval_status": "PARTIAL; P5-D01/P5-D02 APPROVED with explicit owner evidence; remaining 14 P5 decisions are OPEN/PENDING_APPROVAL.",
+    "owner_approval_status": "PARTIAL; P5-D01/P5-D02/P5-D14 APPROVED with explicit owner evidence; remaining 13 P5 decisions are OPEN/PENDING_APPROVAL.",
     "historical_decisions_retained": true,
     "active_owner_input_groups": [
       "P5-D03 before first commitment",
       "P5-D04/P5-D05/P5-D06 only when estimate inputs are unknown",
-      "P5-D07/P5-D08 during planning execution when owner priority is needed",
-      "P5-D14 output format before Skill build"
+      "P5-D07/P5-D08 during planning execution when owner priority is needed"
     ],
-    "disposition_note": "Per-decision review_disposition fields separate the two explicit owner approvals, true remaining owner inputs, policy-covered items, and execution-time choices. Historical options and decision identifiers are retained."
+    "disposition_note": "Per-decision review_disposition fields distinguish the three explicit owner approvals, true remaining owner inputs, policy-covered items, and execution-time choices. Historical decision identifiers and alternatives are retained."
   }
 }

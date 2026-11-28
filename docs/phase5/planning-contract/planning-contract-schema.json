@@ -289,7 +289,7 @@
         "P5-D14",
         "P5-D15"
       ],
-      "rationale": "Remaining format/validator boundary review; P5-D01 and P5-D02 have explicit owner approval."
+      "rationale": "Historical review grouping: D14 JSON format is owner-approved; D15 remains conditional on an uncovered deterministic validation need."
     },
     {
       "group_id": "G-ESTIMATE-CAPACITY",
@@ -322,7 +322,6 @@
     }
   ],
   "proposed_decision_review_order": [
-    "P5-D14",
     "P5-D15",
     "P5-D10",
     "P5-D03",
@@ -1359,7 +1358,7 @@
     "release_semantics": "intermediate work evidence cannot be treated as successful public product release"
   },
   "current_mvp_contract": {
-    "tool": "One Skill, proposed name shahab-planner",
+    "tool": "One approved Codex Skill: shahab-planner",
     "request_modes": [
       "INITIAL PLAN",
       "REPLAN",
@@ -1388,7 +1387,12 @@
     ],
     "unknown_policy": "UNKNOWN is neither zero nor permission to commit",
     "legacy_graph_schema": "Definitions below are not required for MVP implementation and confer no owner approval.",
-    "output_format_status": "PENDING_OWNER_DECISION_P5-D14; no format is approved by this schema"
+    "output_format_status": "OWNER_APPROVED_P5-D14; whole contract status remains PENDING_OWNER_APPROVAL if separate approval is required",
+    "canonical_plan_format": "JSON",
+    "canonical_plan_path": "docs/phase5/weekly-plan.json",
+    "human_readable_presentation": "Requested views are rendered in the shahab-planner Skill response; no parallel Markdown plan file.",
+    "plan_version_history": "Git commits",
+    "validator": "One small Python script inside the Skill; no new dependency or independent engine."
   },
   "decision_owner_approval_states": {
     "decision_status_values": [
@@ -1406,14 +1410,16 @@
     ],
     "approved_decision_ids": [
       "P5-D01",
-      "P5-D02"
+      "P5-D02",
+      "P5-D14"
     ],
     "required_approved_ids": [
       "P5-D01",
-      "P5-D02"
+      "P5-D02",
+      "P5-D14"
     ],
-    "all_other_p5_decisions": "OPEN / PENDING_APPROVAL unless later explicit owner evidence is recorded",
-    "owner_evidence_locator": "PR #258 owner instruction dated 2026-11-28, mission section 3",
+    "all_other_p5_decisions": "OPEN / PENDING_APPROVAL unless later explicit owner evidence is recorded; execution-time inputs do not block building the Skill.",
+    "owner_evidence_locator": "PR #258 owner instructions dated 2026-11-28: mission sections 3 and 4; explicit approval of D14 Option B and its nine rules.",
     "contract_approval_independent": "The whole Phase 5 contract remains PENDING_OWNER_APPROVAL."
   }
 }
