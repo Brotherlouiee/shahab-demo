@@ -85,19 +85,20 @@ WBS پاسخ «چه کاری باید انجام شود؟» است. Release Plan
 | P5-03 | `git diff --cached --check` | Exit 0 | Exit 0؛ trailing whitespace اصلاح شد | PASS |
 | P5-04 | `BASE_SHA=main HEAD_SHA=HEAD python scripts/ci/validate_markdown.py` | لینک و whitespace docs-only معتبر | `Documentation validation passed for 2 changed Markdown files.` Exit 0. تلاش اولیه با `BASE_SHA=origin/main` به‌علت refspec اشتباه نتوانست fetch کند؛ با ref معتبر `main` تکرار و PASS شد | PASS |
 | P5-05 | `git diff --cached --name-status`; re-run Snapshot Validator | فقط هفت Artifact مجاز؛ Snapshot unchanged | هفت فایل فقط زیر `docs/phase5/planning-contract/`; Validator پس از ساخت دوباره PASS | PASS |
-| P5-06 | GitHub Actions روی commit `0c00da5189feb338029de1fffe037b894ae2712f` | docs checks موفق؛ product suites طبق docs-only policy skip | Quality run 1355, Security 838, Container 755, US-13 796: 4/4 success؛ docs classifiers PASS، repository secret scan PASS. Skipها: Quality gates full suite, PostgreSQL migrations, Loan details browser, Profile OTP browser, Python/Node SAST/SCA, Container image build, US-13 route comparison | PASS_WITH_DOCS_ONLY_SKIPS |
+| P5-07 | اسکریپت کنترل `decision-register.json` | هر گزینه مثال/مزایا/معایب/ریسک/هزینه کیفی داشته باشد | 16 تصمیم باز، 49 گزینه؛ همه مثال فرضی، هزینه عددی `UNKNOWN` | PASS |
+| P5-06 | GitHub Actions روی commit `442b66b5a5c33379a75d2f6edd0409b844d39204` | docs checks موفق؛ product suites طبق docs-only policy skip | Quality run 1356, Security 839, Container 756, US-13 797: 4/4 success؛ docs classifiers PASS، repository secret scan PASS. Skipها: Quality gates full suite, PostgreSQL migrations, Loan details browser, Profile OTP browser, Python/Node SAST/SCA, Container image build, US-13 route comparison | PASS_WITH_DOCS_ONLY_SKIPS |
 
 ## ۸. تصمیمات باز و محدودیت‌ها
 
-`P5-D01…P5-D16` در رجیستری `OPEN` و `PENDING_APPROVAL` هستند. ترتیب پیشنهادی بررسی: تعریف Deliverable؛ منبع canonical؛ دانه‌بندی allocation؛ دامنه blocker تصمیم؛ پذیرش outcome؛ ظرفیت و O5-09؛ مدل effort/cost/token؛ ارزش و priority؛ uncertainty؛ scheduler؛ validator؛ replan. انتخاب‌های دقیق، rationale و dependency در JSON ثبت شده است.
+`P5-D01…P5-D16` در رجیستری `OPEN` و `PENDING_APPROVAL` هستند؛ 49 گزینه در قالب 16 تصمیم دارند و هر گزینه مثال فرضی، مزیت، عیب، ریسک و هزینه کیفی (بدون عدد ساختگی) دارد. ترتیب پیشنهادی بررسی: تعریف Deliverable؛ منبع canonical؛ دانه‌بندی allocation؛ دامنه blocker تصمیم؛ پذیرش outcome؛ ظرفیت و O5-09؛ مدل effort/cost/token؛ ارزش و priority؛ uncertainty؛ scheduler؛ validator؛ replan. انتخاب‌های دقیق، rationale و dependency در JSON ثبت شده است.
 
-محدودیت مهم فعلی: Gate مطالعه کامل منابع (B03) انجام نشده است و مانع اعلام COMPLETE می‌شود. Gateهای B07 و B14 وضعیت ساختاری و docs-validation پیش‌نویس را نشان می‌دهند و به معنی تصویب مالک نیستند. PR #258 روی commit `0c00da5189feb338029de1fffe037b894ae2712f` بررسی شد؛ هر چهار workflow مربوط موفق‌اند. تغییرات گزارش/گیت همین نتیجه را ثبت می‌کنند؛ پس از انتشار commit گزارش، CI آن commit نیز باید بازبینی شود.
+محدودیت مهم فعلی: Gate مطالعه کامل منابع (B03) انجام نشده است و مانع اعلام COMPLETE می‌شود. Gateهای B07 و B14 وضعیت ساختاری و docs-validation پیش‌نویس را نشان می‌دهند و به معنی تصویب مالک نیستند. PR #258 روی commit `442b66b5a5c33379a75d2f6edd0409b844d39204` بررسی شد؛ هر چهار workflow مربوط موفق‌اند. تغییرات گزینه‌های 49گانه و این گزارش در commit بعدی قرار می‌گیرند و CI آن commit باید بازبینی شود.
 
 ## ۹. وضعیت Gateها در این checkpoint
 
 - `PASS با دامنه ثبت‌شده`: P5-B01، P5-B02، P5-B04…B15 (B07/B14 به‌عنوان بررسی ساختاری پیش‌نویس، نه تصویب مالک).
 - `NOT PASS`: P5-B03 (مطالعه کامل منابع انجام نشد).
-- `PASS برای commit بررسی‌شده`: P5-B16 روی PR #258/commit `0c00da5…`؛ پس از commit بعدیِ به‌روزرسانی همین گزارش، CI همان commit جدید جداگانه احراز می‌شود.
+- `PASS برای commit بررسی‌شده`: P5-B16 روی PR #258/commit `442b66b…`؛ CI commit بعدیِ افزودن trade-offها جداگانه احراز می‌شود.
 - `MISSION_5_0_COMPLETE`: **خیر**.
 - پیشنهاد قرارداد برای مالک: **PENDING_OWNER_APPROVAL**.
 - Phase 5 execution: **NOT_STARTED**.
@@ -113,6 +114,6 @@ WBS پاسخ «چه کاری باید انجام شود؟» است. Release Plan
 - Draft PR: [#258 — Phase 5: Development Planning Contract and Deliverable Architecture](https://github.com/Brotherlouiee/shahab-demo/pull/258)؛ باز و merge نشده است.
 - Base: `main` (`e207860d82ccaf665241258256565d064ddd901d`).
 - Commit اول PR: `81e4950ad20c4ca38ea5c0333c8460b83da04632`.
-- Commit گزارش و CI قبلی: `0c00da5189feb338029de1fffe037b894ae2712f`. چهار workflow روی این commit موفق شدند؛ شناسه‌های run در `planning-contract-validation.json` ثبت شده‌اند.
-- پس از ثبت همین گزارش یک commit مستنداتی دیگر لازم است؛ CI آن commit نیز باید جداگانه بررسی شود.
+- Commit گزارش و CI قبلی: `442b66b5a5c33379a75d2f6edd0409b844d39204`. چهار workflow روی این commit موفق شدند؛ شناسه‌های run در `planning-contract-validation.json` ثبت شده‌اند.
+- Commit جاری افزودن trade-offها و به‌روزرسانی این گزارش بعد از آن قرار می‌گیرد؛ CI همان commit نیز باید بررسی شود.
 - Git CLI push با نبود username/credential ممکن نبود؛ شاخه و commit از GitHub Git Data API، بر پایه Tree والد `main` ساخته شدند. هیچ force-update یا merge رخ نداده است.

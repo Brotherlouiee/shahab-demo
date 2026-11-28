@@ -88,37 +88,42 @@
         "staged_paths": 7,
         "only_authorized_directory": true
       }
+    },
+    {
+      "test_id": "P5-V14",
+      "status": "PASS",
+      "detail": "16 OPEN decisions and 49 alternatives; every alternative has hypothetical example, benefits, drawbacks, risks and qualitative cost; numeric costs remain UNKNOWN"
     }
   ],
   "summary": {
-    "passed": 13,
+    "passed": 14,
     "failed": 0,
     "overall": "PASS"
   },
   "limitations": [
     "Source reading completeness is separately controlled by P5-B03; structural checks do not prove semantic correctness or owner approval.",
     "Phase 4 Snapshot Validator passed before consumption and after drafting; this is identity evidence, not a substitute for semantic source reading.",
-    "GitHub Actions passed for the latest verified PR head 0c00da5. The final report-only follow-up commit requires its own CI run; source-reading completeness remains NOT PASS."
+    "GitHub Actions passed for latest verified PR head 442b66b. The next commit adds explicit option tradeoff analysis; its docs-only checks must run. Source-reading completeness remains NOT PASS."
   ],
   "external_ci_evidence": {
-    "latest_verified_pr_commit": "0c00da5189feb338029de1fffe037b894ae2712f",
+    "latest_verified_pr_commit": "442b66b5a5c33379a75d2f6edd0409b844d39204",
     "pull_request": 258,
-    "overall": "4/4 workflow runs success; docs-only suites skipped where policy says",
+    "overall": "4/4 workflow runs success; docs-only product suites skipped according to repository policy",
     "workflow_runs": [
       {
         "name": "Quality gates",
-        "run_id": 46116981164,
+        "run_id": 46117168857,
         "conclusion": "success",
         "jobs_skipped": [
           "Loan details browser verification",
-          "Quality gates",
           "Profile OTP real API browser verification",
-          "PostgreSQL migration verification"
+          "PostgreSQL migration verification",
+          "Quality gates"
         ]
       },
       {
         "name": "Security SAST, SCA and secret gates",
-        "run_id": 46116981186,
+        "run_id": 46117168861,
         "conclusion": "success",
         "jobs_skipped": [
           "Python SAST and Python/Node dependency audit"
@@ -127,7 +132,7 @@
       },
       {
         "name": "Container build contract smoke",
-        "run_id": 46116981337,
+        "run_id": 46117168862,
         "conclusion": "success",
         "jobs_skipped": [
           "Build and run two isolated images"
@@ -135,7 +140,7 @@
       },
       {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 46116981394,
+        "run_id": 46117168864,
         "conclusion": "success",
         "jobs_skipped": [
           "Independent original-vs-candidate route evidence"
@@ -143,6 +148,6 @@
       }
     ],
     "docs_classifiers": "all success",
-    "latest_head_after_report_revision": "PENDING"
+    "option_tradeoff_update_commit_ci": "PENDING"
   }
 }

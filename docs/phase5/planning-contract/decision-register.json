@@ -177,7 +177,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) یک Task",
+          "example": "یک Task به‌عنوان Deliverable یک هفته‌ای؛ مثال فرضی: «ساخت endpoint جست‌وجوی مقررات».",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "واحد ساده و قابل پیگیری؛ هزینه مدل پایین.",
+          "drawbacks": "ممکن است کار فنی بدون ارزش مستقل/مصرف‌کننده را deliverable جا بزند؛ چند Task مکمل جدا می‌شوند.",
+          "risks": "تحویل‌های جزیره‌ای و اشتباه‌گرفتن WBS با انتشار.",
+          "cost_and_effort": "هزینه پیاده‌سازی/پیگیری کم؛ هزینه دوباره‌کاری و هماهنگی بین Taskها می‌تواند بالا باشد؛ مقدار نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) Package",
+          "example": "یک Package معادل Deliverable؛ مثال فرضی: Package «کاتالوگ پویا».",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "نقشه مدیریتی ساده و trace به بسته موجود.",
+          "drawbacks": "Package ممکن است بزرگ‌تر از یک چرخه یا فاقد outcome مستقل باشد.",
+          "risks": "چرخه‌های چند‌هفته‌ای یا ادعای پایان بر اساس تکمیل بسته.",
+          "cost_and_effort": "هزینه مدل کم؛ مدت/هزینه بسته از داده فعلی قابل استخراج نیست.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) outcome-based deliverable با ارجاع چند WBS node (پیشنهاد).",
+          "example": "Outcome که چند Task/Subtask از چند Package را با هم مصرف کند؛ مثال فرضی: «کاربر می‌تواند یک محصول وام معتبر را پیدا و با منبعش مقایسه کند».",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ارزش و مصرف مستقل را روشن می‌کند؛ مناسب توسعه تدریجی و reuse.",
+          "drawbacks": "نیازمند قاعده allocation، evidence و حفاظت از عدم دوباره‌شماری.",
+          "risks": "بسته‌بندی outcome صوری یا اتصال اشتباه کار/الزام.",
+          "cost_and_effort": "هزینه تدوین بیشتر از A/B؛ احتمال کاهش دوباره‌کاری، ولی اندازه‌گیری نشده؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D02",
@@ -217,7 +249,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) Task only",
+          "example": "فقط Task تخصیص‌پذیر باشد؛ مثال: کل TASK:CORE:C01:008 به یک outcome.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ساده و نزدیک به WBS.",
+          "drawbacks": "Task درشت است و ممکن است فقط بخشی در deliverable مصرف شود.",
+          "risks": "دوباره‌شماری وقتی یک Task چند outcome را پشتیبانی می‌کند.",
+          "cost_and_effort": "هزینه مدل کم؛ هزینه انعطاف/تخصیص بخشی بالقوه بالا.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) subtask only",
+          "example": "فقط Subtask تخصیص‌پذیر باشد؛ مثال: یک Subtask قرارداد مصرف‌کننده.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "دانه‌بندی دقیق‌تر و قابل estimate.",
+          "drawbacks": "ممکن است وزن/ effort یا سهم دقیق Subtask در parent معلوم نباشد.",
+          "risks": "شمارش هم‌زمان parent و child یا تفسیر Subtask مستقل از parent.",
+          "cost_and_effort": "هزینه ثبت/ممیزی بیشتر؛ effort واقعی نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) mixed leaf allocation to smallest independently estimable unit (پیشنهاد).",
+          "example": "دانه‌بندی مختلط با یک leaf allocation rule؛ مثال: یک Task کامل یا فقط Subtaskهای بخشی، نه هر دو.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "دامنه‌های مستقل را پشتیبانی و شمارش یک‌باره را enforce می‌کند.",
+          "drawbacks": "قواعد سهم جزئی و انتقال ownership نیازمند طراحی/تصویب است.",
+          "risks": "تخصیص مبهم/متداخل، اگر validator نتواند overlap را پیدا کند.",
+          "cost_and_effort": "هزینه طراحی و اعتبارسنجی بالاتر؛ کاهش دوباره‌شماری قابل‌سنجش پس از داده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D03",
@@ -257,7 +321,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) ظرفیت نفرات اعلامی",
+          "example": "ظرفیت اعلام‌شده برای هر role؛ مثال فرضی: owner هر هفته availability و leave را ثبت می‌کند.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "به برنامهٔ آینده نزدیک است؛ می‌تواند غیبت‌ها را منعکس کند.",
+          "drawbacks": "ممکن است خوش‌بینانه باشد و throughput اثبات‌شده نباشد.",
+          "risks": "تعهد بیش از ظرفیت مؤثر یا حذف تست/review.",
+          "cost_and_effort": "هزینه جمع‌آوری availability کم تا متوسط؛ عدد واقعی هنوز ارائه نشده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) ظرفیت تاریخی",
+          "example": "ظرفیت بر اساس throughput تاریخی؛ مثال: میانگین کار تکمیل‌شدهٔ چرخه‌های مشابه.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "به عملکرد مشاهده‌شده متکی است.",
+          "drawbacks": "نیازمند چرخه‌های قابل‌مقایسه است؛ تاریخچه ابزار Phase 4 نماینده توسعه محصول نیست.",
+          "risks": "کالیبراسیون بر نمونهٔ نامرتبط، پنهان‌کردن تغییر ترکیب تیم.",
+          "cost_and_effort": "هزینه طبقه‌بندی و تحلیل تاریخچه؛ کیفیت داده نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) hybrid declared capacity adjusted by historical throughput (پیشنهاد).",
+          "example": "ترکیب ظرفیت اعلامی با اصلاح تاریخی؛ مثال فرضی: availability ثبت شود و فقط با reference class قابل‌مقایسه تعدیل شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "هم برنامه‌ریزی آینده و هم شواهد واقعی را وارد می‌کند.",
+          "drawbacks": "مدل پیچیده‌تر؛ تعریف روش تعدیل/نمونه لازم است.",
+          "risks": "دقت کاذب در صورت داده کم یا reference class نامعتبر.",
+          "cost_and_effort": "هزینه پیاده‌سازی/کالیبراسیون متوسط؛ صرفه‌جویی اثبات‌نشده؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D04",
@@ -298,7 +394,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) expert single-point",
+          "example": "یک عدد expert single-point؛ مثال فرضی: تخمین reviewer برای اتصال API.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "سبک و سریع برای screening اولیه.",
+          "drawbacks": "عدم‌قطعیت و range را پنهان می‌کند.",
+          "risks": "تعهد قطعی روی یک guess.",
+          "cost_and_effort": "هزینه گردآوری کم؛ هزینه خطای برآورد ممکن است زیاد باشد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) three-point range",
+          "example": "برآورد سه‌نقطه‌ای؛ مثال: optimistic/most likely/pessimistic برای پیاده‌سازی و test.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "دامنه ریسک را آشکارتر می‌کند.",
+          "drawbacks": "اگر اعداد subjective باشند، range هم ساختگی می‌شود.",
+          "risks": "استفاده از midpoint بدون حفظ confidence.",
+          "cost_and_effort": "هزینه تدوین بیشتر؛ مقدارها باید با actual کالیبره شوند.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) evidence-based range with reference class/uncertainty (پیشنهاد).",
+          "example": "Range شواهدمحور با reference class و confidence؛ مثال فرضی: برش مشابهی با PRهای محصولی قابل‌مقایسه.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "مقایسه‌پذیری و calibration را صریح می‌کند.",
+          "drawbacks": "تا جمع‌شدن داده، موارد زیادی Unknown می‌مانند.",
+          "risks": "انتخاب گزینشی سابقه یا مخلوط‌کردن coding و waiting.",
+          "cost_and_effort": "هزینه جمع‌آوری و طبقه‌بندی بالاتر؛ داده فعلی برای برآورد معتبر کافی احراز نشده؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D05",
@@ -337,7 +465,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) token per task analogue",
+          "example": "توکن به‌ازای Task از مشابه‌ها؛ مثال فرضی: تحلیل/کدنویسی/آزمون یک Task مشابه.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "پیش‌بینی زودهنگام و کم‌هزینه.",
+          "drawbacks": "وابسته به همان مدل، prompt، ابزار و اندازه Task است.",
+          "risks": "انتقال بی‌اعتبار مصرف تحلیل ابزار به کدنویسی محصول.",
+          "cost_and_effort": "هزینه پایین برای شروع؛ عدم‌قطعیت بالا، آمار نداریم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) measured per run and stage",
+          "example": "اندازه‌گیری واقعی به تفکیک run و stage؛ مثال: ثبت usage واقعی تحلیل، coding و review.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "actual قابل ممیزی و calibration مستقیم می‌دهد.",
+          "drawbacks": "پیش از اجرا forecast ندارد و ممکن است provider usage ناقص باشد.",
+          "risks": "توکن‌های غیرقابل‌انتساب/مفقود یا استفاده از صورتحساب نامرتبط.",
+          "cost_and_effort": "هزینه instrumentation؛ نرخ قیمت/provider هنوز نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) both with provider/model/time/version fields (پیشنهاد).",
+          "example": "ترکیب forecast analog و اندازه‌گیری run با مدل/version؛ مثال: برآورد range و جایگزینی با actual.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "هم planning و هم یادگیری پس از اجرا را پشتیبانی می‌کند.",
+          "drawbacks": "نیازمند schema و governance واحدها/provider است.",
+          "risks": "مقایسه مدل/قیمت‌های نامشابه بدون normalization.",
+          "cost_and_effort": "هزینه مدل‌سازی بیشتر؛ مقدار پولی نامعلوم؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D06",
@@ -377,7 +537,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) aggregated cost",
+          "example": "یک عدد کل هزینه؛ مثال: یک رقم برای کل Deliverable.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "گزارش ساده.",
+          "drawbacks": "نشان نمی‌دهد build، operate، token یا recovery کدام هزینه است.",
+          "risks": "تصمیم بودجه‌ای بر aggregate گمراه‌کننده.",
+          "cost_and_effort": "جمع‌آوری کم؛ تفکیک و پیش‌بینی نامعتبر.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) cost ledger by category and lifecycle (پیشنهاد)",
+          "example": "دفتر هزینه بر دسته و lifecycle؛ مثال: labor/tool/test/build جدا از API/operation/maintenance.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "قابل ممیزی و مطابق F06 چهار دفتر هزینه.",
+          "drawbacks": "نیازمند نرخ و مالک داده و کنترل واحد است.",
+          "risks": "دوباره‌شماری invoice یا اختلاط Error Budget با پول.",
+          "cost_and_effort": "هزینه نگهداری ledger متوسط؛ نرخ‌های داخلی/ابزار هنوز نامعلوم؛ پیشنهاد پایه.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) cost per successful user outcome after measured.",
+          "example": "هزینه به‌ازای outcome موفق پس از اندازه‌گیری؛ مثال فرضی: هزینه هر پرونده تکمیل‌شده با معیار موفقیت.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ربط هزینه به ارزش واقعی کاربر را نشان می‌دهد.",
+          "drawbacks": "بدون outcome denominator و attribution معتبر محاسبه نمی‌شود.",
+          "risks": "انتساب هزینه به outcome ناقص یا نادیده‌گرفتن failure.",
+          "cost_and_effort": "هزینه instrument/analytics بالاتر؛ فعلاً NOT_MEASURED.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D07",
@@ -417,7 +609,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) weighted score",
+          "example": "امتیاز وزن‌دار؛ مثال فرضی: ارزش/ریسک/یادگیری با وزن‌های توافق‌شده.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "رتبه عددی ساده برای مقایسه می‌دهد.",
+          "drawbacks": "وزن‌ها و مقیاس‌ها می‌توانند سلیقه‌ای/پنهان باشند.",
+          "risks": "score بالا hard constraint را ظاهراً جبران کند.",
+          "cost_and_effort": "هزینه مدل کم؛ هزینه governance/بحث وزن‌ها؛ weights فعلاً ناموجود.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) value evidence with ordinal bands",
+          "example": "باندهای ترتیبی ارزش با evidence؛ مثال: high/medium/low و دلیل قابل مشاهده.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "از دقت کاذب جلوگیری و توضیح‌پذیری را حفظ می‌کند.",
+          "drawbacks": "تفکیک tie و انتخاب بین باندها دشوار است.",
+          "risks": "باندهای مبهم بدون rubrics.",
+          "cost_and_effort": "هزینه شروع پایین‌تر؛ rubric review لازم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) cost-effectiveness after hard constraints (پیشنهاد ترکیبی).",
+          "example": "اول constraints را اعمال و سپس value/cost/learning را با range مقایسه؛ مثال: گزینه مسدود حذف و feasibleها کنار هم.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ریسک hard constraints و uncertainty را حفظ می‌کند.",
+          "drawbacks": "تصمیم نهایی ممکن است همچنان قضاوت owner بخواهد.",
+          "risks": "constraint classification ناقص یا پنهان‌شدن قضاوت.",
+          "cost_and_effort": "هزینه تحلیل بیش‌تر؛ threshold/weight عددی همچنان نامعلوم؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D08",
@@ -458,7 +682,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) WSJF",
+          "example": "WSJF؛ مثال فرضی: مقایسه کارهای feasible با delay cost و size.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "روش شناخته‌شده برای اولویت‌گذاری بر اساس تأخیر.",
+          "drawbacks": "نمره‌ها و تقسیم‌ها ممکن است برای محصول/داده کم نامناسب باشد.",
+          "risks": "خروجی عددی کاذب یا نقض gate.",
+          "cost_and_effort": "هزینه کالیبراسیون نسبتاً بالا؛ عوامل پولی/زمانی موجود نیست.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) weighted scoring",
+          "example": "Weighted score؛ مثال: owner weights برای 14 عامل.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ترجیحات را به معیارهای آشکار تبدیل می‌کند.",
+          "drawbacks": "به وزن و scale تصویب‌شده نیاز دارد.",
+          "risks": "سیاست/تعصب پنهان در وزن‌دهی.",
+          "cost_and_effort": "هزینه workshop و نگهداری weights؛ هنوز تصویب نشده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) constraint-first then multi-criteria Pareto/owner choice (پیشنهاد).",
+          "example": "Constraint-first سپس Pareto/decision table؛ مثال: سخت‌گیری امنیتی، سپس مقایسه feasibleها در value/cost/risk.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "قیود غیرقابل جبران را جدا و trade-off را قابل‌دیدن می‌کند.",
+          "drawbacks": "رتبه خطی یگانه نمی‌دهد؛ owner choice لازم است.",
+          "risks": "انتخاب معیارها/محدوده Pareto می‌تواند پنهان بماند.",
+          "cost_and_effort": "هزینه تحلیل متوسط؛ عدد سازی نمی‌کند؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D09",
@@ -500,7 +756,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) manual owner-approved",
+          "example": "دستی و owner-approved؛ مثال: مالک deliverableها را در چرخه ۷روزه قرار می‌دهد.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "کنترل انسانی و مسئولیت روشن.",
+          "drawbacks": "مقیاس‌پذیری و تکرارپذیری کمتر.",
+          "risks": "نقض ظرفیت یا omission وابستگی با خطای انسانی.",
+          "cost_and_effort": "هزینه ابزار کم؛ زمان دستی نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) heuristic auto schedule",
+          "example": "Heuristic auto-schedule؛ مثال: اولویت و estimate را با ظرفیت bin packing ترکیب کند.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "سریع برای پیشنهاد schedule.",
+          "drawbacks": "خروجی حساس به heuristic و tie-break است.",
+          "risks": "پنهان‌کردن infeasibility یا policy order.",
+          "cost_and_effort": "هزینه ساخت/نگهداری متوسط؛ implementation estimate نداریم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) constraint solver after validated inputs, human-approved (پیشنهاد).",
+          "example": "Constraint solver پس از ورودی معتبر و human approval؛ مثال: hard dependencies/capacity, سپس owner تأیید.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "محدودیت‌ها را صریح و feasibility را قابل‌اثبات می‌کند.",
+          "drawbacks": "مدل‌سازی و داده ورودی دشوار؛ solver output نیاز به توضیح دارد.",
+          "risks": "خطای مدل قیود/داده یا اعتماد بی‌جا به optimum.",
+          "cost_and_effort": "هزینه توسعه/آزمون بالاتر؛ ظرفیت و estimate فعلاً نامعلوم؛ پیشنهاد مرحله‌ای.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D10",
@@ -537,7 +825,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) decision ledger in canonical data",
+          "example": "Ledger داخلی canonical؛ مثال: یک P5 decision record مرجع وضعیت است.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "منبع واحد و validation مستقیم.",
+          "drawbacks": "نیازمند workflow/notification در آینده.",
+          "risks": "ثبت دستی ناقص یا ownership نامشخص.",
+          "cost_and_effort": "هزینه ابزار/نگهداری پایین تا متوسط.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) issue/ADR external IDs",
+          "example": "ارجاع به Issue/ADR خارجی؛ مثال: issue ID، owner، approval evidence.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "از workflow موجود و discussion بهره می‌برد.",
+          "drawbacks": "متن/status بیرون repo ممکن است حذف/تغییر کند.",
+          "risks": "ارجاع broken یا نبود snapshot approval evidence.",
+          "cost_and_effort": "هزینه integration کم اما وابستگی خارجی و نگهداری.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) both with one authoritative source (پیشنهاد).",
+          "example": "Registry canonical داخلی با issue به‌عنوان evidence؛ مثال: registry stores status/locator, issue stores discussion.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "یک منبع fact را نگه می‌دارد و history گفت‌وگو را لینک می‌دهد.",
+          "drawbacks": "دو سامانه باید reconcile شوند؛ registry همچنان authority است.",
+          "risks": "در صورت اشتباه‌گرفتن issue با approval، status drift.",
+          "cost_and_effort": "هزینه integration و reconciliation بیشتر؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D11",
@@ -578,7 +898,49 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) 80/20 baseline",
+          "example": "نسبت مبنای O5-09 برابر ۸۰/۲۰؛ مثال: چرخه عادی طبق baseline approved.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "baseline ثابت سیاستی روشن.",
+          "drawbacks": "برای کار بحرانی یا uncertainty مناسب نیست اگر criteria نادیده گرفته شود.",
+          "risks": "استفاده از آن به‌صورت quota خشک و نادیده‌گرفتن شرایط.",
+          "cost_and_effort": "هزینه سیاستی ندارد؛ ظرفیت کل هنوز نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) 90/10 critical",
+          "example": "نسبت O5-09 کار بحرانی ۹۰/۱۰؛ مثال: اقدام delivery برای رفع risk حیاتی با ثبت classification.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "delivery تمرکز بالاتری دارد.",
+          "drawbacks": "Discovery را موقتاً کوچک می‌کند.",
+          "risks": "هر کار فوری «critical» نامیده شود بدون شاهد.",
+          "cost_and_effort": "همان ظرفیت کل؛ هزینه فرصت discovery.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) 70/30 uncertain timeboxed",
+          "example": "نسبت O5-09 نامطمئن ۷۰/۳۰ با timebox؛ مثال: آزمون feasibility برای مسیر پلتفرمی نامطمئن.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "یادگیری قبل از commitment بزرگ‌تر می‌شود.",
+          "drawbacks": "delivery share کمتر و discovery نیازمند سؤال/حد زمانی است.",
+          "risks": "PoC بی‌پایان یا جایگزین‌کردن deliverable.",
+          "cost_and_effort": "هزینه opportunity cost و timebox; ساعت واقعی Unknown.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "D) apply O5-09 criteria with owner chosen per planning window (پیشنهاد).",
+          "example": "طبقه‌بندی هر planning window طبق criteria O5-09؛ مثال: مالک شواهد تعیین می‌کند کدام حالت مصوب اعمال شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "اصل مصوب را با وضعیت واقعی چرخه مرتبط می‌کند.",
+          "drawbacks": "نیازمند معیار تشخیص/تصویب روشن برای موارد مرزی.",
+          "risks": "انتخاب موردی ratio برای توجیه رتبه‌بندی.",
+          "cost_and_effort": "هزینه governance متوسط؛ تصمیم policy بازگشایی نمی‌شود؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D12",
@@ -619,7 +981,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) risk register",
+          "example": "Risk register جدا؛ مثال: blocker و mitigation به deliverable لینک شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "مالک، اثر و اقدام را آشکار می‌کند.",
+          "drawbacks": "uncertainty estimate به‌صورت جدا ممکن است بماند.",
+          "risks": "ریسک فهرست می‌شود اما در schedule دیده نمی‌شود.",
+          "cost_and_effort": "هزینه نگهداری کم/متوسط؛ mitigation cost Unknown.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) estimate range",
+          "example": "Range estimate؛ مثال: low/likely/high برای duration.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "محدوده estimate را آشکار می‌کند.",
+          "drawbacks": "ریسک‌های غیرزمانی/approval را کامل نشان نمی‌دهد.",
+          "risks": "range ساختگی یا استفاده از midpoint قطعی.",
+          "cost_and_effort": "هزینه جمع‌آوری داده بیشتر؛ فعلاً مقادیر Unknown.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) linked risk+estimate uncertainty with confidence state (پیشنهاد).",
+          "example": "Risk و uncertainty مشترک با evidence/status؛ مثال: estimate range به risk/decision blocker و mitigation وصل شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "یکپارچه و قابل‌ردیابی، unknownها مستقل از اعداد می‌مانند.",
+          "drawbacks": "schema پیچیده‌تر و نیازمند نگهداری link.",
+          "risks": "ارتباط‌های حدسی به‌عنوان dependency واقعی خوانده شوند.",
+          "cost_and_effort": "هزینه data modeling/validation متوسط؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D13",
@@ -661,7 +1055,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) task DoD",
+          "example": "فقط Task DoD؛ مثال: کد/test Task پاس شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "حداقل لازم برای مدیریت engineering.",
+          "drawbacks": "ارزش کاربر، deployment و release gate را پوشش کامل نمی‌دهد.",
+          "risks": "Merge به‌عنوان تحویل محصول تفسیر شود.",
+          "cost_and_effort": "هزینه پایین اما acceptance نقص دارد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) user outcome acceptance + technical release gates (پیشنهاد)",
+          "example": "Outcome acceptance + release gates مصوب؛ مثال: outcome قابل مشاهده و evidence به REL version وصل.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ارزش محصول و safety را هر دو می‌سنجد؛ با §5.2.1 سازگار.",
+          "drawbacks": "نیازمند oracle و شواهد واقعی برای هر release.",
+          "risks": "خلاصه‌سازی جایگزین متن مصوب RG/REL شود.",
+          "cost_and_effort": "هزینه تست/monitoring بیشتر و لازم؛ thresholdها Unknown تا تصویب.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) stage acceptance only.",
+          "example": "فقط معیار تکمیل مرحله؛ مثال: کل stage 1 پس از همه الزامات بسته شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "از ادعای پایان ناقص مرحله جلوگیری می‌کند.",
+          "drawbacks": "برای انتشارهای هفتگی feedback زودهنگام نمی‌دهد.",
+          "risks": "مرحله به انتشار غیراستقلالی تبدیل شود.",
+          "cost_and_effort": "هزینه بزرگ و زمان نامعلوم؛ با release readiness تنها سازگار نیست.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D14",
@@ -702,7 +1128,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) Markdown canonical",
+          "example": "Markdown canonical؛ مثال: یک فایل مرکزی برنامه با جدول‌ها.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "برای owner قابل‌خواندن و ساده.",
+          "drawbacks": "parse/query/validation و ساختارهای گرافی دشوارتر می‌شوند.",
+          "risks": "روایت مشتق‌ها با متن همگام نماند.",
+          "cost_and_effort": "هزینه ابزار کم؛ هزینه human reconciliation ممکن است بالا.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) JSON canonical with generated Markdown/CSV/HTML (پیشنهاد)",
+          "example": "JSON canonical با Markdown/CSV/HTML مشتق؛ مثال: یک record مرجع و render در CI.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "ماشین‌خوان، diffable، قابل اعتبارسنجی؛ خروجی انسانی مشتق می‌شود.",
+          "drawbacks": "به schema/version/renderer و discipline نیاز دارد.",
+          "risks": "تولید دستی یکی از خروجی‌ها منبع دوم شود.",
+          "cost_and_effort": "هزینه ساخت validator/renderer متوسط؛ measurable only after prototype; پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) database canonical.",
+          "example": "Database canonical؛ مثال فرضی: relational DB for registry and graph projections.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "query/access control/transaction قابلیت دارد.",
+          "drawbacks": "برای repo review/portability و snapshot workflow سربار دارد.",
+          "risks": "service/db dependency زودهنگام بدون مصرف‌کننده.",
+          "cost_and_effort": "هزینه infra/backup/ops بالاتر و نامعلوم؛ فعلاً نیاز اثبات نشده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D15",
@@ -742,7 +1200,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) schema only",
+          "example": "فقط schema validation؛ مثال: required fields/types/unique IDs.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "سریع، deterministic و کم‌هزینه.",
+          "drawbacks": "policy semantics و graph cross-ref را نمی‌سنجد.",
+          "risks": "JSON معتبر اما از نظر معنا غیرممکن قبول شود.",
+          "cost_and_effort": "هزینه پیاده‌سازی پایین.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) layered schema+crossref+policy+constraint validation (پیشنهاد)",
+          "example": "Validation لایه‌ای schema+crossref+policy+constraint؛ مثال: gate statuses, source refs, cycles, capacity checks.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "خطاهای ساختاری و برنامه‌ای را زود می‌گیرد.",
+          "drawbacks": "مدل policy validator باید دقیق و نگهداری‌شده باشد.",
+          "risks": "validator ادعای semantic approval یا parallel safety کند.",
+          "cost_and_effort": "هزینه توسعه/fixture/test متوسط تا بالا؛ نیاز آینده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) manual review only.",
+          "example": "بازبینی دستی؛ مثال: owner و reviewer هر version را چک کنند.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "قضاوت زمینه‌ای/سیاستی را پوشش می‌دهد.",
+          "drawbacks": "قابل تکرار و مقیاس‌پذیری پایین؛ خطای انسانی.",
+          "risks": "تفاوت در سلیقه و از قلم افتادن ref.",
+          "cost_and_effort": "هزینه انسانی در هر release؛ با validator جایگزین نمی‌شود.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     },
     {
       "decision_id": "P5-D16",
@@ -784,7 +1274,39 @@
         "approver": null,
         "approved_at": null,
         "evidence": null
-      }
+      },
+      "option_tradeoff_analysis": [
+        {
+          "option": "A) fixed baseline",
+          "example": "برنامه baseline ثابت؛ مثال: تغییر فقط با اصلاح نسخه/تصویب کامل.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "پایداری بالا و جابه‌جایی کم.",
+          "drawbacks": "به actual و تغییرات جدید دیر واکنش می‌دهد.",
+          "risks": "تعهد ناممکن پابرجا بماند یا شکست پنهان شود.",
+          "cost_and_effort": "هزینه change-control بالا؛ replan effort نامعلوم.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "B) rolling horizon",
+          "example": "Rolling horizon؛ مثال: هر چرخه برنامه هفته‌های آینده تازه شود.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "سازگار با یادگیری/تخمین actual.",
+          "drawbacks": "بدون audit trail ممکن است گذشته را بازنویسی کند.",
+          "risks": "scope/policy drift خاموش.",
+          "cost_and_effort": "هزینه بازبرنامه‌ریزی تکرارشونده.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        },
+        {
+          "option": "C) rolling horizon with immutable release history and audited diff (پیشنهاد).",
+          "example": "Rolling horizon با تاریخچه release تغییرناپذیر و diff تأییدشده؛ مثال: future only changes, prior release evidence pinned.",
+          "example_type": "HYPOTHETICAL",
+          "benefits": "انعطاف آینده را با حفظ release/contracts ترکیب می‌کند.",
+          "drawbacks": "نیازمند version history، impact analysis و approval state است.",
+          "risks": "تشخیص ناقص تغییر مؤثر بر release قبلی.",
+          "cost_and_effort": "هزینه governance/validation متوسط؛ پیشنهاد.",
+          "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
+        }
+      ]
     }
   ]
 }
