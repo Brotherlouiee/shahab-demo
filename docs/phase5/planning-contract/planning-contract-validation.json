@@ -98,34 +98,36 @@
   "limitations": [
     "Source reading completeness is separately controlled by P5-B03; structural checks do not prove semantic correctness or owner approval.",
     "Phase 4 Snapshot Validator passed before consumption and after drafting; this is identity evidence, not a substitute for semantic source reading.",
-    "The initial PR head GitHub CI passed; report/gate update creates a new head, so rerun is required before P5-B16 can PASS."
+    "GitHub Actions passed for the latest verified PR head 0c00da5. The final report-only follow-up commit requires its own CI run; source-reading completeness remains NOT PASS."
   ],
   "external_ci_evidence": {
-    "initial_pr_commit": "81e4950ad20c4ca38ea5c0333c8460b83da04632",
+    "latest_verified_pr_commit": "0c00da5189feb338029de1fffe037b894ae2712f",
     "pull_request": 258,
+    "overall": "4/4 workflow runs success; docs-only suites skipped where policy says",
     "workflow_runs": [
       {
         "name": "Quality gates",
-        "run_id": 46116774728,
+        "run_id": 46116981164,
         "conclusion": "success",
         "jobs_skipped": [
           "Loan details browser verification",
-          "PostgreSQL migration verification",
+          "Quality gates",
           "Profile OTP real API browser verification",
-          "Quality gates"
+          "PostgreSQL migration verification"
         ]
       },
       {
         "name": "Security SAST, SCA and secret gates",
-        "run_id": 46116774749,
+        "run_id": 46116981186,
         "conclusion": "success",
         "jobs_skipped": [
           "Python SAST and Python/Node dependency audit"
-        ]
+        ],
+        "repository_secret_scan": "success"
       },
       {
         "name": "Container build contract smoke",
-        "run_id": 46116774746,
+        "run_id": 46116981337,
         "conclusion": "success",
         "jobs_skipped": [
           "Build and run two isolated images"
@@ -133,15 +135,14 @@
       },
       {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 46116774734,
+        "run_id": 46116981394,
         "conclusion": "success",
         "jobs_skipped": [
           "Independent original-vs-candidate route evidence"
         ]
       }
     ],
-    "repository_secret_scan": "success",
-    "scope": "docs-only; skipped product suites are not claimed as passed",
-    "final_report_commit_ci": "PENDING"
+    "docs_classifiers": "all success",
+    "latest_head_after_report_revision": "PENDING"
   }
 }

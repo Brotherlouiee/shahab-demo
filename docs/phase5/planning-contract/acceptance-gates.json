@@ -256,7 +256,7 @@
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
-      "observed_status": "PENDING_FINAL_HEAD_CI; INITIAL_PR_HEAD_CI_PASS"
+      "observed_status": "PASS_CI_VERIFIED_ON_0c00da5; FOLLOWUP_REPORT_ONLY_COMMIT_CI_PENDING"
     }
   ]
 }
