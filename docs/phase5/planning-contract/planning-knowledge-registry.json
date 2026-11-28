@@ -2663,6 +2663,1609 @@
         "Implementation Plan lines 5939–6000; C13b wallet experience, in-scope opening only"
       ],
       "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "The source defines a plan and test designs; it does not evidence runtime implementation, executed product tests, owner approval of open values, release, or Phase 5 scheduling.",
+      "knowledge_id": "PK-IMP-0036",
+      "source_locator": {
+        "start_line": 5939,
+        "end_line": 6047,
+        "section": "C13b wallet experience, financial records, support and authorization"
+      },
+      "knowledge_statement": "C13b is the owner-bound customer/investigator experience over financial records, not the source of financial truth: queries and exports obey current C02 tenant/member scope and audited capability; source packages own balances, receipt/invoice distinctions, refunds and reconciliation. A support case links to an immutable same-tenant transaction and cannot move money. Unknown remains unknown; inquiry precedes retry. Notification read/click is not consent. Customer financial details require authenticated access; secrets are excluded. The package lists 16 requirements and three planned cases per requirement, but added R13–R16 leave RA/IPA pending revalidation. Export policy, receipt format, case taxonomy/owner, capacity/SLA, evidence retention and attachment/notification preferences remain OPEN.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "C13b"
+      ],
+      "related_task_ids": [
+        "TASK:CORE:C13B:001",
+        "TASK:CORE:C13B:002",
+        "TASK:CORE:C13B:003",
+        "TASK:CORE:C13B:004",
+        "TASK:CORE:C13B:005",
+        "TASK:CORE:C13B:006",
+        "TASK:CORE:C13B:007",
+        "TASK:CORE:C13B:008"
+      ],
+      "related_acceptance_criteria_ids": [
+        "C13B-AC01",
+        "C13B-AC02",
+        "C13B-AC03",
+        "C13B-AC04",
+        "C13B-AC05",
+        "C13B-AC06",
+        "C13B-AC07",
+        "C13B-AC08",
+        "C13B-AC09",
+        "C13B-AC10",
+        "C13B-AC11",
+        "C13B-AC12",
+        "C13B-AC13",
+        "C13B-AC14",
+        "C13B-AC15",
+        "C13B-AC16"
+      ],
+      "related_test_ids": [
+        "C13B-TD01",
+        "C13B-TD02",
+        "C13B-TD03",
+        "C13B-TD04",
+        "C13B-TD05",
+        "C13B-TD06",
+        "C13B-TD07",
+        "C13B-TD08",
+        "C13B-TD09",
+        "C13B-TD10",
+        "C13B-TD11",
+        "C13B-TD12",
+        "C13B-TD13",
+        "C13B-TD14",
+        "C13B-TD15",
+        "C13B-TD16",
+        "C13B-TC01",
+        "C13B-TC02",
+        "C13B-TC03",
+        "C13B-TC04",
+        "C13B-TC05",
+        "C13B-TC06",
+        "C13B-TC07",
+        "C13B-TC08",
+        "C13B-TC09",
+        "C13B-TC10",
+        "C13B-TC11",
+        "C13B-TC12",
+        "C13B-TC13",
+        "C13B-TC14",
+        "C13B-TC15",
+        "C13B-TC16",
+        "C13B-TC17",
+        "C13B-TC18",
+        "C13B-TC19",
+        "C13B-TC20",
+        "C13B-TC21",
+        "C13B-TC22",
+        "C13B-TC23",
+        "C13B-TC24",
+        "C13B-TC25",
+        "C13B-TC26",
+        "C13B-TC27",
+        "C13B-TC28",
+        "C13B-TC29",
+        "C13B-TC30",
+        "C13B-TC31",
+        "C13B-TC32",
+        "C13B-TC33",
+        "C13B-TC34",
+        "C13B-TC35",
+        "C13B-TC36",
+        "C13B-TC37",
+        "C13B-TC38",
+        "C13B-TC39",
+        "C13B-TC40",
+        "C13B-TC41",
+        "C13B-TC42",
+        "C13B-TC43",
+        "C13B-TC44",
+        "C13B-TC45",
+        "C13B-TC46",
+        "C13B-TC47",
+        "C13B-TC48"
+      ],
+      "related_policy_refs": [
+        "C13B-R01",
+        "C13B-R02",
+        "C13B-R03",
+        "C13B-R04",
+        "C13B-R05",
+        "C13B-R06",
+        "C13B-R07",
+        "C13B-R08",
+        "C13B-R09",
+        "C13B-R10",
+        "C13B-R11",
+        "C13B-R12",
+        "C13B-R13",
+        "C13B-R14",
+        "C13B-R15",
+        "C13B-R16"
+      ],
+      "related_open_decision_refs": [
+        "OPEN:C13B:01",
+        "OPEN:C13B:02",
+        "OPEN:C13B:03",
+        "OPEN:C13B:04",
+        "OPEN:C13B:05",
+        "OPEN:C13B:06"
+      ],
+      "typed_dependency_refs": [
+        {
+          "type": "HARD",
+          "reference": "C02",
+          "meaning": "Current permission/scope result before every read or export"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C03",
+          "meaning": "Versioned read/event/correlation/job envelope"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C12a",
+          "meaning": "Owner-managed ledger and history references"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C12b",
+          "meaning": "Unknown and reconciliation state"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C11a",
+          "meaning": "Linked refund/correction reference"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C11b",
+          "meaning": "Owner-managed Job/retry lifecycle"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C14",
+          "meaning": "Message history and delivery state"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C07-C10",
+          "meaning": "Rights, funding, reservation and transfer remain in their owning packages"
+        }
+      ],
+      "planning_implication": "Plan C13b consumer work against versioned owner APIs and current authorization; represent access, support, financial state and notification state separately. Keep export and support-service commitments blocked on explicit open owner choices. Preserve PK-IMP-0035 as evidence of the partial opening; this record completes the same section without recounting lines 5939–6000.",
+      "evidence_refs": [
+        "Implementation Plan lines 5939–6047; C13B-R01–R16; AC/TD/TC definitions; C13b dependency register"
+      ]
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "The source defines a plan and test designs; it does not evidence runtime implementation, executed product tests, owner approval of open values, release, or Phase 5 scheduling.",
+      "knowledge_id": "PK-IMP-0037",
+      "source_locator": {
+        "start_line": 6048,
+        "end_line": 6150,
+        "section": "C14 shared message history, notifications, monitoring and observability"
+      },
+      "knowledge_statement": "C14 is a shared contract/consumer boundary: source services own data, transaction, Job and any justified local outbox; an event is only a candidate and cannot itself authorize an action or notification. Eligibility includes entitlement, purpose, consent, minimum data, freshness/scope and relevance. Version-aware dedup/replacement/revocation preserves lineage. Durable In-App history, send state, delivery, read and action are separate. Push needs HTTPS, service worker, supported platform and user permission; send acceptance is not delivery. Financial details require authenticated access, message read is not consent, logs/metrics/traces are structured, correlated and redacted, and RUM covers performance only without replay/content capture. User Monitoring is a distinct Silver/Gold entitlement feature and is inactive in Bronze. Provider, costs, templates, cap/fee, thresholds, retention and SLI/SLO remain open.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "C14"
+      ],
+      "related_task_ids": [
+        "TASK:CORE:C14:001",
+        "TASK:CORE:C14:002",
+        "TASK:CORE:C14:003",
+        "TASK:CORE:C14:004",
+        "TASK:CORE:C14:005",
+        "TASK:CORE:C14:006",
+        "TASK:CORE:C14:007",
+        "TASK:CORE:C14:008"
+      ],
+      "related_acceptance_criteria_ids": [
+        "C14-AC01",
+        "C14-AC02",
+        "C14-AC03",
+        "C14-AC04",
+        "C14-AC05",
+        "C14-AC06",
+        "C14-AC07",
+        "C14-AC08",
+        "C14-AC09",
+        "C14-AC10",
+        "C14-AC11",
+        "C14-AC12",
+        "C14-AC13",
+        "C14-AC14",
+        "C14-AC15",
+        "C14-AC16"
+      ],
+      "related_test_ids": [
+        "C14-TD01",
+        "C14-TD02",
+        "C14-TD03",
+        "C14-TD04",
+        "C14-TD05",
+        "C14-TD06",
+        "C14-TD07",
+        "C14-TD08",
+        "C14-TD09",
+        "C14-TD10",
+        "C14-TD11",
+        "C14-TD12",
+        "C14-TD13",
+        "C14-TD14",
+        "C14-TD15",
+        "C14-TD16",
+        "C14-TC01",
+        "C14-TC02",
+        "C14-TC03",
+        "C14-TC04",
+        "C14-TC05",
+        "C14-TC06",
+        "C14-TC07",
+        "C14-TC08",
+        "C14-TC09",
+        "C14-TC10",
+        "C14-TC11",
+        "C14-TC12",
+        "C14-TC13",
+        "C14-TC14",
+        "C14-TC15",
+        "C14-TC16",
+        "C14-TC17",
+        "C14-TC18",
+        "C14-TC19",
+        "C14-TC20",
+        "C14-TC21",
+        "C14-TC22",
+        "C14-TC23",
+        "C14-TC24",
+        "C14-TC25",
+        "C14-TC26",
+        "C14-TC27",
+        "C14-TC28",
+        "C14-TC29",
+        "C14-TC30",
+        "C14-TC31",
+        "C14-TC32",
+        "C14-TC33",
+        "C14-TC34",
+        "C14-TC35",
+        "C14-TC36",
+        "C14-TC37",
+        "C14-TC38",
+        "C14-TC39",
+        "C14-TC40",
+        "C14-TC41",
+        "C14-TC42",
+        "C14-TC43",
+        "C14-TC44",
+        "C14-TC45",
+        "C14-TC46",
+        "C14-TC47",
+        "C14-TC48"
+      ],
+      "related_policy_refs": [
+        "C14-R01",
+        "C14-R02",
+        "C14-R03",
+        "C14-R04",
+        "C14-R05",
+        "C14-R06",
+        "C14-R07",
+        "C14-R08",
+        "C14-R09",
+        "C14-R10",
+        "C14-R11",
+        "C14-R12",
+        "C14-R13",
+        "C14-R14",
+        "C14-R15",
+        "C14-R16"
+      ],
+      "related_open_decision_refs": [
+        "OPEN:C14:01",
+        "OPEN:C14:02",
+        "OPEN:C14:03",
+        "OPEN:C14:04",
+        "OPEN:C14:05",
+        "OPEN:C14:06",
+        "OPEN:C14:07",
+        "OPEN:C14:08",
+        "OPEN:C14:09",
+        "OPEN:C14:10"
+      ],
+      "typed_dependency_refs": [
+        {
+          "type": "HARD",
+          "reference": "C02",
+          "meaning": "Authorization/privacy before shared consumers"
+        },
+        {
+          "type": "HARD",
+          "reference": "C03",
+          "meaning": "Common versioned contracts before shared consumers"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C01",
+          "meaning": "Telemetry/envelope and reliability contract"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C04",
+          "meaning": "Entitlement/subscription facts"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C11b",
+          "meaning": "Job lifecycle supplied by its owner"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C12a",
+          "meaning": "Immutable financial facts"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C12b",
+          "meaning": "Reconciliation and unknown outcome"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C13b",
+          "meaning": "Consumer of logical history/delivery"
+        }
+      ],
+      "planning_implication": "Represent notification/event contracts and owner handoffs explicitly; avoid manufacturing full precedence among packages. Separate operational telemetry from financial records and user Monitoring from Feedforward. Release/acceptance evidence must preserve test-design-only status and leave channel, cost and thresholds to owners.",
+      "evidence_refs": [
+        "Implementation Plan lines 6048–6150; C14-R01–R16; C14-AC01–AC16; C14-TD01–TD16; dependency register; CPA-01–CPA-08"
+      ]
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "The source defines a plan and test designs; it does not evidence runtime implementation, executed product tests, owner approval of open values, release, or Phase 5 scheduling.",
+      "knowledge_id": "PK-IMP-0038",
+      "source_locator": {
+        "start_line": 6048,
+        "end_line": 6150,
+        "section": "C13b/C14 revalidation status and planning-only evidence"
+      },
+      "knowledge_statement": "C13b RA and IPA are PENDING REVALIDATION after additions R13–R16; C14 RA/IPA are also PENDING REVALIDATION. Shared C13b/C14 CPA-01 is PENDING REVALIDATION; CPA-02–CPA-08 are reported PASS as plan crosswalk results only. The source explicitly says no runtime product tests were executed. Historical checkpoint counts are historical, not current acceptance. Do not turn these audit states into release evidence or product PASS.",
+      "knowledge_type": "ACCEPTED_TEST_DESIGN_NOT_EXECUTED",
+      "authority_status": "ACCEPTED_TEST_DESIGN_NOT_EXECUTED",
+      "related_package_ids": [
+        "C13b",
+        "C14"
+      ],
+      "related_task_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
+      "typed_dependency_refs": [],
+      "planning_implication": "Keep product execution, package revalidation, graph candidate discovery and planning acceptance distinct. Crosswalk the records in F01.6; no acceptance gate is satisfied by this document-only study.",
+      "evidence_refs": [
+        "Implementation Plan lines 6038–6045; 6126–6150; C13b RA/IPA status; C14 RA/IPA and shared CPA status"
+      ]
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [
+        "TASK:RAG:R01:001.S01",
+        "TASK:RAG:R01:001.S02",
+        "TASK:RAG:R01:001.S03",
+        "TASK:RAG:R01:002.S01",
+        "TASK:RAG:R01:002.S02",
+        "TASK:RAG:R01:002.S03",
+        "TASK:RAG:R01:003.S01",
+        "TASK:RAG:R01:003.S02",
+        "TASK:RAG:R01:003.S03",
+        "TASK:RAG:R01:004.S01",
+        "TASK:RAG:R01:004.S02",
+        "TASK:RAG:R01:004.S03",
+        "TASK:RAG:R01:005.S01",
+        "TASK:RAG:R01:005.S02",
+        "TASK:RAG:R01:005.S03"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D12",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "Document content records accepted planning design only. It does not evidence runtime implementation, owner decision for open parameters, executed product tests, publication, or Phase 5 schedule.",
+      "knowledge_id": "PK-IMP-0039",
+      "source_locator": {
+        "start_line": 6151,
+        "end_line": 6278,
+        "section": "R01 admission, query understanding and risk-based retrieval"
+      },
+      "knowledge_statement": "R01 owns admission/query decomposition/route and per-need evidence decision, while R02 controls source access, R03 owns published knowledge/Snapshot and C01/C02 govern authenticity/permission. Complex requests are decomposed; sufficient low-risk evidence avoids unnecessary live retrieval; each material claim has its own evidence outcome. Retrieval fallback/retry is bounded and stale/unknown is disclosed. Numeric risk, time/cost budgets, threshold and retention remain open. 10 requirements; planned tests not executed.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "R01"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R01:001",
+        "TASK:RAG:R01:002",
+        "TASK:RAG:R01:003",
+        "TASK:RAG:R01:004",
+        "TASK:RAG:R01:005"
+      ],
+      "related_acceptance_criteria_ids": [
+        "AC:RAG:R01:001",
+        "AC:RAG:R01:002",
+        "AC:RAG:R01:003",
+        "AC:RAG:R01:004",
+        "AC:RAG:R01:005",
+        "AC:RAG:R01:006",
+        "AC:RAG:R01:007",
+        "AC:RAG:R01:008",
+        "AC:RAG:R01:009",
+        "AC:RAG:R01:010"
+      ],
+      "related_test_ids": [
+        "TEST:RAG:R01:001",
+        "TEST:RAG:R01:002",
+        "TEST:RAG:R01:003",
+        "TEST:RAG:R01:004",
+        "TEST:RAG:R01:005",
+        "TEST:RAG:R01:006",
+        "TEST:RAG:R01:007",
+        "TEST:RAG:R01:008",
+        "TEST:RAG:R01:009",
+        "TEST:RAG:R01:010",
+        "TC:RAG:R01:001-P",
+        "TC:RAG:R01:001-N",
+        "TC:RAG:R01:002-P",
+        "TC:RAG:R01:002-N",
+        "TC:RAG:R01:003-P",
+        "TC:RAG:R01:003-N",
+        "TC:RAG:R01:004-P",
+        "TC:RAG:R01:004-N",
+        "TC:RAG:R01:005-P",
+        "TC:RAG:R01:005-N",
+        "TC:RAG:R01:006-P",
+        "TC:RAG:R01:006-N",
+        "TC:RAG:R01:007-P",
+        "TC:RAG:R01:007-N",
+        "TC:RAG:R01:008-P",
+        "TC:RAG:R01:008-N",
+        "TC:RAG:R01:009-P",
+        "TC:RAG:R01:009-N",
+        "TC:RAG:R01:010-P",
+        "TC:RAG:R01:010-N"
+      ],
+      "related_policy_refs": [
+        "REQ:RAG:R01:001",
+        "REQ:RAG:R01:002",
+        "REQ:RAG:R01:003",
+        "REQ:RAG:R01:004",
+        "REQ:RAG:R01:005",
+        "REQ:RAG:R01:006",
+        "REQ:RAG:R01:007",
+        "REQ:RAG:R01:008",
+        "REQ:RAG:R01:009",
+        "REQ:RAG:R01:010"
+      ],
+      "related_open_decision_refs": [],
+      "typed_dependency_refs": [
+        {
+          "type": "CONTRACT",
+          "reference": "C01",
+          "meaning": "service catalogue, authenticity and versioned trace"
+        },
+        {
+          "type": "HARD",
+          "reference": "C02",
+          "meaning": "current identity, scope and permission before personal-data access"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R02",
+          "meaning": "authorized live source access and typed result"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R03",
+          "meaning": "published Snapshot and evidence metadata"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C14",
+          "meaning": "redacted telemetry"
+        }
+      ],
+      "planning_implication": "Carry exact ownership, evidence and uncertainty distinctions into F01.6. Keep package plans and tests separate from product execution; do not create a Phase 5 sequence or resolve open owner choices.",
+      "evidence_refs": [
+        "Implementation Plan lines 6151–6278; R01 requirements, task/subtask, acceptance and planned test tables"
+      ]
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [
+        "TASK:RAG:R02:001.S01",
+        "TASK:RAG:R02:001.S02",
+        "TASK:RAG:R02:001.S03",
+        "TASK:RAG:R02:002.S01",
+        "TASK:RAG:R02:002.S02",
+        "TASK:RAG:R02:002.S03",
+        "TASK:RAG:R02:003.S01",
+        "TASK:RAG:R02:003.S02",
+        "TASK:RAG:R02:003.S03",
+        "TASK:RAG:R02:004.S01",
+        "TASK:RAG:R02:004.S02",
+        "TASK:RAG:R02:004.S03",
+        "TASK:RAG:R02:005.S01",
+        "TASK:RAG:R02:005.S02",
+        "TASK:RAG:R02:005.S03"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D12",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "Document content records accepted planning design only. It does not evidence runtime implementation, owner decision for open parameters, executed product tests, publication, or Phase 5 schedule.",
+      "knowledge_id": "PK-IMP-0040",
+      "source_locator": {
+        "start_line": 6279,
+        "end_line": 6417,
+        "section": "R02 source access, DDI and extraction QA"
+      },
+      "knowledge_statement": "R02 owns authorized source adapters, SourceAccessResult, demand-driven ingestion, acquisition provenance and extraction QA. Access must be preflighted for rights/security, including every redirect; prohibited auth/CAPTCHA/ToS bypass and unsafe destination are denied. DDI only follows an accepted gap and hands candidate plus raw acquisition facts to R03; R02 cannot assign legal document/version identity or publish a Snapshot. Raw spans/hash are preserved beside Persian normalized views; ambiguous extraction is quarantined; external instructions remain untrusted. Idempotent job recovery is required without making a broker default. Source rights, source list, rate, OCR, schema, storage, scheduler and retention remain open; all product tests NOT_EXECUTED.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "R02"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R02:001",
+        "TASK:RAG:R02:002",
+        "TASK:RAG:R02:003",
+        "TASK:RAG:R02:004",
+        "TASK:RAG:R02:005"
+      ],
+      "related_acceptance_criteria_ids": [
+        "AC:RAG:R02:001",
+        "AC:RAG:R02:002",
+        "AC:RAG:R02:003",
+        "AC:RAG:R02:004",
+        "AC:RAG:R02:005",
+        "AC:RAG:R02:006",
+        "AC:RAG:R02:007",
+        "AC:RAG:R02:008",
+        "AC:RAG:R02:009",
+        "AC:RAG:R02:010"
+      ],
+      "related_test_ids": [
+        "TEST:RAG:R02:001",
+        "TEST:RAG:R02:002",
+        "TEST:RAG:R02:003",
+        "TEST:RAG:R02:004",
+        "TEST:RAG:R02:005",
+        "TEST:RAG:R02:006",
+        "TEST:RAG:R02:007",
+        "TEST:RAG:R02:008",
+        "TEST:RAG:R02:009",
+        "TEST:RAG:R02:010",
+        "TC:RAG:R02:001-P",
+        "TC:RAG:R02:001-N",
+        "TC:RAG:R02:002-P",
+        "TC:RAG:R02:002-N",
+        "TC:RAG:R02:003-P",
+        "TC:RAG:R02:003-N",
+        "TC:RAG:R02:004-P",
+        "TC:RAG:R02:004-N",
+        "TC:RAG:R02:005-P",
+        "TC:RAG:R02:005-N",
+        "TC:RAG:R02:006-P",
+        "TC:RAG:R02:006-N",
+        "TC:RAG:R02:007-P",
+        "TC:RAG:R02:007-N",
+        "TC:RAG:R02:008-P",
+        "TC:RAG:R02:008-N",
+        "TC:RAG:R02:009-P",
+        "TC:RAG:R02:009-N",
+        "TC:RAG:R02:010-P",
+        "TC:RAG:R02:010-N"
+      ],
+      "related_policy_refs": [
+        "REQ:RAG:R02:001",
+        "REQ:RAG:R02:002",
+        "REQ:RAG:R02:003",
+        "REQ:RAG:R02:004",
+        "REQ:RAG:R02:005",
+        "REQ:RAG:R02:006",
+        "REQ:RAG:R02:007",
+        "REQ:RAG:R02:008",
+        "REQ:RAG:R02:009",
+        "REQ:RAG:R02:010"
+      ],
+      "related_open_decision_refs": [],
+      "typed_dependency_refs": [
+        {
+          "type": "HARD",
+          "reference": "R01",
+          "meaning": "accepted need gap triggers DDI"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R03",
+          "meaning": "candidate handoff; canonical identity, legal version and publication"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R04",
+          "meaning": "source discovery/catalog and recorded use policy"
+        },
+        {
+          "type": "HARD",
+          "reference": "C01-C02",
+          "meaning": "security, authenticity and identity/scope controls"
+        }
+      ],
+      "planning_implication": "Carry exact ownership, evidence and uncertainty distinctions into F01.6. Keep package plans and tests separate from product execution; do not create a Phase 5 sequence or resolve open owner choices.",
+      "evidence_refs": [
+        "Implementation Plan lines 6279–6417; R02 requirements, task/subtask, acceptance and planned test tables"
+      ]
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [
+        "TASK:RAG:R03:001.S01",
+        "TASK:RAG:R03:001.S02",
+        "TASK:RAG:R03:001.S03",
+        "TASK:RAG:R03:001.S04",
+        "TASK:RAG:R03:002.S01",
+        "TASK:RAG:R03:002.S02",
+        "TASK:RAG:R03:002.S03",
+        "TASK:RAG:R03:003.S01",
+        "TASK:RAG:R03:003.S02",
+        "TASK:RAG:R03:003.S03",
+        "TASK:RAG:R03:004.S01",
+        "TASK:RAG:R03:004.S02",
+        "TASK:RAG:R03:004.S03",
+        "TASK:RAG:R03:005.S01",
+        "TASK:RAG:R03:005.S02",
+        "TASK:RAG:R03:005.S03"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D12",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "Document content records accepted planning design only. It does not evidence runtime implementation, owner decision for open parameters, executed product tests, publication, or Phase 5 schedule.",
+      "knowledge_id": "PK-IMP-0041",
+      "source_locator": {
+        "start_line": 6418,
+        "end_line": 6550,
+        "section": "R03 knowledge identity, versions, evidence, relations and publication"
+      },
+      "knowledge_statement": "R03 owns stable document identity; immutable legal versions separate from extraction revisions; bitemporal valid/recorded history; exact versioned provision/evidence; directly witnessed/scoped LegalRelation; candidate/review/published state; compatible atomic Snapshot; selective lineage invalidation and historical citations. Similarity, recency or ingest cannot establish legal effect/publication. PostgreSQL relational + FTS is stated V0.1 baseline; pgvector is optional evaluation and Neo4j is not required. Physical schema/migration/extension thresholds stay open. The source claims 15 Subtasks but enumerates 16 (R03:001 has four and remaining four tasks have three each); this count requires reconciliation. Tests are planned only.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "R03"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R03:001",
+        "TASK:RAG:R03:002",
+        "TASK:RAG:R03:003",
+        "TASK:RAG:R03:004",
+        "TASK:RAG:R03:005"
+      ],
+      "related_acceptance_criteria_ids": [
+        "AC:RAG:R03:001",
+        "AC:RAG:R03:002",
+        "AC:RAG:R03:003",
+        "AC:RAG:R03:004",
+        "AC:RAG:R03:005",
+        "AC:RAG:R03:006",
+        "AC:RAG:R03:007",
+        "AC:RAG:R03:008",
+        "AC:RAG:R03:009",
+        "AC:RAG:R03:010",
+        "AC:RAG:R03:011"
+      ],
+      "related_test_ids": [
+        "TEST:RAG:R03:001",
+        "TEST:RAG:R03:002",
+        "TEST:RAG:R03:003",
+        "TEST:RAG:R03:004",
+        "TEST:RAG:R03:005",
+        "TEST:RAG:R03:006",
+        "TEST:RAG:R03:007",
+        "TEST:RAG:R03:008",
+        "TEST:RAG:R03:009",
+        "TEST:RAG:R03:010",
+        "TEST:RAG:R03:011",
+        "TC:RAG:R03:001-P",
+        "TC:RAG:R03:001-N",
+        "TC:RAG:R03:002-P",
+        "TC:RAG:R03:002-N",
+        "TC:RAG:R03:003-P",
+        "TC:RAG:R03:003-N",
+        "TC:RAG:R03:004-P",
+        "TC:RAG:R03:004-N",
+        "TC:RAG:R03:005-P",
+        "TC:RAG:R03:005-N",
+        "TC:RAG:R03:006-P",
+        "TC:RAG:R03:006-N",
+        "TC:RAG:R03:007-P",
+        "TC:RAG:R03:007-N",
+        "TC:RAG:R03:008-P",
+        "TC:RAG:R03:008-N",
+        "TC:RAG:R03:009-P",
+        "TC:RAG:R03:009-N",
+        "TC:RAG:R03:010-P",
+        "TC:RAG:R03:010-N",
+        "TC:RAG:R03:011-P",
+        "TC:RAG:R03:011-N"
+      ],
+      "related_policy_refs": [
+        "REQ:RAG:R03:001",
+        "REQ:RAG:R03:002",
+        "REQ:RAG:R03:003",
+        "REQ:RAG:R03:004",
+        "REQ:RAG:R03:005",
+        "REQ:RAG:R03:006",
+        "REQ:RAG:R03:007",
+        "REQ:RAG:R03:008",
+        "REQ:RAG:R03:009",
+        "REQ:RAG:R03:010",
+        "REQ:RAG:R03:011"
+      ],
+      "related_open_decision_refs": [],
+      "typed_dependency_refs": [
+        {
+          "type": "CONTRACT",
+          "reference": "R02",
+          "meaning": "source artifact/acquisition facts and extraction provenance"
+        },
+        {
+          "type": "HARD",
+          "reference": "C01-C06",
+          "meaning": "publication gates and compatibility controls"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R04",
+          "meaning": "source catalog and lifecycle metadata"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R01",
+          "meaning": "Snapshot consumer"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C04",
+          "meaning": "canonical service contract"
+        }
+      ],
+      "planning_implication": "Preserve unresolved discrepancy for later crosswalk: R03 task table enumerates 16 subtasks while its summary states 15; retain the discrepancy for source-to-graph/Ledger reconciliation, not as policy or approval.",
+      "evidence_refs": [
+        "Implementation Plan lines 6418–6550; R03 requirements, task/subtask, acceptance and planned test tables"
+      ],
+      "newly_identified_source_inconsistency": "R03 task table enumerates 16 subtasks while its summary states 15; retain the discrepancy for source-to-graph/Ledger reconciliation, not as policy or approval."
+    },
+    {
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "related_subtask_ids": [
+        "TASK:RAG:R04:001.S01",
+        "TASK:RAG:R04:001.S02",
+        "TASK:RAG:R04:001.S03",
+        "TASK:RAG:R04:002.S01",
+        "TASK:RAG:R04:002.S02",
+        "TASK:RAG:R04:002.S03",
+        "TASK:RAG:R04:003.S01",
+        "TASK:RAG:R04:003.S02",
+        "TASK:RAG:R04:003.S03",
+        "TASK:RAG:R04:004.S01",
+        "TASK:RAG:R04:004.S02",
+        "TASK:RAG:R04:004.S03",
+        "TASK:RAG:R04:005.S01",
+        "TASK:RAG:R04:005.S02",
+        "TASK:RAG:R04:005.S03"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D06",
+        "P5-D09",
+        "P5-D10",
+        "P5-D12",
+        "P5-D13",
+        "P5-D15"
+      ],
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "non_applicability": "Document content records accepted planning design only. It does not evidence runtime implementation, owner decision for open parameters, executed product tests, publication, or Phase 5 schedule.",
+      "knowledge_id": "PK-IMP-0042",
+      "source_locator": {
+        "start_line": 6551,
+        "end_line": 6679,
+        "section": "R04 source discovery, governance and monitoring outcomes"
+      },
+      "knowledge_statement": "R04 owns adaptive discovery clues, lightweight source catalog/governance and check outcome, not source fetch/extraction (R02), legal validity/publication (R03) or access execution. Risk-based monitoring has no universal fixed cadence; clue capture does not require full-text fetch. Source role/trust, usage rights, source lifecycle and legal document state are separate. Successful unchanged, changed, delayed, failed and coverage-limited outcomes are distinguishable; failure is never no-change. High-risk clues trigger targeted review, not auto-publication. Source list/rights, cadence, thresholds, providers, schema/storage and SLO remain open; product tests NOT_EXECUTED.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "R04"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R04:001",
+        "TASK:RAG:R04:002",
+        "TASK:RAG:R04:003",
+        "TASK:RAG:R04:004",
+        "TASK:RAG:R04:005"
+      ],
+      "related_acceptance_criteria_ids": [
+        "AC:RAG:R04:001",
+        "AC:RAG:R04:002",
+        "AC:RAG:R04:003",
+        "AC:RAG:R04:004",
+        "AC:RAG:R04:005",
+        "AC:RAG:R04:006",
+        "AC:RAG:R04:007",
+        "AC:RAG:R04:008",
+        "AC:RAG:R04:009",
+        "AC:RAG:R04:010"
+      ],
+      "related_test_ids": [
+        "TEST:RAG:R04:001",
+        "TEST:RAG:R04:002",
+        "TEST:RAG:R04:003",
+        "TEST:RAG:R04:004",
+        "TEST:RAG:R04:005",
+        "TEST:RAG:R04:006",
+        "TEST:RAG:R04:007",
+        "TEST:RAG:R04:008",
+        "TEST:RAG:R04:009",
+        "TEST:RAG:R04:010",
+        "TC:RAG:R04:001-P",
+        "TC:RAG:R04:001-N",
+        "TC:RAG:R04:002-P",
+        "TC:RAG:R04:002-N",
+        "TC:RAG:R04:003-P",
+        "TC:RAG:R04:003-N",
+        "TC:RAG:R04:004-P",
+        "TC:RAG:R04:004-N",
+        "TC:RAG:R04:005-P",
+        "TC:RAG:R04:005-N",
+        "TC:RAG:R04:006-P",
+        "TC:RAG:R04:006-N",
+        "TC:RAG:R04:007-P",
+        "TC:RAG:R04:007-N",
+        "TC:RAG:R04:008-P",
+        "TC:RAG:R04:008-N",
+        "TC:RAG:R04:009-P",
+        "TC:RAG:R04:009-N",
+        "TC:RAG:R04:010-P",
+        "TC:RAG:R04:010-N"
+      ],
+      "related_policy_refs": [
+        "REQ:RAG:R04:001",
+        "REQ:RAG:R04:002",
+        "REQ:RAG:R04:003",
+        "REQ:RAG:R04:004",
+        "REQ:RAG:R04:005",
+        "REQ:RAG:R04:006",
+        "REQ:RAG:R04:007",
+        "REQ:RAG:R04:008",
+        "REQ:RAG:R04:009",
+        "REQ:RAG:R04:010"
+      ],
+      "related_open_decision_refs": [],
+      "typed_dependency_refs": [
+        {
+          "type": "CONTRACT",
+          "reference": "R02",
+          "meaning": "SourceAccess execution and acquisition result"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "R03",
+          "meaning": "document/legal lifecycle and publication owner"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C01",
+          "meaning": "authenticity/usage control contract"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "RDE",
+          "meaning": "targeted legal effect review"
+        },
+        {
+          "type": "CONTRACT",
+          "reference": "C01-JOB",
+          "meaning": "idempotent job/event owner-local lifecycle"
+        }
+      ],
+      "planning_implication": "Carry exact ownership, evidence and uncertainty distinctions into F01.6. Keep package plans and tests separate from product execution; do not create a Phase 5 sequence or resolve open owner choices.",
+      "evidence_refs": [
+        "Implementation Plan lines 6551–6679; R04 requirements, task/subtask, acceptance and planned test tables"
+      ]
+    },
+    {
+      "knowledge_id": "PK-IMP-0043",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 6680,
+        "end_line": 7045,
+        "section": "R05/R06 retrieval and grounded response"
+      },
+      "knowledge_statement": "R05 applies eligibility before ranking and evaluates independent evidence sufficiency per claim; R06 owns claim-grounded answer states, citation entailment and safe refusal. These responsibilities follow R03 canonical/Snapshot ownership and keep model feedback from becoming truth. Planned AC/TC are not executions.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:RAG:R05",
+        "PKG:RAG:R06"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "R03 canonical/Snapshot ownership",
+        "R05 retrieval sufficiency",
+        "R06 answer and citation"
+      ],
+      "related_open_decision_refs": [
+        "OPEN:R05:ENGINE",
+        "OPEN:R05:THRESHOLDS",
+        "OPEN:R06:MODEL",
+        "OPEN:R06:EVALUATION_THRESHOLDS"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D11"
+      ],
+      "planning_implication": "Track evidence retrieval and answer validation as separate deliverable/evidence layers; estimate only after engine and quantitative thresholds are decided.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 6680–7045; R05/R06 retrieval and grounded response"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0044",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7046,
+        "end_line": 7082,
+        "section": "R05/R06 ownership correction"
+      },
+      "knowledge_statement": "The plan corrects the knowledge lifecycle handoff: R03 owns canonical identity, versions, relations, evidence and Snapshot; R05 owns retrieval/sufficiency; R06 owns answer/citation. C05a/C05b keep catalog/product responsibilities. CPA PASS refers to planning consistency only.",
+      "knowledge_type": "OWNER_BOUNDARY",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:RAG:R03",
+        "PKG:RAG:R05",
+        "PKG:RAG:R06"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D06"
+      ],
+      "planning_implication": "Allocate deliverables by owner and do not double-count shared ownership or treat planning PASS as execution.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7046–7082; R05/R06 ownership correction"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0045",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7214,
+        "end_line": 7371,
+        "section": "R08 task and count inconsistency"
+      },
+      "knowledge_statement": "R08 table enumerates Task 004.S01–S04 plus three subtasks under each other four tasks (16 total), but the historical checkpoint at lines 7074 states 15. Preserve as an unresolved source inconsistency for later crosswalk; do not silently repair the source or treat either count as authoritative.",
+      "knowledge_type": "SOURCE_INCONSISTENCY",
+      "authority_status": "SOURCE_REVIEW_FINDING",
+      "related_package_ids": [
+        "PKG:RAG:R08"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R08:001",
+        "TASK:RAG:R08:002",
+        "TASK:RAG:R08:003",
+        "TASK:RAG:R08:004",
+        "TASK:RAG:R08:005"
+      ],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "R08 restore manifest and recovery boundary"
+      ],
+      "related_open_decision_refs": [
+        "R08 subtask count reconciliation"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D06"
+      ],
+      "planning_implication": "Do not commit a capacity or effort estimate from the inconsistent count until reconciled against source owner.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7214–7371; R08 task and count inconsistency"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0046",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7372,
+        "end_line": 7550,
+        "section": "R09/R10 context and deterministic calculation"
+      },
+      "knowledge_statement": "R09 scopes Adviser continuity and distinguishes temporary context from other state; R10 delegates deterministic financial calculation to a versioned Core API, preserving typed provenance and separating numerical output from eligibility/ranking/transaction status. No local arithmetic, guessed assumptions or private data access.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:RAG:R09",
+        "PKG:RAG:R10"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "R09 scoped conversation context",
+        "R10 deterministic Core calculation boundary"
+      ],
+      "related_open_decision_refs": [
+        "R09 schema/thresholds",
+        "R10 formula/unit/rounding/timeout"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D10"
+      ],
+      "planning_implication": "Represent computation, evidence and authorization as separate deliverables and keep unavailable inputs explicit.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7372–7550; R09/R10 context and deterministic calculation"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0047",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7567,
+        "end_line": 7700,
+        "section": "A01 assistant proposal boundary"
+      },
+      "knowledge_statement": "A01 output is a typed proposal; it does not authorize a tool or financial effect. Backend owners retain identity, consent, entitlement and service authority; telemetry is minimal and sensitive prompts/tokens are excluded. Package status and planned tests are not deployment or execution.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A01"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "A01 proposal-only authority",
+        "C02 permission and consent",
+        "C04 entitlement"
+      ],
+      "related_open_decision_refs": [
+        "A01 tools/endpoints/retention/retries/activation"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D05",
+        "P5-D06",
+        "P5-D11"
+      ],
+      "planning_implication": "Separate discovery artifacts from authorized delivery tasks and require explicit owner-gated evidence.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7567–7700; A01 assistant proposal boundary"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0048",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7701,
+        "end_line": 7858,
+        "section": "A02 durable workflow ownership"
+      },
+      "knowledge_statement": "A02 keeps durable workflow state with the owning service, requires a fresh gate for every effect, idempotent actions and owner inquiry before retrying unknown external outcomes. Queue/engine/state schema/SLA are open; diagrams and planned AC/TC do not select a technology or establish product behavior.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A02"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "A02 owner-local durable state",
+        "C02 fresh authorization",
+        "unknown outcome inquiry before retry"
+      ],
+      "related_open_decision_refs": [
+        "A02 engine/queue/schema/retry/SLA"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D06",
+        "P5-D07",
+        "P5-D11"
+      ],
+      "planning_implication": "Schedule/estimate recovery and effect-specific authorization separately from coordinator implementation.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7701–7858; A02 durable workflow ownership"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0049",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7874,
+        "end_line": 8085,
+        "section": "A03/A04 event and Computer Use boundaries"
+      },
+      "knowledge_statement": "A03 events and risk notices are review candidates, not authority to act. A04 separates model observation from typed executor action and requires current entitlement, permission/consent and owner-confirmed technical/legal capability before effect. Ambiguous UI stops safely; infrastructure, platform and thresholds remain open.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A03",
+        "PKG:ASSISTANT:A04"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "A03 candidate-only event handling",
+        "A04 typed action and fresh conjunctive gates"
+      ],
+      "related_open_decision_refs": [
+        "A03 event infrastructure/order/thresholds",
+        "A04 platform/tool/topology"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D03",
+        "P5-D05",
+        "P5-D06",
+        "P5-D11"
+      ],
+      "planning_implication": "Model event review, UI execution and authorization as distinct work/dependency edges; platform readiness needs evidence.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 7874–8085; A03/A04 event and Computer Use boundaries"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0050",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8113,
+        "end_line": 8221,
+        "section": "A05 financial flow ownership"
+      },
+      "knowledge_statement": "A05 differentiates bank balance from Shahab wallet balance and limits initial flows to read-only inquiry, bill preview/confirmation and separately published/tested capability. Core owns wallet ledger, reservation, price and financial truth; external unknown outcomes are queried before retry. Bank APIs, fees, limits and SLA remain open.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A05",
+        "PKG:CORE:C09",
+        "PKG:CORE:C13B"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "O5-05 initial capability scope",
+        "Core-owned wallet financial state",
+        "unknown outcome reconciliation"
+      ],
+      "related_open_decision_refs": [
+        "A05 bank/API/fee/limit/auth/SLA"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D03",
+        "P5-D04",
+        "P5-D05",
+        "P5-D06",
+        "P5-D11"
+      ],
+      "planning_implication": "Do not estimate or value bank effects with unapproved tariffs, provider APIs or limits; preserve service-owned financial boundaries.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8113–8221; A05 financial flow ownership"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0051",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8222,
+        "end_line": 8351,
+        "section": "A06 UI map and platform release gates"
+      },
+      "knowledge_statement": "A06 maps are versioned guidance, not permission to execute. Discovery must be non-destructive and isolated; changes require route/platform-specific tests and follow web→Android→iOS delivery order; runtime still re-observes UI. Platform/host feasibility, topology and tooling remain open; UI monitoring is distinct from user monitoring.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A06",
+        "PKG:ASSISTANT:A04"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "O5-06 delivery order",
+        "A06 non-destructive discovery",
+        "A04 live observation"
+      ],
+      "related_open_decision_refs": [
+        "A06 execution topology",
+        "A06 platform feasibility",
+        "A06 schema/runner/cadence"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D05",
+        "P5-D06",
+        "P5-D07",
+        "P5-D11"
+      ],
+      "planning_implication": "Treat platform-specific feasibility and ordered release gates as explicit dependency/evidence requirements; do not count discovery as deployment.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8222–8351; A06 UI map and platform release gates"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0052",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8352,
+        "end_line": 8463,
+        "section": "A07 context and User Memory ownership gap"
+      },
+      "knowledge_statement": "A07 separates session, conversation, user memory and case/workflow state. Cross-domain transfer is purpose-limited and backend-authorized; role change rechecks permissions. The persistent User Memory owner, retention and deletion contract remain UNASSIGNED/OPEN, so persistent Assistant memory is blocked pending owner decision.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A07",
+        "PKG:ASSISTANT:A02"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "B05 data transfer boundary",
+        "A07 four context types",
+        "C02 backend authorization"
+      ],
+      "related_open_decision_refs": [
+        "User Memory owner",
+        "User Memory API",
+        "retention/deletion/export"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D05",
+        "P5-D06",
+        "P5-D11"
+      ],
+      "planning_implication": "Record unresolved data ownership as a blocker; no effort estimate or deliverable may assume a memory store exists.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8352–8463; A07 context and User Memory ownership gap"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0053",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8464,
+        "end_line": 8610,
+        "section": "A08 shared contract and configuration governance"
+      },
+      "knowledge_statement": "A08 assigns Assistant-owned endpoints to Assistant while common contract/error/config governance remains in C01. Runtime config, secret, feature flag and business policy are distinct; owner-authorized diffs, audit, secret scanning, kill-switch/dependency checks and compatible rollback apply. API, secret store, rollout and canary choices stay open.",
+      "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:ASSISTANT:A08",
+        "PKG:CORE:C01"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "C01 versioned API/error/config standards",
+        "A08 distinct config classes",
+        "R1 Assistant disabled"
+      ],
+      "related_open_decision_refs": [
+        "A08 API/schema",
+        "A08 configuration/secret tooling",
+        "A08 rollout/version support"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D05",
+        "P5-D06",
+        "P5-D07",
+        "P5-D11"
+      ],
+      "planning_implication": "Reuse C01 standards and identify config/API prerequisites; do not assume new infrastructure or activation authority.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8464–8610; A08 shared contract and configuration governance"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0054",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8620,
+        "end_line": 8661,
+        "section": "C01/C02 typed contracts and dependency semantics"
+      },
+      "knowledge_statement": "The plan labels shared schemas as design-required and not published APIs; dependency indicators distinguish HARD, CONTRACT, POLICY and PREFERENCE. Only explicit HARD edges are hard sequencing constraints; preferences must not become blockers.",
+      "knowledge_type": "DEPENDENCY_SEMANTICS",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:CORE:C01",
+        "PKG:CORE:C02"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [
+        "CONTRACT:C01:01",
+        "CONTRACT:C01:02",
+        "CONTRACT:C01:03",
+        "CONTRACT:C01:04",
+        "CONTRACT:C01:05",
+        "CONTRACT:C01:06",
+        "CONTRACT:C01:07",
+        "CONTRACT:C02:01",
+        "CONTRACT:C02:02",
+        "CONTRACT:C02:03"
+      ],
+      "related_open_decision_refs": [],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D06"
+      ],
+      "planning_implication": "Map relationship types explicitly in scheduling and never represent unpublished design contracts as live APIs.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8620–8661; C01/C02 typed contracts and dependency semantics"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0055",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8662,
+        "end_line": 8676,
+        "section": "Plan/implementation boundary"
+      },
+      "knowledge_statement": "The implementation plan is a supporting planning artifact; RA/IPA PASS means planning completeness only. It does not approve policy, cost, capacity, technology, execution, release or product readiness. Validators and registries support but do not supersede narrative governing sources.",
+      "knowledge_type": "PLANNING_LIMITATION",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D10",
+        "P5-D15"
+      ],
+      "planning_implication": "Keep Phase 5 planning readiness, owner approval, execution commitment and product release as distinct states.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8662–8676; Plan/implementation boundary"
+      ],
+      "non_applicability": ""
+    },
+    {
+      "knowledge_id": "PK-IMP-0056",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 8677,
+        "end_line": 8761,
+        "section": "Wallet crosswalk and semantic coverage audit"
+      },
+      "knowledge_statement": "Wallet scenario coverage requires atomic obligation, owner Req/Task/AC/Test and semantic oracle match. VERIFIED_COVERED means the plan specifies behavior; all product tests remain NOT_EXECUTED. Seventy-five scenarios are plan-covered; 150 aggregate candidates mostly remain VERIFIED_PARTIAL; open tie-break decisions are excluded from approved coverage.",
+      "knowledge_type": "VALIDATION_SEMANTICS",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "PKG:CORE:C08",
+        "PKG:CORE:C09",
+        "PKG:CORE:C10",
+        "PKG:CORE:C12A",
+        "PKG:CORE:C12B",
+        "PKG:CORE:C13A",
+        "PKG:CORE:C13B"
+      ],
+      "related_task_ids": [],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [],
+      "related_test_ids": [],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [
+        "largest-remainder tie-break",
+        "aggregate candidate atomization/oracle gaps"
+      ],
+      "affected_phase5_decisions": [
+        "P5-D02",
+        "P5-D09",
+        "P5-D10"
+      ],
+      "planning_implication": "Base acceptance on semantic evidence and executed status separately; keep partial candidate set visible and unapproved.",
+      "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
+      "evidence_refs": [
+        "Implementation Plan lines 8677–8761; Wallet crosswalk and semantic coverage audit"
+      ],
+      "non_applicability": ""
     }
   ],
   "limitations": []
