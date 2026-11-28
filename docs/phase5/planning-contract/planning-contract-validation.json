@@ -98,6 +98,50 @@
   "limitations": [
     "Source reading completeness is separately controlled by P5-B03; structural checks do not prove semantic correctness or owner approval.",
     "Phase 4 Snapshot Validator passed before consumption and after drafting; this is identity evidence, not a substitute for semantic source reading.",
-    "Hosted GitHub CI is pending until the Draft PR workflow completes; local docs validator passed for both Markdown files."
-  ]
+    "The initial PR head GitHub CI passed; report/gate update creates a new head, so rerun is required before P5-B16 can PASS."
+  ],
+  "external_ci_evidence": {
+    "initial_pr_commit": "81e4950ad20c4ca38ea5c0333c8460b83da04632",
+    "pull_request": 258,
+    "workflow_runs": [
+      {
+        "name": "Quality gates",
+        "run_id": 46116774728,
+        "conclusion": "success",
+        "jobs_skipped": [
+          "Loan details browser verification",
+          "PostgreSQL migration verification",
+          "Profile OTP real API browser verification",
+          "Quality gates"
+        ]
+      },
+      {
+        "name": "Security SAST, SCA and secret gates",
+        "run_id": 46116774749,
+        "conclusion": "success",
+        "jobs_skipped": [
+          "Python SAST and Python/Node dependency audit"
+        ]
+      },
+      {
+        "name": "Container build contract smoke",
+        "run_id": 46116774746,
+        "conclusion": "success",
+        "jobs_skipped": [
+          "Build and run two isolated images"
+        ]
+      },
+      {
+        "name": "US-13 frozen frontend baseline evidence",
+        "run_id": 46116774734,
+        "conclusion": "success",
+        "jobs_skipped": [
+          "Independent original-vs-candidate route evidence"
+        ]
+      }
+    ],
+    "repository_secret_scan": "success",
+    "scope": "docs-only; skipped product suites are not claimed as passed",
+    "final_report_commit_ci": "PENDING"
+  }
 }

@@ -83,22 +83,22 @@ WBS پاسخ «چه کاری باید انجام شود؟» است. Release Plan
 | P5-01 | `python docs/phase4/task-map-graph/validate_phase4_snapshot.py` | Exit 0 / CERTIFIED_SNAPSHOT_VALID | Exit 0؛ 27 artifact؛ source commit و Snapshot ID مطابق؛ HEAD=e207860… | PASS |
 | P5-02 | `python /tmp/validate_phase5.py` | parse JSON و CSV، یکتایی ID، ارجاعات، ۲۲ اصل، ۱۸ Artifact، ۱۶ Gate، بدون عدد ساختگی/زمان‌بندی | 13 check pass، 0 fail؛ JSON/CSV/ID/ref/policy/schema/estimate/schedule/diff-scope controls؛ جزئیات در validation JSON | PASS (ساختاری) |
 | P5-03 | `git diff --cached --check` | Exit 0 | Exit 0؛ trailing whitespace اصلاح شد | PASS |
-| P5-04 | `BASE_SHA=main HEAD_SHA=HEAD python scripts/ci/validate_markdown.py` | لینک و whitespace docs-only معتبر | `Documentation validation passed for 2 changed Markdown files.` Exit 0. تلاش اولیه با `BASE_SHA=origin/main` به‌علت refspec اشتباه نتوانست fetch کند؛ با ref معتبر `main` تکرار و PASS شد | PASS_LOCAL / CI_PENDING |
+| P5-04 | `BASE_SHA=main HEAD_SHA=HEAD python scripts/ci/validate_markdown.py` | لینک و whitespace docs-only معتبر | `Documentation validation passed for 2 changed Markdown files.` Exit 0. تلاش اولیه با `BASE_SHA=origin/main` به‌علت refspec اشتباه نتوانست fetch کند؛ با ref معتبر `main` تکرار و PASS شد | PASS |
 | P5-05 | `git diff --cached --name-status`; re-run Snapshot Validator | فقط هفت Artifact مجاز؛ Snapshot unchanged | هفت فایل فقط زیر `docs/phase5/planning-contract/`; Validator پس از ساخت دوباره PASS | PASS |
-| P5-06 | GitHub Actions در Draft PR | docs validation اجرا شود؛ product suites می‌توانند به‌دلیل docs-only skip شوند | PR هنوز ایجاد نشده | PENDING |
+| P5-06 | GitHub Actions روی commit `81e4950ad20c4ca38ea5c0333c8460b83da04632` | docs checks موفق؛ product suites طبق docs-only policy skip | Quality gates, Security, Container contract smoke, US-13 workflows: 4/4 success; docs classifiers PASS; repository secret scan PASS. Skipها: Quality gates full suite, PostgreSQL migrations, Loan details browser, Profile OTP browser, Python/Node SAST/SCA, Container image build, US-13 route comparison | PASS_WITH_DOCS_ONLY_SKIPS |
 
 ## ۸. تصمیمات باز و محدودیت‌ها
 
 `P5-D01…P5-D16` در رجیستری `OPEN` و `PENDING_APPROVAL` هستند. ترتیب پیشنهادی بررسی: تعریف Deliverable؛ منبع canonical؛ دانه‌بندی allocation؛ دامنه blocker تصمیم؛ پذیرش outcome؛ ظرفیت و O5-09؛ مدل effort/cost/token؛ ارزش و priority؛ uncertainty؛ scheduler؛ validator؛ replan. انتخاب‌های دقیق، rationale و dependency در JSON ثبت شده است.
 
-محدودیت مهم فعلی: Gate مطالعه کامل منابع (B03) انجام نشده است. CI و PR هنوز ایجاد نشده‌اند؛ بنابراین B16 اثبات نشده است. Gateهای B07 و B14 وضعیت ساختاری و docs-validation پیش‌نویس را نشان می‌دهند و به معنی تصویب مالک نیستند. مأموریت در این checkpoint COMPLETE نیست.
+محدودیت مهم فعلی: Gate مطالعه کامل منابع (B03) انجام نشده است و مانع اعلام COMPLETE می‌شود. Gateهای B07 و B14 وضعیت ساختاری و docs-validation پیش‌نویس را نشان می‌دهند و به معنی تصویب مالک نیستند. PR #258 ساخته شده، اما این commit گزارشی پس از ایجاد PR در حال انتشار است؛ GitHub Actions روی commit گزارش نهایی هنوز باید اجرا شود.
 
 ## ۹. وضعیت Gateها در این checkpoint
 
 - `PASS`: P5-B01، P5-B02، P5-B11 فقط در محدوده شواهد اجراشده.
 - `PASS با دامنه ثبت‌شده`: P5-B01، P5-B02، P5-B04…B15 (B07/B14 به‌عنوان بررسی ساختاری پیش‌نویس، نه تصویب مالک).
 - `NOT PASS`: P5-B03 (مطالعه کامل منابع انجام نشد).
-- `PENDING`: P5-B16 تا PR و CI.
+- `PENDING`: P5-B16 برای HEAD نهایی پس از commit گزارش bootstrap؛ CI موفق commit اولیه به معنی تأیید HEAD تغییرکرده نیست.
 - `MISSION_5_0_COMPLETE`: **خیر**.
 - پیشنهاد قرارداد برای مالک: **PENDING_OWNER_APPROVAL**.
 - Phase 5 execution: **NOT_STARTED**.
@@ -108,3 +108,11 @@ WBS پاسخ «چه کاری باید انجام شود؟» است. Release Plan
 ## ۱۰. زمان فعالیت
 
 طبق Task Execution Protocol ثبت زمان از شروع واقعی انجام نشده است؛ مدت فعالیت پیش از ثبت: `NOT_RECORDED`. این گزارش زمان ساخت branch یا زمان commit را جایگزین مدت کار نمی‌کند. مصرف توکن اندازه‌گیری نشده است.
+
+## ۱۱. Pull Request و وضعیت انتشار
+
+- Draft PR: [#258 — Phase 5: Development Planning Contract and Deliverable Architecture](https://github.com/Brotherlouiee/shahab-demo/pull/258)؛ باز و merge نشده است.
+- Base: `main` (`e207860d82ccaf665241258256565d064ddd901d`).
+- Commit اول PR: `81e4950ad20c4ca38ea5c0333c8460b83da04632`.
+- PR هنگام ثبت این گزارش روی commit اول 7 فایل تغییرکرده داشت. گزارش bootstrap/validation و Gate status به‌روزرسانی شدند، پس commit جدید لازم است؛ CI برای همان HEAD نهایی پس از push باید دوباره احراز شود.
+- Git CLI push با نبود username/credential ممکن نبود؛ شاخه و commit از GitHub Git Data API، بر پایه Tree والد `main` ساخته شدند. هیچ force-update یا merge رخ نداده است.

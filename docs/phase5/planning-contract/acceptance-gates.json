@@ -224,7 +224,7 @@
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
-      "observed_status": "PASS_LOCAL_STRUCTURE_AND_LINKS"
+      "observed_status": "PASS_DOCS_VALIDATOR_AND_STRUCTURAL_CHECKS"
     },
     {
       "gate_id": "P5-B15",
@@ -256,7 +256,7 @@
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
-      "observed_status": "PENDING_PR_CI"
+      "observed_status": "PENDING_FINAL_HEAD_CI; INITIAL_PR_HEAD_CI_PASS"
     }
   ]
 }
