@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2-proposed",
   "approval_status": "PROPOSED_PENDING_OWNER_APPROVAL",
-  "scope": "Phase 5.0 contract validation only; not an operational planning engine",
+  "scope": "Lightweight Phase 5.0 planning contract. Existing graph/engine type definitions are retained only as historical proposals and are outside the current MVP.",
   "reference_types": {
     "DECISION": {
       "namespace": "P5-DNN",
@@ -26,7 +26,7 @@
       "missing_behavior": "ERROR"
     },
     "ARTIFACT": {
-      "namespace": "A00-A17",
+      "namespace": "A00-A17 historical registry identifiers; only A01 is active in the proposed MVP",
       "required": [
         "ref_id",
         "relation"
@@ -1361,5 +1361,36 @@
     "slice_semantics": "each child slice has independent acceptance oracle and at most one SCHEDULED_IN edge to a <=7-day WEEK",
     "exception_fields": "multi_week_exception_record_required",
     "release_semantics": "intermediate work evidence cannot be treated as successful public product release"
+  },
+  "current_mvp_contract": {
+    "tool": "One Skill, proposed name shahab-planner",
+    "request_modes": [
+      "INITIAL PLAN",
+      "REPLAN",
+      "VALIDATE",
+      "EXPLAIN"
+    ],
+    "implementation_time_cap_minutes": 60,
+    "history": "Git commits",
+    "active_output_artifact_id": "A01",
+    "minimum_plan_fields": [
+      "Week ID",
+      "Deliverable ID and outcome",
+      "work node references",
+      "dependencies",
+      "applicable policies",
+      "open decision blockers",
+      "effort estimate",
+      "development cost",
+      "operating cost",
+      "token estimate",
+      "required capacity",
+      "acceptance criteria",
+      "test references",
+      "status",
+      "planning evidence"
+    ],
+    "unknown_policy": "UNKNOWN is neither zero nor permission to commit",
+    "legacy_graph_schema": "Definitions below are not required for MVP implementation and confer no owner approval."
   }
 }

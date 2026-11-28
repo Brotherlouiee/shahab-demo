@@ -393,6 +393,11 @@ def fixture_checks(schema: dict[str, Any], real: dict[str, Any]) -> list[dict[st
     record("POS-08-schedule-cadence-policy-present", "<= 6 days" in " ".join(sum((x["validation_rules"] for x in schema["graph_node_types"] if x["type_id"]=="WEEK"),[])))
     record("POS-09-co-decision-groups-preserve-open", all(set(g["members"])<=dset for g in schema["decision_review_groups"]))
     record("SCOPE-01-unauthorized-path-rejected", bool(scope_errors(["src/main.py"])))
+    output_registry=read_json(CONTRACT/"output-artifact-registry.json")
+    active=set(output_registry.get("current_mvp_artifacts",[]))
+    deferred=set(output_registry.get("deferred_artifact_ids",[]))
+    all_ids={x["artifact_id"] for x in output_registry.get("artifacts",[])}
+    record("SCOPE-02-single-lightweight-mvp-output-and-time-cap", active=={"A01"} and active|deferred==all_ids and schema.get("current_mvp_contract",{}).get("implementation_time_cap_minutes")==60 and len(schema.get("current_mvp_contract",{}).get("request_modes",[]))==4)
     return checks
 
 
@@ -408,6 +413,13 @@ def validate_real() -> tuple[list[str], dict[str, Any]]:
     dids = {x["decision_id"] for x in decisions}; aids = {x["artifact_id"] for x in artifacts}; gids = {x["gate_id"] for x in gates}
     if len(dids)!=len(decisions) or len(aids)!=len(artifacts) or len(gids)!=len(gates): errors.append("duplicate entity ID")
     if any(d.get("status")!="OPEN" or d.get("owner_approval",{}).get("status")!="PENDING_APPROVAL" for d in decisions): errors.append("open decision was promoted")
+    registry=data["output-artifact-registry.json"]
+    active=set(registry.get("current_mvp_artifacts",[])); deferred=set(registry.get("deferred_artifact_ids",[]))
+    if active!={"A01"} or active|deferred!=aids or active&deferred: errors.append("MVP output registry must contain only A01 and defer the remaining historical proposals")
+    if any(d.get("review_disposition") is None or d.get("review_reason") is None for d in decisions): errors.append("decision review disposition missing")
+    source_registry=read_json(CONTRACT/"planning-knowledge-registry.json")
+    plan_source=next((x for x in source_registry.get("sources",[]) if x.get("source_document")=="docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md"),{})
+    if plan_source.get("review_status")!="COMPLETE_SEMANTIC_REVIEW" or plan_source.get("review_scope_end")!=plan_source.get("total_lines") or plan_source.get("reviewed_ranges")!=[[1,plan_source.get("total_lines")]]: errors.append("implementation-plan semantic review metadata is incomplete or stale")
     for dec in decisions: errors.extend(approval_errors(dec.get("owner_approval",{})))
     if len(decisions)!=16 or len(artifacts)!=18: errors.append("counts differ from existing contract inventory")
     refs=[]
@@ -464,7 +476,7 @@ def validate_real() -> tuple[list[str], dict[str, Any]]:
     errors.extend(scope_errors(changed_paths))
     order=decision_order(dids,rels)
     if order is None: errors.append("hard prerequisite order cannot be derived")
-    return errors,{"snapshot_output":validator.stdout.strip(),"changed_paths":changed_paths,"decision_count":len(decisions),"artifact_count":len(artifacts),"gate_count":len(gates),"hard_prerequisite_topological_order":order}
+    return errors,{"snapshot_output":validator.stdout.strip(),"changed_paths":changed_paths,"decision_count":len(decisions),"artifact_count":len(artifacts),"active_mvp_artifacts":sorted(active),"deferred_artifact_count":len(deferred),"gate_count":len(gates),"hard_prerequisite_topological_order":order}
 
 
 def main() -> int:

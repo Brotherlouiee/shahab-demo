@@ -1139,7 +1139,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_BEFORE_FIRST_COMMITTED_PLAN",
+      "review_reason": "Merge with P5-D02: choose/confirm outcome-based deliverable and work allocation; current recommendation is a deliverable linked to exact work references without parent/child double count."
     },
     {
       "decision_id": "P5-D02",
@@ -1501,7 +1503,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_BEFORE_FIRST_COMMITTED_PLAN",
+      "review_reason": "Merge with P5-D01; allocation granularity must be clear before commitment. No separate allocation engine."
     },
     {
       "decision_id": "P5-D03",
@@ -1863,7 +1867,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_DATA_BEFORE_FIRST_COMMITTED_PLAN",
+      "review_reason": "Provide actual available capacity/period; O5-09 ratios are already approved and are not reopened."
     },
     {
       "decision_id": "P5-D04",
@@ -2225,7 +2231,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_ONLY_WHERE_SOURCE_UNKNOWN",
+      "review_reason": "Existing policy requires evidence-backed effort estimates before commitment; provide missing basis/source as needed."
     },
     {
       "decision_id": "P5-D05",
@@ -2587,7 +2595,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_ONLY_WHERE_SOURCE_UNKNOWN",
+      "review_reason": "Record token estimate only where applicable; source/model rates remain UNKNOWN until evidenced."
     },
     {
       "decision_id": "P5-D06",
@@ -2949,7 +2959,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_ONLY_WHERE_SOURCE_UNKNOWN",
+      "review_reason": "Keep development and operating costs separate; missing amounts/rates block commitment, not tool construction."
     },
     {
       "decision_id": "P5-D07",
@@ -3311,7 +3323,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "EXECUTION_TIME_OWNER_PRIORITY",
+      "review_reason": "No independent value engine. Owner identifies relative value/learning only where useful among feasible candidates."
     },
     {
       "decision_id": "P5-D08",
@@ -3673,7 +3687,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "EXECUTION_TIME_OWNER_PRIORITY",
+      "review_reason": "No weights or scoring engine. Owner sets the order of feasible work; hard constraints cannot be offset."
     },
     {
       "decision_id": "P5-D09",
@@ -4035,7 +4051,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "NO_SEPARATE_MVP_DECISION",
+      "review_reason": "Use existing dependency/capacity rules and <=7-day cycle; owner resolves only unresolved feasible tie/exception."
     },
     {
       "decision_id": "P5-D10",
@@ -4120,7 +4138,9 @@
           "cost_status": "QUALITATIVE_ONLY; NUMERIC_COST_UNKNOWN"
         }
       ],
-      "approved_policy_references": []
+      "approved_policy_references": [],
+      "review_disposition": "COVERED_BY_REVISED_CONTRACT",
+      "review_reason": "Register owner decision blockers with affected scope; only owner can resolve. No parallel decision system."
     },
     {
       "decision_id": "P5-D11",
@@ -4493,7 +4513,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "COVERED_BY_APPROVED_O5_09",
+      "review_reason": "Discovery/Delivery ratios already approved. Actual capacity and cycle classification are execution inputs, not a new policy decision."
     },
     {
       "decision_id": "P5-D12",
@@ -4855,7 +4877,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "COVERED_BY_EXISTING_UNKNOWN_AND_RISK_POLICY",
+      "review_reason": "UNKNOWN is not zero; use source-backed uncertainty and existing F06/O5-10 authority. No separate uncertainty engine."
     },
     {
       "decision_id": "P5-D13",
@@ -5217,7 +5241,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "COVERED_BY_EXISTING_ACCEPTANCE_AND_RELEASE_POLICY",
+      "review_reason": "Preserve weekly acceptance and separate product outcome, stage completion and release; no new gate."
     },
     {
       "decision_id": "P5-D14",
@@ -5579,7 +5605,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "OWNER_INPUT_BEFORE_SKILL_BUILD",
+      "review_reason": "Architecture proposal narrowed to one Git-versioned plan. Confirm Markdown vs a demonstrated existing JSON consumer; no database or separate version service."
     },
     {
       "decision_id": "P5-D15",
@@ -5941,7 +5969,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "NO_SEPARATE_MVP_DECISION_UNLESS_GAP_FOUND",
+      "review_reason": "Use existing validator; a small script only for a documented uncovered deterministic check."
     },
     {
       "decision_id": "P5-D16",
@@ -6303,7 +6333,9 @@
           "relation": "CONSTRAINED_BY",
           "source_locator": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md#§5.2.1"
         }
-      ]
+      ],
+      "review_disposition": "COVERED_BY_REVISED_CONTRACT",
+      "review_reason": "Replan shows diff/reason/impact and cannot alter a committed plan without owner authorization."
     }
   ],
   "decision_relations": [
@@ -6946,5 +6978,18 @@
     "P5-D09",
     "P5-D13",
     "P5-D16"
-  ]
+  ],
+  "current_review_context": {
+    "mission": "F01.6/F01.7 lightweight planning contract",
+    "owner_approval_status": "PENDING; no decision approved in this update",
+    "historical_decisions_retained": true,
+    "active_owner_input_groups": [
+      "P5-D01/P5-D02 before first commitment",
+      "P5-D03 before first commitment",
+      "P5-D04/P5-D05/P5-D06 only when estimate inputs are unknown",
+      "P5-D07/P5-D08 during planning execution when owner priority is needed",
+      "P5-D14 before Skill build"
+    ],
+    "disposition_note": "Per-decision review_disposition fields distinguish true owner inputs from items covered by existing policy, removed MVP architecture, or execution-time choices; original status and options remain unchanged."
+  }
 }

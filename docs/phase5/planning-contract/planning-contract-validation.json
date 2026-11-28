@@ -3,10 +3,11 @@
   "mission": "5.0",
   "validator_type": "deterministic stdlib contract validator for Phase 5.0 proposal; not a production planning engine",
   "limitations": [
-    "P5-B03 remains NOT PASS: semantic review of every governing document and human review of all snapshot artifacts is incomplete.",
+    "P5-B03 is PASS_WITH_REVIEW_EVIDENCE for the exact source versions and certified Phase 4 inputs recorded in the coverage/consumption registries. This does not imply owner approval, product execution, release readiness, or Phase 5.1 start.",
     "Local validation establishes typed structure and synthetic fixture behavior; it does not establish owner approval, product correctness, or operational readiness.",
     "Phase 4 Snapshot Validator establishes pinned identity and integrity, not semantic completeness of the source review.",
-    "GitHub Actions evidence recorded below is bound to the exact historical PR head 3124c39; all skipped jobs remain SKIPPED. CI for the final corrective commit is pending and must be checked externally without a follow-up evidence commit."
+    "GitHub Actions evidence recorded below is bound to the exact historical PR head 3124c39; all skipped jobs remain SKIPPED. CI for the final corrective commit is pending and must be checked externally without a follow-up evidence commit.",
+    "The Phase 5 MVP proposes one Skill and one Git-versioned weekly plan output; graph/engine/viewer and separate registries are historical/deferred proposals. The contract remains pending owner approval."
   ],
   "external_ci_evidence": {
     "latest_verified_pr_commit": "3124c39ddec912eac146411be765df0bca0549a3",

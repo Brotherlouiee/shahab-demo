@@ -8,22 +8,17 @@
       "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
       "total_lines": 8761,
       "review_scope_start": 1,
-      "review_scope_end": 6000,
+      "review_scope_end": 8761,
       "certified_snapshot": "phase4-45ed4ec10d34216cf935",
-      "review_status": "PART_2_COMPLETE_IN_SCOPE",
+      "review_status": "COMPLETE_SEMANTIC_REVIEW",
       "reviewed_ranges": [
         [
           1,
-          6000
+          8761
         ]
       ],
       "unreviewed_ranges_within_mission": [],
-      "remaining_source_outside_mission": [
-        [
-          6001,
-          8761
-        ]
-      ]
+      "remaining_source_outside_mission": []
     }
   ],
   "records": [
@@ -45,10 +40,7 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "Blueprint V1.6",
-        "Digital Wallet V0.20"
-      ],
+      "related_policy_refs": [],
       "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
@@ -61,7 +53,11 @@
       "evidence_refs": [
         "Implementation Plan §0, lines 1–16"
       ],
-      "non_applicability": "Package/task identifiers do not apply to document-level governance."
+      "non_applicability": "Package/task identifiers do not apply to document-level governance.",
+      "related_policy_sources": [
+        "Blueprint V1.6",
+        "Digital Wallet V0.20"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0002",
@@ -73,7 +69,7 @@
         "end_line": 90,
         "section": "§0 package inventory and 22 implementation principles"
       },
-      "knowledge_statement": "All 36 packages report RA=PASS and IPA=PASS, while product execution is explicitly PRODUCT_NOT_EXECUTED. The 22 principles require usable integrated weekly outcomes (normally <=7 calendar days), documented narrow exceptions, actual dependency mapping, capacity-based commitments, effort/time/token/cost estimates before commitment, separate build/run costs, discovery allocation, estimate-vs-actual learning, full end-to-end DoD, risk-based reversible release and owner control of scope/policy. PoC or Discovery does not replace usable delivery.",
+      "knowledge_statement": "The initial package inventory reports RA=PASS and IPA=PASS for all 36 packages at the source snapshot; that is historical status, not the current status of every later revision. The later C13b and C14 revisions are specifically PENDING REVALIDATION after R13–R16 changes (Implementation Plan lines 5939–6150; see PK-IMP-0036–0038). Product execution/tests remain NOT_EXECUTED. The 22 principles require usable integrated weekly outcomes (normally <=7 calendar days), documented narrow exceptions, actual dependency mapping, capacity-based commitments, effort/time/token/cost estimates before commitment, separate build/run costs, discovery allocation, estimate-vs-actual learning, full end-to-end DoD, risk-based reversible release and owner control of scope/policy. PoC or Discovery does not replace usable delivery.",
       "knowledge_type": "APPROVED_POLICY",
       "authority_status": "APPROVED_SOURCE_POLICY",
       "related_package_ids": [
@@ -95,15 +91,52 @@
         "C13a",
         "C13b",
         "C14",
-        "R01–R10",
-        "A01–A08"
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "POL:BLUEPRINT:5.2.1:01–22",
+        "POL:BLUEPRINT:5.2.1:01",
+        "POL:BLUEPRINT:5.2.1:02",
+        "POL:BLUEPRINT:5.2.1:03",
+        "POL:BLUEPRINT:5.2.1:04",
+        "POL:BLUEPRINT:5.2.1:05",
+        "POL:BLUEPRINT:5.2.1:06",
+        "POL:BLUEPRINT:5.2.1:07",
+        "POL:BLUEPRINT:5.2.1:08",
+        "POL:BLUEPRINT:5.2.1:09",
+        "POL:BLUEPRINT:5.2.1:10",
+        "POL:BLUEPRINT:5.2.1:11",
+        "POL:BLUEPRINT:5.2.1:12",
+        "POL:BLUEPRINT:5.2.1:13",
+        "POL:BLUEPRINT:5.2.1:14",
+        "POL:BLUEPRINT:5.2.1:15",
+        "POL:BLUEPRINT:5.2.1:16",
+        "POL:BLUEPRINT:5.2.1:17",
+        "POL:BLUEPRINT:5.2.1:18",
+        "POL:BLUEPRINT:5.2.1:19",
+        "POL:BLUEPRINT:5.2.1:20",
+        "POL:BLUEPRINT:5.2.1:21",
+        "POL:BLUEPRINT:5.2.1:22",
         "O5-09",
         "O5-10"
       ],
@@ -123,10 +156,10 @@
         "P5-D15",
         "P5-D16"
       ],
-      "planning_implication": "Do not equate planning acceptance with product tests, deployment, readiness or release; require multidimensional estimates before weekly commitment and actuals to improve forecasts.",
+      "planning_implication": "Use initial RA/IPA as historical planning acceptance only; preserve later revalidation pending status and do not treat planned tests as execution evidence.",
       "contract_coverage_status": "COVERED_BY_EXISTING_CONTRACT_PENDING_CROSSWALK",
       "evidence_refs": [
-        "Implementation Plan lines 17–90; package table and POL:BLUEPRINT:5.2.1:01–22"
+        "Implementation Plan lines 17–90; later superseding C13b lines 5939–6047 and C14 lines 6048–6150; PK-IMP-0036–0038"
       ],
       "non_applicability": "Task/test identifiers are not applicable to this cross-package policy inventory; package IDs are retained."
     },
@@ -250,9 +283,7 @@
         "REQ:CORE:007",
         "REQ:CORE:013"
       ],
-      "related_open_decision_refs": [
-        "TASK:CORE:C01:001 (HARD)"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D12",
@@ -264,7 +295,14 @@
       "evidence_refs": [
         "Implementation Plan lines 144–155; TASK:CORE:C01:002"
       ],
-      "non_applicability": "Test IDs are not stated on the task row; test specs elsewhere do not imply execution."
+      "non_applicability": "Test IDs are not stated on the task row; test specs elsewhere do not imply execution.",
+      "related_prerequisite_refs": [
+        {
+          "ref_type": "TASK_HARD",
+          "ref_id": "TASK:CORE:C01:001",
+          "source_locator": "Implementation Plan lines 144–155"
+        }
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0006",
@@ -303,10 +341,7 @@
         "REQ:CORE:004",
         "REQ:CORE:049"
       ],
-      "related_open_decision_refs": [
-        "R1 scope approval",
-        "TASK:CORE:C01:002 (HARD)"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -319,7 +354,19 @@
       "evidence_refs": [
         "Implementation Plan lines 156–160; TASK:CORE:C01:003"
       ],
-      "non_applicability": "No execution/release evidence is supplied here."
+      "non_applicability": "No execution/release evidence is supplied here.",
+      "related_prerequisite_refs": [
+        {
+          "ref_type": "OWNER_APPROVAL",
+          "ref_id": "R1 scope approval",
+          "source_locator": "Implementation Plan lines 156–160"
+        },
+        {
+          "ref_type": "TASK_HARD",
+          "ref_id": "TASK:CORE:C01:002",
+          "source_locator": "Implementation Plan lines 156–160"
+        }
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0007",
@@ -339,6 +386,7 @@
         "C05b"
       ],
       "related_task_ids": [
+        "TASK:CORE:C01:001",
         "TASK:CORE:C01:004",
         "TASK:CORE:C01:008"
       ],
@@ -356,10 +404,7 @@
         "REQ:CORE:008",
         "REQ:CORE:009"
       ],
-      "related_open_decision_refs": [
-        "TASK:CORE:C01:001 (HARD)",
-        "TASK:CORE:C01:008 (CONTRACT)"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D10",
@@ -372,7 +417,19 @@
       "evidence_refs": [
         "Implementation Plan lines 161–179; TASK:CORE:C01:004; REQ/AC:CORE:008–009"
       ],
-      "non_applicability": "Test definitions are not execution outcomes; no TEST result is given here."
+      "non_applicability": "Test definitions are not execution outcomes; no TEST result is given here.",
+      "related_prerequisite_refs": [
+        {
+          "ref_type": "TASK_HARD",
+          "ref_id": "TASK:CORE:C01:001",
+          "source_locator": "Implementation Plan lines 161–179"
+        },
+        {
+          "ref_type": "TASK_CONTRACT",
+          "ref_id": "TASK:CORE:C01:008",
+          "source_locator": "Implementation Plan lines 161–179"
+        }
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0008",
@@ -388,7 +445,8 @@
       "knowledge_type": "OPERATIONAL_CONSTRAINT",
       "authority_status": "APPROVED_SOURCE_POLICY",
       "related_package_ids": [
-        "C01"
+        "C01",
+        "A09"
       ],
       "related_task_ids": [
         "TASK:CORE:C01:010"
@@ -405,13 +463,11 @@
         "TEST:CORE:C01:021"
       ],
       "related_policy_refs": [
-        "REQ:CORE:019–021",
-        "A09",
-        "RUM policy"
+        "REQ:CORE:019",
+        "REQ:CORE:020",
+        "REQ:CORE:021"
       ],
-      "related_open_decision_refs": [
-        "SLO/capacity numerical thresholds and telemetry provider/retention decisions"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D03",
         "P5-D05",
@@ -428,7 +484,13 @@
           "Implementation Plan lines 521–558; REQ/AC/TEST:CORE:C01:019–021"
         ]
       ],
-      "non_applicability": "No actual pilot, SLO measurement or test result is present in the source span."
+      "non_applicability": "No actual pilot, SLO measurement or test result is present in the source span.",
+      "related_planning_unknowns": [
+        "SLO/capacity numerical thresholds and telemetry provider/retention decisions"
+      ],
+      "related_policy_context": [
+        "RUM policy"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0009",
@@ -459,12 +521,10 @@
         "TEST:CORE:C01:023"
       ],
       "related_policy_refs": [
-        "REQ:CORE:022–023",
-        "phase-one compatibility baseline"
+        "REQ:CORE:022",
+        "REQ:CORE:023"
       ],
-      "related_open_decision_refs": [
-        "Authorized runtime and production schema access remain unknown when unavailable"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -479,7 +539,13 @@
           "Implementation Plan lines 559–600; REQ/AC/TEST:CORE:C01:022–023"
         ]
       ],
-      "non_applicability": "Product baseline does not automatically belong to every Phase 5 deliverable."
+      "non_applicability": "Product baseline does not automatically belong to every Phase 5 deliverable.",
+      "related_planning_unknowns": [
+        "Authorized runtime and production schema access remain unknown when unavailable"
+      ],
+      "related_policy_context": [
+        "phase-one compatibility baseline"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0010",
@@ -517,12 +583,9 @@
         "REQ:CORE:026",
         "O5-09",
         "O5-10",
-        "F06",
-        "RG/REL"
+        "F06"
       ],
-      "related_open_decision_refs": [
-        "Release-specific thresholds, owners, cohort, schedule and measured costs remain open"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -546,7 +609,13 @@
           "Implementation Plan lines 601–630; REQ/AC/TEST:CORE:C01:024/026"
         ]
       ],
-      "non_applicability": "No week assignment or actual release decision is made here."
+      "non_applicability": "No week assignment or actual release decision is made here.",
+      "related_planning_unknowns": [
+        "Release-specific thresholds, owners, cohort, schedule and measured costs remain open"
+      ],
+      "related_policy_context": [
+        "گیت‌های مصوب release (ارجاع کلی، نه شناسهٔ واحد)"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0011",
@@ -563,7 +632,16 @@
       "authority_status": "APPROVED_SOURCE_POLICY",
       "related_package_ids": [
         "C01",
-        "C07–C13b"
+        "C07",
+        "C08",
+        "C09",
+        "C10",
+        "C11a",
+        "C11b",
+        "C12a",
+        "C12b",
+        "C13a",
+        "C13b"
       ],
       "related_task_ids": [
         "TASK:CORE:C01:011",
@@ -582,13 +660,9 @@
         "REQ:CORE:027",
         "REQ:CORE:032",
         "O5-13",
-        "O5-14",
-        "EXP-G01..10",
-        "COV/AC/G-COV"
+        "O5-14"
       ],
-      "related_open_decision_refs": [
-        "Measured demand, value, risk, compliance/build/run cost, reuse and blast radius per growth proposal; no invented thresholds"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -611,7 +685,23 @@
           "Implementation Plan lines 631–650; REQ/AC/TEST:CORE:C01:027/032"
         ]
       ],
-      "non_applicability": "Growth policy is not an allocation or approval of P5 tasks."
+      "non_applicability": "Growth policy is not an allocation or approval of P5 tasks.",
+      "related_planning_unknowns": [
+        "Measured demand, value, risk, compliance/build/run cost, reuse and blast radius per growth proposal; no invented thresholds"
+      ],
+      "related_policy_context": [
+        "EXP-G01",
+        "EXP-G02",
+        "EXP-G03",
+        "EXP-G04",
+        "EXP-G05",
+        "EXP-G06",
+        "EXP-G07",
+        "EXP-G08",
+        "EXP-G09",
+        "EXP-G10",
+        "رابطهٔ Coverage/Acceptance؛ متن توصیفی است، نه شناسهٔ سیاست"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0012",
@@ -642,12 +732,9 @@
         "TEST:CORE:C01:033"
       ],
       "related_policy_refs": [
-        "REQ:CORE:033",
-        "Wallet V0.20"
+        "REQ:CORE:033"
       ],
-      "related_open_decision_refs": [
-        "Gift-accounting/vendor/legal details and activation timing are separate/open where source says so"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -664,7 +751,13 @@
           "Implementation Plan lines 651–675; REQ/AC/TEST:CORE:C01:033"
         ]
       ],
-      "non_applicability": "No Wallet implementation or release is approved by this planning statement."
+      "non_applicability": "No Wallet implementation or release is approved by this planning statement.",
+      "related_planning_unknowns": [
+        "Gift-accounting/vendor/legal details and activation timing are separate/open where source says so"
+      ],
+      "related_policy_sources": [
+        "Wallet V0.20"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0013",
@@ -680,7 +773,8 @@
       "knowledge_type": "OPERATIONAL_CONSTRAINT",
       "authority_status": "APPROVED_SOURCE_POLICY",
       "related_package_ids": [
-        "C01"
+        "C01",
+        "A06"
       ],
       "related_task_ids": [
         "TASK:CORE:C01:007"
@@ -697,12 +791,11 @@
         "TEST:CORE:C01:039"
       ],
       "related_policy_refs": [
-        "REQ:CORE:037–039",
-        "A06"
+        "REQ:CORE:037",
+        "REQ:CORE:038",
+        "REQ:CORE:039"
       ],
-      "related_open_decision_refs": [
-        "Approved numeric budgets/policies depend on workload and relevant owner evidence"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -718,7 +811,10 @@
           "Implementation Plan lines 676–700; REQ/AC/TEST:CORE:C01:037–039"
         ]
       ],
-      "non_applicability": "No resilience test execution is recorded."
+      "non_applicability": "No resilience test execution is recorded.",
+      "related_planning_unknowns": [
+        "Approved numeric budgets/policies depend on workload and relevant owner evidence"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0014",
@@ -745,13 +841,33 @@
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "REQ:CORE:057–081"
+        "REQ:CORE:057",
+        "REQ:CORE:058",
+        "REQ:CORE:059",
+        "REQ:CORE:060",
+        "REQ:CORE:061",
+        "REQ:CORE:062",
+        "REQ:CORE:063",
+        "REQ:CORE:064",
+        "REQ:CORE:065",
+        "REQ:CORE:066",
+        "REQ:CORE:067",
+        "REQ:CORE:068",
+        "REQ:CORE:069",
+        "REQ:CORE:070",
+        "REQ:CORE:071",
+        "REQ:CORE:072",
+        "REQ:CORE:073",
+        "REQ:CORE:074",
+        "REQ:CORE:075",
+        "REQ:CORE:076",
+        "REQ:CORE:077",
+        "REQ:CORE:078",
+        "REQ:CORE:079",
+        "REQ:CORE:080",
+        "REQ:CORE:081"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C02:01",
-        "DECISION:C02:02",
-        "DECISION:C02:03"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -766,7 +882,12 @@
       "evidence_refs": [
         "Implementation Plan lines 1041–1390; C02 identity, organization membership and tenant authorization"
       ],
-      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review."
+      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review.",
+      "related_planning_unknowns": [
+        "DECISION:C02:01",
+        "DECISION:C02:02",
+        "DECISION:C02:03"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0015",
@@ -792,11 +913,27 @@
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "REQ:CORE:082–100"
+        "REQ:CORE:082",
+        "REQ:CORE:083",
+        "REQ:CORE:084",
+        "REQ:CORE:085",
+        "REQ:CORE:086",
+        "REQ:CORE:087",
+        "REQ:CORE:088",
+        "REQ:CORE:089",
+        "REQ:CORE:090",
+        "REQ:CORE:091",
+        "REQ:CORE:092",
+        "REQ:CORE:093",
+        "REQ:CORE:094",
+        "REQ:CORE:095",
+        "REQ:CORE:096",
+        "REQ:CORE:097",
+        "REQ:CORE:098",
+        "REQ:CORE:099",
+        "REQ:CORE:100"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C02:03"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -812,7 +949,10 @@
       "evidence_refs": [
         "Implementation Plan lines 1391–1691; C02 action authorization, consent, context transfer and sensitive data"
       ],
-      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review."
+      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review.",
+      "related_planning_unknowns": [
+        "DECISION:C02:03"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0016",
@@ -840,13 +980,37 @@
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "REQ:CORE:102–130"
+        "REQ:CORE:102",
+        "REQ:CORE:103",
+        "REQ:CORE:104",
+        "REQ:CORE:105",
+        "REQ:CORE:106",
+        "REQ:CORE:107",
+        "REQ:CORE:108",
+        "REQ:CORE:109",
+        "REQ:CORE:110",
+        "REQ:CORE:111",
+        "REQ:CORE:112",
+        "REQ:CORE:113",
+        "REQ:CORE:114",
+        "REQ:CORE:115",
+        "REQ:CORE:116",
+        "REQ:CORE:117",
+        "REQ:CORE:118",
+        "REQ:CORE:119",
+        "REQ:CORE:120",
+        "REQ:CORE:121",
+        "REQ:CORE:122",
+        "REQ:CORE:123",
+        "REQ:CORE:124",
+        "REQ:CORE:125",
+        "REQ:CORE:126",
+        "REQ:CORE:127",
+        "REQ:CORE:128",
+        "REQ:CORE:129",
+        "REQ:CORE:130"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C02:01",
-        "DECISION:C02:02",
-        "DECISION:C02:03"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -862,7 +1026,12 @@
       "evidence_refs": [
         "Implementation Plan lines 1692–2088; C02 financial records, legal limits, chain access and open decisions"
       ],
-      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review."
+      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review.",
+      "related_planning_unknowns": [
+        "DECISION:C02:01",
+        "DECISION:C02:02",
+        "DECISION:C02:03"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0017",
@@ -893,16 +1062,29 @@
       "related_test_ids": [],
       "related_policy_refs": [
         "REQ:CORE:006",
-        "REQ:CORE:010–012",
-        "REQ:CORE:015–021",
-        "REQ:CORE:037–047"
+        "REQ:CORE:010",
+        "REQ:CORE:011",
+        "REQ:CORE:012",
+        "REQ:CORE:015",
+        "REQ:CORE:016",
+        "REQ:CORE:017",
+        "REQ:CORE:018",
+        "REQ:CORE:019",
+        "REQ:CORE:020",
+        "REQ:CORE:021",
+        "REQ:CORE:037",
+        "REQ:CORE:038",
+        "REQ:CORE:039",
+        "REQ:CORE:040",
+        "REQ:CORE:041",
+        "REQ:CORE:042",
+        "REQ:CORE:043",
+        "REQ:CORE:044",
+        "REQ:CORE:045",
+        "REQ:CORE:046",
+        "REQ:CORE:047"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C01:02",
-        "DECISION:C01:04",
-        "DECISION:C01:05",
-        "DECISION:C01:09"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -919,7 +1101,13 @@
       "evidence_refs": [
         "Implementation Plan lines 2089–2634; C03 ownership disposition, shared contracts and gated architecture tasks"
       ],
-      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review."
+      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review.",
+      "related_planning_unknowns": [
+        "DECISION:C01:02",
+        "DECISION:C01:04",
+        "DECISION:C01:05",
+        "DECISION:C01:09"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0018",
@@ -947,15 +1135,18 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [
-        "TEST:CORE:C03:001–009"
+        "TEST:CORE:C03:001",
+        "TEST:CORE:C03:002",
+        "TEST:CORE:C03:003",
+        "TEST:CORE:C03:004",
+        "TEST:CORE:C03:005",
+        "TEST:CORE:C03:006",
+        "TEST:CORE:C03:007",
+        "TEST:CORE:C03:008",
+        "TEST:CORE:C03:009"
       ],
       "related_policy_refs": [],
-      "related_open_decision_refs": [
-        "DECISION:C01:02",
-        "DECISION:C01:04",
-        "DECISION:C01:05",
-        "DECISION:C01:09"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -970,7 +1161,13 @@
       "evidence_refs": [
         "Implementation Plan lines 2635–3000; C03 independent synthetic test definitions through line 3000"
       ],
-      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review."
+      "non_applicability": "No source decision was approved and no product implementation/test execution was claimed in this review.",
+      "related_planning_unknowns": [
+        "DECISION:C01:02",
+        "DECISION:C01:04",
+        "DECISION:C01:05",
+        "DECISION:C01:09"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0019",
@@ -1013,12 +1210,7 @@
         "TEST:CORE:C03:022"
       ],
       "related_policy_refs": [],
-      "related_open_decision_refs": [
-        "DECISION:C01:02",
-        "DECISION:C01:03",
-        "DECISION:C01:04",
-        "DECISION:C01:09"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -1034,7 +1226,13 @@
       "evidence_refs": [
         "Implementation Plan lines 3015–3561; C03 recovery, failure isolation and synthetic acceptance tests"
       ],
-      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred."
+      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred.",
+      "related_planning_unknowns": [
+        "DECISION:C01:02",
+        "DECISION:C01:03",
+        "DECISION:C01:04",
+        "DECISION:C01:09"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0020",
@@ -1064,19 +1262,7 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "DELIVERY:C03:001",
-        "DELIVERY:C03:002",
-        "DELIVERY:C03:003",
-        "DELIVERY:C03:004",
-        "DELIVERY:C03:005",
-        "DELIVERY:C03:006",
-        "DELIVERY:C03:007",
-        "DELIVERY:C03:008",
-        "DELIVERY:C03:009",
-        "DELIVERY:C03:010",
-        "DELIVERY:C03:011"
-      ],
+      "related_policy_refs": [],
       "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
@@ -1165,6 +1351,19 @@
           "type": "PREFERENCE",
           "evidence_locator": "Implementation Plan line 3815; DEP:C03:010"
         }
+      ],
+      "related_policy_context": [
+        "DELIVERY:C03:001",
+        "DELIVERY:C03:002",
+        "DELIVERY:C03:003",
+        "DELIVERY:C03:004",
+        "DELIVERY:C03:005",
+        "DELIVERY:C03:006",
+        "DELIVERY:C03:007",
+        "DELIVERY:C03:008",
+        "DELIVERY:C03:009",
+        "DELIVERY:C03:010",
+        "DELIVERY:C03:011"
       ]
     },
     {
@@ -1258,16 +1457,7 @@
         "TEST:CORE:C04:060"
       ],
       "related_policy_refs": [],
-      "related_open_decision_refs": [
-        "DECISION:C04:01",
-        "DECISION:C04:02",
-        "DECISION:C04:03",
-        "DECISION:C04:04",
-        "DECISION:C04:05",
-        "DECISION:C04:06",
-        "DECISION:C04:07",
-        "DECISION:C04:08"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -1288,7 +1478,17 @@
       "evidence_refs": [
         "Implementation Plan lines 3843–3952; C04 subscription domain boundary and approved atomic policy"
       ],
-      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred."
+      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred.",
+      "related_planning_unknowns": [
+        "DECISION:C04:01",
+        "DECISION:C04:02",
+        "DECISION:C04:03",
+        "DECISION:C04:04",
+        "DECISION:C04:05",
+        "DECISION:C04:06",
+        "DECISION:C04:07",
+        "DECISION:C04:08"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0022",
@@ -1442,16 +1642,7 @@
         "TEST:CORE:C04:060"
       ],
       "related_policy_refs": [],
-      "related_open_decision_refs": [
-        "DECISION:C04:01",
-        "DECISION:C04:02",
-        "DECISION:C04:03",
-        "DECISION:C04:04",
-        "DECISION:C04:05",
-        "DECISION:C04:06",
-        "DECISION:C04:07",
-        "DECISION:C04:08"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -1467,7 +1658,17 @@
       "evidence_refs": [
         "Implementation Plan lines 3953–4045; C04 task decomposition and acceptance/test design"
       ],
-      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred."
+      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred.",
+      "related_planning_unknowns": [
+        "DECISION:C04:01",
+        "DECISION:C04:02",
+        "DECISION:C04:03",
+        "DECISION:C04:04",
+        "DECISION:C04:05",
+        "DECISION:C04:06",
+        "DECISION:C04:07",
+        "DECISION:C04:08"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0023",
@@ -1498,27 +1699,8 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "DEP:C04:001",
-        "DEP:C04:002",
-        "DEP:C04:003",
-        "DEP:C04:004",
-        "DEP:C04:005",
-        "DEP:C04:006",
-        "Handoff:H04:001",
-        "Handoff:H04:002",
-        "Handoff:H04:003"
-      ],
-      "related_open_decision_refs": [
-        "DECISION:C04:01",
-        "DECISION:C04:02",
-        "DECISION:C04:03",
-        "DECISION:C04:04",
-        "DECISION:C04:05",
-        "DECISION:C04:06",
-        "DECISION:C04:07",
-        "DECISION:C04:08"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D03",
@@ -1535,7 +1717,28 @@
       "evidence_refs": [
         "Implementation Plan lines 4046–4103; C04 contracts, decisions and financial activation gates"
       ],
-      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred."
+      "non_applicability": "No new Phase 5 decision was approved and no product execution or release status is inferred.",
+      "related_planning_unknowns": [
+        "DECISION:C04:01",
+        "DECISION:C04:02",
+        "DECISION:C04:03",
+        "DECISION:C04:04",
+        "DECISION:C04:05",
+        "DECISION:C04:06",
+        "DECISION:C04:07",
+        "DECISION:C04:08"
+      ],
+      "related_policy_context": [
+        "DEP:C04:001",
+        "DEP:C04:002",
+        "DEP:C04:003",
+        "DEP:C04:004",
+        "DEP:C04:005",
+        "DEP:C04:006",
+        "Handoff:H04:001",
+        "Handoff:H04:002",
+        "Handoff:H04:003"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0024",
@@ -1670,15 +1873,9 @@
         "REQ:CORE:222",
         "REQ:CORE:223",
         "REQ:CORE:224",
-        "REQ:CORE:225",
-        "DEP:C05A:001",
-        "DEP:C05A:002",
-        "DEP:C05A:003",
-        "DEP:C05A:004"
+        "REQ:CORE:225"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C05A:001"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -1694,7 +1891,16 @@
       "evidence_refs": [
         "Implementation Plan lines 4104–4406; C05a service catalog and router"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "DECISION:C05A:001"
+      ],
+      "related_policy_context": [
+        "DEP:C05A:001",
+        "DEP:C05A:002",
+        "DEP:C05A:003",
+        "DEP:C05A:004"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0025",
@@ -1771,19 +1977,9 @@
         "REQ:CORE:239",
         "REQ:CORE:240",
         "REQ:CORE:008",
-        "REQ:CORE:009",
-        "CONTRACT:C01:01",
-        "CONTRACT:C01:02",
-        "CONTRACT:C01:03",
-        "CONTRACT:C01:04"
+        "REQ:CORE:009"
       ],
-      "related_open_decision_refs": [
-        "DECISION:C05B:001",
-        "DECISION:C05B:002",
-        "DECISION:C05B:003",
-        "DECISION:C05B:004",
-        "DECISION:C05B:005"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -1800,7 +1996,20 @@
       "evidence_refs": [
         "Implementation Plan lines 4407–4633; C05b financial product catalog"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "DECISION:C05B:001",
+        "DECISION:C05B:002",
+        "DECISION:C05B:003",
+        "DECISION:C05B:004",
+        "DECISION:C05B:005"
+      ],
+      "related_policy_context": [
+        "CONTRACT:C01:01",
+        "CONTRACT:C01:02",
+        "CONTRACT:C01:03",
+        "CONTRACT:C01:04"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0026",
@@ -2090,12 +2299,7 @@
         "REQ:CORE:C07:016",
         "REQ:CORE:C07:017"
       ],
-      "related_open_decision_refs": [
-        "OPEN:C08:01",
-        "OPEN:C08:02",
-        "OPEN:C08:03",
-        "OPEN:C08:04"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2113,7 +2317,13 @@
       "evidence_refs": [
         "Implementation Plan lines 4932–5091; C08 top-up and campaign behavior"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "OPEN:C08:01",
+        "OPEN:C08:02",
+        "OPEN:C08:03",
+        "OPEN:C08:04"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0029",
@@ -2196,11 +2406,7 @@
         "REQ:CORE:C09:016",
         "REQ:CORE:C09:017"
       ],
-      "related_open_decision_refs": [
-        "OPEN:C09:01",
-        "OPEN:C09:02",
-        "OPEN:C09:03"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2218,7 +2424,12 @@
       "evidence_refs": [
         "Implementation Plan lines 5092–5246; C09 reserve, capture and release"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "OPEN:C09:01",
+        "OPEN:C09:02",
+        "OPEN:C09:03"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0030",
@@ -2286,13 +2497,7 @@
         "REQ:CORE:C10:011",
         "REQ:CORE:C10:012"
       ],
-      "related_open_decision_refs": [
-        "OPEN:C10:01",
-        "OPEN:C10:02",
-        "OPEN:C10:03",
-        "OPEN:C10:04",
-        "OPEN:C10:05"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2310,7 +2515,14 @@
       "evidence_refs": [
         "Implementation Plan lines 5247–5374; C10 transfers and withdrawals"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "OPEN:C10:01",
+        "OPEN:C10:02",
+        "OPEN:C10:03",
+        "OPEN:C10:04",
+        "OPEN:C10:05"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0031",
@@ -2373,12 +2585,7 @@
         "REQ:CORE:C07:015",
         "REQ:CORE:C07:016"
       ],
-      "related_open_decision_refs": [
-        "OPEN:C11A:01",
-        "OPEN:C11A:02",
-        "OPEN:C11A:03",
-        "OPEN:C11A:04"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2396,7 +2603,13 @@
       "evidence_refs": [
         "Implementation Plan lines 5375–5523; C11a refund and correction"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "OPEN:C11A:01",
+        "OPEN:C11A:02",
+        "OPEN:C11A:03",
+        "OPEN:C11A:04"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0032",
@@ -2411,7 +2624,11 @@
       "knowledge_statement": "C11b periodic operations require revocable scoped authorization, no automatic new run after definitive failure and inquiry before retry on unknown; limits apply concurrently and rollover is permission capacity, not employee money. C12a requires balanced immutable ledger entries, component lineage, durable idempotency, distinct linked IDs and atomic state/limit checks. Financial backups/restores must preserve all history and lineage and reconcile on migration. Source summary counts conflict with its explicit REQ tables: C11b enumerates 10 but reports 9, C12a enumerates 13 but reports 11 in its summary. Treat this as a source traceability defect, not a policy decision.",
       "knowledge_type": "SOURCE_COUNT_INCONSISTENCY",
       "authority_status": "SOURCE_INTERNAL_COUNT_CONFLICT",
-      "related_package_ids": "C11b",
+      "related_package_ids": [
+        "C",
+        "1",
+        "b"
+      ],
       "related_task_ids": [
         "TASK:CORE:C11B:001",
         "TASK:CORE:C11B:002",
@@ -2452,22 +2669,7 @@
         "REQ:CORE:C12A:012",
         "REQ:CORE:C12A:013"
       ],
-      "related_open_decision_refs": [
-        "OPEN:C11B:01",
-        "OPEN:C11B:02",
-        "OPEN:C11B:03",
-        "OPEN:C11B:04",
-        "OPEN:C11B:05",
-        "OPEN:C12A:01",
-        "OPEN:C12A:02",
-        "OPEN:C12A:03",
-        "OPEN:C12A:04",
-        "OPEN:C12A:05",
-        "OPEN:C12A:06",
-        "OPEN:C12A:07",
-        "OPEN:C12A:08",
-        "OPEN:C12A:09"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2485,7 +2687,23 @@
       "evidence_refs": [
         "Implementation Plan lines 5524–5752; C11b periodic operations and C12a ledger"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "OPEN:C11B:01",
+        "OPEN:C11B:02",
+        "OPEN:C11B:03",
+        "OPEN:C11B:04",
+        "OPEN:C11B:05",
+        "OPEN:C12A:01",
+        "OPEN:C12A:02",
+        "OPEN:C12A:03",
+        "OPEN:C12A:04",
+        "OPEN:C12A:05",
+        "OPEN:C12A:06",
+        "OPEN:C12A:07",
+        "OPEN:C12A:08",
+        "OPEN:C12A:09"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0033",
@@ -2513,23 +2731,8 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "C12B-R01",
-        "C12B-R02",
-        "C12B-R03",
-        "C12B-R04",
-        "C12B-R05",
-        "C12B-R06",
-        "C12B-R07",
-        "C12B-R08",
-        "C12B-R09",
-        "C12B-R10",
-        "C12B-R11"
-      ],
-      "related_open_decision_refs": [
-        "DECISION:C12B:01",
-        "DECISION:C12B:02"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -2547,7 +2750,24 @@
       "evidence_refs": [
         "Implementation Plan lines 5753–5856; C12b reconciliation and recovery"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_planning_unknowns": [
+        "DECISION:C12B:01",
+        "DECISION:C12B:02"
+      ],
+      "related_policy_context": [
+        "C12B-R01",
+        "C12B-R02",
+        "C12B-R03",
+        "C12B-R04",
+        "C12B-R05",
+        "C12B-R06",
+        "C12B-R07",
+        "C12B-R08",
+        "C12B-R09",
+        "C12B-R10",
+        "C12B-R11"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0034",
@@ -2575,22 +2795,7 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "C13A-R01",
-        "C13A-R02",
-        "C13A-R03",
-        "C13A-R04",
-        "C13A-R05",
-        "C13A-R06",
-        "C13A-R07",
-        "C13A-R08",
-        "C13A-R09",
-        "C13A-R10",
-        "C13A-R11",
-        "C13A-R12",
-        "C13A-R13",
-        "C13A-R14"
-      ],
+      "related_policy_refs": [],
       "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
@@ -2609,7 +2814,23 @@
       "evidence_refs": [
         "Implementation Plan lines 5857–5938; C13a pricing, metering and settlement"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_policy_context": [
+        "C13A-R01",
+        "C13A-R02",
+        "C13A-R03",
+        "C13A-R04",
+        "C13A-R05",
+        "C13A-R06",
+        "C13A-R07",
+        "C13A-R08",
+        "C13A-R09",
+        "C13A-R10",
+        "C13A-R11",
+        "C13A-R12",
+        "C13A-R13",
+        "C13A-R14"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0035",
@@ -2631,22 +2852,7 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "C13B-R01",
-        "C13B-R02",
-        "C13B-R03",
-        "C13B-R04",
-        "C13B-R05",
-        "C13B-R06",
-        "C13B-R07",
-        "C13B-R08",
-        "C13B-R09",
-        "C13B-R10",
-        "CAND-13B-11",
-        "CAND-13B-12",
-        "CAND-13B-13",
-        "CAND-13B-14"
-      ],
+      "related_policy_refs": [],
       "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
@@ -2662,7 +2868,23 @@
       "evidence_refs": [
         "Implementation Plan lines 5939–6000; C13b wallet experience, in-scope opening only"
       ],
-      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced."
+      "non_applicability": "No Phase 5 decision is approved and no product test, build, migration, financial operation or release is evidenced.",
+      "related_policy_context": [
+        "C13B-R01",
+        "C13B-R02",
+        "C13B-R03",
+        "C13B-R04",
+        "C13B-R05",
+        "C13B-R06",
+        "C13B-R07",
+        "C13B-R08",
+        "C13B-R09",
+        "C13B-R10",
+        "CAND-13B-11",
+        "CAND-13B-12",
+        "CAND-13B-13",
+        "CAND-13B-14"
+      ]
     },
     {
       "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
@@ -2786,32 +3008,8 @@
         "C13B-TC47",
         "C13B-TC48"
       ],
-      "related_policy_refs": [
-        "C13B-R01",
-        "C13B-R02",
-        "C13B-R03",
-        "C13B-R04",
-        "C13B-R05",
-        "C13B-R06",
-        "C13B-R07",
-        "C13B-R08",
-        "C13B-R09",
-        "C13B-R10",
-        "C13B-R11",
-        "C13B-R12",
-        "C13B-R13",
-        "C13B-R14",
-        "C13B-R15",
-        "C13B-R16"
-      ],
-      "related_open_decision_refs": [
-        "OPEN:C13B:01",
-        "OPEN:C13B:02",
-        "OPEN:C13B:03",
-        "OPEN:C13B:04",
-        "OPEN:C13B:05",
-        "OPEN:C13B:06"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "typed_dependency_refs": [
         {
           "type": "HARD",
@@ -2857,6 +3055,32 @@
       "planning_implication": "Plan C13b consumer work against versioned owner APIs and current authorization; represent access, support, financial state and notification state separately. Keep export and support-service commitments blocked on explicit open owner choices. Preserve PK-IMP-0035 as evidence of the partial opening; this record completes the same section without recounting lines 5939–6000.",
       "evidence_refs": [
         "Implementation Plan lines 5939–6047; C13B-R01–R16; AC/TD/TC definitions; C13b dependency register"
+      ],
+      "related_planning_unknowns": [
+        "OPEN:C13B:01",
+        "OPEN:C13B:02",
+        "OPEN:C13B:03",
+        "OPEN:C13B:04",
+        "OPEN:C13B:05",
+        "OPEN:C13B:06"
+      ],
+      "related_policy_context": [
+        "C13B-R01",
+        "C13B-R02",
+        "C13B-R03",
+        "C13B-R04",
+        "C13B-R05",
+        "C13B-R06",
+        "C13B-R07",
+        "C13B-R08",
+        "C13B-R09",
+        "C13B-R10",
+        "C13B-R11",
+        "C13B-R12",
+        "C13B-R13",
+        "C13B-R14",
+        "C13B-R15",
+        "C13B-R16"
       ]
     },
     {
@@ -2981,36 +3205,8 @@
         "C14-TC47",
         "C14-TC48"
       ],
-      "related_policy_refs": [
-        "C14-R01",
-        "C14-R02",
-        "C14-R03",
-        "C14-R04",
-        "C14-R05",
-        "C14-R06",
-        "C14-R07",
-        "C14-R08",
-        "C14-R09",
-        "C14-R10",
-        "C14-R11",
-        "C14-R12",
-        "C14-R13",
-        "C14-R14",
-        "C14-R15",
-        "C14-R16"
-      ],
-      "related_open_decision_refs": [
-        "OPEN:C14:01",
-        "OPEN:C14:02",
-        "OPEN:C14:03",
-        "OPEN:C14:04",
-        "OPEN:C14:05",
-        "OPEN:C14:06",
-        "OPEN:C14:07",
-        "OPEN:C14:08",
-        "OPEN:C14:09",
-        "OPEN:C14:10"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "typed_dependency_refs": [
         {
           "type": "HARD",
@@ -3056,6 +3252,36 @@
       "planning_implication": "Represent notification/event contracts and owner handoffs explicitly; avoid manufacturing full precedence among packages. Separate operational telemetry from financial records and user Monitoring from Feedforward. Release/acceptance evidence must preserve test-design-only status and leave channel, cost and thresholds to owners.",
       "evidence_refs": [
         "Implementation Plan lines 6048–6150; C14-R01–R16; C14-AC01–AC16; C14-TD01–TD16; dependency register; CPA-01–CPA-08"
+      ],
+      "related_planning_unknowns": [
+        "OPEN:C14:01",
+        "OPEN:C14:02",
+        "OPEN:C14:03",
+        "OPEN:C14:04",
+        "OPEN:C14:05",
+        "OPEN:C14:06",
+        "OPEN:C14:07",
+        "OPEN:C14:08",
+        "OPEN:C14:09",
+        "OPEN:C14:10"
+      ],
+      "related_policy_context": [
+        "C14-R01",
+        "C14-R02",
+        "C14-R03",
+        "C14-R04",
+        "C14-R05",
+        "C14-R06",
+        "C14-R07",
+        "C14-R08",
+        "C14-R09",
+        "C14-R10",
+        "C14-R11",
+        "C14-R12",
+        "C14-R13",
+        "C14-R14",
+        "C14-R15",
+        "C14-R16"
       ]
     },
     {
@@ -3687,23 +3913,17 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:RAG:R05",
-        "PKG:RAG:R06"
+        "PKG:RAG:R06",
+        "R03",
+        "R05",
+        "R06"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "R03 canonical/Snapshot ownership",
-        "R05 retrieval sufficiency",
-        "R06 answer and citation"
-      ],
-      "related_open_decision_refs": [
-        "OPEN:R05:ENGINE",
-        "OPEN:R05:THRESHOLDS",
-        "OPEN:R06:MODEL",
-        "OPEN:R06:EVALUATION_THRESHOLDS"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -3716,7 +3936,18 @@
       "evidence_refs": [
         "Implementation Plan lines 6680–7045; R05/R06 retrieval and grounded response"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "OPEN:R05:ENGINE",
+        "OPEN:R05:THRESHOLDS",
+        "OPEN:R06:MODEL",
+        "OPEN:R06:EVALUATION_THRESHOLDS"
+      ],
+      "related_policy_context": [
+        "canonical/Snapshot ownership",
+        "retrieval sufficiency",
+        "answer and citation"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0044",
@@ -3768,7 +3999,8 @@
       "knowledge_type": "SOURCE_INCONSISTENCY",
       "authority_status": "SOURCE_REVIEW_FINDING",
       "related_package_ids": [
-        "PKG:RAG:R08"
+        "PKG:RAG:R08",
+        "R08"
       ],
       "related_task_ids": [
         "TASK:RAG:R08:001",
@@ -3780,12 +4012,8 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "R08 restore manifest and recovery boundary"
-      ],
-      "related_open_decision_refs": [
-        "R08 subtask count reconciliation"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D06"
@@ -3795,7 +4023,13 @@
       "evidence_refs": [
         "Implementation Plan lines 7214–7371; R08 task and count inconsistency"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "R08 subtask count reconciliation"
+      ],
+      "related_policy_context": [
+        "restore manifest and recovery boundary"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0046",
@@ -3812,20 +4046,16 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:RAG:R09",
-        "PKG:RAG:R10"
+        "PKG:RAG:R10",
+        "R09",
+        "R10"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "R09 scoped conversation context",
-        "R10 deterministic Core calculation boundary"
-      ],
-      "related_open_decision_refs": [
-        "R09 schema/thresholds",
-        "R10 formula/unit/rounding/timeout"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -3838,7 +4068,15 @@
       "evidence_refs": [
         "Implementation Plan lines 7372–7550; R09/R10 context and deterministic calculation"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "R09 schema/thresholds",
+        "R10 formula/unit/rounding/timeout"
+      ],
+      "related_policy_context": [
+        "scoped conversation context",
+        "deterministic Core calculation boundary"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0047",
@@ -3854,20 +4092,17 @@
       "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
-        "PKG:ASSISTANT:A01"
+        "PKG:ASSISTANT:A01",
+        "A01",
+        "C02",
+        "C04"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "A01 proposal-only authority",
-        "C02 permission and consent",
-        "C04 entitlement"
-      ],
-      "related_open_decision_refs": [
-        "A01 tools/endpoints/retention/retries/activation"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -3880,7 +4115,15 @@
       "evidence_refs": [
         "Implementation Plan lines 7567–7700; A01 assistant proposal boundary"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A01 tools/endpoints/retention/retries/activation"
+      ],
+      "related_policy_context": [
+        "proposal-only authority",
+        "permission and consent",
+        "entitlement"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0048",
@@ -3896,20 +4139,16 @@
       "knowledge_type": "ACCEPTED_IMPLEMENTATION_PLAN",
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
-        "PKG:ASSISTANT:A02"
+        "PKG:ASSISTANT:A02",
+        "A02",
+        "C02"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "A02 owner-local durable state",
-        "C02 fresh authorization",
-        "unknown outcome inquiry before retry"
-      ],
-      "related_open_decision_refs": [
-        "A02 engine/queue/schema/retry/SLA"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D06",
@@ -3921,7 +4160,15 @@
       "evidence_refs": [
         "Implementation Plan lines 7701–7858; A02 durable workflow ownership"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A02 engine/queue/schema/retry/SLA"
+      ],
+      "related_policy_context": [
+        "owner-local durable state",
+        "fresh authorization",
+        "unknown outcome inquiry before retry"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0049",
@@ -3938,20 +4185,16 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:ASSISTANT:A03",
-        "PKG:ASSISTANT:A04"
+        "PKG:ASSISTANT:A04",
+        "A03",
+        "A04"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "A03 candidate-only event handling",
-        "A04 typed action and fresh conjunctive gates"
-      ],
-      "related_open_decision_refs": [
-        "A03 event infrastructure/order/thresholds",
-        "A04 platform/tool/topology"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -3964,7 +4207,15 @@
       "evidence_refs": [
         "Implementation Plan lines 7874–8085; A03/A04 event and Computer Use boundaries"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A03 event infrastructure/order/thresholds",
+        "A04 platform/tool/topology"
+      ],
+      "related_policy_context": [
+        "candidate-only event handling",
+        "typed action and fresh conjunctive gates"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0050",
@@ -3989,13 +4240,9 @@
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "O5-05 initial capability scope",
-        "Core-owned wallet financial state",
-        "unknown outcome reconciliation"
+        "O5-05"
       ],
-      "related_open_decision_refs": [
-        "A05 bank/API/fee/limit/auth/SLA"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D03",
@@ -4009,7 +4256,15 @@
       "evidence_refs": [
         "Implementation Plan lines 8113–8221; A05 financial flow ownership"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A05 bank/API/fee/limit/auth/SLA"
+      ],
+      "related_policy_context": [
+        "initial capability scope",
+        "Core-owned wallet financial state",
+        "unknown outcome reconciliation"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0051",
@@ -4026,22 +4281,18 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:ASSISTANT:A06",
-        "PKG:ASSISTANT:A04"
+        "PKG:ASSISTANT:A04",
+        "A06",
+        "A04"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [
-        "O5-06 delivery order",
-        "A06 non-destructive discovery",
-        "A04 live observation"
+        "O5-06"
       ],
-      "related_open_decision_refs": [
-        "A06 execution topology",
-        "A06 platform feasibility",
-        "A06 schema/runner/cadence"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D05",
@@ -4054,7 +4305,17 @@
       "evidence_refs": [
         "Implementation Plan lines 8222–8351; A06 UI map and platform release gates"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A06 execution topology",
+        "A06 platform feasibility",
+        "A06 schema/runner/cadence"
+      ],
+      "related_policy_context": [
+        "delivery order",
+        "non-destructive discovery",
+        "live observation"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0052",
@@ -4071,22 +4332,16 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:ASSISTANT:A07",
-        "PKG:ASSISTANT:A02"
+        "PKG:ASSISTANT:A02",
+        "A07",
+        "C02"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "B05 data transfer boundary",
-        "A07 four context types",
-        "C02 backend authorization"
-      ],
-      "related_open_decision_refs": [
-        "User Memory owner",
-        "User Memory API",
-        "retention/deletion/export"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D01",
         "P5-D02",
@@ -4099,7 +4354,17 @@
       "evidence_refs": [
         "Implementation Plan lines 8352–8463; A07 context and User Memory ownership gap"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "User Memory owner",
+        "User Memory API",
+        "retention/deletion/export"
+      ],
+      "related_policy_context": [
+        "B05 data transfer boundary",
+        "four context types",
+        "backend authorization"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0053",
@@ -4116,22 +4381,16 @@
       "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
       "related_package_ids": [
         "PKG:ASSISTANT:A08",
-        "PKG:CORE:C01"
+        "PKG:CORE:C01",
+        "C01",
+        "A08"
       ],
       "related_task_ids": [],
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "C01 versioned API/error/config standards",
-        "A08 distinct config classes",
-        "R1 Assistant disabled"
-      ],
-      "related_open_decision_refs": [
-        "A08 API/schema",
-        "A08 configuration/secret tooling",
-        "A08 rollout/version support"
-      ],
+      "related_policy_refs": [],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D05",
@@ -4144,7 +4403,17 @@
       "evidence_refs": [
         "Implementation Plan lines 8464–8610; A08 shared contract and configuration governance"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "A08 API/schema",
+        "A08 configuration/secret tooling",
+        "A08 rollout/version support"
+      ],
+      "related_policy_context": [
+        "versioned API/error/config standards",
+        "distinct config classes",
+        "R1 Assistant disabled"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0054",
@@ -4167,18 +4436,7 @@
       "related_subtask_ids": [],
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
-      "related_policy_refs": [
-        "CONTRACT:C01:01",
-        "CONTRACT:C01:02",
-        "CONTRACT:C01:03",
-        "CONTRACT:C01:04",
-        "CONTRACT:C01:05",
-        "CONTRACT:C01:06",
-        "CONTRACT:C01:07",
-        "CONTRACT:C02:01",
-        "CONTRACT:C02:02",
-        "CONTRACT:C02:03"
-      ],
+      "related_policy_refs": [],
       "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
@@ -4189,7 +4447,19 @@
       "evidence_refs": [
         "Implementation Plan lines 8620–8661; C01/C02 typed contracts and dependency semantics"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_policy_context": [
+        "CONTRACT:C01:01",
+        "CONTRACT:C01:02",
+        "CONTRACT:C01:03",
+        "CONTRACT:C01:04",
+        "CONTRACT:C01:05",
+        "CONTRACT:C01:06",
+        "CONTRACT:C01:07",
+        "CONTRACT:C02:01",
+        "CONTRACT:C02:02",
+        "CONTRACT:C02:03"
+      ]
     },
     {
       "knowledge_id": "PK-IMP-0055",
@@ -4251,10 +4521,7 @@
       "related_acceptance_criteria_ids": [],
       "related_test_ids": [],
       "related_policy_refs": [],
-      "related_open_decision_refs": [
-        "largest-remainder tie-break",
-        "aggregate candidate atomization/oracle gaps"
-      ],
+      "related_open_decision_refs": [],
       "affected_phase5_decisions": [
         "P5-D02",
         "P5-D09",
@@ -4265,7 +4532,84 @@
       "evidence_refs": [
         "Implementation Plan lines 8677–8761; Wallet crosswalk and semantic coverage audit"
       ],
-      "non_applicability": ""
+      "non_applicability": "",
+      "related_planning_unknowns": [
+        "largest-remainder tie-break",
+        "aggregate candidate atomization/oracle gaps"
+      ]
+    },
+    {
+      "knowledge_id": "PK-IMP-0057",
+      "source_document": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+      "source_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "source_locator": {
+        "start_line": 7083,
+        "end_line": 7213,
+        "section": "R07 — کشف و ارزیابی رابطهٔ اسناد و ورود انتخابی"
+      },
+      "knowledge_statement": "R07 owns RDE and document-relation candidates, matching signals and selective-ingestion workflow. R04 owns source observation/catalog; R02 alone owns access authorization and ingestion; R03 owns canonical identity/version/provision/legal-relation records and writes. R07 sends only selected, scoped candidates to R02 and may propose, never publish, canonical relations. Similarity, keyword hits, semantic scores and newness are leads, not legal effect or authority; ambiguity and unavailable evidence remain visible. Product tests are planned only, NOT_EXECUTED.",
+      "knowledge_type": "PLANNING_BOUNDARY",
+      "authority_status": "ACCEPTED_IMPLEMENTATION_PLAN",
+      "related_package_ids": [
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07"
+      ],
+      "related_task_ids": [
+        "TASK:RAG:R07:001",
+        "TASK:RAG:R07:002",
+        "TASK:RAG:R07:003",
+        "TASK:RAG:R07:004"
+      ],
+      "related_subtask_ids": [],
+      "related_acceptance_criteria_ids": [
+        "AC:RAG:R07:001",
+        "AC:RAG:R07:002",
+        "AC:RAG:R07:003",
+        "AC:RAG:R07:004",
+        "AC:RAG:R07:005",
+        "AC:RAG:R07:006",
+        "AC:RAG:R07:007",
+        "AC:RAG:R07:008"
+      ],
+      "related_test_ids": [
+        "TEST:RAG:R07:001",
+        "TEST:RAG:R07:002",
+        "TEST:RAG:R07:003",
+        "TEST:RAG:R07:004",
+        "TEST:RAG:R07:005",
+        "TEST:RAG:R07:006",
+        "TEST:RAG:R07:007",
+        "TEST:RAG:R07:008"
+      ],
+      "related_policy_refs": [
+        "REQ:RAG:R07:001",
+        "REQ:RAG:R07:002",
+        "REQ:RAG:R07:003",
+        "REQ:RAG:R07:004",
+        "REQ:RAG:R07:005",
+        "REQ:RAG:R07:006",
+        "REQ:RAG:R07:007",
+        "REQ:RAG:R07:008"
+      ],
+      "related_open_decision_refs": [],
+      "affected_phase5_decisions": [
+        "P5-D01",
+        "P5-D02",
+        "P5-D10",
+        "P5-D12",
+        "P5-D15"
+      ],
+      "planning_implication": "Plan R07 as candidate discovery/handoff work only after R04 inputs, R02 access contract and R03 canonical boundary are ready; never equate a candidate or planned test with approved legal state or product completion.",
+      "contract_coverage_status": "COVERED_BY_REVISED_CONTRACT",
+      "evidence_refs": [
+        "Implementation Plan R07 lines 7083–7213; source graph references are described in the plan; planned test cases are NOT_EXECUTED"
+      ],
+      "non_applicability": "No implementation, legal effect, authorization or acceptance may be inferred from the planning package."
     }
   ],
   "limitations": []

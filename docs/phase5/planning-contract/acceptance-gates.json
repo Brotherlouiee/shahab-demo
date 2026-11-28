@@ -39,16 +39,18 @@
       "objective": "کامل‌بودن مطالعه منابع",
       "scope": "Mission 5.0 bootstrap and planning contract",
       "preconditions": [
-        "All 18 required manifest paths and 8 named governance sources identified"
+        "All required source manifests and governing sources are identified and version-pinned",
+        "Narrative source coverage is complete and semantic findings are recorded",
+        "Certified Phase 4 inputs are consumed programmatically with recorded scope and limitations"
       ],
       "validation_method": "Source manifest + source reading log with locators",
-      "expected_evidence": "All sources reviewed and line ranges/evidence logged",
+      "expected_evidence": "Complete source-reading-coverage.csv; semantic knowledge registries; phase4-artifact-consumption.csv; contract crosswalk and validation output",
       "failure_conditions": [
         "Any source unreadable or unreviewed; do not claim completeness"
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
-      "observed_status": "NOT_PASS_SOURCE_READING_INCOMPLETE"
+      "observed_status": "PASS_WITH_REVIEW_EVIDENCE"
     },
     {
       "gate_id": "P5-B04",
@@ -341,7 +343,7 @@
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
-      "observed_status": "PARTIAL",
+      "observed_status": "PASS_WITH_REVIEW_EVIDENCE",
       "references": [
         {
           "ref_type": "SOURCE_DOCUMENT",
