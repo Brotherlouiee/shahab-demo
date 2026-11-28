@@ -7,23 +7,71 @@
     "Local validation establishes typed structure and synthetic fixture behavior; it does not establish owner approval, product correctness, or operational readiness.",
     "Phase 4 Snapshot Validator establishes pinned identity and integrity, not semantic completeness of the source review.",
     "GitHub Actions evidence recorded below is bound to the exact historical PR head 3124c39; all skipped jobs remain SKIPPED. CI for the final corrective commit is pending and must be checked externally without a follow-up evidence commit.",
-    "The Phase 5 MVP proposes one Skill and one Git-versioned weekly plan output; graph/engine/viewer and separate registries are historical/deferred proposals. The contract remains pending owner approval."
+    "CI evidence below is pinned to the exact parent PR commit 91f5b322f3b5d03f38a53ac9c346dd85426216a2. CI for any later commit is checked separately and reported against that SHA in the PR description; successful workflow conclusions do not promote skipped jobs."
   ],
   "external_ci_evidence": {
-    "latest_verified_pr_commit": "3124c39ddec912eac146411be765df0bca0549a3",
+    "latest_verified_pr_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
     "pull_request": 258,
-    "verified_state": "HISTORICAL_CI_FOR_THIS_EXACT_COMMIT_ONLY",
-    "overall": "4/4 workflow runs success; individual jobs and skips reported separately",
+    "verified_state": "EXACT_COMMIT_CI_VERIFIED",
+    "overall": "4/4 workflow runs completed successfully; job-level skipped outcomes remain SKIPPED.",
     "workflow_runs": [
       {
-        "name": "Quality gates",
-        "run_id": 46117563824,
-        "run_number": 1357,
-        "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3",
+        "name": "Security SAST, SCA and secret gates",
+        "run_id": 46139089968,
+        "run_number": 852,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
         "conclusion": "success",
         "jobs": [
           {
             "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Repository secret scan",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Python SAST and Python/Node dependency audit",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      },
+      {
+        "name": "Container build contract smoke",
+        "run_id": 46139089954,
+        "run_number": 769,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Build and run two isolated images",
+            "conclusion": "skipped",
+            "reported_status": "SKIPPED"
+          }
+        ]
+      },
+      {
+        "name": "Quality gates",
+        "run_id": 46139089953,
+        "run_number": 1369,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Classify changes and run lightweight documentation checks",
+            "conclusion": "success",
+            "reported_status": "PASS"
+          },
+          {
+            "name": "Validate changed Markdown links and whitespace",
             "conclusion": "success",
             "reported_status": "PASS"
           },
@@ -50,53 +98,10 @@
         ]
       },
       {
-        "name": "Security SAST, SCA and secret gates",
-        "run_id": 46117563818,
-        "run_number": 840,
-        "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3",
-        "conclusion": "success",
-        "jobs": [
-          {
-            "name": "Classify changes and run lightweight documentation checks",
-            "conclusion": "success",
-            "reported_status": "PASS"
-          },
-          {
-            "name": "Repository secret scan",
-            "conclusion": "success",
-            "reported_status": "PASS"
-          },
-          {
-            "name": "Python SAST and Python/Node dependency audit",
-            "conclusion": "skipped",
-            "reported_status": "SKIPPED"
-          }
-        ]
-      },
-      {
-        "name": "Container build contract smoke",
-        "run_id": 46117563854,
-        "run_number": 757,
-        "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3",
-        "conclusion": "success",
-        "jobs": [
-          {
-            "name": "Classify changes and run lightweight documentation checks",
-            "conclusion": "success",
-            "reported_status": "PASS"
-          },
-          {
-            "name": "Build and run two isolated images",
-            "conclusion": "skipped",
-            "reported_status": "SKIPPED"
-          }
-        ]
-      },
-      {
         "name": "US-13 frozen frontend baseline evidence",
-        "run_id": 46117563806,
-        "run_number": 798,
-        "tested_commit": "3124c39ddec912eac146411be765df0bca0549a3",
+        "run_id": 46139089971,
+        "run_number": 810,
+        "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2",
         "conclusion": "success",
         "jobs": [
           {
@@ -111,58 +116,7 @@
           }
         ]
       }
-    ],
-    "docs_classifiers": "success in all four workflows",
-    "repository_secret_scan": "success",
-    "skipped_jobs_are_not_pass": true,
-    "historical_evidence_preserved": [
-      {
-        "latest_verified_pr_commit": "442b66b5a5c33379a75d2f6edd0409b844d39204",
-        "pull_request": 258,
-        "overall": "4/4 workflow runs success; docs-only product suites skipped according to repository policy",
-        "workflow_runs": [
-          {
-            "name": "Quality gates",
-            "run_id": 46117168857,
-            "conclusion": "success",
-            "jobs_skipped": [
-              "Loan details browser verification",
-              "Profile OTP real API browser verification",
-              "PostgreSQL migration verification",
-              "Quality gates"
-            ]
-          },
-          {
-            "name": "Security SAST, SCA and secret gates",
-            "run_id": 46117168861,
-            "conclusion": "success",
-            "jobs_skipped": [
-              "Python SAST and Python/Node dependency audit"
-            ],
-            "repository_secret_scan": "success"
-          },
-          {
-            "name": "Container build contract smoke",
-            "run_id": 46117168862,
-            "conclusion": "success",
-            "jobs_skipped": [
-              "Build and run two isolated images"
-            ]
-          },
-          {
-            "name": "US-13 frozen frontend baseline evidence",
-            "run_id": 46117168864,
-            "conclusion": "success",
-            "jobs_skipped": [
-              "Independent original-vs-candidate route evidence"
-            ]
-          }
-        ],
-        "docs_classifiers": "all success",
-        "option_tradeoff_update_commit_ci": "PENDING"
-      }
-    ],
-    "final_corrective_commit_ci": "PENDING_EXTERNAL_CI; do not infer from CI bound to 3124c39; report final run/job results in PR description without another evidence commit"
+    ]
   },
   "previous_bootstrap_results": [
     {

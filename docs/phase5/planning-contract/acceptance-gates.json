@@ -704,22 +704,24 @@
         ]
       },
       "expected_evidence": [
-        "reproducible command output and relevant commit/hash"
+        "GitHub Actions workflow and per-job conclusions tied to exact tested SHA 91f5b322f3b5d03f38a53ac9c346dd85426216a2",
+        "Skipped jobs reported as SKIPPED, not PASS"
       ],
       "failure_conditions": [
         "required evidence missing or contrary result"
       ],
       "blocking_effect": "BLOCKING",
       "approval_status": "PROPOSED_CORRECTIVE_ACCEPTANCE_GATE; owner approval is distinct",
-      "observed_status": "PENDING_EXTERNAL_CI",
+      "observed_status": "PASS_EXACT_COMMIT_WITH_SKIPS_REPORTED",
       "references": [
         {
           "ref_type": "EXTERNAL_CONDITION",
           "ref_id": "external:phase5-ci-evidence",
           "relation": "REQUIRES_INPUT",
-          "description": "CI evidence for the exact final PR commit, reported externally in the PR body or final report",
+          "description": "Exact-commit CI evidence recorded in planning-contract-validation.json for parent commit 91f5b322f3b5d03f38a53ac9c346dd85426216a2; final commit CI is checked and reported separately.",
           "owner": "Repository CI",
-          "resolution_evidence_required": true
+          "resolution_evidence_required": true,
+          "tested_commit": "91f5b322f3b5d03f38a53ac9c346dd85426216a2"
         }
       ]
     },
