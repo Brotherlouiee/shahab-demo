@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Versioned deterministic Stage 4 search, mapping validation and semantic replay."""
 from __future__ import annotations
-import argparse, hashlib, json, re
+import argparse, hashlib, json, os, re, tempfile
 from collections import Counter, defaultdict, deque
+from os import fsync as file_fsync
+from os import replace
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 BASELINE='c9e74532d4291e9ed1a7ddd3523ee84f09c940a2'
@@ -24,13 +26,69 @@ PARTIAL_RATIONALE={
  'TASK:RAG:R10:002':'Plan برای Task:RAG:R10:002 Snapshot سازگار و provenance می‌خواهد و مالک Snapshot را Core/C05b می‌داند؛ مدل RecommendationSnapshot و خواندن Snapshot مصوب در کد فعال وجود دارد. ClaimEvidenceLink و envelope مخصوص Adviser هنوز تکمیل نشده‌اند.',
  'TASK:RAG:R10:003':'Plan تفکیک computed value، eligibility و ranking را می‌خواهد؛ scorer موجود خروجی ranked/needs-review/below-threshold/evidence را جدا می‌کند. disposition اقدام/transaction و سیاست خطای Adviser هنوز جدید است.'}
 PARTIAL_FILES={
- 'TASK:RAG:R10:001':[('backend/app/recommendation/application/use_cases.py',95),('backend/app/recommendation/engine/canonical_scoring.py',38),('backend/app/api/v1/recommendations.py',95)],
- 'TASK:RAG:R10:002':[('backend/app/recommendation/domain/entities.py',93),('backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py',53)],
- 'TASK:RAG:R10:003':[('backend/app/recommendation/engine/canonical_scoring.py',38),('backend/app/recommendation/engine/canonical_scoring.py',30),('backend/app/recommendation/domain/entities.py',54)]}
+ 'backend_app_recommendation_application_use_cases_recommendcanonicalloans':('backend/app/recommendation/application/use_cases.py',95),
+ 'backend_app_recommendation_engine_canonical_scoring_score_official_categories':('backend/app/recommendation/engine/canonical_scoring.py',38),
+ 'backend_app_api_v1_recommendations_recommend':('backend/app/api/v1/recommendations.py',95),
+ 'backend_app_recommendation_domain_entities_recommendationsnapshot':('backend/app/recommendation/domain/entities.py',93),
+ 'backend_app_recommendation_infrastructure_sqlalchemy_snapshot_sqlalchemyrecommendationsnapshotrepository_read_approved_snapshot':('backend/app/recommendation/infrastructure/sqlalchemy_snapshot.py',53),
+ 'backend_app_recommendation_engine_canonical_scoring_canonicalpartition':('backend/app/recommendation/engine/canonical_scoring.py',30),
+ 'backend_app_recommendation_domain_entities_recommendationpartition':('backend/app/recommendation/domain/entities.py',54),
+}
+
+
+def title_search_tokens(text):
+ return [token.lower() for token in TOKEN.findall(text)]
+
+
+def exact_title_matches(title, corpus, token_files):
+ tokens=title_search_tokens(title)
+ if len(tokens)<3:
+  return []
+ indexes=set.intersection(*(set(token_files.get(token, ())) for token in tokens))
+ phrase=' '+' '.join(tokens)+' '
+ return [
+  {'file':corpus[ix]['path'],'blob_sha':corpus[ix]['blob_sha'],'title':title}
+  for ix in sorted(indexes)
+  if phrase in ' '+' '.join(title_search_tokens(corpus[ix]['text']))+' '
+ ]
+
+
+def validate_partial_files(partial, evidence_files, code_nodes, corpus_by_path):
+ expected={code_id for ids in partial.values() for code_id in ids}
+ missing=expected-evidence_files.keys()
+ extra=evidence_files.keys()-expected
+ if missing or extra:
+  raise ValueError(f'partial evidence IDs: missing {sorted(missing)}, unexpected {sorted(extra)}')
+ for ref,ids in partial.items():
+  if not ids or len(set(ids))!=len(ids):
+   raise ValueError(f'missing or duplicate partial code IDs for {ref}')
+ for code_id,(path,line) in evidence_files.items():
+  node=code_nodes.get(code_id)
+  if node is None or node.get('source_file')!=path:
+   raise ValueError(f'partial evidence code ID/file mismatch: {code_id} -> {path}')
+  source=corpus_by_path.get(path)
+  if source is None or not 1<=line<=len(source['lines']) or not source['lines'][line-1].strip():
+   raise ValueError(f'partial code evidence not found: {code_id} at {path}:{line}')
+
+
 def sha256(b):return hashlib.sha256(b).hexdigest()
 def blob_sha(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def readj(path):return json.loads((ROOT/path).read_text(encoding='utf-8'))
-def writej(path,obj):(ROOT/path).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def writej(path,obj):
+ target=ROOT/path
+ payload=(json.dumps(obj,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
+ temporary=None
+ try:
+  with tempfile.NamedTemporaryFile(dir=target.parent,prefix='.'+target.name+'.',delete=False) as handle:
+   temporary=Path(handle.name)
+   temporary.chmod(target.stat().st_mode & 0o777)
+   handle.write(payload)
+   handle.flush()
+   file_fsync(handle.fileno())
+  replace(temporary,target)
+ finally:
+  if temporary is not None:
+   temporary.unlink(missing_ok=True)
 def fail(errors):
  for e in errors:print('FAIL:',e)
  return 1
@@ -43,7 +101,7 @@ def build_search(m,tg,cg,manifest,audit):
  for path in sorted(manifest):
   p=ROOT/path
   if not p.is_file():raise ValueError('missing pinned corpus file '+path)
-  b=p.read_bytes();txt=b.decode('utf-8',errors='replace');lines=txt.splitlines(); toks=set(t.lower() for t in TOKEN.findall(txt))
+  b=p.read_bytes();txt=b.decode('utf-8',errors='replace');lines=txt.splitlines(); toks=set(title_search_tokens(txt))
   index=len(corpus); corpus.append({'path':path,'blob_sha':blob_sha(b),'sha256':sha256(b),'text':txt,'lines':lines,'tokens':toks})
   file_tokens.append(toks)
   for t in toks:token_files[t].add(index)
@@ -54,6 +112,13 @@ def build_search(m,tg,cg,manifest,audit):
  previous={r['task_or_package_ref']:r for r in audit.get('records',[])}
  scope=audit.get('search_scope_refs') or [r['task_or_package_ref'] for r in audit.get('records',[])]
  if not scope:scope=[r.get('task_ref') or r.get('subtask_ref') or r.get('package_ref') for r in m['mappings'] if r['mapping_status']=='NEW_IMPLEMENTATION']
+ corpus_by_path={item['path']:item for item in corpus}
+ validate_partial_files(PARTIAL,PARTIAL_FILES,{node['id']:node for node in cg['nodes']},corpus_by_path)
+ for ref in PARTIAL:
+  locators=tg_by.get(ref,{}).get('plan_refs',[])
+  prefix,line=locators[0].rsplit(':',1) if locators and ':' in locators[0] else ('','')
+  if ref not in scope or prefix!=FILES['plan'] or not line.isdecimal() or not 1<=int(line)<=len(plan) or not plan[int(line)-1].strip():
+   raise ValueError('missing partial mapping search scope or Plan evidence: '+ref)
  # Search exact canonical and confirmed shortened aliases in one pass over all pinned source lines.
  id_to_refs={}
  for ref in scope:
@@ -86,15 +151,7 @@ def build_search(m,tg,cg,manifest,audit):
   terms=sorted(terms,key=lambda t:(len(token_files[t]),t))[:12]
   # Descriptive title phrase search is narrowed through an inverted index, then exact-checked.
   title=re.sub(r'^(?:AC|REQ|TEST|TASK):[^ ]+\s*[-/|]*\s*','',display,flags=re.I).strip()
-  title_tokens=[t.lower() for t in TOKEN.findall(title)]
-  phrase=[]
-  if len(title_tokens)>=3:
-   sets=[token_files[t] for t in title_tokens if t in token_files]
-   if len(sets)>=3:
-    for ix in sorted(set.intersection(*sets)):
-     norm=' '.join(TOKEN.findall(corpus[ix]['text'].lower()))
-     normtitle=' '.join(title_tokens)
-     if normtitle in norm:phrase.append({'file':corpus[ix]['path'],'blob_sha':corpus[ix]['blob_sha'],'title':title})
+  phrase=exact_title_matches(title,corpus,token_files)
   candidate_counts=Counter()
   for term in terms:
    for ix in token_files.get(term,()):candidate_counts[ix]+=1
@@ -108,8 +165,9 @@ def build_search(m,tg,cg,manifest,audit):
   elif ref in PARTIAL:status='CODE_PARTIALLY_FOUND';rationale=PARTIAL_RATIONALE[ref]
   else:status='NO_CODE_EVIDENCE_FOUND';rationale='No direct active-code implementation was found after exact canonical/short-ID, descriptive title and discriminative-term scans. Generic co-occurrence in unrelated source/tests/workflows was rejected; this does not claim future reuse is impossible.'
   hits=[]
-  for code_id,(path,line_no) in zip(PARTIAL.get(ref,()),PARTIAL_FILES.get(ref,())):
-   f=next(x for x in corpus if x['path']==path)
+  for code_id in PARTIAL.get(ref,()):
+   path,line_no=PARTIAL_FILES[code_id]
+   f=corpus_by_path[path]
    hits.append({'file':path,'line':line_no,'blob_sha':f['blob_sha'],'sha256':f['sha256'],'code_type':'APPLICATION_SOURCE','code_node_ref':code_id,'plan_locator':node.get('plan_refs',[])[0]})
   exact=exact_by_ref.get(ref,[])
   results.append({'task_or_package_ref':ref,'entity_type':kind,'mapping_status_at_review':mapping_by.get(ref,{}).get('mapping_status'),'search_status':status,
@@ -131,6 +189,9 @@ def semantic_projection(m):
   'task_name_evidence_override_unresolved':m.get('task_name_evidence_override_unresolved'),
   'stage4_relation_overlay':m.get('stage4_relation_overlay'),
   'stage4_code_search_audit':{k:v for k,v in audit.items() if k!='semantic_projection_sha256'}}
+def projection_digest(m):
+ return sha256(json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+
 def main():
  ap=argparse.ArgumentParser();g=ap.add_mutually_exclusive_group(required=True);g.add_argument('--write-code-search',action='store_true');g.add_argument('--check-only',action='store_true');args=ap.parse_args()
  errors=[];m=readj(FILES['mapping']);tg=readj(FILES['task_graph']);cg=readj(FILES['current_code_graph']);rg=readj(FILES['reference_graph']);manifest=readj(FILES['code_manifest'])
@@ -193,7 +254,7 @@ def main():
   if key in seen:errors.append('duplicate relation '+str(key))
   seen.add(key)
   for endpoint in (r.get('source'),r.get('target')):
-   if endpoint not in package_ids|ids and not endpoint.startswith(('CONTRACT:','DECISION:')):errors.append('relation endpoint is not a Package/Task/Contract/Decision ref '+str(r.get('relation_id')))
+   if not isinstance(endpoint,str) or (endpoint not in package_ids|ids and not endpoint.startswith(('CONTRACT:','DECISION:'))):errors.append('relation endpoint is not a Package/Task/Contract/Decision ref '+str(r.get('relation_id')))
   if r.get('execution_effect')=='UNRESOLVED_SOURCE_GAP' or r.get('resolution_status')=='UNRESOLVED_SOURCE_GAP':errors.append('unresolved endpoint remains '+str(r.get('relation_id')))
   for k in ('relation_id','source_node','target_node','relation_type','execution_effect','confidence','source_locator','plan_locator','graph_reference','rationale'):
    if not r.get(k):errors.append('relation missing required semantic field '+str(r.get('relation_id'))+'/'+k)
@@ -328,8 +389,20 @@ def main():
    errors.append('special open-decision review crosswalk mismatch '+oid)
  if m.get('validation',{}).get('stage4_audit',{}).get('open_decisions_without_plan_locator')!=0:errors.append('current audit snapshot has open decisions without Plan locator')
  # Search/replay complete corpus, deterministically.
+ if args.write_code_search and errors:
+  return fail(errors)
  audit=m.get('stage4_code_search_audit',{});results,inventory,inventory_sha=build_search(m,tg,cg,manifest,audit)
+ if inventory_sha!=audit.get('inventory_sha256') or inventory!=audit.get('corpus_blob_inventory'):errors.append('pinned 347-file code inventory changed')
  counts=Counter(x['search_status'] for x in results)
+ if counts.get('SEARCH_INCONCLUSIVE',0):errors.append('SEARCH_INCONCLUSIVE remains in the 657-record audit')
+ if len(results)!=657:errors.append(f'expected 657 audited original NEW_IMPLEMENTATION units, got {len(results)}')
+ if counts!={'NON_CODE_REQUIREMENT':30,'NO_CODE_EVIDENCE_FOUND':624,'CODE_PARTIALLY_FOUND':3}:errors.append('AUD-07 result distribution differs from reviewed 30/624/3')
+ # Every Stage 4 partial code link must point to code represented in immutable Graphify.
+ for ref,nids in PARTIAL.items():
+  r=next((x for x in maps if x.get('task_ref')==ref),None)
+  if not r or r.get('mapping_status')!='PARTIALLY_MAPPED' or set(r.get('current_code_node_refs',[]))!=set(nids):errors.append('evidence-backed partial mapping mismatch '+ref)
+ if args.write_code_search and errors:
+  return fail(errors)
  if args.write_code_search:
   audit.update({'schema_version':'2.0.0','audit_id':'phase4-stage4-aud07-full-replay-v2','code_source_commit':BASELINE,
    'repository_comparison':{'from':BASELINE,'through_pr_head':PR_BASE,'code_paths_changed':0,'basis':'The pinned Graphify inventory is tied to the active-code baseline; GitHub comparison confirms this PR changes Stage 1–4 artifacts and no active application-code paths.'},
@@ -339,26 +412,19 @@ def main():
    'decision_summary':{'initial_scope_count':657,'search_completed':len(results),'status_counts':dict(counts),'SEARCH_INCONCLUSIVE':counts.get('SEARCH_INCONCLUSIVE',0),'CODE_FOUND_NOT_IN_GRAPHIFY':counts.get('CODE_FOUND_NOT_IN_GRAPHIFY',0)},
    'limitations':['NO_CODE_EVIDENCE_FOUND means no direct counterpart evidence in the pinned baseline corpus; it does not prove future reuse is impossible.','Lexical co-occurrence is not accepted as mapping evidence.','No Graphify source graph node was added or modified.']})
   m['validation']['stage4_high_finding_followup']['AUD-07']={'status':'COMPLETED_NO_INCONCLUSIVE_RECORDS','initial_scope_count':657,'search_completed':len(results),'status_counts':dict(counts),'code_source_commit':BASELINE,'inventory_count':len(inventory),'inventory_sha256':inventory_sha}
-  m['validation']['semantic_replay_projection_sha256']=''
-  writej(FILES['mapping'],m)
-  m=readj(FILES['mapping']);projection=json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode();digest=sha256(projection)
+  digest=projection_digest(m)
   m['validation']['semantic_replay_projection_sha256']=digest
   m['validation']['semantic_mapping_reproducibility']='PASS_DETERMINISTIC_SEMANTIC_VALIDATION_REPLAY'
   writej(FILES['mapping'],m)
   print(json.dumps({'write':'PASS','scope':len(results),'status_counts':dict(counts),'inventory_count':len(inventory),'inventory_sha256':inventory_sha,'projection_sha256':digest},ensure_ascii=False,indent=2))
   return 0
- else:
-  if results!=audit.get('records'):errors.append('AUD-07 full semantic search replay differs from stored records')
-  if inventory_sha!=audit.get('inventory_sha256') or inventory!=audit.get('corpus_blob_inventory'):errors.append('pinned 347-file code inventory changed')
-  if counts.get('SEARCH_INCONCLUSIVE',0):errors.append('SEARCH_INCONCLUSIVE remains in the 657-record audit')
-  if len(results)!=657:errors.append(f'expected 657 audited original NEW_IMPLEMENTATION units, got {len(results)}')
-  if counts!={'NON_CODE_REQUIREMENT':30,'NO_CODE_EVIDENCE_FOUND':624,'CODE_PARTIALLY_FOUND':3}:errors.append('AUD-07 result distribution differs from reviewed 30/624/3')
-  projection=json.dumps(semantic_projection(m),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode();digest=sha256(projection)
-  if m.get('validation',{}).get('semantic_replay_projection_sha256')!=digest:errors.append('semantic mapping/relations/code-search projection changed since recorded replay')
-  # Every Stage 4 partial code link must point to code represented in immutable Graphify.
-  for ref,nids in PARTIAL.items():
-   r=next((x for x in maps if x.get('task_ref')==ref),None)
-   if not r or r.get('mapping_status')!='PARTIALLY_MAPPED' or set(r.get('current_code_node_refs',[]))!=set(nids):errors.append('evidence-backed partial mapping mismatch '+ref)
-  print(json.dumps({'result':'PASS' if not errors else 'FAIL','graph_counts':dict(counts),'mapping_count':len(maps),'mapping_status_counts':dict(Counter(r['mapping_status'] for r in maps)),'open_decisions':len(decisions),'open_decision_scope_counts':dict(Counter(r['mapping_status'] for r in decisions)),'special_references':len(special),'relations':len(rels),'unresolved_relations':0,'code_search_records':len(results),'code_search_status_counts':dict(counts),'inventory_files':len(inventory),'topological_task_order_count':len(order),'semantic_projection_sha256':digest,'immutable_graphs':'PASS'},ensure_ascii=False,indent=2))
-  return fail(errors) if errors else 0
-if __name__=='__main__':raise SystemExit(main())
+ if results!=audit.get('records'):errors.append('AUD-07 full semantic search replay differs from stored records')
+ digest=projection_digest(m)
+ if m.get('validation',{}).get('semantic_replay_projection_sha256')!=digest:errors.append('semantic mapping/relations/code-search projection changed since recorded replay')
+ print(json.dumps({'result':'PASS' if not errors else 'FAIL','graph_counts':dict(counts),'mapping_count':len(maps),'mapping_status_counts':dict(Counter(r['mapping_status'] for r in maps)),'open_decisions':len(decisions),'open_decision_scope_counts':dict(Counter(r['mapping_status'] for r in decisions)),'special_references':len(special),'relations':len(rels),'unresolved_relations':0,'code_search_records':len(results),'code_search_status_counts':dict(counts),'inventory_files':len(inventory),'topological_task_order_count':len(order),'semantic_projection_sha256':digest,'immutable_graphs':'PASS'},ensure_ascii=False,indent=2))
+ return fail(errors) if errors else 0
+if __name__=='__main__':
+ try:
+  raise SystemExit(main())
+ except (ValueError,OSError) as exc:
+  raise SystemExit(f'FAIL: {exc}') from None

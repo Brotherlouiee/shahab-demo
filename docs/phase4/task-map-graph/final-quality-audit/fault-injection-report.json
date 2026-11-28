@@ -1,0 +1,103 @@
+{
+  "status": "PARTIAL",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "injected_publication_faults": 10,
+  "results": [
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "HTML replacement fails after JSON replacement",
+      "result": "Both previous files restored byte-identically; temporary files cleaned."
+    },
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "staging file fsync raises",
+      "result": "Neither final output changed; temporary files cleaned."
+    },
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "directory fsync raises after replacement",
+      "result": "Both previous files restored byte-identically."
+    },
+    {
+      "target": "Combined graph first-time publication",
+      "injection": "second replacement fails without previous first output",
+      "result": "New first output removed."
+    },
+    {
+      "target": "Combined graph JSON+HTML pair",
+      "injection": "KeyboardInterrupt during second replacement",
+      "result": "Both prior outputs restored."
+    },
+    {
+      "target": "Source Coverage CSV",
+      "injection": "atomic replace raises",
+      "result": "Old output bytes preserved and temporary file removed."
+    },
+    {
+      "target": "Source Coverage CSV",
+      "injection": "file fsync raises",
+      "result": "Old output bytes preserved and temporary file removed."
+    },
+    {
+      "target": "Evidence Join Index",
+      "injection": "staging file fsync raises",
+      "result": "Old output bytes preserved; temporary file removed."
+    },
+    {
+      "target": "Stage 4 Mapping",
+      "injection": "atomic replace raises",
+      "result": "Old mapping preserved; no PASS emitted."
+    },
+    {
+      "target": "Stage 4 Mapping",
+      "injection": "staging file fsync raises",
+      "result": "Old mapping preserved; no PASS emitted."
+    }
+  ],
+  "additional_failure_inputs": [
+    "missing required CSV headers",
+    "short CSV row",
+    "null/blank identifier",
+    "orphan obligation",
+    "duplicate candidate ID",
+    "duplicate obligation ID",
+    "missing pinned graph",
+    "machine validation returns false",
+    "invalid mapping before publication"
+  ],
+  "results_count": 19,
+  "remaining": "SIGKILL between Graph JSON and HTML replacements can expose a mixed pair until rerun; the terminated process releases the lock, and rerunning restores a coherent pair. Source Coverage outputs are individually atomic but do not publish as one transaction. Power-loss durability and full multi-file consumer detection remain unproven.",
+  "tested_source_parent_commit": "9e3f671ae760619d143ca4e61c09e8f29980b48e",
+  "tested_publisher_blob_sha": "e74906f906445cb7317c5110b06e58f78542337d",
+  "supplemental_delta": {
+    "abrupt_process_termination": [
+      {
+        "point": "before first replace, SIGKILL",
+        "observed": "Both prior outputs remained intact. One staged temporary file remained."
+      },
+      {
+        "point": "between JSON and HTML replaces, SIGKILL",
+        "observed": "A mixed new-JSON/old-HTML pair remained. Three temporary/backup files remained. A subsequent publisher run restored a coherent pair."
+      },
+      {
+        "point": "after both replaces, before directory fsync, SIGKILL",
+        "observed": "Both new outputs were present. Two backup files remained."
+      },
+      {
+        "point": "between replacements with destination lock enabled, SIGKILL followed by fresh publisher",
+        "observed": "The kill released the OS file lock; the mixed pair was replaced with a coherent new pair."
+      }
+    ],
+    "concurrent_writers": {
+      "before_fix": "A forced two-process interleaving produced B graph JSON with A HTML.",
+      "fix": "A deterministic OS file lock keyed by sorted destination paths serializes the full pair publication.",
+      "regression": "Two-process controlled interleaving passed with both outputs from generation B."
+    },
+    "source_coverage_multi_file": {
+      "injection": "Second per-file atomic replace failed after first file succeeded.",
+      "observed": "First file contained the new generation and second retained the old generation. No temporary file remained.",
+      "consumer_detection": "Not exercised end to end. Existing check-only validates generated CSVs and references, but full arbitrary cross-file generation detection is not proven.",
+      "status": "PARTIAL_NON_TRANSACTIONAL_SET"
+    }
+  }
+}

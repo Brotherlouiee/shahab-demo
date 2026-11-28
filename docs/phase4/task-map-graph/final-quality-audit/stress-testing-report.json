@@ -1,0 +1,46 @@
+{
+  "status": "PARTIAL",
+  "type": "synthetic_structural_scale_only",
+  "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "browser": "Chrome test separately passed at the actual 1x artifact",
+  "results": [
+    {
+      "scale": 1,
+      "nodes": 4490,
+      "edges": 11435,
+      "serialized_bytes": 8825012,
+      "seconds": 0.516,
+      "peak_tracemalloc_bytes": 53150432
+    },
+    {
+      "scale": 2,
+      "nodes": 8980,
+      "edges": 22870,
+      "serialized_bytes": 17650003,
+      "seconds": 1.11,
+      "peak_tracemalloc_bytes": 106455763
+    },
+    {
+      "scale": 5,
+      "nodes": 22450,
+      "edges": 57175,
+      "serialized_bytes": 44124976,
+      "seconds": 2.577,
+      "peak_tracemalloc_bytes": 266796340
+    },
+    {
+      "scale": 10,
+      "nodes": 44900,
+      "edges": 114350,
+      "serialized_bytes": 88249931,
+      "seconds": 5.114,
+      "peak_tracemalloc_bytes": 531416779
+    }
+  ],
+  "metric": "In-memory node/edge ID duplication, endpoint validation and JSON serialization; Python tracemalloc peak.",
+  "limitations": [
+    "Synthetic structural scale test, not the production graph builder at scaled inputs.",
+    "Browser rendering, canvas frame times, interaction latency and memory were not measured at 2x\u201310x.",
+    "No approved performance budget exists."
+  ]
+}

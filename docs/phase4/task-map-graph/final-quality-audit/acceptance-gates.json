@@ -1,0 +1,156 @@
+[
+  {
+    "gate": "GATE-01",
+    "status": "PARTIAL",
+    "evidence": "Targeted review covered Graph Builder Node/Edge/Mapping/Decision shapes, hierarchy and publication. Full 98-function line-by-line review remains incomplete.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-02",
+    "status": "PARTIAL",
+    "evidence": "No additional production defect reproduced. The five surfaced Graphify leads were checked against current source and tests; one of six remains unknown.",
+    "previous_status": "PASS_WITH_SCOPE_LIMIT",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-03",
+    "status": "PARTIAL",
+    "evidence": "Known Graphify items dispositioned. Sixth description unavailable, so review disposition is incomplete.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-04",
+    "status": "PASS",
+    "evidence": "Nine targeted regressions passed after the delta: eight Graph Builder input/publication tests and one Replay cycle test. Graph check-only passed at 4,490 nodes and 11,435 edges.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-05",
+    "status": "PASS",
+    "evidence": "Independent artifact checks found no duplicate IDs, dangling endpoints, orphan obligations, count mismatches or mapping inconsistencies in current outputs.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-06",
+    "status": "PASS",
+    "evidence": "All three immutable blob SHA and SHA-256 values equal the supplied values.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-07",
+    "status": "PASS",
+    "evidence": "134 decisions OPEN; associated mappings BLOCKED.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-08",
+    "status": "PASS",
+    "evidence": "29/29 controls, zero errors, rerun on ee23df1.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-09",
+    "status": "PASS",
+    "evidence": "Replay check-only and two deterministic write replays; 657 records, 347 inventory files, 696 mappings, 134 OPEN/BLOCKED.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-10",
+    "status": "PASS",
+    "evidence": "Current Graph Builder check-only passed with 4,490 nodes and 11,435 edges. Three immutable graph SHA-256 values matched the pinned values.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-11",
+    "status": "PARTIAL",
+    "evidence": "Added 600 seeded cases: 100 each for Node, Edge, Mapping, Decision, JavaScript Search and Filter. All produced expected outcomes. Search/Filter ran in Node VM only. The browser-fuzz portion remains BLOCKED_ENVIRONMENT.",
+    "previous_status": "PASS_WITH_SCOPE_LIMIT",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-12",
+    "status": "PARTIAL",
+    "evidence": "Newly reviewed critical Graph Builder branches for record shape, IDs, endpoints, mapping statuses, Task parents and Open Decision scope are covered by targeted tests. Replay HARD_ORDER cycle rejection now has a targeted regression. Full adjudication of all prior uncovered arcs remains incomplete.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-13",
+    "status": "PARTIAL",
+    "evidence": "Added five temporary production-code mutants for mapping status, blocked decision mapping, Task parent, duplicate mapping early failure and Replay cycle detection. All five were killed. Prior 15 source mutants and 15 artifact/data mutants were not repeated.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-14",
+    "status": "PARTIAL",
+    "evidence": "A deterministic two-process interleaving reproduced mixed Graph JSON/HTML before the fix. A destination-keyed cross-process lock now prevents it and the concurrency regression passes. SIGKILL after the first replacement still exposes a mixed pair; the killed process releases the OS lock, and a subsequent build restores a coherent pair. Source Coverage multi-file publication also remains non-transactional.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-15",
+    "status": "PARTIAL",
+    "evidence": "Prior local dependency and security scan evidence is retained. The current environment has no mypy module, so the previous 34 diagnostics could not be re-generated or classified individually. GitHub Security SAST/SCA result will be checked on the new code commit.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-16",
+    "status": "PASS",
+    "evidence": "Official Evidence Join and Stage 4 Replay checks pass; two graph builds are byte-identical. JSON and HTML hashes match prior deterministic values.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-17",
+    "status": "PASS",
+    "evidence": "Generated HTML tested in Chrome 142 at DPR 1 and 2. Canvas pixels, requested interactions, Source Evidence and seven hostile payloads passed.",
+    "previous_status": "PASS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-18",
+    "status": "PARTIAL",
+    "evidence": "Three current Graph Builder runs measured 0.721s, 0.536s and 0.515s, median 0.536s. No prior comparable baseline or approved performance budget exists.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-19",
+    "status": "PARTIAL",
+    "evidence": "Linux and prior Chrome 142 DPR 1/2 evidence retained. Current Chromium path is a wrapper with no executable target. Firefox, Edge and Windows were unavailable.",
+    "previous_status": "PARTIAL",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-20",
+    "status": "PARTIAL",
+    "evidence": "Prior independent consumer smoke remains PASS_WITH_LIMITS. No graph schema changed in this delta. Actual Phase 5 software integration remains outside scope.",
+    "previous_status": "PASS_WITH_LIMITS",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  },
+  {
+    "gate": "GATE-21",
+    "status": "PARTIAL",
+    "evidence": "The latest existing CI checkpoint predates this code delta and had five successful jobs, seven skipped jobs and zero failures. New commit checks are pending verification.",
+    "previous_status": "PASS_WITH_SKIPS",
+    "commit": "63e3891c502f95b3763d5edf872f9257211c5acd"
+  },
+  {
+    "gate": "GATE-22",
+    "status": "BLOCKED",
+    "evidence": "Graphify status was read once. Its review is on 79574bc with zero blockers and one advisory. Investigation has six unconfirmed possible issues, five descriptions available and one unavailable. Quota resets 2026-12-01T00:00:00Z.",
+    "previous_status": "BLOCKED",
+    "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+  }
+]

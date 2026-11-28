@@ -1,0 +1,55 @@
+{
+  "seed": 25711026,
+  "valid_permutation_cases": 100,
+  "invalid_mutation_cases": 100,
+  "invalid_mutation_cases_detected": 100,
+  "all_mutants_detected": true,
+  "mutation_family_counts": {
+    "duplicate_node": 20,
+    "duplicate_edge": 20,
+    "dangling_endpoint": 20,
+    "node_count": 20,
+    "edge_count": 20
+  },
+  "independent_assertions": "PASS",
+  "errors": [],
+  "counts": {
+    "nodes": 4490,
+    "edges": 11435,
+    "source_nodes": 3653,
+    "task_nodes": 696,
+    "candidates": 1633,
+    "obligations": 1285,
+    "decisions": 134,
+    "overlay_relations": 99
+  },
+  "snapshot_results": {
+    "current_project_code_graph": {
+      "bytes": 4415738,
+      "sha256": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
+      "expected_bytes": 4415738
+    },
+    "new_project_task_graph": {
+      "bytes": 3013453,
+      "sha256": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7",
+      "expected_bytes": 3013453
+    },
+    "task_map_mapping": {
+      "bytes": 4523369,
+      "sha256": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
+      "expected_bytes": 4523369
+    }
+  },
+  "hard_order_edges": 13,
+  "hard_order_acyclic": true,
+  "status": "PASS",
+  "property_examples": {
+    "valid_title_normalization": 100,
+    "invalid_or_boundary_title_matching": 100,
+    "valid_order_permutations": 100,
+    "invalid_graph_mutations": 100,
+    "csv_fuzz_cases": 1000
+  },
+  "oracle": "Independent Python checks based on input artifacts, identifier/endpoint reconstruction, origin/ref reconciliation, counts, decoded gzip snapshot lengths/SHA-256, and Kahn topological sort. Does not invoke builder validation as its oracle.",
+  "scope_limit": "The 100 invalid graph cases cover five structural mutation families, 20 each. They do not substitute for all 30 required production-code mutation operators."
+}

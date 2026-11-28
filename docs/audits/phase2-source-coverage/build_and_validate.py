@@ -16,7 +16,10 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from collections import Counter, defaultdict
+from os import fsync as file_fsync
+from os import replace as atomic_replace
 from pathlib import Path
 from typing import Any
 
@@ -65,6 +68,9 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fields=list(reader.fieldnames or [])
+        duplicates = [field for field, count in Counter(fields).items() if count > 1]
+        if duplicates:
+            raise ValueError(f"Malformed CSV header in {path}: duplicate column(s): {', '.join(map(str, sorted(duplicates, key=str)))}")
         rows=[]
         for row in reader:
             line=reader.line_num
@@ -78,11 +84,32 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, Any]]) -> None:
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n", extrasaction="ignore")
+    writer.writeheader()
+    writer.writerows(rows)
+    atomic_write_text(path, buffer.getvalue())
+
+
+def atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n", extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(rows)
+    temporary = None
+    try:
+        mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="", dir=path.parent,
+            prefix=f".{path.name}.", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            temporary.chmod(mode)
+            handle.write(content)
+            handle.flush()
+            file_fsync(handle.fileno())
+        atomic_replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def apply_review_dispositions(candidates: list[dict[str, Any]]) -> None:
@@ -210,6 +237,9 @@ def parse_sources(path: Path) -> dict[str, Any]:
             i += 1
         paragraphs.append({"start": start + 1, "end": start + len(block), "text": "\n".join(block)})
 
+    if in_fence:
+        raise ValueError(f"Unclosed fenced code block in {path}:{fence_start}")
+
     # Heading section spans end at the next peer/ancestor heading, or EOF.
     for index, heading in enumerate(headings):
         end = len(lines)
@@ -297,6 +327,10 @@ def cells_from_row(line: str) -> list[str]:
     if value.endswith("|"):
         value = value[:-1]
     return [cell.replace("\\|", "|").strip() for cell in re.split(r"(?<!\\)\|", value)]
+
+
+def has_validation_failures(structural_errors: list[str], validations: dict[str, dict[str, Any]]) -> bool:
+    return bool(structural_errors) or any(check["result"] != "PASS" for check in validations.values())
 
 
 def main() -> int:
@@ -574,7 +608,7 @@ def main() -> int:
     update_manifest(structural_count, candidate_count, source_hashes, graph_sha, candidate_rows)
     write_reports(candidate_rows, structural_count, candidate_count, source_hashes, graph_sha, structural_errors, validations)
     print(json.dumps({"structural_units": sum(structural_count.values()), "headings": structural_count["HEADING"], "tables": structural_count["TABLE"], "text_ranges": candidate_count["TEXT_RANGE"], "table_rows": candidate_count["TABLE_ROW"], "candidate_rows": len(candidate_rows), "structural_errors": structural_errors}, ensure_ascii=False, indent=2))
-    return 1 if structural_errors else 0
+    return 1 if has_validation_failures(structural_errors, validations) else 0
 
 
 def build_package_index_and_traces(candidates: list[dict[str, Any]], source_hashes: dict[str, dict[str, Any]], graph_sha: str) -> None:
@@ -1111,7 +1145,7 @@ def update_manifest(structural: Counter[str], candidate_counts: Counter[str], so
         "The 1,110 baseline paragraph candidates are preserved; 26 previously omitted prose ranges are appended with new IDs.",
     ]
     original["status"]="SEMANTIC_REVIEW_PENDING" if pending else "SEMANTIC_REVIEW_COMPLETE"
-    path.write_text(json.dumps(original,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    atomic_write_text(path, json.dumps(original, ensure_ascii=False, indent=2) + "\n")
 
 
 def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], candidate_counts: Counter[str], source_hashes: dict[str, dict[str, Any]], graph_sha: str, structural_errors: list[str], validations: dict[str, dict[str, Any]]) -> None:
@@ -1216,7 +1250,10 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
             "Graph node overlap is a retrieval reference, not semantic entailment.",
         ],
     }
-    (COVERAGE / "validation-report.json").write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(
+        COVERAGE / "validation-report.json",
+        json.dumps(output, ensure_ascii=False, indent=2) + "\n",
+    )
     report = [
         "# گزارش اعتبارسنجی پوشش منابع فاز دوم",
         "",
@@ -1313,7 +1350,7 @@ def write_reports(candidates: list[dict[str, Any]], structural: Counter[str], ca
         f"وضعیت بازبینی Candidateها: {reviewed_count}/{len(candidates)} بررسی‌شده؛ Pending={pending_count}. تصمیم‌های باز و شکاف‌های تأییدشده جداگانه در Ledger ثبت شده‌اند؛ Pending بودن به‌تنهایی شکاف قطعی محسوب نمی‌شود.",
         "",
     ])
-    (COVERAGE / "semantic-validation-report.md").write_text("\n".join(report), encoding="utf-8")
+    atomic_write_text(COVERAGE / "semantic-validation-report.md", "\n".join(report))
 
 
 if __name__ == "__main__":

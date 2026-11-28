@@ -1,0 +1,415 @@
+{
+  "artifact_hashes": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+    "docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md": "17db416468de77511ca70a70acfcb3c47425c8b932528eceb5cd82a2a2bf072b",
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+    "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md": "86d1c9d684542f67b76e2b69791478e07f0a3c387e93c0ae6f293722b0fa538b",
+    "docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md": "9ba8aa01f3fa40ab9c85ae370bb7b9ea361a271a0445819290397dfd648d382d",
+    "docs/TASK_EXECUTION_PROTOCOL.md": "846a9833c9dad73bfb8871630b4939866409fa83779c8f2d32f621212e8c7890",
+    "docs/audits/phase2-source-coverage/atomic-obligation-dispositions.csv": "f3abf11c156d6eca24aba92efc569bffa2f2b53891db1a4c58d9ffce491b33a4",
+    "docs/audits/phase2-source-coverage/atomic-obligations.csv": "e74c7b7409ea9d3d3f9aa9a0f43bd5111a2ff39a180b5a30b95fe7d10d0329af",
+    "docs/audits/phase2-source-coverage/evidence-join-index.json": "83f6776478f9c9472bb6f70a45390ceccb45d7b178ef55fe4337618d068dc8aa",
+    "docs/audits/phase2-source-coverage/execution-trace.csv": "7fa96bf802507c2cc33bdea3de234c8912596c2607e63d1a8cd620c324743482",
+    "docs/audits/phase2-source-coverage/package-semantic-evidence.csv": "01ac340dbcb207b909a1cedf84073d12a4b0f9d020af60abfa828bc39c3d64d3",
+    "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv": "5553b80bfc2928cdc3347f0d23a63a63dde0736af95fa57844130352bcdd2a05",
+    "docs/audits/phase2-source-coverage/source-inventory.csv": "dd6f98fb92f9a20e6c344827c9de67e2ab7caae4f2b2508933d30d11b7aea66a",
+    "docs/phase4/task-map-graph/current-project-code-graph-manifest.json": "4f71525194a1050db460869ba125a9f4d33c73678f5b4bc0a64ed66c64de10ca",
+    "docs/phase4/task-map-graph/current-project-code-graph.json": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
+    "docs/phase4/task-map-graph/final-quality-audit/FINAL_QUALITY_AUDIT_REPORT.md": "0feddde3b91cb9e59db825f0d0188e75895c30ab3d6690f80fd434d0b091bd9a",
+    "docs/phase4/task-map-graph/final-quality-audit/acceptance-gates.json": "833df58a4761def400cb1f1b6ce8b9d70f9a172b37ae4c79ca6a795361284382",
+    "docs/phase4/task-map-graph/final-quality-audit/fault-injection-report.json": "4cb75e2fa88f3d5605fbfbc204f7d7893ba1b7593e169dcc41ee0f94c22fe2c6",
+    "docs/phase4/task-map-graph/final-quality-audit/graphify-final-review.md": "d381132e68ddaa0b987ec14e870ee6e020f1269d0e4438f39b3d788ec586e24b",
+    "docs/phase4/task-map-graph/final-quality-audit/phase5-consumer-readiness.json": "d96d9e32bb7159988cfd84f3f19e63ff00d305a453faff08fdc36598b1722505",
+    "docs/phase4/task-map-graph/final-quality-audit/test-execution-report.json": "544893557ea69b8f39c84fb26103b3ca0eef3ddfb57be828a27c4a24497b21c0",
+    "docs/phase4/task-map-graph/new-project-task-graph.json": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7",
+    "docs/phase4/task-map-graph/task-map-graph.html": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5",
+    "docs/phase4/task-map-graph/task-map-graph.json": "a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9",
+    "docs/phase4/task-map-graph/task-map-mapping.json": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
+    "docs/phase4/task-map-graph/task-map-quality-audit.md": "1e796faa283f4701cb258e01e315d284853390fbc1fffde19ede3b43d60f631c",
+    "knowledge-graph/phase2-reference-docs/semantic/graph.json": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93"
+  },
+  "artifact_roles": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": "REQUIRED_REFERENCE_INPUT",
+    "docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md": "OPTIONAL_HUMAN_REVIEW",
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": "REQUIRED_REFERENCE_INPUT",
+    "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md": "REQUIRED_REFERENCE_INPUT",
+    "docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md": "REQUIRED_REFERENCE_INPUT",
+    "docs/TASK_EXECUTION_PROTOCOL.md": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/atomic-obligation-dispositions.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/atomic-obligations.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/evidence-join-index.json": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/execution-trace.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/package-semantic-evidence.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/audits/phase2-source-coverage/source-inventory.csv": "REQUIRED_REFERENCE_INPUT",
+    "docs/phase4/task-map-graph/current-project-code-graph-manifest.json": "OPTIONAL_HUMAN_REVIEW",
+    "docs/phase4/task-map-graph/current-project-code-graph.json": "REQUIRED_REFERENCE_INPUT",
+    "docs/phase4/task-map-graph/final-quality-audit/FINAL_QUALITY_AUDIT_REPORT.md": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/final-quality-audit/acceptance-gates.json": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/final-quality-audit/fault-injection-report.json": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/final-quality-audit/graphify-final-review.md": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/final-quality-audit/phase5-consumer-readiness.json": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/final-quality-audit/test-execution-report.json": "AUDIT_EVIDENCE_ONLY",
+    "docs/phase4/task-map-graph/new-project-task-graph.json": "REQUIRED_REFERENCE_INPUT",
+    "docs/phase4/task-map-graph/task-map-graph.html": "OPTIONAL_HUMAN_REVIEW",
+    "docs/phase4/task-map-graph/task-map-graph.json": "REQUIRED_PRIMARY_INPUT",
+    "docs/phase4/task-map-graph/task-map-mapping.json": "REQUIRED_PRIMARY_INPUT",
+    "docs/phase4/task-map-graph/task-map-quality-audit.md": "REQUIRED_REFERENCE_INPUT",
+    "knowledge-graph/phase2-reference-docs/semantic/graph.json": "REQUIRED_REFERENCE_INPUT"
+  },
+  "artifact_sizes": {
+    "docs/SHAHAB_DIGITAL_WALLET.md": 244887,
+    "docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md": 8974,
+    "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md": 447664,
+    "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md": 2219058,
+    "docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md": 365004,
+    "docs/TASK_EXECUTION_PROTOCOL.md": 12623,
+    "docs/audits/phase2-source-coverage/atomic-obligation-dispositions.csv": 2907317,
+    "docs/audits/phase2-source-coverage/atomic-obligations.csv": 3540806,
+    "docs/audits/phase2-source-coverage/evidence-join-index.json": 6305126,
+    "docs/audits/phase2-source-coverage/execution-trace.csv": 2424642,
+    "docs/audits/phase2-source-coverage/package-semantic-evidence.csv": 4042895,
+    "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv": 2481869,
+    "docs/audits/phase2-source-coverage/source-inventory.csv": 1110612,
+    "docs/phase4/task-map-graph/current-project-code-graph-manifest.json": 68285,
+    "docs/phase4/task-map-graph/current-project-code-graph.json": 4415738,
+    "docs/phase4/task-map-graph/final-quality-audit/FINAL_QUALITY_AUDIT_REPORT.md": 35618,
+    "docs/phase4/task-map-graph/final-quality-audit/acceptance-gates.json": 7451,
+    "docs/phase4/task-map-graph/final-quality-audit/fault-injection-report.json": 4460,
+    "docs/phase4/task-map-graph/final-quality-audit/graphify-final-review.md": 3097,
+    "docs/phase4/task-map-graph/final-quality-audit/phase5-consumer-readiness.json": 1062,
+    "docs/phase4/task-map-graph/final-quality-audit/test-execution-report.json": 16732,
+    "docs/phase4/task-map-graph/new-project-task-graph.json": 3013453,
+    "docs/phase4/task-map-graph/task-map-graph.html": 9851896,
+    "docs/phase4/task-map-graph/task-map-graph.json": 9829281,
+    "docs/phase4/task-map-graph/task-map-mapping.json": 4523369,
+    "docs/phase4/task-map-graph/task-map-quality-audit.md": 32370,
+    "knowledge-graph/phase2-reference-docs/semantic/graph.json": 4131810
+  },
+  "audit_evidence_only": [
+    {
+      "description": "Prior independent artifact-consumer smoke evidence; not a planning input.",
+      "git_blob_sha": "05095df4c2b0b7ae69a6ce13d71c3875e25b0acc",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/phase5-consumer-readiness.json",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "d96d9e32bb7159988cfd84f3f19e63ff00d305a453faff08fdc36598b1722505",
+      "size_bytes": 1062
+    },
+    {
+      "description": "Prior 22-gate audit disposition; not a planning input.",
+      "git_blob_sha": "85de18a79bce450031916dbc28bab425db169287",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/acceptance-gates.json",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "833df58a4761def400cb1f1b6ce8b9d70f9a172b37ae4c79ca6a795361284382",
+      "size_bytes": 7451
+    },
+    {
+      "description": "Test and CI evidence; not a planning input.",
+      "git_blob_sha": "2f4c036c49b505b8701ee63bd2240741458390e0",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/test-execution-report.json",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "544893557ea69b8f39c84fb26103b3ca0eef3ddfb57be828a27c4a24497b21c0",
+      "size_bytes": 16732
+    },
+    {
+      "description": "Quality audit narrative; not a planning input.",
+      "git_blob_sha": "bd2e727d19e03fa2a32cf71f3407decde3a34093",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/FINAL_QUALITY_AUDIT_REPORT.md",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "0feddde3b91cb9e59db825f0d0188e75895c30ab3d6690f80fd434d0b091bd9a",
+      "size_bytes": 35618
+    },
+    {
+      "description": "Publication failure evidence; not a planning input.",
+      "git_blob_sha": "ba25369a6e1c8a259daa15049822cc537cf0e0c9",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/fault-injection-report.json",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "4cb75e2fa88f3d5605fbfbc204f7d7893ba1b7593e169dcc41ee0f94c22fe2c6",
+      "size_bytes": 4460
+    },
+    {
+      "description": "Graphify review evidence; not a planning input.",
+      "git_blob_sha": "e4e2ab139ae2c1ed50360395f71abe9d1b81f078",
+      "path": "docs/phase4/task-map-graph/final-quality-audit/graphify-final-review.md",
+      "required_for_phase5": false,
+      "role": "AUDIT_EVIDENCE_ONLY",
+      "sha256": "d381132e68ddaa0b987ec14e870ee6e020f1269d0e4438f39b3d788ec586e24b",
+      "size_bytes": 3097
+    }
+  ],
+  "certification_status": "TECHNICALLY_VALID_FOR_PHASE5; FORMAL_PHASE4_ACCEPTANCE_CONDITIONAL",
+  "certified_source_commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec",
+  "consumption_rules": [
+    "Consume only this certified_source_commit and snapshot_id after validate_phase4_snapshot.py returns CERTIFIED_SNAPSHOT_VALID.",
+    "Use required primary/reference artifacts from the same Git commit; do not validate a mutable set then consume different bytes.",
+    "On any validation failure, stop all Phase 5 planning; never run builders to repair or regenerate the snapshot.",
+    "Do not rerun Mapping, discover relationships, or reinterpret source documents as Phase 5 tasks.",
+    "Interpret HARD_ORDER as execution precedence; CONTRACT_ORDER as contract readiness, not automatically a task execution edge; IMPACT_ONLY is not a dependency.",
+    "Preserve decision status and declared scope; never resolve an OPEN/BLOCKED decision without owner authorization.",
+    "Preserve known gaps and uncertainty; absent dependency evidence does not imply parallel safety.",
+    "If any Phase 4 artifact needs correction, use the formal update process, create a new immutable snapshot and revalidate it before replacing this snapshot."
+  ],
+  "decision_statistics": {
+    "blocked_mappings": 134,
+    "open_decisions": 134,
+    "stage4_replay_records": 657
+  },
+  "formal_phase4_acceptance": "CONDITIONAL",
+  "graph_statistics": {
+    "combined_graph_edges": 11435,
+    "combined_graph_nodes": 4490,
+    "communities": 181,
+    "current_code_nodes": 3653,
+    "packages": 36,
+    "subtasks": 471,
+    "task_graph_nodes": 696,
+    "tasks": 189
+  },
+  "known_limitations": [
+    "No Phase 5 application integration was executed; readiness is based on the prior independent consumer smoke and this snapshot preflight.",
+    "Source Coverage files are individually atomic but the output set is not transactional; certification pins a verified Git generation and preflight rejects changed working files.",
+    "A SIGKILL between graph JSON and HTML replacement can expose a mixed working-tree pair until a rerun; the certified Git commit contains a fixed coherent pair.",
+    "C05A route/contract scope, R02 package-only allocation, and H04:003 future consumer allocation remain explicitly unresolved; preserve their recorded scope and uncertainty.",
+    "Two atomic obligations remain VERIFIED_UNCOVERED; do not infer completion.",
+    "Mapping statuses describe evidence relationships, not implementation completion; do not interpret MAPPED as shipped or done.",
+    "No parallel_safe assertion is present; absence of an edge does not prove safe parallel execution.",
+    "Graphify latest review is on 79574bc806b5a264dca78f5634d0833c1c7e570e: zero confirmed bugs/blockers, one advisory, six possible issues with one unavailable description; quota was known blocked until 2026-12-01 UTC."
+  ],
+  "manifest_schema_version": "1.0",
+  "mapping_statistics": {
+    "MAPPED": 15,
+    "NEW_IMPLEMENTATION": 654,
+    "PARTIALLY_MAPPED": 27,
+    "records": 696,
+    "relation_overlay": 99
+  },
+  "optional_human_review_artifacts": [
+    {
+      "description": "Human-readable visualization; not read by the planning consumer.",
+      "git_blob_sha": "fc8cc3131eba5ee48daaf6b8b9ff0ffb190fb631",
+      "path": "docs/phase4/task-map-graph/task-map-graph.html",
+      "required_for_phase5": false,
+      "role": "OPTIONAL_HUMAN_REVIEW",
+      "sha256": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5",
+      "size_bytes": 9851896
+    },
+    {
+      "description": "Human-facing code-graph inventory manifest.",
+      "git_blob_sha": "a7fb003b60ca161bfc1e89c4bd730f69ed460181",
+      "path": "docs/phase4/task-map-graph/current-project-code-graph-manifest.json",
+      "required_for_phase5": false,
+      "role": "OPTIONAL_HUMAN_REVIEW",
+      "sha256": "4f71525194a1050db460869ba125a9f4d33c73678f5b4bc0a64ed66c64de10ca",
+      "size_bytes": 68285
+    },
+    {
+      "description": "Planning workflow reference; its current instructions are scoped to earlier Phase 2 planning work.",
+      "git_blob_sha": "66e71387d745580538666f86c4be1ae24f993070",
+      "path": "docs/SHAHAB_PHASE2_PLANNING_AGENT_RUNBOOK.md",
+      "required_for_phase5": false,
+      "role": "OPTIONAL_HUMAN_REVIEW",
+      "sha256": "17db416468de77511ca70a70acfcb3c47425c8b932528eceb5cd82a2a2bf072b",
+      "size_bytes": 8974
+    }
+  ],
+  "primary_inputs": [
+    {
+      "description": "Combined graph with serialized nodes, edges, relations, evidence references and embedded source snapshots.",
+      "git_blob_sha": "343e87487ef205d4acbb3609cf8b662ca4105252",
+      "path": "docs/phase4/task-map-graph/task-map-graph.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_PRIMARY_INPUT",
+      "sha256": "a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9",
+      "size_bytes": 9829281
+    },
+    {
+      "description": "Canonical Stage 4 mapping, relation overlay and open-decision scope/status.",
+      "git_blob_sha": "d9699534326a7f56b5bb5ec70120fac37885efc7",
+      "path": "docs/phase4/task-map-graph/task-map-mapping.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_PRIMARY_INPUT",
+      "sha256": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
+      "size_bytes": 4523369
+    }
+  ],
+  "reference_inputs": [
+    {
+      "description": "Pinned current-code graph backing CODE nodes and code relationships.",
+      "git_blob_sha": "c19d700b408206458d56798809ec1c7009e08acc",
+      "path": "docs/phase4/task-map-graph/current-project-code-graph.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
+      "size_bytes": 4415738
+    },
+    {
+      "description": "Canonical 696-node task graph and source Plan locators.",
+      "git_blob_sha": "2393556b74016a437d9a126bee3b04cdcc42be25",
+      "path": "docs/phase4/task-map-graph/new-project-task-graph.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7",
+      "size_bytes": 3013453
+    },
+    {
+      "description": "Immutable semantic reference graph pinned by Stage 4 validation.",
+      "git_blob_sha": "a43c1732e85eeebdf83709b9d76233e59ae1a1af",
+      "path": "knowledge-graph/phase2-reference-docs/semantic/graph.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+      "size_bytes": 4131810
+    },
+    {
+      "description": "Joined candidate and atomic-obligation coverage evidence.",
+      "git_blob_sha": "5e9402edd10196b5bdc453f753277d6c7014072c",
+      "path": "docs/audits/phase2-source-coverage/evidence-join-index.json",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "83f6776478f9c9472bb6f70a45390ceccb45d7b178ef55fe4337618d068dc8aa",
+      "size_bytes": 6305126
+    },
+    {
+      "description": "Source-unit inventory used by the Evidence Join Index.",
+      "git_blob_sha": "4354b39d1598392d2b5256b5827a93377cbe0d56",
+      "path": "docs/audits/phase2-source-coverage/source-inventory.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "dd6f98fb92f9a20e6c344827c9de67e2ab7caae4f2b2508933d30d11b7aea66a",
+      "size_bytes": 1110612
+    },
+    {
+      "description": "Candidate obligations and source excerpts.",
+      "git_blob_sha": "4dcceaceb4f823b0e2281aaec812c8aa2a19815e",
+      "path": "docs/audits/phase2-source-coverage/atomic-obligations.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "e74c7b7409ea9d3d3f9aa9a0f43bd5111a2ff39a180b5a30b95fe7d10d0329af",
+      "size_bytes": 3540806
+    },
+    {
+      "description": "Candidate-to-graph/package/requirement/task/AC/Test trace ledger.",
+      "git_blob_sha": "36619304882cc764909c8ba7bc335a9ca4d3f696",
+      "path": "docs/audits/phase2-source-coverage/execution-trace.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "7fa96bf802507c2cc33bdea3de234c8912596c2607e63d1a8cd620c324743482",
+      "size_bytes": 2424642
+    },
+    {
+      "description": "Semantic candidate review and status ledger.",
+      "git_blob_sha": "0c71b4364b225abd147ea084c40a354e49b2b07d",
+      "path": "docs/audits/phase2-source-coverage/semantic-review-dispositions.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "5553b80bfc2928cdc3347f0d23a63a63dde0736af95fa57844130352bcdd2a05",
+      "size_bytes": 2481869
+    },
+    {
+      "description": "Atomic obligation disposition and evidence ledger.",
+      "git_blob_sha": "10104b6a489dcd79d5de9ab9d3b18f1efc7e2afc",
+      "path": "docs/audits/phase2-source-coverage/atomic-obligation-dispositions.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "f3abf11c156d6eca24aba92efc569bffa2f2b53891db1a4c58d9ffce491b33a4",
+      "size_bytes": 2907317
+    },
+    {
+      "description": "Package source locators and semantic evidence ledger.",
+      "git_blob_sha": "c44697e3fe7205e267663473fcc84c250cb633d5",
+      "path": "docs/audits/phase2-source-coverage/package-semantic-evidence.csv",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "01ac340dbcb207b909a1cedf84073d12a4b0f9d020af60abfa828bc39c3d64d3",
+      "size_bytes": 4042895
+    },
+    {
+      "description": "Canonical plan referenced by task graph Plan locators.",
+      "git_blob_sha": "daa448b2dbb204b4ab081a38bc13548f1a8c8de6",
+      "path": "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "86d1c9d684542f67b76e2b69791478e07f0a3c387e93c0ae6f293722b0fa538b",
+      "size_bytes": 2219058
+    },
+    {
+      "description": "Canonical Phase 2 architecture and requirements reference.",
+      "git_blob_sha": "9681c2bf6c3149317c3788516748084cfb6eac7c",
+      "path": "docs/SHAHAB_PHASE_2_DEVELOPMENT_BLUEPRINT.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "0709c84fe9e47e1d9218c6d0f93a82c89a62d6b234565e9b0ca2d4158759f266",
+      "size_bytes": 447664
+    },
+    {
+      "description": "Canonical wallet decisions referenced by wallet-related work.",
+      "git_blob_sha": "1f3dc55f46b3a12b2eb33e647355e4a6a73dd37a",
+      "path": "docs/SHAHAB_DIGITAL_WALLET.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "8b8d139b64f25f8f9592f936c070ece37b3e97df55d4e6b1d0cf305933960b74",
+      "size_bytes": 244887
+    },
+    {
+      "description": "Execution and task sequencing protocol for interpreting deliverables.",
+      "git_blob_sha": "ba6dd9a2da3bd96fefbf655b9f9544ab74c00456",
+      "path": "docs/TASK_EXECUTION_PROTOCOL.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "846a9833c9dad73bfb8871630b4939866409fa83779c8f2d32f621212e8c7890",
+      "size_bytes": 12623
+    },
+    {
+      "description": "Canonical cross-phase project development constraints.",
+      "git_blob_sha": "680d60fd8fd2038e43714ceca24a5ea4bb7351a4",
+      "path": "docs/SHAHAB_PROJECT_DEVELOPMENT_CANONICAL_GUIDE.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "9ba8aa01f3fa40ab9c85ae370bb7b9ea361a271a0445819290397dfd648d382d",
+      "size_bytes": 365004
+    },
+    {
+      "description": "Recorded relation interpretation, scope limits and uncertainty including C05A/R02/H04:003.",
+      "git_blob_sha": "2190236e2bbb8aa91d90a44636b5b070364ed0c5",
+      "path": "docs/phase4/task-map-graph/task-map-quality-audit.md",
+      "required_for_phase5": true,
+      "role": "REQUIRED_REFERENCE_INPUT",
+      "sha256": "1e796faa283f4701cb258e01e315d284853390fbc1fffde19ede3b43d60f631c",
+      "size_bytes": 32370
+    }
+  ],
+  "repository": "Brotherlouiee/shahab-demo",
+  "snapshot_id": "phase4-45ed4ec10d34216cf935",
+  "source_coverage_statistics": {
+    "atomic_obligations": 1285,
+    "candidates": 1633,
+    "covered": 1149,
+    "open_decision": 134,
+    "partial": 0,
+    "pending_candidates": 0,
+    "uncovered": 2
+  },
+  "source_pr": 257,
+  "validation_evidence": [
+    {
+      "claim": "Combined graph, Replay, source references, immutable graph pins and 134 OPEN/BLOCKED decisions verified; independent consumer smoke extracted graph/snapshots without builders.",
+      "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+    },
+    {
+      "claim": "Source Coverage 29/29 controls and Stage 4 Replay 657 records passed in the recorded audit evidence.",
+      "commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35"
+    },
+    {
+      "claim": "Targeted validation hardening added; graph check-only at 4,490/11,435; immutable source hashes unchanged; 134 decisions OPEN/BLOCKED.",
+      "commit": "8ce742b640bbcbb87be5fc29f3a5a28d92593dec"
+    },
+    {
+      "claim": "Prior real-browser Chrome 142 tests remain the viewer evidence; current workspace could not run its Chromium wrapper. Viewer artifact was not changed in the certified source commit."
+    }
+  ]
+}

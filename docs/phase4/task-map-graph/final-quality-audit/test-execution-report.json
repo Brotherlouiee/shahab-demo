@@ -1,0 +1,356 @@
+{
+  "base_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
+  "environment": {
+    "os": "Linux",
+    "python": "3.12.14",
+    "node": "v24.22.3",
+    "chromium": "Chrome for Testing 142.0.7444.175"
+  },
+  "tests": [
+    {
+      "name": "focused Python regression suite",
+      "command": "python -m unittest -v test_graphify_review.py (from docs/phase4/task-map-graph)",
+      "result": "PASS",
+      "count": 28
+    },
+    {
+      "name": "source coverage official checks",
+      "command": "python3 docs/audits/phase2-source-coverage/build_and_validate.py --check-only",
+      "result": "PASS",
+      "count": "29/29, 0 errors"
+    },
+    {
+      "name": "stage 4 replay",
+      "command": "python3 docs/phase4/task-map-graph/replay_stage4.py --check-only",
+      "result": "PASS",
+      "count": "657 records, 347 files, 696 mappings, 134 OPEN/BLOCKED; projection SHA 44e4970d7a40853d19dfd8b758466a04f0e8c19389f060d6b135869fab2dd5f5"
+    },
+    {
+      "name": "combined graph build",
+      "command": "python3 docs/phase4/task-map-graph/build_task_map_graph.py",
+      "result": "PASS",
+      "count": "4,490 nodes; 11,435 edges"
+    },
+    {
+      "name": "browser E2E",
+      "command": "PLAYWRIGHT_MODULE=... CHROME_BIN=... node docs/phase4/task-map-graph/test_graphify_viewer.cjs",
+      "result": "PASS",
+      "count": "Chrome 142 DPR 1 and 2; Canvas pixel-based tests; no page errors"
+    },
+    {
+      "name": "syntax",
+      "command": "python3 -m py_compile ... && node --check ...",
+      "result": "PASS"
+    },
+    {
+      "name": "determinism",
+      "command": "two independent builder runs and PYTHONHASHSEED 1/98765 checks",
+      "result": "PASS",
+      "count": "evidence index, graph JSON, graph HTML byte-identical across repeated builds; replay projection unchanged"
+    },
+    {
+      "name": "mutation / fuzz / stress / performance budget",
+      "result": "PARTIAL",
+      "reason": "These controls were executed in bounded form with separate reports; complete code-only mutation, broad parser/browser fuzz, comparable production-scale performance budgets were not established."
+    },
+    {
+      "name": "limited browser performance comparison",
+      "command": "Chrome for Testing 142, three runs per artifact, same viewport and DPR=1",
+      "result": "PARTIAL",
+      "baseline_median_load_ms": 250,
+      "final_median_load_ms": 242,
+      "note": "Small sample, no approved budget, memory or detailed frame timings."
+    },
+    {
+      "name": "independent structural/property checks",
+      "command": "Temporary independent Python oracle; Hypothesis 200 examples; seeded 100 ordering and 100 invalid graph variants",
+      "result": "PARTIAL",
+      "count": "Independent artifact invariants, 100 valid ordering permutations, 100 invalid structural variants, and 200 controlled Hypothesis title examples; this does not cover every requested property."
+    },
+    {
+      "name": "CSV fuzz",
+      "command": "Temporary deterministic UTF-8 CSV fuzz against read_csv",
+      "result": "PARTIAL",
+      "count": "1,000 deterministic rows; 779 controlled rejects, 221 complete rows accepted, 0 unexpected errors. Other requested parser/input domains were not fuzzed."
+    },
+    {
+      "name": "mutation tests",
+      "command": "Temporary HTML mutants through Chromium regression harness",
+      "result": "PARTIAL",
+      "count": "30/30 target cases detected, consisting of 15 production-source mutants and 15 artifact/data mutants. Full 30-source-code mutation score is not claimed."
+    },
+    {
+      "name": "Python branch coverage",
+      "command": "coverage.py 7.17.5 --branch",
+      "result": "PARTIAL",
+      "count": "72.04% aggregate branch arcs over four production modules"
+    },
+    {
+      "name": "Bandit security scan",
+      "command": "bandit -q -r on four Python production files",
+      "result": "PARTIAL",
+      "count": "4 high SHA-1 Git blob identity warnings and 16 low constant git subprocess warnings reviewed; no actionable injection finding"
+    },
+    {
+      "name": "Ruff static lint",
+      "command": "ruff check on five Python implementation/test files",
+      "result": "PARTIAL",
+      "count": "547 style/lint findings, predominantly existing long/minified lines; no broad formatting rewrite"
+    },
+    {
+      "name": "XSS browser fixture",
+      "command": "Temporary hostile label passed through html_document and selected in Chrome",
+      "result": "PASS",
+      "count": "No script execution or injected image element"
+    },
+    {
+      "name": "synthetic structural stress",
+      "command": "1x, 2x, 5x, 10x synthetic graph serialization and endpoint validation",
+      "result": "PARTIAL",
+      "count": "10x = 44,900 nodes, 114,350 edges, 5.114s, 531,416,779-byte tracemalloc peak; not browser/builder performance"
+    },
+    {
+      "name": "combined graph publication fault tests",
+      "result": "PASS",
+      "count": "Five replace/fsync/interruption paths restore prior pair or remove partial first-time output."
+    },
+    {
+      "name": "Source Coverage file-publication fault tests",
+      "result": "PASS",
+      "count": "Injected replace and fsync failures preserve old CSV bytes."
+    },
+    {
+      "name": "Python and JavaScript branch coverage",
+      "result": "PARTIAL",
+      "count": "Python 73.10% branch (500/684); JavaScript 85.90% branch (262/305) at DPR1/2; 100% critical target not established."
+    },
+    {
+      "name": "dependency audit",
+      "command": "pip-audit .; npm audit --omit=dev",
+      "result": "PASS",
+      "count": "No known vulnerabilities found for resolved Python dependencies or locked npm production dependencies. Python dependencies range-resolved because pyproject.toml has no lockfile."
+    },
+    {
+      "name": "hostile-data browser fixture",
+      "result": "PASS",
+      "count": "Seven hostile label/source payloads remain inert at DPR1/2, with no injected active element or executed script."
+    },
+    {
+      "name": "Mypy type check",
+      "command": "python -m mypy --follow-imports=skip --ignore-missing-imports on four production modules",
+      "result": "PARTIAL",
+      "count": "Graph builder passes with 0 diagnostics. Aggregate check leaves 34 existing diagnostics across build_and_validate.py and replay_stage4.py. Five diagnostics in the new publication helper were corrected."
+    },
+    {
+      "name": "Mypy on combined graph builder",
+      "command": "python -m mypy --follow-imports=skip --ignore-missing-imports docs/phase4/task-map-graph/build_task_map_graph.py",
+      "result": "PASS",
+      "count": "0 type diagnostics after explicit publication entry tracking, community map types, and source-reference artifact validation."
+    },
+    {
+      "name": "bounded multi-domain fuzz campaign",
+      "command": "PYTHONPATH=... timeout 15s bash -c ulimit -v 1048576; python /tmp/shahab_phase4_fuzz.py",
+      "result": "PARTIAL",
+      "count": "Seed 2571126; 1,500 counted samples across malformed JSON, CSV edge rows, identifier/title parsing, PARTIAL_FILES validation, embedded HTML and snapshot decoding; plus 1,000 prior CSV fuzz rows. 0 unexpected exceptions or accepts. Search/filter and graph record fuzz remain."
+    },
+    {
+      "name": "targeted Graph Builder regression suite",
+      "command": "PYTHONPATH=docs/phase4/task-map-graph:docs/audits/phase2-source-coverage python -m unittest test_graphify_review.CombinedGraphInputValidationTests test_graphify_review.CombinedGraphPublicationTests -v",
+      "result": "PASS",
+      "count": "8 targeted tests"
+    },
+    {
+      "name": "Replay HARD_ORDER cycle regression",
+      "command": "python -m unittest test_graphify_review.ReplayTests.test_replay_rejects_a_relation_overlay_hard_order_cycle -v",
+      "result": "PASS",
+      "count": "one cyclic overlay rejected with diagnostic"
+    },
+    {
+      "name": "supplemental record and viewer-helper fuzz",
+      "command": "seed 2571126; temporary Python builder harness and Node VM pure-function harness",
+      "result": "PASS_FOR_TESTED_DOMAINS",
+      "count": "600 total: 100 each Node, Edge, Mapping, Decision, Search and Filter; zero unexpected exceptions or accepts"
+    },
+    {
+      "name": "delta code mutants",
+      "command": "Temporary source copies only",
+      "result": "PASS",
+      "count": "5/5 killed, including Mapping status, BLOCKED Decision, parent endpoint, duplicate Mapping early error and HARD_ORDER cycle"
+    },
+    {
+      "name": "SIGKILL publication injection",
+      "command": "Temporary output paths only",
+      "result": "PARTIAL",
+      "count": "SIGKILL before/between/after replace boundaries; between-replace termination left a mixed pair until rerun"
+    },
+    {
+      "name": "publisher process concurrency",
+      "command": "Two subprocesses with deterministic interleaving",
+      "result": "PASS_AFTER_FIX",
+      "count": "Original race reproduced a mixed pair. Destination lock regression passes."
+    },
+    {
+      "name": "Source Coverage multi-file publication injection",
+      "command": "Temporary files and injected second replace failure",
+      "result": "PARTIAL",
+      "count": "First file new, second old. Group transaction and full consumer detection are not proven."
+    },
+    {
+      "name": "current Graph Builder microbenchmark",
+      "command": "Three in-memory build() calls",
+      "result": "PASS_WITHOUT_BUDGET",
+      "count": "0.721s, 0.536s, 0.515s; median 0.536s"
+    },
+    {
+      "name": "mypy diagnostic classification",
+      "command": "python -m mypy on build_and_validate.py and replay_stage4.py",
+      "result": "BLOCKED_ENVIRONMENT",
+      "reason": "mypy is not installed in the current environment; prior aggregate 34 diagnostics have no retained per-diagnostic listing."
+    },
+    {
+      "name": "Search/Filter browser fuzz",
+      "command": "Chromium/Chrome availability check",
+      "result": "BLOCKED_ENVIRONMENT",
+      "reason": "Chromium wrapper exists but referenced executable is absent. Node VM fuzz is recorded separately and is not a browser pass."
+    }
+  ],
+  "limitations": [
+    "Complete manual per-line review and JavaScript branch coverage are not established.",
+    "The 30-case mutation matrix is mixed: 15 production-source mutants and 15 artifact/data mutations. Full 30-code-only score is not claimed.",
+    "Property and fuzz testing cover bounded domains, not all specified parsers, browser inputs, snapshots and decoders.",
+    "Security SAST/SCA and runtime/browser/database/container jobs were skipped by GitHub Actions change classification. Local scans ran, but the CI controls remain incomplete.",
+    "Windows, Firefox, Edge and macOS were not tested.",
+    "Synthetic 10x structural stress does not establish production-builder or browser-rendering scaling. No approved performance budget exists.",
+    "Latest Graphify review is on an earlier commit. Five of six investigation descriptions were available; the sixth remains unknown, and quota is exhausted through 2026-12-01 UTC.",
+    "Combined graph pair and per-file Source Coverage publishers were fault-injected. Process/power loss, concurrency and Source Coverage set-level atomicity are not established.",
+    "Python and JavaScript branch coverage are below 100%; critical-branch target remains unproven."
+  ],
+  "immutable_graph_sha256": {
+    "semantic_reference": "f16e684dc773e9bf053e51da2a0a37e3b5ffaf88809e1b5d37f8befbf69e1c93",
+    "code_graph": "0a496833d1a58a6d07e58f3d5d2b59f2c0306a924d8573a687fc4067c549c982",
+    "task_graph": "deb940949583007628dccb89de538c8f3b278aef1c6f99d1386f613f107fa0f7"
+  },
+  "derived_sha256": {
+    "evidence_join_index": "83f6776478f9c9472bb6f70a45390ceccb45d7b178ef55fe4337618d068dc8aa",
+    "mapping": "bee6643868323bb5e424dbfa59f0607f951c8d17733c41bd0b67bdf496be639c",
+    "combined_graph_json": "a9ca43d20d7d49db72b840043350381a3d32913a913788369a0257a89067d0b9",
+    "combined_graph_html": "625fba8cb368ce7cf429e53bf669eab3d5a98c11025f5284db27c8d037f07dd5"
+  },
+  "methods": [
+    {
+      "id": "TEST-01",
+      "method": "Static analysis",
+      "status": "PARTIAL",
+      "evidence": "Python and JavaScript syntax checks and diff check passed. Ruff and Bandit ran locally with findings. Dedicated JavaScript branch/type analysis was not available."
+    },
+    {
+      "id": "TEST-02",
+      "method": "Independent code review",
+      "status": "PARTIAL",
+      "evidence": "Critical modified paths and contracts reviewed; complete line-by-line sign-off for all production functions and embedded JavaScript remains incomplete."
+    },
+    {
+      "id": "TEST-03",
+      "method": "Unit tests",
+      "status": "PASS",
+      "evidence": "28/28 focused Python regression tests passed."
+    },
+    {
+      "id": "TEST-04",
+      "method": "Integration tests",
+      "status": "PASS",
+      "evidence": "Official source coverage, Evidence Join, Stage 4 replay and combined graph builders completed successfully."
+    },
+    {
+      "id": "TEST-05",
+      "method": "End-to-end",
+      "status": "PASS",
+      "evidence": "Generated standalone viewer exercised in Chromium 142 at DPR 1 and 2."
+    },
+    {
+      "id": "TEST-06",
+      "method": "Property-based",
+      "status": "PARTIAL",
+      "evidence": "100 valid ordering permutations, 100 invalid structural variants, and 200 controlled Hypothesis title examples passed. The full 30 requested artifact properties were not each generator-tested."
+    },
+    {
+      "id": "TEST-07",
+      "method": "Mutation testing",
+      "status": "PARTIAL",
+      "evidence": "30/30 mixed target cases detected; 15/15 production-source mutants killed and 15/15 artifact/data mutations detected. Full 30-code-only operator set not run."
+    },
+    {
+      "id": "TEST-08",
+      "method": "Fuzz testing",
+      "status": "PARTIAL",
+      "evidence": "1,000 controlled CSV rows, 779 controlled rejects, 221 valid-width inputs, no unexpected errors. Other requested input domains not covered."
+    },
+    {
+      "id": "TEST-09",
+      "method": "Fault injection",
+      "status": "PARTIAL",
+      "evidence": "Ten injected publication faults across graph, Source Coverage, Evidence Join and Stage 4 Mapping. Crash/power-loss, concurrency and set-level Source Coverage atomicity remain untested."
+    },
+    {
+      "id": "TEST-10",
+      "method": "Differential testing",
+      "status": "PARTIAL",
+      "evidence": "Independent counts, references, snapshots and immutable artifact comparisons ran; no second full semantic implementation was built."
+    },
+    {
+      "id": "TEST-11",
+      "method": "Browser testing",
+      "status": "PASS",
+      "evidence": "Chrome 142 at DPR 1 and 2, including Canvas pixel checks and requested interactions."
+    },
+    {
+      "id": "TEST-12",
+      "method": "Stress/performance",
+      "status": "PARTIAL",
+      "evidence": "Synthetic structural graph tested through 10x and limited three-run browser load comparison. Production builder/browser 10x performance, interaction latencies, memory growth and approved budgets are unavailable."
+    }
+  ],
+  "github_ci": {
+    "commit": "9701feb8df7ab63775b0715bf679f427aadf810a",
+    "workflows": [
+      {
+        "name": "Quality gates",
+        "run_id": 45829248764,
+        "conclusion": "success"
+      },
+      {
+        "name": "Security SAST, SCA and secret gates",
+        "run_id": 45829248667,
+        "conclusion": "success"
+      },
+      {
+        "name": "Container build contract smoke",
+        "run_id": 45829248738,
+        "conclusion": "success"
+      },
+      {
+        "name": "US-13 frozen frontend baseline evidence",
+        "run_id": 45829248752,
+        "conclusion": "success"
+      }
+    ],
+    "total_jobs": {
+      "success": 5,
+      "skipped": 7,
+      "failure": 0
+    },
+    "note": "Skipped jobs are not PASS. Full quality, Python SAST/SCA, container build, route evidence, browser/API and PostgreSQL jobs did not run because change classification treated this as docs-only."
+  },
+  "audit_baseline_commit": "392751eaeee882fc770069e3dcd3a161d47a9d26",
+  "pr_base_commit": "3df5beb8fbec677515ad9b4cd0ea30b7fd055dce",
+  "tested_source_commit": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "ci_evidence_commit": "63e3891c502f95b3763d5edf872f9257211c5acd",
+  "tested_source_parent": "ee23df1cd1d04da6fc4a3b05f64655c6c99a4c35",
+  "source_test_commit": "9701feb8df7ab63775b0715bf679f427aadf810a",
+  "source_test_parent_commit": "9e3f671ae760619d143ca4e61c09e8f29980b48e",
+  "tested_source_file_blobs": {
+    "docs/phase4/task-map-graph/build_task_map_graph.py": "e74906f906445cb7317c5110b06e58f78542337d"
+  },
+  "delta_commit": "pending",
+  "github_ci_delta": "PENDING until the code commit is pushed and checks are inspected."
+}
