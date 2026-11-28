@@ -20575,7 +20575,7 @@
       "finding": "C12A enumerated Requirement rows differ from historical summary count (13 rows versus summary 11).",
       "classification": "HISTORICAL_SUMMARY_MISMATCH",
       "locators": [
-        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5554",
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5556",
         "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:5659-5671"
       ],
       "planning_effect": "Count discrepancy is evidence-level; graph has no Requirement node type. Preserve row-level IDs and do not imply missing work."
@@ -20585,8 +20585,9 @@
       "finding": "R03 has 16 Subtask IDs in task decomposition while a historical package checkpoint states 15.",
       "classification": "HISTORICAL_SUMMARY_MISMATCH",
       "locators": [
-        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6434-6450",
-        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6401"
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6467-6482",
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6542",
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:6546"
       ],
       "planning_effect": "Graph work hierarchy records 16; no work status/effort inference."
     },
@@ -20595,8 +20596,9 @@
       "finding": "R08 has 16 Subtask IDs in task decomposition while a historical package checkpoint states 15.",
       "classification": "HISTORICAL_SUMMARY_MISMATCH",
       "locators": [
-        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7259-7275",
-        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7080"
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7261-7276",
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7080",
+        "docs/SHAHAB_PHASE_2_IMPLEMENTATION_PLAN.md:7357"
       ],
       "planning_effect": "Graph work hierarchy records 16; no work status/effort inference."
     }
