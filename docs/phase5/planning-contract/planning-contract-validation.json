@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "mission": "5.0",
+  "validator_type": "temporary structural validator; not production planning engine",
+  "results": [
+    {
+      "test_id": "P5-V01",
+      "status": "PASS",
+      "detail": {
+        "json_files": 4,
+        "files": [
+          "acceptance-gates.json",
+          "decision-register.json",
+          "output-artifact-registry.json",
+          "planning-contract-validation.json"
+        ]
+      }
+    },
+    {
+      "test_id": "P5-V02",
+      "status": "PASS",
+      "detail": {
+        "rows": 51,
+        "columns": 8
+      }
+    },
+    {
+      "test_id": "P5-V03",
+      "status": "PASS",
+      "detail": {
+        "decisions": 16,
+        "artifacts": 18,
+        "gates": 16
+      }
+    },
+    {
+      "test_id": "P5-V04",
+      "status": "PASS",
+      "detail": "decision dependency and artifact references resolve"
+    },
+    {
+      "test_id": "P5-V05",
+      "status": "PASS",
+      "detail": "16 new decisions OPEN; 14 O5 policies recorded approved"
+    },
+    {
+      "test_id": "P5-V06",
+      "status": "PASS",
+      "detail": "22/22 BP §5.2.1 principles have source locators"
+    },
+    {
+      "test_id": "P5-V07",
+      "status": "PASS",
+      "detail": "18 artifacts include purpose/producer/consumer/validation"
+    },
+    {
+      "test_id": "P5-V08",
+      "status": "PASS",
+      "detail": "16 mission acceptance gates include evidence/failure/validation"
+    },
+    {
+      "test_id": "P5-V09",
+      "status": "PASS",
+      "detail": "no fabricated capacity/effort/cost/token estimate; only approved O5-09 ratios appear"
+    },
+    {
+      "test_id": "P5-V10",
+      "status": "PASS",
+      "detail": "no task-week assignments generated"
+    },
+    {
+      "test_id": "P5-V11",
+      "status": "PASS",
+      "detail": {
+        "lines": 179,
+        "bytes": 26934
+      }
+    },
+    {
+      "test_id": "P5-V12",
+      "status": "PASS",
+      "detail": "git diff --cached --check exit 0"
+    },
+    {
+      "test_id": "P5-V13",
+      "status": "PASS",
+      "detail": {
+        "staged_paths": 7,
+        "only_authorized_directory": true
+      }
+    }
+  ],
+  "summary": {
+    "passed": 13,
+    "failed": 0,
+    "overall": "PASS"
+  },
+  "limitations": [
+    "Source reading completeness is separately controlled by P5-B03; structural checks do not prove semantic correctness or owner approval.",
+    "Phase 4 Snapshot Validator passed before consumption and after drafting; this is identity evidence, not a substitute for semantic source reading.",
+    "Hosted GitHub CI is pending until the Draft PR workflow completes; local docs validator passed for both Markdown files."
+  ]
+}

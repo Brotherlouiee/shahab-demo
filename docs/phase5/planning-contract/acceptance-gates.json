@@ -1,0 +1,262 @@
+{
+  "schema_version": "0.1-proposed",
+  "note": "Mission acceptance control list is owner-reviewable. Actual outcomes must be reconciled from bootstrap evidence and final checks.",
+  "gates": [
+    {
+      "gate_id": "P5-B01",
+      "objective": "احراز مخزن، HEAD، شاخه و PR قبلی",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Clone remote usable; origin/main/HEAD and PR #257 metadata available"
+      ],
+      "validation_method": "Git refs/status + GitHub PR metadata",
+      "expected_evidence": "HEAD e207860…, PR257 merged, clean baseline and branch ancestry",
+      "failure_conditions": [
+        "Identity mismatch, dirty user work overwritten, or PR not merged"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B02",
+      "objective": "اعتبار Snapshot certified",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Pinned manifest and validator available"
+      ],
+      "validation_method": "Run exact validator on pinned source bytes",
+      "expected_evidence": "exit 0 and result CERTIFIED_SNAPSHOT_VALID, commit and artifact count recorded",
+      "failure_conditions": [
+        "Nonzero or hash/ancestry mismatch; stop consumption"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B03",
+      "objective": "کامل‌بودن مطالعه منابع",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "All 18 required manifest paths and 8 named governance sources identified"
+      ],
+      "validation_method": "Source manifest + source reading log with locators",
+      "expected_evidence": "All sources reviewed and line ranges/evidence logged",
+      "failure_conditions": [
+        "Any source unreadable or unreviewed; do not claim completeness"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "NOT_PASS_SOURCE_READING_INCOMPLETE"
+    },
+    {
+      "gate_id": "P5-B04",
+      "objective": "ردیابی سیاست‌های مصوب",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "22 principles and related rules listed"
+      ],
+      "validation_method": "CSV structural check against source locators",
+      "expected_evidence": "Every principle ID and locator; O5/F06/A01..A09 references",
+      "failure_conditions": [
+        "Any principle omitted/untraceable"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_STRUCTURAL_TRACE"
+    },
+    {
+      "gate_id": "P5-B05",
+      "objective": "سلامت تصمیم",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No open decision silently approved"
+      ],
+      "validation_method": "decision registry status and owner approval evidence audit",
+      "expected_evidence": "P5 proposals OPEN; inherited open remains OPEN/BLOCKED",
+      "failure_conditions": [
+        "open item with fabricated approval/changed status"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_NO_OPEN_DECISION_APPROVED"
+    },
+    {
+      "gate_id": "P5-B06",
+      "objective": "مرز فاز",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No Phase 4 rebuild, mapping, remap, or graph regeneration"
+      ],
+      "validation_method": "diff paths plus changed file hashes",
+      "expected_evidence": "Only docs/phase5/planning-contract changed",
+      "failure_conditions": [
+        "any Phase4 or source coverage changes"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B07",
+      "objective": "کامل‌بودن مدل Deliverable",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Definition/input/output/validation and boundary in contract"
+      ],
+      "validation_method": "manual+schema audit",
+      "expected_evidence": "outcome and multi-WBS referencing; no implied task/week",
+      "failure_conditions": [
+        "missing consumer/value/acceptance semantics"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_PROPOSED_SCHEMA"
+    },
+    {
+      "gate_id": "P5-B08",
+      "objective": "قرارداد Artifact",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Each artifact has producer/consumer/ownership/format/validation"
+      ],
+      "validation_method": "registry schema audit",
+      "expected_evidence": "all 18 planning artifacts accounted for",
+      "failure_conditions": [
+        "artifact without consumer or validation"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B09",
+      "objective": "سلامت Estimate",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No invented capacity/time/cost/token numbers"
+      ],
+      "validation_method": "search numeric claims and inspect source status",
+      "expected_evidence": "unknown absent evidence; O5-09 approved ratios only",
+      "failure_conditions": [
+        "asserting unmeasured estimates as fact"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_NO_FABRICATED_ESTIMATE"
+    },
+    {
+      "gate_id": "P5-B10",
+      "objective": "تغییرناپذیری گراف Phase4",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Snapshot data unchanged"
+      ],
+      "validation_method": "git diff and hash comparison",
+      "expected_evidence": "no change under phase4/graphs/mapping/overlays",
+      "failure_conditions": [
+        "any bytes change"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B11",
+      "objective": "عدم زمان‌بندی زودرس",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "No weekly schedule or actual task allocation"
+      ],
+      "validation_method": "file/content search",
+      "expected_evidence": "none created in Mission 5.0",
+      "failure_conditions": [
+        "any actual task assigned to week"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B12",
+      "objective": "سازگاری رجیستری",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Unique IDs and valid refs"
+      ],
+      "validation_method": "temporary structural validator",
+      "expected_evidence": "all IDs unique; references resolve",
+      "failure_conditions": [
+        "duplicate or dangling required ref"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B13",
+      "objective": "عدم PASS کاذب",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Statuses distinguish PASS/SKIPPED/NOT_EXECUTED/NOT_MEASURED/PENDING_APPROVAL"
+      ],
+      "validation_method": "report and gate audit",
+      "expected_evidence": "only evidence backed outcomes PASS",
+      "failure_conditions": [
+        "unexecuted represented as PASS"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B14",
+      "objective": "کیفیت مستندات",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Valid JSON/parseable CSV/complete Markdown/locators"
+      ],
+      "validation_method": "python json/csv parser, links and diff check",
+      "expected_evidence": "all parse and links resolve locally",
+      "failure_conditions": [
+        "invalid artifact or broken required link"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS_LOCAL_STRUCTURE_AND_LINKS"
+    },
+    {
+      "gate_id": "P5-B15",
+      "objective": "سلامت Diff",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Diff only authorized mission scope"
+      ],
+      "validation_method": "git diff --name-status and content review",
+      "expected_evidence": "only planning-contract seven files",
+      "failure_conditions": [
+        "out-of-scope change"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PASS"
+    },
+    {
+      "gate_id": "P5-B16",
+      "objective": "آمادگی بازبینی",
+      "scope": "Mission 5.0 bootstrap and planning contract",
+      "preconditions": [
+        "Draft PR contains scope, evidence, proposals, open decisions and limitations"
+      ],
+      "validation_method": "PR metadata/body + CI result",
+      "expected_evidence": "Draft open; no merge; full evidence/body",
+      "failure_conditions": [
+        "missing PR, nondraft, merged, or false CI"
+      ],
+      "blocking_effect": "BLOCKING",
+      "approval_status": "PROPOSED_GATE; OWNER_APPROVAL_PENDING",
+      "observed_status": "PENDING_PR_CI"
+    }
+  ]
+}
